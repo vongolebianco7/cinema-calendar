@@ -218,6 +218,13 @@ for section_name in ["boxoffice_alltime","filmarks_current"]:
    item["poster"]=("https://image.tmdb.org/t/p/w342"+match["poster_path"]) if match.get("poster_path") else None
    item["tmdb"]="https://www.themoviedb.org/movie/"+str(match.get("id"))
    item["genres"]=match.get("genre_ids") or []
+   item["origin_country"]=match.get("origin_country") or []
+   try:
+    md=get("/movie/"+str(match.get("id")))
+    item["genres_named"]=[g.get("name") for g in md.get("genres",[]) if g.get("name")]
+    item["origin_country"]=md.get("origin_country") or item["origin_country"]
+   except Exception:
+    item["genres_named"]=[]
   except Exception:
    pass
 if extra_rankings:

@@ -1,0 +1,41 @@
+name: Sync backend database
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 18 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check database configuration
+        id: db
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -n "$DATABASE_URL" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "DATABASE_URL is not configured; skipping database sync."
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.db.outputs.ready == 'true'
+        with:
+          node-version: "22"
+
+      - name: Install backend dependencies
+        if: steps.db.outputs.ready == 'true'
+        working-directory: backend
+        run: npm install
+
+      - name: Sync schema and import generated JSON
+        if: steps.db.outputs.ready == 'true'
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run db:sync

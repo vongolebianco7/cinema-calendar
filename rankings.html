@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>REEL NOW — 映画ランキング</title>
+<title>CINEMA NOW — 映画ランキング</title>
 <style>
 :root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#e8b44f;--line:#2a2e37}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px}button,input{font:inherit}h1,h2,h3,.brand{font-family:inherit}
@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand">REEL <b>NOW</b></div><button class="menuBtn" id="menuBtn" aria-label="メニュー">☰</button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand">REEL <b>NOW</b></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="rankings.html">映画ランキング</a></aside>
+<header class="top"><div class="wrap nav"><div class="brand">CINEMA <b>NOW</b></div><button class="menuBtn" id="menuBtn" aria-label="メニュー">☰</button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand">CINEMA <b>NOW</b></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="rankings.html">映画ランキング</a></aside>
 <main class="wrap">
 <section class="hero"><h1>映画ランキング</h1><p>評価・興行・レビューなど、複数の軸から映画を探せます。</p></section><div class="chips" id="axisChips"><button class="chip active" data-axis="tmdb">TMDB評価</button><button class="chip" data-axis="year">今年</button><button class="chip" data-axis="boxoffice">歴代興収</button><button class="chip" data-axis="filmarks">Filmarks評価</button></div>
 <div id="tmdbFilters"><div class="chips" id="regionChips"></div><div class="chips" id="genreChips"></div><div class="chips" id="eraChips"></div></div><div id="yearFilters" style="display:none"><div class="chips" id="yearRegionChips"></div><div class="chips" id="yearGenreChips"></div></div><div id="boxFilters" style="display:none"><div class="chips" id="boxRegionChips"></div><div class="chips" id="boxGenreChips"></div><div class="chips" id="boxEraChips"></div></div><div class="rankGrid" id="grid"></div><div class="note" id="sourceNote"></div>

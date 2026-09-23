@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CINEMA DAYS — 映画配信カレンダー</title>
+<meta name="description" content="サブスク映画の配信開始を、カレンダーと作品カードで見つける。">
+<style>
+:root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#e8b44f;--line:#2a2e37}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top{position:sticky;top:0;z-index:20;background:rgba(11,12,16,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:64px;display:flex;align-items:center;gap:14px}.brand{font-family:Georgia,serif;font-weight:700;letter-spacing:.12em;font-size:20px}.brand b{color:var(--accent)}
+.search{margin-left:auto;background:var(--panel);border:1px solid var(--line);border-radius:999px;color:white;padding:10px 14px;width:min(300px,42vw)}
+.hero{padding:42px 0 22px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.15em}.hero h1{font:700 clamp(34px,7vw,68px)/.95 Georgia,serif;margin:10px 0 14px;max-width:760px}.hero p{color:var(--muted);max-width:620px;line-height:1.65}
+.chips{display:flex;gap:8px;overflow:auto;padding:8px 0 18px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:9px 13px}.chip.active{background:var(--text);color:#111}
+.section{padding:18px 0 34px}.sectionHead{display:flex;align-items:end;justify-content:space-between;margin-bottom:14px}.section h2{font:700 27px Georgia,serif;margin:0}.small{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:.2s}.card:hover{transform:translateY(-3px)}
+.poster{aspect-ratio:2/3;background:linear-gradient(145deg,#30343d,#17191f);display:grid;place-items:center;color:#777;font:700 18px Georgia,serif;padding:20px;text-align:center;background-size:cover;background-position:center}
+.body{padding:12px}.title{font-weight:750;line-height:1.3}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.tag{font-size:11px;background:var(--panel2);padding:5px 7px;border-radius:6px;color:#d5d7dc}.score{color:var(--accent);font-weight:800}
+.calendar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.calHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.calHead button{background:var(--panel2);color:white;border:0;border-radius:9px;padding:8px 12px}
+.days,.dates{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.days div{text-align:center;color:var(--muted);font-size:11px;padding:6px}.day{min-height:94px;border:1px solid var(--line);border-radius:9px;padding:7px;font-size:12px}.day.dim{opacity:.25}.day.today{border-color:var(--accent)}.dot{display:block;margin-top:5px;padding:4px;border-radius:5px;background:#262a33;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);grid-column:1/-1}.notice{border:1px dashed #575d69;border-radius:12px;padding:12px 14px;color:var(--muted);font-size:12px;line-height:1.5;margin:4px 0 22px}
+.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(650px,100%);max-height:88vh;overflow:auto;background:#181a20;border-radius:22px 22px 0 0;padding:22px}.close{float:right;background:#292d35;border:0;color:white;border-radius:50%;width:36px;height:36px}.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.links a{color:#111;background:var(--text);text-decoration:none;border-radius:10px;padding:10px 13px;font-weight:700}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.hero{padding-top:28px}.day{min-height:67px;padding:4px}.dot{font-size:0;width:6px;height:6px;border-radius:50%;padding:0;background:var(--accent)}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap nav"><div class="brand">CINEMA <b>DAYS</b></div><input id="q" class="search" placeholder="作品を検索"></div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">STREAMING MOVIE GUIDE</div><h1>今夜、何観る？</h1><p>Netflix、Prime Video、Disney+、U-NEXT、Hulu。配信開始をひとつの場所で。気になる映画を、日付と評価から探せます。</p></section>
+<div class="chips" id="chips"></div>
+<div class="notice">現在はサイト基盤を構築中です。掲載データはサンプルで、実際の配信状況・評価を保証するものではありません。次段階で正規データソースを接続します。</div>
+<section class="section"><div class="sectionHead"><h2>今日から観られる</h2><span class="small" id="count"></span></div><div class="grid" id="cards"></div></section>
+<section class="section"><div class="sectionHead"><h2>配信カレンダー</h2><span class="small">配信開始日を一覧</span></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div><div class="dates" id="dates"></div></div></section>
+</main>
+<div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
+<script>
+const services=["すべて","Netflix","Prime Video","Disney+","U-NEXT","Hulu"];
+const movies=[
+ {title:"サンプル映画 A",date:"2026-09-23",service:"Netflix",score:"—",reviews:"—",genre:"ドラマ",year:"2026"},
+ {title:"サンプル映画 B",date:"2026-09-25",service:"Prime Video",score:"—",reviews:"—",genre:"SF",year:"2025"},
+ {title:"サンプル映画 C",date:"2026-09-28",service:"Disney+",score:"—",reviews:"—",genre:"アニメーション",year:"2026"},
+ {title:"サンプル映画 D",date:"2026-10-02",service:"U-NEXT",score:"—",reviews:"—",genre:"サスペンス",year:"2024"},
+ {title:"サンプル映画 E",date:"2026-10-07",service:"Hulu",score:"—",reviews:"—",genre:"コメディ",year:"2025"}
+];
+let active="すべて", view=new Date(2026,8,1);
+const $=s=>document.querySelector(s);
+function filtered(){let q=$("#q").value.trim().toLowerCase();return movies.filter(m=>(active==="すべて"||m.service===active)&&(!q||m.title.toLowerCase().includes(q)))}
+function renderChips(){$("#chips").innerHTML=services.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;render()})}
+function renderCards(){let a=filtered();$("#count").textContent=a.length+"作品";$("#cards").innerHTML=a.length?a.map((m,i)=>'<article class="card" data-i="'+movies.indexOf(m)+'"><div class="poster">'+m.title+'</div><div class="body"><div class="title">'+m.title+'</div><div class="meta"><span class="tag">'+m.service+'</span><span class="tag">'+m.date+'</span><span class="tag score">★ '+m.score+'</span></div></div></article>').join(""):'<div class="empty">該当する作品がありません</div>';document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openMovie(movies[+c.dataset.i]))}
+function renderCal(){let y=view.getFullYear(),mo=view.getMonth();$("#month").textContent=y+"年 "+(mo+1)+"月";let first=new Date(y,mo,1),start=new Date(y,mo,1-first.getDay());let out="";for(let i=0;i<42;i++){let d=new Date(start);d.setDate(start.getDate()+i);let iso=[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");let ms=filtered().filter(m=>m.date===iso);out+='<div class="day '+(d.getMonth()!==mo?'dim':'')+'"><b>'+d.getDate()+'</b>'+ms.map(m=>'<span class="dot">'+m.title+'</span>').join("")+'</div>'}$("#dates").innerHTML=out}
+function openMovie(m){$("#detail").innerHTML='<p class="eyebrow">'+m.service+' · '+m.date+'</p><h2 style="font:700 32px Georgia,serif">'+m.title+'</h2><p class="small">'+m.year+' · '+m.genre+'</p><p>評価 <span class="score">★ '+m.score+'</span>　レビュー '+m.reviews+'</p><div class="links"><a target="_blank" href="https://www.google.com/search?q='+encodeURIComponent(m.title+" 配信")+'">配信先を確認</a><a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで探す</a></div>';$("#modal").classList.add("show")}
+function render(){renderChips();renderCards();renderCal()}
+$("#q").oninput=render;$("#prev").onclick=()=>{view.setMonth(view.getMonth()-1);renderCal()};$("#next").onclick=()=>{view.setMonth(view.getMonth()+1);renderCal()};$("#close").onclick=()=>$("#modal").classList.remove("show");$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("show")};render();
+</script></body></html>

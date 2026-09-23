@@ -1,7 +1,1320 @@
 {
-  "generated_at": null,
+  "generated_at": "2026-09-23T07:06:52.251748+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
-  "note": "見放題配信の定点観測。初観測日＝配信開始日ではありません。更新前のデータは表示しません。",
-  "movies": {}
+  "note": "見放題配信の定点観測。初観測日＝配信開始日ではなく、サービスを利用できる保証もありません。",
+  "movies": {
+    "3009": {
+      "title": "審判",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/3009-le-proces/watch?locale=JP"
+    },
+    "1425485": {
+      "title": "3670",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1425485/watch"
+    },
+    "717787": {
+      "title": "縁の手紙",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/717787/watch"
+    },
+    "1382513": {
+      "title": "雌鶏",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1382513/watch"
+    },
+    "1263337": {
+      "title": "ハート・オブ・ビースト",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1263337/watch"
+    },
+    "1697647": {
+      "title": "襲名",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1697647/watch"
+    },
+    "1670061": {
+      "title": "藁にもすがる獣たち",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1670061/watch"
+    },
+    "1651263": {
+      "title": "シャドウワーク",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1651263/watch"
+    },
+    "1595400": {
+      "title": "マッチング TRUE LOVE",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1595400/watch"
+    },
+    "1567787": {
+      "title": "しびれ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1567787/watch"
+    },
+    "1496928": {
+      "title": "我々は宇宙人",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1496928/watch"
+    },
+    "1448971": {
+      "title": "ナギダイアリー",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1448971/watch"
+    },
+    "1522668": {
+      "title": "오, 발렌타인",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1522668/watch"
+    },
+    "1554986": {
+      "title": "Redland Hooves",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1554986/watch"
+    },
+    "1775245": {
+      "title": "Teteu",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1775245/watch"
+    },
+    "1775243": {
+      "title": "Our Times",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1775243/watch"
+    },
+    "1775239": {
+      "title": "眠る眼",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1775239/watch"
+    },
+    "1775231": {
+      "title": "feeling together 共在",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1775231/watch"
+    },
+    "1740257": {
+      "title": "NCT 127 5TH TOUR ‘NEO CITY  SEOUL - THE REDLINE’ in CINEMAS",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1740257/watch"
+    },
+    "1727196": {
+      "title": "ちいさなうりぼう",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1727196/watch"
+    },
+    "1691059": {
+      "title": "The Opposite of Tadashii Is Left",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1691059/watch"
+    },
+    "1641572": {
+      "title": "Compact Disc",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1641572/watch"
+    },
+    "1232797": {
+      "title": "五香宮の猫",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1232797/watch?locale=JP"
+    },
+    "1645621": {
+      "title": "WIND GAP",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1645621/watch"
+    },
+    "1772435": {
+      "title": "蟲のいどころ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1772435/watch"
+    },
+    "1772423": {
+      "title": "曲水",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1772423/watch"
+    },
+    "1772415": {
+      "title": "録画",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1772415/watch"
+    },
+    "1657826": {
+      "title": "Singing of the Evening Stars",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1657826/watch"
+    },
+    "1218925": {
+      "title": "劇場版 チェンソーマン レゼ篇",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1218925/watch?locale=JP"
+    },
+    "967941": {
+      "title": "ウィキッド 永遠の約束",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/967941-wicked-for-good/watch?locale=JP"
+    },
+    "1547224": {
+      "title": "リサ・ラーソンがいた時間",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1547224/watch"
+    },
+    "1160360": {
+      "title": "ワンオペレーション",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1160360/watch"
+    },
+    "1575337": {
+      "title": "超かぐや姫！",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1575337/watch?locale=JP"
+    },
+    "1391021": {
+      "title": "欢迎来龙餐馆",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1391021/watch"
+    },
+    "1716622": {
+      "title": "八つ墓村",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1716622/watch"
+    },
+    "1690296": {
+      "title": "さとこはいつも",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1690296/watch"
+    },
+    "1663937": {
+      "title": "映画名探偵プリキュア！ ⠀不思議な庭と2人の秘密",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1663937/watch"
+    },
+    "1491083": {
+      "title": "踊る大捜査線 N.E.W. メトロポリスを駆け抜けろ！",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1491083/watch"
+    },
+    "1654870": {
+      "title": "免許返納!?",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1654870/watch?locale=JP"
+    },
+    "760329": {
+      "title": "スマッシング・マシーン",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/760329-the-smashing-machine/watch?locale=JP"
+    },
+    "798645": {
+      "title": "ランニング・マン",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/798645-the-running-man/watch?locale=JP"
+    },
+    "872585": {
+      "title": "オッペンハイマー",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/872585-oppenheimer/watch?locale=JP"
+    },
+    "552524": {
+      "title": "リロ＆スティッチ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Disney+"
+          ]
+        }
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/552524-lilo-stitch/watch?locale=JP"
+    },
+    "1275779": {
+      "title": "ディスクロージャー・デイ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1275779/watch"
+    },
+    "1767856": {
+      "title": "UNDERGIRL",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1767856/watch"
+    },
+    "1769717": {
+      "title": "M.I.S.S.I.O.N. 歌劇な潜入捜査官",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1769717-m-i-s-s-i-o-n/watch?locale=JP"
+    },
+    "1333141": {
+      "title": "レズビアン・スペース・プリンセス",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1333141/watch"
+    },
+    "1737455": {
+      "title": "沖晴くんの涙を殺して",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1737455/watch"
+    },
+    "1706689": {
+      "title": "ファーストボイス ー私たちの逆転裁判ー",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1706689/watch"
+    },
+    "1688934": {
+      "title": "時給三〇〇円の死神",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1688934/watch"
+    },
+    "1675182": {
+      "title": "ママがもうこの世界にいなくても　私の命の日記",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1675182/watch"
+    },
+    "858017": {
+      "title": "テレビの中に入りたい",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/858017-i-saw-the-tv-glow/watch?locale=JP"
+    },
+    "948549": {
+      "title": "愛はステロイド",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix",
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/948549-love-lies-bleeding/watch?locale=JP"
+    },
+    "1666802": {
+      "title": "still dark",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1666802/watch"
+    },
+    "1393151": {
+      "title": "プーチンの愛国教室",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1393151/watch"
+    },
+    "1555218": {
+      "title": "อสูร",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1555218/watch"
+    },
+    "1651260": {
+      "title": "かぶと島が浮く日",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1651260/watch"
+    },
+    "1600736": {
+      "title": "冒険の夜",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1600736/watch"
+    },
+    "1502700": {
+      "title": "ストロベリームーン 余命半年の恋",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1502700/watch"
+    },
+    "1682421": {
+      "title": "六つの顔",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1682421/watch"
+    },
+    "1368337": {
+      "title": "オデュッセイア",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1368337/watch"
+    },
+    "1447853": {
+      "title": "オアシス：ドント・ルック・バック・イン・アンガー",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1447853/watch"
+    },
+    "1712074": {
+      "title": "Man",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1712074/watch"
+    },
+    "1705721": {
+      "title": "5秒で完全犯罪を生成する方法",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1705721/watch"
+    },
+    "1677449": {
+      "title": "マッチモンド",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1677449/watch"
+    },
+    "1591675": {
+      "title": "ルックバック",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1591675/watch"
+    },
+    "1497946": {
+      "title": "ネルソンさん、あなたは人を殺しましたか？",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1497946/watch"
+    },
+    "1494419": {
+      "title": "最終楽章 響け！ユーフォニアム 後編",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1494419/watch"
+    },
+    "59952": {
+      "title": "交渉人 真下正義",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Hulu",
+            "Netflix",
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Hulu",
+        "Netflix",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/59952/watch?locale=JP"
+    },
+    "45070": {
+      "title": "容疑者 室井慎次",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Hulu",
+            "Netflix",
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Hulu",
+        "Netflix",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/45070/watch?locale=JP"
+    },
+    "1501242": {
+      "title": "俺ではない炎上",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1501242/watch?locale=JP"
+    },
+    "1063020": {
+      "title": "劇場版「緊急取調室 THE FINAL」",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1063020-the-final/watch?locale=JP"
+    },
+    "1769790": {
+      "title": "Hoshimachi Suisei Arena Tour 2026「Once Upon a Stellar」In  Yokohama-K-Arena",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1769790/watch"
+    },
+    "1023922": {
+      "title": "MaXXXine マキシーン",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix",
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1023922-maxxxine/watch?locale=JP"
+    },
+    "1670114": {
+      "title": "スリーゴースト",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1670114/watch"
+    },
+    "838209": {
+      "title": "破墓／パミョ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/838209/watch?locale=JP"
+    },
+    "1522689": {
+      "title": "私たちが結婚を決めた理由 それから",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1522689-why-did-i-get-married-again/watch?locale=JP"
+    },
+    "1423191": {
+      "title": "バイオハザード",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1423191/watch"
+    },
+    "1744239": {
+      "title": "ミュージカル『刀剣乱舞』 ～月夜一縷～",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1744239/watch"
+    },
+    "912908": {
+      "title": "スラムドッグス",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video",
+            "U-NEXT"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/912908-strays/watch?locale=JP"
+    },
+    "406": {
+      "title": "憎しみ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Prime Video"
+          ]
+        }
+      ],
+      "services": [
+        "Prime Video"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/406-la-haine/watch?locale=JP"
+    },
+    "1248832": {
+      "title": "DIGGER／ディガー",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1248832/watch"
+    },
+    "1740268": {
+      "title": "ヨルシカ LIVE「盗作」",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1740268/watch"
+    },
+    "1632015": {
+      "title": "どこよりも遠い場所にいる君へ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1632015/watch"
+    },
+    "1592548": {
+      "title": "ガールズ＆パンツァー 最終章 第5話",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1592548/watch"
+    },
+    "1590933": {
+      "title": "汝、星のごとく",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1590933/watch"
+    },
+    "621689": {
+      "title": "給逃亡者的恰恰",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/621689/watch"
+    },
+    "1586876": {
+      "title": "映画ちいかわ 人魚の島のひみつ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1586876/watch"
+    },
+    "1485195": {
+      "title": "沼影市民プール",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1485195/watch"
+    },
+    "8426": {
+      "title": "スワロウテイル",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/8426/watch?locale=JP"
+    },
+    "1208284": {
+      "title": "ハルバーシュタットの埋蔵金",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1208284/watch"
+    },
+    "1136690": {
+      "title": "ラブ・ライズ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1136690/watch"
+    },
+    "1480382": {
+      "title": "ヒンド・ラジャブの声",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1480382/watch"
+    },
+    "1368535": {
+      "title": "僕の一年、君の一日",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1368535/watch"
+    },
+    "1083381": {
+      "title": "バックルームズ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1083381/watch"
+    },
+    "1725074": {
+      "title": "SEKIRO: NO DEFEAT",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1725074/watch"
+    },
+    "1621964": {
+      "title": "白鳥とコウモリ",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1621964/watch"
+    },
+    "1221061": {
+      "title": "落下音",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1221061-in-die-sonne-schauen/watch?locale=JP"
+    },
+    "1580374": {
+      "title": "未来",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": []
+        }
+      ],
+      "services": [],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1580374/watch?locale=JP"
+    },
+    "1400383": {
+      "title": "Teenage Wasteland",
+      "changes": [
+        {
+          "observed_at": "2026-09-23T07:06:52.251748+00:00",
+          "services": [
+            "Netflix"
+          ]
+        }
+      ],
+      "services": [
+        "Netflix"
+      ],
+      "checked_at": "2026-09-23T07:06:52.251748+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1400383-teenage-wasteland/watch?locale=JP"
+    }
+  }
 }

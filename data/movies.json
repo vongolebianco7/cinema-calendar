@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T08:11:21.454280+00:00",
+  "generated_at": "2026-09-23T08:18:59.011200+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -4511,9 +4511,11 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://movies.shochiku.co.jp/366movie/assets/img/teaser/mv_sp.jpg",
       "source": "Hulu公式",
-      "source_url": "https://www.hulu.jp/"
+      "source_url": "https://www.hulu.jp/",
+      "poster_source": "映画『366日』公式サイト",
+      "poster_source_url": "https://movies.shochiku.co.jp/366movie/"
     },
     {
       "title": "366日",
@@ -4523,9 +4525,11 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://movies.shochiku.co.jp/366movie/assets/img/teaser/mv_sp.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup"
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
+      "poster_source": "映画『366日』公式サイト",
+      "poster_source_url": "https://movies.shochiku.co.jp/366movie/"
     },
     {
       "title": "ウィキッド 永遠の約束",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T08:22:51.506029+00:00",
+  "generated_at": "2026-09-23T08:28:33.761686+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -1378,12 +1378,30 @@
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
+      "score": 6.8,
+      "votes": 225,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/fMvnCWdYpnHUwnMs6u3fKPBHDpP.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026"
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 811941,
+      "tmdb": "https://www.themoviedb.org/movie/811941",
+      "director": "Koratala Siva",
+      "director_id": 1168111,
+      "cast": [
+        "Ｎ・Ｔ・ラーマ・ラオ・Jr.",
+        "サイーフ・アリー・カーン",
+        "ప్రకాష్ రాజ్",
+        "శ్రీకాంత్"
+      ],
+      "countries": [
+        "India"
+      ],
+      "runtime": 175,
+      "genres": [
+        "アクション",
+        "ドラマ"
+      ]
     },
     {
       "title": "バイオハザード",
@@ -1845,12 +1863,30 @@
       "date": "2026-09-01",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
+      "score": 6.228,
+      "votes": 882,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/4abKUbc9IbsndbaY1hacN1iPM0Y.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup"
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
+      "id": 25983,
+      "tmdb": "https://www.themoviedb.org/movie/25983",
+      "director": "タイ・ウェスト",
+      "director_id": 101542,
+      "cast": [
+        "Jocelin Donahue",
+        "トム・ヌーナン",
+        "メアリー・ウォロノフ",
+        "グレタ・ガーウィグ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 95,
+      "genres": [
+        "ホラー",
+        "謎"
+      ]
     },
     {
       "title": "ラスト、コーション［ノーカット版］",
@@ -2166,12 +2202,29 @@
       "date": "2026-09-03",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
+      "score": 5.2,
+      "votes": 5,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/63ZL1IYUwXgaHQse5JzUlwCE8xu.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup"
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
+      "id": 814193,
+      "tmdb": "https://www.themoviedb.org/movie/814193",
+      "director": "강승용",
+      "director_id": 2197555,
+      "cast": [
+        "강신일",
+        "キム・ギュリ",
+        "백성현",
+        "ハン・スヨン"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 105,
+      "genres": [
+        "ドラマ"
+      ]
     },
     {
       "title": "私たちは天国にはいけないけど、愛することはできる",
@@ -4146,12 +4199,30 @@
       "date": "2026-09-23",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
+      "score": 10.0,
+      "votes": 5,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/baZi0cpYCIb78xyhOe9EjC2iRy6.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026"
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1032863,
+      "tmdb": "https://www.themoviedb.org/movie/1032863",
+      "director": "クレア・スキャンロン",
+      "director_id": 1296522,
+      "cast": [
+        "リリ・ラインハート",
+        "トム・ベイトマン",
+        "Rachel Marsh",
+        "Jaboukie Young-White"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ロマンス",
+        "コメディ"
+      ]
     },
     {
       "id": 3009,

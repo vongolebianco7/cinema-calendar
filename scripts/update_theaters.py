@@ -37,46 +37,38 @@ for th in THEATERS:
         seen=set()
         for h in headings:
             txt=clean(h.get_text(" ",strip=True))
+            if not txt:continue
             if h.name=="h2":
-                if not txt or txt in ("上映スケジュール",th["name"]):
-                    continue
-                # English/original title headings repeat the Japanese name.
-                if txt.isascii() and txt.upper()==txt:
-                    continue
-                if txt.startswith(("上映スケジュール", "作品詳細")):
-                    continue
+                if txt in ("上映スケジュール",th["name"],th["name"].replace("109シネマズ","").upper()):continue
+                if re.fullmatch(r"[A-Z0-9][A-Z0-9 .:/&'!\\-]+",txt):continue
+                if txt.startswith(("SUB]","DUB]","IMAX","4DX","SCREENX")):continue
                 current_title=txt
-                continue
-            if h.name!="h3" or not current_title:
-                continue
-            if "シアター" not in txt and "THEATER" not in txt.upper():
-                continue
-            # The Japanese and English headings can occur consecutively.
-            screen=re.search(r"(?:シアター|THEATER)\\s*([0-9]+)",txt,re.I)
-            screen_name="シアター"+screen.group(1) if screen else txt
-            bits=[]
-            for node in h.next_elements:
-                if isinstance(node,Tag) and node.name in ("h2","h3"):
-                    break
-                if isinstance(node,NavigableString):
-                    val=clean(str(node))
-                    if val: bits.append(val)
-            blob=" ".join(bits)
-            times=re.findall(r"([0-2]?\\d:[0-5]\\d)\\s*[～〜~\\-]\\s*([0-2]?\\d:[0-5]\\d)",blob)
-            for start,end in times:
-                key=(current_title,screen_name,start,end)
-                if key in seen: continue
-                seen.add(key)
-                rows.append({
-                    "title":current_title,
-                    "date":ymd,
-                    "theater":th["name"],
-                    "area":th["area"],
-                    "screen":screen_name,
-                    "start":start,
-                    "end":end,
-                    "source_url":url
-                })
+            elif h.name=="h3" and current_title and ("シアター" in txt or "THEATER" in txt.upper()):
+                # The screening time may be nested in another div, not an h3 sibling.
+                # Walk the document until the next heading, across container boundaries.
+                bits=[]
+                for node in h.next_elements:
+                    if node is h:continue
+                    if getattr(node,"name",None) in ("h2","h3"):break
+                    if getattr(node,"name",None) is not None:continue
+                    t=clean(str(node))
+                    if t:bits.append(t)
+                blob=" ".join(bits)
+                times=re.findall(r"([0-2]?\\d:[0-5]\\d)\\s*[～〜~-]\\s*([0-2]?\\d:[0-5]\\d)",blob)
+                for start_time,end_time in times:
+                    key=(current_title,txt,start_time,end_time)
+                    if key in seen:continue
+                    seen.add(key)
+                    rows.append({
+                        "title":current_title,
+                        "date":ymd,
+                        "theater":th["name"],
+                        "area":th["area"],
+                        "screen":txt,
+                        "start":start_time,
+                        "end":end_time,
+                        "source_url":url
+                    })
 
 out={
     "generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -85,6 +77,9 @@ out={
     "theaters":[{"name":x["name"],"area":x["area"],"code":x["code"]} for x in THEATERS],
     "schedules":rows
 }
+if not rows:
+    # Do not turn a temporary website-layout change into false "no showtimes" data.
+    raise RuntimeError("Theater parsing returned 0 showtimes; retaining previously verified schedule")
 with open("data/theater_schedules.json","w",encoding="utf-8") as f:
     json.dump(out,f,ensure_ascii=False,indent=2)
 print("theater schedule rows:",len(rows))

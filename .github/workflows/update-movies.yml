@@ -21,6 +21,8 @@ jobs:
         run: python scripts/update_movies.py
       - name: Fetch theater schedules
         run: python scripts/update_theaters.py
+      - name: Archive sourced publication history
+        run: python scripts/update_history.py
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"

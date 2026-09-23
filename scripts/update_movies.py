@@ -165,6 +165,7 @@ for region_name in ["邦画","洋画"]:
    collected=[]
    for page in range(1,6):
     params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":vote_min,"include_adult":"false","page":page}
+    if genre_name!="アニメ": params["without_genres"]="16"
     if gte: params["primary_release_date.gte"]=gte
     if lte: params["primary_release_date.lte"]=lte
     if region_name=="邦画": params["with_origin_country"]="JP"

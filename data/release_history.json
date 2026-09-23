@@ -3,6 +3,58 @@
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
+      "kind": "tv",
+      "id": null,
+      "original_title": null,
+      "title": "交渉人 真下正義",
+      "date": "2012-11-03",
+      "time": null,
+      "service": "フジテレビ",
+      "program": "土曜プレミアム",
+      "source": "フジテレビ公式番組アーカイブ",
+      "source_url": "https://www.fujitv.co.jp/b_hp/121103premium/",
+      "record_type": "放送局の公式過去番組ページ"
+    },
+    {
+      "kind": "tv",
+      "id": null,
+      "original_title": null,
+      "title": "ジェイソン・ボーン",
+      "date": "2021-03-26",
+      "time": "13:35",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "source": "テレビ東京公式番組アーカイブ",
+      "source_url": "https://www.tv-tokyo.co.jp/broad_tvtokyo/program/detail/202103/25975_202103261335.html",
+      "record_type": "放送局の公式過去番組ページ"
+    },
+    {
+      "kind": "tv",
+      "id": null,
+      "original_title": null,
+      "title": "ザ・アウトロー",
+      "date": "2021-11-05",
+      "time": "13:40",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "source": "テレビ東京公式番組アーカイブ",
+      "source_url": "https://www.tv-tokyo.co.jp/broad_tvtokyo/program/detail/202111/25975_202111051340.html",
+      "record_type": "放送局の公式過去番組ページ"
+    },
+    {
+      "kind": "tv",
+      "id": null,
+      "original_title": null,
+      "title": "ボーン・レガシー",
+      "date": "2024-02-23",
+      "time": "24:55",
+      "service": "フジテレビ",
+      "program": "フジバラナイト FRI",
+      "source": "フジテレビ公式番組アーカイブ",
+      "source_url": "https://www.fujitv.co.jp/b_hp/bourne-legacy/index.html",
+      "record_type": "放送局の公式過去番組ページ"
+    },
+    {
       "kind": "theatrical",
       "title": "マーターズ",
       "id": 9539,

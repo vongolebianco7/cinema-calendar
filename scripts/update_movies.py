@@ -127,6 +127,7 @@ with open("data/directors.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
 
 # Rankings: split Japanese / foreign films, finer genre buckets, and eras.
+# Japanese films use a lower vote threshold because TMDB vote counts are much smaller than for Hollywood titles.
 rankings={"邦画":{},"洋画":{}}
 genre_groups={
  "アクション":[28],
@@ -156,28 +157,39 @@ eras={
  "2010年代":("2010-01-01","2019-12-31"),
  "2020年代":("2020-01-01",str(today))
 }
-for region_name,country_filter in [("邦画","JP"),("洋画","!JP")]:
+for region_name in ["邦画","洋画"]:
  for genre_name,genre_ids in genre_groups.items():
   rankings[region_name][genre_name]={}
   for era_name,(gte,lte) in eras.items():
-   params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":300,"include_adult":"false","page":1}
-   if gte: params["primary_release_date.gte"]=gte
-   if lte: params["primary_release_date.lte"]=lte
-   if country_filter=="JP":
-    params["with_origin_country"]="JP"
-   else:
-    params["without_origin_country"]="JP"
-   try:
-    rs=get("/discover/movie",params).get("results",[])
-   except Exception:
-    rs=[]
+   vote_min=50 if region_name=="邦画" else 300
+   collected=[]
+   for page in range(1,6):
+    params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":vote_min,"include_adult":"false","page":page}
+    if gte: params["primary_release_date.gte"]=gte
+    if lte: params["primary_release_date.lte"]=lte
+    if region_name=="邦画": params["with_origin_country"]="JP"
+    try:
+     rs=get("/discover/movie",params).get("results",[])
+    except Exception:
+     rs=[]
+    for x in rs:
+     countries=x.get("origin_country") or []
+     if region_name=="洋画" and "JP" in countries: continue
+     collected.append(x)
+    if len(collected)>=60: break
+   # Deduplicate and keep the strongest 50.
+   seen_ids=set(); unique=[]
+   for x in collected:
+    if not x.get("id") or x["id"] in seen_ids: continue
+    seen_ids.add(x["id"]); unique.append(x)
+   unique.sort(key=lambda x:(x.get("vote_average",0),x.get("vote_count",0)),reverse=True)
    rankings[region_name][genre_name][era_name]=[
     {"id":x.get("id"),"title":x.get("title") or x.get("original_title"),"year":(x.get("release_date") or "")[:4],
      "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
      "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
      "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
-    for x in rs[:20]
+    for x in unique[:50]
    ]
 with open("data/rankings.json","w",encoding="utf-8") as fh:
- json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending, minimum 300 votes, split by origin country / genre / era","rankings":rankings},fh,ensure_ascii=False,indent=2)
+ json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending; Japanese films min 50 votes, foreign films min 300 votes; up to 50 titles per genre and era","rankings":rankings},fh,ensure_ascii=False,indent=2)
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)

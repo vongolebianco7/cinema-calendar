@@ -134,12 +134,39 @@ for m in stream_movies:
    except Exception: pass
  except Exception:
   pass
+# Merge verified Nippon TV Friday Roadshow movie broadcasts from official lineup pages.
+def sync_ntv_kinro(tv_data):
+ try:
+  raw=fetch_text("https://kinro.ntv.co.jp/")
+  paths=sorted(set(re.findall(r'href=["\\\'](/lineup/(202[0-9]{5,7}))["\\\']',raw)))
+  existing={(m.get("service"),m.get("date"),m.get("title")) for m in tv_data.get("movies",[])}
+  for path,_ in paths:
+   url="https://kinro.ntv.co.jp"+path
+   try: page=fetch_text(url)
+   except Exception: continue
+   date_m=re.search(r'(202[0-9])\\.(\\d{1,2})\\.(\\d{1,2})',html.unescape(re.sub(r"<[^>]+>"," ",page)))
+   title_m=re.search(r'<h1[^>]*>(.*?)</h1>',page,re.I|re.S)
+   if not date_m or not title_m: continue
+   title=html.unescape(re.sub(r"<[^>]+>","",title_m.group(1))).strip()
+   date=f"{date_m.group(1)}-{int(date_m.group(2)):02d}-{int(date_m.group(3)):02d}"
+   # Only add actual movies that resolve in TMDB movie search; TV specials are skipped.
+   match=search_movie_match(title)
+   if not match: continue
+   key=("日本テレビ",date,title)
+   if key in existing: continue
+   tv_data.setdefault("movies",[]).append({"title":title,"date":date,"time":"21:00","event":"tv","service":"日本テレビ","program":"金曜ロードショー","source":"日本テレビ 金曜ロードシネマクラブ","source_url":url,"terrestrial_first":None})
+   existing.add(key)
+ except Exception as e:
+  print("NTV lineup refresh skipped:",e)
+ return tv_data
+
 # Enrich the curated official TV schedule with matching movie metadata and posters.
 # Keep source broadcast dates, channels and premiere status untouched.
 try:
  with open("data/tv.json",encoding="utf-8") as fh: tv_data=json.load(fh)
 except (FileNotFoundError,json.JSONDecodeError):
  tv_data={"movies":[]}
+tv_data=sync_ntv_kinro(tv_data)
 tv_updated=False
 for m in tv_data.get("movies",[]):
  if m.get("poster") and m.get("id"):continue

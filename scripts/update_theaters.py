@@ -28,51 +28,55 @@ for th in THEATERS:
             print("skip",th["name"],ymd,e)
             continue
 
+        # The official page nests the showtime table below the screen heading.
+        # next_siblings of h3 is often empty, so walk text nodes until
+        # the next movie/screen heading instead.
+        from bs4 import Tag, NavigableString
         headings=soup.find_all(["h2","h3"])
         current_title=None
-        current_theater=None
-        current_times=[]
         seen=set()
-
-        # Parse by heading sections. 109 pages expose movie names as h2 and screens as h3.
         for h in headings:
             txt=clean(h.get_text(" ",strip=True))
-            if not txt:
-                continue
             if h.name=="h2":
-                # Ignore page headings and obvious all-uppercase duplicate/original-title headings.
-                if txt in ("上映スケジュール",th["name"],th["name"].replace("109シネマズ","").upper()):
+                if not txt or txt in ("上映スケジュール",th["name"]):
                     continue
-                if re.fullmatch(r"[A-Z0-9][A-Z0-9 .:/&'!\-]+",txt):
+                # English/original title headings repeat the Japanese name.
+                if txt.isascii() and txt.upper()==txt:
+                    continue
+                if txt.startswith(("上映スケジュール", "作品詳細")):
                     continue
                 current_title=txt
-                current_theater=None
-            elif h.name=="h3" and current_title and ("シアター" in txt or "THEATER" in txt.upper()):
-                current_theater=txt
-                # Search text until next heading for hh:mm～hh:mm pairs.
-                bits=[]
-                for sib in h.next_siblings:
-                    if getattr(sib,"name",None) in ("h2","h3"):
-                        break
-                    t=clean(sib.get_text(" ",strip=True) if hasattr(sib,"get_text") else str(sib))
-                    if t:
-                        bits.append(t)
-                blob=" ".join(bits)
-                times=re.findall(r"([0-2]?\d:[0-5]\d)\s*[～〜~-]\s*([0-2]?\d:[0-5]\d)",blob)
-                for start,end in times:
-                    key=(current_title,current_theater,start,end)
-                    if key in seen: continue
-                    seen.add(key)
-                    rows.append({
-                        "title":current_title,
-                        "date":ymd,
-                        "theater":th["name"],
-                        "area":th["area"],
-                        "screen":current_theater,
-                        "start":start,
-                        "end":end,
-                        "source_url":url
-                    })
+                continue
+            if h.name!="h3" or not current_title:
+                continue
+            if "シアター" not in txt and "THEATER" not in txt.upper():
+                continue
+            # The Japanese and English headings can occur consecutively.
+            screen=re.search(r"(?:シアター|THEATER)\\s*([0-9]+)",txt,re.I)
+            screen_name="シアター"+screen.group(1) if screen else txt
+            bits=[]
+            for node in h.next_elements:
+                if isinstance(node,Tag) and node.name in ("h2","h3"):
+                    break
+                if isinstance(node,NavigableString):
+                    val=clean(str(node))
+                    if val: bits.append(val)
+            blob=" ".join(bits)
+            times=re.findall(r"([0-2]?\\d:[0-5]\\d)\\s*[～〜~\\-]\\s*([0-2]?\\d:[0-5]\\d)",blob)
+            for start,end in times:
+                key=(current_title,screen_name,start,end)
+                if key in seen: continue
+                seen.add(key)
+                rows.append({
+                    "title":current_title,
+                    "date":ymd,
+                    "theater":th["name"],
+                    "area":th["area"],
+                    "screen":screen_name,
+                    "start":start,
+                    "end":end,
+                    "source_url":url
+                })
 
 out={
     "generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),

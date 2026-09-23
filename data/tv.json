@@ -82,7 +82,7 @@
       "poster": "https://image.tmdb.org/t/p/w500/z7sDMT5qNSQ34Q2ix7AqH0z59ru.jpg",
       "id": 59952,
       "original_title": "交渉人 真下正義",
-      "score": 7.0,
+      "score": 7,
       "votes": 6,
       "tmdb": "https://www.themoviedb.org/movie/59952",
       "overview": "クリスマスイブの午後、大混雑している東京の地下鉄で東京トランスポーテーションレールウェイ（TTR）の最新鋭試験車両クモE4-600（通称『クモ』）が何者かに乗っ取られ地下鉄網を暴走し始めた。警視庁は緊急対策会議を招集、第1級テロの可能性ありと見た捜査一課の室井慎次管理官は、緊急対応メンバーの招集を指示、その司令塔として日本初の犯罪交渉人（ネゴシエーター）、真下正義課長率いる刑事部交渉課準備室CICチームをTTR総合司令室へ急行するよう命じる。"
@@ -263,6 +263,28 @@
       "votes": 629,
       "tmdb": "https://www.themoviedb.org/movie/17689",
       "overview": "重要証人マリーをラスベガスからフェニックスまで護送する任務。ありふれた仕事だと思っていたショックレー刑事だが、出発から不可解な出来事が続発。謎の組織に命を狙われていると気づいた彼と証人マリー。しかし、頼りの警察までもが執拗に２人の命を狙ってくる！！黒幕は警察内部にいる－そう確信したショックレー刑事は、彼女を守るため猛然と反撃を開始する。"
+    },
+    {
+      "title": "インサイド・ヘッド",
+      "date": "2026-10-09",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/",
+      "terrestrial_first": false
+    },
+    {
+      "title": "インサイド・ヘッド2",
+      "date": "2026-10-16",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/",
+      "terrestrial_first": true
     }
   ]
 }

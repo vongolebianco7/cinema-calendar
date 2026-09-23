@@ -128,49 +128,11 @@
       }
     ]
   },
-  "filmarks_first_week": {
-    "title": "Filmarks 初日満足度ランキング",
-    "period": "2026年9月第2週公開作品",
-    "published": "2026-09-14",
-    "source": "Filmarks公式 FILMAGA",
-    "source_url": "https://filmaga.filmarks.com/articles/335955/",
-    "items": [
-      {
-        "rank": 1,
-        "title": "オアシス：ドント・ルック・バック・イン・アンガー",
-        "score": 4.48,
-        "reviews": 1189
-      },
-      {
-        "rank": 2,
-        "title": "オデュッセイア",
-        "score": 4.31,
-        "reviews": 12049
-      },
-      {
-        "rank": 3,
-        "title": "ネルソンさん、あなたは人を殺しましたか？",
-        "score": 4.3,
-        "reviews": 655
-      },
-      {
-        "rank": 4,
-        "title": "私たちは、ちょうどいい。",
-        "score": 4.06,
-        "reviews": 364
-      },
-      {
-        "rank": 5,
-        "title": "ルックバック",
-        "score": 3.98,
-        "reviews": 4099
-      },
-      {
-        "rank": 6,
-        "title": "5秒で完全犯罪を生成する方法",
-        "score": 3.54,
-        "reviews": 554
-      }
-    ]
+  "filmarks_current": {
+    "title": "Filmarks評価ランキング",
+    "note": "Filmarksの作品評価は公開後もレビュー投稿により変動するため、固定の「最終評価」はありません。初日満足度は使用せず、今後は各作品ページで確認した現在の評価点を使う設計です。",
+    "source": "Filmarks",
+    "source_url": "https://filmarks.com/",
+    "items": []
   }
 }

@@ -48,7 +48,7 @@ function renderChips(){
  let observed=[];
  Object.values((availabilitySnapshot&&availabilitySnapshot.movies)||{}).forEach(x=>[...(x.flatrate||x.services||[]),...(x.rent||[]),...(x.buy||[])].forEach(s=>{if(s&&!observed.includes(s))observed.push(s)}));
  let extras=[...new Set([...releaseServices,...observed])].filter(x=>!preferred.includes(x)).sort((a,b)=>a.localeCompare(b,"ja"));
- let ss=mode==="streaming"?["すべて",...preferred,...extras]:mode==="tv"?["すべて",...new Set(movies.filter(m=>m.event==="tv").map(m=>m.service))]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"],tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))],tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));let ss=mode==="streaming"?["すべて",...preferred,...extras]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
  $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;render()})
 }
@@ -172,7 +172,7 @@ function renderCal(){
    let cards=weekMovies.map(m=>{
     let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
     let status=m.terrestrial_first===true?"地上波初":m.terrestrial_first===false?"以前にも放映あり":"初放送未確認";
-    return '<article class="tvMovie" data-mi="'+idx+'"><div class="tvMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'</div><div class="tvMovieBody"><div class="tvMovieTop"><span class="tvMovieDate">'+date+'</span><span class="tvMovieTime">'+(m.time||"時間未確認")+'</span></div><div class="tvMovieChannel">'+(m.service||"放送局未確認")+'</div><div class="tvMovieProgram">'+(m.program||"番組名未確認")+'</div><div class="tvMovieTitle">'+m.title+'</div><div class="tvMovieStatus">'+status+'</div></div></article>'
+    return '<article class="tvMovie" data-mi="'+idx+'"><div class="tvMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'</div><div class="tvMovieBody"><div class="tvMovieTop"><span class="tvMovieDate">'+date+'</span><span class="tvMovieTime">'+(m.time||"時間未確認")+'</span></div><div class="tvMovieChannel" style="background:'+tvChannelColor(m.service)+';color:#fff">'+(m.service||"放送局未確認")+'</div><div class="tvMovieProgram">'+(m.program||"番組名未確認")+'</div><div class="tvMovieTitle">'+m.title+'</div><div class="tvMovieStatus">'+status+'</div></div></article>'
    }).join("");
    out+='<section class="streamingWeekBlock"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(cards?'<div class="tvWeekMovies">'+cards+'</div>':'<div class="small">この週の映画放映予定はありません</div>')+'</div></section>'
   }
@@ -404,19 +404,13 @@ function openMovie(m){
 }
 function streamServiceColor(name){
  const colors={
-  "Netflix":"#b51f1f",
-  "Prime Video":"#2385c7",
-  "Disney+":"#4b63d8",
-  "U-NEXT":"#8b59c5",
-  "Hulu":"#2c9a63",
-  "Apple TV+":"#d7d7d7",
-  "ABEMA":"#52b6a6",
-  "Lemino":"#e0a52b",
-  "FOD":"#e0526d",
-  "WOWOWオンデマンド":"#4f72d8",
-  "DMM TV":"#d85ec5",
-  "Rakuten TV":"#d64545"
+  "Netflix":"#b51f1f","Prime Video":"#2385c7","Disney+":"#4b63d8","U-NEXT":"#8b59c5","Hulu":"#2c9a63",
+  "Apple TV+":"#d7d7d7","ABEMA":"#52b6a6","Lemino":"#e0a52b","FOD":"#e0526d","WOWOWオンデマンド":"#4f72d8","DMM TV":"#d85ec5","Rakuten TV":"#d64545"
  };
+ return colors[name]||"#7d8796"
+}
+function tvChannelColor(name){
+ const colors={"日本テレビ":"#d8b62f","テレビ朝日":"#d85a4d","TBS":"#4b78d1","テレビ東京":"#53a06b","フジテレビ":"#7d68c4","NHK総合":"#8a8f98"};
  return colors[name]||"#7d8796"
 }
 function renderLegend(){
@@ -429,7 +423,8 @@ function renderLegend(){
  }else if(mode==="theatrical"){
   $("#legend").innerHTML='<span><i style="background:#6b3a3a"></i>劇場公開</span>'
  }else if(mode==="tv"){
-  $("#legend").innerHTML='<span><i style="background:#8a6818"></i>地上波初</span><span><i style="background:#555"></i>以前にも放映</span><span><i style="background:#999"></i>未確認</span>'
+  let stations=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
+  $("#legend").innerHTML=stations.map(s=>'<span><i style="background:'+tvChannelColor(s)+'"></i>'+s+'</span>').join("")+'<span><i style="background:#8a6818"></i>地上波初</span>'
  }else{
   $("#legend").innerHTML='<span><i style="background:#7b61d1"></i>国内映画祭</span><span><i style="background:#c65a8a"></i>海外映画祭</span><span><i style="background:#b07a2d"></i>国内イベント</span>'
  }

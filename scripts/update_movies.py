@@ -1,4 +1,4 @@
-import os,json,urllib.request,urllib.parse,datetime
+import os,json,urllib.request,urllib.parse,datetime,re,html
 KEY=os.environ["TMDB_API_KEY"]; BASE="https://api.themoviedb.org/3"
 def get(path,params={}):
  p=dict(params);p["api_key"]=KEY;p.setdefault("language","ja-JP")
@@ -29,12 +29,49 @@ for page in range(1,16):
 theatrical=sorted(items.values(),key=lambda x:x["date"])
 os.makedirs("data",exist_ok=True)
 with open("data/theatrical.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"movies":theatrical},fh,ensure_ascii=False,indent=2)
+# Auto-import dated Netflix titles from Netflix's official Japan "New to Watch" page.
+# Only accept titles that TMDB resolves as a movie; series/TV results are excluded.
+def fetch_text(url):
+ req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+ with urllib.request.urlopen(req,timeout=30) as r:return r.read().decode("utf-8","ignore")
+def netflix_official_movies():
+ url="https://about.netflix.com/ja/new-to-watch"
+ try: raw=fetch_text(url)
+ except Exception:return []
+ txt=html.unescape(re.sub(r"<[^>]+>","\n",raw))
+ txt=re.sub(r"[ \t]+"," ",txt)
+ found=[]
+ # Netflix page exposes each title next to YYYY/MM/DD. Capture a short preceding text line.
+ lines=[x.strip() for x in txt.splitlines() if x.strip()]
+ for i,line in enumerate(lines):
+  m=re.search(r"(202[0-9]/[01][0-9]/[0-3][0-9])",line)
+  if not m: continue
+  date=m.group(1).replace("/","-")
+  prefix=line[:m.start()].strip()
+  title=re.sub(r"Netflix.*$","",prefix).strip(" -–—→")
+  if not title and i: title=lines[i-1].strip()
+  if not title or len(title)>120: continue
+  try:
+   q=get("/search/movie",{"query":title,"region":"JP"}).get("results",[])
+  except Exception: continue
+  if not q: continue
+  x=q[0]
+  # Conservative title matching prevents a TV title from being mapped to an unrelated film.
+  names={str(x.get("title","")).lower(),str(x.get("original_title","")).lower()}
+  if title.lower() not in names and not any(title.lower() in n or n in title.lower() for n in names if len(n)>=4): continue
+  found.append({"title":x.get("title") or title,"original_title":x.get("original_title"),"date":date,"event":"streaming","service":"Netflix","poster":("https://image.tmdb.org/t/p/w500"+x["poster_path"]) if x.get("poster_path") else None,"score":x.get("vote_average",0),"votes":x.get("vote_count",0),"overview":x.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(x["id"]),"source":"Netflix公式 新作情報","source_url":url})
+ return found
 # Preserve curated streaming premieres; these are populated only from official dated announcements.
 try:
  with open("data/streaming.json",encoding="utf-8") as fh: streaming=json.load(fh)
 except FileNotFoundError:
  streaming={"generated_at":None,"movies":[]}
 stream_movies=[m for m in streaming.get("movies",[]) if m.get("event")=="streaming" and m.get("date") and m.get("service")]
+# Merge automatically discovered official Netflix movie premieres without overwriting curated entries.
+seen={(m.get("service"),m.get("title"),m.get("date")) for m in stream_movies}
+for m in netflix_official_movies():
+ k=(m.get("service"),m.get("title"),m.get("date"))
+ if k not in seen: stream_movies.append(m); seen.add(k)
 # Enrich verified streaming premieres with TMDB metadata/posters by title.
 # The premiere date and service always remain sourced from official announcements.
 for m in stream_movies:

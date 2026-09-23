@@ -193,6 +193,55 @@ for region_name in ["邦画","洋画"]:
    ]
 with open("data/rankings.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending; Japanese films min 50 votes, foreign films min 300 votes; up to 50 titles per genre and era","rankings":rankings},fh,ensure_ascii=False,indent=2)
+# Refresh Japan all-time box office top 100 from Kogyo Tsushinsha (official source).
+try:
+ req=urllib.request.Request("https://kogyotsushin.com/archives/alltime/",headers={"User-Agent":"Mozilla/5.0"})
+ raw=urllib.request.urlopen(req,timeout=30).read().decode("utf-8","ignore")
+ rows=re.findall(r"<tr[^>]*>(.*?)</tr>",raw,re.I|re.S)
+ box_items=[]
+ def clean_cell(v):
+  v=re.sub(r"<br\s*/?>"," ",v,flags=re.I)
+  v=re.sub(r"<[^>]+>","",v)
+  return html.unescape(v).replace("\u3000"," ").strip()
+ for row in rows:
+  cells=[clean_cell(x) for x in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>",row,re.I|re.S)]
+  if len(cells)<5: continue
+  rank_txt=cells[0].strip()
+  if not re.fullmatch(r"\d+",rank_txt): continue
+  gross_txt=cells[3].replace(",","").strip()
+  m_gross=re.search(r"\d+(?:\.\d+)?",gross_txt)
+  if not m_gross: continue
+  release=cells[4].strip()
+  domestic=False
+  if len(cells)>=6:
+   domestic=("*" in cells[5]) or ("＊" in cells[5])
+  box_items.append({
+   "rank":int(rank_txt),
+   "title":cells[1].strip(),
+   "distributor":cells[2].strip(),
+   "gross_billion_yen":float(m_gross.group()),
+   "release_date":release,
+   "region":"邦画" if domestic else "洋画"
+  })
+ if box_items:
+  try:
+   with open("data/rankings_extra.json",encoding="utf-8") as fh:
+    extra_seed=json.load(fh)
+  except (FileNotFoundError,json.JSONDecodeError):
+   extra_seed={}
+  extra_seed["boxoffice_alltime"]={
+   "title":"歴代興行収入ランキング",
+   "as_of":str(today),
+   "source":"興行通信社 CINEMAランキング通信",
+   "source_url":"https://kogyotsushin.com/archives/alltime/",
+   "scope":"興行通信社が公開する歴代興収ベスト100",
+   "items":box_items[:100]
+  }
+  with open("data/rankings_extra.json","w",encoding="utf-8") as fh:
+   json.dump(extra_seed,fh,ensure_ascii=False,indent=2)
+except Exception as e:
+ print("Box office refresh skipped:",e)
+
 # Enrich every non-TMDB ranking item with TMDB metadata so all ranking axes show a common TMDB score/poster.
 try:
  with open("data/rankings_extra.json",encoding="utf-8") as fh:
@@ -219,6 +268,7 @@ for section_name in ["boxoffice_alltime","filmarks_current"]:
    item["tmdb"]="https://www.themoviedb.org/movie/"+str(match.get("id"))
    item["genres"]=match.get("genre_ids") or []
    item["origin_country"]=match.get("origin_country") or []
+   if not item.get("region"): item["region"]="邦画" if "JP" in item["origin_country"] else "洋画"
    try:
     md=get("/movie/"+str(match.get("id")))
     item["genres_named"]=[g.get("name") for g in md.get("genres",[]) if g.get("name")]

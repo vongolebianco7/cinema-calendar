@@ -1,24 +1,74 @@
 {
   "generated_at": "2026-09-23",
-  "note": "公式発表で日程を確認できた映画祭・映画関連イベント。日程は変更される場合があります。",
+  "note": "公式発表で日程を確認できた国内・海外の主要映画祭／映画関連イベント。日程は変更される場合があります。",
   "events": [
+    {
+      "title": "サンダンス映画祭 2026",
+      "date": "2026-01-22",
+      "end_date": "2026-02-01",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Park City / Salt Lake City, Utah, USA",
+      "source": "Sundance Film Festival 2026 公式",
+      "source_url": "https://festival.sundance.org/",
+      "overview": "2026年のサンダンス映画祭。現地上映は1月22日から2月1日まで。"
+    },
+    {
+      "title": "第76回ベルリン国際映画祭",
+      "date": "2026-02-12",
+      "end_date": "2026-02-22",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Berlin, Germany",
+      "source": "Berlinale 公式",
+      "source_url": "https://www.berlinale.de/",
+      "overview": "第76回ベルリン国際映画祭。2月12日から22日まで開催。"
+    },
+    {
+      "title": "第79回カンヌ国際映画祭",
+      "date": "2026-05-12",
+      "end_date": "2026-05-23",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Cannes, France",
+      "source": "Festival de Cannes 公式",
+      "source_url": "https://www.festival-cannes.com/en/",
+      "overview": "第79回カンヌ国際映画祭。5月12日から23日まで開催。"
+    },
     {
       "title": "ショートショート フィルムフェスティバル ＆ アジア 2026",
       "date": "2026-05-25",
       "end_date": "2026-06-10",
       "event": "festival",
-      "service": "映画祭",
+      "service": "国内映画祭",
+      "scope": "domestic",
       "venue": "MoN Takanawa、赤坂インターシティコンファレンス、ユーロライブ、WITH HARAJUKU HALLほか",
       "source": "SSFF & ASIA 2026 公式",
       "source_url": "https://www.shortshorts.org/2026/about/",
       "overview": "東京会場は5月25日から6月10日まで。オンライン会場は6月30日まで開催。"
     },
     {
+      "title": "第83回ヴェネチア国際映画祭",
+      "date": "2026-09-02",
+      "end_date": "2026-09-12",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Lido di Venezia, Italy",
+      "source": "La Biennale di Venezia 公式",
+      "source_url": "https://www.labiennale.org/en/cinema/2026",
+      "overview": "第83回ヴェネチア国際映画祭。9月2日から12日まで開催。"
+    },
+    {
       "title": "第39回東京国際映画祭",
       "date": "2026-10-26",
       "end_date": "2026-11-04",
       "event": "festival",
-      "service": "映画祭",
+      "service": "国内映画祭",
+      "scope": "domestic",
       "venue": "日比谷・有楽町・丸の内・銀座地区ほか",
       "source": "第39回東京国際映画祭 公式",
       "source_url": "https://2026.tiff-jp.net/ja/",
@@ -29,11 +79,12 @@
       "date": "2026-12-11",
       "end_date": "2026-12-13",
       "event": "festival",
-      "service": "イベント",
+      "service": "国内イベント",
+      "scope": "domestic",
       "venue": "幕張メッセ",
       "source": "東京コミコン 公式",
       "source_url": "https://tokyocomiccon.jp/topics",
-      "overview": "国内外映画・コミックなどの最新情報、展示、ステージなどを行うポップカルチャーイベント。"
+      "overview": "映画・コミックなどの最新情報、展示、ステージを行うポップカルチャーイベント。"
     }
   ]
 }

@@ -126,18 +126,58 @@ for m in events:
 with open("data/directors.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
 
-# Genre rankings: TMDB rating, with a minimum vote count to reduce tiny-sample outliers.
-rankings={}
-try:
- genre_list=get("/genre/movie/list").get("genres",[])
- for g in genre_list:
-  try:
-   rs=get("/discover/movie",{"with_genres":g["id"],"sort_by":"vote_average.desc","vote_count.gte":500,"primary_release_date.lte":str(today),"include_adult":"false","page":1}).get("results",[])
-  except Exception:
-   continue
-  rankings[g["name"]]=[{"id":x.get("id"),"title":x.get("title") or x.get("original_title"),"year":(x.get("release_date") or "")[:4],"poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,"score":x.get("vote_average",0),"votes":x.get("vote_count",0),"tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))} for x in rs[:12]]
-except Exception:
- pass
+# Rankings: split Japanese / foreign films, finer genre buckets, and eras.
+rankings={"邦画":{},"洋画":{}}
+genre_groups={
+ "アクション":[28],
+ "アドベンチャー":[12],
+ "アニメ":[16],
+ "コメディ":[35],
+ "クライム":[80],
+ "ドキュメンタリー":[99],
+ "ドラマ":[18],
+ "ファミリー":[10751],
+ "ファンタジー":[14],
+ "歴史":[36],
+ "ホラー":[27],
+ "音楽":[10402],
+ "ミステリー":[9648],
+ "ロマンス":[10749],
+ "SF":[878],
+ "スリラー":[53],
+ "戦争":[10752],
+ "西部劇":[37]
+}
+eras={
+ "〜1979":(None,"1979-12-31"),
+ "1980年代":("1980-01-01","1989-12-31"),
+ "1990年代":("1990-01-01","1999-12-31"),
+ "2000年代":("2000-01-01","2009-12-31"),
+ "2010年代":("2010-01-01","2019-12-31"),
+ "2020年代":("2020-01-01",str(today))
+}
+for region_name,country_filter in [("邦画","JP"),("洋画","!JP")]:
+ for genre_name,genre_ids in genre_groups.items():
+  rankings[region_name][genre_name]={}
+  for era_name,(gte,lte) in eras.items():
+   params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":300,"include_adult":"false","page":1}
+   if gte: params["primary_release_date.gte"]=gte
+   if lte: params["primary_release_date.lte"]=lte
+   if country_filter=="JP":
+    params["with_origin_country"]="JP"
+   else:
+    params["without_origin_country"]="JP"
+   try:
+    rs=get("/discover/movie",params).get("results",[])
+   except Exception:
+    rs=[]
+   rankings[region_name][genre_name][era_name]=[
+    {"id":x.get("id"),"title":x.get("title") or x.get("original_title"),"year":(x.get("release_date") or "")[:4],
+     "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
+     "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
+     "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
+    for x in rs[:20]
+   ]
 with open("data/rankings.json","w",encoding="utf-8") as fh:
- json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending, minimum 500 votes","genres":rankings},fh,ensure_ascii=False,indent=2)
+ json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending, minimum 300 votes, split by origin country / genre / era","rankings":rankings},fh,ensure_ascii=False,indent=2)
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)

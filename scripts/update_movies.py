@@ -79,8 +79,18 @@ def norm_movie_title(value):
  value=(value or "").lower()
  value=re.sub(r"[【［\[][^】］\]]*(?:4k|デジタル|ノーカット|字幕|吹替)[^】］\]]*[】］\]]","",value,flags=re.I)
  return re.sub(r"[\s　・･:：!！?？「」『』【】\[\]()（）/／\-―ー\.\u30fb\u00b7]+","",value)
+TITLE_ALIASES={
+ "デーヴァラ":"Devara: Part 1",
+ "ハウス・オブ・ザ・デビル":"The House of the Devil",
+ "Stray Kids : The dominATE Experience":"Stray Kids: The dominATE Experience",
+ "1980 僕たちの光州事件":"1980",
+ "ラブ・ハイポセシス":"The Love Hypothesis",
+ "ウェズリー・スナイプス ザ・シューター":"The Contractor",
+ "ウェズリー・スナイプス　ザ・シューター":"The Contractor",
+}
 def search_movie_match(title, original_title=None):
  variants=[title]
+ if title in TITLE_ALIASES: variants.append(TITLE_ALIASES[title])
  simplified=re.sub(r"[【［\[][^】］\]]*[】］\]]","",title).strip()
  if simplified and simplified!=title: variants.append(simplified)
  if original_title: variants.append(original_title)

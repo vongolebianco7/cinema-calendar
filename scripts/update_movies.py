@@ -191,6 +191,44 @@ for region_name in ["邦画","洋画"]:
      "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
     for x in unique[:50]
    ]
+# Enrich ranking titles with runtime and current Japan flatrate subscription providers.
+# Cache results to avoid thousands of repeated API calls. Up to 350 new titles are filled per run.
+try:
+ with open("data/ranking_metadata.json",encoding="utf-8") as fh:
+  ranking_meta=json.load(fh)
+except (FileNotFoundError,json.JSONDecodeError):
+ ranking_meta={}
+new_meta_count=0
+provider_names={"8":"Netflix","9":"Prime Video","337":"Disney+","84":"U-NEXT","15":"Hulu"}
+for region_block in rankings.values():
+ for genre_block in region_block.values():
+  for era_list in genre_block.values():
+   for item in era_list:
+    mid=item.get("id")
+    if not mid: continue
+    key=str(mid)
+    meta=ranking_meta.get(key)
+    if meta is None and new_meta_count<350:
+     try:
+      md=get("/movie/"+key,{"append_to_response":"watch/providers"})
+      jp=((md.get("watch/providers") or {}).get("results") or {}).get("JP") or {}
+      flatrate=jp.get("flatrate") or []
+      providers=[]
+      for p in flatrate:
+       pid=str(p.get("provider_id") or "")
+       name=provider_names.get(pid)
+       if name and name not in providers: providers.append(name)
+      meta={"runtime":md.get("runtime"),"subscriptions":providers,"checked_at":str(today)}
+      ranking_meta[key]=meta
+      new_meta_count+=1
+     except Exception:
+      meta={}
+    meta=meta or {}
+    item["runtime"]=meta.get("runtime")
+    item["subscriptions"]=meta.get("subscriptions") or []
+with open("data/ranking_metadata.json","w",encoding="utf-8") as fh:
+ json.dump(ranking_meta,fh,ensure_ascii=False,indent=2)
+
 with open("data/rankings.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending; Japanese films min 50 votes, foreign films min 300 votes; up to 50 titles per genre and era","rankings":rankings},fh,ensure_ascii=False,indent=2)
 # Refresh Japan all-time box office top 100 from Kogyo Tsushinsha (official source).
@@ -270,9 +308,16 @@ for section_name in ["boxoffice_alltime","filmarks_current"]:
    item["origin_country"]=match.get("origin_country") or []
    if not item.get("region"): item["region"]="邦画" if "JP" in item["origin_country"] else "洋画"
    try:
-    md=get("/movie/"+str(match.get("id")))
+    md=get("/movie/"+str(match.get("id")),{"append_to_response":"watch/providers"})
     item["genres_named"]=[g.get("name") for g in md.get("genres",[]) if g.get("name")]
     item["origin_country"]=md.get("origin_country") or item["origin_country"]
+    item["runtime"]=md.get("runtime")
+    jp=((md.get("watch/providers") or {}).get("results") or {}).get("JP") or {}
+    pmap={8:"Netflix",9:"Prime Video",337:"Disney+",84:"U-NEXT",15:"Hulu"}
+    item["subscriptions"]=[]
+    for p in (jp.get("flatrate") or []):
+     name=pmap.get(p.get("provider_id"))
+     if name and name not in item["subscriptions"]: item["subscriptions"].append(name)
    except Exception:
     item["genres_named"]=[]
   except Exception:

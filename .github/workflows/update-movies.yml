@@ -13,10 +13,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Install theater parser
+        run: pip install beautifulsoup4
       - name: Fetch TMDB data
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_movies.py
+      - name: Fetch theater schedules
+        run: python scripts/update_theaters.py
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"

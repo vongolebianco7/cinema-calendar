@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T08:28:50.856184+00:00",
+  "generated_at": "2026-09-23T18:34:31.193741+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -2821,6 +2821,32 @@
       "program": null,
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "アベンジャーズ／エンドゲーム:アンコール",
+      "id": 1777404,
+      "original_title": "Avengers: Endgame encore",
+      "date": "2026-09-23",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1777404",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "ザ・アウトロー",
+      "id": 449443,
+      "original_title": "Den of Thieves",
+      "date": "2026-09-24",
+      "service": "テレビ東京",
+      "time": "13:40",
+      "program": "午後のロードショー",
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

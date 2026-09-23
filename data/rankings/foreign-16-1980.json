@@ -9,7 +9,7 @@
       "year": "1988",
       "poster": "https://image.tmdb.org/t/p/w342/hJaodNynKzjPyPWIXBL7mJpXvn3.jpg",
       "score": 8.45,
-      "votes": 6821,
+      "votes": 6822,
       "tmdb": "https://www.themoviedb.org/movie/12477"
     },
     {
@@ -49,15 +49,6 @@
       "tmdb": "https://www.themoviedb.org/movie/10515"
     },
     {
-      "id": 149,
-      "title": "AKIRA",
-      "year": "1988",
-      "poster": "https://image.tmdb.org/t/p/w342/oVc2I0WBRaVCmnL3DO0LaPQuEqh.jpg",
-      "score": 7.94,
-      "votes": 5008,
-      "tmdb": "https://www.themoviedb.org/movie/149"
-    },
-    {
       "id": 81,
       "title": "風の谷のナウシカ",
       "year": "1984",
@@ -65,6 +56,15 @@
       "score": 7.94,
       "votes": 4208,
       "tmdb": "https://www.themoviedb.org/movie/81"
+    },
+    {
+      "id": 149,
+      "title": "AKIRA",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/oVc2I0WBRaVCmnL3DO0LaPQuEqh.jpg",
+      "score": 7.939,
+      "votes": 5009,
+      "tmdb": "https://www.themoviedb.org/movie/149"
     },
     {
       "id": 66105,
@@ -116,7 +116,7 @@
       "title": "天使のたまご",
       "year": "1985",
       "poster": "https://image.tmdb.org/t/p/w342/dqi68LqT8z4lduMg0xR2TZHkRId.jpg",
-      "score": 7.692,
+      "score": 7.7,
       "votes": 617,
       "tmdb": "https://www.themoviedb.org/movie/15916"
     },
@@ -188,8 +188,8 @@
       "title": "ロジャー・ラビット",
       "year": "1988",
       "poster": "https://image.tmdb.org/t/p/w342/afOjZ8VBqLD2mz7SuAAzuR6qyqJ.jpg",
-      "score": 7.5,
-      "votes": 6351,
+      "score": 7.541,
+      "votes": 6352,
       "tmdb": "https://www.themoviedb.org/movie/856"
     },
     {
@@ -458,8 +458,8 @@
       "title": "ニックナック",
       "year": "1989",
       "poster": "https://image.tmdb.org/t/p/w342/uRsPF4LCdKLqwG0Gg2GASMgbZgY.jpg",
-      "score": 6.998,
-      "votes": 631,
+      "score": 6.997,
+      "votes": 632,
       "tmdb": "https://www.themoviedb.org/movie/13928"
     },
     {
@@ -494,7 +494,7 @@
       "title": "ドラゴンボール 神龍の伝説",
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/2tMLMV8U5xpaqVOreHALFLsmr1s.jpg",
-      "score": 6.9,
+      "score": 6.874,
       "votes": 385,
       "tmdb": "https://www.themoviedb.org/movie/39144"
     },
@@ -530,9 +530,18 @@
       "title": "ドラゴンボールZ",
       "year": "1989",
       "poster": "https://image.tmdb.org/t/p/w342/9uRHXVUBLidWIBRpZQp4Ra14qzp.jpg",
-      "score": 6.842,
+      "score": 6.844,
       "votes": 636,
       "tmdb": "https://www.themoviedb.org/movie/28609"
+    },
+    {
+      "id": 4978,
+      "title": "アメリカ物語",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/fI54MlUMUojhzzwH2MzXeiGkYVu.jpg",
+      "score": 6.8,
+      "votes": 1494,
+      "tmdb": "https://www.themoviedb.org/movie/4978"
     },
     {
       "id": 11497,
@@ -542,6 +551,15 @@
       "score": 6.8,
       "votes": 1179,
       "tmdb": "https://www.themoviedb.org/movie/11497"
+    },
+    {
+      "id": 23521,
+      "title": "Daffy Duck's Quackbusters",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/d9s1aOsnXfeSOlzYuX6VVmORrFo.jpg",
+      "score": 6.8,
+      "votes": 153,
+      "tmdb": "https://www.themoviedb.org/movie/23521"
     },
     {
       "id": 9318,
@@ -578,24 +596,6 @@
       "score": 6.762,
       "votes": 195,
       "tmdb": "https://www.themoviedb.org/movie/19877"
-    },
-    {
-      "id": 4978,
-      "title": "アメリカ物語",
-      "year": "1986",
-      "poster": "https://image.tmdb.org/t/p/w342/fI54MlUMUojhzzwH2MzXeiGkYVu.jpg",
-      "score": 6.759,
-      "votes": 1494,
-      "tmdb": "https://www.themoviedb.org/movie/4978"
-    },
-    {
-      "id": 23521,
-      "title": "Daffy Duck's Quackbusters",
-      "year": "1988",
-      "poster": "https://image.tmdb.org/t/p/w342/d9s1aOsnXfeSOlzYuX6VVmORrFo.jpg",
-      "score": 6.758,
-      "votes": 153,
-      "tmdb": "https://www.themoviedb.org/movie/23521"
     },
     {
       "id": 39228,
@@ -665,7 +665,7 @@
       "title": "ドラゴンボール 摩訶不思議大冒険",
       "year": "1988",
       "poster": "https://image.tmdb.org/t/p/w342/aEs9UN6kxu9VsqkO0fZBPePGudU.jpg",
-      "score": 6.676,
+      "score": 6.679,
       "votes": 315,
       "tmdb": "https://www.themoviedb.org/movie/116776"
     },
@@ -782,8 +782,8 @@
       "title": "ティン・トイ",
       "year": "1988",
       "poster": "https://image.tmdb.org/t/p/w342/yRjtvmRXgZoY8P9Ug28G9OITD9E.jpg",
-      "score": 6.114,
-      "votes": 507,
+      "score": 6.11,
+      "votes": 508,
       "tmdb": "https://www.themoviedb.org/movie/13927"
     },
     {

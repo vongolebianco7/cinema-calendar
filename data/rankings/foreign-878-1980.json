@@ -8,8 +8,8 @@
       "title": "スター・ウォーズ エピソード５／帝国の逆襲",
       "year": "1980",
       "poster": "https://image.tmdb.org/t/p/w342/mbLTbU4zqdY1nOQP9OTxj9LeRTL.jpg",
-      "score": 8.393,
-      "votes": 18872,
+      "score": 8.392,
+      "votes": 18874,
       "tmdb": "https://www.themoviedb.org/movie/1891"
     },
     {
@@ -17,8 +17,8 @@
       "title": "バック・トゥ・ザ・フューチャー",
       "year": "1985",
       "poster": "https://image.tmdb.org/t/p/w342/dZFaLrpdH2roAt5ZCjAye6DynT1.jpg",
-      "score": 8.33,
-      "votes": 22426,
+      "score": 8.3,
+      "votes": 22430,
       "tmdb": "https://www.themoviedb.org/movie/105"
     },
     {
@@ -27,7 +27,7 @@
       "year": "1982",
       "poster": "https://image.tmdb.org/t/p/w342/j1V5b2Db2nQ4QWIf7wd9gtgsBlt.jpg",
       "score": 8.073,
-      "votes": 8267,
+      "votes": 8269,
       "tmdb": "https://www.themoviedb.org/movie/1091"
     },
     {
@@ -36,7 +36,7 @@
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/xMCV55YbEIIFwpPwdx2pOccT6Tl.jpg",
       "score": 7.965,
-      "votes": 11197,
+      "votes": 11199,
       "tmdb": "https://www.themoviedb.org/movie/679"
     },
     {
@@ -49,22 +49,22 @@
       "tmdb": "https://www.themoviedb.org/movie/78"
     },
     {
-      "id": 43680,
-      "title": "Собачье сердце",
-      "year": "1988",
-      "poster": "https://image.tmdb.org/t/p/w342/yxDzbPhdc2Of7hkAVYATHpvnwkd.jpg",
-      "score": 7.928,
-      "votes": 202,
-      "tmdb": "https://www.themoviedb.org/movie/43680"
-    },
-    {
       "id": 1892,
       "title": "スター・ウォーズ エピソード６／ジェダイの帰還",
       "year": "1983",
       "poster": "https://image.tmdb.org/t/p/w342/tmQ9HzBvXzYuTP1qwVAoYXQvTU1.jpg",
       "score": 7.912,
-      "votes": 17329,
+      "votes": 17331,
       "tmdb": "https://www.themoviedb.org/movie/1892"
+    },
+    {
+      "id": 43680,
+      "title": "Собачье сердце",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/yxDzbPhdc2Of7hkAVYATHpvnwkd.jpg",
+      "score": 7.9,
+      "votes": 202,
+      "tmdb": "https://www.themoviedb.org/movie/43680"
     },
     {
       "id": 165,
@@ -72,7 +72,7 @@
       "year": "1989",
       "poster": "https://image.tmdb.org/t/p/w342/bOGsmFU5Lc9U56Tq01gFm6wbZnb.jpg",
       "score": 7.784,
-      "votes": 14298,
+      "votes": 14301,
       "tmdb": "https://www.themoviedb.org/movie/165"
     },
     {
@@ -90,7 +90,7 @@
       "year": "1984",
       "poster": "https://image.tmdb.org/t/p/w342/iK2YBfD7DdaNXZALQhhT9uTN9Rc.jpg",
       "score": 7.695,
-      "votes": 15158,
+      "votes": 15161,
       "tmdb": "https://www.themoviedb.org/movie/218"
     },
     {
@@ -107,18 +107,9 @@
       "title": "SF核戦争後の未来・スレッズ",
       "year": "1984",
       "poster": "https://image.tmdb.org/t/p/w342/lBhU4U9Eehr9shstPem6I7BdkxK.jpg",
-      "score": 7.641,
+      "score": 7.6,
       "votes": 440,
       "tmdb": "https://www.themoviedb.org/movie/17835"
-    },
-    {
-      "id": 106,
-      "title": "プレデター",
-      "year": "1987",
-      "poster": "https://image.tmdb.org/t/p/w342/jmXrgC4KaLn0rPlQRasJIvjlCxZ.jpg",
-      "score": 7.6,
-      "votes": 9522,
-      "tmdb": "https://www.themoviedb.org/movie/106"
     },
     {
       "id": 27072,
@@ -130,12 +121,21 @@
       "tmdb": "https://www.themoviedb.org/movie/27072"
     },
     {
+      "id": 106,
+      "title": "プレデター",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/jmXrgC4KaLn0rPlQRasJIvjlCxZ.jpg",
+      "score": 7.581,
+      "votes": 9523,
+      "tmdb": "https://www.themoviedb.org/movie/106"
+    },
+    {
       "id": 601,
       "title": "E.T.",
       "year": "1982",
       "poster": "https://image.tmdb.org/t/p/w342/lbudMakIqY8ui9hnBbq1ax3pAfR.jpg",
       "score": 7.518,
-      "votes": 12275,
+      "votes": 12274,
       "tmdb": "https://www.themoviedb.org/movie/601"
     },
     {
@@ -143,8 +143,8 @@
       "title": "スター・トレックII カーンの逆襲",
       "year": "1982",
       "poster": "https://image.tmdb.org/t/p/w342/vGnWBLM0WwSBt9FLli7h8WdLQJb.jpg",
-      "score": 7.45,
-      "votes": 2218,
+      "score": 7.452,
+      "votes": 2219,
       "tmdb": "https://www.themoviedb.org/movie/154"
     },
     {
@@ -153,17 +153,8 @@
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/1Ow2lot8eKvr6kmwFhHjtrGo2vy.jpg",
       "score": 7.446,
-      "votes": 5149,
+      "votes": 5150,
       "tmdb": "https://www.themoviedb.org/movie/9426"
-    },
-    {
-      "id": 2756,
-      "title": "アビス",
-      "year": "1989",
-      "poster": "https://image.tmdb.org/t/p/w342/l1nVgiKIvK4fF35MAgaoNJa5OCb.jpg",
-      "score": 7.4,
-      "votes": 3601,
-      "tmdb": "https://www.themoviedb.org/movie/2756"
     },
     {
       "id": 18289,
@@ -189,16 +180,25 @@
       "year": "1987",
       "poster": "https://image.tmdb.org/t/p/w342/tt2AYIGdBY7c7QS75SrjxkZC4wS.jpg",
       "score": 7.366,
-      "votes": 5961,
+      "votes": 5963,
       "tmdb": "https://www.themoviedb.org/movie/5548"
+    },
+    {
+      "id": 2756,
+      "title": "アビス",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/l1nVgiKIvK4fF35MAgaoNJa5OCb.jpg",
+      "score": 7.359,
+      "votes": 3603,
+      "tmdb": "https://www.themoviedb.org/movie/2756"
     },
     {
       "id": 8337,
       "title": "ゼイリブ",
       "year": "1988",
       "poster": "https://image.tmdb.org/t/p/w342/e1OJhRvjZa76lqJPxsUhK2YGfGK.jpg",
-      "score": 7.306,
-      "votes": 3634,
+      "score": 7.308,
+      "votes": 3637,
       "tmdb": "https://www.themoviedb.org/movie/8337"
     },
     {
@@ -216,7 +216,7 @@
       "year": "1983",
       "poster": "https://image.tmdb.org/t/p/w342/6vwL5nzmUa6Qay24fpRnryTR0NJ.jpg",
       "score": 7.249,
-      "votes": 2570,
+      "votes": 2571,
       "tmdb": "https://www.themoviedb.org/movie/837"
     },
     {
@@ -229,15 +229,6 @@
       "tmdb": "https://www.themoviedb.org/movie/19673"
     },
     {
-      "id": 421467,
-      "title": "ゴジラ",
-      "year": "1984",
-      "poster": "https://image.tmdb.org/t/p/w342/2rqFk9AWfYkA6TOUxLNXi5JR0nC.jpg",
-      "score": 7.201,
-      "votes": 353,
-      "tmdb": "https://www.themoviedb.org/movie/421467"
-    },
-    {
       "id": 10925,
       "title": "バタリアン",
       "year": "1985",
@@ -247,12 +238,21 @@
       "tmdb": "https://www.themoviedb.org/movie/10925"
     },
     {
+      "id": 421467,
+      "title": "ゴジラ",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/2rqFk9AWfYkA6TOUxLNXi5JR0nC.jpg",
+      "score": 7.2,
+      "votes": 353,
+      "tmdb": "https://www.themoviedb.org/movie/421467"
+    },
+    {
       "id": 168,
       "title": "スター・トレックIV 故郷への長い道",
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/6dGZmx75pxUBylO9fYckbGYQUkY.jpg",
-      "score": 7.185,
-      "votes": 1718,
+      "score": 7.182,
+      "votes": 1719,
       "tmdb": "https://www.themoviedb.org/movie/168"
     },
     {
@@ -292,22 +292,22 @@
       "tmdb": "https://www.themoviedb.org/movie/11336"
     },
     {
+      "id": 41428,
+      "title": "鉄男",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/zEzJP8F9EawE1FQySR6ppCyAEX.jpg",
+      "score": 7.0,
+      "votes": 739,
+      "tmdb": "https://www.themoviedb.org/movie/41428"
+    },
+    {
       "id": 11864,
       "title": "第5惑星",
       "year": "1985",
       "poster": "https://image.tmdb.org/t/p/w342/ao3ERL2sRgGf3TI3swlDq3PoSOH.jpg",
       "score": 6.991,
-      "votes": 1130,
+      "votes": 1131,
       "tmdb": "https://www.themoviedb.org/movie/11864"
-    },
-    {
-      "id": 41428,
-      "title": "鉄男",
-      "year": "1989",
-      "poster": "https://image.tmdb.org/t/p/w342/zEzJP8F9EawE1FQySR6ppCyAEX.jpg",
-      "score": 6.98,
-      "votes": 739,
-      "tmdb": "https://www.themoviedb.org/movie/41428"
     },
     {
       "id": 10122,
@@ -409,11 +409,20 @@
       "tmdb": "https://www.themoviedb.org/movie/2614"
     },
     {
+      "id": 8536,
+      "title": "スーパーマンII／冒険篇",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/8olCHRd5fOtdUBl79JNVYuZsFwT.jpg",
+      "score": 6.8,
+      "votes": 2618,
+      "tmdb": "https://www.themoviedb.org/movie/8536"
+    },
+    {
       "id": 39256,
       "title": "ゴジラ1985",
       "year": "1985",
       "poster": "https://image.tmdb.org/t/p/w342/49FqWFC9Ajj2CI74PoViSmHXLPU.jpg",
-      "score": 6.814,
+      "score": 6.8,
       "votes": 202,
       "tmdb": "https://www.themoviedb.org/movie/39256"
     },
@@ -441,7 +450,7 @@
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/j0zYtFvOTJJqMESmacVixbM2VuP.jpg",
       "score": 6.759,
-      "votes": 607,
+      "votes": 608,
       "tmdb": "https://www.themoviedb.org/movie/15762"
     },
     {
@@ -454,15 +463,6 @@
       "tmdb": "https://www.themoviedb.org/movie/28370"
     },
     {
-      "id": 8536,
-      "title": "スーパーマンII／冒険篇",
-      "year": "1980",
-      "poster": "https://image.tmdb.org/t/p/w342/8olCHRd5fOtdUBl79JNVYuZsFwT.jpg",
-      "score": 6.753,
-      "votes": 2618,
-      "tmdb": "https://www.themoviedb.org/movie/8536"
-    },
-    {
       "id": 11548,
       "title": "ニューヨーク東８番街の奇跡",
       "year": "1987",
@@ -470,15 +470,6 @@
       "score": 6.744,
       "votes": 839,
       "tmdb": "https://www.themoviedb.org/movie/11548"
-    },
-    {
-      "id": 11542,
-      "title": "アルタード・ステーツ／未知への挑戦",
-      "year": "1980",
-      "poster": "https://image.tmdb.org/t/p/w342/10teVipgv1Y7ilRIoIhfrdJsf4A.jpg",
-      "score": 6.72,
-      "votes": 802,
-      "tmdb": "https://www.themoviedb.org/movie/11542"
     },
     {
       "id": 9538,
@@ -497,6 +488,15 @@
       "score": 6.7,
       "votes": 1220,
       "tmdb": "https://www.themoviedb.org/movie/16296"
+    },
+    {
+      "id": 11542,
+      "title": "アルタード・ステーツ／未知への挑戦",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/10teVipgv1Y7ilRIoIhfrdJsf4A.jpg",
+      "score": 6.7,
+      "votes": 802,
+      "tmdb": "https://www.themoviedb.org/movie/11542"
     },
     {
       "id": 27814,
@@ -530,7 +530,7 @@
       "title": "2010年",
       "year": "1984",
       "poster": "https://image.tmdb.org/t/p/w342/kzphYhizFBQl1d9Ev4NdpMRfcqU.jpg",
-      "score": 6.657,
+      "score": 6.658,
       "votes": 1121,
       "tmdb": "https://www.themoviedb.org/movie/4437"
     },
@@ -611,8 +611,8 @@
       "title": "スター・トレックIII ミスター・スポックを探せ!",
       "year": "1984",
       "poster": "https://image.tmdb.org/t/p/w342/3fFLzXubetz1rJkba1kujsd3IY4.jpg",
-      "score": 6.588,
-      "votes": 1586,
+      "score": 6.584,
+      "votes": 1587,
       "tmdb": "https://www.themoviedb.org/movie/157"
     },
     {
@@ -634,6 +634,15 @@
       "tmdb": "https://www.themoviedb.org/movie/11814"
     },
     {
+      "id": 14510,
+      "title": "フロム・ビヨンド",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/zwmyxaKzIRLD4iUqZAQW940omdm.jpg",
+      "score": 6.5,
+      "votes": 696,
+      "tmdb": "https://www.themoviedb.org/movie/14510"
+    },
+    {
       "id": 15301,
       "title": "トワイライトゾーン／超次元の体験",
       "year": "1983",
@@ -650,15 +659,6 @@
       "score": 6.486,
       "votes": 1144,
       "tmdb": "https://www.themoviedb.org/movie/3980"
-    },
-    {
-      "id": 14510,
-      "title": "フロム・ビヨンド",
-      "year": "1986",
-      "poster": "https://image.tmdb.org/t/p/w342/zwmyxaKzIRLD4iUqZAQW940omdm.jpg",
-      "score": 6.478,
-      "votes": 696,
-      "tmdb": "https://www.themoviedb.org/movie/14510"
     },
     {
       "id": 51259,
@@ -783,7 +783,7 @@
       "year": "1989",
       "poster": "https://image.tmdb.org/t/p/w342/upzCOeVUF4TGKNZhq7di5Up0aff.jpg",
       "score": 6.334,
-      "votes": 3435,
+      "votes": 3436,
       "tmdb": "https://www.themoviedb.org/movie/9354"
     },
     {
@@ -800,7 +800,7 @@
       "title": "フラッシュ・ゴードン",
       "year": "1980",
       "poster": "https://image.tmdb.org/t/p/w342/gAkp5luy6FpfeurZSS5tRgF2Wxu.jpg",
-      "score": 6.276,
+      "score": 6.3,
       "votes": 1140,
       "tmdb": "https://www.themoviedb.org/movie/3604"
     },
@@ -904,6 +904,15 @@
       "tmdb": "https://www.themoviedb.org/movie/24749"
     },
     {
+      "id": 18462,
+      "title": "ナイト・オブ・ザ・コメット",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/xNXnLXu73LotJ9APaJZZXflBelQ.jpg",
+      "score": 6.206,
+      "votes": 462,
+      "tmdb": "https://www.themoviedb.org/movie/18462"
+    },
+    {
       "id": 11954,
       "title": "スペースバンパイア",
       "year": "1985",
@@ -931,15 +940,6 @@
       "tmdb": "https://www.themoviedb.org/movie/10127"
     },
     {
-      "id": 18462,
-      "title": "ナイト・オブ・ザ・コメット",
-      "year": "1984",
-      "poster": "https://image.tmdb.org/t/p/w342/xNXnLXu73LotJ9APaJZZXflBelQ.jpg",
-      "score": 6.2,
-      "votes": 463,
-      "tmdb": "https://www.themoviedb.org/movie/18462"
-    },
-    {
       "id": 15158,
       "title": "ファンタズム II",
       "year": "1988",
@@ -958,6 +958,15 @@
       "tmdb": "https://www.themoviedb.org/movie/33278"
     },
     {
+      "id": 11039,
+      "title": "Chissà perché... capitano tutte a me",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/hclKvqW4HXN0yQC3bWCoqygxgJr.jpg",
+      "score": 6.2,
+      "votes": 228,
+      "tmdb": "https://www.themoviedb.org/movie/11039"
+    },
+    {
       "id": 841,
       "title": "デューン／砂の惑星",
       "year": "1984",
@@ -974,15 +983,6 @@
       "score": 6.181,
       "votes": 138,
       "tmdb": "https://www.themoviedb.org/movie/21874"
-    },
-    {
-      "id": 11039,
-      "title": "Chissà perché... capitano tutte a me",
-      "year": "1980",
-      "poster": "https://image.tmdb.org/t/p/w342/hclKvqW4HXN0yQC3bWCoqygxgJr.jpg",
-      "score": 6.173,
-      "votes": 228,
-      "tmdb": "https://www.themoviedb.org/movie/11039"
     },
     {
       "id": 40095,
@@ -1142,8 +1142,8 @@
       "title": "地獄のデビル・トラック",
       "year": "1986",
       "poster": "https://image.tmdb.org/t/p/w342/z5zLVest6UUCLq8NvziIDSnaVBE.jpg",
-      "score": 5.837,
-      "votes": 892,
+      "score": 5.839,
+      "votes": 893,
       "tmdb": "https://www.themoviedb.org/movie/9980"
     },
     {
@@ -1205,8 +1205,8 @@
       "title": "スター・トレックV 新たなる未知へ",
       "year": "1989",
       "poster": "https://image.tmdb.org/t/p/w342/6bxXQc57HxA2ymJESbheb78EczO.jpg",
-      "score": 5.73,
-      "votes": 1357,
+      "score": 5.729,
+      "votes": 1358,
       "tmdb": "https://www.themoviedb.org/movie/172"
     },
     {
@@ -1327,6 +1327,15 @@
       "tmdb": "https://www.themoviedb.org/movie/26554"
     },
     {
+      "id": 31909,
+      "title": "スペースインベーダー",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/hTe5W8RJCGMSCvMdcXF16pmWstf.jpg",
+      "score": 5.572,
+      "votes": 291,
+      "tmdb": "https://www.themoviedb.org/movie/31909"
+    },
+    {
       "id": 40059,
       "title": "The Deadly Spawn",
       "year": "1983",
@@ -1334,15 +1343,6 @@
       "score": 5.559,
       "votes": 111,
       "tmdb": "https://www.themoviedb.org/movie/40059"
-    },
-    {
-      "id": 31909,
-      "title": "スペースインベーダー",
-      "year": "1986",
-      "poster": "https://image.tmdb.org/t/p/w342/hTe5W8RJCGMSCvMdcXF16pmWstf.jpg",
-      "score": 5.557,
-      "votes": 290,
-      "tmdb": "https://www.themoviedb.org/movie/31909"
     },
     {
       "id": 11607,
@@ -1556,8 +1556,8 @@
       "title": "ハロウィンⅢ",
       "year": "1982",
       "poster": "https://image.tmdb.org/t/p/w342/pcOdLBNZoBBH36sXztdY89LIPNA.jpg",
-      "score": 5.251,
-      "votes": 1594,
+      "score": 5.253,
+      "votes": 1595,
       "tmdb": "https://www.themoviedb.org/movie/10676"
     },
     {

@@ -1,0 +1,853 @@
+{
+  "region": "邦画",
+  "genre": "クライム",
+  "era": "〜1979",
+  "items": [
+    {
+      "id": 12493,
+      "title": "天国と地獄",
+      "year": "1963",
+      "poster": "https://image.tmdb.org/t/p/w342/3faOft1rjJrIahaLHof9AwDth2z.jpg",
+      "score": 8.4,
+      "votes": 1195,
+      "tmdb": "https://www.themoviedb.org/movie/12493"
+    },
+    {
+      "id": 548,
+      "title": "羅生門",
+      "year": "1950",
+      "poster": "https://image.tmdb.org/t/p/w342/cEg6qpVbKA8cZQE2SDsCjSVqbze.jpg",
+      "score": 8.0,
+      "votes": 2614,
+      "tmdb": "https://www.themoviedb.org/movie/548"
+    },
+    {
+      "id": 19884,
+      "title": "大菩薩峠",
+      "year": "1966",
+      "poster": "https://image.tmdb.org/t/p/w342/bxmAk4Qf7yf7vMhuev1Vw4nxbLK.jpg",
+      "score": 7.755,
+      "votes": 275,
+      "tmdb": "https://www.themoviedb.org/movie/19884"
+    },
+    {
+      "id": 31589,
+      "title": "悪い奴ほどよく眠る",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/x9l8jUUyIpN5XDm7hrJUCN5CH60.jpg",
+      "score": 7.7,
+      "votes": 295,
+      "tmdb": "https://www.themoviedb.org/movie/31589"
+    },
+    {
+      "id": 30368,
+      "title": "野良犬",
+      "year": "1949",
+      "poster": "https://image.tmdb.org/t/p/w342/qMY3t6Yn5Wsw02WKTJfhpoytNON.jpg",
+      "score": 7.582,
+      "votes": 378,
+      "tmdb": "https://www.themoviedb.org/movie/30368"
+    },
+    {
+      "id": 42170,
+      "title": "復讐するは我にあり",
+      "year": "1979",
+      "poster": "https://image.tmdb.org/t/p/w342/wsmP8RasUoqo8cUgQbBNKj6OzRJ.jpg",
+      "score": 7.553,
+      "votes": 159,
+      "tmdb": "https://www.themoviedb.org/movie/42170"
+    },
+    {
+      "id": 2487,
+      "title": "修羅雪姫",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/93Jn07fiBNOC0Ik8ndFDEOadLcp.jpg",
+      "score": 7.518,
+      "votes": 440,
+      "tmdb": "https://www.themoviedb.org/movie/2487"
+    },
+    {
+      "id": 125270,
+      "title": "みな殺しの霊歌",
+      "year": "1968",
+      "poster": "https://image.tmdb.org/t/p/w342/ce3HnvSrUPIzCQ3OhGtKo8OaMKb.jpg",
+      "score": 7.435,
+      "votes": 23,
+      "tmdb": "https://www.themoviedb.org/movie/125270"
+    },
+    {
+      "id": 61475,
+      "title": "乾いた花",
+      "year": "1964",
+      "poster": "https://image.tmdb.org/t/p/w342/tYG4fjaGaC3HyOwI1iG1XvzCdO3.jpg",
+      "score": 7.406,
+      "votes": 128,
+      "tmdb": "https://www.themoviedb.org/movie/61475"
+    },
+    {
+      "id": 59352,
+      "title": "太陽を盗んだ男",
+      "year": "1979",
+      "poster": "https://image.tmdb.org/t/p/w342/avcCRRIsQ1Toz0F18zvQ5zOg7QR.jpg",
+      "score": 7.4,
+      "votes": 41,
+      "tmdb": "https://www.themoviedb.org/movie/59352"
+    },
+    {
+      "id": 40956,
+      "title": "出所祝い",
+      "year": "1971",
+      "poster": "https://image.tmdb.org/t/p/w342/rDosH5H4grkuXrJvj0lROqRxhDx.jpg",
+      "score": 7.4,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/40956"
+    },
+    {
+      "id": 67568,
+      "title": "新仁義なき戦い 組長の首",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/3qdVkNW7UVlC076I3zfZwbDYtbW.jpg",
+      "score": 7.4,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/67568"
+    },
+    {
+      "id": 29268,
+      "title": "砂の器",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/uzliUvv0f5E97m5xyttoZrEUiSp.jpg",
+      "score": 7.364,
+      "votes": 59,
+      "tmdb": "https://www.themoviedb.org/movie/29268"
+    },
+    {
+      "id": 117212,
+      "title": "飢餓海峡",
+      "year": "1965",
+      "poster": "https://image.tmdb.org/t/p/w342/vkI58mGPYzamSVYJVly1lMByIxR.jpg",
+      "score": 7.34,
+      "votes": 50,
+      "tmdb": "https://www.themoviedb.org/movie/117212"
+    },
+    {
+      "id": 54146,
+      "title": "おとし穴",
+      "year": "1962",
+      "poster": "https://image.tmdb.org/t/p/w342/yR0cfconHWBCvy6RLjCmtaOUDGq.jpg",
+      "score": 7.333,
+      "votes": 114,
+      "tmdb": "https://www.themoviedb.org/movie/54146"
+    },
+    {
+      "id": 52980,
+      "title": "仁義なき戦い 広島死闘篇",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/A8e6YXyY7icUrn2GdJiF7inwtXQ.jpg",
+      "score": 7.3,
+      "votes": 74,
+      "tmdb": "https://www.themoviedb.org/movie/52980"
+    },
+    {
+      "id": 125253,
+      "title": "しとやかな獣",
+      "year": "1962",
+      "poster": "https://image.tmdb.org/t/p/w342/sRHVQ63Z9J9jVMHRYn7xsTX5ukQ.jpg",
+      "score": 7.3,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/125253"
+    },
+    {
+      "id": 34326,
+      "title": "仁義なき戦い",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/gmGWl9n8KDNUmhWogkl0KCyEsMK.jpg",
+      "score": 7.29,
+      "votes": 126,
+      "tmdb": "https://www.themoviedb.org/movie/34326"
+    },
+    {
+      "id": 168751,
+      "title": "瀧の白糸",
+      "year": "1933",
+      "poster": "https://image.tmdb.org/t/p/w342/xMKXP9BNOLpRRZNuyHZdbPV4TkV.jpg",
+      "score": 7.25,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/168751"
+    },
+    {
+      "id": 41482,
+      "title": "子連れ狼 冥府魔道",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/ek4DtdiywAYT9EYdVrv5aXOfteS.jpg",
+      "score": 7.248,
+      "votes": 141,
+      "tmdb": "https://www.themoviedb.org/movie/41482"
+    },
+    {
+      "id": 88435,
+      "title": "刺青一代",
+      "year": "1965",
+      "poster": "https://image.tmdb.org/t/p/w342/7Vhef9ETYEkagwAQFPMmkZJyXr6.jpg",
+      "score": 7.217,
+      "votes": 23,
+      "tmdb": "https://www.themoviedb.org/movie/88435"
+    },
+    {
+      "id": 17905,
+      "title": "殺しの烙印",
+      "year": "1967",
+      "poster": "https://image.tmdb.org/t/p/w342/z2ItVyXtkx22rGy1kUwklRdBehs.jpg",
+      "score": 7.2,
+      "votes": 262,
+      "tmdb": "https://www.themoviedb.org/movie/17905"
+    },
+    {
+      "id": 64912,
+      "title": "仁義なき戦い 完結篇",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/799isAqCuIYV3lKECi65DIQPiiE.jpg",
+      "score": 7.2,
+      "votes": 48,
+      "tmdb": "https://www.themoviedb.org/movie/64912"
+    },
+    {
+      "id": 86823,
+      "title": "ある脅迫",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/3SmEyM31wSD31mzPqnwYmjfBJpH.jpg",
+      "score": 7.2,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/86823"
+    },
+    {
+      "id": 104193,
+      "title": "少年",
+      "year": "1969",
+      "poster": "https://image.tmdb.org/t/p/w342/3jLQ1h46FbdyV861jFjGLq8qA0G.jpg",
+      "score": 7.19,
+      "votes": 63,
+      "tmdb": "https://www.themoviedb.org/movie/104193"
+    },
+    {
+      "id": 31104,
+      "title": "豚と軍艦",
+      "year": "1961",
+      "poster": "https://image.tmdb.org/t/p/w342/zUJgHKs84sNvRZfhceRaMW89nuV.jpg",
+      "score": 7.149,
+      "votes": 67,
+      "tmdb": "https://www.themoviedb.org/movie/31104"
+    },
+    {
+      "id": 45706,
+      "title": "東京流れ者",
+      "year": "1966",
+      "poster": "https://image.tmdb.org/t/p/w342/mmMgpiaGWGndXZNOamXVVXatI3U.jpg",
+      "score": 7.1,
+      "votes": 217,
+      "tmdb": "https://www.themoviedb.org/movie/45706"
+    },
+    {
+      "id": 38728,
+      "title": "拳銃は俺のパスポート",
+      "year": "1967",
+      "poster": "https://image.tmdb.org/t/p/w342/tiJhQY2A229D8gQf2XnNrlyv3jN.jpg",
+      "score": 7.1,
+      "votes": 62,
+      "tmdb": "https://www.themoviedb.org/movie/38728"
+    },
+    {
+      "id": 125266,
+      "title": "ガス人間第１号",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/18sNtWdyeP0JdONJS1MkaMHNHa9.jpg",
+      "score": 7.1,
+      "votes": 28,
+      "tmdb": "https://www.themoviedb.org/movie/125266"
+    },
+    {
+      "id": 95508,
+      "title": "狂熱の季節",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/gooH8M2kLnXgSN9RRzq1MNsKzSz.jpg",
+      "score": 7.1,
+      "votes": 25,
+      "tmdb": "https://www.themoviedb.org/movie/95508"
+    },
+    {
+      "id": 37293,
+      "title": "張込み",
+      "year": "1958",
+      "poster": "https://image.tmdb.org/t/p/w342/fDRzRJF2PcK4Gy0tCDWq8WHXDWV.jpg",
+      "score": 7.1,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/37293"
+    },
+    {
+      "id": 90351,
+      "title": "博徒外人部隊",
+      "year": "1971",
+      "poster": "https://image.tmdb.org/t/p/w342/xXUd3NT7VObNdfkZVSr055kSG4y.jpg",
+      "score": 7.098,
+      "votes": 41,
+      "tmdb": "https://www.themoviedb.org/movie/90351"
+    },
+    {
+      "id": 93891,
+      "title": "黒の試走車",
+      "year": "1962",
+      "poster": "https://image.tmdb.org/t/p/w342/bVeUC05Uavap0nS3v6A86R1ti20.jpg",
+      "score": 7.061,
+      "votes": 33,
+      "tmdb": "https://www.themoviedb.org/movie/93891"
+    },
+    {
+      "id": 52874,
+      "title": "仁義なき戦い 代理戦争",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/qTrCZZNB06cRUOYNKggw4KxrC4r.jpg",
+      "score": 7.025,
+      "votes": 59,
+      "tmdb": "https://www.themoviedb.org/movie/52874"
+    },
+    {
+      "id": 52979,
+      "title": "仁義なき戦い 頂上作戦",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/cST0S31yeyIm66vUG3kqlIrh8X0.jpg",
+      "score": 7.02,
+      "votes": 50,
+      "tmdb": "https://www.themoviedb.org/movie/52979"
+    },
+    {
+      "id": 127112,
+      "title": "銀嶺の果て",
+      "year": "1947",
+      "poster": "https://image.tmdb.org/t/p/w342/7oH6D2PMN6tNnwsomkRk3InCGIZ.jpg",
+      "score": 7.0,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/127112"
+    },
+    {
+      "id": 101929,
+      "title": "黒い河",
+      "year": "1957",
+      "poster": "https://image.tmdb.org/t/p/w342/5D3h5g90xQjviMIUlrs9Nust2i6.jpg",
+      "score": 6.972,
+      "votes": 36,
+      "tmdb": "https://www.themoviedb.org/movie/101929"
+    },
+    {
+      "id": 37939,
+      "title": "野獣の青春",
+      "year": "1963",
+      "poster": "https://image.tmdb.org/t/p/w342/l0m81JusjfCQtWG0HxUV0vTUHIR.jpg",
+      "score": 6.953,
+      "votes": 95,
+      "tmdb": "https://www.themoviedb.org/movie/37939"
+    },
+    {
+      "id": 42627,
+      "title": "黒蜥蜴",
+      "year": "1968",
+      "poster": "https://image.tmdb.org/t/p/w342/yjl4cf00pa7dmnWxmSi1JHjxd1o.jpg",
+      "score": 6.938,
+      "votes": 32,
+      "tmdb": "https://www.themoviedb.org/movie/42627"
+    },
+    {
+      "id": 47634,
+      "title": "新幹線大爆破",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/xbfU1ivnFAPe0pzUNumV5n2XiBs.jpg",
+      "score": 6.9,
+      "votes": 72,
+      "tmdb": "https://www.themoviedb.org/movie/47634"
+    },
+    {
+      "id": 35018,
+      "title": "刺青",
+      "year": "1966",
+      "poster": "https://image.tmdb.org/t/p/w342/hFZbcJiWBNDuPrpMqCmGvKZcCK5.jpg",
+      "score": 6.9,
+      "votes": 61,
+      "tmdb": "https://www.themoviedb.org/movie/35018"
+    },
+    {
+      "id": 21613,
+      "title": "現代やくざ 人斬り与太",
+      "year": "1972",
+      "poster": "https://image.tmdb.org/t/p/w342/ttdeeGfCM8RXS1dN4zUxAto76UR.jpg",
+      "score": 6.813,
+      "votes": 48,
+      "tmdb": "https://www.themoviedb.org/movie/21613"
+    },
+    {
+      "id": 40810,
+      "title": "激突! 殺人拳",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/rVhjZDFakDwgguD0hD7Mp9idimv.jpg",
+      "score": 6.803,
+      "votes": 119,
+      "tmdb": "https://www.themoviedb.org/movie/40810"
+    },
+    {
+      "id": 71851,
+      "title": "仁義の墓場",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/biLOvILWfWvdbWCZzaspCAP845O.jpg",
+      "score": 6.7,
+      "votes": 57,
+      "tmdb": "https://www.themoviedb.org/movie/71851"
+    },
+    {
+      "id": 62560,
+      "title": "宇宙大怪獣ドゴラ",
+      "year": "1964",
+      "poster": "https://image.tmdb.org/t/p/w342/juDdObhQZoE38uw2vXlM9HmTmWg.jpg",
+      "score": 6.7,
+      "votes": 46,
+      "tmdb": "https://www.themoviedb.org/movie/62560"
+    },
+    {
+      "id": 46559,
+      "title": "暴力街",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/aRBzXNn2Sv9bOsKXrBfwR4GnYKw.jpg",
+      "score": 6.7,
+      "votes": 22,
+      "tmdb": "https://www.themoviedb.org/movie/46559"
+    },
+    {
+      "id": 71722,
+      "title": "拳銃残酷物語",
+      "year": "1964",
+      "poster": "https://image.tmdb.org/t/p/w342/5MwhKGPxknrIf4W5rfbAC6fWph1.jpg",
+      "score": 6.7,
+      "votes": 21,
+      "tmdb": "https://www.themoviedb.org/movie/71722"
+    },
+    {
+      "id": 47313,
+      "title": "女必殺拳",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/x2RMeH3DFcf9EqoyPx4FVwCAWHo.jpg",
+      "score": 6.667,
+      "votes": 60,
+      "tmdb": "https://www.themoviedb.org/movie/47313"
+    },
+    {
+      "id": 117472,
+      "title": "非常線の女",
+      "year": "1933",
+      "poster": "https://image.tmdb.org/t/p/w342/jL8KWSsNlGd0QF51EgnenOMEuNQ.jpg",
+      "score": 6.643,
+      "votes": 28,
+      "tmdb": "https://www.themoviedb.org/movie/117472"
+    },
+    {
+      "id": 88527,
+      "title": "青春残酷物語",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/rDaO4DFZkN1fncc2Z9Cge19bovT.jpg",
+      "score": 6.63,
+      "votes": 73,
+      "tmdb": "https://www.themoviedb.org/movie/88527"
+    },
+    {
+      "id": 86666,
+      "title": "肉体の門",
+      "year": "1964",
+      "poster": "https://image.tmdb.org/t/p/w342/uYh8zjIdqNgMX26vU7HpwbAZNoO.jpg",
+      "score": 6.604,
+      "votes": 77,
+      "tmdb": "https://www.themoviedb.org/movie/86666"
+    },
+    {
+      "id": 137172,
+      "title": "鬼畜",
+      "year": "1978",
+      "poster": "https://image.tmdb.org/t/p/w342/fAQ5DTqeA8oYdzuIZicv2s1G6xi.jpg",
+      "score": 6.6,
+      "votes": 41,
+      "tmdb": "https://www.themoviedb.org/movie/137172"
+    },
+    {
+      "id": 64578,
+      "title": "やくざの墓場　くちなしの花",
+      "year": "1976",
+      "poster": "https://image.tmdb.org/t/p/w342/netiZMbP0fDzXk0b7Gk8N34Zaoe.jpg",
+      "score": 6.577,
+      "votes": 39,
+      "tmdb": "https://www.themoviedb.org/movie/64578"
+    },
+    {
+      "id": 88535,
+      "title": "探偵事務所23　くたばれ悪党ども",
+      "year": "1963",
+      "poster": "https://image.tmdb.org/t/p/w342/oir8YmngexfPE0rGXNGC6oLPEkg.jpg",
+      "score": 6.548,
+      "votes": 31,
+      "tmdb": "https://www.themoviedb.org/movie/88535"
+    },
+    {
+      "id": 91888,
+      "title": "ドーベルマン刑事",
+      "year": "1977",
+      "poster": "https://image.tmdb.org/t/p/w342/wqkkNYvyFkqLUTYiq1B9ukkNpvM.jpg",
+      "score": 6.533,
+      "votes": 30,
+      "tmdb": "https://www.themoviedb.org/movie/91888"
+    },
+    {
+      "id": 71719,
+      "title": "俺は待ってるぜ",
+      "year": "1957",
+      "poster": "https://image.tmdb.org/t/p/w342/cG7GEL7QJ4sdH5wppnlgKZX75xN.jpg",
+      "score": 6.5,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/71719"
+    },
+    {
+      "id": 111718,
+      "title": "太陽の墓場",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/v7Vt7dzl6EebjGH17uNRGaGCbvn.jpg",
+      "score": 6.455,
+      "votes": 33,
+      "tmdb": "https://www.themoviedb.org/movie/111718"
+    },
+    {
+      "id": 91845,
+      "title": "帰って来た女必殺拳",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/kS9D5s6ieAmKhnZd3pNeSvzKBb0.jpg",
+      "score": 6.451,
+      "votes": 91,
+      "tmdb": "https://www.themoviedb.org/movie/91845"
+    },
+    {
+      "id": 18818,
+      "title": "修羅雪姫 怨み恋歌",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/7u9F2SzYzeC6dzhYxaNXIQknMWY.jpg",
+      "score": 6.418,
+      "votes": 146,
+      "tmdb": "https://www.themoviedb.org/movie/18818"
+    },
+    {
+      "id": 50632,
+      "title": "女必殺拳 危機一発",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/1GBKpIUFGhtaMnV00rFxpjpuNCc.jpg",
+      "score": 6.406,
+      "votes": 32,
+      "tmdb": "https://www.themoviedb.org/movie/50632"
+    },
+    {
+      "id": 62852,
+      "title": "０課の女　赤い手錠",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/xsEAD444B3reGiZmF6QpBn0P1pJ.jpg",
+      "score": 6.385,
+      "votes": 61,
+      "tmdb": "https://www.themoviedb.org/movie/62852"
+    },
+    {
+      "id": 49308,
+      "title": "その夜の妻",
+      "year": "1930",
+      "poster": "https://image.tmdb.org/t/p/w342/sN247Glvl1jJoWKmEct1pcLXHFw.jpg",
+      "score": 6.339,
+      "votes": 28,
+      "tmdb": "https://www.themoviedb.org/movie/49308"
+    },
+    {
+      "id": 101740,
+      "title": "いのちぼうにふろう",
+      "year": "1971",
+      "poster": "https://image.tmdb.org/t/p/w342/b0HKHeBeTiHqwywqGXuyi2uTXSV.jpg",
+      "score": 6.313,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/101740"
+    },
+    {
+      "id": 64719,
+      "title": "野良猫ロック マシン・アニマル",
+      "year": "1970",
+      "poster": "https://image.tmdb.org/t/p/w342/aJzURJLgsTbBP1J3OJ95udrBEWG.jpg",
+      "score": 6.3,
+      "votes": 25,
+      "tmdb": "https://www.themoviedb.org/movie/64719"
+    },
+    {
+      "id": 115572,
+      "title": "ゼロの焦点",
+      "year": "1961",
+      "poster": "https://image.tmdb.org/t/p/w342/62fcf4gAcSTI2EAPl9kNYiOBpWZ.jpg",
+      "score": 6.3,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/115572"
+    },
+    {
+      "id": 63411,
+      "title": "闇の狩人",
+      "year": "1979",
+      "poster": "https://image.tmdb.org/t/p/w342/fdAmgZGdzCyrLXvgZoNTtaIn2CW.jpg",
+      "score": 6.3,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/63411"
+    },
+    {
+      "id": 39856,
+      "title": "暴行切り裂きジャック",
+      "year": "1976",
+      "poster": "https://image.tmdb.org/t/p/w342/8RXE3XHiS49Ma5J6TaWqydY9U38.jpg",
+      "score": 6.269,
+      "votes": 26,
+      "tmdb": "https://www.themoviedb.org/movie/39856"
+    },
+    {
+      "id": 70412,
+      "title": "怪談昇り竜",
+      "year": "1970",
+      "poster": "https://image.tmdb.org/t/p/w342/ApVxZUnsjxqXHoMB5MAQGvZ52ZZ.jpg",
+      "score": 6.254,
+      "votes": 65,
+      "tmdb": "https://www.themoviedb.org/movie/70412"
+    },
+    {
+      "id": 55781,
+      "title": "恐怖女子高校 暴行リンチ教室",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/4wF8HBcVvDcpJeguCTbXTLRNvuw.jpg",
+      "score": 6.21,
+      "votes": 31,
+      "tmdb": "https://www.themoviedb.org/movie/55781"
+    },
+    {
+      "id": 69846,
+      "title": "君よ憤怒の河を渉れ",
+      "year": "1976",
+      "poster": "https://image.tmdb.org/t/p/w342/lJ7RoPpjPtjbyAIKFT6OpUlr20M.jpg",
+      "score": 6.2,
+      "votes": 24,
+      "tmdb": "https://www.themoviedb.org/movie/69846"
+    },
+    {
+      "id": 71723,
+      "title": "１３号待避線より　その護送車を狙え",
+      "year": "1960",
+      "poster": "https://image.tmdb.org/t/p/w342/7GLnASUYLvs5jCi8oCsTVEoZ8n2.jpg",
+      "score": 6.15,
+      "votes": 30,
+      "tmdb": "https://www.themoviedb.org/movie/71723"
+    },
+    {
+      "id": 91872,
+      "title": "県警対組織暴力",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/ux7WRS2u7EdE7bjFXBZ3UYv8tBo.jpg",
+      "score": 6.103,
+      "votes": 29,
+      "tmdb": "https://www.themoviedb.org/movie/91872"
+    },
+    {
+      "id": 162954,
+      "title": "朗かに歩め",
+      "year": "1930",
+      "poster": "https://image.tmdb.org/t/p/w342/r2QhzMW5M4vGPySOZZo7T9vap4K.jpg",
+      "score": 6.091,
+      "votes": 22,
+      "tmdb": "https://www.themoviedb.org/movie/162954"
+    },
+    {
+      "id": 40812,
+      "title": "殺人拳２",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/1PzmjDtu9n8wkJp7Xio57EGPhk9.jpg",
+      "score": 6.087,
+      "votes": 98,
+      "tmdb": "https://www.themoviedb.org/movie/40812"
+    },
+    {
+      "id": 51429,
+      "title": "やさぐれ姐御伝 総括リンチ",
+      "year": "1973",
+      "poster": "https://image.tmdb.org/t/p/w342/o0vHjet1gkFSHK65MNTnVc7l4az.jpg",
+      "score": 6.085,
+      "votes": 41,
+      "tmdb": "https://www.themoviedb.org/movie/51429"
+    },
+    {
+      "id": 55782,
+      "title": "ずべ公番長 ざんげの値打ちもない",
+      "year": "1971",
+      "poster": "https://image.tmdb.org/t/p/w342/iNqGZIAuR1uY1aDsrNuSSV49JtV.jpg",
+      "score": 6.075,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/55782"
+    },
+    {
+      "id": 64576,
+      "title": "女番長 野良猫ロック",
+      "year": "1970",
+      "poster": "https://image.tmdb.org/t/p/w342/ysxgUUwisa7xNuv2xVs8guJYdGQ.jpg",
+      "score": 6.044,
+      "votes": 34,
+      "tmdb": "https://www.themoviedb.org/movie/64576"
+    },
+    {
+      "id": 31319,
+      "title": "胎児が密猟する時",
+      "year": "1966",
+      "poster": "https://image.tmdb.org/t/p/w342/toZtX7MQy35fxMrfRo3KNLgB9An.jpg",
+      "score": 5.987,
+      "votes": 39,
+      "tmdb": "https://www.themoviedb.org/movie/31319"
+    },
+    {
+      "id": 67567,
+      "title": "新仁義なき戦い",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/bVTQjHZLEa4Feq7jgVqahh96WXU.jpg",
+      "score": 5.929,
+      "votes": 21,
+      "tmdb": "https://www.themoviedb.org/movie/67567"
+    },
+    {
+      "id": 137119,
+      "title": "突貫小僧",
+      "year": "1929",
+      "poster": "https://image.tmdb.org/t/p/w342/cHwFGyBuWN8IsoOaAZcodhYXFw.jpg",
+      "score": 5.828,
+      "votes": 32,
+      "tmdb": "https://www.themoviedb.org/movie/137119"
+    },
+    {
+      "id": 104366,
+      "title": "処女ゲバゲバ",
+      "year": "1969",
+      "poster": "https://image.tmdb.org/t/p/w342/yfPQfCypN4KDzU31Mb2EQsfFgmH.jpg",
+      "score": 5.826,
+      "votes": 23,
+      "tmdb": "https://www.themoviedb.org/movie/104366"
+    },
+    {
+      "id": 235374,
+      "title": "怪猫トルコ風呂",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/k3wGkdygOpXXG7UAi9XfBHJMIpY.jpg",
+      "score": 5.8,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/235374"
+    },
+    {
+      "id": 72026,
+      "title": "悦楽",
+      "year": "1965",
+      "poster": "https://image.tmdb.org/t/p/w342/3Qojo8qTalb26aHX4GN7aGcAnrX.jpg",
+      "score": 5.766,
+      "votes": 32,
+      "tmdb": "https://www.themoviedb.org/movie/72026"
+    },
+    {
+      "id": 165282,
+      "title": "ウルフガイ 燃えろ狼男",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/o9L19GGTCAdF9fooElLkNmi8qos.jpg",
+      "score": 5.75,
+      "votes": 42,
+      "tmdb": "https://www.themoviedb.org/movie/165282"
+    },
+    {
+      "id": 100460,
+      "title": "直撃地獄拳　大逆転",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/eJW69X4bveOiPWnfvd3GWNsQsCS.jpg",
+      "score": 5.75,
+      "votes": 20,
+      "tmdb": "https://www.themoviedb.org/movie/100460"
+    },
+    {
+      "id": 48515,
+      "title": "無理心中 日本の夏",
+      "year": "1967",
+      "poster": "https://image.tmdb.org/t/p/w342/vDiHAyHXzfnjf9553fyDUcX8U4S.jpg",
+      "score": 5.72,
+      "votes": 25,
+      "tmdb": "https://www.themoviedb.org/movie/48515"
+    },
+    {
+      "id": 64721,
+      "title": "野良猫ロック ワイルドジャンボ",
+      "year": "1970",
+      "poster": "https://image.tmdb.org/t/p/w342/TIPcKQuhAqFOsZeDaUjJBxxmUV.jpg",
+      "score": 5.714,
+      "votes": 28,
+      "tmdb": "https://www.themoviedb.org/movie/64721"
+    },
+    {
+      "id": 119136,
+      "title": "野良猫ロック 暴走集団'71",
+      "year": "1971",
+      "poster": "https://image.tmdb.org/t/p/w342/2Tx5TsKbyhtzVnHxXe3npyOm9iz.jpg",
+      "score": 5.648,
+      "votes": 27,
+      "tmdb": "https://www.themoviedb.org/movie/119136"
+    },
+    {
+      "id": 124423,
+      "title": "吸血髑髏船",
+      "year": "1968",
+      "poster": "https://image.tmdb.org/t/p/w342/64xvQOdRfeQIbmIylTVFwWmYCvu.jpg",
+      "score": 5.563,
+      "votes": 32,
+      "tmdb": "https://www.themoviedb.org/movie/124423"
+    },
+    {
+      "id": 91847,
+      "title": "女必殺五段拳",
+      "year": "1976",
+      "poster": "https://image.tmdb.org/t/p/w342/m4EeI25JPdsphSU8sGfwyVP9kcg.jpg",
+      "score": 5.538,
+      "votes": 26,
+      "tmdb": "https://www.themoviedb.org/movie/91847"
+    },
+    {
+      "id": 69013,
+      "title": "実録阿部定",
+      "year": "1975",
+      "poster": "https://image.tmdb.org/t/p/w342/dEfWKOhUlRSwdRCvvuTqDuMnSlx.jpg",
+      "score": 5.5,
+      "votes": 33,
+      "tmdb": "https://www.themoviedb.org/movie/69013"
+    },
+    {
+      "id": 48361,
+      "title": "ゴルゴ13 九竜の首",
+      "year": "1977",
+      "poster": "https://image.tmdb.org/t/p/w342/2Q2Tn9OCSGepxRP1Tz6XyVrLuFK.jpg",
+      "score": 5.5,
+      "votes": 26,
+      "tmdb": "https://www.themoviedb.org/movie/48361"
+    },
+    {
+      "id": 40813,
+      "title": "逆襲！殺人拳",
+      "year": "1974",
+      "poster": "https://image.tmdb.org/t/p/w342/3kMXs7cSLhqYrip75QR7pxxGyRm.jpg",
+      "score": 5.49,
+      "votes": 51,
+      "tmdb": "https://www.themoviedb.org/movie/40813"
+    },
+    {
+      "id": 143409,
+      "title": "荒野のダッチワイフ",
+      "year": "1967",
+      "poster": "https://image.tmdb.org/t/p/w342/rrCwkBoJV3DXLD8ZNBSdYw5kuTz.jpg",
+      "score": 5.28,
+      "votes": 25,
+      "tmdb": "https://www.themoviedb.org/movie/143409"
+    }
+  ]
+}

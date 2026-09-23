@@ -1,0 +1,945 @@
+{
+  "generated_at": "2026-09-23T05:30:39.612113+00:00",
+  "filters": {
+    "邦画": {
+      "アクション": {
+        "〜1979": {
+          "file": "data/rankings/jp-28-1979.json",
+          "count": 165
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-28-1980.json",
+          "count": 20
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-28-1990.json",
+          "count": 37
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-28-2000.json",
+          "count": 86
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-28-2010.json",
+          "count": 110
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-28-2020.json",
+          "count": 52
+        }
+      },
+      "アドベンチャー": {
+        "〜1979": {
+          "file": "data/rankings/jp-12-1979.json",
+          "count": 66
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-12-1980.json",
+          "count": 7
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-12-1990.json",
+          "count": 16
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-12-2000.json",
+          "count": 27
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-12-2010.json",
+          "count": 29
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-12-2020.json",
+          "count": 14
+        }
+      },
+      "アニメ": {
+        "〜1979": {
+          "file": "data/rankings/jp-16-1979.json",
+          "count": 34
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-16-1980.json",
+          "count": 116
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-16-1990.json",
+          "count": 158
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-16-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-16-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-16-2020.json",
+          "count": 168
+        }
+      },
+      "コメディ": {
+        "〜1979": {
+          "file": "data/rankings/jp-35-1979.json",
+          "count": 39
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-35-1980.json",
+          "count": 16
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-35-1990.json",
+          "count": 29
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-35-2000.json",
+          "count": 99
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-35-2010.json",
+          "count": 136
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-35-2020.json",
+          "count": 44
+        }
+      },
+      "クライム": {
+        "〜1979": {
+          "file": "data/rankings/jp-80-1979.json",
+          "count": 94
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-80-1980.json",
+          "count": 10
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-80-1990.json",
+          "count": 33
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-80-2000.json",
+          "count": 39
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-80-2010.json",
+          "count": 55
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-80-2020.json",
+          "count": 31
+        }
+      },
+      "ドキュメンタリー": {
+        "〜1979": {
+          "file": "data/rankings/jp-99-1979.json",
+          "count": 3
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-99-1980.json",
+          "count": 5
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-99-1990.json",
+          "count": 1
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-99-2000.json",
+          "count": 3
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-99-2010.json",
+          "count": 13
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-99-2020.json",
+          "count": 3
+        }
+      },
+      "ドラマ": {
+        "〜1979": {
+          "file": "data/rankings/jp-18-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-18-1980.json",
+          "count": 47
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-18-1990.json",
+          "count": 72
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-18-2000.json",
+          "count": 181
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-18-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-18-2020.json",
+          "count": 128
+        }
+      },
+      "ファミリー": {
+        "〜1979": {
+          "file": "data/rankings/jp-10751-1979.json",
+          "count": 6
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-10751-1980.json",
+          "count": 3
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-10751-1990.json",
+          "count": 5
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-10751-2000.json",
+          "count": 7
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-10751-2010.json",
+          "count": 5
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-10751-2020.json",
+          "count": 0
+        }
+      },
+      "ファンタジー": {
+        "〜1979": {
+          "file": "data/rankings/jp-14-1979.json",
+          "count": 31
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-14-1980.json",
+          "count": 8
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-14-1990.json",
+          "count": 16
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-14-2000.json",
+          "count": 36
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-14-2010.json",
+          "count": 43
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-14-2020.json",
+          "count": 20
+        }
+      },
+      "歴史": {
+        "〜1979": {
+          "file": "data/rankings/jp-36-1979.json",
+          "count": 30
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-36-1980.json",
+          "count": 7
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-36-1990.json",
+          "count": 3
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-36-2000.json",
+          "count": 10
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-36-2010.json",
+          "count": 15
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-36-2020.json",
+          "count": 9
+        }
+      },
+      "ホラー": {
+        "〜1979": {
+          "file": "data/rankings/jp-27-1979.json",
+          "count": 68
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-27-1980.json",
+          "count": 29
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-27-1990.json",
+          "count": 35
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-27-2000.json",
+          "count": 109
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-27-2010.json",
+          "count": 91
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-27-2020.json",
+          "count": 28
+        }
+      },
+      "音楽": {
+        "〜1979": {
+          "file": "data/rankings/jp-10402-1979.json",
+          "count": 3
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-10402-1980.json",
+          "count": 2
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-10402-1990.json",
+          "count": 3
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-10402-2000.json",
+          "count": 13
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-10402-2010.json",
+          "count": 17
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-10402-2020.json",
+          "count": 4
+        }
+      },
+      "ミステリー": {
+        "〜1979": {
+          "file": "data/rankings/jp-9648-1979.json",
+          "count": 22
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-9648-1980.json",
+          "count": 7
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-9648-1990.json",
+          "count": 11
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-9648-2000.json",
+          "count": 46
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-9648-2010.json",
+          "count": 57
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-9648-2020.json",
+          "count": 32
+        }
+      },
+      "ロマンス": {
+        "〜1979": {
+          "file": "data/rankings/jp-10749-1979.json",
+          "count": 47
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-10749-1980.json",
+          "count": 9
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-10749-1990.json",
+          "count": 18
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-10749-2000.json",
+          "count": 52
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-10749-2010.json",
+          "count": 110
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-10749-2020.json",
+          "count": 45
+        }
+      },
+      "SF": {
+        "〜1979": {
+          "file": "data/rankings/jp-878-1979.json",
+          "count": 64
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-878-1980.json",
+          "count": 17
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-878-1990.json",
+          "count": 30
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-878-2000.json",
+          "count": 56
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-878-2010.json",
+          "count": 61
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-878-2020.json",
+          "count": 17
+        }
+      },
+      "スリラー": {
+        "〜1979": {
+          "file": "data/rankings/jp-53-1979.json",
+          "count": 55
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-53-1980.json",
+          "count": 13
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-53-1990.json",
+          "count": 27
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-53-2000.json",
+          "count": 72
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-53-2010.json",
+          "count": 72
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-53-2020.json",
+          "count": 37
+        }
+      },
+      "戦争": {
+        "〜1979": {
+          "file": "data/rankings/jp-10752-1979.json",
+          "count": 17
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-10752-1980.json",
+          "count": 2
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-10752-1990.json",
+          "count": 0
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-10752-2000.json",
+          "count": 2
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-10752-2010.json",
+          "count": 12
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-10752-2020.json",
+          "count": 7
+        }
+      },
+      "西部劇": {
+        "〜1979": {
+          "file": "data/rankings/jp-37-1979.json",
+          "count": 0
+        },
+        "1980年代": {
+          "file": "data/rankings/jp-37-1980.json",
+          "count": 0
+        },
+        "1990年代": {
+          "file": "data/rankings/jp-37-1990.json",
+          "count": 0
+        },
+        "2000年代": {
+          "file": "data/rankings/jp-37-2000.json",
+          "count": 1
+        },
+        "2010年代": {
+          "file": "data/rankings/jp-37-2010.json",
+          "count": 1
+        },
+        "2020年代": {
+          "file": "data/rankings/jp-37-2020.json",
+          "count": 0
+        }
+      }
+    },
+    "洋画": {
+      "アクション": {
+        "〜1979": {
+          "file": "data/rankings/foreign-28-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-28-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-28-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-28-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-28-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-28-2020.json",
+          "count": 200
+        }
+      },
+      "アドベンチャー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-12-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-12-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-12-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-12-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-12-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-12-2020.json",
+          "count": 200
+        }
+      },
+      "アニメ": {
+        "〜1979": {
+          "file": "data/rankings/foreign-16-1979.json",
+          "count": 151
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-16-1980.json",
+          "count": 91
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-16-1990.json",
+          "count": 153
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-16-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-16-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-16-2020.json",
+          "count": 200
+        }
+      },
+      "コメディ": {
+        "〜1979": {
+          "file": "data/rankings/foreign-35-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-35-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-35-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-35-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-35-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-35-2020.json",
+          "count": 200
+        }
+      },
+      "クライム": {
+        "〜1979": {
+          "file": "data/rankings/foreign-80-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-80-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-80-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-80-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-80-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-80-2020.json",
+          "count": 200
+        }
+      },
+      "ドキュメンタリー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-99-1979.json",
+          "count": 45
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-99-1980.json",
+          "count": 17
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-99-1990.json",
+          "count": 21
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-99-2000.json",
+          "count": 101
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-99-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-99-2020.json",
+          "count": 161
+        }
+      },
+      "ドラマ": {
+        "〜1979": {
+          "file": "data/rankings/foreign-18-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-18-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-18-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-18-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-18-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-18-2020.json",
+          "count": 200
+        }
+      },
+      "ファミリー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-10751-1979.json",
+          "count": 94
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-10751-1980.json",
+          "count": 75
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-10751-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-10751-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-10751-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-10751-2020.json",
+          "count": 171
+        }
+      },
+      "ファンタジー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-14-1979.json",
+          "count": 174
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-14-1980.json",
+          "count": 136
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-14-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-14-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-14-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-14-2020.json",
+          "count": 200
+        }
+      },
+      "歴史": {
+        "〜1979": {
+          "file": "data/rankings/foreign-36-1979.json",
+          "count": 174
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-36-1980.json",
+          "count": 59
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-36-1990.json",
+          "count": 91
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-36-2000.json",
+          "count": 178
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-36-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-36-2020.json",
+          "count": 200
+        }
+      },
+      "ホラー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-27-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-27-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-27-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-27-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-27-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-27-2020.json",
+          "count": 200
+        }
+      },
+      "音楽": {
+        "〜1979": {
+          "file": "data/rankings/foreign-10402-1979.json",
+          "count": 84
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-10402-1980.json",
+          "count": 44
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-10402-1990.json",
+          "count": 51
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-10402-2000.json",
+          "count": 109
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-10402-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-10402-2020.json",
+          "count": 118
+        }
+      },
+      "ミステリー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-9648-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-9648-1980.json",
+          "count": 99
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-9648-1990.json",
+          "count": 157
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-9648-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-9648-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-9648-2020.json",
+          "count": 200
+        }
+      },
+      "ロマンス": {
+        "〜1979": {
+          "file": "data/rankings/foreign-10749-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-10749-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-10749-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-10749-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-10749-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-10749-2020.json",
+          "count": 200
+        }
+      },
+      "SF": {
+        "〜1979": {
+          "file": "data/rankings/foreign-878-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-878-1980.json",
+          "count": 193
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-878-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-878-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-878-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-878-2020.json",
+          "count": 200
+        }
+      },
+      "スリラー": {
+        "〜1979": {
+          "file": "data/rankings/foreign-53-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-53-1980.json",
+          "count": 200
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-53-1990.json",
+          "count": 200
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-53-2000.json",
+          "count": 200
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-53-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-53-2020.json",
+          "count": 200
+        }
+      },
+      "戦争": {
+        "〜1979": {
+          "file": "data/rankings/foreign-10752-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-10752-1980.json",
+          "count": 56
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-10752-1990.json",
+          "count": 52
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-10752-2000.json",
+          "count": 123
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-10752-2010.json",
+          "count": 200
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-10752-2020.json",
+          "count": 102
+        }
+      },
+      "西部劇": {
+        "〜1979": {
+          "file": "data/rankings/foreign-37-1979.json",
+          "count": 200
+        },
+        "1980年代": {
+          "file": "data/rankings/foreign-37-1980.json",
+          "count": 16
+        },
+        "1990年代": {
+          "file": "data/rankings/foreign-37-1990.json",
+          "count": 37
+        },
+        "2000年代": {
+          "file": "data/rankings/foreign-37-2000.json",
+          "count": 37
+        },
+        "2010年代": {
+          "file": "data/rankings/foreign-37-2010.json",
+          "count": 62
+        },
+        "2020年代": {
+          "file": "data/rankings/foreign-37-2020.json",
+          "count": 35
+        }
+      }
+    }
+  }
+}

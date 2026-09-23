@@ -1,0 +1,826 @@
+{
+  "region": "洋画",
+  "genre": "アニメ",
+  "era": "1980年代",
+  "items": [
+    {
+      "id": 12477,
+      "title": "火垂るの墓",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/hJaodNynKzjPyPWIXBL7mJpXvn3.jpg",
+      "score": 8.45,
+      "votes": 6821,
+      "tmdb": "https://www.themoviedb.org/movie/12477"
+    },
+    {
+      "id": 8392,
+      "title": "となりのトトロ",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/ykeaF3Ldz1Kf6sfnOJJH4dW56F4.jpg",
+      "score": 8.067,
+      "votes": 9089,
+      "tmdb": "https://www.themoviedb.org/movie/8392"
+    },
+    {
+      "id": 49565,
+      "title": "木を植えた男",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/z4GyCrKLK3SWOZFdc9Yat3UZa5d.jpg",
+      "score": 7.981,
+      "votes": 184,
+      "tmdb": "https://www.themoviedb.org/movie/49565"
+    },
+    {
+      "id": 72215,
+      "title": "Жил-был пёс",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/7YbdqmDM9h2VmkelGYDKLYbuC5y.jpg",
+      "score": 7.976,
+      "votes": 165,
+      "tmdb": "https://www.themoviedb.org/movie/72215"
+    },
+    {
+      "id": 10515,
+      "title": "天空の城ラピュタ",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/xDse6WI1npXK9XUn3gOHSu4SFp3.jpg",
+      "score": 7.972,
+      "votes": 4806,
+      "tmdb": "https://www.themoviedb.org/movie/10515"
+    },
+    {
+      "id": 149,
+      "title": "AKIRA",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/oVc2I0WBRaVCmnL3DO0LaPQuEqh.jpg",
+      "score": 7.94,
+      "votes": 5008,
+      "tmdb": "https://www.themoviedb.org/movie/149"
+    },
+    {
+      "id": 81,
+      "title": "風の谷のナウシカ",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/r74DvbQuz8zjxWvLwkX0iTIGs8C.jpg",
+      "score": 7.94,
+      "votes": 4208,
+      "tmdb": "https://www.themoviedb.org/movie/81"
+    },
+    {
+      "id": 66105,
+      "title": "聖闘士星矢 真紅の少年伝説",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/7I7x2eMUwjroTmHfIn4WCr9Ls27.jpg",
+      "score": 7.845,
+      "votes": 255,
+      "tmdb": "https://www.themoviedb.org/movie/66105"
+    },
+    {
+      "id": 16859,
+      "title": "魔女の宅急便",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/rlNKTz07MtYlIJY6zKaQedRN8HF.jpg",
+      "score": 7.84,
+      "votes": 4740,
+      "tmdb": "https://www.themoviedb.org/movie/16859"
+    },
+    {
+      "id": 32085,
+      "title": "ヴィンセント",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/sH8CMLnuXbQv9T61mUCPHxZotDJ.jpg",
+      "score": 7.84,
+      "votes": 946,
+      "tmdb": "https://www.themoviedb.org/movie/32085"
+    },
+    {
+      "id": 30060,
+      "title": "The Plague Dogs",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/aPlkqs5cmOgaZJhekW5CvGywSkx.jpg",
+      "score": 7.807,
+      "votes": 309,
+      "tmdb": "https://www.themoviedb.org/movie/30060"
+    },
+    {
+      "id": 22504,
+      "title": "王と鳥",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/8gl1lJ7hY9W2zid8SkKvQP7Ii0O.jpg",
+      "score": 7.758,
+      "votes": 425,
+      "tmdb": "https://www.themoviedb.org/movie/22504"
+    },
+    {
+      "id": 15916,
+      "title": "天使のたまご",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/dqi68LqT8z4lduMg0xR2TZHkRId.jpg",
+      "score": 7.692,
+      "votes": 617,
+      "tmdb": "https://www.themoviedb.org/movie/15916"
+    },
+    {
+      "id": 83091,
+      "title": "聖闘士星矢 神々の熱き戦い",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/qNKg0bn6E6GWD1iCzL9vwqBLDGF.jpg",
+      "score": 7.676,
+      "votes": 221,
+      "tmdb": "https://www.themoviedb.org/movie/83091"
+    },
+    {
+      "id": 14813,
+      "title": "ミッキーのクリスマスキャロル",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/vifdNsy7Vl3oEdg8KWuChxn7j9f.jpg",
+      "score": 7.667,
+      "votes": 1007,
+      "tmdb": "https://www.themoviedb.org/movie/14813"
+    },
+    {
+      "id": 19035,
+      "title": "対話の可能性",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/bF3UBg43oQ4n2aOyudpqXiZaiOB.jpg",
+      "score": 7.632,
+      "votes": 174,
+      "tmdb": "https://www.themoviedb.org/movie/19035"
+    },
+    {
+      "id": 77762,
+      "title": "Зима в Простоквашино",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/npVjTdinip4kvViCjLpBIY44jXB.jpg",
+      "score": 7.614,
+      "votes": 101,
+      "tmdb": "https://www.themoviedb.org/movie/77762"
+    },
+    {
+      "id": 60800,
+      "title": "Macskafogó",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/z2OKuFQyX0tEz55EiMdAqbDWpdi.jpg",
+      "score": 7.602,
+      "votes": 103,
+      "tmdb": "https://www.themoviedb.org/movie/60800"
+    },
+    {
+      "id": 14087,
+      "title": "はだしのゲン",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/xGvShyJAhuCMEiBR0PNTqXgRDi2.jpg",
+      "score": 7.6,
+      "votes": 272,
+      "tmdb": "https://www.themoviedb.org/movie/14087"
+    },
+    {
+      "id": 13396,
+      "title": "スノーマン",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/b3CMolkeXrPaVvd5vTsssMKfZZo.jpg",
+      "score": 7.565,
+      "votes": 370,
+      "tmdb": "https://www.themoviedb.org/movie/13396"
+    },
+    {
+      "id": 856,
+      "title": "ロジャー・ラビット",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/afOjZ8VBqLD2mz7SuAAzuR6qyqJ.jpg",
+      "score": 7.5,
+      "votes": 6351,
+      "tmdb": "https://www.themoviedb.org/movie/856"
+    },
+    {
+      "id": 77759,
+      "title": "Каникулы в Простоквашино",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/1bBh1oQF2FznRkcudz7NcCiHSE9.jpg",
+      "score": 7.486,
+      "votes": 104,
+      "tmdb": "https://www.themoviedb.org/movie/77759"
+    },
+    {
+      "id": 10857,
+      "title": "風が吹くとき",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/dxgtBJFCE81y6ZuIpAJJKTM3dhq.jpg",
+      "score": 7.47,
+      "votes": 355,
+      "tmdb": "https://www.themoviedb.org/movie/10857"
+    },
+    {
+      "id": 44338,
+      "title": "Balance",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/4GgliKAlzR0W5Xo96nfbZjesQQD.jpg",
+      "score": 7.467,
+      "votes": 150,
+      "tmdb": "https://www.themoviedb.org/movie/44338"
+    },
+    {
+      "id": 11704,
+      "title": "ニムの秘密",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/2RA2wD4N13FCHC535UCsjYhGGJK.jpg",
+      "score": 7.439,
+      "votes": 986,
+      "tmdb": "https://www.themoviedb.org/movie/11704"
+    },
+    {
+      "id": 49802,
+      "title": "Тайна третьей планеты",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/7ICu6SPJBMuWixymqtRIIBvc55S.jpg",
+      "score": 7.421,
+      "votes": 126,
+      "tmdb": "https://www.themoviedb.org/movie/49802"
+    },
+    {
+      "id": 10144,
+      "title": "リトル・マーメイド",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/xVIRRko31jkwk0TNEyKkJeeln1i.jpg",
+      "score": 7.4,
+      "votes": 8570,
+      "tmdb": "https://www.themoviedb.org/movie/10144"
+    },
+    {
+      "id": 18917,
+      "title": "アリス",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/iX1EbFU2QrlANv4HNwd5OCMwvKm.jpg",
+      "score": 7.4,
+      "votes": 371,
+      "tmdb": "https://www.themoviedb.org/movie/18917"
+    },
+    {
+      "id": 37211,
+      "title": "Scooby-Doo! and the Reluctant Werewolf",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/cXUQuHnNBxFSZAmYfogMfrcvMk7.jpg",
+      "score": 7.4,
+      "votes": 349,
+      "tmdb": "https://www.themoviedb.org/movie/37211"
+    },
+    {
+      "id": 83088,
+      "title": "聖闘士星矢 最終聖戦の戦士たち",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/kAnncQfXVFC0ZcYyphCdgcVUsWt.jpg",
+      "score": 7.398,
+      "votes": 265,
+      "tmdb": "https://www.themoviedb.org/movie/83088"
+    },
+    {
+      "id": 13350,
+      "title": "Scooby-Doo and the Ghoul School",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/duMdoHLQvnzRDZm2CD66DT4PvS5.jpg",
+      "score": 7.395,
+      "votes": 338,
+      "tmdb": "https://www.themoviedb.org/movie/13350"
+    },
+    {
+      "id": 48496,
+      "title": "Tango",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/rq6l5GAMImx5x9K4R4ZJ4Rm6Qx8.jpg",
+      "score": 7.387,
+      "votes": 115,
+      "tmdb": "https://www.themoviedb.org/movie/48496"
+    },
+    {
+      "id": 13246,
+      "title": "A Garfield Christmas",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/eQD2VdPntQxHAWap3KMUXGsUTcw.jpg",
+      "score": 7.357,
+      "votes": 105,
+      "tmdb": "https://www.themoviedb.org/movie/13246"
+    },
+    {
+      "id": 24787,
+      "title": "Scooby-Doo! Meets the Boo Brothers",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/2jKmHNGED3cUyXd6oge5uuHYh3f.jpg",
+      "score": 7.348,
+      "votes": 273,
+      "tmdb": "https://www.themoviedb.org/movie/24787"
+    },
+    {
+      "id": 10150,
+      "title": "The Last Unicorn",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/MRHFtXTjxC74MGCzHACcuqvHiw.jpg",
+      "score": 7.3,
+      "votes": 621,
+      "tmdb": "https://www.themoviedb.org/movie/10150"
+    },
+    {
+      "id": 41394,
+      "title": "The Looney, Looney, Looney Bugs Bunny Movie",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/2hsUFCUVvURJCvxofQaqMN9noDU.jpg",
+      "score": 7.3,
+      "votes": 164,
+      "tmdb": "https://www.themoviedb.org/movie/41394"
+    },
+    {
+      "id": 43967,
+      "title": "うる星やつら2 ビューティフル・ドリーマー",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/m7CFGcwc5HLbHkSlK3JBkayFBGV.jpg",
+      "score": 7.3,
+      "votes": 102,
+      "tmdb": "https://www.themoviedb.org/movie/43967"
+    },
+    {
+      "id": 22501,
+      "title": "時の支配者",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/kuKuoEowsVBy6MrbDzFHZY5MZmJ.jpg",
+      "score": 7.258,
+      "votes": 198,
+      "tmdb": "https://www.themoviedb.org/movie/22501"
+    },
+    {
+      "id": 14132,
+      "title": "超時空要塞マクロス 愛・おぼえていますか",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/j27wHdXbq2VRurUtQiCpePZf11b.jpg",
+      "score": 7.248,
+      "votes": 109,
+      "tmdb": "https://www.themoviedb.org/movie/14132"
+    },
+    {
+      "id": 12144,
+      "title": "リトルフットの大冒険 ～謎の恐竜大陸～",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/61J1RXp2OvGFNvIuQQ2VaSOzxTl.jpg",
+      "score": 7.2,
+      "votes": 2834,
+      "tmdb": "https://www.themoviedb.org/movie/12144"
+    },
+    {
+      "id": 54825,
+      "title": "Creature Comforts",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/Ap8XavPP8AyvW9TDQDAZzEGT200.jpg",
+      "score": 7.2,
+      "votes": 134,
+      "tmdb": "https://www.themoviedb.org/movie/54825"
+    },
+    {
+      "id": 10948,
+      "title": "きつねと猟犬",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/gsPbT1VlBpiqwZNH9NODW6YFgo2.jpg",
+      "score": 7.177,
+      "votes": 3592,
+      "tmdb": "https://www.themoviedb.org/movie/10948"
+    },
+    {
+      "id": 26730,
+      "title": "Bugs Bunny's 3rd Movie: 1001 Rabbit Tales",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/wDXqtMTh88qCY0afA6JSXTxYHn3.jpg",
+      "score": 7.164,
+      "votes": 201,
+      "tmdb": "https://www.themoviedb.org/movie/26730"
+    },
+    {
+      "id": 1857,
+      "title": "トランスフォーマー ザ・ムービー",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/a93tT06FLtvYa3vcDFH0lfi3oKG.jpg",
+      "score": 7.145,
+      "votes": 641,
+      "tmdb": "https://www.themoviedb.org/movie/1857"
+    },
+    {
+      "id": 83090,
+      "title": "聖闘士星矢 邪神エリス",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/4I7hDPGRKryNwTrEtpQQCtzOwL2.jpg",
+      "score": 7.138,
+      "votes": 257,
+      "tmdb": "https://www.themoviedb.org/movie/83090"
+    },
+    {
+      "id": 37585,
+      "title": "銀河鉄道の夜",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/fXDTGFn0czpPIQwVqIiYuq6k3Te.jpg",
+      "score": 7.1,
+      "votes": 102,
+      "tmdb": "https://www.themoviedb.org/movie/37585"
+    },
+    {
+      "id": 9994,
+      "title": "オリビアちゃんの大冒険",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/4SeleMZzOtEkVeIu6zFp06XZNap.jpg",
+      "score": 7.048,
+      "votes": 1844,
+      "tmdb": "https://www.themoviedb.org/movie/9994"
+    },
+    {
+      "id": 13925,
+      "title": "ルクソーJr.",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/as8xF0wOawngZ1G3qg5gs0VQea3.jpg",
+      "score": 7.047,
+      "votes": 684,
+      "tmdb": "https://www.themoviedb.org/movie/13925"
+    },
+    {
+      "id": 21793,
+      "title": "The Chipmunk Adventure",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/o0d8qJL8anmGG14UfjBC7HHATJK.jpg",
+      "score": 7.0,
+      "votes": 127,
+      "tmdb": "https://www.themoviedb.org/movie/21793"
+    },
+    {
+      "id": 19386,
+      "title": "He-Man and She-Ra: The Secret of the Sword",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/ojQBGjDr8HDXp1etZTLKeUiYivl.jpg",
+      "score": 7.0,
+      "votes": 109,
+      "tmdb": "https://www.themoviedb.org/movie/19386"
+    },
+    {
+      "id": 13928,
+      "title": "ニックナック",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/uRsPF4LCdKLqwG0Gg2GASMgbZgY.jpg",
+      "score": 6.998,
+      "votes": 631,
+      "tmdb": "https://www.themoviedb.org/movie/13928"
+    },
+    {
+      "id": 19933,
+      "title": "ブレイブ・リトル・トースター",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/u4BNwsD8k6DAhHk9m63WasMsyTj.jpg",
+      "score": 6.948,
+      "votes": 496,
+      "tmdb": "https://www.themoviedb.org/movie/19933"
+    },
+    {
+      "id": 14571,
+      "title": "機動警察パトレイバー the Movie",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/r7y7XdO9KCLEfsS8AZGOSKKJEbk.jpg",
+      "score": 6.928,
+      "votes": 194,
+      "tmdb": "https://www.themoviedb.org/movie/14571"
+    },
+    {
+      "id": 22500,
+      "title": "ガンダーラ",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/rupNCaznAWPWH80eX8OgIvRCuog.jpg",
+      "score": 6.905,
+      "votes": 152,
+      "tmdb": "https://www.themoviedb.org/movie/22500"
+    },
+    {
+      "id": 39144,
+      "title": "ドラゴンボール 神龍の伝説",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/2tMLMV8U5xpaqVOreHALFLsmr1s.jpg",
+      "score": 6.9,
+      "votes": 385,
+      "tmdb": "https://www.themoviedb.org/movie/39144"
+    },
+    {
+      "id": 29204,
+      "title": "American Pop",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/svrATPrggBUauEhCyhiF7K175T9.jpg",
+      "score": 6.873,
+      "votes": 130,
+      "tmdb": "https://www.themoviedb.org/movie/29204"
+    },
+    {
+      "id": 20043,
+      "title": "王立宇宙軍 オネアミスの翼",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/9JxnXWzU8WNWKoilSeldBTUEosp.jpg",
+      "score": 6.87,
+      "votes": 161,
+      "tmdb": "https://www.themoviedb.org/movie/20043"
+    },
+    {
+      "id": 22611,
+      "title": "NEMO/ニモ",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/ySUi9eVlR9ICJ7OyDIFbk1XvN6b.jpg",
+      "score": 6.868,
+      "votes": 185,
+      "tmdb": "https://www.themoviedb.org/movie/22611"
+    },
+    {
+      "id": 28609,
+      "title": "ドラゴンボールZ",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/9uRHXVUBLidWIBRpZQp4Ra14qzp.jpg",
+      "score": 6.842,
+      "votes": 636,
+      "tmdb": "https://www.themoviedb.org/movie/28609"
+    },
+    {
+      "id": 11497,
+      "title": "天国から来たわんちゃん チャーリーのお話",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/nmWh1NglDinfkHD9zCNqGWyhl7Q.jpg",
+      "score": 6.8,
+      "votes": 1179,
+      "tmdb": "https://www.themoviedb.org/movie/11497"
+    },
+    {
+      "id": 9318,
+      "title": "Astérix chez les Bretons",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/1MWTDqNWLzjs9HUtC8aKanNLZLH.jpg",
+      "score": 6.782,
+      "votes": 750,
+      "tmdb": "https://www.themoviedb.org/movie/9318"
+    },
+    {
+      "id": 27273,
+      "title": "フライト・オブ・ドラゴン",
+      "year": "1982",
+      "poster": "https://image.tmdb.org/t/p/w342/pcGDwxEZW5ywTNdvSyTH2Bs49kw.jpg",
+      "score": 6.77,
+      "votes": 115,
+      "tmdb": "https://www.themoviedb.org/movie/27273"
+    },
+    {
+      "id": 19947,
+      "title": "The Adventures of Mark Twain",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/wUYyl69qvIZOTuRJnwK07BbYSyy.jpg",
+      "score": 6.763,
+      "votes": 112,
+      "tmdb": "https://www.themoviedb.org/movie/19947"
+    },
+    {
+      "id": 19877,
+      "title": "劇場版 北斗の拳",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/teWyiFDOAOrhM9yyss3IbdKJGXE.jpg",
+      "score": 6.762,
+      "votes": 195,
+      "tmdb": "https://www.themoviedb.org/movie/19877"
+    },
+    {
+      "id": 4978,
+      "title": "アメリカ物語",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/fI54MlUMUojhzzwH2MzXeiGkYVu.jpg",
+      "score": 6.759,
+      "votes": 1494,
+      "tmdb": "https://www.themoviedb.org/movie/4978"
+    },
+    {
+      "id": 23521,
+      "title": "Daffy Duck's Quackbusters",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/d9s1aOsnXfeSOlzYuX6VVmORrFo.jpg",
+      "score": 6.758,
+      "votes": 153,
+      "tmdb": "https://www.themoviedb.org/movie/23521"
+    },
+    {
+      "id": 39228,
+      "title": "機動戦士ガンダム",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/uig60VsA6fL4NgSdD8KLZS6jDJV.jpg",
+      "score": 6.745,
+      "votes": 104,
+      "tmdb": "https://www.themoviedb.org/movie/39228"
+    },
+    {
+      "id": 12233,
+      "title": "オリバー ニューヨーク子猫ものがたり",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/yhQTang5aBnN6dYq3bS8zhdNL9G.jpg",
+      "score": 6.739,
+      "votes": 1748,
+      "tmdb": "https://www.themoviedb.org/movie/12233"
+    },
+    {
+      "id": 21453,
+      "title": "妖獣都市",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/wPxP34z8Qa6yiyZo1gfnumxUGUR.jpg",
+      "score": 6.711,
+      "votes": 296,
+      "tmdb": "https://www.themoviedb.org/movie/21453"
+    },
+    {
+      "id": 39145,
+      "title": "ドラゴンボール 魔神城のねむり姫",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/fxKP02OXzS3eCAzrZNzd03sEDi6.jpg",
+      "score": 6.7,
+      "votes": 335,
+      "tmdb": "https://www.themoviedb.org/movie/39145"
+    },
+    {
+      "id": 80607,
+      "title": "Daffy Duck's Movie: Fantastic Island",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/rYhasRbxKl8tregggAstihE1DwK.jpg",
+      "score": 6.692,
+      "votes": 138,
+      "tmdb": "https://www.themoviedb.org/movie/80607"
+    },
+    {
+      "id": 37433,
+      "title": "迷宮物語",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/k3sTiIFinCqtAuS82XVLeeUETwX.jpg",
+      "score": 6.689,
+      "votes": 132,
+      "tmdb": "https://www.themoviedb.org/movie/37433"
+    },
+    {
+      "id": 15035,
+      "title": "Fire and Ice",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/aT88je1fX2esb8L72ZYoVtLCSr8.jpg",
+      "score": 6.685,
+      "votes": 370,
+      "tmdb": "https://www.themoviedb.org/movie/15035"
+    },
+    {
+      "id": 116776,
+      "title": "ドラゴンボール 摩訶不思議大冒険",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/aEs9UN6kxu9VsqkO0fZBPePGudU.jpg",
+      "score": 6.676,
+      "votes": 315,
+      "tmdb": "https://www.themoviedb.org/movie/116776"
+    },
+    {
+      "id": 9463,
+      "title": "吸血鬼ハンターD",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/dI8KnEKNCySmS8ZCKxBwsNAYAky.jpg",
+      "score": 6.61,
+      "votes": 555,
+      "tmdb": "https://www.themoviedb.org/movie/9463"
+    },
+    {
+      "id": 36868,
+      "title": "The Jetsons Meet the Flintstones",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/9NJTAlOapW5jNVkt0ZZrTelfuiB.jpg",
+      "score": 6.6,
+      "votes": 164,
+      "tmdb": "https://www.themoviedb.org/movie/36868"
+    },
+    {
+      "id": 17421,
+      "title": "G.I.ジョー",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/gADRX5uks0nIsgEzwNpkCIHukBN.jpg",
+      "score": 6.589,
+      "votes": 123,
+      "tmdb": "https://www.themoviedb.org/movie/17421"
+    },
+    {
+      "id": 8868,
+      "title": "Astérix et la Surprise de César",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/8kY2WmF9PgkzfmtcPyW1AmQJswu.jpg",
+      "score": 6.545,
+      "votes": 662,
+      "tmdb": "https://www.themoviedb.org/movie/8868"
+    },
+    {
+      "id": 11827,
+      "title": "ヘヴィメタル",
+      "year": "1981",
+      "poster": "https://image.tmdb.org/t/p/w342/oAF3iL9J4zMCgE1Kl6mVVkAuXzn.jpg",
+      "score": 6.536,
+      "votes": 830,
+      "tmdb": "https://www.themoviedb.org/movie/11827"
+    },
+    {
+      "id": 10957,
+      "title": "コルドロン",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/wvFXIsiyYeoeOybfxvGtbO81TJN.jpg",
+      "score": 6.437,
+      "votes": 1474,
+      "tmdb": "https://www.themoviedb.org/movie/10957"
+    },
+    {
+      "id": 1361,
+      "title": "The Return of the King",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/lTwUT4NsSyUQlHV20Mx3C96JHq4.jpg",
+      "score": 6.402,
+      "votes": 229,
+      "tmdb": "https://www.themoviedb.org/movie/1361"
+    },
+    {
+      "id": 31112,
+      "title": "スヌーピーとチャーリー／ヨーロッパの旅",
+      "year": "1980",
+      "poster": "https://image.tmdb.org/t/p/w342/eds4cxarUjHn7OdDd26SauphUnR.jpg",
+      "score": 6.369,
+      "votes": 107,
+      "tmdb": "https://www.themoviedb.org/movie/31112"
+    },
+    {
+      "id": 11625,
+      "title": "Astérix et le Coup du menhir",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/29vpkpY52u8gHAtDK68wv91YgRK.jpg",
+      "score": 6.307,
+      "votes": 686,
+      "tmdb": "https://www.themoviedb.org/movie/11625"
+    },
+    {
+      "id": 11243,
+      "title": "The Care Bears Movie",
+      "year": "1985",
+      "poster": "https://image.tmdb.org/t/p/w342/hInHHG8oiKLLXPtO87aUZ9txX4q.jpg",
+      "score": 6.296,
+      "votes": 164,
+      "tmdb": "https://www.themoviedb.org/movie/11243"
+    },
+    {
+      "id": 28152,
+      "title": "スーパーマリオブラザーズ ピーチ姫救出大作戦!",
+      "year": "1986",
+      "poster": "https://image.tmdb.org/t/p/w342/talxEvJIZ3nl4cLmzHUiylJZ8x1.jpg",
+      "score": 6.2,
+      "votes": 122,
+      "tmdb": "https://www.themoviedb.org/movie/28152"
+    },
+    {
+      "id": 13926,
+      "title": "レッズ・ドリーム",
+      "year": "1987",
+      "poster": "https://image.tmdb.org/t/p/w342/ebPNnYqoEYntnrGdwtmppvBRHpu.jpg",
+      "score": 6.125,
+      "votes": 373,
+      "tmdb": "https://www.themoviedb.org/movie/13926"
+    },
+    {
+      "id": 13927,
+      "title": "ティン・トイ",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/yRjtvmRXgZoY8P9Ug28G9OITD9E.jpg",
+      "score": 6.114,
+      "votes": 507,
+      "tmdb": "https://www.themoviedb.org/movie/13927"
+    },
+    {
+      "id": 48624,
+      "title": "超神伝説 うろつき童子",
+      "year": "1989",
+      "poster": "https://image.tmdb.org/t/p/w342/fIwREqYGPjSaDw2xF3dsMbLAdEa.jpg",
+      "score": 6.0,
+      "votes": 123,
+      "tmdb": "https://www.themoviedb.org/movie/48624"
+    },
+    {
+      "id": 44179,
+      "title": "魔界都市＜新宿＞",
+      "year": "1988",
+      "poster": "https://image.tmdb.org/t/p/w342/fgpT73BffSm5Az8LsItFxzwZ1aP.jpg",
+      "score": 6.0,
+      "votes": 115,
+      "tmdb": "https://www.themoviedb.org/movie/44179"
+    },
+    {
+      "id": 21356,
+      "title": "Rock & Rule",
+      "year": "1983",
+      "poster": "https://image.tmdb.org/t/p/w342/aNCN8xBOaEccXS0V93RBdLDSqFh.jpg",
+      "score": 5.945,
+      "votes": 100,
+      "tmdb": "https://www.themoviedb.org/movie/21356"
+    },
+    {
+      "id": 13924,
+      "title": "アンドレとウォーリー B.の冒険",
+      "year": "1984",
+      "poster": "https://image.tmdb.org/t/p/w342/vynPRSjD78EWQpWbvEimlU55Ke.jpg",
+      "score": 5.246,
+      "votes": 345,
+      "tmdb": "https://www.themoviedb.org/movie/13924"
+    }
+  ]
+}

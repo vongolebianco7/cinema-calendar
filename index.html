@@ -26,29 +26,23 @@ button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top
 <body>
 <header class="top"><div class="wrap nav"><div class="brand">CINEMA <b>DAYS</b></div><input id="q" class="search" placeholder="作品を検索"></div></header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">STREAMING MOVIE GUIDE</div><h1>今夜、何観る？</h1><p>Netflix、Prime Video、Disney+、U-NEXT、Hulu。配信開始をひとつの場所で。気になる映画を、日付と評価から探せます。</p></section>
+<section class="hero"><div class="eyebrow">STREAMING MOVIE GUIDE</div><h1>今夜、何観る？</h1><p>Netflix、Prime Video、Disney+、U-NEXT、Hulu。日本で現在見放題配信されている映画を、サービスと評価から探せます。</p></section>
 <div class="chips" id="chips"></div>
-<div class="notice">現在はサイト基盤を構築中です。掲載データはサンプルで、実際の配信状況・評価を保証するものではありません。次段階で正規データソースを接続します。</div>
-<section class="section"><div class="sectionHead"><h2>今日から観られる</h2><span class="small" id="count"></span></div><div class="grid" id="cards"></div></section>
-<section class="section"><div class="sectionHead"><h2>配信カレンダー</h2><span class="small">配信開始日を一覧</span></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div><div class="dates" id="dates"></div></div></section>
-</main>
+<div class="notice">TMDB / JustWatch提供データを利用しています。日付は作品の公開日であり、配信開始日ではありません。配信状況は取得時点の日本向けスナップショットです。</div>
+<section class="section"><div class="sectionHead"><h2>日本で見放題配信中</h2><span class="small" id="count"></span></div><div class="grid" id="cards"></div></section>
+<section class="section"><div class="sectionHead"><h2>配信カレンダー</h2><span class="small">作品公開日を一覧（配信開始日ではありません）</span></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div><div class="dates" id="dates"></div></div></section>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.</footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
 const services=["すべて","Netflix","Prime Video","Disney+","U-NEXT","Hulu"];
-const movies=[
- {title:"サンプル映画 A",date:"2026-09-23",service:"Netflix",score:"—",reviews:"—",genre:"ドラマ",year:"2026"},
- {title:"サンプル映画 B",date:"2026-09-25",service:"Prime Video",score:"—",reviews:"—",genre:"SF",year:"2025"},
- {title:"サンプル映画 C",date:"2026-09-28",service:"Disney+",score:"—",reviews:"—",genre:"アニメーション",year:"2026"},
- {title:"サンプル映画 D",date:"2026-10-02",service:"U-NEXT",score:"—",reviews:"—",genre:"サスペンス",year:"2024"},
- {title:"サンプル映画 E",date:"2026-10-07",service:"Hulu",score:"—",reviews:"—",genre:"コメディ",year:"2025"}
-];
-let active="すべて", view=new Date(2026,8,1);
+let movies=[];
+let active="すべて", view=new Date();
 const $=s=>document.querySelector(s);
-function filtered(){let q=$("#q").value.trim().toLowerCase();return movies.filter(m=>(active==="すべて"||m.service===active)&&(!q||m.title.toLowerCase().includes(q)))}
+function filtered(){let q=$("#q").value.trim().toLowerCase();return movies.filter(m=>(active==="すべて"||m.services.includes(active==="Prime Video"?"Amazon Prime Video":active))&&(!q||m.title.toLowerCase().includes(q)))}
 function renderChips(){$("#chips").innerHTML=services.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;render()})}
 function renderCards(){let a=filtered();$("#count").textContent=a.length+"作品";$("#cards").innerHTML=a.length?a.map((m,i)=>'<article class="card" data-i="'+movies.indexOf(m)+'"><div class="poster">'+m.title+'</div><div class="body"><div class="title">'+m.title+'</div><div class="meta"><span class="tag">'+m.service+'</span><span class="tag">'+m.date+'</span><span class="tag score">★ '+m.score+'</span></div></div></article>').join(""):'<div class="empty">該当する作品がありません</div>';document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openMovie(movies[+c.dataset.i]))}
 function renderCal(){let y=view.getFullYear(),mo=view.getMonth();$("#month").textContent=y+"年 "+(mo+1)+"月";let first=new Date(y,mo,1),start=new Date(y,mo,1-first.getDay());let out="";for(let i=0;i<42;i++){let d=new Date(start);d.setDate(start.getDate()+i);let iso=[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");let ms=filtered().filter(m=>m.date===iso);out+='<div class="day '+(d.getMonth()!==mo?'dim':'')+'"><b>'+d.getDate()+'</b>'+ms.map(m=>'<span class="dot">'+m.title+'</span>').join("")+'</div>'}$("#dates").innerHTML=out}
-function openMovie(m){$("#detail").innerHTML='<p class="eyebrow">'+m.service+' · '+m.date+'</p><h2 style="font:700 32px Georgia,serif">'+m.title+'</h2><p class="small">'+m.year+' · '+m.genre+'</p><p>評価 <span class="score">★ '+m.score+'</span>　レビュー '+m.reviews+'</p><div class="links"><a target="_blank" href="https://www.google.com/search?q='+encodeURIComponent(m.title+" 配信")+'">配信先を確認</a><a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで探す</a></div>';$("#modal").classList.add("show")}
+function openMovie(m){let sv=m.services.map(s=>s==="Amazon Prime Video"?"Prime Video":s).join(" / ");$("#detail").innerHTML='<p class="eyebrow">'+sv+' · 公開 '+m.date+'</p><h2 style="font:700 32px Georgia,serif">'+m.title+'</h2><p class="small">'+(m.original_title||"")+'</p><p>TMDB評価 <span class="score">★ '+Number(m.score||0).toFixed(1)+'</span>　'+m.votes+'票</p><p style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</p><div class="links"><a target="_blank" href="'+m.tmdb+'">TMDB</a><a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで探す</a></div>';$("#modal").classList.add("show")}
 function render(){renderChips();renderCards();renderCal()}
-$("#q").oninput=render;$("#prev").onclick=()=>{view.setMonth(view.getMonth()-1);renderCal()};$("#next").onclick=()=>{view.setMonth(view.getMonth()+1);renderCal()};$("#close").onclick=()=>$("#modal").classList.remove("show");$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("show")};render();
+$("#q").oninput=render;$("#prev").onclick=()=>{view.setMonth(view.getMonth()-1);renderCal()};$("#next").onclick=()=>{view.setMonth(view.getMonth()+1);renderCal()};$("#close").onclick=()=>$("#modal").classList.remove("show");$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("show")};async function boot(){try{let r=await fetch("data/movies.json?"+Date.now());let d=await r.json();movies=d.movies||[];render()}catch(e){$("#cards").innerHTML='<div class="empty">データを読み込めませんでした</div>'}}boot();
 </script></body></html>

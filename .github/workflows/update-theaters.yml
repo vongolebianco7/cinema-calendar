@@ -1,0 +1,36 @@
+name: Update theater showtimes
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/update_theaters.py
+      - .github/workflows/update-theaters.yml
+  schedule:
+    - cron: "25 1,5,9,13,17,21 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: cinema-theater-schedules
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install parser
+        run: pip install beautifulsoup4
+      - name: Fetch verified theater schedules
+        run: python scripts/update_theaters.py
+      - name: Commit showtimes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/theater_schedules.json
+          git diff --cached --quiet || git commit -m "Update theater showtimes"
+          git pull --rebase origin main
+          git push origin main

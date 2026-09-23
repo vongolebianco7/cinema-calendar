@@ -193,4 +193,36 @@ for region_name in ["邦画","洋画"]:
    ]
 with open("data/rankings.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending; Japanese films min 50 votes, foreign films min 300 votes; up to 50 titles per genre and era","rankings":rankings},fh,ensure_ascii=False,indent=2)
+# Enrich every non-TMDB ranking item with TMDB metadata so all ranking axes show a common TMDB score/poster.
+try:
+ with open("data/rankings_extra.json",encoding="utf-8") as fh:
+  extra_rankings=json.load(fh)
+except (FileNotFoundError,json.JSONDecodeError):
+ extra_rankings={}
+for section_name in ["boxoffice_alltime","filmarks_current"]:
+ section=extra_rankings.get(section_name) or {}
+ for item in section.get("items",[]):
+  try:
+   q=item.get("title")
+   if not q: continue
+   sr=get("/search/movie",{"query":q,"include_adult":"false","language":"ja-JP","page":1}).get("results",[])
+   if not sr: continue
+   # Prefer a release-year match when the source ranking provides one.
+   source_year=""
+   rd=item.get("release_date") or ""
+   if len(rd)>=4: source_year=rd[:4]
+   match=next((x for x in sr if source_year and (x.get("release_date") or "")[:4]==source_year),sr[0])
+   item["tmdb_id"]=match.get("id")
+   item["tmdb_score"]=match.get("vote_average",0)
+   item["tmdb_votes"]=match.get("vote_count",0)
+   item["poster"]=("https://image.tmdb.org/t/p/w342"+match["poster_path"]) if match.get("poster_path") else None
+   item["tmdb"]="https://www.themoviedb.org/movie/"+str(match.get("id"))
+   item["genres"]=match.get("genre_ids") or []
+  except Exception:
+   pass
+if extra_rankings:
+ extra_rankings["generated_at"]=datetime.datetime.now(datetime.timezone.utc).isoformat()
+ with open("data/rankings_extra.json","w",encoding="utf-8") as fh:
+  json.dump(extra_rankings,fh,ensure_ascii=False,indent=2)
+
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)

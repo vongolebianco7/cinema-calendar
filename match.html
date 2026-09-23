@@ -74,8 +74,7 @@ function buildCandidates(){
   if(scope==="theater"&&m.event!=="theatrical")continue;
   if(scope==="release"&&m.event!=="streaming")continue;
   if(scope==="watch"&&!hasSelected)continue;
-  if(scope!=="theater"&&scope!=="watch"&&selectedServices.length&&!releaseSelected&&!hasSelected)continue;
-  if(scope==="all"&&m.event==="theatrical"&&selectedServices.length)continue;
+  if(scope!=="theater"&&scope!=="watch"&&selectedServices.length&&m.event!=="theatrical"&&!releaseSelected&&!hasSelected)continue;
   if(scope==="watch"&&!selectedServices.length)continue;
   if(max&&(!m.runtime||m.runtime>max))continue;
   if(minScore&&(!m.score||m.score<minScore))continue;

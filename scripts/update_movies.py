@@ -188,6 +188,52 @@ with open("data/rankings_manifest.json","w",encoding="utf-8") as fh:
 with open("data/rankings.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":manifest["generated_at"],"method":"TMDB vote_average descending; static shards, up to 200 titles per filter","rankings":rankings},fh,ensure_ascii=False,indent=2)
 
+# Dedicated current-year ranking so "今年" is not just a subset of the 2020s top list.
+current_year=str(today.year)
+year_rankings={"邦画":{},"洋画":{}}
+for region_name in ["邦画","洋画"]:
+ for genre_name,genre_ids in genre_groups.items():
+  vote_min=5 if region_name=="邦画" else 20
+  collected=[]
+  for page in range(1,11):
+   params={
+    "with_genres":"|".join(str(x) for x in genre_ids),
+    "sort_by":"vote_average.desc",
+    "vote_count.gte":vote_min,
+    "include_adult":"false",
+    "primary_release_date.gte":current_year+"-01-01",
+    "primary_release_date.lte":str(today),
+    "page":page
+   }
+   if genre_name!="アニメ": params["without_genres"]="16"
+   if region_name=="邦画": params["with_origin_country"]="JP"
+   try:
+    rs=get("/discover/movie",params).get("results",[])
+   except Exception:
+    rs=[]
+   if not rs: break
+   for x in rs:
+    countries=x.get("origin_country") or []
+    if region_name=="洋画" and "JP" in countries: continue
+    collected.append(x)
+  seen_ids=set(); unique=[]
+  for x in collected:
+   if not x.get("id") or x["id"] in seen_ids: continue
+   seen_ids.add(x["id"]); unique.append(x)
+  unique.sort(key=lambda x:(x.get("vote_average",0),x.get("vote_count",0)),reverse=True)
+  year_rankings[region_name][genre_name]=[
+   {"id":x.get("id"),"title":x.get("title") or x.get("original_title"),
+    "date":(x.get("release_date") or "")[:10],"year":(x.get("release_date") or "")[:4],
+    "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
+    "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
+    "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
+   for x in unique[:200]
+  ]
+with open("data/rankings_year.json","w",encoding="utf-8") as fh:
+ json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"year":today.year,
+            "method":"TMDB current-year releases, vote_average descending","rankings":year_rankings},
+           fh,ensure_ascii=False,indent=2)
+
 # Refresh Japan all-time box office top 100 from Kogyo Tsushinsha (official source).
 try:
  req=urllib.request.Request("https://kogyotsushin.com/archives/alltime/",headers={"User-Agent":"Mozilla/5.0"})

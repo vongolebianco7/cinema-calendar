@@ -25,6 +25,10 @@ jobs:
         run: python scripts/update_movies.py
       - name: Fetch theater schedules
         run: python scripts/update_theaters.py
+      - name: Observe Japan streaming availability
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/update_availability.py
       - name: Archive sourced publication history
         run: python scripts/update_history.py
       - name: Commit changes

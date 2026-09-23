@@ -1,26 +1,191 @@
 {
-  "generated_at": "2026-09-23T04:16:47.061Z",
-  "note": "Verified upcoming television movie broadcasts. Start with official broadcaster schedules; expand coverage over time.",
+  "generated_at": "2026-09-23T04:20:58.972Z",
+  "note": "Upcoming verified terrestrial television movie broadcasts in Japan. Schedule may change; source links are retained per item.",
   "movies": [
     {
-      "title": "インサイド・ヘッド",
-      "date": "2026-10-09",
-      "time": "21:00",
+      "title": "ザ・アウトロー",
+      "date": "2026-09-24",
+      "time": "13:40",
       "event": "tv",
-      "service": "日本テレビ",
-      "program": "金曜ロードショー",
-      "source": "金曜ロードシネマクラブ",
-      "source_url": "https://kinro.ntv.co.jp/lineup"
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "クリスチャン・グーデガスト",
+      "cast": [
+        "ジェラルド・バトラー",
+        "パブロ・シュレイバー",
+        "オシェア・ジャクソン・Jr."
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
     },
     {
-      "title": "インサイド・ヘッド2",
-      "date": "2026-10-16",
+      "title": "ボーン・レガシー",
+      "date": "2026-09-25",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "トニー・ギルロイ",
+      "cast": [
+        "ジェレミー・レナー",
+        "エドワード・ノートン"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "交渉人 真下正義",
+      "date": "2026-09-26",
       "time": "21:00",
       "event": "tv",
-      "service": "日本テレビ",
-      "program": "金曜ロードショー",
-      "source": "金曜ロードシネマクラブ",
-      "source_url": "https://kinro.ntv.co.jp/lineup"
+      "service": "フジテレビ",
+      "program": "土曜プレミアム",
+      "director": "本広克行",
+      "cast": [
+        "ユースケ・サンタマリア",
+        "寺島進",
+        "小泉孝太郎",
+        "柳葉敏郎",
+        "水野美紀"
+      ],
+      "countries": [
+        "日本"
+      ],
+      "source": "フジテレビ 土曜プレミアム",
+      "source_url": "https://www.fujitv.co.jp/b_hp/kousyounin/index.html"
+    },
+    {
+      "title": "ウェズリー・スナイプス ザ・シューター",
+      "date": "2026-09-28",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "ジョセフ・ラスナック",
+      "cast": [
+        "ウェズリー・スナイプス",
+        "レナ・ヘディ"
+      ],
+      "countries": [
+        "イギリス"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "激突！",
+      "date": "2026-09-29",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "スティーブン・スピルバーグ",
+      "cast": [
+        "デニス・ウィーバー",
+        "キャリー・ロフティン"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "セントラル・インテリジェンス",
+      "date": "2026-09-30",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "ローソン・マーシャル・サーバー",
+      "cast": [
+        "ドウェイン・ジョンソン",
+        "ケビン・ハート"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "マーヴェリック",
+      "date": "2026-10-01",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "リチャード・ドナー",
+      "cast": [
+        "メル・ギブソン",
+        "ジョディ・フォスター"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "ジェイソン・ボーン",
+      "date": "2026-10-02",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "ポール・グリーングラス",
+      "cast": [
+        "マット・デイモン",
+        "トミー・リー・ジョーンズ"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "マーベラス",
+      "date": "2026-10-05",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "マーティン・キャンベル",
+      "cast": [
+        "マギー・Q",
+        "マイケル・キートン"
+      ],
+      "countries": [
+        "アメリカ",
+        "イギリス"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
+    },
+    {
+      "title": "ガントレット",
+      "date": "2026-10-06",
+      "time": "13:40",
+      "event": "tv",
+      "service": "テレビ東京",
+      "program": "午後のロードショー",
+      "director": "クリント・イーストウッド",
+      "cast": [
+        "クリント・イーストウッド",
+        "ソンドラ・ロック"
+      ],
+      "countries": [
+        "アメリカ"
+      ],
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/"
     }
   ]
 }

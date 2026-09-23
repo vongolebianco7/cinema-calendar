@@ -72,13 +72,38 @@ seen={(m.get("service"),m.get("title"),m.get("date")) for m in stream_movies}
 for m in netflix_official_movies():
  k=(m.get("service"),m.get("title"),m.get("date"))
  if k not in seen: stream_movies.append(m); seen.add(k)
+# Poster lookup never changes an officially verified release/broadcast date.
+# Normalize edition labels and punctuation to improve searches, but do not attach
+# a poster without a close title match (a different film is worse than no image).
+def norm_movie_title(value):
+ value=(value or "").lower()
+ value=re.sub(r"[【［\[][^】］\]]*(?:4k|デジタル|ノーカット|字幕|吹替)[^】］\]]*[】］\]]","",value,flags=re.I)
+ return re.sub(r"[\s　・･:：!！?？「」『』【】\[\]()（）/／\-―ー\.\u30fb\u00b7]+","",value)
+def search_movie_match(title, original_title=None):
+ variants=[title]
+ simplified=re.sub(r"[【［\[][^】］\]]*[】］\]]","",title).strip()
+ if simplified and simplified!=title: variants.append(simplified)
+ if original_title: variants.append(original_title)
+ seen_queries=set()
+ for name in variants:
+  if not name or name in seen_queries:continue
+  seen_queries.add(name)
+  try:
+   results=get("/search/movie",{"query":name,"region":"JP","include_adult":"false"}).get("results",[])
+  except Exception:continue
+  needle=norm_movie_title(name)
+  for x in results:
+   candidate_names=[x.get("title"),x.get("original_title")]
+   if needle and any(norm_movie_title(z)==needle for z in candidate_names):
+    return x
+ return None
+
 # Enrich verified streaming premieres with TMDB metadata/posters by title.
 # The premiere date and service always remain sourced from official announcements.
 for m in stream_movies:
  try:
-  q=get("/search/movie",{"query":m["title"],"region":"JP"}).get("results",[])
-  if q:
-   x=q[0]
+  x=search_movie_match(m["title"],m.get("original_title"))
+  if x:
    m["id"]=x.get("id")
    m["poster"]=("https://image.tmdb.org/t/p/w500"+x["poster_path"]) if x.get("poster_path") else m.get("poster")
    m["score"]=x.get("vote_average",m.get("score",0))
@@ -96,6 +121,32 @@ for m in stream_movies:
    except Exception: pass
  except Exception:
   pass
+# Enrich the curated official TV schedule with matching movie metadata and posters.
+# Keep source broadcast dates, channels and premiere status untouched.
+try:
+ with open("data/tv.json",encoding="utf-8") as fh: tv_data=json.load(fh)
+except (FileNotFoundError,json.JSONDecodeError):
+ tv_data={"movies":[]}
+tv_updated=False
+for m in tv_data.get("movies",[]):
+ if m.get("poster") and m.get("id"):continue
+ try:
+  x=search_movie_match(m.get("title",""),m.get("original_title"))
+  if not x:continue
+  if x.get("poster_path"):
+   m["poster"]="https://image.tmdb.org/t/p/w500"+x["poster_path"]
+  m["id"]=x.get("id")
+  m["original_title"]=x.get("original_title")
+  m["score"]=x.get("vote_average",0)
+  m["votes"]=x.get("vote_count",0)
+  m["tmdb"]="https://www.themoviedb.org/movie/"+str(x["id"])
+  m["overview"]=x.get("overview","")
+  tv_updated=True
+ except Exception as e:print("TV metadata skipped",m.get("title"),e)
+if tv_updated:
+ with open("data/tv.json","w",encoding="utf-8") as fh:
+  json.dump(tv_data,fh,ensure_ascii=False,indent=2)
+
 events=theatrical+stream_movies
 events.sort(key=lambda x:x.get("date",""))
 

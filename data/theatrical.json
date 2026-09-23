@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T04:06:07.035810+00:00",
+  "generated_at": "2026-09-23T04:12:08.916192+00:00",
   "movies": [
     {
       "id": 9539,
@@ -23,6 +23,12 @@
       "countries": [
         "France",
         "Canada"
+      ],
+      "runtime": 99,
+      "genres": [
+        "ホラー",
+        "ドラマ",
+        "スリラー"
       ]
     },
     {
@@ -46,6 +52,10 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 97,
+      "genres": [
+        "スリラー"
       ]
     },
     {
@@ -73,6 +83,10 @@
         "United Kingdom",
         "Taiwan",
         "Singapore"
+      ],
+      "runtime": 109,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -96,6 +110,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 100,
+      "genres": [
+        "サイエンスフィクション",
+        "謎",
+        "スリラー"
       ]
     },
     {
@@ -119,6 +139,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 70,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "アクション"
       ]
     },
     {
@@ -142,6 +168,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 77,
+      "genres": [
+        "謎",
+        "サイエンスフィクション",
+        "ロマンス"
       ]
     },
     {
@@ -165,6 +197,10 @@
       ],
       "countries": [
         "Brazil"
+      ],
+      "runtime": 96,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -188,6 +224,11 @@
       ],
       "countries": [
         "Hong Kong"
+      ],
+      "runtime": 95,
+      "genres": [
+        "ドラマ",
+        "履歴"
       ]
     },
     {
@@ -211,6 +252,11 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 108,
+      "genres": [
+        "ホラー",
+        "コメディ"
       ]
     },
     {
@@ -234,6 +280,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 105,
+      "genres": [
+        "ロマンス",
+        "コメディ",
+        "ドラマ"
       ]
     },
     {
@@ -259,6 +311,11 @@
         "United Kingdom",
         "United States of America",
         "Saudi Arabia"
+      ],
+      "runtime": 97,
+      "genres": [
+        "アクション",
+        "スリラー"
       ]
     },
     {
@@ -280,7 +337,9 @@
         "Erika Terashima",
         "伊藤優衣"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 100,
+      "genres": []
     },
     {
       "id": 1661276,
@@ -302,6 +361,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 36,
+      "genres": [
+        "アニメーション",
+        "ファンタジー",
+        "ドラマ"
       ]
     },
     {
@@ -323,7 +388,9 @@
         "Binglu Li",
         "Huihuang Ko"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 11,
+      "genres": []
     },
     {
       "id": 1703744,
@@ -346,6 +413,10 @@
       ],
       "countries": [
         "Nepal"
+      ],
+      "runtime": 140,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -369,6 +440,12 @@
       ],
       "countries": [
         "India"
+      ],
+      "runtime": 192,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "ドラマ"
       ]
     },
     {
@@ -393,6 +470,12 @@
       "countries": [
         "United States of America",
         "United Kingdom"
+      ],
+      "runtime": 107,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "スリラー"
       ]
     },
     {
@@ -419,6 +502,10 @@
         "Lithuania",
         "France",
         "United Kingdom"
+      ],
+      "runtime": 92,
+      "genres": [
+        "ホラー"
       ]
     },
     {
@@ -442,6 +529,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 119,
+      "genres": [
+        "サイエンスフィクション",
+        "スリラー",
+        "アドベンチャー"
       ]
     },
     {
@@ -465,6 +558,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "音楽"
       ]
     },
     {
@@ -488,6 +585,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 118,
+      "genres": [
+        "ドラマ",
+        "ファミリー"
       ]
     },
     {
@@ -511,6 +613,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -535,6 +641,10 @@
       "countries": [
         "Japan",
         "France"
+      ],
+      "runtime": 126,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -553,6 +663,10 @@
       "cast": [],
       "countries": [
         "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -576,6 +690,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 129,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -599,6 +717,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 120,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "謎",
+        "ファンタジー"
       ]
     },
     {
@@ -622,6 +747,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 120,
+      "genres": [
+        "アクション",
+        "ドラマ"
       ]
     },
     {
@@ -638,7 +768,11 @@
       "tmdb": "https://www.themoviedb.org/movie/1715073",
       "director": "西原孝至",
       "cast": [],
-      "countries": []
+      "countries": [],
+      "runtime": 72,
+      "genres": [
+        "ドキュメンタリー"
+      ]
     },
     {
       "id": 8426,
@@ -661,6 +795,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 148,
+      "genres": [
+        "ドラマ",
+        "犯罪",
+        "音楽",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -684,6 +825,13 @@
       ],
       "countries": [
         "Germany"
+      ],
+      "runtime": 116,
+      "genres": [
+        "コメディ",
+        "ドラマ",
+        "犯罪",
+        "ロマンス"
       ]
     },
     {
@@ -707,6 +855,11 @@
       ],
       "countries": [
         "Hong Kong"
+      ],
+      "runtime": 114,
+      "genres": [
+        "ロマンス",
+        "コメディ"
       ]
     },
     {
@@ -737,6 +890,11 @@
         "Saudi Arabia",
         "Italy",
         "Netherlands"
+      ],
+      "runtime": 89,
+      "genres": [
+        "ドラマ",
+        "履歴"
       ]
     },
     {
@@ -761,6 +919,12 @@
       "countries": [
         "Hong Kong",
         "Taiwan"
+      ],
+      "runtime": 112,
+      "genres": [
+        "ファンタジー",
+        "ロマンス",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -785,6 +949,12 @@
       "countries": [
         "United States of America",
         "Canada"
+      ],
+      "runtime": 111,
+      "genres": [
+        "ホラー",
+        "謎",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -808,6 +978,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 107,
+      "genres": [
+        "アニメーション",
+        "アクション",
+        "アドベンチャー",
+        "ファンタジー"
       ]
     },
     {
@@ -831,6 +1008,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "犯罪",
+        "ドラマ",
+        "ファミリー",
+        "謎"
       ]
     },
     {
@@ -854,6 +1038,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 99,
+      "genres": [
+        "アニメーション",
+        "ファミリー",
+        "アドベンチャー",
+        "ファンタジー"
       ]
     },
     {
@@ -872,6 +1063,10 @@
       "cast": [],
       "countries": [
         "Japan"
+      ],
+      "runtime": 84,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -893,7 +1088,9 @@
         "松島勇之介",
         "桜井 一"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1769790,
@@ -911,7 +1108,9 @@
       "cast": [
         "hoshimachi suisei"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 134,
+      "genres": []
     },
     {
       "id": 1368337,
@@ -935,6 +1134,12 @@
       "countries": [
         "United Kingdom",
         "United States of America"
+      ],
+      "runtime": 173,
+      "genres": [
+        "アドベンチャー",
+        "アクション",
+        "ファンタジー"
       ]
     },
     {
@@ -959,6 +1164,11 @@
       "countries": [
         "United Kingdom",
         "United States of America"
+      ],
+      "runtime": 123,
+      "genres": [
+        "ドキュメンタリー",
+        "音楽"
       ]
     },
     {
@@ -980,7 +1190,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1705721,
@@ -1003,6 +1215,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 107,
+      "genres": [
+        "犯罪",
+        "スリラー"
       ]
     },
     {
@@ -1026,6 +1243,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 104,
+      "genres": [
+        "コメディ",
+        "アクション",
+        "ドラマ"
       ]
     },
     {
@@ -1049,6 +1272,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 99,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1074,6 +1301,11 @@
         "Japan",
         "United States of America",
         "Vietnam"
+      ],
+      "runtime": 116,
+      "genres": [
+        "ドラマ",
+        "戦争"
       ]
     },
     {
@@ -1097,6 +1329,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 127,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "音楽"
       ]
     },
     {
@@ -1120,7 +1358,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 54,
+      "genres": []
     },
     {
       "id": 1547224,
@@ -1143,6 +1383,10 @@
       ],
       "countries": [
         "Sweden"
+      ],
+      "runtime": 90,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1166,6 +1410,10 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 113,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1189,6 +1437,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 143,
+      "genres": [
+        "アニメーション",
+        "ファンタジー",
+        "音楽",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -1212,6 +1467,11 @@
       ],
       "countries": [
         "China"
+      ],
+      "runtime": 140,
+      "genres": [
+        "ドラマ",
+        "戦争"
       ]
     },
     {
@@ -1235,6 +1495,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 117,
+      "genres": [
+        "謎",
+        "ホラー"
       ]
     },
     {
@@ -1258,6 +1523,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 138,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1281,6 +1550,14 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "アクション",
+        "アドベンチャー",
+        "コメディ",
+        "ファミリー"
       ]
     },
     {
@@ -1304,6 +1581,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "犯罪",
+        "ドラマ"
       ]
     },
     {
@@ -1323,7 +1605,9 @@
       "countries": [
         "China",
         "Germany"
-      ]
+      ],
+      "runtime": 30,
+      "genres": []
     },
     {
       "id": 1772435,
@@ -1341,6 +1625,10 @@
       "cast": [],
       "countries": [
         "Japan"
+      ],
+      "runtime": 34,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1359,7 +1647,9 @@
       "cast": [],
       "countries": [
         "China"
-      ]
+      ],
+      "runtime": 21,
+      "genres": []
     },
     {
       "id": 1772415,
@@ -1377,7 +1667,9 @@
       "cast": [],
       "countries": [
         "China"
-      ]
+      ],
+      "runtime": 12,
+      "genres": []
     },
     {
       "id": 1657826,
@@ -1397,7 +1689,9 @@
         "United States of America",
         "China",
         "Estonia"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1522668,
@@ -1419,6 +1713,10 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 92,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1435,7 +1733,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1554986",
       "director": "Kaiwen Ren",
       "cast": [],
-      "countries": []
+      "countries": [],
+      "runtime": 27,
+      "genres": []
     },
     {
       "id": 1775245,
@@ -1454,6 +1754,10 @@
       "countries": [
         "Japan",
         "Indonesia"
+      ],
+      "runtime": 53,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1472,7 +1776,9 @@
       "cast": [],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 10,
+      "genres": []
     },
     {
       "id": 1775239,
@@ -1490,7 +1796,9 @@
       "cast": [],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 12,
+      "genres": []
     },
     {
       "id": 1775231,
@@ -1509,6 +1817,10 @@
       "countries": [
         "Japan",
         "Rwanda"
+      ],
+      "runtime": 25,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1530,7 +1842,11 @@
         "유타",
         "재현"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 180,
+      "genres": [
+        "音楽"
+      ]
     },
     {
       "id": 1727196,
@@ -1548,6 +1864,10 @@
       "cast": [],
       "countries": [
         "Japan"
+      ],
+      "runtime": 4,
+      "genres": [
+        "アニメーション"
       ]
     },
     {
@@ -1566,7 +1886,9 @@
       "cast": [],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 11,
+      "genres": []
     },
     {
       "id": 1641572,
@@ -1585,6 +1907,10 @@
       "countries": [
         "Hong Kong",
         "United Kingdom"
+      ],
+      "runtime": 38,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1610,6 +1936,12 @@
         "France",
         "Germany",
         "Italy"
+      ],
+      "runtime": 119,
+      "genres": [
+        "犯罪",
+        "ドラマ",
+        "謎"
       ]
     },
     {
@@ -1633,6 +1965,11 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 124,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
       ]
     },
     {
@@ -1656,6 +1993,13 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 96,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "謎",
+        "アドベンチャー"
       ]
     },
     {
@@ -1681,6 +2025,11 @@
         "Germany",
         "Hungary",
         "Greece"
+      ],
+      "runtime": 96,
+      "genres": [
+        "アドベンチャー",
+        "ドラマ"
       ]
     },
     {
@@ -1703,6 +2052,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 101,
+      "genres": [
+        "アドベンチャー",
+        "スリラー",
+        "戦争"
       ]
     },
     {
@@ -1723,6 +2078,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 94,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -1745,6 +2104,14 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 94,
+      "genres": [
+        "謎",
+        "ドラマ",
+        "アクション",
+        "スリラー",
+        "犯罪"
       ]
     },
     {
@@ -1768,7 +2135,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1595400,
@@ -1791,6 +2160,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "スリラー"
       ]
     },
     {
@@ -1814,6 +2187,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 118,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1838,6 +2215,11 @@
       "countries": [
         "Japan",
         "France"
+      ],
+      "runtime": 117,
+      "genres": [
+        "アニメーション",
+        "ドラマ"
       ]
     },
     {
@@ -1864,6 +2246,10 @@
         "France",
         "Singapore",
         "Philippines"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1887,6 +2273,11 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 146,
+      "genres": [
+        "サイエンスフィクション",
+        "スリラー"
       ]
     },
     {
@@ -1910,6 +2301,13 @@
       ],
       "countries": [
         "Australia"
+      ],
+      "runtime": 87,
+      "genres": [
+        "アニメーション",
+        "コメディ",
+        "サイエンスフィクション",
+        "アドベンチャー"
       ]
     },
     {
@@ -1933,6 +2331,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 123,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -1955,7 +2357,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1688934,
@@ -1976,6 +2380,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 119,
+      "genres": [
+        "ファンタジー",
+        "ドラマ"
       ]
     },
     {
@@ -1995,7 +2404,12 @@
         "川口春奈",
         "高杉真宙"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": [
+        "ファミリー",
+        "ドラマ"
+      ]
     },
     {
       "id": 1666802,
@@ -2015,7 +2429,11 @@
         "小谷けい",
         "Ken Nagata"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 40,
+      "genres": [
+        "ドラマ"
+      ]
     },
     {
       "id": 1393151,
@@ -2041,6 +2459,10 @@
         "Czech Republic",
         "Germany",
         "United Kingdom"
+      ],
+      "runtime": 90,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -2064,6 +2486,10 @@
       ],
       "countries": [
         "Thailand"
+      ],
+      "runtime": 48,
+      "genres": [
+        "ドキュメンタリー"
       ]
     },
     {
@@ -2087,6 +2513,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 88,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2110,6 +2540,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 77,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2133,7 +2567,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 406,
@@ -2156,6 +2592,10 @@
       ],
       "countries": [
         "France"
+      ],
+      "runtime": 98,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2181,6 +2621,12 @@
         "United States of America",
         "Germany",
         "France"
+      ],
+      "runtime": 95,
+      "genres": [
+        "ホラー",
+        "サイエンスフィクション",
+        "アドベンチャー"
       ]
     },
     {
@@ -2204,6 +2650,10 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 129,
+      "genres": [
+        "コメディ"
       ]
     },
     {
@@ -2225,7 +2675,11 @@
         "下鶴光康",
         "キタニタツヤ"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 90,
+      "genres": [
+        "音楽"
+      ]
     },
     {
       "id": 1632015,
@@ -2248,6 +2702,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "謎",
+        "ロマンス"
       ]
     },
     {
@@ -2268,6 +2729,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "アクション"
       ]
     },
     {
@@ -2291,6 +2757,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 135,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
       ]
     },
     {
@@ -2313,6 +2784,10 @@
       ],
       "countries": [
         "Taiwan"
+      ],
+      "runtime": 83,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2336,6 +2811,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 147,
+      "genres": [
+        "犯罪",
+        "スリラー",
+        "ドラマ"
       ]
     },
     {
@@ -2359,6 +2840,13 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 119,
+      "genres": [
+        "アクション",
+        "アドベンチャー",
+        "コメディ",
+        "ファンタジー"
       ]
     },
     {
@@ -2382,6 +2870,10 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 98,
+      "genres": [
+        "スリラー"
       ]
     },
     {
@@ -2406,6 +2898,12 @@
       "countries": [
         "Japan",
         "United States of America"
+      ],
+      "runtime": 119,
+      "genres": [
+        "アクション",
+        "ファンタジー",
+        "コメディ"
       ]
     },
     {
@@ -2429,6 +2927,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 150,
+      "genres": [
+        "ドラマ",
+        "戦争"
       ]
     },
     {
@@ -2452,6 +2955,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 71,
+      "genres": [
+        "ホラー"
       ]
     },
     {
@@ -2475,6 +2982,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "音楽"
       ]
     },
     {
@@ -2497,6 +3010,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 114,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2520,6 +3037,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "謎",
+        "ロマンス"
       ]
     },
     {
@@ -2541,7 +3065,9 @@
         "Seino Asuka",
         "極美慎"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1693902,
@@ -2562,7 +3088,12 @@
         "Mahesh Tripathi",
         "Kushal Bista"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 150,
+      "genres": [
+        "ドラマ",
+        "ファミリー"
+      ]
     },
     {
       "id": 1283320,
@@ -2586,6 +3117,10 @@
       "countries": [
         "United Kingdom",
         "United States of America"
+      ],
+      "runtime": 99,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2609,6 +3144,11 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 99,
+      "genres": [
+        "コメディ",
+        "アクション"
       ]
     },
     {
@@ -2634,6 +3174,10 @@
         "Canada",
         "Hungary",
         "United States of America"
+      ],
+      "runtime": 91,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2658,6 +3202,10 @@
       "countries": [
         "South Korea",
         "United States of America"
+      ],
+      "runtime": 165,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2678,7 +3226,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 91,
+      "genres": []
     },
     {
       "id": 1689343,
@@ -2699,7 +3249,9 @@
         "植田圭輔",
         "磯貝龍乎"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1526917,
@@ -2722,6 +3274,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "ファンタジー",
+        "アドベンチャー"
       ]
     },
     {
@@ -2747,6 +3306,12 @@
         "United States of America",
         "United Kingdom",
         "Japan"
+      ],
+      "runtime": 109,
+      "genres": [
+        "スリラー",
+        "犯罪",
+        "アクション"
       ]
     },
     {
@@ -2770,6 +3335,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
       ]
     },
     {
@@ -2793,6 +3363,10 @@
       ],
       "countries": [
         "Switzerland"
+      ],
+      "runtime": 99,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2816,6 +3390,10 @@
       ],
       "countries": [
         "Switzerland"
+      ],
+      "runtime": 117,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2839,6 +3417,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 108,
+      "genres": [
+        "ホラー",
+        "スリラー",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -2862,7 +3446,9 @@
       ],
       "countries": [
         "Japan"
-      ]
+      ],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1646897,
@@ -2885,6 +3471,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "犯罪",
+        "ドラマ"
       ]
     },
     {
@@ -2908,6 +3499,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 91,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -2931,6 +3526,12 @@
       ],
       "countries": [
         "Germany"
+      ],
+      "runtime": 72,
+      "genres": [
+        "コメディ",
+        "ドラマ",
+        "ファミリー"
       ]
     },
     {
@@ -2954,6 +3555,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 135,
+      "genres": [
+        "サイエンスフィクション",
+        "ホラー",
+        "アクション"
       ]
     },
     {
@@ -2977,6 +3584,11 @@
       ],
       "countries": [
         "China"
+      ],
+      "runtime": 131,
+      "genres": [
+        "ドラマ",
+        "ファミリー"
       ]
     },
     {
@@ -3000,6 +3612,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 126,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3023,6 +3639,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3046,6 +3666,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 50,
+      "genres": [
+        "サイエンスフィクション",
+        "アクション",
+        "ドラマ"
       ]
     },
     {
@@ -3068,6 +3694,11 @@
       "countries": [
         "South Korea",
         "Japan"
+      ],
+      "runtime": 105,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
       ]
     },
     {
@@ -3091,6 +3722,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 104,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "アクション",
+        "ドラマ"
       ]
     },
     {
@@ -3112,7 +3750,12 @@
         "竹内大生",
         "Daishi Ishizaka"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 72,
+      "genres": [
+        "コメディ",
+        "ドラマ"
+      ]
     },
     {
       "id": 106378,
@@ -3135,6 +3778,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 125,
+      "genres": [
+        "ドラマ",
+        "コメディ"
       ]
     },
     {
@@ -3158,6 +3806,11 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 114,
+      "genres": [
+        "コメディ",
+        "ドラマ"
       ]
     },
     {
@@ -3181,6 +3834,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 102,
+      "genres": [
+        "アクション",
+        "コメディ",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -3205,6 +3864,11 @@
       "countries": [
         "United Kingdom",
         "France"
+      ],
+      "runtime": 105,
+      "genres": [
+        "コメディ",
+        "スリラー"
       ]
     },
     {
@@ -3228,6 +3892,11 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ファンタジー",
+        "コメディ"
       ]
     },
     {
@@ -3251,6 +3920,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 97,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
       ]
     },
     {
@@ -3274,6 +3948,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 102,
+      "genres": [
+        "ホラー",
+        "スリラー"
       ]
     },
     {
@@ -3297,6 +3976,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 139,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
       ]
     },
     {
@@ -3320,6 +4004,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "アクション",
+        "アドベンチャー"
       ]
     },
     {
@@ -3348,6 +4039,11 @@
         "Italy",
         "Germany",
         "United Kingdom"
+      ],
+      "runtime": 111,
+      "genres": [
+        "コメディ",
+        "ドラマ"
       ]
     },
     {
@@ -3371,6 +4067,11 @@
       ],
       "countries": [
         "South Korea"
+      ],
+      "runtime": 105,
+      "genres": [
+        "ファンタジー",
+        "ドラマ"
       ]
     },
     {
@@ -3394,6 +4095,10 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 93,
+      "genres": [
+        "ホラー"
       ]
     },
     {
@@ -3417,6 +4122,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 101,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3440,6 +4149,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 93,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3461,7 +4174,11 @@
         "古舘寛治",
         "吉田羊"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 82,
+      "genres": [
+        "ドラマ"
+      ]
     },
     {
       "id": 1724371,
@@ -3482,6 +4199,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 106,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
       ]
     },
     {
@@ -3505,6 +4227,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "アクション",
+        "戦争"
       ]
     },
     {
@@ -3528,6 +4257,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "ファンタジー"
       ]
     },
     {
@@ -3552,6 +4287,12 @@
       "countries": [
         "United Kingdom",
         "United States of America"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ",
+        "コメディ",
+        "スリラー"
       ]
     },
     {
@@ -3575,6 +4316,11 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 131,
+      "genres": [
+        "謎",
+        "スリラー"
       ]
     },
     {
@@ -3598,6 +4344,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 130,
+      "genres": [
+        "ロマンス",
+        "ファンタジー",
+        "コメディ"
       ]
     },
     {
@@ -3619,6 +4371,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 120,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
       ]
     },
     {
@@ -3641,6 +4398,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3661,6 +4422,13 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "サイエンスフィクション",
+        "ファンタジー"
       ]
     },
     {
@@ -3684,6 +4452,11 @@
       "countries": [
         "Japan",
         "Taiwan"
+      ],
+      "runtime": 128,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
       ]
     },
     {
@@ -3703,6 +4476,13 @@
       "countries": [
         "France",
         "Belgium"
+      ],
+      "runtime": 90,
+      "genres": [
+        "ドキュメンタリー",
+        "履歴",
+        "戦争",
+        "テレビ映画"
       ]
     },
     {
@@ -3724,7 +4504,14 @@
         "山本早苗",
         "森山栄治"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": [
+        "謎",
+        "ホラー",
+        "犯罪",
+        "ファンタジー"
+      ]
     },
     {
       "id": 1287141,
@@ -3749,6 +4536,12 @@
         "United Kingdom",
         "Ireland",
         "Netherlands"
+      ],
+      "runtime": 107,
+      "genres": [
+        "ロマンス",
+        "ドラマ",
+        "コメディ"
       ]
     },
     {
@@ -3776,6 +4569,10 @@
         "Hungary",
         "China",
         "Belgium"
+      ],
+      "runtime": 147,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3795,7 +4592,9 @@
         "橋本将生",
         "中島瑠菜"
       ],
-      "countries": []
+      "countries": [],
+      "runtime": 0,
+      "genres": []
     },
     {
       "id": 1740230,
@@ -3817,6 +4616,10 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3841,6 +4644,12 @@
       "countries": [
         "Hong Kong",
         "China"
+      ],
+      "runtime": 125,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "スリラー"
       ]
     },
     {
@@ -3864,6 +4673,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 91,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "スリラー"
       ]
     },
     {
@@ -3887,6 +4702,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション",
+        "コメディ",
+        "ファンタジー"
       ]
     },
     {
@@ -3908,6 +4729,11 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 83,
+      "genres": [
+        "スリラー",
+        "謎"
       ]
     },
     {
@@ -3931,6 +4757,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション",
+        "アドベンチャー",
+        "サイエンスフィクション"
       ]
     },
     {
@@ -3955,6 +4787,10 @@
       "countries": [
         "Taiwan",
         "Japan"
+      ],
+      "runtime": 108,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -3977,6 +4813,12 @@
       ],
       "countries": [
         "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "謎"
       ]
     },
     {
@@ -4000,6 +4842,11 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 140,
+      "genres": [
+        "サイエンスフィクション",
+        "アドベンチャー"
       ]
     },
     {
@@ -4023,6 +4870,12 @@
       ],
       "countries": [
         "United States of America"
+      ],
+      "runtime": 165,
+      "genres": [
+        "サイエンスフィクション",
+        "アクション",
+        "アドベンチャー"
       ]
     }
   ]

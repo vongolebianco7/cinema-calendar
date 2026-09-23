@@ -39,7 +39,7 @@ let movies=[],directors={},rankings={},genreActive="";
 let active="すべて", mode="streaming", view=new Date();
 const $=s=>document.querySelector(s);
 let modalScrollY=0;
-function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");showModal()}
+function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
 function filtered(){let q=$("#q").value.trim().toLowerCase();return movies.filter(m=>((mode==="streaming"&&m.event==="streaming")||(mode==="theatrical"&&(m.event==="theatrical"||m.service==="劇場公開"))||(mode==="tv"&&m.event==="tv"))&&(active==="すべて"||m.service===active)&&(!q||m.title.toLowerCase().includes(q)))}
 function renderChips(){let ss=mode==="streaming"?["すべて","Netflix","Prime Video","Disney+","U-NEXT","Hulu"]:mode==="tv"?["すべて",...new Set(movies.filter(m=>m.event==="tv").map(m=>m.service))]:["すべて"];$("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;render()})}

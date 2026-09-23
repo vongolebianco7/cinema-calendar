@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - scripts/update_movies.py
+      - scripts/update_availability.py
       - .github/workflows/update-movies.yml
   schedule:
     - cron: "17 18 * * *"

@@ -126,44 +126,31 @@ for m in events:
 with open("data/directors.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
 
-# Rankings: split Japanese / foreign films, finer genre buckets, and eras.
-# Japanese films use a lower vote threshold because TMDB vote counts are much smaller than for Hollywood titles.
+# Rankings: DB-less static shards for GitHub Pages.
+# We precompute up to 200 titles per region x genre x era filter and commit them as JSON.
+# This gives the UI enough depth for 50+ visible titles without exposing the TMDB API key client-side.
 rankings={"邦画":{},"洋画":{}}
 genre_groups={
- "アクション":[28],
- "アドベンチャー":[12],
- "アニメ":[16],
- "コメディ":[35],
- "クライム":[80],
- "ドキュメンタリー":[99],
- "ドラマ":[18],
- "ファミリー":[10751],
- "ファンタジー":[14],
- "歴史":[36],
- "ホラー":[27],
- "音楽":[10402],
- "ミステリー":[9648],
- "ロマンス":[10749],
- "SF":[878],
- "スリラー":[53],
- "戦争":[10752],
- "西部劇":[37]
+ "アクション":[28],"アドベンチャー":[12],"アニメ":[16],"コメディ":[35],"クライム":[80],
+ "ドキュメンタリー":[99],"ドラマ":[18],"ファミリー":[10751],"ファンタジー":[14],"歴史":[36],
+ "ホラー":[27],"音楽":[10402],"ミステリー":[9648],"ロマンス":[10749],"SF":[878],
+ "スリラー":[53],"戦争":[10752],"西部劇":[37]
 }
 eras={
- "〜1979":(None,"1979-12-31"),
- "1980年代":("1980-01-01","1989-12-31"),
- "1990年代":("1990-01-01","1999-12-31"),
- "2000年代":("2000-01-01","2009-12-31"),
- "2010年代":("2010-01-01","2019-12-31"),
- "2020年代":("2020-01-01",str(today))
+ "〜1979":(None,"1979-12-31"),"1980年代":("1980-01-01","1989-12-31"),
+ "1990年代":("1990-01-01","1999-12-31"),"2000年代":("2000-01-01","2009-12-31"),
+ "2010年代":("2010-01-01","2019-12-31"),"2020年代":("2020-01-01",str(today))
 }
+os.makedirs("data/rankings",exist_ok=True)
+manifest={"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"filters":{}}
 for region_name in ["邦画","洋画"]:
+ manifest["filters"][region_name]={}
  for genre_name,genre_ids in genre_groups.items():
-  rankings[region_name][genre_name]={}
+  manifest["filters"][region_name][genre_name]={}
   for era_name,(gte,lte) in eras.items():
-   vote_min=50 if region_name=="邦画" else 300
+   vote_min=20 if region_name=="邦画" else 100
    collected=[]
-   for page in range(1,6):
+   for page in range(1,11):
     params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":vote_min,"include_adult":"false","page":page}
     if genre_name!="アニメ": params["without_genres"]="16"
     if gte: params["primary_release_date.gte"]=gte
@@ -173,64 +160,34 @@ for region_name in ["邦画","洋画"]:
      rs=get("/discover/movie",params).get("results",[])
     except Exception:
      rs=[]
+    if not rs: break
     for x in rs:
      countries=x.get("origin_country") or []
      if region_name=="洋画" and "JP" in countries: continue
      collected.append(x)
-    if len(collected)>=60: break
-   # Deduplicate and keep the strongest 50.
    seen_ids=set(); unique=[]
    for x in collected:
     if not x.get("id") or x["id"] in seen_ids: continue
     seen_ids.add(x["id"]); unique.append(x)
    unique.sort(key=lambda x:(x.get("vote_average",0),x.get("vote_count",0)),reverse=True)
-   rankings[region_name][genre_name][era_name]=[
-    {"id":x.get("id"),"title":x.get("title") or x.get("original_title"),"year":(x.get("release_date") or "")[:4],
-     "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
-     "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
-     "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
-    for x in unique[:50]
-   ]
-# Enrich ranking titles with runtime and current Japan flatrate subscription providers.
-# Cache results to avoid thousands of repeated API calls. Up to 350 new titles are filled per run.
-try:
- with open("data/ranking_metadata.json",encoding="utf-8") as fh:
-  ranking_meta=json.load(fh)
-except (FileNotFoundError,json.JSONDecodeError):
- ranking_meta={}
-new_meta_count=0
-provider_names={"8":"Netflix","9":"Prime Video","337":"Disney+","84":"U-NEXT","15":"Hulu"}
-for region_block in rankings.values():
- for genre_block in region_block.values():
-  for era_list in genre_block.values():
-   for item in era_list:
-    mid=item.get("id")
-    if not mid: continue
-    key=str(mid)
-    meta=ranking_meta.get(key)
-    if meta is None and new_meta_count<350:
-     try:
-      md=get("/movie/"+key,{"append_to_response":"watch/providers"})
-      jp=((md.get("watch/providers") or {}).get("results") or {}).get("JP") or {}
-      flatrate=jp.get("flatrate") or []
-      providers=[]
-      for p in flatrate:
-       pid=str(p.get("provider_id") or "")
-       name=provider_names.get(pid)
-       if name and name not in providers: providers.append(name)
-      meta={"runtime":md.get("runtime"),"subscriptions":providers,"checked_at":str(today)}
-      ranking_meta[key]=meta
-      new_meta_count+=1
-     except Exception:
-      meta={}
-    meta=meta or {}
-    item["runtime"]=meta.get("runtime")
-    item["subscriptions"]=meta.get("subscriptions") or []
-with open("data/ranking_metadata.json","w",encoding="utf-8") as fh:
- json.dump(ranking_meta,fh,ensure_ascii=False,indent=2)
-
+   rows=[{"id":x.get("id"),"title":x.get("title") or x.get("original_title"),
+          "year":(x.get("release_date") or "")[:4],
+          "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
+          "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
+          "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))} for x in unique[:200]]
+   safe_region="jp" if region_name=="邦画" else "foreign"
+   safe_genre=str(genre_ids[0])
+   safe_era=re.sub(r"[^0-9A-Za-z]+","-",era_name).strip("-") or "all"
+   fname=f"{safe_region}-{safe_genre}-{safe_era}.json"
+   with open("data/rankings/"+fname,"w",encoding="utf-8") as fh:
+    json.dump({"region":region_name,"genre":genre_name,"era":era_name,"items":rows},fh,ensure_ascii=False,indent=2)
+   manifest["filters"][region_name][genre_name][era_name]={"file":"data/rankings/"+fname,"count":len(rows)}
+   rankings[region_name].setdefault(genre_name,{})[era_name]=rows[:50]
+with open("data/rankings_manifest.json","w",encoding="utf-8") as fh:
+ json.dump(manifest,fh,ensure_ascii=False,indent=2)
 with open("data/rankings.json","w",encoding="utf-8") as fh:
- json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending; Japanese films min 50 votes, foreign films min 300 votes; up to 50 titles per genre and era","rankings":rankings},fh,ensure_ascii=False,indent=2)
+ json.dump({"generated_at":manifest["generated_at"],"method":"TMDB vote_average descending; static shards, up to 200 titles per filter","rankings":rankings},fh,ensure_ascii=False,indent=2)
+
 # Refresh Japan all-time box office top 100 from Kogyo Tsushinsha (official source).
 try:
  req=urllib.request.Request("https://kogyotsushin.com/archives/alltime/",headers={"User-Agent":"Mozilla/5.0"})

@@ -29,7 +29,7 @@ button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top
 <section class="hero"><div class="eyebrow">STREAMING MOVIE GUIDE</div><h1>今夜、何観る？</h1><p>Netflix、Prime Video、Disney+、U-NEXT、Huluの新規配信開始と、日本の劇場公開をひとつのカレンダーで。</p></section>
 <div class="modeTabs"><button class="modeTab" data-mode="theatrical">🎬 劇場公開</button><button class="modeTab active" data-mode="streaming">▶ 配信公開</button><button class="modeTab" data-mode="tv">📺 TV放映</button></div><div class="chips" id="chips"></div>
 <div class="notice">日付は各サービスの新規配信開始日、または日本での劇場公開日です。配信開始日は確認できた情報のみ掲載しています。</div>
-<section class="section"><div class="sectionHead"><h2>新着映画カレンダー</h2><span class="small">配信開始・日本劇場公開</span></div><div class="calendar"><div class="legend" id="legend"></div><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div><div class="dates" id="dates"></div></div></section>
+<section class="section"><div class="sectionHead"><h2>新着映画カレンダー</h2><span class="small">配信開始・日本劇場公開</span></div><div class="calendar"><div class="legend" id="legend"></div><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <section class="section"><div class="sectionHead"><h2>作品一覧</h2><span class="small" id="count"></span></div><div class="grid" id="cards"></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.</footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
@@ -50,7 +50,7 @@ function renderCal(){
  let y=view.getFullYear(),mo=view.getMonth();
  $("#month").textContent=y+"年 "+(mo+1)+"月";
  let cal=document.querySelector(".calendar");
- let first=new Date(y,mo,1),start=new Date(y,mo,1-first.getDay());
+ let first=new Date(y,mo,1),offset=(first.getDay()+6)%7,start=new Date(y,mo,1-offset);
  function isoOf(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
  function groupHtml(ms,dateKey,maxThumbs){
   let grouped={};ms.forEach(m=>{let k=m.service||"劇場公開";(grouped[k]||(grouped[k]=[])).push(m)});
@@ -63,18 +63,18 @@ function renderCal(){
  }
  if(mode==="theatrical"){
   cal.classList.add("theatricalCompact");
-  $("#weekdays").innerHTML="<div>日</div><div>月〜木</div><div>金</div><div>土</div>";
+  $("#weekdays").innerHTML="<div>月〜木</div><div>金</div><div>土</div><div>日</div>";
   let out="";
   for(let w=0;w<6;w++){
    let base=new Date(start);base.setDate(start.getDate()+w*7);
-   let sun=new Date(base),mon=new Date(base);mon.setDate(base.getDate()+1),fri=new Date(base);fri.setDate(base.getDate()+5),sat=new Date(base);sat.setDate(base.getDate()+6);
+   let mon=new Date(base),fri=new Date(base);fri.setDate(base.getDate()+4),sat=new Date(base);sat.setDate(base.getDate()+5),sun=new Date(base);sun.setDate(base.getDate()+6);
    let now=new Date();
    function normalCell(d){
     let iso=isoOf(d),ms=dayMovies(iso),today=d.toDateString()===now.toDateString();
     return '<div class="day '+(d.getMonth()!==mo?'dim':'')+(today?' today':'')+'" data-date="'+iso+'"><b>'+d.getDate()+'</b>'+(ms.length?'<div class="calGroups">'+groupHtml(ms,iso,6)+'</div>':'')+'</div>'
    }
    let weekdayDates=[],weekdayMovies=[];
-   for(let k=1;k<=4;k++){let d=new Date(base);d.setDate(base.getDate()+k);weekdayDates.push(d);weekdayMovies.push(...dayMovies(isoOf(d)))}
+   for(let k=0;k<=3;k++){let d=new Date(base);d.setDate(base.getDate()+k);weekdayDates.push(d);weekdayMovies.push(...dayMovies(isoOf(d)))}
    let inMonth=weekdayDates.some(d=>d.getMonth()===mo);
    let labels=weekdayDates.map(d=>'<b>'+d.getDate()+'</b>').join('<span>·</span>');
    let grouped={};weekdayMovies.forEach(m=>{let k=m.service||"劇場公開";(grouped[k]||(grouped[k]=[])).push(m)});
@@ -84,7 +84,7 @@ function renderCal(){
     let hidden=Math.max(0,arr.length-visible);
     return '<div class="calGroup '+svcClass(svc)+'" data-range="'+weekdayDates.map(isoOf).join(",")+'" title="'+svc+' '+arr.length+'作品"><span class="calTotal">'+arr.length+'</span><div class="calPosters">'+thumbs+'</div>'+(hidden?'<span class="calHidden">+'+hidden+'</span>':'')+'</div>'
    }).join("");
-   out+=normalCell(sun)+'<div class="day '+(!inMonth?'dim':'')+'"><div class="weekdayRange">'+labels+'</div>'+(weekdayGroups?'<div class="calGroups">'+weekdayGroups+'</div>':'')+'</div>'+normalCell(fri)+normalCell(sat);
+   out+='<div class="day '+(!inMonth?'dim':'')+'"><div class="weekdayRange">'+labels+'</div>'+(weekdayGroups?'<div class="calGroups">'+weekdayGroups+'</div>':'')+'</div>'+normalCell(fri)+normalCell(sat)+normalCell(sun);
   }
   $("#dates").innerHTML=out;
   document.querySelectorAll(".calGroup[data-date]").forEach(x=>x.onclick=e=>{e.stopPropagation();openDay(x.dataset.date)});
@@ -93,7 +93,7 @@ function renderCal(){
   return;
  }
  cal.classList.remove("theatricalCompact");
- $("#weekdays").innerHTML="<div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>";
+ $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
  let out="";
  for(let i=0;i<42;i++){
   let d=new Date(start);d.setDate(start.getDate()+i);

@@ -249,7 +249,9 @@ function theaterScheduleHtml(m){
  let names=(theaterSchedules.theaters||[]).map(x=>({...x,theater:x.name}));
  let prefecture=PREFECTURES.includes(selectedTheaterPrefecture)?selectedTheaterPrefecture:"神奈川県";
  let selector='<div class="theaterRegion"><label for="theaterPrefecture">都道府県</label><select id="theaterPrefecture" onchange="setTheaterPrefecture(this.value)">'+PREFECTURES.map(p=>'<option value="'+p+'"'+(p===prefecture?' selected':'')+'>'+p+'</option>').join("")+'</select></div>';
- let rows=hits.filter(x=>theaterPrefecture(x)===prefecture),byTheater=new Map();
+ let today=new Date(),limit=new Date(today);limit.setDate(today.getDate()+3);
+ let minDate=today.toLocaleDateString("sv-SE"),maxDate=limit.toLocaleDateString("sv-SE");
+ let rows=hits.filter(x=>theaterPrefecture(x)===prefecture&&x.date>=minDate&&x.date<=maxDate),byTheater=new Map();
  rows.forEach(x=>{if(!byTheater.has(x.theater))byTheater.set(x.theater,[]);byTheater.get(x.theater).push(x)});
  if(!rows.length){
   let links=names.filter(x=>theaterPrefecture(x)===prefecture).map(t=>'<a target="_blank" rel="noopener noreferrer" href="https://cinema.109cinemas.net/cgi-bin/pc/site/det.cgi?tsc='+encodeURIComponent(t.code)+'">'+t.name+'公式</a>').join("　");
@@ -270,7 +272,7 @@ function theaterScheduleHtml(m){
   }).join("");
   return '<div class="theaterBox"><div class="theaterHead"><div><div class="theaterName">'+name+'</div><div class="small">'+area+'</div></div><a target="_blank" rel="noopener noreferrer" class="small" href="'+src+'">公式</a></div>'+dates+'</div>'
  }).join("");
- return selector+'<div class="small">'+prefecture+' · 上映時刻を確認できた'+entries.length+'館</div><div class="theaterSchedules">'+boxes+'</div>'+(entries.length>5&&!theaterExpanded?'<button type="button" class="theaterMore" onclick="showMoreTheaters()">ほかの上映館を見る（残り'+(entries.length-5)+'館）</button>':"")
+ return selector+'<div class="small">'+prefecture+' · 今日〜3日後 · 上映時刻を確認できた'+entries.length+'館</div><div class="theaterSchedules">'+boxes+'</div>'+(entries.length>5&&!theaterExpanded?'<button type="button" class="theaterMore" onclick="showMoreTheaters()">ほかの上映館を見る（残り'+(entries.length-5)+'館）</button>':"")
 }
 function movieHistoryHtml(m){
  const rows=(releaseHistory.records||[]),key=normTitle(m.title),alt=normTitle(m.original_title||"");

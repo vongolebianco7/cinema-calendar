@@ -1,4 +1,4 @@
-import os,json,urllib.request,urllib.parse,datetime,re,html
+import os,json,urllib.request,urllib.parse,datetime,re,html,difflib
 KEY=os.environ["TMDB_API_KEY"]; BASE="https://api.themoviedb.org/3"
 def get(path,params={}):
  p=dict(params);p["api_key"]=KEY;p.setdefault("language","ja-JP")
@@ -85,6 +85,7 @@ def search_movie_match(title, original_title=None):
  if simplified and simplified!=title: variants.append(simplified)
  if original_title: variants.append(original_title)
  seen_queries=set()
+ fallback=[]
  for name in variants:
   if not name or name in seen_queries:continue
   seen_queries.add(name)
@@ -92,10 +93,22 @@ def search_movie_match(title, original_title=None):
    results=get("/search/movie",{"query":name,"region":"JP","include_adult":"false"}).get("results",[])
   except Exception:continue
   needle=norm_movie_title(name)
-  for x in results:
+  for rank,x in enumerate(results[:10]):
    candidate_names=[x.get("title"),x.get("original_title")]
-   if needle and any(norm_movie_title(z)==needle for z in candidate_names):
+   normalized=[norm_movie_title(z) for z in candidate_names if z]
+   if needle and needle in normalized:
     return x
+   # Allow close title matches so posters lost by punctuation/subtitle differences
+   # can recover, while keeping a conservative threshold to avoid wrong artwork.
+   for cand in normalized:
+    if not needle or not cand:continue
+    ratio=difflib.SequenceMatcher(None,needle,cand).ratio()
+    contains=(min(len(needle),len(cand))>=4 and (needle in cand or cand in needle))
+    if ratio>=0.78 or contains:
+     fallback.append((ratio+(0.03 if rank==0 else 0),x))
+ if fallback:
+  fallback.sort(key=lambda z:z[0],reverse=True)
+  return fallback[0][1]
  return None
 
 # Enrich verified streaming premieres with TMDB metadata/posters by title.

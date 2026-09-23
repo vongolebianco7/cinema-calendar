@@ -34,6 +34,22 @@ try:
  with open("data/streaming.json",encoding="utf-8") as fh: streaming=json.load(fh)
 except FileNotFoundError:
  streaming={"generated_at":None,"movies":[]}
-stream_movies=[m for m in streaming.get("movies",[]) if m.get("event")=="streaming" and m.get("date") and m.get("service")]\n# Enrich verified streaming premieres with TMDB metadata/posters by title; the date/service remain sourced from official announcements.\nfor m in stream_movies:\n try:\n  q=get("/search/movie",{"query":m["title"],"region":"JP"}).get("results",[])\n  if q:\n   x=q[0]; m["id"]=x.get("id"); m["poster"]=("https://image.tmdb.org/t/p/w500"+x["poster_path"]) if x.get("poster_path") else m.get("poster"); m["score"]=x.get("vote_average",m.get("score",0)); m["votes"]=x.get("vote_count",m.get("votes",0)); m["overview"]=x.get("overview",m.get("overview","")); m["tmdb"]="https://www.themoviedb.org/movie/"+str(x["id"])\n except Exception: pass\nevents=theatrical+stream_movies
+stream_movies=[m for m in streaming.get("movies",[]) if m.get("event")=="streaming" and m.get("date") and m.get("service")]
+# Enrich verified streaming premieres with TMDB metadata/posters by title.
+# The premiere date and service always remain sourced from official announcements.
+for m in stream_movies:
+ try:
+  q=get("/search/movie",{"query":m["title"],"region":"JP"}).get("results",[])
+  if q:
+   x=q[0]
+   m["id"]=x.get("id")
+   m["poster"]=("https://image.tmdb.org/t/p/w500"+x["poster_path"]) if x.get("poster_path") else m.get("poster")
+   m["score"]=x.get("vote_average",m.get("score",0))
+   m["votes"]=x.get("vote_count",m.get("votes",0))
+   m["overview"]=x.get("overview",m.get("overview",""))
+   m["tmdb"]="https://www.themoviedb.org/movie/"+str(x["id"])
+ except Exception:
+  pass
+events=theatrical+stream_movies
 events.sort(key=lambda x:x.get("date",""))
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)

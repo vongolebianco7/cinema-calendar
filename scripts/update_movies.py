@@ -22,7 +22,9 @@ for page in range(1,16):
    for x in jp.get("release_dates",[]):
     if x.get("type") in (2,3) and x.get("release_date"): dates.append(x["release_date"][:10])
   if not dates: continue
-  date=min(dates)
+  valid=[x for x in dates if str(start) <= x <= str(end)]
+  if not valid: continue
+  date=min(valid)
   items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"])}
 theatrical=sorted(items.values(),key=lambda x:x["date"])
 os.makedirs("data",exist_ok=True)

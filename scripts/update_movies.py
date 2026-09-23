@@ -25,7 +25,7 @@ for page in range(1,16):
   valid=[x for x in dates if str(start) <= x <= str(end)]
   if not valid: continue
   date=min(valid)
-  items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"]),"director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],"countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],"runtime":d.get("runtime"),"genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")]}
+  items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"]),"director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"director_id":next((x.get("id") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],"countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],"runtime":d.get("runtime"),"genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")]}
 theatrical=sorted(items.values(),key=lambda x:x["date"])
 os.makedirs("data",exist_ok=True)
 with open("data/theatrical.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"movies":theatrical},fh,ensure_ascii=False,indent=2)
@@ -88,6 +88,7 @@ for m in stream_movies:
    try:
     md=details(x["id"])
     m["director"]=next((z.get("name") for z in md.get("credits",{}).get("crew",[]) if z.get("job")=="Director"),None)
+    m["director_id"]=next((z.get("id") for z in md.get("credits",{}).get("crew",[]) if z.get("job")=="Director"),None)
     m["cast"]=[z.get("name") for z in md.get("credits",{}).get("cast",[])[:4] if z.get("name")]
     m["countries"]=[z.get("name") for z in md.get("production_countries",[]) if z.get("name")]
     m["runtime"]=md.get("runtime")
@@ -97,4 +98,46 @@ for m in stream_movies:
   pass
 events=theatrical+stream_movies
 events.sort(key=lambda x:x.get("date",""))
+
+# Cache filmographies for directors appearing in the calendar.
+try:
+ with open("data/directors.json",encoding="utf-8") as fh: director_data=json.load(fh)
+except (FileNotFoundError,json.JSONDecodeError):
+ director_data={"directors":{}}
+directors=director_data.get("directors",{})
+for m in events:
+ did=m.get("director_id")
+ if not did: continue
+ key=str(did)
+ if key in directors: continue
+ try:
+  credits=get(f"/person/{did}/movie_credits")
+ except Exception:
+  continue
+ seen_ids=set(); works=[]
+ for w in credits.get("crew",[]):
+  if w.get("job")!="Director" or not w.get("id") or w.get("id") in seen_ids: continue
+  rd=w.get("release_date") or ""
+  if not rd or rd[:10] >= str(today): continue
+  seen_ids.add(w["id"])
+  works.append({"id":w["id"],"title":w.get("title") or w.get("original_title"),"year":rd[:4],"date":rd[:10],"poster":("https://image.tmdb.org/t/p/w342"+w["poster_path"]) if w.get("poster_path") else None,"score":w.get("vote_average",0),"votes":w.get("vote_count",0),"tmdb":"https://www.themoviedb.org/movie/"+str(w["id"])})
+ works.sort(key=lambda x:x.get("date",""),reverse=True)
+ directors[key]={"id":did,"name":m.get("director"),"works":works[:30]}
+with open("data/directors.json","w",encoding="utf-8") as fh:
+ json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
+
+# Genre rankings: TMDB rating, with a minimum vote count to reduce tiny-sample outliers.
+rankings={}
+try:
+ genre_list=get("/genre/movie/list").get("genres",[])
+ for g in genre_list:
+  try:
+   rs=get("/discover/movie",{"with_genres":g["id"],"sort_by":"vote_average.desc","vote_count.gte":500,"primary_release_date.lte":str(today),"include_adult":"false","page":1}).get("results",[])
+  except Exception:
+   continue
+  rankings[g["name"]]=[{"id":x.get("id"),"title":x.get("title") or x.get("original_title"),"year":(x.get("release_date") or "")[:4],"poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,"score":x.get("vote_average",0),"votes":x.get("vote_count",0),"tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))} for x in rs[:12]]
+except Exception:
+ pass
+with open("data/rankings.json","w",encoding="utf-8") as fh:
+ json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"method":"TMDB vote_average descending, minimum 500 votes","genres":rankings},fh,ensure_ascii=False,indent=2)
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)

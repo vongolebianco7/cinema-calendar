@@ -54,7 +54,7 @@ for th in THEATERS:
                     t=clean(str(node))
                     if t:bits.append(t)
                 blob=" ".join(bits)
-                times=re.findall(r"([0-2]?\\d:[0-5]\\d)\\s*[～〜~-]\\s*([0-2]?\\d:[0-5]\\d)",blob)
+                times=re.findall(r"([0-2]?\d:[0-5]\d)\s*[～〜~-]\s*([0-2]?\d:[0-5]\d)",blob)
                 for start_time,end_time in times:
                     key=(current_title,txt,start_time,end_time)
                     if key in seen:continue

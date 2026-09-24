@@ -9,8 +9,13 @@
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}.card h2{font-size:16px;margin:0 0 6px}.place{font-size:12px;color:#d9dde3;line-height:1.5}.btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.btn{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-weight:700;font-size:12px}.note{margin:20px 0 36px;color:var(--muted);font-size:12px;line-height:1.7}.empty{grid-column:1/-1;padding:38px 12px;text-align:center;color:var(--muted)}
 @media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:25px}}
 @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+.brand{display:flex;align-items:center;text-decoration:none}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 </style></head><body>
-<header><div class="wrap top"><a class="brand" href="index.html">CINEM<span class="brandA">A</span>P</a><a href="rankings.html" class="small">ランキング</a></div></header>
+<header><div class="wrap top"><a class="brand" href="index.html"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></a><a href="rankings.html" class="small">ランキング</a></div></header>
 <main class="wrap">
 <section class="hero"><h1>全国映画館</h1><p>全国の映画館を検索できます。映画館マスタはWikidataのCC0データを利用し、上映時刻は転載せず公式サイトへ案内します。</p></section>
 <div class="search"><input id="q" placeholder="映画館名・住所・地域で検索"></div>

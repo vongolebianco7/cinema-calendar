@@ -12,6 +12,17 @@
 .chips{display:flex;gap:8px;overflow:auto;padding:8px 0 16px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:6px;padding:8px 11px;font-size:12px}.chip.active{background:var(--text);color:#111}
 .rankGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;color:inherit;text-decoration:none}.rankCard img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#222}.body{padding:9px}.no{color:var(--accent);font-weight:900;font-size:12px}.title{font-weight:750;font-size:13px;line-height:1.3;margin-top:3px}.meta{color:var(--muted);font-size:11px;margin-top:5px}.note{color:var(--muted);font-size:11px;line-height:1.5;margin:14px 0 24px}.moreWrap{text-align:center;margin:18px 0}.moreBtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:6px;padding:10px 20px;font-weight:800;display:none}.listRank{display:flex;flex-direction:column;gap:8px}.listRow{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:12px}.listNo{font-size:18px;font-weight:900;color:var(--accent)}.listTitle{font-weight:750;line-height:1.35}.listMeta{color:var(--muted);font-size:12px;text-align:right}
 @media(max-width:760px){.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,1fr);gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}
+
+/* CINEMAP visual pass */
+body{background:#090909}
+.panel,.movie,.dnaCard,.card,.rankCard{background:transparent!important;box-shadow:none!important}
+.panel,.movie,.dnaCard,.card,.rankCard{border-color:#272727!important;border-radius:6px!important}
+.hero{padding-top:22px}
+.hero h1{font-weight:750;letter-spacing:-.025em}
+.eyebrow{display:none}
+button,.primary,.secondary,.svc,.chip{border-radius:4px!important;box-shadow:none!important}
+.primary{background:#ef3f3f!important;color:#fff!important}
+.secondary,.svc,.chip{background:transparent!important}
 </style>
 </head>
 <body>

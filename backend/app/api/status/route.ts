@@ -10,6 +10,7 @@ export async function GET() {
       releaseCount,
       tvCount,
       theaterCount,
+      theaterMasterCount,
       latestMovie,
       latestRelease,
       latestTv,
@@ -19,6 +20,7 @@ export async function GET() {
       prisma.release.count(),
       prisma.tvBroadcast.count(),
       prisma.theaterShowtime.count(),
+      prisma.theater.count(),
       prisma.movie.findFirst({ orderBy: { updatedAt: "desc" }, select: { updatedAt: true } }),
       prisma.release.findFirst({ orderBy: { updatedAt: "desc" }, select: { updatedAt: true } }),
       prisma.tvBroadcast.findFirst({ orderBy: { updatedAt: "desc" }, select: { updatedAt: true } }),
@@ -34,6 +36,7 @@ export async function GET() {
         releases: { count: releaseCount, updated_at: latestRelease?.updatedAt ?? null },
         tv: { count: tvCount, updated_at: latestTv?.updatedAt ?? null },
         theaters: { count: theaterCount, updated_at: latestTheater?.updatedAt ?? null },
+        theater_master: { count: theaterMasterCount },
       },
     });
   } catch {

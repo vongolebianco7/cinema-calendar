@@ -9,7 +9,7 @@
 .pickerLabel{font-size:10px;color:#777;letter-spacing:.08em;margin-bottom:7px}.chips{display:flex;gap:7px;overflow:auto;scrollbar-width:none;padding:0 0 12px}.chip{white-space:nowrap;border:1px solid var(--line);background:transparent;color:#bbb;padding:8px 10px;border-radius:4px;font:inherit;font-size:11px}.chip.active{background:#eee;color:#111;border-color:#eee}
 .theaterHero{border-top:1px solid var(--line);padding:18px 0 10px}.theaterHero h2{font-size:25px;margin:0 0 5px}.theaterHero .area{font-size:12px;color:#999}.dateBar{display:flex;gap:6px;overflow:auto;padding:13px 0 12px}.dateBtn{border:1px solid #333;background:transparent;color:#bbb;padding:7px 10px;border-radius:4px;font-size:11px}.dateBtn.active{background:#fff;color:#111;border-color:#fff}
 .filmList{border-top:1px solid var(--line)}.film{padding:13px 0;border-bottom:1px solid #242424}.filmTitle{font-size:14px;font-weight:750;line-height:1.45}.showings{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.showing{font-size:11px;border:1px solid #343434;padding:6px 7px;min-width:72px}.showing b{display:block;font-size:12px;color:#eee}.showing span{display:block;color:#777;font-size:9px;margin-top:2px}.official{display:inline-block;margin-top:14px;font-size:11px;text-decoration:underline;color:#ccc}
-.concessions{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}.concessions h3{margin:0 0 10px;font-size:16px}.concessionCurrent{padding:10px 0}.concessionLabel{font-size:9px;letter-spacing:.1em;color:#777;margin-bottom:5px}.concessionNote{font-size:11px;color:#aaa;line-height:1.6}.flavors{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.flavor{font-size:10px;border:1px solid #343434;padding:5px 7px}.historyFood{margin-top:12px}.historyFood summary{font-size:11px;color:#bbb;cursor:pointer}.historyFood article{padding:9px 0;border-top:1px solid #242424}.historyFood b{font-size:11px}.historyFood .period{font-size:9px;color:#777;margin-top:3px}
+
 .verifiedNote{border-left:2px solid #666;padding:1px 0 1px 10px;margin:8px 0 18px;color:#888;font-size:11px;line-height:1.6}
 details.directory{border-top:1px solid var(--line);margin-top:8px;padding-top:16px}details.directory summary{cursor:pointer;font-size:13px;font-weight:700}.search{display:flex;gap:8px;margin:14px 0 10px}.search input{flex:1;background:#111;border:1px solid var(--line);color:#fff;border-radius:4px;padding:12px;font:inherit}.meta{color:var(--muted);font-size:11px;margin:4px 0 15px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{border-top:1px solid var(--line);padding:12px 3px}.card h3{font-size:13px;margin:0 0 5px}.place{font-size:10px;color:#999;line-height:1.5}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.btn{font-size:10px;text-decoration:underline;color:#aaa}.note{margin:18px 0 38px;color:var(--muted);font-size:11px;line-height:1.7}.empty{padding:26px 4px;color:var(--muted)}
 @media(max-width:720px){.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:25px}}
@@ -21,9 +21,9 @@ button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!im
 button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
 </style></head>
 <body>
-<header><div class="wrap top"><a href="index.html"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></a><nav class="topnav"><a href="index.html">カレンダー</a><a class="active" href="theaters.html">映画館</a><a href="rankings.html">ランキング</a></nav></div></header>
+<header><div class="wrap top"><a href="index.html"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></a><nav class="topnav"><a href="index.html">カレンダー</a><a class="active" href="theaters.html">映画館</a><a href="experience.html">上映体験</a><a href="rankings.html">ランキング</a></nav></div></header>
 <main class="wrap">
-<section class="hero"><h1>映画館から映画を見る。</h1><p>公式スケジュールを取得できる映画館だけを主役にします。館を選び、日付を選び、その日に何が上映されるかを見る。</p></section>
+<section class="hero"><h1>映画館から映画を見る。</h1><p>公式スケジュールを取得できる映画館だけを主役にします。館を選び、日付を選び、その日に何が上映されるかを見る。</p><p style="margin-top:10px"><a href="experience.html" style="text-decoration:underline">IMAX・Dolby・4DXなど上映体験の違いを見る →</a></p></section>
 
 <section class="section">
  <div class="sectionHead"><h2>公式スケジュール対応館</h2><span id="scheduleMeta">読み込み中…</span></div>
@@ -45,7 +45,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </main>
 <script>
 const $=s=>document.querySelector(s);
-let theaters=[],scheduleData={theaters:[],schedules:[]},concessions={theaters:{}},selectedTheater="",selectedDate="";
+let theaters=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
 async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
@@ -56,14 +56,6 @@ function renderTheaterChips(){
  if(!selectedTheater||!defs.some(t=>t.name===selectedTheater))selectedTheater=param("theater")&&defs.some(t=>t.name===param("theater"))?param("theater"):(defs[0]?.name||"");
  $("#theaterChips").innerHTML=defs.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+'</button>').join("");
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
-}
-function renderConcessions(name){
- const d=(concessions.theaters||{})[name];
- if(!d)return '<section class="concessions"><h3>売店</h3><div class="concessionNote">確認できる公式売店データはまだありません。</div></section>';
- let cur=d.current||{},hist=d.historical||[];
- let current='<div class="concessionCurrent"><div class="concessionLabel">CURRENT</div><div class="concessionNote">'+esc(cur.note||"現在の売店情報を確認中です。")+'</div>'+(cur.menu_page?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(cur.menu_page)+'">公式フード＆ドリンクメニュー</a>':'')+(cur.menu_updated?'<div class="period">公式ページ更新 '+esc(cur.menu_updated)+'</div>':'')+'</div>';
- let history=hist.length?'<details class="historyFood"><summary>過去に公式確認できたポップコーン・限定メニュー</summary>'+hist.map(x=>'<article><b>'+esc(x.item||x.category||"売店メニュー")+'</b>'+(x.flavors&&x.flavors.length?'<div class="flavors">'+x.flavors.map(y=>'<span class="flavor">'+esc(y)+'</span>').join("")+'</div>':'')+'<div class="period">'+esc(x.period||"")+'</div><div class="concessionNote">'+esc(x.note||"")+'</div>'+(x.source_url?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(x.source_url)+'">公式出典</a>':'')+'</article>').join("")+'</details>':'';
- return '<section class="concessions"><h3>売店・ポップコーン</h3>'+current+history+'</section>'
 }
 function renderTheaterDetail(){
  const defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=(scheduleData.schedules||[]).filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
@@ -81,7 +73,7 @@ function renderTheaterDetail(){
    '<div class="pickerLabel">DATE</div><div class="dateBar">'+dates.map(d=>'<button class="dateBtn '+(d===selectedDate?'active':'')+'" data-date="'+d+'">'+d.slice(5).replace("-","/")+'</button>').join("")+'</div>'+
    '<div class="verifiedNote">この欄は取得済みの公式上映スケジュールだけを表示しています。データにない上映を「上映なし」とは判断しません。</div>'+
    '<div class="filmList">'+(films.length?films.map(([title,shows])=>'<article class="film"><div class="filmTitle">'+esc(title)+'</div><div class="showings">'+shows.sort((a,b)=>a.start.localeCompare(b.start)).map(x=>'<div class="showing"><b>'+esc(x.start)+(x.end?'–'+esc(x.end):'')+'</b><span>'+esc(x.screen||"スクリーン未確認")+'</span></div>').join("")+'</div></article>').join(""):'<div class="empty">この日の取得済み上映データはありません。</div>')+'</div>'+
-   (source?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式スケジュールで確認</a>':'')+renderConcessions(def.name);
+   (source?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式スケジュールで確認</a>':'');
  document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selectedDate=b.dataset.date;renderTheaterDetail();updateUrl()})
 }
 function renderDirectory(){
@@ -93,14 +85,13 @@ function renderDirectory(){
 async function boot(){
  const base=await backend();
  try{
-  const [sr,dr,cr]=await Promise.all([
+  const [sr,dr]=await Promise.all([
    fetch("data/theater_schedules.json?"+Date.now(),{cache:"no-store"}),
-   (async()=>{let r;if(base)r=await fetch(base+"/api/theater-directory",{cache:"no-store"}).catch(()=>null);if(!r||!r.ok)r=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});return r})(),
-   fetch("data/theater_concessions.json?"+Date.now(),{cache:"no-store"}).catch(()=>null)
+   (async()=>{let r;if(base)r=await fetch(base+"/api/theater-directory",{cache:"no-store"}).catch(()=>null);if(!r||!r.ok)r=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});return r})()
   ]);
   if(!sr.ok)throw new Error("schedule load failed");
   scheduleData=await sr.json();
-  if(dr&&dr.ok){const d=await dr.json();theaters=d.theaters||[]} if(cr&&cr.ok)concessions=await cr.json();
+  if(dr&&dr.ok){const d=await dr.json();theaters=d.theaters||[]}
   $("#scheduleMeta").textContent=(scheduleData.theaters||[]).length+"館対応 · 取得 "+String(scheduleData.generated_at||"").slice(0,10);
   selectedTheater=param("theater");
   selectedDate=param("date");

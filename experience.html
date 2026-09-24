@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>上映体験 | CINEMAP</title>
+<meta name="description" content="シネスコ、IMAX、IMAX GT、Dolby Cinema、Dolby Atmos、4DX、MX4D、ScreenXの違いを視覚的に比較。">
+<style>
+:root{--bg:#090909;--panel:#111;--panel2:#171717;--text:#f4f4f4;--muted:#929292;--line:#292929;--blue:#38a9ff;--green:#37d08b;--gold:#e5b64d;--violet:#c96aff;--red:#ff5757}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1120px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
+.top{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090909f2;backdrop-filter:blur(12px);z-index:20}.brandLogoPlate{display:inline-flex;align-items:center;background:#fff;border-radius:4px;padding:4px 7px;line-height:0}.brandLogo{display:block;height:26px;width:auto}.topnav{display:flex;gap:16px;font-size:12px;color:#bbb}.topnav a.active{color:#fff}
+.hero{padding:34px 0 18px}.eyebrow{font-size:10px;letter-spacing:.14em;color:#777;font-weight:800}.hero h1{font-size:clamp(30px,6vw,50px);line-height:1.05;margin:8px 0 10px;letter-spacing:-.035em}.hero p{margin:0;color:var(--muted);line-height:1.65;max-width:760px}
+.section{padding:18px 0 34px;border-top:1px solid var(--line)}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px}.sectionHead h2{font-size:22px;margin:0}.sectionHead p{margin:0;color:var(--muted);font-size:12px;max-width:560px;line-height:1.55}
+.ratioGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}.ratioCard{border:1px solid var(--line);background:#0d0d0d;padding:12px;border-radius:8px}.ratioCard h3{margin:0 0 4px;font-size:17px}.ratioCard .ratio{font-size:12px;color:#aaa}.ratioCard.scope h3{color:var(--gold)}.ratioCard.imax h3{color:var(--blue)}.ratioCard.gt h3{color:var(--green)}
+.frameWrap{margin-top:12px;display:flex;align-items:center;justify-content:center;min-height:310px}.movieFrame{width:100%;display:block;border:2px solid currentColor;background:#03131f}.scope .movieFrame{aspect-ratio:2.39/1;color:var(--gold)}.imax .movieFrame{aspect-ratio:1.90/1;color:var(--blue)}.gt .movieFrame{aspect-ratio:1.43/1;color:var(--green)}
+.ratioMeta{display:flex;justify-content:space-between;margin-top:9px;font-size:11px;color:#aaa}.ratioNote{margin-top:10px;color:#888;font-size:11px;line-height:1.6}.formula{margin-top:14px;padding:11px 12px;border-left:2px solid #555;color:#aaa;font-size:11px;line-height:1.65}.cropLegend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}.cropLegend span{font-size:10px;color:#aaa}.cropLegend i{display:inline-block;width:9px;height:9px;margin-right:5px;border-radius:2px}
+.compareGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.compareCard{border:1px solid var(--line);background:#0d0d0d;border-radius:8px;overflow:hidden}.compareCard h3{font-size:15px;margin:0;padding:12px 12px 4px}.compareCard p{color:#999;font-size:11px;line-height:1.55;margin:0;padding:0 12px 12px}.sceneBox{padding:10px 10px 0}.sceneBox svg{width:100%;aspect-ratio:16/9;display:block;border:1px solid #2d2d2d}.normalScene svg{filter:saturate(.92) contrast(.96) brightness(.93)}.laserScene svg{filter:saturate(1.08) contrast(1.08) brightness(1.05)}.dolbyScene svg{filter:saturate(1.12) contrast(1.18) brightness(.98)}
+.soundGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.soundCard{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.soundCard h3{margin:0 0 12px;font-size:15px}.auditorium{position:relative;height:160px;border:1px solid #252525;background:linear-gradient(#101821,#090b0e);overflow:hidden}.screen{position:absolute;left:24%;right:24%;top:18px;height:34px;border:2px solid #7c8ca0;background:#20384b}.seat{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:22px;height:32px;border-radius:12px 12px 4px 4px;background:#555}.speaker{position:absolute;width:12px;height:16px;border:1px solid #aaa;background:#222}.spL{left:16px;top:68px}.spR{right:16px;top:68px}.spB1{left:27%;bottom:16px}.spB2{right:27%;bottom:16px}.spT1{left:27%;top:8px}.spT2{right:27%;top:8px}.spT3{left:48%;top:5px}.soundWave{position:absolute;border:1px solid currentColor;border-left:0;border-right:0;border-radius:50%;opacity:.65}.wave1{left:50%;top:58px;width:70px;height:50px;transform:translateX(-50%)}.wave2{left:50%;top:45px;width:110px;height:75px;transform:translateX(-50%)}.standardSound{color:#8894a3}.imaxSound{color:var(--blue)}.atmosSound{color:var(--violet)}
+.specialGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.special{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.special h3{margin:0 0 8px;font-size:17px}.special p{font-size:11px;color:#999;line-height:1.55;margin:8px 0 0}.chair{width:70px;height:62px;margin:14px auto;position:relative}.chair:before{content:"";position:absolute;width:42px;height:44px;left:14px;top:0;background:#39414b;border-radius:10px 10px 4px 4px}.chair:after{content:"";position:absolute;width:58px;height:17px;left:6px;bottom:0;background:#2b3138;border-radius:4px}.fx{display:flex;justify-content:center;gap:8px;font-size:18px}
+.screenxRoom{height:150px;position:relative;perspective:420px;margin-top:8px}.sxCenter{position:absolute;left:22%;right:22%;top:28px;height:88px;border:2px solid #d7a63a;overflow:hidden}.sxLeft,.sxRight{position:absolute;top:38px;width:24%;height:72px;border:2px solid #d7a63a;overflow:hidden}.sxLeft{left:0;transform:rotateY(42deg);transform-origin:right}.sxRight{right:0;transform:rotateY(-42deg);transform-origin:left}.screenxRoom svg{width:100%;height:100%;display:block}.note{font-size:11px;line-height:1.65;color:#888;margin:14px 0 0}.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.cta a{font-size:12px;border:1px solid #3a3a3a;padding:9px 12px;border-radius:4px;background:#121212}
+@media(max-width:760px){.ratioGrid,.compareGrid,.soundGrid,.specialGrid{grid-template-columns:1fr}.frameWrap{min-height:0}.sectionHead{display:block}.sectionHead p{margin-top:6px}.topnav{gap:10px;font-size:11px}.hero{padding-top:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><a href="index.html"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></a><nav class="topnav"><a href="index.html">カレンダー</a><a href="theaters.html">映画館</a><a class="active" href="experience.html">上映体験</a><a href="rankings.html">ランキング</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">CINEMA EXPERIENCE</div><h1>同じ映画でも、<br>上映方式でここまで変わる。</h1><p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p></section>
+
+<section class="section">
+ <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。基準はIMAX GTの1.43:1フルフレームで、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
+ <div class="ratioGrid">
+  <article class="ratioCard scope"><h3>シネスコ</h3><div class="ratio">2.39:1</div><div class="frameWrap">
+   <svg class="movieFrame" viewBox="0 140.445 1000 418.410" preserveAspectRatio="none" role="img" aria-label="シネスコ2.39対1の深海シーン">
+    <defs><linearGradient id="sea1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
+    <rect width="1000" height="699.301" fill="url(#sea1)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
+    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
+    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
+    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
+    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
+    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
+   </svg></div>
+   <div class="ratioMeta"><span>W = 1000</span><span>H = 418.41</span></div><div class="ratioNote">上下を最も大きくカット。中央のダイバーは見える一方、上のクジラや下の海底は見えにくくなります。</div>
+  </article>
+  <article class="ratioCard imax"><h3>IMAX</h3><div class="ratio">1.90:1</div><div class="frameWrap">
+   <svg class="movieFrame" viewBox="0 86.492 1000 526.316" preserveAspectRatio="none" role="img" aria-label="IMAX1.90対1の深海シーン">
+    <defs><linearGradient id="sea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
+    <rect width="1000" height="699.301" fill="url(#sea2)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
+    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
+    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
+    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
+    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
+    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
+   </svg></div>
+   <div class="ratioMeta"><span>W = 1000</span><span>H = 526.32</span></div><div class="ratioNote">シネスコより上下が見えます。クジラの一部や海底側の情報が増えます。</div>
+  </article>
+  <article class="ratioCard gt"><h3>IMAX GT</h3><div class="ratio">1.43:1</div><div class="frameWrap">
+   <svg class="movieFrame" viewBox="0 0 1000 699.301" preserveAspectRatio="none" role="img" aria-label="IMAX GT1.43対1の深海シーン">
+    <defs><linearGradient id="sea3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
+    <rect width="1000" height="699.301" fill="url(#sea3)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
+    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
+    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
+    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
+    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
+    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
+   </svg></div>
+   <div class="ratioMeta"><span>W = 1000</span><span>H = 699.30</span></div><div class="ratioNote">基準となるフルフレーム。対応作品・対応劇場では、上のクジラから下の海底まで最も広く見えます。</div>
+  </article>
+ </div>
+ <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ 1000÷2.39 = 418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※これは「見える範囲」の比較です。実際のスクリーンの横幅・高さは映画館ごとに異なります。IMAXだから必ず物理的に大きい、という意味ではありません。</div>
+</section>
+
+<section class="section">
+ <div class="sectionHead"><h2>映像の仕上がり</h2><p>同じ深海シーンを使い、明るさ・黒の沈み・コントラストの違いを直感的に比較するためのガイドです。実際の見え方は劇場・作品・マスターで変わります。</p></div>
+ <div class="compareGrid">
+  <article class="compareCard normalScene"><h3>通常上映</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>基準となる表示。</p></article>
+  <article class="compareCard laserScene"><h3 style="color:var(--blue)">IMAXレーザー</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>レーザー投影による高い明るさ・コントラストをイメージ。</p></article>
+  <article class="compareCard dolbyScene"><h3 style="color:var(--violet)">Dolby Cinema</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>深い黒と高コントラストを意識した比較。</p></article>
+ </div>
+</section>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="colorScene" viewBox="0 0 1000 562">
+  <defs><linearGradient id="seaColor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a9dcc"/><stop offset=".55" stop-color="#075d86"/><stop offset="1" stop-color="#021923"/></linearGradient></defs>
+  <rect width="1000" height="562" fill="url(#seaColor)"/><circle cx="780" cy="95" r="120" fill="#82e2ff" opacity=".18"/>
+  <path d="M315 110 C460 45 650 55 790 110 C680 122 560 145 445 158 C400 154 355 135 315 110Z" fill="#0a2b3b"/>
+  <g stroke="#e8f9ff" stroke-width="8" fill="none"><circle cx="500" cy="300" r="26"/><path d="M500 326v80M500 356l-48 52M500 356l48 52M500 406l-35 70M500 406l35 70"/></g>
+  <path d="M0 505 Q90 445 185 510 T350 510 V562H0Z" fill="#ff8c52"/><ellipse cx="810" cy="415" rx="55" ry="36" fill="#c35cff"/>
+  <g fill="#f7d245"><circle cx="160" cy="245" r="7"/><circle cx="205" cy="270" r="5"/><circle cx="740" cy="245" r="6"/></g>
+ </symbol>
+</svg>
+
+<section class="section">
+ <div class="sectionHead"><h2>音</h2><p>画面比率とは別の軸。通常のサラウンド、IMAXの多チャンネル音響、Dolby Atmosの高さ方向を含む配置を分けて見ます。</p></div>
+ <div class="soundGrid">
+  <article class="soundCard standardSound"><h3>通常 5.1 / 7.1ch</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><div class="seat"></div><i class="soundWave wave1"></i></div><p class="note">前後左右を中心に包むサラウンド。</p></article>
+  <article class="soundCard imaxSound"><h3>IMAX 12ch</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><i class="speaker spT1"></i><i class="speaker spT2"></i><div class="seat"></div><i class="soundWave wave1"></i><i class="soundWave wave2"></i></div><p class="note">対応設備では、より多方向から音を定位。</p></article>
+  <article class="soundCard atmosSound"><h3>Dolby Atmos</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><i class="speaker spT1"></i><i class="speaker spT2"></i><i class="speaker spT3"></i><div class="seat"></div><i class="soundWave wave1"></i><i class="soundWave wave2"></i></div><p class="note">天井を含む3次元的な音場を表現。</p></article>
+ </div>
+</section>
+
+<section class="section">
+ <div class="sectionHead"><h2>体感・特殊上映</h2><p>映像の比率や画質とは別に、座席や周囲の演出そのものが変わります。</p></div>
+ <div class="specialGrid">
+  <article class="special"><h3 style="color:var(--red)">4DX</h3><div class="chair"></div><div class="fx">↕︎　💨　💧　⚡</div><p>動く座席と風・水などの環境効果。</p></article>
+  <article class="special"><h3 style="color:var(--blue)">MX4D</h3><div class="chair"></div><div class="fx">↕︎　💨　💦　✨</div><p>モーションシートと各種特殊効果。</p></article>
+  <article class="special"><h3 style="color:var(--gold)">ScreenX</h3><div class="screenxRoom">
+    <div class="sxLeft"><svg viewBox="0 0 300 180" preserveAspectRatio="none"><rect width="300" height="180" fill="#064a6f"/><path d="M0 150L300 70V180H0Z" fill="#ff8c52"/></svg></div>
+    <div class="sxCenter"><svg viewBox="0 0 500 280" preserveAspectRatio="none"><rect width="500" height="280" fill="#0b739d"/><path d="M130 50C240 15 375 30 455 70C350 78 275 92 190 105Z" fill="#092b3d"/><circle cx="250" cy="160" r="14" fill="#e8f9ff"/></svg></div>
+    <div class="sxRight"><svg viewBox="0 0 300 180" preserveAspectRatio="none"><rect width="300" height="180" fill="#064a6f"/><ellipse cx="90" cy="120" rx="35" ry="24" fill="#bd5cff"/></svg></div>
+   </div><p>正面の同じシーンが左右へ連続して拡張。3枚の同じ映像を並べる方式ではありません。</p></article>
+ </div>
+ <div class="cta"><a href="theaters.html">対応映画館を見る</a><a href="index.html">作品カレンダーへ</a></div>
+</section>
+</main>
+</body></html>

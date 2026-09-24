@@ -19,10 +19,15 @@ body{background:#090909}
 button,.primary,.secondary,.svc,.chip{border-radius:4px!important;box-shadow:none!important}
 .primary{background:#ef3f3f!important;color:#fff!important}
 .secondary,.svc,.chip{background:transparent!important}
+
+.brand{display:flex;align-items:center;text-decoration:none}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand">CINEM<span class="brandA">A</span>P</div><a href="index.html">← カレンダー</a></div></header>
+<header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></div><a href="index.html">← カレンダー</a></div></header>
 <main class="wrap">
 <section class="hero"><div class="eyebrow">MOVIE MATCH</div><h1>2人で何観る？</h1><p>お互いが「観たい」と選んだ映画だけを最後に表示。ログインもDBも不要。選択内容は共有URLに保存します。URLを知る人は読み取れるため、送り先にご注意ください。</p></section>
 

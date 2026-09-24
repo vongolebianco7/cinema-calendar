@@ -1,13 +1,8 @@
 name: Update movie data
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - scripts/update_movies.py
-      - scripts/update_availability.py
-      - .github/workflows/update-movies.yml
   schedule:
-    - cron: "17 18 * * 1,4"
+    - cron: "17 18 * * *"
 concurrency:
   group: cinema-database-write
   cancel-in-progress: false

@@ -56,6 +56,10 @@
 
 
 .gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
+
+.aspectInfographicWrap{margin-top:22px;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;background:#050607}
+.aspectInfographic{display:block;width:100%;height:auto}
+@media(max-width:700px){.aspectInfographicWrap{margin-left:-8px;margin-right:-8px;border-radius:12px}}
 </style>
 </head>
 <body>
@@ -82,22 +86,10 @@
 
 <section class="section">
  <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。基準はIMAX GTの1.43:1フルフレームで、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
- <div class="ratioGrid">
-  <article class="ratioCard scope"><h3>シネマスコープ</h3><div class="ratio">2.39:1</div><div class="frameWrap">
-   <div class="movieFrame"><img class="deepSeaPhoto" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="深海を泳ぐ大型海洋生物とダイバー"></div></div>
-   <div class="ratioMeta"><span>W = 1000</span><span>H = 418.41</span></div><div class="ratioNote">上下を最も大きくカット。中央のダイバーは見える一方、上のクジラや下の海底は見えにくくなります。</div>
-  </article>
-  <article class="ratioCard imax"><h3>IMAX</h3><div class="ratio">1.90:1</div><div class="frameWrap">
-   <div class="movieFrame"><img class="deepSeaPhoto" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="深海を泳ぐ大型海洋生物とダイバー"></div></div>
-   <div class="ratioMeta"><span>W = 1000</span><span>H = 526.32</span></div><div class="ratioNote">シネマスコープより上下が見えます。クジラの一部や海底側の情報が増えます。</div>
-  </article>
-  <article class="ratioCard gt"><h3>IMAX GT</h3><div class="ratio">1.43:1</div><div class="frameWrap">
-   <div class="movieFrame"><img class="deepSeaPhoto" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="深海を泳ぐ大型海洋生物とダイバー"></div></div>
-   <div class="ratioMeta"><span>W = 1000</span><span>H = 699.30</span></div><div class="ratioNote">基準となるフルフレーム。対応作品・対応劇場では、上のクジラから下の海底まで最も広く見えます。</div>
-  </article>
+ <div class="aspectInfographicWrap">
+  <img class="aspectInfographic" src="assets/cinemap-underwater-comparison.jpg?v=1" alt="同じ海中シーンをシネマスコープ2.39:1、IMAX 1.90:1、IMAX GT 1.43:1で比較した図。上のクジラ、中央のダイバー、下の珊瑚・海底生物・沈船が比率ごとにどこまで見えるかを示す。">
  </div>
- <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ 1000÷2.39 = 418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※これは「見える範囲」の比較です。実際のスクリーンの横幅・高さは映画館ごとに異なります。IMAXだから必ず物理的に大きい、という意味ではありません。</div>
-</section>
+ <div class="formula">同じ横幅で比較すると、2.39:1 → 高さ 418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※「見える範囲」の概念比較です。実際の作品では撮影・マスター・上映方式によって使用される画角が異なります。スクリーン実寸とも別の話です。</div></section>
 
 <section class="section">
  <div class="sectionHead"><h2>映像の仕上がり</h2><p>同じ深海シーンを使い、明るさ・黒の沈み・コントラストの違いを直感的に比較するためのガイドです。実際の見え方は劇場・作品・マスターで変わります。</p></div>

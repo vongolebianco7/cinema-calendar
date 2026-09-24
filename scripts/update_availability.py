@@ -42,10 +42,16 @@ for m in movies:
  try:date=datetime.date.fromisoformat(m["date"])
  except (KeyError,ValueError):continue
  distance=abs((date-TODAY).days)
- if distance>110:continue
+ if distance>180:continue
  if mid not in by_id or distance<by_id[mid][0]:by_id[mid]=(distance,m)
 
-selected=sorted(by_id.items(),key=lambda item:item[1][0])[:100]
+# Prioritize streaming calendar entries, then nearby theatrical releases.
+# Coverage was previously capped at 100 titles, which made later-added
+# providers such as Apple TV+, ABEMA and Lemino appear under-populated.
+selected=sorted(
+ by_id.items(),
+ key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1,item[1][0])
+)[:400]
 count=0
 for mid,(_,m) in selected:
  url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})

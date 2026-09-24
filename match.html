@@ -133,8 +133,8 @@ function finishVoting(){
  }else showResults()
 }
 async function doShare(){
- let url=location.href,text="CINEMAPで『2人で何観る？』やろう";
- if(navigator.share){try{await navigator.share({title:"2人で何観る？",text,url});return}catch(e){}}
+ let url=location.href,text="CINEMAPの「ふたりで選ぶ」";
+ if(navigator.share){try{await navigator.share({title:"ふたりで選ぶ",text,url});return}catch(e){}}
  try{await navigator.clipboard.writeText(url);alert("共有リンクをコピーしました")}catch(e){prompt("このリンクを共有してください",url)}
 }
 function matchReason(m){

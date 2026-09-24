@@ -431,6 +431,20 @@ function renderLegend(){
 }
 function setMode(next){mode=next;active="すべて";render()}
 function render(){renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
+async function fetchPrimaryMovieData(){
+  try{
+    const cfgRes=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});
+    if(cfgRes.ok){
+      const cfg=await cfgRes.json();
+      if(cfg&&cfg.enabled&&cfg.base_url){
+        const base=String(cfg.base_url).replace(/\/$/,"");
+        const apiRes=await fetch(base+"/api/calendar",{cache:"no-store"});
+        if(apiRes.ok)return apiRes;
+      }
+    }
+  }catch(e){console.warn("API backend unavailable; using static JSON fallback",e)}
+  return fetchPrimaryMovieData();
+}
 $("#q").oninput=renderSearchResults;$("#q").onkeydown=e=>{if(e.key==="Enter"){let rows=searchMovieResults();if(rows.length){$("#searchResults").classList.remove("show");openMovie(rows[0])}}};document.addEventListener("click",e=>{if(!e.target.closest(".searchBox"))$("#searchResults").classList.remove("show")});$("#prev").onclick=()=>{if(mode==="streaming"||mode==="tv")view.setDate(view.getDate()-28);else view.setMonth(view.getMonth()-1);renderCal()};$("#next").onclick=()=>{if(mode==="streaming"||mode==="tv")view.setDate(view.getDate()+28);else view.setMonth(view.getMonth()+1);renderCal()};$("#close").onclick=hideModal;$("#modal").onclick=e=>{if(e.target.id==="modal")hideModal()};async function boot(){try{let [mr,tr,dr,fr,er,sr,hr,ar,lr]=await Promise.all([fetch("data/movies.json?"+Date.now()),fetch("data/tv.json?"+Date.now()).catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetch("data/theater_schedules.json?"+Date.now()).catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();movies=md.movies||[];if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}if(fr&&fr.ok){let fd=await fr.json();let fm=(fd.filmarks_current&&fd.filmarks_current.items)||[];let map=new Map(fm.map(x=>[x.title,x.score]));movies.forEach(m=>{if(map.has(m.title))m.filmarks_score=map.get(m.title)})}render()}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'}}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#drawer").classList.add("show");$("#drawerMask").classList.add("show")}function closeDrawer(){$("#drawer").classList.remove("show");$("#drawerMask").classList.remove("show")}$("#menuBtn").onclick=openDrawer;$("#drawerClose").onclick=closeDrawer;$("#drawerMask").onclick=closeDrawer;
 boot();

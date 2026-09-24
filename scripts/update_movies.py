@@ -1,8 +1,20 @@
-import os,json,urllib.request,urllib.parse,datetime,re,html,difflib
+import os,json,urllib.request,urllib.parse,datetime,re,html,difflib,time
 KEY=os.environ["TMDB_API_KEY"]; BASE="https://api.themoviedb.org/3"
+MAX_TMDB_REQUESTS=180
+TMDB_REQUESTS=0
+LAST_TMDB_REQUEST_AT=0.0
 def get(path,params={}):
+ global TMDB_REQUESTS,LAST_TMDB_REQUEST_AT
+ if TMDB_REQUESTS>=MAX_TMDB_REQUESTS:
+  raise RuntimeError("TMDB request budget reached")
+ wait=max(0.0,0.35-(time.monotonic()-LAST_TMDB_REQUEST_AT))
+ if wait:time.sleep(wait)
  p=dict(params);p["api_key"]=KEY;p.setdefault("language","ja-JP")
- with urllib.request.urlopen(BASE+path+"?"+urllib.parse.urlencode(p),timeout=30) as r:return json.load(r)
+ with urllib.request.urlopen(BASE+path+"?"+urllib.parse.urlencode(p),timeout=30) as r:
+  data=json.load(r)
+ TMDB_REQUESTS+=1
+ LAST_TMDB_REQUEST_AT=time.monotonic()
+ return data
 def details(mid):
  return get(f"/movie/{mid}",{"append_to_response":"release_dates,credits"})
 today=datetime.date.today(); start=today-datetime.timedelta(days=365); end=today+datetime.timedelta(days=365)
@@ -337,3 +349,4 @@ except Exception:
  pass
 
 with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)
+print("TMDB requests used:",TMDB_REQUESTS,"/",MAX_TMDB_REQUESTS)

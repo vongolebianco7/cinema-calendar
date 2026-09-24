@@ -135,18 +135,16 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 }
 
 
-.gLogoWord{display:inline-flex;align-items:center;height:31px;color:#f5f5f5;font-weight:900;font-size:25px;line-height:1;letter-spacing:.055em;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Arial Black",sans-serif;white-space:nowrap}
-.gLogoA{position:relative;display:inline-block;color:#f5f5f5}
-.gLogoA:after{content:"";position:absolute;left:50%;top:53%;transform:translate(-38%,-50%);width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:7px solid #ef3f3f}
-@media(max-width:600px){.gLogoWord{font-size:22px;height:28px}}
 
+
+.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
 </style>
 </head>
 <body>
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><span class="gLogoWord" aria-label="CINEMAP"><span>CINEM</span><span class="gLogoA">A</span><span>P</span></span></a>
+ <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=1" alt="CINEMAP"></a>
  <form class="gSearchForm" action="index.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -155,7 +153,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><span class="gLogoWord" aria-label="CINEMAP"><span>CINEM</span><span class="gLogoA">A</span><span>P</span></span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=1" alt="CINEMAP"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="theaters.html">映画館</a>
  <a href="experience.html">上映体験</a>

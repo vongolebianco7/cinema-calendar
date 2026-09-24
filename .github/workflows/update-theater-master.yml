@@ -12,7 +12,7 @@ on:
       - .github/workflows/update-theater-master.yml
 
 concurrency:
-  group: cinema-database-write
+  group: cinema-theater-master-write
   cancel-in-progress: false
 
 permissions:
@@ -45,7 +45,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npm install
-          npm run db:sync:theater-master
+          npx prisma generate
+          npx tsx scripts/import-json.ts --theater-master-only
 
       - name: Commit theater master backup snapshot
         run: |

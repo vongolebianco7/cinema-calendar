@@ -28,6 +28,20 @@ type MovieJson = {
   [key: string]: unknown;
 };
 
+type TheaterMasterRow = {
+  source: string;
+  source_id: string;
+  name: string;
+  prefecture?: string | null;
+  municipality?: string | null;
+  address?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  website?: string | null;
+  source_url: string;
+  [key: string]: unknown;
+};
+
 type TheaterRow = {
   title: string;
   date: string;
@@ -153,6 +167,48 @@ async function importTv() {
   return rows.length;
 }
 
+async function importTheaterMaster() {
+  const data = await load<{ theaters?: TheaterMasterRow[] }>("theaters_master.json");
+  const rows = data.theaters || [];
+  const sourceIds = rows.map(x => x.source_id).filter(Boolean);
+  if (sourceIds.length) {
+    await prisma.theater.deleteMany({
+      where: { source: "Wikidata", sourceId: { notIn: sourceIds } },
+    });
+  }
+  for (const item of rows) {
+    if (!item.source_id || !item.name || !item.source_url) continue;
+    await prisma.theater.upsert({
+      where: { sourceId: item.source_id },
+      create: {
+        source: item.source || "Wikidata",
+        sourceId: item.source_id,
+        name: item.name,
+        prefecture: item.prefecture || null,
+        municipality: item.municipality || null,
+        address: item.address || null,
+        latitude: item.latitude ?? null,
+        longitude: item.longitude ?? null,
+        website: item.website || null,
+        sourceUrl: item.source_url,
+        payload: JSON.parse(JSON.stringify(item)),
+      },
+      update: {
+        name: item.name,
+        prefecture: item.prefecture || null,
+        municipality: item.municipality || null,
+        address: item.address || null,
+        latitude: item.latitude ?? null,
+        longitude: item.longitude ?? null,
+        website: item.website || null,
+        sourceUrl: item.source_url,
+        payload: JSON.parse(JSON.stringify(item)),
+      },
+    });
+  }
+  return rows.length;
+}
+
 async function importTheaters() {
   const data = await load<{ schedules?: TheaterRow[] }>("theater_schedules.json");
   const rows = data.schedules || [];
@@ -181,6 +237,13 @@ async function importTheaters() {
 
 async function main() {
   const theatersOnly = process.argv.includes("--theaters-only");
+  const theaterMasterOnly = process.argv.includes("--theater-master-only");
+
+  if (theaterMasterOnly) {
+    const theaterMasterCount = await importTheaterMaster();
+    console.log(JSON.stringify({ ok: true, theaterMasterCount }));
+    return;
+  }
 
   if (theatersOnly) {
     const theaterCount = await importTheaters();
@@ -193,14 +256,14 @@ async function main() {
 
   await importRows(movies.movies || []);
   await importRows(streaming.movies || []);
-  const [tvCount, theaterCount] = await Promise.all([importTv(), importTheaters()]);
+  const [tvCount, theaterCount, theaterMasterCount] = await Promise.all([importTv(), importTheaters(), importTheaterMaster()]);
 
   const [movieCount, releaseCount] = await Promise.all([
     prisma.movie.count(),
     prisma.release.count(),
   ]);
 
-  console.log(JSON.stringify({ ok: true, movieCount, releaseCount, tvCount, theaterCount }));
+  console.log(JSON.stringify({ ok: true, movieCount, releaseCount, tvCount, theaterCount, theaterMasterCount }));
 }
 
 main()

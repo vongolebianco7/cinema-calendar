@@ -31,7 +31,6 @@ jobs:
         with:
           node-version: "22"
       - name: Sync theater schedules to PostgreSQL
-        if: ${{ env.DATABASE_URL != '' }}
         working-directory: backend
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

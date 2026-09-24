@@ -138,18 +138,18 @@ function renderChips(){
 }
 function renderCards(){let a=filtered(),groups=new Map();for(let m of a){let k=m.id?("id:"+m.id):("title:"+m.title);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m)}let cards=[...groups.values()];$("#count").textContent=cards.length+"作品";$("#cards").innerHTML=cards.length?cards.map(g=>{let m=g[0],sv=[...new Set(g.map(x=>x.service))],dates=[...new Set(g.map(x=>x.date))].sort(),tv=g.find(x=>x.event==="tv")||{};return '<article class="card" data-i="'+movies.indexOf(m)+'"><div class="poster">'+(m.poster?'<img src="'+m.poster+'" alt="ポスター" loading="lazy">':mode==="festival"?'<div class="festivalCover"><b>'+m.title+'</b><span>'+(m.date||"")+(m.end_date&&m.end_date!==m.date?' 〜 '+m.end_date:'')+'</span></div>':m.title)+'</div><div class="body"><div class="title">'+m.title+'</div>'+(mode==="tv"&&tv.program?'<div class="small" style="margin-top:4px;font-weight:700;color:#e6e7eb">'+tv.program+'</div>':'')+(mode==="festival"&&m.venue?'<div class="small" style="margin-top:4px;color:#d7d9df">'+m.venue+'</div>':'')+'<div class="meta">'+sv.map(s=>'<span class="tag '+svcClass(s)+'">'+s+'</span>').join("")+'<span class="tag">'+(dates.length===1?dates[0]:dates[0]+"〜")+(mode==="tv"&&tv.time?' '+tv.time:'')+'</span>'+(mode==="tv"?'<span class="tag '+(tv.terrestrial_first===true?'tv-first':tv.terrestrial_first===false?'tv-repeat':'tv-unknown')+'">'+(tv.terrestrial_first===true?'地上波初':tv.terrestrial_first===false?'再放送':'初放送未確認')+'</span>':'')+(mode==="festival"?'':'<span class="tag score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="tag" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'" onclick="event.stopPropagation()">Filmarksで探す </a>')+'</div></div></article>'}).join(""):'<div class="empty">該当する作品がありません</div>';document.querySelectorAll(".card").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.i]))}
 function searchMovieResults(){
- let q=normTitle($("#q").value);
- if(!q){$("#searchResults").classList.remove("show");$("#searchResults").innerHTML="";return []}
+ let q=normTitle($("#q").value),hasRuntime=!!(runtimeMin||runtimeMax);
+ if(!q&&!hasRuntime){$("#searchResults").classList.remove("show");$("#searchResults").innerHTML="";return []}
  let seen=new Set(),rows=[];
  for(let m of movies){
   if(m.event==="festival"||!runtimeOk(m))continue;
   let keys=[normTitle(m.title),normTitle(m.original_title||"")].filter(Boolean);
-  if(!keys.some(k=>k.includes(q)||q.includes(k)))continue;
+  if(q&&!keys.some(k=>k.includes(q)||q.includes(k)))continue;
   let k=m.id?"id:"+m.id:"title:"+normTitle(m.title);
   if(seen.has(k))continue;seen.add(k);rows.push(m)
  }
- rows.sort((a,b)=>{let ae=normTitle(a.title)===q?0:1,be=normTitle(b.title)===q?0:1;return ae-be||a.title.localeCompare(b.title,"ja")});
- return rows.slice(0,8)
+ rows.sort((a,b)=>q?((normTitle(a.title)===q?0:1)-(normTitle(b.title)===q?0:1)||a.title.localeCompare(b.title,"ja")):(Number(b.score||0)-Number(a.score||0)||Number(b.votes||0)-Number(a.votes||0)));
+ return rows.slice(0,q?8:24)
 }
 function closeSearchFocus(){
  const q=$("#q");
@@ -157,8 +157,8 @@ function closeSearchFocus(){
  $("#searchResults").classList.remove("show");
 }
 function renderSearchResults(){
- let rows=searchMovieResults(),box=$("#searchResults"),q=$("#q").value.trim();
- if(!q){box.classList.remove("show");return}
+ let rows=searchMovieResults(),box=$("#searchResults"),q=$("#q").value.trim(),hasRuntime=!!(runtimeMin||runtimeMax);
+ if(!q&&!hasRuntime){box.classList.remove("show");return}
  box.innerHTML=rows.length?rows.map(m=>'<div class="searchResult" data-mi="'+movies.indexOf(m)+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="searchThumb"></div>')+'<div><b>'+m.title+'</b><span>'+(m.event==="theatrical"?"劇場公開":m.event==="tv"?"TV":m.service||"配信")+(m.date?" · "+m.date:"")+'</span></div></div>').join(""):'<div class="searchEmpty">該当する作品がありません</div>';
  box.classList.add("show");
  document.querySelectorAll(".searchResult").forEach(x=>x.onclick=()=>{closeSearchFocus();requestAnimationFrame(()=>openMovie(movies[+x.dataset.mi]))})
@@ -580,7 +580,7 @@ function applyRuntimePreset(){
  $("#runtimeMin").value=runtimeMin||"";$("#runtimeMax").value=runtimeMax||"";
  renderSearchResults()
 }
-$("#runtimePreset").onchange=()=>{applyRuntimePreset();renderSearchResults()};
+$("#runtimePreset").onchange=()=>{applyRuntimePreset();$("#searchFilterPanel").classList.remove("show");$("#searchFilterBtn").setAttribute("aria-expanded","false");renderSearchResults()};
 $("#runtimeMin").oninput=()=>{$("#runtimePreset").value="custom";runtimeMin=Math.max(0,Number($("#runtimeMin").value)||0);renderSearchResults()};
 $("#runtimeMax").oninput=()=>{$("#runtimePreset").value="custom";runtimeMax=Math.max(0,Number($("#runtimeMax").value)||0);renderSearchResults()};
 $("#searchFilterBtn").onclick=e=>{e.stopPropagation();let p=$("#searchFilterPanel"),show=!p.classList.contains("show");p.classList.toggle("show",show);$("#searchFilterBtn").setAttribute("aria-expanded",show?"true":"false")};

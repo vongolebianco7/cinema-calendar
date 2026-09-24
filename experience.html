@@ -57,9 +57,18 @@
 
 .gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
 
-.aspectInfographicWrap{margin-top:22px;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;background:#050607}
-.aspectInfographic{display:block;width:100%;height:auto}
-@media(max-width:700px){.aspectInfographicWrap{margin-left:-8px;margin-right:-8px;border-radius:12px}}
+
+
+.aspectCompare{display:grid;gap:22px;margin-top:22px}
+.ratioVisual{border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;background:#05090d}
+.ratioVisualHead{display:flex;align-items:end;justify-content:space-between;padding:14px 16px 11px;gap:14px}
+.ratioVisualHead div{display:flex;align-items:baseline;gap:12px}
+.ratioVisualHead b{font-size:20px}.ratioVisualHead span{font-size:24px;font-weight:900;color:#67cfff}.ratioVisualHead small{color:#aeb8c2}
+.sceneSvg{display:block;width:100%;height:auto;background:#04283f}
+.scopeV{border-color:rgba(255,87,87,.65)}.scopeV .ratioVisualHead span{color:#ff6b6b}
+.imaxV{border-color:rgba(91,227,154,.6)}.imaxV .ratioVisualHead span{color:#68e8a1}
+.gtV{border-color:rgba(73,190,255,.7)}
+@media(max-width:700px){.ratioVisualHead{padding:10px 11px 8px}.ratioVisualHead b{font-size:15px}.ratioVisualHead span{font-size:19px}.ratioVisualHead small{font-size:10px}.aspectCompare{gap:14px}}
 </style>
 </head>
 <body>
@@ -86,8 +95,101 @@
 
 <section class="section">
  <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。基準はIMAX GTの1.43:1フルフレームで、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
- <div class="aspectInfographicWrap">
-  <img class="aspectInfographic" src="assets/cinemap-underwater-comparison.jpg?v=1" alt="同じ海中シーンをシネマスコープ2.39:1、IMAX 1.90:1、IMAX GT 1.43:1で比較した図。上のクジラ、中央のダイバー、下の珊瑚・海底生物・沈船が比率ごとにどこまで見えるかを示す。">
+ <div class="aspectCompare" aria-label="同じ海中シーンを3つの画面比率で比較">
+  <svg width="0" height="0" style="position:absolute">
+   <defs>
+    <linearGradient id="seaBg" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#0b89c9"/><stop offset=".35" stop-color="#08649b"/><stop offset="1" stop-color="#032a46"/>
+    </linearGradient>
+    <radialGradient id="seaLight" cx=".5" cy="0" r=".7">
+     <stop offset="0" stop-color="#b9efff" stop-opacity=".8"/><stop offset=".5" stop-color="#57c6ed" stop-opacity=".15"/><stop offset="1" stop-color="#001d33" stop-opacity="0"/>
+    </radialGradient>
+    <symbol id="deepSeaScene" viewBox="0 0 1000 699.3">
+     <rect width="1000" height="699.3" fill="url(#seaBg)"/>
+     <rect width="1000" height="699.3" fill="url(#seaLight)"/>
+     <path d="M0 18 Q180 2 350 16 T700 12 T1000 20" fill="none" stroke="#b6f1ff" stroke-opacity=".5" stroke-width="7"/>
+     <g stroke="#baf2ff" stroke-opacity=".15" stroke-width="12">
+      <path d="M245 0 L120 470"/><path d="M345 0 L265 500"/><path d="M445 0 L420 520"/><path d="M555 0 L610 500"/>
+     </g>
+
+     <g transform="translate(520 78)" fill="#4c89a4" stroke="#8cc9dc" stroke-width="2">
+      <ellipse cx="0" cy="0" rx="185" ry="55"/>
+      <path d="M-175 -5 Q-260 -72 -325 -42 Q-275 6 -180 17Z"/>
+      <path d="M165 -5 Q245 -42 290 -20 Q235 12 165 18Z"/>
+      <path d="M-45 42 Q10 91 67 50 Q20 49 -22 29Z"/>
+      <circle cx="125" cy="-12" r="4" fill="#071e2c"/>
+     </g>
+
+     <g fill="#79c7df" opacity=".9">
+      <path d="M135 190 l18 -6 -7 8 7 8 -18 -6 -12 5 5 -7 -5 -7z"/>
+      <path d="M175 215 l15 -5 -6 7 6 6 -15 -5 -11 4 5 -6 -5 -6z"/>
+      <path d="M820 175 l17 -6 -7 8 7 7 -17 -5 -12 4 5 -6 -5 -6z"/>
+      <path d="M865 208 l13 -5 -5 6 5 6 -13 -5 -10 4 4 -6 -4 -5z"/>
+      <path d="M780 245 l15 -5 -6 7 6 6 -15 -5 -11 4 5 -6 -5 -6z"/>
+     </g>
+
+     <g transform="translate(470 330) rotate(-8)">
+      <circle cx="0" cy="-8" r="18" fill="#101a21" stroke="#77c6df" stroke-width="2"/>
+      <rect x="-18" y="10" width="55" height="22" rx="8" fill="#152632"/>
+      <rect x="-44" y="3" width="25" height="36" rx="8" fill="#a6b8c0"/>
+      <path d="M34 22 L92 40" stroke="#0e1d25" stroke-width="12" stroke-linecap="round"/>
+      <path d="M88 40 L125 28" stroke="#0e1d25" stroke-width="10" stroke-linecap="round"/>
+      <path d="M32 14 L80 -5" stroke="#0e1d25" stroke-width="10" stroke-linecap="round"/>
+      <path d="M-5 30 L35 62" stroke="#0e1d25" stroke-width="12" stroke-linecap="round"/>
+      <path d="M35 62 L70 83" stroke="#0e1d25" stroke-width="10" stroke-linecap="round"/>
+      <path d="M70 83 L99 75 L86 92Z" fill="#ffd35a"/>
+      <circle cx="10" cy="-10" r="7" fill="#76d4f4"/>
+      <path d="M-42 -10 Q-65 -35 -79 -70" fill="none" stroke="#a7d9e8" stroke-width="4"/>
+      <circle cx="-82" cy="-77" r="5" fill="#d9f7ff" opacity=".65"/>
+      <circle cx="-87" cy="-93" r="8" fill="#d9f7ff" opacity=".4"/>
+     </g>
+
+     <g transform="translate(690 420)" stroke="#0b2531" fill="none">
+      <path d="M0 110 L40 0 L155 25 L125 115Z" stroke-width="16"/>
+      <path d="M32 65 L140 78M55 15 L78 118M105 16 L90 118" stroke-width="8"/>
+      <path d="M20 98 L-20 120 M125 106 L170 128" stroke-width="10"/>
+     </g>
+
+     <path d="M0 610 Q130 560 250 606 T500 598 T760 602 T1000 575 L1000 699.3 L0 699.3Z" fill="#082b31"/>
+     <g fill="#d66048">
+      <circle cx="90" cy="616" r="18"/><circle cx="115" cy="602" r="12"/><circle cx="142" cy="622" r="15"/>
+      <circle cx="842" cy="605" r="20"/><circle cx="875" cy="590" r="14"/><circle cx="900" cy="616" r="18"/>
+     </g>
+     <g fill="#d6a64c">
+      <path d="M190 675 Q180 610 195 570 Q203 630 220 675Z"/><path d="M245 675 Q228 625 238 588 Q254 630 270 675Z"/>
+      <path d="M760 675 Q750 620 770 580 Q780 626 795 675Z"/>
+     </g>
+
+     <g transform="translate(210 590)">
+      <ellipse cx="0" cy="0" rx="62" ry="32" fill="#55785d" stroke="#8cae88" stroke-width="4"/>
+      <circle cx="58" cy="-2" r="14" fill="#63876a"/>
+      <path d="M-38 -20 l-36 -28 12 38zM-38 20 l-36 28 12 -38zM25 -24 l30 -30 -7 40zM25 24 l30 30 -7 -40z" fill="#63876a"/>
+      <path d="M-40 -10 Q0 -35 42 -8 M-45 8 Q0 30 45 8" fill="none" stroke="#a8c199" stroke-width="3"/>
+     </g>
+
+     <g fill="#83d5ec">
+      <path d="M430 565 l12 -4 -5 6 5 6 -12 -4 -9 3 4 -5 -4 -5z"/>
+      <path d="M465 590 l10 -4 -4 5 4 5 -10 -4 -8 3 4 -5 -4 -5z"/>
+      <path d="M540 540 l13 -4 -5 6 5 6 -13 -4 -9 3 4 -5 -4 -5z"/>
+     </g>
+    </symbol>
+   </defs>
+  </svg>
+
+  <article class="ratioVisual scopeV">
+   <div class="ratioVisualHead"><div><b>シネマスコープ</b><span>2.39:1</span></div><small>上下を大きくカット</small></div>
+   <svg class="sceneSvg" viewBox="0 140.445 1000 418.41" preserveAspectRatio="xMidYMid meet"><use href="#deepSeaScene"/></svg>
+  </article>
+
+  <article class="ratioVisual imaxV">
+   <div class="ratioVisualHead"><div><b>IMAX</b><span>1.90:1</span></div><small>上下の情報が増える</small></div>
+   <svg class="sceneSvg" viewBox="0 86.49 1000 526.32" preserveAspectRatio="xMidYMid meet"><use href="#deepSeaScene"/></svg>
+  </article>
+
+  <article class="ratioVisual gtV">
+   <div class="ratioVisualHead"><div><b>IMAX GT</b><span>1.43:1</span></div><small>上のクジラから下の海底まで</small></div>
+   <svg class="sceneSvg" viewBox="0 0 1000 699.3" preserveAspectRatio="xMidYMid meet"><use href="#deepSeaScene"/></svg>
+  </article>
  </div>
  <div class="formula">同じ横幅で比較すると、2.39:1 → 高さ 418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※「見える範囲」の概念比較です。実際の作品では撮影・マスター・上映方式によって使用される画角が異なります。スクリーン実寸とも別の話です。</div></section>
 

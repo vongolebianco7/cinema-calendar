@@ -14,6 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   update:
+    if: ${{ false }} # Disabled pending explicit permission for automated schedule collection
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

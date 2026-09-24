@@ -114,7 +114,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 .gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
 .gNav{height:62px;display:flex;align-items:center;gap:12px}
 .gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
-
+.gLogo{display:block;height:31px;width:auto;max-width:170px;object-fit:contain}
 .gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
 .gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
 .gSearch::placeholder{color:#777}
@@ -129,22 +129,18 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 .gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
 .gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
 @media(max-width:600px){
- .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}.gLogo{height:27px;max-width:124px}
  .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
  .gMenuBtn{width:36px}
 }
 
-
-
-
-.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
 </style>
 </head>
 <body>
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=1" alt="CINEMAP"></a>
+ <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a>
  <form class="gSearchForm" action="index.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -153,7 +149,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=1" alt="CINEMAP"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="theaters.html">映画館</a>
  <a href="experience.html">上映体験</a>

@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Credits / Data Sources | CINEMA DAYS</title>
+<title>Credits / Data Sources | CINEMAP</title>
 <style>
 :root{color-scheme:dark;--bg:#0d0e11;--panel:#15171c;--text:#f5f6f8;--muted:#a7abb3;--line:#2a2d34;--accent:#e7b24a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.wrap{max-width:860px;margin:auto;padding:28px 18px 60px}.brand{font-weight:900;letter-spacing:.08em}.brand b{color:var(--accent)}
-a{color:#9dc8ff}.back{display:inline-block;margin:18px 0 26px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.wrap{max-width:860px;margin:auto;padding:28px 18px 60px}.brand{font-weight:900;letter-spacing:.08em}.brandA{position:relative;display:inline-block}.brandA:after{content:"";position:absolute;width:0;height:0;border-top:3px solid transparent;border-bottom:3px solid transparent;border-left:5px solid var(--accent);left:50%;top:56%;transform:translate(-42%,-50%)}
+a{color:#9dc8ff}.back{display:inline-block;margin:18px 0 26px}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin:14px 0}
 h1{font-size:28px}h2{font-size:18px;margin:0 0 10px}.muted{color:var(--muted);line-height:1.7}.tmdbLogo{width:78px;height:auto;display:block;margin:10px 0 14px}
-.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:12px;color:var(--muted)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body><main class="wrap">
-<div class="brand">CINEMA <b>DAYS</b></div>
+<div class="brand">CINEM<span class="brandA">A</span>P</div>
 <a class="back" href="index.html">← カレンダーへ戻る</a>
 <h1>Credits / Data Sources</h1>
-<p class="muted">CINEMA DAYSは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>
+<p class="muted">CINEMAPは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>
 
 <section class="card">
 <h2>TMDB</h2>
@@ -26,31 +26,31 @@ h1{font-size:28px}h2{font-size:18px;margin:0 0 10px}.muted{color:var(--muted);li
 </a>
 <p class="muted">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
 <p class="muted">映画メタデータ、画像、公開日、TMDB評価等にTMDB APIを利用しています。</p>
-<a href="https://developer.themoviedb.org/docs/faq" target="_blank" rel="noopener noreferrer">TMDB API attribution requirements ↗</a>
+<a href="https://developer.themoviedb.org/docs/faq" target="_blank" rel="noopener noreferrer">TMDB API attribution requirements </a>
 </section>
 
 <section class="card">
 <h2>JustWatch</h2>
 <span class="badge">Streaming availability source</span>
 <p class="muted">配信・レンタル・購入の提供状況は、TMDB Watch Providers APIを通じて提供されるJustWatchのデータを利用しています。Watch Providersの利用条件に従い、JustWatchをデータ提供元として表示しています。</p>
-<a href="https://developer.themoviedb.org/reference/movie-watch-providers" target="_blank" rel="noopener noreferrer">TMDB Watch Providers / JustWatch attribution ↗</a>
+<a href="https://developer.themoviedb.org/reference/movie-watch-providers" target="_blank" rel="noopener noreferrer">TMDB Watch Providers / JustWatch attribution </a>
 </section>
 
 <section class="card">
 <h2>Wikidata</h2>
 <span class="badge">CC0</span>
 <p class="muted">全国映画館マスタには、CC0で公開されるWikidataの構造化データを利用します。上映時刻データとは分離して管理します。</p>
-<a href="https://www.wikidata.org/wiki/Wikidata:Licensing" target="_blank" rel="noopener noreferrer">Wikidata licensing ↗</a>
+<a href="https://www.wikidata.org/wiki/Wikidata:Licensing" target="_blank" rel="noopener noreferrer">Wikidata licensing </a>
 </section>
 
 <section class="card">
 <h2>第三者サービス</h2>
-<p class="muted">Filmarks等、CINEMA DAYSがデータ利用許諾または正式なAPIライセンスを保有していないサービスについては、評価点・ランキング・レビュー等を取得・保存・再掲載しません。必要に応じて通常の外部リンクのみ提供します。</p>
+<p class="muted">Filmarks等、CINEMAPがデータ利用許諾または正式なAPIライセンスを保有していないサービスについては、評価点・ランキング・レビュー等を取得・保存・再掲載しません。必要に応じて通常の外部リンクのみ提供します。</p>
 </section>
 
 <section class="card">
 <h2>Compliance</h2>
 <p class="muted">新規データソースは、本番利用前に利用規約、API条件、帰属表示、再配布・保存可否を確認します。確認できない場合は自動取得を無効のままとします。</p>
-<a href="https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md" target="_blank" rel="noopener noreferrer">CINEMA DAYS Compliance Policy ↗</a>
+<a href="https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md" target="_blank" rel="noopener noreferrer">CINEMAP Compliance Policy </a>
 </section>
 </main></body></html>

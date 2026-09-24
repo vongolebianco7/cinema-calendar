@@ -10,10 +10,11 @@ on:
     - cron: "17 18 * * *"
 concurrency:
   group: cinema-database-write
-  cancel-in-progress: true
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
+  # Compliance-gated production update
   update:
     runs-on: ubuntu-latest
     steps:

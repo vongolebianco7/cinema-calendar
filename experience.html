@@ -77,6 +77,39 @@
 .pickGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}.pickGrid article{padding:15px;display:flex;flex-direction:column;gap:8px}.pickGrid b{font-size:15px}.pickGrid span{color:#9ea6ae;font-size:12px;line-height:1.55}
 @media(max-width:800px){.qualityGrid,.audioGrid{grid-template-columns:1fr}.pickGrid{grid-template-columns:1fr}.motionGrid{grid-template-columns:1fr}.ratioLabel{align-items:flex-start}.ratioLabel div{display:block}.ratioLabel strong{display:block;margin-top:2px;font-size:24px}.ratioLabel span{max-width:130px;text-align:right}.audioSvg,.motionSvg,.screenxSvg{border-radius:10px}.expSection{margin-top:34px}}
 
+
+/* final experience artwork */
+.finishedVisual{
+ width:100%;
+ aspect-ratio:4/5;
+ background-color:#07090c;
+ background-image:var(--experience-sprite,none);
+ background-repeat:no-repeat;
+ background-size:100% 600%;
+ border:1px solid rgba(255,255,255,.14);
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+.tileAspect{background-position:center 0%}
+.tileVisual{background-position:center 20%}
+.tileAudio{background-position:center 40%}
+.tileMotion{background-position:center 60%}
+.tileScreenx{background-position:center 80%}
+.tileGuide{background-position:center 100%}
+.experienceSpriteLoading .finishedVisual{background-image:linear-gradient(110deg,#080b0f 25%,#11161d 40%,#080b0f 55%);background-size:200% 100%;animation:expShimmer 1.4s linear infinite}
+.experienceSpriteError .finishedVisual{min-height:280px;background:#090b0e}
+@keyframes expShimmer{to{background-position:-200% 0}}
+.sectionSubHead{margin:30px 0 14px}.sectionSubHead h3{margin:0 0 7px;color:var(--gold);font-size:24px}.sectionSubHead p{margin:0;color:var(--muted);line-height:1.7}
+.expSection{margin-top:44px}.expSection .sectionHead{margin-bottom:18px}
+.expSection .formula{margin-top:15px}
+@media(max-width:700px){
+ .finishedVisual{border-radius:14px;box-shadow:none}
+ .expSection{margin-top:34px}
+ .sectionSubHead{margin-top:26px}
+ .sectionSubHead h3{font-size:21px}
+}
+
 </style>
 </head>
 <body>
@@ -99,245 +132,65 @@
  <a href="rankings.html">チャート</a>
 </aside>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">CINEMA EXPERIENCE</div><h1>同じ映画でも、<br>上映方式でここまで変わる。</h1><p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p></section>
-
+<section class="hero">
+ <div class="eyebrow">CINEMA EXPERIENCE</div>
+ <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
+ <p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p>
+</section>
 
 <section class="section expSection" id="aspect">
- <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。IMAX GT 1.43:1 を基準に、1.90:1 と 2.39:1 は上下を中央クロップしています。</p></div>
-
- <svg class="expDefs" aria-hidden="true" width="0" height="0">
-  <defs>
-   <linearGradient id="seaBg2" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#29b6df"/><stop offset=".26" stop-color="#0874a6"/><stop offset=".65" stop-color="#074361"/><stop offset="1" stop-color="#031921"/>
-   </linearGradient>
-   <radialGradient id="sunGlow2" cx=".52" cy=".02" r=".62">
-    <stop offset="0" stop-color="#e7fbff" stop-opacity=".95"/><stop offset=".26" stop-color="#a2e8f7" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-   </radialGradient>
-   <linearGradient id="reef2" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="#17382e"/><stop offset=".3" stop-color="#31563c"/><stop offset=".62" stop-color="#1f4b3c"/><stop offset="1" stop-color="#12332f"/>
-   </linearGradient>
-   <symbol id="cinemapSeaScene" viewBox="0 0 1000 699.3">
-    <rect width="1000" height="699.3" fill="url(#seaBg2)"/>
-    <rect width="1000" height="699.3" fill="url(#sunGlow2)"/>
-    <path d="M0 15 Q180 -2 350 14 T690 12 T1000 20" fill="none" stroke="#d6fbff" stroke-opacity=".72" stroke-width="6"/>
-    <g stroke="#d7fbff" stroke-opacity=".13" stroke-linecap="round">
-      <path d="M250 0 L90 500" stroke-width="24"/><path d="M360 0 L270 510" stroke-width="16"/>
-      <path d="M480 0 L430 540" stroke-width="20"/><path d="M610 0 L660 510" stroke-width="18"/>
-    </g>
-
-    <!-- whale high in frame -->
-    <g transform="translate(505 103) rotate(-3)">
-      <ellipse cx="0" cy="0" rx="188" ry="56" fill="#2f6f89"/>
-      <ellipse cx="20" cy="-8" rx="146" ry="39" fill="#4b879b" opacity=".65"/>
-      <path d="M-176 -8 Q-263 -67 -328 -38 Q-281 7 -177 18Z" fill="#2a6178"/>
-      <path d="M172 -7 Q235 -40 285 -21 Q237 16 169 18Z" fill="#2a6178"/>
-      <path d="M-38 46 Q18 94 72 49 Q17 53 -20 29Z" fill="#28596f"/>
-      <circle cx="128" cy="-12" r="4" fill="#071821"/>
-    </g>
-
-    <!-- fish schools -->
-    <g fill="#d2eef5" opacity=".78">
-     <path d="M120 210 l18 -6 -7 8 7 7 -18 -5 -12 4 5 -6 -5 -6z"/>
-     <path d="M160 236 l14 -5 -5 6 5 6 -14 -5 -10 4 4 -6 -4 -5z"/>
-     <path d="M205 196 l15 -5 -6 7 6 6 -15 -5 -11 4 5 -6 -5 -6z"/>
-     <path d="M788 210 l16 -5 -6 7 6 6 -16 -5 -11 4 5 -6 -5 -6z"/>
-     <path d="M830 235 l14 -4 -5 6 5 6 -14 -5 -10 3 4 -5 -4 -5z"/>
-     <path d="M870 190 l16 -5 -6 7 6 6 -16 -5 -11 4 5 -6 -5 -6z"/>
-    </g>
-
-    <!-- diver in center -->
-    <g transform="translate(488 350) rotate(-8)">
-      <circle cx="0" cy="-8" r="18" fill="#07141b" stroke="#8bdff2" stroke-width="2"/>
-      <rect x="-20" y="9" width="62" height="24" rx="10" fill="#0d2029"/>
-      <rect x="-49" y="3" width="28" height="38" rx="9" fill="#9db6bf"/>
-      <path d="M39 21 L93 40" stroke="#0d1d24" stroke-width="12" stroke-linecap="round"/>
-      <path d="M90 40 L128 27" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
-      <path d="M35 12 L82 -7" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
-      <path d="M-5 31 L38 65" stroke="#0d1d24" stroke-width="12" stroke-linecap="round"/>
-      <path d="M38 65 L74 86" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
-      <path d="M72 86 L105 76 L90 95Z" fill="#e3c25a"/>
-      <circle cx="10" cy="-10" r="7" fill="#75d8ef"/>
-      <path d="M-46 -11 Q-68 -37 -80 -73" fill="none" stroke="#a8dae5" stroke-width="4"/>
-      <circle cx="-83" cy="-80" r="5" fill="#ddfbff" opacity=".7"/><circle cx="-89" cy="-97" r="8" fill="#ddfbff" opacity=".42"/>
-    </g>
-
-    <!-- wreck -->
-    <g transform="translate(700 430)" stroke="#0c2630" fill="none">
-      <path d="M0 112 L42 0 L160 25 L128 118Z" stroke-width="16"/>
-      <path d="M32 65 L144 79M57 16 L80 121M108 17 L92 120" stroke-width="8"/>
-      <path d="M20 100 L-24 123 M128 108 L174 131" stroke-width="10"/>
-    </g>
-
-    <!-- seafloor and coral -->
-    <path d="M0 610 Q130 558 255 606 T510 596 T770 604 T1000 576 L1000 699.3 L0 699.3Z" fill="url(#reef2)"/>
-    <g fill="#df745d"><circle cx="88" cy="617" r="18"/><circle cx="116" cy="602" r="12"/><circle cx="143" cy="622" r="15"/>
-     <circle cx="850" cy="604" r="21"/><circle cx="884" cy="588" r="14"/><circle cx="912" cy="617" r="18"/></g>
-    <g fill="#d8b653">
-      <path d="M190 678 Q180 610 197 568 Q204 631 220 678Z"/><path d="M245 678 Q230 624 241 586 Q256 630 270 678Z"/>
-      <path d="M760 678 Q752 620 771 579 Q781 628 797 678Z"/>
-    </g>
-    <!-- turtle low in frame -->
-    <g transform="translate(210 595)">
-      <ellipse cx="0" cy="0" rx="61" ry="31" fill="#517760" stroke="#8daf8b" stroke-width="4"/>
-      <circle cx="58" cy="-2" r="14" fill="#63876a"/>
-      <path d="M-38 -20 l-36 -28 12 38zM-38 20 l-36 28 12 -38zM25 -24 l30 -30 -7 40zM25 24 l30 30 -7 -40z" fill="#63876a"/>
-      <path d="M-40 -10 Q0 -34 42 -8 M-45 8 Q0 30 45 8" fill="none" stroke="#a8c199" stroke-width="3"/>
-    </g>
-   </symbol>
-  </defs>
- </svg>
-
- <div class="ratioStack">
-  <article class="ratioPanel scopePanel">
-   <div class="ratioLabel"><div><b>シネマスコープ</b><strong>2.39:1</strong></div><span>上下を大きくカット</span></div>
-   <svg class="ratioScene" viewBox="0 140.445 1000 418.41"><use href="#cinemapSeaScene"/></svg>
-   <p>中央のダイバーは見える一方、上のクジラと下の海底情報は大きく減ります。</p>
-  </article>
-  <article class="ratioPanel imaxPanel">
-   <div class="ratioLabel"><div><b>IMAX</b><strong>1.90:1</strong></div><span>上下の情報が増える</span></div>
-   <svg class="ratioScene" viewBox="0 86.49 1000 526.32"><use href="#cinemapSeaScene"/></svg>
-   <p>クジラの大部分と、沈船・珊瑚など海底側の情報が見えてきます。</p>
-  </article>
-  <article class="ratioPanel gtPanel">
-   <div class="ratioLabel"><div><b>IMAX GT</b><strong>1.43:1</strong></div><span>最も上下まで見える</span></div>
-   <svg class="ratioScene" viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg>
-   <p>上のクジラから下の海亀・海底まで、縦方向の情報を最も広く確認できます。</p>
-  </article>
- </div>
- <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※見える範囲の概念比較です。実際の作品は撮影・マスター・上映方式により使用画角が異なります。</div>
+ <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。IMAX GT 1.43:1を基準に、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
+ <div class="finishedVisual tileAspect" role="img" aria-label="同じ海中シーンをシネマスコープ2.39対1、IMAX1.90対1、IMAX GT1.43対1で比較した高品質図"></div>
+ <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※「見える範囲」の概念比較です。実際の作品では撮影・マスター・上映方式により使用画角が異なります。</div>
 </section>
 
 <section class="section expSection" id="visual">
- <div class="sectionHead"><h2>映像</h2><p>画面比率とは別の軸。まったく同じ海中シーンで、明るさ・黒・コントラストの方向性を比較します。</p></div>
- <div class="qualityGrid">
-  <article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>基準となる表示。</p></article>
-  <article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>より明るく、ハイライトと細部が見えやすい方向。</p></article>
-  <article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>黒を深く保ちつつ、色と明暗差を強く感じる方向。</p></article>
- </div>
- <div class="formula">※実際の見え方は劇場設備・作品マスター・座席位置などで変わります。ここでは特徴を理解するために差をやや強調しています。</div>
+ <div class="sectionHead"><h2>映像</h2><p>同じ海中シーンで、通常上映・IMAXレーザー・Dolby Cinemaの明るさ、黒、コントラストの方向性を比較します。</p></div>
+ <div class="finishedVisual tileVisual" role="img" aria-label="通常上映、IMAXレーザー、Dolby Cinemaの映像比較"></div>
+ <div class="formula">※特徴を理解しやすくするためのイメージ比較です。実際の見え方は作品マスター・劇場設備・座席位置などで変わります。</div>
 </section>
 
 <section class="section expSection" id="audio">
- <div class="sectionHead"><h2>音響</h2><p>音の方向を俯瞰図で比較。Atmosは「上から来る音」を明確に分けています。</p></div>
- <div class="audioGrid">
-  <article class="audioCard standardA">
-   <div class="audioTop"><h3>通常 5.1 / 7.1ch</h3><span>平面サラウンド</span></div>
-   <svg class="audioSvg" viewBox="0 0 780 360">
-    <defs><linearGradient id="roomG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#152230"/><stop offset="1" stop-color="#070b0f"/></linearGradient></defs>
-    <rect x="35" y="35" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#27313b" stroke-width="3"/>
-    <rect x="215" y="62" width="350" height="64" rx="4" fill="#2a3d52" stroke="#a7b7c5" stroke-width="3"/>
-    <text x="390" y="102" text-anchor="middle" fill="#dfe8ef" font-size="18">SCREEN</text>
-    <g fill="#87939e"><rect x="80" y="124" width="20" height="34" rx="4"/><rect x="680" y="124" width="20" height="34" rx="4"/>
-      <rect x="80" y="245" width="20" height="34" rx="4"/><rect x="680" y="245" width="20" height="34" rx="4"/>
-      <rect x="245" y="282" width="20" height="28" rx="4"/><rect x="515" y="282" width="20" height="28" rx="4"/></g>
-    <g stroke="#8da7bc" fill="none" stroke-width="3" opacity=".8"><ellipse cx="390" cy="226" rx="115" ry="54"/><ellipse cx="390" cy="226" rx="168" ry="84" opacity=".35"/></g>
-    <circle cx="390" cy="226" r="22" fill="#dce5ec"/><path d="M390 252 v38" stroke="#dce5ec" stroke-width="12" stroke-linecap="round"/>
-   </svg>
-   <p>前後左右を中心に、観客を水平面で包むサラウンド。</p>
-  </article>
-
-  <article class="audioCard imaxA">
-   <div class="audioTop"><h3>IMAX 12ch</h3><span>多方向＋前方の厚み</span></div>
-   <svg class="audioSvg" viewBox="0 0 780 360">
-    <rect x="35" y="35" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#263b51" stroke-width="3"/>
-    <rect x="215" y="62" width="350" height="64" rx="4" fill="#24415d" stroke="#6ab4ff" stroke-width="3"/>
-    <g fill="#5ca9ef"><rect x="195" y="76" width="18" height="34" rx="4"/><rect x="567" y="76" width="18" height="34" rx="4"/>
-      <rect x="80" y="120" width="18" height="30" rx="4"/><rect x="682" y="120" width="18" height="30" rx="4"/>
-      <rect x="80" y="246" width="18" height="30" rx="4"/><rect x="682" y="246" width="18" height="30" rx="4"/>
-      <rect x="240" y="284" width="18" height="27" rx="4"/><rect x="522" y="284" width="18" height="27" rx="4"/></g>
-    <g stroke="#4fa7ff" fill="none" stroke-width="3"><ellipse cx="390" cy="226" rx="118" ry="56"/><ellipse cx="390" cy="226" rx="176" ry="90" opacity=".45"/></g>
-    <circle cx="390" cy="226" r="22" fill="#e2edf6"/><path d="M390 252 v38" stroke="#e2edf6" stroke-width="12" stroke-linecap="round"/>
-   </svg>
-   <p>対応設備では、より細かい方向から音を定位しやすい構成。</p>
-  </article>
-
-  <article class="audioCard atmosA">
-   <div class="audioTop"><h3>Dolby Atmos</h3><span>平面＋高さ</span></div>
-   <svg class="audioSvg" viewBox="0 0 780 390">
-    <rect x="35" y="60" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#4f326f" stroke-width="3"/>
-    <rect x="215" y="88" width="350" height="64" rx="4" fill="#2e2852" stroke="#bd6cff" stroke-width="3"/>
-    <g fill="#bd6cff"><rect x="82" y="145" width="18" height="30" rx="4"/><rect x="680" y="145" width="18" height="30" rx="4"/>
-      <rect x="82" y="272" width="18" height="30" rx="4"/><rect x="680" y="272" width="18" height="30" rx="4"/>
-      <rect x="246" y="307" width="18" height="26" rx="4"/><rect x="516" y="307" width="18" height="26" rx="4"/></g>
-    <g fill="#e3c2ff"><rect x="255" y="24" width="34" height="16" rx="5"/><rect x="373" y="24" width="34" height="16" rx="5"/><rect x="491" y="24" width="34" height="16" rx="5"/></g>
-    <g stroke="#bc6cff" fill="none" stroke-width="3"><ellipse cx="390" cy="250" rx="120" ry="58"/><ellipse cx="390" cy="250" rx="175" ry="92" opacity=".42"/>
-      <path d="M272 42 C285 112 320 155 360 207" stroke-dasharray="8 7"/><path d="M390 42 C390 122 390 165 390 205" stroke-dasharray="8 7"/><path d="M508 42 C495 112 460 155 420 207" stroke-dasharray="8 7"/></g>
-    <circle cx="390" cy="250" r="22" fill="#f0e9f7"/><path d="M390 276 v38" stroke="#f0e9f7" stroke-width="12" stroke-linecap="round"/>
-    <text x="390" y="20" text-anchor="middle" fill="#d8b2ff" font-size="16">CEILING SPEAKERS</text>
-   </svg>
-   <p>天井スピーカーを使い、音が頭上を通る・上から降る感覚まで表現。</p>
-  </article>
- </div>
+ <div class="sectionHead"><h2>音響</h2><p>通常5.1/7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。</p></div>
+ <div class="finishedVisual tileAudio" role="img" aria-label="通常5.1・7.1ch、IMAX 12ch、Dolby Atmosの音響比較"></div>
 </section>
 
 <section class="section expSection" id="special">
- <div class="sectionHead"><h2>体感・特殊上映</h2><p>座席の動き・環境効果・左右壁面への映像拡張など、映像と音以外の体験を比較します。</p></div>
- <div class="motionGrid">
-  <article class="motionCard dx4">
-   <div class="motionHead"><h3>4DX</h3><span>MOTION + EFFECTS</span></div>
-   <svg class="motionSvg" viewBox="0 0 760 300">
-    <defs><linearGradient id="seatG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#56606f"/><stop offset="1" stop-color="#2d3541"/></linearGradient></defs>
-    <rect x="317" y="64" width="126" height="112" rx="28" fill="url(#seatG)"/><rect x="285" y="172" width="190" height="58" rx="18" fill="#343e4b"/>
-    <path d="M270 120 C215 112 185 126 145 160" fill="none" stroke="#65d4ff" stroke-width="5"/><path d="M140 160 l22 -6 -11 18z" fill="#65d4ff"/>
-    <path d="M490 132 C555 120 590 140 625 175" fill="none" stroke="#7ddff4" stroke-width="5"/><path d="M630 177 l-21 -1 12 -17z" fill="#7ddff4"/>
-    <path d="M350 248 l-16 26 M410 248 l16 26" stroke="#ff6c65" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="205" cy="230" r="17" fill="#61b8ff"/><path d="M205 201 C190 220 188 229 205 247 C222 229 220 220 205 201Z" fill="#61b8ff"/>
-    <path d="M550 210 l18 0 -9 16zM575 205 l18 0 -9 16z" fill="#ffd45c"/>
-    <text x="120" y="110" fill="#8fdcff" font-size="17">WIND</text><text x="170" y="278" fill="#8fdcff" font-size="17">WATER</text><text x="510" y="274" fill="#ffd45c" font-size="17">FLASH</text>
-   </svg>
-   <p>動く座席と風・水・フラッシュなどの環境効果を同期。</p>
-  </article>
+ <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DXとMX4Dは座席の動きや環境効果を組み合わせる体感型上映です。</p></div>
+ <div class="finishedVisual tileMotion" role="img" aria-label="4DXとMX4Dの体感効果比較"></div>
 
-  <article class="motionCard mx4d">
-   <div class="motionHead"><h3>MX4D</h3><span>MOTION + MULTI EFFECTS</span></div>
-   <svg class="motionSvg" viewBox="0 0 760 300">
-    <rect x="317" y="64" width="126" height="112" rx="28" fill="url(#seatG)"/><rect x="285" y="172" width="190" height="58" rx="18" fill="#343e4b"/>
-    <g stroke="#6bbaff" stroke-width="5" fill="none"><path d="M270 120 C215 112 185 126 145 160"/><path d="M490 132 C555 120 590 140 625 175"/>
-     <path d="M320 245 q60 35 120 0"/></g>
-    <g fill="#6bbaff"><circle cx="155" cy="214" r="10"/><circle cx="180" cy="230" r="8"/><circle cx="602" cy="213" r="10"/><circle cx="577" cy="230" r="8"/></g>
-    <g stroke="#d28cff" stroke-width="4"><path d="M350 248 l-16 26"/><path d="M410 248 l16 26"/></g>
-    <path d="M113 132 c22 -20 44 -20 65 0 c-22 20 -44 20 -65 0z" fill="#c98cff" opacity=".7"/>
-    <text x="96" y="102" fill="#c98cff" font-size="17">SCENT</text><text x="560" y="102" fill="#6bbaff" font-size="17">SPRAY</text><text x="319" y="292" fill="#d28cff" font-size="17">VIBRATION</text>
-   </svg>
-   <p>モーションに加え、振動・ミスト・香りなど複数の特殊効果を組み合わせます。</p>
-  </article>
- </div>
-
- <article class="screenxCard">
-  <div class="motionHead"><h3>ScreenX</h3><span>PANORAMIC EXTENSION</span></div>
-  <svg class="screenxSvg" viewBox="0 0 980 390">
-   <defs>
-    <clipPath id="sxL"><polygon points="28,86 260,120 260,330 28,302"/></clipPath>
-    <clipPath id="sxC"><rect x="260" y="86" width="460" height="244" rx="2"/></clipPath>
-    <clipPath id="sxR"><polygon points="720,120 952,86 952,302 720,330"/></clipPath>
-   </defs>
-   <rect width="980" height="390" rx="26" fill="#070b0f"/>
-   <!-- Same continuous scene, shifted across three surfaces -->
-   <g clip-path="url(#sxL)" transform="translate(-10 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
-   <g clip-path="url(#sxC)" transform="translate(0 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
-   <g clip-path="url(#sxR)" transform="translate(10 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
-   <polygon points="28,86 260,120 260,330 28,302" fill="none" stroke="#e4bd56" stroke-width="5"/>
-   <rect x="260" y="86" width="460" height="244" fill="none" stroke="#e4bd56" stroke-width="5"/>
-   <polygon points="720,120 952,86 952,302 720,330" fill="none" stroke="#e4bd56" stroke-width="5"/>
-   <path d="M262 330 L180 355 M718 330 L800 355" stroke="#33404a" stroke-width="3"/>
-  </svg>
-  <p>中央映像の左右に「続き」が広がる方式。3面に同じ映像を複製するのではなく、ひとつのパノラマとして見せます。</p>
- </article>
+ <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
+ <div class="finishedVisual tileScreenx" role="img" aria-label="中央映像が左右壁面へ連続して広がるScreenXのイメージ"></div>
 </section>
 
 <section class="section expSection" id="guide">
- <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と体験の優先順位で選ぶとシンプルです。</p></div>
- <div class="pickGrid">
-  <article><b>通常上映</b><span>作品数重視。気軽に観たい。</span></article>
-  <article><b style="color:var(--blue)">IMAX / IMAXレーザー</b><span>大作・迫力・画面の広がりを重視。</span></article>
-  <article><b style="color:var(--violet)">Dolby Cinema</b><span>黒・色・音の質を重視。</span></article>
-  <article><b style="color:var(--red)">4DX / MX4D</b><span>アトラクション的な体感を楽しむ。</span></article>
-  <article><b style="color:var(--gold)">ScreenX</b><span>左右まで広がる視野を楽しむ。</span></article>
- </div>
+ <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と、何をいちばん重視するかで選べます。</p></div>
+ <div class="finishedVisual tileGuide" role="img" aria-label="通常上映、IMAX、Dolby Cinema、4DX・MX4D、ScreenXの選び方ガイド"></div>
  <div class="cta"><a href="theaters.html">対応映画館を見る</a><a href="index.html">作品カレンダーへ</a></div>
 </section>
 </main>
 <script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
+</script>
+<script id="experienceSpriteLoader">
+document.body.classList.add("experienceSpriteLoading");
+(async()=>{
+  try{
+    const urls=Array.from({length:15},(_,i)=>"assets/experience-sprite.part"+String(i+1).padStart(2,"0")+"?v=2");
+    const chunks=await Promise.all(urls.map(async u=>{
+      const r=await fetch(u,{cache:"force-cache"});
+      if(!r.ok) throw new Error(u+" "+r.status);
+      return (await r.text()).trim();
+    }));
+    const src='url("data:image/webp;base64,'+chunks.join("").replace(/\s+/g,"")+'")';
+    document.documentElement.style.setProperty("--experience-sprite",src);
+    document.body.classList.remove("experienceSpriteLoading");
+    document.body.classList.add("experienceSpriteReady");
+  }catch(err){
+    console.error("CINEMAP experience artwork failed",err);
+    document.body.classList.remove("experienceSpriteLoading");
+    document.body.classList.add("experienceSpriteError");
+  }
+})();
 </script>
 </body></html>

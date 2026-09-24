@@ -420,7 +420,7 @@ function theaterScheduleHtml(m){
    let screens=[...byScreen.entries()].sort((a,b)=>a[0].localeCompare(b[0],"ja")).map(([screen,items])=>'<div class="screenGroup"><div class="screenName">'+screen+'</div><div class="showTimes">'+items.sort((a,b)=>a.start.localeCompare(b.start)).map(x=>'<span class="showTime">'+x.start+(x.end?'–'+x.end:'')+'</span>').join("")+'</div></div>').join("");
    return '<div class="showDate">'+date+'</div>'+screens
   }).join("");
-  return '<div class="theaterBox"><div class="theaterHead"><div><div class="theaterName">'+name+'</div><div class="small">'+area+'</div></div><a target="_blank" rel="noopener noreferrer" class="small" href="'+src+'">公式</a></div>'+dates+'</div>'
+  return '<div class="theaterBox"><div class="theaterHead"><div><div><a class="theaterName" href="theaters.html?theater='+encodeURIComponent(name)+'" style="color:inherit;text-decoration:none">'+name+'</a><div class="small">'+area+'</div></div></div><a target="_blank" rel="noopener noreferrer" class="small" href="'+src+'">公式</a></div>'+dates+'</div>'
  }).join("");
  return selector+'<div class="small">'+prefecture+' · 今日〜3日後 · 上映時刻を確認できた'+entries.length+'館</div><div class="theaterSchedules">'+boxes+'</div>'+(entries.length>5&&!theaterExpanded?'<button type="button" class="theaterMore" onclick="showMoreTheaters()">ほかの上映館を見る（残り'+(entries.length-5)+'館）</button>':"")
 }

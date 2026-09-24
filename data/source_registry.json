@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "checked_at": "2026-09-24",
+  "policy": "Only sources marked approved may be used as automated production data sources.",
+  "sources": [
+    {
+      "id": "tmdb",
+      "name": "TMDB",
+      "mode": "approved",
+      "purpose": [
+        "movie_metadata",
+        "images",
+        "ratings",
+        "release_dates"
+      ],
+      "basis": "Official developer API; non-commercial use with attribution.",
+      "terms_url": "https://developer.themoviedb.org/docs/faq",
+      "requirements": [
+        "Use approved TMDB logo",
+        "Display required TMDB attribution notice in Credits/About",
+        "Non-commercial developer API only unless commercial license is obtained"
+      ]
+    },
+    {
+      "id": "justwatch_via_tmdb",
+      "name": "JustWatch via TMDB Watch Providers",
+      "mode": "approved",
+      "purpose": [
+        "streaming_availability"
+      ],
+      "basis": "TMDB Watch Providers endpoint explicitly permits use with mandatory JustWatch attribution.",
+      "terms_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "requirements": [
+        "Attribute JustWatch as source of watch-provider data"
+      ]
+    },
+    {
+      "id": "wikidata",
+      "name": "Wikidata",
+      "mode": "approved",
+      "purpose": [
+        "theater_master"
+      ],
+      "basis": "Wikidata structured data is released under CC0.",
+      "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "requirements": [
+        "Retain source/provenance where practical"
+      ]
+    },
+    {
+      "id": "filmarks",
+      "name": "Filmarks",
+      "mode": "link_only",
+      "purpose": [
+        "outbound_link"
+      ],
+      "basis": "No licensed data API or explicit permission held by CINEMA DAYS.",
+      "requirements": [
+        "No scraping",
+        "No ratings/reviews/rankings storage",
+        "Normal outbound links only"
+      ]
+    },
+    {
+      "id": "109cinemas",
+      "name": "109 Cinemas",
+      "mode": "disabled",
+      "purpose": [
+        "showtimes"
+      ],
+      "basis": "No explicit permission currently held for automated collection/republication.",
+      "requirements": [
+        "Do not automate until written permission or a licensed API is available"
+      ]
+    },
+    {
+      "id": "netflix_web",
+      "name": "Netflix public web pages",
+      "mode": "disabled",
+      "purpose": [
+        "release_announcements"
+      ],
+      "basis": "No explicit permission currently held for automated HTML collection/republication.",
+      "requirements": [
+        "Do not scrape"
+      ]
+    },
+    {
+      "id": "ntv_kinro_web",
+      "name": "Nippon TV / 金曜ロードショー public web pages",
+      "mode": "disabled",
+      "purpose": [
+        "tv_schedule"
+      ],
+      "basis": "No explicit permission currently held for automated HTML collection/republication.",
+      "requirements": [
+        "Do not scrape"
+      ]
+    },
+    {
+      "id": "kogyotsushin",
+      "name": "興行通信社",
+      "mode": "disabled",
+      "purpose": [
+        "box_office_rankings"
+      ],
+      "basis": "No permission held for automated collection/republication.",
+      "requirements": [
+        "Do not scrape or republish rankings without permission/license"
+      ]
+    }
+  ]
+}

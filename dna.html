@@ -18,10 +18,15 @@ body{background:#090909}
 button,.primary,.secondary,.svc,.chip{border-radius:4px!important;box-shadow:none!important}
 .primary{background:#ef3f3f!important;color:#fff!important}
 .secondary,.svc,.chip{background:transparent!important}
+
+.brand{display:flex;align-items:center;text-decoration:none}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand">CINEM<span class="brandA">A</span>P</div><a href="index.html">← カレンダー</a></div></header>
+<header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></div><a href="index.html">← カレンダー</a></div></header>
 <main class="wrap">
 <section class="hero"><div class="eyebrow">MOVIE DNA</div><h1>あなたの映画DNA</h1><p>映画を5段階で評価すると、好みの傾向をローカルで分析します。評価データは端末内だけに保存し、サーバーには送信しません。</p></section>
 

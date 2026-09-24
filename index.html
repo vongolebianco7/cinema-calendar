@@ -682,4 +682,18 @@ boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
+<script>
+function applyHeaderSearchParam(){
+ const term=new URLSearchParams(location.search).get("search");
+ if(!term)return;
+ document.querySelectorAll(".gSearch").forEach(x=>x.value=term);
+ const local=document.getElementById("q");
+ if(local){
+  local.value=term;
+  const fire=()=>local.dispatchEvent(new Event("input",{bubbles:true}));
+  setTimeout(fire,300);setTimeout(fire,1000);
+ }
+}
+window.addEventListener("load",applyHeaderSearchParam);
+</script>
 </body></html>

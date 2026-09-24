@@ -1,0 +1,32 @@
+name: Validate frontend
+
+on:
+  push:
+    paths:
+      - index.html
+      - .github/workflows/validate-frontend.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script(?:\s[^>]*)?>(.*?)</script>", html, flags=re.S|re.I)
+          Path("/tmp/index-inline.js").write_text("\n\n".join(scripts), encoding="utf-8")
+          print("inline script blocks:", len(scripts))
+          PY
+          node --check /tmp/index-inline.js

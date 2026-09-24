@@ -56,6 +56,17 @@ For influence, homage, remake, source material, version differences, restoration
 - Do not increase crawl frequency beyond what is reasonably necessary.
 - If a provider prohibits automated collection, exclude that provider rather than work around the restriction.
 
+## Third-party review services
+
+For services such as Filmarks, where CINEMA DAYS does not have an explicit data-use agreement or licensed API:
+
+- Do not scrape ratings, rankings, review counts, reviews, or proprietary metadata.
+- Do not cache or store those ratings or rankings in CINEMA DAYS.
+- Do not reproduce or rebuild the service's ranking product.
+- Do not use third-party logos unless their trademark guidelines expressly permit it.
+- A normal text link to the service's public page/search may be used where appropriate.
+- If an official licensed API or written permission becomes available, perform a fresh compliance review before using any data.
+
 ## Reviews and ratings
 
 - Do not scrape or republish user reviews or proprietary ratings unless the source explicitly permits it.

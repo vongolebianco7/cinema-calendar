@@ -44,6 +44,13 @@ jobs:
         working-directory: backend
         run: npm install
 
+      - name: Build backend
+        if: steps.db.outputs.ready == 'true'
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run build
+
       - name: Sync schema and import generated JSON
         if: steps.db.outputs.ready == 'true'
         working-directory: backend

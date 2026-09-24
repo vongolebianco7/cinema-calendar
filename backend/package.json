@@ -7,7 +7,8 @@
     "start": "next start",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:sync": "prisma db push && tsx scripts/import-json.ts"
+    "db:sync": "prisma db push && tsx scripts/import-json.ts",
+    "db:sync:theaters": "prisma db push && tsx scripts/import-json.ts --theaters-only"
   },
   "dependencies": {
     "@prisma/client": "^6.0.0",

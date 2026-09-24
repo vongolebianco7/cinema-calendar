@@ -172,7 +172,7 @@ async function importTheaters() {
         start: item.start,
         end: item.end || null,
         sourceUrl: item.source_url || null,
-        payload: item,
+        payload: JSON.parse(JSON.stringify(item)),
       },
     });
   }

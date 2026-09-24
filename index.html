@@ -63,6 +63,7 @@ body{background:#090909}
 .contextCard{border:1px solid #292929;border-radius:5px;padding:10px;display:grid;gap:5px}
 .contextCard b{font-size:11px}.contextCard span{font-size:11px;color:#aaa;line-height:1.55}
 .traceGroup{margin-top:16px}.traceTitle{display:block;font-size:12px;margin-bottom:9px;color:#ddd}
+.timelineHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:6px}.timelineHead h3{font-size:17px;margin:2px 0 0}.movieTimeline{margin-top:8px}.timelineItem{display:grid;grid-template-columns:18px 1fr;gap:10px;min-height:72px}.timelineRail{position:relative}.timelineRail:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:1px;background:#333}.timelineRail i{position:absolute;left:3px;top:7px;width:9px;height:9px;border-radius:50%;background:#ddd;border:2px solid #101010;z-index:1}.timelineBody{padding:0 0 19px}.timelineMeta{display:flex;align-items:center;gap:8px;margin-bottom:4px}.timelineMeta time{font-size:11px;color:#ddd;font-variant-numeric:tabular-nums}.timelineMeta span{font-size:9px;letter-spacing:.08em;color:#888}.timelineBody>b{font-size:13px}.timelineNote{margin-top:5px;color:#777}.timelineCaution{margin:5px 0 0;color:#777;line-height:1.6}
 @media(max-width:600px){.contextGrid{grid-template-columns:1fr}}
 .sheet{background:#101010;border-radius:10px 10px 0 0;padding:20px 18px}
 .close{background:transparent;border:1px solid var(--line);box-shadow:none;border-radius:50%;width:36px;height:36px}
@@ -423,6 +424,39 @@ function theaterScheduleHtml(m){
  }).join("");
  return selector+'<div class="small">'+prefecture+' · 今日〜3日後 · 上映時刻を確認できた'+entries.length+'館</div><div class="theaterSchedules">'+boxes+'</div>'+(entries.length>5&&!theaterExpanded?'<button type="button" class="theaterMore" onclick="showMoreTheaters()">ほかの上映館を見る（残り'+(entries.length-5)+'館）</button>':"")
 }
+function movieTimelineHtml(m){
+ const items=[],seen=new Set();
+ const add=(date,type,label,detail,source,note,status)=>{
+  if(!date)return;
+  const k=[date,type,label,detail].join("|");if(seen.has(k))return;seen.add(k);
+  items.push({date,type,label,detail:detail||"",source:source||"",note:note||"",status:status||""})
+ };
+ related(m).forEach(x=>{
+  if(x.event==="theatrical"||x.service==="劇場公開")add(x.date,"theatrical","劇場公開",x.service==="劇場公開"?"国内劇場公開データ":x.service,x.source_url,"カレンダー掲載データ","listed");
+  else if(x.event==="streaming")add(x.date,"streaming","配信開始",x.service,x.source_url,"カレンダー掲載データ","listed");
+  else if(x.event==="tv")add(x.date,"tv","TV放映",[(x.program||x.service),x.time].filter(Boolean).join(" · "),x.source_url,"カレンダー掲載データ","listed");
+ });
+ const key=normTitle(m.title),alt=normTitle(m.original_title||"");
+ (releaseHistory.records||[]).filter(x=>{
+   if(m.id&&x.id&&String(m.id)===String(x.id))return true;
+   let t=normTitle(x.title),o=normTitle(x.original_title||"");
+   return t===key||(alt&&t===alt)||(o&&(o===key||o===alt))
+ }).forEach(r=>{
+   const confirmed=r.record_type==="放送局の公式過去番組ページ";
+   const type=r.kind==="tv"?"tv":r.kind==="streaming"?"streaming":"theatrical";
+   const label=type==="tv"?"TV放映":type==="streaming"?"配信開始":"劇場公開";
+   add(r.date,type,label,[r.service,r.program,r.time].filter(Boolean).join(" · "),r.source_url,confirmed?"公式の過去記録":"当時掲載された予定・公開日",confirmed?"confirmed":"scheduled")
+ });
+ const av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
+ if(av&&av.checked_at){
+   const d=String(av.checked_at).slice(0,10),services=[...(av.flatrate||av.services||[]),...(av.rent||[]),...(av.buy||[])];
+   if(services.length)add(d,"availability","配信状況を観測",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
+ }
+ items.sort((a,b)=>a.date.localeCompare(b.date)||a.type.localeCompare(b.type));
+ if(!items.length)return '<section class="detailSection history"><h3>作品タイムライン</h3><div class="small">出典または観測記録を確認できる履歴がまだありません。</div></section>';
+ const typeName={theatrical:"THEATER",streaming:"STREAMING",tv:"TV",availability:"NOW"};
+ return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">HISTORY</p><h3>作品タイムライン</h3></div><span class="small">'+items.length+' records</span></div><div class="movieTimeline">'+items.map(x=>'<div class="timelineItem"><div class="timelineRail"><i></i></div><div class="timelineBody"><div class="timelineMeta"><time>'+x.date+'</time><span>'+typeName[x.type]+'</span></div><b>'+x.label+'</b>'+(x.detail?'<div class="small">'+x.detail+'</div>':'')+'<div class="timelineNote small">'+x.note+(x.source?' · <a target="_blank" rel="noopener noreferrer" href="'+x.source+'">出典</a>':'')+'</div></div></div>').join("")+'</div><p class="small timelineCaution">予定データ・過去の実施記録・配信状況の観測を区別して表示しています。観測日は配信開始日を意味しません。</p></section>'
+}
 function movieHistoryHtml(m){
  const rows=(releaseHistory.records||[]),key=normTitle(m.title),alt=normTitle(m.original_title||"");
  const matches=rows.filter(x=>{
@@ -517,21 +551,20 @@ function openMovie(m){
  let streamStart=streams.length?streams.map(x=>'<b>'+x.service+'</b> '+x.date).join('<br>'):'確認できた配信開始情報なし';
  let nowStreaming=[flat.length?'見放題：'+flat.join(" / "):'',rent.length?'レンタル：'+rent.join(" / "):'',buy.length?'購入：'+buy.join(" / "):''].filter(Boolean).join('<br>')||'現在の配信先を確認できていません';
  let tvNext=tvUpcoming.length?tvUpcoming.slice(0,3).map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません';
- let watch='<section class="detailSection streaming"><h3>この映画の歩み</h3><div class="watchSummaryGrid">'+
-   '<div class="watchSummaryRow"><div class="watchSummaryLabel">劇場</div><div class="watchSummaryValue">'+(theatrical?'<b>'+theatrical.date+'</b> 日本公開':'公開日未確認')+'</div></div>'+
-   '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信開始</div><div class="watchSummaryValue">'+streamStart+'</div></div>'+
+ let timeline=movieTimelineHtml(m);
+ let watch='<section class="detailSection streaming"><h3>現在の視聴状況</h3><div class="watchSummaryGrid">'+
    '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信中</div><div class="watchSummaryValue">'+nowStreaming+(av&&av.source_url?'<br><a class="small" target="_blank" rel="noopener noreferrer" href="'+av.source_url+'">提供元で確認</a>':'')+'</div></div>'+
-   '<div class="watchSummaryRow"><div class="watchSummaryLabel">テレビ</div><div class="watchSummaryValue">'+tvNext+'</div></div>'+
-  '</div>'+(tvPast.length?'<details class="compactDetails"><summary>過去のTV放映記録</summary>'+tvPast.slice(-8).reverse().map(x=>'<div class="small" style="margin:5px 0">'+(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')+'</div>').join("")+'</details>':'')+'</section>';
+   '<div class="watchSummaryRow"><div class="watchSummaryLabel">TV予定</div><div class="watchSummaryValue">'+tvNext+'</div></div>'+
+  '</div></section>';
  let locations=filmingLocationHtml(m);
  if(locations)locations='<section class="detailSection location">'+locations+'</section>';
- let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">公開・配信・放映の全履歴</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
+ let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">履歴データの詳細</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
  let context=contextHtml(m);
  let explore=exploreHtml(m);
  let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
  let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
- $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+watch+locations+peopleIntro+filmHtml+context+story+explore+links+history+theater;
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+watch+info+peopleIntro+filmHtml+story+locations+links+history+theater;
  showModal();
  document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))
 }

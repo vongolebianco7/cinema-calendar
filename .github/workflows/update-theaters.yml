@@ -26,6 +26,19 @@ jobs:
         run: pip install beautifulsoup4
       - name: Fetch verified theater schedules
         run: python scripts/update_theaters.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Sync theater schedules to PostgreSQL
+        if: ${{ env.DATABASE_URL != '' }}
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          npm install
+          npm run db:sync:theaters
+
       - name: Commit showtimes
         run: |
           git config user.name "github-actions[bot]"

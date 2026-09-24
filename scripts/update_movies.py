@@ -371,6 +371,7 @@ try:
     extra_seed=json.load(fh)
   except (FileNotFoundError,json.JSONDecodeError):
    extra_seed={}
+  extra_seed.pop("filmarks_current",None)
   extra_seed["boxoffice_alltime"]={
    "title":"歴代興行収入ランキング",
    "as_of":str(today),
@@ -390,7 +391,7 @@ try:
   extra_rankings=json.load(fh)
 except (FileNotFoundError,json.JSONDecodeError):
  extra_rankings={}
-for section_name in ["boxoffice_alltime","filmarks_current"]:
+for section_name in ["boxoffice_alltime"]:
  section=extra_rankings.get(section_name) or {}
  for item in section.get("items",[]):
   try:

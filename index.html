@@ -89,9 +89,6 @@ body{background:#090909}
 .heroAction.alt{background:#e8edf0}
 .heroAction.ghost{background:#fff}
 
-.deepIntro{margin:18px 0 8px;padding:18px 0;border-top:1px solid #ececec;border-bottom:1px solid #ececec}
-.deepIntro h2{margin:0 0 7px;font-size:18px;color:#171717}
-.deepIntro p{margin:0;color:#676767;line-height:1.7;font-size:13px;max-width:760px}
 @media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 
 /* CINEMAP light header */
@@ -105,8 +102,7 @@ body{background:#090909}
 <body>
 <header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="brandFallback">CINEMAP</span></div><div class="searchBox"><div class="searchRow"><input id="q" class="search" placeholder="作品を検索" autocomplete="off"><button type="button" id="searchFilterBtn" class="searchFilterBtn" aria-expanded="false">絞り込み</button></div><div id="searchFilterPanel" class="searchFilterPanel"><div class="searchFilterGrid"><label>上映時間<select id="runtimePreset"><option value="all">指定なし</option><option value="90">90分以内</option><option value="120">120分以内</option><option value="150">150分以内</option><option value="180plus">180分以上</option><option value="custom">自由指定</option></select></label><label>最小<input id="runtimeMin" type="number" min="1" max="600" inputmode="numeric" placeholder="分"></label><label>最大<input id="runtimeMax" type="number" min="1" max="600" inputmode="numeric" placeholder="分"></label></div></div><div id="searchResults" class="searchResults"></div></div><button class="menuBtn" id="menuBtn" aria-label="メニュー"><span class="menuLines" aria-hidden="true"></span></button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="brandFallback" style="color:#f2f2f2">CINEMAP</span></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="night.html">鑑賞プラン</a><a href="match.html">ふたりで選ぶ</a><a href="dna.html">映画DNA</a><a href="rankings.html">映画ランキング</a></aside>
 <main class="wrap">
-<section class="hero"><h1>映画を、公開日だけで終わらせない。</h1><p>劇場・配信・TV・映画祭を追いながら、作品の歩み、人、文脈まで辿るための映画マップ。</p><div class="heroActions"><a href="dna.html" class="heroAction">映画DNA</a><a href="rankings.html" class="heroAction alt">映画ランキング</a><a href="match.html" class="heroAction ghost">ふたりで選ぶ</a><a href="night.html" class="heroAction ghost">鑑賞プラン</a></div></section>
-<section class="deepIntro"><h2>一本の映画から、もっと奥へ。</h2><p>作品詳細では、公開・配信・放映の歩み、監督や出演者のつながり、その作品が属する年代・ジャンルの文脈、次に辿れる作品までまとめて見られる設計に更新しています。</p></section>
+<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。作品を開くと、その歩み・人・文脈・つながりまで辿れます。</p><div class="heroActions"><a href="dna.html" class="heroAction ghost">映画DNA</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="match.html" class="heroAction ghost">ふたりで選ぶ</a><a href="night.html" class="heroAction ghost">鑑賞プラン</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">TV公開</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a></footer></main>
@@ -458,6 +454,35 @@ function filmingLocationHtml(m){
   return '<div class="locationCard"><b>'+x.name+'</b><div class="small">'+(x.area||"")+(x.note?'<br>'+x.note:'')+'</div><div class="locationLinks">'+map+src+'</div></div>'
  }).join("")+'</div><div class="small">舞台設定ではなく、出典で撮影地として確認できた場所のみ掲載しています。</div>'
 }
+function movieIdentity(m){return m.id?"id:"+String(m.id):"title:"+normTitle(m.title)}
+function uniqueByMovie(rows){let seen=new Set();return rows.filter(x=>{let k=movieIdentity(x);if(seen.has(k))return false;seen.add(k);return true})}
+function contextHtml(m){
+ const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
+ const sameDirector=m.director?peers.filter(x=>x.director===m.director):[];
+ const sameGenre=(m.genres||[]).length?peers.filter(x=>(x.genres||[]).some(g=>(m.genres||[]).includes(g))):[];
+ const sameCountry=(m.countries||[]).length?peers.filter(x=>(x.countries||[]).some(g=>(m.countries||[]).includes(g))):[];
+ const scored=sameGenre.filter(x=>Number(x.score)>0),timed=sameGenre.filter(x=>Number(x.runtime)>0);
+ const avgScore=scored.length?scored.reduce((s,x)=>s+Number(x.score),0)/scored.length:0;
+ const avgRuntime=timed.length?Math.round(timed.reduce((s,x)=>s+Number(x.runtime),0)/timed.length):0;
+ let lines=[];
+ if(m.director)lines.push("<b>"+m.director+"</b>監督の作品をCINEMAP内で "+sameDirector.length+"本確認");
+ if((m.genres||[]).length)lines.push("同ジャンルの比較対象 "+sameGenre.length+"本"+(avgScore?" · 平均TMDB ★ "+avgScore.toFixed(1):"")+(avgRuntime?" · 平均 "+avgRuntime+"分":""));
+ if((m.countries||[]).length)lines.push("同じ製作国を含む作品 "+sameCountry.length+"本");
+ if(m.runtime&&avgRuntime){let d=Number(m.runtime)-avgRuntime;lines.push("上映時間は同ジャンル平均より "+Math.abs(d)+"分"+(d>=0?"長め":"短め"))}
+ return '<section class="detailSection info"><h3>この作品の文脈</h3><div class="small" style="line-height:1.9">'+(lines.length?lines.join("<br>"):"比較に十分なデータをまだ取得できていません。")+'</div></section>'
+}
+function exploreHtml(m){
+ const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
+ let scored=peers.map(x=>{
+  let score=0,reasons=[];
+  if(m.director&&x.director===m.director){score+=8;reasons.push("同じ監督")}
+  const cast=(m.cast||[]).filter(a=>(x.cast||[]).includes(a));if(cast.length){score+=Math.min(6,cast.length*3);reasons.push(cast[0]+"出演")}
+  const genres=(m.genres||[]).filter(g=>(x.genres||[]).includes(g));if(genres.length){score+=genres.length;reasons.push(genres.slice(0,2).join(" / "))}
+  if((m.countries||[]).some(g=>(x.countries||[]).includes(g))){score+=1;reasons.push("同じ製作国")}
+  return {x,score,reasons}
+ }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score||Number(b.x.score||0)-Number(a.x.score||0)).slice(0,8);
+ return '<section class="detailSection info"><h3>ここから辿る</h3>'+(scored.length?'<div class="filmography">'+scored.map(r=>'<button type="button" class="filmItem relatedMovie" data-related="'+movies.indexOf(r.x)+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(r.x.poster?'<img src="'+r.x.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+r.x.title+'</b><span class="small">'+r.reasons.slice(0,2).join(" · ")+'</span></button>').join("")+'</div>':'<div class="small">関連作品を取得できていません。</div>')+'</section>'
+}
 function openMovie(m){
  detailMovie=m;theaterExpanded=false;
  if(m.event==="festival"){
@@ -472,11 +497,12 @@ function openMovie(m){
  let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
  let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:[];
- let filmHtml=works.length?'<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="margin-bottom:10px">'+(m.director||"監督")+'の作品を辿る</div><div class="filmography">'+works.slice(0,14).map(w=>'<div class="filmItem"><a target="_blank" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span></a></div>').join("")+'</div></section>':"";
+ let peopleIntro='<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+m.cast.slice(0,8).join("、"):'')+'</div></section>';
+ let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>'<div class="filmItem"><a target="_blank" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span></a></div>').join("")+'</div></section>':"";
  let trailer='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式');
  let teaser='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 特報 ティザー 公式');
  let rating='<div class="detailScore"><span class="scorePill">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="small" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を探す </a>'+'</div>';
- let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>この映画は何者か</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
+ let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>作品情報</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
  let streamStart=streams.length?streams.map(x=>'<b>'+x.service+'</b> '+x.date).join('<br>'):'確認できた配信開始情報なし';
  let nowStreaming=[flat.length?'見放題：'+flat.join(" / "):'',rent.length?'レンタル：'+rent.join(" / "):'',buy.length?'購入：'+buy.join(" / "):''].filter(Boolean).join('<br>')||'現在の配信先を確認できていません';
  let tvNext=tvUpcoming.length?tvUpcoming.slice(0,3).map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません';
@@ -489,13 +515,14 @@ function openMovie(m){
  let locations=filmingLocationHtml(m);
  if(locations)locations='<section class="detailSection location">'+locations+'</section>';
  let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">公開・配信・放映の全履歴</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
- let contextBits=[m.director?'監督：'+m.director:'',m.countries&&m.countries.length?'製作国：'+m.countries.join(" / "):'',m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / "):'',m.runtime?'上映時間：'+m.runtime+'分':''].filter(Boolean);
- let context='<section class="detailSection info"><h3>この作品の文脈</h3><div class="small" style="line-height:1.8">'+(contextBits.length?contextBits.join('<br>'):'現在取得できる情報をもとに文脈を整理中です。')+'</div></section>';
+ let context=contextHtml(m);
+ let explore=exploreHtml(m);
  let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
- let links='<section class="detailSection linksSec"><h3>ここから辿る</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
+ let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
- $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+watch+locations+context+filmHtml+story+links+history+theater;
- showModal()
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+watch+locations+peopleIntro+filmHtml+context+story+explore+links+history+theater;
+ showModal();
+ document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))
 }
 function streamServiceColor(name){
  const colors={

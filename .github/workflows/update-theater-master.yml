@@ -2,14 +2,6 @@ name: Update theater master
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "43 18 * * 0"
-  push:
-    paths:
-      - scripts/update_theater_master.py
-      - scripts/check_sources.py
-      - data/source_registry.json
-      - .github/workflows/update-theater-master.yml
 
 concurrency:
   group: cinema-theater-master-write
@@ -21,6 +13,7 @@ permissions:
 jobs:
   # Safe serialized theater directory update
   update:
+    if: ${{ false }} # Disabled: avoid bulk external queries until a low-impact source is selected
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

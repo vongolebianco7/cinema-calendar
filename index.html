@@ -415,11 +415,8 @@ function tvChannelColor(name){
 }
 function renderLegend(){
  if(mode==="streaming"){
-  let preferred=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","FOD","WOWOWオンデマンド","DMM TV","Rakuten TV"],found=[];
-  movies.filter(m=>m.event==="streaming"&&m.service).forEach(m=>{if(!found.includes(m.service))found.push(m.service)});
-  Object.values((availabilitySnapshot&&availabilitySnapshot.movies)||{}).forEach(x=>[...(x.flatrate||x.services||[]),...(x.rent||[]),...(x.buy||[])].forEach(s=>{if(s&&!found.includes(s))found.push(s)}));
-  let services=[...preferred,...found.filter(s=>!preferred.includes(s))];
-  $("#legend").innerHTML=services.map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")
+  const services=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
+  $("#legend").innerHTML=services.map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")+'<span><i style="background:#7d8796"></i>その他</span>'
  }else if(mode==="theatrical"){
   $("#legend").innerHTML='<span><i style="background:#6b3a3a"></i>劇場公開</span>'
  }else if(mode==="tv"){

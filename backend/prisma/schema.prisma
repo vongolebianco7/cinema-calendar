@@ -43,3 +43,40 @@ model Release {
   @@index([date])
   @@index([service, date])
 }
+
+model TvBroadcast {
+  id          String   @id @default(cuid())
+  fingerprint String   @unique
+  title       String
+  date        DateTime
+  time        String?
+  service     String
+  program     String?
+  payload     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+  @@index([service, date])
+  @@index([title])
+}
+
+model TheaterShowtime {
+  id          String   @id @default(cuid())
+  fingerprint String   @unique
+  title       String
+  date        DateTime
+  theater     String
+  area        String?
+  screen      String?
+  start       String
+  end         String?
+  sourceUrl   String?
+  payload     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+  @@index([theater, date])
+  @@index([title])
+}

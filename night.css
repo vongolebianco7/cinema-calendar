@@ -5,4 +5,4 @@ body{background:#090909}
 .panel,.program{background:transparent;border-color:#272727;border-radius:6px;box-shadow:none}
 button,input,select{border-radius:4px}
 .chips label{border-radius:4px;background:transparent}
-.primary{background:#ef3f3f;color:#fff}
+.primary{background:#e6e1d8;color:#1d1d1d;border-color:#d6d0c5}.primary:hover{background:#eeeae3}.chips label:has(input:checked){background:#e9edf0;color:#1d1d1d;border-color:#d8dde1}

@@ -22,6 +22,63 @@ button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top
 .empty{text-align:center;padding:50px 20px;color:var(--muted);grid-column:1/-1}.notice{border:1px dashed #575d69;border-radius:7px;padding:12px 14px;color:var(--muted);font-size:12px;line-height:1.5;margin:4px 0 22px}
 .detailHero{margin:0 -4px 14px;padding:14px 14px 13px;border-radius:8px;background:linear-gradient(145deg,#20242d,#17191f);border:1px solid #343944}.detailHero h2{margin:6px 0 8px;font-size:25px;line-height:1.2}.detailRatings{display:flex;gap:8px;flex-wrap:wrap}.detailRating{padding:6px 9px;border-radius:6px;background:#121419;border:1px solid #3a3f49;font-size:14px;font-weight:850}.detailSection{margin:12px 0;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#1d2026}.detailSection h3{margin:0 0 9px;font-size:15px}.detailSection p{margin:7px 0;line-height:1.6}.detailSection.release{background:#201f19;border-color:#54472c}.detailSection.streaming{background:#182126;border-color:#284a59}.detailSection.tv{background:#221d18;border-color:#5a4326}.detailSection.location{background:#201b27;border-color:#4a365d}.detailSection.history{background:#1b2026;border-color:#35424f}.detailSection.story{background:#1c1e22}.detailSection.actions{background:transparent;padding:4px 0 0;border:0}.detailSection.theaters{background:#191d22;border-color:#3b4652;margin-top:18px}.detailMeta{font-size:12px;color:var(--muted);line-height:1.65}.detailKicker{font-size:10px;letter-spacing:.13em;color:var(--muted);font-weight:800}.detailLabel{font-size:11px;color:var(--muted);margin-bottom:3px}.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center;overscroll-behavior:contain}.modal.show{display:flex}.sheet{position:relative;width:min(650px,100%);max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;background:#181a20;border-radius:22px 22px 0 0;padding:22px}.modalOpen{overflow:hidden;position:fixed;width:100%;left:0;right:0}.close{position:sticky;top:0;z-index:10;float:right;background:#292d35;border:1px solid #444a55;color:white;border-radius:50%;width:42px;height:42px;box-shadow:0 4px 14px #0009}.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.links a{color:#111;background:var(--text);text-decoration:none;border-radius:6px;padding:10px 13px;font-weight:750}.filmography{display:flex;gap:10px;overflow:auto;padding:6px 0 4px;scrollbar-width:none}.filmItem{min-width:108px;width:108px}.filmItem img{width:108px;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:#222;display:block}.filmItem b{display:block;font-size:12px;line-height:1.35;margin-top:5px}.rankGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:7px;overflow:hidden}.rankCard img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#222}.rankBody{padding:8px}.rankNo{color:var(--accent);font-weight:900;font-size:12px}.countBadge.tv{background:#765116}.legend .l-tv i{background:#765116}
 @media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.tvMovie{padding:7px}.streamingWeeks{gap:12px}.streamingWeekFrame{padding:8px}.streamingWeekMovies{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.streamMovieDate{font-size:8px;padding:2px 5px}.streamMovieService{font-size:8px}.streamMovieTitle{font-size:9px}.streamingWeekLabel{font-size:11px}.festivalCover{aspect-ratio:3/2;min-height:120px}.wrap{padding:0 12px}.grid{grid-template-columns:repeat(3,1fr);gap:5px}.card{border-radius:6px}.body{padding:6px}.title{font-size:11px}.tag{font-size:9px;padding:3px 5px}.section{padding:14px 0 24px}.hero{padding:18px 0 8px}.modeTabs{gap:6px}.modeTab{font-size:13px;padding:10px 5px}.chips{padding:5px 0 12px}.chip{padding:7px 10px;font-size:12px}.calendar{padding:10px;border-radius:8px}.rankGrid{grid-template-columns:repeat(3,1fr)}.hero{padding-top:28px}.day{min-height:164px;padding:4px}.calGroups{gap:3px}.calGroup{gap:2px;padding:14px 2px 12px;border-width:1.5px;border-radius:4px}.calGroupHead{display:none}.calPosters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.calGroup img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}.calPosters .calMissing{width:100%;height:auto;aspect-ratio:2/3;min-height:0;flex:initial}.calTotal{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:6px;background:rgba(0,0,0,.72);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1}.calHidden{position:absolute;right:3px;bottom:2px;font-size:9px;font-weight:800;color:var(--muted);line-height:1}.dot{font-size:0;width:6px;height:6px;border-radius:50%;padding:0;background:var(--accent)}}
+
+/* CINEMAP visual pass: flatter, quieter, editorial rather than dashboard-like */
+body{background:#090909}
+.wrap{max-width:1240px}
+.top{background:rgba(9,9,9,.98)}
+.nav{height:54px}
+.hero{padding:22px 0 8px;border-bottom:0}
+.hero h1{font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin:0 0 14px}
+.modeTabs{display:flex;gap:22px;margin:0 0 8px;border-bottom:1px solid var(--line)}
+.modeTab{flex:0 0 auto;border:0;background:transparent;padding:11px 0 10px;border-radius:0;color:var(--muted);font-weight:600}
+.modeTab.active{background:transparent;color:var(--text);border:0;box-shadow:inset 0 -1px 0 var(--text);font-weight:700}
+.chips{gap:6px;padding:8px 0 16px}
+.chip{background:transparent;border:1px solid #2b2b2b;padding:7px 10px;color:#aaa}
+.chip.active{background:#f0f0f0;color:#111;border-color:#f0f0f0}
+.section{padding:14px 0 30px}
+.sectionHead{margin-bottom:10px}
+.section h2{font-size:15px;font-weight:700;letter-spacing:0}
+.grid{gap:14px 10px}
+.card{background:transparent;border:0;border-radius:0;transition:none}
+.card:hover{transform:none}
+.poster{background:#161616;border-radius:2px}
+.body{padding:7px 0 0}
+.title{font-size:12px;font-weight:600}
+.meta{margin-top:5px;gap:5px}
+.tag{background:transparent;border:1px solid #292929;color:#8f8f8f;padding:2px 5px;border-radius:3px}
+.score{color:#aaa;font-weight:600}
+.calendar{background:transparent;border:0;border-radius:0;padding:0}
+.calHead{padding:2px 0 10px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.calHead button{background:transparent;border:1px solid var(--line);border-radius:4px;padding:7px 10px}
+.day{border:1px solid #222;border-radius:3px;background:#0d0d0d}
+.day.today{border:1px solid #666;background:#101010;box-shadow:none}
+.day.today b{background:transparent;color:var(--text);padding:0}
+.dot{border-radius:2px}
+.detailSection{background:transparent!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;padding:14px 0!important;margin:0!important}
+.detailSection:first-of-type{border-top:0!important}
+.detailSection.info,.detailSection.release,.detailSection.streaming,.detailSection.tv,.detailSection.location,.detailSection.history,.detailSection.story,.detailSection.theater,.detailSection.linksSec{border-left:0!important}
+.detailSection h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.sheet{background:#101010;border-radius:10px 10px 0 0;padding:20px 18px}
+.close{background:transparent;border:1px solid var(--line);box-shadow:none;border-radius:50%;width:36px;height:36px}
+.links{margin-top:10px}
+.links a{background:transparent;color:var(--text);border:1px solid #343434;border-radius:4px;padding:8px 10px;font-weight:600}
+.historyEntry,.locationCard,.theaterBox{background:transparent!important;border:1px solid #272727!important;border-radius:4px!important}
+.watchSummaryRow{padding:10px 0}
+.watchSummaryLabel{font-weight:600}
+.search{background:transparent;border-color:#292929;border-radius:4px}
+.searchResults{background:#111;border-color:#292929;border-radius:4px}
+.drawer{background:#0d0d0d}
+.drawerClose{background:transparent;border:1px solid var(--line)}
+@media(max-width:760px){
+  .wrap{padding:0 14px}
+  .hero{padding-top:16px}
+  .hero h1{font-size:18px}
+  .modeTabs{gap:16px;overflow-x:auto;scrollbar-width:none}
+  .modeTab{font-size:12px;white-space:nowrap}
+  .grid{gap:12px 8px}
+  .sheet{border-radius:8px 8px 0 0}
+}
 </style>
 </head>
 <body>

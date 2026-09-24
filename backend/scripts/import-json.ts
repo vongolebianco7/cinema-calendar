@@ -146,7 +146,7 @@ async function importTv() {
         time: item.time || null,
         service: item.service,
         program: item.program || null,
-        payload: item,
+        payload: JSON.parse(JSON.stringify(item)),
       },
     });
   }

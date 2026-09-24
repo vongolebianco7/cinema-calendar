@@ -44,12 +44,18 @@ const $=s=>document.querySelector(s);
 let modalScrollY=0;
 function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
-function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;if(mode==="streaming"&&!serviceOk&&m.id){let a=(availabilitySnapshot.movies||{})[String(m.id)];let ps=a?[...(a.flatrate||a.services||[]),...(a.rent||[]),...(a.buy||[])]:[];serviceOk=ps.includes(active)}return ok&&serviceOk})}
+function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;return ok&&serviceOk})}
+function streamingReleaseServices(){
+ const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
+ const ordered=STREAMING_SERVICES.filter(s=>found.includes(s));
+ const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)).sort((a,b)=>a.localeCompare(b,"ja"));
+ return [...ordered,...extras]
+}
 function renderChips(){
  let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
  let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
  let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
- let ss=mode==="streaming"?["すべて",...STREAMING_SERVICES]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ let ss=mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
  if(!ss.includes(active))active="すべて";
  $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
@@ -417,7 +423,7 @@ function tvChannelColor(name){
 }
 function renderLegend(){
  if(mode==="streaming"){
-  $("#legend").innerHTML=STREAMING_SERVICES.map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")'
+  $("#legend").innerHTML=streamingReleaseServices().map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")'
  }else if(mode==="theatrical"){
   $("#legend").innerHTML='<span><i style="background:#6b3a3a"></i>劇場公開</span>'
  }else if(mode==="tv"){

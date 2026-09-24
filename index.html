@@ -80,10 +80,23 @@ body{background:#090909}
   .sheet{border-radius:8px 8px 0 0}
 }
 
-.brand{display:flex;align-items:center;text-decoration:none}
-.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.brand{display:flex;align-items:center;text-decoration:none;min-width:104px}
+.brandLogo{display:block;width:auto;height:34px;max-width:148px;object-fit:contain}
 .top .brandLogo{height:32px}
-@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+.brandFallback{display:none;font-weight:900;letter-spacing:.08em;color:#111;font-size:18px}
+.heroActions{margin-top:16px;display:flex;gap:9px;flex-wrap:wrap}
+.heroAction{display:inline-flex;align-items:center;text-decoration:none;font-weight:800;border-radius:8px;padding:10px 14px;border:1px solid #d8d8d8;color:#202124;background:#f2f0eb}
+.heroAction.alt{background:#e8edf0}
+.heroAction.ghost{background:#fff}
+.runtimeFilterBar{display:flex;gap:9px;align-items:end;flex-wrap:wrap;padding:2px 0 16px;border-bottom:1px solid #ececec}
+.runtimeFilterBar label{display:grid;gap:5px;font-size:11px;color:#666}
+.runtimeFilterBar select,.runtimeFilterBar input{height:36px;border:1px solid #d9d9d9;background:#fff;color:#171717;border-radius:7px;padding:0 10px}
+.runtimeFilterBar input{width:92px}
+.runtimeFilterNote{font-size:11px;color:#777;padding-bottom:9px}
+.deepIntro{margin:18px 0 8px;padding:18px 0;border-top:1px solid #ececec;border-bottom:1px solid #ececec}
+.deepIntro h2{margin:0 0 7px;font-size:18px;color:#171717}
+.deepIntro p{margin:0;color:#676767;line-height:1.7;font-size:13px;max-width:760px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}.runtimeFilterBar{align-items:stretch}.runtimeFilterBar label{flex:1 1 120px}.runtimeFilterBar select,.runtimeFilterBar input{width:100%}}
 
 /* CINEMAP light header */
 .top{background:#fff!important;border-bottom-color:#e7e7e7!important}
@@ -94,10 +107,17 @@ body{background:#090909}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></div><div class="searchBox"><input id="q" class="search" placeholder="作品を検索" autocomplete="off"><div id="searchResults" class="searchResults"></div></div><button class="menuBtn" id="menuBtn" aria-label="メニュー"><span class="menuLines" aria-hidden="true"></span></button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="night.html">映画の夜をつくる</a><a href="match.html">2人で何観る？</a><a href="dna.html">映画DNA</a><a href="rankings.html">映画ランキング</a></aside>
+<header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="brandFallback">CINEMAP</span></div><div class="searchBox"><input id="q" class="search" placeholder="作品を検索" autocomplete="off"><div id="searchResults" class="searchResults"></div></div><button class="menuBtn" id="menuBtn" aria-label="メニュー"><span class="menuLines" aria-hidden="true"></span></button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="brandFallback" style="color:#f2f2f2">CINEMAP</span></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="night.html">鑑賞プラン</a><a href="match.html">ふたりで選ぶ</a><a href="dna.html">映画DNA</a><a href="rankings.html">映画ランキング</a></aside>
 <main class="wrap">
-<section class="hero"><h1>映画カレンダー</h1><div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><a href="night.html" style="display:inline-flex;align-items:center;background:#e8b44f;color:#111;text-decoration:none;font-weight:900;border-radius:6px;padding:10px 14px">映画の夜をつくる</a><a href="match.html" style="display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#111;text-decoration:none;font-weight:900;border-radius:6px;padding:10px 14px">2人で何観る？</a><a href="dna.html" style="display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:900;border-radius:6px;padding:10px 14px">映画DNA</a></div></section>
+<section class="hero"><h1>映画を、公開日だけで終わらせない。</h1><p>劇場・配信・TV・映画祭を追いながら、作品の歩み、人、文脈まで辿るための映画マップ。</p><div class="heroActions"><a href="dna.html" class="heroAction">映画DNA</a><a href="rankings.html" class="heroAction alt">映画ランキング</a><a href="match.html" class="heroAction ghost">ふたりで選ぶ</a><a href="night.html" class="heroAction ghost">鑑賞プラン</a></div></section>
+<section class="deepIntro"><h2>一本の映画から、もっと奥へ。</h2><p>作品詳細では、公開・配信・放映の歩み、監督や出演者のつながり、その作品が属する年代・ジャンルの文脈、次に辿れる作品までまとめて見られる設計に更新しています。</p></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">TV公開</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div>
+<div class="runtimeFilterBar" id="runtimeFilterBar">
+ <label>上映時間<select id="runtimePreset"><option value="all">指定なし</option><option value="90">90分以内</option><option value="120">120分以内</option><option value="150">150分以内</option><option value="180plus">180分以上</option><option value="custom">自由指定</option></select></label>
+ <label>最小<input id="runtimeMin" type="number" min="1" max="600" inputmode="numeric" placeholder="分"></label>
+ <label>最大<input id="runtimeMax" type="number" min="1" max="600" inputmode="numeric" placeholder="分"></label>
+ <span class="runtimeFilterNote">カレンダー・作品検索の両方に反映</span>
+</div>
 
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a></footer></main>
@@ -109,11 +129,13 @@ let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory=
 const savedMode=localStorage.getItem("cinemaNow.mode");
 const savedActive=localStorage.getItem("cinemaNow.active");
 let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"streaming", view=new Date();
+let runtimeMin=0,runtimeMax=0;
 const $=s=>document.querySelector(s);
 let modalScrollY=0;
 function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
-function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;return ok&&serviceOk})}
+function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.runtime||0);if(!r)return false;return (!runtimeMin||r>=runtimeMin)&&(!runtimeMax||r<=runtimeMax)}
+function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;return ok&&serviceOk&&(mode==="festival"||runtimeOk(m))})}
 function streamingReleaseServices(){
  const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
  const ordered=STREAMING_SERVICES.filter(s=>found.includes(s));
@@ -135,7 +157,7 @@ function searchMovieResults(){
  if(!q){$("#searchResults").classList.remove("show");$("#searchResults").innerHTML="";return []}
  let seen=new Set(),rows=[];
  for(let m of movies){
-  if(m.event==="festival")continue;
+  if(m.event==="festival"||!runtimeOk(m))continue;
   let keys=[normTitle(m.title),normTitle(m.original_title||"")].filter(Boolean);
   if(!keys.some(k=>k.includes(q)||q.includes(k)))continue;
   let k=m.id?"id:"+m.id:"title:"+normTitle(m.title);
@@ -461,15 +483,15 @@ function openMovie(m){
  let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
  let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:[];
- let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の過去作品</h3><div class="filmography">'+works.slice(0,14).map(w=>'<div class="filmItem"><a target="_blank" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span></a></div>').join("")+'</div></section>':"";
+ let filmHtml=works.length?'<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="margin-bottom:10px">'+(m.director||"監督")+'の作品を辿る</div><div class="filmography">'+works.slice(0,14).map(w=>'<div class="filmItem"><a target="_blank" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span></a></div>').join("")+'</div></section>':"";
  let trailer='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式');
  let teaser='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 特報 ティザー 公式');
  let rating='<div class="detailScore"><span class="scorePill">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="small" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を探す </a>'+'</div>';
- let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>作品情報</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
+ let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>この映画は何者か</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
  let streamStart=streams.length?streams.map(x=>'<b>'+x.service+'</b> '+x.date).join('<br>'):'確認できた配信開始情報なし';
  let nowStreaming=[flat.length?'見放題：'+flat.join(" / "):'',rent.length?'レンタル：'+rent.join(" / "):'',buy.length?'購入：'+buy.join(" / "):''].filter(Boolean).join('<br>')||'現在の配信先を確認できていません';
  let tvNext=tvUpcoming.length?tvUpcoming.slice(0,3).map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません';
- let watch='<section class="detailSection streaming"><h3>視聴情報</h3><div class="watchSummaryGrid">'+
+ let watch='<section class="detailSection streaming"><h3>この映画の歩み</h3><div class="watchSummaryGrid">'+
    '<div class="watchSummaryRow"><div class="watchSummaryLabel">劇場</div><div class="watchSummaryValue">'+(theatrical?'<b>'+theatrical.date+'</b> 日本公開':'公開日未確認')+'</div></div>'+
    '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信開始</div><div class="watchSummaryValue">'+streamStart+'</div></div>'+
    '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信中</div><div class="watchSummaryValue">'+nowStreaming+(av&&av.source_url?'<br><a class="small" target="_blank" rel="noopener noreferrer" href="'+av.source_url+'">提供元で確認</a>':'')+'</div></div>'+
@@ -477,11 +499,13 @@ function openMovie(m){
   '</div>'+(tvPast.length?'<details class="compactDetails"><summary>過去のTV放映記録</summary>'+tvPast.slice(-8).reverse().map(x=>'<div class="small" style="margin:5px 0">'+(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')+'</div>').join("")+'</details>':'')+'</section>';
  let locations=filmingLocationHtml(m);
  if(locations)locations='<section class="detailSection location">'+locations+'</section>';
- let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">過去の公開・配信・放映記録</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
+ let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">公開・配信・放映の全履歴</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
+ let contextBits=[m.director?'監督：'+m.director:'',m.countries&&m.countries.length?'製作国：'+m.countries.join(" / "):'',m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / "):'',m.runtime?'上映時間：'+m.runtime+'分':''].filter(Boolean);
+ let context='<section class="detailSection info"><h3>この作品の文脈</h3><div class="small" style="line-height:1.8">'+(contextBits.length?contextBits.join('<br>'):'現在取得できる情報をもとに文脈を整理中です。')+'</div></section>';
  let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
- let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
+ let links='<section class="detailSection linksSec"><h3>ここから辿る</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
- $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+watch+locations+story+links+filmHtml+history+theater;
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+watch+locations+context+filmHtml+story+links+history+theater;
  showModal()
 }
 function streamServiceColor(name){
@@ -529,6 +553,20 @@ async function fetchBackendOrFallback(apiPath,fallbackPath){
   }catch(e){console.warn("API backend unavailable; using static JSON fallback",apiPath,e)}
   return fetch(fallbackPath+"?"+Date.now(),{cache:"no-store"});
 }
+function applyRuntimePreset(){
+ const v=$("#runtimePreset").value;
+ if(v==="90"){runtimeMin=0;runtimeMax=90}
+ else if(v==="120"){runtimeMin=0;runtimeMax=120}
+ else if(v==="150"){runtimeMin=0;runtimeMax=150}
+ else if(v==="180plus"){runtimeMin=180;runtimeMax=0}
+ else if(v==="all"){runtimeMin=0;runtimeMax=0}
+ else{runtimeMin=Math.max(0,Number($("#runtimeMin").value)||0);runtimeMax=Math.max(0,Number($("#runtimeMax").value)||0)}
+ $("#runtimeMin").value=runtimeMin||"";$("#runtimeMax").value=runtimeMax||"";
+ render();renderSearchResults()
+}
+$("#runtimePreset").onchange=applyRuntimePreset;
+$("#runtimeMin").oninput=()=>{$("#runtimePreset").value="custom";runtimeMin=Math.max(0,Number($("#runtimeMin").value)||0);render();renderSearchResults()};
+$("#runtimeMax").oninput=()=>{$("#runtimePreset").value="custom";runtimeMax=Math.max(0,Number($("#runtimeMax").value)||0);render();renderSearchResults()};
 $("#q").oninput=renderSearchResults;$("#q").onkeydown=e=>{if(e.key==="Enter"){let rows=searchMovieResults();if(rows.length){e.preventDefault();closeSearchFocus();requestAnimationFrame(()=>openMovie(rows[0]))}}};document.addEventListener("click",e=>{if(!e.target.closest(".searchBox"))$("#searchResults").classList.remove("show")});$("#prev").onclick=()=>{if(mode==="streaming"||mode==="tv")view.setDate(view.getDate()-28);else view.setMonth(view.getMonth()-1);renderCal()};$("#next").onclick=()=>{if(mode==="streaming"||mode==="tv")view.setDate(view.getDate()+28);else view.setMonth(view.getMonth()+1);renderCal()};$("#close").onclick=hideModal;$("#modal").onclick=e=>{if(e.target.id==="modal")hideModal()};async function boot(){try{let [mr,tr,dr,fr,er,sr,hr,ar,lr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}render()}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'}}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#drawer").classList.add("show");$("#drawerMask").classList.add("show")}function closeDrawer(){$("#drawer").classList.remove("show");$("#drawerMask").classList.remove("show")}$("#menuBtn").onclick=openDrawer;$("#drawerClose").onclick=closeDrawer;$("#drawerMask").onclick=closeDrawer;
 boot();

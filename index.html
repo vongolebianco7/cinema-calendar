@@ -59,6 +59,11 @@ body{background:#090909}
 .detailSection:first-of-type{border-top:0!important}
 .detailSection.info,.detailSection.release,.detailSection.streaming,.detailSection.tv,.detailSection.location,.detailSection.history,.detailSection.story,.detailSection.theater,.detailSection.linksSec{border-left:0!important}
 .detailSection h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.contextGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.contextCard{border:1px solid #292929;border-radius:5px;padding:10px;display:grid;gap:5px}
+.contextCard b{font-size:11px}.contextCard span{font-size:11px;color:#aaa;line-height:1.55}
+.traceGroup{margin-top:16px}.traceTitle{display:block;font-size:12px;margin-bottom:9px;color:#ddd}
+@media(max-width:600px){.contextGrid{grid-template-columns:1fr}}
 .sheet{background:#101010;border-radius:10px 10px 0 0;padding:20px 18px}
 .close{background:transparent;border:1px solid var(--line);box-shadow:none;border-radius:50%;width:36px;height:36px}
 .links{margin-top:10px}
@@ -456,32 +461,60 @@ function filmingLocationHtml(m){
 }
 function movieIdentity(m){return m.id?"id:"+String(m.id):"title:"+normTitle(m.title)}
 function uniqueByMovie(rows){let seen=new Set();return rows.filter(x=>{let k=movieIdentity(x);if(seen.has(k))return false;seen.add(k);return true})}
+function movieYear(m){let d=(m.date||"").slice(0,4),y=Number(d);return y||0}
+function collaborationCount(name,m){
+ if(!name)return 0;
+ return uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)&&(x.cast||[]).includes(name))).length
+}
 function contextHtml(m){
  const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
  const sameDirector=m.director?peers.filter(x=>x.director===m.director):[];
  const sameGenre=(m.genres||[]).length?peers.filter(x=>(x.genres||[]).some(g=>(m.genres||[]).includes(g))):[];
  const sameCountry=(m.countries||[]).length?peers.filter(x=>(x.countries||[]).some(g=>(m.countries||[]).includes(g))):[];
+ const y=movieYear(m),sameEra=y?peers.filter(x=>Math.abs(movieYear(x)-y)<=2):[];
  const scored=sameGenre.filter(x=>Number(x.score)>0),timed=sameGenre.filter(x=>Number(x.runtime)>0);
  const avgScore=scored.length?scored.reduce((s,x)=>s+Number(x.score),0)/scored.length:0;
  const avgRuntime=timed.length?Math.round(timed.reduce((s,x)=>s+Number(x.runtime),0)/timed.length):0;
- let lines=[];
- if(m.director)lines.push("<b>"+m.director+"</b>監督の作品をCINEMAP内で "+sameDirector.length+"本確認");
- if((m.genres||[]).length)lines.push("同ジャンルの比較対象 "+sameGenre.length+"本"+(avgScore?" · 平均TMDB ★ "+avgScore.toFixed(1):"")+(avgRuntime?" · 平均 "+avgRuntime+"分":""));
- if((m.countries||[]).length)lines.push("同じ製作国を含む作品 "+sameCountry.length+"本");
- if(m.runtime&&avgRuntime){let d=Number(m.runtime)-avgRuntime;lines.push("上映時間は同ジャンル平均より "+Math.abs(d)+"分"+(d>=0?"長め":"短め"))}
- return '<section class="detailSection info"><h3>この作品の文脈</h3><div class="small" style="line-height:1.9">'+(lines.length?lines.join("<br>"):"比較に十分なデータをまだ取得できていません。")+'</div></section>'
+ const directorYears=sameDirector.map(movieYear).filter(Boolean).concat(y||[]).sort((a,b)=>a-b);
+ let cards=[];
+ if(m.director){
+   let pos="";
+   if(y&&directorYears.length>1){
+     let idx=directorYears.indexOf(y);
+     pos=idx===0?"CINEMAP内では初期側":idx===directorYears.length-1?"CINEMAP内では後期側":"CINEMAP内では中期";
+   }
+   cards.push('<div class="contextCard"><b>監督の流れ</b><span>'+m.director+'作品を '+sameDirector.length+'本確認'+(pos?' · '+pos:'')+'</span></div>')
+ }
+ if(y)cards.push('<div class="contextCard"><b>同時代</b><span>'+(y-2)+'〜'+(y+2)+'年の作品を '+sameEra.length+'本確認</span></div>');
+ if((m.genres||[]).length)cards.push('<div class="contextCard"><b>ジャンル内の位置</b><span>'+m.genres.slice(0,2).join(" / ")+' · '+sameGenre.length+'本'+(avgScore?' · 平均TMDB ★ '+avgScore.toFixed(1):'')+(avgRuntime?' · 平均 '+avgRuntime+'分':'')+'</span></div>');
+ if(m.runtime&&avgRuntime){
+   let d=Number(m.runtime)-avgRuntime;
+   cards.push('<div class="contextCard"><b>上映時間</b><span>同ジャンル平均より '+Math.abs(d)+'分'+(d>=0?'長い':'短い')+'</span></div>')
+ }
+ if((m.countries||[]).length)cards.push('<div class="contextCard"><b>製作国</b><span>'+m.countries.slice(0,2).join(" / ")+'を含む作品を '+sameCountry.length+'本確認</span></div>');
+ const recurring=(m.cast||[]).map(name=>({name,n:collaborationCount(name,m)})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,3);
+ if(recurring.length)cards.push('<div class="contextCard"><b>出演者のつながり</b><span>'+recurring.map(x=>x.name+'：他 '+x.n+'本').join(" · ")+'</span></div>');
+ return '<section class="detailSection info"><h3>この作品の文脈</h3><div class="contextGrid">'+(cards.length?cards.join(""):'<div class="small">比較に十分なデータをまだ取得できていません。</div>')+'</div></section>'
 }
 function exploreHtml(m){
  const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
+ const y=movieYear(m);
  let scored=peers.map(x=>{
   let score=0,reasons=[];
-  if(m.director&&x.director===m.director){score+=8;reasons.push("同じ監督")}
-  const cast=(m.cast||[]).filter(a=>(x.cast||[]).includes(a));if(cast.length){score+=Math.min(6,cast.length*3);reasons.push(cast[0]+"出演")}
-  const genres=(m.genres||[]).filter(g=>(x.genres||[]).includes(g));if(genres.length){score+=genres.length;reasons.push(genres.slice(0,2).join(" / "))}
+  if(m.director&&x.director===m.director){score+=12;reasons.push("同じ監督")}
+  const cast=(m.cast||[]).filter(a=>(x.cast||[]).includes(a));if(cast.length){score+=Math.min(9,cast.length*4);reasons.push(cast[0]+"が出演")}
+  const genres=(m.genres||[]).filter(g=>(x.genres||[]).includes(g));if(genres.length){score+=genres.length*2;reasons.push(genres.slice(0,2).join(" / "))}
+  const xy=movieYear(x);if(y&&xy&&Math.abs(xy-y)<=2){score+=2;reasons.push("同時代 "+xy)}
   if((m.countries||[]).some(g=>(x.countries||[]).includes(g))){score+=1;reasons.push("同じ製作国")}
   return {x,score,reasons}
- }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score||Number(b.x.score||0)-Number(a.x.score||0)).slice(0,8);
- return '<section class="detailSection info"><h3>ここから辿る</h3>'+(scored.length?'<div class="filmography">'+scored.map(r=>'<button type="button" class="filmItem relatedMovie" data-related="'+movies.indexOf(r.x)+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(r.x.poster?'<img src="'+r.x.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+r.x.title+'</b><span class="small">'+r.reasons.slice(0,2).join(" · ")+'</span></button>').join("")+'</div>':'<div class="small">関連作品を取得できていません。</div>')+'</section>'
+ }).filter(r=>r.score>1).sort((a,b)=>b.score-a.score||Number(b.x.score||0)-Number(a.x.score||0)).slice(0,12);
+ let groups=[
+  ["監督から辿る",scored.filter(r=>r.reasons.includes("同じ監督"))],
+  ["出演者から辿る",scored.filter(r=>r.reasons.some(x=>x.endsWith("が出演")))],
+  ["同時代・ジャンルから辿る",scored.filter(r=>!r.reasons.includes("同じ監督")&&!r.reasons.some(x=>x.endsWith("が出演")))]
+ ].filter(g=>g[1].length);
+ const cards=r=>r.slice(0,6).map(z=>'<button type="button" class="filmItem relatedMovie" data-related="'+movies.indexOf(z.x)+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(z.x.poster?'<img src="'+z.x.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+z.x.title+'</b><span class="small">'+z.reasons.slice(0,3).join(" · ")+'</span></button>').join("");
+ return '<section class="detailSection info"><h3>ここから辿る</h3><p class="small" style="margin:0 0 12px">おすすめ順ではなく、この作品との関係が強い順です。</p>'+(groups.length?groups.map(g=>'<div class="traceGroup"><b class="traceTitle">'+g[0]+'</b><div class="filmography">'+cards(g[1])+'</div></div>').join(""):'<div class="small">関連作品を取得できていません。</div>')+'</section>'
 }
 function openMovie(m){
  detailMovie=m;theaterExpanded=false;
@@ -498,7 +531,7 @@ function openMovie(m){
  let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:[];
  let peopleIntro='<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+m.cast.slice(0,8).join("、"):'')+'</div></section>';
- let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>'<div class="filmItem"><a target="_blank" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span></a></div>').join("")+'</div></section>':"";
+ let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||"")===String(w.id||"")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span>';return local>=0?'<button type="button" class="filmItem relatedMovie" data-related="'+local+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+body+'</button>':'<div class="filmItem"><a target="_blank" rel="noopener noreferrer" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+body+'</a></div>'}).join("")+'</div></section>':"";
  let trailer='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式');
  let teaser='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 特報 ティザー 公式');
  let rating='<div class="detailScore"><span class="scorePill">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="small" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を探す </a>'+'</div>';

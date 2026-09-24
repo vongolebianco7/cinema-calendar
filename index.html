@@ -34,23 +34,25 @@ button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
-const services=["すべて","劇場公開","Netflix","Prime Video","Disney+","U-NEXT","Hulu"];
+const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
+const services=["すべて","劇場公開",...STREAMING_SERVICES];
 let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
-let active="すべて", mode="streaming", view=new Date();
+const savedMode=localStorage.getItem("cinemaNow.mode");
+const savedActive=localStorage.getItem("cinemaNow.active");
+let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"streaming", view=new Date();
 const $=s=>document.querySelector(s);
 let modalScrollY=0;
 function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
 function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;if(mode==="streaming"&&!serviceOk&&m.id){let a=(availabilitySnapshot.movies||{})[String(m.id)];let ps=a?[...(a.flatrate||a.services||[]),...(a.rent||[]),...(a.buy||[])]:[];serviceOk=ps.includes(active)}return ok&&serviceOk})}
 function renderChips(){
- let preferred=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","FOD","WOWOWオンデマンド","DMM TV","Rakuten TV"];
- let releaseServices=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
- let observed=[];
- Object.values((availabilitySnapshot&&availabilitySnapshot.movies)||{}).forEach(x=>[...(x.flatrate||x.services||[]),...(x.rent||[]),...(x.buy||[])].forEach(s=>{if(s&&!observed.includes(s))observed.push(s)}));
- let extras=[...new Set([...releaseServices,...observed])].filter(x=>!preferred.includes(x)).sort((a,b)=>a.localeCompare(b,"ja"));
- let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"],tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))],tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));let ss=mode==="streaming"?["すべて",...preferred,...extras]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
+ let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
+ let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
+ let ss=mode==="streaming"?["すべて",...STREAMING_SERVICES]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ if(!ss.includes(active))active="すべて";
  $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
- document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;render()})
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
 }
 function renderCards(){let a=filtered(),groups=new Map();for(let m of a){let k=m.id?("id:"+m.id):("title:"+m.title);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m)}let cards=[...groups.values()];$("#count").textContent=cards.length+"作品";$("#cards").innerHTML=cards.length?cards.map(g=>{let m=g[0],sv=[...new Set(g.map(x=>x.service))],dates=[...new Set(g.map(x=>x.date))].sort(),tv=g.find(x=>x.event==="tv")||{};return '<article class="card" data-i="'+movies.indexOf(m)+'"><div class="poster">'+(m.poster?'<img src="'+m.poster+'" alt="ポスター" loading="lazy">':mode==="festival"?'<div class="festivalCover"><b>'+m.title+'</b><span>'+(m.date||"")+(m.end_date&&m.end_date!==m.date?' 〜 '+m.end_date:'')+'</span></div>':m.title)+'</div><div class="body"><div class="title">'+m.title+'</div>'+(mode==="tv"&&tv.program?'<div class="small" style="margin-top:4px;font-weight:700;color:#e6e7eb">'+tv.program+'</div>':'')+(mode==="festival"&&m.venue?'<div class="small" style="margin-top:4px;color:#d7d9df">'+m.venue+'</div>':'')+'<div class="meta">'+sv.map(s=>'<span class="tag '+svcClass(s)+'">'+s+'</span>').join("")+'<span class="tag">'+(dates.length===1?dates[0]:dates[0]+"〜")+(mode==="tv"&&tv.time?' '+tv.time:'')+'</span>'+(mode==="tv"?'<span class="tag '+(tv.terrestrial_first===true?'tv-first':tv.terrestrial_first===false?'tv-repeat':'tv-unknown')+'">'+(tv.terrestrial_first===true?'地上波初':tv.terrestrial_first===false?'再放送':'初放送未確認')+'</span>':'')+(mode==="festival"?'':'<span class="tag score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="tag" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'" onclick="event.stopPropagation()">Filmarksで探す ↗</a>')+'</div></div></article>'}).join(""):'<div class="empty">該当する作品がありません</div>';document.querySelectorAll(".card").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.i]))}
 function searchMovieResults(){
@@ -415,8 +417,7 @@ function tvChannelColor(name){
 }
 function renderLegend(){
  if(mode==="streaming"){
-  const services=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
-  $("#legend").innerHTML=services.map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")+'<span><i style="background:#7d8796"></i>その他</span>'
+  $("#legend").innerHTML=STREAMING_SERVICES.map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")'
  }else if(mode==="theatrical"){
   $("#legend").innerHTML='<span><i style="background:#6b3a3a"></i>劇場公開</span>'
  }else if(mode==="tv"){
@@ -426,7 +427,7 @@ function renderLegend(){
   $("#legend").innerHTML='<span><i style="background:#7b61d1"></i>国内映画祭</span><span><i style="background:#c65a8a"></i>海外映画祭</span><span><i style="background:#b07a2d"></i>国内イベント</span>'
  }
 }
-function setMode(next){mode=next;active="すべて";render()}
+function setMode(next){mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render()}
 function render(){renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
 let backendConfigPromise=null;
 async function getBackendConfig(){

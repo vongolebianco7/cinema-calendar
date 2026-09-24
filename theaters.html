@@ -14,9 +14,14 @@
 details.directory{border-top:1px solid var(--line);margin-top:8px;padding-top:16px}details.directory summary{cursor:pointer;font-size:13px;font-weight:700}.search{display:flex;gap:8px;margin:14px 0 10px}.search input{flex:1;background:#111;border:1px solid var(--line);color:#fff;border-radius:4px;padding:12px;font:inherit}.meta{color:var(--muted);font-size:11px;margin:4px 0 15px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{border-top:1px solid var(--line);padding:12px 3px}.card h3{font-size:13px;margin:0 0 5px}.place{font-size:10px;color:#999;line-height:1.5}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.btn{font-size:10px;text-decoration:underline;color:#aaa}.note{margin:18px 0 38px;color:var(--muted);font-size:11px;line-height:1.7}.empty{padding:26px 4px;color:var(--muted)}
 @media(max-width:720px){.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:25px}}
 @media(max-width:520px){.grid{grid-template-columns:1fr}.topnav{gap:10px}.theaterHero h2{font-size:22px}}
+
+.brandLogoPlate{display:inline-flex;align-items:center;background:#fff;border-radius:4px;padding:4px 7px;line-height:0}
+.brandLogoPlate .brandLogo{display:block;height:26px;width:auto;object-fit:contain}
+button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
+button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
 </style></head>
 <body>
-<header><div class="wrap top"><a href="index.html"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP"></a><nav class="topnav"><a href="index.html">カレンダー</a><a class="active" href="theaters.html">映画館</a><a href="rankings.html">ランキング</a></nav></div></header>
+<header><div class="wrap top"><a href="index.html"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></a><nav class="topnav"><a href="index.html">カレンダー</a><a class="active" href="theaters.html">映画館</a><a href="rankings.html">ランキング</a></nav></div></header>
 <main class="wrap">
 <section class="hero"><h1>映画館から映画を見る。</h1><p>公式スケジュールを取得できる映画館だけを主役にします。館を選び、日付を選び、その日に何が上映されるかを見る。</p></section>
 

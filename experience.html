@@ -25,43 +25,122 @@
 <main class="wrap">
 <section class="hero"><div class="eyebrow">CINEMA EXPERIENCE</div><h1>同じ映画でも、<br>上映方式でここまで変わる。</h1><p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p></section>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <linearGradient id="deepSeaBg" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#1496c7"/><stop offset=".22" stop-color="#0c729e"/><stop offset=".62" stop-color="#074565"/><stop offset="1" stop-color="#021b2a"/>
+  </linearGradient>
+  <linearGradient id="deepSeaFloor" x1="0" y1="0" x2="1" y2="0">
+   <stop offset="0" stop-color="#173c3d"/><stop offset=".5" stop-color="#0e3135"/><stop offset="1" stop-color="#09242d"/>
+  </linearGradient>
+  <radialGradient id="lightPool" cx=".68" cy=".05" r=".62">
+   <stop offset="0" stop-color="#b8f4ff" stop-opacity=".68"/><stop offset=".4" stop-color="#8edfff" stop-opacity=".22"/><stop offset="1" stop-color="#8edfff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="jellyBody" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#f5c4ff"/><stop offset=".65" stop-color="#b967e8"/><stop offset="1" stop-color="#7134a9"/>
+  </linearGradient>
+ </defs>
+ <symbol id="deepSeaFull" viewBox="0 0 1000 699.301">
+  <rect width="1000" height="699.301" fill="url(#deepSeaBg)"/>
+  <rect width="1000" height="699.301" fill="url(#lightPool)"/>
+
+  <!-- surface shimmer and light shafts -->
+  <path d="M560 0h330l-120 300-48-6 48-294z" fill="#d4fbff" opacity=".11"/>
+  <path d="M690 0h130l-55 290-37 0z" fill="#e8fdff" opacity=".13"/>
+  <path d="M450 0h150l80 300-50 12z" fill="#a9eaff" opacity=".08"/>
+  <g stroke="#c5f4ff" stroke-width="3" opacity=".26">
+   <path d="M20 35C160 5 260 65 390 28S620 58 760 18 900 44 990 20"/>
+   <path d="M0 65C130 38 250 86 365 57S585 88 735 52 910 80 1000 48"/>
+  </g>
+
+  <!-- whale, deliberately near top so crop differences are obvious -->
+  <g fill="#0b3446">
+   <path d="M275 92C375 30 590 26 770 84c-70 10-130 24-190 44-112 35-206 50-282 23-36-13-55-37-23-59z"/>
+   <path d="M763 84l106-47-38 60 45 42-111-31z"/>
+   <path d="M460 121l-74 58 19-69z" opacity=".9"/>
+  </g>
+  <path d="M340 88c115-38 252-39 373-5" stroke="#5f8190" stroke-width="5" opacity=".25" fill="none"/>
+
+  <!-- distant rock walls -->
+  <path d="M0 130L100 96l70 26 62-45 86 64-75 75-100 20L0 205z" fill="#0a3546" opacity=".68"/>
+  <path d="M1000 115l-105-38-72 46-79-18-76 73 72 54 132-8 128-50z" fill="#082f42" opacity=".74"/>
+
+  <!-- fish schools -->
+  <g fill="#b5e8f3" opacity=".78">
+   <path d="M150 210l16-6-5 6 5 6z"/><path d="M188 235l18-7-6 7 6 7z"/><path d="M220 194l15-6-5 6 5 6z"/>
+   <path d="M250 254l14-5-4 5 4 5z"/><path d="M290 222l17-6-5 6 5 6z"/><path d="M332 260l14-5-4 5 4 5z"/>
+   <path d="M720 198l18-7-6 7 6 7z"/><path d="M760 232l15-6-5 6 5 6z"/><path d="M800 188l16-6-5 6 5 6z"/>
+   <path d="M840 248l19-7-6 7 6 7z"/><path d="M875 210l15-5-5 5 5 5z"/>
+  </g>
+  <g fill="#f4d67a" opacity=".9">
+   <path d="M115 328l14-6-5 6 5 6z"/><path d="M155 350l18-7-6 7 6 7z"/><path d="M205 314l16-6-5 6 5 6z"/>
+   <path d="M735 340l15-6-5 6 5 6z"/><path d="M775 316l18-7-6 7 6 7z"/>
+  </g>
+
+  <!-- diver -->
+  <g stroke="#e9faff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="505" cy="331" r="28"/><path d="M505 359v86M505 387l-50 48M505 387l50 48M505 445l-38 72M505 445l39 72"/>
+   <path d="M469 514l-35 17M543 516l35 17"/>
+  </g>
+  <rect x="530" y="355" width="26" height="72" rx="7" fill="#d5eff7" opacity=".8"/>
+  <circle cx="494" cy="327" r="11" fill="#51d2ff" opacity=".8"/>
+
+  <!-- bubbles -->
+  <g fill="none" stroke="#c9f4ff" stroke-width="3" opacity=".58">
+   <circle cx="554" cy="294" r="9"/><circle cx="570" cy="265" r="6"/><circle cx="579" cy="240" r="4"/>
+   <circle cx="447" cy="320" r="7"/><circle cx="430" cy="292" r="4"/>
+  </g>
+
+  <!-- jellyfish -->
+  <g>
+   <path d="M796 470c0-37 30-67 67-67s67 30 67 67z" fill="url(#jellyBody)" opacity=".94"/>
+   <ellipse cx="863" cy="468" rx="67" ry="17" fill="#d990ff" opacity=".82"/>
+   <g stroke="#c875f5" stroke-width="8" fill="none" stroke-linecap="round">
+    <path d="M815 475c-10 65 12 109-3 170"/><path d="M840 478c8 58-7 112 4 166"/><path d="M865 480c-9 62 13 105 2 165"/><path d="M892 478c13 57-11 111 7 162"/><path d="M916 475c-6 62 15 99 6 155"/>
+   </g>
+  </g>
+
+  <!-- wreck -->
+  <g transform="translate(650 515) rotate(-8)">
+   <path d="M0 55l205-35 58 38-235 55z" fill="#38494d"/>
+   <path d="M44 44l118-20 30 20-137 29z" fill="#52666b"/>
+   <rect x="83" y="18" width="55" height="18" fill="#223237"/>
+   <path d="M163 23l14-38 6 36" stroke="#72898e" stroke-width="5" fill="none"/>
+   <g stroke="#94a7aa" stroke-width="3"><path d="M70 63l145-25"/><path d="M91 81l145-25"/></g>
+  </g>
+
+  <!-- sea floor -->
+  <path d="M0 588C120 545 220 590 330 566s195 11 289 6c108-6 214-54 381-13v140H0z" fill="url(#deepSeaFloor)"/>
+  <g fill="#ff7f4f">
+   <path d="M30 660c22-86 18-95 39-130 5 48-1 88 17 128z"/><path d="M72 668c5-73 31-118 52-136-9 55-23 87-16 133z"/>
+   <path d="M126 675c-7-63 16-113 39-147-1 64-13 97 3 143z"/><path d="M180 684c8-59 40-100 62-118-17 47-28 78-22 113z"/>
+  </g>
+  <g fill="#2e9f8e"><path d="M285 690c7-73 42-107 66-128-10 59-17 92-2 126z"/><path d="M336 694c-4-68 22-111 47-137-3 61-7 97 9 134z"/></g>
+  <g fill="#d5b243" opacity=".85"><ellipse cx="565" cy="631" rx="35" ry="13"/><ellipse cx="595" cy="648" rx="22" ry="9"/></g>
+
+  <!-- small seafloor creatures near bottom, deliberately outside scope crop -->
+  <g transform="translate(455 624)">
+   <ellipse cx="0" cy="0" rx="30" ry="20" fill="#e66e55"/><circle cx="-12" cy="-2" r="4" fill="#fff"/><circle cx="12" cy="-2" r="4" fill="#fff"/>
+   <path d="M-20 15l-20 18M-7 18l-8 28M7 18l8 28M20 15l20 18" stroke="#e66e55" stroke-width="7"/>
+  </g>
+  <g transform="translate(925 628)" fill="#84d16e">
+   <path d="M0 40c-4-32 3-52 19-74-2 31 2 46 13 67z"/><path d="M25 38c7-34 21-53 42-66-13 31-14 47-8 66z"/>
+  </g>
+ </symbol>
+</svg>
 <section class="section">
  <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。基準はIMAX GTの1.43:1フルフレームで、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
  <div class="ratioGrid">
   <article class="ratioCard scope"><h3>シネスコ</h3><div class="ratio">2.39:1</div><div class="frameWrap">
-   <svg class="movieFrame" viewBox="0 140.445 1000 418.410" preserveAspectRatio="none" role="img" aria-label="シネスコ2.39対1の深海シーン">
-    <defs><linearGradient id="sea1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
-    <rect width="1000" height="699.301" fill="url(#sea1)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
-    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
-    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
-    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
-    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
-    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
-   </svg></div>
+   <svg class="movieFrame" viewBox="0 140.445 1000 418.410" preserveAspectRatio="none" role="img" aria-label="シネスコ2.39対1の深海シーン"><use href="#deepSeaFull"/></svg></div>
    <div class="ratioMeta"><span>W = 1000</span><span>H = 418.41</span></div><div class="ratioNote">上下を最も大きくカット。中央のダイバーは見える一方、上のクジラや下の海底は見えにくくなります。</div>
   </article>
   <article class="ratioCard imax"><h3>IMAX</h3><div class="ratio">1.90:1</div><div class="frameWrap">
-   <svg class="movieFrame" viewBox="0 86.492 1000 526.316" preserveAspectRatio="none" role="img" aria-label="IMAX1.90対1の深海シーン">
-    <defs><linearGradient id="sea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
-    <rect width="1000" height="699.301" fill="url(#sea2)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
-    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
-    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
-    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
-    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
-    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
-   </svg></div>
+   <svg class="movieFrame" viewBox="0 86.492 1000 526.316" preserveAspectRatio="none" role="img" aria-label="IMAX1.90対1の深海シーン"><use href="#deepSeaFull"/></svg></div>
    <div class="ratioMeta"><span>W = 1000</span><span>H = 526.32</span></div><div class="ratioNote">シネスコより上下が見えます。クジラの一部や海底側の情報が増えます。</div>
   </article>
   <article class="ratioCard gt"><h3>IMAX GT</h3><div class="ratio">1.43:1</div><div class="frameWrap">
-   <svg class="movieFrame" viewBox="0 0 1000 699.301" preserveAspectRatio="none" role="img" aria-label="IMAX GT1.43対1の深海シーン">
-    <defs><linearGradient id="sea3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d79a3"/><stop offset=".55" stop-color="#064b70"/><stop offset="1" stop-color="#012334"/></linearGradient></defs>
-    <rect width="1000" height="699.301" fill="url(#sea3)"/><circle cx="790" cy="45" r="150" fill="#68d8ff" opacity=".12"/>
-    <path d="M340 95 C470 35 650 50 785 105 C680 115 560 135 455 150 C410 150 370 128 340 95Z" fill="#092b3d"/><path d="M785 105 L855 72 L830 130Z" fill="#092b3d"/>
-    <g fill="#a9e5ff" opacity=".72"><circle cx="180" cy="240" r="8"/><circle cx="220" cy="270" r="5"/><circle cx="760" cy="235" r="6"/><circle cx="820" cy="280" r="4"/></g>
-    <g stroke="#d8f4ff" stroke-width="8" fill="none"><circle cx="500" cy="330" r="26"/><path d="M500 356v80M500 386l-48 52M500 386l48 52M500 436l-35 70M500 436l35 70"/></g>
-    <g fill="#ff8c52"><path d="M0 620 Q100 555 180 620 T350 620 V699H0Z"/></g><g fill="#bd5cff"><ellipse cx="825" cy="545" rx="48" ry="34"/><path d="M790 565q5 80 20 110M815 570q0 75 8 110M840 570q-8 70-4 105M865 562q-18 70-15 105" stroke="#bd5cff" stroke-width="9" fill="none"/></g>
-    <g fill="#6c7980"><path d="M650 610l180-36 40 44-185 31z"/></g>
-   </svg></div>
+   <svg class="movieFrame" viewBox="0 0 1000 699.301" preserveAspectRatio="none" role="img" aria-label="IMAX GT1.43対1の深海シーン"><use href="#deepSeaFull"/></svg></div>
    <div class="ratioMeta"><span>W = 1000</span><span>H = 699.30</span></div><div class="ratioNote">基準となるフルフレーム。対応作品・対応劇場では、上のクジラから下の海底まで最も広く見えます。</div>
   </article>
  </div>
@@ -71,22 +150,11 @@
 <section class="section">
  <div class="sectionHead"><h2>映像の仕上がり</h2><p>同じ深海シーンを使い、明るさ・黒の沈み・コントラストの違いを直感的に比較するためのガイドです。実際の見え方は劇場・作品・マスターで変わります。</p></div>
  <div class="compareGrid">
-  <article class="compareCard normalScene"><h3>通常上映</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>基準となる表示。</p></article>
-  <article class="compareCard laserScene"><h3 style="color:var(--blue)">IMAXレーザー</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>レーザー投影による高い明るさ・コントラストをイメージ。</p></article>
-  <article class="compareCard dolbyScene"><h3 style="color:var(--violet)">Dolby Cinema</h3><div class="sceneBox"><svg viewBox="0 0 1000 562"><use href="#colorScene"/></svg></div><p>深い黒と高コントラストを意識した比較。</p></article>
+  <article class="compareCard normalScene"><h3>通常上映</h3><div class="sceneBox"><svg viewBox="0 68.6505 1000 562" preserveAspectRatio="none"><use href="#deepSeaFull"/></svg></div><p>基準となる表示。</p></article>
+  <article class="compareCard laserScene"><h3 style="color:var(--blue)">IMAXレーザー</h3><div class="sceneBox"><svg viewBox="0 68.6505 1000 562" preserveAspectRatio="none"><use href="#deepSeaFull"/></svg></div><p>レーザー投影による高い明るさ・コントラストをイメージ。</p></article>
+  <article class="compareCard dolbyScene"><h3 style="color:var(--violet)">Dolby Cinema</h3><div class="sceneBox"><svg viewBox="0 68.6505 1000 562" preserveAspectRatio="none"><use href="#deepSeaFull"/></svg></div><p>深い黒と高コントラストを意識した比較。</p></article>
  </div>
 </section>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
- <symbol id="colorScene" viewBox="0 0 1000 562">
-  <defs><linearGradient id="seaColor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a9dcc"/><stop offset=".55" stop-color="#075d86"/><stop offset="1" stop-color="#021923"/></linearGradient></defs>
-  <rect width="1000" height="562" fill="url(#seaColor)"/><circle cx="780" cy="95" r="120" fill="#82e2ff" opacity=".18"/>
-  <path d="M315 110 C460 45 650 55 790 110 C680 122 560 145 445 158 C400 154 355 135 315 110Z" fill="#0a2b3b"/>
-  <g stroke="#e8f9ff" stroke-width="8" fill="none"><circle cx="500" cy="300" r="26"/><path d="M500 326v80M500 356l-48 52M500 356l48 52M500 406l-35 70M500 406l35 70"/></g>
-  <path d="M0 505 Q90 445 185 510 T350 510 V562H0Z" fill="#ff8c52"/><ellipse cx="810" cy="415" rx="55" ry="36" fill="#c35cff"/>
-  <g fill="#f7d245"><circle cx="160" cy="245" r="7"/><circle cx="205" cy="270" r="5"/><circle cx="740" cy="245" r="6"/></g>
- </symbol>
-</svg>
 
 <section class="section">
  <div class="sectionHead"><h2>音</h2><p>画面比率とは別の軸。通常のサラウンド、IMAXの多チャンネル音響、Dolby Atmosの高さ方向を含む配置を分けて見ます。</p></div>

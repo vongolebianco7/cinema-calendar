@@ -6,42 +6,123 @@ def get(path,params={}):
 def details(mid):
  return get(f"/movie/{mid}",{"append_to_response":"release_dates,credits"})
 today=datetime.date.today(); start=today-datetime.timedelta(days=365); end=today+datetime.timedelta(days=365)
+os.makedirs("data",exist_ok=True)
+
+# Low-impact differential refresh:
+# - Keep the existing +/-1 year cache.
+# - Check the near-term window every day.
+# - Check one rotating 60-day background slice per day.
+# - Resolve at most 40 movie-detail records per run.
+try:
+ with open("data/theatrical.json",encoding="utf-8") as fh:
+  old_theatrical=json.load(fh)
+except (FileNotFoundError,json.JSONDecodeError):
+ old_theatrical={"movies":[]}
+
 items={}
-# Japan theatrical releases only. Streaming premieres are stored separately in data/streaming.json.
-# Split the two-year window into smaller chunks so TMDB pagination cannot truncate the future range.
+for row in old_theatrical.get("movies",[]):
+ mid=row.get("id")
+ date=row.get("date")
+ if isinstance(mid,int) and date and str(start)<=date<=str(end):
+  items[mid]=row
+
+span_days=(end-start).days+1
+slice_days=60
+slice_count=(span_days+slice_days-1)//slice_days
+slice_index=today.toordinal()%slice_count
+bg_start=start+datetime.timedelta(days=slice_index*slice_days)
+bg_end=min(end,bg_start+datetime.timedelta(days=slice_days-1))
+
+ranges=[
+ (max(start,today-datetime.timedelta(days=30)),min(end,today+datetime.timedelta(days=120))),
+ (bg_start,bg_end),
+]
+
 discovered={}
-chunk_start=start
-while chunk_start <= end:
- chunk_end=min(end,chunk_start+datetime.timedelta(days=59))
- params={"region":"JP","release_date.gte":str(chunk_start),"release_date.lte":str(chunk_end),"with_release_type":"2|3","sort_by":"primary_release_date.asc","include_adult":"false"}
+for range_start,range_end in ranges:
+ params={"region":"JP","release_date.gte":str(range_start),"release_date.lte":str(range_end),"with_release_type":"2|3","sort_by":"primary_release_date.asc","include_adult":"false"}
  first=get("/discover/movie",{**params,"page":1})
- pages=min(int(first.get("total_pages") or 1),50)
+ pages=min(int(first.get("total_pages") or 1),20)
  for m in first.get("results",[]):
-  if m.get("id"): discovered[m["id"]]=m
+  if m.get("id"):discovered[m["id"]]=m
  for page in range(2,pages+1):
   data=get("/discover/movie",{**params,"page":page})
   for m in data.get("results",[]):
-   if m.get("id"): discovered[m["id"]]=m
- chunk_start=chunk_end+datetime.timedelta(days=1)
+   if m.get("id"):discovered[m["id"]]=m
 
-for m in discovered.values():
- if not m.get("poster_path"): continue
- try:d=details(m["id"])
- except Exception:continue
- jp=d.get("release_dates",{}).get("results",[])
- jp=next((x for x in jp if x.get("iso_3166_1")=="JP"),None)
+MAX_DETAIL_REQUESTS=40
+detail_requests=0
+now_iso=datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+def needs_refresh(row):
+ if not row:return True
+ date=row.get("date") or ""
+ if not (str(today-datetime.timedelta(days=30))<=date<=str(today+datetime.timedelta(days=60))):
+  return False
+ checked=row.get("checked_at")
+ if not checked:return True
+ try:
+  checked_dt=datetime.datetime.fromisoformat(str(checked).replace("Z","+00:00"))
+  return (datetime.datetime.now(datetime.timezone.utc)-checked_dt).days>=7
+ except Exception:
+  return True
+
+for mid,m in sorted(discovered.items(),key=lambda kv:(0 if kv[0] not in items else 1,kv[1].get("release_date") or "")):
+ existing=items.get(mid)
+ if not needs_refresh(existing):
+  continue
+ if detail_requests>=MAX_DETAIL_REQUESTS:
+  break
+ if not m.get("poster_path") and not existing:
+  continue
+ try:
+  d=details(mid)
+ except Exception:
+  continue
+ detail_requests+=1
+ jp=next((x for x in d.get("release_dates",{}).get("results",[]) if x.get("iso_3166_1")=="JP"),None)
  dates=[]
  if jp:
   for x in jp.get("release_dates",[]):
-   if x.get("type") in (2,3) and x.get("release_date"): dates.append(x["release_date"][:10])
- if not dates: continue
- valid=[x for x in dates if str(start) <= x <= str(end)]
- if not valid: continue
+   if x.get("type") in (2,3) and x.get("release_date"):dates.append(x["release_date"][:10])
+ valid=[x for x in dates if str(start)<=x<=str(end)]
+ if not valid:
+  continue
  date=min(valid)
- items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"]),"director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"director_id":next((x.get("id") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],"countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],"runtime":d.get("runtime"),"genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")]}
+ poster_path=d.get("poster_path") or m.get("poster_path")
+ items[mid]={
+  "id":mid,
+  "title":d.get("title") or m.get("title"),
+  "original_title":d.get("original_title"),
+  "date":date,
+  "event":"theatrical",
+  "service":"劇場公開",
+  "poster":("https://image.tmdb.org/t/p/w500"+poster_path) if poster_path else (existing or {}).get("poster"),
+  "score":d.get("vote_average",0),
+  "votes":d.get("vote_count",0),
+  "overview":d.get("overview",""),
+  "tmdb":"https://www.themoviedb.org/movie/"+str(mid),
+  "director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),
+  "director_id":next((x.get("id") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),
+  "cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],
+  "countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],
+  "runtime":d.get("runtime"),
+  "genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")],
+  "checked_at":now_iso,
+ }
+
 theatrical=sorted(items.values(),key=lambda x:x["date"])
-os.makedirs("data",exist_ok=True)
-with open("data/theatrical.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"movies":theatrical},fh,ensure_ascii=False,indent=2)
+with open("data/theatrical.json","w",encoding="utf-8") as fh:
+ json.dump({
+  "generated_at":now_iso,
+  "refresh_policy":{
+   "near_term":[str(ranges[0][0]),str(ranges[0][1])],
+   "background_slice":[str(bg_start),str(bg_end)],
+   "max_detail_requests":MAX_DETAIL_REQUESTS,
+  },
+  "movies":theatrical,
+ },fh,ensure_ascii=False,indent=2)
+print("Theatrical cache:",len(theatrical),"detail requests:",detail_requests,"background:",bg_start,bg_end)
 # Auto-import dated Netflix titles from Netflix's official Japan "New to Watch" page.
 # Only accept titles that TMDB resolves as a movie; series/TV results are excluded.
 def fetch_text(url):
@@ -137,6 +218,8 @@ def search_movie_match(title, original_title=None):
 # Enrich verified streaming premieres with TMDB metadata/posters by title.
 # The premiere date and service always remain sourced from official announcements.
 for m in stream_movies:
+ if m.get("id") and m.get("poster") and m.get("director_id"):
+  continue
  try:
   x=search_movie_match(m["title"],m.get("original_title"))
   if x:
@@ -241,113 +324,9 @@ for m in events:
 with open("data/directors.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
 
-# Rankings: DB-less static shards for GitHub Pages.
-# We precompute up to 200 titles per region x genre x era filter and commit them as JSON.
-# This gives the UI enough depth for 50+ visible titles without exposing the TMDB API key client-side.
-rankings={"邦画":{},"洋画":{}}
-genre_groups={
- "アクション":[28],"アドベンチャー":[12],"アニメ":[16],"コメディ":[35],"クライム":[80],
- "ドキュメンタリー":[99],"ドラマ":[18],"ファミリー":[10751],"ファンタジー":[14],"歴史":[36],
- "ホラー":[27],"音楽":[10402],"ミステリー":[9648],"ロマンス":[10749],"SF":[878],
- "スリラー":[53],"戦争":[10752],"西部劇":[37]
-}
-eras={
- "〜1979":(None,"1979-12-31"),"1980年代":("1980-01-01","1989-12-31"),
- "1990年代":("1990-01-01","1999-12-31"),"2000年代":("2000-01-01","2009-12-31"),
- "2010年代":("2010-01-01","2019-12-31"),"2020年代":("2020-01-01",str(today))
-}
-os.makedirs("data/rankings",exist_ok=True)
-manifest={"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"filters":{}}
-for region_name in ["邦画","洋画"]:
- manifest["filters"][region_name]={}
- for genre_name,genre_ids in genre_groups.items():
-  manifest["filters"][region_name][genre_name]={}
-  for era_name,(gte,lte) in eras.items():
-   vote_min=20 if region_name=="邦画" else 100
-   collected=[]
-   for page in range(1,11):
-    params={"with_genres":"|".join(str(x) for x in genre_ids),"sort_by":"vote_average.desc","vote_count.gte":vote_min,"include_adult":"false","page":page}
-    if genre_name!="アニメ": params["without_genres"]="16"
-    if gte: params["primary_release_date.gte"]=gte
-    if lte: params["primary_release_date.lte"]=lte
-    if region_name=="邦画": params["with_origin_country"]="JP"
-    try:
-     rs=get("/discover/movie",params).get("results",[])
-    except Exception:
-     rs=[]
-    if not rs: break
-    for x in rs:
-     countries=x.get("origin_country") or []
-     if region_name=="洋画" and "JP" in countries: continue
-     collected.append(x)
-   seen_ids=set(); unique=[]
-   for x in collected:
-    if not x.get("id") or x["id"] in seen_ids: continue
-    seen_ids.add(x["id"]); unique.append(x)
-   unique.sort(key=lambda x:(x.get("vote_average",0),x.get("vote_count",0)),reverse=True)
-   rows=[{"id":x.get("id"),"title":x.get("title") or x.get("original_title"),
-          "year":(x.get("release_date") or "")[:4],
-          "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
-          "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
-          "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))} for x in unique[:200]]
-   safe_region="jp" if region_name=="邦画" else "foreign"
-   safe_genre=str(genre_ids[0])
-   safe_era=re.sub(r"[^0-9A-Za-z]+","-",era_name).strip("-") or "all"
-   fname=f"{safe_region}-{safe_genre}-{safe_era}.json"
-   with open("data/rankings/"+fname,"w",encoding="utf-8") as fh:
-    json.dump({"region":region_name,"genre":genre_name,"era":era_name,"items":rows},fh,ensure_ascii=False,indent=2)
-   manifest["filters"][region_name][genre_name][era_name]={"file":"data/rankings/"+fname,"count":len(rows)}
-   rankings[region_name].setdefault(genre_name,{})[era_name]=rows[:50]
-with open("data/rankings_manifest.json","w",encoding="utf-8") as fh:
- json.dump(manifest,fh,ensure_ascii=False,indent=2)
-with open("data/rankings.json","w",encoding="utf-8") as fh:
- json.dump({"generated_at":manifest["generated_at"],"method":"TMDB vote_average descending; static shards, up to 200 titles per filter","rankings":rankings},fh,ensure_ascii=False,indent=2)
-
-# Dedicated current-year ranking so "今年" is not just a subset of the 2020s top list.
-current_year=str(today.year)
-year_rankings={"邦画":{},"洋画":{}}
-for region_name in ["邦画","洋画"]:
- for genre_name,genre_ids in genre_groups.items():
-  vote_min=5 if region_name=="邦画" else 20
-  collected=[]
-  for page in range(1,11):
-   params={
-    "with_genres":"|".join(str(x) for x in genre_ids),
-    "sort_by":"vote_average.desc",
-    "vote_count.gte":vote_min,
-    "include_adult":"false",
-    "primary_release_date.gte":current_year+"-01-01",
-    "primary_release_date.lte":str(today),
-    "page":page
-   }
-   if genre_name!="アニメ": params["without_genres"]="16"
-   if region_name=="邦画": params["with_origin_country"]="JP"
-   try:
-    rs=get("/discover/movie",params).get("results",[])
-   except Exception:
-    rs=[]
-   if not rs: break
-   for x in rs:
-    countries=x.get("origin_country") or []
-    if region_name=="洋画" and "JP" in countries: continue
-    collected.append(x)
-  seen_ids=set(); unique=[]
-  for x in collected:
-   if not x.get("id") or x["id"] in seen_ids: continue
-   seen_ids.add(x["id"]); unique.append(x)
-  unique.sort(key=lambda x:(x.get("vote_average",0),x.get("vote_count",0)),reverse=True)
-  year_rankings[region_name][genre_name]=[
-   {"id":x.get("id"),"title":x.get("title") or x.get("original_title"),
-    "date":(x.get("release_date") or "")[:10],"year":(x.get("release_date") or "")[:4],
-    "poster":("https://image.tmdb.org/t/p/w342"+x["poster_path"]) if x.get("poster_path") else None,
-    "score":x.get("vote_average",0),"votes":x.get("vote_count",0),
-    "tmdb":"https://www.themoviedb.org/movie/"+str(x.get("id"))}
-   for x in unique[:200]
-  ]
-with open("data/rankings_year.json","w",encoding="utf-8") as fh:
- json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"year":today.year,
-            "method":"TMDB current-year releases, vote_average descending","rankings":year_rankings},
-           fh,ensure_ascii=False,indent=2)
+# Rankings are intentionally NOT regenerated during the daily movie refresh.
+# Existing static ranking shards remain available to the UI.
+# This keeps the daily external API footprint bounded; rankings can be refreshed separately at low frequency.
 
 # Box-office scraping disabled.
 # CINEMA DAYS does not automatically collect or republish Kogyo Tsushinsha ranking data.

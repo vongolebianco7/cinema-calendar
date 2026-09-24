@@ -428,7 +428,7 @@ function tvChannelColor(name){
 }
 function renderLegend(){
  if(mode==="streaming"){
-  $("#legend").innerHTML=streamingReleaseServices().map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")'
+  $("#legend").innerHTML=streamingReleaseServices().map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")
  }else if(mode==="theatrical"){
   $("#legend").innerHTML='<span><i style="background:#6b3a3a"></i>劇場公開</span>'
  }else if(mode==="tv"){

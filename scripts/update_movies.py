@@ -7,25 +7,38 @@ def details(mid):
  return get(f"/movie/{mid}",{"append_to_response":"release_dates,credits"})
 today=datetime.date.today(); start=today-datetime.timedelta(days=365); end=today+datetime.timedelta(days=365)
 items={}
-# Japan theatrical releases only. Streaming premieres are stored separately in data/streaming.json
-# and must come from dated official service announcements, never inferred from current availability.
-for page in range(1,31):
- data=get("/discover/movie",{"region":"JP","release_date.gte":str(start),"release_date.lte":str(end),"with_release_type":"2|3","sort_by":"primary_release_date.asc","include_adult":"false","page":page})
- for m in data.get("results",[]):
-  if not m.get("poster_path"): continue
-  try:d=details(m["id"])
-  except Exception:continue
-  jp=d.get("release_dates",{}).get("results",[])
-  jp=next((x for x in jp if x.get("iso_3166_1")=="JP"),None)
-  dates=[]
-  if jp:
-   for x in jp.get("release_dates",[]):
-    if x.get("type") in (2,3) and x.get("release_date"): dates.append(x["release_date"][:10])
-  if not dates: continue
-  valid=[x for x in dates if str(start) <= x <= str(end)]
-  if not valid: continue
-  date=min(valid)
-  items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"]),"director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"director_id":next((x.get("id") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],"countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],"runtime":d.get("runtime"),"genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")]}
+# Japan theatrical releases only. Streaming premieres are stored separately in data/streaming.json.
+# Split the two-year window into smaller chunks so TMDB pagination cannot truncate the future range.
+discovered={}
+chunk_start=start
+while chunk_start <= end:
+ chunk_end=min(end,chunk_start+datetime.timedelta(days=59))
+ params={"region":"JP","release_date.gte":str(chunk_start),"release_date.lte":str(chunk_end),"with_release_type":"2|3","sort_by":"primary_release_date.asc","include_adult":"false"}
+ first=get("/discover/movie",{**params,"page":1})
+ pages=min(int(first.get("total_pages") or 1),50)
+ for m in first.get("results",[]):
+  if m.get("id"): discovered[m["id"]]=m
+ for page in range(2,pages+1):
+  data=get("/discover/movie",{**params,"page":page})
+  for m in data.get("results",[]):
+   if m.get("id"): discovered[m["id"]]=m
+ chunk_start=chunk_end+datetime.timedelta(days=1)
+
+for m in discovered.values():
+ if not m.get("poster_path"): continue
+ try:d=details(m["id"])
+ except Exception:continue
+ jp=d.get("release_dates",{}).get("results",[])
+ jp=next((x for x in jp if x.get("iso_3166_1")=="JP"),None)
+ dates=[]
+ if jp:
+  for x in jp.get("release_dates",[]):
+   if x.get("type") in (2,3) and x.get("release_date"): dates.append(x["release_date"][:10])
+ if not dates: continue
+ valid=[x for x in dates if str(start) <= x <= str(end)]
+ if not valid: continue
+ date=min(valid)
+ items[m["id"]]={"id":m["id"],"title":d.get("title") or m.get("title"),"original_title":d.get("original_title"),"date":date,"event":"theatrical","service":"劇場公開","poster":"https://image.tmdb.org/t/p/w500"+m["poster_path"],"score":d.get("vote_average",0),"votes":d.get("vote_count",0),"overview":d.get("overview",""),"tmdb":"https://www.themoviedb.org/movie/"+str(m["id"]),"director":next((x.get("name") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"director_id":next((x.get("id") for x in d.get("credits",{}).get("crew",[]) if x.get("job")=="Director"),None),"cast":[x.get("name") for x in d.get("credits",{}).get("cast",[])[:4] if x.get("name")],"countries":[x.get("name") for x in d.get("production_countries",[]) if x.get("name")],"runtime":d.get("runtime"),"genres":[x.get("name") for x in d.get("genres",[]) if x.get("name")]}
 theatrical=sorted(items.values(),key=lambda x:x["date"])
 os.makedirs("data",exist_ok=True)
 with open("data/theatrical.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"movies":theatrical},fh,ensure_ascii=False,indent=2)

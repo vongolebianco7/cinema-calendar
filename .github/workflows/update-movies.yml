@@ -31,6 +31,19 @@ jobs:
       - name: Archive sourced publication history
         run: python scripts/update_history.py
 
+      - name: Validate movie snapshot
+        run: |
+          python - <<'PY'
+          import json, sys
+          with open("data/movies.json", encoding="utf-8") as f:
+              data = json.load(f)
+          count = len(data.get("movies") or [])
+          print("movie snapshot count:", count)
+          if count < 50:
+              print("Refusing to sync an unexpectedly small movie snapshot.")
+              sys.exit(1)
+          PY
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

@@ -81,3 +81,14 @@ When terms change or a source requests removal, disable the integration promptly
 ## Priority
 
 When product completeness conflicts with compliance, compliance wins.
+
+
+## Automated source registry
+
+Production automation must consult `data/source_registry.json`.
+
+- `approved`: may be used by automated production workflows, subject to listed requirements.
+- `link_only`: may only be referenced through ordinary outbound links; no scraping, caching, or republication.
+- `disabled`: must not be used for automated collection or republication.
+
+Automated workflows must pass `scripts/check_sources.py` before collecting production data. Changing a source from `disabled` or `link_only` to `approved` requires a fresh compliance review and documented legal/contractual basis.

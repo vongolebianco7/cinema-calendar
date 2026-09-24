@@ -12,6 +12,10 @@ on:
   schedule:
     - cron: "45 18 * * *"
 
+concurrency:
+  group: cinema-database-write
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest

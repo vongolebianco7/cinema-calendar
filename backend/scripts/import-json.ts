@@ -168,7 +168,16 @@ async function importTv() {
 }
 
 async function importTheaterMaster() {
-  const data = await load<{ theaters?: TheaterMasterRow[] }>("theaters_master.json");
+  let data: { theaters?: TheaterMasterRow[] };
+  try {
+    data = await load<{ theaters?: TheaterMasterRow[] }>("theaters_master.json");
+  } catch (error: any) {
+    if (error?.code === "ENOENT") {
+      console.log(JSON.stringify({ theaterMasterSkipped: true, reason: "snapshot_not_generated_yet" }));
+      return 0;
+    }
+    throw error;
+  }
   const rows = data.theaters || [];
   const sourceIds = rows.map(x => x.source_id).filter(Boolean);
   if (sourceIds.length) {

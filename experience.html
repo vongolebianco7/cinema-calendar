@@ -61,6 +61,22 @@
 
 
 .approvedAspectVisual{margin-top:22px;border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;background:#050607}.approvedAspectVisual img{display:block;width:100%;height:auto}@media(max-width:700px){.approvedAspectVisual{border-radius:12px}}
+
+.expDefs{position:absolute;width:0;height:0;overflow:hidden}
+.expSection{margin-top:44px}
+.ratioStack,.qualityGrid,.audioGrid,.motionGrid{display:grid;gap:18px;margin-top:22px}
+.ratioPanel,.qualityCard,.audioCard,.motionCard,.screenxCard,.pickGrid article{background:#080a0c;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
+.ratioPanel{padding:14px}.ratioLabel{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:12px}.ratioLabel div{display:flex;align-items:baseline;gap:12px}.ratioLabel b{font-size:20px}.ratioLabel strong{font-size:26px}.ratioLabel span{font-size:12px;color:#9da5ae}
+.scopePanel{border-color:rgba(255,95,95,.45)}.scopePanel strong{color:#ff6b6b}.imaxPanel{border-color:rgba(81,206,151,.45)}.imaxPanel strong{color:#68e8a1}.gtPanel{border-color:rgba(79,174,255,.5)}.gtPanel strong{color:#64b9ff}
+.ratioScene{display:block;width:100%;height:auto;border-radius:12px;background:#062b42}.ratioPanel p,.qualityCard p,.audioCard p,.motionCard p,.screenxCard p{margin:12px 4px 2px;color:#aeb4bb;line-height:1.65;font-size:14px}
+.qualityGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.qualityCard{padding:14px}.qualityCard h3,.audioCard h3,.motionCard h3,.screenxCard h3{margin:0;font-size:20px}.qualityScene{margin-top:12px;border-radius:12px;overflow:hidden;background:#061f2d}.qualityScene svg{display:block;width:100%;height:auto}
+.normalQ .qualityScene{filter:saturate(.88) brightness(.88) contrast(.94)}.imaxQ .qualityScene{filter:saturate(1.08) brightness(1.08) contrast(1.08)}.dolbyQ .qualityScene{filter:saturate(1.18) brightness(.94) contrast(1.24)}
+.imaxQ h3{color:#63b3ff}.dolbyQ h3{color:#bc70ff}
+.audioGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.audioCard{padding:14px}.audioTop,.motionHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.audioTop span,.motionHead span{font-size:11px;letter-spacing:.08em;color:#8c949d}.audioSvg,.motionSvg,.screenxSvg{display:block;width:100%;height:auto;margin-top:10px;border-radius:12px}.imaxA h3{color:#63b3ff}.atmosA h3{color:#bc70ff}
+.motionGrid{grid-template-columns:1fr 1fr}.motionCard{padding:16px}.dx4 h3{color:#ff6b6b}.mx4d h3{color:#63b3ff}.screenxCard{margin-top:18px;padding:16px}.screenxCard h3{color:#e6c35e}
+.pickGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}.pickGrid article{padding:15px;display:flex;flex-direction:column;gap:8px}.pickGrid b{font-size:15px}.pickGrid span{color:#9ea6ae;font-size:12px;line-height:1.55}
+@media(max-width:800px){.qualityGrid,.audioGrid{grid-template-columns:1fr}.pickGrid{grid-template-columns:1fr}.motionGrid{grid-template-columns:1fr}.ratioLabel{align-items:flex-start}.ratioLabel div{display:block}.ratioLabel strong{display:block;margin-top:2px;font-size:24px}.ratioLabel span{max-width:130px;text-align:right}.audioSvg,.motionSvg,.screenxSvg{border-radius:10px}.expSection{margin-top:34px}}
+
 </style>
 </head>
 <body>
@@ -85,39 +101,238 @@
 <main class="wrap">
 <section class="hero"><div class="eyebrow">CINEMA EXPERIENCE</div><h1>同じ映画でも、<br>上映方式でここまで変わる。</h1><p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p></section>
 
-<section class="section">
- <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。基準はIMAX GTの1.43:1フルフレームで、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
- <div class="approvedAspectVisual"><img src="data:image/jpeg;base64,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[... ELLIPSIZATION ...]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" alt="シネマスコープ、IMAX、IMAX GTで同じ海中シーンの見える範囲を比較。クジラ、魚群、ダイバー、沈船、珊瑚、海底生物を配置した比較図。"></div>>
- <div class="formula">同じ横幅で比較すると、2.39:1 → 高さ 418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※「見える範囲」の概念比較です。実際の作品では撮影・マスター・上映方式によって使用される画角が異なります。スクリーン実寸とも別の話です。</div></section>
 
-<section class="section">
- <div class="sectionHead"><h2>映像の仕上がり</h2><p>同じ深海シーンを使い、明るさ・黒の沈み・コントラストの違いを直感的に比較するためのガイドです。実際の見え方は劇場・作品・マスターで変わります。</p></div>
- <div class="compareGrid">
-  <article class="compareCard normalScene"><h3>通常上映</h3><div class="sceneBox"><img class="deepSeaQuality" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="同じ深海シーン"></div><p>基準となる表示。</p></article>
-  <article class="compareCard laserScene"><h3 style="color:var(--blue)">IMAXレーザー</h3><div class="sceneBox"><img class="deepSeaQuality" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="同じ深海シーン"></div><p>レーザー投影による高い明るさ・コントラストをイメージ。</p></article>
-  <article class="compareCard dolbyScene"><h3 style="color:var(--violet)">Dolby Cinema</h3><div class="sceneBox"><img class="deepSeaQuality" src="https://images.pexels.com/photos/10519044/pexels-photo-10519044.jpeg?auto=compress&dpr=1&h=1200&w=1600" alt="同じ深海シーン"></div><p>深い黒と高コントラストを意識した比較。</p></article>
+<section class="section expSection" id="aspect">
+ <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。IMAX GT 1.43:1 を基準に、1.90:1 と 2.39:1 は上下を中央クロップしています。</p></div>
+
+ <svg class="expDefs" aria-hidden="true" width="0" height="0">
+  <defs>
+   <linearGradient id="seaBg2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#29b6df"/><stop offset=".26" stop-color="#0874a6"/><stop offset=".65" stop-color="#074361"/><stop offset="1" stop-color="#031921"/>
+   </linearGradient>
+   <radialGradient id="sunGlow2" cx=".52" cy=".02" r=".62">
+    <stop offset="0" stop-color="#e7fbff" stop-opacity=".95"/><stop offset=".26" stop-color="#a2e8f7" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+   </radialGradient>
+   <linearGradient id="reef2" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#17382e"/><stop offset=".3" stop-color="#31563c"/><stop offset=".62" stop-color="#1f4b3c"/><stop offset="1" stop-color="#12332f"/>
+   </linearGradient>
+   <symbol id="cinemapSeaScene" viewBox="0 0 1000 699.3">
+    <rect width="1000" height="699.3" fill="url(#seaBg2)"/>
+    <rect width="1000" height="699.3" fill="url(#sunGlow2)"/>
+    <path d="M0 15 Q180 -2 350 14 T690 12 T1000 20" fill="none" stroke="#d6fbff" stroke-opacity=".72" stroke-width="6"/>
+    <g stroke="#d7fbff" stroke-opacity=".13" stroke-linecap="round">
+      <path d="M250 0 L90 500" stroke-width="24"/><path d="M360 0 L270 510" stroke-width="16"/>
+      <path d="M480 0 L430 540" stroke-width="20"/><path d="M610 0 L660 510" stroke-width="18"/>
+    </g>
+
+    <!-- whale high in frame -->
+    <g transform="translate(505 103) rotate(-3)">
+      <ellipse cx="0" cy="0" rx="188" ry="56" fill="#2f6f89"/>
+      <ellipse cx="20" cy="-8" rx="146" ry="39" fill="#4b879b" opacity=".65"/>
+      <path d="M-176 -8 Q-263 -67 -328 -38 Q-281 7 -177 18Z" fill="#2a6178"/>
+      <path d="M172 -7 Q235 -40 285 -21 Q237 16 169 18Z" fill="#2a6178"/>
+      <path d="M-38 46 Q18 94 72 49 Q17 53 -20 29Z" fill="#28596f"/>
+      <circle cx="128" cy="-12" r="4" fill="#071821"/>
+    </g>
+
+    <!-- fish schools -->
+    <g fill="#d2eef5" opacity=".78">
+     <path d="M120 210 l18 -6 -7 8 7 7 -18 -5 -12 4 5 -6 -5 -6z"/>
+     <path d="M160 236 l14 -5 -5 6 5 6 -14 -5 -10 4 4 -6 -4 -5z"/>
+     <path d="M205 196 l15 -5 -6 7 6 6 -15 -5 -11 4 5 -6 -5 -6z"/>
+     <path d="M788 210 l16 -5 -6 7 6 6 -16 -5 -11 4 5 -6 -5 -6z"/>
+     <path d="M830 235 l14 -4 -5 6 5 6 -14 -5 -10 3 4 -5 -4 -5z"/>
+     <path d="M870 190 l16 -5 -6 7 6 6 -16 -5 -11 4 5 -6 -5 -6z"/>
+    </g>
+
+    <!-- diver in center -->
+    <g transform="translate(488 350) rotate(-8)">
+      <circle cx="0" cy="-8" r="18" fill="#07141b" stroke="#8bdff2" stroke-width="2"/>
+      <rect x="-20" y="9" width="62" height="24" rx="10" fill="#0d2029"/>
+      <rect x="-49" y="3" width="28" height="38" rx="9" fill="#9db6bf"/>
+      <path d="M39 21 L93 40" stroke="#0d1d24" stroke-width="12" stroke-linecap="round"/>
+      <path d="M90 40 L128 27" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
+      <path d="M35 12 L82 -7" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
+      <path d="M-5 31 L38 65" stroke="#0d1d24" stroke-width="12" stroke-linecap="round"/>
+      <path d="M38 65 L74 86" stroke="#0d1d24" stroke-width="10" stroke-linecap="round"/>
+      <path d="M72 86 L105 76 L90 95Z" fill="#e3c25a"/>
+      <circle cx="10" cy="-10" r="7" fill="#75d8ef"/>
+      <path d="M-46 -11 Q-68 -37 -80 -73" fill="none" stroke="#a8dae5" stroke-width="4"/>
+      <circle cx="-83" cy="-80" r="5" fill="#ddfbff" opacity=".7"/><circle cx="-89" cy="-97" r="8" fill="#ddfbff" opacity=".42"/>
+    </g>
+
+    <!-- wreck -->
+    <g transform="translate(700 430)" stroke="#0c2630" fill="none">
+      <path d="M0 112 L42 0 L160 25 L128 118Z" stroke-width="16"/>
+      <path d="M32 65 L144 79M57 16 L80 121M108 17 L92 120" stroke-width="8"/>
+      <path d="M20 100 L-24 123 M128 108 L174 131" stroke-width="10"/>
+    </g>
+
+    <!-- seafloor and coral -->
+    <path d="M0 610 Q130 558 255 606 T510 596 T770 604 T1000 576 L1000 699.3 L0 699.3Z" fill="url(#reef2)"/>
+    <g fill="#df745d"><circle cx="88" cy="617" r="18"/><circle cx="116" cy="602" r="12"/><circle cx="143" cy="622" r="15"/>
+     <circle cx="850" cy="604" r="21"/><circle cx="884" cy="588" r="14"/><circle cx="912" cy="617" r="18"/></g>
+    <g fill="#d8b653">
+      <path d="M190 678 Q180 610 197 568 Q204 631 220 678Z"/><path d="M245 678 Q230 624 241 586 Q256 630 270 678Z"/>
+      <path d="M760 678 Q752 620 771 579 Q781 628 797 678Z"/>
+    </g>
+    <!-- turtle low in frame -->
+    <g transform="translate(210 595)">
+      <ellipse cx="0" cy="0" rx="61" ry="31" fill="#517760" stroke="#8daf8b" stroke-width="4"/>
+      <circle cx="58" cy="-2" r="14" fill="#63876a"/>
+      <path d="M-38 -20 l-36 -28 12 38zM-38 20 l-36 28 12 -38zM25 -24 l30 -30 -7 40zM25 24 l30 30 -7 -40z" fill="#63876a"/>
+      <path d="M-40 -10 Q0 -34 42 -8 M-45 8 Q0 30 45 8" fill="none" stroke="#a8c199" stroke-width="3"/>
+    </g>
+   </symbol>
+  </defs>
+ </svg>
+
+ <div class="ratioStack">
+  <article class="ratioPanel scopePanel">
+   <div class="ratioLabel"><div><b>シネマスコープ</b><strong>2.39:1</strong></div><span>上下を大きくカット</span></div>
+   <svg class="ratioScene" viewBox="0 140.445 1000 418.41"><use href="#cinemapSeaScene"/></svg>
+   <p>中央のダイバーは見える一方、上のクジラと下の海底情報は大きく減ります。</p>
+  </article>
+  <article class="ratioPanel imaxPanel">
+   <div class="ratioLabel"><div><b>IMAX</b><strong>1.90:1</strong></div><span>上下の情報が増える</span></div>
+   <svg class="ratioScene" viewBox="0 86.49 1000 526.32"><use href="#cinemapSeaScene"/></svg>
+   <p>クジラの大部分と、沈船・珊瑚など海底側の情報が見えてきます。</p>
+  </article>
+  <article class="ratioPanel gtPanel">
+   <div class="ratioLabel"><div><b>IMAX GT</b><strong>1.43:1</strong></div><span>最も上下まで見える</span></div>
+   <svg class="ratioScene" viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg>
+   <p>上のクジラから下の海亀・海底まで、縦方向の情報を最も広く確認できます。</p>
+  </article>
+ </div>
+ <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※見える範囲の概念比較です。実際の作品は撮影・マスター・上映方式により使用画角が異なります。</div>
+</section>
+
+<section class="section expSection" id="visual">
+ <div class="sectionHead"><h2>映像</h2><p>画面比率とは別の軸。まったく同じ海中シーンで、明るさ・黒・コントラストの方向性を比較します。</p></div>
+ <div class="qualityGrid">
+  <article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>基準となる表示。</p></article>
+  <article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>より明るく、ハイライトと細部が見えやすい方向。</p></article>
+  <article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityScene"><svg viewBox="0 0 1000 699.3"><use href="#cinemapSeaScene"/></svg></div><p>黒を深く保ちつつ、色と明暗差を強く感じる方向。</p></article>
+ </div>
+ <div class="formula">※実際の見え方は劇場設備・作品マスター・座席位置などで変わります。ここでは特徴を理解するために差をやや強調しています。</div>
+</section>
+
+<section class="section expSection" id="audio">
+ <div class="sectionHead"><h2>音響</h2><p>音の方向を俯瞰図で比較。Atmosは「上から来る音」を明確に分けています。</p></div>
+ <div class="audioGrid">
+  <article class="audioCard standardA">
+   <div class="audioTop"><h3>通常 5.1 / 7.1ch</h3><span>平面サラウンド</span></div>
+   <svg class="audioSvg" viewBox="0 0 780 360">
+    <defs><linearGradient id="roomG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#152230"/><stop offset="1" stop-color="#070b0f"/></linearGradient></defs>
+    <rect x="35" y="35" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#27313b" stroke-width="3"/>
+    <rect x="215" y="62" width="350" height="64" rx="4" fill="#2a3d52" stroke="#a7b7c5" stroke-width="3"/>
+    <text x="390" y="102" text-anchor="middle" fill="#dfe8ef" font-size="18">SCREEN</text>
+    <g fill="#87939e"><rect x="80" y="124" width="20" height="34" rx="4"/><rect x="680" y="124" width="20" height="34" rx="4"/>
+      <rect x="80" y="245" width="20" height="34" rx="4"/><rect x="680" y="245" width="20" height="34" rx="4"/>
+      <rect x="245" y="282" width="20" height="28" rx="4"/><rect x="515" y="282" width="20" height="28" rx="4"/></g>
+    <g stroke="#8da7bc" fill="none" stroke-width="3" opacity=".8"><ellipse cx="390" cy="226" rx="115" ry="54"/><ellipse cx="390" cy="226" rx="168" ry="84" opacity=".35"/></g>
+    <circle cx="390" cy="226" r="22" fill="#dce5ec"/><path d="M390 252 v38" stroke="#dce5ec" stroke-width="12" stroke-linecap="round"/>
+   </svg>
+   <p>前後左右を中心に、観客を水平面で包むサラウンド。</p>
+  </article>
+
+  <article class="audioCard imaxA">
+   <div class="audioTop"><h3>IMAX 12ch</h3><span>多方向＋前方の厚み</span></div>
+   <svg class="audioSvg" viewBox="0 0 780 360">
+    <rect x="35" y="35" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#263b51" stroke-width="3"/>
+    <rect x="215" y="62" width="350" height="64" rx="4" fill="#24415d" stroke="#6ab4ff" stroke-width="3"/>
+    <g fill="#5ca9ef"><rect x="195" y="76" width="18" height="34" rx="4"/><rect x="567" y="76" width="18" height="34" rx="4"/>
+      <rect x="80" y="120" width="18" height="30" rx="4"/><rect x="682" y="120" width="18" height="30" rx="4"/>
+      <rect x="80" y="246" width="18" height="30" rx="4"/><rect x="682" y="246" width="18" height="30" rx="4"/>
+      <rect x="240" y="284" width="18" height="27" rx="4"/><rect x="522" y="284" width="18" height="27" rx="4"/></g>
+    <g stroke="#4fa7ff" fill="none" stroke-width="3"><ellipse cx="390" cy="226" rx="118" ry="56"/><ellipse cx="390" cy="226" rx="176" ry="90" opacity=".45"/></g>
+    <circle cx="390" cy="226" r="22" fill="#e2edf6"/><path d="M390 252 v38" stroke="#e2edf6" stroke-width="12" stroke-linecap="round"/>
+   </svg>
+   <p>対応設備では、より細かい方向から音を定位しやすい構成。</p>
+  </article>
+
+  <article class="audioCard atmosA">
+   <div class="audioTop"><h3>Dolby Atmos</h3><span>平面＋高さ</span></div>
+   <svg class="audioSvg" viewBox="0 0 780 390">
+    <rect x="35" y="60" width="710" height="290" rx="22" fill="url(#roomG)" stroke="#4f326f" stroke-width="3"/>
+    <rect x="215" y="88" width="350" height="64" rx="4" fill="#2e2852" stroke="#bd6cff" stroke-width="3"/>
+    <g fill="#bd6cff"><rect x="82" y="145" width="18" height="30" rx="4"/><rect x="680" y="145" width="18" height="30" rx="4"/>
+      <rect x="82" y="272" width="18" height="30" rx="4"/><rect x="680" y="272" width="18" height="30" rx="4"/>
+      <rect x="246" y="307" width="18" height="26" rx="4"/><rect x="516" y="307" width="18" height="26" rx="4"/></g>
+    <g fill="#e3c2ff"><rect x="255" y="24" width="34" height="16" rx="5"/><rect x="373" y="24" width="34" height="16" rx="5"/><rect x="491" y="24" width="34" height="16" rx="5"/></g>
+    <g stroke="#bc6cff" fill="none" stroke-width="3"><ellipse cx="390" cy="250" rx="120" ry="58"/><ellipse cx="390" cy="250" rx="175" ry="92" opacity=".42"/>
+      <path d="M272 42 C285 112 320 155 360 207" stroke-dasharray="8 7"/><path d="M390 42 C390 122 390 165 390 205" stroke-dasharray="8 7"/><path d="M508 42 C495 112 460 155 420 207" stroke-dasharray="8 7"/></g>
+    <circle cx="390" cy="250" r="22" fill="#f0e9f7"/><path d="M390 276 v38" stroke="#f0e9f7" stroke-width="12" stroke-linecap="round"/>
+    <text x="390" y="20" text-anchor="middle" fill="#d8b2ff" font-size="16">CEILING SPEAKERS</text>
+   </svg>
+   <p>天井スピーカーを使い、音が頭上を通る・上から降る感覚まで表現。</p>
+  </article>
  </div>
 </section>
 
-<section class="section">
- <div class="sectionHead"><h2>音</h2><p>画面比率とは別の軸。通常のサラウンド、IMAXの多チャンネル音響、Dolby Atmosの高さ方向を含む配置を分けて見ます。</p></div>
- <div class="soundGrid">
-  <article class="soundCard standardSound"><h3>通常 5.1 / 7.1ch</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><div class="seat"></div><i class="soundWave wave1"></i></div><p class="note">前後左右を中心に包むサラウンド。</p></article>
-  <article class="soundCard imaxSound"><h3>IMAX 12ch</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><i class="speaker spT1"></i><i class="speaker spT2"></i><div class="seat"></div><i class="soundWave wave1"></i><i class="soundWave wave2"></i></div><p class="note">対応設備では、より多方向から音を定位。</p></article>
-  <article class="soundCard atmosSound"><h3>Dolby Atmos</h3><div class="auditorium"><div class="screen"></div><i class="speaker spL"></i><i class="speaker spR"></i><i class="speaker spB1"></i><i class="speaker spB2"></i><i class="speaker spT1"></i><i class="speaker spT2"></i><i class="speaker spT3"></i><div class="seat"></div><i class="soundWave wave1"></i><i class="soundWave wave2"></i></div><p class="note">天井を含む3次元的な音場を表現。</p></article>
+<section class="section expSection" id="special">
+ <div class="sectionHead"><h2>体感・特殊上映</h2><p>座席の動き・環境効果・左右壁面への映像拡張など、映像と音以外の体験を比較します。</p></div>
+ <div class="motionGrid">
+  <article class="motionCard dx4">
+   <div class="motionHead"><h3>4DX</h3><span>MOTION + EFFECTS</span></div>
+   <svg class="motionSvg" viewBox="0 0 760 300">
+    <defs><linearGradient id="seatG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#56606f"/><stop offset="1" stop-color="#2d3541"/></linearGradient></defs>
+    <rect x="317" y="64" width="126" height="112" rx="28" fill="url(#seatG)"/><rect x="285" y="172" width="190" height="58" rx="18" fill="#343e4b"/>
+    <path d="M270 120 C215 112 185 126 145 160" fill="none" stroke="#65d4ff" stroke-width="5"/><path d="M140 160 l22 -6 -11 18z" fill="#65d4ff"/>
+    <path d="M490 132 C555 120 590 140 625 175" fill="none" stroke="#7ddff4" stroke-width="5"/><path d="M630 177 l-21 -1 12 -17z" fill="#7ddff4"/>
+    <path d="M350 248 l-16 26 M410 248 l16 26" stroke="#ff6c65" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="205" cy="230" r="17" fill="#61b8ff"/><path d="M205 201 C190 220 188 229 205 247 C222 229 220 220 205 201Z" fill="#61b8ff"/>
+    <path d="M550 210 l18 0 -9 16zM575 205 l18 0 -9 16z" fill="#ffd45c"/>
+    <text x="120" y="110" fill="#8fdcff" font-size="17">WIND</text><text x="170" y="278" fill="#8fdcff" font-size="17">WATER</text><text x="510" y="274" fill="#ffd45c" font-size="17">FLASH</text>
+   </svg>
+   <p>動く座席と風・水・フラッシュなどの環境効果を同期。</p>
+  </article>
+
+  <article class="motionCard mx4d">
+   <div class="motionHead"><h3>MX4D</h3><span>MOTION + MULTI EFFECTS</span></div>
+   <svg class="motionSvg" viewBox="0 0 760 300">
+    <rect x="317" y="64" width="126" height="112" rx="28" fill="url(#seatG)"/><rect x="285" y="172" width="190" height="58" rx="18" fill="#343e4b"/>
+    <g stroke="#6bbaff" stroke-width="5" fill="none"><path d="M270 120 C215 112 185 126 145 160"/><path d="M490 132 C555 120 590 140 625 175"/>
+     <path d="M320 245 q60 35 120 0"/></g>
+    <g fill="#6bbaff"><circle cx="155" cy="214" r="10"/><circle cx="180" cy="230" r="8"/><circle cx="602" cy="213" r="10"/><circle cx="577" cy="230" r="8"/></g>
+    <g stroke="#d28cff" stroke-width="4"><path d="M350 248 l-16 26"/><path d="M410 248 l16 26"/></g>
+    <path d="M113 132 c22 -20 44 -20 65 0 c-22 20 -44 20 -65 0z" fill="#c98cff" opacity=".7"/>
+    <text x="96" y="102" fill="#c98cff" font-size="17">SCENT</text><text x="560" y="102" fill="#6bbaff" font-size="17">SPRAY</text><text x="319" y="292" fill="#d28cff" font-size="17">VIBRATION</text>
+   </svg>
+   <p>モーションに加え、振動・ミスト・香りなど複数の特殊効果を組み合わせます。</p>
+  </article>
  </div>
+
+ <article class="screenxCard">
+  <div class="motionHead"><h3>ScreenX</h3><span>PANORAMIC EXTENSION</span></div>
+  <svg class="screenxSvg" viewBox="0 0 980 390">
+   <defs>
+    <clipPath id="sxL"><polygon points="28,86 260,120 260,330 28,302"/></clipPath>
+    <clipPath id="sxC"><rect x="260" y="86" width="460" height="244" rx="2"/></clipPath>
+    <clipPath id="sxR"><polygon points="720,120 952,86 952,302 720,330"/></clipPath>
+   </defs>
+   <rect width="980" height="390" rx="26" fill="#070b0f"/>
+   <!-- Same continuous scene, shifted across three surfaces -->
+   <g clip-path="url(#sxL)" transform="translate(-10 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
+   <g clip-path="url(#sxC)" transform="translate(0 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
+   <g clip-path="url(#sxR)" transform="translate(10 38) scale(.98 .46)"><use href="#cinemapSeaScene"/></g>
+   <polygon points="28,86 260,120 260,330 28,302" fill="none" stroke="#e4bd56" stroke-width="5"/>
+   <rect x="260" y="86" width="460" height="244" fill="none" stroke="#e4bd56" stroke-width="5"/>
+   <polygon points="720,120 952,86 952,302 720,330" fill="none" stroke="#e4bd56" stroke-width="5"/>
+   <path d="M262 330 L180 355 M718 330 L800 355" stroke="#33404a" stroke-width="3"/>
+  </svg>
+  <p>中央映像の左右に「続き」が広がる方式。3面に同じ映像を複製するのではなく、ひとつのパノラマとして見せます。</p>
+ </article>
 </section>
 
-<section class="section">
- <div class="sectionHead"><h2>体感・特殊上映</h2><p>映像の比率や画質とは別に、座席や周囲の演出そのものが変わります。</p></div>
- <div class="specialGrid">
-  <article class="special"><h3 style="color:var(--red)">4DX</h3><div class="chair"></div><div class="fx">↕︎　💨　💧　⚡</div><p>動く座席と風・水などの環境効果。</p></article>
-  <article class="special"><h3 style="color:var(--blue)">MX4D</h3><div class="chair"></div><div class="fx">↕︎　💨　💦　✨</div><p>モーションシートと各種特殊効果。</p></article>
-  <article class="special"><h3 style="color:var(--gold)">ScreenX</h3><div class="screenxRoom">
-    <div class="sxLeft"><svg viewBox="0 0 300 180" preserveAspectRatio="none"><rect width="300" height="180" fill="#064a6f"/><path d="M0 150L300 70V180H0Z" fill="#ff8c52"/></svg></div>
-    <div class="sxCenter"><svg viewBox="0 0 500 280" preserveAspectRatio="none"><rect width="500" height="280" fill="#0b739d"/><path d="M130 50C240 15 375 30 455 70C350 78 275 92 190 105Z" fill="#092b3d"/><circle cx="250" cy="160" r="14" fill="#e8f9ff"/></svg></div>
-    <div class="sxRight"><svg viewBox="0 0 300 180" preserveAspectRatio="none"><rect width="300" height="180" fill="#064a6f"/><ellipse cx="90" cy="120" rx="35" ry="24" fill="#bd5cff"/></svg></div>
-   </div><p>正面の同じシーンが左右へ連続して拡張。3枚の同じ映像を並べる方式ではありません。</p></article>
+<section class="section expSection" id="guide">
+ <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と体験の優先順位で選ぶとシンプルです。</p></div>
+ <div class="pickGrid">
+  <article><b>通常上映</b><span>作品数重視。気軽に観たい。</span></article>
+  <article><b style="color:var(--blue)">IMAX / IMAXレーザー</b><span>大作・迫力・画面の広がりを重視。</span></article>
+  <article><b style="color:var(--violet)">Dolby Cinema</b><span>黒・色・音の質を重視。</span></article>
+  <article><b style="color:var(--red)">4DX / MX4D</b><span>アトラクション的な体感を楽しむ。</span></article>
+  <article><b style="color:var(--gold)">ScreenX</b><span>左右まで広がる視野を楽しむ。</span></article>
  </div>
  <div class="cta"><a href="theaters.html">対応映画館を見る</a><a href="index.html">作品カレンダーへ</a></div>
 </section>

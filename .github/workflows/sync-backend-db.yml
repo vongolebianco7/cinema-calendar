@@ -2,6 +2,12 @@ name: Sync backend database
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - backend-foundation
+    paths:
+      - backend/**
+      - .github/workflows/sync-backend-db.yml
   schedule:
     - cron: "45 18 * * *"
 

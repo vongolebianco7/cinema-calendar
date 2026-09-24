@@ -8,7 +8,8 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:sync": "prisma db push && tsx scripts/import-json.ts",
-    "db:sync:theaters": "prisma db push && tsx scripts/import-json.ts --theaters-only"
+    "db:sync:theaters": "prisma db push && tsx scripts/import-json.ts --theaters-only",
+    "db:sync:theater-master": "prisma db push && tsx scripts/import-json.ts --theater-master-only"
   },
   "dependencies": {
     "@prisma/client": "^6.0.0",

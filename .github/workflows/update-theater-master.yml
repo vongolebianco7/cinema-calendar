@@ -19,6 +19,7 @@ permissions:
   contents: write
 
 jobs:
+  # Safe serialized theater directory update
   update:
     runs-on: ubuntu-latest
     steps:

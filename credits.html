@@ -11,10 +11,15 @@
 a{color:#9dc8ff}.back{display:inline-block;margin:18px 0 26px}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin:14px 0}
 h1{font-size:28px}h2{font-size:18px;margin:0 0 10px}.muted{color:var(--muted);line-height:1.7}.tmdbLogo{width:78px;height:auto;display:block;margin:10px 0 14px}
 .badge{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;color:var(--muted)}
+
+.brand{display:flex;align-items:center;text-decoration:none}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 </style>
 </head>
 <body><main class="wrap">
-<div class="brand">CINEM<span class="brandA">A</span>P</div>
+<div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp" alt="CINEMAP"></div>
 <a class="back" href="index.html">← カレンダーへ戻る</a>
 <h1>Credits / Data Sources</h1>
 <p class="muted">CINEMAPは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>

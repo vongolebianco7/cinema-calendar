@@ -5,11 +5,11 @@ def get(path,params={}):
  with urllib.request.urlopen(BASE+path+"?"+urllib.parse.urlencode(p),timeout=30) as r:return json.load(r)
 def details(mid):
  return get(f"/movie/{mid}",{"append_to_response":"release_dates,credits"})
-today=datetime.date.today(); start=today-datetime.timedelta(days=45); end=today+datetime.timedelta(days=90)
+today=datetime.date.today(); start=today-datetime.timedelta(days=365); end=today+datetime.timedelta(days=365)
 items={}
 # Japan theatrical releases only. Streaming premieres are stored separately in data/streaming.json
 # and must come from dated official service announcements, never inferred from current availability.
-for page in range(1,16):
+for page in range(1,31):
  data=get("/discover/movie",{"region":"JP","release_date.gte":str(start),"release_date.lte":str(end),"with_release_type":"2|3","sort_by":"primary_release_date.asc","include_adult":"false","page":page})
  for m in data.get("results",[]):
   if not m.get("poster_path"): continue

@@ -42,16 +42,29 @@ for m in movies:
  try:date=datetime.date.fromisoformat(m["date"])
  except (KeyError,ValueError):continue
  distance=abs((date-TODAY).days)
- if distance>180:continue
+ if distance>120:continue
  if mid not in by_id or distance<by_id[mid][0]:by_id[mid]=(distance,m)
 
 # Prioritize streaming calendar entries, then nearby theatrical releases.
 # Coverage was previously capped at 100 titles, which made later-added
 # providers such as Apple TV+, ABEMA and Lemino appear under-populated.
-selected=sorted(
+candidates=sorted(
  by_id.items(),
  key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1,item[1][0])
-)[:400]
+)
+selected=[]
+for mid,pair in candidates:
+ item=cache.get(str(mid),{})
+ checked=item.get("checked_at")
+ stale=True
+ if checked:
+  try:
+   checked_dt=datetime.datetime.fromisoformat(checked.replace("Z","+00:00"))
+   stale=(datetime.datetime.now(datetime.timezone.utc)-checked_dt).days>=7
+  except Exception:
+   stale=True
+ if stale:selected.append((mid,pair))
+ if len(selected)>=40:break
 count=0
 for mid,(_,m) in selected:
  url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})
@@ -75,7 +88,7 @@ for mid,(_,m) in selected:
   item["title"]=m.get("title") or item.get("title")
   cache[str(mid)]=item
   count+=1
-  time.sleep(0.12)
+  time.sleep(1.0)
  except Exception as exc:
   print("provider check skipped:",mid,str(exc))
 

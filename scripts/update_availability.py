@@ -64,7 +64,7 @@ for mid,pair in candidates:
   except Exception:
    stale=True
  if stale:selected.append((mid,pair))
- if len(selected)>=40:break
+ if len(selected)>=20:break
 count=0
 for mid,(_,m) in selected:
  url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})
@@ -88,7 +88,7 @@ for mid,(_,m) in selected:
   item["title"]=m.get("title") or item.get("title")
   cache[str(mid)]=item
   count+=1
-  time.sleep(1.0)
+  time.sleep(1.5)
  except Exception as exc:
   print("provider check skipped:",mid,str(exc))
 

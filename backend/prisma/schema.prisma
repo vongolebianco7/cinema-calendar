@@ -80,3 +80,25 @@ model TheaterShowtime {
   @@index([theater, date])
   @@index([title])
 }
+
+
+model Theater {
+  id           String   @id @default(cuid())
+  source       String
+  sourceId     String   @unique
+  name         String
+  prefecture   String?
+  municipality String?
+  address      String?
+  latitude     Float?
+  longitude    Float?
+  website      String?
+  sourceUrl    String
+  payload      Json
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([prefecture])
+  @@index([municipality])
+  @@index([name])
+}

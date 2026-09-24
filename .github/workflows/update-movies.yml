@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: "17 18 * * *"
 concurrency:
-  group: cinema-movie-metadata-main
+  group: cinema-database-write
   cancel-in-progress: true
 permissions:
   contents: write
@@ -31,7 +31,20 @@ jobs:
         run: python scripts/update_availability.py
       - name: Archive sourced publication history
         run: python scripts/update_history.py
-      - name: Commit changes
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Sync fresh movie and TV data directly to PostgreSQL
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          npm install
+          npm run db:sync
+
+      - name: Commit JSON backup snapshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

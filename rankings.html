@@ -28,10 +28,15 @@ button,.primary,.secondary,.svc,.chip{border-radius:4px!important;box-shadow:non
 .brandLogo{display:block;width:auto;height:34px;object-fit:contain}
 .top .brandLogo{height:32px}
 @media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+
+.brandLogoPlate{display:inline-flex;align-items:center;background:#fff;border-radius:4px;padding:4px 7px;line-height:0}
+.brandLogoPlate .brandLogo{display:block;height:26px;width:auto;object-fit:contain}
+button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
+button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP"></div><button class="menuBtn" id="menuBtn" aria-label="メニュー"><span class="menuLines" aria-hidden="true"></span></button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand"><img class="brandLogo" src="assets/cinemap-logo.webp?v=3" alt="CINEMAP"></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="rankings.html">映画ランキング</a><a href="theaters.html">映画館</a></aside>
+<header class="top"><div class="wrap nav"><div class="brand"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></div><button class="menuBtn" id="menuBtn" aria-label="メニュー"><span class="menuLines" aria-hidden="true"></span></button></div></header><div class="drawerMask" id="drawerMask"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div class="brand"><span class="brandLogoPlate"><img class="brandLogo" src="assets/cinemap-logo.webp?v=4" alt="CINEMAP"></span></div><button class="drawerClose" id="drawerClose">×</button></div><a href="index.html">カレンダー</a><a href="rankings.html">映画ランキング</a><a href="theaters.html">映画館</a></aside>
 <main class="wrap">
 <section class="hero"><h1>映画ランキング</h1><p>評価・興行など、利用条件が明確なデータから映画を探せます。</p></section><div class="chips" id="axisChips"><button class="chip active" data-axis="tmdb">TMDB評価</button><button class="chip" data-axis="year">今年</button></div>
 <div id="tmdbFilters"><div class="chips" id="regionChips"></div><div class="chips" id="genreChips"></div><div class="chips" id="eraChips"></div></div><div id="yearFilters" style="display:none"><div class="chips" id="yearRegionChips"></div><div class="chips" id="yearGenreChips"></div></div><div id="boxFilters" style="display:none"><div class="chips" id="boxRegionChips"></div><div class="chips" id="boxGenreChips"></div><div class="chips" id="boxEraChips"></div></div><div class="rankGrid" id="grid"></div><div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div><div class="note" id="sourceNote"></div>

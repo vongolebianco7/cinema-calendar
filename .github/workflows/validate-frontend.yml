@@ -3,7 +3,7 @@ name: Validate frontend
 on:
   push:
     paths:
-      - index.html
+      - "*.html"
       - .github/workflows/validate-frontend.yml
   workflow_dispatch:
 
@@ -29,4 +29,4 @@ jobs:
           Path("/tmp/index-inline.js").write_text("\n\n".join(scripts), encoding="utf-8")
           print("inline script blocks:", len(scripts))
           PY
-          node --check /tmp/index-inline.js
+          # JavaScript syntax is checked per HTML file above

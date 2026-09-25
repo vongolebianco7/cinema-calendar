@@ -1,0 +1,209 @@
+{
+  "generated_at": "2026-09-26",
+  "note": "公式ブランド/劇場ページで確認できた導入情報をCinemap用に整理。網羅性は公式ソース更新に合わせて拡張。",
+  "screens": [
+    {
+      "format": "IMAX",
+      "theater": "TOHOシネマズ ららぽーと横浜",
+      "prefecture": "神奈川県",
+      "screen": "IMAX",
+      "source_url": "https://www.imax.com/theatre/toho-cinemas-lalaport-yokohama-imax"
+    },
+    {
+      "format": "IMAX",
+      "theater": "イオンシネマ江釣子",
+      "prefecture": "岩手県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/theater/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ名取",
+      "prefecture": "宮城県",
+      "screen": "Screen03",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ越谷レイクタウン",
+      "prefecture": "埼玉県",
+      "screen": "Screen01",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ シアタス調布",
+      "prefecture": "東京都",
+      "screen": "Screen06",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマみなとみらい",
+      "prefecture": "神奈川県",
+      "screen": "Screen01",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ京都桂川",
+      "prefecture": "京都府",
+      "screen": "Screen02",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ四條畷",
+      "prefecture": "大阪府",
+      "screen": "Screen01",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "4DX",
+      "theater": "イオンシネマ筑紫野",
+      "prefecture": "福岡県",
+      "screen": "Screen07",
+      "source_url": "https://www.aeoncinema.com/facility/4dx/"
+    },
+    {
+      "format": "SCREENX",
+      "theater": "TOHOシネマズ 池袋",
+      "prefecture": "東京都",
+      "screen": "SCREENX with Dolby Atmos",
+      "source_url": "https://www.tohotheater.jp/service/screen_x/index.html"
+    },
+    {
+      "format": "SCREENX",
+      "theater": "TOHOシネマズ 熊本サクラマチ",
+      "prefecture": "熊本県",
+      "screen": "SCREENX",
+      "source_url": "https://www.tohotheater.jp/service/screen_x/index.html"
+    },
+    {
+      "format": "SCREENX",
+      "theater": "横浜ブルク13",
+      "prefecture": "神奈川県",
+      "screen": "SCREENX with Dolby Atmos",
+      "source_url": "https://faq.tjoy.jp/faq/detail?id=426&site=916369P4"
+    },
+    {
+      "format": "SCREENX",
+      "theater": "T・ジョイ京都",
+      "prefecture": "京都府",
+      "screen": "SCREENX with Dolby Atmos",
+      "source_url": "https://faq.tjoy.jp/faq/detail?id=426&site=916369P4"
+    },
+    {
+      "format": "SCREENX",
+      "theater": "T・ジョイ蘇我",
+      "prefecture": "千葉県",
+      "screen": "SCREENX with Dolby Atmos",
+      "source_url": "https://faq.tjoy.jp/faq/detail?id=426&site=916369P4"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "丸の内ピカデリー",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "MOVIX さいたま",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "MOVIX 京都",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "ミッドランドスクエア シネマ",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "T・ジョイ横浜",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "T・ジョイ博多",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "T・ジョイ梅田",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "新宿バルト9",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "TOHOシネマズ ららぽーと門真",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "Dolby Cinema",
+      "theater": "TOHOシネマズ すすきの",
+      "prefecture": "",
+      "screen": "Dolby Cinema",
+      "source_url": "https://www.dolby.com/ja/experience/mission-impossible-the-final-reckoning-jp/"
+    },
+    {
+      "format": "MX4D",
+      "theater": "TOHOシネマズ 新宿",
+      "prefecture": "",
+      "screen": "MX4D",
+      "source_url": "https://mario-movie.jp/news/2026/06/"
+    },
+    {
+      "format": "MX4D",
+      "theater": "TOHOシネマズ 西新井",
+      "prefecture": "",
+      "screen": "MX4D",
+      "source_url": "https://mario-movie.jp/news/2026/06/"
+    },
+    {
+      "format": "MX4D",
+      "theater": "TOHOシネマズ 六本木ヒルズ",
+      "prefecture": "",
+      "screen": "MX4D",
+      "source_url": "https://mario-movie.jp/news/2026/06/"
+    },
+    {
+      "format": "MX4D",
+      "theater": "TOHOシネマズ 海老名",
+      "prefecture": "",
+      "screen": "MX4D",
+      "source_url": "https://mario-movie.jp/news/2026/06/"
+    },
+    {
+      "format": "MX4D",
+      "theater": "TOHOシネマズ 川崎",
+      "prefecture": "",
+      "screen": "MX4D",
+      "source_url": "https://mario-movie.jp/news/2026/06/"
+    }
+  ]
+}

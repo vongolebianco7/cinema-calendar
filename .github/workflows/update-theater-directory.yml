@@ -1,0 +1,30 @@
+name: Update nationwide cinema directory
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 3 * * 1"
+permissions:
+  contents: write
+concurrency:
+  group: cinema-database-write
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Fetch directory
+        run: python scripts/update_theaters_osm.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/theaters_osm.json
+          git diff --cached --quiet || git commit -m "Update nationwide cinema directory"
+          git pull --rebase origin main
+          git push origin main

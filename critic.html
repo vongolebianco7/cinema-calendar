@@ -26,15 +26,23 @@ a{color:inherit}.wrap{max-width:980px;margin:auto;padding:0 18px}.top{position:s
 <script>
 const API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),cache=new Map(),app=document.getElementById("app");
 function topics(m,dna){
- const dir=(dna.directors||[]).map(x=>x.name).join("、")||m.director||"",writers=(dna.writers||[]).map(x=>x.name).join("、"),photo=(dna.cinematography||[]).map(x=>x.name).join("、"),music=(dna.music||[]).map(x=>x.name).join("、"),genres=(m.genres||[]).join("・");
- return [
+ const dir=(dna.directors||[]).map(x=>x.name).join("、")||m.director||"",writers=(dna.writers||[]).map(x=>x.name).join("、"),photo=(dna.cinematography||[]).map(x=>x.name).join("、"),music=(dna.music||[]).map(x=>x.name).join("、"),genres=(m.genres||[]).join("・"),text=((m.overview||"")+" "+(m.title||"")).toLowerCase(),out=[];
+ const themes=[
+  {keys:["記憶","memory","忘れ"],title:"記憶は事実か、それとも物語か",hint:"この作品固有のテーマ候補：記憶・時間・自己像",q:"この作品で「覚えていること」は事実として扱われているのか、それとも人物が自分を守るために作った物語なのか。",counter:"記憶の曖昧さではなく、現在の選択そのものが主題だと読むこともできる。",inspect:"回想、反復される台詞、同じ出来事が別の角度から提示される場面を見る。"},
+  {keys:["家族","父","母","親","娘","息子","family"],title:"家族は救いか、拘束か",hint:"この作品固有のテーマ候補：親密さ・義務・自立",q:"人物を支えている家族関係が、同時に自由を奪ってはいないか。",counter:"家族を抑圧として読むより、不完全な人間同士の相互扶助として見る余地もある。",inspect:"家族内と家族外で、人物の声・姿勢・選択がどう変わるかを見る。"},
+  {keys:["戦争","暴力","殺人","犯罪","war","crime"],title:"暴力は何を正当化している？",hint:"この作品固有のテーマ候補：正義・恐怖・報復",q:"暴力が起きたとき、映画は誰の視点に観客を置き、その行為を理解・拒絶させようとしているのか。",counter:"暴力の是非より、暴力を生む制度や環境の描写が中心だと読むこともできる。",inspect:"暴力の直前と直後、被害側と加害側の画面時間・音・説明量を比べる。"},
+  {keys:["ai","人工知能","技術","technology","sns"],title:"技術は人間を拡張する？",hint:"この作品固有のテーマ候補：技術・主体性・関係性",q:"技術は人物の可能性を広げているのか、それとも判断や関係性を奪っているのか。",counter:"技術そのものではなく、それを使う社会や欲望の側が問題だと読む余地もある。",inspect:"機械・画面・端末が映る場面で、誰が見る側／見られる側なのかを追う。"},
+  {keys:["恋","愛","romance","love"],title:"愛は相手を見ることか、自分を投影することか",hint:"この作品固有のテーマ候補：欲望・理想化・距離",q:"人物は相手そのものを見ているのか、それとも自分の理想や欠落を相手に投影しているのか。",counter:"理想化を未熟さではなく、関係を始めるための想像力と見ることもできる。",inspect:"会話より、視線・距離・沈黙・相手不在時の行動を比べる。"}
+ ];
+ const theme=themes.find(t=>t.keys.some(k=>text.includes(k)));if(theme)out.push({...theme,kind:"THEME"});
+ out.push(
  {kind:"IMAGE",title:"画面は誰の味方をしている？",hint:photo?"撮影："+photo:"構図・光・色・距離",q:"カメラは誰に近づき、誰から距離を取るのか。画面設計そのものが、観客の共感先を決めていないか。",counter:"画面の距離を感情誘導ではなく、ジャンル上のリズムや情報整理として読むこともできる。",inspect:"クローズアップ／引き、明暗、人物配置が変わる瞬間を見る。"},
  {kind:"STORY",title:"何を見せずに物語を成立させた？",hint:writers?"脚本："+writers:"視点・省略・反復",q:"説明したことより「説明しなかったこと」で、観客に何を補わせているか。",counter:"省略を曖昧さではなく、テンポやジャンル慣習のための圧縮と見ることもできる。",inspect:"重要な決断の直前に省かれた情報、意味が変わる台詞、反復場面を見る。"},
  {kind:"PERFORMANCE",title:"人物は台詞と同じことを考えている？",hint:"表情・声・身体・間",q:"台詞と、表情・声・身体・沈黙が食い違う瞬間はどこか。",counter:"細かな演技より、脚本が与える役割や構造の方が人物を規定しているとも読める。",inspect:"返事までの間、目線、声量や姿勢が変わる場面を見る。"},
  {kind:"SOUND",title:"音は映像に従っている？",hint:music?"音楽："+music:"音楽・環境音・沈黙",q:"音は映像の感情を補強しているのか、それとも逆方向の感情を持ち込むのか。",counter:"対位法ではなく、テンポや没入感を設計する機能として捉えることもできる。",inspect:"音楽が止まる瞬間、環境音だけになる場面、画面外の音に注目する。"},
  {kind:"AUTHOR",title:"この監督らしさは反復か、変化か",hint:dir||"作家性・反復・例外",q:"過去作と似ている部分だけでなく、この作品で初めて変わったものは何か。",counter:"監督中心で読むと、脚本・撮影・編集・俳優の貢献を過小評価する危険もある。",inspect:"主題だけでなく、画面距離、人物配置、終わり方、反復する小道具を比較する。"},
  {kind:"HISTORY",title:"ジャンルの約束を守った？ 裏切った？",hint:genres||"ジャンル・時代・映画史",q:"観客がジャンルに期待する展開・人物・結末をどこまで利用し、どこで外しているか。",counter:"ジャンル更新ではなく、既存の型を巧く使った完成度として見ることもできる。",inspect:"同ジャンルなら当然起きそうな出来事が、起きる／起きないタイミングを見る。"}
- ]
+ );return out.slice(0,6)
 }
 function tags(v,kind){
  const t=String(v.title||"").toLowerCase(),a=[],add=x=>{if(!a.includes(x))a.push(x)};
@@ -87,5 +95,5 @@ function render(m){
 }
 (async()=>{const id=new URLSearchParams(location.search).get("id");if(!id){app.textContent="作品を指定してください。";return}try{const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json();render(d.movie)}catch{app.textContent="作品情報を取得できませんでした。"}})();
 </script>
-<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v1.1</div>
+<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v1.2</div>
 </body></html>

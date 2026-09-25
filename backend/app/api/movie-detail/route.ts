@@ -1,8 +1,8 @@
-import { json } from "../../../lib/http";
+import { json, rateLimited, options } from "../../../lib/http";
 export const dynamic="force-dynamic";
 const BASE="https://api.themoviedb.org/3";
 function auth(url:URL){const token=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,key=process.env.TMDB_API_KEY;const headers:Record<string,string>={accept:"application/json"};if(token)headers.Authorization=`Bearer ${token}`;else if(key)url.searchParams.set("api_key",key);return token||key?headers:null}
-export async function GET(request:Request){
+export async function GET(request:Request){const limited=rateLimited(request,60);if(limited)return limited;
  const id=Number(new URL(request.url).searchParams.get("id"));if(!Number.isInteger(id)||id<1)return json({error:"invalid id"},{status:400});
  try{
   const url=new URL(BASE+`/movie/${id}`);url.searchParams.set("language","ja-JP");url.searchParams.set("append_to_response","credits,videos,watch/providers,release_dates");
@@ -20,5 +20,5 @@ export async function GET(request:Request){
   return json({movie:{id:m.id,tmdbId:m.id,title:m.title,original_title:m.original_title,overview:m.overview,date:m.release_date,year:(m.release_date||"").slice(0,4),runtime:m.runtime||null,genres:(m.genres||[]).map((x:any)=>x.name),countries:(m.production_countries||[]).map((x:any)=>x.name),director,director_id:directorObj?.id||null,director_works:directorWorks,dna,cast_people:cast.slice(0,12).map((x:any)=>({id:x.id,name:x.name,character:x.character})),cast:cast.slice(0,12).map((x:any)=>x.name),related,score:m.vote_average,votes:m.vote_count,poster:m.poster_path?`https://image.tmdb.org/t/p/w500${m.poster_path}`:null,backdrop:m.backdrop_path?`https://image.tmdb.org/t/p/w780${m.backdrop_path}`:null,tmdb:`https://www.themoviedb.org/movie/${m.id}`,trailer_url:trailer?`https://www.youtube.com/watch?v=${trailer.key}`:null,event:"catalog",source:"tmdb",catalog:true,availability:{flatrate:providers(jp.flatrate),rent:providers(jp.rent),buy:providers(jp.buy),source_url:jp.link||null}}});
  }catch(e){console.warn("TMDB detail unavailable",e);return json({error:"detail unavailable"},{status:502})}
 }
-export async function OPTIONS(){return new Response(null,{status:204,headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,OPTIONS"}})}
+export async function OPTIONS(request:Request){return options(request)}
 

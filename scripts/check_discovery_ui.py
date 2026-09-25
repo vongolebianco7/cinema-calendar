@@ -42,7 +42,7 @@ discover = text("discover.html")
 for required in ["条件から探す", "AIで探す", 'id="conciergeMode"', "/api/agent"]:
     if required not in discover:
         errors.append(f"Discover concierge integration missing: {required}")
-for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset", "flex-wrap:wrap", "data/rankings_year.json", "localPresetFallback"]:
+for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset", "flex-wrap:wrap", "data/rankings_year.json", "localPresetFallback", "scroll-snap-type:x proximity"]:
     if required not in discover:
         errors.append(f"Discover preset/provider integration missing: {required}")
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:

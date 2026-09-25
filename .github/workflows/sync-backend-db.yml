@@ -12,6 +12,9 @@ on:
   schedule:
     - cron: "45 18 * * *"
 
+permissions:
+  contents: read
+
 concurrency:
   group: cinema-database-write
   cancel-in-progress: false
@@ -42,7 +45,7 @@ jobs:
       - name: Install backend dependencies
         if: steps.db.outputs.ready == 'true'
         working-directory: backend
-        run: npm install
+        run: npm ci
 
       - name: Build backend
         if: steps.db.outputs.ready == 'true'

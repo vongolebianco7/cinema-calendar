@@ -136,10 +136,11 @@ async function boot(){
   if(!sr.ok)throw new Error("schedule load failed");
   scheduleData=await sr.json();
   if(dr&&dr.ok){const d=await dr.json();theaters=d.theaters||[]}
+  if(!theaters.length){try{const fr=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});if(fr.ok){const fd=await fr.json();theaters=fd.theaters||fd||[]}}catch(_){}}
   $("#scheduleMeta").textContent="上映時間取得済み "+(scheduleData.theaters||[]).length+"館 · 全国映画館一覧は下に表示";
   selectedTheater=param("theater")||(scheduleData.theaters||[])[0]?.name||"";
   selectedDate=param("date");
-  renderTheaterChips();renderTheaterDetail();renderDirectory()
+  renderDirectory();renderTheaterChips();renderTheaterDetail()
  }catch(e){
   $("#scheduleMeta").textContent="データを読み込めませんでした";
   $("#theaterDetail").innerHTML='<div class="empty">上映スケジュールを取得できませんでした。</div>'
@@ -152,5 +153,5 @@ boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.38 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.39 · 09/25</div>
 </body></html>

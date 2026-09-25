@@ -105,7 +105,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <div class="filterLabel">年代</div><div class="chips" id="eraChips"></div>
 </div>
 
-<div id="awardsIntro" class="note" style="display:none;margin:0 0 14px">主要映画賞・国際映画祭の受賞作品。順位ではなく受賞実績を表示します。</div><div id="boxFilters" style="display:none">
+<div id="awardsIntro" style="display:none;margin:0 0 18px"><div class="note" style="margin-bottom:12px">アカデミー賞・主要映画賞・主要国際映画祭の受賞結果。年・賞・受賞部門で絞り込めます。</div><div class="filterLabel">年</div><div class="chips" id="awardYearChips"></div><div class="filterLabel">賞・映画祭</div><div class="chips" id="awardOrgChips"></div><div class="filterLabel">受賞部門</div><div class="chips" id="awardCategoryChips"></div></div><div id="boxFilters" style="display:none">
  <div class="filterLabel">地域</div><div class="chips" id="boxRegionChips"></div>
  <div class="filterLabel">期間</div><div class="chips" id="boxEraChips"></div>
 </div>
@@ -115,8 +115,8 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <div class="note" id="sourceNote"></div>
 </main>
 <script>
-let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},axis="rating";
-let regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代";
+let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis="rating";
+let regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear="",awardOrg="すべて",awardCategory="すべて";
 const $=s=>document.querySelector(s);
 const uniqById=list=>{const m=new Map();list.forEach(x=>{const k=x.id||x.title;const p=m.get(k);if(!p||(x.score||0)>(p.score||0))m.set(k,x)});return [...m.values()]};
 function allRegions(){return ["すべて",...Object.keys(rankings||{})]}
@@ -184,16 +184,20 @@ function renderBox(){
  const src=boxEra==="歴代"?"興行通信社・歴代興収ベスト100":"日本映画製作者連盟・年次興行資料";
  $("#sourceNote").textContent="日本国内興行収入 · "+src;
 }
-function renderAwards(){const list=[
-{award:"第98回アカデミー賞 作品賞",title:"One Battle after Another",source:"https://www.oscars.org/oscars/ceremonies/2026"},
-{award:"第98回アカデミー賞 国際長編映画賞",title:"Sentimental Value",source:"https://www.oscars.org/oscars/ceremonies/2026"},
-{award:"第98回アカデミー賞 長編アニメ映画賞",title:"KPop Demon Hunters",source:"https://www.oscars.org/oscars/ceremonies/2026"},
-{award:"第79回カンヌ国際映画祭 パルム・ドール",title:"FJORD",source:"https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/"},
-{award:"第79回カンヌ国際映画祭 グランプリ",title:"MINOTAURE",source:"https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/"},
-{award:"第83回ヴェネチア国際映画祭 金獅子賞",title:"WOMAN UNKNOWN",source:"https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival"},
-{award:"第83回ヴェネチア国際映画祭 審査員大賞",title:"POSSIBLE LOVE",source:"https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival"},
-{award:"第83回ヴェネチア国際映画祭 新人監督賞",title:"HOUSE OF THE WIND",source:"https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival"}
-];$("#grid").className="listRank";$("#grid").innerHTML=list.map(m=>'<a class="listRow" target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit;text-decoration:none"><div class="listNo">★</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+m.award+'</div></div><div class="listMeta">公式 ↗</div></a>').join("");$("#sourceNote").textContent="2026年の主要映画賞・国際映画祭。各主催者の公式発表を参照"}
+function renderAwards(){
+ const years=[...new Set(awards.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a));if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"";
+ const inYear=awards.filter(x=>String(x.year)===awardYear),orgs=["すべて",...new Set(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";
+ const inOrg=awardOrg==="すべて"?inYear:inYear.filter(x=>x.organization===awardOrg),cats=["すべて",...new Set(inOrg.map(x=>x.category))];if(!cats.includes(awardCategory))awardCategory="すべて";
+ $("#awardYearChips").innerHTML=years.map(x=>'<button class="chip '+(x===awardYear?'active':'')+'" data-award-year="'+x+'">'+x+'</button>').join("");
+ $("#awardOrgChips").innerHTML=orgs.map(x=>'<button class="chip '+(x===awardOrg?'active':'')+'" data-award-org="'+x+'">'+x+'</button>').join("");
+ $("#awardCategoryChips").innerHTML=cats.map(x=>'<button class="chip '+(x===awardCategory?'active':'')+'" data-award-category="'+x+'">'+x+'</button>').join("");
+ document.querySelectorAll("[data-award-year]").forEach(x=>x.onclick=()=>{awardYear=x.dataset.awardYear;awardOrg="すべて";awardCategory="すべて";render()});
+ document.querySelectorAll("[data-award-org]").forEach(x=>x.onclick=()=>{awardOrg=x.dataset.awardOrg;awardCategory="すべて";render()});
+ document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});
+ let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);
+ $("#grid").className="listRank";$("#grid").innerHTML=list.length?list.map(m=>'<a class="listRow" target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit;text-decoration:none"><div class="listNo">★</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+m.organization+' · '+m.category+'</div></div><div class="listMeta">公式 ↗</div></a>').join(""):'<div class="empty">該当する受賞作品がありません</div>';
+ $("#sourceNote").textContent=awardYear+"年 · 主催者公式発表で確認した受賞結果";
+}
 
 function render(){
  $("#moreBtn").style.display="none";
@@ -205,16 +209,17 @@ function render(){
 }
 async function boot(){
  try{
-  const [r,m,y,b]=await Promise.all([
+  const [r,m,y,b,a]=await Promise.all([
    fetch("data/rankings.json?"+Date.now()),
    fetch("data/rankings_manifest.json?"+Date.now()).catch(()=>null),
    fetch("data/rankings_year.json?"+Date.now()).catch(()=>null),
-   fetch("data/boxoffice.json?"+Date.now())
+   fetch("data/boxoffice.json?"+Date.now()),
+   fetch("data/awards.json?"+Date.now())
   ]);
   const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};
   manifest=m&&m.ok?await m.json():{};
   const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year||new Date().getFullYear();
-  boxoffice=await b.json();
+  boxoffice=await b.json();const ad=await a.json();awards=ad.awards||[];
   document.querySelectorAll("[data-axis]").forEach(btn=>btn.onclick=()=>{axis=btn.dataset.axis;render()});
   render();
  }catch(err){$("#grid").innerHTML='<p>チャートデータを読み込めませんでした。</p>'}

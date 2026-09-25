@@ -198,6 +198,16 @@
 @keyframes sxCenterLive{0%,100%{filter:brightness(.82)}45%,85%{filter:brightness(1.08)}}
 @media(max-width:640px){.premiumMotion .experienceCrop{min-height:0}.screenxTheater{height:215px}.sxPanel{height:154px}.sxCenter{left:17%;right:17%}}
 @media(prefers-reduced-motion:reduce){.fxWind,.fxWater,.fxFlash,.fxSeat,.sxPanel{animation:none!important}.sxLeft{transform:rotateY(58deg);opacity:1}.sxRight{transform:rotateY(-58deg);opacity:1}}
+
+/* v0.4.22 cleanup: one 4D scene + restore prior ScreenX */
+.singleMotionScene{position:relative;overflow:hidden;width:100%;aspect-ratio:16/10;border-radius:12px;background-image:url("assets/cinemap-experience.png?v=0422");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;box-shadow:inset 0 0 0 1px #ffffff20}
+.singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxSeat,.singleMotionScene .fxAir{position:absolute;pointer-events:none}
+.singleMotionScene .fxAir{left:-20%;top:32%;width:55%;height:20%;background:linear-gradient(90deg,transparent,#dff7ff99,transparent);filter:blur(3px);animation:fxAir 2.8s ease-in-out infinite}
+@keyframes fxAir{0%{transform:translateX(0);opacity:0}35%{opacity:.7}100%{transform:translateX(210%);opacity:0}}
+.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/cinemap-experience.png?v=0422")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:screenxSubtle 8s ease-in-out infinite alternate!important}
+@keyframes screenxSubtle{from{filter:brightness(.94);transform:scale(1)}to{filter:brightness(1.04);transform:scale(1.008)}}
+.screenxTheater{display:none!important}
+@media(prefers-reduced-motion:reduce){.singleMotionScene span,.cropScreenx{animation:none!important}}
 </style>
 </head>
 <body>
@@ -269,27 +279,21 @@
 </section>
 
 <section class="section expSection" id="special">
- <div class="sectionHead"><h2>体感・特殊上映</h2><p>静止画を並べるのではなく、上映方式ごとの「何が起きるか」を動きで比較します。</p></div>
+ <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DX / MX4Dは同じ1枚のシーン上に、体感エフェクトだけを重ねて違いを見せます。</p></div>
  <div class="motionGrid premiumMotion">
   <article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div>
-   <div class="experienceCrop crop4dx"><span class="fxWind"></span><span class="fxWater"></span><span class="fxFlash"></span><span class="fxSeat">SEAT MOTION</span></div>
+   <div class="singleMotionScene"><span class="fxWind"></span><span class="fxWater"></span><span class="fxFlash"></span><span class="fxSeat">SEAT MOTION</span></div>
    <div class="effectLegend"><span>↕ MOVE</span><span>〰 WIND</span><span>•• WATER</span><span>✦ FLASH</span></div>
    <p>映像に合わせて座席が揺れ、風・水・フラッシュなどが重なる体感型。</p>
   </article>
   <article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div>
-   <div class="experienceCrop cropMx4d"><span class="fxWind"></span><span class="fxWater"></span><span class="fxSeat">SEAT MOTION</span></div>
+   <div class="singleMotionScene"><span class="fxAir"></span><span class="fxWater"></span><span class="fxSeat">SEAT MOTION</span></div>
    <div class="effectLegend"><span>↔ MOVE</span><span>〰 AIR</span><span>•• WATER</span></div>
-   <p>シートの細かな動きと局所的な風・水などを映像に同期させる方式。</p>
+   <p>同じ映像を基準に、シートの細かな動きと局所的な風・水などを表現。</p>
   </article>
  </div>
- <div class="sectionSubHead"><h3>ScreenX</h3><p>中央から左右へ映像世界が拡張する感覚を、実際に動かして見せます。</p></div>
- <div class="screenxCard premiumScreenx">
-  <div class="screenxTheater">
-   <div class="sxPanel sxLeft"></div><div class="sxPanel sxCenter"></div><div class="sxPanel sxRight"></div>
-   <div class="sxVignette"></div><div class="sxSeatsReal"></div>
-  </div>
-  <p>正面映像から左右の壁面へ視界が開き、最大270°まで世界が広がるパノラマ上映。</p>
- </div>
+ <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
+ <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p></div>
 </section>
 
 <section class="section expSection" id="guide">
@@ -335,5 +339,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-08">v0.4.21 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-09">v0.4.22 · 09/25</div>
 </body></html>

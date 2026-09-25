@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-09-25",
+  "note": "公式情報で上映仕様を確認できた作品のみ掲載。推測で形式を付与しない。",
+  "guides": [
+    {
+      "tmdb_id": 872585,
+      "title": "オッペンハイマー",
+      "best": "IMAX 70mm",
+      "formats": [
+        "IMAX 70mm",
+        "IMAX"
+      ],
+      "reasons": [
+        "IMAXフィルムカメラで撮影",
+        "IMAX 70mmでは一部シーンが最大1.43:1に拡張"
+      ],
+      "source_name": "IMAX公式",
+      "source_url": "https://www.imax.com/news/oppenheimer-in-imax-70mm"
+    },
+    {
+      "tmdb_id": 157336,
+      "title": "インターステラー",
+      "best": "IMAX",
+      "formats": [
+        "IMAX"
+      ],
+      "reasons": [
+        "IMAXカメラで撮影された広範なシーンを含む",
+        "IMAX上映向けに展開された作品"
+      ],
+      "source_name": "IMAX公式",
+      "source_url": "https://www.imax.com/pr/interstellar-scores-record-global-launch-imaxr-205-million"
+    },
+    {
+      "tmdb_id": 1197306,
+      "title": "The Odyssey",
+      "best": "IMAX 70mm",
+      "formats": [
+        "IMAX 70mm",
+        "IMAX"
+      ],
+      "reasons": [
+        "全編をIMAXフィルムカメラで撮影",
+        "IMAX 70mm上映が公式案内"
+      ],
+      "source_name": "IMAX公式",
+      "source_url": "https://www.imax.com/news/now-playing-the-odyssey"
+    }
+  ]
+}

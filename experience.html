@@ -321,6 +321,11 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 .audio3d .imaxRoom{background-position:70% 7%!important}
 .audio3d .atmosRoom{background-position:70% 7%!important}
 .audio3d .room3d:after{box-shadow:inset 0 0 0 12px #05070a,inset 0 0 34px 18px #05070a!important}
+
+/* v0.4.32 dedicated uploaded seat asset — no sprite-sheet cropping */
+.singleMotionScene:after{content:""!important;position:absolute!important;z-index:3!important;left:6%!important;right:6%!important;bottom:-1%!important;height:29%!important;background-image:url("assets/887F3A99-0D56-4E3F-9754-859B5C27E764.png?v=0432")!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center bottom!important;clip-path:none!important;filter:drop-shadow(0 -7px 10px #000b)!important;transform-origin:50% 85%!important}
+.motionCard:not(.mx4d) .singleMotionScene:after{animation:seatAsset4d 4.2s cubic-bezier(.45,.05,.25,1) infinite!important}
+.motionCard.mx4d .singleMotionScene:after{animation:seatAssetMx 3.5s cubic-bezier(.45,.05,.25,1) infinite!important}
 </style>
 </head>
 <body>
@@ -453,5 +458,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-18">v0.4.31 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-19">v0.4.32 · 09/25</div>
 </body></html>

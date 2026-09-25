@@ -71,23 +71,19 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <a href="rankings.html">チャート</a>
 </aside>
 <main class="wrap">
-<section class="hero"><h1>映画館から映画を見る。</h1><p>公式スケジュールを取得できる映画館だけを主役にします。館を選び、日付を選び、その日に何が上映されるかを見る。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
+<section class="hero"><h1>映画館から映画を見る。</h1><p>全国の映画館から探す。上映時間を取得済みの映画館では、その日の上映作品まで確認できます。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
 
 <section class="section">
- <div class="sectionHead"><h2>公式スケジュール対応館</h2><span id="scheduleMeta">読み込み中…</span></div>
+ <div class="sectionHead"><h2>全国の映画館</h2><span id="scheduleMeta">読み込み中…</span></div>
+ <div class="search"><input id="q" placeholder="映画館名・住所・地域で検索"></div>
+ <div class="meta" id="meta"></div>
+ <div class="grid" id="grid"></div>
+ <div style="margin-top:28px"><h2 style="font-size:16px;margin-bottom:8px">上映時間を取得済み</h2></div>
  <div class="pickerLabel">THEATER</div><div class="chips" id="theaterChips"></div>
  <div id="theaterDetail"></div>
 </section>
 
-<section class="section">
- <details class="directory">
-  <summary>全国映画館データを見る（参考）</summary>
-  <div class="verifiedNote">こちらはWikidata由来の参考データです。所在地・営業状況・名称が最新とは限りません。CINEMAPの主要機能には使用しません。</div>
-  <div class="search"><input id="q" placeholder="映画館名・住所・地域で検索"></div>
-  <div class="meta" id="meta"></div>
-  <div class="grid" id="grid"></div>
- </details>
-</section>
+
 
 <div class="note">上映時刻は映画館公式サイト由来の取得データを表示しています。上映内容は変更される場合があるため、鑑賞前に公式スケジュールを確認してください。<br><a href="credits.html">Credits / Data Sources</a></div>
 </main>
@@ -151,10 +147,10 @@ async function boot(){
 }
 $("#q").addEventListener("input",renderDirectory);
 const initialSearch=new URLSearchParams(location.search).get("search")||"";
-if(initialSearch){$("#q").value=initialSearch;const d=document.querySelector("details.directory");if(d)d.open=true}
+if(initialSearch){$("#q").value=initialSearch}
 boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.37 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.38 · 09/25</div>
 </body></html>

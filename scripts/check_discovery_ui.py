@@ -47,6 +47,8 @@ for required in ['id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap",
         errors.append(f"Discover recommendation/search integration missing: {required}")
 if 'loadPreset();load(true);' in discover:
     errors.append("Discover must not auto-load recommendation results into condition search")
+if "repeat(3,minmax(0,1fr))" not in discover:
+    errors.append("Condition search results must use a three-column grid")
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:
     if '<a href="agent.html">映画コンシェルジュ</a>' in text(page):
         errors.append(f"Standalone concierge nav remains in {page}")

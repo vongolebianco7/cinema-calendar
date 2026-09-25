@@ -29,6 +29,20 @@ for required in [
 if "videos.sort(" in search:
     errors.append("search.html must not locally reorder YouTube API search results")
 
+critic = (ROOT / "critic.html").read_text(encoding="utf-8")
+for required in [
+    "検索結果提供：YouTube Data API",
+    "Cinemap独自",
+    "privacy.html",
+    "terms.html",
+    "https://www.youtube.com/t/terms",
+    "観たのでCritic Mapを開く",
+]:
+    if required not in critic:
+        errors.append(f"critic.html missing Critic Map requirement: {required}")
+if "videos.sort(" in critic:
+    errors.append("critic.html must not locally reorder YouTube API search results")
+
 privacy = (ROOT / "privacy.html").read_text(encoding="utf-8")
 for required in ["YouTube API Services", "https://www.youtube.com/t/terms", "https://policies.google.com/privacy"]:
     if required not in privacy:

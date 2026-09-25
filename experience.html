@@ -134,6 +134,10 @@
 /* v0.4.16 visual hotfix: explicit overrides */
 .audioStage{background:linear-gradient(180deg,#111820,#07090c)!important}.audioStage .scr{left:18%!important;right:18%!important;height:42px!important;background:linear-gradient(180deg,#345f7b,#132638)!important;box-shadow:0 0 22px currentColor}.audioStage .listener{bottom:20px!important;width:24px!important;height:34px!important}.audioStage .sp,.audioStage .ceil{width:16px!important;height:21px!important;border-width:2px!important}.audioStage .ring{border-width:2px!important}.aAtmos .ring{box-shadow:0 0 18px #c67cff55}.aImax .ring{box-shadow:0 0 18px #56baff44}
 .sxMain span,.sxSide span{background-image:none!important;background-repeat:no-repeat!important}.sxMain span{background-image:var(--aspect-base)!important;background-size:cover!important;background-position:center 48%!important}.sxL span,.sxR span{background:linear-gradient(180deg,#08243b 0 47%,#0b3841 48% 100%)!important}.sxL span:before,.sxR span:before{content:"";position:absolute;inset:0;background:linear-gradient(155deg,transparent 0 42%,#24584d 43% 60%,#10363a 61%),radial-gradient(circle at 72% 30%,#8de9ff77 0 2%,transparent 2.5%)}.sxR span:before{transform:scaleX(-1)}.sxL span:after,.sxR span:after{content:"";position:absolute;width:30px;height:9px;border-radius:50%;top:43%;left:28%;background:#173d47;box-shadow:40px -17px 0 -4px #1b4650,68px 18px 0 -6px #173a43}.sxR span:after{left:auto;right:28%;transform:scaleX(-1)}
+
+/* v0.4.17: theater-like ScreenX, not flat side cards */
+.screenxRoom2{perspective:700px!important;background:radial-gradient(ellipse at 50% 72%,#15191f,#030405 72%)!important}.sxMain{left:20%!important;right:20%!important;top:34px!important;height:178px!important;transform:translateZ(0)!important}.sxSide{top:42px!important;height:174px!important;width:36%!important;border-color:#765f2d!important}.sxL{left:-8%!important;transform:rotateY(64deg)!important;transform-origin:right center!important}.sxR{right:-8%!important;transform:rotateY(-64deg)!important;transform-origin:left center!important}.sxL span,.sxR span{background:linear-gradient(180deg,#071b2c 0 45%,#0b3038 46% 100%)!important}.sxL span:before,.sxR span:before{background:linear-gradient(160deg,transparent 0 46%,#17463f 47% 61%,#0c292f 62%)!important}.sxSeats{bottom:9px!important;opacity:.8}
+@media(max-width:700px){.sxMain{left:20%!important;right:20%!important;height:130px!important}.sxSide{width:38%!important;height:126px!important}.sxL{left:-11%!important}.sxR{right:-11%!important}}
 </style>
 </head>
 <body>
@@ -258,5 +262,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-03">v0.4.16 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-04">v0.4.17 · 09/25</div>
 </body></html>

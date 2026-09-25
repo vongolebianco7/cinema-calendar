@@ -26,3 +26,6 @@ Minimal API-first backend that can be deployed independently from the current Gi
 `db:sync` creates the schema and imports the existing `../data/movies.json` and `../data/streaming.json`.
 
 The current production frontend is intentionally unchanged. Once the backend is deployed and verified, switch the calendar's data fetch from JSON files to these endpoints.
+
+
+<!-- Deploy marker: v0.5.2 -->

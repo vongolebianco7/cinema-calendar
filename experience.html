@@ -225,6 +225,27 @@
 @keyframes seatBank4d{0%,100%{transform:perspective(450px) rotateX(0) rotateZ(0) translateY(0)}30%{transform:perspective(450px) rotateX(-5deg) rotateZ(-1.2deg) translateY(-5px)}65%{transform:perspective(450px) rotateX(3deg) rotateZ(1deg) translateY(3px)}}
 @keyframes seatBankMx{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(-3px,-2px) rotate(-.7deg)}55%{transform:translate(3px,1px) rotate(.7deg)}75%{transform:translate(0,-4px) rotate(0)}}
 .singleMotionScene>span{z-index:3}
+
+/* v0.4.25 refined motion; ScreenX intentionally frozen to v0.4.20 visual */
+.singleMotionScene:after{content:"";position:absolute;z-index:2;left:5%;right:5%;bottom:-2%;height:28%;background:
+radial-gradient(ellipse at 10% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 30% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 50% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 70% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 90% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+linear-gradient(180deg,transparent 0 38%,#101419 39% 70%,#080a0d 71%);
+clip-path:polygon(0 20%,8% 8%,16% 20%,22% 7%,38% 20%,44% 7%,56% 20%,62% 7%,78% 20%,84% 8%,100% 20%,100% 100%,0 100%);
+filter:drop-shadow(0 -8px 12px #000a);transform-origin:50% 92%;animation:seatRide4d 3.8s cubic-bezier(.45,.05,.25,1) infinite}
+.mx4d .singleMotionScene:after{animation:seatRideMx 3.2s cubic-bezier(.45,.05,.25,1) infinite}
+@keyframes seatRide4d{0%,16%,100%{transform:translateY(0) rotate(0)}24%{transform:translateY(-7px) rotate(-1.4deg)}31%{transform:translateY(2px) rotate(.7deg)}48%{transform:translateY(0) rotate(0)}62%{transform:translateY(-4px) rotate(1deg)}69%{transform:translateY(1px) rotate(-.4deg)}}
+@keyframes seatRideMx{0%,20%,100%{transform:translate(0,0) rotate(0)}28%{transform:translate(-3px,-4px) rotate(-.7deg)}34%{transform:translate(2px,1px) rotate(.5deg)}54%{transform:translate(0,0) rotate(0)}68%{transform:translate(3px,-3px) rotate(.6deg)}74%{transform:translate(-1px,1px) rotate(-.3deg)}}
+.singleMotionScene .fxWind{opacity:.42;filter:blur(1.5px);animation-duration:5.2s}
+.singleMotionScene .fxWater{animation-duration:5.6s}
+.singleMotionScene .fxFlash{animation-duration:8.5s}
+.singleMotionScene .fxSeat{display:none!important}
+/* Restore exactly the simple v0.4.20 ScreenX presentation; no later theater-opening animation. */
+.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/cinemap-experience.png?v=0420")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:none!important;transform:none!important;filter:none!important}
+.screenxCard .screenxTheater,.screenxCard .sxPanel,.screenxCard .sxVignette,.screenxCard .sxSeatsReal{display:none!important}
 </style>
 </head>
 <body>
@@ -356,5 +377,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-11">v0.4.24 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-12">v0.4.25 · 09/25</div>
 </body></html>

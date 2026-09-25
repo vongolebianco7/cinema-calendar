@@ -9,13 +9,24 @@ export async function GET(request:Request){
   const u=new URL(request.url);
   const title=(u.searchParams.get("title")||"").trim().slice(0,120);
   const topic=(u.searchParams.get("topic")||"").trim().slice(0,120);
+  const kind=(u.searchParams.get("kind")||"").trim().toUpperCase().slice(0,24);
   if(!title)return json({error:"title required"},{status:400});
   const key=process.env.YOUTUBE_API_KEY;
   const enabled=process.env.YOUTUBE_CRITIC_ENABLED==="true";
   if(!enabled||!key)return json({enabled:false,videos:[],reason:"YouTube critic discovery is not enabled"});
 
   try{
-    const q=[title,"映画","批評","考察",topic].filter(Boolean).join(" ");
+    const lensTerms:Record<string,string>={
+      IMAGE:"映像 撮影",
+      STORY:"脚本 構成",
+      PERFORMANCE:"演技 人物",
+      SOUND:"音楽 音響",
+      AUTHOR:"監督 演出",
+      HISTORY:"映画史 ジャンル",
+      THEME:"テーマ 解釈"
+    };
+    const lens=lensTerms[kind]||topic;
+    const q=[title,"映画","考察",lens].filter(Boolean).join(" ");
     const y=new URL(YT);
     y.searchParams.set("part","snippet");
     y.searchParams.set("type","video");

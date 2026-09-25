@@ -135,7 +135,9 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 }
 
 </style>
-</head>
+<style id="experience-fit-v1">
+.experienceFitGrid{display:grid;gap:9px}.experienceFitCard{display:block;padding:13px 14px;border:1px solid #ffffff18;border-radius:14px;background:linear-gradient(135deg,#11161d,#0b0d11);color:inherit;text-decoration:none}.experienceFitCard span{display:flex;align-items:center;justify-content:space-between;gap:10px}.experienceFitCard b{font-size:15px}.experienceFitCard em{font-style:normal;font-size:11px;color:#aeb8c8;border:1px solid #ffffff18;border-radius:999px;padding:3px 8px}.experienceFitCard small{display:block;color:#b8c0cc;line-height:1.55;margin-top:7px}.experienceFitCard i{display:block;font-style:normal;font-size:12px;font-weight:800;margin-top:8px;color:#8dcfff}.experienceTheaterLink{display:block;margin-top:11px;padding:12px 14px;border-radius:12px;background:#ffffff0c;border:1px solid #ffffff16;color:#fff;text-decoration:none;font-weight:800;font-size:13px}
+</style></head>
 <body>
 
 
@@ -582,6 +584,18 @@ function exploreHtml(m){
  const cards=r=>r.slice(0,6).map(z=>'<button type="button" class="filmItem relatedMovie" data-related="'+movies.indexOf(z.x)+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(z.x.poster?'<img src="'+z.x.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+z.x.title+'</b><span class="small">'+z.reasons.slice(0,3).join(" · ")+'</span></button>').join("");
  return '<section class="detailSection info"><h3>ここから辿る</h3><p class="small" style="margin:0 0 12px">同じ監督・出演者・ジャンル・製作国など、現在のデータで確認できる共通点から表示しています。</p>'+(groups.length?groups.map(g=>'<div class="traceGroup"><b class="traceTitle">'+g[0]+'</b><div class="filmography">'+cards(g[1])+'</div></div>').join(""):'<div class="small">関連作品を取得できていません。</div>')+'</section>'
 }
+function experienceFitHtml(m){
+ const g=(m.genres||[]).join(" ").toLowerCase(), title=(m.title||"").toLowerCase();
+ const action=/アクション|action|adventure|アドベンチャー|sf|science fiction|fantasy|ファンタジー/.test(g);
+ const music=/music|音楽|ミュージカル|concert/.test(g);
+ const animation=/animation|アニメ/.test(g);
+ let items=[
+  {n:"IMAX",tag:"大画面・画角",why:(action||animation)?"大画面で映像のスケールを活かしやすい作品です。":"作品の公式なIMAX対応情報を確認して選ぶのがおすすめです。",a:"visual"},
+  {n:"Dolby Atmos",tag:"立体音響",why:(action||music)?"空間を使った音響表現と相性のよいジャンルです。":"Atmosミックス／上映の有無を劇場情報で確認してください。",a:"audio"},
+  {n:"4DX / MX4D",tag:"体感",why:action?"動きの大きいシーンを体感演出で楽しみやすい作品です。":"4D上映が設定されている場合に選べます。",a:"special"}
+ ];
+ return '<section class="detailSection experienceFit"><h3>この映画、どの上映方式で観る？</h3><p class="small" style="margin:0 0 12px">ジャンルから分かる相性と、確認できる上映仕様を分けて案内します。公式対応が未確認の方式は断定しません。</p><div class="experienceFitGrid">'+items.map(x=>'<a class="experienceFitCard" href="experience.html#'+x.a+'"><span><b>'+x.n+'</b><em>'+x.tag+'</em></span><small>'+x.why+'</small><i>違いを見る →</i></a>').join("")+'</div><a class="experienceTheaterLink" href="theaters.html?search='+encodeURIComponent(m.title||"")+'">対応する映画館・上映を探す →</a></section>'
+}
 function openMovie(m){
  detailMovie=m;theaterExpanded=false;
  if(m.event==="festival"){
@@ -615,10 +629,10 @@ function openMovie(m){
  let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">履歴データの詳細</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
  let context=contextHtml(m);
  let explore=exploreHtml(m);
- let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
+ let experienceFit=experienceFitHtml(m);\n let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
  let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
- $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+watch+info+peopleIntro+filmHtml+story+locations+links+history+theater;
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+experienceFit+watch+info+peopleIntro+filmHtml+story+locations+links+history+theater;
  showModal();
  document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))
 }

@@ -260,6 +260,17 @@ filter:drop-shadow(0 -8px 12px #000a);transform-origin:50% 92%;animation:seatRid
 @keyframes audioPulse{0%{opacity:.75;transform:translate(-50%,-50%) scale(.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.5)}}
 @keyframes objectFly{0%,10%{left:18%;top:72%}45%{left:48%;top:28%}75%,100%{left:78%;top:48%}}
 @media(prefers-reduced-motion:reduce){.soundWave,.soundObject{animation:none!important}}
+
+/* v0.4.27 recognizable cinema seats: backrest + headrest + armrests */
+.singleMotionScene:after{content:"";position:absolute;z-index:2;left:7%;right:7%;bottom:-1%;height:31%;background:
+radial-gradient(ellipse at 10% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 30% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 50% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 70% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 90% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+linear-gradient(90deg,transparent 2%,#20262d 3% 17%,transparent 18% 22%,#20262d 23% 37%,transparent 38% 42%,#20262d 43% 57%,transparent 58% 62%,#20262d 63% 77%,transparent 78% 82%,#20262d 83% 97%,transparent 98%) 0 43%/100% 47% no-repeat,
+linear-gradient(90deg,transparent 0 8%,#090c10 8% 11%,transparent 11% 28%,#090c10 28% 31%,transparent 31% 48%,#090c10 48% 51%,transparent 51% 68%,#090c10 68% 71%,transparent 71% 88%,#090c10 88% 91%,transparent 91%) 0 70%/100% 18% no-repeat;
+clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 12px #000b);transform-origin:50% 92%;animation:seatRide4d 3.8s cubic-bezier(.45,.05,.25,1) infinite}
 </style>
 </head>
 <body>
@@ -392,5 +403,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-13">v0.4.26 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-14">v0.4.27 · 09/25</div>
 </body></html>

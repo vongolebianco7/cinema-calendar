@@ -125,6 +125,11 @@
 .aspectBaseLoading .ratioViewport{background-image:linear-gradient(110deg,#081018 25%,#101c27 40%,#081018 55%);background-size:200% 100%;animation:expShimmer 1.4s linear infinite}
 @media(max-width:700px){.ratioExactCard{padding:11px;border-radius:14px}.ratioExactHead{align-items:flex-start}.ratioExactHead>div{display:block}.ratioExactHead b{font-size:16px}.ratioExactHead strong{display:block;margin-top:2px;font-size:22px}.ratioExactHead span{max-width:125px;font-size:11px}.ratioViewport{border-radius:8px}}
 
+
+/* rebuilt experience comparisons */
+.qualityDemo{margin-top:12px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#02050a}.qScreen{height:100%;position:relative;overflow:hidden;background:radial-gradient(circle at 72% 24%,#d8f4ff 0 2%,transparent 3%),linear-gradient(180deg,#06182b 0 48%,#052c3c 49% 100%)}.qScreen:before{content:"";position:absolute;left:-8%;right:-8%;bottom:25%;height:22%;background:linear-gradient(165deg,transparent 0 35%,#123c4a 36% 48%,#071d29 49%);transform:skewY(-3deg)}.qScreen:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 45% 58%,transparent 0 25%,#0008 70%)}.qMoon{position:absolute;width:32px;height:32px;border-radius:50%;right:18%;top:15%;background:#eaf8ff;box-shadow:0 0 30px #8bd8ff}.qSea{position:absolute;left:10%;right:10%;bottom:13%;height:3px;background:#5abbd0;box-shadow:0 8px 18px #35b8d888}.qNormal{filter:saturate(.75) brightness(.82) contrast(.92)}.qImax{filter:saturate(1.05) brightness(1.12) contrast(1.08)}.qDolby{filter:saturate(1.1) brightness(.88) contrast(1.35)}.qualityCard p b{color:#eee}
+.audioStage{height:220px;margin-top:12px;border-radius:12px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 60%,#17212b,#07090c 68%);border:1px solid #242a31}.audioStage .scr{position:absolute;left:22%;right:22%;top:18px;height:32px;border:2px solid #71879a;background:linear-gradient(90deg,#17314a,#28526c,#17314a)}.audioStage .listener{position:absolute;left:50%;bottom:28px;width:20px;height:28px;transform:translateX(-50%);border-radius:50% 50% 5px 5px;background:#c4cbd1;z-index:3}.audioStage .sp,.audioStage .ceil{position:absolute;width:12px;height:16px;border:1px solid currentColor;background:#15191e;box-shadow:0 0 12px currentColor}.s1{left:8%;top:30%}.s2{right:8%;top:30%}.s3{left:8%;bottom:15%}.s4{right:8%;bottom:15%}.s5{left:48%;top:12%}.s6{right:24%;top:12%}.audioStage .ring{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);border:1px solid currentColor;border-radius:50%;opacity:.55}.r1{width:44%;height:40%}.r2{width:72%;height:65%}.aStandard{color:#9ba6b1}.aImax{color:#56baff}.aAtmos{color:#c67cff}.ceil{top:4%;transform:rotate(90deg)}.c1{left:25%}.c2{left:49%}.c3{right:25%}.motionStage{height:220px;margin-top:12px;border-radius:12px;background:radial-gradient(circle at 50% 65%,#242a31,#080a0d 65%);position:relative;overflow:hidden}.motionSeat{position:absolute;left:50%;top:35%;width:90px;height:90px;transform:translateX(-50%) rotate(-4deg)}.motionSeat:before{content:"";position:absolute;left:19px;top:0;width:52px;height:65px;border-radius:16px 16px 6px 6px;background:linear-gradient(#454d57,#222831)}.motionSeat:after{content:"";position:absolute;left:5px;bottom:5px;width:80px;height:25px;border-radius:7px;background:#2c333c}.motionSeat i{position:absolute;left:43px;bottom:-28px;width:5px;height:35px;background:#555}.mx{transform:translateX(-50%) rotate(4deg)}.effects{position:absolute;left:8%;right:8%;bottom:16px;display:flex;justify-content:space-around;align-items:center}.effects b{font-size:22px;font-weight:500}.screenxRoom2{height:310px;position:relative;perspective:650px;background:#05070a;border-radius:12px;overflow:hidden}.sxMain,.sxSide{position:absolute;top:40px;height:190px;overflow:hidden;border:1px solid #9b7a32}.sxMain{left:22%;right:22%;z-index:2}.sxSide{width:27%;top:52px;height:166px}.sxL{left:-1%;transform:rotateY(48deg);transform-origin:right}.sxR{right:-1%;transform:rotateY(-48deg);transform-origin:left}.sxMain span,.sxSide span{position:absolute;inset:0;background:linear-gradient(180deg,#10243b 0 48%,#173b3a 49% 100%)}.sxMain span:before,.sxSide span:before{content:"";position:absolute;left:-20%;right:-20%;bottom:25%;height:30%;background:linear-gradient(160deg,transparent 0 34%,#315342 35% 48%,#142d2b 49%)}.sxSeats{position:absolute;left:0;right:0;bottom:25px;text-align:center;word-spacing:28px;color:#4b5057;font-size:26px}.pickGrid article strong{font-size:18px;color:#f2f2f2}.pickGrid article:nth-child(2) strong{color:#c67cff}.pickGrid article:nth-child(3) strong{color:#ff7474}.pickGrid article:nth-child(4) strong{color:#e6c35e}
+@media(max-width:700px){.audioStage,.motionStage{height:190px}.screenxRoom2{height:230px}.sxMain,.sxSide{height:135px}.sxSide{height:118px}.sxSeats{font-size:18px;word-spacing:12px}}
 </style>
 </head>
 <body>
@@ -178,26 +183,43 @@
 
 <section class="section expSection" id="visual">
  <div class="sectionHead"><h2>映像</h2><p>同じ海中シーンで、通常上映・IMAXレーザー・Dolby Cinemaの明るさ、黒、コントラストの方向性を比較します。</p></div>
- <div class="finishedVisual tileVisual" role="img" aria-label="通常上映、IMAXレーザー、Dolby Cinemaの映像比較"></div>
+ <div class="qualityGrid">
+<article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityDemo"><div class="qScreen qNormal"><span class="qMoon"></span><span class="qSea"></span></div></div><p><b>基準</b> — 作品本来のルックを標準的な明るさ・コントラストで。</p></article>
+<article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityDemo"><div class="qScreen qImax"><span class="qMoon"></span><span class="qSea"></span></div></div><p><b>高輝度・高精細</b> — 明部の抜けと細部の見通しを意識した表現。</p></article>
+<article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityDemo"><div class="qScreen qDolby"><span class="qMoon"></span><span class="qSea"></span></div></div><p><b>深い黒・高コントラスト</b> — 暗部と光の差を強調した表現。</p></article>
+</div>
  <div class="formula">※特徴を理解しやすくするためのイメージ比較です。実際の見え方は作品マスター・劇場設備・座席位置などで変わります。</div>
 </section>
 
 <section class="section expSection" id="audio">
  <div class="sectionHead"><h2>音響</h2><p>通常5.1/7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。</p></div>
- <div class="finishedVisual tileAudio" role="img" aria-label="通常5.1・7.1ch、IMAX 12ch、Dolby Atmosの音響比較"></div>
+ <div class="audioGrid">
+<article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>平面サラウンド</span></div><div class="audioStage aStandard"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="ring r1"></i></div><p>前後左右から包む、映画館サウンドの基本形。</p></article>
+<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>多方向・高出力</span></div><div class="audioStage aImax"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="sp s6"></i><i class="ring r1"></i><i class="ring r2"></i></div><p>スクリーン側と客席周囲を多チャンネルで構成。</p></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>高さ方向＋オブジェクト</span></div><div class="audioStage aAtmos"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="ceil c1"></i><i class="ceil c2"></i><i class="ceil c3"></i><i class="ring r1"></i><i class="ring r2"></i></div><p>頭上を含む3次元空間に音を配置する考え方。</p></article>
+</div>
 </section>
 
 <section class="section expSection" id="special">
  <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DXとMX4Dは座席の動きや環境効果を組み合わせる体感型上映です。</p></div>
- <div class="finishedVisual tileMotion" role="img" aria-label="4DXとMX4Dの体感効果比較"></div>
+ <div class="motionGrid">
+<article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div><div class="motionStage"><div class="motionSeat"><i></i></div><div class="effects"><b>↕</b><b>≋</b><b>💨</b><b>💧</b><b>✦</b></div></div><p>座席の動きに、風・水・香り・フラッシュなどの効果を組み合わせる体感型。</p></article>
+<article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div><div class="motionStage"><div class="motionSeat mx"><i></i></div><div class="effects"><b>↔</b><b>⌁</b><b>💨</b><b>💧</b><b>✦</b></div></div><p>シートの動きと、風・水などの効果で場面への没入感を高める方式。</p></article>
+</div>
 
  <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
- <div class="finishedVisual tileScreenx" role="img" aria-label="中央映像が左右壁面へ連続して広がるScreenXのイメージ"></div>
+ <div class="screenxCard"><div class="screenxRoom2"><div class="sxSide sxL"><span></span></div><div class="sxMain"><span></span></div><div class="sxSide sxR"><span></span></div><div class="sxSeats">● ● ● ● ●</div></div><p>正面の映像世界が左右の壁面へ連続して広がる、最大270°のパノラマ表現。</p></div>
 </section>
 
 <section class="section expSection" id="guide">
  <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と、何をいちばん重視するかで選べます。</p></div>
- <div class="finishedVisual tileGuide" role="img" aria-label="通常上映、IMAX、Dolby Cinema、4DX・MX4D、ScreenXの選び方ガイド"></div>
+ <div class="pickGrid">
+<article><b>画面の大きさ・迫力</b><strong>IMAX</strong><span>大画面と専用システムを重視</span></article>
+<article><b>黒・コントラスト</b><strong>Dolby Cinema</strong><span>暗部表現と立体音響を重視</span></article>
+<article><b>身体で楽しむ</b><strong>4DX / MX4D</strong><span>座席の動きと環境効果</span></article>
+<article><b>視界を広げる</b><strong>ScreenX</strong><span>左右まで広がるパノラマ映像</span></article>
+<article><b>作品そのもの</b><strong>通常上映</strong><span>追加演出なしでシンプルに鑑賞</span></article>
+</div>
  <div class="cta"><a href="theaters.html">対応映画館を見る</a><a href="index.html">作品カレンダーへ</a></div>
 </section>
 </main>

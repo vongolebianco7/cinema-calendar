@@ -90,7 +90,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </main>
 <script>
 const $=s=>document.querySelector(s);
-let theaters=[],osmTheaters=[],directoryCache=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
+let theaters=[],osmTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
 function scheduleUrl(t){if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
@@ -123,7 +123,16 @@ function renderTheaterDetail(){
    (source?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式スケジュールで確認</a>':'');
  document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selectedDate=b.dataset.date;renderTheaterDetail();updateUrl()})
 }
+function renderFormatDirectory(){
+ if(!selectedFormat)return false;
+ const rows=(formatData.screens||[]).filter(x=>String(x.format).toLowerCase()===String(selectedFormat).toLowerCase());
+ $("#q").value="";
+ $("#meta").textContent=selectedFormat+" 対応スクリーン "+rows.length+"件";
+ $("#grid").innerHTML=rows.length?rows.map(x=>'<article class="card"><h3>'+esc(x.theater)+'</h3><div class="place">'+esc([x.prefecture,x.screen].filter(Boolean).join(" · "))+'</div><div class="btns"><a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(x.source_url)+'">設備の公式情報</a><a class="btn" href="theaters.html?search='+encodeURIComponent(x.theater)+'">映画館を開く</a></div></article>').join(""):'<div class="empty">確認済みの対応スクリーンがありません。</div>';
+ return true
+}
 function renderDirectory(){
+ if(renderFormatDirectory())return;
  const all=[...theaters,...osmTheaters],uniq=new Map();all.forEach(t=>{const k=String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"");if(k&&!uniq.has(k))uniq.set(k,t)});const directory=[...uniq.values()];
  const q=$("#q").value.trim().toLowerCase();
  directoryCache=directory;
@@ -151,12 +160,12 @@ async function loadSchedules(){
   $("#theaterChips").innerHTML="";$("#theaterDetail").innerHTML='<div class="empty">上映スケジュールを取得できませんでした。</div>'
  }
 }
-async function boot(){const base=await backend();await loadDirectory(base);await loadSchedules()}
-$("#q").addEventListener("input",renderDirectory);$("#scheduleQ").addEventListener("input",()=>{selectedTheater="";selectedDate="";renderTheaterChips();$("#theaterDetail").innerHTML=""});
+async function boot(){const base=await backend();try{const fr=await fetch("data/theater_formats.json?"+Date.now(),{cache:"no-store"});if(fr.ok)formatData=await fr.json()}catch(_){}await loadDirectory(base);await loadSchedules();if(selectedFormat)renderFormatDirectory()}
+$("#q").addEventListener("input",()=>{selectedFormat="";renderDirectory()});$("#scheduleQ").addEventListener("input",()=>{selectedTheater="";selectedDate="";renderTheaterChips();$("#theaterDetail").innerHTML=""});
 const initialSearch=new URLSearchParams(location.search).get("search")||"";
-if(initialSearch){$("#q").value=initialSearch}
+if(initialSearch){selectedFormat="";$("#q").value=initialSearch}
 boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.60</div></body></html>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.61</div></body></html>

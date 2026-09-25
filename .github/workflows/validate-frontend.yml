@@ -10,6 +10,7 @@ on:
       - "data/theater_formats.json"
       - "scripts/check_sources.py"
       - "scripts/check_discovery_ui.py"
+      - "scripts/check_core_journey.py"
       - "scripts/check_critic_map.py"
       - ".github/workflows/validate-frontend.yml"
   pull_request:
@@ -64,5 +65,7 @@ jobs:
         run: python scripts/check_sources.py
       - name: Check discovery UI integrations
         run: python scripts/check_discovery_ui.py
+      - name: Check Cinemap core journey
+        run: python scripts/check_core_journey.py
       - name: Check Critic Map compliance gate
         run: python scripts/check_critic_map.py

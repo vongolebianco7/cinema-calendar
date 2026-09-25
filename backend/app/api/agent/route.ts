@@ -1,28 +1,22 @@
 import { json, rateLimited, options } from "../../../lib/http";
-
 export const dynamic="force-dynamic";
-const OPENAI="https://api.openai.com/v1/responses";
 const B="https://api.themoviedb.org/3";
-function tmdb(u:URL){const t=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,k=process.env.TMDB_API_KEY,h:Record<string,string>={accept:"application/json"};if(t)h.Authorization=`Bearer ${t}`;else if(k)u.searchParams.set("api_key",k);return t||k?h:null}
-async function searchMovies(q:string){const u=new URL(B+"/search/movie");u.searchParams.set("query",q.slice(0,80));u.searchParams.set("language","ja-JP");u.searchParams.set("region","JP");u.searchParams.set("include_adult","false");const h=tmdb(u);if(!h)return [];const r=await fetch(u,{headers:h,next:{revalidate:3600}});if(!r.ok)return [];const d=await r.json();return (d.results||[]).slice(0,8).map((m:any)=>({id:m.id,title:m.title,year:(m.release_date||"").slice(0,4),score:m.vote_average,votes:m.vote_count,overview:(m.overview||"").slice(0,500)}))}
-async function detail(id:number){if(!Number.isInteger(id)||id<1)return null;const u=new URL(B+`/movie/${id}`);u.searchParams.set("language","ja-JP");u.searchParams.set("append_to_response","credits,watch/providers");const h=tmdb(u);if(!h)return null;const r=await fetch(u,{headers:h,next:{revalidate:86400}});if(!r.ok)return null;const m:any=await r.json(),jp=m["watch/providers"]?.results?.JP||{};return{id:m.id,title:m.title,year:(m.release_date||"").slice(0,4),runtime:m.runtime,genres:(m.genres||[]).map((x:any)=>x.name),score:m.vote_average,votes:m.vote_count,director:(m.credits?.crew||[]).find((x:any)=>x.job==="Director")?.name||"",cast:(m.credits?.cast||[]).slice(0,6).map((x:any)=>x.name),streaming:(jp.flatrate||[]).map((x:any)=>x.provider_name),overview:(m.overview||"").slice(0,800)}}
-const tools=[{type:"function",name:"search_movies",description:"映画タイトルやキーワードから作品候補を検索する",parameters:{type:"object",properties:{query:{type:"string"}},required:["query"],additionalProperties:false},strict:true},{type:"function",name:"get_movie_detail",description:"TMDB IDから作品詳細、監督、出演者、日本の定額配信情報を確認する",parameters:{type:"object",properties:{id:{type:"integer"}},required:["id"],additionalProperties:false},strict:true}];
-export async function POST(request:Request){
- const limited=rateLimited(request,12);if(limited)return limited;
- const key=process.env.OPENAI_API_KEY;if(!key)return json({error:"AI agent is not configured"},{status:503},request);
- let body:any;try{body=await request.json()}catch{return json({error:"invalid json"},{status:400},request)}
- const message=String(body?.message||"").trim();if(!message||message.length>500)return json({error:"message must be 1-500 characters"},{status:400},request);
- const headers={Authorization:`Bearer ${key}`,"Content-Type":"application/json"};
- let input:any[]=[{role:"user",content:message}],response:any;
- for(let step=0;step<4;step++){
-  const r=await fetch(OPENAI,{method:"POST",headers,body:JSON.stringify({model:"gpt-5.6-luna",instructions:"あなたはCINEMAPの映画コンシェルジュ。日本語で簡潔に答える。推薦は必ずツールで作品を確認し、確認できた事実だけを使う。配信状況は取得データにある場合だけ断定する。作品名には公開年を添える。最大5作品。",input,tools,max_output_tokens:900})});
-  if(!r.ok){console.warn("OpenAI unavailable",r.status);return json({error:"AI unavailable"},{status:502},request)}
-  response=await r.json();const calls=(response.output||[]).filter((x:any)=>x.type==="function_call");
-  if(!calls.length)break;
-  input=[...input,...(response.output||[])];
-  for(const c of calls){let a:any={};try{a=JSON.parse(c.arguments||"{}")}catch{};let out:any=c.name==="search_movies"?await searchMovies(String(a.query||"")):c.name==="get_movie_detail"?await detail(Number(a.id)):null;input.push({type:"function_call_output",call_id:c.call_id,output:JSON.stringify(out)})}
- }
- const text=(response?.output||[]).filter((x:any)=>x.type==="message").flatMap((x:any)=>x.content||[]).filter((x:any)=>x.type==="output_text").map((x:any)=>x.text).join("\n").trim();
- return json({answer:text||"回答を生成できませんでした。"},{headers:{"Cache-Control":"no-store"}},request);
-}
+function auth(u:URL){const t=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,k=process.env.TMDB_API_KEY,h:Record<string,string>={accept:"application/json"};if(t)h.Authorization=`Bearer ${t}`;else if(k)u.searchParams.set("api_key",k);return t||k?h:null}
+const genres:Record<string,string>={"SF":"878","ＳＦ":"878","サイエンスフィクション":"878","ドラマ":"18","アクション":"28","コメディ":"35","ホラー":"27","ミステリー":"9648","スリラー":"53","アニメ":"16","アニメーション":"16","ファンタジー":"14","恋愛":"10749","ロマンス":"10749","ドキュメンタリー":"99","戦争":"10752","西部劇":"37","犯罪":"80","音楽":"10402"};
+const providers:Record<string,string>={"Netflix":"8","ネットフリックス":"8","Prime Video":"9","Amazon Prime":"9","アマプラ":"9","Disney+":"337","ディズニープラス":"337","U-NEXT":"84","ユーネクスト":"84","Hulu":"15","Apple TV+":"350"};
+function yearRange(q:string){let m=q.match(/(19|20)(\d)0年代/);if(m){const y=Number(m[1]+m[2]+"0");return[y,y+9]}m=q.match(/(19|20)\d{2}/);if(m){const y=Number(m[0]);return[y,y]}return null}
+function runtime(q:string){const m=q.match(/(\d{1,3})\s*(分|minutes?|min)/i);if(m)return Number(m[1]);const h=q.match(/(\d(?:\.\d)?)\s*時間/);return h?Math.round(Number(h[1])*60):null}
+async function tmdbJson(u:URL){const h=auth(u);if(!h)return null;const r=await fetch(u,{headers:h,next:{revalidate:1800}});return r.ok?r.json():null}
+async function search(q:string){const u=new URL(B+"/search/movie");u.searchParams.set("query",q);u.searchParams.set("language","ja-JP");u.searchParams.set("region","JP");u.searchParams.set("include_adult","false");return tmdbJson(u)}
+async function recommend(id:number){const u=new URL(B+`/movie/${id}/recommendations`);u.searchParams.set("language","ja-JP");return tmdbJson(u)}
+async function discover(q:string){const u=new URL(B+"/discover/movie");u.searchParams.set("language","ja-JP");u.searchParams.set("region","JP");u.searchParams.set("include_adult","false");u.searchParams.set("sort_by",/評価|高評価/.test(q)?"vote_average.desc":"popularity.desc");u.searchParams.set("vote_count.gte","300");for(const [n,id] of Object.entries(genres))if(q.includes(n)){u.searchParams.set("with_genres",id);break}for(const [n,id] of Object.entries(providers))if(q.toLowerCase().includes(n.toLowerCase())){u.searchParams.set("watch_region","JP");u.searchParams.set("with_watch_providers",id);u.searchParams.set("with_watch_monetization_types","flatrate");break}const yr=yearRange(q);if(yr){u.searchParams.set("primary_release_date.gte",yr[0]+"-01-01");u.searchParams.set("primary_release_date.lte",yr[1]+"-12-31")}const rt=runtime(q);if(rt)u.searchParams.set("with_runtime.lte",String(rt));return tmdbJson(u)}
+function movieLine(m:any,i:number){const y=(m.release_date||"").slice(0,4),score=Number(m.vote_average||0).toFixed(1);return `${i+1}. ${m.title}${y?" ("+y+")":""} — ★${score}\n   ${(m.overview||"あらすじ情報なし").slice(0,100)}`}
+export async function POST(request:Request){const limited=rateLimited(request,30);if(limited)return limited;let b:any;try{b=await request.json()}catch{return json({error:"invalid json"},{status:400},request)}const q=String(b?.message||"").trim();if(!q||q.length>300)return json({error:"message must be 1-300 characters"},{status:400},request);
+ let results:any[]=[];let lead="条件から探しました。";
+ const like=q.match(/(.+?)(?:が好き|に似た|みたいな|っぽい)/);if(like){const s=await search(like[1].replace(/[「」『』]/g,"").trim());const base=s?.results?.[0];if(base){const rec=await recommend(base.id);results=rec?.results||[];lead=`「${base.title}」を起点に関連作品を探しました。`}}
+ if(!results.length){const d=await discover(q);results=d?.results||[]}
+ results=results.filter((m:any)=>m.title&&!m.adult).slice(0,5);
+ if(!results.length)return json({answer:"条件に合う作品を見つけられませんでした。条件を少し広げてみてください。",movies:[]},{headers:{"Cache-Control":"no-store"}},request);
+ const answer=lead+"\n\n"+results.map(movieLine).join("\n\n")+"\n\n※評価・配信状況などは取得時点のTMDBデータを使用しています。";
+ return json({answer,movies:results.map((m:any)=>({id:m.id,title:m.title,year:(m.release_date||"").slice(0,4),poster:m.poster_path?`https://image.tmdb.org/t/p/w342${m.poster_path}`:null}))},{headers:{"Cache-Control":"no-store"}},request)}
 export async function OPTIONS(request:Request){return options(request)}

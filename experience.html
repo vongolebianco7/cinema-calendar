@@ -153,6 +153,16 @@
 @keyframes airBurst{0%,100%{transform:scaleX(.65);opacity:.25}50%{transform:scaleX(1.08);opacity:1}}
 @keyframes mistPulse{0%,100%{opacity:.2;transform:scale(.85)}50%{opacity:.75;transform:scale(1.08)}}
 @media(prefers-reduced-motion:reduce){.audioStage .ring,.audioStage .ceil,.screenxRoom2 .sxMain,.screenxRoom2 .sxL,.screenxRoom2 .sxR,.dx4 .motionStage:before,.dx4 .motionStage:after,.mx4d .motionStage:before,.mx4d .motionStage:after{animation:none!important}}
+
+/* v0.4.19 uploaded experience artwork */
+.uploadedExperienceArt{max-width:1180px;margin:18px auto 28px;padding:0 16px}
+.uploadedExperienceArt__frame{position:relative;overflow:hidden;border-radius:22px;background:#070b12;box-shadow:0 18px 50px rgba(0,0,0,.32)}
+.uploadedExperienceArt img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;transform:scale(1.005);animation:cinemapArtDrift 12s ease-in-out infinite alternate}
+.uploadedExperienceArt__sweep{position:absolute;inset:-20%;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.10) 49%,transparent 63%);transform:translateX(-65%);animation:cinemapArtSweep 8s ease-in-out infinite}
+@keyframes cinemapArtDrift{0%{transform:scale(1.005) translate3d(0,0,0)}100%{transform:scale(1.035) translate3d(-.35%,.25%,0)}}
+@keyframes cinemapArtSweep{0%,58%{transform:translateX(-65%);opacity:0}64%{opacity:.55}78%,100%{transform:translateX(65%);opacity:0}}
+@media(max-width:640px){.uploadedExperienceArt{margin:12px auto 20px;padding:0 12px}.uploadedExperienceArt__frame{border-radius:16px}.uploadedExperienceArt img{aspect-ratio:16/10;object-fit:cover}}
+@media(prefers-reduced-motion:reduce){.uploadedExperienceArt img,.uploadedExperienceArt__sweep{animation:none!important}}
 </style>
 </head>
 <body>
@@ -174,7 +184,12 @@
  <a href="experience.html">上映体験</a>
  <a href="rankings.html">チャート</a>
 </aside>
-<main class="wrap">
+<main class="wrap"><section class="uploadedExperienceArt" aria-label="上映体験イメージ">
+  <div class="uploadedExperienceArt__frame">
+    <img src="assets/cinemap-experience.png" alt="ScreenX、4DX、MX4D、音響体験をイメージしたシネマビジュアル" loading="eager">
+    <span class="uploadedExperienceArt__sweep" aria-hidden="true"></span>
+  </div>
+</section>
 <section class="hero">
  <div class="eyebrow">CINEMA EXPERIENCE</div>
  <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
@@ -277,5 +292,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-05">v0.4.18 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-06">v0.4.19 · 09/25</div>
 </body></html>

@@ -41,10 +41,10 @@ for required in ["IMAX", "Dolby Cinema", "Dolby Atmos", "4DX", "MX4D", "SCREENX"
 
 # Concierge is now a discovery mode, not a global nav destination.
 discover = text("discover.html")
-for required in ["条件から探す", "コンシェルジュに相談", 'id="conciergeMode"', "/api/agent"]:
+for required in ["条件から探す", "AIで探す", 'id="conciergeMode"', "/api/agent"]:
     if required not in discover:
         errors.append(f"Discover concierge integration missing: {required}")
-for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset"]:
+for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset", "flex-wrap:wrap"]:
     if required not in discover:
         errors.append(f"Discover preset/provider integration missing: {required}")
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:

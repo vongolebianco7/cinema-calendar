@@ -77,11 +77,11 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <section class="hero"><h1>映画館を探す</h1><p>行きたい映画館を地域・名前から探し、場所や公式の上映スケジュールへ進むためのページです。上映方式にこだわる場合は設備比較から探せます。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
 
 <section class="section">
- <div class="sectionHead"><h2>全国の映画館</h2><span id="scheduleMeta">読み込み中…</span></div>
- <div class="search"><input id="q" placeholder="映画館名・住所・地域で検索"></div>
+ <div class="sectionHead"><h2>映画館を検索</h2><span id="scheduleMeta">読み込み中…</span></div>
+ <div class="search"><input id="q" placeholder="映画館名・住所・地域を入力"></div>
  <div class="meta" id="meta"></div>
  <div class="grid" id="grid"></div>
- <details class="schedulePanel" style="margin-top:28px"><summary style="cursor:pointer;font-size:16px;font-weight:800;padding:14px 0">上映時間を確認できる映画館 <span id="scheduleCount"></span></summary><div class="pickerLabel">映画館</div><div class="chips" id="theaterChips"></div><div id="theaterDetail"></div></details>
+ <details class="schedulePanel" style="margin-top:28px"><summary style="cursor:pointer;font-size:16px;font-weight:800;padding:14px 0">上映時間を確認する</summary><div class="pickerLabel">映画館名を指定</div><div class="search"><input id="scheduleQ" placeholder="映画館名・地域を入力"></div><div class="chips" id="theaterChips"></div><div id="theaterDetail"></div></details>
 </section>
 
 
@@ -90,7 +90,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </main>
 <script>
 const $=s=>document.querySelector(s);
-let theaters=[],osmTheaters=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
+let theaters=[],osmTheaters=[],directoryCache=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
 function scheduleUrl(t){if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
@@ -98,14 +98,15 @@ async function backend(){try{const r=await fetch("data/backend.json?"+Date.now()
 function param(name){return new URLSearchParams(location.search).get(name)||""}
 function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
 function renderTheaterChips(){
- const defs=scheduleData.theaters||[];
- // The directory is the primary theater catalog. Schedule coverage is a secondary capability.
- $("#theaterChips").innerHTML=defs.length?defs.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+' <span style="opacity:.65">上映時間あり</span></button>').join(""):'<span class="empty">取得済み上映時間はありません。</span>';
+ const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
+ if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
+ const scheduleNames=new Set((scheduleData.theaters||[]).map(x=>x.name)),list=directoryCache.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,30);
+ $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(t.name)?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
 }
 function renderTheaterDetail(){
  const defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=(scheduleData.schedules||[]).filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
- if(!def){$("#theaterDetail").innerHTML='<div class="empty">対応映画館がありません。</div>';return}
+ if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinemap内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
  const dates=[...new Set(rows.map(x=>x.date))].sort(),today=new Date().toLocaleDateString("sv-SE");
  if(!selectedDate||!dates.includes(selectedDate)){
    const requested=param("date");
@@ -125,8 +126,10 @@ function renderTheaterDetail(){
 function renderDirectory(){
  const all=[...theaters,...osmTheaters],uniq=new Map();all.forEach(t=>{const k=String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"");if(k&&!uniq.has(k))uniq.set(k,t)});const directory=[...uniq.values()];
  const q=$("#q").value.trim().toLowerCase();
- const list=directory.filter(t=>!q||[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,150);
- $("#meta").textContent=(q?list.length+"件表示 / ":"")+directory.length+"館収録";
+ directoryCache=directory;
+ if(!q){$("#meta").textContent=directory.length+"館収録 · 検索すると候補を表示します";$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力してください。</div>';return}
+ const list=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,80);
+ $("#meta").textContent=list.length+"件表示 / "+directory.length+"館収録";
  $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映スケジュール</a><a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
 }
 async function loadDirectory(base){
@@ -142,19 +145,18 @@ async function loadDirectory(base){
 async function loadSchedules(){
  try{
   const r=await fetch("data/theater_schedules.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();
-  scheduleData=await r.json();const sc=document.getElementById("scheduleCount");if(sc)sc.textContent="（"+(scheduleData.theaters||[]).length+"館）";
-  selectedTheater=param("theater")||(scheduleData.theaters||[])[0]?.name||"";selectedDate=param("date");renderTheaterChips();renderTheaterDetail()
+  scheduleData=await r.json();selectedTheater=param("theater")||"";selectedDate=param("date");if(selectedTheater&&$("#scheduleQ"))$("#scheduleQ").value=selectedTheater;renderTheaterChips();renderTheaterDetail()
  }catch(_){
   const sc=document.getElementById("scheduleCount");if(sc)sc.textContent="";
   $("#theaterChips").innerHTML="";$("#theaterDetail").innerHTML='<div class="empty">上映スケジュールを取得できませんでした。</div>'
  }
 }
 async function boot(){const base=await backend();await loadDirectory(base);await loadSchedules()}
-$("#q").addEventListener("input",renderDirectory);
+$("#q").addEventListener("input",renderDirectory);$("#scheduleQ").addEventListener("input",()=>{selectedTheater="";selectedDate="";renderTheaterChips();$("#theaterDetail").innerHTML=""});
 const initialSearch=new URLSearchParams(location.search).get("search")||"";
 if(initialSearch){$("#q").value=initialSearch}
 boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.59</div></body></html>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.60</div></body></html>

@@ -11,10 +11,8 @@ calendar = text("index.html")
 for required in ["groupedMovieCards", "currentWeekStart", "scrollCalendarToCurrentWeek", "通常公開", "午前十時の映画祭", "リバイバル上映"]:
     if required not in calendar:
         errors.append(f"Calendar weekly grouping missing: {required}")
-if "max-height:min(68vh,760px)" not in calendar:
-    errors.append("Calendar tabs are not independently scrollable")
-if "box.scrollTop" not in calendar or "window.scrollTo(0,0)" not in calendar:
-    errors.append("Calendar must keep the page at top and scroll only inside the tab content")
+if "max-height:min(68vh,760px)" in calendar or "box.scrollTop" in calendar:
+    errors.append("Calendar must use normal page scrolling without nested auto-scroll")
 if "monthPageStart" not in calendar or "view.getMonth()+1" not in calendar:
     errors.append("Calendar page navigation must be month-based and Monday-aligned")
 

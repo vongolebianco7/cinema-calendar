@@ -6,6 +6,14 @@ errors = []
 def text(path):
     return (ROOT / path).read_text(encoding="utf-8")
 
+# Calendar grouping / current-week behavior.
+calendar = text("index.html")
+for required in ["groupedMovieCards", "currentWeekStart", "scrollCalendarToCurrentWeek", "通常公開", "午前十時の映画祭", "リバイバル上映"]:
+    if required not in calendar:
+        errors.append(f"Calendar weekly grouping missing: {required}")
+if "max-height:min(68vh,760px)" not in calendar:
+    errors.append("Calendar tabs are not independently scrollable")
+
 # Morning Ten Film Festival calendar integration.
 special = json.loads(text("data/special_screenings.json"))
 rows = special.get("screenings", [])

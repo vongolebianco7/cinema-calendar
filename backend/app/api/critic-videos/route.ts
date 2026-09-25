@@ -11,7 +11,8 @@ export async function GET(request:Request){
   const topic=(u.searchParams.get("topic")||"").trim().slice(0,120);
   if(!title)return json({error:"title required"},{status:400});
   const key=process.env.YOUTUBE_API_KEY;
-  if(!key)return json({enabled:false,videos:[],reason:"YouTube API is not configured"});
+  const enabled=process.env.YOUTUBE_CRITIC_ENABLED==="true";
+  if(!enabled||!key)return json({enabled:false,videos:[],reason:"YouTube critic discovery is not enabled"});
 
   try{
     const q=[title,"映画","批評","考察",topic].filter(Boolean).join(" ");

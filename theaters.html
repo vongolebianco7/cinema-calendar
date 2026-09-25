@@ -78,9 +78,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <div class="search"><input id="q" placeholder="映画館名・住所・地域で検索"></div>
  <div class="meta" id="meta"></div>
  <div class="grid" id="grid"></div>
- <div style="margin-top:28px"><h2 style="font-size:16px;margin-bottom:8px">上映時間を取得済み</h2></div>
- <div class="pickerLabel">THEATER</div><div class="chips" id="theaterChips"></div>
- <div id="theaterDetail"></div>
+ <details class="schedulePanel" style="margin-top:28px"><summary style="cursor:pointer;font-size:16px;font-weight:800;padding:14px 0">上映時間を確認できる映画館 <span id="scheduleCount"></span></summary><div class="pickerLabel">映画館</div><div class="chips" id="theaterChips"></div><div id="theaterDetail"></div></details>
 </section>
 
 
@@ -137,7 +135,7 @@ async function boot(){
   scheduleData=await sr.json();
   if(dr&&dr.ok){const d=await dr.json();theaters=d.theaters||[]}
   if(!theaters.length){try{const fr=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});if(fr.ok){const fd=await fr.json();theaters=fd.theaters||fd||[]}}catch(_){}}
-  $("#scheduleMeta").textContent="上映時間取得済み "+(scheduleData.theaters||[]).length+"館 · 全国映画館一覧は下に表示";
+  $("#scheduleMeta").textContent=theaters.length+"館収録";const sc=document.getElementById("scheduleCount");if(sc)sc.textContent="（"+(scheduleData.theaters||[]).length+"館）";
   selectedTheater=param("theater")||(scheduleData.theaters||[])[0]?.name||"";
   selectedDate=param("date");
   renderDirectory();renderTheaterChips();renderTheaterDetail()

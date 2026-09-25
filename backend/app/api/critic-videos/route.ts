@@ -35,7 +35,7 @@ export async function GET(request:Request){
     y.searchParams.set("relevanceLanguage","ja");
     y.searchParams.set("regionCode","JP");
     y.searchParams.set("safeSearch","moderate");
-    y.searchParams.set("videoEmbeddable","true");
+    y.searchParams.set("fields","items(id/videoId,snippet(title,channelTitle,publishedAt,thumbnails/medium/url,thumbnails/default/url))");
     y.searchParams.set("q",q);
     y.searchParams.set("key",key);
     const r=await fetch(y,{cache:"no-store"});

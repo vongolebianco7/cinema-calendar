@@ -11,7 +11,7 @@ elif youtube.get("mode") != "disabled":
     errors.append("youtube_api must remain disabled until production compliance review and activation")
 
 route = (ROOT / "backend" / "app" / "api" / "critic-videos" / "route.ts").read_text(encoding="utf-8")
-for required in ["YOUTUBE_API_KEY", "YOUTUBE_CRITIC_ENABLED", 'process.env.YOUTUBE_CRITIC_ENABLED==="true"', "youtube/v3/search"]:
+for required in ["YOUTUBE_API_KEY", "YOUTUBE_CRITIC_ENABLED", 'process.env.YOUTUBE_CRITIC_ENABLED==="true"', "youtube/v3/search", "Cache-Control", "no-store"]:
     if required not in route:
         errors.append(f"critic-videos route missing safety requirement: {required}")
 

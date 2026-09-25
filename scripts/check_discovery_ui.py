@@ -15,6 +15,8 @@ if "max-height:min(68vh,760px)" not in calendar:
     errors.append("Calendar tabs are not independently scrollable")
 if "box.scrollTop" not in calendar or "window.scrollTo(0,0)" not in calendar:
     errors.append("Calendar must keep the page at top and scroll only inside the tab content")
+if "monthPageStart" not in calendar or "view.getMonth()+1" not in calendar:
+    errors.append("Calendar page navigation must be month-based and Monday-aligned")
 
 # Morning Ten Film Festival calendar integration.
 special = json.loads(text("data/special_screenings.json"))

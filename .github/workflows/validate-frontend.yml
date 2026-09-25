@@ -6,7 +6,10 @@ on:
       - "*.html"
       - "backend/app/api/critic-videos/route.ts"
       - "data/source_registry.json"
+      - "data/special_screenings.json"
+      - "data/theater_formats.json"
       - "scripts/check_sources.py"
+      - "scripts/check_discovery_ui.py"
       - "scripts/check_critic_map.py"
       - ".github/workflows/validate-frontend.yml"
   pull_request:
@@ -14,7 +17,10 @@ on:
       - "*.html"
       - "backend/app/api/critic-videos/route.ts"
       - "data/source_registry.json"
+      - "data/special_screenings.json"
+      - "data/theater_formats.json"
       - "scripts/check_sources.py"
+      - "scripts/check_discovery_ui.py"
       - "scripts/check_critic_map.py"
       - ".github/workflows/validate-frontend.yml"
   workflow_dispatch:
@@ -56,5 +62,7 @@ jobs:
           PY
       - name: Check approved data sources
         run: python scripts/check_sources.py
+      - name: Check discovery UI integrations
+        run: python scripts/check_discovery_ui.py
       - name: Check Critic Map compliance gate
         run: python scripts/check_critic_map.py

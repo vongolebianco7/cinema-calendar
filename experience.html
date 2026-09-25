@@ -271,6 +271,21 @@ radial-gradient(ellipse at 90% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 
 linear-gradient(90deg,transparent 2%,#20262d 3% 17%,transparent 18% 22%,#20262d 23% 37%,transparent 38% 42%,#20262d 43% 57%,transparent 58% 62%,#20262d 63% 77%,transparent 78% 82%,#20262d 83% 97%,transparent 98%) 0 43%/100% 47% no-repeat,
 linear-gradient(90deg,transparent 0 8%,#090c10 8% 11%,transparent 11% 28%,#090c10 28% 31%,transparent 31% 48%,#090c10 48% 51%,transparent 51% 68%,#090c10 68% 71%,transparent 71% 88%,#090c10 88% 91%,transparent 91%) 0 70%/100% 18% no-repeat;
 clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 12px #000b);transform-origin:50% 92%;animation:seatRide4d 3.8s cubic-bezier(.45,.05,.25,1) infinite}
+
+/* v0.4.28 perspective 3D audio rooms */
+.room3d{height:245px;position:relative;overflow:hidden;margin:12px 0;border-radius:14px;background:linear-gradient(#080b10,#020304);perspective:520px;border:1px solid #ffffff18}
+.floorPlane{position:absolute;left:8%;right:8%;bottom:-24%;height:70%;background:linear-gradient(90deg,#ffffff08 1px,transparent 1px),linear-gradient(#ffffff08 1px,transparent 1px);background-size:32px 32px;transform:rotateX(67deg);transform-origin:bottom}
+.ceilingPlane{position:absolute;left:12%;right:12%;top:-23%;height:58%;border:1px solid #ffffff0d;transform:rotateX(-62deg);background:linear-gradient(90deg,#ffffff06 1px,transparent 1px),linear-gradient(#ffffff06 1px,transparent 1px);background-size:30px 30px}
+.screen3d{position:absolute;left:28%;right:28%;top:25px;height:48px;border:2px solid #dbeaff99;background:#b9dcff12;box-shadow:0 0 18px #8acaff33}
+.seat3d{position:absolute;left:45%;top:59%;width:10%;height:15%;border-radius:10px 10px 4px 4px;background:#3b424b;box-shadow:0 9px 0 #171b20}
+.sp3{position:absolute;width:12px;height:12px;border-radius:3px;background:#8ecfff;box-shadow:0 0 12px #64b9ff;font-style:normal}.f1{left:23%;top:35%}.f2{right:23%;top:35%}.s1{left:12%;top:55%}.s2{right:12%;top:55%}.r1{left:20%;top:75%}.r2{right:20%;top:75%}.h1{left:29%;top:20%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h2{right:29%;top:20%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h3{left:37%;top:42%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h4{right:37%;top:42%;background:#c57aff;box-shadow:0 0 12px #c57aff}
+.horizontalRing{position:absolute;left:9%;right:9%;top:49%;height:36%;border:2px solid #65c4ff88;border-radius:50%;transform:rotateX(66deg);animation:ringGlow 2.8s ease-in-out infinite}
+.upperRing{position:absolute;left:22%;right:22%;top:21%;height:32%;border:2px solid #b66cff99;border-radius:50%;transform:rotateX(63deg);animation:ringGlow 2.8s 1.2s ease-in-out infinite}
+.flightPath{position:absolute;left:16%;top:66%;width:68%;height:1px;border-top:2px dashed #c96aff88;transform:rotate(-27deg);transform-origin:left}
+.soundOrb{position:absolute;left:16%;top:66%;color:#fff;font-size:18px;text-shadow:0 0 16px #c96aff;animation:orb3d 4.8s cubic-bezier(.45,.05,.25,1) infinite}
+@keyframes ringGlow{50%{opacity:.35;transform:rotateX(66deg) scale(.9)}}
+@keyframes orb3d{0%,8%{left:16%;top:66%;transform:scale(.7)}45%{left:48%;top:18%;transform:scale(1.3)}78%,100%{left:80%;top:48%;transform:scale(.85)}}
+@media(prefers-reduced-motion:reduce){.horizontalRing,.upperRing,.soundOrb{animation:none!important}}
 </style>
 </head>
 <body>
@@ -334,12 +349,12 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 
 <section class="section expSection" id="audio">
  <div class="sectionHead"><h2>音響</h2><p>通常5.1/7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。</p></div>
- <div class="audioGrid audioCompare">
-<article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>耳の高さ中心</span></div><div class="soundMap flatMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fc">C</i><i class="speaker fr">R</i><i class="speaker sl">SL</i><i class="speaker sr">SR</i><i class="soundWave w1"></i></div><p><b>前・横・後ろ</b>の水平面で包む基本形。音の方向が分かりやすい。</p></article>
-<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>上下＋多方向</span></div><div class="soundMap imaxMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fc">C</i><i class="speaker fr">R</i><i class="speaker sl">SL</i><i class="speaker sr">SR</i><i class="speaker rl">RL</i><i class="speaker rr">RR</i><i class="speaker hi1">↑</i><i class="speaker hi2">↑</i><i class="soundWave w1"></i><i class="soundWave w2"></i></div><p><b>水平＋高さ方向</b>へスピーカー配置を増やし、大空間を強い音圧で包む。</p></article>
-<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>音を空間内で移動</span></div><div class="soundMap atmosMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fr">R</i><i class="ceiling c1">●</i><i class="ceiling c2">●</i><i class="ceiling c3">●</i><i class="ceiling c4">●</i><i class="soundObject">✦</i><i class="objectTrail"></i></div><p>チャンネル数の比較ではなく、<b>音を「物体」として3D空間に配置・移動</b>できるのがポイント。</p></article>
+ <div class="audioGrid audioCompare audio3d">
+<article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>水平リング</span></div><div class="room3d flatRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><div class="horizontalRing"></div></div><p><b>耳の高さの1層</b>で、前→横→後ろを包む。</p></article>
+<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>水平＋上層</span></div><div class="room3d imaxRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="horizontalRing"></div><div class="upperRing"></div></div><p><b>水平層＋高い位置の層</b>。上下を含む多方向から強く包む。</p></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p></article>
 </div>
-<div class="audioKey"><span>5.1/7.1 = 水平</span><span>IMAX 12ch = 水平＋高さ＋高出力</span><span>Atmos = 3D空間を音が移動</span></div>
+<div class="audioKey"><span>5.1/7.1：1層</span><span>IMAX 12ch：2層</span><span>Atmos：空間内を移動</span></div>
 </section>
 
 <section class="section expSection" id="special">
@@ -403,5 +418,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-14">v0.4.27 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-15">v0.4.28 · 09/25</div>
 </body></html>

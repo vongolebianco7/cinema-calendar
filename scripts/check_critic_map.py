@@ -33,6 +33,7 @@ critic = (ROOT / "critic.html").read_text(encoding="utf-8")
 for required in [
     "developers.google.com/static/youtube/images/youtube-logos-2x.png",
     "Cinemap独自",
+    "Cinemap独自の絞り込み・分類",
     "privacy.html",
     "terms.html",
     "https://www.youtube.com/t/terms",

@@ -231,7 +231,7 @@ async function fetchRemoteMovieResults(q){
 }
 async function openRemoteMovie(m){
  let full=m;
- try{const cfg=await getBackendConfig();if(cfg&&cfg.enabled&&cfg.base_url&&m.tmdbId){const base=String(cfg.base_url).replace(/\/$/,"");const r=await fetch(base+"/api/movie-detail?id="+encodeURIComponent(m.tmdbId),{cache:"no-store"});if(r.ok){const d=await r.json();if(d.movie)full=d.movie}}}catch(e){console.warn("catalog detail unavailable",e)}
+ try{const cfg=await getBackendConfig();if(cfg&&cfg.enabled&&cfg.base_url&&m.tmdbId){const base=String(cfg.base_url).replace(/\/$/,"");const r=await fetch(base+"/api/movie-detail?id="+encodeURIComponent(m.tmdbId),{cache:"no-store"});if(r.ok){const d=await r.json();if(d.movie)full=d.movie}else{console.warn("catalog detail HTTP",r.status)}}}catch(e){console.warn("catalog detail unavailable",e)}
  closeSearchFocus();requestAnimationFrame(()=>openMovie(full))
 }
 function renderSearchResults(fromRemote=false){

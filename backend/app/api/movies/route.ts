@@ -30,14 +30,16 @@ export async function GET(request: Request) {
   let external: any[] = [];
   if (q) {
     const headers = tmdbHeaders();
-    if (headers) {
+    if (headers || process.env.TMDB_API_KEY) {
       try {
         const url = new URL(TMDB_BASE + "/search/movie");
         url.searchParams.set("query", q);
         url.searchParams.set("language", "ja-JP");
         url.searchParams.set("region", "JP");
         url.searchParams.set("include_adult", "false");
-        const res = await fetch(url, { headers, next: { revalidate: 3600 } });
+        const apiKey = process.env.TMDB_API_KEY;
+        if (!headers && apiKey) url.searchParams.set("api_key", apiKey);
+        const res = await fetch(url, { ...(headers ? { headers } : {}), next: { revalidate: 3600 } });
         if (res.ok) {
           const body = await res.json();
           const localIds = new Set(movies.map((m:any) => String(m.tmdbId || "")));

@@ -249,7 +249,8 @@ function renderSearchResults(fromRemote=false){
  document.querySelectorAll(".searchResult[data-ri]").forEach(x=>x.onclick=()=>{closeSearchFocus();openRemoteMovie(remote[+x.dataset.ri])})
 }
 function svcClass(s){return s==="劇場公開"?"theatrical":s==="Netflix"?"netflix":s==="Prime Video"?"prime-video":s==="Disney+"?"disney":s==="U-NEXT"?"u-next":s==="Hulu"?"hulu":s==="国内映画祭"?"festival-domestic":s==="海外映画祭"?"festival-overseas":s==="国内イベント"?"event-domestic":"tv"}
-function popularitySort(a,b){return Number(b.votes||0)-Number(a.votes||0)||Number(b.score||0)-Number(a.score||0)||String(a.title||"").localeCompare(String(b.title||""),"ja")}\nfunction dayMovies(iso){return filtered().filter(m=>m.date===iso).sort(popularitySort)}
+function popularitySort(a,b){return Number(b.votes||0)-Number(a.votes||0)||Number(b.score||0)-Number(a.score||0)||String(a.title||"").localeCompare(String(b.title||""),"ja")}
+function dayMovies(iso){return filtered().filter(m=>m.date===iso).sort(popularitySort)}
 function missingPoster(){return '<div class="calMissing" aria-label="画像なし"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="8" y="12" width="48" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="23" cy="27" r="5" fill="none" stroke="currentColor" stroke-width="4"/><path d="M12 47l13-13 9 9 7-7 11 11M10 10l44 44" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>'}
 const holidayCache=new Map();
 function japaneseHolidays(year){

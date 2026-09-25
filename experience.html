@@ -313,6 +313,14 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 /* cover transparent-preview checkerboard outside each theater cutout */
 .audio3d .room3d:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:13px;box-shadow:inset 0 0 0 7px #05070a,inset 0 0 28px 12px #05070a;z-index:1}
 .audio3d .room3d>*{z-index:2}
+
+/* v0.4.31 use newly uploaded separated-layout source; no checkerboard shown */
+.singleMotionScene:after{background-image:url("assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png?v=0431")!important;background-size:205% auto!important;background-position:34% 10%!important;left:8%!important;right:8%!important;bottom:-5%!important;height:31%!important;clip-path:inset(0 0 48% 0)!important}
+.audio3d .room3d{background-image:url("assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png?v=0431")!important;background-size:205% auto!important;background-color:#05070a!important}
+.audio3d .flatRoom{background-position:70% 7%!important}
+.audio3d .imaxRoom{background-position:70% 7%!important}
+.audio3d .atmosRoom{background-position:70% 7%!important}
+.audio3d .room3d:after{box-shadow:inset 0 0 0 12px #05070a,inset 0 0 34px 18px #05070a!important}
 </style>
 </head>
 <body>
@@ -445,5 +453,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-17">v0.4.30 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-18">v0.4.31 · 09/25</div>
 </body></html>

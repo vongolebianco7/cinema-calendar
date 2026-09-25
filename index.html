@@ -92,7 +92,7 @@ body{background:#090909}
 .heroActions{margin-top:16px;display:flex;gap:9px;flex-wrap:wrap}
 .heroAction{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;text-decoration:none;font-weight:800;border-radius:10px;padding:12px 14px;border:1px solid #3a3a3a;color:#f5f5f5;background:#171717;box-shadow:0 2px 0 #000}.heroAction:after{content:"›";font-size:18px;color:#aaa}
 .heroAction.alt{background:#e8edf0}
-.heroAction.ghost{background:#171717}
+.heroAction.ghost{background:#171717}.festivalHero{min-height:150px;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(circle at 80% 15%,#7b61d155,transparent 36%),linear-gradient(145deg,#18131f,#111);border:1px solid #342b43;margin:10px 0 16px;overflow:hidden}.festivalHero img{width:100%;max-height:260px;object-fit:cover;border-radius:8px;margin-bottom:12px}.festivalHero .festivalKind{font-size:11px;color:#cdbef5;font-weight:800;letter-spacing:.08em}.festivalHero .festivalVenue{font-size:12px;color:#aaa;margin-top:7px}
 
 @media(max-width:600px){.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.top .brandLogo{height:32px}}
 
@@ -307,11 +307,11 @@ function renderCal(){
  if(mode==="streaming"){
   cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.remove("streamingWeekMode");cal.classList.add("streamingWeekMode");
   $("#weekdays").innerHTML="";
-  let wd=(view.getDay()+6)%7,firstWeek=new Date(view);firstWeek.setHours(0,0,0,0);firstWeek.setDate(view.getDate()-wd);
-  let lastDay=new Date(firstWeek);lastDay.setDate(firstWeek.getDate()+27);
+  let monthFirst=new Date(view.getFullYear(),view.getMonth(),1),wd=(monthFirst.getDay()+6)%7,firstWeek=new Date(monthFirst);firstWeek.setHours(0,0,0,0);firstWeek.setDate(monthFirst.getDate()-wd);
+  let lastDay=new Date(firstWeek);lastDay.setDate(firstWeek.getDate()+41);
   $("#month").textContent=(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
   let out='<div class="streamingWeeks">';
-  for(let w=0;w<4;w++){
+  for(let w=0;w<6;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
@@ -623,7 +623,7 @@ function openMovie(m){
  detailMovie=m;theaterExpanded=false;
  if(m.event==="festival"){
   let source=m.source_url?'<a target="_blank" href="'+m.source_url+'">公式サイト</a>':'';
-  $("#detail").innerHTML='<p class="eyebrow">FESTIVAL / EVENT</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 12px">'+m.title+'</h2><section class="detailSection release"><h3>開催情報</h3><div><b>開催期間</b><br>'+(m.start_date||m.date)+(m.end_date&&m.end_date!==(m.start_date||m.date)?' 〜 '+m.end_date:'')+'</div>'+(m.venue?'<div style="margin-top:8px"><b>会場</b><br>'+m.venue+'</div>':'')+'</section>'+(m.overview?'<section class="detailSection story"><h3>概要</h3><div style="line-height:1.7">'+m.overview+'</div></section>':'')+(source?'<section class="detailSection linksSec"><h3>公式情報</h3><div class="links">'+source+'</div></section>':'');
+  let visual=m.visual_url?'<img src="'+m.visual_url+'" alt="" loading="lazy">':'';$("#detail").innerHTML='<p class="eyebrow">FESTIVAL / EVENT</p><div class="festivalHero">'+visual+'<span class="festivalKind">'+(m.service||"映画祭")+'</span><h2 style="font-size:24px;line-height:1.25;margin:6px 0 0">'+m.title+'</h2>'+(m.venue?'<div class="festivalVenue">'+m.venue+'</div>':'')+'</div><section class="detailSection release"><h3>開催情報</h3><div><b>開催期間</b><br>'+(m.start_date||m.date)+(m.end_date&&m.end_date!==(m.start_date||m.date)?' 〜 '+m.end_date:'')+'</div>'+(m.venue?'<div style="margin-top:8px"><b>会場</b><br>'+m.venue+'</div>':'')+'</section>'+(m.overview?'<section class="detailSection story"><h3>概要</h3><div style="line-height:1.7">'+m.overview+'</div></section>':'')+(source?'<section class="detailSection linksSec"><h3>公式情報</h3><div class="links">'+source+(m.trailer_url?'<a target="_blank" rel="noopener noreferrer" href="'+m.trailer_url+'">公式予告編</a>':'')+'</div></section>':'');
   showModal();return
  }
  let all=related(m),theatrical=all.find(x=>x.event==="theatrical"||x.service==="劇場公開");

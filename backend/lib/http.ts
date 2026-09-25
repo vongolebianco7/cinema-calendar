@@ -6,10 +6,10 @@ const ALLOWED_ORIGINS = new Set([
 ]);
 
 function allowedOrigin(request?: Request) {
-  if (!request) return "https://cinema-calendar-three.vercel.app";
-  const origin = request.headers.get("origin");
-  if (!origin) return "https://cinema-calendar-three.vercel.app";
-  return ALLOWED_ORIGINS.has(origin) ? origin : "https://cinema-calendar-three.vercel.app";
+  // Public read-only movie APIs do not use cookies or browser credentials.
+  // Use wildcard CORS so GitHub Pages, Vercel aliases and a future custom domain
+  // can all consume the same catalog without silently losing movie results.
+  return "*";
 }
 
 export function securityHeaders(request?: Request) {

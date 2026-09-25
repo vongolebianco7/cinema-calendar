@@ -164,7 +164,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinemap.html" class="heroAction ghost">My Cinemap</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
-<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.68</span></footer></main>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.69</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
@@ -299,6 +299,13 @@ function monthPageStart(d){
  const first=new Date(d.getFullYear(),d.getMonth(),1),wd=(first.getDay()+6)%7;
  first.setHours(0,0,0,0);first.setDate(first.getDate()-wd);return first
 }
+function monthPageEnd(d){
+ const last=new Date(d.getFullYear(),d.getMonth()+1,0),wd=(last.getDay()+6)%7;
+ last.setHours(0,0,0,0);last.setDate(last.getDate()+(6-wd));return last
+}
+function monthPageWeekCount(d){
+ const a=monthPageStart(d),z=monthPageEnd(d);return Math.round((z-a)/86400000/7)+1
+}
 function currentWeekStart(){
  const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d
 }
@@ -352,11 +359,10 @@ function renderCal(){
  if(mode==="streaming"){
   cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.remove("streamingWeekMode");cal.classList.add("streamingWeekMode");
   $("#weekdays").innerHTML="";
-  if(!streamRangeStart)streamRangeStart=monthPageStart(view);let firstWeek=new Date(streamRangeStart);
-  let lastDay=new Date(firstWeek);lastDay.setDate(firstWeek.getDate()+41);
+  if(!streamRangeStart)streamRangeStart=monthPageStart(view);let firstWeek=new Date(streamRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
   $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
   let out='<div class="streamingWeeks">';
-  for(let w=0;w<6;w++){
+  for(let w=0;w<weekCount;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
@@ -374,11 +380,10 @@ function renderCal(){
  if(mode==="tv"){
   cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.remove("streamingWeekMode");cal.classList.add("streamingWeekMode");
   $("#weekdays").innerHTML="";
-  let wd=(view.getDay()+6)%7,firstWeek=new Date(view);firstWeek.setHours(0,0,0,0);firstWeek.setDate(view.getDate()-wd);
-  let lastDay=new Date(firstWeek);lastDay.setDate(firstWeek.getDate()+27);
+  let firstWeek=monthPageStart(view),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
   $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
   let out='<div class="streamingWeeks">';
-  for(let w=0;w<4;w++){
+  for(let w=0;w<weekCount;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
@@ -401,7 +406,7 @@ function renderCal(){
   cal.classList.remove("theatricalCompact");cal.classList.remove("streamingWeekMode");cal.classList.add("festivalMode");
   $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
   let out="",now=new Date();
-  for(let w=0;w<6;w++){
+  for(let w=0,weekCount=monthPageWeekCount(view);w<weekCount;w++){
    let ws=new Date(start);ws.setDate(start.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let activeEvents=festivalEvents.filter(ev=>{
@@ -435,10 +440,10 @@ function renderCal(){
   cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.add("streamingWeekMode");
   $("#weekdays").innerHTML="";
   if(!theatricalRangeStart)theatricalRangeStart=monthPageStart(view)
-  let firstWeek=new Date(theatricalRangeStart),lastDay=new Date(firstWeek);lastDay.setDate(firstWeek.getDate()+41);
-  $("#month").textContent=(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
+  let firstWeek=new Date(theatricalRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
+  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
   let out='<div class="streamingWeeks">';
-  for(let w=0;w<6;w++){
+  for(let w=0;w<weekCount;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
@@ -454,8 +459,8 @@ function renderCal(){
  }
  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");
  $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
- let out="";
- for(let i=0;i<42;i++){
+ let out="",gridDays=monthPageWeekCount(view)*7;
+ for(let i=0;i<gridDays;i++){
   let d=new Date(start);d.setDate(start.getDate()+i);
   let iso=isoOf(d),ms=dayMovies(iso),now=new Date(),today=d.toDateString()===now.toDateString();
   let groupsHtml=groupHtml(ms,iso,9);

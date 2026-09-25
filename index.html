@@ -368,7 +368,7 @@ function renderCal(){
   }
   out+='</div>';
   $("#dates").innerHTML=out;
-  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]));scrollCalendarToCurrentWeek();
+  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
   return;
  }
  if(mode==="tv"){
@@ -394,7 +394,7 @@ function renderCal(){
   }
   out+='</div>';
   $("#dates").innerHTML=out;
-  document.querySelectorAll(".tvMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]));scrollCalendarToCurrentWeek();
+  document.querySelectorAll(".tvMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
   return;
  }
  if(mode==="festival"){
@@ -449,7 +449,7 @@ function renderCal(){
   }
   out+='</div>';
   $("#dates").innerHTML=out;
-  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]));scrollCalendarToCurrentWeek();
+  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
   return;
  }
  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");

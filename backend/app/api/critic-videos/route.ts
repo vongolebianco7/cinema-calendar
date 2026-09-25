@@ -4,16 +4,17 @@ export const dynamic="force-dynamic";
 const YT="https://www.googleapis.com/youtube/v3/search";
 
 export async function GET(request:Request){
+  const reply=(data:unknown,init:ResponseInit={})=>json(data,{...init,headers:{...(init.headers||{}),"Cache-Control":"private, no-store, max-age=0"}},request);
   const limited=rateLimited(request,30);
   if(limited)return limited;
   const u=new URL(request.url);
   const title=(u.searchParams.get("title")||"").trim().slice(0,120);
   const topic=(u.searchParams.get("topic")||"").trim().slice(0,120);
   const kind=(u.searchParams.get("kind")||"").trim().toUpperCase().slice(0,24);
-  if(!title)return json({error:"title required"},{status:400});
+  if(!title)return reply({error:"title required"},{status:400});
   const key=process.env.YOUTUBE_API_KEY;
   const enabled=process.env.YOUTUBE_CRITIC_ENABLED==="true";
-  if(!enabled||!key)return json({enabled:false,videos:[],reason:"YouTube critic discovery is not enabled"});
+  if(!enabled||!key)return reply({enabled:false,videos:[],reason:"YouTube critic discovery is not enabled"});
 
   try{
     const lensTerms:Record<string,string>={
@@ -39,7 +40,7 @@ export async function GET(request:Request){
     y.searchParams.set("q",q);
     y.searchParams.set("key",key);
     const r=await fetch(y,{cache:"no-store"});
-    if(!r.ok)return json({enabled:true,videos:[],error:"YouTube API unavailable"},{status:502});
+    if(!r.ok)return reply({enabled:true,videos:[],error:"YouTube API unavailable"},{status:502});
     const d:any=await r.json();
     const videos=(d.items||[]).map((x:any)=>({
       videoId:x.id?.videoId,
@@ -49,7 +50,7 @@ export async function GET(request:Request){
       thumbnail:x.snippet?.thumbnails?.medium?.url||x.snippet?.thumbnails?.default?.url||null,
       url:x.id?.videoId?`https://www.youtube.com/watch?v=${x.id.videoId}`:null
     })).filter((x:any)=>x.videoId&&x.title);
-    return json({enabled:true,query:q,videos,source:"YouTube Data API v3"});
+    return reply({enabled:true,query:q,videos,source:"YouTube Data API v3"});
   }catch(e){
     console.warn("youtube critic search unavailable",e);
     return json({enabled:true,videos:[],error:"YouTube API unavailable"},{status:502});

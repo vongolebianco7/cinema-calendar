@@ -101,8 +101,8 @@ function param(name){return new URLSearchParams(location.search).get(name)||""}
 function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
 function renderTheaterChips(){
  const defs=scheduleData.theaters||[];
- if(!selectedTheater||!defs.some(t=>t.name===selectedTheater))selectedTheater=param("theater")&&defs.some(t=>t.name===param("theater"))?param("theater"):(defs[0]?.name||"");
- $("#theaterChips").innerHTML=defs.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+'</button>').join("");
+ // The directory is the primary theater catalog. Schedule coverage is a secondary capability.
+ $("#theaterChips").innerHTML=defs.length?defs.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+' <span style="opacity:.65">上映時間あり</span></button>').join(""):'<span class="empty">取得済み上映時間はありません。</span>';
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
 }
 function renderTheaterDetail(){
@@ -127,7 +127,7 @@ function renderTheaterDetail(){
 function renderDirectory(){
  const q=$("#q").value.trim().toLowerCase();
  const list=theaters.filter(t=>!q||[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,150);
- $("#meta").textContent=(q?list.length+"件表示 / ":"")+theaters.length+"館収録（参考データ）";
+ $("#meta").textContent=(q?list.length+"件表示 / ":"")+theaters.length+"館収録";
  $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
 }
 async function boot(){
@@ -140,8 +140,8 @@ async function boot(){
   if(!sr.ok)throw new Error("schedule load failed");
   scheduleData=await sr.json();
   if(dr&&dr.ok){const d=await dr.json();theaters=d.theaters||[]}
-  $("#scheduleMeta").textContent=(scheduleData.theaters||[]).length+"館対応 · 取得 "+String(scheduleData.generated_at||"").slice(0,10);
-  selectedTheater=param("theater");
+  $("#scheduleMeta").textContent="上映時間取得済み "+(scheduleData.theaters||[]).length+"館 · 全国映画館一覧は下に表示";
+  selectedTheater=param("theater")||(scheduleData.theaters||[])[0]?.name||"";
   selectedDate=param("date");
   renderTheaterChips();renderTheaterDetail();renderDirectory()
  }catch(e){
@@ -156,5 +156,5 @@ boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.14 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-01">v0.4.37 · 09/25</div>
 </body></html>

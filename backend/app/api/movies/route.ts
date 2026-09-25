@@ -1,5 +1,5 @@
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited, options } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 const TMDB_BASE = "https://api.themoviedb.org/3";
@@ -14,6 +14,7 @@ function tmdbAuth(url: URL) {
 }
 
 export async function GET(request: Request) {
+  const limited=rateLimited(request,90);if(limited)return limited;
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q")?.trim();
   const limit = Math.min(Math.max(Number(searchParams.get("limit") || 50), 1), 100);
@@ -97,9 +98,4 @@ export async function GET(request: Request) {
   return json({ movies, external, count: movies.length + external.length });
 }
 
-export async function OPTIONS(){
-  return new Response(null,{status:204,headers:{
-    "Access-Control-Allow-Origin":"*",
-    "Access-Control-Allow-Methods":"GET,OPTIONS"
-  }});
-}
+export async function OPTIONS(request:Request){return options(request)}

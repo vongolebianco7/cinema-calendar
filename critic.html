@@ -151,17 +151,28 @@ async function hydrateComparison(fromId,current,lens){
   host.innerHTML='<div class="comparePair"><div class="compareMovie"><b>'+E(origin.title)+'</b><small>'+E(origin.year||"")+(info.aDirs.length?' · '+E(info.aDirs.join(" / ")):'')+'</small></div><div class="compareVs">VS</div><div class="compareMovie"><b>'+E(current.title)+'</b><small>'+E(current.year||"")+(info.bDirs.length?' · '+E(info.bDirs.join(" / ")):'')+'</small></div></div><div class="compareFacts">'+info.facts.map(x=>'<span class="compareFact">'+E(x)+'</span>').join("")+'</div>';
  }catch{host.innerHTML='<div class="compareFacts"><span class="compareFact none">比較元の作品情報を取得できませんでした</span></div>'}
 }
+function detectedThemeKeys(movie){
+ const text=((movie?.overview||"")+" "+(movie?.title||"")).toLowerCase();
+ const defs={
+  memory:["記憶","memory","忘れ"],family:["家族","父","母","親","娘","息子","family"],violence:["戦争","暴力","殺人","犯罪","war","crime"],
+  technology:["ai","人工知能","技術","technology","sns"],love:["恋","愛","romance","love"],time:["時間","time","未来","過去"],
+  loneliness:["孤独","孤立","lonely","alone"],work:["仕事","会社","企業","職場","office","company"],dream:["夢","dream","幻想","幻"]
+ };
+ return Object.entries(defs).filter(([,keys])=>keys.some(k=>text.includes(k))).map(([key])=>key)
+}
 function relatedGroups(m,dna,related){
  const genreMap=new Map((dna.genres||[]).map(g=>[Number(g.id),g.name]));
- const myYear=Number(m.year||0),groups={sameGenre:[],sameEra:[],other:[]};
+ const myThemes=new Set(detectedThemeKeys(m)),myYear=Number(m.year||0),groups={sameTheme:[],sameGenre:[],sameEra:[],other:[]};
  related.forEach(x=>{
-   const shared=(x.genre_ids||[]).map(id=>genreMap.get(Number(id))).filter(Boolean);
-   const otherYear=Number(x.year||0);
-   if(shared.length)groups.sameGenre.push({...x,_reason:"共通ジャンル："+shared.slice(0,2).join(" × ")});
+   const sharedThemes=detectedThemeKeys(x).filter(k=>myThemes.has(k));
+   const shared=(x.genre_ids||[]).map(id=>genreMap.get(Number(id))).filter(Boolean),otherYear=Number(x.year||0);
+   if(sharedThemes.length)groups.sameTheme.push({...x,_reason:"共通テーマ："+sharedThemes.slice(0,2).map(k=>THEME_LABELS[k]||k).join(" × ")});
+   else if(shared.length)groups.sameGenre.push({...x,_reason:"共通ジャンル："+shared.slice(0,2).join(" × ")});
    else if(myYear&&otherYear&&Math.abs(myYear-otherYear)<=5)groups.sameEra.push({...x,_reason:"近い時代："+otherYear+"年"});
    else groups.other.push({...x,_reason:"TMDB関連作品"});
  });
  return [
+   ["同じテーマで比べる",groups.sameTheme.slice(0,6)],
    ["同じジャンルから比べる",groups.sameGenre.slice(0,6)],
    ["同じ時代から比べる",groups.sameEra.slice(0,6)],
    ["別方向へ広げる",groups.other.slice(0,6)]
@@ -199,5 +210,5 @@ function render(m){
 }
 (async()=>{const id=new URLSearchParams(location.search).get("id");if(!id){app.textContent="作品を指定してください。";return}try{const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json();render(d.movie)}catch{app.textContent="作品情報を取得できませんでした。"}})();
 </script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const o=()=>{d.classList.add("show");m.classList.add("show")},q=()=>{d.classList.remove("show");m.classList.remove("show")};b.onclick=o;m.onclick=q;if(x)x.onclick=q;document.addEventListener("keydown",e=>{if(e.key==="Escape")q()})})();</script>
-<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v3.1</div>
+<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v3.2</div>
 </body></html>

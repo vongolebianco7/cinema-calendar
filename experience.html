@@ -246,6 +246,20 @@ filter:drop-shadow(0 -8px 12px #000a);transform-origin:50% 92%;animation:seatRid
 /* Restore exactly the simple v0.4.20 ScreenX presentation; no later theater-opening animation. */
 .cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/cinemap-experience.png?v=0420")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:none!important;transform:none!important;filter:none!important}
 .screenxCard .screenxTheater,.screenxCard .sxPanel,.screenxCard .sxVignette,.screenxCard .sxSeatsReal{display:none!important}
+
+/* v0.4.26 audio comparison that explains the conceptual difference */
+.soundMap{height:220px;position:relative;margin:12px 0;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 58%,#18202a 0 4%,#0b1016 5% 34%,#050709 70%);border:1px solid #ffffff18}
+.screenBar{position:absolute;left:20%;right:20%;top:14px;height:7px;border-radius:8px;background:#d9e7f5;box-shadow:0 0 16px #9fd5ff66}
+.listenerDot{position:absolute;left:50%;top:58%;width:15px;height:15px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 0 18px #fff8}
+.speaker{position:absolute;display:grid;place-items:center;width:29px;height:29px;border-radius:7px;background:#18232e;border:1px solid #ffffff38;font-size:9px;font-style:normal;color:#dce9f5}.fl{left:14%;top:25%}.fc{left:calc(50% - 14px);top:21%}.fr{right:14%;top:25%}.sl{left:8%;top:58%}.sr{right:8%;top:58%}.rl{left:18%;bottom:12%}.rr{right:18%;bottom:12%}.hi1{left:31%;top:40%;border-color:#64b9ff;color:#64b9ff}.hi2{right:31%;top:40%;border-color:#64b9ff;color:#64b9ff}
+.soundWave{position:absolute;left:50%;top:58%;width:65px;height:65px;border:1px solid #8dd2ff66;border-radius:50%;transform:translate(-50%,-50%);animation:audioPulse 2.8s ease-out infinite}.w2{animation-delay:1.4s}
+.ceiling{position:absolute;top:35%;font-style:normal;color:#c96aff;text-shadow:0 0 12px #c96aff}.c1{left:25%}.c2{left:42%}.c3{right:42%}.c4{right:25%}
+.soundObject{position:absolute;left:18%;top:72%;font-style:normal;color:#fff;font-size:20px;text-shadow:0 0 14px #c96aff;animation:objectFly 4.8s cubic-bezier(.45,.05,.25,1) infinite}
+.objectTrail{position:absolute;left:20%;top:70%;width:58%;height:1px;border-top:1px dashed #c96aff88;transform:rotate(-28deg);transform-origin:left center}
+.audioKey{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.audioKey span{padding:7px 10px;border-radius:999px;background:#0b0e12;border:1px solid #ffffff1c;color:#aeb8c2;font-size:10px}
+@keyframes audioPulse{0%{opacity:.75;transform:translate(-50%,-50%) scale(.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.5)}}
+@keyframes objectFly{0%,10%{left:18%;top:72%}45%{left:48%;top:28%}75%,100%{left:78%;top:48%}}
+@media(prefers-reduced-motion:reduce){.soundWave,.soundObject{animation:none!important}}
 </style>
 </head>
 <body>
@@ -309,11 +323,12 @@ filter:drop-shadow(0 -8px 12px #000a);transform-origin:50% 92%;animation:seatRid
 
 <section class="section expSection" id="audio">
  <div class="sectionHead"><h2>音響</h2><p>通常5.1/7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。</p></div>
- <div class="audioGrid">
-<article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>平面サラウンド</span></div><div class="audioStage aStandard"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="ring r1"></i></div><p>前後左右から包む、映画館サウンドの基本形。</p></article>
-<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>多方向・高出力</span></div><div class="audioStage aImax"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="sp s6"></i><i class="ring r1"></i><i class="ring r2"></i></div><p>スクリーン側と客席周囲を多チャンネルで構成。</p></article>
-<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>高さ方向＋オブジェクト</span></div><div class="audioStage aAtmos"><i class="scr"></i><i class="listener"></i><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="ceil c1"></i><i class="ceil c2"></i><i class="ceil c3"></i><i class="ring r1"></i><i class="ring r2"></i></div><p>頭上を含む3次元空間に音を配置する考え方。</p></article>
+ <div class="audioGrid audioCompare">
+<article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>耳の高さ中心</span></div><div class="soundMap flatMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fc">C</i><i class="speaker fr">R</i><i class="speaker sl">SL</i><i class="speaker sr">SR</i><i class="soundWave w1"></i></div><p><b>前・横・後ろ</b>の水平面で包む基本形。音の方向が分かりやすい。</p></article>
+<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>上下＋多方向</span></div><div class="soundMap imaxMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fc">C</i><i class="speaker fr">R</i><i class="speaker sl">SL</i><i class="speaker sr">SR</i><i class="speaker rl">RL</i><i class="speaker rr">RR</i><i class="speaker hi1">↑</i><i class="speaker hi2">↑</i><i class="soundWave w1"></i><i class="soundWave w2"></i></div><p><b>水平＋高さ方向</b>へスピーカー配置を増やし、大空間を強い音圧で包む。</p></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>音を空間内で移動</span></div><div class="soundMap atmosMap"><i class="screenBar"></i><i class="listenerDot"></i><i class="speaker fl">L</i><i class="speaker fr">R</i><i class="ceiling c1">●</i><i class="ceiling c2">●</i><i class="ceiling c3">●</i><i class="ceiling c4">●</i><i class="soundObject">✦</i><i class="objectTrail"></i></div><p>チャンネル数の比較ではなく、<b>音を「物体」として3D空間に配置・移動</b>できるのがポイント。</p></article>
 </div>
+<div class="audioKey"><span>5.1/7.1 = 水平</span><span>IMAX 12ch = 水平＋高さ＋高出力</span><span>Atmos = 3D空間を音が移動</span></div>
 </section>
 
 <section class="section expSection" id="special">
@@ -377,5 +392,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-12">v0.4.25 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-13">v0.4.26 · 09/25</div>
 </body></html>

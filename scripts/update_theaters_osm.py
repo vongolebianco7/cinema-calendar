@@ -22,4 +22,4 @@ for e in get().get("elements",[]):
 rows.sort(key=lambda x:(x["prefecture"],x["municipality"],x["name"]))
 if len(rows)<300:raise RuntimeError("OSM cinema coverage unexpectedly low: "+str(len(rows)))
 with open("data/theaters_osm.json","w",encoding="utf-8") as f:json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"source":"OpenStreetMap contributors","license":"ODbL 1.0","theaters":rows},f,ensure_ascii=False,indent=2)
-print("OSM cinemas:",len(rows))
+print("OSM cinemas:",len(rows))\n# updater-version: 2

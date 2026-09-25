@@ -3,6 +3,18 @@
   "note": "公式発表で日程を確認できた国内・海外の主要映画祭／映画関連イベント。日程は変更される場合があります。",
   "events": [
     {
+      "title": "第83回ゴールデングローブ賞",
+      "date": "2026-01-11",
+      "end_date": "2026-01-11",
+      "event": "festival",
+      "service": "映画賞",
+      "scope": "overseas",
+      "venue": "The Beverly Hilton, Beverly Hills, USA",
+      "source": "Golden Globes 公式",
+      "source_url": "https://goldenglobes.com/winners-nominees/",
+      "overview": "映画・テレビの主要賞。映画部門ではドラマ、ミュージカル／コメディ、アニメーション、非英語作品、演技、監督、脚本などを表彰。"
+    },
+    {
       "title": "サンダンス映画祭 2026",
       "date": "2026-01-22",
       "end_date": "2026-02-01",
@@ -25,6 +37,30 @@
       "source": "Berlinale 公式",
       "source_url": "https://www.berlinale.de/",
       "overview": "第76回ベルリン国際映画祭。2月12日から22日まで開催。"
+    },
+    {
+      "title": "2026 EE BAFTA Film Awards",
+      "date": "2026-02-22",
+      "end_date": "2026-02-22",
+      "event": "festival",
+      "service": "映画賞",
+      "scope": "overseas",
+      "venue": "Royal Festival Hall, London, UK",
+      "source": "BAFTA 公式",
+      "source_url": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "overview": "英国アカデミー賞。2026年は2月22日に開催。"
+    },
+    {
+      "title": "第98回アカデミー賞",
+      "date": "2026-03-15",
+      "end_date": "2026-03-15",
+      "event": "festival",
+      "service": "映画賞",
+      "scope": "overseas",
+      "venue": "Dolby Theatre, Hollywood, USA",
+      "source": "Academy of Motion Picture Arts and Sciences 公式",
+      "source_url": "https://www.oscars.org/oscars/ceremonies/2026",
+      "overview": "2025年公開作品を対象とする第98回アカデミー賞。作品・監督・演技・脚本・技術など各部門を表彰。"
     },
     {
       "title": "第79回カンヌ国際映画祭",
@@ -51,6 +87,18 @@
       "overview": "米国アカデミー賞公認の国際短編映画祭。東京会場は5月25日から6月10日、オンライン会場は6月30日まで。世界各国の短編映画、トーク、セミナー、アワードを展開。"
     },
     {
+      "title": "第79回ロカルノ国際映画祭",
+      "date": "2026-08-05",
+      "end_date": "2026-08-15",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Locarno, Switzerland",
+      "source": "Locarno Film Festival",
+      "source_url": "https://www.locarnofestival.ch/",
+      "overview": "スイス・ロカルノで開催される主要国際映画祭。Piazza Grandeでの大規模野外上映でも知られる。"
+    },
+    {
       "title": "第83回ヴェネチア国際映画祭",
       "date": "2026-09-02",
       "end_date": "2026-09-12",
@@ -61,6 +109,18 @@
       "source": "La Biennale di Venezia 公式",
       "source_url": "https://www.labiennale.org/en/cinema/2026",
       "overview": "第83回ヴェネチア国際映画祭。9月2日から12日まで開催。"
+    },
+    {
+      "title": "第51回トロント国際映画祭",
+      "date": "2026-09-10",
+      "end_date": "2026-09-20",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Toronto, Canada",
+      "source": "TIFF",
+      "source_url": "https://www.tiff.net/",
+      "overview": "北米最大級の国際映画祭。ガラ、スペシャル・プレゼンテーション、Platform、Discoveryなど多数の部門で上映。"
     },
     {
       "title": "第48回ぴあフィルムフェスティバル2026",
@@ -85,6 +145,18 @@
       "source": "なら国際映画祭公式",
       "source_url": "https://nara-iff.jp/",
       "overview": "古都・奈良を舞台に、国内外の作品や若手クリエイターの作品を上映する国際映画祭。"
+    },
+    {
+      "title": "第64回ニューヨーク映画祭",
+      "date": "2026-09-25",
+      "end_date": "2026-10-12",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "New York, USA",
+      "source": "Film at Lincoln Center",
+      "source_url": "https://www.filmlinc.org/nyff/",
+      "overview": "Film at Lincoln Center主催。2026年のMain Slateは34作品。"
     },
     {
       "title": "第39回東京国際映画祭",

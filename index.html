@@ -179,9 +179,8 @@ function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.run
 function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;return ok&&serviceOk})}
 function streamingReleaseServices(){
  const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
- const ordered=STREAMING_SERVICES.filter(s=>found.includes(s));
  const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)).sort((a,b)=>a.localeCompare(b,"ja"));
- return [...ordered,...extras]
+ return [...STREAMING_SERVICES,...extras]
 }
 function renderChips(){
  let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];

@@ -208,6 +208,14 @@
 @keyframes screenxSubtle{from{filter:brightness(.94);transform:scale(1)}to{filter:brightness(1.04);transform:scale(1.008)}}
 .screenxTheater{display:none!important}
 @media(prefers-reduced-motion:reduce){.singleMotionScene span,.cropScreenx{animation:none!important}}
+
+/* v0.4.23 precise 4D crop: isolate the single action frame */
+.singleMotionScene{aspect-ratio:1.78/1!important;background-size:200% auto!important;background-position:100% 0!important}
+/* mask the neighboring tiles baked into the source sprite by cropping to the action-frame bounds */
+.singleMotionScene:before{content:"";position:absolute;inset:0;z-index:0;background-image:url("assets/cinemap-experience.png?v=0423");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;transform:scale(1.34);transform-origin:76% 18%}
+.singleMotionScene{background-image:none!important}
+.singleMotionScene>span{z-index:2}
+@media(max-width:640px){.singleMotionScene:before{transform:scale(1.38);transform-origin:78% 16%}}
 </style>
 </head>
 <body>
@@ -339,5 +347,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-09">v0.4.22 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-10">v0.4.23 · 09/25</div>
 </body></html>

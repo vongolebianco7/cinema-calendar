@@ -222,7 +222,7 @@ async function fetchRemoteMovieResults(q){
  if(!q||q.length<2){remoteMovieResults=[];return}
  try{
   const cfg=await getBackendConfig();if(!cfg||!cfg.enabled||!cfg.base_url)return;
-  const base=String(cfg.base_url).replace(/\\\/$/,"");
+  const base=String(cfg.base_url).replace(/\/$/,"");
   const r=await fetch(base+"/api/movies?q="+encodeURIComponent(q)+"&limit=16",{cache:"no-store"});
   if(!r.ok)return;const d=await r.json();if(seq!==remoteSearchSeq)return;
   remoteMovieResults=[...(d.movies||[]),...(d.external||[])].filter(x=>x&&x.title)

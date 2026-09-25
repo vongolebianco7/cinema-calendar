@@ -115,11 +115,11 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.59</div>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.61</div>
 </main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
-let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて";
+let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="すべて",boxRegion="すべて",boxEra="歴代",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて";
 const $=s=>document.querySelector(s);
 const uniqById=list=>{const m=new Map();list.forEach(x=>{const k=x.id||x.title;const p=m.get(k);if(!p||(x.score||0)>(p.score||0))m.set(k,x)});return [...m.values()]};
 function allRegions(){return ["すべて",...Object.keys(rankings||{})]}
@@ -142,7 +142,11 @@ function ratingList(regions,genre,era){
  if(era==="今年")return yearList(regions,genre);
  let list=[];regions.forEach(r=>{
    const gs=Object.keys(rankings[r]||{});
-   (genre==="すべて"?gs:[genre]).forEach(g=>list.push(...((((rankings[r]||{})[g]||{})[era])||[])));
+   (genre==="すべて"?gs:[genre]).forEach(g=>{
+     const byEra=((rankings[r]||{})[g]||{});
+     if(era==="すべて")Object.values(byEra).forEach(rows=>list.push(...(rows||[])));
+     else list.push(...((byEra[era])||[]));
+   });
  });
  return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0));
 }
@@ -158,13 +162,13 @@ function renderRating(){
  let eras=availableEras(regions,useGenres);
  const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};
  eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));
- const eraOpts=["今年",...eras];
- if(!eraActive||!eraOpts.includes(eraActive))eraActive="今年";
+ const eraOpts=["すべて","今年",...eras];
+ if(!eraActive||!eraOpts.includes(eraActive))eraActive="すべて";
  $("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");
  $("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");
  $("#eraChips").innerHTML=eraOpts.map(x=>'<button class="chip '+(x===eraActive?'active':'')+'" data-era="'+x+'">'+x+'</button>').join("");
- document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="今年";render()});
- document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="今年";render()});
+ document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="すべて";render()});
+ document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="すべて";render()});
  document.querySelectorAll("[data-era]").forEach(b=>b.onclick=()=>{eraActive=b.dataset.era;render()});
  const list=ratingList(regions,genreActive,eraActive).slice(0,80);
  $("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map(card).join(""):'<div class="empty">該当作品がありません</div>';

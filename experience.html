@@ -110,6 +110,21 @@
  .sectionSubHead h3{font-size:21px}
 }
 
+
+/* exact aspect-ratio comparison */
+.ratioCompareExact{display:grid;gap:18px;margin-top:20px}
+.ratioExactCard{background:#080a0d;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;padding:14px}
+.ratioExactHead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:12px}
+.ratioExactHead>div{display:flex;align-items:baseline;gap:12px}.ratioExactHead b{font-size:20px;letter-spacing:.01em}.ratioExactHead strong{font-size:26px;font-weight:800;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue","Noto Sans JP",sans-serif}
+.ratioExactHead span{font-size:12px;color:#9da6af;text-align:right}
+.scopeExact{border-color:rgba(255,92,105,.42)}.scopeExact strong{color:#ff6875}
+.imaxExact{border-color:rgba(72,201,255,.42)}.imaxExact strong{color:#5bc8ff}
+.gtExact{border-color:rgba(255,210,79,.45)}.gtExact strong{color:#f4d15b}
+.ratioViewport{width:100%;display:block;background-color:#061019;background-image:var(--aspect-base,none);background-repeat:no-repeat;background-size:cover;background-position:50% 50%;border-radius:10px;overflow:hidden}
+.ratio239{aspect-ratio:2.39/1}.ratio190{aspect-ratio:1.90/1}.ratio143{aspect-ratio:1.43/1}
+.aspectBaseLoading .ratioViewport{background-image:linear-gradient(110deg,#081018 25%,#101c27 40%,#081018 55%);background-size:200% 100%;animation:expShimmer 1.4s linear infinite}
+@media(max-width:700px){.ratioExactCard{padding:11px;border-radius:14px}.ratioExactHead{align-items:flex-start}.ratioExactHead>div{display:block}.ratioExactHead b{font-size:16px}.ratioExactHead strong{display:block;margin-top:2px;font-size:22px}.ratioExactHead span{max-width:125px;font-size:11px}.ratioViewport{border-radius:8px}}
+
 </style>
 </head>
 <body>
@@ -139,9 +154,26 @@
 </section>
 
 <section class="section expSection" id="aspect">
- <div class="sectionHead"><h2>見える範囲</h2><p>同じ横幅・同じ中心位置で比較。IMAX GT 1.43:1を基準に、1.90:1と2.39:1は上下を中央クロップしています。</p></div>
- <div class="finishedVisual tileAspect" role="img" aria-label="同じ海中シーンをシネマスコープ2.39対1、IMAX1.90対1、IMAX GT1.43対1で比較した高品質図"></div>
- <div class="formula">同じ横幅1000で計算：2.39:1 → 高さ418.41 ／ 1.90:1 → 526.32 ／ 1.43:1 → 699.30。<br>※「見える範囲」の概念比較です。実際の作品では撮影・マスター・上映方式により使用画角が異なります。</div>
+ <div class="sectionHead"><h2>見える範囲</h2><p>同じ1枚の1.43:1画像を、横幅を変えずに上下だけ中央クロップして比較します。</p></div>
+
+ <div class="ratioCompareExact" aria-label="同一の海中画像を正確な画面比率で比較">
+  <article class="ratioExactCard scopeExact">
+   <div class="ratioExactHead"><div><b>シネマスコープ</b><strong>2.39:1</strong></div><span>上下を大きくクロップ</span></div>
+   <div class="ratioViewport ratio239" role="img" aria-label="シネマスコープ2.39対1の海中シーン"></div>
+  </article>
+
+  <article class="ratioExactCard imaxExact">
+   <div class="ratioExactHead"><div><b>IMAX</b><strong>1.90:1</strong></div><span>上下の情報が増える</span></div>
+   <div class="ratioViewport ratio190" role="img" aria-label="IMAX1.90対1の海中シーン"></div>
+  </article>
+
+  <article class="ratioExactCard gtExact">
+   <div class="ratioExactHead"><div><b>IMAX GT</b><strong>1.43:1</strong></div><span>元画像をほぼそのまま表示</span></div>
+   <div class="ratioViewport ratio143" role="img" aria-label="IMAX GT1.43対1の海中シーン"></div>
+  </article>
+ </div>
+
+ <div class="formula">元画像：1500 × 1049 px（1.42993:1）。中央クロップ後：シネマスコープ 1500 × 628 px（2.38854:1）／ IMAX 1500 × 789 px（1.90114:1）／ IMAX GT 1500 × 1049 px（1.42993:1）。<br>※画像を横方向へ引き伸ばしていません。3つとも同じ元画像です。</div>
 </section>
 
 <section class="section expSection" id="visual">
@@ -173,22 +205,29 @@
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
 <script id="experienceSpriteLoader">
-document.body.classList.add("experienceSpriteLoading");
+document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
 (async()=>{
-  try{
-    const urls=Array.from({length:15},(_,i)=>"assets/experience-sprite.part"+String(i+1).padStart(2,"0")+"?v=2");
+  const loadParts=async(prefix,count,version)=>{
+    const urls=Array.from({length:count},(_,i)=>prefix+String(i+1).padStart(2,"0")+"?v="+version);
     const chunks=await Promise.all(urls.map(async u=>{
       const r=await fetch(u,{cache:"force-cache"});
       if(!r.ok) throw new Error(u+" "+r.status);
       return (await r.text()).trim();
     }));
-    const src='url("data:image/webp;base64,'+chunks.join("").replace(/\s+/g,"")+'")';
-    document.documentElement.style.setProperty("--experience-sprite",src);
-    document.body.classList.remove("experienceSpriteLoading");
-    document.body.classList.add("experienceSpriteReady");
+    return chunks.join("").replace(/\s+/g,"");
+  };
+  try{
+    const [sprite64,aspect64]=await Promise.all([
+      loadParts("assets/experience-sprite.part",15,2),
+      loadParts("assets/aspect-base.part",11,1)
+    ]);
+    document.documentElement.style.setProperty("--experience-sprite",'url("data:image/webp;base64,'+sprite64+'")');
+    document.documentElement.style.setProperty("--aspect-base",'url("data:image/webp;base64,'+aspect64+'")');
+    document.body.classList.remove("experienceSpriteLoading","aspectBaseLoading");
+    document.body.classList.add("experienceSpriteReady","aspectBaseReady");
   }catch(err){
     console.error("CINEMAP experience artwork failed",err);
-    document.body.classList.remove("experienceSpriteLoading");
+    document.body.classList.remove("experienceSpriteLoading","aspectBaseLoading");
     document.body.classList.add("experienceSpriteError");
   }
 })();

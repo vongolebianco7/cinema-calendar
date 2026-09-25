@@ -164,7 +164,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinemap.html" class="heroAction ghost">My Cinemap</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
-<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.69</span></footer></main>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.70</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
@@ -181,7 +181,8 @@ let modalScrollY=0;
 function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
 function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.runtime||0);if(!r)return false;return (!runtimeMin||r>=runtimeMin)&&(!runtimeMax||r<=runtimeMax)}
-function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=active==="すべて"||m.service===active;return ok&&serviceOk})}
+function theatricalCategory(m){return m.special_screening==="asa10"?"午前十時":m.service==="リバイバル上映"?"リバイバル":"通常"}
+function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=mode==="theatrical"?(active==="すべて"||theatricalCategory(m)===active):(active==="すべて"||m.service===active);return ok&&serviceOk})}
 function streamingReleaseServices(){
  const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
  const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)).sort((a,b)=>a.localeCompare(b,"ja"));
@@ -191,7 +192,7 @@ function renderChips(){
  let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
  let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
  let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
- let ss=mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ let ss=mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
  if(!ss.includes(active))active="すべて";
  $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
@@ -420,7 +421,7 @@ function renderCal(){
     cells+='<div class="festivalDate '+(d.getMonth()!==mo?'dim':'')+(d.toDateString()===now.toDateString()?' today':'')+dayColorClass(d)+'" style="grid-column:'+(k+1)+';grid-row:1;min-height:'+height+'px">'+d.getDate()+'</div>'
    }
    let spans=activeEvents.map((ev,lane)=>{
-    let a=new Date(ev.date+"T00:00:00"),z=new Date((ev.end_date||ev.date)+"T00:00:00");
+    let a=new Date(ev.date+"T00:00:00"),z=new Date((ev.end_date||ev.date)+"T00:00:00"),continued=a<ws;
     let segStart=a>ws?a:ws,segEnd=z<we?z:we;
     let colStart=((segStart.getDay()+6)%7)+1,colEnd=((segEnd.getDay()+6)%7)+2;
     let klass=ev.scope==="overseas"?"overseas":ev.service==="国内イベント"?"event":"domestic";

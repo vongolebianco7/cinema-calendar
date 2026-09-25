@@ -18,3 +18,4 @@ export async function GET(request:Request){
  }catch(e){console.warn("TMDB detail unavailable",e);return json({error:"detail unavailable"},{status:502})}
 }
 export async function OPTIONS(){return new Response(null,{status:204,headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,OPTIONS"}})}
+

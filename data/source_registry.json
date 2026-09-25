@@ -149,6 +149,27 @@
         "Do not operate CINEMAP as commercial SaaS/e-commerce on Pages",
         "Stay within Pages usage limits"
       ]
+    },
+    {
+      "id": "youtube_api",
+      "name": "YouTube API Services",
+      "mode": "disabled",
+      "purpose": [
+        "critic_map",
+        "criticism_discovery"
+      ],
+      "basis": "Potential source for human criticism discovery, but production use is gated until CINEMAP has the required YouTube API Client terms/privacy disclosures, credential handling, display/storage rules, and the exact CRITIC MAP design passes a fresh compliance review.",
+      "terms_url": "https://developers.google.com/youtube/terms/developer-policies",
+      "requirements": [
+        "Use documented YouTube API Services only; no scraping",
+        "Do not download/cache/store audiovisual content",
+        "Do not expose API credentials in the frontend or repository",
+        "Publish and surface the required privacy policy and YouTube Terms links before enabling",
+        "Respect API-data refresh/storage limits",
+        "Do not create derived metrics from YouTube API Data",
+        "Clearly label CINEMAP-owned classifications as not from YouTube",
+        "Keep disabled until these requirements are implemented and reviewed"
+      ]
     }
   ]
 }

@@ -112,7 +112,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.39</div>\n</main>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.40</div>\n</main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis="rating";
 let regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear="",awardOrg="すべて",awardCategory="すべて";
@@ -184,8 +184,8 @@ function renderBox(){
  $("#sourceNote").textContent="日本国内興行収入 · "+src;
 }
 function renderAwards(){
- const years=[...new Set(awards.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a));if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"";
- const inYear=awards.filter(x=>String(x.year)===awardYear),orgs=["すべて",...new Set(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";
+ const years=["すべて",...[...new Set(awards.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a))];if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"すべて";
+ const inYear=awardYear==="すべて"?awards:awards.filter(x=>String(x.year)===awardYear),orgs=["すべて",...new Set(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";
  const inOrg=awardOrg==="すべて"?inYear:inYear.filter(x=>x.organization===awardOrg),cats=["すべて",...new Set(inOrg.map(x=>x.category))];if(!cats.includes(awardCategory))awardCategory="すべて";
  $("#awardYearChips").innerHTML=years.map(x=>'<button class="chip '+(x===awardYear?'active':'')+'" data-award-year="'+x+'">'+x+'</button>').join("");
  $("#awardOrgChips").innerHTML=orgs.map(x=>'<button class="chip '+(x===awardOrg?'active':'')+'" data-award-org="'+x+'">'+x+'</button>').join("");
@@ -195,7 +195,7 @@ function renderAwards(){
  document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});
  let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);
  $("#grid").className="listRank";$("#grid").innerHTML=list.length?list.map(m=>'<a class="listRow" target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit;text-decoration:none"><div class="listNo">★</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+m.organization+' · '+m.category+'</div></div><div class="listMeta">公式 ↗</div></a>').join(""):'<div class="empty">該当する受賞作品がありません</div>';
- $("#sourceNote").textContent=awardYear+"年 · 主催者公式発表で確認した受賞結果";
+ $("#sourceNote").textContent=(awardYear==="すべて"?"全年度":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";
 }
 
 function render(){

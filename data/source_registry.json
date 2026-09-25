@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "checked_at": "2026-09-24",
-  "policy": "Only sources marked approved may be used as automated production data sources.",
+  "checked_at": "2026-09-25",
+  "policy": "Only reviewed, zero-cost sources marked approved may be used as automated production data sources. CINEMAP remains personal and non-commercial.",
   "sources": [
     {
       "id": "tmdb",
@@ -107,6 +107,47 @@
       "basis": "No permission held for automated collection/republication.",
       "requirements": [
         "Do not scrape or republish rankings without permission/license"
+      ]
+    },
+    {
+      "id": "openai_api",
+      "name": "OpenAI API",
+      "mode": "disabled",
+      "purpose": [
+        "generative_ai"
+      ],
+      "basis": "Paid/metered API is outside CINEMAP zero-cost policy.",
+      "requirements": [
+        "Do not call from production CINEMAP"
+      ]
+    },
+    {
+      "id": "vercel_hobby",
+      "name": "Vercel Hobby",
+      "mode": "approved",
+      "purpose": [
+        "backend_hosting"
+      ],
+      "basis": "Free plan for personal, non-commercial projects; usage limits apply.",
+      "terms_url": "https://vercel.com/docs/plans/hobby",
+      "requirements": [
+        "Personal/non-commercial use only",
+        "Do not upgrade to paid plan for CINEMAP",
+        "Treat free-tier exhaustion as downtime, not a billing trigger"
+      ]
+    },
+    {
+      "id": "github_pages",
+      "name": "GitHub Pages",
+      "mode": "approved",
+      "purpose": [
+        "static_frontend_hosting"
+      ],
+      "basis": "Permitted for project static sites subject to Pages terms and usage limits.",
+      "terms_url": "https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features",
+      "requirements": [
+        "Do not operate CINEMAP as commercial SaaS/e-commerce on Pages",
+        "Stay within Pages usage limits"
       ]
     }
   ]

@@ -45,7 +45,7 @@ jobs:
       - name: Install backend dependencies
         if: steps.db.outputs.ready == 'true'
         working-directory: backend
-        run: npm ci
+        run: npm install --ignore-scripts
 
       - name: Build backend
         if: steps.db.outputs.ready == 'true'

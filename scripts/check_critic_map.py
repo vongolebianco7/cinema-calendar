@@ -37,6 +37,7 @@ for required in [
     "terms.html",
     "https://www.youtube.com/t/terms",
     "観たのでCritic Mapを開く",
+    "同じ視点：",
 ]:
     if required not in critic:
         errors.append(f"critic.html missing Critic Map requirement: {required}")

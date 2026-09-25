@@ -1,6 +1,10 @@
 name: Update nationwide cinema directory
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - scripts/update_theaters_osm.py
+      - .github/workflows/update-theater-directory.yml
   schedule:
     - cron: "15 3 * * 1"
 permissions:

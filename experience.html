@@ -138,6 +138,21 @@
 /* v0.4.17: theater-like ScreenX, not flat side cards */
 .screenxRoom2{perspective:700px!important;background:radial-gradient(ellipse at 50% 72%,#15191f,#030405 72%)!important}.sxMain{left:20%!important;right:20%!important;top:34px!important;height:178px!important;transform:translateZ(0)!important}.sxSide{top:42px!important;height:174px!important;width:36%!important;border-color:#765f2d!important}.sxL{left:-8%!important;transform:rotateY(64deg)!important;transform-origin:right center!important}.sxR{right:-8%!important;transform:rotateY(-64deg)!important;transform-origin:left center!important}.sxL span,.sxR span{background:linear-gradient(180deg,#071b2c 0 45%,#0b3038 46% 100%)!important}.sxL span:before,.sxR span:before{background:linear-gradient(160deg,transparent 0 46%,#17463f 47% 61%,#0c292f 62%)!important}.sxSeats{bottom:9px!important;opacity:.8}
 @media(max-width:700px){.sxMain{left:20%!important;right:20%!important;height:130px!important}.sxSide{width:38%!important;height:126px!important}.sxL{left:-11%!important}.sxR{right:-11%!important}}
+
+/* v0.4.18 motion pass */
+.audioStage .ring{animation:soundPulse 2.4s ease-out infinite}.audioStage .r2{animation-delay:.65s}.aAtmos .ceil{animation:ceilingGlow 1.8s ease-in-out infinite alternate}
+.screenxRoom2 .sxMain{animation:screenCenter 5s ease-in-out infinite}.screenxRoom2 .sxL{animation:screenLeft 5s ease-in-out infinite}.screenxRoom2 .sxR{animation:screenRight 5s ease-in-out infinite}
+.dx4 .motionStage:before{animation:windSweep 2.1s linear infinite}.dx4 .motionStage:after{animation:waterSpray 2.8s ease-in-out infinite}.mx4d .motionStage:before{animation:airBurst 2.2s ease-in-out infinite}.mx4d .motionStage:after{animation:mistPulse 2.5s ease-in-out infinite}
+@keyframes soundPulse{0%{opacity:.12;transform:translate(-50%,-50%) scale(.72)}65%{opacity:.72}100%{opacity:0;transform:translate(-50%,-50%) scale(1.16)}}
+@keyframes ceilingGlow{from{box-shadow:0 0 4px currentColor;opacity:.45}to{box-shadow:0 0 20px currentColor;opacity:1}}
+@keyframes screenCenter{0%,100%{filter:brightness(.9)}45%,65%{filter:brightness(1.08)}}
+@keyframes screenLeft{0%,18%{opacity:.45;transform:rotateY(68deg)}45%,100%{opacity:1;transform:rotateY(64deg)}}
+@keyframes screenRight{0%,18%{opacity:.45;transform:rotateY(-68deg)}45%,100%{opacity:1;transform:rotateY(-64deg)}}
+@keyframes windSweep{0%{transform:translateX(-20%) skewY(-8deg);opacity:0}35%{opacity:.9}100%{transform:translateX(20%) skewY(-8deg);opacity:0}}
+@keyframes waterSpray{0%,100%{transform:translate(8px,8px) rotate(-18deg);opacity:.25}45%{transform:translate(-8px,-8px) rotate(-18deg);opacity:1}}
+@keyframes airBurst{0%,100%{transform:scaleX(.65);opacity:.25}50%{transform:scaleX(1.08);opacity:1}}
+@keyframes mistPulse{0%,100%{opacity:.2;transform:scale(.85)}50%{opacity:.75;transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.audioStage .ring,.audioStage .ceil,.screenxRoom2 .sxMain,.screenxRoom2 .sxL,.screenxRoom2 .sxR,.dx4 .motionStage:before,.dx4 .motionStage:after,.mx4d .motionStage:before,.mx4d .motionStage:after{animation:none!important}}
 </style>
 </head>
 <body>
@@ -262,5 +277,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-04">v0.4.17 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-05">v0.4.18 · 09/25</div>
 </body></html>

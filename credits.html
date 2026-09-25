@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Credits / Data Sources | CINEMAP</title>
+<title>Credits / Data Sources | Cinemap</title>
 <style>
 :root{color-scheme:dark;--bg:#0d0e11;--panel:#15171c;--text:#f5f6f8;--muted:#a7abb3;--line:#2a2d34;--accent:#e7b24a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -22,7 +22,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 @media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 
 
-/* unified CINEMAP header v2 */
+/* unified Cinemap header v2 */
 .gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
 .gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
 .gNav{height:62px;display:flex;align-items:center;gap:12px}
@@ -56,7 +56,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <body>
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a>
+ <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -65,15 +65,15 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="theaters.html">映画館</a>
  <a href="experience.html">上映体験</a>
  <a href="rankings.html">ランキング・受賞作</a>
- <a href="revivals.html">リバイバル上映</a>\n <a href="discover.html">見る映画を探す</a>\n <a href="my-cinemap.html">MY CINEMAP</a>\n <a href="agent.html">映画コンシェルジュ</a>\n</aside><main class="wrap">
+ <a href="revivals.html">リバイバル上映</a>\n <a href="discover.html">見る映画を探す</a>\n <a href="my-cinemap.html">My Cinemap</a>\n <a href="agent.html">映画コンシェルジュ</a>\n</aside><main class="wrap">
 <a class="back" href="index.html">← カレンダーへ戻る</a>
 <h1>Credits / Data Sources</h1>
-<p class="muted">CINEMAPは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>
+<p class="muted">Cinemapは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>
 
 <section class="card">
 <h2>TMDB</h2>
@@ -114,7 +114,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <section class="card">
 <h2>第三者サービス</h2>
-<p class="muted">Filmarks等、CINEMAPがデータ利用許諾または正式なAPIライセンスを保有していないサービスについては、評価点・ランキング・レビュー等を取得・保存・再掲載しません。必要に応じて通常の外部リンクのみ提供します。</p>
+<p class="muted">Filmarks等、Cinemapがデータ利用許諾または正式なAPIライセンスを保有していないサービスについては、評価点・ランキング・レビュー等を取得・保存・再掲載しません。必要に応じて通常の外部リンクのみ提供します。</p>
 </section>
 
 <section class="card">
@@ -127,9 +127,9 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <section class="card">
 <h2>Compliance</h2>
 <p class="muted">新規データソースは、本番利用前に利用規約、API条件、帰属表示、再配布・保存可否を確認します。確認できない場合は自動取得を無効のままとします。</p>
-<a href="https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md" target="_blank" rel="noopener noreferrer">CINEMAP Compliance Policy </a>
+<a href="https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md" target="_blank" rel="noopener noreferrer">Cinemap Compliance Policy </a>
 </section>
 </main><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.56</div></body></html>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.56</div></body></html>

@@ -92,3 +92,35 @@ Production automation must consult `data/source_registry.json`.
 - `disabled`: must not be used for automated collection or republication.
 
 Automated workflows must pass `scripts/check_sources.py` before collecting production data. Changing a source from `disabled` or `link_only` to `approved` requires a fresh compliance review and documented legal/contractual basis.
+
+
+## Zero-cost / non-commercial release gate
+
+CINEMAP is operated as a personal, non-commercial project. Paid APIs, metered paid add-ons, advertising, subscriptions, purchases, donations, affiliate monetization, and any feature that can create an automatic usage charge are out of scope.
+
+Before enabling a service or feature in production, confirm all of the following:
+
+- It is permitted for personal, non-commercial use.
+- The enabled plan has no automatic paid overage for the feature being used.
+- No paid API key or paid AI/model endpoint is required.
+- Required attribution and branding are present.
+- Automated collection, caching, storage, display, and redistribution are permitted for the exact intended use.
+- Copyrighted artwork is not exported or redistributed beyond the permission actually granted.
+- No authentication, paywall, anti-bot measure, or technical access control is bypassed.
+- No personal, payment, password, or other sensitive user data is collected.
+
+If any item is unclear, keep the integration disabled until the terms or permission are confirmed.
+
+### Hosting constraints
+
+- GitHub Pages must remain within its permitted project-hosting use and must not be used as a commercial SaaS/e-commerce host.
+- Vercel Hobby must remain personal and non-commercial. CINEMAP must not opt into paid plans or paid overage features.
+- Hitting a free-tier limit is treated as a service-availability event, not a reason to enable billing automatically.
+
+### Generative AI
+
+Production CINEMAP must not require OpenAI or another paid generative-AI API. The concierge may use deterministic parsing and approved free data APIs only unless this policy is explicitly changed after a fresh cost/compliance review.
+
+### Social exports
+
+Do not embed third-party movie posters or other copyrighted artwork in user-generated social export images unless redistribution rights for that exact use have been verified. In-app reference/display and export/republication are treated as separate uses.

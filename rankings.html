@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CINEMA CHARTS | Cinemap</title>
+<title>ランキング | Cinemap</title>
 <style>
 :root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#ef3f3f;--line:#2a2e37}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px}button,input{font:inherit}h1,h2,h3,.brand{font-family:inherit}
@@ -84,12 +84,15 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
- <a href="theaters.html">映画館</a>
- <a href="experience.html">上映体験</a>
- <a href="rankings.html">ランキング・受賞作</a>
- <a href="revivals.html">リバイバル上映</a>\n <a href="discover.html">見る映画を探す</a>\n <a href="my-cinemap.html">My Cinemap</a>\n <a href="agent.html">映画コンシェルジュ</a>\n</aside>
+ <a href="discover.html">映画を探す</a>
+ <a href="rankings.html">ランキング</a>
+ <a href="theaters.html">映画館を探す</a>
+ <a href="experience.html">上映方式・設備</a>
+ <a href="my-cinemap.html">My Cinemap</a>
+ <a href="agent.html">映画コンシェルジュ</a>
+</aside>
 <main class="wrap">
-<section class="hero"><h1>映画チャート</h1><p>評価と興行から、映画を時代・地域・ジャンルで横断して見る。</p></section>
+<section class="hero"><h1>ランキング</h1><p>ユーザー評価、興行収入、受賞歴から映画を横断して見る。</p></section>
 
 <div class="chartAxes">
  <div class="filterLabel">ランキング</div>
@@ -112,7 +115,8 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.50</div>\n</main>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.59</div>
+</main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
 let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて";
@@ -194,7 +198,8 @@ function renderAwards(){
  document.querySelectorAll("[data-award-year]").forEach(x=>x.onclick=()=>{awardYear=x.dataset.awardYear;awardOrg="すべて";awardCategory="すべて";render()});
  document.querySelectorAll("[data-award-org]").forEach(x=>x.onclick=()=>{awardOrg=x.dataset.awardOrg;awardCategory="すべて";render()});
  document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});
- let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);\n const total=awards.length,yearCount=new Set(awards.map(x=>x.year)).size;$("#awardCoverage").textContent="収録 "+total+"件 · "+yearCount+"授賞年。初期年度はアカデミー作品賞中心で、主要映画祭・部門を順次補完。";
+ let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);
+ const total=awards.length,yearCount=new Set(awards.map(x=>x.year)).size;$("#awardCoverage").textContent="収録 "+total+"件 · "+yearCount+"授賞年。初期年度はアカデミー作品賞中心で、主要映画祭・部門を順次補完。";
  $("#grid").className="listRank";$("#grid").innerHTML=list.length?list.map(m=>{let film=String(m.title||"").split(" — ")[0];return '<div class="listRow"><div class="listNo">★</div><div><a href="search.html?search='+encodeURIComponent(film)+'" style="color:inherit;text-decoration:none"><div class="listTitle">'+m.title+'</div><div class="meta">'+m.organization+' · '+m.category+'</div></a></div><div class="listMeta"><a href="search.html?search='+encodeURIComponent(film)+'" style="color:inherit">作品詳細</a> · <a target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit">公式</a></div></div>'}).join(""):'<div class="empty">該当する受賞作品がありません</div>';
  $("#sourceNote").textContent=(awardYear==="すべて"?"全年度":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";
 }

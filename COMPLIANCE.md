@@ -124,3 +124,19 @@ Production CINEMAP must not require OpenAI or another paid generative-AI API. Th
 ### Social exports
 
 Do not embed third-party movie posters or other copyrighted artwork in user-generated social export images unless redistribution rights for that exact use have been verified. In-app reference/display and export/republication are treated as separate uses.
+
+
+## YouTube / Critic Map
+CRITIC MAP may use YouTube Data API v3 only when the production compliance gate is explicitly enabled.
+
+Requirements:
+- Use only documented YouTube API Services. Do not scrape YouTube pages.
+- Keep `YOUTUBE_CRITIC_ENABLED=false` until privacy, terms, attribution, credential handling, display, and storage requirements are reviewed.
+- Keep the API key server-side and out of frontend code and repository history.
+- Do not download, transcribe, cache, or store audiovisual content through CINEMAP.
+- Do not locally reorder YouTube API search results. CINEMAP-owned filters and classifications must be visually distinguished from YouTube-provided data.
+- Label YouTube as the source near YouTube-derived results.
+- Keep Privacy, CINEMAP Terms, YouTube Terms, and Google Privacy links available before enabling the feature.
+- Responses containing YouTube API data must use `Cache-Control: private, no-store`.
+- CRITIC MAP must remain behind an explicit post-viewing spoiler gate. Deep links must not bypass that gate.
+- Any production activation requires a fresh compliance review and a successful `scripts/check_critic_map.py` run.

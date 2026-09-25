@@ -1,5 +1,5 @@
 import json,datetime,urllib.parse,urllib.request
-Q='[out:json][timeout:180];area["ISO3166-1"="JP"][admin_level=2]->.j;(nwr["amenity"="cinema"](area.j););out center tags;'
+Q='[out:json][timeout:180];area["ISO3166-1"="JP"][admin_level=2]->.j;nwr["amenity"="cinema"](area.j);out center tags;'
 def get():
  p=urllib.parse.urlencode({"data":Q}).encode()
  for u in ("https://overpass-api.de/api/interpreter","https://overpass.kumi.systems/api/interpreter"):

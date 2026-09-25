@@ -183,6 +183,7 @@ function renderBox(){
  const src=boxEra==="歴代"?"興行通信社・歴代興収ベスト100":"日本映画製作者連盟・年次興行資料";
  $("#sourceNote").textContent="日本国内興行収入 · "+src;
 }
+function awardExplanation(m){if(m.organization==="アカデミー賞"&&m.category==="作品賞")return "映画芸術科学アカデミーがその年の作品として授与するアカデミー賞の中心部門。";if(m.category.includes("パルム"))return "カンヌ国際映画祭コンペティションの最高賞。";if(m.category.includes("金獅子"))return "ヴェネチア国際映画祭コンペティションの最高賞。";if(m.category.includes("金熊"))return "ベルリン国際映画祭コンペティションの最高賞。";if(m.category.includes("作品賞"))return "その賞・部門で作品全体に授与される主要賞。";return ""}
 function renderAwards(){
  const years=["すべて",...[...new Set(awards.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a))];if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"すべて";
  const inYear=awardYear==="すべて"?awards:awards.filter(x=>String(x.year)===awardYear),orgs=["すべて",...new Set(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";

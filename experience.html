@@ -163,6 +163,14 @@
 @keyframes cinemapArtSweep{0%,58%{transform:translateX(-65%);opacity:0}64%{opacity:.55}78%,100%{transform:translateX(65%);opacity:0}}
 @media(max-width:640px){.uploadedExperienceArt{margin:12px auto 20px;padding:0 12px}.uploadedExperienceArt__frame{border-radius:16px}.uploadedExperienceArt img{aspect-ratio:16/10;object-fit:cover}}
 @media(prefers-reduced-motion:reduce){.uploadedExperienceArt img,.uploadedExperienceArt__sweep{animation:none!important}}
+
+/* v0.4.20: use uploaded artwork at the actual special-format cards */
+.experienceCrop{position:relative;width:100%;overflow:hidden;border-radius:12px;background-image:url("assets/cinemap-experience.png?v=0420");background-repeat:no-repeat;background-color:#05070a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);animation:experienceBreath 9s ease-in-out infinite alternate}
+.cropScreenx{aspect-ratio:2.55/1;background-size:200% auto;background-position:0% 0%}
+.crop4dx{aspect-ratio:16/10;background-size:200% auto;background-position:100% 0%}
+.cropMx4d{aspect-ratio:16/10;background-size:300% auto;background-position:0% 100%}
+@keyframes experienceBreath{from{filter:brightness(.92) saturate(.96)}to{filter:brightness(1.08) saturate(1.08)}}
+@media(prefers-reduced-motion:reduce){.experienceCrop{animation:none!important}}
 </style>
 </head>
 <body>
@@ -184,12 +192,7 @@
  <a href="experience.html">上映体験</a>
  <a href="rankings.html">チャート</a>
 </aside>
-<main class="wrap"><section class="uploadedExperienceArt" aria-label="上映体験イメージ">
-  <div class="uploadedExperienceArt__frame">
-    <img src="assets/cinemap-experience.png" alt="ScreenX、4DX、MX4D、音響体験をイメージしたシネマビジュアル" loading="eager">
-    <span class="uploadedExperienceArt__sweep" aria-hidden="true"></span>
-  </div>
-</section>
+<main class="wrap">
 <section class="hero">
  <div class="eyebrow">CINEMA EXPERIENCE</div>
  <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
@@ -241,12 +244,11 @@
 <section class="section expSection" id="special">
  <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DXとMX4Dは座席の動きや環境効果を組み合わせる体感型上映です。</p></div>
  <div class="motionGrid">
-<article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div><div class="motionStage"><div class="motionSeat"><i></i></div><div class="effects"><b>↕ MOVE</b><b>→ WIND</b><b>· WATER</b><b>≈ SCENT</b><b>✦ FLASH</b></div></div><p>座席の動きに、風・水・香り・フラッシュなどの効果を組み合わせる体感型。</p></article>
-<article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div><div class="motionStage"><div class="motionSeat mx"><i></i></div><div class="effects"><b>↔ MOVE</b><b>→ WIND</b><b>· WATER</b><b>⇢ AIR</b><b>✦ FLASH</b></div></div><p>シートの動きと、風・水などの効果で場面への没入感を高める方式。</p></article>
+<article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div><div class="experienceCrop crop4dx" role="img" aria-label="4DX体感上映イメージ"></div><p>座席の動きに、風・水・香り・フラッシュなどの効果を組み合わせる体感型。</p></article>
+<article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div><div class="experienceCrop cropMx4d" role="img" aria-label="MX4D体感上映イメージ"></div><p>シートの動きと、風・水などの効果で場面への没入感を高める方式。</p></article>
 </div>
-
- <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
- <div class="screenxCard"><div class="screenxRoom2"><div class="sxSide sxL"><span></span></div><div class="sxMain"><span></span></div><div class="sxSide sxR"><span></span></div><div class="sxSeats">● ● ● ● ●</div></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。中央映像の単純な複製ではありません。</p></div>
+<div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
+ <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。中央映像の単純な複製ではありません。</p></div>
 </section>
 
 <section class="section expSection" id="guide">
@@ -292,5 +294,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-06">v0.4.19 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-07">v0.4.20 · 09/25</div>
 </body></html>

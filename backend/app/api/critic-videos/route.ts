@@ -1,0 +1,46 @@
+import { json, rateLimited, options } from "../../../lib/http";
+export const dynamic="force-dynamic";
+
+const YT="https://www.googleapis.com/youtube/v3/search";
+
+export async function GET(request:Request){
+  const limited=rateLimited(request,30);
+  if(limited)return limited;
+  const u=new URL(request.url);
+  const title=(u.searchParams.get("title")||"").trim().slice(0,120);
+  const topic=(u.searchParams.get("topic")||"").trim().slice(0,120);
+  if(!title)return json({error:"title required"},{status:400});
+  const key=process.env.YOUTUBE_API_KEY;
+  if(!key)return json({enabled:false,videos:[],reason:"YouTube API is not configured"});
+
+  try{
+    const q=[title,"映画","批評","考察",topic].filter(Boolean).join(" ");
+    const y=new URL(YT);
+    y.searchParams.set("part","snippet");
+    y.searchParams.set("type","video");
+    y.searchParams.set("maxResults","6");
+    y.searchParams.set("order","relevance");
+    y.searchParams.set("relevanceLanguage","ja");
+    y.searchParams.set("regionCode","JP");
+    y.searchParams.set("safeSearch","moderate");
+    y.searchParams.set("videoEmbeddable","true");
+    y.searchParams.set("q",q);
+    y.searchParams.set("key",key);
+    const r=await fetch(y,{cache:"no-store"});
+    if(!r.ok)return json({enabled:true,videos:[],error:"YouTube API unavailable"},{status:502});
+    const d:any=await r.json();
+    const videos=(d.items||[]).map((x:any)=>({
+      videoId:x.id?.videoId,
+      title:x.snippet?.title||"",
+      channelTitle:x.snippet?.channelTitle||"",
+      publishedAt:x.snippet?.publishedAt||"",
+      thumbnail:x.snippet?.thumbnails?.medium?.url||x.snippet?.thumbnails?.default?.url||null,
+      url:x.id?.videoId?`https://www.youtube.com/watch?v=${x.id.videoId}`:null
+    })).filter((x:any)=>x.videoId&&x.title);
+    return json({enabled:true,query:q,videos,source:"YouTube Data API v3"});
+  }catch(e){
+    console.warn("youtube critic search unavailable",e);
+    return json({enabled:true,videos:[],error:"YouTube API unavailable"},{status:502});
+  }
+}
+export async function OPTIONS(request:Request){return options(request)}

@@ -42,9 +42,11 @@ discover = text("discover.html")
 for required in ["条件から探す", "AIで探す", 'id="conciergeMode"', "/api/agent"]:
     if required not in discover:
         errors.append(f"Discover concierge integration missing: {required}")
-for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset", "flex-wrap:wrap", "data/rankings_year.json", "localPresetFallback", "scroll-snap-type:x proximity"]:
+for required in ['id="presetGrid"', 'id="providerChecks"', 'providers.join("|")', "loadPreset", "flex-wrap:wrap", "data/rankings_year.json", "localPresetFallback", "scroll-snap-type:x proximity", 'class="presetCard"', 'id="conditionResults"', '#grid .card']:
     if required not in discover:
         errors.append(f"Discover preset/provider integration missing: {required}")
+if 'loadPreset();load(true);' in discover:
+    errors.append("Discover must not auto-load recommendation results into condition search")
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:
     if '<a href="agent.html">映画コンシェルジュ</a>' in text(page):
         errors.append(f"Standalone concierge nav remains in {page}")

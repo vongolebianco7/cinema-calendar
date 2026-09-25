@@ -95,7 +95,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <div class="filterLabel">ランキング</div>
  <div class="chips" id="axisChips">
   <button class="chip active" data-axis="rating">ユーザー評価</button>
-  <button class="chip" data-axis="boxoffice">興行収入</button>
+  <button class="chip" data-axis="boxoffice">興行収入</button><button class="chip" data-axis="awards">受賞作品</button>
  </div>
 </div>
 
@@ -105,7 +105,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <div class="filterLabel">年代</div><div class="chips" id="eraChips"></div>
 </div>
 
-<div id="boxFilters" style="display:none">
+<div id="awardsIntro" class="note" style="display:none;margin:0 0 14px">主要映画賞・国際映画祭の受賞作品。順位ではなく受賞実績を表示します。</div><div id="boxFilters" style="display:none">
  <div class="filterLabel">地域</div><div class="chips" id="boxRegionChips"></div>
  <div class="filterLabel">期間</div><div class="chips" id="boxEraChips"></div>
 </div>
@@ -183,12 +183,14 @@ function renderBox(){
  const src=boxEra==="歴代"?"興行通信社・歴代興収ベスト100":"日本映画製作者連盟・年次興行資料";
  $("#sourceNote").textContent="日本国内興行収入 · "+src;
 }
+function renderAwards(){const list=[{award:"第98回アカデミー賞 作品賞",title:"One Battle after Another",source:"https://www.oscars.org/oscars/ceremonies/2026"},{award:"第79回カンヌ国際映画祭 パルム・ドール",title:"Fjord",source:"https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/"},{award:"第83回ヴェネチア国際映画祭 金獅子賞",title:"Woman Unknown",source:"https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival"}];$("#grid").className="listRank";$("#grid").innerHTML=list.map(m=>'<a class="listRow" target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit;text-decoration:none"><div class="listNo">★</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+m.award+'</div></div><div class="listMeta">公式 ↗</div></a>').join("");$("#sourceNote").textContent="各賞の公式発表を参照"}
 function render(){
  $("#moreBtn").style.display="none";
  document.querySelectorAll("[data-axis]").forEach(b=>b.classList.toggle("active",b.dataset.axis===axis));
  $("#ratingFilters").style.display=axis==="rating"?"block":"none";
  $("#boxFilters").style.display=axis==="boxoffice"?"block":"none";
- axis==="boxoffice"?renderBox():renderRating();
+ $("#awardsIntro").style.display=axis==="awards"?"block":"none";
+ axis==="boxoffice"?renderBox():axis==="awards"?renderAwards():renderRating();
 }
 async function boot(){
  try{

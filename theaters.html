@@ -71,7 +71,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
  <a href="rankings.html">チャート</a>
 </aside>
 <main class="wrap">
-<section class="hero"><h1>映画館から映画を見る。</h1><p>全国の映画館から探す。上映時間を取得済みの映画館では、その日の上映作品まで確認できます。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
+<section class="hero"><h1>映画館から映画を見る。</h1><p>全国の映画館から探す。全国の映画館を検索できます。CINEMAP内に上映時間がない映画館も、公式サイトから上映スケジュールを確認できます。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
 
 <section class="section">
  <div class="sectionHead"><h2>全国の映画館</h2><span id="scheduleMeta">読み込み中…</span></div>
@@ -89,7 +89,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 const $=s=>document.querySelector(s);
 let theaters=[],osmTheaters=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
+function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}\nfunction scheduleUrl(t){if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
 async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
 function param(name){return new URLSearchParams(location.search).get(name)||""}
 function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
@@ -123,7 +123,7 @@ function renderDirectory(){
  const q=$("#q").value.trim().toLowerCase();
  const list=directory.filter(t=>!q||[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,150);
  $("#meta").textContent=(q?list.length+"件表示 / ":"")+directory.length+"館収録";
- $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
+ $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映スケジュール</a><a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
 }
 async function loadDirectory(base){
  let loaded=[];

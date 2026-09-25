@@ -13,6 +13,8 @@ for required in ["groupedMovieCards", "currentWeekStart", "scrollCalendarToCurre
         errors.append(f"Calendar weekly grouping missing: {required}")
 if "max-height:min(68vh,760px)" not in calendar:
     errors.append("Calendar tabs are not independently scrollable")
+if "box.scrollTop" not in calendar or "window.scrollTo(0,0)" not in calendar:
+    errors.append("Calendar must keep the page at top and scroll only inside the tab content")
 
 # Morning Ten Film Festival calendar integration.
 special = json.loads(text("data/special_screenings.json"))

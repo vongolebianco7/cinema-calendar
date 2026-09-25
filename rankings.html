@@ -153,8 +153,9 @@ function renderRating(){
  if(!genreOpts.includes(genreActive))genreActive="すべて";
  const useGenres=genreActive==="すべて"?genres:[genreActive];
  let eras=availableEras(regions,useGenres);
- eras.sort();
- const eraOpts=["今年",...eras.slice().reverse()];
+ const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};
+ eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));
+ const eraOpts=["今年",...eras];
  if(!eraActive||!eraOpts.includes(eraActive))eraActive="今年";
  $("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");
  $("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");

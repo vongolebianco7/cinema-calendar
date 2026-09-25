@@ -200,11 +200,11 @@
 @media(prefers-reduced-motion:reduce){.fxWind,.fxWater,.fxFlash,.fxSeat,.sxPanel{animation:none!important}.sxLeft{transform:rotateY(58deg);opacity:1}.sxRight{transform:rotateY(-58deg);opacity:1}}
 
 /* v0.4.22 cleanup: one 4D scene + restore prior ScreenX */
-.singleMotionScene{position:relative;overflow:hidden;width:100%;aspect-ratio:16/10;border-radius:12px;background-image:url("assets/cinemap-experience.png?v=0422");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;box-shadow:inset 0 0 0 1px #ffffff20}
+.singleMotionScene{position:relative;overflow:hidden;width:100%;aspect-ratio:16/10;border-radius:12px;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;box-shadow:inset 0 0 0 1px #ffffff20}
 .singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxSeat,.singleMotionScene .fxAir{position:absolute;pointer-events:none}
 .singleMotionScene .fxAir{left:-20%;top:32%;width:55%;height:20%;background:linear-gradient(90deg,transparent,#dff7ff99,transparent);filter:blur(3px);animation:fxAir 2.8s ease-in-out infinite}
 @keyframes fxAir{0%{transform:translateX(0);opacity:0}35%{opacity:.7}100%{transform:translateX(210%);opacity:0}}
-.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/cinemap-experience.png?v=0422")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:screenxSubtle 8s ease-in-out infinite alternate!important}
+.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:screenxSubtle 8s ease-in-out infinite alternate!important}
 @keyframes screenxSubtle{from{filter:brightness(.94);transform:scale(1)}to{filter:brightness(1.04);transform:scale(1.008)}}
 .screenxTheater{display:none!important}
 @media(prefers-reduced-motion:reduce){.singleMotionScene span,.cropScreenx{animation:none!important}}
@@ -212,10 +212,19 @@
 /* v0.4.23 precise 4D crop: isolate the single action frame */
 .singleMotionScene{aspect-ratio:1.78/1!important;background-size:200% auto!important;background-position:100% 0!important}
 /* mask the neighboring tiles baked into the source sprite by cropping to the action-frame bounds */
-.singleMotionScene:before{content:"";position:absolute;inset:0;z-index:0;background-image:url("assets/cinemap-experience.png?v=0423");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;transform:scale(1.34);transform-origin:76% 18%}
+.singleMotionScene:before{content:"";position:absolute;inset:0;z-index:0;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;transform:scale(1.34);transform-origin:76% 18%}
 .singleMotionScene{background-image:none!important}
 .singleMotionScene>span{z-index:2}
 @media(max-width:640px){.singleMotionScene:before{transform:scale(1.38);transform-origin:78% 16%}}
+
+/* v0.4.24 clean 4D base + animated seats as independent DOM layer */
+.singleMotionScene{background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424")!important;background-size:cover!important;background-position:center!important;aspect-ratio:16/9!important}
+.singleMotionScene:before{content:none!important}
+.singleMotionScene:after{content:"";position:absolute;z-index:1;left:4%;right:4%;bottom:-5%;height:30%;background:radial-gradient(ellipse at 50% 35%,#272c33 0 18%,#11151a 20% 38%,transparent 40%) 0 0/20% 58%,linear-gradient(180deg,transparent 0 18%,#090b0e 19% 100%);filter:drop-shadow(0 -5px 8px #0008);transform-origin:50% 100%;animation:seatBank4d 1.65s ease-in-out infinite}
+.mx4d .singleMotionScene:after{animation:seatBankMx 1.25s ease-in-out infinite}
+@keyframes seatBank4d{0%,100%{transform:perspective(450px) rotateX(0) rotateZ(0) translateY(0)}30%{transform:perspective(450px) rotateX(-5deg) rotateZ(-1.2deg) translateY(-5px)}65%{transform:perspective(450px) rotateX(3deg) rotateZ(1deg) translateY(3px)}}
+@keyframes seatBankMx{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(-3px,-2px) rotate(-.7deg)}55%{transform:translate(3px,1px) rotate(.7deg)}75%{transform:translate(0,-4px) rotate(0)}}
+.singleMotionScene>span{z-index:3}
 </style>
 </head>
 <body>
@@ -347,5 +356,5 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-10">v0.4.23 · 09/25</div>
+<div id="cinemapBuild" style="position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9999;font:600 10px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.04em;color:#8e969f;background:#0b0d10e8;border:1px solid #2a2f35;border-radius:999px;padding:5px 8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" title="CINEMAP build 2026.09.25-11">v0.4.24 · 09/25</div>
 </body></html>

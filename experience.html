@@ -16,7 +16,7 @@
 .compareGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.compareCard{border:1px solid var(--line);background:#0d0d0d;border-radius:8px;overflow:hidden}.compareCard h3{font-size:15px;margin:0;padding:12px 12px 4px}.compareCard p{color:#999;font-size:11px;line-height:1.55;margin:0;padding:0 12px 12px}.sceneBox{padding:10px 10px 0}.sceneBox svg{width:100%;aspect-ratio:16/9;display:block;border:1px solid #2d2d2d}.normalScene .deepSeaQuality{filter:saturate(.92) contrast(.96) brightness(.93)}.laserScene .deepSeaQuality{filter:saturate(1.08) contrast(1.08) brightness(1.05)}.dolbyScene .deepSeaQuality{filter:saturate(1.12) contrast(1.18) brightness(.98)}
 .soundGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.soundCard{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.soundCard h3{margin:0 0 12px;font-size:15px}.auditorium{position:relative;height:160px;border:1px solid #252525;background:linear-gradient(#101821,#090b0e);overflow:hidden}.screen{position:absolute;left:24%;right:24%;top:18px;height:34px;border:2px solid #7c8ca0;background:#20384b}.seat{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:22px;height:32px;border-radius:12px 12px 4px 4px;background:#555}.speaker{position:absolute;width:12px;height:16px;border:1px solid #aaa;background:#222}.spL{left:16px;top:68px}.spR{right:16px;top:68px}.spB1{left:27%;bottom:16px}.spB2{right:27%;bottom:16px}.spT1{left:27%;top:8px}.spT2{right:27%;top:8px}.spT3{left:48%;top:5px}.soundWave{position:absolute;border:1px solid currentColor;border-left:0;border-right:0;border-radius:50%;opacity:.65}.wave1{left:50%;top:58px;width:70px;height:50px;transform:translateX(-50%)}.wave2{left:50%;top:45px;width:110px;height:75px;transform:translateX(-50%)}.standardSound{color:#8894a3}.imaxSound{color:var(--blue)}.atmosSound{color:var(--violet)}
 .specialGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.special{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.special h3{margin:0 0 8px;font-size:17px}.special p{font-size:11px;color:#999;line-height:1.55;margin:8px 0 0}.chair{width:70px;height:62px;margin:14px auto;position:relative}.chair:before{content:"";position:absolute;width:42px;height:44px;left:14px;top:0;background:#39414b;border-radius:10px 10px 4px 4px}.chair:after{content:"";position:absolute;width:58px;height:17px;left:6px;bottom:0;background:#2b3138;border-radius:4px}.fx{display:flex;justify-content:center;gap:8px;font-size:18px}
-.screenxRoom{height:150px;position:relative;perspective:420px;margin-top:8px}.sxCenter{position:absolute;left:22%;right:22%;top:28px;height:88px;border:2px solid #d7a63a;overflow:hidden}.sxLeft,.sxRight{position:absolute;top:38px;width:24%;height:72px;border:2px solid #d7a63a;overflow:hidden}.sxLeft{left:0;transform:rotateY(42deg);transform-origin:right}.sxRight{right:0;transform:rotateY(-42deg);transform-origin:left}.screenxRoom svg{width:100%;height:100%;display:block}.note{font-size:11px;line-height:1.65;color:#888;margin:14px 0 0}.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.cta a{font-size:12px;border:1px solid #3a3a3a;padding:9px 12px;border-radius:4px;background:#121212}
+.screenxRoom{height:150px;position:relative;perspective:420px;margin-top:8px}.sxCenter{position:absolute;left:22%;right:22%;top:28px;height:88px;border:2px solid #d7a63a;overflow:hidden}.sxLeft,.sxRight{position:absolute;top:38px;width:24%;height:72px;border:2px solid #d7a63a;overflow:hidden}.sxLeft{left:0;transform:rotateY(42deg);transform-origin:right}.sxRight{right:0;transform:rotateY(-42deg);transform-origin:left}.screenxRoom svg{width:100%;height:100%;display:block}.note{font-size:11px;line-height:1.65;color:#888;margin:14px 0 0}.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.cta a{font-size:12px;border:1px solid #3a3a3a;padding:9px 12px;border-radius:4px;background:#121212}.screenLink{display:inline-flex;margin-top:10px;border:1px solid #3b4652;border-radius:999px;padding:6px 9px;font-size:10px;color:#dbe7f2;text-decoration:none}.screenLink:hover{border-color:#78899b}
 @media(max-width:760px){.ratioGrid,.compareGrid,.soundGrid,.specialGrid{grid-template-columns:1fr}.frameWrap{min-height:0}.sectionHead{display:block}.sectionHead p{margin-top:6px}.topnav{gap:10px;font-size:11px}.hero{padding-top:24px}}
 .top .brandLogo{height:32px}
 @media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
@@ -409,8 +409,8 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="sectionHead"><h2>映像</h2><p>同じ海中シーンで、通常上映・IMAXレーザー・Dolby Cinemaの明るさ、黒、コントラストの方向性を比較します。</p></div>
  <div class="qualityGrid">
 <article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityDemo"><div class="qScreen qNormal"></div></div><p><b>基準</b> — 作品本来のルックを標準的な明るさ・コントラストで。</p></article>
-<article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityDemo"><div class="qScreen qImax"></div></div><p><b>高輝度・高精細</b> — 明部の抜けと細部の見通しを意識した表現。</p></article>
-<article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityDemo"><div class="qScreen qDolby"></div></div><p><b>深い黒・高コントラスト</b> — 暗部と光の差を強調した表現。</p></article>
+<article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityDemo"><div class="qScreen qImax"></div></div><p><b>高輝度・高精細</b> — 明部の抜けと細部の見通しを意識した表現。</p><a class="screenLink" href="theaters.html?format=IMAX">IMAX対応スクリーンを見る →</a></article>
+<article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityDemo"><div class="qScreen qDolby"></div></div><p><b>深い黒・高コントラスト</b> — 暗部と光の差を強調した表現。</p><a class="screenLink" href="theaters.html?format=Dolby%20Cinema">Dolby Cinema対応スクリーンを見る →</a></article>
 </div>
  <div class="formula">※特徴を理解しやすくするためのイメージ比較です。実際の見え方は作品マスター・劇場設備・座席位置などで変わります。</div>
 </section>
@@ -420,7 +420,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="audioGrid audioCompare audio3d">
 <article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>水平リング</span></div><div class="room3d flatRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><div class="horizontalRing"></div></div><p><b>耳の高さの1層</b>で、前→横→後ろを包む。</p></article>
 <article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>水平＋上層</span></div><div class="room3d imaxRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="horizontalRing"></div><div class="upperRing"></div></div><p><b>水平層＋高い位置の層</b>。上下を含む多方向から強く包む。</p></article>
-<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p><a class="screenLink" href="theaters.html?format=Dolby%20Atmos">Dolby Atmos対応スクリーンを見る →</a></article>
 </div>
 <div class="audioKey"><span>5.1/7.1：1層</span><span>IMAX 12ch：2層</span><span>Atmos：空間内を移動</span></div>
 </section>
@@ -431,16 +431,16 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
   <article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div>
    <div class="singleMotionScene"><span class="fxWind"></span><span class="fxWater"></span><span class="fxFlash"></span><span class="fxSeat">SEAT MOTION</span></div>
    <div class="effectLegend"><span>↕ MOVE</span><span>〰 WIND</span><span>•• WATER</span><span>✦ FLASH</span></div>
-   <p>映像に合わせて座席が揺れ、風・水・フラッシュなどが重なる体感型。</p>
+   <p>映像に合わせて座席が揺れ、風・水・フラッシュなどが重なる体感型。</p><a class="screenLink" href="theaters.html?format=4DX">4DX対応スクリーンを見る →</a>
   </article>
   <article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div>
    <div class="singleMotionScene"><span class="fxAir"></span><span class="fxWater"></span><span class="fxSeat">SEAT MOTION</span></div>
    <div class="effectLegend"><span>↔ MOVE</span><span>〰 AIR</span><span>•• WATER</span></div>
-   <p>同じ映像を基準に、シートの細かな動きと局所的な風・水などを表現。</p>
+   <p>同じ映像を基準に、シートの細かな動きと局所的な風・水などを表現。</p><a class="screenLink" href="theaters.html?format=MX4D">MX4D対応スクリーンを見る →</a>
   </article>
  </div>
  <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
- <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p></div>
+ <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p><a class="screenLink" href="theaters.html?format=SCREENX">ScreenX対応スクリーンを見る →</a></div>
 </section>
 
 <section class="section expSection" id="guide">
@@ -452,7 +452,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 <article><b>視界を広げる</b><strong>ScreenX</strong><span>左右まで広がるパノラマ映像</span></article>
 <article><b>作品そのもの</b><strong>通常上映</strong><span>追加演出なしでシンプルに鑑賞</span></article>
 </div>
- <div class="cta"><a href="theaters.html">対応映画館を見る</a><a href="index.html">作品カレンダーへ</a></div>
+ <div class="cta"><a href="theaters.html?format=IMAX">IMAX</a><a href="theaters.html?format=Dolby%20Cinema">Dolby Cinema</a><a href="theaters.html?format=4DX">4DX</a><a href="theaters.html?format=MX4D">MX4D</a><a href="theaters.html?format=SCREENX">ScreenX</a><a href="index.html">作品カレンダーへ</a></div>
 </section>
 </main>
 <script>
@@ -486,4 +486,4 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.59</div></body></html>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.60</div></body></html>

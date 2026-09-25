@@ -112,7 +112,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.40</div>\n</main>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.41</div>\n</main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis="rating";
 let regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear="",awardOrg="すべて",awardCategory="すべて";
@@ -194,7 +194,7 @@ function renderAwards(){
  document.querySelectorAll("[data-award-org]").forEach(x=>x.onclick=()=>{awardOrg=x.dataset.awardOrg;awardCategory="すべて";render()});
  document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});
  let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);
- $("#grid").className="listRank";$("#grid").innerHTML=list.length?list.map(m=>'<a class="listRow" target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit;text-decoration:none"><div class="listNo">★</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+m.organization+' · '+m.category+'</div></div><div class="listMeta">公式 ↗</div></a>').join(""):'<div class="empty">該当する受賞作品がありません</div>';
+ $("#grid").className="listRank";$("#grid").innerHTML=list.length?list.map(m=>{let film=String(m.title||"").split(" — ")[0];return '<div class="listRow"><div class="listNo">★</div><div><a href="search.html?search='+encodeURIComponent(film)+'" style="color:inherit;text-decoration:none"><div class="listTitle">'+m.title+'</div><div class="meta">'+m.organization+' · '+m.category+'</div></a></div><div class="listMeta"><a href="search.html?search='+encodeURIComponent(film)+'" style="color:inherit">作品詳細</a> · <a target="_blank" rel="noopener noreferrer" href="'+m.source+'" style="color:inherit">公式</a></div></div>'}).join(""):'<div class="empty">該当する受賞作品がありません</div>';
  $("#sourceNote").textContent=(awardYear==="すべて"?"全年度":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";
 }
 

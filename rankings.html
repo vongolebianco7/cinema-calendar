@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CINEMA CHARTS | CINEMAP</title>
+<title>CINEMA CHARTS | Cinemap</title>
 <style>
 :root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#ef3f3f;--line:#2a2e37}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px}button,input{font:inherit}h1,h2,h3,.brand{font-family:inherit}
@@ -13,7 +13,7 @@
 .rankGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;color:inherit;text-decoration:none}.rankCard img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#222}.body{padding:9px}.no{color:var(--accent);font-weight:900;font-size:12px}.title{font-weight:750;font-size:13px;line-height:1.3;margin-top:3px}.meta{color:var(--muted);font-size:11px;margin-top:5px}.note{color:var(--muted);font-size:11px;line-height:1.5;margin:14px 0 24px}.moreWrap{text-align:center;margin:18px 0}.moreBtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:6px;padding:10px 20px;font-weight:800;display:none}.listRank{display:flex;flex-direction:column;gap:8px}.listRow{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:12px}.listNo{font-size:18px;font-weight:900;color:var(--accent)}.listTitle{font-weight:750;line-height:1.35}.listMeta{color:var(--muted);font-size:12px;text-align:right}
 @media(max-width:760px){.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,1fr);gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}
 
-/* CINEMAP visual pass */
+/* Cinemap visual pass */
 body{background:#090909}
 .panel,.movie,.dnaCard,.card,.rankCard{background:transparent!important;box-shadow:none!important}
 .panel,.movie,.dnaCard,.card,.rankCard{border-color:#272727!important;border-radius:6px!important}
@@ -34,7 +34,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 @media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
 
 
-/* unified CINEMAP header v2 */
+/* unified Cinemap header v2 */
 .gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
 .gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
 .gNav{height:62px;display:flex;align-items:center;gap:12px}
@@ -73,7 +73,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a>
+ <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -82,12 +82,12 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="CINEMAP"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="theaters.html">映画館</a>
  <a href="experience.html">上映体験</a>
  <a href="rankings.html">ランキング・受賞作</a>
- <a href="revivals.html">リバイバル上映</a>\n <a href="discover.html">見る映画を探す</a>\n <a href="my-cinemap.html">MY CINEMAP</a>\n <a href="agent.html">映画コンシェルジュ</a>\n</aside>
+ <a href="revivals.html">リバイバル上映</a>\n <a href="discover.html">見る映画を探す</a>\n <a href="my-cinemap.html">My Cinemap</a>\n <a href="agent.html">映画コンシェルジュ</a>\n</aside>
 <main class="wrap">
 <section class="hero"><h1>映画チャート</h1><p>評価と興行から、映画を時代・地域・ジャンルで横断して見る。</p></section>
 
@@ -112,7 +112,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINEMAP v0.4.50</div>\n</main>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.50</div>\n</main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
 let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="",boxRegion="すべて",boxEra="歴代",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて";

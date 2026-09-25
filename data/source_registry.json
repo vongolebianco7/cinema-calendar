@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checked_at": "2026-09-25",
+  "checked_at": "2026-09-26",
   "policy": "Only reviewed, zero-cost sources marked approved may be used as automated production data sources. CINEMAP remains personal and non-commercial.",
   "sources": [
     {
@@ -169,6 +169,37 @@
         "Do not create derived metrics from YouTube API Data",
         "Clearly label CINEMAP-owned classifications as not from YouTube",
         "Keep disabled until these requirements are implemented and reviewed"
+      ]
+    },
+    {
+      "id": "asa10_official",
+      "name": "午前十時の映画祭 公式サイト",
+      "mode": "approved",
+      "purpose": [
+        "manual_curated_special_screening_schedule"
+      ],
+      "basis": "Official event site; CINEMAP stores a manually reviewed factual schedule snapshot and links back to the official source. No automated scraping.",
+      "terms_url": "https://asa10.eiga.com/2026/",
+      "requirements": [
+        "Manual review only",
+        "Store factual titles/dates/group labels with source URL",
+        "Do not copy editorial text, images, or automate HTML collection",
+        "Refresh by human review when the official schedule changes"
+      ]
+    },
+    {
+      "id": "premium_format_official_pages",
+      "name": "Premium-format official theater/brand pages",
+      "mode": "approved",
+      "purpose": [
+        "manual_curated_theater_format_directory"
+      ],
+      "basis": "Official IMAX, Dolby, TOHO Cinemas, T-Joy, Aeon Cinema and other exhibitor pages; CINEMAP stores manually reviewed factual format/theater/screen labels with outbound source links.",
+      "requirements": [
+        "Manual review only",
+        "Store factual theater/format/screen labels and source URLs",
+        "No automated scraping",
+        "Prefer direct official theater/brand pages and periodically recheck current status"
       ]
     }
   ]

@@ -629,7 +629,8 @@ function openMovie(m){
  let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">履歴データの詳細</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
  let context=contextHtml(m);
  let explore=exploreHtml(m);
- let experienceFit=experienceFitHtml(m);\n let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
+ let experienceFit=experienceFitHtml(m);
+ let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
  let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
  $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+experienceFit+watch+info+peopleIntro+filmHtml+story+locations+links+history+theater;

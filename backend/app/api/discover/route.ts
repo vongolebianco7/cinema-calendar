@@ -19,7 +19,7 @@ export async function GET(request:Request){
  const to=p.get("to");if(to)url.searchParams.set("primary_release_date.lte",to+"-12-31");
  const min=p.get("rating");if(min)url.searchParams.set("vote_average.gte",min);
  const minVotes=p.get("votes")||"100";url.searchParams.set("vote_count.gte",minVotes);
- const runtime=p.get("runtime");if(runtime)url.searchParams.set("with_runtime.lte",runtime);
+ const runtime=p.get("runtime");if(runtime)url.searchParams.set("with_runtime.lte",runtime);\n const country=p.get("country");if(country)url.searchParams.set("with_origin_country",country);\n const language=p.get("language");if(language)url.searchParams.set("with_original_language",language);\n const provider=p.get("provider");if(provider){url.searchParams.set("watch_region","JP");url.searchParams.set("with_watch_providers",provider);url.searchParams.set("with_watch_monetization_types","flatrate");}
  const headers=auth(url);if(!headers)return json({movies:[],error:"TMDB not configured"},{status:503});
  try{const res=await fetch(url,{headers,next:{revalidate:1800}});if(!res.ok)return json({movies:[],error:"TMDB unavailable"},{status:502});const d=await res.json();return json({movies:(d.results||[]).map((m:any)=>({id:m.id,tmdbId:m.id,title:m.title,original_title:m.original_title,overview:m.overview,date:m.release_date,year:(m.release_date||"").slice(0,4),score:m.vote_average,votes:m.vote_count,popularity:m.popularity,poster:m.poster_path?`https://image.tmdb.org/t/p/w342${m.poster_path}`:null,catalog:true,source:"tmdb"})),page:d.page,total_pages:d.total_pages,total_results:d.total_results});}catch(e){return json({movies:[],error:"discover failed"},{status:502})}
 }

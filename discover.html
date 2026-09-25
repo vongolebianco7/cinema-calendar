@@ -36,14 +36,23 @@ function renderPreset(){
 function normalizeLocalMovie(m){
  return {tmdbId:m.tmdbId||m.tmdb_id||m.id,title:m.title||m.name||m.original_title||"",year:m.year||String(m.date||m.release_date||"").slice(0,4),score:m.score??m.vote_average??0,poster:m.poster||m.poster_url||(m.poster_path?"https://image.tmdb.org/t/p/w342"+m.poster_path:null),popularity:Number(m.popularity||0),votes:Number(m.votes||m.vote_count||0),runtime:Number(m.runtime||0)}
 }
+function collectLocalMovies(node,out=[]){
+ if(Array.isArray(node)){node.forEach(x=>collectLocalMovies(x,out));return out}
+ if(node&&typeof node==="object"){
+  if((node.id||node.tmdbId||node.tmdb_id)&&(node.title||node.name||node.original_title))out.push(normalizeLocalMovie(node));
+  Object.values(node).forEach(v=>collectLocalMovies(v,out))
+ }
+ return out
+}
 async function localPresetFallback(){
- const raw=await fetch("data/movies.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()});
- let list=(Array.isArray(raw)?raw:(raw.movies||raw.results||[])).map(normalizeLocalMovie).filter(m=>m.tmdbId&&m.title);
- if(preset==="rated")list=list.filter(m=>m.score>=7.5&&m.votes>=100).sort((a,b)=>b.score-a.score||b.votes-a.votes);
- else if(preset==="short")list=list.filter(m=>m.runtime&&m.runtime<=100).sort((a,b)=>b.popularity-a.popularity);
+ const raw=await fetch("data/rankings_year.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()});
+ let list=collectLocalMovies(raw),seen=new Set();
+ list=list.filter(m=>m.tmdbId&&m.title&&!seen.has(String(m.tmdbId))&&seen.add(String(m.tmdbId)));
+ if(preset==="rated")list=list.filter(m=>m.score>=7.5).sort((a,b)=>b.score-a.score||b.votes-a.votes);
+ else if(preset==="short")list=list.filter(m=>m.runtime&&m.runtime<=100).sort((a,b)=>b.score-a.score||b.votes-a.votes);
  else if(preset==="classic")list=list.filter(m=>Number(m.year)&&Number(m.year)<=1999&&m.score>=7.5).sort((a,b)=>b.score-a.score||b.votes-a.votes);
- else if(preset==="new")list=list.filter(m=>Number(m.year)>=2024).sort((a,b)=>Number(b.year)-Number(a.year)||b.popularity-a.popularity);
- else list=list.sort((a,b)=>b.popularity-a.popularity||b.votes-a.votes);
+ else if(preset==="new")list=list.filter(m=>Number(m.year)>=2024).sort((a,b)=>Number(b.year)-Number(a.year)||b.votes-a.votes);
+ else list=list.sort((a,b)=>b.votes-a.votes||b.score-a.score);
  presetItems=list.slice(0,60);renderPreset();$("#presetStatus").textContent="Cinemap収録作品から";
 }
 async function loadPreset(){

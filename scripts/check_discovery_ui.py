@@ -13,8 +13,8 @@ for required in ["groupedMovieCards", "currentWeekStart", "scrollCalendarToCurre
         errors.append(f"Calendar weekly grouping missing: {required}")
 if "max-height:min(68vh,760px)" in calendar or "box.scrollTop" in calendar:
     errors.append("Calendar must use normal page scrolling without nested auto-scroll")
-if "monthPageStart" not in calendar or "view.getMonth()+1" not in calendar:
-    errors.append("Calendar page navigation must be month-based and Monday-aligned")
+if "monthPageStart" not in calendar or "monthPageEnd" not in calendar or "monthPageWeekCount" not in calendar:
+    errors.append("Calendar month pages must span complete Monday-Sunday weeks touching the selected month")
 
 # Morning Ten Film Festival calendar integration.
 special = json.loads(text("data/special_screenings.json"))

@@ -229,6 +229,11 @@ async function fetchRemoteMovieResults(q){
  }catch(e){console.warn("catalog search unavailable",e)}
  if(seq===remoteSearchSeq)renderSearchResults(true)
 }
+async function openRemoteMovie(m){
+ let full=m;
+ try{const cfg=await getBackendConfig();if(cfg&&cfg.enabled&&cfg.base_url&&m.tmdbId){const base=String(cfg.base_url).replace(/\/$/,"");const r=await fetch(base+"/api/movie-detail?id="+encodeURIComponent(m.tmdbId),{cache:"no-store"});if(r.ok){const d=await r.json();if(d.movie)full=d.movie}}}catch(e){console.warn("catalog detail unavailable",e)}
+ closeSearchFocus();requestAnimationFrame(()=>openMovie(full))
+}
 function renderSearchResults(fromRemote=false){
  let rows=searchMovieResults(),theaters=searchTheaterResults(),box=$("#searchResults"),q=$("#q").value.trim(),hasRuntime=!!(runtimeMin||runtimeMax);
  if(!q&&!hasRuntime){box.classList.remove("show");return}
@@ -241,7 +246,7 @@ function renderSearchResults(fromRemote=false){
  box.innerHTML=(movieHtml||remoteHtml||theaterHtml)?movieHtml+remoteHtml+theaterHtml:'<div class="searchEmpty">該当する作品・映画館がありません</div>';
  box.classList.add("show");
  document.querySelectorAll(".searchResult[data-mi]").forEach(x=>x.onclick=()=>{closeSearchFocus();requestAnimationFrame(()=>openMovie(movies[+x.dataset.mi]))});
- document.querySelectorAll(".searchResult[data-ri]").forEach(x=>x.onclick=()=>{closeSearchFocus();requestAnimationFrame(()=>openMovie(remote[+x.dataset.ri]))})
+ document.querySelectorAll(".searchResult[data-ri]").forEach(x=>x.onclick=()=>{closeSearchFocus();openRemoteMovie(remote[+x.dataset.ri])})
 }
 function svcClass(s){return s==="劇場公開"?"theatrical":s==="Netflix"?"netflix":s==="Prime Video"?"prime-video":s==="Disney+"?"disney":s==="U-NEXT"?"u-next":s==="Hulu"?"hulu":s==="国内映画祭"?"festival-domestic":s==="海外映画祭"?"festival-overseas":s==="国内イベント"?"event-domestic":"tv"}
 function dayMovies(iso){return filtered().filter(m=>m.date===iso)}
@@ -625,12 +630,12 @@ function openMovie(m){
  let streams=all.filter(x=>x.event==="streaming"&&x.service!=="劇場公開").sort((a,b)=>a.date.localeCompare(b.date));
  let tvs=all.filter(x=>x.event==="tv").sort((a,b)=>a.date.localeCompare(b.date));
  let todayIso=new Date().toLocaleDateString("sv-SE"),tvUpcoming=tvs.filter(x=>x.date>=todayIso),tvPast=tvs.filter(x=>x.date<todayIso);
- let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
+ let av=m.availability||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
  let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:[];
  let peopleIntro='<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+m.cast.slice(0,8).join("、"):'')+'</div></section>';
  let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||"")===String(w.id||"")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span>';return local>=0?'<button type="button" class="filmItem relatedMovie" data-related="'+local+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+body+'</button>':'<div class="filmItem"><a target="_blank" rel="noopener noreferrer" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+body+'</a></div>'}).join("")+'</div></section>':"";
- let trailer='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式');
+ let trailer=m.trailer_url||('https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式'));
  let teaser='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 特報 ティザー 公式');
  let rating='<div class="detailScore"><span class="scorePill">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="small" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を探す </a>'+'</div>';
  let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>作品情報</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
@@ -650,7 +655,7 @@ function openMovie(m){
  let experienceFit=experienceFitHtml(m);
  let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
  let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
- let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
+ let theater=(theatrical||m.catalog)?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
  $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+experienceFit+watch+info+peopleIntro+filmHtml+story+locations+links+history+theater;
  showModal();
  document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))

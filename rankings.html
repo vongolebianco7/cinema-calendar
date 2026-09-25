@@ -115,7 +115,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 <div class="rankGrid" id="grid"></div>
 <div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.62</div>
+<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.63</div>
 </main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
@@ -151,7 +151,8 @@ function ratingList(regions,genre,era){
  return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0));
 }
 function card(m,i){
- return '<a class="rankCard" target="_blank" href="'+(m.tmdb||"#")+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div style="aspect-ratio:2/3;background:#171717"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div></div></a>'
+ const id=m.id||m.tmdbId||"",href=id?"search.html?id="+encodeURIComponent(id)+"&search="+encodeURIComponent(m.title||""):(m.tmdb||"#");
+ return '<a class="rankCard" href="'+href+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div style="aspect-ratio:2/3;background:#171717"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div><div class="meta">Cinemapで深掘る →</div></div></a>'
 }
 function renderRating(){
  const regions=baseRegions();

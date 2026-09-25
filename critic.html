@@ -71,7 +71,7 @@ function dnaRoleNote(role){
  return {監督:"演出・作品全体の統括",脚本:"物語・台詞・構成",撮影:"画面・光・カメラ設計",音楽:"劇伴・音楽設計",編集:"時間・リズム・構成"}[role]||"作品づくりの主要スタッフ";
 }
 function dnaHtmlForRows(rows){
- return rows.map(r=>'<div class="dnaCell"><strong>'+E(r[0])+'</strong>'+r[1].map(p=>'<a class="dnaCard" href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(r[0])+'&name='+encodeURIComponent(p.name)+'">'+E(p.name)+'<span class="dnaRoleNote">'+E(dnaRoleNote(r[0]))+'</span></a>').join("")+'</div>').join("");
+ return rows.map(r=>'<div class="dnaCell"><strong>'+E(r[0])+'</strong>'+r[1].map(p=>'<a class="dnaCard" href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(r[0])+'&name='+encodeURIComponent(p.name)+'&fromId='+encodeURIComponent(m.tmdbId||m.id||'')+'&from='+encodeURIComponent(m.title)+'">'+E(p.name)+'<span class="dnaRoleNote">'+E(dnaRoleNote(r[0]))+'</span></a>').join("")+'</div>').join("");
 }
 function creatorFocusHtml(kind,dna){
  const map={
@@ -85,7 +85,7 @@ function creatorFocusHtml(kind,dna){
  };
  const hit=map[kind],list=hit&&Array.isArray(hit[1])?hit[1].filter(Boolean).slice(0,3):[];
  if(!hit||!list.length)return "";
- return '<div class="creatorFocus"><div class="creatorFocusLabel">この視点から作り手を掘る</div><div class="creatorFocusLinks">'+list.map(p=>'<a href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(hit[0])+'&name='+encodeURIComponent(p.name)+'">'+E(hit[0]+"："+p.name)+'</a>').join("")+'</div></div>';
+ return '<div class="creatorFocus"><div class="creatorFocusLabel">この視点から作り手を掘る</div><div class="creatorFocusLinks">'+list.map(p=>'<a href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(hit[0])+'&name='+encodeURIComponent(p.name)+'&fromId='+encodeURIComponent(dna.__movieId||'')+'&from='+encodeURIComponent(dna.__movieTitle||'')+'">'+E(hit[0]+"："+p.name)+'</a>').join("")+'</div></div>';
 }
 function humanHtml(){
  const agreed=localStorage.getItem("cinemap-youtube-policy-consent")==="yes";
@@ -175,7 +175,7 @@ function lensLabel(kind){
 }
 function render(m){
  const back=document.querySelector(".back");if(back)back.href="search.html?id="+encodeURIComponent(m.tmdbId||m.id||"")+"&search="+encodeURIComponent(m.title);
- const dna=m.dna||{},ts=topics(m,dna),key="cinemap-critic-unlocked-"+String(m.tmdbId||m.id||m.title),unlocked=sessionStorage.getItem(key)==="yes",related=m.related||[];
+ const dna=m.dna||{};dna.__movieId=m.tmdbId||m.id||"";dna.__movieTitle=m.title||"";const ts=topics(m,dna),key="cinemap-critic-unlocked-"+String(m.tmdbId||m.id||m.title),unlocked=sessionStorage.getItem(key)==="yes",related=m.related||[];
  const dnaRows=[["監督",dna.directors],["脚本",dna.writers],["撮影",dna.cinematography],["音楽",dna.music],["編集",dna.editing]].filter(x=>x[1]?.length);
  app.className="";
  const compareParams=new URLSearchParams(location.search),incomingLens=compareParams.get("lens"),fromTitle=compareParams.get("from"),fromId=compareParams.get("fromId");app.innerHTML='<section class="hero"><div class="eyebrow">CINEMAP · CRITIC MAP</div><div class="heroGrid">'+(m.poster?'<img class="poster" src="'+E(m.poster)+'">':'<div class="poster"></div>')+'<div><h1>'+E(m.title)+'</h1><div class="meta">'+E(m.year||"")+(m.director?' · '+E(m.director):'')+'</div><p class="lead">点数ではなく、論点と実際の人間の批評からこの映画を掘る。</p>'+(incomingLens?'<div class="compareContext"><strong>'+(fromTitle?E(fromTitle)+" から引き継いだ比較視点":"前の作品から引き継いだ比較視点")+'</strong><span>'+E(lensLabel(incomingLens))+'でこの作品も見ます。</span><div class="comparePrompt">'+E(lensPrompt(incomingLens,m,dna))+'</div>'+(fromId?'<div class="compareBoard" data-compare-board><span class="meta">比較情報を読み込み中…</span></div>':'')+(fromId?'<a href="critic.html?id='+encodeURIComponent(fromId)+'&lens='+encodeURIComponent(incomingLens)+'" style="display:inline-block;margin-top:8px;font-size:9px;color:#aaa">比較元の作品へ戻る →</a>':'')+'</div>':'')+'</div></div></section>'+(!unlocked?'<div class="gate" id="gate"><strong>ここから先は観た後に</strong><p>批評・考察には重要な展開や結末に触れる内容が含まれる可能性があります。</p><button id="unlock">観たのでCritic Mapを開く</button></div>':'')+'<div id="body" class="body '+(unlocked?'':'locked')+'"><div class="flow"><div class="flowStep"><strong>01 論点</strong><span>作品固有の問いを選ぶ</span></div><div class="flowStep"><strong>02 人間の批評</strong><span>誰がどう語るかを見る</span></div><div class="flowStep"><strong>03 Movie DNA</strong><span>作り手・技法へ潜る</span></div><div class="flowStep"><strong>04 関連作品</strong><span>別の映画と比較する</span></div></div><div class="lead">気になる論点を選ぶと、その論点を実際に語る人間の批評へ進めます。</div><div class="topics">'+ts.map((x,i)=>'<button class="topic" data-topic="'+i+'"><b>'+E(x.title)+'</b><span>'+E(x.hint)+'</span></button>').join("")+'</div><div class="panel" id="panel"></div><section class="deep"><h2>さらに深掘る</h2>'+(dnaRows.length?'<div class="dna">'+dnaHtmlForRows(dnaRows)+'</div>':'')+(related.length?'<div class="relatedGroups">'+relatedHtml(m,dna,related)+'</div>':'')+'</section></div>';
@@ -185,5 +185,5 @@ function render(m){
 }
 (async()=>{const id=new URLSearchParams(location.search).get("id");if(!id){app.textContent="作品を指定してください。";return}try{const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json();render(d.movie)}catch{app.textContent="作品情報を取得できませんでした。"}})();
 </script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const o=()=>{d.classList.add("show");m.classList.add("show")},q=()=>{d.classList.remove("show");m.classList.remove("show")};b.onclick=o;m.onclick=q;if(x)x.onclick=q;document.addEventListener("keydown",e=>{if(e.key==="Escape")q()})})();</script>
-<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v2.7</div>
+<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v2.8</div>
 </body></html>

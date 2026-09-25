@@ -17,7 +17,7 @@ for required in ["YOUTUBE_API_KEY", "YOUTUBE_CRITIC_ENABLED", 'process.env.YOUTU
 
 search = (ROOT / "search.html").read_text(encoding="utf-8")
 for required in [
-    "検索結果提供：YouTube Data API",
+    "developers.google.com/static/youtube/images/youtube-logos-2x.png",
     "Cinemap独自の視点分類",
     "privacy.html",
     "terms.html",
@@ -31,11 +31,12 @@ if "videos.sort(" in search:
 
 critic = (ROOT / "critic.html").read_text(encoding="utf-8")
 for required in [
-    "検索結果提供：YouTube Data API",
+    "developers.google.com/static/youtube/images/youtube-logos-2x.png",
     "Cinemap独自",
     "privacy.html",
     "terms.html",
     "https://www.youtube.com/t/terms",
+    "https://www.youtube.com/",
     "観たのでCritic Mapを開く",
     "同じ視点：",
 ]:

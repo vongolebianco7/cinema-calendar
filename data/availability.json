@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T18:31:00.991108+00:00",
+  "generated_at": "2026-09-25T18:29:48.210991+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
@@ -4844,6 +4844,288 @@
       "buy": [],
       "checked_at": "2026-09-24T18:31:00.991108+00:00",
       "source_url": "https://www.themoviedb.org/movie/1732759/watch"
+    },
+    "1137844": {
+      "title": "Mayday",
+      "changes": [
+        {
+          "observed_at": "2026-09-25T18:29:48.210991+00:00",
+          "flatrate": [
+            "Apple TV",
+            "Apple TV Amazon Channel"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Apple TV",
+        "Apple TV Amazon Channel"
+      ],
+      "flatrate": [
+        "Apple TV",
+        "Apple TV Amazon Channel"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1137844-mayday/watch?locale=JP"
+    },
+    "1361774": {
+      "title": "The Dink",
+      "changes": [
+        {
+          "observed_at": "2026-09-25T18:29:48.210991+00:00",
+          "flatrate": [
+            "Apple TV",
+            "Apple TV Amazon Channel"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Apple TV",
+        "Apple TV Amazon Channel"
+      ],
+      "flatrate": [
+        "Apple TV",
+        "Apple TV Amazon Channel"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1361774-the-dink/watch?locale=JP"
+    },
+    "1278101": {
+      "title": "小さな私",
+      "changes": [
+        {
+          "observed_at": "2026-09-25T18:29:48.210991+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1278101/watch?locale=JP"
+    },
+    "1773014": {
+      "title": "4アウト ─もう一度、プレイボール─",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1773014/watch"
+    },
+    "1707282": {
+      "title": "男ともだち",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1707282/watch"
+    },
+    "1567149": {
+      "title": "仮面ライダーカブト20th 天を継ぐもの",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1567149/watch"
+    },
+    "1527427": {
+      "title": "3ミリの恋",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1527427/watch"
+    },
+    "1313587": {
+      "title": "GROTESQQQUE -グロテスク-",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1313587/watch"
+    },
+    "1755423": {
+      "title": "となりのとらんす少女ちゃん",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1755423/watch"
+    },
+    "1065968": {
+      "title": "マザーズキングダム",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1065968/watch"
+    },
+    "999075": {
+      "title": "左利きの少女",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/999075/watch"
+    },
+    "1101383": {
+      "title": "オークストリートの異変",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1101383/watch"
+    },
+    "1633790": {
+      "title": "機動警察パトレイバー EZY　File 2",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1633790/watch"
+    },
+    "106378": {
+      "title": "南極料理人",
+      "changes": [
+        {
+          "observed_at": "2026-09-25T18:29:48.210991+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Google Play Movies"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Google Play Movies"
+          ]
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Google Play Movies"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Google Play Movies"
+      ],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/106378/watch?locale=JP"
+    },
+    "1306816": {
+      "title": "世界で最後の愛しい娘！",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1306816/watch"
+    },
+    "338969": {
+      "title": "トキシック・アベンジャー",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/338969/watch"
+    },
+    "467905": {
+      "title": "大富豪になるための正しい殺し方",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/467905/watch"
+    },
+    "1567605": {
+      "title": "クリスマス・キャロル／3人のゴーストたち",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1567605/watch"
+    },
+    "1759179": {
+      "title": "シルバー・エクスプレス",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1759179/watch"
+    },
+    "1737072": {
+      "title": "呪いのスマホ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1737072/watch"
     }
   }
 }

@@ -57,7 +57,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=1" alt="CINEMAP"></a>
  <form class="gSearchForm" action="index.html" method="get">
-  <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
  </form>
  <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
@@ -150,6 +150,8 @@ async function boot(){
  }
 }
 $("#q").addEventListener("input",renderDirectory);
+const initialSearch=new URLSearchParams(location.search).get("search")||"";
+if(initialSearch){$("#q").value=initialSearch;const d=document.querySelector("details.directory");if(d)d.open=true}
 boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();

@@ -87,7 +87,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </main>
 <script>
 const $=s=>document.querySelector(s);
-let theaters=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
+let theaters=[],osmTheaters=[],scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="";
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
 async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
@@ -119,17 +119,21 @@ function renderTheaterDetail(){
  document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selectedDate=b.dataset.date;renderTheaterDetail();updateUrl()})
 }
 function renderDirectory(){
+ const all=[...theaters,...osmTheaters],uniq=new Map();all.forEach(t=>{const k=String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"");if(k&&!uniq.has(k))uniq.set(k,t)});const directory=[...uniq.values()];
  const q=$("#q").value.trim().toLowerCase();
- const list=theaters.filter(t=>!q||[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,150);
- $("#meta").textContent=(q?list.length+"件表示 / ":"")+theaters.length+"館収録";
+ const list=directory.filter(t=>!q||[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,150);
+ $("#meta").textContent=(q?list.length+"件表示 / ":"")+directory.length+"館収録";
  $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
 }
 async function loadDirectory(base){
  let loaded=[];
  if(base){try{const r=await fetch(base+"/api/theater-directory",{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||[]}}catch(_){}}
  if(!loaded.length){try{const r=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||d||[]}}catch(_){}}
- theaters=Array.isArray(loaded)?loaded:[];renderDirectory();
- $("#scheduleMeta").textContent=theaters.length+"館収録"
+ theaters=Array.isArray(loaded)?loaded:[];
+ try{const r=await fetch("data/theaters_osm.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();osmTheaters=d.theaters||[]}}catch(_){}
+ renderDirectory();
+ const all=[...theaters,...osmTheaters],keys=new Set(all.map(t=>String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"")));
+ $("#scheduleMeta").textContent=keys.size+"館収録"
 }
 async function loadSchedules(){
  try{

@@ -85,7 +85,7 @@ async function loadVideos(panel,m,x){
  }catch{box.innerHTML='<div class="meta">批評動画を取得できませんでした。</div>'}
 }
 function render(m){
- const back=document.querySelector(".back");if(back)back.href="search.html?search="+encodeURIComponent(m.title);
+ const back=document.querySelector(".back");if(back)back.href="search.html?id="+encodeURIComponent(m.tmdbId||m.id||"")+"&search="+encodeURIComponent(m.title);
  const dna=m.dna||{},ts=topics(m,dna),key="cinemap-critic-unlocked-"+String(m.tmdbId||m.id||m.title),unlocked=sessionStorage.getItem(key)==="yes",related=m.related||[];
  const dnaRows=[["監督",dna.directors],["脚本",dna.writers],["撮影",dna.cinematography],["音楽",dna.music],["編集",dna.editing]].filter(x=>x[1]?.length);
  app.className="";
@@ -95,5 +95,5 @@ function render(m){
 }
 (async()=>{const id=new URLSearchParams(location.search).get("id");if(!id){app.textContent="作品を指定してください。";return}try{const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json();render(d.movie)}catch{app.textContent="作品情報を取得できませんでした。"}})();
 </script>
-<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v1.2</div>
+<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v1.3</div>
 </body></html>

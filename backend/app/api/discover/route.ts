@@ -1,4 +1,4 @@
-import { json } from "../../../lib/http";
+import { json, rateLimited, options } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 const TMDB_BASE="https://api.themoviedb.org/3";
@@ -9,7 +9,7 @@ function auth(url:URL){
  if(token)headers.Authorization=`Bearer ${token}`; else if(key)url.searchParams.set("api_key",key);
  return token||key?headers:null;
 }
-export async function GET(request:Request){
+export async function GET(request:Request){const limited=rateLimited(request,90);if(limited)return limited;
  const p=new URL(request.url).searchParams,page=Math.min(Math.max(Number(p.get("page")||1),1),500);
  const url=new URL(TMDB_BASE+"/discover/movie");
  url.searchParams.set("language","ja-JP");url.searchParams.set("region","JP");url.searchParams.set("include_adult","false");url.searchParams.set("include_video","false");url.searchParams.set("page",String(page));
@@ -28,4 +28,4 @@ export async function GET(request:Request){
  const headers=auth(url);if(!headers)return json({movies:[],error:"TMDB not configured"},{status:503});
  try{const res=await fetch(url,{headers,next:{revalidate:1800}});if(!res.ok)return json({movies:[],error:"TMDB unavailable"},{status:502});const d=await res.json();return json({movies:(d.results||[]).map((m:any)=>({id:m.id,tmdbId:m.id,title:m.title,original_title:m.original_title,overview:m.overview,date:m.release_date,year:(m.release_date||"").slice(0,4),score:m.vote_average,votes:m.vote_count,popularity:m.popularity,poster:m.poster_path?`https://image.tmdb.org/t/p/w342${m.poster_path}`:null,catalog:true,source:"tmdb"})),page:d.page,total_pages:d.total_pages,total_results:d.total_results});}catch(e){return json({movies:[],error:"discover failed"},{status:502})}
 }
-export async function OPTIONS(){return new Response(null,{status:204,headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,OPTIONS"}})}
+export async function OPTIONS(request:Request){return options(request)}

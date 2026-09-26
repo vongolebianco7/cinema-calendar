@@ -20,7 +20,49 @@ input,select{font-size:16px}.label{font-size:14px;color:#bdbdbd}.hero p{font-siz
 #msg{min-height:24px}button:focus-visible,a:focus-visible{outline:2px solid #e84a4a;outline-offset:3px}
 @media(max-width:760px){.editor{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}.previewPanel{order:0}.panel{padding:14px}.list{display:block}.hero h1{font-size:28px}.previewPanel{position:static}.wrap{padding-left:12px;padding-right:12px}}
 #saveImageDialog{width:min(94vw,540px);max-height:92dvh;overflow:auto;padding:20px;background:#181818;color:#f5f2ed;border:1px solid #746d5d;border-radius:12px;box-shadow:0 24px 80px #000b}#saveImageDialog::backdrop{background:#000c}#saveImageDialog h2{font:normal 25px Georgia,serif;margin:0 40px 6px 0}#saveImageDialog p{font-size:14px;line-height:1.6;color:#dedbd5;margin:0 0 16px}#saveImagePreview{display:block;width:100%;height:auto;-webkit-touch-callout:default;user-select:auto}#closeSaveImage{float:right;border:1px solid #777;background:#2b2b2b;color:#fff;border-radius:50%;width:36px;height:36px;font-size:22px}#saveToPhotos{background:#d6c49d!important;color:#211b15!important;border-color:#d6c49d!important} @media(max-width:760px){.buttons button{flex:1 1 40%}}
-</style></head><body><header class="gTop"><div class="wrap gNav"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
+
+<style id="cinemap-brand-v1">
+/* Cinemap brandTagline: premium editorial identity */
+.brand{
+  color:#f4efe5!important;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  line-height:.92!important;
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:max-content;
+}
+.brand::after{
+  content:"EXPLORE CINEMA";
+  display:block;
+  margin-top:6px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.28em;
+}
+.brandA:after{display:none!important}
+.brandTagline{font-family:inherit}
+@media(max-width:430px){
+  .brand{font-size:20px!important}
+  .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
+}
+</style>
+</head><body><header class="gTop"><div class="wrap gNav"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>

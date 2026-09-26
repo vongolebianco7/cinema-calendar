@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cinemap">
+<defs>
+  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#f1dfbd" stop-opacity=".85"/><stop offset="1" stop-color="#cdb68c" stop-opacity=".08"/></linearGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<rect width="128" height="128" rx="28" fill="#0a0c0f"/>
+<path d="M64 64 L121 36 L121 92 Z" fill="url(#beam)" filter="url(#blur)" opacity=".78"/>
+<text x="22" y="96" fill="#f4efe5" font-family="Georgia,Times New Roman,serif" font-size="91">C</text>
+</svg>

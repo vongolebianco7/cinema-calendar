@@ -4,6 +4,10 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>上映体験 | Cinemap</title>
 <meta name="description" content="シネマスコープ、IMAX、IMAX GT、Dolby Cinema、Dolby Atmos、4DX、MX4D、ScreenXの違いを視覚的に比較。">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
 <style>
 :root{--bg:#090909;--panel:#111;--panel2:#171717;--text:#f4f4f4;--muted:#929292;--line:#292929;--blue:#38a9ff;--green:#37d08b;--gold:#e5b64d;--violet:#c96aff;--red:#ff5757}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1120px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
@@ -353,6 +357,43 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 .audio3d .room3d:before,.audio3d .room3d:after{display:none!important}
 .gtVenueGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.gtVenue{border:1px solid rgba(244,209,91,.3);border-radius:12px;background:#0d0d0d;padding:12px}.gtVenue small{display:block;color:#8d949c;font-size:9px;letter-spacing:.08em}.gtVenue b{display:block;margin-top:4px;font-size:15px}.gtVenue strong{display:block;margin-top:5px;color:#f4d15b;font-size:13px}.gtVenue span{display:block;margin-top:5px;color:#aaa;font-size:10px;line-height:1.5}.gtVenue a{display:inline-block;margin-top:8px;color:#ddd;font-size:10px;text-decoration:underline}@media(max-width:650px){.gtVenueGrid{grid-template-columns:1fr}}
 .gtTheaters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.gtTheater{border:1px solid var(--line);border-radius:10px;background:#0d0d0d;padding:14px}.gtTheater b{display:block;font-size:15px}.gtTheater strong{display:block;color:#64b9ff;font-size:20px;margin-top:5px}.gtTheater a{display:inline-block;margin-top:9px;color:#aaa;font-size:10px;text-decoration:underline}@media(max-width:650px){.gtTheaters{grid-template-columns:1fr}}
+</style>
+
+<style id="cinemap-brand-v1">
+/* Cinemap brandTagline: premium editorial identity */
+.brand{
+  color:#f4efe5!important;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  line-height:.92!important;
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:max-content;
+}
+.brand::after{
+  content:"EXPLORE CINEMA";
+  display:block;
+  margin-top:6px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.28em;
+}
+.brandA:after{display:none!important}
+.brandTagline{font-family:inherit}
+@media(max-width:430px){
+  .brand{font-size:20px!important}
+  .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
+}
 </style>
 </head>
 <body>

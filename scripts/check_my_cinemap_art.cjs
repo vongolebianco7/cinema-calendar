@@ -2,7 +2,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 let draws=[],pending=[],shared=false;
 const values={format:'portrait',layout:'editorial',theme:'minimal',title:'MY TOP OF 2026',sub:'',illustrationMode:'none'};
-const ctx={font:'',textAlign:'left',save(){},restore(){},fillRect(){},strokeRect(){},beginPath(){},arc(){},ellipse(){},stroke(){},translate(){},drawImage(){},createLinearGradient(){return {addColorStop(){}}},createRadialGradient(){return {addColorStop(){}}},measureText(s){return {width:Array.from(s).length*(parseFloat(this.font.match(/(\d+(?:\.\d+)?)px/)?.[1])||24)*.65}},fillText(text,x,y){draws.push({text:String(text),x,y,font:this.font})}};
+const ctx={font:'',textAlign:'left',save(){},restore(){},fillRect(){},strokeRect(){},beginPath(){},arc(){},ellipse(){},stroke(){},translate(){},rotate(){},drawImage(){},createLinearGradient(){return {addColorStop(){}}},createRadialGradient(){return {addColorStop(){}}},measureText(s){return {width:Array.from(s).length*(parseFloat(this.font.match(/(\d+(?:\.\d+)?)px/)?.[1])||24)*.65}},fillText(text,x,y){draws.push({text:String(text),x,y,font:this.font})}};
 const canvas={width:0,height:0,getContext:()=>ctx,setAttribute(){},toBlob(cb){pending.push(()=>cb(new Blob(['png'],{type:'image/png'})))}};
 const elements={artCanvas:canvas,share:{disabled:false},msg:{textContent:''}};
 Object.keys(values).forEach(k=>elements[k]={value:values[k]});
@@ -14,6 +14,11 @@ for(const theme of ['minimal','filmnote','theater','galleryeditorial'])for(const
  assert.equal(canvas.width,1600);assert.equal(canvas.height,{portrait:2000,square:1600,landscape:1000}[format]);
  assert.ok(draws.every(d=>Number.isFinite(d.x)&&Number.isFinite(d.y)&&d.y>=0&&d.y+parseFloat(d.font.match(/(\d+(?:\.\d+)?)px/)[1])<canvas.height),format+' '+layout+' vertical bounds');
  assert.ok(draws.some(d=>d.text==='MY TOP OF 2026'));
+ if(format==='portrait'&&layout==='editorial'&&count===10){
+  const title=draws.find(d=>d.text==='MY TOP OF 2026');
+  assert.ok(parseFloat(title.font.match(/(\d+)px/)[1])>=110,'headline has editorial scale');
+  assert.ok(draws.some(d=>d.text.includes('作品9')&&d.y>canvas.height*.75),'ten films fill the lower page');
+ }
  pending.splice(0).forEach(f=>f());assert.equal(elements.share.disabled,false);
 }
 // A pending older encode must not overwrite the newest preview's file.

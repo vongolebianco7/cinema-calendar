@@ -72,3 +72,10 @@ def test_canvas_uses_existing_cinemap_logo_asset():
 def test_hidden_theme_control_does_not_assume_select_options():
     assert 'type="hidden" id="theme"' in HTML
     assert "theme.options" not in TOOLS
+
+
+def test_phone_photo_flow_shows_a_long_pressable_image():
+    assert 'id="saveToPhotos"' in HTML
+    assert 'id="saveImageDialog"' in HTML
+    assert 'id="saveImagePreview"' in HTML
+    assert 'toDataURL' in ART

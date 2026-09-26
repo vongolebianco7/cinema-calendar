@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updated": "2026-09-26",
   "source_policy": "official-first; unknown when unverified",
   "trait_policy": "cinematic traits are descriptive metadata, not manual format scores",
@@ -8,6 +8,7 @@
     "imax_expanded_ratio": "unknown",
     "filmed_for_imax": "unknown",
     "imax_dmr_only": "unknown",
+    "official_imax_release": "unknown",
     "dolby_vision_master": "unknown",
     "dolby_atmos_mix": "unknown",
     "official_4dx": "unknown",
@@ -139,6 +140,29 @@
         "lateral": 5,
         "sports": 5
       }
+    },
+    "969681": {
+      "title": "Spider-Man: Brand New Day",
+      "official_imax_release": true,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 4,
+        "motion": 5,
+        "physical": 5,
+        "setpiece": 5,
+        "visual": 4,
+        "audio": 4,
+        "contemplative": 1,
+        "framing": 2,
+        "lateral": 4
+      },
+      "sources": [
+        {
+          "label": "IMAX — Spider-Man: Brand New Day in IMAX",
+          "url": "https://www.imax.com/news/spider-man-brand-new-day-in-imax",
+          "formats": ["imax"]
+        }
+      ]
     }
   },
   "title_fixtures": {
@@ -151,6 +175,50 @@
           "label": "Dolby — モアナと伝説の海 (2026)",
           "url": "https://www.dolby.com/ja/experience/moana-2026/",
           "formats": ["dolby_cinema"]
+        }
+      ]
+    },
+    "Spider-Man: Brand New Day|2026": {
+      "official_imax_release": true,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 4,
+        "motion": 5,
+        "physical": 5,
+        "setpiece": 5,
+        "visual": 4,
+        "audio": 4,
+        "contemplative": 1,
+        "framing": 2,
+        "lateral": 4
+      },
+      "sources": [
+        {
+          "label": "IMAX — Spider-Man: Brand New Day in IMAX",
+          "url": "https://www.imax.com/news/spider-man-brand-new-day-in-imax",
+          "formats": ["imax"]
+        }
+      ]
+    },
+    "Disclosure Day|2026": {
+      "official_imax_release": true,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 4,
+        "motion": 3,
+        "physical": 3,
+        "setpiece": 5,
+        "visual": 4,
+        "audio": 5,
+        "contemplative": 2,
+        "framing": 2,
+        "lateral": 3
+      },
+      "sources": [
+        {
+          "label": "IMAX — Disclosure Day",
+          "url": "https://www.imax.com/movie/disclosure-day",
+          "formats": ["imax"]
         }
       ]
     }

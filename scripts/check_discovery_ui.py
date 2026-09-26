@@ -64,13 +64,15 @@ for required in ['["すべて","通常","リバイバル","午前十時"]', "the
 if "firstSeg" not in calendar or "（継続）" not in calendar:
     errors.append("Calendar UX integration missing continuation marker")
 
-# My Cinemap layout/theme gates.
+# My Cinemap final layout/template gates.
 my = text("my-cinemap.html")
-for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "Modern / Graphite", "Night / Cobalt", "Art House / Plum", "Magazine / Cream", "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
+for required in ["themeChoices", "Minimal", "Film Note", "Theater Night", "Gallery Editorial", "illustrationMode", "MY TOP 10", "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
+if "心に残った10本。" in my:
+    errors.append("My Cinemap still contains the removed canned poem")
 
-# My Cinemap assist + premium artwork gates.
+# My Cinemap assist + final artwork gates.
 tools_path = ROOT / "js/my-cinemap-tools.js"
 if not tools_path.exists():
     errors.append("My Cinemap assist module missing: js/my-cinemap-tools.js")
@@ -79,16 +81,13 @@ else:
     for required in ["candidateShelf", "候補に追加", "data-replace", "movieComment", "duplicateList", "cinemap-my-candidates", "cinemap-my-saved-lists"]:
         if required not in tools:
             errors.append(f"My Cinemap assist feature missing: {required}")
-    for required in ["compactMovieItem", "compactMovieMeta", "movieEditPanel", "movieDirector", "監督", "Art Deco Cinema", "Gallery / Museum", "Night Theater"]:
+    for required in ["compactMovieItem", "compactMovieMeta", "movieEditPanel", "movieDirector", "監督", ".themeChoice.premiumTheme.active", "ひとこと（任意）"]:
         if required not in tools:
             errors.append(f"My Cinemap compact/director/template feature missing: {required}")
 art = text("js/my-cinemap-art.js")
-for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne"]:
+for required in ["drawFilmGrain", "drawFilmStrip", "drawCurtain", "drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial", "drawMedal", "drawAbstractThumb", "cinemapLogo", "assets/cinemap-logo.png?v=2", "m.director"]:
     if required not in art:
-        errors.append(f"My Cinemap luxe artwork missing: {required}")
-for required in ["drawArtDeco", "drawGallery", "drawNightTheater", "drawProjector", "drawCurtain", "drawFilmStrip", "m.director"]:
-    if required not in art:
-        errors.append(f"My Cinemap premium artwork/director missing: {required}")
+        errors.append(f"My Cinemap final artwork/director missing: {required}")
 for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
     p = ROOT / js_path
     if p.exists():

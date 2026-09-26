@@ -29,7 +29,7 @@ for required in [
 if "videos.sort(" in search:
     errors.append("search.html must not locally reorder YouTube API search results")
 
-# Screening-format recommendation v2 regression gates.
+# Screening-format recommendation v2 regression gates, including source scoping.
 for required in [
     'const FORMAT_ORDER=["standard","imax","dolby_cinema","motion","screenx"]',
     'data/screening_format_evidence.json',

@@ -70,7 +70,7 @@ for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / S
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
 
-# My Cinemap assist + luxe gates.
+# My Cinemap assist + premium artwork gates.
 tools_path = ROOT / "js/my-cinemap-tools.js"
 if not tools_path.exists():
     errors.append("My Cinemap assist module missing: js/my-cinemap-tools.js")
@@ -79,10 +79,16 @@ else:
     for required in ["candidateShelf", "候補に追加", "data-replace", "movieComment", "duplicateList", "cinemap-my-candidates", "cinemap-my-saved-lists"]:
         if required not in tools:
             errors.append(f"My Cinemap assist feature missing: {required}")
+    for required in ["compactMovieItem", "compactMovieMeta", "movieEditPanel", "movieDirector", "監督", "Art Deco Cinema", "Gallery / Museum", "Night Theater"]:
+        if required not in tools:
+            errors.append(f"My Cinemap compact/director/template feature missing: {required}")
 art = text("js/my-cinemap-art.js")
-for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne", "Editorial Luxe"]:
+for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne"]:
     if required not in art:
         errors.append(f"My Cinemap luxe artwork missing: {required}")
+for required in ["drawArtDeco", "drawGallery", "drawNightTheater", "drawProjector", "drawCurtain", "drawFilmStrip", "m.director"]:
+    if required not in art:
+        errors.append(f"My Cinemap premium artwork/director missing: {required}")
 for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
     p = ROOT / js_path
     if p.exists():

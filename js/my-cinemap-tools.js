@@ -10,106 +10,28 @@
 
   const style=document.createElement('style');
   style.textContent=`
-    .candidateShelf{margin:10px 0 16px;padding:12px;border:1px solid #303030;border-radius:12px;background:#101010}
-    .candidateHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}.candidateHead b{font-size:13px}.candidateHead span{font-size:11px;color:#888}
-    .candidateRail{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:4px;overscroll-behavior-x:contain}.candidateCard{flex:0 0 138px;scroll-snap-align:start;background:#171717;border:1px solid #303030;border-radius:10px;padding:8px;min-width:0}.candidateCard img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:#222}.candidateCard b{display:block;font-size:12px;line-height:1.3;margin-top:7px;min-height:31px}.candidateMeta{font-size:10px;color:#777;margin-top:3px}.candidateActions{display:grid;grid-template-columns:1fr 36px;gap:5px;margin-top:7px}.candidateActions button,.assistBtn{min-height:36px;border:1px solid #3a3a3a;background:#202020;color:#eee;border-radius:8px;font-weight:750}.candidateActions .toRank{background:#eee;color:#111;border-color:#eee}.assistRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.assistBtn{padding:6px 9px;font-size:11px}.replaceActive{outline:2px solid #cdb47a;outline-offset:3px}.movieComment{grid-column:2 / -1;width:100%;margin-top:4px;background:#101010!important;border:1px solid #303030!important;color:#ddd!important;border-radius:8px!important;padding:9px!important;font-size:13px!important}.movieComment::placeholder{color:#666}.completionHint{font-size:11px;color:#888;margin-left:5px}.luxeTheme{border-color:#7b6944!important;background:linear-gradient(135deg,#221f19,#141414)!important}.luxeTheme .themeSwatch{box-shadow:inset 0 0 0 5px #1c1a16,0 0 0 1px #cdb47a;background:linear-gradient(135deg,#ead9a6,#7d6840)!important}.duplicateNotice{font-size:11px;color:#c9b783;margin-top:8px}
-    @media(max-width:760px){.candidateCard{flex-basis:124px}.candidateShelf{margin-left:-2px;margin-right:-2px}.assistBtn{min-height:40px}.movieComment{font-size:16px!important}}
+    .candidateShelf{margin:8px 0 12px;padding:10px;border:1px solid #303030;border-radius:12px;background:#101010}.candidateHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.candidateHead b{font-size:13px}.candidateHead span{font-size:11px;color:#888}
+    .candidateRail{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:3px;overscroll-behavior-x:contain}.candidateCard{flex:0 0 120px;scroll-snap-align:start;background:#171717;border:1px solid #303030;border-radius:10px;padding:7px;min-width:0}.candidateCard img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:#222}.candidateCard b{display:block;font-size:11px;line-height:1.25;margin-top:6px;min-height:28px}.candidateMeta{font-size:10px;color:#777;margin-top:2px}.candidateActions{display:grid;grid-template-columns:1fr 34px;gap:4px;margin-top:6px}.candidateActions button,.assistBtn{min-height:32px;border:1px solid #3a3a3a;background:#202020;color:#eee;border-radius:8px;font-weight:750}.candidateActions .toRank{background:#eee;color:#111;border-color:#eee}
+    #list{gap:6px!important}.compactMovieItem{min-height:64px!important;padding:7px 8px!important;grid-template-columns:28px 42px minmax(0,1fr) auto!important;align-items:center!important}.compactMovieItem>img{width:42px!important;height:58px!important;border-radius:5px!important;object-fit:cover}.compactMovieItem>div:not(.move):not(.movieEditPanel){min-width:0}.compactMovieItem>a,.compactMovieItem>b{font-size:12px!important;line-height:1.2!important}.compactMovieItem .move{display:flex!important;gap:3px!important;align-items:center!important;flex-wrap:nowrap!important}.compactMovieItem .move>button,.compactMovieItem .move>a{width:30px!important;height:30px!important;min-height:30px!important;padding:0!important;font-size:10px!important}.compactMovieMeta{font-size:10px;color:#858585;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.compactMovieMeta .directorName{color:#b8aa83}.assistBtn{padding:5px 8px;font-size:10px}.movieEditPanel{display:none;grid-column:2/-1;grid-template-columns:1fr 1.4fr;gap:6px;margin-top:5px;padding:7px;border-radius:8px;background:#0d0d0d;border:1px solid #292929}.movieEditPanel.open{display:grid}.movieEditPanel label{font-size:9px;color:#888}.movieEditPanel input{display:block;width:100%;margin-top:3px;background:#151515;border:1px solid #303030;color:#eee;border-radius:7px;padding:7px;font-size:12px}.movieComment,.movieDirector{min-width:0}.replaceActive{outline:2px solid #cdb47a;outline-offset:2px}.completionHint{font-size:11px;color:#888;margin-left:5px}
+    .premiumTheme{position:relative;overflow:hidden}.premiumTheme:after{content:'';position:absolute;right:-12px;bottom:-12px;width:40px;height:40px;border:1px solid currentColor;border-radius:50%;opacity:.18}.premiumTheme .themeSwatch{box-shadow:inset 0 0 0 4px rgba(0,0,0,.55)}.themeChoice[data-theme="artdeco"]{border-color:#7d6840!important;background:linear-gradient(135deg,#19140e,#090909)!important;color:#e6d19a}.themeChoice[data-theme="gallery"]{border-color:#b8aa90!important;background:linear-gradient(135deg,#e9e0d0,#cfc3ae)!important;color:#252019}.themeChoice[data-theme="night"]{border-color:#334667!important;background:linear-gradient(135deg,#101827,#070a10)!important;color:#dce6f7}.themeChoice[data-theme="champagne"]{border-color:#7b6944!important;background:linear-gradient(135deg,#221f19,#141414)!important}
+    .templateHint{font-size:10px;color:#777;margin:5px 0 8px}.duplicateNotice{font-size:11px;color:#c9b783;margin-top:8px}
+    @media(max-width:760px){.candidateCard{flex-basis:108px}.candidateShelf{margin-left:-2px;margin-right:-2px}.compactMovieItem{grid-template-columns:24px 36px minmax(0,1fr) auto!important;min-height:56px!important}.compactMovieItem>img{width:36px!important;height:50px!important}.compactMovieItem .move>button,.compactMovieItem .move>a{width:28px!important;height:28px!important}.movieEditPanel{grid-template-columns:1fr}.movieEditPanel input{font-size:16px}.assistBtn{min-height:34px}}
   `;
   document.head.appendChild(style);
 
   function saveCandidates(){localStorage.setItem(CANDIDATE_KEY,JSON.stringify(candidates.slice(0,30)))}
-  function renderCandidates(){
-    const rail=document.getElementById('candidateRail'),count=document.getElementById('candidateCount');
-    if(!rail)return;
-    if(count)count.textContent=`${candidates.length}本`;
-    rail.innerHTML=candidates.length?candidates.map((m,i)=>`<article class="candidateCard">${m.poster?`<img src="${esc(m.poster)}" alt="">`:''}<b>${esc(m.title)}</b><div class="candidateMeta">${esc(m.year||'')}</div><div class="candidateActions"><button class="toRank" data-candidate-rank="${i}">ランキングへ</button><button aria-label="候補から削除" data-candidate-x="${i}">×</button></div></article>`).join(''):'<div class="legal">迷っている作品をここへ置けます。</div>';
-    rail.querySelectorAll('[data-candidate-rank]').forEach(b=>b.onclick=()=>{
-      const i=+b.dataset.candidateRank,m=candidates[i];if(!m||picks.length>=10)return;
-      if(!picks.some(x=>movieKey(x)===movieKey(m)))picks.push({...m});
-      candidates.splice(i,1);saveCandidates();persist();renderCandidates();
-    });
-    rail.querySelectorAll('[data-candidate-x]').forEach(b=>b.onclick=()=>{candidates.splice(+b.dataset.candidateX,1);saveCandidates();renderCandidates()});
-  }
+  function renderCandidates(){const rail=document.getElementById('candidateRail'),count=document.getElementById('candidateCount');if(!rail)return;if(count)count.textContent=`${candidates.length}本`;rail.innerHTML=candidates.length?candidates.map((m,i)=>`<article class="candidateCard">${m.poster?`<img src="${esc(m.poster)}" alt="">`:''}<b>${esc(m.title)}</b><div class="candidateMeta">${esc(m.year||'')}</div><div class="candidateActions"><button class="toRank" data-candidate-rank="${i}">ランキングへ</button><button aria-label="候補から削除" data-candidate-x="${i}">×</button></div></article>`).join(''):'<div class="legal">迷っている作品をここへ置けます。</div>';rail.querySelectorAll('[data-candidate-rank]').forEach(b=>b.onclick=()=>{const i=+b.dataset.candidateRank,m=candidates[i];if(!m||picks.length>=10)return;if(!picks.some(x=>movieKey(x)===movieKey(m)))picks.push({...m});candidates.splice(i,1);saveCandidates();persist();renderCandidates()});rail.querySelectorAll('[data-candidate-x]').forEach(b=>b.onclick=()=>{candidates.splice(+b.dataset.candidateX,1);saveCandidates();renderCandidates()})}
+  function addCandidate(movie){if(!movie||!movie.title)return;if(!candidates.some(x=>movieKey(x)===movieKey(movie))&&!picks.some(x=>movieKey(x)===movieKey(movie)))candidates.unshift({...movie});saveCandidates();renderCandidates()}
 
-  function addCandidate(movie){
-    if(!movie||!movie.title)return;
-    if(!candidates.some(x=>movieKey(x)===movieKey(movie))&&!picks.some(x=>movieKey(x)===movieKey(movie)))candidates.unshift({...movie});
-    saveCandidates();renderCandidates();
-  }
+  function saveMovieMeta(i,director,comment){if(!picks[i])return;picks[i].director=director.trim().slice(0,60);picks[i].movieComment=comment.trim().slice(0,40);localStorage.setItem('cinemap-my-list',JSON.stringify(picks));drawArtwork(picks)}
+  function enhanceList(){const list=document.getElementById('list');if(!list)return;[...list.querySelectorAll('.item')].forEach((item,i)=>{item.classList.add('compactMovieItem');item.classList.toggle('replaceActive',replaceIndex===i);const titleCell=item.children[2];if(titleCell&&!item.querySelector('.compactMovieMeta')){const meta=document.createElement('div');meta.className='compactMovieMeta';meta.innerHTML=`${esc(picks[i]?.year||'')}<span class="directorName">${picks[i]?.director?` · 監督 ${esc(picks[i].director)}`:''}</span>`;titleCell.appendChild(meta)}const controls=item.querySelector('.move');if(controls&&!controls.querySelector('[data-edit]')){const edit=document.createElement('button');edit.className='assistBtn';edit.dataset.edit=String(i);edit.textContent='編集';controls.prepend(edit);edit.onclick=()=>item.querySelector('.movieEditPanel')?.classList.toggle('open')}if(!item.querySelector('.movieEditPanel')){const panel=document.createElement('div');panel.className='movieEditPanel';panel.innerHTML=`<label>監督<input class="movieDirector" maxlength="60" placeholder="監督名" value="${esc(picks[i]?.director||'')}"></label><label>一言コメント<input class="movieComment" maxlength="40" placeholder="任意・40文字まで" value="${esc(picks[i]?.movieComment||'')}"></label><div class="assistRow"><button class="assistBtn" data-replace="${i}">この作品を差し替え</button></div>`;item.appendChild(panel);const director=panel.querySelector('.movieDirector'),comment=panel.querySelector('.movieComment');const commit=()=>saveMovieMeta(i,director.value,comment.value);director.onchange=commit;comment.onchange=commit;panel.querySelector('[data-replace]').onclick=()=>{replaceIndex=i;document.getElementById('q').focus();document.getElementById('q').placeholder=`${i+1}位を差し替える作品を検索`;document.getElementById('msg').textContent=`${i+1}位「${picks[i]?.title||''}」を差し替えます。`;enhanceList()}}});const count=document.getElementById('count');if(count&&!document.getElementById('completionHint')){const hint=document.createElement('span');hint.id='completionHint';hint.className='completionHint';count.after(hint)}const hint=document.getElementById('completionHint');if(hint)hint.textContent=picks.length<10?`あと${10-picks.length}本`:'完成'}
 
-  function enhanceList(){
-    const list=document.getElementById('list');if(!list)return;
-    [...list.querySelectorAll('.item')].forEach((item,i)=>{
-      item.classList.toggle('replaceActive',replaceIndex===i);
-      const controls=item.querySelector('.move');
-      if(controls&&!controls.querySelector('[data-replace]')){
-        const row=document.createElement('div');row.className='assistRow';
-        const replace=document.createElement('button');replace.className='assistBtn';replace.dataset.replace=String(i);replace.textContent='差し替え';
-        replace.onclick=()=>{replaceIndex=i;document.getElementById('q').focus();document.getElementById('q').placeholder=`${i+1}位を差し替える作品を検索`;enhanceList();document.getElementById('msg').textContent=`${i+1}位「${picks[i]?.title||''}」を差し替えます。`};
-        row.appendChild(replace);controls.appendChild(row);
-      }
-      if(!item.querySelector('.movieComment')){
-        const input=document.createElement('input');input.className='movieComment';input.maxLength=40;input.placeholder='一言コメント（任意・40文字まで）';input.value=picks[i]?.movieComment||'';
-        input.onchange=()=>{if(!picks[i])return;picks[i].movieComment=input.value.trim().slice(0,40);localStorage.setItem('cinemap-my-list',JSON.stringify(picks));drawArtwork(picks)};
-        item.appendChild(input);
-      }
-    });
-    const count=document.getElementById('count');if(count&&!document.getElementById('completionHint')){
-      const hint=document.createElement('span');hint.id='completionHint';hint.className='completionHint';count.after(hint);
-    }
-    const hint=document.getElementById('completionHint');if(hint)hint.textContent=picks.length<10?`あと${10-picks.length}本`:'完成';
-  }
+  async function enhancedSearch(){const input=document.getElementById('q'),box=document.getElementById('results'),t=input.value.trim();if(!t)return;box.textContent='検索中…';try{const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?q='+encodeURIComponent(t)+'&limit=12'),d=await r.json(),seen=new Set();const movies=[...(d.movies||[]),...(d.external||[])].filter(m=>{const k=movieKey(m);if(seen.has(k))return false;seen.add(k);return true}).slice(0,12).map(m=>({...m,director:m.director||m.directors?.[0]||''}));box.innerHTML=movies.map((m,i)=>`<div class="result">${m.poster?`<img src="${esc(m.poster)}" alt="">`:'<div></div>'}<b>${esc(m.title)}<br><span style="color:#777">${esc(m.year||'')}${m.director?` · ${esc(m.director)}`:''}</span></b><div class="assistRow"><button data-rank-add="${i}">${replaceIndex==null?'ランキング':'差し替え'}</button><button data-candidate-add="${i}">候補に追加</button></div></div>`).join('');box.querySelectorAll('[data-candidate-add]').forEach(b=>b.onclick=()=>addCandidate(movies[+b.dataset.candidateAdd]));box.querySelectorAll('[data-rank-add]').forEach(b=>b.onclick=()=>{const movie=movies[+b.dataset.rankAdd];if(replaceIndex!=null){picks[replaceIndex]={...movie,movieComment:picks[replaceIndex]?.movieComment||'',director:movie.director||picks[replaceIndex]?.director||''};replaceIndex=null;input.placeholder='作品名を検索';persist();return}if(picks.length>=10||picks.some(x=>movieKey(x)===movieKey(movie)))return;const v=document.getElementById('insertAt').value,pos=v==='end'?picks.length:Math.min(Math.max(Number(v),0),picks.length);picks.splice(pos,0,movie);if(picks.length>10)picks=picks.slice(0,10);persist()})}catch{box.textContent='検索できませんでした'}}
 
-  async function enhancedSearch(){
-    const input=document.getElementById('q'),box=document.getElementById('results'),t=input.value.trim();if(!t)return;
-    box.textContent='検索中…';
-    try{
-      const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?q='+encodeURIComponent(t)+'&limit=12'),d=await r.json(),seen=new Set();
-      const movies=[...(d.movies||[]),...(d.external||[])].filter(m=>{const k=movieKey(m);if(seen.has(k))return false;seen.add(k);return true}).slice(0,12);
-      box.innerHTML=movies.map((m,i)=>`<div class="result">${m.poster?`<img src="${esc(m.poster)}" alt="">`:'<div></div>'}<b>${esc(m.title)}<br><span style="color:#777">${esc(m.year||'')}</span></b><div class="assistRow"><button data-rank-add="${i}">${replaceIndex==null?'ランキング':'差し替え'}</button><button data-candidate-add="${i}">候補に追加</button></div></div>`).join('');
-      box.querySelectorAll('[data-candidate-add]').forEach(b=>b.onclick=()=>addCandidate(movies[+b.dataset.candidateAdd]));
-      box.querySelectorAll('[data-rank-add]').forEach(b=>b.onclick=()=>{
-        const movie=movies[+b.dataset.rankAdd];
-        if(replaceIndex!=null){picks[replaceIndex]={...movie,movieComment:picks[replaceIndex]?.movieComment||''};replaceIndex=null;input.placeholder='作品名を検索';persist();return}
-        if(picks.length>=10||picks.some(x=>movieKey(x)===movieKey(movie)))return;
-        const v=document.getElementById('insertAt').value,pos=v==='end'?picks.length:Math.min(Math.max(Number(v),0),picks.length);picks.splice(pos,0,movie);if(picks.length>10)picks=picks.slice(0,10);persist();
-      });
-    }catch{box.textContent='検索できませんでした'}
-  }
+  function duplicateList(){let saved=[];try{saved=JSON.parse(localStorage.getItem(SAVED_LISTS_KEY)||'[]');if(!Array.isArray(saved))saved=[]}catch{saved=[]}const original={picks:JSON.parse(JSON.stringify(picks)),title:document.getElementById('title').value,sub:document.getElementById('sub').value,theme:document.getElementById('theme').value,format:document.getElementById('format').value,layout:document.getElementById('layout').value,savedAt:new Date().toISOString()};saved.unshift(original);localStorage.setItem(SAVED_LISTS_KEY,JSON.stringify(saved.slice(0,20)));const title=document.getElementById('title');title.value=(title.value||'My Cinemap')+'（コピー）';render();document.getElementById('msg').textContent='元のリストを保存し、編集用のコピーを作りました。'}
 
-  function duplicateList(){
-    let saved=[];try{saved=JSON.parse(localStorage.getItem(SAVED_LISTS_KEY)||'[]');if(!Array.isArray(saved))saved=[]}catch{saved=[]}
-    const original={picks:JSON.parse(JSON.stringify(picks)),title:document.getElementById('title').value,sub:document.getElementById('sub').value,theme:document.getElementById('theme').value,format:document.getElementById('format').value,layout:document.getElementById('layout').value,savedAt:new Date().toISOString()};
-    saved.unshift(original);localStorage.setItem(SAVED_LISTS_KEY,JSON.stringify(saved.slice(0,20)));
-    const title=document.getElementById('title');title.value=(title.value||'My Cinemap')+'（コピー）';render();
-    document.getElementById('msg').textContent='元のリストを保存し、編集用のコピーを作りました。';
-  }
+  function addPremiumTemplates(){const theme=document.getElementById('theme'),choices=document.getElementById('themeChoices');if(!theme||!choices)return;const templates=[['artdeco','Art Deco Cinema','#d3b66e'],['gallery','Gallery / Museum','#d9cfbb'],['night','Night Theater','#1d2a42']];templates.forEach(([value,label,color])=>{if(![...theme.options].some(o=>o.value===value)){const o=document.createElement('option');o.value=value;o.textContent=label;theme.appendChild(o)}if(!choices.querySelector(`[data-theme="${value}"]`)){const b=document.createElement('button');b.className='themeChoice premiumTheme';b.dataset.theme=value;b.innerHTML=`<span class="themeSwatch" style="background:${color}"></span>${label}`;choices.prepend(b);b.onclick=()=>{theme.value=value;syncThemeChoices();render()}}});if(!document.getElementById('templateHint')){const h=document.createElement('div');h.id='templateHint';h.className='templateHint';h.textContent='色違いではなく、構図・装飾・タイポグラフィまで変わります。';choices.before(h)}}
 
-  function mount(){
-    const list=document.getElementById('list');if(!list)return;
-    const rankingLabel=list.previousElementSibling;
-    const shelf=document.createElement('section');shelf.id='candidateShelf';shelf.className='candidateShelf';shelf.innerHTML='<div class="candidateHead"><b>候補箱</b><span id="candidateCount">0本</span></div><div id="candidateRail" class="candidateRail"></div>';
-    rankingLabel?.before(shelf);
-
-    const themeChoices=document.getElementById('themeChoices');
-    if(themeChoices&&!themeChoices.querySelector('[data-theme="champagne"]')){
-      const luxe=document.createElement('button');luxe.className='themeChoice luxeTheme';luxe.dataset.theme='champagne';luxe.innerHTML='<span class="themeSwatch"></span>Editorial Luxe';
-      themeChoices.prepend(luxe);luxe.onclick=()=>{document.getElementById('theme').value='champagne';syncThemeChoices();render()};
-    }
-
-    const actions=document.getElementById('saveList')?.parentElement;
-    if(actions&&!document.getElementById('duplicateList')){
-      const b=document.createElement('button');b.id='duplicateList';b.className='secondary';b.textContent='このリストを複製';b.onclick=duplicateList;actions.appendChild(b);
-    }
-
-    const originalRender=render;
-    render=function(){originalRender();enhanceList();renderCandidates()};
-    const go=document.getElementById('go'),input=document.getElementById('q');
-    if(go)go.onclick=enhancedSearch;
-    if(input)input.onkeydown=e=>{if(e.key==='Enter')enhancedSearch()};
-    renderCandidates();enhanceList();
-  }
-
-  window.CinemapTools={addCandidate,duplicateList,renderCandidates};
-  mount();
+  function mount(){const list=document.getElementById('list');if(!list)return;const rankingLabel=list.previousElementSibling;const shelf=document.createElement('section');shelf.id='candidateShelf';shelf.className='candidateShelf';shelf.innerHTML='<div class="candidateHead"><b>候補箱</b><span id="candidateCount">0本</span></div><div id="candidateRail" class="candidateRail"></div>';rankingLabel?.before(shelf);addPremiumTemplates();const actions=document.getElementById('saveList')?.parentElement;if(actions&&!document.getElementById('duplicateList')){const b=document.createElement('button');b.id='duplicateList';b.className='secondary';b.textContent='このリストを複製';b.onclick=duplicateList;actions.appendChild(b)}const originalRender=render;render=function(){originalRender();enhanceList();renderCandidates()};const go=document.getElementById('go'),input=document.getElementById('q');if(go)go.onclick=enhancedSearch;if(input)input.onkeydown=e=>{if(e.key==='Enter')enhancedSearch()};renderCandidates();enhanceList()}
+  window.CinemapTools={addCandidate,duplicateList,renderCandidates};mount();
 })();

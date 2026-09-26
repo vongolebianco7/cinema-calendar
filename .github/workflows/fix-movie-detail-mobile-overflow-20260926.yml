@@ -1,0 +1,83 @@
+name: Fix movie detail mobile overflow 2026-09-26
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-movie-detail-mobile-overflow-20260926.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add regression test and verify RED
+        run: |
+          mkdir -p tests
+          cat > tests/test_movie_detail_mobile_overflow.py <<'PY'
+          from pathlib import Path
+
+          MARKER = 'movie-detail-mobile-overflow-v1'
+          REQUIRED = [
+              'max-width:100vw',
+              'overflow-x:hidden',
+              'overflow-x:auto',
+              'overscroll-behavior-x:contain',
+              '-webkit-overflow-scrolling:touch',
+          ]
+
+          for name in ('index.html', 'search.html'):
+              text = Path(name).read_text(encoding='utf-8')
+              assert MARKER in text, f'{name}: missing mobile detail overflow guard'
+              block = text.split('/* '+MARKER+' */', 1)[1].split('</style>', 1)[0]
+              for token in REQUIRED:
+                  assert token in block, f'{name}: missing {token}'
+          print('movie detail mobile overflow regression: OK')
+          PY
+          if python tests/test_movie_detail_mobile_overflow.py; then
+            echo 'Regression test unexpectedly passed before the fix.'
+            exit 1
+          else
+            echo 'RED confirmed: current pages lack the mobile overflow guard.'
+          fi
+      - name: Apply scoped mobile overflow fix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          marker='movie-detail-mobile-overflow-v1'
+          css='''\n<style>\n/* movie-detail-mobile-overflow-v1 */\n@media(max-width:760px){\n  html,body{max-width:100%;overflow-x:hidden}\n  .modal{max-width:100vw;overflow-x:hidden}\n  .sheet{width:100%;max-width:100vw;min-width:0;overflow-x:hidden}\n  #detail,#detail>*,.detailSection,.detailTop,.criticBody,.criticPanel,.relatedGroups,.traceGroup{min-width:0;max-width:100%}\n  .filmography,.works,.criticMatrix{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}\n  .filmography,.works{touch-action:pan-x}\n  .criticMatrixGrid{width:max-content}\n}\n</style>\n'''
+          for name in ('index.html','search.html'):
+              p=Path(name)
+              s=p.read_text(encoding='utf-8')
+              if marker not in s:
+                  if '</head>' not in s:
+                      raise SystemExit(f'{name}: </head> not found')
+                  s=s.replace('</head>',css+'</head>',1)
+                  p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify GREEN and JavaScript syntax
+        run: |
+          python tests/test_movie_detail_mobile_overflow.py
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          for f in ('index.html','search.html'):
+              text=Path(f).read_text(encoding='utf-8')
+              for i,js in enumerate(re.findall(r'<script(?:\\s[^>]*)?>(.*?)</script>',text,re.S|re.I)):
+                  if not js.strip():
+                      continue
+                  q=Path(tempfile.gettempdir())/f'{Path(f).stem}-overflow-{i}.js'
+                  q.write_text(js,encoding='utf-8')
+                  r=subprocess.run(['node','--check',str(q)],capture_output=True,text=True)
+                  if r.returncode:
+                      raise SystemExit(f'{f} JS error: {r.stderr}')
+          print('JavaScript syntax: OK')
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'Cinemap Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html search.html tests/test_movie_detail_mobile_overflow.py
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix mobile movie detail horizontal overflow'
+          git push

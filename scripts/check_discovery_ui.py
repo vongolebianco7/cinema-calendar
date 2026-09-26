@@ -58,7 +58,7 @@ if "repeat(3,minmax(0,1fr))" not in discover:
     errors.append("Condition search results must use a three-column grid")
 
 # Calendar UX gates.
-for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))", "継続 · '+ev.title"]:
+for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))", "ev.title+'（継続）'"]:
     if required not in calendar:
         errors.append(f"Calendar UX integration missing: {required}")
 

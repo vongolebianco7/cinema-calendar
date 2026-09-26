@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import unittest
 
+# Regression contract for the deployed B (Outline Tile) brand treatment.
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "discover.html", "experience.html", "my-cinemap.html", "search.html", "rankings.html", "critic.html", "revivals.html", "theaters.html"]
 

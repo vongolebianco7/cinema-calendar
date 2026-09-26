@@ -67,8 +67,9 @@ async function loadPopularShelves(){
  }catch{try{await localPopularFallback()}catch{$("#theatricalPopularStatus").textContent="取得できませんでした";$("#streamingPopularStatus").textContent="取得できませんでした"}}
 }
 function renderPresetShelf(gridId,list){
- $("#"+gridId).innerHTML=list.slice(0,12).map(m=>'<button class="presetCard" data-preset-id="'+m.tmdbId+'"><div class="presetCardPoster">'+(m.poster?'<img loading="lazy" src="'+E(m.poster)+'">':'')+'</div><div class="presetCardBody"><div class="presetCardTitle">'+E(m.title)+'</div><div class="presetCardMeta">'+E(m.year||"")+" · ★ "+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="empty">作品がありません。</div>';
- $("#"+gridId).querySelectorAll("[data-preset-id]").forEach(b=>b.onclick=()=>{const m=list.find(x=>String(x.tmdbId)===b.dataset.presetId);location.href="search.html?"+new URLSearchParams({id:b.dataset.presetId,search:m?.title||""}).toString()})
+ const shown=list.slice(0,12);
+ $("#"+gridId).innerHTML=shown.map((m,i)=>'<button class="presetCard" data-preset-index="'+i+'"><div class="presetCardPoster">'+(m.poster?'<img loading="lazy" src="'+E(m.poster)+'">':'')+'</div><div class="presetCardBody"><div class="presetCardTitle">'+E(m.title)+'</div><div class="presetCardMeta">'+E(m.year||"")+" · ★ "+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="empty">作品がありません。</div>';
+ $("#"+gridId).querySelectorAll("[data-preset-index]").forEach(b=>b.onclick=()=>{const m=shown[+b.dataset.presetIndex],p=new URLSearchParams({search:m?.title||""});if(m?.tmdbId)p.set("id",m.tmdbId);location.href="search.html?"+p.toString()})
 }
 async function loadPresetShelf(kind){
  const gridId=kind==="theatrical"?"theatricalPresetGrid":"streamingPresetGrid",statusId=kind==="theatrical"?"theatricalPresetStatus":"streamingPresetStatus";
@@ -99,26 +100,6 @@ function loadPreset(){loadPresetShelf("theatrical");loadPresetShelf("streaming")
 function normalizeLocalMovie(m){
  return {tmdbId:m.tmdbId||m.tmdb_id||m.id,title:m.title||m.name||m.original_title||"",date:m.date||m.release_date||"",year:m.year||String(m.date||m.release_date||"").slice(0,4),score:m.score??m.vote_average??0,poster:m.poster||m.poster_url||(m.poster_path?"https://image.tmdb.org/t/p/w342"+m.poster_path:null),popularity:Number(m.popularity||0),votes:Number(m.votes||m.vote_count||0),runtime:Number(m.runtime||0)}
 }
-function collectLocalMovies(node,out=[]){
- if(Array.isArray(node)){node.forEach(x=>collectLocalMovies(x,out));return out}
- if(node&&typeof node==="object"){
-  if((node.id||node.tmdbId||node.tmdb_id)&&(node.title||node.name||node.original_title))out.push(normalizeLocalMovie(node));
-  Object.values(node).forEach(v=>collectLocalMovies(v,out))
- }
- return out
-}
-async function localPresetFallback(){
- const raw=await fetch("data/rankings_year.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()});
- let list=collectLocalMovies(raw),seen=new Set();
- list=list.filter(m=>m.tmdbId&&m.title&&!seen.has(String(m.tmdbId))&&seen.add(String(m.tmdbId)));
- if(preset==="rated")list=list.filter(m=>m.score>=7.5).sort((a,b)=>b.score-a.score||b.votes-a.votes);
- else if(preset==="short")list=list.filter(m=>m.runtime&&m.runtime<=100).sort((a,b)=>b.score-a.score||b.votes-a.votes);
- else if(preset==="classic")list=list.filter(m=>Number(m.year)&&Number(m.year)<=1999&&m.score>=7.5).sort((a,b)=>b.score-a.score||b.votes-a.votes);
- else if(preset==="new")list=list.filter(m=>Number(m.year)>=2024).sort((a,b)=>Number(b.year)-Number(a.year)||b.votes-a.votes);
- else list=list.sort((a,b)=>b.votes-a.votes||b.score-a.score);
- presetItems=list.slice(0,60);renderPreset();$("#presetStatus").textContent="Cinemap収録作品から";
-}
-async function loadPreset(){return}
 async function load(reset=true){if(reset){page=1;items=[]}$("#status").textContent="読み込み中…";try{let res=await fetch(API+"/api/discover?"+build(),{cache:"no-store"});if(!res.ok)throw Error(res.status);let d=await res.json();totalPages=d.total_pages||1;items=items.concat(d.movies||[]);render();$("#status").textContent=(d.total_results||items.length).toLocaleString()+"作品";$("#more").style.display=page<Math.min(totalPages,20)?"block":"none"}catch(e){$("#status").textContent="取得できませんでした";$("#grid").innerHTML='<div class="empty">作品データを取得できませんでした。</div>';$("#more").style.display="none"}}
 function render(){$("#grid").innerHTML=items.map(m=>'<button class="card" data-id="'+m.tmdbId+'"><div class="poster">'+(m.poster?'<img loading="lazy" src="'+E(m.poster)+'">':'')+'</div><div class="body"><div class="title">'+E(m.title)+'</div><div class="meta">'+E(m.year||"")+" · TMDB ★ "+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="empty">条件に合う作品がありません。</div>';document.querySelectorAll("#grid .card").forEach(b=>b.onclick=()=>{const movie=items.find(x=>String(x.tmdbId)===b.dataset.id),p=new URLSearchParams({id:b.dataset.id,search:movie?.title||""});if(person){p.set("creator",personName||"");p.set("role",role||"");p.set("person",person||"")}location.href="search.html?"+p.toString()})}
 async function people(inputId,boxId,kind){const el=$("#"+inputId),box=$("#"+boxId);let timer;el.oninput=()=>{if(kind==="director")directorId="";else castId="";clearTimeout(timer);const q=el.value.trim();if(q.length<2){box.hidden=true;return}timer=setTimeout(async()=>{try{const d=await (await fetch(API+"/api/people?q="+encodeURIComponent(q))).json();box.innerHTML=(d.people||[]).map(x=>'<button data-id="'+x.id+'" data-name="'+E(x.name)+'">'+E(x.name)+'<small>'+E(x.department||"")+(x.known_for?.length?" · "+E(x.known_for.join(" / ")):"")+'</small></button>').join("");box.hidden=!box.innerHTML;box.querySelectorAll("button").forEach(b=>b.onclick=()=>{el.value=b.dataset.name;if(kind==="director")directorId=b.dataset.id;else castId=b.dataset.id;box.hidden=true})}catch{box.hidden=true}},250)}}people("director","directorSuggest","director");people("cast","castSuggest","cast");const qp=new URLSearchParams(location.search),person=qp.get("person"),role=qp.get("role"),personName=qp.get("name"),fromId=qp.get("fromId"),fromTitle=qp.get("from");if(person){if(role==="監督"||role==="脚本"||role==="撮影"||role==="音楽"||role==="編集"){directorId=person;$("#director").value=personName||""}else{castId=person;$("#cast").value=personName||""}const pm=$("#personMode"),label=role||"作り手",roleText={監督:"演出と作品全体の統括",脚本:"物語・台詞・構成",撮影:"画面・光・カメラ設計",音楽:"劇伴・音楽設計",編集:"時間・リズム・構成",出演:"演技・人物表現"}[label]||"この人物が関わった作品";pm.classList.add("show");$("#personModeTitle").textContent=(personName||"人物")+" · "+label;$("#personModeText").textContent=roleText+"という視点で、この人物のフィルモグラフィーを辿ります。";$("#personModeActions").innerHTML='<a href="discover.html">通常の映画探索へ戻る</a>'+(fromId?'<a href="critic.html?id='+encodeURIComponent(fromId)+'">元の作品のCritic Mapへ戻る</a>':'');if(fromId||fromTitle){const origin=document.createElement("div");origin.className="originCard";origin.innerHTML='<strong>この作り手を辿った元の作品</strong>'+(fromId?'<a href="search.html?id='+encodeURIComponent(fromId)+'">'+E(fromTitle||"作品詳細へ戻る")+'</a>':E(fromTitle||""));pm.appendChild(origin)};$("#heading").textContent=(personName||"人物")+"の作品"}genreUI();document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{preset=b.dataset.p;document.querySelectorAll("[data-p]").forEach(x=>x.classList.toggle("active",x===b));if(preset==="rated")$("#rating").value="7.5";else if(preset==="short")$("#runtime").value="100";else if(preset==="classic"){$("#era").value="1990";$("#rating").value="7.5"}else if(preset==="new")$("#era").value="2020"});$("#apply").onclick=()=>{$("#conditionResults").hidden=false;$("#heading").textContent="条件検索の結果";load(true)};$("#more").onclick=()=>{page++;load(false)};

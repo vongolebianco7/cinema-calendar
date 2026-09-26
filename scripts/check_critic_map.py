@@ -42,6 +42,16 @@ for required in [
 if '{name:"Dolby Atmos"' in search:
     errors.append("Dolby Atmos must not be a peer top-level screening format")
 
+evidence_path = ROOT / "data" / "screening_format_evidence.json"
+if not evidence_path.exists():
+    errors.append("screening_format_evidence.json is missing")
+else:
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    if evidence.get("source_policy") != "official-first; unknown when unverified":
+        errors.append("screening format evidence must use official-first / unknown fallback policy")
+    if not evidence.get("films"):
+        errors.append("screening format evidence has no verified film fixtures")
+
 critic = (ROOT / "critic.html").read_text(encoding="utf-8")
 for required in [
     "developers.google.com/static/youtube/images/youtube-logos-2x.png",

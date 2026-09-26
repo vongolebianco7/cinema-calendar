@@ -14,55 +14,55 @@ OLD_MARK = '<img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="t
 NEW_MARK = '<span class="gBrandTile" aria-hidden="true"><span class="gBrandGlyph">C</span><span class="gBrandBeam"></span></span>'
 
 OUTLINE_CSS = r'''<style id="cinemap-outline-brand-v2">
-/* Approved B mockup: compact horizontal Outline Tile + editorial serif wordmark. */
+/* Approved B: compact, quiet, editorial. No decorative app-badge effects. */
 .gBrand{
   display:inline-flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  gap:8px!important;
+  gap:7px!important;
   flex:0 0 auto;
   min-width:max-content;
-  color:#f8f0e4!important;
+  color:#f6eee2!important;
   text-decoration:none!important;
   white-space:nowrap!important;
 }
 .gBrandTile{
   position:relative;
   display:block;
-  width:34px;
-  height:34px;
-  flex:0 0 34px;
-  border:.6px solid rgba(240,224,199,.90);
-  border-radius:9px;
-  background:linear-gradient(145deg,rgba(255,255,255,.02),rgba(255,255,255,.004));
+  width:32px;
+  height:32px;
+  flex:0 0 32px;
+  border:.5px solid rgba(240,224,199,.86);
+  border-radius:7px;
+  background:transparent;
   overflow:hidden;
-  box-shadow:inset 0 0 0 .3px rgba(255,255,255,.035);
+  box-shadow:none;
 }
 .gBrandGlyph{
   position:absolute;
   left:5px;
   top:-1px;
   z-index:2;
-  color:#fff5e8;
+  color:#fbf3e7;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:26px;
+  font-size:24px;
   font-weight:400;
-  line-height:34px;
-  letter-spacing:-.065em;
+  line-height:32px;
+  letter-spacing:-.055em;
 }
 .gBrandBeam{
   position:absolute;
   z-index:1;
-  left:14px;
-  top:5px;
-  width:22px;
-  height:23px;
-  background:linear-gradient(90deg,rgba(255,239,205,.94) 0%,rgba(243,214,166,.67) 35%,rgba(225,190,135,.30) 68%,rgba(212,172,113,0) 100%);
-  clip-path:polygon(0 39%,100% 6%,100% 94%,0 61%);
-  filter:blur(.2px);
-  opacity:1;
+  left:13px;
+  top:6px;
+  width:20px;
+  height:19px;
+  background:linear-gradient(90deg,rgba(255,239,205,.90) 0%,rgba(243,214,166,.56) 38%,rgba(225,190,135,.18) 72%,rgba(212,172,113,0) 100%);
+  clip-path:polygon(0 40%,100% 10%,100% 90%,0 60%);
+  filter:none;
+  opacity:.96;
 }
 .gBrandWords{
   display:flex!important;
@@ -72,60 +72,60 @@ OUTLINE_CSS = r'''<style id="cinemap-outline-brand-v2">
   min-width:0;
   line-height:1;
   white-space:nowrap;
-  transform:translateY(-.5px);
+  transform:translateY(-.25px);
 }
 .gBrandName{
-  color:#fff3e4;
+  color:#f8efe2;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:26px;
+  font-size:24px;
   font-weight:400;
-  line-height:.88;
-  letter-spacing:-.024em;
+  line-height:.90;
+  letter-spacing:-.018em;
   white-space:nowrap;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   font-feature-settings:"kern" 1,"liga" 1;
 }
 .gBrandTagline{
-  margin-top:5px;
+  margin-top:4px;
   padding-left:1px;
-  color:#d7c7ae;
+  color:#cdbfa9;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.1px;
+  font-size:4.7px;
   font-weight:600;
   line-height:1;
-  letter-spacing:.28em;
+  letter-spacing:.25em;
   white-space:nowrap;
 }
-.gNav{height:60px!important;gap:9px!important}
+.gNav{height:58px!important;gap:8px!important}
 @media(max-width:430px){
-  .gNav{height:58px!important;gap:8px!important}
+  .gNav{height:56px!important;gap:8px!important}
   .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important;min-width:max-content}
-  .gBrandTile{width:31px;height:31px;flex:0 0 31px;border-radius:8px}
-  .gBrandGlyph{left:5px;top:-1px;font-size:24px;line-height:31px;font-weight:400}
-  .gBrandBeam{left:13px;top:5px;width:20px;height:21px;opacity:1}
-  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-.5px)}
-  .gBrandName{font-size:23px;line-height:.88;letter-spacing:-.022em}
-  .gBrandTagline{font-size:4.7px;letter-spacing:.25em;margin-top:4px;padding-left:1px}
-  .gSearchForm{height:34px!important}
+  .gBrandTile{width:30px;height:30px;flex:0 0 30px;border-radius:7px}
+  .gBrandGlyph{left:5px;top:-1px;font-size:23px;line-height:30px;font-weight:400}
+  .gBrandBeam{left:12px;top:6px;width:19px;height:18px;opacity:.96}
+  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-.25px)}
+  .gBrandName{font-size:22px;line-height:.90;letter-spacing:-.018em}
+  .gBrandTagline{font-size:4.5px;letter-spacing:.23em;margin-top:4px;padding-left:1px}
+  .gSearchForm{height:33px!important}
 }
 @media(max-width:370px){
   .gBrand{gap:6px!important}
-  .gBrandTile{width:29px;height:29px;flex-basis:29px;border-radius:7px}
-  .gBrandGlyph{left:4px;font-size:22px;line-height:29px}
-  .gBrandBeam{left:12px;top:5px;width:19px;height:19px}
-  .gBrandName{font-size:21px}
-  .gBrandTagline{font-size:4.4px;letter-spacing:.22em;margin-top:4px}
+  .gBrandTile{width:28px;height:28px;flex-basis:28px;border-radius:6px}
+  .gBrandGlyph{left:4px;font-size:21px;line-height:28px}
+  .gBrandBeam{left:11px;top:5px;width:18px;height:18px}
+  .gBrandName{font-size:20px}
+  .gBrandTagline{font-size:4.2px;letter-spacing:.21em;margin-top:3px}
 }
 </style>'''
 
 FAVICON = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cinemap">
 <defs>
-  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".94"/><stop offset=".42" stop-color="#edc98f" stop-opacity=".66"/><stop offset=".75" stop-color="#dcb276" stop-opacity=".28"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
+  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".90"/><stop offset=".42" stop-color="#edc98f" stop-opacity=".56"/><stop offset=".75" stop-color="#dcb276" stop-opacity=".18"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
 </defs>
 <rect width="128" height="128" rx="28" fill="#0a0c0f"/>
-<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="23" fill="none" stroke="#ebe3d6" stroke-width="1.5" opacity=".94"/>
-<path d="M57 62 L113 37 L113 91 Z" fill="url(#beam)" opacity="1"/>
+<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="21" fill="none" stroke="#ebe3d6" stroke-width="1" opacity=".90"/>
+<path d="M57 62 L111 40 L111 88 Z" fill="url(#beam)" opacity=".96"/>
 <text x="29" y="92" fill="#fbf6ed" font-family="Bodoni 72,Didot,Iowan Old Style,Baskerville,Times New Roman,serif" font-size="75" font-weight="400">C</text>
 </svg>'''
 
@@ -171,8 +171,8 @@ def make_icon(path: Path, n: int):
     outline = (235, 227, 214)
     warm = (255, 232, 194)
     left, top, right, bottom = .14*n, .14*n, .86*n, .86*n
-    radius = .16*n
-    thick = max(1.0, .012*n)
+    radius = .145*n
+    thick = max(1.0, .008*n)
     rows=[]
     for y in range(n):
         row=bytearray([0])
@@ -184,11 +184,11 @@ def make_icon(path: Path, n: int):
                 rgb=outline
             ox,oy=.44*n,.50*n
             if x>=ox:
-                dx=x-ox; half=.42*dx+.026*n; dy=abs(y-oy)
+                dx=x-ox; half=.36*dx+.020*n; dy=abs(y-oy)
                 if dy<half:
-                    edge=max(0.0,min(1.0,(half-dy)/(.06*n)))
-                    fade=max(0.0,1.0-dx/(.48*n))
-                    a=.17+.47*edge*fade
+                    edge=max(0.0,min(1.0,(half-dy)/(.05*n)))
+                    fade=max(0.0,1.0-dx/(.47*n))
+                    a=.12+.38*edge*fade
                     rgb=tuple(round(rgb[i]*(1-a)+warm[i]*a) for i in range(3))
             cx,cy=.42*n,.51*n
             rr=math.hypot(x-cx,y-cy)
@@ -212,4 +212,4 @@ for page in PAGES:
 make_icon(ROOT / "apple-touch-icon.png", 180)
 make_icon(ROOT / "icon-192.png", 192)
 make_icon(ROOT / "icon-512.png", 512)
-print("Applied compact approved B mockup brand proportions to", len(PAGES), "pages")
+print("Applied final crafted B brand details to", len(PAGES), "pages")

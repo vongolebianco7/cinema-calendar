@@ -11,27 +11,18 @@ def test_selected_movies_use_compact_editor_rows():
         assert token in TOOLS
 
 
-def test_director_can_be_shown_and_edited():
+def test_director_is_preserved_and_defaulted_from_search_results():
     for token in ["movieDirector", "監督", "director"]:
         assert token in TOOLS
+    assert "m.director||m.directors?.[0]||''" in TOOLS
     assert "m.director" in ART
 
 
-def test_three_distinct_premium_templates_exist():
-    for token in ["Art Deco Cinema", "Gallery / Museum", "Night Theater"]:
-        assert token in TOOLS
-    for token in ["drawArtDeco", "drawGallery", "drawNightTheater"]:
+def test_four_final_templates_exist():
+    for token in ["Minimal", "Film Note", "Theater Night", "Gallery Editorial"]:
+        assert token in HTML
+    for token in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial"]:
         assert token in ART
-
-
-def test_premium_templates_have_vector_illustration_details():
-    for token in ["drawProjector", "drawCurtain", "drawFilmStrip", "drawMarquee", "drawGalleryFrames", "drawCinemaFacade"]:
-        assert token in ART
-
-
-def test_hidden_theme_control_does_not_assume_select_options():
-    assert 'type="hidden" id="theme"' in HTML
-    assert "theme.options" not in TOOLS
 
 
 def test_design_picker_is_directly_below_export_shape_and_layout_controls():
@@ -39,11 +30,42 @@ def test_design_picker_is_directly_below_export_shape_and_layout_controls():
     design_pos = HTML.index('<div class="designPicker"')
     art_pos = HTML.index('<div id="art"')
     assert export_pos < design_pos < art_pos
-    assert HTML.index('class="panel"') < HTML.index('id="q"') < design_pos
 
 
-def test_premium_theme_active_state_overrides_template_border_color():
+def test_template_selection_has_visible_active_frame():
     assert '.themeChoice.premiumTheme.active{' in TOOLS
-    assert 'border-color:#f7f1e3!important' in TOOLS
     assert 'box-shadow:0 0 0 2px #f7f1e3' in TOOLS
     assert '.premiumTheme.active:before' in TOOLS
+
+
+def test_default_title_is_english_and_canned_poem_is_removed():
+    assert 'id="title" value="MY TOP 10"' in HTML
+    assert 'id="sub" value="" placeholder="ひとこと（任意）"' in HTML
+    assert '心に残った10本。' not in HTML
+    assert 'あなたの映画を、ここに。' not in ART
+
+
+def test_illustrations_are_optional_and_default_off():
+    assert 'id="illustrationMode"' in HTML
+    assert '<option value="none" selected>なし（推奨）</option>' in HTML
+    assert '<option value="abstract">抽象イラスト</option>' in HTML
+    assert "artValue('illustrationMode')==='abstract'" in ART
+    assert "drawAbstractThumb" in ART
+
+
+def test_top_three_use_refined_medal_renderer():
+    assert "function drawMedal" in ART
+    assert "if(i<3)drawMedal" in ART
+    for metal in ["#b9903a", "#a7abb1", "#a76d43"]:
+        assert metal in ART
+
+
+def test_canvas_uses_existing_cinemap_logo_asset():
+    assert "assets/cinemap-logo.png?v=2" in ART
+    assert "cinemapLogo" in ART
+    assert "drawBrand" in ART
+
+
+def test_hidden_theme_control_does_not_assume_select_options():
+    assert 'type="hidden" id="theme"' in HTML
+    assert "theme.options" not in TOOLS

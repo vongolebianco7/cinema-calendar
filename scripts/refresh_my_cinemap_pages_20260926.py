@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-VERSION = "20260926-compact-directors-v1"
+VERSION = "20260926-theme-mount-v2"
 
 html_path = Path("my-cinemap.html")
 html = html_path.read_text(encoding="utf-8")

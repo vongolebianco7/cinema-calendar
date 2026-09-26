@@ -42,13 +42,40 @@ discover = text("discover.html")
 for required in ["条件から探す", "AIで探す", 'id="conciergeMode"', "/api/agent"]:
     if required not in discover:
         errors.append(f"Discover concierge integration missing: {required}")
-for required in ['id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap", "scroll-snap-type:x proximity", 'class="presetCard"', 'id="conditionResults"', '#grid .card', 'id="theatricalPopularGrid"', 'id="streamingPopularGrid"', "loadPopularShelves", 'grid-template-columns:1fr']:
+for required in [
+    'id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap",
+    "scroll-snap-type:x proximity", 'class="presetCard"',
+    'id="conditionResults"', '#grid .card',
+    'id="theatricalPresetGrid"', 'id="streamingPresetGrid"',
+    'loadPresetShelf("theatrical")', 'loadPresetShelf("streaming")',
+    'data/theatrical.json', 'data/streaming.json'
+]:
     if required not in discover:
         errors.append(f"Discover recommendation/search integration missing: {required}")
 if 'loadPreset();load(true);' in discover:
     errors.append("Discover must not auto-load recommendation results into condition search")
 if "repeat(3,minmax(0,1fr))" not in discover:
     errors.append("Condition search results must use a three-column grid")
+if 'function loadPreset(){return}' in discover:
+    errors.append("Discover recommendation loader is accidentally disabled")
+
+# Calendar UX gates.
+for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))", "継続 · '+ev.title"]:
+    if required not in calendar:
+        errors.append(f"Calendar UX integration missing: {required}")
+
+# My Cinemap layout/theme gates.
+my = text("my-cinemap.html")
+for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "aspect-ratio:3/2", "drawFit", "syncThemeChoices"]:
+    if required not in my:
+        errors.append(f"My Cinemap enhancement missing: {required}")
+
+# IMAX GT directory must include verified screens and an experience-page path.
+if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):
+    errors.append("No verified IMAX GT screen entries")
+if "format=IMAX%20GT" not in text("experience.html"):
+    errors.append("Experience page does not link to IMAX GT screen directory")
+
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:
     if '<a href="agent.html">映画コンシェルジュ</a>' in text(page):
         errors.append(f"Standalone concierge nav remains in {page}")

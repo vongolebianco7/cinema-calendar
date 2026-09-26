@@ -35,12 +35,15 @@ for required in [
     'data/screening_format_evidence.json',
     'function scoreScreeningFormats(',
     'function formatReasonHtml(',
+    'function formatSources(',
     '上映方式おすすめの理由',
 ]:
     if required not in search:
         errors.append(f"search.html missing screening-format v2 requirement: {required}")
 if '{name:"Dolby Atmos"' in search:
     errors.append("Dolby Atmos must not be a peer top-level screening format")
+if 'sources:e.sources||[]' in search:
+    errors.append("screening-format cards must not reuse all evidence sources indiscriminately")
 
 evidence_path = ROOT / "data" / "screening_format_evidence.json"
 if not evidence_path.exists():
@@ -51,6 +54,11 @@ else:
         errors.append("screening format evidence must use official-first / unknown fallback policy")
     if not evidence.get("films"):
         errors.append("screening format evidence has no verified film fixtures")
+    for group in [evidence.get("films", {}), evidence.get("title_fixtures", {})]:
+        for key, row in group.items():
+            for src in row.get("sources", []):
+                if not src.get("formats"):
+                    errors.append(f"screening evidence source missing format scope: {key} / {src.get('label','source')}")
 
 critic = (ROOT / "critic.html").read_text(encoding="utf-8")
 for required in [

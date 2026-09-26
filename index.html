@@ -531,39 +531,21 @@ function showMoreTheaters(){
  if(el&&detailMovie)el.innerHTML=theaterScheduleHtml(detailMovie)
 }
 function theaterScheduleHtml(m){
- let all=(theaterSchedules.schedules||[]),key=normTitle(m.title),alt=normTitle(m.original_title||"");
- let hits=all.filter(x=>{
-  let t=normTitle(x.title).replace(/\[(?:字幕|吹替|IMAX|4DX|MX4D|Dolby[^\]]*)\]/gi,"");
-  return t===key||(alt&&t===alt)||(key.length>=6&&(t.includes(key)||key.includes(t)))
- });
- let names=(theaterSchedules.theaters||[]).map(x=>({...x,theater:x.name}));
- let prefecture=PREFECTURES.includes(selectedTheaterPrefecture)?selectedTheaterPrefecture:"神奈川県";
- let selector='<div class="theaterRegion"><label for="theaterPrefecture">都道府県</label><select id="theaterPrefecture" onchange="setTheaterPrefecture(this.value)">'+PREFECTURES.map(p=>'<option value="'+p+'"'+(p===prefecture?' selected':'')+'>'+p+'</option>').join("")+'</select></div>';
- let today=new Date(),limit=new Date(today);limit.setDate(today.getDate()+3);
- let minDate=today.toLocaleDateString("sv-SE"),maxDate=limit.toLocaleDateString("sv-SE");
- let rows=hits.filter(x=>theaterPrefecture(x)===prefecture&&x.date>=minDate&&x.date<=maxDate),byTheater=new Map();
- rows.forEach(x=>{if(!byTheater.has(x.theater))byTheater.set(x.theater,[]);byTheater.get(x.theater).push(x)});
- if(!rows.length){
-  let links=names.filter(x=>theaterPrefecture(x)===prefecture).map(t=>'<a target="_blank" rel="noopener noreferrer" href="https://cinema.109cinemas.net/cgi-bin/pc/site/det.cgi?tsc='+encodeURIComponent(t.code)+'">'+t.name+'公式</a>').join("　");
-  let covered=names.some(x=>theaterPrefecture(x)===prefecture);
-  return selector+'<div class="small">'+(covered?'この作品について、'+prefecture+'の対応劇場で上映時刻を確認できていません。':'現在、'+prefecture+'の劇場データはまだ取得できていません。')+'上映していないことを意味するものではありません。</div>'+(links?'<div class="links" style="margin-top:8px">'+links+'</div>':"")
- }
- let entries=[...byTheater.entries()].sort((a,b)=>a[0].localeCompare(b[0],"ja"));
- let visible=theaterExpanded?entries:entries.slice(0,5);
- let boxes=visible.map(([name,rs])=>{
-  let byDate=new Map();
-  rs.forEach(x=>{if(!byDate.has(x.date))byDate.set(x.date,[]);byDate.get(x.date).push(x)});
-  let area=rs[0].area||"",src=rs[0].source_url||"#";
-  let dates=[...byDate.entries()].sort().map(([date,ds])=>{
-   let byScreen=new Map();
-   ds.forEach(x=>{let screen=x.screen||"スクリーン未確認";if(!byScreen.has(screen))byScreen.set(screen,[]);byScreen.get(screen).push(x)});
-   let screens=[...byScreen.entries()].sort((a,b)=>a[0].localeCompare(b[0],"ja")).map(([screen,items])=>'<div class="screenGroup"><div class="screenName">'+screen+'</div><div class="showTimes">'+items.sort((a,b)=>a.start.localeCompare(b.start)).map(x=>'<span class="showTime">'+x.start+(x.end?'–'+x.end:'')+'</span>').join("")+'</div></div>').join("");
-   return '<div class="showDate">'+date+'</div>'+screens
-  }).join("");
-  return '<div class="theaterBox"><div class="theaterHead"><div><div><a class="theaterName" href="theaters.html?theater='+encodeURIComponent(name)+'" style="color:inherit;text-decoration:none">'+name+'</a><div class="small">'+area+'</div></div></div><a target="_blank" rel="noopener noreferrer" class="small" href="'+src+'">公式</a></div>'+dates+'</div>'
- }).join("");
- return selector+'<div class="small">'+prefecture+' · 今日〜3日後 · 上映時刻を確認できた'+entries.length+'館</div><div class="theaterSchedules">'+boxes+'</div>'+(entries.length>5&&!theaterExpanded?'<button type="button" class="theaterMore" onclick="showMoreTheaters()">ほかの上映館を見る（残り'+(entries.length-5)+'館）</button>':"")
+ // theater-official-links-v1
+ const q=encodeURIComponent(((m&&m.title)||"")+" 上映時間 映画館");
+ const links=[
+  ["TOHOシネマズ","https://www.tohotheater.jp/"],
+  ["イオンシネマ","https://www.aeoncinema.com/"],
+  ["ユナイテッド・シネマ","https://www.unitedcinemas.jp/"],
+  ["MOVIX／ピカデリー","https://www.smt-cinema.com/"],
+  ["T・ジョイ","https://tjoy.jp/"],
+  ["109シネマズ","https://109cinemas.net/"],
+  ["作品名で上映館を検索","https://www.google.com/search?q="+q]
+ ];
+ const items=links.map(function(x){return '<a href="'+x[1]+'" target="_blank" rel="noopener noreferrer">'+esc(x[0])+'</a>'}).join('');
+ return '<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links">'+items+'</div></div>';
 }
+
 function movieTimelineHtml(m){
  const items=[],seen=new Set(),av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
  const add=(date,type,label,detail,source,note,status)=>{

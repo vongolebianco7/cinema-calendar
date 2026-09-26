@@ -1,0 +1,38 @@
+name: Apply revival and core polish 2026-09-26
+on:
+  push:
+    paths:
+      - 'scripts/apply_revival_core_polish_20260926.py'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply revival and critic polish
+        run: python scripts/apply_revival_core_polish_20260926.py
+      - name: Validate inline JS
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re,subprocess,tempfile,sys
+          bad=[]
+          for html in [Path('index.html'),Path('critic.html')]:
+            for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',html.read_text(encoding='utf-8'),re.S|re.I)):
+              if not script.strip(): continue
+              p=Path(tempfile.gettempdir())/f'{html.stem}-{i}.js';p.write_text(script,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+              if r.returncode: bad.append(r.stderr)
+          if bad: print('\n'.join(bad));sys.exit(1)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html critic.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add verified revivals and streamline Critic Map"
+          git push

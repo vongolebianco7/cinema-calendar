@@ -22,7 +22,7 @@ function renderEvidence(m,data){
 function render(m,data){
  const id=movieId(m),key='cinemap-critic-unlocked-'+id,unlocked=sessionStorage.getItem(key)==='yes',related=m.related||[],dna=m.dna||{};
  document.getElementById('detailBack').href='search.html?'+new URLSearchParams({id,search:m.title||''});
- app.className='';app.innerHTML='<div class="hero">'+(m.poster?'<img class="poster" src="'+E(m.poster)+'" alt="">':'<div class="poster"></div>')+'<div><h1>'+E(m.title)+'</h1><div class="muted">'+E(m.year||'')+(m.director?' · '+E(m.director):'')+'</div></div></div>'+
+ app.className='';app.innerHTML='<div class="hero">'+(m.poster?'<img class="poster" src="'+E(m.poster)+'" alt="">:'')+'<div><h1>'+E(m.title)+'</h1><div class="muted">'+E(m.year||'')+(m.director?' · '+E(m.director):'')+'</div></div></div>'+
  (unlocked?'':'<div class="gate" id="gate"><p>批評には重要な展開や結末に触れる可能性があります。</p><button id="unlock" type="button">観たので批評を見る</button></div>')+
  '<div id="evidence" '+(unlocked?'':'hidden')+'>'+renderEvidence(m,data)+'<p class="deep"><a href="search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(m.title||'')+'">作品情報・映画DNAへ戻る →</a></p></div>';
  const unlock=document.getElementById('unlock');if(unlock)unlock.onclick=()=>{sessionStorage.setItem(key,'yes');document.getElementById('gate').remove();document.getElementById('evidence').hidden=false};

@@ -20,9 +20,16 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn('flex-direction:row!important', text, page)
             self.assertIn('flex-wrap:nowrap!important', text, page)
             self.assertIn('"Bodoni 72",Didot', text, page)
-            self.assertIn('rgba(255,238,204,.78)', text, page)
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
+
+            # B mockup proportions: a clearly separated outline tile, large editorial wordmark,
+            # visible projection beam, and compact horizontal lockup on iPhone.
+            self.assertIn('.gBrandTile{width:42px;height:42px;flex:0 0 42px;border-radius:10px}', text, page)
+            self.assertIn('.gBrandName{font-size:29px;line-height:.86;letter-spacing:-.026em}', text, page)
+            self.assertIn('.gBrandBeam{left:18px;top:7px;width:27px;height:28px;opacity:1}', text, page)
+            self.assertIn('rgba(255,239,205,.96)', text, page)
+            self.assertIn('.gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:9px!important', text, page)
 
             # Both the visible header and drawer must use the horizontal gBrand flex lockup.
             lockup = '<a class="gBrand" href="index.html"><span class="gBrandTile"'
@@ -50,7 +57,7 @@ class BrandIdentityTests(unittest.TestCase):
         text = (ROOT / "favicon.svg").read_text(encoding="utf-8")
         self.assertIn('id="outline-tile"', text)
         self.assertIn('stroke="#ebe3d6"', text)
-        self.assertIn('stop-color="#ffeccc" stop-opacity=".9"', text)
+        self.assertIn('stop-color="#ffeccc" stop-opacity=".96"', text)
         self.assertIn("Bodoni 72,Didot", text)
 
     def test_manifest_is_cinemap_branded(self):

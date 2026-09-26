@@ -4,6 +4,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def read(p): return (ROOT/p).read_text(encoding='utf-8')
 def write(p,s): (ROOT/p).write_text(s,encoding='utf-8')
 
+# Triggered after workflow installation. Applies the latest user-requested polish.
 # ---------- Discover: hard-lock recommendation rails + more AI examples ----------
 p='discover.html'; s=read(p)
 css='''\n/* recommendation rail hard lock */

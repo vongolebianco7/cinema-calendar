@@ -42,55 +42,55 @@
 </style>
 
 <style id="cinemap-outline-brand-v2">
-/* Approved B mockup: compact horizontal Outline Tile + editorial serif wordmark. */
+/* Approved B: compact, quiet, editorial. No decorative app-badge effects. */
 .gBrand{
   display:inline-flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  gap:8px!important;
+  gap:7px!important;
   flex:0 0 auto;
   min-width:max-content;
-  color:#f8f0e4!important;
+  color:#f6eee2!important;
   text-decoration:none!important;
   white-space:nowrap!important;
 }
 .gBrandTile{
   position:relative;
   display:block;
-  width:34px;
-  height:34px;
-  flex:0 0 34px;
-  border:.6px solid rgba(240,224,199,.90);
-  border-radius:9px;
-  background:linear-gradient(145deg,rgba(255,255,255,.02),rgba(255,255,255,.004));
+  width:32px;
+  height:32px;
+  flex:0 0 32px;
+  border:.5px solid rgba(240,224,199,.86);
+  border-radius:7px;
+  background:transparent;
   overflow:hidden;
-  box-shadow:inset 0 0 0 .3px rgba(255,255,255,.035);
+  box-shadow:none;
 }
 .gBrandGlyph{
   position:absolute;
   left:5px;
   top:-1px;
   z-index:2;
-  color:#fff5e8;
+  color:#fbf3e7;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:26px;
+  font-size:24px;
   font-weight:400;
-  line-height:34px;
-  letter-spacing:-.065em;
+  line-height:32px;
+  letter-spacing:-.055em;
 }
 .gBrandBeam{
   position:absolute;
   z-index:1;
-  left:14px;
-  top:5px;
-  width:22px;
-  height:23px;
-  background:linear-gradient(90deg,rgba(255,239,205,.94) 0%,rgba(243,214,166,.67) 35%,rgba(225,190,135,.30) 68%,rgba(212,172,113,0) 100%);
-  clip-path:polygon(0 39%,100% 6%,100% 94%,0 61%);
-  filter:blur(.2px);
-  opacity:1;
+  left:13px;
+  top:6px;
+  width:20px;
+  height:19px;
+  background:linear-gradient(90deg,rgba(255,239,205,.90) 0%,rgba(243,214,166,.56) 38%,rgba(225,190,135,.18) 72%,rgba(212,172,113,0) 100%);
+  clip-path:polygon(0 40%,100% 10%,100% 90%,0 60%);
+  filter:none;
+  opacity:.96;
 }
 .gBrandWords{
   display:flex!important;
@@ -100,50 +100,50 @@
   min-width:0;
   line-height:1;
   white-space:nowrap;
-  transform:translateY(-.5px);
+  transform:translateY(-.25px);
 }
 .gBrandName{
-  color:#fff3e4;
+  color:#f8efe2;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:26px;
+  font-size:24px;
   font-weight:400;
-  line-height:.88;
-  letter-spacing:-.024em;
+  line-height:.90;
+  letter-spacing:-.018em;
   white-space:nowrap;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   font-feature-settings:"kern" 1,"liga" 1;
 }
 .gBrandTagline{
-  margin-top:5px;
+  margin-top:4px;
   padding-left:1px;
-  color:#d7c7ae;
+  color:#cdbfa9;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.1px;
+  font-size:4.7px;
   font-weight:600;
   line-height:1;
-  letter-spacing:.28em;
+  letter-spacing:.25em;
   white-space:nowrap;
 }
-.gNav{height:60px!important;gap:9px!important}
+.gNav{height:58px!important;gap:8px!important}
 @media(max-width:430px){
-  .gNav{height:58px!important;gap:8px!important}
+  .gNav{height:56px!important;gap:8px!important}
   .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important;min-width:max-content}
-  .gBrandTile{width:31px;height:31px;flex:0 0 31px;border-radius:8px}
-  .gBrandGlyph{left:5px;top:-1px;font-size:24px;line-height:31px;font-weight:400}
-  .gBrandBeam{left:13px;top:5px;width:20px;height:21px;opacity:1}
-  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-.5px)}
-  .gBrandName{font-size:23px;line-height:.88;letter-spacing:-.022em}
-  .gBrandTagline{font-size:4.7px;letter-spacing:.25em;margin-top:4px;padding-left:1px}
-  .gSearchForm{height:34px!important}
+  .gBrandTile{width:30px;height:30px;flex:0 0 30px;border-radius:7px}
+  .gBrandGlyph{left:5px;top:-1px;font-size:23px;line-height:30px;font-weight:400}
+  .gBrandBeam{left:12px;top:6px;width:19px;height:18px;opacity:.96}
+  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-.25px)}
+  .gBrandName{font-size:22px;line-height:.90;letter-spacing:-.018em}
+  .gBrandTagline{font-size:4.5px;letter-spacing:.23em;margin-top:4px;padding-left:1px}
+  .gSearchForm{height:33px!important}
 }
 @media(max-width:370px){
   .gBrand{gap:6px!important}
-  .gBrandTile{width:29px;height:29px;flex-basis:29px;border-radius:7px}
-  .gBrandGlyph{left:4px;font-size:22px;line-height:29px}
-  .gBrandBeam{left:12px;top:5px;width:19px;height:19px}
-  .gBrandName{font-size:21px}
-  .gBrandTagline{font-size:4.4px;letter-spacing:.22em;margin-top:4px}
+  .gBrandTile{width:28px;height:28px;flex-basis:28px;border-radius:6px}
+  .gBrandGlyph{left:4px;font-size:21px;line-height:28px}
+  .gBrandBeam{left:11px;top:5px;width:18px;height:18px}
+  .gBrandName{font-size:20px}
+  .gBrandTagline{font-size:4.2px;letter-spacing:.21em;margin-top:3px}
 }
 </style>
 </head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html"><span class="gBrandTile" aria-hidden="true"><span class="gBrandGlyph">C</span><span class="gBrandBeam"></span></span><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">

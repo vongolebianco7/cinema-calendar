@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cinemap">
 <defs>
-  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".94"/><stop offset=".42" stop-color="#edc98f" stop-opacity=".66"/><stop offset=".75" stop-color="#dcb276" stop-opacity=".28"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
+  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".90"/><stop offset=".42" stop-color="#edc98f" stop-opacity=".56"/><stop offset=".75" stop-color="#dcb276" stop-opacity=".18"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
 </defs>
 <rect width="128" height="128" rx="28" fill="#0a0c0f"/>
-<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="23" fill="none" stroke="#ebe3d6" stroke-width="1.5" opacity=".94"/>
-<path d="M57 62 L113 37 L113 91 Z" fill="url(#beam)" opacity="1"/>
+<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="21" fill="none" stroke="#ebe3d6" stroke-width="1" opacity=".90"/>
+<path d="M57 62 L111 40 L111 88 Z" fill="url(#beam)" opacity=".96"/>
 <text x="29" y="92" fill="#fbf6ed" font-family="Bodoni 72,Didot,Iowan Old Style,Baskerville,Times New Roman,serif" font-size="75" font-weight="400">C</text>
 </svg>

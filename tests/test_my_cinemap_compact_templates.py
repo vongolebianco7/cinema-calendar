@@ -61,11 +61,13 @@ def test_top_three_use_refined_medal_renderer():
         assert metal in ART
 
 
-def test_canvas_uses_existing_cinemap_logo_asset():
-    assert "assets/cinemap-logo.png?v=2" in ART
-    assert "cinemapLogo" in ART
-    assert "drawBrand" in ART
-    assert "fillText('Cinemap'" not in ART
+def test_canvas_uses_current_outline_tile_brand():
+    assert "function drawBrand" in ART
+    assert "EXPLORE CINEMA" in ART
+    assert "Bodoni 72" in ART
+    assert "ctx.strokeRect" in ART
+    assert "assets/cinemap-logo.png?v=2" not in ART
+    assert "cinemapLogo" not in ART
 
 
 def test_hidden_theme_control_does_not_assume_select_options():

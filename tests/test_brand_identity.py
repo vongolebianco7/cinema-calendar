@@ -24,11 +24,14 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
-    def test_my_cinemap_export_uses_current_brand(self):
+    def test_my_cinemap_export_uses_current_outline_tile_brand(self):
         text = (ROOT / "js/my-cinemap-art.js").read_text(encoding="utf-8")
-        self.assertIn("assets/cinemap-logo.png?v=2", text)
-        self.assertIn("ctx.drawImage(cinemapLogo", text)
-        self.assertNotIn("fillText('Cinemap'", text)
+        self.assertIn("function drawBrand", text)
+        self.assertIn("EXPLORE CINEMA", text)
+        self.assertIn("Bodoni 72", text)
+        self.assertIn("ctx.strokeRect", text)
+        self.assertNotIn("assets/cinemap-logo.png?v=2", text)
+        self.assertNotIn("const cinemapLogo=new Image()", text)
 
     def test_primary_pages_reference_brand_assets(self):
         for page in PAGES:

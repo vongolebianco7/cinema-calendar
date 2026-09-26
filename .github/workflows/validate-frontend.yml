@@ -20,6 +20,7 @@ on:
       - "scripts/fix_brand_header_20260927.py"
       - "scripts/fix_my_cinemap_export_brand_20260927.py"
       - "tests/test_brand_identity.py"
+      - "tests/test_my_cinemap_three_column_export.py"
       - "manifest.webmanifest"
       - "favicon.svg"
       - "apple-touch-icon.png"
@@ -39,11 +40,13 @@ on:
       - "data/theater_formats.json"
       - "scripts/check_sources.py"
       - "scripts/check_discovery_ui.py"
+      - "scripts/check_core_journey.py"
       - "scripts/check_critic_map.py"
       - "scripts/apply_brand_identity_20260927.py"
       - "scripts/fix_brand_header_20260927.py"
       - "scripts/fix_my_cinemap_export_brand_20260927.py"
       - "tests/test_brand_identity.py"
+      - "tests/test_my_cinemap_three_column_export.py"
       - "manifest.webmanifest"
       - "favicon.svg"
       - "apple-touch-icon.png"
@@ -89,6 +92,8 @@ jobs:
           PY
       - name: Check My Cinemap artwork JavaScript syntax
         run: node --check js/my-cinemap-art.js
+      - name: Check My Cinemap export layouts
+        run: python tests/test_my_cinemap_three_column_export.py
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

@@ -3,25 +3,38 @@ from pathlib import Path
 art = Path("js/my-cinemap-art.js").read_text(encoding="utf-8")
 html = Path("my-cinemap.html").read_text(encoding="utf-8")
 
-required = [
-    "const columns=3;",
-    "const rows=Math.max(1,Math.ceil(items.length/columns))",
-    "const col=Math.floor(i/rows),row=i%rows;",
-    "Ranking output is always three vertical columns",
-]
-missing = [token for token in required if token not in art]
-if missing:
-    raise SystemExit(f"My Cinemap three-column export missing: {missing}")
-
-forbidden = [
-    "const columns=sparse?1:shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1;",
+required_art = [
+    "layout=artValue('layout')||'single'",
+    "const columns=layout==='double'?2:1;",
     "const rows=columns===2?5:10",
+    "const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;",
 ]
-present = [token for token in forbidden if token in art]
-if present:
-    raise SystemExit(f"legacy one/two-column export logic remains: {present}")
+missing_art = [token for token in required_art if token not in art]
+if missing_art:
+    raise SystemExit(f"My Cinemap one/two-column export missing: {missing_art}")
 
-if "my-cinemap-final-v8" not in html:
+forbidden_art = [
+    "const columns=3;",
+    "Ranking output is always three vertical columns",
+    "shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1",
+]
+present_art = [token for token in forbidden_art if token in art]
+if present_art:
+    raise SystemExit(f"legacy My Cinemap export layout logic remains: {present_art}")
+
+required_html = [
+    '<option value="single" selected>縦1列</option>',
+    '<option value="double">左右2列</option>',
+    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html"><span class="gBrandTile"',
+]
+missing_html = [token for token in required_html if token not in html]
+if missing_html:
+    raise SystemExit(f"My Cinemap layout/brand controls missing: {missing_html}")
+
+if "illustrationMode" in html:
+    raise SystemExit("removed illustration setting returned")
+
+if "my-cinemap-editorial-v9" not in html:
     raise SystemExit("My Cinemap artwork cache-bust version was not bumped")
 
-print("My Cinemap three-column export regression checks passed")
+print("My Cinemap editorial one/two-column export regression checks passed")

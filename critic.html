@@ -2,271 +2,42 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Critic Map | Cinemap</title>
+<title>映画の批評 | Cinemap</title>
 <style>
-:root{--bg:#090909;--panel:#121212;--line:#2a2a2a;--text:#f4f4f4;--muted:#8e8e8e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}
-a{color:inherit}.wrap{max-width:980px;margin:auto;padding:0 18px}.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}.gNav{height:62px;display:flex;align-items:center;gap:12px}.gLogo{display:block;height:31px;width:auto;max-width:180px}.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px}.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px}.gMenuBtn{width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center}.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}.gDrawer.show{transform:translateX(0)}.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}.gDrawer a{display:block;color:#f2f2f2;text-decoration:none}.gDrawer>a{font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}.back{color:#aaa;font-size:11px;text-decoration:none;margin-bottom:12px;display:inline-block}@media(max-width:600px){.gNav{height:58px;gap:8px}.gLogo{height:28px;max-width:150px}.gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearchBtn{width:32px}.gMenuBtn{width:36px}}
-.hero{padding:28px 0 18px}.eyebrow{font-size:9px;letter-spacing:.18em;color:#777}.heroGrid{display:grid;grid-template-columns:90px 1fr;gap:16px;margin-top:10px}.poster{width:90px;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:#222}.hero h1{margin:0 0 6px;font-size:24px}.meta{font-size:11px;color:#888}.compareContext{margin-top:12px;border:1px solid #343434;border-radius:10px;padding:10px 11px;background:#101010}.compareContext strong{display:block;font-size:10px;color:#777;letter-spacing:.08em}.compareContext span{display:block;font-size:11px;color:#bbb;line-height:1.55;margin-top:4px}.comparePrompt{margin-top:8px;padding-top:8px;border-top:1px solid #292929;font-size:10px;color:#999;line-height:1.6}.compareBoard{margin-top:9px;border-top:1px solid #292929;padding-top:9px}.comparePair{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}.compareMovie{min-width:0}.compareMovie b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.compareMovie small{display:block;color:#777;font-size:8px;margin-top:3px}.compareVs{color:#555;font-size:9px}.compareFacts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.compareFact{border:1px solid #303030;border-radius:999px;padding:4px 7px;font-size:8px;color:#aaa}.compareFact.none{color:#666}
-.gate{margin:14px 0 22px;border:1px solid #383838;border-radius:14px;padding:18px;background:#111}.gate strong{font-size:16px}.gate p{font-size:11px;color:#999;line-height:1.7}.gate button,.load{border:0;border-radius:9px;padding:10px 13px;font-weight:850;cursor:pointer}
-.body.locked{display:none}.lead{font-size:12px;color:#aaa;line-height:1.75;margin-bottom:14px}.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.topic{border:1px solid #303030;background:#131313;color:#eee;border-radius:12px;padding:13px;text-align:left;cursor:pointer}.topic.active{border-color:#ddd;background:#1b1b1b}.topic b{display:block;font-size:13px}.topic span{display:block;color:#777;font-size:10px;margin-top:5px;line-height:1.5}
-.panel{display:none;margin:12px 0 26px;border:1px solid #303030;border-radius:14px;padding:15px;background:#111}.panel.show{display:block}.question{font-size:18px;font-weight:850;line-height:1.45}
-.human{margin-top:14px;border-top:1px solid #292929;padding-top:13px}.humanHead{display:flex;justify-content:space-between;gap:10px;align-items:end}.humanHead b{font-size:14px}.humanHead span{font-size:9px;color:#777}.ytBrand{display:block;width:151px;height:32px;overflow:hidden;background-image:url("https://developers.google.com/static/youtube/images/youtube-logos-2x.png");background-size:205px 355px;background-position:-27px -36px;background-repeat:no-repeat}.ytBrandWrap{display:flex;align-items:center;gap:8px;text-decoration:none}.ytBrandNote{font-size:8px;color:#777}
-.consent{margin-top:10px;padding:11px;border:1px solid #343434;border-radius:9px;font-size:10px;color:#aaa;line-height:1.6}.consent label{display:flex;gap:8px}.consent a{color:#ddd}.filterLabel{font-size:8px;color:#666;letter-spacing:.08em;margin-top:10px}.overview{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.overview button{border:1px solid #343434;background:#111;color:#bbb;border-radius:999px;padding:6px 9px;font-size:9px;cursor:pointer}.overview button.active{background:#eee;color:#111}.matrix{margin-top:10px;border:1px solid #292929;border-radius:10px;overflow:auto;background:#101010}.matrixTitle{font-size:9px;color:#777;padding:9px 10px;border-bottom:1px solid #252525}.matrixGrid{display:grid;min-width:520px}.matrixCell{min-height:34px;padding:7px 8px;border-right:1px solid #252525;border-bottom:1px solid #252525;font-size:8px;color:#777;display:flex;align-items:center}.matrixHead{color:#aaa;font-weight:800;background:#141414}.matrixChannel{color:#bbb;font-weight:750;background:#131313;position:sticky;left:0;z-index:1}.matrixHit{justify-content:center;color:#eee;background:#151515;cursor:pointer}.matrixEmpty{justify-content:center;color:#444}.shareRow{display:flex;justify-content:flex-end;margin-top:10px}.shareBtn{border:1px solid #383838;background:#141414;color:#ccc;border-radius:8px;padding:7px 9px;font-size:9px;cursor:pointer}
-.videos{display:grid;gap:8px;margin-top:10px}.video{display:grid;grid-template-columns:128px 1fr;gap:10px;padding:8px;border:1px solid #2c2c2c;border-radius:10px;background:#151515;text-decoration:none}.video img{width:128px;aspect-ratio:16/9;object-fit:cover;border-radius:6px}.video b{font-size:11px;line-height:1.45}.video small{display:block;color:#777;margin-top:5px}.yt{display:inline-block;font-size:8px;border:1px solid #444;border-radius:999px;padding:3px 7px;margin-bottom:6px}.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.tag{font-size:8px;border:1px solid #3a3a3a;border-radius:999px;padding:3px 6px;color:#aaa}.note{font-size:9px;color:#666;line-height:1.6;margin-top:9px}
-.guide{margin-top:14px;border-top:1px solid #292929;padding-top:10px}.guide summary{cursor:pointer;font-size:10px;color:#888}.guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.guideCell{border-top:1px solid #292929;padding-top:8px;font-size:11px;color:#bbb;line-height:1.65}.guideCell strong{display:block;color:#777;font-size:9px;margin-bottom:4px}.creatorFocus{margin-top:14px;border-top:1px solid #292929;padding-top:10px}.creatorFocusLabel{font-size:9px;color:#777;letter-spacing:.08em;margin-bottom:7px}.creatorFocusLinks{display:flex;gap:6px;flex-wrap:wrap}.creatorFocusLinks a{border:1px solid #363636;border-radius:999px;padding:6px 9px;font-size:9px;text-decoration:none;color:#ddd}
-.deep{border-top:1px solid var(--line);padding:18px 0 40px}.deep h2{font-size:17px}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 16px}.flowStep{border:1px solid #292929;border-radius:10px;padding:10px;background:#111}.flowStep strong{display:block;font-size:9px;color:#777;letter-spacing:.08em}.flowStep span{display:block;font-size:10px;color:#bbb;line-height:1.45;margin-top:4px}@media(max-width:600px){.flow{grid-template-columns:1fr 1fr}}.dna{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.dnaCell{border:1px solid #292929;border-radius:9px;padding:10px;background:#121212}.dnaCell strong{display:block;font-size:9px;color:#777;margin-bottom:4px}.relatedGroups{display:grid;gap:14px;margin-top:14px}.relatedGroupTitle{font-size:10px;color:#777;letter-spacing:.08em}.works{display:flex;gap:10px;overflow:auto;margin-top:8px}.work{flex:0 0 100px;text-decoration:none}.work img{width:100px;aspect-ratio:2/3;object-fit:cover;border-radius:7px}.work b{font-size:10px;display:block;margin-top:4px}.work small{display:block;color:#777;font-size:8px;line-height:1.4;margin-top:4px}.status{padding:40px 0;color:#888}
-@media(max-width:560px){.topics,.guideGrid,.dna{grid-template-columns:1fr}.video{grid-template-columns:104px 1fr}.video img{width:104px}}
-
-/* Critic Map clarity pass */
-.flow{display:none!important}.hero{padding-bottom:10px}.lead{margin-bottom:10px}.topicSections{display:grid;gap:12px}.deep{margin-top:14px;padding-top:14px}.deep h2{font-size:14px;color:#bbb}.matrix{max-height:250px}.relatedGroups{margin-top:10px}.works{padding-bottom:5px}
-.criticLensBar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px 0 12px;padding-bottom:2px}.criticLensBar::-webkit-scrollbar{display:none}.criticLensBtn{flex:0 0 auto;border:1px solid #303030;background:#111;color:#aaa;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:800;cursor:pointer}.criticLensBtn.active{background:#eee;color:#111;border-color:#eee}.criticMapIntro{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:8px}.criticMapIntro b{font-size:12px}.criticMapIntro span{font-size:9px;color:#777}.topicSection{position:relative;border:1px solid #242424;border-radius:13px;padding:11px;background:#0f0f0f}.topicSectionLabel{font-size:9px;color:#777;letter-spacing:.08em;margin:0 0 8px}.topic{position:relative;overflow:hidden}.topic:before{content:attr(data-lens-label);display:block;font-size:8px;color:#666;letter-spacing:.05em;margin-bottom:5px}.topic[hidden]{display:none!important}.topicSection[hidden]{display:none!important}.criticMapEmpty{display:none;border:1px dashed #333;border-radius:10px;padding:14px;color:#777;font-size:10px}.criticMapEmpty.show{display:block}
-.criticJourney{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0 2px}.criticJourneyStep{border:1px solid #2c2c2c;border-radius:10px;padding:9px;background:#101010;min-width:0}.criticJourneyStep strong{display:block;font-size:8px;color:#6f6f6f;letter-spacing:.07em}.criticJourneyStep span{display:block;margin-top:4px;font-size:10px;line-height:1.45;color:#b8b8b8}.criticJourneyStep.active{border-color:#777;background:#181818}.criticJourneyStep.active strong,.criticJourneyStep.active span{color:#eee}.topicContext{margin-top:9px;padding:9px 10px;border-left:2px solid #555;background:#0d0d0d;font-size:10px;color:#aaa;line-height:1.6}.topicContext b{color:#ddd}.criticNext{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:12px}.criticNext a{display:block;border:1px solid #303030;border-radius:9px;padding:9px 10px;text-decoration:none;background:#121212}.criticNext a b{display:block;font-size:10px}.criticNext a span{display:block;font-size:8px;color:#777;margin-top:4px;line-height:1.4}@media(max-width:560px){.criticJourney{grid-template-columns:1fr}.criticNext{grid-template-columns:1fr}}
-@media(max-width:560px){.topics{grid-template-columns:1fr 1fr}.topic{padding:10px}.topic b{font-size:11px}.topic span{font-size:9px}.panel{padding:12px}.question{font-size:16px}}
-
-.deep>summary{cursor:pointer;font-size:13px;font-weight:800;color:#ccc;padding:8px 0;list-style:none}.deep>summary:after{content:" ＋";color:#777}.deep[open]>summary:after{content:" −"}.deep[open]>summary{margin-bottom:10px}
-
-/* critic compact v3.6 */
-.hero{padding:20px 0 10px}.heroGrid{grid-template-columns:74px 1fr;gap:12px}.poster{width:74px}.hero h1{font-size:21px}.lead{font-size:11px;line-height:1.6}.topicSections{gap:8px}.topicSection{padding:9px}.topics{gap:6px}.topic{min-height:0;padding:9px 9px 9px 10px;border-radius:9px}.topic b{font-size:11px}.topic span{font-size:9px;margin-top:3px}.panel{margin:8px 0 14px;padding:12px}.question{font-size:16px}.human{margin-top:10px;padding-top:10px}.deep{padding-bottom:18px}.deep[open]{padding-bottom:24px}.relatedGroups{gap:9px}.works{gap:8px}.work{flex-basis:86px}.work img{width:86px}.dna{gap:6px}.dnaCell{padding:8px}.compareContext{padding:8px 9px}.matrix{display:none}.matrixTitle{display:none}
-@media(max-width:560px){.heroGrid{grid-template-columns:62px 1fr}.poster{width:62px}.topicSections{gap:7px}.topics{grid-template-columns:1fr 1fr}.topic{padding:8px}.topic b{font-size:10px}.topic span{font-size:8px}.panel{padding:10px}.video{grid-template-columns:90px 1fr}.video img{width:90px}}
-</style>
-</head>
-<body>
-<header class="gTop"><div class="wrap gNav"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My Cinemap</a></aside><main class="wrap"><a class="back" id="detailBack" href="search.html">← 作品詳細へ戻る</a><div id="app" class="status">作品を読み込み中…</div></main>
-<script>
-const API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),cache=new Map(),app=document.getElementById("app");
-function topics(m,dna){
- const dir=(dna.directors||[]).map(x=>x.name).join("、")||m.director||"",writers=(dna.writers||[]).map(x=>x.name).join("、"),photo=(dna.cinematography||[]).map(x=>x.name).join("、"),music=(dna.music||[]).map(x=>x.name).join("、"),genres=(m.genres||[]).join("・"),text=((m.overview||"")+" "+(m.title||"")).toLowerCase(),out=[];
- const themes=[
-  {themeKey:"memory",keys:["記憶","memory","忘れ"],title:"記憶は事実か、それとも物語か",hint:"記憶・時間・自己像",q:"この作品で「覚えていること」は事実として扱われているのか、それとも人物が自分を守るために作った物語なのか。",counter:"記憶の曖昧さではなく、現在の選択そのものが主題だと読むこともできる。",inspect:"回想、反復される台詞、同じ出来事が別の角度から提示される場面を見る。"},
-  {themeKey:"family",keys:["家族","父","母","親","娘","息子","family"],title:"家族は救いか、拘束か",hint:"親密さ・義務・自立",q:"人物を支えている家族関係が、同時に自由を奪ってはいないか。",counter:"家族を抑圧として読むより、不完全な人間同士の相互扶助として見る余地もある。",inspect:"家族内と家族外で、人物の声・姿勢・選択がどう変わるかを見る。"},
-  {themeKey:"violence",keys:["戦争","暴力","殺人","犯罪","war","crime"],title:"暴力は何を正当化している？",hint:"正義・恐怖・報復",q:"暴力が起きたとき、映画は誰の視点に観客を置き、その行為を理解・拒絶させようとしているのか。",counter:"暴力の是非より、暴力を生む制度や環境の描写が中心だと読むこともできる。",inspect:"暴力の直前と直後、被害側と加害側の画面時間・音・説明量を比べる。"},
-  {themeKey:"technology",keys:["ai","人工知能","技術","technology","sns"],title:"技術は人間を拡張する？",hint:"技術・主体性・関係性",q:"技術は人物の可能性を広げているのか、それとも判断や関係性を奪っているのか。",counter:"技術そのものではなく、それを使う社会や欲望の側が問題だと読む余地もある。",inspect:"機械・画面・端末が映る場面で、誰が見る側／見られる側なのかを追う。"},
-  {themeKey:"love",keys:["恋","愛","romance","love"],title:"愛は相手を見ることか、自分を投影することか",hint:"欲望・理想化・距離",q:"人物は相手そのものを見ているのか、それとも自分の理想や欠落を相手に投影しているのか。",counter:"理想化を未熟さではなく、関係を始めるための想像力と見ることもできる。",inspect:"会話より、視線・距離・沈黙・相手不在時の行動を比べる。"},
-  {themeKey:"time",keys:["時間","time","未来","過去"],title:"時間は進んでいるのか、折り畳まれているのか",hint:"時間・因果・選択",q:"この作品の時間構造は、出来事を理解しやすくするための仕掛けか、それとも人物の認識そのものを表しているのか。",counter:"複雑な時間構造より、感情の順序の方が重要だと読むこともできる。",inspect:"同じ出来事の再提示、時間の飛躍、因果が逆転して見える場面を追う。"},
-  {themeKey:"loneliness",keys:["孤独","孤立","lonely","alone"],title:"孤独は欠落か、それとも自由か",hint:"孤立・共同体・自律",q:"人物の孤立は克服すべき問題として描かれているのか、それとも他者から距離を取ることで成立する自由なのか。",counter:"孤独そのものより、共同体が人物に要求する役割の方が主題だとも読める。",inspect:"一人でいる場面と集団内にいる場面で、画面の密度・音・会話量を比べる。"},
-  {themeKey:"work",keys:["仕事","会社","企業","職場","office","company"],title:"仕事は自己実現か、役割への従属か",hint:"労働・評価・アイデンティティ",q:"人物は仕事を通じて自分を作っているのか、それとも組織に期待される役割へ自分を合わせているのか。",counter:"労働批判ではなく、能力を発揮できる場を探す物語としても読める。",inspect:"仕事中と私生活での口調、身体、判断基準の違いを見る。"},
-  {themeKey:"dream",keys:["夢","dream","幻想","幻"],title:"夢や幻想は現実逃避か、真実への近道か",hint:"夢・現実・欲望",q:"非現実的な場面は現実から逃げるためにあるのか、それとも人物の本音や真実をより直接に見せているのか。",counter:"象徴的意味を読み込みすぎず、感情のリズムを作る演出として見る余地もある。",inspect:"夢や幻想に入る直前・直後で、色・音・台詞・編集がどう変わるかを見る。"}
- ];
- const matchedThemes=themes.filter(t=>t.keys.some(k=>text.includes(k))).slice(0,2);matchedThemes.forEach(t=>out.push({...t,kind:"THEME"}));
- out.push(
- {kind:"IMAGE",title:"画面は誰の味方をしている？",hint:photo?"撮影："+photo:"構図・光・色・距離",q:"カメラは誰に近づき、誰から距離を取るのか。画面設計そのものが、観客の共感先を決めていないか。",counter:"画面の距離を感情誘導ではなく、ジャンル上のリズムや情報整理として読むこともできる。",inspect:"クローズアップ／引き、明暗、人物配置が変わる瞬間を見る。"},
- {kind:"STORY",title:"何を見せずに物語を成立させた？",hint:writers?"脚本："+writers:"視点・省略・反復",q:"説明したことより「説明しなかったこと」で、観客に何を補わせているか。",counter:"省略を曖昧さではなく、テンポやジャンル慣習のための圧縮と見ることもできる。",inspect:"重要な決断の直前に省かれた情報、意味が変わる台詞、反復場面を見る。"},
- {kind:"PERFORMANCE",title:"人物は台詞と同じことを考えている？",hint:"表情・声・身体・間",q:"台詞と、表情・声・身体・沈黙が食い違う瞬間はどこか。",counter:"細かな演技より、脚本が与える役割や構造の方が人物を規定しているとも読める。",inspect:"返事までの間、目線、声量や姿勢が変わる場面を見る。"},
- {kind:"SOUND",title:"音は映像に従っている？",hint:music?"音楽："+music:"音楽・環境音・沈黙",q:"音は映像の感情を補強しているのか、それとも逆方向の感情を持ち込むのか。",counter:"対位法ではなく、テンポや没入感を設計する機能として捉えることもできる。",inspect:"音楽が止まる瞬間、環境音だけになる場面、画面外の音に注目する。"},
- {kind:"AUTHOR",title:"この監督らしさは反復か、変化か",hint:dir||"作家性・反復・例外",q:"過去作と似ている部分だけでなく、この作品で初めて変わったものは何か。",counter:"監督中心で読むと、脚本・撮影・編集・俳優の貢献を過小評価する危険もある。",inspect:"主題だけでなく、画面距離、人物配置、終わり方、反復する小道具を比較する。"},
- {kind:"HISTORY",title:"ジャンルの約束を守った？ 裏切った？",hint:genres||"ジャンル・時代・映画史",q:"観客がジャンルに期待する展開・人物・結末をどこまで利用し、どこで外しているか。",counter:"ジャンル更新ではなく、既存の型を巧く使った完成度として見ることもできる。",inspect:"同ジャンルなら当然起きそうな出来事が、起きる／起きないタイミングを見る。"}
- );return out.slice(0,6)
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#090909;color:#f5f5f5;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}a{color:inherit}.wrap{max-width:860px;margin:auto;padding:0 18px}.gTop{border-bottom:1px solid #292929;background:#101010}.gNav{height:64px;display:flex;align-items:center;gap:16px}.gLogo{width:145px;max-height:40px;object-fit:contain}.gSearchForm{display:flex;margin-left:auto;min-width:0}.gSearch{min-width:0;background:#1a1a1a;color:#fff;border:1px solid #444;border-radius:8px;padding:8px}.gSearchBtn,.gMenuBtn,.gDrawerClose{border:0;background:none;color:#fff;font-size:24px;cursor:pointer}.gDrawerMask{display:none;position:fixed;inset:0;background:#000a;z-index:8}.gDrawerMask.show{display:block}.gDrawer{position:fixed;z-index:9;right:0;top:0;height:100dvh;width:min(320px,85vw);background:#171717;padding:22px;transform:translateX(100%);transition:transform .2s}.gDrawer.show{transform:translateX(0)}.gDrawerHead{display:flex;justify-content:space-between}.gDrawer>a{display:block;padding:10px;border-bottom:1px solid #333;text-decoration:none}.back{display:inline-block;margin:18px 0;color:#bbb;text-decoration:none}.hero{display:flex;gap:16px;align-items:center;padding:12px 0 24px;border-bottom:1px solid #333}.poster{width:74px;aspect-ratio:2/3;object-fit:cover;border-radius:5px;background:#252525}.hero h1{font-size:clamp(22px,5vw,32px);line-height:1.3;margin:0}.muted{color:#a7a7a7;font-size:14px}.panel{padding:22px 0;border-bottom:1px solid #333}.panel h2{font-size:20px;margin:0 0 12px}.panel p{margin:0 0 10px}.panel ul{margin:0;padding-left:22px}.panel li{margin:0 0 12px}.panel li a{color:#c5d9fb;font-size:14px}.empty{color:#b9b9b9}.sources{display:grid;gap:12px;list-style:none!important;padding:0!important}.sources a{display:block;padding:12px;border:1px solid #444;border-radius:8px;text-decoration:none;font-size:16px!important}.sources small{display:block;color:#aaa}.gate{margin:20px 0;padding:16px;border:1px solid #444;border-radius:10px}.gate button{padding:10px 14px;border:0;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer}.deep{padding:24px 0}.deep summary{cursor:pointer}.links{display:flex;gap:12px;overflow-x:auto}.links a{min-width:110px;max-width:130px;text-decoration:none}.links img{width:90px;aspect-ratio:2/3;object-fit:cover}.links span{display:block;font-size:14px}.status{padding:30px 0}@media(max-width:600px){.gNav{gap:7px}.gLogo{width:105px}.gSearch{width:100%}.gSearchForm{flex:1}.panel{padding:18px 0}}
+</style></head><body><header class="gTop"><div class="wrap gNav"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー">☰</button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My Cinemap</a></aside><main class="wrap"><a class="back" id="detailBack" href="search.html">← 作品詳細へ戻る</a><div id="app" class="status">作品を読み込み中…</div></main>
+<script src="js/critic-evidence.js"></script><script>
+const E=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])), app=document.getElementById("app");
+const movieId=m=>String(m.tmdbId||m.id||"");
+function renderEvidence(m,data){
+ const result=CinemapCriticEvidence.forMovie(data,movieId(m));
+ const anchors=ids=>ids.length?' <span class="muted">'+ids.map(id=>{const source=result.sources.find(x=>x.id===id);return source?'<a href="'+E(source.url)+'" target="_blank" rel="noopener noreferrer">'+E(source.name)+'</a>':''}).filter(Boolean).join(' / ')+'</span>':'';
+ const list=rows=>'<ul>'+rows.map(row=>'<li>'+E(row.text)+anchors(row.sourceIds)+'</li>').join('')+'</ul>';
+ return '<section class="panel"><h2>批評の傾向</h2>'+(result.overview?'<p>'+E(result.overview.text)+'</p>'+anchors(result.overview.sourceIds):'<p class="empty">批評情報がまだ十分に集まっていません。現時点では傾向を判断できるだけの情報がありません。</p>')+'</section>'+
+ (result.positive.length?'<section class="panel"><h2>評価されている点</h2>'+list(result.positive)+'</section>':'')+
+ (result.divided.length?'<section class="panel"><h2>意見が分かれる点</h2>'+list(result.divided)+'</section>':'')+
+ (result.ratio?'<section class="panel"><h2>賛否の傾向</h2><p>今回分析した'+result.ratio.total+'件のうち、肯定的な内容が'+result.ratio.percent+'%。</p><p class="muted">確認した出典に限る集計です。作品全体の評価を表すものではありません。</p></section>':'')+
+ (result.sources.length?'<section class="panel"><h2>出典を見る</h2><ul class="sources">'+result.sources.map(source=>'<li><a href="'+E(source.url)+'" target="_blank" rel="noopener noreferrer">'+E(source.name)+'<small>'+E(source.publisher||'')+'</small></a></li>').join('')+'</ul></section>':'');
 }
-function tags(v,kind){
- const t=String(v.title||"").toLowerCase(),a=[],add=x=>{if(!a.includes(x))a.push(x)};
- if(/撮影|映像|画角|カメラ|cinematography|visual|imax/.test(t))add("映像演出");
- if(/脚本|構成|伏線|ストーリー|物語|screenplay|story|ending|考察/.test(t))add("脚本・構造");
- if(/テーマ|意味|解釈|哲学|社会|象徴|メタファー|analysis|meaning/.test(t))add("テーマ解釈");
- if(/監督|director|作家性|演出/.test(t))add("作家論");
- if(/音楽|音響|サウンド|score|music/.test(t))add("音・音楽");
- if(/演技|俳優|character|acting/.test(t))add("演技・人物");
- if(/映画史|ジャンル|genre|history|比較/.test(t))add("映画史・比較");
- if(!a.length){const f={IMAGE:"映像演出",STORY:"脚本・構造",PERFORMANCE:"演技・人物",SOUND:"音・音楽",AUTHOR:"作家論",HISTORY:"映画史・比較"};if(f[kind])add(f[kind])}
- return a.slice(0,3)
+function render(m,data){
+ const id=movieId(m),key='cinemap-critic-unlocked-'+id,unlocked=sessionStorage.getItem(key)==='yes',related=m.related||[],dna=m.dna||{};
+ document.getElementById('detailBack').href='search.html?'+new URLSearchParams({id,search:m.title||''});
+ app.className='';app.innerHTML='<div class="hero">'+(m.poster?'<img class="poster" src="'+E(m.poster)+'" alt="">':'<div class="poster"></div>')+'<div><h1>'+E(m.title)+'</h1><div class="muted">'+E(m.year||'')+(m.director?' · '+E(m.director):'')+'</div></div></div>'+
+ (unlocked?'':'<div class="gate" id="gate"><p>批評には重要な展開や結末に触れる可能性があります。</p><button id="unlock" type="button">観たので批評を見る</button></div>')+
+ '<div id="evidence" '+(unlocked?'':'hidden')+'>'+renderEvidence(m,data)+'<p class="deep"><a href="search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(m.title||'')+'">作品情報・映画DNAへ戻る →</a></p></div>';
+ const unlock=document.getElementById('unlock');if(unlock)unlock.onclick=()=>{sessionStorage.setItem(key,'yes');document.getElementById('gate').remove();document.getElementById('evidence').hidden=false};
 }
-function compareReason(m,dna,x){
- const genreMap=new Map((dna.genres||[]).map(g=>[Number(g.id),g.name]));
- const shared=(x.genre_ids||[]).map(id=>genreMap.get(Number(id))).filter(Boolean);
- const myYear=Number(m.year||0),otherYear=Number(x.year||0);
- if(shared.length>=2)return "共通ジャンル："+shared.slice(0,2).join(" × ");
- if(shared.length===1)return "共通ジャンル："+shared[0];
- if(myYear&&otherYear&&Math.abs(myYear-otherYear)<=3)return "近い時代の作品（"+otherYear+"年）";
- return "TMDBの関連作品候補";
-}
-function dnaRoleNote(role){
- return {監督:"演出・作品全体の統括",脚本:"物語・台詞・構成",撮影:"画面・光・カメラ設計",音楽:"劇伴・音楽設計",編集:"時間・リズム・構成"}[role]||"作品づくりの主要スタッフ";
-}
-function dnaHtmlForRows(rows,m){
- return rows.map(r=>'<div class="dnaCell"><strong>'+E(r[0])+'</strong>'+r[1].map(p=>'<a class="dnaCard" href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(r[0])+'&name='+encodeURIComponent(p.name)+'&fromId='+encodeURIComponent(m.tmdbId||m.id||'')+'&from='+encodeURIComponent(m.title)+'">'+E(p.name)+'<span class="dnaRoleNote">'+E(dnaRoleNote(r[0]))+'</span></a>').join("")+'</div>').join("");
-}
-function creatorFocusHtml(kind,dna){
- kind=lensBase(kind);const map={
-  IMAGE:["撮影",dna.cinematography],
-  STORY:["脚本",dna.writers],
-  SOUND:["音楽",dna.music],
-  AUTHOR:["監督",dna.directors],
-  PERFORMANCE:["出演",dna.cast],
-  HISTORY:["監督",dna.directors],
-  THEME:["脚本",dna.writers]
- };
- const hit=map[kind],list=hit&&Array.isArray(hit[1])?hit[1].filter(Boolean).slice(0,3):[];
- if(!hit||!list.length)return "";
- return '<div class="creatorFocus"><div class="creatorFocusLabel">この視点から作り手を掘る</div><div class="creatorFocusLinks">'+list.map(p=>'<a href="discover.html?person='+encodeURIComponent(p.id)+'&role='+encodeURIComponent(hit[0])+'&name='+encodeURIComponent(p.name)+'&fromId='+encodeURIComponent(dna.__movieId||'')+'&from='+encodeURIComponent(dna.__movieTitle||'')+'">'+E(hit[0]+"："+p.name)+'</a>').join("")+'</div></div>';
-}
-function humanHtml(){
- const agreed=localStorage.getItem("cinemap-youtube-policy-consent")==="yes";
- return '<div class="human"><div class="humanHead"><b>人間の批評・考察</b><a class="ytBrandWrap" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="ytBrand" aria-hidden="true"></span><span class="ytBrandNote">Data API</span></a></div>'+(agreed?'<button class="load" data-load>この論点で批評動画を探す</button>':'<div class="consent"><label><input type="checkbox" data-consent> <span><a href="privacy.html" target="_blank">Privacy</a>、<a href="terms.html" target="_blank">Cinemap利用規約</a>、<a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer">YouTube利用規約</a>を確認し、同意して利用します。</span></label><button class="load" data-accept>同意して批評動画を探す</button></div>')+'<div class="filterLabel">Cinemap独自の絞り込み・分類</div><div class="overview" data-overview></div><div class="matrix" data-matrix></div><div class="videos" data-videos></div><div class="note">視点タグはCinemap独自分類です。YouTubeが作成・推奨した分類ではありません。動画本文は解析・保存しません。</div></div>'
-}
-async function loadVideos(panel,m,x){
- const box=panel.querySelector("[data-videos]");if(!box)return;box.innerHTML='<div class="meta">検索中…</div>';
+async function load(){
+ const p=new URLSearchParams(location.search),id=p.get('id'),title=p.get('search')||p.get('title')||'';
+ app.className='status';app.textContent='批評情報を読み込み中…';
  try{
-  const key=String(m.tmdbId||m.id)+"|"+x.kind;let d=cache.get(key);
-  if(!d){const r=await fetch(API+"/api/critic-videos?title="+encodeURIComponent(m.title)+"&topic="+encodeURIComponent(x.title)+"&kind="+encodeURIComponent(x.kind),{cache:"no-store"});d=await r.json();if(!r.ok)throw 0;cache.set(key,d)}
-  if(!d.enabled){box.innerHTML='<div class="meta">YouTube批評連携は現在準備中です。</div>';return}
-  const videos=(d.videos||[]).map(v=>({...v,_tags:tags(v,x.kind)})),overview=panel.querySelector("[data-overview]");
-  const render=list=>box.innerHTML=list.length?list.map(v=>'<a class="video" target="_blank" rel="noopener noreferrer" href="'+E(v.url)+'">'+(v.thumbnail?'<img src="'+E(v.thumbnail)+'" alt="">':'<div></div>')+'<div><span class="yt">▶ YouTube</span><b>'+E(v.title)+'</b><small>'+E(v.channelTitle)+(v.publishedAt?' · '+E(String(v.publishedAt).slice(0,10)):'')+'</small><div class="tags">'+v._tags.map(t=>'<span class="tag">'+E(t)+'</span>').join("")+'</div></div></a>').join(""):'<div class="meta">該当する動画を確認できませんでした。</div>';
-  const counts=new Map();videos.forEach(v=>v._tags.forEach(t=>counts.set(t,(counts.get(t)||0)+1)));
-  if(overview){const items=[["すべて",videos.length],...[...counts.entries()]];overview.innerHTML=items.map((it,i)=>'<button class="'+(i===0?'active':'')+'" data-tag="'+E(it[0])+'">'+E(it[0])+' '+it[1]+'</button>').join("");overview.querySelectorAll("[data-tag]").forEach(b=>b.onclick=()=>{overview.querySelectorAll("button").forEach(z=>z.classList.toggle("active",z===b));render(b.dataset.tag==="すべて"?videos:videos.filter(v=>v._tags.includes(b.dataset.tag)))})}
-  const matrix=panel.querySelector("[data-matrix]");
-  if(matrix){
-    const lenses=[...counts.keys()].slice(0,5),channels=[...new Set(videos.map(v=>v.channelTitle).filter(Boolean))].slice(0,6);
-    if(lenses.length&&channels.length){
-      const cols='140px repeat('+lenses.length+',minmax(76px,1fr))';
-      let cells='<div class="matrixCell matrixHead">発信元</div>'+lenses.map(t=>'<div class="matrixCell matrixHead">'+E(t)+'</div>').join("");
-      channels.forEach(ch=>{cells+='<div class="matrixCell matrixChannel">'+E(ch)+'</div>';lenses.forEach(tag=>{const n=videos.filter(v=>v.channelTitle===ch&&v._tags.includes(tag)).length;cells+=n?'<button type="button" class="matrixCell matrixHit" data-ch="'+E(ch)+'" data-lens="'+E(tag)+'">'+n+'</button>':'<div class="matrixCell matrixEmpty">–</div>'})});
-      matrix.innerHTML='<div class="matrixTitle">発信元 × Cinemap独自の視点分類</div><div class="matrixGrid" style="grid-template-columns:'+cols+'">'+cells+'</div>';
-      matrix.querySelectorAll("[data-ch]").forEach(b=>b.onclick=()=>{render(videos.filter(v=>v.channelTitle===b.dataset.ch&&v._tags.includes(b.dataset.lens)));if(overview)overview.querySelectorAll("button").forEach(z=>z.classList.remove("active"))})
-    }else matrix.innerHTML="";
-  }
-  render(videos)
- }catch{box.innerHTML='<div class="meta">批評動画を取得できませんでした。</div>'}
+  const evidence=await fetch('data/critic_evidence.json',{cache:'default'});
+  if(!evidence.ok)throw Error('evidence');const data=await evidence.json();
+  const entry=data.films?.[String(id||'')]||{};
+  const m={id,title:entry.title||title||'作品名を確認できませんでした',year:entry.year||'',related:[]};
+  render(m,data);
+ }catch(e){app.innerHTML='<p>批評情報を読み込めませんでした。</p><button type="button" id="retry">再試行</button>';document.getElementById('retry').onclick=load}
 }
-function lensPrompt(kind,m,dna){
- kind=lensBase(kind);const map={
-  IMAGE:"構図・光・カメラ距離が、前の作品と同じように観客の共感先を作っているか比較する。",
-  STORY:"情報の出し方・省略・反復が、前の作品と同じ役割を持つか比較する。",
-  PERFORMANCE:"台詞と表情・声・身体のズレが、前の作品とどう違うかを見る。",
-  SOUND:"音楽・環境音・沈黙が、前の作品より感情を補強するのか、逆らうのかを見る。",
-  AUTHOR:"監督らしさの反復と、この作品だけで変わった点を前の作品と比較する。",
-  HISTORY:"同じジャンルの約束を、この作品がどこまで守り、どこで外すか比較する。",
-  THEME:"同じ主題を、この作品が別の立場や結末から描いていないか比較する。"
- };
- return map[kind]||"同じ視点で前の作品との違いを見る。";
-}
-function factualCompare(a,b){
- const ad=a.dna||{},bd=b.dna||{},aDirs=(ad.directors||[]).map(x=>x.name),bDirs=(bd.directors||[]).map(x=>x.name);
- const aGenres=new Set((a.genres||[]).map(String)),sharedGenres=(b.genres||[]).filter(g=>aGenres.has(String(g)));
- const creatorSets=[
-  ["監督",ad.directors,bd.directors],["脚本",ad.writers,bd.writers],["撮影",ad.cinematography,bd.cinematography],["音楽",ad.music,bd.music]
- ];
- const overlaps=[];
- creatorSets.forEach(([role,xs,ys])=>{const names=new Set((xs||[]).map(x=>String(x.id||x.name)));(ys||[]).forEach(y=>{if(names.has(String(y.id||y.name)))overlaps.push(role+"："+y.name)})});
- const yearA=Number(a.year||0),yearB=Number(b.year||0),facts=[];
- if(sharedGenres.length)facts.push("共通ジャンル："+sharedGenres.slice(0,3).join(" / "));
- if(yearA&&yearB)facts.push("公開年差："+Math.abs(yearA-yearB)+"年");
- facts.push(...overlaps.slice(0,3));
- if(!facts.length)facts.push("主要メタデータ上の明確な共通点は少なめ");
- return {aDirs,bDirs,facts};
-}
-async function hydrateComparison(fromId,current,lens){
- const host=document.querySelector("[data-compare-board]");if(!host||!fromId)return;
- try{
-  const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(fromId),{cache:"no-store"});if(!r.ok)throw 0;
-  const d=await r.json(),origin=d.movie;if(!origin)return;
-  const info=factualCompare(origin,current);
-  host.innerHTML='<div class="comparePair"><div class="compareMovie"><b>'+E(origin.title)+'</b><small>'+E(origin.year||"")+(info.aDirs.length?' · '+E(info.aDirs.join(" / ")):'')+'</small></div><div class="compareVs">VS</div><div class="compareMovie"><b>'+E(current.title)+'</b><small>'+E(current.year||"")+(info.bDirs.length?' · '+E(info.bDirs.join(" / ")):'')+'</small></div></div><div class="compareFacts">'+info.facts.map(x=>'<span class="compareFact">'+E(x)+'</span>').join("")+'</div>';
- }catch{host.innerHTML='<div class="compareFacts"><span class="compareFact none">比較元の作品情報を取得できませんでした</span></div>'}
-}
-function detectedThemeKeys(movie){
- const text=((movie?.overview||"")+" "+(movie?.title||"")).toLowerCase();
- const defs={
-  memory:["記憶","memory","忘れ"],family:["家族","父","母","親","娘","息子","family"],violence:["戦争","暴力","殺人","犯罪","war","crime"],
-  technology:["ai","人工知能","技術","technology","sns"],love:["恋","愛","romance","love"],time:["時間","time","未来","過去"],
-  loneliness:["孤独","孤立","lonely","alone"],work:["仕事","会社","企業","職場","office","company"],dream:["夢","dream","幻想","幻"]
- };
- return Object.entries(defs).filter(([,keys])=>keys.some(k=>text.includes(k))).map(([key])=>key)
-}
-function relatedGroups(m,dna,related){
- const genreMap=new Map((dna.genres||[]).map(g=>[Number(g.id),g.name]));
- const myThemes=new Set(detectedThemeKeys(m)),myYear=Number(m.year||0),groups={sameTheme:[],sameGenre:[],sameEra:[],other:[]};
- related.forEach(x=>{
-   const sharedThemes=detectedThemeKeys(x).filter(k=>myThemes.has(k));
-   const shared=(x.genre_ids||[]).map(id=>genreMap.get(Number(id))).filter(Boolean),otherYear=Number(x.year||0);
-   if(sharedThemes.length)groups.sameTheme.push({...x,_reason:"共通テーマ："+sharedThemes.slice(0,2).map(k=>THEME_LABELS[k]||k).join(" × ")});
-   else if(shared.length)groups.sameGenre.push({...x,_reason:"共通ジャンル："+shared.slice(0,2).join(" × ")});
-   else if(myYear&&otherYear&&Math.abs(myYear-otherYear)<=5)groups.sameEra.push({...x,_reason:"近い時代："+otherYear+"年"});
-   else groups.other.push({...x,_reason:"TMDB関連作品"});
- });
- return [
-   ["同じテーマで比べる",groups.sameTheme.slice(0,6)],
-   ["同じジャンルから比べる",groups.sameGenre.slice(0,6)],
-   ["同じ時代から比べる",groups.sameEra.slice(0,6)],
-   ["別方向へ広げる",groups.other.slice(0,6)]
- ].filter(x=>x[1].length);
-}
-function relatedHtml(m,dna,related){
- const directorWorks=(m.director_works||[]).slice(0,6).map(x=>({...x,_reason:"同じ監督："+(m.director||((dna.directors||[])[0]?.name)||"")}));
- const directorIds=new Set(directorWorks.map(x=>String(x.tmdbId||x.id)));
- const groups=[...(directorWorks.length?[["同じ監督を辿る",directorWorks]]:[]),...relatedGroups(m,dna,related.filter(x=>!directorIds.has(String(x.tmdbId||x.id))))];
- return groups.map(g=>'<div class="relatedGroup"><div class="relatedGroupTitle">'+E(g[0])+'</div><div class="works">'+g[1].map(x=>'<a class="work" data-related-id="'+E(x.tmdbId||x.id)+'" href="critic.html?id='+encodeURIComponent(x.tmdbId||x.id)+'&search='+encodeURIComponent(x.title||'')+'">'+(x.poster?'<img src="'+E(x.poster)+'">':'')+'<b>'+E(x.title)+'</b><small>'+E(x._reason)+'</small></a>').join("")+'</div></div>').join("");
-}
-const THEME_LABELS={memory:"記憶",family:"家族",violence:"暴力・正義",technology:"技術と人間",love:"愛・関係性",time:"時間",loneliness:"孤独",work:"仕事・役割",dream:"夢・幻想"};
-function lensValue(topic){return topic.kind==="THEME"&&topic.themeKey?"THEME:"+topic.themeKey:topic.kind}
-function lensBase(lens){return String(lens||"").startsWith("THEME:")?"THEME":String(lens||"")}
-function findLensTopic(ts,lens){
- if(!lens)return -1;
- if(String(lens).startsWith("THEME:")){const key=String(lens).slice(6);return ts.findIndex(t=>t.kind==="THEME"&&t.themeKey===key)}
- return ts.findIndex(t=>t.kind===lens)
-}
-function lensLabel(kind){
- if(String(kind||"").startsWith("THEME:"))return "テーマ："+(THEME_LABELS[String(kind).slice(6)]||"作品テーマ");
- return {IMAGE:"映像演出",STORY:"脚本・構造",PERFORMANCE:"演技・人物",SOUND:"音・音楽",AUTHOR:"作家論",HISTORY:"映画史・ジャンル",THEME:"テーマ解釈"}[kind]||"批評視点";
-}
-function topicContextHtml(m,x){
- const parts=[];
- if(m.director)parts.push('監督：'+m.director);
- if(m.year)parts.push(String(m.year)+'年');
- if((m.genres||[]).length)parts.push((m.genres||[]).slice(0,3).join(' / '));
- const base=parts.join(' · ');
- return '<div class="topicContext"><b>'+E(m.title)+'</b>を'+E(lensLabel(lensValue(x)))+'から読む。'+(base?' <span>'+E(base)+'</span>':'')+'</div>';
-}
-function criticJourneyHtml(){
- return '<div class="criticJourney"><div class="criticJourneyStep active" data-journey="topic"><strong>01 · 論点</strong><span>作品固有の問いを選ぶ</span></div><div class="criticJourneyStep" data-journey="human"><strong>02 · 人間の批評</strong><span>実際に誰がどう語るか</span></div><div class="criticJourneyStep" data-journey="deeper"><strong>03 · 次の映画へ</strong><span>作り手・比較作品へつなぐ</span></div></div>';
-}
-function setJourney(stage){
- const order={topic:0,human:1,deeper:2},n=order[stage]??0;
- document.querySelectorAll('[data-journey]').forEach((el,i)=>el.classList.toggle('active',i<=n));
-}
-function nextLinksHtml(m,x,dna,related){
- const links=[];
- const roleMap={IMAGE:['撮影',dna.cinematography],STORY:['脚本',dna.writers],PERFORMANCE:['出演',dna.cast],SOUND:['音楽',dna.music],AUTHOR:['監督',dna.directors],HISTORY:['監督',dna.directors],THEME:['脚本',dna.writers]};
- const hit=roleMap[lensBase(x.kind)],people=hit&&Array.isArray(hit[1])?hit[1].filter(Boolean):[];
- if(people.length){const person=people[0];links.push('<a href="discover.html?person='+encodeURIComponent(person.id)+'&role='+encodeURIComponent(hit[0])+'&name='+encodeURIComponent(person.name)+'&fromId='+encodeURIComponent(m.tmdbId||m.id||'')+'&from='+encodeURIComponent(m.title||'')+'"><b>'+E(hit[0]+'：'+person.name)+'</b><span>この論点を作り手の他作品へ広げる</span></a>')}
- if(related&&related.length){const r=related[0];links.push('<a href="critic.html?id='+encodeURIComponent(r.tmdbId||r.id||'')+'&search='+encodeURIComponent(r.title||'')+'&lens='+encodeURIComponent(lensValue(x))+'&from='+encodeURIComponent(m.title||'')+'&fromId='+encodeURIComponent(m.tmdbId||m.id||'')+'"><b>'+E(r.title)+'</b><span>同じ視点を別作品で比較する</span></a>')}
- return links.length?'<div class="criticNext">'+links.join('')+'</div>':'';
-}
-function topicMapHtml(ts){
- const rows=ts.map((x,i)=>({x,i,lens:lensBase(lensValue(x)),label:lensLabel(lensValue(x))})),theme=rows.filter(o=>o.x.kind==="THEME"),craft=rows.filter(o=>o.x.kind!=="THEME");
- const lensOrder=["ALL","THEME","IMAGE","STORY","PERFORMANCE","SOUND","AUTHOR","HISTORY"],present=new Set(rows.map(o=>o.lens));
- const lensName={ALL:"すべて",THEME:"テーマ",IMAGE:"映像",STORY:"脚本",PERFORMANCE:"演技",SOUND:"音",AUTHOR:"作家論",HISTORY:"映画史"};
- const buttons=lensOrder.filter(k=>k==="ALL"||present.has(k)).map((k,i)=>'<button type="button" class="criticLensBtn '+(i===0?'active':'')+'" data-critic-lens="'+k+'">'+lensName[k]+'</button>').join("");
- const block=(label,group)=>group.length?'<section class="topicSection" data-topic-section><div class="topicSectionLabel">'+label+'</div><div class="topics">'+group.map(o=>'<button class="topic" data-topic="'+o.i+'" data-lens="'+o.lens+'" data-lens-label="'+E(o.label)+'"><b>'+E(o.x.title)+'</b><span>'+E(o.x.hint)+'</span></button>').join("")+'</div></section>':"";
- return '<div class="criticMapIntro"><b>批評の入口を選ぶ</b><span>'+rows.length+'の論点</span></div><div class="criticLensBar" aria-label="批評視点">'+buttons+'</div><div class="topicSections">'+block("この作品から生まれる論点",theme)+block("映画の作りから見る論点",craft)+'</div><div class="criticMapEmpty" data-critic-empty>この視点の論点はまだありません。</div>'
-}
-function bindCriticLensFilters(){
- const buttons=[...document.querySelectorAll('[data-critic-lens]')],topics=[...document.querySelectorAll('[data-topic][data-lens]')],sections=[...document.querySelectorAll('[data-topic-section]')],empty=document.querySelector('[data-critic-empty]');
- buttons.forEach(btn=>btn.onclick=()=>{
-  const lens=btn.dataset.criticLens;buttons.forEach(b=>b.classList.toggle('active',b===btn));
-  topics.forEach(t=>t.hidden=lens!=="ALL"&&t.dataset.lens!==lens);
-  sections.forEach(sec=>sec.hidden=!sec.querySelector('[data-topic]:not([hidden])'));
-  if(empty)empty.classList.toggle('show',!topics.some(t=>!t.hidden));
- });
-}
-function render(m){
- const compareParams=new URLSearchParams(location.search),incomingLens=compareParams.get("lens"),fromTitle=compareParams.get("from"),fromId=compareParams.get("fromId"),creatorName=compareParams.get("creator"),creatorRole=compareParams.get("role"),creatorPerson=compareParams.get("person");
- const back=document.querySelector(".back");if(back){const bp=new URLSearchParams({id:String(m.tmdbId||m.id||""),search:m.title||""});if(creatorName)bp.set("creator",creatorName);if(creatorRole)bp.set("role",creatorRole);if(creatorPerson)bp.set("person",creatorPerson);back.href="search.html?"+bp.toString()}
- const dna=m.dna||{};dna.__movieId=m.tmdbId||m.id||"";dna.__movieTitle=m.title||"";const ts=topics(m,dna),key="cinemap-critic-unlocked-"+String(m.tmdbId||m.id||m.title),unlocked=sessionStorage.getItem(key)==="yes",related=m.related||[];
- const dnaRows=[["監督",dna.directors],["脚本",dna.writers],["撮影",dna.cinematography],["音楽",dna.music],["編集",dna.editing]].filter(x=>x[1]?.length);
- app.className="";
- const incomingTopicIndex=findLensTopic(ts,incomingLens),incomingThemeMissing=String(incomingLens||"").startsWith("THEME:")&&incomingTopicIndex<0;app.innerHTML='<section class="hero"><div class="eyebrow">CINEMAP · CRITIC MAP</div><div class="heroGrid">'+(m.poster?'<img class="poster" src="'+E(m.poster)+'">':'<div class="poster"></div>')+'<div><h1>'+E(m.title)+'</h1><div class="meta">'+E(m.year||"")+(m.director?' · '+E(m.director):'')+'</div><p class="lead">点数ではなく、論点と実際の人間の批評からこの映画を掘る。</p>'+(incomingLens?'<div class="compareContext"><strong>'+(fromTitle?E(fromTitle)+" から引き継いだ比較視点":"前の作品から引き継いだ比較視点")+'</strong><span>'+E(lensLabel(incomingLens))+(incomingThemeMissing?'は、この作品の概要からは同じテーマとして検出されませんでした。':'でこの作品も見ます。')+'</span>'+(incomingThemeMissing?'':'<div class="comparePrompt">'+E(lensPrompt(incomingLens,m,dna))+'</div>')+(fromId?'<div class="compareBoard" data-compare-board><span class="meta">比較情報を読み込み中…</span></div>':'')+(fromId?'<a href="critic.html?id='+encodeURIComponent(fromId)+'&lens='+encodeURIComponent(incomingLens)+'" style="display:inline-block;margin-top:8px;font-size:9px;color:#aaa">比較元の作品へ戻る →</a>':'')+'</div>':'')+'</div></div></section>'+(!unlocked?'<div class="gate" id="gate"><strong>ここから先は観た後に</strong><p>批評・考察には重要な展開や結末に触れる内容が含まれる可能性があります。</p><button id="unlock">観たのでCritic Mapを開く</button></div>':'')+'<div id="body" class="body '+(unlocked?'':'locked')+'"><div class="flow"><div class="flowStep"><strong>01 論点</strong><span>作品固有の問いを選ぶ</span></div><div class="flowStep"><strong>02 人間の批評</strong><span>誰がどう語るかを見る</span></div><div class="flowStep"><strong>03 Movie DNA</strong><span>作り手・技法へ潜る</span></div><div class="flowStep"><strong>04 関連作品</strong><span>別の映画と比較する</span></div></div><div class="lead">気になる論点を選ぶと、その論点を実際に語る人間の批評へ進めます。</div>'+criticJourneyHtml()+topicMapHtml(ts)+'<div class="panel" id="panel"></div><details class="deep"><summary>作り手・関連作品へ広げる</summary>'+(dnaRows.length?'<div class="dna">'+dnaHtmlForRows(dnaRows,m)+'</div>':'')+((related.length||(m.director_works||[]).length)?'<div class="relatedGroups">'+relatedHtml(m,dna,related)+'</div>':'')+'</details></div>';
- bindCriticLensFilters();
- if(incomingLens&&fromId)hydrateComparison(fromId,m,incomingLens);
- const unlock=document.getElementById("unlock");if(unlock)unlock.onclick=()=>{sessionStorage.setItem(key,"yes");document.getElementById("gate").remove();document.getElementById("body").classList.remove("locked");const paramsNow=new URLSearchParams(location.search),topicParam=paramsNow.get("topic"),lensParam=paramsNow.get("lens");if(topicParam||lensParam){let idx=-1;if(topicParam){const rawIndex=Number(String(topicParam).split("-").pop());idx=Number.isInteger(rawIndex)&&rawIndex>=0&&rawIndex<ts.length?rawIndex:ts.findIndex(t=>t.kind===topicParam)}if(idx<0&&lensParam)idx=findLensTopic(ts,lensParam);const btn=idx>=0?document.querySelector('[data-topic="'+idx+'"]'):null;if(btn)btn.click()}};
- document.querySelectorAll("[data-topic]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-topic]").forEach(z=>z.classList.toggle("active",z===b));const topicIndex=+b.dataset.topic,x=ts[topicIndex],selectedLens=lensValue(x),url=new URL(location.href);url.searchParams.set("topic",x.kind+"-"+topicIndex);url.searchParams.set("lens",selectedLens);history.replaceState(null,"",url);document.querySelectorAll("[data-related-id]").forEach(a=>{{const rp=new URLSearchParams({id:String(a.dataset.relatedId),search:(a.querySelector("b")?.textContent||""),lens:selectedLens,from:m.title||"",fromId:String(m.tmdbId||m.id||"")});if(creatorName)rp.set("creator",creatorName);if(creatorRole)rp.set("role",creatorRole);if(creatorPerson)rp.set("person",creatorPerson);a.href="critic.html?"+rp.toString()};const s=a.querySelector("small");if(s&&!s.dataset.base){s.dataset.base=s.textContent||""}if(s)s.textContent=(s.dataset.base?s.dataset.base+" · ":"")+"同じ視点："+lensLabel(selectedLens)});const panel=document.getElementById("panel");setJourney('topic');panel.innerHTML='<div class="question">'+E(x.q)+'</div>'+topicContextHtml(m,x)+creatorFocusHtml(x.kind,dna)+'<div class="shareRow"><button type="button" class="shareBtn" data-share>この論点を共有</button></div>'+humanHtml()+'<details class="guide"><summary>Cinemapの補助視点を見る</summary><div class="guideGrid"><div class="guideCell"><strong>別の読み</strong>'+E(x.counter)+'</div><div class="guideCell"><strong>見直すポイント</strong>'+E(x.inspect)+'</div></div></details>'+nextLinksHtml(m,x,dna,related);panel.classList.add("show");const accept=panel.querySelector("[data-accept]"),load=panel.querySelector("[data-load]");if(accept)accept.onclick=()=>{const cb=panel.querySelector("[data-consent]");if(!cb?.checked)return;localStorage.setItem("cinemap-youtube-policy-consent","yes");panel.querySelector(".human").outerHTML=humanHtml();const n=panel.querySelector("[data-load]");if(n)n.onclick=()=>{setJourney('human');loadVideos(panel,m,x)};setJourney('human');loadVideos(panel,m,x)};if(load)load.onclick=()=>{setJourney('human');loadVideos(panel,m,x)};const share=panel.querySelector("[data-share]");if(share)share.onclick=async()=>{const link=location.href;try{if(navigator.share)await navigator.share({title:m.title+" · Critic Map",url:link});else await navigator.clipboard.writeText(link)}catch{}}});const paramsNow=new URLSearchParams(location.search),topicParam=paramsNow.get("topic"),lensParam=paramsNow.get("lens");if(unlocked&&(topicParam||lensParam)){let idx=-1;if(topicParam){const rawIndex=Number(String(topicParam).split("-").pop());idx=Number.isInteger(rawIndex)&&rawIndex>=0&&rawIndex<ts.length?rawIndex:ts.findIndex(t=>t.kind===topicParam)}if(idx<0&&lensParam)idx=findLensTopic(ts,lensParam);const btn=idx>=0?document.querySelector('[data-topic="'+idx+'"]'):null;if(btn)btn.click()}
-}
-function withTimeout(promise,ms=9000,message="読み込みがタイムアウトしました"){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))])}
-async function fetchCriticMovie(id,title=""){
- if(id){try{const r=await withTimeout(fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"}),9000);if(r.ok){const d=await r.json();if(d.movie)return d.movie}}catch{}}
- if(title){try{const r=await withTimeout(fetch(API+"/api/movies?q="+encodeURIComponent(title)+"&limit=8",{cache:"no-store"}),9000);if(r.ok){const d=await r.json(),rows=[...(d.movies||[]),...(d.external||[])],n=String(title).toLowerCase().normalize("NFKC"),hit=rows.find(x=>String(x.title||"").toLowerCase().normalize("NFKC")===n)||rows.find(x=>String(x.original_title||"").toLowerCase().normalize("NFKC")===n)||rows[0];if(hit){const rid=hit.tmdbId||hit.id;if(rid&&String(rid)!==String(id)){try{const r2=await withTimeout(fetch(API+"/api/movie-detail?id="+encodeURIComponent(rid),{cache:"no-store"}),9000);if(r2.ok){const d2=await r2.json();if(d2.movie)return d2.movie}}catch{}}return hit}}}catch{}}
- return null
-}
-(async function loadCriticPage(){const p=new URLSearchParams(location.search),id=p.get("id"),title=p.get("search")||p.get("title")||p.get("from")||"";app.innerHTML='<div class="status">作品を読み込み中…</div>';try{const movie=await withTimeout(fetchCriticMovie(id,title),10000);if(movie){const back=document.getElementById("detailBack"),mid=movie.tmdbId||movie.id||id;if(back)back.href="search.html?"+new URLSearchParams({id:String(mid||""),search:movie.title||title}).toString();render(movie);return}throw new Error("movie not found")}catch(e){const timed=String(e&&e.message||"").includes("タイムアウト");app.innerHTML='<div class="status">'+(timed?'読み込みがタイムアウトしました。':'作品情報を取得できませんでした。')+'<br><button type="button" data-retry-movie style="margin-top:12px;padding:9px 12px;border:0;border-radius:8px;font-weight:800">再試行</button><br><a href="search.html?search='+encodeURIComponent(title)+'" style="display:inline-block;margin-top:12px;color:#ddd">作品検索へ戻る →</a></div>';const retry=app.querySelector("[data-retry-movie]");if(retry)retry.onclick=loadCriticPage}})();
-</script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const o=()=>{d.classList.add("show");m.classList.add("show")},q=()=>{d.classList.remove("show");m.classList.remove("show")};b.onclick=o;m.onclick=q;if(x)x.onclick=q;document.addEventListener("keydown",e=>{if(e.key==="Escape")q()})})();</script>
-<div style="text-align:center;color:#666;font-size:10px;padding:20px">Cinemap Critic Map v3.6</div>
-</body></html>
+load();
+const b=document.getElementById('gMenuBtn'),d=document.getElementById('gDrawer'),mask=document.getElementById('gDrawerMask');b.onclick=()=>{d.classList.add('show');mask.classList.add('show')};document.getElementById('gDrawerClose').onclick=mask.onclick=()=>{d.classList.remove('show');mask.classList.remove('show')};
+</script></body></html>

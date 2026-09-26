@@ -13,24 +13,22 @@ my=read("my-cinemap.html")
 discover=read("discover.html")
 
 checks={
- "critic semantic theme lens":(critic,["themeKey:","lensValue(","findLensTopic(","同じテーマで比べる"]),
- "critic grouped map":(critic,["この作品から生まれる論点","映画の作りから見る論点"]),
- "critic creator cycle":(critic,["同じ監督を辿る","discover.html?person="]),
- "critic comparison cycle":(critic,["data-related-id","fromId","同じ視点："]),
- "search standalone critic entry":(search,["Critic Mapで深掘る","critic.html?id="]),
- "calendar deep dive":(index,["Critic Mapを開く","作品詳細・Movie DNAへ"]),
+ "critic evidence view":(critic,["js/critic-evidence.js","批評の傾向","出典を見る","sessionStorage"]),
+ "critic movie detail link":(critic,["作品情報・映画DNAへ戻る","search.html?id="]),
+ "search standalone critic entry":(search,["批評の傾向と出典を見る","critic.html?id="]),
+ "calendar deep dive":(index,["批評の傾向を見る","作品詳細・Movie DNAへ"]),
  "ranking internal detail":(rankings,["Cinemapで深掘る","search.html?id="]),
  "my cinemap deep dive":(my,["critic.html?id=","search.html?id="]),
- "creator origin cycle":(discover,["元の作品のCritic Mapへ戻る","MOVIE DNA · CREATOR PATH"]),
+ "creator origin cycle":(discover,["元の作品の批評へ戻る","MOVIE DNA · CREATOR PATH"]),
 }
 for name,(body,needles) in checks.items():
     for needle in needles:
         if needle not in body:
             errors.append(f"{name} missing: {needle}")
 
-# Keep the full Critic Map in one place only.
-if "criticMap" in search and "criticPreview" not in search:
-    errors.append("Search movie detail still owns the full Critic Map instead of previewing standalone Critic Map")
+# The work page must not infer actual critical opinions from metadata.
+if "criticTopics(" in critic or "criticTopics(" in search:
+    errors.append("Criticism must not be inferred from synopsis or movie metadata")
 
 if errors:
     print("Cinemap core journey gate failed:")

@@ -11,23 +11,12 @@ elif youtube.get("mode") != "disabled":
     errors.append("youtube_api must remain disabled until production compliance review and activation")
 
 route = (ROOT / "backend" / "app" / "api" / "critic-videos" / "route.ts").read_text(encoding="utf-8")
-for required in ["YOUTUBE_API_KEY", "YOUTUBE_CRITIC_ENABLED", 'process.env.YOUTUBE_CRITIC_ENABLED==="true"', "youtube/v3/search", "Cache-Control", "no-store"]:
-    if required not in route:
-        errors.append(f"critic-videos route missing safety requirement: {required}")
+if "status:410" not in route or "youtube/v3/search" in route or "fetch(" in route:
+    errors.append("retired critic-video route must not call external services")
 
 search = (ROOT / "search.html").read_text(encoding="utf-8")
-for required in [
-    "developers.google.com/static/youtube/images/youtube-logos-2x.png",
-    "Cinemap独自の視点分類",
-    "privacy.html",
-    "terms.html",
-    "https://www.youtube.com/t/terms",
-]:
-    if required not in search:
-        errors.append(f"search.html missing Critic Map disclosure: {required}")
-
-if "videos.sort(" in search:
-    errors.append("search.html must not locally reorder YouTube API search results")
+if "批評の傾向と出典を見る" not in search or "criticTopics(" in search:
+    errors.append("movie detail must link to evidence without generated topics")
 
 # Screening-format recommendation v2 regression gates, including source scoping.
 for required in [
@@ -61,24 +50,11 @@ else:
                     errors.append(f"screening evidence source missing format scope: {key} / {src.get('label','source')}")
 
 critic = (ROOT / "critic.html").read_text(encoding="utf-8")
-for required in [
-    "developers.google.com/static/youtube/images/youtube-logos-2x.png",
-    "Cinemap独自",
-    "Cinemap独自の絞り込み・分類",
-    "privacy.html",
-    "terms.html",
-    "https://www.youtube.com/t/terms",
-    "https://www.youtube.com/",
-    "観たのでCritic Mapを開く",
-    "同じ視点：",
-]:
+for required in ["js/critic-evidence.js", "data/critic_evidence.json", "批評の傾向", "評価されている点", "意見が分かれる点", "賛否の傾向", "出典を見る", "観たので批評を見る", "sessionStorage"]:
     if required not in critic:
-        errors.append(f"critic.html missing Critic Map requirement: {required}")
-if "videos.sort(" in critic:
-    errors.append("critic.html must not locally reorder YouTube API search results")
-for required in ["function withTimeout(", "data-retry-movie", "読み込みがタイムアウトしました"]:
-    if required not in critic:
-        errors.append(f"critic.html missing resilient movie-loading requirement: {required}")
+        errors.append(f"critic.html missing evidence presentation: {required}")
+if "/api/critic-videos" in critic or "topics(m,dna)" in critic:
+    errors.append("critic.html must not infer criticism from movie metadata or live search")
 
 privacy = (ROOT / "privacy.html").read_text(encoding="utf-8")
 for required in ["YouTube API Services", "https://www.youtube.com/t/terms", "https://policies.google.com/privacy"]:
@@ -96,4 +72,4 @@ if errors:
     sys.exit(1)
 
 print("Critic Map compliance check passed.")
-print("YouTube critic integration remains gated and disabled by default.")
+print("Live critic searches are retired; editorial evidence only.")

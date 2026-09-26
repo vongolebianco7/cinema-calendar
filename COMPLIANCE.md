@@ -126,17 +126,11 @@ Production CINEMAP must not require OpenAI or another paid generative-AI API. Th
 Do not embed third-party movie posters or other copyrighted artwork in user-generated social export images unless redistribution rights for that exact use have been verified. In-app reference/display and export/republication are treated as separate uses.
 
 
-## YouTube / Critic Map
-CRITIC MAP may use YouTube Data API v3 only when the production compliance gate is explicitly enabled.
+## 批評の出典と費用
 
-Requirements:
-- Use only documented YouTube API Services. Do not scrape YouTube pages.
-- Keep `YOUTUBE_CRITIC_ENABLED=false` until privacy, terms, attribution, credential handling, display, and storage requirements are reviewed.
-- Keep the API key server-side and out of frontend code and repository history.
-- Do not download, transcribe, cache, or store audiovisual content through CINEMAP.
-- Do not locally reorder YouTube API search results. CINEMAP-owned filters and classifications must be visually distinguished from YouTube-provided data.
-- Label YouTube as the source near YouTube-derived results.
-- Keep Privacy, CINEMAP Terms, YouTube Terms, and Google Privacy links available before enabling the feature.
-- Responses containing YouTube API data must use `Cache-Control: private, no-store`.
-- CRITIC MAP must remain behind an explicit post-viewing spoiler gate. Deep links must not bypass that gate.
-- Any production activation requires a fresh compliance review and a successful `scripts/check_critic_map.py` run.
+- 作品批評は `data/critic_evidence.json` に登録された確認済み出典の短い独自要約のみ表示する。原文、全文、引用、動画本文、コメント、サムネイルは収集・再掲しない。
+- あらすじ・作品タイトル・メタデータ・動画タイトルから批評を推測しない。AIを編集補助に使う場合も、担当者が各出典を手動で確認し、要約と出典IDをレビューしてから静的JSONを更新する。サイト利用者の操作で生成AIは起動しない。
+- 出典は利用条件を個別に確認し、許容される場合に限りリンクを登録する。サイトへの自動巡回やスクレイピングは行わない。
+- 総評は異なる出典3件以上、評価点は2件以上、対立点は両側の出典が必要。割合は個別判定した出典10件以上に限り、母数を明記する。出典不足時は情報不足を表示する。
+- YouTube検索エンドポイントは廃止し、410のみ返す。YouTube APIや有料APIへの利用者起点のアクセスはない。新しい外部サービス・課金可能なサービスは導入しない。
+- 批評の静的データはGitHub Pagesで配布し、同一データを毎回外部サイトから取得しない。

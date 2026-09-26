@@ -1,4 +1,4 @@
-name: One-shot Critic Map polish
+name: One-shot Cinemap final polish
 on:
   push:
     paths:
@@ -10,29 +10,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply Critic Map polish
-        run: python scripts/critic_polish_once.py
+      - name: Apply final detail polish
+        run: python scripts/final_user_polish_once.py
       - name: Syntax check
         run: |
           python - <<'PY'
           from pathlib import Path
           import re, subprocess, tempfile, sys
-          text=Path('critic.html').read_text(encoding='utf-8')
-          for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,re.S|re.I)):
-              if not script.strip():
-                  continue
-              p=Path(tempfile.gettempdir())/f'critic-{i}.js'
-              p.write_text(script,encoding='utf-8')
-              r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
-              if r.returncode:
-                  print(r.stderr)
-                  sys.exit(1)
-          print('critic syntax ok')
+          for html in ['index.html','discover.html']:
+              text=Path(html).read_text(encoding='utf-8')
+              for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,re.S|re.I)):
+                  if not script.strip():
+                      continue
+                  p=Path(tempfile.gettempdir())/f'{Path(html).stem}-{i}.js'
+                  p.write_text(script,encoding='utf-8')
+                  r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+                  if r.returncode:
+                      print(html,r.stderr)
+                      sys.exit(1)
+          print('syntax ok')
           PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add critic.html
-          git commit -m "Simplify and harden Critic Map [critic-polish-done]"
+          git add index.html discover.html
+          git commit -m "Integrate viewing timeline and format recommendations [final-polish-done]"
           git push

@@ -15,6 +15,12 @@ on:
       - "scripts/check_discovery_ui.py"
       - "scripts/check_core_journey.py"
       - "scripts/check_critic_map.py"
+      - "tests/test_brand_identity.py"
+      - "manifest.webmanifest"
+      - "favicon.svg"
+      - "apple-touch-icon.png"
+      - "icon-192.png"
+      - "icon-512.png"
       - ".github/workflows/validate-frontend.yml"
   pull_request:
     paths:
@@ -29,6 +35,12 @@ on:
       - "scripts/check_sources.py"
       - "scripts/check_discovery_ui.py"
       - "scripts/check_critic_map.py"
+      - "tests/test_brand_identity.py"
+      - "manifest.webmanifest"
+      - "favicon.svg"
+      - "apple-touch-icon.png"
+      - "icon-192.png"
+      - "icon-512.png"
       - ".github/workflows/validate-frontend.yml"
   workflow_dispatch:
 
@@ -67,6 +79,8 @@ jobs:
               sys.exit(1)
           print("All inline JavaScript syntax checks passed.")
           PY
+      - name: Check Cinemap brand identity
+        run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources
         run: python scripts/check_sources.py
       - name: Check discovery UI integrations

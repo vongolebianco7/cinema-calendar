@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updated": "2026-09-26",
   "source_policy": "official-first; unknown when unverified",
   "trait_policy": "cinematic traits are descriptive metadata, not manual format scores",
@@ -218,6 +218,70 @@
         {
           "label": "IMAX — Disclosure Day",
           "url": "https://www.imax.com/movie/disclosure-day",
+          "formats": ["imax"]
+        }
+      ]
+    },
+    "The Odyssey|2026": {
+      "imax_camera": "imax_film",
+      "imax_expanded_ratio": "1.43",
+      "filmed_for_imax": true,
+      "imax_dmr_only": false,
+      "official_imax_release": true,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 5,
+        "motion": 4,
+        "physical": 4,
+        "setpiece": 5,
+        "visual": 5,
+        "audio": 5,
+        "contemplative": 2,
+        "framing": 2,
+        "lateral": 4
+      },
+      "director_or_dp_intent": "全編をIMAXフィルムカメラで撮影。IMAX 70mmでは1.43:1の大判画面を前提とする作品。",
+      "sources": [
+        {
+          "label": "IMAX — The Odyssey now playing",
+          "url": "https://www.imax.com/news/now-playing-the-odyssey",
+          "formats": ["imax"]
+        },
+        {
+          "label": "IMAX — The Odyssey 1.43:1",
+          "url": "https://www.imax.com/news/gift-with-purchase-the-odyssey-1-43-1-aspect-ratio-poster",
+          "formats": ["imax"]
+        }
+      ]
+    },
+    "オデュッセイア|2026": {
+      "imax_camera": "imax_film",
+      "imax_expanded_ratio": "1.43",
+      "filmed_for_imax": true,
+      "imax_dmr_only": false,
+      "official_imax_release": true,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 5,
+        "motion": 4,
+        "physical": 4,
+        "setpiece": 5,
+        "visual": 5,
+        "audio": 5,
+        "contemplative": 2,
+        "framing": 2,
+        "lateral": 4
+      },
+      "director_or_dp_intent": "全編をIMAXフィルムカメラで撮影。IMAX 70mmでは1.43:1の大判画面を前提とする作品。",
+      "sources": [
+        {
+          "label": "IMAX — The Odyssey now playing",
+          "url": "https://www.imax.com/news/now-playing-the-odyssey",
+          "formats": ["imax"]
+        },
+        {
+          "label": "IMAX — The Odyssey 1.43:1",
+          "url": "https://www.imax.com/news/gift-with-purchase-the-odyssey-1-43-1-aspect-ratio-poster",
           "formats": ["imax"]
         }
       ]

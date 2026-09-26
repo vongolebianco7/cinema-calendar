@@ -49,79 +49,94 @@
 </style>
 
 <style id="cinemap-outline-brand-v2">
-/* Approved B concept: Outline Tile + editorial serif wordmark. No external font request. */
+/* Approved B concept: horizontal Outline Tile + premium editorial serif wordmark. */
 .gBrand{
   display:inline-flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
   align-items:center!important;
-  gap:9px!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
   flex:0 0 auto;
-  min-width:0;
-  color:#f4efe5!important;
+  min-width:max-content;
+  color:#f5efe5!important;
   text-decoration:none!important;
+  white-space:nowrap!important;
 }
 .gBrandTile{
   position:relative;
   display:block;
-  width:31px;
-  height:31px;
-  flex:0 0 31px;
-  border:1px solid rgba(216,208,195,.82);
+  width:30px;
+  height:30px;
+  flex:0 0 30px;
+  border:1px solid rgba(235,227,214,.88);
   border-radius:8px;
-  background:rgba(255,255,255,.015);
+  background:rgba(255,255,255,.012);
   overflow:hidden;
-  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.025);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.035);
 }
 .gBrandGlyph{
   position:absolute;
   left:5px;
-  top:1px;
+  top:0;
   z-index:2;
-  color:#f7f1e7;
-  font-family:Baskerville,"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
-  font-size:24px;
-  font-weight:400;
+  color:#fbf6ed;
+  font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
+  font-size:23px;
+  font-weight:500;
   line-height:29px;
-  letter-spacing:-.05em;
+  letter-spacing:-.055em;
 }
 .gBrandBeam{
   position:absolute;
   z-index:1;
-  left:15px;
-  top:7px;
-  width:17px;
-  height:17px;
-  background:linear-gradient(90deg,rgba(240,222,190,.32),rgba(214,190,150,.08) 62%,rgba(214,190,150,0));
+  left:14px;
+  top:6px;
+  width:18px;
+  height:18px;
+  background:linear-gradient(90deg,rgba(255,238,204,.78) 0%,rgba(239,211,162,.42) 42%,rgba(222,187,131,.10) 76%,rgba(222,187,131,0) 100%);
   clip-path:polygon(0 38%,100% 5%,100% 95%,0 62%);
-  filter:blur(.15px);
+  filter:blur(.1px);
+  opacity:.96;
 }
-.gBrandWords{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1}
+.gBrandWords{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  min-width:0;
+  line-height:1;
+  white-space:nowrap;
+}
 .gBrandName{
-  color:#f4efe5;
-  font-family:Baskerville,"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
-  font-size:23px;
-  font-weight:400;
-  line-height:.9;
-  letter-spacing:.005em;
+  color:#f5efe5;
+  font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
+  font-size:24px;
+  font-weight:500;
+  line-height:.86;
+  letter-spacing:-.018em;
   white-space:nowrap;
   text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
 }
 .gBrandTagline{
   margin-top:5px;
   padding-left:1px;
-  color:#bfb3a1;
+  color:#cbbca6;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.5px;
-  font-weight:560;
+  font-size:5.4px;
+  font-weight:600;
   line-height:1;
-  letter-spacing:.28em;
+  letter-spacing:.27em;
   white-space:nowrap;
 }
 @media(max-width:430px){
-  .gBrand{gap:7px!important}
-  .gBrandTile{width:29px;height:29px;flex-basis:29px;border-radius:7px}
+  .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important;min-width:max-content}
+  .gBrandTile{width:29px;height:29px;flex:0 0 29px;border-radius:7px}
   .gBrandGlyph{left:5px;top:0;font-size:22px;line-height:28px}
-  .gBrandBeam{left:14px;top:7px;width:16px;height:15px}
-  .gBrandName{font-size:20px}
+  .gBrandBeam{left:13px;top:6px;width:17px;height:17px;opacity:1}
+  .gBrandWords{flex-direction:column!important;white-space:nowrap!important}
+  .gBrandName{font-size:21px;line-height:.86;letter-spacing:-.018em}
   .gBrandTagline{font-size:4.9px;letter-spacing:.21em;margin-top:4px}
 }
 </style>

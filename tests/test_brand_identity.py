@@ -24,6 +24,11 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
+            # Both the visible header and drawer must use the horizontal gBrand flex lockup.
+            lockup = '<a class="gBrand" href="index.html"><span class="gBrandTile"'
+            self.assertGreaterEqual(text.count(lockup), 2, page)
+            self.assertNotIn('<a href="index.html"><span class="gBrandTile"', text, page)
+
     def test_my_cinemap_export_uses_current_outline_tile_brand(self):
         text = (ROOT / "js/my-cinemap-art.js").read_text(encoding="utf-8")
         self.assertIn("function drawBrand", text)

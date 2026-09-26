@@ -29,6 +29,11 @@ for token in ['applyScreeningCapsV5','quietNarrative','isJapaneseRomance','x.key
     if token not in html:
         errors.append('missing quiet-film motion/ScreenX cap: '+token)
 
+# IMAX without verified expanded aspect ratio should be strongly downgraded.
+for token in ['x.key==="imax"','expandedRatioVerified','Math.min(x.score,2)']:
+    if token not in html:
+        errors.append('missing IMAX no-expanded-ratio cap: '+token)
+
 if errors:
     print('screening wording v5 failed')
     [print('-',e) for e in errors]

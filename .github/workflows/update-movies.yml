@@ -24,6 +24,14 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_movies.py
+      - name: Classify confirmed revival screenings
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/classify_revivals.py
+      - name: Add posters to Morning Ten screenings
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/enrich_special_screenings.py
       - name: Observe Japan streaming availability
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

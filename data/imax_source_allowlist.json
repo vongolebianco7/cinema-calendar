@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "collection_enabled": false,
+  "sources": [
+    {
+      "domain": "www.imax.com",
+      "purpose": "film-specific IMAX technical facts",
+      "source_class": "official_imax",
+      "reviewed_at": "2026-09-26",
+      "approved_for_automated_fetch": false,
+      "fetch_mode": "manual-review-only",
+      "minimum_interval_ms": 5000,
+      "notes": "Automation remains disabled until terms, robots directives and access policy are explicitly reviewed for the intended path."
+    },
+    {
+      "domain": "investors.imax.com",
+      "purpose": "official IMAX slate and investor materials",
+      "source_class": "official_imax_investor",
+      "reviewed_at": "2026-09-26",
+      "approved_for_automated_fetch": false,
+      "fetch_mode": "manual-review-only",
+      "minimum_interval_ms": 5000,
+      "notes": "No scheduled or automatic retrieval in this release."
+    }
+  ]
+}

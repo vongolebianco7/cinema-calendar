@@ -33,6 +33,9 @@ assert.equal(by(r,'imax').score,4,'Spider-Man: Brand New Day IMAX should be 4 wi
 r=score(movie('Disclosure Day',2026,{genres:['Science Fiction','Drama'],overview:'A Steven Spielberg event film built around large-scale science-fiction spectacle, cinematic scale and immersive sound.'}));
 assert.equal(by(r,'imax').score,4,'Disclosure Day IMAX should be 4 with verified official IMAX presentation plus strong scale/audio traits');
 
+r=score(movie('The Odyssey',2026,{genres:['Action','Adventure','Drama'],overview:'Christopher Nolan epic shot entirely on IMAX film cameras and presented in IMAX 70mm with an expansive large-format image.'}));
+assert.equal(by(r,'imax').score,5,'The Odyssey IMAX must be 5 because the film was shot entirely with IMAX film cameras and has 1.43:1 IMAX 70mm presentation');
+
 r=score(movie('Quiet Romance',2025,{genres:['Romance','Drama'],overview:'Two people talk quietly in small rooms and cafes.'}));
 assert.equal(by(r,'standard').score,4,'standard rises to 4 when no special format has a strong case');
 for(const key of ['imax','motion','screenx']) assert.ok(by(r,key).score>=2,'special formats must not drop below 2 merely from missing evidence');

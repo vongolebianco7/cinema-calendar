@@ -6,266 +6,40 @@
 <style>
 :root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#ef3f3f;--line:#2a2e37}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px}button,input{font:inherit}h1,h2,h3,.brand{font-family:inherit}
-.wrap{max-width:1180px;margin:auto;padding:0 18px}.top{position:sticky;top:0;z-index:20;background:rgba(11,12,16,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.nav{height:56px;display:flex;align-items:center;gap:12px}.menuBtn{margin-left:auto;width:38px;height:38px;border:0;background:transparent;color:var(--text);display:grid;place-items:center;padding:0}.menuLines,.menuLines:before,.menuLines:after{display:block;width:18px;height:1px;background:currentColor;content:""}.menuLines{position:relative}.menuLines:before{position:absolute;top:-6px}.menuLines:after{position:absolute;top:6px}.drawerMask{position:fixed;inset:0;background:#0008;z-index:80;display:none}.drawerMask.show{display:block}.drawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid var(--line);z-index:81;transform:translateX(100%);transition:.22s ease;padding:20px}.drawer.show{transform:translateX(0)}.drawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.drawerClose{width:38px;height:38px;border:0;border-radius:50%;background:var(--panel2);color:var(--text);font-size:22px}.drawer a{display:block;color:var(--text);text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:.04em;font-size:18px}.brandA{position:relative;display:inline-block}.brandA:after{content:"";position:absolute;width:0;height:0;border-top:3px solid transparent;border-bottom:3px solid transparent;border-left:5px solid var(--accent);left:50%;top:56%;transform:translate(-42%,-50%)}.nav a{color:var(--text);text-decoration:none;font-size:12px;font-weight:700}
-.hero{padding:28px 0 14px}.hero h1{font-size:clamp(28px,6vw,46px);line-height:1.05;margin:0 0 8px;font-weight:850}.hero p{color:var(--muted);max-width:720px;line-height:1.6}
+.wrap{max-width:1180px;margin:auto;padding:0 18px}.hero{padding:28px 0 14px}.hero h1{font-size:clamp(28px,6vw,46px);line-height:1.05;margin:0 0 8px;font-weight:850}.hero p{color:var(--muted);max-width:720px;line-height:1.6}
 .chips{display:flex;gap:8px;overflow:auto;padding:8px 0 16px;scrollbar-width:none}.chip{white-space:nowrap;word-break:keep-all;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:6px;padding:8px 11px;font-size:12px}.chip.active{background:var(--text);color:#111}
-.rankGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;color:inherit;text-decoration:none}.rankCard img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#222}.body{padding:9px}.no{color:var(--accent);font-weight:900;font-size:12px}.title{font-weight:750;font-size:13px;line-height:1.3;margin-top:3px}.meta{color:var(--muted);font-size:11px;margin-top:5px}.note{color:var(--muted);font-size:11px;line-height:1.5;margin:14px 0 24px}.moreWrap{text-align:center;margin:18px 0}.moreBtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:6px;padding:10px 20px;font-weight:800;display:none}.listRank{display:flex;flex-direction:column;gap:8px}.listRow{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:12px}.listNo{font-size:18px;font-weight:900;color:var(--accent)}.listTitle{font-weight:750;line-height:1.35}.listMeta{color:var(--muted);font-size:12px;text-align:right}.awardGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.awardCard{display:grid;grid-template-columns:76px 1fr;gap:10px;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--panel);min-width:0}.awardPoster{width:76px;aspect-ratio:2/3;object-fit:cover;background:#171717;border-radius:5px}.awardBody{min-width:0}.awardTitle{font-weight:800;line-height:1.35}.awardYear{display:inline-block;margin-top:5px;font-size:10px;font-weight:850;color:var(--accent)}.awardMeta{color:var(--muted);font-size:10px;line-height:1.45;margin-top:5px}.awardLinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}.awardLinks a{font-size:10px;color:#bbb}.olderEras{margin-top:8px;border:1px solid var(--line);border-radius:8px;background:#101010}.olderEras summary{cursor:pointer;padding:9px 11px;font-size:11px;font-weight:800;color:#aaa}.olderEras .chips{padding:0 9px 9px}.coverageWarn{border-left:3px solid #b68a3b;background:#201b12;padding:9px 10px;border-radius:6px;color:#d9c79e;font-size:10px;line-height:1.55;margin:8px 0 12px}@media(max-width:760px){.awardGrid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.awardGrid{grid-template-columns:1fr}}
-@media(max-width:760px){.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,1fr);gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}
-
-/* Cinemap visual pass */
-body{background:#090909}
-.panel,.movie,.dnaCard,.card,.rankCard{background:transparent!important;box-shadow:none!important}
-.panel,.movie,.dnaCard,.card,.rankCard{border-color:#272727!important;border-radius:6px!important}
-.hero{padding-top:22px}
-.hero h1{font-weight:750;letter-spacing:-.025em}
-.eyebrow{display:none}
-button,.primary,.secondary,.svc,.chip{border-radius:4px!important;box-shadow:none!important}
-.primary{background:#ef3f3f!important;color:#fff!important}
-.secondary,.svc,.chip{background:transparent!important}
-
-.brand{display:flex;align-items:center;text-decoration:none}
-.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
-.top .brandLogo{height:32px}
-@media(max-width:600px){.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.top .brandLogo{height:32px}}
-
-button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
-button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
-@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
-
-
-/* unified Cinemap header v2 */
-.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
-.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
-.gNav{height:62px;display:flex;align-items:center;gap:12px}
-.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
-
-.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
-.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
-.gSearch::placeholder{color:#777}
-.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
-.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
-.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
-.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
-.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
-.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
-.gDrawer.show{transform:translateX(0)}
-.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
-.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
-@media(max-width:600px){
- .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
- .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
- .gMenuBtn{width:36px}
-}
-
-
-
-
-.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
-
-/* ranking typography stability */
-.filterLabel,.chip,.title,.meta,.listTitle,.listMeta,.no,.listNo{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;font-synthesis:none;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
-.filterLabel{font-size:11px;font-weight:700;letter-spacing:.06em;color:#9ca3af;margin:5px 0 2px}.chip{font-weight:650;line-height:1.2}.rankCard,.listRow{transform:translateZ(0)}
+.rankGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;color:inherit;text-decoration:none;min-width:0}.rankCard img,.rankPosterPlaceholder{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#171717}.body{padding:9px}.no{color:var(--accent);font-weight:900;font-size:12px}.title{font-weight:750;font-size:13px;line-height:1.3;margin-top:3px}.meta{color:var(--muted);font-size:11px;margin-top:5px}.note{color:var(--muted);font-size:11px;line-height:1.5;margin:14px 0 24px}.moreWrap{text-align:center;margin:18px 0}.moreBtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:6px;padding:10px 20px;font-weight:800;display:none}.awardGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.awardCard{display:grid;grid-template-columns:76px 1fr;gap:10px;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--panel);min-width:0}.awardPoster{width:76px;aspect-ratio:2/3;object-fit:cover;background:#171717;border-radius:5px}.awardBody{min-width:0}.awardTitle{font-weight:800;line-height:1.35}.awardYear{display:inline-block;margin-top:5px;font-size:10px;font-weight:850;color:var(--accent)}.awardMeta{color:var(--muted);font-size:10px;line-height:1.45;margin-top:5px}.awardLinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}.awardLinks a{font-size:10px;color:#bbb}.olderEras{margin-top:8px;border:1px solid var(--line);border-radius:8px;background:#101010}.olderEras summary{cursor:pointer;padding:9px 11px;font-size:11px;font-weight:800;color:#aaa}.olderEras .chips{padding:0 9px 9px}.coverageWarn{border-left:3px solid #b68a3b;background:#201b12;padding:9px 10px;border-radius:6px;color:#d9c79e;font-size:10px;line-height:1.55;margin:8px 0 12px}.empty{grid-column:1/-1;color:var(--muted);padding:28px 0}
+@media(max-width:760px){.awardGrid{grid-template-columns:1fr 1fr}.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,1fr);gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}@media(max-width:480px){.awardGrid{grid-template-columns:1fr}}
+body{background:#090909}.rankCard{background:transparent!important;box-shadow:none!important;border-color:#272727!important;border-radius:6px!important}.hero{padding-top:22px}.hero h1{font-weight:750;letter-spacing:-.025em}button,.chip{border-radius:4px!important;box-shadow:none!important}.chip{background:transparent!important}button.active,.chip.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}.gNav{height:62px;display:flex;align-items:center;gap:12px}.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px}.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center}.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}.gDrawer.show{transform:translateX(0)}.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}@media(max-width:600px){.gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}.gLogo{height:28px;max-width:150px}.gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}.gMenuBtn{width:36px}}
+.filterLabel,.chip,.title,.meta,.no{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;font-synthesis:none}.filterLabel{font-size:11px;font-weight:700;letter-spacing:.06em;color:#9ca3af;margin:5px 0 2px}.chip{font-weight:650;line-height:1.2}
 </style>
 </head>
 <body>
-
-
-<header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a>
- <form class="gSearchForm" action="search.html" method="get">
-  <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
-  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
- </form>
- <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
-</div></header>
-<div class="gDrawerMask" id="gDrawerMask"></div>
-<aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
- <a href="index.html">カレンダー</a>
- <a href="discover.html">映画を探す</a>
- <a href="rankings.html">ランキング</a>
- <a href="theaters.html">映画館を探す</a>
- <a href="experience.html">上映方式</a>
- <a href="my-cinemap.html">My Cinemap</a>
-</aside>
-<main class="wrap">
-<section class="hero"><h1>ランキング</h1><p>ユーザー評価、興行収入、受賞歴から映画を横断して見る。</p></section>
-
-<div class="chartAxes">
- <div class="filterLabel">ランキング</div>
- <div class="chips" id="axisChips">
-  <button class="chip active" data-axis="rating">ユーザー評価</button>
-  <button class="chip" data-axis="boxoffice">興行収入</button><button class="chip" data-axis="awards">受賞作品</button>
- </div>
-</div>
-
-<div id="ratingFilters">
- <div class="filterLabel">地域</div><div class="chips" id="regionChips"></div>
- <div class="filterLabel">ジャンル</div><div class="chips" id="genreChips"></div>
- <div class="filterLabel">年代</div><div class="chips" id="eraChips"></div>
-</div>
-
-<div id="awardsIntro" style="display:none;margin:0 0 18px"><div class="note" style="margin-bottom:12px">アカデミー賞・主要映画賞・主要国際映画祭の受賞結果。年代・授賞年・賞・受賞部門で絞り込めます。</div><div class="filterLabel">年代</div><div class="chips" id="awardEraChips"></div><details class="olderEras" id="awardOlderEras"><summary>＋ 1980年以前を表示</summary><div class="chips" id="awardOldEraChips"></div></details><div class="filterLabel">授賞年</div><div class="chips" id="awardYearChips"></div><div class="note" id="awardCoverage" style="margin:8px 0 12px"></div><div class="filterLabel">賞・映画祭</div><div class="chips" id="awardOrgChips"></div><div class="filterLabel">受賞部門</div><div class="chips" id="awardCategoryChips"></div></div><div id="boxFilters" style="display:none">
- <div class="filterLabel">地域</div><div class="chips" id="boxRegionChips"></div>
- <div class="filterLabel">期間</div><div class="chips" id="boxEraChips"></div>
-</div>
-
-<div class="rankGrid" id="grid"></div>
-<div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div>
-<div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.64</div>
-</main>
+<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><form class="gSearchForm" action="search.html" method="get"><input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索"><button class="gSearchBtn" type="submit" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button></div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My Cinemap</a></aside>
+<main class="wrap"><section class="hero"><h1>ランキング</h1><p>ユーザー評価、興行収入、受賞歴から映画を横断して見る。</p></section>
+<div class="chartAxes"><div class="filterLabel">ランキング</div><div class="chips" id="axisChips"><button class="chip active" data-axis="rating">ユーザー評価</button><button class="chip" data-axis="boxoffice">興行収入</button><button class="chip" data-axis="awards">受賞作品</button></div></div>
+<div id="ratingFilters"><div class="filterLabel">地域</div><div class="chips" id="regionChips"></div><div class="filterLabel">ジャンル</div><div class="chips" id="genreChips"></div><div class="filterLabel">年代</div><div class="chips" id="eraChips"></div></div>
+<div id="awardsIntro" style="display:none;margin:0 0 18px"><div class="note" style="margin-bottom:12px">アカデミー賞・主要映画賞・主要国際映画祭の受賞結果。年代・授賞年・賞・受賞部門で絞り込めます。</div><div class="filterLabel">年代</div><div class="chips" id="awardEraChips"></div><details class="olderEras" id="awardOlderEras"><summary>＋ 1980年以前を表示</summary><div class="chips" id="awardOldEraChips"></div></details><div class="filterLabel">授賞年</div><div class="chips" id="awardYearChips"></div><div class="note" id="awardCoverage" style="margin:8px 0 12px"></div><div class="filterLabel">賞・映画祭</div><div class="chips" id="awardOrgChips"></div><div class="filterLabel">受賞部門</div><div class="chips" id="awardCategoryChips"></div></div>
+<div id="boxFilters" style="display:none"><div class="filterLabel">地域</div><div class="chips" id="boxRegionChips"></div><div class="filterLabel">期間</div><div class="chips" id="boxEraChips"></div></div>
+<div class="rankGrid" id="grid"></div><div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div><div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.65</div></main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
-let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="すべて",boxRegion="すべて",boxEra="歴代",awardEra=qs.get("era")||"すべて",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて",awardMovieCache=new Map();
-const $=s=>document.querySelector(s);
-const uniqById=list=>{const m=new Map();list.forEach(x=>{const k=x.id||x.title;const p=m.get(k);if(!p||(x.score||0)>(p.score||0))m.set(k,x)});return [...m.values()]};
-function allRegions(){return ["すべて",...Object.keys(rankings||{})]}
-function baseRegions(){return regionActive==="すべて"?Object.keys(rankings||{}):[regionActive]}
-function allGenres(regions){
- const s=new Set();regions.forEach(r=>Object.keys(rankings[r]||{}).forEach(g=>s.add(g)));return [...s]
-}
-function availableEras(regions,genres){
- const s=new Set();regions.forEach(r=>genres.forEach(g=>Object.keys(((rankings[r]||{})[g]||{})).forEach(e=>s.add(e))));
- return [...s]
-}
-function yearList(regions,genre){
- let list=[];regions.forEach(r=>{
-   const gs=Object.keys(yearRankings[r]||{});
-   (genre==="すべて"?gs:[genre]).forEach(g=>list.push(...((yearRankings[r]||{})[g]||[])));
- });
- return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0));
-}
-function ratingList(regions,genre,era){
- if(era==="今年")return yearList(regions,genre);
- let list=[];regions.forEach(r=>{
-   const gs=Object.keys(rankings[r]||{});
-   (genre==="すべて"?gs:[genre]).forEach(g=>{
-     const byEra=((rankings[r]||{})[g]||{});
-     if(era==="すべて")Object.values(byEra).forEach(rows=>list.push(...(rows||[])));
-     else list.push(...((byEra[era])||[]));
-   });
- });
- return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0));
-}
-function card(m,i){
- const id=m.id||m.tmdbId||"",href=id?"search.html?id="+encodeURIComponent(id)+"&search="+encodeURIComponent(m.title||""):(m.tmdb||"#");
- return '<a class="rankCard" href="'+href+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div style="aspect-ratio:2/3;background:#171717"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div><div class="meta">Cinemapで深掘る →</div></div></a>'
-}
-function renderRating(){
- const regions=baseRegions();
- let genres=allGenres(regions);
- const genreOpts=["すべて",...genres];
- if(!genreOpts.includes(genreActive))genreActive="すべて";
- const useGenres=genreActive==="すべて"?genres:[genreActive];
- let eras=availableEras(regions,useGenres);
- const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};
- eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));
- const eraOpts=["すべて","今年",...eras];
- if(!eraActive||!eraOpts.includes(eraActive))eraActive="すべて";
- $("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");
- $("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");
- $("#eraChips").innerHTML=eraOpts.map(x=>'<button class="chip '+(x===eraActive?'active':'')+'" data-era="'+x+'">'+x+'</button>').join("");
- document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="すべて";render()});
- document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="すべて";render()});
- document.querySelectorAll("[data-era]").forEach(b=>b.onclick=()=>{eraActive=b.dataset.era;render()});
- const list=ratingList(regions,genreActive,eraActive).slice(0,80);
- $("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map(card).join(""):'<div class="empty">該当作品がありません</div>';
- $("#sourceNote").textContent=(eraActive==="今年"?(yearValue||new Date().getFullYear())+"年公開作品 · ":"")+"TMDBユーザー評価順";
-}
-function renderBox(){
- const regions=["すべて","邦画","洋画"];
- $("#boxRegionChips").innerHTML=regions.map(x=>'<button class="chip '+(x===boxRegion?'active':'')+'" data-box-region="'+x+'">'+x+'</button>').join("");
- const years=Object.keys(boxoffice.by_year||{}).sort().reverse();
- const periods=["歴代",...years];
- if(!periods.includes(boxEra))boxEra="歴代";
- $("#boxEraChips").innerHTML=periods.map(x=>'<button class="chip '+(x===boxEra?'active':'')+'" data-box-era="'+x+'">'+x+'</button>').join("");
- document.querySelectorAll("[data-box-region]").forEach(b=>b.onclick=()=>{boxRegion=b.dataset.boxRegion;render()});
- document.querySelectorAll("[data-box-era]").forEach(b=>b.onclick=()=>{boxEra=b.dataset.boxEra;render()});
- let list=boxEra==="歴代"?(boxoffice.all_time||[]):((boxoffice.by_year||{})[boxEra]||[]);
- if(boxRegion!=="すべて")list=list.filter(x=>x.region===boxRegion);
- list=[...list].sort((a,b)=>(b.gross||0)-(a.gross||0));
- $("#grid").className="listRank";
- $("#grid").innerHTML=list.length?list.map((m,i)=>'<div class="listRow"><div class="listNo">#'+(i+1)+'</div><div><div class="listTitle">'+m.title+'</div><div class="meta">'+(m.year||boxEra||"")+' · '+m.region+'</div></div><div class="listMeta">'+Number(m.gross||0).toFixed(1)+'億円</div></div>').join(""):'<div class="empty">該当作品がありません</div>';
- const src=boxEra==="歴代"?"興行通信社・歴代興収ベスト100":"日本映画製作者連盟・年次興行資料";
- $("#sourceNote").textContent="日本国内興行収入 · "+src;
-}
-function awardExplanation(m){if(m.organization==="アカデミー賞"&&m.category==="作品賞")return "映画芸術科学アカデミーがその年の作品として授与するアカデミー賞の中心部門。";if(m.category.includes("パルム"))return "カンヌ国際映画祭コンペティションの最高賞。";if(m.category.includes("金獅子"))return "ヴェネチア国際映画祭コンペティションの最高賞。";if(m.category.includes("金熊"))return "ベルリン国際映画祭コンペティションの最高賞。";if(m.category.includes("作品賞"))return "その賞・部門で作品全体に授与される主要賞。";return ""}
-function awardFilmName(m){return String(m.title||"").split(" — ")[0].trim()}
-async function resolveAwardMovie(name){
- if(awardMovieCache.has(name))return awardMovieCache.get(name);
- try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?q="+encodeURIComponent(name)+"&limit=5",{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json(),rows=[...(d.movies||[]),...(d.external||[])],n=name.toLowerCase();let hit=rows.find(x=>String(x.original_title||"").toLowerCase()===n)||rows.find(x=>String(x.title||"").toLowerCase()===n)||rows[0]||null;awardMovieCache.set(name,hit);return hit}catch{awardMovieCache.set(name,null);return null}
-}
-async function hydrateAwardCards(list){
- const names=[...new Set(list.slice(0,60).map(awardFilmName))];
- let cursor=0;async function worker(){while(cursor<names.length){const name=names[cursor++],movie=await resolveAwardMovie(name);if(!movie)continue;document.querySelectorAll('[data-award-film="'+CSS.escape(name)+'"]').forEach(card=>{const t=card.querySelector("[data-award-title]"),img=card.querySelector("[data-award-poster]"),link=card.querySelector("[data-award-detail]");if(t)t.textContent=movie.title||name;if(img&&movie.poster){img.src=movie.poster;img.hidden=false}if(link)link.href="search.html?id="+encodeURIComponent(movie.tmdbId||movie.id||"")+"&search="+encodeURIComponent(movie.title||name)})}}await Promise.all([worker(),worker(),worker(),worker()])
-}
-const AWARD_ORG_ORDER=["アカデミー賞","カンヌ国際映画祭","ヴェネチア国際映画祭","ベルリン国際映画祭","ゴールデングローブ賞","BAFTA"];
-function orderedAwardOrgs(list){
- const found=[...new Set(list)],rank=x=>{const i=AWARD_ORG_ORDER.indexOf(x);return i<0?999:i};
- return found.sort((a,b)=>rank(a)-rank(b)||a.localeCompare(b,"ja"));
-}
-function coverageNote(year,rows){
- if(year==="すべて")return "";
- const y=Number(year),orgs=new Set(rows.map(x=>x.organization)),cats=new Set(rows.map(x=>x.category));
- if(y<=2022)return "この授賞年は現在、アカデミー賞の作品賞を中心に収録しています。他の賞・映画祭や受賞部門は未収録です。";
- if(orgs.size<3||cats.size<8)return "この授賞年は、賞・映画祭または受賞部門の収録範囲が他の年より少なめです。表示件数は実際の全受賞結果を意味しません。";
- return "";
-}
-function renderAwards(){
- const decadeOf=y=>Math.floor(Number(y)/10)*10+"年代",allEras=[...new Set(awards.map(x=>decadeOf(x.year)))].sort((a,b)=>Number(b.slice(0,4))-Number(a.slice(0,4))),recentEras=allEras.filter(x=>Number(x.slice(0,4))>=1980),oldEras=allEras.filter(x=>Number(x.slice(0,4))<1980);
- const eras=["すべて",...allEras];if(!eras.includes(awardEra))awardEra="すべて";
- const inEra=awardEra==="すべて"?awards:awards.filter(x=>decadeOf(x.year)===awardEra);
- const years=["すべて",...[...new Set(inEra.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a))];if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"すべて";
- const inYear=awardYear==="すべて"?inEra:inEra.filter(x=>String(x.year)===awardYear),orgs=["すべて",...orderedAwardOrgs(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";
- const inOrg=awardOrg==="すべて"?inYear:inYear.filter(x=>x.organization===awardOrg),cats=["すべて",...new Set(inOrg.map(x=>x.category))];if(!cats.includes(awardCategory))awardCategory="すべて";
- $("#awardEraChips").innerHTML=["すべて",...recentEras].map(x=>'<button class="chip '+(x===awardEra?'active':'')+'" data-award-era="'+x+'">'+x+'</button>').join("");
- $("#awardOldEraChips").innerHTML=oldEras.map(x=>'<button class="chip '+(x===awardEra?'active':'')+'" data-award-era="'+x+'">'+x+'</button>').join("");
- const oldDetails=$("#awardOlderEras");if(oldDetails)oldDetails.open=oldEras.includes(awardEra);
- $("#awardYearChips").innerHTML=years.map(x=>'<button class="chip '+(x===awardYear?'active':'')+'" data-award-year="'+x+'">'+x+'</button>').join("");
- $("#awardOrgChips").innerHTML=orgs.map(x=>'<button class="chip '+(x===awardOrg?'active':'')+'" data-award-org="'+x+'">'+x+'</button>').join("");
- $("#awardCategoryChips").innerHTML=cats.map(x=>'<button class="chip '+(x===awardCategory?'active':'')+'" data-award-category="'+x+'">'+x+'</button>').join("");
- document.querySelectorAll("[data-award-era]").forEach(x=>x.onclick=()=>{awardEra=x.dataset.awardEra;awardYear="すべて";awardOrg="すべて";awardCategory="すべて";render()});
- document.querySelectorAll("[data-award-year]").forEach(x=>x.onclick=()=>{awardYear=x.dataset.awardYear;awardOrg="すべて";awardCategory="すべて";render()});
- document.querySelectorAll("[data-award-org]").forEach(x=>x.onclick=()=>{awardOrg=x.dataset.awardOrg;awardCategory="すべて";render()});
- document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});
- let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);
- const coverageRows=awardYear==="すべて"?inEra:awards.filter(x=>String(x.year)===awardYear),note=coverageNote(awardYear,coverageRows),total=awards.length,yearCount=new Set(awards.map(x=>x.year)).size;
- $("#awardCoverage").innerHTML="収録 "+total+"件 · "+yearCount+"授賞年。"+(note?'<div class="coverageWarn">'+note+'</div>':'');
- $("#grid").className="awardGrid";$("#grid").innerHTML=list.length?list.map(m=>{const film=awardFilmName(m);return '<article class="awardCard" data-award-film="'+film.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><img class="awardPoster" data-award-poster hidden alt=""><div class="awardBody"><div class="awardTitle" data-award-title>'+film+'</div><span class="awardYear">'+m.year+'年受賞</span><div class="awardMeta">'+m.organization+' · '+m.category+'</div><div class="awardLinks"><a data-award-detail href="search.html?search='+encodeURIComponent(film)+'">作品詳細</a><a target="_blank" rel="noopener noreferrer" href="'+m.source+'">公式</a></div></div></article>'}).join(""):'<div class="empty">該当する受賞作品がありません</div>';
- $("#sourceNote").textContent=(awardEra==="すべて"?"全年代":awardEra)+" · "+(awardYear==="すべて"?"全授賞年":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";
- hydrateAwardCards(list);
-}
-
-function render(){
- $("#moreBtn").style.display="none";
- document.querySelectorAll("[data-axis]").forEach(b=>b.classList.toggle("active",b.dataset.axis===axis));
- $("#ratingFilters").style.display=axis==="rating"?"block":"none";
- $("#boxFilters").style.display=axis==="boxoffice"?"block":"none";
- $("#awardsIntro").style.display=axis==="awards"?"block":"none";
- axis==="boxoffice"?renderBox():axis==="awards"?renderAwards():renderRating();
-}
-async function boot(){
- try{
-  const [r,m,y,b,a]=await Promise.all([
-   fetch("data/rankings.json?"+Date.now()),
-   fetch("data/rankings_manifest.json?"+Date.now()).catch(()=>null),
-   fetch("data/rankings_year.json?"+Date.now()).catch(()=>null),
-   fetch("data/boxoffice.json?"+Date.now()),
-   fetch("data/awards.json?"+Date.now())
-  ]);
-  const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};
-  manifest=m&&m.ok?await m.json():{};
-  const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year||new Date().getFullYear();
-  boxoffice=await b.json();const ad=await a.json();awards=ad.awards||[];
-  document.querySelectorAll("[data-axis]").forEach(btn=>btn.onclick=()=>{axis=btn.dataset.axis;render()});
-  render();
- }catch(err){$("#grid").innerHTML='<p>チャートデータを読み込めませんでした。</p>'}
-}
-boot();
-</script>
-<script>
-(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
-</script>
+let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="すべて",boxRegion="すべて",boxEra="歴代",awardEra=qs.get("era")||"すべて",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて",movieLookupCache=new Map();
+const $=s=>document.querySelector(s);const uniqById=list=>{const m=new Map();list.forEach(x=>{const k=x.id||x.title,p=m.get(k);if(!p||(x.score||0)>(p.score||0))m.set(k,x)});return [...m.values()]};
+function allRegions(){return ["すべて",...Object.keys(rankings||{})]}function baseRegions(){return regionActive==="すべて"?Object.keys(rankings||{}):[regionActive]}function allGenres(regions){const s=new Set();regions.forEach(r=>Object.keys(rankings[r]||{}).forEach(g=>s.add(g)));return [...s]}function availableEras(regions,genres){const s=new Set();regions.forEach(r=>genres.forEach(g=>Object.keys(((rankings[r]||{})[g]||{})).forEach(e=>s.add(e))));return [...s]}
+function yearList(regions,genre){let list=[];regions.forEach(r=>{const gs=Object.keys(yearRankings[r]||{});(genre==="すべて"?gs:[genre]).forEach(g=>list.push(...((yearRankings[r]||{})[g]||[])))});return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0))}
+function ratingList(regions,genre,era){if(era==="今年")return yearList(regions,genre);let list=[];regions.forEach(r=>{const gs=Object.keys(rankings[r]||{});(genre==="すべて"?gs:[genre]).forEach(g=>{const byEra=((rankings[r]||{})[g]||{});if(era==="すべて")Object.values(byEra).forEach(rows=>list.push(...(rows||[])));else list.push(...((byEra[era])||[]))})});return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0))}
+function card(m,i){const id=m.id||m.tmdbId||"",href=id?"search.html?id="+encodeURIComponent(id)+"&search="+encodeURIComponent(m.title||""):(m.tmdb||"#");return '<a class="rankCard" href="'+href+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div class="rankPosterPlaceholder"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div><div class="meta">Cinemapで深掘る →</div></div></a>'}
+function renderRating(){const regions=baseRegions(),genres=allGenres(regions),genreOpts=["すべて",...genres];if(!genreOpts.includes(genreActive))genreActive="すべて";const useGenres=genreActive==="すべて"?genres:[genreActive];let eras=availableEras(regions,useGenres);const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));const eraOpts=["すべて","今年",...eras];if(!eraOpts.includes(eraActive))eraActive="すべて";$("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");$("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");$("#eraChips").innerHTML=eraOpts.map(x=>'<button class="chip '+(x===eraActive?'active':'')+'" data-era="'+x+'">'+x+'</button>').join("");document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="すべて";render()});document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="すべて";render()});document.querySelectorAll("[data-era]").forEach(b=>b.onclick=()=>{eraActive=b.dataset.era;render()});const list=ratingList(regions,genreActive,eraActive).slice(0,80);$("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map(card).join(""):'<div class="empty">該当作品がありません</div>';$("#sourceNote").textContent=(eraActive==="今年"?(yearValue||new Date().getFullYear())+"年公開作品 · ":"")+"TMDBユーザー評価順"}
+async function resolveMovie(name){if(movieLookupCache.has(name))return movieLookupCache.get(name);try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?q="+encodeURIComponent(name)+"&limit=5",{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json(),rows=[...(d.movies||[]),...(d.external||[])],n=name.toLowerCase();let hit=rows.find(x=>String(x.original_title||"").toLowerCase()===n)||rows.find(x=>String(x.title||"").toLowerCase()===n)||rows[0]||null;movieLookupCache.set(name,hit);return hit}catch{movieLookupCache.set(name,null);return null}}
+async function hydrateBoxCards(list){const names=[...new Set(list.slice(0,80).map(x=>x.title))];let cursor=0;async function worker(){while(cursor<names.length){const name=names[cursor++],movie=await resolveMovie(name);if(!movie)continue;document.querySelectorAll('[data-box-film="'+CSS.escape(name)+'"]').forEach(card=>{const img=card.querySelector("[data-box-poster]"),ph=card.querySelector("[data-box-placeholder]");if(img&&movie.poster){img.src=movie.poster;img.hidden=false;if(ph)ph.hidden=true}const link=card.closest("a");if(link&&(movie.tmdbId||movie.id))link.href="search.html?id="+encodeURIComponent(movie.tmdbId||movie.id)+"&search="+encodeURIComponent(movie.title||name)})}}await Promise.all([worker(),worker(),worker(),worker()])}
+function renderBox(){const regions=["すべて","邦画","洋画"];$("#boxRegionChips").innerHTML=regions.map(x=>'<button class="chip '+(x===boxRegion?'active':'')+'" data-box-region="'+x+'">'+x+'</button>').join("");const years=Object.keys(boxoffice.by_year||{}).sort((a,b)=>Number(b)-Number(a)),periods=["歴代",...years];if(!periods.includes(boxEra))boxEra="歴代";$("#boxEraChips").innerHTML=periods.map(x=>'<button class="chip '+(x===boxEra?'active':'')+'" data-box-era="'+x+'">'+x+'</button>').join("");document.querySelectorAll("[data-box-region]").forEach(b=>b.onclick=()=>{boxRegion=b.dataset.boxRegion;render()});document.querySelectorAll("[data-box-era]").forEach(b=>b.onclick=()=>{boxEra=b.dataset.boxEra;render()});let list=boxEra==="歴代"?(boxoffice.all_time||[]):((boxoffice.by_year||{})[boxEra]||[]);if(boxRegion!=="すべて")list=list.filter(x=>x.region===boxRegion);list=[...list].sort((a,b)=>(b.gross||0)-(a.gross||0));$("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map((m,i)=>'<a class="rankCard" href="search.html?search='+encodeURIComponent(m.title)+'"><div data-box-film="'+m.title.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><img data-box-poster hidden alt=""><div class="rankPosterPlaceholder" data-box-placeholder></div><div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.year||boxEra||"")+' · '+m.region+'</div><div class="meta" style="font-weight:800;color:#e5e7eb">'+Number(m.gross||0).toFixed(1)+'億円</div></div></div></a>').join(""):'<div class="empty">該当作品がありません</div>';$("#sourceNote").textContent="日本国内興行収入 · "+(boxEra==="歴代"?"興行通信社・歴代興収ベスト100":"日本映画製作者連盟・"+boxEra+"年興行資料");hydrateBoxCards(list)}
+function awardFilmName(m){return String(m.title||"").split(" — ")[0].trim()}async function hydrateAwardCards(list){const names=[...new Set(list.slice(0,60).map(awardFilmName))];let cursor=0;async function worker(){while(cursor<names.length){const name=names[cursor++],movie=await resolveMovie(name);if(!movie)continue;document.querySelectorAll('[data-award-film="'+CSS.escape(name)+'"]').forEach(card=>{const t=card.querySelector("[data-award-title]"),img=card.querySelector("[data-award-poster]"),link=card.querySelector("[data-award-detail]");if(t)t.textContent=movie.title||name;if(img&&movie.poster){img.src=movie.poster;img.hidden=false}if(link)link.href="search.html?id="+encodeURIComponent(movie.tmdbId||movie.id||"")+"&search="+encodeURIComponent(movie.title||name)})}}await Promise.all([worker(),worker(),worker(),worker()])}
+const AWARD_ORG_ORDER=["アカデミー賞","カンヌ国際映画祭","ヴェネチア国際映画祭","ベルリン国際映画祭","ゴールデングローブ賞","BAFTA"];function orderedAwardOrgs(list){const found=[...new Set(list)],rank=x=>{const i=AWARD_ORG_ORDER.indexOf(x);return i<0?999:i};return found.sort((a,b)=>rank(a)-rank(b)||a.localeCompare(b,"ja"))}function coverageNote(year,rows){if(year==="すべて")return "";const y=Number(year),orgs=new Set(rows.map(x=>x.organization)),cats=new Set(rows.map(x=>x.category));if(y<=2022)return "この授賞年は現在、アカデミー賞の作品賞を中心に収録しています。他の賞・映画祭や受賞部門は未収録です。";if(orgs.size<3||cats.size<8)return "この授賞年は、賞・映画祭または受賞部門の収録範囲が他の年より少なめです。表示件数は実際の全受賞結果を意味しません。";return ""}
+function renderAwards(){const decadeOf=y=>Math.floor(Number(y)/10)*10+"年代",allEras=[...new Set(awards.map(x=>decadeOf(x.year)))].sort((a,b)=>Number(b.slice(0,4))-Number(a.slice(0,4))),recentEras=allEras.filter(x=>Number(x.slice(0,4))>=1980),oldEras=allEras.filter(x=>Number(x.slice(0,4))<1980);if(!["すべて",...allEras].includes(awardEra))awardEra="すべて";const inEra=awardEra==="すべて"?awards:awards.filter(x=>decadeOf(x.year)===awardEra),years=["すべて",...[...new Set(inEra.map(x=>String(x.year)))].sort((a,b)=>Number(b)-Number(a))];if(!awardYear||!years.includes(awardYear))awardYear=years[0]||"すべて";const inYear=awardYear==="すべて"?inEra:inEra.filter(x=>String(x.year)===awardYear),orgs=["すべて",...orderedAwardOrgs(inYear.map(x=>x.organization))];if(!orgs.includes(awardOrg))awardOrg="すべて";const inOrg=awardOrg==="すべて"?inYear:inYear.filter(x=>x.organization===awardOrg),cats=["すべて",...new Set(inOrg.map(x=>x.category))];if(!cats.includes(awardCategory))awardCategory="すべて";$("#awardEraChips").innerHTML=["すべて",...recentEras].map(x=>'<button class="chip '+(x===awardEra?'active':'')+'" data-award-era="'+x+'">'+x+'</button>').join("");$("#awardOldEraChips").innerHTML=oldEras.map(x=>'<button class="chip '+(x===awardEra?'active':'')+'" data-award-era="'+x+'">'+x+'</button>').join("");const oldDetails=$("#awardOlderEras");if(oldDetails)oldDetails.open=oldEras.includes(awardEra);$("#awardYearChips").innerHTML=years.map(x=>'<button class="chip '+(x===awardYear?'active':'')+'" data-award-year="'+x+'">'+x+'</button>').join("");$("#awardOrgChips").innerHTML=orgs.map(x=>'<button class="chip '+(x===awardOrg?'active':'')+'" data-award-org="'+x+'">'+x+'</button>').join("");$("#awardCategoryChips").innerHTML=cats.map(x=>'<button class="chip '+(x===awardCategory?'active':'')+'" data-award-category="'+x+'">'+x+'</button>').join("");document.querySelectorAll("[data-award-era]").forEach(x=>x.onclick=()=>{awardEra=x.dataset.awardEra;awardYear="すべて";awardOrg="すべて";awardCategory="すべて";render()});document.querySelectorAll("[data-award-year]").forEach(x=>x.onclick=()=>{awardYear=x.dataset.awardYear;awardOrg="すべて";awardCategory="すべて";render()});document.querySelectorAll("[data-award-org]").forEach(x=>x.onclick=()=>{awardOrg=x.dataset.awardOrg;awardCategory="すべて";render()});document.querySelectorAll("[data-award-category]").forEach(x=>x.onclick=()=>{awardCategory=x.dataset.awardCategory;render()});let list=inOrg.filter(x=>awardCategory==="すべて"||x.category===awardCategory);const coverageRows=awardYear==="すべて"?inEra:awards.filter(x=>String(x.year)===awardYear),note=coverageNote(awardYear,coverageRows);$("#awardCoverage").innerHTML="収録 "+awards.length+"件 · "+new Set(awards.map(x=>x.year)).size+"授賞年。"+(note?'<div class="coverageWarn">'+note+'</div>':'');$("#grid").className="awardGrid";$("#grid").innerHTML=list.length?list.map(m=>{const film=awardFilmName(m);return '<article class="awardCard" data-award-film="'+film.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><img class="awardPoster" data-award-poster hidden alt=""><div class="awardBody"><div class="awardTitle" data-award-title>'+film+'</div><span class="awardYear">'+m.year+'年受賞</span><div class="awardMeta">'+m.organization+' · '+m.category+'</div><div class="awardLinks"><a data-award-detail href="search.html?search='+encodeURIComponent(film)+'">作品詳細</a><a target="_blank" rel="noopener noreferrer" href="'+m.source+'">公式</a></div></div></article>'}).join(""):'<div class="empty">該当する受賞作品がありません</div>';$("#sourceNote").textContent=(awardEra==="すべて"?"全年代":awardEra)+" · "+(awardYear==="すべて"?"全授賞年":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";hydrateAwardCards(list)}
+function render(){$("#moreBtn").style.display="none";document.querySelectorAll("[data-axis]").forEach(b=>b.classList.toggle("active",b.dataset.axis===axis));$("#ratingFilters").style.display=axis==="rating"?"block":"none";$("#boxFilters").style.display=axis==="boxoffice"?"block":"none";$("#awardsIntro").style.display=axis==="awards"?"block":"none";axis==="boxoffice"?renderBox():axis==="awards"?renderAwards():renderRating()}
+async function boot(){try{const [r,m,y,b,a]=await Promise.all([fetch("data/rankings.json?"+Date.now()),fetch("data/rankings_manifest.json?"+Date.now()).catch(()=>null),fetch("data/rankings_year.json?"+Date.now()).catch(()=>null),fetch("data/boxoffice.json?"+Date.now()),fetch("data/awards.json?"+Date.now())]);const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};manifest=m&&m.ok?await m.json():{};const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year||new Date().getFullYear();boxoffice=await b.json();const ad=await a.json();awards=ad.awards||[];document.querySelectorAll("[data-axis]").forEach(btn=>btn.onclick=()=>{axis=btn.dataset.axis;render()});render()}catch(err){$("#grid").innerHTML='<p>チャートデータを読み込めませんでした。</p>'}}boot();
+</script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script>
 </body></html>

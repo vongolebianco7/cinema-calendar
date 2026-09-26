@@ -1,0 +1,85 @@
+name: Cinemap UI batch 2026-09-26 v2
+on:
+  push:
+    paths:
+      - '.github/workflows/cinemap-ui-batch-20260926-v2.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply remaining requested changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Calendar: keep theater filters already present; force TV to 3 columns on mobile and make continuation labels explicit.
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          s=s.replace('.tvWeekMovies{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}', '.tvWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}')
+          s=s.replace("(firstSeg?ev.title:'継続 · '+ev.title)", "(firstSeg?ev.title:'継続｜'+ev.title)")
+          s=s.replace('Cinemap v0.4.69','Cinemap v0.4.70')
+          p.write_text(s,encoding='utf-8')
+
+          # My Cinemap: compact horizontal theme selector, more palettes, less vertical length, safer Japanese text layout.
+          p=Path('my-cinemap.html'); s=p.read_text(encoding='utf-8')
+          s=s.replace('.themeChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}', '.themeChoices{display:flex;gap:7px;overflow-x:auto;padding:2px 0 7px;scrollbar-width:none}.themeChoices::-webkit-scrollbar{display:none}')
+          s=s.replace('.themeChoice{display:flex;align-items:center;gap:8px;border:1px solid #363636;background:#111;color:#ddd;border-radius:8px;padding:8px 9px;text-align:left;font-size:10px}', '.themeChoice{display:flex;align-items:center;gap:7px;flex:0 0 auto;min-width:128px;border:1px solid #363636;background:#111;color:#ddd;border-radius:999px;padding:7px 9px;text-align:left;font-size:9px;white-space:nowrap}')
+          s=s.replace('.results{max-height:230px;', '.results{max-height:150px;')
+          s=s.replace('.item{display:grid;grid-template-columns:26px 36px 1fr auto;gap:7px;align-items:center;padding:6px 0;', '.item{display:grid;grid-template-columns:24px 32px 1fr auto;gap:6px;align-items:center;padding:4px 0;')
+          s=s.replace('.item img{width:36px;', '.item img{width:32px;')
+          if '.art.sage{' not in s:
+              s=s.replace('.art.cream{background:#f1e7d4;color:#2e2922}', '.art.cream{background:#f1e7d4;color:#2e2922}.art.sage{background:#8fa18e;color:#111b13}.art.blueprint{background:#173f5f;color:#f2f7fb}.art.rose{background:#a85f68;color:#fff7f4}.art.mono{background:#dedede;color:#151515}')
+          s=s.replace('.movieName{font-size:clamp(8px,1.05vw,12px);font-weight:850;line-height:1.18;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}', '.movieName{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:clamp(8px,1.05vw,12px);font-weight:850;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:normal;overflow-wrap:anywhere}')
+          s=s.replace('.themeChoices{grid-template-columns:repeat(2,minmax(0,1fr))}', '.themeChoices{display:flex}')
+          marker='<button class="themeChoice" data-theme="cream"><span class="themeSwatch" style="background:#f1e7d4"></span>Magazine / Cream</button>'
+          if 'data-theme="sage"' not in s and marker in s:
+              s=s.replace(marker, marker+'\n<button class="themeChoice" data-theme="sage"><span class="themeSwatch" style="background:#8fa18e"></span>Quiet / Sage</button>\n<button class="themeChoice" data-theme="blueprint"><span class="themeSwatch" style="background:#173f5f"></span>Blueprint / Blue</button>\n<button class="themeChoice" data-theme="rose"><span class="themeSwatch" style="background:#a85f68"></span>Retro / Rose</button>\n<button class="themeChoice" data-theme="mono"><span class="themeSwatch" style="background:#dedede"></span>Monochrome</button>')
+          if 'sage:["#8fa18e"' not in s:
+              s=s.replace('cream:["#f1e7d4","#2e2922"]', 'cream:["#f1e7d4","#2e2922"],sage:["#8fa18e","#111b13"],blueprint:["#173f5f","#f2f7fb"],rose:["#a85f68","#fff7f4"],mono:["#dedede","#151515"]')
+          s=s.replace('x.font="700 19px -apple-system, sans-serif";', 'x.font=\'700 18px "Hiragino Sans","Yu Gothic",sans-serif\';')
+          s=s.replace('x.fillText(lines[0],left+72,y+38);if(lines[1])x.fillText(lines[1],left+72,y+62);x.globalAlpha=.55;x.font="18px -apple-system, sans-serif";x.fillText(String(picks[i].year||""),left+72,y+73);', 'x.fillText(lines[0],left+72,y+36);if(lines[1])x.fillText(lines[1],left+72,y+60);x.globalAlpha=.55;x.font=\'16px "Hiragino Sans","Yu Gothic",sans-serif\';x.fillText(String(picks[i].year||""),left+72,y+88);')
+          s=s.replace('Cinemap v0.4.65','Cinemap v0.4.66')
+          p.write_text(s,encoding='utf-8')
+
+          # IMAX GT: exact official equipment page for the verified Osaka screen.
+          p=Path('experience.html'); s=p.read_text(encoding='utf-8')
+          s=s.replace('href="https://109cinemas.net/osaka-expocity/" target="_blank" rel="noopener noreferrer">公式劇場ページで確認</a>', 'href="https://109cinemas.net/osaka-expocity/establishment.html" target="_blank" rel="noopener noreferrer">公式設備ページで確認</a>')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Validate requested state
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile, sys
+          index=Path('index.html').read_text(encoding='utf-8')
+          my=Path('my-cinemap.html').read_text(encoding='utf-8')
+          exp=Path('experience.html').read_text(encoding='utf-8')
+          required=[
+            ('theater filters','mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]' in index),
+            ('tv three columns mobile','@media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(3' in index),
+            ('festival continuation name','継続｜' in index),
+            ('theme swatches','themeSwatch' in my),
+            ('extra my cinemap theme','data-theme="sage"' in my and 'data-theme="mono"' in my),
+            ('imax gt tokyo','グランドシネマサンシャイン 池袋' in exp and 'シアター12' in exp),
+            ('imax gt osaka','109シネマズ大阪エキスポシティ' in exp and 'シアター11' in exp),
+          ]
+          bad=[n for n,ok in required if not ok]
+          if bad: raise SystemExit('missing: '+', '.join(bad))
+          for f in ['index.html','my-cinemap.html','experience.html']:
+            t=Path(f).read_text(encoding='utf-8')
+            for i,js in enumerate(re.findall(r'<script(?:\\s[^>]*)?>(.*?)</script>',t,re.S|re.I)):
+              if not js.strip(): continue
+              q=Path(tempfile.gettempdir())/f'{Path(f).stem}-{i}.js'; q.write_text(js,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(q)],capture_output=True,text=True)
+              if r.returncode: raise SystemExit(f'{f} JS error: {r.stderr}')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'Cinemap Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html my-cinemap.html experience.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Finish calendar My Cinemap and IMAX GT polish'
+          git push

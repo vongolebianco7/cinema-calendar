@@ -1,0 +1,76 @@
+/* One local canvas is both the preview and the PNG source. No image/API requests. */
+const artPalettes = {dark:['#111111','#f5f0e8'],red:['#7d1518','#fff7e9'],navy:['#152033','#eef3fa'],forest:['#173126','#edf4e8'],sand:['#c9ad84','#241d16'],graphite:['#25282d','#f2f2ef'],cobalt:['#123b68','#eef7ff'],plum:['#4b244c','#fff1fb'],cream:['#f1e7d4','#2e2922'],sage:['#8fa18e','#111b13'],blueprint:['#173f5f','#f2f7fb'],rose:['#a85f68','#fff7f4'],mono:['#dedede','#151515'],amber:['#b47722','#fff8e8'],teal:['#165b5a','#efffff'],lavender:['#d8cfea','#261f32'],paper:['#f4f0e6','#24201a']};
+let artworkFile=null, artworkRevision=0, artworkURL=null;
+const artValue=id=>document.getElementById(id).value;
+const artFont='"Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
+function artText(ctx,text,x,y,width,size,maxLines=2,weight=700){
+  const chars=Array.from(String(text||''));
+  let lines=[];
+  const wrap=()=>{lines=[''];for(const ch of chars){let n=lines.length-1;if(ctx.measureText(lines[n]+ch).width>width&&lines[n])lines.push(ch);else lines[n]+=ch}};
+  do{ctx.font=`${weight} ${size}px ${artFont}`;wrap();if(lines.length<=maxLines||size<=22)break;size-=2}while(true);
+  if(lines.length>maxLines){lines=lines.slice(0,maxLines);let last=lines[maxLines-1];while(last&&ctx.measureText(last+'…').width>width)last=Array.from(last).slice(0,-1).join('');lines[maxLines-1]=last+'…'}
+  lines.forEach((line,i)=>ctx.fillText(line,x,y+i*size*1.4));
+  return lines.length*size*1.4;
+}
+function drawArtwork(movies){
+  const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
+  const shape=artValue('format'),layout=artValue('layout');
+  c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
+  const w=c.width,h=c.height,pad=96,inner=w-pad*2;
+  const [bg,fg]=artPalettes[artValue('theme')]||['#e8e1d4','#191919'];
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);ctx.fillStyle=fg;ctx.textBaseline='top';
+  const rule=(x,y,width,alpha=.3)=>{ctx.save();ctx.globalAlpha=alpha;ctx.fillRect(x,y,width,2);ctx.restore()};
+  ctx.font=`700 22px ${artFont}`;ctx.fillText('MY CINEMAP',pad,pad);
+  ctx.textAlign='right';ctx.font=`400 22px ${artFont}`;ctx.fillText(String(movies.length).padStart(2,'0')+' FILMS',w-pad,pad);ctx.textAlign='left';
+  rule(pad,pad+48,inner);
+  const titleY=pad+84;
+  const titleHeight=artText(ctx,artValue('title'),pad,titleY,inner,shape==='landscape'?68:88,2);
+  ctx.globalAlpha=.68;
+  const subY=titleY+titleHeight+16;
+  const subHeight=artText(ctx,artValue('sub'),pad,subY,inner,28,2,400);ctx.globalAlpha=1;
+  const top=subY+subHeight+48,bottom=h-140,available=bottom-top;
+  const items=movies.slice(0,10);
+  if(!items.length){ctx.globalAlpha=.6;artText(ctx,'あなたの映画を、ここに。',pad,top+available*.3,inner,48,2);ctx.globalAlpha=1;}
+  const columns=layout==='ranking'?1:2,rows=Math.ceil(items.length/columns)||1,gap=56;
+  const cellW=(inner-gap*(columns-1))/columns,cellH=available/rows;
+  items.forEach((m,i)=>{
+    const col=columns===1?0:Math.floor(i/rows),row=columns===1?i:i%rows;
+    const x=pad+col*(cellW+gap),y=top+row*cellH;
+    rule(x,y,cellW,layout==='minimal'?.16:.35);
+    const compact=cellH<90,numW=layout==='minimal'?76:108;
+    const numberSize=Math.min(layout==='minimal'?40:72,cellH*.56);
+    ctx.font=`400 ${numberSize}px Georgia,serif`;ctx.globalAlpha=layout==='minimal'?.5:1;
+    ctx.fillText(String(i+1).padStart(2,'0'),x,y+Math.min(22,cellH*.15));ctx.globalAlpha=1;
+    const textX=x+numW,textW=cellW-numW-(compact?90:0);
+    const nameSize=layout==='minimal'?32:Math.min(42,cellH*.27);
+    const nameH=artText(ctx,m.title,textX,y+Math.min(22,cellH*.15),textW,Math.max(24,nameSize),compact?1:2);
+    ctx.globalAlpha=.6;ctx.font=`400 22px ${artFont}`;
+    if(compact){ctx.textAlign='right';ctx.fillText(String(m.year||''),x+cellW,y+cellH*.28);ctx.textAlign='left'}
+    else ctx.fillText(String(m.year||''),textX,y+Math.min(22,cellH*.15)+nameH+10);
+    ctx.globalAlpha=1;
+  });
+  rule(pad,h-110,inner);
+  ctx.font=`400 20px ${artFont}`;ctx.globalAlpha=.6;ctx.fillText('PERSONAL FILM SELECTION',pad,h-75);ctx.globalAlpha=1;
+  ctx.textAlign='right';ctx.font=`700 26px ${artFont}`;ctx.fillText('Cinemap',w-pad,h-80);ctx.textAlign='left';
+  c.setAttribute('aria-label',artValue('title')+'。'+movies.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
+  artworkFile=null;document.getElementById('share').disabled=true;
+  const revision=++artworkRevision;
+  c.toBlob(blob=>{if(!blob||revision!==artworkRevision)return;artworkFile=new File([blob],'my-cinemap.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
+}
+function downloadArtwork(file){
+  if(artworkURL)URL.revokeObjectURL(artworkURL);
+  artworkURL=URL.createObjectURL(file);
+  const a=document.createElement('a');a.href=artworkURL;a.download='my-cinemap.png';document.body.append(a);a.click();a.remove();
+}
+async function saveArtwork(){
+  const msg=document.getElementById('msg');
+  try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinemap.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGを保存しました。iPhoneの写真に保存するには「画像を共有」を選んでください。'}
+  catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}
+}
+async function shareArtwork(){
+  const msg=document.getElementById('msg'),file=artworkFile;
+  if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}
+  try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}
+  catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}
+}
+window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

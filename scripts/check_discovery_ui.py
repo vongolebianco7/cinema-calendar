@@ -66,7 +66,7 @@ if "firstSeg" not in calendar or "（継続）" not in calendar:
 
 # My Cinemap layout/theme gates.
 my = text("my-cinemap.html")
-for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "Modern / Graphite", "Night / Cobalt", "Art House / Plum", "Magazine / Cream", "aspect-ratio:16/10", "drawFit", "syncThemeChoices"]:
+for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "Modern / Graphite", "Night / Cobalt", "Art House / Plum", "Magazine / Cream", "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
 

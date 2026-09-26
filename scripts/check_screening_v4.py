@@ -1,22 +1,16 @@
 import pathlib, sys
 
+model = pathlib.Path('js/screening-model-v7.js').read_text(encoding='utf-8')
 html = pathlib.Path('search.html').read_text(encoding='utf-8')
 errors=[]
-required=[
-    'IMAX撮影と拡張画角を確認できる作品は、CinemapではIMAXとの相性を高く評価します。',
-    'formatVerdictLabelV5',
-    'なぜこの評価？',
-    'この作品で効くポイント',
-    '方式固有の裏付け',
-]
-for token in required:
-    if token not in html: errors.append('missing '+token)
-if 'if(key==="imax"&&e.filmed_for_imax===true&&e.imax_expanded_ratio&&e.imax_expanded_ratio!=="unknown")score=5' not in html:
-    errors.append('verified IMAX capture + expanded ratio must score 5')
-if 'function verdictV3(score)' in html:
-    errors.append('old ambiguous compact verdict function remains')
+for token in ['imax_expanded_ratio','imax_camera','score=5','拡張画角','IMAXカメラ撮影']:
+    if token not in model: errors.append('missing IMAX evidence rule: '+token)
+if 'js/screening-model-v7.js' not in html:
+    errors.append('search detail must use the shared v7 model')
+if 'formatHeroTitle' in html:
+    errors.append('final-verdict hero must not return')
 if errors:
-    print('screening v4 failed')
+    print('screening IMAX regression failed')
     [print('-',e) for e in errors]
     sys.exit(1)
-print('screening v4 passed')
+print('screening IMAX regression passed')

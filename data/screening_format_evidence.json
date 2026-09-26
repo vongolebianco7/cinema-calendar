@@ -1,7 +1,8 @@
 {
-  "version": 2,
+  "version": 3,
   "updated": "2026-09-26",
   "source_policy": "official-first; unknown when unverified",
+  "trait_policy": "cinematic traits are descriptive metadata, not manual format scores",
   "default": {
     "imax_camera": "unknown",
     "imax_expanded_ratio": "unknown",
@@ -57,6 +58,87 @@
           "formats": ["imax"]
         }
       ]
+    },
+    "155": {
+      "title": "The Dark Knight",
+      "imax_camera": "imax_film",
+      "imax_expanded_ratio": "mixed",
+      "filmed_for_imax": true,
+      "imax_dmr_only": false,
+      "cinematic_traits": {
+        "scale": 5,
+        "spatial": 4,
+        "motion": 5,
+        "physical": 5,
+        "setpiece": 5,
+        "visual": 4,
+        "audio": 5,
+        "contemplative": 2,
+        "framing": 3,
+        "lateral": 4
+      },
+      "sources": [
+        {
+          "label": "IMAX — Nolan films shot with IMAX cameras",
+          "url": "https://www.imax.com/news/experience-tenet-IMAX-70mm",
+          "formats": ["imax"]
+        }
+      ]
+    },
+    "414906": {
+      "title": "The Batman",
+      "dolby_vision_master": true,
+      "dolby_atmos_mix": true,
+      "cinematic_traits": {
+        "scale": 4,
+        "spatial": 3,
+        "motion": 4,
+        "physical": 4,
+        "setpiece": 5,
+        "visual": 5,
+        "audio": 5,
+        "contemplative": 3,
+        "framing": 3,
+        "lateral": 3
+      },
+      "sources": [
+        {
+          "label": "Dolby — The Batman creator interview",
+          "url": "https://professional.dolby.com/hear-from-the-creators/the-batman/",
+          "formats": ["dolby_cinema"]
+        }
+      ]
+    },
+    "581734": {
+      "title": "Nomadland",
+      "cinematic_traits": {
+        "scale": 3,
+        "spatial": 5,
+        "motion": 1,
+        "physical": 1,
+        "setpiece": 1,
+        "visual": 4,
+        "audio": 2,
+        "contemplative": 5,
+        "framing": 2,
+        "lateral": 4
+      }
+    },
+    "783675": {
+      "title": "THE FIRST SLAM DUNK",
+      "cinematic_traits": {
+        "scale": 4,
+        "spatial": 4,
+        "motion": 5,
+        "physical": 5,
+        "setpiece": 4,
+        "visual": 3,
+        "audio": 5,
+        "contemplative": 2,
+        "framing": 2,
+        "lateral": 5,
+        "sports": 5
+      }
     }
   },
   "title_fixtures": {

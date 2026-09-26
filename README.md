@@ -21,3 +21,5 @@ Vercel のフロントエンドは旧環境として扱い、今後の本番判�
 ## Verification
 
 フロントエンドの変更後は、GitHub Pages 上の実画面を確認して完了判定します。
+
+<!-- pages-refresh: 2026-09-26 legacy-redirect-fix -->

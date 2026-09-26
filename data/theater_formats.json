@@ -3,6 +3,20 @@
   "note": "公式ブランド/劇場ページで確認できた導入情報をCinemap用に整理。網羅性は公式ソース更新に合わせて拡張。",
   "screens": [
     {
+      "format": "IMAX GT",
+      "theater": "グランドシネマサンシャイン 池袋",
+      "prefecture": "東京都",
+      "screen": "シアター12",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/gdcs/"
+    },
+    {
+      "format": "IMAX GT",
+      "theater": "109シネマズ大阪エキスポシティ",
+      "prefecture": "大阪府",
+      "screen": "シアター11",
+      "source_url": "https://109cinemas.net/osaka-expocity/establishment.html"
+    },
+    {
       "format": "IMAX",
       "theater": "TOHOシネマズ ららぽーと横浜",
       "prefecture": "神奈川県",

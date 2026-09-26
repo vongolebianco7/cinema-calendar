@@ -3,8 +3,8 @@ name: Apply ranking three-column grid
 on:
   push:
     paths:
-      - '.github/workflows/apply-ranking-three-column-20260927.yml'
-  workflow_dispatch:
+      - "scripts/apply_ranking_three_column_20260927.py"
+      - ".github/workflows/apply-ranking-three-column-20260927.yml"
 
 permissions:
   contents: write
@@ -15,100 +15,44 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Add regression test and confirm RED
-        shell: bash
+      - name: Prepare ranking regression tests
+        run: python scripts/apply_ranking_three_column_20260927.py prepare-tests
+
+      - name: Confirm RED before implementation
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          rail_test = Path('tests/test_mobile_movie_rails.py')
-          text = rail_test.read_text(encoding='utf-8')
-          old = "    'rankings.html': ['mobile-movie-rails-v1', '.rankGrid{display:flex', '.rankCard{flex:0 0 104px', 'overflow-x:auto'],\n"
-          if old not in text:
-              raise SystemExit('expected rankings rail assertion not found')
-          rail_test.write_text(text.replace(old, ''), encoding='utf-8')
-
-          Path('tests/test_rankings_three_column_grid.py').write_text('''from pathlib import Path\n\ntext = Path("rankings.html").read_text(encoding="utf-8")\n\nrequired = [\n    "/* rankings-three-column-grid-v1 */",\n    ".rankGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important",\n    ".awardGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important",\n]\nmissing = [token for token in required if token not in text]\nif missing:\n    raise SystemExit(f"rankings three-column grid missing: {missing}")\n\nforbidden = [\n    "/* mobile-movie-rails-v1 */",\n    ".rankGrid{display:flex!important",\n    ".rankCard{flex:0 0 104px",\n]\npresent = [token for token in forbidden if token in text]\nif present:\n    raise SystemExit(f"legacy rankings rail still present: {present}")\n\nprint("ranking three-column regression checks passed")\n''', encoding='utf-8')
-          PY
-
-          if python3 tests/test_rankings_three_column_grid.py; then
-            echo 'Expected RED test to fail before production change.' >&2
+          if python tests/test_rankings_three_column_grid.py; then
+            echo "Expected the new ranking grid test to fail before implementation." >&2
             exit 1
-          else
-            echo 'RED confirmed: new ranking grid test fails on current production CSS.'
           fi
+          echo "RED confirmed."
 
-      - name: Implement three-column ranking results
-        shell: bash
+      - name: Apply three-column ranking layout
+        run: python scripts/apply_ranking_three_column_20260927.py apply
+
+      - name: Verify ranking regression test
+        run: python tests/test_rankings_three_column_grid.py
+
+      - name: Run Python regression suite
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          path = Path('rankings.html')
-          text = path.read_text(encoding='utf-8')
-
-          text = text.replace(
-              '.rankGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}',
-              '.rankGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}'
-          )
-          text = text.replace(
-              '.awardGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}',
-              '.awardGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}'
-          )
-
-          legacy = '<style>/* mobile-movie-rails-v1 */@media(max-width:760px){html,body{max-width:100%;overflow-x:hidden}.wrap,.rankGrid{min-width:0;max-width:100%}.rankGrid{display:flex!important;grid-template-columns:none!important;flex-wrap:nowrap!important;gap:9px!important;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 1px 18px}.rankCard{flex:0 0 104px;width:104px;min-width:104px;max-width:104px;scroll-snap-align:start}.rankCard .body{padding:7px}.rankCard .title{font-size:11px}.rankCard .meta{font-size:9px}.rankGrid .empty{flex:0 0 100%;width:100%}}</style>'
-          if legacy not in text:
-              raise SystemExit('legacy mobile ranking rail block not found')
-
-          replacement = '''<style>/* rankings-three-column-grid-v1 */
-.rankGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;overflow:visible!important;padding:0!important}
-.rankCard{width:auto!important;min-width:0!important;max-width:none!important}
-.rankGrid .empty{grid-column:1/-1;width:auto!important}
-.awardGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
-@media(max-width:760px){
-  html,body{max-width:100%;overflow-x:hidden}
-  .wrap,.rankGrid,.awardGrid{min-width:0;max-width:100%}
-  .rankGrid,.awardGrid{gap:6px!important}
-  .rankCard .body{padding:7px}
-  .rankCard .title{font-size:11px}
-  .rankCard .meta{font-size:9px}
-  .awardCard{display:flex;flex-direction:column;gap:6px;padding:6px;min-width:0;overflow:hidden}
-  .awardPoster{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}
-  .awardTitle{font-size:10px;line-height:1.35;overflow-wrap:anywhere}
-  .awardYear,.awardMeta,.awardLinks a{font-size:9px}
-  .awardMeta{overflow-wrap:anywhere}
-}
-</style>'''
-          text = text.replace(legacy, replacement)
-
-          # Remove old responsive award column rules that would otherwise override the unified 3-column result layout.
-          text = text.replace('@media(max-width:760px){.awardGrid{grid-template-columns:1fr 1fr}.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,1fr);gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}@media(max-width:480px){.awardGrid{grid-template-columns:1fr}}',
-                              '@media(max-width:760px){.wrap{padding:0 12px}.rankGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.body{padding:7px}.title{font-size:11px}.hero{padding:20px 0 10px}}')
-
-          path.write_text(text, encoding='utf-8')
-          PY
-
-      - name: Verify GREEN and regression suite
-        shell: bash
-        run: |
-          python3 tests/test_rankings_three_column_grid.py
           for t in tests/test_*.py; do
             echo "==> $t"
-            python3 "$t"
+            python "$t"
           done
+
+      - name: Run movie information regression test
+        run: |
           if [ -f tests/test_movie_information.cjs ]; then
             node tests/test_movie_information.cjs
           fi
 
-      - name: Commit changes
-        shell: bash
+      - name: Commit ranking layout
         run: |
-          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
-            echo 'No changes to commit.'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rankings.html tests/test_mobile_movie_rails.py tests/test_rankings_three_column_grid.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
             exit 0
           fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add rankings.html tests/test_mobile_movie_rails.py tests/test_rankings_three_column_grid.py
-          git commit -m 'fix: unify ranking results into three-column grid'
+          git commit -m "fix: unify ranking results into three-column grid"
           git push

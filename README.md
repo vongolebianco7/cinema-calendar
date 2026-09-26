@@ -24,3 +24,4 @@ Vercel のフロントエンドは旧環境として扱い、今後の本番判�
 
 <!-- pages-refresh: 2026-09-26 legacy-redirect-fix -->
 <!-- pages-refresh: 2026-09-26 theater-links-only -->
+<!-- pages-refresh: 2026-09-26 detail-recovery -->

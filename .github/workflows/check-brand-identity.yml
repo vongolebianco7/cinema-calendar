@@ -1,0 +1,33 @@
+name: Check brand identity
+
+on:
+  push:
+    paths:
+      - "tests/test_brand_identity.py"
+      - "*.html"
+      - "manifest.webmanifest"
+      - "favicon.svg"
+      - "apple-touch-icon.png"
+      - "icon-192.png"
+      - "icon-512.png"
+      - ".github/workflows/check-brand-identity.yml"
+  pull_request:
+    paths:
+      - "tests/test_brand_identity.py"
+      - "*.html"
+      - "manifest.webmanifest"
+      - "favicon.svg"
+      - "apple-touch-icon.png"
+      - "icon-192.png"
+      - "icon-512.png"
+
+permissions:
+  contents: read
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run brand identity regression tests
+        run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v

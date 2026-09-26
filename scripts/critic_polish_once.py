@@ -1,0 +1,31 @@
+from pathlib import Path
+
+p = Path('critic.html')
+s = p.read_text(encoding='utf-8')
+
+if '/* critic compact v3.6 */' not in s:
+    css = r'''
+/* critic compact v3.6 */
+.hero{padding:20px 0 10px}.heroGrid{grid-template-columns:74px 1fr;gap:12px}.poster{width:74px}.hero h1{font-size:21px}.lead{font-size:11px;line-height:1.6}.topicSections{gap:8px}.topicSection{padding:9px}.topics{gap:6px}.topic{min-height:0;padding:9px 9px 9px 10px;border-radius:9px}.topic b{font-size:11px}.topic span{font-size:9px;margin-top:3px}.panel{margin:8px 0 14px;padding:12px}.question{font-size:16px}.human{margin-top:10px;padding-top:10px}.deep{padding-bottom:18px}.deep[open]{padding-bottom:24px}.relatedGroups{gap:9px}.works{gap:8px}.work{flex-basis:86px}.work img{width:86px}.dna{gap:6px}.dnaCell{padding:8px}.compareContext{padding:8px 9px}.matrix{display:none}.matrixTitle{display:none}
+@media(max-width:560px){.heroGrid{grid-template-columns:62px 1fr}.poster{width:62px}.topicSections{gap:7px}.topics{grid-template-columns:1fr 1fr}.topic{padding:8px}.topic b{font-size:10px}.topic span{font-size:8px}.panel{padding:10px}.video{grid-template-columns:90px 1fr}.video img{width:90px}}
+'''
+    s = s.replace('</style>', css + '</style>', 1)
+
+s = s.replace('<a class="back" href="search.html">← 作品詳細へ戻る</a>', '<a class="back" id="detailBack" href="search.html">← 作品詳細へ戻る</a>')
+
+start = s.find('async function fetchCriticMovie(id){')
+end = s.find('</script><script>(()=>', start)
+if start < 0 or end < 0:
+    raise SystemExit('critic loader markers not found')
+
+loader = r'''async function fetchCriticMovie(id,title=""){
+ if(id){try{const r=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(id),{cache:"no-store"});if(r.ok){const d=await r.json();if(d.movie)return d.movie}}catch{}}
+ if(title){try{const r=await fetch(API+"/api/movies?q="+encodeURIComponent(title)+"&limit=8",{cache:"no-store"});if(r.ok){const d=await r.json(),rows=[...(d.movies||[]),...(d.external||[])],n=String(title).toLowerCase().normalize("NFKC"),hit=rows.find(x=>String(x.title||"").toLowerCase().normalize("NFKC")===n)||rows.find(x=>String(x.original_title||"").toLowerCase().normalize("NFKC")===n)||rows[0];if(hit){const rid=hit.tmdbId||hit.id;if(rid&&String(rid)!==String(id)){try{const r2=await fetch(API+"/api/movie-detail?id="+encodeURIComponent(rid),{cache:"no-store"});if(r2.ok){const d2=await r2.json();if(d2.movie)return d2.movie}}catch{}}return hit}}}catch{}}
+ return null
+}
+(async()=>{const p=new URLSearchParams(location.search),id=p.get("id"),title=p.get("search")||p.get("title")||p.get("from")||"";const movie=await fetchCriticMovie(id,title);if(movie){const back=document.getElementById("detailBack"),mid=movie.tmdbId||movie.id||id;if(back)back.href="search.html?"+new URLSearchParams({id:String(mid||""),search:movie.title||title}).toString();render(movie);return}app.innerHTML='<div class="status">作品情報を取得できませんでした。<br><a href="search.html?search='+encodeURIComponent(title)+'" style="display:inline-block;margin-top:12px;color:#ddd">作品検索へ戻る →</a></div>'})();
+'''
+s = s[:start] + loader + s[end:]
+s = s.replace('Cinemap Critic Map v3.5', 'Cinemap Critic Map v3.6')
+p.write_text(s, encoding='utf-8')
+print('critic polished')

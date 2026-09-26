@@ -1,0 +1,128 @@
+name: Remove legacy frontend redirects 2026-09-26
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-legacy-frontend-redirects-20260926.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create regression test
+        run: |
+          mkdir -p tests
+          cat > tests/test_no_legacy_frontend_domains.py <<'PY'
+          from pathlib import Path
+
+          forbidden = [
+              'cinema-calendar-three.vercel.app',
+              'cinema-calendar-vongole1.vercel.app',
+              'cinema-calendar-git-main-vongole1.vercel.app',
+          ]
+          files = list(Path('.').glob('*.html')) + list(Path('js').rglob('*.js'))
+          hits = []
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              for domain in forbidden:
+                  if domain in text:
+                      hits.append(f'{path}: {domain}')
+          if hits:
+              raise SystemExit('legacy frontend domains remain:\n' + '\n'.join(hits))
+          print('no legacy frontend domains in user-facing HTML/JS')
+          PY
+
+      - name: Verify RED
+        run: |
+          if python tests/test_no_legacy_frontend_domains.py; then
+            echo 'Expected at least one legacy frontend reference before cleanup'
+            exit 1
+          else
+            echo 'Expected RED confirmed'
+          fi
+
+      - name: Remove legacy redirects and URLs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          forbidden = [
+              'cinema-calendar-three.vercel.app',
+              'cinema-calendar-vongole1.vercel.app',
+              'cinema-calendar-git-main-vongole1.vercel.app',
+          ]
+          files = list(Path('.').glob('*.html')) + list(Path('js').rglob('*.js'))
+          changed = []
+
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              original = text
+
+              if path.suffix == '.html':
+                  # Remove complete inline script blocks that contain any legacy frontend domain.
+                  def drop_legacy_script(match):
+                      block = match.group(0)
+                      return '' if any(domain in block for domain in forbidden) else block
+                  text = re.sub(r'<script(?:\s[^>]*)?>.*?</script>', drop_legacy_script, text, flags=re.S | re.I)
+
+              # Any remaining legacy absolute frontend URL in user-facing code is unsafe.
+              for domain in forbidden:
+                  text = text.replace('https://' + domain + '/cinema-calendar/', '')
+                  text = text.replace('https://' + domain + '/', '')
+                  text = text.replace('https://' + domain, '')
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed.append(str(path))
+
+          if not changed:
+              raise SystemExit('No user-facing files changed; expected legacy redirect references')
+          print('changed files:')
+          print('\n'.join(changed))
+          PY
+
+      - name: Verify GREEN
+        run: python tests/test_no_legacy_frontend_domains.py
+
+      - name: Verify HTML inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile, os
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              scripts = re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>', text, flags=re.S | re.I)
+              for i, src in enumerate(scripts):
+                  if not src.strip():
+                      continue
+                  fd, tmp = tempfile.mkstemp(suffix='.js')
+                  os.close(fd)
+                  Path(tmp).write_text(src, encoding='utf-8')
+                  result = subprocess.run(['node', '--check', tmp], capture_output=True, text=True)
+                  os.unlink(tmp)
+                  if result.returncode:
+                      raise SystemExit(f'{path} inline script {i} syntax error:\n{result.stderr}')
+          print('all inline JavaScript syntax checks passed')
+          PY
+
+      - name: Show removed-reference scope
+        run: |
+          git diff --name-only
+          git diff --stat
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' js tests/test_no_legacy_frontend_domains.py
+          git diff --cached --quiet && exit 0
+          git commit -m 'Remove legacy frontend redirects'
+          git push origin main

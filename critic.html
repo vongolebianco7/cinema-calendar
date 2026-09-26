@@ -31,7 +31,7 @@ async function load(){
  const p=new URLSearchParams(location.search),id=p.get('id'),title=p.get('search')||p.get('title')||'';
  app.className='status';app.textContent='批評情報を読み込み中…';
  try{
-  const evidence=await fetch('data/critic_evidence.json',{cache:'default'});
+  const evidence=await fetch('data/critic_evidence.json?v=20260926b',{cache:'default'});
   if(!evidence.ok)throw Error('evidence');const data=await evidence.json();
   const entry=data.films?.[String(id||'')]||{};
   const m={id,title:entry.title||title||'作品名を確認できませんでした',year:entry.year||'',related:[]};

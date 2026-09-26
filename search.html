@@ -114,7 +114,7 @@ function screeningRecommendationV3Html(m){
 }
 
 let criticEvidencePromise;
-function criticRegistry(){if(!criticEvidencePromise)criticEvidencePromise=fetch('data/critic_evidence.json',{cache:'default'}).then(r=>{if(!r.ok)throw Error('critic evidence unavailable');return r.json()}).catch(e=>{criticEvidencePromise=null;throw e});return criticEvidencePromise}
+function criticRegistry(){if(!criticEvidencePromise)criticEvidencePromise=fetch('data/critic_evidence.json?v=20260926b',{cache:'default'}).then(r=>{if(!r.ok)throw Error('critic evidence unavailable');return r.json()}).catch(e=>{criticEvidencePromise=null;throw e});return criticEvidencePromise}
 function renderInlineCriticism(m,data){
  const evidence=CinemapCriticEvidence.forMovie(data,m.tmdbId||m.id),byId=new Map(evidence.sources.map(x=>[x.id,x]));
  const cite=ids=>ids.map(id=>byId.get(id)).filter(Boolean).map(x=>'<a href="'+E(x.url)+'" target="_blank" rel="noopener noreferrer">'+E(x.name)+'</a>').join(' / ');

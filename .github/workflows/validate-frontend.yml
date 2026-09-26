@@ -6,6 +6,7 @@ on:
       - "*.html"
       - "backend/app/api/critic-videos/route.ts"
       - "js/critic-evidence.js"
+      - "js/my-cinemap-art.js"
       - "data/critic_evidence.json"
       - "scripts/check_critic_evidence.js"
       - "data/source_registry.json"
@@ -15,6 +16,9 @@ on:
       - "scripts/check_discovery_ui.py"
       - "scripts/check_core_journey.py"
       - "scripts/check_critic_map.py"
+      - "scripts/apply_brand_identity_20260927.py"
+      - "scripts/fix_brand_header_20260927.py"
+      - "scripts/fix_my_cinemap_export_brand_20260927.py"
       - "tests/test_brand_identity.py"
       - "manifest.webmanifest"
       - "favicon.svg"
@@ -27,6 +31,7 @@ on:
       - "*.html"
       - "backend/app/api/critic-videos/route.ts"
       - "js/critic-evidence.js"
+      - "js/my-cinemap-art.js"
       - "data/critic_evidence.json"
       - "scripts/check_critic_evidence.js"
       - "data/source_registry.json"
@@ -35,6 +40,9 @@ on:
       - "scripts/check_sources.py"
       - "scripts/check_discovery_ui.py"
       - "scripts/check_critic_map.py"
+      - "scripts/apply_brand_identity_20260927.py"
+      - "scripts/fix_brand_header_20260927.py"
+      - "scripts/fix_my_cinemap_export_brand_20260927.py"
       - "tests/test_brand_identity.py"
       - "manifest.webmanifest"
       - "favicon.svg"
@@ -79,6 +87,8 @@ jobs:
               sys.exit(1)
           print("All inline JavaScript syntax checks passed.")
           PY
+      - name: Check My Cinemap artwork JavaScript syntax
+        run: node --check js/my-cinemap-art.js
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

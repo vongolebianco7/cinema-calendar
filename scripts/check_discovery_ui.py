@@ -85,9 +85,12 @@ else:
         if required not in tools:
             errors.append(f"My Cinemap compact/director/template feature missing: {required}")
 art = text("js/my-cinemap-art.js")
-for required in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial", "drawMedal", "cinemapLogo", "assets/cinemap-logo.png?v=2", "m.director"]:
+for required in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial", "drawMedal", "Cinemap", "EXPLORE CINEMA", "m.director"]:
     if required not in art:
         errors.append(f"My Cinemap final artwork/director missing: {required}")
+for forbidden in ["cinemapLogo", "assets/cinemap-logo.png?v=2"]:
+    if forbidden in art:
+        errors.append(f"My Cinemap final artwork still uses legacy brand: {forbidden}")
 for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
     p = ROOT / js_path
     if p.exists():

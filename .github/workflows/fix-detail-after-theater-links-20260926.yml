@@ -1,0 +1,56 @@
+name: Fix detail after theater links 2026-09-26
+on:
+  push:
+    paths:
+      - .github/workflows/fix-detail-after-theater-links-20260926.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Replace renderer with dependency-free official links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          repl='''function theaterScheduleHtml(m){\n // theater-official-links-v2: static, dependency-free renderer to avoid breaking detail view.\n return '<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links"><a href="https://www.tohotheater.jp/" target="_blank" rel="noopener noreferrer">TOHOシネマズ</a><a href="https://www.aeoncinema.com/" target="_blank" rel="noopener noreferrer">イオンシネマ</a><a href="https://www.unitedcinemas.jp/" target="_blank" rel="noopener noreferrer">ユナイテッド・シネマ</a><a href="https://www.smt-cinema.com/" target="_blank" rel="noopener noreferrer">MOVIX／ピカデリー</a><a href="https://tjoy.jp/" target="_blank" rel="noopener noreferrer">T・ジョイ</a><a href="https://109cinemas.net/" target="_blank" rel="noopener noreferrer">109シネマズ</a></div></div>';\n}'''
+          pat=r'function theaterScheduleHtml\(m\)\{.*?\n\}'
+          ns,n=re.subn(pat,repl,s,count=1,flags=re.S)
+          if n != 1:
+              raise SystemExit('theaterScheduleHtml replacement failed')
+          p.write_text(ns,encoding='utf-8')
+          PY
+      - name: Verify renderer and syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          assert 'theater-official-links-v2' in s
+          assert 'theaterSchedules.schedules' not in s[s.index('function theaterScheduleHtml(m)'):s.index('function movieTimelineHtml(m)')]
+          assert '上映時間を公式サイトで確認' in s
+          PY
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('index.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',s,re.S|re.I)
+          Path('/tmp/all-inline.js').write_text('\n'.join(scripts),encoding='utf-8')
+          PY
+          node --check /tmp/all-inline.js
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Fix movie detail after theater link change"
+          git pull --rebase origin main
+          git push origin main

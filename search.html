@@ -163,9 +163,10 @@ function viewingTimelineHtml(m,av){
 }
 function screeningKnown(v){return v!==undefined&&v!==null&&v!=="unknown"}
 function screeningConfidence(values){const known=values.filter(screeningKnown).length;if(known===values.length&&known>0)return "確認済み";if(known>0)return "一部確認";return "情報不足"}
+function formatSources(sources,key){return (sources||[]).filter(s=>Array.isArray(s.formats)&&s.formats.includes(key))}
 function formatReasonHtml(x){return '<div class="formatReasonTitle">上映方式おすすめの理由</div><small>'+E(x.reasons.join(" "))+'</small>'+(x.sub?'<div class="formatSub">'+E(x.sub)+'</div>':'')+'<div class="formatConfidence">根拠：'+E(x.confidence)+'</div>'+(x.sources?.length?'<div class="formatSources">'+x.sources.map(s=>'<a target="_blank" rel="noopener noreferrer" href="'+E(s.url)+'">'+E(s.label||"根拠")+' ↗</a>').join("")+'</div>':'')}
 function scoreScreeningFormats(m,evidence){
- const e=evidence||{},sources=e.sources||[],imaxExpanded=["1.43","1.90","mixed"].includes(e.imax_expanded_ratio),imaxCamera=["imax_film","imax_certified_digital"].includes(e.imax_camera);
+ const e=evidence||{},allSources=e.sources||[],imaxExpanded=["1.43","1.90","mixed"].includes(e.imax_expanded_ratio),imaxCamera=["imax_film","imax_certified_digital"].includes(e.imax_camera);
  let imaxScore=1,imaxReasons=[];
  if(imaxCamera&&imaxExpanded){imaxScore=5;imaxReasons.push("IMAXカメラ撮影と拡張画角が確認でき、通常上映より多い映像情報を見られるためIMAXを最優先。")}
  else if(e.filmed_for_imax===true){imaxScore=4;imaxReasons.push("Filmed for IMAXとして作品側がIMAX上映を前提に設計していることが確認できるため。")}
@@ -174,7 +175,7 @@ function scoreScreeningFormats(m,evidence){
  else imaxReasons.push("IMAX専用画角・IMAX撮影など作品固有の優位性を確認できないため、通常上映を優先。")
 
  let dolbyScore=1,dolbyReasons=[];
- if(e.dolby_vision_master===true&&e.dolby_atmos_mix===true){dolbyScore=5;dolbyReasons.push("Dolby VisionとDolby Atmosの両方が確認でき、映像と立体音響をセットで活かせるため。")}
+ if(e.dolby_vision_master===true&&e.dolby_atmos_mix===true){dolbyScore=(e.cinematography_notes||e.director_or_dp_intent)?5:4;dolbyReasons.push(dolbyScore===5?"Dolby VisionとDolby Atmosの両方に加え、作品固有の映像・音響設計の根拠も確認できるため。":"Dolby VisionとDolby Atmosの両方が確認できるため。作品固有の演出意図までは確認できないので最高評価にはしない。")}
  else if(e.dolby_vision_master===true||e.dolby_atmos_mix===true){dolbyScore=3;dolbyReasons.push(e.dolby_vision_master===true?"Dolby Visionの映像メリットは確認できるが、Atmosまで揃う根拠がないため。":"Dolby Atmosミックスは確認できるが、Dolby Visionまで揃う根拠がなく、Dolby Cinemaとしては中評価。")}
  else dolbyReasons.push("Dolby Vision / Dolby Atmosの作品固有対応を確認できないため、Dolby Cinemaを積極推奨しない。")
 
@@ -183,10 +184,10 @@ function scoreScreeningFormats(m,evidence){
  const premiumMax=Math.max(imaxScore,dolbyScore,motionScore,screenxScore),standardScore=premiumMax<=2?5:premiumMax===3?4:premiumMax===5?2:3;
  const rows={
   standard:{key:"standard",name:"通常上映",score:standardScore,reasons:[premiumMax<=2?"追加料金に見合うプレミアム方式固有のメリットが確認できないため、通常上映が最も合理的。":"プレミアム方式に確認済みの利点があるため、通常上映はコスト重視の選択肢。"],confidence:"確認済み",sources:[]},
-  imax:{key:"imax",name:"IMAX",score:imaxScore,reasons:imaxReasons,confidence:screeningConfidence([e.imax_camera,e.imax_expanded_ratio,e.filmed_for_imax,e.imax_dmr_only]),sources},
-  dolby_cinema:{key:"dolby_cinema",name:"Dolby Cinema",score:dolbyScore,reasons:dolbyReasons,confidence:screeningConfidence([e.dolby_vision_master,e.dolby_atmos_mix]),sources,sub:e.dolby_atmos_mix===true?"Dolby Atmos対応：立体音響は確認済み。AtmosはDolby Cinemaとは別の独立上映方式ではなく、Dolby Cinemaを構成する音響技術のひとつです。":"Dolby Atmosは音響技術であり、Dolby Cinemaと同列の上映方式としては扱いません。"},
-  motion:{key:"motion",name:"4DX / MX4D",score:motionScore,reasons:motionReasons,confidence:screeningConfidence([e.official_4dx,e.official_mx4d]),sources},
-  screenx:{key:"screenx",name:"ScreenX",score:screenxScore,reasons:screenxReasons,confidence:screeningConfidence([e.official_screenx]),sources}
+  imax:{key:"imax",name:"IMAX",score:imaxScore,reasons:imaxReasons,confidence:screeningConfidence([e.imax_camera,e.imax_expanded_ratio,e.filmed_for_imax,e.imax_dmr_only]),sources:formatSources(allSources,"imax")},
+  dolby_cinema:{key:"dolby_cinema",name:"Dolby Cinema",score:dolbyScore,reasons:dolbyReasons,confidence:screeningConfidence([e.dolby_vision_master,e.dolby_atmos_mix]),sources:formatSources(allSources,"dolby_cinema"),sub:e.dolby_atmos_mix===true?"Dolby Atmos対応：立体音響は確認済み。AtmosはDolby Cinemaとは別の独立上映方式ではなく、Dolby Cinemaを構成する音響技術のひとつです。":"Dolby Atmosは音響技術であり、Dolby Cinemaと同列の上映方式としては扱いません。"},
+  motion:{key:"motion",name:"4DX / MX4D",score:motionScore,reasons:motionReasons,confidence:screeningConfidence([e.official_4dx,e.official_mx4d]),sources:formatSources(allSources,"motion")},
+  screenx:{key:"screenx",name:"ScreenX",score:screenxScore,reasons:screenxReasons,confidence:screeningConfidence([e.official_screenx]),sources:formatSources(allSources,"screenx")}
  };
  const winner=FORMAT_ORDER.map(k=>rows[k]).reduce((a,b)=>b.score>a.score?b:a,rows.standard);return {rows,winner}
 }

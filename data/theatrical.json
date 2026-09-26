@@ -1,46 +1,17 @@
 {
-  "generated_at": "2026-09-25T18:28:36.466139+00:00",
+  "generated_at": "2026-09-26T18:28:58.311483+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-08-26",
-      "2027-01-23"
+      "2026-08-27",
+      "2027-01-24"
     ],
     "background_slice": [
-      "2026-01-23",
-      "2026-03-23"
+      "2026-03-25",
+      "2026-05-23"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1538343,
-      "title": "Bloody Love 歌劇「ババンババンバンバンパイア」",
-      "original_title": "Bloody Love 歌劇「ババンババンバンバンパイア」",
-      "date": "2025-09-25",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/9rr6XNHOQfEwa4LwFhNYCMXRBFA.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1538343",
-      "director": "Keita Kawajiri",
-      "director_id": 2379684,
-      "cast": [
-        "水江建太",
-        "Risuto Sakimoto",
-        "Yuka Ide",
-        "Hikaru Yamano"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 134,
-      "genres": [
-        "音楽",
-        "コメディ"
-      ]
-    },
     {
       "id": 22984,
       "title": "ザ・フー キッズ・アー・オールライト",
@@ -12805,6 +12776,26 @@
       "genres": []
     },
     {
+      "id": 1778414,
+      "title": "DxS [SERENADE] ON STAGE - JAPAN",
+      "original_title": "DxS [SERENADE] ON STAGE - JAPAN",
+      "date": "2026-04-30",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/vm3fUcbs2IuGM1UrZCsTHcGzi8v.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "13人組グループ・SEVENTEENのDKとSEUNGKWANによるスペシャルユニット・DxS (SEVENTEEN)の初単独コンサート『DxS [SERENADE] ON STAGE - JAPAN』より、2026年4月30日(木)に千葉・幕張メッセで行われた日本ファイナル公演を、全曲ノーカットで独占放送する。",
+      "tmdb": "https://www.themoviedb.org/movie/1778414",
+      "director": null,
+      "director_id": null,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
+    },
+    {
       "id": 1164860,
       "title": "ユートピアの力",
       "original_title": "Kraft der Utopie – Leben mit Le Corbusier in Chandigarh",
@@ -19793,7 +19784,7 @@
       "original_title": "スワロウテイル",
       "date": "2026-09-04",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/p67xuAENDxee2DZZfRQFiVH3iBR.jpg",
       "score": 7.5,
       "votes": 101,
@@ -19817,7 +19808,10 @@
         "音楽",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "revival": true,
+      "original_jp_release_date": "1996-09-14",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1208284,
@@ -20596,6 +20590,35 @@
       "checked_at": "2026-09-25T18:28:36.466139+00:00"
     },
     {
+      "id": 1780426,
+      "title": "チャオ・ヤングの墓",
+      "original_title": "チャオ・ヤングの墓",
+      "date": "2026-09-18",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/rigLesfysAswVKLfjNooss9ZkAr.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "自然史博物館で働く分類学者の荒須賀南港（あらすか・みなと）は、ひょんなことから中学生の比野光（ひのひかり）とその弟・比野ぼんべとともに南に浮かぶ卵池島（らんちとう）へとやってきた。テレビマンの川田鱚太（かわた・きすた）も加わり、出会ったばかりの4人は、古いレンタル車に乗って軽快に出発する。\r 光の目的は伝説のカウボーイ、チャオ・ヤングの墓を見つけること。卵池島には名を馳せたスターだけが埋葬されている墓地があり、そこにチャオ・ヤングの墓もあると光は信じている。\r 化石ハンターの三兄弟に追われ、もぐらレストランが出現し、謎の博士に遭遇するうち冒険は混迷を極めていく。存在するかどうかもわからない墓をさがす中、で島は夜になり朝になり、4人は、どこに、向かうのか。",
+      "tmdb": "https://www.themoviedb.org/movie/1780426",
+      "director": "こんにち博士",
+      "director_id": 6505395,
+      "cast": [
+        "大場みなみ",
+        "山脇辰哉",
+        "端栞里",
+        "井田よと"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 85,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
+    },
+    {
       "id": 1645621,
       "title": "WIND GAP",
       "original_title": "WIND GAP",
@@ -20956,7 +20979,7 @@
       "original_title": "Le Procès",
       "date": "2026-09-25",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gSSnEwxXErFMhHwDY8yBPuN6hIj.jpg",
       "score": 7.391,
       "votes": 589,
@@ -20981,7 +21004,10 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "revival": true,
+      "original_jp_release_date": "1964-01-28",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1425485,
@@ -21492,7 +21518,7 @@
       "original_title": "still dark",
       "date": "2026-10-03",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/tmJrPruWPchsLVeQHRPLJ8VENo.jpg",
       "score": 0.0,
       "votes": 0,
@@ -21510,7 +21536,10 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "revival": true,
+      "original_jp_release_date": "2020-02-04",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1393151,
@@ -21599,7 +21628,8 @@
       "runtime": 88,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1600736,
@@ -21627,7 +21657,8 @@
       "runtime": 77,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1670114,
@@ -21653,7 +21684,8 @@
         "Japan"
       ],
       "runtime": 0,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 406,
@@ -21661,7 +21693,7 @@
       "original_title": "La Haine",
       "date": "2026-10-09",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
       "score": 8.085,
       "votes": 4708,
@@ -21682,7 +21714,10 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "revival": true,
+      "original_jp_release_date": "1996-02-17",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1423191,
@@ -21693,7 +21728,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/wHXSnGH3zQtvpxPwaBXMoS9o8Vl.jpg",
       "score": 7.3,
-      "votes": 400,
+      "votes": 478,
       "overview": "ある医療品の配送を請け負った男を襲う、地獄の一夜。 男は、己の命運を懸けた壮絶なサバイバルを余儀なくされる…",
       "tmdb": "https://www.themoviedb.org/movie/1423191",
       "director": "ザック・クレッガー",
@@ -21714,7 +21749,8 @@
         "ホラー",
         "サイエンスフィクション",
         "アドベンチャー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1248832,
@@ -21724,8 +21760,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vi2HvWOBtR1pcr4vBoYe43ldkuu.jpg",
-      "score": 9.333,
-      "votes": 3,
+      "score": 7.8,
+      "votes": 6,
       "overview": "石油採掘会社のCEOとして君臨する傲慢な権力者、ディガー・ロックウェル。己の利益しか考えていない彼の欲深い行動のせいで、地球は滅亡の危機に陥ってしまう。大統領から事態の収拾を命じられたディガーは、世界を救うべくシャベルを片手に立ち上がるが……。",
       "tmdb": "https://www.themoviedb.org/movie/1248832",
       "director": "アレハンドロ・ゴンサレス・イニャリトゥ",
@@ -21741,9 +21777,10 @@
       ],
       "runtime": 129,
       "genres": [
-        "コメディ",
-        "ドラマ"
-      ]
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1740268,
@@ -21769,7 +21806,8 @@
       "runtime": 90,
       "genres": [
         "音楽"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1632015,
@@ -21800,7 +21838,8 @@
         "ドラマ",
         "謎",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1592548,
@@ -21826,7 +21865,8 @@
       "genres": [
         "アニメーション",
         "アクション"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1590933,
@@ -21855,7 +21895,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 621689,
@@ -21882,7 +21923,8 @@
       "runtime": 83,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 59352,
@@ -21890,7 +21932,7 @@
       "original_title": "太陽を盗んだ男",
       "date": "2026-10-16",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/avcCRRIsQ1Toz0F18zvQ5zOg7QR.jpg",
       "score": 7.4,
       "votes": 41,
@@ -21913,7 +21955,10 @@
         "スリラー",
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "revival": true,
+      "original_jp_release_date": "1979-10-06",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 793058,
@@ -21944,7 +21989,8 @@
         "アドベンチャー",
         "コメディ",
         "ファンタジー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1255833,
@@ -21972,7 +22018,8 @@
       "runtime": 98,
       "genres": [
         "スリラー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1153576,
@@ -22002,7 +22049,8 @@
       "genres": [
         "アクション",
         "ファンタジー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1692852,
@@ -22031,7 +22079,8 @@
       "genres": [
         "ドラマ",
         "戦争"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1687667,
@@ -22059,7 +22108,8 @@
       "runtime": 71,
       "genres": [
         "ホラー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1614539,
@@ -22089,7 +22139,8 @@
         "アニメーション",
         "ドラマ",
         "音楽"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1575872,
@@ -22116,7 +22167,8 @@
       "runtime": 114,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1553200,
@@ -22147,7 +22199,8 @@
         "ドラマ",
         "謎",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1774868,
@@ -22171,7 +22224,8 @@
       ],
       "countries": [],
       "runtime": 0,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1693902,
@@ -22198,7 +22252,8 @@
       "genres": [
         "ドラマ",
         "ファミリー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1283320,
@@ -22227,7 +22282,8 @@
       "runtime": 99,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1053231,
@@ -22256,7 +22312,8 @@
       "genres": [
         "コメディ",
         "アクション"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1184941,
@@ -22266,8 +22323,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/4hfMbVbYc2gsMnSE1K8Oc9LQH4j.jpg",
-      "score": 6.6,
-      "votes": 45,
+      "score": 6.543,
+      "votes": 46,
       "overview": "1990年代後半の夏、8歳の少女サーシャはハンガリー系移民の家族とともにカナダ・バンクーバー島に移り住む。豊かな自然に囲まれた土地で、サーシャは兄たちや新しい友人たちと過ごしながら、少しずつ居場所を見つけていく。ところが、一番上の兄ジェレミーは「問題行動」を繰り返し、家族は限界を迎えつつある。両親はジェレミーの問題を専門家たちに相談する中、困難な選択を迫られていた。20年後、映画監督となったサーシャは、カメラを手に家族の過去をたどり始める──。",
       "tmdb": "https://www.themoviedb.org/movie/1184941",
       "director": "Sophy Romvari",
@@ -22286,7 +22343,8 @@
       "runtime": 91,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1483525,
@@ -22315,7 +22373,8 @@
       "runtime": 165,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1703008,
@@ -22338,7 +22397,8 @@
         "Japan"
       ],
       "runtime": 91,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1689343,
@@ -22362,7 +22422,8 @@
       ],
       "countries": [],
       "runtime": 0,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1526917,
@@ -22393,7 +22454,8 @@
         "サイエンスフィクション",
         "ファンタジー",
         "アドベンチャー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1473439,
@@ -22425,7 +22487,8 @@
         "スリラー",
         "犯罪",
         "アクション"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1410955,
@@ -22454,7 +22517,8 @@
       "genres": [
         "ロマンス",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 517815,
@@ -22482,7 +22546,8 @@
       "runtime": 99,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1102390,
@@ -22510,7 +22575,8 @@
       "runtime": 117,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1400940,
@@ -22519,7 +22585,7 @@
       "date": "2026-10-30",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/7MRyzFaVkTvRY5UNES8pw66XK0a.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -22540,7 +22606,8 @@
         "ホラー",
         "スリラー",
         "サイエンスフィクション"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1748514,
@@ -22566,7 +22633,8 @@
         "Japan"
       ],
       "runtime": 0,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1646897,
@@ -22595,7 +22663,8 @@
       "genres": [
         "犯罪",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1555226,
@@ -22623,7 +22692,8 @@
       "runtime": 91,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 164328,
@@ -22653,7 +22723,8 @@
         "コメディ",
         "ドラマ",
         "ファミリー"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1381071,
@@ -22683,7 +22754,8 @@
         "サイエンスフィクション",
         "ホラー",
         "アクション"
-      ]
+      ],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1278101,
@@ -24574,6 +24646,33 @@
         "ドラマ",
         "ロマンス"
       ]
+    },
+    {
+      "id": 1560316,
+      "title": "あきらめません！",
+      "original_title": "あきらめません！",
+      "date": "2027-01-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/vJ5dpcqly5KjRhFK73WwjLAjWtu.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "主人公は、夫・幹夫の退社を機に夫の実家がある田舎に移住することを決めた霧島郁子。結婚して30年近く。共働きかつワンオペ育児を卒業し、二人の娘たちも独立し、親元を離れていった。都会のマンションから念願の庭付き一戸建てに。悠々自適なセカンドライフを送るはずが、待っていたのは閉鎖的な地域社会のしがらみばかり。そんな郁子に目をつけた老齢の女性市議の後押しで市議会議員に立候補することになった郁子の運命は――。",
+      "tmdb": "https://www.themoviedb.org/movie/1560316",
+      "director": "大九明子",
+      "director_id": 1138579,
+      "cast": [
+        "永作博美",
+        "大森南朋",
+        "西野七瀬",
+        "伊武雅刀"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-09-26T18:28:58.311483+00:00"
     },
     {
       "id": 1280738,

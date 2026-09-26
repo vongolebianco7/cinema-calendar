@@ -4,7 +4,7 @@ art = Path("js/my-cinemap-art.js").read_text(encoding="utf-8")
 html = Path("my-cinemap.html").read_text(encoding="utf-8")
 
 required_art = [
-    "const layout=artValue('layout')||'single';",
+    "layout=artValue('layout')||'single'",
     "const columns=layout==='double'?2:1;",
     "const rows=columns===2?5:10",
     "const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;",

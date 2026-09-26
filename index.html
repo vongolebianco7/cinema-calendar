@@ -531,19 +531,8 @@ function showMoreTheaters(){
  if(el&&detailMovie)el.innerHTML=theaterScheduleHtml(detailMovie)
 }
 function theaterScheduleHtml(m){
- // theater-official-links-v1
- const q=encodeURIComponent(((m&&m.title)||"")+" 上映時間 映画館");
- const links=[
-  ["TOHOシネマズ","https://www.tohotheater.jp/"],
-  ["イオンシネマ","https://www.aeoncinema.com/"],
-  ["ユナイテッド・シネマ","https://www.unitedcinemas.jp/"],
-  ["MOVIX／ピカデリー","https://www.smt-cinema.com/"],
-  ["T・ジョイ","https://tjoy.jp/"],
-  ["109シネマズ","https://109cinemas.net/"],
-  ["作品名で上映館を検索","https://www.google.com/search?q="+q]
- ];
- const items=links.map(function(x){return '<a href="'+x[1]+'" target="_blank" rel="noopener noreferrer">'+esc(x[0])+'</a>'}).join('');
- return '<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links">'+items+'</div></div>';
+ // theater-official-links-v2: static, dependency-free renderer to avoid breaking detail view.
+ return '<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links"><a href="https://www.tohotheater.jp/" target="_blank" rel="noopener noreferrer">TOHOシネマズ</a><a href="https://www.aeoncinema.com/" target="_blank" rel="noopener noreferrer">イオンシネマ</a><a href="https://www.unitedcinemas.jp/" target="_blank" rel="noopener noreferrer">ユナイテッド・シネマ</a><a href="https://www.smt-cinema.com/" target="_blank" rel="noopener noreferrer">MOVIX／ピカデリー</a><a href="https://tjoy.jp/" target="_blank" rel="noopener noreferrer">T・ジョイ</a><a href="https://109cinemas.net/" target="_blank" rel="noopener noreferrer">109シネマズ</a></div></div>';
 }
 
 function movieTimelineHtml(m){

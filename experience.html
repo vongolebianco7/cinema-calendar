@@ -396,7 +396,8 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 }
 </style>
 
-<style id="cinemap-live-header-brand-v1">
+<style id="cinemap-outline-brand-v2">
+/* Approved B concept: Outline Tile + editorial serif wordmark. No external font request. */
 .gBrand{
   display:inline-flex!important;
   align-items:center!important;
@@ -406,41 +407,70 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
   color:#f4efe5!important;
   text-decoration:none!important;
 }
-.gBrand .gLogoMark{
+.gBrandTile{
+  position:relative;
   display:block;
-  width:30px!important;
-  height:30px!important;
-  max-width:30px!important;
-  flex:0 0 30px;
-  object-fit:contain;
+  width:31px;
+  height:31px;
+  flex:0 0 31px;
+  border:1px solid rgba(216,208,195,.82);
   border-radius:8px;
+  background:rgba(255,255,255,.015);
+  overflow:hidden;
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.025);
+}
+.gBrandGlyph{
+  position:absolute;
+  left:5px;
+  top:1px;
+  z-index:2;
+  color:#f7f1e7;
+  font-family:Baskerville,"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+  line-height:29px;
+  letter-spacing:-.05em;
+}
+.gBrandBeam{
+  position:absolute;
+  z-index:1;
+  left:15px;
+  top:7px;
+  width:17px;
+  height:17px;
+  background:linear-gradient(90deg,rgba(240,222,190,.32),rgba(214,190,150,.08) 62%,rgba(214,190,150,0));
+  clip-path:polygon(0 38%,100% 5%,100% 95%,0 62%);
+  filter:blur(.15px);
 }
 .gBrandWords{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1}
 .gBrandName{
   color:#f4efe5;
-  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:22px;
-  font-weight:500;
-  line-height:.92;
-  letter-spacing:-.035em;
+  font-family:Baskerville,"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+  font-size:23px;
+  font-weight:400;
+  line-height:.9;
+  letter-spacing:.005em;
   white-space:nowrap;
+  text-rendering:optimizeLegibility;
 }
 .gBrandTagline{
   margin-top:5px;
   padding-left:1px;
-  color:#cdbfa9;
+  color:#bfb3a1;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.8px;
-  font-weight:650;
+  font-size:5.5px;
+  font-weight:560;
   line-height:1;
-  letter-spacing:.25em;
+  letter-spacing:.28em;
   white-space:nowrap;
 }
 @media(max-width:430px){
   .gBrand{gap:7px!important}
-  .gBrand .gLogoMark{width:28px!important;height:28px!important;max-width:28px!important;flex-basis:28px}
+  .gBrandTile{width:29px;height:29px;flex-basis:29px;border-radius:7px}
+  .gBrandGlyph{left:5px;top:0;font-size:22px;line-height:28px}
+  .gBrandBeam{left:14px;top:7px;width:16px;height:15px}
   .gBrandName{font-size:20px}
-  .gBrandTagline{font-size:5px;letter-spacing:.19em;margin-top:4px}
+  .gBrandTagline{font-size:4.9px;letter-spacing:.21em;margin-top:4px}
 }
 </style>
 </head>
@@ -448,7 +478,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="true"><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a>
+ <a class="gBrand" href="index.html"><span class="gBrandTile" aria-hidden="true"><span class="gBrandGlyph">C</span><span class="gBrandBeam"></span></span><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -457,7 +487,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="true"><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><span class="gBrandTile" aria-hidden="true"><span class="gBrandGlyph">C</span><span class="gBrandBeam"></span></span><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
  <a href="rankings.html">ランキング</a>

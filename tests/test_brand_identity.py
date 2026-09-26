@@ -12,10 +12,14 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn("cinemap-outline-brand-v2", text, page)
             self.assertIn("gBrandTile", text, page)
             self.assertIn("gBrandGlyph", text, page)
+            self.assertIn("gBrandBeam", text, page)
             self.assertIn("gBrandName", text, page)
             self.assertIn("gBrandTagline", text, page)
             self.assertIn("EXPLORE CINEMA", text, page)
-            self.assertIn("Baskerville", text, page)
+            self.assertIn('flex-direction:row!important', text, page)
+            self.assertIn('flex-wrap:nowrap!important', text, page)
+            self.assertIn('"Bodoni 72",Didot', text, page)
+            self.assertIn('rgba(255,238,204,.78)', text, page)
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
@@ -36,8 +40,9 @@ class BrandIdentityTests(unittest.TestCase):
     def test_favicon_uses_outline_tile(self):
         text = (ROOT / "favicon.svg").read_text(encoding="utf-8")
         self.assertIn('id="outline-tile"', text)
-        self.assertIn('stroke="#d8d0c3"', text)
-        self.assertIn("Baskerville", text)
+        self.assertIn('stroke="#ebe3d6"', text)
+        self.assertIn('stop-color="#ffeccc" stop-opacity=".9"', text)
+        self.assertIn("Bodoni 72,Didot", text)
 
     def test_manifest_is_cinemap_branded(self):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))

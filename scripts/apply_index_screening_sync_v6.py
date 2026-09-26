@@ -37,7 +37,7 @@ function experienceFitHtml(m){
 }
 function festivalAwardOrg'''
 
-ns,n=re.subn(pattern,replacement,s,count=1,flags=re.S)
+ns,n=re.subn(pattern,lambda _m: replacement,s,count=1,flags=re.S)
 if n!=1:
     raise SystemExit(f'expected 1 experienceFitHtml block, replaced {n}')
 p.write_text(ns,encoding='utf-8')

@@ -1,4 +1,4 @@
-import json, pathlib, sys
+import json, pathlib, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 errors = []
@@ -83,6 +83,12 @@ art = text("js/my-cinemap-art.js")
 for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne", "Editorial Luxe"]:
     if required not in art:
         errors.append(f"My Cinemap luxe artwork missing: {required}")
+for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
+    p = ROOT / js_path
+    if p.exists():
+        r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+        if r.returncode:
+            errors.append(f"JavaScript syntax failed for {js_path}: {r.stderr.strip()}")
 
 # IMAX GT directory must include verified screens and an experience-page path.
 if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):

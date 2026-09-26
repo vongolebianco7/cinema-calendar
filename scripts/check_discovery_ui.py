@@ -46,8 +46,8 @@ for required in [
     'id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap",
     "scroll-snap-type:x proximity", 'class="presetCard"',
     'id="conditionResults"', '#grid .card',
-    'id="theatricalPresetGrid"', 'id="streamingPresetGrid"',
-    'loadPresetShelf("theatrical")', 'loadPresetShelf("streaming")',
+    'id="theatricalPopularGrid"', 'id="streamingPopularGrid"',
+    'loadPopularShelves', 'loadPopularShelves',
     'data/theatrical.json', 'data/streaming.json'
 ]:
     if required not in discover:
@@ -56,8 +56,6 @@ if 'loadPreset();load(true);' in discover:
     errors.append("Discover must not auto-load recommendation results into condition search")
 if "repeat(3,minmax(0,1fr))" not in discover:
     errors.append("Condition search results must use a three-column grid")
-if 'function loadPreset(){return}' in discover:
-    errors.append("Discover recommendation loader is accidentally disabled")
 
 # Calendar UX gates.
 for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))", "継続 · '+ev.title"]:

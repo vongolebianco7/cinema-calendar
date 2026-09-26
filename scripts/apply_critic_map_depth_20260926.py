@@ -47,8 +47,6 @@ if old not in s:
 s=s.replace(old,new,1)
 
 panel_old="""panel.innerHTML='<div class=\"question\">'+E(x.q)+'</div>'+creatorFocusHtml(x.kind,dna)+'<div class=\"shareRow\">"""
-panel_new="""setJourney('topic');panel.innerHTML='<div class=\"question\">'+E(x.q)+'</div>'+topicContextHtml(m,x)+creatorFocusHtml(x.kind,dna)+'<div class=\"shareRow\'>"""
-# avoid quote typo by using a safer replacement below
 if panel_old not in s:
     raise SystemExit('panel anchor missing')
 s=s.replace(panel_old,"""setJourney('topic');panel.innerHTML='<div class=\"question\">'+E(x.q)+'</div>'+topicContextHtml(m,x)+creatorFocusHtml(x.kind,dna)+'<div class=\"shareRow\">""",1)
@@ -74,3 +72,4 @@ s=s.replace(guide_old,guide_new,1)
 s=s.replace('Cinemap Critic Map v3.5','Cinemap Critic Map v3.6',1)
 p.write_text(s,encoding='utf-8')
 print('Applied deeper Critic Map journey')
+# workflow trigger

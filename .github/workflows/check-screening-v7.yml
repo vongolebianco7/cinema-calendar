@@ -1,7 +1,7 @@
 name: Check screening v7
 on:
   push:
-    branches: ['feat/screening-model-v7']
+    branches: ['feat/screening-model-v7', 'feat/imax-official-catalog']
   pull_request:
     branches: [main]
 jobs:
@@ -12,4 +12,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: node scripts/check_imax_catalog.js
       - run: node scripts/check_screening_v7.js

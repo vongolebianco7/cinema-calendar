@@ -1,0 +1,26 @@
+from pathlib import Path
+
+p=Path('critic.html')
+s=p.read_text(encoding='utf-8')
+
+css_anchor='''/* Critic Map clarity pass */\n.flow{display:none!important}.hero{padding-bottom:10px}.lead{margin-bottom:10px}.topicSections{display:grid;gap:12px}.deep{margin-top:14px;padding-top:14px}.deep h2{font-size:14px;color:#bbb}.matrix{max-height:250px}.relatedGroups{margin-top:10px}.works{padding-bottom:5px}\n'''
+css_new='''/* Critic Map clarity pass */\n.flow{display:none!important}.hero{padding-bottom:10px}.lead{margin-bottom:10px}.topicSections{display:grid;gap:12px}.deep{margin-top:14px;padding-top:14px}.deep h2{font-size:14px;color:#bbb}.matrix{max-height:250px}.relatedGroups{margin-top:10px}.works{padding-bottom:5px}\n.criticLensBar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px 0 12px;padding-bottom:2px}.criticLensBar::-webkit-scrollbar{display:none}.criticLensBtn{flex:0 0 auto;border:1px solid #303030;background:#111;color:#aaa;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:800;cursor:pointer}.criticLensBtn.active{background:#eee;color:#111;border-color:#eee}.criticMapIntro{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:8px}.criticMapIntro b{font-size:12px}.criticMapIntro span{font-size:9px;color:#777}.topicSection{position:relative;border:1px solid #242424;border-radius:13px;padding:11px;background:#0f0f0f}.topicSectionLabel{font-size:9px;color:#777;letter-spacing:.08em;margin:0 0 8px}.topic{position:relative;overflow:hidden}.topic:before{content:attr(data-lens-label);display:block;font-size:8px;color:#666;letter-spacing:.05em;margin-bottom:5px}.topic[hidden]{display:none!important}.topicSection[hidden]{display:none!important}.criticMapEmpty{display:none;border:1px dashed #333;border-radius:10px;padding:14px;color:#777;font-size:10px}.criticMapEmpty.show{display:block}\n'''
+if css_anchor not in s:
+    raise SystemExit('CSS anchor not found')
+s=s.replace(css_anchor,css_new,1)
+
+old='''function topicMapHtml(ts){\n const theme=ts.map((x,i)=>({x,i})).filter(o=>o.x.kind==="THEME"),craft=ts.map((x,i)=>({x,i})).filter(o=>o.x.kind!=="THEME");\n const block=(label,rows)=>rows.length?'<section class="topicSection"><div class="topicSectionLabel">'+label+'</div><div class="topics">'+rows.map(o=>'<button class="topic" data-topic="'+o.i+'"><b>'+E(o.x.title)+'</b><span>'+E(o.x.hint)+'</span></button>').join("")+'</div></section>':"";\n return '<div class="topicSections">'+block("この作品から生まれる論点",theme)+block("映画の作りから見る論点",craft)+'</div>'\n}\n'''
+new='''function topicMapHtml(ts){\n const rows=ts.map((x,i)=>({x,i,lens:lensBase(lensValue(x)),label:lensLabel(lensValue(x))})),theme=rows.filter(o=>o.x.kind==="THEME"),craft=rows.filter(o=>o.x.kind!=="THEME");\n const lensOrder=["ALL","THEME","IMAGE","STORY","PERFORMANCE","SOUND","AUTHOR","HISTORY"],present=new Set(rows.map(o=>o.lens));\n const lensName={ALL:"すべて",THEME:"テーマ",IMAGE:"映像",STORY:"脚本",PERFORMANCE:"演技",SOUND:"音",AUTHOR:"作家論",HISTORY:"映画史"};\n const buttons=lensOrder.filter(k=>k==="ALL"||present.has(k)).map((k,i)=>'<button type="button" class="criticLensBtn '+(i===0?'active':'')+'" data-critic-lens="'+k+'">'+lensName[k]+'</button>').join("");\n const block=(label,group)=>group.length?'<section class="topicSection" data-topic-section><div class="topicSectionLabel">'+label+'</div><div class="topics">'+group.map(o=>'<button class="topic" data-topic="'+o.i+'" data-lens="'+o.lens+'" data-lens-label="'+E(o.label)+'"><b>'+E(o.x.title)+'</b><span>'+E(o.x.hint)+'</span></button>').join("")+'</div></section>':"";\n return '<div class="criticMapIntro"><b>批評の入口を選ぶ</b><span>'+rows.length+'の論点</span></div><div class="criticLensBar" aria-label="批評視点">'+buttons+'</div><div class="topicSections">'+block("この作品から生まれる論点",theme)+block("映画の作りから見る論点",craft)+'</div><div class="criticMapEmpty" data-critic-empty>この視点の論点はまだありません。</div>'\n}\nfunction bindCriticLensFilters(){\n const buttons=[...document.querySelectorAll('[data-critic-lens]')],topics=[...document.querySelectorAll('[data-topic][data-lens]')],sections=[...document.querySelectorAll('[data-topic-section]')],empty=document.querySelector('[data-critic-empty]');\n buttons.forEach(btn=>btn.onclick=()=>{\n  const lens=btn.dataset.criticLens;buttons.forEach(b=>b.classList.toggle('active',b===btn));\n  topics.forEach(t=>t.hidden=lens!=="ALL"&&t.dataset.lens!==lens);\n  sections.forEach(sec=>sec.hidden=!sec.querySelector('[data-topic]:not([hidden])'));\n  if(empty)empty.classList.toggle('show',!topics.some(t=>!t.hidden));\n });\n}\n'''
+if old not in s:
+    raise SystemExit('topicMapHtml anchor not found')
+s=s.replace(old,new,1)
+
+render_anchor=''' if(incomingLens&&fromId)hydrateComparison(fromId,m,incomingLens);\n const unlock=document.getElementById("unlock");'''
+render_new=''' bindCriticLensFilters();\n if(incomingLens&&fromId)hydrateComparison(fromId,m,incomingLens);\n const unlock=document.getElementById("unlock");'''
+if render_anchor not in s:
+    raise SystemExit('render anchor not found')
+s=s.replace(render_anchor,render_new,1)
+
+s=s.replace('Cinemap Critic Map v3.4','Cinemap Critic Map v3.5',1)
+p.write_text(s,encoding='utf-8')
+print('Applied interactive Critic Map lens filters')

@@ -27,7 +27,7 @@ for token in required:
 if 'data-format-key="atmos"' in html or '{name:"Dolby Atmos"' in html:
     errors.append('Dolby Atmos must not be a peer screening-format card')
 
-# We no longer want long reasons expanded for all five formats by default.
+# Long evidence should be hidden behind progressive disclosure by default.
 if '上映方式おすすめの理由</strong>' in html and 'data-format-detail' not in html:
     errors.append('format reasons must be progressive-disclosure details')
 

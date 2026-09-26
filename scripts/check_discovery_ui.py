@@ -1,4 +1,4 @@
-import json, pathlib, sys
+import json, pathlib, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 errors = []
@@ -69,6 +69,26 @@ my = text("my-cinemap.html")
 for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "Modern / Graphite", "Night / Cobalt", "Art House / Plum", "Magazine / Cream", "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
+
+# My Cinemap assist + luxe gates.
+tools_path = ROOT / "js/my-cinemap-tools.js"
+if not tools_path.exists():
+    errors.append("My Cinemap assist module missing: js/my-cinemap-tools.js")
+else:
+    tools = tools_path.read_text(encoding="utf-8")
+    for required in ["candidateShelf", "候補に追加", "data-replace", "movieComment", "duplicateList", "cinemap-my-candidates", "cinemap-my-saved-lists"]:
+        if required not in tools:
+            errors.append(f"My Cinemap assist feature missing: {required}")
+art = text("js/my-cinemap-art.js")
+for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne", "Editorial Luxe"]:
+    if required not in art:
+        errors.append(f"My Cinemap luxe artwork missing: {required}")
+for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
+    p = ROOT / js_path
+    if p.exists():
+        r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+        if r.returncode:
+            errors.append(f"JavaScript syntax failed for {js_path}: {r.stderr.strip()}")
 
 # IMAX GT directory must include verified screens and an experience-page path.
 if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):

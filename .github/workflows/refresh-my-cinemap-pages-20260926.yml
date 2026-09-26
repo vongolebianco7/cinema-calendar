@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/refresh_my_cinemap_pages_20260926.py'
+      - 'scripts/check_discovery_ui.py'
+      - '.github/workflows/refresh-my-cinemap-pages-20260926.yml'
 
 permissions:
   contents: write

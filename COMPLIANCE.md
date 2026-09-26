@@ -76,6 +76,8 @@ For services such as Filmarks, where CINEMA DAYS does not have an explicit data-
 
 A new source is not production-ready until its compliance review is complete.
 
+The nationwide OpenStreetMap theater updater is paused: a full-country Overpass request must not run on a timer or retry against another public instance. Continue serving the existing static theater snapshot until a smaller permitted refresh method is reviewed.
+
 When terms change or a source requests removal, disable the integration promptly and retain only data we are permitted to keep.
 
 ## Priority

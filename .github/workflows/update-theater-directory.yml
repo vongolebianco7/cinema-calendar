@@ -4,8 +4,6 @@ on:
   push:
     paths:
       - scripts/update_theaters_osm.py
-  schedule:
-    - cron: "15 3 * * 1"
 permissions:
   contents: write
 concurrency:
@@ -13,6 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   update:
+    if: ${{ false }} # Disabled: nationwide Overpass query is too broad for unattended use
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

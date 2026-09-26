@@ -1,0 +1,15 @@
+name: Check screening v4
+on:
+  push:
+    branches: [feat/screening-recommendation-v4]
+  pull_request:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python scripts/check_screening_v4.py

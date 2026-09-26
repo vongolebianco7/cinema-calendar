@@ -25,10 +25,11 @@ if present_art:
 required_html = [
     '<option value="single" selected>縦1列</option>',
     '<option value="double">左右2列</option>',
+    '<a class="gBrand" href="index.html"><span class="gBrandTile"',
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:
-    raise SystemExit(f"My Cinemap layout controls missing: {missing_html}")
+    raise SystemExit(f"My Cinemap layout/brand controls missing: {missing_html}")
 
 if "illustrationMode" in html:
     raise SystemExit("removed illustration setting returned")

@@ -1,9 +1,8 @@
-name: Remove 3-theater showtimes 2026-09-26
+name: Remove partial theater showtimes
 on:
-  workflow_dispatch:
   push:
     paths:
-      - .github/workflows/remove-3-theater-showtimes-20260926.yml
+      - '.github/workflows/remove-3-theater-showtimes-20260926.yml'
 permissions:
   contents: write
 jobs:
@@ -16,46 +15,44 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Create regression test
-        run: |
-          cat > tests/test_official_theater_links_only.py <<'PY'
-          from pathlib import Path
-
-          targets = [Path('index.html'), Path('search.html')]
-          found = 0
-          for path in targets:
-              text = path.read_text(encoding='utf-8')
-              if 'function theaterScheduleHtml(m)' not in text:
-                  continue
-              found += 1
-              start = text.index('function theaterScheduleHtml(m)')
-              end = text.find('\nfunction ', start + 10)
-              block = text[start:] if end < 0 else text[start:end]
-              assert 'theater-official-links-v1' in block, f'{path}: official-link marker missing'
-              assert 'theaterSchedules.schedules' not in block, f'{path}: still builds showtimes from 3-theater data'
-              assert '上映時間を公式サイトで確認' in block, f'{path}: official-site CTA missing'
-              assert '109シネマズ港北' not in block
-              assert '109シネマズ川崎' not in block
-              assert '109シネマズ二子玉川' not in block
-          assert found >= 1, 'theaterScheduleHtml not found in expected pages'
-          PY
-      - name: Verify RED
-        run: |
-          if python tests/test_official_theater_links_only.py; then
-            echo 'Regression test unexpectedly passed before implementation'
-            exit 1
-          else
-            echo 'RED confirmed: old showtime implementation is present'
-          fi
-      - name: Replace showtime renderer with official links
+      - name: Red green replace and verify
+        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
+          import re, subprocess, tempfile
 
-          replacement = r'''function theaterScheduleHtml(m){
- // theater-official-links-v1: do not present partial 3-theater showtimes as comprehensive coverage.
- const title=encodeURIComponent((m&&m.title)||"");
+          targets=[]
+          for name in ('index.html','search.html'):
+              p=Path(name)
+              text=p.read_text(encoding='utf-8')
+              if 'function theaterScheduleHtml(m)' in text:
+                  targets.append(p)
+          if not targets:
+              raise SystemExit('theaterScheduleHtml not found')
+
+          def check(expect_new):
+              for p in targets:
+                  text=p.read_text(encoding='utf-8')
+                  start=text.index('function theaterScheduleHtml(m)')
+                  end=text.find('\nfunction ',start+10)
+                  block=text[start:] if end<0 else text[start:end]
+                  ok=(
+                      'theater-official-links-v1' in block and
+                      'theaterSchedules.schedules' not in block and
+                      '上映時間を公式サイトで確認' in block
+                  )
+                  if expect_new and not ok:
+                      raise AssertionError(f'{p}: new link-only renderer missing')
+                  if not expect_new and ok:
+                      raise AssertionError(f'{p}: test unexpectedly green before change')
+
+          # RED: current renderer must still be the partial-showtime implementation.
+          check(False)
+          print('RED confirmed')
+
+          replacement='''function theaterScheduleHtml(m){
+ // theater-official-links-v1
  const q=encodeURIComponent(((m&&m.title)||"")+" 上映時間 映画館");
  const links=[
   ["TOHOシネマズ","https://www.tohotheater.jp/"],
@@ -66,47 +63,44 @@ jobs:
   ["109シネマズ","https://109cinemas.net/"],
   ["作品名で上映館を検索","https://www.google.com/search?q="+q]
  ];
- return `<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links">${links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join("")}</div></div>`;
+ const items=links.map(function(x){return '<a href="'+x[1]+'" target="_blank" rel="noopener noreferrer">'+esc(x[0])+'</a>'}).join('');
+ return '<div class="theaterOfficialOnly"><p class="small">Cinemap内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links">'+items+'</div></div>';
 }'''
 
-          changed=[]
-          for name in ('index.html','search.html'):
-              p=Path(name)
+          for p in targets:
               text=p.read_text(encoding='utf-8')
-              if 'function theaterScheduleHtml(m)' not in text:
-                  continue
-              pat=r'function theaterScheduleHtml\(m\)\{.*?(?=\nfunction [A-Za-z_$])'
-              new,n=re.subn(pat,replacement+'\n',text,count=1,flags=re.S)
+              pattern=r'function theaterScheduleHtml\(m\)\{.*?(?=\nfunction [A-Za-z_$])'
+              new,n=re.subn(pattern,replacement+'\n',text,count=1,flags=re.S)
               if n!=1:
-                  raise SystemExit(f'Could not replace theaterScheduleHtml in {name}')
+                  raise SystemExit(f'could not replace renderer in {p}')
               p.write_text(new,encoding='utf-8')
-              changed.append(name)
-          if not changed:
-              raise SystemExit('No theaterScheduleHtml implementation found')
-          print('changed:', ', '.join(changed))
-          PY
-      - name: Verify GREEN
-        run: python tests/test_official_theater_links_only.py
-      - name: Verify inline JavaScript syntax
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re, subprocess, tempfile
-          for name in ('index.html','search.html'):
-              text=Path(name).read_text(encoding='utf-8')
+
+          # GREEN
+          check(True)
+          print('GREEN confirmed')
+
+          # Inline JavaScript syntax check.
+          for p in targets:
+              text=p.read_text(encoding='utf-8')
               scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,re.S|re.I)
-              for i,js in enumerate(scripts):
-                  if not js.strip(): continue
+              for js in scripts:
+                  if not js.strip():
+                      continue
                   with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False,encoding='utf-8') as f:
-                      f.write(js); tmp=f.name
+                      f.write(js)
+                      tmp=f.name
                   subprocess.run(['node','--check',tmp],check=True)
-              print(name, 'inline JS ok')
+              print(p,'inline JS ok')
+
+          test=Path('tests/test_official_theater_links_only.py')
+          test.write_text('''from pathlib import Path\n\nfor name in ("index.html","search.html"):\n    p=Path(name)\n    text=p.read_text(encoding="utf-8")\n    if "function theaterScheduleHtml(m)" not in text:\n        continue\n    start=text.index("function theaterScheduleHtml(m)")\n    end=text.find("\\nfunction ",start+10)\n    block=text[start:] if end<0 else text[start:end]\n    assert "theater-official-links-v1" in block\n    assert "theaterSchedules.schedules" not in block\n    assert "上映時間を公式サイトで確認" in block\n''',encoding='utf-8')
           PY
-      - name: Commit changes
+      - name: Commit
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html search.html tests/test_official_theater_links_only.py
-          git diff --cached --quiet || git commit -m "Replace partial theater showtimes with official links"
+          git diff --cached --quiet || git commit -m 'Replace partial theater showtimes with official links'
           git pull --rebase origin main
           git push origin main

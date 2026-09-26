@@ -6,12 +6,16 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "discover.html", "experience.html", "my-cinemap.html", "search.html", "rankings.html", "critic.html", "revivals.html", "theaters.html"]
 
 class BrandIdentityTests(unittest.TestCase):
-    def test_primary_pages_use_new_cinemap_wordmark(self):
+    def test_primary_pages_use_approved_outline_tile_wordmark(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")
+            self.assertIn("cinemap-outline-brand-v2", text, page)
+            self.assertIn("gBrandTile", text, page)
+            self.assertIn("gBrandGlyph", text, page)
             self.assertIn("gBrandName", text, page)
             self.assertIn("gBrandTagline", text, page)
             self.assertIn("EXPLORE CINEMA", text, page)
+            self.assertIn("Baskerville", text, page)
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
@@ -28,6 +32,12 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn('rel="apple-touch-icon" href="apple-touch-icon.png"', text, page)
             self.assertIn('rel="manifest" href="manifest.webmanifest"', text, page)
             self.assertIn('name="theme-color" content="#0a0c0f"', text, page)
+
+    def test_favicon_uses_outline_tile(self):
+        text = (ROOT / "favicon.svg").read_text(encoding="utf-8")
+        self.assertIn('id="outline-tile"', text)
+        self.assertIn('stroke="#d8d0c3"', text)
+        self.assertIn("Baskerville", text)
 
     def test_manifest_is_cinemap_branded(self):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))

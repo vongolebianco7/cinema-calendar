@@ -351,7 +351,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 .audio3d .imaxRoom{background-position:50% 50%!important}
 .audio3d .atmosRoom{background-position:100% 50%!important}
 .audio3d .room3d:before,.audio3d .room3d:after{display:none!important}
-</style>
+.gtVenueGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.gtVenue{border:1px solid rgba(244,209,91,.3);border-radius:12px;background:#0d0d0d;padding:12px}.gtVenue small{display:block;color:#8d949c;font-size:9px;letter-spacing:.08em}.gtVenue b{display:block;margin-top:4px;font-size:15px}.gtVenue strong{display:block;margin-top:5px;color:#f4d15b;font-size:13px}.gtVenue span{display:block;margin-top:5px;color:#aaa;font-size:10px;line-height:1.5}.gtVenue a{display:inline-block;margin-top:8px;color:#ddd;font-size:10px;text-decoration:underline}@media(max-width:650px){.gtVenueGrid{grid-template-columns:1fr}}</style>
 </head>
 <body>
 
@@ -402,11 +402,10 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  </div>
 
  <div class="formula">元画像：1500 × 1049 px（1.42993:1）。中央クロップ後：シネマスコープ 1500 × 628 px（2.38854:1）／ IMAX 1500 × 789 px（1.90114:1）／ IMAX GT 1500 × 1049 px（1.42993:1）。<br>※画像を横方向へ引き伸ばしていません。3つとも同じ元画像です。</div>
- <div class="formula"><b>IMAX GTを観られる確認済みスクリーン</b><br>
- グランドシネマサンシャイン 池袋 — <b>シアター12</b><br>
- 109シネマズ大阪エキスポシティ — <b>シアター11</b><br>
- <a class="screenLink" href="theaters.html?format=IMAX%20GT">IMAX GT対応スクリーン一覧を見る →</a>
- </div>
+ <div class="formula"><b>IMAX GTを観られる確認済みスクリーン</b><div class="gtVenueGrid">
+ <article class="gtVenue"><small>TOKYO · IMAX LASER / GT</small><b>グランドシネマサンシャイン 池袋</b><strong>シアター12</strong><span>IMAXレーザー／GTテクノロジー。最大1.43:1の画角に対応する大型スクリーン。</span><a href="https://www.cinemasunshine.co.jp/pages/gdcs/" target="_blank" rel="noopener noreferrer">公式設備ページで確認</a></article>
+ <article class="gtVenue"><small>OSAKA · IMAX LASER / GT</small><b>109シネマズ大阪エキスポシティ</b><strong>シアター11</strong><span>IMAXレーザー／GTテクノロジー。1.43:1上映対応が公式案内で確認できるスクリーン。</span><a href="https://109cinemas.net/osaka-expocity/" target="_blank" rel="noopener noreferrer">公式劇場ページで確認</a></article>
+ </div><a class="screenLink" href="theaters.html?format=IMAX%20GT">IMAX GT対応スクリーン一覧を見る →</a></div>
 </section>
 
 <section class="section expSection" id="visual">
@@ -490,4 +489,4 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.61</div></body></html>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.62</div></body></html>

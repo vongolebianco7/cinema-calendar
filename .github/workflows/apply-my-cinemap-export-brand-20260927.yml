@@ -1,0 +1,33 @@
+name: Apply My Cinemap export brand
+
+on:
+  push:
+    paths:
+      - "scripts/fix_my_cinemap_export_brand_20260927.py"
+      - ".github/workflows/apply-my-cinemap-export-brand-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply current brand to My Cinemap export
+        run: python scripts/fix_my_cinemap_export_brand_20260927.py
+      - name: Run brand regression tests
+        run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
+      - name: Check JavaScript syntax
+        run: node --check js/my-cinemap-art.js
+      - name: Commit export brand update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/my-cinemap-art.js
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Align My Cinemap export with approved brand"
+          git push

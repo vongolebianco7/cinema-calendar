@@ -25,10 +25,25 @@ def test_three_distinct_premium_templates_exist():
 
 
 def test_premium_templates_have_vector_illustration_details():
-    for token in ["drawProjector", "drawCurtain", "drawFilmStrip"]:
+    for token in ["drawProjector", "drawCurtain", "drawFilmStrip", "drawMarquee", "drawGalleryFrames", "drawCinemaFacade"]:
         assert token in ART
 
 
 def test_hidden_theme_control_does_not_assume_select_options():
     assert 'type="hidden" id="theme"' in HTML
     assert "theme.options" not in TOOLS
+
+
+def test_design_picker_is_directly_below_export_shape_and_layout_controls():
+    export_pos = HTML.index('class="exportOptions"')
+    design_pos = HTML.index('<div class="designPicker"')
+    art_pos = HTML.index('<div id="art"')
+    assert export_pos < design_pos < art_pos
+    assert HTML.index('class="panel"') < HTML.index('id="q"') < design_pos
+
+
+def test_premium_theme_active_state_overrides_template_border_color():
+    assert '.themeChoice.premiumTheme.active{' in TOOLS
+    assert 'border-color:#f7f1e3!important' in TOOLS
+    assert 'box-shadow:0 0 0 2px #f7f1e3' in TOOLS
+    assert '.premiumTheme.active:before' in TOOLS

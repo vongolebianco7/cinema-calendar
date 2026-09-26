@@ -32,7 +32,8 @@
       "sources": [
         {
           "label": "IMAX — Oppenheimer in IMAX 70mm",
-          "url": "https://www.imax.com/news/oppenheimer-in-imax-70mm"
+          "url": "https://www.imax.com/news/oppenheimer-in-imax-70mm",
+          "formats": ["imax"]
         }
       ]
     },
@@ -52,7 +53,8 @@
       "sources": [
         {
           "label": "IMAX — Dune: Part Two Filmed For IMAX",
-          "url": "https://www.imax.com/news/dune-2021-imax-reissue-now-playing-in-theatres"
+          "url": "https://www.imax.com/news/dune-2021-imax-reissue-now-playing-in-theatres",
+          "formats": ["imax"]
         }
       ]
     }
@@ -65,7 +67,8 @@
       "sources": [
         {
           "label": "Dolby — モアナと伝説の海 (2026)",
-          "url": "https://www.dolby.com/ja/experience/moana-2026/"
+          "url": "https://www.dolby.com/ja/experience/moana-2026/",
+          "formats": ["dolby_cinema"]
         }
       ]
     }

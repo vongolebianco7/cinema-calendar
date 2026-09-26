@@ -16,6 +16,8 @@ def test_director_is_preserved_and_defaulted_from_search_results():
         assert token in TOOLS
     assert "m.director||m.directors?.[0]||''" in TOOLS
     assert "m.director" in ART
+    assert 'api/movie-detail?id=' in TOOLS
+    assert 'if(movie.director)' in TOOLS
 
 
 def test_four_final_templates_exist():

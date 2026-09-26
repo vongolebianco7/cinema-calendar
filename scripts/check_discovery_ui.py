@@ -57,6 +57,20 @@ if 'loadPreset();load(true);' in discover:
 if "repeat(3,minmax(0,1fr))" not in discover:
     errors.append("Condition search results must use a three-column grid")
 
+# Recommendation rails must be one-row horizontal scrollers without page-level horizontal drift.
+for required in [
+    "/* canonical recommendation rail */",
+    "html,body{max-width:100%;overflow-x:hidden}",
+    "flex-wrap:nowrap!important",
+    "overscroll-behavior-x:contain",
+    "touch-action:pan-x",
+    "scroll-snap-align:start"
+]:
+    if required not in discover:
+        errors.append(f"Discover horizontal rail integration missing: {required}")
+if "/* recommendation rail hard lock */" in discover:
+    errors.append("Discover still contains the obsolete duplicate rail override block")
+
 # Calendar UX gates.
 for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))"]:
     if required not in calendar:

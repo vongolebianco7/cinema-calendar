@@ -21,6 +21,9 @@ assert.equal((html.match(/俳優A/g)||[]).length, 1, 'キャストも重複排�
 assert.ok(html.includes('discover.html?person=2&role='), '作り手リンクを維持');
 assert.ok(html.includes('撮影A') && html.includes('音楽A') && html.includes('編集A') && html.includes('製作会社A'));
 assert.ok(!html.includes('映画DNA'));
+assert.ok(!source.includes('E((m.genres||[]).join(" / "))'), 'ジャンルは上部で二重表示しない');
+assert.equal((html.match(/ドラマ/g)||[]).length,1);
+assert.equal((html.match(/150分/g)||[]).length,1);
 const linked=context.renderMovieInformation({...movie, related:[{title:'関連作A'}]});
 assert.ok(linked.includes('relatedWork') && linked.includes('関連作A'), '関連作品を作品情報内に保持');
 const fallback=context.renderMovieInformation({id:9,director:'監督B',cast:['俳優C'],dna:{},related:[]});

@@ -26,6 +26,30 @@ Example fallback:
 > IMAX ★☆☆☆☆ — 通常上映で十分  
 > 理由: IMAX専用画角やIMAX撮影の確認が取れない。大画面・音響の一般的な恩恵はあるが、IMAX固有の映像情報が増える根拠がないため、通常上映を推奨。
 
+## Display order
+The display order must be stable and must not reshuffle per film. Recommendation rank is shown with badges/stars inside this fixed order.
+
+Canonical order:
+1. 通常上映
+2. IMAX
+3. Dolby Cinema
+4. 4DX / MX4D
+5. ScreenX
+
+3D is treated as a film-specific presentation attribute rather than a permanent tier in this primary hierarchy. Show it when the film has an actual 3D presentation and score it independently.
+
+## Dolby hierarchy
+Dolby Atmos and Dolby Cinema must not be rendered as peer formats.
+
+- `Dolby Cinema` is the full premium cinema presentation combining Dolby Vision image presentation and Dolby Atmos immersive sound.
+- `Dolby Atmos` is an audio format/feature that can exist in a non-Dolby-Cinema auditorium.
+- Therefore Dolby Atmos should appear as a supporting attribute beneath the relevant recommendation rather than as a standalone top-level card in the primary format order.
+
+Recommended UI behavior:
+- Dolby Cinema card: show whether `Dolby Vision` and `Dolby Atmos` are verified.
+- Non-Dolby-Cinema Atmos venue/release: surface `Dolby Atmos対応` as a sub-attribute or note.
+- Never imply that Atmos alone is equivalent to Dolby Cinema.
+
 ## Evidence model
 Per film, store only evidence-backed attributes:
 - `imax_camera`: none / imax_film / imax_certified_digital / unknown
@@ -114,6 +138,7 @@ Examples:
 4. If all premium formats are <=2 stars, select `通常上映` as the primary recommendation.
 5. If two formats are close, explain the tradeoff rather than forcing a false single winner.
    - Example: `IMAX = 画角優先`, `Dolby Cinema = HDR/音響優先`.
+6. Recommendation rank must not change the canonical display order.
 
 ## Reason generation
 Reasons must be generated from the exact evidence that affected the score, not generic copy.
@@ -144,6 +169,8 @@ Requirements:
 
 ## Testing
 Add regression checks for:
+- fixed display order is `通常上映 → IMAX → Dolby Cinema → 4DX/MX4D → ScreenX`
+- Dolby Atmos is not a peer top-level format card
 - IMAX expanded-ratio film -> IMAX ranks first with reason mentioning expanded image
 - IMAX DMR-only film -> standard can outrank IMAX
 - Dolby Vision + Atmos film without IMAX-specific benefit -> Dolby Cinema ranks first

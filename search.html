@@ -53,8 +53,9 @@
 #detail .infoPerson{color:#e6e6e6;text-decoration:underline;text-decoration-color:#555;text-underline-offset:3px}
 #detail .infoCast,#detail .infoEmpty{margin:0;color:#c9c9c9;font-size:13px;line-height:1.75;overflow-wrap:anywhere}
 #detail .infoEmpty{color:#888}
-#detail .movieInfo .relatedGroups{min-width:0}
-#detail .movieInfo .works{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+#detail .movieInfo .relatedGroups{min-width:0;max-width:100%;grid-template-columns:minmax(0,1fr)}
+#detail .movieInfo .relatedGroups>div{min-width:0;max-width:100%}
+#detail .movieInfo .works{width:100%;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 #detail .movieInfo .relatedWork{flex:0 0 124px;width:124px;max-width:124px}
 #detail .movieInfo .relatedWork img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover}
 #detail .movieInfo .relatedWork b{font-size:12px;line-height:1.45;min-height:2.9em;overflow-wrap:anywhere}

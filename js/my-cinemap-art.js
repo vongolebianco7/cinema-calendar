@@ -102,18 +102,21 @@ function drawArtwork(movies){
   rule(ctx,pad,cursor,inner,p.line,.68);cursor+=shape==='landscape'?20:28;
   const items=(movies||[]).slice(0,10),bottom=h-150,available=bottom-cursor;
   // Landscape needs two columns for legible names; ranking otherwise reads down the page.
-  const columns=shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1;
-  const rows=columns===2?5:10,gap=columns===2?62:0,cellW=(inner-gap*(columns-1))/columns,cellH=available/rows;
+  const sparse=items.length>0&&items.length<=3;
+  const columns=sparse?1:shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1;
+  const rows=columns===2?5:10,gap=columns===2?62:0,cellW=(inner-gap*(columns-1))/columns;
+  const cellH=sparse?Math.min(shape==='landscape'?160:260,available/(items.length+1)):available/rows;
+  const firstRowY=sparse?cursor+available*(items.length===1?.3:.12):cursor;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,cursor+available*.42);ctx.textAlign='left';ctx.fillStyle=p.fg}
   items.forEach((m,i)=>{
     const col=columns===1?0:Math.floor(i/rows),row=columns===1?i:i%rows;
-    const x=pad+col*(cellW+gap),y=cursor+row*cellH,numberX=x+51;
+    const x=pad+col*(cellW+gap),y=firstRowY+row*cellH,numberX=x+51;
     rule(ctx,x,y,cellW,p.line,theme==='galleryeditorial'?.47:.34);
     if(i<3)drawMedal(ctx,numberX,y+cellH*.5,i+1,theme);
     else{ctx.save();ctx.font=`400 47px ${artSerif}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+Math.max(16,cellH*.25));ctx.restore()}
-    let tx=x+122,tw=cellW-130,top=y+Math.max(12,Math.min(26,cellH*.16));
+    let tx=x+122,tw=cellW-130,top=y+(sparse?cellH*.25:Math.max(12,Math.min(26,cellH*.16)));
     ctx.fillStyle=p.fg;
-    const nameSize=Math.min(columns===2?31:38,Math.max(25,cellH*.24));
+    const nameSize=sparse?Math.min(62,cellH*.3):Math.min(columns===2?31:38,Math.max(25,cellH*.24));
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,cellH<115?1:2,nameSize,22,artSerif,500,1.15);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
     if(meta){ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+6,tw,1,24,19,artSans,400);ctx.fillStyle=p.fg}
@@ -134,5 +137,5 @@ function openImageForSaving(){
   if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');
 }
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
-window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-final-v6';s.defer=true;document.body.appendChild(s)});
+window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-final-v7';s.defer=true;document.body.appendChild(s)});
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

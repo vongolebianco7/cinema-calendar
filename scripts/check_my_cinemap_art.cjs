@@ -14,6 +14,9 @@ for(const theme of ['minimal','filmnote','theater','galleryeditorial'])for(const
  assert.equal(canvas.width,1600);assert.equal(canvas.height,{portrait:2000,square:1600,landscape:1000}[format]);
  assert.ok(draws.every(d=>Number.isFinite(d.x)&&Number.isFinite(d.y)&&d.y>=0&&d.y+parseFloat(d.font.match(/(\d+(?:\.\d+)?)px/)[1])<canvas.height),format+' '+layout+' vertical bounds');
  assert.ok(draws.some(d=>d.text==='MY TOP OF 2026'));
+ if(format==='portrait'&&layout==='editorial'&&count===1){
+  assert.ok(draws.some(d=>d.text.startsWith('作品0')&&d.y>canvas.height*.34),'a single film is composed within the page');
+ }
  if(format==='portrait'&&layout==='editorial'&&count===10){
   const title=draws.find(d=>d.text==='MY TOP OF 2026');
   assert.ok(parseFloat(title.font.match(/(\d+)px/)[1])>=110,'headline has editorial scale');

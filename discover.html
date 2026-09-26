@@ -66,37 +66,6 @@ async function loadPopularShelves(){
   renderPopularShelves();$("#theatricalPopularStatus").textContent="人気順";$("#streamingPopularStatus").textContent="人気順"
  }catch{try{await localPopularFallback()}catch{$("#theatricalPopularStatus").textContent="取得できませんでした";$("#streamingPopularStatus").textContent="取得できませんでした"}}
 }
-function renderPresetShelf(gridId,list){
- const shown=list.slice(0,12);
- $("#"+gridId).innerHTML=shown.map((m,i)=>'<button class="presetCard" data-preset-index="'+i+'"><div class="presetCardPoster">'+(m.poster?'<img loading="lazy" src="'+E(m.poster)+'">':'')+'</div><div class="presetCardBody"><div class="presetCardTitle">'+E(m.title)+'</div><div class="presetCardMeta">'+E(m.year||"")+" · ★ "+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="empty">作品がありません。</div>';
- $("#"+gridId).querySelectorAll("[data-preset-index]").forEach(b=>b.onclick=()=>{const m=shown[+b.dataset.presetIndex],p=new URLSearchParams({search:m?.title||""});if(m?.tmdbId)p.set("id",m.tmdbId);location.href="search.html?"+p.toString()})
-}
-async function loadPresetShelf(kind){
- const gridId=kind==="theatrical"?"theatricalPresetGrid":"streamingPresetGrid",statusId=kind==="theatrical"?"theatricalPresetStatus":"streamingPresetStatus";
- $("#"+statusId).textContent="読み込み中…";
- try{
-  const file=kind==="theatrical"?"data/theatrical.json":"data/streaming.json";
-  const raw=await fetch(file,{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()});
-  let list=(raw.movies||[]).map(normalizeLocalMovie).filter(m=>m.title);
-  const seen=new Set();
-  list=list.filter(m=>{const k=String(m.tmdbId||m.title);if(seen.has(k))return false;seen.add(k);return true});
-  if(kind==="theatrical"){
-    const now=new Date(),lo=new Date(now);lo.setDate(lo.getDate()-45);const hi=new Date(now);hi.setDate(hi.getDate()+45);
-    list=list.filter(m=>{const d=new Date((m.date||m.year+"-01-01")+"T00:00:00");return d>=lo&&d<=hi}).sort((a,b)=>b.votes-a.votes||b.score-a.score);
-  }else{
-    list=list.sort((a,b)=>b.votes-a.votes||b.score-a.score||String(b.date||"").localeCompare(String(a.date||"")));
-  }
-  if(!list.length)throw 0;
-  renderPresetShelf(gridId,list);
-  $("#"+statusId).textContent=kind==="theatrical"?"劇場公開作品から":"配信開始作品から";
- }catch{
-  try{
-    const r=await fetch(API+"/api/discover?"+buildPreset(preset),{cache:"no-store"});if(!r.ok)throw 0;const d=await r.json(),list=d.movies||[];if(!list.length)throw 0;
-    renderPresetShelf(gridId,list);$("#"+statusId).textContent="TMDB作品から"
-  }catch{$("#"+statusId).textContent="取得できませんでした";$("#"+gridId).innerHTML='<div class="empty">作品データを取得できませんでした。</div>'}
- }
-}
-function loadPreset(){loadPresetShelf("theatrical");loadPresetShelf("streaming")}
 function normalizeLocalMovie(m){
  return {tmdbId:m.tmdbId||m.tmdb_id||m.id,title:m.title||m.name||m.original_title||"",date:m.date||m.release_date||"",year:m.year||String(m.date||m.release_date||"").slice(0,4),score:m.score??m.vote_average??0,poster:m.poster||m.poster_url||(m.poster_path?"https://image.tmdb.org/t/p/w342"+m.poster_path:null),popularity:Number(m.popularity||0),votes:Number(m.votes||m.vote_count||0),runtime:Number(m.runtime||0)}
 }

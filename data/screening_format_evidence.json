@@ -1,0 +1,76 @@
+{
+  "version": 2,
+  "updated": "2026-09-26",
+  "source_policy": "official-first; unknown when unverified",
+  "default": {
+    "imax_camera": "unknown",
+    "imax_expanded_ratio": "unknown",
+    "filmed_for_imax": "unknown",
+    "imax_dmr_only": "unknown",
+    "dolby_vision_master": "unknown",
+    "dolby_atmos_mix": "unknown",
+    "official_4dx": "unknown",
+    "official_mx4d": "unknown",
+    "official_screenx": "unknown",
+    "native_3d_or_stereo_authored": "unknown",
+    "sources": []
+  },
+  "films": {
+    "872585": {
+      "title": "Oppenheimer",
+      "imax_camera": "imax_film",
+      "imax_expanded_ratio": "1.43",
+      "filmed_for_imax": true,
+      "imax_dmr_only": false,
+      "dolby_vision_master": "unknown",
+      "dolby_atmos_mix": "unknown",
+      "official_4dx": "unknown",
+      "official_mx4d": "unknown",
+      "official_screenx": "unknown",
+      "native_3d_or_stereo_authored": false,
+      "director_or_dp_intent": "IMAX 15/70上映ではIMAXフィルム撮影シーンが最大1.43:1まで縦方向に拡張される。",
+      "sources": [
+        {
+          "label": "IMAX — Oppenheimer in IMAX 70mm",
+          "url": "https://www.imax.com/news/oppenheimer-in-imax-70mm",
+          "formats": ["imax"]
+        }
+      ]
+    },
+    "693134": {
+      "title": "Dune: Part Two",
+      "imax_camera": "imax_certified_digital",
+      "imax_expanded_ratio": "mixed",
+      "filmed_for_imax": true,
+      "imax_dmr_only": false,
+      "dolby_vision_master": "unknown",
+      "dolby_atmos_mix": "unknown",
+      "official_4dx": "unknown",
+      "official_mx4d": "unknown",
+      "official_screenx": "unknown",
+      "native_3d_or_stereo_authored": false,
+      "director_or_dp_intent": "Filmed for IMAX作品として全編IMAX拡張画角で上映され、IMAX 70mmの一部シーンは1.43:1。",
+      "sources": [
+        {
+          "label": "IMAX — Dune: Part Two Filmed For IMAX",
+          "url": "https://www.imax.com/news/dune-2021-imax-reissue-now-playing-in-theatres",
+          "formats": ["imax"]
+        }
+      ]
+    }
+  },
+  "title_fixtures": {
+    "モアナと伝説の海|2026": {
+      "dolby_vision_master": true,
+      "dolby_atmos_mix": true,
+      "cinematography_notes": "Dolby公式がDolby Visionの映像とDolby AtmosのサウンドによるDolby Cinema体験を案内。",
+      "sources": [
+        {
+          "label": "Dolby — モアナと伝説の海 (2026)",
+          "url": "https://www.dolby.com/ja/experience/moana-2026/",
+          "formats": ["dolby_cinema"]
+        }
+      ]
+    }
+  }
+}

@@ -29,6 +29,37 @@ for required in [
 if "videos.sort(" in search:
     errors.append("search.html must not locally reorder YouTube API search results")
 
+# Screening-format recommendation v2 regression gates, including source scoping.
+for required in [
+    'const FORMAT_ORDER=["standard","imax","dolby_cinema","motion","screenx"]',
+    'data/screening_format_evidence.json',
+    'function scoreScreeningFormats(',
+    'function formatReasonHtml(',
+    'function formatSources(',
+    '上映方式おすすめの理由',
+]:
+    if required not in search:
+        errors.append(f"search.html missing screening-format v2 requirement: {required}")
+if '{name:"Dolby Atmos"' in search:
+    errors.append("Dolby Atmos must not be a peer top-level screening format")
+if 'sources:e.sources||[]' in search:
+    errors.append("screening-format cards must not reuse all evidence sources indiscriminately")
+
+evidence_path = ROOT / "data" / "screening_format_evidence.json"
+if not evidence_path.exists():
+    errors.append("screening_format_evidence.json is missing")
+else:
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    if evidence.get("source_policy") != "official-first; unknown when unverified":
+        errors.append("screening format evidence must use official-first / unknown fallback policy")
+    if not evidence.get("films"):
+        errors.append("screening format evidence has no verified film fixtures")
+    for group in [evidence.get("films", {}), evidence.get("title_fixtures", {})]:
+        for key, row in group.items():
+            for src in row.get("sources", []):
+                if not src.get("formats"):
+                    errors.append(f"screening evidence source missing format scope: {key} / {src.get('label','source')}")
+
 critic = (ROOT / "critic.html").read_text(encoding="utf-8")
 for required in [
     "developers.google.com/static/youtube/images/youtube-logos-2x.png",
@@ -45,6 +76,9 @@ for required in [
         errors.append(f"critic.html missing Critic Map requirement: {required}")
 if "videos.sort(" in critic:
     errors.append("critic.html must not locally reorder YouTube API search results")
+for required in ["function withTimeout(", "data-retry-movie", "読み込みがタイムアウトしました"]:
+    if required not in critic:
+        errors.append(f"critic.html missing resilient movie-loading requirement: {required}")
 
 privacy = (ROOT / "privacy.html").read_text(encoding="utf-8")
 for required in ["YouTube API Services", "https://www.youtube.com/t/terms", "https://policies.google.com/privacy"]:

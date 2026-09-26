@@ -64,7 +64,7 @@ for required in ['["すべて","通常","リバイバル","午前十時"]', "the
 
 # My Cinemap layout/theme gates.
 my = text("my-cinemap.html")
-for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "aspect-ratio:3/2", "drawFit", "syncThemeChoices"]:
+for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / Sand", "Modern / Graphite", "Night / Cobalt", "Art House / Plum", "Magazine / Cream", "aspect-ratio:16/10", "drawFit", "syncThemeChoices"]:
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
 
@@ -73,6 +73,9 @@ if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):
     errors.append("No verified IMAX GT screen entries")
 if "format=IMAX%20GT" not in text("experience.html"):
     errors.append("Experience page does not link to IMAX GT screen directory")
+for required in ["グランドシネマサンシャイン 池袋", "シアター12", "109シネマズ大阪エキスポシティ", "シアター11"]:
+    if required not in text("experience.html"):
+        errors.append(f"Experience IMAX GT detail missing: {required}")
 
 for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:
     if '<a href="agent.html">映画コンシェルジュ</a>' in text(page):

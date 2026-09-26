@@ -135,7 +135,18 @@ def patch_page(path: Path):
         if count < 2:
             raise SystemExit(f"Expected header and drawer marks in {path.name}, found {count}")
         text = text.replace(OLD_MARK, NEW_MARK)
-    # Horizontal structure is mandatory: tile then wordmark/tagline within the same gBrand flex row.
+
+    # Some pages lost the gBrand class on the visible header anchor, which makes
+    # the tile and wordmark stack instead of using the approved horizontal B lockup.
+    text = text.replace(
+        '<a href="index.html"><span class="gBrandTile"',
+        '<a class="gBrand" href="index.html"><span class="gBrandTile"'
+    )
+
+    # Horizontal structure is mandatory in both the visible header and drawer.
+    brand_lockup = '<a class="gBrand" href="index.html"><span class="gBrandTile"'
+    if text.count(brand_lockup) < 2:
+        raise SystemExit(f"Expected two horizontal gBrand lockups in {path.name}")
     if text.count('class="gBrandTile"') < 2 or text.count('class="gBrandWords"') < 2:
         raise SystemExit(f"Expected horizontal header and drawer brand structure in {path.name}")
     path.write_text(text, encoding="utf-8")

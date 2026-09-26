@@ -27,6 +27,12 @@ assert.equal(by(r,'dolby_cinema').score,4,'The First Slam Dunk Dolby should refl
 assert.equal(by(r,'motion').score,4,'The First Slam Dunk motion should reflect sustained physicality');
 assert.equal(by(r,'screenx').score,4,'The First Slam Dunk ScreenX should reflect court breadth and lateral movement');
 
+r=score(movie('Spider-Man: Brand New Day',2026,{id:969681,genres:['Science Fiction','Action','Adventure'],overview:'Spider-Man returns in a large-scale superhero action film with major action set pieces, city movement, impacts and spectacle.'}));
+assert.equal(by(r,'imax').score,4,'Spider-Man: Brand New Day IMAX should be 4 with verified official IMAX release plus strong large-screen/action traits');
+
+r=score(movie('Disclosure Day',2026,{genres:['Science Fiction','Drama'],overview:'A Steven Spielberg event film built around large-scale science-fiction spectacle, cinematic scale and immersive sound.'}));
+assert.equal(by(r,'imax').score,4,'Disclosure Day IMAX should be 4 with verified official IMAX presentation plus strong scale/audio traits');
+
 r=score(movie('Quiet Romance',2025,{genres:['Romance','Drama'],overview:'Two people talk quietly in small rooms and cafes.'}));
 assert.equal(by(r,'standard').score,4,'standard rises to 4 when no special format has a strong case');
 for(const key of ['imax','motion','screenx']) assert.ok(by(r,key).score>=2,'special formats must not drop below 2 merely from missing evidence');

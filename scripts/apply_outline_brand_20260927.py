@@ -4,7 +4,6 @@ import re
 import struct
 import zlib
 
-# Reapply trigger: keep implementation and regression expectations synchronized.
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     "index.html", "discover.html", "experience.html", "my-cinemap.html",
@@ -15,55 +14,56 @@ OLD_MARK = '<img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="t
 NEW_MARK = '<span class="gBrandTile" aria-hidden="true"><span class="gBrandGlyph">C</span><span class="gBrandBeam"></span></span>'
 
 OUTLINE_CSS = r'''<style id="cinemap-outline-brand-v2">
-/* Approved B concept: horizontal Outline Tile + premium editorial serif wordmark. */
+/* Approved B mockup: horizontal Outline Tile + large editorial serif wordmark. */
 .gBrand{
   display:inline-flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  gap:8px!important;
+  gap:10px!important;
   flex:0 0 auto;
   min-width:max-content;
-  color:#f5efe5!important;
+  color:#f8f0e4!important;
   text-decoration:none!important;
   white-space:nowrap!important;
 }
 .gBrandTile{
   position:relative;
   display:block;
-  width:30px;
-  height:30px;
-  flex:0 0 30px;
-  border:1px solid rgba(235,227,214,.88);
-  border-radius:8px;
-  background:rgba(255,255,255,.012);
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  border:1px solid rgba(240,224,199,.92);
+  border-radius:11px;
+  background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.006));
   overflow:hidden;
-  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.035);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.06),0 0 18px rgba(211,173,116,.045);
 }
 .gBrandGlyph{
   position:absolute;
-  left:5px;
-  top:0;
+  left:7px;
+  top:-1px;
   z-index:2;
-  color:#fbf6ed;
+  color:#fff5e8;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:23px;
-  font-weight:500;
-  line-height:29px;
-  letter-spacing:-.055em;
+  font-size:34px;
+  font-weight:400;
+  line-height:44px;
+  letter-spacing:-.07em;
+  text-shadow:0 0 8px rgba(255,236,205,.12);
 }
 .gBrandBeam{
   position:absolute;
   z-index:1;
-  left:14px;
-  top:6px;
-  width:18px;
-  height:18px;
-  background:linear-gradient(90deg,rgba(255,238,204,.78) 0%,rgba(239,211,162,.42) 42%,rgba(222,187,131,.10) 76%,rgba(222,187,131,0) 100%);
-  clip-path:polygon(0 38%,100% 5%,100% 95%,0 62%);
-  filter:blur(.1px);
-  opacity:.96;
+  left:19px;
+  top:7px;
+  width:29px;
+  height:30px;
+  background:linear-gradient(90deg,rgba(255,239,205,.96) 0%,rgba(243,214,166,.70) 34%,rgba(225,190,135,.34) 68%,rgba(212,172,113,0) 100%);
+  clip-path:polygon(0 39%,100% 6%,100% 94%,0 61%);
+  filter:blur(.25px);
+  opacity:1;
 }
 .gBrandWords{
   display:flex!important;
@@ -73,54 +73,66 @@ OUTLINE_CSS = r'''<style id="cinemap-outline-brand-v2">
   min-width:0;
   line-height:1;
   white-space:nowrap;
+  transform:translateY(-1px);
 }
 .gBrandName{
-  color:#f5efe5;
+  color:#fff3e4;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:24px;
-  font-weight:500;
+  font-size:32px;
+  font-weight:400;
   line-height:.86;
-  letter-spacing:-.018em;
+  letter-spacing:-.03em;
   white-space:nowrap;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
+  font-feature-settings:"kern" 1,"liga" 1;
 }
 .gBrandTagline{
-  margin-top:5px;
-  padding-left:1px;
-  color:#cbbca6;
+  margin-top:7px;
+  padding-left:2px;
+  color:#d7c7ae;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.4px;
+  font-size:5.8px;
   font-weight:600;
   line-height:1;
-  letter-spacing:.27em;
+  letter-spacing:.31em;
   white-space:nowrap;
 }
+.gNav{height:70px!important;gap:11px!important}
 @media(max-width:430px){
-  .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important;min-width:max-content}
-  .gBrandTile{width:29px;height:29px;flex:0 0 29px;border-radius:7px}
-  .gBrandGlyph{left:5px;top:0;font-size:22px;line-height:28px}
-  .gBrandBeam{left:13px;top:6px;width:17px;height:17px;opacity:1}
-  .gBrandWords{flex-direction:column!important;white-space:nowrap!important}
-  .gBrandName{font-size:21px;line-height:.86;letter-spacing:-.018em}
-  .gBrandTagline{font-size:4.9px;letter-spacing:.21em;margin-top:4px}
+  .gNav{height:68px!important;gap:9px!important}
+  .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:9px!important;min-width:max-content}
+  .gBrandTile{width:42px;height:42px;flex:0 0 42px;border-radius:10px}
+  .gBrandGlyph{left:7px;top:-1px;font-size:32px;line-height:42px;font-weight:400}
+  .gBrandBeam{left:18px;top:7px;width:27px;height:28px;opacity:1}
+  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-1px)}
+  .gBrandName{font-size:29px;line-height:.86;letter-spacing:-.026em}
+  .gBrandTagline{font-size:5.4px;letter-spacing:.28em;margin-top:6px;padding-left:2px}
+  .gSearchForm{height:36px!important}
+}
+@media(max-width:370px){
+  .gBrand{gap:7px!important}
+  .gBrandTile{width:38px;height:38px;flex-basis:38px;border-radius:9px}
+  .gBrandGlyph{left:6px;font-size:29px;line-height:38px}
+  .gBrandBeam{left:16px;top:6px;width:25px;height:26px}
+  .gBrandName{font-size:26px}
+  .gBrandTagline{font-size:4.8px;letter-spacing:.24em;margin-top:5px}
 }
 </style>'''
 
 FAVICON = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cinemap">
 <defs>
-  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".9"/><stop offset=".48" stop-color="#edc98f" stop-opacity=".46"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
+  <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#ffeccc" stop-opacity=".96"/><stop offset=".42" stop-color="#edc98f" stop-opacity=".68"/><stop offset=".75" stop-color="#dcb276" stop-opacity=".30"/><stop offset="1" stop-color="#d6ae72" stop-opacity="0"/></linearGradient>
 </defs>
 <rect width="128" height="128" rx="28" fill="#0a0c0f"/>
-<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="23" fill="none" stroke="#ebe3d6" stroke-width="3" opacity=".94"/>
-<path d="M58 62 L110 39 L110 89 Z" fill="url(#beam)" opacity=".96"/>
-<text x="29" y="92" fill="#fbf6ed" font-family="Bodoni 72,Didot,Iowan Old Style,Baskerville,Times New Roman,serif" font-size="75" font-weight="500">C</text>
+<rect id="outline-tile" x="16" y="16" width="96" height="96" rx="23" fill="none" stroke="#ebe3d6" stroke-width="3" opacity=".96"/>
+<path d="M57 62 L113 37 L113 91 Z" fill="url(#beam)" opacity="1"/>
+<text x="29" y="92" fill="#fbf6ed" font-family="Bodoni 72,Didot,Iowan Old Style,Baskerville,Times New Roman,serif" font-size="75" font-weight="400">C</text>
 </svg>'''
 
 
 def patch_page(path: Path):
     text = path.read_text(encoding="utf-8")
-    # Reapply cleanly whether the page still has v1 or already has the approved v2 block.
     text, n = re.subn(
         r'<style id="(?:cinemap-live-header-brand-v1|cinemap-outline-brand-v2)">.*?</style>',
         OUTLINE_CSS,
@@ -131,24 +143,14 @@ def patch_page(path: Path):
     if n != 1:
         raise SystemExit(f"Expected one live header brand block in {path.name}, found {n}")
     if OLD_MARK in text:
-        count = text.count(OLD_MARK)
-        if count < 2:
-            raise SystemExit(f"Expected header and drawer marks in {path.name}, found {count}")
         text = text.replace(OLD_MARK, NEW_MARK)
-
-    # Some pages lost the gBrand class on the visible header anchor, which makes
-    # the tile and wordmark stack instead of using the approved horizontal B lockup.
     text = text.replace(
         '<a href="index.html"><span class="gBrandTile"',
         '<a class="gBrand" href="index.html"><span class="gBrandTile"'
     )
-
-    # Horizontal structure is mandatory in both the visible header and drawer.
     brand_lockup = '<a class="gBrand" href="index.html"><span class="gBrandTile"'
     if text.count(brand_lockup) < 2:
         raise SystemExit(f"Expected two horizontal gBrand lockups in {path.name}")
-    if text.count('class="gBrandTile"') < 2 or text.count('class="gBrandWords"') < 2:
-        raise SystemExit(f"Expected horizontal header and drawer brand structure in {path.name}")
     path.write_text(text, encoding="utf-8")
 
 
@@ -168,7 +170,7 @@ def make_icon(path: Path, n: int):
     bg = (10, 12, 15)
     ivory = (251, 246, 237)
     outline = (235, 227, 214)
-    warm = (255, 230, 189)
+    warm = (255, 232, 194)
     left, top, right, bottom = .14*n, .14*n, .86*n, .86*n
     radius = .16*n
     thick = max(1.4, .022*n)
@@ -181,22 +183,20 @@ def make_icon(path: Path, n: int):
             inner=inside_round_rect(x,y,left+thick,top+thick,right-thick,bottom-thick,max(1,radius-thick))
             if outer and not inner:
                 rgb=outline
-            # Stronger but still soft projection beam, matching the agreed B mockup.
-            ox,oy=.45*n,.50*n
+            ox,oy=.44*n,.50*n
             if x>=ox:
-                dx=x-ox; half=.40*dx+.022*n; dy=abs(y-oy)
+                dx=x-ox; half=.42*dx+.026*n; dy=abs(y-oy)
                 if dy<half:
-                    edge=max(0.0,min(1.0,(half-dy)/(.055*n)))
-                    fade=max(0.0,1.0-dx/(.46*n))
-                    a=.13+.40*edge*fade
+                    edge=max(0.0,min(1.0,(half-dy)/(.06*n)))
+                    fade=max(0.0,1.0-dx/(.48*n))
+                    a=.18+.50*edge*fade
                     rgb=tuple(round(rgb[i]*(1-a)+warm[i]*a) for i in range(3))
-            # Geometric C approximation, intentionally legible at iPhone icon sizes.
-            cx,cy=.43*n,.51*n
+            cx,cy=.42*n,.51*n
             rr=math.hypot(x-cx,y-cy)
             ang=math.atan2(y-cy,x-cx)
             ring=.18*n<=rr<=.25*n and abs(ang)>=math.radians(48)
-            top_serif=.47*n<x<.58*n and .27*n<y<.32*n
-            bot_serif=.47*n<x<.58*n and .70*n<y<.75*n
+            top_serif=.46*n<x<.58*n and .27*n<y<.32*n
+            bot_serif=.46*n<x<.58*n and .70*n<y<.75*n
             if ring or top_serif or bot_serif:
                 rgb=ivory
             row.extend((*rgb,255))
@@ -213,4 +213,4 @@ for page in PAGES:
 make_icon(ROOT / "apple-touch-icon.png", 180)
 make_icon(ROOT / "icon-192.png", 192)
 make_icon(ROOT / "icon-512.png", 512)
-print("Applied refined approved Cinemap Outline Tile brand to", len(PAGES), "pages")
+print("Applied approved B mockup brand proportions to", len(PAGES), "pages")

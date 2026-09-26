@@ -92,12 +92,60 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
   .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
 }
 </style>
+
+<style id="cinemap-live-header-brand-v1">
+.gBrand{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  flex:0 0 auto;
+  min-width:0;
+  color:#f4efe5!important;
+  text-decoration:none!important;
+}
+.gBrand .gLogoMark{
+  display:block;
+  width:30px!important;
+  height:30px!important;
+  max-width:30px!important;
+  flex:0 0 30px;
+  object-fit:contain;
+  border-radius:8px;
+}
+.gBrandWords{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1}
+.gBrandName{
+  color:#f4efe5;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:22px;
+  font-weight:500;
+  line-height:.92;
+  letter-spacing:-.035em;
+  white-space:nowrap;
+}
+.gBrandTagline{
+  margin-top:5px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.25em;
+  white-space:nowrap;
+}
+@media(max-width:430px){
+  .gBrand{gap:7px!important}
+  .gBrand .gLogoMark{width:28px!important;height:28px!important;max-width:28px!important;flex-basis:28px}
+  .gBrandName{font-size:20px}
+  .gBrandTagline{font-size:5px;letter-spacing:.19em;margin-top:4px}
+}
+</style>
 </head>
 <body>
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a>
+ <a class="gBrand" href="index.html"><img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="true"><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -106,7 +154,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo" src="assets/cinemap-logo.png?v=2" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html"><img class="gLogo gLogoMark" src="favicon.svg" alt="" aria-hidden="true"><span class="gBrandWords"><span class="gBrandName">Cinemap</span><span class="gBrandTagline">EXPLORE CINEMA</span></span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
  <a href="rankings.html">ランキング</a>

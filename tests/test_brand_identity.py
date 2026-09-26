@@ -9,8 +9,10 @@ class BrandIdentityTests(unittest.TestCase):
     def test_primary_pages_use_new_cinemap_wordmark(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")
-            self.assertIn("brandTagline", text, page)
+            self.assertIn("gBrandName", text, page)
+            self.assertIn("gBrandTagline", text, page)
             self.assertIn("EXPLORE CINEMA", text, page)
+            self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
     def test_primary_pages_reference_brand_assets(self):

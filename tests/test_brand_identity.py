@@ -15,6 +15,12 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
+    def test_my_cinemap_export_uses_current_brand(self):
+        text = (ROOT / "js/my-cinemap-art.js").read_text(encoding="utf-8")
+        self.assertNotIn("assets/cinemap-logo.png?v=2", text)
+        self.assertIn("EXPLORE CINEMA", text)
+        self.assertIn("Cinemap", text)
+
     def test_primary_pages_reference_brand_assets(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")

@@ -14,7 +14,7 @@ discover=read("discover.html")
 
 checks={
  "critic evidence view":(critic,["js/critic-evidence.js","批評の傾向","出典を見る","sessionStorage"]),
- "critic movie detail link":(critic,["作品情報・映画DNAへ戻る","search.html?id="]),
+ "critic movie detail link":(critic,["作品情報へ戻る","search.html?id="]),
  "search standalone critic entry":(search,["批評の傾向と出典を見る","critic.html?id="]),
  "search inline evidence":(search,["js/critic-evidence.js","data/critic_evidence.json","function renderInlineCriticism(","批評情報がまだ十分に集まっていません"]),
  "calendar deep dive":(index,["批評の傾向を見る","作品詳細・Movie DNAへ"]),

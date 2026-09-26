@@ -1,0 +1,27 @@
+name: Apply screening v3
+on:
+  push:
+    branches: [feat/screening-recommendation-v3]
+    paths:
+      - scripts/apply_screening_v3.py
+      - .github/workflows/apply-screening-v3.yml
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/screening-recommendation-v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python scripts/apply_screening_v3.py
+      - run: rm scripts/apply_screening_v3.py .github/workflows/apply-screening-v3.yml
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add search.html scripts/apply_screening_v3.py .github/workflows/apply-screening-v3.yml
+          git commit -m "feat: implement screening recommendation v3"
+          git push

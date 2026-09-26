@@ -1,0 +1,15 @@
+name: Check screening v7
+on:
+  push:
+    branches: ['feat/screening-model-v7']
+  pull_request:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check_screening_v7.js

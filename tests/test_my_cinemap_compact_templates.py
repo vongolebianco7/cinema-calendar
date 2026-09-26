@@ -39,7 +39,8 @@ def test_template_selection_has_visible_active_frame():
 
 
 def test_default_title_is_english_and_canned_poem_is_removed():
-    assert 'id="title" value="MY TOP 10"' in HTML
+    assert 'id="title" data-year="2026"' in HTML
+    assert 'MY TOP OF '+chr(34)+'+document.getElementById("title").dataset.year' in HTML
     assert 'id="sub" value="" placeholder="ひとこと（任意）"' in HTML
     assert '心に残った10本。' not in HTML
     assert 'あなたの映画を、ここに。' not in ART
@@ -48,15 +49,14 @@ def test_default_title_is_english_and_canned_poem_is_removed():
 def test_illustrations_are_optional_and_default_off():
     assert 'id="illustrationMode"' in HTML
     assert '<option value="none" selected>なし（推奨）</option>' in HTML
-    assert '<option value="abstract">抽象イラスト</option>' in HTML
-    assert "artValue('illustrationMode')==='abstract'" in ART
-    assert "drawAbstractThumb" in ART
+    assert '<option value="abstract">' not in HTML
+    assert 'drawAbstractThumb' not in ART
 
 
 def test_top_three_use_refined_medal_renderer():
     assert "function drawMedal" in ART
     assert "if(i<3)drawMedal" in ART
-    for metal in ["#b9903a", "#a7abb1", "#a76d43"]:
+    for metal in ["#a98c56", "#92969a", "#a77b61"]:
         assert metal in ART
 
 
@@ -64,6 +64,7 @@ def test_canvas_uses_existing_cinemap_logo_asset():
     assert "assets/cinemap-logo.png?v=2" in ART
     assert "cinemapLogo" in ART
     assert "drawBrand" in ART
+    assert "fillText('Cinemap'" not in ART
 
 
 def test_hidden_theme_control_does_not_assume_select_options():

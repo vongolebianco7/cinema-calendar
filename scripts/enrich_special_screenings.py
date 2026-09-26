@@ -1,4 +1,4 @@
-import os, json, urllib.request, urllib.parse, re, difflib, time
+import os, json, urllib.request, urllib.parse, re, difflib, time, unicodedata
 
 KEY = os.environ["TMDB_API_KEY"]
 BASE = "https://api.themoviedb.org/3"
@@ -31,7 +31,7 @@ def request(path, params):
         return json.load(r)
 
 def norm(s):
-    s = (s or "").lower().normalize("NFKC") if hasattr(str, "normalize") else (s or "").lower()
+    s = unicodedata.normalize("NFKC", s or "").lower()
     return re.sub(r"[\s　・･:：!！?？「」『』【】\[\]()（）/／\-―ー\.…]+", "", s)
 
 def clean_title(title):
@@ -88,7 +88,6 @@ for row in data.get("screenings", []):
             params["year"] = year
         try:
             results = request("/search/movie", params).get("results", [])
-            # Retry without year because Japanese reissue titles often differ from the original TMDB year.
             if not results and year:
                 params.pop("year", None)
                 results = request("/search/movie", params).get("results", [])

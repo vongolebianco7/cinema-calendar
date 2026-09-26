@@ -1,0 +1,48 @@
+name: Apply My Cinemap three-column export
+
+on:
+  push:
+    paths:
+      - "scripts/apply_my_cinemap_three_column_20260927.py"
+      - ".github/workflows/apply-my-cinemap-three-column-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare regression test
+        run: python scripts/apply_my_cinemap_three_column_20260927.py prepare-tests
+
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_my_cinemap_three_column_export.py; then
+            echo "Expected three-column export test to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+
+      - name: Apply My Cinemap three-column export
+        run: python scripts/apply_my_cinemap_three_column_20260927.py apply
+
+      - name: Verify GREEN
+        run: |
+          python tests/test_my_cinemap_three_column_export.py
+          node --check js/my-cinemap-art.js
+          python tests/test_my_cinemap_compact_templates.py
+
+      - name: Commit My Cinemap export fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/my-cinemap-art.js my-cinemap.html tests/test_my_cinemap_three_column_export.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: render My Cinemap rankings in three vertical columns"
+          git push

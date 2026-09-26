@@ -23,14 +23,17 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
             self.assertNotIn('.brandA:after{content:""', text, page)
 
-            # Compact B mockup proportions on iPhone: small horizontal lockup,
-            # thin outline, visible beam, and no oversized header.
-            self.assertIn('.gNav{height:58px!important;gap:8px!important}', text, page)
-            self.assertIn('.gBrandTile{width:31px;height:31px;flex:0 0 31px;border-radius:8px}', text, page)
-            self.assertIn('border:.6px solid rgba(240,224,199,.90)', text, page)
-            self.assertIn('.gBrandName{font-size:23px;line-height:.88;letter-spacing:-.022em}', text, page)
-            self.assertIn('.gBrandBeam{left:13px;top:5px;width:20px;height:21px;opacity:1}', text, page)
-            self.assertIn('rgba(255,239,205,.94)', text, page)
+            # Final B craft: compact, thin outline, no decorative tile effects,
+            # restrained projection beam and editorial wordmark proportions.
+            self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
+            self.assertIn('.gBrandTile{width:30px;height:30px;flex:0 0 30px;border-radius:7px}', text, page)
+            self.assertIn('border:.5px solid rgba(240,224,199,.86)', text, page)
+            self.assertIn('background:transparent', text, page)
+            self.assertIn('box-shadow:none', text, page)
+            self.assertIn('.gBrandName{font-size:22px;line-height:.90;letter-spacing:-.018em}', text, page)
+            self.assertIn('.gBrandBeam{left:12px;top:6px;width:19px;height:18px;opacity:.96}', text, page)
+            self.assertIn('rgba(255,239,205,.90)', text, page)
+            self.assertIn('filter:none', text, page)
             self.assertIn('.gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important', text, page)
 
             # Both the visible header and drawer must use the horizontal gBrand flex lockup.
@@ -59,8 +62,8 @@ class BrandIdentityTests(unittest.TestCase):
         text = (ROOT / "favicon.svg").read_text(encoding="utf-8")
         self.assertIn('id="outline-tile"', text)
         self.assertIn('stroke="#ebe3d6"', text)
-        self.assertIn('stroke-width="1.5"', text)
-        self.assertIn('stop-color="#ffeccc" stop-opacity=".94"', text)
+        self.assertIn('stroke-width="1"', text)
+        self.assertIn('stop-color="#ffeccc" stop-opacity=".90"', text)
         self.assertIn("Bodoni 72,Didot", text)
 
     def test_manifest_is_cinemap_branded(self):

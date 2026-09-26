@@ -25,7 +25,7 @@ if present_art:
 required_html = [
     '<option value="single" selected>縦1列</option>',
     '<option value="double">左右2列</option>',
-    '<a class="gBrand" href="index.html"><span class="gBrandTile"',
+    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html"><span class="gBrandTile"',
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:

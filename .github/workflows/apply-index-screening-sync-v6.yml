@@ -1,0 +1,29 @@
+name: Apply index screening sync v6
+on:
+  push:
+    branches: ['fix/index-screening-sync-v6']
+    paths:
+      - 'scripts/apply_index_screening_sync_v6.py'
+      - '.github/workflows/apply-index-screening-sync-v6.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/index-screening-sync-v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python scripts/apply_index_screening_sync_v6.py
+      - run: python scripts/check_index_screening_sync_v6.py
+      - name: Commit patch
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'fix: sync index screening recommendations with movie detail'
+          git push origin HEAD:fix/index-screening-sync-v6

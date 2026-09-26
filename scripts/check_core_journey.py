@@ -17,10 +17,10 @@ checks={
  "critic movie detail link":(critic,["作品情報へ戻る","search.html?id="]),
  "search standalone critic entry":(search,["批評の傾向と出典を見る","critic.html?id="]),
  "search inline evidence":(search,["js/critic-evidence.js","data/critic_evidence.json","function renderInlineCriticism(","批評情報がまだ十分に集まっていません"]),
- "calendar deep dive":(index,["批評の傾向を見る","作品詳細・Movie DNAへ"]),
+ "calendar deep dive":(index,["批評の傾向を見る","作品情報を見る"]),
  "ranking internal detail":(rankings,["Cinemapで深掘る","search.html?id="]),
  "my cinemap deep dive":(my,["critic.html?id=","search.html?id="]),
- "creator origin cycle":(discover,["元の作品の批評へ戻る","MOVIE DNA · CREATOR PATH"]),
+ "creator origin cycle":(discover,["元の作品の批評へ戻る","作り手の作品をたどる"]),
 }
 for name,(body,needles) in checks.items():
     for needle in needles:

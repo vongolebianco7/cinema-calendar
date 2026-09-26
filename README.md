@@ -1,2 +1,2 @@
 # cinema-calendar
-<!-- redeploy-pages -->
+<!-- redeploy-pages: 2026-09-26-final-polish -->

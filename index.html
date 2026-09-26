@@ -148,7 +148,20 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 /* timeline integrated + format stars */
 .timelineNow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 15px}.timelineNow>div{border:1px solid #2d3036;border-radius:7px;padding:9px 10px;background:#111}.timelineNow strong{display:block;font-size:10px;color:#ddd;margin-bottom:5px}.timelineNow span{display:block;font-size:10px;line-height:1.55;color:#aaa}.experienceFitCard.best{border-color:#75652f;background:linear-gradient(135deg,#191710,#0b0d11)}.experienceStars{font-style:normal!important;color:#f0c86a!important;border:0!important;padding:0!important;font-size:12px!important;letter-spacing:.03em!important}.experienceFitCard.best b:after{content:"  おすすめ";font-size:8px;color:#f0c86a;font-weight:700}
 @media(max-width:600px){.timelineNow{grid-template-columns:1fr}}
-</style><script src="js/screening-model-v7.js"></script></head>
+</style><script src="js/screening-model-v7.js"></script>
+<style>
+/* movie-detail-mobile-overflow-v1 */
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .modal{max-width:100vw;overflow-x:hidden}
+  .sheet{width:100%;max-width:100vw;min-width:0;overflow-x:hidden}
+  #detail,#detail>*,.detailSection,.detailTop,.criticBody,.criticPanel,.relatedGroups,.traceGroup{min-width:0;max-width:100%}
+  .filmography,.works,.criticMatrix{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .filmography,.works{touch-action:pan-x}
+  .criticMatrixGrid{width:max-content}
+}
+</style>
+</head>
 <body>
 
 

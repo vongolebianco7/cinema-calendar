@@ -4,6 +4,7 @@ import re
 import struct
 import zlib
 
+# Reapply trigger: keep implementation and regression expectations synchronized.
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     "index.html", "discover.html", "experience.html", "my-cinemap.html",

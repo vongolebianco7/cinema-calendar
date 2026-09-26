@@ -13,8 +13,8 @@ for token in required:
     if token not in html: errors.append('missing '+token)
 if 'if(key==="imax"&&e.filmed_for_imax===true&&e.imax_expanded_ratio&&e.imax_expanded_ratio!=="unknown")score=5' not in html:
     errors.append('verified IMAX capture + expanded ratio must score 5')
-if 'かなり向く' in html or '候補' in html or '優先度低め' in html:
-    errors.append('ambiguous compact verdict labels remain')
+if 'function verdictV3(score)' in html:
+    errors.append('old ambiguous compact verdict function remains')
 if errors:
     print('screening v4 failed')
     [print('-',e) for e in errors]

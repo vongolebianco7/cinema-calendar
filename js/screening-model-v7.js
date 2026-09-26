@@ -53,7 +53,7 @@
   function officialStatus(key,e){
     if(key==='standard')return {verified:true,label:'基本上映'};
     if(key==='imax'){
-      const v=known(e.imax_camera)||known(e.imax_expanded_ratio)||e.filmed_for_imax===true||e.imax_dmr_only===true;
+      const v=known(e.imax_camera)||known(e.imax_expanded_ratio)||e.filmed_for_imax===true||e.imax_dmr_only===true||e.official_imax_release===true;
       return {verified:v,label:v?'IMAX作品情報あり':'IMAX作品情報は未確認'};
     }
     if(key==='dolby_cinema'){
@@ -71,10 +71,15 @@
   function imaxRow(tr,e){
     const expanded=known(e.imax_expanded_ratio)&&e.imax_expanded_ratio!=='none';
     const captured=['imax_film','imax_certified_digital'].includes(e.imax_camera)||e.filmed_for_imax===true;
-    let score=2,reason='IMAX固有の拡張画角は未確認です。作品特性による大画面・音響の上乗せを中心に見ます。';
+    const officialIntent=e.filmed_for_imax===true||e.official_imax_release===true;
+    const strongFit=Math.max(tr.scale,tr.audio,tr.motion,tr.setpiece)>=4;
+    const clearlyLowFit=Math.max(tr.scale,tr.audio,tr.motion,tr.setpiece)<=2&&tr.contemplative>=4;
+    let score=clearlyLowFit?2:3;
+    let reason=clearlyLowFit?'小規模で静的な表現が中心で、大画面・音響による上乗せが比較的小さい作品です。':'IMAX固有の拡張画角は未確認ですが、大画面・音響による一定の上乗せを見込みます。';
     if(expanded&&captured){score=5;reason='IMAXカメラ撮影と拡張画角を作品固有情報で確認。通常上映より広い画面情報を含むシーンがあります。';}
     else if(expanded){score=4;reason='IMAXで拡張画角となる作品固有情報を確認。画面情報の広がりが明確です。';}
-    else if(Math.max(tr.scale,tr.audio,tr.motion,tr.setpiece)>=4){score=3;reason='拡張画角は未確認。一方、大画面・低音・大規模な見せ場を活かしやすい作品特性があります。';}
+    else if(officialIntent&&strongFit){score=4;reason='公式IMAX展開を確認。大画面・低音・大規模な見せ場との相性も強く、IMAXでの上乗せが明確です。';}
+    else if(strongFit){score=3;reason='拡張画角は未確認。一方、大画面・低音・大規模な見せ場を活かしやすい作品特性があります。';}
     const stat=officialStatus('imax',e);
     return {key:'imax',name:LABELS.imax,score,reason,availability:stat.label,verifiedVersion:stat.verified,sources:sourceList('imax',e),details:{expandedRatio:e.imax_expanded_ratio||'unknown',capture:e.imax_camera||'unknown'}};
   }

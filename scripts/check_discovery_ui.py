@@ -58,9 +58,11 @@ if "repeat(3,minmax(0,1fr))" not in discover:
     errors.append("Condition search results must use a three-column grid")
 
 # Calendar UX gates.
-for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))", "継続 · '+ev.title"]:
+for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))"]:
     if required not in calendar:
         errors.append(f"Calendar UX integration missing: {required}")
+if "firstSeg" not in calendar or "（継続）" not in calendar:
+    errors.append("Calendar UX integration missing continuation marker")
 
 # My Cinemap layout/theme gates.
 my = text("my-cinemap.html")

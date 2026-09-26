@@ -30,6 +30,8 @@ for name,(body,needles) in checks.items():
 # The work page must not infer actual critical opinions from metadata.
 if "criticTopics(" in critic or "criticTopics(" in search:
     errors.append("Criticism must not be inferred from synopsis or movie metadata")
+if 'class="criticPreviewCta" href="critic.html?id=' not in search:
+    errors.append("Movie detail criticism link must be a valid anchor")
 
 if errors:
     print("Cinemap core journey gate failed:")

@@ -70,6 +70,20 @@ for required in ["themeChoices", "Archive / Navy", "Classic / Forest", "35mm / S
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
 
+# My Cinemap assist + luxe gates.
+tools_path = ROOT / "js/my-cinemap-tools.js"
+if not tools_path.exists():
+    errors.append("My Cinemap assist module missing: js/my-cinemap-tools.js")
+else:
+    tools = tools_path.read_text(encoding="utf-8")
+    for required in ["candidateShelf", "候補に追加", "data-replace", "movieComment", "duplicateList", "cinemap-my-candidates", "cinemap-my-saved-lists"]:
+        if required not in tools:
+            errors.append(f"My Cinemap assist feature missing: {required}")
+art = text("js/my-cinemap-art.js")
+for required in ["drawLuxeBackdrop", "drawFilmGrain", "champagne", "Editorial Luxe"]:
+    if required not in art:
+        errors.append(f"My Cinemap luxe artwork missing: {required}")
+
 # IMAX GT directory must include verified screens and an experience-page path.
 if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):
     errors.append("No verified IMAX GT screen entries")

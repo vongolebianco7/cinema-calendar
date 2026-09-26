@@ -9,9 +9,6 @@ let artworkFile=null, artworkRevision=0, artworkURL=null;
 const artValue=id=>document.getElementById(id)?.value||'';
 const artSerif='Georgia,"Times New Roman",serif';
 const artSans='"Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
-const cinemapLogo=new Image();
-cinemapLogo.src='assets/cinemap-logo.png?v=2';
-cinemapLogo.onload=()=>{try{if(typeof picks!=='undefined')drawArtwork(picks)}catch{}};
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -79,10 +76,14 @@ function drawGalleryEditorial(ctx,w,h,p){
   ctx.fillStyle='#75644e';ctx.globalAlpha=.16;ctx.fillRect(0,h-65,w,65);ctx.globalAlpha=1;
 }
 function drawBrand(ctx,w,h,theme){
-  if(!cinemapLogo.complete||!cinemapLogo.naturalWidth)return;
-  const scale=Math.min(174/cinemapLogo.naturalWidth,58/cinemapLogo.naturalHeight);
-  const dw=cinemapLogo.naturalWidth*scale,dh=cinemapLogo.naturalHeight*scale;
-  ctx.save();if(theme!=='theater'){ctx.fillStyle='#22262c';ctx.globalAlpha=.92;ctx.fillRect(w-96-dw-12,h-93,dw+24,dh+16)}ctx.globalAlpha=.95;ctx.drawImage(cinemapLogo,w-96-dw,h-85,dw,dh);ctx.restore();
+  ctx.save();
+  const dark=theme==='theater';
+  ctx.textAlign='right';ctx.textBaseline='alphabetic';
+  ctx.fillStyle=dark?'#f4efe5':'#29231d';ctx.globalAlpha=.96;
+  ctx.font=`500 42px ${artSerif}`;ctx.fillText('Cinemap',w-96,h-70);
+  ctx.fillStyle=dark?'#cdbfa9':'#8a7658';ctx.globalAlpha=.9;
+  ctx.font=`650 10px ${artSans}`;ctx.fillText('EXPLORE CINEMA',w-96,h-49);
+  ctx.restore();
 }
 function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');

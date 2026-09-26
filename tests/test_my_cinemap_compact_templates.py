@@ -80,3 +80,11 @@ def test_phone_photo_flow_shows_a_long_pressable_image():
     assert 'id="saveImageDialog"' in HTML
     assert 'id="saveImagePreview"' in HTML
     assert 'toDataURL' in ART
+
+
+def test_editorial_export_uses_one_continuous_vertical_rhythm():
+    # The approved default layout should read as one visual axis from rank 1 through 10,
+    # with a smaller title and a footer tied to the list instead of a large empty bottom zone.
+    for token in ["const portraitTitleSize=54", "const portraitListTop=244", "const portraitFooterGap=54", "const rowInset=16"]:
+        assert token in ART
+    assert "cellH=available/rows" not in ART

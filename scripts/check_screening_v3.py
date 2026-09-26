@@ -8,9 +8,6 @@ required = [
     'formatHero',
     'formatCompactGrid',
     'data-format-detail',
-    '作品との相性',
-    '専用最適化',
-    '判定根拠',
     'compatibilityScore',
     'optimizationScore',
     'darkVisualScore',
@@ -23,11 +20,13 @@ for token in required:
     if token not in html:
         errors.append(f'missing v3 token: {token}')
 
-# Dolby Atmos is a supporting technology, not a peer card.
+# v3 semantics can use the clearer v4 labels.
+if not (('作品との相性' in html and '専用最適化' in html and '判定根拠' in html) or ('この作品で効くポイント' in html and '方式固有の裏付け' in html and 'なぜこの評価？' in html)):
+    errors.append('missing screening recommendation explanation structure')
+
 if 'data-format-key="atmos"' in html or '{name:"Dolby Atmos"' in html:
     errors.append('Dolby Atmos must not be a peer screening-format card')
 
-# Long evidence should be hidden behind progressive disclosure by default.
 if '上映方式おすすめの理由</strong>' in html and 'data-format-detail' not in html:
     errors.append('format reasons must be progressive-disclosure details')
 

@@ -1,0 +1,38 @@
+name: Critic Map render regression
+
+on:
+  push:
+    branches:
+      - 'fix/critic-render-tdz'
+    paths:
+      - 'critic.html'
+      - 'scripts/check_critic_render_tdz.py'
+      - '.github/workflows/critic-render-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  critic-render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Critic Map render TDZ regression
+        run: python scripts/check_critic_render_tdz.py
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile, sys
+          text=Path('critic.html').read_text(encoding='utf-8')
+          for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,re.S|re.I)):
+              if not script.strip():
+                  continue
+              p=Path(tempfile.gettempdir())/f'critic-{i}.js'
+              p.write_text(script,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+              if r.returncode:
+                  print(r.stderr)
+                  sys.exit(1)
+          print('critic inline JavaScript syntax ok')
+          PY

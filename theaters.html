@@ -94,14 +94,14 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </style>
 
 <style id="cinemap-outline-brand-v2">
-/* Approved B mockup: horizontal Outline Tile + large editorial serif wordmark. */
+/* Approved B mockup: compact horizontal Outline Tile + editorial serif wordmark. */
 .gBrand{
   display:inline-flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  gap:10px!important;
+  gap:8px!important;
   flex:0 0 auto;
   min-width:max-content;
   color:#f8f0e4!important;
@@ -111,38 +111,37 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 .gBrandTile{
   position:relative;
   display:block;
-  width:44px;
-  height:44px;
-  flex:0 0 44px;
-  border:1px solid rgba(240,224,199,.92);
-  border-radius:11px;
-  background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.006));
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  border:.6px solid rgba(240,224,199,.90);
+  border-radius:9px;
+  background:linear-gradient(145deg,rgba(255,255,255,.02),rgba(255,255,255,.004));
   overflow:hidden;
-  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.06),0 0 18px rgba(211,173,116,.045);
+  box-shadow:inset 0 0 0 .3px rgba(255,255,255,.035);
 }
 .gBrandGlyph{
   position:absolute;
-  left:7px;
+  left:5px;
   top:-1px;
   z-index:2;
   color:#fff5e8;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:34px;
+  font-size:26px;
   font-weight:400;
-  line-height:44px;
-  letter-spacing:-.07em;
-  text-shadow:0 0 8px rgba(255,236,205,.12);
+  line-height:34px;
+  letter-spacing:-.065em;
 }
 .gBrandBeam{
   position:absolute;
   z-index:1;
-  left:19px;
-  top:7px;
-  width:29px;
-  height:30px;
-  background:linear-gradient(90deg,rgba(255,239,205,.96) 0%,rgba(243,214,166,.70) 34%,rgba(225,190,135,.34) 68%,rgba(212,172,113,0) 100%);
+  left:14px;
+  top:5px;
+  width:22px;
+  height:23px;
+  background:linear-gradient(90deg,rgba(255,239,205,.94) 0%,rgba(243,214,166,.67) 35%,rgba(225,190,135,.30) 68%,rgba(212,172,113,0) 100%);
   clip-path:polygon(0 39%,100% 6%,100% 94%,0 61%);
-  filter:blur(.25px);
+  filter:blur(.2px);
   opacity:1;
 }
 .gBrandWords{
@@ -153,50 +152,50 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
   min-width:0;
   line-height:1;
   white-space:nowrap;
-  transform:translateY(-1px);
+  transform:translateY(-.5px);
 }
 .gBrandName{
   color:#fff3e4;
   font-family:"Bodoni 72",Didot,"Iowan Old Style",Baskerville,"Times New Roman",serif;
-  font-size:32px;
+  font-size:26px;
   font-weight:400;
-  line-height:.86;
-  letter-spacing:-.03em;
+  line-height:.88;
+  letter-spacing:-.024em;
   white-space:nowrap;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   font-feature-settings:"kern" 1,"liga" 1;
 }
 .gBrandTagline{
-  margin-top:7px;
-  padding-left:2px;
+  margin-top:5px;
+  padding-left:1px;
   color:#d7c7ae;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  font-size:5.8px;
+  font-size:5.1px;
   font-weight:600;
   line-height:1;
-  letter-spacing:.31em;
+  letter-spacing:.28em;
   white-space:nowrap;
 }
-.gNav{height:70px!important;gap:11px!important}
+.gNav{height:60px!important;gap:9px!important}
 @media(max-width:430px){
-  .gNav{height:68px!important;gap:9px!important}
-  .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:9px!important;min-width:max-content}
-  .gBrandTile{width:42px;height:42px;flex:0 0 42px;border-radius:10px}
-  .gBrandGlyph{left:7px;top:-1px;font-size:32px;line-height:42px;font-weight:400}
-  .gBrandBeam{left:18px;top:7px;width:27px;height:28px;opacity:1}
-  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-1px)}
-  .gBrandName{font-size:29px;line-height:.86;letter-spacing:-.026em}
-  .gBrandTagline{font-size:5.4px;letter-spacing:.28em;margin-top:6px;padding-left:2px}
-  .gSearchForm{height:36px!important}
+  .gNav{height:58px!important;gap:8px!important}
+  .gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important;min-width:max-content}
+  .gBrandTile{width:31px;height:31px;flex:0 0 31px;border-radius:8px}
+  .gBrandGlyph{left:5px;top:-1px;font-size:24px;line-height:31px;font-weight:400}
+  .gBrandBeam{left:13px;top:5px;width:20px;height:21px;opacity:1}
+  .gBrandWords{flex-direction:column!important;white-space:nowrap!important;transform:translateY(-.5px)}
+  .gBrandName{font-size:23px;line-height:.88;letter-spacing:-.022em}
+  .gBrandTagline{font-size:4.7px;letter-spacing:.25em;margin-top:4px;padding-left:1px}
+  .gSearchForm{height:34px!important}
 }
 @media(max-width:370px){
-  .gBrand{gap:7px!important}
-  .gBrandTile{width:38px;height:38px;flex-basis:38px;border-radius:9px}
-  .gBrandGlyph{left:6px;font-size:29px;line-height:38px}
-  .gBrandBeam{left:16px;top:6px;width:25px;height:26px}
-  .gBrandName{font-size:26px}
-  .gBrandTagline{font-size:4.8px;letter-spacing:.24em;margin-top:5px}
+  .gBrand{gap:6px!important}
+  .gBrandTile{width:29px;height:29px;flex-basis:29px;border-radius:7px}
+  .gBrandGlyph{left:4px;font-size:22px;line-height:29px}
+  .gBrandBeam{left:12px;top:5px;width:19px;height:19px}
+  .gBrandName{font-size:21px}
+  .gBrandTagline{font-size:4.4px;letter-spacing:.22em;margin-top:4px}
 }
 </style>
 </head>

@@ -64,8 +64,7 @@ brand = r'''function drawBrand(ctx,w,h,theme){
   ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 29px ${artDisplay}`;ctx.fillText('C',x+7,y+2);ctx.font=`500 27px ${artDisplay}`;ctx.fillText('Cinemap',x+tile+14,y-1);
   ctx.fillStyle=tagline;ctx.font=`600 7px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+15,y+29);ctx.restore();
 }'''
-art = re.sub(r"function drawBrand\(.*?\n\}
-function drawArtwork", brand + "\nfunction drawArtwork", art, count=1, flags=re.S)
+art = re.sub(r'''function drawBrand\(.*?\n\}\nfunction drawArtwork''', brand + "\nfunction drawArtwork", art, count=1, flags=re.S)
 
 art = art.replace("const w=c.width,h=c.height,pad=theme==='galleryeditorial'?246:theme==='filmnote'?122:116,inner=w-2*pad;", "const w=c.width,h=c.height,pad=shape==='landscape'?104:128,inner=w-2*pad;")
 art = art.replace("({minimal:drawMinimal,filmnote:drawFilmNote,theater:drawTheater,galleryeditorial:drawGalleryEditorial}[theme]||drawMinimal)(ctx,w,h,p);", "({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,sage:drawSage,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);")

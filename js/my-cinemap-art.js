@@ -102,22 +102,22 @@ function drawArtwork(movies){
   if(note){ctx.fillStyle=p.muted;ctx.textAlign='center';writeLines(ctx,note,w/2,cursor,inner*.88,2,27,22,artSans,400);ctx.textAlign='left';cursor+=58;ctx.fillStyle=p.fg}
   rule(ctx,pad,cursor,inner,p.line,.68);cursor+=shape==='landscape'?20:28;
   const items=(movies||[]).slice(0,10),bottom=h-150,available=bottom-cursor;
-  // Landscape needs two columns for legible names; ranking otherwise reads down the page.
+  // Ranking output is always three vertical columns, regardless of image shape or layout preset.
   const sparse=items.length>0&&items.length<=3;
-  const columns=sparse?1:shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1;
-  const rows=columns===2?5:10,gap=columns===2?62:0,cellW=(inner-gap*(columns-1))/columns;
-  const cellH=sparse?Math.min(shape==='landscape'?160:260,available/(items.length+1)):available/rows;
+  const columns=3;
+  const rows=Math.max(1,Math.ceil(items.length/columns)),gap=44,cellW=(inner-gap*(columns-1))/columns;
+  const cellH=sparse?Math.min(shape==='landscape'?160:260,available/(Math.max(1,items.length)+1)):available/rows;
   const firstRowY=sparse?cursor+available*(items.length===1?.3:.12):cursor;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,cursor+available*.42);ctx.textAlign='left';ctx.fillStyle=p.fg}
   items.forEach((m,i)=>{
-    const col=columns===1?0:Math.floor(i/rows),row=columns===1?i:i%rows;
+    const col=Math.floor(i/rows),row=i%rows;
     const x=pad+col*(cellW+gap),y=firstRowY+row*cellH,numberX=x+51;
     rule(ctx,x,y,cellW,p.line,theme==='galleryeditorial'?.47:.34);
     if(i<3)drawMedal(ctx,numberX,y+cellH*.5,i+1,theme);
     else{ctx.save();ctx.font=`400 47px ${artSerif}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+Math.max(16,cellH*.25));ctx.restore()}
     let tx=x+122,tw=cellW-130,top=y+(sparse?cellH*.25:Math.max(12,Math.min(26,cellH*.16)));
     ctx.fillStyle=p.fg;
-    const nameSize=sparse?Math.min(62,cellH*.3):Math.min(columns===2?31:38,Math.max(25,cellH*.24));
+    const nameSize=sparse?Math.min(48,cellH*.26):Math.min(29,Math.max(21,cellH*.19));
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,cellH<115?1:2,nameSize,22,artSerif,500,1.15);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
     if(meta){ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+6,tw,1,24,19,artSans,400);ctx.fillStyle=p.fg}

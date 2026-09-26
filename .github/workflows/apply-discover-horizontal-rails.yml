@@ -1,0 +1,48 @@
+name: Apply discover horizontal rails
+
+on:
+  push:
+    branches:
+      - 'fix/discover-horizontal-rails'
+    paths:
+      - '.github/workflows/apply-discover-horizontal-rails.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/discover-horizontal-rails
+      - name: Apply rail cleanup
+        run: python scripts/fix_discover_horizontal_rails.py
+      - name: Run discovery UI gate
+        run: python scripts/check_discovery_ui.py
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile, sys
+          text=Path('discover.html').read_text(encoding='utf-8')
+          for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,re.S|re.I)):
+              if not script.strip():
+                  continue
+              p=Path(tempfile.gettempdir())/f'discover-{i}.js'
+              p.write_text(script,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+              if r.returncode:
+                  print(r.stderr)
+                  sys.exit(1)
+          print('discover inline JavaScript syntax ok')
+          PY
+      - name: Commit implementation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discover.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Normalize discover horizontal recommendation rails"
+          git push origin HEAD:fix/discover-horizontal-rails

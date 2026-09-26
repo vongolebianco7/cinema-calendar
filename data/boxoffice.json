@@ -2,143 +2,800 @@
   "generated_at": "2026-09-26",
   "unit": "億円",
   "sources": [
-    {"name":"興行通信社 歴代興収ベスト100","url":"https://kogyotsushin.com/archives/alltime/","as_of":"2026-09-06"},
-    {"name":"日本映画製作者連盟 2025年興行収入10億円以上番組","url":"https://www.eiren.org/toukei/img/eiren_kosyu/data_current_2025.pdf","as_of":"2026-01"},
-    {"name":"日本映画製作者連盟 2024年興行収入10億円以上番組","url":"https://www.eiren.org/toukei/img/eiren_kosyu/data_2024.pdf","as_of":"2025-01"},
-    {"name":"日本映画製作者連盟 2023年興行収入10億円以上番組","url":"https://www.eiren.org/toukei/img/eiren_kosyu/data_2023.pdf","as_of":"2024-01"},
-    {"name":"日本映画製作者連盟 2022年興行収入10億円以上番組","url":"https://www.eiren.org/toukei/img/eiren_kosyu/data_2022.pdf","as_of":"2023-01"}
+    {
+      "name": "興行通信社 歴代興収ベスト100",
+      "url": "https://kogyotsushin.com/archives/alltime/",
+      "as_of": "2026-09-06"
+    },
+    {
+      "name": "日本映画製作者連盟 2025年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_current_2025.pdf",
+      "as_of": "2026-01"
+    },
+    {
+      "name": "日本映画製作者連盟 2024年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2024.pdf",
+      "as_of": "2025-01"
+    },
+    {
+      "name": "日本映画製作者連盟 2023年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2023.pdf",
+      "as_of": "2024-01"
+    },
+    {
+      "name": "日本映画製作者連盟 2022年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2022.pdf",
+      "as_of": "2023-01"
+    },
+    {
+      "name": "日本映画製作者連盟 2021年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2021.pdf",
+      "as_of": "2022-01"
+    },
+    {
+      "name": "日本映画製作者連盟 2020年興行収入10億円以上番組",
+      "url": "https://www.eiren.org/toukei/img/eiren_kosyu/2020.pdf",
+      "as_of": "2021-01"
+    }
   ],
   "all_time": [
-    {"rank":1,"title":"劇場版「鬼滅の刃」無限列車編","gross":407.5,"year":2020,"region":"邦画"},
-    {"rank":2,"title":"劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来","gross":403.6,"year":2025,"region":"邦画"},
-    {"rank":3,"title":"千と千尋の神隠し","gross":316.8,"year":2001,"region":"邦画"},
-    {"rank":4,"title":"タイタニック","gross":277.7,"year":1997,"region":"洋画"},
-    {"rank":5,"title":"アナと雪の女王","gross":255.0,"year":2014,"region":"洋画"},
-    {"rank":6,"title":"君の名は。","gross":251.7,"year":2016,"region":"邦画"},
-    {"rank":7,"title":"もののけ姫","gross":214.6,"year":1997,"region":"邦画"},
-    {"rank":8,"title":"国宝","gross":209.0,"year":2025,"region":"邦画"},
-    {"rank":9,"title":"ONE PIECE FILM RED","gross":203.4,"year":2022,"region":"邦画"},
-    {"rank":10,"title":"ハリー・ポッターと賢者の石","gross":203.0,"year":2001,"region":"洋画"},
-    {"rank":11,"title":"ハウルの動く城","gross":196.0,"year":2004,"region":"邦画"},
-    {"rank":12,"title":"踊る大捜査線 THE MOVIE2 レインボーブリッジを封鎖せよ！","gross":173.5,"year":2003,"region":"邦画"}
+    {
+      "rank": 1,
+      "title": "劇場版「鬼滅の刃」無限列車編",
+      "gross": 407.5,
+      "year": 2020,
+      "region": "邦画"
+    },
+    {
+      "rank": 2,
+      "title": "劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来",
+      "gross": 403.6,
+      "year": 2025,
+      "region": "邦画"
+    },
+    {
+      "rank": 3,
+      "title": "千と千尋の神隠し",
+      "gross": 316.8,
+      "year": 2001,
+      "region": "邦画"
+    },
+    {
+      "rank": 4,
+      "title": "タイタニック",
+      "gross": 277.7,
+      "year": 1997,
+      "region": "洋画"
+    },
+    {
+      "rank": 5,
+      "title": "アナと雪の女王",
+      "gross": 255.0,
+      "year": 2014,
+      "region": "洋画"
+    },
+    {
+      "rank": 6,
+      "title": "君の名は。",
+      "gross": 251.7,
+      "year": 2016,
+      "region": "邦画"
+    },
+    {
+      "rank": 7,
+      "title": "もののけ姫",
+      "gross": 214.6,
+      "year": 1997,
+      "region": "邦画"
+    },
+    {
+      "rank": 8,
+      "title": "国宝",
+      "gross": 209.0,
+      "year": 2025,
+      "region": "邦画"
+    },
+    {
+      "rank": 9,
+      "title": "ONE PIECE FILM RED",
+      "gross": 203.4,
+      "year": 2022,
+      "region": "邦画"
+    },
+    {
+      "rank": 10,
+      "title": "ハリー・ポッターと賢者の石",
+      "gross": 203.0,
+      "year": 2001,
+      "region": "洋画"
+    },
+    {
+      "rank": 11,
+      "title": "ハウルの動く城",
+      "gross": 196.0,
+      "year": 2004,
+      "region": "邦画"
+    },
+    {
+      "rank": 12,
+      "title": "踊る大捜査線 THE MOVIE2 レインボーブリッジを封鎖せよ！",
+      "gross": 173.5,
+      "year": 2003,
+      "region": "邦画"
+    }
   ],
   "by_year": {
     "2025": [
-      {"title":"劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来","gross":391.4,"region":"邦画"},
-      {"title":"国宝","gross":195.5,"region":"邦画"},
-      {"title":"名探偵コナン 隻眼の残像（フラッシュバック）","gross":147.4,"region":"邦画"},
-      {"title":"劇場版『チェンソーマン レゼ篇』","gross":104.3,"region":"邦画"},
-      {"title":"はたらく細胞","gross":63.6,"region":"邦画"},
-      {"title":"劇場版『TOKYO MER～走る緊急救命室～南海ミッション』","gross":52.9,"region":"邦画"},
-      {"title":"ミッション：インポッシブル／ファイナル・レコニング","gross":52.8,"region":"洋画"},
-      {"title":"8番出口","gross":51.7,"region":"邦画"},
-      {"title":"モアナと伝説の海2","gross":51.7,"region":"洋画"},
-      {"title":"ジュラシック・ワールド／復活の大地","gross":49.0,"region":"洋画"},
-      {"title":"映画ドラえもん のび太の絵世界物語","gross":46.1,"region":"邦画"},
-      {"title":"映画「グランメゾン・パリ」","gross":42.0,"region":"邦画"},
-      {"title":"マインクラフト／ザ・ムービー","gross":39.4,"region":"洋画"},
-      {"title":"機動戦士Gundam GQuuuuuuX -Beginning-","gross":36.2,"region":"邦画"},
-      {"title":"ウィキッド ふたりの魔女","gross":35.4,"region":"洋画"},
-      {"title":"劇場版 忍たま乱太郎 ドクタケ忍者隊最強の軍師","gross":33.5,"region":"邦画"},
-      {"title":"リロ＆スティッチ","gross":33.9,"region":"洋画"},
-      {"title":"ライオン・キング：ムファサ","gross":22.5,"region":"洋画"},
-      {"title":"F1／エフワン","gross":21.3,"region":"洋画"},
-      {"title":"教皇選挙","gross":11.5,"region":"洋画"},
-      {"title":"キャプテン・アメリカ：ブレイブ・ニュー・ワールド","gross":11.4,"region":"洋画"},
-      {"title":"サンダーボルツ*","gross":11.3,"region":"洋画"},
-      {"title":"スーパーマン","gross":10.3,"region":"洋画"}
+      {
+        "title": "劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来",
+        "gross": 391.4,
+        "region": "邦画"
+      },
+      {
+        "title": "国宝",
+        "gross": 195.5,
+        "region": "邦画"
+      },
+      {
+        "title": "名探偵コナン 隻眼の残像（フラッシュバック）",
+        "gross": 147.4,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版『チェンソーマン レゼ篇』",
+        "gross": 104.3,
+        "region": "邦画"
+      },
+      {
+        "title": "はたらく細胞",
+        "gross": 63.6,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版『TOKYO MER～走る緊急救命室～南海ミッション』",
+        "gross": 52.9,
+        "region": "邦画"
+      },
+      {
+        "title": "ミッション：インポッシブル／ファイナル・レコニング",
+        "gross": 52.8,
+        "region": "洋画"
+      },
+      {
+        "title": "8番出口",
+        "gross": 51.7,
+        "region": "邦画"
+      },
+      {
+        "title": "モアナと伝説の海2",
+        "gross": 51.7,
+        "region": "洋画"
+      },
+      {
+        "title": "ジュラシック・ワールド／復活の大地",
+        "gross": 49.0,
+        "region": "洋画"
+      },
+      {
+        "title": "映画ドラえもん のび太の絵世界物語",
+        "gross": 46.1,
+        "region": "邦画"
+      },
+      {
+        "title": "映画「グランメゾン・パリ」",
+        "gross": 42.0,
+        "region": "邦画"
+      },
+      {
+        "title": "マインクラフト／ザ・ムービー",
+        "gross": 39.4,
+        "region": "洋画"
+      },
+      {
+        "title": "機動戦士Gundam GQuuuuuuX -Beginning-",
+        "gross": 36.2,
+        "region": "邦画"
+      },
+      {
+        "title": "ウィキッド ふたりの魔女",
+        "gross": 35.4,
+        "region": "洋画"
+      },
+      {
+        "title": "劇場版 忍たま乱太郎 ドクタケ忍者隊最強の軍師",
+        "gross": 33.5,
+        "region": "邦画"
+      },
+      {
+        "title": "リロ＆スティッチ",
+        "gross": 33.9,
+        "region": "洋画"
+      },
+      {
+        "title": "ライオン・キング：ムファサ",
+        "gross": 22.5,
+        "region": "洋画"
+      },
+      {
+        "title": "F1／エフワン",
+        "gross": 21.3,
+        "region": "洋画"
+      },
+      {
+        "title": "教皇選挙",
+        "gross": 11.5,
+        "region": "洋画"
+      },
+      {
+        "title": "キャプテン・アメリカ：ブレイブ・ニュー・ワールド",
+        "gross": 11.4,
+        "region": "洋画"
+      },
+      {
+        "title": "サンダーボルツ*",
+        "gross": 11.3,
+        "region": "洋画"
+      },
+      {
+        "title": "スーパーマン",
+        "gross": 10.3,
+        "region": "洋画"
+      }
     ],
     "2024": [
-      {"title":"名探偵コナン 100万ドルの五稜星（みちしるべ）","gross":158.0,"region":"邦画"},
-      {"title":"劇場版ハイキュー！！ ゴミ捨て場の決戦","gross":116.4,"region":"邦画"},
-      {"title":"キングダム 大将軍の帰還","gross":80.3,"region":"邦画"},
-      {"title":"劇場版 SPY×FAMILY CODE: White","gross":63.2,"region":"邦画"},
-      {"title":"ラストマイル","gross":59.6,"region":"邦画"},
-      {"title":"機動戦士ガンダムSEED FREEDOM","gross":53.8,"region":"邦画"},
-      {"title":"インサイド・ヘッド2","gross":53.6,"region":"洋画"},
-      {"title":"変な家","gross":50.7,"region":"邦画"},
-      {"title":"あの花が咲く丘で、君とまた出会えたら。","gross":45.4,"region":"邦画"},
-      {"title":"怪盗グルーのミニオン超変身","gross":45.3,"region":"洋画"},
-      {"title":"映画ドラえもん のび太の地球交響楽","gross":43.1,"region":"邦画"},
-      {"title":"ウィッシュ","gross":36.1,"region":"洋画"},
-      {"title":"僕のヒーローアカデミア THE MOVIE ユアネクスト","gross":36.0,"region":"邦画"},
-      {"title":"ゴールデンカムイ","gross":29.9,"region":"邦画"},
-      {"title":"映画クレヨンしんちゃん オラたちの恐竜日記","gross":26.9,"region":"邦画"},
-      {"title":"ウォンカとチョコレート工場のはじまり","gross":23.7,"region":"洋画"},
-      {"title":"「鬼滅の刃」絆の奇跡、そして柱稽古へ","gross":23.1,"region":"邦画"},
-      {"title":"デッドプール＆ウルヴァリン","gross":21.1,"region":"洋画"},
-      {"title":"ルックバック","gross":20.4,"region":"邦画"},
-      {"title":"オッペンハイマー","gross":18.7,"region":"洋画"},
-      {"title":"ゴジラxコング 新たなる帝国","gross":17.4,"region":"洋画"},
-      {"title":"ヴェノム：ザ・ラストダンス","gross":15.1,"region":"洋画"},
-      {"title":"ジョーカー：フォリ・ア・ドゥ","gross":11.6,"region":"洋画"},
-      {"title":"マッドマックス：フュリオサ","gross":10.0,"region":"洋画"}
+      {
+        "title": "名探偵コナン 100万ドルの五稜星（みちしるべ）",
+        "gross": 158.0,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版ハイキュー！！ ゴミ捨て場の決戦",
+        "gross": 116.4,
+        "region": "邦画"
+      },
+      {
+        "title": "キングダム 大将軍の帰還",
+        "gross": 80.3,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版 SPY×FAMILY CODE: White",
+        "gross": 63.2,
+        "region": "邦画"
+      },
+      {
+        "title": "ラストマイル",
+        "gross": 59.6,
+        "region": "邦画"
+      },
+      {
+        "title": "機動戦士ガンダムSEED FREEDOM",
+        "gross": 53.8,
+        "region": "邦画"
+      },
+      {
+        "title": "インサイド・ヘッド2",
+        "gross": 53.6,
+        "region": "洋画"
+      },
+      {
+        "title": "変な家",
+        "gross": 50.7,
+        "region": "邦画"
+      },
+      {
+        "title": "あの花が咲く丘で、君とまた出会えたら。",
+        "gross": 45.4,
+        "region": "邦画"
+      },
+      {
+        "title": "怪盗グルーのミニオン超変身",
+        "gross": 45.3,
+        "region": "洋画"
+      },
+      {
+        "title": "映画ドラえもん のび太の地球交響楽",
+        "gross": 43.1,
+        "region": "邦画"
+      },
+      {
+        "title": "ウィッシュ",
+        "gross": 36.1,
+        "region": "洋画"
+      },
+      {
+        "title": "僕のヒーローアカデミア THE MOVIE ユアネクスト",
+        "gross": 36.0,
+        "region": "邦画"
+      },
+      {
+        "title": "ゴールデンカムイ",
+        "gross": 29.9,
+        "region": "邦画"
+      },
+      {
+        "title": "映画クレヨンしんちゃん オラたちの恐竜日記",
+        "gross": 26.9,
+        "region": "邦画"
+      },
+      {
+        "title": "ウォンカとチョコレート工場のはじまり",
+        "gross": 23.7,
+        "region": "洋画"
+      },
+      {
+        "title": "「鬼滅の刃」絆の奇跡、そして柱稽古へ",
+        "gross": 23.1,
+        "region": "邦画"
+      },
+      {
+        "title": "デッドプール＆ウルヴァリン",
+        "gross": 21.1,
+        "region": "洋画"
+      },
+      {
+        "title": "ルックバック",
+        "gross": 20.4,
+        "region": "邦画"
+      },
+      {
+        "title": "オッペンハイマー",
+        "gross": 18.7,
+        "region": "洋画"
+      },
+      {
+        "title": "ゴジラxコング 新たなる帝国",
+        "gross": 17.4,
+        "region": "洋画"
+      },
+      {
+        "title": "ヴェノム：ザ・ラストダンス",
+        "gross": 15.1,
+        "region": "洋画"
+      },
+      {
+        "title": "ジョーカー：フォリ・ア・ドゥ",
+        "gross": 11.6,
+        "region": "洋画"
+      },
+      {
+        "title": "マッドマックス：フュリオサ",
+        "gross": 10.0,
+        "region": "洋画"
+      }
     ],
     "2023": [
-      {"title":"THE FIRST SLAM DUNK","gross":158.7,"region":"邦画"},
-      {"title":"ザ・スーパーマリオブラザーズ・ムービー","gross":140.2,"region":"洋画"},
-      {"title":"名探偵コナン 黒鉄の魚影","gross":138.8,"region":"邦画"},
-      {"title":"君たちはどう生きるか","gross":94.0,"region":"邦画"},
-      {"title":"ゴジラ-1.0","gross":76.5,"region":"邦画"},
-      {"title":"キングダム 運命の炎","gross":56.0,"region":"邦画"},
-      {"title":"ミッション：インポッシブル／デッドレコニング PART ONE","gross":54.3,"region":"洋画"},
-      {"title":"ミステリと言う勿れ","gross":48.0,"region":"邦画"},
-      {"title":"劇場版「TOKYO MER～走る緊急救命室～」","gross":45.3,"region":"邦画"},
-      {"title":"映画ドラえもん のび太と空の理想郷","gross":43.5,"region":"邦画"},
-      {"title":"アバター：ウェイ・オブ・ウォーター","gross":43.1,"region":"洋画"},
-      {"title":"「鬼滅の刃」上弦集結、そして刀鍛冶の里へ","gross":41.6,"region":"邦画"},
-      {"title":"ワイルド・スピード／ファイヤーブースト","gross":38.3,"region":"洋画"},
-      {"title":"リトル・マーメイド","gross":34.0,"region":"洋画"},
-      {"title":"劇場版アイドリッシュセブン LIVE 4bit BEYOND THE PERiOD","gross":29.2,"region":"邦画"},
-      {"title":"わたしの幸せな結婚","gross":28.0,"region":"邦画"},
-      {"title":"マイ・エレメント","gross":27.0,"region":"洋画"},
-      {"title":"東京リベンジャーズ2 血のハロウィン編 -運命-","gross":27.1,"region":"邦画"},
-      {"title":"インディ・ジョーンズと運命のダイヤル","gross":26.0,"region":"洋画"},
-      {"title":"BTS: Yet To Come in Cinemas","gross":25.6,"region":"洋画"},
-      {"title":"鬼太郎誕生 ゲゲゲの謎","gross":24.7,"region":"邦画"},
-      {"title":"シン・仮面ライダー","gross":23.4,"region":"邦画"},
-      {"title":"ホーンテッドマンション","gross":21.7,"region":"洋画"},
-      {"title":"怪物","gross":21.5,"region":"邦画"},
-      {"title":"MEG ザ・モンスターズ2","gross":14.6,"region":"洋画"},
-      {"title":"ガーディアンズ・オブ・ギャラクシー：VOLUME3","gross":13.2,"region":"洋画"},
-      {"title":"トランスフォーマー／ビースト覚醒","gross":12.9,"region":"洋画"},
-      {"title":"スパイダーマン：アクロス・ザ・スパイダーバース","gross":11.1,"region":"洋画"},
-      {"title":"タイタニック：ジェームズ・キャメロン25周年3Dリマスター","gross":10.9,"region":"洋画"},
-      {"title":"ジョン・ウィック：コンセクエンス","gross":10.4,"region":"洋画"}
+      {
+        "title": "THE FIRST SLAM DUNK",
+        "gross": 158.7,
+        "region": "邦画"
+      },
+      {
+        "title": "ザ・スーパーマリオブラザーズ・ムービー",
+        "gross": 140.2,
+        "region": "洋画"
+      },
+      {
+        "title": "名探偵コナン 黒鉄の魚影",
+        "gross": 138.8,
+        "region": "邦画"
+      },
+      {
+        "title": "君たちはどう生きるか",
+        "gross": 94.0,
+        "region": "邦画"
+      },
+      {
+        "title": "ゴジラ-1.0",
+        "gross": 76.5,
+        "region": "邦画"
+      },
+      {
+        "title": "キングダム 運命の炎",
+        "gross": 56.0,
+        "region": "邦画"
+      },
+      {
+        "title": "ミッション：インポッシブル／デッドレコニング PART ONE",
+        "gross": 54.3,
+        "region": "洋画"
+      },
+      {
+        "title": "ミステリと言う勿れ",
+        "gross": 48.0,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版「TOKYO MER～走る緊急救命室～」",
+        "gross": 45.3,
+        "region": "邦画"
+      },
+      {
+        "title": "映画ドラえもん のび太と空の理想郷",
+        "gross": 43.5,
+        "region": "邦画"
+      },
+      {
+        "title": "アバター：ウェイ・オブ・ウォーター",
+        "gross": 43.1,
+        "region": "洋画"
+      },
+      {
+        "title": "「鬼滅の刃」上弦集結、そして刀鍛冶の里へ",
+        "gross": 41.6,
+        "region": "邦画"
+      },
+      {
+        "title": "ワイルド・スピード／ファイヤーブースト",
+        "gross": 38.3,
+        "region": "洋画"
+      },
+      {
+        "title": "リトル・マーメイド",
+        "gross": 34.0,
+        "region": "洋画"
+      },
+      {
+        "title": "劇場版アイドリッシュセブン LIVE 4bit BEYOND THE PERiOD",
+        "gross": 29.2,
+        "region": "邦画"
+      },
+      {
+        "title": "わたしの幸せな結婚",
+        "gross": 28.0,
+        "region": "邦画"
+      },
+      {
+        "title": "マイ・エレメント",
+        "gross": 27.0,
+        "region": "洋画"
+      },
+      {
+        "title": "東京リベンジャーズ2 血のハロウィン編 -運命-",
+        "gross": 27.1,
+        "region": "邦画"
+      },
+      {
+        "title": "インディ・ジョーンズと運命のダイヤル",
+        "gross": 26.0,
+        "region": "洋画"
+      },
+      {
+        "title": "BTS: Yet To Come in Cinemas",
+        "gross": 25.6,
+        "region": "洋画"
+      },
+      {
+        "title": "鬼太郎誕生 ゲゲゲの謎",
+        "gross": 24.7,
+        "region": "邦画"
+      },
+      {
+        "title": "シン・仮面ライダー",
+        "gross": 23.4,
+        "region": "邦画"
+      },
+      {
+        "title": "ホーンテッドマンション",
+        "gross": 21.7,
+        "region": "洋画"
+      },
+      {
+        "title": "怪物",
+        "gross": 21.5,
+        "region": "邦画"
+      },
+      {
+        "title": "MEG ザ・モンスターズ2",
+        "gross": 14.6,
+        "region": "洋画"
+      },
+      {
+        "title": "ガーディアンズ・オブ・ギャラクシー：VOLUME3",
+        "gross": 13.2,
+        "region": "洋画"
+      },
+      {
+        "title": "トランスフォーマー／ビースト覚醒",
+        "gross": 12.9,
+        "region": "洋画"
+      },
+      {
+        "title": "スパイダーマン：アクロス・ザ・スパイダーバース",
+        "gross": 11.1,
+        "region": "洋画"
+      },
+      {
+        "title": "タイタニック：ジェームズ・キャメロン25周年3Dリマスター",
+        "gross": 10.9,
+        "region": "洋画"
+      },
+      {
+        "title": "ジョン・ウィック：コンセクエンス",
+        "gross": 10.4,
+        "region": "洋画"
+      }
     ],
     "2022": [
-      {"title":"ONE PIECE FILM RED","gross":203.3,"region":"邦画"},
-      {"title":"すずめの戸締まり","gross":149.4,"region":"邦画"},
-      {"title":"劇場版 呪術廻戦 0","gross":138.9,"region":"邦画"},
-      {"title":"トップガン マーヴェリック","gross":135.7,"region":"洋画"},
-      {"title":"名探偵コナン ハロウィンの花嫁","gross":97.8,"region":"邦画"},
-      {"title":"ジュラシック・ワールド／新たなる支配者","gross":63.2,"region":"洋画"},
-      {"title":"キングダム2 遥かなる大地へ","gross":51.6,"region":"邦画"},
-      {"title":"ファンタスティック・ビーストとダンブルドアの秘密","gross":46.0,"region":"洋画"},
-      {"title":"シン・ウルトラマン","gross":44.4,"region":"邦画"},
-      {"title":"ミニオンズ フィーバー","gross":44.4,"region":"洋画"},
-      {"title":"スパイダーマン：ノー・ウェイ・ホーム","gross":42.5,"region":"洋画"},
-      {"title":"SING／シング：ネクストステージ","gross":33.1,"region":"洋画"},
-      {"title":"99.9-刑事専門弁護士-THE MOVIE","gross":30.1,"region":"邦画"},
-      {"title":"余命10年","gross":30.0,"region":"邦画"},
-      {"title":"沈黙のパレード","gross":30.0,"region":"邦画"},
-      {"title":"コンフィデンスマンJP 英雄編","gross":28.9,"region":"邦画"},
-      {"title":"映画ドラえもん のび太の宇宙小戦争 2021","gross":26.9,"region":"邦画"},
-      {"title":"ドラゴンボール超 スーパーヒーロー","gross":25.1,"region":"邦画"},
-      {"title":"RRR","gross":24.2,"region":"洋画"},
-      {"title":"映画 五等分の花嫁","gross":22.4,"region":"邦画"},
-      {"title":"ドクター・ストレンジ／マルチバース・オブ・マッドネス","gross":21.6,"region":"洋画"},
-      {"title":"映画クレヨンしんちゃん もののけニンジャ珍風伝","gross":20.4,"region":"邦画"},
-      {"title":"ヴェノム：レット・ゼア・ビー・カーネイジ","gross":19.1,"region":"洋画"},
-      {"title":"映画『おそ松さん』","gross":16.7,"region":"邦画"},
-      {"title":"今夜、世界からこの恋が消えても","gross":15.3,"region":"邦画"},
-      {"title":"劇場版 転生したらスライムだった件 紅蓮の絆編","gross":15.0,"region":"邦画"},
-      {"title":"マトリックス レザレクションズ","gross":14.0,"region":"洋画"},
-      {"title":"ソー：ラブ＆サンダー","gross":13.5,"region":"洋画"},
-      {"title":"ブレット・トレイン","gross":13.5,"region":"洋画"},
-      {"title":"ブラックパンサー／ワカンダ・フォーエバー","gross":12.5,"region":"洋画"},
-      {"title":"バズ・ライトイヤー","gross":12.2,"region":"洋画"},
-      {"title":"THE BATMAN－ザ・バットマン－","gross":11.9,"region":"洋画"}
+      {
+        "title": "ONE PIECE FILM RED",
+        "gross": 203.3,
+        "region": "邦画"
+      },
+      {
+        "title": "すずめの戸締まり",
+        "gross": 149.4,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版 呪術廻戦 0",
+        "gross": 138.9,
+        "region": "邦画"
+      },
+      {
+        "title": "トップガン マーヴェリック",
+        "gross": 135.7,
+        "region": "洋画"
+      },
+      {
+        "title": "名探偵コナン ハロウィンの花嫁",
+        "gross": 97.8,
+        "region": "邦画"
+      },
+      {
+        "title": "ジュラシック・ワールド／新たなる支配者",
+        "gross": 63.2,
+        "region": "洋画"
+      },
+      {
+        "title": "キングダム2 遥かなる大地へ",
+        "gross": 51.6,
+        "region": "邦画"
+      },
+      {
+        "title": "ファンタスティック・ビーストとダンブルドアの秘密",
+        "gross": 46.0,
+        "region": "洋画"
+      },
+      {
+        "title": "シン・ウルトラマン",
+        "gross": 44.4,
+        "region": "邦画"
+      },
+      {
+        "title": "ミニオンズ フィーバー",
+        "gross": 44.4,
+        "region": "洋画"
+      },
+      {
+        "title": "スパイダーマン：ノー・ウェイ・ホーム",
+        "gross": 42.5,
+        "region": "洋画"
+      },
+      {
+        "title": "SING／シング：ネクストステージ",
+        "gross": 33.1,
+        "region": "洋画"
+      },
+      {
+        "title": "99.9-刑事専門弁護士-THE MOVIE",
+        "gross": 30.1,
+        "region": "邦画"
+      },
+      {
+        "title": "余命10年",
+        "gross": 30.0,
+        "region": "邦画"
+      },
+      {
+        "title": "沈黙のパレード",
+        "gross": 30.0,
+        "region": "邦画"
+      },
+      {
+        "title": "コンフィデンスマンJP 英雄編",
+        "gross": 28.9,
+        "region": "邦画"
+      },
+      {
+        "title": "映画ドラえもん のび太の宇宙小戦争 2021",
+        "gross": 26.9,
+        "region": "邦画"
+      },
+      {
+        "title": "ドラゴンボール超 スーパーヒーロー",
+        "gross": 25.1,
+        "region": "邦画"
+      },
+      {
+        "title": "RRR",
+        "gross": 24.2,
+        "region": "洋画"
+      },
+      {
+        "title": "映画 五等分の花嫁",
+        "gross": 22.4,
+        "region": "邦画"
+      },
+      {
+        "title": "ドクター・ストレンジ／マルチバース・オブ・マッドネス",
+        "gross": 21.6,
+        "region": "洋画"
+      },
+      {
+        "title": "映画クレヨンしんちゃん もののけニンジャ珍風伝",
+        "gross": 20.4,
+        "region": "邦画"
+      },
+      {
+        "title": "ヴェノム：レット・ゼア・ビー・カーネイジ",
+        "gross": 19.1,
+        "region": "洋画"
+      },
+      {
+        "title": "映画『おそ松さん』",
+        "gross": 16.7,
+        "region": "邦画"
+      },
+      {
+        "title": "今夜、世界からこの恋が消えても",
+        "gross": 15.3,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版 転生したらスライムだった件 紅蓮の絆編",
+        "gross": 15.0,
+        "region": "邦画"
+      },
+      {
+        "title": "マトリックス レザレクションズ",
+        "gross": 14.0,
+        "region": "洋画"
+      },
+      {
+        "title": "ソー：ラブ＆サンダー",
+        "gross": 13.5,
+        "region": "洋画"
+      },
+      {
+        "title": "ブレット・トレイン",
+        "gross": 13.5,
+        "region": "洋画"
+      },
+      {
+        "title": "ブラックパンサー／ワカンダ・フォーエバー",
+        "gross": 12.5,
+        "region": "洋画"
+      },
+      {
+        "title": "バズ・ライトイヤー",
+        "gross": 12.2,
+        "region": "洋画"
+      },
+      {
+        "title": "THE BATMAN－ザ・バットマン－",
+        "gross": 11.9,
+        "region": "洋画"
+      }
+    ],
+    "2021": [
+      {
+        "title": "シン・エヴァンゲリオン劇場版",
+        "gross": 102.8,
+        "region": "邦画"
+      },
+      {
+        "title": "名探偵コナン 緋色の弾丸",
+        "gross": 76.5,
+        "region": "邦画"
+      },
+      {
+        "title": "竜とそばかすの姫",
+        "gross": 66.0,
+        "region": "邦画"
+      },
+      {
+        "title": "ARASHI Anniversary Tour 5×20 FILM Record of Memories",
+        "gross": 45.5,
+        "region": "邦画"
+      },
+      {
+        "title": "東京リベンジャーズ",
+        "gross": 45.0,
+        "region": "邦画"
+      },
+      {
+        "title": "るろうに剣心 最終章 The Final",
+        "gross": 43.5,
+        "region": "邦画"
+      },
+      {
+        "title": "新解釈・三國志",
+        "gross": 40.3,
+        "region": "邦画"
+      },
+      {
+        "title": "花束みたいな恋をした",
+        "gross": 38.1,
+        "region": "邦画"
+      },
+      {
+        "title": "マスカレード・ナイト",
+        "gross": 38.1,
+        "region": "邦画"
+      },
+      {
+        "title": "ワイルド・スピード／ジェットブレイク",
+        "gross": 36.6,
+        "region": "洋画"
+      },
+      {
+        "title": "007／ノー・タイム・トゥ・ダイ",
+        "gross": 27.2,
+        "region": "洋画"
+      },
+      {
+        "title": "ゴジラvsコング",
+        "gross": 19.0,
+        "region": "洋画"
+      },
+      {
+        "title": "DUNE／デューン 砂の惑星",
+        "gross": 11.2,
+        "region": "洋画"
+      }
+    ],
+    "2020": [
+      {
+        "title": "劇場版「鬼滅の刃」無限列車編",
+        "gross": 365.5,
+        "region": "邦画"
+      },
+      {
+        "title": "今日から俺は!!劇場版",
+        "gross": 53.7,
+        "region": "邦画"
+      },
+      {
+        "title": "コンフィデンスマンJP プリンセス編",
+        "gross": 38.4,
+        "region": "邦画"
+      },
+      {
+        "title": "映画ドラえもん のび太の新恐竜",
+        "gross": 33.5,
+        "region": "邦画"
+      },
+      {
+        "title": "事故物件 恐い間取り",
+        "gross": 23.4,
+        "region": "邦画"
+      },
+      {
+        "title": "糸",
+        "gross": 22.7,
+        "region": "邦画"
+      },
+      {
+        "title": "劇場版 ヴァイオレット・エヴァーガーデン",
+        "gross": 21.3,
+        "region": "邦画"
+      },
+      {
+        "title": "TENET テネット",
+        "gross": 27.3,
+        "region": "洋画"
+      },
+      {
+        "title": "パラサイト 半地下の家族",
+        "gross": 47.4,
+        "region": "洋画"
+      },
+      {
+        "title": "スター・ウォーズ／スカイウォーカーの夜明け",
+        "gross": 73.2,
+        "region": "洋画"
+      }
     ]
   }
 }

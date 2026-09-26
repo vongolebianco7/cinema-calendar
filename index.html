@@ -135,6 +135,12 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
  .gMenuBtn{width:36px}
 }
 
+
+/* 2026-09-26 calendar UX fixes */
+.tvWeekMovies{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.tvMovie{min-width:0!important}
+@media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}.tvMovie{display:block!important;padding:5px!important}.tvMoviePoster{width:100%!important}.tvMovieProgram{font-size:9px!important;line-height:1.25}.tvMovieTitle{font-size:8px!important;line-height:1.25}}
+.festivalSpan.cont{font-weight:850;opacity:.96}
 </style>
 <style id="experience-fit-v1">
 .experienceFitGrid{display:grid;gap:9px}.experienceFitCard{display:block;padding:13px 14px;border:1px solid #ffffff18;border-radius:14px;background:linear-gradient(135deg,#11161d,#0b0d11);color:inherit;text-decoration:none}.experienceFitCard span{display:flex;align-items:center;justify-content:space-between;gap:10px}.experienceFitCard b{font-size:15px}.experienceFitCard em{font-style:normal;font-size:11px;color:#aeb8c8;border:1px solid #ffffff18;border-radius:999px;padding:3px 8px}.experienceFitCard small{display:block;color:#b8c0cc;line-height:1.55;margin-top:7px}.experienceFitCard i{display:block;font-style:normal;font-size:12px;font-weight:800;margin-top:8px;color:#8dcfff}.experienceTheaterLink{display:block;margin-top:11px;padding:12px 14px;border-radius:12px;background:#ffffff0c;border:1px solid #ffffff16;color:#fff;text-decoration:none;font-weight:800;font-size:13px}
@@ -164,7 +170,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinemap.html" class="heroAction ghost">My Cinemap</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
-<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.71</span></footer></main>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.72</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
@@ -426,7 +432,7 @@ function renderCal(){
     let colStart=((segStart.getDay()+6)%7)+1,colEnd=((segEnd.getDay()+6)%7)+2;
     let klass=ev.scope==="overseas"?"overseas":ev.service==="国内イベント"?"event":"domestic";
     let firstSeg=a>=ws&&a<=we;
-    return '<div class="festivalSpan '+klass+(firstSeg?'':' cont')+'" data-event-title="'+encodeURIComponent(ev.title)+'" style="grid-column:'+colStart+' / '+colEnd+';grid-row:1;margin-top:'+(29+lane*32)+'px" title="'+ev.title+'">'+(firstSeg?ev.title:'継続｜'+ev.title)+'</div>'
+    return '<div class="festivalSpan '+klass+(firstSeg?'':' cont')+'" data-event-title="'+encodeURIComponent(ev.title)+'" style="grid-column:'+colStart+' / '+colEnd+';grid-row:1;margin-top:'+(29+lane*32)+'px" title="'+ev.title+'">'+(firstSeg?ev.title:ev.title+'（継続）')+'</div>'
    }).join("");
    out+='<div class="festivalWeek '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'">'+cells+spans+'</div>'
   }
@@ -448,7 +454,7 @@ function renderCal(){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
-    if(!m.date)return false;let d=new Date(m.date+"T00:00:00");return d>=ws&&d<=we
+    if(!m.date)return false;let d=new Date(m.date+"T00:00:00"),z=new Date((m.end_date||m.date)+"T00:00:00");return d<=we&&z>=ws
    }).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
    let groups=groupedMovieCards(weekMovies,"theatrical"),isCurrent=sameDay(ws,currentWeekStart());
    out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
@@ -771,6 +777,28 @@ $("#prev").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);if
 $("#next").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);if(mode==="streaming")streamRangeStart=monthPageStart(view);else if(mode==="theatrical")theatricalRangeStart=monthPageStart(view);renderCal()};
 $("#close").onclick=hideModal;
 $("#modal").onclick=e=>{if(e.target.id==="modal")hideModal()};
+
+function revivalNorm(s){return String(s||"").toLowerCase().normalize("NFKC").replace(/[\s　・･:：!！?？「」『』【】\[\]()（）\-―ー]/g,"")}
+function applyRevivalClassification(){
+ const hist=(releaseHistory.records||[]).filter(r=>r.kind==="theatrical"&&r.date),DAY=86400000;
+ for(const m of movies){
+  if(m.special_screening==="asa10"||m.event!=="theatrical"||!m.date)continue;
+  const cur=new Date(m.date+"T00:00:00"),key=revivalNorm(m.title),id=String(m.id||m.tmdbId||"");
+  const old=hist.some(r=>{if(!r.date)return false;const rd=new Date(r.date+"T00:00:00");if((cur-rd)<180*DAY)return false;return (id&&String(r.id||r.tmdbId||"")===id)||(key&&revivalNorm(r.title)===key)});
+  if(old){m.service="リバイバル上映";m.revival=true}
+ }
+}
+function morningTenQuery(title){return String(title||"").replace(/（\d{4}年版）/g,"").replace(/【[^】]+】/g,"").trim()}
+async function hydrateMorningTenPosters(){
+ const rows=movies.filter(m=>m.special_screening==="asa10"&&(!m.poster||!m.id));
+ let cursor=0;
+ async function worker(){while(cursor<rows.length){const m=rows[cursor++],q=morningTenQuery(m.title),key=revivalNorm(q);let hit=movies.find(x=>x!==m&&x.poster&&revivalNorm(x.title)===key);
+   if(!hit)try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?q="+encodeURIComponent(q)+"&limit=5",{cache:"no-store"});if(r.ok){const d=await r.json(),a=[...(d.movies||[]),...(d.external||[])];hit=a.find(x=>revivalNorm(x.title)===key||revivalNorm(x.original_title)===key)||a[0]}}catch{}
+   if(hit){m.poster=hit.poster||hit.posterUrl||m.poster;m.id=hit.tmdbId||hit.id||m.id;m.tmdbId=hit.tmdbId||hit.id||m.tmdbId;m.score=hit.score??m.score;m.votes=hit.votes??m.votes}
+ }}
+ await Promise.all([worker(),worker(),worker()])
+}
+
 async function boot(){try{let [mr,tr,dr,fr,er,sr,hr,ar,lr,tdr,spr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theater-directory","data/theaters_master.json").catch(()=>null),fetch("data/special_screenings.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];if(spr&&spr.ok){let sp=await spr.json();for(const x of(sp.screenings||[]))movies.push({...x,revival:false})}
 // Reset a stale streaming-service filter if it no longer exists in the loaded catalog.
 if(mode==="streaming"&&active!=="すべて"&&!movies.some(m=>m.event==="streaming"&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
@@ -782,7 +810,7 @@ if(mode==="streaming"&&active!=="すべて"){
   const inWindow=m=>{if(m.event!=="streaming"||!m.date)return false;const d=new Date(m.date+"T00:00:00");return d>=ws&&d<=we};
   if(movies.some(inWindow)&&!movies.some(m=>inWindow(m)&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
 }
-if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}render();const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
+if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}applyRevivalClassification();await hydrateMorningTenPosters();render();const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#gDrawer").classList.add("show");$("#gDrawerMask").classList.add("show")}function closeDrawer(){$("#gDrawer").classList.remove("show");$("#gDrawerMask").classList.remove("show")}$("#gMenuBtn").onclick=openDrawer;$("#gDrawerClose").onclick=closeDrawer;$("#gDrawerMask").onclick=closeDrawer;
 boot();
 </script><script>

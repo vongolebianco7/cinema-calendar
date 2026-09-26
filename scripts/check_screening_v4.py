@@ -3,8 +3,8 @@ import pathlib, sys
 html = pathlib.Path('search.html').read_text(encoding='utf-8')
 errors=[]
 required=[
-    'IMAX撮影と拡張画角を確認済みならIMAXを最優先',
-    'formatVerdictLabelV4',
+    'IMAX撮影と拡張画角を確認できる作品は、CinemapではIMAXとの相性を高く評価します。',
+    'formatVerdictLabelV5',
     'なぜこの評価？',
     'この作品で効くポイント',
     '方式固有の裏付け',

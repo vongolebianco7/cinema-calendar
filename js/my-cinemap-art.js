@@ -74,7 +74,7 @@ function drawBrand(ctx,w,h,theme){
   if(!cinemapLogo.complete||!cinemapLogo.naturalWidth)return;
   const scale=Math.min(174/cinemapLogo.naturalWidth,58/cinemapLogo.naturalHeight);
   const dw=cinemapLogo.naturalWidth*scale,dh=cinemapLogo.naturalHeight*scale;
-  ctx.save();ctx.globalAlpha=.82;ctx.drawImage(cinemapLogo,w-96-dw,h-85, dw,dh);ctx.restore();
+  ctx.save();if(theme!=='theater'){ctx.fillStyle='#22262c';ctx.globalAlpha=.92;ctx.fillRect(w-96-dw-12,h-93,dw+24,dh+16)}ctx.globalAlpha=.95;ctx.drawImage(cinemapLogo,w-96-dw,h-85,dw,dh);ctx.restore();
 }
 function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
@@ -118,5 +118,5 @@ function drawArtwork(movies){
 function downloadArtwork(file){if(artworkURL)URL.revokeObjectURL(artworkURL);artworkURL=URL.createObjectURL(file);const a=document.createElement('a');a.href=artworkURL;a.download='my-cinemap.png';document.body.append(a);a.click();a.remove()}
 async function saveArtwork(){const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinemap.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGを保存しました。iPhoneの写真に保存するには「画像を共有」を選んでください。'}catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}}
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
-window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-final-v4';s.defer=true;document.body.appendChild(s)});
+window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-final-v5';s.defer=true;document.body.appendChild(s)});
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

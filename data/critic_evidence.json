@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "films": {
+    "27205": {
+      "reviewedAt": "2026-09-26",
+      "sources": [
+        {
+          "id": "guardian-bradshaw-2010",
+          "name": "Peter Bradshawの批評",
+          "publisher": "The Guardian",
+          "url": "https://www.theguardian.com/film/2010/jul/15/inception-review"
+        },
+        {
+          "id": "guardian-brooks-2010",
+          "name": "Xan Brooksの批評",
+          "publisher": "The Guardian",
+          "url": "https://www.theguardian.com/film/2010/jul/10/film-review-inception-christopher-nolan"
+        },
+        {
+          "id": "observer-french-2010",
+          "name": "Philip Frenchの批評",
+          "publisher": "The Observer（The Guardian掲載）",
+          "url": "https://www.theguardian.com/film/2010/jul/18/inception-film-review-philip-french"
+        }
+      ],
+      "overview": {
+        "text": "今回確認した3件は、夢を重ねる映像表現に触れています。物語の進み方への評価は一様ではありません。",
+        "sourceIds": [
+          "guardian-bradshaw-2010",
+          "guardian-brooks-2010",
+          "observer-french-2010"
+        ]
+      },
+      "positive": [
+        {
+          "text": "夢の空間を見せる映像演出に注目している。",
+          "sourceIds": [
+            "guardian-bradshaw-2010",
+            "guardian-brooks-2010",
+            "observer-french-2010"
+          ]
+        },
+        {
+          "text": "複雑な設定を娯楽映画として動かす構成を評価している。",
+          "sourceIds": [
+            "guardian-brooks-2010",
+            "observer-french-2010"
+          ]
+        }
+      ],
+      "divided": [
+        {
+          "text": "後半の展開は、勢いが続くという見方と、物語が停滞するという見方がある。",
+          "sourceIds": [
+            "guardian-bradshaw-2010",
+            "guardian-brooks-2010",
+            "observer-french-2010"
+          ],
+          "positiveSourceIds": [
+            "guardian-brooks-2010",
+            "observer-french-2010"
+          ],
+          "negativeSourceIds": [
+            "guardian-bradshaw-2010"
+          ]
+        }
+      ],
+      "title": "インセプション",
+      "year": "2010"
+    }
+  }
+}

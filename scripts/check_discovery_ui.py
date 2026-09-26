@@ -66,7 +66,7 @@ if "firstSeg" not in calendar or "（継続）" not in calendar:
 
 # My Cinemap final layout/template gates.
 my = text("my-cinemap.html")
-for required in ["themeChoices", "Minimal", "Film Note", "Theater Night", "Gallery Editorial", "illustrationMode", 'data-year="2026"', "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
+for required in ["themeChoices", "Minimal", "Film Note", "Theater Night", "Gallery Editorial", 'data-year="2026"', "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices"]:
     if required not in my:
         errors.append(f"My Cinemap enhancement missing: {required}")
 if "心に残った10本。" in my:
@@ -85,12 +85,11 @@ else:
         if required not in tools:
             errors.append(f"My Cinemap compact/director/template feature missing: {required}")
 art = text("js/my-cinemap-art.js")
-for required in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial", "drawMedal", "Cinemap", "EXPLORE CINEMA", "m.director"]:
+for required in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial", "drawMedal", "cinemapLogo", "assets/cinemap-logo.png?v=2", "m.director"]:
     if required not in art:
         errors.append(f"My Cinemap final artwork/director missing: {required}")
-for forbidden in ["cinemapLogo", "assets/cinemap-logo.png?v=2"]:
-    if forbidden in art:
-        errors.append(f"My Cinemap final artwork still uses legacy brand: {forbidden}")
+if "illustrationMode" in my:
+    errors.append("My Cinemap still exposes the removed illustration setting")
 for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
     p = ROOT / js_path
     if p.exists():

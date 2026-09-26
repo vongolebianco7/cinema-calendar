@@ -1,7 +1,7 @@
 // Local-only regression checks: export dimensions, bounds, and share activation.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 let draws=[],pending=[],shared=false;
-const values={format:'portrait',layout:'editorial',theme:'minimal',title:'MY TOP OF 2026',sub:'',illustrationMode:'none'};
+const values={format:'portrait',layout:'editorial',theme:'minimal',title:'MY TOP OF 2026',sub:''};
 const ctx={font:'',textAlign:'left',save(){},restore(){},fillRect(){},strokeRect(){},beginPath(){},arc(){},ellipse(){},stroke(){},translate(){},rotate(){},drawImage(){},createLinearGradient(){return {addColorStop(){}}},createRadialGradient(){return {addColorStop(){}}},measureText(s){return {width:Array.from(s).length*(parseFloat(this.font.match(/(\d+(?:\.\d+)?)px/)?.[1])||24)*.65}},fillText(text,x,y){draws.push({text:String(text),x,y,font:this.font})}};
 const canvas={width:0,height:0,getContext:()=>ctx,setAttribute(){},toBlob(cb){pending.push(()=>cb(new Blob(['png'],{type:'image/png'})))}};
 const elements={artCanvas:canvas,share:{disabled:false},msg:{textContent:''}};

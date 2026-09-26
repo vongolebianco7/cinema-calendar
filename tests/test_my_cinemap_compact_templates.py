@@ -48,10 +48,9 @@ def test_default_title_is_english_and_canned_poem_is_removed():
     assert 'あなたの映画を、ここに。' not in ART
 
 
-def test_illustrations_are_optional_and_default_off():
-    assert 'id="illustrationMode"' in HTML
-    assert '<option value="none" selected>なし（推奨）</option>' in HTML
-    assert '<option value="abstract">' not in HTML
+def test_illustration_setting_is_removed():
+    assert 'illustrationMode' not in HTML
+    assert 'visualOptions' not in TOOLS
     assert 'drawAbstractThumb' not in ART
 
 

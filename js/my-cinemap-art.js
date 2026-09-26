@@ -9,6 +9,8 @@ let artworkFile=null, artworkRevision=0, artworkURL=null;
 const artValue=id=>document.getElementById(id)?.value||'';
 const artSerif='Georgia,"Times New Roman",serif';
 const artSans='"Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
+const cinemapLogo=new Image();cinemapLogo.src='assets/cinemap-logo.png?v=2';
+cinemapLogo.onload=()=>{if(typeof picks!=='undefined')drawArtwork(picks)};
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -63,67 +65,73 @@ function drawTheater(ctx,w,h,p){
   ctx.fillStyle='#c2a678';ctx.save();ctx.translate(w/2,74);ctx.rotate(Math.PI/4);ctx.fillRect(-4,-4,8,8);ctx.restore();
 }
 function drawGalleryEditorial(ctx,w,h,p){
-  ctx.fillStyle='#b0a08a';ctx.fillRect(0,0,w,h);
-  const glow=ctx.createRadialGradient(w/2,0,0,w/2,h*.25,w*.75);
-  glow.addColorStop(0,'rgba(255,247,221,.62)');glow.addColorStop(1,'rgba(255,247,221,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
-  // A framed exhibition list, not framed movie artwork.
-  const x=68,y=62,fw=w-136,fh=h-124;
-  ctx.fillStyle='#75644e';ctx.fillRect(x+16,y+20,fw,fh);
-  ctx.fillStyle='#b69a66';ctx.fillRect(x-8,y-8,fw+16,fh+16);
-  ctx.fillStyle='#e8d8b4';ctx.fillRect(x-2,y-2,fw+4,fh+4);
-  ctx.fillStyle='#f8f5ee';ctx.fillRect(x,y,fw,fh);
-  ctx.strokeStyle='#c8b89b';ctx.lineWidth=2;ctx.strokeRect(x+18,y+18,fw-36,fh-36);
-  ctx.fillStyle='#75644e';ctx.globalAlpha=.16;ctx.fillRect(0,h-65,w,65);ctx.globalAlpha=1;
+  ctx.fillStyle='#e5ddce';ctx.fillRect(0,0,w,h);
+  // The surrounding wall, quiet spotlight and picture rail make the ranking a single exhibition panel.
+  const light=ctx.createRadialGradient(w/2,0,15,w/2,h*.38,w*.82);
+  light.addColorStop(0,'rgba(255,253,241,.92)');light.addColorStop(1,'rgba(255,253,241,0)');ctx.fillStyle=light;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='#d6cbbb';ctx.fillRect(0,h-106,w,106);
+  ctx.fillStyle='#c9bba7';ctx.fillRect(0,h-108,w,2);
+  for(const x of [34,w-140]){
+    ctx.strokeStyle='#c3b7a6';ctx.lineWidth=2;ctx.strokeRect(x,210,106,h-540);
+    ctx.strokeStyle='#e8e0d4';ctx.lineWidth=2;ctx.strokeRect(x+8,218,90,h-556);
+  }
+  const x=174,y=82,fw=w-348,fh=h-248;
+  ctx.fillStyle='rgba(70,58,42,.15)';ctx.fillRect(x+23,y+28,fw,fh);
+  ctx.fillStyle='#988366';ctx.fillRect(x-9,y-9,fw+18,fh+18);
+  ctx.fillStyle='#d6c3a0';ctx.fillRect(x-4,y-4,fw+8,fh+8);
+  ctx.fillStyle='#f9f6ef';ctx.fillRect(x,y,fw,fh);
+  ctx.strokeStyle='#c9bda9';ctx.lineWidth=2;ctx.strokeRect(x+20,y+20,fw-40,fh-40);
+  ctx.fillStyle='#c7b89d';ctx.fillRect(w/2-18,47,36,8);
 }
 function drawBrand(ctx,w,h,theme){
+  if(!cinemapLogo.complete||!cinemapLogo.naturalWidth)return;
+  const gallery=theme==='galleryeditorial';
+  const scale=Math.min(176/cinemapLogo.naturalWidth,48/cinemapLogo.naturalHeight);
+  const dw=cinemapLogo.naturalWidth*scale,dh=cinemapLogo.naturalHeight*scale;
+  const x=gallery?w-244-dw:w-96-dw,y=gallery?h-205:h-95;
   ctx.save();
-  const dark=theme==='theater';
-  ctx.textAlign='right';ctx.textBaseline='alphabetic';
-  ctx.fillStyle=dark?'#f4efe5':'#29231d';ctx.globalAlpha=.96;
-  ctx.font=`500 42px ${artSerif}`;ctx.fillText('Cinemap',w-96,h-70);
-  ctx.fillStyle=dark?'#cdbfa9':'#8a7658';ctx.globalAlpha=.9;
-  ctx.font=`650 10px ${artSans}`;ctx.fillText('EXPLORE CINEMA',w-96,h-49);
-  ctx.restore();
+  if(theme!=='theater'){ctx.fillStyle='#252c35';ctx.fillRect(x-11,y-7,dw+22,dh+14)}
+  ctx.drawImage(cinemapLogo,x,y,dw,dh);ctx.restore();
 }
 function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format'),layout=artValue('layout'),theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
-  const w=c.width,h=c.height,pad=theme==='galleryeditorial'?132:theme==='filmnote'?116:108,inner=w-2*pad;
+  const w=c.width,h=c.height,pad=theme==='galleryeditorial'?244:theme==='filmnote'?116:108,inner=w-2*pad;
   ({minimal:drawMinimal,filmnote:drawFilmNote,theater:drawTheater,galleryeditorial:drawGalleryEditorial}[theme]||drawMinimal)(ctx,w,h,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
   const title=artValue('title').trim()||'MY TOP OF 2026';
   ctx.textAlign='center';
-  const titleY=shape==='landscape'?96:shape==='square'?128:148;
+  const titleY=shape==='landscape'?96:shape==='square'?128:theme==='galleryeditorial'?168:148;
   const headline=shape==='landscape'?78:shape==='square'?112:theme==='galleryeditorial'?112:136;
   const titleHeight=writeLines(ctx,title,w/2,titleY,inner,2,headline,58,artSerif,400,1.1);
   ctx.textAlign='left';
-  const note=artValue('sub').trim();let cursor=Math.max(shape==='landscape'?242:shape==='square'?328:390,titleY+titleHeight+38);
+  const note=artValue('sub').trim();let cursor=Math.max(shape==='landscape'?242:shape==='square'?328:theme==='galleryeditorial'?405:390,titleY+titleHeight+38);
   if(note){ctx.fillStyle=p.muted;ctx.textAlign='center';writeLines(ctx,note,w/2,cursor,inner*.88,2,27,22,artSans,400);ctx.textAlign='left';cursor+=58;ctx.fillStyle=p.fg}
   rule(ctx,pad,cursor,inner,p.line,.68);cursor+=shape==='landscape'?20:28;
-  const items=(movies||[]).slice(0,10),bottom=h-150,available=bottom-cursor;
-  // Ranking output is always three vertical columns, regardless of image shape or layout preset.
+  const items=(movies||[]).slice(0,10),bottom=h-(theme==='galleryeditorial'?266:150),available=bottom-cursor;
+  // Landscape needs two columns for legible names; ranking otherwise reads down the page.
   const sparse=items.length>0&&items.length<=3;
-  const columns=3;
-  const rows=Math.max(1,Math.ceil(items.length/columns)),gap=44,cellW=(inner-gap*(columns-1))/columns;
-  const cellH=sparse?Math.min(shape==='landscape'?160:260,available/(Math.max(1,items.length)+1)):available/rows;
+  const columns=sparse?1:shape==='landscape'||(shape==='square'&&layout!=='ranking')?2:1;
+  const rows=columns===2?5:10,gap=columns===2?62:0,cellW=(inner-gap*(columns-1))/columns;
+  const cellH=sparse?Math.min(shape==='landscape'?160:260,available/(items.length+1)):available/rows;
   const firstRowY=sparse?cursor+available*(items.length===1?.3:.12):cursor;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,cursor+available*.42);ctx.textAlign='left';ctx.fillStyle=p.fg}
   items.forEach((m,i)=>{
-    const col=Math.floor(i/rows),row=i%rows;
+    const col=columns===1?0:Math.floor(i/rows),row=columns===1?i:i%rows;
     const x=pad+col*(cellW+gap),y=firstRowY+row*cellH,numberX=x+51;
     rule(ctx,x,y,cellW,p.line,theme==='galleryeditorial'?.47:.34);
     if(i<3)drawMedal(ctx,numberX,y+cellH*.5,i+1,theme);
     else{ctx.save();ctx.font=`400 47px ${artSerif}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+Math.max(16,cellH*.25));ctx.restore()}
     let tx=x+122,tw=cellW-130,top=y+(sparse?cellH*.25:Math.max(12,Math.min(26,cellH*.16)));
     ctx.fillStyle=p.fg;
-    const nameSize=sparse?Math.min(48,cellH*.26):Math.min(29,Math.max(21,cellH*.19));
+    const nameSize=sparse?Math.min(62,cellH*.3):Math.min(columns===2?31:38,Math.max(25,cellH*.24));
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,cellH<115?1:2,nameSize,22,artSerif,500,1.15);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
     if(meta){ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+6,tw,1,24,19,artSans,400);ctx.fillStyle=p.fg}
     if(m.movieComment&&cellH>150){ctx.fillStyle=p.muted;writeLines(ctx,m.movieComment,tx,top+nameHeight+34,tw,1,18,16,artSans,400);ctx.fillStyle=p.fg}
   });
-  rule(ctx,pad,h-112,inner,p.line,.58);drawBrand(ctx,w,h,theme);
+  rule(ctx,pad,theme==='galleryeditorial'?h-226:h-112,inner,p.line,.58);drawBrand(ctx,w,h,theme);
   c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));
   artworkFile=null;document.getElementById('share').disabled=true;
   const revision=++artworkRevision;

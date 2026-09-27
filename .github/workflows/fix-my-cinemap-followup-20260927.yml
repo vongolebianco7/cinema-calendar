@@ -1,0 +1,67 @@
+name: Fix My Cinemap follow-up
+
+on:
+  push:
+    paths:
+      - "scripts/fix_my_cinemap_followup_20260927.py"
+      - ".github/workflows/fix-my-cinemap-followup-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare regression test
+        run: python scripts/fix_my_cinemap_followup_20260927.py prepare-test
+      - name: Confirm RED
+        run: |
+          if python - <<'PY'
+          import runpy
+          ns=runpy.run_path('tests/test_my_cinemap_followup.py')
+          for name,fn in ns.items():
+              if name.startswith('test_') and callable(fn): fn()
+          PY
+          then
+            echo "Expected follow-up test to fail before implementation" >&2
+            exit 1
+          fi
+          echo "RED confirmed"
+      - name: Apply fix
+        run: python scripts/fix_my_cinemap_followup_20260927.py apply
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/my-cinemap-art.js
+          node --check js/my-cinemap-tools.js
+      - name: Verify GREEN
+        run: |
+          python - <<'PY'
+          import runpy
+          ns=runpy.run_path('tests/test_my_cinemap_followup.py')
+          tests=[(n,f) for n,f in ns.items() if n.startswith('test_') and callable(f)]
+          for name,fn in tests:
+              fn(); print('PASS',name)
+          print(f'{len(tests)} follow-up tests passed')
+          PY
+      - name: Run My Cinemap regressions
+        run: |
+          python - <<'PY'
+          import runpy
+          for path in ['tests/test_my_cinemap_controls.py','tests/test_my_cinemap_compact_templates.py']:
+              ns=runpy.run_path(path)
+              for name,fn in ns.items():
+                  if name.startswith('test_') and callable(fn):
+                      fn(); print('PASS',path,name)
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add my-cinemap.html js/my-cinemap-tools.js js/my-cinemap-art.js tests/test_my_cinemap_followup.py
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "fix: refine My Cinemap previews and controls"
+          git pull --rebase origin main
+          git push

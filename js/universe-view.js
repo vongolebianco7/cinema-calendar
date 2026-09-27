@@ -26,22 +26,27 @@
   function farView() {
     const films=known(), rated=films.filter(f=>records[String(f.id)]?.rating!=null).length;
     const stage=rated>=20?'本格Universe':rated>=10?'仮Universe':'形成中';
-    const nodes=visibleGenres().map((genre,index)=>{
-      const matching=films.filter(f=>inGenre(f,genre));
+    const groups=visibleGenres().map((genre,index)=>({genre,index,matching:films.filter(f=>inGenre(f,genre))}));
+    const card=({genre,index,matching})=>{
       const p=model.position('genre:'+genre);
-      return '<button type="button" class="universeGalaxy'+(matching.length?'':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+'" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><small>'+(matching.length?matching.length+'作品を記録':'未登録の領域')+'</small></button>';
-    }).join('');
+      const posters=matching.slice(0,3).map(f=>f.poster?'<img src="'+esc(f.poster)+'" alt="" loading="lazy">':'').join('');
+      return '<button type="button" class="universeGalaxy'+(matching.length?'':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+'" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。監督と作品を見る"><span class="galaxyCloud"></span><strong>'+esc(genre)+' <span class="galaxyType">銀河</span></strong><span class="galaxyCount">'+(matching.length?'観た作品 '+matching.length+'本':'記録はまだありません')+'</span>'+(matching.length?'<span class="galaxyPosters">'+posters+'</span><span class="galaxyExample">'+esc(matching[0].title)+(matching.length>1?' ほか':'')+'</span><span class="galaxyAction">監督と作品を見る →</span>':'')+'</button>';
+    };
+    const explored=groups.filter(g=>g.matching.length).sort((a,b)=>b.matching.length-a.matching.length||a.index-b.index);
+    const unexplored=groups.filter(g=>!g.matching.length);
+    const nodes=explored.map(card).join('');
+    const hidden='<details class="universeUnexplored"><summary>まだ記録のないジャンルを見る · '+unexplored.length+'銀河</summary><div class="universeGalaxies universeGalaxies--empty">'+unexplored.map(card).join('')+'</div><p>未登録は「観ていない」という意味ではありません。</p></details>';
     const suggestions=model.recommend(records,catalog,3);
-    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>銀河を選ぶと監督星系へ。評価するたびに、次の発見が変わります。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div><div class="universeGalaxies">'+nodes+'</div>'+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>未発見惑星の候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>未登録のため鑑賞状況は不明です · 詳細を見る →</small></button>':'');
+    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>観た映画がジャンルごとに集まります。好きな銀河を開いて、監督と作品をたどれます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div><div class="universeGuide"><strong>この宇宙の見方</strong><span>銀河＝ジャンル → 恒星＝監督 → 惑星＝作品</span><small>1作品が複数の銀河に入ることがあります。光る惑星は5.0、暗い惑星は未登録の候補です。</small></div><div class="universeSectionHead universeFarHeading"><h3>あなたが記録したジャンル</h3><p>ポスターのある銀河をタップして、作品を見てみましょう。</p></div>'+(nodes?'<div class="universeGalaxies universeGalaxies--recorded">'+nodes+'</div>':'<div class="universeStart"><p>まだ作品がありません。映画を評価すると、この場所にあなたの銀河が生まれます。</p><a href="my-records.html?view=add">映画を記録する →</a></div>')+hidden+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
   }
   function middleView() {
     const genre=state.genre;
     const films=known().filter(f=>inGenre(f,genre));
     const directors=new Map();
     films.forEach(f=>{const name=f.director||'監督データ未取得';const group=directors.get(name)||[];group.push(f);directors.set(name,group);});
-    const cells=[...directors].sort((a,b)=>b[1].length-a[1].length || a[0].localeCompare(b[0])).map(([name,works])=>'<button type="button" class="universeSystem" data-universe-director="'+esc(name)+'" style="--system-scale:'+(1+Math.min(works.length-1,4)*0.15)+'"><span class="systemSun"></span><strong>'+esc(name)+'</strong><small>'+works.length+'作品 · 恒星を開く</small></button>').join('');
+    const cells=[...directors].sort((a,b)=>b[1].length-a[1].length || a[0].localeCompare(b[0])).map(([name,works])=>'<button type="button" class="universeSystem'+(name==='監督データ未取得'?' universeSystem--unknown':'')+'" data-universe-director="'+esc(name)+'" style="--system-scale:'+(1+Math.min(works.length-1,4)*0.15)+'"><span class="systemSun"></span><strong>'+esc(name==='監督データ未取得'?'監督情報のない作品':name)+'</strong><small>'+works.length+'作品 · '+esc(works[0].title)+(works.length>1?' ほか':'')+' →</small></button>').join('');
     const candidates=model.recommend(records,catalog,4).filter(x=>inGenre(x.film,genre));
-    return '<div class="universeInnerHeader"><button type="button" data-universe-back="far">← 銀河へ</button><span>'+esc(genre)+' 銀河</span></div><div class="universeSectionHead"><h2>監督星系</h2><p>このジャンルで記録した作品から見える星系です。</p></div><div class="universeSystems">'+(cells||'<p class="universeEmpty">まだ記録された作品がありません。未登録は未鑑賞を意味しません。</p>')+'</div>'+(candidates.length?'<div class="universeSuggestions"><h3>この銀河の未発見候補</h3><div class="universePlanets">'+candidates.map(x=>filmCard(x.film,true)).join('')+'</div></div>':'');
+    return '<div class="universeInnerHeader"><button type="button" data-universe-back="far">← ジャンル一覧へ</button><span>'+esc(genre)+' 銀河</span></div><div class="universeSectionHead"><h2>'+esc(genre)+'の監督と作品</h2><p>ここには記録した'+films.length+'本が入っています。監督を選ぶと作品が見えます。</p></div><div class="universeSystems">'+(cells||'<p class="universeEmpty">まだ記録された作品がありません。未登録は未鑑賞を意味しません。</p>')+'</div>'+(candidates.length?'<div class="universeSuggestions"><h3>このジャンルの未登録候補</h3><p class="universeEmpty">鑑賞状況は不明です。</p><div class="universePlanets">'+candidates.map(x=>filmCard(x.film,true)).join('')+'</div></div>':'');
   }
   function closeView() {
     const films=known().filter(f=>inGenre(f,state.genre) && (f.director||'監督データ未取得')===state.director);

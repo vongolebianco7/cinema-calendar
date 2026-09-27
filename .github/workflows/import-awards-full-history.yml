@@ -1,0 +1,46 @@
+name: Import awards full history
+
+on:
+  push:
+    paths:
+      - "scripts/import_awards_wikidata_full_history.py"
+      - ".github/workflows/import-awards-full-history.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import all retrievable historical winners
+        run: python scripts/import_awards_wikidata_full_history.py --start-year 1929
+
+      - name: Validate JSON
+        run: python -m json.tool data/awards.json >/dev/null
+
+      - name: Show awards file size
+        run: |
+          du -h data/awards.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/awards.json').read_text())
+          print('rows', len(d['awards']))
+          PY
+
+      - name: Commit expanded history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/awards.json
+          if git diff --cached --quiet; then
+            echo "No new award rows."
+            exit 0
+          fi
+          git commit -m "data: expand awards through full available history"
+          git push

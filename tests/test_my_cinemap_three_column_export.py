@@ -3,6 +3,7 @@ from pathlib import Path
 art = Path("js/my-cinemap-art.js").read_text(encoding="utf-8")
 html = Path("my-cinemap.html").read_text(encoding="utf-8")
 tools = Path("js/my-cinemap-tools.js").read_text(encoding="utf-8")
+enhancements = Path("js/my-cinemap-art-direction.js").read_text(encoding="utf-8")
 
 required_art = [
     "layout=artValue('layout')||'single'",
@@ -86,14 +87,22 @@ missing_preview = [token for token in large_theme_preview if token not in tools]
 if missing_preview:
     raise SystemExit(f"Large theme preview UI missing: {missing_preview}")
 
-director_defaults = [
+enhancement_requirements = [
+    "<select id=\"fontStyle\">",
+    "Editorial Serif",
+    "Modern Serif",
+    "Clean Sans",
+    "Cinema Classic",
+    "const FONT_KEY='cinemap-my-font-style'",
     "async function hydrateMissingDirectors",
     "picks.filter(movie=>!movie.director)",
     "hydrateMissingDirectors()",
+    "saved.font=fontStyle.value",
+    "previewDecor",
 ]
-missing_director = [token for token in director_defaults if token not in tools]
-if missing_director:
-    raise SystemExit(f"Default director hydration missing: {missing_director}")
+missing_enhancements = [token for token in enhancement_requirements if token not in enhancements]
+if missing_enhancements:
+    raise SystemExit(f"My Cinemap enhancement module missing: {missing_enhancements}")
 
 forbidden_art = [
     "const columns=3;",
@@ -111,14 +120,6 @@ if present_art:
 required_html = [
     '<option value="single" selected>縦1列</option>',
     '<option value="double">左右2列</option>',
-    '<select id="fontStyle">',
-    '<option value="editorial" selected>Editorial Serif</option>',
-    '<option value="modern">Modern Serif</option>',
-    '<option value="clean">Clean Sans</option>',
-    '<option value="classic">Cinema Classic</option>',
-    'font:document.getElementById("fontStyle").value',
-    'document.getElementById("fontStyle").value=',
-    '["format","layout","fontStyle"]',
     'data-theme="minimal"',
     'data-theme="noir"',
     'data-theme="burgundy"',
@@ -133,7 +134,7 @@ required_html = [
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:
-    raise SystemExit(f"My Cinemap layout/theme/font controls missing: {missing_html}")
+    raise SystemExit(f"My Cinemap layout/theme controls missing: {missing_html}")
 
 for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Editorial"]:
     if forbidden in html:
@@ -141,5 +142,7 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
 
 if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
     raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
+if "my-cinemap-art-direction.js?v=20260927-art-direction-v1" not in art:
+    raise SystemExit("My Cinemap art-direction enhancement module is not loaded")
 
 print("My Cinemap five editorial themes, abstract illustrations, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")

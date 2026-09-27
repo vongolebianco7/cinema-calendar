@@ -126,15 +126,17 @@ JS = r'''
    const all=[...theaters,...osmTheaters],uniq=new Map();
    all.forEach(t=>{if(window.isGenericChainOnly(t))return;const k=normName(t.name)+'|'+String(t.prefecture||'')+'|'+String(t.municipality||'');if(k&&!uniq.has(k))uniq.set(k,t)});
    let directory=equipmentFilter?window.equipmentTheaters([...uniq.values()],equipmentFilter):[...uniq.values()];
+   if(prefectureFilter)directory=directory.filter(t=>String(t.prefecture||'')===prefectureFilter);
    directoryCache=directory;
    const q=$("#q").value.trim().toLowerCase();
    if(q)directory=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(' ').toLowerCase().includes(q));
-   if(!q&&!equipmentFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
-   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter:'');
+   if(!q&&!equipmentFilter&&!prefectureFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
+   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter:'')+(prefectureFilter?' · '+prefectureFilter:'');
    if(!directory.length){$("#grid").innerHTML='<div class="empty">条件に合う映画館がありません。</div>';return}
    $("#grid").innerHTML='<div class="tableHint">表は左右にスワイプできます</div><div class="theaterTableWrap"><table class="theaterTable"><thead><tr><th>映画館</th><th>エリア</th><th>IMAX</th><th>Dolby</th><th>4DX / MX4D</th><th>ScreenX</th><th>スクリーン設備</th><th>リンク</th></tr></thead><tbody>'+directory.slice(0,150).map(rowHtml).join('')+'</tbody></table></div>';
  }
  let equipmentFilter=selectedFormat||'';
+ let prefectureFilter=new URLSearchParams(location.search).get('prefecture')||'';
  window.renderDirectory=renderTheaterTable;
  document.querySelectorAll('[data-format-filter]').forEach(b=>{
    b.replaceWith(b.cloneNode(true));
@@ -145,6 +147,15 @@ JS = r'''
    const p=new URLSearchParams(location.search);if(equipmentFilter)p.set('format',equipmentFilter);else p.delete('format');history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
    renderTheaterTable();
  }));
+ const prefectureSelect=document.getElementById('prefectureFilter');
+ if(prefectureSelect){
+   prefectureSelect.value=prefectureFilter;
+   prefectureSelect.addEventListener('change',()=>{
+     prefectureFilter=prefectureSelect.value||'';
+     const p=new URLSearchParams(location.search);if(prefectureFilter)p.set('prefecture',prefectureFilter);else p.delete('prefecture');history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+     renderTheaterTable();
+   });
+ }
  const input=$("#q"); if(input){const fresh=input.cloneNode(true);input.replaceWith(fresh);fresh.addEventListener('input',renderTheaterTable);}
  const timer=setInterval(()=>{if((theaters.length||osmTheaters.length)&&formatData&&Array.isArray(formatData.screens)){clearInterval(timer);renderTheaterTable();}},100);
  setTimeout(()=>clearInterval(timer),8000);

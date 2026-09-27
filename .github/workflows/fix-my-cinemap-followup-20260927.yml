@@ -5,6 +5,7 @@ on:
     paths:
       - "scripts/fix_my_cinemap_followup_20260927.py"
       - "tests/test_my_cinemap_controls.py"
+      - "tests/test_my_cinemap_compact_templates.py"
       - ".github/workflows/fix-my-cinemap-followup-20260927.yml"
 
 permissions:

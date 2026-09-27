@@ -24,7 +24,12 @@ const minimalMedalScale=.86;
 const minimalMetaAlpha=.74;
 const minimalMovieWeight=600;
 const minimalFooterGap=38;
-const minimalSingleMovieSize=38;
+const minimalSingleMovieSize=42;
+const singleMovieSize=38;
+const doublePortraitMovieSize=32;
+const doubleCompactMovieSize=27;
+const singleMetaSize=21;
+const doubleMetaSize=20;
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -103,25 +108,26 @@ function drawArtwork(movies){
   ctx.textAlign='left';
   const items=(movies||[]).slice(0,10);
   const rows=columns===2?5:10;
-  const gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=metrics.rowH;
+  const doubleListBottomTarget=h-(shape==='portrait'?150:shape==='square'?126:106);
+  const gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=columns===2?Math.max(96,(doubleListBottomTarget-listTop)/rows):metrics.rowH;
   const listBottom=listTop+rows*rowH;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
   items.forEach((m,i)=>{
     const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;
     const x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
-    rule(ctx,x,y,cellW,p.line,theme==='minimal'?.24:(p.dark?.30:.32));
+    rule(ctx,x,y,cellW,p.line,theme==='minimal'?.20:(p.dark?.27:.28));
     const medalScale=theme==='minimal'?minimalMedalScale:1;
     if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
-    else{ctx.save();ctx.font=`400 ${columns===2?28:31}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+rowInset+2);ctx.restore()}
+    else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
     const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
-    const nameSize=columns===2?(shape==='portrait'?29:24):(theme==='minimal'&&columns===1?minimalSingleMovieSize:(shape==='portrait'?34:shape==='square'?30:24));
+    const nameSize=columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28);
     const movieWeight=theme==='minimal'?minimalMovieWeight:500;
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,20,artBodySerif,movieWeight,1.10);
+    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,columns===2?21:24,artBodySerif,movieWeight,1.10);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+7,tw,1,columns===2?18:20,15,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
+    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,columns===2?doubleMetaSize:singleMetaSize,16,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });
-  rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.25:.34);
+  rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);
   drawBrand(ctx,w,h,theme,footerY);
   c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));

@@ -1,0 +1,45 @@
+name: Refresh My Cinemap cinema renderer cache
+
+on:
+  push:
+    paths:
+      - ".github/workflows/bump-my-cinemap-fontsize-cache-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refresh renderer cache keys
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          replacements={
+            'js/my-cinemap-art.js': [('my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v3','my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v4')],
+            'js/my-cinemap-art-direction.js': [('my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v3','my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v4')],
+            'tests/test_my_cinemap_render_regression_20260927.py': [('my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v3','my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v4')],
+          }
+          for name,repls in replacements.items():
+              p=Path(name); s=p.read_text()
+              for old,new in repls:
+                  assert old in s, (name,old)
+                  s=s.replace(old,new)
+              p.write_text(s)
+          PY
+      - name: Verify
+        run: |
+          node --check js/my-cinemap-art.js
+          node --check js/my-cinemap-art-direction.js
+          node --check js/my-cinemap-cinema-templates.js
+          python -c "import runpy; ns=runpy.run_path('tests/test_my_cinemap_render_regression_20260927.py'); tests=[(n,f) for n,f in ns.items() if n.startswith('test_') and callable(f)]; [f() for _,f in tests]; print(str(len(tests))+' tests passed')"
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/my-cinemap-art.js js/my-cinemap-art-direction.js tests/test_my_cinemap_render_regression_20260927.py
+          git commit -m "fix: refresh cinema template font-size renderer"
+          git pull --rebase origin main
+          git push

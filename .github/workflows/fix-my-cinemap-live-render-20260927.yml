@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/fix_my_cinemap_live_render_20260927.py"
+      - "tests/test_my_cinemap_compact_templates.py"
       - ".github/workflows/fix-my-cinemap-live-render-20260927.yml"
 
 permissions:

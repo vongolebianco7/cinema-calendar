@@ -1,4 +1,5 @@
 from pathlib import Path
+from io import BytesIO
 import json
 import re
 import time
@@ -6,26 +7,18 @@ import unicodedata
 
 import requests
 from bs4 import BeautifulSoup
+import pdfplumber
 
 ROOT = Path(__file__).resolve().parents[1]
 BOX_PATH = ROOT / "data/boxoffice.json"
 RANK_PATH = ROOT / "rankings.html"
-BASE = "https://www.eiren.org/toukei/{year}.html"
+HTML_BASE = "https://www.eiren.org/toukei/{year}.html"
+PDF_BASE = "https://www.eiren.org/toukei/img/eiren_kosyu/data_{year}.pdf"
 HEADERS = {"User-Agent": "Cinemap/1.0 historical-boxoffice-backfill (static one-time import)"}
 
 
 def norm(value):
     return unicodedata.normalize("NFKC", str(value or "")).replace("\xa0", " ").strip()
-
-
-def section_for(table):
-    for prev in table.find_all_previous(limit=30):
-        text = norm(prev.get_text(" ", strip=True))
-        if "邦画" in text and len(text) < 80:
-            return "邦画"
-        if "洋画" in text and len(text) < 80:
-            return "洋画"
-    return None
 
 
 def parse_numeric(text):
@@ -34,59 +27,7 @@ def parse_numeric(text):
     return float(m.group(0)) if m else None
 
 
-def scrape_year(year):
-    url = BASE.format(year=year)
-    response = requests.get(url, headers=HEADERS, timeout=25)
-    response.raise_for_status()
-    response.encoding = response.apparent_encoding or response.encoding
-    soup = BeautifulSoup(response.text, "html.parser")
-    page_text = norm(soup.get_text(" ", strip=True))
-    unit_million = "単位:百万円" in page_text.replace(" ", "") or "単位：百万円" in page_text.replace(" ", "")
-    metric = "配給収入" if year <= 1999 else "興行収入"
-    rows = []
-
-    for table in soup.find_all("table"):
-        region = section_for(table)
-        if region not in {"邦画", "洋画"}:
-            continue
-        trs = table.find_all("tr")
-        title_idx = amount_idx = header_row = None
-        for ridx, tr in enumerate(trs[:6]):
-            cells = [norm(c.get_text(" ", strip=True)) for c in tr.find_all(["th", "td"])]
-            for idx, cell in enumerate(cells):
-                key = cell.replace(" ", "")
-                if title_idx is None and ("作品名" in key or "題名" in key or "題名" == key):
-                    title_idx = idx
-                if amount_idx is None and ("興収" in key or "興行収入" in key or "配給収入" in key):
-                    amount_idx = idx
-            if title_idx is not None and amount_idx is not None:
-                header_row = ridx
-                break
-        if title_idx is None or amount_idx is None:
-            continue
-
-        for tr in trs[(header_row or 0) + 1:]:
-            cells = tr.find_all(["th", "td"])
-            if max(title_idx, amount_idx) >= len(cells):
-                continue
-            title = norm(cells[title_idx].get_text(" / ", strip=True))
-            amount_raw = norm(cells[amount_idx].get_text(" ", strip=True))
-            if not title or title in {"作品名", "題名"}:
-                continue
-            amount = parse_numeric(amount_raw)
-            if amount is None:
-                continue
-            gross_oku = amount / 100.0 if unit_million else amount
-            rows.append({
-                "title": title,
-                "gross": round(gross_oku, 3),
-                "year": year,
-                "region": region,
-                "metric": metric,
-                "source_url": url,
-            })
-
-    # Keep source ordering while removing accidental duplicate rows.
+def dedupe(rows, year, url):
     seen = set()
     unique = []
     for row in rows:
@@ -101,11 +42,119 @@ def scrape_year(year):
     return unique
 
 
+def section_for(table):
+    for prev in table.find_all_previous(limit=30):
+        text = norm(prev.get_text(" ", strip=True))
+        if "邦画" in text and len(text) < 80:
+            return "邦画"
+        if "洋画" in text and len(text) < 80:
+            return "洋画"
+    return None
+
+
+def scrape_html_year(year):
+    url = HTML_BASE.format(year=year)
+    response = requests.get(url, headers=HEADERS, timeout=25)
+    response.raise_for_status()
+    response.encoding = response.apparent_encoding or response.encoding
+    soup = BeautifulSoup(response.text, "html.parser")
+    page_text = norm(soup.get_text(" ", strip=True))
+    compact = page_text.replace(" ", "")
+    unit_million = "単位:百万円" in compact or "単位：百万円" in compact
+    metric = "配給収入" if year <= 1999 else "興行収入"
+    rows = []
+
+    for table in soup.find_all("table"):
+        region = section_for(table)
+        if region not in {"邦画", "洋画"}:
+            continue
+        trs = table.find_all("tr")
+        title_idx = amount_idx = header_row = None
+        for ridx, tr in enumerate(trs[:8]):
+            cells = [norm(c.get_text(" ", strip=True)) for c in tr.find_all(["th", "td"])]
+            for idx, cell in enumerate(cells):
+                key = cell.replace(" ", "")
+                if title_idx is None and ("作品名" in key or "題名" in key):
+                    title_idx = idx
+                if amount_idx is None and ("興収" in key or "興行収入" in key or "配給収入" in key):
+                    amount_idx = idx
+            if title_idx is not None and amount_idx is not None:
+                header_row = ridx
+                break
+        if title_idx is None or amount_idx is None:
+            continue
+
+        for tr in trs[(header_row or 0) + 1:]:
+            cells = tr.find_all(["th", "td"])
+            if max(title_idx, amount_idx) >= len(cells):
+                continue
+            title = norm(cells[title_idx].get_text(" / ", strip=True))
+            amount = parse_numeric(cells[amount_idx].get_text(" ", strip=True))
+            if not title or amount is None:
+                continue
+            gross_oku = amount / 100.0 if unit_million else amount
+            rows.append({"title": title, "gross": round(gross_oku, 3), "year": year,
+                         "region": region, "metric": metric, "source_url": url})
+    return dedupe(rows, year, url)
+
+
+def table_header_indices(table):
+    for ridx, row in enumerate(table[:8]):
+        cells = [norm(x) for x in row]
+        title_idx = amount_idx = None
+        for idx, cell in enumerate(cells):
+            key = cell.replace(" ", "").replace("\n", "")
+            if title_idx is None and ("作品名" in key or "題名" in key):
+                title_idx = idx
+            if amount_idx is None and ("興収" in key or "興行収入" in key):
+                amount_idx = idx
+        if title_idx is not None and amount_idx is not None:
+            return ridx, title_idx, amount_idx
+    return None
+
+
+def scrape_pdf_year(year):
+    url = PDF_BASE.format(year=year)
+    response = requests.get(url, headers=HEADERS, timeout=30)
+    response.raise_for_status()
+    valid_tables = []
+    with pdfplumber.open(BytesIO(response.content)) as pdf:
+        for page in pdf.pages:
+            for table in page.extract_tables() or []:
+                idx = table_header_indices(table)
+                if idx:
+                    valid_tables.append((table, idx))
+    if len(valid_tables) < 2:
+        raise RuntimeError(f"{year}: expected 邦画/洋画 tables in {url}, got {len(valid_tables)}")
+
+    rows = []
+    # Official PDFs place 邦画 first and 洋画 second. Any later summary table is ignored.
+    for region, (table, indices) in zip(("邦画", "洋画"), valid_tables[:2]):
+        header_row, title_idx, amount_idx = indices
+        for row in table[header_row + 1:]:
+            if not row or max(title_idx, amount_idx) >= len(row):
+                continue
+            title = norm(row[title_idx]).replace("\n", " ")
+            amount = parse_numeric(row[amount_idx])
+            if not title or amount is None:
+                continue
+            # Avoid total/footer rows sometimes captured by PDF table extraction.
+            if "興収計" in title or "合計" in title:
+                continue
+            rows.append({"title": title, "gross": round(amount, 3), "year": year,
+                         "region": region, "metric": "興行収入", "source_url": url})
+    return dedupe(rows, year, url)
+
+
+def scrape_year(year):
+    return scrape_html_year(year) if year <= 2010 else scrape_pdf_year(year)
+
+
 def update_data():
     data = json.loads(BOX_PATH.read_text(encoding="utf-8"))
     by_year = data.setdefault("by_year", {})
     for year in range(1980, 2020):
-        print(f"Fetching {year}...")
+        print(f"Fetching {year}...", flush=True)
         by_year[str(year)] = scrape_year(year)
         time.sleep(0.15)
     data["by_year"] = dict(sorted(by_year.items(), key=lambda kv: int(kv[0]), reverse=True))
@@ -117,7 +166,7 @@ def update_data():
         "name": source_name,
         "url": "https://www.eiren.org/toukei/data.html",
         "as_of": "2026-09-27",
-        "note": "1980-1999は配給収入、2000年以降は興行収入。各年の公式ページから静的取得。",
+        "note": "1980-1999は配給収入、2000年以降は興行収入。1980-2010は各年HTML、2011-2019は映連公式PDFから静的取得。",
     })
     data["sources"] = sources
     BOX_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

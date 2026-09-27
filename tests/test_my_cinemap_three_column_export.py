@@ -110,6 +110,27 @@ missing_enhancements = [token for token in enhancement_requirements if token not
 if missing_enhancements:
     raise SystemExit(f"My Cinemap enhancement module missing: {missing_enhancements}")
 
+cinema_backgrounds = [
+    '<select id="cinemaBackground">',
+    '<option value="none" selected>なし</option>',
+    '<option value="projector">Projector</option>',
+    '<option value="theater">Theater Curtain</option>',
+    '<option value="artdeco">Art Deco Cinema</option>',
+    '<option value="archive">Film Archive</option>',
+    '<option value="screening">Screening Room</option>',
+    "const CINEMA_BG_KEY='cinemap-my-cinema-background'",
+    "assets/my-cinemap/cinema-projector.png",
+    "assets/my-cinemap/cinema-theater.png",
+    "assets/my-cinemap/cinema-artdeco.png",
+    "assets/my-cinemap/cinema-archive.png",
+    "assets/my-cinemap/cinema-screening.png",
+    "drawCinemaBackground",
+    "cinemaBackground",
+]
+missing_backgrounds = [token for token in cinema_backgrounds if token not in (art + html + enhancements)]
+if missing_backgrounds:
+    raise SystemExit(f"My Cinemap optional cinema backgrounds missing: {missing_backgrounds}")
+
 forbidden_art = [
     "const columns=3;",
     "drawFilmNote",
@@ -151,4 +172,4 @@ if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
 if "my-cinemap-art-direction.js?v=20260927-art-direction-v1" not in art:
     raise SystemExit("My Cinemap art-direction enhancement module is not loaded")
 
-print("My Cinemap five editorial themes, abstract illustrations, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")
+print("My Cinemap five editorial themes, optional cinema backgrounds, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")

@@ -20,10 +20,10 @@ def test_director_is_preserved_and_defaulted_from_search_results():
     assert 'if(movie.director)' in TOOLS
 
 
-def test_four_final_templates_exist():
-    for token in ["Minimal", "Film Note", "Theater Night", "Gallery Editorial"]:
+def test_five_editorial_templates_exist():
+    for token in ["Minimal", "Noir Editorial", "Burgundy Journal", "Sage Museum", "Blue Grey Archive"]:
         assert token in HTML
-    for token in ["drawMinimal", "drawFilmNote", "drawTheater", "drawGalleryEditorial"]:
+    for token in ["drawMinimal", "drawNoir", "drawBurgundy", "drawSage", "drawBlueGray"]:
         assert token in ART
 
 

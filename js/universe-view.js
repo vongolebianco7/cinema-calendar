@@ -96,11 +96,11 @@
   function home(){clearTimeout(flight);Object.assign(camera,{zoom:1,focusX:50,focusY:50,panX:0,panY:0,yaw:0,pitch:0});selected=null;render();}
   function bindGestures(viewport){
     const pointers=new Map();let pinchDistance=0,moved=false;
-    viewport.addEventListener('pointerdown',e=>{moved=false;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()];pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);}});
+    viewport.addEventListener('pointerdown',e=>{moved=false;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()];pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);}});
     viewport.addEventListener('pointermove',e=>{
       const previous=pointers.get(e.pointerId);if(!previous)return;
-      pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-      if(Math.hypot(e.clientX-previous.x,e.clientY-previous.y)>3){moved=true;if(!viewport.hasPointerCapture(e.pointerId))viewport.setPointerCapture(e.pointerId);}
+      pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:previous.startX,startY:previous.startY});
+      if(Math.hypot(e.clientX-previous.startX,e.clientY-previous.startY)>5){moved=true;if(!viewport.hasPointerCapture(e.pointerId))viewport.setPointerCapture(e.pointerId);}
       if(pointers.size>=2){
         const [a,b]=[...pointers.values()],dist=Math.hypot(a.x-b.x,a.y-b.y);
         if(pinchDistance){const next=clamp(camera.zoom*dist/pinchDistance,.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;}

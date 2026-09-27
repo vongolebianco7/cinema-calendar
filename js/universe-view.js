@@ -26,7 +26,9 @@
       return '<button type="button" class="cosmosBody cosmosGalaxy'+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(g)+'銀河、'+n+'作品の記録"><span class="cosmosHalo"></span><strong>'+esc(g)+'</strong><small>'+(n?n+'作品':'記録なし')+'</small></button>';
     }).join('');
   };
-  const candidates=()=>model.recommend(records,catalog,12);
+  // Before ten ratings there is too little evidence for a useful suggestion.
+  // Keep the personal map dominant even after suggestions become available.
+  const candidates=()=>known().length<10?[]:model.recommend(records,catalog,5);
   const directorGroups=()=>{
     const byName=new Map();
     [...known().filter(inDecade),...candidates().map(x=>x.film).filter(inDecade)].forEach(f=>{
@@ -129,7 +131,14 @@
     if(!e.target.closest('#universe'))return;
     const genre=e.target.closest('[data-cosmos-genre]');if(genre){const g=genre.dataset.cosmosGenre,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});return;}
     const director=e.target.closest('[data-cosmos-director]');if(director){const name=director.dataset.cosmosDirector;fly(model.directorPosition(name,catalog),3.8,{kind:'director',name});return;}
-    const film=e.target.closest('[data-cosmos-film]');if(film){const id=film.dataset.cosmosFilm,f=catalog.find(x=>String(x.id)===id);if(f)fly(model.filmPosition(f),3.8,{kind:'film',id});return;}
+    let film=e.target.closest('[data-cosmos-film]');
+    if(film){
+      // In crowded constellations an overlapping planet can receive a tap on
+      // another planet's centre. Choose the visually nearest centre instead.
+      const closest=[...document.querySelectorAll('#universe .cosmosPlanet')].map(node=>{const r=node.getBoundingClientRect();return {node,d:Math.hypot(e.clientX-(r.left+r.right)/2,e.clientY-(r.top+r.bottom)/2)};}).sort((a,b)=>a.d-b.d)[0];
+      if(closest?.d<48)film=closest.node;
+      const id=film.dataset.cosmosFilm,f=catalog.find(x=>String(x.id)===id);if(f)fly(model.filmPosition(f),3.8,{kind:'film',id});return;
+    }
     if(e.target.closest('[data-cosmos-home]')){home();return;}
     if(e.target.closest('[data-cosmos-closer]')){const p=selected?.kind==='genre'?model.centerForGenre(selected.name):model.directorPosition(selected?.name,catalog);if(p)fly(Array.isArray(p)?{x:p[0],y:p[1]}:p,3.8,selected);}
   });

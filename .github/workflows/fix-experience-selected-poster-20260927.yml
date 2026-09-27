@@ -1,0 +1,81 @@
+name: Fix selected screening poster card
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-experience-selected-poster-20260927.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add regression test
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tests/test_experience_selected_poster.py')
+          p.write_text("""from pathlib import Path\n\ndef test_selected_movie_card_shows_poster_and_clears_on_edit():\n    s=Path('experience.html').read_text(encoding='utf-8')\n    assert 'id=\"formatSelectedMovie\"' in s\n    assert 'function renderSelectedMovie()' in s\n    assert 'selectedMovieCard.innerHTML' in s\n    assert 'candidatePoster(selectedMovie)' in s\n    assert 'selectedMovieCard.hidden=false' in s\n    assert 'selectedMovieCard.hidden=true' in s\n""", encoding='utf-8')
+          PY
+      - name: Confirm RED
+        run: |
+          if python - <<'PY'
+          from tests.test_experience_selected_poster import test_selected_movie_card_shows_poster_and_clears_on_edit
+          test_selected_movie_card_shows_poster_and_clears_on_edit()
+          PY
+          then
+            echo 'Expected RED before fix' >&2
+            exit 1
+          fi
+      - name: Apply fix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('experience.html')
+          s=p.read_text(encoding='utf-8')
+          old='<div class="filmCandidates" id="formatCandidates" role="listbox" hidden></div><div class="formatResult" id="formatResult">'
+          new='<div class="filmCandidates" id="formatCandidates" role="listbox" hidden></div><div class="selectedMovieCard" id="formatSelectedMovie" hidden></div><div class="formatResult" id="formatResult">'
+          if 'id="formatSelectedMovie"' not in s:
+              if old not in s: raise SystemExit('selected card anchor not found')
+              s=s.replace(old,new,1)
+          css_anchor='.candidateState{padding:12px;color:#999;font-size:12px}'
+          css_add='\n.selectedMovieCard{margin-top:10px;display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;align-items:center;padding:9px 10px;border:1px solid #30343a;border-radius:10px;background:#101216}.selectedMovieCard[hidden]{display:none!important}.selectedMoviePoster{width:54px;aspect-ratio:2/3;border-radius:6px;object-fit:cover;background:#24272e}.selectedMoviePosterFallback{width:54px;aspect-ratio:2/3;border-radius:6px;background:#24272e;display:grid;place-items:center;color:#70757f;font-size:9px}.selectedMovieBody b{display:block;font-size:13px}.selectedMovieBody span{display:block;margin-top:3px;font-size:10px;color:#9ca3ad}'
+          if '.selectedMovieCard{' not in s:
+              if css_anchor not in s: raise SystemExit('css anchor not found')
+              s=s.replace(css_anchor,css_anchor+css_add,1)
+          init_old="const input=document.getElementById('formatFilm'),candidateBox=document.getElementById('formatCandidates'),out=document.getElementById('formatResult');"
+          init_new="const input=document.getElementById('formatFilm'),candidateBox=document.getElementById('formatCandidates'),selectedMovieCard=document.getElementById('formatSelectedMovie'),out=document.getElementById('formatResult');"
+          if 'selectedMovieCard=document.getElementById' not in s:
+              if init_old not in s: raise SystemExit('init anchor not found')
+              s=s.replace(init_old,init_new,1)
+          func_anchor='function candidatePoster(m){return m.poster||m.posterUrl||m.poster_url||\'\'}'
+          func_add="\nfunction renderSelectedMovie(){if(!selectedMovie){selectedMovieCard.hidden=true;selectedMovieCard.innerHTML='';return}const poster=candidatePoster(selectedMovie),title=searchLabel(selectedMovie)||'タイトル不明',original=searchOriginal(selectedMovie),meta=[movieYear(selectedMovie)||'年不明',original&&normalizeSearchText(original)!==normalizeSearchText(title)?original:''].filter(Boolean).join(' · ');selectedMovieCard.innerHTML=(poster?'<img class=\"selectedMoviePoster\" src=\"'+esc(poster)+'\" alt=\"\" decoding=\"async\">':'<span class=\"selectedMoviePosterFallback\">NO IMAGE</span>')+'<span class=\"selectedMovieBody\"><b>'+esc(title)+'</b><span>'+esc(meta)+'</span></span>';selectedMovieCard.hidden=false}"
+          if 'function renderSelectedMovie()' not in s:
+              if func_anchor not in s: raise SystemExit('poster function anchor not found')
+              s=s.replace(func_anchor,func_anchor+func_add,1)
+          select_old="candidateBox.innerHTML='';candidateBox.hidden=true;input.setAttribute('aria-expanded','false');renderRecommendation()"
+          select_new="candidateBox.innerHTML='';candidateBox.hidden=true;input.setAttribute('aria-expanded','false');renderSelectedMovie();renderRecommendation()"
+          if 'renderSelectedMovie();renderRecommendation()' not in s:
+              if select_old not in s: raise SystemExit('selection anchor not found')
+              s=s.replace(select_old,select_new,1)
+          input_old="input.addEventListener('input',()=>{selectedMovie=null;out.innerHTML='<div class=\"decisionNote\">候補から作品を選んでください。</div>';clearTimeout(candidateTimer);candidateTimer=setTimeout(loadCandidates,250)})"
+          input_new="input.addEventListener('input',()=>{selectedMovie=null;selectedMovieCard.hidden=true;selectedMovieCard.innerHTML='';out.innerHTML='<div class=\"decisionNote\">候補から作品を選んでください。</div>';clearTimeout(candidateTimer);candidateTimer=setTimeout(loadCandidates,250)})"
+          if "selectedMovieCard.hidden=true;selectedMovieCard.innerHTML=''" not in s:
+              if input_old not in s: raise SystemExit('input anchor not found')
+              s=s.replace(input_old,input_new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify GREEN
+        run: |
+          python - <<'PY'
+          from tests.test_experience_selected_poster import test_selected_movie_card_shows_poster_and_clears_on_edit
+          test_selected_movie_card_shows_poster_and_clears_on_edit()
+          print('PASS')
+          PY
+      - name: Commit result
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add experience.html tests/test_experience_selected_poster.py
+          git commit -m 'feat: show selected screening movie poster'
+          git push

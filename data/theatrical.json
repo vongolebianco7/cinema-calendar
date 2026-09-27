@@ -1,455 +1,17 @@
 {
-  "generated_at": "2026-09-26T18:28:58.311483+00:00",
+  "generated_at": "2026-09-27T18:28:52.872090+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-08-27",
-      "2027-01-24"
+      "2026-08-28",
+      "2027-01-25"
     ],
     "background_slice": [
-      "2026-03-25",
-      "2026-05-23"
+      "2026-05-25",
+      "2026-07-23"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 22984,
-      "title": "ザ・フー キッズ・アー・オールライト",
-      "original_title": "The Who: The Kids Are Alright",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/ucsyYRNk0kx0gbCjuNOtpESYsc.jpg",
-      "score": 7.272,
-      "votes": 46,
-      "overview": "ザ・ビートルズ、ザ・ローリング・ストーンズと共にブリティッシュ・ロックの黄金期を牽引し、ロックを革新し続けたスーパーバンド、ザ・フー。それにもかかわらず全盛期の来日がかなわなかった彼らの1964年から1978年までの代表曲のライブパフォーマンスを中心に、プロモーションフィルム、インタビューなどを含む、ロック・ドキュメンタリー映画史上の傑作。数多い歴史的なシーンの中でもとりわけ、本作のために1978年5月にシェバートン・スタジオで撮影された、伝説的天才ドラマー、キース・ムーン最後の渾身のパフォーマンスがフィーチャーされているのは貴重。",
-      "tmdb": "https://www.themoviedb.org/movie/22984",
-      "director": "Jeff Stein",
-      "director_id": 179546,
-      "cast": [
-        "ロジャー・ダルトリー",
-        "ジョン・エントウィッスル",
-        "ピート・タウンゼント",
-        "キース・ムーン"
-      ],
-      "countries": [
-        "United Kingdom"
-      ],
-      "runtime": 110,
-      "genres": [
-        "ドキュメンタリー",
-        "音楽"
-      ]
-    },
-    {
-      "id": 43963,
-      "title": "蘇える金狼",
-      "original_title": "蘇える金狼",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/rZcpI878aYBrGFR6B7KN1qjSCY7.jpg",
-      "score": 6.3,
-      "votes": 10,
-      "overview": "伝説の人気男優、松田優作が、大藪春彦の同名小説を原作に、サラリーマンとアウトローという２つの顔を持つ一匹狼に扮し、公開当時大ヒットした角川映画の人気アクション。先駆けるTV「太陽にほえろ！」などで人気爆発していた松田が、同じ角川映画としては「人間の証明」に続く作品となり、映画「遊戯」シリーズ3本やドラマ「大都会　PARTII」でも組んだ監督・村川透＆撮影・仙元誠三らとチームを組み、国産ハードアクションの新境地を開いた要注目作。役作りのため海外で実銃射撃を経験するなど、俳優・松田はワイルドな魅力を従来よりアップ。銃撃戦の場面では村川監督ならではの長回し撮影も独自の迫力を発揮。ラストシーンのせりふは脚本にない松田自身のアドリブだという。\r 朝倉哲也は表向きは平凡なサラリーマンだが、夜は身体を鍛えて巨大資本乗っ取りを企んでいる。朝倉はある日、手に入れた麻薬で上司の愛人、永井京子を手なずけた。しばらくして会社幹部達の横領事件をネタに、桜井という男がゆすりに来ていることを突き止めた。朝倉は桜井と会社を巧みに利用して社長令嬢の絵理子と婚約することに成功するが、その一方で嫉妬に燃える京子は、ある決意をしていた。",
-      "tmdb": "https://www.themoviedb.org/movie/43963",
-      "director": "村川透",
-      "director_id": 129957,
-      "cast": [
-        "松田優作",
-        "風吹ジュン",
-        "成田三樹夫",
-        "小池朝雄"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 132,
-      "genres": [
-        "アクション",
-        "犯罪"
-      ]
-    },
-    {
-      "id": 1058685,
-      "title": "ピアノフォルテ",
-      "original_title": "Pianoforte",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uLgVsM1QboBX9hPA1c8ATENCO7S.jpg",
-      "score": 7.8,
-      "votes": 10,
-      "overview": "ショパンの出身国であるポーランドの首都ワルシャワで、5年に1度開催されているショパン国際ピアノコンクール。出場するだけで名誉なことで、入賞すればその後の成功が約束されるとあり、世界中の若きピアニストたちがその頂点を目指し切磋琢磨している。",
-      "tmdb": "https://www.themoviedb.org/movie/1058685",
-      "director": "Jakub Piątek",
-      "director_id": 2229459,
-      "cast": [
-        "Leonora Armellini",
-        "Michelle Candotti",
-        "Alexander Gadjiev",
-        "Eva Gevorgyan"
-      ],
-      "countries": [
-        "Czech Republic",
-        "Germany",
-        "Poland"
-      ],
-      "runtime": 91,
-      "genres": [
-        "ドキュメンタリー",
-        "音楽"
-      ]
-    },
-    {
-      "id": 858017,
-      "title": "テレビの中に入りたい",
-      "original_title": "I Saw the TV Glow",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/tZWz3jjrRWBA8va6NYEpANNCtQD.jpg",
-      "score": 6.212,
-      "votes": 800,
-      "overview": "冴えない毎日を過ごすティーンエイジャーのオーウェンにとって、毎週土曜日の22時30分から放送される謎めいたテレビ番組「ピンク・オペーク」は、生きづらい現実を忘れさせてくれる唯一の居場所だった。オーウェンは同じくこの番組に夢中なマディとともに、番組の登場人物と自分たちを重ね合わせるようになっていく。しかしある日、マディはオーウェンの前から姿を消してしまう。ひとり残されたオーウェンは、自分はいったい何者なのか、知りたい気持ちとそれを知ることの怖さとの間で身動きが取れないまま、時間だけが過ぎていく。",
-      "tmdb": "https://www.themoviedb.org/movie/858017",
-      "director": "Jane Schoenbrun",
-      "director_id": 1827119,
-      "cast": [
-        "ジャスティス・スミス",
-        "Jack Haven",
-        "Ian Foreman",
-        "ヘレナ・ハワード"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 100,
-      "genres": [
-        "ドラマ",
-        "ホラー"
-      ]
-    },
-    {
-      "id": 819277,
-      "title": "ブライアン・エプスタイン 世界最高のバンドを育てた男",
-      "original_title": "Midas Man",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/upfHomg9jaHUaSMCqJ63Yg1KF8W.jpg",
-      "score": 6.3,
-      "votes": 33,
-      "overview": "1959年、イギリスのリバプール。ユダヤ系家庭に生まれ育ったブライアン・エプスタインは、祖父が始めた家業の家具店で忙しい毎日を送っていた。熱心に働くブライアンのおかげで家具店は繁盛し、若者文化の広がりを見越して新たに店舗に増設したレコードショップも評判になり、看板部門に成長する。1961年11月、ドイツ・ハンブルクで発売された1枚のレコードが話題を集めていると知ったブライアンは、そのバンドが出演する地下クラブ「キャヴァーン」を訪れる。その4人組バンドは、地元リバプールで結成された、無名に近い20代そこそこの若者たちだった。4人が奏でるそのサウンドに魅了されたブライアンは、彼らを世に出したいと考え、家業の傍らバンドのマネージメントを手がけることを決意。彼らの初代マネージャーから権利を譲り受ける。ステージマナーを教え、衣裳も髪型もととのえ、メジャーデビューのためのレーベルを探し回り、ついにＥＭＩ傘下のパーロフォンから辛くもデビューを遂げると、瞬く間にバンドは世界中でその名を知らぬ者がいないほどの存在になっていく。メンバーの活躍にエプスタインも喜びをあふれさせるが、彼の中にはマネージャーとしての表の顔からはうかがい知れぬ、一個の人間として満たされない思いがあったのだったー。",
-      "tmdb": "https://www.themoviedb.org/movie/819277",
-      "director": "ジョー・スティーヴンソン",
-      "director_id": 1626867,
-      "cast": [
-        "ジェイコブ・フォーチュン=ロイド",
-        "エディ・マーサン",
-        "エミリー・ワトソン",
-        "ブレイク・リチャードソン"
-      ],
-      "countries": [
-        "United Kingdom"
-      ],
-      "runtime": 112,
-      "genres": [
-        "音楽",
-        "ドラマ",
-        "履歴"
-      ]
-    },
-    {
-      "id": 1160981,
-      "title": "君の声を聴かせて",
-      "original_title": "청설",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/wAtXTntLdARqVORhTanOgIlB4dQ.jpg",
-      "score": 7.711,
-      "votes": 45,
-      "overview": "ヨンジュンは大学を卒業したもののやりたいことが見つからず、就職する気になれずにいた。両親が営む弁当屋をしぶしぶ手伝うことになった彼は、配達のため訪れたプールで、手話で会話する女性ヨルムに出会い一目ぼれする。大学時代に習った手話を使ってどうにか彼女に近づこうとするヨンジュンだったが、ヨルムは聴覚障がい者の水泳グループに所属しオリンピックを目指す妹ガウルの夢をかなえるため、多忙な日々を送っていた。",
-      "tmdb": "https://www.themoviedb.org/movie/1160981",
-      "director": "조선호",
-      "director_id": 1827112,
-      "cast": [
-        "홍경",
-        "노윤서",
-        "キム・ミンジュ",
-        "정용주"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 109,
-      "genres": [
-        "ロマンス",
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1128650,
-      "title": "プロセキューター",
-      "original_title": "誤判",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/n3ZnFqp988MWfIkT8OHofEJfjlt.jpg",
-      "score": 7.073,
-      "votes": 239,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1128650",
-      "director": "ドニー・イェン",
-      "director_id": 1341,
-      "cast": [
-        "ドニー・イェン",
-        "フランシス・ン",
-        "張智霖",
-        "鄭則仕"
-      ],
-      "countries": [
-        "China",
-        "Hong Kong"
-      ],
-      "runtime": 117,
-      "genres": [
-        "アクション",
-        "ドラマ",
-        "犯罪",
-        "スリラー"
-      ]
-    },
-    {
-      "id": 857800,
-      "title": "レッド・ツェッペリン：ビカミング",
-      "original_title": "Becoming Led Zeppelin",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/ja3BA6nc9z3nN4SLUJ7HL0OdNlv.jpg",
-      "score": 7.4,
-      "votes": 152,
-      "overview": "60年代末、イギリスで産声を上げたロックバンド「レッド・ツェッペリン」。ジミー・ペイジ、ジョン・ポール・ジョーンズ、ジョン・ボーナム、ロバート・プラント。およそ12年間の活動の中で、彼らが起こした現象はまさに事件であり、予言であり、そして未来であった。デビューアルバムでいきなり世界を熱狂の渦に巻き込んだバンドの出発点にはいったい何があったのか。未公開のジョン・ボーナムの生前音声のほか、メンバーの家族写真や映像、初期のライブシーンなど貴重なアーカイヴ映像とともに、その知られざる歴史を語る証言者はオリジナルメンバーのみ！さらに、部分的ではなく１曲まるごと演奏シーンを映し出すことで、私たちはまるでその場に居合わせたかのようにメンバーの声を聞き、当時のライブをリアルタイムで目撃した感覚になるだろう。4人のメンバーとともに当時を再体感する、まさにユニークにして最高の没入型“映画オデッセイ”である。今、音楽シーンに新たな「伝説」が誕生する！",
-      "tmdb": "https://www.themoviedb.org/movie/857800",
-      "director": "バーナード・マクマホン",
-      "director_id": 1572184,
-      "cast": [
-        "Jimmy Page",
-        "John Paul Jones",
-        "Robert Plant",
-        "John Bonham"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "runtime": 122,
-      "genres": [
-        "ドキュメンタリー",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1233575,
-      "title": "ブラックバッグ",
-      "original_title": "Black Bag",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5EMcEkPTgQuvnLlUw7WYuMiULH8.jpg",
-      "score": 6.377,
-      "votes": 1384,
-      "overview": "イギリスの国家サイバーセキュリティセンター（NCSC）のエリート諜報員ジョージは、世界を揺るがす不正プログラム「セヴェルス」を盗み出した組織内部の裏切り者を見つける極秘任務に乗り出す。容疑者は諜報員のフレディ、ジミー、情報分析官のクラリサ、局内カウンセラーのゾーイ、そしてジョージの愛妻である凄腕諜報員キャスリンの5人。ある夜、ジョージは裏切り者の動向を探るべく、容疑者全員をディナーに招待する。食事に仕込まれた薬とアルコールの効果で、容疑者たちの意外な関係性が浮かび上がるなか、ジョージは彼らにあるゲームを仕掛ける。",
-      "tmdb": "https://www.themoviedb.org/movie/1233575",
-      "director": "スティーヴン・ソダーバーグ",
-      "director_id": 1884,
-      "cast": [
-        "ケイト・ブランシェット",
-        "マイケル・ファスベンダー",
-        "トム・バーク",
-        "マリサ・アベラ"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 94,
-      "genres": [
-        "ドラマ",
-        "謎",
-        "スリラー"
-      ]
-    },
-    {
-      "id": 764842,
-      "title": "殺人配信",
-      "original_title": "스트리밍",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/yyFYasuBuHqS4EoaNmbLhGdvr80.jpg",
-      "score": 4.938,
-      "votes": 16,
-      "overview": "登録者数1位の配信者に広告料が独占的に支払われる仕組みのリアルタイム動画配信サービス「WAG」で、未解決事件を扱う人気犯罪チャンネルを運営している配信者ウサン。しかし、ある配信をきっかけに圧倒的1位を誇った登録者数は激減し、人気は急落。登録者数1位の座を取り戻すため、ウサンは、女性を狙った連続殺人鬼をリアルタイムで追跡する配信を開始する。次々と手がかりを追いながら、プロファイリングで殺人犯の正体に迫っていくウサンだったが、彼に協力した女性配信者が何者かに拉致されたことで、事態は予想外の展開を迎える。",
-      "tmdb": "https://www.themoviedb.org/movie/764842",
-      "director": "Cho Jang-ho",
-      "director_id": 2858165,
-      "cast": [
-        "カン・ハヌル",
-        "하서윤",
-        "강하경",
-        "하현수"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 92,
-      "genres": [
-        "スリラー",
-        "謎",
-        "犯罪"
-      ]
-    },
-    {
-      "id": 1702685,
-      "title": "オオムタアツシの青春",
-      "original_title": "オオムタアツシの青春",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5sc8pX4j1ytM7OR8pVucG1kan3d.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "昭和風情が残る福岡県大牟田市を舞台に、人生につまずいた3人の大人たちが、病気を抱えながらも前向きに生きる少女との出会いを通して再生していく姿を描いた人間ドラマ。  炭鉱文化の名残ある町・大牟田市。パティシエの亜美は洋菓子店をオープンさせるためこの町にやって来たが、共同経営するはずだった友人に見放され、途方に暮れてしまう。そんなある日、下校途中の少女・日菜子が怪我をしたところに居合わせた亜美は、同じく偶然通りかかった青年・司と初老の男性・静男とともに日菜子を病院へ連れていく。この出会いをきっかけに、亜美はお店の内装の手伝いを彼らに依頼する。開店に向けて順調に準備が進んでいるように思えたが、司と静男には、それぞれ誰にも話していない過去があった。  筧美和子が亜美役で長編映画初主演を果たし、過去を隠して見知らぬ土地に来た青年・司を福山翔大、車上生活を送る男性・静男を陣内孝則が演じた。「いのちスケッチ」「ラーメン侍」など地域やグルメをモチーフにした作品を手がけてきた瀬木直貴監督がメガホンをとり、瀬木監督の過去作に出演した小野塚勇人（劇団EXILE）、佐藤寛太、芹澤興人が特別出演。",
-      "tmdb": "https://www.themoviedb.org/movie/1702685",
-      "director": "瀬木直貴",
-      "director_id": 1169477,
-      "cast": [
-        "筧美和子",
-        "福山翔大",
-        "林田麻里",
-        "陣内孝則"
-      ],
-      "countries": [],
-      "runtime": 106,
-      "genres": []
-    },
-    {
-      "id": 1506679,
-      "title": "Aqours Documentary",
-      "original_title": "Aqours Documentary",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/9u1bbhMQBIybVJmwFxIRQs4Y59c.jpg",
-      "score": 9.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1506679",
-      "director": "富樫渉",
-      "director_id": 2326326,
-      "cast": [
-        "伊波杏樹",
-        "斉藤朱夏",
-        "逢田梨香子",
-        "鈴木愛奈"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 114,
-      "genres": [
-        "音楽",
-        "ドキュメンタリー"
-      ]
-    },
-    {
-      "id": 1501242,
-      "title": "俺ではない炎上",
-      "original_title": "俺ではない炎上",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/nAvuksR3eQRok0VAr8Q7gW0o0Ma.jpg",
-      "score": 5.8,
-      "votes": 4,
-      "overview": "大手ハウスメーカーに勤める山縣泰介はある日突然、自分のものと思われるSNSアカウントから女子大生の遺体画像が拡散されたことにより、「殺人犯」としてネット上で名指しされる。  身に覚えのない泰介は無実を訴えるが全く信じてもらえず、瞬く間に泰介のあらゆる個人情報は晒されネット上は大炎上、泰介は日本中から追いかけ回される羽目になってしまう。  泰介は必死の逃亡劇を繰り広げながら、自分を陥れた真犯人を見つけようと奔走する。",
-      "tmdb": "https://www.themoviedb.org/movie/1501242",
-      "director": "山田篤宏",
-      "director_id": 3046232,
-      "cast": [
-        "阿部寛",
-        "芦田愛菜",
-        "藤原大祐",
-        "長尾謙杜"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 125,
-      "genres": [
-        "ドラマ",
-        "謎"
-      ]
-    },
-    {
-      "id": 1450115,
-      "title": "沈黙の艦隊 北極海大海戦",
-      "original_title": "沈黙の艦隊 北極海大海戦",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/apGmN5Q2zEp4UAAdoyJL3ZNeawT.jpg",
-      "score": 8.5,
-      "votes": 30,
-      "overview": "冷たく深い北の海を、モーツァルトを響かせながら潜航する「やまと」。「大」いなる平「和」と名づけられた原子力潜水艦は、国連本部のあるニューヨークへ針路をとる。アメリカとロシアの国境線であるベーリング海峡にさしかかったとき、背後に一隻の潜水艦が迫る。それは「やまと」の性能をはるかに上回るアメリカの最新鋭原潜であった。氷塊が砕ける冷たい北極海で、戦いの幕が切って落とされる。",
-      "tmdb": "https://www.themoviedb.org/movie/1450115",
-      "director": "吉野耕平",
-      "director_id": 2160478,
-      "cast": [
-        "大沢たかお",
-        "上戸彩",
-        "中村蒼",
-        "笹野高史"
-      ],
-      "countries": [
-        "Japan",
-        "United States of America"
-      ],
-      "runtime": 132,
-      "genres": [
-        "戦争"
-      ]
-    },
-    {
-      "id": 1386355,
-      "title": "THE オリバーな犬、(Gosh!!) このヤロウ MOVIE",
-      "original_title": "THE オリバーな犬、(Gosh!!) このヤロウ MOVIE",
-      "date": "2025-09-26",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5Lciwzk5MEktDgU9khLkXmpMaof.jpg",
-      "score": 4.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1386355",
-      "director": "オダギリジョー",
-      "director_id": 63694,
-      "cast": [
-        "オダギリジョー",
-        "池松壮亮",
-        "麻生久美子",
-        "本田翼"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 99,
-      "genres": [
-        "コメディ"
-      ]
-    },
     {
       "id": 1561624,
       "title": "Tiara Azul －Destino－（ティアラ・アスール　ディスティーノ）II",
@@ -16133,6 +15695,30 @@
       ]
     },
     {
+      "id": 1781791,
+      "title": "KNOCK OUT 65 THE KNOCK OUT 2026",
+      "original_title": "KNOCK OUT 65 THE KNOCK OUT 2026",
+      "date": "2026-06-21",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/7MY9hcBPpTKhAQ0RVmMnmHZVubx.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781791",
+      "director": null,
+      "director_id": null,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
       "id": 1727340,
       "title": "もう一人のアリス",
       "original_title": "もう一人のアリス",
@@ -16689,6 +16275,35 @@
       ]
     },
     {
+      "id": 1781511,
+      "title": "RISE 199",
+      "original_title": "RISE 199",
+      "date": "2026-06-28",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/npM190xbtQKsVGxey5Exu6EQwKQ.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781511",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Motoyasu",
+        "Yuya",
+        "Haruka Shimada",
+        "Pancake Sor.Kongprakan"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
       "id": 1718133,
       "title": "Train Window Visions",
       "original_title": "Train Window Visions",
@@ -17181,6 +16796,31 @@
       ]
     },
     {
+      "id": 1781792,
+      "title": "KNOCK OUT MX LIVE",
+      "original_title": "KNOCK OUT MX LIVE",
+      "date": "2026-07-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/rEgZq7TWagk72Mkw4pl4rSTTz2d.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781792",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "軍司泰斗",
+        "Ryoto Kimura",
+        "Kiho",
+        "Yuki Shirayuki"
+      ],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
       "id": 1749852,
       "title": "スーパーの裏でヤニ吸うふたり",
       "original_title": "スーパーの裏でヤニ吸うふたり",
@@ -17484,6 +17124,64 @@
       "countries": [],
       "runtime": 0,
       "genres": []
+    },
+    {
+      "id": 1781513,
+      "title": "RISE 200",
+      "original_title": "RISE 200",
+      "date": "2026-07-12",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/paPtE0IPHgEfTHhc75xIre2zLpL.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781513",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Ryu Hanaoka",
+        "Djillali Kharroubi",
+        "Akito Nakashima",
+        "Taisei Umei"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
+      "id": 1781662,
+      "title": "Lemino修斗.7",
+      "original_title": "Lemino修斗.7",
+      "date": "2026-07-13",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/tIjFSxAkOatYuVH9zH6sAVTg6DI.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781662",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Yoshihiro Koyama",
+        "Caol Uno",
+        "Hiroki Takaoka",
+        "Marwin Quirante"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1734045,
@@ -19727,6 +19425,40 @@
       "checked_at": "2026-09-24T18:29:57.371940+00:00"
     },
     {
+      "id": 1781614,
+      "title": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉",
+      "original_title": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉",
+      "date": "2026-08-28",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/aALwXEhM4dDrci5wBgyN8uxKRxz.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781614",
+      "director": "新房昭之",
+      "director_id": 555094,
+      "cast": [
+        "阿澄佳奈",
+        "加藤英美里",
+        "喜多村英梨",
+        "黒沢ともよ"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 120,
+      "genres": [
+        "アニメーション",
+        "アクション",
+        "アドベンチャー",
+        "ファンタジー",
+        "謎",
+        "ドラマ"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
       "id": 1761076,
       "title": "舞台『龍が如く』-神室町八犬伝-",
       "original_title": "舞台『龍が如く』-神室町八犬伝-",
@@ -19777,6 +19509,35 @@
         "ドキュメンタリー"
       ],
       "checked_at": "2026-09-24T18:29:57.371940+00:00"
+    },
+    {
+      "id": 1781517,
+      "title": "RISE 201",
+      "original_title": "RISE 201",
+      "date": "2026-08-29",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/lojLR6XyLXs3h45XeAKivMsCzF0.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781517",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Kenta Nanbara",
+        "Gunther Kalunda Ngunza",
+        "Mei Miyamoto",
+        "Namwan Sor.Kongkrapan"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 8426,
@@ -20063,6 +19824,26 @@
         "ドキュメンタリー"
       ],
       "checked_at": "2026-09-24T18:29:57.371940+00:00"
+    },
+    {
+      "id": 1781804,
+      "title": "KNOCK OUT 68 KNOCKIN' ON THE WORLD",
+      "original_title": "KNOCK OUT 68 KNOCKIN' ON THE WORLD",
+      "date": "2026-09-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/8Hev8tFdsBLkt1MKCXDHcnJuU4z.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781804",
+      "director": null,
+      "director_id": null,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1744239,
@@ -20972,6 +20753,60 @@
         "ドキュメンタリー"
       ],
       "checked_at": "2026-09-25T18:28:36.466139+00:00"
+    },
+    {
+      "id": 1781808,
+      "title": "KNOCK OUT MX LIVE 2",
+      "original_title": "KNOCK OUT MX LIVE 2",
+      "date": "2026-09-20",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/QR4q0E5CHIMqDz2DOMp4dqoTDo.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781808",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Ryoto Kimura",
+        "Shoya Watanabe",
+        "Raina Watanabe",
+        "Kaewnaka S.thanabowon"
+      ],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
+      "id": 1781670,
+      "title": "Lemino修斗.8",
+      "original_title": "Lemino修斗.8",
+      "date": "2026-09-24",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/jUIxCg53LuQcCmgDeINaoXUfeJt.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781670",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Kanata Nagai",
+        "Nikora Lee-Kingi",
+        "Masuto Kawana",
+        "Tial Thang"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 3009,
@@ -22765,8 +22600,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
-      "score": 8.7,
-      "votes": 135,
+      "score": 8.669,
+      "votes": 136,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "tmdb": "https://www.themoviedb.org/movie/1278101",
       "director": "Yang Lina",
@@ -22784,7 +22619,8 @@
       "genres": [
         "ドラマ",
         "ファミリー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1773014,
@@ -22812,7 +22648,8 @@
       "runtime": 126,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1707282,
@@ -22840,7 +22677,8 @@
       "runtime": 0,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1567149,
@@ -22870,7 +22708,8 @@
         "サイエンスフィクション",
         "アクション",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1527427,
@@ -22898,7 +22737,8 @@
       "genres": [
         "ロマンス",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1313587,
@@ -22907,7 +22747,7 @@
       "date": "2026-11-06",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/gsEYdDLYq2yUXqmnacvMDhgrfv.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -22929,7 +22769,8 @@
         "サイエンスフィクション",
         "アクション",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1755423,
@@ -22956,7 +22797,8 @@
       "genres": [
         "コメディ",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 106378,
@@ -23015,7 +22857,8 @@
       "genres": [
         "コメディ",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 338969,
@@ -23025,8 +22868,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cCWojb6N9UcTzNVtS4bOM3vQ30x.jpg",
-      "score": 5.936,
-      "votes": 443,
+      "score": 5.939,
+      "votes": 446,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/338969",
       "director": "メイコン・ブレア",
@@ -23045,7 +22888,8 @@
         "アクション",
         "コメディ",
         "サイエンスフィクション"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 467905,
@@ -23055,8 +22899,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vxMeKC7o5Gi8IHMi6lUgsdprTqv.jpg",
-      "score": 6.962,
-      "votes": 751,
+      "score": 6.961,
+      "votes": 761,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/467905",
       "director": "John Patton Ford",
@@ -23075,7 +22919,8 @@
       "genres": [
         "コメディ",
         "スリラー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1567605,
@@ -23104,7 +22949,8 @@
       "genres": [
         "ファンタジー",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1759179,
@@ -23133,7 +22979,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1737072,
@@ -23162,7 +23009,8 @@
       "genres": [
         "ホラー",
         "スリラー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1560309,
@@ -23191,7 +23039,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1236857,
@@ -23222,7 +23071,8 @@
         "サイエンスフィクション",
         "アクション",
         "アドベンチャー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1159206,
@@ -23232,8 +23082,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/96O3Ol3f2veMxAxYqsML8rOumB9.jpg",
-      "score": 6.396,
-      "votes": 342,
+      "score": 6.4,
+      "votes": 344,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1159206",
       "director": "ジム・ジャームッシュ",
@@ -23256,7 +23106,8 @@
       "genres": [
         "コメディ",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1411577,
@@ -23285,7 +23136,8 @@
       "genres": [
         "ファンタジー",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1400837,
@@ -23313,7 +23165,8 @@
       "runtime": 93,
       "genres": [
         "ホラー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1767360,
@@ -23341,7 +23194,8 @@
       "runtime": 101,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1754757,
@@ -23369,7 +23223,8 @@
       "runtime": 93,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1746633,
@@ -23395,7 +23250,8 @@
       "runtime": 82,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1724371,
@@ -23422,7 +23278,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1694711,
@@ -23453,7 +23310,8 @@
         "サイエンスフィクション",
         "アクション",
         "戦争"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 920167,
@@ -23483,7 +23341,8 @@
         "アニメーション",
         "ドラマ",
         "ファンタジー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1457866,
@@ -23514,7 +23373,8 @@
         "ドラマ",
         "コメディ",
         "スリラー"
-      ]
+      ],
+      "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
       "id": 1368166,

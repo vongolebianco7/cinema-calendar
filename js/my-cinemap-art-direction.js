@@ -93,10 +93,17 @@
 
   function decorateThemePreviews(){document.querySelectorAll('.templatePreview:not(.cinemaTemplatePreview)').forEach(preview=>{if(preview.querySelector('.previewDecor'))return;const decor=document.createElement('span');decor.className='previewDecor';decor.setAttribute('aria-hidden','true');preview.prepend(decor)})}
   function markEditorRanking(){document.getElementById('list')?.classList.add('editorRankingFixedTwoColumn')}
-  function mount(){mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();hydrateMissingDirectors();render();markEditorRanking()}
+  function bindExportControlsToEnhancedRender(){
+    ['format','layout'].forEach(id=>{
+      const control=document.getElementById(id);
+      if(!control)return;
+      control.onchange=()=>{render();markEditorRanking()};
+    });
+  }
+  function mount(){mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
 
   const renderer=document.createElement('script');
   renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v2';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
-  window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking};
+  window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender};
 })();

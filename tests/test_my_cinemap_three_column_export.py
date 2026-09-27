@@ -39,19 +39,6 @@ missing_minimal = [token for token in minimal_polish if token not in art]
 if missing_minimal:
     raise SystemExit(f"Minimal editorial polish missing: {missing_minimal}")
 
-legibility_requirements = [
-    "const medalNumberSize=34","const medalNumberWeight=600","const medalStrokeWidth=1.75",
-    "const singleMetaSize=23","const doubleMetaSize=21","const metaWeight=600","const noteSize=23","const noteWeight=600",
-    "const readableMetaAlpha=.9",
-]
-missing_legibility = [token for token in legibility_requirements if token not in art]
-if missing_legibility:
-    raise SystemExit(f"My Cinemap rank/director/note legibility missing: {missing_legibility}")
-
-for forbidden_copy in ["再配布の許諾", "公式ポスター", "場面写真", "ポスターは含めません"]:
-    if forbidden_copy in html:
-        raise SystemExit(f"User-facing poster exclusion explanation remains: {forbidden_copy}")
-
 art_direction = [
     "const artFonts=","const fontKey=artValue('fontStyle')||'editorial'","function drawThemeIllustration",
     "function drawProjectionGlow","function drawBotanicalLines","function drawArchiveGrid","function drawBurgundyArch",

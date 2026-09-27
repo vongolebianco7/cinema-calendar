@@ -12,8 +12,9 @@ class BoxOfficeCountryBucketTests(unittest.TestCase):
         self.assertIn('return "アメリカ"', text)
         self.assertIn('return "アジア"', text)
         self.assertIn('return "ヨーロッパ"', text)
-        self.assertIn('const regions=["すべて","日本","海外","アメリカ","アジア","ヨーロッパ","その他"]', text)
-        self.assertIn('row.region==="洋画"?"海外"', text)
+        self.assertIn('const regions=["すべて","日本","アメリカ","アジア","ヨーロッパ","その他"]', text)
+        self.assertNotIn('boxRegion==="海外"', text)
+        self.assertIn('return row.region==="邦画"?"日本":"その他"}', text)
 
 if __name__ == "__main__":
     unittest.main()

@@ -10,7 +10,7 @@
     rating:[['default','ランキング順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-desc','評価：高い順'],['score-asc','評価：低い順'],['votes-desc','評価件数順'],['title-asc','作品名順']],
     boxoffice:[['default','興収順'],['year-desc','集計年：新しい順'],['year-asc','集計年：古い順'],['gross-desc','興収：高い順'],['title-asc','作品名順']],
     awards:[['default','元の表示順'],['year-desc','授賞年：新しい順'],['year-asc','授賞年：古い順'],['title-asc','作品名順'],['organization-asc','賞・映画祭順']],
-    tv:[['default','放送順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-desc','評価：高い順'],['title-asc','作品名順'],['channel-asc','放送局順']]
+    tv:[['default','放送順'],['score-desc','評価：高い順'],['title-asc','作品名順'],['channel-asc','放送局順']]
   };
   const key=()=>page==='rankings.html'?document.querySelector('[data-axis].active')?.dataset.axis||'rating':page==='index.html'?'tv':page.replace('.html','');
   const controls=document.createElement('div');controls.className='movieGridSort';

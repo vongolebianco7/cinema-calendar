@@ -58,5 +58,5 @@
   });
   $('reset').addEventListener('click',()=>{if(confirm('すべての視聴記録を削除しますか？ この操作は元に戻せません。')){store.clear();history.replaceState(null,'','my-records.html?view=add');show();}});
   store.subscribe(show);
-  fetch('data/onboarding-films.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(data=>{films=data.films;show();}).catch(()=>{$('loadError').textContent='作品データを読み込めませんでした。再読み込みしてください。';$('dashboard').hidden=false;});
+  fetch('data/onboarding-films.json?v=20260927-editorial-v2').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(data=>{films=data.films;show();}).catch(()=>{$('loadError').textContent='作品データを読み込めませんでした。再読み込みしてください。';$('dashboard').hidden=false;});
 })();

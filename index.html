@@ -243,7 +243,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinemap v0.4.73</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
-<script src="js/calendar-context.js"></script><script>
+<script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
 const services=["すべて","劇場公開",...STREAMING_SERVICES];
 let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
@@ -874,7 +874,7 @@ async function fastInitialCalendarPaint(){
   const d=await r.json();
   const firstMovies=d.movies||[];
   if(!firstMovies.length)return;
-  movies=firstMovies;
+  movies=CinemapCalendarDedupe.dedupe(firstMovies);
   applyRevivalClassification();
   render();
  }catch(e){console.warn("fast calendar paint unavailable",e)}
@@ -890,7 +890,7 @@ if(mode==="streaming"&&active!=="すべて"){
   const inWindow=m=>{if(m.event!=="streaming"||!m.date)return false;const d=new Date(m.date+"T00:00:00");return d>=ws&&d<=we};
   if(movies.some(inWindow)&&!movies.some(m=>inWindow(m)&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
 }
-if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}applyRevivalClassification();await hydrateMorningTenPosters();render();const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
+if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}movies=CinemapCalendarDedupe.dedupe(movies);applyRevivalClassification();await hydrateMorningTenPosters();render();const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#gDrawer").classList.add("show");$("#gDrawerMask").classList.add("show")}function closeDrawer(){$("#gDrawer").classList.remove("show");$("#gDrawerMask").classList.remove("show")}$("#gMenuBtn").onclick=openDrawer;$("#gDrawerClose").onclick=closeDrawer;$("#gDrawerMask").onclick=closeDrawer;
 renderCoverage();boot();
 </script><script>

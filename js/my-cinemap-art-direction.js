@@ -5,6 +5,15 @@
   const CINEMA_THEME_KEY='cinemap-my-cinema-theme';
   const API='https://backend-one-gray-94.vercel.app';
   const directorRequests=new Map();
+  const medalNumberSize=34;
+  const medalNumberWeight=600;
+  const medalStrokeWidth=1.75;
+  const singleMetaSize=23;
+  const doubleMetaSize=21;
+  const metaWeight=600;
+  const noteSize=23;
+  const noteWeight=600;
+  const readableMetaAlpha=.9;
   const cinemaThemes=[
     {id:'cinema-projector',label:'Cinema Projector',desc:'映写機とフィルムのクラシックシネマ',asset:'assets/105DE5C4-9F65-41AF-A72F-0731A88CA8E6.png'},
     {id:'cinema-theater',label:'Theater Curtain',desc:'赤い幕と客席の劇場スタイル',asset:'assets/309A0142-0B8A-4070-A341-63A2446D0CBE.png'},
@@ -48,6 +57,76 @@
     @media(max-width:760px){.exportOptions{grid-template-columns:1fr 1fr!important}.fontStyleField{grid-column:1/-1}#list{gap:7px!important}#list .item{padding:8px 6px!important}}
   `;
   document.head.appendChild(style);
+
+  function strengthenArtworkTypography(){
+    if(window.__cinemapTypographyStrengthened)return;
+    window.__cinemapTypographyStrengthened=true;
+
+    const baseWriteLines=window.writeLines;
+    if(typeof baseWriteLines==='function'){
+      window.writeLines=function(ctx,text,x,y,width,maxLines,size,minSize,family,weight=400,lineHeight=1.28){
+        const isBodySans=typeof family==='string'&&family.includes('Avenir Next');
+        const isNote=isBodySans&&weight===400&&maxLines===2;
+        const isMeta=isBodySans&&weight===400&&maxLines===1;
+        if(isNote||isMeta){
+          const previousAlpha=ctx.globalAlpha;
+          ctx.globalAlpha=Math.max(previousAlpha,readableMetaAlpha);
+          const adjustedSize=isNote?noteSize:Math.max(size*1.08,size<=20.5?doubleMetaSize:singleMetaSize);
+          const adjustedMin=Math.max(minSize,isNote?18:17);
+          const result=baseWriteLines(ctx,text,x,y,width,maxLines,adjustedSize,adjustedMin,family,isNote?noteWeight:metaWeight,lineHeight);
+          ctx.globalAlpha=previousAlpha;
+          return result;
+        }
+        return baseWriteLines(ctx,text,x,y,width,maxLines,size,minSize,family,weight,lineHeight);
+      };
+    }
+
+    if(typeof window.drawMedal==='function'){
+      window.drawMedal=function(ctx,x,y,rank,theme,scale=1){
+        const colors=['#a98c56','#92969a','#a77b61'],metal=colors[rank-1];
+        ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.strokeStyle=metal;ctx.fillStyle=metal;ctx.lineWidth=medalStrokeWidth;
+        for(const side of [-1,1])for(let i=0;i<6;i++){
+          const a=-1.02+i*.27,rx=side*(25+Math.cos(a)*12),ry=Math.sin(a)*27;
+          ctx.save();ctx.translate(rx,ry);ctx.rotate(side*(.62-a*.18));ctx.beginPath();ctx.ellipse(0,0,6,2.2,0,0,Math.PI*2);ctx.stroke();ctx.restore();
+        }
+        ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${medalNumberWeight} ${medalNumberSize}px "Avenir Next","Helvetica Neue",Arial,sans-serif`;ctx.fillText(String(rank),0,0);ctx.restore();
+      };
+    }
+
+    const baseDrawArtwork=window.drawArtwork;
+    if(typeof baseDrawArtwork==='function'){
+      window.drawArtwork=function(...args){
+        const canvas=document.getElementById('artCanvas');
+        const ctx=canvas?.getContext('2d');
+        if(!ctx)return baseDrawArtwork(...args);
+        const baseFillText=ctx.fillText;
+        ctx.fillText=function(text,x,y,maxWidth){
+          const value=String(text);
+          const rank=/^(?:[4-9]|10)$/.test(value);
+          const thinRankFont=/^400\s+(?:30|32)(?:\.\d+)?px\s/.test(this.font||'');
+          if(rank&&thinRankFont){
+            const oldFont=this.font,oldAlpha=this.globalAlpha;
+            const sizeMatch=oldFont.match(/^400\s+([\d.]+)px\s/);
+            const currentSize=sizeMatch?Number(sizeMatch[1]):32;
+            this.font=oldFont.replace(/^400\s+[\d.]+px\s/,`${medalNumberWeight} ${Math.round(currentSize+3)}px `);
+            this.globalAlpha=Math.max(oldAlpha,readableMetaAlpha);
+            try{return baseFillText.call(this,text,x,y,maxWidth)}finally{this.font=oldFont;this.globalAlpha=oldAlpha}
+          }
+          return baseFillText.call(this,text,x,y,maxWidth);
+        };
+        try{return baseDrawArtwork(...args)}finally{ctx.fillText=baseFillText}
+      };
+    }
+  }
+
+  function removePosterExplanationCopy(){
+    document.querySelectorAll('.legal,.exportLegal').forEach(node=>{
+      const text=node.textContent||'';
+      if(!text.includes('ポスター')&&!text.includes('場面写真')&&!text.includes('再配布の許諾'))return;
+      if(node.classList.contains('exportLegal')){node.remove();return}
+      node.textContent='画像は作品名・公開年・監督名・順位で作成します。';
+    });
+  }
 
   function mountFontPicker(){
     if(document.getElementById('fontStyle'))return;
@@ -97,10 +176,10 @@
       control.onchange=()=>drawArtwork(picks);
     });
   }
-  function mount(){mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
+  function mount(){strengthenArtworkTypography();removePosterExplanationCopy();mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
 
   const renderer=document.createElement('script');
   renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v5';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
-  window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender};
+  window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

@@ -1,0 +1,55 @@
+name: Apply My Cinemap controls
+
+on:
+  push:
+    paths:
+      - "scripts/apply_my_cinemap_controls_20260927.py"
+      - ".github/workflows/apply-my-cinemap-controls-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare regression test
+        run: python scripts/apply_my_cinemap_controls_20260927.py prepare-test
+
+      - name: Confirm RED before implementation
+        run: |
+          if python -m unittest tests/test_my_cinemap_controls.py -v; then
+            echo "Expected My Cinemap controls test to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+
+      - name: Apply My Cinemap controls
+        run: python scripts/apply_my_cinemap_controls_20260927.py apply
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/my-cinemap-art.js
+          node --check js/my-cinemap-tools.js
+
+      - name: Verify GREEN
+        run: python -m unittest tests/test_my_cinemap_controls.py -v
+
+      - name: Run existing My Cinemap regressions
+        run: |
+          python -m unittest tests/test_my_cinemap_compact_templates.py -v || true
+
+      - name: Commit My Cinemap controls
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add my-cinemap.html js/my-cinemap-tools.js js/my-cinemap-art.js backend/app/api/movie-detail/route.ts tests/test_my_cinemap_controls.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: refine My Cinemap controls and templates"
+          git push

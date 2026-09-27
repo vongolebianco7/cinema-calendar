@@ -118,6 +118,34 @@ function drawThemeIllustration(ctx,w,h,theme,p){
   if(theme==='bluegray'){drawArchiveGrid(ctx,w,h,p)}
 }
 
+function drawCinemaBackground(ctx,w,h,kind){
+  if(!kind||kind==='none')return;
+  ctx.save();
+  const dark=kind!=='projector';
+  ctx.fillStyle=dark?'#0d1014':'#efe5d2';ctx.fillRect(0,0,w,h);
+  if(kind==='projector'){
+    const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,'#f4ead8');g.addColorStop(.55,'#d7c09b');g.addColorStop(1,'#8a6a48');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(55,39,27,.38)';ctx.beginPath();ctx.arc(w*.14,h*.84,110,0,Math.PI*2);ctx.arc(w*.27,h*.84,86,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,244,213,.28)';ctx.beginPath();ctx.moveTo(w*.28,h*.79);ctx.lineTo(w*.9,h*.32);ctx.lineTo(w*.9,h*.68);ctx.closePath();ctx.fill();
+  }else if(kind==='theater'){
+    ctx.fillStyle='#08131e';ctx.fillRect(0,0,w,h);ctx.fillStyle='#6d171d';ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(w*.25,0);ctx.lineTo(w*.17,h);ctx.lineTo(0,h);ctx.fill();ctx.beginPath();ctx.moveTo(w,0);ctx.lineTo(w*.75,0);ctx.lineTo(w*.83,h);ctx.lineTo(w,h);ctx.fill();
+    ctx.strokeStyle='rgba(213,170,88,.5)';ctx.lineWidth=5;ctx.strokeRect(w*.23,h*.08,w*.54,h*.84);
+  }else if(kind==='artdeco'){
+    ctx.fillStyle='#080909';ctx.fillRect(0,0,w,h);ctx.strokeStyle='rgba(202,161,78,.58)';ctx.lineWidth=3;
+    for(let i=0;i<5;i++){ctx.strokeRect(65+i*18,65+i*18,w-130-i*36,h-130-i*36)}
+    ctx.beginPath();ctx.moveTo(w*.18,h*.18);ctx.lineTo(w*.5,h*.05);ctx.lineTo(w*.82,h*.18);ctx.stroke();
+  }else if(kind==='archive'){
+    ctx.fillStyle='#15120f';ctx.fillRect(0,0,w,h);ctx.strokeStyle='rgba(211,180,128,.38)';ctx.lineWidth=8;
+    for(const x of [w*.15,w*.82]){ctx.beginPath();ctx.arc(x,h*.22,95,0,Math.PI*2);ctx.stroke();for(let i=0;i<6;i++){const a=i*Math.PI/3;ctx.beginPath();ctx.arc(x+Math.cos(a)*52,h*.22+Math.sin(a)*52,20,0,Math.PI*2);ctx.stroke()}}
+    ctx.fillStyle='rgba(244,219,171,.10)';ctx.beginPath();ctx.moveTo(w*.2,h*.3);ctx.lineTo(w*.8,h*.48);ctx.lineTo(w*.8,h*.68);ctx.closePath();ctx.fill();
+  }else if(kind==='screening'){
+    ctx.fillStyle='#10131a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#e6ddca';ctx.fillRect(w*.2,h*.12,w*.6,h*.34);
+    ctx.fillStyle='#42191c';for(let r=0;r<5;r++)for(let i=0;i<8;i++){ctx.beginPath();ctx.roundRect(w*.13+i*w*.095,h*.58+r*58,90,38,8);ctx.fill()}
+    const g=ctx.createLinearGradient(w*.5,h*.46,w*.5,h);g.addColorStop(0,'rgba(232,211,165,.16)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,h*.44,w,h*.56);
+  }
+  ctx.fillStyle=dark?'rgba(0,0,0,.34)':'rgba(255,248,235,.24)';ctx.fillRect(0,0,w,h);ctx.restore();
+}
+
 function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal,dark=!!p.dark,isMinimal=theme==='minimal';
   const fg=dark?'#fbf6ed':p.fg,outline=dark?'rgba(239,230,216,.86)':p.border,tagline=dark?'#cbbca6':p.muted;
@@ -143,7 +171,9 @@ function drawArtwork(movies){
   const columns=layout==='double'?2:1;
   const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
   ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,sage:drawSage,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
-  drawThemeIllustration(ctx,w,h,theme,p);
+  const cinemaBackground=artValue('cinemaBackground')||'none';
+  drawCinemaBackground(ctx,w,h,cinemaBackground);
+  if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
   const title=artValue('title').trim()||'MY TOP OF 2026';
   ctx.textAlign='center';
@@ -195,7 +225,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-art-direction-v1';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

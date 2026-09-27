@@ -81,7 +81,9 @@ function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
-  const w=c.width,h=c.height,columns=layout==='double'?2:1,metrics=layoutMetrics(shape,columns),pad=metrics.pad,inner=w-2*pad;
+  const w=c.width,h=c.height;
+  const columns=layout==='double'?2:1;
+  const metrics=layoutMetrics(shape,columns),pad=metrics.pad,inner=w-2*pad;
   ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,sage:drawSage,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
   const title=artValue('title').trim()||'MY TOP OF 2026';
@@ -91,7 +93,9 @@ function drawArtwork(movies){
   let listTop=Math.max(metrics.listTop,metrics.titleY+titleHeight+58);
   if(note){ctx.fillStyle=p.muted;writeLines(ctx,note,w/2,metrics.titleY+titleHeight+20,inner*.78,2,21,17,artSans,400);ctx.fillStyle=p.fg;listTop=Math.max(listTop,metrics.titleY+titleHeight+76)}
   ctx.textAlign='left';
-  const items=(movies||[]).slice(0,10),rows=columns===2?5:10,gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=metrics.rowH;
+  const items=(movies||[]).slice(0,10);
+  const rows=columns===2?5:10;
+  const gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=metrics.rowH;
   const listBottom=listTop+rows*rowH;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
   items.forEach((m,i)=>{

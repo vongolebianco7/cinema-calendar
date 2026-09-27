@@ -1,0 +1,57 @@
+name: Apply awards 2010-2022 backfill
+
+on:
+  push:
+    paths:
+      - "scripts/apply_awards_2010_2022_backfill_20260927.py"
+      - ".github/workflows/apply-awards-2010-2022-backfill-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare awards coverage regression test
+        run: python scripts/apply_awards_2010_2022_backfill_20260927.py prepare-tests
+
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_awards_2010_2022_coverage.py; then
+            echo "Expected awards coverage test to fail before the backfill." >&2
+            exit 1
+          fi
+          echo "RED confirmed: 2010-2022 coverage is incomplete."
+
+      - name: Backfill verified major award winners
+        run: python scripts/apply_awards_2010_2022_backfill_20260927.py apply
+
+      - name: Verify awards regression test
+        run: python tests/test_awards_2010_2022_coverage.py
+
+      - name: Validate awards JSON
+        run: python -m json.tool data/awards.json >/dev/null
+
+      - name: Run repository Python regression suite
+        run: |
+          failed=0
+          for t in tests/test_*.py; do
+            echo "==> $t"
+            python "$t" || failed=1
+          done
+          exit "$failed"
+
+      - name: Commit awards backfill
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/awards.json rankings.html tests/test_awards_2010_2022_coverage.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: backfill major awards from 2010 through 2022"
+          git push

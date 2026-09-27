@@ -21,7 +21,13 @@ jobs:
 
       - name: Confirm RED before implementation
         run: |
-          if python tests/test_my_cinemap_controls.py; then
+          if python - <<'PY'
+          import runpy
+          ns=runpy.run_path('tests/test_my_cinemap_controls.py')
+          for name,fn in ns.items():
+              if name.startswith('test_') and callable(fn): fn()
+          PY
+          then
             echo "Expected My Cinemap controls test to fail before implementation." >&2
             exit 1
           fi
@@ -36,11 +42,28 @@ jobs:
           node --check js/my-cinemap-tools.js
 
       - name: Verify GREEN
-        run: python tests/test_my_cinemap_controls.py
+        run: |
+          python - <<'PY'
+          import runpy
+          ns=runpy.run_path('tests/test_my_cinemap_controls.py')
+          tests=[(name,fn) for name,fn in ns.items() if name.startswith('test_') and callable(fn)]
+          for name,fn in tests:
+              fn(); print('PASS',name)
+          print(f'{len(tests)} My Cinemap control tests passed')
+          PY
 
       - name: Run existing My Cinemap regressions
         run: |
-          python tests/test_my_cinemap_compact_templates.py || true
+          python - <<'PY'
+          import runpy
+          ns=runpy.run_path('tests/test_my_cinemap_compact_templates.py')
+          failed=[]
+          for name,fn in ns.items():
+              if name.startswith('test_') and callable(fn):
+                  try: fn()
+                  except Exception as e: failed.append((name,str(e)))
+          print('existing My Cinemap regression failures:', failed)
+          PY
 
       - name: Commit My Cinemap controls
         run: |

@@ -3,6 +3,14 @@
   'use strict';
   const model = root.CinemapUniverseModel;
   const baseGenres = ['SF','ドラマ','スリラー','コメディ','アニメ','アクション','ロマンス','ホラー','ミステリー','ファンタジー','クライム','アドベンチャー'];
+  // Slots belong to genres, not to the user's records. Adding a film never moves an existing galaxy.
+  const galaxySlot = genre => {
+    const index=baseGenres.indexOf(genre);
+    if(index>=0)return index;
+    const named=['歴史','戦争','音楽','ドキュメンタリー','西部劇','ファミリー','情報未取得'];
+    const extra=named.indexOf(genre);
+    return extra>=0?baseGenres.length+extra:baseGenres.length+named.length+((model.position('genre:'+genre).x*37+model.position('genre:'+genre).y)%16);
+  };
   const state = {genre:null,director:null,film:null};
   let catalog=[], records={};
   const esc = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,18 +34,17 @@
   function farView() {
     const films=known(), rated=films.filter(f=>records[String(f.id)]?.rating!=null).length;
     const stage=rated>=20?'本格Universe':rated>=10?'仮Universe':'形成中';
-    const groups=visibleGenres().map((genre,index)=>({genre,index,matching:films.filter(f=>inGenre(f,genre))}));
-    const card=({genre,index,matching})=>{
+    const groups=visibleGenres().map(genre=>({genre,index:galaxySlot(genre),matching:films.filter(f=>inGenre(f,genre))}));
+    const node=({genre,index,matching})=>{
       const p=model.position('genre:'+genre);
-      const posters=matching.slice(0,3).map(f=>f.poster?'<img src="'+esc(f.poster)+'" alt="" loading="lazy">':'').join('');
-      return '<button type="button" class="universeGalaxy'+(matching.length?'':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+'" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。監督と作品を見る"><span class="galaxyCloud"></span><strong>'+esc(genre)+' <span class="galaxyType">銀河</span></strong><span class="galaxyCount">'+(matching.length?'観た作品 '+matching.length+'本':'記録はまだありません')+'</span>'+(matching.length?'<span class="galaxyPosters">'+posters+'</span><span class="galaxyExample">'+esc(matching[0].title)+(matching.length>1?' ほか':'')+'</span><span class="galaxyAction">監督と作品を見る →</span>':'')+'</button>';
+      return '<button type="button" class="universeGalaxy'+(matching.length?' universeGalaxy--known':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+';--galaxy-x:'+(12.5+(index%4)*25)+'%;--galaxy-y:'+(122+Math.floor(index/4)*215)+'px;--mobile-x:'+(25+(index%2)*50)+'%;--mobile-y:'+(95+Math.floor(index/2)*157)+'px" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。銀河へ入る"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><span class="galaxyCount">'+(matching.length?matching.length+'作品 · 銀河へ':'記録なし')+'</span></button>';
     };
-    const explored=groups.filter(g=>g.matching.length).sort((a,b)=>b.matching.length-a.matching.length||a.index-b.index);
-    const unexplored=groups.filter(g=>!g.matching.length);
-    const nodes=explored.map(card).join('');
-    const hidden='<details class="universeUnexplored"><summary>まだ記録のないジャンルを見る · '+unexplored.length+'銀河</summary><div class="universeGalaxies universeGalaxies--empty">'+unexplored.map(card).join('')+'</div><p>未登録は「観ていない」という意味ではありません。</p></details>';
+    const explored=groups.filter(g=>g.matching.length);
+    const visible=groups.filter(g=>g.index<12||g.matching.length);
+    const lastSlot=Math.max(11,...visible.map(g=>g.index));
+    const map='<div class="universeMap" role="group" aria-label="あなたの映画宇宙。銀河を選んで監督と作品を見る" style="--map-height:'+(Math.floor(lastSlot/4)+1)*215+'px;--map-mobile-height:'+(Math.floor(lastSlot/2)+1)*157+'px"><div class="universeMapHaze" aria-hidden="true"></div>'+visible.map(node).join('')+'<span class="universeMapCaption">'+explored.length+'銀河が育っています · '+films.length+'作品を記録</span></div>';
     const suggestions=model.recommend(records,catalog,3);
-    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>観た映画がジャンルごとに集まります。好きな銀河を開いて、監督と作品をたどれます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div><div class="universeGuide"><strong>この宇宙の見方</strong><span>銀河＝代表ジャンル → 恒星＝監督 → 惑星＝作品</span><small>作品は代表ジャンルの銀河に1回だけ並びます。5.0は強く光り、暗い惑星は未登録の候補です。</small></div><div class="universeSectionHead universeFarHeading"><h3>あなたが記録したジャンル</h3><p>ポスターのある銀河をタップして、作品を見てみましょう。</p></div>'+(nodes?'<div class="universeGalaxies universeGalaxies--recorded">'+nodes+'</div>':'<div class="universeStart"><p>まだ作品がありません。映画を評価すると、この場所にあなたの銀河が生まれます。</p><a href="my-records.html?view=add">映画を記録する →</a></div>')+hidden+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
+    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>ひとつの宇宙に、映画のジャンルが銀河として広がります。銀河に触れると監督と作品へ近づきます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div>'+map+'<div class="universeGuide"><strong>宇宙の歩き方</strong><span>銀河を選ぶ → 監督の星系 → 作品の惑星</span><small>明るい銀河には記録があり、暗い銀河にはまだ記録がありません。未登録は未鑑賞を意味しません。作品は代表ジャンルに一度だけ現れます。</small></div>'+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
   }
   function middleView() {
     const genre=state.genre;

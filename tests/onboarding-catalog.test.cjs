@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const data = require('../data/onboarding-films.json');
+const films = data.films;
+assert.equal(films.length,100,'fixed denominator must be exactly 100');
+assert.equal(new Set(films.map(m=>m.id)).size,100,'no duplicated title ID');
+assert.ok(films.every(m=>m.title && m.poster && Number.isInteger(m.year)));
+const regions=new Set(films.map(m=>m.region));
+assert.ok(regions.has('日本') && regions.has('海外映画'));
+assert.ok(new Set(films.map(m=>Math.floor(m.year/10))).size>=7,'decades vary');
+assert.ok(new Set(films.flatMap(m=>m.genres)).size>=8,'genres vary');
+console.log('100-film fixed catalog, IDs, regions, decades and genres passed');

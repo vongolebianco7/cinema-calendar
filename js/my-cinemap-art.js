@@ -222,7 +222,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-live-v13';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v4';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-contrast-refresh-v3';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

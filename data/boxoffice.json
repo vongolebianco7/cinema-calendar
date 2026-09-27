@@ -42,6 +42,12 @@
       "url": "https://www.eiren.org/toukei/data.html",
       "as_of": "2026-09-27",
       "note": "1980-1999は配給収入、2000年以降は興行収入。1980-2010は各年HTML、2011-2019は映連公式PDFから静的取得。"
+    },
+    {
+      "name": "年代流行 年別映画ランキング（不足年のTop10補完）",
+      "url": "https://nendai-ryuukou.com/",
+      "as_of": "2026-09-27",
+      "note": "映連の公開上位作品だけでは国内/国外各10本に満たない年について、年別ランキングで不足分のみ補完。映連データを優先。"
     }
   ],
   "all_time": [
@@ -1322,6 +1328,15 @@
         "region": "邦画"
       },
       {
+        "title": "ARASHI Anniversary Tour 5×20 FILM “Record of Memories”",
+        "gross": 45.5,
+        "year": 2021,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie1.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "東京リベンジャーズ",
         "gross": 45.0,
         "region": "邦画"
@@ -1362,9 +1377,63 @@
         "region": "洋画"
       },
       {
+        "title": "モンスターハンター",
+        "gross": 12.5,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "DUNE／デューン 砂の惑星",
         "gross": 11.2,
         "region": "洋画"
+      },
+      {
+        "title": "エターナルズ",
+        "gross": 11.0,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "シャン・チー/テン・リングスの伝説",
+        "gross": 9.6,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ブラック・ウィドウ",
+        "gross": 8.6,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ジャングル・クルーズ",
+        "gross": 8.0,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "トムとジェリー",
+        "gross": 7.8,
+        "year": 2021,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2021/movie2.html",
+        "source_kind": "supplement"
       }
     ],
     "2020": [
@@ -1374,9 +1443,46 @@
         "region": "邦画"
       },
       {
+        "title": "劇場版 鬼滅の刃 無限列車編",
+        "gross": 311.7,
+        "year": 2020,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie1.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "スター・ウォーズ／スカイウォーカーの夜明け",
+        "gross": 73.2,
+        "region": "洋画"
+      },
+      {
+        "title": "スター・ウォーズ スカイウォーカーの夜明け",
+        "gross": 72.7,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "今日から俺は!!劇場版",
         "gross": 53.7,
         "region": "邦画"
+      },
+      {
+        "title": "今日から俺は!! 劇場版",
+        "gross": 53.7,
+        "year": 2020,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie1.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "パラサイト 半地下の家族",
+        "gross": 47.4,
+        "region": "洋画"
       },
       {
         "title": "コンフィデンスマンJP プリンセス編",
@@ -1387,6 +1493,20 @@
         "title": "映画ドラえもん のび太の新恐竜",
         "gross": 33.5,
         "region": "邦画"
+      },
+      {
+        "title": "TENET テネット",
+        "gross": 27.3,
+        "region": "洋画"
+      },
+      {
+        "title": "STAND BY ME ドラえもん 2",
+        "gross": 27.1,
+        "year": 2020,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie1.html",
+        "source_kind": "supplement"
       },
       {
         "title": "事故物件 恐い間取り",
@@ -1404,19 +1524,58 @@
         "region": "邦画"
       },
       {
-        "title": "TENET テネット",
-        "gross": 27.3,
-        "region": "洋画"
+        "title": "キャッツ",
+        "gross": 12.8,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
       },
       {
-        "title": "パラサイト 半地下の家族",
-        "gross": 47.4,
-        "region": "洋画"
+        "title": "フォードvsフェラーリ",
+        "gross": 9.0,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
       },
       {
-        "title": "スター・ウォーズ／スカイウォーカーの夜明け",
-        "gross": 73.2,
-        "region": "洋画"
+        "title": "ジュマンジ ネクスト・レベル",
+        "gross": 8.6,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "2分の1の魔法",
+        "gross": 8.0,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "1917 命をかけた伝令",
+        "gross": 7.9,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ミッドサマー",
+        "gross": 7.0,
+        "year": 2020,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://nendai-ryuukou.com/2020/movie2.html",
+        "source_kind": "supplement"
       }
     ],
     "2019": [
@@ -10173,12 +10332,30 @@
         "source_url": "https://www.eiren.org/toukei/1999.html"
       },
       {
+        "title": "ポケットモンスター 幻のポケモン・ルギア爆誕",
+        "gross": 35.0,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1999.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "リング2 / 死国",
         "gross": 21.0,
         "year": 1999,
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1999.html"
+      },
+      {
+        "title": "リング2",
+        "gross": 21.0,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1999.html",
+        "source_kind": "supplement"
       },
       {
         "title": "鉄道員 (ぽっぽや)",
@@ -10195,6 +10372,24 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1999.html"
+      },
+      {
+        "title": "鉄道員(ぽっぽや)",
+        "gross": 20.0,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1999.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ドラえもん のび太の宇宙漂流記",
+        "gross": 20.0,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1999.html",
+        "source_kind": "supplement"
       },
       {
         "title": "ハムナプトラ 失われた砂漠の都",
@@ -10317,6 +10512,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1998.html"
+      },
+      {
+        "title": "ポケットモンスター ミュウツーの逆襲",
+        "gross": 41.5,
+        "year": 1998,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1998.html",
+        "source_kind": "supplement"
       },
       {
         "title": "メン・イン・ブラック",
@@ -10521,6 +10725,15 @@
         "source_url": "https://www.eiren.org/toukei/1997.html"
       },
       {
+        "title": "ドラえもん のび太のねじ巻き都市冒険記",
+        "gross": 20.0,
+        "year": 1997,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1997.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "スターウォーズ(3部作)",
         "gross": 19.0,
         "year": 1997,
@@ -10551,6 +10764,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1997.html"
+      },
+      {
+        "title": "新世紀エヴァンゲリオン劇場版",
+        "gross": 14.5,
+        "year": 1997,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1997.html",
+        "source_kind": "supplement"
       },
       {
         "title": "身代金",
@@ -10599,6 +10821,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1997.html"
+      },
+      {
+        "title": "新世紀エヴァンゲリオン劇場版 シト新生",
+        "gross": 11.0,
+        "year": 1997,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1997.html",
+        "source_kind": "supplement"
       },
       {
         "title": "101",
@@ -10675,6 +10906,15 @@
         "source_url": "https://www.eiren.org/toukei/1996.html"
       },
       {
+        "title": "ドラえもん のび太と銀河超特急",
+        "gross": 15.4,
+        "year": 1996,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1996.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "スーパーの女",
         "gross": 15.0,
         "year": 1996,
@@ -10715,6 +10955,15 @@
         "source_url": "https://www.eiren.org/toukei/1996.html"
       },
       {
+        "title": "男はつらいよ 寅次郎紅の花",
+        "gross": 11.6,
+        "year": 1996,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1996.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "ジュマンジ",
         "gross": 11.0,
         "year": 1996,
@@ -10737,6 +10986,24 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1996.html"
+      },
+      {
+        "title": "ガメラ2 レギオン襲来",
+        "gross": 7.0,
+        "year": 1996,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1996.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "クレヨンしんちゃん ヘンダーランドの大冒険",
+        "gross": 6.5,
+        "year": 1996,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1996.html",
+        "source_kind": "supplement"
       }
     ],
     "1995": [
@@ -10747,6 +11014,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1995.html"
+      },
+      {
+        "title": "ダイ・ハード3",
+        "gross": 48.0,
+        "year": 1995,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1995.html",
+        "source_kind": "supplement"
       },
       {
         "title": "スピード",
@@ -10951,6 +11227,15 @@
         "source_url": "https://www.eiren.org/toukei/1994.html"
       },
       {
+        "title": "ライオン・キング",
+        "gross": 16.6,
+        "year": 1994,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1994.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "ミセスダウト",
         "gross": 16.0,
         "year": 1994,
@@ -11105,6 +11390,15 @@
         "source_url": "https://www.eiren.org/toukei/1993.html"
       },
       {
+        "title": "REX 恐竜物語",
+        "gross": 22.0,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1993.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "水の旅人 侍KIDS",
         "gross": 20.3,
         "year": 1993,
@@ -11169,6 +11463,15 @@
         "source_url": "https://www.eiren.org/toukei/1993.html"
       },
       {
+        "title": "シュワルツェネッガー ラスト・アクション・ヒーロー",
+        "gross": 12.0,
+        "year": 1993,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1993.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "高校教師",
         "gross": 11.0,
         "year": 1993,
@@ -11183,6 +11486,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1993.html"
+      },
+      {
+        "title": "ザ・ファーム 法律事務所",
+        "gross": 11.0,
+        "year": 1993,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1993.html",
+        "source_kind": "supplement"
       }
     ],
     "1992": [
@@ -11321,6 +11633,33 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1992.html"
+      },
+      {
+        "title": "愛人 ラマン",
+        "gross": 10.0,
+        "year": 1992,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1992.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "リーサル・ウェポン3",
+        "gross": 10.0,
+        "year": 1992,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1992.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ツイン・ピークス ローラ・パーマー最期の七日間",
+        "gross": 8.0,
+        "year": 1992,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1992.html",
+        "source_kind": "supplement"
       }
     ],
     "1991": [
@@ -11365,6 +11704,15 @@
         "source_url": "https://www.eiren.org/toukei/1991.html"
       },
       {
+        "title": "おもひでぽろぽろ",
+        "gross": 18.5,
+        "year": 1991,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1991.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "ドラえもん のび太のトラビアンナイト / ドラミちゃん アララ少年山賊団",
         "gross": 18.0,
         "year": 1991,
@@ -11379,6 +11727,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1991.html"
+      },
+      {
+        "title": "ダンス・ウィズ・ウルブズ",
+        "gross": 15.0,
+        "year": 1991,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1991.html",
+        "source_kind": "supplement"
       },
       {
         "title": "男はつらいよ 寅次郎の休日 / 釣りバカ日誌3",
@@ -11535,6 +11892,15 @@
         "source_url": "https://www.eiren.org/toukei/1990.html"
       },
       {
+        "title": "ドラえもん のび太とアニマル惑星",
+        "gross": 19.1,
+        "year": 1990,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1990/1990.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "稲村ジェーン",
         "gross": 18.3,
         "year": 1990,
@@ -11673,6 +12039,15 @@
         "source_url": "https://www.eiren.org/toukei/1989.html"
       },
       {
+        "title": "ドラえもん のび太の日本誕生",
+        "gross": 20.0,
+        "year": 1989,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1989.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "カクテル",
         "gross": 17.0,
         "year": 1989,
@@ -11687,6 +12062,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1989.html"
+      },
+      {
+        "title": "ロジャー・ラビット",
+        "gross": 14.4,
+        "year": 1989,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1989.html",
+        "source_kind": "supplement"
       },
       {
         "title": "オルゴール",
@@ -11721,6 +12105,15 @@
         "source_url": "https://www.eiren.org/toukei/1989.html"
       },
       {
+        "title": "男はつらいよ 寅次郎サラダ記念日",
+        "gross": 12.5,
+        "year": 1989,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1989.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "ツインズ",
         "gross": 12.4,
         "year": 1989,
@@ -11735,6 +12128,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1989.html"
+      },
+      {
+        "title": "星の王子ニューヨークへ行く",
+        "gross": 12.1,
+        "year": 1989,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1989.html",
+        "source_kind": "supplement"
       },
       {
         "title": "ダイ・ハード",
@@ -11889,6 +12291,51 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1988.html"
+      },
+      {
+        "title": "ロボコップ",
+        "gross": 9.1,
+        "year": 1988,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1988.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "インナー・スペース",
+        "gross": 8.8,
+        "year": 1988,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1988.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "クロコダイル・ダンディー2",
+        "gross": 7.9,
+        "year": 1988,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1988.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "007/リビング・デイライツ",
+        "gross": 7.7,
+        "year": 1988,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1988.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "フルメタル・ジャケット",
+        "gross": 7.6,
+        "year": 1988,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1988.html",
+        "source_kind": "supplement"
       }
     ],
     "1987": [
@@ -11933,6 +12380,15 @@
         "source_url": "https://www.eiren.org/toukei/1987.html"
       },
       {
+        "title": "ドラえもん のび太と竜の騎士",
+        "gross": 15.0,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "竹取物語",
         "gross": 14.5,
         "year": 1987,
@@ -11947,6 +12403,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1987.html"
+      },
+      {
+        "title": "男はつらいよ 知床慕情",
+        "gross": 12.7,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
       },
       {
         "title": "マルサの女",
@@ -12003,6 +12468,42 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1987.html"
+      },
+      {
+        "title": "キングコング2",
+        "gross": 9.0,
+        "year": 1987,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ハワード・ザ・ダック 暗黒魔王の陰謀",
+        "gross": 7.7,
+        "year": 1987,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ゴールデン・チャイルド",
+        "gross": 7.6,
+        "year": 1987,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "シュワルツェネッガー プレデター",
+        "gross": 7.3,
+        "year": 1987,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1987.html",
+        "source_kind": "supplement"
       }
     ],
     "1986": [
@@ -12053,6 +12554,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1986.html"
+      },
+      {
+        "title": "野蛮人のように",
+        "gross": 14.5,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1986.html",
+        "source_kind": "supplement"
       },
       {
         "title": "コーラスライン",
@@ -12257,6 +12767,15 @@
         "source_url": "https://www.eiren.org/toukei/1985.html"
       },
       {
+        "title": "007/美しき獲物たち",
+        "gross": 12.0,
+        "year": 1985,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1985.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "愛・旅立ち / うる星やつら3 リメンバー・マイ・ラブ",
         "gross": 11.7,
         "year": 1985,
@@ -12311,6 +12830,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1985.html"
+      },
+      {
+        "title": "コットンクラブ",
+        "gross": 8.7,
+        "year": 1985,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1985.html",
+        "source_kind": "supplement"
       }
     ],
     "1984": [
@@ -12321,6 +12849,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1984.html"
+      },
+      {
+        "title": "インディ・ジョーンズ 魔宮の伝説",
+        "gross": 31.7,
+        "year": 1984,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
       },
       {
         "title": "里見八犬伝",
@@ -12345,6 +12882,24 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1984.html"
+      },
+      {
+        "title": "愛情物語",
+        "gross": 18.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ドラえもん のび太の魔界大冒険",
+        "gross": 17.0,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
       },
       {
         "title": "ドラえもん のび太の魔界大冒険 / 忍者ハットリくん+パーマン 超能力ウォーズ",
@@ -12395,6 +12950,15 @@
         "source_url": "https://www.eiren.org/toukei/1984.html"
       },
       {
+        "title": "男はつらいよ 口笛を吹く寅次郎",
+        "gross": 12.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "ネバーセイ・ネバーアゲイン",
         "gross": 12.3,
         "year": 1984,
@@ -12409,6 +12973,42 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1984.html"
+      },
+      {
+        "title": "男はつらいよ 夜霧にむせぶ寅次郎",
+        "gross": 11.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ジョーズ3",
+        "gross": 8.3,
+        "year": 1984,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ワンス・アポン・ア・タイム・イン・アメリカ",
+        "gross": 7.8,
+        "year": 1984,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ポリスアカデミー",
+        "gross": 7.2,
+        "year": 1984,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1984.html",
+        "source_kind": "supplement"
       }
     ],
     "1983": [
@@ -12451,6 +13051,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1983.html"
+      },
+      {
+        "title": "007/オクトパシー",
+        "gross": 19.4,
+        "year": 1983,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1983.html",
+        "source_kind": "supplement"
       },
       {
         "title": "007 オクトパシー",
@@ -12571,9 +13180,45 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1983.html"
+      },
+      {
+        "title": "スーパーマンIII 電子の要塞",
+        "gross": 9.1,
+        "year": 1983,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1983.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "食人族",
+        "gross": 8.5,
+        "year": 1983,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1983.html",
+        "source_kind": "supplement"
       }
     ],
     "1982": [
+      {
+        "title": "E.T.",
+        "gross": 35.5,
+        "year": 1982,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1982.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ミラクル・ワールド ブッシュマン",
+        "gross": 23.7,
+        "year": 1982,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1982.html",
+        "source_kind": "supplement"
+      },
       {
         "title": "ブッシュマン",
         "gross": 23.6,
@@ -12639,6 +13284,15 @@
         "source_url": "https://www.eiren.org/toukei/1982.html"
       },
       {
+        "title": "レイダース 失われた聖櫃<アーク>",
+        "gross": 13.8,
+        "year": 1982,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1982.html",
+        "source_kind": "supplement"
+      },
+      {
         "title": "機動戦士ガンダムIII めぐりあい宇宙編",
         "gross": 12.9,
         "year": 1982,
@@ -12701,6 +13355,15 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1982.html"
+      },
+      {
+        "title": "マッドマックス2",
+        "gross": 9.8,
+        "year": 1982,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1982.html",
+        "source_kind": "supplement"
       }
     ],
     "1981": [
@@ -12711,6 +13374,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1981.html"
+      },
+      {
+        "title": "007/ユア・アイズ・オンリー",
+        "gross": 21.5,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
       },
       {
         "title": "007 ユア・アイズ・オンリー",
@@ -12743,6 +13415,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1981.html"
+      },
+      {
+        "title": "スーパーマン2 冒険篇",
+        "gross": 15.9,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
       },
       {
         "title": "男はつらいよ 寅次郎かもめ歌 / 土佐の一本釣り",
@@ -12815,6 +13496,51 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1981.html"
+      },
+      {
+        "title": "レイズ・ザ・タイタニック",
+        "gross": 8.5,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ブルース・ブラザース",
+        "gross": 7.7,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "アメリカン・バイオレンス",
+        "gross": 6.7,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ハンター",
+        "gross": 6.3,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "ブラックホール",
+        "gross": 6.0,
+        "year": 1981,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1981.html",
+        "source_kind": "supplement"
       }
     ],
     "1980": [
@@ -12849,6 +13575,15 @@
         "region": "洋画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1980.html"
+      },
+      {
+        "title": "007/ムーンレイカー",
+        "gross": 22.8,
+        "year": 1980,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1980.html",
+        "source_kind": "supplement"
       },
       {
         "title": "地獄の黙示録",
@@ -12945,6 +13680,33 @@
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1980.html"
+      },
+      {
+        "title": "カリギュラ",
+        "gross": 6.0,
+        "year": 1980,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1980.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "青い珊瑚礁",
+        "gross": 5.5,
+        "year": 1980,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1980.html",
+        "source_kind": "supplement"
+      },
+      {
+        "title": "バトルクリーク・ブロー",
+        "gross": 5.2,
+        "year": 1980,
+        "region": "洋画",
+        "metric": "配給収入",
+        "source_url": "https://nendai-ryuukou.com/1980/1980.html",
+        "source_kind": "supplement"
       }
     ]
   }

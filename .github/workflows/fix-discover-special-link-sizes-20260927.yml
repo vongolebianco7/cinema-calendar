@@ -1,0 +1,44 @@
+name: Fix discover action button sizes
+
+on:
+  push:
+    paths:
+      - "scripts/fix_discover_special_link_sizes_20260927.py"
+      - ".github/workflows/fix-discover-special-link-sizes-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare regression test
+        run: python scripts/fix_discover_special_link_sizes_20260927.py prepare-tests
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_discover_special_link_sizes.py; then
+            echo "Expected equal-button test to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+      - name: Apply equal button sizing
+        run: python scripts/fix_discover_special_link_sizes_20260927.py apply
+      - name: Verify equal button sizing
+        run: python tests/test_discover_special_link_sizes.py
+      - name: Verify discover grid regression
+        run: |
+          python tests/test_person_profile_three_column.py
+          python tests/test_mobile_movie_rails.py
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discover.html tests/test_discover_special_link_sizes.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: align discover action button sizes"
+          git push

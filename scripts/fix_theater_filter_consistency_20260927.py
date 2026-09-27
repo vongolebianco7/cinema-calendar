@@ -10,7 +10,7 @@ checks = {
     "all equipment rows snapshot": "const allRows=(formatData.screens||[]);",
     "all-theater equipment index": "const allByTheater=new Map();",
     "visible rows derived after index": "const visibleRows=allRows.filter",
-    "full equipment rows attached": "_equipmentRows:allByTheater.get(k)||[]",
+    "full equipment rows attached": "base._equipmentRows=allByTheater.get(k)||[]",
     "row renderer prefers attached full rows": "Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t)",
 }
 missing=[name for name, marker in checks.items() if marker not in src]

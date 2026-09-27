@@ -55,6 +55,7 @@ large_theme_preview = [
     ".previewBlueGray{background:#d9dfe3",
     ".templatePreview .previewRank",
     "scroll-snap-type:x mandatory",
+    "populateThemePreviews()",
 ]
 missing_preview = [token for token in large_theme_preview if token not in tools]
 if missing_preview:
@@ -96,7 +97,7 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
     if forbidden in html:
         raise SystemExit(f"removed My Cinemap option returned: {forbidden}")
 
-if "my-cinemap-editorial-v11" not in html:
-    raise SystemExit("My Cinemap artwork cache-bust version was not bumped")
+if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v8" not in art:
+    raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
 
 print("My Cinemap five editorial themes, large previews, Minimal polish, and one/two-column export checks passed")

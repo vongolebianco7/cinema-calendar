@@ -65,9 +65,10 @@
     return {x,y:12+(hash>>>0)%77};
   }
   const genreCenters = {
-    'SF':[24,23,-55],'ドラマ':[49,35,15],'スリラー':[66,29,-20],'コメディ':[83,22,45],
+    'SF':[24,23,-55],'戦争':[45,20,14],'スリラー':[66,29,-20],'コメディ':[83,22,45],
     'アニメ':[21,52,35],'アクション':[43,57,-35],'ロマンス':[63,55,45],'ホラー':[83,52,-30],
-    'ミステリー':[23,78,-15],'ファンタジー':[43,79,55],'クライム':[65,76,-45],'アドベンチャー':[84,78,20]
+    'ミステリー':[23,78,-15],'ファンタジー':[43,79,55],'クライム':[65,76,-45],'アドベンチャー':[84,78,20],
+    'ドキュメンタリー':[8,39,9],'音楽':[57,9,28],'ファミリー':[9,90,30]
   };
   const centerForGenre = name => genreCenters[name] || (()=>{const p=position('genre:'+name);return [p.x,p.y,(p.x%7-3)*15];})();
   function genreStrengths(film) {
@@ -80,7 +81,8 @@
     return Object.fromEntries((film?.genres||[]).filter(Boolean).map((name,i)=>[name,i===0?1:i===1?.7:.5]));
   }
   function filmPosition(film) {
-    const strengths=Object.entries(genreStrengths(film));
+    // Drama is retained as source metadata but is too broad to define a galaxy.
+    const strengths=Object.entries(genreStrengths(film)).filter(([name])=>name in genreCenters);
     const base=strengths.length?strengths.reduce((v,[genre,weight])=>{const p=centerForGenre(genre);v[0]+=p[0]*weight;v[1]+=p[1]*weight;v[2]+=p[2]*weight;v[3]+=weight;return v;},[0,0,0,0]):[50,50,0,1];
     const jitter=position('film:'+film.id);
     return {x:Math.max(5,Math.min(95,base[0]/base[3]+(jitter.x-50)*.08)),y:Math.max(5,Math.min(95,base[1]/base[3]+(jitter.y-50)*.08)),z:Math.round(base[2]/base[3]+(jitter.x-jitter.y)*.25)};

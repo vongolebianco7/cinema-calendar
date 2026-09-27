@@ -68,3 +68,14 @@
 @media(prefers-reduced-motion:reduce){.cosmosWorld{transition:none!important}}
 .cosmosSearch{display:grid;grid-template-columns:minmax(150px,1fr) auto;grid-template-rows:auto 42px;align-items:end}.cosmosSearch label{grid-column:1/-1}.cosmosSearch input{grid-column:1;grid-row:2}.cosmosSearch button{grid-column:2;grid-row:2}
 .cosmosWorld .cosmosBody{transform:translate3d(-50%,-50%,calc(110px + var(--depth)))}
+/* Population controls radiance; a personal rating changes hue and surface. */
+.cosmosGalaxy--active .cosmosHalo{opacity:clamp(.58,calc(.58 + var(--mass) * .044),1);box-shadow:0 0 calc(12px + var(--mass) * 3px) #b5d5ff91,0 0 calc(30px + var(--mass) * 5px) #687fda9e}
+.cosmosDirector .cosmosHalo{box-shadow:0 0 calc(13px + var(--mass) * 3px) #ffb8858a}
+.cosmosPlanet .cosmosHalo{border-color:hsl(var(--rating-hue) 68% 72%);box-shadow:0 0 14px hsl(var(--rating-hue) 58% 66% / .45);background:radial-gradient(circle at 35% 30%,hsl(var(--rating-hue) 62% 86%),hsl(var(--rating-hue) 51% 39%) 59%,#091631)}
+.cosmosPlanet img{opacity:.68;filter:grayscale(.65);mix-blend-mode:luminosity}
+.cosmosPlanet--best .cosmosHalo{width:89px;height:89px;top:8px;border:3px double #ecdaff;background:radial-gradient(circle at 34% 28%,#eee6ff,#63518e 62%,#15142c);box-shadow:0 0 16px #b7a4db94}
+.cosmosPlanet.vintage .cosmosHalo{filter:contrast(.82) saturate(.7);border-style:double}
+.cosmosPlanet.recent .cosmosHalo{filter:contrast(1.12);border-style:solid}
+.cosmosPlanet--unknown .cosmosHalo{filter:grayscale(.8) brightness(.63);border-style:dashed}
+.cosmosDirectorQueue{display:grid;gap:8px;margin-top:16px}.cosmosDirectorQueue>div{display:flex;align-items:center;gap:12px;padding:8px;border:1px solid #62759466;border-radius:9px}.cosmosDirectorQueue>div>span{width:35%;min-width:90px}.cosmosDirectorQueue .recordRuler{flex:1;min-width:0}.cosmosDetail>button{min-height:44px;border:1px solid #9cb5d9;border-radius:8px;background:#122641;color:#fff;padding:9px 11px;cursor:pointer}
+@media(max-width:700px){.cosmosPlanet--best .cosmosHalo{width:70px;height:70px;top:8px}.cosmosDirectorQueue>div{display:block}.cosmosDirectorQueue>div>span{display:block;width:auto}.cosmosDirectorQueue .recordRuler{width:100%}}

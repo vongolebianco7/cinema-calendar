@@ -33,7 +33,7 @@
   }
   function renderDashboard() {
     const metadata = new Map(films.map(x=>[String(x.id),x]));
-    const entries = Object.values(store.read()).filter(x=>x?.watched).map(x=>({ ...metadata.get(String(x.id)), ...x, genres:x.genres?.length?x.genres:metadata.get(String(x.id))?.genres||[], region:x.region||metadata.get(String(x.id))?.region||'' })).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+    const entries = Object.values(store.read()).filter(x=>x?.watched).map(x=>({ ...metadata.get(String(x.id)), ...x, genres:x.genres?.length?x.genres:metadata.get(String(x.id))?.genres||[], region:x.region||metadata.get(String(x.id))?.region||'' }));
     const n = entries.length, rated = entries.filter(x=>x.rating != null).length;
     $('dashboardCount').textContent = n + '本記録済み'; $('watchedCount').textContent = n; $('resonatedCount').textContent = rated;
     window.CinemapUniverseView?.render(films,store.read());
@@ -45,7 +45,16 @@
     const reached=films.filter(m=>store.get(m)?.watched).length;
     $('coverage').textContent = reached+' / '+films.length+'作品を記録（'+Math.round(reached/films.length*100)+'%）';
     $('missing').innerHTML = films.filter(m=>!store.get(m)?.watched).slice(0,8).map(m=>'<a class="chip" href="'+url(m)+'">'+escape(m.title)+'</a>').join('')||'<span class="empty">選定作品をすべて記録しました。</span>';
-    $('entries').innerHTML=entries.map(m=>'<div class="entry">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<span></span>')+'<div class="name"><a href="'+url(m)+'">'+escape(m.title||'作品 '+m.id)+'</a><small>'+escape(m.year||'')+'</small></div>'+ruler(m,m,true)+'<button type="button" data-remove="'+escape(m.id)+'" aria-label="'+escape(m.title||'作品')+'の記録を解除">解除</button></div>').join('')||'<p class="empty">まだ記録がありません。観た映画から始めましょう。</p>';
+    const sort=$('historySort').value,filter=$('historyFilter').value;
+    const textKey=(m,key)=>String(key==='genre'?m.genres?.[0]||'':m[key]||'');
+    const ordered=entries.filter(m=>filter==='all'||(filter==='best'?m.rating===5:Number(m.rating)>=4.5)).sort((a,b)=>{
+      if(sort==='rating')return (Number(b.rating)||0)-(Number(a.rating)||0)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||''));
+      if(sort==='year')return Number(b.year||0)-Number(a.year||0);
+      if(sort==='watched')return String(b.watchedAt||b.recordedAt||'').localeCompare(String(a.watchedAt||a.recordedAt||''));
+      if(['director','genre','title'].includes(sort))return textKey(a,sort).localeCompare(textKey(b,sort),'ja');
+      return String(b.recordedAt||'').localeCompare(String(a.recordedAt||''));
+    });
+    $('entries').innerHTML=ordered.map(m=>'<div class="entry">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<span></span>')+'<div class="name"><a href="'+url(m)+'">'+escape(m.title||'作品 '+m.id)+'</a><small>'+escape(m.year||'')+(m.director?' · '+escape(m.director):'')+'</small></div>'+ruler(m,m,true)+'<button type="button" data-remove="'+escape(m.id)+'" aria-label="'+escape(m.title||'作品')+'の記録を解除">解除</button></div>').join('')||'<p class="empty">条件に合う記録がありません。</p>';
   }
   document.addEventListener('input',e=>{
     if(!e.target.matches('[data-rate-id]'))return;
@@ -60,6 +69,8 @@
   document.addEventListener('click',e=>{
     const removed=e.target.closest('[data-remove]');if(removed)store.rate({id:removed.dataset.remove},0);
   });
+  $('historySort').addEventListener('change',renderDashboard);
+  $('historyFilter').addEventListener('change',renderDashboard);
   $('reset').addEventListener('click',()=>{if(confirm('すべての視聴記録を削除しますか？ この操作は元に戻せません。')){store.clear();history.replaceState(null,'','my-records.html?view=add');show();}});
   store.subscribe(show);
   fetch('data/onboarding-films.json?v=20260927-editorial-v2').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(data=>{films=data.films;show();}).catch(()=>{$('loadError').textContent='作品データを読み込めませんでした。再読み込みしてください。';$('dashboard').hidden=false;});

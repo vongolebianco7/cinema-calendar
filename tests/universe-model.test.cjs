@@ -29,10 +29,14 @@ assert.equal(model.recommend({},catalog).length,0,'do not imply affinity without
 assert.deepEqual(model.position('genre:SF'),model.position('genre:SF'),'positions are stable');
 assert.ok(model.position('genre:SF').x>=10&&model.position('genre:SF').x<=90);
 const hybrid={id:73,genres:['SF','ドラマ'],genreStrengths:{SF:.8,'ドラマ':.7},director:'Crossing'};
-const point=model.filmPosition(hybrid), sf=model.centerForGenre('SF'), drama=model.centerForGenre('ドラマ');
-assert.ok(point.x>sf[0]&&point.x<drama[0],'a hybrid film occupies the boundary, with one stable coordinate');
+assert.equal('ドラマ' in model.genreCenters,false,'broad drama metadata does not create a galaxy');
+const point=model.filmPosition(hybrid), sf=model.centerForGenre('SF');
+assert.ok(Math.abs(point.x-sf[0])<5,'drama metadata does not pull a film away from its specific genre');
 assert.deepEqual(point,model.filmPosition({...hybrid,rating:5}),'rating cannot move a planet');
 assert.deepEqual(model.genreStrengths(hybrid),{SF:.8,'ドラマ':.7});
-const cross=model.directorPosition('Crossing',[hybrid,{id:74,genres:['ドラマ'],director:'Crossing'}]);
+const mixed={id:75,genres:['SF','スリラー'],genreStrengths:{SF:.8,'スリラー':.7}};
+const mixedPoint=model.filmPosition(mixed), thriller=model.centerForGenre('スリラー');
+assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres occupy a boundary');
+const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
 console.log('Universe weights, honest metadata, suggestions and stable positions passed');

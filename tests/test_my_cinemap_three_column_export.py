@@ -1,8 +1,15 @@
 from pathlib import Path
+import subprocess
 
 art = Path("js/my-cinemap-art.js").read_text(encoding="utf-8")
 html = Path("my-cinemap.html").read_text(encoding="utf-8")
 tools = Path("js/my-cinemap-tools.js").read_text(encoding="utf-8")
+enhancements_path = Path("js/my-cinemap-art-direction.js")
+enhancements = enhancements_path.read_text(encoding="utf-8")
+
+syntax = subprocess.run(["node", "--check", str(enhancements_path)], capture_output=True, text=True)
+if syntax.returncode:
+    raise SystemExit(f"My Cinemap enhancement JavaScript syntax failed:\n{syntax.stderr}")
 
 required_art = [
     "layout=artValue('layout')||'single'",
@@ -52,6 +59,23 @@ missing_minimal = [token for token in minimal_polish if token not in art]
 if missing_minimal:
     raise SystemExit(f"Minimal editorial polish missing: {missing_minimal}")
 
+art_direction = [
+    "const artFonts=",
+    "const fontKey=artValue('fontStyle')||'editorial'",
+    "function drawThemeIllustration",
+    "function drawProjectionGlow",
+    "function drawBotanicalLines",
+    "function drawArchiveGrid",
+    "function drawBurgundyArch",
+    "titleBottom",
+    "const titleToListGap=",
+    "font.title",
+    "font.movie",
+]
+missing_direction = [token for token in art_direction if token not in art]
+if missing_direction:
+    raise SystemExit(f"My Cinemap art direction missing: {missing_direction}")
+
 large_theme_preview = [
     ".designPicker .themeChoices{display:flex",
     ".themeChoice.premiumTheme{flex:0 0 min(82vw,330px)",
@@ -68,6 +92,23 @@ large_theme_preview = [
 missing_preview = [token for token in large_theme_preview if token not in tools]
 if missing_preview:
     raise SystemExit(f"Large theme preview UI missing: {missing_preview}")
+
+enhancement_requirements = [
+    "<select id=\"fontStyle\">",
+    "Editorial Serif",
+    "Modern Serif",
+    "Clean Sans",
+    "Cinema Classic",
+    "const FONT_KEY='cinemap-my-font-style'",
+    "async function hydrateMissingDirectors",
+    "picks.filter(movie=>!movie.director)",
+    "hydrateMissingDirectors()",
+    "saved.font=fontStyle.value",
+    "previewDecor",
+]
+missing_enhancements = [token for token in enhancement_requirements if token not in enhancements]
+if missing_enhancements:
+    raise SystemExit(f"My Cinemap enhancement module missing: {missing_enhancements}")
 
 forbidden_art = [
     "const columns=3;",
@@ -105,7 +146,9 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
     if forbidden in html:
         raise SystemExit(f"removed My Cinemap option returned: {forbidden}")
 
-if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v8" not in art:
+if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
     raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
+if "my-cinemap-art-direction.js?v=20260927-art-direction-v1" not in art:
+    raise SystemExit("My Cinemap art-direction enhancement module is not loaded")
 
-print("My Cinemap five editorial themes, readable typography, filled two-column layout, and large previews passed")
+print("My Cinemap five editorial themes, abstract illustrations, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")

@@ -13,6 +13,10 @@
     'cinema-artdeco':'dark',
     'cinema-archive':'dark'
   };
+  const rankNumberWeight=650;
+  const metaTextWeight=600;
+  const noteTextWeight=600;
+  const brandScale=1.4;
   const imageCache=new Map();
 
   function getTemplateImage(theme){
@@ -34,33 +38,68 @@
 
   function paletteForTheme(theme){
     return templateMode[theme]==='light'
-      ? {bg:'#efe7d9',fg:'#241e18',muted:'#66594d',line:'#9d8669',accent:'#9d7542',border:'#9d8669',dark:false}
-      : {bg:'#0d1014',fg:'#fffaf1',muted:'#d4c8b6',line:'#b49360',accent:'#d4ad6c',border:'#b99862',dark:true};
+      ? {bg:'#efe7d9',fg:'#1d1814',muted:'#4b4036',line:'#8b7358',accent:'#8a632f',border:'#8b7358',dark:false}
+      : {bg:'#0d1014',fg:'#fffdf8',muted:'#eee2cf',line:'#c5a46e',accent:'#e0b86e',border:'#c5a46e',dark:true};
   }
 
   function drawContentScrim(ctx,w,h,p,listTop,listBottom,columns){
     ctx.save();
     const x=columns===2?72:92;
     const top=54;
-    const bottom=Math.min(h-72,listBottom+58);
+    const bottom=Math.min(h-72,listBottom+70);
     const width=w-x*2;
     const height=Math.max(120,bottom-top);
     const g=ctx.createLinearGradient(0,top,0,bottom);
     if(p.dark){
-      g.addColorStop(0,'rgba(4,6,8,.58)');
-      g.addColorStop(.18,'rgba(4,6,8,.46)');
-      g.addColorStop(.82,'rgba(4,6,8,.46)');
-      g.addColorStop(1,'rgba(4,6,8,.56)');
+      g.addColorStop(0,'rgba(4,6,8,.66)');
+      g.addColorStop(.18,'rgba(4,6,8,.56)');
+      g.addColorStop(.82,'rgba(4,6,8,.56)');
+      g.addColorStop(1,'rgba(4,6,8,.64)');
     }else{
-      g.addColorStop(0,'rgba(249,244,234,.76)');
-      g.addColorStop(.18,'rgba(249,244,234,.66)');
-      g.addColorStop(.82,'rgba(249,244,234,.66)');
-      g.addColorStop(1,'rgba(249,244,234,.74)');
+      g.addColorStop(0,'rgba(249,244,234,.86)');
+      g.addColorStop(.18,'rgba(249,244,234,.78)');
+      g.addColorStop(.82,'rgba(249,244,234,.78)');
+      g.addColorStop(1,'rgba(249,244,234,.84)');
     }
     ctx.fillStyle=g;
     ctx.beginPath();
     if(ctx.roundRect)ctx.roundRect(x,top,width,height,24);else ctx.rect(x,top,width,height);
     ctx.fill();
+    ctx.restore();
+  }
+
+  function drawCinemaMedal(ctx,x,y,rank,p,scale=1){
+    const light=['#7a5b2d','#62686d','#815743'];
+    const dark=['#e2bd73','#c8ced3','#d39470'];
+    const metal=(p.dark?dark:light)[rank-1];
+    ctx.save();
+    ctx.translate(x,y);ctx.scale(scale,scale);
+    ctx.strokeStyle=metal;ctx.fillStyle=metal;ctx.lineWidth=2.1;
+    for(const side of [-1,1])for(let i=0;i<6;i++){
+      const a=-1.02+i*.27,rx=side*(25+Math.cos(a)*12),ry=Math.sin(a)*27;
+      ctx.save();ctx.translate(rx,ry);ctx.rotate(side*(.62-a*.18));ctx.beginPath();ctx.ellipse(0,0,6,2.2,0,0,Math.PI*2);ctx.stroke();ctx.restore();
+    }
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${rankNumberWeight} 34px ${artNumber}`;ctx.fillText(String(rank),0,0);
+    ctx.restore();
+  }
+
+  function drawCinemaBrand(ctx,w,h,p,y=h-110){
+    const s=brandScale;
+    const tile=36*s,wordSize=28*s,tagSize=7.2*s,gap=12*s,wordW=176*s;
+    const total=tile+gap+wordW,x=(w-total)/2;
+    const lineY=y+tile*.5,lineW=Math.max(120,(w-total)/2-150);
+    rule(ctx,82,lineY,lineW,p.line,p.dark?.62:.52);
+    rule(ctx,w-82-lineW,lineY,lineW,p.line,p.dark?.62:.52);
+    ctx.save();
+    ctx.strokeStyle=p.fg;ctx.globalAlpha=.96;ctx.lineWidth=1.7*s;ctx.strokeRect(x,y,tile,tile);
+    const beam=ctx.createLinearGradient(x+tile*.46,y,x+tile+12*s,y);
+    beam.addColorStop(0,p.dark?'rgba(255,231,183,.78)':'rgba(111,76,34,.54)');
+    beam.addColorStop(1,'rgba(222,187,131,0)');
+    ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+tile*.46,y+tile*.38);ctx.lineTo(x+tile+12*s,y+tile*.20);ctx.lineTo(x+tile+12*s,y+tile*.82);ctx.lineTo(x+tile*.46,y+tile*.64);ctx.closePath();ctx.fill();
+    ctx.globalAlpha=1;ctx.fillStyle=p.fg;ctx.textAlign='left';ctx.textBaseline='top';
+    ctx.font=`600 ${wordSize}px ${artDisplay}`;ctx.fillText('C',x+7*s,y+1*s);
+    ctx.font=`600 ${wordSize*.95}px ${artDisplay}`;ctx.fillText('Cinemap',x+tile+gap,y-2*s);
+    ctx.fillStyle=p.dark?'#f0dfc4':'#514335';ctx.globalAlpha=.96;ctx.font=`700 ${tagSize}px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+gap+1*s,y+tile*.72);
     ctx.restore();
   }
 
@@ -85,12 +124,12 @@
     let noteY=0,noteHeight=0;
     if(note){
       noteY=titleBottom+18;
-      const noteFit=fittedLines(ctx,note,inner*.76,2,21*fontScale,17*fontScale,artSans,400);
+      const noteFit=fittedLines(ctx,note,inner*.76,2,23*fontScale,18*fontScale,artSans,noteTextWeight);
       noteHeight=noteFit.lines.length*noteFit.size*1.28;
       listTop=Math.max(listTop,noteY+noteHeight+36);
     }
     const items=(movies||[]).slice(0,10),rows=columns===2?5:10;
-    const bottomTarget=h-(shape==='portrait'?158:shape==='square'?130:110);
+    const bottomTarget=h-(shape==='portrait'?174:shape==='square'?142:122);
     const gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns;
     const rowH=Math.max(columns===2?96:102,(bottomTarget-listTop)/rows);
     const listBottom=listTop+rows*rowH;
@@ -98,33 +137,39 @@
     drawContentScrim(ctx,w,h,p,listTop,listBottom,columns);
 
     ctx.save();
-    ctx.shadowColor=p.dark?'rgba(0,0,0,.78)':'rgba(255,255,255,.72)';
-    ctx.shadowBlur=p.dark?6:4;
+    ctx.shadowColor=p.dark?'rgba(0,0,0,.72)':'rgba(255,255,255,0)';
+    ctx.shadowBlur=p.dark?5:0;
     ctx.textBaseline='top';ctx.fillStyle=p.fg;
     ctx.textAlign='center';
     writeLines(ctx,title,w/2,metrics.titleY,inner*.76,2,metrics.titleSize*fontScale,40*fontScale,font.title,font.titleWeight,1.04);
     if(note){
-      ctx.fillStyle=p.muted;
-      writeLines(ctx,note,w/2,noteY,inner*.76,2,21*fontScale,17*fontScale,artSans,400);
-      ctx.fillStyle=p.fg;
+      ctx.fillStyle=p.muted;ctx.globalAlpha=.96;
+      writeLines(ctx,note,w/2,noteY,inner*.76,2,23*fontScale,18*fontScale,artSans,noteTextWeight);
+      ctx.globalAlpha=1;ctx.fillStyle=p.fg;
     }
     ctx.textAlign='left';
-    if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 ${29*fontScale}px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
+    if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`600 ${29*fontScale}px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
     items.forEach((m,i)=>{
       const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;
       const x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
-      rule(ctx,x,y,cellW,p.line,p.dark?.52:.42);
-      if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,.9*fontScale);
-      else{ctx.save();ctx.font=`400 ${(columns===2?30:32)*fontScale}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
+      rule(ctx,x,y,cellW,p.line,p.dark?.68:.54);
+      if(i<3)drawCinemaMedal(ctx,numberX,y+rowH*.5,i+1,p,.92*fontScale);
+      else{
+        ctx.save();ctx.font=`${rankNumberWeight} ${(columns===2?33:35)*fontScale}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=.96;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore();
+      }
       const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+Math.max(10,(rowH-76)/2);
       ctx.fillStyle=p.fg;
       const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?singleMovieSize:shape==='square'?34:28))*fontScale;
       const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,font.movieWeight,1.10);
       const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-      if(meta){ctx.save();ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
+      if(meta){
+        ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=.96;
+        writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?22:24)*fontScale,18*fontScale,artSans,metaTextWeight);
+        ctx.restore();ctx.fillStyle=p.fg;
+      }
     });
-    rule(ctx,pad,listBottom,inner,p.line,p.dark?.52:.42);
-    drawBrand(ctx,w,h,theme,Math.min(h-92,listBottom+38));
+    rule(ctx,pad,listBottom,inner,p.line,p.dark?.68:.54);
+    drawCinemaBrand(ctx,w,h,p,Math.min(h-118,listBottom+42));
     ctx.restore();
 
     c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));
@@ -139,5 +184,5 @@
     renderCinemaTemplate(movies,theme);
   };
 
-  window.CinemapCinemaTemplates={cinemaTemplates,drawImageCover,drawContentScrim};
+  window.CinemapCinemaTemplates={cinemaTemplates,drawImageCover,drawContentScrim,drawCinemaMedal,drawCinemaBrand};
 })();

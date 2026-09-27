@@ -42,8 +42,10 @@
 .universeMap .universeGalaxy strong,.universeMap .universeGalaxy .galaxyCount{position:relative;z-index:2;display:block;max-width:100%;padding:2px 8px;border-radius:15px;background:#061329d9;color:#f7f7ff;white-space:nowrap;text-shadow:0 2px 6px #000}
 .universeMap .universeGalaxy strong{font:700 15px -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif}.universeMap .universeGalaxy .galaxyCount{margin-top:2px;font-size:10px;color:#d4e5ff}
 .universeMap .universeGalaxy--unexplored{opacity:.55}.universeMap .universeGalaxy--unexplored .galaxyCloud{filter:grayscale(.55) brightness(.55);box-shadow:0 0 22px #6783b960}
+.universeMap .universeGalaxy--known .galaxyCloud{width:calc(153px + var(--growth) * 6px);height:calc(116px + var(--growth) * 4px);filter:saturate(calc(1.1 + var(--growth) * .06))}
 .universeMap .universeGalaxy:hover,.universeMap .universeGalaxy:focus-visible{transform:translate(-50%,-50%) scale(1.11);filter:brightness(1.25)}
 .universeMap .universeGalaxy:focus-visible{outline:2px solid #f4dfaa;outline-offset:4px}
 .universeMapCaption{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);padding:9px 15px;border:1px solid #9cb9df74;border-radius:20px;background:#06142cdb;color:#e5edfa;font-size:12px;white-space:nowrap}
 @media(max-width:700px){.universeMap{height:calc(var(--map-mobile-height) + 35px);margin:20px -18px 0}.universeMap .universeGalaxy{left:var(--mobile-x);top:var(--mobile-y);width:134px;height:125px}.universeMap .universeGalaxy .galaxyCloud{width:114px;height:87px}.universeMap .universeGalaxy strong{font-size:13px}.universeMap .universeGalaxy .galaxyCount{font-size:10px}.universeMapCaption{font-size:11px}}
+@media(max-width:700px){.universeMap .universeGalaxy--known .galaxyCloud{width:calc(114px + var(--growth) * 4px);height:calc(87px + var(--growth) * 3px)}}
 @media(prefers-reduced-motion:reduce){.universeMap .universeGalaxy{transition:none}}

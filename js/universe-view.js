@@ -37,7 +37,8 @@
     const groups=visibleGenres().map(genre=>({genre,index:galaxySlot(genre),matching:films.filter(f=>inGenre(f,genre))}));
     const node=({genre,index,matching})=>{
       const p=model.position('genre:'+genre);
-      return '<button type="button" class="universeGalaxy'+(matching.length?' universeGalaxy--known':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+';--galaxy-x:'+(12.5+(index%4)*25)+'%;--galaxy-y:'+(122+Math.floor(index/4)*215)+'px;--mobile-x:'+(25+(index%2)*50)+'%;--mobile-y:'+(95+Math.floor(index/2)*157)+'px" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。銀河へ入る"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><span class="galaxyCount">'+(matching.length?matching.length+'作品 · 銀河へ':'記録なし')+'</span></button>';
+      const offsetX=(p.x%11)-5,offsetY=(p.y%37)-18;
+      return '<button type="button" class="universeGalaxy'+(matching.length?' universeGalaxy--known':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--gi:'+index+';--growth:'+Math.min(matching.length,8)+';--galaxy-x:'+(12.5+(index%4)*25+offsetX)+'%;--galaxy-y:'+(122+Math.floor(index/4)*215+offsetY)+'px;--mobile-x:'+(25+(index%2)*50+offsetX*.55)+'%;--mobile-y:'+(95+Math.floor(index/2)*157+offsetY*.6)+'px" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。銀河へ入る"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><span class="galaxyCount">'+(matching.length?matching.length+'作品 · 銀河へ':'記録なし')+'</span></button>';
     };
     const explored=groups.filter(g=>g.matching.length);
     const visible=groups.filter(g=>g.index<12||g.matching.length);

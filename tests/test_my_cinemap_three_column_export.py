@@ -164,7 +164,7 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
 
 if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
     raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
-if "my-cinemap-art-direction.js?v=20260927-art-direction-v2" not in art:
+if "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2" not in art:
     raise SystemExit("My Cinemap art-direction background module cache-bust was not bumped")
 
 print("My Cinemap five editorial themes, optional generated cinema backgrounds, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")

@@ -91,7 +91,7 @@
   function decorateThemePreviews(){document.querySelectorAll('.templatePreview:not(.cinemaTemplatePreview)').forEach(preview=>{if(preview.querySelector('.previewDecor'))return;const decor=document.createElement('span');decor.className='previewDecor';decor.setAttribute('aria-hidden','true');preview.prepend(decor)})}
   function markEditorRanking(){document.getElementById('list')?.classList.add('editorRankingFixedTwoColumn')}
   function bindExportControlsToEnhancedRender(){
-    ['format','layout'].forEach(id=>{
+    ['format','layout','fontSize'].forEach(id=>{
       const control=document.getElementById(id);
       if(!control)return;
       control.onchange=()=>drawArtwork(picks);
@@ -100,7 +100,7 @@
   function mount(){mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v4';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v5';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender};
 })();

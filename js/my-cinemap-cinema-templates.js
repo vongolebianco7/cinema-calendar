@@ -77,7 +77,7 @@
     const p=paletteForTheme(theme);artPalettes[theme]=p;
 
     const title=artValue('title').trim()||'MY TOP OF 2026';
-    const titleFit=fittedLines(ctx,title,inner*.76,2,metrics.titleSize,40,font.title,font.titleWeight);
+    const titleFit=fittedLines(ctx,title,inner*.76,2,metrics.titleSize*fontScale,40*fontScale,font.title,font.titleWeight);
     const titleHeight=titleFit.lines.length*titleFit.size*1.04;
     const titleBottom=metrics.titleY+titleHeight;
     const note=artValue('sub').trim();
@@ -85,7 +85,7 @@
     let noteY=0,noteHeight=0;
     if(note){
       noteY=titleBottom+18;
-      const noteFit=fittedLines(ctx,note,inner*.76,2,21,17,artSans,400);
+      const noteFit=fittedLines(ctx,note,inner*.76,2,21*fontScale,17*fontScale,artSans,400);
       noteHeight=noteFit.lines.length*noteFit.size*1.28;
       listTop=Math.max(listTop,noteY+noteHeight+36);
     }
@@ -102,20 +102,20 @@
     ctx.shadowBlur=p.dark?6:4;
     ctx.textBaseline='top';ctx.fillStyle=p.fg;
     ctx.textAlign='center';
-    writeLines(ctx,title,w/2,metrics.titleY,inner*.76,2,metrics.titleSize,40,font.title,font.titleWeight,1.04);
+    writeLines(ctx,title,w/2,metrics.titleY,inner*.76,2,metrics.titleSize*fontScale,40*fontScale,font.title,font.titleWeight,1.04);
     if(note){
       ctx.fillStyle=p.muted;
-      writeLines(ctx,note,w/2,noteY,inner*.76,2,21,17,artSans,400);
+      writeLines(ctx,note,w/2,noteY,inner*.76,2,21*fontScale,17*fontScale,artSans,400);
       ctx.fillStyle=p.fg;
     }
     ctx.textAlign='left';
-    if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
+    if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 ${29*fontScale}px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
     items.forEach((m,i)=>{
       const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;
       const x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
       rule(ctx,x,y,cellW,p.line,p.dark?.52:.42);
-      if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,.9);
-      else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
+      if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,.9*fontScale);
+      else{ctx.save();ctx.font=`400 ${(columns===2?30:32)*fontScale}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
       const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+Math.max(10,(rowH-76)/2);
       ctx.fillStyle=p.fg;
       const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?singleMovieSize:shape==='square'?34:28))*fontScale;

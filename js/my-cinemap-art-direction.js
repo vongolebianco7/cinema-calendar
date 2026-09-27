@@ -100,7 +100,7 @@
   function mount(){mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v3';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v4';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender};
 })();

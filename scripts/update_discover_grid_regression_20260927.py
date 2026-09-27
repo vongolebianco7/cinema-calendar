@@ -1,0 +1,5 @@
+from pathlib import Path
+
+p = Path('tests/test_mobile_movie_rails.py')
+p.write_text('''from pathlib import Path\nexpected = {\n    "discover.html": ["discover-three-column-results-v2", "#grid.grid{display:grid!important", "grid-template-columns:repeat(3,minmax(0,1fr))!important", "overflow:visible!important"],\n    "search.html": ["search-three-column-grid-v1", ".grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important", ".grid>.card{min-width:0;width:100%", "overflow:visible!important"],\n}\nfailed=[]\nfor name,tokens in expected.items():\n    text=Path(name).read_text(encoding="utf-8")\n    missing=[t for t in tokens if t not in text]\n    if missing: failed.append(f"{name}: missing {missing}")\n    if name=="discover.html" and ("mobile-movie-rails-v1" in text or "#grid.grid{display:flex!important" in text):\n        failed.append("discover.html: legacy one-row horizontal result rail still present")\nif failed: raise SystemExit("\\n".join(failed))\nprint("three-column search result regression checks passed")\n''', encoding='utf-8')
+print('updated discover/search grid regression test')

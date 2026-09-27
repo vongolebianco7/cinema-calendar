@@ -31,6 +31,7 @@
       const old = records[id] || {};
       records[id] = {
         id, watched: true, resonated: !!old.resonated, rating: old.rating ?? null,
+        recordedAt: old.recordedAt || new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         title: String(movie.title || old.title || '').slice(0, 160),
         poster: String(movie.poster || old.poster || '').slice(0, 500),

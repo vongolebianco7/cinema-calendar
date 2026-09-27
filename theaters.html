@@ -119,6 +119,7 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </style>
 
 
+
 <style id="cinemap-theater-table-v1">
 html,body{overflow-x:hidden}
 .theaterTableWrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);scrollbar-width:thin}
@@ -272,6 +273,7 @@ boot();
 </script>
 <div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.61</div>
 
+
 <script id="cinemap-theater-table-js-v1">
 (function(){
  const normName=s=>String(s||'').replace(/[\s　・･\.\-（）()]/g,'').toLowerCase();
@@ -304,12 +306,23 @@ boot();
    return all.find(t=>!window.isGenericChainOnly(t)&&normName(t.name)===n)||null;
  }
  window.equipmentTheaters=function(all,filter){
-   const rows=(formatData.screens||[]).filter(x=>!filter||formatFamilyMatch(x.format,filter)||formatFamilyMatch(x.screen,filter));
-   const map=new Map();
-   rows.forEach(x=>{
+   // Build each theater's complete equipment state first. Filtering only decides visibility.
+   const allRows=(formatData.screens||[]);
+   const allByTheater=new Map();
+   allRows.forEach(x=>{
      const k=normName(x.theater);
      if(!k)return;
-     const base=bestDirectoryMatch(x.theater,all)||{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     if(!allByTheater.has(k))allByTheater.set(k,[]);
+     allByTheater.get(k).push(x);
+   });
+   const visibleRows=allRows.filter(x=>!filter||formatFamilyMatch(x.format,filter)||formatFamilyMatch(x.screen,filter));
+   const map=new Map();
+   visibleRows.forEach(x=>{
+     const k=normName(x.theater);
+     if(!k)return;
+     const matched=bestDirectoryMatch(x.theater,all);
+     const base=matched?{...matched}:{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     base._equipmentRows=allByTheater.get(k)||[];
      if(!map.has(k))map.set(k,base);
    });
    return [...map.values()];
@@ -323,7 +336,7 @@ boot();
    return actual.toLowerCase()===wanted.toLowerCase();
  }
  function rowHtml(t){
-   const rows=window.strictTheaterFormatRows(t);
+   const rows=Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t);
    const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(' ')||'所在地未確認';
    const screens=[...new Set(rows.map(x=>String(x.screen||'').trim()).filter(Boolean))];
    const source=rows.find(x=>x.source_url)?.source_url||'';

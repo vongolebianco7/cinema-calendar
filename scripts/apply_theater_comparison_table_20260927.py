@@ -84,12 +84,23 @@ JS = r'''
    return all.find(t=>!window.isGenericChainOnly(t)&&normName(t.name)===n)||null;
  }
  window.equipmentTheaters=function(all,filter){
-   const rows=(formatData.screens||[]).filter(x=>!filter||formatFamilyMatch(x.format,filter)||formatFamilyMatch(x.screen,filter));
-   const map=new Map();
-   rows.forEach(x=>{
+   // Build each theater's complete equipment state first. Filtering only decides visibility.
+   const allRows=(formatData.screens||[]);
+   const allByTheater=new Map();
+   allRows.forEach(x=>{
      const k=normName(x.theater);
      if(!k)return;
-     const base=bestDirectoryMatch(x.theater,all)||{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     if(!allByTheater.has(k))allByTheater.set(k,[]);
+     allByTheater.get(k).push(x);
+   });
+   const visibleRows=allRows.filter(x=>!filter||formatFamilyMatch(x.format,filter)||formatFamilyMatch(x.screen,filter));
+   const map=new Map();
+   visibleRows.forEach(x=>{
+     const k=normName(x.theater);
+     if(!k)return;
+     const matched=bestDirectoryMatch(x.theater,all);
+     const base=matched?{...matched}:{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     base._equipmentRows=allByTheater.get(k)||[];
      if(!map.has(k))map.set(k,base);
    });
    return [...map.values()];
@@ -103,7 +114,7 @@ JS = r'''
    return actual.toLowerCase()===wanted.toLowerCase();
  }
  function rowHtml(t){
-   const rows=window.strictTheaterFormatRows(t);
+   const rows=Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t);
    const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(' ')||'所在地未確認';
    const screens=[...new Set(rows.map(x=>String(x.screen||'').trim()).filter(Boolean))];
    const source=rows.find(x=>x.source_url)?.source_url||'';

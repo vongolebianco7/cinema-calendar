@@ -180,7 +180,7 @@
   function mount(){strengthenArtworkTypography();removePosterExplanationCopy();mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();hydrateMissingDirectors();render();markEditorRanking()}
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-contrast-refresh-v6';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-logo-footer-v7';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates,markEditorRanking,bindExportControlsToEnhancedRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

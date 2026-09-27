@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const model = require('../js/universe-model.js');
+const model = require('../js/ocean-model.js');
 
 const catalog = [
   {id:1,title:'Loved Space',genres:['SF'],director:'A',region:'海外映画',year:2020},
@@ -39,4 +39,8 @@ const mixedPoint=model.filmPosition(mixed), thriller=model.centerForGenre('ス�
 assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres occupy a boundary');
 const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
-console.log('Universe weights, honest metadata, suggestions and stable positions passed');
+assert.equal(model.speciesFor(catalog[0]).id,'silver');
+assert.equal(model.speciesFor(catalog[1]).id,'deep');
+assert.equal(model.speciesFor({...catalog[0],rating:2.5}).id,model.speciesFor(catalog[0]).id,'rating affects appearance, not species');
+assert.equal(model.speciesFor({genres:[]}).id,'manta','unknown traits get a neutral form rather than invented mood');
+console.log('Ocean weights, honest metadata, suggestions and stable positions passed');

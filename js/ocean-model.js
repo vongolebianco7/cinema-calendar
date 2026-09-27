@@ -1,4 +1,4 @@
-/* Deterministic, local taste model. Unknown film attributes stay unknown. */
+/* Deterministic, local ocean taste model. Unknown film attributes stay unknown. */
 (function (root) {
   'use strict';
   const anchors = [[0.1,-2.5],[2.5,-2],[3,-1],[3.5,0],[4,1],[4.5,2],[5,3.5]];
@@ -93,7 +93,25 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition};
-  root.CinemapUniverseModel=api;
+  // A modest first set of fish forms from catalog metadata we actually have.
+  // Explicit editorial classifications can replace this fallback later.
+  const species=[
+    {id:'silver',name:'銀鱗魚',index:0,genres:['SF','アクション','戦争']},
+    {id:'manta',name:'マンタ',index:1,genres:['ドキュメンタリー','アドベンチャー']},
+    {id:'reef',name:'彩鰭魚',index:2,genres:['アニメ','コメディ','ファミリー']},
+    {id:'deep',name:'深海魚',index:3,genres:['ホラー','スリラー','クライム','ミステリー']},
+    {id:'gold',name:'蝶魚',index:4,genres:['ロマンス','音楽']},
+    {id:'veil',name:'透鰭魚',index:5,genres:['ファンタジー']}
+  ];
+  function speciesFor(film){
+    const explicit=species.find(x=>x.id===film?.ecologyType);
+    if(explicit)return explicit;
+    const strengths=genreStrengths(film);
+    const match=species.map(type=>({type,score:Math.max(0,...type.genres.map(g=>strengths[g]||0))}))
+      .sort((a,b)=>b.score-a.score || a.type.index-b.type.index)[0];
+    return match.score>0?match.type:species[1];
+  }
+  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,speciesFor};
+  root.CinemapOceanModel=api;
   if (typeof module !== 'undefined') module.exports=api;
 })(typeof window === 'undefined' ? globalThis : window);

@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const store = window.CinemapRecords;
   let films = [];
+  let recentId=null,toastTimer=null;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
   const url = movie => 'search.html?id=' + encodeURIComponent(movie.id) + '&search=' + encodeURIComponent(movie.title);
   const count = () => Object.values(store.read()).filter(x => x?.watched).length;
@@ -36,7 +37,15 @@
     const entries = Object.values(store.read()).filter(x=>x?.watched).map(x=>({ ...metadata.get(String(x.id)), ...x, genres:x.genres?.length?x.genres:metadata.get(String(x.id))?.genres||[], region:x.region||metadata.get(String(x.id))?.region||'' }));
     const n = entries.length, rated = entries.filter(x=>x.rating != null).length;
     $('dashboardCount').textContent = n + '本記録済み'; $('watchedCount').textContent = n; $('resonatedCount').textContent = rated;
-    window.CinemapUniverseView?.render(films,store.read());
+    window.CinemapOceanView?.render(films,store.read(),recentId);
+    recentId=null;
+    const speciesTotals=new Map();
+    entries.forEach(m=>{const type=window.CinemapOceanModel.speciesFor(m);speciesTotals.set(type.id,(speciesTotals.get(type.id)||0)+1);});
+    $('speciesCount').textContent=speciesTotals.size+' / '+window.CinemapOceanModel.species.length;
+    $('speciesCollection').innerHTML=window.CinemapOceanModel.species.map(type=>{
+      const total=speciesTotals.get(type.id)||0;
+      return '<div class="speciesTile'+(total?'':' locked')+'"><span class="fishIcon" aria-hidden="true" style="--fish-x:'+(type.index%3*50)+'%;--fish-y:'+(Math.floor(type.index/3)*100)+'%"></span><span><strong>'+(total?escape(type.name):'まだ出会っていない')+'</strong><small>'+(total?total+'作品':'')+'</small></span></div>';
+    }).join('');
     const genres = entries.flatMap(x=>Array.isArray(x.genres)?x.genres:[]);
     const years = entries.map(x=>Number(x.year)).filter(x=>x>=1880&&x<=2100).map(x=>Math.floor(x/10)*10+'年代');
     const regions = entries.map(x=>x.region).filter(Boolean);
@@ -64,7 +73,21 @@
   document.addEventListener('change',e=>{
     if(!e.target.matches('[data-rate-id]'))return;
     const id=e.target.dataset.rateId;
-    store.rate(films.find(m=>String(m.id)===id)||store.get({id})||{id},Number(e.target.value));
+    const film=films.find(m=>String(m.id)===id)||store.get({id})||{id};
+    const previous=store.read(),knownSpecies=new Set(Object.values(previous).filter(r=>r?.watched).map(r=>window.CinemapOceanModel.speciesFor(films.find(m=>String(m.id)===String(r.id))||r).id));
+    const first=!previous[id]?.watched&&Number(e.target.value)>0;
+    recentId=first?id:null;
+    store.rate(film,Number(e.target.value));
+    if(first){
+      const species=window.CinemapOceanModel.speciesFor(film);
+      if(!knownSpecies.has(species.id)){
+        const suggestion=films.find(m=>String(m.id)!==id&&!store.get(m)?.watched&&window.CinemapOceanModel.speciesFor(m).id===species.id);
+        const toast=$('speciesToast');
+        const shared=species.genres.filter(g=>film.genres?.includes(g));
+        toast.textContent='新しい魚種を発見 · '+species.name+' — '+(film.title||'作品')+(shared.length?'。手がかり：'+shared.join('・'):'')+(suggestion?'。同じタイプの未登録候補：'+suggestion.title:'');
+        toast.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{toast.hidden=true;},5200);
+      }
+    }
   });
   document.addEventListener('click',e=>{
     const removed=e.target.closest('[data-remove]');if(removed)store.rate({id:removed.dataset.remove},0);

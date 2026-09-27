@@ -24,6 +24,7 @@ const minimalMedalScale=.86;
 const minimalMetaAlpha=.74;
 const minimalMovieWeight=600;
 const minimalFooterGap=38;
+const minimalSingleMovieSize=38;
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -114,7 +115,7 @@ function drawArtwork(movies){
     else{ctx.save();ctx.font=`400 ${columns===2?28:31}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+rowInset+2);ctx.restore()}
     const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
-    const nameSize=columns===2?(shape==='portrait'?29:24):(shape==='portrait'?34:shape==='square'?30:24);
+    const nameSize=columns===2?(shape==='portrait'?29:24):(theme==='minimal'&&columns===1?minimalSingleMovieSize:(shape==='portrait'?34:shape==='square'?30:24));
     const movieWeight=theme==='minimal'?minimalMovieWeight:500;
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,20,artBodySerif,movieWeight,1.10);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
@@ -132,5 +133,5 @@ function downloadArtwork(file){if(artworkURL)URL.revokeObjectURL(artworkURL);art
 async function saveArtwork(){const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinemap.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGをダウンロードしました。iPhoneでは「写真に保存」から画像を長押ししてください。'}catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}}
 function openImageForSaving(){const dialog=document.getElementById('saveImageDialog'),image=document.getElementById('saveImagePreview');image.src=document.getElementById('artCanvas').toDataURL('image/png');if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','')}
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
-window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-final-v7';s.defer=true;document.body.appendChild(s)});
+window.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('script');s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-preview-v8';s.defer=true;document.body.appendChild(s)});
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

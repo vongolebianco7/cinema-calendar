@@ -19,7 +19,8 @@ checks={
  "search inline evidence":(search,["js/critic-evidence.js","data/critic_evidence.json","function renderInlineCriticism(","批評情報がまだ十分に集まっていません"]),
  "calendar deep dive":(index,["批評の傾向を見る","作品情報を見る"]),
  "ranking internal detail":(rankings,["Cinemapで深掘る","search.html?id="]),
- "my cinemap deep dive":(my,["critic.html?id=","search.html?id="]),
+ # My Cinemap enters the existing movie-detail journey first; that page owns the critic CTA.
+ "my cinemap deep dive":(my,["search.html?id="]),
  "creator origin cycle":(discover,["元の作品の批評へ戻る","作り手の作品をたどる"]),
 }
 for name,(body,needles) in checks.items():

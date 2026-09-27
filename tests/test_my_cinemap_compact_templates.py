@@ -20,11 +20,13 @@ def test_director_is_preserved_and_defaulted_from_search_results():
     assert 'if(movie.director)' in TOOLS
 
 
-def test_five_editorial_templates_exist():
-    for token in ["Minimal", "Noir Editorial", "Burgundy Journal", "Sage Museum", "Blue Grey Archive"]:
+def test_four_editorial_templates_exist():
+    for token in ["Minimal", "Noir Editorial", "Burgundy Journal", "Blue Grey Archive"]:
         assert token in HTML
-    for token in ["drawMinimal", "drawNoir", "drawBurgundy", "drawSage", "drawBlueGray"]:
+    for token in ["drawMinimal", "drawNoir", "drawBurgundy", "drawBlueGray"]:
         assert token in ART
+    for token in ["Sage Museum", 'data-theme="sage"', "drawSage"]:
+        assert token not in HTML + ART
 
 
 def test_design_picker_is_directly_below_export_shape_and_layout_controls():
@@ -83,16 +85,12 @@ def test_phone_photo_flow_shows_a_long_pressable_image():
 
 
 def test_editorial_export_uses_one_continuous_vertical_rhythm():
-    # The approved default layout should read as one visual axis from rank 1 through 10,
-    # with a smaller title and a footer tied to the list instead of a large empty bottom zone.
     for token in ["const portraitTitleSize=54", "const portraitListTop=244", "const portraitFooterGap=54", "const rowInset=16"]:
         assert token in ART
     assert "cellH=available/rows" not in ART
 
 
 def test_minimal_theme_has_quieter_warmer_neutral_polish():
-    # Minimal is the hero template: cooler ivory, smaller title, quieter medals/meta,
-    # stronger movie titles, and a calmer footer without changing the other themes.
     for token in [
         "const minimalPortraitTitleSize=46",
         "const minimalPortraitListTop=232",

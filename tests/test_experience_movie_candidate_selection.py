@@ -17,7 +17,7 @@ class ExperienceMovieCandidateSelectionTests(unittest.TestCase):
 
     def test_standard_screening_is_always_first(self):
         text = (ROOT / "experience.html").read_text(encoding="utf-8")
-        self.assertIn("const rows=[['通常上映',scores['通常上映']],...Object.entries(scores).filter(([k])=>k!=='通常上映').sort((a,b)=>b[1]-a[1])];", text)
+        self.assertIn("rows=[['通常上映',scores['通常上映']],...Object.entries(scores).filter(([k])=>k!=='通常上映').sort((a,b)=>b[1]-a[1])]", text)
 
 if __name__ == "__main__":
     unittest.main()

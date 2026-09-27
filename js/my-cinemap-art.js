@@ -1,6 +1,6 @@
 /* My Cinemap: editorial ranking export rendered locally without poster/still artwork. */
 const artPalettes = {
-  minimal: {bg:'#f4ecdf', fg:'#1f1b17', muted:'#6f665d', line:'#cdbf9f', accent:'#a98243', border:'#a98243', dark:false},
+  minimal: {bg:'#f3efe7', fg:'#1f1d19', muted:'#7b746c', line:'#d3cab9', accent:'#b9aa8d', border:'#b9aa8d', dark:false},
   noir: {bg:'#1b1c1d', fg:'#f4efe6', muted:'#b9b0a5', line:'#514c46', accent:'#b8955d', border:'#8d744d', dark:true},
   burgundy: {bg:'#57252d', fg:'#f7eee4', muted:'#d4bdb2', line:'#87505a', accent:'#c89a68', border:'#a66f52', dark:true},
   sage: {bg:'#d7d9cb', fg:'#22251f', muted:'#687065', line:'#a8ae9e', accent:'#817752', border:'#8d8567', dark:false},
@@ -17,6 +17,13 @@ const portraitTitleSize=54;
 const portraitListTop=244;
 const portraitFooterGap=54;
 const rowInset=16;
+const minimalPortraitTitleSize=46;
+const minimalPortraitListTop=232;
+const minimalPortraitRowHeight=154;
+const minimalMedalScale=.86;
+const minimalMetaAlpha=.74;
+const minimalMovieWeight=600;
+const minimalFooterGap=38;
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -36,9 +43,9 @@ function writeLines(ctx,text,x,y,width,maxLines,size,minSize,family,weight=400,l
   fit.lines.forEach((line,i)=>ctx.fillText(line,x,y+i*fit.size*lineHeight));
   return fit.lines.length*fit.size*lineHeight;
 }
-function drawMedal(ctx,x,y,rank,theme){
+function drawMedal(ctx,x,y,rank,theme,scale=1){
   const colors=['#a98c56','#92969a','#a77b61'],metal=colors[rank-1];
-  ctx.save();ctx.translate(x,y);ctx.strokeStyle=metal;ctx.fillStyle=metal;ctx.lineWidth=1.35;
+  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.strokeStyle=metal;ctx.fillStyle=metal;ctx.lineWidth=1.35;
   for(const side of [-1,1])for(let i=0;i<6;i++){
     const a=-1.02+i*.27,rx=side*(25+Math.cos(a)*12),ry=Math.sin(a)*27;
     ctx.save();ctx.translate(rx,ry);ctx.rotate(side*(.62-a*.18));ctx.beginPath();ctx.ellipse(0,0,6,2.2,0,0,Math.PI*2);ctx.stroke();ctx.restore();
@@ -56,24 +63,24 @@ function drawHeaderRule(ctx,w,p){
 function fillEditorialBackground(ctx,w,h,p,top,bottom){
   ctx.fillStyle=p.bg;ctx.fillRect(0,0,w,h);const wash=ctx.createLinearGradient(0,0,0,h);wash.addColorStop(0,top);wash.addColorStop(1,bottom);ctx.fillStyle=wash;ctx.fillRect(0,0,w,h);drawEditorialFrame(ctx,w,h,p);drawHeaderRule(ctx,w,p);
 }
-function drawMinimal(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.34)','rgba(184,156,110,.04)')}
+function drawMinimal(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.28)','rgba(154,143,124,.025)')}
 function drawNoir(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.025)','rgba(0,0,0,.10)')}
 function drawBurgundy(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,238,218,.04)','rgba(43,10,17,.12)')}
 function drawSage(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,245,.18)','rgba(104,117,94,.055)')}
 function drawBlueGray(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.20)','rgba(80,98,113,.05)')}
 function drawBrand(ctx,w,h,theme,y=h-98){
-  const p=artPalettes[theme]||artPalettes.minimal,dark=!!p.dark;
+  const p=artPalettes[theme]||artPalettes.minimal,dark=!!p.dark,isMinimal=theme==='minimal';
   const fg=dark?'#fbf6ed':p.fg,outline=dark?'rgba(239,230,216,.86)':p.border,tagline=dark?'#cbbca6':p.muted;
-  const tile=34,wordW=160,total=tile+12+wordW,x=(w-total)/2;
-  const lineY=y+17,sideGap=42,lineW=Math.max(130,(w-total)/2-sideGap-78);
-  rule(ctx,78,lineY,lineW,p.line,.42);rule(ctx,w-78-lineW,lineY,lineW,p.line,.42);
-  ctx.save();ctx.strokeStyle=outline;ctx.lineWidth=1.35;ctx.strokeRect(x,y,tile,tile);
-  const beam=ctx.createLinearGradient(x+15,y,x+tile+8,y);beam.addColorStop(0,dark?'rgba(255,235,196,.68)':'rgba(166,127,72,.52)');beam.addColorStop(1,'rgba(222,187,131,0)');ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+15,y+13);ctx.lineTo(x+tile+8,y+7);ctx.lineTo(x+tile+8,y+28);ctx.lineTo(x+15,y+21);ctx.closePath();ctx.fill();
-  ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 26px ${artDisplay}`;ctx.fillText('C',x+6,y+1);ctx.font=`500 25px ${artDisplay}`;ctx.fillText('Cinemap',x+tile+12,y-1);
-  ctx.fillStyle=tagline;ctx.font=`600 6.5px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+13,y+27);ctx.restore();
+  const tile=isMinimal?30:34,wordW=isMinimal?148:160,total=tile+12+wordW,x=(w-total)/2;
+  const lineY=y+(isMinimal?15:17),sideGap=42,lineW=Math.max(130,(w-total)/2-sideGap-78);
+  rule(ctx,78,lineY,lineW,p.line,isMinimal?.30:.42);rule(ctx,w-78-lineW,lineY,lineW,p.line,isMinimal?.30:.42);
+  ctx.save();ctx.strokeStyle=outline;ctx.globalAlpha=isMinimal?.76:1;ctx.lineWidth=isMinimal?1.15:1.35;ctx.strokeRect(x,y,tile,tile);
+  const beam=ctx.createLinearGradient(x+15,y,x+tile+8,y);beam.addColorStop(0,dark?'rgba(255,235,196,.68)':isMinimal?'rgba(154,143,124,.38)':'rgba(166,127,72,.52)');beam.addColorStop(1,'rgba(222,187,131,0)');ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+15,y+13);ctx.lineTo(x+tile+8,y+7);ctx.lineTo(x+tile+8,y+(isMinimal?25:28));ctx.lineTo(x+15,y+(isMinimal?20:21));ctx.closePath();ctx.fill();
+  ctx.globalAlpha=1;ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 ${isMinimal?23:26}px ${artDisplay}`;ctx.fillText('C',x+(isMinimal?5:6),y+1);ctx.font=`500 ${isMinimal?23:25}px ${artDisplay}`;ctx.fillText('Cinemap',x+tile+12,y-1);
+  ctx.fillStyle=tagline;ctx.globalAlpha=isMinimal?.82:1;ctx.font=`600 ${isMinimal?6:6.5}px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+13,y+(isMinimal?25:27));ctx.restore();
 }
-function layoutMetrics(shape,columns){
-  if(shape==='portrait')return {titleY:112,titleSize:portraitTitleSize,listTop:portraitListTop,rowH:columns===2?286:148,footerGap:portraitFooterGap,pad:128};
+function layoutMetrics(shape,columns,theme){
+  if(shape==='portrait')return {titleY:112,titleSize:theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize,listTop:theme==='minimal'?minimalPortraitListTop:portraitListTop,rowH:theme==='minimal'?minimalPortraitRowHeight:(columns===2?286:148),footerGap:theme==='minimal'?minimalFooterGap:portraitFooterGap,pad:128};
   if(shape==='square')return {titleY:96,titleSize:58,listTop:222,rowH:columns===2?220:110,footerGap:42,pad:118};
   return {titleY:66,titleSize:46,listTop:182,rowH:columns===2?136:68,footerGap:30,pad:104};
 }
@@ -83,7 +90,7 @@ function drawArtwork(movies){
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
   const w=c.width,h=c.height;
   const columns=layout==='double'?2:1;
-  const metrics=layoutMetrics(shape,columns),pad=metrics.pad,inner=w-2*pad;
+  const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
   ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,sage:drawSage,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
   const title=artValue('title').trim()||'MY TOP OF 2026';
@@ -91,7 +98,7 @@ function drawArtwork(movies){
   const titleHeight=writeLines(ctx,title,w/2,metrics.titleY,inner*.78,2,metrics.titleSize,40,artDisplay,500,1.04);
   const note=artValue('sub').trim();
   let listTop=Math.max(metrics.listTop,metrics.titleY+titleHeight+58);
-  if(note){ctx.fillStyle=p.muted;writeLines(ctx,note,w/2,metrics.titleY+titleHeight+20,inner*.78,2,21,17,artSans,400);ctx.fillStyle=p.fg;listTop=Math.max(listTop,metrics.titleY+titleHeight+76)}
+  if(note){ctx.fillStyle=p.muted;ctx.save();ctx.globalAlpha=theme==='minimal'?.76:1;writeLines(ctx,note,w/2,metrics.titleY+titleHeight+20,inner*.78,2,21,17,artSans,400);ctx.restore();ctx.fillStyle=p.fg;listTop=Math.max(listTop,metrics.titleY+titleHeight+76)}
   ctx.textAlign='left';
   const items=(movies||[]).slice(0,10);
   const rows=columns===2?5:10;
@@ -101,17 +108,19 @@ function drawArtwork(movies){
   items.forEach((m,i)=>{
     const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;
     const x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
-    rule(ctx,x,y,cellW,p.line,p.dark?.30:.32);
-    if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme);
-    else{ctx.save();ctx.font=`400 ${columns===2?28:31}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+rowInset+2);ctx.restore()}
+    rule(ctx,x,y,cellW,p.line,theme==='minimal'?.24:(p.dark?.30:.32));
+    const medalScale=theme==='minimal'?minimalMedalScale:1;
+    if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
+    else{ctx.save();ctx.font=`400 ${columns===2?28:31}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.fillText(String(i+1),numberX,y+rowInset+2);ctx.restore()}
     const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
     const nameSize=columns===2?(shape==='portrait'?29:24):(shape==='portrait'?34:shape==='square'?30:24);
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,20,artBodySerif,500,1.10);
+    const movieWeight=theme==='minimal'?minimalMovieWeight:500;
+    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,20,artBodySerif,movieWeight,1.10);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-    if(meta){ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+7,tw,1,columns===2?18:20,15,artSans,400);ctx.fillStyle=p.fg}
+    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+7,tw,1,columns===2?18:20,15,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });
-  rule(ctx,pad,listBottom,inner,p.line,.34);
+  rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.25:.34);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);
   drawBrand(ctx,w,h,theme,footerY);
   c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));

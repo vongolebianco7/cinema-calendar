@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/apply_my_cinemap_controls_20260927.py"
+      - "scripts/fix_my_cinemap_controls_followup_20260927.py"
       - ".github/workflows/apply-my-cinemap-controls-20260927.yml"
 
 permissions:
@@ -34,7 +35,9 @@ jobs:
           echo "RED confirmed."
 
       - name: Apply My Cinemap controls
-        run: python scripts/apply_my_cinemap_controls_20260927.py apply
+        run: |
+          python scripts/apply_my_cinemap_controls_20260927.py apply
+          python scripts/fix_my_cinemap_controls_followup_20260927.py
 
       - name: Check JavaScript syntax
         run: |

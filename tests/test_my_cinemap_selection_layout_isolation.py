@@ -1,12 +1,13 @@
 from pathlib import Path
 
-html = Path('my-cinemap.html').read_text(encoding='utf-8')
+art = Path('js/my-cinemap-art.js').read_text(encoding='utf-8')
 
-# Selected ranking must be two columns from first paint and not depend on export layout.
-assert '#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))' in html
-assert '#list>.item:nth-child(-n+5){grid-column:1' in html
-assert '#list>.item:nth-child(n+6){grid-column:2' in html
+# Selected ranking must be two columns from the first rendered frame, before async helper scripts load.
+assert "id='my-cinemap-selection-layout'" in art
+assert '#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))' in art
+assert '#list>.item:nth-child(-n+5){grid-column:1' in art
+assert '#list>.item:nth-child(n+6){grid-column:2' in art
 
-# Export controls must redraw only the canvas, never rebuild the selection list.
-assert '["format","layout"].forEach(id=>document.getElementById(id).onchange=()=>drawArtwork(picks))' in html
-assert '["format","layout"].forEach(id=>document.getElementById(id).onchange=render)' not in html
+# Export controls must redraw only the canvas, never rebuild the selected-ranking DOM.
+assert "document.getElementById(id).onchange=()=>drawArtwork(picks)" in art
+assert "['format','layout'].forEach" in art

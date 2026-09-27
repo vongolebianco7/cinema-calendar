@@ -5,15 +5,15 @@ import sys
 VERSIONS = {
     'my-cinemap.html': (
         r'js/my-cinemap-art\.js\?v=[^"\'<>]+',
-        'js/my-cinemap-art.js?v=20260927-contrast-refresh-v14',
+        'js/my-cinemap-art.js?v=20260927-logo-footer-v15',
     ),
     'js/my-cinemap-art.js': (
         r'js/my-cinemap-art-direction\.js\?v=[^"\'`<>]+',
-        'js/my-cinemap-art-direction.js?v=20260927-contrast-refresh-v3',
+        'js/my-cinemap-art-direction.js?v=20260927-logo-footer-v4',
     ),
     'js/my-cinemap-art-direction.js': (
         r'js/my-cinemap-cinema-templates\.js\?v=[^"\'`<>]+',
-        'js/my-cinemap-cinema-templates.js?v=20260927-contrast-refresh-v6',
+        'js/my-cinemap-cinema-templates.js?v=20260927-logo-footer-v7',
     ),
 }
 

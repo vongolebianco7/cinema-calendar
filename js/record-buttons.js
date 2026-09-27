@@ -38,8 +38,11 @@
         const resolved = await window.CinemapRecordResolveAward?.(card.dataset.awardFilm || selected.title);
         button.disabled = false;
         if (!resolved || !store.movieId(resolved)) { button.textContent = '特定できません'; return; }
-        card.dataset.recordId = store.movieId(resolved);
-        selected = { ...resolved, id: card.dataset.recordId };
+        const id = store.movieId(resolved);
+        document.querySelectorAll('.awardCard[data-award-film]').forEach(other => {
+          if (other.dataset.awardFilm === card.dataset.awardFilm) other.dataset.recordId = id;
+        });
+        selected = { ...resolved, id };
       }
       store.toggleWatched(selected);
     });

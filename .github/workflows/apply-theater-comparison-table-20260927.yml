@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/apply_theater_comparison_table_20260927.py"
+      - "tests/test_theater_equipment_explorer.py"
       - ".github/workflows/apply-theater-comparison-table-20260927.yml"
 
 permissions:
@@ -27,7 +28,7 @@ jobs:
         run: python scripts/apply_theater_comparison_table_20260927.py apply
       - name: Verify comparison table
         run: python tests/test_theater_comparison_table.py
-      - name: Verify existing theater equipment controls
+      - name: Verify theater equipment controls
         run: python tests/test_theater_equipment_explorer.py
       - name: Commit updates
         run: |

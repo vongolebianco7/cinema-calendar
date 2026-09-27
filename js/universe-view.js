@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   const model = root.CinemapUniverseModel;
-  const genres = ['SF','ドラマ','サスペンス','コメディ','アニメ','アクション','ロマンス','ホラー','ミステリー','ファンタジー','クライム','情報未取得'];
+  const baseGenres = ['SF','ドラマ','スリラー','コメディ','アニメ','アクション','ロマンス','ホラー','ミステリー','ファンタジー','クライム','アドベンチャー'];
   const state = {genre:null,director:null,film:null};
   let catalog=[], records={};
   const esc = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -10,6 +10,11 @@
   const watched = film => !!records[String(film.id)]?.watched;
   const known = () => catalog.filter(watched);
   const inGenre = (film,genre) => genre==='情報未取得' ? !film.genres?.length : !!film.genres?.includes(genre);
+  const visibleGenres = () => {
+    const recorded=known();
+    const extra=[...new Set(recorded.flatMap(f=>f.genres||[]))].filter(g=>!baseGenres.includes(g)).sort();
+    return [...baseGenres,...extra,...(recorded.some(f=>!f.genres?.length)?['情報未取得']:[])];
+  };
   function filmCard(film, unknown=false) {
     const record=records[String(film.id)];
     return '<button class="universePlanet'+(unknown?' universePlanet--unknown':'')+(record?.rating===5?' universePlanet--best':'')+'" type="button" data-universe-film="'+esc(film.id)+'" aria-label="'+esc(film.title)+(unknown?'・未登録の候補':'・記録した作品')+'">'+(film.poster?'<span class="planetArtwork"><img src="'+esc(film.poster)+'" alt="" loading="lazy"></span>':'<span class="planetArtwork planetFallback"></span>')+'<span class="planetName">'+esc(film.title||'作品')+'</span><span class="planetMeta">'+(unknown?'未登録の候補':record?.rating!=null?record.rating+' ★':'観た · 未評価')+'</span></button>';
@@ -17,7 +22,7 @@
   function farView() {
     const films=known(), rated=films.filter(f=>records[String(f.id)]?.rating!=null).length;
     const stage=rated>=20?'本格Universe':rated>=10?'仮Universe':'形成中';
-    const nodes=genres.map((genre,index)=>{
+    const nodes=visibleGenres().map((genre,index)=>{
       const matching=films.filter(f=>inGenre(f,genre));
       const p=model.position('genre:'+genre);
       return '<button type="button" class="universeGalaxy'+(matching.length?'':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--px:'+p.x+'%;--py:'+p.y+'%;--gi:'+index+'" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><small>'+(matching.length?matching.length+'作品を記録':'未登録の領域')+'</small></button>';
@@ -52,7 +57,7 @@
   document.addEventListener('click',event=>{
     const genre=event.target.closest('[data-universe-genre]');if(genre){state.genre=genre.dataset.universeGenre;state.director=null;state.film=null;render();return;}
     const director=event.target.closest('[data-universe-director]');if(director){state.director=director.dataset.universeDirector;state.film=null;render();return;}
-    const film=event.target.closest('[data-universe-film]');if(film){state.film=film.dataset.universeFilm;const match=catalog.find(f=>String(f.id)===state.film);if(match && !inGenre(match,state.genre)){state.genre=genres.find(g=>inGenre(match,g))||'情報未取得';}state.director=match?.director||'監督データ未取得';render();return;}
+    const film=event.target.closest('[data-universe-film]');if(film){state.film=film.dataset.universeFilm;const match=catalog.find(f=>String(f.id)===state.film);if(match && !inGenre(match,state.genre)){state.genre=visibleGenres().find(g=>inGenre(match,g))||'情報未取得';}state.director=match?.director||'監督データ未取得';render();return;}
     const back=event.target.closest('[data-universe-back]');if(back){if(back.dataset.universeBack==='far')state.genre=null;else{state.director=null;state.film=null;}render();}
   });
   root.CinemapUniverseView={render};

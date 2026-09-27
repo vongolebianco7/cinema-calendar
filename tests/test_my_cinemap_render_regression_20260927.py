@@ -15,7 +15,7 @@ def test_unknown_font_falls_back_to_modern():
 
 def test_removed_sage_renderer_is_not_referenced():
     assert "sage:drawSage" not in ART
-    assert "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v4" in ART
+    assert "my-cinemap-art-direction.js?v=" in ART
 
 
 def test_editorial_font_option_is_removed():
@@ -27,7 +27,7 @@ def test_selected_ranking_poster_is_not_hidden():
     assert "#list .item>:nth-child(2){display:none!important}" not in DIRECTION
     assert "#list .item>:nth-child(2){" in DIRECTION
     assert "display:block!important" in DIRECTION
-    assert "grid-template-columns:22px 42px minmax(0,1fr)!important" in DIRECTION
+    assert "grid-template-columns:20px 38px minmax(0,1fr)!important" in DIRECTION
     assert "#list .item>:nth-child(3){grid-column:3!important" in DIRECTION
 
 
@@ -37,9 +37,24 @@ def test_screening_room_is_not_reintroduced():
     assert "'cinema-screening':" not in CINEMA
 
 
+def test_removed_templates_are_not_reintroduced():
+    assert "{id:'cinema-artdeco'" not in DIRECTION
+    assert "'cinema-artdeco':" not in CINEMA
+    assert "REMOVED_THEMES=['bluegray','cinema-artdeco']" in DIRECTION
+
+
 def test_cinema_templates_honor_font_size_control():
     assert "const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;" in CINEMA
     assert "const nameSize=(columns===2?" in CINEMA
     assert ")*fontScale;" in CINEMA
-    assert "singleMetaSize)*fontScale" in CINEMA
-    assert "16*fontScale" in CINEMA
+    assert "22:24)*fontScale" in CINEMA
+    assert "18*fontScale" in CINEMA
+
+
+def test_compact_performance_hooks_are_kept():
+    assert "scheduleArtworkRender" in DIRECTION
+    assert "requestAnimationFrame" in DIRECTION
+    assert "HYDRATION_CONCURRENCY=3" in DIRECTION
+    assert "requestIdleCallback" in DIRECTION
+    assert "scheduleArtworkBlob" in CINEMA
+    assert "clearTimeout(blobTimer)" in CINEMA

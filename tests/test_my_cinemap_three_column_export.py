@@ -25,6 +25,22 @@ missing_art = [token for token in required_art if token not in art]
 if missing_art:
     raise SystemExit(f"My Cinemap five-theme artwork missing: {missing_art}")
 
+minimal_polish = [
+    "const minimalPortraitTitleSize=46",
+    "const minimalPortraitListTop=232",
+    "const minimalMedalScale=.86",
+    "const minimalMetaAlpha=.74",
+    "const minimalMovieWeight=600",
+    "const minimalFooterGap=38",
+    "#f3efe7",
+    "#b9aa8d",
+    "theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize",
+    "theme==='minimal'?minimalMedalScale:1",
+]
+missing_minimal = [token for token in minimal_polish if token not in art]
+if missing_minimal:
+    raise SystemExit(f"Minimal editorial polish missing: {missing_minimal}")
+
 forbidden_art = [
     "const columns=3;",
     "drawFilmNote",
@@ -64,4 +80,4 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
 if "my-cinemap-editorial-v10" not in html:
     raise SystemExit("My Cinemap artwork cache-bust version was not bumped")
 
-print("My Cinemap five editorial themes and one/two-column export checks passed")
+print("My Cinemap five editorial themes, Minimal polish, and one/two-column export checks passed")

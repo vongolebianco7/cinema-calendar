@@ -11,38 +11,58 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AWARDS_PATH = ROOT / "data" / "awards.json"
 ENDPOINT = "https://query.wikidata.org/sparql"
-USER_AGENT = "CinemapAwardsImporter/1.0 (https://github.com/vongolebianco7/cinema-calendar)"
+USER_AGENT = "CinemapAwardsImporter/1.1 (https://github.com/vongolebianco7/cinema-calendar)"
 
-# Wikidata entity IDs for the award families / festivals.
-# We deliberately use structured relationships rather than scraping award sites.
-FAMILY_BLOCK = r'''
-  {
-    ?award wdt:P31 wd:Q19020 .
-    BIND("アカデミー賞" AS ?organization)
-  }
-  UNION {
-    { ?award wdt:P31 wd:Q732997 } UNION { ?award wdt:P361 wd:Q732997 }
-    BIND("BAFTA" AS ?organization)
-  }
-  UNION {
-    { ?award wdt:P31 wd:Q1011547 } UNION { ?award wdt:P361 wd:Q1011547 }
-    BIND("ゴールデングローブ賞" AS ?organization)
-  }
-  UNION {
-    ?award wdt:P1027 wd:Q42369 .
-    BIND("カンヌ国際映画祭" AS ?organization)
-  }
-  UNION {
-    ?award wdt:P1027 wd:Q49024 .
-    BIND("ヴェネチア国際映画祭" AS ?organization)
-  }
-  UNION {
-    ?award wdt:P1027 wd:Q130871 .
-    BIND("ベルリン国際映画祭" AS ?organization)
-  }
-'''
+# One query per family is intentionally used instead of one giant UNION query.
+# It is faster, easier on WDQS, and a single family can fail/retry independently.
+FAMILIES = {
+    "アカデミー賞": {
+        "start": 1929,
+        "selector": "?award wdt:P31 wd:Q19020 .",
+    },
+    "BAFTA": {
+        "start": 1948,
+        "selector": "{ ?award wdt:P31 wd:Q732997 } UNION { ?award wdt:P361 wd:Q732997 }",
+    },
+    "ゴールデングローブ賞": {
+        "start": 1944,
+        "selector": "{ ?award wdt:P31 wd:Q1011547 } UNION { ?award wdt:P361 wd:Q1011547 }",
+    },
+    "カンヌ国際映画祭": {
+        "start": 1946,
+        "selector": '''
+          { ?award wdt:P1027 wd:Q42369 }
+          UNION {
+            ?award rdfs:label ?awardEnglish .
+            FILTER(LANG(?awardEnglish) = "en")
+            FILTER(REGEX(?awardEnglish, "Cannes|Palme d'Or|Short Film Palme d'Or", "i"))
+          }
+        ''',
+    },
+    "ヴェネチア国際映画祭": {
+        "start": 1932,
+        "selector": '''
+          { ?award wdt:P1027 wd:Q49024 }
+          UNION {
+            ?award rdfs:label ?awardEnglish .
+            FILTER(LANG(?awardEnglish) = "en")
+            FILTER(REGEX(?awardEnglish, "Venice Film Festival|Golden Lion|Silver Lion|Volpi Cup", "i"))
+          }
+        ''',
+    },
+    "ベルリン国際映画祭": {
+        "start": 1951,
+        "selector": '''
+          { ?award wdt:P1027 wd:Q130871 }
+          UNION {
+            ?award rdfs:label ?awardEnglish .
+            FILTER(LANG(?awardEnglish) = "en")
+            FILTER(REGEX(?awardEnglish, "Berlin International Film Festival|Golden Bear|Silver Bear", "i"))
+          }
+        ''',
+    },
+}
 
-# Fallback English/Japanese labels used when Wikidata has no Japanese label.
 CATEGORY_RENAMES = {
     "Academy Award for Best Picture": "作品賞",
     "Academy Award for Best Director": "監督賞",
@@ -56,7 +76,8 @@ CATEGORY_RENAMES = {
 }
 
 
-def query_for_years(start_year: int, end_year: int) -> str:
+def family_query(organization: str, selector: str, start_year: int, end_year: int) -> str:
+    safe_org = organization.replace('"', '\\"')
     return f'''
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -66,8 +87,8 @@ PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
-SELECT DISTINCT ?organization ?award ?awardLabel ?recipient ?recipientLabel ?work ?workLabel ?date WHERE {{
-  {FAMILY_BLOCK}
+SELECT DISTINCT ?award ?awardLabel ?recipient ?recipientLabel ?work ?workLabel ?date WHERE {{
+  {selector}
   ?recipient p:P166 ?awardStatement .
   ?awardStatement ps:P166 ?award .
   OPTIONAL {{ ?awardStatement pq:P1686 ?work . }}
@@ -89,7 +110,7 @@ SELECT DISTINCT ?organization ?award ?awardLabel ?recipient ?recipientLabel ?wor
     ?work rdfs:label ?workLabel .
   }}
 }}
-ORDER BY ?date ?organization ?awardLabel ?recipientLabel
+ORDER BY ?date ?awardLabel ?recipientLabel
 '''
 
 
@@ -102,13 +123,13 @@ def fetch_sparql(query: str, retries: int = 4) -> dict:
     last_error = None
     for attempt in range(retries):
         try:
-            with urllib.request.urlopen(req, timeout=90) as resp:
+            with urllib.request.urlopen(req, timeout=120) as resp:
                 return json.loads(resp.read().decode("utf-8"))
-        except Exception as exc:  # network/service errors should be retried conservatively
+        except Exception as exc:
             last_error = exc
             if attempt + 1 == retries:
                 raise
-            time.sleep(3 * (attempt + 1))
+            time.sleep(4 * (attempt + 1))
     raise RuntimeError(last_error)
 
 
@@ -123,8 +144,7 @@ def clean_label(value: str | None) -> str:
     return (value or "").strip()
 
 
-def normalize_binding(binding: dict) -> dict | None:
-    organization = clean_label(binding.get("organization", {}).get("value"))
+def normalize_binding(organization: str, binding: dict) -> dict | None:
     award_label = clean_label(binding.get("awardLabel", {}).get("value"))
     recipient = clean_label(binding.get("recipientLabel", {}).get("value"))
     work = clean_label(binding.get("workLabel", {}).get("value"))
@@ -132,11 +152,10 @@ def normalize_binding(binding: dict) -> dict | None:
     award_uri = clean_label(binding.get("award", {}).get("value"))
     recipient_uri = clean_label(binding.get("recipient", {}).get("value"))
     year = year_from_date(date)
-    if not organization or not award_label or not recipient or not year:
+    if not award_label or not recipient or not year:
         return None
 
     category = CATEGORY_RENAMES.get(award_label, award_label)
-    # If a person received the award for a work, show film first then recipient.
     title = f"{work} — {recipient}" if work and work != recipient else recipient
     return {
         "year": year,
@@ -150,19 +169,20 @@ def normalize_binding(binding: dict) -> dict | None:
     }
 
 
-def collect(start_year: int, end_year: int, chunk_years: int = 8) -> list[dict]:
+def collect(start_year: int, end_year: int) -> list[dict]:
     rows: list[dict] = []
-    start = start_year
-    while start <= end_year:
-        end = min(end_year, start + chunk_years - 1)
-        print(f"querying {start}-{end}...", flush=True)
-        payload = fetch_sparql(query_for_years(start, end))
+    for organization, spec in FAMILIES.items():
+        family_start = max(start_year, int(spec["start"]))
+        if family_start > end_year:
+            continue
+        print(f"querying {organization}: {family_start}-{end_year}...", flush=True)
+        payload = fetch_sparql(family_query(organization, str(spec["selector"]), family_start, end_year))
         bindings = payload.get("results", {}).get("bindings", [])
-        normalized = [normalize_binding(b) for b in bindings]
-        rows.extend(r for r in normalized if r)
-        print(f"  received {len(bindings)} bindings / {sum(r is not None for r in normalized)} usable rows", flush=True)
-        start = end + 1
-        time.sleep(1.0)
+        normalized = [normalize_binding(organization, b) for b in bindings]
+        usable = [r for r in normalized if r]
+        rows.extend(usable)
+        print(f"  {organization}: {len(bindings)} bindings / {len(usable)} usable rows", flush=True)
+        time.sleep(1.5)
     return rows
 
 
@@ -201,13 +221,16 @@ def validate(rows: list[dict]) -> None:
         assert row.get("category")
         assert row.get("title")
         assert row.get("source")
-    # Historical floor checks: do not regress to only modern awards.
-    assert any(r["organization"] == "アカデミー賞" and r["year"] <= 1930 for r in rows)
-    assert any(r["organization"] == "カンヌ国際映画祭" and r["year"] <= 1955 for r in rows)
-    assert any(r["organization"] == "ヴェネチア国際映画祭" and r["year"] <= 1950 for r in rows)
-    assert any(r["organization"] == "ベルリン国際映画祭" and r["year"] <= 1955 for r in rows)
-    assert any(r["organization"] == "ゴールデングローブ賞" and r["year"] <= 1950 for r in rows)
-    assert any(r["organization"] == "BAFTA" and r["year"] <= 1955 for r in rows)
+    floors = {
+        "アカデミー賞": 1930,
+        "カンヌ国際映画祭": 1955,
+        "ヴェネチア国際映画祭": 1950,
+        "ベルリン国際映画祭": 1955,
+        "ゴールデングローブ賞": 1950,
+        "BAFTA": 1955,
+    }
+    for organization, floor in floors.items():
+        assert any(r["organization"] == organization and r["year"] <= floor for r in rows), f"historical floor missing: {organization}"
 
 
 def main() -> None:

@@ -67,6 +67,7 @@
   function renderCinemaTemplate(movies,theme){
     const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
     const shape=artValue('format')||'portrait',layout=artValue('layout')||'single';
+    const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
     const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
     c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
     const w=c.width,h=c.height,columns=layout==='double'?2:1;
@@ -117,10 +118,10 @@
       else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
       const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+Math.max(10,(rowH-76)/2);
       ctx.fillStyle=p.fg;
-      const nameSize=columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?singleMovieSize:shape==='square'?34:28);
-      const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,columns===2?21:24,font.movie,font.movieWeight,1.10);
+      const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?singleMovieSize:shape==='square'?34:28))*fontScale;
+      const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,font.movieWeight,1.10);
       const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-      if(meta){ctx.save();ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,columns===2?doubleMetaSize:singleMetaSize,16,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
+      if(meta){ctx.save();ctx.fillStyle=p.muted;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
     });
     rule(ctx,pad,listBottom,inner,p.line,p.dark?.52:.42);
     drawBrand(ctx,w,h,theme,Math.min(h-92,listBottom+38));

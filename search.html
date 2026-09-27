@@ -164,11 +164,11 @@ function starText(n){n=Math.max(1,Math.min(5,Math.round(Number(n)||1)));return "
 function viewingTimelineHtml(m,av){
  const rows=[];
  if(m.date)rows.push({when:String(m.date).slice(0,10),label:"公開日",detail:"劇場公開・作品データ"});
- if(av.flatrate&&av.flatrate.length)rows.push({when:"現在",label:"見放題",detail:av.flatrate.join(" / ")});
- if(av.rent&&av.rent.length)rows.push({when:"現在",label:"レンタル",detail:av.rent.join(" / ")});
- if(av.buy&&av.buy.length)rows.push({when:"現在",label:"購入",detail:av.buy.join(" / ")});
- if(!rows.some(x=>x.when==="現在"))rows.push({when:"現在",label:"配信",detail:"配信情報を確認できていません。"});
- return '<div class="watchTimeline">'+rows.map(x=>'<div class="watchTimelineRow"><div class="watchTimelineWhen">'+E(x.when)+'</div><div><div class="watchTimelineLabel">'+E(x.label)+'</div><div class="watchTimelineDetail">'+E(x.detail)+'</div></div></div>').join("")+'</div>'
+ if(av.flatrate&&av.flatrate.length)rows.push({when:"取得時点",label:"見放題",detail:av.flatrate.join(" / ")});
+ if(av.rent&&av.rent.length)rows.push({when:"取得時点",label:"レンタル",detail:av.rent.join(" / ")});
+ if(av.buy&&av.buy.length)rows.push({when:"取得時点",label:"購入",detail:av.buy.join(" / ")});
+ if(!rows.some(x=>x.when==="取得時点"))rows.push({when:"取得時点",label:"配信",detail:"配信情報を確認できていません。"});
+ return '<div class="watchTimeline">'+rows.map(x=>'<div class="watchTimelineRow"><div class="watchTimelineWhen">'+E(x.when)+'</div><div><div class="watchTimelineLabel">'+E(x.label)+'</div><div class="watchTimelineDetail">'+E(x.detail)+'</div></div></div>').join("")+'</div><p class="small">配信先は取得時点の参考情報です（観測日の記録はありません）。配信開始日の記録ではありません。最新の視聴可否は各サービスでご確認ください。'+(av.source_url?'<a href="'+E(av.source_url)+'" target="_blank" rel="noopener noreferrer">提供元の情報を見る →</a>':'')+'</p>'
 }
 function screeningKnown(v){return v!==undefined&&v!==null&&v!=="unknown"}
 function screeningConfidence(values){const known=values.filter(screeningKnown).length;if(known===values.length&&known>0)return "確認済み";if(known>0)return "一部確認";return "情報不足"}

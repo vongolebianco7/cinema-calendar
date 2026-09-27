@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 art_path=Path('js/my-cinemap-art.js')
 art=art_path.read_text(encoding='utf-8')
@@ -10,4 +11,8 @@ if "artValue('fontSize')" not in art:
     new="const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;"
     art=art.replace(old,new)
     art=art.replace("writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,columns===2?doubleMetaSize:singleMetaSize,16,artSans,400)","writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400)")
+
+art=re.sub(r"\n\s*sage:\s*\{[^\n]+\},?", "", art)
+art=re.sub(r"\nfunction drawSage\([^\n]+\n", "\n", art)
+art=art.replace("\n  if(theme==='sage'){drawBotanicalLines(ctx,w,h,p);return}","")
 art_path.write_text(art,encoding='utf-8')

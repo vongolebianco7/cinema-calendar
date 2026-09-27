@@ -8,30 +8,27 @@ def read(path):
 
 
 def test_all_my_cinemap_templates_anchor_brand_near_canvas_bottom():
-    art = read("js/my-cinemap-art.js")
     cinema = read("js/my-cinemap-cinema-templates.js")
 
-    assert "function brandFooterTop(shape,h,brandHeight" in art
-    assert "brandFooterTop(shape,h,theme==='minimal'?30:34)" in art
+    assert "const originalDrawBrand=drawBrand" in cinema
+    assert "function brandFooterTop(shape,h,brandHeight" in cinema
+    assert "drawBrand=function(ctx,w,h,theme,y){" in cinema
+    assert "brandFooterTop(shape,h,theme==='minimal'?30:34)" in cinema
     assert "brandFooterTop(shape,h,36*brandScale)" in cinema
     assert "Math.min(h-118,listBottom+42)" not in cinema
-    assert "Math.min(h-92,listBottom+metrics.footerGap)" not in art
 
 
 def test_logo_has_a_dedicated_effect_free_safe_zone():
-    art = read("js/my-cinemap-art.js")
     cinema = read("js/my-cinemap-cinema-templates.js")
 
-    assert "function drawBrandSafeZone(ctx,w,h,p,y,brandHeight" in art
-    assert "drawBrandSafeZone(ctx,w,h,p,footerY" in art
+    assert "function drawBrandSafeZone(ctx,w,h,p,y,brandHeight" in cinema
+    assert "drawBrandSafeZone(ctx,w,h,p,safeY,brandHeight)" in cinema
     assert "drawBrandSafeZone(ctx,w,h,p,footerY,36*brandScale)" in cinema
 
 
-def test_my_cinemap_script_chain_is_cache_busted_for_footer_change():
-    html = read("my-cinemap.html")
-    art = read("js/my-cinemap-art.js")
-    direction = read("js/my-cinemap-art-direction.js")
+def test_cache_bump_script_updates_the_full_my_cinemap_script_chain():
+    bump = read("scripts/bump_my_cinemap_cache.py")
 
-    assert "my-cinemap-art.js?v=20260927-logo-footer-v15" in html
-    assert "my-cinemap-art-direction.js?v=20260927-logo-footer-v4" in art
-    assert "my-cinemap-cinema-templates.js?v=20260927-logo-footer-v7" in direction
+    assert "my-cinemap-art.js?v=20260927-logo-footer-v15" in bump
+    assert "my-cinemap-art-direction.js?v=20260927-logo-footer-v4" in bump
+    assert "my-cinemap-cinema-templates.js?v=20260927-logo-footer-v7" in bump

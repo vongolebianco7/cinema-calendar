@@ -2,81 +2,53 @@ from pathlib import Path
 import json
 import unittest
 
-# Regression contract for the deployed B (Outline Tile) brand treatment.
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "discover.html", "experience.html", "my-cinemap.html", "search.html", "rankings.html", "critic.html", "revivals.html", "theaters.html"]
+BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
+ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
 
 class BrandIdentityTests(unittest.TestCase):
-    def test_primary_pages_use_approved_outline_tile_wordmark(self):
+    def test_primary_pages_use_image_based_b_lockup(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")
-            self.assertIn("cinemap-outline-brand-v2", text, page)
-            self.assertIn("gBrandTile", text, page)
-            self.assertIn("gBrandGlyph", text, page)
-            self.assertIn("gBrandBeam", text, page)
-            self.assertIn("gBrandName", text, page)
-            self.assertIn("gBrandTagline", text, page)
-            self.assertIn("EXPLORE CINEMA", text, page)
-            self.assertIn('flex-direction:row!important', text, page)
-            self.assertIn('flex-wrap:nowrap!important', text, page)
-            self.assertIn('"Bodoni 72",Didot', text, page)
-            self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
-            self.assertNotIn('.brandA:after{content:""', text, page)
-
-            # Final B craft: compact, thin outline, no decorative tile effects,
-            # restrained projection beam and editorial wordmark proportions.
+            self.assertIn("cinemap-brand-image-v3", text, page)
+            self.assertIn("gBrandImage", text, page)
+            self.assertGreaterEqual(text.count(BRAND_ASSET), 2, page)
             self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
-            self.assertIn('.gBrandTile{width:30px;height:30px;flex:0 0 30px;border-radius:7px}', text, page)
-            self.assertIn('border:.5px solid rgba(240,224,199,.86)', text, page)
-            self.assertIn('background:transparent', text, page)
-            self.assertIn('box-shadow:none', text, page)
-            self.assertIn('.gBrandName{font-size:22px;line-height:.90;letter-spacing:-.018em}', text, page)
-            self.assertIn('.gBrandBeam{left:12px;top:6px;width:19px;height:18px;opacity:.96}', text, page)
-            self.assertIn('rgba(255,239,205,.90)', text, page)
-            self.assertIn('filter:none', text, page)
-            self.assertIn('.gBrand{flex-direction:row!important;flex-wrap:nowrap!important;gap:7px!important', text, page)
+            self.assertIn('.gBrandImage{display:block;width:132px;height:auto;max-width:none}', text, page)
+            self.assertIn('@media(max-width:370px){.gBrandImage{width:118px}}', text, page)
+            self.assertNotIn("gBrandTile", text, page)
+            self.assertNotIn("gBrandGlyph", text, page)
+            self.assertNotIn("gBrandBeam", text, page)
+            self.assertNotIn("gBrandName", text, page)
+            self.assertNotIn("gBrandTagline", text, page)
+            self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
 
-            # Both the visible header and drawer must use the horizontal gBrand flex lockup.
-            lockup = '<a class="gBrand" href="index.html"><span class="gBrandTile"'
+            lockup = f'<a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="{BRAND_ASSET}" alt="Cinemap"></a>'
             self.assertGreaterEqual(text.count(lockup), 2, page)
-            self.assertNotIn('<a href="index.html"><span class="gBrandTile"', text, page)
 
-    def test_my_cinemap_export_uses_current_outline_tile_brand(self):
-        text = (ROOT / "js/my-cinemap-art.js").read_text(encoding="utf-8")
-        self.assertIn("function drawBrand", text)
-        self.assertIn("EXPLORE CINEMA", text)
-        self.assertIn("Bodoni 72", text)
-        self.assertIn("ctx.strokeRect", text)
-        self.assertNotIn("assets/cinemap-logo.png?v=2", text)
-        self.assertNotIn("const cinemapLogo=new Image()", text)
-
-    def test_primary_pages_reference_brand_assets(self):
+    def test_primary_pages_use_uploaded_icon_asset(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")
-            self.assertIn('rel="icon" href="favicon.svg"', text, page)
-            self.assertIn('rel="apple-touch-icon" href="apple-touch-icon.png"', text, page)
+            self.assertIn(f'rel="icon" href="{ICON_ASSET}" type="image/png"', text, page)
+            self.assertIn(f'rel="apple-touch-icon" href="{ICON_ASSET}"', text, page)
             self.assertIn('rel="manifest" href="manifest.webmanifest"', text, page)
             self.assertIn('name="theme-color" content="#0a0c0f"', text, page)
 
-    def test_favicon_uses_outline_tile(self):
-        text = (ROOT / "favicon.svg").read_text(encoding="utf-8")
-        self.assertIn('id="outline-tile"', text)
-        self.assertIn('stroke="#ebe3d6"', text)
-        self.assertIn('stroke-width="1"', text)
-        self.assertIn('stop-color="#ffeccc" stop-opacity=".90"', text)
-        self.assertIn("Bodoni 72,Didot", text)
+    def test_uploaded_brand_assets_exist(self):
+        self.assertTrue((ROOT / BRAND_ASSET).exists())
+        self.assertTrue((ROOT / ICON_ASSET).exists())
+
+    def test_my_cinemap_export_keeps_existing_canvas_brand(self):
+        text = (ROOT / "js/my-cinemap-art.js").read_text(encoding="utf-8")
+        self.assertIn("function drawBrand", text)
+        self.assertIn("EXPLORE CINEMA", text)
 
     def test_manifest_is_cinemap_branded(self):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], "Cinemap")
         self.assertEqual(manifest["short_name"], "Cinemap")
         self.assertEqual(manifest["theme_color"], "#0a0c0f")
-        self.assertTrue(any(icon.get("src") == "icon-192.png" for icon in manifest["icons"]))
-        self.assertTrue(any(icon.get("src") == "icon-512.png" for icon in manifest["icons"]))
-
-    def test_required_icon_files_exist(self):
-        for path in ["favicon.svg", "apple-touch-icon.png", "icon-192.png", "icon-512.png"]:
-            self.assertTrue((ROOT / path).exists(), path)
 
 if __name__ == "__main__":
     unittest.main()

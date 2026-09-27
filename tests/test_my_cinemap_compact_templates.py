@@ -88,3 +88,21 @@ def test_editorial_export_uses_one_continuous_vertical_rhythm():
     for token in ["const portraitTitleSize=54", "const portraitListTop=244", "const portraitFooterGap=54", "const rowInset=16"]:
         assert token in ART
     assert "cellH=available/rows" not in ART
+
+
+def test_minimal_theme_has_quieter_warmer_neutral_polish():
+    # Minimal is the hero template: cooler ivory, smaller title, quieter medals/meta,
+    # stronger movie titles, and a calmer footer without changing the other themes.
+    for token in [
+        "const minimalPortraitTitleSize=46",
+        "const minimalPortraitListTop=232",
+        "const minimalMedalScale=.86",
+        "const minimalMetaAlpha=.74",
+        "const minimalMovieWeight=600",
+        "const minimalFooterGap=38",
+        "#f3efe7",
+        "#b9aa8d",
+    ]:
+        assert token in ART
+    assert "theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize" in ART
+    assert "theme==='minimal'?minimalMedalScale:1" in ART

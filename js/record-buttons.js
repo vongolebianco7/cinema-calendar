@@ -1,4 +1,4 @@
-/* Adds one-tap recording to existing card layouts without changing navigation handlers. */
+/* A direct rating gesture on every major film card records the film. */
 (function () {
   'use strict';
   const store = window.CinemapRecords;
@@ -15,36 +15,40 @@
     return { id, title, year, poster: card.querySelector('img')?.getAttribute('src') || '' };
   }
   function update(shell, movie) {
-    const button = shell.querySelector(':scope > .recordToggle');
-    if (!button) return;
-    const active = !!store.get(movie)?.watched;
-    const label = active ? '✓ 観た' : '＋ 観た';
-    if (button.textContent !== label) button.textContent = label;
-    button.setAttribute('aria-pressed', String(active));
-    button.setAttribute('aria-label', movie.title + (active ? 'の観た記録を解除' : 'を観たと記録'));
+    const range = shell.querySelector(':scope > .recordScale input');
+    if (!range || document.activeElement===range) return;
+    const score=store.get(movie)?.rating ?? 0;
+    if (Number(range.value)!==score) range.value=score;
+    const output=shell.querySelector(':scope > .recordScale output');
+    const text=score===0?'0 · 未鑑賞':Number(score).toFixed(1);
+    if (output && output.textContent!==text) output.textContent=text;
+    range.setAttribute('aria-label',(movie.title||'作品')+'の評価。0は未鑑賞、動かすと観た作品として記録');
   }
   function enhance(card) {
     if (card.closest('.recordShell') || !card.parentNode) return;
     const movie = movieFor(card); if (!movie) return;
     const shell = document.createElement('div'); shell.className = 'recordShell';
     card.parentNode.insertBefore(shell, card); shell.appendChild(card);
-    const button = document.createElement('button'); button.type = 'button'; button.className = 'recordToggle';
-    shell.appendChild(button); update(shell, movie);
-    button.addEventListener('click', async e => {
-      e.preventDefault(); e.stopPropagation();
+    const label=document.createElement('label');label.className='recordScale';
+    label.innerHTML='<span>自分の評価 <output>0 · 未鑑賞</output></span><input type="range" min="0" max="5" step="0.1" value="0"><small>0 ───── 5.0</small>';
+    shell.appendChild(label);update(shell,movie);
+    const range=label.querySelector('input'),output=label.querySelector('output');
+    range.addEventListener('input',()=>{output.textContent=Number(range.value)===0?'0 · 未鑑賞':Number(range.value).toFixed(1);});
+    range.addEventListener('change', async e => {
+      e.stopPropagation();
       let selected = movieFor(card);
       if (!store.movieId(selected) && card.matches('.awardCard')) {
-        button.disabled = true; button.textContent = '確認中…';
+        range.disabled=true;output.textContent='作品確認中…';
         const resolved = await window.CinemapRecordResolveAward?.(card.dataset.awardFilm || selected.title);
-        button.disabled = false;
-        if (!resolved || !store.movieId(resolved)) { button.textContent = '特定できません'; return; }
+        range.disabled=false;
+        if (!resolved || !store.movieId(resolved)) {range.value='0';output.textContent='作品を特定できません';return;}
         const id = store.movieId(resolved);
         document.querySelectorAll('.awardCard[data-award-film]').forEach(other => {
           if (other.dataset.awardFilm === card.dataset.awardFilm) other.dataset.recordId = id;
         });
         selected = { ...resolved, id };
       }
-      store.toggleWatched(selected);
+      store.rate(selected,Number(range.value));
     });
   }
   let scheduled = false;

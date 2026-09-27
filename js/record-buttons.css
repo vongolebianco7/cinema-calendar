@@ -1,9 +1,14 @@
-.recordShell{position:relative;min-width:0;display:block}
-.recordShell>.tvMovie,.recordShell>.card,.recordShell>.rankCard,.recordShell>.personFeatureCard,.recordShell>.presetCard,.recordShell>.work,.recordShell>.conciergeMovie{width:100%;max-width:none;display:block;height:100%}
-.recordShell>.awardCard{width:100%;height:100%}
+.recordShell{position:relative;min-width:0;display:flex;flex-direction:column}
+.recordShell>.tvMovie,.recordShell>.card,.recordShell>.rankCard,.recordShell>.personFeatureCard,.recordShell>.presetCard,.recordShell>.work,.recordShell>.conciergeMovie{width:100%;max-width:none;display:block;flex:1 0 auto;height:auto}
+.recordShell>.awardCard{width:100%;height:auto;flex:1 0 auto}
 .recordShell>.rankCard{box-sizing:border-box}
-.recordShell>.recordToggle{position:absolute;right:5px;top:5px;z-index:3;min-width:52px;min-height:44px;border:1px solid #aaa8;background:#090e14e8;color:white;border-radius:999px;padding:5px 7px;font-size:11px;font-weight:800;cursor:pointer;touch-action:manipulation;box-shadow:0 2px 9px #0008}
-.recordShell>.recordToggle[aria-pressed="true"]{background:#d5eadf;color:#173b34;border-color:#d5eadf}
+.recordScale{display:block;min-width:0;padding:6px;background:#0c202de9;color:#f5f5f0;border:1px solid #5b7787;border-radius:0 0 9px 9px;cursor:pointer}
+.recordScale>span{display:flex;justify-content:space-between;gap:3px;flex-wrap:wrap;font-size:10px}.recordScale output{font-weight:800;font-variant-numeric:tabular-nums;color:#ffe1a5}
+.recordScale input{display:block;width:100%;height:42px;margin:2px 0 0;appearance:none;-webkit-appearance:none;background:transparent;cursor:ew-resize}
+.recordScale input::-webkit-slider-runnable-track{height:7px;border-radius:8px;background:repeating-linear-gradient(90deg,#9ab0bd 0 1px,transparent 1px 10%),linear-gradient(90deg,#253c4d,#8bafd0);border:1px solid #8fa7b7}
+.recordScale input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:29px;margin-top:-12px;border:2px solid #fff0c9;border-radius:5px;background:linear-gradient(90deg,#8b6736,#f9dfa4 50%,#8b6736);box-shadow:0 2px 8px #000a}
+.recordScale input::-moz-range-track{height:7px;border-radius:8px;background:#66869e}.recordScale input::-moz-range-thumb{width:20px;height:27px;border:2px solid #fff0c9;border-radius:5px;background:#f9dfa4}
+.recordScale small{display:block;text-align:center;font-size:8px;color:#b1c4cb;white-space:nowrap;overflow:hidden}
 .recordShell:has(>.presetCard){flex:0 0 92px;width:92px;max-width:92px;scroll-snap-align:start}
 .recordShell:has(>.work){flex:0 0 124px;width:124px;max-width:124px;scroll-snap-align:start}
-@media(max-width:650px){.recordShell:has(>.presetCard){flex-basis:84px;width:84px;max-width:84px}.recordShell>.recordToggle{right:4px;top:4px;min-height:44px;min-width:48px;font-size:10px}}
+@media(max-width:650px){.recordShell:has(>.presetCard){flex-basis:84px;width:84px;max-width:84px}.recordScale>span{font-size:9px}.recordScale input{height:44px}}

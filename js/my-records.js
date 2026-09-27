@@ -3,23 +3,16 @@
   const $ = id => document.getElementById(id);
   const store = window.CinemapRecords;
   let films = [];
-  const ratingSteps = [[2.5,'最悪'],[3,'微妙'],[3.5,'普通'],[4,'好き'],[4.5,'傑作'],[5,'人生ベスト級']];
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
   const url = movie => 'search.html?id=' + encodeURIComponent(movie.id) + '&search=' + encodeURIComponent(movie.title);
   const count = () => Object.values(store.read()).filter(x => x?.watched).length;
   const ratedCount = () => Object.values(store.read()).filter(x => x?.watched && x.rating != null).length;
-  const ratingDock = document.createElement('div');
-  ratingDock.id = 'impactDock'; ratingDock.hidden = true;
-  ratingDock.innerHTML = '<div class="impactDockTop"><strong class="impactDockTitle"></strong><button type="button" class="impactDockSkip" data-skip-rating>あとで</button></div><p class="impactQuestion">この映画はどうだった？ 観た記録は保存済みです</p><div class="impactChoices">'+ratingSteps.map(([score,label])=>'<button type="button" class="impactChoice" data-rating="'+score+'" aria-label="'+score+' '+label+'"><strong>'+score+'</strong><small>'+label+'</small></button>').join('')+'</div><button type="button" class="impactDockSkip impactDockClear" data-clear-rating hidden>評価を外す</button>';
-  document.body.appendChild(ratingDock);
-  function openRating(movie) {
-    ratingDock.dataset.movieId = String(movie.id);
-    ratingDock.querySelector('.impactDockTitle').textContent = movie.title || '作品 ' + movie.id;
-    const current = store.get(movie)?.rating;
-    ratingDock.querySelectorAll('[data-rating]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.rating)===current)));
-    ratingDock.querySelector('[data-clear-rating]').hidden = current == null;
-    ratingDock.hidden = false;
+  const format = value => Number(value)===0?'0 · 未鑑賞':Number(value).toFixed(1);
+  function ruler(movie, record, compact=false) {
+    const score=record?.rating??0, title=escape(movie.title||'作品');
+    return '<label class="recordRuler'+(compact?' recordRuler--compact':'')+'"><span class="rulerTop"><span>自分の評価</span><output>'+format(score)+'</output></span><input type="range" min="0" max="5" step="0.1" value="'+score+'" data-rate-id="'+escape(movie.id)+'" aria-label="'+title+'の評価。0は未鑑賞、0より大きい値で記録" /><span class="rulerTicks"><span>0</span><span>2.5</span><span>5.0</span></span></label>';
   }
+  window.CinemapRatingRuler = ruler;
   const requestedView = new URLSearchParams(location.search).get('view');
   const addMode = requestedView === 'add' || (requestedView !== 'dashboard' && ratedCount() < 10);
   function show() {
@@ -31,7 +24,7 @@
     $('milestone').hidden = ratedCount() < 10;
     $('filmGrid').innerHTML = films.map(m => {
       const record = store.get(m), watched = !!record?.watched;
-      return '<div class="movie'+(watched?' watched':'')+'"><button type="button" class="posterButton" data-watch="'+m.id+'" aria-pressed="'+watched+'" aria-label="'+escape(m.title)+(watched?'の記録を解除':'を観たと記録')+'">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<div class="placeholder">'+escape(m.title)+'</div>')+'<span class="state">'+(watched?'✓ 観た'+(record.rating?' · '+record.rating:''):'＋ 観た')+'</span><span class="label">'+escape(m.title)+'<span class="meta">'+escape(m.year)+'</span></span></button><a href="'+url(m)+'">作品情報 →</a></div>';
+      return '<div class="movie'+(watched?' watched':'')+'"><div class="posterButton">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<div class="placeholder">'+escape(m.title)+'</div>')+'<span class="state">'+(watched?(record.rating==null?'観た · 未評価':Number(record.rating).toFixed(1)):'未登録')+'</span><span class="label">'+escape(m.title)+'<span class="meta">'+escape(m.year)+'</span></span></div>'+ruler(m,record,true)+'<a href="'+url(m)+'">作品情報 →</a></div>';
     }).join('');
   }
   function histogram(values) {
@@ -52,17 +45,22 @@
     const reached=films.filter(m=>store.get(m)?.watched).length;
     $('coverage').textContent = reached+' / '+films.length+'作品を記録（'+Math.round(reached/films.length*100)+'%）';
     $('missing').innerHTML = films.filter(m=>!store.get(m)?.watched).slice(0,8).map(m=>'<a class="chip" href="'+url(m)+'">'+escape(m.title)+'</a>').join('')||'<span class="empty">選定作品をすべて記録しました。</span>';
-    $('entries').innerHTML=entries.map(m=>'<div class="entry">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<span></span>')+'<div class="name"><a href="'+url(m)+'">'+escape(m.title||'作品 '+m.id)+'</a><small>'+escape(m.year||'')+'</small></div><button type="button" class="ratingButton" data-rate-movie="'+escape(m.id)+'" aria-label="'+escape(m.title||'作品')+'の評価を設定">'+(m.rating!=null?escape(m.rating)+' ★':'評価する')+'</button><button type="button" data-remove="'+escape(m.id)+'" aria-label="'+escape(m.title||'作品')+'の記録を解除">解除</button></div>').join('')||'<p class="empty">まだ記録がありません。観た映画から始めましょう。</p>';
+    $('entries').innerHTML=entries.map(m=>'<div class="entry">'+(m.poster?'<img src="'+escape(m.poster)+'" alt="" loading="lazy">':'<span></span>')+'<div class="name"><a href="'+url(m)+'">'+escape(m.title||'作品 '+m.id)+'</a><small>'+escape(m.year||'')+'</small></div>'+ruler(m,m,true)+'<button type="button" data-remove="'+escape(m.id)+'" aria-label="'+escape(m.title||'作品')+'の記録を解除">解除</button></div>').join('')||'<p class="empty">まだ記録がありません。観た映画から始めましょう。</p>';
   }
-  document.addEventListener('click', e=>{
-    const watched=e.target.closest('[data-watch]'); if(watched){const film=films.find(m=>String(m.id)===watched.dataset.watch);if(film){store.toggleWatched(film);if(store.get(film)?.watched)openRating(film);else if(ratingDock.dataset.movieId===String(film.id))ratingDock.hidden=true;}return;}
-    const rating=e.target.closest('[data-rating]'); if(rating){store.setRating({id:ratingDock.dataset.movieId},Number(rating.dataset.rating));ratingDock.hidden=true;return;}
-    if(e.target.closest('[data-skip-rating]')){ratingDock.hidden=true;return;}
-    if(e.target.closest('[data-clear-rating]')){store.setRating({id:ratingDock.dataset.movieId},null);ratingDock.hidden=true;return;}
-    const rateMovie=e.target.closest('[data-rate-movie]');if(rateMovie){const record=store.get({id:rateMovie.dataset.rateMovie});if(record)openRating(record);return;}
-    const removed=e.target.closest('[data-remove]');if(removed){store.setWatched({id:removed.dataset.remove},false);if(ratingDock.dataset.movieId===removed.dataset.remove)ratingDock.hidden=true;}
+  document.addEventListener('input',e=>{
+    if(!e.target.matches('[data-rate-id]'))return;
+    const output=e.target.closest('.recordRuler')?.querySelector('output');
+    if(output)output.textContent=format(e.target.value);
   });
-  $('reset').addEventListener('click',()=>{if(confirm('すべての視聴記録を削除しますか？ この操作は元に戻せません。')){store.clear();ratingDock.hidden=true;history.replaceState(null,'','my-records.html?view=add');show();}});
+  document.addEventListener('change',e=>{
+    if(!e.target.matches('[data-rate-id]'))return;
+    const id=e.target.dataset.rateId;
+    store.rate(films.find(m=>String(m.id)===id)||store.get({id})||{id},Number(e.target.value));
+  });
+  document.addEventListener('click',e=>{
+    const removed=e.target.closest('[data-remove]');if(removed)store.rate({id:removed.dataset.remove},0);
+  });
+  $('reset').addEventListener('click',()=>{if(confirm('すべての視聴記録を削除しますか？ この操作は元に戻せません。')){store.clear();history.replaceState(null,'','my-records.html?view=add');show();}});
   store.subscribe(show);
   fetch('data/onboarding-films.json?v=20260927-editorial-v2').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(data=>{films=data.films;show();}).catch(()=>{$('loadError').textContent='作品データを読み込めませんでした。再読み込みしてください。';$('dashboard').hidden=false;});
 })();

@@ -1,8 +1,19 @@
 /* Deterministic, local taste model. Unknown film attributes stay unknown. */
 (function (root) {
   'use strict';
-  const weights = new Map([[2.5,-2],[3,-1],[3.5,0],[4,1],[4.5,2],[5,3.5]]);
-  const ratingWeight = rating => weights.get(Number(rating)) ?? null;
+  const anchors = [[0.1,-2.5],[2.5,-2],[3,-1],[3.5,0],[4,1],[4.5,2],[5,3.5]];
+  function ratingWeight(rating) {
+    const score=Number(rating);
+    if (!Number.isFinite(score) || score<0.1 || score>5 || !Number.isInteger(score*10)) return null;
+    for (let i=1;i<anchors.length;i++) {
+      if (score<=anchors[i][0]) {
+        const [from,weight]=anchors[i-1], [to,next]=anchors[i];
+        return weight+(score-from)*(next-weight)/(to-from);
+      }
+    }
+    return anchors.at(-1)[1];
+  }
+  const primaryGenre = film => Array.isArray(film?.genres) ? film.genres.find(Boolean)||'情報未取得' : '情報未取得';
   function features(film) {
     const result = {};
     const genres = Array.isArray(film?.genres) ? film.genres.filter(Boolean) : [];
@@ -54,7 +65,7 @@
     hash=Math.imul(hash^0x9e3779b9,16777619);
     return {x,y:12+(hash>>>0)%77};
   }
-  const api={ratingWeight,features,preferences,recommend,position};
+  const api={ratingWeight,primaryGenre,features,preferences,recommend,position};
   root.CinemapUniverseModel=api;
   if (typeof module !== 'undefined') module.exports=api;
 })(typeof window === 'undefined' ? globalThis : window);

@@ -13,15 +13,15 @@
     return Number.isNaN(date.getTime())?'不明':date.toLocaleDateString('ja-JP');
   };
   const known = () => catalog.filter(watched);
-  const inGenre = (film,genre) => genre==='情報未取得' ? !film.genres?.length : !!film.genres?.includes(genre);
+  const inGenre = (film,genre) => model.primaryGenre(film)===genre;
   const visibleGenres = () => {
     const recorded=known();
-    const extra=[...new Set(recorded.flatMap(f=>f.genres||[]))].filter(g=>!baseGenres.includes(g)).sort();
-    return [...baseGenres,...extra,...(recorded.some(f=>!f.genres?.length)?['情報未取得']:[])];
+    const extra=[...new Set(recorded.map(model.primaryGenre))].filter(g=>g!=='情報未取得'&&!baseGenres.includes(g)).sort();
+    return [...baseGenres,...extra,...(recorded.some(f=>model.primaryGenre(f)==='情報未取得')?['情報未取得']:[])];
   };
   function filmCard(film, unknown=false) {
     const record=records[String(film.id)];
-    return '<button class="universePlanet'+(unknown?' universePlanet--unknown':'')+(record?.rating===5?' universePlanet--best':'')+'" type="button" data-universe-film="'+esc(film.id)+'" aria-label="'+esc(film.title)+(unknown?'・未登録の候補':'・記録した作品')+'">'+(film.poster?'<span class="planetArtwork"><img src="'+esc(film.poster)+'" alt="" loading="lazy"></span>':'<span class="planetArtwork planetFallback"></span>')+'<span class="planetName">'+esc(film.title||'作品')+'</span><span class="planetMeta">'+(unknown?'未登録の候補':record?.rating!=null?record.rating+' ★':'観た · 未評価')+'</span></button>';
+    return '<button class="universePlanet'+(unknown?' universePlanet--unknown':'')+(record?.rating===5?' universePlanet--best':'')+'" type="button" data-universe-film="'+esc(film.id)+'" aria-label="'+esc(film.title)+(unknown?'・未登録の候補':'・記録した作品')+'">'+(film.poster?'<span class="planetArtwork"><img src="'+esc(film.poster)+'" alt="" loading="lazy"></span>':'<span class="planetArtwork planetFallback"></span>')+'<span class="planetName">'+esc(film.title||'作品')+'</span><span class="planetMeta">'+(unknown?'未登録の候補':record?.rating!=null?Number(record.rating).toFixed(1)+' ★':'観た · 未評価')+'</span></button>';
   }
   function farView() {
     const films=known(), rated=films.filter(f=>records[String(f.id)]?.rating!=null).length;
@@ -37,7 +37,7 @@
     const nodes=explored.map(card).join('');
     const hidden='<details class="universeUnexplored"><summary>まだ記録のないジャンルを見る · '+unexplored.length+'銀河</summary><div class="universeGalaxies universeGalaxies--empty">'+unexplored.map(card).join('')+'</div><p>未登録は「観ていない」という意味ではありません。</p></details>';
     const suggestions=model.recommend(records,catalog,3);
-    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>観た映画がジャンルごとに集まります。好きな銀河を開いて、監督と作品をたどれます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div><div class="universeGuide"><strong>この宇宙の見方</strong><span>銀河＝ジャンル → 恒星＝監督 → 惑星＝作品</span><small>1作品が複数の銀河に入ることがあります。光る惑星は5.0、暗い惑星は未登録の候補です。</small></div><div class="universeSectionHead universeFarHeading"><h3>あなたが記録したジャンル</h3><p>ポスターのある銀河をタップして、作品を見てみましょう。</p></div>'+(nodes?'<div class="universeGalaxies universeGalaxies--recorded">'+nodes+'</div>':'<div class="universeStart"><p>まだ作品がありません。映画を評価すると、この場所にあなたの銀河が生まれます。</p><a href="my-records.html?view=add">映画を記録する →</a></div>')+hidden+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
+    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>観た映画がジャンルごとに集まります。好きな銀河を開いて、監督と作品をたどれます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div><div class="universeGuide"><strong>この宇宙の見方</strong><span>銀河＝代表ジャンル → 恒星＝監督 → 惑星＝作品</span><small>作品は代表ジャンルの銀河に1回だけ並びます。5.0は強く光り、暗い惑星は未登録の候補です。</small></div><div class="universeSectionHead universeFarHeading"><h3>あなたが記録したジャンル</h3><p>ポスターのある銀河をタップして、作品を見てみましょう。</p></div>'+(nodes?'<div class="universeGalaxies universeGalaxies--recorded">'+nodes+'</div>':'<div class="universeStart"><p>まだ作品がありません。映画を評価すると、この場所にあなたの銀河が生まれます。</p><a href="my-records.html?view=add">映画を記録する →</a></div>')+hidden+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
   }
   function middleView() {
     const genre=state.genre;
@@ -54,7 +54,7 @@
     const selected=state.film && catalog.find(f=>String(f.id)===state.film);
     const record=selected&&records[String(selected.id)];
     const related=selected ? catalog.filter(f=>String(f.id)!==String(selected.id) && (f.director===selected.director || f.genres?.some(g=>selected.genres?.includes(g)))).sort((a,b)=>Number(b.director===selected.director)-Number(a.director===selected.director) || (b.genres||[]).filter(g=>selected.genres?.includes(g)).length-(a.genres||[]).filter(g=>selected.genres?.includes(g)).length).slice(0,3):[];
-    return '<div class="universeInnerHeader"><button type="button" data-universe-back="middle">← '+esc(state.genre)+'銀河へ</button><span>'+esc(state.director)+'</span></div><div class="universeSectionHead"><h2>'+esc(state.director)+' 星系</h2><p>作品の惑星を選ぶと、記録と近くの作品が見えます。</p></div><div class="universePlanets">'+films.map(f=>filmCard(f)).join('')+suggestions.slice(0,4).map(x=>filmCard(x.film,true)).join('')+'</div>'+(selected?'<div class="universeFilmDetail"><h3>'+esc(selected.title)+'</h3><p>'+(record?.watched?'自分の評価: '+(record.rating==null?'未評価':record.rating)+' · 記録日: '+esc(recordDate(record.recordedAt||record.updatedAt)):'未登録の候補 · 鑑賞状況は不明')+'</p><p>監督: '+esc(selected.director||'情報なし')+'</p><div class="universeDetailActions"><a href="'+infoLink(selected)+'">作品情報を見る</a>'+(record?.watched?'<button type="button" data-rate-movie="'+esc(selected.id)+'">評価を変更</button>':'<button type="button" data-watch="'+esc(selected.id)+'">観たと記録</button>')+'</div>'+(related.length?'<div class="universeRelated"><small>関連作品</small>'+related.map(f=>'<button type="button" data-universe-film="'+esc(f.id)+'">'+esc(f.title)+'</button>').join('')+'</div>':'')+'</div>':'');
+    return '<div class="universeInnerHeader"><button type="button" data-universe-back="middle">← '+esc(state.genre)+'銀河へ</button><span>'+esc(state.director)+'</span></div><div class="universeSectionHead"><h2>'+esc(state.director)+' 星系</h2><p>作品の惑星を選ぶと、記録と近くの作品が見えます。</p></div><div class="universePlanets">'+films.map(f=>filmCard(f)).join('')+suggestions.slice(0,4).map(x=>filmCard(x.film,true)).join('')+'</div>'+(selected?'<div class="universeFilmDetail"><h3>'+esc(selected.title)+'</h3><p>'+(record?.watched?'自分の評価: '+(record.rating==null?'未評価':Number(record.rating).toFixed(1))+' · 記録日: '+esc(recordDate(record.recordedAt||record.updatedAt)):'未登録の候補 · 鑑賞状況は不明')+'</p><p>監督: '+esc(selected.director||'情報なし')+'</p><p>ジャンル: '+esc(selected.genres?.join(' · ')||'情報なし')+'</p><div class="universeDetailActions"><a href="'+infoLink(selected)+'">作品情報を見る</a>'+(root.CinemapRatingRuler?.(selected,record)||'')+'</div>'+(related.length?'<div class="universeRelated"><small>関連作品</small>'+related.map(f=>'<button type="button" data-universe-film="'+esc(f.id)+'">'+esc(f.title)+'</button>').join('')+'</div>':'')+'</div>':'');
   }
   function render(nextCatalog,nextRecords) {
     records=nextRecords||records;
@@ -66,7 +66,7 @@
   document.addEventListener('click',event=>{
     const genre=event.target.closest('[data-universe-genre]');if(genre){state.genre=genre.dataset.universeGenre;state.director=null;state.film=null;render();return;}
     const director=event.target.closest('[data-universe-director]');if(director){state.director=director.dataset.universeDirector;state.film=null;render();return;}
-    const film=event.target.closest('[data-universe-film]');if(film){state.film=film.dataset.universeFilm;const match=catalog.find(f=>String(f.id)===state.film);if(match && !inGenre(match,state.genre)){state.genre=visibleGenres().find(g=>inGenre(match,g))||'情報未取得';}state.director=match?.director||'監督データ未取得';render();return;}
+    const film=event.target.closest('[data-universe-film]');if(film){state.film=film.dataset.universeFilm;const match=catalog.find(f=>String(f.id)===state.film);if(match && !inGenre(match,state.genre)){state.genre=model.primaryGenre(match);}state.director=match?.director||'監督データ未取得';render();return;}
     const back=event.target.closest('[data-universe-back]');if(back){if(back.dataset.universeBack==='far')state.genre=null;else{state.director=null;state.film=null;}render();}
   });
   root.CinemapUniverseView={render};

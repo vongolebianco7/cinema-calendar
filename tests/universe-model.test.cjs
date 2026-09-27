@@ -16,6 +16,11 @@ assert.deepEqual(model.features(catalog[4]),{'decade:2020':0.5},'unknown attribu
 assert.equal(model.ratingWeight(3.5),0);
 assert.ok(model.ratingWeight(5)>model.ratingWeight(4.5));
 assert.ok(model.ratingWeight(2.5)<model.ratingWeight(3));
+assert.ok(model.ratingWeight(4.2)>model.ratingWeight(4));
+assert.ok(model.ratingWeight(4.2)<model.ratingWeight(4.5));
+assert.equal(model.ratingWeight(0),null,'zero means no viewing rating');
+assert.equal(model.primaryGenre({genres:['SF','ドラマ']}),'SF','one film belongs to one far-view galaxy');
+assert.equal(model.primaryGenre({genres:[]}), '情報未取得');
 const prefs = model.preferences(records,catalog);
 assert.ok(prefs['genre:SF'].score>0);
 assert.ok(prefs['genre:ホラー'].score<0,'low ratings must reduce affinity');

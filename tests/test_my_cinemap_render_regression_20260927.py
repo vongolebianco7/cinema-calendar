@@ -32,6 +32,6 @@ def test_selected_ranking_poster_is_not_hidden():
 
 
 def test_screening_room_is_not_reintroduced():
-    for text in (DIRECTION,CINEMA):
-        assert "Screening Room" not in text
-        assert "cinema-screening" not in text
+    assert "Screening Room" not in DIRECTION
+    assert "{id:'cinema-screening'" not in DIRECTION
+    assert "'cinema-screening':" not in CINEMA

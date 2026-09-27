@@ -60,12 +60,10 @@ jobs:
           python - <<'PY'
           import runpy
           ns=runpy.run_path('tests/test_my_cinemap_compact_templates.py')
-          failed=[]
-          for name,fn in ns.items():
-              if name.startswith('test_') and callable(fn):
-                  try: fn()
-                  except Exception as e: failed.append((name,str(e)))
-          print('existing My Cinemap regression failures:', failed)
+          tests=[(name,fn) for name,fn in ns.items() if name.startswith('test_') and callable(fn)]
+          for name,fn in tests:
+              fn(); print('PASS',name)
+          print(f'{len(tests)} existing My Cinemap tests passed')
           PY
 
       - name: Commit My Cinemap controls
@@ -78,4 +76,5 @@ jobs:
             exit 0
           fi
           git commit -m "fix: refine My Cinemap controls and templates"
+          git pull --rebase origin main
           git push

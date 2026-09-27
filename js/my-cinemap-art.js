@@ -13,7 +13,6 @@ const artNumber='"Avenir Next","Helvetica Neue",Arial,sans-serif';
 const artSerif=artBodySerif;
 const artSans='"Avenir Next","Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
 const artFonts={
-  editorial:{title:artDisplay,movie:artBodySerif,titleWeight:500,movieWeight:600},
   modern:{title:'Baskerville,"Times New Roman","Yu Mincho",serif',movie:'Baskerville,"Times New Roman","Yu Mincho",serif',titleWeight:500,movieWeight:600},
   clean:{title:artSans,movie:artSans,titleWeight:650,movieWeight:650},
   classic:{title:'Georgia,"Times New Roman","Yu Mincho",serif',movie:'Georgia,"Times New Roman","Yu Mincho",serif',titleWeight:500,movieWeight:600}
@@ -163,7 +162,7 @@ function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
-  const fontKey=artValue('fontStyle')||'editorial',font=artFonts[fontKey]||artFonts.editorial;
+  const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.editorial;
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
   const w=c.width,h=c.height;
   const columns=layout==='double'?2:1;
@@ -202,8 +201,8 @@ function drawArtwork(movies){
     const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
     const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
-    const movieWeight=fontKey==='editorial'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,columns===2?21:24,font.movie,movieWeight,1.10);
+    const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
+    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,movieWeight,1.10);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
     if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });

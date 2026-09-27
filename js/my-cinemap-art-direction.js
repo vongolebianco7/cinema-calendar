@@ -37,9 +37,10 @@
     #list .compactMovieItem:nth-child(n+6){grid-column:2!important}
     #list .compactMovieItem:nth-child(6){grid-row:1!important}
     #list .compactMovieItem{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;grid-template-rows:auto auto!important;min-width:0!important;min-height:0!important;padding:8px!important;border:1px solid #292929!important;border-radius:9px!important;background:#111!important;align-items:start!important;column-gap:6px!important}
-    #list .compactMovieItem>img{display:none!important}
-    #list .compactMovieItem>b,#list .compactMovieItem>a,#list .compactMovieItem>div:not(.move):not(.movieEditPanel){grid-column:2!important;min-width:0!important;max-width:100%!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;writing-mode:horizontal-tb!important;line-break:strict!important;line-height:1.32!important}
-    #list .compactMovieItem>b,#list .compactMovieItem>a{font-size:11px!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden!important}
+    #list .compactMovieItem>:nth-child(1){grid-column:1!important}
+    #list .compactMovieItem>:nth-child(2){display:none!important}
+    #list .compactMovieItem>:nth-child(3){grid-column:2!important;min-width:0!important;max-width:100%!important;width:100%!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;writing-mode:horizontal-tb!important;line-break:strict!important;line-height:1.32!important}
+    #list .compactMovieItem>:nth-child(3) a,#list .compactMovieItem>:nth-child(3) b{white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;writing-mode:horizontal-tb!important;line-break:strict!important}
     #list .compactMovieItem .move{grid-column:1/-1!important;display:flex!important;max-width:none!important;justify-content:flex-end!important;margin-top:6px!important;gap:4px!important;flex-wrap:nowrap!important}
     #list .compactMovieItem .movieEditPanel{grid-column:1/-1!important;margin-top:6px!important}
     #list .compactMovieMeta{font-size:9px!important;white-space:normal!important;line-height:1.25!important;overflow:hidden!important;text-overflow:ellipsis}

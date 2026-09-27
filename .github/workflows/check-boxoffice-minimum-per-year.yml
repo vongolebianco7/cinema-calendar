@@ -1,0 +1,15 @@
+name: Check box office minimum per year
+on:
+  push:
+    paths:
+      - 'data/boxoffice.json'
+      - 'tests/test_boxoffice_minimum_per_year.py'
+      - '.github/workflows/check-boxoffice-minimum-per-year.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m unittest tests.test_boxoffice_minimum_per_year

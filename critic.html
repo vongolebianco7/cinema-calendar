@@ -68,7 +68,7 @@ function renderEvidence(m,data){
  const result=CinemapCriticEvidence.forMovie(data,movieId(m));
  const anchors=ids=>ids.length?' <span class="muted">'+ids.map(id=>{const source=result.sources.find(x=>x.id===id);return source?'<a href="'+E(source.url)+'" target="_blank" rel="noopener noreferrer">'+E(source.name)+'</a>':''}).filter(Boolean).join(' / ')+'</span>':'';
  const list=rows=>'<ul>'+rows.map(row=>'<li>'+E(row.text)+anchors(row.sourceIds)+'</li>').join('')+'</ul>';
- return '<section class="panel"><h2>批評の傾向</h2>'+(result.overview?'<p>'+E(result.overview.text)+'</p>'+anchors(result.overview.sourceIds):'<p class="empty">批評情報がまだ十分に集まっていません。現時点では傾向を判断できるだけの情報がありません。</p>')+'</section>'+
+ return '<section class="panel"><h2>批評の傾向</h2>'+(result.overview?'<p>'+E(result.overview.text)+'</p>'+anchors(result.overview.sourceIds):'<p class="empty">この作品の批評はまだ掲載していません。確認済みの出典が揃った作品から、短い要約と出典リンクを公開します。</p>')+'</section>'+
  (result.positive.length?'<section class="panel"><h2>評価されている点</h2>'+list(result.positive)+'</section>':'')+
  (result.divided.length?'<section class="panel"><h2>意見が分かれる点</h2>'+list(result.divided)+'</section>':'')+
  (result.ratio?'<section class="panel"><h2>賛否の傾向</h2><p>今回分析した'+result.ratio.total+'件のうち、肯定的な内容が'+result.ratio.percent+'%。</p><p class="muted">確認した出典に限る集計です。作品全体の評価を表すものではありません。</p></section>':'')+

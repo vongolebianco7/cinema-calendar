@@ -39,8 +39,11 @@ const mixedPoint=model.filmPosition(mixed), thriller=model.centerForGenre('ス�
 assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres occupy a boundary');
 const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
-assert.equal(model.speciesFor(catalog[0]).id,'silver');
-assert.equal(model.speciesFor(catalog[1]).id,'deep');
+assert.equal(model.species.length,360,'thirty silhouettes with twelve discoverable morphs each');
+assert.ok(model.speciesFor(catalog[0]).genres.includes('SF'));
+assert.ok(model.speciesFor(catalog[1]).genres.includes('ホラー'));
 assert.equal(model.speciesFor({...catalog[0],rating:2.5}).id,model.speciesFor(catalog[0]).id,'rating affects appearance, not species');
-assert.equal(model.speciesFor({genres:[]}).id,'manta','unknown traits get a neutral form rather than invented mood');
+assert.deepEqual(model.speciesFor(catalog[0]),model.speciesFor({...catalog[0]}),'same film keeps its creature');
+assert.equal(model.speciesFor({genres:[]}).genres.includes('ドキュメンタリー'),true,'unknown traits get a neutral family rather than invented mood');
+assert.ok(new Set(Array.from({length:1000},(_,i)=>model.speciesFor({id:i,genres:['SF']}).id)).size>40,'many works uncover many appearances');
 console.log('Ocean weights, honest metadata, suggestions and stable positions passed');

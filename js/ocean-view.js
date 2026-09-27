@@ -18,6 +18,10 @@
   const recordDate=v=>{const d=new Date(v||'');return Number.isNaN(d.getTime())?'不明':d.toLocaleDateString('ja-JP');};
   const hue=name=>model.position('color:'+name).x*3;
   const nodeStyle=(p,extra='')=>'left:'+p.x+'%;top:'+p.y+'%;--depth:'+p.z+'px;'+extra;
+  const fishStyle=fish=>{
+    const columns=fish.atlas===0?3:4,rows=fish.atlas===0?2:3;
+    return '--fish-x:'+(fish.index%columns/(columns-1)*100)+'%;--fish-y:'+(Math.floor(fish.index/columns)/(rows-1)*100)+'%;--fish-size:'+(columns*100)+'% '+(rows*100)+'%;--fish-hue:'+fish.hue+'deg;--fish-pattern:'+fish.pattern+';';
+  };
   const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const genreNodes=()=>{
     const films=known().filter(inDecade);
@@ -27,7 +31,7 @@
       const representative=films.find(f=>model.genreStrengths(f)[g]);
       const fish=model.speciesFor(representative||{genres:[g]});
       const school=Array.from({length:Math.min(n,4)},(_,i)=>'<span class="oceanSchool" aria-hidden="true" style="--swim-offset:'+(i-1.5)*25+'px;--swim-depth:'+i*12+'px"></span>').join('');
-      return '<button type="button" class="cosmosBody cosmosGalaxy'+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10)+';--fish-x:'+(fish.index%3*50)+'%;--fish-y:'+(Math.floor(fish.index/3)*100)+'%')+'" aria-label="'+esc(g)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+school+'<strong>'+esc(g)+'</strong>'+(n?'<small>'+n+'作品</small>':'')+'</button>';
+      return '<button type="button" class="cosmosBody cosmosGalaxy oceanAtlas'+fish.atlas+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10)+';'+fishStyle(fish))+'" aria-label="'+esc(g)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+school+'<strong>'+esc(g)+'</strong>'+(n?'<small>'+n+'作品</small>':'')+'</button>';
     }).join('');
   };
   // Before ten ratings there is too little evidence for a useful suggestion.
@@ -55,7 +59,7 @@
     const tone=record?.watched&&Number.isFinite(score)?Math.round((clamp(score,2.5,5)-3.5)*22):0;
     const fish=model.speciesFor(f);
     const era=Number(f.year)<1980?' vintage':Number(f.year)>=2010?' recent':'';
-    return '<button type="button" class="cosmosBody cosmosPlanet'+(unknown?' cosmosPlanet--unknown':'')+(best?' cosmosPlanet--best':'')+(newbornId===String(f.id)?' oceanNewborn':'')+era+'" data-cosmos-film="'+esc(f.id)+'" style="'+nodeStyle(p,'--score-tone:'+tone+'deg;--fish-x:'+(fish.index%3*50)+'%;--fish-y:'+(Math.floor(fish.index/3)*100)+'%')+'" aria-label="'+esc(f.title)+(unknown?'、未登録の候補':'、記録済み')+'"><span class="cosmosHalo"></span><strong>'+esc(f.title)+'</strong><small>'+(unknown?'未登録の候補':record?.rating!=null?Number(record.rating).toFixed(1):'観た')+'</small></button>';
+    return '<button type="button" class="cosmosBody cosmosPlanet oceanAtlas'+fish.atlas+(unknown?' cosmosPlanet--unknown':'')+(best?' cosmosPlanet--best':'')+(newbornId===String(f.id)?' oceanNewborn':'')+era+'" data-cosmos-film="'+esc(f.id)+'" style="'+nodeStyle(p,'--score-tone:'+tone+'deg;'+fishStyle(fish))+'" aria-label="'+esc(f.title)+(unknown?'、未登録の候補':'、記録済み')+'"><span class="cosmosHalo"></span><strong>'+esc(f.title)+'</strong><small>'+(unknown?'未登録の候補':record?.rating!=null?Number(record.rating).toFixed(1):'観た')+'</small></button>';
   }
   const nearNodes=()=>{
     const focus={x:camera.focusX,y:camera.focusY};

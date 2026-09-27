@@ -42,10 +42,11 @@
     const speciesTotals=new Map();
     entries.forEach(m=>{const type=window.CinemapOceanModel.speciesFor(m);speciesTotals.set(type.id,(speciesTotals.get(type.id)||0)+1);});
     $('speciesCount').textContent=speciesTotals.size+' / '+window.CinemapOceanModel.species.length;
-    $('speciesCollection').innerHTML=window.CinemapOceanModel.species.map(type=>{
+    $('speciesCollection').innerHTML=window.CinemapOceanModel.species.filter(type=>speciesTotals.has(type.id)).map(type=>{
       const total=speciesTotals.get(type.id)||0;
-      return '<div class="speciesTile'+(total?'':' locked')+'"><span class="fishIcon" aria-hidden="true" style="--fish-x:'+(type.index%3*50)+'%;--fish-y:'+(Math.floor(type.index/3)*100)+'%"></span><span><strong>'+(total?escape(type.name):'まだ出会っていない')+'</strong><small>'+(total?total+'作品':'')+'</small></span></div>';
-    }).join('');
+      const columns=type.atlas===0?3:4,rows=type.atlas===0?2:3;
+      return '<div class="speciesTile oceanAtlas'+type.atlas+'"><span class="fishIcon" aria-hidden="true" style="--fish-x:'+(type.index%columns/(columns-1)*100)+'%;--fish-y:'+(Math.floor(type.index/columns)/(rows-1)*100)+'%;--fish-size:'+(columns*100)+'% '+(rows*100)+'%;--fish-hue:'+type.hue+'deg"></span><span><strong>'+escape(type.name)+'</strong><small>'+total+'作品</small></span></div>';
+    }).join('')||'<span class="empty">作品を評価すると、出会った生き物がここに増えます。</span>';
     const genres = entries.flatMap(x=>Array.isArray(x.genres)?x.genres:[]);
     const years = entries.map(x=>Number(x.year)).filter(x=>x>=1880&&x<=2100).map(x=>Math.floor(x/10)*10+'年代');
     const regions = entries.map(x=>x.region).filter(Boolean);

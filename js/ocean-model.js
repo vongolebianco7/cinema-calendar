@@ -93,23 +93,51 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  // A modest first set of fish forms from catalog metadata we actually have.
-  // Explicit editorial classifications can replace this fallback later.
-  const species=[
-    {id:'silver',name:'銀鱗魚',index:0,genres:['SF','アクション','戦争']},
-    {id:'manta',name:'マンタ',index:1,genres:['ドキュメンタリー','アドベンチャー']},
-    {id:'reef',name:'彩鰭魚',index:2,genres:['アニメ','コメディ','ファミリー']},
-    {id:'deep',name:'深海魚',index:3,genres:['ホラー','スリラー','クライム','ミステリー']},
-    {id:'gold',name:'蝶魚',index:4,genres:['ロマンス','音楽']},
-    {id:'veil',name:'透鰭魚',index:5,genres:['ファンタジー']}
+  // Thirty distinct silhouettes, twelve stable colour/marking morphs each.
+  // The morph is an artistic rendering from the film ID, not a claim about
+  // unmeasured moods, personality or the taxonomy of a real animal.
+  const families=[
+    {id:'silver',name:'銀鱗魚',atlas:0,index:0,genres:['SF','アクション','戦争']},
+    {id:'manta',name:'マンタ',atlas:0,index:1,genres:['ドキュメンタリー','アドベンチャー']},
+    {id:'reef',name:'彩鰭魚',atlas:0,index:2,genres:['アニメ','コメディ','ファミリー']},
+    {id:'deep',name:'深海魚',atlas:0,index:3,genres:['ホラー','スリラー','クライム','ミステリー']},
+    {id:'gold',name:'蝶魚',atlas:0,index:4,genres:['ロマンス','音楽']},
+    {id:'veil',name:'透鰭魚',atlas:0,index:5,genres:['ファンタジー']},
+    ...[
+      ['whaleshark','ジンベエザメ',0],['hammerhead','シュモクザメ',0],['turtle','ウミガメ',1],['eagleray','トビエイ',1],
+      ['seahorse','タツノオトシゴ',4],['jelly','クラゲ',5],['lionfish','ミノカサゴ',3],['seadragon','リーフィーシードラゴン',5],
+      ['octopus','タコ',3],['cuttlefish','コウイカ',3],['puffer','フグ',2],['angelfish','エンゼルフィッシュ',2]
+    ].map(([id,name,group],index)=>({id,name,atlas:1,index,genres:familiesGenres(group)})),
+    ...[
+      ['sunfish','マンボウ',1],['mantaray','オニイトマキエイ',1],['whale','ザトウクジラ',1],['swordfish','メカジキ',0],
+      ['clownfish','クマノミ',2],['moray','ウツボ',3],['grouper','ハタ',0],['nautilus','オウムガイ',5],
+      ['blueoctopus','ヒョウモンダコ',3],['lobster','ロブスター',4],['nudibranch','ウミウシ',4],['sailfish','バショウカジキ',0]
+    ].map(([id,name,group],index)=>({id,name,atlas:2,index,genres:familiesGenres(group)}))
   ];
+  function familiesGenres(group){return [
+    ['SF','アクション','戦争'],['ドキュメンタリー','アドベンチャー'],['アニメ','コメディ','ファミリー'],
+    ['ホラー','スリラー','クライム','ミステリー'],['ロマンス','音楽'],['ファンタジー']
+  ][group];}
+  const morphNames=['蒼','珊瑚','琥珀','紫','紺','銀','瑠璃','朱','真珠','藍','金','薄紅'];
+  const species=families.flatMap(f=>morphNames.map((morph,variant)=>({
+    ...f,id:f.id+'-'+variant,name:morph+'の'+f.name,variant,
+    hue:(variant-5)*12,pattern:variant%3
+  })));
   function speciesFor(film){
     const explicit=species.find(x=>x.id===film?.ecologyType);
     if(explicit)return explicit;
     const strengths=genreStrengths(film);
-    const match=species.map(type=>({type,score:Math.max(0,...type.genres.map(g=>strengths[g]||0))}))
-      .sort((a,b)=>b.score-a.score || a.type.index-b.type.index)[0];
-    return match.score>0?match.type:species[1];
+    const groups=[[0,6,7,21,24,29],[1,8,9,18,19,20],[2,16,17,22],[3,12,14,15,23,26],[4,10,27,28],[5,11,13,25]];
+    const groupScores=groups.map((_,i)=>Math.max(0,...families[i].genres.map(g=>strengths[g]||0)));
+    const group=groupScores.indexOf(Math.max(...groupScores));
+    const pool=groupScores[group]>0?groups[group]:[1,18,19,20];
+    const key='creature:'+String(film?.id??film?.title??'unknown');
+    let seed=2166136261;
+    for(const char of key){seed^=char.codePointAt(0);seed=Math.imul(seed,16777619);}
+    seed=(seed^(seed>>>16))>>>0;
+    const family=families[pool[seed%pool.length]];
+    const variant=Math.floor(seed/pool.length)%morphNames.length;
+    return species.find(x=>x.id===family.id+'-'+variant);
   }
   const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,speciesFor};
   root.CinemapOceanModel=api;

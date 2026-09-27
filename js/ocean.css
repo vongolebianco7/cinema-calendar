@@ -49,3 +49,27 @@
 .cosmosPlanet--unknown .cosmosHalo{filter:grayscale(.8) brightness(.63);border-style:dashed}
 .cosmosDirectorQueue{display:grid;gap:8px;margin-top:16px}.cosmosDirectorQueue>div{display:flex;align-items:center;gap:12px;padding:8px;border:1px solid #62759466;border-radius:9px}.cosmosDirectorQueue>div>span{width:35%;min-width:90px}.cosmosDirectorQueue .recordRuler{flex:1;min-width:0}.cosmosDetail>button{min-height:44px;border:1px solid #9cb5d9;border-radius:8px;background:#122641;color:#fff;padding:9px 11px;cursor:pointer}
 @media(max-width:700px){.cosmosPlanet--best .cosmosHalo{width:70px;height:70px;top:8px}.cosmosDirectorQueue>div{display:block}.cosmosDirectorQueue>div>span{display:block;width:auto}.cosmosDirectorQueue .recordRuler{width:100%}}
+/* The ocean is the hero: a single broad, high-resolution view. */
+.cosmosScene{width:min(1480px,calc(100vw - 24px));max-width:none;margin-left:50%;transform:translateX(-50%);display:flex;flex-direction:column;border-color:#4b90a080;background:#031827}
+.cosmosHeader{order:0;background:linear-gradient(90deg,#062a43,#063450)}
+.cosmosViewport{order:1;height:min(78svh,900px);min-height:600px;perspective:1000px;background-color:#06273e;background-image:linear-gradient(180deg,#03345817 0%,#051c2a15 60%,#03132370 100%),url('../assets/cinemap-ocean/deep-ocean.webp');background-position:center;background-size:cover}
+.cosmosViewport:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 35%,transparent 48%,#02111a50 100%)}
+.cosmosWorld:after{background:linear-gradient(0deg,#03182770,transparent 24%,#04203828)}
+.cosmosFoot{order:2;background:#062638}.cosmosControls{order:3;background:#071e30}.cosmosDetail,.cosmosHint{order:4;background:#071e30}
+.oceanAtlas0{--fish-atlas:url('../assets/cinemap-ocean/fish-atlas.webp')}
+.oceanAtlas1{--fish-atlas:url('../assets/cinemap-ocean/creatures-a.webp')}
+.oceanAtlas2{--fish-atlas:url('../assets/cinemap-ocean/creatures-b.webp')}
+.cosmosPlanet .cosmosHalo,.cosmosPlanet--best .cosmosHalo{
+  width:134px;height:105px;top:0;border:0;border-radius:0;overflow:visible;
+  background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;
+  box-shadow:none;transform:translateX(-50%);
+  filter:hue-rotate(calc(var(--fish-hue) + var(--score-tone))) saturate(1.22) drop-shadow(0 8px 11px #001725bb)
+}
+.cosmosPlanet .cosmosHalo:after,.cosmosPlanet--best .cosmosHalo:after{display:none}
+.cosmosPlanet--best .cosmosHalo{filter:hue-rotate(calc(var(--fish-hue) + var(--score-tone))) saturate(1.5) drop-shadow(0 4px 3px #f3cb83a0) drop-shadow(0 10px 13px #001725bb)}
+.cosmosPlanet.vintage .cosmosHalo{filter:hue-rotate(calc(var(--fish-hue) + var(--score-tone))) contrast(.9) saturate(.88) drop-shadow(0 8px 11px #001725bb)}
+.cosmosPlanet.recent .cosmosHalo{filter:hue-rotate(calc(var(--fish-hue) + var(--score-tone))) contrast(1.08) saturate(1.22) drop-shadow(0 8px 11px #001725bb)}
+.cosmosPlanet--unknown .cosmosHalo{opacity:.6;filter:grayscale(.85) brightness(.75);border:0}
+.cosmosGalaxy .oceanSchool{background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) drop-shadow(0 5px 8px #083443);opacity:clamp(.45,calc(.45 + var(--mass) * .045),.95)}
+.speciesTile .fishIcon{background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) saturate(1.15)}
+@media(max-width:700px){.cosmosScene{width:100vw;border-radius:0}.cosmosViewport{height:74svh;min-height:520px;max-height:none}.cosmosHeader{padding:12px 16px}.cosmosPlanet .cosmosHalo,.cosmosPlanet--best .cosmosHalo{width:111px;height:87px;top:0}}

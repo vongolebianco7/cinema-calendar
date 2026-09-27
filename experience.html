@@ -412,6 +412,17 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 <style id="experience-decision-v1">
 .expQuickNav{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:2px 0 18px}.expQuickNav a{white-space:nowrap;border:1px solid #30343a;border-radius:999px;padding:8px 11px;font-size:11px;color:#d6d9dd}.decisionBox{border:1px solid #30343a;border-radius:16px;background:#0b0d10;padding:16px;margin:8px 0 28px}.decisionBox h2{margin:0 0 6px;font-size:22px}.decisionBox>p{margin:0;color:#9ba2aa;font-size:12px;line-height:1.6}.filmPicker{display:flex;gap:8px;margin-top:14px}.filmPicker input{min-width:0;flex:1;background:#08090b;border:1px solid #343941;color:#fff;border-radius:8px;padding:12px}.filmPicker button{border:1px solid #ddd;background:#eee;color:#111;border-radius:8px;padding:0 14px;font-weight:800}.formatResult{margin-top:14px}.formatScore{display:grid;grid-template-columns:118px 84px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #24282e}.formatScore:first-child{border-top:0}.formatScore b{font-size:13px}.formatScore strong{letter-spacing:.08em;color:#e8c56b;font-size:13px}.formatScore span{font-size:11px;color:#9ba2aa;line-height:1.45}.decisionNote{font-size:10px;color:#777;margin-top:10px;line-height:1.55}.compareScroll{overflow:auto;margin:12px 0 34px}.experienceCompare{width:100%;min-width:720px;border-collapse:collapse;font-size:11px}.experienceCompare th,.experienceCompare td{padding:10px;border-bottom:1px solid #282c31;text-align:left;vertical-align:top}.experienceCompare th{color:#eee;background:#0d0f12;position:sticky;top:56px}.experienceCompare td:first-child{font-weight:800;color:#eee}.compareCta{display:inline-flex;margin-top:7px;color:#d7e7f5;text-decoration:underline}@media(max-width:600px){.decisionBox{padding:13px;border-radius:12px}.filmPicker{display:grid;grid-template-columns:1fr auto}.formatScore{grid-template-columns:92px 70px 1fr;gap:7px}.formatScore strong{font-size:11px}.formatScore span{font-size:10px}.expQuickNav{margin-left:-2px}}
 </style>
+
+<style id="experience-tabs-v1">
+.expTabs{position:sticky;top:56px;z-index:80;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:10px 0 22px;padding:6px;background:rgba(9,9,9,.96);backdrop-filter:blur(14px);border:1px solid #282828;border-radius:14px}
+.expTab{appearance:none;border:0;background:transparent;color:#8f969e;font:inherit;font-size:12px;font-weight:750;padding:10px 4px;border-radius:9px;white-space:nowrap}
+.expTab.active{background:#f2eee6;color:#111}
+.expTabPanel[hidden]{display:none!important}
+.expTabPanel{animation:expPanelIn .16s ease-out}
+@keyframes expPanelIn{from{opacity:.45;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(min-width:601px){.expTabs{top:58px;max-width:620px}}
+@media(max-width:430px){.expTabs{margin-left:-4px;margin-right:-4px;padding:5px}.expTab{font-size:11px;padding:10px 2px}.expSection{margin-top:20px}}
+</style>
 </head>
 <body>
 
@@ -440,11 +451,17 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
  <p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p>
 </section>
-<nav class="expQuickNav" aria-label="上映方式ページ内ナビ"><a href="#formatFinder">作品から選ぶ</a><a href="#experienceCompare">違いを比較</a><a href="#aspect">画角</a><a href="#visual">映像</a><a href="#audio">音響</a><a href="#special">体感</a></nav>
 <section class="decisionBox" id="formatFinder"><h2>作品から上映方式を選ぶ</h2><p>作品のジャンル傾向から、各上映方式との相性を5段階で比較します。作品固有のIMAX撮影やScreenX専用素材を未確認の場合は断定しません。</p><div class="filmPicker"><input id="formatFilm" type="search" placeholder="作品名を入力（例：オデュッセイア）" aria-label="上映方式を選ぶ作品名"><button id="formatJudge" type="button">おすすめを見る</button></div><div class="formatResult" id="formatResult"><div class="decisionNote">まず作品名を入力してください。</div></div></section>
-<section class="section" id="experienceCompare"><div class="sectionHead"><h2>上映方式を横比較</h2><p>迷ったときに見るための総合比較。実際の仕様・追加料金は劇場ごとに異なります。</p></div><div class="compareScroll"><table class="experienceCompare"><thead><tr><th>方式</th><th>画面・画角</th><th>映像</th><th>音響</th><th>体感</th><th>向く作品</th></tr></thead><tbody><tr><td>通常上映</td><td>作品標準</td><td>標準</td><td>5.1/7.1等</td><td>なし</td><td>ドラマ、会話劇など</td></tr><tr><td>IMAX</td><td>大型・作品により拡張画角</td><td>高輝度・高精細系</td><td>専用音響</td><td>なし</td><td>SF、アクション、スケールの大きい作品<br><a class="compareCta" href="theaters.html?format=IMAX">対応映画館 →</a></td></tr><tr><td>Dolby Cinema</td><td>作品標準中心</td><td>黒・コントラスト重視</td><td>Dolby Atmos</td><td>なし</td><td>暗部表現、音響重視</td></tr><tr><td>4DX / MX4D</td><td>作品標準</td><td>標準</td><td>劇場仕様</td><td>座席・風・水など</td><td>アクション、アトラクション性</td></tr><tr><td>ScreenX</td><td>左右へ拡張</td><td>3面パノラマ</td><td>劇場仕様</td><td>視界の拡張</td><td>専用シーンのある作品</td></tr></tbody></table></div></section>
+<nav class="expTabs" aria-label="上映方式の比較カテゴリ">
+ <button type="button" class="expTab active" data-exp-tab="recommend" aria-selected="true">おすすめ</button>
+ <button type="button" class="expTab" data-exp-tab="aspect" aria-selected="false">画角</button>
+ <button type="button" class="expTab" data-exp-tab="visual" aria-selected="false">映像</button>
+ <button type="button" class="expTab" data-exp-tab="audio" aria-selected="false">音響</button>
+ <button type="button" class="expTab" data-exp-tab="special" aria-selected="false">体感</button>
+</nav>
 
-<section class="section expSection" id="aspect">
+
+<section class="section expSection expTabPanel" id="aspect" data-exp-panel="aspect" hidden>
  <div class="sectionHead"><h2>見える範囲</h2><p>同じ1枚の1.43:1画像を、横幅を変えずに上下だけ中央クロップして比較します。</p></div>
 
  <div class="ratioCompareExact" aria-label="同一の海中画像を正確な画面比率で比較">
@@ -471,7 +488,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  </div><a class="screenLink" href="theaters.html?format=IMAX%20GT">IMAX GT対応スクリーン一覧を見る →</a></div>
 </section>
 
-<section class="section expSection" id="visual">
+<section class="section expSection expTabPanel" id="visual" data-exp-panel="visual" hidden>
  <div class="sectionHead"><h2>映像</h2><p>同じ海中シーンで、通常上映・IMAXレーザー・Dolby Cinemaの明るさ、黒、コントラストの方向性を比較します。</p></div>
  <div class="qualityGrid">
 <article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityDemo"><div class="qScreen qNormal"></div></div><p><b>基準</b> — 作品本来のルックを標準的な明るさ・コントラストで。</p></article>
@@ -481,7 +498,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="formula">※特徴を理解しやすくするためのイメージ比較です。実際の見え方は作品マスター・劇場設備・座席位置などで変わります。</div>
 </section>
 
-<section class="section expSection" id="audio">
+<section class="section expSection expTabPanel" id="audio" data-exp-panel="audio" hidden>
  <div class="sectionHead"><h2>音響</h2><p>通常5.1/7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。</p></div>
  <div class="audioGrid audioCompare audio3d">
 <article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>水平リング</span></div><div class="room3d flatRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><div class="horizontalRing"></div></div><p><b>耳の高さの1層</b>で、前→横→後ろを包む。</p></article>
@@ -491,7 +508,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 <div class="audioKey"><span>5.1/7.1：1層</span><span>IMAX 12ch：2層</span><span>Atmos：空間内を移動</span></div>
 </section>
 
-<section class="section expSection" id="special">
+<section class="section expSection expTabPanel" id="special" data-exp-panel="special" hidden>
  <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DX / MX4Dは同じ1枚のシーン上に、体感エフェクトだけを重ねて違いを見せます。</p></div>
  <div class="motionGrid premiumMotion">
   <article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div>
@@ -509,7 +526,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p><a class="screenLink" href="theaters.html?format=SCREENX">ScreenX対応スクリーンを見る →</a></div>
 </section>
 
-<section class="section expSection" id="guide">
+<section class="section expSection expTabPanel" id="guide" data-exp-panel="recommend">
  <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と、何をいちばん重視するかで選べます。</p></div>
  <div class="pickGrid">
 <article><b>画面の大きさ・迫力</b><strong>IMAX</strong><span>大画面と専用システムを重視</span></article>
@@ -554,4 +571,18 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
 </script>
 <div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.62</div>
 <script id="experience-decision-js-v1">(()=>{const input=document.getElementById('formatFilm'),btn=document.getElementById('formatJudge'),out=document.getElementById('formatResult');if(!input||!btn||!out)return;const clamp=n=>Math.max(1,Math.min(5,n));const stars=n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));function genresOf(m){return (m.genres||m.genre_names||[]).map(x=>String(typeof x==='string'?x:(x&&x.name)||'').toLowerCase()).join(' ')}function scoreMovie(m){const g=genresOf(m),s={'通常上映':4,'IMAX':3.5,'Dolby Cinema':3.5,'4DX / MX4D':2,'ScreenX':2};if(/action|アクション|adventure|アドベンチャー|science fiction|sf|fantasy|ファンタジー/.test(g)){s.IMAX+=1;s['Dolby Cinema']+=.5;s['4DX / MX4D']+=.8;s.ScreenX+=.4}if(/horror|ホラー|thriller|スリラー|crime|犯罪/.test(g)){s['Dolby Cinema']+=1;s.IMAX+=.3;s['4DX / MX4D']+=.3}if(/animation|アニメ/.test(g)){s.IMAX+=.6;s['Dolby Cinema']+=.5;s.ScreenX+=.2}if(/drama|ドラマ|romance|恋愛|documentary|ドキュメンタリー/.test(g)){s['通常上映']+=.5;s['Dolby Cinema']+=.2;s['4DX / MX4D']-=.8;s.ScreenX-=.5}Object.keys(s).forEach(k=>s[k]=clamp(s[k]));return s}function reason(k){return k==='IMAX'?'大画面・スケール感との相性':k==='Dolby Cinema'?'黒・コントラストと立体音響':k==='4DX / MX4D'?'動きのある場面を身体で楽しむ':k==='ScreenX'?'左右まで広がる視界を楽しむ':'追加演出なしで作品に集中'}async function run(){const q=input.value.trim();if(!q)return;btn.disabled=true;out.innerHTML='<div class="decisionNote">作品情報を確認中…</div>';try{const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?q='+encodeURIComponent(q)+'&limit=5',{cache:'no-store'}),d=await r.json(),m=[...(d.movies||[]),...(d.external||[])][0];if(!m)throw 0;const scores=scoreMovie(m),rows=Object.entries(scores).sort((a,b)=>b[1]-a[1]);out.innerHTML='<div class="decisionNote"><b>'+(m.title||q)+'</b>の作品傾向からの目安</div>'+rows.map(([k,v])=>'<div class="formatScore"><b>'+k+'</b><strong>'+stars(v)+'</strong><span>'+reason(k)+'</span></div>').join('')+'<div class="decisionNote">※ジャンル等からの目安です。作品固有の上映仕様・上映有無は劇場公式情報を確認してください。</div>'}catch(e){out.innerHTML='<div class="decisionNote">作品情報を取得できませんでした。作品名を変えて再検索してください。</div>'}finally{btn.disabled=false}}btn.addEventListener('click',run);input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run()}})})();</script>
+
+<script id="experience-tabs-js">
+(()=>{
+ const tabs=[...document.querySelectorAll('[data-exp-tab]')];
+ const panels=[...document.querySelectorAll('[data-exp-panel]')];
+ if(!tabs.length||!panels.length)return;
+ function show(key){
+  tabs.forEach(tab=>{const on=tab.dataset.expTab===key;tab.classList.toggle('active',on);tab.setAttribute('aria-selected',on?'true':'false')});
+  panels.forEach(panel=>{const on=panel.dataset.expPanel===key;panel.hidden=true;if(on)panel.hidden=false});
+ }
+ tabs.forEach(tab=>tab.addEventListener('click',()=>show(tab.dataset.expTab)));
+ show('recommend');
+})();
+</script>
 </body></html>

@@ -100,7 +100,7 @@ direction = text("js/my-cinemap-art-direction.js")
 for required in ["removeDeprecatedTemplates", "cinema-projector", "cinema-theater", "cinema-archive"]:
     if required not in direction:
         errors.append(f"My Cinemap current template integration missing: {required}")
-for forbidden in ["cinema-artdeco", "Art Deco Cinema"]:
+for forbidden in ["{id:'cinema-artdeco'", "Art Deco Cinema"]:
     if forbidden in direction:
         errors.append(f"My Cinemap removed cinema template returned: {forbidden}")
 for forbidden in [

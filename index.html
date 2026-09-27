@@ -432,6 +432,10 @@ function groupedMovieCards(weekMovies,modeName){
  }).join("")
 }
 function renderCal(){
+ let calendarPriorityBudget=12;
+ function calendarThumbUrl(url){return String(url||"").replace(/\/(?:original|w780|w500|w342)\//,"/w185/")}
+ function calendarImg(url){let priority=calendarPriorityBudget>0;calendarPriorityBudget--;return '<img src="'+calendarThumbUrl(url)+'" alt="" loading="'+(priority?'eager':'lazy')+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>'}
+
  let y=view.getFullYear(),mo=view.getMonth();
  $("#month").textContent=y+"年 "+(mo+1)+"月";
  let cal=document.querySelector(".calendar");
@@ -440,7 +444,7 @@ function renderCal(){
  function groupHtml(ms,dateKey,maxThumbs){
   let grouped={};ms.forEach(m=>{let k=m.service||"劇場公開";(grouped[k]||(grouped[k]=[])).push(m)});
   return Object.entries(grouped).map(([svc,arr])=>{
-   arr.sort(popularitySort);let shown=arr.slice(0,maxThumbs);let thumbs=shown.map(m=>m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster()).join("");
+   arr.sort(popularitySort);let shown=arr.slice(0,maxThumbs);let thumbs=shown.map(m=>m.poster?calendarImg(m.poster):missingPoster()).join("");
    let hidden=Math.max(0,arr.length-maxThumbs);
    return '<div class="calGroup '+svcClass(svc)+'" data-date="'+dateKey+'" title="'+svc+' '+arr.length+'作品"><span class="calTotal">'+arr.length+'</span><div class="calPosters">'+thumbs+'</div>'+(hidden?'<span class="calHidden">+'+hidden+'</span>':'')+'</div>'
   }).join("")
@@ -482,7 +486,7 @@ function renderCal(){
    let cards=weekMovies.map(m=>{
     let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
     let status=m.terrestrial_first===true?'<span class="tvFirstBadge">初</span><span>地上波初</span>':m.terrestrial_first===false?'<span class="tvStatusMuted">以前にも放映あり</span>':'<span class="tvStatusMuted">初放送未確認</span>';
-    return '<article class="tvMovie" data-mi="'+idx+'"><div class="tvMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'</div><div class="tvMovieBody"><div class="tvMovieTop"><span class="tvMovieDate">'+date+'</span><span class="tvMovieTime">'+(m.time||"時間未確認")+'</span></div><div class="tvMovieChannel" style="background:'+tvChannelColor(m.service)+';color:#fff">'+(m.service||"放送局未確認")+'</div><div class="tvMovieProgram">'+(m.program||"番組名未確認")+'</div><div class="tvMovieTitle">'+m.title+'</div><div class="tvMovieStatus">'+status+'</div></div></article>'
+    return '<article class="tvMovie" data-mi="'+idx+'"><div class="tvMoviePoster">'+(m.poster?calendarImg(m.poster):missingPoster())+'</div><div class="tvMovieBody"><div class="tvMovieTop"><span class="tvMovieDate">'+date+'</span><span class="tvMovieTime">'+(m.time||"時間未確認")+'</span></div><div class="tvMovieChannel" style="background:'+tvChannelColor(m.service)+';color:#fff">'+(m.service||"放送局未確認")+'</div><div class="tvMovieProgram">'+(m.program||"番組名未確認")+'</div><div class="tvMovieTitle">'+m.title+'</div><div class="tvMovieStatus">'+status+'</div></div></article>'
    }).join("");
    out+='<section class="streamingWeekBlock '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(cards?'<div class="tvWeekMovies">'+cards+'</div>':'<div class="small">この週の映画放映予定はありません</div>')+'</div></section>'
   }

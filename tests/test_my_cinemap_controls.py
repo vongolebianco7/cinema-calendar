@@ -30,12 +30,11 @@ def test_font_size_control_has_small_medium_large_and_small_default():
     assert "artValue('fontSize')" in ART
 
 
-def test_preview_poster_toggle_exists_and_is_local_preview_only():
-    assert 'id="posterMode"' in HTML
-    assert '<option value="off" selected>表示しない</option>' in HTML
-    assert '<option value="on">表示する</option>' in HTML
-    assert 'posterPreviewOn' in TOOLS
-    assert "posterMode" in TOOLS
+def test_selected_ranking_shows_posters_without_toggle():
+    assert 'id="posterMode"' not in HTML
+    assert 'posterPreviewOn' not in TOOLS
+    assert 'posterPreviewOff' not in TOOLS
+    assert "m.poster?'<img src=\"'+E(m.poster)+'\">'" in HTML
     assert "drawImage(" not in ART
 
 

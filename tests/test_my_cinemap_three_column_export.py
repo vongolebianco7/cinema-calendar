@@ -1,9 +1,15 @@
 from pathlib import Path
+import subprocess
 
 art = Path("js/my-cinemap-art.js").read_text(encoding="utf-8")
 html = Path("my-cinemap.html").read_text(encoding="utf-8")
 tools = Path("js/my-cinemap-tools.js").read_text(encoding="utf-8")
-enhancements = Path("js/my-cinemap-art-direction.js").read_text(encoding="utf-8")
+enhancements_path = Path("js/my-cinemap-art-direction.js")
+enhancements = enhancements_path.read_text(encoding="utf-8")
+
+syntax = subprocess.run(["node", "--check", str(enhancements_path)], capture_output=True, text=True)
+if syntax.returncode:
+    raise SystemExit(f"My Cinemap enhancement JavaScript syntax failed:\n{syntax.stderr}")
 
 required_art = [
     "layout=artValue('layout')||'single'",

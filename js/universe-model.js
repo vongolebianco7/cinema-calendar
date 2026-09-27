@@ -13,7 +13,6 @@
     }
     return anchors.at(-1)[1];
   }
-  const primaryGenre = film => Array.isArray(film?.genres) ? film.genres.find(Boolean)||'情報未取得' : '情報未取得';
   function features(film) {
     const result = {};
     const genres = Array.isArray(film?.genres) ? film.genres.filter(Boolean) : [];
@@ -92,7 +91,7 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  const api={ratingWeight,primaryGenre,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition};
+  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition};
   root.CinemapUniverseModel=api;
   if (typeof module !== 'undefined') module.exports=api;
 })(typeof window === 'undefined' ? globalThis : window);

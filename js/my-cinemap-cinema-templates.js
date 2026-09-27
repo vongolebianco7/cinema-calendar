@@ -5,15 +5,13 @@
     'cinema-projector':'assets/105DE5C4-9F65-41AF-A72F-0731A88CA8E6.png',
     'cinema-theater':'assets/309A0142-0B8A-4070-A341-63A2446D0CBE.png',
     'cinema-artdeco':'assets/48E0565E-2BBD-45A0-B6C9-A3A554976D0D.png',
-    'cinema-archive':'assets/99AFA977-5A97-4544-A7AD-60E16A93F874.png',
-    'cinema-screening':'assets/AB933939-93EB-43D6-814A-C60BE58B42F6.png'
+    'cinema-archive':'assets/99AFA977-5A97-4544-A7AD-60E16A93F874.png'
   };
   const templateMode={
     'cinema-projector':'light',
     'cinema-theater':'dark',
     'cinema-artdeco':'dark',
-    'cinema-archive':'dark',
-    'cinema-screening':'dark'
+    'cinema-archive':'dark'
   };
   const imageCache=new Map();
 
@@ -69,7 +67,7 @@
   function renderCinemaTemplate(movies,theme){
     const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
     const shape=artValue('format')||'portrait',layout=artValue('layout')||'single';
-    const fontKey=artValue('fontStyle')||'editorial',font=artFonts[fontKey]||artFonts.editorial;
+    const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
     c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
     const w=c.width,h=c.height,columns=layout==='double'?2:1;
     const metrics=layoutMetrics(shape,columns,'noir'),pad=metrics.pad,inner=w-2*pad;

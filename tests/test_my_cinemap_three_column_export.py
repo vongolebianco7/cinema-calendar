@@ -19,12 +19,12 @@ required_art = [
     "const columns=layout==='double'?2:1;",
     "const rows=columns===2?5:10",
     "const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5;",
-    "minimal:","noir:","burgundy:","sage:","bluegray:",
-    "drawMinimal","drawNoir","drawBurgundy","drawSage","drawBlueGray","drawMedal","MY TOP OF 2026",
+    "minimal:","noir:","burgundy:","bluegray:",
+    "drawMinimal","drawNoir","drawBurgundy","drawBlueGray","drawMedal","MY TOP OF 2026",
 ]
 missing_art = [token for token in required_art if token not in art]
 if missing_art:
-    raise SystemExit(f"My Cinemap five-theme artwork missing: {missing_art}")
+    raise SystemExit(f"My Cinemap editorial artwork missing: {missing_art}")
 
 minimal_polish = [
     "const minimalPortraitTitleSize=46","const minimalPortraitListTop=232","const minimalMedalScale=.86",
@@ -40,8 +40,8 @@ if missing_minimal:
     raise SystemExit(f"Minimal editorial polish missing: {missing_minimal}")
 
 art_direction = [
-    "const artFonts=","const fontKey=artValue('fontStyle')||'editorial'","function drawThemeIllustration",
-    "function drawProjectionGlow","function drawBotanicalLines","function drawArchiveGrid","function drawBurgundyArch",
+    "const artFonts=","const fontKey=artValue('fontStyle')||'modern'","function drawThemeIllustration",
+    "function drawProjectionGlow","function drawArchiveGrid","function drawBurgundyArch",
     "titleBottom","const titleToListGap=","font.title","font.movie",
 ]
 missing_direction = [token for token in art_direction if token not in art]
@@ -51,7 +51,7 @@ if missing_direction:
 large_theme_preview = [
     ".designPicker .themeChoices{display:flex",".themeChoice.premiumTheme{flex:0 0 min(82vw,330px)",
     ".templatePreview{position:relative;display:block;width:100%;height:164px",".previewMinimal{background:#f3efe7",
-    ".previewNoir{background:#1b1c1d",".previewBurgundy{background:#57252d",".previewSage{background:#d7d9cb",
+    ".previewNoir{background:#1b1c1d",".previewBurgundy{background:#57252d",
     ".previewBlueGray{background:#d9dfe3",".templatePreview .previewRank","scroll-snap-type:x mandatory","populateThemePreviews()",
 ]
 missing_preview = [token for token in large_theme_preview if token not in tools]
@@ -59,10 +59,10 @@ if missing_preview:
     raise SystemExit(f"Large theme preview UI missing: {missing_preview}")
 
 enhancement_requirements = [
-    "<select id=\"fontStyle\">","Editorial Serif","Modern Serif","Clean Sans","Cinema Classic",
+    "<select id=\"fontStyle\">","Modern Serif","Clean Sans","Cinema Classic",
     "const FONT_KEY='cinemap-my-font-style'","async function hydrateMissingDirectors",
     "picks.filter(movie=>!movie.director)","hydrateMissingDirectors()","saved.font=fontStyle.value","previewDecor",
-    "mountCinemaTemplates","cinema-projector","cinema-theater","cinema-artdeco","cinema-archive","cinema-screening",
+    "mountCinemaTemplates","cinema-projector","cinema-theater","cinema-artdeco","cinema-archive",
 ]
 missing_enhancements = [token for token in enhancement_requirements if token not in enhancements]
 if missing_enhancements:
@@ -78,8 +78,8 @@ for required in ["originalDrawArtwork","cinemaTemplates","drawImageCover","theme
 
 required_html = [
     '<option value="single" selected>縦1列</option>','<option value="double">左右2列</option>',
-    'data-theme="minimal"','data-theme="noir"','data-theme="burgundy"','data-theme="sage"','data-theme="bluegray"',
-    '>Minimal<','>Noir Editorial<','>Burgundy Journal<','>Sage Museum<','>Blue Grey Archive<',
+    'data-theme="minimal"','data-theme="noir"','data-theme="burgundy"','data-theme="bluegray"',
+    '>Minimal<','>Noir Editorial<','>Burgundy Journal<','>Blue Grey Archive<',
     '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage"',
 ]
 missing_html = [token for token in required_html if token not in html]
@@ -90,9 +90,13 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
     if forbidden in html:
         raise SystemExit(f"removed My Cinemap option returned: {forbidden}")
 
-if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
-    raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
-if "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2" not in art:
-    raise SystemExit("My Cinemap art-direction module is not loaded")
+# Cache-bust values change whenever My Cinemap rendering is updated. Verify the
+# split modules are versioned, without pinning the test to one obsolete version.
+if "my-cinemap-tools.js?v=" not in art:
+    raise SystemExit("My Cinemap preview tool cache-bust query is missing")
+if "my-cinemap-art-direction.js?v=" not in art:
+    raise SystemExit("My Cinemap art-direction module is not loaded with a cache-bust query")
+if '<script src="js/my-cinemap-art.js?v=' not in html:
+    raise SystemExit("My Cinemap artwork renderer is not loaded with a cache-bust query")
 
-print("My Cinemap five editorial themes, five exact uploaded cinema templates, font choices, directors, and responsive layouts passed")
+print("My Cinemap editorial themes, uploaded cinema templates, font choices, directors, and responsive layouts passed")

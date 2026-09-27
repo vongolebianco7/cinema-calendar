@@ -3,7 +3,6 @@ const artPalettes = {
   minimal: {bg:'#f3efe7', fg:'#1f1d19', muted:'#7b746c', line:'#d3cab9', accent:'#b9aa8d', border:'#b9aa8d', dark:false},
   noir: {bg:'#1b1c1d', fg:'#f4efe6', muted:'#b9b0a5', line:'#514c46', accent:'#b8955d', border:'#8d744d', dark:true},
   burgundy: {bg:'#57252d', fg:'#f7eee4', muted:'#d4bdb2', line:'#87505a', accent:'#c89a68', border:'#a66f52', dark:true},
-  sage: {bg:'#d7d9cb', fg:'#22251f', muted:'#687065', line:'#a8ae9e', accent:'#817752', border:'#8d8567', dark:false},
   bluegray: {bg:'#d9dfe3', fg:'#1d2730', muted:'#697681', line:'#aab4bb', accent:'#827665', border:'#8c9296', dark:false}
 };
 let artworkFile=null, artworkRevision=0, artworkURL=null;
@@ -78,7 +77,6 @@ function fillEditorialBackground(ctx,w,h,p,top,bottom){
 function drawMinimal(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.28)','rgba(154,143,124,.025)')}
 function drawNoir(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.025)','rgba(0,0,0,.10)')}
 function drawBurgundy(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,238,218,.04)','rgba(43,10,17,.12)')}
-function drawSage(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,245,.18)','rgba(104,117,94,.055)')}
 function drawBlueGray(ctx,w,h,p){fillEditorialBackground(ctx,w,h,p,'rgba(255,255,255,.20)','rgba(80,98,113,.05)')}
 
 function drawProjectionGlow(ctx,w,h,p,strength=.11){
@@ -114,7 +112,6 @@ function drawThemeIllustration(ctx,w,h,theme,p){
   if(theme==='minimal'){drawProjectionGlow(ctx,w,h,p,.085);return}
   if(theme==='noir'){drawProjectionGlow(ctx,w,h,p,.075);drawNoirGeometry(ctx,w,h,p);return}
   if(theme==='burgundy'){drawBurgundyArch(ctx,w,h,p);return}
-  if(theme==='sage'){drawBotanicalLines(ctx,w,h,p);return}
   if(theme==='bluegray'){drawArchiveGrid(ctx,w,h,p)}
 }
 
@@ -165,6 +162,7 @@ function layoutMetrics(shape,columns,theme){
 function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
+  const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
   const fontKey=artValue('fontStyle')||'editorial',font=artFonts[fontKey]||artFonts.editorial;
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
   const w=c.width,h=c.height;
@@ -203,11 +201,11 @@ function drawArtwork(movies){
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
     const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
-    const nameSize=columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28);
+    const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
     const movieWeight=fontKey==='editorial'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,columns===2?21:24,font.movie,movieWeight,1.10);
     const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,columns===2?doubleMetaSize:singleMetaSize,16,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
+    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);

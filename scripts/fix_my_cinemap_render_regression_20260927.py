@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# Triggered after the regression test confirmed the broken production behavior.
 ROOT=Path(__file__).resolve().parents[1]
 ART=ROOT/'js/my-cinemap-art.js'
 DIRECTION=ROOT/'js/my-cinemap-art-direction.js'

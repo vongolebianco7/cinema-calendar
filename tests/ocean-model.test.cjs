@@ -39,7 +39,7 @@ const mixedPoint=model.filmPosition(mixed), thriller=model.centerForGenre('ス�
 assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres occupy a boundary');
 const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
-assert.equal(model.species.length,360,'thirty silhouettes with twelve discoverable morphs each');
+assert.equal(model.species.length,504,'forty-two silhouettes with twelve discoverable colour variants each');
 assert.ok(model.speciesFor(catalog[0]).genres.includes('SF'));
 assert.ok(model.speciesFor(catalog[1]).genres.includes('ホラー'));
 assert.equal(model.speciesFor({...catalog[0],rating:2.5}).id,model.speciesFor(catalog[0]).id,'rating affects appearance, not species');

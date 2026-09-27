@@ -59,6 +59,7 @@
 .oceanAtlas0{--fish-atlas:url('../assets/cinemap-ocean/fish-atlas.webp')}
 .oceanAtlas1{--fish-atlas:url('../assets/cinemap-ocean/creatures-a.webp')}
 .oceanAtlas2{--fish-atlas:url('../assets/cinemap-ocean/creatures-b.webp')}
+.oceanAtlas3{--fish-atlas:url('../assets/cinemap-ocean/creatures-c.webp')}
 .cosmosPlanet .cosmosHalo,.cosmosPlanet--best .cosmosHalo{
   width:134px;height:105px;top:0;border:0;border-radius:0;overflow:visible;
   background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;

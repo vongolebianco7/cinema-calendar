@@ -93,7 +93,7 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  // Thirty distinct silhouettes, twelve stable colour variants each.
+  // Forty-two distinct silhouettes, twelve stable colour variants each.
   // The morph is an artistic rendering from the film ID, not a claim about
   // unmeasured moods, personality or the taxonomy of a real animal.
   const families=[
@@ -112,7 +112,12 @@
       ['sunfish','マンボウ',1],['mantaray','オニイトマキエイ',1],['whale','ザトウクジラ',1],['swordfish','メカジキ',0],
       ['clownfish','クマノミ',2],['moray','ウツボ',3],['grouper','ハタ',0],['nautilus','オウムガイ',5],
       ['blueoctopus','ヒョウモンダコ',3],['lobster','ロブスター',4],['nudibranch','ウミウシ',4],['sailfish','バショウカジキ',0]
-    ].map(([id,name,group],index)=>({id,name,atlas:2,index,genres:familiesGenres(group)}))
+    ].map(([id,name,group],index)=>({id,name,atlas:2,index,genres:familiesGenres(group)})),
+    ...[
+      ['beluga','シロイルカ',1],['tigershark','イタチザメ',0],['dolphin','イルカ',1],['stingray','アカエイ',1],
+      ['barracuda','カマス',0],['horseshoe','カブトガニ',1],['mantisshrimp','シャコ',3],['isopod','ダイオウグソクムシ',3],
+      ['combjelly','クシクラゲ',5],['urchin','ウニ',4],['seastar','ヒトデ',2],['seal','アザラシ',1]
+    ].map(([id,name,group],index)=>({id,name,atlas:3,index,genres:familiesGenres(group)}))
   ];
   function familiesGenres(group){return [
     ['SF','アクション','戦争'],['ドキュメンタリー','アドベンチャー'],['アニメ','コメディ','ファミリー'],
@@ -127,7 +132,7 @@
     const explicit=species.find(x=>x.id===film?.ecologyType);
     if(explicit)return explicit;
     const strengths=genreStrengths(film);
-    const groups=[[0,6,7,21,24,29],[1,8,9,18,19,20],[2,16,17,22],[3,12,14,15,23,26],[4,10,27,28],[5,11,13,25]];
+    const groups=[[0,6,7,21,24,29,31,34],[1,8,9,18,19,20,30,32,33,35,41],[2,16,17,22,40],[3,12,14,15,23,26,36,37],[4,10,27,28,39],[5,11,13,25,38]];
     const groupScores=groups.map((_,i)=>Math.max(0,...families[i].genres.map(g=>strengths[g]||0)));
     const group=groupScores.indexOf(Math.max(...groupScores));
     const pool=groupScores[group]>0?groups[group]:[1,18,19,20];

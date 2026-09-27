@@ -1,34 +1,384 @@
 {
-  "generated_at": "2026-09-26",
-  "note": "公式ブランド/劇場ページで確認できた導入情報をCinemap用に整理。網羅性は公式ソース更新に合わせて拡張。",
+  "generated_at": "2026-09-27",
+  "note": "公式チェーン/劇場ページで確認できる上映設備をCinemap用に整理。IMAXはIMAX/IMAXレーザー/IMAX GTを同一ファミリーとして検索し、GTは個別絞り込み可能。",
   "screens": [
     {
-      "format": "IMAX GT",
-      "theater": "グランドシネマサンシャイン 池袋",
-      "prefecture": "東京都",
-      "screen": "シアター12",
-      "source_url": "https://www.cinemasunshine.co.jp/pages/gdcs/"
+      "format": "IMAX",
+      "theater": "TOHOシネマズ 仙台",
+      "prefecture": "宮城県",
+      "screen": "IMAX",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
     },
     {
-      "format": "IMAX GT",
-      "theater": "109シネマズ大阪エキスポシティ",
-      "prefecture": "大阪府",
-      "screen": "シアター11",
-      "source_url": "https://109cinemas.net/osaka-expocity/establishment.html"
+      "format": "IMAX",
+      "theater": "TOHOシネマズ 立川立飛",
+      "prefecture": "東京都",
+      "screen": "IMAX",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
     },
     {
       "format": "IMAX",
       "theater": "TOHOシネマズ ららぽーと横浜",
       "prefecture": "神奈川県",
       "screen": "IMAX",
-      "source_url": "https://www.imax.com/theatre/toho-cinemas-lalaport-yokohama-imax"
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
     },
     {
       "format": "IMAX",
+      "theater": "TOHOシネマズ なんば（本館・別館）",
+      "prefecture": "大阪府",
+      "screen": "IMAX",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 日比谷",
+      "prefecture": "東京都",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 新宿",
+      "prefecture": "東京都",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 流山おおたかの森",
+      "prefecture": "千葉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 宇都宮",
+      "prefecture": "栃木県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 名古屋栄",
+      "prefecture": "愛知県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 赤池",
+      "prefecture": "愛知県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ モレラ岐阜",
+      "prefecture": "岐阜県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ ファボーレ富山",
+      "prefecture": "富山県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 二条",
+      "prefecture": "京都府",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "TOHOシネマズ 西宮OS",
+      "prefecture": "兵庫県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.tohotheater.jp/theater/find.html"
+    },
+    {
+      "format": "IMAX GT",
+      "theater": "109シネマズ大阪エキスポシティ",
+      "prefecture": "大阪府",
+      "screen": "IMAXレーザー/GT",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ菖蒲",
+      "prefecture": "埼玉県",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ木場",
+      "prefecture": "東京都",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ二子玉川",
+      "prefecture": "東京都",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズグランベリーパーク",
+      "prefecture": "東京都",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ川崎",
+      "prefecture": "神奈川県",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ湘南",
+      "prefecture": "神奈川県",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズゆめが丘",
+      "prefecture": "神奈川県",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAX",
+      "theater": "109シネマズ名古屋",
+      "prefecture": "愛知県",
+      "screen": "IMAX",
+      "source_url": "https://109cinemas.net/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ローソン・ユナイテッドシネマ札幌",
+      "prefecture": "北海道",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ローソン・ユナイテッドシネマ前橋",
+      "prefecture": "群馬県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ浦和",
+      "prefecture": "埼玉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ松戸",
+      "prefecture": "千葉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマとしまえん",
+      "prefecture": "東京都",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ金沢",
+      "prefecture": "石川県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ岡崎",
+      "prefecture": "愛知県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ岸和田",
+      "prefecture": "大阪府",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ローソン・ユナイテッドシネマ小倉",
+      "prefecture": "福岡県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ キャナルシティ13",
+      "prefecture": "福岡県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ長崎",
+      "prefecture": "長崎県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "ユナイテッド・シネマ PARCO CITY 浦添",
+      "prefecture": "沖縄県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAX",
+      "theater": "ユナイテッド・シネマ豊橋18",
+      "prefecture": "愛知県",
+      "screen": "IMAX",
+      "source_url": "https://www.unitedcinemas.jp/imax/index.html"
+    },
+    {
+      "format": "IMAXレーザー",
       "theater": "イオンシネマ江釣子",
       "prefecture": "岩手県",
       "screen": "IMAXレーザー",
-      "source_url": "https://www.aeoncinema.com/theater/"
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ新潟亀田インター",
+      "prefecture": "新潟県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ越谷レイクタウン",
+      "prefecture": "埼玉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ シアタス調布",
+      "prefecture": "東京都",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ八王子滝山",
+      "prefecture": "東京都",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ市川妙典",
+      "prefecture": "千葉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ幕張新都心",
+      "prefecture": "千葉県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ須坂",
+      "prefecture": "長野県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ各務原",
+      "prefecture": "岐阜県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ四條畷",
+      "prefecture": "大阪府",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ岡山",
+      "prefecture": "岡山県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "イオンシネマ福岡",
+      "prefecture": "福岡県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.aeoncinema.com/facility/imax/"
+    },
+    {
+      "format": "IMAX GT",
+      "theater": "グランドシネマサンシャイン 池袋",
+      "prefecture": "東京都",
+      "screen": "シアター12 / IMAXレーザーGT",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "シネマサンシャイン土浦",
+      "prefecture": "茨城県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "シネマサンシャインららぽーと沼津",
+      "prefecture": "静岡県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "シネマサンシャイン大和郡山",
+      "prefecture": "奈良県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "シネマサンシャイン衣山",
+      "prefecture": "愛媛県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
+    },
+    {
+      "format": "IMAXレーザー",
+      "theater": "シネマサンシャイン飯塚",
+      "prefecture": "福岡県",
+      "screen": "IMAXレーザー",
+      "source_url": "https://www.cinemasunshine.co.jp/pages/imax-about"
     },
     {
       "format": "4DX",

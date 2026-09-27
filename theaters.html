@@ -177,9 +177,10 @@ function renderTheaterDetail(){
    (source?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式スケジュールで確認</a>':'');
  document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selectedDate=b.dataset.date;renderTheaterDetail();updateUrl()})
 }
+function formatMatches(actual,wanted){actual=String(actual||"").trim().toLowerCase();wanted=String(wanted||"").trim().toLowerCase();if(wanted==="imax")return actual.startsWith("imax");return actual===wanted}
 function renderFormatDirectory(){
  if(!selectedFormat)return false;
- const rows=(formatData.screens||[]).filter(x=>String(x.format).toLowerCase()===String(selectedFormat).toLowerCase());
+ const rows=(formatData.screens||[]).filter(x=>formatMatches(x.format,selectedFormat));
  $("#q").value="";
  $("#meta").textContent=selectedFormat+" 対応スクリーン "+rows.length+"件";
  $("#grid").innerHTML=rows.length?rows.map(x=>'<article class="card"><h3>'+esc(x.theater)+'</h3><div class="place">'+esc([x.prefecture,x.screen].filter(Boolean).join(" · "))+'</div><div class="btns"><a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(x.source_url)+'">設備の公式情報</a><a class="btn" href="theaters.html?search='+encodeURIComponent(x.theater)+'">映画館を開く</a></div></article>').join(""):'<div class="empty">確認済みの対応スクリーンがありません。</div>';

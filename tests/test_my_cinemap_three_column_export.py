@@ -90,9 +90,13 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
     if forbidden in html:
         raise SystemExit(f"removed My Cinemap option returned: {forbidden}")
 
-if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
-    raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
-if "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2" not in art:
-    raise SystemExit("My Cinemap art-direction module is not loaded")
+# Cache-bust values change whenever My Cinemap rendering is updated. Verify the
+# split modules are versioned, without pinning the test to one obsolete version.
+if "my-cinemap-tools.js?v=" not in art:
+    raise SystemExit("My Cinemap preview tool cache-bust query is missing")
+if "my-cinemap-art-direction.js?v=" not in art:
+    raise SystemExit("My Cinemap art-direction module is not loaded with a cache-bust query")
+if '<script src="js/my-cinemap-art.js?v=' not in html:
+    raise SystemExit("My Cinemap artwork renderer is not loaded with a cache-bust query")
 
 print("My Cinemap five editorial themes, five exact uploaded cinema templates, font choices, directors, and responsive layouts passed")

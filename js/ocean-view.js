@@ -20,7 +20,7 @@
   const nodeStyle=(p,extra='')=>'left:'+p.x+'%;top:'+p.y+'%;--depth:'+p.z+'px;'+extra;
   const fishStyle=fish=>{
     const columns=fish.atlas===0?3:4,rows=fish.atlas===0?2:3;
-    return '--fish-x:'+(fish.index%columns/(columns-1)*100)+'%;--fish-y:'+(Math.floor(fish.index/columns)/(rows-1)*100)+'%;--fish-size:'+(columns*100)+'% '+(rows*100)+'%;--fish-hue:'+fish.hue+'deg;--fish-pattern:'+fish.pattern+';';
+    return '--fish-x:'+(fish.index%columns/(columns-1)*100)+'%;--fish-y:'+(Math.floor(fish.index/columns)/(rows-1)*100)+'%;--fish-size:'+(columns*100)+'% '+(rows*100)+'%;--fish-hue:'+fish.hue+'deg;';
   };
   const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const genreNodes=()=>{

@@ -93,7 +93,7 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  // Thirty distinct silhouettes, twelve stable colour/marking morphs each.
+  // Thirty distinct silhouettes, twelve stable colour variants each.
   // The morph is an artistic rendering from the film ID, not a claim about
   // unmeasured moods, personality or the taxonomy of a real animal.
   const families=[
@@ -121,7 +121,7 @@
   const morphNames=['蒼','珊瑚','琥珀','紫','紺','銀','瑠璃','朱','真珠','藍','金','薄紅'];
   const species=families.flatMap(f=>morphNames.map((morph,variant)=>({
     ...f,id:f.id+'-'+variant,name:morph+'の'+f.name,variant,
-    hue:(variant-5)*12,pattern:variant%3
+    hue:(variant-5)*12
   })));
   function speciesFor(film){
     const explicit=species.find(x=>x.id===film?.ecologyType);

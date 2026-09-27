@@ -1,0 +1,44 @@
+name: Remove subjective person profile sections
+
+on:
+  push:
+    paths:
+      - "scripts/remove_person_subjective_sections_20260927.py"
+      - ".github/workflows/remove-person-subjective-sections-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare regression test
+        run: python scripts/remove_person_subjective_sections_20260927.py prepare-tests
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_person_profile_objective_only.py; then
+            echo "Expected objective-only test to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+      - name: Remove subjective person sections
+        run: python scripts/remove_person_subjective_sections_20260927.py apply
+      - name: Verify objective-only person profile
+        run: python tests/test_person_profile_objective_only.py
+      - name: Verify three-column person/search regression
+        run: |
+          python tests/test_person_profile_three_column.py
+          python tests/test_mobile_movie_rails.py
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discover.html tests/test_person_profile_objective_only.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "refactor: keep person profile objective only"
+          git push

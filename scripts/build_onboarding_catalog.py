@@ -23,11 +23,13 @@ PICKS = {
 }
 rankings = json.loads((ROOT/'data/rankings.json').read_text())['rankings']
 by_title = {}
+preferred_ids = {'魔女の宅急便': 16859}  # Original animated film; the catalog also has a 2014 remake.
 for region, genres in rankings.items():
     for genre, eras in genres.items():
         for era, movies in eras.items():
             for movie in movies:
-                entry = by_title.setdefault(movie['title'], {**movie, 'genres': set(), 'regions': set()})
+                candidates = by_title.setdefault(movie['title'], {})
+                entry = candidates.setdefault(movie['id'], {**movie, 'genres': set(), 'regions': set()})
                 entry['genres'].add(genre)
                 entry['regions'].add(region)
 directors = json.loads((ROOT/'data/directors.json').read_text())['directors']
@@ -43,7 +45,8 @@ for index in range(10):
             if index >= len(decade):
                 continue
             title = decade[index]
-            movie = by_title.get(title)
+            candidates = by_title.get(title, {})
+            movie = candidates.get(preferred_ids[title]) if title in preferred_ids else next(iter(candidates.values()), None)
             if not movie:
                 missing.append(title)
                 continue

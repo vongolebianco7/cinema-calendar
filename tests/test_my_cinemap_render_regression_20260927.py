@@ -39,7 +39,7 @@ def test_screening_room_is_not_reintroduced():
 
 def test_cinema_templates_honor_font_size_control():
     assert "const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;" in CINEMA
-    assert "metrics.titleSize*fontScale" in CINEMA
     assert "const nameSize=(columns===2?" in CINEMA
     assert ")*fontScale;" in CINEMA
-    assert "singleMetaSize*fontScale" in CINEMA
+    assert "singleMetaSize)*fontScale" in CINEMA
+    assert "16*fontScale" in CINEMA

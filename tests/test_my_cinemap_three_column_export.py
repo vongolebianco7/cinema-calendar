@@ -46,7 +46,7 @@ minimal_polish = [
     "#b9aa8d",
     "theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize",
     "theme==='minimal'?minimalMedalScale:1",
-    "theme==='minimal'&&columns===1?minimalSingleMovieSize",
+    "theme==='minimal'?minimalSingleMovieSize:singleMovieSize",
 ]
 missing_minimal = [token for token in minimal_polish if token not in art]
 if missing_minimal:

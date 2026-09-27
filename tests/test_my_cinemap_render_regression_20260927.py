@@ -13,6 +13,11 @@ def test_unknown_font_falls_back_to_modern():
     assert "artFonts.editorial" not in CINEMA
 
 
+def test_removed_sage_renderer_is_not_referenced():
+    assert "sage:drawSage" not in ART
+    assert "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v3" in ART
+
+
 def test_editorial_font_option_is_removed():
     assert "value=\"editorial\"" not in DIRECTION
     assert "const FONT_VALUES=['modern','clean','classic']" in DIRECTION

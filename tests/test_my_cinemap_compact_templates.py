@@ -17,7 +17,7 @@ def test_director_is_preserved_and_defaulted_from_search_results():
     assert "m.director||m.directors?.[0]||''" in TOOLS
     assert "m.director" in ART
     assert 'api/movie-detail?id=' in TOOLS
-    assert 'if(movie.director)' in TOOLS
+    assert 'if(movie.director&&movie.poster)' in TOOLS
 
 
 def test_four_editorial_templates_exist():

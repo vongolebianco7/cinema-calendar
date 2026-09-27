@@ -23,13 +23,18 @@ if css not in s:
         raise SystemExit('style end not found')
     s = s.replace('</style>', css + '\n</style>', 1)
 
-# Keep both theater-directory actions visible under the card.
+# Keep both theater-directory actions visible inside the Atmos/Dolby Cinema card.
 atmos_link = '<a class="screenLink" href="theaters.html?format=Dolby%20Atmos">Dolby Atmos対応スクリーンを見る →</a>'
 cinema_link = '<a class="screenLink" href="theaters.html?format=Dolby%20Cinema">Dolby Cinema対応スクリーンを見る →</a>'
-if 'theaters.html?format=Dolby%20Cinema' not in s:
-    if atmos_link not in s:
-        raise SystemExit('Dolby Atmos screen link not found')
-    s = s.replace(atmos_link, atmos_link + cinema_link, 1)
+card_match = re.search(r'(<article class="audioCard atmosA">)(.*?)(</article>)', s, re.S)
+if not card_match:
+    raise SystemExit('Dolby Atmos / Dolby Cinema card not found')
+card = card_match.group(2)
+if atmos_link not in card:
+    raise SystemExit('Dolby Atmos screen link not found in Dolby card')
+if cinema_link not in card:
+    card = card.replace(atmos_link, atmos_link + cinema_link, 1)
+    s = s[:card_match.start(2)] + card + s[card_match.end(2):]
 
 if '<span class="dolbyTitlePart">Dolby Atmos /</span>' not in s:
     raise SystemExit('Dolby Atmos title part was not produced')

@@ -19,3 +19,5 @@ class BoxOfficeMinimumDomesticForeignPerYearTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+# Coverage policy: every year keeps at least 10 邦画 and 10 洋画 entries.

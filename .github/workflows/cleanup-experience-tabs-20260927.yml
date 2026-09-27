@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/cleanup_experience_tabs_20260927.py'
       - 'tests/test_experience_tab_cleanup.py'
+      - 'tests/test_experience_imax_coverage.py'
       - '.github/workflows/cleanup-experience-tabs-20260927.yml'
 permissions:
   contents: write

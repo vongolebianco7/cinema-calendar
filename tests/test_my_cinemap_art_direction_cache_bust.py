@@ -1,9 +1,15 @@
 from pathlib import Path
 
-art = Path('js/my-cinemap-art.js').read_text(encoding='utf-8')
+ui = Path('js/my-cinemap-art-direction.js').read_text(encoding='utf-8')
 
-expected = "my-cinemap-art-direction.js?v=20260927-mobile-two-column-v3"
-legacy = "my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2"
+required = [
+    '#list .compactMovieItem>:nth-child(2){display:none!important}',
+    '#list .compactMovieItem>:nth-child(3){grid-column:2!important',
+    'min-width:0!important',
+    'writing-mode:horizontal-tb!important',
+    '#list .compactMovieItem:nth-child(-n+5){grid-column:1!important}',
+    '#list .compactMovieItem:nth-child(n+6){grid-column:2!important}',
+]
 
-assert expected in art, 'My Cinemap must load the latest two-column/contrast module on iPhone'
-assert legacy not in art, 'Stale art-direction cache key would keep the broken mobile layout in Safari'
+missing = [token for token in required if token not in ui]
+assert not missing, f'My Cinemap mobile two-column DOM targeting is incomplete: {missing}'

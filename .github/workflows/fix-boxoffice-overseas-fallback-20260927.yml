@@ -1,0 +1,48 @@
+name: Fix box office overseas fallback
+on:
+  push:
+    paths:
+      - 'scripts/fix_boxoffice_overseas_fallback_20260927.py'
+      - 'tests/test_boxoffice_overseas_fallback.py'
+      - '.github/workflows/fix-boxoffice-overseas-fallback-20260927.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify regression test fails before fix
+        run: |
+          if python -m unittest tests.test_boxoffice_overseas_fallback; then
+            echo 'Expected overseas fallback regression test to fail before fix' >&2
+            exit 1
+          fi
+      - name: Apply fix
+        run: python scripts/fix_boxoffice_overseas_fallback_20260927.py
+      - name: Run regression tests
+        run: |
+          python -m unittest tests.test_boxoffice_overseas_fallback
+          python -m unittest tests.test_boxoffice_country_buckets
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          text=Path('rankings.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>', text, flags=re.S)
+          for s in scripts:
+              if not s.strip(): continue
+              with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False,encoding='utf-8') as f:
+                  f.write(s); name=f.name
+              subprocess.run(['node','--check',name],check=True)
+          PY
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add rankings.html
+          git commit -m 'Keep overseas box office films visible'
+          git pull --rebase origin main
+          git push

@@ -8,6 +8,7 @@
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
   const known=()=>catalog.filter(f=>records[String(f.id)]?.watched);
+  const visibleGenres=()=>[...genres,...[...new Set(known().flatMap(f=>Object.keys(model.genreStrengths(f))))].filter(g=>!genres.includes(g)).sort()];
   const tier=()=>camera.zoom<1.65?'far':camera.zoom<3.2?'middle':'near';
   const link=f=>'search.html?id='+encodeURIComponent(f.id)+'&search='+encodeURIComponent(f.title||'');
   const recordDate=v=>{const d=new Date(v||'');return Number.isNaN(d.getTime())?'不明':d.toLocaleDateString('ja-JP');};
@@ -16,8 +17,7 @@
   const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const genreNodes=()=>{
     const films=known();
-    const present=new Set(films.flatMap(f=>Object.keys(model.genreStrengths(f))));
-    return genres.map(g=>{
+    return visibleGenres().map(g=>{
       const p=model.centerForGenre(g), n=films.filter(f=>model.genreStrengths(f)[g]).length;
       return '<button type="button" class="cosmosBody cosmosGalaxy'+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(g)+'銀河、'+n+'作品の記録"><span class="cosmosHalo"></span><strong>'+esc(g)+'</strong><small>'+(n?n+'作品':'記録なし')+'</small></button>';
     }).join('');
@@ -75,7 +75,7 @@
     const host=document.getElementById('universe');if(!host)return;
     const level=tier(),n=known().length;
     const nodes=level==='far'?genreNodes():level==='middle'?midNodes():nearNodes();
-    const options=genres.map(g=>'<option value="'+esc(g)+'">'+esc(g)+'銀河</option>').join('');
+    const options=visibleGenres().map(g=>'<option value="'+esc(g)+'">'+esc(g)+'銀河</option>').join('');
     const names=[...new Set([...catalog.filter(f=>f.director).map(f=>f.director),...catalog.map(f=>f.title)])];
     host.innerHTML='<section class="cosmosScene"><div class="cosmosHeader"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+(n>=20?'成長中':n>=10?'仮Universe':'形成中')+'</span><h2>あなたの映画宇宙</h2><p>ひとつの宇宙を探索する。銀河はジャンル、恒星は監督、惑星は作品です。</p></div><div class="cosmosControls"><button type="button" data-cosmos-home>全体を見る</button><label>銀河へ移動 <select data-cosmos-jump><option value="">ジャンルを選ぶ</option>'+options+'</select></label><form class="cosmosSearch" data-cosmos-search><label for="cosmosQuery">監督・作品を探す</label><input id="cosmosQuery" list="cosmosSuggestions" placeholder="作品名・監督名"><datalist id="cosmosSuggestions">'+names.slice(0,400).map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist><button>移動</button></form></div><div class="cosmosViewport" role="group" aria-label="映画宇宙。ドラッグで視点を動かし、ピンチで拡大縮小"><div class="cosmosWorld">'+nodes+'</div><div class="cosmosLevel">'+(level==='far'?'遠景 · ジャンル銀河':level==='middle'?'中景 · 監督星系':'近景 · 作品惑星')+'</div></div><div class="cosmosFoot"><span>1本指で移動 · ピンチで拡大縮小 · 天体をタップして接近</span><span>'+n+'作品を記録</span></div>'+detail()+'</section>';
     applyCamera();

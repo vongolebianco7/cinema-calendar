@@ -1,0 +1,32 @@
+name: Apply My Cinemap cache refresh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/bump_my_cinemap_cache.py'
+      - '.github/workflows/apply-my-cinemap-cache-refresh.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Refresh My Cinemap script versions
+        run: python scripts/bump_my_cinemap_cache.py
+      - name: Commit cache-bust references
+        run: |
+          if git diff --quiet; then
+            echo "Cache-bust references already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add my-cinemap.html js/my-cinemap-art.js js/my-cinemap-art-direction.js
+          git commit -m "Refresh My Cinemap script cache"
+          git push origin HEAD:main

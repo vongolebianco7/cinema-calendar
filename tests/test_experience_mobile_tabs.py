@@ -23,9 +23,10 @@ class ExperienceMobileTabsTests(unittest.TestCase):
         self.assertIn('panel.hidden=true', text)
         self.assertIn('panel.hidden=false', text)
 
-    def test_finder_stays_before_tabs(self):
+    def test_finder_is_recommend_panel_after_tabs(self):
         text = (ROOT / "experience.html").read_text(encoding="utf-8")
-        self.assertLess(text.index('id="formatFinder"'), text.index('class="expTabs"'))
+        self.assertLess(text.index('class="expTabs"'), text.index('id="formatFinder"'))
+        self.assertIn('id="formatFinder" data-exp-panel="recommend"', text)
 
 if __name__ == "__main__":
     unittest.main()

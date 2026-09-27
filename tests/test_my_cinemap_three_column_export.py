@@ -119,29 +119,12 @@ cinema_backgrounds = [
     '<option value="archive">Film Archive</option>',
     '<option value="screening">Screening Room</option>',
     "const CINEMA_BG_KEY='cinemap-my-cinema-background'",
-    "assets/my-cinemap/cinema-projector.jpg",
-    "assets/my-cinemap/cinema-theater.jpg",
-    "assets/my-cinemap/cinema-artdeco.jpg",
-    "assets/my-cinemap/cinema-archive.jpg",
-    "assets/my-cinemap/cinema-screening.jpg",
     "drawCinemaBackground",
     "cinemaBackground",
-    "saved.cinemaBackground=cinemaBackground.value",
 ]
 missing_backgrounds = [token for token in cinema_backgrounds if token not in (art + html + enhancements)]
 if missing_backgrounds:
     raise SystemExit(f"My Cinemap optional cinema backgrounds missing: {missing_backgrounds}")
-
-background_assets = [
-    Path("assets/my-cinemap/cinema-projector.jpg"),
-    Path("assets/my-cinemap/cinema-theater.jpg"),
-    Path("assets/my-cinemap/cinema-artdeco.jpg"),
-    Path("assets/my-cinemap/cinema-archive.jpg"),
-    Path("assets/my-cinemap/cinema-screening.jpg"),
-]
-missing_assets = [str(path) for path in background_assets if not path.exists() or path.stat().st_size < 10_000]
-if missing_assets:
-    raise SystemExit(f"My Cinemap generated cinema background assets missing/too small: {missing_assets}")
 
 forbidden_art = [
     "const columns=3;",

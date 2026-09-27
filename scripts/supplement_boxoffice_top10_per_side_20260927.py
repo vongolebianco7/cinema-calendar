@@ -24,7 +24,6 @@ def rows_from_table(table,region,year,url):
         cells=[norm(c.get_text(' ',strip=True)) for c in tr.find_all(['th','td'])]
         if len(cells)<2:continue
         title=None;gross=None
-        # Newer pages: rank, release, title, gross. Older pages: rank, title, gross.
         for cell in cells:
             if gross is None and ('億円' in cell or re.fullmatch(r'\d+(?:\.\d+)?',cell)):
                 v=amount_oku(cell)
@@ -43,7 +42,8 @@ def rows_from_table(table,region,year,url):
     return res[:10]
 
 def old_year(year):
-    url=f'https://nendai-ryuukou.com/1980/{year}.html'
+    decade=(year//10)*10
+    url=f'https://nendai-ryuukou.com/{decade}/{year}.html'
     r=requests.get(url,headers=HEADERS,timeout=25);r.raise_for_status();r.encoding=r.apparent_encoding or r.encoding
     soup=BeautifulSoup(r.text,'html.parser')
     found={'邦画':[],'洋画':[]}
@@ -66,8 +66,7 @@ def recent_year(year,region):
     return rows[:10]
 
 def merge_top10(existing,supplement,region):
-    current=[r for r in existing if r.get('region')==region]
-    if len(current)>=10:return existing
+    if sum(1 for r in existing if r.get('region')==region)>=10:return existing
     keys={norm(r.get('title')).lower() for r in existing}
     for row in supplement:
         k=norm(row['title']).lower()

@@ -27,14 +27,23 @@
     .previewBlueGray .previewDecor{background:linear-gradient(rgba(130,118,101,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(130,118,101,.15) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(to bottom,transparent,#000 45%,transparent)}
     .cinemaTemplatePreview{padding:0!important;background-size:cover!important;background-position:center!important;border-color:#8d744d!important}.cinemaTemplatePreview>*{display:none!important}
     .cinemaTemplateCard{border-color:#5a4a35!important}.cinemaTemplateCard small{color:#c7b79e}
-    #list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px!important;align-items:start}
-    #list .compactMovieItem{display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;grid-template-rows:auto auto!important;min-height:0!important;padding:8px!important;border:1px solid #292929!important;border-radius:9px!important;background:#111!important;align-items:start!important}
+    #list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,auto);grid-auto-flow:column;gap:8px 10px!important;align-items:start}
+    #list .compactMovieItem:nth-child(-n+5){grid-column:1!important}
+    #list .compactMovieItem:nth-child(1),#list .compactMovieItem:nth-child(6){grid-row:1!important}
+    #list .compactMovieItem:nth-child(2),#list .compactMovieItem:nth-child(7){grid-row:2!important}
+    #list .compactMovieItem:nth-child(3),#list .compactMovieItem:nth-child(8){grid-row:3!important}
+    #list .compactMovieItem:nth-child(4),#list .compactMovieItem:nth-child(9){grid-row:4!important}
+    #list .compactMovieItem:nth-child(5),#list .compactMovieItem:nth-child(10){grid-row:5!important}
+    #list .compactMovieItem:nth-child(n+6){grid-column:2!important}
+    #list .compactMovieItem:nth-child(6){grid-row:1!important}
+    #list .compactMovieItem{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;grid-template-rows:auto auto!important;min-width:0!important;min-height:0!important;padding:8px!important;border:1px solid #292929!important;border-radius:9px!important;background:#111!important;align-items:start!important;column-gap:6px!important}
     #list .compactMovieItem>img{display:none!important}
-    #list .compactMovieItem>div:not(.move):not(.movieEditPanel){grid-column:2;min-width:0}
-    #list .compactMovieItem .move{grid-column:1/-1!important;display:flex!important;max-width:none!important;justify-content:flex-end!important;margin-top:5px!important;gap:4px!important}
+    #list .compactMovieItem>b,#list .compactMovieItem>a,#list .compactMovieItem>div:not(.move):not(.movieEditPanel){grid-column:2!important;min-width:0!important;max-width:100%!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;writing-mode:horizontal-tb!important;line-break:strict!important;line-height:1.32!important}
+    #list .compactMovieItem>b,#list .compactMovieItem>a{font-size:11px!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden!important}
+    #list .compactMovieItem .move{grid-column:1/-1!important;display:flex!important;max-width:none!important;justify-content:flex-end!important;margin-top:6px!important;gap:4px!important;flex-wrap:nowrap!important}
     #list .compactMovieItem .movieEditPanel{grid-column:1/-1!important;margin-top:6px!important}
-    #list .compactMovieMeta{font-size:9px!important;white-space:normal!important;line-height:1.25!important}
-    @media(max-width:760px){.exportOptions{grid-template-columns:1fr 1fr!important}.fontStyleField{grid-column:1/-1}#list{gap:7px!important}#list .compactMovieItem{padding:7px!important}#list .compactMovieItem .move>button,#list .compactMovieItem .move>a{width:27px!important;height:27px!important;min-height:27px!important}}
+    #list .compactMovieMeta{font-size:9px!important;white-space:normal!important;line-height:1.25!important;overflow:hidden!important;text-overflow:ellipsis}
+    @media(max-width:760px){.exportOptions{grid-template-columns:1fr 1fr!important}.fontStyleField{grid-column:1/-1}#list{gap:7px!important}#list .compactMovieItem{padding:7px 6px!important}#list .compactMovieItem .move>button,#list .compactMovieItem .move>a{width:26px!important;height:26px!important;min-height:26px!important;padding:0!important;font-size:11px!important}}
   `;
   document.head.appendChild(style);
 
@@ -128,7 +137,7 @@
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v1';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-exact-cinema-v2';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,mountFontPicker,mountCinemaTemplates};
 })();

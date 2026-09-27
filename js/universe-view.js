@@ -4,7 +4,7 @@
   const model=root.CinemapUniverseModel;
   const genres=Object.keys(model.genreCenters);
   const camera={zoom:1,focusX:50,focusY:50,panX:0,panY:0,yaw:0,pitch:0};
-  let catalog=[],records={},selected=null,flight=null;
+  let catalog=[],records={},selected=null,flight=null,draggedAt=0;
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
   const known=()=>catalog.filter(f=>records[String(f.id)]?.watched);
@@ -95,11 +95,12 @@
   }
   function home(){clearTimeout(flight);Object.assign(camera,{zoom:1,focusX:50,focusY:50,panX:0,panY:0,yaw:0,pitch:0});selected=null;render();}
   function bindGestures(viewport){
-    const pointers=new Map();let pinchDistance=0;
-    viewport.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()];pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);}});
+    const pointers=new Map();let pinchDistance=0,moved=false;
+    viewport.addEventListener('pointerdown',e=>{moved=false;(e.target.closest('button')||viewport).setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()];pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);}});
     viewport.addEventListener('pointermove',e=>{
       const previous=pointers.get(e.pointerId);if(!previous)return;
       pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(Math.hypot(e.clientX-previous.x,e.clientY-previous.y)>3)moved=true;
       if(pointers.size>=2){
         const [a,b]=[...pointers.values()],dist=Math.hypot(a.x-b.x,a.y-b.y);
         if(pinchDistance){const next=clamp(camera.zoom*dist/pinchDistance,.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;}
@@ -113,10 +114,11 @@
       }
       applyCamera();
     });
-    const end=e=>{if(!pointers.delete(e.pointerId))return;if(pointers.size<2)pinchDistance=0;if(!pointers.size)render();};
+    const end=e=>{if(!pointers.delete(e.pointerId))return;if(pointers.size<2)pinchDistance=0;if(!pointers.size){if(moved)draggedAt=Date.now();render();}};
     viewport.addEventListener('pointerup',end);viewport.addEventListener('pointercancel',end);
     viewport.addEventListener('wheel',e=>{e.preventDefault();const next=clamp(camera.zoom*(e.deltaY>0?.88:1.12),.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;applyCamera();clearTimeout(flight);flight=setTimeout(()=>render(),150);},{passive:false});
   }
+  document.addEventListener('click',e=>{if(e.target.closest('.cosmosViewport')&&Date.now()-draggedAt<400){e.preventDefault();e.stopPropagation();}},true);
   document.addEventListener('click',e=>{
     if(!e.target.closest('#universe'))return;
     const genre=e.target.closest('[data-cosmos-genre]');if(genre){const g=genre.dataset.cosmosGenre,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});return;}

@@ -1,0 +1,49 @@
+name: Fix theater filter consistency
+
+on:
+  push:
+    paths:
+      - "scripts/fix_theater_filter_consistency_20260927.py"
+      - ".github/workflows/fix-theater-filter-consistency-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare regression test
+        run: python scripts/fix_theater_filter_consistency_20260927.py prepare-tests
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_theater_filter_consistency.py; then
+            echo "Expected filter consistency regression to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+      - name: Apply source fix
+        run: python scripts/fix_theater_filter_consistency_20260927.py apply
+      - name: Regenerate theater page
+        run: python scripts/apply_theater_comparison_table_20260927.py apply
+      - name: Verify filter consistency
+        run: python tests/test_theater_filter_consistency.py
+      - name: Verify comparison table
+        run: |
+          python scripts/apply_theater_comparison_table_20260927.py prepare-tests
+          python tests/test_theater_comparison_table.py
+      - name: Verify theater equipment controls
+        run: python tests/test_theater_equipment_explorer.py
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/apply_theater_comparison_table_20260927.py theaters.html tests/test_theater_filter_consistency.py tests/test_theater_comparison_table.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: preserve all theater equipment across filters"
+          git pull --rebase origin main
+          git push

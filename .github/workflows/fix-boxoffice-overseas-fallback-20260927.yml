@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/fix_boxoffice_overseas_fallback_20260927.py'
       - 'tests/test_boxoffice_overseas_fallback.py'
+      - 'tests/test_boxoffice_country_buckets.py'
       - '.github/workflows/fix-boxoffice-overseas-fallback-20260927.yml'
 permissions:
   contents: write

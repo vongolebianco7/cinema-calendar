@@ -30,7 +30,7 @@
     else {
       const old = records[id] || {};
       records[id] = {
-        id, watched: true, resonated: !!old.resonated,
+        id, watched: true, resonated: !!old.resonated, rating: old.rating ?? null,
         updatedAt: new Date().toISOString(),
         title: String(movie.title || old.title || '').slice(0, 160),
         poster: String(movie.poster || old.poster || '').slice(0, 500),
@@ -43,6 +43,12 @@
     write(records); return true;
   }
   function toggleWatched(movie) { return setWatched(movie, !get(movie)?.watched); }
+  function setRating(movie, rating) {
+    const id = movieId(movie), records = read();
+    if (!id || !records[id]?.watched || (rating !== null && ![2.5, 3, 3.5, 4, 4.5, 5].includes(rating))) return false;
+    records[id] = { ...records[id], rating, updatedAt: new Date().toISOString() };
+    write(records); return true;
+  }
   function toggleResonated(movie) {
     const id = movieId(movie), records = read();
     if (!id || !records[id]?.watched) return false;
@@ -50,6 +56,6 @@
     write(records); return true;
   }
   function clear() { write({}); }
-  root.CinemapRecords = { movieId, read, get, setWatched, toggleWatched, toggleResonated, clear,
+  root.CinemapRecords = { movieId, read, get, setWatched, toggleWatched, setRating, toggleResonated, clear,
     subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); } };
 })(typeof window === 'undefined' ? globalThis : window);

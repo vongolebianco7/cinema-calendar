@@ -1,0 +1,23 @@
+#ocean.ocean{height:clamp(270px,35vw,430px);background:#03101b url('../assets/cinema-ocean/quiet.webp') center/cover no-repeat;box-shadow:inset 0 0 100px #020c1bcc,0 18px 45px #0008;border-color:#2a5266}
+#ocean.ocean--life{background-image:url('../assets/cinema-ocean/life.webp')}
+#ocean.ocean--majestic{background-image:url('../assets/cinema-ocean/majestic.webp')}
+#ocean.ocean:before{background:linear-gradient(90deg,#01101b83,transparent 58%)}
+#ocean.ocean:after{height:100%;bottom:0;background:linear-gradient(0deg,#041521aa,transparent 38%);pointer-events:none}
+#ocean.ocean--best{border-color:#8ddbcc;box-shadow:inset 0 0 85px #6cfee53d,0 0 26px #65c7b54f,0 18px 45px #0008}
+#ocean .oceanTitle,#ocean .oceanNote{z-index:2;text-shadow:0 2px 14px #000,0 0 20px #000}
+#ocean .oceanTitle{font-size:clamp(26px,3vw,37px);letter-spacing:.02em}
+#ocean .oceanNote{max-width:75%;line-height:1.45}
+#impactDock[hidden]{display:none}
+#impactDock{position:fixed;z-index:20;bottom:12px;left:50%;transform:translateX(-50%);width:min(540px,calc(100% - 20px));padding:12px;border:1px solid #7ab4b7;border-radius:16px;background:#081b27f7;box-shadow:0 14px 35px #000c;color:#f2f7f6;backdrop-filter:blur(18px)}
+.impactDockTop{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.impactDockTitle{font-size:14px;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.impactDockSkip{border:0;background:transparent;color:#b4ced0;text-decoration:underline;font-size:12px;min-height:38px;padding:3px 7px}
+.impactQuestion{font-size:11px;color:#bbd9d7;margin:0 0 9px}
+.impactChoices{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.impactChoice{display:grid;place-items:center;gap:3px;min-height:58px;min-width:0;padding:5px 2px;border:1px solid #5c8990;border-radius:9px;background:#13323d;color:#e8f5f2}
+.impactChoice[aria-pressed="true"]{background:#d6ebe6;color:#143b3b;border-color:#d6ebe6}
+.impactChoice strong{font-size:15px;line-height:1.1}
+.impactChoice small{font-size:9px;line-height:1.15;text-align:center}
+.movie .state{max-width:calc(100% - 8px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.entry .ratingButton{min-width:70px;white-space:nowrap}
+@media(max-width:600px){#ocean.ocean{height:280px;background-position:57% center}#impactDock{bottom:max(8px,env(safe-area-inset-bottom));width:calc(100% - 12px);padding:10px}.impactChoice{min-height:62px}.impactChoice strong{font-size:14px}.impactChoice small{font-size:8px}.entry .ratingButton{min-width:60px}}

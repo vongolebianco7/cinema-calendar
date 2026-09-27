@@ -1,0 +1,61 @@
+name: Fix Morning Ten duplicate titles
+
+on:
+  push:
+    paths:
+      - "scripts/fix_asa10_duplicates_20260927.py"
+      - ".github/workflows/fix-asa10-duplicates-20260927.yml"
+      - "tests/test_asa10_week_dedupe.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Confirm regression test fails before patch
+        run: |
+          if python -m unittest tests.test_asa10_week_dedupe; then
+            echo "Expected dedupe regression test to fail before patch" >&2
+            exit 1
+          fi
+      - name: Apply Morning Ten dedupe
+        run: python scripts/fix_asa10_duplicates_20260927.py
+      - name: Run regression test
+        run: python -m unittest tests.test_asa10_week_dedupe -v
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, sys, tempfile
+          text=Path('index.html').read_text(encoding='utf-8')
+          failures=[]
+          for i,script in enumerate(re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',text,flags=re.S|re.I)):
+              if not script.strip():
+                  continue
+              p=Path(tempfile.gettempdir())/f'index-asa10-{i}.js'
+              p.write_text(script,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
+              if r.returncode:
+                  failures.append(r.stderr)
+          if failures:
+              print('\n'.join(failures));sys.exit(1)
+          print('index inline JavaScript syntax checks passed.')
+          PY
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Fix Morning Ten duplicate titles"
+          git push

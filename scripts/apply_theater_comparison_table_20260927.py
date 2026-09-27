@@ -21,14 +21,13 @@ checks = {
     "strict equipment match": "strictTheaterFormatRows",
     "generic chain guard": "isGenericChainOnly",
     "format-data theater source": "equipmentTheaters",
+    "active table renderer": "window.renderDirectory=renderTheaterTable",
     "table scoped scroll": "overflow-x:auto",
     "page overflow guard": "html,body{overflow-x:hidden}",
 }
 missing = [name for name, marker in checks.items() if marker not in html]
 if missing:
     raise SystemExit("missing: " + ", ".join(missing))
-if '<article class="card">' in html[html.find('cinemap-theater-table-v1'):]:
-    raise SystemExit("enhanced theater directory still renders card rows")
 print("theater comparison table checks passed")
 '''
 
@@ -148,7 +147,6 @@ def prepare_tests():
 
 def apply():
     text=HTML.read_text(encoding='utf-8')
-    # Keep the filter controls from v1, but replace its rendering JS so generic chain names cannot inherit store equipment.
     text=re.sub(r'<script id="cinemap-theater-equipment-js-v1">.*?</script>\s*', '', text, flags=re.S)
     text=re.sub(r'<style id="cinemap-theater-table-v1">.*?</style>\s*', '', text, flags=re.S)
     text=re.sub(r'<script id="cinemap-theater-table-js-v1">.*?</script>\s*', '', text, flags=re.S)

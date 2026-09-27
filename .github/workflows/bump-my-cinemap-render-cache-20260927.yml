@@ -1,0 +1,25 @@
+name: Bump My Cinemap render cache
+
+on:
+  push:
+    paths:
+      - "scripts/bump_my_cinemap_render_cache_20260927.py"
+      - ".github/workflows/bump-my-cinemap-render-cache-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/bump_my_cinemap_render_cache_20260927.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add my-cinemap.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix: bust My Cinemap renderer cache"
+          git pull --rebase origin main
+          git push

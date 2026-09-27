@@ -100,6 +100,7 @@
         const ctx=canvas?.getContext('2d');
         if(!ctx)return baseDrawArtwork(...args);
         const baseFillText=ctx.fillText;
+        const callFillText=(target,text,x,y,maxWidth)=>maxWidth===undefined?baseFillText.call(target,text,x,y):baseFillText.call(target,text,x,y,maxWidth);
         ctx.fillText=function(text,x,y,maxWidth){
           const value=String(text);
           const rank=/^(?:[4-9]|10)$/.test(value);
@@ -110,9 +111,9 @@
             const currentSize=sizeMatch?Number(sizeMatch[1]):32;
             this.font=oldFont.replace(/^400\s+[\d.]+px\s/,`${medalNumberWeight} ${Math.round(currentSize+3)}px `);
             this.globalAlpha=Math.max(oldAlpha,readableMetaAlpha);
-            try{return baseFillText.call(this,text,x,y,maxWidth)}finally{this.font=oldFont;this.globalAlpha=oldAlpha}
+            try{return callFillText(this,text,x,y,maxWidth)}finally{this.font=oldFont;this.globalAlpha=oldAlpha}
           }
-          return baseFillText.call(this,text,x,y,maxWidth);
+          return callFillText(this,text,x,y,maxWidth);
         };
         try{return baseDrawArtwork(...args)}finally{ctx.fillText=baseFillText}
       };

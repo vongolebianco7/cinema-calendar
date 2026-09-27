@@ -1,0 +1,49 @@
+name: Cleanup experience tabs
+on:
+  push:
+    paths:
+      - 'scripts/cleanup_experience_tabs_20260927.py'
+      - 'tests/test_experience_tab_cleanup.py'
+      - '.github/workflows/cleanup-experience-tabs-20260927.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify regression fails before fix
+        run: |
+          if python -m unittest tests.test_experience_tab_cleanup; then
+            echo 'Expected cleanup regression to fail before fix' >&2
+            exit 1
+          fi
+      - name: Apply cleanup
+        run: python scripts/cleanup_experience_tabs_20260927.py
+      - name: Run regression tests
+        run: |
+          python -m unittest tests.test_experience_tab_cleanup
+          python -m unittest tests.test_experience_picker_imax_coverage
+          python -m unittest tests.test_experience_mobile_tabs
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, tempfile
+          text=Path('experience.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>', text, flags=re.S)
+          for s in scripts:
+              if not s.strip(): continue
+              with tempfile.NamedTemporaryFile('w',suffix='.js',delete=False,encoding='utf-8') as f:
+                  f.write(s); name=f.name
+              subprocess.run(['node','--check',name],check=True)
+          PY
+      - name: Commit production change
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experience.html
+          git commit -m 'Remove duplicate screening guidance'
+          git pull --rebase origin main
+          git push

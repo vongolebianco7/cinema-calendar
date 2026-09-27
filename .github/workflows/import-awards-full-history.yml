@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/import_awards_wikidata_full_history_v2.py"
+      - "scripts/import_awards_wikidata_full_history_v3.py"
       - ".github/workflows/import-awards-full-history.yml"
   workflow_dispatch:
 
@@ -22,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Import all retrievable historical winners
-        run: python scripts/import_awards_wikidata_full_history_v2.py --start-year 1929
+        run: python scripts/import_awards_wikidata_full_history_v3.py --start-year 1929
 
       - name: Validate JSON
         run: python -m json.tool data/awards.json >/dev/null
@@ -33,9 +34,9 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
+          from collections import Counter
           d=json.loads(Path('data/awards.json').read_text())
           print('rows', len(d['awards']))
-          from collections import Counter
           print('by_org', Counter(x['organization'] for x in d['awards']))
           PY
 

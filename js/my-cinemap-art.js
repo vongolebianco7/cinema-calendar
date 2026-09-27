@@ -162,12 +162,12 @@ function drawArtwork(movies){
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
-  const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.editorial;
+  const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
   c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
   const w=c.width,h=c.height;
   const columns=layout==='double'?2:1;
   const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
-  ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,sage:drawSage,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
+  ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
   const cinemaBackground=artValue('cinemaBackground')||'none';
   drawCinemaBackground(ctx,w,h,cinemaBackground);
   if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
@@ -222,7 +222,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20260927-my-cinemap-live-v13';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v2';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20260927-cinema-backgrounds-v3';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

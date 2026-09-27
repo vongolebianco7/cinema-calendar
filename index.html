@@ -860,7 +860,19 @@ async function hydrateMorningTenPosters(){
  await Promise.all([worker(),worker(),worker()])
 }
 
-async function boot(){try{let [mr,tr,dr,fr,er,sr,hr,ar,lr,tdr,spr,rr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theater-directory","data/theaters_master.json").catch(()=>null),fetch("data/special_screenings.json?"+Date.now()).catch(()=>null),fetch("data/revival_screenings.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];if(spr&&spr.ok){let sp=await spr.json();for(const x of(sp.screenings||[]))movies.push({...x,revival:false})}if(rr&&rr.ok){let rv=await rr.json();for(const x of(rv.screenings||[]))movies.push({...x,revival:true,service:"リバイバル上映"})}
+async function fastInitialCalendarPaint(){
+ try{
+  const r=await fetch("data/movies.json",{cache:"force-cache"});
+  if(!r.ok)return;
+  const d=await r.json();
+  const firstMovies=d.movies||[];
+  if(!firstMovies.length)return;
+  movies=firstMovies;
+  applyRevivalClassification();
+  render();
+ }catch(e){console.warn("fast calendar paint unavailable",e)}
+}
+async function boot(){await fastInitialCalendarPaint();try{let [mr,tr,dr,fr,er,sr,hr,ar,lr,tdr,spr,rr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theater-directory","data/theaters_master.json").catch(()=>null),fetch("data/special_screenings.json?"+Date.now()).catch(()=>null),fetch("data/revival_screenings.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];if(spr&&spr.ok){let sp=await spr.json();for(const x of(sp.screenings||[]))movies.push({...x,revival:false})}if(rr&&rr.ok){let rv=await rr.json();for(const x of(rv.screenings||[]))movies.push({...x,revival:true,service:"リバイバル上映"})}
 // Reset a stale streaming-service filter if it no longer exists in the loaded catalog.
 if(mode==="streaming"&&active!=="すべて"&&!movies.some(m=>m.event==="streaming"&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
 // If a remembered streaming filter has no titles in the currently visible six-week window,

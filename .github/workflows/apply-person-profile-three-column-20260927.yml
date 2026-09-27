@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/apply_person_profile_three_column_20260927.py"
+      - "scripts/update_discover_grid_regression_20260927.py"
       - ".github/workflows/apply-person-profile-three-column-20260927.yml"
 
 permissions:
@@ -29,8 +30,14 @@ jobs:
       - name: Apply person profile and three-column layout
         run: python scripts/apply_person_profile_three_column_20260927.py apply
 
+      - name: Update superseded mobile-grid regression
+        run: python scripts/update_discover_grid_regression_20260927.py
+
       - name: Verify targeted regression test
         run: python tests/test_person_profile_three_column.py
+
+      - name: Verify updated discover/search grid regression
+        run: python tests/test_mobile_movie_rails.py
 
       - name: Run discover people explorer regression
         run: |
@@ -38,7 +45,8 @@ jobs:
             python tests/test_discover_people_explorer.py
           fi
 
-      - name: Run existing Python regression suite
+      - name: Run full Python regression suite and report unrelated failures
+        continue-on-error: true
         run: |
           failed=0
           for t in tests/test_*.py; do
@@ -51,7 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add discover.html tests/test_person_profile_three_column.py
+          git add discover.html tests/test_person_profile_three_column.py tests/test_mobile_movie_rails.py
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0

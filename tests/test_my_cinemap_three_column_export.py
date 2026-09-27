@@ -52,6 +52,23 @@ missing_minimal = [token for token in minimal_polish if token not in art]
 if missing_minimal:
     raise SystemExit(f"Minimal editorial polish missing: {missing_minimal}")
 
+art_direction = [
+    "const artFonts=",
+    "const fontKey=artValue('fontStyle')||'editorial'",
+    "function drawThemeIllustration",
+    "function drawProjectionGlow",
+    "function drawBotanicalLines",
+    "function drawArchiveGrid",
+    "function drawBurgundyArch",
+    "titleBottom",
+    "const titleToListGap=",
+    "font.title",
+    "font.movie",
+]
+missing_direction = [token for token in art_direction if token not in art]
+if missing_direction:
+    raise SystemExit(f"My Cinemap art direction missing: {missing_direction}")
+
 large_theme_preview = [
     ".designPicker .themeChoices{display:flex",
     ".themeChoice.premiumTheme{flex:0 0 min(82vw,330px)",
@@ -69,6 +86,15 @@ missing_preview = [token for token in large_theme_preview if token not in tools]
 if missing_preview:
     raise SystemExit(f"Large theme preview UI missing: {missing_preview}")
 
+director_defaults = [
+    "async function hydrateMissingDirectors",
+    "picks.filter(movie=>!movie.director)",
+    "hydrateMissingDirectors()",
+]
+missing_director = [token for token in director_defaults if token not in tools]
+if missing_director:
+    raise SystemExit(f"Default director hydration missing: {missing_director}")
+
 forbidden_art = [
     "const columns=3;",
     "drawFilmNote",
@@ -85,6 +111,14 @@ if present_art:
 required_html = [
     '<option value="single" selected>縦1列</option>',
     '<option value="double">左右2列</option>',
+    '<select id="fontStyle">',
+    '<option value="editorial" selected>Editorial Serif</option>',
+    '<option value="modern">Modern Serif</option>',
+    '<option value="clean">Clean Sans</option>',
+    '<option value="classic">Cinema Classic</option>',
+    'font:document.getElementById("fontStyle").value',
+    'document.getElementById("fontStyle").value=',
+    '["format","layout","fontStyle"]',
     'data-theme="minimal"',
     'data-theme="noir"',
     'data-theme="burgundy"',
@@ -99,13 +133,13 @@ required_html = [
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:
-    raise SystemExit(f"My Cinemap layout/theme controls missing: {missing_html}")
+    raise SystemExit(f"My Cinemap layout/theme/font controls missing: {missing_html}")
 
 for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Editorial"]:
     if forbidden in html:
         raise SystemExit(f"removed My Cinemap option returned: {forbidden}")
 
-if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v8" not in art:
+if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v9" not in art:
     raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
 
-print("My Cinemap five editorial themes, readable typography, filled two-column layout, and large previews passed")
+print("My Cinemap five editorial themes, abstract illustrations, font choices, aligned title/list rhythm, default director hydration, and responsive layouts passed")

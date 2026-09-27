@@ -72,7 +72,7 @@
   const worldTransform=()=>`translate3d(${camera.panX}px,${camera.panY}px,0) rotateX(${camera.pitch}deg) rotateY(${camera.yaw}deg) scale(${camera.zoom})`;
   function applyCamera(animated=false){
     const world=document.querySelector('#universe .cosmosWorld');
-    if(world){world.style.transition=animated?'transform .68s cubic-bezier(.2,.8,.2,1)':'none';world.style.transform=worldTransform();}
+    if(world){world.style.transition=animated?'transform .68s cubic-bezier(.2,.8,.2,1)':'none';world.style.transform=worldTransform();world.style.setProperty('--inverse-zoom',String(1/camera.zoom));}
     try { sessionStorage.setItem('cinemap-universe-camera',JSON.stringify(camera)); } catch { /* Storage is optional. */ }
   }
   function render(nextCatalog,nextRecords){

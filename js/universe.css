@@ -67,9 +67,10 @@
 @media(max-width:700px){.cosmosHeader{padding:16px}.cosmosControls{padding:10px;gap:7px}.cosmosControls>button{flex:0 0 auto}.cosmosControls>label{flex:1;min-width:130px}.cosmosControls select{width:100%}.cosmosSearch{width:100%}.cosmosSearch label{flex:1}.cosmosSearch input{width:100%}.cosmosViewport{height:62vh;min-height:420px;max-height:680px}.cosmosBody{width:103px;height:103px}.cosmosBody strong{font-size:11px}.cosmosBody small{font-size:9px}.cosmosGalaxy .cosmosHalo{width:calc(74px + var(--mass) * 2px);height:calc(59px + var(--mass) * 1.5px)}.cosmosDirector .cosmosHalo{width:66px;height:66px}.cosmosPlanet .cosmosHalo{width:67px;height:67px}.cosmosPlanet--best .cosmosHalo{width:80px;height:80px}.cosmosFoot{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.cosmosWorld{transition:none!important}}
 .cosmosSearch{display:grid;grid-template-columns:minmax(150px,1fr) auto;grid-template-rows:auto 42px;align-items:end}.cosmosSearch label{grid-column:1/-1}.cosmosSearch input{grid-column:1;grid-row:2}.cosmosSearch button{grid-column:2;grid-row:2}
-.cosmosWorld .cosmosBody{transform:translate3d(-50%,-50%,calc(110px + var(--depth)))}
+.cosmosWorld .cosmosBody{transform:translate3d(-50%,-50%,calc(110px + var(--depth))) scale(var(--inverse-zoom,1))}
 /* Population controls radiance; a personal rating changes hue and surface. */
 .cosmosGalaxy--active .cosmosHalo{opacity:clamp(.58,calc(.58 + var(--mass) * .044),1);box-shadow:0 0 calc(12px + var(--mass) * 3px) #b5d5ff91,0 0 calc(30px + var(--mass) * 5px) #687fda9e}
+.cosmosGalaxy--dormant{opacity:1}.cosmosGalaxy--dormant .cosmosHalo{opacity:.45}.cosmosGalaxy--dormant strong,.cosmosGalaxy--dormant small{background:#06132cf2;color:#e7efff}
 .cosmosDirector .cosmosHalo{box-shadow:0 0 calc(13px + var(--mass) * 3px) #ffb8858a}
 .cosmosPlanet .cosmosHalo{border-color:hsl(var(--rating-hue) 68% 72%);box-shadow:0 0 14px hsl(var(--rating-hue) 58% 66% / .45);background:radial-gradient(circle at 35% 30%,hsl(var(--rating-hue) 62% 86%),hsl(var(--rating-hue) 51% 39%) 59%,#091631)}
 .cosmosPlanet img{opacity:.68;filter:grayscale(.65);mix-blend-mode:luminosity}

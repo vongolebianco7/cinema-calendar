@@ -392,6 +392,17 @@ function scrollCalendarToCurrentWeek(){}
 function streamingGroupOrder(){
  const preferred=streamingReleaseServices();return new Map(preferred.map((x,i)=>[x,i]))
 }
+function dedupeMorningTenWeek(rows){
+ const seen=new Set();
+ return rows.filter(m=>{
+  if(m.special_screening!=="asa10")return true;
+  const key=revivalNorm(morningTenQuery(m.title));
+  if(!key)return true;
+  if(seen.has(key))return false;
+  seen.add(key);
+  return true
+ })
+}
 function groupedMovieCards(weekMovies,modeName){
  let groups=new Map();
  for(const m of weekMovies){
@@ -526,7 +537,8 @@ function renderCal(){
    let we=new Date(ws);we.setDate(ws.getDate()+6);
    let weekMovies=filtered().filter(m=>{
     if(!m.date)return false;let d=new Date(m.date+"T00:00:00"),z=new Date((m.end_date||m.date)+"T00:00:00");return d<=we&&z>=ws
-   }).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
+   });
+   weekMovies=dedupeMorningTenWeek(weekMovies).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
    let groups=groupedMovieCards(weekMovies,"theatrical"),isCurrent=sameDay(ws,currentWeekStart());
    out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
   }

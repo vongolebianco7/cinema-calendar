@@ -8,6 +8,9 @@
 <link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0a0c0f">
+<link rel="preload" as="image" href="assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424">
+<link rel="preload" as="image" href="assets/887F3A99-0D56-4E3F-9754-859B5C27E764.png?v=0432">
+<link rel="preload" as="image" href="assets/cinemap-experience.png?v=0420">
 <style>
 :root{--bg:#090909;--panel:#111;--panel2:#171717;--text:#f4f4f4;--muted:#929292;--line:#292929;--blue:#38a9ff;--green:#37d08b;--gold:#e5b64d;--violet:#c96aff;--red:#ff5757}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1120px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
@@ -430,6 +433,21 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 @media(min-width:601px){.expTabs{top:58px;max-width:620px}}
 @media(max-width:430px){.expTabs{margin-left:-4px;margin-right:-4px;padding:5px}.expTab{font-size:11px;padding:10px 2px}.expSection{margin-top:20px}}
 </style>
+
+<style id="experience-polish-20260927">
+.audioTop h3 small{display:inline-block;margin-left:6px;padding:3px 6px;border:1px solid #8c61a8;border-radius:999px;color:#d7a0ff;font-size:9px;font-weight:800;vertical-align:middle;letter-spacing:.02em}
+.audio3d .horizontalRing,.audio3d .upperRing{border-width:3px!important;filter:drop-shadow(0 0 9px currentColor)!important;opacity:.9!important}
+.audio3d .horizontalRing{box-shadow:0 0 18px #46d9ff55,inset 0 0 12px #46d9ff22}
+.audio3d .upperRing{box-shadow:0 0 18px #9b6cff55,inset 0 0 12px #9b6cff22}
+.audio3d .atmosRoom .flightPath{border-top-width:3px!important;filter:drop-shadow(0 0 8px #d76cff)!important}
+.audio3d .atmosRoom .soundOrb{font-size:22px!important;text-shadow:0 0 18px #d76cff,0 0 8px #fff!important}
+.singleMotionScene .fxWind{opacity:.62!important;filter:blur(.6px) drop-shadow(0 0 5px #dff7ff)!important;animation-duration:4.3s!important}
+.singleMotionScene .fxWater{filter:drop-shadow(0 0 6px #bceeff)!important;animation-duration:4.7s!important}
+.singleMotionScene .fxFlash{mix-blend-mode:screen;animation-duration:7.2s!important}
+.singleMotionScene .fxAir{opacity:.82;filter:blur(2px) drop-shadow(0 0 7px #dff7ff)!important;animation-duration:2.5s!important}
+.motionCard .effectLegend span{border-color:#ffffff34!important;background:#0e141bcc!important;color:#edf4f8!important}
+@media(prefers-reduced-motion:reduce){.singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxAir{animation:none!important}}
+</style>
 </head>
 <body>
 
@@ -469,7 +487,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 
 
 <section class="section expSection expTabPanel" id="aspect" data-exp-panel="aspect" hidden>
- <div class="sectionHead"><h2>見える範囲</h2><p>同じ1枚の1.43:1画像を、横幅を変えずに上下だけ中央クロップして比較します。</p></div>
+ <div class="sectionHead"><h2>見える範囲</h2><p>この比較では通常上映をシネマスコープ（2.39:1）として表示。同じ1枚の1.43:1画像を、横幅を変えずに上下だけ中央クロップして比較します。</p></div>
 
  <div class="ratioCompareExact" aria-label="同一の海中画像を正確な画面比率で比較">
   <article class="ratioExactCard scopeExact">
@@ -508,7 +526,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="audioGrid audioCompare audio3d">
 <article class="audioCard"><div class="audioTop"><h3>5.1 / 7.1ch</h3><span>水平リング</span></div><div class="room3d flatRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><div class="horizontalRing"></div></div><p><b>耳の高さの1層</b>で、前→横→後ろを包む。</p></article>
 <article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>水平＋上層</span></div><div class="room3d imaxRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="horizontalRing"></div><div class="upperRing"></div></div><p><b>水平層＋高い位置の層</b>。上下を含む多方向から強く包む。</p><a class="screenLink" href="theaters.html?format=IMAX">IMAX対応スクリーンを見る →</a></article>
-<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos</h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p><p class="dolbyCinemaNote"><b>Dolby Cinemaの音響もDolby Atmos</b>。映像はDolby Visionとの組み合わせです。</p><a class="screenLink" href="theaters.html?format=Dolby%20Atmos">Dolby Atmos対応スクリーンを見る →</a></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3>Dolby Atmos <small>Dolby Cinema</small></h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p><p class="dolbyCinemaNote"><b>Dolby Cinemaの音響もDolby Atmos</b>。映像はDolby Visionとの組み合わせです。</p><a class="screenLink" href="theaters.html?format=Dolby%20Atmos">Dolby Atmos対応スクリーンを見る →</a></article>
 </div>
 <div class="audioKey"><span>5.1/7.1：1層</span><span>IMAX 12ch：2層</span><span>Atmos：空間内を移動</span></div>
 </section>

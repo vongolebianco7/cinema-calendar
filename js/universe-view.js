@@ -114,11 +114,11 @@
       }
       applyCamera();
     });
-    const end=e=>{if(!pointers.delete(e.pointerId))return;if(pointers.size<2)pinchDistance=0;if(!pointers.size){if(moved)draggedAt=Date.now();render();}};
+    const end=e=>{if(!pointers.delete(e.pointerId))return;if(pointers.size<2)pinchDistance=0;if(!pointers.size&&moved){draggedAt=Date.now();render();}};
     viewport.addEventListener('pointerup',end);viewport.addEventListener('pointercancel',end);
     viewport.addEventListener('wheel',e=>{e.preventDefault();const next=clamp(camera.zoom*(e.deltaY>0?.88:1.12),.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;applyCamera();clearTimeout(flight);flight=setTimeout(()=>render(),150);},{passive:false});
   }
-  document.addEventListener('click',e=>{if(e.target.closest('.cosmosViewport')&&Date.now()-draggedAt<400){e.preventDefault();e.stopPropagation();}},true);
+  document.addEventListener('click',e=>{if(e.target.closest('.cosmosViewport')&&Date.now()-draggedAt<120){e.preventDefault();e.stopPropagation();}},true);
   document.addEventListener('click',e=>{
     if(!e.target.closest('#universe'))return;
     const genre=e.target.closest('[data-cosmos-genre]');if(genre){const g=genre.dataset.cosmosGenre,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});return;}

@@ -67,7 +67,7 @@ if "firstSeg" not in calendar or "（継続）" not in calendar:
 # My Cinemap final layout/template gates.
 my = text("my-cinemap.html")
 for required in [
-    "themeChoices", "Minimal", "Noir Editorial", "Burgundy Journal", "Sage Museum", "Blue Grey Archive",
+    "themeChoices", "Minimal", "Noir Editorial", "Burgundy Journal",
     'data-year="2026"', "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices",
     '<option value="single" selected>縦1列</option>', '<option value="double">左右2列</option>'
 ]:
@@ -91,11 +91,18 @@ else:
             errors.append(f"My Cinemap compact/director/template feature missing: {required}")
 art = text("js/my-cinemap-art.js")
 for required in [
-    "drawMinimal", "drawNoir", "drawBurgundy", "drawSage", "drawBlueGray", "drawMedal",
+    "drawMinimal", "drawNoir", "drawBurgundy", "drawMedal",
     "function drawBrand", "EXPLORE CINEMA", "Bodoni 72", "m.director", "layout==='double'?2:1", "MY TOP OF 2026"
 ]:
     if required not in art:
         errors.append(f"My Cinemap final artwork/director missing: {required}")
+direction = text("js/my-cinemap-art-direction.js")
+for required in ["removeDeprecatedTemplates", "cinema-projector", "cinema-theater", "cinema-archive"]:
+    if required not in direction:
+        errors.append(f"My Cinemap current template integration missing: {required}")
+for forbidden in ["cinema-artdeco", "Art Deco Cinema"]:
+    if forbidden in direction:
+        errors.append(f"My Cinemap removed cinema template returned: {forbidden}")
 for forbidden in [
     "drawFilmNote", "drawTheater", "drawGalleryEditorial", "cinemapLogo", "assets/cinemap-logo.png?v=2"
 ]:
@@ -103,7 +110,7 @@ for forbidden in [
         errors.append(f"My Cinemap final artwork still uses removed legacy element: {forbidden}")
 if "illustrationMode" in my:
     errors.append("My Cinemap still exposes the removed illustration setting")
-for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js"]:
+for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js", "js/my-cinemap-art-direction.js", "js/my-cinemap-cinema-templates.js"]:
     p = ROOT / js_path
     if p.exists():
         r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)

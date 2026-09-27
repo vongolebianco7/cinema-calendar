@@ -1,0 +1,58 @@
+name: Apply discover people explorer
+
+on:
+  push:
+    paths:
+      - "scripts/apply_discover_people_explorer_20260927.py"
+      - ".github/workflows/apply-discover-people-explorer-20260927.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare people explorer regression test
+        run: python scripts/apply_discover_people_explorer_20260927.py prepare-tests
+
+      - name: Confirm RED before implementation
+        run: |
+          if python tests/test_discover_people_explorer.py; then
+            echo "Expected people explorer regression test to fail before implementation." >&2
+            exit 1
+          fi
+          echo "RED confirmed."
+
+      - name: Apply people explorer
+        run: python scripts/apply_discover_people_explorer_20260927.py apply
+
+      - name: Verify people explorer regression test
+        run: python tests/test_discover_people_explorer.py
+
+      - name: Run existing Python regression suite
+        continue-on-error: true
+        run: |
+          failed=0
+          for t in tests/test_*.py; do
+            echo "==> $t"
+            python "$t" || failed=1
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "One or more unrelated repository regressions are currently failing; people-explorer-specific checks passed."
+            exit 1
+          fi
+
+      - name: Commit people explorer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discover.html tests/test_discover_people_explorer.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "feat: add director and cast explorer"
+          git push

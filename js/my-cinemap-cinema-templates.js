@@ -1,6 +1,7 @@
 /* My Cinemap uploaded cinema templates: use the uploaded visual itself as the background. */
 (() => {
   const originalDrawArtwork=drawArtwork;
+  const originalDrawBrand=drawBrand;
   const cinemaTemplates={
     'cinema-projector':'assets/105DE5C4-9F65-41AF-A72F-0731A88CA8E6.png',
     'cinema-theater':'assets/309A0142-0B8A-4070-A341-63A2446D0CBE.png',
@@ -35,6 +36,35 @@
     const sx=(img.naturalWidth-sw)/2,sy=(img.naturalHeight-sh)/2;
     ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);
   }
+
+  function brandFooterTop(shape,h,brandHeight=34){
+    const bottomGap=shape==='portrait'?26:shape==='square'?24:20;
+    return h-bottomGap-brandHeight;
+  }
+
+  function drawBrandSafeZone(ctx,w,h,p,y,brandHeight=34){
+    const top=Math.max(0,y-26),bottom=Math.min(h,y+brandHeight+14);
+    const g=ctx.createLinearGradient(0,top,0,bottom);
+    if(p.dark){
+      g.addColorStop(0,'rgba(4,6,8,0)');
+      g.addColorStop(.32,'rgba(4,6,8,.72)');
+      g.addColorStop(1,'rgba(4,6,8,.90)');
+    }else{
+      g.addColorStop(0,'rgba(249,244,234,0)');
+      g.addColorStop(.32,'rgba(249,244,234,.78)');
+      g.addColorStop(1,'rgba(249,244,234,.94)');
+    }
+    ctx.save();ctx.fillStyle=g;ctx.fillRect(70,top,w-140,bottom-top);ctx.restore();
+  }
+
+  drawBrand=function(ctx,w,h,theme,y){
+    const p=artPalettes[theme]||artPalettes.minimal;
+    const shape=artValue('format')||'portrait';
+    const brandHeight=theme==='minimal'?30:34;
+    const safeY=brandFooterTop(shape,h,brandHeight);
+    drawBrandSafeZone(ctx,w,h,p,safeY,brandHeight);
+    return originalDrawBrand(ctx,w,h,theme,safeY);
+  };
 
   function paletteForTheme(theme){
     return templateMode[theme]==='light'
@@ -169,7 +199,9 @@
       }
     });
     rule(ctx,pad,listBottom,inner,p.line,p.dark?.68:.54);
-    drawCinemaBrand(ctx,w,h,p,Math.min(h-118,listBottom+42));
+    const footerY=brandFooterTop(shape,h,36*brandScale);
+    drawBrandSafeZone(ctx,w,h,p,footerY,36*brandScale);
+    drawCinemaBrand(ctx,w,h,p,footerY);
     ctx.restore();
 
     c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));
@@ -184,5 +216,5 @@
     renderCinemaTemplate(movies,theme);
   };
 
-  window.CinemapCinemaTemplates={cinemaTemplates,drawImageCover,drawContentScrim,drawCinemaMedal,drawCinemaBrand};
+  window.CinemapCinemaTemplates={cinemaTemplates,drawImageCover,drawContentScrim,drawCinemaMedal,drawCinemaBrand,brandFooterTop,drawBrandSafeZone};
 })();

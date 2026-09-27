@@ -21,7 +21,7 @@ jobs:
 
       - name: Confirm RED before implementation
         run: |
-          if python -m unittest tests/test_my_cinemap_controls.py -v; then
+          if python tests/test_my_cinemap_controls.py; then
             echo "Expected My Cinemap controls test to fail before implementation." >&2
             exit 1
           fi
@@ -36,11 +36,11 @@ jobs:
           node --check js/my-cinemap-tools.js
 
       - name: Verify GREEN
-        run: python -m unittest tests/test_my_cinemap_controls.py -v
+        run: python tests/test_my_cinemap_controls.py
 
       - name: Run existing My Cinemap regressions
         run: |
-          python -m unittest tests/test_my_cinemap_compact_templates.py -v || true
+          python tests/test_my_cinemap_compact_templates.py || true
 
       - name: Commit My Cinemap controls
         run: |

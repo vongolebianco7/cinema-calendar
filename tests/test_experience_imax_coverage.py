@@ -17,10 +17,15 @@ class ExperienceImaxCoverageTests(unittest.TestCase):
         self.assertIn('wanted==="imax"', text)
         self.assertIn('actual.startsWith("imax")', text)
 
-    def test_experience_has_picker_and_comparison(self):
+    def test_experience_has_picker_and_tabbed_comparison(self):
         text = (ROOT/'experience.html').read_text(encoding='utf-8')
         self.assertIn('id="formatFinder"', text)
-        self.assertIn('id="experienceCompare"', text)
+        self.assertIn('data-exp-tab="recommend"', text)
+        self.assertIn('data-exp-tab="aspect"', text)
+        self.assertIn('data-exp-tab="visual"', text)
+        self.assertIn('data-exp-tab="audio"', text)
+        self.assertIn('data-exp-tab="special"', text)
+        self.assertNotIn('id="experienceCompare"', text)
         self.assertIn('作品から上映方式を選ぶ', text)
         self.assertIn('通常上映', text)
         self.assertIn('IMAX', text)

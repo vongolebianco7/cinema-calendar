@@ -451,7 +451,6 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
  <p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p>
 </section>
-<section class="decisionBox" id="formatFinder"><h2>作品から上映方式を選ぶ</h2><p>作品のジャンル傾向から、各上映方式との相性を5段階で比較します。作品固有のIMAX撮影やScreenX専用素材を未確認の場合は断定しません。</p><div class="filmPicker"><input id="formatFilm" type="search" placeholder="作品名を入力（例：オデュッセイア）" aria-label="上映方式を選ぶ作品名"><button id="formatJudge" type="button">おすすめを見る</button></div><div class="formatResult" id="formatResult"><div class="decisionNote">まず作品名を入力してください。</div></div></section>
 <nav class="expTabs" aria-label="上映方式の比較カテゴリ">
  <button type="button" class="expTab active" data-exp-tab="recommend" aria-selected="true">おすすめ</button>
  <button type="button" class="expTab" data-exp-tab="aspect" aria-selected="false">画角</button>
@@ -459,6 +458,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <button type="button" class="expTab" data-exp-tab="audio" aria-selected="false">音響</button>
  <button type="button" class="expTab" data-exp-tab="special" aria-selected="false">体感</button>
 </nav>
+<section class="decisionBox expTabPanel" id="formatFinder" data-exp-panel="recommend"><h2>作品から上映方式を選ぶ</h2><p>作品のジャンル傾向から、各上映方式との相性を5段階で比較します。作品固有のIMAX撮影やScreenX専用素材を未確認の場合は断定しません。</p><div class="filmPicker"><input id="formatFilm" type="search" placeholder="作品名を入力（例：オデュッセイア）" aria-label="上映方式を選ぶ作品名"><button id="formatJudge" type="button">おすすめを見る</button></div><div class="formatResult" id="formatResult"><div class="decisionNote">まず作品名を入力してください。</div></div></section>
 
 
 <section class="section expSection expTabPanel" id="aspect" data-exp-panel="aspect" hidden>
@@ -482,10 +482,6 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  </div>
 
  <div class="formula">元画像：1500 × 1049 px（1.42993:1）。中央クロップ後：シネマスコープ 1500 × 628 px（2.38854:1）／ IMAX 1500 × 789 px（1.90114:1）／ IMAX GT 1500 × 1049 px（1.42993:1）。<br>※画像を横方向へ引き伸ばしていません。3つとも同じ元画像です。</div>
- <div class="formula"><b>IMAX GTを観られる確認済みスクリーン</b><div class="gtVenueGrid">
- <article class="gtVenue"><small>TOKYO · IMAX LASER / GT</small><b>グランドシネマサンシャイン 池袋</b><strong>シアター12</strong><span>IMAXレーザー／GTテクノロジー。最大1.43:1の画角に対応する大型スクリーン。</span><a href="https://www.cinemasunshine.co.jp/pages/gdcs/" target="_blank" rel="noopener noreferrer">公式設備ページで確認</a></article>
- <article class="gtVenue"><small>OSAKA · IMAX LASER / GT</small><b>109シネマズ大阪エキスポシティ</b><strong>シアター11</strong><span>IMAXレーザー／GTテクノロジー。1.43:1上映対応が公式案内で確認できるスクリーン。</span><a href="https://109cinemas.net/osaka-expocity/establishment.html" target="_blank" rel="noopener noreferrer">公式設備ページで確認</a></article>
- </div><a class="screenLink" href="theaters.html?format=IMAX%20GT">IMAX GT対応スクリーン一覧を見る →</a></div>
 </section>
 
 <section class="section expSection expTabPanel" id="visual" data-exp-panel="visual" hidden>
@@ -526,18 +522,7 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
  <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p><a class="screenLink" href="theaters.html?format=SCREENX">ScreenX対応スクリーンを見る →</a></div>
 </section>
 
-<section class="section expSection expTabPanel" id="guide" data-exp-panel="recommend">
- <div class="sectionHead"><h2>どれを選ぶ？</h2><p>作品と、何をいちばん重視するかで選べます。</p></div>
- <div class="pickGrid">
-<article><b>画面の大きさ・迫力</b><strong>IMAX</strong><span>大画面と専用システムを重視</span></article>
-<article><b>黒・コントラスト</b><strong>Dolby Cinema</strong><span>暗部表現と立体音響を重視</span></article>
-<article><b>身体で楽しむ</b><strong>4DX / MX4D</strong><span>座席の動きと環境効果</span></article>
-<article><b>視界を広げる</b><strong>ScreenX</strong><span>左右まで広がるパノラマ映像</span></article>
-<article><b>作品そのもの</b><strong>通常上映</strong><span>追加演出なしでシンプルに鑑賞</span></article>
-</div>
- <div class="cta"><a href="theaters.html?format=IMAX">IMAX</a><a href="theaters.html?format=IMAX%20GT">IMAX GT</a><a href="theaters.html?format=Dolby%20Cinema">Dolby Cinema</a><a href="theaters.html?format=4DX">4DX</a><a href="theaters.html?format=MX4D">MX4D</a><a href="theaters.html?format=SCREENX">ScreenX</a><a href="index.html">作品カレンダーへ</a></div>
-</section>
-<section class="section" id="imax-gt-theaters"><div class="sectionHead"><div><div class="eyebrow">VERIFIED SCREENS</div><h2>IMAX GTを観られる映画館・スクリーン</h2></div><p>公式劇場ページでスクリーンまで確認できた国内のIMAX GT。通常のIMAXレーザーとは分けて表示します。</p></div><div class="gtTheaters"><article class="gtTheater"><b>グランドシネマサンシャイン 池袋</b><strong>シアター12</strong><span class="note">東京都 · IMAX GT</span><a href="https://www.cinemasunshine.co.jp/pages/gdcs/" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article><article class="gtTheater"><b>109シネマズ大阪エキスポシティ</b><strong>シアター11</strong><span class="note">大阪府 · IMAX GT</span><a href="https://109cinemas.net/osaka-expocity/establishment.html" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article></div></section></main>
+<section class="section expTabPanel" id="imax-gt-theaters" data-exp-panel="aspect" hidden><div class="sectionHead"><div><div class="eyebrow">VERIFIED SCREENS</div><h2>IMAX GTを観られる映画館・スクリーン</h2></div><p>公式劇場ページでスクリーンまで確認できた国内のIMAX GT。通常のIMAXレーザーとは分けて表示します。</p></div><div class="gtTheaters"><article class="gtTheater"><b>グランドシネマサンシャイン 池袋</b><strong>シアター12</strong><span class="note">東京都 · IMAX GT</span><a href="https://www.cinemasunshine.co.jp/pages/gdcs/" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article><article class="gtTheater"><b>109シネマズ大阪エキスポシティ</b><strong>シアター11</strong><span class="note">大阪府 · IMAX GT</span><a href="https://109cinemas.net/osaka-expocity/establishment.html" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article></div></section></main>
 <script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>

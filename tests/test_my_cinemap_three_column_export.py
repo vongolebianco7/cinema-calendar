@@ -87,7 +87,7 @@ required_html = [
     '>Burgundy Journal<',
     '>Sage Museum<',
     '>Blue Grey Archive<',
-    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html"><span class="gBrandTile"',
+    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage"',
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:

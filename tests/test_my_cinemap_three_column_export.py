@@ -33,7 +33,15 @@ minimal_polish = [
     "const minimalMetaAlpha=.74",
     "const minimalMovieWeight=600",
     "const minimalFooterGap=38",
-    "const minimalSingleMovieSize=38",
+    "const minimalSingleMovieSize=42",
+    "const singleMovieSize=38",
+    "const doublePortraitMovieSize=32",
+    "const doubleCompactMovieSize=27",
+    "const singleMetaSize=21",
+    "const doubleMetaSize=20",
+    "const doubleListBottomTarget=",
+    "rowH=columns===2?Math.max(96,(doubleListBottomTarget-listTop)/rows):metrics.rowH",
+    "ctx.textBaseline='middle'",
     "#f3efe7",
     "#b9aa8d",
     "theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize",
@@ -100,4 +108,4 @@ for forbidden in ["illustrationMode", "Film Note", "Theater Night", "Gallery Edi
 if "my-cinemap-tools.js?v=20260927-my-cinemap-preview-v8" not in art:
     raise SystemExit("My Cinemap preview tool cache-bust version was not bumped")
 
-print("My Cinemap five editorial themes, large previews, Minimal polish, and one/two-column export checks passed")
+print("My Cinemap five editorial themes, readable typography, filled two-column layout, and large previews passed")

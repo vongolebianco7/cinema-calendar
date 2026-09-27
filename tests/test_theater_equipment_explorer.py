@@ -6,13 +6,15 @@ checks = {
     "format all": 'data-format-filter=""',
     "IMAX filter": 'data-format-filter="IMAX"',
     "Dolby Cinema filter": 'data-format-filter="Dolby Cinema"',
+    "Dolby Atmos filter": 'data-format-filter="Dolby Atmos"',
     "4DX filter": 'data-format-filter="4DX"',
     "MX4D filter": 'data-format-filter="MX4D"',
     "ScreenX filter": 'data-format-filter="ScreenX"',
-    "format tag renderer": "theaterFormatRows",
-    "screen equipment renderer": "renderEquipmentSummary",
-    "unknown fallback": "スクリーン設備 未確認",
-    "experience links": "experience.html?format=",
+    "strict equipment matcher": "strictTheaterFormatRows",
+    "screen equipment column": "スクリーン設備</th>",
+    "unknown fallback": "未確認",
+    "official equipment source": "公式設備情報",
+    "experience page link": 'href="experience.html"',
 }
 missing = [name for name, marker in checks.items() if marker not in html]
 if missing:

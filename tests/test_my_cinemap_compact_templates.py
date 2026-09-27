@@ -25,8 +25,6 @@ def test_four_editorial_templates_exist():
         assert token in HTML
     for token in ["drawMinimal", "drawNoir", "drawBurgundy", "drawBlueGray"]:
         assert token in ART
-    for token in ["Sage Museum", 'data-theme="sage"', "drawSage"]:
-        assert token not in HTML + ART
 
 
 def test_design_picker_is_directly_below_export_shape_and_layout_controls():

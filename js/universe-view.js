@@ -1,81 +1,140 @@
-/* Three-distance film universe. The artwork is fixed; placement and taste are data driven. */
+/* One navigable film universe. The scene is CSS 3D and renders only the current detail level. */
 (function (root) {
   'use strict';
-  const model = root.CinemapUniverseModel;
-  const baseGenres = ['SF','ドラマ','スリラー','コメディ','アニメ','アクション','ロマンス','ホラー','ミステリー','ファンタジー','クライム','アドベンチャー'];
-  // Slots belong to genres, not to the user's records. Adding a film never moves an existing galaxy.
-  const galaxySlot = genre => {
-    const index=baseGenres.indexOf(genre);
-    if(index>=0)return index;
-    const named=['歴史','戦争','音楽','ドキュメンタリー','西部劇','ファミリー','情報未取得'];
-    const extra=named.indexOf(genre);
-    return extra>=0?baseGenres.length+extra:baseGenres.length+named.length+((model.position('genre:'+genre).x*37+model.position('genre:'+genre).y)%16);
+  const model=root.CinemapUniverseModel;
+  const genres=Object.keys(model.genreCenters);
+  const camera={zoom:1,focusX:50,focusY:50,panX:0,panY:0,yaw:0,pitch:0};
+  let catalog=[],records={},selected=null,flight=null;
+  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+  const known=()=>catalog.filter(f=>records[String(f.id)]?.watched);
+  const tier=()=>camera.zoom<1.65?'far':camera.zoom<3.2?'middle':'near';
+  const link=f=>'search.html?id='+encodeURIComponent(f.id)+'&search='+encodeURIComponent(f.title||'');
+  const recordDate=v=>{const d=new Date(v||'');return Number.isNaN(d.getTime())?'不明':d.toLocaleDateString('ja-JP');};
+  const hue=name=>model.position('color:'+name).x*3;
+  const nodeStyle=(p,extra='')=>'left:'+p.x+'%;top:'+p.y+'%;--depth:'+p.z+'px;'+extra;
+  const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  const genreNodes=()=>{
+    const films=known();
+    const present=new Set(films.flatMap(f=>Object.keys(model.genreStrengths(f))));
+    return genres.map(g=>{
+      const p=model.centerForGenre(g), n=films.filter(f=>model.genreStrengths(f)[g]).length;
+      return '<button type="button" class="cosmosBody cosmosGalaxy'+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(g)+'銀河、'+n+'作品の記録"><span class="cosmosHalo"></span><strong>'+esc(g)+'</strong><small>'+(n?n+'作品':'記録なし')+'</small></button>';
+    }).join('');
   };
-  const state = {genre:null,director:null,film:null};
-  let catalog=[], records={};
-  const esc = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const infoLink = film => 'search.html?id='+encodeURIComponent(film.id)+'&search='+encodeURIComponent(film.title||'');
-  const watched = film => !!records[String(film.id)]?.watched;
-  const recordDate = value => {
-    const date=new Date(value||'');
-    return Number.isNaN(date.getTime())?'不明':date.toLocaleDateString('ja-JP');
+  const candidates=()=>model.recommend(records,catalog,12);
+  const directorGroups=()=>{
+    const byName=new Map();
+    [...known(),...candidates().map(x=>x.film)].forEach(f=>{
+      if(!f.director)return;
+      if(!byName.has(f.director))byName.set(f.director,[]);
+      byName.get(f.director).push(f);
+    });
+    return [...byName].map(([name,works])=>({name,works,point:model.directorPosition(name,catalog.filter(f=>f.director===name).length?catalog:works)}));
   };
-  const known = () => catalog.filter(watched);
-  const inGenre = (film,genre) => model.primaryGenre(film)===genre;
-  const visibleGenres = () => {
-    const recorded=known();
-    const extra=[...new Set(recorded.map(model.primaryGenre))].filter(g=>g!=='情報未取得'&&!baseGenres.includes(g)).sort();
-    return [...baseGenres,...extra,...(recorded.some(f=>model.primaryGenre(f)==='情報未取得')?['情報未取得']:[])];
+  const midNodes=()=>{
+    const focus={x:camera.focusX,y:camera.focusY};
+    const systems=directorGroups().filter(x=>x.point&&distance(x.point,focus)<31).sort((a,b)=>distance(a.point,focus)-distance(b.point,focus)).slice(0,32);
+    const directorMarkup=systems.map(s=>'<button type="button" class="cosmosBody cosmosDirector" data-cosmos-director="'+esc(s.name)+'" style="'+nodeStyle(s.point,'--hue:'+hue(s.name))+'" aria-label="'+esc(s.name)+'星系、'+s.works.length+'作品"><span class="cosmosHalo"></span><strong>'+esc(s.name)+'</strong><small>'+s.works.length+'作品</small></button>').join('');
+    const anonymous=known().filter(f=>!f.director&&distance(model.filmPosition(f),focus)<27).slice(0,12).map(f=>planet(f,false)).join('');
+    return directorMarkup+anonymous;
   };
-  function filmCard(film, unknown=false) {
-    const record=records[String(film.id)];
-    return '<button class="universePlanet'+(unknown?' universePlanet--unknown':'')+(record?.rating===5?' universePlanet--best':'')+'" type="button" data-universe-film="'+esc(film.id)+'" aria-label="'+esc(film.title)+(unknown?'・未登録の候補':'・記録した作品')+'">'+(film.poster?'<span class="planetArtwork"><img src="'+esc(film.poster)+'" alt="" loading="lazy"></span>':'<span class="planetArtwork planetFallback"></span>')+'<span class="planetName">'+esc(film.title||'作品')+'</span><span class="planetMeta">'+(unknown?'未登録の候補':record?.rating!=null?Number(record.rating).toFixed(1)+' ★':'観た · 未評価')+'</span></button>';
+  function planet(f,unknown){
+    const p=model.filmPosition(f),record=records[String(f.id)],best=record?.rating===5;
+    const score=Number(record?.rating);
+    const glow=record?.watched&&Number.isFinite(score)?Math.max(0,(score-2.5)/2.5):0;
+    return '<button type="button" class="cosmosBody cosmosPlanet'+(unknown?' cosmosPlanet--unknown':'')+(best?' cosmosPlanet--best':'')+'" data-cosmos-film="'+esc(f.id)+'" style="'+nodeStyle(p,'--glow:'+glow.toFixed(2))+'" aria-label="'+esc(f.title)+(unknown?'、未登録の候補':'、記録済み')+'"><span class="cosmosHalo">'+(f.poster?'<img src="'+esc(f.poster)+'" alt="" loading="lazy">':'')+'</span><strong>'+esc(f.title)+'</strong><small>'+(unknown?'未登録の候補':record?.rating!=null?Number(record.rating).toFixed(1):'観た')+'</small></button>';
   }
-  function farView() {
-    const films=known(), rated=films.filter(f=>records[String(f.id)]?.rating!=null).length;
-    const stage=rated>=20?'本格Universe':rated>=10?'仮Universe':'形成中';
-    const groups=visibleGenres().map(genre=>({genre,index:galaxySlot(genre),matching:films.filter(f=>inGenre(f,genre))}));
-    const node=({genre,index,matching})=>{
-      const p=model.position('genre:'+genre);
-      const offsetX=(p.x%11)-5,offsetY=(p.y%37)-18;
-      return '<button type="button" class="universeGalaxy'+(matching.length?' universeGalaxy--known':' universeGalaxy--unexplored')+'" data-universe-genre="'+esc(genre)+'" style="--gi:'+index+';--growth:'+Math.min(matching.length,8)+';--galaxy-x:'+(12.5+(index%4)*25+offsetX)+'%;--galaxy-y:'+(122+Math.floor(index/4)*215+offsetY)+'px;--mobile-x:'+(25+(index%2)*50+offsetX*.55)+'%;--mobile-y:'+(95+Math.floor(index/2)*157+offsetY*.6)+'px" aria-label="'+esc(genre)+'銀河、'+matching.length+'作品を記録。銀河へ入る"><span class="galaxyCloud"></span><strong>'+esc(genre)+'</strong><span class="galaxyCount">'+(matching.length?matching.length+'作品 · 銀河へ':'記録なし')+'</span></button>';
-    };
-    const explored=groups.filter(g=>g.matching.length);
-    const visible=groups.filter(g=>g.index<12||g.matching.length);
-    const lastSlot=Math.max(11,...visible.map(g=>g.index));
-    const map='<div class="universeMap" role="group" aria-label="あなたの映画宇宙。銀河を選んで監督と作品を見る" style="--map-height:'+(Math.floor(lastSlot/4)+1)*215+'px;--map-mobile-height:'+(Math.floor(lastSlot/2)+1)*157+'px"><div class="universeMapHaze" aria-hidden="true"></div>'+visible.map(node).join('')+'<span class="universeMapCaption">'+explored.length+'銀河が育っています · '+films.length+'作品を記録</span></div>';
-    const suggestions=model.recommend(records,catalog,3);
-    return '<div class="universeIntro"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+stage+'</span><h2>あなたの映画宇宙</h2><p>ひとつの宇宙に、映画のジャンルが銀河として広がります。銀河に触れると監督と作品へ近づきます。</p><div class="universeProgress">'+rated+'本評価済み'+(rated<10?' · あと'+(10-rated)+'本で仮Universe':rated<20?' · あと'+(20-rated)+'本で本格Universe':'')+'</div></div>'+map+'<div class="universeGuide"><strong>宇宙の歩き方</strong><span>銀河を選ぶ → 監督の星系 → 作品の惑星</span><small>明るい銀河には記録があり、暗い銀河にはまだ記録がありません。未登録は未鑑賞を意味しません。作品は代表ジャンルに一度だけ現れます。</small></div>'+(suggestions.length?'<button type="button" class="universeTeaser" data-universe-film="'+esc(suggestions[0].film.id)+'"><span>次の発見 · 未登録の作品候補</span><strong>'+esc(suggestions[0].film.title)+'</strong><small>鑑賞状況は不明です · 詳細を見る →</small></button>':'');
+  const nearNodes=()=>{
+    const focus={x:camera.focusX,y:camera.focusY};
+    const recommended=candidates().map(x=>x.film);
+    const films=[...known(),...recommended];
+    if(selected?.kind==='film'&&!films.some(f=>String(f.id)===selected.id)){
+      const f=catalog.find(x=>String(x.id)===selected.id);if(f)films.push(f);
+    }
+    return films.filter(f=>distance(model.filmPosition(f),focus)<22||String(f.id)===selected?.id)
+      .sort((a,b)=>distance(model.filmPosition(a),focus)-distance(model.filmPosition(b),focus))
+      .slice(0,45).map(f=>planet(f,!records[String(f.id)]?.watched)).join('');
+  };
+  function detail(){
+    if(!selected)return '<p class="cosmosHint">銀河を選ぶと星系へ、さらに近づくと作品の惑星を探索できます。未登録は未鑑賞を意味しません。</p>';
+    if(selected.kind==='genre')return '<div class="cosmosDetail"><h3>'+esc(selected.name)+'銀河</h3><p>この近くの監督星系と作品へ移動しました。1本の作品が複数ジャンルの間に位置することがあります。</p><button type="button" data-cosmos-closer>作品まで近づく →</button></div>';
+    if(selected.kind==='director')return '<div class="cosmosDetail"><h3>'+esc(selected.name)+' 星系</h3><p>監督の位置は作品群から決まり、複数の銀河の間に存在できます。</p><button type="button" data-cosmos-closer>惑星まで近づく →</button></div>';
+    const film=catalog.find(f=>String(f.id)===selected.id);if(!film)return '';
+    const record=records[String(film.id)],recommendation=candidates().find(x=>String(x.film.id)===selected.id);
+    return '<div class="cosmosDetail"><h3>'+esc(film.title)+'</h3><p>'+(record?.watched?'自分の評価: '+(record.rating==null?'未評価':Number(record.rating).toFixed(1))+' · 記録日: '+esc(recordDate(record.recordedAt||record.updatedAt)):'未登録の候補 · 鑑賞状況は不明')+'</p><p>監督: '+esc(film.director||'情報なし')+' · ジャンル: '+esc(film.genres?.join('・')||'情報なし')+'</p>'+(recommendation?.reasons?.length?'<p>候補になった理由: '+esc(recommendation.reasons.join('・'))+'</p>':'')+'<div class="cosmosDetailActions"><a href="'+link(film)+'">作品詳細へ →</a>'+(root.CinemapRatingRuler?.(film,record)||'')+'</div></div>';
   }
-  function middleView() {
-    const genre=state.genre;
-    const films=known().filter(f=>inGenre(f,genre));
-    const directors=new Map();
-    films.forEach(f=>{const name=f.director||'監督データ未取得';const group=directors.get(name)||[];group.push(f);directors.set(name,group);});
-    const cells=[...directors].sort((a,b)=>b[1].length-a[1].length || a[0].localeCompare(b[0])).map(([name,works])=>'<button type="button" class="universeSystem'+(name==='監督データ未取得'?' universeSystem--unknown':'')+'" data-universe-director="'+esc(name)+'" style="--system-scale:'+(1+Math.min(works.length-1,4)*0.15)+'"><span class="systemSun"></span><strong>'+esc(name==='監督データ未取得'?'監督情報のない作品':name)+'</strong><small>'+works.length+'作品 · '+esc(works[0].title)+(works.length>1?' ほか':'')+' →</small></button>').join('');
-    const candidates=model.recommend(records,catalog,4).filter(x=>inGenre(x.film,genre));
-    return '<div class="universeInnerHeader"><button type="button" data-universe-back="far">← ジャンル一覧へ</button><span>'+esc(genre)+' 銀河</span></div><div class="universeSectionHead"><h2>'+esc(genre)+'の監督と作品</h2><p>ここには記録した'+films.length+'本が入っています。監督を選ぶと作品が見えます。</p></div><div class="universeSystems">'+(cells||'<p class="universeEmpty">まだ記録された作品がありません。未登録は未鑑賞を意味しません。</p>')+'</div>'+(candidates.length?'<div class="universeSuggestions"><h3>このジャンルの未登録候補</h3><p class="universeEmpty">鑑賞状況は不明です。</p><div class="universePlanets">'+candidates.map(x=>filmCard(x.film,true)).join('')+'</div></div>':'');
+  const worldTransform=()=>`translate3d(${camera.panX}px,${camera.panY}px,0) rotateX(${camera.pitch}deg) rotateY(${camera.yaw}deg) scale(${camera.zoom})`;
+  function applyCamera(animated=false){
+    const world=document.querySelector('#universe .cosmosWorld');
+    if(world){world.style.transition=animated?'transform .68s cubic-bezier(.2,.8,.2,1)':'none';world.style.transform=worldTransform();}
   }
-  function closeView() {
-    const films=known().filter(f=>inGenre(f,state.genre) && (f.director||'監督データ未取得')===state.director);
-    const suggestions=model.recommend(records,catalog,8).filter(x=>inGenre(x.film,state.genre) && (x.film.director||'監督データ未取得')===state.director);
-    const selected=state.film && catalog.find(f=>String(f.id)===state.film);
-    const record=selected&&records[String(selected.id)];
-    const related=selected ? catalog.filter(f=>String(f.id)!==String(selected.id) && (f.director===selected.director || f.genres?.some(g=>selected.genres?.includes(g)))).sort((a,b)=>Number(b.director===selected.director)-Number(a.director===selected.director) || (b.genres||[]).filter(g=>selected.genres?.includes(g)).length-(a.genres||[]).filter(g=>selected.genres?.includes(g)).length).slice(0,3):[];
-    return '<div class="universeInnerHeader"><button type="button" data-universe-back="middle">← '+esc(state.genre)+'銀河へ</button><span>'+esc(state.director)+'</span></div><div class="universeSectionHead"><h2>'+esc(state.director)+' 星系</h2><p>作品の惑星を選ぶと、記録と近くの作品が見えます。</p></div><div class="universePlanets">'+films.map(f=>filmCard(f)).join('')+suggestions.slice(0,4).map(x=>filmCard(x.film,true)).join('')+'</div>'+(selected?'<div class="universeFilmDetail"><h3>'+esc(selected.title)+'</h3><p>'+(record?.watched?'自分の評価: '+(record.rating==null?'未評価':Number(record.rating).toFixed(1))+' · 記録日: '+esc(recordDate(record.recordedAt||record.updatedAt)):'未登録の候補 · 鑑賞状況は不明')+'</p><p>監督: '+esc(selected.director||'情報なし')+'</p><p>ジャンル: '+esc(selected.genres?.join(' · ')||'情報なし')+'</p><div class="universeDetailActions"><a href="'+infoLink(selected)+'">作品情報を見る</a>'+(root.CinemapRatingRuler?.(selected,record)||'')+'</div>'+(related.length?'<div class="universeRelated"><small>関連作品</small>'+related.map(f=>'<button type="button" data-universe-film="'+esc(f.id)+'">'+esc(f.title)+'</button>').join('')+'</div>':'')+'</div>':'');
-  }
-  function render(nextCatalog,nextRecords) {
-    records=nextRecords||records;
+  function render(nextCatalog,nextRecords){
+    if(nextRecords)records=nextRecords;
     if(nextCatalog){const ids=new Set(nextCatalog.map(f=>String(f.id)));catalog=[...nextCatalog,...Object.values(records).filter(r=>r?.watched&&!ids.has(String(r.id)))];}
     const host=document.getElementById('universe');if(!host)return;
-    const body=state.genre===null?farView():state.director===null?middleView():closeView();
-    host.innerHTML='<div class="universeScene">'+body+'</div>';
+    const level=tier(),n=known().length;
+    const nodes=level==='far'?genreNodes():level==='middle'?midNodes():nearNodes();
+    const options=genres.map(g=>'<option value="'+esc(g)+'">'+esc(g)+'銀河</option>').join('');
+    const names=[...new Set([...catalog.filter(f=>f.director).map(f=>f.director),...catalog.map(f=>f.title)])];
+    host.innerHTML='<section class="cosmosScene"><div class="cosmosHeader"><span class="universeEyebrow">YOUR FILM UNIVERSE · '+(n>=20?'成長中':n>=10?'仮Universe':'形成中')+'</span><h2>あなたの映画宇宙</h2><p>ひとつの宇宙を探索する。銀河はジャンル、恒星は監督、惑星は作品です。</p></div><div class="cosmosControls"><button type="button" data-cosmos-home>全体を見る</button><label>銀河へ移動 <select data-cosmos-jump><option value="">ジャンルを選ぶ</option>'+options+'</select></label><form class="cosmosSearch" data-cosmos-search><label for="cosmosQuery">監督・作品を探す</label><input id="cosmosQuery" list="cosmosSuggestions" placeholder="作品名・監督名"><datalist id="cosmosSuggestions">'+names.slice(0,400).map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist><button>移動</button></form></div><div class="cosmosViewport" role="group" aria-label="映画宇宙。ドラッグで視点を動かし、ピンチで拡大縮小"><div class="cosmosWorld">'+nodes+'</div><div class="cosmosLevel">'+(level==='far'?'遠景 · ジャンル銀河':level==='middle'?'中景 · 監督星系':'近景 · 作品惑星')+'</div></div><div class="cosmosFoot"><span>1本指で移動 · ピンチで拡大縮小 · 天体をタップして接近</span><span>'+n+'作品を記録</span></div>'+detail()+'</section>';
+    applyCamera();
+    bindGestures(host.querySelector('.cosmosViewport'));
   }
-  document.addEventListener('click',event=>{
-    const genre=event.target.closest('[data-universe-genre]');if(genre){state.genre=genre.dataset.universeGenre;state.director=null;state.film=null;render();return;}
-    const director=event.target.closest('[data-universe-director]');if(director){state.director=director.dataset.universeDirector;state.film=null;render();return;}
-    const film=event.target.closest('[data-universe-film]');if(film){state.film=film.dataset.universeFilm;const match=catalog.find(f=>String(f.id)===state.film);if(match && !inGenre(match,state.genre)){state.genre=model.primaryGenre(match);}state.director=match?.director||'監督データ未取得';render();return;}
-    const back=event.target.closest('[data-universe-back]');if(back){if(back.dataset.universeBack==='far')state.genre=null;else{state.director=null;state.film=null;}render();}
+  function fly(point,zoom,selection){
+    if(!point)return;
+    const stage=document.querySelector('#universe .cosmosViewport');
+    const rect=stage?.getBoundingClientRect();
+    camera.zoom=zoom;camera.focusX=point.x;camera.focusY=point.y;camera.yaw=0;camera.pitch=0;
+    camera.panX=(.5-point.x/100)*(rect?.width||800)*zoom;
+    camera.panY=(.5-point.y/100)*(rect?.height||580)*zoom;
+    selected=selection;
+    applyCamera(true);
+    clearTimeout(flight);
+    flight=setTimeout(()=>render(),720);
+  }
+  function home(){clearTimeout(flight);Object.assign(camera,{zoom:1,focusX:50,focusY:50,panX:0,panY:0,yaw:0,pitch:0});selected=null;render();}
+  function bindGestures(viewport){
+    const pointers=new Map();let pinchDistance=0;
+    viewport.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()];pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);}});
+    viewport.addEventListener('pointermove',e=>{
+      const previous=pointers.get(e.pointerId);if(!previous)return;
+      pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(pointers.size>=2){
+        const [a,b]=[...pointers.values()],dist=Math.hypot(a.x-b.x,a.y-b.y);
+        if(pinchDistance){const next=clamp(camera.zoom*dist/pinchDistance,.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;}
+        pinchDistance=dist;
+      }else{
+        const dx=e.clientX-previous.x,dy=e.clientY-previous.y;
+        camera.panX+=dx;camera.panY+=dy;
+        camera.focusX=clamp(camera.focusX-dx/(viewport.clientWidth*camera.zoom)*100,0,100);
+        camera.focusY=clamp(camera.focusY-dy/(viewport.clientHeight*camera.zoom)*100,0,100);
+        camera.yaw=clamp(camera.yaw+dx*.035,-12,12);camera.pitch=clamp(camera.pitch-dy*.035,-9,9);
+      }
+      applyCamera();
+    });
+    const end=e=>{if(!pointers.delete(e.pointerId))return;if(pointers.size<2)pinchDistance=0;if(!pointers.size)render();};
+    viewport.addEventListener('pointerup',end);viewport.addEventListener('pointercancel',end);
+    viewport.addEventListener('wheel',e=>{e.preventDefault();const next=clamp(camera.zoom*(e.deltaY>0?.88:1.12),.85,4.8);camera.panX*=next/camera.zoom;camera.panY*=next/camera.zoom;camera.zoom=next;applyCamera();clearTimeout(flight);flight=setTimeout(()=>render(),150);},{passive:false});
+  }
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#universe'))return;
+    const genre=e.target.closest('[data-cosmos-genre]');if(genre){const g=genre.dataset.cosmosGenre,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});return;}
+    const director=e.target.closest('[data-cosmos-director]');if(director){const name=director.dataset.cosmosDirector;fly(model.directorPosition(name,catalog),3.8,{kind:'director',name});return;}
+    const film=e.target.closest('[data-cosmos-film]');if(film){const id=film.dataset.cosmosFilm,f=catalog.find(x=>String(x.id)===id);if(f)fly(model.filmPosition(f),3.8,{kind:'film',id});return;}
+    if(e.target.closest('[data-cosmos-home]')){home();return;}
+    if(e.target.closest('[data-cosmos-closer]')){const p=selected?.kind==='genre'?model.centerForGenre(selected.name):model.directorPosition(selected?.name,catalog);if(p)fly(Array.isArray(p)?{x:p[0],y:p[1]}:p,3.8,selected);}
   });
+  document.addEventListener('change',e=>{if(!e.target.matches('[data-cosmos-jump]')||!e.target.value)return;const g=e.target.value,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});});
+  document.addEventListener('submit',e=>{
+    if(!e.target.matches('[data-cosmos-search]'))return;e.preventDefault();
+    const query=e.target.querySelector('input').value.trim().toLocaleLowerCase();if(!query)return;
+    const movie=catalog.find(f=>f.title?.toLocaleLowerCase()===query)||catalog.find(f=>f.title?.toLocaleLowerCase().includes(query));
+    if(movie){fly(model.filmPosition(movie),3.8,{kind:'film',id:String(movie.id)});return;}
+    const director=catalog.find(f=>f.director?.toLocaleLowerCase()===query)||catalog.find(f=>f.director?.toLocaleLowerCase().includes(query));
+    if(director)fly(model.directorPosition(director.director,catalog),3.8,{kind:'director',name:director.director});
+    else e.target.querySelector('input').setCustomValidity('該当する作品・監督がありません');
+  });
+  document.addEventListener('input',e=>{if(e.target.id==='cosmosQuery')e.target.setCustomValidity('');});
   root.CinemapUniverseView={render};
 })(window);

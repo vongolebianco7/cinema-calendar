@@ -30,4 +30,11 @@ assert.equal(suggestions.some(x=>x.film.id===4),false,'negative-affinity film is
 assert.equal(model.recommend({},catalog).length,0,'do not imply affinity without ratings');
 assert.deepEqual(model.position('genre:SF'),model.position('genre:SF'),'positions are stable');
 assert.ok(model.position('genre:SF').x>=10&&model.position('genre:SF').x<=90);
+const hybrid={id:73,genres:['SF','ドラマ'],genreStrengths:{SF:.8,'ドラマ':.7},director:'Crossing'};
+const point=model.filmPosition(hybrid), sf=model.centerForGenre('SF'), drama=model.centerForGenre('ドラマ');
+assert.ok(point.x>sf[0]&&point.x<drama[0],'a hybrid film occupies the boundary, with one stable coordinate');
+assert.deepEqual(point,model.filmPosition({...hybrid,rating:5}),'rating cannot move a planet');
+assert.deepEqual(model.genreStrengths(hybrid),{SF:.8,'ドラマ':.7});
+const cross=model.directorPosition('Crossing',[hybrid,{id:74,genres:['ドラマ'],director:'Crossing'}]);
+assert.ok(cross.x>point.x,'the director system spans its different film genres');
 console.log('Universe weights, honest metadata, suggestions and stable positions passed');

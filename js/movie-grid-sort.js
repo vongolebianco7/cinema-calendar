@@ -52,7 +52,8 @@
   function update(){
     const next=key();controls.hidden=page==='index.html'&&(typeof mode==='undefined'||mode!=='tv');
     if(currentKey!==next){currentKey=next;select.innerHTML=(choices[next]||choices.rating).map(([value,label])=>'<option value="'+value+'">'+label+'</option>').join('')}
-    if(!controls.hidden)apply();
+    if(controls.hidden)observer.observe(root,{childList:true,subtree:true});
+    else apply();
   }
   const observer=new MutationObserver(update);
   select.addEventListener('change',apply);

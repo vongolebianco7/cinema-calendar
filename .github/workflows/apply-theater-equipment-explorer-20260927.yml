@@ -54,4 +54,5 @@ jobs:
             exit 0
           fi
           git commit -m "feat: show theater formats and screen equipment"
+          git pull --rebase origin main
           git push

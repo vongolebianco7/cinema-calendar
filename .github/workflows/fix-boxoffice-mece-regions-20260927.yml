@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/fix_boxoffice_mece_regions_20260927.py'
       - 'tests/test_boxoffice_mece_regions.py'
+      - 'tests/test_boxoffice_country_buckets.py'
       - '.github/workflows/fix-boxoffice-mece-regions-20260927.yml'
 permissions:
   contents: write

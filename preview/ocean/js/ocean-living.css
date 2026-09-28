@@ -1,0 +1,24 @@
+/* Living Ocean composition. Loaded by ocean-immersive.js so legacy pages need no markup migration. */
+.oceanWorld{--reef:0;--vegetation:0;--life:0;--light:.18;background:linear-gradient(180deg,#06334a 0%,#052534 42%,#02141d 100%)}
+.oceanBackdrop{filter:saturate(calc(.82 + var(--growth)*.42)) contrast(1.05) brightness(calc(.72 + var(--light)*.32))}
+.oceanReefArt{position:absolute;z-index:1;left:-7%;right:-7%;bottom:-7%;height:62%;pointer-events:none;background:url("../assets/cinemap-ocean/growth-reef-mobile.webp") center bottom/cover no-repeat;opacity:calc(.04 + var(--reef)*.9);transform-origin:50% 100%;transform:translateY(calc((1 - var(--reef))*28%)) scale(calc(.9 + var(--reef)*.13));filter:saturate(calc(.72 + var(--reef)*.55)) brightness(calc(.62 + var(--reef)*.3));transition:opacity .5s,transform .5s,filter .5s}
+.oceanVegetation{position:absolute;z-index:2;inset:auto 0 0;height:38%;pointer-events:none;opacity:calc(.08 + var(--vegetation)*.72);overflow:hidden}
+.oceanVegetation i{position:absolute;bottom:-5%;width:9px;height:calc(20% + var(--h)*58%);border-radius:80% 20% 0 0;transform-origin:50% 100%;background:linear-gradient(90deg,#0b3829,#2c7452 52%,#123f31);filter:blur(.2px);animation:oceanFrond 7s ease-in-out infinite alternate}
+.oceanVegetation i:nth-child(1){left:7%;--h:.8}.oceanVegetation i:nth-child(2){left:14%;--h:.48;animation-delay:-3s}.oceanVegetation i:nth-child(3){left:31%;--h:.7;animation-delay:-5s}.oceanVegetation i:nth-child(4){left:59%;--h:.55;animation-delay:-2s}.oceanVegetation i:nth-child(5){left:78%;--h:.86;animation-delay:-4s}.oceanVegetation i:nth-child(6){left:91%;--h:.62;animation-delay:-6s}
+.oceanFauna{z-index:4}
+.oceanAnimal{width:clamp(36px,calc(72px * var(--size) * (.72 + var(--z)*.55)),190px);opacity:calc(.3 + var(--z)*.62);animation-name:oceanLivingSwim;animation-duration:var(--speed);animation-delay:var(--delay);transform:translate(-50%,-50%) scaleX(var(--dir));transform-origin:center;will-change:margin,transform}
+.oceanAnimal.oceanHero{z-index:3;filter:drop-shadow(0 12px 20px #001018aa) saturate(1.2) brightness(1.08)}
+.oceanAnimal.oceanDepthFar{filter:drop-shadow(0 5px 8px #00101855) saturate(.62) blur(.55px);opacity:.32}.oceanAnimal.oceanDepthMid{opacity:.68}.oceanAnimal.oceanDepthNear{filter:drop-shadow(0 14px 18px #001018aa) saturate(1.16);opacity:.96}
+.oceanSchoolLayer{z-index:3;opacity:calc(.05 + var(--life)*.58)}
+.oceanSchoolLayer span{animation-duration:var(--school-speed,42s)}
+.oceanDistantLife{opacity:calc(.04 + var(--life)*.34)}
+.oceanLightShafts{opacity:calc(.08 + var(--light)*.45)}
+.oceanHaze{z-index:5;background:linear-gradient(180deg,#3bd8ef08 0,#00263510 38%,#0010184d 100%),radial-gradient(ellipse at 50% 42%,transparent 0 34%,#0010181d 70%,#00090f80 120%)}
+.oceanCaustics{z-index:6;opacity:calc(.08 + var(--light)*.28)}
+.oceanParticles{z-index:6;opacity:calc(.18 + var(--life)*.38)}
+.oceanExploreHint,.oceanCreatureCard{z-index:9}
+@keyframes oceanLivingSwim{0%{margin-left:calc(var(--drift)*-.55);margin-top:5px}45%{margin-top:-9px}100%{margin-left:var(--drift);margin-top:1px}}
+@keyframes oceanFrond{from{transform:rotate(-5deg) skewX(-2deg)}to{transform:rotate(6deg) skewX(2deg)}}
+@media(min-width:760px){.oceanReefArt{background-image:url("../assets/cinemap-ocean/growth-reef.webp");height:68%}}
+@media(max-width:700px){.oceanAnimal{width:clamp(32px,calc(58px * var(--size) * (.72 + var(--z)*.5)),148px)}.oceanReefArt{left:-16%;right:-16%;height:58%;bottom:-4%}.oceanVegetation{height:31%}}
+@media(prefers-reduced-motion:reduce){.oceanAnimal,.oceanVegetation i{animation:none!important}.oceanReefArt{transition:none}}

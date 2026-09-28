@@ -15297,7 +15297,9 @@ function Nd(e) {
 	return {
 		watched: Math.max(0, Number(t.watched) || 0),
 		maturity: Math.max(0, Math.min(1, Number(e?.maturity) || 0)),
-		reef: Number(n.reef) || 0,
+		reef: Math.max(0, Math.min(1, Number(n.reef) || 0)),
+		vegetation: Math.max(0, Math.min(1, Number(n.vegetation) || 0)),
+		distantLife: Math.max(0, Math.min(1, Number(n.distantLife) || 0)),
 		schools: Number(n.schools) || 0,
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
@@ -15350,7 +15352,47 @@ function Id(e) {
 		member: 0
 	}));
 }
-async function Ld(e, t = null) {
+function Ld(e) {
+	let t = [
+		{
+			key: "rocks",
+			at: 0
+		},
+		{
+			key: "rocks",
+			at: .08
+		},
+		{
+			key: "coral",
+			at: .16
+		},
+		{
+			key: "rocks",
+			at: .28
+		},
+		{
+			key: "coral",
+			at: .4
+		},
+		{
+			key: "rocks",
+			at: .52
+		},
+		{
+			key: "coral",
+			at: .66
+		},
+		{
+			key: "wreck",
+			at: .82
+		}
+	], n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7);
+	return t.filter((e, t) => t === 0 || n >= e.at).map((t, r) => ({
+		...t,
+		scale: t.key === "wreck" ? .5 : t.key === "coral" ? .32 + e.reef * .22 : .42 + n * .2 + jd(r) * .12
+	}));
+}
+async function Rd(e, t = null) {
 	let n = new At();
 	n.name = "cinemap-asset-ecosystem", e.add(n);
 	let r = [], i = [], a = Nd(t);
@@ -15361,16 +15403,7 @@ async function Ld(e, t = null) {
 			Cd.dispose(), e.remove(n);
 		}
 	};
-	let o = Math.max(1, Math.min(8, Math.ceil(1 + a.reef * 7))), s = [
-		"rocks",
-		"rocks",
-		"coral",
-		"wreck",
-		"rocks",
-		"rocks",
-		"coral",
-		"rocks"
-	].slice(0, o), c = await Promise.all(s.map((e, t) => Ad(e, e === "wreck" ? .55 : e === "coral" ? .42 : .46 + jd(t) * .22))), l = [
+	let o = Ld(a), s = await Promise.all(o.map((e) => Ad(e.key, e.scale))), c = [
 		[
 			-8,
 			-7.2,
@@ -15412,18 +15445,18 @@ async function Ld(e, t = null) {
 			-76
 		]
 	];
-	c.forEach(({ holder: e }, t) => {
-		e.position.set(...l[t]), e.rotation.y += t * .67, n.add(e);
+	s.forEach(({ holder: e }, t) => {
+		e.position.set(...c[t]), e.rotation.y += t * .67, n.add(e);
 	});
-	let u = Id(a);
-	(await Promise.all(u.map((e) => Ad(e.key, e.scale * (e.hero ? 1.12 : 1))))).forEach((e, t) => {
-		let a = u[t];
+	let l = Id(a);
+	(await Promise.all(l.map((e) => Ad(e.key, e.scale * (e.hero ? 1.12 : 1))))).forEach((e, t) => {
+		let a = l[t];
 		n.add(e.holder), e.mixer && r.push(e.mixer);
 		let o = a.niche === "reef", s = a.niche === "benthic" || a.niche === "drifter", c = a.hero || [
 			"whale",
 			"shark",
 			"manta"
-		].includes(a.key), l = (a.member || 0) * .13;
+		].includes(a.key), u = (a.member || 0) * .13;
 		i.push(Md(e.holder, t, {
 			radius: c ? 8 : o ? 4.2 : 5.5,
 			y: s ? -3.4 : c ? 4.5 : o ? .4 : 1.8,
@@ -15431,16 +15464,16 @@ async function Ld(e, t = null) {
 			speed: c ? .022 : s ? .03 : .05,
 			bob: s ? .2 : c ? .55 : .32,
 			spread: c ? .2 : .75,
-			phase: Math.PI / 2 + l
+			phase: Math.PI / 2 + u
 		}));
 	});
-	let d = 0;
+	let u = 0;
 	return {
 		root: n,
 		update(e) {
-			d += e, r.forEach((t) => t.update(e));
+			u += e, r.forEach((t) => t.update(e));
 			for (let e of i) {
-				let t = d * e.speed + e.phase;
+				let t = u * e.speed + e.phase;
 				e.obj.position.set(Math.cos(t) * e.radius, e.y + Math.sin(t * 1.7) * e.bob, e.z + Math.sin(t) * e.radius * .32), e.obj.rotation.y = Math.atan2(-Math.sin(t) * e.radius, Math.cos(t) * e.radius * .32), e.obj.rotation.z = Math.sin(t) * .022;
 			}
 		},
@@ -15451,7 +15484,7 @@ async function Ld(e, t = null) {
 }
 //#endregion
 //#region src/main.js
-function Rd(e, t = globalThis.devicePixelRatio || 1) {
+function zd(e, t = globalThis.devicePixelRatio || 1) {
 	if (!e) throw Error("Ocean renderer requires a canvas");
 	let n = new Gl({
 		canvas: e,
@@ -15461,15 +15494,15 @@ function Rd(e, t = globalThis.devicePixelRatio || 1) {
 	});
 	return n.setPixelRatio(ql(t)), n.outputColorSpace = N, n.toneMapping = 4, n.toneMappingExposure = .98, n;
 }
-function zd(e, t = {}) {
+function Bd(e, t = {}) {
 	let n = t.reducedMotion === !0, r = Jl({
 		width: e.clientWidth || 390,
 		dpr: globalThis.devicePixelRatio || 1,
 		cores: globalThis.navigator?.hardwareConcurrency || 4,
 		reducedMotion: n
-	}), i = Rd(e, r.dpr), a = new zt();
+	}), i = zd(e, r.dpr), a = new zt();
 	a.background = new X(473414);
-	let o = new Ya(48, 1, .1, 240), s = ru(a, r), c = null, l = null, u = Ld(a, t.ecosystem || null).then((e) => (c = e, e)).catch((e) => {
+	let o = new Ya(48, 1, .1, 240), s = ru(a, r), c = null, l = null, u = Rd(a, t.ecosystem || null).then((e) => (c = e, e)).catch((e) => {
 		throw l = e, console.error("[Ocean assets]", e), e;
 	}), d = new Do(), f = 0, p = !1, m = 0, h = 0, g = 0, _ = 0, v = 38, y = 38, b = 0, x = new W(0, .2, -40), S = /* @__PURE__ */ new Map();
 	function C() {
@@ -15533,4 +15566,4 @@ function zd(e, t = {}) {
 	};
 }
 //#endregion
-export { zd as mountOcean };
+export { Bd as mountOcean };

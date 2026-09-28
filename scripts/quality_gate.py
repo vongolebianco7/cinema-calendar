@@ -38,6 +38,7 @@ commands=[
  ["python","scripts/check_critic_map.py"],
  ["node","scripts/check_critic_evidence.js"],
  ["node","--test","tests/ocean-ecosystem.test.cjs"],
+ ["python","tests/test_ocean_living_renderer.py"],
 ]
 for cmd in commands:
     if (ROOT/cmd[1]).exists() if len(cmd)>1 and ("/" in cmd[1] or cmd[1].endswith(".js")) else True:

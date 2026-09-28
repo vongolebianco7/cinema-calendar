@@ -2,7 +2,11 @@ name: Ocean mature renderer
 on:
   pull_request:
     paths:
-      - 'preview/ocean/renderer/**'
+      - 'preview/ocean/renderer/src/**'
+      - 'preview/ocean/renderer/package.json'
+      - 'preview/ocean/renderer/package-lock.json'
+      - 'preview/ocean/renderer/capture.mjs'
+      - 'preview/ocean/renderer/index.html'
       - 'tests/ocean-renderer-*.test.cjs'
       - '.github/workflows/ocean-mature-renderer.yml'
 permissions:
@@ -24,7 +28,7 @@ jobs:
       - run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build -- --base=./
-      - name: Commit static Ocean bundle
+      - name: Commit static Ocean bundle for GitHub Pages
         working-directory: .
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |

@@ -19,9 +19,7 @@ for (const rel of [
   'preview/ocean/js/ocean-geometry.js',
   'preview/ocean/js/ocean-shaders.js',
   'preview/ocean/js/ocean-webgl.js',
-]) {
-  assert.ok(fs.existsSync(path.join(ROOT, rel)), `${rel} must exist for v0.5`);
-}
+]) assert.ok(fs.existsSync(path.join(ROOT, rel)), `${rel} must exist for v0.5`);
 
 const cameraSandbox = load('preview/ocean/js/ocean-camera.js');
 assert.ok(cameraSandbox.CinemapOceanCamera, 'camera module exports a browser global');
@@ -35,8 +33,8 @@ assert.ok(zoomed.distance <= 34 && zoomed.distance >= 9, 'zoom remains bounded')
 
 const sceneSandbox = load('preview/ocean/js/ocean-scene.js');
 const ecosystem = {
-  maturity: { creatureCount: 14, schoolCount: 3, reef: 0.7, vegetation: 0.65, light: 0.75, largeCreatureCount: 1 },
-  creatures: Array.from({ length: 14 }, (_, i) => ({ id: `film-${i}`, speciesId: `species-${i % 6}`, rating: i === 0 ? 5 : 4, size: 0.8 + (i % 4) * 0.12, depth: i % 3 })),
+  maturity: { reef: 0.7, vegetation: 0.65, light: 0.75 },
+  creatures: Array.from({ length: 14 }, (_, i) => ({ id: `film-${i}`, speciesId: `species-${i % 6}`, rating: i === 0 ? 5 : 4, size: 0.8 + (i % 4) * 0.12 })),
   schools: [{ id: 'school-a', count: 7 }, { id: 'school-b', count: 5 }, { id: 'school-c', count: 4 }],
 };
 const a = sceneSandbox.CinemapOceanScene.buildRenderScene(ecosystem);
@@ -47,15 +45,17 @@ assert.ok(a.fish.length >= 10, 'ecosystem produces inhabitants');
 assert.ok(a.habitat.length >= 8, 'growth enriches habitat, not just fish count');
 assert.ok(a.fish.filter((fish) => fish.scale >= 1.7).length <= 2, 'large animals remain rare');
 
-const html = fs.readFileSync(path.join(ROOT, 'preview/ocean/ocean-demo.html'), 'utf8');
-assert.ok(html.includes('OCEAN v0.5.0'), 'visible version marker is v0.5.0');
-for (const asset of ['ocean-camera.js', 'ocean-scene.js', 'ocean-geometry.js', 'ocean-shaders.js', 'ocean-webgl.js', 'ocean-immersive.js']) {
-  assert.ok(html.includes(`${asset}?v=5`), `${asset} uses v0.5 cache key`);
-}
-
 const immersive = fs.readFileSync(path.join(ROOT, 'preview/ocean/js/ocean-immersive.js'), 'utf8');
+assert.ok(immersive.includes("VERSION='0.5.0'"), 'visible/runtime version is v0.5.0');
+assert.ok(immersive.includes("CACHE='5'"), 'v0.5 renderer modules share an explicit cache key');
+for (const asset of ['ocean-camera.js', 'ocean-scene.js', 'ocean-geometry.js', 'ocean-shaders.js', 'ocean-webgl.js']) assert.ok(immersive.includes(asset), `${asset} is loaded by the v0.5 shell`);
 assert.ok(immersive.includes('CinemapOceanWebGL'), 'immersive view mounts WebGL renderer');
 assert.ok(!immersive.includes('cosmosHalo'), 'v0.5 primary renderer does not build halo DOM');
 assert.ok(!immersive.includes('oceanSchool'), 'v0.5 primary renderer does not build sprite schools');
+
+const renderer = fs.readFileSync(path.join(ROOT, 'preview/ocean/js/ocean-webgl.js'), 'utf8');
+assert.ok(renderer.includes("getContext('webgl2'"), 'renderer requests native WebGL2');
+assert.ok(renderer.includes('showFallback'), 'renderer has a local graceful fallback');
+assert.ok(!renderer.includes('fish-atlas'), 'primary renderer does not use the old fish sprite atlas');
 
 console.log('ocean webgl v0.5 contract tests passed');

@@ -31,7 +31,7 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/swordfish.glb -o assets/creatures/swordfish.glb
           for f in assets/creatures/*.glb; do test "$(head -c4 "$f")" = glTF; done
           cd ../../..
-          if ! git diff --quiet -- preview/ocean/renderer/assets/creatures; then
+          if [ -n "$(git status --porcelain -- preview/ocean/renderer/assets/creatures)" ]; then
             git config user.name github-actions[bot]
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add preview/ocean/renderer/assets/creatures

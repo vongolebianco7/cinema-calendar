@@ -12,7 +12,7 @@
   precision highp float;
   uniform vec3 uColor; uniform vec3 uFogColor; uniform float uAlpha; uniform float uTime; uniform float uLight;
   in float vDepth; in float vShade; in float vPart; out vec4 outColor;
-  void main(){float caustic=.94+.06*sin(uTime*1.35+vDepth*.31); vec3 lit=uColor*(vShade+.28*uLight)*caustic; float fog=1.0-exp(-vDepth*.055); vec3 color=mix(lit,uFogColor,clamp(fog,0.0,.9)); outColor=vec4(color,uAlpha);}`;
+  void main(){float caustic=.94+.06*sin(uTime*1.35+vDepth*.31); vec3 lit=uColor*(vShade+.28*uLight)*caustic; float fog=1.0-exp(-vDepth*.022); vec3 color=mix(lit,uFogColor,clamp(fog,0.0,.82)); outColor=vec4(color,uAlpha);}`;
   function compile(gl,type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s)||'shader compile failed');return s;}
   function createProgram(gl){const p=gl.createProgram();gl.attachShader(p,compile(gl,gl.VERTEX_SHADER,vertex));gl.attachShader(p,compile(gl,gl.FRAGMENT_SHADER,fragment));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p)||'program link failed');return p;}
   root.CinemapOceanShaders={vertex,fragment,createProgram};

@@ -20,5 +20,15 @@ assert 'CAMERA_BOUNDS={minX:0,maxX:100,minY:5,maxY:95}' in immersive, 'Ocean exp
 assert 'DRAG_TRAVEL={x:100,y:90}' in immersive, 'one viewport drag should be able to traverse a meaningful part of the Ocean'
 assert 'clamp(drag.tx-dx/stage.clientWidth*45,25,75)' not in immersive, 'legacy narrow horizontal camera clamp must not return'
 assert 'clamp(drag.ty-dy/stage.clientHeight*32,30,70)' not in immersive, 'legacy narrow vertical camera clamp must not return'
+
+# Exploration UX contract: the ecosystem is a genuinely larger map, not a viewport-sized layer
+# with a larger numeric clamp. Start pulled back, keep decorative bubbles out, and expose a
+# visible build marker so an iPhone user can tell whether GitHub Pages has refreshed.
+assert 'INITIAL_SCALE=.72' in immersive, 'Ocean must open on a pulled-back overview'
+assert 'class="oceanMap"' in immersive and '.oceanMap{' in css, 'spatial habitat and fauna must live in one oversized pannable map'
+assert 'inset:-90% -120%' in css, 'Ocean map must be materially larger than the viewport'
+assert 'oceanBubbles' not in immersive, 'decorative bubble layer must stay removed'
+assert 'OCEAN v0.4.0' in immersive, 'Ocean must show a visible version marker for deployment verification'
+assert '.oceanVersion{' in css, 'version marker needs stable overlay styling'
 assert 'https://' not in css, 'living Ocean CSS must not introduce external asset requests'
 print('Living Ocean renderer contract passed')

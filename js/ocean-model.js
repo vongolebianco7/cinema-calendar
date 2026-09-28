@@ -128,23 +128,41 @@
     ...f,id:f.id+'-'+variant,name:morph+'の'+f.name,variant,
     hue:(variant-5)*12
   })));
+  function hash32(value){let seed=2166136261;for(const char of String(value)){seed^=char.codePointAt(0);seed=Math.imul(seed,16777619);}return(seed^(seed>>>16))>>>0;}
+  function familyFor(film){
+    // Genre changes probability, never taxonomy. Every genre can produce many
+    // creatures, so a horror shelf cannot collapse into a starfish/deep-fish blob.
+    const strengths=genreStrengths(film);
+    const seed=hash32('family:'+String(film?.id??film?.title??'unknown'));
+    const scored=families.map((family,index)=>{
+      const affinity=Math.max(0,...family.genres.map(g=>strengths[g]||0));
+      const diversity=((hash32(seed+':'+family.id)%1000)/1000);
+      const repetitionPenalty=((seed+index*17)%11===0)?.35:0;
+      return {family,score:diversity*1.35+affinity*.72-repetitionPenalty};
+    }).sort((a,b)=>b.score-a.score||a.family.id.localeCompare(b.family.id));
+    // Select among the strongest few deterministically. This keeps a weak
+    // semantic connection while making adjacent films visibly different.
+    return scored[(seed>>>8)%Math.min(6,scored.length)].family;
+  }
   function speciesFor(film){
     const explicit=species.find(x=>x.id===film?.ecologyType);
     if(explicit)return explicit;
-    const strengths=genreStrengths(film);
-    const groups=[[0,6,7,21,24,29,31,34],[1,8,9,18,19,20,30,32,33,35,41],[2,16,17,22,40],[3,12,14,15,23,26,36,37],[4,10,27,28,39],[5,11,13,25,38]];
-    const groupScores=groups.map((_,i)=>Math.max(0,...families[i].genres.map(g=>strengths[g]||0)));
-    const group=groupScores.indexOf(Math.max(...groupScores));
-    const pool=groupScores[group]>0?groups[group]:[1,18,19,20];
-    const key='creature:'+String(film?.id??film?.title??'unknown');
-    let seed=2166136261;
-    for(const char of key){seed^=char.codePointAt(0);seed=Math.imul(seed,16777619);}
-    seed=(seed^(seed>>>16))>>>0;
-    const family=families[pool[seed%pool.length]];
-    const variant=Math.floor(seed/pool.length)%morphNames.length;
+    const family=familyFor(film);
+    const seed=hash32('morph:'+String(film?.id??film?.title??'unknown'));
+    const variant=seed%morphNames.length;
     return species.find(x=>x.id===family.id+'-'+variant);
   }
-  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,speciesFor};
+  function ecosystem(records,catalog){
+    const byId=new Map((catalog||[]).map(f=>[String(f.id),f]));
+    const watched=Object.values(records||{}).filter(r=>r?.watched).map(r=>byId.get(String(r.id))||r);
+    const counts={};for(const film of watched){const creature=speciesFor(film);counts[creature.id]=(counts[creature.id]||0)+1;}
+    const n=watched.length;
+    return {watched:n,discovered:Object.keys(counts),counts,environment:{
+      richness:Math.min(1,n/100),coral:Math.floor(n/7),seaweed:Math.floor(n/4),
+      rock:Math.floor(n/11),ambientSchools:Math.floor(n/14),lightRays:Math.min(9,2+Math.floor(n/25))
+    }};
+  }
+  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,speciesFor,familyFor,ecosystem};
   root.CinemapOceanModel=api;
   if (typeof module !== 'undefined') module.exports=api;
 })(typeof window === 'undefined' ? globalThis : window);

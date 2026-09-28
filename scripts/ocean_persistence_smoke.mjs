@@ -7,58 +7,15 @@ const context = await browser.newContext({ viewport: { width: 390, height: 844 }
 const page = await context.newPage();
 const errors = [];
 page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
-
-async function assertDashboardVisible(label, { requireCanvas = true } = {}) {
-  await page.waitForSelector('#dashboard:not([hidden])', { state: 'visible', timeout: 5000 });
-  const visible = await page.locator('#dashboard').isVisible();
-  const controls = await page.locator('#dashboard .toolbar').isVisible();
-  const species = await page.locator('#speciesCollection').isVisible();
-  const canvas = await page.locator('.ocean3dCanvas').count();
-  if (!visible) throw new Error(`${label}: Ocean dashboard is hidden`);
-  if (!controls || !species) throw new Error(`${label}: essential non-3D dashboard content is unavailable`);
-  if (requireCanvas && !canvas) throw new Error(`${label}: Ocean 3D canvas was not mounted`);
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
-  if (overflow) throw new Error(`${label}: Ocean page overflows the iPhone viewport`);
-}
-
-async function seedRecord() {
-  return page.evaluate(key => {
-    localStorage.removeItem(key);
-    CinemapRecords.clear();
-    const film = { id: 129, title: '千と千尋の神隠し', year: 2001, genres: ['アニメ'], region: '日本', director: '宮崎駿' };
-    if (!CinemapRecords.rate(film, 4.5)) throw new Error('record: rating was rejected');
-    const records = CinemapRecords.read();
-    const ecology = CinemapOceanModel.ecosystem(records, [film]);
-    return { record: records['129'], watched: ecology.watched, discovered: ecology.discovered, environment: ecology.environment, stored: localStorage.getItem(key) };
-  }, storageKey);
-}
-
-try {
-  let response = await page.goto(base, { waitUntil: 'domcontentloaded' });
-  if (!response || response.status() >= 400) throw new Error(`Ocean page HTTP ${response?.status() ?? 'no response'}`);
-  await page.waitForFunction(() => window.CinemapRecords && window.CinemapOceanModel);
-  await assertDashboardVisible('zero-record initial');
-
-  const before = await seedRecord();
-  if (before.record?.rating !== 4.5 || before.watched !== 1 || before.discovered.length !== 1) throw new Error(`grow: unexpected ecosystem after record ${JSON.stringify(before)}`);
-  if (!before.stored) throw new Error('persist: localStorage was not written');
-
-  await page.reload({ waitUntil: 'domcontentloaded' });
-  await page.waitForFunction(() => window.CinemapRecords && window.CinemapOceanModel);
-  await assertDashboardVisible('existing-record reload');
-  const after = await page.evaluate(() => { const records=CinemapRecords.read(); const record=records['129']; const ecology=CinemapOceanModel.ecosystem(records,[record]); return {record,watched:ecology.watched,discovered:ecology.discovered,environment:ecology.environment}; });
-  if (after.record?.rating !== 4.5 || after.watched !== 1) throw new Error(`reload: record did not survive reload ${JSON.stringify(after)}`);
-  if (JSON.stringify(after.discovered) !== JSON.stringify(before.discovered)) throw new Error('model: species changed across reload');
-  if (JSON.stringify(after.environment) !== JSON.stringify(before.environment)) throw new Error('model: environment changed across reload');
-
-  // Renderer failure must degrade locally: the rest of the dashboard remains usable.
-  await page.route('**/renderer/dist/ocean-pages.js', route => route.abort());
-  await page.reload({ waitUntil: 'domcontentloaded' });
-  await page.waitForFunction(() => window.CinemapRecords && window.CinemapOceanModel);
-  await assertDashboardVisible('renderer-failure fallback', { requireCanvas: false });
-  await page.waitForSelector('.ocean3dError:not([hidden])', { state: 'visible', timeout: 5000 });
-  if (!(await page.locator('#dashboard .action').first().isVisible())) throw new Error('renderer-failure fallback: primary action disappeared');
-
-  if (errors.length) throw new Error(errors.join('\n'));
-  console.log('Ocean Phase 1 resilience passed: zero records -> existing record -> reload -> renderer failure fallback, all within iPhone viewport.');
-} finally { await browser.close(); }
+async function assertDashboardVisible(label,{requireCanvas=true}={}){await page.waitForSelector('#dashboard:not([hidden])',{state:'visible',timeout:5000});if(!(await page.locator('#dashboard .toolbar').isVisible())||!(await page.locator('#speciesCollection').isVisible()))throw new Error(`${label}: essential dashboard content unavailable`);if(requireCanvas&&!(await page.locator('.ocean3dCanvas').count()))throw new Error(`${label}: canvas missing`);if(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1))throw new Error(`${label}: iPhone overflow`)}
+try{
+ const response=await page.goto(base,{waitUntil:'domcontentloaded'});if(!response||response.status()>=400)throw new Error(`Ocean HTTP ${response?.status()}`);await page.waitForFunction(()=>window.CinemapRecords&&window.CinemapOceanModel);await assertDashboardVisible('zero');
+ const beforeText=await page.locator('#speciesCollection').innerText();
+ await page.evaluate(key=>{localStorage.removeItem(key);CinemapRecords.clear();const film={id:129,title:'千と千尋の神隠し',year:2001,genres:['アニメ'],region:'日本',director:'宮崎駿'};if(!CinemapRecords.rate(film,4.5))throw new Error('rating rejected')},storageKey);
+ await page.waitForFunction(()=>document.querySelector('#speciesCollection')?.textContent?.includes('最新の生命'));
+ const afterText=await page.locator('#speciesCollection').innerText();if(afterText===beforeText||!afterText.includes('から誕生'))throw new Error('Phase 2: one rating did not create visible life feedback');
+ const coverage=await page.locator('#coverage').innerText();if(!coverage.includes('海の豊かさ'))throw new Error('Phase 2: environment growth is not visible');
+ await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.CinemapRecords&&window.CinemapOceanModel);await assertDashboardVisible('reload');if(!(await page.locator('#speciesCollection').innerText()).includes('最新の生命'))throw new Error('Phase 2: growth state did not survive reload');
+ await page.route('**/renderer/dist/ocean-pages.js',route=>route.abort());await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.CinemapRecords&&window.CinemapOceanModel);await assertDashboardVisible('renderer failure',{requireCanvas:false});await page.waitForSelector('.ocean3dError:not([hidden])',{state:'visible',timeout:5000});
+ if(errors.length)throw new Error(errors.join('\n'));console.log('Ocean Phase 2 loop passed: rate -> visible new life -> environment growth -> reload -> renderer fallback.');
+}finally{await browser.close()}

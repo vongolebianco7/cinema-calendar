@@ -7,7 +7,7 @@ on:
       - 'tests/ocean-schooling.test.cjs'
       - '.github/workflows/ocean-mature-renderer.yml'
 permissions:
-  contents: read
+  contents: write
 jobs:
   renderer:
     runs-on: ubuntu-latest
@@ -17,9 +17,23 @@ jobs:
         working-directory: preview/ocean/renderer
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: feat/ocean-mature-renderer
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Vendor local Draco decoder
+        run: |
+          mkdir -p assets/draco
+          for name in draco_decoder.js draco_decoder.wasm draco_wasm_wrapper.js; do curl -fsSL "https://raw.githubusercontent.com/amarnotcool/ABYSS/main/public/draco/${name}" -o "assets/draco/${name}"; done
+          cd ../../..
+          if [ -n "$(git status --porcelain -- preview/ocean/renderer/assets/draco)" ]; then
+            git config user.name github-actions[bot]
+            git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+            git add preview/ocean/renderer/assets/draco
+            git commit -m 'assets: vendor local Draco decoder'
+            git push origin HEAD:feat/ocean-mature-renderer
+          fi
       - run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build

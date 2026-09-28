@@ -1,1 +1,0 @@
-Ocean visual assets in this directory are vendored from WebGLSamples/WebGLSamples.github.io/aquarium under the 3-clause BSD license. They are stored locally so the Ocean experience performs no runtime request to the upstream project.

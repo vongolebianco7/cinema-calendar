@@ -1,0 +1,25 @@
+name: Ocean Preview Artifact
+on:
+  push:
+    branches: [feature/ocean-ecosystem-v2]
+  workflow_dispatch:
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Test Ocean model
+        run: node tests/ocean-model.test.cjs
+      - name: Build static preview
+        run: |
+          mkdir -p preview
+          cp ocean-demo.html preview/index.html
+          cp -r js preview/js
+          cp -r assets preview/assets
+          cp -r data preview/data 2>/dev/null || true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: preview

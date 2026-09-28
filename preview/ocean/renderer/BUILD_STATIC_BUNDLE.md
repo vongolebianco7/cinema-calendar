@@ -1,0 +1,1 @@
+Run `npm ci && npm run build -- --base=./`. The deterministic output `dist/ocean-pages.js` is the module loaded by GitHub Pages. The Ocean renderer CI retains `dist/` as `ocean-static-bundle` so the generated module can be committed without adding runtime package/CDN access.

@@ -36,8 +36,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install Playwright browser
-        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/cinemap-http.log 2>&1 &
       - name: Run mobile checks

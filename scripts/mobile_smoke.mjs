@@ -13,26 +13,30 @@ for (const path of candidates) {
   let res=await page.goto(`${base}/${path}`,{waitUntil:'domcontentloaded'});
   if (!res || res.status()>=400) {
     if (path==='index.html' || path.startsWith('preview/ocean/')) errors.push(`${path}: HTTP ${res?.status() ?? 'no response'}`);
-    continue; // other optional pages may not exist in every branch
+    continue;
   }
   if(path.startsWith('preview/ocean/')){
     const mature=Object.fromEntries(Array.from({length:100},(_,i)=>{const id=700000+i;return[String(id),{id,watched:true,rating:i%19===0?5:i%5===0?4.5:3.5,title:`Smoke film ${i+1}`,genres:[],year:1980+(i%45)}]}));
     await page.evaluate(records=>localStorage.setItem('cinemap-ocean-demo-records-v1',JSON.stringify(records)),mature);
     res=await page.reload({waitUntil:'domcontentloaded'});
   }
-  await page.waitForTimeout(path.startsWith('preview/ocean/')?1100:250);
+  await page.waitForTimeout(path.startsWith('preview/ocean/')?1400:250);
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   if (overflow>2) errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
-  if(path.startsWith('preview/ocean/')){
-    const ocean=await page.locator('.oceanWorld').count();
-    const reef=await page.locator('.oceanReefArt').count();
-    const fauna=await page.locator('.oceanAnimal').count();
-    // The ecosystem deliberately caps foreground individuals at 22 on iPhone;
-    // additional viewing history is expressed through reef growth, schools and ambience.
-    if(!ocean||!reef||fauna<18||fauna>22)errors.push(`${path}: mature ecosystem did not render as expected (world=${ocean}, reef=${reef}, fauna=${fauna})`);
-  }
   const safeName=path.split('?')[0].replace(/\.html$/,'').replaceAll('/','-');
   await page.screenshot({path:`artifacts/mobile-smoke/${safeName}.png`,fullPage:true});
+
+  if(path.startsWith('preview/ocean/')){
+    const scene=await page.locator('.oceanV5Scene').count();
+    const canvas=await page.locator('.oceanV5Canvas').count();
+    const version=await page.getByText('OCEAN v0.5.0',{exact:true}).count();
+    const fallback=await page.locator('.oceanV5Fallback').count();
+    if(!scene||!version||(!canvas&&!fallback))errors.push(`${path}: WebGL Ocean shell did not render (scene=${scene}, canvas=${canvas}, fallback=${fallback}, version=${version})`);
+    if(canvas){
+      const box=await page.locator('.oceanV5Viewport').boundingBox();
+      if(box){await page.mouse.move(box.x+box.width*.75,box.y+box.height*.55);await page.mouse.down();await page.mouse.move(box.x+box.width*.2,box.y+box.height*.45,{steps:12});await page.mouse.up();await page.waitForTimeout(500);await page.screenshot({path:'artifacts/mobile-smoke/preview-ocean-explored.png',fullPage:true});}
+    }
+  }
 }
 await browser.close();
 if(errors.length){ console.error(errors.join('\n')); process.exit(1); }

@@ -1,0 +1,11 @@
+{
+  "policy": "All runtime assets are vendored locally. No model is fetched from a third party at runtime.",
+  "assets": [
+    {"files":["creatures/fish.glb","creatures/clownfish.glb","creatures/butterflyfish.glb","creatures/swordfish.glb"],"creator":"Quaternius","license":"CC0-1.0","source":"https://github.com/Tanvik01/ocean"},
+    {"files":["creatures/whale.glb","creatures/manta.glb","creatures/shark.glb","creatures/angler.glb"],"creator":"Quaternius","license":"CC0-1.0","source":"https://github.com/amarnotcool/ABYSS","upstream":"Poly Pizza"},
+    {"files":["habitat/coral.glb"],"creator":"MiniPoly","license":"CC0-1.0","source":"https://github.com/amarnotcool/ABYSS","upstream":"Poly Pizza"},
+    {"files":["habitat/rocks.glb"],"creator":"Quaternius","license":"CC0-1.0","source":"https://github.com/amarnotcool/ABYSS","upstream":"Poly Pizza"},
+    {"files":["habitat/shipwreck.glb"],"creator":"Kenney","license":"CC0-1.0","source":"https://github.com/amarnotcool/ABYSS","upstream":"Poly Pizza"},
+    {"files":["draco/draco_decoder.js","draco/draco_decoder.wasm","draco/draco_wasm_wrapper.js"],"creator":"Google","license":"Apache-2.0","source":"Three.js Draco distribution via ABYSS"}
+  ]
+}

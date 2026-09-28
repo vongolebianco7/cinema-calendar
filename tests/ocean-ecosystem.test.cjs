@@ -32,6 +32,17 @@ if (!fs.existsSync(modulePath)) {
     assert.ok(rated.habitat.reef>watchedOnly.habitat.reef);
     assert.ok(rated.habitat.vegetation>watchedOnly.habitat.vegetation);
   });
+  test('growth milestones make each viewing step visibly explainable', () => {
+    const empty=ocean.build([],{});
+    const one=fixture(1); const first=ocean.build(one.catalog,one.records);
+    const twelve=fixture(12); const growing=ocean.build(twelve.catalog,twelve.records);
+    assert.equal(empty.milestone.stage,0);
+    assert.match(empty.milestone.label,/静かな海/);
+    assert.ok(first.milestone.stage>=1,'the first watched film should visibly wake the Ocean');
+    assert.ok(first.milestone.nextAt>first.stats.watched,'next growth target should be actionable');
+    assert.ok(growing.milestone.stage>first.milestone.stage,'continued viewing should unlock a visibly richer stage');
+    assert.ok(growing.milestone.label.length>0);
+  });
   test('organism layout is deterministic and visually varied', () => {
     const {catalog,records}=fixture(30),first=ocean.build(catalog,records),second=ocean.build(catalog,records);
     assert.deepEqual(first,second);assert.ok(new Set(first.organisms.map(o=>o.scale.toFixed(2))).size>=8);assert.ok(new Set(first.organisms.map(o=>o.depthBand)).size>=3);

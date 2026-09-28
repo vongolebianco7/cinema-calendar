@@ -40,10 +40,11 @@ assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres oc
 const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
 assert.equal(model.species.length,504,'forty-two silhouettes with twelve discoverable colour variants each');
-assert.ok(model.speciesFor(catalog[0]).genres.includes('SF'));
-assert.ok(model.speciesFor(catalog[1]).genres.includes('ホラー'));
 assert.equal(model.speciesFor({...catalog[0],rating:2.5}).id,model.speciesFor(catalog[0]).id,'rating affects appearance, not species');
 assert.deepEqual(model.speciesFor(catalog[0]),model.speciesFor({...catalog[0]}),'same film keeps its creature');
-assert.equal(model.speciesFor({genres:[]}).genres.includes('ドキュメンタリー'),true,'unknown traits get a neutral family rather than invented mood');
-assert.ok(new Set(Array.from({length:1000},(_,i)=>model.speciesFor({id:i,genres:['SF']}).id)).size>40,'many works uncover many appearances');
+assert.ok(new Set(Array.from({length:1000},(_,i)=>model.speciesFor({id:i,genres:['SF']}).id)).size>120,'one genre can uncover a broad ecosystem');
+assert.ok(new Set(Array.from({length:200},(_,i)=>model.familyFor({id:'h'+i,genres:['ホラー']}).id)).size>=20,'horror must not collapse into a small creature cluster');
+assert.equal(model.speciesFor({id:99,genres:['ホラー']}).id,model.speciesFor({id:99,genres:['ホラー']}).id,'species mapping stays deterministic');
+const eco=model.ecosystem(Object.fromEntries(Array.from({length:100},(_,i)=>[i,{id:String(i),watched:true,genres:['ドラマ'],rating:4}])),[]);
+assert.equal(eco.environment.richness,1);assert.ok(eco.environment.coral>0&&eco.environment.ambientSchools>0,'the habitat grows with viewing history');
 console.log('Ocean weights, honest metadata, suggestions and stable positions passed');

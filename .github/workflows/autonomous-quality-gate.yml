@@ -2,6 +2,8 @@ name: Autonomous quality gate
 
 on:
   pull_request:
+    paths-ignore:
+      - 'preview/ocean/renderer/dist/**'
   workflow_dispatch:
 
 permissions:

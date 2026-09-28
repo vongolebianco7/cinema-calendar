@@ -9,5 +9,7 @@ assert 'oceanReefArt' in immersive, 'renderer must render the authored/generated
 assert 'growth-reef-mobile.webp' in css and 'growth-reef.webp' in css, 'reef art must support mobile and desktop'
 assert '--w:' in immersive and 'var(--w)' in css, 'organism size must come from per-organism scene traits'
 assert 'Math.min(6' not in immersive, 'renderer should consume bounded school count from the scene model'
+assert 'o.atlas===0?3:4' in immersive, 'the 3x2 fish atlas and 4x3 creature atlases need different cell grids'
+assert 'background-size:300% 200%' in css, 'fish atlas must use its native 3x2 grid to avoid clipped creatures'
 assert 'https://' not in css, 'living Ocean CSS must not introduce external asset requests'
 print('Living Ocean renderer contract passed')

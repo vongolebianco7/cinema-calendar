@@ -20,21 +20,21 @@ for (const path of candidates) {
     await page.evaluate(records=>localStorage.setItem('cinemap-ocean-demo-records-v1',JSON.stringify(records)),mature);
     res=await page.reload({waitUntil:'domcontentloaded'});
   }
-  await page.waitForTimeout(path.startsWith('preview/ocean/')?1400:250);
+  await page.waitForTimeout(path.startsWith('preview/ocean/')?1600:250);
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   if (overflow>2) errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
   const safeName=path.split('?')[0].replace(/\.html$/,'').replaceAll('/','-');
   await page.screenshot({path:`artifacts/mobile-smoke/${safeName}.png`,fullPage:true});
 
   if(path.startsWith('preview/ocean/')){
-    const scene=await page.locator('.oceanV5Scene').count();
-    const canvas=await page.locator('.oceanV5Canvas').count();
-    const version=await page.getByText('OCEAN v0.5.0',{exact:true}).count();
-    const fallback=await page.locator('.oceanV5Fallback').count();
-    if(!scene||!version||(!canvas&&!fallback))errors.push(`${path}: WebGL Ocean shell did not render (scene=${scene}, canvas=${canvas}, fallback=${fallback}, version=${version})`);
+    const scene=await page.locator('.oceanV6Scene').count();
+    const canvas=await page.locator('.oceanCinematicCanvas').count();
+    const version=await page.getByText('OCEAN v0.6.0',{exact:true}).count();
+    const fallback=await page.locator('.oceanCinematicFallback').count();
+    if(!scene||!version||(!canvas&&!fallback))errors.push(`${path}: cinematic Ocean shell did not render (scene=${scene}, canvas=${canvas}, fallback=${fallback}, version=${version})`);
     if(canvas){
-      const box=await page.locator('.oceanV5Viewport').boundingBox();
-      if(box){await page.mouse.move(box.x+box.width*.75,box.y+box.height*.55);await page.mouse.down();await page.mouse.move(box.x+box.width*.2,box.y+box.height*.45,{steps:12});await page.mouse.up();await page.waitForTimeout(500);await page.screenshot({path:'artifacts/mobile-smoke/preview-ocean-explored.png',fullPage:true});}
+      const box=await page.locator('.oceanCinematicViewport').boundingBox();
+      if(box){await page.mouse.move(box.x+box.width*.78,box.y+box.height*.55);await page.mouse.down();await page.mouse.move(box.x+box.width*.18,box.y+box.height*.43,{steps:12});await page.mouse.up();await page.waitForTimeout(550);await page.screenshot({path:'artifacts/mobile-smoke/preview-ocean-explored.png',fullPage:true});}
     }
   }
 }

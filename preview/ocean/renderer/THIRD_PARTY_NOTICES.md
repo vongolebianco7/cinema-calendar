@@ -14,4 +14,11 @@
 - Usage: architecture/reference source for underwater rendering techniques including depth fog, light absorption/scattering, caustic treatment, volumetric shafts, draw-call-aware schooling and adaptive quality.
 - Integration rule: tracker/analytics code and unrelated application code are not copied. Cinemap keeps its own ecology model and product UI.
 
-Any later creature or habitat asset must be added to `assets/licenses.json` before it can ship.
+## Ocean 3D assets
+
+- Quaternius: fish, clownfish, butterflyfish, swordfish, whale, manta ray, shark, anglerfish and rocks — CC0 1.0.
+- MiniPoly: coral reef set — CC0 1.0.
+- Kenney: shipwreck — CC0 1.0.
+- Draco decoder: Google — Apache-2.0.
+- Provenance and per-file mapping are recorded in `assets/licenses.json`.
+- All models and decoders are vendored into the repository; there are no runtime model/CDN requests.

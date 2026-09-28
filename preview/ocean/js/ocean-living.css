@@ -6,12 +6,14 @@
 .oceanVegetation i{position:absolute;bottom:-5%;width:9px;height:calc(20% + var(--h)*58%);border-radius:80% 20% 0 0;transform-origin:50% 100%;background:linear-gradient(90deg,#0b3829,#2c7452 52%,#123f31);filter:blur(.2px);animation:oceanFrond 7s ease-in-out infinite alternate}
 .oceanVegetation i:nth-child(1){left:7%;--h:.8}.oceanVegetation i:nth-child(2){left:14%;--h:.48;animation-delay:-3s}.oceanVegetation i:nth-child(3){left:31%;--h:.7;animation-delay:-5s}.oceanVegetation i:nth-child(4){left:59%;--h:.55;animation-delay:-2s}.oceanVegetation i:nth-child(5){left:78%;--h:.86;animation-delay:-4s}.oceanVegetation i:nth-child(6){left:91%;--h:.62;animation-delay:-6s}
 .oceanFauna{z-index:4}
-.oceanAnimal{width:var(--w);min-width:18px;max-width:260px;opacity:calc(.3 + var(--z)*.62);animation-duration:var(--speed);animation-delay:var(--delay);transform:translate(-50%,-50%) scaleX(var(--dir));transform-origin:center;will-change:margin,transform}
+.oceanAnimal{mix-blend-mode:normal;width:var(--w);min-width:18px;max-width:260px;opacity:calc(.3 + var(--z)*.62);animation-duration:var(--speed);animation-delay:var(--delay);transform:translate(-50%,-50%) scaleX(var(--dir));transform-origin:center;will-change:margin,transform;overflow:hidden;border-radius:46%;isolation:isolate}
+.oceanAnimal::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(155deg,#a9f1ee66 0%,#3b9eaa20 35%,#002c3d38 72%,#00121e70 100%);mix-blend-mode:soft-light;opacity:.55;box-shadow:inset 0 0 18px #69cad91c}
 .oceanAnimal[style*="--atlas:0"]{background-size:300% 200%;background-position:calc(var(--col)*50%) calc(var(--row)*100%)}
 .oceanAnimal.oceanMegafauna{z-index:2;filter:drop-shadow(0 18px 24px #001018bb) saturate(.88) contrast(1.03);opacity:calc(.54 + var(--z)*.38)}
 .oceanAnimal.oceanTiny{filter:drop-shadow(0 3px 5px #00101888) saturate(.82);opacity:calc(.42 + var(--z)*.45)}
 .oceanAnimal.oceanHero{filter:drop-shadow(0 13px 22px #001018cc) saturate(1.16) brightness(1.07)}
 .oceanAnimal.oceanDepthFar{filter:drop-shadow(0 5px 8px #00101855) saturate(.55) blur(.65px);opacity:.27}.oceanAnimal.oceanDepthMid{opacity:.66}.oceanAnimal.oceanDepthNear{filter:drop-shadow(0 14px 18px #001018aa) saturate(1.08);opacity:.94}
+.oceanAnimal.oceanDepthFar::after{background:linear-gradient(165deg,#8cdbe56b,#1b718059 48%,#00202f9c);opacity:.88}.oceanAnimal.oceanDepthMid::after{opacity:.62}.oceanAnimal.oceanDepthNear::after{background:linear-gradient(145deg,#b8f4ed52 0%,#3fa2aa12 42%,#001c2b55 100%);opacity:.42}
 .oceanAnimal.oceanMegafauna.oceanDepthFar{filter:drop-shadow(0 8px 13px #00101877) saturate(.5) blur(.8px);opacity:.32}
 .oceanMotion-swim{animation-name:oceanSwim}.oceanMotion-cruise{animation-name:oceanCruise}.oceanMotion-hover{animation-name:oceanHover}.oceanMotion-drift{animation-name:oceanDrift}.oceanMotion-grounded{animation-name:oceanGrounded}
 .oceanSchoolLayer{z-index:3;opacity:calc(.05 + var(--life)*.58)}

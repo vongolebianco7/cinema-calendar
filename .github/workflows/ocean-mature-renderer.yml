@@ -1,0 +1,37 @@
+name: Ocean mature renderer
+on:
+  pull_request:
+    paths:
+      - 'preview/ocean/renderer/**'
+      - 'tests/ocean-renderer-*.test.cjs'
+      - 'tests/ocean-schooling.test.cjs'
+      - '.github/workflows/ocean-mature-renderer.yml'
+permissions:
+  contents: read
+jobs:
+  renderer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    defaults:
+      run:
+        working-directory: preview/ocean/renderer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --package-lock-only
+      - run: npm ci
+      - run: npm run build
+      - run: npm install --no-save --no-package-lock playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Capture iPhone renderer
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4174 >/tmp/ocean-renderer.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4174 >/dev/null && break; sleep 1; done
+          node capture.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ocean-mature-renderer-iphone
+          path: preview/ocean/renderer/ocean-mature-iphone.png
+          retention-days: 7

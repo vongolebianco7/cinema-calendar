@@ -79,6 +79,7 @@
     const previous=store.read(),knownSpecies=new Set(Object.values(previous).filter(r=>r?.watched).map(r=>window.CinemapOceanModel.speciesFor(films.find(m=>String(m.id)===String(r.id))||r).familyId));
     const first=!previous[id]?.watched&&Number(e.target.value)>0;
     recentId=first?id:null;
+    if(first){try{sessionStorage.setItem('cinemap-ocean-arrival',JSON.stringify({id,novel:!knownSpecies.has(window.CinemapOceanModel.speciesFor(film).familyId)}));}catch{/* Optional session state. */}}
     store.rate(film,Number(e.target.value));
     if(first){
       const species=window.CinemapOceanModel.speciesFor(film);

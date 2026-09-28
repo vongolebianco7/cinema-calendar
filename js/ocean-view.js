@@ -95,16 +95,24 @@
     try { sessionStorage.setItem('cinemap-ocean-camera',JSON.stringify(camera)); } catch { /* Storage is optional. */ }
   }
   function render(nextCatalog,nextRecords,newFilmId){
-    newbornId=newFilmId==null?null:String(newFilmId);
+    let arrival=null;
+    try {arrival=JSON.parse(sessionStorage.getItem('cinemap-ocean-arrival')||'null');}catch{/* Optional session state. */}
+    newbornId=newFilmId==null?arrival?.id||null:String(newFilmId);
     if(nextRecords)records=nextRecords;
     if(nextCatalog){const ids=new Set(nextCatalog.map(f=>String(f.id)));catalog=[...nextCatalog,...Object.values(records).filter(r=>r?.watched&&!ids.has(String(r.id)))];}
     const host=document.getElementById('universe');if(!host)return;
+    const newborn=catalog.find(f=>String(f.id)===String(newbornId));
+    if(newborn&&records[String(newborn.id)]?.watched){const p=model.filmPosition(newborn);camera.zoom=3.8;camera.focusX=p.x;camera.focusY=p.y;selected={kind:'film',id:String(newborn.id)};}
     const level=tier(),n=known().length;
     const nodes=level==='far'?genreNodes():level==='middle'?midNodes():nearNodes();
     const options=visibleGenres().map(g=>'<option value="'+esc(g)+'">'+esc(g)+'</option>').join('');
     const names=[...new Set([...catalog.filter(f=>f.director).map(f=>f.director),...catalog.map(f=>f.title)])];
     const growth=model.habitatGrowth(n);
     host.innerHTML='<section class="cosmosScene"><div class="cosmosHeader"><span class="universeEyebrow">YOUR FILM OCEAN · '+(n>=20?'成長中':n>=10?'育ちはじめた海':'静かな海')+'</span><h2>あなたの映画の海</h2><p>作品が生き物になり、海そのものが育つ。海域から群れ、個体へ近づけます。</p></div><div class="cosmosControls"><button type="button" data-cosmos-home>全体を見る</button><label>海域へ移動 <select data-cosmos-jump><option value="">ジャンルを選ぶ</option>'+options+'</select></label><label>公開年代 <select data-cosmos-decade><option value="">すべて</option>'+Array.from({length:12},(_,i)=>1910+i*10).map(y=>'<option value="'+y+'"'+(decade===String(y)?' selected':'')+'>'+y+'年代</option>').join('')+'</select></label><form class="cosmosSearch" data-cosmos-search><label for="cosmosQuery">監督・作品を探す</label><input id="cosmosQuery" list="cosmosSuggestions" placeholder="作品名・監督名"><datalist id="cosmosSuggestions">'+names.slice(0,400).map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist><button>移動</button></form></div><div class="cosmosViewport" style="--reef:'+growth.reef+';--quiet:'+(1-growth.reef)*.64+'" role="group" aria-label="映画の海。ドラッグで視点を動かし、ピンチで拡大縮小"><div class="oceanReef" aria-hidden="true"></div><div class="cosmosWorld">'+nodes+'</div><div class="cosmosLevel">'+(level==='far'?'全景 · 海域':level==='middle'?'中景 · 群れ':'近景 · 魚')+'</div></div><div class="cosmosFoot"><span>1本指で移動 · ピンチで拡大縮小 · 生き物をタップして接近</span><span>'+n+'作品を記録</span></div>'+detail()+'</section>';
+    if(newborn&&records[String(newborn.id)]?.watched){const p=model.filmPosition(newborn),rect=host.querySelector('.cosmosViewport').getBoundingClientRect();camera.panX=(.5-p.x/100)*rect.width*camera.zoom;camera.panY=(.5-p.y/100)*rect.height*camera.zoom;
+      const type=model.speciesFor(newborn),banner=document.createElement('div');banner.className='oceanArrival';banner.setAttribute('role','status');banner.innerHTML='<span>'+(arrival?.novel?'NEW SPECIES · 新種発見':'NEW LIFE · 群れに仲間が増えました')+'</span><strong>'+esc(type.name)+'</strong><small>'+esc(newborn.title||'作品')+' から生まれた個体</small><button type="button" data-ocean-arrival-close aria-label="発見表示を閉じる">×</button>';host.querySelector('.cosmosViewport').append(banner);
+      try{sessionStorage.removeItem('cinemap-ocean-arrival');}catch{/* Optional session state. */}
+    }
     applyCamera();
     bindGestures(host.querySelector('.cosmosViewport'));
   }
@@ -148,6 +156,7 @@
   document.addEventListener('click',e=>{if(e.target.closest('.cosmosViewport')&&Date.now()-draggedAt<120){e.preventDefault();e.stopPropagation();}},true);
   document.addEventListener('click',e=>{
     if(!e.target.closest('#universe'))return;
+    if(e.target.closest('[data-ocean-arrival-close]')){e.target.closest('.oceanArrival')?.remove();return;}
     const genre=e.target.closest('[data-cosmos-genre]');if(genre){const g=genre.dataset.cosmosGenre,p=model.centerForGenre(g);fly({x:p[0],y:p[1]},2.2,{kind:'genre',name:g});return;}
     const director=e.target.closest('[data-cosmos-director]');if(director){const name=director.dataset.cosmosDirector;fly(model.directorPosition(name,catalog),3.8,{kind:'director',name});return;}
     let film=e.target.closest('[data-cosmos-film]');

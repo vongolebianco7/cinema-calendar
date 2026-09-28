@@ -45,6 +45,21 @@ if (!fs.existsSync(modulePath)) {
     assert.ok(new Set(first.organisms.map(o=>o.depthBand)).size >= 3);
   });
 
+  test('benthic and drifting species occupy plausible ecological niches', () => {
+    const catalog=[
+      {id:901,title:'Benthic',ecologyType:'seastar-0',genres:['ドラマ']},
+      {id:902,title:'Drifter',ecologyType:'jelly-0',genres:['ドラマ']}
+    ];
+    const records={'901':{id:901,watched:true,rating:4},'902':{id:902,watched:true,rating:4}};
+    const scene=ocean.build(catalog,records);
+    const benthic=scene.organisms.find(o=>o.film.id===901);
+    const drifter=scene.organisms.find(o=>o.film.id===902);
+    assert.equal(benthic.niche,'benthic');
+    assert.ok(benthic.y>=70,'benthic life should stay near the reef floor');
+    assert.equal(drifter.niche,'drifter');
+    assert.ok(drifter.y<=68,'drifters should remain in the water column');
+  });
+
   test('a 5.0 film is more prominent than the same ordinary film', () => {
     const {catalog,records}=fixture(12,3.5);
     const ordinary=ocean.build(catalog,records).organisms.find(o=>o.film.id===1);

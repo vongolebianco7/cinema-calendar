@@ -167,3 +167,10 @@ body.oceanExperience #universe{width:100vw;height:100svh;margin:0}
 @keyframes surfaceShimmer{from{transform:translateX(-1%) scaleX(.98);opacity:.56}to{transform:translateX(1.5%) scaleX(1.03);opacity:.8}}
 @keyframes foregroundBreathe{from{transform:skewX(-.7deg) scale(1.01)}to{transform:skewX(.9deg) scale(1.025)}}
 @media(max-width:700px){.oceanBackdrop{background-position:52% 45%}.oceanForeground{height:32%}.oceanSurface{height:27%}}
+
+/* Habitat maturation: growth changes the world, not just the creature count. */
+.oceanHabitat{position:absolute;z-index:2;inset:0;pointer-events:none;overflow:hidden}.oceanHabitat b{position:absolute;bottom:-5%;width:28%;height:26%;opacity:0;transform-origin:50% 100%;background:radial-gradient(ellipse at 50% 100%,#0c5b5a55 0 20%,transparent 21%),repeating-radial-gradient(ellipse at 50% 100%,#ff984522 0 2%,#8b55c922 3% 4%,transparent 5% 11%);filter:saturate(1.3);animation:habitatSway 12s ease-in-out infinite alternate}.oceanHabitat b:nth-child(1){left:-5%}.oceanHabitat b:nth-child(2){left:20%;height:19%;animation-delay:-4s}.oceanHabitat b:nth-child(3){right:18%;height:22%;animation-delay:-7s}.oceanHabitat b:nth-child(4){right:-7%;height:31%;animation-delay:-2s}
+.oceanTier1 .oceanHabitat b:nth-child(1){opacity:.28}.oceanTier2 .oceanHabitat b:nth-child(-n+2){opacity:.38}.oceanTier3 .oceanHabitat b:nth-child(-n+3){opacity:.5}.oceanTier4 .oceanHabitat b{opacity:.62}.oceanTier5 .oceanHabitat b{opacity:.76;height:34%}
+.oceanTier0 .oceanSchoolLayer{opacity:.12}.oceanTier1 .oceanSchoolLayer{opacity:.28}.oceanTier2 .oceanSchoolLayer{opacity:.4}.oceanTier3 .oceanSchoolLayer{opacity:.55}.oceanTier4 .oceanSchoolLayer{opacity:.72}.oceanTier5 .oceanSchoolLayer{opacity:.88}
+.oceanTier0 .oceanDistantLife{opacity:.04}.oceanTier1 .oceanDistantLife{opacity:.12}.oceanTier2 .oceanDistantLife{opacity:.2}.oceanTier3 .oceanDistantLife{opacity:.3}.oceanTier4 .oceanDistantLife{opacity:.4}.oceanTier5 .oceanDistantLife{opacity:.52}
+@keyframes habitatSway{from{transform:skewX(-1.5deg) scaleY(.98)}to{transform:skewX(2deg) scaleY(1.025)}}

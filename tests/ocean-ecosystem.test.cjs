@@ -19,6 +19,19 @@ if (!fs.existsSync(modulePath)) {
     const levels=[0,10,30,100].map(count=>{const {catalog,records}=fixture(count);return ocean.build(catalog,records).habitat;});
     for(let i=1;i<levels.length;i++){assert.ok(levels[i].reef>levels[i-1].reef);assert.ok(levels[i].vegetation>levels[i-1].vegetation);assert.ok(levels[i].schools>=levels[i-1].schools);}
   });
+  test('rating watched films deepens the same personal ecosystem', () => {
+    const {catalog,records}=fixture(24);
+    Object.values(records).forEach(record=>{delete record.rating;});
+    const watchedOnly=ocean.build(catalog,records);
+    Object.values(records).forEach(record=>{record.rating=3.5;});
+    const rated=ocean.build(catalog,records);
+    assert.equal(watchedOnly.stats.watched,rated.stats.watched);
+    assert.equal(watchedOnly.stats.rated,0);
+    assert.equal(rated.stats.rated,24);
+    assert.ok(rated.maturity>watchedOnly.maturity);
+    assert.ok(rated.habitat.reef>watchedOnly.habitat.reef);
+    assert.ok(rated.habitat.vegetation>watchedOnly.habitat.vegetation);
+  });
   test('organism layout is deterministic and visually varied', () => {
     const {catalog,records}=fixture(30),first=ocean.build(catalog,records),second=ocean.build(catalog,records);
     assert.deepEqual(first,second);assert.ok(new Set(first.organisms.map(o=>o.scale.toFixed(2))).size>=8);assert.ok(new Set(first.organisms.map(o=>o.depthBand)).size>=3);
@@ -51,5 +64,5 @@ if (!fs.existsSync(modulePath)) {
     const {catalog,records}=fixture(12,3.5),ordinary=ocean.build(catalog,records).organisms.find(o=>o.film.id===1);records['1'].rating=5;const best=ocean.build(catalog,records).organisms.find(o=>o.film.id===1);assert.ok(best.scale>ordinary.scale);assert.equal(best.hero,true);
   });
   test('large histories cap focal organisms for mobile performance', () => {const {catalog,records}=fixture(180);const scene=ocean.build(catalog,records);assert.ok(scene.organisms.length<=22);assert.equal(scene.stats.watched,180);});
-  test('empty records return a valid quiet ecosystem', () => {const scene=ocean.build([],{});assert.equal(scene.stats.watched,0);assert.equal(scene.organisms.length,0);assert.equal(scene.habitat.reef,0);assert.equal(scene.habitat.vegetation,0);});
+  test('empty records return a valid quiet ecosystem', () => {const scene=ocean.build([],{});assert.equal(scene.stats.watched,0);assert.equal(scene.stats.rated,0);assert.equal(scene.organisms.length,0);assert.equal(scene.habitat.reef,0);assert.equal(scene.habitat.vegetation,0);});
 }

@@ -20,7 +20,8 @@ jobs:
       - name: Build isolated preview
         run: |
           mkdir -p /tmp/ocean-preview
-          cp ocean-demo.html /tmp/ocean-preview/index.html\n          cp ocean-demo.html /tmp/ocean-preview/ocean-demo.html
+          cp ocean-demo.html /tmp/ocean-preview/index.html
+          cp ocean-demo.html /tmp/ocean-preview/ocean-demo.html
           cp -r js /tmp/ocean-preview/js
           cp -r assets /tmp/ocean-preview/assets
           cp -r data /tmp/ocean-preview/data 2>/dev/null || true

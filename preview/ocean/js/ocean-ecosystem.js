@@ -8,6 +8,7 @@ function oceanModel(){if(root.CinemapOceanModel)return root.CinemapOceanModel;if
 function watchedFilms(catalog,records){const byId=new Map((catalog||[]).map(f=>[String(f.id),f]));return Object.values(records||{}).filter(r=>r?.watched).map(r=>({film:byId.get(String(r.id))||r,record:r}));}
 function validRating(value){const rating=Number(value);return Number.isFinite(rating)&&rating>=.1&&rating<=5?rating:null;}
 function ratingProminence(rating){const r=validRating(rating);if(r===5)return 1.38;if(r>=4.5)return 1.22;if(r>=4)return 1.1;if(r!==null&&r<3)return .9;return 1;}
+function ratingGrowth(rating){const r=validRating(rating);if(r===null)return 0;if(r===5)return 1.35;if(r>=4.5)return 1.05;if(r>=4)return .82;if(r>=3.5)return .58;if(r>=3)return .42;return .28;}
 const benthic=new Set(['octopus','cuttlefish','blueoctopus','lobster','nudibranch','horseshoe','mantisshrimp','isopod','urchin','seastar']);
 const reefLife=new Set(['seahorse','seadragon','clownfish','moray','puffer','angelfish','lionfish','nautilus']);
 const drifters=new Set(['jelly','combjelly']);
@@ -33,11 +34,12 @@ function build(catalog,records){
   const model=oceanModel(),seen=watchedFilms(catalog,records),species=seen.map(({film})=>model.speciesFor(film));
   const families=new Set(species.map(familyOf)),types=new Set(species.map(s=>s.id));
   const ratings=seen.map(({record})=>validRating(record.rating)).filter(v=>v!==null),rated=ratings.length;
-  const loved=ratings.filter(v=>v>=4).length,exceptional=ratings.filter(v=>v===5).length,n=seen.length,diversity=n?types.size/n:0;
-  const growthPoints=n+rated*.45+families.size*1.6+types.size*.3+loved*.2+exceptional*.8,maturity=clamp(growthPoints/130);
-  const habitat={reef:clamp((n+rated*.22)/105),vegetation:clamp((n+rated*.3)/92),schools:Math.min(7,Math.floor((n+rated*.25)/11)),distantLife:clamp((n+rated*.2-6)/84),light:clamp(.18+(n+rated*.15)/155),richness:maturity};
+  const loved=ratings.filter(v=>v>=4).length,exceptional=ratings.filter(v=>v===5).length,n=seen.length,diversity=n?types.size/n:0,ratingEnergy=ratings.reduce((sum,r)=>sum+ratingGrowth(r),0);
+  const growthPoints=n+ratingEnergy+families.size*1.6+types.size*.3,growthSignal=n+ratingEnergy;
+  const maturity=clamp(growthPoints/130);
+  const habitat={reef:clamp(growthSignal/105),vegetation:clamp(growthSignal/92),schools:Math.min(7,Math.floor(growthSignal/11)),distantLife:clamp((growthSignal-6)/84),light:clamp(.18+growthSignal/155),richness:maturity};
   const all=seen.map(({film,record},i)=>{const sp=species[i],family=familyOf(sp),niche=nicheFor(sp),motion=motionFor(niche,family),key=String(film.id??film.title??i),z=.12+unit('depth:'+key)*.88,individuality=.84+unit('scale:'+key)*.32,prominence=ratingProminence(record.rating),visualScale=(sizeByFamily[family]||.8)*individuality*prominence;return{film,species:sp,family,niche,motion,atlas:sp.atlas||0,index:sp.index||0,x:10+unit('x:'+key)*80,y:yFor(niche,key,family),z,depthBand:z<.38?'far':z<.72?'mid':'near',scale:individuality*prominence,visualScale,speed:motion==='cruise'?18+unit('speed:'+key)*14:motion==='drift'?13+unit('speed:'+key)*10:9+unit('speed:'+key)*10,drift:motion==='grounded'?3+unit('drift:'+key)*5:motion==='hover'?5+unit('drift:'+key)*9:motion==='cruise'?34+unit('drift:'+key)*46:16+unit('drift:'+key)*28,direction:unit('direction:'+key)>.5?1:-1,hero:validRating(record.rating)===5,rating:validRating(record.rating),order:hash32('population:'+key)};});
-  return{maturity,habitat,milestone:milestoneFor(n),organisms:compose(all),stats:{watched:n,rated,types:types.size,families:families.size,loved,exceptional,diversity}};
+  return{maturity,habitat,milestone:milestoneFor(n),organisms:compose(all),stats:{watched:n,rated,types:types.size,families:families.size,loved,exceptional,diversity,ratingEnergy}};
 }
-const api={build,ratingProminence,nicheFor,milestoneFor};root.CinemapOceanEcosystem=api;if(typeof module!=='undefined')module.exports=api;
+const api={build,ratingProminence,ratingGrowth,nicheFor,milestoneFor};root.CinemapOceanEcosystem=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window==='undefined'?globalThis:window);

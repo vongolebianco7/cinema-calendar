@@ -1,35 +1,21 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-
 const ROOT = path.join(__dirname, '..');
 const immersive = fs.readFileSync(path.join(ROOT, 'preview/ocean/js/ocean-immersive.js'), 'utf8');
-
-assert.ok(immersive.includes("VERSION='0.6.1'"), 'visible/runtime version is v0.6.1');
-assert.ok(immersive.includes("CACHE='7'"), 'v0.6.1 renderer uses a fresh cache key');
-assert.ok(immersive.includes('ocean-cinematic.js'), 'v0.6.1 loads the cinematic renderer');
-assert.ok(immersive.includes('CinemapOceanCinematic'), 'immersive view mounts the cinematic renderer');
-assert.ok(!immersive.includes('ocean-webgl.js'), 'failed low-poly WebGL renderer is no longer loaded');
-assert.ok(!immersive.includes('ocean-geometry.js'), 'low-poly geometry is not part of the primary experience');
-
-const rendererPath = path.join(ROOT, 'preview/ocean/js/ocean-cinematic.js');
-assert.ok(fs.existsSync(rendererPath), 'cinematic renderer exists');
-const renderer = fs.readFileSync(rendererPath, 'utf8');
-for (const token of ['water','distantReef','seabed','rock','coral','kelp','creature','schools','particulate','foreground']) {
-  assert.ok(renderer.includes(`function ${token}`), `renderer includes ${token}`);
-}
-for (const token of ['whale','ray','turtle','jelly','fishBody']) {
-  assert.ok(renderer.includes(`function ${token}`), `renderer includes distinct ${token} treatment`);
-}
-assert.ok(renderer.includes('createLinearGradient'), 'water and animals use continuous shading rather than flat primitives');
-assert.ok(renderer.includes('createRadialGradient'), 'atmosphere and organisms use radial shading');
-assert.ok(renderer.includes('bezierCurveTo'), 'organic silhouettes use curved paths rather than triangle-only geometry');
-assert.ok(renderer.includes('globalCompositeOperation'), 'light and translucent life use compositing');
-assert.ok(renderer.includes('requestAnimationFrame'), 'ecosystem remains alive in real time');
-assert.ok(renderer.includes('pointermove'), 'one-finger exploration remains supported');
-assert.ok(renderer.includes('camera.min'), 'wide overview and zoom bounds remain explicit');
-assert.ok(renderer.includes('touch-action:none'), 'mobile gestures stay inside the Ocean viewport');
-assert.ok(!renderer.includes('cosmosHalo'), 'no attached halo/bubble treatment');
-assert.ok(!renderer.includes('fish-atlas'), 'failed sprite-atlas treatment is not used');
-assert.ok(!renderer.includes("getContext('webgl2'"), 'v0.6.1 does not reuse the rejected low-poly WebGL path');
-console.log('ocean cinematic v0.6.1 contract tests passed');
+const renderer = fs.readFileSync(path.join(ROOT, 'preview/ocean/js/ocean-3d.js'), 'utf8');
+const geometry = JSON.parse(fs.readFileSync(path.join(ROOT, 'preview/ocean/assets/bsd/SmallFishA.json'), 'utf8'));
+assert.ok(immersive.includes("VERSION='0.7.0'"), 'visible/runtime version is v0.7.0');
+assert.ok(immersive.includes("CACHE='8'"), 'v0.7 renderer uses a fresh cache key');
+assert.ok(immersive.includes('ocean-3d.js') && immersive.includes('CinemapOcean3D'), 'immersive view mounts the textured 3D renderer');
+assert.ok(renderer.includes("getContext('webgl2'"), 'Ocean v0.7 uses WebGL2');
+assert.ok(renderer.includes('SmallFishA.json') && renderer.includes('smallfish.webp'), '3D renderer uses locally vendored geometry and texture');
+assert.ok(renderer.includes('aNormal') && renderer.includes('aUV'), 'fish use normals and UVs rather than primitive silhouettes');
+assert.ok(renderer.includes('uBend') && renderer.includes('tail*tail'), 'fish mesh bends at the tail in the vertex shader');
+assert.ok(renderer.includes('fog') && renderer.includes('rays'), 'water depth and light shafts are shader-driven');
+assert.ok(renderer.includes('requestAnimationFrame') && renderer.includes('pointermove'), 'scene remains alive and explorable');
+assert.ok(geometry.position.length > 300 && geometry.normal.length === geometry.position.length && geometry.uv.length > 200, 'vendored fish mesh is real textured geometry');
+assert.ok(fs.existsSync(path.join(ROOT, 'preview/ocean/assets/bsd/LICENSE-WebGLSamples.txt')), 'BSD provenance is retained');
+assert.ok(!renderer.includes('http://') && !renderer.includes('https://'), 'renderer makes no runtime external request');
+assert.ok(!renderer.includes('cosmosHalo') && !renderer.includes('fish-atlas'), 'rejected halo/sprite treatments stay absent');
+console.log('Ocean textured WebGL2 v0.7.0 contract tests passed');

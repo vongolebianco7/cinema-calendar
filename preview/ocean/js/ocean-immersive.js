@@ -16,8 +16,9 @@ function hit(px,py){const r=stage.getBoundingClientRect(),x=px-r.left,y=py-r.top
 function bind(){stage.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,tx:target.x,ty:target.y,moved:false};stage.setPointerCapture(e.pointerId)});stage.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>7)drag.moved=true;target.x=clamp(drag.tx-dx/stage.clientWidth*45,25,75);target.y=clamp(drag.ty-dy/stage.clientHeight*32,30,70)});stage.addEventListener('pointerup',e=>{if(drag&&!drag.moved){const o=hit(e.clientX,e.clientY);if(o)show(o)}drag=null});stage.addEventListener('wheel',e=>{e.preventDefault();target.scale=clamp(target.scale-e.deltaY*.0008,1.03,1.28)},{passive:false})}
 function animalMarkup(o,i){
   const depth=o.depthBand==='far'?'Far':o.depthBand==='mid'?'Mid':'Near';
-  const width=Math.round((44+o.z*48)*o.scale);
-  return '<button class="oceanAnimal oceanDepth'+depth+(o.hero?' oceanHero':'')+'" data-i="'+i+'" aria-label="'+esc(o.film.title||'海の生き物')+'" style="--x:'+o.x.toFixed(2)+'%;--y:'+o.y.toFixed(2)+'%;--z:'+o.z.toFixed(3)+';--w:'+width+'px;--atlas:'+o.atlas+';--col:'+(o.index%4)+';--row:'+Math.floor(o.index/4)+';--dir:'+o.direction+';--speed:'+o.speed.toFixed(1)+'s;--drift:'+o.drift.toFixed(0)+'px;--delay:-'+(i%11)+'s"></button>';
+  const width=Math.round((44+o.z*48)*o.scale),columns=o.atlas===0?3:4;
+  const col=o.index%columns,row=Math.floor(o.index/columns);
+  return '<button class="oceanAnimal oceanDepth'+depth+(o.hero?' oceanHero':'')+'" data-i="'+i+'" aria-label="'+esc(o.film.title||'海の生き物')+'" style="--x:'+o.x.toFixed(2)+'%;--y:'+o.y.toFixed(2)+'%;--z:'+o.z.toFixed(3)+';--w:'+width+'px;--atlas:'+o.atlas+';--col:'+col+';--row:'+row+';--dir:'+o.direction+';--speed:'+o.speed.toFixed(1)+'s;--drift:'+o.drift.toFixed(0)+'px;--delay:-'+(i%11)+'s"></button>';
 }
 function render(){
   const scene=root.CinemapOceanEcosystem.build(films,records);spots=scene.organisms;

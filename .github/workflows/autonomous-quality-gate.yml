@@ -44,11 +44,11 @@ jobs:
         run: python3 -m http.server 4173 >/tmp/cinemap-http.log 2>&1 &
       - name: Run mobile checks
         run: node scripts/mobile_smoke.mjs
-      - name: Upload mobile screenshots
-        if: always()
+      - name: Upload screenshots on failure
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: mobile-smoke-screenshots
           path: artifacts/mobile-smoke/
           if-no-files-found: ignore
-          retention-days: 1
+          retention-days: 7

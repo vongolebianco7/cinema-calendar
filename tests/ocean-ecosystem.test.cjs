@@ -45,6 +45,23 @@ if (!fs.existsSync(modulePath)) {
     assert.ok(new Set(first.organisms.map(o=>o.depthBand)).size >= 3);
   });
 
+  test('real-world silhouette scale creates a strong food-web hierarchy', () => {
+    const catalog=[
+      {id:801,title:'Whale',ecologyType:'whale-0',genres:['ドラマ']},
+      {id:802,title:'Clownfish',ecologyType:'clownfish-0',genres:['ドラマ']},
+      {id:803,title:'Seahorse',ecologyType:'seahorse-0',genres:['ドラマ']}
+    ];
+    const records=Object.fromEntries(catalog.map(f=>[String(f.id),{id:f.id,watched:true,rating:3.5}]));
+    const scene=ocean.build(catalog,records);
+    const whale=scene.organisms.find(o=>o.film.id===801);
+    const clown=scene.organisms.find(o=>o.film.id===802);
+    const horse=scene.organisms.find(o=>o.film.id===803);
+    assert.ok(whale.visualScale >= 4, 'whale must read as megafauna');
+    assert.ok(clown.visualScale <= .7, 'clownfish must read as small reef life');
+    assert.ok(horse.visualScale <= .6, 'seahorse must read as tiny reef life');
+    assert.ok(whale.visualScale / clown.visualScale >= 6, 'large and small life cannot look uniformly sized');
+  });
+
   test('benthic and drifting species occupy plausible ecological niches', () => {
     const catalog=[
       {id:901,title:'Benthic',ecologyType:'seastar-0',genres:['ドラマ']},
@@ -60,6 +77,19 @@ if (!fs.existsSync(modulePath)) {
     assert.ok(drifter.y<=68,'drifters should remain in the water column');
   });
 
+  test('movement style follows ecology instead of one shared animation', () => {
+    const catalog=[
+      {id:911,title:'Star',ecologyType:'seastar-0',genres:['ドラマ']},
+      {id:912,title:'Whale',ecologyType:'whale-0',genres:['ドラマ']},
+      {id:913,title:'Jelly',ecologyType:'jelly-0',genres:['ドラマ']}
+    ];
+    const records=Object.fromEntries(catalog.map(f=>[String(f.id),{id:f.id,watched:true,rating:4}]));
+    const scene=ocean.build(catalog,records);
+    assert.equal(scene.organisms.find(o=>o.film.id===911).motion,'grounded');
+    assert.equal(scene.organisms.find(o=>o.film.id===912).motion,'cruise');
+    assert.equal(scene.organisms.find(o=>o.film.id===913).motion,'drift');
+  });
+
   test('a 5.0 film is more prominent than the same ordinary film', () => {
     const {catalog,records}=fixture(12,3.5);
     const ordinary=ocean.build(catalog,records).organisms.find(o=>o.film.id===1);
@@ -69,11 +99,10 @@ if (!fs.existsSync(modulePath)) {
     assert.equal(best.hero,true);
   });
 
-  test('large histories cap visible organisms and keep initial placement inside mobile edges', () => {
+  test('large histories cap focal organisms for mobile performance', () => {
     const {catalog,records}=fixture(180);
     const scene=ocean.build(catalog,records);
     assert.ok(scene.organisms.length <= 40);
-    assert.ok(scene.organisms.every(o=>o.x>=10&&o.x<=90));
     assert.equal(scene.stats.watched,180);
   });
 

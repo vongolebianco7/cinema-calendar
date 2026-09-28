@@ -24,6 +24,10 @@ jobs:
           cp ocean-demo.html /tmp/ocean-preview/ocean-demo.html
           cp -r js /tmp/ocean-preview/js
           cp -r assets /tmp/ocean-preview/assets
+          mkdir -p /tmp/ocean-preview/assets/cinemap-ocean
+          git fetch origin feat/my-cinemap-viewing-records --depth=1
+          git show FETCH_HEAD:assets/cinemap-ocean/growth-reef-mobile.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef-mobile.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/growth-reef.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef.webp
           cp -r data /tmp/ocean-preview/data 2>/dev/null || true
       - name: Publish preview folder to Pages source
         run: |

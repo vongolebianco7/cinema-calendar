@@ -2,13 +2,14 @@ from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
 immersive=(ROOT/'preview/ocean/js/ocean-immersive.js').read_text(encoding='utf-8')
-renderer=(ROOT/'preview/ocean/js/ocean-v8.js').read_text(encoding='utf-8')
+renderer_path=ROOT/'preview/ocean/js/ocean-v9.js'
+renderer=renderer_path.read_text(encoding='utf-8') if renderer_path.exists() else ''
 geometry=json.loads((ROOT/'preview/ocean/assets/bsd/SmallFishA.json').read_text(encoding='utf-8'))
 habitat=ROOT/'preview/ocean/assets/cc0/great-barrier-reef-06.jpg'
 license_file=ROOT/'preview/ocean/assets/cc0/LICENSE-Great-Barrier-Reef-06.txt'
 assert 'CinemapOceanEcosystem.build' in immersive
 assert "VERSION='0.9.0'" in immersive and "CACHE='11'" in immersive
-assert 'CinemapOceanV8.mount' in immersive and 'ocean-v8.js' in immersive
+assert 'CinemapOceanV9.mount' in immersive and 'ocean-v9.js' in immersive
 assert "getContext('webgl2'" in renderer
 assert 'SmallFishA.json' in renderer and 'smallfish.webp' in renderer
 assert 'assets/cc0/great-barrier-reef-06.jpg' in renderer

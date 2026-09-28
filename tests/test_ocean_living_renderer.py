@@ -16,5 +16,9 @@ assert 'oceanAmbientSchool' in immersive and '.oceanAmbientSchool i' in css, 'ma
 assert 'oceanAnimal::after' not in css, 'fauna must not be wrapped in a visible overlay that reads like a bubble'
 assert 'border-radius:46%' not in css and 'overflow:hidden' not in css.split('.oceanAnimal[style*=')[0].split('.oceanAnimal{')[-1], 'fauna must keep the source silhouette instead of oval clipping'
 assert '.oceanAnimal.oceanDepthFar{filter:' in css and '.oceanAnimal.oceanDepthNear{filter:' in css, 'water integration should vary by depth on the organism pixels themselves'
+assert 'CAMERA_BOUNDS={minX:0,maxX:100,minY:5,maxY:95}' in immersive, 'Ocean exploration must span nearly the full ecosystem instead of a narrow center window'
+assert 'DRAG_TRAVEL={x:100,y:90}' in immersive, 'one viewport drag should be able to traverse a meaningful part of the Ocean'
+assert 'clamp(drag.tx-dx/stage.clientWidth*45,25,75)' not in immersive, 'legacy narrow horizontal camera clamp must not return'
+assert 'clamp(drag.ty-dy/stage.clientHeight*32,30,70)' not in immersive, 'legacy narrow vertical camera clamp must not return'
 assert 'https://' not in css, 'living Ocean CSS must not introduce external asset requests'
 print('Living Ocean renderer contract passed')

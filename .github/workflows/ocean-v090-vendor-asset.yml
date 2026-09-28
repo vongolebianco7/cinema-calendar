@@ -1,0 +1,40 @@
+name: Ocean v0.9 asset staging
+on:
+  push:
+    branches: [feat/ocean-v090-asset-led]
+permissions:
+  contents: write
+jobs:
+  vendor:
+    if: ${{ !contains(github.event.head_commit.message, '[ocean-asset-staged]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/ocean-v090-asset-led
+      - name: Download reviewed CC0 reef habitat
+        run: |
+          mkdir -p preview/ocean/assets/cc0
+          curl --fail --location --retry 2 \
+            -A 'Cinemap Ocean asset staging/0.9' \
+            'https://commons.wikimedia.org/wiki/Special:Redirect/file/Great_Barrier_Reef_photos_06.jpg?width=960' \
+            -o preview/ocean/assets/cc0/great-barrier-reef-06.jpg
+          test $(wc -c < preview/ocean/assets/cc0/great-barrier-reef-06.jpg) -gt 50000
+      - name: Record provenance
+        run: |
+          cat > preview/ocean/assets/cc0/LICENSE-Great-Barrier-Reef-06.txt <<'EOF'
+          Great Barrier Reef photos 06.jpg
+          Author: Grandmaster Huon
+          Source: https://commons.wikimedia.org/wiki/File:Great_Barrier_Reef_photos_06.jpg
+          License: CC0 1.0 Universal Public Domain Dedication
+          License URL: https://creativecommons.org/publicdomain/zero/1.0/
+          Retrieved for Cinemap Ocean v0.9 visual environment on 2026-09-28.
+          EOF
+      - name: Commit vendored asset once
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/ocean/assets/cc0
+          git diff --cached --quiet && exit 0
+          git commit -m 'assets: vendor reviewed CC0 reef habitat [ocean-asset-staged]'
+          git push origin HEAD:feat/ocean-v090-asset-led

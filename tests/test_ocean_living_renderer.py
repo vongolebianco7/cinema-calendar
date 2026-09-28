@@ -2,33 +2,27 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 immersive = (ROOT / 'preview/ocean/js/ocean-immersive.js').read_text(encoding='utf-8')
-css = (ROOT / 'preview/ocean/js/ocean-living.css').read_text(encoding='utf-8')
+renderer = (ROOT / 'preview/ocean/js/ocean-webgl.js').read_text(encoding='utf-8')
+scene = (ROOT / 'preview/ocean/js/ocean-scene.js').read_text(encoding='utf-8')
+camera = (ROOT / 'preview/ocean/js/ocean-camera.js').read_text(encoding='utf-8')
+shaders = (ROOT / 'preview/ocean/js/ocean-shaders.js').read_text(encoding='utf-8')
 
-assert 'CinemapOceanEcosystem.build' in immersive, 'renderer must consume the ecosystem scene model'
-assert 'oceanReefArt' in immersive, 'renderer must render the authored/generated reef as habitat'
-assert 'growth-reef-mobile.webp' in css and 'growth-reef.webp' in css, 'reef art must support mobile and desktop'
-assert 'o.visualScale' in immersive and '--w:' in immersive and 'width:var(--w)' in css, 'organism size must come from ecological scale rather than one shared clamp'
-assert 'Math.min(6' not in immersive, 'renderer should consume bounded school count from the scene model'
-assert 'o.atlas===0?3:4' in immersive, 'the 3x2 fish atlas and 4x3 creature atlases need different cell grids'
-assert 'background-size:300% 200%' in css, 'fish atlas must use its native 3x2 grid to avoid clipped creatures'
-assert 'oceanMotion-' in immersive and '.oceanMotion-grounded' in css and '.oceanMotion-cruise' in css, 'ecological roles must not share one swimming animation'
-assert 'oceanAmbientSchool' in immersive and '.oceanAmbientSchool i' in css, 'mature abundance should include composed schools, not only isolated icons'
-assert 'oceanAnimal::after' not in css, 'fauna must not be wrapped in a visible overlay that reads like a bubble'
-assert 'border-radius:46%' not in css and 'overflow:hidden' not in css.split('.oceanAnimal[style*=')[0].split('.oceanAnimal{')[-1], 'fauna must keep the source silhouette instead of oval clipping'
-assert '.oceanAnimal.oceanDepthFar{filter:' in css and '.oceanAnimal.oceanDepthNear{filter:' in css, 'water integration should vary by depth on the organism pixels themselves'
-assert 'CAMERA_BOUNDS={minX:0,maxX:100,minY:5,maxY:95}' in immersive, 'Ocean exploration must span nearly the full ecosystem instead of a narrow center window'
-assert 'DRAG_TRAVEL={x:100,y:90}' in immersive, 'one viewport drag should be able to traverse a meaningful part of the Ocean'
-assert 'clamp(drag.tx-dx/stage.clientWidth*45,25,75)' not in immersive, 'legacy narrow horizontal camera clamp must not return'
-assert 'clamp(drag.ty-dy/stage.clientHeight*32,30,70)' not in immersive, 'legacy narrow vertical camera clamp must not return'
-
-# Exploration UX contract: the ecosystem is a genuinely larger map, not a viewport-sized layer
-# with a larger numeric clamp. Start pulled back, keep decorative bubbles out, and expose a
-# visible build marker so an iPhone user can tell whether GitHub Pages has refreshed.
-assert 'INITIAL_SCALE=.72' in immersive, 'Ocean must open on a pulled-back overview'
-assert 'class="oceanMap"' in immersive and '.oceanMap{' in css, 'spatial habitat and fauna must live in one oversized pannable map'
-assert 'inset:-90% -120%' in css, 'Ocean map must be materially larger than the viewport'
-assert 'oceanBubbles' not in immersive, 'decorative bubble layer must stay removed'
-assert 'OCEAN v0.4.0' in immersive, 'Ocean must show a visible version marker for deployment verification'
-assert '.oceanVersion{' in css, 'version marker needs stable overlay styling'
-assert 'https://' not in css, 'living Ocean CSS must not introduce external asset requests'
-print('Living Ocean renderer contract passed')
+assert 'CinemapOceanEcosystem.build' in immersive, 'v0.5 must keep the deterministic ecosystem domain model'
+assert "VERSION='0.5.0'" in immersive, 'Ocean must expose a visible v0.5.0 build marker'
+assert "CACHE='5'" in immersive, 'renderer modules must share a v0.5 cache key'
+assert 'CinemapOceanWebGL.mount' in immersive, 'immersive Ocean must mount the WebGL renderer'
+assert "getContext('webgl2'" in renderer, 'primary Ocean renderer must use native WebGL2'
+assert 'requestAnimationFrame(frame)' in renderer, 'Ocean uses one realtime frame loop'
+assert 'devicePixelRatio' in renderer and 'Math.min(1.5' in renderer, 'iPhone render resolution must be bounded'
+assert 'showFallback' in renderer and 'webglcontextlost' in renderer, 'WebGL failure/context loss must fail gracefully'
+assert 'fish-atlas' not in renderer and 'creatures-' not in renderer, 'primary renderer must not return to sprite-atlas fish'
+assert 'cosmosHalo' not in immersive and 'oceanBubbles' not in immersive, 'primary v0.5 DOM must not create soap-bubble/halo treatment'
+assert 'world={width:44,height:16,depth:34}' in scene, 'Ocean must be a materially large continuous world'
+assert 'large<2' in scene, 'megafauna must remain rare'
+assert 'particleCount' in scene, 'sparse suspended particulate is part of the 3D volume'
+assert 'overviewDistance:70' in camera and 'maxDistance:78' in camera and 'x:18' in camera and 'y:8' in camera, 'portrait overview and travel bounds must be genuinely wide'
+assert "mode:'overview'" in camera, 'first camera state must be overview'
+assert 'dragDistance<8' in camera, 'drag must not accidentally become organism selection'
+assert 'uFogColor' in shaders and 'caustic' in shaders, 'underwater depth fog and caustic light belong to the shader'
+assert 'https://' not in renderer and 'https://' not in scene and 'https://' not in shaders, 'v0.5 renderer must not introduce external runtime requests'
+print('Ocean WebGL v0.5 renderer contract passed')

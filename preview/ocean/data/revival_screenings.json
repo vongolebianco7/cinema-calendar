@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-09-26",
+  "note": "公式劇場・配給ページで再上映／リバイバル上映として確認したものを手動整理。終映日が公式に示されていない場合は開始日のみ保持する。",
+  "screenings": [
+    {
+      "date": "2026-09-25",
+      "title": "ドラッグストア・カウボーイ デジタルリマスター版",
+      "event": "theatrical",
+      "service": "リバイバル上映",
+      "revival": true,
+      "venue": "シネ・リーブル神戸ほか",
+      "source_url": "https://www.ttcg.jp/compliment/"
+    },
+    {
+      "date": "2026-09-25",
+      "title": "眺めのいい部屋 4K",
+      "event": "theatrical",
+      "service": "リバイバル上映",
+      "revival": true,
+      "venue": "テアトル梅田ほか",
+      "source_url": "https://www.ttcg.jp/compliment/"
+    },
+    {
+      "date": "2026-10-23",
+      "end_date": "2026-10-29",
+      "title": "ビッグ・フィッシュ",
+      "event": "theatrical",
+      "service": "リバイバル上映",
+      "revival": true,
+      "venue": "ヒューマントラストシネマ渋谷",
+      "source_url": "https://www.ttcg.jp/human_shibuya/topics/2026/09161417_37398.html"
+    }
+  ]
+}

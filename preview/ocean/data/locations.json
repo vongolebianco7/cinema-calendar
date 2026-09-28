@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-09-23",
+  "note": "撮影地は一次情報・公的機関・公式制作情報で確認できたものだけを掲載。作品の舞台・物語上の場所とは区別する。",
+  "movies": {
+    "872585": {
+      "title": "オッペンハイマー",
+      "locations": [
+        {
+          "name": "Los Alamos",
+          "area": "New Mexico, USA",
+          "note": "オッペンハイマー邸やFuller Lodgeなど、マンハッタン計画期の実在建物で撮影。",
+          "source": "U.S. National Park Service",
+          "source_url": "https://www.nps.gov/mapr/learn/historyculture/los-alamos-oppenheimer-movie-manhattan-project-film-locations.htm",
+          "map_query": "Los Alamos New Mexico"
+        },
+        {
+          "name": "Ghost Ranch",
+          "area": "Abiquiu, New Mexico, USA",
+          "note": "劇中のLos Alamos町並みセットを建設した主要ロケ地。",
+          "source": "Visit Los Alamos",
+          "source_url": "https://www.visitlosalamos.org/Things-to-Do/Arts-and-Culture/Movies-Filmed-in-Los-Alamos",
+          "map_query": "Ghost Ranch Abiquiu New Mexico"
+        },
+        {
+          "name": "Memorial Bataan Building",
+          "area": "Santa Fe, New Mexico, USA",
+          "note": "上院承認公聴会の場面に使用された建物。",
+          "source": "Visit Los Alamos",
+          "source_url": "https://www.visitlosalamos.org/Things-to-Do/Arts-and-Culture/Movies-Filmed-in-Los-Alamos",
+          "map_query": "Memorial Bataan Building Santa Fe New Mexico"
+        }
+      ]
+    },
+    "967941": {
+      "title": "ウィキッド 永遠の約束",
+      "locations": [
+        {
+          "name": "Warner Bros. Studios Leavesden",
+          "area": "Hertfordshire, England, UK",
+          "note": "作品の一部を撮影。複数のサウンドステージが使用された。",
+          "source": "Warner Bros. Studios Leavesden",
+          "source_url": "https://www.wbsl.com/studios/2025/11/22/wicked-for-good-at-wbsl/",
+          "map_query": "Warner Bros Studios Leavesden"
+        }
+      ]
+    },
+    "999075": {
+      "title": "左利きの少女",
+      "locations": [
+        {
+          "name": "通化夜市（臨江街観光夜市）",
+          "area": "台北市・台湾",
+          "note": "監督ツォウ・シンチンが実際の夜市で撮影したことを説明。作中の主要ロケーション。",
+          "source": "Netflix Tudum",
+          "source_url": "https://www.netflix.com/tudum/articles/left-handed-girl-release-date-cast-news",
+          "map_query": "Tonghua Night Market Taipei"
+        },
+        {
+          "name": "台北市内",
+          "area": "台北市・台湾",
+          "note": "狭い路地、実在する住居や屋台など、台北の実空間でロケ撮影。",
+          "source": "Netflix Tudum",
+          "source_url": "https://cdn.nflxext.com/tudum/articles/shih-ching-tsou-interview-left-handed-girl-ending-explained",
+          "map_query": "Taipei Taiwan"
+        }
+      ]
+    }
+  }
+}

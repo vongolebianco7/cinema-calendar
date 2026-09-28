@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "checked_at": "2026-09-26",
+  "policy": "Only reviewed, zero-cost sources marked approved may be used as automated production data sources. CINEMAP remains personal and non-commercial.",
+  "sources": [
+    {
+      "id": "tmdb",
+      "name": "TMDB",
+      "mode": "approved",
+      "purpose": [
+        "movie_metadata",
+        "images",
+        "ratings",
+        "release_dates"
+      ],
+      "basis": "Official developer API; non-commercial use with attribution.",
+      "terms_url": "https://developer.themoviedb.org/docs/faq",
+      "requirements": [
+        "Use approved TMDB logo",
+        "Display required TMDB attribution notice in Credits/About",
+        "Non-commercial developer API only unless commercial license is obtained"
+      ]
+    },
+    {
+      "id": "justwatch_via_tmdb",
+      "name": "JustWatch via TMDB Watch Providers",
+      "mode": "approved",
+      "purpose": [
+        "streaming_availability"
+      ],
+      "basis": "TMDB Watch Providers endpoint explicitly permits use with mandatory JustWatch attribution.",
+      "terms_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "requirements": [
+        "Attribute JustWatch as source of watch-provider data"
+      ]
+    },
+    {
+      "id": "wikidata",
+      "name": "Wikidata",
+      "mode": "approved",
+      "purpose": [
+        "theater_master"
+      ],
+      "basis": "Wikidata structured data is released under CC0.",
+      "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "requirements": [
+        "Retain source/provenance where practical"
+      ]
+    },
+    {
+      "id": "filmarks",
+      "name": "Filmarks",
+      "mode": "link_only",
+      "purpose": [
+        "outbound_link"
+      ],
+      "basis": "No licensed data API or explicit permission held by CINEMA DAYS.",
+      "requirements": [
+        "No scraping",
+        "No ratings/reviews/rankings storage",
+        "Normal outbound links only"
+      ]
+    },
+    {
+      "id": "109cinemas",
+      "name": "109 Cinemas",
+      "mode": "disabled",
+      "purpose": [
+        "showtimes"
+      ],
+      "basis": "No explicit permission currently held for automated collection/republication.",
+      "requirements": [
+        "Do not automate until written permission or a licensed API is available"
+      ]
+    },
+    {
+      "id": "netflix_web",
+      "name": "Netflix public web pages",
+      "mode": "disabled",
+      "purpose": [
+        "release_announcements"
+      ],
+      "basis": "No explicit permission currently held for automated HTML collection/republication.",
+      "requirements": [
+        "Do not scrape"
+      ]
+    },
+    {
+      "id": "ntv_kinro_web",
+      "name": "Nippon TV / 金曜ロードショー public web pages",
+      "mode": "disabled",
+      "purpose": [
+        "tv_schedule"
+      ],
+      "basis": "No explicit permission currently held for automated HTML collection/republication.",
+      "requirements": [
+        "Do not scrape"
+      ]
+    },
+    {
+      "id": "kogyotsushin",
+      "name": "興行通信社",
+      "mode": "disabled",
+      "purpose": [
+        "box_office_rankings"
+      ],
+      "basis": "No permission held for automated collection/republication.",
+      "requirements": [
+        "Do not scrape or republish rankings without permission/license"
+      ]
+    },
+    {
+      "id": "openai_api",
+      "name": "OpenAI API",
+      "mode": "disabled",
+      "purpose": [
+        "generative_ai"
+      ],
+      "basis": "Paid/metered API is outside CINEMAP zero-cost policy.",
+      "requirements": [
+        "Do not call from production CINEMAP"
+      ]
+    },
+    {
+      "id": "vercel_hobby",
+      "name": "Vercel Hobby",
+      "mode": "approved",
+      "purpose": [
+        "backend_hosting"
+      ],
+      "basis": "Free plan for personal, non-commercial projects; usage limits apply.",
+      "terms_url": "https://vercel.com/docs/plans/hobby",
+      "requirements": [
+        "Personal/non-commercial use only",
+        "Do not upgrade to paid plan for CINEMAP",
+        "Treat free-tier exhaustion as downtime, not a billing trigger"
+      ]
+    },
+    {
+      "id": "github_pages",
+      "name": "GitHub Pages",
+      "mode": "approved",
+      "purpose": [
+        "static_frontend_hosting"
+      ],
+      "basis": "Permitted for project static sites subject to Pages terms and usage limits.",
+      "terms_url": "https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features",
+      "requirements": [
+        "Do not operate CINEMAP as commercial SaaS/e-commerce on Pages",
+        "Stay within Pages usage limits"
+      ]
+    },
+    {
+      "id": "youtube_api",
+      "name": "YouTube API Services",
+      "mode": "disabled",
+      "purpose": [
+        "critic_map",
+        "criticism_discovery"
+      ],
+      "basis": "Potential source for human criticism discovery, but production use is gated until CINEMAP has the required YouTube API Client terms/privacy disclosures, credential handling, display/storage rules, and the exact CRITIC MAP design passes a fresh compliance review.",
+      "terms_url": "https://developers.google.com/youtube/terms/developer-policies",
+      "requirements": [
+        "Use documented YouTube API Services only; no scraping",
+        "Do not download/cache/store audiovisual content",
+        "Do not expose API credentials in the frontend or repository",
+        "Publish and surface the required privacy policy and YouTube Terms links before enabling",
+        "Respect API-data refresh/storage limits",
+        "Do not create derived metrics from YouTube API Data",
+        "Clearly label CINEMAP-owned classifications as not from YouTube",
+        "Keep disabled until these requirements are implemented and reviewed"
+      ]
+    },
+    {
+      "id": "asa10_official",
+      "name": "午前十時の映画祭 公式サイト",
+      "mode": "approved",
+      "purpose": [
+        "manual_curated_special_screening_schedule"
+      ],
+      "basis": "Official event site; CINEMAP stores a manually reviewed factual schedule snapshot and links back to the official source. No automated scraping.",
+      "terms_url": "https://asa10.eiga.com/2026/",
+      "requirements": [
+        "Manual review only",
+        "Store factual titles/dates/group labels with source URL",
+        "Do not copy editorial text, images, or automate HTML collection",
+        "Refresh by human review when the official schedule changes"
+      ]
+    },
+    {
+      "id": "premium_format_official_pages",
+      "name": "Premium-format official theater/brand pages",
+      "mode": "approved",
+      "purpose": [
+        "manual_curated_theater_format_directory"
+      ],
+      "basis": "Official IMAX, Dolby, TOHO Cinemas, T-Joy, Aeon Cinema and other exhibitor pages; CINEMAP stores manually reviewed factual format/theater/screen labels with outbound source links.",
+      "requirements": [
+        "Manual review only",
+        "Store factual theater/format/screen labels and source URLs",
+        "No automated scraping",
+        "Prefer direct official theater/brand pages and periodically recheck current status"
+      ]
+    }
+  ]
+}

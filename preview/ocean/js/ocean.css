@@ -105,3 +105,22 @@
 .oceanCreatureCard{position:absolute;z-index:5;left:50%;bottom:max(54px,calc(env(safe-area-inset-bottom) + 48px));transform:translateX(-50%);width:min(360px,calc(100% - 28px));padding:16px 18px;border:1px solid #a7d6d052;border-radius:16px;background:#03181ee6;backdrop-filter:blur(18px);box-shadow:0 18px 48px #0009;color:#eff8f6}
 .oceanCreatureCard[hidden]{display:none}.oceanCreatureCard small{font-size:8px;letter-spacing:.18em;color:#8fcac4}.oceanCreatureCard h3{margin:6px 24px 3px 0;font:normal 21px Georgia,serif}.oceanCreatureCard p{margin:0;color:#a9c4c0;font-size:11px}.oceanClose{position:absolute;right:10px;top:9px;border:0;background:transparent;color:#dceae8;font-size:22px}
 @media(max-width:700px){.oceanImmersive{height:90svh;min-height:640px}.oceanMinimalHud span:first-child{display:none}}
+
+/* Cinematic Ocean v3 — full-screen world, no map labels, no diagram fish. */
+body.oceanExperience{background:#020b10;overflow-x:hidden}
+body.oceanExperience .top,body.oceanExperience #dashboard>h1,body.oceanExperience #dashboard>.lead,body.oceanExperience #dashboard>.ratingLegend,body.oceanExperience #dashboard>.toolbar,body.oceanExperience #dashboard>.panel,body.oceanExperience #dashboard>.stats,body.oceanExperience #dashboard>.danger,body.oceanExperience main>.eyebrow,body.oceanExperience main>.hint{display:none!important}
+body.oceanExperience .wrap.page{width:100%;max-width:none;padding:0;margin:0}
+body.oceanExperience #dashboard{display:block!important}
+body.oceanExperience #universe{width:100vw;height:100svh;margin:0}
+.oceanWorld{position:relative;width:100%;height:100%;overflow:hidden;background:#03151d;touch-action:none;isolation:isolate}
+.oceanBackdrop{position:absolute;z-index:0;inset:-9%;background:url("../assets/cinemap-ocean/growth-reef-mobile.webp") center 52%/cover no-repeat;will-change:transform;transition:filter .4s;filter:saturate(1.12) contrast(1.04) brightness(.9)}
+.oceanHaze{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(180deg,#37c5dd0a 0,#001e2b18 38%,#00101755 100%),radial-gradient(ellipse at 50% 42%,transparent 0 36%,#00101822 72%,#00090f88 120%)}
+.oceanCaustics{position:absolute;z-index:2;inset:-25%;pointer-events:none;opacity:.24;mix-blend-mode:screen;background:repeating-linear-gradient(113deg,transparent 0 7%,#c8fff50b 8%,transparent 10% 17%);animation:oceanLight 18s ease-in-out infinite alternate}
+.oceanParticles{position:absolute;z-index:3;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle at 18% 32%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 74% 26%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 38% 67%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 82% 72%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 56% 45%,#d8fff2 0 1px,transparent 2px);background-size:210px 190px,270px 240px,310px 280px,350px 320px,430px 390px;animation:oceanDust 24s linear infinite}
+.oceanExploreHint{position:absolute;z-index:5;left:50%;bottom:max(20px,calc(env(safe-area-inset-bottom) + 10px));transform:translateX(-50%);padding:8px 13px;border:1px solid #d7fff42b;border-radius:999px;background:#00151a66;backdrop-filter:blur(12px);color:#e7f7f3b0;font:600 9px/1 -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.18em;animation:hintFade 5s forwards}
+.oceanCreatureCard{z-index:8}
+@keyframes oceanLight{from{transform:translate3d(-2%,-1%,0) rotate(-1deg)}to{transform:translate3d(3%,2%,0) rotate(1deg)}}
+@keyframes oceanDust{from{transform:translateY(0)}to{transform:translateY(-120px)}}
+@keyframes hintFade{0%,55%{opacity:1}100%{opacity:.22}}
+@media(min-width:760px){.oceanBackdrop{background-image:url("../assets/cinemap-ocean/growth-reef.webp")}}
+@media(prefers-reduced-motion:reduce){.oceanCaustics,.oceanParticles,.oceanExploreHint{animation:none}}

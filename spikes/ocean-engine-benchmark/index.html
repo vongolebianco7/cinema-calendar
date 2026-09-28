@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Ocean renderer benchmark</title>
+  <style>
+    *{box-sizing:border-box}html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#01131d;color:#e8f6f7;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif}canvas{display:block;width:100%;height:100%;touch-action:none}.hud{position:fixed;left:16px;top:max(16px,env(safe-area-inset-top));z-index:4;pointer-events:none;text-shadow:0 2px 18px #001018}.hud small{display:block;font-size:9px;letter-spacing:.2em;color:#8fc9d0}.hud strong{display:block;margin-top:4px;font:400 28px/1.05 Georgia,serif}.badge{position:fixed;right:12px;top:max(14px,env(safe-area-inset-top));z-index:4;padding:7px 10px;border:1px solid #ffffff26;border-radius:999px;background:#00151e99;backdrop-filter:blur(12px);font:600 9px/1 monospace;letter-spacing:.08em;color:#b8d9dc}.grade{position:fixed;left:0;right:0;bottom:0;height:35%;z-index:3;pointer-events:none;background:linear-gradient(0deg,#0010189c,transparent)}
+  </style>
+</head>
+<body>
+  <div id="app"><canvas id="ocean"></canvas></div>
+  <div class="hud"><small>RENDERER QUALITY SPIKE</small><strong>Ocean benchmark</strong></div>
+  <div class="badge">PLAYCANVAS · CC0 GLTF</div><div class="grade"></div>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

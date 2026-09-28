@@ -1,5 +1,5 @@
 (function(root){'use strict';
-const VERSION='0.6.0',CACHE='6';let renderer=null,assetsPromise=null;
+const VERSION='0.6.1',CACHE='7';let renderer=null,assetsPromise=null;
 const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
 function loadScript(src,globalName){if(root[globalName])return Promise.resolve(root[globalName]);return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src+'?v='+CACHE;s.async=false;s.onload=()=>root[globalName]?resolve(root[globalName]):reject(new Error(globalName+' unavailable'));s.onerror=reject;document.head.appendChild(s);});}
 function ensureAssets(){if(assetsPromise)return assetsPromise;assetsPromise=loadScript('js/ocean-ecosystem.js','CinemapOceanEcosystem').then(()=>loadScript('js/ocean-cinematic.js','CinemapOceanCinematic'));return assetsPromise;}

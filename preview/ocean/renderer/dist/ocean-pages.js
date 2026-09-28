@@ -15322,13 +15322,20 @@ function Fd(e) {
 	return Pd[e?.family] ? Pd[e.family] : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
 }
 function Id(e) {
-	if (e.organisms.length) return e.organisms.slice(0, 22).map((e, t) => ({
-		key: Fd(e),
-		scale: Math.max(.5, Math.min(1.45, Number(e.scale) || 1)),
-		hero: !!e.hero,
-		niche: e.niche || "pelagic",
-		index: t
-	}));
+	if (e.organisms.length) {
+		let t = [];
+		return e.organisms.slice(0, 18).forEach((n, r) => {
+			let i = !!n.hero, a = Fd(n), o = Math.max(.5, Math.min(1.45, Number(n.scale) || 1)), s = i ? 1 : Math.max(1, Math.min(4, 1 + Math.floor((Number(n.rating) || 0) - 3.5) + Math.floor(e.schools / 3)));
+			for (let e = 0; e < s && t.length < 32; e++) t.push({
+				key: a,
+				scale: o * (e ? .68 + jd(r * 7 + e) * .18 : 1),
+				hero: i,
+				niche: n.niche || "pelagic",
+				index: r,
+				member: e
+			});
+		}), t;
+	}
 	let t = Math.max(1, Math.min(22, Math.round(2 + e.watched * .45 + e.schools * 2)));
 	return Array.from({ length: t }, (e, t) => ({
 		key: [
@@ -15339,7 +15346,8 @@ function Id(e) {
 		scale: .62 + jd(t + 20) * .34,
 		hero: !1,
 		niche: "pelagic",
-		index: t
+		index: t,
+		member: 0
 	}));
 }
 async function Ld(e, t = null) {
@@ -15415,14 +15423,15 @@ async function Ld(e, t = null) {
 			"whale",
 			"shark",
 			"manta"
-		].includes(a.key);
+		].includes(a.key), l = (a.member || 0) * .13;
 		i.push(Md(e.holder, t, {
 			radius: c ? 8 : o ? 4.2 : 5.5,
 			y: s ? -3.4 : c ? 4.5 : o ? .4 : 1.8,
-			z: -30 - t % 6 * 7,
+			z: -30 - a.index % 6 * 7 - (a.member || 0) * .45,
 			speed: c ? .022 : s ? .03 : .05,
 			bob: s ? .2 : c ? .55 : .32,
-			spread: c ? .2 : .75
+			spread: c ? .2 : .75,
+			phase: Math.PI / 2 + l
 		}));
 	});
 	let d = 0;

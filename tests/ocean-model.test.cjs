@@ -40,10 +40,11 @@ assert.ok(mixedPoint.x>sf[0]&&mixedPoint.x<thriller[0],'specific mixed genres oc
 const cross=model.directorPosition('Crossing',[hybrid,{...mixed,director:'Crossing'}]);
 assert.ok(cross.x>point.x,'the director system spans its different film genres');
 assert.equal(model.species.length,504,'forty-two silhouettes with twelve discoverable colour variants each');
-assert.ok(model.speciesFor(catalog[0]).genres.includes('SF'));
-assert.ok(model.speciesFor(catalog[1]).genres.includes('ホラー'));
 assert.equal(model.speciesFor({...catalog[0],rating:2.5}).id,model.speciesFor(catalog[0]).id,'rating affects appearance, not species');
 assert.deepEqual(model.speciesFor(catalog[0]),model.speciesFor({...catalog[0]}),'same film keeps its creature');
-assert.equal(model.speciesFor({genres:[]}).genres.includes('ドキュメンタリー'),true,'unknown traits get a neutral family rather than invented mood');
+assert.ok(model.speciesFor({genres:[]}).familyId,'unknown traits never imply a made-up mood');
 assert.ok(new Set(Array.from({length:1000},(_,i)=>model.speciesFor({id:i,genres:['SF']}).id)).size>40,'many works uncover many appearances');
+assert.ok(new Set(Array.from({length:70},(_,i)=>model.speciesFor({id:i,genres:['ホラー']}).familyId)).size>12,'one genre never becomes one sea animal');
+assert.ok(model.habitatGrowth(10).reef<model.habitatGrowth(50).reef && model.habitatGrowth(50).reef<model.habitatGrowth(100).reef);
+assert.equal(model.habitatGrowth(0).fish,0,'an empty ocean has no decorative shoal');
 console.log('Ocean weights, honest metadata, suggestions and stable positions passed');

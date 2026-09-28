@@ -74,3 +74,11 @@
 .cosmosGalaxy .oceanSchool{background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) drop-shadow(0 5px 8px #083443);opacity:clamp(.45,calc(.45 + var(--mass) * .045),.95)}
 .speciesTile .fishIcon{background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) saturate(1.15)}
 @media(max-width:700px){.cosmosScene{width:100vw;border-radius:0}.cosmosViewport{height:74svh;min-height:520px;max-height:none;background-image:linear-gradient(180deg,#03345817 0%,#051c2a15 60%,#03132370 100%),url('../assets/cinemap-ocean/deep-ocean-mobile.webp')}.cosmosHeader{padding:12px 16px}.cosmosPlanet .cosmosHalo,.cosmosPlanet--best .cosmosHalo{width:111px;height:87px;top:0}}
+/* The seabed gains texture as the personal collection grows. */
+.cosmosViewport:after{z-index:3;background:radial-gradient(ellipse at 50% 35%,transparent 48%,#02111a50 100%),linear-gradient(#00121a,var(--quiet))}
+.oceanReef{position:absolute;inset:0;z-index:1;pointer-events:none;background:url('../assets/cinemap-ocean/growth-reef.webp') bottom center/100% auto no-repeat;opacity:var(--reef);transition:opacity .7s ease}
+.cosmosWorld{z-index:2}
+.oceanWildlife{position:absolute;display:block;z-index:1;width:clamp(30px,5vw,75px);height:clamp(25px,4vw,58px);transform:translate(-50%,-50%) translateZ(var(--depth));background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) drop-shadow(0 5px 8px #001323);pointer-events:none;opacity:.84}
+.cosmosDirector .directorFish{position:absolute;width:54px;height:43px;top:20px;left:50%;transform:translateX(calc(-50% + var(--shoal-x)));background:var(--fish-atlas) var(--fish-x) var(--fish-y)/var(--fish-size) no-repeat;filter:hue-rotate(var(--fish-hue)) drop-shadow(0 3px 6px #001323);pointer-events:none}
+.cosmosGalaxy .cosmosHalo{opacity:.48;filter:blur(12px)}
+@media(max-width:700px){.oceanReef{background-image:url('../assets/cinemap-ocean/growth-reef-mobile.webp');background-size:100% auto}.oceanWildlife{width:42px;height:34px}.cosmosDirector .directorFish{width:42px;height:34px}}

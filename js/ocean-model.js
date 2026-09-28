@@ -93,9 +93,9 @@
     const points=works.map(filmPosition);
     return {x:points.reduce((s,p)=>s+p.x,0)/points.length,y:points.reduce((s,p)=>s+p.y,0)/points.length,z:points.reduce((s,p)=>s+p.z,0)/points.length};
   }
-  // Forty-two distinct silhouettes, twelve stable colour variants each.
-  // The morph is an artistic rendering from the film ID, not a claim about
-  // unmeasured moods, personality or the taxonomy of a real animal.
+  // An animal is a stable individual expression of a film, never a synonym
+  // for one genre. Genre influences habitat; every silhouette can occur in
+  // every habitat. Unmeasured moods and awards are never invented.
   const families=[
     {id:'silver',name:'銀鱗魚',atlas:0,index:0,genres:['SF','アクション','戦争']},
     {id:'manta',name:'マンタ',atlas:0,index:1,genres:['ドキュメンタリー','アドベンチャー']},
@@ -125,26 +125,44 @@
   ][group];}
   const morphNames=['蒼','珊瑚','琥珀','紫','紺','銀','瑠璃','朱','真珠','藍','金','薄紅'];
   const species=families.flatMap(f=>morphNames.map((morph,variant)=>({
-    ...f,id:f.id+'-'+variant,name:morph+'の'+f.name,variant,
+    ...f,id:f.id+'-'+variant,familyId:f.id,name:morph+'の'+f.name,variant,
     hue:(variant-5)*12
   })));
+  function stableHash(key){
+    let hash=2166136261;
+    for(const char of String(key)){hash^=char.codePointAt(0);hash=Math.imul(hash,16777619);}
+    return (hash^(hash>>>16))>>>0;
+  }
+  const rareFamilies=new Set(['whale','whaleshark','mantaray','beluga','seadragon','nautilus','combjelly']);
+  function habitatGrowth(n){
+    const count=Math.max(0,Number(n)||0);
+    const interpolate=(a,b,t)=>a+(b-a)*t;
+    const curve=[[0,.03],[10,.13],[50,.37],[100,.68],[300,1]];
+    for(let i=1;i<curve.length;i++)if(count<=curve[i][0]){
+      const [x,y]=curve[i-1],[next,value]=curve[i];
+      return {reef:interpolate(y,value,(count-x)/(next-x)),fish:Math.min(28,Math.floor(Math.sqrt(count)*2.5)),phase:i-1};
+    }
+    return {reef:1,fish:28,phase:4};
+  }
   function speciesFor(film){
     const explicit=species.find(x=>x.id===film?.ecologyType);
     if(explicit)return explicit;
+    const key=[film?.id??film?.title??'unknown',film?.year||'',film?.region||'',film?.director||'',film?.series||'',film?.subgenre||'',...(film?.genres||[])].join('|');
     const strengths=genreStrengths(film);
-    const groups=[[0,6,7,21,24,29,31,34],[1,8,9,18,19,20,30,32,33,35,41],[2,16,17,22,40],[3,12,14,15,23,26,36,37],[4,10,27,28,39],[5,11,13,25,38]];
-    const groupScores=groups.map((_,i)=>Math.max(0,...families[i].genres.map(g=>strengths[g]||0)));
-    const group=groupScores.indexOf(Math.max(...groupScores));
-    const pool=groupScores[group]>0?groups[group]:[1,18,19,20];
-    const key='creature:'+String(film?.id??film?.title??'unknown');
-    let seed=2166136261;
-    for(const char of key){seed^=char.codePointAt(0);seed=Math.imul(seed,16777619);}
-    seed=(seed^(seed>>>16))>>>0;
-    const family=families[pool[seed%pool.length]];
-    const variant=Math.floor(seed/pool.length)%morphNames.length;
-    return species.find(x=>x.id===family.id+'-'+variant);
+    // Weighted deterministic draw: a matching habitat is a small influence,
+    // and rare large animals remain possible without being tied to rating.
+    const family=families.reduce((best,type)=>{
+      const match=Math.max(0,...type.genres.map(g=>strengths[g]||0));
+      const weight=(rareFamilies.has(type.id)?.3:1)*(1+match*.7);
+      const u=(stableHash(key+'|'+type.id)+1)/4294967297;
+      const ticket=-Math.log(u)/weight;
+      return !best||ticket<best.ticket?{type,ticket}:best;
+    },null).type;
+    const variant=stableHash('colour:'+String(film?.id??film?.title??'unknown'))%morphNames.length;
+    const familyIndex=(family.atlas===0?0:6+(family.atlas-1)*12)+family.index;
+    return species[familyIndex*morphNames.length+variant];
   }
-  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,speciesFor};
+  const api={ratingWeight,features,preferences,recommend,position,genreCenters,centerForGenre,genreStrengths,filmPosition,directorPosition,species,families,speciesFor,habitatGrowth};
   root.CinemapOceanModel=api;
   if (typeof module !== 'undefined') module.exports=api;
 })(typeof window === 'undefined' ? globalThis : window);

@@ -25,14 +25,20 @@
   const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const genreNodes=()=>{
     const films=known().filter(inDecade);
-    return visibleGenres().map(g=>{
-      const p=model.centerForGenre(g), n=films.filter(f=>model.genreStrengths(f)[g]).length;
-      if(!n&&genres.indexOf(g)%4!==0)return '';
-      const representative=films.find(f=>model.genreStrengths(f)[g]);
-      const fish=model.speciesFor(representative||{genres:[g]});
-      const school=Array.from({length:Math.min(n,4)},(_,i)=>'<span class="oceanSchool" aria-hidden="true" style="--swim-offset:'+(i-1.5)*25+'px;--swim-depth:'+i*12+'px"></span>').join('');
-      return '<button type="button" class="cosmosBody cosmosGalaxy oceanAtlas'+fish.atlas+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10)+';'+fishStyle(fish))+'" aria-label="'+esc(g)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+school+'<strong>'+esc(g)+'</strong>'+(n?'<small>'+n+'作品</small>':'')+'</button>';
+    const habitats=visibleGenres().map(g=>{
+      const p=model.centerForGenre(g),n=films.filter(f=>model.genreStrengths(f)[g]).length;
+      if(!n&&films.length&&genres.indexOf(g)%5!==0)return '';
+      if(!n&&!films.length&&genres.indexOf(g)%4!==0)return '';
+      return '<button type="button" class="cosmosBody cosmosGalaxy'+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(g)+'付近、'+n+'作品の記録"><span class="cosmosHalo"></span><strong>'+esc(g)+'付近</strong>'+(n?'<small>'+n+'作品</small>':'')+'</button>';
     }).join('');
+    // Each decorative animal stands for one distinct recorded film, never a
+    // genre mascot. Sample at most 28 regardless of a 1000-film collection.
+    const limit=model.habitatGrowth(films.length).fish;
+    const sample=films.map(f=>({f,priority:model.position('school:'+f.id).x})).sort((a,b)=>a.priority-b.priority||String(a.f.id).localeCompare(String(b.f.id))).slice(0,limit);
+    const wildlife=sample.map(({f})=>{const fish=model.speciesFor(f),p=model.filmPosition(f);
+      return '<span class="oceanWildlife oceanAtlas'+fish.atlas+'" aria-hidden="true" style="'+nodeStyle(p,fishStyle(fish))+'"></span>';
+    }).join('');
+    return wildlife+habitats;
   };
   // Before ten ratings there is too little evidence for a useful suggestion.
   // Keep the personal map dominant even after suggestions become available.
@@ -49,7 +55,9 @@
   const midNodes=()=>{
     const focus={x:camera.focusX,y:camera.focusY};
     const systems=directorGroups().filter(x=>x.point&&distance(x.point,focus)<31).sort((a,b)=>distance(a.point,focus)-distance(b.point,focus)).slice(0,32);
-    const directorMarkup=systems.map(s=>{const n=s.works.filter(f=>records[String(f.id)]?.watched).length;return '<button type="button" class="cosmosBody cosmosDirector" data-cosmos-director="'+esc(s.name)+'" style="'+nodeStyle(s.point,'--hue:'+hue(s.name)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(s.name)+'、'+n+'作品の記録"><span class="cosmosHalo"></span><strong>'+esc(s.name)+'</strong><small>'+n+'作品を記録</small></button>';}).join('');
+    const directorMarkup=systems.map(s=>{const watched=s.works.filter(f=>records[String(f.id)]?.watched),n=watched.length;
+      const shoal=watched.slice(0,3).map((f,i)=>{const fish=model.speciesFor(f);return '<span class="directorFish oceanAtlas'+fish.atlas+'" aria-hidden="true" style="--shoal-x:'+((i-1)*24)+'px;'+fishStyle(fish)+'"></span>';}).join('');
+      return '<button type="button" class="cosmosBody cosmosDirector" data-cosmos-director="'+esc(s.name)+'" style="'+nodeStyle(s.point,'--hue:'+hue(s.name)+';--mass:'+Math.min(n,10))+'" aria-label="'+esc(s.name)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+shoal+'<strong>'+esc(s.name)+'</strong><small>'+n+'作品の群れ</small></button>';}).join('');
     const anonymous=known().filter(f=>inDecade(f)&&!f.director&&distance(model.filmPosition(f),focus)<27).slice(0,12).map(f=>planet(f,false)).join('');
     return directorMarkup+anonymous;
   };
@@ -95,7 +103,8 @@
     const nodes=level==='far'?genreNodes():level==='middle'?midNodes():nearNodes();
     const options=visibleGenres().map(g=>'<option value="'+esc(g)+'">'+esc(g)+'</option>').join('');
     const names=[...new Set([...catalog.filter(f=>f.director).map(f=>f.director),...catalog.map(f=>f.title)])];
-    host.innerHTML='<section class="cosmosScene"><div class="cosmosHeader"><span class="universeEyebrow">YOUR FILM OCEAN · '+(n>=20?'成長中':n>=10?'育ちはじめた海':'静かな海')+'</span><h2>あなたの映画の海</h2><p>観た作品が魚となって増えていく、あなただけの海。ジャンルから監督、作品へ。</p></div><div class="cosmosControls"><button type="button" data-cosmos-home>全体を見る</button><label>海域へ移動 <select data-cosmos-jump><option value="">ジャンルを選ぶ</option>'+options+'</select></label><label>公開年代 <select data-cosmos-decade><option value="">すべて</option>'+Array.from({length:12},(_,i)=>1910+i*10).map(y=>'<option value="'+y+'"'+(decade===String(y)?' selected':'')+'>'+y+'年代</option>').join('')+'</select></label><form class="cosmosSearch" data-cosmos-search><label for="cosmosQuery">監督・作品を探す</label><input id="cosmosQuery" list="cosmosSuggestions" placeholder="作品名・監督名"><datalist id="cosmosSuggestions">'+names.slice(0,400).map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist><button>移動</button></form></div><div class="cosmosViewport" role="group" aria-label="映画の海。ドラッグで視点を動かし、ピンチで拡大縮小"><div class="cosmosWorld">'+nodes+'</div><div class="cosmosLevel">'+(level==='far'?'全景 · 海域':level==='middle'?'中景 · 群れ':'近景 · 魚')+'</div></div><div class="cosmosFoot"><span>1本指で移動 · ピンチで拡大縮小 · 魚をタップして接近</span><span>'+n+'作品を記録</span></div>'+detail()+'</section>';
+    const growth=model.habitatGrowth(n);
+    host.innerHTML='<section class="cosmosScene"><div class="cosmosHeader"><span class="universeEyebrow">YOUR FILM OCEAN · '+(n>=20?'成長中':n>=10?'育ちはじめた海':'静かな海')+'</span><h2>あなたの映画の海</h2><p>作品が生き物になり、海そのものが育つ。海域から群れ、個体へ近づけます。</p></div><div class="cosmosControls"><button type="button" data-cosmos-home>全体を見る</button><label>海域へ移動 <select data-cosmos-jump><option value="">ジャンルを選ぶ</option>'+options+'</select></label><label>公開年代 <select data-cosmos-decade><option value="">すべて</option>'+Array.from({length:12},(_,i)=>1910+i*10).map(y=>'<option value="'+y+'"'+(decade===String(y)?' selected':'')+'>'+y+'年代</option>').join('')+'</select></label><form class="cosmosSearch" data-cosmos-search><label for="cosmosQuery">監督・作品を探す</label><input id="cosmosQuery" list="cosmosSuggestions" placeholder="作品名・監督名"><datalist id="cosmosSuggestions">'+names.slice(0,400).map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist><button>移動</button></form></div><div class="cosmosViewport" style="--reef:'+growth.reef+';--quiet:'+(1-growth.reef)*.64+'" role="group" aria-label="映画の海。ドラッグで視点を動かし、ピンチで拡大縮小"><div class="oceanReef" aria-hidden="true"></div><div class="cosmosWorld">'+nodes+'</div><div class="cosmosLevel">'+(level==='far'?'全景 · 海域':level==='middle'?'中景 · 群れ':'近景 · 魚')+'</div></div><div class="cosmosFoot"><span>1本指で移動 · ピンチで拡大縮小 · 生き物をタップして接近</span><span>'+n+'作品を記録</span></div>'+detail()+'</section>';
     applyCamera();
     bindGestures(host.querySelector('.cosmosViewport'));
   }

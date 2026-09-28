@@ -20,7 +20,7 @@ assert 'cosmosHalo' not in immersive and 'oceanBubbles' not in immersive, 'prima
 assert 'world={width:44,height:16,depth:34}' in scene, 'Ocean must be a materially large continuous world'
 assert 'large<2' in scene, 'megafauna must remain rare'
 assert 'particleCount' in scene, 'sparse suspended particulate is part of the 3D volume'
-assert 'overviewDistance:28' in camera and 'x:18' in camera and 'y:8' in camera, 'initial overview and travel bounds must be wide'
+assert 'overviewDistance:70' in camera and 'maxDistance:78' in camera and 'x:18' in camera and 'y:8' in camera, 'portrait overview and travel bounds must be genuinely wide'
 assert "mode:'overview'" in camera, 'first camera state must be overview'
 assert 'dragDistance<8' in camera, 'drag must not accidentally become organism selection'
 assert 'uFogColor' in shaders and 'caustic' in shaders, 'underwater depth fog and caustic light belong to the shader'

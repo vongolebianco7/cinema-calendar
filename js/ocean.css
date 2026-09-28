@@ -113,7 +113,7 @@ body.oceanExperience .wrap.page{width:100%;max-width:none;padding:0;margin:0}
 body.oceanExperience #dashboard{display:block!important}
 body.oceanExperience #universe{width:100vw;height:100svh;margin:0}
 .oceanWorld{position:relative;width:100%;height:100%;overflow:hidden;background:#03151d;touch-action:none;isolation:isolate}
-.oceanBackdrop{position:absolute;z-index:0;inset:-9%;background:url("../assets/cinemap-ocean/growth-reef-mobile.webp") center 52%/cover no-repeat;will-change:transform;transition:filter .4s;filter:saturate(1.12) contrast(1.04) brightness(.9)}
+.oceanBackdrop{position:absolute;z-index:0;inset:-9%;background:url("../assets/cinemap-ocean/deep-ocean-mobile.webp") center 52%/cover no-repeat;will-change:transform;transition:filter .4s;filter:saturate(1.12) contrast(1.04) brightness(.9)}
 .oceanHaze{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(180deg,#37c5dd0a 0,#001e2b18 38%,#00101755 100%),radial-gradient(ellipse at 50% 42%,transparent 0 36%,#00101822 72%,#00090f88 120%)}
 .oceanCaustics{position:absolute;z-index:2;inset:-25%;pointer-events:none;opacity:.24;mix-blend-mode:screen;background:repeating-linear-gradient(113deg,transparent 0 7%,#c8fff50b 8%,transparent 10% 17%);animation:oceanLight 18s ease-in-out infinite alternate}
 .oceanParticles{position:absolute;z-index:3;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle at 18% 32%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 74% 26%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 38% 67%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 82% 72%,#d8fff2 0 1px,transparent 2px),radial-gradient(circle at 56% 45%,#d8fff2 0 1px,transparent 2px);background-size:210px 190px,270px 240px,310px 280px,350px 320px,430px 390px;animation:oceanDust 24s linear infinite}
@@ -122,7 +122,7 @@ body.oceanExperience #universe{width:100vw;height:100svh;margin:0}
 @keyframes oceanLight{from{transform:translate3d(-2%,-1%,0) rotate(-1deg)}to{transform:translate3d(3%,2%,0) rotate(1deg)}}
 @keyframes oceanDust{from{transform:translateY(0)}to{transform:translateY(-120px)}}
 @keyframes hintFade{0%,55%{opacity:1}100%{opacity:.22}}
-@media(min-width:760px){.oceanBackdrop{background-image:url("../assets/cinemap-ocean/growth-reef.webp")}}
+@media(min-width:760px){.oceanBackdrop{background-image:url("../assets/cinemap-ocean/deep-ocean.webp")}}
 @media(prefers-reduced-motion:reduce){.oceanCaustics,.oceanParticles,.oceanExploreHint{animation:none}}
 
 .oceanFauna{position:absolute;z-index:2;inset:0;will-change:transform;pointer-events:none}

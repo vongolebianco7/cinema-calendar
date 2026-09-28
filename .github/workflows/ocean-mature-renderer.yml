@@ -27,7 +27,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Capture iPhone renderer
         run: |
-          npm run dev -- --host 127.0.0.1 --port 4174 >/tmp/ocean-renderer.log 2>&1 &
+          npx vite --host 127.0.0.1 --port 4174 >/tmp/ocean-renderer.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:4174 >/dev/null && break; sleep 1; done
           node capture.mjs
       - uses: actions/upload-artifact@v4

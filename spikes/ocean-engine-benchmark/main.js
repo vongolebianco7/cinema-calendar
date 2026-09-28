@@ -80,7 +80,7 @@ fill.addComponent('light', { type: 'omni', color: new pc.Color(0.05, 0.38, 0.48)
 fill.setPosition(-7, 5, 2);
 app.root.addChild(fill);
 
-// God rays: soft translucent geometry, deliberately not circular bubble sprites.
+// God rays: soft translucent shafts without circular sprite effects.
 const rayMat = new pc.StandardMaterial();
 rayMat.diffuse = new pc.Color(0.18, 0.65, 0.68);
 rayMat.emissive = new pc.Color(0.06, 0.26, 0.28);

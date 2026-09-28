@@ -23,22 +23,33 @@ function watchedFilms(catalog,records){
 }
 function ratingProminence(rating){
   const r=Number(rating);
-  if(r===5)return 1.55;
-  if(r>=4.5)return 1.32;
-  if(r>=4)return 1.16;
+  if(r===5)return 1.38;
+  if(r>=4.5)return 1.22;
+  if(r>=4)return 1.1;
   if(r>0&&r<3)return .9;
   return 1;
 }
 const benthic=new Set(['octopus','cuttlefish','blueoctopus','lobster','nudibranch','horseshoe','mantisshrimp','isopod','urchin','seastar']);
 const reefLife=new Set(['seahorse','seadragon','clownfish','moray','puffer','angelfish','lionfish','nautilus']);
 const drifters=new Set(['jelly','combjelly']);
-function nicheFor(sp){const family=String(sp?.id||'').replace(/-\d+$/,'');if(benthic.has(family))return'benthic';if(reefLife.has(family))return'reef';if(drifters.has(family))return'drifter';return'pelagic';}
-function yFor(niche,key){const u=unit('y:'+key);if(niche==='benthic')return 72+u*18;if(niche==='reef')return 56+u*26;if(niche==='drifter')return 18+u*50;return 12+u*58;}
+const megafauna=new Set(['whale','whaleshark','manta','mantaray','hammerhead','tigershark','dolphin','beluga','seal','turtle','eagleray','stingray','sunfish']);
+const sizeByFamily={
+  whale:4.8,whaleshark:4.25,manta:3.5,mantaray:3.65,hammerhead:3.05,tigershark:3.0,
+  dolphin:2.35,beluga:2.45,seal:1.75,turtle:1.9,eagleray:2.45,stingray:2.2,sunfish:2.55,
+  swordfish:2.05,sailfish:2.15,barracuda:1.15,grouper:1.45,moray:1.35,octopus:1.25,cuttlefish:1.05,
+  nautilus:.82,lobster:.8,horseshoe:.72,isopod:.78,mantisshrimp:.62,blueoctopus:.55,lionfish:.82,
+  seadragon:.56,puffer:.62,angelfish:.58,jelly:.86,combjelly:.54,nudibranch:.42,urchin:.4,seastar:.46,
+  seahorse:.38,clownfish:.52,silver:.72,reef:.64,deep:.78,gold:.6,veil:.66
+};
+function familyOf(sp){return String(sp?.id||'').replace(/-\d+$/,'');}
+function nicheFor(sp){const family=familyOf(sp);if(benthic.has(family))return'benthic';if(reefLife.has(family))return'reef';if(drifters.has(family))return'drifter';return'pelagic';}
+function yFor(niche,key,family){const u=unit('y:'+key);if(niche==='benthic')return 75+u*15;if(niche==='reef')return 58+u*25;if(niche==='drifter')return 18+u*46;if(megafauna.has(family))return 20+u*38;return 16+u*52;}
+function motionFor(niche,family){if(niche==='benthic')return'grounded';if(niche==='drifter')return'drift';if(megafauna.has(family))return'cruise';if(niche==='reef')return'hover';return'swim';}
 function build(catalog,records){
   const model=oceanModel();
   const seen=watchedFilms(catalog,records);
   const species=seen.map(({film})=>model.speciesFor(film));
-  const families=new Set(species.map(s=>s.id.split('-')[0]));
+  const families=new Set(species.map(familyOf));
   const types=new Set(species.map(s=>s.id));
   const ratings=seen.map(({record})=>Number(record.rating)).filter(Number.isFinite);
   const loved=ratings.filter(v=>v>=4).length;
@@ -49,42 +60,43 @@ function build(catalog,records){
   const habitat={
     reef:clamp(n/100),
     vegetation:clamp(n/85),
-    schools:Math.min(6,Math.floor(n/12)),
+    schools:Math.min(7,Math.floor(n/11)),
     distantLife:clamp((n-6)/80),
     light:clamp(.18+n/150),
     richness:maturity
   };
   const all=seen.map(({film,record},i)=>{
-    const sp=species[i],niche=nicheFor(sp);
+    const sp=species[i],family=familyOf(sp),niche=nicheFor(sp),motion=motionFor(niche,family);
     const key=String(film.id??film.title??i);
-    const z=.16+unit('depth:'+key)*.84;
-    const base=.56+unit('scale:'+key)*.72;
+    const z=.12+unit('depth:'+key)*.88;
+    const individuality=.84+unit('scale:'+key)*.32;
     const prominence=ratingProminence(record.rating);
-    const scale=base*prominence;
+    const visualScale=(sizeByFamily[family]||.8)*individuality*prominence;
+    const scale=individuality*prominence;
+    const schoolable=['silver','reef','gold','veil','clownfish','angelfish','barracuda'].includes(family);
     return {
-      film, species:sp, niche, atlas:sp.atlas||0, index:sp.index||0,
+      film,species:sp,family,niche,motion,atlas:sp.atlas||0,index:sp.index||0,
       x:10+unit('x:'+key)*80,
-      y:yFor(niche,key),
+      y:yFor(niche,key,family),
       z,
-      depthBand:z<.43?'far':z<.73?'mid':'near',
-      scale,
-      speed:10+unit('speed:'+key)*13,
-      drift:niche==='benthic'?8+unit('drift:'+key)*12:18+unit('drift:'+key)*34,
+      depthBand:z<.38?'far':z<.72?'mid':'near',
+      scale,visualScale,
+      speed:motion==='cruise'?18+unit('speed:'+key)*14:motion==='drift'?13+unit('speed:'+key)*10:9+unit('speed:'+key)*10,
+      drift:motion==='grounded'?3+unit('drift:'+key)*5:motion==='hover'?5+unit('drift:'+key)*9:motion==='cruise'?34+unit('drift:'+key)*46:16+unit('drift:'+key)*28,
       direction:unit('direction:'+key)>.5?1:-1,
+      schoolable,
       hero:Number(record.rating)===5,
       rating:Number.isFinite(Number(record.rating))?Number(record.rating):null,
       order:hash32('population:'+key)
     };
   });
-  // Keep all 5.0 discoveries visible, then fill a stable sample. Mature seas
-  // express abundance through schools and habitat rather than icon-like clutter.
-  const organisms=all.sort((a,b)=>Number(b.hero)-Number(a.hero)||a.order-b.order).slice(0,40).sort((a,b)=>a.z-b.z);
-  return {
-    maturity,
-    habitat,
-    organisms,
-    stats:{watched:n,types:types.size,families:families.size,loved,exceptional,diversity}
-  };
+  // A mature ecosystem is composed, not tiled: keep rare favourites and a stable
+  // cross-section of life while abundance moves into schools/habitat layers.
+  const heroes=all.filter(o=>o.hero).sort((a,b)=>a.order-b.order).slice(0,8);
+  const heroIds=new Set(heroes.map(o=>String(o.film.id)));
+  const rest=all.filter(o=>!heroIds.has(String(o.film.id))).sort((a,b)=>a.order-b.order);
+  const organisms=[...heroes,...rest.slice(0,Math.max(0,40-heroes.length))].sort((a,b)=>a.z-b.z);
+  return {maturity,habitat,organisms,stats:{watched:n,types:types.size,families:families.size,loved,exceptional,diversity}};
 }
 const api={build,ratingProminence,nicheFor};
 root.CinemapOceanEcosystem=api;

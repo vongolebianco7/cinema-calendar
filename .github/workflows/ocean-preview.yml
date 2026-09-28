@@ -1,25 +1,38 @@
-name: Ocean Preview Artifact
+name: Ocean GitHub Pages Preview
 on:
   push:
     branches: [feature/ocean-ecosystem-v2]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Test Ocean model
         run: node tests/ocean-model.test.cjs
-      - name: Build static preview
+      - name: Build isolated preview
         run: |
-          mkdir -p preview
-          cp ocean-demo.html preview/index.html
-          cp -r js preview/js
-          cp -r assets preview/assets
-          cp -r data preview/data 2>/dev/null || true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: preview
+          mkdir -p /tmp/ocean-preview
+          cp ocean-demo.html /tmp/ocean-preview/index.html
+          cp -r js /tmp/ocean-preview/js
+          cp -r assets /tmp/ocean-preview/assets
+          cp -r data /tmp/ocean-preview/data 2>/dev/null || true
+      - name: Publish preview folder to Pages source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          rm -rf preview/ocean
+          mkdir -p preview/ocean
+          cp -r /tmp/ocean-preview/. preview/ocean/
+          git add preview/ocean
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Publish isolated Ocean preview"
+          git push origin main

@@ -28,6 +28,10 @@ jobs:
           git fetch origin feat/my-cinemap-viewing-records --depth=1
           git show FETCH_HEAD:assets/cinemap-ocean/growth-reef-mobile.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef-mobile.webp
           git show FETCH_HEAD:assets/cinemap-ocean/growth-reef.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/creatures-a.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-a.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/creatures-b.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-b.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/creatures-c.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-c.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/fish-atlas.webp > /tmp/ocean-preview/assets/cinemap-ocean/fish-atlas.webp
           cp -r data /tmp/ocean-preview/data 2>/dev/null || true
       - name: Publish preview folder to Pages source
         run: |

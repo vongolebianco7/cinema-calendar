@@ -27,7 +27,9 @@ for (const path of candidates) {
     const ocean=await page.locator('.oceanWorld').count();
     const reef=await page.locator('.oceanReefArt').count();
     const fauna=await page.locator('.oceanAnimal').count();
-    if(!ocean||!reef||fauna<28||fauna>40)errors.push(`${path}: mature ecosystem did not render as expected (world=${ocean}, reef=${reef}, fauna=${fauna})`);
+    // The ecosystem deliberately caps foreground individuals at 22 on iPhone;
+    // additional viewing history is expressed through reef growth, schools and ambience.
+    if(!ocean||!reef||fauna<18||fauna>22)errors.push(`${path}: mature ecosystem did not render as expected (world=${ocean}, reef=${reef}, fauna=${fauna})`);
   }
   const safeName=path.split('?')[0].replace(/\.html$/,'').replaceAll('/','-');
   await page.screenshot({path:`artifacts/mobile-smoke/${safeName}.png`,fullPage:true});

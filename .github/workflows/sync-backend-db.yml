@@ -8,6 +8,7 @@ on:
       - backend-foundation
     paths:
       - backend/**
+      - data/movies.json
       - .github/workflows/sync-backend-db.yml
   schedule:
     - cron: "45 18 * * *"

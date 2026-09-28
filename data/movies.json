@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T18:34:00.263060+00:00",
+  "generated_at": "2026-09-28T23:13:20.427310+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -24944,7 +24944,10 @@
       "overview": "",
       "poster": null,
       "source": "Netflix公式ニュースルーム",
-      "source_url": "https://about.netflix.com/ja/news/one-year-to-live-buy-a-man-trailer"
+      "source_url": "https://about.netflix.com/ja/news/one-year-to-live-buy-a-man-trailer",
+      "type": "見放題",
+      "checked_at": "2026-09-29",
+      "filmarks_url": "https://filmarks.com/movies/126990"
     },
     {
       "id": 1278101,
@@ -27408,6 +27411,41 @@
         "アドベンチャー",
         "ファンタジー"
       ]
+    },
+    {
+      "id": 1054867,
+      "title": "ワン・バトル・アフター・アナザー",
+      "original_title": "One Battle After Another",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Hulu",
+      "poster": "https://image.tmdb.org/t/p/w500/6963S9BQk07eEk8r26eaHgw0RNY.jpg",
+      "score": 7.339,
+      "votes": 4289,
+      "overview": "元革命家の頼りない中年男ボブ。彼はさらわれた愛娘を取り戻すため、かつての仲間や謎めいた空手のセンセイの助けを借りながら、恐ろしい軍人ロックジョーに立ち向かっていく。",
+      "tmdb": "https://www.themoviedb.org/movie/1054867",
+      "director": "ポール・トーマス・アンダーソン",
+      "director_id": 4762,
+      "cast": [
+        "レオナルド・ディカプリオ",
+        "ショーン・ペン",
+        "チェイス・インフィニティ",
+        "ベニチオ・デル・トロ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 162,
+      "genres": [
+        "スリラー",
+        "犯罪",
+        "コメディ"
+      ],
+      "source": "Hulu News（公式）",
+      "source_url": "https://news.hulu.jp/hbo_max_on_hulu/",
+      "type": "見放題",
+      "checked_at": "2026-09-29",
+      "filmarks_url": "https://filmarks.com/movies/121982"
     }
   ]
 }

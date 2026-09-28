@@ -28,6 +28,8 @@ jobs:
           git fetch origin feat/my-cinemap-viewing-records --depth=1
           git show FETCH_HEAD:assets/cinemap-ocean/growth-reef-mobile.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef-mobile.webp
           git show FETCH_HEAD:assets/cinemap-ocean/growth-reef.webp > /tmp/ocean-preview/assets/cinemap-ocean/growth-reef.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/deep-ocean-mobile.webp > /tmp/ocean-preview/assets/cinemap-ocean/deep-ocean-mobile.webp
+          git show FETCH_HEAD:assets/cinemap-ocean/deep-ocean.webp > /tmp/ocean-preview/assets/cinemap-ocean/deep-ocean.webp
           git show FETCH_HEAD:assets/cinemap-ocean/creatures-a.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-a.webp
           git show FETCH_HEAD:assets/cinemap-ocean/creatures-b.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-b.webp
           git show FETCH_HEAD:assets/cinemap-ocean/creatures-c.webp > /tmp/ocean-preview/assets/cinemap-ocean/creatures-c.webp

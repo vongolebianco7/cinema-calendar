@@ -1,113 +1,17 @@
 {
-  "generated_at": "2026-09-27T18:28:52.872090+00:00",
+  "generated_at": "2026-09-28T18:31:59.587462+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-08-28",
-      "2027-01-25"
+      "2026-08-29",
+      "2027-01-26"
     ],
     "background_slice": [
-      "2026-05-25",
-      "2026-07-23"
+      "2026-07-25",
+      "2026-09-22"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1561624,
-      "title": "Tiara Azul －Destino－（ティアラ・アスール　ディスティーノ）II",
-      "original_title": "Tiara Azul －Destino－（ティアラ・アスール　ディスティーノ）II",
-      "date": "2025-09-27",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qYBr6XgVXbDwPHCuC6Oy8bWoIV7.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1561624",
-      "director": null,
-      "director_id": null,
-      "cast": [
-        "暁千星",
-        "詩ちづる",
-        "凛城きら",
-        "小桜ほのか"
-      ],
-      "countries": [],
-      "runtime": 0,
-      "genres": []
-    },
-    {
-      "id": 1561612,
-      "title": "ダンサ セレナータ",
-      "original_title": "ダンサ セレナータ",
-      "date": "2025-09-27",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/j7J3uetvyINqHaTRLzdxDVLxnfz.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1561612",
-      "director": null,
-      "director_id": null,
-      "cast": [
-        "暁千星",
-        "詩ちづる",
-        "凛城きら",
-        "小桜ほのか"
-      ],
-      "countries": [],
-      "runtime": 0,
-      "genres": []
-    },
-    {
-      "id": 1553096,
-      "title": "ラストムービーPART２",
-      "original_title": "ラストムービーPART２",
-      "date": "2025-09-27",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/iLrGgGLkDiPrPCFic478xPHssNq.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1553096",
-      "director": "古澤健",
-      "director_id": 52811,
-      "cast": [],
-      "countries": [],
-      "runtime": 29,
-      "genres": []
-    },
-    {
-      "id": 1447896,
-      "title": "素敵すぎて素敵すぎて素敵すぎる",
-      "original_title": "素敵すぎて素敵すぎて素敵すぎる",
-      "date": "2025-09-27",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/k0ZkQ0dSnzV9Fi4dJkTqH0vJBQ1.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1447896",
-      "director": "大河原恵",
-      "director_id": 3705455,
-      "cast": [
-        "大河原恵",
-        "名村辰",
-        "宮本直子",
-        "鎌滝えり"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 67,
-      "genres": [
-        "ドラマ",
-        "コメディ"
-      ]
-    },
     {
       "id": 1697629,
       "title": "デイズ～かけがえのない日々～",
@@ -18663,6 +18567,63 @@
       ]
     },
     {
+      "id": 1781801,
+      "title": "KNOCK OUT 67 SUMMER JAM in OSAKA",
+      "original_title": "KNOCK OUT 67 SUMMER JAM in OSAKA",
+      "date": "2026-08-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/hJQFsz4LGI8z5m8fOL99RuG2IFT.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781801",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Taimu Hisai",
+        "Mo Abdurahman",
+        "Surasak Krudarmgym",
+        "Jin"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+    },
+    {
+      "id": 1688584,
+      "title": "ゴースト・オブ・ウエノ",
+      "original_title": "ゴースト・オブ・ウエノ",
+      "date": "2026-08-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/tnsgCwnNuPtCgRQZX5yBy8evwBc.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "上野でソーシャルワーカーとして働くサツキ（門脇麦）は、都内の公園の青テントで、”ゴージョー”と呼ばれる身元不明のホームレス男性が遺した日記を見つける。妻を亡くして自身も公園で暮らしているトシ（竹中直人）とともに、ゴージョーの正体を求め、日記を手がかりにホームレスのネットワークを訪ね歩くサツキ。やがてその先に一人の女性の存在が浮かび上がる。さらに荒川の土手で生活するマリの口から明かされたのは、ゴージョーが自ら家族との縁を切ったという過去。それはサツキの人生をも大きく揺らがす事実だった。ゴージョーとはいったい何者なのか。彼はなぜ世間から姿を消したのか。そしてサツキが本当に探している人物とは──",
+      "tmdb": "https://www.themoviedb.org/movie/1688584",
+      "director": "Wang Qi",
+      "director_id": 3246439,
+      "cast": [
+        "門脇麦",
+        "竹中直人",
+        "村松和輝",
+        "一本気伸吾"
+      ],
+      "countries": [],
+      "runtime": 90,
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+    },
+    {
       "id": 9539,
       "title": "マーターズ",
       "original_title": "Martyrs",
@@ -18842,6 +18803,35 @@
         "サイエンスフィクション",
         "ロマンス"
       ]
+    },
+    {
+      "id": 1782207,
+      "title": "Lemino BOXING PHOENIX BATTLE 159",
+      "original_title": "Lemino BOXING PHOENIX BATTLE 159",
+      "date": "2026-08-19",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/9lp42PFYZsx70YJDma7ti0P7KC2.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1782207",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Shu Utsuki",
+        "Reito Takahashi",
+        "Sora Tanaka",
+        "Reymond Yanong"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 42031,
@@ -19066,6 +19056,35 @@
       "countries": [],
       "runtime": 11,
       "genres": []
+    },
+    {
+      "id": 1781869,
+      "title": "SHOOT BOXING 2026 act.4",
+      "original_title": "SHOOT BOXING 2026 act.4",
+      "date": "2026-08-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/9T7OnEASWJKf1G5JxbtX935gaMb.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1781869",
+      "director": "シーザー武志",
+      "director_id": 551732,
+      "cast": [
+        "Kotaro Yamada",
+        "Farmonkon Jor Clinic",
+        "Yuuki Kasahara",
+        "Lom Ieesan Tiger Reon"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1703744,
@@ -19540,6 +19559,35 @@
       "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
+      "id": 1782012,
+      "title": "Drinks and Sweet Smoke before Candy",
+      "original_title": "Drinks and Sweet Smoke before Candy",
+      "date": "2026-09-03",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/33CZcxbMLr0RTdftWFFCjMtqpse.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1782012",
+      "director": "David Mitrevski",
+      "director_id": 6508892,
+      "cast": [
+        "Darko Stefanovski",
+        "Matea Ilievska"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 11,
+      "genres": [
+        "ドラマ",
+        "謎",
+        "ロマンス"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+    },
+    {
       "id": 8426,
       "title": "スワロウテイル",
       "original_title": "スワロウテイル",
@@ -19869,6 +19917,35 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-09-24T18:29:57.371940+00:00"
+    },
+    {
+      "id": 1782210,
+      "title": "Lemino BOXING PHOENIX BATTLE 160",
+      "original_title": "Lemino BOXING PHOENIX BATTLE 160",
+      "date": "2026-09-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/9aC8bGqrRyMp6j8il7lhuz5VOZq.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1782210",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "Jun Ikegawa",
+        "Koji Tsurumi",
+        "Taiga Imanaga",
+        "Min Ho Jung"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1769790,
@@ -20778,6 +20855,35 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-09-27T18:28:52.872090+00:00"
+    },
+    {
+      "id": 1782212,
+      "title": "Lemino BOXING PHOENIX BATTLE 161",
+      "original_title": "Lemino BOXING PHOENIX BATTLE 161",
+      "date": "2026-09-21",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/A8dVnHpI3AFIc8y0Gbmgdhbvodo.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1782212",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "佐々木尽",
+        "David Ssemujju",
+        "Ryuko Ishii",
+        "Takumi Fukunaga"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション"
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1781670,
@@ -23384,8 +23490,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
-      "score": 7.259,
-      "votes": 3107,
+      "score": 7.3,
+      "votes": 3134,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1368166",
       "director": "ポール・フェイグ",
@@ -23403,7 +23509,8 @@
       "genres": [
         "謎",
         "スリラー"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1302904,
@@ -23413,8 +23520,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
-      "score": 6.222,
-      "votes": 81,
+      "score": 6.2,
+      "votes": 93,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1302904",
       "director": "スサンネ・ビア",
@@ -23433,7 +23540,8 @@
         "ロマンス",
         "ファンタジー",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1739765,
@@ -23460,7 +23568,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1718930,
@@ -23487,7 +23596,8 @@
       "runtime": 0,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1700953,
@@ -23515,7 +23625,8 @@
         "ドラマ",
         "サイエンスフィクション",
         "ファンタジー"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1660754,
@@ -23544,7 +23655,8 @@
       "genres": [
         "ロマンス",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
       "id": 1552998,

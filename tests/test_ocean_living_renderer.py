@@ -11,5 +11,6 @@ assert '--w:' in immersive and 'var(--w)' in css, 'organism size must come from 
 assert 'Math.min(6' not in immersive, 'renderer should consume bounded school count from the scene model'
 assert 'o.atlas===0?3:4' in immersive, 'the 3x2 fish atlas and 4x3 creature atlases need different cell grids'
 assert 'background-size:300% 200%' in css, 'fish atlas must use its native 3x2 grid to avoid clipped creatures'
+assert 'oceanNiche' in immersive and '.oceanNicheBenthic' in css, 'benthic life must not use the same swimming motion as pelagic fish'
 assert 'https://' not in css, 'living Ocean CSS must not introduce external asset requests'
 print('Living Ocean renderer contract passed')

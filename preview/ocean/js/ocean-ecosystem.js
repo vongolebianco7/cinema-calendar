@@ -29,6 +29,11 @@ function ratingProminence(rating){
   if(r>0&&r<3)return .9;
   return 1;
 }
+const benthic=new Set(['octopus','cuttlefish','blueoctopus','lobster','nudibranch','horseshoe','mantisshrimp','isopod','urchin','seastar']);
+const reefLife=new Set(['seahorse','seadragon','clownfish','moray','puffer','angelfish','lionfish','nautilus']);
+const drifters=new Set(['jelly','combjelly']);
+function nicheFor(sp){const family=String(sp?.id||'').replace(/-\d+$/,'');if(benthic.has(family))return'benthic';if(reefLife.has(family))return'reef';if(drifters.has(family))return'drifter';return'pelagic';}
+function yFor(niche,key){const u=unit('y:'+key);if(niche==='benthic')return 72+u*18;if(niche==='reef')return 56+u*26;if(niche==='drifter')return 18+u*50;return 12+u*58;}
 function build(catalog,records){
   const model=oceanModel();
   const seen=watchedFilms(catalog,records);
@@ -50,21 +55,21 @@ function build(catalog,records){
     richness:maturity
   };
   const all=seen.map(({film,record},i)=>{
-    const sp=species[i];
+    const sp=species[i],niche=nicheFor(sp);
     const key=String(film.id??film.title??i);
     const z=.16+unit('depth:'+key)*.84;
     const base=.56+unit('scale:'+key)*.72;
     const prominence=ratingProminence(record.rating);
     const scale=base*prominence;
     return {
-      film, species:sp, atlas:sp.atlas||0, index:sp.index||0,
+      film, species:sp, niche, atlas:sp.atlas||0, index:sp.index||0,
       x:4+unit('x:'+key)*92,
-      y:12+unit('y:'+key)*64,
+      y:yFor(niche,key),
       z,
       depthBand:z<.43?'far':z<.73?'mid':'near',
       scale,
       speed:10+unit('speed:'+key)*13,
-      drift:18+unit('drift:'+key)*34,
+      drift:niche==='benthic'?8+unit('drift:'+key)*12:18+unit('drift:'+key)*34,
       direction:unit('direction:'+key)>.5?1:-1,
       hero:Number(record.rating)===5,
       rating:Number.isFinite(Number(record.rating))?Number(record.rating):null,
@@ -81,7 +86,7 @@ function build(catalog,records){
     stats:{watched:n,types:types.size,families:families.size,loved,exceptional,diversity}
   };
 }
-const api={build,ratingProminence};
+const api={build,ratingProminence,nicheFor};
 root.CinemapOceanEcosystem=api;
 if(typeof module!=='undefined')module.exports=api;
 })(typeof window==='undefined'?globalThis:window);

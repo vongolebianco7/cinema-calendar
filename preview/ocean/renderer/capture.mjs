@@ -1,11 +1,4 @@
 import { chromium } from 'playwright';
-const browser=await chromium.launch({headless:true});
-const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});
-await page.goto('http://127.0.0.1:4174/',{waitUntil:'domcontentloaded',timeout:15000});
-await page.waitForTimeout(3500);
-const canvas=page.locator('canvas');
-if(await canvas.count()!==1)throw new Error('Ocean canvas missing');
-const box=await canvas.boundingBox();
-if(!box||box.width<380||box.height<800)throw new Error('Ocean canvas does not fill iPhone viewport');
-await page.screenshot({path:'ocean-mature-iphone.png',fullPage:false});
-await browser.close();
+const browser=await chromium.launch({headless:true});const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});const errors=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text())});
+await page.goto('http://127.0.0.1:4174/',{waitUntil:'domcontentloaded',timeout:15000});await page.waitForFunction(()=>window.__cinemapOcean?.ready,{timeout:5000});try{await page.evaluate(()=>window.__cinemapOcean.ready)}catch(e){errors.push('asset ready: '+e.message)}await page.waitForTimeout(900);
+const canvas=page.locator('canvas');if(await canvas.count()!==1)errors.push('Ocean canvas missing');const box=await canvas.boundingBox();if(!box||box.width<380||box.height<800)errors.push('Ocean canvas does not fill iPhone viewport');await page.screenshot({path:'ocean-mature-iphone.png',fullPage:false});await browser.close();if(errors.length){console.error(errors.join('\n'));process.exit(1)}

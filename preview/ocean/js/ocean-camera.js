@@ -1,9 +1,9 @@
 (function(root){
   'use strict';
-  const BOUNDS={x:18,y:8,minDistance:9,maxDistance:34,overviewDistance:28};
+  const BOUNDS={x:18,y:8,minDistance:16,maxDistance:78,overviewDistance:70};
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   function createState(){return {x:0,y:0,targetX:0,targetY:0,distance:BOUNDS.overviewDistance,targetDistance:BOUNDS.overviewDistance,mode:'overview'};}
-  function applyPan(state,dx,dy){return {...state,targetX:clamp(state.targetX-dx*0.035,-BOUNDS.x,BOUNDS.x),targetY:clamp(state.targetY+dy*0.025,-BOUNDS.y,BOUNDS.y),mode:'explore'};}
+  function applyPan(state,dx,dy){return {...state,targetX:clamp(state.targetX-dx*0.055,-BOUNDS.x,BOUNDS.x),targetY:clamp(state.targetY+dy*0.035,-BOUNDS.y,BOUNDS.y),mode:'explore'};}
   function applyZoom(state,factor){return {...state,targetDistance:clamp(state.targetDistance*factor,BOUNDS.minDistance,BOUNDS.maxDistance),distance:clamp(state.distance*factor,BOUNDS.minDistance,BOUNDS.maxDistance),mode:'explore'};}
   function createCameraController(viewport,options){
     options=options||{}; let state=createState(); const pointers=new Map(); let lastPinch=0; let dragDistance=0; let downAt=0;

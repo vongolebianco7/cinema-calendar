@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const browser=await chromium.launch({headless:true});
+const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});
+await page.goto('http://127.0.0.1:4174/',{waitUntil:'networkidle',timeout:30000});
+await page.waitForTimeout(3500);
+const canvas=page.locator('canvas');
+if(await canvas.count()!==1)throw new Error('Ocean canvas missing');
+const box=await canvas.boundingBox();
+if(!box||box.width<380||box.height<800)throw new Error('Ocean canvas does not fill iPhone viewport');
+await page.screenshot({path:'ocean-mature-iphone.png',fullPage:false});
+await browser.close();

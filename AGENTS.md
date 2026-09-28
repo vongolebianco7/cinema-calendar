@@ -34,3 +34,42 @@ Use deterministic tools first: syntax checks, Python/Node tests, browser asserti
 Use an AI model only when code generation, diagnosis, or product judgment is actually needed.
 Do not spend AI calls repeatedly re-reading unchanged files or re-running checks that CI can run for free.
 Escalate to a stronger model only after a deterministic failure cannot be resolved by the current agent.
+
+
+## Task complexity routing
+Classify each task before implementation.
+
+### S — deterministic/local change
+Examples: copy, spacing, simple CSS, one-file bug, data correction.
+- One implementation agent.
+- Deterministic quality gate.
+- No architecture/research agent unless the gate exposes ambiguity.
+
+### M — feature change
+Examples: new interaction, multi-file UI feature, search/sort behavior, data-flow change.
+- One planning pass that states acceptance criteria and affected boundaries.
+- Implementation agent.
+- Deterministic quality gate + mobile browser validation.
+- One focused review pass only after tests pass.
+
+### L — architecture/product experience
+Examples: Ocean/Aquarium ecosystem, major navigation redesign, storage architecture, backend migration, cross-cutting refactor.
+- Architecture/design pass before code.
+- Explicit acceptance criteria and non-goals.
+- Implementation may span multiple coherent commits.
+- Deterministic tests after each stable milestone.
+- Browser/UX review after implementation.
+- Compliance/security review when external data, storage, authentication, APIs, or user content are affected.
+- Stronger reasoning model is allowed here; do not downgrade an L task merely to save credits.
+
+## Quality over credit minimization
+Credit saving is a routing constraint, not a product constraint.
+Never replace a required architecture/design/review step with a weaker implementation just to reduce AI usage.
+Spend stronger-model capacity on ambiguous product/architecture decisions and hard diagnosis; keep repeatable verification deterministic.
+
+## Deployment policy
+- Development branches must not require a production deployment to be considered tested.
+- Prefer local/CI static serving and Playwright for frontend validation.
+- Production deploy happens only after the quality gate passes and the approved change reaches main.
+- Hosting migrations must be staged and reversible. Keep the current production host until the replacement is verified.
+- Frontend and backend may use different hosts when that reduces limits/risk.

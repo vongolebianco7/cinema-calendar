@@ -8,7 +8,7 @@ export function createOceanRenderer(canvas,dpr=globalThis.devicePixelRatio||1){i
 export function mountOcean(canvas,options={}){
   const reduced=options.reducedMotion===true,quality=selectQuality({width:canvas.clientWidth||390,dpr:globalThis.devicePixelRatio||1,cores:globalThis.navigator?.hardwareConcurrency||4,reducedMotion:reduced}),renderer=createOceanRenderer(canvas,quality.dpr),scene=new THREE.Scene();scene.background=new THREE.Color(0x073946);
   const camera=new THREE.PerspectiveCamera(48,1,.1,240);const environment=createEnvironment(scene,quality);
-  let assetWorld=null,assetError=null;const ready=createAssetWorld(scene).then(w=>(assetWorld=w,w)).catch(err=>{assetError=err;console.error('[Ocean assets]',err);throw err});
+  let assetWorld=null,assetError=null;const ready=createAssetWorld(scene,options.ecosystem||null).then(w=>(assetWorld=w,w)).catch(err=>{assetError=err;console.error('[Ocean assets]',err);throw err});
   const clock=new THREE.Clock();let raf=0,disposed=false,yaw=0,pitch=0,targetYaw=0,targetPitch=0,distance=38,targetDistance=38,lastPinch=0;const look=new THREE.Vector3(0,.2,-40),pointers=new Map();
   function resize(){const w=Math.max(1,canvas.clientWidth||390),h=Math.max(1,canvas.clientHeight||520);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
   function pinchDistance(){const pts=[...pointers.values()];if(pts.length<2)return 0;return Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y)}

@@ -22,20 +22,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Vendor reviewed CC0 fish assets
+      - name: Vendor reviewed CC0 Ocean assets
         run: |
-          mkdir -p assets/creatures
+          mkdir -p assets/creatures assets/habitat
           curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/fish.glb -o assets/creatures/fish.glb
           curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/clownfish.glb -o assets/creatures/clownfish.glb
           curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/butterflyfish.glb -o assets/creatures/butterflyfish.glb
           curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/swordfish.glb -o assets/creatures/swordfish.glb
-          for f in assets/creatures/*.glb; do test "$(head -c4 "$f")" = glTF; done
+          for name in whale manta shark angler; do curl -fsSL "https://raw.githubusercontent.com/amarnotcool/ABYSS/main/public/assets/models/${name}.glb" -o "assets/creatures/${name}.glb"; done
+          for name in coral rocks shipwreck; do curl -fsSL "https://raw.githubusercontent.com/amarnotcool/ABYSS/main/public/assets/models/${name}.glb" -o "assets/habitat/${name}.glb"; done
+          for f in assets/creatures/*.glb assets/habitat/*.glb; do test "$(head -c4 "$f")" = glTF; done
           cd ../../..
-          if [ -n "$(git status --porcelain -- preview/ocean/renderer/assets/creatures)" ]; then
+          if [ -n "$(git status --porcelain -- preview/ocean/renderer/assets)" ]; then
             git config user.name github-actions[bot]
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-            git add preview/ocean/renderer/assets/creatures
-            git commit -m 'assets: vendor reviewed CC0 Ocean fish models'
+            git add preview/ocean/renderer/assets
+            git commit -m 'assets: vendor reviewed CC0 Ocean models'
             git push origin HEAD:feat/ocean-mature-renderer
           fi
       - run: npm install --package-lock-only

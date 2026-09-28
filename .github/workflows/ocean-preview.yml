@@ -33,7 +33,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout main
+          git fetch origin main
+          git checkout -B main origin/main
           rm -rf preview/ocean
           mkdir -p preview/ocean
           cp -r /tmp/ocean-preview/. preview/ocean/

@@ -5,8 +5,9 @@ immersive=(ROOT/'preview/ocean/js/ocean-immersive.js').read_text(encoding='utf-8
 renderer=(ROOT/'preview/ocean/js/ocean-v8.js').read_text(encoding='utf-8')
 geometry=json.loads((ROOT/'preview/ocean/assets/bsd/SmallFishA.json').read_text(encoding='utf-8'))
 assert 'CinemapOceanEcosystem.build' in immersive
-assert "VERSION='0.8.0'" in immersive and "CACHE='9'" in immersive
+assert "VERSION='0.8.1'" in immersive and "CACHE='10'" in immersive
 assert 'CinemapOceanV8.mount' in immersive and 'ocean-v8.js' in immersive
+assert 'brightness(1.55)' in immersive
 assert "getContext('webgl2'" in renderer
 assert 'SmallFishA.json' in renderer and 'smallfish.webp' in renderer
 assert 'ocean-cinematic-bg.webp' in renderer and (ROOT/'preview/ocean/assets/generated/ocean-cinematic-bg.webp').exists()
@@ -17,4 +18,4 @@ assert len(geometry['position'])>300 and len(geometry['normal'])==len(geometry['
 assert (ROOT/'preview/ocean/assets/bsd/LICENSE-WebGLSamples.txt').exists()
 assert 'https://' not in renderer and 'http://' not in renderer
 assert 'cosmosHalo' not in renderer and 'fish-atlas' not in renderer
-print('Ocean cinematic WebGL2 v0.8.0 renderer contract passed')
+print('Ocean cinematic WebGL2 v0.8.1 renderer contract passed')

@@ -1,0 +1,2 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+test('renderer build has a stable Pages entry',()=>{const cfg=fs.readFileSync(path.resolve(__dirname,'../preview/ocean/renderer/vite.config.js'),'utf8');assert.match(cfg,/ocean-pages\.js/);const entry=fs.readFileSync(path.resolve(__dirname,'../preview/ocean/renderer/src/pages-entry.js'),'utf8');assert.match(entry,/mountOcean/);});

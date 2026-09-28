@@ -1,0 +1,2 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+test('Ocean primary page uses a browser-loadable static renderer',()=>{const adapter=fs.readFileSync(path.resolve(__dirname,'../preview/ocean/js/ocean-3d-primary.js'),'utf8');assert.doesNotMatch(adapter,/renderer\/src\/main\.js/,'GitHub Pages cannot resolve the renderer source bare import of three');assert.match(adapter,/renderer\/dist\//,'primary Ocean must load the built local renderer bundle');});

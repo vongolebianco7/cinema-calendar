@@ -20,6 +20,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Stage reviewed CC0 fish assets
+        run: |
+          mkdir -p vendor-assets
+          curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/fish.glb -o vendor-assets/fish.glb
+          curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/clownfish.glb -o vendor-assets/clownfish.glb
+          curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/butterflyfish.glb -o vendor-assets/butterflyfish.glb
+          curl -fsSL https://raw.githubusercontent.com/Tanvik01/ocean/main/public/swordfish.glb -o vendor-assets/swordfish.glb
+          for f in vendor-assets/*.glb; do test "$(head -c4 "$f")" = glTF; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ocean-reviewed-cc0-assets
+          path: preview/ocean/renderer/vendor-assets/*.glb
+          retention-days: 1
       - run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build

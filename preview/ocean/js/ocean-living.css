@@ -7,6 +7,7 @@
 .oceanVegetation i:nth-child(1){left:7%;--h:.8}.oceanVegetation i:nth-child(2){left:14%;--h:.48;animation-delay:-3s}.oceanVegetation i:nth-child(3){left:31%;--h:.7;animation-delay:-5s}.oceanVegetation i:nth-child(4){left:59%;--h:.55;animation-delay:-2s}.oceanVegetation i:nth-child(5){left:78%;--h:.86;animation-delay:-4s}.oceanVegetation i:nth-child(6){left:91%;--h:.62;animation-delay:-6s}
 .oceanFauna{z-index:4}
 .oceanAnimal{width:clamp(36px,var(--w),190px);opacity:calc(.3 + var(--z)*.62);animation-name:oceanLivingSwim;animation-duration:var(--speed);animation-delay:var(--delay);transform:translate(-50%,-50%) scaleX(var(--dir));transform-origin:center;will-change:margin,transform}
+.oceanAnimal[style*="--atlas:0"]{background-size:300% 200%;background-position:calc(var(--col)*50%) calc(var(--row)*100%)}
 .oceanAnimal.oceanHero{z-index:3;filter:drop-shadow(0 12px 20px #001018aa) saturate(1.2) brightness(1.08)}
 .oceanAnimal.oceanDepthFar{filter:drop-shadow(0 5px 8px #00101855) saturate(.62) blur(.55px);opacity:.32}.oceanAnimal.oceanDepthMid{opacity:.68}.oceanAnimal.oceanDepthNear{filter:drop-shadow(0 14px 18px #001018aa) saturate(1.16);opacity:.96}
 .oceanSchoolLayer{z-index:3;opacity:calc(.05 + var(--life)*.58)}

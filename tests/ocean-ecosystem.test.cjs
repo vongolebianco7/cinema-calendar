@@ -69,10 +69,11 @@ if (!fs.existsSync(modulePath)) {
     assert.equal(best.hero,true);
   });
 
-  test('large histories cap visible organisms for mobile performance', () => {
+  test('large histories cap visible organisms and keep initial placement inside mobile edges', () => {
     const {catalog,records}=fixture(180);
     const scene=ocean.build(catalog,records);
-    assert.ok(scene.organisms.length <= 64);
+    assert.ok(scene.organisms.length <= 40);
+    assert.ok(scene.organisms.every(o=>o.x>=10&&o.x<=90));
     assert.equal(scene.stats.watched,180);
   });
 

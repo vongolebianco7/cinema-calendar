@@ -1,0 +1,26 @@
+name: Ocean engine benchmark
+on:
+  push:
+    branches: [spike/ocean-engine-benchmark]
+  pull_request:
+    paths:
+      - 'spikes/ocean-engine-benchmark/**'
+      - '.github/workflows/ocean-engine-benchmark.yml'
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: spikes/ocean-engine-benchmark
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: spikes/ocean-engine-benchmark/package-lock.json
+      - run: npm install --package-lock-only
+      - run: npm ci
+      - run: npm test

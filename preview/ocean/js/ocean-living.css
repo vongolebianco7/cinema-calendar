@@ -1,6 +1,9 @@
 /* Living Ocean composition. Loaded by ocean-immersive.js so legacy pages need no markup migration. */
 .oceanWorld{--reef:0;--vegetation:0;--life:0;--light:.18;background:linear-gradient(180deg,#06334a 0%,#052534 42%,#02141d 100%)}
 .oceanBackdrop{filter:saturate(calc(.82 + var(--growth)*.42)) contrast(1.05) brightness(calc(.72 + var(--light)*.32))}
+/* The ecosystem is intentionally much larger than the viewport. Camera movement translates this
+   single spatial layer, so swiping explores new habitat instead of nudging viewport-sized fish. */
+.oceanMap{position:absolute;z-index:1;inset:-90% -120%;transform-origin:50% 50%;will-change:transform}
 .oceanReefArt{position:absolute;z-index:1;left:-7%;right:-7%;bottom:-7%;height:62%;pointer-events:none;background:url("../assets/cinemap-ocean/growth-reef-mobile.webp") center bottom/cover no-repeat;opacity:calc(.04 + var(--reef)*.9);transform-origin:50% 100%;transform:translateY(calc((1 - var(--reef))*28%)) scale(calc(.9 + var(--reef)*.13));filter:saturate(calc(.72 + var(--reef)*.55)) brightness(calc(.62 + var(--reef)*.3));transition:opacity .5s,transform .5s,filter .5s}
 .oceanVegetation{position:absolute;z-index:2;inset:auto 0 0;height:38%;pointer-events:none;opacity:calc(.08 + var(--vegetation)*.72);overflow:hidden}
 .oceanVegetation i{position:absolute;bottom:-5%;width:9px;height:calc(20% + var(--h)*58%);border-radius:80% 20% 0 0;transform-origin:50% 100%;background:linear-gradient(90deg,#0b3829,#2c7452 52%,#123f31);filter:blur(.2px);animation:oceanFrond 7s ease-in-out infinite alternate}
@@ -24,6 +27,7 @@
 .oceanCaustics{z-index:6;opacity:calc(.08 + var(--light)*.28)}
 .oceanParticles{z-index:6;opacity:calc(.18 + var(--life)*.38)}
 .oceanExploreHint,.oceanCreatureCard{z-index:9}
+.oceanVersion{position:absolute;z-index:10;top:10px;right:12px;padding:4px 7px;border:1px solid #c5e8e84a;border-radius:999px;background:#03151dcc;color:#c9e4e4;font:700 9px/1.2 -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.08em;pointer-events:none}
 @keyframes oceanSwim{0%{margin-left:calc(var(--drift)*-.55);margin-top:4px}45%{margin-top:-8px}100%{margin-left:var(--drift);margin-top:1px}}
 @keyframes oceanCruise{0%{margin-left:calc(var(--drift)*-.5);margin-top:1px}50%{margin-top:-3px}100%{margin-left:var(--drift);margin-top:2px}}
 @keyframes oceanHover{0%{margin-left:-3px;margin-top:5px}50%{margin-left:4px;margin-top:-6px}100%{margin-left:7px;margin-top:2px}}
@@ -31,5 +35,5 @@
 @keyframes oceanGrounded{0%{margin-left:-2px;margin-top:1px}50%{margin-left:2px;margin-top:-1px}100%{margin-left:4px;margin-top:1px}}
 @keyframes oceanFrond{from{transform:rotate(-5deg) skewX(-2deg)}to{transform:rotate(6deg) skewX(2deg)}}
 @media(min-width:760px){.oceanReefArt{background-image:url("../assets/cinemap-ocean/growth-reef.webp");height:68%}}
-@media(max-width:700px){.oceanAnimal{max-width:250px}.oceanReefArt{left:-16%;right:-16%;height:58%;bottom:-4%}.oceanVegetation{height:31%}.oceanAmbientSchool i{width:22px;height:15px}}
+@media(max-width:700px){.oceanAnimal{max-width:250px}.oceanReefArt{left:-16%;right:-16%;height:58%;bottom:-4%}.oceanVegetation{height:31%}.oceanAmbientSchool i{width:22px;height:15px}.oceanVersion{top:8px;right:8px}}
 @media(prefers-reduced-motion:reduce){.oceanAnimal,.oceanVegetation i,.oceanAmbientSchool{animation:none!important}.oceanReefArt{transition:none}}

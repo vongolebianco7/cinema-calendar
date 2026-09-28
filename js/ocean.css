@@ -98,3 +98,10 @@
 @keyframes oceanSchoolDrift{from{translate:-10px 3px}to{translate:13px -5px}}
 @media(max-width:700px){.cosmosViewport{height:88svh;min-height:620px}.cosmosControls.oceanChrome{top:max(8px,env(safe-area-inset-top));left:8px;right:8px}.cosmosControls.oceanChrome>label,.cosmosControls.oceanChrome>form{display:none}.cosmosFoot.oceanChrome span:last-child{display:none}.cosmosDetail{bottom:48px;max-height:42%}.cosmosPlanet{width:120px;height:105px}.cosmosGalaxy{width:170px;height:130px}}
 @media(prefers-reduced-motion:reduce){.cosmosPlanet,.cosmosGalaxy .oceanSchool{animation:none}}
+
+.oceanImmersive{position:relative;width:100vw;margin-left:50%;transform:translateX(-50%);height:88svh;min-height:620px;overflow:hidden;background:#03141b}
+.oceanCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.oceanCanvas:active{cursor:grabbing}
+.oceanMinimalHud{position:absolute;z-index:3;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:12px;align-items:center;padding:7px 12px;border:1px solid #b6e2dd25;border-radius:999px;background:#02161ba8;backdrop-filter:blur(10px);font-size:9px;letter-spacing:.08em;color:#d9efecaa;white-space:nowrap;pointer-events:none}
+.oceanCreatureCard{position:absolute;z-index:5;left:50%;bottom:max(54px,calc(env(safe-area-inset-bottom) + 48px));transform:translateX(-50%);width:min(360px,calc(100% - 28px));padding:16px 18px;border:1px solid #a7d6d052;border-radius:16px;background:#03181ee6;backdrop-filter:blur(18px);box-shadow:0 18px 48px #0009;color:#eff8f6}
+.oceanCreatureCard[hidden]{display:none}.oceanCreatureCard small{font-size:8px;letter-spacing:.18em;color:#8fcac4}.oceanCreatureCard h3{margin:6px 24px 3px 0;font:normal 21px Georgia,serif}.oceanCreatureCard p{margin:0;color:#a9c4c0;font-size:11px}.oceanClose{position:absolute;right:10px;top:9px;border:0;background:transparent;color:#dceae8;font-size:22px}
+@media(max-width:700px){.oceanImmersive{height:90svh;min-height:640px}.oceanMinimalHud span:first-child{display:none}}

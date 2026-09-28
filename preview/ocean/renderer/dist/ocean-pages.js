@@ -13336,28 +13336,36 @@ function Jl(e = {}) {
 		particles: 0,
 		shafts: 1,
 		caustics: !1,
-		schoolSize: 8
+		schoolSize: 8,
+		maxLife: 34,
+		maxHabitat: 42
 	} : t <= 600 && r <= 3 ? {
 		tier: "mobile-low",
 		dpr: Math.min(1.25, n),
 		particles: 70,
 		shafts: 2,
 		caustics: !1,
-		schoolSize: 16
+		schoolSize: 16,
+		maxLife: 54,
+		maxHabitat: 72
 	} : t <= 600 ? {
 		tier: "mobile-high",
 		dpr: Math.min(2, n),
-		particles: 180,
-		shafts: 5,
+		particles: 150,
+		shafts: 4,
 		caustics: !0,
-		schoolSize: 32
+		schoolSize: 28,
+		maxLife: 82,
+		maxHabitat: 110
 	} : {
 		tier: "desktop",
 		dpr: Math.min(2, n),
-		particles: 260,
-		shafts: 7,
+		particles: 240,
+		shafts: 6,
 		caustics: !0,
-		schoolSize: 48
+		schoolSize: 44,
+		maxLife: 120,
+		maxHabitat: 160
 	};
 }
 //#endregion

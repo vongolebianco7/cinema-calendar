@@ -63,7 +63,7 @@ function build(catalog,records){
     const scale=base*prominence;
     return {
       film, species:sp, niche, atlas:sp.atlas||0, index:sp.index||0,
-      x:4+unit('x:'+key)*92,
+      x:10+unit('x:'+key)*80,
       y:yFor(niche,key),
       z,
       depthBand:z<.43?'far':z<.73?'mid':'near',
@@ -76,9 +76,9 @@ function build(catalog,records){
       order:hash32('population:'+key)
     };
   });
-  // Keep all 5.0 discoveries visible, then fill a stable sample. Density is
-  // expressed by habitat/schools rather than hundreds of DOM nodes on iPhone.
-  const organisms=all.sort((a,b)=>Number(b.hero)-Number(a.hero)||a.order-b.order).slice(0,64).sort((a,b)=>a.z-b.z);
+  // Keep all 5.0 discoveries visible, then fill a stable sample. Mature seas
+  // express abundance through schools and habitat rather than icon-like clutter.
+  const organisms=all.sort((a,b)=>Number(b.hero)-Number(a.hero)||a.order-b.order).slice(0,40).sort((a,b)=>a.z-b.z);
   return {
     maturity,
     habitat,

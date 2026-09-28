@@ -32,6 +32,16 @@ if (!fs.existsSync(modulePath)) {
     assert.ok(rated.habitat.reef>watchedOnly.habitat.reef);
     assert.ok(rated.habitat.vegetation>watchedOnly.habitat.vegetation);
   });
+  test('rating quality changes ecosystem growth without changing watched count', () => {
+    const low=fixture(24,2.5),high=fixture(24,5);
+    const lowSea=ocean.build(low.catalog,low.records),highSea=ocean.build(high.catalog,high.records);
+    assert.equal(lowSea.stats.watched,highSea.stats.watched);
+    assert.equal(lowSea.stats.rated,highSea.stats.rated);
+    assert.ok(highSea.stats.ratingEnergy>lowSea.stats.ratingEnergy);
+    assert.ok(highSea.maturity>lowSea.maturity);
+    assert.ok(highSea.habitat.reef>lowSea.habitat.reef);
+    assert.ok(highSea.habitat.vegetation>lowSea.habitat.vegetation);
+  });
   test('growth milestones make each viewing step visibly explainable', () => {
     const empty=ocean.build([],{});
     const one=fixture(1); const first=ocean.build(one.catalog,one.records);

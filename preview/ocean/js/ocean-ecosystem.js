@@ -2,7 +2,12 @@
 (function(root){
 'use strict';
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
-function hash32(value){let h=2166136261;for(const c of String(value)){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return(h^(h>>>16))>>>0;}
+function hash32(value){
+  let h=2166136261;
+  for(const c of String(value)){h^=c.codePointAt(0);h=Math.imul(h,16777619);}
+  h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;h=Math.imul(h,0xc2b2ae35);h^=h>>>16;
+  return h>>>0;
+}
 function unit(key){return hash32(key)/4294967295;}
 function oceanModel(){
   if(root.CinemapOceanModel)return root.CinemapOceanModel;

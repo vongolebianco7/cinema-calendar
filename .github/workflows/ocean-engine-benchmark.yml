@@ -24,13 +24,16 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Capture iPhone visual
+      - name: Capture iPhone visuals
         run: |
           npm run dev -- --port 4173 > /tmp/ocean-vite.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:4173 >/dev/null && break; sleep 1; done
           node capture.mjs
+          node capture-reference.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: ocean-engine-benchmark-iphone
-          path: spikes/ocean-engine-benchmark/ocean-engine-benchmark-iphone.png
+          path: |
+            spikes/ocean-engine-benchmark/ocean-engine-benchmark-iphone.png
+            spikes/ocean-engine-benchmark/ocean-mit-reference-iphone.png
           retention-days: 7

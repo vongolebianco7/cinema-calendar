@@ -31,7 +31,7 @@
       const representative=films.find(f=>model.genreStrengths(f)[g]);
       const fish=model.speciesFor(representative||{genres:[g]});
       const school=Array.from({length:Math.min(n,4)},(_,i)=>'<span class="oceanSchool" aria-hidden="true" style="--swim-offset:'+(i-1.5)*25+'px;--swim-depth:'+i*12+'px"></span>').join('');
-      return '<button type="button" class="cosmosBody cosmosGalaxy oceanAtlas'+fish.atlas+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10)+';'+fishStyle(fish))+'" aria-label="'+esc(g)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+school+'<span class="oceanHiddenMeta" aria-hidden="true"></span>+'</button>';
+      return '<button type="button" class="cosmosBody cosmosGalaxy oceanAtlas'+fish.atlas+(n?' cosmosGalaxy--active':' cosmosGalaxy--dormant')+'" data-cosmos-genre="'+esc(g)+'" style="'+nodeStyle({x:p[0],y:p[1],z:p[2]},'--hue:'+hue(g)+';--mass:'+Math.min(n,10)+';'+fishStyle(fish))+'" aria-label="'+esc(g)+'、'+n+'作品の記録"><span class="cosmosHalo"></span>'+school+'<span class="oceanHiddenMeta" aria-hidden="true"></span></button>';
     }).join('');
   };
   // Before ten ratings there is too little evidence for a useful suggestion.

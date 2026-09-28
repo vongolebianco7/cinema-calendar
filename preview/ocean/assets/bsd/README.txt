@@ -1,0 +1,1 @@
+Binary assets are added through Git blobs to preserve their original bytes.

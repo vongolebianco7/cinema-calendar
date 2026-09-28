@@ -1,0 +1,12 @@
+import { chromium } from '@playwright/test';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const errors = [];
+page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('pageerror', e => errors.push(e.message));
+await page.goto('http://127.0.0.1:4173', { waitUntil: 'networkidle' });
+await page.waitForFunction(() => document.body.dataset.ready === 'true', null, { timeout: 20000 });
+await page.waitForTimeout(1500);
+await page.screenshot({ path: 'ocean-engine-benchmark-iphone.png', fullPage: true });
+if (errors.length) throw new Error(errors.join('\n'));
+await browser.close();

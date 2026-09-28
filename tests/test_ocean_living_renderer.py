@@ -2,27 +2,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 immersive = (ROOT / 'preview/ocean/js/ocean-immersive.js').read_text(encoding='utf-8')
-renderer = (ROOT / 'preview/ocean/js/ocean-webgl.js').read_text(encoding='utf-8')
-scene = (ROOT / 'preview/ocean/js/ocean-scene.js').read_text(encoding='utf-8')
-camera = (ROOT / 'preview/ocean/js/ocean-camera.js').read_text(encoding='utf-8')
-shaders = (ROOT / 'preview/ocean/js/ocean-shaders.js').read_text(encoding='utf-8')
+renderer = (ROOT / 'preview/ocean/js/ocean-cinematic.js').read_text(encoding='utf-8')
 
-assert 'CinemapOceanEcosystem.build' in immersive, 'v0.5 must keep the deterministic ecosystem domain model'
-assert "VERSION='0.5.0'" in immersive, 'Ocean must expose a visible v0.5.0 build marker'
-assert "CACHE='5'" in immersive, 'renderer modules must share a v0.5 cache key'
-assert 'CinemapOceanWebGL.mount' in immersive, 'immersive Ocean must mount the WebGL renderer'
-assert "getContext('webgl2'" in renderer, 'primary Ocean renderer must use native WebGL2'
+assert 'CinemapOceanEcosystem.build' in immersive, 'v0.6 must keep the deterministic ecosystem domain model'
+assert "VERSION='0.6.0'" in immersive, 'Ocean must expose a visible v0.6.0 build marker'
+assert "CACHE='6'" in immersive, 'renderer modules must share a v0.6 cache key'
+assert 'CinemapOceanCinematic.mount' in immersive, 'immersive Ocean must mount the cinematic renderer'
+assert 'ocean-webgl.js' not in immersive and 'ocean-geometry.js' not in immersive, 'rejected low-poly renderer must not be loaded'
 assert 'requestAnimationFrame(frame)' in renderer, 'Ocean uses one realtime frame loop'
-assert 'devicePixelRatio' in renderer and 'Math.min(1.5' in renderer, 'iPhone render resolution must be bounded'
-assert 'showFallback' in renderer and 'webglcontextlost' in renderer, 'WebGL failure/context loss must fail gracefully'
-assert 'fish-atlas' not in renderer and 'creatures-' not in renderer, 'primary renderer must not return to sprite-atlas fish'
-assert 'cosmosHalo' not in immersive and 'oceanBubbles' not in immersive, 'primary v0.5 DOM must not create soap-bubble/halo treatment'
-assert 'world={width:44,height:16,depth:34}' in scene, 'Ocean must be a materially large continuous world'
-assert 'large<2' in scene, 'megafauna must remain rare'
-assert 'particleCount' in scene, 'sparse suspended particulate is part of the 3D volume'
-assert 'overviewDistance:70' in camera and 'maxDistance:78' in camera and 'x:18' in camera and 'y:8' in camera, 'portrait overview and travel bounds must be genuinely wide'
-assert "mode:'overview'" in camera, 'first camera state must be overview'
-assert 'dragDistance<8' in camera, 'drag must not accidentally become organism selection'
-assert 'uFogColor' in shaders and 'caustic' in shaders, 'underwater depth fog and caustic light belong to the shader'
-assert 'https://' not in renderer and 'https://' not in scene and 'https://' not in shaders, 'v0.5 renderer must not introduce external runtime requests'
-print('Ocean WebGL v0.5 renderer contract passed')
+assert 'devicePixelRatio' in renderer and 'Math.min(2' in renderer, 'iPhone render resolution must be bounded'
+assert 'showFallback' in renderer, 'canvas failure must fail gracefully'
+assert 'fish-atlas' not in renderer and 'cosmosHalo' not in renderer, 'primary renderer must not return to sprite/halo treatment'
+assert 'world={w:1600,h:900}' in renderer, 'Ocean must be a materially large continuous world'
+assert "zoom:.38" in renderer and "r.width/1050" in renderer, 'first camera state must be a wide overview'
+assert 'camera.x=clamp' in renderer and 'camera.y=clamp' in renderer, 'one-finger travel must cover a broad bounded world'
+assert 'drawWater' in renderer and 'drawLightShafts' in renderer and 'drawTerrain' in renderer, 'water volume and depth are explicit layers'
+assert 'drawReef' in renderer and 'drawKelp' in renderer and 'drawSchool' in renderer, 'habitat growth is visible beyond focal animals'
+assert 'bezierCurveTo' in renderer and 'createLinearGradient' in renderer, 'organic silhouettes and continuous shading replace triangle primitives'
+for family in ['whale','manta','hammerhead','turtle','jelly','octopus','seahorse']:
+    assert f"'{family}'" in renderer, f'{family} must have a distinct silhouette path'
+assert 'https://' not in renderer, 'v0.6 renderer must not introduce external runtime requests'
+print('Ocean cinematic v0.6 renderer contract passed')

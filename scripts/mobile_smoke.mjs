@@ -29,9 +29,10 @@ for (const path of candidates) {
   if(path.startsWith('preview/ocean/')){
     const scene=await page.locator('.oceanV6Scene').count();
     const canvas=await page.locator('.oceanCinematicCanvas').count();
-    const version=await page.getByText('OCEAN v0.6.0',{exact:true}).count();
+    const version=await page.locator('[data-ocean-version="0.6.1"]').count();
+    const marker=await page.getByText('OCEAN v0.6.1',{exact:true}).count();
     const fallback=await page.locator('.oceanCinematicFallback').count();
-    if(!scene||!version||(!canvas&&!fallback))errors.push(`${path}: cinematic Ocean shell did not render (scene=${scene}, canvas=${canvas}, fallback=${fallback}, version=${version})`);
+    if(!scene||!version||!marker||(!canvas&&!fallback))errors.push(`${path}: cinematic Ocean shell did not render (scene=${scene}, canvas=${canvas}, fallback=${fallback}, version=${version}, marker=${marker})`);
     if(canvas){
       const box=await page.locator('.oceanCinematicViewport').boundingBox();
       if(box){await page.mouse.move(box.x+box.width*.78,box.y+box.height*.55);await page.mouse.down();await page.mouse.move(box.x+box.width*.18,box.y+box.height*.43,{steps:12});await page.mouse.up();await page.waitForTimeout(550);await page.screenshot({path:'artifacts/mobile-smoke/preview-ocean-explored.png',fullPage:true});}

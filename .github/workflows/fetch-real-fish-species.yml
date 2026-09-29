@@ -1,0 +1,42 @@
+name: Fetch real fish species assets
+on:
+  push:
+    branches: [feat/ocean-real-species]
+    paths:
+      - '.github/workflows/fetch-real-fish-species.yml'
+permissions:
+  contents: write
+jobs:
+  fetch:
+    if: "!contains(github.event.head_commit.message, '[species-bot]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/ocean-real-species
+      - name: Download photographed transparent fish assets
+        run: |
+          set -euo pipefail
+          mkdir -p preview/ocean/real-fish/species
+          curl -fL --retry 3 -o preview/ocean/real-fish/species/goldfish.png 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Carassius_auratus_2.png'
+          curl -fL --retry 3 -o preview/ocean/real-fish/species/tench.png 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tinca_tinca.png'
+          curl -fL --retry 3 -o preview/ocean/real-fish/species/nase.png 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Chondrostoma_nasus.png'
+          curl -fL --retry 3 -o preview/ocean/real-fish/species/weatherfish.png 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Misgurnus_fossilis.png'
+      - name: Validate PNGs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+          files=list(Path('preview/ocean/real-fish/species').glob('*.png'))
+          assert len(files)==4
+          for p in files:
+            b=p.read_bytes(); assert len(b)>200_000,(p,len(b)); assert b[:8]==b'\x89PNG\r\n\x1a\n'
+            w,h=struct.unpack('>II',b[16:24]); assert w>=700 and h>=500,(p,w,h); print(p,len(b),w,h)
+          PY
+      - name: Commit local assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/ocean/real-fish/species
+          git commit -m 'chore(ocean): add four photographed fish species [species-bot]'
+          git push origin HEAD:feat/ocean-real-species

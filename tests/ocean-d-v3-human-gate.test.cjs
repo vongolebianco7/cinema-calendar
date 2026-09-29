@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('real iPhone gate is explicit',()=>{const s=fs.readFileSync('preview/ocean/poc/d-v3-human-gate.txt','utf8');assert.match(s,/HUMAN_GATE_REQUIRED=true/);assert.match(s,/DEVICE=iPhone Safari/);assert.match(s,/REQUIRED=G1,G2,FPS>=50/)});

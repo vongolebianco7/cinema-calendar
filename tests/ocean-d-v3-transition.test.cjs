@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('transition marker says PR',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-transition.marker','utf8').trim(),'TRANSITION_TO_PR'));

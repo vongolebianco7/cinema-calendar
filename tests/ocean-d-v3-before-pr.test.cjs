@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('pre-PR checkpoint says implementation complete but production blocked',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-before-pr.txt','utf8');assert.match(s,/implementation=complete/);assert.match(s,/production=blocked/)});

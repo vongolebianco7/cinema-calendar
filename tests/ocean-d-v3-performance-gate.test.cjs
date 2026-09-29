@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 performance gate keeps 50fps floor',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-performance-gate.md','utf8');assert.match(s,/pass >=50fps/);assert.match(s,/preferred median >=55fps/)});

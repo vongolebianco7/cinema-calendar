@@ -13521,8 +13521,7 @@ function lu(e, t, n, r, i) {
 			let a = e / 8;
 			c.push(new W(n + l + Math.sin(a * 5.2 + s + t() * .6) * (.07 + a * .16), -7.08 + a * i * (.78 + t() * .22), r + Math.cos(a * 3.4 + s) * (.04 + a * .06)));
 		}
-		let u = new wi(c);
-		e.add(new or(new Gi(u, 28, .024 + t() * .012, 5, !1), a));
+		e.add(new or(new Gi(new wi(c), 28, .024 + t() * .012, 5, !1), a));
 	}
 }
 function uu() {
@@ -13545,22 +13544,24 @@ function du(e, t, n, r, i) {
 	}
 }
 function fu(e, t) {
-	e.background = iu.clone(), e.fog = new Rt(807520, .015), e.add(ou()), e.add(new La(10935509, 201496, 1.35));
-	let n = new no(13170414, 2.15);
-	n.position.set(-12, 22, 6), e.add(n);
-	let r = new At();
-	e.add(r);
-	let i = au(7391), a = new Ui(2.2, 34);
-	for (let e = 0; e < Math.max(t.shafts, 5); e++) {
-		let e = new or(a, su(.02 + i() * .03));
-		e.position.set(-10 + i() * 20, 8, -22 - i() * 36), e.rotation.z = -.13 + i() * .12, e.rotation.y = -.25 + i() * .5, e.scale.x = .55 + i() * 1.2, r.add(e);
+	let n = Math.max(0, Math.min(1, Number(t?.maturity?.richness) || 0)), r = Math.max(0, Math.min(1, Number(t?.maturity?.habitat) || 0));
+	e.background = iu.clone(), e.fog = new Rt(807520, .016 - n * .003), e.add(ou()), e.add(new La(10935509, 201496, 1.2 + n * .28));
+	let i = new no(13170414, 1.9 + n * .35);
+	i.position.set(-12, 22, 6), e.add(i);
+	let a = new At();
+	e.add(a);
+	let o = au(7391), s = new Ui(2.2, 34), c = Math.max(2, Math.round(2 + (t.shafts || 4) * (.35 + .65 * n)));
+	for (let e = 0; e < c; e++) {
+		let e = new or(s, su(.018 + o() * .028));
+		e.position.set(-10 + o() * 20, 8, -22 - o() * 36), e.rotation.z = -.13 + o() * .12, e.rotation.y = -.25 + o() * .5, e.scale.x = .55 + o() * 1.2, a.add(e);
 	}
-	let o = new or(uu(), new na({
+	let l = new or(uu(), new na({
 		vertexColors: !0,
 		roughness: 1,
 		metalness: 0
 	}));
-	o.rotation.x = -Math.PI / 2, o.position.y = -7.35, r.add(o), [
+	l.rotation.x = -Math.PI / 2, l.position.y = -7.35, a.add(l);
+	let u = [
 		[
 			-10,
 			-29,
@@ -13591,32 +13592,34 @@ function fu(e, t) {
 			-69,
 			1.35
 		]
-	].forEach((e) => du(r, i, ...e));
-	let s = new na({
+	], d = Math.max(1, Math.round(1 + r * 5));
+	u.slice(0, d).forEach((e) => du(a, o, ...e));
+	let f = new na({
 		color: 2047031,
 		roughness: 1
-	});
-	for (let e = 0; e < 28; e++) {
-		let e = new or(new mi(.13 + i() * .38, 1), s);
-		e.position.set(-14 + i() * 28, -6.98, -28 - i() * 43), e.scale.set(.9 + i() * 1.35, .28 + i() * .4, .62 + i() * .76), e.rotation.set(i(), i() * Math.PI, i()), r.add(e);
+	}), p = Math.round(8 + r * 24);
+	for (let e = 0; e < p; e++) {
+		let e = new or(new mi(.13 + o() * .38, 1), f);
+		e.position.set(-14 + o() * 28, -6.98, -28 - o() * 43), e.scale.set(.9 + o() * 1.35, .28 + o() * .4, .62 + o() * .76), e.rotation.set(o(), o() * Math.PI, o()), a.add(e);
 	}
-	for (let e = 0; e < 32; e++) lu(r, i, -12 + i() * 24, -30 - i() * 39, .85 + i() * 2.5);
-	let c = new Pn(), l = new Float32Array(t.particles * 3);
-	for (let e = 0; e < t.particles; e++) l[e * 3] = -17 + i() * 34, l[e * 3 + 1] = -7 + i() * 20, l[e * 3 + 2] = -10 - i() * 62;
-	c.setAttribute("position", new yn(l, 3));
-	let u = new oi(c, new ti({
+	let m = Math.round(4 + r * 36);
+	for (let e = 0; e < m; e++) lu(a, o, -12 + o() * 24, -30 - o() * 39, .85 + o() * 2.5);
+	let h = Math.max(0, Number(t.particles) || 0), g = new Pn(), _ = new Float32Array(h * 3);
+	for (let e = 0; e < h; e++) _[e * 3] = -17 + o() * 34, _[e * 3 + 1] = -7 + o() * 20, _[e * 3 + 2] = -10 - o() * 62;
+	g.setAttribute("position", new yn(_, 3));
+	let v = new oi(g, new ti({
 		color: 14020328,
 		size: .024,
 		transparent: !0,
-		opacity: .24,
+		opacity: .18 + n * .1,
 		depthWrite: !1
 	}));
-	r.add(u);
-	let d = null;
-	return t.caustics && (d = new or(new Ui(54, 56), cu()), d.rotation.x = -Math.PI / 2, d.position.set(0, -7.08, -40), r.add(d)), {
-		group: r,
+	a.add(v);
+	let y = null;
+	return t.caustics && n > .08 && (y = new or(new Ui(54, 56), cu()), y.rotation.x = -Math.PI / 2, y.position.set(0, -7.08, -40), a.add(y)), {
+		group: a,
 		update(e) {
-			u.rotation.y = e * .0025, d && (d.material.uniforms.uTime.value = e);
+			v.rotation.y = e * .0025, y && (y.material.uniforms.uTime.value = e);
 		}
 	};
 }

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR title says preview',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-title.txt','utf8'),/preview/i));

@@ -1,63 +1,17 @@
 {
-  "generated_at": "2026-09-28T18:31:59.587462+00:00",
+  "generated_at": "2026-09-29T18:32:41.928750+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-08-29",
-      "2027-01-26"
+      "2026-08-30",
+      "2027-01-27"
     ],
     "background_slice": [
-      "2026-07-25",
-      "2026-09-22"
+      "2026-09-24",
+      "2026-11-22"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1697629,
-      "title": "デイズ～かけがえのない日々～",
-      "original_title": "デイズ～かけがえのない日々～",
-      "date": "2025-09-28",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/wEe7V04weXDENY2bKfFMSR1ooNk.jpg",
-      "score": 3.0,
-      "votes": 1,
-      "overview": "大分市で生まれ、都会で働く主人公。めまぐるしく時が進む都会から帰省した彼は、地元の豊かな自然、歴史の息づく風景に触れ、記憶の引き出しを開けていく。人を思いやることの美しさ、感謝の思い、そして自信を持って楽しく生きることこそが大切だと気づく。",
-      "tmdb": "https://www.themoviedb.org/movie/1697629",
-      "director": "平川雄一朗",
-      "director_id": 575084,
-      "cast": [
-        "市原隼人",
-        "財前直見"
-      ],
-      "countries": [],
-      "runtime": 41,
-      "genres": []
-    },
-    {
-      "id": 1554736,
-      "title": "ミュージカル「黒執事」～緑の魔女と人狼の森～",
-      "original_title": "ミュージカル「黒執事」～緑の魔女と人狼の森～",
-      "date": "2025-09-28",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/zWBQiEmkCXsLdJcaFp8O4BZN5vw.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1554736",
-      "director": "毛利亘宏",
-      "director_id": 1318727,
-      "cast": [
-        "Ikuma Kobayashi",
-        "立石俊樹",
-        "糸川耀士郎",
-        "Misa Tsunokawa"
-      ],
-      "countries": [],
-      "runtime": 180,
-      "genres": []
-    },
     {
       "id": 1560702,
       "title": "アレクサンダー －天上の王国－",
@@ -21281,6 +21235,36 @@
       "checked_at": "2026-09-25T18:28:36.466139+00:00"
     },
     {
+      "id": 1685619,
+      "title": "치킨런",
+      "original_title": "치킨런",
+      "date": "2026-09-29",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/dTshwL7wQOf9rv1QV3SQTUddluD.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1685619",
+      "director": "Yook Sang Feel",
+      "director_id": 6179921,
+      "cast": [
+        "Bae Sung Ho",
+        "강채윤",
+        "김예창"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 22,
+      "genres": [
+        "コメディ",
+        "ドラマ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+    },
+    {
       "id": 1275779,
       "title": "ディスクロージャー・デイ",
       "original_title": "Disclosure Day",
@@ -23683,7 +23667,8 @@
         "履歴",
         "戦争",
         "テレビ映画"
-      ]
+      ],
+      "checked_at": "2026-09-29T18:32:41.928750+00:00"
     },
     {
       "id": 1774734,
@@ -23712,7 +23697,8 @@
         "ホラー",
         "犯罪",
         "ファンタジー"
-      ]
+      ],
+      "checked_at": "2026-09-29T18:32:41.928750+00:00"
     },
     {
       "id": 1287141,
@@ -23826,6 +23812,36 @@
       "genres": [
         "ドラマ"
       ]
+    },
+    {
+      "id": 1782930,
+      "title": "超塑性变形",
+      "original_title": "超塑性变形",
+      "date": "2026-12-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/z7rIXho9Ts5zrOgYnwcHlxDVrHX.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1782930",
+      "director": "園子温",
+      "director_id": 67075,
+      "cast": [
+        "Miyoshi",
+        "牛抱せん夏",
+        "いしだ壱成",
+        "神楽坂恵"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 125,
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-09-29T18:32:41.928750+00:00"
     },
     {
       "id": 478798,
@@ -24645,6 +24661,37 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-09-26T18:28:58.311483+00:00"
+    },
+    {
+      "id": 1375441,
+      "title": "プライムタイム",
+      "original_title": "Primetime",
+      "date": "2027-01-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+      "score": 7.2,
+      "votes": 57,
+      "overview": "ネットで未成年者を狙う大人たちをあぶり出す「おとり捜査」の様子を流すリアリティTV。 未成年者になりすました「おとり」で大人たちを誘い出し、隠しカメラでその姿を撮影、クリス・ハンセンが犯罪者になりえる人間を直接追及する。しかし視聴率を上げ、番組をさらに人気番組へと押し上げるため、ハンセンの行動は次第にエスカレート。大スクープを追い求めるその姿勢に、やがて周囲からはジャーナリズムやモラルのあり方を疑問視する声も上がっていく。",
+      "tmdb": "https://www.themoviedb.org/movie/1375441",
+      "director": "ランス・オッペンハイム",
+      "director_id": 1405665,
+      "cast": [
+        "ロバート・パティンソン",
+        "スカイラー・ギソンド",
+        "メリット・ウェヴァー",
+        "フィービー・ブリジャーズ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 109,
+      "genres": [
+        "犯罪",
+        "スリラー",
+        "コメディ"
+      ],
+      "checked_at": "2026-09-29T18:32:41.928750+00:00"
     },
     {
       "id": 1280738,

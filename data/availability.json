@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T18:35:06.285415+00:00",
+  "generated_at": "2026-09-29T18:34:08.186136+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
@@ -5745,6 +5745,253 @@
       "buy": [],
       "checked_at": "2026-09-28T18:35:06.285415+00:00",
       "source_url": "https://www.themoviedb.org/movie/1743286/watch"
+    },
+    "1054867": {
+      "title": "ワン・バトル・アフター・アナザー",
+      "changes": [
+        {
+          "observed_at": "2026-09-29T18:34:08.186136+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1054867-one-battle-after-another/watch?locale=JP"
+    },
+    "1148365": {
+      "title": "Matchbox The Movie",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1148365/watch"
+    },
+    "1050981": {
+      "title": "Being Heumann",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1050981/watch"
+    },
+    "1685619": {
+      "title": "치킨런",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1685619/watch"
+    },
+    "1740230": {
+      "title": "雨のエトランゼ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1740230/watch"
+    },
+    "1782930": {
+      "title": "超塑性变形",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1782930/watch"
+    },
+    "99002": {
+      "title": "ネネットとボニ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/99002/watch"
+    },
+    "26895": {
+      "title": "ハッシュ！",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/26895/watch"
+    },
+    "51549": {
+      "title": "ぐるりのこと。",
+      "changes": [
+        {
+          "observed_at": "2026-09-29T18:34:08.186136+00:00",
+          "flatrate": [
+            "U-NEXT"
+          ],
+          "rent": [],
+          "buy": [
+            "Google Play Movies"
+          ]
+        }
+      ],
+      "services": [
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "U-NEXT"
+      ],
+      "rent": [],
+      "buy": [
+        "Google Play Movies"
+      ],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/51549/watch?locale=JP"
+    },
+    "758679": {
+      "title": "隣人たち",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/758679/watch"
+    },
+    "1290432": {
+      "title": "プライベート・ケース",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1290432/watch"
+    },
+    "1746256": {
+      "title": "舞台「忍たま乱太郎」〜みんなニコニコ、はい、どうぞ！の段〜",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1746256/watch"
+    },
+    "1738133": {
+      "title": "俺の血はピンクの血 映画俳優久保新二",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1738133/watch"
+    },
+    "1687841": {
+      "title": "Return to My Blue",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1687841/watch"
+    },
+    "1659702": {
+      "title": "超宇宙刑事ギャバン インフィニティ 太陽が泣いた日",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1659702/watch"
+    },
+    "1659696": {
+      "title": "仮面ライダーゼッツ さよならのミッション",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1659696/watch"
+    },
+    "1658226": {
+      "title": "だぁれかさんとアソぼ？",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1658226/watch"
+    },
+    "1634820": {
+      "title": "怪奇！死肉の男",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1634820/watch"
+    },
+    "478798": {
+      "title": "風林火山",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/478798/watch"
+    },
+    "1242332": {
+      "title": "NORMAL／ノーマル",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-09-29T18:34:08.186136+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1242332/watch"
     }
   }
 }

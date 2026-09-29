@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T18:34:00.193424+00:00",
+  "generated_at": "2026-09-29T18:33:46.721449+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -75055,6 +75055,88 @@
           "score": 6.0,
           "votes": 4,
           "tmdb": "https://www.themoviedb.org/movie/369633"
+        }
+      ]
+    },
+    "21007": {
+      "id": 21007,
+      "name": "ジョナ・ヒル",
+      "works": [
+        {
+          "id": 1049471,
+          "title": "アウトカム",
+          "year": "2026",
+          "date": "2026-04-06",
+          "poster": "https://image.tmdb.org/t/p/w342/imG2qynV4wAP4C7bPqf1BEGspcT.jpg",
+          "score": 5.4,
+          "votes": 258,
+          "tmdb": "https://www.themoviedb.org/movie/1049471"
+        },
+        {
+          "id": 799375,
+          "title": "スタッツ: 人生を好転させるツール",
+          "year": "2022",
+          "date": "2022-11-13",
+          "poster": "https://image.tmdb.org/t/p/w342/uOiJmotRM12wsgfwiEXsp3AErdU.jpg",
+          "score": 7.5,
+          "votes": 223,
+          "tmdb": "https://www.themoviedb.org/movie/799375"
+        },
+        {
+          "id": 437586,
+          "title": "mid90s ミッドナインティーズ",
+          "year": "2018",
+          "date": "2018-10-19",
+          "poster": "https://image.tmdb.org/t/p/w342/9Tw0Y3DK5kGIU9X1yw3Q9gCkOlb.jpg",
+          "score": 7.46,
+          "votes": 1868,
+          "tmdb": "https://www.themoviedb.org/movie/437586"
+        },
+        {
+          "id": 1590714,
+          "title": "Ain't It Funny",
+          "year": "2017",
+          "date": "2017-03-28",
+          "poster": "https://image.tmdb.org/t/p/w342/xsuCrRLwJ7MQLa7IiJeZrseriBv.jpg",
+          "score": 0.0,
+          "votes": 0,
+          "tmdb": "https://www.themoviedb.org/movie/1590714"
+        }
+      ]
+    },
+    "3246439": {
+      "id": 3246439,
+      "name": "Wang Qi",
+      "works": [
+        {
+          "id": 1688584,
+          "title": "ゴースト・オブ・ウエノ",
+          "year": "2026",
+          "date": "2026-08-08",
+          "poster": "https://image.tmdb.org/t/p/w342/tnsgCwnNuPtCgRQZX5yBy8evwBc.jpg",
+          "score": 0.0,
+          "votes": 0,
+          "tmdb": "https://www.themoviedb.org/movie/1688584"
+        },
+        {
+          "id": 874543,
+          "title": "急风晚来",
+          "year": "2021",
+          "date": "2021-10-10",
+          "poster": "https://image.tmdb.org/t/p/w342/kupnXDgbYxw4cvC9SEjhP7lfpJf.jpg",
+          "score": 0.0,
+          "votes": 0,
+          "tmdb": "https://www.themoviedb.org/movie/874543"
+        },
+        {
+          "id": 1018141,
+          "title": "操场",
+          "year": "2011",
+          "date": "2011-01-01",
+          "poster": null,
+          "score": 0.0,
+          "votes": 0,
+          "tmdb": "https://www.themoviedb.org/movie/1018141"
         }
       ]
     }

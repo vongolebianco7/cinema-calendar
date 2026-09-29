@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T18:35:43.135392+00:00",
+  "generated_at": "2026-09-29T18:34:38.810765+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -12288,6 +12288,19 @@
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
+      "kind": "streaming",
+      "title": "オッペンハイマー",
+      "id": 872585,
+      "original_title": null,
+      "date": "2026-09-28",
+      "service": "Prime Video",
+      "time": null,
+      "program": null,
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
       "kind": "tv",
       "title": "ウェズリー・スナイプス ザ・シューター",
       "id": 628900,
@@ -12314,11 +12327,50 @@
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
+      "kind": "streaming",
+      "title": "不思議の国でアリスと -Dive in Wonderland-",
+      "id": 1418665,
+      "original_title": null,
+      "date": "2026-09-29",
+      "service": "Prime Video",
+      "time": null,
+      "program": null,
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "치킨런",
+      "id": 1685619,
+      "original_title": "치킨런",
+      "date": "2026-09-29",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1685619",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
       "kind": "tv",
       "title": "激突！",
       "id": 839,
       "original_title": "Duel",
       "date": "2026-09-29",
+      "service": "テレビ東京",
+      "time": "13:40",
+      "program": "午後のロードショー",
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "セントラル・インテリジェンス",
+      "id": 302699,
+      "original_title": "Central Intelligence",
+      "date": "2026-09-30",
       "service": "テレビ東京",
       "time": "13:40",
       "program": "午後のロードショー",

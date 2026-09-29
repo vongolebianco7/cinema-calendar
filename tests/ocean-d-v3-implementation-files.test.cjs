@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 core index points to existing files',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-implementation-files.txt','utf8');for(const p of s.split('\n').filter(x=>x.includes('/')))assert.ok(fs.existsSync(p),p)});

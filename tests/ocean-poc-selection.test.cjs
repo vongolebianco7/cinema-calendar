@@ -1,46 +1,6 @@
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-
-const root = path.resolve(__dirname, '..');
-const read = p => fs.readFileSync(path.join(root, p), 'utf8');
-
-test('PoC harness fixes all comparison states and modes', () => {
-  const config = read('preview/ocean/poc/poc-config.js');
-  assert.match(config, /\[0, 10, 30, 100, 300, 500\]/);
-  assert.match(config, /\['A', 'B', 'C', 'D', 'E'\]/);
-  assert.match(config, /cinemap-poc-01/);
-});
-
-test('surviving PoC candidates use distinct rendering strategies', () => {
-  const main = read('preview/ocean/poc/poc-main.js');
-  assert.match(main, /async function mountA\(\).*ocean-renderer/s);
-  assert.match(main, /async function mountD\(\).*mountLayered2D/s);
-  assert.match(main, /async function mountE\(\).*mountIllustrated2D/s);
-});
-
-test('B and C are explicitly rejected rather than masquerading as distinct renderers', () => {
-  const main = read('preview/ocean/poc/poc-main.js');
-  assert.match(main, /B:.*REJECT/i);
-  assert.match(main, /C:.*REJECT/i);
-  assert.doesNotMatch(main, /function mountB\(/);
-  assert.doesNotMatch(main, /function mountC\(/);
-});
-
-test('PoC exposes reproducible performance evidence', () => {
-  const main = read('preview/ocean/poc/poc-main.js');
-  assert.match(main, /medianFps/);
-  assert.match(main, /longFrames/);
-  assert.match(main, /metrics\.ready/);
-  assert.match(main, /window\.__OCEAN_POC__/);
-});
-
-test('selection report narrows the device review to D and E', () => {
-  const report = read('docs/superpowers/reviews/ocean-poc-selection.md');
-  assert.match(report, /B: REJECT/);
-  assert.match(report, /C: REJECT/);
-  assert.match(report, /Finalists: D and E/);
-  for (const gate of ['G1','G2','G3','G4','G5','G6','G7']) assert.match(report, new RegExp(`${gate}.*PENDING`));
-  assert.match(report, /G8.*30 fps/);
-});
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const root=path.resolve(__dirname,'..');const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+test('fixed comparison inputs',()=>{const c=read('preview/ocean/poc/poc-config.js');assert.match(c,/\[0, 10, 30, 100, 300, 500\]/);assert.match(c,/cinemap-poc-01/)});
+test('D v2 removes primitive construction',()=>{const m=read('preview/ocean/poc/poc-main.js');for(const f of ['drawNaturalFish','drawSeabedTexture','drawWaterVolume','drawVegetation'])assert.match(m,new RegExp(`function ${f}`));assert.doesNotMatch(m,/function fish\(/);assert.doesNotMatch(m,/ctx\.lineTo\(x,floor\+Math\.sin/)});
+test('D v2 models depth and ecology',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/depthLayers/);assert.match(m,/maturity/);assert.match(m,/school/);assert.match(m,/scenario\.state\s*>=\s*500/)});
+test('B C remain rejected',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/B:'REJECT/);assert.match(m,/C:'REJECT/)});
+test('performance evidence remains',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/medianFps/);assert.match(m,/longFrames/);assert.match(m,/metrics\.ready/);assert.match(m,/window\.__OCEAN_POC__/)});

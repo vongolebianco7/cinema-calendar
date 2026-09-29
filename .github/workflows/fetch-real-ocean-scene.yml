@@ -1,0 +1,33 @@
+name: Fetch real underwater scene asset
+on:
+  push:
+    branches: [feat/ocean-real-species]
+    paths:
+      - '.github/workflows/fetch-real-ocean-scene.yml'
+permissions:
+  contents: write
+jobs:
+  fetch:
+    if: "!contains(github.event.head_commit.message, '[scene-bot]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: feat/ocean-real-species}
+      - name: Download CC0 underwater seabed photograph
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 -o preview/ocean/real-fish/scene-seabed.png 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Underwater_shots_in_Bohol.png'
+      - name: Validate scene raster
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+          p=Path('preview/ocean/real-fish/scene-seabed.png'); b=p.read_bytes(); assert len(b)>300000; assert b[:8]==b'\x89PNG\r\n\x1a\n'; w,h=struct.unpack('>II',b[16:24]); assert w>=900 and h>=450,(w,h); print(len(b),w,h)
+          PY
+      - name: Commit local scene
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/ocean/real-fish/scene-seabed.png
+          git commit -m 'chore(ocean): add CC0 photographed seabed [scene-bot]'
+          git push origin HEAD:feat/ocean-real-species

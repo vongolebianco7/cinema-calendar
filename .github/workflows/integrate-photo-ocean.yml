@@ -24,7 +24,7 @@ jobs:
             s=s.replace('</body>',inject+'</body>')
             p.write_text(s)
           t=Path('tests/ocean-photo-integration.test.cjs')
-          t.write_text("const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const h=fs.readFileSync('preview/ocean/index.html','utf8');test('production Ocean mounts photo ecosystem into existing dashboard',()=>{assert.match(h,/photo-ocean-production-v1/);assert.match(h,/real-fish\\/ecosystem\\.html\\?state=/);assert.match(h,/document\\.getElementById\\('universe'\\)/);assert.match(h,/CinemapRecords\\.read/)});test('maturity routing covers all required states',()=>{for(const n of [500,300,100,30,10,0])assert.match(h,new RegExp('\\?'+''))});")
+          t.write_text("const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const h=fs.readFileSync('preview/ocean/index.html','utf8');test('production Ocean mounts photo ecosystem into existing dashboard',()=>{assert.match(h,/photo-ocean-production-v1/);assert.match(h,/real-fish\\/ecosystem\\.html\\?state=/);assert.match(h,/document\\.getElementById\\('universe'\\)/);assert.match(h,/CinemapRecords\\.read/)});test('maturity routing covers all required states',()=>{assert.match(h,/n>=500\\?500:n>=300\\?300:n>=100\\?100:n>=30\\?30:n>=10\\?10:0/)})")
           q=Path('scripts/quality_gate.py'); qs=q.read_text(); needle="['node','--test','tests/ocean-photo-ecosystem.test.cjs']"; add="['node','--test','tests/ocean-photo-integration.test.cjs'],"+needle
           if 'ocean-photo-integration.test.cjs' not in qs: qs=qs.replace(needle,add); q.write_text(qs)
           PY

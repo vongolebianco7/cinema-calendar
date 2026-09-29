@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('before-open-PR marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-before-open-pr.marker','utf8').trim(),'BEFORE_OPEN_PR'));

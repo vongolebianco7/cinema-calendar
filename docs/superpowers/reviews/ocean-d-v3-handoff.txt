@@ -1,0 +1,8 @@
+CONTINUE_WITH:
+1 create PR feat/ocean-d-v3-sprites -> main
+2 wait for all required CI and preview deployment
+3 if CI fails, debug/fix without user interruption
+4 give user ONLY the deployed D-v3 100-state iPhone URL when preview is ready
+5 collect G1/G2 + HUD FPS
+6 on PASS integrate to production Ocean, run CI, merge
+7 on FAIL preserve compositor and replace art layer; do not production merge

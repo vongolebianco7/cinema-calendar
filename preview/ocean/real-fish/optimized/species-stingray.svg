@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 280" role="img" aria-label="stingray silhouette">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#789eaa"/><stop offset="0.46" stop-color="#456f7f"/><stop offset="1" stop-color="#244b5b"/>
+    </linearGradient>
+    <radialGradient id="light" cx="50%" cy="34%" r="58%">
+      <stop offset="0" stop-color="#d8eef0" stop-opacity=".42"/><stop offset="1" stop-color="#d8eef0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-8%" y="-12%" width="116%" height="124%"><feGaussianBlur stdDeviation="1.5"/></filter>
+  </defs>
+  <path fill="#173947" opacity=".34" filter="url(#soft)" d="M26 140C82 88 154 63 218 77c17 4 29 11 38 19 9-8 21-15 38-19 64-14 136 11 192 63-36 20-83 24-127 13-34-8-66-24-92-40l-8 38-5 125-5-125-8-38c-26 16-58 32-92 40-44 11-91 7-125-13z"/>
+  <path fill="url(#body)" d="M29 132C80 91 145 68 205 74c24 3 40 12 51 22 11-10 27-19 51-22 60-6 125 17 176 58-33 18-78 22-119 12-39-9-76-29-102-48-3 14-4 31-6 52-2-21-3-38-6-52-26 19-63 39-102 48-41 10-86 6-119-12z"/>
+  <ellipse cx="256" cy="105" rx="40" ry="45" fill="url(#body)"/>
+  <path fill="url(#body)" d="M245 128h22l7 63-7 51-7 34-4 4-4-4-7-34-7-51z"/>
+  <path fill="url(#light)" d="M62 128c51-32 105-44 154-35 18 3 31 9 40 17 9-8 22-14 40-17 49-9 103 3 154 35-44 7-88 0-126-16-30-13-51-27-68-42-17 15-38 29-68 42-38 16-82 23-126 16z"/>
+  <path fill="#355f70" d="M244 92l-26-22 5 37 24 12zm24 0 26-22-5 37-24 12z"/>
+  <ellipse cx="242" cy="109" rx="3.5" ry="2.6" fill="#071b22"/><ellipse cx="270" cy="109" rx="3.5" ry="2.6" fill="#071b22"/>
+  <g fill="#c8e0e2" opacity=".22"><circle cx="177" cy="103" r="4"/><circle cx="202" cy="92" r="3"/><circle cx="310" cy="92" r="3"/><circle cx="335" cy="103" r="4"/><circle cx="132" cy="122" r="2.5"/><circle cx="380" cy="122" r="2.5"/></g>
+</svg>

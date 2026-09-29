@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('user polygon verdict is binding',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-visual-gate.md','utf8');assert.match(s,/If the user says `ポリゴン`, G2 is FAIL/);assert.match(s,/regardless of CI, FPS/)});

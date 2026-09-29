@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final action before human gate is PR plus green CI',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-action.txt','utf8'),/CREATE_PR_AND_FIX_CI_TO_GREEN/));

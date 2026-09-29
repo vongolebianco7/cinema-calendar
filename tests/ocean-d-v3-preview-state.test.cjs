@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 preview explicitly blocks production adoption',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-ready-for-preview.md','utf8'),/not ready for production merge/));

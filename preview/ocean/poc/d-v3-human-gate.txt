@@ -1,0 +1,5 @@
+HUMAN_GATE_REQUIRED=true
+DEVICE=iPhone Safari
+STATE=100
+SEED=cinemap-poc-01
+REQUIRED=G1,G2,FPS>=50

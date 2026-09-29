@@ -2,19 +2,19 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 
-const dashboard=fs.readFileSync('preview/ocean/index.html','utf8');
 const ecosystem=fs.readFileSync('preview/ocean/real-fish/ecosystem.html','utf8');
 
-test('production Ocean derives deterministic ecology energy from user ratings',()=>{
-  assert.match(dashboard,/function\s+ratingEnergy\s*\(/);
-  assert.match(dashboard,/\.rating/);
-  assert.match(dashboard,/energy='\+energy/);
+test('photo ecosystem derives deterministic ecology energy from saved ratings',()=>{
+  assert.match(ecosystem,/cinemap-ocean-demo-records-v1/);
+  assert.match(ecosystem,/function\s+ratingEnergy\s*\(/);
+  assert.match(ecosystem,/\.rating/);
+  assert.match(ecosystem,/const\s+energy\s*=\s*ratingEnergy/);
 });
 
-test('photo ecosystem makes rating energy visibly affect ecology, not only labels',()=>{
-  assert.match(ecosystem,/const\s+energy\s*=/);
+test('rating energy visibly changes ecology, not only labels',()=>{
   assert.match(ecosystem,/cfg\.count\s*\+\s*energy/);
   assert.match(ecosystem,/--energy/);
   assert.match(ecosystem,/saturate\(/);
   assert.match(ecosystem,/var\(--energy\)/);
+  assert.match(ecosystem,/--dur/);
 });

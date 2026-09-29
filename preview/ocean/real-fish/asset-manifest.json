@@ -1,0 +1,14 @@
+{
+  "id": "real-fish-poc-01",
+  "file": "fish.jpg",
+  "purpose": "single-subject realism gate before ecosystem expansion",
+  "provenance": "generated for Cinemap with OpenAI image generation",
+  "runtimeExternalRequests": 0,
+  "thirdPartyScraping": false,
+  "paidRuntimeApi": false,
+  "acceptance": {
+    "iphoneFirstImpression": "real fish underwater",
+    "rejectIf": ["icon-like", "low-poly", "vector-like", "game-sprite-like"],
+    "fpsMedianMinimum": 50
+  }
+}

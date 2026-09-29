@@ -26,15 +26,17 @@ try{
       fallback:document.querySelector('#oceanFallback')?.hidden===false
     };
   });
-  if(result.overflow)throw new Error('iPhone horizontal overflow');
-  if(result.fallback)throw new Error('Ocean fell back instead of rendering');
-  if(result.fishCount<50)throw new Error(`expected dense mature ecosystem, got ${result.fishCount} fish`);
-  for(const cls of ['near','mid','far'])if(!result.depths.includes(cls))throw new Error(`missing depth layer ${cls}`);
-  if(!result.background.includes('ocean-background-approved.webp'))throw new Error('approved background is not active');
-  if(result.stageWidth>390||result.stageWidth<330)throw new Error(`unexpected stage width ${result.stageWidth}`);
-  if(result.stageHeight<430)throw new Error(`stage too shallow ${result.stageHeight}`);
-  if(errors.length)throw new Error(errors.join('\n'));
   await mkdir('artifacts/mobile-smoke',{recursive:true});
   await page.screenshot({path:'artifacts/mobile-smoke/ocean-ecosystem.png',fullPage:true});
+  const failures=[];
+  if(result.overflow)failures.push('iPhone horizontal overflow');
+  if(result.fallback)failures.push('Ocean fell back instead of rendering');
+  if(result.fishCount<50)failures.push(`expected dense mature ecosystem, got ${result.fishCount} fish`);
+  for(const cls of ['near','mid','far'])if(!result.depths.includes(cls))failures.push(`missing depth layer ${cls}`);
+  if(!result.background.includes('ocean-background-approved.webp'))failures.push('approved background is not active');
+  if(result.stageWidth>390||result.stageWidth<330)failures.push(`unexpected stage width ${result.stageWidth}`);
+  if(result.stageHeight<430)failures.push(`stage too shallow ${result.stageHeight}`);
+  failures.push(...errors);
+  if(failures.length)throw new Error(`${failures.join('; ')} | metrics=${JSON.stringify(result)}`);
   console.log(`Ocean iPhone visual gate passed: ${result.fishCount} fish, depths ${result.depths.join('/')}.`);
 }finally{await browser.close();}

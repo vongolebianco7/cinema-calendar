@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('before PR API call marker exists',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-before-call.txt','utf8'),/BEFORE_CREATE_PULL_REQUEST_CALL/));

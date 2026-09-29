@@ -13,13 +13,19 @@ test('PoC harness fixes all comparison states and modes', () => {
   assert.match(config, /cinemap-poc-01/);
 });
 
-test('PoC candidates are materially distinct', () => {
+test('surviving PoC candidates use distinct rendering strategies', () => {
   const main = read('preview/ocean/poc/poc-main.js');
   assert.match(main, /async function mountA\(\).*ocean-renderer/s);
-  assert.match(main, /async function mountB\(\).*navigator/s);
-  assert.match(main, /async function mountC\(\).*renderProfile:'asset-first'/s);
   assert.match(main, /async function mountD\(\).*mountLayered2D/s);
   assert.match(main, /async function mountE\(\).*mountIllustrated2D/s);
+});
+
+test('B and C are explicitly rejected rather than masquerading as distinct renderers', () => {
+  const main = read('preview/ocean/poc/poc-main.js');
+  assert.match(main, /B:.*REJECT/i);
+  assert.match(main, /C:.*REJECT/i);
+  assert.doesNotMatch(main, /function mountB\(/);
+  assert.doesNotMatch(main, /function mountC\(/);
 });
 
 test('PoC exposes reproducible performance evidence', () => {
@@ -30,9 +36,11 @@ test('PoC exposes reproducible performance evidence', () => {
   assert.match(main, /window\.__OCEAN_POC__/);
 });
 
-test('selection report keeps subjective visual gates unresolved until iPhone review', () => {
+test('selection report narrows the device review to D and E', () => {
   const report = read('docs/superpowers/reviews/ocean-poc-selection.md');
+  assert.match(report, /B: REJECT/);
+  assert.match(report, /C: REJECT/);
+  assert.match(report, /Finalists: D and E/);
   for (const gate of ['G1','G2','G3','G4','G5','G6','G7']) assert.match(report, new RegExp(`${gate}.*PENDING`));
   assert.match(report, /G8.*30 fps/);
-  assert.match(report, /ADOPT.*HOLD.*REJECT/);
 });

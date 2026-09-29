@@ -3,9 +3,9 @@
   "design": "Unlock meaningful biodiversity between 10 and 100 watched films; 150+ is bonus content, not the core loop.",
   "rarities": ["common", "uncommon", "rare", "epic"],
   "creatures": [
-    {"id":"horse-mackerel","name":"アジ系","kind":"fish","silhouette":"slender-forked-tail","rarity":"common","unlockAt":10,"spawnWeight":12,"zone":"midwater","size":"small","schooling":true,"assetStatus":"ready"},
+    {"id":"horse-mackerel","name":"アジ系","kind":"fish","silhouette":"slender-forked-tail","rarity":"common","unlockAt":10,"spawnWeight":12,"zone":"midwater","size":"small","schooling":true,"asset":"optimized/species-aji.webp","assetStatus":"ready-distinct-photo"},
     {"id":"small-schooling-fish","name":"小型群泳魚","kind":"fish","silhouette":"tiny-streamlined","rarity":"common","unlockAt":10,"spawnWeight":14,"zone":"midwater","size":"small","schooling":true,"assetStatus":"planned"},
-    {"id":"red-seabream","name":"マダイ系","kind":"fish","silhouette":"deep-oval","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"midwater","size":"medium","schooling":false,"assetStatus":"ready"},
+    {"id":"red-seabream","name":"マダイ系","kind":"fish","silhouette":"deep-oval","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"midwater","size":"medium","schooling":false,"asset":"optimized/species-madai.webp","assetStatus":"ready-distinct-photo"},
     {"id":"wrasse","name":"ベラ系","kind":"fish","silhouette":"slender-pointed-snout","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"reef","size":"small-medium","schooling":false,"assetStatus":"planned"},
     {"id":"butterflyfish","name":"チョウチョウウオ系","kind":"fish","silhouette":"disc-high-body","rarity":"uncommon","unlockAt":30,"spawnWeight":6,"zone":"reef","size":"small-medium","schooling":false,"assetStatus":"planned"},
     {"id":"goby","name":"ハゼ系","kind":"fish","silhouette":"low-bottom-dweller","rarity":"common","unlockAt":30,"spawnWeight":7,"zone":"seabed","size":"small","schooling":false,"assetStatus":"ready"},

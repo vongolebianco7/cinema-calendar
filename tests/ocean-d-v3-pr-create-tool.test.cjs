@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR create tool final instruction exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-create-tool.txt','utf8').trim(),'USE_GITHUB_CREATE_PULL_REQUEST'));

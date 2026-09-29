@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 verification suite is substantial',()=>{const files=fs.readdirSync('tests').filter(x=>x.startsWith('ocean-d-v3-')&&x.endsWith('.test.cjs'));assert.ok(files.length>=10,`expected >=10 D-v3 tests, got ${files.length}`)});

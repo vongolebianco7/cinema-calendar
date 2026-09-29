@@ -1,0 +1,36 @@
+name: Optimize Ocean photo assets
+on:
+  push:
+    branches: [feat/ocean-real-species]
+    paths:
+      - '.github/workflows/optimize-ocean-photo-assets.yml'
+permissions:
+  contents: write
+jobs:
+  optimize:
+    if: "!contains(github.event.head_commit.message, '[optimize-bot]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: feat/ocean-real-species}
+      - run: python -m pip install --quiet pillow
+      - name: Resize and encode phone-sized WebP assets
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          srcs=[Path('preview/ocean/real-fish/fish-real.png'),*Path('preview/ocean/real-fish/species').glob('*.png'),Path('preview/ocean/real-fish/scene-seabed.png')]
+          out=Path('preview/ocean/real-fish/optimized'); out.mkdir(exist_ok=True)
+          for p in srcs:
+            im=Image.open(p); im.thumbnail((960,960),Image.Resampling.LANCZOS)
+            target=out/(p.stem+'.webp'); im.save(target,'WEBP',quality=84,method=6)
+            print(p,'=>',target,im.size,target.stat().st_size)
+            assert target.stat().st_size>12000
+          PY
+      - name: Commit optimized local assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/ocean/real-fish/optimized
+          git commit -m 'perf(ocean): add phone-sized photo WebP assets [optimize-bot]'
+          git push origin HEAD:feat/ocean-real-species

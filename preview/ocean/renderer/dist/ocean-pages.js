@@ -15108,72 +15108,72 @@ var Nd = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 	grouper: {
 		kind: "creatures",
 		file: "fish",
-		size: .72,
+		size: 1.05,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
 	clown: {
 		kind: "creatures",
 		file: "clownfish",
-		size: .48,
+		size: .72,
 		yaw: Math.PI
 	},
 	butterfly: {
 		kind: "creatures",
 		file: "butterflyfish",
-		size: .55,
+		size: .82,
 		yaw: Math.PI
 	},
 	sword: {
 		kind: "creatures",
 		file: "swordfish",
-		size: 1.45,
+		size: 1.8,
 		yaw: Math.PI
 	},
 	shark: {
 		kind: "creatures",
 		file: "shark",
-		size: 2.45,
+		size: 3.1,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
 	manta: {
 		kind: "creatures",
 		file: "manta",
-		size: 3.15,
+		size: 3.8,
 		yaw: Math.PI / 2,
 		clip: "Armature|Swim"
 	},
 	whale: {
 		kind: "creatures",
 		file: "whale",
-		size: 6.6,
+		size: 7.2,
 		yaw: Math.PI / 2,
 		clip: "Armature|Swim"
 	},
 	angler: {
 		kind: "creatures",
 		file: "angler",
-		size: .78,
+		size: 1.05,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
 	coral: {
 		kind: "habitat",
 		file: "coral",
-		size: 7.4,
+		size: 8.6,
 		ground: !0
 	},
 	rocks: {
 		kind: "habitat",
 		file: "rocks",
-		size: 2.8,
+		size: 3.4,
 		ground: !0
 	},
 	wreck: {
 		kind: "habitat",
 		file: "shipwreck",
-		size: 5.2,
+		size: 5.8,
 		ground: !0
 	}
 }, Fd = /* @__PURE__ */ new Map();
@@ -15188,11 +15188,11 @@ function Ld(e, t) {
 		if (!e.isMesh || !e.material) return;
 		let r = (Array.isArray(e.material) ? e.material : [e.material]).map((e) => {
 			let r = e.clone();
-			if ("envMapIntensity" in r && (r.envMapIntensity = n ? .16 : .32), "roughness" in r && (r.roughness = Math.max(n ? .78 : .5, r.roughness ?? .6)), "metalness" in r && (r.metalness = Math.min(.06, r.metalness ?? 0)), n && r.color) {
-				let e = new X(2708041);
-				r.color.lerp(e, t === "coral" ? .62 : .24);
+			if ("envMapIntensity" in r && (r.envMapIntensity = n ? .22 : .42), "roughness" in r && (r.roughness = Math.max(n ? .72 : .42, r.roughness ?? .6)), "metalness" in r && (r.metalness = Math.min(.05, r.metalness ?? 0)), n && r.color) {
+				let e = new X(t === "coral" ? 4550488 : 3165765);
+				r.color.lerp(e, t === "coral" ? .38 : .18);
 			}
-			return "emissive" in r && n && r.emissive.multiplyScalar(.08), r.side = 2, r;
+			return "emissive" in r && n && r.emissive.multiplyScalar(.12), r.side = 2, r;
 		});
 		e.material = r.length === 1 ? r[0] : r;
 	});
@@ -15217,16 +15217,15 @@ function zd(e) {
 	let t = Math.sin(e * 9283.17) * 43758.5453;
 	return t - Math.floor(t);
 }
-function Bd(e, t, { radius: n = 6, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1, turnRadius: l = 6 } = {}) {
+function Bd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1 } = {}) {
 	return {
 		obj: e,
-		phase: o + (t % 7 - 3) * .23,
-		radius: n * (.86 + zd(t + 8) * .25),
-		y: r + (zd(t + 2) - .5) * 3.2 * c,
-		z: i + (zd(t + 4) - .5) * 7 * c,
-		speed: a * (.82 + zd(t + 6) * .35),
-		bob: s,
-		turnRadius: l
+		phase: o + (t % 7 - 3) * .18,
+		radius: n * (.9 + zd(t + 8) * .18),
+		y: r + (zd(t + 2) - .5) * 2.2 * c,
+		z: i + (zd(t + 4) - .5) * 3.5 * c,
+		speed: a * (.86 + zd(t + 6) * .28),
+		bob: s
 	};
 }
 function Vd(e) {
@@ -15236,7 +15235,6 @@ function Vd(e) {
 		maturity: Math.max(0, Math.min(1, Number(e?.maturity) || 0)),
 		reef: Math.max(0, Math.min(1, Number(n.reef) || 0)),
 		vegetation: Math.max(0, Math.min(1, Number(n.vegetation) || 0)),
-		distantLife: Math.max(0, Math.min(1, Number(n.distantLife) || 0)),
 		schools: Number(n.schools) || 0,
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
@@ -15262,11 +15260,11 @@ function Ud(e, t) {
 }
 function Wd(e, t) {
 	let n = Math.max(1, t?.life || 32), r = [];
-	if (e.organisms.length) return e.organisms.slice(0, 24).forEach((t, i) => {
-		let a = nu(i), o = !!t.hero, s = Ud(t, a), c = Math.max(.42, Math.min(1.65, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(2, Math.min(5, 2 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
+	if (e.organisms.length) return e.organisms.slice(0, 28).forEach((t, i) => {
+		let a = nu(i), o = !!t.hero, s = Ud(t, a), c = Math.max(.65, Math.min(1.9, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(3, Math.min(6, 3 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
 		for (let e = 0; e < l && r.length < n; e++) r.push({
 			key: s,
-			scale: c * (e ? .62 + zd(i * 7 + e) * .2 : 1),
+			scale: c * (e ? .72 + zd(i * 7 + e) * .18 : 1),
 			hero: o,
 			niche: t.niche || "pelagic",
 			index: i,
@@ -15274,13 +15272,13 @@ function Wd(e, t) {
 			profile: a
 		});
 	}), r;
-	let i = Math.min(n, Math.max(1, Math.round(2 + e.watched * .5 + e.schools * 2)));
+	let i = Math.min(n, Math.max(12, Math.round(8 + e.watched * .55 + e.schools * 2)));
 	return Array.from({ length: i }, (e, t) => {
 		let n = nu(t);
 		return {
 			key: Ud({}, n),
-			scale: .62 * n.scale,
-			hero: !1,
+			scale: .82 * n.scale,
+			hero: t % 19 == 0,
 			niche: "pelagic",
 			index: t,
 			member: 0,
@@ -15289,9 +15287,9 @@ function Wd(e, t) {
 	});
 }
 function Gd(e, t) {
-	let n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7), r = Math.max(1, Math.min(12, Math.round((t?.habitat || 8) / 9)));
+	let n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7), r = Math.max(5, Math.min(14, Math.round((t?.habitat || 8) / 8)));
 	return [
-		"rocks",
+		"coral",
 		"rocks",
 		"coral",
 		"rocks",
@@ -15302,10 +15300,12 @@ function Gd(e, t) {
 		"rocks",
 		"coral",
 		"rocks",
+		"coral",
+		"rocks",
 		"coral"
 	].slice(0, r).map((t, r) => ({
 		key: t,
-		scale: t === "wreck" ? .5 : t === "coral" ? .28 + e.reef * .24 : .38 + n * .22 + zd(r) * .12,
+		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + zd(r) * .1,
 		index: r
 	}));
 }
@@ -15325,27 +15325,32 @@ async function Kd(e, t = null, n = {}) {
 	};
 	let c = Gd(o, s);
 	(await Promise.all(c.map((e) => Rd(e.key, e.scale)))).forEach(({ holder: e }, t) => {
-		let n = t % 2 ? 9 : 6.5, i = t * 2.399;
-		e.position.set(Math.cos(i) * n, -7.2, -36 - Math.floor(t / 2) * 5 + Math.sin(i) * 2.5), e.rotation.y += i + .4, r.add(e);
+		let n = [
+			-9,
+			-4,
+			2,
+			7,
+			10
+		], i = n[t % n.length] + (zd(t) - .5) * 2, a = -27 - Math.floor(t / n.length) * 8 - t % 2 * 2;
+		e.position.set(i, -6.9, a), e.rotation.y += zd(t + 2) * Math.PI * 2, r.add(e);
 	});
 	let l = Wd(o, s);
-	(await Promise.all(l.map((e) => Rd(e.key, e.scale * (e.hero ? 1.12 : 1))))).forEach((e, t) => {
+	(await Promise.all(l.map((e) => Rd(e.key, e.scale * (e.hero ? 1.18 : 1))))).forEach((e, t) => {
 		let n = l[t], o = n.profile || nu(t);
 		r.add(e.holder), e.mixer && i.push(e.mixer);
 		let s = n.niche === "reef", c = n.niche === "benthic" || n.niche === "drifter", u = n.hero || [
 			"whale",
 			"shark",
 			"manta"
-		].includes(n.key), d = o.depthBand === "near" ? 2.6 : o.depthBand === "far" ? -1.4 : .6, f = (n.member || 0) * .11;
+		].includes(n.key), d = t % 3, f = -25 - t % 8 * 3.5 - Math.floor(t / 24) * 5, p = c ? -3.8 : u ? 2.8 : d === 0 ? 2.2 : d === 1 ? .3 : -1.5;
 		a.push(Bd(e.holder, t, {
-			radius: Math.max(u ? 8 : s ? 3.8 : 5, o.turnRadius),
-			y: c ? -3.4 : u ? 4.5 : d,
-			z: -28 - n.index % 7 * 6.2 - (n.member || 0) * .35,
-			speed: (u ? .022 : c ? .03 : .05) * o.speed,
-			bob: c ? .2 : u ? .55 : .28 + .15 * o.scale,
-			spread: u ? .2 : .72,
-			phase: Math.PI / 2 + o.phase + f,
-			turnRadius: o.turnRadius
+			radius: u ? 7.5 : s ? 3.4 : 4.8,
+			y: p,
+			z: f,
+			speed: (u ? .026 : c ? .035 : .058) * o.speed,
+			bob: c ? .18 : u ? .42 : .3 + .12 * o.scale,
+			spread: u ? .18 : .58,
+			phase: Math.PI / 2 + o.phase + (n.member || 0) * .1
 		}));
 	});
 	let u = 0;
@@ -15355,7 +15360,7 @@ async function Kd(e, t = null, n = {}) {
 			u += e, i.forEach((t) => t.update(e));
 			for (let e of a) {
 				let t = u * e.speed + e.phase;
-				e.obj.position.set(Math.cos(t) * e.radius, e.y + Math.sin(t * 1.7) * e.bob, e.z + Math.sin(t) * e.radius * .32), e.obj.rotation.y = Math.atan2(-Math.sin(t) * e.radius, Math.cos(t) * e.radius * .32), e.obj.rotation.z = Math.sin(t) * .022;
+				e.obj.position.set(Math.cos(t) * e.radius, e.y + Math.sin(t * 1.7) * e.bob, e.z + Math.sin(t) * e.radius * .25), e.obj.rotation.y = Math.atan2(-Math.sin(t) * e.radius, Math.cos(t) * e.radius * .25), e.obj.rotation.z = Math.sin(t) * .018;
 			}
 		},
 		dispose() {

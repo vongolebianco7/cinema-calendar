@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 rights record excludes third-party embedded art',()=>{const s=fs.readFileSync('preview/ocean/poc/d-v3-license.txt','utf8');assert.match(s,/No third-party visual asset/);assert.match(s,/Runtime external asset requests: none/)});

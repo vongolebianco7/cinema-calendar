@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('durable D-v3 checkpoint exists',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-checkpoint.md','utf8');assert.match(s,/cached image sprite source module/);assert.match(s,/must not be merged.*before G1\/G2/s)});

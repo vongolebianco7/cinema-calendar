@@ -12,7 +12,8 @@ test('photo ecosystem derives deterministic ecology energy from saved ratings',(
 });
 
 test('rating energy visibly changes ecology, not only labels',()=>{
-  assert.match(ecosystem,/cfg\.count\s*\+\s*energy/);
+  assert.match(ecosystem,/function populationTarget\(cfg,energy\)/);
+  assert.match(ecosystem,/cfg\.count\s*\*\s*3\s*\+\s*energy\s*\*\s*2/);
   assert.match(ecosystem,/--energy/);
   assert.match(ecosystem,/saturate\(/);
   assert.match(ecosystem,/var\(--energy\)/);

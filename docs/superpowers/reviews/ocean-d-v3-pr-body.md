@@ -1,0 +1,1 @@
+D-v3 converts D's primary habitat visuals to pre-decoded image sprites while retaining the smooth Canvas 2D compositor, fixed growth states, DPR cap and FPS HUD. It adds provenance/performance contracts and prevents a CI-green result from being treated as visual approval. This PR is for preview evaluation; do not production-merge until iPhone G1/G2 and >=50fps pass.

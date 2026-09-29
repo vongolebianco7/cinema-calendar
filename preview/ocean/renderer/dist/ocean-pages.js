@@ -13239,15 +13239,17 @@ function eu(e, t = 0) {
 	let n = Math.sin((e + 1) * 12.9898 + t * 78.233) * 43758.5453;
 	return n - Math.floor(n);
 }
-function tu(e = 0) {
-	let t = Math.max(0, Number(e) || 0), n = "empty";
-	return t >= 100 ? n = "mature" : t >= 30 ? n = "growing" : t >= 10 ? n = "young" : t > 0 && (n = "awakening"), {
-		count: t,
-		stage: n,
-		richness: Math.min(1, t / 100),
-		habitat: Math.min(1, t / 80),
-		life: Math.min(1, t / 70),
-		depth: Math.min(1, t / 50)
+function tu(e = 0, t = 0) {
+	let n = Math.max(0, Number(e) || 0), r = Math.max(0, Math.min(20, Number(t) || 0)), i = n + r, a = "empty";
+	return i >= 100 ? a = "mature" : i >= 30 ? a = "growing" : i >= 10 ? a = "young" : i > 0 && (a = "awakening"), {
+		count: n,
+		ratingEnergy: r,
+		effectiveCount: i,
+		stage: a,
+		richness: Math.min(1, i / 100),
+		habitat: Math.min(1, i / 80),
+		life: Math.min(1, i / 70),
+		depth: Math.min(1, i / 50)
 	};
 }
 function nu(e) {
@@ -15384,86 +15386,95 @@ function Jd(e) {
 	let t = Number(e?.stats?.watched);
 	return Number.isFinite(t) ? Math.max(0, t) : Array.isArray(e?.organisms) ? e.organisms.length : 0;
 }
-function Yd(e, t = {}) {
+function Yd(e) {
+	let t = Number(e?.stats?.ratingEnergy);
+	if (Number.isFinite(t)) return Math.max(0, Math.min(20, t));
+	let n = Array.isArray(e?.organisms) ? e.organisms : [];
+	return Math.min(20, n.reduce((e, t) => {
+		let n = Number(t?.rating);
+		return e + (n >= 5 ? 1 : n >= 4.5 ? .6 : n >= 4 ? .25 : 0);
+	}, 0));
+}
+function Xd(e, t = {}) {
 	let n = t.reducedMotion === !0, r = ql({
 		width: e.clientWidth || 390,
 		dpr: globalThis.devicePixelRatio || 1,
 		cores: globalThis.navigator?.hardwareConcurrency || 4,
 		reducedMotion: n
-	}), i = Jd(t.ecosystem), a = tu(i), o = Jl(r, i), s = qd(e, r.dpr), c = new zt();
-	c.background = new X(473414);
-	let l = new Ja(52, 1, .1, 180), u = du(c, {
+	}), i = tu(Jd(t.ecosystem), Yd(t.ecosystem)), a = Jl(r, i.effectiveCount), o = qd(e, r.dpr), s = new zt();
+	s.background = new X(473414);
+	let c = new Ja(52, 1, .1, 180), l = du(s, {
 		...r,
-		particles: o.particles,
-		maturity: a
-	}), d = null, f = null, p = Kd(c, t.ecosystem || null, {
+		particles: a.particles,
+		maturity: i
+	}), u = null, d = null, f = Kd(s, t.ecosystem || null, {
 		quality: r,
-		caps: o,
-		maturity: a
-	}).then((e) => (d = e, e)).catch((e) => {
-		throw f = e, console.error("[Ocean assets]", e), e;
-	}), m = new Eo(), h = 0, g = !1, _ = 0, v = 0, y = 0, b = 0, x = 24, S = 24, C = 0, w = new W(0, -1.8, -35), T = /* @__PURE__ */ new Map();
-	function E() {
+		caps: a,
+		maturity: i
+	}).then((e) => (u = e, e)).catch((e) => {
+		throw d = e, console.error("[Ocean assets]", e), e;
+	}), p = new Eo(), m = 0, h = !1, g = 0, _ = 0, v = 0, y = 0, b = 24, x = 24, S = 0, C = new W(0, -1.8, -35), w = /* @__PURE__ */ new Map();
+	function T() {
 		let t = Math.max(1, e.clientWidth || 390), n = Math.max(1, e.clientHeight || 520);
-		s.setSize(t, n, !1), l.aspect = t / n, l.updateProjectionMatrix();
+		o.setSize(t, n, !1), c.aspect = t / n, c.updateProjectionMatrix();
 	}
-	function D() {
-		let e = [...T.values()];
+	function E() {
+		let e = [...w.values()];
 		return e.length < 2 ? 0 : Math.hypot(e[0].x - e[1].x, e[0].y - e[1].y);
 	}
-	let O = (t) => {
-		T.set(t.pointerId, {
+	let D = (t) => {
+		w.set(t.pointerId, {
 			x: t.clientX,
 			y: t.clientY
-		}), e.setPointerCapture?.(t.pointerId), T.size === 2 && (C = D());
-	}, k = (e) => {
-		let t = T.get(e.pointerId);
+		}), e.setPointerCapture?.(t.pointerId), w.size === 2 && (S = E());
+	}, O = (e) => {
+		let t = w.get(e.pointerId);
 		if (t) {
-			if (T.set(e.pointerId, {
+			if (w.set(e.pointerId, {
 				x: e.clientX,
 				y: e.clientY
-			}), T.size >= 2) {
-				let e = D();
-				C && (S = Ie.clamp(S - (e - C) * .09, 12, 54)), C = e;
+			}), w.size >= 2) {
+				let e = E();
+				S && (x = Ie.clamp(x - (e - S) * .09, 12, 54)), S = e;
 				return;
 			}
-			y -= (e.clientX - t.x) * .0055, b = Ie.clamp(b - (e.clientY - t.y) * .0045, -.24, .2);
+			v -= (e.clientX - t.x) * .0055, y = Ie.clamp(y - (e.clientY - t.y) * .0045, -.24, .2);
 		}
+	}, k = (e) => {
+		w.delete(e.pointerId), S = w.size === 2 ? E() : 0;
 	}, A = (e) => {
-		T.delete(e.pointerId), C = T.size === 2 ? D() : 0;
-	}, j = (e) => {
-		e.preventDefault(), S = Ie.clamp(S + e.deltaY * .025, 12, 54);
+		e.preventDefault(), x = Ie.clamp(x + e.deltaY * .025, 12, 54);
 	};
-	e.addEventListener("pointerdown", O), e.addEventListener("pointermove", k), e.addEventListener("pointerup", A), e.addEventListener("pointercancel", A), e.addEventListener("wheel", j, { passive: !1 });
-	function M() {
-		if (g) return;
-		E();
-		let e = Math.min(.034, m.getDelta()), t = m.elapsedTime;
-		_ = Ie.damp(_, y, 4.2, e), v = Ie.damp(v, b, 4.2, e), x = Ie.damp(x, S, 4, e), l.position.set(Math.sin(_) * x, 2.2 + v * 15, w.z + Math.cos(_) * x), l.lookAt(w.x, w.y + v * 3.2, w.z), u.update(t), n || d?.update(e), s.render(c, l), h = requestAnimationFrame(M);
+	e.addEventListener("pointerdown", D), e.addEventListener("pointermove", O), e.addEventListener("pointerup", k), e.addEventListener("pointercancel", k), e.addEventListener("wheel", A, { passive: !1 });
+	function j() {
+		if (h) return;
+		T();
+		let e = Math.min(.034, p.getDelta()), t = p.elapsedTime;
+		g = Ie.damp(g, v, 4.2, e), _ = Ie.damp(_, y, 4.2, e), b = Ie.damp(b, x, 4, e), c.position.set(Math.sin(g) * b, 2.2 + _ * 15, C.z + Math.cos(g) * b), c.lookAt(C.x, C.y + _ * 3.2, C.z), l.update(t), n || u?.update(e), o.render(s, c), m = requestAnimationFrame(j);
 	}
-	return M(), {
-		renderer: s,
-		scene: c,
-		camera: l,
+	return j(), {
+		renderer: o,
+		scene: s,
+		camera: c,
 		quality: r,
-		maturity: a,
-		caps: o,
-		ready: p,
+		maturity: i,
+		caps: a,
+		ready: f,
 		get assetError() {
-			return f;
+			return d;
 		},
 		dispose() {
-			g = !0, cancelAnimationFrame(h);
+			h = !0, cancelAnimationFrame(m);
 			for (let [t, n] of [
-				["pointerdown", O],
-				["pointermove", k],
-				["pointerup", A],
-				["pointercancel", A],
-				["wheel", j]
+				["pointerdown", D],
+				["pointermove", O],
+				["pointerup", k],
+				["pointercancel", k],
+				["wheel", A]
 			]) e.removeEventListener(t, n);
-			d?.dispose(), s.dispose(), e.width = e.width;
+			u?.dispose(), o.dispose(), e.width = e.width;
 		}
 	};
 }
 //#endregion
-export { Yd as mountOcean };
+export { Xd as mountOcean };

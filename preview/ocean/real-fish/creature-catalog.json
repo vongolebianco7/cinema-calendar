@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "design": "Unlock meaningful biodiversity between 10 and 100 watched films; 150+ is bonus content, not the core loop.",
+  "rarities": ["common", "uncommon", "rare", "epic"],
+  "creatures": [
+    {"id":"horse-mackerel","name":"アジ系","kind":"fish","silhouette":"slender-forked-tail","rarity":"common","unlockAt":10,"spawnWeight":12,"zone":"midwater","size":"small","schooling":true,"asset":"optimized/species-aji.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"small-schooling-fish","name":"小型群泳魚","kind":"fish","silhouette":"tiny-streamlined","rarity":"common","unlockAt":10,"spawnWeight":14,"zone":"midwater","size":"small","schooling":true,"asset":"optimized/fish-real.webp","assetStatus":"ready-photo"},
+    {"id":"red-seabream","name":"マダイ系","kind":"fish","silhouette":"deep-oval","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"midwater","size":"medium","schooling":false,"asset":"optimized/species-madai.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"wrasse","name":"ベラ系","kind":"fish","silhouette":"slender-pointed-snout","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"reef","size":"small-medium","schooling":false,"asset":"optimized/nase.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"butterflyfish","name":"チョウチョウウオ系","kind":"fish","silhouette":"disc-high-body","rarity":"uncommon","unlockAt":30,"spawnWeight":6,"zone":"reef","size":"small-medium","schooling":false,"asset":"optimized/species-butterflyfish.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"goby","name":"ハゼ系","kind":"fish","silhouette":"low-bottom-dweller","rarity":"common","unlockAt":30,"spawnWeight":7,"zone":"seabed","size":"small","schooling":false,"asset":"optimized/weatherfish.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"moorish-idol","name":"ツノダシ","kind":"fish","silhouette":"tall-dorsal-streamer","rarity":"uncommon","unlockAt":40,"spawnWeight":5,"zone":"reef","size":"medium","schooling":false,"asset":"optimized/species-moorish-idol.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"barracuda","name":"カマス系","kind":"fish","silhouette":"very-long-pointed","rarity":"uncommon","unlockAt":40,"spawnWeight":5,"zone":"open-water","size":"medium","schooling":true,"asset":"optimized/tench.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"grouper","name":"ハタ系","kind":"fish","silhouette":"large-head-thick-body","rarity":"uncommon","unlockAt":50,"spawnWeight":4,"zone":"reef-bottom","size":"medium-large","schooling":false,"asset":"optimized/species-grouper.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"porcupinefish","name":"ハリセンボン系","kind":"fish","silhouette":"round-large-head-small-tail","rarity":"rare","unlockAt":50,"spawnWeight":3,"zone":"midwater","size":"medium","schooling":false,"asset":"optimized/species-puffer.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"lionfish","name":"ミノカサゴ","kind":"fish","silhouette":"radiating-long-fins","rarity":"rare","unlockAt":50,"spawnWeight":2,"zone":"reef","size":"medium","schooling":false,"asset":"optimized/species-lionfish.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"shrimp","name":"エビ","kind":"crustacean","silhouette":"arched-long-antennae","rarity":"uncommon","unlockAt":50,"spawnWeight":4,"zone":"seabed","size":"small","schooling":false,"asset":"optimized/species-shrimp.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"crab","name":"カニ","kind":"crustacean","silhouette":"wide-clawed","rarity":"uncommon","unlockAt":60,"spawnWeight":4,"zone":"seabed","size":"small-medium","schooling":false,"asset":"optimized/species-crab.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"starfish","name":"ヒトデ","kind":"echinoderm","silhouette":"five-arm-star","rarity":"uncommon","unlockAt":60,"spawnWeight":5,"zone":"seabed","size":"small","schooling":false,"asset":"optimized/species-starfish.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"nudibranch","name":"ウミウシ","kind":"mollusk","silhouette":"soft-low-frilled","rarity":"rare","unlockAt":70,"spawnWeight":3,"zone":"seabed","size":"small","schooling":false,"asset":"optimized/species-nudibranch.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"squid","name":"イカ","kind":"cephalopod","silhouette":"torpedo-fins-tentacles","rarity":"rare","unlockAt":80,"spawnWeight":2,"zone":"open-water","size":"medium","schooling":false,"asset":"optimized/species-squid.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"octopus","name":"タコ","kind":"cephalopod","silhouette":"bulb-head-eight-arms","rarity":"rare","unlockAt":90,"spawnWeight":2,"zone":"rock-seabed","size":"medium","schooling":false,"asset":"optimized/species-octopus.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"large-crustacean","name":"大型甲殻類","kind":"crustacean","silhouette":"armored-long-limbs","rarity":"rare","unlockAt":90,"spawnWeight":2,"zone":"seabed","size":"medium","schooling":false,"asset":"optimized/species-large-crustacean.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"stingray","name":"エイ","kind":"fish","silhouette":"wide-wing-disc-long-tail","rarity":"epic","unlockAt":100,"spawnWeight":1,"zone":"open-water-bottom","size":"large","schooling":false,"asset":"optimized/species-stingray.webp","assetStatus":"ready-distinct-photo"},
+    {"id":"small-sea-turtle","name":"小型ウミガメ","kind":"reptile","silhouette":"oval-shell-four-flippers","rarity":"epic","unlockAt":100,"spawnWeight":1,"zone":"open-water","size":"large","schooling":false,"asset":"optimized/species-small-sea-turtle.webp","assetStatus":"ready-distinct-photo"}
+  ]
+}

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 build marker exists',()=>assert.match(fs.readFileSync('preview/ocean/poc/d-v3-build-marker.js','utf8'),/sprite-compositor/));

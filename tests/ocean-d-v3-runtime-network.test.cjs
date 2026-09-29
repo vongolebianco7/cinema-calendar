@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');for(const f of ['preview/ocean/poc/poc-main.js','preview/ocean/poc/d-v3-assets.js'])test(`${f} has no runtime remote asset URL`,()=>{const s=fs.readFileSync(f,'utf8');assert.doesNotMatch(s,/https?:\/\//);assert.doesNotMatch(s,/fetch\s*\(/)});

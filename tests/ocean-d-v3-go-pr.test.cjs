@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('go PR checkpoint exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-go-pr.txt','utf8').trim(),'GO_PR'));

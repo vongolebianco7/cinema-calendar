@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('branch checklist leaves only human evidence and conditional integration open',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-review-checklist.md','utf8');assert.match(s,/- \[ \] Real iPhone evidence/);assert.match(s,/- \[ \] Production integration/)});

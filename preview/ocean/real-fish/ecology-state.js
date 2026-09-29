@@ -4,13 +4,14 @@
     return Object.values(records).filter(v=>v&&typeof v==='object'&&!Array.isArray(v));
   }
   function validRecordCount(records){return validRecords(records).length;}
+  function ordinaryCreatureCount(records){return validRecordCount(records);}
+  function nextSecretMilestone(records){const count=validRecordCount(records),at=(Math.floor(count/100)+1)*100;return{at,remaining:at-count,label:'???'};}
   function ecologySignalsForRecords(records){
     const rows=validRecords(records),count=rows.length;
     const ratings=rows.map(r=>Number(r.rating)).filter(r=>Number.isFinite(r)&&r>0);
     const highRatings=ratings.filter(r=>r>=4).length;
     const lovedRatings=ratings.filter(r=>r>=4.5).length;
     const lifeBestRatings=ratings.filter(r=>r>=5).length;
-    const ratingBonus=Math.min(5,Math.floor(highRatings/5));
     const ratingEnergy=Math.min(5,Math.floor(highRatings/4)+Math.floor(lovedRatings/6)+Math.min(1,lifeBestRatings));
     const genres=new Set(),regions=new Set(),directors=new Set();
     rows.forEach(r=>{
@@ -20,15 +21,15 @@
     });
     const diversityScore=genres.size+regions.size*2+Math.min(directors.size,6);
     const diversityTier=diversityScore>=16?5:diversityScore>=10?4:diversityScore>=6?3:diversityScore>=3?2:count?1:0;
-    return {count,ratedCount:ratings.length,highRatings,lovedRatings,lifeBestRatings,ratingBonus,ratingEnergy,effectiveCount:count+ratingBonus,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier};
+    return {count,ordinaryCreatureCount:count,ratedCount:ratings.length,highRatings,lovedRatings,lifeBestRatings,ratingEnergy,effectiveCount:count,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier,nextMilestone:nextSecretMilestone(records)};
   }
   function maturityStateForRecords(records,states,fallbackState){
     const signals=ecologySignalsForRecords(records);
     if(signals.count===0)return Number(fallbackState);
     const milestones=Object.keys(states||{}).map(Number).filter(Number.isFinite).sort((a,b)=>a-b);
     let reached=milestones.length?milestones[0]:0;
-    for(const milestone of milestones){if(milestone<=signals.effectiveCount)reached=milestone;else break;}
+    for(const milestone of milestones){if(milestone<=signals.count)reached=milestone;else break;}
     return reached;
   }
-  return {validRecordCount,ecologySignalsForRecords,maturityStateForRecords};
+  return {validRecordCount,ordinaryCreatureCount,nextSecretMilestone,ecologySignalsForRecords,maturityStateForRecords};
 });

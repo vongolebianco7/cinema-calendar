@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('create PR now final marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-create-now.marker','utf8').trim(),'CREATE_PR_NOW_FINAL'));

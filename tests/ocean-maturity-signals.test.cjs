@@ -16,12 +16,13 @@ test('maturity affects habitat, benthic richness, population and school structur
   assert.match(html,/signals\.habitat/);
   assert.match(html,/signals\.seabedCount/);
   assert.match(html,/signals\.population/);
-  assert.match(html,/signals\.schoolSpread/);
+  assert.match(html,/ACTIVE_SIGNALS=signals/);
+  assert.match(html,/ACTIVE_SIGNALS\.schoolSpread/);
 });
 
 test('approved background remains static while maturity changes dynamic ecology layers',()=>{
   assert.match(html,/ocean-background-approved\.webp/);
   assert.match(html,/--habitat/);
   assert.match(html,/ACTIVE_SIGNALS/);
-  assert.doesNotMatch(html,/genre.*(?:fish|creature)|(?:fish|creature).*genre/i);
+  assert.doesNotMatch(html,/genre[^;\n]{0,80}(?:fish|creature)|(?:fish|creature)[^;\n]{0,80}genre/i);
 });

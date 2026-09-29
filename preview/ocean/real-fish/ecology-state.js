@@ -8,7 +8,10 @@
     const rows=validRecords(records),count=rows.length;
     const ratings=rows.map(r=>Number(r.rating)).filter(r=>Number.isFinite(r)&&r>0);
     const highRatings=ratings.filter(r=>r>=4).length;
+    const lovedRatings=ratings.filter(r=>r>=4.5).length;
+    const lifeBestRatings=ratings.filter(r=>r>=5).length;
     const ratingBonus=Math.min(5,Math.floor(highRatings/5));
+    const ratingEnergy=Math.min(5,Math.floor(highRatings/4)+Math.floor(lovedRatings/6)+Math.min(1,lifeBestRatings));
     const genres=new Set(),regions=new Set(),directors=new Set();
     rows.forEach(r=>{
       (Array.isArray(r.genres)?r.genres:[]).forEach(g=>g&&genres.add(String(g)));
@@ -17,7 +20,7 @@
     });
     const diversityScore=genres.size+regions.size*2+Math.min(directors.size,6);
     const diversityTier=diversityScore>=16?5:diversityScore>=10?4:diversityScore>=6?3:diversityScore>=3?2:count?1:0;
-    return {count,ratedCount:ratings.length,highRatings,ratingBonus,effectiveCount:count+ratingBonus,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier};
+    return {count,ratedCount:ratings.length,highRatings,lovedRatings,lifeBestRatings,ratingBonus,ratingEnergy,effectiveCount:count+ratingBonus,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier};
   }
   function maturityStateForRecords(records,states,fallbackState){
     const signals=ecologySignalsForRecords(records);

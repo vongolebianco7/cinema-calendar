@@ -15244,27 +15244,22 @@ function Bd(e) {
 }
 var Vd = {
 	whale: "whale",
-	whaleshark: "shark",
-	hammerhead: "shark",
-	tigershark: "shark",
 	manta: "manta",
-	mantaray: "manta",
-	eagleray: "manta",
-	stingray: "manta",
 	swordfish: "sword",
-	sailfish: "sword",
 	clownfish: "clown",
 	angler: "angler",
 	deep: "angler",
 	grouper: "grouper"
 };
 function Hd(e, t) {
-	return Vd[e?.family] ? Vd[e.family] : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
+	return Vd[e?.family] ? Vd[e.family] : e?.family ? null : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
 }
 function Ud(e, t) {
 	let n = Math.max(1, t?.life || 32), r = [];
 	if (e.organisms.length) return e.organisms.slice(0, 28).forEach((t, i) => {
-		let a = nu(i), o = !!t.hero, s = Hd(t, a), c = Math.max(.65, Math.min(1.9, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(3, Math.min(6, 3 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
+		let a = nu(i), o = !!t.hero, s = Hd(t, a);
+		if (!s) return;
+		let c = Math.max(.65, Math.min(1.9, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(3, Math.min(6, 3 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
 		for (let e = 0; e < l && r.length < n; e++) r.push({
 			key: s,
 			scale: c * (e ? .72 + Rd(i * 7 + e) * .18 : 1),

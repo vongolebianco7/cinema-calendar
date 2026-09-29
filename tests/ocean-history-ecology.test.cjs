@@ -22,5 +22,5 @@ test('habitat matures visibly with history instead of only changing counters',()
 test('sparse and mature states are compositionally distinct',()=>{
   assert.match(h,/habitatTier/);
   assert.match(h,/cfg\.species/);
-  assert.match(h,/Math\.min\(cfg\.species/);
+  assert.match(h,/Math\.min\(ASSETS\.length/);
 });

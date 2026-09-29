@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('sole remaining product blocker is real iPhone gate',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-human-blocker.txt','utf8');assert.match(s,/REAL_IPHONE_VISUAL_AND_PERFORMANCE_GATE/)});

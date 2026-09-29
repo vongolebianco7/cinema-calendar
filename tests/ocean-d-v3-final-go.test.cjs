@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final go marker says create PR now',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-go.marker','utf8').trim(),'GO_CREATE_PULL_REQUEST_NOW'));

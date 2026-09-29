@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('pre PR complete final marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pre-pr-complete.txt','utf8').trim(),'PRE_PR_COMPLETE_FINAL'));

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "profile": "iphone-safari",
+  "viewport": {"width": 390, "height": 844, "maxDpr": 2},
+  "budgets": {
+    "medianFpsPass": 50,
+    "medianFpsTarget": 55,
+    "medianFpsFail": 45,
+    "readyMsMax": 5000,
+    "decodedImageBytesMax": 33554432,
+    "largestAtlasEdgeMax": 2048,
+    "fpsRegressionPercentMax": 10,
+    "decodedMemoryRegressionPercentMax": 30,
+    "readyRegressionPercentMax": 50
+  },
+  "requiredCategories": ["fish", "rock", "plant", "seabed", "light"],
+  "assetRules": {
+    "fish": {"format": ["webp"], "alpha": true, "maxEdge": 1024, "atlas": true},
+    "rock": {"format": ["webp"], "alpha": true, "maxEdge": 1024, "atlas": true},
+    "plant": {"format": ["webp"], "alpha": true, "maxEdge": 1024, "atlas": true},
+    "seabed": {"format": ["webp"], "alpha": false, "maxEdge": 2048, "atlas": false},
+    "light": {"format": ["webp"], "alpha": true, "maxEdge": 1024, "atlas": true}
+  },
+  "assets": []
+}

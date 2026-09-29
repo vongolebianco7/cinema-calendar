@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('visual review waits for CI and preview',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-ci-expectations.md','utf8');assert.match(s,/test suite green/);assert.match(s,/mobile\/iPhone-size smoke green/);assert.match(s,/preview deployment successful/)});

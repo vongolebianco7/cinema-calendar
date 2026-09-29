@@ -24,6 +24,6 @@ test('terrain reaction remains school-level rather than quadratic per-fish simul
 
 test('reef encounters can split a school into deterministic lanes and reunite through shared motion',()=>{
   assert.match(html,/splitLane/);
-  assert.match(html,/data-lane/);
+  assert.match(html,/dataset\.lane/);
   assert.match(html,/schoolAnchors/);
 });

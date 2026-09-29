@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR next action is create pull request',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-next-action.marker','utf8').trim(),'CREATE_PULL_REQUEST'));

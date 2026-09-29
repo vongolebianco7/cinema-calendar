@@ -1,0 +1,5 @@
+CHECKPOINT=D_V3_PREVIEW_PR_READY
+HEAD=feat/ocean-d-v3-sprites
+AUTOMATED_IMPLEMENTATION=100
+DO_NOT_MERGE=true
+NEXT=create PR, observe CI, fix to green, then provide iPhone D/100 preview

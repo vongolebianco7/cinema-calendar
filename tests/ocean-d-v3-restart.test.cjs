@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('restart checkpoint names next action and human blocker',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-branch-state.txt','utf8');assert.match(s,/NEXT_ACTION=create_preview_pr_and_wait_for_ci/);assert.match(s,/BLOCKED_BY_IPHONE_G1_G2_FPS/)});

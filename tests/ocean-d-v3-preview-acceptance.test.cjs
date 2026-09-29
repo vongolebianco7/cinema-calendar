@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('preview acceptance requires green automation but not product acceptance',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-preview-acceptance.md','utf8');assert.match(s,/deployment succeeds/);assert.match(s,/not product acceptance/)});

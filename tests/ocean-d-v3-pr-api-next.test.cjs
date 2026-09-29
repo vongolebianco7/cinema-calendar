@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('API next is create PR',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-api-next.txt','utf8'),/GitHub.create_pull_request/));

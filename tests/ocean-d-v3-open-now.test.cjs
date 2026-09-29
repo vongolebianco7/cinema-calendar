@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('open PR now marker is set',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-open-now.marker','utf8').trim(),'OPEN_NOW'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 verification marker is explicit',()=>assert.match(fs.readFileSync('preview/ocean/poc/d-v3-debug.js','utf8'),/oceanDv3='sprite-compositor'/));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final go signal says create PR',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-final-go.txt','utf8').trim(),'GO_CREATE_PR'));

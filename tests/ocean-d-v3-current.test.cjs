@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('current checkpoint is explicit',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-current.txt','utf8');assert.match(s,/D_V3_AUTOMATED_SCOPE=100/);assert.match(s,/AWAITING_REAL_IPHONE_GATE/)});

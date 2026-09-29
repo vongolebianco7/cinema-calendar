@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const s=require('../docs/superpowers/reviews/ocean-d-v3-final-state.json');test('final automated state is preview-ready but human-blocked',()=>{assert.equal(s.automated,100);assert.equal(s.previewReady,true);assert.equal(s.productionReady,false);assert.equal(s.blocker,'real-iPhone-G1-G2-FPS')});

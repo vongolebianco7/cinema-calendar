@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('green CI alone cannot merge D-v3',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-merge-rule.md','utf8');assert.match(s,/Do not merge.*merely because automated checks are green/);assert.match(s,/G1 PASS, G2 PASS, FPS>=50/)});

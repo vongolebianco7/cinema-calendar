@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('implementation phase ends at preview publication',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-end-of-implementation.md','utf8');assert.match(s,/next operation is preview publication/);assert.match(s,/Production remains blocked/)});

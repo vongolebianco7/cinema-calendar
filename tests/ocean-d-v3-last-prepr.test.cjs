@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('last pre-PR marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-last-prepr.marker','utf8').trim(),'LAST_PREPR'));

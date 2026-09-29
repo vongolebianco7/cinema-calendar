@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('open marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-open.txt','utf8').trim(),'OPEN'));

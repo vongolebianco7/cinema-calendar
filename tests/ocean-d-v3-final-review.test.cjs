@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final review keeps production merge blocked',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-review.md','utf8');assert.match(s,/block production adoption/);assert.match(s,/No production merge requested/)});

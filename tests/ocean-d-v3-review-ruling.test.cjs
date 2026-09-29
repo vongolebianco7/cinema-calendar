@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final ruling allows preview but blocks production',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-review-ruling.md','utf8');assert.match(s,/suitable for preview deployment, not production adoption/)});

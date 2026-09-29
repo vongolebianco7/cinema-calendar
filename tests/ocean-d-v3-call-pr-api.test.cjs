@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('call PR API final marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-call-pr-api.txt','utf8').trim(),'CALL_GITHUB_CREATE_PULL_REQUEST_NOW'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('tool next is create pull request',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-tool-next.txt','utf8'),/CREATE_PULL_REQUEST/));

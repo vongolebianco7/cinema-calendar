@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('execute create PR now checkpoint exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-execute-now.txt','utf8').trim(),'EXECUTE_CREATE_PULL_REQUEST_NOW'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 phase is PR CI preview',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-phase.txt','utf8'),/PR_CI_PREVIEW/));

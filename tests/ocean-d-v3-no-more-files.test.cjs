@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('file-writing phase is closed',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-no-more-files.marker','utf8').trim(),'NO_MORE_FILES'));

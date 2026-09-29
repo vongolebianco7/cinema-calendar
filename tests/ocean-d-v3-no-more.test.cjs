@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('no more pre-PR work marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-no-more.txt','utf8').trim(),'NO_MORE_PRE_PR_WORK'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR head SHA is authoritative after PR creation',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-commit-head.txt','utf8'),/PR head SHA as authoritative/));

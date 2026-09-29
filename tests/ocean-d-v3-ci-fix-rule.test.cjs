@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('CI failure does not cause progress-only stop',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-ci-fix-rule.md','utf8');assert.match(s,/not a reason to ask the user to continue/);assert.match(s,/apply fixes.*until required automated gates are green/s)});

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 PR text requires iPhone gate',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-body.md','utf8');assert.match(s,/do not production-merge/);assert.match(s,/G1\/G2/);assert.match(s,/>=50fps/)});

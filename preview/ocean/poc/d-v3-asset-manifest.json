@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "runtimeExternalRequests": 0,
+  "paidDependencies": 0,
+  "assets": [
+    {"id":"fish-set-01","category":"fish","provenance":"self-authored","license":"project-owned","format":"svg-data-image","count":5,"alpha":true,"maxDisplayCssPx":[116,58]},
+    {"id":"reef-rock-01","category":"rock","provenance":"self-authored","license":"project-owned","format":"svg-data-image","count":1,"alpha":true,"maxDisplayCssPx":[180,105]},
+    {"id":"grass-01","category":"plant","provenance":"self-authored","license":"project-owned","format":"svg-data-image","count":1,"alpha":true,"maxDisplayCssPx":[55,153]},
+    {"id":"caustic-01","category":"light","provenance":"self-authored","license":"project-owned","format":"svg-data-image","count":1,"alpha":true,"maxDisplayCssPx":[300,500]},
+    {"id":"seabed-grain","category":"seabed","provenance":"procedural-microtexture","license":"project-owned","format":"canvas-static-detail","alpha":false,"primitiveRisk":"low-microdetail-only"}
+  ],
+  "performanceBudget":{"dprMax":2,"medianFpsPreferred":55,"medianFpsMinimum":50,"failBelowFps":45}
+}

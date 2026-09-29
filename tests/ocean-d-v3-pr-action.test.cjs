@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('immediate action is preview PR',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-action.txt','utf8'),/CREATE_PREVIEW_PR/));

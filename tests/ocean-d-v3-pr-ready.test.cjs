@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR checkpoint remains preview-only',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-ready.txt','utf8');assert.match(s,/PR_READY=true/);assert.match(s,/preview-only-until-iphone-gates/)});

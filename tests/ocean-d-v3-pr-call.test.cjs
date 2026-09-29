@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('PR call marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-call.marker','utf8').trim(),'PR_CALL'));

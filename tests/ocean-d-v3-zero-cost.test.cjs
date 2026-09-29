@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 zero-cost record bans paid and runtime third-party assets',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-zero-cost.md','utf8');assert.match(s,/No paid API/);assert.match(s,/No runtime third-party image request/)});

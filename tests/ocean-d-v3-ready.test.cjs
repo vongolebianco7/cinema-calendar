@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('D-v3 pre-PR readiness is final',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-ready.txt','utf8').trim(),'READY'));

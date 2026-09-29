@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('one-line state preserves no-premature-merge rule',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-one-line-state.txt','utf8');assert.match(s,/never merge before PASS/)});

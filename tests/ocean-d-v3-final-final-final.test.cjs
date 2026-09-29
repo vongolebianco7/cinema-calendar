@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('stop and create PR instruction exists',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-final-final.txt','utf8'),/CREATE PR TOOL CALL NOW/));

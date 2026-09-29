@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('before PR API final marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-before-pr-api-final.marker','utf8').trim(),'BEFORE_PR_API_FINAL'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('no user interaction needed before preview ready',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-now.txt','utf8'),/No user interaction needed until CI\/preview is ready/));

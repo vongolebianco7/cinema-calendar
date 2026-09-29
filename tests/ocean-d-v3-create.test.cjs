@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('create marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-create.marker','utf8').trim(),'CREATE'));

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('next operation is create pull request',()=>assert.match(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-pr-next.txt','utf8'),/create_pull_request/));

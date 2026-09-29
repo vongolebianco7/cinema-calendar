@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('art layer contract keeps compositor reusable',()=>{const s=fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-art-layer-contract.md','utf8');assert.match(s,/intentionally replaceable/);assert.match(s,/without reverting to per-frame primitive geometry/)});

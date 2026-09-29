@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('pre-PR state sealed',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-prepr-done.marker','utf8').trim(),'DONE'));

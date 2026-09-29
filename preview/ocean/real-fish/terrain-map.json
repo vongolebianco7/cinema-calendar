@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "coordinateSystem": "normalized-percent",
+  "backgroundIndependent": true,
+  "seabedProfile": [
+    {"x":0,"y":72},{"x":12,"y":69},{"x":25,"y":71},{"x":38,"y":66},{"x":50,"y":68},{"x":62,"y":64},{"x":75,"y":69},{"x":88,"y":67},{"x":100,"y":72}
+  ],
+  "zones": [
+    {"id":"sand-left","type":"sand","x":4,"y":66,"width":28,"height":22,"avoidance":0.15,"habitat":["goby","crab","starfish"]},
+    {"id":"reef-left","type":"reef","x":0,"y":42,"width":24,"height":34,"avoidance":0.78,"habitat":["wrasse","butterflyfish","lionfish","octopus"]},
+    {"id":"coral-mid","type":"coral","x":30,"y":49,"width":24,"height":22,"avoidance":0.62,"habitat":["butterflyfish","moorish-idol","wrasse"]},
+    {"id":"sand-channel","type":"sand","x":44,"y":65,"width":30,"height":18,"avoidance":0.08,"habitat":["goby","starfish","shrimp"]},
+    {"id":"reef-right","type":"reef","x":73,"y":39,"width":27,"height":37,"avoidance":0.82,"habitat":["grouper","wrasse","octopus","lionfish"]},
+    {"id":"open-midwater","type":"open-water","x":20,"y":16,"width":62,"height":43,"avoidance":0.0,"habitat":["horse-mackerel","red-seabream","barracuda","squid"]},
+    {"id":"upper-water","type":"open-water","x":8,"y":4,"width":84,"height":28,"avoidance":0.0,"habitat":["small-schooling-fish","stingray","small-sea-turtle"]}
+  ],
+  "obstacles": [
+    {"id":"left-reef-rise","shape":"ellipse","cx":14,"cy":54,"rx":13,"ry":18,"strength":0.85},
+    {"id":"mid-coral-rise","shape":"ellipse","cx":42,"cy":58,"rx":11,"ry":10,"strength":0.68},
+    {"id":"right-reef-rise","shape":"ellipse","cx":87,"cy":52,"rx":14,"ry":19,"strength":0.9}
+  ]
+}

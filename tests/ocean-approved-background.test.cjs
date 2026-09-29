@@ -6,14 +6,16 @@ const provenance=fs.readFileSync('preview/ocean/real-fish/BACKGROUND_PROVENANCE.
 const terrain=JSON.parse(fs.readFileSync('preview/ocean/real-fish/terrain-map.json','utf8'));
 
 test('photo Ocean uses the explicitly approved local turquoise-cobalt background',()=>{
-  assert.match(html,/optimized\/ocean-background-approved\.webp/);
+  assert.match(html,/src="optimized\/ocean-background-approved\.webp"/);
   assert.doesNotMatch(html,/background:[^;}]*scene-seabed\.webp/);
   assert.ok(fs.statSync('preview/ocean/real-fish/optimized/ocean-background-approved.webp').size>10000);
 });
 
-test('iPhone stage preserves the entire approved composition instead of center-cropping it away',()=>{
-  assert.match(html,/background:#087fc3 url\('optimized\/ocean-background-approved\.webp'\) center\/100% 100% no-repeat/);
-  assert.doesNotMatch(html,/ocean-background-approved\.webp'\) center\/cover/);
+test('approved composition is a dedicated full-stage backdrop instead of a CSS crop',()=>{
+  assert.match(html,/<img class="oceanBackdrop" id="oceanBackdrop" src="optimized\/ocean-background-approved\.webp"/);
+  assert.match(html,/\.oceanBackdrop\{[^}]*width:100%;height:100%;object-fit:fill;z-index:0/);
+  assert.match(html,/\.stage\{[^}]*background:#087fc3;/);
+  assert.doesNotMatch(html,/ocean-background-approved\.webp[^;}]*cover/);
 });
 
 test('creatures are layered independently and never baked into the scenery contract',()=>{

@@ -1,0 +1,25 @@
+name: Fix Ocean photo mount order
+on:
+  push:
+    branches: [fix/ocean-photo-mount-order]
+    paths: ['.github/workflows/fix-ocean-photo-mount-order.yml']
+permissions: {contents: write}
+jobs:
+  fix:
+    if: "!contains(github.event.head_commit.message, '[mount-order-bot]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: fix/ocean-photo-mount-order}
+      - run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('preview/ocean/index.html'); s=p.read_text(); old='setTimeout(mountPhotoOcean,80)'; assert s.count(old)==2,s.count(old); s=s.replace(old,'setTimeout(mountPhotoOcean,450)'); p.write_text(s)
+          t=Path('tests/ocean-photo-mount-order.test.cjs'); t.write_text("const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const h=fs.readFileSync('preview/ocean/index.html','utf8');test('photo ocean mounts after legacy immersive renderer',()=>{assert.match(h,/CinemapOceanImmersive\\.mount/);assert.match(h,/},250\\)<\\/script>/);assert.equal((h.match(/setTimeout\\(mountPhotoOcean,450\\)/g)||[]).length,2)});")
+          q=Path('scripts/quality_gate.py'); qs=q.read_text(); needle="['node','--test','tests/ocean-photo-integration.test.cjs']"; add="['node','--test','tests/ocean-photo-mount-order.test.cjs'],"+needle
+          if 'ocean-photo-mount-order.test.cjs' not in qs: qs=qs.replace(needle,add); q.write_text(qs)
+          PY
+          node --test tests/ocean-photo-mount-order.test.cjs
+          python scripts/quality_gate.py
+      - run: |
+          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'; git add preview/ocean/index.html tests/ocean-photo-mount-order.test.cjs scripts/quality_gate.py; git commit -m 'fix(ocean): ensure photo renderer wins mount race [mount-order-bot]'; git push origin HEAD:fix/ocean-photo-mount-order

@@ -4,7 +4,7 @@ const DEPTH_BANDS=['near','mid','far'];
 const GROUPING={reef:'school',disc:'school',slender:'school',needle:'school',shark:'solitary',ray:'loose',jelly:'drift',turtle:'solitary'};
 const RARITY={reef:'common',disc:'common',slender:'common',needle:'common',jelly:'uncommon',ray:'rare',turtle:'rare',shark:'rare'};
 function seeded(index,salt=0){const x=Math.sin((index+1)*12.9898+salt*78.233)*43758.5453;return x-Math.floor(x)}
-export function ecosystemMaturity(recordCount=0){const count=Math.max(0,Number(recordCount)||0);let stage='empty';if(count>=100)stage='mature';else if(count>=30)stage='growing';else if(count>=10)stage='young';else if(count>0)stage='awakening';return {count,stage,richness:Math.min(1,count/100),habitat:Math.min(1,count/80),life:Math.min(1,count/70),depth:Math.min(1,count/50)};}
+export function ecosystemMaturity(recordCount=0,ratingEnergy=0){const count=Math.max(0,Number(recordCount)||0),energy=Math.max(0,Math.min(20,Number(ratingEnergy)||0)),effective=count+energy;let stage='empty';if(effective>=100)stage='mature';else if(effective>=30)stage='growing';else if(effective>=10)stage='young';else if(effective>0)stage='awakening';return {count,ratingEnergy:energy,effectiveCount:effective,stage,richness:Math.min(1,effective/100),habitat:Math.min(1,effective/80),life:Math.min(1,effective/70),depth:Math.min(1,effective/50)};}
 export function creatureProfile(index){
  const i=Math.max(0,Number(index)||0),silhouette=ARCHETYPES[i%ARCHETYPES.length];
  const scaleBand=SCALE_BANDS[(i*3+Math.floor(i/4))%SCALE_BANDS.length];

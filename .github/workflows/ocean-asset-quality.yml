@@ -1,0 +1,33 @@
+name: Ocean 2D asset quality
+on:
+  pull_request:
+    paths:
+      - 'preview/ocean/assets/**'
+      - 'scripts/ocean-quality/**'
+      - 'tests/ocean-asset-quality-gate.test.cjs'
+      - '.github/workflows/ocean-asset-quality.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'preview/ocean/assets/**'
+      - 'scripts/ocean-quality/**'
+      - 'tests/ocean-asset-quality-gate.test.cjs'
+jobs:
+  asset-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Contract tests
+        run: node --test tests/ocean-asset-quality-gate.test.cjs
+      - name: Inspect asset manifest
+        run: node scripts/ocean-quality/inspect-assets.mjs
+      - name: Upload quality evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-asset-quality
+          path: artifacts/ocean-quality/
+          if-no-files-found: warn

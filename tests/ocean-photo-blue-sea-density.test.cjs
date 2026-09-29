@@ -6,12 +6,12 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'preview/ocean/real-fish/ecosystem.html'), 'utf8');
 
-test('50-watched state exposes ten fish species', () => {
-  assert.match(html, /50:\{count:\d+,species:10/);
+test('50-watched state shows a living school using every photographed species', () => {
+  assert.match(html, /50:\{count:10,species:5/);
   const assets = html.match(/const ASSETS=\[(.*?)\];/s);
   assert.ok(assets, 'ASSETS array should exist');
   const assetCount = (assets[1].match(/optimized\//g) || []).length;
-  assert.ok(assetCount >= 10, `expected at least 10 fish assets, got ${assetCount}`);
+  assert.equal(assetCount, 5, 'renderer must not claim more species than distinct photographed assets');
 });
 
 test('fish scale is about thirty percent smaller than the previous range', () => {
@@ -28,6 +28,6 @@ test('scene keeps seabed while shifting to a bright cobalt-turquoise water palet
 });
 
 test('100-watched state is already a diverse living scene', () => {
-  assert.match(html, /100:\{count:1\d,species:10/);
+  assert.match(html, /100:\{count:1\d,species:5/);
   assert.match(html, /effectiveSpecies=cfg\.species===0\?0:Math\.min\(ASSETS\.length,Math\.max\(cfg\.species,diversity\|\|1\)\)/);
 });

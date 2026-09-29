@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const s=fs.readFileSync('preview/ocean/poc/d-v3-assets.js','utf8');test('first D-v3 visual gate has five fish variants',()=>{const line=s.match(/export const SOURCES=\{fish:\[(.*?)\],rock/s);assert.ok(line);assert.ok((line[1].match(/fish\(/g)||[]).length>=5)});

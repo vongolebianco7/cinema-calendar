@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');test('final ready marker exists',()=>assert.equal(fs.readFileSync('docs/superpowers/reviews/ocean-d-v3-final-ready.txt','utf8').trim(),'FINAL_READY_FOR_PR'));

@@ -1,0 +1,2 @@
+const fs=require('node:fs');const test=require('node:test');const assert=require('node:assert/strict');
+test('preview exposes every milestone state through 1500',()=>{const js=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');for(const n of [25,50,75,100,150,200,300,400,500,600,700,800,1000,1200,1500])assert.match(js,new RegExp('\\b'+n+'\\b'));assert.match(js,/PREVIEW_STATES/);assert.match(js,/ensurePreviewControls/);assert.match(js,/get\('preview'\)/);});

@@ -46,6 +46,17 @@ test('production growth creates ordinary fish from the full creature catalog ins
   assert.doesNotMatch(enhancer,/sources\[i%sources\.length\]\.cloneNode\(true\)/);
 });
 
+test('ordinary species use catalog scale habitat schooling and motion instead of one generic behavior',()=>{
+  assert.match(enhancer,/function speciesDisplayFactor\(/);
+  assert.match(enhancer,/function speciesVerticalOffset\(/);
+  assert.match(enhancer,/function inferMotionProfile\(/);
+  assert.match(enhancer,/dataset\.speciesScale/);
+  assert.match(enhancer,/dataset\.schooling/);
+  assert.match(enhancer,/dataset\.motionProfile/);
+  assert.match(enhancer,/node\.style\.width=.*speciesDisplayFactor/);
+  assert.match(enhancer,/point\.y\+speciesVerticalOffset/);
+});
+
 test('legacy state query and preview query select the same exact population target',()=>{
   assert.match(enhancer,/params\.get\('preview'\)\?\?params\.get\('state'\)/);
 });

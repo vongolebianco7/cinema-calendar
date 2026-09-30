@@ -12,7 +12,7 @@ test('Photo Ocean loads layout, performance renderer, milestone rewards and atla
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
   assert.match(ecology,/milestone-swim\.js\?v=3/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=1/);
-  assert.match(ecology,/photo-four-points\.js\?v=8/);
+  assert.match(ecology,/photo-four-points\.js\?v=9/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -33,7 +33,17 @@ test('normal Ocean population equals watched record count exactly',()=>{
   assert.match(enhancer,/if\(nodes\.length>target\)/);
   assert.match(enhancer,/if\(nodes\.length<target\)/);
   assert.match(enhancer,/const rewards=window\.CinemapOceanMilestoneRewards\?\.rewardsForCount\?\.\(target\)\|\|\[\]/);
-  assert.match(enhancer,/nodes\.forEach\(\(node,index\)=>applyNaturalPosition\(node,points\[index\],index\)\)/);
+  assert.match(enhancer,/nodes\.forEach\(\(node,index\)=>\{/);
+});
+
+test('production growth creates ordinary fish from the full creature catalog instead of cloning a tiny initial pool',()=>{
+  assert.match(enhancer,/function ordinaryFishCatalog\(/);
+  assert.match(enhancer,/window\.__OCEAN_PHOTO__\?\.CREATURES/);
+  assert.match(enhancer,/function ordinaryFishDeck\(/);
+  assert.match(enhancer,/function makeCatalogFish\(/);
+  assert.match(enhancer,/dataset\.creatureId/);
+  assert.match(enhancer,/applyCatalogSpecies\(node,catalogFishForIndex\(target,index\)\)/);
+  assert.doesNotMatch(enhancer,/sources\[i%sources\.length\]\.cloneNode\(true\)/);
 });
 
 test('legacy state query and preview query select the same exact population target',()=>{
@@ -48,9 +58,11 @@ test('ordinary DOM fish are lifted for underwater readability instead of appeari
 });
 
 test('fallback fish never uses the dark legacy killifish asset',()=>{
-  assert.match(enhancer,/function makeFallbackFish/);
-  assert.doesNotMatch(enhancer,/optimized\/fish-real\.webp/);
-  assert.match(enhancer,/optimized\/species-aji\.webp/);
+  const fallback=(enhancer.match(/function makeFallbackFish\([^\n]+/)||[''])[0];
+  assert.match(fallback,/makeCatalogFish/);
+  assert.doesNotMatch(fallback,/fish-real\.webp/);
+  assert.match(enhancer,/species\?\.asset\|\|'optimized\/species-aji\.webp'/);
+  assert.match(enhancer,/c\.asset!==\'optimized\/fish-real\.webp\'/);
 });
 
 test('FPS diagnostics are hidden unless debug is explicitly requested',()=>{

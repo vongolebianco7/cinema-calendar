@@ -61,6 +61,9 @@ async function runScenario(count){
     const result=await page.evaluate(()=>{
       const stage=document.querySelector('#stage'),hud=document.querySelector('.hud'),backdrop=document.querySelector('#oceanBackdrop');
       const fish=[...document.querySelectorAll('.fishWrap')],creatures=[...document.querySelectorAll('.fishWrap,.seabedCreature')],commemorative=[...document.querySelectorAll('[data-commemorative]')],milestoneImages=[...document.querySelectorAll('.milestoneAtlasCreature img')],solitary=creatures.filter(el=>el.dataset.oceanSchool==='-1');
+      const ordinaryFish=fish.filter(el=>!el.dataset.commemorative);
+      const ordinarySpeciesIds=[...new Set(ordinaryFish.map(el=>el.dataset.creatureId).filter(Boolean))];
+      const ordinaryAssetSrcs=[...new Set(ordinaryFish.map(el=>el.querySelector(':scope > img')?.getAttribute('src')).filter(Boolean))];
       const stageRect=stage.getBoundingClientRect(),hudRect=hud.getBoundingClientRect(),backdropRect=backdrop.getBoundingClientRect(),backdropStyle=getComputedStyle(backdrop);
       const visibleDom=creatures.filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>.45&&r.width>2&&r.height>2&&r.right>stageRect.left&&r.left<stageRect.right&&r.bottom>stageRect.top&&r.top<stageRect.bottom;});
       const perf=window.CinemapOceanPerformanceRenderer?.metrics?.()||{active:false,domCount:visibleDom.length,canvasCount:0,totalCount:creatures.length};
@@ -68,7 +71,7 @@ async function runScenario(count){
       const expectedMilestones=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(logicalCount)?.length??commemorative.length;
       const cells=new Set(creatures.map(el=>`${Math.floor(parseFloat(el.style.left||'0')/10)}:${Math.floor(parseFloat(el.style.top||'0')/10)}`));
       const fps=document.querySelector('#fps');
-      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
+      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,ordinarySpeciesCount:ordinarySpeciesIds.length,ordinarySpeciesIds,ordinaryAssetCount:ordinaryAssetSrcs.length,ordinaryAssetSrcs,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
     });
     const frameStats=await page.evaluate(async()=>{const stamps=[];await new Promise(resolve=>{const start=performance.now();function step(t){stamps.push(t);if(t-start>=1200)return resolve();requestAnimationFrame(step)}requestAnimationFrame(step)});const gaps=stamps.slice(1).map((t,i)=>t-stamps[i]);return{frames:stamps.length,maxGap:gaps.length?Math.max(...gaps):0,avgGap:gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:0}});
     await page.screenshot({path:`artifacts/mobile-smoke/ocean-ecosystem-${count}.png`,fullPage:true});
@@ -77,6 +80,8 @@ async function runScenario(count){
     if(result.overflow)failures.push('iPhone horizontal overflow');
     if(result.fallback)failures.push('Ocean fell back instead of rendering');
     if(result.creatureCount!==count)failures.push(`${count} films must produce ${count} logical creatures, got ${result.creatureCount}`);
+    if(count>=100&&result.ordinarySpeciesCount<15)failures.push(`${count}-preview must expose at least 15 ordinary fish species, got ${result.ordinarySpeciesCount}: ${result.ordinarySpeciesIds.join(',')}`);
+    if(count>=100&&result.ordinaryAssetCount<14)failures.push(`${count}-preview must expose at least 14 distinct ordinary fish assets, got ${result.ordinaryAssetCount}: ${result.ordinaryAssetSrcs.join(',')}`);
     if(result.commemorativeCount!==result.expectedMilestones)failures.push(`${count} films must render ${result.expectedMilestones} unlocked milestone creatures, got ${result.commemorativeCount}`);
     if(result.milestoneImageCount!==result.expectedMilestones)failures.push(`${count} films must mount ${result.expectedMilestones} milestone images, got ${result.milestoneImageCount}`);
     if(!result.milestoneImagesDecoded)failures.push('milestone atlas images did not decode before visual capture');
@@ -98,7 +103,7 @@ async function runScenario(count){
     if(badResponses.length)failures.push(`bad responses: ${badResponses.map(x=>`${x.status}:${x.url}`).join(',')}`);
     failures.push(...errors);
     if(failures.length)throw new Error(`${failures.join('; ')} | metrics=${JSON.stringify({result,frameStats})}`);
-    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
+    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
   }finally{await context.close()}
 }
 

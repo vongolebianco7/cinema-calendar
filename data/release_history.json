@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T18:34:38.810765+00:00",
+  "generated_at": "2026-09-30T18:33:18.512692+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -12371,6 +12371,45 @@
       "id": 302699,
       "original_title": "Central Intelligence",
       "date": "2026-09-30",
+      "service": "テレビ東京",
+      "time": "13:40",
+      "program": "午後のロードショー",
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "ワン・バトル・アフター・アナザー",
+      "id": 1054867,
+      "original_title": "One Battle After Another",
+      "date": "2026-10-01",
+      "service": "Hulu",
+      "time": null,
+      "program": null,
+      "source": "Hulu News（公式）",
+      "source_url": "https://news.hulu.jp/hbo_max_on_hulu/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "ディスクロージャー・デイ",
+      "id": 1275779,
+      "original_title": "Disclosure Day",
+      "date": "2026-10-01",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1275779",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "マーヴェリック",
+      "id": 9359,
+      "original_title": "Maverick",
+      "date": "2026-10-01",
       "service": "テレビ東京",
       "time": "13:40",
       "program": "午後のロードショー",

@@ -12,11 +12,13 @@ async function waitForLogicalPopulation(page,count){
   },count);
 }
 
-async function waitForMilestoneImages(page){
-  await page.waitForFunction(()=>{
+async function waitForMilestoneImages(page,count){
+  await page.waitForFunction(expected=>{
+    const rewardCount=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(expected)?.length||0;
+    const commemorative=document.querySelectorAll('[data-commemorative]').length;
     const images=[...document.querySelectorAll('.milestoneAtlasCreature img')];
-    return images.length===0||images.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0);
-  });
+    return commemorative===rewardCount&&images.length===rewardCount&&images.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0);
+  },count);
 }
 
 async function runScenario(count){
@@ -32,8 +34,7 @@ async function runScenario(count){
     await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
     await waitForLogicalPopulation(page,count);
     await page.waitForFunction(()=>document.querySelector('#oceanBackdrop')?.complete&&document.querySelector('#oceanBackdrop')?.naturalWidth>0);
-    await page.waitForFunction(()=>document.querySelectorAll('[data-commemorative]').length===(window.CinemapOceanMilestoneRewards?.rewardsForCount?.(count)?.length||0),count);
-    await waitForMilestoneImages(page);
+    await waitForMilestoneImages(page,count);
     if(count>=300)await page.waitForFunction(()=>window.CinemapOceanPerformanceRenderer?.metrics?.().active===true);
     await page.waitForTimeout(350);
     const result=await page.evaluate(()=>{

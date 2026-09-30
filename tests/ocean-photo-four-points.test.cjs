@@ -11,8 +11,8 @@ test('Photo Ocean loads layout, performance renderer, milestone rewards and atla
   assert.match(ecology,/milestone-rewards\.js\?v=4/);
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
   assert.match(ecology,/milestone-swim\.js\?v=3/);
-  assert.match(ecology,/ordinary-species-motion\.js\?v=1/);
-  assert.match(ecology,/photo-four-points\.js\?v=9/);
+  assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
+  assert.match(ecology,/photo-four-points\.js\?v=10/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -42,7 +42,7 @@ test('production growth creates ordinary fish from the full creature catalog ins
   assert.match(enhancer,/function ordinaryFishDeck\(/);
   assert.match(enhancer,/function makeCatalogFish\(/);
   assert.match(enhancer,/dataset\.creatureId/);
-  assert.match(enhancer,/applyCatalogSpecies\(node,catalogFishForIndex\(target,index\)\)/);
+  assert.match(enhancer,/applyCatalogSpecies\(node,species\)/);
   assert.doesNotMatch(enhancer,/sources\[i%sources\.length\]\.cloneNode\(true\)/);
 });
 

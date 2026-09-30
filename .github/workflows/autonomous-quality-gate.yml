@@ -30,9 +30,9 @@ jobs:
         run: python scripts/quality_gate.py
 
   mobile-smoke:
-    name: iPhone-size smoke test (no AI)
+    name: iPhone-size smoke test (Chromium + WebKit, no AI)
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,12 +40,14 @@ jobs:
           node-version: "22"
       - name: Install temporary Playwright dependency
         run: npm install --no-save --no-package-lock playwright@1.55.0
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/cinemap-http.log 2>&1 &
-      - name: Run mobile checks
-        run: node scripts/mobile_smoke.mjs
+      - name: Run mobile checks in Chromium
+        run: CINEMAP_BROWSER=chromium node scripts/mobile_smoke.mjs
+      - name: Run mobile checks in WebKit
+        run: CINEMAP_BROWSER=webkit node scripts/mobile_smoke.mjs
       - name: Run Ocean record/grow/reload persistence check
         run: node scripts/ocean_persistence_smoke.mjs
       - name: Run Ocean iPhone visual gate

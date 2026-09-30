@@ -28,5 +28,6 @@ test('every completed 100-film milestone promotes one existing creature instead 
   assert.match(rewards,/milestoneSlots/);
   assert.match(world,/milestoneSlots/);
   assert.match(world,/milestoneByIndex/);
-  assert.match(world,/target===state\.watched/);
+  assert.match(world,/const target=state\.watched/);
+  assert.match(world,/milestoneAt:special\?\.at\|\|null/);
 });

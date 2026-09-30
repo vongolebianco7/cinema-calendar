@@ -25,6 +25,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Run renderer regression contracts
+        working-directory: .
+        run: node --test tests/ocean-renderer-*.test.cjs
       - run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build -- --base=./

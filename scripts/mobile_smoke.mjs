@@ -6,7 +6,11 @@ const browserName=process.env.CINEMAP_BROWSER||'chromium';
 const browserType={chromium,webkit}[browserName];
 if(!browserType)throw new Error(`Unsupported CINEMAP_BROWSER: ${browserName}`);
 const browser=await browserType.launch();
-const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:3});
+const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3});
+// This is a layout/smoke gate. Keep it deterministic and independent from the optional
+// Vercel movie-search backend, whose CORS/rate-limit state is tested separately.
+await context.route(/backend-one-gray-94\.vercel\.app\/api\/movies/,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
+const page=await context.newPage();
 const errors=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 for(const path of candidates){
  const res=await page.goto(`${base}/${path}`,{waitUntil:'domcontentloaded'});

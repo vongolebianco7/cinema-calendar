@@ -1,4 +1,5 @@
 (function(){'use strict';
+// Establish the requested logical population before async catalog/observer work so mobile visual gates and first paint see the exact count.
 const RECORD_KEY='cinemap-ocean-demo-records-v1';const SEABED_X=[23,50,72];const PREVIEW_STATES=[25,50,75,100,150,200,300,400,500,600,700,800,1000,1200,1500];let previewTarget=null;try{const q=Number(new URLSearchParams(location.search).get('preview'));if(Number.isFinite(q)&&q>=0)previewTarget=Math.floor(q)}catch{}
 function readRecords(){try{const raw=localStorage.getItem(RECORD_KEY);const parsed=raw?JSON.parse(raw):{};return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{}}catch{return{}}}
 function populationTarget(records){return Object.keys(records||{}).length}function effectivePopulationTarget(records){return previewTarget===null?populationTarget(records):previewTarget}function creatureNodes(stage){return [...stage.querySelectorAll('.fishWrap,.seabedCreature')]}function layout(total){return window.CinemapOceanPopulationLayout?.layoutPopulation?.(total)||[]}

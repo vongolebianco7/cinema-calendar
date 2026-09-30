@@ -6,7 +6,9 @@ const src=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8')
 
 test('all counted creatures use natural-layout positions, not an equal grid',()=>{
   assert.match(src,/const records=readRecords\(\),target=effectivePopulationTarget\(records\),points=layout\(target\)/);
-  assert.match(src,/nodes\.forEach\(\(node,index\)=>applyNaturalPosition\(node,points\[index\],index\)\)/);
+  assert.match(src,/nodes\.forEach\(\(node,index\)=>\{/);
+  assert.match(src,/applyNaturalPosition\(node,points\[index\],index\)/);
+  assert.match(src,/applyCatalogSpecies\(node,catalogFishForIndex\(target,index\)\)/);
   assert.doesNotMatch(src,/Math\.ceil\(Math\.sqrt\(total\)\)/);
 });
 

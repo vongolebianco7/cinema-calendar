@@ -9,5 +9,5 @@ export const OCEAN_RUNTIME_POLICY=Object.freeze({
 export function clampDevicePixelRatio(value){
   const n=Number(value);
   if(!Number.isFinite(n)||n<=0)return 1;
-  return Math.min(OCEAN_RUNTIME_POLICY.maxDevicePixelRatio,n);
+  return Math.min(2,Math.max(1,n));
 }

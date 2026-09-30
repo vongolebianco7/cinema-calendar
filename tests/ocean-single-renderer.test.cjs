@@ -1,12 +1,12 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
-const index=fs.readFileSync('preview/ocean/index.html','utf8');
+const immersive=fs.readFileSync('preview/ocean/js/ocean-immersive.js','utf8');
 
-test('production Ocean has exactly one renderer owner for #universe',()=>{
-  assert.match(index,/CinemapOceanImmersive\.mount/);
-  assert.doesNotMatch(index,/id="photo-ocean-production-script"/);
-  assert.doesNotMatch(index,/mountPhotoOcean/);
-  assert.doesNotMatch(index,/photoOceanFrame/);
-  assert.doesNotMatch(index,/photoOceanShell/);
+test('production Ocean blocks the legacy Photo Ocean overwrite without repair-loop remounts',()=>{
+  assert.match(immersive,/photoOceanShell/);
+  assert.match(immersive,/Object\.defineProperty\(host,'innerHTML'/);
+  assert.doesNotMatch(immersive,/MutationObserver/);
+  assert.doesNotMatch(immersive,/repairTimer/);
+  assert.doesNotMatch(immersive,/setTimeout\(\(\)=>mount/);
 });

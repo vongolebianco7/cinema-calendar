@@ -14,14 +14,13 @@ async function waitForLogicalPopulation(page,count){
 
 async function runScenario(count){
   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
-  await context.addInitScript((recordCount)=>{const records={};for(let i=0;i<recordCount;i++)records[String(i)]={watched:true,rating:4,genres:['ドラマ'],region:'日本'};localStorage.setItem('cinemap-ocean-demo-records-v1',JSON.stringify(records));},count);
   const page=await context.newPage();
   const errors=[],requestFailures=[],badResponses=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('requestfailed',req=>requestFailures.push({url:req.url(),failure:req.failure()?.errorText||'unknown'}));
   page.on('response',res=>{if(res.status()>=400)badResponses.push({url:res.url(),status:res.status()})});
   try{
-    const response=await page.goto(`http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?state=${count}`,{waitUntil:'domcontentloaded'});
+    const response=await page.goto(`http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?preview=${count}`,{waitUntil:'domcontentloaded'});
     if(!response||response.status()>=400)throw new Error(`Ocean ${count} visual HTTP ${response?.status()}`);
     await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
     await waitForLogicalPopulation(page,count);
@@ -70,9 +69,8 @@ async function runScenario(count){
 
 async function runPreviewOverrideScenario(){
   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
-  await context.addInitScript(()=>{const records={};for(let i=0;i<28;i++)records[String(i)]={watched:true,rating:4};localStorage.setItem('cinemap-ocean-demo-records-v1',JSON.stringify(records));});
   const page=await context.newPage();
-  try{await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?state=100',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);await waitForLogicalPopulation(page,28);await page.click('button[data-state="500"]');await waitForLogicalPopulation(page,500);await page.waitForFunction(()=>window.CinemapOceanPerformanceRenderer?.metrics?.().totalCount===500);const result=await page.evaluate(()=>({count:window.CinemapOceanPerformanceRenderer?.metrics?.().totalCount||document.querySelectorAll('.fishWrap,.seabedCreature').length,previewTarget:window.CinemapOceanPhotoFourPoints.previewTarget,perf:window.CinemapOceanPerformanceRenderer.metrics()}));if(result.count!==500||result.previewTarget!==500||result.perf.totalCount!==500)throw new Error(`500 preview override failed: ${JSON.stringify(result)}`);}finally{await context.close()}
+  try{await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?preview=100',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);await waitForLogicalPopulation(page,100);await page.click('button[data-state="500"]');await waitForLogicalPopulation(page,500);await page.waitForFunction(()=>window.CinemapOceanPerformanceRenderer?.metrics?.().totalCount===500);const result=await page.evaluate(()=>({count:window.CinemapOceanPerformanceRenderer?.metrics?.().totalCount||document.querySelectorAll('.fishWrap,.seabedCreature').length,previewTarget:window.CinemapOceanPhotoFourPoints.previewTarget,perf:window.CinemapOceanPerformanceRenderer.metrics()}));if(result.count!==500||result.previewTarget!==500||result.perf.totalCount!==500)throw new Error(`500 preview override failed: ${JSON.stringify(result)}`);}finally{await context.close()}
 }
 
 try{await runScenario(100);await runScenario(500);await runPreviewOverrideScenario();}finally{await browser.close();}

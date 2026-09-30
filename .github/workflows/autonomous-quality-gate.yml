@@ -1,6 +1,12 @@
 name: Autonomous quality gate
 
 on:
+  push:
+    branches:
+      - 'feat/**'
+      - 'fix/**'
+    paths-ignore:
+      - 'preview/ocean/renderer/dist/**'
   pull_request:
     paths-ignore:
       - 'preview/ocean/renderer/dist/**'

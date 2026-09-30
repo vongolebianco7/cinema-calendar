@@ -1,0 +1,23 @@
+name: Ocean ordinary species v1
+on:
+  push:
+    branches:
+      - feat/ocean-ordinary-species-v1
+    paths:
+      - 'preview/ocean/real-fish/**'
+      - 'tests/ocean-ordinary-species-expansion.test.cjs'
+      - '.github/workflows/ocean-ordinary-species-v1.yml'
+  pull_request:
+    paths:
+      - 'preview/ocean/real-fish/**'
+      - 'tests/ocean-ordinary-species-expansion.test.cjs'
+      - '.github/workflows/ocean-ordinary-species-v1.yml'
+jobs:
+  ordinary-species-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/ocean-ordinary-species-expansion.test.cjs

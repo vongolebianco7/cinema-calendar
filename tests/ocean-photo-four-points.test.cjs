@@ -22,13 +22,19 @@ test('Photo Ocean switches to the approved high-resolution background without st
   assert.match(enhancer,/objectFit='cover'/);
 });
 
-test('visible creature target equals watched record count exactly',()=>{
+test('normal Ocean population equals watched record count exactly',()=>{
   assert.match(enhancer,/function populationTarget\(records\)\{return Object\.keys\(records\|\|\{\}\)\.length\}/);
-  assert.match(enhancer,/const records=readRecords\(\),target=populationTarget\(records\),points=layout\(target\)/);
+  assert.match(enhancer,/previewTarget===null\?populationTarget\(records\):previewTarget/);
   assert.match(enhancer,/if\(nodes\.length>target\)/);
   assert.match(enhancer,/if\(nodes\.length<target\)/);
   assert.match(enhancer,/const commemorativeCount=Math\.floor\(target\/100\)/);
   assert.match(enhancer,/nodes\.forEach\(\(node,index\)=>applyNaturalPosition\(node,points\[index\],index\)\)/);
+});
+
+test('500 preview button renders 500 creatures instead of saved-record count',()=>{
+  assert.match(enhancer,/let previewTarget=null/);
+  assert.match(enhancer,/button\[data-state\]/);
+  assert.match(enhancer,/previewTarget=Math\.max\(0,Number\(button\.dataset\.state\)\|\|0\)/);
 });
 
 test('every completed 100 films replaces one ordinary creature with a commemorative creature',()=>{

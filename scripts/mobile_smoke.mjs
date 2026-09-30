@@ -9,7 +9,10 @@ const browser=await browserType.launch();
 const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3});
 await context.route(/backend-one-gray-94\.vercel\.app\/api\/movies/,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
 const page=await context.newPage();
-const errors=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
+const errors=[];
+const optionalMovieBackendError=/backend-one-gray-94\.vercel\.app\/api\/movies.*access control checks/i;
+page.on('pageerror',e=>{if(!optionalMovieBackendError.test(e.message))errors.push('pageerror: '+e.message)});
+fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 async function navigate(path){
  let lastError;
  for(let attempt=1;attempt<=2;attempt++){

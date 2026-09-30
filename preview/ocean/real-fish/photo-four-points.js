@@ -1,6 +1,6 @@
 (function(){'use strict';
 const RECORD_KEY='cinemap-ocean-demo-records-v1';
-const SEABED_X=[48,58,68,78,88];
+const SEABED_X=[23,35,50,59,72];
 let previewTarget=null;
 function readRecords(){try{const raw=localStorage.getItem(RECORD_KEY);const parsed=raw?JSON.parse(raw):{};return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{}}catch{return{}}}
 function populationTarget(records){return Object.keys(records||{}).length}

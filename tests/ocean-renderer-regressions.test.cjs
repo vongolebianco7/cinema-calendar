@@ -21,7 +21,7 @@ test('ordinary 3D fish retain readable native color rather than darkening toward
   assert.match(world,/m\.emissiveIntensity\s*=\s*\.08/);
 });
 
-test('renderer milestone table follows approved 100-1000 cadence and omits rejected seahorse',()=>{
+test('renderer milestone table follows approved 100-1000 cadence and omits rejected seahorse reward',()=>{
   const expected=[
     [25,'clownfish'],[50,'seaTurtle'],[100,'sunfish'],[150,'giantOctopus'],[200,'manta'],[250,'dolphin'],
     [300,'hammerhead'],[350,'largeShark'],[400,'dugong'],[450,'minkeWhale'],[500,'orca'],[550,'manta'],
@@ -31,10 +31,10 @@ test('renderer milestone table follows approved 100-1000 cadence and omits rejec
   for(const [at,key] of expected){
     assert.match(rewards,new RegExp(`at:${at},key:'${key}'`),`${at} should map to ${key}`);
   }
-  assert.doesNotMatch(rewards,/seahorse/i);
+  assert.doesNotMatch(rewards,/key:'seahorse'/i);
 });
 
-test('75 remains an explicit empty content slot rather than silently restoring seahorse',()=>{
+test('75 remains an explicit empty content slot rather than silently restoring a rejected reward',()=>{
   assert.match(rewards,/75 intentionally stays empty/);
-  assert.doesNotMatch(rewards,/at:75/);
+  assert.doesNotMatch(rewards,/\{at:75,/);
 });

@@ -36,6 +36,14 @@ test('normal Ocean population equals watched record count exactly',()=>{
   assert.match(enhancer,/nodes\.forEach\(\(node,index\)=>applyNaturalPosition\(node,points\[index\],index\)\)/);
 });
 
+test('production growth creates ordinary fish from the full creature catalog instead of cloning a tiny initial pool',()=>{
+  assert.match(enhancer,/function ordinaryFishCatalog\(/);
+  assert.match(enhancer,/window\.__OCEAN_PHOTO__\?\.CREATURES/);
+  assert.match(enhancer,/function makeCatalogFish\(/);
+  assert.match(enhancer,/dataset\.creatureId/);
+  assert.doesNotMatch(enhancer,/sources\[i%sources\.length\]\.cloneNode\(true\)/);
+});
+
 test('legacy state query and preview query select the same exact population target',()=>{
   assert.match(enhancer,/params\.get\('preview'\)\?\?params\.get\('state'\)/);
 });

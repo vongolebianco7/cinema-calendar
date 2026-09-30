@@ -1,36 +1,10 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;root.CinemapOceanEcologyState=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
-  function validRecords(records){
-    if(!records||typeof records!=='object'||Array.isArray(records))return [];
-    return Object.values(records).filter(v=>v&&typeof v==='object'&&!Array.isArray(v));
-  }
+  function validRecords(records){if(!records||typeof records!=='object'||Array.isArray(records))return [];return Object.values(records).filter(v=>v&&typeof v==='object'&&!Array.isArray(v));}
   function validRecordCount(records){return validRecords(records).length;}
   function ordinaryCreatureCount(records){return validRecordCount(records);}
   function nextSecretMilestone(records){const count=validRecordCount(records),at=(Math.floor(count/100)+1)*100;return{at,remaining:at-count,label:'???'};}
-  function ecologySignalsForRecords(records){
-    const rows=validRecords(records),count=rows.length;
-    const ratings=rows.map(r=>Number(r.rating)).filter(r=>Number.isFinite(r)&&r>0);
-    const highRatings=ratings.filter(r=>r>=4).length;
-    const lovedRatings=ratings.filter(r=>r>=4.5).length;
-    const lifeBestRatings=ratings.filter(r=>r>=5).length;
-    const ratingEnergy=Math.min(5,Math.floor(highRatings/4)+Math.floor(lovedRatings/6)+Math.min(1,lifeBestRatings));
-    const genres=new Set(),regions=new Set(),directors=new Set();
-    rows.forEach(r=>{
-      (Array.isArray(r.genres)?r.genres:[]).forEach(g=>g&&genres.add(String(g)));
-      if(r.region)regions.add(String(r.region));
-      if(r.director)directors.add(String(r.director));
-    });
-    const diversityScore=genres.size+regions.size*2+Math.min(directors.size,6);
-    const diversityTier=diversityScore>=16?5:diversityScore>=10?4:diversityScore>=6?3:diversityScore>=3?2:count?1:0;
-    return {count,ordinaryCreatureCount:count,ratedCount:ratings.length,highRatings,lovedRatings,lifeBestRatings,ratingEnergy,effectiveCount:count,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier,nextMilestone:nextSecretMilestone(records)};
-  }
-  function maturityStateForRecords(records,states,fallbackState){
-    const signals=ecologySignalsForRecords(records);
-    if(signals.count===0)return Number(fallbackState);
-    const milestones=Object.keys(states||{}).map(Number).filter(Number.isFinite).sort((a,b)=>a-b);
-    let reached=milestones.length?milestones[0]:0;
-    for(const milestone of milestones){if(milestone<=signals.count)reached=milestone;else break;}
-    return reached;
-  }
-  return {validRecordCount,ordinaryCreatureCount,nextSecretMilestone,ecologySignalsForRecords,maturityStateForRecords};
+  function ecologySignalsForRecords(records){const rows=validRecords(records),count=rows.length;const ratings=rows.map(r=>Number(r.rating)).filter(r=>Number.isFinite(r)&&r>0);const highRatings=ratings.filter(r=>r>=4).length;const lovedRatings=ratings.filter(r=>r>=4.5).length;const lifeBestRatings=ratings.filter(r=>r>=5).length;const ratingEnergy=Math.min(5,Math.floor(highRatings/4)+Math.floor(lovedRatings/6)+Math.min(1,lifeBestRatings));const genres=new Set(),regions=new Set(),directors=new Set();rows.forEach(r=>{(Array.isArray(r.genres)?r.genres:[]).forEach(g=>g&&genres.add(String(g)));if(r.region)regions.add(String(r.region));if(r.director)directors.add(String(r.director));});const diversityScore=genres.size+regions.size*2+Math.min(directors.size,6);const diversityTier=diversityScore>=16?5:diversityScore>=10?4:diversityScore>=6?3:diversityScore>=3?2:count?1:0;return{count,ordinaryCreatureCount:count,ratedCount:ratings.length,highRatings,lovedRatings,lifeBestRatings,ratingEnergy,effectiveCount:count,genreCount:genres.size,regionCount:regions.size,directorCount:directors.size,diversityScore,diversityTier,nextMilestone:nextSecretMilestone(records)};}
+  function maturityStateForRecords(records,states,fallbackState){const signals=ecologySignalsForRecords(records);if(signals.count===0)return Number(fallbackState);const milestones=Object.keys(states||{}).map(Number).filter(Number.isFinite).sort((a,b)=>a-b);let reached=milestones.length?milestones[0]:0;for(const milestone of milestones){if(milestone<=signals.count)reached=milestone;else break;}return reached;}
+  return{validRecordCount,ordinaryCreatureCount,nextSecretMilestone,ecologySignalsForRecords,maturityStateForRecords};
 });
-(function(){if(typeof document==='undefined')return;const current=document.currentScript;if(!current)return;const script=document.createElement('script');script.src='photo-four-points.js?v=1';script.defer=true;current.insertAdjacentElement('afterend',script)})();
+(function(){if(typeof document==='undefined')return;const current=document.currentScript;if(!current)return;const layout=document.createElement('script');layout.src='population-layout.js?v=1';layout.defer=true;layout.onload=()=>{const script=document.createElement('script');script.src='photo-four-points.js?v=2';script.defer=true;layout.insertAdjacentElement('afterend',script)};current.insertAdjacentElement('afterend',layout)})();

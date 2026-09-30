@@ -1,8 +1,7 @@
 (function(root){'use strict';
 const recurring=[
  {key:'clownfish',label:'カクレクマノミ',first:25,every:100,role:'habitat',habitat:'reef-anemone',scaleClass:'small'},
- {key:'sea-turtle',label:'ウミガメ',first:50,every:200,role:'habitat',habitat:'reef-edge',scaleClass:'medium'},
- {key:'seahorse',label:'タツノオトシゴ',first:75,every:200,role:'habitat',habitat:'reef-vegetation',scaleClass:'small'}
+ {key:'sea-turtle',label:'ウミガメ',first:50,every:200,role:'habitat',habitat:'reef-edge',scaleClass:'medium'}
 ];
 const fixed=[
  {key:'ocean-sunfish',label:'マンボウ',unlockAt:100,ordinal:1,role:'feature',habitat:'open-mid',scaleClass:'large'},
@@ -16,9 +15,10 @@ const fixed=[
  {key:'orca',label:'シャチ',unlockAt:500,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
  {key:'manta-ray',label:'マンタ',unlockAt:550,ordinal:2,role:'hero',habitat:'open-glide',scaleClass:'hero'},
  {key:'humpback-whale',label:'ザトウクジラ',unlockAt:600,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
+ {key:'sea-turtle',label:'ウミガメ',unlockAt:650,ordinal:4,role:'habitat',habitat:'reef-edge',scaleClass:'medium'},
  {key:'whale-shark',label:'ジンベイザメ',unlockAt:700,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
  {key:'ocean-sunfish',label:'マンボウ',unlockAt:750,ordinal:2,role:'feature',habitat:'open-mid',scaleClass:'large'},
- {key:'dolphin',label:'イルカ',unlockAt:800,ordinal:2,role:'hero',habitat:'upper-mid',scaleClass:'hero'},
+ {key:'dolphin',label:'イルカ',unlockAt:800,ordinal:2,role:'hero',habitat:'upper-mid',scaleClass:'hero',copies:3},
  {key:'hammerhead-shark',label:'ハンマーヘッドシャーク',unlockAt:850,ordinal:2,role:'hero',habitat:'open-mid',scaleClass:'hero'},
  {key:'minke-whale',label:'ミンククジラ',unlockAt:900,ordinal:2,role:'hero',habitat:'open-route',scaleClass:'giant'},
  {key:'orca',label:'シャチ',unlockAt:950,ordinal:2,role:'hero',habitat:'open-route',scaleClass:'giant'},
@@ -39,7 +39,7 @@ function rewardsForCount(value){
    const total=1+Math.floor((count-rule.first)/rule.every);
    for(let i=0;i<total;i++)rewards.push({key:rule.key,label:rule.label,unlockAt:rule.first+i*rule.every,ordinal:i+1,role:rule.role,habitat:rule.habitat,scaleClass:rule.scaleClass});
  }
- for(const rule of fixed){if(count>=rule.unlockAt)rewards.push({...rule,ordinal:rule.ordinal||1});}
+ for(const rule of fixed){if(count>=rule.unlockAt){const copies=Math.max(1,Number(rule.copies)||1);for(let i=0;i<copies;i++)rewards.push({...rule,ordinal:(rule.ordinal||1)+i});}}
  return rewards.sort((a,b)=>a.unlockAt-b.unlockAt||a.key.localeCompare(b.key));
 }
 function heroRewardsForCount(count){return rewardsForCount(count).filter(r=>r.role==='hero');}

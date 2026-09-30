@@ -71,4 +71,24 @@ async function runScenario(count){
   }finally{await context.close()}
 }
 
-try{await runScenario(100);await runScenario(500);}finally{await browser.close();}
+async function runPreviewOverrideScenario(){
+  const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
+  await context.addInitScript(()=>{
+    const records={};
+    for(let i=0;i<28;i++)records[String(i)]={watched:true,rating:4};
+    localStorage.setItem('cinemap-ocean-demo-records-v1',JSON.stringify(records));
+  });
+  const page=await context.newPage();
+  try{
+    await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?state=100',{waitUntil:'networkidle'});
+    await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
+    await page.waitForFunction(()=>document.querySelectorAll('.fishWrap,.seabedCreature').length===28);
+    await page.click('button[data-state="500"]');
+    await page.waitForFunction(()=>document.querySelectorAll('.fishWrap,.seabedCreature').length===500);
+    const result=await page.evaluate(()=>({count:document.querySelectorAll('.fishWrap,.seabedCreature').length,previewTarget:window.CinemapOceanPhotoFourPoints.previewTarget,pressed:document.querySelector('button[data-state="500"]').getAttribute('aria-pressed')}));
+    if(result.count!==500||result.previewTarget!==500||result.pressed!=='true')throw new Error(`500 preview override failed: ${JSON.stringify(result)}`);
+    console.log('Ocean preview override gate: 28 saved records -> 500 selected -> 500 rendered creatures.');
+  }finally{await context.close()}
+}
+
+try{await runScenario(100);await runScenario(500);await runPreviewOverrideScenario();}finally{await browser.close();}

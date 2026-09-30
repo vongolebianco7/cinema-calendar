@@ -1,11 +1,11 @@
 {
-  "version": 4,
-  "design": "Real-world body size is the source of truth; display scale compresses extremes for iPhone while preserving relative biological size. Red seabream (~40 cm) is the 1.0 reference. Ordinary species now also carry habitat and motion roles so schools, hoverers and solitary cruisers do not all read as the same fish.",
+  "version": 5,
+  "design": "Real-world body size is the source of truth; display scale compresses extremes for iPhone while preserving relative biological size. Red seabream (~40 cm) is the 1.0 reference. Ordinary species carry habitat and motion roles, and the legacy dark killifish photo is excluded from the ordinary spawn pool.",
   "scaleReference": {"id":"red-seabream","realLengthCm":40,"displayScale":1.0,"globalPresentationScale":1.2},
   "rarities": ["common", "uncommon", "rare", "epic"],
   "creatures": [
     {"id":"horse-mackerel","name":"アジ系","kind":"fish","silhouette":"slender-forked-tail","rarity":"common","unlockAt":10,"spawnWeight":12,"zone":"midwater","depthBias":"midground","realLengthCm":30,"displayScale":0.75,"schooling":true,"asset":"optimized/species-aji.webp","assetStatus":"ready-distinct-photo"},
-    {"id":"small-schooling-fish","name":"小型群泳魚","kind":"fish","silhouette":"tiny-streamlined","rarity":"common","unlockAt":10,"spawnWeight":14,"zone":"midwater-upper","depthBias":"background","realLengthCm":12,"displayScale":0.40,"schooling":true,"asset":"optimized/fish-real.webp","assetStatus":"ready-photo"},
+    {"id":"small-schooling-fish","name":"小型群泳魚","kind":"fish","silhouette":"tiny-streamlined","rarity":"common","unlockAt":10,"spawnWeight":14,"zone":"midwater-upper","depthBias":"background","realLengthCm":12,"displayScale":0.40,"schooling":true,"asset":"optimized/species-aji.webp","assetStatus":"ready-photo"},
     {"id":"red-seabream","name":"マダイ","kind":"fish","silhouette":"deep-oval","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"midwater","depthBias":"midground","realLengthCm":40,"displayScale":1.00,"schooling":false,"motionProfile":"heavy-cruise","asset":"optimized/species-madai.webp","assetStatus":"ready-distinct-photo"},
     {"id":"wrasse","name":"ベラ系","kind":"fish","silhouette":"slender-pointed-snout","rarity":"common","unlockAt":20,"spawnWeight":8,"zone":"reef-lower","depthBias":"midground","realLengthCm":30,"displayScale":0.80,"schooling":false,"asset":"optimized/nase.webp","assetStatus":"ready-distinct-photo"},
     {"id":"palette-surgeonfish","name":"ナンヨウハギ","kind":"fish","silhouette":"deep-oval-yellow-tail","rarity":"uncommon","unlockAt":25,"spawnWeight":5,"zone":"midwater","depthBias":"midground","realLengthCm":30,"displayScale":0.82,"schooling":true,"schoolSize":[3,7],"motionProfile":"small-school-cruise","asset":"optimized/species-blue-tang.svg","assetStatus":"ready-distinct-vector"},

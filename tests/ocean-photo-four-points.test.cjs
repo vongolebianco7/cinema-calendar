@@ -47,6 +47,12 @@ test('ordinary DOM fish are lifted for underwater readability instead of appeari
   assert.match(enhancer,/node\.style\.filter=ordinaryVisualFilter\(depth\)/);
 });
 
+test('fallback fish never uses the dark legacy killifish asset',()=>{
+  assert.match(enhancer,/function makeFallbackFish/);
+  assert.doesNotMatch(enhancer,/optimized\/fish-real\.webp/);
+  assert.match(enhancer,/optimized\/species-aji\.webp/);
+});
+
 test('FPS diagnostics are hidden unless debug is explicitly requested',()=>{
   assert.match(enhancer,/params\.get\('debug'\)==='1'/);
   assert.match(enhancer,/fps\.hidden=!debug/);

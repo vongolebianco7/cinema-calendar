@@ -22,3 +22,9 @@ test('performance evaluator requires all growth states and stability',()=>{
  assert.match(s,/\[0,30,100,300,500\]/);
  for(const token of ['medianFps','readyMs','blank','jsErrors','contextLosses','fpsRegressionPercentMax']) assert.match(s,new RegExp(token));
 });
+
+test('ordinary ecosystem does not spawn the dark legacy killifish asset',()=>{
+ const catalog=JSON.parse(read('preview/ocean/real-fish/creature-catalog.json'));
+ const ordinaryAssets=catalog.creatures.filter(c=>c.kind==='fish').map(c=>c.asset);
+ assert.ok(!ordinaryAssets.includes('optimized/fish-real.webp'));
+});

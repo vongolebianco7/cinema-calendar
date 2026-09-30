@@ -21,17 +21,13 @@ test('animation is centralized in one RAF-driven tick and throttles dense layers
   assert.match(perf,/MOBILE_DPR_CAP\s*=\s*1\.25/);
 });
 
-test('far fish use a batched lightweight silhouette pass instead of hundreds of image draws',()=>{
-  assert.match(perf,/function drawFarLayer\(/);
-  assert.match(perf,/ctx\.ellipse\(/);
-  assert.match(perf,/farItems/);
-});
-
-test('dense ordinary fish stay visibly colorful instead of collapsing into black silhouettes',()=>{
-  assert.match(perf,/ORDINARY_FISH_PALETTE/);
-  assert.match(perf,/function drawLightweightFish\(/);
-  assert.match(perf,/colorFor\(item/);
-  assert.doesNotMatch(perf,/fillStyle\s*=\s*['"](?:#000|black)/i);
+test('dense canvas fish preserve source fish imagery instead of becoming polygon silhouettes',()=>{
+  assert.match(perf,/function drawImageFish\(/);
+  assert.match(perf,/ctx\.drawImage\(/);
+  assert.match(perf,/function imageFor\(/);
+  assert.match(perf,/item\.src/);
+  assert.doesNotMatch(perf,/ctx\.ellipse\(/);
+  assert.doesNotMatch(perf,/lineTo\(tailX/);
 });
 
 test('canvas geometry is measured on mount or resize rather than every fish frame',()=>{

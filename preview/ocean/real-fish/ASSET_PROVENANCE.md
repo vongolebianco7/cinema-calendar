@@ -18,4 +18,12 @@
 - Runtime policy: committed locally; production makes zero external image requests.
 - Composition policy: each species has a unique crop in `milestone-assets.json`; no generic fish body or another species may be substituted.
 
+## Ordinary reef species v1
+
+- Assets: `optimized/species-blue-tang.svg`, `species-firefish.svg`, `species-sixline-wrasse.svg`, `species-damselfish.svg`, `species-lyretail-anthias.svg`, `species-filefish.svg`.
+- Subjects: ナンヨウハギ, ハタタテハゼ, ニセモチノウオ, スズメダイ, アカネハナゴイ, カワハギ. マダイ continues to use the existing dedicated local `species-madai.webp` asset.
+- Source: original vector illustrations authored specifically for Cinemap Ocean; no external copyrighted image is embedded or fetched at runtime.
+- Purpose: give each approved ordinary species a distinct silhouette, palette and ecology role rather than recoloring one generic fish.
+- Runtime policy: committed locally; production makes zero external image requests.
+
 The realism floor remains: if the iPhone first impression reads as an icon/game sprite rather than a recognizable marine animal, the asset gate fails and the milestone must not ship.

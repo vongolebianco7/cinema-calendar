@@ -12,10 +12,14 @@ test('exact population is laid out across a deterministic grid instead of near-o
   assert.doesNotMatch(src,/i\*23\+row\*9/);
 });
 
-test('added fish use visible depth classes and larger readable sizes while preserving the exact count',()=>{
+test('all counted creatures are repositioned, not only newly added clones',()=>{
+  assert.match(src,/nodes\.forEach\(\(node,index\)=>positionExtra\(node,index,target\)\)/);
+});
+
+test('100-creature layout uses compact readable sizes and preserves exact count',()=>{
   assert.match(src,/const depth=index%5===0\?'near':index%3===0\?'far':'mid'/);
   assert.match(src,/node\.classList\.remove\('near','mid','far'\)/);
   assert.match(src,/node\.classList\.add\(depth\)/);
-  assert.match(src,/5\.4\+\(index%5\)\*\.72/);
+  assert.match(src,/3\.2\+\(index%4\)\*\.38/);
   assert.match(src,/target=populationTarget\(records\)/);
 });

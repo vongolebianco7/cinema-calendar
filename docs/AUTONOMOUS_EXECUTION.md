@@ -1,40 +1,71 @@
 # Cinemap autonomous execution contract
 
-Cinemap development uses the same queue-oriented control loop for every implementation task.
+Cinemap development is a reply-before-complete self-loop, not a sequence of one-tool conversational turns.
 
-## State machine
+## Persistent queue states
 
-`BACKLOG -> READY -> IN_PROGRESS -> VERIFY -> APPLY -> STATE_UPDATE -> READY`
+Every task is explicitly one of:
 
-Verification failure transitions back to `IN_PROGRESS` through `ROOT_CAUSE -> FIX -> VERIFY`.
+`BACKLOG -> READY -> RUNNING -> VERIFY -> APPLY -> DONE`
 
-Progress events are never terminal states. Creating a commit or PR, receiving a tool result, starting CI, CI success, asset inspection, and posting progress are inputs to the next transition.
+`WAITING` is non-terminal: immediately schedule another `READY` task when one exists. `BLOCKED` is terminal only when it matches an allowed STOP condition below.
+
+Verification failure transitions through `ROOT_CAUSE -> REPAIR -> UNIT -> INTEGRATION -> SYSTEM`; a repair always restarts all three verification stages.
+
+## Visible progress protocol
+
+Before each material tool/action transition, emit a short progress event naming the current action (for example `Ocean: integration test` or `main: deploy verification`). A progress event is not a final response and MUST NOT end the self-loop.
+
+Tool results, commits, PR creation, CI start/success, asset inspection, merge, deploy start, and progress events are all non-terminal inputs to `NEXT_ACTION` selection.
+
+## Reply-before-complete guard
+
+A final response is forbidden while any of these are non-zero:
+
+- `READY`
+- `RUNNING`
+- `VERIFY`
+- `REPAIRABLE`
+- `APPLY`
+- any executable `NEXT_ACTION`
+
+Before final response, re-evaluate the queue. If any executable action exists, cancel finalization and return to `SELECT -> PROGRESS -> EXECUTE -> OBSERVE -> STATE_UPDATE -> NEXT_ACTION`.
 
 ## Allowed STOP conditions
 
 Execution may stop only when one of these is true:
 
 1. `QUEUE_EMPTY`: all currently defined work is complete.
-2. `USER_DECISION_REQUIRED`: two or more materially different product choices remain and prior agreements do not resolve them.
+2. `USER_DECISION_REQUIRED`: materially different product choices remain and prior agreements do not resolve them.
 3. `AUTH_OR_PERMISSION_BLOCK`: required authentication or permission cannot be completed by the agent.
 4. `SAFETY_OR_POLICY_BLOCK`: the required action is prohibited.
 5. `REPAIR_EXHAUSTED`: the same blocking failure remains after three evidence-based repair attempts.
-6. `EXTERNAL_WAIT_NO_RESUME`: an external asynchronous operation is still pending and the current execution environment provides no continuation mechanism. This must be reported as stopped, never as running in the background.
+6. `EXTERNAL_WAIT_NO_RESUME`: only external asynchronous work remains, no independent READY work exists, and the current execution environment cannot wait/resume. Report this as stopped, never as background work.
 
-Everything else transitions to the next state automatically.
+## Three-stage quality gate
 
-## Verification loop
+Every implementation uses, in order:
 
-For each task:
+1. `UNIT`: changed logic/contracts in isolation.
+2. `INTEGRATION`: connected feature/data/DOM or service flow.
+3. `SYSTEM`: build + security/compliance + primary iPhone/mobile user journey when UI is affected.
 
-1. Implement the smallest coherent change.
-2. Run deterministic tests.
-3. Run the relevant mobile/Ocean visual smoke gate when UI is affected.
-4. On failure, inspect evidence, repair, and rerun (maximum three repair attempts for the same blocker).
-5. On success, apply/merge when permitted.
-6. Verify the applied state.
-7. Update queue state and immediately select the next ready task.
+Any failure routes to root cause and repair, then restarts at UNIT.
 
-## Reporting
+## Post-merge completion
 
-Progress reporting does not terminate execution. A final report is produced only at an allowed STOP condition. Never claim background execution after the execution turn has ended.
+Merge is not DONE. Completion requires:
+
+`MERGE -> MAIN_SHA -> MAIN_QUALITY -> DEPLOY -> PRIMARY_SURFACE/DEVICE_CHECK (when applicable) -> DONE`
+
+A failed optional/legacy deploy provider does not invalidate a successful primary deployment if it is explicitly classified as non-primary and the primary surface is verified.
+
+## Autonomy acceptance test
+
+The autonomy mechanism itself is tested at three levels:
+
+- Unit: queue states, STOP whitelist, repair restart, and final guard are present and deterministic.
+- Integration: one execution turn chains multiple real tool operations through a non-terminal intermediate result without user prompting.
+- System: a real Cinemap task shows visible progress events and reaches DONE or a legitimate BLOCKED condition before the final response.
+
+Documentation alone never proves this acceptance test.

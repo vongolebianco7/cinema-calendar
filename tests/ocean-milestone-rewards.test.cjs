@@ -11,11 +11,12 @@ function loadRewards() {
 }
 
 function keysAt(count) {
-  return loadRewards().rewardsForCount(count).map((reward) => reward.key);
+  return Array.from(loadRewards().rewardsForCount(count), (reward) => reward.key);
 }
 
 function ordinalsAt(count, key) {
-  return loadRewards().rewardsForCount(count).filter((reward) => reward.key === key).map((reward) => reward.ordinal);
+  const rewards = loadRewards().rewardsForCount(count).filter((reward) => reward.key === key);
+  return Array.from(rewards, (reward) => reward.ordinal);
 }
 
 test('first 100 films unlock milestone species at 25-film intervals', () => {
@@ -45,8 +46,7 @@ test('large milestone ladder escalates through 1500 films', () => {
 });
 
 test('hero rewards contain only hero-role animals', () => {
-  const api = loadRewards();
-  const heroes = api.heroRewardsForCount(1500);
+  const heroes = loadRewards().heroRewardsForCount(1500);
   assert.ok(heroes.length > 0);
   assert.ok(heroes.every((reward) => reward.role === 'hero'));
 });

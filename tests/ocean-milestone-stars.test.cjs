@@ -13,10 +13,11 @@ test('Ocean milestone ecosystem starts at 25, rejects seahorse, and escalates th
   assert.equal(api.rewardsForCount(1500).some(r=>r.key==='seahorse'),false);
 });
 
-test('approved habitat populations recur without reintroducing seahorses',()=>{
+test('habitat rewards follow only explicitly approved unlocks and never reintroduce seahorses',()=>{
   const api=rewards();
-  assert.equal(api.rewardsForCount(225).filter(r=>r.key==='clownfish').length,3);
-  assert.equal(api.rewardsForCount(450).filter(r=>r.key==='sea-turtle').length,3);
+  assert.equal(api.rewardsForCount(225).filter(r=>r.key==='clownfish').length,1);
+  assert.equal(api.rewardsForCount(450).filter(r=>r.key==='sea-turtle').length,1);
+  assert.equal(api.rewardsForCount(650).filter(r=>r.key==='sea-turtle').length,2);
   assert.equal(api.rewardsForCount(1500).filter(r=>r.key==='seahorse').length,0);
   assert.ok(api.rewardsForCount(1500).length<=1500);
 });

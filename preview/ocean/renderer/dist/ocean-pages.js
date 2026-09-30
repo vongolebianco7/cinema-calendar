@@ -15093,9 +15093,23 @@ function kd() {
 //#region src/asset-world.js
 var Ad = new Od();
 Ad.setDecoderPath("./draco/");
-var jd = new Tu();
+var jd = new Tu(), Md = 1.2, Nd = {
+	clown: .11,
+	grouper: .75,
+	butterfly: .2,
+	angler: .45,
+	sword: 3,
+	shark: 3.4,
+	manta: 4.5,
+	whale: 12
+}, Pd = {
+	reef: -2.1,
+	benthic: -3.8,
+	drifter: -3.2,
+	pelagic: .3
+};
 jd.setDRACOLoader(Ad);
-var Md = (e, t) => new URL((/* #__PURE__ */ Object.assign({
+var Fd = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 	"../assets/creatures/angler.glb": du,
 	"../assets/creatures/butterflyfish.glb": fu,
 	"../assets/creatures/clownfish.glb": pu,
@@ -15107,57 +15121,57 @@ var Md = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 	"../assets/habitat/coral.glb": yu,
 	"../assets/habitat/rocks.glb": bu,
 	"../assets/habitat/shipwreck.glb": xu
-}))[`../assets/${e}/${t}.glb`], import.meta.url).href, Nd = {
+}))[`../assets/${e}/${t}.glb`], import.meta.url).href, Id = {
 	grouper: {
 		kind: "creatures",
 		file: "fish",
-		size: 1.05,
+		size: Nd.grouper * Md,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
 	clown: {
 		kind: "creatures",
 		file: "clownfish",
-		size: .72,
+		size: Nd.clown * Md,
 		yaw: Math.PI
 	},
 	butterfly: {
 		kind: "creatures",
 		file: "butterflyfish",
-		size: .82,
+		size: Nd.butterfly * Md,
 		yaw: Math.PI
 	},
 	sword: {
 		kind: "creatures",
 		file: "swordfish",
-		size: 1.8,
+		size: Nd.sword * Md,
 		yaw: Math.PI
 	},
 	shark: {
 		kind: "creatures",
 		file: "shark",
-		size: 3.1,
+		size: Nd.shark * Md,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
 	manta: {
 		kind: "creatures",
 		file: "manta",
-		size: 3.8,
+		size: Nd.manta * Md,
 		yaw: Math.PI / 2,
 		clip: "Armature|Swim"
 	},
 	whale: {
 		kind: "creatures",
 		file: "whale",
-		size: 7.2,
+		size: Nd.whale * Md,
 		yaw: Math.PI / 2,
 		clip: "Armature|Swim"
 	},
 	angler: {
 		kind: "creatures",
 		file: "angler",
-		size: 1.05,
+		size: Nd.angler * Md,
 		yaw: Math.PI / 2,
 		clip: "Fish_Armature|Swimming_Normal"
 	},
@@ -15179,14 +15193,14 @@ var Md = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 		size: 5.8,
 		ground: !0
 	}
-}, Pd = /* @__PURE__ */ new Map();
-async function Fd(e) {
-	if (Pd.has(e)) return Pd.get(e);
-	let t = Nd[e], n = jd.loadAsync(Md(t.kind, t.file));
-	return Pd.set(e, n), n;
+}, Ld = /* @__PURE__ */ new Map();
+async function Rd(e) {
+	if (Ld.has(e)) return Ld.get(e);
+	let t = Id[e], n = jd.loadAsync(Fd(t.kind, t.file));
+	return Ld.set(e, n), n;
 }
-function Id(e, t) {
-	let n = Nd[t].kind === "habitat";
+function zd(e, t) {
+	let n = Id[t].kind === "habitat";
 	e.traverse((e) => {
 		if (!e.isMesh || !e.material) return;
 		let r = (Array.isArray(e.material) ? e.material : [e.material]).map((e) => {
@@ -15200,11 +15214,11 @@ function Id(e, t) {
 		e.material = r.length === 1 ? r[0] : r;
 	});
 }
-async function Ld(e, t = 1) {
-	let n = Nd[e], r = await Fd(e), i = Cu(r.scene);
+async function Bd(e, t = 1) {
+	let n = Id[e], r = await Rd(e), i = Cu(r.scene);
 	i.updateMatrixWorld(!0);
 	let a = new en().setFromObject(i), o = a.getSize(new W()), s = Math.max(o.x, o.y, o.z) || 1, c = a.getCenter(new W()), l = new At();
-	l.add(i), i.position.set(-c.x, n.ground ? -a.min.y : -c.y, -c.z), l.scale.setScalar(n.size * t / s), l.rotation.y = n.yaw || 0, Id(i, e);
+	l.add(i), i.position.set(-c.x, n.ground ? -a.min.y : -c.y, -c.z), l.scale.setScalar(n.size * t / s), l.rotation.y = n.yaw || 0, zd(i, e);
 	let u = null;
 	if (n.clip && r.animations.length) {
 		u = new To(i);
@@ -15216,22 +15230,22 @@ async function Ld(e, t = 1) {
 		mixer: u
 	};
 }
-function Rd(e) {
+function Vd(e) {
 	let t = Math.sin(e * 9283.17) * 43758.5453;
 	return t - Math.floor(t);
 }
-function zd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1 } = {}) {
+function Hd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1 } = {}) {
 	return {
 		obj: e,
 		phase: o + (t % 7 - 3) * .18,
-		radius: n * (.9 + Rd(t + 8) * .18),
-		y: r + (Rd(t + 2) - .5) * 2.2 * c,
-		z: i + (Rd(t + 4) - .5) * 3.5 * c,
-		speed: a * (.86 + Rd(t + 6) * .28),
+		radius: n * (.9 + Vd(t + 8) * .18),
+		y: r + (Vd(t + 2) - .5) * 2.2 * c,
+		z: i + (Vd(t + 4) - .5) * 3.5 * c,
+		speed: a * (.86 + Vd(t + 6) * .28),
 		bob: s
 	};
 }
-function Bd(e) {
+function Ud(e) {
 	let t = e?.stats || {}, n = e?.habitat || {};
 	return {
 		watched: Math.max(0, Number(t.watched) || 0),
@@ -15242,7 +15256,7 @@ function Bd(e) {
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
 }
-var Vd = {
+var Wd = {
 	whale: "whale",
 	manta: "manta",
 	swordfish: "sword",
@@ -15251,18 +15265,18 @@ var Vd = {
 	deep: "angler",
 	grouper: "grouper"
 };
-function Hd(e, t) {
-	return Vd[e?.family] ? Vd[e.family] : e?.family ? null : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
+function Gd(e, t) {
+	return Wd[e?.family] ? Wd[e.family] : e?.family ? null : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
 }
-function Ud(e, t) {
+function Kd(e, t) {
 	let n = Math.max(1, t?.life || 32), r = [];
 	if (e.organisms.length) return e.organisms.slice(0, 28).forEach((t, i) => {
-		let a = nu(i), o = !!t.hero, s = Hd(t, a);
+		let a = nu(i), o = !!t.hero, s = Gd(t, a);
 		if (!s) return;
 		let c = Math.max(.65, Math.min(1.9, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(3, Math.min(6, 3 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
 		for (let e = 0; e < l && r.length < n; e++) r.push({
 			key: s,
-			scale: c * (e ? .72 + Rd(i * 7 + e) * .18 : 1),
+			scale: c * (e ? .72 + Vd(i * 7 + e) * .18 : 1),
 			hero: o,
 			niche: t.niche || "pelagic",
 			index: i,
@@ -15274,7 +15288,7 @@ function Ud(e, t) {
 	return Array.from({ length: i }, (e, t) => {
 		let n = nu(t);
 		return {
-			key: Hd({}, n),
+			key: Gd({}, n),
 			scale: .82 * n.scale,
 			hero: t % 19 == 0,
 			niche: "pelagic",
@@ -15284,7 +15298,7 @@ function Ud(e, t) {
 		};
 	});
 }
-function Wd(e, t) {
+function qd(e, t) {
 	let n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7), r = Math.max(5, Math.min(14, Math.round((t?.habitat || 8) / 8)));
 	return [
 		"coral",
@@ -15303,14 +15317,14 @@ function Wd(e, t) {
 		"coral"
 	].slice(0, r).map((t, r) => ({
 		key: t,
-		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Rd(r) * .1,
+		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Vd(r) * .1,
 		index: r
 	}));
 }
-async function Gd(e, t = null, n = {}) {
+async function Jd(e, t = null, n = {}) {
 	let r = new At();
 	r.name = "cinemap-asset-ecosystem", e.add(r);
-	let i = [], a = [], o = Bd(t), s = n.caps || {
+	let i = [], a = [], o = Ud(t), s = n.caps || {
 		life: 32,
 		habitat: 72
 	};
@@ -15321,27 +15335,27 @@ async function Gd(e, t = null, n = {}) {
 			Ad.dispose(), e.remove(r);
 		}
 	};
-	let c = Wd(o, s);
-	(await Promise.all(c.map((e) => Ld(e.key, e.scale)))).forEach(({ holder: e }, t) => {
+	let c = qd(o, s);
+	(await Promise.all(c.map((e) => Bd(e.key, e.scale)))).forEach(({ holder: e }, t) => {
 		let n = [
 			-9,
 			-4,
 			2,
 			7,
 			10
-		], i = n[t % n.length] + (Rd(t) - .5) * 2, a = -27 - Math.floor(t / n.length) * 8 - t % 2 * 2;
-		e.position.set(i, -6.9, a), e.rotation.y += Rd(t + 2) * Math.PI * 2, r.add(e);
+		], i = n[t % n.length] + (Vd(t) - .5) * 2, a = -27 - Math.floor(t / n.length) * 8 - t % 2 * 2;
+		e.position.set(i, -6.9, a), e.rotation.y += Vd(t + 2) * Math.PI * 2, r.add(e);
 	});
-	let l = Ud(o, s);
-	(await Promise.all(l.map((e) => Ld(e.key, e.scale * (e.hero ? 1.18 : 1))))).forEach((e, t) => {
+	let l = Kd(o, s);
+	(await Promise.all(l.map((e) => Bd(e.key, e.scale * (e.hero ? 1.18 : 1))))).forEach((e, t) => {
 		let n = l[t], o = n.profile || nu(t);
 		r.add(e.holder), e.mixer && i.push(e.mixer);
 		let s = n.niche === "reef", c = n.niche === "benthic" || n.niche === "drifter", u = n.hero || [
 			"whale",
 			"shark",
 			"manta"
-		].includes(n.key), d = t % 3, f = -25 - t % 8 * 3.5 - Math.floor(t / 24) * 5, p = c ? -3.8 : u ? 2.8 : d === 0 ? 2.2 : d === 1 ? .3 : -1.5;
-		a.push(zd(e.holder, t, {
+		].includes(n.key), d = t % 3, f = -25 - t % 8 * 3.5 - Math.floor(t / 24) * 5, p = u ? 2.8 : Pd[n.niche] ?? (d === 0 ? 2.2 : d === 1 ? .3 : -1.5);
+		a.push(Hd(e.holder, t, {
 			radius: u ? 7.5 : s ? 3.4 : 4.8,
 			y: p,
 			z: f,
@@ -15368,7 +15382,7 @@ async function Gd(e, t = null, n = {}) {
 }
 //#endregion
 //#region src/main.js
-function Kd(e, t = globalThis.devicePixelRatio || 1) {
+function Yd(e, t = globalThis.devicePixelRatio || 1) {
 	if (!e) throw Error("Ocean renderer requires a canvas");
 	let n = new Wl({
 		canvas: e,
@@ -15378,11 +15392,11 @@ function Kd(e, t = globalThis.devicePixelRatio || 1) {
 	});
 	return n.setClearAlpha(0), n.setPixelRatio(Kl(t)), n.outputColorSpace = N, n.toneMapping = 4, n.toneMappingExposure = 1.08, n;
 }
-function qd(e) {
+function Xd(e) {
 	let t = Number(e?.stats?.watched);
 	return Number.isFinite(t) ? Math.max(0, t) : Array.isArray(e?.organisms) ? e.organisms.length : 0;
 }
-function Jd(e) {
+function Zd(e) {
 	let t = Number(e?.stats?.ratingEnergy);
 	if (Number.isFinite(t)) return Math.max(0, Math.min(20, t));
 	let n = Array.isArray(e?.organisms) ? e.organisms : [];
@@ -15391,19 +15405,19 @@ function Jd(e) {
 		return e + (n >= 5 ? 1 : n >= 4.5 ? .6 : n >= 4 ? .25 : 0);
 	}, 0));
 }
-function Yd(e, t = {}) {
+function Qd(e, t = {}) {
 	let n = t.reducedMotion === !0, r = ql({
 		width: e.clientWidth || 390,
 		dpr: globalThis.devicePixelRatio || 1,
 		cores: globalThis.navigator?.hardwareConcurrency || 4,
 		reducedMotion: n
-	}), i = tu(qd(t.ecosystem), Jd(t.ecosystem)), a = Jl(r, i.effectiveCount), o = Kd(e, r.dpr), s = new zt();
+	}), i = tu(Xd(t.ecosystem), Zd(t.ecosystem)), a = Jl(r, i.effectiveCount), o = Yd(e, r.dpr), s = new zt();
 	s.background = null;
 	let c = new Ja(52, 1, .1, 180), l = uu(s, {
 		...r,
 		particles: a.particles,
 		maturity: i
-	}), u = null, d = null, f = Gd(s, t.ecosystem || null, {
+	}), u = null, d = null, f = Jd(s, t.ecosystem || null, {
 		quality: r,
 		caps: a,
 		maturity: i
@@ -15473,4 +15487,4 @@ function Yd(e, t = {}) {
 	};
 }
 //#endregion
-export { Yd as mountOcean };
+export { Qd as mountOcean };

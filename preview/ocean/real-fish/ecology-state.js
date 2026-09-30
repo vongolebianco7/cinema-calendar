@@ -33,3 +33,4 @@
   }
   return {validRecordCount,ordinaryCreatureCount,nextSecretMilestone,ecologySignalsForRecords,maturityStateForRecords};
 });
+(function(){if(typeof document==='undefined')return;const current=document.currentScript;if(!current)return;const script=document.createElement('script');script.src='photo-four-points.js?v=1';script.defer=true;current.insertAdjacentElement('afterend',script)})();

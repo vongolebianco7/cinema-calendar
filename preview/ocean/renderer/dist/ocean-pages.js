@@ -15122,6 +15122,24 @@ var Fd = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 	"../assets/habitat/rocks.glb": bu,
 	"../assets/habitat/shipwreck.glb": xu
 }))[`../assets/${e}/${t}.glb`], import.meta.url).href, Id = {
+	clown: 16751448,
+	butterfly: 16768875,
+	grouper: 6268871,
+	angler: 12029032,
+	sword: 12048101,
+	shark: 8890808,
+	manta: 7315379,
+	whale: 8627381
+}, Ld = [
+	5223891,
+	15911522,
+	15371110,
+	12573669,
+	6858192,
+	8636319,
+	16757597,
+	9421789
+], Rd = {
 	grouper: {
 		kind: "creatures",
 		file: "fish",
@@ -15193,32 +15211,35 @@ var Fd = (e, t) => new URL((/* #__PURE__ */ Object.assign({
 		size: 5.8,
 		ground: !0
 	}
-}, Ld = /* @__PURE__ */ new Map();
-async function Rd(e) {
-	if (Ld.has(e)) return Ld.get(e);
-	let t = Id[e], n = jd.loadAsync(Fd(t.kind, t.file));
-	return Ld.set(e, n), n;
+}, zd = /* @__PURE__ */ new Map();
+async function Bd(e) {
+	if (zd.has(e)) return zd.get(e);
+	let t = Rd[e], n = jd.loadAsync(Fd(t.kind, t.file));
+	return zd.set(e, n), n;
 }
-function zd(e, t) {
-	let n = Id[t].kind === "habitat";
+function Vd(e, t) {
+	let n = Rd[t].kind === "habitat";
 	e.traverse((e) => {
 		if (!e.isMesh || !e.material) return;
 		let r = (Array.isArray(e.material) ? e.material : [e.material]).map((e) => {
 			let r = e.clone();
-			if ("envMapIntensity" in r && (r.envMapIntensity = n ? .22 : .42), "roughness" in r && (r.roughness = Math.max(n ? .72 : .42, r.roughness ?? .6)), "metalness" in r && (r.metalness = Math.min(.05, r.metalness ?? 0)), n && r.color) {
+			if ("envMapIntensity" in r && (r.envMapIntensity = n ? .22 : .58), "roughness" in r && (r.roughness = Math.max(n ? .72 : .38, r.roughness ?? .6)), "metalness" in r && (r.metalness = Math.min(.05, r.metalness ?? 0)), n && r.color) {
 				let e = new X(t === "coral" ? 4550488 : 3165765);
 				r.color.lerp(e, t === "coral" ? .38 : .18);
+			} else if (r.color) {
+				let e = new X(Id[t] || 11061976);
+				r.color.lerp(e, .16);
 			}
-			return "emissive" in r && n && r.emissive.multiplyScalar(.12), r.side = 2, r;
+			return "emissive" in r && !n && r.color ? (r.emissive.copy(r.color), r.emissiveIntensity = .08) : "emissive" in r && n && r.emissive.multiplyScalar(.12), r.side = 2, r;
 		});
 		e.material = r.length === 1 ? r[0] : r;
 	});
 }
-async function Bd(e, t = 1) {
-	let n = Id[e], r = await Rd(e), i = Cu(r.scene);
+async function Hd(e, t = 1) {
+	let n = Rd[e], r = await Bd(e), i = Cu(r.scene);
 	i.updateMatrixWorld(!0);
 	let a = new en().setFromObject(i), o = a.getSize(new W()), s = Math.max(o.x, o.y, o.z) || 1, c = a.getCenter(new W()), l = new At();
-	l.add(i), i.position.set(-c.x, n.ground ? -a.min.y : -c.y, -c.z), l.scale.setScalar(n.size * t / s), l.rotation.y = n.yaw || 0, zd(i, e);
+	l.add(i), i.position.set(-c.x, n.ground ? -a.min.y : -c.y, -c.z), l.scale.setScalar(n.size * t / s), l.rotation.y = n.yaw || 0, Vd(i, e);
 	let u = null;
 	if (n.clip && r.animations.length) {
 		u = new To(i);
@@ -15230,22 +15251,22 @@ async function Bd(e, t = 1) {
 		mixer: u
 	};
 }
-function Vd(e) {
+function Ud(e) {
 	let t = Math.sin(e * 9283.17) * 43758.5453;
 	return t - Math.floor(t);
 }
-function Hd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1 } = {}) {
+function Wd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: o = Math.PI / 2, bob: s = .5, spread: c = 1 } = {}) {
 	return {
 		obj: e,
 		phase: o + (t % 7 - 3) * .18,
-		radius: n * (.9 + Vd(t + 8) * .18),
-		y: r + (Vd(t + 2) - .5) * 2.2 * c,
-		z: i + (Vd(t + 4) - .5) * 3.5 * c,
-		speed: a * (.86 + Vd(t + 6) * .28),
+		radius: n * (.9 + Ud(t + 8) * .18),
+		y: r + (Ud(t + 2) - .5) * 2.2 * c,
+		z: i + (Ud(t + 4) - .5) * 3.5 * c,
+		speed: a * (.86 + Ud(t + 6) * .28),
 		bob: s
 	};
 }
-function Ud(e) {
+function Gd(e) {
 	let t = e?.stats || {}, n = e?.habitat || {};
 	return {
 		watched: Math.max(0, Number(t.watched) || 0),
@@ -15256,7 +15277,7 @@ function Ud(e) {
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
 }
-var Wd = {
+var Kd = {
 	whale: "whale",
 	manta: "manta",
 	swordfish: "sword",
@@ -15265,40 +15286,102 @@ var Wd = {
 	deep: "angler",
 	grouper: "grouper"
 };
-function Gd(e, t) {
-	return Wd[e?.family] ? Wd[e.family] : e?.family ? null : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
-}
-function Kd(e, t) {
-	let n = Math.max(1, t?.life || 32), r = [];
-	if (e.organisms.length) return e.organisms.slice(0, 28).forEach((t, i) => {
-		let a = nu(i), o = !!t.hero, s = Gd(t, a);
-		if (!s) return;
-		let c = Math.max(.65, Math.min(1.9, (Number(t.scale) || 1) * a.scale)), l = o ? 1 : a.grouping === "school" ? Math.max(3, Math.min(6, 3 + Math.floor(e.schools / 2))) : a.grouping === "loose" ? 2 : 1;
-		for (let e = 0; e < l && r.length < n; e++) r.push({
-			key: s,
-			scale: c * (e ? .72 + Vd(i * 7 + e) * .18 : 1),
-			hero: o,
-			niche: t.niche || "pelagic",
-			index: i,
-			member: e,
-			profile: a
-		});
-	}), r;
-	let i = Math.min(n, Math.max(12, Math.round(8 + e.watched * .55 + e.schools * 2)));
-	return Array.from({ length: i }, (e, t) => {
-		let n = nu(t);
-		return {
-			key: Gd({}, n),
-			scale: .82 * n.scale,
-			hero: t % 19 == 0,
-			niche: "pelagic",
-			index: t,
-			member: 0,
-			profile: n
-		};
-	});
-}
 function qd(e, t) {
+	return Kd[e?.family] ? Kd[e.family] : e?.family ? null : t?.silhouette === "shark" ? "shark" : t?.silhouette === "ray" ? "manta" : t?.silhouette === "needle" ? "sword" : e?.niche === "reef" ? Number(e?.atlas) % 2 ? "clown" : "butterfly" : e?.niche === "drifter" || e?.niche === "benthic" ? "angler" : Number(e?.atlas) % 3 == 0 ? "butterfly" : "grouper";
+}
+function Jd(e, t) {
+	let n = Math.max(0, e.watched), r = Math.max(1, t?.life || 32), i = Math.min(n, r), a = [];
+	if (e.organisms.length) {
+		let t = 0;
+		for (; a.length < i && t < i * 3 + 28;) {
+			let n = t % Math.min(28, e.organisms.length), r = e.organisms[n], i = nu(t), o = !!r?.hero, s = qd(r, i);
+			if (t++, !s) continue;
+			let c = Math.max(.65, Math.min(1.9, (Number(r?.scale) || 1) * i.scale));
+			a.push({
+				key: s,
+				scale: c * (.82 + Ud(t * 7) * .18),
+				hero: o,
+				niche: r?.niche || "pelagic",
+				index: n,
+				member: t,
+				profile: i
+			});
+		}
+	} else for (let e = 0; e < i; e++) {
+		let t = nu(e);
+		a.push({
+			key: qd({}, t),
+			scale: .82 * t.scale,
+			hero: e % 19 == 0,
+			niche: "pelagic",
+			index: e,
+			member: 0,
+			profile: t
+		});
+	}
+	return {
+		life: a,
+		logicalCount: n,
+		primaryCount: i,
+		overflowCount: Math.max(0, n - i)
+	};
+}
+function Yd() {
+	let e = new Pn(), t = new Float32Array([
+		-.54,
+		0,
+		0,
+		-.08,
+		.22,
+		0,
+		.38,
+		0,
+		0,
+		-.08,
+		-.22,
+		0,
+		.38,
+		0,
+		0,
+		.66,
+		.28,
+		0,
+		.66,
+		-.28,
+		0
+	]);
+	return e.setAttribute("position", new yn(t, 3)), e.setIndex([
+		0,
+		1,
+		2,
+		0,
+		2,
+		3,
+		2,
+		4,
+		5,
+		2,
+		6,
+		4
+	]), e.computeVertexNormals(), e;
+}
+function Xd(e) {
+	if (e <= 0) return null;
+	let t = new Mr(Yd(), new Jn({
+		color: 16777215,
+		side: 2,
+		transparent: !0,
+		opacity: .9,
+		depthWrite: !1
+	}), e), n = new kt(), r = new X();
+	t.name = "cinemap-overflow-school", t.frustumCulled = !1;
+	for (let i = 0; i < e; i++) {
+		let e = i % 4, a = Math.floor(i / 7) % 7, o = (Ud(i + 101) - .5) * 20 + (a - 3) * .65, s = 3.5 - e * 1.35 + (Ud(i + 211) - .5) * 1.1, c = -31 - e * 5 - Ud(i + 307) * 8, l = .14 + Ud(i + 401) * .18;
+		n.position.set(o, s, c), n.rotation.set(0, Ud(i + 503) > .5 ? 0 : Math.PI, 0), n.scale.set(l * (1.05 + Ud(i + 607) * .4), l, l), n.updateMatrix(), t.setMatrixAt(i, n.matrix), r.setHex(Ld[i % Ld.length]), t.setColorAt(i, r);
+	}
+	return t.instanceMatrix.needsUpdate = !0, t.instanceColor && (t.instanceColor.needsUpdate = !0), t.userData.logicalCreatureCount = e, t;
+}
+function Zd(e, t) {
 	let n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7), r = Math.max(5, Math.min(14, Math.round((t?.habitat || 8) / 8)));
 	return [
 		"coral",
@@ -15317,37 +15400,40 @@ function qd(e, t) {
 		"coral"
 	].slice(0, r).map((t, r) => ({
 		key: t,
-		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Vd(r) * .1,
+		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Ud(r) * .1,
 		index: r
 	}));
 }
-async function Jd(e, t = null, n = {}) {
+async function Qd(e, t = null, n = {}) {
 	let r = new At();
 	r.name = "cinemap-asset-ecosystem", e.add(r);
-	let i = [], a = [], o = Ud(t), s = n.caps || {
+	let i = [], a = [], o = Gd(t), s = n.caps || {
 		life: 32,
 		habitat: 72
 	};
 	if (o.watched === 0) return {
 		root: r,
+		logicalCount: 0,
+		primaryCount: 0,
+		overflowCount: 0,
 		update() {},
 		dispose() {
 			Ad.dispose(), e.remove(r);
 		}
 	};
-	let c = qd(o, s);
-	(await Promise.all(c.map((e) => Bd(e.key, e.scale)))).forEach(({ holder: e }, t) => {
+	let c = Zd(o, s);
+	(await Promise.all(c.map((e) => Hd(e.key, e.scale)))).forEach(({ holder: e }, t) => {
 		let n = [
 			-9,
 			-4,
 			2,
 			7,
 			10
-		], i = n[t % n.length] + (Vd(t) - .5) * 2, a = -27 - Math.floor(t / n.length) * 8 - t % 2 * 2;
-		e.position.set(i, -6.9, a), e.rotation.y += Vd(t + 2) * Math.PI * 2, r.add(e);
+		], i = n[t % n.length] + (Ud(t) - .5) * 2, a = -27 - Math.floor(t / n.length) * 8 - t % 2 * 2;
+		e.position.set(i, -6.9, a), e.rotation.y += Ud(t + 2) * Math.PI * 2, r.add(e);
 	});
-	let l = Kd(o, s);
-	(await Promise.all(l.map((e) => Bd(e.key, e.scale * (e.hero ? 1.18 : 1))))).forEach((e, t) => {
+	let { life: l, logicalCount: u, primaryCount: d, overflowCount: f } = Jd(o, s);
+	(await Promise.all(l.map((e) => Hd(e.key, e.scale * (e.hero ? 1.18 : 1))))).forEach((e, t) => {
 		let n = l[t], o = n.profile || nu(t);
 		r.add(e.holder), e.mixer && i.push(e.mixer);
 		let s = n.niche === "reef", c = n.niche === "benthic" || n.niche === "drifter", u = n.hero || [
@@ -15355,7 +15441,7 @@ async function Jd(e, t = null, n = {}) {
 			"shark",
 			"manta"
 		].includes(n.key), d = t % 3, f = -25 - t % 8 * 3.5 - Math.floor(t / 24) * 5, p = u ? 2.8 : Pd[n.niche] ?? (d === 0 ? 2.2 : d === 1 ? .3 : -1.5);
-		a.push(Hd(e.holder, t, {
+		a.push(Wd(e.holder, t, {
 			radius: u ? 7.5 : s ? 3.4 : 4.8,
 			y: p,
 			z: f,
@@ -15365,24 +15451,30 @@ async function Jd(e, t = null, n = {}) {
 			phase: Math.PI / 2 + o.phase + (n.member || 0) * .1
 		}));
 	});
-	let u = 0;
+	let p = Xd(f);
+	p && r.add(p);
+	let m = 0;
 	return {
 		root: r,
+		logicalCount: u,
+		primaryCount: d,
+		overflowCount: f,
 		update(e) {
-			u += e, i.forEach((t) => t.update(e));
+			m += e, i.forEach((t) => t.update(e));
 			for (let e of a) {
-				let t = u * e.speed + e.phase;
+				let t = m * e.speed + e.phase;
 				e.obj.position.set(Math.cos(t) * e.radius, e.y + Math.sin(t * 1.7) * e.bob, e.z + Math.sin(t) * e.radius * .25), e.obj.rotation.y = Math.atan2(-Math.sin(t) * e.radius, Math.cos(t) * e.radius * .25), e.obj.rotation.z = Math.sin(t) * .018;
 			}
+			p && (p.position.x = Math.sin(m * .08) * .8, p.position.y = Math.sin(m * .11) * .12);
 		},
 		dispose() {
-			Ad.dispose(), e.remove(r);
+			p?.geometry?.dispose(), p?.material?.dispose(), Ad.dispose(), e.remove(r);
 		}
 	};
 }
 //#endregion
 //#region src/main.js
-function Yd(e, t = globalThis.devicePixelRatio || 1) {
+function $d(e, t = globalThis.devicePixelRatio || 1) {
 	if (!e) throw Error("Ocean renderer requires a canvas");
 	let n = new Wl({
 		canvas: e,
@@ -15392,11 +15484,11 @@ function Yd(e, t = globalThis.devicePixelRatio || 1) {
 	});
 	return n.setClearAlpha(0), n.setPixelRatio(Kl(t)), n.outputColorSpace = N, n.toneMapping = 4, n.toneMappingExposure = 1.08, n;
 }
-function Xd(e) {
+function ef(e) {
 	let t = Number(e?.stats?.watched);
 	return Number.isFinite(t) ? Math.max(0, t) : Array.isArray(e?.organisms) ? e.organisms.length : 0;
 }
-function Zd(e) {
+function tf(e) {
 	let t = Number(e?.stats?.ratingEnergy);
 	if (Number.isFinite(t)) return Math.max(0, Math.min(20, t));
 	let n = Array.isArray(e?.organisms) ? e.organisms : [];
@@ -15405,19 +15497,19 @@ function Zd(e) {
 		return e + (n >= 5 ? 1 : n >= 4.5 ? .6 : n >= 4 ? .25 : 0);
 	}, 0));
 }
-function Qd(e, t = {}) {
+function nf(e, t = {}) {
 	let n = t.reducedMotion === !0, r = ql({
 		width: e.clientWidth || 390,
 		dpr: globalThis.devicePixelRatio || 1,
 		cores: globalThis.navigator?.hardwareConcurrency || 4,
 		reducedMotion: n
-	}), i = tu(Xd(t.ecosystem), Zd(t.ecosystem)), a = Jl(r, i.effectiveCount), o = Yd(e, r.dpr), s = new zt();
+	}), i = tu(ef(t.ecosystem), tf(t.ecosystem)), a = Jl(r, i.effectiveCount), o = $d(e, r.dpr), s = new zt();
 	s.background = null;
 	let c = new Ja(52, 1, .1, 180), l = uu(s, {
 		...r,
 		particles: a.particles,
 		maturity: i
-	}), u = null, d = null, f = Jd(s, t.ecosystem || null, {
+	}), u = null, d = null, f = Qd(s, t.ecosystem || null, {
 		quality: r,
 		caps: a,
 		maturity: i
@@ -15487,4 +15579,4 @@ function Qd(e, t = {}) {
 	};
 }
 //#endregion
-export { Qd as mountOcean };
+export { nf as mountOcean };

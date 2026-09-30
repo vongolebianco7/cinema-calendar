@@ -10,6 +10,13 @@ function loadRewards() {
   return context.window.CinemapOceanMilestoneRewards;
 }
 
+function loadEcology() {
+  const source = fs.readFileSync('preview/ocean/real-fish/ecology-state.js', 'utf8');
+  const context = { globalThis: {}, window: {} };
+  vm.runInNewContext(source, context);
+  return context.globalThis.CinemapOceanEcologyState || context.window.CinemapOceanEcologyState;
+}
+
 function keysAt(count) {
   return Array.from(loadRewards().rewardsForCount(count), (reward) => reward.key);
 }
@@ -21,6 +28,10 @@ function ordinalsAt(count, key) {
 
 function rewardsUnlockedAt(count) {
   return Array.from(loadRewards().rewardsForCount(count)).filter((reward) => reward.unlockAt === count);
+}
+
+function fakeRecords(count) {
+  return Object.fromEntries(Array.from({length: count}, (_, i) => [`movie-${i}`, {rating: 3}]));
 }
 
 test('first 100 films unlock milestone species at 25-film intervals', () => {
@@ -68,6 +79,16 @@ test('post-1000 milestones continue every 50 films as ecosystem expansions', () 
   for (let count = 1050; count <= 1500; count += 50) {
     assert.ok(rewardsUnlockedAt(count).length >= 1, `at least one special reward should unlock at ${count}`);
   }
+});
+
+test('next secret milestone follows 25-step early cadence then 50-step cadence', () => {
+  const ecology = loadEcology();
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(24)).at, 25);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(75)).at, 100);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(100)).at, 150);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(249)).at, 250);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(1000)).at, 1050);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(1499)).at, 1500);
 });
 
 test('hero rewards contain only hero-role animals', () => {

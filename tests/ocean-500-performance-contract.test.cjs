@@ -12,11 +12,19 @@ test('500 fish uses canvas-backed mid/background layers with a small DOM foregro
   assert.match(perf,/farCanvas/);
 });
 
-test('animation is centralized in one RAF-driven tick and throttles the far layer',()=>{
+test('animation is centralized in one RAF-driven tick and throttles dense layers',()=>{
   assert.match(perf,/const tick=t=>/);
   assert.match(perf,/state\.raf=requestAnimationFrame\(tick\)/);
   assert.doesNotMatch(perf,/setInterval\(/);
-  assert.match(perf,/frame\s*%\s*3/);
+  assert.match(perf,/frame\s*%\s*2/);
+  assert.match(perf,/frame\s*%\s*4/);
+  assert.match(perf,/MOBILE_DPR_CAP\s*=\s*1\.5/);
+});
+
+test('canvas geometry is measured on mount or resize rather than every fish frame',()=>{
+  assert.match(perf,/function measure\(stage\)/);
+  assert.match(perf,/function resize\(stage,farCanvas,midCanvas\)/);
+  assert.match(perf,/state\.canvasMetrics/);
 });
 
 test('photo population hands large populations to performance renderer',()=>{

@@ -1,4 +1,4 @@
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');
-const demo=fs.readFileSync('preview/ocean/js/ocean-demo.js','utf8');
-test('user-facing Ocean lazily loads ecosystem and primary renderer without paid services',()=>{assert.match(demo,/loadScript\('js\/ocean-ecosystem\.js/);assert.match(demo,/loadScript\('js\/ocean-3d-primary\.js/);});
-test('dashboard mounts primary adapter and no longer mounts legacy immersive renderer',()=>{assert.match(demo,/CinemapOcean3DPrimary\?\.mount\?\.\(\)/);assert.doesNotMatch(demo,/CinemapOceanImmersive\?\.mount/);});
+const index=fs.readFileSync('preview/ocean/index.html','utf8');const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8');
+test('user-facing restored Ocean mounts the local Photo Ocean without paid runtime services',()=>{assert.match(index,/real-fish\/ecosystem\.html\?state=/);assert.match(index,/photoOceanFrame/);});
+test('Photo Ocean loads the four-point correction module locally',()=>{assert.match(ecology,/photo-four-points\.js\?v=1/);assert.doesNotMatch(ecology,/https?:\/\//);});

@@ -8,9 +8,9 @@ const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8')
 test('Photo Ocean loads layout, performance renderer, milestone rewards and atlas before correction module',()=>{
   assert.match(ecology,/population-layout\.js\?v=1/);
   assert.match(ecology,/performance-renderer\.js\?v=3/);
-  assert.match(ecology,/milestone-rewards\.js\?v=4/);
+  assert.match(ecology,/milestone-rewards\.js\?v=5/);
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
-  assert.match(ecology,/milestone-swim\.js\?v=3/);
+  assert.match(ecology,/milestone-swim\.js\?v=4/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
   assert.match(ecology,/photo-four-points\.js\?v=10/);
 });

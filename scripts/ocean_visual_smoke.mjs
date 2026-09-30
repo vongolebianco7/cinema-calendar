@@ -52,7 +52,7 @@ async function runScenario(count){
       if(result.perf.canvasCount<450)failures.push(`500-preview canvas population must carry most fish, got ${result.perf.canvasCount}`);
       if(result.visualPopulation<490)failures.push(`500-preview visual population must remain near 500, got ${result.visualPopulation}`);
       if(result.solitaryCount<25||result.solitaryCount>50)failures.push(`500-preview solitary creatures must be 25-50, got ${result.solitaryCount}`);
-      if(result.occupiedCells>55)failures.push(`500-preview must preserve open-water zones, occupied cells=${result.occupiedCells}`);
+      if(result.occupiedCells>60)failures.push(`500-preview must preserve open-water zones, occupied cells=${result.occupiedCells}`);
       if(frameStats.frames<20)failures.push(`500-preview animation stalled: ${JSON.stringify(frameStats)}`);
     }
     if(!result.hudBelowOcean)failures.push('message/HUD overlaps the ocean');

@@ -7,12 +7,12 @@ const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8')
 
 test('Photo Ocean loads layout, performance renderer, milestone rewards and atlas before correction module',()=>{
   assert.match(ecology,/population-layout\.js\?v=1/);
-  assert.match(ecology,/performance-renderer\.js\?v=2/);
+  assert.match(ecology,/performance-renderer\.js\?v=3/);
   assert.match(ecology,/milestone-rewards\.js\?v=4/);
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
   assert.match(ecology,/milestone-swim\.js\?v=3/);
-  assert.match(ecology,/ordinary-species-motion\.js\?v=1/);
-  assert.match(ecology,/photo-four-points\.js\?v=9/);
+  assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
+  assert.match(ecology,/photo-four-points\.js\?v=10/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -42,8 +42,19 @@ test('production growth creates ordinary fish from the full creature catalog ins
   assert.match(enhancer,/function ordinaryFishDeck\(/);
   assert.match(enhancer,/function makeCatalogFish\(/);
   assert.match(enhancer,/dataset\.creatureId/);
-  assert.match(enhancer,/applyCatalogSpecies\(node,catalogFishForIndex\(target,index\)\)/);
+  assert.match(enhancer,/applyCatalogSpecies\(node,species\)/);
   assert.doesNotMatch(enhancer,/sources\[i%sources\.length\]\.cloneNode\(true\)/);
+});
+
+test('ordinary species use catalog scale habitat schooling and motion instead of one generic behavior',()=>{
+  assert.match(enhancer,/function speciesDisplayFactor\(/);
+  assert.match(enhancer,/function speciesVerticalOffset\(/);
+  assert.match(enhancer,/function inferMotionProfile\(/);
+  assert.match(enhancer,/dataset\.speciesScale/);
+  assert.match(enhancer,/dataset\.schooling/);
+  assert.match(enhancer,/dataset\.motionProfile/);
+  assert.match(enhancer,/node\.style\.width=.*speciesDisplayFactor/);
+  assert.match(enhancer,/point\.y\+speciesVerticalOffset/);
 });
 
 test('legacy state query and preview query select the same exact population target',()=>{

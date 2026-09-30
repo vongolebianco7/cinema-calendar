@@ -16,8 +16,8 @@ test('animation is centralized in one RAF-driven tick and throttles dense layers
   assert.match(perf,/const tick=t=>/);
   assert.match(perf,/state\.raf=requestAnimationFrame\(tick\)/);
   assert.doesNotMatch(perf,/setInterval\(/);
-  assert.match(perf,/frame\s*%\s*3/);
-  assert.match(perf,/frame\s*%\s*6/);
+  assert.match(perf,/frame\s*%\s*4/);
+  assert.match(perf,/frame\s*%\s*8/);
   assert.match(perf,/MOBILE_DPR_CAP\s*=\s*1\.25/);
 });
 
@@ -28,6 +28,11 @@ test('dense canvas fish preserve source fish imagery instead of becoming polygon
   assert.match(perf,/item\.src/);
   assert.doesNotMatch(perf,/ctx\.ellipse\(/);
   assert.doesNotMatch(perf,/lineTo\(tailX/);
+});
+
+test('hybrid renderer suspends hidden DOM fish motion and resumes only DOM foreground',()=>{
+  assert.match(perf,/CinemapOceanOrdinaryMotion\?\.suspendNode/);
+  assert.match(perf,/CinemapOceanOrdinaryMotion\?\.resumeNode/);
 });
 
 test('canvas geometry is measured on mount or resize rather than every fish frame',()=>{

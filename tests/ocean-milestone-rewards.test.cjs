@@ -33,15 +33,41 @@ test('habitat species recur on their approved cadences', () => {
   assert.deepEqual(ordinalsAt(475, 'seahorse'), [1, 2, 3]);
 });
 
-test('large milestone ladder escalates through 1500 films', () => {
+test('special reward cadence is every 50 films from 100 through 1000', () => {
   const expected = [
-    [150, 'giant-octopus'], [200, 'manta-ray'], [300, 'dolphin'],
-    [400, 'hammerhead-shark'], [500, 'large-shark'], [600, 'dugong'],
-    [700, 'minke-whale'], [800, 'orca'], [1000, 'humpback-whale'],
-    [1200, 'whale-shark'], [1500, 'blue-whale']
+    [100, 'ocean-sunfish'],
+    [150, 'giant-octopus'],
+    [200, 'manta-ray'],
+    [250, 'dolphin'],
+    [300, 'hammerhead-shark'],
+    [350, 'large-shark'],
+    [400, 'dugong'],
+    [450, 'minke-whale'],
+    [500, 'orca'],
+    [550, 'manta-ray'],
+    [600, 'humpback-whale'],
+    [650, 'sea-turtle'],
+    [700, 'whale-shark'],
+    [750, 'ocean-sunfish'],
+    [800, 'dolphin'],
+    [850, 'hammerhead-shark'],
+    [900, 'minke-whale'],
+    [950, 'orca'],
+    [1000, 'blue-whale']
   ];
+  const api = loadRewards();
   for (const [count, key] of expected) {
-    assert.ok(keysAt(count).includes(key), `${key} should be unlocked at ${count}`);
+    const atCount = api.rewardsForCount(count);
+    const before = api.rewardsForCount(count - 1);
+    assert.ok(atCount.some((reward) => reward.key === key && reward.unlockAt === count), `${key} should be rewarded at ${count}`);
+    assert.equal(atCount.length, before.length + 1, `exactly one special reward should be added at ${count}`);
+  }
+});
+
+test('post-1000 milestones continue every 50 films as ecosystem expansions', () => {
+  const api = loadRewards();
+  for (let count = 1050; count <= 1500; count += 50) {
+    assert.equal(api.rewardsForCount(count).length, api.rewardsForCount(count - 1).length + 1, `one reward should be added at ${count}`);
   }
 });
 

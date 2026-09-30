@@ -12,8 +12,10 @@ test('500 fish uses canvas-backed mid/background layers with a small DOM foregro
   assert.match(perf,/farCanvas/);
 });
 
-test('animation is driven by one requestAnimationFrame loop and throttles far water layer',()=>{
-  assert.equal((perf.match(/requestAnimationFrame\(/g)||[]).length,1);
+test('animation is centralized in one RAF-driven tick and throttles the far layer',()=>{
+  assert.match(perf,/const tick=t=>/);
+  assert.match(perf,/state\.raf=requestAnimationFrame\(tick\)/);
+  assert.doesNotMatch(perf,/setInterval\(/);
   assert.match(perf,/frame\s*%\s*3/);
 });
 

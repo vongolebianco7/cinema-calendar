@@ -1,0 +1,3 @@
+const fs=require('node:fs');const test=require('node:test');const assert=require('node:assert/strict');
+test('population integration uses reward model and atlas instead of every-100 legacy stars',()=>{const js=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');assert.match(js,/rewardsForCount/);assert.match(js,/createCreature/);assert.match(js,/applyMilestonePlacement/);assert.doesNotMatch(js,/Math\.floor\(target\/100\)/);assert.doesNotMatch(js,/for\(let milestone=100/);});
+test('integration preserves exact logical population and hybrid renderer',()=>{const js=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');assert.match(js,/points\.length!==target/);assert.match(js,/PerformanceRenderer\?\.mount/);});

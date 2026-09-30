@@ -9,4 +9,13 @@
 - Original raster: 711 x 359 PNG, approximately 303 KB
 - Runtime policy: the source is downloaded once at build/authoring time and committed locally. Production makes zero requests to Wikimedia.
 
-This PoC uses a real photographed fish specifically to establish the visual realism floor before any ecosystem expansion. If the iPhone first impression still reads as an icon/illustration/game sprite, Task 2 remains failed and the asset must be replaced before adding species or scenery.
+## Milestone creature atlas v2
+
+- Asset: `optimized/milestone-creatures-v2.webp`
+- Subjects: clownfish, sea turtle, seahorse, ocean sunfish, giant octopus, manta ray, bottlenose dolphin, hammerhead shark, large shark, dugong, minke/baleen whale, orca, humpback whale, whale shark, blue whale.
+- Source: generated specifically for Cinemap Ocean with OpenAI image generation on 2026-09-30, then cropped/optimized into a local transparent WebP atlas.
+- Purpose: replace the crude geometric milestone SVGs and species substitutions with immediately recognizable, high-detail milestone animals.
+- Runtime policy: committed locally; production makes zero external image requests.
+- Composition policy: each species has a unique crop in `milestone-assets.json`; no generic fish body or another species may be substituted.
+
+The realism floor remains: if the iPhone first impression reads as an icon/game sprite rather than a recognizable marine animal, the asset gate fails and the milestone must not ship.

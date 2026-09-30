@@ -1,37 +1,28 @@
 const fs=require('node:fs');
+const vm=require('node:vm');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 
-const src=fs.readFileSync('preview/ocean/renderer/src/milestone-rewards.js','utf8');
+function rewards(){const source=fs.readFileSync('preview/ocean/real-fish/milestone-rewards.js','utf8');const context={window:{}};vm.runInNewContext(source,context);return context.window.CinemapOceanMilestoneRewards;}
 const photo=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 
-const expected=[
-  [100,'カクレクマノミ'],
-  [200,'ウミガメ'],
-  [300,'大ダコ'],
-  [400,'マンタ'],
-  [500,'イルカ'],
-  [600,'大型サメ'],
-  [700,'シャチ'],
-  [800,'ザトウクジラ'],
-  [900,'ジンベイザメ'],
-  [1000,'シロナガスクジラ']
-];
-
-test('Ocean milestone stars follow the approved 100-1000 film reward ladder',()=>{
-  for(const [at,label] of expected){
-    assert.match(src,new RegExp(`\\[${at},\\{[^\\n]*label:'${label}'`),`${at} films should unlock ${label}`);
-  }
+test('Ocean milestone ecosystem starts at 25 and escalates through 1500',()=>{
+  const api=rewards();
+  const expected=[[25,'clownfish'],[50,'sea-turtle'],[75,'seahorse'],[100,'ocean-sunfish'],[150,'giant-octopus'],[200,'manta-ray'],[300,'dolphin'],[400,'hammerhead-shark'],[500,'large-shark'],[600,'dugong'],[700,'minke-whale'],[800,'orca'],[1000,'humpback-whale'],[1200,'whale-shark'],[1500,'blue-whale']];
+  for(const [at,key] of expected)assert.ok(api.rewardsForCount(at).some(r=>r.key===key),`${at} films should unlock ${key}`);
 });
 
-test('milestone rewards still replace one creature every 100 films',()=>{
-  assert.match(src,/export const MILESTONE_STEP=100/);
-  assert.match(src,/filter\(\(\[at\]\)=>at<=n\)/);
+test('clownfish, turtle and seahorse populations recur without increasing logical population',()=>{
+  const api=rewards();
+  assert.equal(api.rewardsForCount(225).filter(r=>r.key==='clownfish').length,3);
+  assert.equal(api.rewardsForCount(450).filter(r=>r.key==='sea-turtle').length,3);
+  assert.equal(api.rewardsForCount(475).filter(r=>r.key==='seahorse').length,3);
+  assert.ok(api.rewardsForCount(1500).length<=1500);
 });
 
-test('large commemorative creatures render as one clean hero image, not duplicated fish body/tail layers',()=>{
-  assert.match(photo,/const hero=imgs\[0\]/);
-  assert.match(photo,/imgs\.slice\(1\)\.forEach/);
-  assert.match(photo,/style\.display='none'/);
-  assert.match(photo,/style\.animation='none'/);
+test('commemorative creatures render through one atlas crop while ordinary body and tail layers are hidden',()=>{
+  assert.match(photo,/createCreature\?\.\(reward\.key,manifest\)/);
+  assert.match(photo,/querySelectorAll\(':scope > img'\)/);
+  assert.match(photo,/img\.style\.display='none'/);
+  assert.match(photo,/creature\.style\.width='100%'/);
 });

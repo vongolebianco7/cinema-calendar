@@ -11,16 +11,16 @@ const assets={
  bluewhale:svg('<path d="M6 90c71-45 168-48 252-11l54-18-24 35 25 25-61-8c-89 34-179 27-246-23Z" fill="url(#g)"/><path d="M117 105c-31 23-61 31-91 28 24-11 41-24 50-41" fill="#5b9fb8"/><path d="M250 79c20-14 34-34 39-55 10 18 8 38-3 56" fill="#5b9fb8"/>' )
 };
 const REWARDS={
-100:{key:'clown',label:'カクレクマノミ',asset:assets.clown,width:8},
-200:{key:'turtle',label:'ウミガメ',asset:'optimized/species-small-sea-turtle.webp',width:13},
-300:{key:'octopus',label:'大ダコ',asset:'optimized/species-octopus.webp',width:14},
-400:{key:'manta',label:'マンタ',asset:assets.manta,width:17},
+100:{key:'clownfish',label:'カクレクマノミ',asset:assets.clown,width:8},
+200:{key:'sea-turtle',label:'ウミガメ',asset:'optimized/species-small-sea-turtle.webp',width:13},
+300:{key:'giant-octopus',label:'大ダコ',asset:'optimized/species-octopus.webp',width:14},
+400:{key:'manta-ray',label:'マンタ',asset:assets.manta,width:17},
 500:{key:'dolphin',label:'イルカ',asset:assets.dolphin,width:18},
-600:{key:'shark',label:'大型サメ',asset:assets.shark,width:20},
+600:{key:'large-shark',label:'大型サメ',asset:assets.shark,width:20},
 700:{key:'orca',label:'シャチ',asset:assets.orca,width:23},
-800:{key:'humpback',label:'ザトウクジラ',asset:assets.humpback,width:28},
-900:{key:'whaleshark',label:'ジンベイザメ',asset:assets.whaleshark,width:30},
-1000:{key:'bluewhale',label:'シロナガスクジラ',asset:assets.bluewhale,width:34}
+800:{key:'humpback-whale',label:'ザトウクジラ',asset:assets.humpback,width:28},
+900:{key:'whale-shark',label:'ジンベイザメ',asset:assets.whaleshark,width:30},
+1000:{key:'blue-whale',label:'シロナガスクジラ',asset:assets.bluewhale,width:34}
 };
 function rewardFor(at){return REWARDS[at]||null}
 root.CinemapOceanMilestoneStars={REWARDS,rewardFor};

@@ -34,18 +34,19 @@ function fakeRecords(count) {
   return Object.fromEntries(Array.from({length: count}, (_, i) => [`movie-${i}`, {rating: 3}]));
 }
 
-test('first 100 films unlock milestone species at 25-film intervals', () => {
+test('early milestones keep clownfish and turtle while the rejected seahorse is absent', () => {
   assert.deepEqual(keysAt(24), []);
   assert.deepEqual(keysAt(25), ['clownfish']);
   assert.deepEqual(keysAt(50), ['clownfish', 'sea-turtle']);
-  assert.deepEqual(keysAt(75), ['clownfish', 'sea-turtle', 'seahorse']);
-  assert.deepEqual(keysAt(100), ['clownfish', 'sea-turtle', 'seahorse', 'ocean-sunfish']);
+  assert.deepEqual(keysAt(75), ['clownfish', 'sea-turtle']);
+  assert.deepEqual(keysAt(100), ['clownfish', 'sea-turtle', 'ocean-sunfish']);
+  assert.equal(keysAt(1500).includes('seahorse'), false);
 });
 
-test('habitat species recur on their approved cadences', () => {
+test('approved habitat species recur without reintroducing seahorses', () => {
   assert.deepEqual(ordinalsAt(225, 'clownfish'), [1, 2, 3]);
   assert.deepEqual(ordinalsAt(450, 'sea-turtle'), [1, 2, 3]);
-  assert.deepEqual(ordinalsAt(475, 'seahorse'), [1, 2, 3]);
+  assert.deepEqual(ordinalsAt(1500, 'seahorse'), []);
 });
 
 test('special reward cadence is every 50 films from 100 through 1000', () => {
@@ -81,9 +82,10 @@ test('post-1000 milestones continue every 50 films as ecosystem expansions', () 
   }
 });
 
-test('next secret milestone follows 25-step early cadence then 50-step cadence', () => {
+test('next secret milestone follows the remaining early rewards then 50-step cadence', () => {
   const ecology = loadEcology();
   assert.equal(ecology.nextSecretMilestone(fakeRecords(24)).at, 25);
+  assert.equal(ecology.nextSecretMilestone(fakeRecords(50)).at, 100);
   assert.equal(ecology.nextSecretMilestone(fakeRecords(75)).at, 100);
   assert.equal(ecology.nextSecretMilestone(fakeRecords(100)).at, 150);
   assert.equal(ecology.nextSecretMilestone(fakeRecords(249)).at, 250);

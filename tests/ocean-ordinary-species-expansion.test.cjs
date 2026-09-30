@@ -28,6 +28,7 @@ test('ordinary Ocean catalog contains the seven approved species with distinct e
     assert.ok(Number(creature.realLengthCm) > 0);
     assert.ok(Number(creature.displayScale) > 0);
     assert.ok(Number(creature.spawnWeight) > 0);
+    assert.ok(Number(creature.unlockAt) <= 100, `${id} should join the ordinary ecosystem within the first 100 films`);
     assert.match(creature.assetStatus || '', /^ready-distinct-/);
   }
 });

@@ -15253,6 +15253,7 @@ function Ud(e) {
 		reef: Math.max(0, Math.min(1, Number(n.reef) || 0)),
 		vegetation: Math.max(0, Math.min(1, Number(n.vegetation) || 0)),
 		schools: Number(n.schools) || 0,
+		diversityTier: Math.max(0, Math.min(5, Number(t.diversityTier) || Number(e?.diversityTier) || 0)),
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
 }
@@ -15284,22 +15285,31 @@ function Kd(e, t) {
 			profile: a
 		});
 	}), r;
-	let i = Math.min(n, Math.max(12, Math.round(8 + e.watched * .55 + e.schools * 2)));
-	return Array.from({ length: i }, (e, t) => {
-		let n = nu(t);
+	let i = Math.min(n, Math.max(12, Math.round(8 + e.watched * .55 + e.schools * 2))), a = [
+		"grouper",
+		"butterfly",
+		"clown",
+		"sword",
+		"angler",
+		"manta",
+		"shark",
+		"whale"
+	], o = Math.max(2, Math.min(a.length, 2 + e.diversityTier));
+	return Array.from({ length: i }, (t, n) => {
+		let r = nu(n);
 		return {
-			key: Gd({}, n),
-			scale: .82 * n.scale,
-			hero: t % 19 == 0,
+			key: e.diversityTier ? a[(n * 3 + Math.floor(n / 4)) % o] : Gd({}, r),
+			scale: .82 * r.scale,
+			hero: n % 19 == 0,
 			niche: "pelagic",
-			index: t,
+			index: n,
 			member: 0,
-			profile: n
+			profile: r
 		};
 	});
 }
 function qd(e, t) {
-	let n = Math.max(e.maturity, e.reef * .9, e.vegetation * .7), r = Math.max(5, Math.min(14, Math.round((t?.habitat || 8) / 8)));
+	let n = e.diversityTier / 5, r = Math.max(e.maturity, e.reef * .9, e.vegetation * .7, n * .45), i = Math.max(5, Math.min(14, Math.round((t?.habitat || 8) / 8) + Math.floor(e.diversityTier / 2)));
 	return [
 		"coral",
 		"rocks",
@@ -15315,10 +15325,10 @@ function qd(e, t) {
 		"coral",
 		"rocks",
 		"coral"
-	].slice(0, r).map((t, r) => ({
+	].slice(0, i).map((t, i) => ({
 		key: t,
-		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Vd(r) * .1,
-		index: r
+		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 + n * .08 : .48 + r * .2 + Vd(i) * .1,
+		index: i
 	}));
 }
 async function Jd(e, t = null, n = {}) {

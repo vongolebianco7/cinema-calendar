@@ -4,11 +4,11 @@ const profiles={
  'sea-turtle':{family:'turtle-stroke',duration:15,travel:9,bob:3,body:2.5},
  'ocean-sunfish':{family:'sunfish-scull',duration:17,travel:5,bob:4,body:2},
  'giant-octopus':{family:'octopus-drift',duration:19,travel:5,bob:3,body:3},
- 'manta-ray':{family:'ray-glide',duration:18,travel:13,bob:2,body:4},
- dolphin:{family:'cetacean-play',duration:13,travel:15,bob:2,body:3},
+ 'manta-ray':{family:'rigid-glide',duration:18,travel:13,bob:1.2,body:4},
+ dolphin:{family:'rigid-cruise',duration:13,travel:15,bob:1,body:3},
  'hammerhead-shark':{family:'shark-cruise',duration:18,travel:14,bob:2.5,body:2},
  'large-shark':{family:'shark-cruise',duration:20,travel:15,bob:2,body:1.8},
- dugong:{family:'gentle-cruise',duration:22,travel:10,bob:1.5,body:2},
+ dugong:{family:'rigid-cruise',duration:22,travel:10,bob:.8,body:2},
  'minke-whale':{family:'cetacean-cruise',duration:25,travel:17,bob:3.5,body:2},
  orca:{family:'cetacean-cruise',duration:23,travel:18,bob:4,body:2.4},
  'humpback-whale':{family:'cetacean-cruise',duration:29,travel:18,bob:5,body:2.8},
@@ -24,8 +24,7 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 [data-swim-profile="turtle-stroke"] img:first-child{animation-name:turtleBody!important}
 [data-swim-profile="sunfish-scull"] img:first-child{animation-name:sunfishBody!important}
 [data-swim-profile="octopus-drift"] img:first-child{animation-name:octopusBody!important}
-[data-swim-profile="ray-glide"] img:first-child{animation-name:rayBody!important}
-[data-swim-profile="cetacean-play"] img:first-child{animation-name:cetaceanPlayBody!important}
+[data-swim-profile="rigid-glide"] img:first-child,[data-swim-profile="rigid-cruise"] img:first-child{animation:none!important;transform:none!important;will-change:auto!important}
 [data-swim-profile="cetacean-cruise"] img:first-child{animation-name:cetaceanBody!important}
 [data-swim-profile="shark-cruise"] img:first-child{animation-name:sharkBody!important}
 [data-swim-profile="gentle-cruise"] img:first-child{animation-name:gentleBody!important}
@@ -35,8 +34,6 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 @keyframes turtleBody{0%,100%{transform:translateY(0) rotate(-1.5deg) scaleY(.99)}50%{transform:translateY(-3%) rotate(1.8deg) scaleY(1.015)}}
 @keyframes sunfishBody{0%,100%{transform:rotate(-1.4deg) scaleY(.985)}50%{transform:rotate(1.4deg) scaleY(1.015)}}
 @keyframes octopusBody{0%,100%{transform:translateY(2%) rotate(-2deg) scaleX(.985)}50%{transform:translateY(-3%) rotate(2.5deg) scaleX(1.02)}}
-@keyframes rayBody{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5%)}}
-@keyframes cetaceanPlayBody{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5%)}}
 @keyframes cetaceanBody{0%,100%{transform:translateY(1%) rotate(-.8deg)}50%{transform:translateY(-1.2%) rotate(.8deg)}}
 @keyframes sharkBody{0%,100%{transform:skewY(-1.2deg) rotate(-.7deg)}50%{transform:skewY(1.2deg) rotate(.7deg)}}
 @keyframes gentleBody{0%,100%{transform:translateY(0)}50%{transform:translateY(-1%)}}

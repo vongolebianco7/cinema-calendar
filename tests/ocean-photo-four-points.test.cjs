@@ -7,11 +7,12 @@ const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8')
 
 test('Photo Ocean loads layout, performance renderer, milestone rewards and atlas before correction module',()=>{
   assert.match(ecology,/population-layout\.js\?v=1/);
-  assert.match(ecology,/performance-renderer\.js\?v=1/);
-  assert.match(ecology,/milestone-rewards\.js\?v=3/);
+  assert.match(ecology,/performance-renderer\.js\?v=2/);
+  assert.match(ecology,/milestone-rewards\.js\?v=4/);
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
-  assert.match(ecology,/milestone-swim\.js\?v=2/);
-  assert.match(ecology,/photo-four-points\.js\?v=7/);
+  assert.match(ecology,/milestone-swim\.js\?v=3/);
+  assert.match(ecology,/ordinary-species-motion\.js\?v=1/);
+  assert.match(ecology,/photo-four-points\.js\?v=8/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -41,8 +42,9 @@ test('preview controls expose the new 50-film cadence through 1500',()=>{
   assert.match(enhancer,/previewTarget=Math\.max\(0,Number\(button\.dataset\.state\)\|\|0\)/);
 });
 
-test('milestone rewards replace ordinary creatures without changing node count',()=>{
+test('milestone rewards replace ordinary creatures without changing node count and never overwrite another reward at the same film count',()=>{
   assert.match(enhancer,/for\(const reward of rewards\)/);
-  assert.match(enhancer,/reward\.unlockAt-1/);
+  assert.match(enhancer,/occupiedMilestoneIndices/);
+  assert.match(enhancer,/findMilestoneNodeIndex/);
   assert.match(enhancer,/renderCommemorative\(reward,nodes\[index\],manifest\)/);
 });

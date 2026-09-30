@@ -1,0 +1,3 @@
+const fs=require('node:fs');const test=require('node:test');const assert=require('node:assert/strict');
+test('gallery renders all milestone species through shared atlas renderer',()=>{const html=fs.readFileSync('preview/ocean/real-fish/milestone-gallery.html','utf8');assert.match(html,/milestone-atlas\.js/);assert.match(fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8'),/milestone-assets\.json/);assert.match(html,/data-milestone-gallery/);assert.match(html,/blue-whale/);assert.match(html,/clownfish/);});
+test('atlas renderer exposes crop-based element creation',()=>{const js=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8');assert.match(js,/createCreature/);assert.match(js,/10000\/w/);assert.match(js,/presentationScale/);});

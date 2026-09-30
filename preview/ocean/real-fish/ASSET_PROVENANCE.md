@@ -12,11 +12,11 @@
 ## Milestone creature atlas v2
 
 - Asset: `optimized/milestone-creatures-v2.webp`
-- Subjects: clownfish, sea turtle, seahorse, ocean sunfish, giant octopus, manta ray, bottlenose dolphin, hammerhead shark, large shark, dugong, minke/baleen whale, orca, humpback whale, whale shark, blue whale.
+- Subjects: clownfish, sea turtle, ocean sunfish, giant octopus, manta ray, bottlenose dolphin, hammerhead shark, large shark, dugong, minke/baleen whale, orca, humpback whale, whale shark, blue whale.
 - Source: generated specifically for Cinemap Ocean with OpenAI image generation on 2026-09-30, then cropped/optimized into a local transparent WebP atlas.
 - Purpose: replace the crude geometric milestone SVGs and species substitutions with immediately recognizable, high-detail milestone animals.
 - Runtime policy: committed locally; production makes zero external image requests.
-- Composition policy: each species has a unique crop in `milestone-assets.json`; no generic fish body or another species may be substituted.
+- Composition policy: each approved species has a unique crop in `milestone-assets.json`; no generic fish body or another species may be substituted. The rejected seahorse is not part of the runtime milestone catalog.
 
 ## Ordinary reef species v1
 

@@ -15245,14 +15245,14 @@ function Hd(e, t, { radius: n = 5, y: r = 0, z: i = -30, speed: a = .07, phase: 
 		bob: s
 	};
 }
-function Ud(e) {
-	let t = e?.stats || {}, n = e?.habitat || {};
+function Ud(e, t = null) {
+	let n = e?.stats || {}, r = e?.habitat || {}, i = Number(t?.habitat);
 	return {
-		watched: Math.max(0, Number(t.watched) || 0),
-		maturity: Math.max(0, Math.min(1, Number(e?.maturity) || 0)),
-		reef: Math.max(0, Math.min(1, Number(n.reef) || 0)),
-		vegetation: Math.max(0, Math.min(1, Number(n.vegetation) || 0)),
-		schools: Number(n.schools) || 0,
+		watched: Math.max(0, Number(n.watched) || 0),
+		maturity: Math.max(0, Math.min(1, Number.isFinite(i) ? i : Number(e?.maturity) || 0)),
+		reef: Math.max(0, Math.min(1, Number(r.reef) || 0)),
+		vegetation: Math.max(0, Math.min(1, Number(r.vegetation) || 0)),
+		schools: Number(r.schools) || 0,
 		organisms: Array.isArray(e?.organisms) ? e.organisms : []
 	};
 }
@@ -15317,14 +15317,14 @@ function qd(e, t) {
 		"coral"
 	].slice(0, r).map((t, r) => ({
 		key: t,
-		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 : .48 + n * .2 + Vd(r) * .1,
+		scale: t === "wreck" ? .58 : t === "coral" ? .4 + e.reef * .28 + n * .12 : .48 + n * .2 + Vd(r) * .1,
 		index: r
 	}));
 }
 async function Jd(e, t = null, n = {}) {
 	let r = new At();
 	r.name = "cinemap-asset-ecosystem", e.add(r);
-	let i = [], a = [], o = Ud(t), s = n.caps || {
+	let i = [], a = [], o = Ud(t, n.maturity), s = n.caps || {
 		life: 32,
 		habitat: 72
 	};

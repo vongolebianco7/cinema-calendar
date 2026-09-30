@@ -5,9 +5,11 @@ const assert=require('node:assert/strict');
 const enhancer=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8');
 
-test('Photo Ocean loads natural layout before the correction module',()=>{
+test('Photo Ocean loads layout, performance renderer and milestone stars before the correction module',()=>{
   assert.match(ecology,/population-layout\.js\?v=1/);
-  assert.match(ecology,/photo-four-points\.js\?v=2/);
+  assert.match(ecology,/performance-renderer\.js\?v=1/);
+  assert.match(ecology,/milestone-stars\.js\?v=1/);
+  assert.match(ecology,/photo-four-points\.js\?v=4/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{

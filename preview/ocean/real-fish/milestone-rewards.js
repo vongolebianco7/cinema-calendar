@@ -15,7 +15,6 @@ const fixed=[
  {key:'orca',label:'シャチ',unlockAt:500,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
  {key:'manta-ray',label:'マンタ',unlockAt:550,ordinal:2,role:'hero',habitat:'open-glide',scaleClass:'hero'},
  {key:'humpback-whale',label:'ザトウクジラ',unlockAt:600,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
- {key:'sea-turtle',label:'ウミガメ',unlockAt:650,ordinal:4,role:'habitat',habitat:'reef-edge',scaleClass:'medium'},
  {key:'whale-shark',label:'ジンベイザメ',unlockAt:700,ordinal:1,role:'hero',habitat:'open-route',scaleClass:'giant'},
  {key:'ocean-sunfish',label:'マンボウ',unlockAt:750,ordinal:2,role:'feature',habitat:'open-mid',scaleClass:'large'},
  {key:'dolphin',label:'イルカ',unlockAt:800,ordinal:2,role:'hero',habitat:'upper-mid',scaleClass:'hero',copies:3},

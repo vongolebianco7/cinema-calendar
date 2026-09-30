@@ -31,6 +31,7 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 [data-swim-profile="cetacean-cruise"] img:first-child{animation-name:cetaceanBody!important}
 [data-swim-profile="shark-cruise"] img:first-child{animation-name:sharkBody!important}
 [data-swim-profile="gentle-cruise"] img:first-child{animation-name:gentleBody!important}
+.milestoneAtlasCreature img{animation:none!important;transform:none!important}
 @keyframes milestoneRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(0deg)}42%{transform:translate3d(calc(var(--swim-travel)*.55),calc(var(--swim-bob)*-1),0) rotateY(0deg)}49%{transform:translate3d(calc(var(--swim-travel)*.62),calc(var(--swim-bob)*-.5),0) rotateY(180deg)}91%{transform:translate3d(calc(var(--swim-travel)*-.55),var(--swim-bob),0) rotateY(180deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(360deg)}}
 @keyframes reefBody{0%,100%{transform:rotate(-1deg) skewY(-1deg)}50%{transform:rotate(1.2deg) skewY(1.4deg)}}
 @keyframes turtleBody{0%,100%{transform:translateY(0) rotate(-1.5deg) scaleY(.99)}50%{transform:translateY(-3%) rotate(1.8deg) scaleY(1.015)}}

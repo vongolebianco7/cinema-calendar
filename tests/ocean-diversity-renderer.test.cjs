@@ -1,0 +1,3 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const src=fs.readFileSync('preview/ocean/renderer/src/asset-world.js','utf8');
+test('renderer consumes aggregate diversity tier without genre-to-fish mapping',()=>{assert.match(src,/diversityTier/);assert.match(src,/palette=\['grouper','butterfly','clown','sword','angler','manta','shark','whale'\]/);assert.doesNotMatch(src,/genre.*(?:fish|shark|manta|clown)/i);});
+test('diversity expands bounded palette and habitat while watched count stays population driver',()=>{assert.match(src,/2\+state\.diversityTier/);assert.match(src,/state\.watched\*\.55/);assert.match(src,/Math\.floor\(state\.diversityTier\/2\)/);});

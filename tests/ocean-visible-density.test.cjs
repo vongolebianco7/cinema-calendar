@@ -17,5 +17,5 @@ test('added fish use visible depth classes and larger readable sizes while prese
   assert.match(src,/node\.classList\.remove\('near','mid','far'\)/);
   assert.match(src,/node\.classList\.add\(depth\)/);
   assert.match(src,/5\.4\+\(index%5\)\*\.72/);
-  assert.match(src,/const target=populationTarget\(records\)/);
+  assert.match(src,/target=populationTarget\(records\)/);
 });

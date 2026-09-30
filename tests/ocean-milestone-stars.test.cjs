@@ -6,17 +6,18 @@ const assert=require('node:assert/strict');
 function rewards(){const source=fs.readFileSync('preview/ocean/real-fish/milestone-rewards.js','utf8');const context={window:{}};vm.runInNewContext(source,context);return context.window.CinemapOceanMilestoneRewards;}
 const photo=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 
-test('Ocean milestone ecosystem starts at 25 and escalates through 1500',()=>{
+test('Ocean milestone ecosystem starts at 25, rejects seahorse, and escalates through 1500',()=>{
   const api=rewards();
-  const expected=[[25,'clownfish'],[50,'sea-turtle'],[75,'seahorse'],[100,'ocean-sunfish'],[150,'giant-octopus'],[200,'manta-ray'],[300,'dolphin'],[400,'hammerhead-shark'],[500,'large-shark'],[600,'dugong'],[700,'minke-whale'],[800,'orca'],[1000,'humpback-whale'],[1200,'whale-shark'],[1500,'blue-whale']];
+  const expected=[[25,'clownfish'],[50,'sea-turtle'],[100,'ocean-sunfish'],[150,'giant-octopus'],[200,'manta-ray'],[250,'dolphin'],[300,'hammerhead-shark'],[350,'large-shark'],[400,'dugong'],[450,'minke-whale'],[500,'orca'],[600,'humpback-whale'],[700,'whale-shark'],[1000,'blue-whale'],[1500,'blue-whale']];
   for(const [at,key] of expected)assert.ok(api.rewardsForCount(at).some(r=>r.key===key),`${at} films should unlock ${key}`);
+  assert.equal(api.rewardsForCount(1500).some(r=>r.key==='seahorse'),false);
 });
 
-test('clownfish, turtle and seahorse populations recur without increasing logical population',()=>{
+test('approved habitat populations recur without reintroducing seahorses',()=>{
   const api=rewards();
   assert.equal(api.rewardsForCount(225).filter(r=>r.key==='clownfish').length,3);
   assert.equal(api.rewardsForCount(450).filter(r=>r.key==='sea-turtle').length,3);
-  assert.equal(api.rewardsForCount(475).filter(r=>r.key==='seahorse').length,3);
+  assert.equal(api.rewardsForCount(1500).filter(r=>r.key==='seahorse').length,0);
   assert.ok(api.rewardsForCount(1500).length<=1500);
 });
 

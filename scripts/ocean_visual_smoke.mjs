@@ -12,6 +12,15 @@ async function waitForLogicalPopulation(page,count){
   },count);
 }
 
+async function waitForMilestoneImages(page,count){
+  await page.waitForFunction(expected=>{
+    const rewardCount=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(expected)?.length||0;
+    const commemorative=document.querySelectorAll('[data-commemorative]').length;
+    const images=[...document.querySelectorAll('.milestoneAtlasCreature img')];
+    return commemorative===rewardCount&&images.length===rewardCount&&images.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0);
+  },count);
+}
+
 async function runScenario(count){
   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
   const page=await context.newPage();
@@ -25,18 +34,19 @@ async function runScenario(count){
     await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
     await waitForLogicalPopulation(page,count);
     await page.waitForFunction(()=>document.querySelector('#oceanBackdrop')?.complete&&document.querySelector('#oceanBackdrop')?.naturalWidth>0);
+    await waitForMilestoneImages(page,count);
     if(count>=300)await page.waitForFunction(()=>window.CinemapOceanPerformanceRenderer?.metrics?.().active===true);
     await page.waitForTimeout(350);
     const result=await page.evaluate(()=>{
       const stage=document.querySelector('#stage'),hud=document.querySelector('.hud'),backdrop=document.querySelector('#oceanBackdrop');
-      const fish=[...document.querySelectorAll('.fishWrap')],creatures=[...document.querySelectorAll('.fishWrap,.seabedCreature')],commemorative=[...document.querySelectorAll('[data-commemorative]')],solitary=creatures.filter(el=>el.dataset.oceanSchool==='-1');
+      const fish=[...document.querySelectorAll('.fishWrap')],creatures=[...document.querySelectorAll('.fishWrap,.seabedCreature')],commemorative=[...document.querySelectorAll('[data-commemorative]')],milestoneImages=[...document.querySelectorAll('.milestoneAtlasCreature img')],solitary=creatures.filter(el=>el.dataset.oceanSchool==='-1');
       const stageRect=stage.getBoundingClientRect(),hudRect=hud.getBoundingClientRect(),backdropRect=backdrop.getBoundingClientRect(),backdropStyle=getComputedStyle(backdrop);
       const visibleDom=creatures.filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>.45&&r.width>2&&r.height>2&&r.right>stageRect.left&&r.left<stageRect.right&&r.bottom>stageRect.top&&r.top<stageRect.bottom;});
       const perf=window.CinemapOceanPerformanceRenderer?.metrics?.()||{active:false,domCount:visibleDom.length,canvasCount:0,totalCount:creatures.length};
       const logicalCount=perf.active?perf.totalCount:creatures.length;
       const expectedMilestones=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(logicalCount)?.length??commemorative.length;
       const cells=new Set(creatures.map(el=>`${Math.floor(parseFloat(el.style.left||'0')/10)}:${Math.floor(parseFloat(el.style.top||'0')/10)}`));
-      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,commemorativeCount:commemorative.length,expectedMilestones,occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
+      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
     });
     const frameStats=await page.evaluate(async()=>{const stamps=[];await new Promise(resolve=>{const start=performance.now();function step(t){stamps.push(t);if(t-start>=1200)return resolve();requestAnimationFrame(step)}requestAnimationFrame(step)});const gaps=stamps.slice(1).map((t,i)=>t-stamps[i]);return{frames:stamps.length,maxGap:gaps.length?Math.max(...gaps):0,avgGap:gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:0}});
     await page.screenshot({path:`artifacts/mobile-smoke/ocean-ecosystem-${count}.png`,fullPage:true});
@@ -46,6 +56,8 @@ async function runScenario(count){
     if(result.fallback)failures.push('Ocean fell back instead of rendering');
     if(result.creatureCount!==count)failures.push(`${count} films must produce ${count} logical creatures, got ${result.creatureCount}`);
     if(result.commemorativeCount!==result.expectedMilestones)failures.push(`${count} films must render ${result.expectedMilestones} unlocked milestone creatures, got ${result.commemorativeCount}`);
+    if(result.milestoneImageCount!==result.expectedMilestones)failures.push(`${count} films must mount ${result.expectedMilestones} milestone images, got ${result.milestoneImageCount}`);
+    if(!result.milestoneImagesDecoded)failures.push('milestone atlas images did not decode before visual capture');
     if(count===500){
       if(!result.perf.active)failures.push('500-preview must activate hybrid renderer');
       if(result.perf.domCount>40)failures.push(`500-preview DOM fish must be <=40, got ${result.perf.domCount}`);

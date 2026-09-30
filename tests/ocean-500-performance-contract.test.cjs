@@ -27,6 +27,13 @@ test('far fish use a batched lightweight silhouette pass instead of hundreds of 
   assert.match(perf,/farItems/);
 });
 
+test('dense ordinary fish stay visibly colorful instead of collapsing into black silhouettes',()=>{
+  assert.match(perf,/ORDINARY_FISH_PALETTE/);
+  assert.match(perf,/function drawLightweightFish\(/);
+  assert.match(perf,/colorFor\(item/);
+  assert.doesNotMatch(perf,/fillStyle\s*=\s*['"](?:#000|black)/i);
+});
+
 test('canvas geometry is measured on mount or resize rather than every fish frame',()=>{
   assert.match(perf,/function measure\(stage\)/);
   assert.match(perf,/function resize\(stage,farCanvas,midCanvas\)/);

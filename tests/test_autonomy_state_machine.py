@@ -16,8 +16,9 @@ class AutonomyStress(unittest.TestCase):
   self.assertIn('SYSTEM:PASS',t.history[i+1:])
 
  def test_long_queue_no_loss_or_duplicate_apply(self):
-  tasks=[Task(f't{i}') for i in range(20)]; e,steps=run(tasks)
-  self.assertTrue(e.can_finalize()); self.assertLess(steps,100)
+  tasks=[Task(f't{i}') for i in range(20)]; e,steps=run(tasks,max_steps=140)
+  self.assertTrue(e.can_finalize())
+  self.assertEqual(steps,120)  # READY,RUNNING + 3 verification stages + APPLY per task
   for t in tasks:
    self.assertEqual(t.state,'DONE'); self.assertEqual(t.history.count('APPLY:DONE'),1)
 

@@ -33,17 +33,3 @@
   }
   return {validRecordCount,ordinaryCreatureCount,nextSecretMilestone,ecologySignalsForRecords,maturityStateForRecords};
 });
-
-(function escapeLegacyPhotoOcean(){
-  if(typeof window==='undefined'||window.parent===window)return;
-  try{
-    const parentWindow=window.parent,parentDoc=parentWindow.document,host=parentDoc.getElementById('universe');
-    if(!host||!parentWindow.CinemapRecords)return;
-    const records=parentWindow.CinemapRecords.read?parentWindow.CinemapRecords.read():{};
-    const remount=()=>parentWindow.CinemapOceanImmersive?.mount?.([],records);
-    const freshSrc=new URL('../js/ocean-immersive.js?v=3',window.location.href).href;
-    const existing=parentDoc.querySelector('script[data-ocean-immersive-hotfix="3"]');
-    if(existing){existing.addEventListener('load',remount,{once:true});remount();return;}
-    const script=parentDoc.createElement('script');script.src=freshSrc;script.dataset.oceanImmersiveHotfix='3';script.onload=remount;parentDoc.head.appendChild(script);
-  }catch(err){console.warn('[Ocean legacy escape]',err)}
-})();

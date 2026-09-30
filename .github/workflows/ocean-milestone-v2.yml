@@ -1,0 +1,24 @@
+name: Ocean milestone ecosystem v2
+on:
+  pull_request:
+    paths:
+      - 'preview/ocean/**'
+      - 'tests/ocean-milestone-*.test.cjs'
+      - '.github/workflows/ocean-milestone-v2.yml'
+  push:
+    branches:
+      - 'design/ocean-milestone-ecosystem-v2'
+    paths:
+      - 'preview/ocean/**'
+      - 'tests/ocean-milestone-*.test.cjs'
+      - '.github/workflows/ocean-milestone-v2.yml'
+jobs:
+  milestone-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/ocean-milestone-rewards.test.cjs tests/ocean-milestone-assets.test.cjs tests/ocean-milestone-gallery.test.cjs tests/ocean-milestone-integration.test.cjs tests/ocean-milestone-preview.test.cjs
+      - run: node --test tests/ocean-photo-four-points.test.cjs tests/ocean-500-performance-contract.test.cjs tests/ocean-natural-population-layout.test.cjs

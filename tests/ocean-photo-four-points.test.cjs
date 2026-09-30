@@ -58,9 +58,11 @@ test('ordinary DOM fish are lifted for underwater readability instead of appeari
 });
 
 test('fallback fish never uses the dark legacy killifish asset',()=>{
-  assert.match(enhancer,/function makeFallbackFish/);
-  assert.doesNotMatch(enhancer,/optimized\/fish-real\.webp/);
-  assert.match(enhancer,/optimized\/species-aji\.webp/);
+  const fallback=(enhancer.match(/function makeFallbackFish\([^\n]+/)||[''])[0];
+  assert.match(fallback,/makeCatalogFish/);
+  assert.doesNotMatch(fallback,/fish-real\.webp/);
+  assert.match(enhancer,/species\?\.asset\|\|'optimized\/species-aji\.webp'/);
+  assert.match(enhancer,/c\.asset!==\'optimized\/fish-real\.webp\'/);
 });
 
 test('FPS diagnostics are hidden unless debug is explicitly requested',()=>{

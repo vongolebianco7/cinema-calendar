@@ -36,6 +36,22 @@ test('normal Ocean population equals watched record count exactly',()=>{
   assert.match(enhancer,/nodes\.forEach\(\(node,index\)=>applyNaturalPosition\(node,points\[index\],index\)\)/);
 });
 
+test('legacy state query and preview query select the same exact population target',()=>{
+  assert.match(enhancer,/params\.get\('preview'\)\?\?params\.get\('state'\)/);
+});
+
+test('ordinary DOM fish are lifted for underwater readability instead of appearing black',()=>{
+  assert.match(enhancer,/function ordinaryVisualFilter\(depth\)/);
+  assert.match(enhancer,/brightness\(1\.3/);
+  assert.match(enhancer,/saturate\(1\.2/);
+  assert.match(enhancer,/node\.style\.filter=ordinaryVisualFilter\(depth\)/);
+});
+
+test('FPS diagnostics are hidden unless debug is explicitly requested',()=>{
+  assert.match(enhancer,/params\.get\('debug'\)==='1'/);
+  assert.match(enhancer,/fps\.hidden=!debug/);
+});
+
 test('preview controls expose the new 50-film cadence through 1500',()=>{
   assert.match(enhancer,/PREVIEW_STATES=\[[^\]]*250[^\]]*350[^\]]*550[^\]]*950[^\]]*1050[^\]]*1450[^\]]*1500\]/);
   assert.match(enhancer,/button\[data-state\]/);

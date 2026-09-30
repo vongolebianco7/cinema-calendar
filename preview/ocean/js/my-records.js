@@ -37,7 +37,7 @@
     const entries = Object.values(store.read()).filter(x=>x?.watched).map(x=>({ ...metadata.get(String(x.id)), ...x, genres:x.genres?.length?x.genres:metadata.get(String(x.id))?.genres||[], region:x.region||metadata.get(String(x.id))?.region||'' }));
     const n = entries.length, rated = entries.filter(x=>x.rating != null).length;
     $('dashboardCount').textContent = n + '本記録済み'; $('watchedCount').textContent = n; $('resonatedCount').textContent = rated;
-    window.CinemapOceanView?.render(films,store.read(),recentId);
+    window.CinemapOceanImmersive?.mount(films,store.read(),recentId);
     recentId=null;
     const speciesTotals=new Map();
     entries.forEach(m=>{const type=window.CinemapOceanModel.speciesFor(m);speciesTotals.set(type.id,(speciesTotals.get(type.id)||0)+1);});

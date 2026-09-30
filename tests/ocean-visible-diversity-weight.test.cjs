@@ -1,0 +1,16 @@
+const assert=require('assert');
+const fs=require('fs');
+const path=require('path');
+const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'..','preview/ocean/real-fish/creature-catalog.json'),'utf8'));
+const fish=catalog.creatures.filter(c=>c.kind==='fish');
+assert.ok(fish.length>=18,'ordinary fish catalog must stay broad');
+assert.ok(new Set(fish.map(c=>c.silhouette)).size>=15,'fish must span many visibly different silhouettes');
+assert.ok(new Set(fish.map(c=>c.zone)).size>=6,'fish must occupy multiple habitat zones');
+const total=fish.reduce((sum,c)=>sum+Number(c.spawnWeight||1),0);
+const top4=[...fish].sort((a,b)=>Number(b.spawnWeight||1)-Number(a.spawnWeight||1)).slice(0,4).reduce((sum,c)=>sum+Number(c.spawnWeight||1),0);
+assert.ok(top4/total<=0.32,'top four fish must not dominate the visible population');
+const byAsset=new Map();
+for(const c of fish)byAsset.set(c.asset,(byAsset.get(c.asset)||0)+Number(c.spawnWeight||1));
+const maxAssetShare=Math.max(...byAsset.values())/total;
+assert.ok(maxAssetShare<=0.12,'one visual asset must not dominate through duplicate catalog entries');
+console.log('Ocean visible diversity weight tests passed');

@@ -2,28 +2,35 @@ const fs=require('node:fs');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 
-const html=fs.readFileSync('preview/ocean/real-fish/ecosystem.html','utf8');
+const enhancer=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
+const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8');
 
-test('Ocean message is below the sea, never overlaid on it',()=>{
-  const closeStage=html.indexOf('</div><div class="hud">');
-  assert.ok(closeStage>=0,'HUD should be a sibling after .stage');
-  assert.doesNotMatch(html,/\.hud\{position:absolute/);
+test('Photo Ocean loads the four-point correction module',()=>{
+  assert.match(ecology,/photo-four-points\.js\?v=1/);
 });
 
-test('Photo Ocean uses the approved high-resolution background without stretching',()=>{
-  assert.match(html,/src="ocean-background-approved-hires\.png"/);
-  assert.match(html,/\.oceanBackdrop\{[^}]*object-fit:cover/);
+test('Ocean message is moved below the sea, never overlaid on it',()=>{
+  assert.match(enhancer,/function moveHudBelowStage\(stage\)/);
+  assert.match(enhancer,/stage\.insertAdjacentElement\('afterend',hud\)/);
+  assert.match(enhancer,/position:'relative'/);
+  assert.match(enhancer,/bottom:'auto'/);
+});
+
+test('Photo Ocean switches to the approved high-resolution background without stretching',()=>{
+  assert.match(enhancer,/ocean-background-approved-hires\.png/);
+  assert.match(enhancer,/objectFit='cover'/);
 });
 
 test('visible creature target equals watched record count exactly',()=>{
-  assert.match(html,/function populationTarget\(records\)\{return Object\.keys\(records\|\|\{\}\)\.length\}/);
-  assert.match(html,/const target=populationTarget\(records\)/);
-  assert.match(html,/const commemorativeCount=Math\.floor\(target\/100\)/);
-  assert.match(html,/const ordinaryTarget=target-commemorativeCount/);
+  assert.match(enhancer,/function populationTarget\(records\)\{return Object\.keys\(records\|\|\{\}\)\.length\}/);
+  assert.match(enhancer,/const records=readRecords\(\),target=populationTarget\(records\)/);
+  assert.match(enhancer,/if\(nodes\.length>target\)/);
+  assert.match(enhancer,/if\(nodes\.length<target\)/);
+  assert.match(enhancer,/const commemorativeCount=Math\.floor\(target\/100\)/);
+  assert.match(enhancer,/const ordinaryTarget=target-commemorativeCount/);
 });
 
 test('every completed 100 films replaces one ordinary creature with a commemorative creature',()=>{
-  assert.match(html,/function renderCommemorative\(/);
-  assert.match(html,/for\(let milestone=100;milestone<=target;milestone\+=100\)/);
-  assert.match(html,/renderCommemorative\(milestone/);
+  assert.match(enhancer,/function renderCommemorative\(milestone,node\)/);
+  assert.match(enhancer,/for\(let milestone=100;milestone<=target;milestone\+=100\)renderCommemorative\(milestone,nodes\[milestone-1\]\)/);
 });

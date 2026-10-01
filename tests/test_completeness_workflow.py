@@ -18,6 +18,10 @@ class CompletenessWorkflowTests(unittest.TestCase):
         self.assertIn('CINEMAP_BROWSER=chromium', text)
         self.assertIn('CINEMAP_BROWSER=webkit', text)
 
+    def test_mobile_job_scores_performance_bands(self):
+        text = WORKFLOW.read_text(encoding='utf-8')
+        self.assertIn('tests/product/performance-score.mjs', text)
+
     def test_ocean_job_runs_existing_authoritative_checks_and_mapper(self):
         text = WORKFLOW.read_text(encoding='utf-8')
         for required in [
@@ -46,6 +50,17 @@ class CompletenessWorkflowTests(unittest.TestCase):
             'scripts/map_data_compliance_metrics.py',
         ]:
             self.assertIn(required, text)
+
+    def test_score_job_can_fetch_main_baseline_after_bootstrap_merge(self):
+        text = WORKFLOW.read_text(encoding='utf-8')
+        self.assertIn('push:', text)
+        self.assertIn('branches: [main]', text)
+        self.assertIn('actions: read', text)
+        self.assertIn('gh run list', text)
+        self.assertIn('--branch main', text)
+        self.assertIn('completeness-score', text)
+        self.assertIn('--baseline artifacts/completeness/main-score.json', text)
+        self.assertIn('--enforce-phase-a', text)
 
     def test_all_producer_artifacts_are_downloaded_by_score_job(self):
         text = WORKFLOW.read_text(encoding='utf-8')

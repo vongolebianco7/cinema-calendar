@@ -1,0 +1,23 @@
+name: Ocean parallel workflow contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ocean-parallel-quality.yml'
+      - '.github/workflows/ocean-parallel-contract.yml'
+      - 'tests/test_ocean_parallel_quality_workflow.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Ocean parallel workflow contract
+        run: python -m unittest tests/test_ocean_parallel_quality_workflow.py

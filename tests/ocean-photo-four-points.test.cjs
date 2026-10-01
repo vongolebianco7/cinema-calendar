@@ -5,11 +5,13 @@ const assert=require('node:assert/strict');
 const enhancer=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8');
 
-test('Photo Ocean loads layout, performance renderer, milestone rewards and atlas before correction module',()=>{
+test('Photo Ocean loads layout, performance renderer, milestone rewards, atlas and lighting before correction module',()=>{
   assert.match(ecology,/population-layout\.js\?v=2/);
   assert.match(ecology,/performance-renderer\.js\?v=4/);
   assert.match(ecology,/milestone-rewards\.js\?v=5/);
   assert.match(ecology,/milestone-atlas\.js\?v=4/);
+  assert.match(ecology,/milestone-vector-lighting\.js\?v=1/);
+  assert.match(ecology,/lighting\.onload=\(\)=>\{const swim=/);
   assert.match(ecology,/milestone-swim\.js\?v=8/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
   assert.match(ecology,/photo-four-points\.js\?v=13/);

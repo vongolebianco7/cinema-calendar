@@ -40,32 +40,26 @@ def _row(metric_id: str, points: float, passed: bool, details: str) -> dict:
 
 
 def map_data_compliance_metrics(statuses: dict[str, bool]) -> list[dict]:
-    critic_schema = bool(statuses.get("critic_schema"))
-    critic_association = bool(statuses.get("critic_association"))
-    critic_inference = bool(statuses.get("critic_inference", critic_schema))
+    rows: list[dict] = []
 
-    data_checks = {
-        "sources": bool(statuses.get("sources")),
-        "critic_schema": critic_schema,
-        "critic_association": critic_association,
-        "unknown_data": bool(statuses.get("unknown_data")),
-    }
-    compliance_checks = {
-        "free_only": bool(statuses.get("free_only")),
-        "scraping": bool(statuses.get("scraping")),
-        "trackers": bool(statuses.get("trackers")),
-        "critic_inference": critic_inference,
-    }
-    data_pass = all(data_checks.values())
-    compliance_pass = all(compliance_checks.values())
+    if "critic_schema" in statuses:
+        rows.append(_row("CRIT-01", 0.5, bool(statuses["critic_schema"]), "critic evidence schema"))
+    if "critic_association" in statuses:
+        rows.append(_row("CRIT-03", 0.5, bool(statuses["critic_association"]), "critic evidence/movie association"))
+    if "critic_inference" in statuses:
+        rows.append(_row("CRIT-05", 0.5, bool(statuses["critic_inference"]), "criticism is not inferred from metadata"))
 
-    return [
-        _row("CROSS-DATA", 3.0, data_pass, json.dumps(data_checks, sort_keys=True)),
-        _row("CROSS-COMPLIANCE", 3.0, compliance_pass, json.dumps(compliance_checks, sort_keys=True)),
-        _row("CRIT-01", 0.5, critic_schema, "critic evidence schema"),
-        _row("CRIT-03", 0.5, critic_association, "critic evidence/movie association"),
-        _row("CRIT-05", 0.5, critic_inference, "criticism is not inferred from metadata"),
-    ]
+    data_keys = ("sources", "critic_schema", "critic_association", "unknown_data")
+    if all(key in statuses for key in data_keys):
+        data_checks = {key: bool(statuses[key]) for key in data_keys}
+        rows.append(_row("CROSS-DATA", 3.0, all(data_checks.values()), json.dumps(data_checks, sort_keys=True)))
+
+    compliance_keys = ("free_only", "scraping", "trackers", "critic_inference")
+    if all(key in statuses for key in compliance_keys):
+        compliance_checks = {key: bool(statuses[key]) for key in compliance_keys}
+        rows.append(_row("CROSS-COMPLIANCE", 3.0, all(compliance_checks.values()), json.dumps(compliance_checks, sort_keys=True)))
+
+    return rows
 
 
 def main() -> int:

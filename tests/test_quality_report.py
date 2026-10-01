@@ -7,7 +7,7 @@ except ModuleNotFoundError:
 
 
 class QualityReportTests(unittest.TestCase):
-    def test_report_contains_score_groups_areas_blockers_and_delta(self):
+    def test_report_contains_score_groups_areas_blockers_unverified_and_delta(self):
         self.assertIsNotNone(render_report, "scripts.quality_report must exist")
         score = {
             "total": 82.5,
@@ -15,6 +15,7 @@ class QualityReportTests(unittest.TestCase):
             "area_totals": {"calendar": 7.0, "discover": 8.5},
             "release_eligible": False,
             "blockers": ["DETAIL-12", "OC-11"],
+            "unverified_blockers": ["FLOW-FIRSTUSE"],
             "missing_metrics": ["FLOW-FIRSTUSE"],
             "comparison": {"baseline_total": 80.5, "delta": 2.0},
         }
@@ -28,8 +29,11 @@ class QualityReportTests(unittest.TestCase):
         self.assertIn("12.0 / 15", report)
         self.assertIn("calendar", report)
         self.assertIn("discover", report)
-        self.assertIn("DETAIL-12", report)
-        self.assertIn("OC-11", report)
+        self.assertIn("Release Blockers", report)
+        self.assertIn("❌ DETAIL-12", report)
+        self.assertIn("❌ OC-11", report)
+        self.assertIn("Unverified Blockers", report)
+        self.assertIn("⚠️ FLOW-FIRSTUSE", report)
         self.assertIn("80.5", report)
         self.assertIn("+2.0", report)
         self.assertIn("release_eligible: false", report.lower())
@@ -42,10 +46,12 @@ class QualityReportTests(unittest.TestCase):
             "area_totals": {},
             "release_eligible": True,
             "blockers": [],
+            "unverified_blockers": [],
             "missing_metrics": [],
         })
         self.assertIn("release_eligible: true", report.lower())
         self.assertNotIn("❌", report)
+        self.assertNotIn("⚠️", report)
 
 
 if __name__ == "__main__":

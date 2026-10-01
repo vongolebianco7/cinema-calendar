@@ -9,8 +9,8 @@ test('Photo Ocean loads layout, performance renderer, milestone rewards and atla
   assert.match(ecology,/population-layout\.js\?v=2/);
   assert.match(ecology,/performance-renderer\.js\?v=4/);
   assert.match(ecology,/milestone-rewards\.js\?v=5/);
-  assert.match(ecology,/milestone-atlas\.js\?v=2/);
-  assert.match(ecology,/milestone-swim\.js\?v=6/);
+  assert.match(ecology,/milestone-atlas\.js\?v=3/);
+  assert.match(ecology,/milestone-swim\.js\?v=7/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
   assert.match(ecology,/photo-four-points\.js\?v=12/);
 });

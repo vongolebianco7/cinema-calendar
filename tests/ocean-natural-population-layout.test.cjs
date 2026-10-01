@@ -31,11 +31,13 @@ test('depth and size vary enough that fish remain readable instead of tiny unifo
   assert.ok(points.filter(p=>p.depth==='near').length>=12);
 });
 
-test('dense oceans deliberately occupy the lower third instead of leaving the seabed empty',()=>{
+test('dense oceans populate the lower third in clustered habitats while preserving open seabed water',()=>{
   for(const count of [300,500]){
     const points=layoutPopulation(count);
     const lower=points.filter(p=>p.y>=70);
-    assert.ok(lower.length>=Math.floor(count*.12),`${count} films only places ${lower.length} creatures in the lower third`);
+    assert.ok(lower.length>=Math.floor(count*.08),`${count} films only places ${lower.length} creatures in the lower third`);
     assert.ok(Math.max(...points.map(p=>p.y))>=82,`${count} films never reaches the lower seabed zone`);
+    const lowerCells=new Set(lower.map(p=>`${Math.floor(p.x/10)}:${Math.floor(p.y/10)}`));
+    assert.ok(lowerCells.size<=12,`${count} films spreads lower-third life across too many cells: ${lowerCells.size}`);
   }
 });

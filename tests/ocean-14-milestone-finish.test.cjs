@@ -14,6 +14,13 @@ function loadManifest() {
   return JSON.parse(fs.readFileSync('preview/ocean/real-fish/milestone-assets.json', 'utf8'));
 }
 
+function milestoneWidthCaps() {
+  const source = fs.readFileSync('preview/ocean/real-fish/photo-four-points.js', 'utf8');
+  const match = source.match(/const MILESTONE_WIDTH_CAP=\{([^}]*)\}/);
+  assert.ok(match, 'missing MILESTONE_WIDTH_CAP');
+  return Object.fromEntries([...match[1].matchAll(/['\"]?([a-z-]+)['\"]?:(\d+(?:\.\d+)?)/g)].map(m => [m[1], Number(m[2])]));
+}
+
 const APPROVED = [
   'clownfish', 'sea-turtle', 'ocean-sunfish', 'giant-octopus', 'manta-ray',
   'dolphin', 'hammerhead-shark', 'large-shark', 'dugong', 'minke-whale',
@@ -38,6 +45,16 @@ test('clownfish presentation is decisively smaller than large milestone animals'
   assert.ok(species['sea-turtle'].presentationScale >= species.clownfish.presentationScale * 4);
   assert.ok(species.dolphin.presentationScale >= species.clownfish.presentationScale * 5);
   assert.ok(species['blue-whale'].presentationScale >= species.clownfish.presentationScale * 10);
+});
+
+test('whales and whale shark render as unmistakable megafauna', () => {
+  const caps = milestoneWidthCaps();
+  assert.ok(caps['minke-whale'] >= 30, 'minke whale should read as giant');
+  assert.ok(caps['humpback-whale'] >= 38, 'humpback whale should dominate the scene');
+  assert.ok(caps['whale-shark'] >= 36, 'whale shark should read as giant');
+  assert.ok(caps['blue-whale'] >= 44, 'blue whale should be the largest milestone animal');
+  assert.ok(caps['blue-whale'] >= caps.dolphin * 3, 'blue whale must be at least three times dolphin width');
+  assert.ok(caps['whale-shark'] >= caps['large-shark'] * 1.8, 'whale shark must clearly exceed ordinary large shark scale');
 });
 
 test('rigid swimmers use straight-pose motion families instead of body-bending families', () => {

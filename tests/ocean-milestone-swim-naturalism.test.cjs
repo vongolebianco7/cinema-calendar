@@ -27,6 +27,10 @@ test('inactive large milestone swimmers do not burn animation budget', () => {
   assert.match(source, /animation:none!important/);
 });
 
+test('dense milestone states serialize large crossings for iPhone performance', () => {
+  assert.match(source, /list\.length>=8\?1:/, 'dense states should animate one large pass-through creature at a time');
+});
+
 test('large pass-through swimmers accelerate into a cruise without turning in-frame', () => {
   const passRoute = source.match(/@keyframes milestonePassRoute\{([^}]|}\s*(?!@keyframes))*?\}\n/)?.[0] || '';
   assert.ok(passRoute, 'milestonePassRoute should exist');

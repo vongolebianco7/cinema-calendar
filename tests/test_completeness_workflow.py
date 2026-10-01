@@ -8,9 +8,15 @@ WORKFLOW = ROOT / '.github' / 'workflows' / 'completeness-scorecard.yml'
 class CompletenessWorkflowTests(unittest.TestCase):
     def test_workflow_has_required_score_producer_jobs(self):
         text = WORKFLOW.read_text(encoding='utf-8')
-        for job in ['mobile-e2e:', 'ocean:', 'data-compliance:', 'score:']:
+        for job in ['mobile-e2e:', 'journey-e2e:', 'ocean:', 'data-compliance:', 'score:']:
             self.assertIn(job, text)
-        self.assertIn('needs: [mobile-e2e, ocean, data-compliance]', text)
+        self.assertIn('needs: [mobile-e2e, journey-e2e, ocean, data-compliance]', text)
+
+    def test_journey_job_runs_both_mobile_browsers(self):
+        text = WORKFLOW.read_text(encoding='utf-8')
+        self.assertIn('tests/journeys/core-journeys.mjs', text)
+        self.assertIn('CINEMAP_BROWSER=chromium', text)
+        self.assertIn('CINEMAP_BROWSER=webkit', text)
 
     def test_ocean_job_runs_existing_authoritative_checks_and_mapper(self):
         text = WORKFLOW.read_text(encoding='utf-8')

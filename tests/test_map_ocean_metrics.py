@@ -2,9 +2,10 @@ import unittest
 from pathlib import Path
 
 try:
-    from scripts.map_ocean_metrics import OCEAN_METRIC_SOURCES, map_ocean_metrics
+    from scripts.map_ocean_metrics import OCEAN_METRIC_SOURCES, OCEAN_FLOW_SOURCES, map_ocean_metrics
 except ModuleNotFoundError:
     OCEAN_METRIC_SOURCES = None
+    OCEAN_FLOW_SOURCES = None
     map_ocean_metrics = None
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,12 @@ class OceanMetricMappingTests(unittest.TestCase):
             for source in sources:
                 self.assertTrue((ROOT / source).exists(), f"{metric_id} source missing: {source}")
 
+    def test_ocean_flow_sources_are_existing_authoritative_checks(self):
+        self.assertIsNotNone(OCEAN_FLOW_SOURCES, "OCEAN_FLOW_SOURCES must exist")
+        self.assertTrue(OCEAN_FLOW_SOURCES)
+        for source in OCEAN_FLOW_SOURCES:
+            self.assertTrue((ROOT / source).exists(), source)
+
     def test_mapper_marks_metric_failed_when_any_authoritative_source_fails(self):
         self.assertIsNotNone(map_ocean_metrics, "scripts.map_ocean_metrics must exist")
         statuses = {source: True for sources in OCEAN_METRIC_SOURCES.values() for source in sources}
@@ -27,6 +34,8 @@ class OceanMetricMappingTests(unittest.TestCase):
         rows = {row["id"]: row for row in map_ocean_metrics(statuses)}
         self.assertEqual(rows["OC-11"]["status"], "fail")
         self.assertEqual(rows["OC-11"]["earned"], 0)
+        self.assertEqual(rows["FLOW-OCEAN"]["status"], "fail")
+        self.assertLess(rows["FLOW-OCEAN"]["earned"], 7.0)
 
     def test_mapper_awards_full_points_for_passing_sources(self):
         self.assertIsNotNone(map_ocean_metrics, "scripts.map_ocean_metrics must exist")
@@ -36,6 +45,8 @@ class OceanMetricMappingTests(unittest.TestCase):
         self.assertEqual(rows["OC-01"]["earned"], 1.0)
         self.assertEqual(rows["OC-03"]["earned"], 0.5)
         self.assertEqual(rows["OC-11"]["earned"], 1.0)
+        self.assertEqual(rows["FLOW-OCEAN"]["status"], "pass")
+        self.assertEqual(rows["FLOW-OCEAN"]["earned"], 7.0)
 
 
 if __name__ == "__main__":

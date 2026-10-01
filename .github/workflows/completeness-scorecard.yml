@@ -2,10 +2,13 @@ name: Cinemap completeness scorecard
 
 on:
   pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: completeness-scorecard-${{ github.ref }}
@@ -31,6 +34,8 @@ jobs:
         run: CINEMAP_BROWSER=chromium node tests/product/mobile-score.mjs
       - name: Score WebKit mobile basics
         run: CINEMAP_BROWSER=webkit node tests/product/mobile-score.mjs
+      - name: Score broad performance bands
+        run: node tests/product/performance-score.mjs
       - name: Upload mobile score evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -248,6 +253,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -257,11 +264,45 @@ jobs:
           pattern: completeness-*-metrics
           path: artifacts/completeness
           merge-multiple: true
-      - name: Calculate score
+      - name: Calculate current score
         run: python scripts/score_quality.py --metrics artifacts/completeness/metrics --output artifacts/completeness/score.json
+      - name: Fetch latest successful main baseline
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          run_id=$(gh run list --workflow completeness-scorecard.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty' 2>/dev/null)
+          if [ -n "$run_id" ]; then
+            rm -rf /tmp/cinemap-main-score && mkdir -p /tmp/cinemap-main-score
+            gh run download "$run_id" -n completeness-score -D /tmp/cinemap-main-score >/dev/null 2>&1
+            if [ -f /tmp/cinemap-main-score/score.json ]; then
+              cp /tmp/cinemap-main-score/score.json artifacts/completeness/main-score.json
+            elif [ -f /tmp/cinemap-main-score/artifacts/completeness/score.json ]; then
+              cp /tmp/cinemap-main-score/artifacts/completeness/score.json artifacts/completeness/main-score.json
+            fi
+          fi
+          exit 0
+      - id: phase_a
+        name: Compare with main baseline when available
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          if [ -f artifacts/completeness/main-score.json ]; then
+            python scripts/score_quality.py \
+              --metrics artifacts/completeness/metrics \
+              --baseline artifacts/completeness/main-score.json \
+              --touched-areas all \
+              --enforce-phase-a \
+              --output artifacts/completeness/score.json
+          else
+            echo 'No same-version main baseline yet; bootstrap comparison skipped.'
+          fi
       - name: Render score report
+        if: always()
         run: python scripts/quality_report.py artifacts/completeness/score.json --output artifacts/completeness/score.md
       - name: Add score to job summary
+        if: always()
         run: cat artifacts/completeness/score.md >> "$GITHUB_STEP_SUMMARY"
       - name: Upload final score
         if: always()
@@ -273,3 +314,6 @@ jobs:
             artifacts/completeness/score.md
           if-no-files-found: error
           retention-days: 14
+      - name: Enforce Phase A comparison
+        if: github.event_name == 'pull_request' && steps.phase_a.outcome == 'failure'
+        run: exit 1

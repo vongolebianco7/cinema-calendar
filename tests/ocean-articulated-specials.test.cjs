@@ -51,6 +51,19 @@ test('articulated specials can translate through the ocean but never rock as a w
   assert.doesNotMatch(route,/rotate|skew|scale/);
 });
 
+test('AI pose-cycle creatures use three whole-body frames instead of clipped appendages',()=>{
+  for(const key of ['manta-ray','dolphin','dugong','whale-shark','humpback-whale']){
+    const spec=manifest.species[key];
+    assert.ok(Array.isArray(spec.poseFrames),key+' needs poseFrames');
+    assert.equal(spec.poseFrames.length,3,key+' needs exactly three generated swimming poses');
+    for(const frame of spec.poseFrames)assert.match(frame,/^assets\/pose-.*\.webp$/,key+' pose frame must be a direct WebP asset');
+  }
+  assert.match(atlas,/createPoseCycleCreature/);
+  assert.match(atlas,/spec\.poseFrames/);
+  assert.match(atlas,/oceanPoseCycle/);
+  assert.match(atlas,/if\(Array\.isArray\(spec\.poseFrames\)/);
+});
+
 test('large whales and whale shark use direct HQ transparent sprites',()=>{
   const expected={
     'minke-whale':'assets/milestone-minke-whale-hq.webp',

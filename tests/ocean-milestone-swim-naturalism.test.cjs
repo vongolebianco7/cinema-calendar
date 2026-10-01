@@ -8,34 +8,33 @@ const source = fs.readFileSync(
   'utf8'
 );
 
-test('milestone atlas image stays fixed while the cropped sprite carries body motion', () => {
-  assert.match(source, /\.milestoneAtlasCreature > img\{animation:none!important;transform:none!important/);
-  assert.match(source, /\.milestoneAtlasCreature\{animation-duration:var\(--swim-body-duration\)!important/);
+test('milestone atlas image and crop stay fixed to avoid animating the giant source texture', () => {
+  assert.match(source, /\.milestoneAtlasCreature,\.milestoneAtlasCreature > img\{animation:none!important;transform:none!important/);
   assert.match(source, /data-swim-key/);
 });
 
-test('major milestone swimmers have species-appropriate propulsion cues on the cropped sprite', () => {
-  for (const name of ['turtleStrokeBody', 'mantaWingBody', 'dolphinKickBody', 'dugongKickBody', 'cetaceanBody', 'sharkBody']) {
+test('major milestone swimmers use species-appropriate outer swim routes', () => {
+  for (const name of ['turtlePassRoute', 'mantaPassRoute', 'dolphinPassRoute', 'dugongPassRoute', 'cetaceanPassRoute', 'sharkPassRoute']) {
     assert.match(source, new RegExp(`@keyframes ${name}\\b`), `${name} should exist`);
   }
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="manta-ray"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:mantaWingBody!important\}/);
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="dolphin"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:dolphinKickBody!important\}/);
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="dugong"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:dugongKickBody!important\}/);
-});
-
-test('inactive large milestone swimmers do not burn animation budget', () => {
-  assert.match(source, /data-swim-profile="cetacean-cruise"\]:not\(\[data-swim-active="1"\]\) \.milestoneAtlasCreature/);
-  assert.match(source, /animation:none!important/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="manta-ray"\]\[data-swim-active="1"\]\{animation-name:mantaPassRoute!important\}/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="dolphin"\]\[data-swim-active="1"\]\{animation-name:dolphinPassRoute!important\}/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="dugong"\]\[data-swim-active="1"\]\{animation-name:dugongPassRoute!important\}/);
 });
 
 test('dense milestone states serialize large crossings for iPhone performance', () => {
   assert.match(source, /list\.length>=8\?1:/, 'dense states should animate one large pass-through creature at a time');
 });
 
-test('large pass-through swimmers accelerate into a cruise without turning in-frame', () => {
-  const passRoute = source.match(/@keyframes milestonePassRoute\{([^}]|}\s*(?!@keyframes))*?\}\n/)?.[0] || '';
-  assert.ok(passRoute, 'milestonePassRoute should exist');
-  assert.doesNotMatch(passRoute, /rotateY\(/, 'pass-through swimmers must not turn in-frame');
+test('large pass-through swimmers accelerate into cruise without turning in-frame', () => {
+  for (const name of ['turtlePassRoute', 'mantaPassRoute', 'dolphinPassRoute', 'dugongPassRoute', 'cetaceanPassRoute', 'sharkPassRoute']) {
+    const marker = `@keyframes ${name}`;
+    const start = source.indexOf(marker);
+    assert.notEqual(start, -1, `${name} should exist`);
+    const next = source.indexOf('@keyframes ', start + marker.length);
+    const route = source.slice(start, next === -1 ? source.length : next);
+    assert.doesNotMatch(route, /rotateY\(/, `${name} must not turn in-frame`);
+  }
   assert.match(source, /animation-timing-function:cubic-bezier\(/, 'pass-through should not look like a constant-speed slide');
   assert.match(source, /activatePassThrough\(nodes,maxActive=2\)/, 'keep at most two active pass-through milestone swimmers');
 });

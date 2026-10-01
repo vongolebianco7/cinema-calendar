@@ -37,7 +37,7 @@ class OceanParallelQualityWorkflowTests(unittest.TestCase):
         self.assertIn('artifacts/mobile-smoke/', self.text)
 
     def test_visual_probe_observes_1000_film_maturity_without_promoting_a_new_performance_contract(self):
-        self.assertIn('OCEAN_VISUAL_SCENARIOS=100,500,1000 node scripts/ocean_visual_smoke.mjs', self.text)
+        self.assertIn('OCEAN_VISUAL_SCENARIOS=1000 node scripts/ocean_visual_1000_observation.mjs', self.text)
         self.assertIn('"scenarios": [100, 500, 1000]', self.text)
         self.assertNotIn('tests/ocean-1000-performance-contract.test.cjs', self.text)
 

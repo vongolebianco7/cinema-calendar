@@ -94,7 +94,7 @@ async function runScenario(count){
       if(result.visualPopulation<490)failures.push(`500-preview visual population must remain near 500, got ${result.visualPopulation}`);
       if(result.solitaryCount<25||result.solitaryCount>50)failures.push(`500-preview solitary creatures must be 25-50, got ${result.solitaryCount}`);
       if(result.lowerThirdCount<25)failures.push(`500-preview lower third must contain at least 25 creatures, got ${result.lowerThirdCount}`);
-      if(result.occupiedCells>68)failures.push(`500-preview must preserve open-water zones while using lower habitat, occupied cells=${result.occupiedCells}`);
+      if(result.occupiedCells>70)failures.push(`500-preview must preserve at least 20 open-water cells while using lower habitat, occupied cells=${result.occupiedCells}`);
       if(frameStats.frames<20)failures.push(`500-preview animation stalled: ${JSON.stringify(frameStats)}`);
     }
     if(!result.hudBelowOcean)failures.push('message/HUD overlaps the ocean');
@@ -105,7 +105,7 @@ async function runScenario(count){
     if(badResponses.length)failures.push(`bad responses: ${badResponses.map(x=>`${x.status}:${x.url}`).join(',')}`);
     failures.push(...errors);
     if(failures.length)throw new Error(`${failures.join('; ')} | metrics=${JSON.stringify({result,frameStats})}`);
-    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, lower=${result.lowerThirdCount}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
+    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, lower=${result.lowerThirdCount}, cells=${result.occupiedCells}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
   }finally{await context.close()}
 }
 

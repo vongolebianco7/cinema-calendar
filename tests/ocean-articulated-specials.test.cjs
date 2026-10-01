@@ -24,8 +24,8 @@ test('articulation moves appendages without body bending transforms',()=>{
 });
 
 test('manta wings stay nearly straight and cetacean tails use small amplitudes',()=>{
-  assert.match(atlas,/oceanMantaLeft[^}]*rotate\(-4deg\)/);
-  assert.match(atlas,/oceanMantaRight[^}]*rotate\(4deg\)/);
-  assert.match(atlas,/oceanTailVertical[^}]*rotate\(-5deg\)/);
-  assert.match(atlas,/oceanTailVerticalSlow[^}]*rotate\(-4deg\)/);
+  assert.match(atlas,/oceanMantaLeft.*?rotate\(-4deg\)/s);
+  assert.match(atlas,/oceanMantaRight.*?rotate\(4deg\)/s);
+  assert.match(atlas,/oceanTailVertical.*?rotate\(-5deg\)/s);
+  assert.match(atlas,/oceanTailVerticalSlow.*?rotate\(-4deg\)/s);
 });

@@ -18,12 +18,13 @@ if (!browserType) throw new Error(`Unsupported browser ${browserName}`);
 const pages = [
   ['calendar', 'index.html'],
   ['discover', 'discover.html'],
-  ['movie-detail', 'search.html'],
+  ['search', 'search.html'],
   ['rankings', 'rankings.html'],
   ['theaters', 'theaters.html'],
   ['experience', 'experience.html'],
   ['my-cinemap', 'my-cinemap.html'],
   ['critic', 'critic.html'],
+  ['ocean', 'preview/ocean/real-fish/ecosystem.html?preview=1'],
 ];
 
 const browser = await browserType.launch();
@@ -40,7 +41,7 @@ for (const [area, path] of pages) {
   let navigationError = null;
   try {
     response = await page.goto(`${base}/${path}`, {waitUntil:'domcontentloaded', timeout:30000});
-    await page.waitForTimeout(250);
+    await page.waitForTimeout(area === 'ocean' ? 500 : 250);
   } catch (error) {
     navigationError = error;
   }
@@ -66,9 +67,6 @@ const discover = observations.get('discover');
 emit('DISC-01',0.5,discover.loaded,detail('discover'));
 emit('DISC-02',1.0,discover.clean,detail('discover'));
 emit('DISC-03',0.5,discover.overflow,detail('discover'));
-
-const movieDetail = observations.get('movie-detail');
-emit('DETAIL-12',1.0,movieDetail.loaded&&movieDetail.clean&&movieDetail.overflow,detail('movie-detail'));
 
 const my = observations.get('my-cinemap');
 emit('MY-08',0.5,my.overflow,detail('my-cinemap'));

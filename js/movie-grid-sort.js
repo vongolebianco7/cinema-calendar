@@ -23,12 +23,14 @@
   const year=(v)=>{const match=String(v||'').match(/(?:18|19|20)\d{2}/);return match?Number(match[0]):null};
   const text=(node,selector)=>node.querySelector(selector)?.textContent?.trim()||'';
   function movieFor(node){
+    if(node.matches('.recordShell'))node=node.firstElementChild;
     if(page==='search.html')return typeof results!=='undefined'?results[Number(node.dataset.i)]||{}:{};
     if(page==='discover.html')return typeof items!=='undefined'?items.find(m=>String(m.tmdbId)===node.dataset.id)||{}:{};
     if(page==='index.html')return typeof movies!=='undefined'?movies[Number(node.dataset.mi)]||{}:{};
     return {};
   }
   function fields(node){
+    if(node.matches('.recordShell'))node=node.firstElementChild;
     const movie=movieFor(node),meta=text(node,'.meta'),title=movie.title||text(node,'.title')||text(node,'.awardTitle')||text(node,'.tvMovieTitle');
     return {title,year:year(movie.year||movie.release_date||(page==='index.html'?movie.original_release_date:movie.date)||text(node,'.awardYear')||meta),score:numeric(movie.score)||numeric(meta.match(/★\s*([\d.]+)/)?.[1]),votes:numeric(movie.votes)||numeric(meta.match(/([\d,]+)票/)?.[1]?.replaceAll(',','')),gross:numeric(text(node,'.body').match(/([\d.]+)億円/)?.[1]),organization:text(node,'.awardMeta').split(' · ')[0],channel:movie.service||text(node,'.tvMovieChannel')};
   }
@@ -43,7 +45,7 @@
   function apply(){
     if(busy)return;busy=true;observer.disconnect();
     groups().forEach(group=>{
-      const cards=[...group.children].filter(n=>n.matches('.card,.rankCard,.awardCard,.tvMovie'));
+      const cards=[...group.children].filter(n=>n.matches('.card,.rankCard,.awardCard,.tvMovie,.recordShell'));
       cards.forEach((node,i)=>{if(!node.hasAttribute('data-sort-order'))node.dataset.sortOrder=String(i)});
       if(cards.length>1)cards.sort((a,b)=>compare(a,b,select.value)).forEach(node=>group.append(node));
     });

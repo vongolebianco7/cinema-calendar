@@ -26,13 +26,16 @@ test('large milestone animals use scalable vector artwork instead of the 400x200
 
 test('large milestone swimmers stay in-place instead of flying across the whole viewport', () => {
   for (const route of ['milestonePassRoute','turtlePassRoute','mantaPassRoute','dolphinPassRoute','dugongPassRoute','cetaceanPassRoute','sharkPassRoute']) {
-    const match = swim.match(new RegExp(`@keyframes ${route}\\{([^}]|}\\s*(?!@keyframes))*?\\}\\n`));
-    assert.ok(match, `${route} should exist`);
-    assert.doesNotMatch(match[0], /-92vw|92vw|-84vw|84vw/, `${route} must not traverse edge-to-edge`);
+    const marker = `@keyframes ${route}`;
+    const start = swim.indexOf(marker);
+    assert.notEqual(start, -1, `${route} should exist`);
+    const next = swim.indexOf('@keyframes ', start + marker.length);
+    const section = swim.slice(start, next === -1 ? swim.length : next);
+    assert.doesNotMatch(section, /-92vw|92vw|-84vw|84vw/, `${route} must not traverse edge-to-edge`);
+    assert.doesNotMatch(section, /rotateY\(/, `${route} must keep a straight side-on pose`);
   }
 });
 
 test('rigid swimmers keep the whole body straight when fins cannot articulate', () => {
-  assert.match(atlas, /data-pose=['\"]straight['\"]/);
-  assert.doesNotMatch(swim, /rotateY\(180deg\)/, 'large animals must not flip like flat sprites');
+  assert.match(atlas, /dataset\.pose='straight'/);
 });

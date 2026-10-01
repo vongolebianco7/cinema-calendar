@@ -132,6 +132,8 @@ jobs:
         run: python3 -m http.server 4173 >/tmp/ocean-v1-http.log 2>&1 &
       - name: Capture deterministic iPhone Ocean evidence
         run: node scripts/ocean_visual_smoke.mjs
+      - name: Capture 1000-film observational maturity evidence
+        run: OCEAN_VISUAL_SCENARIOS=1000 node scripts/ocean_visual_1000_observation.mjs
       - name: Write visual review manifest
         if: always()
         run: |
@@ -141,7 +143,7 @@ jobs:
             "baseline": "$BASELINE_SHA",
             "probe": "V1-visual-gap",
             "viewport": "390x844@2x",
-            "scenarios": [100, 500],
+            "scenarios": [100, 500, 1000],
             "reviewAxes": [
               "creature-density",
               "species-variety",
@@ -154,7 +156,7 @@ jobs:
               "turquoise-cobalt-color",
               "ecosystem-maturity"
             ],
-            "note": "Observation only. No product code is mutated and no subjective visual edit is applied automatically."
+            "note": "1000 is observational only. The authoritative performance contract remains the existing 500-film gate; no new 1000-film threshold is introduced."
           }
           EOF
       - name: Upload visual evidence
@@ -216,6 +218,8 @@ jobs:
           Path('artifacts/integration/summary.json').write_text(json.dumps({
             'baseline':expected,
             'probes':['P1-performance','I1-iphone-webkit','V1-visual-gap'],
+            'visualScenarios':[100,500,1000],
+            'performanceContract':500,
             'policy':'observation-only-before-integrated-fix'
           },indent=2)+'\n')
           PY
@@ -227,9 +231,10 @@ jobs:
             echo
             echo "Baseline: \`$BASELINE_SHA\`"
             echo
-            echo '- P1 performance: independent observation'
+            echo '- P1 performance: authoritative 500-film observation'
             echo '- I1 iPhone/WebKit: independent observation'
-            echo '- V1 visual gap: independent evidence capture'
+            echo '- V1 visual gap: 100 / 500 / 1000 evidence capture'
+            echo '- 1000-film scenario: observational only; no new performance threshold'
             echo '- Product code mutation: none in this workflow'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload integration summary

@@ -23,10 +23,11 @@ async function waitForMilestoneVisuals(page,count){
   await page.waitForFunction(expected=>{
     const rewards=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(expected)||[];
     const mounted=document.querySelectorAll('[data-commemorative]').length;
+    const atlasContainers=document.querySelectorAll('.milestoneAtlasCreature').length;
     const images=[...document.querySelectorAll('.milestoneAtlasCreature img')];
     const vectors=document.querySelectorAll('.milestoneVectorCreature svg').length;
     const rasterReady=images.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0);
-    return mounted===rewards.length&&images.length+vectors===rewards.length&&rasterReady;
+    return mounted===rewards.length&&atlasContainers+vectors===rewards.length&&rasterReady;
   },count,{timeout:12000});
 }
 

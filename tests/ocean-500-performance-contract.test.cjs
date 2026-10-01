@@ -16,8 +16,8 @@ test('animation is centralized in one RAF-driven tick and throttles dense layers
   assert.match(perf,/const tick=t=>/);
   assert.match(perf,/state\.raf=requestAnimationFrame\(tick\)/);
   assert.doesNotMatch(perf,/setInterval\(/);
-  assert.match(perf,/frame\s*%\s*4/);
-  assert.match(perf,/frame\s*%\s*8/);
+  assert.match(perf,/frame\s*%\s*6/);
+  assert.match(perf,/frame\s*%\s*12/);
   assert.match(perf,/MOBILE_DPR_CAP\s*=\s*1\.25/);
 });
 

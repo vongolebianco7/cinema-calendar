@@ -1,0 +1,242 @@
+name: Ocean parallel quality probes
+
+on:
+  pull_request:
+    paths:
+      - 'preview/ocean/**'
+      - 'scripts/ocean_*'
+      - 'tests/ocean-*'
+      - 'tests/product/**'
+      - 'tests/journeys/**'
+      - '.github/workflows/ocean-parallel-quality.yml'
+      - 'tests/test_ocean_parallel_quality_workflow.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ocean-parallel-quality-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  baseline:
+    name: Freeze observation baseline
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.baseline.outputs.sha }}
+    steps:
+      - id: baseline
+        name: Record immutable commit
+        run: echo "sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+  performance-probe:
+    name: P1 Ocean performance observation
+    needs: baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASELINE_SHA: ${{ needs.baseline.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/ocean-p1-http.log 2>&1 &
+      - name: Run authoritative 500-film performance contract
+        run: node --test tests/ocean-500-performance-contract.test.cjs
+      - name: Capture runtime frame and population diagnostics
+        run: node scripts/ocean_visual_smoke.mjs
+      - name: Persist baseline identity
+        if: always()
+        run: |
+          mkdir -p artifacts/ocean-parallel/performance
+          printf '{"baseline":"%s","probe":"P1-performance"}\n' "$BASELINE_SHA" > artifacts/ocean-parallel/performance/meta.json
+      - name: Upload performance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-performance-evidence
+          path: |
+            artifacts/ocean-parallel/performance/
+            artifacts/mobile-smoke/ocean-diagnostics-*.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  iphone-interaction-probe:
+    name: I1 iPhone WebKit interaction observation
+    needs: baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASELINE_SHA: ${{ needs.baseline.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install WebKit
+        run: npx playwright install --with-deps webkit
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/ocean-i1-http.log 2>&1 &
+      - name: Run iPhone-class WebKit basics
+        run: CINEMAP_BROWSER=webkit node tests/product/mobile-score.mjs
+      - name: Run core journeys in WebKit
+        run: CINEMAP_BROWSER=webkit node tests/journeys/core-journeys.mjs
+      - name: Persist baseline identity
+        if: always()
+        run: |
+          mkdir -p artifacts/ocean-parallel/iphone
+          printf '{"baseline":"%s","probe":"I1-iphone-webkit"}\n' "$BASELINE_SHA" > artifacts/ocean-parallel/iphone/meta.json
+      - name: Upload iPhone interaction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-iphone-evidence
+          path: |
+            artifacts/ocean-parallel/iphone/
+            artifacts/completeness/
+          if-no-files-found: warn
+          retention-days: 7
+
+  visual-gap-probe:
+    name: V1 Ocean visual evidence capture
+    needs: baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASELINE_SHA: ${{ needs.baseline.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BASELINE_SHA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/ocean-v1-http.log 2>&1 &
+      - name: Capture deterministic iPhone Ocean evidence
+        run: node scripts/ocean_visual_smoke.mjs
+      - name: Write visual review manifest
+        if: always()
+        run: |
+          mkdir -p artifacts/ocean-parallel/visual
+          cat > artifacts/ocean-parallel/visual/review-manifest.json <<EOF
+          {
+            "baseline": "$BASELINE_SHA",
+            "probe": "V1-visual-gap",
+            "viewport": "390x844@2x",
+            "scenarios": [100, 500],
+            "reviewAxes": [
+              "creature-density",
+              "species-variety",
+              "size-hierarchy",
+              "depth",
+              "seabed-integration",
+              "intentional-whitespace",
+              "schooling",
+              "underwater-light",
+              "turquoise-cobalt-color",
+              "ecosystem-maturity"
+            ],
+            "note": "Observation only. No product code is mutated and no subjective visual edit is applied automatically."
+          }
+          EOF
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-visual-evidence
+          path: |
+            artifacts/ocean-parallel/visual/
+            artifacts/mobile-smoke/
+          if-no-files-found: warn
+          retention-days: 7
+
+  integrate:
+    name: T1 Integrate probe evidence
+    needs: [baseline, performance-probe, iphone-interaction-probe, visual-gap-probe]
+    if: always()
+    runs-on: ubuntu-latest
+    env:
+      BASELINE_SHA: ${{ needs.baseline.outputs.sha }}
+    steps:
+      - name: Download performance evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: ocean-performance-evidence
+          path: artifacts/integration/performance
+      - name: Download iPhone evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: ocean-iphone-evidence
+          path: artifacts/integration/iphone
+      - name: Download visual evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: ocean-visual-evidence
+          path: artifacts/integration/visual
+      - name: Verify all probes observed the same commit
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          expected=os.environ['BASELINE_SHA']
+          files={
+            'performance':Path('artifacts/integration/performance/ocean-parallel/performance/meta.json'),
+            'iphone':Path('artifacts/integration/iphone/ocean-parallel/iphone/meta.json'),
+            'visual':Path('artifacts/integration/visual/ocean-parallel/visual/review-manifest.json'),
+          }
+          errors=[]
+          for name,path in files.items():
+            if not path.exists():
+              errors.append(f'{name}: evidence metadata missing at {path}')
+              continue
+            payload=json.loads(path.read_text())
+            if payload.get('baseline')!=expected:
+              errors.append(f"{name}: baseline {payload.get('baseline')} != {expected}")
+          if errors:
+            raise SystemExit('\n'.join(errors))
+          Path('artifacts/integration').mkdir(parents=True,exist_ok=True)
+          Path('artifacts/integration/summary.json').write_text(json.dumps({
+            'baseline':expected,
+            'probes':['P1-performance','I1-iphone-webkit','V1-visual-gap'],
+            'policy':'observation-only-before-integrated-fix'
+          },indent=2)+'\n')
+          PY
+      - name: Add integrated summary
+        if: always()
+        run: |
+          {
+            echo '## Ocean parallel quality probes'
+            echo
+            echo "Baseline: \`$BASELINE_SHA\`"
+            echo
+            echo '- P1 performance: independent observation'
+            echo '- I1 iPhone/WebKit: independent observation'
+            echo '- V1 visual gap: independent evidence capture'
+            echo '- Product code mutation: none in this workflow'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload integration summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-parallel-quality-summary
+          path: artifacts/integration/summary.json
+          if-no-files-found: error
+          retention-days: 7

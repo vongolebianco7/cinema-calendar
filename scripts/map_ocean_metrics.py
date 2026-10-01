@@ -35,6 +35,20 @@ OCEAN_POINTS = {
     "OC-11": 1.0,
 }
 
+OCEAN_FLOW_SOURCES = [
+    "tests/ocean-renderer-contract.test.cjs",
+    "tests/ocean-milestone-stars.test.cjs",
+    "tests/ocean-creature-unlocks.test.cjs",
+    "scripts/ocean_persistence_smoke.mjs",
+    "tests/ocean-500-natural-density.test.cjs",
+    "tests/ocean-500-performance-contract.test.cjs",
+    "scripts/ocean_visual_smoke.mjs",
+]
+
+
+def _passed(source_statuses: dict[str, bool], sources: list[str]) -> bool:
+    return all(source in source_statuses and source_statuses[source] is True for source in sources)
+
 
 def map_ocean_metrics(source_statuses: dict[str, bool]) -> list[dict]:
     rows = []
@@ -54,6 +68,27 @@ def map_ocean_metrics(source_statuses: dict[str, bool]) -> list[dict]:
             "details": "; ".join(details) if details else "all authoritative Ocean sources passed",
             "source_test": sources,
         })
+
+    count_ok = _passed(source_statuses, OCEAN_METRIC_SOURCES["OC-01"])
+    milestone_ok = _passed(source_statuses, OCEAN_METRIC_SOURCES["OC-02"])
+    persistence_ok = _passed(source_statuses, OCEAN_METRIC_SOURCES["OC-06"])
+    dense_ok = _passed(source_statuses, OCEAN_METRIC_SOURCES["OC-09"] + OCEAN_METRIC_SOURCES["OC-10"])
+    visual_ok = _passed(source_statuses, OCEAN_METRIC_SOURCES["OC-11"])
+    flow_earned = (1 if count_ok else 0) + (2 if milestone_ok else 0) + (1 if persistence_ok else 0) + (1 if dense_ok else 0) + (2 if visual_ok else 0)
+    flow_pass = flow_earned == 7
+    rows.append({
+        "id": "FLOW-OCEAN",
+        "status": "pass" if flow_pass else "fail",
+        "earned": float(flow_earned),
+        "details": json.dumps({
+            "count": count_ok,
+            "milestones": milestone_ok,
+            "persistence": persistence_ok,
+            "dense_500": dense_ok,
+            "iphone_visual": visual_ok,
+        }, sort_keys=True),
+        "source_test": OCEAN_FLOW_SOURCES,
+    })
     return rows
 
 

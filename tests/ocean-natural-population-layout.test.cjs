@@ -8,7 +8,7 @@ test('100 watched films create 100 distinct visible positions',()=>{
   const points=layoutPopulation(100);
   assert.equal(points.length,100);
   assert.equal(new Set(points.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`)).size,100);
-  assert.ok(points.every(p=>p.x>=3&&p.x<=93&&p.y>=7&&p.y<=69));
+  assert.ok(points.every(p=>p.x>=3&&p.x<=93&&p.y>=7&&p.y<=86));
 });
 
 test('layout is not an equal grid: spacing varies and includes shoals plus open water',()=>{
@@ -29,4 +29,13 @@ test('depth and size vary enough that fish remain readable instead of tiny unifo
   assert.ok(Math.max(...sizes)>=7.0);
   assert.ok(new Set(points.map(p=>p.depth)).size===3);
   assert.ok(points.filter(p=>p.depth==='near').length>=12);
+});
+
+test('dense oceans deliberately occupy the lower third instead of leaving the seabed empty',()=>{
+  for(const count of [300,500]){
+    const points=layoutPopulation(count);
+    const lower=points.filter(p=>p.y>=70);
+    assert.ok(lower.length>=Math.floor(count*.12),`${count} films only places ${lower.length} creatures in the lower third`);
+    assert.ok(Math.max(...points.map(p=>p.y))>=82,`${count} films never reaches the lower seabed zone`);
+  }
 });

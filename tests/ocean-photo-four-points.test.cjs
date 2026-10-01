@@ -12,7 +12,7 @@ test('Photo Ocean loads layout, performance renderer, milestone rewards and atla
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
   assert.match(ecology,/milestone-swim\.js\?v=6/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
-  assert.match(ecology,/photo-four-points\.js\?v=11/);
+  assert.match(ecology,/photo-four-points\.js\?v=12/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -98,4 +98,10 @@ test('milestone habitats can occupy the lower seabed instead of being capped abo
   assert.match(enhancer,/case'seabed-rock':x=58;y=76/);
   assert.match(enhancer,/case'shallow-seagrass':x=16;y=70/);
   assert.match(enhancer,/Math\.min\(84,y\)/);
+});
+
+test('moving milestone megafauna avoid expensive drop shadows on iPhone',()=>{
+  assert.match(enhancer,/PASS_THROUGH_MILESTONES=new Set/);
+  assert.match(enhancer,/function milestoneUsesPassThrough\(key\)/);
+  assert.match(enhancer,/milestoneUsesPassThrough\(reward\.key\)\?'none'/);
 });

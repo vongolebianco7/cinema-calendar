@@ -5,16 +5,37 @@ const browser=await chromium.launch();
 const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
 const page=await context.newPage();
 await mkdir('artifacts/dolphin-motion',{recursive:true});
+const pageErrors=[];
+page.on('pageerror',error=>pageErrors.push(error.message));
 
 try{
   await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?preview=500',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
   await page.waitForFunction(()=>document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas'));
-  await page.waitForFunction(()=>{
+  await page.waitForTimeout(1200);
+
+  const diagnostic=await page.evaluate(()=>{
     const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
-    return canvas?.closest('[data-milestone-key="dolphin"]')?.dataset.backgroundKeyed==='1';
+    const wrap=canvas?.closest('[data-milestone-key="dolphin"]');
+    const ctx=canvas?.getContext('2d',{willReadFrequently:true});
+    let coverage=null;
+    if(canvas&&ctx){
+      const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+      let opaque=0;
+      for(let i=3;i<data.length;i+=4)if(data[i]>16)opaque++;
+      coverage=opaque/(canvas.width*canvas.height);
+    }
+    return {
+      matches:[...document.querySelectorAll('[data-milestone-key="dolphin"]')].map(el=>({className:el.className,dataset:{...el.dataset},canvasCount:el.querySelectorAll('canvas.milestoneDeformedCanvas').length})),
+      wrapDataset:wrap?{...wrap.dataset}:null,
+      canvasSize:canvas?{width:canvas.width,height:canvas.height}:null,
+      coverage
+    };
   });
-  await page.waitForTimeout(250);
+  console.log('Dolphin preflight:',JSON.stringify({diagnostic,pageErrors}));
+  await writeFile('artifacts/dolphin-motion/preflight.json',JSON.stringify({diagnostic,pageErrors},null,2)+'\n');
+  if(pageErrors.length)throw new Error(`page errors: ${pageErrors.join('; ')}`);
+  if(diagnostic.wrapDataset?.backgroundKeyed!=='1')throw new Error(`dolphin source never reached keyed state: ${JSON.stringify(diagnostic)}`);
 
   const dolphinCanvas=page.locator('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas').first();
   const dolphinWrap=dolphinCanvas.locator('..');

@@ -61,6 +61,14 @@ test('legacy state query and preview query select the same exact population targ
   assert.match(enhancer,/params\.get\('preview'\)\?\?params\.get\('state'\)/);
 });
 
+test('HUD maturity title follows the exact preview population instead of staying at the bootstrap 100 state',()=>{
+  assert.match(enhancer,/function maturityLabelForTarget\(target\)/);
+  assert.match(enhancer,/window\.__OCEAN_PHOTO__\?\.STATES/);
+  assert.match(enhancer,/function syncHudForTarget\(target\)/);
+  assert.match(enhancer,/title\.textContent=label\+' · '\+target\+'本'/);
+  assert.match(enhancer,/syncHudForTarget\(target\)/);
+});
+
 test('ordinary DOM fish are lifted for underwater readability instead of appearing black',()=>{
   assert.match(enhancer,/function ordinaryVisualFilter\(depth\)/);
   assert.match(enhancer,/brightness\(1\.3/);

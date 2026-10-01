@@ -26,15 +26,15 @@ test('dense milestone states serialize large crossings for iPhone performance', 
   assert.match(source, /list\.length>=8\?1:/, 'dense states should animate one large pass-through creature at a time');
 });
 
-test('large pass-through swimmers accelerate into cruise without turning in-frame', () => {
-  for (const name of ['turtlePassRoute', 'mantaPassRoute', 'dolphinPassRoute', 'dugongPassRoute', 'cetaceanPassRoute', 'sharkPassRoute']) {
+test('large milestone swimmers use restrained local motion instead of flying edge-to-edge', () => {
+  for (const name of ['milestonePassRoute','turtlePassRoute', 'mantaPassRoute', 'dolphinPassRoute', 'dugongPassRoute', 'cetaceanPassRoute', 'sharkPassRoute']) {
     const marker = `@keyframes ${name}`;
     const start = source.indexOf(marker);
     assert.notEqual(start, -1, `${name} should exist`);
     const next = source.indexOf('@keyframes ', start + marker.length);
     const route = source.slice(start, next === -1 ? source.length : next);
-    assert.doesNotMatch(route, /rotateY\(/, `${name} must not turn in-frame`);
+    assert.doesNotMatch(route, /(?:-|\b)(?:84|92)vw/, `${name} must not cross almost the entire viewport`);
   }
-  assert.match(source, /animation-timing-function:cubic-bezier\(/, 'pass-through should not look like a constant-speed slide');
-  assert.match(source, /activatePassThrough\(nodes,maxActive=2\)/, 'keep at most two active pass-through milestone swimmers');
+  assert.match(source, /animation-timing-function:cubic-bezier\(/, 'motion should still ease naturally');
+  assert.match(source, /activatePassThrough\(nodes,maxActive=2\)/, 'keep at most two active milestone swimmers');
 });

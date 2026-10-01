@@ -36,18 +36,17 @@ test('visible articulation has enough amplitude and travel to read on iPhone',()
   assert.doesNotMatch(atlas,/animation:none!important/);
 });
 
-test('articulated specials do not animate the whole commemorative wrapper',()=>{
-  assert.match(population,/node\.dataset\.articulated=creature\.dataset\.articulated\|\|'0'/);
-  assert.match(swim,/\[data-commemorative\]\[data-articulated="1"\]\{animation:none!important;transform:none!important;will-change:auto!important\}/);
+test('articulated specials keep their wrapper rigid while appendage layers animate',()=>{
+  for(const key of ['manta-ray','dolphin','dugong'])assert.match(swim,new RegExp('data-swim-key="'+key+'"[^}]*animation:none!important;transform:none!important;will-change:auto!important'));
 });
 
 test('large whales and whale shark use direct HQ transparent sprites',()=>{
   const expected={
-    'minke-whale':'assets/milestone-minke-whale-hq.png',
-    orca:'assets/milestone-orca-hq.png',
-    'humpback-whale':'assets/milestone-humpback-whale-hq.png',
-    'whale-shark':'assets/milestone-whale-shark-hq.png',
-    'blue-whale':'assets/milestone-blue-whale-hq.png'
+    'minke-whale':'assets/milestone-minke-whale-hq.webp',
+    orca:'assets/milestone-orca-hq.webp',
+    'humpback-whale':'assets/milestone-humpback-whale-hq.webp',
+    'whale-shark':'assets/milestone-whale-shark-hq.webp',
+    'blue-whale':'assets/milestone-blue-whale-hq.webp'
   };
   for(const [key,asset] of Object.entries(expected)){
     assert.equal(manifest.species[key].asset,asset,key+' must use HQ direct asset');

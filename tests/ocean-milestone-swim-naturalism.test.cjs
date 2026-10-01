@@ -8,22 +8,23 @@ const source = fs.readFileSync(
   'utf8'
 );
 
-test('milestone atlas sprites keep visible body motion instead of blanket disabling animation', () => {
-  assert.doesNotMatch(source, /\.milestoneAtlasCreature img\{animation:none!important/);
+test('milestone atlas image stays fixed while the cropped sprite carries body motion', () => {
+  assert.match(source, /\.milestoneAtlasCreature > img\{animation:none!important;transform:none!important/);
+  assert.match(source, /\.milestoneAtlasCreature\{animation-duration:var\(--swim-body-duration\)!important/);
   assert.match(source, /data-swim-key/);
 });
 
-test('major milestone swimmers have species-appropriate propulsion cues', () => {
+test('major milestone swimmers have species-appropriate propulsion cues on the cropped sprite', () => {
   for (const name of ['turtleStrokeBody', 'mantaWingBody', 'dolphinKickBody', 'dugongKickBody', 'cetaceanBody', 'sharkBody']) {
     assert.match(source, new RegExp(`@keyframes ${name}\\b`), `${name} should exist`);
   }
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="manta-ray"\]\[data-swim-active="1"\] img:first-child\{animation-name:mantaWingBody!important\}/);
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="dolphin"\]\[data-swim-active="1"\] img:first-child\{animation-name:dolphinKickBody!important\}/);
-  assert.match(source, /\[data-commemorative\]\[data-swim-key="dugong"\]\[data-swim-active="1"\] img:first-child\{animation-name:dugongKickBody!important\}/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="manta-ray"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:mantaWingBody!important\}/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="dolphin"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:dolphinKickBody!important\}/);
+  assert.match(source, /\[data-commemorative\]\[data-swim-key="dugong"\]\[data-swim-active="1"\] \.milestoneAtlasCreature\{animation-name:dugongKickBody!important\}/);
 });
 
 test('inactive large milestone swimmers do not burn animation budget', () => {
-  assert.match(source, /data-swim-profile="cetacean-cruise"\]:not\(\[data-swim-active="1"\]\) img:first-child/);
+  assert.match(source, /data-swim-profile="cetacean-cruise"\]:not\(\[data-swim-active="1"\]\) \.milestoneAtlasCreature/);
   assert.match(source, /animation:none!important/);
 });
 

@@ -22,7 +22,7 @@ test('500-preview mixes large, medium, small shoals and 5-10% solitary creatures
   assert.ok(sizes.some(n=>n>=4&&n<=10),`no small shoal: ${sizes}`);
 });
 
-test('500-preview avoids grid spacing and keeps readable density with open water',()=>{
+test('500-preview avoids grid spacing while preserving open water across the newly occupied lower third',()=>{
   const points=layoutPopulation(500);
   const nearest=nearestDistances(points);
   const distinct=new Set(nearest.map(n=>n.toFixed(2)));
@@ -30,7 +30,8 @@ test('500-preview avoids grid spacing and keeps readable density with open water
   const crowded=nearest.filter(n=>n<0.7).length;
   assert.ok(crowded<=50,`too many near-overlaps=${crowded}`);
   const cells=new Set(points.map(p=>`${Math.floor(p.x/10)}:${Math.floor(p.y/10)}`));
-  assert.ok(cells.size>=32&&cells.size<=55,`occupied cells=${cells.size}`);
+  assert.ok(cells.size>=40&&cells.size<=68,`occupied cells=${cells.size}`);
+  assert.ok(90-cells.size>=20,`too little open water: blank cells=${90-cells.size}`);
 });
 
 test('500-preview keeps a visually readable mix of sizes',()=>{

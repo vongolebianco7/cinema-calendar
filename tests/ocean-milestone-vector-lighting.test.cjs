@@ -5,21 +5,21 @@ const assert=require('node:assert/strict');
 const source=fs.readFileSync('preview/ocean/real-fish/milestone-vector-lighting.js','utf8');
 const largeSpecies=['manta-ray','dolphin','hammerhead-shark','large-shark','dugong','minke-whale','orca','humpback-whale','whale-shark','blue-whale'];
 
-test('large milestone vectors use lightweight species-specific body lighting instead of flat single-color bodies',()=>{
-  assert.match(source,/const LIGHTING_PROFILES=/);
+test('large milestone creatures use natural atlas v3 texture while keeping SVG fallback',()=>{
+  assert.match(source,/const NATURAL_ATLAS='optimized\/milestone-creatures-v3\.webp'/);
+  assert.match(source,/const NATURAL_CROPS=/);
+  assert.match(source,/texture\.className='milestoneNaturalTexture'/);
+  assert.match(source,/img\.src=NATURAL_ATLAS/);
+  assert.match(source,/svg\.style\.opacity='0'/);
+  assert.match(source,/dataset\.renderQuality='natural-atlas-v3'/);
+  for(const key of largeSpecies){
+    assert.ok(source.includes(`'${key}':{light:`),key);
+    assert.ok(source.includes(`'${key}':[`)||source.includes(`'${key}': [`),key+' crop');
+  }
+});
+
+test('natural texture path keeps lightweight vector fallback and avoids blur/drop-shadow effects',()=>{
+  assert.match(source,/function addVectorFallback\(/);
   assert.match(source,/createElementNS\(SVG_NS,'linearGradient'\)/);
-  assert.match(source,/dataset\.renderQuality='lit-vector-v1'/);
-  assert.match(source,/primary\.setAttribute\('fill','url\(#'\+gradientId\+'\)'\)/);
-  for(const key of largeSpecies) assert.ok(source.includes(`'${key}':{light:`),key);
-});
-
-test('large milestone vectors add a lightweight highlight skin and edge definition without changing silhouette',()=>{
-  assert.match(source,/const highlight=primary\.cloneNode\(false\)/);
-  assert.match(source,/highlight\.setAttribute\('data-ocean-highlight','body'\)/);
-  assert.match(source,/primary\.setAttribute\('stroke',profile\.outline\)/);
-  assert.match(source,/primary\.setAttribute\('stroke-width','0\.8'\)/);
-});
-
-test('vector lighting avoids blur and drop-shadow effects on moving milestone animals',()=>{
   assert.doesNotMatch(source,/feGaussianBlur|feDropShadow|drop-shadow\(/);
 });

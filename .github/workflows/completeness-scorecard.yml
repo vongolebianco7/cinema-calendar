@@ -40,6 +40,34 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
+  journey-e2e:
+    name: Scored core journeys
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/cinemap-journey-http.log 2>&1 &
+      - name: Score Chromium core journeys
+        run: CINEMAP_BROWSER=chromium node tests/journeys/core-journeys.mjs
+      - name: Score WebKit core journeys
+        run: CINEMAP_BROWSER=webkit node tests/journeys/core-journeys.mjs
+      - name: Upload journey score evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-journey-metrics
+          path: artifacts/completeness/
+          if-no-files-found: warn
+          retention-days: 7
+
   ocean:
     name: Scored Ocean contracts
     runs-on: ubuntu-latest
@@ -215,7 +243,7 @@ jobs:
 
   score:
     name: Completeness score
-    needs: [mobile-e2e, ocean, data-compliance]
+    needs: [mobile-e2e, journey-e2e, ocean, data-compliance]
     if: always()
     runs-on: ubuntu-latest
     steps:

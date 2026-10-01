@@ -14,6 +14,7 @@ class DataComplianceMetricTests(unittest.TestCase):
             "sources": True,
             "critic_schema": True,
             "critic_association": True,
+            "critic_inference": True,
             "unknown_data": True,
             "free_only": True,
             "scraping": True,
@@ -21,6 +22,7 @@ class DataComplianceMetricTests(unittest.TestCase):
         })}
         self.assertEqual(rows["CROSS-DATA"]["earned"], 3.0)
         self.assertEqual(rows["CROSS-COMPLIANCE"]["earned"], 3.0)
+        self.assertEqual(rows["CRIT-01"]["earned"], 0.5)
         self.assertEqual(rows["CRIT-03"]["earned"], 0.5)
         self.assertEqual(rows["CRIT-05"]["earned"], 0.5)
 
@@ -30,6 +32,7 @@ class DataComplianceMetricTests(unittest.TestCase):
             "sources": True,
             "critic_schema": True,
             "critic_association": False,
+            "critic_inference": True,
             "unknown_data": True,
             "free_only": True,
             "scraping": True,
@@ -37,6 +40,17 @@ class DataComplianceMetricTests(unittest.TestCase):
         })}
         self.assertEqual(rows["CROSS-DATA"]["status"], "fail")
         self.assertEqual(rows["CRIT-03"]["status"], "fail")
+
+    def test_incomplete_evidence_emits_only_metrics_it_can_prove(self):
+        self.assertIsNotNone(map_data_compliance_metrics, "scripts.map_data_compliance_metrics must exist")
+        rows = {r["id"]: r for r in map_data_compliance_metrics({
+            "sources": True,
+            "critic_schema": True,
+            "critic_association": True,
+            "critic_inference": True,
+        })}
+        self.assertEqual(set(rows), {"CRIT-01", "CRIT-03", "CRIT-05"})
+        self.assertTrue(all(row["status"] == "pass" for row in rows.values()))
 
     def test_policy_scan_detects_metered_ai_scraping_and_trackers(self):
         self.assertIsNotNone(scan_text_for_policy_violations, "scripts.map_data_compliance_metrics must exist")

@@ -5,13 +5,16 @@ const assert=require('node:assert/strict');
 const source=fs.readFileSync('preview/ocean/real-fish/milestone-vector-lighting.js','utf8');
 const largeSpecies=['manta-ray','dolphin','hammerhead-shark','large-shark','dugong','minke-whale','orca','humpback-whale','whale-shark','blue-whale'];
 
-test('large milestone vectors use species-specific illustrated lighting and anatomy',()=>{
+test('large milestone vectors use soft countershaded illustrated anatomy',()=>{
   assert.match(source,/const LIGHTING_PROFILES=/);
   assert.match(source,/const DETAIL_MARKUP=/);
-  assert.match(source,/createElementNS\(SVG_NS,'linearGradient'\)/);
-  assert.match(source,/data-ocean-highlight/);
+  assert.match(source,/data-ocean-lighting','countershade'/);
+  assert.match(source,/addStop\(gradient,'0%',profile\.shadow\)/);
+  assert.match(source,/addStop\(gradient,'100%',profile\.light\)/);
+  assert.match(source,/primary\.setAttribute\('stroke-opacity','\.34'\)/);
+  assert.match(source,/highlight\.setAttribute\('opacity','\.22'\)/);
   assert.match(source,/data-ocean-details/);
-  assert.match(source,/dataset\.renderQuality='illustrated-vector-v2'/);
+  assert.match(source,/dataset\.renderQuality='illustrated-vector-v3'/);
   for(const key of largeSpecies){
     assert.ok(source.includes(`'${key}':{light:`),key);
     assert.ok(source.includes(`'${key}':'<g data-ocean-details=`),key+' details');

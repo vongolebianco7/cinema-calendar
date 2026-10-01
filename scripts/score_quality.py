@@ -101,6 +101,7 @@ def calculate_score(scorecard: dict, results: list[dict]) -> dict:
     group_totals = {"screen": 0.0, "flow": 0.0, "cross": 0.0}
     area_totals: dict[str, float] = defaultdict(float)
     blockers: list[str] = []
+    unverified_blockers: list[str] = []
     missing_metrics: list[str] = []
     metric_results: list[dict] = []
 
@@ -111,7 +112,9 @@ def calculate_score(scorecard: dict, results: list[dict]) -> dict:
         area_totals[metric["area"]] += earned
         if canonical["status"] == "missing":
             missing_metrics.append(metric["id"])
-        if metric["blocker"] and canonical["status"] in {"fail", "missing"}:
+            if metric["blocker"]:
+                unverified_blockers.append(metric["id"])
+        elif metric["blocker"] and canonical["status"] == "fail":
             blockers.append(metric["id"])
         metric_results.append({
             **canonical,
@@ -129,8 +132,9 @@ def calculate_score(scorecard: dict, results: list[dict]) -> dict:
         "group_totals": {k: round(v, 4) for k, v in group_totals.items()},
         "area_totals": {k: round(v, 4) for k, v in sorted(area_totals.items())},
         "total": total,
-        "release_eligible": not blockers,
+        "release_eligible": not blockers and not unverified_blockers,
         "blockers": sorted(blockers),
+        "unverified_blockers": sorted(unverified_blockers),
         "missing_metrics": sorted(missing_metrics),
         "metrics": metric_results,
     }
@@ -143,6 +147,9 @@ def compare_scores(current: dict, baseline: dict, touched_areas: set[str]) -> di
     current_blockers = set(current.get("blockers", []))
     baseline_blockers = set(baseline.get("blockers", []))
     new_blockers = sorted(current_blockers - baseline_blockers)
+    current_unverified = set(current.get("unverified_blockers", []))
+    baseline_unverified = set(baseline.get("unverified_blockers", []))
+    new_unverified = sorted(current_unverified - baseline_unverified)
     delta = round(float(current.get("total", 0)) - float(baseline.get("total", 0)), 4)
 
     current_areas = current.get("area_totals", {})
@@ -157,12 +164,13 @@ def compare_scores(current: dict, baseline: dict, touched_areas: set[str]) -> di
         if after + 1e-9 < before:
             regressions.append({"area": area, "baseline": before, "current": after})
 
-    passed = not new_blockers and delta >= -1e-9 and not regressions
+    passed = not new_blockers and not new_unverified and delta >= -1e-9 and not regressions
     return {
         "baseline_total": baseline.get("total", 0),
         "current_total": current.get("total", 0),
         "delta": delta,
         "new_blockers": new_blockers,
+        "new_unverified_blockers": new_unverified,
         "touched_area_regressions": regressions,
         "phase_a_pass": passed,
     }

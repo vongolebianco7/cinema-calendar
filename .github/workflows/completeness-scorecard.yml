@@ -1,0 +1,319 @@
+name: Cinemap completeness scorecard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: completeness-scorecard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  mobile-e2e:
+    name: Scored mobile basics
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/cinemap-scorecard-http.log 2>&1 &
+      - name: Score Chromium mobile basics
+        run: CINEMAP_BROWSER=chromium node tests/product/mobile-score.mjs
+      - name: Score WebKit mobile basics
+        run: CINEMAP_BROWSER=webkit node tests/product/mobile-score.mjs
+      - name: Score broad performance bands
+        run: node tests/product/performance-score.mjs
+      - name: Upload mobile score evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-mobile-metrics
+          path: artifacts/completeness/
+          if-no-files-found: warn
+          retention-days: 7
+
+  journey-e2e:
+    name: Scored core journeys
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/cinemap-journey-http.log 2>&1 &
+      - name: Score Chromium core journeys
+        run: CINEMAP_BROWSER=chromium node tests/journeys/core-journeys.mjs
+      - name: Score WebKit core journeys
+        run: CINEMAP_BROWSER=webkit node tests/journeys/core-journeys.mjs
+      - name: Upload journey score evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-journey-metrics
+          path: artifacts/completeness/
+          if-no-files-found: warn
+          retention-days: 7
+
+  ocean:
+    name: Scored Ocean contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/cinemap-ocean-scorecard-http.log 2>&1 &
+      - id: oc01
+        name: OC-01 creature count
+        continue-on-error: true
+        run: node --test tests/ocean-renderer-contract.test.cjs
+      - id: oc02
+        name: OC-02 milestone schedule
+        continue-on-error: true
+        run: node --test tests/ocean-milestone-stars.test.cjs && node --test tests/ocean-creature-unlocks.test.cjs
+      - id: oc03
+        name: OC-03 biodiversity
+        continue-on-error: true
+        run: node --test tests/ocean-creature-diversity.test.cjs && node --test tests/ocean-ordinary-species-expansion.test.cjs
+      - id: oc04
+        name: OC-04 habitat depth
+        continue-on-error: true
+        run: node --test tests/ocean-habitat-depth.test.cjs
+      - id: oc05
+        name: OC-05 rating ecology
+        continue-on-error: true
+        run: node --test tests/ocean-rating-ecology.test.cjs && node --test tests/ocean-record-driven-maturity.test.cjs
+      - id: oc06
+        name: OC-06 persistence
+        continue-on-error: true
+        run: node scripts/ocean_persistence_smoke.mjs
+      - id: oc07
+        name: OC-07 natural motion
+        continue-on-error: true
+        run: node --test tests/ocean-photo-natural-motion.test.cjs && node --test tests/ocean-real-fish-motion.test.cjs
+      - id: oc08
+        name: OC-08 real scale hierarchy
+        continue-on-error: true
+        run: node --test tests/ocean-real-scale-catalog.test.cjs
+      - id: oc09
+        name: OC-09 500 natural density
+        continue-on-error: true
+        run: node --test tests/ocean-500-natural-density.test.cjs
+      - id: oc10
+        name: OC-10 500 performance
+        continue-on-error: true
+        run: node --test tests/ocean-500-performance-contract.test.cjs
+      - id: oc11
+        name: OC-11 iPhone visual gate
+        continue-on-error: true
+        run: node scripts/ocean_visual_smoke.mjs
+      - name: Build Ocean source status
+        if: always()
+        env:
+          OC01: ${{ steps.oc01.outcome }}
+          OC02: ${{ steps.oc02.outcome }}
+          OC03: ${{ steps.oc03.outcome }}
+          OC04: ${{ steps.oc04.outcome }}
+          OC05: ${{ steps.oc05.outcome }}
+          OC06: ${{ steps.oc06.outcome }}
+          OC07: ${{ steps.oc07.outcome }}
+          OC08: ${{ steps.oc08.outcome }}
+          OC09: ${{ steps.oc09.outcome }}
+          OC10: ${{ steps.oc10.outcome }}
+          OC11: ${{ steps.oc11.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os
+          ok=lambda key: os.environ[key]=='success'
+          payload={
+            'tests/ocean-renderer-contract.test.cjs':ok('OC01'),
+            'tests/ocean-milestone-stars.test.cjs':ok('OC02'),
+            'tests/ocean-creature-unlocks.test.cjs':ok('OC02'),
+            'tests/ocean-creature-diversity.test.cjs':ok('OC03'),
+            'tests/ocean-ordinary-species-expansion.test.cjs':ok('OC03'),
+            'tests/ocean-habitat-depth.test.cjs':ok('OC04'),
+            'tests/ocean-rating-ecology.test.cjs':ok('OC05'),
+            'tests/ocean-record-driven-maturity.test.cjs':ok('OC05'),
+            'scripts/ocean_persistence_smoke.mjs':ok('OC06'),
+            'tests/ocean-photo-natural-motion.test.cjs':ok('OC07'),
+            'tests/ocean-real-fish-motion.test.cjs':ok('OC07'),
+            'tests/ocean-real-scale-catalog.test.cjs':ok('OC08'),
+            'tests/ocean-500-natural-density.test.cjs':ok('OC09'),
+            'tests/ocean-500-performance-contract.test.cjs':ok('OC10'),
+            'scripts/ocean_visual_smoke.mjs':ok('OC11'),
+          }
+          open('/tmp/ocean-status.json','w').write(json.dumps(payload))
+          PY
+      - name: Map Ocean score metrics
+        if: always()
+        run: python scripts/map_ocean_metrics.py /tmp/ocean-status.json --output artifacts/completeness/metrics/ocean.json
+      - name: Upload Ocean score evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-ocean-metrics
+          path: |
+            artifacts/completeness/
+            artifacts/mobile-smoke/
+          if-no-files-found: warn
+          retention-days: 7
+
+  data-compliance:
+    name: Scored verified data contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: sources
+        name: Verify source contracts
+        continue-on-error: true
+        run: python scripts/check_sources.py
+      - id: core
+        name: Verify critic inference contract
+        continue-on-error: true
+        run: python scripts/check_core_journey.py
+      - id: critic_map
+        name: Verify critic map schema
+        continue-on-error: true
+        run: python scripts/check_critic_map.py
+      - id: critic_evidence
+        name: Verify critic evidence
+        continue-on-error: true
+        run: node scripts/check_critic_evidence.js
+      - name: Build verified data status
+        if: always()
+        env:
+          SOURCES: ${{ steps.sources.outcome }}
+          CORE: ${{ steps.core.outcome }}
+          CRITIC_MAP: ${{ steps.critic_map.outcome }}
+          CRITIC_EVIDENCE: ${{ steps.critic_evidence.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os
+          ok=lambda key: os.environ[key]=='success'
+          critic_ok=ok('CRITIC_MAP') and ok('CRITIC_EVIDENCE')
+          payload={
+            'sources':ok('SOURCES'),
+            'critic_schema':critic_ok,
+            'critic_association':critic_ok,
+            'critic_inference':ok('CORE'),
+          }
+          open('/tmp/data-status.json','w').write(json.dumps(payload))
+          PY
+      - name: Map verified data metrics
+        if: always()
+        run: python scripts/map_data_compliance_metrics.py /tmp/data-status.json --output artifacts/completeness/metrics/data-compliance.json
+      - name: Upload data score evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-data-compliance-metrics
+          path: artifacts/completeness/
+          if-no-files-found: warn
+          retention-days: 7
+
+  score:
+    name: Completeness score
+    needs: [mobile-e2e, journey-e2e, ocean, data-compliance]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download producer metrics
+        uses: actions/download-artifact@v4
+        with:
+          pattern: completeness-*-metrics
+          path: artifacts/completeness
+          merge-multiple: true
+      - name: Calculate current score
+        run: python scripts/score_quality.py --metrics artifacts/completeness/metrics --output artifacts/completeness/score.json
+      - name: Fetch latest successful main baseline
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          run_id=$(gh run list --workflow completeness-scorecard.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty' 2>/dev/null)
+          if [ -n "$run_id" ]; then
+            rm -rf /tmp/cinemap-main-score && mkdir -p /tmp/cinemap-main-score
+            gh run download "$run_id" -n completeness-score -D /tmp/cinemap-main-score >/dev/null 2>&1
+            if [ -f /tmp/cinemap-main-score/score.json ]; then
+              cp /tmp/cinemap-main-score/score.json artifacts/completeness/main-score.json
+            elif [ -f /tmp/cinemap-main-score/artifacts/completeness/score.json ]; then
+              cp /tmp/cinemap-main-score/artifacts/completeness/score.json artifacts/completeness/main-score.json
+            fi
+          fi
+          exit 0
+      - id: phase_a
+        name: Compare with main baseline when available
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          if [ -f artifacts/completeness/main-score.json ]; then
+            python scripts/score_quality.py \
+              --metrics artifacts/completeness/metrics \
+              --baseline artifacts/completeness/main-score.json \
+              --touched-areas all \
+              --enforce-phase-a \
+              --output artifacts/completeness/score.json
+          else
+            echo 'No same-version main baseline yet; bootstrap comparison skipped.'
+          fi
+      - name: Render score report
+        if: always()
+        run: python scripts/quality_report.py artifacts/completeness/score.json --output artifacts/completeness/score.md
+      - name: Add score to job summary
+        if: always()
+        run: cat artifacts/completeness/score.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload final score
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completeness-score
+          path: |
+            artifacts/completeness/score.json
+            artifacts/completeness/score.md
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce Phase A comparison
+        if: github.event_name == 'pull_request' && steps.phase_a.outcome == 'failure'
+        run: exit 1

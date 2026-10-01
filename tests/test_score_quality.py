@@ -102,6 +102,19 @@ class ScoreQualityTests(unittest.TestCase):
         score = calculate_score(scorecard, [{"id": "B", "status": "fail", "earned": 0}])
         self.assertFalse(score["release_eligible"])
         self.assertEqual(score["blockers"], ["B"])
+        self.assertEqual(score["unverified_blockers"], [])
+
+    def test_missing_blocker_is_unverified_not_reported_as_failed(self):
+        self.require_module()
+        scorecard = {
+            "scorecard_version": 1,
+            "gate_phase": "A",
+            "metrics": [{"id": "B", "group": "screen", "area": "a", "description": "b", "points": 1, "blocker": True}],
+        }
+        score = calculate_score(scorecard, [])
+        self.assertFalse(score["release_eligible"])
+        self.assertEqual(score["blockers"], [])
+        self.assertEqual(score["unverified_blockers"], ["B"])
 
     def test_blocker_failure_in_either_browser_wins(self):
         self.require_module()
@@ -116,6 +129,7 @@ class ScoreQualityTests(unittest.TestCase):
         ])
         self.assertFalse(score["release_eligible"])
         self.assertEqual(score["area_totals"]["a"], 0)
+        self.assertEqual(score["blockers"], ["B"])
 
     def test_baseline_version_mismatch_is_rejected(self):
         self.require_module()

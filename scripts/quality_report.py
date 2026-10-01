@@ -19,6 +19,7 @@ def render_report(score: dict) -> str:
     groups = score.get("group_totals", {})
     areas = score.get("area_totals", {})
     blockers = score.get("blockers", [])
+    unverified = score.get("unverified_blockers", [])
     missing = score.get("missing_metrics", [])
     comparison = score.get("comparison", {})
 
@@ -54,6 +55,13 @@ def render_report(score: dict) -> str:
     if blockers:
         for blocker in blockers:
             lines.append(f"- ❌ {blocker}")
+    else:
+        lines.append("- none")
+
+    lines.extend(["", "## Unverified Blockers"])
+    if unverified:
+        for blocker in unverified:
+            lines.append(f"- ⚠️ {blocker}")
     else:
         lines.append("- none")
 

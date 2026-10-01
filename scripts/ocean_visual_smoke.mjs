@@ -95,7 +95,7 @@ async function runScenario(count){
       if(result.solitaryCount<25||result.solitaryCount>50)failures.push(`500-preview solitary creatures must be 25-50, got ${result.solitaryCount}`);
       if(result.lowerThirdCount<25)failures.push(`500-preview lower third must contain at least 25 creatures, got ${result.lowerThirdCount}`);
       if(result.occupiedCells>70)failures.push(`500-preview must preserve at least 20 open-water cells while using lower habitat, occupied cells=${result.occupiedCells}`);
-      if(frameStats.frames<20)failures.push(`500-preview animation stalled: ${JSON.stringify(frameStats)}`);
+      if(frameStats.frames<8||frameStats.maxGap>250)failures.push(`500-preview animation stalled: ${JSON.stringify(frameStats)}`);
     }
     if(!result.hudBelowOcean)failures.push('message/HUD overlaps the ocean');
     if(!result.backdrop.src.endsWith('ocean-background-approved-hires.png'))failures.push(`high-resolution approved backdrop is not active (${result.backdrop.src})`);

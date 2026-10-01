@@ -85,14 +85,17 @@ test('octopus and gentle drifters stay on local drift routes instead of pass-thr
   assert.match(src,/data-swim-profile="gentle-cruise"[^}]*animation-name:milestoneDriftRoute/s);
 });
 
-test('milestone size hierarchy keeps whales visibly larger than octopus and dolphin',()=>{
+test('milestone size hierarchy keeps whales larger while rigid specials stay below airplane-like scale',()=>{
   const src=loadPhotoSource();
   assert.match(src,/function milestoneWidthPercent\(/);
-  assert.match(src,/MILESTONE_VISUAL_SCALE=.*'giant-octopus':0\.82/);
-  assert.match(src,/'minke-whale':1\.35/);
-  assert.match(src,/'humpback-whale':1\.5/);
-  assert.match(src,/'blue-whale':1\.7/);
-  assert.match(src,/Math\.min\(44,/);
+  assert.match(src,/const MILESTONE_WIDTH_CAP=/);
+  const caps=Object.fromEntries([...src.matchAll(/(?:^|,)['\"]?([a-z-]+)['\"]?:(\d+(?:\.\d+)?)/g)].map(m=>[m[1],Number(m[2])]));
+  assert.ok(caps['blue-whale']>caps['minke-whale']);
+  assert.ok(caps['humpback-whale']>caps.dolphin);
+  assert.ok(caps['manta-ray']<=18);
+  assert.ok(caps.dolphin<=14);
+  assert.ok(caps['large-shark']<=20);
+  assert.match(src,/Math\.min\(cap,/);
 });
 
 test('hero rewards contain only hero-role animals', () => {

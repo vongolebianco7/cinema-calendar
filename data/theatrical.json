@@ -1,43 +1,17 @@
 {
-  "generated_at": "2026-09-30T18:31:14.377018+00:00",
+  "generated_at": "2026-10-01T18:33:59.121809+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-08-31",
-      "2027-01-28"
+      "2026-09-01",
+      "2027-01-29"
     ],
     "background_slice": [
-      "2026-11-24",
-      "2027-01-22"
+      "2027-01-24",
+      "2027-03-24"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1560702,
-      "title": "アレクサンダー －天上の王国－",
-      "original_title": "アレクサンダー －天上の王国－",
-      "date": "2025-09-30",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/tN47ovI6fF5uWy2fsz7TVj77ABA.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1560702",
-      "director": "田渕大輔",
-      "director_id": 3571530,
-      "cast": [
-        "Amato Kanon",
-        "Ruri Hanaka",
-        "Kishou Kazuto",
-        "美稀千種"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 0,
-      "genres": []
-    },
     {
       "id": 14571,
       "title": "機動警察パトレイバー the Movie",
@@ -19571,7 +19545,7 @@
         "音楽",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
       "revival": true,
       "original_jp_release_date": "1996-09-14",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -19606,7 +19580,7 @@
         "犯罪",
         "ロマンス"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1136690,
@@ -19636,7 +19610,7 @@
         "ロマンス",
         "コメディ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1480382,
@@ -19646,8 +19620,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/xF9IOyzwft0EQdHgVVHTsXVQT6s.jpg",
-      "score": 8.1,
-      "votes": 365,
+      "score": 8.063,
+      "votes": 372,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1480382",
       "director": "カウテール・ベン・ハニア",
@@ -19673,7 +19647,7 @@
         "ドラマ",
         "履歴"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1368535,
@@ -19705,7 +19679,7 @@
         "ロマンス",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1083381,
@@ -19715,8 +19689,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/z52Eabu4xm5I8ksqdKOSylo5wWL.jpg",
-      "score": 7.03,
-      "votes": 3392,
+      "score": 7.019,
+      "votes": 3528,
       "overview": "舞台は、都市伝説とされていた空間“Backrooms”。「ある日突然 “現実世界の裏側”へ墜ちてしまったら…？」どこまでも続く黄色い壁紙の部屋、終わりのない廊下。不自然な間取りと、意味を失い床に埋まった設置物。  わずかに現実からズレている――そんな出口のない“リミナルスペース”で、観客は“最高密度の不安と恐怖”を体験する。",
       "tmdb": "https://www.themoviedb.org/movie/1083381",
       "director": "ケイン・パーソンズ",
@@ -19737,7 +19711,7 @@
         "謎",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1725074,
@@ -19769,7 +19743,7 @@
         "アドベンチャー",
         "ファンタジー"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1621964,
@@ -19788,20 +19762,20 @@
       "cast": [
         "松村北斗",
         "今田美桜",
-        "三浦友和",
-        "柄本佑"
+        "柄本佑",
+        "三浦友和"
       ],
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 145,
       "genres": [
         "犯罪",
         "ドラマ",
         "ファミリー",
         "謎"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1485195,
@@ -19825,7 +19799,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1781804,
@@ -19870,7 +19844,7 @@
       "countries": [],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1782210,
@@ -19921,7 +19895,7 @@
       "countries": [],
       "runtime": 134,
       "genres": [],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1368337,
@@ -19931,8 +19905,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/oe40oI7aulGLkoNDEZWxyeIQGZq.jpg",
-      "score": 8.02,
-      "votes": 3883,
+      "score": 8.0,
+      "votes": 3983,
       "overview": "トロイア戦争の終結後、イタケーの伝説的な王オデュッセウスは、故郷への長く危険に満ちた帰還の旅に出る。その航海の途上、彼は神々の気まぐれや神話の怪物たち、そして自身の知略と人間性の双方を極限まで試す過酷な試練に立ち向かうことを余儀なくされる――。",
       "tmdb": "https://www.themoviedb.org/movie/1368337",
       "director": "クリストファー・ノーラン",
@@ -19953,7 +19927,7 @@
         "アクション",
         "ファンタジー"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1447853,
@@ -19963,8 +19937,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5XoHhKZ1IROW6f5UlRpADHnTL2l.jpg",
-      "score": 7.4,
-      "votes": 19,
+      "score": 7.5,
+      "votes": 20,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1447853",
       "director": "Dylan Southern",
@@ -19984,7 +19958,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1712074,
@@ -20009,7 +19983,7 @@
       ],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1705721,
@@ -20039,7 +20013,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1677449,
@@ -20070,7 +20044,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1591675,
@@ -20080,8 +20054,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/6eXDHPwPDTZTgf4wuGIP49bxxJV.jpg",
-      "score": 7.8,
-      "votes": 9,
+      "score": 7.7,
+      "votes": 11,
       "overview": "小学四年生の藤野は、学級新聞に載せる漫画で周囲から一目置かれる存在だった。しかしある日、内気なクラスメイト・京本と紙面を分け合うことになり、彼女の描く圧倒的な絵の才能を目の当たりにして、藤野の世界は一変する。ようやく顔を合わせたふたりは、京本がずっと藤野を陰で憧れの存在として見つめていたことを知る。一方的だったライバル心は静かに溶け、やがてふたりは絵を描くことへの尽きせぬ情熱に導かれ、漫画家を志す大人へと成長していく。大人になった藤野と京本は、創作の喜びと、思いがけない人生の巡り合わせが交錯する道をともに歩んでいく。",
       "tmdb": "https://www.themoviedb.org/movie/1591675",
       "director": "是枝裕和",
@@ -20099,7 +20073,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1497946,
@@ -20131,7 +20105,7 @@
         "ドラマ",
         "戦争"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1494419,
@@ -20149,8 +20123,8 @@
       "director_id": 1661035,
       "cast": [
         "黒沢ともよ",
-        "戸松遥",
         "朝井彩加",
+        "豊田萌絵",
         "安済知佳"
       ],
       "countries": [
@@ -20162,7 +20136,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1767856,
@@ -20189,7 +20163,7 @@
       ],
       "runtime": 54,
       "genres": [],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1547224,
@@ -20218,7 +20192,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1160360,
@@ -20228,8 +20202,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5CTl7SVUP6kfbVXn36Qj8Kci0B.jpg",
-      "score": 6.337,
-      "votes": 421,
+      "score": 6.341,
+      "votes": 428,
       "overview": "家事と育児、セラピストの仕事に追われるリンダは、原因不明の病を抱える幼い娘の世話に追い詰められていた。顧客の患者への対応、娘の担当医からの叱責、出張中の口うるさい夫からの電話──休まる暇もない日々の中、自宅アパートの天井が突然崩落し、娘とともに海辺の格安モーテルへ移り住むことに。誰にも頼れない孤独のなかで限界を迎えた彼女は、思いもよらぬ事態へと飲み込まれていく──。",
       "tmdb": "https://www.themoviedb.org/movie/1160360",
       "director": "Mary Bronstein",
@@ -20247,7 +20221,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1391021,
@@ -20876,8 +20850,8 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gSSnEwxXErFMhHwDY8yBPuN6hIj.jpg",
-      "score": 7.391,
-      "votes": 589,
+      "score": 7.393,
+      "votes": 591,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/3009",
       "director": "オーソン・ウェルズ",
@@ -20899,7 +20873,7 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
       "revival": true,
       "original_jp_release_date": "1964-01-28",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21461,7 +21435,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
       "revival": true,
       "original_jp_release_date": "2020-02-04",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21620,8 +21594,8 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
-      "score": 8.085,
-      "votes": 4708,
+      "score": 8.087,
+      "votes": 4728,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/406",
       "director": "マチュー・カソヴィッツ",
@@ -21639,7 +21613,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
       "revival": true,
       "original_jp_release_date": "1996-02-17",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21880,7 +21854,7 @@
         "スリラー",
         "ドラマ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00",
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
       "revival": true,
       "original_jp_release_date": "1979-10-06",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -22918,7 +22892,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-09-24T18:29:57.371940+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1306816,
@@ -24435,6 +24409,35 @@
       ]
     },
     {
+      "id": 1481955,
+      "title": "陽だまりの歌が聴こえる",
+      "original_title": "陽光女子合唱團",
+      "date": "2027-01-01",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/ryCanTADyAo7bqRr1aca2ThuTeE.jpg",
+      "score": 7.2,
+      "votes": 9,
+      "overview": "光の届かない場所で生まれた歌声が、台湾全土をやさしく包み込んだ──。 女子刑務所で誕生した女児を大切に育てる母親と、辛い過去を抱えた4人の受刑者たち。 しかし、娘に“失明の危機”が迫り、「最後に最高の思い出を！」と合唱団を結成する。 反発を重ねながらも、歌を通して絆を深めていく姿は、世代を超えて人々の心を揺さぶり、",
+      "tmdb": "https://www.themoviedb.org/movie/1481955",
+      "director": "林孝謙",
+      "director_id": 1406214,
+      "cast": [
+        "陳意涵",
+        "ジュディ・オング",
+        "鍾欣凌",
+        "孫淑媚"
+      ],
+      "countries": [
+        "Taiwan"
+      ],
+      "runtime": 135,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
+    },
+    {
       "id": 1153714,
       "title": "ユニコーンを轢いた",
       "original_title": "Death of a Unicorn",
@@ -24605,6 +24608,38 @@
       "genres": [
         "ドラマ"
       ]
+    },
+    {
+      "id": 1440769,
+      "title": "ビーキーパー2",
+      "original_title": "The Beekeeper 2",
+      "date": "2027-01-15",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/10jGGKeNxY4j6pvJpWLmBzcMeMH.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1440769",
+      "director": "ティモ・ジャヤント",
+      "director_id": 235430,
+      "cast": [
+        "ジェイソン・ステイサム",
+        "ジェレミー・アイアンズ",
+        "ヤラ・シャヒディ",
+        "エミー・レイヴァー＝ランプマン"
+      ],
+      "countries": [
+        "United States of America",
+        "United Kingdom"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "スリラー"
+      ],
+      "checked_at": "2026-10-01T18:33:59.121809+00:00"
     },
     {
       "id": 1774278,

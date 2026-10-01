@@ -49,3 +49,20 @@ export function screenshotPath(name, browser = '') {
   const suffix = browser ? `-${browser}` : '';
   return `artifacts/completeness/screenshots/${name}${suffix}.png`;
 }
+
+export async function recordBasicPageMetrics({page, response, errors, rows, browser, ids, points, screenshotName}) {
+  const loaded = Boolean(response && response.status() < 400);
+  recordMetric(rows, {id: ids.load, status: loaded ? 'pass' : 'fail', earned: loaded ? points.load : 0, browser, details: `HTTP ${response?.status?.() ?? 'no response'}`});
+
+  await page.waitForTimeout(200);
+  const clean = errors.length === 0;
+  recordMetric(rows, {id: ids.errors, status: clean ? 'pass' : 'fail', earned: clean ? points.errors : 0, browser, details: clean ? 'no pageerror' : errors.join(' | ')});
+
+  const overflowResult = await assertNoPageOverflow(page);
+  recordMetric(rows, {id: ids.overflow, status: overflowResult.pass ? 'pass' : 'fail', earned: overflowResult.pass ? points.overflow : 0, browser, details: `overflow=${overflowResult.overflow}px`});
+
+  if (screenshotName) {
+    fs.mkdirSync('artifacts/completeness/screenshots', {recursive:true});
+    await page.screenshot({path:screenshotPath(screenshotName,browser), fullPage:true});
+  }
+}

@@ -23,9 +23,11 @@ test('articulation moves appendages without body bending transforms',()=>{
   assert.doesNotMatch(atlas,/skew\(|scaleX\(|scaleY\(|perspective\(|rotateX\(|rotateY\(/i);
 });
 
-test('manta wings stay nearly straight and cetacean tails use small amplitudes',()=>{
-  assert.match(atlas,/oceanMantaLeft.*?rotate\(-4deg\)/s);
-  assert.match(atlas,/oceanMantaRight.*?rotate\(4deg\)/s);
-  assert.match(atlas,/oceanTailVertical.*?rotate\(-5deg\)/s);
-  assert.match(atlas,/oceanTailVerticalSlow.*?rotate\(-4deg\)/s);
+test('visible articulation has enough amplitude to read on iPhone',()=>{
+  assert.match(atlas,/oceanMantaLeft.*?rotate\(-8deg\)/s);
+  assert.match(atlas,/oceanMantaRight.*?rotate\(8deg\)/s);
+  assert.match(atlas,/oceanTailVertical.*?rotate\(-9deg\)/s);
+  assert.match(atlas,/oceanTailVerticalSlow.*?rotate\(-7deg\)/s);
+  assert.match(atlas,/dataset\.articulated='1'/);
+  assert.doesNotMatch(atlas,/animation:none!important/);
 });

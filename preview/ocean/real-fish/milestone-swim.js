@@ -20,34 +20,35 @@ let rotationTimer=null;
 function profileFor(key){return key&&profiles[key]?{key,...profiles[key]}:{key:key||'unknown',...fallback};}
 function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles'))return;const style=doc.createElement('style');style.id='oceanMilestoneSwimStyles';style.textContent=`
 [data-commemorative][data-swim-profile]{transform-origin:50% 50%}
-[data-swim-profile="reef-dart"],[data-swim-profile="sunfish-scull"],[data-swim-profile="octopus-drift"],[data-swim-profile="gentle-cruise"]{animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important}
-[data-swim-profile="reef-dart"],[data-swim-profile="sunfish-scull"]{animation-name:milestoneFishRoute!important}
-[data-swim-profile="octopus-drift"],[data-swim-profile="gentle-cruise"]{animation-name:milestoneDriftRoute!important}
-[data-swim-active="1"]{animation-name:milestonePassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:cubic-bezier(.22,.58,.42,1)!important;animation-iteration-count:infinite!important;will-change:transform}
-[data-swim-profile="turtle-stroke"]:not([data-swim-active="1"]),[data-swim-profile="rigid-glide"]:not([data-swim-active="1"]),[data-swim-profile="rigid-cruise"]:not([data-swim-active="1"]),[data-swim-profile="shark-cruise"]:not([data-swim-active="1"]),[data-swim-profile="cetacean-cruise"]:not([data-swim-active="1"]){animation:none!important;transform:none!important;will-change:auto!important}
+[data-commemorative][data-swim-profile="reef-dart"],[data-commemorative][data-swim-profile="sunfish-scull"],[data-commemorative][data-swim-profile="octopus-drift"],[data-commemorative][data-swim-profile="gentle-cruise"]{animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important}
+[data-commemorative][data-swim-profile="reef-dart"],[data-commemorative][data-swim-profile="sunfish-scull"]{animation-name:milestoneFishRoute!important}
+[data-commemorative][data-swim-profile="octopus-drift"],[data-commemorative][data-swim-profile="gentle-cruise"]{animation-name:milestoneDriftRoute!important}
+[data-commemorative][data-swim-active="1"]{animation-name:milestonePassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:cubic-bezier(.22,.58,.42,1)!important;animation-iteration-count:infinite!important;will-change:transform}
+[data-commemorative][data-swim-profile="turtle-stroke"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="rigid-glide"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="rigid-cruise"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="shark-cruise"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="cetacean-cruise"]:not([data-swim-active="1"]){animation:none!important;transform:none!important;will-change:auto!important}
 [data-commemorative][data-swim-profile] img:first-child{animation-duration:var(--swim-body-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;animation-delay:var(--swim-body-delay,0s)!important;transform-origin:50% 55%}
-[data-swim-profile="reef-dart"] img:first-child{animation-name:reefBody!important}
-[data-swim-profile="turtle-stroke"] img:first-child{animation-name:turtleStrokeBody!important}
-[data-swim-profile="sunfish-scull"] img:first-child{animation-name:sunfishBody!important}
-[data-swim-profile="octopus-drift"] img:first-child{animation-name:octopusBody!important}
-[data-swim-key="manta-ray"] img:first-child{animation-name:mantaWingBody!important}
-[data-swim-key="dolphin"] img:first-child{animation-name:dolphinKickBody!important}
-[data-swim-key="dugong"] img:first-child{animation-name:dugongKickBody!important}
-[data-swim-profile="cetacean-cruise"] img:first-child{animation-name:cetaceanBody!important}
-[data-swim-profile="shark-cruise"] img:first-child{animation-name:sharkBody!important}
-[data-swim-profile="gentle-cruise"] img:first-child{animation-name:gentleBody!important}
+[data-commemorative][data-swim-profile="turtle-stroke"]:not([data-swim-active="1"]) img:first-child,[data-commemorative][data-swim-profile="rigid-glide"]:not([data-swim-active="1"]) img:first-child,[data-commemorative][data-swim-profile="rigid-cruise"]:not([data-swim-active="1"]) img:first-child,[data-commemorative][data-swim-profile="shark-cruise"]:not([data-swim-active="1"]) img:first-child,[data-commemorative][data-swim-profile="cetacean-cruise"]:not([data-swim-active="1"]) img:first-child{animation:none!important;transform:none!important;will-change:auto!important}
+[data-commemorative][data-swim-profile="reef-dart"] img:first-child{animation-name:reefBody!important}
+[data-commemorative][data-swim-profile="turtle-stroke"][data-swim-active="1"] img:first-child{animation-name:turtleStrokeBody!important}
+[data-commemorative][data-swim-profile="sunfish-scull"] img:first-child{animation-name:sunfishBody!important}
+[data-commemorative][data-swim-profile="octopus-drift"] img:first-child{animation-name:octopusBody!important}
+[data-commemorative][data-swim-key="manta-ray"][data-swim-active="1"] img:first-child{animation-name:mantaWingBody!important}
+[data-commemorative][data-swim-key="dolphin"][data-swim-active="1"] img:first-child{animation-name:dolphinKickBody!important}
+[data-commemorative][data-swim-key="dugong"][data-swim-active="1"] img:first-child{animation-name:dugongKickBody!important}
+[data-commemorative][data-swim-profile="cetacean-cruise"][data-swim-active="1"] img:first-child{animation-name:cetaceanBody!important}
+[data-commemorative][data-swim-profile="shark-cruise"][data-swim-active="1"] img:first-child{animation-name:sharkBody!important}
+[data-commemorative][data-swim-profile="gentle-cruise"] img:first-child{animation-name:gentleBody!important}
 @keyframes milestoneFishRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(0deg)}42%{transform:translate3d(calc(var(--swim-travel)*.55),calc(var(--swim-bob)*-1),0) rotateY(0deg)}49%{transform:translate3d(calc(var(--swim-travel)*.62),calc(var(--swim-bob)*-.5),0) rotateY(180deg)}91%{transform:translate3d(calc(var(--swim-travel)*-.55),var(--swim-bob),0) rotateY(180deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(360deg)}}
 @keyframes milestonePassRoute{0%{transform:translate3d(-92vw,0,0);opacity:0}8%{transform:translate3d(-84vw,calc(var(--swim-bob)*-.08),0);opacity:1}38%{transform:translate3d(-28vw,calc(var(--swim-bob)*-.4),0);opacity:1}72%{transform:translate3d(38vw,calc(var(--swim-bob)*-.15),0);opacity:1}94%{transform:translate3d(84vw,calc(var(--swim-bob)*.7),0);opacity:1}100%{transform:translate3d(92vw,var(--swim-bob),0);opacity:0}}
 @keyframes milestoneDriftRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}25%{transform:translate3d(0,calc(var(--swim-bob)*-1),0) rotateZ(1.5deg)}50%{transform:translate3d(calc(var(--swim-travel)*.25),0,0) rotateZ(0deg)}75%{transform:translate3d(0,var(--swim-bob),0) rotateZ(-1.5deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}}
 @keyframes reefBody{0%,100%{transform:rotate(-1deg) skewY(-1deg)}50%{transform:rotate(1.2deg) skewY(1.4deg)}}
 @keyframes turtleStrokeBody{0%,100%{transform:translateY(1%) rotate(-1.2deg) scaleY(.985)}35%{transform:translateY(-2.6%) rotate(.8deg) scaleY(1.018)}70%{transform:translateY(.2%) rotate(1.5deg) scaleY(.995)}}
 @keyframes mantaWingBody{0%,100%{transform:translateY(.5%) rotate(-.5deg) scaleY(.94)}50%{transform:translateY(-1.4%) rotate(.7deg) scaleY(1.055)}}
-@keyframes dolphinKickBody{0%,100%{transform:translateY(.8%) rotate(-1.1deg) scaleY(.992)}45%{transform:translateY(-1.5%) rotate(.9deg) scaleY(1.006)}75%{transform:translateY(-.3%) rotate(1.25deg) scaleY(.998)}}
-@keyframes dugongKickBody{0%,100%{transform:translateY(.7%) rotate(-.55deg) scaleY(.994)}50%{transform:translateY(-1%) rotate(.55deg) scaleY(1.004)}}
+@keyframes dolphinKickBody{0%,100%{transform:translateY(.8%) rotate(-1.1deg)}45%{transform:translateY(-1.5%) rotate(.9deg)}75%{transform:translateY(-.3%) rotate(1.25deg)}}
+@keyframes dugongKickBody{0%,100%{transform:translateY(.7%) rotate(-.55deg)}50%{transform:translateY(-1%) rotate(.55deg)}}
 @keyframes sunfishBody{0%,100%{transform:rotate(-1.4deg) scaleY(.985)}50%{transform:rotate(1.4deg) scaleY(1.015)}}
 @keyframes octopusBody{0%,100%{transform:translateY(2%) rotate(-2deg) scaleX(.985)}50%{transform:translateY(-3%) rotate(2.5deg) scaleX(1.02)}}
-@keyframes cetaceanBody{0%,100%{transform:translateY(.7%) rotate(-.55deg) scaleY(.996)}50%{transform:translateY(-.9%) rotate(.55deg) scaleY(1.004)}}
-@keyframes sharkBody{0%,100%{transform:translateY(.25%) skewY(-.8deg) rotate(-.35deg)}50%{transform:translateY(-.25%) skewY(.8deg) rotate(.35deg)}}
+@keyframes cetaceanBody{0%,100%{transform:translateY(.7%) rotate(-.55deg)}50%{transform:translateY(-.9%) rotate(.55deg)}}
+@keyframes sharkBody{0%,100%{transform:translateY(.25%) rotate(-.35deg)}50%{transform:translateY(-.25%) rotate(.35deg)}}
 @keyframes gentleBody{0%,100%{transform:translateY(0)}50%{transform:translateY(-1%)}}
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile],[data-commemorative][data-swim-profile] img:first-child{animation:none!important}}
 `;doc.head.appendChild(style);}

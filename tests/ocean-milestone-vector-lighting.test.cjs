@@ -2,7 +2,7 @@ const fs=require('node:fs');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 
-const source=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8');
+const source=fs.readFileSync('preview/ocean/real-fish/milestone-vector-lighting.js','utf8');
 const largeSpecies=['manta-ray','dolphin','hammerhead-shark','large-shark','dugong','minke-whale','orca','humpback-whale','whale-shark','blue-whale'];
 
 test('large milestone vectors use lightweight species-specific body lighting instead of flat single-color bodies',()=>{

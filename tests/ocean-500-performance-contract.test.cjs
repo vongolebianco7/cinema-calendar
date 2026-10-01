@@ -54,6 +54,6 @@ test('milestone animals remain DOM foreground and are not hidden into canvas',()
 test('1000-film far canvas is visually quieter while 500-film rendering keeps its established profile',()=>{
   assert.match(perf,/function farVisualProfile\(total\)/);
   assert.match(perf,/total>=1000\?\{scale:\.62,alpha:\.50\}:\{scale:\.82,alpha:\.80\}/);
-  assert.match(perf,/const profile=farVisualProfile\(state\.nodes\.length\)/);
-  assert.match(perf,/profile\.scale,profile\.alpha/);
+  assert.match(perf,/profile=farVisualProfile\(state\.nodes\.length\)/);
+  assert.match(perf,/drawImageFish\(ctx,item,metrics,t,profile\.scale,profile\.alpha\)/);
 });

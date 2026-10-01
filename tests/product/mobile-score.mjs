@@ -72,9 +72,6 @@ const my = observations.get('my-cinemap');
 emit('MY-08',0.5,my.overflow,detail('my-cinemap'));
 emit('MY-09',0.5,my.loaded&&my.clean,detail('my-cinemap'));
 
-const critic = observations.get('critic');
-emit('CRIT-06',0.5,critic.loaded&&critic.clean&&critic.overflow,detail('critic'));
-
 const mobilePass = [...observations.values()].every(x=>x.loaded&&x.clean&&x.overflow);
 emit('CROSS-MOBILE',5.0,mobilePass,JSON.stringify(Object.fromEntries(observations)));
 

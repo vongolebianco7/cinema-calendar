@@ -6,13 +6,13 @@ const enhancer=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','u
 const ecology=fs.readFileSync('preview/ocean/real-fish/ecology-state.js','utf8');
 
 test('Photo Ocean loads layout, performance renderer, milestone rewards and atlas before correction module',()=>{
-  assert.match(ecology,/population-layout\.js\?v=1/);
-  assert.match(ecology,/performance-renderer\.js\?v=3/);
-  assert.match(ecology,/milestone-rewards\.js\?v=4/);
+  assert.match(ecology,/population-layout\.js\?v=2/);
+  assert.match(ecology,/performance-renderer\.js\?v=4/);
+  assert.match(ecology,/milestone-rewards\.js\?v=5/);
   assert.match(ecology,/milestone-atlas\.js\?v=2/);
-  assert.match(ecology,/milestone-swim\.js\?v=3/);
+  assert.match(ecology,/milestone-swim\.js\?v=6/);
   assert.match(ecology,/ordinary-species-motion\.js\?v=2/);
-  assert.match(ecology,/photo-four-points\.js\?v=10/);
+  assert.match(ecology,/photo-four-points\.js\?v=12/);
 });
 
 test('Ocean message is moved below the sea, never overlaid on it',()=>{
@@ -92,4 +92,16 @@ test('milestone rewards replace ordinary creatures without changing node count a
   assert.match(enhancer,/occupiedMilestoneIndices/);
   assert.match(enhancer,/findMilestoneNodeIndex/);
   assert.match(enhancer,/renderCommemorative\(reward,nodes\[index\],manifest\)/);
+});
+
+test('milestone habitats can occupy the lower seabed instead of being capped above it',()=>{
+  assert.match(enhancer,/case'seabed-rock':x=58;y=76/);
+  assert.match(enhancer,/case'shallow-seagrass':x=16;y=70/);
+  assert.match(enhancer,/Math\.min\(84,y\)/);
+});
+
+test('moving milestone megafauna avoid expensive drop shadows on iPhone',()=>{
+  assert.match(enhancer,/PASS_THROUGH_MILESTONES=new Set/);
+  assert.match(enhancer,/function milestoneUsesPassThrough\(key\)/);
+  assert.match(enhancer,/milestoneUsesPassThrough\(reward\.key\)\?'none'/);
 });

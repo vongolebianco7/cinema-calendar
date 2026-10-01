@@ -41,3 +41,16 @@ test('dense oceans populate the lower third in clustered habitats while preservi
     assert.ok(lowerCells.size<=12,`${count} films spreads lower-third life across too many cells: ${lowerCells.size}`);
   }
 });
+
+test('1000-film oceans read as mature depth rather than a crowded flat wall',()=>{
+  const points=layoutPopulation(1000);
+  assert.equal(points.length,1000);
+  const far=points.filter(p=>p.depth==='far').length;
+  const near=points.filter(p=>p.depth==='near').length;
+  const lower=points.filter(p=>p.y>=70).length;
+  const occupiedCells=new Set(points.map(p=>`${Math.floor(p.x/10)}:${Math.floor(p.y/10)}`));
+  assert.ok(far>=700,`1000-film far layer is too sparse: ${far}`);
+  assert.ok(near<=60,`1000-film near layer is too crowded: ${near}`);
+  assert.ok(lower>=100,`1000-film lower habitat is underused: ${lower}`);
+  assert.ok(occupiedCells.size>=75,`1000-film ocean uses too little of the available water column: ${occupiedCells.size} cells`);
+});

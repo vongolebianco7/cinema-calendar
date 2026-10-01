@@ -85,15 +85,18 @@ test('octopus and gentle drifters stay on local drift routes instead of pass-thr
   assert.match(src,/data-swim-profile="gentle-cruise"[^}]*animation-name:milestoneDriftRoute/s);
 });
 
-test('milestone size hierarchy keeps whales larger while rigid specials stay below airplane-like scale',()=>{
+test('milestone size hierarchy keeps megafauna dominant while articulated specials remain readable',()=>{
   const src=loadPhotoSource();
   assert.match(src,/function milestoneWidthPercent\(/);
   assert.match(src,/const MILESTONE_WIDTH_CAP=/);
   const caps=Object.fromEntries([...src.matchAll(/(?:^|,)['\"]?([a-z-]+)['\"]?:(\d+(?:\.\d+)?)/g)].map(m=>[m[1],Number(m[2])]));
-  assert.ok(caps['blue-whale']>caps['minke-whale']);
-  assert.ok(caps['humpback-whale']>caps.dolphin);
-  assert.ok(caps['manta-ray']<=18);
-  assert.ok(caps.dolphin<=14);
+  assert.ok(caps['blue-whale']>=60);
+  assert.ok(caps['humpback-whale']>=50);
+  assert.ok(caps['whale-shark']>=50);
+  assert.ok(caps['blue-whale']>=caps.dolphin*3);
+  assert.ok(caps['manta-ray']>=24&&caps['manta-ray']<=28);
+  assert.ok(caps.dolphin>=18&&caps.dolphin<=22);
+  assert.ok(caps.dugong>=18&&caps.dugong<=22);
   assert.ok(caps['large-shark']<=20);
   assert.match(src,/Math\.min\(cap,/);
 });

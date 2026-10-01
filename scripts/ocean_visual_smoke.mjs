@@ -89,8 +89,8 @@ async function runScenario(count){
     if(!result.fpsHidden)failures.push('FPS diagnostics must stay hidden outside debug mode');
     if(count===500){
       if(!result.perf.active)failures.push('500-preview must activate hybrid renderer');
-      if(result.perf.domCount>40)failures.push(`500-preview DOM fish must be <=40, got ${result.perf.domCount}`);
-      if(result.perf.canvasCount<450)failures.push(`500-preview canvas population must carry most fish, got ${result.perf.canvasCount}`);
+      if(result.perf.domCount>28)failures.push(`500-preview DOM fish must be <=28, got ${result.perf.domCount}`);
+      if(result.perf.canvasCount<465)failures.push(`500-preview canvas population must carry most fish, got ${result.perf.canvasCount}`);
       if(result.visualPopulation<490)failures.push(`500-preview visual population must remain near 500, got ${result.visualPopulation}`);
       if(result.solitaryCount<25||result.solitaryCount>50)failures.push(`500-preview solitary creatures must be 25-50, got ${result.solitaryCount}`);
       if(result.lowerThirdCount<25)failures.push(`500-preview lower third must contain at least 25 creatures, got ${result.lowerThirdCount}`);

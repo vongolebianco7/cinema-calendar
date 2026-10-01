@@ -1,0 +1,53 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const test = require('node:test');
+const assert = require('node:assert/strict');
+
+function loadRewards() {
+  const source = fs.readFileSync('preview/ocean/real-fish/milestone-rewards.js', 'utf8');
+  const context = { window: {} };
+  vm.runInNewContext(source, context);
+  return context.window.CinemapOceanMilestoneRewards;
+}
+
+function loadManifest() {
+  return JSON.parse(fs.readFileSync('preview/ocean/real-fish/milestone-assets.json', 'utf8'));
+}
+
+const APPROVED = [
+  'clownfish', 'sea-turtle', 'ocean-sunfish', 'giant-octopus', 'manta-ray',
+  'dolphin', 'hammerhead-shark', 'large-shark', 'dugong', 'minke-whale',
+  'orca', 'humpback-whale', 'whale-shark', 'blue-whale'
+];
+
+test('milestone asset catalog is exactly the approved 14 species', () => {
+  const keys = Object.keys(loadManifest().species).sort();
+  assert.deepEqual(keys, APPROVED.slice().sort());
+  assert.equal(keys.includes('seahorse'), false);
+});
+
+test('1000-film rewards expose all 14 approved milestone species and no rejected species', () => {
+  const keys = [...new Set(Array.from(loadRewards().rewardsForCount(1000), reward => reward.key))].sort();
+  assert.deepEqual(keys, APPROVED.slice().sort());
+  assert.equal(keys.includes('seahorse'), false);
+});
+
+test('clownfish presentation is decisively smaller than large milestone animals', () => {
+  const species = loadManifest().species;
+  assert.ok(species.clownfish.presentationScale <= 0.35, 'clownfish must stay genuinely tiny');
+  assert.ok(species['sea-turtle'].presentationScale >= species.clownfish.presentationScale * 4);
+  assert.ok(species.dolphin.presentationScale >= species.clownfish.presentationScale * 5);
+  assert.ok(species['blue-whale'].presentationScale >= species.clownfish.presentationScale * 10);
+});
+
+test('rigid swimmers use straight-pose motion families instead of body-bending families', () => {
+  const swim = fs.readFileSync('preview/ocean/real-fish/milestone-swim.js', 'utf8');
+  for (const expression of [
+    /'manta-ray':\{family:'rigid-glide'/,
+    /dolphin:\{family:'rigid-cruise'/,
+    /dugong:\{family:'rigid-cruise'/,
+    /'humpback-whale':\{family:'cetacean-cruise'/,
+    /'blue-whale':\{family:'cetacean-cruise'/
+  ]) assert.match(swim, expression);
+  assert.doesNotMatch(swim, /body-bend|spine-bend|curveBody|bendBody/i);
+});

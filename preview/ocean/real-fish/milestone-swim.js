@@ -25,21 +25,18 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 [data-commemorative][data-swim-profile="octopus-drift"],[data-commemorative][data-swim-profile="gentle-cruise"]{animation-name:milestoneDriftRoute!important}
 [data-commemorative][data-swim-active="1"]{animation-name:milestonePassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:cubic-bezier(.45,0,.55,1)!important;animation-iteration-count:infinite!important;will-change:transform}
 [data-commemorative][data-swim-key="sea-turtle"][data-swim-active="1"]{animation-name:turtlePassRoute!important}
-[data-commemorative][data-swim-key="manta-ray"][data-swim-active="1"]{animation-name:mantaPassRoute!important}
-[data-commemorative][data-swim-key="dolphin"][data-swim-active="1"]{animation-name:dolphinPassRoute!important}
-[data-commemorative][data-swim-key="dugong"][data-swim-active="1"]{animation-name:dugongPassRoute!important}
+[data-commemorative][data-swim-key="manta-ray"][data-swim-active="1"]{animation-name:articulatedPassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;will-change:transform}
+[data-commemorative][data-swim-key="dolphin"][data-swim-active="1"]{animation-name:articulatedPassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;will-change:transform}
+[data-commemorative][data-swim-key="dugong"][data-swim-active="1"]{animation-name:articulatedPassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;will-change:transform}
 [data-commemorative][data-swim-profile="cetacean-cruise"][data-swim-active="1"]{animation-name:cetaceanPassRoute!important}
 [data-commemorative][data-swim-profile="shark-cruise"][data-swim-active="1"]{animation-name:sharkPassRoute!important}
-[data-commemorative][data-swim-key="manta-ray"],[data-commemorative][data-swim-key="dolphin"],[data-commemorative][data-swim-key="dugong"]{animation:none!important;transform:none!important;will-change:auto!important}
 [data-commemorative][data-swim-profile="turtle-stroke"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="rigid-glide"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="rigid-cruise"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="shark-cruise"]:not([data-swim-active="1"]),[data-commemorative][data-swim-profile="cetacean-cruise"]:not([data-swim-active="1"]){animation:none!important;transform:none!important;will-change:auto!important}
 .milestoneAtlasCreature,.milestoneAtlasCreature > img{animation:none!important;transform:none!important;will-change:auto!important}
 @keyframes milestoneFishRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(0deg)}42%{transform:translate3d(calc(var(--swim-travel)*.55),calc(var(--swim-bob)*-1),0) rotateY(0deg)}49%{transform:translate3d(calc(var(--swim-travel)*.62),calc(var(--swim-bob)*-.5),0) rotateY(180deg)}91%{transform:translate3d(calc(var(--swim-travel)*-.55),var(--swim-bob),0) rotateY(180deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(360deg)}}
 @keyframes milestoneDriftRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}25%{transform:translate3d(0,calc(var(--swim-bob)*-1),0) rotateZ(1.5deg)}50%{transform:translate3d(calc(var(--swim-travel)*.25),0,0) rotateZ(0deg)}75%{transform:translate3d(0,var(--swim-bob),0) rotateZ(-1.5deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}}
 @keyframes milestonePassRoute{0%{transform:translate3d(-2vw,0,0)}50%{transform:translate3d(2vw,-.12vh,0)}100%{transform:translate3d(-2vw,0,0)}}
 @keyframes turtlePassRoute{0%{transform:translate3d(-1.5vw,.08vh,0)}50%{transform:translate3d(1.5vw,-.18vh,0)}100%{transform:translate3d(-1.5vw,.08vh,0)}}
-@keyframes mantaPassRoute{0%{transform:translate3d(-2vw,0,0)}50%{transform:translate3d(2vw,-.1vh,0)}100%{transform:translate3d(-2vw,0,0)}}
-@keyframes dolphinPassRoute{0%{transform:translate3d(-2.5vw,.05vh,0)}50%{transform:translate3d(2.5vw,-.15vh,0)}100%{transform:translate3d(-2.5vw,.05vh,0)}}
-@keyframes dugongPassRoute{0%{transform:translate3d(-1.5vw,.04vh,0)}50%{transform:translate3d(1.5vw,-.08vh,0)}100%{transform:translate3d(-1.5vw,.04vh,0)}}
+@keyframes articulatedPassRoute{0%{transform:translate3d(-.6vw,0,0)}50%{transform:translate3d(.6vw,0,0)}100%{transform:translate3d(-.6vw,0,0)}}
 @keyframes cetaceanPassRoute{0%{transform:translate3d(-2.5vw,.04vh,0)}50%{transform:translate3d(2.5vw,-.1vh,0)}100%{transform:translate3d(-2.5vw,.04vh,0)}}
 @keyframes sharkPassRoute{0%{transform:translate3d(-3vw,0,0)}50%{transform:translate3d(3vw,-.06vh,0)}100%{transform:translate3d(-3vw,0,0)}}
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile]{animation:none!important}}

@@ -70,8 +70,9 @@ async function runScenario(count){
       const logicalCount=perf.active?perf.totalCount:creatures.length;
       const expectedMilestones=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(logicalCount)?.length??commemorative.length;
       const cells=new Set(creatures.map(el=>`${Math.floor(parseFloat(el.style.left||'0')/10)}:${Math.floor(parseFloat(el.style.top||'0')/10)}`));
+      const lowerThirdCount=creatures.filter(el=>parseFloat(el.style.top||'0')>=70).length;
       const fps=document.querySelector('#fps');
-      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,ordinarySpeciesCount:ordinarySpeciesIds.length,ordinarySpeciesIds,ordinaryAssetCount:ordinaryAssetSrcs.length,ordinaryAssetSrcs,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
+      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,lowerThirdCount,ordinarySpeciesCount:ordinarySpeciesIds.length,ordinarySpeciesIds,ordinaryAssetCount:ordinaryAssetSrcs.length,ordinaryAssetSrcs,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
     });
     const frameStats=await page.evaluate(async()=>{const stamps=[];await new Promise(resolve=>{const start=performance.now();function step(t){stamps.push(t);if(t-start>=1200)return resolve();requestAnimationFrame(step)}requestAnimationFrame(step)});const gaps=stamps.slice(1).map((t,i)=>t-stamps[i]);return{frames:stamps.length,maxGap:gaps.length?Math.max(...gaps):0,avgGap:gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:0}});
     await page.screenshot({path:`artifacts/mobile-smoke/ocean-ecosystem-${count}.png`,fullPage:true});
@@ -92,7 +93,8 @@ async function runScenario(count){
       if(result.perf.canvasCount<450)failures.push(`500-preview canvas population must carry most fish, got ${result.perf.canvasCount}`);
       if(result.visualPopulation<490)failures.push(`500-preview visual population must remain near 500, got ${result.visualPopulation}`);
       if(result.solitaryCount<25||result.solitaryCount>50)failures.push(`500-preview solitary creatures must be 25-50, got ${result.solitaryCount}`);
-      if(result.occupiedCells>60)failures.push(`500-preview must preserve open-water zones, occupied cells=${result.occupiedCells}`);
+      if(result.lowerThirdCount<25)failures.push(`500-preview lower third must contain at least 25 creatures, got ${result.lowerThirdCount}`);
+      if(result.occupiedCells>68)failures.push(`500-preview must preserve open-water zones while using lower habitat, occupied cells=${result.occupiedCells}`);
       if(frameStats.frames<20)failures.push(`500-preview animation stalled: ${JSON.stringify(frameStats)}`);
     }
     if(!result.hudBelowOcean)failures.push('message/HUD overlaps the ocean');
@@ -103,7 +105,7 @@ async function runScenario(count){
     if(badResponses.length)failures.push(`bad responses: ${badResponses.map(x=>`${x.status}:${x.url}`).join(',')}`);
     failures.push(...errors);
     if(failures.length)throw new Error(`${failures.join('; ')} | metrics=${JSON.stringify({result,frameStats})}`);
-    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
+    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, lower=${result.lowerThirdCount}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
   }finally{await context.close()}
 }
 

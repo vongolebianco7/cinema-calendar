@@ -11,6 +11,7 @@ function loadRewards() {
 }
 
 function loadSwimSource(){return fs.readFileSync('preview/ocean/real-fish/milestone-swim.js','utf8');}
+function loadPhotoSource(){return fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');}
 
 function keysAt(count) {return Array.from(loadRewards().rewardsForCount(count), (reward) => reward.key);}
 function rewardsUnlockedAt(count) {return Array.from(loadRewards().rewardsForCount(count)).filter((reward) => reward.unlockAt === count);}
@@ -63,6 +64,26 @@ test('manta dolphin and dugong use rigid-body swim profiles with no body-bending
   assert.match(src,/data-swim-profile="rigid-cruise"/);
   assert.doesNotMatch(src,/cetaceanPlayBody/);
   assert.doesNotMatch(src,/rayBody/);
+});
+
+test('non-fish milestone animals do not all use the same instant fish flip turn',()=>{
+  const src=loadSwimSource();
+  assert.match(src,/milestoneCetaceanRoute/);
+  assert.match(src,/milestoneGlideRoute/);
+  assert.match(src,/milestoneDriftRoute/);
+  assert.match(src,/data-swim-profile="cetacean-cruise"[^}]*animation-name:milestoneCetaceanRoute/s);
+  assert.match(src,/data-swim-profile="octopus-drift"[^}]*animation-name:milestoneDriftRoute/s);
+  assert.doesNotMatch(src,/\[data-commemorative\]\[data-swim-profile\]\{animation-name:milestoneRoute/);
+});
+
+test('milestone size hierarchy keeps whales visibly larger than octopus and dolphin',()=>{
+  const src=loadPhotoSource();
+  assert.match(src,/function milestoneWidthPercent\(/);
+  assert.match(src,/MILESTONE_VISUAL_SCALE=.*'giant-octopus':0\.82/);
+  assert.match(src,/'minke-whale':1\.35/);
+  assert.match(src,/'humpback-whale':1\.5/);
+  assert.match(src,/'blue-whale':1\.7/);
+  assert.match(src,/Math\.min\(44,/);
 });
 
 test('hero rewards contain only hero-role animals', () => {

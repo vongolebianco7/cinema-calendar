@@ -13,6 +13,13 @@ test('large milestone vectors use lightweight species-specific body lighting ins
   for(const key of largeSpecies) assert.ok(source.includes(`'${key}':{light:`),key);
 });
 
+test('large milestone vectors add a lightweight highlight skin and edge definition without changing silhouette',()=>{
+  assert.match(source,/const highlight=primary\.cloneNode\(false\)/);
+  assert.match(source,/highlight\.setAttribute\('data-ocean-highlight','body'\)/);
+  assert.match(source,/primary\.setAttribute\('stroke',profile\.outline\)/);
+  assert.match(source,/primary\.setAttribute\('stroke-width','0\.8'\)/);
+});
+
 test('vector lighting avoids blur and drop-shadow effects on moving milestone animals',()=>{
   assert.doesNotMatch(source,/feGaussianBlur|feDropShadow|drop-shadow\(/);
 });

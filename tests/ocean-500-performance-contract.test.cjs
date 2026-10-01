@@ -7,7 +7,7 @@ const photo=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8
 
 test('500 fish uses canvas-backed mid/background layers with a small DOM foreground cap',()=>{
   assert.match(perf,/canvas/);
-  assert.match(perf,/MAX_DOM_FISH\s*=\s*40/);
+  assert.match(perf,/MAX_DOM_FISH\s*=\s*28/);
   assert.match(perf,/midCanvas/);
   assert.match(perf,/farCanvas/);
 });
@@ -16,8 +16,8 @@ test('animation is centralized in one RAF-driven tick and throttles dense layers
   assert.match(perf,/const tick=t=>/);
   assert.match(perf,/state\.raf=requestAnimationFrame\(tick\)/);
   assert.doesNotMatch(perf,/setInterval\(/);
-  assert.match(perf,/frame\s*%\s*18/);
-  assert.match(perf,/frame\s*%\s*36/);
+  assert.match(perf,/frame\s*%\s*60/);
+  assert.match(perf,/frame\s*%\s*120/);
   assert.match(perf,/MOBILE_DPR_CAP\s*=\s*1\.25/);
 });
 

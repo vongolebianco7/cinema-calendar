@@ -66,14 +66,23 @@ test('manta dolphin and dugong use rigid-body swim profiles with no body-bending
   assert.doesNotMatch(src,/rayBody/);
 });
 
-test('non-fish milestone animals do not all use the same instant fish flip turn',()=>{
+test('large swimmers, dolphin, manta and turtle pass through without turning inside the frame',()=>{
   const src=loadSwimSource();
-  assert.match(src,/milestoneCetaceanRoute/);
-  assert.match(src,/milestoneGlideRoute/);
-  assert.match(src,/milestoneDriftRoute/);
-  assert.match(src,/data-swim-profile="cetacean-cruise"[^}]*animation-name:milestoneCetaceanRoute/s);
+  assert.match(src,/milestonePassRoute/);
+  assert.match(src,/data-swim-profile="turtle-stroke"[^}]*animation-name:milestonePassRoute/s);
+  assert.match(src,/data-swim-profile="rigid-glide"[^}]*animation-name:milestonePassRoute/s);
+  assert.match(src,/data-swim-profile="rigid-cruise"[^}]*animation-name:milestonePassRoute/s);
+  assert.match(src,/data-swim-profile="shark-cruise"[^}]*animation-name:milestonePassRoute/s);
+  assert.match(src,/data-swim-profile="cetacean-cruise"[^}]*animation-name:milestonePassRoute/s);
+  const pass=src.match(/@keyframes milestonePassRoute\{([^}]|\}(?!\n@keyframes))*\}/s)?.[0]||'';
+  assert.ok(pass,'missing pass-through keyframes');
+  assert.doesNotMatch(pass,/rotateY\(/);
+});
+
+test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{
+  const src=loadSwimSource();
   assert.match(src,/data-swim-profile="octopus-drift"[^}]*animation-name:milestoneDriftRoute/s);
-  assert.doesNotMatch(src,/\[data-commemorative\]\[data-swim-profile\]\{animation-name:milestoneRoute/);
+  assert.match(src,/data-swim-profile="gentle-cruise"[^}]*animation-name:milestoneDriftRoute/s);
 });
 
 test('milestone size hierarchy keeps whales visibly larger than octopus and dolphin',()=>{

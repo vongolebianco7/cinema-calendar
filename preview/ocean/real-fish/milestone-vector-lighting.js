@@ -1,35 +1,32 @@
 (function(root){'use strict';
 const SVG_NS='http://www.w3.org/2000/svg';
-const NATURAL_ATLAS='optimized/milestone-creatures-v3.webp';
-const NATURAL_CROPS={
-  'manta-ray':[1.24,29.989,23.732,23.224],
-  'dolphin':[25.93,32.694,25.028,22.322],
-  'hammerhead-shark':[51.127,34.047,24.183,20.519],
-  'large-shark':[75.423,32.244,23.393,22.661],
-  'dugong':[0.395,56.257,23.337,20.406],
-  'minke-whale':[24.972,58.399,27.396,16.46],
-  'orca':[51.522,53.326,23.168,25.254],
-  'humpback-whale':[75.028,58.061,24.859,21.984],
-  'whale-shark':[1.184,75.761,28.016,22.999],
-  'blue-whale':[29.707,79.369,42.334,18.828]
-};
 const LIGHTING_PROFILES={
-  'manta-ray':{light:'#58798a',mid:'#3d5d70',shadow:'#263e4d',outline:'#223746'},
-  'dolphin':{light:'#a4bfca',mid:'#6f93a4',shadow:'#456574',outline:'#395866'},
-  'hammerhead-shark':{light:'#91a7b2',mid:'#667e8c',shadow:'#465d69',outline:'#344b56'},
-  'large-shark':{light:'#869eaa',mid:'#5a7482',shadow:'#3d5561',outline:'#314751'},
-  'dugong':{light:'#b7bbb5',mid:'#8b928d',shadow:'#666d69',outline:'#555d59'},
-  'minke-whale':{light:'#8fa9b4',mid:'#607b89',shadow:'#405965',outline:'#354d59'},
-  'orca':{light:'#46535a',mid:'#172229',shadow:'#080e12',outline:'#05090b'},
-  'humpback-whale':{light:'#91a5ad',mid:'#627780',shadow:'#43555d',outline:'#35474e'},
-  'whale-shark':{light:'#7397a2',mid:'#4b7581',shadow:'#315762',outline:'#284a54'},
-  'blue-whale':{light:'#8fb5c4',mid:'#5e8799',shadow:'#3d6677',outline:'#315767'}
+  'manta-ray':{light:'#678a9a',mid:'#405f70',shadow:'#233c4b',outline:'#1d3340'},
+  'dolphin':{light:'#b1cbd5',mid:'#7095a5',shadow:'#3d6171',outline:'#31515f'},
+  'hammerhead-shark':{light:'#a0b5be',mid:'#687f8b',shadow:'#405762',outline:'#304650'},
+  'large-shark':{light:'#98adb7',mid:'#617b88',shadow:'#3a535e',outline:'#2c424c'},
+  'dugong':{light:'#c3c6c0',mid:'#919993',shadow:'#626b67',outline:'#515955'},
+  'minke-whale':{light:'#9eb7c1',mid:'#66818e',shadow:'#3a5662',outline:'#304a55'},
+  'orca':{light:'#53636b',mid:'#18252c',shadow:'#070d10',outline:'#04080a'},
+  'humpback-whale':{light:'#a1b1b8',mid:'#687d86',shadow:'#3f555e',outline:'#344850'},
+  'whale-shark':{light:'#84a7b0',mid:'#507984',shadow:'#2c5660',outline:'#234751'},
+  'blue-whale':{light:'#a0c2cf',mid:'#648b9c',shadow:'#386575',outline:'#2d5766'}
+};
+const DETAIL_MARKUP={
+  'manta-ray':'<g data-ocean-details="manta" fill="none" stroke="#b6d1d8" stroke-opacity=".48" stroke-width="1.15" stroke-linecap="round"><path d="M42 67C76 61 100 47 126 28"/><path d="M258 67C224 61 200 47 174 28"/><path d="M150 53C149 63 149 72 151 86"/></g>',
+  'dolphin':'<g data-ocean-details="dolphin" fill="none" stroke-linecap="round"><path d="M61 68C105 78 164 77 218 66" stroke="#d9edf2" stroke-opacity=".5" stroke-width="1.2"/><path d="M72 61c-5 3-8 7-10 12" stroke="#314f5d" stroke-opacity=".72" stroke-width="1.1"/><path d="M49 66c9 1 15 0 22-3" stroke="#294650" stroke-opacity=".62" stroke-width="1"/></g>',
+  'hammerhead-shark':'<g data-ocean-details="hammerhead" fill="none" stroke-linecap="round"><path d="M49 61l9-4M50 66l10-2M50 71l10 1M51 76l9 4" stroke="#344c57" stroke-opacity=".82" stroke-width="1.15"/><path d="M62 70C112 79 176 79 235 68" stroke="#d3e0e4" stroke-opacity=".34" stroke-width="1"/></g>',
+  'large-shark':'<g data-ocean-details="shark" fill="none" stroke-linecap="round"><path d="M56 60l10-4M57 65l11-2M58 70l10 1M59 75l9 4" stroke="#2d4651" stroke-opacity=".84" stroke-width="1.2"/><path d="M69 70C119 79 181 79 238 68" stroke="#d9e6e9" stroke-opacity=".36" stroke-width="1.05"/><path d="M39 69c8 3 17 4 25 2" stroke="#253b45" stroke-opacity=".72" stroke-width="1"/></g>',
+  'dugong':'<g data-ocean-details="dugong" fill="none" stroke-linecap="round"><path d="M55 73C104 85 170 88 230 77" stroke="#e0ddd4" stroke-opacity=".38" stroke-width="1.15"/><path d="M34 68c9 5 19 6 29 4" stroke="#505954" stroke-opacity=".68" stroke-width="1.1"/><path d="M72 55C118 46 174 50 218 66" stroke="#eef0e9" stroke-opacity=".22" stroke-width="1"/></g>',
+  'minke-whale':'<g data-ocean-details="minke" fill="none" stroke-linecap="round"><path d="M63 72C121 84 204 85 281 70" stroke="#dbe8ec" stroke-opacity=".4" stroke-width="1.05"/><path d="M47 67c12 5 26 7 39 6M50 72c12 5 25 7 38 6M54 77c11 4 23 6 35 5" stroke="#304a55" stroke-opacity=".62" stroke-width=".9"/></g>',
+  'orca':'<g data-ocean-details="orca" fill="none" stroke-linecap="round"><path d="M92 77C145 87 217 84 281 69" stroke="#91adb8" stroke-opacity=".28" stroke-width="1"/><path d="M45 70c10 3 19 4 28 2" stroke="#060b0d" stroke-opacity=".72" stroke-width="1.1"/></g>',
+  'humpback-whale':'<g data-ocean-details="humpback" fill="none" stroke-linecap="round"><path d="M66 78C133 91 226 91 318 74" stroke="#dce7e9" stroke-opacity=".34" stroke-width="1.05"/><path d="M48 72c14 7 30 10 47 10M52 77c14 7 29 10 44 10M57 82c13 6 27 9 41 9" stroke="#334a53" stroke-opacity=".55" stroke-width=".9"/></g>',
+  'whale-shark':'<g data-ocean-details="whale-shark" fill="none" stroke-linecap="round"><path d="M64 88C132 99 226 96 319 78" stroke="#d3e5e5" stroke-opacity=".32" stroke-width="1"/><path d="M46 72c11 4 22 5 34 3" stroke="#274c55" stroke-opacity=".66" stroke-width="1.1"/></g>',
+  'blue-whale':'<g data-ocean-details="blue-whale" fill="none" stroke-linecap="round"><path d="M72 82C145 96 251 94 347 77" stroke="#e0edf0" stroke-opacity=".36" stroke-width="1.05"/><path d="M49 73c16 8 34 11 53 11M53 78c15 7 32 10 50 10M58 83c14 6 30 9 47 9" stroke="#315766" stroke-opacity=".56" stroke-width=".9"/></g>'
 };
 function addStop(gradient,offset,color,opacity='1'){const stop=document.createElementNS(SVG_NS,'stop');stop.setAttribute('offset',offset);stop.setAttribute('stop-color',color);stop.setAttribute('stop-opacity',opacity);gradient.appendChild(stop)}
-function addVectorFallback(svg,primary,key,profile){const gradientId='oceanMilestoneLight-'+key,highlightId='oceanMilestoneHighlight-'+key;const defs=document.createElementNS(SVG_NS,'defs');const gradient=document.createElementNS(SVG_NS,'linearGradient');gradient.id=gradientId;gradient.setAttribute('x1','0');gradient.setAttribute('y1','0');gradient.setAttribute('x2','0');gradient.setAttribute('y2','1');gradient.setAttribute('data-ocean-lighting','body');addStop(gradient,'0%',profile.light);addStop(gradient,'48%',profile.mid);addStop(gradient,'100%',profile.shadow);const highlightGradient=document.createElementNS(SVG_NS,'linearGradient');highlightGradient.id=highlightId;highlightGradient.setAttribute('x1','0');highlightGradient.setAttribute('y1','0');highlightGradient.setAttribute('x2','0.85');highlightGradient.setAttribute('y2','1');highlightGradient.setAttribute('data-ocean-lighting','highlight');addStop(highlightGradient,'0%','#ffffff','.28');addStop(highlightGradient,'42%','#ffffff','.10');addStop(highlightGradient,'100%','#ffffff','0');defs.append(gradient,highlightGradient);svg.insertBefore(defs,svg.firstChild);primary.setAttribute('fill','url(#'+gradientId+')');primary.setAttribute('stroke',profile.outline);primary.setAttribute('stroke-width','0.8');primary.setAttribute('vector-effect','non-scaling-stroke');const highlight=primary.cloneNode(false);highlight.removeAttribute('stroke');highlight.setAttribute('fill','url(#'+highlightId+')');highlight.setAttribute('data-ocean-highlight','body');highlight.setAttribute('pointer-events','none');primary.insertAdjacentElement('afterend',highlight)}
-function addNaturalTexture(node,svg,key){const crop=NATURAL_CROPS[key];if(!crop)return false;const [x,y,w,h]=crop;const texture=document.createElement('span');const img=document.createElement('img');texture.className='milestoneNaturalTexture';texture.setAttribute('aria-hidden','true');Object.assign(texture.style,{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'100%',aspectRatio:String((2*w)/h),overflow:'hidden',pointerEvents:'none'});img.src=NATURAL_ATLAS;img.alt='';img.loading='eager';img.decoding='async';Object.assign(img.style,{position:'absolute',width:(10000/w)+'%',height:'auto',maxWidth:'none',left:(-100*x/w)+'%',top:(-100*y/h)+'%',pointerEvents:'none',userSelect:'none'});texture.appendChild(img);svg.insertAdjacentElement('afterend',texture);svg.style.opacity='0';node.dataset.renderQuality='natural-atlas-v3';return true}
-function enhance(node,key){const profile=LIGHTING_PROFILES[key];if(!profile||!node?.classList?.contains('milestoneVectorCreature'))return node;const svg=node.querySelector('svg'),primary=svg?.querySelector('path[fill]');if(!svg||!primary||node.dataset.renderQuality==='natural-atlas-v3')return node;addVectorFallback(svg,primary,key,profile);addNaturalTexture(node,svg,key);return node}
+function enhance(node,key){const profile=LIGHTING_PROFILES[key];if(!profile||!node?.classList?.contains('milestoneVectorCreature'))return node;const svg=node.querySelector('svg'),primary=svg?.querySelector('path[fill]');if(!svg||!primary||node.dataset.renderQuality==='illustrated-vector-v2')return node;const gradientId='oceanMilestoneLight-'+key,highlightId='oceanMilestoneHighlight-'+key;const defs=document.createElementNS(SVG_NS,'defs');const gradient=document.createElementNS(SVG_NS,'linearGradient');gradient.id=gradientId;gradient.setAttribute('x1','0');gradient.setAttribute('y1','0');gradient.setAttribute('x2','0');gradient.setAttribute('y2','1');addStop(gradient,'0%',profile.light);addStop(gradient,'45%',profile.mid);addStop(gradient,'100%',profile.shadow);const highlightGradient=document.createElementNS(SVG_NS,'linearGradient');highlightGradient.id=highlightId;highlightGradient.setAttribute('x1','0');highlightGradient.setAttribute('y1','0');highlightGradient.setAttribute('x2','.85');highlightGradient.setAttribute('y2','1');addStop(highlightGradient,'0%','#ffffff','.32');addStop(highlightGradient,'38%','#ffffff','.10');addStop(highlightGradient,'100%','#ffffff','0');defs.append(gradient,highlightGradient);svg.insertBefore(defs,svg.firstChild);primary.setAttribute('fill','url(#'+gradientId+')');primary.setAttribute('stroke',profile.outline);primary.setAttribute('stroke-width','.8');primary.setAttribute('vector-effect','non-scaling-stroke');const highlight=primary.cloneNode(false);highlight.removeAttribute('stroke');highlight.setAttribute('fill','url(#'+highlightId+')');highlight.setAttribute('opacity','.46');highlight.setAttribute('data-ocean-highlight','body');highlight.setAttribute('pointer-events','none');primary.insertAdjacentElement('afterend',highlight);if(DETAIL_MARKUP[key])svg.insertAdjacentHTML('beforeend',DETAIL_MARKUP[key]);node.dataset.renderQuality='illustrated-vector-v2';return node}
 function install(){const atlas=root.CinemapOceanMilestoneAtlas;if(!atlas||atlas.__lightingInstalled)return false;const original=atlas.createCreature.bind(atlas);atlas.createCreature=(key,manifest)=>enhance(original(key,manifest),key);atlas.__lightingInstalled=true;return true}
 install();
-root.CinemapOceanMilestoneLighting={NATURAL_ATLAS,NATURAL_CROPS,LIGHTING_PROFILES,enhance,install};
+root.CinemapOceanMilestoneLighting={LIGHTING_PROFILES,DETAIL_MARKUP,enhance,install};
 })(window);

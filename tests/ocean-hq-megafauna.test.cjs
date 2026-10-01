@@ -13,12 +13,24 @@ const HQ={
   'whale-shark':'assets/milestone-whale-shark-hq.webp',
   'blue-whale':'assets/milestone-blue-whale-hq.webp'
 };
+const ASSET_ROOT='preview/ocean/real-fish/';
 
 test('large whales and whale shark use direct high-resolution transparent assets',()=>{
   for(const [key,asset] of Object.entries(HQ)){
     const spec=manifest.species[key];
     assert.equal(spec.asset,asset,key+' must use the HQ direct asset');
     assert.equal(spec.assetAspect,3,key+' HQ asset is a 3:1 transparent sprite');
+  }
+});
+
+test('HQ megafauna assets are real decodable WebP files, not placeholder bytes',()=>{
+  for(const [key,asset] of Object.entries(HQ)){
+    const file=ASSET_ROOT+asset;
+    assert.equal(fs.existsSync(file),true,key+' HQ asset must exist');
+    const bytes=fs.readFileSync(file);
+    assert.ok(bytes.length>2048,key+' HQ asset must contain real image data');
+    assert.equal(bytes.subarray(0,4).toString('ascii'),'RIFF',key+' HQ asset must have RIFF header');
+    assert.equal(bytes.subarray(8,12).toString('ascii'),'WEBP',key+' HQ asset must have WEBP signature');
   }
 });
 

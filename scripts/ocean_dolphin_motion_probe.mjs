@@ -10,15 +10,19 @@ try{
   await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?preview=500',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
   await page.waitForFunction(()=>document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas'));
-  await page.waitForFunction(()=>document.querySelector('[data-milestone-key="dolphin"]')?.dataset.backgroundKeyed==='1');
+  await page.waitForFunction(()=>{
+    const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
+    return canvas?.closest('[data-milestone-key="dolphin"]')?.dataset.backgroundKeyed==='1';
+  });
   await page.waitForTimeout(250);
 
-  const dolphin=page.locator('[data-milestone-key="dolphin"]');
-  await dolphin.screenshot({path:'artifacts/dolphin-motion/frame-a.png'});
+  const dolphinCanvas=page.locator('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas').first();
+  const dolphinWrap=dolphinCanvas.locator('..');
+  await dolphinWrap.screenshot({path:'artifacts/dolphin-motion/frame-a.png'});
 
   const metrics=await page.evaluate(async()=>{
-    const wrap=document.querySelector('[data-milestone-key="dolphin"]');
-    const canvas=wrap?.querySelector('canvas.milestoneDeformedCanvas');
+    const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
+    const wrap=canvas?.closest('[data-milestone-key="dolphin"]');
     if(!wrap||!canvas)throw new Error('dolphin deformation canvas missing');
     const ctx=canvas.getContext('2d',{willReadFrequently:true});
     const snapshot=()=>{
@@ -52,7 +56,7 @@ try{
     };
   });
 
-  await dolphin.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
+  await dolphinWrap.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
   await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify(metrics,null,2)+'\n');
 
   const failures=[];

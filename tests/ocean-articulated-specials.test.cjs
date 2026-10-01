@@ -9,7 +9,7 @@ const population=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js',
 test('AI-like swimmers use continuous whole-body deformation instead of clipped appendage layers',()=>{
   const expected={
     'manta-ray':'wing-flex',
-    dolphin:'tail-flex-right',
+    dolphin:'tail-flex-left',
     dugong:'tail-flex-right',
     'whale-shark':'tail-flex-left',
     'humpback-whale':'tail-flex-left'
@@ -26,6 +26,16 @@ test('AI-like swimmers use continuous whole-body deformation instead of clipped 
   assert.match(atlas,/requestAnimationFrame/);
   assert.match(atlas,/spec\.deformation/);
   assert.match(atlas,/if\(spec\.asset&&spec\.deformation\)return createDeformedCreature/);
+});
+
+test('dolphin bends at the tail side and removes baked ocean background before deformation',()=>{
+  const dolphin=manifest.species.dolphin;
+  assert.equal(dolphin.deformation.profile,'tail-flex-left','dolphin tail is on the left side of its source image');
+  assert.equal(dolphin.deformation.chromaKey,true,'dolphin background must be keyed out before deformation');
+  assert.match(atlas,/createKeyedSource/);
+  assert.match(atlas,/getImageData/);
+  assert.match(atlas,/putImageData/);
+  assert.match(atlas,/chromaKey/);
 });
 
 test('deformation uses overlapping vertical slices so the animal stays visually continuous',()=>{

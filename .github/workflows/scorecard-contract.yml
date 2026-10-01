@@ -14,8 +14,10 @@ on:
       - 'tests/test_ci_touched_areas.py'
       - 'tests/test_map_ocean_metrics.py'
       - 'tests/test_data_compliance_metrics.py'
+      - 'tests/test_completeness_workflow.py'
       - 'tests/product/**'
       - '.github/workflows/scorecard-contract.yml'
+      - '.github/workflows/completeness-scorecard.yml'
   workflow_dispatch:
 
 permissions:
@@ -33,6 +35,6 @@ jobs:
         with:
           node-version: '22'
       - name: Run scorecard contract tests
-        run: python -m unittest tests.test_score_quality tests.test_quality_report tests.test_ci_touched_areas tests.test_map_ocean_metrics tests.test_data_compliance_metrics -v
+        run: python -m unittest tests.test_score_quality tests.test_quality_report tests.test_ci_touched_areas tests.test_map_ocean_metrics tests.test_data_compliance_metrics tests.test_completeness_workflow -v
       - name: Run browser metric harness contract
         run: node --test tests/product/metric-harness.test.mjs

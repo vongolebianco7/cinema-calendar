@@ -57,6 +57,22 @@ test('whales and whale shark render as unmistakable megafauna', () => {
   assert.ok(caps['whale-shark'] >= caps['large-shark'] * 1.8, 'whale shark must clearly exceed ordinary large shark scale');
 });
 
+test('manta, dolphin and dugong use the generated straight-pose files instead of atlas/vector art', () => {
+  const species = loadManifest().species;
+  const expected = {
+    'manta-ray': 'assets/milestone-manta-ray-v2.webp',
+    dolphin: 'assets/milestone-dolphin-v2.webp',
+    dugong: 'assets/milestone-dugong-v2.webp'
+  };
+  for (const [key, asset] of Object.entries(expected)) {
+    assert.equal(species[key].asset, asset, key + ' must point at generated asset');
+    assert.ok(fs.existsSync('preview/ocean/real-fish/' + asset), key + ' generated asset must exist');
+  }
+  const atlas = fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js', 'utf8');
+  assert.match(atlas, /if\(spec\.asset\)/, 'renderer must prefer direct per-species assets');
+  assert.match(atlas, /img\.src=spec\.asset/, 'renderer must wire direct asset URL');
+});
+
 test('rigid swimmers use straight-pose motion families instead of body-bending families', () => {
   const swim = fs.readFileSync('preview/ocean/real-fish/milestone-swim.js', 'utf8');
   for (const expression of [

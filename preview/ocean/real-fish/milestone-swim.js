@@ -18,11 +18,13 @@ const profiles={
 const fallback={family:'gentle-cruise',duration:18,travel:8,bob:3,body:2};
 function profileFor(key){return key&&profiles[key]?{key,...profiles[key]}:{key:key||'unknown',...fallback};}
 function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles'))return;const style=doc.createElement('style');style.id='oceanMilestoneSwimStyles';style.textContent=`
-[data-commemorative][data-swim-profile]{animation-duration:var(--swim-duration)!important;animation-timing-function:linear!important;animation-iteration-count:infinite!important;transform-origin:50% 50%;will-change:transform}
-[data-swim-profile="reef-dart"],[data-swim-profile="sunfish-scull"]{animation-name:milestoneFishRoute!important;animation-timing-function:ease-in-out!important}
-[data-swim-profile="turtle-stroke"],[data-swim-profile="rigid-glide"],[data-swim-profile="rigid-cruise"],[data-swim-profile="shark-cruise"],[data-swim-profile="cetacean-cruise"]{animation-name:milestonePassRoute!important}
-[data-swim-profile="octopus-drift"],[data-swim-profile="gentle-cruise"]{animation-name:milestoneDriftRoute!important;animation-timing-function:ease-in-out!important}
-[data-commemorative][data-swim-profile] img:first-child{animation-duration:var(--swim-body-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;transform-origin:50% 55%;will-change:transform}
+[data-commemorative][data-swim-profile]{transform-origin:50% 50%}
+[data-swim-profile="reef-dart"],[data-swim-profile="sunfish-scull"],[data-swim-profile="octopus-drift"],[data-swim-profile="gentle-cruise"]{animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important}
+[data-swim-profile="reef-dart"],[data-swim-profile="sunfish-scull"]{animation-name:milestoneFishRoute!important}
+[data-swim-profile="octopus-drift"],[data-swim-profile="gentle-cruise"]{animation-name:milestoneDriftRoute!important}
+[data-swim-active="1"]{animation-name:milestonePassRoute!important;animation-duration:var(--swim-duration)!important;animation-timing-function:linear!important;animation-iteration-count:infinite!important;will-change:transform}
+[data-swim-profile="turtle-stroke"]:not([data-swim-active="1"]),[data-swim-profile="rigid-glide"]:not([data-swim-active="1"]),[data-swim-profile="rigid-cruise"]:not([data-swim-active="1"]),[data-swim-profile="shark-cruise"]:not([data-swim-active="1"]),[data-swim-profile="cetacean-cruise"]:not([data-swim-active="1"]){animation:none!important;transform:none!important;will-change:auto!important}
+[data-commemorative][data-swim-profile] img:first-child{animation-duration:var(--swim-body-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important;transform-origin:50% 55%}
 [data-swim-profile="reef-dart"] img:first-child{animation-name:reefBody!important}
 [data-swim-profile="turtle-stroke"] img:first-child{animation-name:turtleBody!important}
 [data-swim-profile="sunfish-scull"] img:first-child{animation-name:sunfishBody!important}
@@ -33,7 +35,7 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 [data-swim-profile="gentle-cruise"] img:first-child{animation-name:gentleBody!important}
 .milestoneAtlasCreature img{animation:none!important;transform:none!important}
 @keyframes milestoneFishRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(0deg)}42%{transform:translate3d(calc(var(--swim-travel)*.55),calc(var(--swim-bob)*-1),0) rotateY(0deg)}49%{transform:translate3d(calc(var(--swim-travel)*.62),calc(var(--swim-bob)*-.5),0) rotateY(180deg)}91%{transform:translate3d(calc(var(--swim-travel)*-.55),var(--swim-bob),0) rotateY(180deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.55),0,0) rotateY(360deg)}}
-@keyframes milestonePassRoute{0%{transform:translate3d(-115vw,0,0);opacity:0}6%{opacity:1}48%{transform:translate3d(0,calc(var(--swim-bob)*-.45),0);opacity:1}94%{opacity:1}100%{transform:translate3d(115vw,var(--swim-bob),0);opacity:0}}
+@keyframes milestonePassRoute{0%{transform:translate3d(-92vw,0,0);opacity:0}7%{opacity:1}50%{transform:translate3d(0,calc(var(--swim-bob)*-.35),0);opacity:1}93%{opacity:1}100%{transform:translate3d(92vw,var(--swim-bob),0);opacity:0}}
 @keyframes milestoneDriftRoute{0%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}25%{transform:translate3d(0,calc(var(--swim-bob)*-1),0) rotateZ(1.5deg)}50%{transform:translate3d(calc(var(--swim-travel)*.25),0,0) rotateZ(0deg)}75%{transform:translate3d(0,var(--swim-bob),0) rotateZ(-1.5deg)}100%{transform:translate3d(calc(var(--swim-travel)*-.25),0,0) rotateZ(-1deg)}}
 @keyframes reefBody{0%,100%{transform:rotate(-1deg) skewY(-1deg)}50%{transform:rotate(1.2deg) skewY(1.4deg)}}
 @keyframes turtleBody{0%,100%{transform:translateY(0) rotate(-1.5deg) scaleY(.99)}50%{transform:translateY(-3%) rotate(1.8deg) scaleY(1.015)}}
@@ -45,5 +47,6 @@ function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile],[data-commemorative][data-swim-profile] img:first-child{animation:none!important}}
 `;doc.head.appendChild(style);}
 function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key);ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');return p;}
-root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,ensureStyles};
+function activatePassThrough(nodes,maxActive=2){const list=(nodes||[]).filter(Boolean);for(const node of list)delete node.dataset.swimActive;for(const node of list.slice(-Math.max(0,maxActive)))node.dataset.swimActive='1';return list.filter(node=>node.dataset.swimActive==='1');}
+root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles};
 })(window);

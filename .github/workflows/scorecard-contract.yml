@@ -8,6 +8,7 @@ on:
       - 'scripts/quality_report.py'
       - 'tests/test_score_quality.py'
       - 'tests/test_quality_report.py'
+      - 'tests/product/**'
       - '.github/workflows/scorecard-contract.yml'
   workflow_dispatch:
 
@@ -22,5 +23,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Run scorecard contract tests
         run: python -m unittest tests.test_score_quality tests.test_quality_report -v
+      - name: Run browser metric harness contract
+        run: node --test tests/product/metric-harness.test.mjs

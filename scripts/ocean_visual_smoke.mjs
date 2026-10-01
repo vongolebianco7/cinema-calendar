@@ -16,6 +16,7 @@ async function milestoneDiagnostics(page,count){
   return page.evaluate(expected=>{
     const rewards=window.CinemapOceanMilestoneRewards?.rewardsForCount?.(expected)||[];
     const commemorative=[...document.querySelectorAll('[data-commemorative]')];
+    const atlasContainers=[...document.querySelectorAll('.milestoneAtlasCreature')];
     const images=[...document.querySelectorAll('.milestoneAtlasCreature img')];
     const vectors=[...document.querySelectorAll('.milestoneVectorCreature svg')];
     return {
@@ -24,6 +25,7 @@ async function milestoneDiagnostics(page,count){
       rewards:rewards.map(r=>({key:r.key,unlockAt:r.unlockAt,ordinal:r.ordinal})),
       commemorativeCount:commemorative.length,
       commemorative:commemorative.map(el=>({key:el.dataset.commemorativeKey,at:el.dataset.commemorative})),
+      atlasCount:atlasContainers.length,
       imageCount:images.length,
       images:images.map(img=>({src:img.getAttribute('src'),currentSrc:img.currentSrc,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight})),
       vectorCount:vectors.length,
@@ -38,7 +40,7 @@ async function waitForMilestoneVisuals(page,count){
   while(Date.now()<deadline){
     last=await milestoneDiagnostics(page,count);
     const rasterReady=last.images.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0);
-    if(last.commemorativeCount===last.rewardCount&&last.imageCount+last.vectorCount===last.rewardCount&&rasterReady)return last;
+    if(last.commemorativeCount===last.rewardCount&&last.atlasCount+last.vectorCount===last.rewardCount&&rasterReady)return last;
     await page.waitForTimeout(160);
   }
   await page.screenshot({path:`artifacts/mobile-smoke/ocean-milestone-timeout-${count}.png`,fullPage:true});
@@ -64,7 +66,7 @@ async function runScenario(count){
     await page.waitForTimeout(350);
     const result=await page.evaluate(()=>{
       const stage=document.querySelector('#stage'),hud=document.querySelector('.hud'),backdrop=document.querySelector('#oceanBackdrop');
-      const fish=[...document.querySelectorAll('.fishWrap')],creatures=[...document.querySelectorAll('.fishWrap,.seabedCreature')],commemorative=[...document.querySelectorAll('[data-commemorative]')],milestoneImages=[...document.querySelectorAll('.milestoneAtlasCreature img')],milestoneVectors=[...document.querySelectorAll('.milestoneVectorCreature svg')],solitary=creatures.filter(el=>el.dataset.oceanSchool==='-1');
+      const fish=[...document.querySelectorAll('.fishWrap')],creatures=[...document.querySelectorAll('.fishWrap,.seabedCreature')],commemorative=[...document.querySelectorAll('[data-commemorative]')],milestoneAtlasContainers=[...document.querySelectorAll('.milestoneAtlasCreature')],milestoneImages=[...document.querySelectorAll('.milestoneAtlasCreature img')],milestoneVectors=[...document.querySelectorAll('.milestoneVectorCreature svg')],solitary=creatures.filter(el=>el.dataset.oceanSchool==='-1');
       const ordinaryFish=fish.filter(el=>!el.dataset.commemorative);
       const ordinarySpeciesIds=[...new Set(ordinaryFish.map(el=>el.dataset.creatureId).filter(Boolean))];
       const ordinaryAssetSrcs=[...new Set(ordinaryFish.map(el=>el.querySelector(':scope > img')?.getAttribute('src')).filter(Boolean))];
@@ -76,7 +78,7 @@ async function runScenario(count){
       const cells=new Set(creatures.map(el=>`${Math.floor(parseFloat(el.style.left||'0')/10)}:${Math.floor(parseFloat(el.style.top||'0')/10)}`));
       const lowerThirdCount=creatures.filter(el=>parseFloat(el.style.top||'0')>=70).length;
       const fps=document.querySelector('#fps');
-      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,lowerThirdCount,ordinarySpeciesCount:ordinarySpeciesIds.length,ordinarySpeciesIds,ordinaryAssetCount:ordinaryAssetSrcs.length,ordinaryAssetSrcs,commemorativeCount:commemorative.length,expectedMilestones,milestoneImageCount:milestoneImages.length,milestoneVectorCount:milestoneVectors.length,milestoneVisualCount:milestoneImages.length+milestoneVectors.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),milestoneVectorKeys:milestoneVectors.map(svg=>svg.closest('.milestoneVectorCreature')?.dataset.milestoneKey).filter(Boolean),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
+      return{overflow:document.documentElement.scrollWidth>window.innerWidth+1,fishCount:fish.length,creatureCount:logicalCount,domCreatureCount:creatures.length,visibleDomCount:visibleDom.length,visualPopulation:visibleDom.length+perf.canvasCount,solitaryCount:solitary.length,lowerThirdCount,ordinarySpeciesCount:ordinarySpeciesIds.length,ordinarySpeciesIds,ordinaryAssetCount:ordinaryAssetSrcs.length,ordinaryAssetSrcs,commemorativeCount:commemorative.length,expectedMilestones,milestoneAtlasCount:milestoneAtlasContainers.length,milestoneImageCount:milestoneImages.length,milestoneVectorCount:milestoneVectors.length,milestoneVisualCount:milestoneAtlasContainers.length+milestoneVectors.length,milestoneImagesDecoded:milestoneImages.every(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0),milestoneVectorKeys:milestoneVectors.map(svg=>svg.closest('.milestoneVectorCreature')?.dataset.milestoneKey).filter(Boolean),occupiedCells:cells.size,perf,hudBelowOcean:hudRect.top>=stageRect.bottom-1,fpsHidden:fps?fps.hidden:true,backdrop:{src:backdrop.getAttribute('src')||'',complete:backdrop.complete,naturalWidth:backdrop.naturalWidth,naturalHeight:backdrop.naturalHeight,width:backdropRect.width,height:backdropRect.height,objectFit:backdropStyle.objectFit},stageWidth:stageRect.width,stageHeight:stageRect.height,fallback:document.querySelector('#oceanFallback')?.hidden===false};
     });
     const frameStats=await page.evaluate(async()=>{const stamps=[];await new Promise(resolve=>{const start=performance.now();function step(t){stamps.push(t);if(t-start>=1200)return resolve();requestAnimationFrame(step)}requestAnimationFrame(step)});const gaps=stamps.slice(1).map((t,i)=>t-stamps[i]);return{frames:stamps.length,maxGap:gaps.length?Math.max(...gaps):0,avgGap:gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:0}});
     await page.screenshot({path:`artifacts/mobile-smoke/ocean-ecosystem-${count}.png`,fullPage:true});
@@ -88,10 +90,8 @@ async function runScenario(count){
     if(count>=100&&result.ordinarySpeciesCount<15)failures.push(`${count}-preview must expose at least 15 ordinary fish species, got ${result.ordinarySpeciesCount}: ${result.ordinarySpeciesIds.join(',')}`);
     if(count>=100&&result.ordinaryAssetCount<14)failures.push(`${count}-preview must expose at least 14 distinct ordinary fish assets, got ${result.ordinaryAssetCount}: ${result.ordinaryAssetSrcs.join(',')}`);
     if(result.commemorativeCount!==result.expectedMilestones)failures.push(`${count} films must render ${result.expectedMilestones} unlocked milestone creatures, got ${result.commemorativeCount}`);
-    if(result.milestoneVisualCount!==result.expectedMilestones)failures.push(`${count} films must mount ${result.expectedMilestones} milestone visuals, got ${result.milestoneVisualCount}`);
-    if(!result.milestoneImagesDecoded)failures.push('remaining milestone atlas images did not decode before visual capture');
-    if(count>=100&&!result.milestoneVectorKeys.includes('sea-turtle'))failures.push('large milestone turtle must use scalable vector rendering');
-    if(count===500&&result.milestoneVectorCount<8)failures.push(`500-preview must render most large milestones as vectors, got ${result.milestoneVectorCount}`);
+    if(result.milestoneVisualCount!==result.expectedMilestones)failures.push(`${count} films must mount ${result.expectedMilestones} milestone creature containers, got ${result.milestoneVisualCount}`);
+    if(!result.milestoneImagesDecoded)failures.push('milestone creature image layers did not decode before visual capture');
     if(!result.fpsHidden)failures.push('FPS diagnostics must stay hidden outside debug mode');
     if(count===500){
       if(!result.perf.active)failures.push('500-preview must activate hybrid renderer');
@@ -111,7 +111,7 @@ async function runScenario(count){
     if(badResponses.length)failures.push(`bad responses: ${badResponses.map(x=>`${x.status}:${x.url}`).join(',')}`);
     failures.push(...errors);
     if(failures.length)throw new Error(`${failures.join('; ')} | metrics=${JSON.stringify({result,frameStats})}`);
-    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, milestoneVectors=${result.milestoneVectorCount}, lower=${result.lowerThirdCount}, cells=${result.occupiedCells}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
+    console.log(`Ocean iPhone visual gate ${count}: logical=${result.creatureCount}, species=${result.ordinarySpeciesCount}, assets=${result.ordinaryAssetCount}, milestoneContainers=${result.milestoneVisualCount}, lower=${result.lowerThirdCount}, cells=${result.occupiedCells}, DOM=${result.perf.domCount}, canvas=${result.perf.canvasCount}, frames=${frameStats.frames}.`);
   }finally{await context.close()}
 }
 

@@ -27,18 +27,15 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('large swimmers use directional pulse-glide traversal without conveyor motion',()=>{
-  assert.match(swim,/@keyframes milestoneForwardNatural/);
-  assert.match(swim,/@keyframes milestoneReverseNatural/);
+test('large swimmers use short pulse-glide traversal rather than conveyor motion',()=>{
+  assert.match(swim,/const PULSE_STEPS=80/);
+  assert.match(swim,/const PULSE_ROUTE_DURATION_FACTOR=5/);
+  assert.match(swim,/function buildPulseRoute\(/);
   assert.match(swim,/data-swim-direction="forward"/);
   assert.match(swim,/data-swim-direction="reverse"/);
   assert.match(swim,/data-swim-cadence="pulse-glide"/);
   assert.match(swim,/var\(--swim-lane-y\)/);
   assert.match(swim,/var\(--swim-wave\)/);
-  assert.match(swim,/18%\{transform:translate3d\(-50vw/);
-  assert.match(swim,/25%\{transform:translate3d\(-50vw/);
-  assert.match(swim,/46%\{transform:translate3d\(-8vw/);
-  assert.match(swim,/55%\{transform:translate3d\(-8vw/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
 });
 

@@ -18,22 +18,22 @@ const profiles={
  'blue-whale':{family:'cetacean-cruise',duration:50,travel:4,bob:.6,body:1.6,direction:'forward'}
 };
 const fallback={family:'gentle-cruise',duration:24,travel:8,bob:2,body:2,direction:'forward'};
-let rotationTimer=null;
+const ORDINARY_ASSET_UPGRADES={
+ 'species-blue-tang.svg':'fish-real.webp',
+ 'species-damselfish.svg':'fish-real.webp',
+ 'species-firefish.svg':'species-aji.webp',
+ 'species-lyretail-anthias.svg':'species-red-ornate-reef-fish.webp',
+ 'species-six-line-wrasse.svg':'species-reef-schooling-fish.webp',
+ 'species-threadfin-butterflyfish.svg':'species-butterflyfish.webp',
+ 'species-filefish.webp':'species-butterflyfish.webp',
+ 'species-stingray.webp':'../real-fish/assets/milestone-manta-ray-v2.webp'
+};
+let rotationTimer=null,ordinaryObserver=null;
 function profileFor(key){return key&&profiles[key]?{key,...profiles[key]}:{key:key||'unknown',...fallback};}
-function buildPulseRoute(name,start,end,tilt){
-  const out=['@keyframes '+name+'{'],step=(end-start)/PULSE_STEPS;
-  for(let i=0;i<PULSE_STEPS;i++){
-    const p0=(i/PULSE_STEPS*100).toFixed(4),pMove=((i+.48)/PULSE_STEPS*100).toFixed(4),pHold=((i+1)/PULSE_STEPS*100).toFixed(4);
-    const x0=(start+step*i).toFixed(4),x1=(start+step*(i+1)).toFixed(4),wave=((i%2?1:-1)*.08).toFixed(2),angle=((i%2?1:-1)*tilt).toFixed(2);
-    const y='calc(var(--swim-lane-y) + var(--swim-wave)*'+wave+')';
-    const pose='translate3d('+x1+'vw,'+y+',0) rotateZ('+angle+'deg)';
-    out.push(p0+'%{transform:translate3d('+x0+'vw,'+y+',0) rotateZ('+angle+'deg);animation-timing-function:cubic-bezier(.18,.72,.28,1)}');
-    out.push(pMove+'%{transform:'+pose+'}');
-    out.push(pHold+'%{transform:'+pose+'}');
-  }
-  out.push('}');return out.join('');
-}
+function buildPulseRoute(name,start,end,tilt){const out=['@keyframes '+name+'{'],step=(end-start)/PULSE_STEPS;for(let i=0;i<PULSE_STEPS;i++){const p0=(i/PULSE_STEPS*100).toFixed(4),pMove=((i+.48)/PULSE_STEPS*100).toFixed(4),pHold=((i+1)/PULSE_STEPS*100).toFixed(4);const x0=(start+step*i).toFixed(4),x1=(start+step*(i+1)).toFixed(4),wave=((i%2?1:-1)*.08).toFixed(2),angle=((i%2?1:-1)*tilt).toFixed(2);const y='calc(var(--swim-lane-y) + var(--swim-wave)*'+wave+')';const pose='translate3d('+x1+'vw,'+y+',0) rotateZ('+angle+'deg)';out.push(p0+'%{transform:translate3d('+x0+'vw,'+y+',0) rotateZ('+angle+'deg);animation-timing-function:cubic-bezier(.18,.72,.28,1)}');out.push(pMove+'%{transform:'+pose+'}');out.push(pHold+'%{transform:'+pose+'}');}out.push('}');return out.join('');}
 function ensureStyles(doc){if(!doc||doc.getElementById('oceanMilestoneSwimStyles'))return;const style=doc.createElement('style');style.id='oceanMilestoneSwimStyles';style.textContent=`
+[data-commemorative]{opacity:1!important}
+[data-commemorative] .milestoneAtlasCreature,[data-commemorative] .milestoneDeformedCanvas{opacity:1!important}
 [data-commemorative][data-swim-profile]{transform-origin:50% 50%}
 [data-commemorative][data-swim-profile="reef-dart"],[data-commemorative][data-swim-profile="sunfish-scull"],[data-commemorative][data-swim-profile="octopus-drift"],[data-commemorative][data-swim-profile="gentle-cruise"]{animation-duration:var(--swim-duration)!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important}
 [data-commemorative][data-swim-profile="reef-dart"],[data-commemorative][data-swim-profile="sunfish-scull"]{animation-name:milestoneFishRoute!important}
@@ -49,8 +49,11 @@ ${buildPulseRoute('milestoneForwardNatural',-72,128,.04)}
 ${buildPulseRoute('milestoneReverseNatural',128,-72,.04)}
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile]{animation:none!important}}
 `;doc.head.appendChild(style);}
-function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key);ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',(p.duration*PULSE_ROUTE_DURATION_FACTOR)+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.25,Math.min(.9,p.bob))+'vh');return p;}
+function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key);ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';const routeDuration=p.duration*PULSE_ROUTE_DURATION_FACTOR,pulseDuration=routeDuration/PULSE_STEPS;node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',routeDuration+'s');node.style.setProperty('--swim-pulse-duration',pulseDuration+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.25,Math.min(.9,p.bob))+'vh');node.style.opacity='1';return p;}
+function upgradeOrdinaryAssets(scope){const rootNode=scope&&scope.querySelectorAll?scope:root.document;if(!rootNode)return;const imgs=[];if(rootNode.matches?.('.fishBody,.fishTail'))imgs.push(rootNode);for(const img of rootNode.querySelectorAll?.('.fishBody,.fishTail')||[])imgs.push(img);for(const img of imgs){const src=img.getAttribute('src')||'';for(const [bad,replacement] of Object.entries(ORDINARY_ASSET_UPGRADES)){if(!src.endsWith(bad))continue;img.src='optimized/'+replacement.replace(/^optimized\//,'');img.closest('.fishWrap')?.setAttribute('data-asset-upgraded','1');break;}}}
+function bootOrdinaryUpgrade(){upgradeOrdinaryAssets(root.document);if(ordinaryObserver||!root.MutationObserver||!root.document?.body)return;ordinaryObserver=new MutationObserver(ms=>{for(const m of ms)for(const node of m.addedNodes)upgradeOrdinaryAssets(node)});ordinaryObserver.observe(root.document.body,{childList:true,subtree:true});}
 function clearRotation(){if(rotationTimer!==null){if(root.clearTimeout)root.clearTimeout(rotationTimer);else if(root.clearInterval)root.clearInterval(rotationTimer);rotationTimer=null;}}
-function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length,lanes=[-13,-7,-2,4,10,15,-10,8,-15,1,13];for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y');}const active=list.slice(0,count);for(const [index,node] of active.entries()){const routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||120,phase=(index+.37)/(Math.max(1,count)),lane=lanes[index%lanes.length];node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.style.left='0%';node.style.top='40%';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y',lane+'vh');}return active;}
-root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR};
+function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length,lanes=[-13,-7,-2,4,10,15,-10,8,-15,1,13];for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y');}const active=list.slice(0,count);for(const [index,node] of active.entries()){const routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||120,phase=(index+.37)/(Math.max(1,count)),lane=lanes[index%lanes.length];node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.style.left='0%';node.style.top='40%';node.style.opacity='1';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y',lane+'vh');}return active;}
+if(root.document?.readyState==='loading')root.document.addEventListener('DOMContentLoaded',bootOrdinaryUpgrade,{once:true});else bootOrdinaryUpgrade();
+root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,upgradeOrdinaryAssets,ORDINARY_ASSET_UPGRADES,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR};
 })(window);

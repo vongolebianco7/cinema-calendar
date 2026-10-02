@@ -27,9 +27,10 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('large swimmers use short pulse-glide traversal rather than conveyor motion',()=>{
-  assert.match(swim,/const PULSE_STEPS=80/);
-  assert.match(swim,/const PULSE_ROUTE_DURATION_FACTOR=5/);
+test('large swimmers use tiny pulse-glide traversal rather than conveyor motion',()=>{
+  assert.match(swim,/const PULSE_STEPS=200/);
+  assert.match(swim,/const PULSE_ROUTE_DURATION_FACTOR=13/);
+  assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);
   assert.match(swim,/function buildPulseRoute\(/);
   assert.match(swim,/data-swim-direction="forward"/);
   assert.match(swim,/data-swim-direction="reverse"/);

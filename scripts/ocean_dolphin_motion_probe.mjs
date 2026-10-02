@@ -37,16 +37,14 @@ try{
   if(pageErrors.length)throw new Error(`page errors: ${pageErrors.join('; ')}`);
   if(diagnostic.wrapDataset?.backgroundKeyed!=='1')throw new Error(`dolphin source never reached keyed state: ${JSON.stringify(diagnostic)}`);
 
-  const dolphinCanvas=page.locator('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas').first();
-  const dolphinWrap=dolphinCanvas.locator('..');
-  await dolphinWrap.screenshot({path:'artifacts/dolphin-motion/frame-a.png'});
+  await page.screenshot({path:'artifacts/dolphin-motion/frame-a.png'});
 
   const metrics=await page.evaluate(async()=>{
-    const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
-    const wrap=canvas?.closest('[data-milestone-key="dolphin"]');
-    if(!wrap||!canvas)throw new Error('dolphin deformation canvas missing');
-    const ctx=canvas.getContext('2d',{willReadFrequently:true});
     const snapshot=()=>{
+      const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
+      const wrap=canvas?.closest('[data-milestone-key="dolphin"]');
+      if(!wrap||!canvas)throw new Error('dolphin deformation canvas missing');
+      const ctx=canvas.getContext('2d',{willReadFrequently:true});
       const {width,height}=canvas;
       const data=ctx.getImageData(0,0,width,height).data;
       let opaque=0,total=width*height,leftWeight=0,leftY=0,rightWeight=0,rightY=0;
@@ -56,11 +54,12 @@ try{
         if(x<width*.45){leftWeight+=a;leftY+=a*y;}
         if(x>width*.58){rightWeight+=a;rightY+=a*y;}
       }
-      return {alpha,width,height,coverage:opaque/total,leftCentroid:leftWeight?leftY/leftWeight:0,rightCentroid:rightWeight?rightY/rightWeight:0};
+      return {alpha,width,height,coverage:opaque/total,leftCentroid:leftWeight?leftY/leftWeight:0,rightCentroid:rightWeight?rightY/rightWeight:0,keyed:wrap.dataset.backgroundKeyed==='1'};
     };
     const a=snapshot();
     await new Promise(resolve=>setTimeout(resolve,450));
     const b=snapshot();
+    if(a.width!==b.width||a.height!==b.height)throw new Error('dolphin canvas dimensions changed during probe');
     let leftDiff=0,leftN=0,rightDiff=0,rightN=0;
     for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++){
       const p=y*a.width+x,d=Math.abs(a.alpha[p]-b.alpha[p]);
@@ -68,7 +67,7 @@ try{
       else if(x>a.width*.58){rightDiff+=d;rightN++;}
     }
     return {
-      keyed:wrap.dataset.backgroundKeyed==='1',
+      keyed:a.keyed&&b.keyed,
       coverage:a.coverage,
       tailCentroidShift:Math.abs(a.leftCentroid-b.leftCentroid),
       headCentroidShift:Math.abs(a.rightCentroid-b.rightCentroid),
@@ -77,7 +76,7 @@ try{
     };
   });
 
-  await dolphinWrap.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
+  await page.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
   await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify(metrics,null,2)+'\n');
 
   const failures=[];

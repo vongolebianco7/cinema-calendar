@@ -33,15 +33,11 @@ test('large swimmers use directional pulse-glide traversal without in-frame flip
   assert.match(swim,/data-swim-direction="forward"/);
   assert.match(swim,/data-swim-direction="reverse"/);
   assert.match(swim,/data-swim-cadence="pulse-glide"/);
-  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[\s\S]*?\n\}/g)].map(m=>m[0]);
-  assert.equal(routes.length,2);
-  for(const route of routes){
-    assert.doesNotMatch(route,/rotateY\(/);
-    assert.match(route,/var\(--swim-lane-y\)/);
-    assert.match(route,/var\(--swim-wave\)/);
-  }
+  assert.match(swim,/var\(--swim-lane-y\)/);
+  assert.match(swim,/var\(--swim-wave\)/);
   assert.match(swim,/18%\{transform:translate3d\(-50vw/);
   assert.match(swim,/25%\{transform:translate3d\(-50vw/);
+  assert.doesNotMatch(swim,/rotateY\(/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
 });
 

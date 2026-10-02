@@ -27,18 +27,21 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('large swimmers use natural directional traversal without in-frame flipping',()=>{
+test('large swimmers use directional pulse-glide traversal without in-frame flipping',()=>{
   assert.match(swim,/@keyframes milestoneForwardNatural/);
   assert.match(swim,/@keyframes milestoneReverseNatural/);
   assert.match(swim,/data-swim-direction="forward"/);
   assert.match(swim,/data-swim-direction="reverse"/);
-  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[^\n]+/g)].map(m=>m[0]);
+  assert.match(swim,/data-swim-cadence="pulse-glide"/);
+  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[\s\S]*?\n\}/g)].map(m=>m[0]);
   assert.equal(routes.length,2);
   for(const route of routes){
     assert.doesNotMatch(route,/rotateY\(/);
     assert.match(route,/var\(--swim-lane-y\)/);
     assert.match(route,/var\(--swim-wave\)/);
   }
+  assert.match(swim,/18%\{transform:translate3d\(-50vw/);
+  assert.match(swim,/25%\{transform:translate3d\(-50vw/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
 });
 

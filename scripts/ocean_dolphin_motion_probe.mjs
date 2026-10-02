@@ -94,24 +94,28 @@ try{
     node.dataset.swimActive='1';
     node.dataset.swimCadence='pulse-glide';
     node.dataset.swimDirection='forward';
-    node.style.setProperty('--swim-duration','4s');
+    node.style.setProperty('--swim-route-duration','8s');
     node.style.setProperty('--swim-delay','0s');
     node.style.setProperty('--swim-lane-y','0vh');
+    await new Promise(resolve=>setTimeout(resolve,80));
+    const animation=node.getAnimations().find(a=>a.animationName==='milestoneForwardNatural');
+    if(!animation)throw new Error('dolphin route animation missing');
+    animation.pause();
     const left=()=>node.getBoundingClientRect().left;
-    await new Promise(resolve=>setTimeout(resolve,120));
-    const animationName=getComputedStyle(node).animationName;
-    const startLeft=left();
-    await new Promise(resolve=>setTimeout(resolve,560));
-    const burstLeft=left();
-    await new Promise(resolve=>setTimeout(resolve,120));
-    const pauseStart=left();
-    await new Promise(resolve=>setTimeout(resolve,170));
-    const pauseEnd=left();
-    await new Promise(resolve=>setTimeout(resolve,420));
-    const nextBurst=left();
+    const leftAt=ms=>new Promise(resolve=>{
+      animation.currentTime=ms;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(left())));
+    });
+    const segmentMs=8000/80;
+    const startLeft=await leftAt(0);
+    const burstLeft=await leftAt(segmentMs*.55);
+    const pauseStart=await leftAt(segmentMs*.62);
+    const pauseEnd=await leftAt(segmentMs*.95);
+    const nextBurst=await leftAt(segmentMs*1.55);
     return {
-      animationName,
+      animationName:animation.animationName,
       cadence:node.dataset.swimCadence,
+      segmentMs,
       startLeft,
       burstLeft,
       pauseStart,
@@ -140,11 +144,11 @@ try{
   if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
   if(cadence.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${cadence.animationName})`);
   if(cadence.cadence!=='pulse-glide')failures.push(`dolphin: wrong cadence (${cadence.cadence})`);
-  if(cadence.firstBurstDelta<5)failures.push(`dolphin: first propulsion burst did not advance (${cadence.firstBurstDelta.toFixed(2)}px)`);
-  if(Math.abs(cadence.pauseDelta)>2)failures.push(`dolphin: glide pause is still conveyor motion (${cadence.pauseDelta.toFixed(2)}px)`);
-  if(cadence.secondBurstDelta<5)failures.push(`dolphin: second propulsion burst did not resume (${cadence.secondBurstDelta.toFixed(2)}px)`);
+  if(cadence.firstBurstDelta<5||cadence.firstBurstDelta>15)failures.push(`dolphin: propulsion burst must stay short (${cadence.firstBurstDelta.toFixed(2)}px)`);
+  if(Math.abs(cadence.pauseDelta)>1.5)failures.push(`dolphin: glide pause is still conveyor motion (${cadence.pauseDelta.toFixed(2)}px)`);
+  if(cadence.secondBurstDelta<5||cadence.secondBurstDelta>15)failures.push(`dolphin: next propulsion burst must stay short (${cadence.secondBurstDelta.toFixed(2)}px)`);
   if(failures.length)throw new Error(failures.join('; '));
-  console.log('Ocean swimmer pulse-glide motion verified:',{metrics,cadence});
+  console.log('Ocean swimmer short pulse-glide motion verified:',{metrics,cadence});
 }finally{
   await context.close();
   await browser.close();

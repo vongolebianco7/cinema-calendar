@@ -11,8 +11,11 @@ test('AI-like swimmers use continuous whole-body deformation instead of clipped 
     'manta-ray':'wing-flex',
     dolphin:'tail-flex-left',
     dugong:'tail-flex-right',
+    'minke-whale':'tail-flex-left',
+    orca:'tail-flex-left',
+    'humpback-whale':'tail-flex-left',
     'whale-shark':'tail-flex-left',
-    'humpback-whale':'tail-flex-left'
+    'blue-whale':'tail-flex-left'
   };
   for(const [key,profile] of Object.entries(expected)){
     const spec=manifest.species[key];
@@ -36,6 +39,13 @@ test('dolphin bends at the tail side and removes baked ocean background before d
   assert.match(atlas,/getImageData/);
   assert.match(atlas,/putImageData/);
   assert.match(atlas,/chromaKey/);
+});
+
+test('other direct-image swimmers use automatic background isolation before deformation',()=>{
+  const keys=['manta-ray','dugong','minke-whale','orca','humpback-whale','whale-shark','blue-whale'];
+  for(const key of keys)assert.equal(manifest.species[key].deformation?.chromaKey,'auto',key+' should use automatic background isolation');
+  assert.match(atlas,/chromaKey==='auto'/);
+  assert.match(atlas,/edgeBlueRatio/);
 });
 
 test('deformation uses overlapping vertical slices so the animal stays visually continuous',()=>{

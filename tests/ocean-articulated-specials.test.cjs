@@ -7,10 +7,10 @@ const atlas=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8')
 const population=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 const swim=fs.readFileSync('preview/ocean/real-fish/milestone-swim.js','utf8');
 
-test('AI-like swimmers use continuous whole-body deformation instead of clipped appendage layers',()=>{
+test('AI-like swimmers use continuous deformation with species-correct tail side',()=>{
   const expected={
     'manta-ray':'wing-flex',
-    dolphin:'tail-flex-left',
+    dolphin:'tail-flex-right',
     dugong:'tail-flex-right',
     'minke-whale':'tail-flex-left',
     orca:'tail-flex-left',
@@ -32,9 +32,10 @@ test('AI-like swimmers use continuous whole-body deformation instead of clipped 
   assert.match(atlas,/if\(spec\.asset&&spec\.deformation\)return createDeformedCreature/);
 });
 
-test('dolphin bends at the tail side and removes baked ocean background before deformation',()=>{
+test('dolphin bends only at its right-side tail and removes baked ocean background before deformation',()=>{
   const dolphin=manifest.species.dolphin;
-  assert.equal(dolphin.deformation.profile,'tail-flex-left','dolphin tail is on the left side of its source image');
+  assert.equal(dolphin.deformation.profile,'tail-flex-right','user-observed source orientation puts the dolphin tail on the right side');
+  assert.ok(Number(dolphin.deformation.flexSpan)<=0.3,'dolphin flex must stay in the tail-most zone');
   assert.equal(dolphin.deformation.chromaKey,true,'dolphin background must be keyed out before deformation');
   assert.match(atlas,/createKeyedSource/);
   assert.match(atlas,/getImageData/);
@@ -77,11 +78,12 @@ test('manta dolphin and dugong have readable iPhone size caps',()=>{
   assert.match(population,/dugong:20/);
 });
 
-test('active milestone swimmers move forward across the ocean instead of oscillating in place',()=>{
-  assert.match(swim,/@keyframes milestoneForwardPass/);
-  assert.match(swim,/0%\{transform:translate3d\(-35vw/);
-  assert.match(swim,/100%\{transform:translate3d\(85vw/);
-  assert.match(swim,/animation-name:milestoneForwardPass!important/);
+test('active milestone swimmers use directional natural routes instead of in-place or linear motion',()=>{
+  assert.match(swim,/@keyframes milestoneForwardNatural/);
+  assert.match(swim,/@keyframes milestoneReverseNatural/);
+  assert.match(swim,/data-swim-direction="forward"/);
+  assert.match(swim,/data-swim-direction="reverse"/);
+  assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
   assert.doesNotMatch(swim,/@keyframes articulatedPassRoute\{0%\{transform:translate3d\(-\.6vw/);
 });
 

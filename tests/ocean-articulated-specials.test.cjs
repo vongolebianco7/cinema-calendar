@@ -78,9 +78,10 @@ test('manta dolphin and dugong have readable iPhone size caps',()=>{
   assert.match(population,/dugong:20/);
 });
 
-test('active milestone swimmers use directional natural routes instead of in-place or linear motion',()=>{
-  assert.match(swim,/@keyframes milestoneForwardNatural/);
-  assert.match(swim,/@keyframes milestoneReverseNatural/);
+test('active milestone swimmers use generated directional short-step routes instead of in-place or linear motion',()=>{
+  assert.match(swim,/function buildPulseRoute\(/);
+  assert.match(swim,/buildPulseRoute\('milestoneForwardNatural',-72,128/);
+  assert.match(swim,/buildPulseRoute\('milestoneReverseNatural',128,-72/);
   assert.match(swim,/data-swim-direction="forward"/);
   assert.match(swim,/data-swim-direction="reverse"/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);

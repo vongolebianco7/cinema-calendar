@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 
 const swimmers={
   'manta-ray':{profile:'wing-flex',minDelta:.25,maxCoverage:.72},
-  dolphin:{profile:'tail-flex-left',minDelta:1.5,maxCoverage:.58},
+  dolphin:{profile:'tail-flex-right',minDelta:1.5,maxCoverage:.58},
   dugong:{profile:'tail-flex-right',minDelta:.45,maxCoverage:.72},
   'minke-whale':{profile:'tail-flex-left',minDelta:.25,maxCoverage:.72},
   orca:{profile:'tail-flex-left',minDelta:.3,maxCoverage:.72},
@@ -72,7 +72,7 @@ try{
           const p=y*a.width+x,d=Math.abs(a.alpha[p]-b.alpha[p]);
           let moving=false,anchor=false;
           if(cfg.profile==='tail-flex-left'){moving=x<a.width*(key==='dolphin'?.30:.45);anchor=x>a.width*.58;}
-          else if(cfg.profile==='tail-flex-right'){moving=x>a.width*.55;anchor=x<a.width*.42;}
+          else if(cfg.profile==='tail-flex-right'){moving=x>a.width*(key==='dolphin'?.70:.55);anchor=x<a.width*(key==='dolphin'?.58:.42);}
           else {moving=x<a.width*.32||x>a.width*.68;anchor=x>a.width*.42&&x<a.width*.58;}
           if(moving){movingDiff+=d;movingN++;}
           if(anchor){anchorDiff+=d;anchorN++;}
@@ -86,12 +86,13 @@ try{
   },swimmers);
 
   const forward=await page.evaluate(async()=>{
-    window.CinemapOceanMilestoneSwim?.clearRotation?.();
-    for(const node of document.querySelectorAll('[data-commemorative][data-swim-active]'))delete node.dataset.swimActive;
     const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
     const node=canvas?.closest('[data-commemorative]');
     if(!node)throw new Error('dolphin commemorative wrapper missing');
     node.dataset.swimActive='1';
+    node.dataset.swimDirection='forward';
+    node.style.setProperty('--swim-delay','0s');
+    node.style.setProperty('--swim-lane-y','0vh');
     await new Promise(resolve=>setTimeout(resolve,120));
     const animationName=getComputedStyle(node).animationName;
     const startLeft=node.getBoundingClientRect().left;
@@ -115,7 +116,7 @@ try{
     }
   }
   if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
-  if(forward.animationName!=='milestoneForwardPass')failures.push(`dolphin: wrong travel animation (${forward.animationName})`);
+  if(forward.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${forward.animationName})`);
   if(forward.forwardDelta<5)failures.push(`dolphin: did not visibly advance (${forward.forwardDelta.toFixed(2)}px)`);
   if(failures.length)throw new Error(failures.join('; '));
   console.log('Ocean swimmer motion verified:',{metrics,forward});

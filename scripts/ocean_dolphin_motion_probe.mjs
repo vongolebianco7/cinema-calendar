@@ -56,23 +56,33 @@ try{
       }
       return {alpha,width,height,coverage:opaque/total,leftCentroid:leftWeight?leftY/leftWeight:0,rightCentroid:rightWeight?rightY/rightWeight:0,keyed:wrap.dataset.backgroundKeyed==='1'};
     };
-    const a=snapshot();
-    await new Promise(resolve=>setTimeout(resolve,450));
-    const b=snapshot();
-    if(a.width!==b.width||a.height!==b.height)throw new Error('dolphin canvas dimensions changed during probe');
-    let leftDiff=0,leftN=0,rightDiff=0,rightN=0;
-    for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++){
-      const p=y*a.width+x,d=Math.abs(a.alpha[p]-b.alpha[p]);
-      if(x<a.width*.45){leftDiff+=d;leftN++;}
-      else if(x>a.width*.58){rightDiff+=d;rightN++;}
+    const base=snapshot();
+    const samples=[base];
+    for(let i=0;i<4;i++){
+      await new Promise(resolve=>setTimeout(resolve,220));
+      samples.push(snapshot());
+    }
+    for(const sample of samples){if(base.width!==sample.width||base.height!==sample.height)throw new Error('dolphin canvas dimensions changed during probe');}
+    let maxTailCentroidShift=0,maxHeadCentroidShift=0,maxTailPixelDelta=0,maxHeadPixelDelta=0;
+    for(const sample of samples.slice(1)){
+      let leftDiff=0,leftN=0,rightDiff=0,rightN=0;
+      for(let y=0;y<base.height;y++)for(let x=0;x<base.width;x++){
+        const p=y*base.width+x,d=Math.abs(base.alpha[p]-sample.alpha[p]);
+        if(x<base.width*.45){leftDiff+=d;leftN++;}
+        else if(x>base.width*.58){rightDiff+=d;rightN++;}
+      }
+      maxTailCentroidShift=Math.max(maxTailCentroidShift,Math.abs(base.leftCentroid-sample.leftCentroid));
+      maxHeadCentroidShift=Math.max(maxHeadCentroidShift,Math.abs(base.rightCentroid-sample.rightCentroid));
+      maxTailPixelDelta=Math.max(maxTailPixelDelta,leftDiff/Math.max(1,leftN));
+      maxHeadPixelDelta=Math.max(maxHeadPixelDelta,rightDiff/Math.max(1,rightN));
     }
     return {
-      keyed:a.keyed&&b.keyed,
-      coverage:a.coverage,
-      tailCentroidShift:Math.abs(a.leftCentroid-b.leftCentroid),
-      headCentroidShift:Math.abs(a.rightCentroid-b.rightCentroid),
-      tailPixelDelta:leftDiff/Math.max(1,leftN),
-      headPixelDelta:rightDiff/Math.max(1,rightN)
+      keyed:samples.every(sample=>sample.keyed),
+      coverage:base.coverage,
+      tailCentroidShift:maxTailCentroidShift,
+      headCentroidShift:maxHeadCentroidShift,
+      tailPixelDelta:maxTailPixelDelta,
+      headPixelDelta:maxHeadPixelDelta
     };
   });
 

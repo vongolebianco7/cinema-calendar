@@ -29,3 +29,9 @@ test('all pass-through milestone creatures are activated and staggered instead o
   assert.match(swim,/--swim-delay/);
   assert.match(swim,/--swim-lane-y/);
 });
+
+test('pass-through creatures share a neutral base cell while visual lanes keep them separated',()=>{
+  assert.match(swim,/node\.style\.left='0%'/);
+  assert.match(swim,/node\.style\.top='40%'/);
+  assert.match(swim,/lanes=\[-13,-7,-2,4,10,15,-10,8,-15,1,13\]/);
+});

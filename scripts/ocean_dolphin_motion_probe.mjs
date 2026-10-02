@@ -85,24 +85,46 @@ try{
     return output;
   },swimmers);
 
-  const forward=await page.evaluate(async()=>{
+  const cadence=await page.evaluate(async()=>{
     const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
     const node=canvas?.closest('[data-commemorative]');
     if(!node)throw new Error('dolphin commemorative wrapper missing');
+    delete node.dataset.swimActive;
+    await new Promise(resolve=>setTimeout(resolve,80));
     node.dataset.swimActive='1';
+    node.dataset.swimCadence='pulse-glide';
     node.dataset.swimDirection='forward';
+    node.style.setProperty('--swim-duration','4s');
     node.style.setProperty('--swim-delay','0s');
     node.style.setProperty('--swim-lane-y','0vh');
+    const left=()=>node.getBoundingClientRect().left;
     await new Promise(resolve=>setTimeout(resolve,120));
     const animationName=getComputedStyle(node).animationName;
-    const startLeft=node.getBoundingClientRect().left;
-    await new Promise(resolve=>setTimeout(resolve,850));
-    const endLeft=node.getBoundingClientRect().left;
-    return {animationName,startLeft,endLeft,forwardDelta:endLeft-startLeft};
+    const startLeft=left();
+    await new Promise(resolve=>setTimeout(resolve,560));
+    const burstLeft=left();
+    await new Promise(resolve=>setTimeout(resolve,120));
+    const pauseStart=left();
+    await new Promise(resolve=>setTimeout(resolve,170));
+    const pauseEnd=left();
+    await new Promise(resolve=>setTimeout(resolve,420));
+    const nextBurst=left();
+    return {
+      animationName,
+      cadence:node.dataset.swimCadence,
+      startLeft,
+      burstLeft,
+      pauseStart,
+      pauseEnd,
+      nextBurst,
+      firstBurstDelta:burstLeft-startLeft,
+      pauseDelta:pauseEnd-pauseStart,
+      secondBurstDelta:nextBurst-pauseEnd
+    };
   });
 
   await page.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
-  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify({swimmers:metrics,forward},null,2)+'\n');
+  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify({swimmers:metrics,cadence},null,2)+'\n');
 
   const failures=[];
   for(const [key,cfg] of Object.entries(swimmers)){
@@ -116,10 +138,13 @@ try{
     }
   }
   if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
-  if(forward.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${forward.animationName})`);
-  if(forward.forwardDelta<5)failures.push(`dolphin: did not visibly advance (${forward.forwardDelta.toFixed(2)}px)`);
+  if(cadence.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${cadence.animationName})`);
+  if(cadence.cadence!=='pulse-glide')failures.push(`dolphin: wrong cadence (${cadence.cadence})`);
+  if(cadence.firstBurstDelta<5)failures.push(`dolphin: first propulsion burst did not advance (${cadence.firstBurstDelta.toFixed(2)}px)`);
+  if(Math.abs(cadence.pauseDelta)>2)failures.push(`dolphin: glide pause is still conveyor motion (${cadence.pauseDelta.toFixed(2)}px)`);
+  if(cadence.secondBurstDelta<5)failures.push(`dolphin: second propulsion burst did not resume (${cadence.secondBurstDelta.toFixed(2)}px)`);
   if(failures.length)throw new Error(failures.join('; '));
-  console.log('Ocean swimmer motion verified:',{metrics,forward});
+  console.log('Ocean swimmer pulse-glide motion verified:',{metrics,cadence});
 }finally{
   await context.close();
   await browser.close();

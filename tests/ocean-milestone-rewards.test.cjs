@@ -66,7 +66,7 @@ test('manta dolphin and dugong use rigid-body swim profiles with no body-bending
   assert.doesNotMatch(src,/rayBody/);
 });
 
-test('large swimmers, dolphin, manta and turtle traverse continuously with natural directional routes',()=>{
+test('large swimmers, dolphin, manta and turtle use repeated propulsion bursts with glide pauses',()=>{
   const swim=loadSwimSource();
   for(const family of ['turtle-stroke','rigid-glide','rigid-cruise','shark-cruise','cetacean-cruise']){
     assert.match(swim,new RegExp(`data-swim-profile="${family}"[^}]*not\\(\\[data-swim-active="1"\\]\\)[^}]*animation:none`,'s'));
@@ -75,12 +75,16 @@ test('large swimmers, dolphin, manta and turtle traverse continuously with natur
   assert.match(swim,/@keyframes milestoneReverseNatural/);
   assert.match(swim,/function activatePassThrough\(nodes,maxActive\)/);
   assert.match(swim,/const list=\(nodes\|\|\[\]\)\.filter\(Boolean\),count=list\.length/);
+  assert.match(swim,/node\.dataset\.swimCadence='pulse-glide'/);
   assert.match(swim,/--swim-delay/);
   assert.match(swim,/--swim-lane-y/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
-  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[^\n]+/g)].map(m=>m[0]);
-  assert.equal(routes.length,2);
-  for(const route of routes) assert.doesNotMatch(route,/rotateY\(/);
+  assert.match(swim,/18%\{transform:translate3d\(-50vw/);
+  assert.match(swim,/25%\{transform:translate3d\(-50vw/);
+  assert.match(swim,/46%\{transform:translate3d\(-8vw/);
+  assert.match(swim,/55%\{transform:translate3d\(-8vw/);
+  assert.match(swim,/78%\{transform:translate3d\(52vw/);
+  assert.match(swim,/86%\{transform:translate3d\(52vw/);
 });
 
 test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{

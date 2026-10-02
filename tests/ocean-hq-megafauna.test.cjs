@@ -27,7 +27,7 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('large swimmers use directional pulse-glide traversal without in-frame flipping',()=>{
+test('large swimmers use directional pulse-glide traversal without conveyor motion',()=>{
   assert.match(swim,/@keyframes milestoneForwardNatural/);
   assert.match(swim,/@keyframes milestoneReverseNatural/);
   assert.match(swim,/data-swim-direction="forward"/);
@@ -37,7 +37,8 @@ test('large swimmers use directional pulse-glide traversal without in-frame flip
   assert.match(swim,/var\(--swim-wave\)/);
   assert.match(swim,/18%\{transform:translate3d\(-50vw/);
   assert.match(swim,/25%\{transform:translate3d\(-50vw/);
-  assert.doesNotMatch(swim,/rotateY\(/);
+  assert.match(swim,/46%\{transform:translate3d\(-8vw/);
+  assert.match(swim,/55%\{transform:translate3d\(-8vw/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
 });
 

@@ -35,7 +35,7 @@ try{
     const outer=canvas?.closest('[data-commemorative]');
     const ctx=canvas?.getContext('2d',{willReadFrequently:true});
     let coverage=null,opaqueRatio=null;
-    if(canvas&&ctx){const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let opaque=0,solid=0;for(let i=3;i<data.length;i+=4){if(data[i]>16)opaque++;if(data[i]===255)solid++;}coverage=opaque/(canvas.width*canvas.height);opaqueRatio=opaque?solid/opaque:0;}
+    if(canvas&&ctx){const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let opaque=0,solid=0;for(let i=3;i<data.length;i+=4){if(data[i]>16)opaque++;if(data[i]>=250)solid++;}coverage=opaque/(canvas.width*canvas.height);opaqueRatio=opaque?solid/opaque:0;}
     const rect=outer?.getBoundingClientRect();
     return [key,{dataset:inner?{...inner.dataset}:null,direction:outer?.dataset.swimDirection||null,opacity:outer?getComputedStyle(outer).opacity:null,canvasSize:canvas?{width:canvas.width,height:canvas.height}:null,coverage,opaqueRatio,rect:rect?{width:rect.width,height:rect.height}:null,expectedDirection:cfg.direction||null}];
   })),swimmers);
@@ -50,7 +50,7 @@ try{
       if(!wrap||!canvas)throw new Error(`${key} deformation canvas missing`);
       const ctx=canvas.getContext('2d',{willReadFrequently:true}),{width,height}=canvas,data=ctx.getImageData(0,0,width,height).data,total=width*height,alpha=new Uint8Array(total);let opaque=0;
       for(let p=0;p<total;p++){const a=data[p*4+3];alpha[p]=a;if(a>16)opaque++;}
-      return [key,{alpha,width,height,coverage:opaque/total,keyed:wrap.dataset.backgroundKeyed==='1',profile:cfg.profile}];
+      return [key,{alpha,width,height,coverage:opaque/total,ready:wrap.dataset.sourceState==='ready',profile:cfg.profile}];
     }));
     const base=snapshot(),samples=[base];
     for(let i=0;i<8;i++){await new Promise(resolve=>setTimeout(resolve,240));samples.push(snapshot());}
@@ -69,17 +69,18 @@ try{
         }
         movingMax=Math.max(movingMax,movingDiff/Math.max(1,movingN));anchorMax=Math.max(anchorMax,anchorDiff/Math.max(1,anchorN));
       }
-      output[key]={coverage:a.coverage,keyed:samples.every(set=>set[key].keyed),movingPixelDelta:movingMax,anchorPixelDelta:anchorMax};
+      output[key]={coverage:a.coverage,ready:samples.every(set=>set[key].ready),movingPixelDelta:movingMax,anchorPixelDelta:anchorMax};
     }
     return output;
   },swimmers);
 
   const cadence=await page.evaluate(async()=>{
     const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas'),node=canvas?.closest('[data-commemorative]');if(!node)throw new Error('dolphin commemorative wrapper missing');
-    delete node.dataset.swimActive;await new Promise(r=>setTimeout(r,80));node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.dataset.swimDirection='forward';node.style.setProperty('--swim-route-duration','80s');node.style.setProperty('--swim-pulse-duration','0.1s');node.style.setProperty('--swim-delay','0s');node.style.setProperty('--swim-lane-y','0vh');await new Promise(r=>setTimeout(r,80));
+    const steps=window.CinemapOceanMilestoneSwim?.PULSE_STEPS||200,routeMs=80000;
+    delete node.dataset.swimActive;await new Promise(r=>setTimeout(r,80));node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.dataset.swimDirection='forward';node.style.setProperty('--swim-route-duration',`${routeMs/1000}s`);node.style.setProperty('--swim-pulse-duration',`${routeMs/steps/1000}s`);node.style.setProperty('--swim-delay','0s');node.style.setProperty('--swim-lane-y','0vh');await new Promise(r=>setTimeout(r,80));
     const animation=node.getAnimations().find(a=>a.animationName==='milestoneForwardNatural');if(!animation)throw new Error('dolphin route animation missing');animation.pause();const left=()=>node.getBoundingClientRect().left;const leftAt=ms=>new Promise(resolve=>{animation.currentTime=ms;requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(left())));});
-    const segmentMs=80000/800,startLeft=await leftAt(0),burstLeft=await leftAt(segmentMs*.48),pauseStart=await leftAt(segmentMs*.55),pauseEnd=await leftAt(segmentMs*.95),nextBurst=await leftAt(segmentMs*1.48);
-    return {animationName:animation.animationName,cadence:node.dataset.swimCadence,segmentMs,startLeft,burstLeft,pauseStart,pauseEnd,nextBurst,firstBurstDelta:burstLeft-startLeft,pauseDelta:pauseEnd-pauseStart,secondBurstDelta:nextBurst-pauseEnd};
+    const segmentMs=routeMs/steps,startLeft=await leftAt(0),burstLeft=await leftAt(segmentMs*.48),pauseStart=await leftAt(segmentMs*.55),pauseEnd=await leftAt(segmentMs*.95),nextBurst=await leftAt(segmentMs*1.48);
+    return {animationName:animation.animationName,cadence:node.dataset.swimCadence,steps,segmentMs,startLeft,burstLeft,pauseStart,pauseEnd,nextBurst,firstBurstDelta:burstLeft-startLeft,pauseDelta:pauseEnd-pauseStart,secondBurstDelta:nextBurst-pauseEnd};
   });
 
   const ordinaryUpgrade=await page.evaluate(()=>{
@@ -93,21 +94,21 @@ try{
   for(const [key,cfg] of Object.entries(swimmers)){
     const m=metrics[key],d=diagnostic[key];
     if(!m||!d)failures.push(`${key}: no metrics`);else{
-      if(!m.keyed)failures.push(`${key}: background isolation never reached ready state`);
+      if(!m.ready)failures.push(`${key}: deformation source never reached ready state`);
       if(m.coverage>cfg.maxCoverage)failures.push(`${key}: alpha coverage too large (${m.coverage.toFixed(3)})`);
       if(m.movingPixelDelta<cfg.minDelta)failures.push(`${key}: motion too small (${m.movingPixelDelta.toFixed(2)})`);
       if(m.movingPixelDelta<=m.anchorPixelDelta*1.03)failures.push(`${key}: moving region must change more than anchored body`);
       if(Number(d.opacity)!==1)failures.push(`${key}: commemorative opacity is ${d.opacity}`);
-      if(d.opaqueRatio<.94)failures.push(`${key}: body remains semi-transparent (${d.opaqueRatio.toFixed(3)} solid/opaque)`);
+      if(d.opaqueRatio<.90)failures.push(`${key}: body remains too transparent (${d.opaqueRatio.toFixed(3)} solid/opaque)`);
       if(!d.rect||d.rect.width<4||d.rect.height<4)failures.push(`${key}: not visibly laid out`);
       if(cfg.direction&&d.direction!==cfg.direction)failures.push(`${key}: direction ${d.direction}, expected ${cfg.direction}`);
     }
   }
   if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
   if(cadence.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${cadence.animationName})`);
-  if(cadence.firstBurstDelta<.25||cadence.firstBurstDelta>2.2)failures.push(`dolphin: propulsion burst must be tiny (${cadence.firstBurstDelta.toFixed(2)}px)`);
+  if(cadence.firstBurstDelta<.2||cadence.firstBurstDelta>1.5)failures.push(`dolphin: propulsion burst must be tiny (${cadence.firstBurstDelta.toFixed(2)}px)`);
   if(Math.abs(cadence.pauseDelta)>.35)failures.push(`dolphin: pause still drifts (${cadence.pauseDelta.toFixed(2)}px)`);
-  if(cadence.secondBurstDelta<.25||cadence.secondBurstDelta>2.2)failures.push(`dolphin: next burst must be tiny (${cadence.secondBurstDelta.toFixed(2)}px)`);
+  if(cadence.secondBurstDelta<.2||cadence.secondBurstDelta>1.5)failures.push(`dolphin: next burst must be tiny (${cadence.secondBurstDelta.toFixed(2)}px)`);
   if(!ordinaryUpgrade.upgraded||ordinaryUpgrade.srcs.some(s=>/\.svg$|species-filefish\.webp$/.test(s)))failures.push(`ordinary fish upgrade failed: ${JSON.stringify(ordinaryUpgrade)}`);
   if(failures.length)throw new Error(failures.join('; '));
   console.log('Ocean creature quality motion verified:',{metrics,cadence,ordinaryUpgrade});

@@ -1,0 +1,37 @@
+name: Ocean dolphin motion probe
+
+on:
+  pull_request:
+    paths:
+      - 'preview/ocean/**'
+      - 'scripts/ocean_dolphin_motion_probe.mjs'
+      - '.github/workflows/ocean-dolphin-motion.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  dolphin-motion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary Playwright dependency
+        run: npm install --no-save --no-package-lock playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/ocean-dolphin-http.log 2>&1 &
+      - name: Verify dolphin tail motion and fixed background
+        run: node scripts/ocean_dolphin_motion_probe.mjs
+      - name: Upload dolphin motion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-dolphin-motion-evidence
+          path: artifacts/dolphin-motion/
+          if-no-files-found: warn
+          retention-days: 7

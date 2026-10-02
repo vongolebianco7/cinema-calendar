@@ -11,6 +11,7 @@ test('active milestone swimmers travel forward instead of oscillating in place',
   assert.match(swim,/0%\{transform:translate3d\(-35vw/);
   assert.match(swim,/100%\{transform:translate3d\(85vw/);
   assert.match(swim,/animation-name:milestoneForwardPass!important/);
+  assert.match(swim,/dolphin:\{family:'rigid-cruise',duration:18/,'dolphin needs readable forward travel on iPhone');
   assert.doesNotMatch(swim,/@keyframes articulatedPassRoute\{0%\{transform:translate3d\(-\.6vw/);
 });
 

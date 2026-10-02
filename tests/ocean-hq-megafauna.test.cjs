@@ -27,13 +27,19 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('articulated manta dolphin and dugong move through a forward-only unrotated route',()=>{
-  assert.match(swim,/@keyframes milestoneForwardPass/);
-  assert.match(swim,/\[data-commemorative\]\[data-swim-active="1"\]\{animation-name:milestoneForwardPass!important/);
-  const pass=swim.match(/@keyframes milestoneForwardPass\{[^\n]+/)?.[0]||'';
-  assert.ok(pass,'missing forward pass keyframes');
-  assert.doesNotMatch(pass,/rotate[XYZ]?\(/);
-  assert.doesNotMatch(pass,/50%/);
+test('large swimmers use natural directional traversal without in-frame flipping',()=>{
+  assert.match(swim,/@keyframes milestoneForwardNatural/);
+  assert.match(swim,/@keyframes milestoneReverseNatural/);
+  assert.match(swim,/data-swim-direction="forward"/);
+  assert.match(swim,/data-swim-direction="reverse"/);
+  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[^\n]+/g)].map(m=>m[0]);
+  assert.equal(routes.length,2);
+  for(const route of routes){
+    assert.doesNotMatch(route,/rotateY\(/);
+    assert.match(route,/var\(--swim-lane-y\)/);
+    assert.match(route,/var\(--swim-wave\)/);
+  }
+  assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
 });
 
 test('megafauna keep a strong iPhone size hierarchy',()=>{

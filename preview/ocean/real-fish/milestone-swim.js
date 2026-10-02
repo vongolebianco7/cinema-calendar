@@ -8,7 +8,7 @@ const profiles={
  'giant-octopus':{family:'octopus-drift',duration:19,travel:5,bob:3,body:3,direction:'forward'},
  'manta-ray':{family:'rigid-glide',duration:28,travel:3,bob:.6,body:4,direction:'reverse'},
  dolphin:{family:'rigid-cruise',duration:20,travel:3.5,bob:.65,body:3,direction:'reverse'},
- 'hammerhead-shark':{family:'shark-cruise',duration:27,travel:4,bob:.45,body:2,direction:'forward'},
+ 'hammerhead-shark':{family:'shark-cruise',duration:27,travel:4,bob:.45,body:2,direction:'reverse'},
  'large-shark':{family:'shark-cruise',duration:31,travel:4,bob:.4,body:1.8,direction:'forward'},
  dugong:{family:'rigid-cruise',duration:31,travel:2.5,bob:.55,body:2,direction:'reverse'},
  'minke-whale':{family:'cetacean-cruise',duration:36,travel:3.5,bob:.55,body:2,direction:'forward'},
@@ -19,14 +19,14 @@ const profiles={
 };
 const fallback={family:'gentle-cruise',duration:24,travel:8,bob:2,body:2,direction:'forward'};
 const ORDINARY_ASSET_UPGRADES={
- 'species-blue-tang.svg':'fish-real.webp',
- 'species-damselfish.svg':'fish-real.webp',
- 'species-firefish.svg':'species-aji.webp',
- 'species-lyretail-anthias.svg':'species-red-ornate-reef-fish.webp',
- 'species-six-line-wrasse.svg':'species-reef-schooling-fish.webp',
- 'species-threadfin-butterflyfish.svg':'species-butterflyfish.webp',
- 'species-filefish.webp':'species-butterflyfish.webp',
- 'species-stingray.webp':'../real-fish/assets/milestone-manta-ray-v2.webp'
+ 'species-blue-tang.svg':'optimized/fish-real.webp',
+ 'species-damselfish.svg':'optimized/fish-real.webp',
+ 'species-firefish.svg':'optimized/species-aji.webp',
+ 'species-lyretail-anthias.svg':'optimized/species-red-ornate-reef-fish.webp',
+ 'species-six-line-wrasse.svg':'optimized/species-reef-schooling-fish.webp',
+ 'species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
+ 'species-filefish.webp':'optimized/species-butterflyfish.webp',
+ 'species-stingray.webp':'assets/milestone-manta-ray-v2.webp'
 };
 let rotationTimer=null,ordinaryObserver=null;
 function profileFor(key){return key&&profiles[key]?{key,...profiles[key]}:{key:key||'unknown',...fallback};}
@@ -50,7 +50,7 @@ ${buildPulseRoute('milestoneReverseNatural',128,-72,.04)}
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile]{animation:none!important}}
 `;doc.head.appendChild(style);}
 function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key);ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';const routeDuration=p.duration*PULSE_ROUTE_DURATION_FACTOR,pulseDuration=routeDuration/PULSE_STEPS;node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',routeDuration+'s');node.style.setProperty('--swim-pulse-duration',pulseDuration+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.25,Math.min(.9,p.bob))+'vh');node.style.opacity='1';return p;}
-function upgradeOrdinaryAssets(scope){const rootNode=scope&&scope.querySelectorAll?scope:root.document;if(!rootNode)return;const imgs=[];if(rootNode.matches?.('.fishBody,.fishTail'))imgs.push(rootNode);for(const img of rootNode.querySelectorAll?.('.fishBody,.fishTail')||[])imgs.push(img);for(const img of imgs){const src=img.getAttribute('src')||'';for(const [bad,replacement] of Object.entries(ORDINARY_ASSET_UPGRADES)){if(!src.endsWith(bad))continue;img.src='optimized/'+replacement.replace(/^optimized\//,'');img.closest('.fishWrap')?.setAttribute('data-asset-upgraded','1');break;}}}
+function upgradeOrdinaryAssets(scope){const rootNode=scope&&scope.querySelectorAll?scope:root.document;if(!rootNode)return;const imgs=[];if(rootNode.matches?.('.fishBody,.fishTail'))imgs.push(rootNode);for(const img of rootNode.querySelectorAll?.('.fishBody,.fishTail')||[])imgs.push(img);for(const img of imgs){const src=img.getAttribute('src')||'';for(const [bad,replacement] of Object.entries(ORDINARY_ASSET_UPGRADES)){if(!src.endsWith(bad))continue;img.src=replacement;img.closest('.fishWrap')?.setAttribute('data-asset-upgraded','1');break;}}}
 function bootOrdinaryUpgrade(){upgradeOrdinaryAssets(root.document);if(ordinaryObserver||!root.MutationObserver||!root.document?.body)return;ordinaryObserver=new MutationObserver(ms=>{for(const m of ms)for(const node of m.addedNodes)upgradeOrdinaryAssets(node)});ordinaryObserver.observe(root.document.body,{childList:true,subtree:true});}
 function clearRotation(){if(rotationTimer!==null){if(root.clearTimeout)root.clearTimeout(rotationTimer);else if(root.clearInterval)root.clearInterval(rotationTimer);rotationTimer=null;}}
 function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length,lanes=[-13,-7,-2,4,10,15,-10,8,-15,1,13];for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y');}const active=list.slice(0,count);for(const [index,node] of active.entries()){const routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||120,phase=(index+.37)/(Math.max(1,count)),lane=lanes[index%lanes.length];node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.style.left='0%';node.style.top='40%';node.style.opacity='1';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y',lane+'vh');}return active;}

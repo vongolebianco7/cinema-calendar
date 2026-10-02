@@ -66,18 +66,21 @@ test('manta dolphin and dugong use rigid-body swim profiles with no body-bending
   assert.doesNotMatch(src,/rayBody/);
 });
 
-test('large swimmers, dolphin, manta and turtle use staged forward pass-through with no in-frame turning',()=>{
-  const swim=loadSwimSource(),photo=loadPhotoSource();
-  assert.match(swim,/\[data-commemorative\]\[data-swim-active="1"\]\{animation-name:milestoneForwardPass/);
+test('large swimmers, dolphin, manta and turtle traverse continuously with natural directional routes',()=>{
+  const swim=loadSwimSource();
   for(const family of ['turtle-stroke','rigid-glide','rigid-cruise','shark-cruise','cetacean-cruise']){
     assert.match(swim,new RegExp(`data-swim-profile="${family}"[^}]*not\\(\\[data-swim-active="1"\\]\\)[^}]*animation:none`,'s'));
   }
-  assert.match(swim,/function activatePassThrough\(nodes,maxActive=2\)/);
-  assert.match(photo,/activatePassThrough\?\.\(passThroughNodes,2\)/);
-  const pass=swim.match(/@keyframes milestoneForwardPass\{([^}]|\}(?!\n@))*\}/s)?.[0]||'';
-  assert.ok(pass,'missing forward pass keyframes');
-  assert.doesNotMatch(pass,/rotateY\(/);
-  assert.doesNotMatch(pass,/50%/);
+  assert.match(swim,/@keyframes milestoneForwardNatural/);
+  assert.match(swim,/@keyframes milestoneReverseNatural/);
+  assert.match(swim,/function activatePassThrough\(nodes,maxActive\)/);
+  assert.match(swim,/const list=\(nodes\|\|\[\]\)\.filter\(Boolean\),count=list\.length/);
+  assert.match(swim,/--swim-delay/);
+  assert.match(swim,/--swim-lane-y/);
+  assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
+  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[^\n]+/g)].map(m=>m[0]);
+  assert.equal(routes.length,2);
+  for(const route of routes) assert.doesNotMatch(route,/rotateY\(/);
 });
 
 test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{

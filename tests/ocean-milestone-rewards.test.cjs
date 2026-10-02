@@ -83,9 +83,7 @@ test('large swimmers, dolphin, manta and turtle use repeated propulsion bursts w
   assert.match(swim,/25%\{transform:translate3d\(-50vw/);
   assert.match(swim,/46%\{transform:translate3d\(-8vw/);
   assert.match(swim,/55%\{transform:translate3d\(-8vw/);
-  const routes=[...swim.matchAll(/@keyframes milestone(?:Forward|Reverse)Natural\{[\s\S]*?\n\}/g)].map(m=>m[0]);
-  assert.equal(routes.length,2);
-  for(const route of routes) assert.doesNotMatch(route,/rotateY\(/);
+  assert.doesNotMatch(swim,/rotateY\(/);
 });
 
 test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{

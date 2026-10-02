@@ -66,19 +66,23 @@ test('manta dolphin and dugong use rigid-body swim profiles with no body-bending
   assert.doesNotMatch(src,/rayBody/);
 });
 
-test('large swimmers use many short propulsion steps with glide pauses',()=>{
+test('large swimmers use tiny propulsion steps with glide pauses',()=>{
   const swim=loadSwimSource();
   for(const family of ['turtle-stroke','rigid-glide','rigid-cruise','shark-cruise','cetacean-cruise']){
     assert.match(swim,new RegExp(`data-swim-profile="${family}"[^}]*not\\(\\[data-swim-active="1"\\]\\)[^}]*animation:none`,'s'));
   }
-  assert.match(swim,/const PULSE_STEPS=80/);
-  assert.match(swim,/const PULSE_ROUTE_DURATION_FACTOR=5/);
+  assert.match(swim,/const PULSE_STEPS=200/);
+  assert.match(swim,/const PULSE_ROUTE_DURATION_FACTOR=13/);
+  assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);
   assert.match(swim,/function buildPulseRoute\(/);
   assert.match(swim,/node\.dataset\.swimCadence='pulse-glide'/);
   assert.match(swim,/--swim-delay/);
   assert.match(swim,/--swim-lane-y/);
-  assert.match(swim,/--swim-duration/);
+  assert.match(swim,/--swim-pulse-duration/);
   assert.doesNotMatch(swim,/animation-timing-function:linear!important/);
+  const steps=Number(swim.match(/const PULSE_STEPS=(\d+)/)?.[1]);
+  const span=Number(swim.match(/const PULSE_ROUTE_SPAN_VW=(\d+(?:\.\d+)?)/)?.[1]);
+  assert.ok(span/steps<=.3,`per-stroke travel must stay tiny, got ${span/steps}vw`);
 });
 
 test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{

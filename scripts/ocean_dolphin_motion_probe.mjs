@@ -71,7 +71,7 @@ try{
         for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++){
           const p=y*a.width+x,d=Math.abs(a.alpha[p]-b.alpha[p]);
           let moving=false,anchor=false;
-          if(cfg.profile==='tail-flex-left'){moving=x<a.width*.45;anchor=x>a.width*.58;}
+          if(cfg.profile==='tail-flex-left'){moving=x<a.width*(key==='dolphin'?.30:.45);anchor=x>a.width*.58;}
           else if(cfg.profile==='tail-flex-right'){moving=x>a.width*.55;anchor=x<a.width*.42;}
           else {moving=x<a.width*.32||x>a.width*.68;anchor=x>a.width*.42&&x<a.width*.58;}
           if(moving){movingDiff+=d;movingN++;}
@@ -85,8 +85,23 @@ try{
     return output;
   },swimmers);
 
+  const forward=await page.evaluate(async()=>{
+    window.CinemapOceanMilestoneSwim?.clearRotation?.();
+    for(const node of document.querySelectorAll('[data-commemorative][data-swim-active]'))delete node.dataset.swimActive;
+    const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas');
+    const node=canvas?.closest('[data-commemorative]');
+    if(!node)throw new Error('dolphin commemorative wrapper missing');
+    node.dataset.swimActive='1';
+    await new Promise(resolve=>setTimeout(resolve,120));
+    const animationName=getComputedStyle(node).animationName;
+    const startLeft=node.getBoundingClientRect().left;
+    await new Promise(resolve=>setTimeout(resolve,850));
+    const endLeft=node.getBoundingClientRect().left;
+    return {animationName,startLeft,endLeft,forwardDelta:endLeft-startLeft};
+  });
+
   await page.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
-  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify(metrics,null,2)+'\n');
+  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify({swimmers:metrics,forward},null,2)+'\n');
 
   const failures=[];
   for(const [key,cfg] of Object.entries(swimmers)){
@@ -99,8 +114,11 @@ try{
       if(m.movingPixelDelta<=m.anchorPixelDelta*1.08)failures.push(`${key}: moving region must change more than anchored body (moving=${m.movingPixelDelta.toFixed(2)}, anchor=${m.anchorPixelDelta.toFixed(2)})`);
     }
   }
+  if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
+  if(forward.animationName!=='milestoneForwardPass')failures.push(`dolphin: wrong travel animation (${forward.animationName})`);
+  if(forward.forwardDelta<5)failures.push(`dolphin: did not visibly advance (${forward.forwardDelta.toFixed(2)}px)`);
   if(failures.length)throw new Error(failures.join('; '));
-  console.log('Ocean swimmer motion verified:',metrics);
+  console.log('Ocean swimmer motion verified:',{metrics,forward});
 }finally{
   await context.close();
   await browser.close();

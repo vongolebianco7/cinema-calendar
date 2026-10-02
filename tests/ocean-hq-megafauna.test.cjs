@@ -27,9 +27,13 @@ test('large whales and whale shark use direct HQ transparent assets that really 
   }
 });
 
-test('articulated manta dolphin and dugong move through an unrotated translation route',()=>{
-  assert.match(swim,/@keyframes articulatedPassRoute/);
-  for(const key of ['manta-ray','dolphin','dugong'])assert.match(swim,new RegExp('data-swim-key="'+key+'"\\]\\[data-swim-active="1"\\]\\{animation-name:articulatedPassRoute!important'));
+test('articulated manta dolphin and dugong move through a forward-only unrotated route',()=>{
+  assert.match(swim,/@keyframes milestoneForwardPass/);
+  assert.match(swim,/\[data-commemorative\]\[data-swim-active="1"\]\{animation-name:milestoneForwardPass!important/);
+  const pass=swim.match(/@keyframes milestoneForwardPass\{[^\n]+/)?.[0]||'';
+  assert.ok(pass,'missing forward pass keyframes');
+  assert.doesNotMatch(pass,/rotate[XYZ]?\(/);
+  assert.doesNotMatch(pass,/50%/);
 });
 
 test('megafauna keep a strong iPhone size hierarchy',()=>{

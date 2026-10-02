@@ -5,6 +5,7 @@ const assert=require('node:assert/strict');
 const manifest=JSON.parse(fs.readFileSync('preview/ocean/real-fish/milestone-assets.json','utf8'));
 const atlas=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8');
 const population=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
+const swim=fs.readFileSync('preview/ocean/real-fish/milestone-swim.js','utf8');
 
 test('AI-like swimmers use continuous whole-body deformation instead of clipped appendage layers',()=>{
   const expected={
@@ -74,4 +75,20 @@ test('manta dolphin and dugong have readable iPhone size caps',()=>{
   assert.match(population,/'manta-ray':26/);
   assert.match(population,/dolphin:20/);
   assert.match(population,/dugong:20/);
+});
+
+test('active milestone swimmers move forward across the ocean instead of oscillating in place',()=>{
+  assert.match(swim,/@keyframes milestoneForwardPass/);
+  assert.match(swim,/0%\{transform:translate3d\(-35vw/);
+  assert.match(swim,/100%\{transform:translate3d\(85vw/);
+  assert.match(swim,/animation-name:milestoneForwardPass!important/);
+  assert.doesNotMatch(swim,/@keyframes articulatedPassRoute\{0%\{transform:translate3d\(-\.6vw/);
+});
+
+test('dolphin deformation stays within the tail-most zone',()=>{
+  const dolphin=manifest.species.dolphin;
+  assert.ok(Number(dolphin.deformation?.flexSpan)>0);
+  assert.ok(Number(dolphin.deformation.flexSpan)<=0.3,'dolphin flex span must stay within the tail-most 30%');
+  assert.match(atlas,/function tailRamp\(profile,u,flexSpan/);
+  assert.match(atlas,/tailRamp\(profile,u,Number\(cfg\.flexSpan\)/);
 });

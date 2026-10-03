@@ -6,7 +6,6 @@ const manifest=JSON.parse(fs.readFileSync('preview/ocean/real-fish/milestone-ass
 const atlas=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8');
 const population=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 const swim=fs.readFileSync('preview/ocean/real-fish/milestone-swim.js','utf8');
-const ecosystem=fs.readFileSync('preview/ocean/real-fish/ecosystem.html','utf8');
 
 test('AI-like swimmers use continuous deformation with species-correct tail side',()=>{
   const expected={'manta-ray':'wing-flex',dolphin:'tail-flex-right',dugong:'tail-flex-right','minke-whale':'tail-flex-left',orca:'tail-flex-left','humpback-whale':'tail-flex-left','whale-shark':'tail-flex-left','blue-whale':'tail-flex-left'};
@@ -81,11 +80,11 @@ test('megafauna use species-aware habitat bands instead of three fixed lanes',()
 });
 
 test('schooling fish expose leader phase and follower lag',()=>{
-  assert.match(ecosystem,/schoolMotion/);
-  assert.match(ecosystem,/data-school/);
-  assert.match(ecosystem,/--school-phase/);
-  assert.match(ecosystem,/--school-lag/);
-  assert.match(ecosystem,/@keyframes schoolFollow/);
+  assert.match(population,/schoolMotion/);
+  assert.match(population,/data-school/);
+  assert.match(population,/--school-phase/);
+  assert.match(population,/--school-lag/);
+  assert.match(population,/@keyframes schoolFollow/);
 });
 
 test('octopus uses jet propulsion cadence near the seabed',()=>{

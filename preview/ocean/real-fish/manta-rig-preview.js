@@ -20,11 +20,12 @@ function strokeCurve(phase){
   return .34;
 }
 function projectedWingLift(span,phase,side){
-  const torsoMask=smoothstep((span-.24)/.30);
-  const tipGain=Math.pow(clamp01(span),1.62);
-  const propagation=.075*tipGain;
+  const torsoMask=smoothstep((span-.22)/.31);
+  const rootCompliance=.10+.90*smoothstep((span-.20)/.42);
+  const midCamber=.72+Math.exp(-Math.pow((span-.68)/.22,2))*.34;
+  const tipLag=.092*Math.pow(clamp01(span),1.85);
   const sideOffset=side<0?leftPhaseOffset:rightPhaseOffset;
-  return strokeCurve(phase-propagation-sideOffset)*torsoMask*(.14+.86*tipGain);
+  return strokeCurve(phase-tipLag-sideOffset)*torsoMask*rootCompliance*midCamber;
 }
 
 function shader(gl,type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s)||'shader compile failed');return s;}
@@ -38,6 +39,7 @@ uniform float uCameraPitch;
 uniform float uDepthPerspective;
 varying vec2 vUv;
 varying float vLiftNorm;
+varying float vTrailingFlex;
 float sat(float x){return clamp(x,0.0,1.0);} 
 float sstep(float x){x=sat(x);return x*x*(3.0-2.0*x);} 
 float ss(float x){x=sat(x);return x*x*x*(x*(x*6.0-15.0)+10.0);} 
@@ -52,18 +54,25 @@ void main(){
   float v=aUv.y;
   float side=u<.5?-1.0:1.0;
   float span=abs(u-.5)*2.0;
-  float torsoMask=sstep((span-.24)/.30);
-  float tipGain=pow(sat(span),1.62);
-  float phaseDelay=.075*tipGain+(side<0.0?${leftPhaseOffset.toFixed(3)}:${rightPhaseOffset.toFixed(3)});
-  float chord=.66+.34*sin(3.14159265*v);
-  float liftNorm=stroke(uPhase-phaseDelay)*torsoMask*(.14+.86*tipGain)*chord;
+  float torsoMask=sstep((span-.22)/.31);
+  float rootCompliance=.10+.90*sstep((span-.20)/.42);
+  float midCamber=.72+exp(-pow((span-.68)/.22,2.0))*.34;
+  float tipLag=.092*pow(sat(span),1.85);
+  float phaseDelay=tipLag+(side<0.0?${leftPhaseOffset.toFixed(3)}:${rightPhaseOffset.toFixed(3)});
+  float leadingEdge=1.0-.20*sstep((v-.05)/.28);
+  float trailingEdgeFlex=sstep((v-.48)/.46)*(.18+.82*sstep((span-.42)/.50));
+  float chordShape=(.82+.18*sin(3.14159265*v))*leadingEdge;
+  float primary=stroke(uPhase-phaseDelay)*torsoMask*rootCompliance*midCamber*chordShape;
+  float delayedTrailing=stroke(uPhase-phaseDelay-.025)*trailingEdgeFlex*.18;
+  float liftNorm=primary+delayedTrailing;
   float lift=liftNorm*uAmplitude;
 
   float worldX=(u-.5)*2.0;
   float worldY=(v-.5)*1.15;
   float worldZ=lift;
-  float spanCompress=1.0-.42*abs(worldZ)*(.15+.85*tipGain);
+  float spanCompress=1.0-.34*abs(worldZ)*(.12+.88*sstep((span-.30)/.68));
   worldX*=spanCompress;
+  worldY+=trailingEdgeFlex*lift*.10;
 
   float cp=cos(uCameraPitch);
   float sp=sin(uCameraPitch);
@@ -76,8 +85,9 @@ void main(){
   gl_Position=vec4(screenX,-screenY,0.0,1.0);
   vUv=aUv;
   vLiftNorm=liftNorm;
+  vTrailingFlex=trailingEdgeFlex;
 }`);
- const fs=shader(gl,gl.FRAGMENT_SHADER,`precision mediump float;uniform sampler2D uTexture;varying vec2 vUv;varying float vLiftNorm;void main(){vec4 c=texture2D(uTexture,vUv);float shade=clamp(1.0+vLiftNorm*.14,.84,1.16);c.rgb*=shade;gl_FragColor=c;}`);
+ const fs=shader(gl,gl.FRAGMENT_SHADER,`precision mediump float;uniform sampler2D uTexture;varying vec2 vUv;varying float vLiftNorm;varying float vTrailingFlex;void main(){vec4 c=texture2D(uTexture,vUv);float shade=clamp(1.0+vLiftNorm*.12-vTrailingFlex*abs(vLiftNorm)*.035,.86,1.14);c.rgb*=shade;gl_FragColor=c;}`);
  const p=gl.createProgram();gl.attachShader(p,vs);gl.attachShader(p,fs);gl.linkProgram(p);gl.deleteShader(vs);gl.deleteShader(fs);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p)||'program link failed');return p;
 }
 function createMesh(gl){const data=[],indices=[];for(let y=0;y<=ROWS;y++){const v=y/ROWS;for(let x=0;x<=COLS;x++){const u=x/COLS;data.push(u,v,u,v);}}const stride=COLS+1;for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){const a=y*stride+x,b=a+1,c=a+stride,d=c+1;indices.push(a,c,b,b,c,d);}const vb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);const ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indices),gl.STATIC_DRAW);return{vb,ib,count:indices.length};}

@@ -34,7 +34,7 @@ function createKeyedSource(img,cfg){
    const edgeBlueRatio=edgeOpaque?edgeBlue/edgeOpaque:0;shouldKey=edgeOpaque>0&&edgeBlueRatio>=.42;
  }
  if(shouldKey){for(let i=0;i<data.length;i+=4){const score=chromaScore(data[i],data[i+1],data[i+2]);if(score<=low)continue;const keyed=score>=high?1:smoothstep((score-low)/(high-low));data[i+3]=Math.round(data[i+3]*(1-keyed));}}
- if(cfg.opaqueBody){for(let i=0;i<data.length;i+=4)data[i+3]=data[i+3]>28?255:0;}
+ if(cfg.opaqueBody){for(let i=0;i<data.length;i+=4)data[i+3]=data[i+3]>16?255:0;}
  ctx.putImageData(imageData,0,0);return off;
 }
 function thrustEnvelope(phase){if(phase===null||phase===undefined)return 1;const p=((phase%1)+1)%1;if(p<.48){const local=p/.48;return .58+.48*Math.sin(Math.PI*local);}return .14;}

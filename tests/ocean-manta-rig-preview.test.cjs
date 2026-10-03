@@ -1,29 +1,31 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
-const assert=require('node:assert/strict');
-const test=require('node:test');
 
 const root=path.resolve(__dirname,'..');
 const jsPath=path.join(root,'preview/ocean/real-fish/manta-rig-preview.js');
 const htmlPath=path.join(root,'preview/ocean/real-fish/manta-rig-preview.html');
 
-test('manta preview uses seven-bone weighted skinning and asymmetric stroke timing',()=>{
+test('manta preview uses projected 3D wing lift instead of in-plane bone rotation',()=>{
   assert.equal(fs.existsSync(jsPath),true,'manta rig preview renderer must exist');
-  const src=fs.readFileSync(jsPath,'utf8');
-  assert.match(src,/BONE_COUNT\s*=\s*7/);
-  assert.match(src,/leftRoot/);
-  assert.match(src,/leftMid/);
-  assert.match(src,/leftTip/);
-  assert.match(src,/rightRoot/);
-  assert.match(src,/rightMid/);
-  assert.match(src,/rightTip/);
-  assert.match(src,/aBoneWeights/);
-  assert.match(src,/powerStroke/);
-  assert.match(src,/recoveryStroke/);
-  assert.doesNotMatch(src,/Math\.sin\([^\n]*\)\s*\*\s*amplitude[^\n]*\/\/\s*global-wave/i);
+  const js=fs.readFileSync(jsPath,'utf8');
+  assert.match(js,/projectedWingLift/,'expected projected wing lift');
+  assert.match(js,/uPerspectiveY/,'expected perspective projection uniform');
+  assert.match(js,/uForeshorten/,'expected wing foreshortening uniform');
+  assert.doesNotMatch(js,/rotateAround\(/,'in-plane rotateAround rig should be removed');
 });
 
-test('manta preview is an isolated iPhone-first visual review page',()=>{
+test('manta torso stays anchored while the wing tips get the strongest lift',()=>{
+  const js=fs.readFileSync(jsPath,'utf8');
+  assert.match(js,/torsoMask/,'expected torso anchoring mask');
+  assert.match(js,/tipGain/,'expected distal tip amplification');
+  assert.match(js,/leftPhaseOffset/,'expected slight left/right phase asymmetry');
+  assert.match(js,/powerStroke/);
+  assert.match(js,/recoveryStroke/);
+});
+
+test('manta preview remains an isolated iPhone-first visual comparison',()=>{
   assert.equal(fs.existsSync(htmlPath),true,'manta rig preview page must exist');
   const html=fs.readFileSync(htmlPath,'utf8');
   assert.match(html,/width=device-width/);

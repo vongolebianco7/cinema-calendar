@@ -21,7 +21,7 @@ test('other direct-image swimmers use automatic background isolation before defo
   const keys=['manta-ray','dugong','minke-whale','orca','humpback-whale','whale-shark','blue-whale'];for(const key of keys)assert.equal(manifest.species[key].deformation?.chromaKey,'auto',key+' should use automatic background isolation');assert.match(atlas,/chromaKey==='auto'/);
 });
 
-test('deformation uses overlapping vertical slices so the animal stays visually continuous',()=>{assert.match(atlas,/const slices=/);assert.match(atlas,/overlap=/);assert.match(atlas,/sliceW/);assert.match(atlas,/tailRamp/);});
+test('deformation uses a continuous GPU mesh rather than overlapping image slices',()=>{assert.match(atlas,/const MESH_COLS=/);assert.match(atlas,/const MESH_ROWS=/);assert.match(atlas,/function createMesh\(/);assert.match(atlas,/drawElements/);assert.doesNotMatch(atlas,/sliceCountForWidth/);assert.doesNotMatch(atlas,/sliceW=source\.width\/slices/);});
 
 test('large whales and whale shark keep their direct HQ transparent sprites',()=>{
   const expected={'minke-whale':'assets/milestone-minke-whale-hq.webp',orca:'assets/milestone-orca-hq.webp','humpback-whale':'assets/milestone-humpback-whale-hq.webp','whale-shark':'assets/milestone-whale-shark-hq.webp','blue-whale':'assets/milestone-blue-whale-hq.webp'};for(const [key,asset] of Object.entries(expected)){assert.equal(manifest.species[key].asset,asset);assert.equal(manifest.species[key].assetAspect,3)}
@@ -58,21 +58,23 @@ test('deformed milestone creatures share one scheduler and pause when offscreen 
   assert.ok(rafCalls<=2,`milestone deformation should use a shared RAF, found ${rafCalls}`);
 });
 
-test('deformation canvas resolution and slice work are capped for iPhone performance',()=>{
+test('deformation canvas resolution and mesh density are capped for iPhone performance',()=>{
   assert.match(atlas,/DEFORMATION_DPR_CAP=1\.25/);
   assert.match(atlas,/DEFORMATION_WIDTH_CAP=520/);
   assert.match(atlas,/function ensureCanvasResolution\(/);
-  assert.match(atlas,/function sliceCountForWidth\(/);
+  const cols=Number(atlas.match(/const MESH_COLS=(\d+)/)?.[1]||0),rows=Number(atlas.match(/const MESH_ROWS=(\d+)/)?.[1]||0);
+  assert.ok(cols>=20&&cols<=40,`mesh columns out of range: ${cols}`);
+  assert.ok(rows>=8&&rows<=20,`mesh rows out of range: ${rows}`);
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
-test('fin deformation renders at near-display cadence with high spatial sampling',()=>{
+test('fin deformation renders at near-display cadence with GPU interpolation',()=>{
   const frameMs=Number(atlas.match(/const DEFORMATION_FRAME_MS=(\d+(?:\.\d+)?)/)?.[1]||Infinity);
   assert.ok(frameMs<=17,`deformation should target about 60fps, got ${frameMs}ms`);
-  const counts=[...atlas.matchAll(/width<\d+\?(\d+)/g)].map(m=>Number(m[1]));
-  assert.ok(counts.length>=2&&Math.min(...counts)>=48,`deformation needs at least 48 slices, got ${counts.join(',')}`);
-  assert.match(atlas,/imageSmoothingEnabled=true/);
-  assert.match(atlas,/imageSmoothingQuality='high'/);
+  assert.match(atlas,/vertexShader/);
+  assert.match(atlas,/uPhaseLag/);
+  assert.match(atlas,/drawElements/);
+  assert.doesNotMatch(atlas,/const slices=/);
 });
 
 test('pass-through swimmers move three times faster without increasing per-stroke jump distance',()=>{
@@ -114,7 +116,7 @@ test('octopus uses jet propulsion cadence near the seabed',()=>{
 test('manta and turtle use visibly large fin or flipper strokes with phase offsets',()=>{
   assert.ok(Number(manifest.species['manta-ray'].deformation?.amplitude)>=40);
   assert.ok(Number(manifest.species['sea-turtle'].deformation?.amplitude)>=30);
-  assert.match(atlas,/phaseOffset/);
+  assert.match(atlas,/phaseLag|uPhaseLag/);
 });
 
 test('surface-breathing cetaceans include gentle ascent and descent in route motion',()=>{

@@ -25,6 +25,14 @@ test('manta torso stays anchored while the wing tips get the strongest lift',()=
   assert.match(js,/recoveryStroke/);
 });
 
+test('manta normal cruise follows observed slow stroke and glide behavior',()=>{
+  const js=fs.readFileSync(jsPath,'utf8');
+  assert.match(js,/NORMAL_CYCLE_S\s*=\s*3\.15/,'expected roughly 3.1 second cruising cycle');
+  assert.match(js,/GLIDE_START\s*=\s*\.82/,'expected short glide near end of recovery');
+  assert.match(js,/milestone-manta-ray-hq\.svg/,'expected high-resolution vector manta asset');
+  assert.doesNotMatch(js,/milestone-manta-ray-v2\.webp/,'old low-resolution manta asset should not drive rigged preview');
+});
+
 test('manta preview remains an isolated iPhone-first visual comparison',()=>{
   assert.equal(fs.existsSync(htmlPath),true,'manta rig preview page must exist');
   const html=fs.readFileSync(htmlPath,'utf8');

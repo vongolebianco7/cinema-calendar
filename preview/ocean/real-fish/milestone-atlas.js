@@ -57,11 +57,11 @@ function fitDeformationCanvas(entry,force=false){
 }
 function ensureVisibilityObserver(){
  if(deformationScheduler.observer||!root.IntersectionObserver)return deformationScheduler.observer;
- deformationScheduler.observer=new root.IntersectionObserver(records=>{for(const record of records){const entry=record.target.__oceanDeformationEntry;if(!entry)continue;entry.visible=Boolean(record.isIntersecting&&record.intersectionRatio>0);if(entry.visible)scheduleDeformationFrame();}},{root:null,rootMargin:'12% 0px',threshold:0});
+ deformationScheduler.observer=new root.IntersectionObserver(records=>{for(const record of records){const entry=record.target.__oceanDeformationEntry;if(!entry)continue;entry.visible=Boolean(record.isIntersecting&&record.intersectionRatio>0);if(entry.visible){entry.everConnected=true;scheduleDeformationFrame();}}},{root:null,rootMargin:'12% 0px',threshold:0});
  return deformationScheduler.observer;
 }
 function unregisterDeformation(entry){deformationScheduler.entries.delete(entry);deformationScheduler.observer?.unobserve(entry.wrap);if(entry.wrap.__oceanDeformationEntry===entry)delete entry.wrap.__oceanDeformationEntry;}
-function hasActiveDeformation(){if(document.hidden)return false;for(const entry of [...deformationScheduler.entries]){if(!entry.wrap.isConnected){unregisterDeformation(entry);continue;}if(entry.visible&&entry.source)return true;}return false;}
+function hasActiveDeformation(){if(document.hidden)return false;for(const entry of [...deformationScheduler.entries]){if(entry.wrap.isConnected)entry.everConnected=true;else if(entry.everConnected){unregisterDeformation(entry);continue;}else continue;if(entry.visible&&entry.source)return true;}return false;}
 function scheduleDeformationFrame(){if(deformationScheduler.raf||!deformationScheduler.entries.size)return;if(!hasActiveDeformation())return;deformationScheduler.raf=requestAnimationFrame(tickDeformations);}
 function drawDeformation(entry,ts){
  if(!entry.source)return;fitDeformationCanvas(entry);const {canvas,source,cfg,profile,amplitude,motionScale,effectivePeriod,aspect,wrap}=entry,ctx=canvas.getContext('2d');if(!ctx)return;
@@ -82,7 +82,8 @@ function tickDeformations(ts){
  if(due){
    deformationScheduler.lastFrame=ts;
    for(const entry of [...deformationScheduler.entries]){
-     if(!entry.wrap.isConnected){unregisterDeformation(entry);continue;}
+     if(!entry.wrap.isConnected){if(entry.everConnected)unregisterDeformation(entry);continue;}
+     entry.everConnected=true;
      if(!entry.visible||!entry.source)continue;
      if(!entry.start)entry.start=ts;
      drawDeformation(entry,ts);
@@ -96,7 +97,7 @@ function createDeformedCreature(key,spec){
  const wrap=decorate(document.createElement('span'),key,spec),canvas=document.createElement('canvas'),img=new Image(),cfg=spec.deformation||{},profile=cfg.profile||'tail-flex-right',amplitude=Math.max(1,Number(cfg.amplitude)||24),period=Math.max(.8,Number(cfg.period)||2.4),aspect=Math.max(.8,Number(spec.assetAspect)||3),reduced=Boolean(root.matchMedia&&root.matchMedia('(prefers-reduced-motion: reduce)').matches),motionScale=reduced?.45:1,effectivePeriod=period*(reduced?1.35:1);
  Object.assign(wrap.style,{display:'block',position:'relative',overflow:'visible',aspectRatio:String(aspect),background:'transparent',opacity:'1'});wrap.dataset.deformed='1';wrap.dataset.sourceState='loading';wrap.dataset.reducedMotion=reduced?'1':'0';
  canvas.className='milestoneDeformedCanvas';Object.assign(canvas.style,{position:'absolute',left:'0',top:'-10%',width:'100%',height:'120%',display:'block',pointerEvents:'none',overflow:'visible',opacity:'1'});wrap.appendChild(canvas);
- const entry={wrap,canvas,img,cfg,profile,amplitude,period,aspect,motionScale,effectivePeriod,source:null,start:0,lastFit:-Infinity,visible:true,dpr:1};
+ const entry={wrap,canvas,img,cfg,profile,amplitude,period,aspect,motionScale,effectivePeriod,source:null,start:0,lastFit:-Infinity,visible:true,dpr:1,everConnected:false};
  const prepare=()=>{if(entry.source||!img.complete||!img.naturalWidth)return;entry.source=createKeyedSource(img,cfg);wrap.dataset.backgroundKeyed=cfg.chromaKey?'1':'0';wrap.dataset.sourceState='ready';fitDeformationCanvas(entry,true);};
  const kick=()=>{entry.source=null;wrap.dataset.sourceState='loaded';prepare();if(entry.source){if(!entry.start)entry.start=performance.now();drawDeformation(entry,entry.start);}scheduleDeformationFrame();};
  img.onload=kick;img.onerror=()=>{wrap.dataset.sourceState='error';};img.decoding='async';img.loading='eager';img.src=spec.asset;registerDeformation(entry);if(img.complete&&img.naturalWidth)kick();return wrap;

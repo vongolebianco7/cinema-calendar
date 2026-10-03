@@ -6,6 +6,7 @@ const manifest=JSON.parse(fs.readFileSync('preview/ocean/real-fish/milestone-ass
 const atlas=fs.readFileSync('preview/ocean/real-fish/milestone-atlas.js','utf8');
 const population=fs.readFileSync('preview/ocean/real-fish/photo-four-points.js','utf8');
 const swim=fs.readFileSync('preview/ocean/real-fish/milestone-swim.js','utf8');
+const ecosystem=fs.readFileSync('preview/ocean/real-fish/ecosystem.html','utf8');
 
 test('AI-like swimmers use continuous deformation with species-correct tail side',()=>{
   const expected={'manta-ray':'wing-flex',dolphin:'tail-flex-right',dugong:'tail-flex-right','minke-whale':'tail-flex-left',orca:'tail-flex-left','humpback-whale':'tail-flex-left','whale-shark':'tail-flex-left','blue-whale':'tail-flex-left'};
@@ -66,9 +67,43 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
-test('pass-through megafauna use three vertical lanes to avoid density spill',()=>{
-  assert.match(swim,/const PASS_THROUGH_BASE_X=\[42\]/);
-  assert.match(swim,/const PASS_THROUGH_LANES=\[-22,0,22\]/);
-  assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
-  assert.match(swim,/node\.style\.left=baseX\+'%'/);
+test('megafauna use species-aware habitat bands instead of three fixed lanes',()=>{
+  assert.match(swim,/SPECIES_SWIM_BANDS/);
+  assert.match(swim,/HABITAT_SWIM_BANDS/);
+  assert.match(swim,/function bandFor\(/);
+  assert.doesNotMatch(swim,/const PASS_THROUGH_LANES=\[-22,0,22\]/);
+  assert.match(swim,/dolphin:[^\n]*surface/);
+  assert.match(swim,/orca:[^\n]*surface/);
+  assert.match(swim,/'humpback-whale':[^\n]*surface/);
+  assert.match(swim,/'minke-whale':[^\n]*surface/);
+  assert.match(swim,/dugong:[^\n]*(seagrass|lower)/);
+  assert.match(swim,/'giant-octopus':[^\n]*(seabed|bottom)/);
+});
+
+test('schooling fish expose leader phase and follower lag',()=>{
+  assert.match(ecosystem,/schoolMotion/);
+  assert.match(ecosystem,/data-school/);
+  assert.match(ecosystem,/--school-phase/);
+  assert.match(ecosystem,/--school-lag/);
+  assert.match(ecosystem,/@keyframes schoolFollow/);
+});
+
+test('octopus uses jet propulsion cadence near the seabed',()=>{
+  assert.equal(manifest.species['giant-octopus'].habitat,'seabed-rock');
+  assert.match(swim,/'giant-octopus':\{[^}]*family:'octopus-jet'/);
+  assert.match(swim,/octopusJetRoute/);
+  assert.match(swim,/octopusJetPulse/);
+});
+
+test('manta and turtle use visibly large fin or flipper strokes with phase offsets',()=>{
+  assert.ok(Number(manifest.species['manta-ray'].deformation?.amplitude)>=40);
+  assert.ok(Number(manifest.species['sea-turtle'].deformation?.amplitude)>=30);
+  assert.match(atlas,/phaseOffset/);
+});
+
+test('surface-breathing cetaceans include gentle ascent and descent in route motion',()=>{
+  assert.match(swim,/surfaceRise/);
+  assert.match(swim,/surfaceDip/);
+  assert.match(swim,/--swim-surface-rise/);
+  assert.match(swim,/--swim-surface-dip/);
 });

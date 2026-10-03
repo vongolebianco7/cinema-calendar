@@ -2,8 +2,8 @@
 const PULSE_STEPS=200;
 const PULSE_ROUTE_DURATION_FACTOR=13;
 const PULSE_ROUTE_SPAN_VW=50;
-const PASS_THROUGH_BASE_X=[8,58,108];
-const PASS_THROUGH_LANES=[-16,8];
+const PASS_THROUGH_BASE_X=[12,72];
+const PASS_THROUGH_LANES=[-15,9];
 const ORDINARY_ASSET_UPGRADES={
  'optimized/species-blue-tang.svg':'optimized/species-moorish-idol.webp',
  'optimized/species-damselfish.svg':'optimized/species-puffer.webp',

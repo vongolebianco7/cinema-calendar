@@ -52,6 +52,8 @@ jobs:
         run: node scripts/ocean_persistence_smoke.mjs
       - name: Run Ocean iPhone visual gate
         run: node scripts/ocean_visual_smoke.mjs
+      - name: Capture manta rig visual frames
+        run: node scripts/manta_rig_visual_probe.mjs
       - name: Upload mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4

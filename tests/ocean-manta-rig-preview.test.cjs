@@ -19,10 +19,11 @@ test('manta preview uses true 3D wing lift projection instead of in-plane rotati
   assert.doesNotMatch(js,/p\.y\s*\+=\s*lift\s*\*\s*uPerspectiveY/,'old y-only projected lift should be removed');
 });
 
-test('manta torso stays anchored while wing tips receive strongest smooth lift',()=>{
+test('manta torso stays anchored while distal wing receives stronger smooth lift',()=>{
   const js=fs.readFileSync(jsPath,'utf8');
   assert.match(js,/torsoMask/,'expected torso anchoring mask');
-  assert.match(js,/tipGain/,'expected distal tip amplification');
+  assert.match(js,/rootCompliance/,'expected restrained root motion');
+  assert.match(js,/midCamber/,'expected stronger middle-wing camber');
   assert.match(js,/leftPhaseOffset/,'expected slight left/right phase asymmetry');
   assert.match(js,/powerStroke/);
   assert.match(js,/recoveryStroke/);

@@ -29,6 +29,14 @@ test('manta torso stays anchored while wing tips receive strongest smooth lift',
   assert.match(js,/amp=reduced\?\.08:\.24/,'expected visible full-motion wing amplitude');
 });
 
+test('manta wing uses biological root-mid-tip curvature instead of a single monotonic bend',()=>{
+  const js=fs.readFileSync(jsPath,'utf8');
+  assert.match(js,/rootCompliance/,'expected restrained root motion');
+  assert.match(js,/midCamber/,'expected strongest camber through middle wing');
+  assert.match(js,/tipLag/,'expected delayed distal response');
+  assert.match(js,/trailingEdgeFlex/,'expected trailing-edge flex rather than rigid-sheet deformation');
+});
+
 test('manta normal cruise follows observed slow stroke and glide behavior',()=>{
   const js=fs.readFileSync(jsPath,'utf8');
   assert.match(js,/NORMAL_CYCLE_S\s*=\s*3\.15/,'expected roughly 3.1 second cruising cycle');

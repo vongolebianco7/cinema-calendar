@@ -66,6 +66,23 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
+test('fin deformation renders at near-display cadence with high spatial sampling',()=>{
+  const frameMs=Number(atlas.match(/const DEFORMATION_FRAME_MS=(\d+(?:\.\d+)?)/)?.[1]||Infinity);
+  assert.ok(frameMs<=17,`deformation should target about 60fps, got ${frameMs}ms`);
+  const counts=[...atlas.matchAll(/width<\d+\?(\d+)/g)].map(m=>Number(m[1]));
+  assert.ok(counts.length>=2&&Math.min(...counts)>=48,`deformation needs at least 48 slices, got ${counts.join(',')}`);
+  assert.match(atlas,/imageSmoothingEnabled=true/);
+  assert.match(atlas,/imageSmoothingQuality='high'/);
+});
+
+test('pass-through swimmers move three times faster without increasing per-stroke jump distance',()=>{
+  assert.match(swim,/const PULSE_SPEED_MULTIPLIER=3/);
+  assert.match(swim,/PULSE_ROUTE_DURATION_FACTOR\/PULSE_SPEED_MULTIPLIER/);
+  assert.match(swim,/\/PULSE_SPEED_MULTIPLIER\)\/PULSE_STEPS/);
+  const steps=Number(swim.match(/const PULSE_STEPS=(\d+)/)?.[1]||0),span=Number(swim.match(/const PULSE_ROUTE_SPAN_VW=(\d+(?:\.\d+)?)/)?.[1]||0);
+  assert.ok(span/steps<=.3,`3x speed must not enlarge each propulsion jump, got ${span/steps}vw`);
+});
+
 test('megafauna use species-aware habitat bands instead of three fixed lanes',()=>{
   assert.match(swim,/SPECIES_SWIM_BANDS/);
   assert.match(swim,/HABITAT_SWIM_BANDS/);

@@ -44,7 +44,7 @@ try{
 
   const webglMotion={};
   for(const key of Object.keys(swimmers)){
-    const locator=page.locator(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`);
+    const locator=page.locator(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`).first();
     const hashes=[];
     for(let i=0;i<4;i++){hashes.push(hash(await locator.screenshot()));await page.waitForTimeout(220);}
     webglMotion[key]={hashes,changed:new Set(hashes).size>1};

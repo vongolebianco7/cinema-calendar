@@ -61,7 +61,8 @@ function ensureVisibilityObserver(){
  return deformationScheduler.observer;
 }
 function unregisterDeformation(entry){deformationScheduler.entries.delete(entry);deformationScheduler.observer?.unobserve(entry.wrap);if(entry.wrap.__oceanDeformationEntry===entry)delete entry.wrap.__oceanDeformationEntry;}
-function scheduleDeformationFrame(){if(deformationScheduler.raf||!deformationScheduler.entries.size)return;deformationScheduler.raf=requestAnimationFrame(tickDeformations);}
+function hasActiveDeformation(){if(document.hidden)return false;for(const entry of [...deformationScheduler.entries]){if(!entry.wrap.isConnected){unregisterDeformation(entry);continue;}if(entry.visible&&entry.source)return true;}return false;}
+function scheduleDeformationFrame(){if(deformationScheduler.raf||!deformationScheduler.entries.size)return;if(!hasActiveDeformation())return;deformationScheduler.raf=requestAnimationFrame(tickDeformations);}
 function drawDeformation(entry,ts){
  if(!entry.source)return;fitDeformationCanvas(entry);const {canvas,source,cfg,profile,amplitude,motionScale,effectivePeriod,aspect,wrap}=entry,ctx=canvas.getContext('2d');if(!ctx)return;
  ctx.clearRect(0,0,canvas.width,canvas.height);const slices=40,overlap=2,sliceW=source.width/slices,destW=canvas.width/slices,destH=canvas.width/aspect,baseY=(canvas.height-destH)/2,elapsedSec=(ts-entry.start)/1000,t=elapsedSec*(Math.PI*2/effectivePeriod),routePhase=swimPhaseFor(wrap,elapsedSec),thrust=thrustEnvelope(routePhase);
@@ -76,9 +77,9 @@ function drawDeformation(entry,ts){
 }
 function tickDeformations(ts){
  deformationScheduler.raf=0;
- if(!deformationScheduler.entries.size)return;
+ if(!hasActiveDeformation())return;
  const due=ts-deformationScheduler.lastFrame>=DEFORMATION_FRAME_MS*.92;
- if(due&&!document.hidden){
+ if(due){
    deformationScheduler.lastFrame=ts;
    for(const entry of [...deformationScheduler.entries]){
      if(!entry.wrap.isConnected){unregisterDeformation(entry);continue;}
@@ -90,6 +91,7 @@ function tickDeformations(ts){
  scheduleDeformationFrame();
 }
 function registerDeformation(entry){deformationScheduler.entries.add(entry);entry.wrap.__oceanDeformationEntry=entry;const observer=ensureVisibilityObserver();if(observer){entry.visible=false;observer.observe(entry.wrap);}else entry.visible=true;scheduleDeformationFrame();}
+if(root.document?.addEventListener)root.document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleDeformationFrame();});
 function createDeformedCreature(key,spec){
  const wrap=decorate(document.createElement('span'),key,spec),canvas=document.createElement('canvas'),img=new Image(),cfg=spec.deformation||{},profile=cfg.profile||'tail-flex-right',amplitude=Math.max(1,Number(cfg.amplitude)||24),period=Math.max(.8,Number(cfg.period)||2.4),aspect=Math.max(.8,Number(spec.assetAspect)||3),reduced=Boolean(root.matchMedia&&root.matchMedia('(prefers-reduced-motion: reduce)').matches),motionScale=reduced?.45:1,effectivePeriod=period*(reduced?1.35:1);
  Object.assign(wrap.style,{display:'block',position:'relative',overflow:'visible',aspectRatio:String(aspect),background:'transparent',opacity:'1'});wrap.dataset.deformed='1';wrap.dataset.sourceState='loading';wrap.dataset.reducedMotion=reduced?'1':'0';

@@ -3,15 +3,6 @@ const PULSE_STEPS=200;
 const PULSE_ROUTE_DURATION_FACTOR=13;
 const PULSE_ROUTE_SPAN_VW=50;
 const ORDINARY_ASSET_UPGRADES={
- 'optimized/species-blue-tang.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-damselfish.svg':'optimized/species-aji.webp',
- 'optimized/species-firefish.svg':'optimized/nase.webp',
- 'optimized/species-lyretail-anthias.svg':'optimized/species-aji.webp',
- 'optimized/species-six-line-wrasse.svg':'optimized/nase.webp',
- 'optimized/species-sixline-wrasse.svg':'optimized/nase.webp',
- 'optimized/species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.webp':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.svg':'optimized/species-butterflyfish.webp',
  'optimized/species-stingray.webp':'assets/milestone-manta-ray-v2.webp',
  'optimized/species-stingray.svg':'assets/milestone-manta-ray-v2.webp'
 };

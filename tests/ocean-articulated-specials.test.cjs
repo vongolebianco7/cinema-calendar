@@ -66,9 +66,9 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
-test('pass-through megafauna reuse a compact slot grid while keeping multiple lanes',()=>{
-  assert.match(swim,/const PASS_THROUGH_BASE_X=\[8,58,108\]/);
-  assert.match(swim,/const PASS_THROUGH_LANES=\[-16,8\]/);
+test('pass-through megafauna reuse four compact route slots while keeping two depth lanes',()=>{
+  assert.match(swim,/const PASS_THROUGH_BASE_X=\[12,72\]/);
+  assert.match(swim,/const PASS_THROUGH_LANES=\[-15,9\]/);
   assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
   assert.match(swim,/node\.style\.left=baseX\+'%'/);
 });

@@ -43,7 +43,7 @@ test('sharks use direct generated HQ assets with moving tails',()=>{for(const ke
 
 test('turtle flippers and octopus tentacles use cleaned direct assets and dedicated motion profiles',()=>{for(const key of ['sea-turtle','giant-octopus']){const spec=manifest.species[key];assert.match(spec.asset,/assets\/milestone-.*-hq\.webp/);assert.ok(fs.existsSync('preview/ocean/real-fish/'+spec.asset),spec.asset+' must exist');}assert.equal(manifest.species['sea-turtle'].deformation?.profile,'flipper-flex');assert.equal(manifest.species['giant-octopus'].deformation?.profile,'tentacle-wave');assert.ok(Number(manifest.species['giant-octopus'].presentationScale)>=2);assert.match(atlas,/flipper-flex/);assert.match(atlas,/tentacle-wave/);});
 
-test('low quality vector/render ordinary fish are replaced at runtime with photo assets',()=>{assert.match(swim,/ORDINARY_ASSET_UPGRADES/);for(const bad of ['species-blue-tang.svg','species-damselfish.svg','species-firefish.svg','species-lyretail-anthias.svg','species-six-line-wrasse.svg','species-threadfin-butterflyfish.svg','species-filefish.webp','species-stingray.webp'])assert.match(swim,new RegExp(bad.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));assert.match(swim,/upgradeOrdinaryAssets/);assert.match(swim,/data-asset-upgraded/);});
+test('low quality vector/render ordinary fish are replaced at runtime with diverse photo assets',()=>{assert.match(swim,/ORDINARY_ASSET_UPGRADES/);for(const bad of ['species-blue-tang.svg','species-damselfish.svg','species-firefish.svg','species-lyretail-anthias.svg','species-six-line-wrasse.svg','species-threadfin-butterflyfish.svg','species-filefish.webp','species-stingray.webp'])assert.match(swim,new RegExp(bad.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));for(const replacement of ['species-moorish-idol.webp','species-puffer.webp','species-lionfish.webp','species-madai.webp','species-grouper.webp','species-butterflyfish.webp','fish-real.webp'])assert.match(swim,new RegExp(replacement.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));assert.match(swim,/upgradeOrdinaryAssets/);assert.match(swim,/data-asset-upgraded/);});
 
 test('keyed milestone bodies are hardened to opaque alpha after background removal',()=>{assert.match(atlas,/opaqueBody/);assert.match(atlas,/data\[i\+3\]=data\[i\+3\]>28\?255:0/);});
 
@@ -66,9 +66,9 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
-test('pass-through megafauna are staggered across offscreen base columns and wider vertical lanes',()=>{
-  assert.match(swim,/const PASS_THROUGH_BASE_X=\[-60,-20,20,60,100,140\]/);
-  assert.match(swim,/const PASS_THROUGH_LANES=\[-20,-7,7,20\]/);
+test('pass-through megafauna reuse a compact slot grid while keeping multiple lanes',()=>{
+  assert.match(swim,/const PASS_THROUGH_BASE_X=\[8,58,108\]/);
+  assert.match(swim,/const PASS_THROUGH_LANES=\[-16,8\]/);
   assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
   assert.match(swim,/node\.style\.left=baseX\+'%'/);
 });

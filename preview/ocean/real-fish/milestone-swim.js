@@ -1,6 +1,7 @@
 (function(root){'use strict';
 const PULSE_STEPS=200;
 const PULSE_ROUTE_DURATION_FACTOR=13;
+const PULSE_SPEED_MULTIPLIER=3;
 const PULSE_ROUTE_SPAN_VW=50;
 const PASS_THROUGH_BASE_X=[42];
 const HABITAT_SWIM_BANDS={
@@ -32,13 +33,12 @@ const ORDINARY_ASSET_UPGRADES={
  'optimized/species-damselfish.svg':'optimized/species-puffer.webp',
  'optimized/species-firefish.svg':'optimized/species-lionfish.webp',
  'optimized/species-lyretail-anthias.svg':'optimized/species-madai.webp',
- 'optimized/species-six-line-wrasse.svg':'optimized/species-grouper.webp',
- 'optimized/species-sixline-wrasse.svg':'optimized/species-grouper.webp',
+ 'optimized/species-six-line-wrasse.svg':'optimized/species-sixline-wrasse-hq.svg',
+ 'optimized/species-sixline-wrasse.svg':'optimized/species-sixline-wrasse-hq.svg',
  'optimized/species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
  'optimized/species-filefish.webp':'optimized/fish-real.webp',
  'optimized/species-filefish.svg':'optimized/fish-real.webp',
- 'optimized/species-stingray.webp':'assets/milestone-manta-ray-v2.webp',
- 'optimized/species-stingray.svg':'assets/milestone-manta-ray-v2.webp'
+ 'optimized/species-stingray.svg':'optimized/species-stingray.webp'
 };
 const profiles={
  clownfish:{family:'reef-dart',duration:9,travel:8,bob:2,body:1.8,direction:'forward'},
@@ -88,8 +88,8 @@ ${buildPulseRoute('milestoneForwardNatural',-PULSE_ROUTE_SPAN_VW/2,PULSE_ROUTE_S
 ${buildPulseRoute('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW/2,-PULSE_ROUTE_SPAN_VW/2,.05)}
 @media(prefers-reduced-motion:reduce){[data-commemorative][data-swim-profile]{animation-duration:calc(var(--swim-route-duration)*1.6)!important}}
 `;doc.head.appendChild(style);upgradeOrdinaryAssets(doc);observeOrdinaryAssets(doc)}
-function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key),band=bandFor(reward.key),cruiseOffset=Number(band.cruiseOffset)||0,surfaceRise=Number(band.surfaceRise)||0;ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';node.dataset.swimHabitat=band.habitat||'open';if((band.habitat||'')==='surface')node.dataset.surfaceBreather='1';else delete node.dataset.surfaceBreather;node.style.opacity='1';node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',(p.duration*PULSE_ROUTE_DURATION_FACTOR)+'s');node.style.setProperty('--swim-pulse-duration',((p.duration*PULSE_ROUTE_DURATION_FACTOR)/PULSE_STEPS).toFixed(3)+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.18,Math.min(.72,p.bob*.62))+'vh');node.style.setProperty('--swim-surface-rise',surfaceRise+'vh');node.style.setProperty('--swim-surface-dip',(Number(band.surfaceDip)||0)+'vh');node.style.setProperty('--swim-cruise-offset',cruiseOffset+'vh');node.style.setProperty('--swim-ascent-mid',((cruiseOffset+surfaceRise)*.5).toFixed(2)+'vh');return p}
+function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key),band=bandFor(reward.key),cruiseOffset=Number(band.cruiseOffset)||0,surfaceRise=Number(band.surfaceRise)||0;ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';node.dataset.swimHabitat=band.habitat||'open';if((band.habitat||'')==='surface')node.dataset.surfaceBreather='1';else delete node.dataset.surfaceBreather;node.style.opacity='1';node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',(p.duration*PULSE_ROUTE_DURATION_FACTOR/PULSE_SPEED_MULTIPLIER)+'s');node.style.setProperty('--swim-pulse-duration',((p.duration*PULSE_ROUTE_DURATION_FACTOR/PULSE_SPEED_MULTIPLIER)/PULSE_STEPS).toFixed(3)+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.18,Math.min(.72,p.bob*.62))+'vh');node.style.setProperty('--swim-surface-rise',surfaceRise+'vh');node.style.setProperty('--swim-surface-dip',(Number(band.surfaceDip)||0)+'vh');node.style.setProperty('--swim-cruise-offset',cruiseOffset+'vh');node.style.setProperty('--swim-ascent-mid',((cruiseOffset+surfaceRise)*.5).toFixed(2)+'vh');return p}
 function clearRotation(){if(rotationTimer!==null){if(root.clearTimeout)root.clearTimeout(rotationTimer);else if(root.clearInterval)root.clearInterval(rotationTimer);rotationTimer=null}}
 function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length;for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y')}const active=list.slice(0,count);for(const [index,node] of active.entries()){const key=node.dataset.swimKey||node.dataset.commemorativeKey||'',band=bandFor(key),routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||260,phase=(index+.37)/(Math.max(1,count)),spread=((index%5)-2)*2.2,baseX=Math.max(18,Math.min(68,PASS_THROUGH_BASE_X[0]+spread)),top=Math.max(band.min,Math.min(band.max,band.preferred+((index%3)-1)*2.5));node.dataset.swimActive='1';node.dataset.swimSlot=String(index);node.style.left=baseX+'%';node.style.top=top+'%';node.style.opacity='1';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y','0vh');if(key==='giant-octopus'){node.dataset.swimCadence='octopus-jet';node.style.setProperty('--swim-delay',(-((index%4)*1.6)).toFixed(2)+'s')}else{node.dataset.swimCadence='pulse-glide'}}return active}
-root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,bandFor,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR,PULSE_ROUTE_SPAN_VW,PASS_THROUGH_BASE_X,HABITAT_SWIM_BANDS,SPECIES_SWIM_BANDS,upgradeOrdinaryAssets,upgradedAsset};
+root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,bandFor,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR,PULSE_SPEED_MULTIPLIER,PULSE_ROUTE_SPAN_VW,PASS_THROUGH_BASE_X,HABITAT_SWIM_BANDS,SPECIES_SWIM_BANDS,upgradeOrdinaryAssets,upgradedAsset};
 })(window);

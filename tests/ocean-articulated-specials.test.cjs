@@ -66,9 +66,9 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
 });
 
-test('pass-through megafauna use four vertical lanes to avoid band overlap',()=>{
+test('pass-through megafauna use three vertical lanes to avoid density spill',()=>{
   assert.match(swim,/const PASS_THROUGH_BASE_X=\[42\]/);
-  assert.match(swim,/const PASS_THROUGH_LANES=\[-24,-8,8,24\]/);
+  assert.match(swim,/const PASS_THROUGH_LANES=\[-22,0,22\]/);
   assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
   assert.match(swim,/node\.style\.left=baseX\+'%'/);
 });

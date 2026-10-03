@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Manta ray">
+<defs>
+  <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#8498a3"/>
+    <stop offset="0.28" stop-color="#3f5866"/>
+    <stop offset="0.68" stop-color="#172b38"/>
+    <stop offset="1" stop-color="#0a1720"/>
+  </linearGradient>
+  <linearGradient id="leftWing" x1="1" y1="0" x2="0" y2="0.8">
+    <stop offset="0" stop-color="#6f8793"/>
+    <stop offset="0.38" stop-color="#314c5a"/>
+    <stop offset="1" stop-color="#102530"/>
+  </linearGradient>
+  <linearGradient id="rightWing" x1="0" y1="0" x2="1" y2="0.8">
+    <stop offset="0" stop-color="#718a96"/>
+    <stop offset="0.38" stop-color="#334f5e"/>
+    <stop offset="1" stop-color="#102530"/>
+  </linearGradient>
+  <radialGradient id="chest" cx="50%" cy="36%" r="65%">
+    <stop offset="0" stop-color="#b8c8ce" stop-opacity=".82"/>
+    <stop offset=".32" stop-color="#718994" stop-opacity=".35"/>
+    <stop offset="1" stop-color="#0c1f29" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b9c9cf" stop-opacity=".75"/>
+    <stop offset="1" stop-color="#4b6672" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+    <feGaussianBlur stdDeviation="7"/>
+  </filter>
+</defs>
+
+<!-- broad pectoral fins -->
+<path d="M565 220 C480 190 420 178 360 178 C268 178 178 206 92 258 C48 285 22 313 14 338 C48 330 85 325 124 326 C180 327 235 341 292 365 C356 392 417 420 487 447 C510 456 536 463 566 467 C558 416 553 368 553 322 C553 280 557 246 565 220Z" fill="url(#leftWing)"/>
+<path d="M635 220 C720 190 780 178 840 178 C932 178 1022 206 1108 258 C1152 285 1178 313 1186 338 C1152 330 1115 325 1076 326 C1020 327 965 341 908 365 C844 392 783 420 713 447 C690 456 664 463 634 467 C642 416 647 368 647 322 C647 280 643 246 635 220Z" fill="url(#rightWing)"/>
+
+<!-- main body -->
+<path d="M600 142 C551 142 515 161 493 195 C474 226 467 270 472 327 C478 397 507 462 557 507 C573 521 588 532 600 538 C612 532 627 521 643 507 C693 462 722 397 728 327 C733 270 726 226 707 195 C685 161 649 142 600 142Z" fill="url(#body)"/>
+
+<!-- cephalic lobes / head horns -->
+<path d="M548 162 C515 137 488 111 473 82 C462 61 459 43 464 28 C491 42 517 63 541 90 C558 110 568 133 570 158Z" fill="url(#body)"/>
+<path d="M652 162 C685 137 712 111 727 82 C738 61 741 43 736 28 C709 42 683 63 659 90 C642 110 632 133 630 158Z" fill="url(#body)"/>
+
+<!-- tail -->
+<path d="M590 520 C593 558 593 595 590 632 C588 657 588 677 592 692 C598 680 603 657 606 625 C610 584 610 548 606 516Z" fill="#182d38"/>
+
+<!-- clean highlights -->
+<path d="M565 220 C474 207 390 214 309 242 C220 273 151 303 96 332 C175 321 247 337 314 367 C391 402 457 433 529 452" fill="none" stroke="url(#edge)" stroke-width="16" stroke-linecap="round" opacity=".48"/>
+<path d="M635 220 C726 207 810 214 891 242 C980 273 1049 303 1104 332 C1025 321 953 337 886 367 C809 402 743 433 671 452" fill="none" stroke="url(#edge)" stroke-width="16" stroke-linecap="round" opacity=".48"/>
+<ellipse cx="600" cy="300" rx="106" ry="162" fill="url(#chest)"/>
+
+<!-- dorsal pattern and depth cues -->
+<path d="M537 230 C558 208 578 199 600 199 C622 199 642 208 663 230 C644 222 624 219 600 219 C576 219 556 222 537 230Z" fill="#d4e0e4" opacity=".56"/>
+<path d="M518 281 C548 267 575 261 600 261 C625 261 652 267 682 281" fill="none" stroke="#b8c8ce" stroke-width="9" stroke-linecap="round" opacity=".18"/>
+<path d="M501 332 C538 319 571 313 600 313 C629 313 662 319 699 332" fill="none" stroke="#8ea4ad" stroke-width="8" stroke-linecap="round" opacity=".14"/>
+<path d="M295 348 C389 385 470 418 540 443" fill="none" stroke="#0b1b24" stroke-width="20" stroke-linecap="round" opacity=".18" filter="url(#soft)"/>
+<path d="M905 348 C811 385 730 418 660 443" fill="none" stroke="#0b1b24" stroke-width="20" stroke-linecap="round" opacity=".18" filter="url(#soft)"/>
+
+<!-- subtle eyes -->
+<ellipse cx="548" cy="198" rx="9" ry="5" fill="#071015" opacity=".9"/>
+<ellipse cx="652" cy="198" rx="9" ry="5" fill="#071015" opacity=".9"/>
+</svg>

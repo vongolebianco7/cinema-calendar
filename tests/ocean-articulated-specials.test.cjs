@@ -29,7 +29,7 @@ test('large whales and whale shark keep their direct HQ transparent sprites',()=
 
 test('manta dolphin and dugong have readable iPhone size caps',()=>{assert.match(population,/'manta-ray':26/);assert.match(population,/dolphin:20/);assert.match(population,/dugong:20/);});
 
-test('active milestone swimmers use generated directional short-step routes instead of in-place or linear motion',()=>{assert.match(swim,/function buildPulseRoute\(/);assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);assert.match(swim,/buildPulseRoute\('milestoneForwardNatural',-PULSE_ROUTE_SPAN_VW\/2,PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/buildPulseRoute\('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW\/2,-PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/node\.style\.left='50%'/);assert.doesNotMatch(swim,/animation-timing-function:linear!important/);});
+test('active milestone swimmers use generated directional short-step routes instead of in-place or linear motion',()=>{assert.match(swim,/function buildPulseRoute\(/);assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);assert.match(swim,/buildPulseRoute\('milestoneForwardNatural',-PULSE_ROUTE_SPAN_VW\/2,PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/buildPulseRoute\('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW\/2,-PULSE_ROUTE_SPAN_VW\/2/);assert.doesNotMatch(swim,/node\.style\.left='50%'/);assert.doesNotMatch(swim,/animation-timing-function:linear!important/);});
 
 test('dolphin deformation stays within the tail-most zone',()=>{const dolphin=manifest.species.dolphin;assert.ok(Number(dolphin.deformation?.flexSpan)>0);assert.ok(Number(dolphin.deformation.flexSpan)<=0.3);assert.match(atlas,/function tailRamp\(profile,u,flexSpan/);});
 
@@ -64,4 +64,11 @@ test('deformation canvas resolution and slice work are capped for iPhone perform
   assert.match(atlas,/function ensureCanvasResolution\(/);
   assert.match(atlas,/function sliceCountForWidth\(/);
   assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
+});
+
+test('pass-through megafauna are staggered across offscreen base columns and wider vertical lanes',()=>{
+  assert.match(swim,/const PASS_THROUGH_BASE_X=\[-60,-20,20,60,100,140\]/);
+  assert.match(swim,/const PASS_THROUGH_LANES=\[-20,-7,7,20\]/);
+  assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
+  assert.match(swim,/node\.style\.left=baseX\+'%'/);
 });

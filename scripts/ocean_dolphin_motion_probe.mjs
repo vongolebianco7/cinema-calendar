@@ -31,9 +31,7 @@ try{
 
   const diagnostic=await page.evaluate(config=>Object.fromEntries(Object.entries(config).map(([key,cfg])=>{
     const canvas=document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`);
-    const inner=canvas?.closest(`[data-milestone-key="${key}"]`);
-    const outer=canvas?.closest('[data-commemorative]');
-    const ctx=canvas?.getContext('2d',{willReadFrequently:true});
+    const inner=canvas?.closest(`[data-milestone-key="${key}"]`),outer=canvas?.closest('[data-commemorative]'),ctx=canvas?.getContext('2d',{willReadFrequently:true});
     let coverage=null,opaqueRatio=null;
     if(canvas&&ctx){const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let opaque=0,solid=0;for(let i=3;i<data.length;i+=4){if(data[i]>16)opaque++;if(data[i]>=250)solid++;}coverage=opaque/(canvas.width*canvas.height);opaqueRatio=opaque?solid/opaque:0;}
     const rect=outer?.getBoundingClientRect();
@@ -46,14 +44,12 @@ try{
 
   const metrics=await page.evaluate(async swimmerConfig=>{
     const snapshot=()=>Object.fromEntries(Object.entries(swimmerConfig).map(([key,cfg])=>{
-      const canvas=document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`),wrap=canvas?.closest(`[data-milestone-key="${key}"]`);
-      if(!wrap||!canvas)throw new Error(`${key} deformation canvas missing`);
+      const canvas=document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`),wrap=canvas?.closest(`[data-milestone-key="${key}"]`);if(!wrap||!canvas)throw new Error(`${key} deformation canvas missing`);
       const ctx=canvas.getContext('2d',{willReadFrequently:true}),{width,height}=canvas,data=ctx.getImageData(0,0,width,height).data,total=width*height,alpha=new Uint8Array(total);let opaque=0;
       for(let p=0;p<total;p++){const a=data[p*4+3];alpha[p]=a;if(a>16)opaque++;}
       return [key,{alpha,width,height,coverage:opaque/total,ready:wrap.dataset.sourceState==='ready',profile:cfg.profile}];
     }));
-    const base=snapshot(),samples=[base];
-    for(let i=0;i<8;i++){await new Promise(resolve=>setTimeout(resolve,240));samples.push(snapshot());}
+    const base=snapshot(),samples=[base];for(let i=0;i<8;i++){await new Promise(resolve=>setTimeout(resolve,240));samples.push(snapshot());}
     const output={};
     for(const [key,cfg] of Object.entries(swimmerConfig)){
       const a=base[key];let movingMax=0,anchorMax=0;
@@ -76,40 +72,21 @@ try{
 
   const cadence=await page.evaluate(async()=>{
     const canvas=document.querySelector('[data-milestone-key="dolphin"] canvas.milestoneDeformedCanvas'),node=canvas?.closest('[data-commemorative]');if(!node)throw new Error('dolphin commemorative wrapper missing');
-    const steps=window.CinemapOceanMilestoneSwim?.PULSE_STEPS||200,routeMs=80000;
-    delete node.dataset.swimActive;await new Promise(r=>setTimeout(r,80));node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.dataset.swimDirection='forward';node.style.setProperty('--swim-route-duration',`${routeMs/1000}s`);node.style.setProperty('--swim-pulse-duration',`${routeMs/steps/1000}s`);node.style.setProperty('--swim-delay','0s');node.style.setProperty('--swim-lane-y','0vh');await new Promise(r=>setTimeout(r,80));
-    const animation=node.getAnimations().find(a=>a.animationName==='milestoneForwardNatural');if(!animation)throw new Error('dolphin route animation missing');animation.pause();const left=()=>node.getBoundingClientRect().left;const leftAt=ms=>new Promise(resolve=>{animation.currentTime=ms;requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(left())));});
-    const segmentMs=routeMs/steps,startLeft=await leftAt(0),burstLeft=await leftAt(segmentMs*.48),pauseStart=await leftAt(segmentMs*.55),pauseEnd=await leftAt(segmentMs*.95),nextBurst=await leftAt(segmentMs*1.48);
-    return {animationName:animation.animationName,cadence:node.dataset.swimCadence,steps,segmentMs,startLeft,burstLeft,pauseStart,pauseEnd,nextBurst,firstBurstDelta:burstLeft-startLeft,pauseDelta:pauseEnd-pauseStart,secondBurstDelta:nextBurst-pauseEnd};
+    const steps=window.CinemapOceanMilestoneSwim?.PULSE_STEPS||200,routeMs=80000;delete node.dataset.swimActive;await new Promise(r=>setTimeout(r,80));node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.dataset.swimDirection='forward';node.style.setProperty('--swim-route-duration',`${routeMs/1000}s`);node.style.setProperty('--swim-pulse-duration',`${routeMs/steps/1000}s`);node.style.setProperty('--swim-delay','0s');node.style.setProperty('--swim-lane-y','0vh');await new Promise(r=>setTimeout(r,80));
+    const animation=node.getAnimations().find(a=>a.animationName==='milestoneForwardNatural');if(!animation)throw new Error('dolphin route animation missing');animation.pause();const left=()=>node.getBoundingClientRect().left;const leftAt=ms=>new Promise(resolve=>{animation.currentTime=ms;requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(left())));});const segmentMs=routeMs/steps,startLeft=await leftAt(0),burstLeft=await leftAt(segmentMs*.48),pauseStart=await leftAt(segmentMs*.55),pauseEnd=await leftAt(segmentMs*.95),nextBurst=await leftAt(segmentMs*1.48);return{animationName:animation.animationName,cadence:node.dataset.swimCadence,steps,segmentMs,startLeft,burstLeft,pauseStart,pauseEnd,nextBurst,firstBurstDelta:burstLeft-startLeft,pauseDelta:pauseEnd-pauseStart,secondBurstDelta:nextBurst-pauseEnd};
   });
 
-  const ordinaryUpgrade=await page.evaluate(()=>{
-    const host=document.createElement('div');host.innerHTML='<div class="fishWrap"><img class="fishBody" src="optimized/species-blue-tang.svg"><img class="fishTail" src="optimized/species-filefish.webp"></div>';document.body.appendChild(host);window.CinemapOceanMilestoneSwim.upgradeOrdinaryAssets(host);const srcs=[...host.querySelectorAll('img')].map(i=>i.getAttribute('src'));const upgraded=host.querySelector('.fishWrap')?.dataset.assetUpgraded==='1';host.remove();return{srcs,upgraded};
+  const speciesIdentity=await page.evaluate(()=>{
+    const host=document.createElement('div');host.innerHTML='<div class="fishWrap"><img src="optimized/species-blue-tang.svg"><img src="optimized/species-filefish.svg"></div>';document.body.appendChild(host);window.CinemapOceanMilestoneSwim.upgradeOrdinaryAssets(host);const srcs=[...host.querySelectorAll('img')].map(i=>i.getAttribute('src'));const upgraded=host.querySelector('.fishWrap')?.dataset.assetUpgraded==='1';host.remove();return{srcs,upgraded};
   });
 
   await page.screenshot({path:'artifacts/dolphin-motion/frame-b.png'});
-  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify({swimmers:metrics,cadence,ordinaryUpgrade,diagnostic},null,2)+'\n');
-
+  await writeFile('artifacts/dolphin-motion/metrics.json',JSON.stringify({swimmers:metrics,cadence,speciesIdentity,diagnostic},null,2)+'\n');
   const failures=[];
-  for(const [key,cfg] of Object.entries(swimmers)){
-    const m=metrics[key],d=diagnostic[key];
-    if(!m||!d)failures.push(`${key}: no metrics`);else{
-      if(!m.ready)failures.push(`${key}: deformation source never reached ready state`);
-      if(m.coverage>cfg.maxCoverage)failures.push(`${key}: alpha coverage too large (${m.coverage.toFixed(3)})`);
-      if(m.movingPixelDelta<cfg.minDelta)failures.push(`${key}: motion too small (${m.movingPixelDelta.toFixed(2)})`);
-      if(m.movingPixelDelta<=m.anchorPixelDelta*1.03)failures.push(`${key}: moving region must change more than anchored body`);
-      if(Number(d.opacity)!==1)failures.push(`${key}: commemorative opacity is ${d.opacity}`);
-      if(d.opaqueRatio<.90)failures.push(`${key}: body remains too transparent (${d.opaqueRatio.toFixed(3)} solid/opaque)`);
-      if(!d.rect||d.rect.width<4||d.rect.height<4)failures.push(`${key}: not visibly laid out`);
-      if(cfg.direction&&d.direction!==cfg.direction)failures.push(`${key}: direction ${d.direction}, expected ${cfg.direction}`);
-    }
-  }
+  for(const [key,cfg] of Object.entries(swimmers)){const m=metrics[key],d=diagnostic[key];if(!m||!d)failures.push(`${key}: no metrics`);else{if(!m.ready)failures.push(`${key}: deformation source never reached ready state`);if(m.coverage>cfg.maxCoverage)failures.push(`${key}: alpha coverage too large (${m.coverage.toFixed(3)})`);if(m.movingPixelDelta<cfg.minDelta)failures.push(`${key}: motion too small (${m.movingPixelDelta.toFixed(2)})`);if(m.movingPixelDelta<=m.anchorPixelDelta*1.03)failures.push(`${key}: moving region must change more than anchored body`);if(Number(d.opacity)!==1)failures.push(`${key}: commemorative opacity is ${d.opacity}`);if(d.opaqueRatio<.90)failures.push(`${key}: body remains too transparent (${d.opaqueRatio.toFixed(3)} solid/opaque)`);if(!d.rect||d.rect.width<4||d.rect.height<4)failures.push(`${key}: not visibly laid out`);if(cfg.direction&&d.direction!==cfg.direction)failures.push(`${key}: direction ${d.direction}, expected ${cfg.direction}`);}}
   if(metrics.dolphin?.anchorPixelDelta>1.0)failures.push(`dolphin: head/upper torso is still deforming too much (${metrics.dolphin.anchorPixelDelta.toFixed(2)})`);
-  if(cadence.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${cadence.animationName})`);
-  if(cadence.firstBurstDelta<.2||cadence.firstBurstDelta>1.5)failures.push(`dolphin: propulsion burst must be tiny (${cadence.firstBurstDelta.toFixed(2)}px)`);
-  if(Math.abs(cadence.pauseDelta)>.35)failures.push(`dolphin: pause still drifts (${cadence.pauseDelta.toFixed(2)}px)`);
-  if(cadence.secondBurstDelta<.2||cadence.secondBurstDelta>1.5)failures.push(`dolphin: next burst must be tiny (${cadence.secondBurstDelta.toFixed(2)}px)`);
-  if(!ordinaryUpgrade.upgraded||ordinaryUpgrade.srcs.some(s=>/\.svg$|species-filefish\.webp$/.test(s)))failures.push(`ordinary fish upgrade failed: ${JSON.stringify(ordinaryUpgrade)}`);
+  if(cadence.animationName!=='milestoneForwardNatural')failures.push(`dolphin: wrong travel animation (${cadence.animationName})`);if(cadence.firstBurstDelta<.2||cadence.firstBurstDelta>1.5)failures.push(`dolphin: propulsion burst must be tiny (${cadence.firstBurstDelta.toFixed(2)}px)`);if(Math.abs(cadence.pauseDelta)>.35)failures.push(`dolphin: pause still drifts (${cadence.pauseDelta.toFixed(2)}px)`);if(cadence.secondBurstDelta<.2||cadence.secondBurstDelta>1.5)failures.push(`dolphin: next burst must be tiny (${cadence.secondBurstDelta.toFixed(2)}px)`);
+  if(speciesIdentity.upgraded||speciesIdentity.srcs.some(s=>!/species-(blue-tang|filefish)\.svg$/.test(s)))failures.push(`ordinary fish identity changed unexpectedly: ${JSON.stringify(speciesIdentity)}`);
   if(failures.length)throw new Error(failures.join('; '));
-  console.log('Ocean creature quality motion verified:',{metrics,cadence,ordinaryUpgrade});
+  console.log('Ocean creature quality motion verified:',{metrics,cadence,speciesIdentity});
 }finally{await context.close();await browser.close();}

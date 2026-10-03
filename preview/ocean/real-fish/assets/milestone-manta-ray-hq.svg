@@ -1,62 +1,68 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Manta ray">
 <defs>
-  <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#8498a3"/>
-    <stop offset="0.28" stop-color="#3f5866"/>
-    <stop offset="0.68" stop-color="#172b38"/>
-    <stop offset="1" stop-color="#0a1720"/>
+  <linearGradient id="dorsal" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6d828d"/>
+    <stop offset="0.26" stop-color="#405864"/>
+    <stop offset="0.62" stop-color="#203641"/>
+    <stop offset="1" stop-color="#0d2029"/>
   </linearGradient>
-  <linearGradient id="leftWing" x1="1" y1="0" x2="0" y2="0.8">
-    <stop offset="0" stop-color="#6f8793"/>
-    <stop offset="0.38" stop-color="#314c5a"/>
-    <stop offset="1" stop-color="#102530"/>
+  <linearGradient id="wingShade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#91a4ac" stop-opacity=".42"/>
+    <stop offset=".5" stop-color="#49616c" stop-opacity=".14"/>
+    <stop offset="1" stop-color="#071820" stop-opacity=".2"/>
   </linearGradient>
-  <linearGradient id="rightWing" x1="0" y1="0" x2="1" y2="0.8">
-    <stop offset="0" stop-color="#718a96"/>
-    <stop offset="0.38" stop-color="#334f5e"/>
-    <stop offset="1" stop-color="#102530"/>
-  </linearGradient>
-  <radialGradient id="chest" cx="50%" cy="36%" r="65%">
-    <stop offset="0" stop-color="#b8c8ce" stop-opacity=".82"/>
-    <stop offset=".32" stop-color="#718994" stop-opacity=".35"/>
-    <stop offset="1" stop-color="#0c1f29" stop-opacity="0"/>
+  <radialGradient id="ridge" cx="50%" cy="30%" r="58%">
+    <stop offset="0" stop-color="#c1cdd2" stop-opacity=".45"/>
+    <stop offset=".34" stop-color="#7f949d" stop-opacity=".18"/>
+    <stop offset="1" stop-color="#0d2029" stop-opacity="0"/>
   </radialGradient>
-  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#b9c9cf" stop-opacity=".75"/>
-    <stop offset="1" stop-color="#4b6672" stop-opacity="0"/>
+  <linearGradient id="edgeL" x1="1" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b7c5ca" stop-opacity=".48"/>
+    <stop offset="1" stop-color="#6f8790" stop-opacity="0"/>
   </linearGradient>
-  <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
-    <feGaussianBlur stdDeviation="7"/>
-  </filter>
+  <linearGradient id="edgeR" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7c5ca" stop-opacity=".48"/>
+    <stop offset="1" stop-color="#6f8790" stop-opacity="0"/>
+  </linearGradient>
 </defs>
 
-<!-- broad pectoral fins -->
-<path d="M565 220 C480 190 420 178 360 178 C268 178 178 206 92 258 C48 285 22 313 14 338 C48 330 85 325 124 326 C180 327 235 341 292 365 C356 392 417 420 487 447 C510 456 536 463 566 467 C558 416 553 368 553 322 C553 280 557 246 565 220Z" fill="url(#leftWing)"/>
-<path d="M635 220 C720 190 780 178 840 178 C932 178 1022 206 1108 258 C1152 285 1178 313 1186 338 C1152 330 1115 325 1076 326 C1020 327 965 341 908 365 C844 392 783 420 713 447 C690 456 664 463 634 467 C642 416 647 368 647 322 C647 280 643 246 635 220Z" fill="url(#rightWing)"/>
+<!-- One continuous manta silhouette: head, torso and pectoral fins form one diamond-shaped body. -->
+<path id="manta-main-silhouette" d="M600 92
+C574 94 552 108 533 132
+C505 148 473 164 431 181
+C351 214 266 240 184 260
+C112 278 59 300 18 329
+C82 328 145 338 208 358
+C298 387 381 421 459 458
+C512 483 557 506 600 532
+C643 506 688 483 741 458
+C819 421 902 387 992 358
+C1055 338 1118 328 1182 329
+C1141 300 1088 278 1016 260
+C934 240 849 214 769 181
+C727 164 695 148 667 132
+C648 108 626 94 600 92Z" fill="url(#dorsal)"/>
 
-<!-- main body -->
-<path d="M600 142 C551 142 515 161 493 195 C474 226 467 270 472 327 C478 397 507 462 557 507 C573 521 588 532 600 538 C612 532 627 521 643 507 C693 462 722 397 728 327 C733 270 726 226 707 195 C685 161 649 142 600 142Z" fill="url(#body)"/>
+<!-- Cephalic lobes are short forward extensions, not tall horns. -->
+<path d="M558 137 C535 119 514 95 500 69 C490 51 486 34 489 20 C508 32 527 48 545 68 C560 86 570 107 573 131Z" fill="#314955"/>
+<path d="M642 137 C665 119 686 95 700 69 C710 51 714 34 711 20 C692 32 673 48 655 68 C640 86 630 107 627 131Z" fill="#314955"/>
 
-<!-- cephalic lobes / head horns -->
-<path d="M548 162 C515 137 488 111 473 82 C462 61 459 43 464 28 C491 42 517 63 541 90 C558 110 568 133 570 158Z" fill="url(#body)"/>
-<path d="M652 162 C685 137 712 111 727 82 C738 61 741 43 736 28 C709 42 683 63 659 90 C642 110 632 133 630 158Z" fill="url(#body)"/>
+<!-- Thin trailing tail -->
+<path d="M592 515 C595 558 595 600 592 640 C590 663 591 684 596 698 C602 681 606 657 608 626 C611 584 610 547 606 514Z" fill="#162c36"/>
 
-<!-- tail -->
-<path d="M590 520 C593 558 593 595 590 632 C588 657 588 677 592 692 C598 680 603 657 606 625 C610 584 610 548 606 516Z" fill="#182d38"/>
+<!-- Broad wing lighting follows the continuous surface instead of separate wing panels. -->
+<path d="M538 153 C468 183 393 211 316 234 C220 263 132 294 61 325 C146 320 226 339 306 370 C390 403 461 435 529 468" fill="none" stroke="url(#edgeL)" stroke-width="13" stroke-linecap="round" opacity=".50"/>
+<path d="M662 153 C732 183 807 211 884 234 C980 263 1068 294 1139 325 C1054 320 974 339 894 370 C810 403 739 435 671 468" fill="none" stroke="url(#edgeR)" stroke-width="13" stroke-linecap="round" opacity=".50"/>
+<path d="M52 328 C152 327 247 353 337 392 C413 425 481 456 545 486 C510 466 474 446 436 427 C354 386 270 353 183 337 C132 328 88 325 52 328Z" fill="url(#wingShade)" opacity=".55"/>
+<path d="M1148 328 C1048 327 953 353 863 392 C787 425 719 456 655 486 C690 466 726 446 764 427 C846 386 930 353 1017 337 C1068 328 1112 325 1148 328Z" fill="url(#wingShade)" opacity=".55"/>
 
-<!-- clean highlights -->
-<path d="M565 220 C474 207 390 214 309 242 C220 273 151 303 96 332 C175 321 247 337 314 367 C391 402 457 433 529 452" fill="none" stroke="url(#edge)" stroke-width="16" stroke-linecap="round" opacity=".48"/>
-<path d="M635 220 C726 207 810 214 891 242 C980 273 1049 303 1104 332 C1025 321 953 337 886 367 C809 402 743 433 671 452" fill="none" stroke="url(#edge)" stroke-width="16" stroke-linecap="round" opacity=".48"/>
-<ellipse cx="600" cy="300" rx="106" ry="162" fill="url(#chest)"/>
+<!-- Subtle dorsal ridge; keep torso integrated rather than oval/bulbous. -->
+<path d="M600 115 C568 119 542 142 527 178 C512 214 507 257 512 306 C518 369 543 427 575 468 C586 482 595 492 600 496 C605 492 614 482 625 468 C657 427 682 369 688 306 C693 257 688 214 673 178 C658 142 632 119 600 115Z" fill="url(#ridge)"/>
+<path d="M546 184 C565 169 583 162 600 162 C617 162 635 169 654 184 C636 177 618 174 600 174 C582 174 564 177 546 184Z" fill="#d0dadd" opacity=".30"/>
+<path d="M530 247 C554 236 577 231 600 231 C623 231 646 236 670 247" fill="none" stroke="#a8bac1" stroke-width="7" stroke-linecap="round" opacity=".13"/>
+<path d="M517 310 C548 299 576 294 600 294 C624 294 652 299 683 310" fill="none" stroke="#849ca5" stroke-width="6" stroke-linecap="round" opacity=".10"/>
 
-<!-- dorsal pattern and depth cues -->
-<path d="M537 230 C558 208 578 199 600 199 C622 199 642 208 663 230 C644 222 624 219 600 219 C576 219 556 222 537 230Z" fill="#d4e0e4" opacity=".56"/>
-<path d="M518 281 C548 267 575 261 600 261 C625 261 652 267 682 281" fill="none" stroke="#b8c8ce" stroke-width="9" stroke-linecap="round" opacity=".18"/>
-<path d="M501 332 C538 319 571 313 600 313 C629 313 662 319 699 332" fill="none" stroke="#8ea4ad" stroke-width="8" stroke-linecap="round" opacity=".14"/>
-<path d="M295 348 C389 385 470 418 540 443" fill="none" stroke="#0b1b24" stroke-width="20" stroke-linecap="round" opacity=".18" filter="url(#soft)"/>
-<path d="M905 348 C811 385 730 418 660 443" fill="none" stroke="#0b1b24" stroke-width="20" stroke-linecap="round" opacity=".18" filter="url(#soft)"/>
-
-<!-- subtle eyes -->
-<ellipse cx="548" cy="198" rx="9" ry="5" fill="#071015" opacity=".9"/>
-<ellipse cx="652" cy="198" rx="9" ry="5" fill="#071015" opacity=".9"/>
+<!-- Eyes near the lateral head margin. -->
+<ellipse cx="552" cy="153" rx="8" ry="4.5" fill="#071015" opacity=".9"/>
+<ellipse cx="648" cy="153" rx="8" ry="4.5" fill="#071015" opacity=".9"/>
 </svg>

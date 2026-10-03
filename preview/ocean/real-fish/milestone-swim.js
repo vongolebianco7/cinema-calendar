@@ -33,13 +33,12 @@ const ORDINARY_ASSET_UPGRADES={
  'optimized/species-damselfish.svg':'optimized/species-puffer.webp',
  'optimized/species-firefish.svg':'optimized/species-lionfish.webp',
  'optimized/species-lyretail-anthias.svg':'optimized/species-madai.webp',
- 'optimized/species-six-line-wrasse.svg':'optimized/species-grouper.webp',
- 'optimized/species-sixline-wrasse.svg':'optimized/species-grouper.webp',
+ 'optimized/species-six-line-wrasse.svg':'optimized/species-sixline-wrasse-hq.svg',
+ 'optimized/species-sixline-wrasse.svg':'optimized/species-sixline-wrasse-hq.svg',
  'optimized/species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
  'optimized/species-filefish.webp':'optimized/fish-real.webp',
  'optimized/species-filefish.svg':'optimized/fish-real.webp',
- 'optimized/species-stingray.webp':'assets/milestone-manta-ray-v2.webp',
- 'optimized/species-stingray.svg':'assets/milestone-manta-ray-v2.webp'
+ 'optimized/species-stingray.svg':'optimized/species-stingray.webp'
 };
 const profiles={
  clownfish:{family:'reef-dart',duration:9,travel:8,bob:2,body:1.8,direction:'forward'},

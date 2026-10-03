@@ -2,18 +2,18 @@
 const PULSE_STEPS=200;
 const PULSE_ROUTE_DURATION_FACTOR=13;
 const PULSE_ROUTE_SPAN_VW=50;
-const PASS_THROUGH_BASE_X=[-60,-20,20,60,100,140];
-const PASS_THROUGH_LANES=[-20,-7,7,20];
+const PASS_THROUGH_BASE_X=[8,58,108];
+const PASS_THROUGH_LANES=[-16,8];
 const ORDINARY_ASSET_UPGRADES={
- 'optimized/species-blue-tang.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-damselfish.svg':'optimized/species-aji.webp',
- 'optimized/species-firefish.svg':'optimized/nase.webp',
- 'optimized/species-lyretail-anthias.svg':'optimized/species-aji.webp',
- 'optimized/species-six-line-wrasse.svg':'optimized/nase.webp',
- 'optimized/species-sixline-wrasse.svg':'optimized/nase.webp',
+ 'optimized/species-blue-tang.svg':'optimized/species-moorish-idol.webp',
+ 'optimized/species-damselfish.svg':'optimized/species-puffer.webp',
+ 'optimized/species-firefish.svg':'optimized/species-lionfish.webp',
+ 'optimized/species-lyretail-anthias.svg':'optimized/species-madai.webp',
+ 'optimized/species-six-line-wrasse.svg':'optimized/species-grouper.webp',
+ 'optimized/species-sixline-wrasse.svg':'optimized/species-grouper.webp',
  'optimized/species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.webp':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.svg':'optimized/species-butterflyfish.webp',
+ 'optimized/species-filefish.webp':'optimized/fish-real.webp',
+ 'optimized/species-filefish.svg':'optimized/fish-real.webp',
  'optimized/species-stingray.webp':'assets/milestone-manta-ray-v2.webp',
  'optimized/species-stingray.svg':'assets/milestone-manta-ray-v2.webp'
 };

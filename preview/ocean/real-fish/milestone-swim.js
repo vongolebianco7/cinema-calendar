@@ -2,16 +2,18 @@
 const PULSE_STEPS=200;
 const PULSE_ROUTE_DURATION_FACTOR=13;
 const PULSE_ROUTE_SPAN_VW=50;
+const PASS_THROUGH_BASE_X=[42];
+const PASS_THROUGH_LANES=[-22,0,22];
 const ORDINARY_ASSET_UPGRADES={
- 'optimized/species-blue-tang.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-damselfish.svg':'optimized/species-aji.webp',
- 'optimized/species-firefish.svg':'optimized/nase.webp',
- 'optimized/species-lyretail-anthias.svg':'optimized/species-aji.webp',
- 'optimized/species-six-line-wrasse.svg':'optimized/nase.webp',
- 'optimized/species-sixline-wrasse.svg':'optimized/nase.webp',
+ 'optimized/species-blue-tang.svg':'optimized/species-moorish-idol.webp',
+ 'optimized/species-damselfish.svg':'optimized/species-puffer.webp',
+ 'optimized/species-firefish.svg':'optimized/species-lionfish.webp',
+ 'optimized/species-lyretail-anthias.svg':'optimized/species-madai.webp',
+ 'optimized/species-six-line-wrasse.svg':'optimized/species-grouper.webp',
+ 'optimized/species-sixline-wrasse.svg':'optimized/species-grouper.webp',
  'optimized/species-threadfin-butterflyfish.svg':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.webp':'optimized/species-butterflyfish.webp',
- 'optimized/species-filefish.svg':'optimized/species-butterflyfish.webp',
+ 'optimized/species-filefish.webp':'optimized/fish-real.webp',
+ 'optimized/species-filefish.svg':'optimized/fish-real.webp',
  'optimized/species-stingray.webp':'assets/milestone-manta-ray-v2.webp',
  'optimized/species-stingray.svg':'assets/milestone-manta-ray-v2.webp'
 };
@@ -57,6 +59,6 @@ ${buildPulseRoute('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW/2,-PULSE_ROUTE_S
 `;doc.head.appendChild(style);upgradeOrdinaryAssets(doc);observeOrdinaryAssets(doc)}
 function apply(node,reward){if(!node||!reward)return null;const p=profileFor(reward.key);ensureStyles(node.ownerDocument||root.document);node.dataset.swimProfile=p.family;node.dataset.swimKey=p.key;node.dataset.swimDirection=p.direction||'forward';node.style.opacity='1';node.style.setProperty('--swim-duration',p.duration+'s');node.style.setProperty('--swim-route-duration',(p.duration*PULSE_ROUTE_DURATION_FACTOR)+'s');node.style.setProperty('--swim-pulse-duration',((p.duration*PULSE_ROUTE_DURATION_FACTOR)/PULSE_STEPS).toFixed(3)+'s');node.style.setProperty('--swim-body-duration',Math.max(2.4,p.body||p.duration*.28)+'s');node.style.setProperty('--swim-travel',p.travel+'%');node.style.setProperty('--swim-bob',p.bob+'%');node.style.setProperty('--swim-wave',Math.max(.18,Math.min(.72,p.bob*.62))+'vh');return p}
 function clearRotation(){if(rotationTimer!==null){if(root.clearTimeout)root.clearTimeout(rotationTimer);else if(root.clearInterval)root.clearInterval(rotationTimer);rotationTimer=null}}
-function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length,lanes=[-15,-11,-7,-3,1,5,9,13,16,-13,-9,-5,-1,3,7,11,15];for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y')}const active=list.slice(0,count);for(const [index,node] of active.entries()){const routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||260,phase=(index+.37)/(Math.max(1,count)),lane=lanes[index%lanes.length];node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.style.left='50%';node.style.top='40%';node.style.opacity='1';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y',lane+'vh')}return active}
-root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR,PULSE_ROUTE_SPAN_VW,upgradeOrdinaryAssets,upgradedAsset};
+function activatePassThrough(nodes,maxActive){clearRotation();const list=(nodes||[]).filter(Boolean),count=list.length;for(const node of list){delete node.dataset.swimActive;delete node.dataset.swimCadence;node.style.removeProperty('--swim-delay');node.style.removeProperty('--swim-lane-y')}const active=list.slice(0,count);for(const [index,node] of active.entries()){const routeDuration=parseFloat(node.style.getPropertyValue('--swim-route-duration'))||260,phase=(index+.37)/(Math.max(1,count)),slot=index%(PASS_THROUGH_BASE_X.length*PASS_THROUGH_LANES.length),baseX=PASS_THROUGH_BASE_X[slot%PASS_THROUGH_BASE_X.length],lane=PASS_THROUGH_LANES[Math.floor(slot/PASS_THROUGH_BASE_X.length)%PASS_THROUGH_LANES.length];node.dataset.swimActive='1';node.dataset.swimCadence='pulse-glide';node.dataset.swimSlot=String(slot);node.style.left=baseX+'%';node.style.top='40%';node.style.opacity='1';node.style.setProperty('--swim-delay',(-routeDuration*phase).toFixed(2)+'s');node.style.setProperty('--swim-lane-y',lane+'vh')}return active}
+root.CinemapOceanMilestoneSwim={profiles,profileFor,apply,activatePassThrough,ensureStyles,clearRotation,buildPulseRoute,PULSE_STEPS,PULSE_ROUTE_DURATION_FACTOR,PULSE_ROUTE_SPAN_VW,PASS_THROUGH_BASE_X,PASS_THROUGH_LANES,upgradeOrdinaryAssets,upgradedAsset};
 })(window);

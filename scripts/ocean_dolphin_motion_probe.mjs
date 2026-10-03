@@ -27,7 +27,12 @@ try{
   await page.goto('http://127.0.0.1:4173/preview/ocean/real-fish/ecosystem.html?preview=1000',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.CinemapOceanPhotoFourPoints&&window.__OCEAN_PHOTO__?.CREATURES?.length>0);
   await page.waitForFunction(keys=>keys.every(key=>document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`)),Object.keys(swimmers),{timeout:20000});
-  await page.waitForTimeout(1800);
+  // Production intentionally pauses offscreen deformation. Move every probe target into the
+  // viewport so this motion-specific test still exercises every species without weakening
+  // the offscreen performance behavior validated by the visual/performance probes.
+  await page.evaluate(keys=>{for(const key of keys){const canvas=document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`),outer=canvas?.closest('[data-commemorative]');if(!outer)continue;outer.style.left='12%';outer.style.top='40%';outer.style.setProperty('--swim-lane-y','0vh');}},Object.keys(swimmers));
+  await page.waitForFunction(keys=>keys.every(key=>document.querySelector(`[data-milestone-key="${key}"]`)?.dataset.sourceState==='ready'),Object.keys(swimmers),{timeout:20000});
+  await page.waitForTimeout(700);
 
   const diagnostic=await page.evaluate(config=>Object.fromEntries(Object.entries(config).map(([key,cfg])=>{
     const canvas=document.querySelector(`[data-milestone-key="${key}"] canvas.milestoneDeformedCanvas`);

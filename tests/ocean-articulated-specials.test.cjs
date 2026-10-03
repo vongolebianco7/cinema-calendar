@@ -29,7 +29,7 @@ test('large whales and whale shark keep their direct HQ transparent sprites',()=
 
 test('manta dolphin and dugong have readable iPhone size caps',()=>{assert.match(population,/'manta-ray':26/);assert.match(population,/dolphin:20/);assert.match(population,/dugong:20/);});
 
-test('active milestone swimmers use generated directional short-step routes instead of in-place or linear motion',()=>{assert.match(swim,/function buildPulseRoute\(/);assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);assert.match(swim,/buildPulseRoute\('milestoneForwardNatural',-PULSE_ROUTE_SPAN_VW\/2,PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/buildPulseRoute\('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW\/2,-PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/node\.style\.left='50%'/);assert.doesNotMatch(swim,/animation-timing-function:linear!important/);});
+test('active milestone swimmers use generated directional short-step routes instead of in-place or linear motion',()=>{assert.match(swim,/function buildPulseRoute\(/);assert.match(swim,/const PULSE_ROUTE_SPAN_VW=50/);assert.match(swim,/buildPulseRoute\('milestoneForwardNatural',-PULSE_ROUTE_SPAN_VW\/2,PULSE_ROUTE_SPAN_VW\/2/);assert.match(swim,/buildPulseRoute\('milestoneReverseNatural',PULSE_ROUTE_SPAN_VW\/2,-PULSE_ROUTE_SPAN_VW\/2/);assert.doesNotMatch(swim,/node\.style\.left='50%'/);assert.doesNotMatch(swim,/animation-timing-function:linear!important/);});
 
 test('dolphin deformation stays within the tail-most zone',()=>{const dolphin=manifest.species.dolphin;assert.ok(Number(dolphin.deformation?.flexSpan)>0);assert.ok(Number(dolphin.deformation.flexSpan)<=0.3);assert.match(atlas,/function tailRamp\(profile,u,flexSpan/);});
 
@@ -43,6 +43,32 @@ test('sharks use direct generated HQ assets with moving tails',()=>{for(const ke
 
 test('turtle flippers and octopus tentacles use cleaned direct assets and dedicated motion profiles',()=>{for(const key of ['sea-turtle','giant-octopus']){const spec=manifest.species[key];assert.match(spec.asset,/assets\/milestone-.*-hq\.webp/);assert.ok(fs.existsSync('preview/ocean/real-fish/'+spec.asset),spec.asset+' must exist');}assert.equal(manifest.species['sea-turtle'].deformation?.profile,'flipper-flex');assert.equal(manifest.species['giant-octopus'].deformation?.profile,'tentacle-wave');assert.ok(Number(manifest.species['giant-octopus'].presentationScale)>=2);assert.match(atlas,/flipper-flex/);assert.match(atlas,/tentacle-wave/);});
 
-test('low quality vector/render ordinary fish are replaced at runtime with photo assets',()=>{assert.match(swim,/ORDINARY_ASSET_UPGRADES/);for(const bad of ['species-blue-tang.svg','species-damselfish.svg','species-firefish.svg','species-lyretail-anthias.svg','species-six-line-wrasse.svg','species-threadfin-butterflyfish.svg','species-filefish.webp','species-stingray.webp'])assert.match(swim,new RegExp(bad.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));assert.match(swim,/upgradeOrdinaryAssets/);assert.match(swim,/data-asset-upgraded/);});
+test('low quality vector/render ordinary fish are replaced at runtime with diverse photo assets',()=>{assert.match(swim,/ORDINARY_ASSET_UPGRADES/);for(const bad of ['species-blue-tang.svg','species-damselfish.svg','species-firefish.svg','species-lyretail-anthias.svg','species-six-line-wrasse.svg','species-threadfin-butterflyfish.svg','species-filefish.webp','species-stingray.webp'])assert.match(swim,new RegExp(bad.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));for(const replacement of ['species-moorish-idol.webp','species-puffer.webp','species-lionfish.webp','species-madai.webp','species-grouper.webp','species-butterflyfish.webp','fish-real.webp'])assert.match(swim,new RegExp(replacement.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));assert.match(swim,/upgradeOrdinaryAssets/);assert.match(swim,/data-asset-upgraded/);});
 
 test('keyed milestone bodies are hardened to opaque alpha after background removal',()=>{assert.match(atlas,/opaqueBody/);assert.match(atlas,/data\[i\+3\]=data\[i\+3\]>28\?255:0/);});
+
+test('deformed milestone creatures share one scheduler and pause when offscreen or hidden',()=>{
+  assert.match(atlas,/const deformationRegistry=new Set\(\)/);
+  assert.match(atlas,/function ensureDeformationScheduler\(/);
+  assert.match(atlas,/function schedulerTick\(/);
+  assert.match(atlas,/IntersectionObserver/);
+  assert.match(atlas,/document\.hidden/);
+  assert.match(atlas,/entry\.visible/);
+  const rafCalls=(atlas.match(/requestAnimationFrame\(/g)||[]).length;
+  assert.ok(rafCalls<=2,`milestone deformation should use a shared RAF, found ${rafCalls}`);
+});
+
+test('deformation canvas resolution and slice work are capped for iPhone performance',()=>{
+  assert.match(atlas,/DEFORMATION_DPR_CAP=1\.25/);
+  assert.match(atlas,/DEFORMATION_WIDTH_CAP=520/);
+  assert.match(atlas,/function ensureCanvasResolution\(/);
+  assert.match(atlas,/function sliceCountForWidth\(/);
+  assert.doesNotMatch(atlas,/canvas\.width=600;canvas\.height=240/);
+});
+
+test('pass-through megafauna use three vertical lanes to avoid density spill',()=>{
+  assert.match(swim,/const PASS_THROUGH_BASE_X=\[42\]/);
+  assert.match(swim,/const PASS_THROUGH_LANES=\[-22,0,22\]/);
+  assert.match(swim,/baseX=PASS_THROUGH_BASE_X\[/);
+  assert.match(swim,/node\.style\.left=baseX\+'%'/);
+});

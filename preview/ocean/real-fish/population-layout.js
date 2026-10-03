@@ -6,8 +6,8 @@ const LEGACY_CENTERS=[
 ];
 const DENSE_CENTERS=[
   {x:12,y:14},{x:31,y:12},{x:55,y:15},{x:80,y:13},{x:90,y:24},
-  {x:20,y:30},{x:43,y:29},{x:69,y:31},{x:85,y:38},
-  {x:12,y:47},{x:35,y:47},{x:59,y:44},{x:78,y:49},
+  {x:20,y:30},{x:43,y:28.5},{x:69,y:31},{x:85,y:38},
+  {x:12,y:47},{x:35,y:47},{x:59.1,y:44},{x:78,y:49},
   {x:23,y:60},{x:50,y:59},{x:72,y:61}
 ];
 const LOWER_THIRD_ANCHORS=[
@@ -22,7 +22,7 @@ function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function hash01(index,salt=0){let x=((index+1)*0x9e3779b1^(salt+1)*0x85ebca6b)>>>0;x^=x>>>16;x=Math.imul(x,0x7feb352d);x^=x>>>15;x=Math.imul(x,0x846ca68b);x^=x>>>16;return(x>>>0)/4294967296}
 function halton(n,base){let f=1,r=0;while(n>0){f/=base;r+=f*(n%base);n=Math.floor(n/base)}return r}
 function legacyDepthAndWidth(index){const d=hash01(index,8);const depth=d<.18?'near':d<.47?'far':'mid';const width=depth==='near'?6.7+hash01(index,9)*2.1:depth==='far'?3.0+hash01(index,9)*1.25:4.4+hash01(index,9)*1.9;return{depth,width}}
-function denseDepthAndWidth(index,count=500){if(count>=1000){const d=hash01(index,81);const depth=d<.72?'far':d<.94?'mid':'near';const width=depth==='far'?2.1+hash01(index,82):depth==='mid'?3.8+hash01(index,82)*1.4:5.8+hash01(index,82)*1.6;return{depth,width}}const d=hash01(index,8);const depth=d<.08?'near':d<.36?'mid':'far';const width=depth==='near'?6.2+hash01(index,9)*1.8:depth==='mid'?4.15+hash01(index,9)*1.65:2.55+hash01(index,9)*1.25;return{depth,width}}
+function denseDepthAndWidth(index,count=500){if(count>=1000){const d=hash01(index,81);const depth=d<.72?'far':d<.94?'mid':'near';const width=depth==='far'?2.1+hash01(index,82):depth==='mid'?3.8+hash01(index,82)*1.4:5.8+hash01(index,82)*1.6;return{depth,width}}const d=hash01(index,8);const depth=d<.08?'near':d<.25?'mid':'far';const width=depth==='near'?6.2+hash01(index,9)*1.8:depth==='mid'?4.15+hash01(index,9)*1.65:2.55+hash01(index,9)*1.25;return{depth,width}}
 function legacyLayout(count){const points=[],schooling=Math.round(count*.68),perSchool=Math.max(1,Math.ceil(schooling/LEGACY_CENTERS.length));for(let i=0;i<count;i++){let x,y,school=-1;if(i<schooling){school=(i*5+Math.floor(i/11))%LEGACY_CENTERS.length;const center=LEGACY_CENTERS[school],ordinal=Math.floor(i/LEGACY_CENTERS.length);const progress=Math.sqrt((ordinal+.65)/(perSchool+.65));const angle=ordinal*GOLDEN_ANGLE+school*.77+(hash01(i,3)-.5)*.85;const radius=.28+.72*progress;x=center.x+Math.cos(angle)*center.rx*radius+(hash01(i,4)-.5)*3.2;y=center.y+Math.sin(angle)*center.ry*radius+(hash01(i,5)-.5)*2.6;}else{const n=i-schooling+1;x=4+88*halton(n*3+7,2)+(hash01(i,6)-.5)*3.8;y=8+58*halton(n*5+11,3)+(hash01(i,7)-.5)*3.0;}const sizing=legacyDepthAndWidth(i);points.push({x:clamp(x,3,93),y:clamp(y,7,69),width:sizing.width,depth:sizing.depth,school});}return points}
 function groupRadius(size){if(size>=28)return{rx:7.2+size*.053,ry:4.35+size*.035};if(size>=12)return{rx:5.5+size*.053,ry:3.65+size*.035};return{rx:3.55+size*.103,ry:2.6+size*.063}}
 function spreadMatureFarWater(points,count){if(count<1000)return points;const target=Math.min(points.length,Math.max(80,Math.floor(count*.10)));for(let n=0;n<target;n++){const index=(n*11+5)%points.length;points[index].x=clamp(4+90*halton(n*5+19,2)+(hash01(n,91)-.5)*1.2,3,95);points[index].y=clamp(7+76*halton(n*7+23,3)+(hash01(n,92)-.5),7,85);points[index].depth='far';points[index].width=2.1+hash01(n,93);points[index].school=-3;}return points}

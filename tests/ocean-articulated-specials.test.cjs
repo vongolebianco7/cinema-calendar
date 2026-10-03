@@ -45,4 +45,4 @@ test('turtle flippers and octopus tentacles use cleaned direct assets and dedica
 
 test('low quality vector/render ordinary fish are replaced at runtime with photo assets',()=>{assert.match(swim,/ORDINARY_ASSET_UPGRADES/);for(const bad of ['species-blue-tang.svg','species-damselfish.svg','species-firefish.svg','species-lyretail-anthias.svg','species-six-line-wrasse.svg','species-threadfin-butterflyfish.svg','species-filefish.webp','species-stingray.webp'])assert.match(swim,new RegExp(bad.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));assert.match(swim,/upgradeOrdinaryAssets/);assert.match(swim,/data-asset-upgraded/);});
 
-test('keyed milestone bodies are hardened to opaque alpha after background removal',()=>{assert.match(atlas,/opaqueBody/);assert.match(atlas,/data\[i\+3\]=data\[i\+3\]>28\?255:0/);});
+test('keyed milestone bodies are hardened to opaque alpha after background removal',()=>{assert.match(atlas,/opaqueBody/);assert.match(atlas,/data\[i\+3\]=data\[i\+3\]>16\?255:0/);});

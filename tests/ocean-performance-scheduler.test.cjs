@@ -14,11 +14,14 @@ test('milestone deformation runs on one shared throttled animation scheduler',()
   assert.ok(rafCalls<=2,`deformation scheduler should own RAF; found ${rafCalls} requestAnimationFrame calls`);
 });
 
-test('offscreen milestone deformation is suspended and disconnected nodes are pruned',()=>{
+test('offscreen milestone deformation is suspended and idle RAF stops',()=>{
   assert.match(atlas,/IntersectionObserver/);
   assert.match(atlas,/entry\.visible/);
   assert.match(atlas,/isConnected/);
   assert.match(atlas,/document\.hidden/);
+  assert.match(atlas,/function hasActiveDeformation/);
+  assert.match(atlas,/if\(!hasActiveDeformation\(\)\)return/);
+  assert.match(atlas,/visibilitychange/);
 });
 
 test('deformation canvas resolution is capped for iPhone-class DPR',()=>{

@@ -14,14 +14,14 @@ function tailRamp(profile,u,flexSpan){
    const left=Math.exp(-Math.pow((u-.30)/.12,2)),right=Math.exp(-Math.pow((u-.70)/.12,2));
    return Math.min(1,(left+right)*.95);
  }
- if(profile==='tentacle-wave')return .12+.88*Math.pow(Math.min(1,Math.abs(u-.5)*2),1.15);
+ if(profile==='tentacle-wave')return .08+.92*Math.pow(Math.min(1,Math.abs(u-.5)*2),1.35);
  return Math.pow(Math.min(1,Math.abs(u-.5)*2),1.65);
 }
 function smoothstep(value){const x=Math.max(0,Math.min(1,value));return x*x*(3-2*x);}
 function chromaScore(r,g,b){const max=Math.max(r,g,b),min=Math.min(r,g,b),sat=max?((max-min)/max):0,blue=Math.max(0,(b-(r+g)/2)/255);return .72*sat+.28*blue;}
 function createKeyedSource(img,cfg){
  if(!cfg.chromaKey&&!cfg.opaqueBody)return img;
- const off=document.createElement('canvas'),maxWidth=900,scale=Math.min(1,maxWidth/img.naturalWidth);
+ const off=document.createElement('canvas'),maxWidth=720,scale=Math.min(1,maxWidth/img.naturalWidth);
  off.width=Math.max(1,Math.round(img.naturalWidth*scale));off.height=Math.max(1,Math.round(img.naturalHeight*scale));
  const ctx=off.getContext('2d',{willReadFrequently:true});if(!ctx)return img;
  ctx.clearRect(0,0,off.width,off.height);ctx.drawImage(img,0,0,off.width,off.height);
@@ -34,19 +34,20 @@ function createKeyedSource(img,cfg){
    const edgeBlueRatio=edgeOpaque?edgeBlue/edgeOpaque:0;shouldKey=edgeOpaque>0&&edgeBlueRatio>=.42;
  }
  if(shouldKey){for(let i=0;i<data.length;i+=4){const score=chromaScore(data[i],data[i+1],data[i+2]);if(score<=low)continue;const keyed=score>=high?1:smoothstep((score-low)/(high-low));data[i+3]=Math.round(data[i+3]*(1-keyed));}}
- if(cfg.opaqueBody){for(let i=0;i<data.length;i+=4)data[i+3]=data[i+3]>28?255:0;}
+ if(cfg.opaqueBody){for(let i=0;i<data.length;i+=4)data[i+3]=data[i+3]>16?255:0;}
  ctx.putImageData(imageData,0,0);return off;
 }
 function thrustEnvelope(phase){if(phase===null||phase===undefined)return 1;const p=((phase%1)+1)%1;if(p<.48){const local=p/.48;return .58+.48*Math.sin(Math.PI*local);}return .14;}
 function swimPhaseFor(wrap,elapsedSec){const node=wrap.closest?.('[data-swim-active="1"][data-swim-cadence="pulse-glide"]');if(!node)return null;const duration=Math.max(.15,parseFloat(node.style.getPropertyValue('--swim-pulse-duration'))||1.25),delay=parseFloat(node.style.getPropertyValue('--swim-delay'))||0;return((elapsedSec-delay)/duration)%1;}
 function createDeformedCreature(key,spec){
  const wrap=decorate(document.createElement('span'),key,spec),canvas=document.createElement('canvas'),img=new Image(),cfg=spec.deformation||{},profile=cfg.profile||'tail-flex-right',amplitude=Math.max(1,Number(cfg.amplitude)||24),period=Math.max(.8,Number(cfg.period)||2.4),aspect=Math.max(.8,Number(spec.assetAspect)||3),reduced=Boolean(root.matchMedia&&root.matchMedia('(prefers-reduced-motion: reduce)').matches),motionScale=reduced?.45:1,effectivePeriod=period*(reduced?1.35:1);
- Object.assign(wrap.style,{display:'block',position:'relative',overflow:'visible',aspectRatio:String(aspect),background:'transparent',opacity:'1'});wrap.dataset.deformed='1';wrap.dataset.sourceState='loading';wrap.dataset.reducedMotion=reduced?'1':'0';
- canvas.className='milestoneDeformedCanvas';canvas.width=600;canvas.height=240;Object.assign(canvas.style,{position:'absolute',left:'0',top:'-10%',width:'100%',height:'120%',display:'block',pointerEvents:'none',overflow:'visible',opacity:'1'});wrap.appendChild(canvas);
- img.decoding='async';img.loading='eager';let start=0,raf=0,lastDraw=-Infinity,source=null;const minFrameMs=reduced?80:50;
+ Object.assign(wrap.style,{display:'block',position:'relative',overflow:'visible',aspectRatio:String(aspect),background:'transparent',opacity:'1',contain:'layout paint'});wrap.dataset.deformed='1';wrap.dataset.sourceState='loading';wrap.dataset.reducedMotion=reduced?'1':'0';
+ canvas.className='milestoneDeformedCanvas';canvas.width=480;canvas.height=192;Object.assign(canvas.style,{position:'absolute',left:'0',top:'-10%',width:'100%',height:'120%',display:'block',pointerEvents:'none',overflow:'visible',opacity:'1',transform:'translateZ(0)',backfaceVisibility:'hidden'});wrap.appendChild(canvas);
+ const ctx=canvas.getContext('2d',{alpha:true});if(ctx){ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';}
+ img.decoding='async';img.loading='eager';let start=0,raf=0,lastDraw=-Infinity,source=null;const minFrameMs=reduced?50:33;
  const prepare=()=>{if(source||!img.complete||!img.naturalWidth)return;source=createKeyedSource(img,cfg);wrap.dataset.backgroundKeyed=cfg.chromaKey?'1':'0';wrap.dataset.sourceState='ready';};
- const draw=(ts)=>{prepare();if(!source){raf=requestAnimationFrame(draw);return;}if(!start)start=ts;if(ts-lastDraw<minFrameMs){raf=requestAnimationFrame(draw);return;}lastDraw=ts;const ctx=canvas.getContext('2d');if(!ctx)return;ctx.clearRect(0,0,canvas.width,canvas.height);const slices=40,overlap=2,sliceW=source.width/slices,destW=canvas.width/slices,destH=canvas.width/aspect,baseY=(canvas.height-destH)/2,elapsedSec=(ts-start)/1000,t=elapsedSec*(Math.PI*2/effectivePeriod),routePhase=swimPhaseFor(wrap,elapsedSec),thrust=thrustEnvelope(routePhase);
- for(let i=0;i<slices;i++){const u=(i+.5)/slices,ramp=tailRamp(profile,u,Number(cfg.flexSpan));let phase=t+u*.7;if(profile==='wing-flex'||profile==='flipper-flex')phase=t+(u-.5)*1.55;if(profile==='tentacle-wave')phase=t*.78+u*3.6;const offset=Math.sin(phase)*amplitude*motionScale*thrust*ramp*(canvas.height/360),sx=i*sliceW,dx=i*destW;ctx.drawImage(source,sx,0,sliceW,source.height,dx-overlap*.5,baseY+offset,destW+overlap,destH);}
+ const draw=(ts)=>{prepare();if(!source||!ctx){raf=requestAnimationFrame(draw);return;}if(!start)start=ts;if(ts-lastDraw<minFrameMs){raf=requestAnimationFrame(draw);return;}lastDraw=ts;ctx.clearRect(0,0,canvas.width,canvas.height);const slices=24,overlap=2,sliceW=source.width/slices,destW=canvas.width/slices,destH=canvas.width/aspect,baseY=(canvas.height-destH)/2,elapsedSec=(ts-start)/1000,t=elapsedSec*(Math.PI*2/effectivePeriod),routePhase=swimPhaseFor(wrap,elapsedSec),thrust=thrustEnvelope(routePhase);
+ for(let i=0;i<slices;i++){const u=(i+.5)/slices,ramp=tailRamp(profile,u,Number(cfg.flexSpan));let phase=t+u*.7;if(profile==='wing-flex'||profile==='flipper-flex')phase=t+(u-.5)*1.55;if(profile==='tentacle-wave')phase=t*.92+u*4.2;const octopusPulse=profile==='tentacle-wave'?(0.72+0.28*Math.sin(t*.5+u*2.2)):1,offset=Math.sin(phase)*amplitude*motionScale*thrust*ramp*octopusPulse*(canvas.height/288),sx=i*sliceW,dx=i*destW;ctx.drawImage(source,sx,0,sliceW,source.height,dx-overlap*.5,baseY+offset,destW+overlap,destH);}
  if(!wrap.isConnected&&ts-start>4000)return;raf=requestAnimationFrame(draw);
  };
  const kick=()=>{source=null;wrap.dataset.sourceState='loaded';if(raf)cancelAnimationFrame(raf);draw(performance.now());};img.onload=kick;img.onerror=()=>{wrap.dataset.sourceState='error';};img.src=spec.asset;if(img.complete&&img.naturalWidth)kick();return wrap;

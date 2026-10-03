@@ -86,9 +86,12 @@ test('large swimmers use tiny propulsion steps with glide pauses',()=>{
 });
 
 test('octopus and gentle drifters stay on local drift routes instead of pass-through',()=>{
-  const src=loadSwimSource();
-  assert.match(src,/data-swim-profile="octopus-drift"[^}]*animation-name:milestoneDriftRoute/s);
-  assert.match(src,/data-swim-profile="gentle-cruise"[^}]*animation-name:milestoneDriftRoute/s);
+  const swim=loadSwimSource();
+  const photo=loadPhotoSource();
+  assert.match(swim,/data-swim-profile="octopus-jet"[^}]*animation-name:milestoneDriftRoute/s);
+  assert.match(swim,/data-swim-profile="gentle-cruise"[^}]*animation-name:milestoneDriftRoute/s);
+  const passThrough=photo.match(/const PASS_THROUGH_MILESTONES=new Set\(\[([^\]]*)\]\)/)?.[1]||'';
+  assert.doesNotMatch(passThrough,/giant-octopus/);
 });
 
 test('milestone size hierarchy keeps megafauna dominant while articulated specials remain readable',()=>{

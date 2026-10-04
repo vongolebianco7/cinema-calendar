@@ -1,399 +1,17 @@
 {
-  "generated_at": "2026-10-03T22:22:31.507074+00:00",
+  "generated_at": "2026-10-04T21:14:50.255842+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-03",
-      "2027-01-31"
+      "2026-09-04",
+      "2027-02-01"
     ],
     "background_slice": [
-      "2027-05-26",
-      "2027-07-24"
+      "2027-07-26",
+      "2027-09-23"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 14571,
-      "title": "機動警察パトレイバー the Movie",
-      "original_title": "機動警察パトレイバー 劇場版",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/r7y7XdO9KCLEfsS8AZGOSKKJEbk.jpg",
-      "score": 6.928,
-      "votes": 194,
-      "overview": "すべてが朱に染まる夕暮れ、篠原重工の天才プログラマー・帆場暎一が、バビロンプロジェクトの要となるレイバー用海上プラットホーム「方舟」から投身自殺する。その口元に嘲りの笑みを浮かべながら…。これが、すべての始まりであった。  時期を同じくして、レイバーが突如暴走する事件が多発。遂には自衛隊の試作レイバーまでが無人で暴走事件を起こす。  特車二課第1小隊は、近々正式配備される新型パトレイバー（通称「零式」）に関する研修中のため不在。単独で暴走事件の処理に追われる第2小隊の篠原遊馬巡査は、多発する暴走事件の異常性にいち早く気付いて独自に調査を始め、原因が暴走した機体すべてに搭載されていた篠原重工製の最新レイバー用OS「HOS」(Hyper Operating System)ではないかと推測する。また、同様の疑念を抱いていた第2小隊長・後藤喜一警部補は、「HOS」の主任開発者だった帆場の捜査を、本庁の松井刑事に依頼していた。  遊馬の調査の結果、「HOS」が意図的に引き起こす暴走が事件の原因で、暴走の引き金が強風によって建造物から発せられる低周波音であることが明らかとなるが、知らせを受けた警視庁上層部や政府は、有力企業である篠原重工との関係やHOSを認可した国の責任問題の隠蔽を重視し、旧OSに戻すこと（公式には「HOS」のバージョンアップと称される）で政治的決着を図ろうとする。  そしてすべての謎が解明された時、大規模な暴走の引き金となる強風=台風の接近と、その台風により大音量の低周波音を発する東京湾上の浮遊建造物「方舟」を解体するため、第2小隊は「方舟」に向けて緊急出動する。",
-      "tmdb": "https://www.themoviedb.org/movie/14571",
-      "director": "押井守",
-      "director_id": 12180,
-      "cast": [
-        "冨永みーな",
-        "古川登志夫",
-        "大林隆介",
-        "榊原良子"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 100,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション",
-        "謎"
-      ]
-    },
-    {
-      "id": 736720,
-      "title": "ハンサム・ガイズ",
-      "original_title": "핸섬가이즈",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/ng4oX4mzPr8x53yF8gw5zGtpDLD.jpg",
-      "score": 6.788,
-      "votes": 52,
-      "overview": "自称タフガイのジェピルと、セクシーガイを名乗るサングは、森の奥深くにある新居へ引っ越してくる。互いがいかにハンサムかを褒め合う2人だが、実際にはその強面ぶりから周囲に不審者だと疑われていた。そんなことは知る由もなく、ようやく手に入れたマイホームでの新生活に幸せをかみしめる2人。ところが、近くの湖で溺れかけた大学生ミナを助けようとしたことから、彼らは殺人鬼と間違えられてしまう。ミナの友人たちが次々と襲いかかってくるなか、今度は家の地下室に封じられていた古代の悪霊が目を覚まし、家は次第に不気味なエネルギーに包まれていく。  カナダ映画「タッカーとデイル　史上最悪にツイてないヤツら」（2010年）のリメイク。",
-      "tmdb": "https://www.themoviedb.org/movie/736720",
-      "director": "남동협",
-      "director_id": 2755355,
-      "cast": [
-        "イ・ソンミン",
-        "イ・ヒジュン",
-        "공승연",
-        "パク・ジファン"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 102,
-      "genres": [
-        "コメディ",
-        "ホラー"
-      ]
-    },
-    {
-      "id": 1099946,
-      "title": "夏の終わりのクラシック",
-      "original_title": "여름이 끝날 무렵의 라트라비아타",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qC9aTTESSTjz8VLkZNwyDuh63Bt.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "夏が終わりに近づく頃、ヨンヒは毎年、済州島へとやって来る。一方、ジュヌは母の遺品を片付けるために済州島に来ていた。2人が偶然出会った日の夜、ジュヌが海で溺れかけたところをヨンヒが助ける。彼女はジュヌの家で膨大な量のクラシックアルバムのコレクションを目にし、クラシック音楽について詳しく教えてほしいと、ジュヌに懇願する。何か意味がありそうなヨンヒの願いを断りきれなかったジュヌは、庭の片づけを手伝ってもらうことを条件に、クラシック音楽を教えることを承諾する。人生の道に迷っていた2人は、次第に心を通わせていくが……。",
-      "tmdb": "https://www.themoviedb.org/movie/1099946",
-      "director": "Yoon Seok-ho",
-      "director_id": 1245456,
-      "cast": [
-        "キム・ジヨン",
-        "배수빈",
-        "윤지민",
-        "윤상정"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 116,
-      "genres": [
-        "ロマンス",
-        "ドラマ",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1187308,
-      "title": "ジュリーは沈黙したままで",
-      "original_title": "Julie zwijgt",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/ugT2w9SDDgKH3cEUV3tUcZiSyo5.jpg",
-      "score": 6.2,
-      "votes": 38,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1187308",
-      "director": "Leonardo Van Dijl",
-      "director_id": 1402209,
-      "cast": [
-        "Tessa Van den Broeck",
-        "Grace Biot",
-        "Alyssa Lorette",
-        "Ruth Becquart"
-      ],
-      "countries": [
-        "Belgium",
-        "Sweden",
-        "France"
-      ],
-      "runtime": 100,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 797109,
-      "title": "シークレット・メロディ",
-      "original_title": "말할 수 없는 비밀",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uuoWJyI6aiTUPzc2MHQRShgjqyY.jpg",
-      "score": 6.4,
-      "votes": 10,
-      "overview": "人気K-POPグループ「EXO」のメンバーで俳優としても活躍するD.O.（ディオ）ことド・ギョンスと、「ハッピーニューイヤー」などのウォン・ジナが共演したラブストーリー。2007年に台湾で大ヒットを記録した青春映画「言えない秘密」を原案に、現代的な解釈を加え新たな結末で描き出す。  幼い頃から天才ピアニストとして活躍してきたユジュンはドイツで将来を嘱望されていたが、コンクールで原因不明の発作を起こし、静養のため韓国に帰国する。音楽大学に編入した彼はある日、練習室から聞こえてきた美しいピアノの旋律に導かれ、そのピアノを弾いていたジョンアと運命的な出会いを果たす。ふたりはすぐにひかれあい、お互いにとってかけがえのない存在となるが、ある事情からすれ違いが続いてしまう。そんな中、ユジュンは1本の電話をきっかけにジョンアがいる場所へと走り出し、ジョンアもまたユジュンのもとへと向かう。",
-      "tmdb": "https://www.themoviedb.org/movie/797109",
-      "director": "ソ・ユミン",
-      "director_id": 1979003,
-      "cast": [
-        "ド・ギョンス",
-        "ウォン・ジナ",
-        "シン・イェウン",
-        "ペ・ソンウ"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 104,
-      "genres": [
-        "ロマンス",
-        "ファンタジー",
-        "ドラマ",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1251717,
-      "title": "箱の中の呪い",
-      "original_title": "Vicious",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/shKGDGrwqmc9x2aTJcQszoXinq0.jpg",
-      "score": 6.033,
-      "votes": 302,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1251717",
-      "director": "Bryan Bertino",
-      "director_id": 66074,
-      "cast": [
-        "ダコタ・ファニング",
-        "キャサリン・ハンター",
-        "メアリー・マコーマック",
-        "Rachel Blanchard"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 98,
-      "genres": [
-        "ホラー",
-        "スリラー"
-      ]
-    },
-    {
-      "id": 1054867,
-      "title": "ワン・バトル・アフター・アナザー",
-      "original_title": "One Battle After Another",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/6963S9BQk07eEk8r26eaHgw0RNY.jpg",
-      "score": 7.339,
-      "votes": 4289,
-      "overview": "元革命家の頼りない中年男ボブ。彼はさらわれた愛娘を取り戻すため、かつての仲間や謎めいた空手のセンセイの助けを借りながら、恐ろしい軍人ロックジョーに立ち向かっていく。",
-      "tmdb": "https://www.themoviedb.org/movie/1054867",
-      "director": "ポール・トーマス・アンダーソン",
-      "director_id": 4762,
-      "cast": [
-        "レオナルド・ディカプリオ",
-        "ショーン・ペン",
-        "チェイス・インフィニティ",
-        "ベニチオ・デル・トロ"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 162,
-      "genres": [
-        "スリラー",
-        "犯罪",
-        "コメディ"
-      ]
-    },
-    {
-      "id": 1593936,
-      "title": "By 6am 夜が明ける前に",
-      "original_title": "By 6am 夜が明ける前に",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5GLPB4foZgWtmE3uYsGNjJ5KMmg.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1593936",
-      "director": "Munetoshi Mukai",
-      "director_id": 1827034,
-      "cast": [
-        "武田梨奈",
-        "駿河太郎",
-        "萩原聖人",
-        "辻千恵"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 77,
-      "genres": [
-        "アクション"
-      ]
-    },
-    {
-      "id": 1556084,
-      "title": "3つのグノシエンヌ",
-      "original_title": "3つのグノシエンヌ",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/a84ozDM99cb01yPGAUqk32qRSHz.jpg",
-      "score": 5.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1556084",
-      "director": "ウエダアツシ",
-      "director_id": 1422573,
-      "cast": [
-        "松田凌",
-        "Yura Anno",
-        "Kaishi Iwao"
-      ],
-      "countries": [],
-      "runtime": 0,
-      "genres": [
-        "ロマンス",
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1555998,
-      "title": "アイドリッシュセブン First BEAT! 劇場総集編 前編",
-      "original_title": "アイドリッシュセブン First BEAT! 劇場総集編 前編",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/3yJVoWc3yQLiVKMdu7XfYtlGC61.jpg",
-      "score": 7.0,
-      "votes": 1,
-      "overview": "小鳥遊事務所に集められ、7人組グループ「IDOLiSH7」として芸能界への第一歩を踏み出した、和泉一織、二階堂大和、和泉三月、四葉環、逢坂壮五、六弥ナギ、七瀬陸。アイドルとしての未知の可能性を秘めた彼らは、寮での共同生活と芸能活動をスタートさせるが、それぞれの夢や目的の違いからほころびが広がってしまう。一方、「IDOLiSH7」より先にデビューした八乙女事務所の八乙女楽、九条天、十龍之介による3人組アイドルグループ「TRIGGER」は、ファンに対して常に完璧なステージを見せ人気を集めてきたが、ステージを降りれば事務所の方針と自分たちの信念との間で揺れ動いていた。",
-      "tmdb": "https://www.themoviedb.org/movie/1555998",
-      "director": "別所誠人",
-      "director_id": 1654092,
-      "cast": [
-        "増田俊樹",
-        "白井悠介",
-        "代永翼",
-        "KENN"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 107,
-      "genres": [
-        "アニメーション",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1530325,
-      "title": "火喰鳥を、喰う",
-      "original_title": "火喰鳥を、喰う",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/lX8NYv8o8nESI0d7IIuoZSMcpri.jpg",
-      "score": 7.667,
-      "votes": 3,
-      "overview": "信州で暮らす久喜雄司（水上恒司）と夕里子（山下美月）の元に戦死した先祖・久喜貞市の日記が届く。最後のページに綴られていたのは「ヒクイドリ、クイタイ」の文字。その日を境に、墓石の損壊、祖父の失踪など、幸せな夫婦の周辺で不可解な出来事が起こり始める。超常現象専門家・北斗総一郎（宮舘涼太）の力を借りて探った先で知る、驚愕の真相とは――",
-      "tmdb": "https://www.themoviedb.org/movie/1530325",
-      "director": "本木克英",
-      "director_id": 116787,
-      "cast": [
-        "水上恒司",
-        "山下美月",
-        "森田望智",
-        "吉澤健"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 108,
-      "genres": [
-        "ドラマ",
-        "謎",
-        "ホラー"
-      ]
-    },
-    {
-      "id": 1431083,
-      "title": "劇場版総集編 ガールズバンドクライ 【前編】 青春狂走曲",
-      "original_title": "劇場版総集編 ガールズバンドクライ 【前編】 青春狂走曲",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/tiBUhzLfZ9KS91fK5kyfHO2leNL.jpg",
-      "score": 8.0,
-      "votes": 1,
-      "overview": "高校を中退し単身で上京した井芹仁菜は憧れのバンドのボーカルの河原木桃香と出会い音楽の魅力に目覚める。\r 本心を隠しながら生きる安和すばる、両親に捨てられた過去を持つ海老塚智、天涯孤独の少女ルパとともにロックバンド「トゲナシトゲアリ」を結成。\r 悩みを抱えた5人の少女が世の中の不条理さに立ち向かい、自分たちの居場所を探し始める。",
-      "tmdb": "https://www.themoviedb.org/movie/1431083",
-      "director": "酒井和男",
-      "director_id": 1498114,
-      "cast": [
-        "理名",
-        "夕莉",
-        "凪都",
-        "美怜"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 110,
-      "genres": [
-        "アニメーション",
-        "ドラマ",
-        "コメディ",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1379045,
-      "title": "アフター・ザ・クエイク",
-      "original_title": "アフター・ザ・クエイク",
-      "date": "2025-10-03",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/cdW1Pfy4LzRx4NUWYTAUTHUgNjs.jpg",
-      "score": 8.0,
-      "votes": 10,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1379045",
-      "director": "井上剛",
-      "director_id": 1493929,
-      "cast": [
-        "岡田将生",
-        "橋本愛",
-        "泉澤祐希",
-        "唐田えりか"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 132,
-      "genres": [
-        "ドラマ"
-      ]
-    },
     {
       "id": 1570587,
       "title": "ラブライブ！蓮ノ空女学院スクールアイドルクラブ 5th Live Tour ～4Pair Power Spread!!!!～",
@@ -21585,6 +21203,33 @@
       "checked_at": "2026-10-03T22:22:31.507074+00:00"
     },
     {
+      "id": 1788056,
+      "title": "幻日",
+      "original_title": "幻日",
+      "date": "2026-10-03",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/gwknZuWtEeY9Wz3kdZdhtJDTQfk.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "閉館する映画館＜相鉄ムービル＞を舞台に存在しない記憶を巡るー短編映画『幻日』",
+      "tmdb": "https://www.themoviedb.org/movie/1788056",
+      "director": "河合健",
+      "director_id": 6524815,
+      "cast": [
+        "大西礼芳",
+        "細川佳央",
+        "上大迫祐希",
+        "吉田翔"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 23,
+      "genres": [],
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+    },
+    {
       "id": 1670114,
       "title": "スリーゴースト",
       "original_title": "スリーゴースト",
@@ -22716,8 +22361,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
-      "score": 8.669,
-      "votes": 136,
+      "score": 8.724,
+      "votes": 145,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "tmdb": "https://www.themoviedb.org/movie/1278101",
       "director": "Yang Lina",
@@ -22736,7 +22381,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1773014,
@@ -22765,7 +22410,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1707282,
@@ -22790,11 +22435,11 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 131,
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1567149,
@@ -22825,7 +22470,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1527427,
@@ -22854,7 +22499,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1313587,
@@ -22886,7 +22531,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1755423,
@@ -22914,7 +22559,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 106378,
@@ -22954,7 +22599,7 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/aASLRiO8p9xLIvG9EHXSyZ71sPl.jpg",
-      "score": 7.308,
+      "score": 7.3,
       "votes": 52,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1306816",
@@ -22974,7 +22619,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 338969,
@@ -22984,8 +22629,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cCWojb6N9UcTzNVtS4bOM3vQ30x.jpg",
-      "score": 5.939,
-      "votes": 446,
+      "score": 5.944,
+      "votes": 451,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/338969",
       "director": "メイコン・ブレア",
@@ -23005,7 +22650,7 @@
         "コメディ",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 467905,
@@ -23015,8 +22660,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vxMeKC7o5Gi8IHMi6lUgsdprTqv.jpg",
-      "score": 6.961,
-      "votes": 761,
+      "score": 6.952,
+      "votes": 779,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/467905",
       "director": "John Patton Ford",
@@ -23036,7 +22681,7 @@
         "コメディ",
         "スリラー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1567605,
@@ -23045,7 +22690,7 @@
       "date": "2026-11-13",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/wmuMZrelOQBAN2KlA30yOIeIUJl.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/6H2N59jJW1hZEzn2ZdrMvJw5vNI.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -23055,18 +22700,19 @@
       "cast": [
         "ジョニー・デップ",
         "ルパート・グリント",
-        "アンドレア・ライズボロー",
-        "トラメル・ティルマン"
+        "デイジー・リドリー",
+        "アンドレア・ライズボロー"
       ],
       "countries": [
         "United States of America"
       ],
       "runtime": 0,
       "genres": [
+        "ドラマ",
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1759179,
@@ -23096,7 +22742,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1737072,
@@ -23126,7 +22772,7 @@
         "ホラー",
         "スリラー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1560309,
@@ -23135,7 +22781,7 @@
       "date": "2026-11-13",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/hf26NlpP7xqSbsthwVUnaMhSQ4l.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/hu59kewfoT7Brzimj8KOliuh5Ih.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "人との関わりを拒み孤独に生きてきた主人公の冬子が、年上の男性三束と出会い、自らの孤独や感情と向き合う物語。",
@@ -23156,7 +22802,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1236857,
@@ -23188,7 +22834,7 @@
         "アクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1159206,
@@ -23199,7 +22845,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/96O3Ol3f2veMxAxYqsML8rOumB9.jpg",
       "score": 6.4,
-      "votes": 344,
+      "votes": 347,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1159206",
       "director": "ジム・ジャームッシュ",
@@ -23223,7 +22869,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1411577,
@@ -23233,8 +22879,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/qg0MKxZtg5CROXqfXBGVZmaxGbK.jpg",
-      "score": 6.0,
-      "votes": 14,
+      "score": 6.1,
+      "votes": 15,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1411577",
       "director": "김태용",
@@ -23253,7 +22899,7 @@
         "ファンタジー",
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1400837,
@@ -23282,7 +22928,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1767360,
@@ -23311,7 +22957,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1754757,
@@ -23340,7 +22986,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1746633,
@@ -23367,7 +23013,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1724371,
@@ -23395,7 +23041,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1694711,
@@ -23427,7 +23073,7 @@
         "アクション",
         "戦争"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 920167,
@@ -23441,8 +23087,8 @@
       "votes": 0,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/920167",
-      "director": null,
-      "director_id": null,
+      "director": "近藤光",
+      "director_id": 931823,
       "cast": [
         "戸松遥",
         "花澤香菜",
@@ -23455,10 +23101,10 @@
       "runtime": 0,
       "genres": [
         "アニメーション",
-        "ドラマ",
-        "ファンタジー"
+        "ファンタジー",
+        "ドラマ"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1457866,
@@ -23490,7 +23136,7 @@
         "コメディ",
         "スリラー"
       ],
-      "checked_at": "2026-09-27T18:28:52.872090+00:00"
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1368166,
@@ -24809,6 +24455,32 @@
         "コメディ"
       ],
       "checked_at": "2026-09-29T18:32:41.928750+00:00"
+    },
+    {
+      "id": 1196776,
+      "title": "Tamala 2030: A Punk Cat in Dark",
+      "original_title": "Tamala 2030: A Punk Cat in Dark",
+      "date": "2027-01-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/sHnbbkUAArhDgHA8ax4rvT0PlzM.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1196776",
+      "director": "t.o.L",
+      "director_id": 1364669,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 129,
+      "genres": [
+        "アニメーション",
+        "ファンタジー",
+        "サイエンスフィクション"
+      ],
+      "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
       "id": 1280738,

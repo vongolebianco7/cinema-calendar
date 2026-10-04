@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T22:24:04.866388+00:00",
+  "generated_at": "2026-10-04T21:16:41.697885+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
@@ -386,7 +386,7 @@
       "services": [
         "U-NEXT"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1232797/watch?locale=JP",
       "flatrate": [
         "U-NEXT"
@@ -497,7 +497,7 @@
         "Amazon Prime Video with Ads",
         "Prime Video"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1218925/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -964,7 +964,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1333141/watch",
       "flatrate": [],
       "rent": [],
@@ -979,7 +979,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1737455/watch",
       "flatrate": [],
       "rent": [],
@@ -994,7 +994,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1706689/watch",
       "flatrate": [],
       "rent": [],
@@ -1009,7 +1009,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1688934/watch",
       "flatrate": [],
       "rent": [],
@@ -1024,7 +1024,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1675182/watch",
       "flatrate": [],
       "rent": [],
@@ -1151,15 +1151,19 @@
             "Amazon Video"
           ],
           "buy": []
+        },
+        {
+          "observed_at": "2026-10-04T21:16:41.697885+00:00",
+          "flatrate": [],
+          "rent": [],
+          "buy": []
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
-      "source_url": "https://www.themoviedb.org/movie/1666802-still-dark/watch?locale=JP",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1666802/watch",
       "flatrate": [],
-      "rent": [
-        "Amazon Video"
-      ],
+      "rent": [],
       "buy": []
     },
     "1393151": {
@@ -1171,7 +1175,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1393151/watch",
       "flatrate": [],
       "rent": [],
@@ -1186,7 +1190,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1555218/watch",
       "flatrate": [],
       "rent": [],
@@ -1201,7 +1205,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1651260/watch",
       "flatrate": [],
       "rent": [],
@@ -1216,7 +1220,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1600736/watch",
       "flatrate": [],
       "rent": [],
@@ -1667,7 +1671,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1670114/watch",
       "flatrate": [],
       "rent": [],
@@ -1769,7 +1773,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1423191/watch",
       "flatrate": [],
       "rent": [],
@@ -1897,7 +1901,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1248832/watch",
       "flatrate": [],
       "rent": [],
@@ -4367,7 +4371,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/980996-i-like-movies/watch?locale=JP"
     },
     "1496183": {
@@ -4407,7 +4411,7 @@
       "buy": [
         "Amazon Video"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1496183/watch?locale=JP"
     },
     "1651162": {
@@ -4992,7 +4996,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-25T18:29:48.210991+00:00",
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1361774-the-dink/watch?locale=JP"
     },
     "1278101": {
@@ -6326,6 +6330,26 @@
       "buy": [],
       "checked_at": "2026-09-30T18:32:47.575289+00:00",
       "source_url": "https://www.themoviedb.org/movie/1511675/watch"
+    },
+    "1788056": {
+      "title": "幻日",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1788056/watch"
+    },
+    "1787681": {
+      "title": "本当にあった話（の話）",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1787681/watch"
     }
   }
 }

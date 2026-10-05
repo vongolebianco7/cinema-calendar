@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T21:17:13.989126+00:00",
+  "generated_at": "2026-10-05T18:37:19.018959+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -11703,6 +11703,19 @@
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
+      "kind": "theatrical",
+      "title": "龍飯店へようこそ",
+      "id": 1780540,
+      "original_title": "歓迎来龍餐館",
+      "date": "2026-09-18",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1780540",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
       "kind": "streaming",
       "title": "劇場版 チェンソーマン レゼ篇",
       "id": null,
@@ -12432,6 +12445,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "キリコのタクト～YELL～",
+      "id": 1788171,
+      "original_title": "キリコのタクト～YELL～",
+      "date": "2026-10-02",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1788171",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "ファーストボイス ー私たちの逆転裁判ー",
       "id": 1706689,
       "original_title": "ファーストボイス ー私たちの逆転裁判ー",
@@ -12467,6 +12493,19 @@
       "program": null,
       "source": "TMDB JP release dates",
       "source_url": "https://www.themoviedb.org/movie/1333141",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "劇場版ダーウィンが来た！世界のネコのなかまたち",
+      "id": 1786485,
+      "original_title": "劇場版ダーウィンが来た！世界のネコのなかまたち",
+      "date": "2026-10-02",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1786485",
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
@@ -12605,6 +12644,45 @@
       "id": 645788,
       "original_title": "The Protégé",
       "date": "2026-10-05",
+      "service": "テレビ東京",
+      "time": "13:40",
+      "program": "午後のロードショー",
+      "source": "テレビ東京 午後のロードショー",
+      "source_url": "https://www.tv-tokyo.co.jp/telecine/oa_afr_load/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "DIGGER／ディガー",
+      "id": 1248832,
+      "original_title": "Digger",
+      "date": "2026-10-06",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1248832",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "スリーゴースト",
+      "id": 1670114,
+      "original_title": "スリーゴースト",
+      "date": "2026-10-06",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1670114",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "ガントレット",
+      "id": 17689,
+      "original_title": "The Gauntlet",
+      "date": "2026-10-06",
       "service": "テレビ東京",
       "time": "13:40",
       "program": "午後のロードショー",

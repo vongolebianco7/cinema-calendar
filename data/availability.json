@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T21:16:41.697885+00:00",
+  "generated_at": "2026-10-05T18:36:47.269591+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
@@ -525,16 +525,40 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-10-05T18:36:47.269591+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
-      "services": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/967941-wicked-for-good/watch?locale=JP",
-      "flatrate": [],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
       "rent": [
         "Amazon Video",
         "Apple TV Store",
-        "FOD"
+        "FOD",
+        "U-NEXT"
       ],
       "buy": [
         "Amazon Video",
@@ -825,17 +849,36 @@
             "Apple TV Store",
             "Google Play Movies"
           ]
+        },
+        {
+          "observed_at": "2026-10-05T18:36:47.269591+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "Google Play Movies",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store",
+            "Google Play Movies"
+          ]
         }
       ],
       "services": [
-        "Netflix",
-        "Netflix Standard with Ads"
+        "Amazon Prime Video with Ads",
+        "Prime Video"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/872585-oppenheimer/watch?locale=JP",
       "flatrate": [
-        "Netflix",
-        "Netflix Standard with Ads"
+        "Amazon Prime Video with Ads",
+        "Prime Video"
       ],
       "rent": [
         "Amazon Video",
@@ -902,7 +945,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1275779/watch",
       "flatrate": [],
       "rent": [],
@@ -1876,7 +1919,7 @@
         "Amazon Prime Video with Ads",
         "Prime Video"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/406-la-haine/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1916,7 +1959,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1740268/watch",
       "flatrate": [],
       "rent": [],
@@ -1931,7 +1974,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1632015/watch",
       "flatrate": [],
       "rent": [],
@@ -1946,7 +1989,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1592548/watch",
       "flatrate": [],
       "rent": [],
@@ -1961,7 +2004,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1590933/watch",
       "flatrate": [],
       "rent": [],
@@ -1976,7 +2019,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-09-24T12:24:08.329052+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/621689/watch",
       "flatrate": [],
       "rent": [],
@@ -2250,10 +2293,33 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-10-05T18:36:47.269591+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
-      "services": [],
-      "flatrate": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
       "rent": [
         "Amazon Video",
         "Apple TV Store",
@@ -2264,7 +2330,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1418665-dive-in-wonderland/watch?locale=JP"
     },
     "1603232": {
@@ -2351,7 +2417,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1032863-the-love-hypothesis/watch?locale=JP"
     },
     "1777404": {
@@ -2638,7 +2704,7 @@
         "Apple TV Store",
         "Google Play Movies"
       ],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/59352/watch?locale=JP"
     },
     "793058": {
@@ -2648,7 +2714,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T12:59:34.468282+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/793058/watch"
     },
     "1462735": {
@@ -4554,7 +4620,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T13:06:15.016153+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1654940/watch"
     },
     "1255833": {
@@ -4564,7 +4630,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T13:06:15.016153+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1255833/watch"
     },
     "1153576": {
@@ -4574,7 +4640,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T13:06:15.016153+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1153576/watch"
     },
     "1692852": {
@@ -4584,7 +4650,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T13:06:15.016153+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1692852/watch"
     },
     "1687667": {
@@ -4594,7 +4660,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-09-24T13:06:15.016153+00:00",
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
       "source_url": "https://www.themoviedb.org/movie/1687667/watch"
     },
     "1614539": {
@@ -6350,6 +6416,26 @@
       "buy": [],
       "checked_at": "2026-10-04T21:16:41.697885+00:00",
       "source_url": "https://www.themoviedb.org/movie/1787681/watch"
+    },
+    "1788171": {
+      "title": "キリコのタクト～YELL～",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1788171/watch"
+    },
+    "1786485": {
+      "title": "劇場版ダーウィンが来た！世界のネコのなかまたち",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-05T18:36:47.269591+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1786485/watch"
     }
   }
 }

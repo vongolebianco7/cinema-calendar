@@ -1,68 +1,17 @@
 {
-  "generated_at": "2026-10-04T21:14:50.255842+00:00",
+  "generated_at": "2026-10-05T18:35:02.862445+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-04",
-      "2027-02-01"
+      "2026-09-05",
+      "2027-02-02"
     ],
     "background_slice": [
-      "2027-07-26",
-      "2027-09-23"
+      "2027-09-25",
+      "2027-10-05"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1570587,
-      "title": "ラブライブ！蓮ノ空女学院スクールアイドルクラブ 5th Live Tour ～4Pair Power Spread!!!!～",
-      "original_title": "ラブライブ！蓮ノ空女学院スクールアイドルクラブ 5th Live Tour ～4Pair Power Spread!!!!～",
-      "date": "2025-10-04",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/pOiQ5ppR39LfQ9eSr07KooneyqK.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1570587",
-      "director": null,
-      "director_id": null,
-      "cast": [
-        "楡井希実",
-        "野中ここな",
-        "菅叶和",
-        "櫻井陽菜"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 235,
-      "genres": []
-    },
-    {
-      "id": 1565508,
-      "title": "最高の友達ができた",
-      "original_title": "最高の友達ができた",
-      "date": "2025-10-04",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bxH50yvRxytgKkgwWDIJwzFrmrB.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "ガクとサトルは毎週のように一緒に映画を観る仲だ。だが最近サトルが結婚し、会う頻度は減っていた。そんな2人はサトルの妻・ナツキを交えて3人で会うようになるが、ガクとナツキはソリが合わない。サトルは、ナツキがガクを良く思っていないことを知り…。",
-      "tmdb": "https://www.themoviedb.org/movie/1565508",
-      "director": "野呂悠輔",
-      "director_id": 5760320,
-      "cast": [
-        "篠田諒"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 60,
-      "genres": [
-        "ドラマ"
-      ]
-    },
     {
       "id": 359105,
       "title": "Heneral Luna",
@@ -20023,6 +19972,26 @@
       "checked_at": "2026-10-03T22:22:31.507074+00:00"
     },
     {
+      "id": 1780540,
+      "title": "龍飯店へようこそ",
+      "original_title": "歓迎来龍餐館",
+      "date": "2026-09-18",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/rx1FPYliGVQydh0hzmpklQcxO4A.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "家族を養い借金を返済するため、シューは遠く中東の中華料理店へ料理人として赴く。そこで現地のホールマネージャー・マーと出会い、本場の中華の味で多くの客を惹きつけ、「龍飯店」はたちまち評判となる。しかし戦争の勃発とともに現地の情勢は急転直下。二人の運命はどこへ向かうのか。戦時最中の「龍飯店」は、それでもどう営みを続けていくのか。",
+      "tmdb": "https://www.themoviedb.org/movie/1780540",
+      "director": "文牧野",
+      "director_id": 1958907,
+      "cast": [],
+      "countries": [],
+      "runtime": 141,
+      "genres": [],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
+    },
+    {
       "id": 1645621,
       "title": "WIND GAP",
       "original_title": "WIND GAP",
@@ -21053,6 +21022,60 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-10-03T22:22:31.507074+00:00"
+    },
+    {
+      "id": 1788171,
+      "title": "キリコのタクト～YELL～",
+      "original_title": "キリコのタクト～YELL～",
+      "date": "2026-10-02",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/fcew8q3dIjwkCsookwm34CcZfV2.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1788171",
+      "director": "脚本",
+      "director_id": 6240096,
+      "cast": [
+        "鈴木京香",
+        "藤原大祐",
+        "井頭愛海",
+        "田辺桃子"
+      ],
+      "countries": [],
+      "runtime": 128,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
+    },
+    {
+      "id": 1786485,
+      "title": "劇場版ダーウィンが来た！世界のネコのなかまたち",
+      "original_title": "劇場版ダーウィンが来た！世界のネコのなかまたち",
+      "date": "2026-10-02",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/kh0BWUAYl7vMOiZI8wpoq9Y6AyS.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "灼熱の砂漠でキリンを狙うライオンの豪快な狩り、サバンナで群れで暮らす若いチーターの連携プレイ。\r マヌルネコはしっぽを使った＜にゃんともかわいい＞奇想天外の狩りを披露！\r 世界中のネコ科動物たちの驚きと発見いっぱいのネコ物語。",
+      "tmdb": "https://www.themoviedb.org/movie/1786485",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "山田孝之",
+        "水瀬いのり",
+        "中村千絵",
+        "葉山翔太"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 80,
+      "genres": [],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1666802,
@@ -23146,8 +23169,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
-      "score": 7.3,
-      "votes": 3134,
+      "score": 7.251,
+      "votes": 3165,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1368166",
       "director": "ポール・フェイグ",
@@ -23166,7 +23189,7 @@
         "謎",
         "スリラー"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1302904,
@@ -23176,8 +23199,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
-      "score": 6.2,
-      "votes": 93,
+      "score": 6.197,
+      "votes": 104,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1302904",
       "director": "スサンネ・ビア",
@@ -23197,7 +23220,7 @@
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1739765,
@@ -23225,7 +23248,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1718930,
@@ -23253,7 +23276,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1700953,
@@ -23282,7 +23305,7 @@
         "サイエンスフィクション",
         "ファンタジー"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1660754,
@@ -23312,7 +23335,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-09-28T18:31:59.587462+00:00"
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1552998,
@@ -23380,8 +23403,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/7Pd6ChSQjSXy4snJiorSdzg2cG3.jpg",
-      "score": 6.464,
-      "votes": 334,
+      "score": 6.497,
+      "votes": 342,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1287141",
       "director": "Harry Lighton",
@@ -23402,7 +23425,8 @@
         "ロマンス",
         "ドラマ",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1168719,
@@ -23412,8 +23436,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/hHUN0a4sswgPTmM4TogFrl3OSgR.jpg",
-      "score": 7.1,
-      "votes": 54,
+      "score": 7.2,
+      "votes": 56,
       "overview": "舞台はドイツの学園都市にある植物園。一本のイチョウの木を軸に、1908年、1972年、2020年という三つの時代の人々の人生が交錯し、自然と人間のあいだに宿る神秘的なつながりを重厚かつ独創的な映像美で描き出す。",
       "tmdb": "https://www.themoviedb.org/movie/1168719",
       "director": "Enyedi Ildikó",
@@ -23434,7 +23458,8 @@
       "runtime": 147,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1743286,
@@ -23456,7 +23481,8 @@
       ],
       "countries": [],
       "runtime": 0,
-      "genres": []
+      "genres": [],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1740230,
@@ -23483,7 +23509,8 @@
       "runtime": 0,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1782930,
@@ -24599,6 +24626,26 @@
       ],
       "runtime": 0,
       "genres": []
+    },
+    {
+      "id": 1788769,
+      "title": "ガチャ-廻世界-",
+      "original_title": "ガチャ-廻世界-",
+      "date": "2027-02-01",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/7mK027tqpxMLoyzwaAVy8sy63vg.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1788769",
+      "director": null,
+      "director_id": null,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-10-05T18:35:02.862445+00:00"
     },
     {
       "id": 1772119,

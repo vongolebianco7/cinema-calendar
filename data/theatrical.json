@@ -1,72 +1,17 @@
 {
-  "generated_at": "2026-10-05T18:35:02.862445+00:00",
+  "generated_at": "2026-10-06T18:32:14.724206+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-05",
-      "2027-02-02"
+      "2026-09-06",
+      "2027-02-03"
     ],
     "background_slice": [
-      "2027-09-25",
-      "2027-10-05"
+      "2025-10-06",
+      "2025-12-04"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 359105,
-      "title": "Heneral Luna",
-      "original_title": "Heneral Luna",
-      "date": "2025-10-05",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/fBv24gtxtiHSssgVg3QIITotYT9.jpg",
-      "score": 7.694,
-      "votes": 49,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/359105",
-      "director": "Jerrold Tarog",
-      "director_id": 893462,
-      "cast": [
-        "John Arcilla",
-        "Mon Confiado",
-        "Arron Villaflor",
-        "Bing Pimentel"
-      ],
-      "countries": [
-        "Philippines"
-      ],
-      "runtime": 118,
-      "genres": [
-        "アクション",
-        "ドラマ",
-        "履歴",
-        "戦争"
-      ]
-    },
-    {
-      "id": 1774902,
-      "title": "舞台『エグ女2025』",
-      "original_title": "舞台『エグ女2025』",
-      "date": "2025-10-05",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/aXp0viJ8yKIynG0UOHRi55kPDgh.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1774902",
-      "director": "村上大樹",
-      "director_id": 3918757,
-      "cast": [
-        "磯野亨",
-        "武藤潤",
-        "木原瑠生",
-        "鳥越裕貴"
-      ],
-      "countries": [],
-      "runtime": 140,
-      "genres": []
-    },
     {
       "id": 21832,
       "title": "新世紀エヴァンゲリオン劇場版 シト新生",
@@ -2759,6 +2704,28 @@
         "ドラマ",
         "サイエンスフィクション"
       ]
+    },
+    {
+      "id": 1786038,
+      "title": "名無しの子",
+      "original_title": "名無しの子",
+      "date": "2025-11-21",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/bZBsO9zlQgNizZtn0vXXgY800zX.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "「我是日本人还是中国人？」——私は日本人？それとも中国人？  中国語しか話せない日本人、中国残留孤児。答えのない問いを胸に、80年の歳月を生きてきた彼らは言う。  「私たちの戦争は、まだ終わっていない。」  1945年、第二次世界大戦末期の中国・旧満州。  当時そこには、日本の国策によって移住した約150万人の日本人庶民が暮らしていた。  だが、終戦直前、日本軍は彼らを見捨てて撤退。  戦火の中、数多くの女性や高齢者が命を落とし、数千人の幼い子供たちが親と離れ離れになった。  彼らは国籍を失い、孤児となり、“名無しの子”となった——。  本作は、日中共同取材チームが100人以上の残留孤児とその家族を、2年にわたって徹底取材。  1990年代に帰国するも、日本社会に馴染めず自殺未遂に追い込まれた一世。  差別の中で自らの居場所をつくるため、準暴力団「チャイニーズドラゴン」を結成した二世。  日中ハーフである自分のルーツを隠し、友人にさえ真実を語れない三世。  ——あれから80年。  今もなお「私は誰なのか」を探る彼らの、アイデンティティの物語。  『再会長江』の竹内亮監督が、日中合作チームとともに魂を込めて描く、心の国境を越えるドキュメンタリー。  本映画祭にて世界初公開。",
+      "tmdb": "https://www.themoviedb.org/movie/1786038",
+      "director": "竹内亮",
+      "director_id": 6518159,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [],
+      "checked_at": "2026-10-06T18:32:14.724206+00:00"
     },
     {
       "id": 1713257,
@@ -21519,6 +21486,26 @@
       "checked_at": "2026-10-03T22:22:31.507074+00:00"
     },
     {
+      "id": 1788907,
+      "title": "東京上空300メートル",
+      "original_title": "東京上空300メートル",
+      "date": "2026-10-10",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/ugbTTQDaVvXmB74vSEFArHtXJ17.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "首都上空を飛び交う米軍ヘリの実態に迫った調査報道をベースに、  毎日新聞が初めて送り出す長編ドキュメンタリー映画。",
+      "tmdb": "https://www.themoviedb.org/movie/1788907",
+      "director": null,
+      "director_id": null,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-10-06T18:32:14.724206+00:00"
+    },
+    {
       "id": 59352,
       "title": "太陽を盗んだ男",
       "original_title": "太陽を盗んだ男",
@@ -22590,7 +22577,7 @@
       "original_title": "南極料理人",
       "date": "2026-11-13",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/99vPuzrGf8cDIvpaLaTdyj0s9tF.jpg",
       "score": 7.1,
       "votes": 53,
@@ -22612,7 +22599,10 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-01T18:33:59.121809+00:00"
+      "checked_at": "2026-10-01T18:33:59.121809+00:00",
+      "revival": true,
+      "original_jp_release_date": "2009-08-08",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1306816,
@@ -23836,6 +23826,41 @@
         "アクション",
         "アドベンチャー"
       ]
+    },
+    {
+      "id": 1220564,
+      "title": "シークレット・エージェント",
+      "original_title": "O Agente Secreto",
+      "date": "2026-12-18",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/t1DQ4XXIqTm5LvUjz8jypN43JjZ.jpg",
+      "score": 7.2,
+      "votes": 895,
+      "overview": "1977 年、軍事政権下のブラジル。カーニバルの喧騒に紛れ、男は再び街へと舞い戻る。過去を消し身分を隠し、抑圧された僅かな自由にすがる人々と猜疑心渦巻くこの国で、「ある目的」を果たすために……。",
+      "tmdb": "https://www.themoviedb.org/movie/1220564",
+      "director": "クレベール・メンドンサ・フィリオ",
+      "director_id": 1016214,
+      "cast": [
+        "ヴァグネル・モウラ",
+        "Alice Carvalho",
+        "ガブリエル・レオン",
+        "Isabél Zuaa"
+      ],
+      "countries": [
+        "Brazil",
+        "France",
+        "Germany",
+        "Netherlands",
+        "Argentina"
+      ],
+      "runtime": 161,
+      "genres": [
+        "スリラー",
+        "ドラマ",
+        "犯罪"
+      ],
+      "checked_at": "2026-10-06T18:32:14.724206+00:00"
     },
     {
       "id": 1094274,

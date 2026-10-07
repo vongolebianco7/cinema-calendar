@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-06T18:32:14.724206+00:00",
+  "generated_at": "2026-10-07T18:34:19.421700+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-06",
-      "2027-02-03"
+      "2026-09-07",
+      "2027-02-04"
     ],
     "background_slice": [
-      "2025-10-06",
-      "2025-12-04"
+      "2025-12-06",
+      "2026-02-03"
     ],
     "max_detail_requests": 40
   },
@@ -3809,6 +3809,31 @@
       "genres": []
     },
     {
+      "id": 1663253,
+      "title": "シャイニングな女たち",
+      "original_title": "シャイニングな女たち",
+      "date": "2025-12-07",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/tY5kEobsk5N3EkJJCkQMVgySWZ0.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "金田海（吉高由里子）は、社会人として働くかたわら、他人のお別れの会に紛れ込み、ビュッフェを食べて帰るという行為を繰り返していた。ある日、入り込んだ会場で金田は偶然見覚えのある顔たちに出会う。それはかつて自分がキャプテンを務めていた大学時代の女子フットサル部の仲間たち。親友の山形圭子（さとうほなみ）、そして敵視していた顧問の川越瑞希（山口紗弥加）の姿まであった。遺影には同じピッチに立っていた後輩、白澤喜美（桜井日奈子）の姿。  『私はなぜ呼ばれていないのか？』――現在と輝いていた大学時代が交錯していく。その輝きは本当の輝きだったのか！？",
+      "tmdb": "https://www.themoviedb.org/movie/1663253",
+      "director": "蓬莱竜太",
+      "director_id": 1039437,
+      "cast": [
+        "吉高由里子",
+        "さとうほなみ",
+        "桜井日奈子",
+        "小野寺ずる"
+      ],
+      "countries": [],
+      "runtime": 150,
+      "genres": [],
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
+    },
+    {
       "id": 1603909,
       "title": "晩夏ノ蝉",
       "original_title": "晩夏ノ蝉",
@@ -6518,6 +6543,28 @@
       "genres": [
         "ドラマ"
       ]
+    },
+    {
+      "id": 1786018,
+      "title": "FUKUYAMA MASAHARU WE'RE BROS. TOUR 2026 龍、雷乃発声",
+      "original_title": "FUKUYAMA MASAHARU WE'RE BROS. TOUR 2026 龍、雷乃発声",
+      "date": "2026-01-24",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/4homwJJH14cAZQszwkGpD874EWh.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "龍。  それは、恵みの雨を降らし、五穀豊穣をもたらす神として  多くの人々に信仰されてきた存在。  雷乃発声。  それは、季節の移り変わりを細やかに感じ取るために  1年を72の季節に分けた暦「七十二候」しちじゅうにこうのひとつ。  人は五穀豊穣を願いながら、季節の変化を繊細に感じ取り、  農耕を営み、命を繋いできた。  そんな大きな流れの中に、蜜柑を作っていた福山雅治の祖母がいる。  自分の意思や力だけではどうにもならない農業の現場。  それでも、祖母は自然の声に耳を澄ませ、手を動かし続けた。  その生き方は福山にとって、アーティストそのものだった。  長崎で生まれ育ち、まだ何者でもなかった福山少年は  いつしか音楽への夢と憧れを抱き、ギター1本を抱えて上京する。  祖母の“ものづくりの血”は脈々と受け継がれ、  “アーティスト・福山雅治”へとつながった。  ⾳楽を作り、人々に届ける。  『龍、雷乃発声』りゅう、かみなりすなわちこえをはっす  それは、自身の命に与えられた命題に向き合いながら、季節とともに巡る音楽の旅。",
+      "tmdb": "https://www.themoviedb.org/movie/1786018",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "福山雅治"
+      ],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1702834,
@@ -20795,7 +20842,7 @@
         "ドラマ",
         "ファンタジー"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1275779,
@@ -23353,7 +23400,7 @@
         "戦争",
         "テレビ映画"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1774734,
@@ -23383,7 +23430,27 @@
         "犯罪",
         "ファンタジー"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
+    },
+    {
+      "id": 1790612,
+      "title": "ロンガの海",
+      "original_title": "ロンガの海",
+      "date": "2026-11-28",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/ed7tWMU4Wz39X7NWmIjBzrx1ydl.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1790612",
+      "director": "Haruko Konishi",
+      "director_id": 6532067,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1287141,
@@ -23528,9 +23595,10 @@
       "runtime": 125,
       "genres": [
         "ドラマ",
-        "コメディ"
+        "コメディ",
+        "ロマンス"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 478798,
@@ -23861,6 +23929,36 @@
         "犯罪"
       ],
       "checked_at": "2026-10-06T18:32:14.724206+00:00"
+    },
+    {
+      "id": 1790602,
+      "title": "人生を変えたコント",
+      "original_title": "人生を変えたコント",
+      "date": "2026-12-18",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/VtUaqFxH8klAznDPUHhX05g117.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "中学時代は人気者だったイシカワは、進学した高校で周囲にうまくなじめず居場所を失い、いじめの標的となってしまう。持ち前の明るさで逆境を乗り越えようとするイシカワだったが、いじめは止まらず確実に彼の心身をむしばんでいく。やがて彼は、学校最大のイベントである秋の文劇祭で大逆転を果たすべく立ち上がり、周囲を巻き込みながら前向きに突き進んでいく。",
+      "tmdb": "https://www.themoviedb.org/movie/1790602",
+      "director": "河合勇人",
+      "director_id": 1500346,
+      "cast": [
+        "大橋和也",
+        "桜田ひより",
+        "前田旺志郎",
+        "岩瀬洋志"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1094274,
@@ -24420,6 +24518,37 @@
         "スリラー"
       ],
       "checked_at": "2026-10-01T18:33:59.121809+00:00"
+    },
+    {
+      "id": 1257420,
+      "title": "ひとりで死ぬのはイヤだから",
+      "original_title": "ひとりで死ぬのはイヤだから",
+      "date": "2027-01-16",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/gmZkCDwBQfiYX9llE9BBDYYggK4.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1257420",
+      "director": "Janus Victoria",
+      "director_id": 1535481,
+      "cast": [
+        "リリー・フランキー",
+        "Maria Isabel Lopez",
+        "Soliman Cruz",
+        "Charlie Dizon"
+      ],
+      "countries": [
+        "Japan",
+        "Malaysia",
+        "Philippines"
+      ],
+      "runtime": 102,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
       "id": 1774278,

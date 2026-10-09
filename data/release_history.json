@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T18:36:29.798728+00:00",
+  "generated_at": "2026-10-09T18:34:26.790400+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -6647,6 +6647,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "異国の親友",
+      "id": 1694308,
+      "original_title": "異国の親友",
+      "date": "2026-05-20",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1694308",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "スター・ウォーズ／マンダロリアン・アンド・グローグー",
       "id": 1228710,
       "original_title": "The Mandalorian and Grogu",
@@ -12640,6 +12653,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "さよならの前に、できること",
+      "id": 1792196,
+      "original_title": "さよならの前に、できること",
+      "date": "2026-10-03",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1792196",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "プーチンの愛国教室",
       "id": 1393151,
       "original_title": "Mr. Nobody mod Putin",
@@ -12743,6 +12769,19 @@
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
+      "kind": "streaming",
+      "title": "Matchbox The Movie",
+      "id": 1148365,
+      "original_title": null,
+      "date": "2026-10-09",
+      "service": "Apple TV+",
+      "time": null,
+      "program": null,
+      "source": "Apple TV Press 2026 lineup",
+      "source_url": "https://www.apple.com/tv-pr/news/2026/02/apple-tv-sets-must-see-2026-lineup-of-star-studded-original-series-films-and-live-sports/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
       "kind": "theatrical",
       "title": "どこよりも遠い場所にいる君へ",
       "id": 1632015,
@@ -12831,6 +12870,32 @@
       "program": "金曜ロードショー",
       "source": "日本テレビ 金曜ロードシネマクラブ",
       "source_url": "https://kinro.ntv.co.jp/",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "東京上空300メートル",
+      "id": 1788907,
+      "original_title": "東京上空300メートル",
+      "date": "2026-10-10",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1788907",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "給逃亡者的恰恰",
+      "id": 621689,
+      "original_title": "給逃亡者的恰恰",
+      "date": "2026-10-10",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/621689",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

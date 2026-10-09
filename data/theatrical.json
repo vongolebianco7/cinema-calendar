@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-08T18:34:09.239976+00:00",
+  "generated_at": "2026-10-09T18:32:15.592420+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-08",
-      "2027-02-05"
+      "2026-09-09",
+      "2027-02-06"
     ],
     "background_slice": [
-      "2026-02-05",
-      "2026-04-05"
+      "2026-04-07",
+      "2026-06-05"
     ],
     "max_detail_requests": 40
   },
@@ -12966,6 +12966,32 @@
       "genres": []
     },
     {
+      "id": 1694308,
+      "title": "異国の親友",
+      "original_title": "異国の親友",
+      "date": "2026-05-20",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/wYP4JsHpbZDi9z1LFaOzTZ8mmAF.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1694308",
+      "director": "Roufy Nasution",
+      "director_id": 2537285,
+      "cast": [
+        "​​Nguyễn Thị Trúc Linh",
+        "Roufy Nasution"
+      ],
+      "countries": [],
+      "runtime": 15,
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-10-09T18:32:15.592420+00:00"
+    },
+    {
       "id": 1228710,
       "title": "スター・ウォーズ／マンダロリアン・アンド・グローグー",
       "original_title": "The Mandalorian and Grogu",
@@ -21267,6 +21293,35 @@
       "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
+      "id": 1792196,
+      "title": "さよならの前に、できること",
+      "original_title": "さよならの前に、できること",
+      "date": "2026-10-03",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/5PgbuYJ7tcNRruQ5zymKZPS0SY7.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "喜乃（渡辺優美)は、母の葬儀に父・健一（竹中直人）が参列しなかったことを長年恨んでいた。\r 叔父の和也（甲本雅裕）から健一が末期がんであることを知らされた喜乃は、父と最期の対面を果たす。静まり返った体育館で、喜乃は秘めた想いを賭け、フリースロー3ラウンドの勝負に挑む。\r ボールが弧を描いて空を舞うにつれ、長年の沈黙と誤解が解きほぐされていく。",
+      "tmdb": "https://www.themoviedb.org/movie/1792196",
+      "director": "根岸憲一",
+      "director_id": 1046096,
+      "cast": [
+        "竹中直人",
+        "渡辺優美",
+        "甲本雅裕",
+        "米本學仁"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-09T18:32:15.592420+00:00"
+    },
+    {
       "id": 1670114,
       "title": "スリーゴースト",
       "original_title": "スリーゴースト",
@@ -24546,6 +24601,38 @@
         "スリラー"
       ],
       "checked_at": "2026-10-01T18:33:59.121809+00:00"
+    },
+    {
+      "id": 1695893,
+      "title": "機動戦士ガンダムSEED FREEDOM ZERO",
+      "original_title": "機動戦士ガンダムSEED FREEDOM ZERO",
+      "date": "2027-01-15",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/oaVT7ZdNgZnBmq1Hncb072qJ5dD.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "デュランダルが提唱した、遺伝子によって人の運命を定める「デスティニープラン」の崩壊後 新たな平和秩序の実現に向けて、オーブ連合首長国代表・カガリを中心に、 世界平和監視機構「コンパス」の創設が進められていた。  C.E.74。大きな戦いを終えた世界で、シンは自らが進むべき道を見出せずにいた。 そんな折、ザフトからオノゴロ島のコンパス暫定基地へ、かつての戦場を戦い抜いたモビルスーツが移送される。 しかしその夜、「ストライクフリーダムガンダム」が何者かによって強奪されてしまう。  事件の拡大を阻止し、奪われた機体を取り戻すため、そして守るべきもののため シンたちは再び戦いへと身を投じていく――。",
+      "tmdb": "https://www.themoviedb.org/movie/1695893",
+      "director": "福田己津央",
+      "director_id": 1241824,
+      "cast": [
+        "鈴村健一",
+        "坂本真綾",
+        "桑島法子",
+        "小野大輔"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "サイエンスフィクション",
+        "アニメーション",
+        "アクション",
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-09T18:32:15.592420+00:00"
     },
     {
       "id": 1257420,

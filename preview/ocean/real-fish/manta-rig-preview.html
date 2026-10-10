@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cinemap Ocean — Manta Rig Preview</title>
+<style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#071a27;color:#f3f8fb}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 20%,#123a52 0,#0a2637 36%,#05151f 72%,#030d14 100%)}
+body{padding:calc(env(safe-area-inset-top) + 16px) 14px calc(env(safe-area-inset-bottom) + 28px)}
+main{width:min(100%,390px);margin:0 auto}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.66}.title{font-size:24px;font-weight:700;margin:5px 0 8px}.intro{font-size:13px;line-height:1.55;opacity:.78;margin:0 0 16px}
+.card{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:linear-gradient(180deg,rgba(25,72,96,.44),rgba(5,28,42,.76));box-shadow:0 18px 45px rgba(0,0,0,.28);margin:0 0 14px}.cardHeader{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 4px}.label{font-size:13px;font-weight:650}.status{font-size:10px;opacity:.6}.stage{height:238px;position:relative;overflow:hidden}.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(72,164,196,.16),transparent 58%),linear-gradient(180deg,rgba(255,255,255,.035),transparent 30%);pointer-events:none}.stage:after{content:"";position:absolute;left:8%;right:8%;bottom:18%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+#currentManta,#riggedManta{position:absolute;left:50%;top:50%;width:330px;height:180px;transform:translate(-50%,-50%)}#riggedManta{display:block}.note{font-size:11px;line-height:1.5;opacity:.62;padding:0 14px 13px}
+.footer{font-size:11px;line-height:1.55;opacity:.6;margin:4px 3px 0}
+@media(min-width:760px){main{width:min(920px,calc(100vw - 40px))}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{margin:0}.stage{height:300px}#currentManta,#riggedManta{width:390px;height:220px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Cinemap Ocean · 390px review</div>
+  <h1 class="title">Manta fin motion</h1>
+  <p class="intro">横移動を止めて、ヒレのしなりだけを比較する専用プレビューです。</p>
+  <section class="grid">
+    <article class="card">
+      <div class="cardHeader"><span class="label">Current</span><span id="currentStatus" class="status">loading</span></div>
+      <div class="stage"><div id="currentManta" aria-label="current manta motion"></div></div>
+      <div class="note">現在の全体メッシュ変形。比較用。</div>
+    </article>
+    <article class="card">
+      <div class="cardHeader"><span class="label">Rigged</span><span id="rigStatus" class="status">loading</span></div>
+      <div class="stage"><canvas id="riggedManta" aria-label="rigged manta motion"></canvas></div>
+      <div class="note">実測に合わせた約3.15秒周期。胴体を安定させ、翼端ほど大きく上下し、3D投影で奥行きを表現。</div>
+    </article>
+  </section>
+  <p class="footer">これはマンタ単体の試作で、mainには反映していません。</p>
+</main>
+<script src="milestone-atlas.js"></script>
+<script src="manta-rig-preview.js"></script>
+</body>
+</html>

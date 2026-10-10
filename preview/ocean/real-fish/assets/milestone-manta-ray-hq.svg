@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Manta ray">
+<defs>
+  <linearGradient id="dorsal" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6d828d"/>
+    <stop offset="0.26" stop-color="#405864"/>
+    <stop offset="0.62" stop-color="#203641"/>
+    <stop offset="1" stop-color="#0d2029"/>
+  </linearGradient>
+  <linearGradient id="wingShade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#91a4ac" stop-opacity=".42"/>
+    <stop offset=".5" stop-color="#49616c" stop-opacity=".14"/>
+    <stop offset="1" stop-color="#071820" stop-opacity=".2"/>
+  </linearGradient>
+  <radialGradient id="ridge" cx="50%" cy="30%" r="58%">
+    <stop offset="0" stop-color="#c1cdd2" stop-opacity=".45"/>
+    <stop offset=".34" stop-color="#7f949d" stop-opacity=".18"/>
+    <stop offset="1" stop-color="#0d2029" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="edgeL" x1="1" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b7c5ca" stop-opacity=".48"/>
+    <stop offset="1" stop-color="#6f8790" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="edgeR" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7c5ca" stop-opacity=".48"/>
+    <stop offset="1" stop-color="#6f8790" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<!-- One continuous manta silhouette: head, torso and pectoral fins form one diamond-shaped body. -->
+<path id="manta-main-silhouette" d="M600 92
+C574 94 552 108 533 132
+C505 148 473 164 431 181
+C351 214 266 240 184 260
+C112 278 59 300 18 329
+C82 328 145 338 208 358
+C298 387 381 421 459 458
+C512 483 557 506 600 532
+C643 506 688 483 741 458
+C819 421 902 387 992 358
+C1055 338 1118 328 1182 329
+C1141 300 1088 278 1016 260
+C934 240 849 214 769 181
+C727 164 695 148 667 132
+C648 108 626 94 600 92Z" fill="url(#dorsal)"/>
+
+<!-- Cephalic lobes are short forward extensions, not tall horns. -->
+<path d="M558 137 C535 119 514 95 500 69 C490 51 486 34 489 20 C508 32 527 48 545 68 C560 86 570 107 573 131Z" fill="#314955"/>
+<path d="M642 137 C665 119 686 95 700 69 C710 51 714 34 711 20 C692 32 673 48 655 68 C640 86 630 107 627 131Z" fill="#314955"/>
+
+<!-- Thin trailing tail -->
+<path d="M592 515 C595 558 595 600 592 640 C590 663 591 684 596 698 C602 681 606 657 608 626 C611 584 610 547 606 514Z" fill="#162c36"/>
+
+<!-- Broad wing lighting follows the continuous surface instead of separate wing panels. -->
+<path d="M538 153 C468 183 393 211 316 234 C220 263 132 294 61 325 C146 320 226 339 306 370 C390 403 461 435 529 468" fill="none" stroke="url(#edgeL)" stroke-width="13" stroke-linecap="round" opacity=".50"/>
+<path d="M662 153 C732 183 807 211 884 234 C980 263 1068 294 1139 325 C1054 320 974 339 894 370 C810 403 739 435 671 468" fill="none" stroke="url(#edgeR)" stroke-width="13" stroke-linecap="round" opacity=".50"/>
+<path d="M52 328 C152 327 247 353 337 392 C413 425 481 456 545 486 C510 466 474 446 436 427 C354 386 270 353 183 337 C132 328 88 325 52 328Z" fill="url(#wingShade)" opacity=".55"/>
+<path d="M1148 328 C1048 327 953 353 863 392 C787 425 719 456 655 486 C690 466 726 446 764 427 C846 386 930 353 1017 337 C1068 328 1112 325 1148 328Z" fill="url(#wingShade)" opacity=".55"/>
+
+<!-- Subtle dorsal ridge; keep torso integrated rather than oval/bulbous. -->
+<path d="M600 115 C568 119 542 142 527 178 C512 214 507 257 512 306 C518 369 543 427 575 468 C586 482 595 492 600 496 C605 492 614 482 625 468 C657 427 682 369 688 306 C693 257 688 214 673 178 C658 142 632 119 600 115Z" fill="url(#ridge)"/>
+<path d="M546 184 C565 169 583 162 600 162 C617 162 635 169 654 184 C636 177 618 174 600 174 C582 174 564 177 546 184Z" fill="#d0dadd" opacity=".30"/>
+<path d="M530 247 C554 236 577 231 600 231 C623 231 646 236 670 247" fill="none" stroke="#a8bac1" stroke-width="7" stroke-linecap="round" opacity=".13"/>
+<path d="M517 310 C548 299 576 294 600 294 C624 294 652 299 683 310" fill="none" stroke="#849ca5" stroke-width="6" stroke-linecap="round" opacity=".10"/>
+
+<!-- Eyes near the lateral head margin. -->
+<ellipse cx="552" cy="153" rx="8" ry="4.5" fill="#071015" opacity=".9"/>
+<ellipse cx="648" cy="153" rx="8" ry="4.5" fill="#071015" opacity=".9"/>
+</svg>

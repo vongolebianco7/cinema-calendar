@@ -1,6 +1,10 @@
 name: Update movie data
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - data/streaming.json
   schedule:
     - cron: "17 18 * * *"
 concurrency:

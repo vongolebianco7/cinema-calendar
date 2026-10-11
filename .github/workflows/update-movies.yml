@@ -39,6 +39,24 @@ jobs:
       - name: Archive sourced publication history
         run: python scripts/update_history.py
 
+      - name: Detect stale premiere coverage
+        run: |
+          python - <<'PY'
+          import datetime, json
+          with open("data/streaming.json", encoding="utf-8") as f:
+              source = json.load(f)
+          today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date()
+          upcoming = [m for m in source.get("movies", []) if m.get("date", "") >= str(today)]
+          missing = [m.get("title") for m in source.get("movies", []) if not (m.get("source_url") and m.get("date") and m.get("service"))]
+          print(f"Verified future streaming premieres: {len(upcoming)}")
+          print(f"Streaming source last editorial update: {source.get('generated_at')}")
+          print(f"Source records missing citation/date/service: {len(missing)}")
+          if len(upcoming) < 5:
+              print("::warning title=Streaming premiere coverage stale::Fewer than five upcoming officially dated premieres. Curated official release announcements need refresh.")
+          if missing:
+              print("::warning title=Missing streaming citations::Some streaming entries lack required source/date/service.")
+          PY
+
       - name: Validate movie snapshot
         run: |
           python - <<'PY'

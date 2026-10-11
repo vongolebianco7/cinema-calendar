@@ -42,16 +42,13 @@ for m in movies:
  try:date=datetime.date.fromisoformat(m["date"])
  except (KeyError,ValueError):continue
  distance=abs((date-TODAY).days)
- if distance>120:continue
+ if distance>365:continue
  if mid not in by_id or distance<by_id[mid][0]:by_id[mid]=(distance,m)
 
 # Prioritize streaming calendar entries, then nearby theatrical releases.
 # Coverage was previously capped at 100 titles, which made later-added
 # providers such as Apple TV+, ABEMA and Lemino appear under-populated.
-candidates=sorted(
- by_id.items(),
- key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1,item[1][0])
-)
+candidates=sorted(\n by_id.items(),\n key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])\n)
 selected=[]
 for mid,pair in candidates:
  item=cache.get(str(mid),{})
@@ -96,7 +93,7 @@ old.update({
  "generated_at":NOW,
  "source":"TMDB watch/providers (JustWatch)",
  "country":"JP",
- "note":"日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
+ "note":"日本向けの見放題・レンタル・購入先の観測です。初観測日は配信開始日ではありません。更新時刻は作品ごとのchecked_atを参照してください。",
  "movies":cache
 })
 with open(PATH,"w",encoding="utf-8") as f:json.dump(old,f,ensure_ascii=False,indent=2)

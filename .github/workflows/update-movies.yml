@@ -1,6 +1,11 @@
 name: Update movie data
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - data/streaming.json
+      - data/streaming_announcements.json
   schedule:
     - cron: "17 18 * * *"
 concurrency:
@@ -18,6 +23,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Import source-reviewed official streaming premieres
+        run: python scripts/import_streaming_announcements.py
+      - name: Validate all streaming provider feeds and provenance
+        run: python scripts/check_streaming_coverage.py
       - name: Run compliance source gate
         run: python scripts/check_sources.py
       - name: Fetch TMDB data
@@ -38,6 +47,24 @@ jobs:
         run: python scripts/update_availability.py
       - name: Archive sourced publication history
         run: python scripts/update_history.py
+
+      - name: Detect stale premiere coverage
+        run: |
+          python - <<'PY'
+          import datetime, json
+          with open("data/streaming.json", encoding="utf-8") as f:
+              source = json.load(f)
+          today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date()
+          upcoming = [m for m in source.get("movies", []) if m.get("date", "") >= str(today)]
+          missing = [m.get("title") for m in source.get("movies", []) if not (m.get("source_url") and m.get("date") and m.get("service"))]
+          print(f"Verified future streaming premieres: {len(upcoming)}")
+          print(f"Streaming source last editorial update: {source.get('generated_at')}")
+          print(f"Source records missing citation/date/service: {len(missing)}")
+          if len(upcoming) < 5:
+              print("::warning title=Streaming premiere coverage stale::Fewer than five upcoming officially dated premieres. Curated official release announcements need refresh.")
+          if missing:
+              print("::warning title=Missing streaming citations::Some streaming entries lack required source/date/service.")
+          PY
 
       - name: Validate movie snapshot
         run: |

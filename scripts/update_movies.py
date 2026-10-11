@@ -306,6 +306,22 @@ if tv_updated:
  with open("data/tv.json","w",encoding="utf-8") as fh:
   json.dump(tv_data,fh,ensure_ascii=False,indent=2)
 
+# Persist TMDB enrichment without pretending that a new streaming premiere was discovered.
+# The editorial source's generated_at is preserved so stale official release dates
+# remain detectable even when the main movie snapshot is refreshed daily.
+if stream_movies != streaming.get("movies", []):
+ with open("data/streaming.json", "w", encoding="utf-8") as fh:
+  json.dump({**streaming, "movies":stream_movies}, fh, ensure_ascii=False, indent=2)
+
+# Emit honest freshness metadata for diagnostics. A refreshed TMDB availability
+# snapshot is NOT evidence that official streaming premieres have been updated.
+streaming_source_last_updated = streaming.get("generated_at")
+future_streaming_count = sum(1 for m in stream_movies if m.get("date", "") >= str(today))
+print("Official streaming premiere source last updated:", streaming_source_last_updated)
+print("Future verified streaming premieres:", future_streaming_count)
+if future_streaming_count < 5:
+ print("WARNING: Streaming premiere coverage is sparse. Update data/streaming.json from officially dated announcements.")
+
 events=theatrical+stream_movies
 events.sort(key=lambda x:x.get("date",""))
 

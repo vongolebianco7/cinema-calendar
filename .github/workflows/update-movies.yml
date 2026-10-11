@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - data/streaming.json
+      - data/streaming_announcements.json
   schedule:
     - cron: "17 18 * * *"
 concurrency:
@@ -22,6 +23,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Import source-reviewed official streaming premieres
+        run: python scripts/import_streaming_announcements.py
       - name: Validate all streaming provider feeds and provenance
         run: python scripts/check_streaming_coverage.py
       - name: Run compliance source gate

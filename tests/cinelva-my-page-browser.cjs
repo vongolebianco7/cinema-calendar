@@ -74,18 +74,18 @@ async function freePort() {
     await page.route('https://backend-one-gray-94.vercel.app/api/movies*', route => route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ movies: [{ id: 999999, title: 'New Browser Film', year: 2026, director: director.name, genres: ['SF'], countries: ['Japan'] }], external: [] }),
+      body: JSON.stringify({ movies: [{ id: 99999999, title: 'New Browser Film', year: 2026, director: director.name, genres: ['SF'], countries: ['Japan'] }], external: [] }),
     }));
     await page.locator('#addRecord').click();
     await page.locator('#movieQuery').fill('New Browser Film');
-    await page.locator('[data-choose-movie="999999"]').click();
+    await page.locator('[data-choose-movie="99999999"]').click();
     await page.locator('#watchedAt').fill('2026-06-11');
     await page.locator('#rating').evaluate(input => { input.value = '0'; input.dispatchEvent(new Event('input', { bubbles: true })); });
     await page.locator('#unrated').uncheck();
     await page.locator('#saveRecord').click();
     await page.waitForFunction(() => document.getElementById('statTotal').textContent === '3');
     assert.match(await page.locator('#recordList').textContent(), /New Browser Film/);
-    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['999999'].rating), 0);
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999'].rating), 0);
     await page.reload({ waitUntil: 'networkidle' });
     assert.equal(await page.locator('#statTotal').textContent(), '3');
 

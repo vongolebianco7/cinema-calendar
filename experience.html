@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>上映体験 | Cinemap</title>
+<title>上映体験 | CINELVA</title>
 <meta name="description" content="シネマスコープ、IMAX、IMAX GT、Dolby Cinema、Dolby Atmos、4DX、MX4D、ScreenXの違いを視覚的に比較。">
 <link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
@@ -456,12 +456,17 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 .motionCard .effectLegend span{border-color:#ffffff34!important;background:#0e141bcc!important;color:#edf4f8!important}
 @media(prefers-reduced-motion:reduce){.singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxAir{animation:none!important}}
 </style>
-</head>
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style></head>
 <body>
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png" alt="Cinemap"></a>
+ <a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -470,13 +475,13 @@ clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 1
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
  <a href="rankings.html">ランキング</a>
  <a href="theaters.html">映画館を探す</a>
  <a href="experience.html">上映方式</a>
- <a href="my-cinemap.html">My Cinemap</a>
+ <a href="my-cinemap.html">My CINELVA</a>
 </aside>
 <main class="wrap">
 <section class="hero">
@@ -589,7 +594,7 @@ document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
   }
 })();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.62</div>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.62</div>
 <style id="experience-candidate-search-v2">
 .filmCandidates{margin-top:10px;border:1px solid #2b2f35;border-radius:10px;overflow:hidden;background:#101216}
 .filmCandidates[hidden]{display:none!important}

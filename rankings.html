@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ランキング | Cinemap</title>
+<title>ランキング | CINELVA</title>
 <style>
 :root{--bg:#0b0c10;--panel:#15171d;--panel2:#1d2028;--text:#f5f1e8;--muted:#9ca3af;--accent:#ef3f3f;--line:#2a2e37}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px}button,input{font:inherit}h1,h2,h3,.brand{font-family:inherit}
@@ -91,16 +91,21 @@ body{background:#090909}.rankCard{background:transparent!important;box-shadow:no
 }
 @media(max-width:370px){.gBrandImage{width:118px}}
 </style>
-</head>
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style></head>
 <body>
-<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png" alt="Cinemap"></a><form class="gSearchForm" action="search.html" method="get"><input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索"><button class="gSearchBtn" type="submit" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button></div></header>
-<div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png" alt="Cinemap"></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My Cinemap</a></aside>
+<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><form class="gSearchForm" action="search.html" method="get"><input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索"><button class="gSearchBtn" type="submit" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button></div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My CINELVA</a></aside>
 <main class="wrap"><section class="hero"><h1>ランキング</h1><p>ユーザー評価、興行収入、受賞歴から映画を横断して見る。</p></section>
 <div class="chartAxes"><div class="filterLabel">ランキング</div><div class="chips" id="axisChips"><button class="chip active" data-axis="rating">ユーザー評価</button><button class="chip" data-axis="boxoffice">興行収入</button><button class="chip" data-axis="awards">受賞作品</button></div></div>
 <div id="ratingFilters"><div class="filterLabel">地域</div><div class="chips" id="regionChips"></div><div class="filterLabel">ジャンル</div><div class="chips" id="genreChips"></div><div class="filterLabel">年代</div><div class="chips" id="eraChips"></div></div>
 <div id="awardsIntro" style="display:none;margin:0 0 18px"><div class="note" style="margin-bottom:12px">アカデミー賞・主要映画賞・主要国際映画祭の受賞結果。年代・授賞年・賞・受賞部門で絞り込めます。</div><div class="filterLabel">年代</div><div class="chips" id="awardEraChips"></div><details class="olderEras" id="awardOlderEras"><summary>＋ 1980年以前を表示</summary><div class="chips" id="awardOldEraChips"></div></details><div class="filterLabel">授賞年</div><div class="chips" id="awardYearChips"></div><div class="note" id="awardCoverage" style="margin:8px 0 12px"></div><div class="filterLabel">賞・映画祭</div><div class="chips" id="awardOrgChips"></div><div class="filterLabel">受賞部門</div><div class="chips" id="awardCategoryChips"></div></div>
 <div id="boxFilters" style="display:none"><div class="filterLabel">地域</div><div class="chips" id="boxRegionChips"></div><div class="filterLabel">期間</div><div class="chips" id="boxEraChips"></div></div>
-<div class="rankGrid" id="grid"></div><div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div><div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">Cinemap v0.4.67</div></main>
+<div class="rankGrid" id="grid"></div><div class="moreWrap"><button class="moreBtn" id="moreBtn">もっと見る</button></div><div class="note" id="sourceNote"></div><div style="margin:28px 0 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.67</div></main>
 <script>
 let rankings={},manifest={},yearRankings={},yearValue="",legacyGenres={},boxoffice={},awards=[],axis=new URLSearchParams(location.search).get("axis")||"rating";
 let qs=new URLSearchParams(location.search),regionActive="すべて",genreActive="すべて",eraActive="すべて",boxRegion="すべて",boxEra="歴代",awardEra=qs.get("era")||"すべて",awardYear=qs.get("year")||"",awardOrg=qs.get("award")||"すべて",awardCategory=qs.get("category")||"すべて",movieLookupCache=new Map();
@@ -108,7 +113,7 @@ const $=s=>document.querySelector(s);const uniqById=list=>{const m=new Map();lis
 function allRegions(){return ["すべて",...Object.keys(rankings||{}),"アジア"]}function baseRegions(){return regionActive==="アジア"?[]:regionActive==="すべて"?Object.keys(rankings||{}):[regionActive]}function allGenres(regions){const s=new Set();regions.forEach(r=>Object.keys(rankings[r]||{}).forEach(g=>s.add(g)));return [...s]}function availableEras(regions,genres){const s=new Set();regions.forEach(r=>genres.forEach(g=>Object.keys(((rankings[r]||{})[g]||{})).forEach(e=>s.add(e))));return [...s]}
 function yearList(regions,genre){let list=[];regions.forEach(r=>{const gs=Object.keys(yearRankings[r]||{});(genre==="すべて"?gs:[genre]).forEach(g=>list.push(...((yearRankings[r]||{})[g]||[])))});return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0))}
 function ratingList(regions,genre,era){if(era==="今年")return yearList(regions,genre);let list=[];regions.forEach(r=>{const gs=Object.keys(rankings[r]||{});(genre==="すべて"?gs:[genre]).forEach(g=>{const byEra=((rankings[r]||{})[g]||{});if(era==="すべて")Object.values(byEra).forEach(rows=>list.push(...(rows||[])));else list.push(...((byEra[era])||[]))})});return uniqById(list).sort((a,b)=>(b.score||0)-(a.score||0)||(b.votes||0)-(a.votes||0))}
-function card(m,i){const id=m.id||m.tmdbId||"",href=id?"search.html?id="+encodeURIComponent(id)+"&search="+encodeURIComponent(m.title||""):(m.tmdb||"#");return '<a class="rankCard" href="'+href+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div class="rankPosterPlaceholder"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div><div class="meta">Cinemapで深掘る →</div></div></a>'}
+function card(m,i){const id=m.id||m.tmdbId||"",href=id?"search.html?id="+encodeURIComponent(id)+"&search="+encodeURIComponent(m.title||""):(m.tmdb||"#");return '<a class="rankCard" href="'+href+'">'+(m.poster?'<img src="'+m.poster+'" loading="lazy">':'<div class="rankPosterPlaceholder"></div>')+'<div class="body"><div class="no">#'+(i+1)+'</div><div class="title">'+m.title+'</div><div class="meta">'+(m.date||m.year||"")+' · ★ '+Number(m.score||0).toFixed(1)+' · '+(m.votes||0)+'票</div><div class="meta">CINELVAで深掘る →</div></div></a>'}
 
 const ASIA_GENRES={"すべて":"","ドラマ":"18","コメディ":"35","アクション":"28","SF":"878","スリラー":"53","ホラー":"27","恋愛":"10749","アニメ":"16","犯罪":"80","ドキュメンタリー":"99","ファンタジー":"14"};
 async function renderAsiaRating(){

@@ -102,15 +102,15 @@ The backup tool is additive and not linked into existing app pages yet. No produ
 - Real iPhone Safari: unverified, distinct from CI WebKit.
 - Existing production https://vongolebianco7.github.io/cinema-calendar/ opened successfully in cloud browser, showing Cinemap v0.4.73 and current calendar controls; not a full regression pass. Streaming view includes an explicit partial-coverage note and sparse weeks. Freshness/completeness not certified by rebranding work.
 - Theater search/showtimes, Ocean visual quality, Movie DNA, all outbound links, SEO/OGP and cache/base-path checks remain pending for the final adopted version.
-- GitHub Actions: CINELVA backup safety, Validate frontend and Check brand identity succeeded on implementation commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8. Autonomous quality gate and completeness scorecard also succeeded on that commit. All seven observed runs succeeded (two are duplicate push/PR frontend/brand checks). CI success does not mean production was deployed.
+- Initial implementation GitHub Actions: CINELVA backup safety, Validate frontend and Check brand identity succeeded on implementation commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8. Autonomous quality gate and completeness scorecard also succeeded on that commit. All seven observed runs succeeded (two are duplicate push/PR frontend/brand checks). CI success does not mean production was deployed.
 
 ## 6. Pending release gates
 
-The user selected the **existing Cinemap logo unchanged**. The A/B/C proposals were withdrawn. The embedded wordmark still visibly reads “Cinemap”; this conflicts with a complete CINELVA naming change and requires an explicit resolution before release. No production identity asset was altered.
+The user selected the **existing Cinemap logo symbol**, paired with the new CINELVA text. The combined old raster wordmark and A/B/C proposals were withdrawn. Production identity assets remain untouched; the existing square symbol is referenced in the review branch.
 
 1. Complete close-mark goods/services and international rights assessment; no guarantee of legal clearance.
-2. User confirms the final CINELVA naming treatment after reviewing the old embedded wordmark and explicitly approves CINELVA adoption.
-3. Complete display-only rebrand, preserving internal identifiers and old pages.
+2. User explicitly approves final CINELVA brand adoption after review. The original symbol plus CINELVA text is the selected logo treatment.
+3. Review the staged display-only rebrand (header, page copy, exported artwork and manifest); preserve internal identifiers and old page routes. Production is unchanged.
 4. Complete browser/data flow regressions and new-origin staging; get external registration approval only if needed.
 5. Resolve release-blocking defects, verify Actions and actual deployed revision.
 6. Retain old URL. Any redirect/retirement requires separate user approval.

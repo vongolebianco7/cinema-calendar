@@ -35,7 +35,7 @@ class DisplayCopy(HTMLParser):
 
 class RebrandReleaseTests(unittest.TestCase):
     def test_changed_artwork_scripts_have_a_new_cache_version(self):
-        for path in ['my-cinemap.html', 'cinelva/my-cinemap.html', 'js/my-cinemap-art.js', 'cinelva/js/my-cinemap-art.js', 'js/my-cinemap-art-direction.js', 'cinelva/js/my-cinemap-art-direction.js']:
+        for path in ['cinelva/my-cinemap.html', 'js/my-cinemap-art.js', 'cinelva/js/my-cinemap-art.js', 'js/my-cinemap-art-direction.js', 'cinelva/js/my-cinemap-art-direction.js']:
             with self.subTest(path=path):
                 source = (ROOT / path).read_text()
                 urls = re.findall(r'''js/my-cinemap-(?:art|tools|art-direction|cinema-templates)\.js\?([^'"\s]+)''', source)

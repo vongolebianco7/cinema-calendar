@@ -1,0 +1,32 @@
+name: CINELVA backup safety
+on:
+  pull_request:
+    paths:
+      - 'data-backup.html'
+      - 'js/data-backup.js'
+      - 'tests/cinelva-backup*.cjs'
+      - '.github/workflows/cinelva-backup.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/cinelva-backup.test.cjs
+      - name: Install isolated browser test dependencies
+        run: |
+          mkdir -p /tmp/cinelva-browser-deps
+          npm install --prefix /tmp/cinelva-browser-deps --no-audit --no-fund playwright@1.59.0
+          /tmp/cinelva-browser-deps/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Verify mobile and desktop backup journeys
+        env:
+          NODE_PATH: /tmp/cinelva-browser-deps/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-http.log 2>&1 &
+          node tests/cinelva-backup-browser.cjs

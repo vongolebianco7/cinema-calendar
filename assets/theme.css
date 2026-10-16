@@ -11,26 +11,25 @@ html[data-theme="dark"] body:has(#export) {
   --bg:#101418; --text:#f4f0e8; --panel:#192027; --line:#46515a; --accent:#d8bd87;
 }
 html[data-theme="light"] body { background:var(--bg); color:var(--text); }
-html[data-theme="light"] :where(.gTop,.top,.dock,.expTabs) {
+html[data-theme="light"] :is(.gTop,.top,.dock,.expTabs) {
   background:#f8f6f1f5!important; border-color:var(--line)!important;
 }
-html[data-theme="light"] :where(.gDrawer,.drawer,.sheet,.modalSheet,.detailSheet,.searchResults,.suggest,.filters,.concierge,.conciergeMsg.ai,.msg.ai,.creatorTrail,.dnaCell,.watchAction,.viewGuide,.criticIntro,.criticGate,.criticPathStep,.criticNode,.criticPanel,.criticConsent,.criticMatrix,.criticMatrixHead,.criticMatrixChannel,.criticVideo,.filmCandidates,.filmCandidate,.selectedMovieCard,.olderEras,.theaterTable th,.theaterTable td:first-child,.movieLinks a,.formatEvidence,.formatReasonBody,.experienceCompare th,.candidateMore) {
+html[data-theme="light"] :is(.heroActions .heroAction,.btn,.official,.legend>span,.gDrawerClose,.gDrawer,.drawer,.sheet,.modalSheet,.detailSheet,.searchResults,.suggest,.filters,.concierge,.conciergeMsg.ai,.msg.ai,.creatorTrail,.dnaCell,.watchAction,.viewGuide,.criticIntro,.criticGate,.criticPathStep,.criticNode,.criticPanel,.criticConsent,.criticMatrix,.criticMatrixHead,.criticMatrixChannel,.criticVideo,.filmCandidates,.filmCandidate,.selectedMovieCard,.olderEras,.theaterTable th,.theaterTable td:first-child,.movieLinks a,.formatEvidence,.formatReasonBody,.experienceCompare th,.candidateMore) {
   background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important;
 }
-html[data-theme="light"] :where(.gSearchForm,.search,.form input,.personInput,.conciergeInput input,.filmPicker input,.row input,.search input,.prefectureFilterRow select,.formatFilter,.suggest button,.result button,.move button,.remove,.more,.criticAction,.criticOverview button,.examples button) {
+html[data-theme="light"] :is(.gSearchForm,.search,.form input,.personInput,.conciergeInput input,.filmPicker input,.row input,.search input,.prefectureFilterRow select,.formatFilter,.suggest button,.result button,.move button,.remove,.more,.criticAction,.criticOverview button,.examples button) {
   background:var(--panel2)!important; color:var(--text)!important; border-color:var(--line)!important;
 }
-html[data-theme="light"] :where(.gSearch,.gSearchBtn,.gMenuBtn,.gDrawerClose,.gDrawer>a,.drawer a,.menuBtn,.drawerClose,.gTop a,.gBrandWord,.brand,.back,.title,.hero h1,.section h2,.panel h2,.criticNode,.criticAction,.watchAction,.formatReasonToggle,.formatScoreCta,.chip:not(.active),.dateBtn:not(.active),.showing b,.official,.btn,.awardLinks a,.olderEras summary,.label,.exportOptions label,.previewControls label) { color:var(--text)!important; }
-html[data-theme="light"] :where(.brand)::after { color:#756443!important; }
-html[data-theme="light"] :where(.muted,.small,.meta,.status,.empty,.foot,.note,.conditionHint,.revivalEditorialLink,.sources small,.criticConsent,.criticTag,.formatEvidence,.formatReasonBody,.filterLabel,.pickerLabel,.theaterHero .area,.verifiedNote,.place,.theaterToolsTitle,.equipmentSummary,.legal,.exportLegal) { color:var(--muted)!important; }
-html[data-theme="light"] :where(.tag,.criticTag,.calHead button) { background:var(--panel2)!important; color:var(--text)!important; }
+html[data-theme="light"] :is(.gSearch,.gSearchBtn,.gMenuBtn,.gDrawerClose,.gDrawer>a,.drawer a,.menuBtn,.drawerClose,.gTop a,.gBrandWord,.brand,.back,.title,.hero h1,.section h2,.panel h2,.criticNode,.criticAction,.watchAction,.formatReasonToggle,.formatScoreCta,.chip:not(.active),.dateBtn:not(.active),.showing b,.official,.btn,.awardLinks a,.olderEras summary,.label,.exportOptions label,.previewControls label) { color:var(--text)!important; }
+html[data-theme="light"] :is(.brand)::after { color:#756443!important; }
+html[data-theme="light"] :is(.muted,.small,.meta,.status,.empty,.foot,.note,.conditionHint,.revivalEditorialLink,.sources small,.criticConsent,.criticTag,.formatEvidence,.formatReasonBody,.filterLabel,.pickerLabel,.theaterHero .area,.verifiedNote,.place,.theaterToolsTitle,.equipmentSummary,.legal,.exportLegal) { color:var(--muted)!important; }
+html[data-theme="light"] :is(.tag,.criticTag,.calHead button) { background:var(--panel2)!important; color:var(--text)!important; }
 html[data-theme="light"] :is(.chip.active,.preset.active,.expTab.active,.criticOverview button.active,.dateBtn.active,.formatFilter.active) { background:var(--text)!important; color:var(--bg)!important; border-color:var(--text)!important; }
-html[data-theme="light"] .modeTab.active { background:#f9e5e4; color:#84212b; }
-html[data-theme="light"] :where(.selects select,.filters select,.filters input) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
-html[data-theme="light"] :where(.panel li a,.sources a,main.wrap>a,main.wrap p>a) { color:#795a20; }
+html[data-theme="light"] .modeTab.active { background:#f9e5e4!important; color:#84212b!important; }
+html[data-theme="light"] :is(.selects select,.filters select,.filters input) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
+html[data-theme="light"] :is(.panel li a,.sources a,main.wrap>a,main.wrap p>a) { color:#795a20; }
 html[data-theme="light"] .hero a { color:#795a20!important; }
-html[data-theme="light"] .row button { color:var(--bg); }
-html[data-theme="light"] :where(.coverageWarn,.note) { background:transparent; }
+html[data-theme="light"] :is(.coverageWarn,.note) { background:transparent; }
 html[data-theme="light"] .coverageWarn { color:#705525; }
 html[data-theme="light"] .gTop a>span { color:var(--text)!important; }
 /* Menus can remain operable at 390px width and short landscape heights. */
@@ -47,3 +46,8 @@ html[data-theme="light"] .gTop a>span { color:var(--text)!important; }
 }
 .cinelvaTheme select:focus-visible { outline:3px solid var(--accent,#ef3f3f); outline-offset:3px; }
 @media(prefers-reduced-motion:reduce) { .gDrawer,.drawer { transition:none; } }
+
+html[data-theme="light"] body :is(button,input,select,textarea) { background:var(--panel2)!important; color:var(--text)!important; border-color:var(--line)!important; }
+html[data-theme="light"] body .modeTab.active { background:#f9e5e4!important; color:#84212b!important; }
+html[data-theme="light"] body :is(.chip.active,.preset.active,.expTab.active,.dateBtn.active,.formatFilter.active) { background:var(--text)!important; color:var(--bg)!important; }
+html[data-theme="light"] .gBrandImage { background:#171717; border-radius:5px; }

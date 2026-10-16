@@ -18,6 +18,13 @@ try {
   assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' system theme');
   assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',prefix+file+' light body');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,prefix+file+' light overflow');
+  const contrasts=await page.locator('.heroAction,.legend>span,.gDrawerClose').evaluateAll(elements=>{
+   const rgb=value=>value.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});
+   const lum=value=>rgb(value).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+   return elements.map(el=>{const c=getComputedStyle(el),fg=lum(c.color),bg=lum(c.backgroundColor);return {name:el.className||el.textContent,ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)}});
+  });
+  for(const check of contrasts)assert.ok(check.ratio>=4.5,`${prefix}${file} light text contrast ${check.name}: ${check.ratio}`);
+
   const menu=page.locator('#gMenuBtn');
   if(await menu.count())await menu.click();
   const select=page.getByLabel('表示テーマ',{exact:true});

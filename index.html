@@ -238,7 +238,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <style id="cinelva-modal-compact-20261017">
 @media(max-width:760px){#detail .experienceFitGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#detail .experienceFitCard{min-width:0!important;padding:10px!important}#detail .experienceFitCard span{flex-wrap:wrap;gap:2px!important}#detail .experienceFitCard small{font-size:10px!important;line-height:1.5!important}#detail .experienceFitCard .small{font-size:10px!important}#detail .experienceFitCard .experienceStars{font-size:11px!important}}
 #detail .experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#detail .history>summary{list-style:revert;min-height:44px;display:list-item;padding:12px}#detail .history .timelineSection{border:0;padding:10px 0}
-</style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style></head>
+</style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style><style id="cinelva-compact-formats">@media(min-width:400px){.experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.experienceFitCard{min-width:0;padding:10px}.experienceFitCard b{font-size:13px}.experienceFitCard small{font-size:11px}}.experienceFitCard.best{outline:2px solid #d6ae56;outline-offset:-2px}body:not(.dark) .gBrand{background:transparent!important}</style></head>
 <body>
 
 
@@ -267,12 +267,12 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
-const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
+const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","WOWOW"];
 const services=["すべて","劇場公開",...STREAMING_SERVICES];
 let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
 const savedMode=localStorage.getItem("cinemaNow.mode");
 const savedActive=localStorage.getItem("cinemaNow.active");
-let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"streaming", view=new Date(),streamRangeStart=null,theatricalRangeStart=null;
+let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"theatrical", view=new Date(),streamRangeStart=null,theatricalRangeStart=null;
 const calendarReturn=CinemapCalendarContext.initialCalendar(new URLSearchParams(location.search));if(calendarReturn){mode=calendarReturn.mode;view=new Date(calendarReturn.date+"T12:00:00")}
 // Saved filters must never make the calendar appear empty after navigation/UI changes.
 if(mode!=="streaming"&&active!=="すべて")active="すべて";

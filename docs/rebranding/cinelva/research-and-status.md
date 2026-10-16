@@ -1,6 +1,6 @@
 # CINELVA rebrand — research and release status
 
-Date: 2026-10-16 (Japan). Status: **REVIEW REQUIRED; not released**. No brand/logo adoption, external registration, old-URL redirect/retirement or destructive data change has occurred.
+Date: 2026-10-16 (Japan). Status: **REVIEW REQUIRED; not released**. The user selected the original symbol with CINELVA text; this remains a draft and has not been adopted in production. No external registration, old-URL redirect/retirement or destructive data change has occurred.
 
 ## 1. Brand and trademark risk: 要注意
 
@@ -94,6 +94,9 @@ No IndexedDB, service-worker registration or app cookie persistence was found in
 The backup tool is additive and linked from the My CINELVA hero in the draft rebrand. No production user data was read by the agent. Unit tests use synthetic records. Same-origin paths share localStorage; other hostnames do not. Keep original browser/URL until imported records and derived Ocean/DNA are verified. Existing records in a destination key are skipped in full; this is not a record-level merge tool.
 
 ## 5. Validation and known limits
+
+- Review commit `6d853d12c7a6f1a6dcfe01a24d06eb78360c00cb`: local quality gate passed. All 10 observed GitHub Actions completed successfully, including the browser CI in Chromium and WebKit at 390/1280px for the backup journey and CINELVA header/logo/layout checks. Browser coverage is limited to index, My CINELVA, search and privacy for brand layout; full iPhone Safari remains unverified.
+
 
 - Node backup suite: 7/7 passed (including round trip, conflict preservation, malformed input/unknown keys, version/size rejection, rollback, unavailable storage).
 - `python scripts/quality_gate.py`: PASSED.

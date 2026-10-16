@@ -6,7 +6,7 @@
 
 **Frontend (production):** https://vongolebianco7.github.io/cinema-calendar/
 
-CINELVA のユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
+ユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。CINELVA は現在ドラフトPRで検証中で、本番には未反映です。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
 
 Vercel のフロントエンドは旧環境として扱い、今後の本番判定には使用しません。Vercel は、必要なバックエンド/API用途のみ継続利用します。
 

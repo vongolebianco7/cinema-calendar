@@ -1,0 +1,28 @@
+name: CINELVA isolated Pages stage
+on:
+  pull_request:
+    paths:
+      - 'cinelva/**'
+      - 'tests/cinelva-stage-browser.cjs'
+      - '.github/workflows/cinelva-stage.yml'
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          mkdir -p /tmp/cinelva-stage-deps
+          npm install --prefix /tmp/cinelva-stage-deps --no-audit --no-fund playwright@1.59.0
+          /tmp/cinelva-stage-deps/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Verify old URL and nested brand at mobile and desktop sizes
+        env:
+          NODE_PATH: /tmp/cinelva-stage-deps/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-stage-http.log 2>&1 &
+          node tests/cinelva-stage-browser.cjs

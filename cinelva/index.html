@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="ja">
+<head><base href="../"><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CINELVA</title>
+<meta name="description" content="CINELVA｜映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
+<meta property="og:title" content="CINELVA｜映画の公開・配信カレンダー">
+<meta property="og:description" content="映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
+<meta property="og:image" content="https://vongolebianco7.github.io/cinema-calendar/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<link rel="manifest" href="cinelva/manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
+<style>
+:root{--bg:#0a0a0a;--panel:#111;--panel2:#171717;--text:#f2f2f2;--muted:#888;--accent:#ef3f3f;--line:#262626}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px;letter-spacing:0}
+button,input{font:inherit}.modeTab,.chip,.heroAction,.gDrawer>a,.searchFilterBtn,.revivalEditorialLink{word-break:keep-all;white-space:nowrap}.wrap{max-width:1180px;margin:auto;padding:0 18px}.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.97);border-bottom:1px solid var(--line)}
+.nav{height:56px;display:flex;align-items:center;gap:12px}.menuBtn{margin-left:auto;width:38px;height:38px;border:0;background:transparent;color:var(--text);display:grid;place-items:center;padding:0}.menuLines,.menuLines:before,.menuLines:after{display:block;width:18px;height:1px;background:currentColor;content:""}.menuLines{position:relative}.menuLines:before{position:absolute;top:-6px}.menuLines:after{position:absolute;top:6px}.drawerMask{position:fixed;inset:0;background:#0008;z-index:80;display:none}.drawerMask.show{display:block}.drawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid var(--line);z-index:81;transform:translateX(100%);transition:.22s ease;padding:20px}.drawer.show{transform:translateX(0)}.drawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.drawerClose{width:38px;height:38px;border:0;border-radius:50%;background:var(--panel2);color:var(--text);font-size:22px}.drawer a{display:block;color:var(--text);text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid var(--line)}.brand{font-weight:850;letter-spacing:-.035em;font-size:20px;color:var(--text);text-decoration:none}.brandA{position:relative;display:inline-block}
+.search{margin-left:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:white;padding:9px 12px;width:min(280px,44vw);font-size:16px}.searchBox{position:relative;margin-left:auto;width:min(390px,56vw)}.searchRow{display:flex;gap:7px;align-items:center}.searchBox .search{margin-left:0;width:100%}.searchFilterBtn{height:36px;border:1px solid #d8d8d8;background:#fff;color:#333;border-radius:7px;padding:0 10px;font-size:11px;font-weight:700;white-space:nowrap}.searchFilterPanel{display:none;position:absolute;z-index:65;top:calc(100% + 7px);right:0;width:min(360px,88vw);background:#fff;border:1px solid #ddd;border-radius:9px;padding:12px;box-shadow:0 14px 32px #0002}.searchFilterPanel.show{display:block}.searchFilterGrid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:8px}.searchFilterGrid label{display:grid;gap:5px;font-size:10px;color:#666}.searchFilterGrid select,.searchFilterGrid input{width:100%;height:34px;border:1px solid #d9d9d9;background:#fff;color:#171717;border-radius:6px;padding:0 8px}.searchResults{position:absolute;z-index:60;top:calc(100% + 7px);left:0;right:0;display:none;background:#17191e;border:1px solid var(--line);border-radius:7px;box-shadow:0 14px 32px #0009;max-height:60vh;overflow:auto}.searchResults.show{display:block}.searchResult{display:grid;grid-template-columns:38px 1fr;gap:9px;padding:8px;border-top:1px solid var(--line);cursor:pointer}.searchResult:first-child{border-top:0}.searchResult img,.searchResult .searchThumb{width:38px;aspect-ratio:2/3;object-fit:cover;border-radius:5px;background:#25272d}.searchResult b{display:block;font-size:12px;line-height:1.3}.searchResult span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.searchEmpty{padding:12px;color:var(--muted);font-size:11px}
+.hero{padding:24px 0 12px}.eyebrow{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.12em}.hero h1{font-size:clamp(26px,6vw,44px);line-height:1.08;font-weight:800;margin:6px 0 8px;max-width:760px}.hero p{color:var(--muted);max-width:620px;line-height:1.55;font-size:13px}
+.modeTabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:8px 0 14px}.modeTab{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:12px 5px;border-radius:7px;font-weight:700;font-size:13px;touch-action:manipulation}.modeTab.active{background:#2b1d20;color:#fff;border-color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent),0 0 0 1px #ef3f3f55;font-weight:850}.chips{display:flex;gap:8px;overflow:auto;padding:8px 0 18px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:6px;padding:9px 13px}.chip.active{background:var(--text);color:#111}
+.section{padding:18px 0 34px}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}.revivalEditorialLink{font-size:11px;color:#999;text-decoration:none;white-space:nowrap}.revivalEditorialLink:hover{color:#ddd}.section h2{font-size:20px;font-weight:800;margin:0;letter-spacing:-.01em}.small{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;cursor:pointer;transition:.18s}.card:hover{transform:translateY(-3px)}
+.poster{aspect-ratio:2/3;background:linear-gradient(145deg,#30343d,#17191f);display:grid;place-items:center;color:#777;font:700 18px/1.35 inherit;text-align:center;overflow:hidden}.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.body{padding:8px}.title{font-weight:700;line-height:1.3;font-size:12px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.tag{font-size:10px;background:var(--panel2);padding:4px 6px;border-radius:6px;color:#d5d7dc}.score{color:var(--accent);font-weight:800}
+.calendar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.calHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.calHead button{background:var(--panel2);color:white;border:0;border-radius:9px;padding:8px 12px}
+.days,.dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.calendar.theatricalCompact .days,.calendar.theatricalCompact .dates{grid-template-columns:repeat(4,minmax(0,1fr))}.calendar.theatricalCompact .weekdayRange{display:flex;justify-content:space-between;gap:4px;font-size:9px;color:var(--muted);margin-bottom:4px}.calendar.theatricalCompact .weekdayRange b{font-size:10px;color:var(--text)}.days div{text-align:center;color:var(--muted);font-size:11px;padding:6px}.days div:nth-last-child(2){color:#6baeff;font-weight:800}.days div:last-child{color:#ff6577;font-weight:800}.day.saturday > b,.festivalDate.saturday{color:#6baeff!important}.day.sunday > b,.day.holiday > b,.festivalDate.sunday,.festivalDate.holiday{color:#ff6577!important}.calendar .weekdayRange b.holiday{color:#ff6577!important}.day.today.saturday > b{background:var(--accent);color:#6baeff!important}.day.today.sunday > b,.day.today.holiday > b{background:var(--accent);color:#e33e55!important}.day{min-height:184px;border:1px solid var(--line);border-radius:9px;padding:7px;font-size:12px}.day.dim{opacity:.25}.day.today{border:2px solid var(--accent);background:rgba(232,180,79,.10);box-shadow:0 0 0 1px rgba(232,180,79,.2) inset}.day.today b{background:var(--accent);color:#111;border-radius:6px;padding:2px 6px}.dot{display:block;margin-top:4px;padding:4px 5px;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;cursor:pointer}.dot.theatrical{background:#6b3a3a}.dot.netflix{background:#7a1717}.dot.prime-video{background:#18527a}.dot.disney{background:#263f82}.dot.u-next{background:#563477}.dot.hulu{background:#23623d}.legend{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}.legend span{font-size:11px;padding:5px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;width:auto!important;height:auto!important;line-height:1.2;white-space:nowrap;background:#1b1d22;border:1px solid var(--line)}.legend i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 10px;box-shadow:0 0 0 1px #ffffff22}.legend .l-theatrical i{background:#6b3a3a}.legend .l-revival i{background:#7d5aa8}.legend .l-asa10 i{background:#c69232}.legend .l-netflix i{background:#7a1717}.legend .l-prime-video i{background:#18527a}.legend .l-disney i{background:#263f82}.legend .l-u-next i{background:#563477}.legend .l-hulu i{background:#23623d}.legend i.netflix{background:#7a1717!important}.legend i.prime-video{background:#18527a!important}.legend i.disney{background:#263f82!important}.legend i.u-next{background:#563477!important}.legend i.hulu{background:#23623d!important}.legend i.tv{background:#5a6472!important}.streamMovieService.tv{background:#4b5563}.calGroups{display:flex;flex-direction:column;gap:4px;margin-top:5px}.calGroup{position:relative;display:grid;grid-template-columns:1fr;gap:2px;padding:18px 2px 14px;border:2px solid transparent;border-radius:6px;overflow:hidden;cursor:pointer}.calGroupHead{display:flex;align-items:center;justify-content:flex-end;min-height:12px}.calPosters{display:flex;gap:2px;flex-wrap:wrap}.calGroup.theatrical{border-color:#6b3a3a}.calGroup.revival{border-color:#7d5aa8}.calGroup.asa10{border-color:#c69232}.calGroup.netflix{border-color:#7a1717}.calGroup.prime-video{border-color:#18527a}.calGroup.disney{border-color:#263f82}.calGroup.u-next{border-color:#563477}.calGroup.hulu{border-color:#23623d}.calGroup.tv{border-color:#765116}.calGroup.festival-domestic{border-color:#7b61d1}.calGroup.festival-overseas{border-color:#c65a8a}.calGroup.event-domestic{border-color:#b07a2d}.tag.revival{background:#5a4077}.tag.asa10{background:#6f521f}.tag.festival-domestic{background:#4a3b86}.tag.festival-overseas{background:#7f3557}.tag.event-domestic{background:#6e4b1e}.calMissing{display:flex;align-items:center;justify-content:center;width:28px;height:42px;aspect-ratio:2/3;min-width:0;min-height:0;padding:0;overflow:hidden;flex:0 0 auto;border-radius:4px;background:#24272e;color:#888e9b}.calMissing svg{width:70%;height:70%;max-height:100%;opacity:.6}.calendar.festivalMode .dates{display:block}.festivalCover{width:100%;aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;background:linear-gradient(145deg,#29213c,#15161b 58%,#40253b);color:#fff;overflow:hidden}.festivalCover b{font-size:15px;line-height:1.25}.festivalCover span{margin-top:7px;font-size:10px;color:#d8d2df}.calendar{background:#0b0b0c}.calendar .dates{padding:0;background:transparent;border:0;border-radius:0}.streamingWeeks{grid-column:1/-1;width:100%;display:flex;flex-direction:column;gap:14px}.streamingWeekBlock.isCurrentWeek{scroll-margin-top:8px}.weekGroups{display:flex;flex-direction:column;gap:12px}.weekGroup{border-top:1px solid #2d3036;padding-top:9px}.weekGroup:first-child{border-top:0;padding-top:0}.weekGroupHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 7px}.weekGroupTitle{font-size:10px;font-weight:900;letter-spacing:.02em}.weekGroupCount{font-size:9px;color:var(--muted)}.streamingWeekBlock{width:100%}.streamingWeekLabel{font-size:12px;font-weight:850;color:var(--muted);margin:0 0 6px 2px}.streamingWeekFrame{width:100%;border:1px solid var(--line);border-radius:7px;padding:10px;background:var(--panel)}.streamingWeekMovies{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px}.streamMovie{cursor:pointer;min-width:0}.streamMoviePoster{position:relative;aspect-ratio:2/3;border-radius:7px;overflow:hidden;background:#222}.streamMoviePoster img{width:100%;height:100%;object-fit:cover;display:block}.streamMovieDate{position:absolute;left:4px;top:4px;background:rgba(0,0,0,.82);color:#fff;border-radius:6px;padding:3px 6px;font-size:9px;font-weight:900}.streamMovieService{display:inline-flex;align-items:center;max-width:100%;font-size:9px;font-weight:900;color:#fff;margin-top:5px;padding:3px 6px;border-radius:6px;background:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.streamMovieService.netflix{background:#7a1717}.streamMovieService.prime-video{background:#18527a}.streamMovieService.disney{background:#263f82}.streamMovieService.u-next{background:#563477}.streamMovieService.hulu{background:#23623d}.streamMovieService.theatrical{background:#6b3a3a}.streamMovieService.revival{background:#5a4077}.streamMovieService.asa10{background:#6f521f}.theatricalPosterFallback{width:100%;height:100%;display:flex;align-items:flex-end;padding:8px;background:linear-gradient(145deg,#292929,#151515);font-size:10px;font-weight:800;line-height:1.3;color:#ddd}.streamMovieAvail{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}.streamMovieAvail span{font-size:8px;border:1px solid var(--line);border-radius:6px;padding:2px 5px;color:#c9ccd3;background:#1a1c21}.streamMovieTitle{font-size:10px;line-height:1.3;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tvWeekMovies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.tvMovie{cursor:pointer;min-width:0;border:1px solid var(--line);border-radius:9px;padding:8px;background:#1b1d22;display:grid;grid-template-columns:72px 1fr;gap:8px}.tvMoviePoster{width:72px;aspect-ratio:2/3;border-radius:7px;overflow:hidden;background:#24272e}.tvMoviePoster img{width:100%;height:100%;object-fit:cover;display:block}.tvMovieBody{min-width:0}.tvMovieTop{display:flex;justify-content:space-between;gap:8px;align-items:center}.tvMovieDate{font-size:10px;font-weight:900;color:#fff}.tvMovieTime{font-size:10px;color:#e2c66b;font-weight:800}.tvMovieChannel{display:inline-block;margin-top:7px;font-size:10px;font-weight:850;padding:3px 6px;border-radius:6px;background:#493814;color:#f6dda0}.tvMovieProgram{font-size:11px;font-weight:800;line-height:1.35;margin-top:6px;color:#f0f1f4}.tvMovieTitle{font-size:10px;line-height:1.35;margin-top:4px;color:#cfd2d8}.tvMovieStatus{margin-top:5px;font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px;flex-wrap:wrap}.tvFirstBadge{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:18px;padding:0 6px;border-radius:6px;border:1px solid #d3a72c;color:#f0d58f;background:#2c2618;font-size:9px;font-weight:900;line-height:1}.tvStatusMuted{color:var(--muted)}@media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.tvMovie{display:block;padding:5px}.tvMoviePoster{width:100%;aspect-ratio:2/3}.tvMovieTop{margin-top:5px;display:block}.tvMovieDate,.tvMovieTime{display:block;font-size:8px}.tvMovieChannel{font-size:8px;margin-top:4px;padding:2px 4px}.tvMovieProgram{font-size:9px;margin-top:4px}.tvMovieTitle{font-size:8px}.tvMovieStatus{font-size:7px}.tvFirstBadge{min-width:18px;height:15px;font-size:7px;padding:0 4px}}.legendStatus{gap:5px!important}.legendStatus .tvFirstBadge{margin:0}
+.festivalWeek{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-bottom:5px;align-items:stretch}.festivalDate{min-height:48px;border:1px solid var(--line);border-radius:8px;padding:5px;font-size:10px;color:var(--muted);background:var(--panel)}.festivalDate.dim{opacity:.28}.festivalDate.today{border-color:var(--accent);color:var(--text)}.festivalSpan{min-height:26px;height:26px;align-self:start;z-index:2;border:2px solid;border-radius:6px;padding:4px 6px;font-size:10px;line-height:15px;font-weight:800;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;background:#171920;min-width:0}.festivalSpan.domestic{border-color:#7b61d1}.festivalSpan.overseas{border-color:#c65a8a}.festivalSpan.event{border-color:#b07a2d}.festivalSpan.cont{color:#d9dce2;background:#15171c}.detailScore{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}.detailScore .scorePill{border:1px solid #6e5a2f;background:#2c2618;border-radius:6px;padding:7px 10px;font-size:14px;font-weight:850;color:#f0d58f}.detailSection{margin:12px 0;padding:13px 14px;border:1px solid var(--line);border-radius:7px;background:var(--panel2)}.detailSection h3{font-size:14px;margin:0 0 9px}.watchSummaryGrid{display:flex;flex-direction:column;gap:0}.watchSummaryRow{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line);align-items:start}.watchSummaryRow:first-child{border-top:0;padding-top:0}.watchSummaryLabel{font-size:11px;font-weight:850;color:var(--muted)}.watchSummaryValue{font-size:12px;line-height:1.55}.watchSummaryValue b{font-size:12px}.watchSummaryValue .small{font-size:10px}.compactDetails{margin-top:8px}.compactDetails summary{font-size:11px;color:var(--muted);cursor:pointer}.compactDetails[open] summary{margin-bottom:8px}.detailSection.info{border-left:4px solid #6c7480}.detailSection.release{border-left:4px solid #4d78a8;background:#18202a}.detailSection.streaming{border-left:4px solid #4c8b68;background:#17231c}.detailSection.tv{border-left:4px solid #9b7630;background:#241f16}.detailSection.location{border-left:4px solid #8a5d98;background:#221a25}.detailSection.history{border-left:4px solid #676d78}.detailSection.story{border-left:4px solid #547082;background:#182026}.detailSection.theater{border-left:4px solid #a14f4f;background:#261a1a}.detailSection.linksSec{border-left:4px solid #777;background:#1b1d22}.detailSection.deepDive{border-left:4px solid #8d6bb3;background:#1b1721}.deepDiveActions{display:flex;gap:8px;flex-wrap:wrap}.deepDiveActions a{display:inline-flex;align-items:center;border:1px solid #4a3f55;border-radius:7px;padding:9px 11px;color:#eee;text-decoration:none;font-size:11px;font-weight:800}.detailSection .links{margin-top:4px}.locationList{display:flex;flex-direction:column;gap:8px;margin:10px 0 18px}.locationCard{border:1px solid var(--line);background:var(--panel2);border-radius:6px;padding:10px 11px}.locationCard b{display:block;font-size:13px}.locationCard .small{line-height:1.5}.locationLinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}.locationLinks a{font-size:11px;color:var(--accent);text-decoration:none}.historyList{display:flex;flex-direction:column;gap:6px;margin:10px 0 20px}.historyEntry{padding:9px 10px;border:1px solid var(--line);background:var(--panel2);border-radius:9px;font-size:12px;line-height:1.5}.historyEntry small{color:var(--muted);font-size:11px}.historyEntry a{color:var(--accent)}.theaterRegion{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}.theaterRegion label{font-size:12px;color:var(--muted)}.theaterRegion select{min-width:140px;max-width:100%;padding:9px 10px;border:1px solid var(--line);background:var(--panel2);border-radius:9px;color:var(--text);font-size:14px}.theaterMore{margin:9px 0;padding:9px 13px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;font-weight:700}.theaterSchedules{display:flex;flex-direction:column;gap:6px;margin-top:8px}.theaterBox{border-top:1px solid var(--line);padding:9px 2px}.theaterHead{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.theaterName{font-weight:850;font-size:13px}.showDate{font-size:11px;font-weight:800;color:#d8dbe3;margin-top:8px}.screenGroup{display:grid;grid-template-columns:minmax(76px,auto) 1fr;gap:7px;align-items:start;margin-top:5px}.screenName{font-size:10px;color:var(--muted);padding-top:5px}.showTimes{display:flex;flex-wrap:wrap;gap:4px}.showTime{font-size:11px;font-weight:800;background:#0f1115;border:1px solid var(--line);border-radius:7px;padding:4px 6px}.tag.tv-first{background:#2c2618;color:#f0d58f;border:1px solid #d3a72c}.tag.tv-repeat,.tag.tv-unknown{background:#252525;color:#999;border:1px solid #444}.calGroup img{width:28px;height:42px;object-fit:cover;border-radius:4px;flex:0 0 auto}.calCount{font-size:9px;font-weight:800;color:var(--text);padding:0 2px;white-space:nowrap}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);grid-column:1/-1}.notice{border:1px dashed #575d69;border-radius:7px;padding:12px 14px;color:var(--muted);font-size:12px;line-height:1.5;margin:4px 0 22px}
+.detailHero{margin:0 -4px 14px;padding:14px 14px 13px;border-radius:8px;background:linear-gradient(145deg,#20242d,#17191f);border:1px solid #343944}.detailHero h2{margin:6px 0 8px;font-size:25px;line-height:1.2}.detailRatings{display:flex;gap:8px;flex-wrap:wrap}.detailRating{padding:6px 9px;border-radius:6px;background:#121419;border:1px solid #3a3f49;font-size:14px;font-weight:850}.detailSection{margin:12px 0;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#1d2026}.detailSection h3{margin:0 0 9px;font-size:15px}.detailSection p{margin:7px 0;line-height:1.6}.detailSection.release{background:#201f19;border-color:#54472c}.detailSection.streaming{background:#182126;border-color:#284a59}.detailSection.tv{background:#221d18;border-color:#5a4326}.detailSection.location{background:#201b27;border-color:#4a365d}.detailSection.history{background:#1b2026;border-color:#35424f}.detailSection.story{background:#1c1e22}.detailSection.actions{background:transparent;padding:4px 0 0;border:0}.detailSection.theaters{background:#191d22;border-color:#3b4652;margin-top:18px}.detailMeta{font-size:12px;color:var(--muted);line-height:1.65}.detailKicker{font-size:10px;letter-spacing:.13em;color:var(--muted);font-weight:800}.detailLabel{font-size:11px;color:var(--muted);margin-bottom:3px}.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center;overscroll-behavior:contain}.modal.show{display:flex}.sheet{position:relative;width:min(650px,100%);max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;background:#181a20;border-radius:22px 22px 0 0;padding:22px}.modalOpen{overflow:hidden;position:fixed;width:100%;left:0;right:0}.close{position:sticky;top:0;z-index:10;float:right;background:#292d35;border:1px solid #444a55;color:white;border-radius:50%;width:42px;height:42px;box-shadow:0 4px 14px #0009}.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.links a{color:#111;background:var(--text);text-decoration:none;border-radius:6px;padding:10px 13px;font-weight:750}.filmography{display:flex;gap:10px;overflow:auto;padding:6px 0 4px;scrollbar-width:none}.filmItem{min-width:108px;width:108px}.filmItem img{width:108px;aspect-ratio:2/3;object-fit:cover;border-radius:8px;background:#222;display:block}.filmItem b{display:block;font-size:12px;line-height:1.35;margin-top:5px}.rankGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.rankCard{background:var(--panel);border:1px solid var(--line);border-radius:7px;overflow:hidden}.rankCard img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#222}.rankBody{padding:8px}.rankNo{color:var(--accent);font-weight:900;font-size:12px}.countBadge.tv{background:#765116}.legend .l-tv i{background:#765116}
+@media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.tvMovie{padding:7px}.streamingWeeks{gap:12px}.streamingWeekFrame{padding:8px}.streamingWeekMovies{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.streamMovieDate{font-size:8px;padding:2px 5px}.streamMovieService{font-size:8px}.streamMovieTitle{font-size:9px}.streamingWeekLabel{font-size:11px}.festivalCover{aspect-ratio:3/2;min-height:120px}.wrap{padding:0 12px}.grid{grid-template-columns:repeat(3,1fr);gap:5px}.card{border-radius:6px}.body{padding:6px}.title{font-size:11px}.tag{font-size:9px;padding:3px 5px}.section{padding:14px 0 24px}.hero{padding:18px 0 8px}.modeTabs{gap:6px}.modeTab{font-size:13px;padding:10px 5px}.chips{padding:5px 0 12px}.chip{padding:7px 10px;font-size:12px}.calendar{padding:10px;border-radius:8px}.rankGrid{grid-template-columns:repeat(3,1fr)}.hero{padding-top:28px}.day{min-height:164px;padding:4px}.calGroups{gap:3px}.calGroup{gap:2px;padding:14px 2px 12px;border-width:1.5px;border-radius:4px}.calGroupHead{display:none}.calPosters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.calGroup img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}.calPosters .calMissing{width:100%;height:auto;aspect-ratio:2/3;min-height:0;flex:initial}.calTotal{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:6px;background:rgba(0,0,0,.72);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1}.calHidden{position:absolute;right:3px;bottom:2px;font-size:9px;font-weight:800;color:var(--muted);line-height:1}.dot{font-size:0;width:6px;height:6px;border-radius:50%;padding:0;background:var(--accent)}}
+
+/* Cinemap visual pass: flatter, quieter, editorial rather than dashboard-like */
+body{background:#090909}
+.wrap{max-width:1240px}
+.top{background:#fff;border-bottom:1px solid #e9e9e9}
+.nav{height:54px}
+.hero{padding:22px 0 8px;border-bottom:0}
+.hero h1{font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin:0 0 14px}
+.modeTabs{display:flex;gap:22px;margin:0 0 8px;border-bottom:1px solid var(--line)}
+.modeTab{flex:0 0 auto;border:0;background:transparent;padding:11px 0 10px;border-radius:0;color:var(--muted);font-weight:600}
+.modeTab.active{background:transparent;color:var(--text);border:0;box-shadow:inset 0 -1px 0 var(--text);font-weight:700}
+.chips{gap:6px;padding:8px 0 16px}
+.chip{background:transparent;border:1px solid #2b2b2b;padding:7px 10px;color:#aaa}
+.chip.active{background:#f0f0f0;color:#111;border-color:#f0f0f0}
+.section{padding:14px 0 30px}
+.sectionHead{margin-bottom:10px}
+.section h2{font-size:15px;font-weight:700;letter-spacing:0}
+.grid{gap:14px 10px}
+.card{background:transparent;border:0;border-radius:0;transition:none}
+.card:hover{transform:none}
+.poster{background:#161616;border-radius:2px}
+.body{padding:7px 0 0}
+.title{font-size:12px;font-weight:600}
+.meta{margin-top:5px;gap:5px}
+.tag{background:transparent;border:1px solid #292929;color:#8f8f8f;padding:2px 5px;border-radius:3px}
+.score{color:#aaa;font-weight:600}
+.calendar{background:transparent;border:0;border-radius:0;padding:0}
+.calHead{padding:2px 0 10px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.calHead button{background:transparent;border:1px solid var(--line);border-radius:4px;padding:7px 10px}
+.day{border:1px solid #222;border-radius:3px;background:#0d0d0d}
+.day.today{border:1px solid #666;background:#101010;box-shadow:none}
+.day.today b{background:transparent;color:var(--text);padding:0}
+.dot{border-radius:2px}
+.detailSection{background:transparent!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;padding:14px 0!important;margin:0!important}
+.detailSection:first-of-type{border-top:0!important}
+.detailSection.info,.detailSection.release,.detailSection.streaming,.detailSection.tv,.detailSection.location,.detailSection.history,.detailSection.story,.detailSection.theater,.detailSection.linksSec{border-left:0!important}
+.detailSection h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.contextGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.contextCard{border:1px solid #292929;border-radius:5px;padding:10px;display:grid;gap:5px}
+.contextCard b{font-size:11px}.contextCard span{font-size:11px;color:#aaa;line-height:1.55}
+.traceGroup{margin-top:16px}.traceTitle{display:block;font-size:12px;margin-bottom:9px;color:#ddd}
+.timelineHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:6px}.timelineHead h3{font-size:17px;margin:2px 0 0}.movieTimeline{margin-top:8px}.timelineItem{display:grid;grid-template-columns:18px 1fr;gap:10px;min-height:72px}.timelineRail{position:relative}.timelineRail:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:1px;background:#333}.timelineRail i{position:absolute;left:3px;top:7px;width:9px;height:9px;border-radius:50%;background:#ddd;border:2px solid #101010;z-index:1}.timelineBody{padding:0 0 19px}.timelineMeta{display:flex;align-items:center;gap:8px;margin-bottom:4px}.timelineMeta time{font-size:11px;color:#ddd;font-variant-numeric:tabular-nums}.timelineMeta span{font-size:9px;letter-spacing:.08em;color:#888}.timelineBody>b{font-size:13px}.timelineNote{margin-top:5px;color:#777}.timelineCaution{margin:5px 0 0;color:#777;line-height:1.6}
+@media(max-width:600px){.contextGrid{grid-template-columns:1fr}}
+.sheet{background:#101010;border-radius:10px 10px 0 0;padding:20px 18px}
+.close{background:transparent;border:1px solid var(--line);box-shadow:none;border-radius:50%;width:36px;height:36px}
+.links{margin-top:10px}
+.links a{background:transparent;color:var(--text);border:1px solid #343434;border-radius:4px;padding:8px 10px;font-weight:600}
+.historyEntry,.locationCard,.theaterBox{background:transparent!important;border:1px solid #272727!important;border-radius:4px!important}
+.watchSummaryRow{padding:10px 0}
+.watchSummaryLabel{font-weight:600}
+.search{background:transparent;border-color:#292929;border-radius:4px}
+.searchResults{background:#111;border-color:#292929;border-radius:4px}
+.drawer{background:#0d0d0d}
+.drawerClose{background:transparent;border:1px solid var(--line)}
+@media(max-width:760px){
+  .heroActions{grid-template-columns:repeat(2,minmax(0,1fr))}.heroAction{min-height:42px;height:auto;padding:9px 10px;font-size:10.5px}.heroAction:last-child:nth-child(odd){grid-column:auto}
+  .wrap{padding:0 14px}
+  .hero{padding-top:16px}
+  .hero h1{font-size:18px}
+  .modeTabs{gap:16px;overflow-x:auto;scrollbar-width:none}
+  .modeTab{font-size:12px;white-space:nowrap}
+  .grid{gap:12px 8px}
+  .sheet{border-radius:8px 8px 0 0}
+}
+
+.brand{display:flex;align-items:center;text-decoration:none;min-width:104px}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+.heroActions{margin-top:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.heroAction{display:flex;align-items:center;justify-content:space-between;gap:8px;text-decoration:none;font-weight:750;border-radius:9px;padding:10px 12px;border:1px solid #343434;color:#f5f5f5;background:#151515;min-width:0;min-height:46px;height:auto;font-size:11px;line-height:1.35;overflow:hidden}.heroAction:after{content:"›";font-size:18px;color:#aaa}
+.heroAction.alt{background:#e8edf0}
+.heroAction.ghost{background:#171717}.festivalHero{min-height:150px;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(circle at 80% 15%,#7b61d155,transparent 36%),linear-gradient(145deg,#18131f,#111);border:1px solid #342b43;margin:10px 0 16px;overflow:hidden}.festivalHero img{width:100%;max-height:260px;object-fit:cover;border-radius:8px;margin-bottom:12px}.festivalHero .festivalKind{font-size:11px;color:#cdbef5;font-weight:800;letter-spacing:.08em}.festivalHero .festivalVenue{font-size:12px;color:#aaa;margin-top:7px}
+
+@media(max-width:600px){.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.top .brandLogo{height:32px}}
+
+/* Cinemap light header */
+.top{background:#fff!important;border-bottom-color:#e7e7e7!important}
+.top .search{color:#171717;background:#fff;border-color:#d8d8d8}
+.top .search::placeholder{color:#777}
+.top .menuBtn{color:#1b1b1b}
+.top .brand{color:#111}
+
+button.active,.chip.active,.dateBtn.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}.modeTab.active{background:#2b1d20!important;color:#fff!important;border-color:var(--accent)!important;box-shadow:inset 0 -3px 0 var(--accent),0 0 0 1px #ef3f3f55!important}
+button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.active *{color:#fff!important}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+.heroSearchWrap{margin-top:14px}.heroSearchWrap .searchBox{margin-left:0;width:min(560px,100%)}
+
+
+/* unified Cinemap header v2 */
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+.gLogo{display:block;height:31px;width:auto;max-width:170px;object-fit:contain}
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}.gLogo{height:27px;max-width:124px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+/* 2026-09-26 calendar UX fixes */
+.tvWeekMovies{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.tvMovie{min-width:0!important}
+@media(max-width:760px){.tvWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}.tvMovie{display:block!important;padding:5px!important}.tvMoviePoster{width:100%!important}.tvMovieProgram{font-size:9px!important;line-height:1.25}.tvMovieTitle{font-size:8px!important;line-height:1.25}}
+.festivalSpan.cont{font-weight:850;opacity:.96}
+</style>
+<style id="experience-fit-v1">
+.experienceFitGrid{display:grid;gap:9px}.experienceFitCard{display:block;padding:13px 14px;border:1px solid #ffffff18;border-radius:14px;background:linear-gradient(135deg,#11161d,#0b0d11);color:inherit;text-decoration:none}.experienceFitCard span{display:flex;align-items:center;justify-content:space-between;gap:10px}.experienceFitCard b{font-size:15px}.experienceFitCard em{font-style:normal;font-size:11px;color:#aeb8c8;border:1px solid #ffffff18;border-radius:999px;padding:3px 8px}.experienceFitCard small{display:block;color:#b8c0cc;line-height:1.55;margin-top:7px}.experienceFitCard i{display:block;font-style:normal;font-size:12px;font-weight:800;margin-top:8px;color:#8dcfff}.experienceTheaterLink{display:block;margin-top:11px;padding:12px 14px;border-radius:12px;background:#ffffff0c;border:1px solid #ffffff16;color:#fff;text-decoration:none;font-weight:800;font-size:13px}
+
+/* timeline integrated + format stars */
+.timelineNow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 15px}.timelineNow>div{border:1px solid #2d3036;border-radius:7px;padding:9px 10px;background:#111}.timelineNow strong{display:block;font-size:10px;color:#ddd;margin-bottom:5px}.timelineNow span{display:block;font-size:10px;line-height:1.55;color:#aaa}.experienceFitCard.best{border-color:#75652f;background:linear-gradient(135deg,#191710,#0b0d11)}.experienceStars{font-style:normal!important;color:#f0c86a!important;border:0!important;padding:0!important;font-size:12px!important;letter-spacing:.03em!important}.experienceFitCard.best b:after{content:"  おすすめ";font-size:8px;color:#f0c86a;font-weight:700}
+@media(max-width:600px){.timelineNow{grid-template-columns:1fr}}
+</style><script src="js/screening-model-v7.js"></script>
+<style>
+/* movie-detail-mobile-overflow-v1 */
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .modal{max-width:100vw;overflow-x:hidden}
+  .sheet{width:100%;max-width:100vw;min-width:0;overflow-x:hidden}
+  #detail,#detail>*,.detailSection,.detailTop,.criticBody,.criticPanel,.relatedGroups,.traceGroup{min-width:0;max-width:100%}
+  .filmography,.works,.criticMatrix{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .filmography,.works{touch-action:pan-x}
+  .criticMatrixGrid{width:max-content}
+}
+</style>
+
+<style id="cinemap-brand-v1">
+/* Cinemap brandTagline: premium editorial identity */
+.brand{
+  color:#f4efe5!important;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  line-height:.92!important;
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:max-content;
+}
+.brand::after{
+  content:"EXPLORE CINEMA";
+  display:block;
+  margin-top:6px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.28em;
+}
+.brandA:after{display:none!important}
+.brandTagline{font-family:inherit}
+@media(max-width:430px){
+  .brand{font-size:20px!important}
+  .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
+}
+</style>
+
+<style id="cinemap-brand-image-v3">
+/* Approved B brand is a fixed artwork asset. CSS only controls placement/size. */
+.gBrand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto;min-width:0;text-decoration:none!important;line-height:0}
+.gBrandImage{display:block;width:132px;height:auto;max-width:none}
+.gNav{height:58px!important;gap:8px!important}
+@media(max-width:430px){
+  .gNav{height:56px!important;gap:8px!important}
+  .gBrandImage{width:132px}
+  .gSearchForm{height:33px!important}
+}
+@media(max-width:370px){.gBrandImage{width:118px}}
+</style>
+<style>.calendarCoverage{margin:5px 0 18px;color:#aeb2b9;font-size:11px;line-height:1.6;padding:10px 12px;border:1px solid #343840;border-radius:8px;background:#17191c}</style><style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style></head>
+<body>
+
+
+<header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
+ <form class="gSearchForm" action="cinelva/search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="cinelva/index.html">カレンダー</a>
+ <a href="cinelva/discover.html">映画を探す</a>
+ <a href="cinelva/rankings.html">ランキング</a>
+ <a href="cinelva/theaters.html">映画館を探す</a>
+ <a href="cinelva/experience.html">上映方式</a>
+ <a href="cinelva/my-cinemap.html">My CINELVA</a>
+</aside>
+<main class="wrap">
+<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="cinelva/discover.html" class="heroAction ghost">映画を探す</a><a href="cinelva/experience.html" class="heroAction ghost">上映方式</a><a href="cinelva/rankings.html" class="heroAction ghost">ランキング</a><a href="cinelva/my-cinemap.html" class="heroAction ghost">My CINELVA</a></div></section>
+<div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
+<section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="cinelva/revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="cinelva/credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">CINELVA v0.4.73</span></footer></main>
+<div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
+<script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
+const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
+const services=["すべて","劇場公開",...STREAMING_SERVICES];
+let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
+const savedMode=localStorage.getItem("cinemaNow.mode");
+const savedActive=localStorage.getItem("cinemaNow.active");
+let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"streaming", view=new Date(),streamRangeStart=null,theatricalRangeStart=null;
+const calendarReturn=CinemapCalendarContext.initialCalendar(new URLSearchParams(location.search));if(calendarReturn){mode=calendarReturn.mode;view=new Date(calendarReturn.date+"T12:00:00")}
+// Saved filters must never make the calendar appear empty after navigation/UI changes.
+if(mode!=="streaming"&&active!=="すべて")active="すべて";
+let runtimeMin=0,runtimeMax=0;
+const $=s=>document.querySelector(s);
+let modalScrollY=0;
+function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
+function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
+function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.runtime||0);if(!r)return false;return (!runtimeMin||r>=runtimeMin)&&(!runtimeMax||r<=runtimeMax)}
+function theatricalCategory(m){return m.special_screening==="asa10"?"午前十時":m.service==="リバイバル上映"?"リバイバル":"通常"}
+function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=mode==="theatrical"?(active==="すべて"||theatricalCategory(m)===active):(active==="すべて"||m.service===active);return ok&&serviceOk})}
+function streamingReleaseServices(){
+ const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
+ const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)).sort((a,b)=>a.localeCompare(b,"ja"));
+ return [...STREAMING_SERVICES,...extras]
+}
+function renderChips(){
+ let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
+ let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
+ let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
+ let ss=mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ if(!ss.includes(active))active="すべて";
+ $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
+}
+function renderCards(){let a=filtered(),groups=new Map();for(let m of a){let k=m.id?("id:"+m.id):("title:"+m.title);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m)}let cards=[...groups.values()];$("#count").textContent=cards.length+"作品";$("#cards").innerHTML=cards.length?cards.map(g=>{let m=g[0],sv=[...new Set(g.map(x=>x.service))],dates=[...new Set(g.map(x=>x.date))].sort(),tv=g.find(x=>x.event==="tv")||{};return '<article class="card" data-i="'+movies.indexOf(m)+'"><div class="poster">'+(m.poster?'<img src="'+m.poster+'" alt="ポスター" loading="lazy">':mode==="festival"?'<div class="festivalCover"><b>'+m.title+'</b><span>'+(m.date||"")+(m.end_date&&m.end_date!==m.date?' 〜 '+m.end_date:'')+'</span></div>':m.title)+'</div><div class="body"><div class="title">'+m.title+'</div>'+(mode==="tv"&&tv.program?'<div class="small" style="margin-top:4px;font-weight:700;color:#e6e7eb">'+tv.program+'</div>':'')+(mode==="festival"&&m.venue?'<div class="small" style="margin-top:4px;color:#d7d9df">'+m.venue+'</div>':'')+'<div class="meta">'+sv.map(s=>'<span class="tag '+svcClass(s)+'">'+s+'</span>').join("")+'<span class="tag">'+(dates.length===1?dates[0]:dates[0]+"〜")+(mode==="tv"&&tv.time?' '+tv.time:'')+'</span>'+(mode==="tv"?'<span class="tag '+(tv.terrestrial_first===true?'tv-first':tv.terrestrial_first===false?'tv-repeat':'tv-unknown')+'">'+(tv.terrestrial_first===true?'地上波初':tv.terrestrial_first===false?'再放送':'初放送未確認')+'</span>':'')+(mode==="festival"?'':'<span class="tag score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="tag" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'" onclick="event.stopPropagation()">Filmarksで探す </a>')+'</div></div></article>'}).join(""):'<div class="empty">該当する作品がありません</div>';document.querySelectorAll(".card").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.i]))}
+function searchMovieResults(){
+ let q=normTitle($("#q").value),hasRuntime=!!(runtimeMin||runtimeMax);
+ if(!q&&!hasRuntime){$("#searchResults").classList.remove("show");$("#searchResults").innerHTML="";return []}
+ let seen=new Set(),rows=[];
+ for(let m of movies){
+  if(m.event==="festival"||!runtimeOk(m))continue;
+  let keys=[m.title,m.original_title,m.director,...(m.cast||[]),...(m.genres||[]),...(m.countries||[])].map(normTitle).filter(Boolean);
+  if(q&&!keys.some(k=>k.includes(q)||q.includes(k)))continue;
+  let k=m.id?"id:"+m.id:"title:"+normTitle(m.title);
+  if(seen.has(k))continue;seen.add(k);rows.push(m)
+ }
+ rows.sort((a,b)=>q?((normTitle(a.title)===q?0:1)-(normTitle(b.title)===q?0:1)||Number(b.votes||0)-Number(a.votes||0)||a.title.localeCompare(b.title,"ja")):(Number(b.score||0)-Number(a.score||0)||Number(b.votes||0)-Number(a.votes||0)));
+ return rows.slice(0,q?16:24)
+}
+function searchTheaterResults(){
+ let q=normTitle($("#q").value);if(!q)return [];
+ return theaterDirectory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].map(normTitle).some(k=>k&&k.includes(q))).slice(0,8)
+}
+function closeSearchFocus(){
+ const q=$("#q");
+ if(q&&document.activeElement===q)q.blur();
+ $("#searchResults").classList.remove("show");
+}
+let remoteMovieResults=[],remoteSearchTimer=0,remoteSearchSeq=0;
+async function fetchRemoteMovieResults(q){
+ const seq=++remoteSearchSeq;
+ if(!q||q.length<2){remoteMovieResults=[];return}
+ try{
+  const cfg=await getBackendConfig();if(!cfg||!cfg.enabled||!cfg.base_url)return;
+  const base=String(cfg.base_url).replace(/\/$/,"");
+  const r=await fetch(base+"/api/movies?q="+encodeURIComponent(q)+"&limit=16",{cache:"no-store"});
+  if(!r.ok)return;const d=await r.json();if(seq!==remoteSearchSeq)return;
+  remoteMovieResults=[...(d.movies||[]),...(d.external||[])].filter(x=>x&&x.title)
+ }catch(e){console.warn("catalog search unavailable",e)}
+ if(seq===remoteSearchSeq)renderSearchResults(true)
+}
+async function openRemoteMovie(m){
+ let full=m;
+ try{const cfg=await getBackendConfig();if(cfg&&cfg.enabled&&cfg.base_url&&m.tmdbId){const base=String(cfg.base_url).replace(/\/$/,"");const r=await fetch(base+"/api/movie-detail?id="+encodeURIComponent(m.tmdbId),{cache:"no-store"});if(r.ok){const d=await r.json();if(d.movie)full=d.movie}else{console.warn("catalog detail HTTP",r.status)}}}catch(e){console.warn("catalog detail unavailable",e)}
+ closeSearchFocus();requestAnimationFrame(()=>openMovie(full))
+}
+function renderSearchResults(fromRemote=false){
+ let rows=searchMovieResults(),theaters=searchTheaterResults(),box=$("#searchResults"),q=$("#q").value.trim(),hasRuntime=!!(runtimeMin||runtimeMax);
+ if(!q&&!hasRuntime){box.classList.remove("show");return}
+ if(!fromRemote){clearTimeout(remoteSearchTimer);if(q.length>=2)remoteSearchTimer=setTimeout(()=>fetchRemoteMovieResults(q),280);else remoteMovieResults=[]}
+ const keys=new Set(rows.map(m=>String(m.tmdbId||m.tmdb_id||m.id||normTitle(m.title))));
+ const remote=remoteMovieResults.filter(m=>!keys.has(String(m.tmdbId||m.tmdb_id||m.id||normTitle(m.title)))).slice(0,12);
+ let movieHtml=rows.map(m=>'<div class="searchResult" data-mi="'+movies.indexOf(m)+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="searchThumb"></div>')+'<div><b>'+esc(m.title)+'</b><span>'+(m.director?"監督 "+esc(m.director)+" · ":"")+(m.event==="theatrical"?"劇場公開":m.event==="tv"?"TV":m.service||"配信")+(m.date?" · "+m.date:"")+'</span></div></div>').join("");
+ let remoteHtml=remote.map((m,i)=>'<div class="searchResult" data-ri="'+i+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="searchThumb"></div>')+'<div><b>'+esc(m.title)+'</b><span>作品カタログ'+((m.year||m.date)?' · '+esc(m.year||String(m.date).slice(0,4)):'')+'</span></div></div>').join("");
+ let theaterHtml=theaters.length?'<div class="searchEmpty" style="padding-bottom:5px;color:#bbb;font-weight:800">映画館</div>'+theaters.map(t=>'<a class="searchResult" href="cinelva/theaters.html?search='+encodeURIComponent(t.name)+'" style="text-decoration:none;color:inherit"><div class="searchThumb" style="aspect-ratio:1;display:grid;place-items:center">▣</div><div><b>'+esc(t.name)+'</b><span>'+esc([t.prefecture,t.municipality].filter(Boolean).join(" "))+'</span></div></a>').join(""):"";
+ box.innerHTML=(movieHtml||remoteHtml||theaterHtml)?movieHtml+remoteHtml+theaterHtml:'<div class="searchEmpty">該当する作品・映画館がありません</div>';
+ box.classList.add("show");
+ document.querySelectorAll(".searchResult[data-mi]").forEach(x=>x.onclick=()=>{closeSearchFocus();requestAnimationFrame(()=>openMovie(movies[+x.dataset.mi]))});
+ document.querySelectorAll(".searchResult[data-ri]").forEach(x=>x.onclick=()=>{closeSearchFocus();openRemoteMovie(remote[+x.dataset.ri])})
+}
+function svcClass(s){return s==="午前十時の映画祭"?"asa10":s==="リバイバル上映"?"revival":s==="劇場公開"?"theatrical":s==="Netflix"?"netflix":s==="Prime Video"?"prime-video":s==="Disney+"?"disney":s==="U-NEXT"?"u-next":s==="Hulu"?"hulu":s==="国内映画祭"?"festival-domestic":s==="海外映画祭"?"festival-overseas":s==="国内イベント"?"event-domestic":"tv"}
+function popularitySort(a,b){return Number(b.votes||0)-Number(a.votes||0)||Number(b.score||0)-Number(a.score||0)||String(a.title||"").localeCompare(String(b.title||""),"ja")}
+function dayMovies(iso){return filtered().filter(m=>m.date===iso).sort(popularitySort)}
+function missingPoster(){return '<div class="calMissing" aria-label="画像なし"><svg viewBox="0 0 64 64" role="img" aria-hidden="true"><rect x="8" y="12" width="48" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="23" cy="27" r="5" fill="none" stroke="currentColor" stroke-width="4"/><path d="M12 47l13-13 9 9 7-7 11 11M10 10l44 44" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>'}
+const holidayCache=new Map();
+function japaneseHolidays(year){
+ if(holidayCache.has(year))return holidayCache.get(year);
+ let holidays=new Map();
+ if(year<2000||year>2099)return holidays;
+ const put=(month,day,name)=>{holidays.set(new Date(year,month-1,day).toLocaleDateString("sv-SE"),name)};
+ // Legal national holidays (modern calendar); equinox dates are calculated for 2000–2099.
+ const nthMonday=(month,n)=>{let first=new Date(year,month-1,1).getDay();return 1+((8-first)%7)+(n-1)*7};
+ const equinox=(spring)=>Math.floor((spring?20.8431:23.2488)+0.242194*(year-1980)-Math.floor((year-1980)/4));
+ put(1,1,"元日");put(1,nthMonday(1,2),"成人の日");put(2,11,"建国記念の日");
+ if(year>=2020)put(2,23,"天皇誕生日");
+ put(3,equinox(true),"春分の日");put(4,29,"昭和の日");put(5,3,"憲法記念日");put(5,4,"みどりの日");put(5,5,"こどもの日");
+ if(year===2020){put(7,23,"海の日");put(7,24,"スポーツの日");put(8,10,"山の日")}
+ else if(year===2021){put(7,22,"海の日");put(7,23,"スポーツの日");put(8,8,"山の日")}
+ else{put(7,nthMonday(7,3),"海の日");put(8,11,"山の日");put(10,nthMonday(10,2),"スポーツの日")}
+ put(9,nthMonday(9,3),"敬老の日");put(9,equinox(false),"秋分の日");
+ put(11,3,"文化の日");put(11,23,"勤労感謝の日");
+ // 国民の休日: weekdays sandwiched between two national holidays.
+ const original=new Set(holidays.keys());
+ for(let d=new Date(year,0,2);d.getFullYear()===year;d.setDate(d.getDate()+1)){
+  let key=d.toLocaleDateString("sv-SE");if(holidays.has(key)||d.getDay()===0)continue;
+  let prev=new Date(d),next=new Date(d);prev.setDate(prev.getDate()-1);next.setDate(next.getDate()+1);
+  if(original.has(prev.toLocaleDateString("sv-SE"))&&original.has(next.toLocaleDateString("sv-SE")))holidays.set(key,"国民の休日");
+ }
+ // 振替休日: after a Sunday national holiday, the next non-holiday becomes a holiday.
+ [...original].sort().forEach(key=>{
+  let d=new Date(key+"T00:00:00");if(d.getDay()!==0)return;
+  d.setDate(d.getDate()+1);
+  while(holidays.has(d.toLocaleDateString("sv-SE")))d.setDate(d.getDate()+1);
+  if(d.getFullYear()===year)holidays.set(d.toLocaleDateString("sv-SE"),"振替休日")
+ });
+ holidayCache.set(year,holidays);
+ return holidays
+}
+function holidayName(d){
+ const y=d.getFullYear();
+ return japaneseHolidays(y).get([y,String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-"))||""
+}
+function dayColorClass(d){return holidayName(d)?" holiday":d.getDay()===0?" sunday":d.getDay()===6?" saturday":""}
+function monthPageStart(d){
+ const first=new Date(d.getFullYear(),d.getMonth(),1),wd=(first.getDay()+6)%7;
+ first.setHours(0,0,0,0);first.setDate(first.getDate()-wd);return first
+}
+function monthPageEnd(d){
+ const last=new Date(d.getFullYear(),d.getMonth()+1,0),wd=(last.getDay()+6)%7;
+ last.setHours(0,0,0,0);last.setDate(last.getDate()+(6-wd));return last
+}
+function monthPageWeekCount(d){
+ const a=monthPageStart(d),z=monthPageEnd(d);return Math.round((z-a)/86400000/7)+1
+}
+function currentWeekStart(){
+ const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d
+}
+function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+function scrollCalendarToCurrentWeek(){}
+function streamingGroupOrder(){
+ const preferred=streamingReleaseServices();return new Map(preferred.map((x,i)=>[x,i]))
+}
+function dedupeMorningTenWeek(rows){
+ const seen=new Set();
+ return rows.filter(m=>{
+  if(m.special_screening!=="asa10")return true;
+  const key=revivalNorm(morningTenQuery(m.title));
+  if(!key)return true;
+  if(seen.has(key))return false;
+  seen.add(key);
+  return true
+ })
+}
+function groupedMovieCards(weekMovies,modeName){
+ let groups=new Map();
+ for(const m of weekMovies){
+  let key;
+  if(modeName==="theatrical")key=m.special_screening==="asa10"?"午前十時の映画祭":m.service==="リバイバル上映"?"リバイバル上映":"通常公開";
+  else key=m.service||"その他";
+  if(!groups.has(key))groups.set(key,[]);groups.get(key).push(m)
+ }
+ let entries=[...groups.entries()];
+ if(modeName==="theatrical"){
+  const rank=new Map([["通常公開",0],["午前十時の映画祭",1],["リバイバル上映",2]]);
+  entries.sort((a,b)=>(rank.get(a[0])??99)-(rank.get(b[0])??99)||a[0].localeCompare(b[0],"ja"))
+ }else{
+  const rank=streamingGroupOrder();entries.sort((a,b)=>(rank.get(a[0])??999)-(rank.get(b[0])??999)||a[0].localeCompare(b[0],"ja"))
+ }
+ return entries.map(([group,rows])=>{
+  let cards=rows.sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b)).map(m=>{
+   let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
+   if(modeName==="streaming"){
+    let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)],flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
+    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'<span class="streamMovieDate">'+date+'</span></div>'+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div></article>'
+   }
+   let kind=group==="午前十時の映画祭"?"asa10":group==="リバイバル上映"?"revival":"theatrical";
+   return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="theatricalPosterFallback">'+m.title+'</div>')+'<span class="streamMovieDate">'+date+'</span></div><div class="streamMovieService '+kind+'">'+group+'</div><div class="streamMovieTitle">'+m.title+'</div></article>'
+  }).join("");
+  return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group+'</div><div class="weekGroupCount">'+rows.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
+ }).join("")
+}
+function renderCal(){
+ let calendarPriorityBudget=12;
+ function calendarThumbUrl(url){return String(url||"").replace(/\/(?:original|w780|w500|w342)\//,"/w185/")}
+ function calendarImg(url){let priority=calendarPriorityBudget>0;calendarPriorityBudget--;return '<img src="'+calendarThumbUrl(url)+'" alt="" loading="'+(priority?'eager':'lazy')+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>'}
+
+ let y=view.getFullYear(),mo=view.getMonth();
+ $("#month").textContent=y+"年 "+(mo+1)+"月";
+ let cal=document.querySelector(".calendar");
+ let first=new Date(y,mo,1),offset=(first.getDay()+6)%7,start=new Date(y,mo,1-offset);
+ function isoOf(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
+ function groupHtml(ms,dateKey,maxThumbs){
+  let grouped={};ms.forEach(m=>{let k=m.service||"劇場公開";(grouped[k]||(grouped[k]=[])).push(m)});
+  return Object.entries(grouped).map(([svc,arr])=>{
+   arr.sort(popularitySort);let shown=arr.slice(0,maxThumbs);let thumbs=shown.map(m=>m.poster?calendarImg(m.poster):missingPoster()).join("");
+   let hidden=Math.max(0,arr.length-maxThumbs);
+   return '<div class="calGroup '+svcClass(svc)+'" data-date="'+dateKey+'" title="'+svc+' '+arr.length+'作品"><span class="calTotal">'+arr.length+'</span><div class="calPosters">'+thumbs+'</div>'+(hidden?'<span class="calHidden">+'+hidden+'</span>':'')+'</div>'
+  }).join("")
+ }
+ if(mode==="streaming"){
+  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.remove("streamingWeekMode");cal.classList.add("streamingWeekMode");
+  $("#weekdays").innerHTML="";
+  if(!streamRangeStart)streamRangeStart=monthPageStart(view);let firstWeek=new Date(streamRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
+  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
+  let out='<div class="streamingWeeks">';
+  for(let w=0;w<weekCount;w++){
+   let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
+   let we=new Date(ws);we.setDate(ws.getDate()+6);
+   let weekMovies=filtered().filter(m=>{
+    let d=new Date(m.date+"T00:00:00");
+    return m.event==="streaming"&&d>=ws&&d<=we
+   }).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
+   let groups=groupedMovieCards(weekMovies,"streaming"),isCurrent=sameDay(ws,currentWeekStart());
+   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の配信開始作品はありません</div>')+'</div></section>'
+  }
+  out+='</div>';
+  $("#dates").innerHTML=out;
+  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
+  return;
+ }
+ if(mode==="tv"){
+  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.remove("streamingWeekMode");cal.classList.add("streamingWeekMode");
+  $("#weekdays").innerHTML="";
+  let firstWeek=monthPageStart(view),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
+  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
+  let out='<div class="streamingWeeks">';
+  for(let w=0;w<weekCount;w++){
+   let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
+   let we=new Date(ws);we.setDate(ws.getDate()+6);
+   let weekMovies=filtered().filter(m=>{
+    let d=new Date(m.date+"T00:00:00");
+    return m.event==="tv"&&d>=ws&&d<=we
+   }).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")||a.title.localeCompare(b.title,"ja"));
+   let cards=weekMovies.map(m=>{
+    let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
+    let status=m.terrestrial_first===true?'<span class="tvFirstBadge">初</span><span>地上波初</span>':m.terrestrial_first===false?'<span class="tvStatusMuted">以前にも放映あり</span>':'<span class="tvStatusMuted">初放送未確認</span>';
+    return '<article class="tvMovie" data-mi="'+idx+'"><div class="tvMoviePoster">'+(m.poster?calendarImg(m.poster):missingPoster())+'</div><div class="tvMovieBody"><div class="tvMovieTop"><span class="tvMovieDate">'+date+'</span><span class="tvMovieTime">'+(m.time||"時間未確認")+'</span></div><div class="tvMovieChannel" style="background:'+tvChannelColor(m.service)+';color:#fff">'+(m.service||"放送局未確認")+'</div><div class="tvMovieProgram">'+(m.program||"番組名未確認")+'</div><div class="tvMovieTitle">'+m.title+'</div><div class="tvMovieStatus">'+status+'</div></div></article>'
+   }).join("");
+   out+='<section class="streamingWeekBlock '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(cards?'<div class="tvWeekMovies">'+cards+'</div>':'<div class="small">この週の映画放映予定はありません</div>')+'</div></section>'
+  }
+  out+='</div>';
+  $("#dates").innerHTML=out;
+  document.querySelectorAll(".tvMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
+  return;
+ }
+ if(mode==="festival"){
+  cal.classList.remove("theatricalCompact");cal.classList.remove("streamingWeekMode");cal.classList.add("festivalMode");
+  $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
+  let out="",now=new Date();
+  for(let w=0,weekCount=monthPageWeekCount(view);w<weekCount;w++){
+   let ws=new Date(start);ws.setDate(start.getDate()+w*7);
+   let we=new Date(ws);we.setDate(ws.getDate()+6);
+   let activeEvents=festivalEvents.filter(ev=>{
+    let a=new Date(ev.date+"T00:00:00"),z=new Date((ev.end_date||ev.date)+"T00:00:00");
+    return a<=we&&z>=ws
+   }).sort((a,b)=>a.date.localeCompare(b.date)||a.title.localeCompare(b.title));
+   let height=40+activeEvents.length*32;
+   let cells="";
+   for(let k=0;k<7;k++){
+    let d=new Date(ws);d.setDate(ws.getDate()+k);
+    cells+='<div class="festivalDate '+(d.getMonth()!==mo?'dim':'')+(d.toDateString()===now.toDateString()?' today':'')+dayColorClass(d)+'" style="grid-column:'+(k+1)+';grid-row:1;min-height:'+height+'px">'+d.getDate()+'</div>'
+   }
+   let spans=activeEvents.map((ev,lane)=>{
+    let a=new Date(ev.date+"T00:00:00"),z=new Date((ev.end_date||ev.date)+"T00:00:00"),continued=a<ws;
+    let segStart=a>ws?a:ws,segEnd=z<we?z:we;
+    let colStart=((segStart.getDay()+6)%7)+1,colEnd=((segEnd.getDay()+6)%7)+2;
+    let klass=ev.scope==="overseas"?"overseas":ev.service==="国内イベント"?"event":"domestic";
+    let firstSeg=a>=ws&&a<=we;
+    return '<div class="festivalSpan '+klass+(firstSeg?'':' cont')+'" data-event-title="'+encodeURIComponent(ev.title)+'" style="grid-column:'+colStart+' / '+colEnd+';grid-row:1;margin-top:'+(29+lane*32)+'px" title="'+ev.title+'">'+(firstSeg?ev.title:ev.title+'（継続）')+'</div>'
+   }).join("");
+   out+='<div class="festivalWeek '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'">'+cells+spans+'</div>'
+  }
+  $("#dates").innerHTML=out;
+  document.querySelectorAll(".festivalSpan").forEach(x=>x.onclick=()=>{
+   let title=decodeURIComponent(x.dataset.eventTitle),m=festivalEvents.find(e=>e.title===title);
+   if(m)openMovie({...m,start_date:m.date,event:"festival"})
+  });
+  return;
+ }
+ if(mode==="theatrical"){
+  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.add("streamingWeekMode");
+  $("#weekdays").innerHTML="";
+  if(!theatricalRangeStart)theatricalRangeStart=monthPageStart(view)
+  let firstWeek=new Date(theatricalRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
+  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
+  let out='<div class="streamingWeeks">';
+  for(let w=0;w<weekCount;w++){
+   let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
+   let we=new Date(ws);we.setDate(ws.getDate()+6);
+   let weekMovies=filtered().filter(m=>{
+    if(!m.date)return false;let d=new Date(m.date+"T00:00:00"),z=new Date((m.end_date||m.date)+"T00:00:00");return d<=we&&z>=ws
+   });
+   weekMovies=dedupeMorningTenWeek(weekMovies).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
+   let groups=groupedMovieCards(weekMovies,"theatrical"),isCurrent=sameDay(ws,currentWeekStart());
+   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
+  }
+  out+='</div>';
+  $("#dates").innerHTML=out;
+  document.querySelectorAll(".streamMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
+  return;
+ }
+ cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");
+ $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
+ let out="",gridDays=monthPageWeekCount(view)*7;
+ for(let i=0;i<gridDays;i++){
+  let d=new Date(start);d.setDate(start.getDate()+i);
+  let iso=isoOf(d),ms=dayMovies(iso),now=new Date(),today=d.toDateString()===now.toDateString();
+  let groupsHtml=groupHtml(ms,iso,9);
+  out+='<div class="day '+(d.getMonth()!==mo?'dim':'')+(today?' today':'')+dayColorClass(d)+'" data-date="'+iso+'"><b>'+d.getDate()+'</b>'+(groupsHtml?'<div class="calGroups">'+groupsHtml+'</div>':'')+'</div>'
+ }
+ $("#dates").innerHTML=out;
+ document.querySelectorAll(".calGroup[data-date]").forEach(x=>x.onclick=e=>{e.stopPropagation();openDay(x.dataset.date)});
+ document.querySelectorAll(".day[data-date]").forEach(x=>x.onclick=()=>openDay(x.dataset.date))
+}
+function openDateRange(csv){
+ let dates=csv.split(","),ms=dates.flatMap(d=>dayMovies(d));
+ if(!ms.length)return;
+ $("#detail").innerHTML='<p class="eyebrow">'+dates[0]+' 〜 '+dates[dates.length-1]+'</p><h2 style="font-size:26px;line-height:1.2;font-weight:800">月〜木の劇場公開</h2>'+ms.map(m=>'<article class="dayMovie" data-mi="'+movies.indexOf(m)+'" style="padding:14px 0;border-top:1px solid var(--line);cursor:pointer;display:grid;grid-template-columns:64px 1fr;gap:11px">'+(m.poster?'<img src="'+m.poster+'" style="width:64px;aspect-ratio:2/3;object-fit:cover;border-radius:7px;background:#222">':'<div style="width:64px;aspect-ratio:2/3;background:#222;border-radius:7px"></div>')+'<div><b style="font-size:17px;line-height:1.3">'+m.title+'</b><div class="meta"><span class="tag theatrical">劇場公開</span><span class="tag">'+m.date+'</span><span class="tag score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span></div></div></article>').join("");
+ showModal();
+ document.querySelectorAll(".dayMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))
+}
+function openDay(iso){let ms=dayMovies(iso);if(!ms.length)return;$("#detail").innerHTML='<p class="eyebrow">'+iso+' の新着</p><h2 style="font-size:26px;line-height:1.2;font-weight:800">作品一覧</h2>'+ms.map(m=>'<article class="dayMovie" data-mi="'+movies.indexOf(m)+'" style="padding:14px 0;border-top:1px solid var(--line);cursor:pointer;display:grid;grid-template-columns:64px 1fr;gap:11px">'+(m.poster?'<img src="'+m.poster+'" style="width:64px;aspect-ratio:2/3;object-fit:cover;border-radius:7px;background:#222">':'<div style="width:64px;aspect-ratio:2/3;background:#222;border-radius:7px"></div>')+'<div><b style="font-size:17px;line-height:1.3">'+m.title+'</b>'+(m.event==="tv"&&m.program?'<div class="small" style="margin-top:5px;font-weight:700;color:#d7d9df">'+m.program+'</div>':'')+(m.event==="festival"&&m.venue?'<div class="small" style="margin-top:5px;color:#d7d9df">'+m.venue+'</div>':'')+'<div class="meta"><span class="tag '+svcClass(m.service)+'">'+m.service+'</span><span class="tag">'+m.date+(m.event==="tv"&&m.time?' '+m.time:'')+'</span>'+(m.event==="tv"?'<span class="tag '+(m.terrestrial_first===true?'tv-first':m.terrestrial_first===false?'tv-repeat':'tv-unknown')+'">'+(m.terrestrial_first===true?'地上波初':m.terrestrial_first===false?'再放送':'初放送未確認')+'</span>':'')+'<span class="tag score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="tag" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'" onclick="event.stopPropagation()">Filmarksで探す </a>'+'</div><div class="small" style="margin-top:7px;line-height:1.55">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.slice(0,3).join('、')+'<br>':'')+((m.countries&&m.countries.length)||(m.genres&&m.genres.length)||m.runtime?'<span>'+(m.countries&&m.countries.length?m.countries.join(' / '):'')+(m.genres&&m.genres.length?' ・ '+m.genres.slice(0,2).join(' / '):'')+(m.runtime?' ・ '+m.runtime+'分':'')+'</span>':'')+'</div>'+(m.overview?'<div class="small" style="margin-top:7px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+m.overview+'</div>':'')+'</div></article>').join("");showModal();document.querySelectorAll(".dayMovie").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))}
+function related(m){let key=normTitle(m.title),alt=normTitle(m.original_title||"");return movies.filter(x=>(m.id&&x.id&&String(m.id)===String(x.id))||(!(m.id&&x.id)&&((key&&normTitle(x.title)===key)||(alt&&normTitle(x.title)===alt))))}
+function normTitle(s){return (s||"").toLowerCase().normalize("NFKC").replace(/[\s　・･:：!！?？「」『』【】\[\]()（）\-―ー]/g,"")}
+const PREFECTURES=["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+let selectedTheaterPrefecture=localStorage.getItem("cinema-theater-prefecture")||"神奈川県";
+let theaterExpanded=false,detailMovie=null;
+function theaterPrefecture(x){
+ if(x.prefecture&&PREFECTURES.includes(x.prefecture))return x.prefecture;
+ let area=x.area||"",name=x.theater||x.name||"";
+ for(let p of PREFECTURES)if(area.startsWith(p)||area.startsWith(p.replace(/[都府県]$/,"")))return p;
+ if(area.startsWith("東京"))return "東京都";
+ if(area.startsWith("神奈川"))return "神奈川県";
+ if(area.startsWith("大阪"))return "大阪府";
+ if(area.startsWith("京都"))return "京都府";
+ if(area.startsWith("北海道"))return "北海道";
+ return ""
+}
+function setTheaterPrefecture(p){
+ if(!PREFECTURES.includes(p))return;
+ selectedTheaterPrefecture=p;theaterExpanded=false;
+ try{localStorage.setItem("cinema-theater-prefecture",p)}catch(e){}
+ let el=document.getElementById("theaterResult");
+ if(el&&detailMovie)el.innerHTML=theaterScheduleHtml(detailMovie)
+}
+function showMoreTheaters(){
+ theaterExpanded=true;
+ let el=document.getElementById("theaterResult");
+ if(el&&detailMovie)el.innerHTML=theaterScheduleHtml(detailMovie)
+}
+function theaterScheduleHtml(m){
+ // theater-official-links-v2: static, dependency-free renderer to avoid breaking detail view.
+ return '<div class="theaterOfficialOnly"><p class="small">CINELVA内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links"><a href="https://www.tohotheater.jp/" target="_blank" rel="noopener noreferrer">TOHOシネマズ</a><a href="https://www.aeoncinema.com/" target="_blank" rel="noopener noreferrer">イオンシネマ</a><a href="https://www.unitedcinemas.jp/" target="_blank" rel="noopener noreferrer">ユナイテッド・シネマ</a><a href="https://www.smt-cinema.com/" target="_blank" rel="noopener noreferrer">MOVIX／ピカデリー</a><a href="https://tjoy.jp/" target="_blank" rel="noopener noreferrer">T・ジョイ</a><a href="https://109cinemas.net/" target="_blank" rel="noopener noreferrer">109シネマズ</a></div></div>';
+}
+
+function movieTimelineHtml(m){
+ const items=[],seen=new Set(),av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
+ const add=(date,type,label,detail,source,note,status)=>{
+  if(!date)return;
+  const k=[date,type,label,detail].join("|");if(seen.has(k))return;seen.add(k);
+  items.push({date,type,label,detail:detail||"",source:source||"",note:note||"",status:status||""})
+ };
+ related(m).forEach(x=>{
+  if(x.event==="theatrical"||x.service==="劇場公開")add(x.date,"theatrical","劇場公開",x.service==="劇場公開"?"国内劇場公開データ":x.service,x.source_url,"カレンダー掲載データ","listed");
+  else if(x.event==="streaming")add(x.date,"streaming","配信開始",x.service,x.source_url,"カレンダー掲載データ","listed");
+  else if(x.event==="tv")add(x.date,"tv","TV放映",[(x.program||x.service),x.time].filter(Boolean).join(" · "),x.source_url,"カレンダー掲載データ","listed");
+ });
+ const key=normTitle(m.title),alt=normTitle(m.original_title||"");
+ (releaseHistory.records||[]).filter(x=>{
+   if(m.id&&x.id&&String(m.id)===String(x.id))return true;
+   let t=normTitle(x.title),o=normTitle(x.original_title||"");
+   return t===key||(alt&&t===alt)||(o&&(o===key||o===alt))
+ }).forEach(r=>{
+   const confirmed=r.record_type==="放送局の公式過去番組ページ";
+   const type=r.kind==="tv"?"tv":r.kind==="streaming"?"streaming":"theatrical";
+   const label=type==="tv"?"TV放映":type==="streaming"?"配信開始":"劇場公開";
+   add(r.date,type,label,[r.service,r.program,r.time].filter(Boolean).join(" · "),r.source_url,confirmed?"公式の過去記録":"当時掲載された予定・公開日",confirmed?"confirmed":"scheduled")
+ });
+ if(av&&av.checked_at){
+   const d=String(av.checked_at).slice(0,10),services=[...(av.flatrate||av.services||[]),...(av.rent||[]),...(av.buy||[])];
+   if(services.length)add(d,"availability","現在の配信状況を観測",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
+ }
+ items.sort((a,b)=>a.date.localeCompare(b.date)||a.type.localeCompare(b.type));
+ const flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
+ const nowRows=[flat.length?'<b>見放題</b> '+flat.join(" / "):"",rent.length?'<b>レンタル</b> '+rent.join(" / "):"",buy.length?'<b>購入</b> '+buy.join(" / "):""].filter(Boolean);
+ const upcoming=related(m).filter(x=>x.event==="tv"&&x.date>=new Date().toLocaleDateString("sv-SE")).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
+ const nowHtml='<div class="timelineNow"><div><strong>いま観る</strong><span>'+(nowRows.length?nowRows.join('<br>'):'配信先を確認できていません')+'</span></div><div><strong>次のTV放映</strong><span>'+(upcoming.length?upcoming.map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません')+'</span></div></div>';
+ if(!items.length)return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・視聴タイムライン</h3></div></div>'+nowHtml+'<div class="small" style="margin-top:10px">出典または観測記録を確認できる履歴がまだありません。</div></section>';
+ const typeName={theatrical:"THEATER",streaming:"STREAMING",tv:"TV",availability:"NOW"};
+ return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・視聴タイムライン</h3></div><span class="small">'+items.length+' records</span></div>'+nowHtml+'<div class="movieTimeline">'+items.map(x=>'<div class="timelineItem"><div class="timelineRail"><i></i></div><div class="timelineBody"><div class="timelineMeta"><time>'+x.date+'</time><span>'+typeName[x.type]+'</span></div><b>'+x.label+'</b>'+(x.detail?'<div class="small">'+x.detail+'</div>':'')+'<div class="timelineNote small">'+x.note+(x.source?' · <a target="_blank" rel="noopener noreferrer" href="'+x.source+'">出典</a>':'')+'</div></div></div>').join("")+'</div><p class="small timelineCaution">予定データ・過去の実施記録・現在の配信状況の観測を区別しています。観測日は配信開始日を意味しません。</p></section>'
+}
+function movieHistoryHtml(m){
+ const rows=(releaseHistory.records||[]),key=normTitle(m.title),alt=normTitle(m.original_title||"");
+ const matches=rows.filter(x=>{
+  if(m.id&&x.id&&String(m.id)===String(x.id))return true;
+  let t=normTitle(x.title),o=normTitle(x.original_title||"");
+  return t===key||(alt&&t===alt)||(o&&(o===key||o===alt))
+ }).sort((a,b)=>b.date.localeCompare(a.date));
+ if(!matches.length)return '<div class="small">出典を確認できた過去の掲載記録はありません。</div>';
+ const types={tv:"TV放映予定",streaming:"配信開始予定",theatrical:"国内劇場公開予定"};
+ return '<div class="historyList">'+matches.slice(0,25).map(r=>{
+  let label=r.record_type==="放送局の公式過去番組ページ"?"TV過去番組記録":(types[r.kind]||"公開予定");
+  let src=r.source_url?'<a href="'+r.source_url+'" target="_blank" rel="noopener noreferrer">出典</a>':'';
+  return '<div class="historyEntry"><b>'+r.date+'　'+label+'</b><div>'+(r.service||"")+(r.time?'　'+r.time:'')+(r.program?'　'+r.program:'')+'</div><small>'+(r.record_type==="放送局の公式過去番組ページ"?"放送局の公式過去番組ページ。":"当時掲載された予定・公開日。実施確認ではありません。")+' '+src+'</small></div>'
+ }).join("")+'</div>'
+}
+function availabilityHtml(m){
+ const info=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
+ if(!info||!info.checked_at)return '<div class="small">直近の配信状況は確認待ちです。</div>';
+ let f=info.flatrate||info.services||[],r=info.rent||[],b=info.buy||[];
+ let rows=(f.length?'<div><b>見放題：</b>'+f.join(" / ")+'</div>':'')+(r.length?'<div style="margin-top:5px"><b>レンタル：</b>'+r.join(" / ")+'</div>':'')+(b.length?'<div style="margin-top:5px"><b>購入：</b>'+b.join(" / ")+'</div>':'');
+ if(!rows)rows='<div>日本向け配信先を確認できませんでした</div>';
+ let changes=(info.changes||[]).slice(-5).reverse().map(x=>{
+  let ff=x.flatrate||x.services||[],rr=x.rent||[],bb=x.buy||[];
+  return '<div class="historyEntry"><small>'+x.observed_at.slice(0,10)+' UTCに観測</small><div>'+(ff.length?'見放題 '+ff.join(" / "):'見放題なし')+(rr.length?'<br>レンタル '+rr.join(" / "):'')+(bb.length?'<br>購入 '+bb.join(" / "):'')+'</div></div>'
+ }).join("");
+ return '<div style="margin-top:8px">'+rows+'<div class="small">最終観測：'+info.checked_at.slice(0,10)+' UTC。初観測日＝配信開始日ではありません。価格は提供元で確認してください。 <a href="'+info.source_url+'" target="_blank" rel="noopener noreferrer">提供元で確認</a></div></div>'+(changes?'<details style="margin-top:9px"><summary class="small">配信状況の観測履歴</summary><div class="historyList">'+changes+'</div></details>':'')
+}
+function filmingLocationHtml(m){
+ let entry=m.id&&(filmingLocations.movies||{})[String(m.id)];
+ if(!entry||!(entry.locations||[]).length)return "";
+ return '<h3 style="margin-top:22px"> ロケ地</h3><div class="locationList">'+entry.locations.map(x=>{
+  let map=x.map_query?'<a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.map_query)+'">地図で見る</a>':'';
+  let src=x.source_url?'<a target="_blank" rel="noopener noreferrer" href="'+x.source_url+'">出典</a>':'';
+  return '<div class="locationCard"><b>'+x.name+'</b><div class="small">'+(x.area||"")+(x.note?'<br>'+x.note:'')+'</div><div class="locationLinks">'+map+src+'</div></div>'
+ }).join("")+'</div><div class="small">舞台設定ではなく、出典で撮影地として確認できた場所のみ掲載しています。</div>'
+}
+function movieIdentity(m){return m.id?"id:"+String(m.id):"title:"+normTitle(m.title)}
+function uniqueByMovie(rows){let seen=new Set();return rows.filter(x=>{let k=movieIdentity(x);if(seen.has(k))return false;seen.add(k);return true})}
+function movieYear(m){let d=(m.date||"").slice(0,4),y=Number(d);return y||0}
+function contextHtml(m){
+ const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
+ const sameDirector=m.director?peers.filter(x=>x.director===m.director):[];
+ const sameGenre=(m.genres||[]).length?peers.filter(x=>(x.genres||[]).some(g=>(m.genres||[]).includes(g))):[];
+ const sameCountry=(m.countries||[]).length?peers.filter(x=>(x.countries||[]).some(g=>(m.countries||[]).includes(g))):[];
+ const recurring=(m.cast||[]).map(name=>({name,n:peers.filter(x=>(x.cast||[]).includes(name)).length})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,4);
+ let rows=[];
+ if(m.director)rows.push('<div class="contextCard"><b>同じ監督</b><span>CINELVA内で他 '+sameDirector.length+'作品を確認</span></div>');
+ if((m.genres||[]).length)rows.push('<div class="contextCard"><b>同じジャンル</b><span>'+m.genres.slice(0,3).join(" / ")+'を共有する作品 '+sameGenre.length+'本</span></div>');
+ if((m.countries||[]).length)rows.push('<div class="contextCard"><b>同じ製作国</b><span>'+m.countries.slice(0,3).join(" / ")+'を含む作品 '+sameCountry.length+'本</span></div>');
+ if(recurring.length)rows.push('<div class="contextCard"><b>同じ出演者</b><span>'+recurring.map(x=>x.name+'：他 '+x.n+'本').join(" · ")+'</span></div>');
+ return '<section class="detailSection info"><h3>確認できるつながり</h3><div class="contextGrid">'+(rows.length?rows.join(""):'<div class="small">現在のデータでは、追加のつながりを確認できません。</div>')+'</div><p class="small" style="margin-top:10px">CINELVAが現在保持している作品データ内で確認できる一致のみ表示しています。作品史上の位置づけや作風の解釈は表示していません。</p></section>'
+}
+function exploreHtml(m){
+ const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
+ const y=movieYear(m);
+ let scored=peers.map(x=>{
+  let score=0,reasons=[];
+  if(m.director&&x.director===m.director){score+=12;reasons.push("同じ監督")}
+  const cast=(m.cast||[]).filter(a=>(x.cast||[]).includes(a));if(cast.length){score+=Math.min(9,cast.length*4);reasons.push(cast[0]+"が出演")}
+  const genres=(m.genres||[]).filter(g=>(x.genres||[]).includes(g));if(genres.length){score+=genres.length*2;reasons.push(genres.slice(0,2).join(" / "))}
+  if((m.countries||[]).some(g=>(x.countries||[]).includes(g))){score+=1;reasons.push("同じ製作国")}
+  return {x,score,reasons}
+ }).filter(r=>r.score>1).sort((a,b)=>b.score-a.score||Number(b.x.score||0)-Number(a.x.score||0)).slice(0,12);
+ let groups=[
+  ["監督から辿る",scored.filter(r=>r.reasons.includes("同じ監督"))],
+  ["出演者から辿る",scored.filter(r=>r.reasons.some(x=>x.endsWith("が出演")))],
+  ["ジャンル・製作国から辿る",scored.filter(r=>!r.reasons.includes("同じ監督")&&!r.reasons.some(x=>x.endsWith("が出演")))]
+ ].filter(g=>g[1].length);
+ const cards=r=>r.slice(0,6).map(z=>'<button type="button" class="filmItem relatedMovie" data-related="'+movies.indexOf(z.x)+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(z.x.poster?'<img src="'+z.x.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+z.x.title+'</b><span class="small">'+z.reasons.slice(0,3).join(" · ")+'</span></button>').join("");
+ return '<section class="detailSection info"><h3>ここから辿る</h3><p class="small" style="margin:0 0 12px">同じ監督・出演者・ジャンル・製作国など、現在のデータで確認できる共通点から表示しています。</p>'+(groups.length?groups.map(g=>'<div class="traceGroup"><b class="traceTitle">'+g[0]+'</b><div class="filmography">'+cards(g[1])+'</div></div>').join(""):'<div class="small">関連作品を取得できていません。</div>')+'</section>'
+}
+let INDEX_SCREENING_EVIDENCE={default:{},films:{},title_fixtures:{}};
+fetch("data/screening_format_evidence.json?"+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(!d)return;INDEX_SCREENING_EVIDENCE=d;if(detailMovie){const h=document.querySelector("[data-index-screening-v6]");if(h)h.outerHTML=experienceFitHtml(detailMovie)}}).catch(()=>{});
+function indexClampScore(n){return Math.max(1,Math.min(5,Math.round(n)))}
+function indexTraitText(m){return ((m.title||"")+" "+(m.original_title||"")+" "+(m.genres||[]).join(" ")+" "+(m.overview||"")).toLowerCase()}
+function indexKeywordScore(text,patterns,base=1){let n=base;patterns.forEach(x=>{if(x.test(text))n++});return indexClampScore(n)}
+function indexScreeningEvidenceRow(m){const id=String(m.tmdbId||m.id||""),year=String(m.year||String(m.date||"").slice(0,4)),key=(m.title||"")+"|"+year;return {...(INDEX_SCREENING_EVIDENCE.default||{}),...(INDEX_SCREENING_EVIDENCE.films?.[id]||{}),...(INDEX_SCREENING_EVIDENCE.title_fixtures?.[key]||{})}}
+function indexFormatVerdict(x){if(x.key==="standard")return x.score>=4?"通常上映もおすすめ":"通常上映で十分楽しめる";return x.score>=5?"特におすすめ":x.score>=4?"おすすめ":x.score>=3?"相性あり":x.score>=2?"向く場面は限定的":"メリットは限定的"}
+function indexFormatStars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
+function applyIndexScreeningCapsV6(m,rows){const gs=(m.genres||[]).map(g=>typeof g==="string"?g:(g&&g.name)||"").join(" "),countries=(m.origin_country||m.production_countries||m.countries||[]).map(c=>typeof c==="string"?c:(c&&((c.iso_3166_1||c.name)))||"").join(" "),text=[m.title||"",m.original_title||"",m.overview||"",gs].join(" ").toLowerCase(),lang=String(m.original_language||"").toLowerCase(),isJapanese=lang==="ja"||/(^|\s)(jp|japan|日本)(\s|$)/i.test(countries),romance=/(romance|恋愛|ロマンス|ラブストーリー)/i.test(text),drama=/(drama|ドラマ|青春|家族)/i.test(text),spectacle=/(action|adventure|science fiction|sci-fi|sf|thriller|horror|fantasy|war|music|concert|sport|アクション|冒険|sf|サスペンス|スリラー|ホラー|ファンタジー|戦争|音楽|ライブ|スポーツ|レース|飛行|宇宙|海|爆発|戦闘|追跡|乗り物)/i.test(text),quietNarrative=(romance||drama)&&!spectacle,isJapaneseRomance=isJapanese&&romance&&!spectacle;return rows.map(x=>{const y={...x};if(y.key==="standard")y.score=Math.max(3,y.score);if(y.key==="imax"&&!y.expandedRatioVerified){y.score=Math.min(x.score,3);y.reason="拡張画角を確認できないため、IMAX固有の画面メリットは限定的と評価。"}if((quietNarrative||isJapaneseRomance)&&(y.key==="motion"||y.key==="screenx")){y.score=Math.min(x.score,2);y.reason=isJapaneseRomance?"会話や人物関係が中心の邦画恋愛として、体感演出・視野拡張の上乗せ効果は限定的と評価。":"静かな会話劇・ドラマとして、体感演出・視野拡張の上乗せ効果は限定的と評価。"}return y})}
+function experienceFitHtml(m){
+ const rows=window.ScreeningModelV7?window.ScreeningModelV7.scoreMovie(m,INDEX_SCREENING_EVIDENCE):[];
+ const stars=n=>window.ScreeningModelV7.stars(n);
+ const cards=rows.map(x=>{const sub=x.subscores?'<div class="small" style="margin-top:5px">映像 '+stars(x.subscores.picture)+'　音響 '+stars(x.subscores.audio)+'</div>':'';const src=(x.sources||[]).length?'<div class="small" style="margin-top:6px">'+x.sources.map(a=>'<a target="_blank" rel="noopener noreferrer" href="'+a.url+'">'+a.label+' ↗</a>').join('　')+'</div>':'';return '<div class="experienceFitCard"><span><b>'+x.name+'</b><em class="experienceStars" aria-label="'+x.score+' / 5">'+stars(x.score)+'</em></span>'+sub+'<small>'+x.reason+'</small><div class="small" style="margin-top:6px">'+x.availability+'</div>'+src+'</div>'}).join('');
+ return '<section class="detailSection experienceFit" data-index-screening-v7><h3>どの上映方式で観る？</h3><p class="small" style="margin:0 0 12px">★は作品と上映方式の相性を示す参考値です。公式対応の有無と、作品の映像・音響・身体性・空間性を分けて扱います。</p><div class="experienceFitGrid">'+cards+'</div><p class="small" style="margin-top:9px">「公式版未確認」は非対応を意味しません。確認できた作品固有情報がない場合も、情報不足を理由に★1へ下げません。</p><a class="experienceTheaterLink" href="cinelva/search.html?id='+encodeURIComponent(m.tmdbId||m.id||"")+'&search='+encodeURIComponent(m.title||"")+'">詳しい根拠を見る →</a></section>'
+}
+function festivalAwardOrg(title){let t=String(title||"");if(t.includes("アカデミー賞"))return "アカデミー賞";if(t.includes("ゴールデングローブ"))return "ゴールデングローブ賞";if(t.includes("BAFTA"))return "BAFTA";if(t.includes("カンヌ"))return "カンヌ国際映画祭";if(t.includes("ヴェネチア"))return "ヴェネチア国際映画祭";if(t.includes("ベルリン"))return "ベルリン国際映画祭";return ""}
+function openMovie(m){
+ detailMovie=m;theaterExpanded=false;
+ if(m.special_screening==="asa10"&&!m.id&&!m.tmdbId){$("#detail").innerHTML='<p class="eyebrow">SPECIAL SCREENING</p><h2 style="font-size:24px;line-height:1.25">'+m.title+'</h2><section class="detailSection release"><h3>午前十時の映画祭16</h3><div class="small">'+m.date+' 〜 '+(m.end_date||m.date)+' · グループ '+(m.group||'')+'</div><div class="small" style="margin-top:8px">上映開始時間は劇場・作品により異なります。</div></section><section class="detailSection linksSec"><div class="links"><a href="cinelva/search.html?search='+encodeURIComponent(m.title)+'">CINELVAで作品を開く</a><a target="_blank" rel="noopener noreferrer" href="'+m.source_url+'">公式スケジュール</a></div></section>';showModal();return}
+ if(m.event==="festival"){
+  let source=m.source_url?'<a target="_blank" href="'+m.source_url+'">公式サイト</a>':'';
+  let visual=m.visual_url?'<img src="'+m.visual_url+'" alt="" loading="lazy">':'';let awardOrg=festivalAwardOrg(m.title),awardLink=awardOrg?'<a href="cinelva/rankings.html?axis=awards&year='+encodeURIComponent(String((m.date||"").slice(0,4)))+'&award='+encodeURIComponent(awardOrg)+'">受賞作品を見る</a>':'';$("#detail").innerHTML='<p class="eyebrow">FESTIVAL / EVENT</p><div class="festivalHero">'+visual+'<span class="festivalKind">'+(m.service||"映画祭")+'</span><h2 style="font-size:24px;line-height:1.25;margin:6px 0 0">'+m.title+'</h2>'+(m.venue?'<div class="festivalVenue">'+m.venue+'</div>':'')+'</div><section class="detailSection release"><h3>開催情報</h3><div><b>開催期間</b><br>'+(m.start_date||m.date)+(m.end_date&&m.end_date!==(m.start_date||m.date)?' 〜 '+m.end_date:'')+'</div>'+(m.venue?'<div style="margin-top:8px"><b>会場</b><br>'+m.venue+'</div>':'')+'</section>'+(m.overview?'<section class="detailSection story"><h3>概要</h3><div style="line-height:1.7">'+m.overview+'</div></section>':'')+'<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links">'+awardLink+source+(m.trailer_url?'<a target="_blank" rel="noopener noreferrer" href="'+m.trailer_url+'">公式予告編</a>':'')+'</div></section>';
+  showModal();return
+ }
+ let all=related(m),theatrical=all.find(x=>x.event==="theatrical"||x.service==="劇場公開");
+ let streams=all.filter(x=>x.event==="streaming"&&x.service!=="劇場公開").sort((a,b)=>a.date.localeCompare(b.date));
+ let tvs=all.filter(x=>x.event==="tv").sort((a,b)=>a.date.localeCompare(b.date));
+ let todayIso=new Date().toLocaleDateString("sv-SE"),tvUpcoming=tvs.filter(x=>x.date>=todayIso),tvPast=tvs.filter(x=>x.date<todayIso);
+ let av=m.availability||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
+ let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
+ let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:(m.director_works||[]);
+ let peopleIntro='<section class="detailSection info"><h3>この映画をつくった人たち</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+m.cast.slice(0,8).join("、"):'')+'</div></section>';
+ let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||"")===String(w.id||"")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span>';return local>=0?'<button type="button" class="filmItem relatedMovie" data-related="'+local+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+body+'</button>':'<div class="filmItem"><a target="_blank" rel="noopener noreferrer" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+body+'</a></div>'}).join("")+'</div></section>':"";
+ let trailer=m.trailer_url||('https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式'));
+ let teaser='https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 特報 ティザー 公式');
+ let rating='<div class="detailScore"><span class="scorePill">TMDB ★ '+Number(m.score||0).toFixed(1)+'</span>'+'<a class="small" target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を探す </a>'+'</div>';
+ let info=(m.director||m.cast&&m.cast.length||m.countries&&m.countries.length||m.genres&&m.genres.length||m.runtime)?'<section class="detailSection info"><h3>作品情報</h3><div class="small">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'出演：'+m.cast.join("、")+'<br>':'')+(m.countries&&m.countries.length?'製作国：'+m.countries.join(" / ")+'<br>':'')+(m.genres&&m.genres.length?'ジャンル：'+m.genres.join(" / ")+'<br>':'')+(m.runtime?'上映時間：'+m.runtime+'分':'')+'</div></section>':"";
+ let streamStart=streams.length?streams.map(x=>'<b>'+x.service+'</b> '+x.date).join('<br>'):'確認できた配信開始情報なし';
+ let nowStreaming=[flat.length?'見放題：'+flat.join(" / "):'',rent.length?'レンタル：'+rent.join(" / "):'',buy.length?'購入：'+buy.join(" / "):''].filter(Boolean).join('<br>')||'現在の配信先を確認できていません';
+ let tvNext=tvUpcoming.length?tvUpcoming.slice(0,3).map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません';
+ let timeline=movieTimelineHtml(m);
+ let watch='<section class="detailSection streaming"><h3>現在の視聴状況</h3><div class="watchSummaryGrid">'+
+   '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信中</div><div class="watchSummaryValue">'+nowStreaming+(av&&av.source_url?'<br><a class="small" target="_blank" rel="noopener noreferrer" href="'+av.source_url+'">提供元で確認</a>':'')+'</div></div>'+
+   '<div class="watchSummaryRow"><div class="watchSummaryLabel">TV予定</div><div class="watchSummaryValue">'+tvNext+'</div></div>'+
+  '</div></section>';
+ let locations=filmingLocationHtml(m);
+ if(locations)locations='<section class="detailSection location">'+locations+'</section>';
+ let history='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">履歴データの詳細</summary><div style="margin-top:10px">'+movieHistoryHtml(m)+'</div></details>';
+ let context=contextHtml(m);
+ let explore=exploreHtml(m);
+ let experienceFit=experienceFitHtml(m);
+ let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
+ let fullDetailHref=CinemapCalendarContext.detailHref(m)||('cinelva/search.html?id='+encodeURIComponent(m.tmdbId||m.id)+'&search='+encodeURIComponent(m.title||''));
+ let deepDive=(m.id||m.tmdbId)?'<section class="detailSection deepDive"><h3>作品を深掘る</h3><div class="small" style="margin-bottom:9px">作り手の別作品や関連作品をたどれます。批評は出典を確認できた作品から掲載します。</div><div class="deepDiveActions"><a href="'+fullDetailHref+'">作品情報を見る</a></div></section>':'';
+ let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
+ let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+timeline+experienceFit+info+peopleIntro+filmHtml+story+locations+deepDive+links+history+theater;
+ showModal();
+ document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))
+}
+function streamServiceColor(name){
+ const colors={
+  "Netflix":"#b51f1f","Prime Video":"#2385c7","Disney+":"#4b63d8","U-NEXT":"#8b59c5","Hulu":"#2c9a63",
+  "Apple TV+":"#d7d7d7","ABEMA":"#52b6a6","Lemino":"#e0a52b","FOD":"#e0526d","WOWOWオンデマンド":"#4f72d8","DMM TV":"#d85ec5","Rakuten TV":"#d64545"
+ };
+ return colors[name]||"#7d8796"
+}
+function tvChannelColor(name){
+ const colors={"日本テレビ":"#d8b62f","テレビ朝日":"#d85a4d","TBS":"#4b78d1","テレビ東京":"#53a06b","フジテレビ":"#7d68c4","NHK総合":"#8a8f98"};
+ return colors[name]||"#7d8796"
+}
+function renderLegend(){
+ if(mode==="streaming"){
+  $("#legend").innerHTML=streamingReleaseServices().map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")
+ }else if(mode==="theatrical"){
+  $("#legend").innerHTML='<span class="l-theatrical"><i></i>通常公開</span><span class="l-revival"><i></i>リバイバル上映</span><span class="l-asa10"><i></i>午前十時の映画祭</span>'
+ }else if(mode==="tv"){
+  let stations=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
+  $("#legend").innerHTML=stations.map(s=>'<span><i style="background:'+tvChannelColor(s)+'"></i>'+s+'</span>').join("")+'<span class="legendStatus"><b class="tvFirstBadge">初</b>地上波初</span>'
+ }else{
+  $("#legend").innerHTML='<span><i style="background:#7b61d1"></i>国内映画祭</span><span><i style="background:#c65a8a"></i>海外映画祭</span><span><i style="background:#b07a2d"></i>国内イベント</span>'
+ }
+}
+const coverageText={theatrical:"国内の劇場公開情報と、手動で確認した一部の再上映を掲載しています。全国の上映回を網羅するものではありません。",streaming:"公式情報で確認した一部の配信開始予定です。現在の配信先の観測日を、配信開始日として扱いません。",tv:"確認できた一部の地上波映画放映予定です。全局・全作品を網羅していません。放映日時は番組公式サイトでご確認ください。",festival:"日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。"};function renderCoverage(){const el=document.getElementById("calendarCoverage");if(el)el.textContent=coverageText[mode]||""}
+function setMode(next){streamRangeStart=null;theatricalRangeStart=null;mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render();renderCoverage()}
+function render(){renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
+let backendConfigPromise=null;
+async function getBackendConfig(){
+  if(!backendConfigPromise){
+    backendConfigPromise=fetch("data/backend.json?"+Date.now(),{cache:"no-store"})
+      .then(r=>r.ok?r.json():null)
+      .catch(()=>null);
+  }
+  return backendConfigPromise;
+}
+async function fetchBackendOrFallback(apiPath,fallbackPath){
+  try{
+    const cfg=await getBackendConfig();
+    if(cfg&&cfg.enabled&&cfg.base_url){
+      const base=String(cfg.base_url).replace(/\/$/,"");
+      const apiRes=await fetch(base+apiPath,{cache:"no-store"});
+      if(apiRes.ok)return apiRes;
+    }
+  }catch(e){console.warn("API backend unavailable; using static JSON fallback",apiPath,e)}
+  return fetch(fallbackPath+"?"+Date.now(),{cache:"no-store"});
+}
+function applyRuntimePreset(){
+ const v=$("#runtimePreset").value;
+ if(v==="90"){runtimeMin=0;runtimeMax=90}
+ else if(v==="120"){runtimeMin=0;runtimeMax=120}
+ else if(v==="150"){runtimeMin=0;runtimeMax=150}
+ else if(v==="180plus"){runtimeMin=180;runtimeMax=0}
+ else if(v==="all"){runtimeMin=0;runtimeMax=0}
+ else{runtimeMin=Math.max(0,Number($("#runtimeMin").value)||0);runtimeMax=Math.max(0,Number($("#runtimeMax").value)||0)}
+ $("#runtimeMin").value=runtimeMin||"";$("#runtimeMax").value=runtimeMax||"";
+ renderSearchResults()
+}
+const runtimePresetEl=$("#runtimePreset"),runtimeMinEl=$("#runtimeMin"),runtimeMaxEl=$("#runtimeMax"),searchFilterBtnEl=$("#searchFilterBtn"),searchFilterPanelEl=$("#searchFilterPanel"),localSearchEl=$("#q");
+if(runtimePresetEl)runtimePresetEl.onchange=()=>{applyRuntimePreset();if(searchFilterPanelEl)searchFilterPanelEl.classList.remove("show");if(searchFilterBtnEl)searchFilterBtnEl.setAttribute("aria-expanded","false");renderSearchResults()};
+if(runtimeMinEl)runtimeMinEl.oninput=()=>{if(runtimePresetEl)runtimePresetEl.value="custom";runtimeMin=Math.max(0,Number(runtimeMinEl.value)||0);renderSearchResults()};
+if(runtimeMaxEl)runtimeMaxEl.oninput=()=>{if(runtimePresetEl)runtimePresetEl.value="custom";runtimeMax=Math.max(0,Number(runtimeMaxEl.value)||0);renderSearchResults()};
+if(searchFilterBtnEl)searchFilterBtnEl.onclick=e=>{e.stopPropagation();if(!searchFilterPanelEl)return;let show=!searchFilterPanelEl.classList.contains("show");searchFilterPanelEl.classList.toggle("show",show);searchFilterBtnEl.setAttribute("aria-expanded",show?"true":"false")};
+if(localSearchEl){
+ localSearchEl.oninput=renderSearchResults;
+ localSearchEl.onkeydown=async e=>{if(e.key==="Enter"){e.preventDefault();let rows=searchMovieResults();if(rows.length){closeSearchFocus();requestAnimationFrame(()=>openMovie(rows[0]));return}let q=localSearchEl.value.trim();if(q.length>=2){await fetchRemoteMovieResults(q);let remote=remoteMovieResults[0];if(remote)openRemoteMovie(remote)}}};
+}
+document.addEventListener("click",e=>{if(!e.target.closest(".searchBox")){const sr=$("#searchResults");if(sr)sr.classList.remove("show");if(searchFilterPanelEl)searchFilterPanelEl.classList.remove("show");if(searchFilterBtnEl)searchFilterBtnEl.setAttribute("aria-expanded","false")}});
+$("#prev").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);if(mode==="streaming")streamRangeStart=monthPageStart(view);else if(mode==="theatrical")theatricalRangeStart=monthPageStart(view);renderCal()};
+$("#next").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);if(mode==="streaming")streamRangeStart=monthPageStart(view);else if(mode==="theatrical")theatricalRangeStart=monthPageStart(view);renderCal()};
+$("#close").onclick=hideModal;
+$("#modal").onclick=e=>{if(e.target.id==="modal")hideModal()};
+
+function revivalNorm(s){return String(s||"").toLowerCase().normalize("NFKC").replace(/[\s　・･:：!！?？「」『』【】\[\]()（）\-―ー]/g,"")}
+function applyRevivalClassification(){
+ const hist=(releaseHistory.records||[]).filter(r=>r.kind==="theatrical"&&r.date),DAY=86400000;
+ for(const m of movies){
+  if(m.special_screening==="asa10"||m.event!=="theatrical"||!m.date)continue;
+  const cur=new Date(m.date+"T00:00:00"),key=revivalNorm(m.title),id=String(m.id||m.tmdbId||"");
+  const old=hist.some(r=>{if(!r.date)return false;const rd=new Date(r.date+"T00:00:00");if((cur-rd)<180*DAY)return false;return (id&&String(r.id||r.tmdbId||"")===id)||(key&&revivalNorm(r.title)===key)});
+  if(old){m.service="リバイバル上映";m.revival=true}
+ }
+}
+function morningTenQuery(title){return String(title||"").replace(/（\d{4}年版）/g,"").replace(/【[^】]+】/g,"").trim()}
+function titleYearHint(title){const m=String(title||"").match(/（(\d{4})年版）/);return m?m[1]:""}
+async function hydrateMorningTenPosters(){
+ const rows=movies.filter(m=>(m.special_screening==="asa10"||m.service==="リバイバル上映")&&(!m.poster||!m.id));
+ let cursor=0;
+ async function worker(){while(cursor<rows.length){const m=rows[cursor++],q=morningTenQuery(m.title),key=revivalNorm(q),yearHint=titleYearHint(m.title);let hit=movies.find(x=>x!==m&&x.poster&&revivalNorm(x.title)===key&&(!yearHint||String(x.year||x.date||"").startsWith(yearHint)));
+   if(!hit)try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?q="+encodeURIComponent(q)+"&limit=5",{cache:"no-store"});if(r.ok){const d=await r.json(),a=[...(d.movies||[]),...(d.external||[])];hit=a.find(x=>(revivalNorm(x.title)===key||revivalNorm(x.original_title)===key)&&(!yearHint||String(x.year||x.date||"").startsWith(yearHint)))||a.find(x=>revivalNorm(x.title)===key||revivalNorm(x.original_title)===key)||a[0]}}catch{}
+   if(hit){m.poster=hit.poster||hit.posterUrl||m.poster;m.id=hit.tmdbId||hit.id||m.id;m.tmdbId=hit.tmdbId||hit.id||m.tmdbId;m.score=hit.score??m.score;m.votes=hit.votes??m.votes}
+ }}
+ await Promise.all([worker(),worker(),worker()])
+}
+
+async function fastInitialCalendarPaint(){
+ try{
+  const r=await fetch("data/movies.json",{cache:"force-cache"});
+  if(!r.ok)return;
+  const d=await r.json();
+  const firstMovies=d.movies||[];
+  if(!firstMovies.length)return;
+  movies=CinemapCalendarDedupe.dedupe(firstMovies);
+  applyRevivalClassification();
+  render();
+ }catch(e){console.warn("fast calendar paint unavailable",e)}
+}
+async function boot(){await fastInitialCalendarPaint();try{let [mr,tr,dr,fr,er,sr,hr,ar,lr,tdr,spr,rr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theater-directory","data/theaters_master.json").catch(()=>null),fetch("data/special_screenings.json?"+Date.now()).catch(()=>null),fetch("data/revival_screenings.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];if(spr&&spr.ok){let sp=await spr.json();for(const x of(sp.screenings||[]))movies.push({...x,revival:false})}if(rr&&rr.ok){let rv=await rr.json();for(const x of(rv.screenings||[]))movies.push({...x,revival:true,service:"リバイバル上映"})}
+// Reset a stale streaming-service filter if it no longer exists in the loaded catalog.
+if(mode==="streaming"&&active!=="すべて"&&!movies.some(m=>m.event==="streaming"&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
+// If a remembered streaming filter has no titles in the currently visible six-week window,
+// fall back to all services instead of rendering an apparently empty catalog.
+if(mode==="streaming"&&active!=="すべて"){
+  let mf=new Date(view.getFullYear(),view.getMonth(),1),wd=(mf.getDay()+6)%7,ws=new Date(mf),we=new Date(mf);
+  ws.setHours(0,0,0,0);ws.setDate(mf.getDate()-wd);we=new Date(ws);we.setDate(ws.getDate()+41);
+  const inWindow=m=>{if(m.event!=="streaming"||!m.date)return false;const d=new Date(m.date+"T00:00:00");return d>=ws&&d<=we};
+  if(movies.some(inWindow)&&!movies.some(m=>inWindow(m)&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}
+}
+if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}movies=CinemapCalendarDedupe.dedupe(movies);applyRevivalClassification();await hydrateMorningTenPosters();render();const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#gDrawer").classList.add("show");$("#gDrawerMask").classList.add("show")}function closeDrawer(){$("#gDrawer").classList.remove("show");$("#gDrawerMask").classList.remove("show")}$("#gMenuBtn").onclick=openDrawer;$("#gDrawerClose").onclick=closeDrawer;$("#gDrawerMask").onclick=closeDrawer;
+renderCoverage();boot();
+</script><script>
+(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
+</script>
+<script>
+function applyHeaderSearchParam(){
+ const term=new URLSearchParams(location.search).get("search");
+ if(!term)return;
+ document.querySelectorAll(".gSearch").forEach(x=>x.value=term);
+ const local=document.getElementById("q");
+ if(local){
+  local.value=term;
+  const fire=()=>local.dispatchEvent(new Event("input",{bubbles:true}));
+  setTimeout(fire,300);setTimeout(fire,1000);
+ }
+}
+window.addEventListener("load",applyHeaderSearchParam);
+</script>
+<!-- CINELVA deployment v0.4.58 -->
+<!-- frontend-deploy-trigger: discover-recommendations-v1 -->
+<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script></body></html>

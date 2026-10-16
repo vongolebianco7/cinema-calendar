@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head><base href="../"><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Credits / Data Sources | CINELVA</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0e11;--panel:#15171c;--text:#f5f6f8;--muted:#a7abb3;--line:#2a2d34;--accent:#e7b24a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:860px;margin:auto;padding:28px 18px 60px}.brand{font-weight:900;letter-spacing:.08em}.brandA{position:relative;display:inline-block}.brandA:after{content:"";position:absolute;width:0;height:0;border-top:3px solid transparent;border-bottom:3px solid transparent;border-left:5px solid var(--accent);left:50%;top:56%;transform:translate(-42%,-50%)}
+a{color:#9dc8ff}.back{display:inline-block;margin:18px 0 26px}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin:14px 0}
+h1{font-size:28px}h2{font-size:18px;margin:0 0 10px}.muted{color:var(--muted);line-height:1.7}.tmdbLogo{width:78px;height:auto;display:block;margin:10px 0 14px}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;color:var(--muted)}
+
+.brand{display:flex;align-items:center;text-decoration:none}
+.brandLogo{display:block;width:auto;height:34px;object-fit:contain}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.top .brandLogo{height:32px}}
+
+button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
+button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+
+
+/* unified Cinemap header v2 */
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+
+
+.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
+</style>
+</head>
+<body>
+
+<header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="cinelva/index.html"><img class="gLogo" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt="" style="width:32px;height:32px;object-fit:contain"><span style="font:600 21px Georgia,serif;color:#f2dfbb;margin-left:5px">CINELVA</span></a>
+ <form class="gSearchForm" action="cinelva/search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品を検索" autocomplete="off" aria-label="作品を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html"><img class="gLogo" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt="" style="width:32px;height:32px;object-fit:contain"><span style="font:600 21px Georgia,serif;color:#f2dfbb;margin-left:5px">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="cinelva/index.html">カレンダー</a>
+ <a href="cinelva/discover.html">映画を探す</a>
+ <a href="cinelva/rankings.html">ランキング</a>
+ <a href="cinelva/theaters.html">映画館を探す</a>
+ <a href="cinelva/experience.html">上映方式・設備</a>
+ <a href="cinelva/my-cinemap.html">My CINELVA</a>
+ <a href="cinelva/agent.html">映画コンシェルジュ</a>
+</aside><main class="wrap">
+<a class="back" href="cinelva/index.html">← カレンダーへ戻る</a>
+<h1>Credits / Data Sources</h1>
+<p class="muted">CINELVAは、利用条件が明確なAPI・オープンデータを優先して使用します。許諾が明確でない第三者サイトの評価・ランキング・上映時刻等は自動取得しません。</p>
+
+<section class="card">
+<h2>TMDB</h2>
+<a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">
+<img class="tmdbLogo" src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="TMDB">
+</a>
+<p class="muted">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+<p class="muted">映画メタデータ、画像、公開日、TMDB評価等にTMDB APIを利用しています。</p>
+<a href="https://developer.themoviedb.org/docs/faq" target="_blank" rel="noopener noreferrer">TMDB API attribution requirements </a>
+</section>
+
+<section class="card">
+<h2>JustWatch</h2>
+<span class="badge">Streaming availability source</span>
+<p class="muted">配信・レンタル・購入の提供状況は、TMDB Watch Providers APIを通じて提供されるJustWatchのデータを利用しています。Watch Providersの利用条件に従い、JustWatchをデータ提供元として表示しています。</p>
+<a href="https://developer.themoviedb.org/reference/movie-watch-providers" target="_blank" rel="noopener noreferrer">TMDB Watch Providers / JustWatch attribution </a>
+</section>
+
+<section class="card">
+<h2>Wikidata</h2>
+<span class="badge">CC0</span>
+<p class="muted">全国映画館マスタには、CC0で公開されるWikidataの構造化データを利用します。上映時刻データとは分離して管理します。</p>
+<a href="https://www.wikidata.org/wiki/Wikidata:Licensing" target="_blank" rel="noopener noreferrer">Wikidata licensing </a>
+</section>
+
+<section class="card">
+<h2>OpenStreetMap</h2>
+<span class="badge">ODbL 1.0</span>
+<p class="muted">映画館ディレクトリのカバレッジ拡張にはOpenStreetMapの映画館データを利用できます。OpenStreetMap contributorsへの帰属を表示し、ODbLの条件に従って取り扱います。</p>
+<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors / ODbL</a>
+</section>
+
+<section class="card">
+<h2>Pexels / Francisco Davids</h2>
+<p class="muted">上映体験ページの比較画像には、Pexelsで無料利用可能なFrancisco Davids撮影の水中写真を使用しています。同一画像を各アスペクト比でクロップして比較します。</p>
+<a href="https://www.pexels.com/photo/diver-and-coral-reef-10519044/" target="_blank" rel="noopener noreferrer">写真の出典</a>
+</section>
+
+<section class="card">
+<h2>第三者サービス</h2>
+<p class="muted">Filmarks等、CINELVAがデータ利用許諾または正式なAPIライセンスを保有していないサービスについては、評価点・ランキング・レビュー等を取得・保存・再掲載しません。必要に応じて通常の外部リンクのみ提供します。</p>
+</section>
+
+<section class="card">
+<h2>映画批評</h2><p class="muted">編集者が確認した記事・動画へのリンクと短い独自要約を表示します。本文の転載、スクレイピング、ページ閲覧ごとの外部批評検索は行いません。</p><a href="cinelva/privacy.html">Privacy</a></section>
+
+<section class="card">
+<h2>Compliance</h2>
+<p class="muted">新規データソースは、本番利用前に利用規約、API条件、帰属表示、再配布・保存可否を確認します。確認できない場合は自動取得を無効のままとします。</p>
+<a href="https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md" target="_blank" rel="noopener noreferrer">CINELVA Compliance Policy </a>
+</section>
+</main><script>
+(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
+</script>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.59</div></body></html>

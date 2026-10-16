@@ -1,4 +1,4 @@
-/* My Cinemap uploaded cinema templates: use the uploaded visual itself as the background. */
+/* My CINELVA uploaded cinema templates: use the uploaded visual itself as the background. */
 (() => {
   const originalDrawArtwork=drawArtwork;
   const originalDrawBrand=drawBrand;
@@ -95,7 +95,7 @@
     ctx.save();ctx.strokeStyle=p.fg;ctx.globalAlpha=.96;ctx.lineWidth=1.7*s;ctx.strokeRect(x,y,tile,tile);
     const beam=ctx.createLinearGradient(x+tile*.46,y,x+tile+12*s,y);beam.addColorStop(0,p.dark?'rgba(255,231,183,.78)':'rgba(111,76,34,.54)');beam.addColorStop(1,'rgba(222,187,131,0)');
     ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+tile*.46,y+tile*.38);ctx.lineTo(x+tile+12*s,y+tile*.20);ctx.lineTo(x+tile+12*s,y+tile*.82);ctx.lineTo(x+tile*.46,y+tile*.64);ctx.closePath();ctx.fill();
-    ctx.globalAlpha=1;ctx.fillStyle=p.fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`600 ${wordSize}px ${artDisplay}`;ctx.fillText('C',x+7*s,y+1*s);ctx.font=`600 ${wordSize*.95}px ${artDisplay}`;ctx.fillText('Cinemap',x+tile+gap,y-2*s);
+    ctx.globalAlpha=1;ctx.fillStyle=p.fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`600 ${wordSize}px ${artDisplay}`;ctx.fillText('C',x+7*s,y+1*s);ctx.font=`600 ${wordSize*.95}px ${artDisplay}`;ctx.fillText('CINELVA',x+tile+gap,y-2*s);
     ctx.fillStyle=p.dark?'#f0dfc4':'#514335';ctx.globalAlpha=.96;ctx.font=`700 ${tagSize}px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+gap+1*s,y+tile*.72);ctx.restore();
   }
 
@@ -104,7 +104,7 @@
     const revision=++artworkRevision;
     clearTimeout(blobTimer);
     blobTimer=setTimeout(()=>{
-      c.toBlob(blob=>{if(!blob||revision!==artworkRevision)return;artworkFile=new File([blob],'my-cinemap.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
+      c.toBlob(blob=>{if(!blob||revision!==artworkRevision)return;artworkFile=new File([blob],'my-cinelva.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
     },220);
   }
 

@@ -80,7 +80,7 @@ required_html = [
     '<option value="single" selected>縦1列</option>','<option value="double">左右2列</option>',
     'data-theme="minimal"','data-theme="noir"','data-theme="burgundy"','data-theme="bluegray"',
     '>Minimal<','>Noir Editorial<','>Burgundy Journal<','>Blue Grey Archive<',
-    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage"',
+    '<header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage"',
 ]
 missing_html = [token for token in required_html if token not in html]
 if missing_html:

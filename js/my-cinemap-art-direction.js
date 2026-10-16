@@ -1,4 +1,4 @@
-/* My Cinemap art-direction controls: compact editor, fonts, uploaded cinema templates, and director hydration. */
+/* My CINELVA art-direction controls: compact editor, fonts, uploaded cinema templates, and director hydration. */
 (() => {
   const FONT_KEY='cinemap-my-font-style';
   const FONT_VALUES=['modern','clean','classic'];

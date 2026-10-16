@@ -1,0 +1,67 @@
+{
+  "baseCommit": "65dc9f109d93dadba74da9e4a96695b2d91575a9",
+  "note": "Literal legacy namespaces, including storage keys and events. Display rename must preserve them. Canonical record and Ocean modules stay byte-identical.",
+  "namespaces": {
+    "critic.html": [
+      "cinemap-brand-image-v3",
+      "cinemap-brand-v1",
+      "cinemap-critic-unlocked-"
+    ],
+    "index.html": [
+      "cinema-theater-prefecture",
+      "cinemaNow.active",
+      "cinemaNow.mode",
+      "cinemap-brand-image-v3",
+      "cinemap-brand-v1"
+    ],
+    "js/my-cinemap-art-direction.js": [
+      "cinemap-my-cinema-background",
+      "cinemap-my-cinema-theme",
+      "cinemap-my-font-style",
+      "cinemap-my-list",
+      "cinemap-my-saved-list"
+    ],
+    "js/my-cinemap-tools.js": [
+      "cinemap-my-candidates",
+      "cinemap-my-list",
+      "cinemap-my-saved-lists"
+    ],
+    "my-cinemap.html": [
+      "cinemap-brand-image-v3",
+      "cinemap-brand-v1",
+      "cinemap-my-list",
+      "cinemap-my-saved-list"
+    ],
+    "preview/ocean/js/my-cinemap-art-direction.js": [
+      "cinemap-my-cinema-background",
+      "cinemap-my-cinema-theme",
+      "cinemap-my-font-style",
+      "cinemap-my-list",
+      "cinemap-my-saved-list"
+    ],
+    "preview/ocean/js/my-cinemap-tools.js": [
+      "cinemap-my-candidates",
+      "cinemap-my-list",
+      "cinemap-my-saved-lists"
+    ],
+    "preview/ocean/js/ocean-3d-primary.js": [
+      "cinemap:ocean:last-shown-growth"
+    ],
+    "preview/ocean/js/ocean-view.js": [
+      "cinemap-ocean-camera"
+    ],
+    "preview/ocean/js/viewing-records-demo.js": [
+      "cinemap-ocean-demo-records-v1"
+    ],
+    "preview/ocean/js/viewing-records.js": [
+      "cinemap-viewing-records-v1"
+    ]
+  },
+  "unchangedModules": {
+    "preview/ocean/js/viewing-records.js": "5386fe1c15857f66f0a23150305e553c646d6f1c31008e74adf169044a4875fc",
+    "preview/ocean/js/viewing-records-demo.js": "88482ab832bce91b43977d7714e86c4f8a37ab5761a328d4a5af891e4622abae",
+    "preview/ocean/js/ocean-model.js": "4ef2c8c914b4a0b0779377d459c54342c6056c9a42b3f8181e6b20c29ea5646f",
+    "preview/ocean/js/ocean-ecosystem.js": "ed091823372ca629bc35a3eb880308778681a9dd7dd472bc5a2adbab11d11de0",
+    "preview/ocean/real-fish/photo-four-points.js": "b94416895f6a0ef5d1009e9f73c9e8793d083a517f400e06f9e8b109c168b69b"
+  }
+}

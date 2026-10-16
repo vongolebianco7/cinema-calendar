@@ -1,0 +1,64 @@
+name: CINELVA backup safety
+on:
+  pull_request:
+    paths:
+      - 'data-backup.html'
+      - '*.html'
+      - 'manifest.webmanifest'
+      - 'js/data-backup.js'
+      - 'js/my-cinemap-*.js'
+      - 'preview/ocean/**'
+      - 'tests/cinelva-backup*.cjs'
+      - 'tests/cinelva-brand-browser.cjs'
+      - 'tests/cinelva-storage.test.cjs'
+      - 'tests/test_cinelva_release.py'
+      - 'docs/rebranding/cinelva/storage-contract.json'
+      - 'scripts/compare_cinelva_journeys.cjs'
+      - '.github/workflows/cinelva-backup.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node --test tests/cinelva-backup.test.cjs tests/cinelva-storage.test.cjs
+          python3 -m unittest discover -s tests -p test_cinelva_release.py -v
+      - name: Install isolated browser test dependencies
+        run: |
+          mkdir -p /tmp/cinelva-browser-deps
+          npm install --prefix /tmp/cinelva-browser-deps --no-audit --no-fund playwright@1.59.0
+          /tmp/cinelva-browser-deps/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Verify mobile and desktop backup journeys
+        env:
+          NODE_PATH: /tmp/cinelva-browser-deps/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-http.log 2>&1 &
+          node tests/cinelva-backup-browser.cjs
+          node tests/cinelva-brand-browser.cjs
+      - name: Compare core journeys with the exact pre-rebrand baseline
+        run: |
+          ln -s /tmp/cinelva-browser-deps/node_modules node_modules
+          mkdir -p /tmp/cinelva-baseline-check
+          git archive 65dc9f109d93dadba74da9e4a96695b2d91575a9 | tar -x -C /tmp/cinelva-baseline-check
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory /tmp/cinelva-baseline-check > /tmp/cinelva-baseline-http.log 2>&1 &
+          for browser in chromium webkit; do
+            CINEMAP_BROWSER="$browser" CINEMAP_BASE_URL=http://127.0.0.1:8766 node tests/journeys/core-journeys.mjs
+            cp "artifacts/completeness/metrics/journeys-$browser.json" "/tmp/cinelva-baseline-$browser.json"
+            CINEMAP_BROWSER="$browser" CINEMAP_BASE_URL=http://127.0.0.1:8765 node tests/journeys/core-journeys.mjs
+            node scripts/compare_cinelva_journeys.cjs "/tmp/cinelva-baseline-$browser.json" "artifacts/completeness/metrics/journeys-$browser.json" > "artifacts/completeness/cinelva-comparison-$browser.json"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cinelva-regression-evidence
+          path: artifacts/completeness/
+          retention-days: 7

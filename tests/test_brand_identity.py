@@ -8,12 +8,13 @@ BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
 ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
 
 class BrandIdentityTests(unittest.TestCase):
-    def test_primary_pages_use_image_based_b_lockup(self):
+    def test_primary_pages_use_original_symbol_with_cinelva_text(self):
         for page in PAGES:
             text = (ROOT / page).read_text(encoding="utf-8")
             self.assertIn("cinemap-brand-image-v3", text, page)
             self.assertIn("gBrandImage", text, page)
-            self.assertGreaterEqual(text.count(BRAND_ASSET), 2, page)
+            self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
+            self.assertGreaterEqual(text.count('class="gBrandWord">CINELVA</span>'), 2, page)
             self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
             self.assertIn('.gBrandImage{display:block;width:132px;height:auto;max-width:none}', text, page)
             self.assertIn('@media(max-width:370px){.gBrandImage{width:118px}}', text, page)
@@ -24,7 +25,7 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn("gBrandTagline", text, page)
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
 
-            lockup = f'<a class="gBrand" href="index.html" aria-label="Cinemap"><img class="gBrandImage" src="{BRAND_ASSET}" alt="Cinemap"></a>'
+            lockup = f'<a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="{ICON_ASSET}" alt=""><span class="gBrandWord">CINELVA</span></a>'
             self.assertGreaterEqual(text.count(lockup), 2, page)
 
     def test_primary_pages_use_uploaded_icon_asset(self):
@@ -44,10 +45,11 @@ class BrandIdentityTests(unittest.TestCase):
         self.assertIn("function drawBrand", text)
         self.assertIn("EXPLORE CINEMA", text)
 
-    def test_manifest_is_cinemap_branded(self):
+    def test_manifest_is_cinelva_branded_with_existing_symbol(self):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["name"], "Cinemap")
-        self.assertEqual(manifest["short_name"], "Cinemap")
+        self.assertEqual(manifest["name"], "CINELVA")
+        self.assertEqual(manifest["short_name"], "CINELVA")
+        self.assertTrue(all(item["src"] == ICON_ASSET for item in manifest["icons"]))
         self.assertEqual(manifest["theme_color"], "#0a0c0f")
 
 if __name__ == "__main__":

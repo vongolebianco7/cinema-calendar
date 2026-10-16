@@ -14,8 +14,8 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn("cinemap-brand-image-v3", text, page)
             self.assertIn("gBrandImage", text, page)
             self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
-            self.assertGreaterEqual(text.count('class="gBrandWord">Cinelva</span>'), 2, page)
-            self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
+            self.assertGreaterEqual(text.count('class="gBrandWord">Cinelva</span>'), 1 if page == "my-cinemap.html" else 2, page)
+            if page != "my-cinemap.html": self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
             self.assertIn('.gBrandImage{display:block;width:132px;height:auto;max-width:none}', text, page)
             self.assertIn('@media(max-width:370px){.gBrandImage{width:118px}}', text, page)
             self.assertNotIn("gBrandTile", text, page)
@@ -26,7 +26,7 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
 
             lockup = f'<a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="{ICON_ASSET}" alt=""><span class="gBrandWord">Cinelva</span></a>'
-            self.assertGreaterEqual(text.count(lockup), 2, page)
+            self.assertGreaterEqual(text.count(lockup), 1 if page == "my-cinemap.html" else 2, page)
 
     def test_primary_pages_use_uploaded_icon_asset(self):
         for page in PAGES:

@@ -4,6 +4,15 @@ on:
   push:
     paths:
       - "*.html"
+      - "js/cinelva-*.js"
+      - "js/data-backup.js"
+      - "my-cinelva/**"
+      - "tests/cinelva-insights.test.cjs"
+      - "tests/cinelva-library-records.test.cjs"
+      - "tests/cinelva-my-page-*.cjs"
+      - "tests/cinelva-storage.test.cjs"
+      - "tests/cinelva-backup.test.cjs"
+      - "tests/test_my_cinemap_three_column_export.py"
       - "backend/app/api/critic-videos/route.ts"
       - "js/critic-evidence.js"
       - "js/my-cinemap-art.js"
@@ -30,6 +39,15 @@ on:
   pull_request:
     paths:
       - "*.html"
+      - "js/cinelva-*.js"
+      - "js/data-backup.js"
+      - "my-cinelva/**"
+      - "tests/cinelva-insights.test.cjs"
+      - "tests/cinelva-library-records.test.cjs"
+      - "tests/cinelva-my-page-*.cjs"
+      - "tests/cinelva-storage.test.cjs"
+      - "tests/cinelva-backup.test.cjs"
+      - "tests/test_my_cinemap_three_column_export.py"
       - "backend/app/api/critic-videos/route.ts"
       - "js/critic-evidence.js"
       - "js/my-cinemap-art.js"
@@ -61,7 +79,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -90,10 +108,20 @@ jobs:
               sys.exit(1)
           print("All inline JavaScript syntax checks passed.")
           PY
-      - name: Check My Cinemap artwork JavaScript syntax
-        run: node --check js/my-cinemap-art.js
-      - name: Check My Cinemap export layouts
+      - name: Check My Cinelva record model and views
+        run: |
+          node --check js/cinelva-library-records.js
+          node --check js/cinelva-insights.js
+          node --check js/cinelva-records-page.js
+          node --check js/cinelva-share-image.js
+          node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs
+      - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
+      - name: Run My Cinelva mobile browser journey
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0
+          "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

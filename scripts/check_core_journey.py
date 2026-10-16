@@ -19,8 +19,8 @@ checks={
  "search inline evidence":(search,["js/critic-evidence.js","data/critic_evidence.json","function renderInlineCriticism(","批評情報がまだ十分に集まっていません"]),
  "calendar meaningful detail":(index,["公開・配信・放送の履歴と出典を確認する","監督・出演者","上映方式"]),
  "ranking internal detail":(rankings,["Cinelvaで深掘る","search.html?id="]),
- # My Cinemap enters the existing movie-detail journey first; that page owns the critic CTA.
- "my cinemap deep dive":(my,["search.html?id="]),
+ # My Cinelva keeps records local and routes to record-based image sharing.
+ "my cinelva record sharing":(my,["href=\"my-cinelva/\"","鑑賞実績の共有画像","cinelva-share-image.js"]),
  "creator origin cycle":(discover,["元の作品の批評へ戻る","作り手の作品をたどる"]),
 }
 for name,(body,needles) in checks.items():

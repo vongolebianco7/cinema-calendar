@@ -64,58 +64,27 @@ for required in ['["すべて","通常","リバイバル","午前十時"]', "the
 if "firstSeg" not in calendar or "（継続）" not in calendar:
     errors.append("Calendar UX integration missing continuation marker")
 
-# My Cinemap final layout/template gates.
+# My Cinelva is based on stored viewing history and its image is generated from that history.
 my = text("my-cinemap.html")
-for required in [
-    "themeChoices", "Minimal", "Noir Editorial", "Burgundy Journal",
-    'data-year="2026"', "artCanvas", "js/my-cinemap-art.js", "syncThemeChoices",
-    '<option value="single" selected>縦1列</option>', '<option value="double">左右2列</option>'
-]:
+library = text("js/cinelva-library-records.js")
+share = text("js/cinelva-share-image.js")
+for required in ["鑑賞実績の共有画像", "js/cinelva-library-records.js", "js/cinelva-share-image.js", "data-backup.html"]:
     if required not in my:
-        errors.append(f"My Cinemap enhancement missing: {required}")
-for forbidden in ["Film Note", "Theater Night", "Gallery Editorial", "心に残った10本。"]:
+        errors.append(f"Cinelva viewing-record share page missing: {required}")
+for required in ["records.all()", "canvas.toBlob", "crossOrigin = 'anonymous'", "navigator.share"]:
+    if required not in share:
+        errors.append(f"Cinelva viewing-record image export missing: {required}")
+for required in ["saveUnrated", "function remove(", "cinelva-library-deleted-legacy-v1"]:
+    if required not in library:
+        errors.append(f"Cinelva record compatibility missing: {required}")
+for forbidden in ["候補に追加", "自由に作品を追加", "自分でつくる映画棚", "＋ 棚をつくる"]:
     if forbidden in my:
-        errors.append(f"My Cinemap still contains removed template/content: {forbidden}")
-
-# My Cinemap assist + final artwork gates.
-tools_path = ROOT / "js/my-cinemap-tools.js"
-if not tools_path.exists():
-    errors.append("My Cinemap assist module missing: js/my-cinemap-tools.js")
-else:
-    tools = tools_path.read_text(encoding="utf-8")
-    for required in ["candidateShelf", "候補に追加", "data-replace", "movieComment", "duplicateList", "cinemap-my-candidates", "cinemap-my-saved-lists"]:
-        if required not in tools:
-            errors.append(f"My Cinemap assist feature missing: {required}")
-    for required in ["compactMovieItem", "compactMovieMeta", "movieEditPanel", "movieDirector", "監督", ".themeChoice.premiumTheme.active", "ひとこと（任意）"]:
-        if required not in tools:
-            errors.append(f"My Cinemap compact/director/template feature missing: {required}")
-art = text("js/my-cinemap-art.js")
-for required in [
-    "drawMinimal", "drawNoir", "drawBurgundy", "drawMedal",
-    "function drawBrand", "EXPLORE CINEMA", "Bodoni 72", "m.director", "layout==='double'?2:1", "MY TOP OF 2026"
-]:
-    if required not in art:
-        errors.append(f"My Cinemap final artwork/director missing: {required}")
-direction = text("js/my-cinemap-art-direction.js")
-for required in ["removeDeprecatedTemplates", "cinema-projector", "cinema-theater", "cinema-archive"]:
-    if required not in direction:
-        errors.append(f"My Cinemap current template integration missing: {required}")
-for forbidden in ["{id:'cinema-artdeco'", "Art Deco Cinema"]:
-    if forbidden in direction:
-        errors.append(f"My Cinemap removed cinema template returned: {forbidden}")
-for forbidden in [
-    "drawFilmNote", "drawTheater", "drawGalleryEditorial", "cinemapLogo", "assets/cinemap-logo.png?v=2"
-]:
-    if forbidden in art:
-        errors.append(f"My Cinemap final artwork still uses removed legacy element: {forbidden}")
-if "illustrationMode" in my:
-    errors.append("My Cinemap still exposes the removed illustration setting")
-for js_path in ["js/my-cinemap-art.js", "js/my-cinemap-tools.js", "js/my-cinemap-art-direction.js", "js/my-cinemap-cinema-templates.js"]:
+        errors.append(f"Removed manual collection UI returned: {forbidden}")
+for js_path in ["js/cinelva-share-image.js", "js/cinelva-records-page.js", "js/cinelva-insights.js"]:
     p = ROOT / js_path
-    if p.exists():
-        r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
-        if r.returncode:
-            errors.append(f"JavaScript syntax failed for {js_path}: {r.stderr.strip()}")
+    r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+    if r.returncode:
+        errors.append(f"JavaScript syntax failed for {js_path}: {r.stderr.strip()}")
 
 # IMAX GT directory must include verified screens and an experience-page path.
 if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):

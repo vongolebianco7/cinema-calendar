@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-11T09:57:15.542228+00:00",
+  "generated_at": "2026-10-16T18:49:04.484983+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
-  "note": "日本向けの見放題・レンタル・購入先を定点観測。価格はTMDB watch/providersから取得できないため表示しません。初観測日＝配信開始日ではありません。",
+  "note": "日本向けの見放題・レンタル・購入先の観測です。初観測日は配信開始日ではありません。更新時刻は作品ごとのchecked_atを参照してください。",
   "movies": {
     "3009": {
       "title": "審判",
@@ -989,7 +989,7 @@
         "Amazon Prime Video with Ads",
         "Prime Video"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1769717-m-i-s-s-i-o-n/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1106,7 +1106,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/858017-i-saw-the-tv-glow/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1161,7 +1161,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/948549-love-lies-bleeding/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1278,7 +1278,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1502700/watch",
       "flatrate": [],
       "rent": [],
@@ -1293,7 +1293,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1682421/watch",
       "flatrate": [],
       "rent": [],
@@ -1451,6 +1451,25 @@
             "Apple TV Store",
             "Google Play Movies"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
@@ -1462,7 +1481,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/59952/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1475,12 +1494,10 @@
       ],
       "rent": [
         "Amazon Video",
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ],
       "buy": [
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ]
     },
     "45070": {
@@ -1515,6 +1532,25 @@
             "Apple TV Store",
             "Google Play Movies"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
@@ -1526,7 +1562,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/45070/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1539,12 +1575,10 @@
       ],
       "rent": [
         "Amazon Video",
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ],
       "buy": [
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ]
     },
     "1501242": {
@@ -1569,13 +1603,28 @@
           "buy": [
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Apple TV Store",
+            "FOD",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
         "Amazon Prime Video with Ads",
         "Prime Video"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1501242/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1583,7 +1632,8 @@
       ],
       "rent": [
         "Apple TV Store",
-        "FOD"
+        "FOD",
+        "U-NEXT"
       ],
       "buy": [
         "Apple TV Store"
@@ -1619,7 +1669,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1063020-the-final/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1686,7 +1736,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1023922-maxxxine/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1748,6 +1798,23 @@
             "Apple TV Store",
             "Google Play Movies"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
@@ -1756,7 +1823,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/838209/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1766,13 +1833,11 @@
       ],
       "rent": [
         "Amazon Video",
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ],
       "buy": [
         "Amazon Video",
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ]
     },
     "1522689": {
@@ -1864,6 +1929,22 @@
             "Apple TV Store",
             "Google Play Movies"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
@@ -1871,7 +1952,7 @@
         "Prime Video",
         "U-NEXT"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/912908-strays/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -1880,13 +1961,11 @@
       ],
       "rent": [
         "Apple TV Store",
-        "FOD",
-        "Google Play Movies"
+        "FOD"
       ],
       "buy": [
         "Amazon Video",
-        "Apple TV Store",
-        "Google Play Movies"
+        "Apple TV Store"
       ]
     },
     "406": {
@@ -2212,7 +2291,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1221061-in-die-sonne-schauen/watch?locale=JP",
       "flatrate": [],
       "rent": [
@@ -2237,7 +2316,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1580374/watch?locale=JP",
       "flatrate": [],
       "rent": [
@@ -2340,7 +2419,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1603232/watch"
     },
     "55382": {
@@ -2391,7 +2470,7 @@
       "buy": [
         "Apple TV Store"
       ],
-      "checked_at": "2026-10-08T18:35:57.737488+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/55382-the-movie/watch?locale=JP"
     },
     "1032863": {
@@ -4437,7 +4516,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/980996-i-like-movies/watch?locale=JP"
     },
     "1496183": {
@@ -4477,7 +4556,7 @@
       "buy": [
         "Amazon Video"
       ],
-      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1496183/watch?locale=JP"
     },
     "1651162": {
@@ -5062,7 +5141,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-10-04T21:16:41.697885+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1361774-the-dink/watch?locale=JP"
     },
     "1278101": {
@@ -5951,17 +6030,33 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-10-16T18:49:04.484983+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "HBO Max on U-Next",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
         "HBO Max on U-Next",
-        "Hulu",
-        "U-NEXT"
+        "Hulu"
       ],
       "flatrate": [
         "HBO Max on U-Next",
-        "Hulu",
-        "U-NEXT"
+        "Hulu"
       ],
       "rent": [
         "Amazon Video",
@@ -5974,7 +6069,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-10-07T18:36:08.881969+00:00",
+      "checked_at": "2026-10-16T18:49:04.484983+00:00",
       "source_url": "https://www.themoviedb.org/movie/1054867-one-battle-after-another/watch?locale=JP"
     },
     "1148365": {

@@ -1,41 +1,17 @@
 {
-  "generated_at": "2026-10-11T09:55:48.622171+00:00",
+  "generated_at": "2026-10-16T18:47:16.198708+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-11",
-      "2027-02-08"
+      "2026-09-16",
+      "2027-02-13"
     ],
     "background_slice": [
-      "2026-08-07",
-      "2026-10-05"
+      "2027-06-08",
+      "2027-08-06"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1657515,
-      "title": "「美男高校地球防衛部LOVE！LOVE！」 on STAGE",
-      "original_title": "「美男高校地球防衛部LOVE！LOVE！」 on STAGE",
-      "date": "2025-10-13",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/mQRcUu9jyWjGz09hMUdnehSY8qf.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1657515",
-      "director": "村井雄",
-      "director_id": 4028894,
-      "cast": [
-        "広井雄士",
-        "Nakamoto Taiga",
-        "佐藤たかみち",
-        "新納直"
-      ],
-      "countries": [],
-      "runtime": 120,
-      "genres": []
-    },
     {
       "id": 14572,
       "title": "機動警察パトレイバー2 the Movie",
@@ -19678,7 +19654,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1160360,
@@ -19688,8 +19664,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5CTl7SVUP6kfbVXn36Qj8Kci0B.jpg",
-      "score": 6.3,
-      "votes": 429,
+      "score": 6.342,
+      "votes": 438,
       "overview": "家事と育児、セラピストの仕事に追われるリンダは、原因不明の病を抱える幼い娘の世話に追い詰められていた。顧客の患者への対応、娘の担当医からの叱責、出張中の口うるさい夫からの電話──休まる暇もない日々の中、自宅アパートの天井が突然崩落し、娘とともに海辺の格安モーテルへ移り住むことに。誰にも頼れない孤独のなかで限界を迎えた彼女は、思いもよらぬ事態へと飲み込まれていく──。",
       "tmdb": "https://www.themoviedb.org/movie/1160360",
       "director": "Mary Bronstein",
@@ -19707,7 +19683,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1391021,
@@ -19908,7 +19884,7 @@
       "countries": [],
       "runtime": 141,
       "genres": [],
-      "checked_at": "2026-10-05T18:35:02.862445+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1645621,
@@ -20357,7 +20333,7 @@
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gSSnEwxXErFMhHwDY8yBPuN6hIj.jpg",
       "score": 7.4,
-      "votes": 592,
+      "votes": 594,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/3009",
       "director": "オーソン・ウェルズ",
@@ -20379,7 +20355,7 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00",
+      "checked_at": "2026-10-16T18:47:16.198708+00:00",
       "revival": true,
       "original_jp_release_date": "1964-01-28",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -20744,7 +20720,7 @@
         "ドラマ",
         "ファンタジー"
       ],
-      "checked_at": "2026-10-07T18:34:19.421700+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1275779,
@@ -20979,7 +20955,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-05T18:35:02.862445+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1786485,
@@ -21005,8 +20981,35 @@
         "Japan"
       ],
       "runtime": 80,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1792352,
+      "title": "逃げろお嬢さん",
+      "original_title": "逃げろお嬢さん",
+      "date": "2026-10-02",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/sl9cTq0Eq8dR5y7K4NvCHGQR7i0.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "吉田修一（『国宝』）による短編集『逃亡小説集』（角川文庫/KADOKAWA 刊）内に収められている「逃げろお嬢さん」が映画化、2026年10月2日に全国公開を迎える。\r 主人公の康太を演じるのは、映画『ひとりぼっちじゃない』に続き、映画主演2作目となる井口理（King Gnu）。音楽、俳優として活躍の場を広げる井口が、大勘違いの中、推しのために一生懸命奮闘する康太を演じる。\r 康太が長年推している元アイドル・鮎川舞子には、話題作の出演が続く深川麻衣。ある事情で行方不明の舞子が康太に出会い、揺れ動く心情を繊細に表現している。\r 監督は、『世界の中心で、愛をさけぶ』『スカイ・クロラ The Sky Crawlers』などの脚本家として活躍する一方、近年では、『ひとりぼっちじゃない』『サイド バイ サイド 隣にいる人』で脚本・監督を務める伊藤ちひろ監督。井口とは、主演と監督としては2度目のタッグになり、絶対的な信頼関係で本作を紡ぎあげた。\r 一億総推し時代と言われている今、自分の人生を支えてくれた推しを、信じ抜くことで守ろうとした、ある男の小さな奇跡の一日の物語があなたの心を照らす。",
+      "tmdb": "https://www.themoviedb.org/movie/1792352",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "井口理",
+        "深川麻衣"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 100,
       "genres": [],
-      "checked_at": "2026-10-05T18:35:02.862445+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1666802,
@@ -21032,7 +21035,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00",
+      "checked_at": "2026-10-16T18:47:16.198708+00:00",
       "revival": true,
       "original_jp_release_date": "2020-02-04",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21181,7 +21184,7 @@
       ],
       "runtime": 23,
       "genres": [],
-      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1792196,
@@ -21210,7 +21213,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-09T18:32:15.592420+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1670114,
@@ -21277,8 +21280,8 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
-      "score": 8.086,
-      "votes": 4738,
+      "score": 8.087,
+      "votes": 4745,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/406",
       "director": "マチュー・カソヴィッツ",
@@ -21296,7 +21299,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00",
+      "checked_at": "2026-10-16T18:47:16.198708+00:00",
       "revival": true,
       "original_jp_release_date": "1996-02-17",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21515,10 +21518,14 @@
       "director": null,
       "director_id": null,
       "cast": [],
-      "countries": [],
-      "runtime": 0,
-      "genres": [],
-      "checked_at": "2026-10-06T18:32:14.724206+00:00"
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1793888,
@@ -21544,6 +21551,36 @@
       "checked_at": "2026-10-11T09:55:48.622171+00:00"
     },
     {
+      "id": 1234139,
+      "title": "ஜெயிலர் 2",
+      "original_title": "ஜெயிலர் 2",
+      "date": "2026-10-15",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
+      "score": 8.0,
+      "votes": 4,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1234139",
+      "director": "நெல்சன் திலீப்குமார்",
+      "director_id": 1378577,
+      "cast": [
+        "ラジニカント",
+        "S. J. Suryah",
+        "Mithun Chakraborty",
+        "Suraj Venjaramoodu"
+      ],
+      "countries": [
+        "India"
+      ],
+      "runtime": 163,
+      "genres": [
+        "アクション",
+        "コメディ"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
       "id": 59352,
       "title": "太陽を盗んだ男",
       "original_title": "太陽を盗んだ男",
@@ -21551,8 +21588,8 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/avcCRRIsQ1Toz0F18zvQ5zOg7QR.jpg",
-      "score": 7.4,
-      "votes": 42,
+      "score": 7.372,
+      "votes": 43,
       "overview": "中学校の理科教師である城戸誠（沢田研二）は、茨城県東海村の原子力発電所から液体プルトニウムを強奪し、アパートの自室でハンドメイドの原爆を完成させた。そして、金属プルトニウムの欠片を仕込んだダミー原爆を国会議事堂に置き去り、日本政府を脅迫する。",
       "tmdb": "https://www.themoviedb.org/movie/59352",
       "director": "長谷川和彦",
@@ -21572,7 +21609,7 @@
         "スリラー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00",
+      "checked_at": "2026-10-16T18:47:16.198708+00:00",
       "revival": true,
       "original_jp_release_date": "1979-10-06",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21893,12 +21930,12 @@
         "Sanisha Bhattarai"
       ],
       "countries": [],
-      "runtime": 0,
+      "runtime": 158,
       "genres": [
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1283320,
@@ -22163,7 +22200,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1755291,
@@ -22173,9 +22210,9 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/b4Gyj8VRoJAeU13jfKPuOTMr5GL.jpg",
-      "score": 8.0,
-      "votes": 24,
-      "overview": "",
+      "score": 8.1,
+      "votes": 85,
+      "overview": "夜のテルアビブ、とある建物の屋上でイスラエル人ジャーナリストのユヴァル・アブラハームとラヘル・ショールは、イスラエル軍の兵士と諜報員24名に極秘インタビューを行った。ガザでの民間人殺害について、どのような指令を受けたのか。何をしたのか。ある者はデジタル化された遠隔攻撃を「事務作業のようなものだ」と語り、ある者は「食糧配給所に人が集まったところを撃った」と証言する。ひとりひとりの言葉から浮かび上がるのは、イスラエル国家が組織的に作り上げた、人間を人間としてみなさない＜虐殺を可能にするシステム＞だった。",
       "tmdb": "https://www.themoviedb.org/movie/1755291",
       "director": "ユヴァル・アブラハム",
       "director_id": 4487239,
@@ -22186,11 +22223,101 @@
         "United States of America",
         "United Kingdom"
       ],
-      "runtime": 80,
+      "runtime": 77,
       "genres": [
+        "ドキュメンタリー",
+        "戦争"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1797226,
+      "title": "하이브 치어링 파티",
+      "original_title": "하이브 치어링 파티",
+      "date": "2026-10-24",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1797226",
+      "director": "Park Sang-geun",
+      "director_id": 5361732,
+      "cast": [
+        "알엠",
+        "진",
+        "슈가",
+        "제이홉"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 60,
+      "genres": [
+        "音楽"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1797200,
+      "title": "세븐틴 월드 투어 '뉴_'",
+      "original_title": "세븐틴 월드 투어 '뉴_'",
+      "date": "2026-10-24",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/p3SW5xiKdUJ0zIY3hMyyCQ6tcru.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1797200",
+      "director": "Taehwan Yum",
+      "director_id": 3432927,
+      "cast": [
+        "에스쿱스",
+        "정한",
+        "조슈아",
+        "文俊辉"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 103,
+      "genres": [
+        "音楽",
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-02T18:32:50.586098+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1688795,
+      "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
+      "original_title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
+      "date": "2026-10-24",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/aRoPHxYzfQjCLxSp4H4sJANNmou.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1688795",
+      "director": "Taehwan Yum",
+      "director_id": 3432927,
+      "cast": [
+        "수빈",
+        "연준",
+        "범규",
+        "태현"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 97,
+      "genres": [
+        "音楽",
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 517815,
@@ -22219,7 +22346,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1102390,
@@ -22229,7 +22356,7 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/pM3hP7ODKhjFvw50hvikqDumDnl.jpg",
-      "score": 5.792,
+      "score": 5.8,
       "votes": 12,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1102390",
@@ -22248,7 +22375,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1400940,
@@ -22258,8 +22385,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/7MRyzFaVkTvRY5UNES8pw66XK0a.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 8.6,
+      "votes": 6,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1400940",
       "director": "ジェームズ・ワトキンス",
@@ -22279,7 +22406,7 @@
         "スリラー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1748514,
@@ -22306,7 +22433,7 @@
       ],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1646897,
@@ -22336,7 +22463,7 @@
         "犯罪",
         "ドラマ"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1555226,
@@ -22365,7 +22492,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 164328,
@@ -22396,7 +22523,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1381071,
@@ -22427,7 +22554,7 @@
         "ホラー",
         "アクション"
       ],
-      "checked_at": "2026-10-03T22:22:31.507074+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1278101,
@@ -22437,14 +22564,14 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
-      "score": 8.724,
-      "votes": 145,
+      "score": 8.775,
+      "votes": 151,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "tmdb": "https://www.themoviedb.org/movie/1278101",
       "director": "Yang Lina",
       "director_id": 1149365,
       "cast": [
-        "易烊千璽",
+        "ジャクソン・イー",
         "林晓杰",
         "ジアン・チンチン",
         "周雨彤"
@@ -22457,7 +22584,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1773014,
@@ -22486,7 +22613,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1707282,
@@ -22610,6 +22737,58 @@
       "checked_at": "2026-10-04T21:14:50.255842+00:00"
     },
     {
+      "id": 1283515,
+      "title": "ヴェリティ／真実",
+      "original_title": "Verity",
+      "date": "2026-11-06",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/zPHfsaiMZT1HNz1ZS55iyLKZkFG.jpg",
+      "score": 6.4,
+      "votes": 207,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1283515",
+      "director": "マイケル・ショウォーター",
+      "director_id": 22215,
+      "cast": [
+        "アン・ハサウェイ",
+        "ダコタ・ジョンソン",
+        "ジョシュ・ハートネット",
+        "Brady Wagner"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 114,
+      "genres": [
+        "謎",
+        "スリラー"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1795736,
+      "title": "星の教室",
+      "original_title": "星の教室",
+      "date": "2026-11-06",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/cvOS0T7bals4dRLsYu15YOMmgsM.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "中学生の頃、いじめが原因で学校へ通えなくなり、義務教育を十分に受けられないまま大人になった潤間さやか  （桜田ひより）。学歴への引け目や生きづらさを抱えながらフリーターとして日々を過ごしていたある日、さまさまな事情から学ぶ機会を失った人たちのための\"夜間中学”があることを知る。  「もう一度やり直したいーー」勇気を振り絞って夜間中学の門を叩いたさやかは、中国残留孤児の蕗子（浅野温子）、ベトナム出身のスアン（ナターシャ）、料亭で修業に励む健児（小林虎之介）、韓国料理店を営む正子（中尾ミエ）、戦後の混乱の中で十分な教育を受けられなかった  遠見（山本學）ら、年齢も国籍も境遇も異なる仲間たちと出会う。生徒たちに寄り添う担任教師・江口（真木よう子） や夜間中学を取材する漫画家・用瀬（小泉孝太郎）  らの支えのもと、さやかの2度目の中学生活が始まる。  仲間たちとの出会いは、止まっていた彼女の人生を少しずつ動かしていくのだった。",
+      "tmdb": "https://www.themoviedb.org/movie/1795736",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "桜田ひより"
+      ],
+      "countries": [],
+      "runtime": 108,
+      "genres": [],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
       "id": 1755423,
       "title": "となりのとらんす少女ちゃん",
       "original_title": "となりのとらんす少女ちゃん",
@@ -22665,7 +22844,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-08T18:34:09.239976+00:00",
+      "checked_at": "2026-10-16T18:47:16.198708+00:00",
       "revival": true,
       "original_jp_release_date": "2009-08-08",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -22914,6 +23093,35 @@
         "アドベンチャー"
       ],
       "checked_at": "2026-10-04T21:14:50.255842+00:00"
+    },
+    {
+      "id": 1707955,
+      "title": "呪いのスマホ",
+      "original_title": "呪いのスマホ",
+      "date": "2026-11-13",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/7ZsxOt6MnEf2Z67sEMJoEPKMPe4.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "ある事件をきっかけに心を閉ざしてしまった孤独な女子高生・榊ユラは、同級生と一緒に立入禁止の旧校舎を掃除することになる。彼らはそこで、ボロボロになった1台のスマホを見つけるが、突如として画面が起動し不気味な動画が流れはじめる。その動画を目にしたことで呪いのスマホとつながってしまったユラたちは、それ以来「死の通知」を受け取るようになり、1人また1人と命を落としていく。やがてユラは呪いのスマホに隠された衝撃の真実にたどり着くが、それはさらなる恐怖の幕開けに過ぎなかった。",
+      "tmdb": "https://www.themoviedb.org/movie/1707955",
+      "director": "山元環",
+      "director_id": 2353589,
+      "cast": [
+        "早瀬憩",
+        "窪塚愛流",
+        "井手上漠",
+        "坂巻有紗"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 102,
+      "genres": [
+        "ホラー"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1159206,
@@ -23620,6 +23828,31 @@
       "checked_at": "2026-10-07T18:34:19.421700+00:00"
     },
     {
+      "id": 1794649,
+      "title": "コール＆レスポンス",
+      "original_title": "コール＆レスポンス",
+      "date": "2026-12-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/bHMMZuEzFWDfmicQ0KtU4hJ43wy.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "少年院3か所で行われたラップ・ワークショップ。少年たちが、自らに名前〈MC ネーム〉を与え、言葉〈リリック〉に想いを乗せていく。塀の中のラップが届けられたのは、大人たちの〈市民ラップチーム〉。対面できないもどかしさをも超えて応答し合い、ある少年院では、地域住民と直接交流し、交わることのないと思えた人生が交差していく。そしてまた別の少年院では犯罪の加害者、被害者、異なる立場の大人たちとの出会いを通してラップを生み出していく。",
+      "tmdb": "https://www.themoviedb.org/movie/1794649",
+      "director": "坂上香",
+      "director_id": 1231432,
+      "cast": [
+        "FUNI"
+      ],
+      "countries": [],
+      "runtime": 229,
+      "genres": [
+        "ドキュメンタリー",
+        "音楽"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
       "id": 478798,
       "title": "風林火山",
       "original_title": "風林火山",
@@ -23824,6 +24057,92 @@
         "ドラマ",
         "謎"
       ]
+    },
+    {
+      "id": 1317512,
+      "title": "ジュインはリンゴが嫌い",
+      "original_title": "세계의 주인",
+      "date": "2026-12-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/A3yTrZi1hSGTYcAEqEPXd3FO2sG.jpg",
+      "score": 7.7,
+      "votes": 40,
+      "overview": "快活で物怖じしない17歳の女子高生ジュインが主人公。怒りと勢いに任せて口にした言葉がきっかけで校内に騒動を巻き起こし、匿名の手紙が届き始めたことから、彼女の平穏な日常が崩れていく。",
+      "tmdb": "https://www.themoviedb.org/movie/1317512",
+      "director": "윤가은",
+      "director_id": 1583324,
+      "cast": [
+        "서수빈",
+        "チャン・ヘジン",
+        "김정식",
+        "강채윤"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 119,
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1785714,
+      "title": "恋する地球人 -劇場特別版-",
+      "original_title": "恋する地球人 -劇場特別版-",
+      "date": "2026-12-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/lC4YEgGjMy8PMS3z2zYI5JYIDRD.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1785714",
+      "director": "上田慎一郎",
+      "director_id": 2130029,
+      "cast": [
+        "カトウシンスケ",
+        "清瀬やえこ",
+        "菊池剛",
+        "細川佳央"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 102,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1785664,
+      "title": "羊の皮を着たケモノ",
+      "original_title": "羊の皮を着たケモノ",
+      "date": "2026-12-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/gqGz9hj8T8p7M5XeFnb5BtKZrHU.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1785664",
+      "director": "杨礼平",
+      "director_id": 4972728,
+      "cast": [
+        "鈴木伸之",
+        "柏木悠"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ロマンス"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1759805,
@@ -24964,6 +25283,35 @@
         "ドラマ",
         "謎"
       ]
+    },
+    {
+      "id": 1798422,
+      "title": "認知症世界の歩き方",
+      "original_title": "認知症世界の歩き方",
+      "date": "2027-02-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/uBFPb9o9lUd6ijeKHEAYzfqlMZQ.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "「うちに帰りたい」が口癖の豊さんは、施設で陽気に暮らすムードメーカー。ただし、認知症で記憶は20数年前にしばしばタイムスリップ！そんな彼の元に、長らく音信不通だったワケありの次男・優輝が突然現れる。目の前の優輝を「息子」だと認識できないばかりか、元妻と離婚したことすらわからない豊さん。財産確認のためにかつての我が家を目指し、思わぬ“父子の二人旅”がスタートするも、道中は迷子や謎の幻想、幻聴など、豊さんが生きる不思議な認知症世界に次々と直面していく―。",
+      "tmdb": "https://www.themoviedb.org/movie/1798422",
+      "director": "Yoshihiro Tamura",
+      "director_id": 6551484,
+      "cast": [
+        "ルー大柴",
+        "泉澤祐希",
+        "安藤なつ",
+        "浅野ゆう子"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 94,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-16T18:47:16.198708+00:00"
     },
     {
       "id": 1147572,

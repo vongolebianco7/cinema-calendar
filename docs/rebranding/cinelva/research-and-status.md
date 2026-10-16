@@ -25,7 +25,7 @@ Important observed candidates:
 | Mark / application or registration | Classes | Status shown | Relevance and evaluation |
 |---|---|---|---|
 | Zynerva / 商願2026-048968 | 09 | pending examination | Pronunciations include ジネルバ. Detailed goods are mainly electronic hardware/accessories; codes include 11B01/11C01. Not automatically irrelevant just because hardware. 要注意. |
-| シレルバ / 登録6982790 | 35 | active registration | Close short Japanese sound; detailed services still unconfirmed. 要注意. |
+| シレルバ / 登録6982790 | 35 | active registration | Detailed services include advertising, database information compilation, and consumer choice information; codes include 35A01/35B01/35G03/35L01/42P02. Close short Japanese sound, so 要注意. |
 | CST Minerva / 登録6607295 | 09/41/42 | active registration | Detail confirms software, online audiovisual/text information and software provision/website services. Codes 11C01, 41E02/03, 42P02/42X11 etc. Sound/appearance differ, but service overlap means no blanket low-risk conclusion. 要注意. |
 | みねるば / 登録5944206 and composite 登録6051816 | 35/37/42 | active registrations | Cloud/software related name; all specific goods/services not fully reviewed. 要注意. |
 | MINERVA / 登録6488952 | 09 | active registration | Full goods and visual comparison unconfirmed. 要注意. |
@@ -54,7 +54,7 @@ Alternative direction if CINELVA cannot be cleared: keep Cinemap while investiga
 |---|---|---|---|---|---|
 | cinelva.is-a.dev | free delegation; separate free host required | HTTPS from hosting provider, not DNS delegation itself; Actions depends on host; indexing possible if allowed | Community-operated delegation can be revoked; future domain change is another origin migration | `domains/cinelva.json` returned 404 through GitHub API; no reservation established. Software-development-related noncommercial condition; movie app fit needs maintainer confirmation. Request guidance says not to generate domain requests with AI. No application made. | Hold |
 | cinelva.pages.dev | Pages Free, subject to free limits | HTTPS; Git integration or Actions via Wrangler; indexing possible | Managed host; standard static assets portable; service continuity not guaranteed | Exact name unconfirmed: fetch failure is not availability. Account/terms/registration approval required. Free limits: 500 builds/month, 20,000 files, 25 MiB/file. Avoid Functions/billing/R2 add-ons. | Best clean branded host candidate, conditional |
-| vongolebianco7.github.io/cinelva/ | GitHub Pages public-project hosting free | HTTPS; Actions; indexing possible | Same origin as old URL preserves localStorage keys; deployment must publish sibling path using a cinelva repository/user-site layout, not simply rename current repository | Path not reserved/created. No repository rename, no old URL retirement. Exact new-repository availability and publishing configuration unconfirmed. Personal noncommercial project restrictions apply. | Best data-continuity candidate, conditional |
+| vongolebianco7.github.io/cinelva/ | GitHub Pages public-project hosting free | HTTPS; Actions; indexing possible | Same origin as old URL preserves localStorage keys; deployment must publish sibling path using a cinelva repository/user-site layout, not simply rename current repository | Repository GET for vongolebianco7/cinelva returned 404; no visible accessible repository found, but name not reserved/created. No repository rename, no old URL retirement. Exact new-repository availability and publishing configuration unconfirmed. Personal noncommercial project restrictions apply. | Best data-continuity candidate, conditional |
 
 Conservative launch route: approve identity, rebrand at existing production URL first, then stage a new URL while keeping old origin available. The URL need not change simultaneously with the visible brand.
 
@@ -86,7 +86,7 @@ Base commit: 65dc9f109d93dadba74da9e4a96695b2d91575a9. GitHub connector confirme
 | Artwork settings | existing font/theme/background keys retained |
 | Calendar/theater settings | `cinemaNow.mode`, `cinemaNow.active`, `cinema-theater-prefecture` |
 | Temporary camera and critic-unlock state | sessionStorage; intentionally not migrated as durable user data |
-| Movie DNA | preservation depends on existing source records; no separate persisted key was identified in inspected source. Full flow unverified. |
+| Movie DNA | search.html receives `dna` (creator/genre metadata) from backend/app/api/movie-detail/route.ts, which assembles it from movie API responses. No personal DNA storage key identified. Endpoint and interface stay unchanged; full flow unverified. |
 | Other favorites/reviews/server data | only known local keys are covered; do not claim backup of an unidentified backend store. Complete flow audit remains a release gate. |
 
 No IndexedDB, service-worker registration or app cookie persistence was found in the inspected JS/HTML paths. This does not establish that a user's previously installed app has no legacy worker/cache. Check actual clients and retain old asset paths before release.
@@ -98,11 +98,11 @@ The backup tool is additive and not linked into existing app pages yet. No produ
 - Node backup suite: 7/7 passed (including round trip, conflict preservation, malformed input/unknown keys, version/size rejection, rollback, unavailable storage).
 - `python scripts/quality_gate.py`: PASSED.
 - Broader `python -m unittest discover -s tests`: 92 tests, 8 failures + 8 import-time errors. A clean `git archive` of the exact base reproduces the same 16 names; tracked existing files unchanged. See baseline-failures.md. Keep unrelated repairs separate.
-- Local mobile/desktop Chromium and WebKit could not start: Playwright browser binaries missing. An attempted official install failed with truncated archive downloads. No browser pass is claimed. A CI workflow is provided to run actual export/download/import at 390px/1280px in both engines.
+- Local mobile/desktop Chromium and WebKit could not start: Playwright browser binaries missing. An attempted official install failed with truncated archive downloads. No browser pass is claimed. The dedicated CI subsequently succeeded: Chromium and WebKit at 390px and 1280px all passed actual export/download, conflict-preserving import, invalid-file rejection, no horizontal overflow, and no page errors. Evidence: https://github.com/vongolebianco7/cinema-calendar/actions/runs/38844153050 (commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8).
 - Real iPhone Safari: unverified, distinct from CI WebKit.
 - Existing production https://vongolebianco7.github.io/cinema-calendar/ opened successfully in cloud browser, showing Cinemap v0.4.73 and current calendar controls; not a full regression pass. Streaming view includes an explicit partial-coverage note and sparse weeks. Freshness/completeness not certified by rebranding work.
 - Theater search/showtimes, Ocean visual quality, Movie DNA, all outbound links, SEO/OGP and cache/base-path checks remain pending for the final adopted version.
-- GitHub Actions results are reported separately after the review PR is created. A local pass is not CI success or production deployment.
+- GitHub Actions: CINELVA backup safety, Validate frontend and Check brand identity succeeded on implementation commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8. Autonomous quality gate and completeness scorecard also succeeded on that commit. All seven observed runs succeeded (two are duplicate push/PR frontend/brand checks). CI success does not mean production was deployed.
 
 ## 6. Pending release gates
 
@@ -114,3 +114,9 @@ The backup tool is additive and not linked into existing app pages yet. No produ
 6. Retain old URL. Any redirect/retirement requires separate user approval.
 
 Current production remains Cinemap. No new CINELVA public URL exists from this work.
+
+## 7. Review delivery
+
+Draft PR: https://github.com/vongolebianco7/cinema-calendar/pull/220
+
+Implementation commit: 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8 (39 additive files, zero deletions). File groups: `data-backup.html`, `js/data-backup.js`, `tests/cinelva-backup*.cjs`, `.github/workflows/cinelva-backup.yml`, this research folder including all identity materials, and design/implementation-plan documents under `docs/superpowers`. The PR Files changed tab is the exact authoritative list. This follow-up note records the verified CI result and further trademark/storage observations. No production file or user storage key was replaced.

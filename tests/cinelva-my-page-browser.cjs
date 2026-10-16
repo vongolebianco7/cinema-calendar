@@ -68,7 +68,7 @@ async function freePort() {
     await page.locator('#worldYear').selectOption('all');
     const plotPoint = await page.locator('#worldCanvas').evaluate(canvas => canvas._points[0]);
     await page.locator('#worldCanvas').click({ position: { x: Math.round(plotPoint.x), y: Math.round(plotPoint.y) } });
-    assert.match(await page.locator('#worldFilm').textContent(), /Browser Test Film|Film/);
+    assert.ok((await page.locator('#worldFilm').textContent()).includes(plotPoint.record.title));
 
     await page.locator('#worldToggle').click();
     assert.equal(await page.locator('#worldList').isVisible(),true);
@@ -78,6 +78,7 @@ async function freePort() {
     assert.ok(await page.locator('#worldFilm [data-record-card]').count()===1);
     await page.locator('[data-tab="genres"]').click();
     await page.locator('#genreFormat').selectOption('アニメーション');
+    await page.locator('[data-genre-pair="SF|SF"]').click();
     assert.equal(await page.locator('#genreFilms [data-record-card]').count(),1);
     await page.locator('#genreWorkForm').selectOption('ドキュメンタリー');
     assert.equal(await page.locator('#genreFilms [data-record-card]').count(),0);

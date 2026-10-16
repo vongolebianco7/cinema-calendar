@@ -20,3 +20,13 @@ test('official on-demand listings expire and are never made into premieres',()=>
  const valid=Q.activeOfficialOffers(offers,now);assert.equal(valid.length,1);assert.equal(valid[0].date,undefined);
  assert.equal(Q.activeOfficialOffers(offers,Date.parse('2026-11-01')).length,0);
 });
+
+test('calendar badges and timeline current block do not reuse expired provider lists',()=>{
+ const fs=require('node:fs'),vm=require('node:vm'),html=fs.readFileSync('index.html','utf8');
+ const extract=name=>{const start=html.indexOf('function '+name+'('),end=html.indexOf('\nfunction ',start+10);return html.slice(start,end);};
+ const ctx={CinelvaDataQuality:Q,movies:[{id:1,title:'Film',date:'2026-01-01',event:'streaming',service:'Netflix'}],availabilitySnapshot:{movies:{'1':{checked_at:'2000-01-01',flatrate:['EXPIRED_PROVIDER'],buy:['EXPIRED_BUY_PROVIDER']}}},streamingGroupOrder:()=>new Map(),missingPoster:()=>'',popularitySort:()=>0,related:()=>[],normTitle:x=>String(x),releaseHistory:{records:[]}};
+ assert.doesNotMatch(vm.runInNewContext(extract('groupedMovieCards')+';groupedMovieCards(movies,"streaming");',ctx),/EXPIRED/);
+ const timeline=vm.runInNewContext(extract('movieTimelineHtml')+';movieTimelineHtml(movies[0]);',ctx);
+ const current=timeline.split('<div class="timelineNow">')[1].split('<div class="movieTimeline">')[0];
+ assert.doesNotMatch(current,/EXPIRED/);
+});

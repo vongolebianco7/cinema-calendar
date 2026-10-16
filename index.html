@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 30697)
+Total output lines: 942
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -372,61 +375,7 @@ function japaneseHolidays(year){
  put(1,1,"元日");put(1,nthMonday(1,2),"成人の日");put(2,11,"建国記念の日");
  if(year>=2020)put(2,23,"天皇誕生日");
  put(3,equinox(true),"春分の日");put(4,29,"昭和の日");put(5,3,"憲法記念日");put(5,4,"みどりの日");put(5,5,"こどもの日");
- if(year===2020){put(7,23,"海の日");put(7,24,"スポーツの日");put(8,10,"山の日")}
- else if(year===2021){put(7,22,"海の日");put(7,23,"スポーツの日");put(8,8,"山の日")}
- else{put(7,nthMonday(7,3),"海の日");put(8,11,"山の日");put(10,nthMonday(10,2),"スポーツの日")}
- put(9,nthMonday(9,3),"敬老の日");put(9,equinox(false),"秋分の日");
- put(11,3,"文化の日");put(11,23,"勤労感謝の日");
- // 国民の休日: weekdays sandwiched between two national holidays.
- const original=new Set(holidays.keys());
- for(let d=new Date(year,0,2);d.getFullYear()===year;d.setDate(d.getDate()+1)){
-  let key=d.toLocaleDateString("sv-SE");if(holidays.has(key)||d.getDay()===0)continue;
-  let prev=new Date(d),next=new Date(d);prev.setDate(prev.getDate()-1);next.setDate(next.getDate()+1);
-  if(original.has(prev.toLocaleDateString("sv-SE"))&&original.has(next.toLocaleDateString("sv-SE")))holidays.set(key,"国民の休日");
- }
- // 振替休日: after a Sunday national holiday, the next non-holiday becomes a holiday.
- [...original].sort().forEach(key=>{
-  let d=new Date(key+"T00:00:00");if(d.getDay()!==0)return;
-  d.setDate(d.getDate()+1);
-  while(holidays.has(d.toLocaleDateString("sv-SE")))d.setDate(d.getDate()+1);
-  if(d.getFullYear()===year)holidays.set(d.toLocaleDateString("sv-SE"),"振替休日")
- });
- holidayCache.set(year,holidays);
- return holidays
-}
-function holidayName(d){
- const y=d.getFullYear();
- return japaneseHolidays(y).get([y,String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-"))||""
-}
-function dayColorClass(d){return holidayName(d)?" holiday":d.getDay()===0?" sunday":d.getDay()===6?" saturday":""}
-function monthPageStart(d){
- const first=new Date(d.getFullYear(),d.getMonth(),1),wd=(first.getDay()+6)%7;
- first.setHours(0,0,0,0);first.setDate(first.getDate()-wd);return first
-}
-function monthPageEnd(d){
- const last=new Date(d.getFullYear(),d.getMonth()+1,0),wd=(last.getDay()+6)%7;
- last.setHours(0,0,0,0);last.setDate(last.getDate()+(6-wd));return last
-}
-function monthPageWeekCount(d){
- const a=monthPageStart(d),z=monthPageEnd(d);return Math.round((z-a)/86400000/7)+1
-}
-function currentWeekStart(){
- const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d
-}
-function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
-function scrollCalendarToCurrentWeek(){}
-function streamingGroupOrder(){
- const preferred=streamingReleaseServices();return new Map(preferred.map((x,i)=>[x,i]))
-}
-function dedupeMorningTenWeek(rows){
- const seen=new Set();
- return rows.filter(m=>{
-  if(m.special_screening!=="asa10")return true;
-  const key=revivalNorm(morningTenQuery(m.title));
-  if(!key)return true;
-  if(seen.has(key))return false;
-  seen.add(key);
-  return true
+ if(year===2020){put(7,23,"海の日");put(7,24,"スポ…697 tokens truncated…n true
  })
 }
 function groupedMovieCards(weekMovies,modeName){
@@ -448,7 +397,7 @@ function groupedMovieCards(weekMovies,modeName){
   let cards=rows.sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b)).map(m=>{
    let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
    if(modeName==="streaming"){
-    let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)],flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
+    let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)],flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
     return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'<span class="streamMovieDate">'+date+'</span></div>'+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div></article>'
    }
    let kind=group==="午前十時の映画祭"?"asa10":group==="リバイバル上映"?"revival":"theatrical";
@@ -656,13 +605,13 @@ function movieTimelineHtml(m){
  });
  if(av&&av.checked_at){
    const d=String(av.checked_at).slice(0,10),services=[...(av.flatrate||av.services||[]),...(av.rent||[]),...(av.buy||[])];
-   if(services.length)add(d,"availability","現在の配信状況を観測",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
+   if(services.length)add(d,"availability","配信先の観測履歴",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
  }
  items.sort((a,b)=>a.date.localeCompare(b.date)||a.type.localeCompare(b.type));
- const flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
+ const flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],buy=CinelvaDataQuality.availabilityIsFresh(av)?(av.buy||[]):[];
  const nowRows=[flat.length?'<b>見放題</b> '+flat.join(" / "):"",rent.length?'<b>レンタル</b> '+rent.join(" / "):"",buy.length?'<b>購入</b> '+buy.join(" / "):""].filter(Boolean);
  const upcoming=related(m).filter(x=>x.event==="tv"&&x.date>=new Date().toLocaleDateString("sv-SE")).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
- const nowHtml='<div class="timelineNow"><div><strong>いま観る</strong><span>'+(nowRows.length?nowRows.join('<br>'):'配信先を確認できていません')+'</span></div><div><strong>次のTV放映</strong><span>'+(upcoming.length?upcoming.map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません')+'</span></div></div>';
+ const nowHtml='<div class="timelineNow"><div><strong>配信先の観測情報</strong><span>'+(nowRows.length?nowRows.join('<br>'):'配信先を確認できていません')+'</span></div><div><strong>次のTV放映</strong><span>'+(upcoming.length?upcoming.map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません')+'</span></div></div>';
  if(!items.length)return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・配信・放送の履歴</h3></div></div>'+nowHtml+'<div class="small" style="margin-top:10px">出典または観測記録を確認できる履歴がまだありません。</div></section>';
  const typeName={theatrical:"THEATER",streaming:"STREAMING",tv:"TV",availability:"NOW"};
  return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・配信・放送の履歴</h3></div><span class="small">'+items.length+' records</span></div>'+nowHtml+'<div class="movieTimeline">'+items.map(x=>'<div class="timelineItem"><div class="timelineRail"><i></i></div><div class="timelineBody"><div class="timelineMeta"><time>'+x.date+'</time><span>'+typeName[x.type]+'</span></div><b>'+x.label+'</b>'+(x.detail?'<div class="small">'+x.detail+'</div>':'')+'<div class="timelineNote small">'+x.note+(x.source?' · <a target="_blank" rel="noopener noreferrer" href="'+x.source+'">出典</a>':'')+'</div></div></div>').join("")+'</div><p class="small timelineCaution">予定データ・過去の実施記録・現在の配信状況の観測を区別しています。観測日は配信開始日を意味しません。</p></section>'

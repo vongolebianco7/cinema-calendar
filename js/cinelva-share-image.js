@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const records = globalThis.CinelvaLibraryRecords;
   const canvas = $('art'), ctx = canvas.getContext('2d');
-  let imageUrl = '', renderToken = 0;
+  let imageUrl = '', renderToken = 0, exporting = false;
   const sizes = { portrait: [1200, 1500], square: [1200, 1200], landscape: [1600, 1000] };
   const escapeName = name => String(name || 'Cinelva').replace(/[\\/:*?"<>|]/g, '-').slice(0, 80);
   const note = text => { $('status').textContent = text; };
@@ -63,8 +63,16 @@
   }
   function toBlob() { return new Promise((resolve, reject) => { try { canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('画像を作成できませんでした。')), 'image/png'); } catch (error) { reject(error); } }); }
   async function makeImage() {
-    try { await render(true); return await toBlob(); }
-    catch (_) { await render(false); try { const blob = await toBlob(); note('ポスター画像は利用できなかったため、作品名カードで画像を作りました。'); return blob; } catch (error) { note(`画像を作成できません：${error.message}`); return null; } }
+    if(exporting)return null;
+    exporting=true;const controls=['period','format','imageSort','save','share'];controls.forEach(id=>{$(id).disabled=true;});
+    try {
+      const list=await render(true);if(!list){note('表示条件が変わったため保存を中止しました。もう一度保存してください。');return null;}
+      return await toBlob();
+    } catch (_) {
+      const list=await render(false);if(!list)return null;
+      try { const blob=await toBlob();note('ポスター画像は利用できなかったため、作品名カードで画像を作りました。');return blob; }
+      catch(error){note(`画像を作成できません：${error.message}`);return null;}
+    } finally {exporting=false;controls.forEach(id=>{$(id).disabled=false;});}
   }
   function setDownload(blob) { if (imageUrl) URL.revokeObjectURL(imageUrl); imageUrl=URL.createObjectURL(blob); $('download').href=imageUrl; $('download').download=`cinelva-${escapeName($('summary').textContent)}.png`; $('savePreview').src=imageUrl; }
   async function save() { const blob=await makeImage(); if(!blob)return;setDownload(blob);if(/iPhone|iPad|iPod/i.test(navigator.userAgent))$('saveDialog').showModal();else { const link=document.createElement('a');link.href=imageUrl;link.download=$('download').download;link.click();note('PNGをダウンロードしました。'); } }

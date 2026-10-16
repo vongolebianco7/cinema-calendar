@@ -58,6 +58,8 @@
   function recordValue(movie,rating,watchedAt,current,older) {
     const id=String(movie?.id??movie?.tmdbId??'');
     if(!validId(id)||!(rating===null||validScore(rating))) throw new Error('作品IDまたは評価が不正です');
+    for(const field of ['genres','countries','formats','workForms'])if(movie[field]!=null&&!Array.isArray(movie[field]))throw new Error('分類メタデータの形式が不正です');
+    for(const field of ['countries','formats','workForms'])if(Array.isArray(movie[field])&&movie[field].some(value=>typeof value!=='string'))throw new Error('分類メタデータの値が不正です');
     const old=current[id]||{}, source=older[id]||{};
     const date=watchedAt===undefined?(old.watchedAt??source.watchedAt??null):watchedAt;
     if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');

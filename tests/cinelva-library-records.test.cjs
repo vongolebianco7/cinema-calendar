@@ -79,3 +79,11 @@ test('restore rolls back legacy visibility when record storage quota fails',()=>
  assert.equal(data.get(api.KEY),before);assert.equal(data.get(api.DELETED),deleted);
  assert.equal(api.all().length,0);
 });
+
+test('malformed classification metadata is rejected before any restore write',()=>{
+ const {api,data}=setup();api.save(movie,0,null);const before=data.get(api.KEY);
+ for(const field of ['genres','countries','formats','workForms']){
+  assert.throws(()=>api.restore([{id:43,title:'Bad metadata',rating:null,[field]:{}}]));
+  assert.equal(data.get(api.KEY),before);
+ }
+});

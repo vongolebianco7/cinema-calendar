@@ -116,7 +116,7 @@ jobs:
           node --check js/cinelva-share-image.js
           node --check js/cinelva-data-quality.js
           node --check js/cinelva-official-offers.js
-          node --test tests/cinelva-data-quality.test.cjs
+          node --test tests/cinelva-data-quality.test.cjs tests/cinelva-share-image.test.cjs
           python -m unittest tests.test_availability_update tests.test_award_identity
           python scripts/check_release_data.py
           node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs

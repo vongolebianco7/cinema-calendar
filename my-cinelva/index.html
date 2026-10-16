@@ -122,7 +122,7 @@ $('importRecordsFile').onchange=async event=>{
   if(payload.records.length>10000)throw new Error('記録件数が多すぎます');
   const valid=payload.records.map(r=>{
    const id=String(r?.id??r?.tmdbId??'');
-   if(!/^[1-9]\\d*$/.test(id)||typeof r.title!=='string'||!globalThis.CinelvaLibraryRecords.validScore(r.rating)||!globalThis.CinelvaLibraryRecords.validDate(r.watchedAt??null))throw new Error('不正な作品ID・評価・鑑賞日が含まれています');
+   if(!/^[1-9]\d*$/.test(id)||typeof r.title!=='string'||!globalThis.CinelvaLibraryRecords.validScore(r.rating)||!globalThis.CinelvaLibraryRecords.validDate(r.watchedAt??null))throw new Error('不正な作品ID・評価・鑑賞日が含まれています');
    return {...r,id};
   });
   if(!confirm(valid.length+'件の鑑賞記録を取り込みます。同じ作品IDの現在の記録は上書きされます。続けますか？'))return;

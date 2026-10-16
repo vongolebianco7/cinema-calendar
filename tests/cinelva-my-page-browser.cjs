@@ -39,7 +39,7 @@ async function freePort() {
     const work = director.works[0];
     await context.addInitScript(({ key, film, directorName }) => {
       localStorage.setItem(key, JSON.stringify({
-        [String(film.id)]: { id: String(film.id), title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
+        [String(film.id)]: { id: String(film.id), title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], countries: ['Japan'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
         '900001': { id: '900001', title: 'Browser Test Film', year: 2002, director: directorName, genres: ['SF', 'Crime'], region: '日本', rating: 0, watchedAt: '2025-04-15' },
       }));
     }, { key: 'cinelva-library-records-v2', film: work, directorName: director.name });

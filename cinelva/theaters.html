@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ja"><head><base href="../"><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>映画館を探す | CINELVA</title>
+<style>
+:root{--bg:#090909;--panel:#111;--panel2:#181818;--text:#f2f2f2;--muted:#929292;--line:#292929;--accent:#ef3f3f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1080px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
+.top{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090909f2;backdrop-filter:blur(12px);z-index:20}.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.topnav{display:flex;gap:16px;font-size:12px;color:#bbb}.topnav a.active{color:#fff}
+.hero{padding:30px 0 18px}.hero h1{font-size:30px;margin:0 0 8px}.hero p,.small{color:var(--muted);font-size:13px;line-height:1.65}.section{padding:14px 0 30px}.sectionHead{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:12px}.sectionHead h2{margin:0;font-size:18px}.sectionHead span{font-size:11px;color:var(--muted)}
+.pickerLabel{font-size:10px;color:#777;letter-spacing:.08em;margin-bottom:7px}.chips{display:flex;gap:7px;overflow:auto;scrollbar-width:none;padding:0 0 12px}.chip{white-space:nowrap;border:1px solid var(--line);background:transparent;color:#bbb;padding:8px 10px;border-radius:4px;font:inherit;font-size:11px}.chip.active{background:#eee;color:#111;border-color:#eee}
+.theaterHero{border-top:1px solid var(--line);padding:18px 0 10px}.theaterHero h2{font-size:25px;margin:0 0 5px}.theaterHero .area{font-size:12px;color:#999}.dateBar{display:flex;gap:6px;overflow:auto;padding:13px 0 12px}.dateBtn{border:1px solid #333;background:transparent;color:#bbb;padding:7px 10px;border-radius:4px;font-size:11px}.dateBtn.active{background:#fff;color:#111;border-color:#fff}
+.filmList{border-top:1px solid var(--line)}.film{padding:13px 0;border-bottom:1px solid #242424}.filmTitle{font-size:14px;font-weight:750;line-height:1.45}.showings{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.showing{font-size:11px;border:1px solid #343434;padding:6px 7px;min-width:72px}.showing b{display:block;font-size:12px;color:#eee}.showing span{display:block;color:#777;font-size:9px;margin-top:2px}.official{display:inline-block;margin-top:14px;font-size:11px;text-decoration:underline;color:#ccc}
+
+.verifiedNote{border-left:2px solid #666;padding:1px 0 1px 10px;margin:8px 0 18px;color:#888;font-size:11px;line-height:1.6}
+details.directory{border-top:1px solid var(--line);margin-top:8px;padding-top:16px}details.directory summary{cursor:pointer;font-size:13px;font-weight:700}.search{display:flex;gap:8px;margin:14px 0 10px}.search input{flex:1;background:#111;border:1px solid var(--line);color:#fff;border-radius:4px;padding:12px;font:inherit}.meta{color:var(--muted);font-size:11px;margin:4px 0 15px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{border-top:1px solid var(--line);padding:12px 3px}.card h3{font-size:13px;margin:0 0 5px}.place{font-size:10px;color:#999;line-height:1.5}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.btn{font-size:10px;text-decoration:underline;color:#aaa}.note{margin:18px 0 38px;color:var(--muted);font-size:11px;line-height:1.7}.empty{padding:26px 4px;color:var(--muted)}
+@media(max-width:720px){.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:25px}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.topnav{gap:10px}.theaterHero h2{font-size:22px}}
+
+button.active,.chip.active,.dateBtn.active,.modeTab.active{background:#f4f4f4!important;color:#111!important;border-color:#f4f4f4!important}
+button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!important}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+
+
+/* unified Cinemap header v2 */
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+
+
+.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
+</style>
+<link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<link rel="manifest" href="cinelva/manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
+
+<style id="cinemap-brand-v1">
+/* Cinemap brandTagline: premium editorial identity */
+.brand{
+  color:#f4efe5!important;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  line-height:.92!important;
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:max-content;
+}
+.brand::after{
+  content:"EXPLORE CINEMA";
+  display:block;
+  margin-top:6px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.28em;
+}
+.brandA:after{display:none!important}
+.brandTagline{font-family:inherit}
+@media(max-width:430px){
+  .brand{font-size:20px!important}
+  .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
+}
+</style>
+
+<style id="cinemap-brand-image-v3">
+/* Approved B brand is a fixed artwork asset. CSS only controls placement/size. */
+.gBrand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto;min-width:0;text-decoration:none!important;line-height:0}
+.gBrandImage{display:block;width:132px;height:auto;max-width:none}
+.gNav{height:58px!important;gap:8px!important}
+@media(max-width:430px){
+  .gNav{height:56px!important;gap:8px!important}
+  .gBrandImage{width:132px}
+  .gSearchForm{height:33px!important}
+}
+@media(max-width:370px){.gBrandImage{width:118px}}
+</style>
+
+<style id="cinemap-theater-equipment-v1">
+.theaterTools{margin:14px 0 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0}
+.theaterToolsTitle{font-size:11px;font-weight:800;color:#aaa;margin-bottom:8px}
+.formatFilters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}.formatFilters::-webkit-scrollbar{display:none}
+.formatFilter{flex:0 0 auto;white-space:nowrap;border:1px solid #383838;background:#121212;color:#ccc;border-radius:999px;padding:8px 11px;font-size:11px}
+.formatFilter.active{background:#eee;color:#111;border-color:#eee}
+.theaterFormats{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.formatTag{display:inline-flex;align-items:center;border:1px solid #4b4030;background:#1b1711;color:#ddc89b;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:750}.formatTag.unknown{border-color:#333;background:#151515;color:#777}
+.equipmentSummary{margin-top:9px;padding-top:8px;border-top:1px solid #232323;color:#a2a2a2;font-size:10px;line-height:1.55}.equipmentSummary b{display:block;color:#ddd;font-size:10px;margin-bottom:3px}.equipmentSummary a{color:#cdbb91;text-decoration:underline;text-underline-offset:2px}
+.card{min-width:0}.card h3{line-height:1.45}.grid{align-items:start}
+@media(max-width:520px){.grid{grid-template-columns:1fr!important}.card{padding:14px 3px}.formatFilters{margin-right:-18px;padding-right:18px}}
+</style>
+
+
+
+<style id="cinemap-theater-prefecture-v1">
+.prefectureFilterRow{display:flex;align-items:center;gap:10px;margin-top:12px}.prefectureFilterRow label{flex:0 0 auto;color:#aaa;font-size:11px;font-weight:800}.prefectureFilterRow select{min-width:190px;max-width:100%;background:#121212;color:#eee;border:1px solid #383838;border-radius:6px;padding:9px 34px 9px 11px;font:inherit;font-size:12px}.prefectureFilterRow select:focus{outline:1px solid #777;outline-offset:1px}@media(max-width:520px){.prefectureFilterRow{display:block}.prefectureFilterRow label{display:block;margin-bottom:7px}.prefectureFilterRow select{width:100%;min-width:0;font-size:16px}}
+</style>
+
+
+<style id="cinemap-theater-table-v1">
+html,body{overflow-x:hidden}
+.theaterTableWrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);scrollbar-width:thin}
+.theaterTable{width:100%;min-width:860px;border-collapse:collapse;table-layout:auto;font-size:11px}
+.theaterTable th,.theaterTable td{padding:11px 10px;border-bottom:1px solid #252525;text-align:left;vertical-align:top;white-space:nowrap}
+.theaterTable th{position:sticky;top:0;background:#101010;color:#8f8f8f;font-size:9px;letter-spacing:.05em;font-weight:750;z-index:2}
+.theaterTable th:first-child,.theaterTable td:first-child{position:sticky;left:0;z-index:1;background:#090909;min-width:190px;max-width:230px;white-space:normal}
+.theaterTable th:first-child{z-index:3;background:#101010}
+.theaterTable .theaterName{font-size:12px;font-weight:800;color:#eee;line-height:1.45}
+.theaterTable .areaCell{color:#aaa;white-space:normal;min-width:110px;max-width:180px;line-height:1.45}
+.theaterTable .verifiedCell{color:#ddc89b;font-weight:700}.theaterTable .unknownCell{color:#666}
+.theaterTable .equipmentCell{min-width:190px;max-width:300px;white-space:normal;color:#aaa;line-height:1.5}
+.theaterTable .tableLinks{display:flex;gap:9px;flex-wrap:wrap;min-width:130px}.theaterTable .tableLinks a{color:#bbb;text-decoration:underline;text-underline-offset:2px}
+.theaterTable .equipmentSource{display:inline-block;margin-top:4px;color:#cdbb91;text-decoration:underline;text-underline-offset:2px}
+.tableHint{display:none;color:#777;font-size:9px;margin:-7px 0 10px}
+@media(max-width:600px){.tableHint{display:block}.theaterTable{min-width:780px}.theaterTable th,.theaterTable td{padding:10px 8px}.theaterTable th:first-child,.theaterTable td:first-child{min-width:168px;max-width:190px}}
+</style>
+
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style></head>
+<body>
+
+
+<header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
+ <form class="gSearchForm" action="cinelva/search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="cinelva/index.html">カレンダー</a>
+ <a href="cinelva/discover.html">映画を探す</a>
+ <a href="cinelva/rankings.html">ランキング</a>
+ <a href="cinelva/theaters.html">映画館を探す</a>
+ <a href="cinelva/experience.html">上映方式</a>
+ <a href="cinelva/my-cinemap.html">My CINELVA</a>
+</aside>
+<main class="wrap">
+<section class="hero"><h1>映画館を探す</h1><p>行きたい映画館を地域・名前から探し、場所や公式の上映スケジュールへ進むためのページです。上映方式にこだわる場合は設備比較から探せます。</p><a class="experienceCta" href="cinelva/experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
+
+<section class="section">
+ <div class="sectionHead"><h2>映画館を検索</h2><span id="scheduleMeta">読み込み中…</span></div>
+ <div class="search"><input id="q" placeholder="映画館名・住所・地域を入力"></div>
+
+<div class="theaterTools" aria-label="上映方式で映画館を絞り込み">
+ <div class="theaterToolsTitle">上映方式で絞り込む</div>
+ <div class="formatFilters" id="formatFilters">
+  <button class="formatFilter active" data-format-filter="">すべて</button>
+  <button class="formatFilter" data-format-filter="IMAX">IMAX</button>
+  <button class="formatFilter" data-format-filter="IMAXレーザー">IMAXレーザー</button>
+  <button class="formatFilter" data-format-filter="Dolby Cinema">Dolby Cinema</button>
+  <button class="formatFilter" data-format-filter="Dolby Atmos">Dolby Atmos</button>
+  <button class="formatFilter" data-format-filter="4DX">4DX</button>
+  <button class="formatFilter" data-format-filter="MX4D">MX4D</button>
+  <button class="formatFilter" data-format-filter="ScreenX">ScreenX</button>
+ </div>
+ <div class="prefectureFilterRow"><label for="prefectureFilter">都道府県で絞り込む</label><select id="prefectureFilter" aria-label="都道府県で映画館を絞り込む"><option value="">すべての都道府県</option><option value="北海道">北海道</option><option value="青森県">青森県</option><option value="岩手県">岩手県</option><option value="宮城県">宮城県</option><option value="秋田県">秋田県</option><option value="山形県">山形県</option><option value="福島県">福島県</option><option value="茨城県">茨城県</option><option value="栃木県">栃木県</option><option value="群馬県">群馬県</option><option value="埼玉県">埼玉県</option><option value="千葉県">千葉県</option><option value="東京都">東京都</option><option value="神奈川県">神奈川県</option><option value="新潟県">新潟県</option><option value="富山県">富山県</option><option value="石川県">石川県</option><option value="福井県">福井県</option><option value="山梨県">山梨県</option><option value="長野県">長野県</option><option value="岐阜県">岐阜県</option><option value="静岡県">静岡県</option><option value="愛知県">愛知県</option><option value="三重県">三重県</option><option value="滋賀県">滋賀県</option><option value="京都府">京都府</option><option value="大阪府">大阪府</option><option value="兵庫県">兵庫県</option><option value="奈良県">奈良県</option><option value="和歌山県">和歌山県</option><option value="鳥取県">鳥取県</option><option value="島根県">島根県</option><option value="岡山県">岡山県</option><option value="広島県">広島県</option><option value="山口県">山口県</option><option value="徳島県">徳島県</option><option value="香川県">香川県</option><option value="愛媛県">愛媛県</option><option value="高知県">高知県</option><option value="福岡県">福岡県</option><option value="佐賀県">佐賀県</option><option value="長崎県">長崎県</option><option value="熊本県">熊本県</option><option value="大分県">大分県</option><option value="宮崎県">宮崎県</option><option value="鹿児島県">鹿児島県</option><option value="沖縄県">沖縄県</option></select></div>
+</div>
+
+ <div class="meta" id="meta"></div>
+ <div class="grid" id="grid"></div>
+ <details class="schedulePanel" style="margin-top:28px"><summary style="cursor:pointer;font-size:16px;font-weight:800;padding:14px 0">上映時間を確認する</summary><div class="pickerLabel">映画館名を指定</div><div class="search"><input id="scheduleQ" placeholder="映画館名・地域を入力"></div><div class="chips" id="theaterChips"></div><div id="theaterDetail"></div></details>
+</section>
+
+
+
+<div class="note">上映時刻は映画館公式サイト由来の取得データを表示しています。上映内容は変更される場合があるため、鑑賞前に公式スケジュールを確認してください。<br><a href="cinelva/credits.html">Credits / Data Sources</a></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+let theaters=[],osmTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
+function scheduleUrl(t){if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
+async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
+function param(name){return new URLSearchParams(location.search).get(name)||""}
+function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
+function renderTheaterChips(){
+ const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
+ if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
+ const scheduleNames=new Set((scheduleData.theaters||[]).map(x=>x.name)),list=directoryCache.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,30);
+ $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(t.name)?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
+ document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
+}
+function renderTheaterDetail(){
+ const defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=(scheduleData.schedules||[]).filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+ if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">CINELVA内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
+ const dates=[...new Set(rows.map(x=>x.date))].sort(),today=new Date().toLocaleDateString("sv-SE");
+ if(!selectedDate||!dates.includes(selectedDate)){
+   const requested=param("date");
+   selectedDate=requested&&dates.includes(requested)?requested:(dates.find(d=>d>=today)||dates[dates.length-1]||"")
+ }
+ const day=rows.filter(x=>x.date===selectedDate),byMovie=new Map();
+ for(const x of day){if(!byMovie.has(x.title))byMovie.set(x.title,[]);byMovie.get(x.title).push(x)}
+ const films=[...byMovie.entries()];
+ const source=day.find(x=>x.source_url)?.source_url||rows.find(x=>x.source_url)?.source_url||"";
+ $("#theaterDetail").innerHTML='<div class="theaterHero"><h2>'+esc(def.name)+'</h2><div class="area">'+esc(def.area||"")+'</div></div>'+
+   '<div class="pickerLabel">DATE</div><div class="dateBar">'+dates.map(d=>'<button class="dateBtn '+(d===selectedDate?'active':'')+'" data-date="'+d+'">'+d.slice(5).replace("-","/")+'</button>').join("")+'</div>'+
+   '<div class="verifiedNote">この欄は取得済みの公式上映スケジュールだけを表示しています。データにない上映を「上映なし」とは判断しません。</div>'+
+   '<div class="filmList">'+(films.length?films.map(([title,shows])=>'<article class="film"><div class="filmTitle">'+esc(title)+'</div><div class="showings">'+shows.sort((a,b)=>a.start.localeCompare(b.start)).map(x=>'<div class="showing"><b>'+esc(x.start)+(x.end?'–'+esc(x.end):'')+'</b><span>'+esc(x.screen||"スクリーン未確認")+'</span></div>').join("")+'</div></article>').join(""):'<div class="empty">この日の取得済み上映データはありません。</div>')+'</div>'+
+   (source?'<a class="official" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式スケジュールで確認</a>':'');
+ document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{selectedDate=b.dataset.date;renderTheaterDetail();updateUrl()})
+}
+function formatMatches(actual,wanted){actual=String(actual||"").trim().toLowerCase();wanted=String(wanted||"").trim().toLowerCase();if(wanted==="imax")return actual.startsWith("imax");return actual===wanted}
+function renderFormatDirectory(){
+ if(!selectedFormat)return false;
+ const rows=(formatData.screens||[]).filter(x=>formatMatches(x.format,selectedFormat));
+ $("#q").value="";
+ $("#meta").textContent=selectedFormat+" 対応スクリーン "+rows.length+"件";
+ $("#grid").innerHTML=rows.length?rows.map(x=>'<article class="card"><h3>'+esc(x.theater)+'</h3><div class="place">'+esc([x.prefecture,x.screen].filter(Boolean).join(" · "))+'</div><div class="btns"><a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(x.source_url)+'">設備の公式情報</a><a class="btn" href="cinelva/theaters.html?search='+encodeURIComponent(x.theater)+'">映画館を開く</a></div></article>').join(""):'<div class="empty">確認済みの対応スクリーンがありません。</div>';
+ return true
+}
+function renderDirectory(){
+ if(renderFormatDirectory())return;
+ const all=[...theaters,...osmTheaters],uniq=new Map();all.forEach(t=>{const k=String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"");if(k&&!uniq.has(k))uniq.set(k,t)});const directory=[...uniq.values()];
+ const q=$("#q").value.trim().toLowerCase();
+ directoryCache=directory;
+ if(!q){$("#meta").textContent=directory.length+"館収録 · 検索すると候補を表示します";$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力してください。</div>';return}
+ const list=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,80);
+ $("#meta").textContent=list.length+"件表示 / "+directory.length+"館収録";
+ $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映スケジュール</a><a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
+}
+async function loadDirectory(base){
+ let loaded=[];
+ if(base){try{const r=await fetch(base+"/api/theater-directory",{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||[]}}catch(_){}}
+ if(!loaded.length){try{const r=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||d||[]}}catch(_){}}
+ theaters=Array.isArray(loaded)?loaded:[];
+ try{const r=await fetch("data/theaters_osm.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();osmTheaters=d.theaters||[]}}catch(_){}
+ renderDirectory();
+ const all=[...theaters,...osmTheaters],keys=new Set(all.map(t=>String(t.name||"").replace(/[\\s　]/g,"").toLowerCase()+"|"+String(t.prefecture||"")+"|"+String(t.municipality||"")));
+ $("#scheduleMeta").textContent=keys.size+"館収録"
+}
+async function loadSchedules(){
+ try{
+  const r=await fetch("data/theater_schedules.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();
+  scheduleData=await r.json();selectedTheater=param("theater")||"";selectedDate=param("date");if(selectedTheater&&$("#scheduleQ"))$("#scheduleQ").value=selectedTheater;renderTheaterChips();renderTheaterDetail()
+ }catch(_){
+  const sc=document.getElementById("scheduleCount");if(sc)sc.textContent="";
+  $("#theaterChips").innerHTML="";$("#theaterDetail").innerHTML='<div class="empty">上映スケジュールを取得できませんでした。</div>'
+ }
+}
+async function boot(){const base=await backend();try{const fr=await fetch("data/theater_formats.json?"+Date.now(),{cache:"no-store"});if(fr.ok)formatData=await fr.json()}catch(_){}await loadDirectory(base);await loadSchedules();if(selectedFormat)renderFormatDirectory()}
+$("#q").addEventListener("input",()=>{selectedFormat="";renderDirectory()});$("#scheduleQ").addEventListener("input",()=>{selectedTheater="";selectedDate="";renderTheaterChips();$("#theaterDetail").innerHTML=""});
+const initialSearch=new URLSearchParams(location.search).get("search")||"";
+if(initialSearch){selectedFormat="";$("#q").value=initialSearch}
+boot();
+</script><script>
+(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
+</script>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.61</div>
+
+
+
+<script id="cinemap-theater-table-js-v1">
+(function(){
+ const normName=s=>String(s||'').replace(/[\s　・･\.\-（）()]/g,'').toLowerCase();
+ const genericNames=new Set(['tohoシネマ','tohoシネマズ','tジョイ','t・ジョイ','ティジョイ','イオンシネマ','movix','ユナイテッドシネマ','ユナイテッド・シネマ','109シネマズ']);
+ window.isGenericChainOnly=function(t){
+   const n=String(t&&t.name||'').trim().toLowerCase();
+   return genericNames.has(n) && !(t&&t.address) && !(t&&t.municipality);
+ };
+ window.strictTheaterFormatRows=function(t){
+   const tn=normName(t&&t.name);
+   if(!tn||window.isGenericChainOnly(t))return [];
+   return (formatData.screens||[]).filter(x=>normName(x.theater)===tn);
+ };
+ function familyRows(rows,kind){
+   return rows.filter(x=>{
+     const f=String(x.format||'');
+     if(kind==='imax')return /^IMAX/i.test(f);
+     if(kind==='dolby')return /Dolby Cinema|Dolby Atmos/i.test(f)||/Dolby Atmos/i.test(String(x.screen||''));
+     if(kind==='motion')return /^(4DX|MX4D)$/i.test(f);
+     if(kind==='screenx')return /SCREENX/i.test(f)||/SCREENX/i.test(String(x.screen||''));
+     return false;
+   });
+ }
+ function cellFormats(rows,kind){
+   const vals=[...new Set(familyRows(rows,kind).map(x=>String(x.format||'').trim()).filter(Boolean))];
+   return vals.length?'<span class="verifiedCell">'+vals.map(esc).join(' / ')+'</span>':'<span class="unknownCell">未確認</span>';
+ }
+ function bestDirectoryMatch(name,all){
+   const n=normName(name);
+   return all.find(t=>!window.isGenericChainOnly(t)&&normName(t.name)===n)||null;
+ }
+ window.equipmentTheaters=function(all,filter){
+   // Build each theater's complete equipment state first. Filtering only decides visibility.
+   const allRows=(formatData.screens||[]);
+   const allByTheater=new Map();
+   allRows.forEach(x=>{
+     const k=normName(x.theater);
+     if(!k)return;
+     if(!allByTheater.has(k))allByTheater.set(k,[]);
+     allByTheater.get(k).push(x);
+   });
+   const visibleRows=allRows.filter(x=>!filter||formatFamilyMatch(x.format,filter)||formatFamilyMatch(x.screen,filter));
+   const map=new Map();
+   visibleRows.forEach(x=>{
+     const k=normName(x.theater);
+     if(!k)return;
+     const matched=bestDirectoryMatch(x.theater,all);
+     const base=matched?{...matched}:{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     base._equipmentRows=allByTheater.get(k)||[];
+     if(!map.has(k))map.set(k,base);
+   });
+   return [...map.values()];
+ };
+ function formatFamilyMatch(actual,wanted){
+   actual=String(actual||'').trim(); wanted=String(wanted||'').trim();
+   if(!wanted)return true;
+   if(wanted==='IMAX')return /^IMAX/i.test(actual);
+   if(wanted==='ScreenX')return /screenx/i.test(actual);
+   if(wanted==='Dolby Atmos')return /dolby atmos/i.test(actual)||/atmos/i.test(actual);
+   return actual.toLowerCase()===wanted.toLowerCase();
+ }
+ function rowHtml(t){
+   const rows=Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t);
+   const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(' ')||'所在地未確認';
+   const screens=[...new Set(rows.map(x=>String(x.screen||'').trim()).filter(Boolean))];
+   const source=rows.find(x=>x.source_url)?.source_url||'';
+   const equipment=screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>';
+   const links=(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
+   return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
+ }
+ function renderTheaterTable(){
+   const all=[...theaters,...osmTheaters],uniq=new Map();
+   all.forEach(t=>{if(window.isGenericChainOnly(t))return;const k=normName(t.name)+'|'+String(t.prefecture||'')+'|'+String(t.municipality||'');if(k&&!uniq.has(k))uniq.set(k,t)});
+   let directory=equipmentFilter?window.equipmentTheaters([...uniq.values()],equipmentFilter):[...uniq.values()];
+   if(prefectureFilter)directory=directory.filter(t=>String(t.prefecture||'')===prefectureFilter);
+   directoryCache=directory;
+   const q=$("#q").value.trim().toLowerCase();
+   if(q)directory=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(' ').toLowerCase().includes(q));
+   if(!q&&!equipmentFilter&&!prefectureFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
+   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter:'')+(prefectureFilter?' · '+prefectureFilter:'');
+   if(!directory.length){$("#grid").innerHTML='<div class="empty">条件に合う映画館がありません。</div>';return}
+   $("#grid").innerHTML='<div class="tableHint">表は左右にスワイプできます</div><div class="theaterTableWrap"><table class="theaterTable"><thead><tr><th>映画館</th><th>エリア</th><th>IMAX</th><th>Dolby</th><th>4DX / MX4D</th><th>ScreenX</th><th>スクリーン設備</th><th>リンク</th></tr></thead><tbody>'+directory.slice(0,150).map(rowHtml).join('')+'</tbody></table></div>';
+ }
+ let equipmentFilter=selectedFormat||'';
+ let prefectureFilter=new URLSearchParams(location.search).get('prefecture')||'';
+ window.renderDirectory=renderTheaterTable;
+ document.querySelectorAll('[data-format-filter]').forEach(b=>{
+   b.replaceWith(b.cloneNode(true));
+ });
+ document.querySelectorAll('[data-format-filter]').forEach(b=>b.addEventListener('click',()=>{
+   equipmentFilter=b.dataset.formatFilter||''; selectedFormat=equipmentFilter;
+   document.querySelectorAll('[data-format-filter]').forEach(x=>x.classList.toggle('active',x===b));
+   const p=new URLSearchParams(location.search);if(equipmentFilter)p.set('format',equipmentFilter);else p.delete('format');history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+   renderTheaterTable();
+ }));
+ const prefectureSelect=document.getElementById('prefectureFilter');
+ if(prefectureSelect){
+   prefectureSelect.value=prefectureFilter;
+   prefectureSelect.addEventListener('change',()=>{
+     prefectureFilter=prefectureSelect.value||'';
+     const p=new URLSearchParams(location.search);if(prefectureFilter)p.set('prefecture',prefectureFilter);else p.delete('prefecture');history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+     renderTheaterTable();
+   });
+ }
+ const input=$("#q"); if(input){const fresh=input.cloneNode(true);input.replaceWith(fresh);fresh.addEventListener('input',renderTheaterTable);}
+ const timer=setInterval(()=>{if((theaters.length||osmTheaters.length)&&formatData&&Array.isArray(formatData.screens)){clearInterval(timer);renderTheaterTable();}},100);
+ setTimeout(()=>clearInterval(timer),8000);
+})();
+</script>
+
+</body></html>

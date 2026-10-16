@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ja">
+<head><base href="../"><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>上映体験 | CINELVA</title>
+<meta name="description" content="シネマスコープ、IMAX、IMAX GT、Dolby Cinema、Dolby Atmos、4DX、MX4D、ScreenXの違いを視覚的に比較。">
+<link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<link rel="manifest" href="cinelva/manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
+<link rel="preload" as="image" href="assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424">
+<link rel="preload" as="image" href="assets/887F3A99-0D56-4E3F-9754-859B5C27E764.png?v=0432">
+<link rel="preload" as="image" href="assets/cinemap-experience.png?v=0420">
+<style>
+:root{--bg:#090909;--panel:#111;--panel2:#171717;--text:#f4f4f4;--muted:#929292;--line:#292929;--blue:#38a9ff;--green:#37d08b;--gold:#e5b64d;--violet:#c96aff;--red:#ff5757}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1120px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
+.top{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090909f2;backdrop-filter:blur(12px);z-index:20}.brandLogo{display:block;width:auto;height:34px;object-fit:contain}.topnav{display:flex;gap:16px;font-size:12px;color:#bbb}.topnav a.active{color:#fff}
+.hero{padding:34px 0 18px}.eyebrow{font-size:10px;letter-spacing:.14em;color:#777;font-weight:800}.hero h1{font-size:clamp(30px,6vw,50px);line-height:1.05;margin:8px 0 10px;letter-spacing:-.035em}.hero p{margin:0;color:var(--muted);line-height:1.65;max-width:760px}
+.section{padding:18px 0 34px;border-top:1px solid var(--line)}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px}.sectionHead h2{font-size:22px;margin:0}.sectionHead p{margin:0;color:var(--muted);font-size:12px;max-width:560px;line-height:1.55}
+.ratioGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}.ratioCard{border:1px solid var(--line);background:#0d0d0d;padding:12px;border-radius:8px}.ratioCard h3{margin:0 0 4px;font-size:17px}.ratioCard .ratio{font-size:12px;color:#aaa}.ratioCard.scope h3{color:var(--gold)}.ratioCard.imax h3{color:var(--blue)}.ratioCard.gt h3{color:var(--green)}
+.frameWrap{margin-top:12px;display:flex;align-items:center;justify-content:center;min-height:310px}.movieFrame{width:100%;display:block;border:2px solid currentColor;background:#03131f}.scope .movieFrame{aspect-ratio:2.39/1;color:var(--gold)}.imax .movieFrame{aspect-ratio:1.90/1;color:var(--blue)}.gt .movieFrame{aspect-ratio:1.43/1;color:var(--green)}
+.ratioMeta{display:flex;justify-content:space-between;margin-top:9px;font-size:11px;color:#aaa}.ratioNote{margin-top:10px;color:#888;font-size:11px;line-height:1.6}.formula{margin-top:14px;padding:11px 12px;border-left:2px solid #555;color:#aaa;font-size:11px;line-height:1.65}.cropLegend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}.cropLegend span{font-size:10px;color:#aaa}.cropLegend i{display:inline-block;width:9px;height:9px;margin-right:5px;border-radius:2px}
+.compareGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.compareCard{border:1px solid var(--line);background:#0d0d0d;border-radius:8px;overflow:hidden}.compareCard h3{font-size:15px;margin:0;padding:12px 12px 4px}.compareCard p{color:#999;font-size:11px;line-height:1.55;margin:0;padding:0 12px 12px}.sceneBox{padding:10px 10px 0}.sceneBox svg{width:100%;aspect-ratio:16/9;display:block;border:1px solid #2d2d2d}.normalScene .deepSeaQuality{filter:saturate(.92) contrast(.96) brightness(.93)}.laserScene .deepSeaQuality{filter:saturate(1.08) contrast(1.08) brightness(1.05)}.dolbyScene .deepSeaQuality{filter:saturate(1.12) contrast(1.18) brightness(.98)}
+.soundGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.soundCard{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.soundCard h3{margin:0 0 12px;font-size:15px}.auditorium{position:relative;height:160px;border:1px solid #252525;background:linear-gradient(#101821,#090b0e);overflow:hidden}.screen{position:absolute;left:24%;right:24%;top:18px;height:34px;border:2px solid #7c8ca0;background:#20384b}.seat{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:22px;height:32px;border-radius:12px 12px 4px 4px;background:#555}.speaker{position:absolute;width:12px;height:16px;border:1px solid #aaa;background:#222}.spL{left:16px;top:68px}.spR{right:16px;top:68px}.spB1{left:27%;bottom:16px}.spB2{right:27%;bottom:16px}.spT1{left:27%;top:8px}.spT2{right:27%;top:8px}.spT3{left:48%;top:5px}.soundWave{position:absolute;border:1px solid currentColor;border-left:0;border-right:0;border-radius:50%;opacity:.65}.wave1{left:50%;top:58px;width:70px;height:50px;transform:translateX(-50%)}.wave2{left:50%;top:45px;width:110px;height:75px;transform:translateX(-50%)}.standardSound{color:#8894a3}.imaxSound{color:var(--blue)}.atmosSound{color:var(--violet)}
+.specialGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.special{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0d0d0d}.special h3{margin:0 0 8px;font-size:17px}.special p{font-size:11px;color:#999;line-height:1.55;margin:8px 0 0}.chair{width:70px;height:62px;margin:14px auto;position:relative}.chair:before{content:"";position:absolute;width:42px;height:44px;left:14px;top:0;background:#39414b;border-radius:10px 10px 4px 4px}.chair:after{content:"";position:absolute;width:58px;height:17px;left:6px;bottom:0;background:#2b3138;border-radius:4px}.fx{display:flex;justify-content:center;gap:8px;font-size:18px}
+.screenxRoom{height:150px;position:relative;perspective:420px;margin-top:8px}.sxCenter{position:absolute;left:22%;right:22%;top:28px;height:88px;border:2px solid #d7a63a;overflow:hidden}.sxLeft,.sxRight{position:absolute;top:38px;width:24%;height:72px;border:2px solid #d7a63a;overflow:hidden}.sxLeft{left:0;transform:rotateY(42deg);transform-origin:right}.sxRight{right:0;transform:rotateY(-42deg);transform-origin:left}.screenxRoom svg{width:100%;height:100%;display:block}.note{font-size:11px;line-height:1.65;color:#888;margin:14px 0 0}.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.cta a{font-size:12px;border:1px solid #3a3a3a;padding:9px 12px;border-radius:4px;background:#121212}.screenLink{display:inline-flex;margin-top:10px;border:1px solid #3b4652;border-radius:999px;padding:6px 9px;font-size:10px;color:#dbe7f2;text-decoration:none}.screenLink:hover{border-color:#78899b}
+@media(max-width:760px){.ratioGrid,.compareGrid,.soundGrid,.specialGrid{grid-template-columns:1fr}.frameWrap{min-height:0}.sectionHead{display:block}.sectionHead p{margin-top:6px}.topnav{gap:10px;font-size:11px}.hero{padding-top:24px}}
+.top .brandLogo{height:32px}
+@media(max-width:600px){.brandLogo{height:29px}.top .brandLogo{height:28px}}
+
+.movieFrame{overflow:hidden;position:relative}
+.movieFrame .deepSeaPhoto{width:100%;height:100%;display:block;object-fit:cover;object-position:center 48%}
+.sceneBox .deepSeaQuality{width:100%;aspect-ratio:16/9;display:block;object-fit:cover;object-position:center 48%;border:1px solid #2d2d2d}
+
+
+
+/* unified Cinemap header v2 */
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+
+
+.gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
+
+
+
+
+.approvedAspectVisual{margin-top:22px;border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;background:#050607}.approvedAspectVisual img{display:block;width:100%;height:auto}@media(max-width:700px){.approvedAspectVisual{border-radius:12px}}
+
+.expDefs{position:absolute;width:0;height:0;overflow:hidden}
+.expSection{margin-top:44px}
+.ratioStack,.qualityGrid,.audioGrid,.motionGrid{display:grid;gap:18px;margin-top:22px}
+.ratioPanel,.qualityCard,.audioCard,.motionCard,.screenxCard,.pickGrid article{background:#080a0c;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
+.ratioPanel{padding:14px}.ratioLabel{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:12px}.ratioLabel div{display:flex;align-items:baseline;gap:12px}.ratioLabel b{font-size:20px}.ratioLabel strong{font-size:26px}.ratioLabel span{font-size:12px;color:#9da5ae}
+.scopePanel{border-color:rgba(255,95,95,.45)}.scopePanel strong{color:#ff6b6b}.imaxPanel{border-color:rgba(81,206,151,.45)}.imaxPanel strong{color:#68e8a1}.gtPanel{border-color:rgba(79,174,255,.5)}.gtPanel strong{color:#64b9ff}
+.ratioScene{display:block;width:100%;height:auto;border-radius:12px;background:#062b42}.ratioPanel p,.qualityCard p,.audioCard p,.motionCard p,.screenxCard p{margin:12px 4px 2px;color:#aeb4bb;line-height:1.65;font-size:14px}
+.qualityGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.qualityCard{padding:14px}.qualityCard h3,.audioCard h3,.motionCard h3,.screenxCard h3{margin:0;font-size:20px}.qualityScene{margin-top:12px;border-radius:12px;overflow:hidden;background:#061f2d}.qualityScene svg{display:block;width:100%;height:auto}
+.normalQ .qualityScene{filter:saturate(.88) brightness(.88) contrast(.94)}.imaxQ .qualityScene{filter:saturate(1.08) brightness(1.08) contrast(1.08)}.dolbyQ .qualityScene{filter:saturate(1.18) brightness(.94) contrast(1.24)}
+.imaxQ h3{color:#63b3ff}.dolbyQ h3{color:#bc70ff}
+.audioGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.audioCard{padding:14px}.audioTop,.motionHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.audioTop span,.motionHead span{font-size:11px;letter-spacing:.08em;color:#8c949d}.audioSvg,.motionSvg,.screenxSvg{display:block;width:100%;height:auto;margin-top:10px;border-radius:12px}.imaxA h3{color:#63b3ff}.atmosA h3{color:#bc70ff}
+.motionGrid{grid-template-columns:1fr 1fr}.motionCard{padding:16px}.dx4 h3{color:#ff6b6b}.mx4d h3{color:#63b3ff}.screenxCard{margin-top:18px;padding:16px}.screenxCard h3{color:#e6c35e}
+.pickGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}.pickGrid article{padding:15px;display:flex;flex-direction:column;gap:8px}.pickGrid b{font-size:15px}.pickGrid span{color:#9ea6ae;font-size:12px;line-height:1.55}
+@media(max-width:800px){.qualityGrid,.audioGrid{grid-template-columns:1fr}.pickGrid{grid-template-columns:1fr}.motionGrid{grid-template-columns:1fr}.ratioLabel{align-items:flex-start}.ratioLabel div{display:block}.ratioLabel strong{display:block;margin-top:2px;font-size:24px}.ratioLabel span{max-width:130px;text-align:right}.audioSvg,.motionSvg,.screenxSvg{border-radius:10px}.expSection{margin-top:34px}}
+
+
+/* final experience artwork */
+.finishedVisual{
+ width:100%;
+ aspect-ratio:4/5;
+ background-color:#07090c;
+ background-image:var(--experience-sprite,none);
+ background-repeat:no-repeat;
+ background-size:100% 600%;
+ border:1px solid rgba(255,255,255,.14);
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+.tileAspect{background-position:center 0%}
+.tileVisual{background-position:center 20%}
+.tileAudio{background-position:center 40%}
+.tileMotion{background-position:center 60%}
+.tileScreenx{background-position:center 80%}
+.tileGuide{background-position:center 100%}
+.experienceSpriteLoading .finishedVisual{background-image:linear-gradient(110deg,#080b0f 25%,#11161d 40%,#080b0f 55%);background-size:200% 100%;animation:expShimmer 1.4s linear infinite}
+.experienceSpriteError .finishedVisual{min-height:280px;background:#090b0e}
+@keyframes expShimmer{to{background-position:-200% 0}}
+.sectionSubHead{margin:30px 0 14px}.sectionSubHead h3{margin:0 0 7px;color:var(--gold);font-size:24px}.sectionSubHead p{margin:0;color:var(--muted);line-height:1.7}
+.expSection{margin-top:44px}.expSection .sectionHead{margin-bottom:18px}
+.expSection .formula{margin-top:15px}
+@media(max-width:700px){
+ .finishedVisual{border-radius:14px;box-shadow:none}
+ .expSection{margin-top:34px}
+ .sectionSubHead{margin-top:26px}
+ .sectionSubHead h3{font-size:21px}
+}
+
+
+/* exact aspect-ratio comparison */
+.ratioCompareExact{display:grid;gap:18px;margin-top:20px}
+.ratioExactCard{background:#080a0d;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;padding:14px}
+.ratioExactHead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:12px}
+.ratioExactHead>div{display:flex;align-items:baseline;gap:12px}.ratioExactHead b{font-size:20px;letter-spacing:.01em}.ratioExactHead strong{font-size:26px;font-weight:800;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue","Noto Sans JP",sans-serif}
+.ratioExactHead span{font-size:12px;color:#9da6af;text-align:right}
+.scopeExact{border-color:rgba(255,92,105,.42)}.scopeExact strong{color:#ff6875}
+.imaxExact{border-color:rgba(72,201,255,.42)}.imaxExact strong{color:#5bc8ff}
+.gtExact{border-color:rgba(255,210,79,.45)}.gtExact strong{color:#f4d15b}
+.ratioViewport{width:100%;display:block;background-color:#061019;background-image:var(--aspect-base,none);background-repeat:no-repeat;background-size:cover;background-position:50% 50%;border-radius:10px;overflow:hidden}
+.ratio239{aspect-ratio:2.39/1}.ratio190{aspect-ratio:1.90/1}.ratio143{aspect-ratio:1.43/1}
+.aspectBaseLoading .ratioViewport{background-image:linear-gradient(110deg,#081018 25%,#101c27 40%,#081018 55%);background-size:200% 100%;animation:expShimmer 1.4s linear infinite}
+@media(max-width:700px){.ratioExactCard{padding:11px;border-radius:14px}.ratioExactHead{align-items:flex-start}.ratioExactHead>div{display:block}.ratioExactHead b{font-size:16px}.ratioExactHead strong{display:block;margin-top:2px;font-size:22px}.ratioExactHead span{max-width:125px;font-size:11px}.ratioViewport{border-radius:8px}}
+
+
+/* rebuilt experience comparisons */
+.qualityDemo{margin-top:12px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#02050a;border:1px solid #242a31}.qScreen{height:100%;position:relative;overflow:hidden;background-image:var(--aspect-base,linear-gradient(180deg,#06182b,#052c3c));background-size:cover;background-position:center 48%;transform:scale(1.015)}.qScreen:after{content:"";position:absolute;inset:0;pointer-events:none}.qNormal:after{background:rgba(18,26,31,.18)}.qImax:after{background:linear-gradient(180deg,rgba(120,210,255,.04),transparent 55%)}.qDolby:after{background:radial-gradient(circle at 55% 42%,transparent 18%,rgba(0,0,0,.22) 82%)}.qNormal{filter:saturate(.82) brightness(.88) contrast(.96)}.qImax{filter:saturate(1.08) brightness(1.08) contrast(1.08) sharpen(1)}.qDolby{filter:saturate(1.13) brightness(.94) contrast(1.28)}.qualityCard p b{color:#eee}
+.audioStage{height:220px;margin-top:12px;border-radius:12px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 60%,#17212b,#07090c 68%);border:1px solid #242a31}.audioStage .scr{position:absolute;left:22%;right:22%;top:18px;height:32px;border:2px solid #71879a;background:linear-gradient(90deg,#17314a,#28526c,#17314a)}.audioStage .listener{position:absolute;left:50%;bottom:28px;width:20px;height:28px;transform:translateX(-50%);border-radius:50% 50% 5px 5px;background:#c4cbd1;z-index:3}.audioStage .sp,.audioStage .ceil{position:absolute;width:12px;height:16px;border:1px solid currentColor;background:#15191e;box-shadow:0 0 12px currentColor}.s1{left:8%;top:30%}.s2{right:8%;top:30%}.s3{left:8%;bottom:15%}.s4{right:8%;bottom:15%}.s5{left:48%;top:12%}.s6{right:24%;top:12%}.audioStage .ring{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);border:1px solid currentColor;border-radius:50%;opacity:.55}.r1{width:44%;height:40%}.r2{width:72%;height:65%}.aStandard{color:#9ba6b1}.aImax{color:#56baff}.aAtmos{color:#c67cff}.ceil{top:4%;transform:rotate(90deg)}.c1{left:25%}.c2{left:49%}.c3{right:25%}.motionStage{height:220px;margin-top:12px;border-radius:12px;background:radial-gradient(circle at 50% 65%,#242a31,#080a0d 65%);position:relative;overflow:hidden}.motionStage:before,.motionStage:after{content:"";position:absolute;pointer-events:none}.dx4 .motionStage:before{left:6%;right:6%;top:24%;height:70px;background:repeating-linear-gradient(168deg,transparent 0 15px,#68d8ff77 16px 18px,transparent 19px 28px);clip-path:polygon(0 20%,100% 0,100% 45%,0 72%);filter:drop-shadow(0 0 7px #55cfff)}.dx4 .motionStage:after{width:120px;height:100px;right:4%;top:26%;background:radial-gradient(circle,#a9efffaa 0 2px,transparent 3px) 0 0/20px 18px;transform:rotate(-18deg)}.mx4d .motionStage:before{left:6%;right:6%;top:34%;height:50px;background:linear-gradient(90deg,transparent,#72caff88 25%,#e7f6ff 50%,#72caff88 75%,transparent);clip-path:polygon(0 45%,45% 38%,45% 0,55% 0,55% 38%,100% 45%,100% 55%,55% 48%,55% 100%,45% 100%,45% 48%,0 55%);filter:drop-shadow(0 0 9px #63baff)}.mx4d .motionStage:after{left:12%;right:12%;bottom:24%;height:35px;background:radial-gradient(ellipse at center,#d7e7f255,transparent 68%);filter:blur(5px)}.motionSeat{position:absolute;left:50%;top:35%;width:90px;height:90px;transform:translateX(-50%) rotate(-8deg);filter:drop-shadow(12px 12px 16px #000)}.dx4 .motionSeat{animation:seat4dx 2.6s ease-in-out infinite}.mx4d .motionSeat{animation:seatmx 2.2s ease-in-out infinite}@keyframes seat4dx{0%,100%{transform:translateX(-50%) rotate(-7deg) translateY(0)}50%{transform:translateX(-50%) rotate(6deg) translateY(-8px)}}@keyframes seatmx{0%,100%{transform:translateX(-50%) rotate(5deg) translateX(-4px)}50%{transform:translateX(-50%) rotate(-4deg) translateX(5px)}}@media(prefers-reduced-motion:reduce){.dx4 .motionSeat,.mx4d .motionSeat{animation:none}}.motionSeat:before{content:"";position:absolute;left:19px;top:0;width:52px;height:65px;border-radius:16px 16px 6px 6px;background:linear-gradient(#454d57,#222831)}.motionSeat:after{content:"";position:absolute;left:5px;bottom:5px;width:80px;height:25px;border-radius:7px;background:#2c333c}.motionSeat i{position:absolute;left:43px;bottom:-28px;width:5px;height:35px;background:#555}.mx{transform:translateX(-50%) rotate(5deg)}.effects{position:absolute;left:8%;right:8%;bottom:16px;display:flex;justify-content:space-around;align-items:center}.effects{gap:5px}.effects b{font-size:9px;letter-spacing:.06em;font-weight:800;color:#d7dde3;border:1px solid #4a535e;border-radius:999px;padding:6px 7px;background:#111820}.screenxRoom2{height:310px;position:relative;perspective:520px;background:radial-gradient(ellipse at 50% 70%,#111923,#030507 70%);border-radius:12px;overflow:hidden}.sxMain,.sxSide{position:absolute;top:38px;height:190px;overflow:hidden;border:1px solid #9b7a32;box-shadow:0 0 22px #d5aa4440}.sxMain{left:22%;right:22%;z-index:2}.sxSide{width:34%;top:50px;height:166px}.sxL{left:-10%;transform:rotateY(58deg);transform-origin:right}.sxR{right:-10%;transform:rotateY(-58deg);transform-origin:left}.sxMain span,.sxSide span{position:absolute;inset:0;background-image:var(--aspect-base,linear-gradient(180deg,#10243b,#173b3a));background-size:cover;background-repeat:no-repeat}.sxMain span{background-position:center 48%}.sxL span{background-position:left 48%}.sxR span{background-position:right 48%}.sxMain:after,.sxSide:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 30px #0007;pointer-events:none}.sxSeats{position:absolute;left:4%;right:4%;bottom:20px;text-align:center;word-spacing:24px;color:#505965;font-size:25px;transform:perspective(300px) rotateX(48deg);text-shadow:0 12px 18px #000}.pickGrid article strong{font-size:18px;color:#f2f2f2}.pickGrid article:nth-child(2) strong{color:#c67cff}.pickGrid article:nth-child(3) strong{color:#ff7474}.pickGrid article:nth-child(4) strong{color:#e6c35e}
+@media(max-width:700px){.audioStage,.motionStage{height:190px}.screenxRoom2{height:230px}.sxMain{height:135px}.sxSide{height:118px}.sxSeats{font-size:18px;word-spacing:12px}.effects{left:4%;right:4%;gap:3px}.effects b{font-size:8px;padding:5px 6px}}
+
+/* v0.4.16 visual hotfix: explicit overrides */
+.audioStage{background:linear-gradient(180deg,#111820,#07090c)!important}.audioStage .scr{left:18%!important;right:18%!important;height:42px!important;background:linear-gradient(180deg,#345f7b,#132638)!important;box-shadow:0 0 22px currentColor}.audioStage .listener{bottom:20px!important;width:24px!important;height:34px!important}.audioStage .sp,.audioStage .ceil{width:16px!important;height:21px!important;border-width:2px!important}.audioStage .ring{border-width:2px!important}.aAtmos .ring{box-shadow:0 0 18px #c67cff55}.aImax .ring{box-shadow:0 0 18px #56baff44}
+.sxMain span,.sxSide span{background-image:none!important;background-repeat:no-repeat!important}.sxMain span{background-image:var(--aspect-base)!important;background-size:cover!important;background-position:center 48%!important}.sxL span,.sxR span{background:linear-gradient(180deg,#08243b 0 47%,#0b3841 48% 100%)!important}.sxL span:before,.sxR span:before{content:"";position:absolute;inset:0;background:linear-gradient(155deg,transparent 0 42%,#24584d 43% 60%,#10363a 61%),radial-gradient(circle at 72% 30%,#8de9ff77 0 2%,transparent 2.5%)}.sxR span:before{transform:scaleX(-1)}.sxL span:after,.sxR span:after{content:"";position:absolute;width:30px;height:9px;border-radius:50%;top:43%;left:28%;background:#173d47;box-shadow:40px -17px 0 -4px #1b4650,68px 18px 0 -6px #173a43}.sxR span:after{left:auto;right:28%;transform:scaleX(-1)}
+
+/* v0.4.17: theater-like ScreenX, not flat side cards */
+.screenxRoom2{perspective:700px!important;background:radial-gradient(ellipse at 50% 72%,#15191f,#030405 72%)!important}.sxMain{left:20%!important;right:20%!important;top:34px!important;height:178px!important;transform:translateZ(0)!important}.sxSide{top:42px!important;height:174px!important;width:36%!important;border-color:#765f2d!important}.sxL{left:-8%!important;transform:rotateY(64deg)!important;transform-origin:right center!important}.sxR{right:-8%!important;transform:rotateY(-64deg)!important;transform-origin:left center!important}.sxL span,.sxR span{background:linear-gradient(180deg,#071b2c 0 45%,#0b3038 46% 100%)!important}.sxL span:before,.sxR span:before{background:linear-gradient(160deg,transparent 0 46%,#17463f 47% 61%,#0c292f 62%)!important}.sxSeats{bottom:9px!important;opacity:.8}
+@media(max-width:700px){.sxMain{left:20%!important;right:20%!important;height:130px!important}.sxSide{width:38%!important;height:126px!important}.sxL{left:-11%!important}.sxR{right:-11%!important}}
+
+/* v0.4.18 motion pass */
+.audioStage .ring{animation:soundPulse 2.4s ease-out infinite}.audioStage .r2{animation-delay:.65s}.aAtmos .ceil{animation:ceilingGlow 1.8s ease-in-out infinite alternate}
+.screenxRoom2 .sxMain{animation:screenCenter 5s ease-in-out infinite}.screenxRoom2 .sxL{animation:screenLeft 5s ease-in-out infinite}.screenxRoom2 .sxR{animation:screenRight 5s ease-in-out infinite}
+.dx4 .motionStage:before{animation:windSweep 2.1s linear infinite}.dx4 .motionStage:after{animation:waterSpray 2.8s ease-in-out infinite}.mx4d .motionStage:before{animation:airBurst 2.2s ease-in-out infinite}.mx4d .motionStage:after{animation:mistPulse 2.5s ease-in-out infinite}
+@keyframes soundPulse{0%{opacity:.12;transform:translate(-50%,-50%) scale(.72)}65%{opacity:.72}100%{opacity:0;transform:translate(-50%,-50%) scale(1.16)}}
+@keyframes ceilingGlow{from{box-shadow:0 0 4px currentColor;opacity:.45}to{box-shadow:0 0 20px currentColor;opacity:1}}
+@keyframes screenCenter{0%,100%{filter:brightness(.9)}45%,65%{filter:brightness(1.08)}}
+@keyframes screenLeft{0%,18%{opacity:.45;transform:rotateY(68deg)}45%,100%{opacity:1;transform:rotateY(64deg)}}
+@keyframes screenRight{0%,18%{opacity:.45;transform:rotateY(-68deg)}45%,100%{opacity:1;transform:rotateY(-64deg)}}
+@keyframes windSweep{0%{transform:translateX(-20%) skewY(-8deg);opacity:0}35%{opacity:.9}100%{transform:translateX(20%) skewY(-8deg);opacity:0}}
+@keyframes waterSpray{0%,100%{transform:translate(8px,8px) rotate(-18deg);opacity:.25}45%{transform:translate(-8px,-8px) rotate(-18deg);opacity:1}}
+@keyframes airBurst{0%,100%{transform:scaleX(.65);opacity:.25}50%{transform:scaleX(1.08);opacity:1}}
+@keyframes mistPulse{0%,100%{opacity:.2;transform:scale(.85)}50%{opacity:.75;transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.audioStage .ring,.audioStage .ceil,.screenxRoom2 .sxMain,.screenxRoom2 .sxL,.screenxRoom2 .sxR,.dx4 .motionStage:before,.dx4 .motionStage:after,.mx4d .motionStage:before,.mx4d .motionStage:after{animation:none!important}}
+
+/* v0.4.19 uploaded experience artwork */
+.uploadedExperienceArt{max-width:1180px;margin:18px auto 28px;padding:0 16px}
+.uploadedExperienceArt__frame{position:relative;overflow:hidden;border-radius:22px;background:#070b12;box-shadow:0 18px 50px rgba(0,0,0,.32)}
+.uploadedExperienceArt img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;transform:scale(1.005);animation:cinemapArtDrift 12s ease-in-out infinite alternate}
+.uploadedExperienceArt__sweep{position:absolute;inset:-20%;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.10) 49%,transparent 63%);transform:translateX(-65%);animation:cinemapArtSweep 8s ease-in-out infinite}
+@keyframes cinemapArtDrift{0%{transform:scale(1.005) translate3d(0,0,0)}100%{transform:scale(1.035) translate3d(-.35%,.25%,0)}}
+@keyframes cinemapArtSweep{0%,58%{transform:translateX(-65%);opacity:0}64%{opacity:.55}78%,100%{transform:translateX(65%);opacity:0}}
+@media(max-width:640px){.uploadedExperienceArt{margin:12px auto 20px;padding:0 12px}.uploadedExperienceArt__frame{border-radius:16px}.uploadedExperienceArt img{aspect-ratio:16/10;object-fit:cover}}
+@media(prefers-reduced-motion:reduce){.uploadedExperienceArt img,.uploadedExperienceArt__sweep{animation:none!important}}
+
+/* v0.4.20: use uploaded artwork at the actual special-format cards */
+.experienceCrop{position:relative;width:100%;overflow:hidden;border-radius:12px;background-image:url("assets/cinemap-experience.png?v=0420");background-repeat:no-repeat;background-color:#05070a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);animation:experienceBreath 9s ease-in-out infinite alternate}
+.cropScreenx{aspect-ratio:2.55/1;background-size:200% auto;background-position:0% 0%}
+.crop4dx{aspect-ratio:16/10;background-size:200% auto;background-position:100% 0%}
+.cropMx4d{aspect-ratio:16/10;background-size:300% auto;background-position:0% 100%}
+@keyframes experienceBreath{from{filter:brightness(.92) saturate(.96)}to{filter:brightness(1.08) saturate(1.08)}}
+@media(prefers-reduced-motion:reduce){.experienceCrop{animation:none!important}}
+
+/* v0.4.21 premium animated special-format section */
+.premiumMotion .experienceCrop{background-size:cover!important;background-position:center!important;min-height:260px}
+.crop4dx{background-image:linear-gradient(#0000,#0002),url("assets/cinemap-experience.png?v=0421")!important;background-size:200% auto!important;background-position:100% 0!important}
+.cropMx4d{background-image:linear-gradient(#0000,#0002),url("assets/cinemap-experience.png?v=0421")!important;background-size:300% auto!important;background-position:0 100%!important}
+.effectLegend{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 2px}.effectLegend span{font-size:10px;letter-spacing:.08em;padding:6px 8px;border:1px solid #ffffff24;border-radius:999px;color:#cbd2d9;background:#0c1015}
+.experienceCrop .fxWind,.experienceCrop .fxWater,.experienceCrop .fxFlash,.experienceCrop .fxSeat{position:absolute;pointer-events:none}
+.fxWind{left:-35%;top:20%;width:70%;height:42%;background:repeating-linear-gradient(165deg,transparent 0 13px,#d9f5ff80 14px 16px,transparent 17px 28px);filter:blur(.2px);animation:fxWind 3.2s linear infinite}
+.fxWater{right:3%;bottom:7%;width:42%;height:44%;background:radial-gradient(circle,#e5faffd9 0 2px,transparent 3px) 0 0/22px 20px;opacity:0;animation:fxWater 3.8s ease-out infinite}
+.fxFlash{inset:0;background:#fff;opacity:0;animation:fxFlash 6.2s steps(1) infinite}
+.fxSeat{left:14px;bottom:12px;font-size:9px;letter-spacing:.14em;color:#fff9;background:#0009;border:1px solid #fff3;border-radius:999px;padding:5px 8px;animation:fxSeat 1.9s ease-in-out infinite}
+@keyframes fxWind{to{transform:translateX(210%)}}
+@keyframes fxWater{0%,62%{opacity:0;transform:translate(12px,14px) scale(.75)}70%{opacity:.85}88%,100%{opacity:0;transform:translate(-15px,-22px) scale(1.08)}}
+@keyframes fxFlash{0%,74%,77%,100%{opacity:0}75%{opacity:.26}76%{opacity:.06}}
+@keyframes fxSeat{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-3px) rotate(-1deg)}70%{transform:translateY(2px) rotate(1deg)}}
+.screenxTheater{height:260px;position:relative;overflow:hidden;border-radius:14px;background:#020407;perspective:850px}
+.sxPanel{position:absolute;top:18px;height:188px;background-image:url("assets/cinemap-experience.png?v=0421");background-size:200% auto;background-repeat:no-repeat;box-shadow:0 0 22px #62c9ff22}
+.sxCenter{left:18%;right:18%;background-position:0 0;z-index:2;animation:sxCenterLive 7s ease-in-out infinite}
+.sxLeft{left:-14%;width:38%;background-position:0 0;transform-origin:right center;animation:sxLeftOpen 7s ease-in-out infinite}
+.sxRight{right:-14%;width:38%;background-position:48% 0;transform-origin:left center;animation:sxRightOpen 7s ease-in-out infinite}
+.sxVignette{position:absolute;inset:0;z-index:3;box-shadow:inset 0 -70px 60px #000,inset 0 0 35px #0008;pointer-events:none}
+.sxSeatsReal{position:absolute;z-index:4;left:6%;right:6%;bottom:-9px;height:62px;background:radial-gradient(ellipse at 8px 8px,#171c22 0 7px,transparent 8px) 0 0/32px 22px;transform:perspective(180px) rotateX(48deg);opacity:.9}
+@keyframes sxLeftOpen{0%,15%{transform:rotateY(88deg);opacity:.15}45%,85%{transform:rotateY(58deg);opacity:1}100%{transform:rotateY(88deg);opacity:.15}}
+@keyframes sxRightOpen{0%,15%{transform:rotateY(-88deg);opacity:.15}45%,85%{transform:rotateY(-58deg);opacity:1}100%{transform:rotateY(-88deg);opacity:.15}}
+@keyframes sxCenterLive{0%,100%{filter:brightness(.82)}45%,85%{filter:brightness(1.08)}}
+@media(max-width:640px){.premiumMotion .experienceCrop{min-height:0}.screenxTheater{height:215px}.sxPanel{height:154px}.sxCenter{left:17%;right:17%}}
+@media(prefers-reduced-motion:reduce){.fxWind,.fxWater,.fxFlash,.fxSeat,.sxPanel{animation:none!important}.sxLeft{transform:rotateY(58deg);opacity:1}.sxRight{transform:rotateY(-58deg);opacity:1}}
+
+/* v0.4.22 cleanup: one 4D scene + restore prior ScreenX */
+.singleMotionScene{position:relative;overflow:hidden;width:100%;aspect-ratio:16/10;border-radius:12px;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;box-shadow:inset 0 0 0 1px #ffffff20}
+.singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxSeat,.singleMotionScene .fxAir{position:absolute;pointer-events:none}
+.singleMotionScene .fxAir{left:-20%;top:32%;width:55%;height:20%;background:linear-gradient(90deg,transparent,#dff7ff99,transparent);filter:blur(3px);animation:fxAir 2.8s ease-in-out infinite}
+@keyframes fxAir{0%{transform:translateX(0);opacity:0}35%{opacity:.7}100%{transform:translateX(210%);opacity:0}}
+.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:screenxSubtle 8s ease-in-out infinite alternate!important}
+@keyframes screenxSubtle{from{filter:brightness(.94);transform:scale(1)}to{filter:brightness(1.04);transform:scale(1.008)}}
+.screenxTheater{display:none!important}
+@media(prefers-reduced-motion:reduce){.singleMotionScene span,.cropScreenx{animation:none!important}}
+
+/* v0.4.23 precise 4D crop: isolate the single action frame */
+.singleMotionScene{aspect-ratio:1.78/1!important;background-size:200% auto!important;background-position:100% 0!important}
+/* mask the neighboring tiles baked into the source sprite by cropping to the action-frame bounds */
+.singleMotionScene:before{content:"";position:absolute;inset:0;z-index:0;background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424");background-repeat:no-repeat;background-size:200% auto;background-position:100% 0;transform:scale(1.34);transform-origin:76% 18%}
+.singleMotionScene{background-image:none!important}
+.singleMotionScene>span{z-index:2}
+@media(max-width:640px){.singleMotionScene:before{transform:scale(1.38);transform-origin:78% 16%}}
+
+/* v0.4.24 clean 4D base + animated seats as independent DOM layer */
+.singleMotionScene{background-image:url("assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png?v=0424")!important;background-size:cover!important;background-position:center!important;aspect-ratio:16/9!important}
+.singleMotionScene:before{content:none!important}
+.singleMotionScene:after{content:"";position:absolute;z-index:1;left:4%;right:4%;bottom:-5%;height:30%;background:radial-gradient(ellipse at 50% 35%,#272c33 0 18%,#11151a 20% 38%,transparent 40%) 0 0/20% 58%,linear-gradient(180deg,transparent 0 18%,#090b0e 19% 100%);filter:drop-shadow(0 -5px 8px #0008);transform-origin:50% 100%;animation:seatBank4d 1.65s ease-in-out infinite}
+.mx4d .singleMotionScene:after{animation:seatBankMx 1.25s ease-in-out infinite}
+@keyframes seatBank4d{0%,100%{transform:perspective(450px) rotateX(0) rotateZ(0) translateY(0)}30%{transform:perspective(450px) rotateX(-5deg) rotateZ(-1.2deg) translateY(-5px)}65%{transform:perspective(450px) rotateX(3deg) rotateZ(1deg) translateY(3px)}}
+@keyframes seatBankMx{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(-3px,-2px) rotate(-.7deg)}55%{transform:translate(3px,1px) rotate(.7deg)}75%{transform:translate(0,-4px) rotate(0)}}
+.singleMotionScene>span{z-index:3}
+
+/* v0.4.25 refined motion; ScreenX intentionally frozen to v0.4.20 visual */
+.singleMotionScene:after{content:"";position:absolute;z-index:2;left:5%;right:5%;bottom:-2%;height:28%;background:
+radial-gradient(ellipse at 10% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 30% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 50% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 70% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+radial-gradient(ellipse at 90% 34%,#30363e 0 8%,#15191f 9% 15%,transparent 16%),
+linear-gradient(180deg,transparent 0 38%,#101419 39% 70%,#080a0d 71%);
+clip-path:polygon(0 20%,8% 8%,16% 20%,22% 7%,38% 20%,44% 7%,56% 20%,62% 7%,78% 20%,84% 8%,100% 20%,100% 100%,0 100%);
+filter:drop-shadow(0 -8px 12px #000a);transform-origin:50% 92%;animation:seatRide4d 3.8s cubic-bezier(.45,.05,.25,1) infinite}
+.mx4d .singleMotionScene:after{animation:seatRideMx 3.2s cubic-bezier(.45,.05,.25,1) infinite}
+@keyframes seatRide4d{0%,16%,100%{transform:translateY(0) rotate(0)}24%{transform:translateY(-7px) rotate(-1.4deg)}31%{transform:translateY(2px) rotate(.7deg)}48%{transform:translateY(0) rotate(0)}62%{transform:translateY(-4px) rotate(1deg)}69%{transform:translateY(1px) rotate(-.4deg)}}
+@keyframes seatRideMx{0%,20%,100%{transform:translate(0,0) rotate(0)}28%{transform:translate(-3px,-4px) rotate(-.7deg)}34%{transform:translate(2px,1px) rotate(.5deg)}54%{transform:translate(0,0) rotate(0)}68%{transform:translate(3px,-3px) rotate(.6deg)}74%{transform:translate(-1px,1px) rotate(-.3deg)}}
+.singleMotionScene .fxWind{opacity:.42;filter:blur(1.5px);animation-duration:5.2s}
+.singleMotionScene .fxWater{animation-duration:5.6s}
+.singleMotionScene .fxFlash{animation-duration:8.5s}
+.singleMotionScene .fxSeat{display:none!important}
+/* Restore exactly the simple v0.4.20 ScreenX presentation; no later theater-opening animation. */
+.cropScreenx{aspect-ratio:2.55/1!important;background-image:url("assets/cinemap-experience.png?v=0420")!important;background-repeat:no-repeat!important;background-size:200% auto!important;background-position:0 0!important;animation:none!important;transform:none!important;filter:none!important}
+.screenxCard .screenxTheater,.screenxCard .sxPanel,.screenxCard .sxVignette,.screenxCard .sxSeatsReal{display:none!important}
+
+/* v0.4.26 audio comparison that explains the conceptual difference */
+.soundMap{height:220px;position:relative;margin:12px 0;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 58%,#18202a 0 4%,#0b1016 5% 34%,#050709 70%);border:1px solid #ffffff18}
+.screenBar{position:absolute;left:20%;right:20%;top:14px;height:7px;border-radius:8px;background:#d9e7f5;box-shadow:0 0 16px #9fd5ff66}
+.listenerDot{position:absolute;left:50%;top:58%;width:15px;height:15px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 0 18px #fff8}
+.speaker{position:absolute;display:grid;place-items:center;width:29px;height:29px;border-radius:7px;background:#18232e;border:1px solid #ffffff38;font-size:9px;font-style:normal;color:#dce9f5}.fl{left:14%;top:25%}.fc{left:calc(50% - 14px);top:21%}.fr{right:14%;top:25%}.sl{left:8%;top:58%}.sr{right:8%;top:58%}.rl{left:18%;bottom:12%}.rr{right:18%;bottom:12%}.hi1{left:31%;top:40%;border-color:#64b9ff;color:#64b9ff}.hi2{right:31%;top:40%;border-color:#64b9ff;color:#64b9ff}
+.soundWave{position:absolute;left:50%;top:58%;width:65px;height:65px;border:1px solid #8dd2ff66;border-radius:50%;transform:translate(-50%,-50%);animation:audioPulse 2.8s ease-out infinite}.w2{animation-delay:1.4s}
+.ceiling{position:absolute;top:35%;font-style:normal;color:#c96aff;text-shadow:0 0 12px #c96aff}.c1{left:25%}.c2{left:42%}.c3{right:42%}.c4{right:25%}
+.soundObject{position:absolute;left:18%;top:72%;font-style:normal;color:#fff;font-size:20px;text-shadow:0 0 14px #c96aff;animation:objectFly 4.8s cubic-bezier(.45,.05,.25,1) infinite}
+.objectTrail{position:absolute;left:20%;top:70%;width:58%;height:1px;border-top:1px dashed #c96aff88;transform:rotate(-28deg);transform-origin:left center}
+.audioKey{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.audioKey span{padding:7px 10px;border-radius:999px;background:#0b0e12;border:1px solid #ffffff1c;color:#aeb8c2;font-size:10px}
+@keyframes audioPulse{0%{opacity:.75;transform:translate(-50%,-50%) scale(.35)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.5)}}
+@keyframes objectFly{0%,10%{left:18%;top:72%}45%{left:48%;top:28%}75%,100%{left:78%;top:48%}}
+@media(prefers-reduced-motion:reduce){.soundWave,.soundObject{animation:none!important}}
+
+/* v0.4.27 recognizable cinema seats: backrest + headrest + armrests */
+.singleMotionScene:after{content:"";position:absolute;z-index:2;left:7%;right:7%;bottom:-1%;height:31%;background:
+radial-gradient(ellipse at 10% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 30% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 50% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 70% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+radial-gradient(ellipse at 90% 21%,#343a43 0 5.8%,#171b21 6.2% 9.5%,transparent 10%),
+linear-gradient(90deg,transparent 2%,#20262d 3% 17%,transparent 18% 22%,#20262d 23% 37%,transparent 38% 42%,#20262d 43% 57%,transparent 58% 62%,#20262d 63% 77%,transparent 78% 82%,#20262d 83% 97%,transparent 98%) 0 43%/100% 47% no-repeat,
+linear-gradient(90deg,transparent 0 8%,#090c10 8% 11%,transparent 11% 28%,#090c10 28% 31%,transparent 31% 48%,#090c10 48% 51%,transparent 51% 68%,#090c10 68% 71%,transparent 71% 88%,#090c10 88% 91%,transparent 91%) 0 70%/100% 18% no-repeat;
+clip-path:none!important;border-radius:14px 14px 0 0;filter:drop-shadow(0 -8px 12px #000b);transform-origin:50% 92%;animation:seatRide4d 3.8s cubic-bezier(.45,.05,.25,1) infinite}
+
+/* v0.4.28 perspective 3D audio rooms */
+.room3d{height:245px;position:relative;overflow:hidden;margin:12px 0;border-radius:14px;background:linear-gradient(#080b10,#020304);perspective:520px;border:1px solid #ffffff18}
+.floorPlane{position:absolute;left:8%;right:8%;bottom:-24%;height:70%;background:linear-gradient(90deg,#ffffff08 1px,transparent 1px),linear-gradient(#ffffff08 1px,transparent 1px);background-size:32px 32px;transform:rotateX(67deg);transform-origin:bottom}
+.ceilingPlane{position:absolute;left:12%;right:12%;top:-23%;height:58%;border:1px solid #ffffff0d;transform:rotateX(-62deg);background:linear-gradient(90deg,#ffffff06 1px,transparent 1px),linear-gradient(#ffffff06 1px,transparent 1px);background-size:30px 30px}
+.screen3d{position:absolute;left:28%;right:28%;top:25px;height:48px;border:2px solid #dbeaff99;background:#b9dcff12;box-shadow:0 0 18px #8acaff33}
+.seat3d{position:absolute;left:45%;top:59%;width:10%;height:15%;border-radius:10px 10px 4px 4px;background:#3b424b;box-shadow:0 9px 0 #171b20}
+.sp3{position:absolute;width:12px;height:12px;border-radius:3px;background:#8ecfff;box-shadow:0 0 12px #64b9ff;font-style:normal}.f1{left:23%;top:35%}.f2{right:23%;top:35%}.s1{left:12%;top:55%}.s2{right:12%;top:55%}.r1{left:20%;top:75%}.r2{right:20%;top:75%}.h1{left:29%;top:20%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h2{right:29%;top:20%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h3{left:37%;top:42%;background:#c57aff;box-shadow:0 0 12px #c57aff}.h4{right:37%;top:42%;background:#c57aff;box-shadow:0 0 12px #c57aff}
+.horizontalRing{position:absolute;left:9%;right:9%;top:49%;height:36%;border:2px solid #65c4ff88;border-radius:50%;transform:rotateX(66deg);animation:ringGlow 2.8s ease-in-out infinite}
+.upperRing{position:absolute;left:22%;right:22%;top:21%;height:32%;border:2px solid #b66cff99;border-radius:50%;transform:rotateX(63deg);animation:ringGlow 2.8s 1.2s ease-in-out infinite}
+.flightPath{position:absolute;left:16%;top:66%;width:68%;height:1px;border-top:2px dashed #c96aff88;transform:rotate(-27deg);transform-origin:left}
+.soundOrb{position:absolute;left:16%;top:66%;color:#fff;font-size:18px;text-shadow:0 0 16px #c96aff;animation:orb3d 4.8s cubic-bezier(.45,.05,.25,1) infinite}
+@keyframes ringGlow{50%{opacity:.35;transform:rotateX(66deg) scale(.9)}}
+@keyframes orb3d{0%,8%{left:16%;top:66%;transform:scale(.7)}45%{left:48%;top:18%;transform:scale(1.3)}78%,100%{left:80%;top:48%;transform:scale(.85)}}
+@media(prefers-reduced-motion:reduce){.horizontalRing,.upperRing,.soundOrb{animation:none!important}}
+
+/* v0.4.29 uploaded production assets */
+.audio3d .room3d{background-image:url("assets/A03A1082-4DE0-4BCF-9B5E-0985A16F41E2.png?v=0429")!important;background-repeat:no-repeat!important;background-size:300% auto!important;background-color:#05070a!important}
+.audio3d .flatRoom{background-position:0 0!important}
+.audio3d .imaxRoom{background-position:50% 0!important}
+.audio3d .atmosRoom{background-position:100% 0!important}
+.audio3d .room3d>.ceilingPlane,.audio3d .room3d>.floorPlane,.audio3d .room3d>.screen3d,.audio3d .room3d>.seat3d,.audio3d .room3d>.sp3{display:none!important}
+.audio3d .horizontalRing,.audio3d .upperRing{opacity:.42}
+.audio3d .atmosRoom .flightPath{opacity:.55}
+.audio3d .atmosRoom .soundOrb{z-index:4}
+.singleMotionScene:after{content:""!important;position:absolute!important;z-index:3!important;left:8%!important;right:8%!important;bottom:-1%!important;height:29%!important;background-image:url("assets/24B630B8-44B6-4B0B-854A-F8D8B246763F.png?v=0429")!important;background-repeat:no-repeat!important;background-size:100% auto!important;background-position:center top!important;clip-path:inset(0 0 62% 0)!important;filter:drop-shadow(0 -7px 10px #000c)!important;transform-origin:50% 85%!important}
+.motionCard:not(.mx4d) .singleMotionScene:after{animation:seatAsset4d 4.2s cubic-bezier(.45,.05,.25,1) infinite!important}
+.motionCard.mx4d .singleMotionScene:after{animation:seatAssetMx 3.5s cubic-bezier(.45,.05,.25,1) infinite!important}
+@keyframes seatAsset4d{0%,18%,100%{transform:translateY(0) rotate(0)}27%{transform:translateY(-8px) rotate(-1.7deg)}35%{transform:translateY(2px) rotate(.8deg)}62%{transform:translateY(-4px) rotate(1deg)}70%{transform:translateY(0) rotate(0)}}
+@keyframes seatAssetMx{0%,20%,100%{transform:translate(0,0)}28%{transform:translate(-3px,-4px) rotate(-.6deg)}34%{transform:translate(2px,1px) rotate(.5deg)}68%{transform:translate(3px,-3px) rotate(.5deg)}75%{transform:translate(0,0)}}
+@media(prefers-reduced-motion:reduce){.singleMotionScene:after{animation:none!important}}
+
+/* v0.4.30 crop cleanup: hide sprite-sheet checkerboard and frame only intended art */
+.singleMotionScene{overflow:hidden!important}
+.singleMotionScene:after{left:9%!important;right:9%!important;bottom:-12%!important;height:39%!important;background-size:122% auto!important;background-position:50% 1%!important;clip-path:inset(0 0 71% 0)!important;mix-blend-mode:normal!important}
+.audio3d .room3d{overflow:hidden!important;background-color:#05070a!important;background-size:306% auto!important}
+.audio3d .flatRoom{background-position:0.8% 0!important}
+.audio3d .imaxRoom{background-position:50% 0!important}
+.audio3d .atmosRoom{background-position:99.2% 0!important}
+/* cover transparent-preview checkerboard outside each theater cutout */
+.audio3d .room3d:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:13px;box-shadow:inset 0 0 0 7px #05070a,inset 0 0 28px 12px #05070a;z-index:1}
+.audio3d .room3d>*{z-index:2}
+
+/* v0.4.31 use newly uploaded separated-layout source; no checkerboard shown */
+.singleMotionScene:after{background-image:url("assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png?v=0431")!important;background-size:205% auto!important;background-position:34% 10%!important;left:8%!important;right:8%!important;bottom:-5%!important;height:31%!important;clip-path:inset(0 0 48% 0)!important}
+.audio3d .room3d{background-image:url("assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png?v=0431")!important;background-size:205% auto!important;background-color:#05070a!important}
+.audio3d .flatRoom{background-position:70% 7%!important}
+.audio3d .imaxRoom{background-position:70% 7%!important}
+.audio3d .atmosRoom{background-position:70% 7%!important}
+.audio3d .room3d:after{box-shadow:inset 0 0 0 12px #05070a,inset 0 0 34px 18px #05070a!important}
+
+/* v0.4.32 dedicated uploaded seat asset — no sprite-sheet cropping */
+.singleMotionScene:after{content:""!important;position:absolute!important;z-index:3!important;left:6%!important;right:6%!important;bottom:-1%!important;height:29%!important;background-image:url("assets/887F3A99-0D56-4E3F-9754-859B5C27E764.png?v=0432")!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center bottom!important;clip-path:none!important;filter:drop-shadow(0 -7px 10px #000b)!important;transform-origin:50% 85%!important}
+.motionCard:not(.mx4d) .singleMotionScene:after{animation:seatAsset4d 4.2s cubic-bezier(.45,.05,.25,1) infinite!important}
+.motionCard.mx4d .singleMotionScene:after{animation:seatAssetMx 3.5s cubic-bezier(.45,.05,.25,1) infinite!important}
+
+/* v0.4.33 clean audio artwork uploaded by user */
+.audio3d .room3d{background-image:url("assets/F90C6A34-D4FF-4500-AD8D-310B8FF4D01C.png?v=0433")!important;background-size:300% 200%!important;background-repeat:no-repeat!important;box-shadow:none!important}
+.audio3d .flatRoom{background-position:0 100%!important}
+.audio3d .imaxRoom{background-position:50% 100%!important}
+.audio3d .atmosRoom{background-position:100% 100%!important}
+.audio3d .room3d:before,.audio3d .room3d:after{background:none!important;box-shadow:none!important}
+
+/* v0.4.34 audio-only polish; 4D intentionally untouched */
+.audio3d .room3d{background-size:300% auto!important;background-repeat:no-repeat!important;background-color:#05070a!important;aspect-ratio:1.46/1!important;height:auto!important}
+.audio3d .flatRoom{background-position:0 100%!important}
+.audio3d .imaxRoom{background-position:50% 100%!important}
+.audio3d .atmosRoom{background-position:100% 100%!important}
+.audio3d .room3d:after{display:none!important}
+.audio3d .horizontalRing{border-color:#46d9ffcc!important;opacity:.78!important;filter:drop-shadow(0 0 6px #35bfff)}
+.audio3d .imaxRoom .upperRing{border-color:#36a8ffdd!important;opacity:.85!important;filter:drop-shadow(0 0 7px #268cff)}
+.audio3d .atmosRoom .horizontalRing,.audio3d .atmosRoom .upperRing{display:none!important}
+.audio3d .atmosRoom .flightPath{opacity:.85!important;border-color:#d76cff!important;filter:drop-shadow(0 0 5px #b84cff)}
+
+/* v0.4.35 text-free audio triptych; 4D untouched */
+.audio3d .room3d{background-image:url("assets/B3FA4217-3B0A-4F0A-8D84-6560C5E6F4B4.png?v=0435")!important;background-size:300% 100%!important;background-repeat:no-repeat!important;background-color:#05070a!important;aspect-ratio:1/1!important;height:auto!important}
+.audio3d .flatRoom{background-position:0 50%!important}
+.audio3d .imaxRoom{background-position:50% 50%!important}
+.audio3d .atmosRoom{background-position:100% 50%!important}
+.audio3d .room3d:before,.audio3d .room3d:after{display:none!important}
+.gtVenueGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.gtVenue{border:1px solid rgba(244,209,91,.3);border-radius:12px;background:#0d0d0d;padding:12px}.gtVenue small{display:block;color:#8d949c;font-size:9px;letter-spacing:.08em}.gtVenue b{display:block;margin-top:4px;font-size:15px}.gtVenue strong{display:block;margin-top:5px;color:#f4d15b;font-size:13px}.gtVenue span{display:block;margin-top:5px;color:#aaa;font-size:10px;line-height:1.5}.gtVenue a{display:inline-block;margin-top:8px;color:#ddd;font-size:10px;text-decoration:underline}@media(max-width:650px){.gtVenueGrid{grid-template-columns:1fr}}
+.gtTheaters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.gtTheater{border:1px solid var(--line);border-radius:10px;background:#0d0d0d;padding:14px}.gtTheater b{display:block;font-size:15px}.gtTheater strong{display:block;color:#64b9ff;font-size:20px;margin-top:5px}.gtTheater a{display:inline-block;margin-top:9px;color:#aaa;font-size:10px;text-decoration:underline}@media(max-width:650px){.gtTheaters{grid-template-columns:1fr}}
+.audioTitleNowrap{white-space:nowrap}
+.atmosA .audioTitleNowrap{color:var(--violet)}
+@media(max-width:600px){
+ .audioTop{gap:8px;align-items:center}
+ .audioTop .audioTitleNowrap{flex:1;min-width:0;font-size:14px;line-height:1.15;letter-spacing:-.025em;font-weight:800}
+ .audioTop .standardAudioTitle{font-size:13px;letter-spacing:-.04em}
+ .audioTop>span{flex:0 0 auto;font-size:11px}
+}
+</style>
+
+<style id="cinemap-brand-v1">
+/* Cinemap brandTagline: premium editorial identity */
+.brand{
+  color:#f4efe5!important;
+  font-family:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+  line-height:.92!important;
+  display:inline-flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:max-content;
+}
+.brand::after{
+  content:"EXPLORE CINEMA";
+  display:block;
+  margin-top:6px;
+  padding-left:1px;
+  color:#cdbfa9;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:5.8px;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.28em;
+}
+.brandA:after{display:none!important}
+.brandTagline{font-family:inherit}
+@media(max-width:430px){
+  .brand{font-size:20px!important}
+  .brand::after{font-size:5.2px;letter-spacing:.22em;margin-top:5px}
+}
+</style>
+
+<style id="cinemap-brand-image-v3">
+/* Approved B brand is a fixed artwork asset. CSS only controls placement/size. */
+.gBrand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto;min-width:0;text-decoration:none!important;line-height:0}
+.gBrandImage{display:block;width:132px;height:auto;max-width:none}
+.gNav{height:58px!important;gap:8px!important}
+@media(max-width:430px){
+  .gNav{height:56px!important;gap:8px!important}
+  .gBrandImage{width:132px}
+  .gSearchForm{height:33px!important}
+}
+@media(max-width:370px){.gBrandImage{width:118px}}
+</style>
+
+<style id="experience-decision-v1">
+.expQuickNav{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:2px 0 18px}.expQuickNav a{white-space:nowrap;border:1px solid #30343a;border-radius:999px;padding:8px 11px;font-size:11px;color:#d6d9dd}.decisionBox{border:1px solid #30343a;border-radius:16px;background:#0b0d10;padding:16px;margin:8px 0 28px}.decisionBox h2{margin:0 0 6px;font-size:22px}.decisionBox>p{margin:0;color:#9ba2aa;font-size:12px;line-height:1.6}.filmPicker{display:flex;gap:8px;margin-top:14px}.filmPicker input{min-width:0;flex:1;background:#08090b;border:1px solid #343941;color:#fff;border-radius:8px;padding:12px}.filmPicker button{border:1px solid #ddd;background:#eee;color:#111;border-radius:8px;padding:0 14px;font-weight:800}.formatResult{margin-top:14px}.formatScore{display:grid;grid-template-columns:118px 84px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #24282e}.formatScore:first-child{border-top:0}.formatScore b{font-size:13px}.formatScore strong{letter-spacing:.08em;color:#e8c56b;font-size:13px}.formatScore span{font-size:11px;color:#9ba2aa;line-height:1.45}.formatScore.isNavigable{position:relative;cursor:pointer;padding-right:22px}.formatScore.isNavigable:after{content:'›';position:absolute;right:2px;top:50%;transform:translateY(-50%);font-size:19px;color:#d8d2c8}.formatScore.isNavigable:active{background:#ffffff08}.formatScoreMeta{display:flex;flex-direction:column;gap:4px;min-width:0}.formatScoreActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}.formatReasonToggle,.formatScoreCta{appearance:none;border:0;background:none;padding:0;font:inherit;display:inline-flex;align-items:center;gap:4px;width:max-content;max-width:100%;font-size:10px!important;font-weight:750;color:#d8d2c8!important;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.formatReasonBody{display:none;margin-top:5px;color:#9ba2aa!important;font-size:10px!important;line-height:1.55}.formatReasonBody.show{display:block}.decisionNote{font-size:10px;color:#777;margin-top:10px;line-height:1.55}.compareScroll{overflow:auto;margin:12px 0 34px}.experienceCompare{width:100%;min-width:720px;border-collapse:collapse;font-size:11px}.experienceCompare th,.experienceCompare td{padding:10px;border-bottom:1px solid #282c31;text-align:left;vertical-align:top}.experienceCompare th{color:#eee;background:#0d0f12;position:sticky;top:56px}.experienceCompare td:first-child{font-weight:800;color:#eee}.compareCta{display:inline-flex;margin-top:7px;color:#d7e7f5;text-decoration:underline}@media(max-width:600px){.decisionBox{padding:13px;border-radius:12px}.filmPicker{display:grid;grid-template-columns:1fr auto}.formatScore{grid-template-columns:92px 70px 1fr;gap:7px}.formatScore strong{font-size:11px}.formatScore span{font-size:10px}.expQuickNav{margin-left:-2px}}
+</style>
+
+<style id="experience-candidate-selection-v1">
+.filmCandidates{display:grid;gap:7px;margin-top:10px}.filmCandidate{width:100%;text-align:left;border:1px solid #30343a;background:#0a0c0f;color:#f1f1f1;border-radius:10px;padding:10px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px}.filmCandidate b{font-size:13px}.filmCandidate span{font-size:10px;color:#858d96;white-space:nowrap}.filmCandidate.selected{border-color:#e7dfd2;background:#171717;box-shadow:0 0 0 1px #e7dfd255}.formatConfirm{margin-top:10px;width:100%;border:1px solid #e5ddd0;background:#f2eee6;color:#111;border-radius:9px;padding:11px 13px;font-weight:800}.formatConfirm:disabled{opacity:.4}.formatScoreActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:5px}.formatReasonToggle,.formatScoreCta{appearance:none;border:0;background:transparent;padding:0;font:inherit;font-size:10px!important;font-weight:750;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.formatReasonToggle{color:#b8c0c8}.formatReasonBody{display:none;margin-top:5px;padding:8px 9px;border-left:2px solid #3b4148;background:#0a0c0f;color:#aeb5bd!important;line-height:1.55}.formatReasonBody.show{display:block}
+</style>
+
+<style id="experience-live-candidates-v2">
+.livePicker{display:block}.livePicker input{width:100%}.filmCandidates{position:relative;z-index:4;border:1px solid #30343a;border-radius:10px;overflow:hidden;background:#090b0e}.filmCandidate{border:0!important;border-bottom:1px solid #24282e!important;border-radius:0!important}.filmCandidate:last-child{border-bottom:0!important}.candidateState{padding:10px 11px;color:#858d96;font-size:11px}.formatConfirm{margin-top:10px}.formatEvidence{margin-top:5px;padding:8px 9px;border-left:2px solid #59616b;background:#0a0c0f;color:#aeb5bd;font-size:10px;line-height:1.55}
+</style>
+<style id="experience-tabs-v1">
+.expTabs{position:sticky;top:56px;z-index:80;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:10px 0 22px;padding:6px;background:rgba(9,9,9,.96);backdrop-filter:blur(14px);border:1px solid #282828;border-radius:14px}
+.expTab{appearance:none;border:0;background:transparent;color:#8f969e;font:inherit;font-size:12px;font-weight:750;padding:10px 4px;border-radius:9px;white-space:nowrap}
+.expTab.active{background:#f2eee6;color:#111}
+.expTabPanel[hidden]{display:none!important}
+.expTabPanel{animation:expPanelIn .16s ease-out}
+@keyframes expPanelIn{from{opacity:.45;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(min-width:601px){.expTabs{top:58px;max-width:620px}}
+@media(max-width:430px){.expTabs{margin-left:-4px;margin-right:-4px;padding:5px}.expTab{font-size:11px;padding:10px 2px}.expSection{margin-top:20px}}
+</style>
+
+<style id="experience-polish-20260927">
+.audioTop h3 small{display:inline-block;margin-left:6px;padding:3px 6px;border:1px solid #8c61a8;border-radius:999px;color:#d7a0ff;font-size:9px;font-weight:800;vertical-align:middle;letter-spacing:.02em}
+.audio3d .horizontalRing,.audio3d .upperRing{border-width:3px!important;filter:drop-shadow(0 0 9px currentColor)!important;opacity:.9!important}
+.audio3d .horizontalRing{box-shadow:0 0 18px #46d9ff55,inset 0 0 12px #46d9ff22}
+.audio3d .upperRing{box-shadow:0 0 18px #9b6cff55,inset 0 0 12px #9b6cff22}
+.audio3d .atmosRoom .flightPath{border-top-width:3px!important;filter:drop-shadow(0 0 8px #d76cff)!important}
+.audio3d .atmosRoom .soundOrb{font-size:22px!important;text-shadow:0 0 18px #d76cff,0 0 8px #fff!important}
+.singleMotionScene .fxWind{opacity:.62!important;filter:blur(.6px) drop-shadow(0 0 5px #dff7ff)!important;animation-duration:4.3s!important}
+.singleMotionScene .fxWater{filter:drop-shadow(0 0 6px #bceeff)!important;animation-duration:4.7s!important}
+.singleMotionScene .fxFlash{mix-blend-mode:screen;animation-duration:7.2s!important}
+.singleMotionScene .fxAir{opacity:.82;filter:blur(2px) drop-shadow(0 0 7px #dff7ff)!important;animation-duration:2.5s!important}
+.motionCard .effectLegend span{border-color:#ffffff34!important;background:#0e141bcc!important;color:#edf4f8!important}
+@media(prefers-reduced-motion:reduce){.singleMotionScene .fxWind,.singleMotionScene .fxWater,.singleMotionScene .fxFlash,.singleMotionScene .fxAir{animation:none!important}}
+</style>
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style></head>
+<body>
+
+
+<header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
+ <form class="gSearchForm" action="cinelva/search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="cinelva/index.html">カレンダー</a>
+ <a href="cinelva/discover.html">映画を探す</a>
+ <a href="cinelva/rankings.html">ランキング</a>
+ <a href="cinelva/theaters.html">映画館を探す</a>
+ <a href="cinelva/experience.html">上映方式</a>
+ <a href="cinelva/my-cinemap.html">My CINELVA</a>
+</aside>
+<main class="wrap">
+<section class="hero">
+ <div class="eyebrow">CINEMA EXPERIENCE</div>
+ <h1>同じ映画でも、<br>上映方式でここまで変わる。</h1>
+ <p>画面比率、映像、音、体感を分けて比較します。スクリーンの実寸は映画館ごとの設備なので、IMAXかどうかとは別に扱います。</p>
+</section>
+<nav class="expTabs" aria-label="上映方式の比較カテゴリ">
+ <button type="button" class="expTab active" data-exp-tab="recommend" aria-selected="true">おすすめ</button>
+ <button type="button" class="expTab" data-exp-tab="aspect" aria-selected="false">画角</button>
+ <button type="button" class="expTab" data-exp-tab="visual" aria-selected="false">映像</button>
+ <button type="button" class="expTab" data-exp-tab="audio" aria-selected="false">音響</button>
+ <button type="button" class="expTab" data-exp-tab="special" aria-selected="false">体感</button>
+</nav>
+<section class="decisionBox expTabPanel" id="formatFinder" data-exp-panel="recommend"><h2>作品から上映方式を選ぶ</h2><p>作品名を入力すると候補が表示されます。正しい作品を選んでからおすすめを表示します。</p><div class="filmPicker livePicker"><input id="formatFilm" type="search" placeholder="作品名を入力（例：スター・ウォーズ）" aria-label="上映方式を選ぶ作品名" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="formatCandidates" aria-expanded="false"></div><div class="filmCandidates" id="formatCandidates" role="listbox" hidden></div><div class="selectedMovieCard" id="formatSelectedMovie" hidden></div><div class="formatResult" id="formatResult"><div class="decisionNote">2文字以上入力すると候補が表示されます。</div></div></section>
+
+
+<section class="section expSection expTabPanel" id="aspect" data-exp-panel="aspect" hidden>
+ <div class="sectionHead"><h2>見える範囲</h2><p>この比較では通常上映をシネマスコープ（2.39:1）として表示。同じ1枚の1.43:1画像を、横幅を変えずに上下だけ中央クロップして比較します。</p></div>
+
+ <div class="ratioCompareExact" aria-label="同一の海中画像を正確な画面比率で比較">
+  <article class="ratioExactCard scopeExact">
+   <div class="ratioExactHead"><div><b>シネマスコープ</b><strong>2.39:1</strong></div><span>上下を大きくクロップ</span></div>
+   <div class="ratioViewport ratio239" role="img" aria-label="シネマスコープ2.39対1の海中シーン"></div>
+  </article>
+
+  <article class="ratioExactCard imaxExact">
+   <div class="ratioExactHead"><div><b>IMAX</b><strong>1.90:1</strong></div><span>上下の情報が増える</span></div>
+   <div class="ratioViewport ratio190" role="img" aria-label="IMAX1.90対1の海中シーン"></div>
+   <a class="screenLink" href="cinelva/theaters.html?format=IMAX">IMAX対応スクリーンを見る →</a>
+  </article>
+
+  <article class="ratioExactCard gtExact">
+   <div class="ratioExactHead"><div><b>IMAX GT</b><strong>1.43:1</strong></div><span>元画像をほぼそのまま表示</span></div>
+   <div class="ratioViewport ratio143" role="img" aria-label="IMAX GT1.43対1の海中シーン"></div>
+   <a class="screenLink" href="cinelva/theaters.html?format=IMAX%20GT">IMAX GT対応スクリーンを見る →</a>
+  </article>
+ </div>
+
+ <div class="formula">元画像：1500 × 1049 px（1.42993:1）。中央クロップ後：シネマスコープ 1500 × 628 px（2.38854:1）／ IMAX 1500 × 789 px（1.90114:1）／ IMAX GT 1500 × 1049 px（1.42993:1）。<br>※画像を横方向へ引き伸ばしていません。3つとも同じ元画像です。</div>
+</section>
+
+<section class="section expSection expTabPanel" id="visual" data-exp-panel="visual" hidden>
+ <div class="sectionHead"><h2>映像</h2><p>同じ海中シーンで、通常上映・IMAXレーザー・Dolby Cinemaの明るさ、黒、コントラストの方向性を比較します。</p></div>
+ <div class="qualityGrid">
+<article class="qualityCard normalQ"><h3>通常上映</h3><div class="qualityDemo"><div class="qScreen qNormal"></div></div><p><b>基準</b> — 作品本来のルックを標準的な明るさ・コントラストで。</p></article>
+<article class="qualityCard imaxQ"><h3>IMAXレーザー</h3><div class="qualityDemo"><div class="qScreen qImax"></div></div><p><b>高輝度・高精細</b> — 明部の抜けと細部の見通しを意識した表現。</p><a class="screenLink" href="cinelva/theaters.html?format=IMAX">IMAX対応スクリーンを見る →</a></article>
+<article class="qualityCard dolbyQ"><h3>Dolby Cinema</h3><div class="qualityDemo"><div class="qScreen qDolby"></div></div><p><b>深い黒・高コントラスト</b> — 暗部と光の差を強調した表現。</p><a class="screenLink" href="cinelva/theaters.html?format=Dolby%20Cinema">Dolby Cinema対応スクリーンを見る →</a></article>
+</div>
+ <div class="formula">※特徴を理解しやすくするためのイメージ比較です。実際の見え方は作品マスター・劇場設備・座席位置などで変わります。</div>
+</section>
+
+<section class="section expSection expTabPanel" id="audio" data-exp-panel="audio" hidden>
+ <div class="sectionHead"><h2>音響</h2><p>多くの通常上映で使われる5.1ch / 7.1ch、IMAX 12ch、Dolby Atmosを比較。Atmosは高さ方向を含む立体的な配置がポイントです。劇場やスクリーンによって構成は異なります。</p></div>
+ <div class="audioGrid audioCompare audio3d">
+<article class="audioCard"><div class="audioTop"><h3 class="audioTitleNowrap standardAudioTitle">一般的な通常上映（5.1 / 7.1ch）</h3><span>水平リング</span></div><div class="room3d flatRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><div class="horizontalRing"></div></div><p><b>耳の高さの1層</b>で、前→横→後ろを包む。</p></article>
+<article class="audioCard imaxA"><div class="audioTop"><h3>IMAX 12ch</h3><span>水平＋上層</span></div><div class="room3d imaxRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 r1"></i><i class="sp3 r2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="horizontalRing"></div><div class="upperRing"></div></div><p><b>水平層＋高い位置の層</b>。上下を含む多方向から強く包む。</p><a class="screenLink" href="cinelva/theaters.html?format=IMAX">IMAX対応スクリーンを見る →</a></article>
+<article class="audioCard atmosA"><div class="audioTop"><h3 class="audioTitleNowrap">Dolby Atmos / Dolby Cinema</h3><span>3Dオブジェクト</span></div><div class="room3d atmosRoom"><div class="ceilingPlane"></div><div class="floorPlane"></div><div class="screen3d"></div><div class="seat3d"></div><i class="sp3 f1"></i><i class="sp3 f2"></i><i class="sp3 s1"></i><i class="sp3 s2"></i><i class="sp3 h1"></i><i class="sp3 h2"></i><i class="sp3 h3"></i><i class="sp3 h4"></i><div class="flightPath"></div><b class="soundOrb">●</b></div><p><b>点の音が3D空間を移動</b>。頭上を通過する音まで位置として表現。</p><p class="dolbyCinemaNote"><b>Dolby Cinemaの音響もDolby Atmos</b>。映像はDolby Visionとの組み合わせです。</p><a class="screenLink" href="cinelva/theaters.html?format=Dolby%20Atmos">Dolby Atmos対応スクリーンを見る →</a><a class="screenLink" href="cinelva/theaters.html?format=Dolby%20Cinema">Dolby Cinema対応スクリーンを見る →</a></article>
+</div>
+<div class="audioKey"><span>5.1/7.1：1層</span><span>IMAX 12ch：2層</span><span>Atmos：空間内を移動</span></div>
+</section>
+
+<section class="section expSection expTabPanel" id="special" data-exp-panel="special" hidden>
+ <div class="sectionHead"><h2>体感・特殊上映</h2><p>4DX / MX4Dは同じ1枚のシーン上に、体感エフェクトだけを重ねて違いを見せます。</p></div>
+ <div class="motionGrid premiumMotion">
+  <article class="motionCard dx4"><div class="motionHead"><h3>4DX</h3><span>座席＋環境効果</span></div>
+   <div class="singleMotionScene"><span class="fxWind"></span><span class="fxWater"></span><span class="fxFlash"></span><span class="fxSeat">SEAT MOTION</span></div>
+   <div class="effectLegend"><span>↕ MOVE</span><span>〰 WIND</span><span>•• WATER</span><span>✦ FLASH</span></div>
+   <p>映像に合わせて座席が揺れ、風・水・フラッシュなどが重なる体感型。</p><a class="screenLink" href="cinelva/theaters.html?format=4DX">4DX対応スクリーンを見る →</a>
+  </article>
+  <article class="motionCard mx4d"><div class="motionHead"><h3>MX4D</h3><span>シート連動＋局所効果</span></div>
+   <div class="singleMotionScene"><span class="fxAir"></span><span class="fxWater"></span><span class="fxSeat">SEAT MOTION</span></div>
+   <div class="effectLegend"><span>↔ MOVE</span><span>〰 AIR</span><span>•• WATER</span></div>
+   <p>同じ映像を基準に、シートの細かな動きと局所的な風・水などを表現。</p><a class="screenLink" href="cinelva/theaters.html?format=MX4D">MX4D対応スクリーンを見る →</a>
+  </article>
+ </div>
+ <div class="sectionSubHead"><h3>ScreenX</h3><p>中央映像の左右に「続き」が広がるパノラマ上映。3面に同じ映像を複製する方式ではありません。</p></div>
+ <div class="screenxCard"><div class="experienceCrop cropScreenx" role="img" aria-label="ScreenX 270度パノラマ上映イメージ"></div><p>正面映像の外側の世界が左右へ連続して広がる、最大270°のパノラマ表現。</p><a class="screenLink" href="cinelva/theaters.html?format=SCREENX">ScreenX対応スクリーンを見る →</a></div>
+</section>
+
+<section class="section expTabPanel" id="imax-gt-theaters" data-exp-panel="aspect" hidden><div class="sectionHead"><div><div class="eyebrow">VERIFIED SCREENS</div><h2>IMAX GTを観られる映画館・スクリーン</h2></div><p>公式劇場ページでスクリーンまで確認できた国内のIMAX GT。通常のIMAXレーザーとは分けて表示します。</p></div><div class="gtTheaters"><article class="gtTheater"><b>グランドシネマサンシャイン 池袋</b><strong>シアター12</strong><span class="note">東京都 · IMAX GT</span><a href="https://www.cinemasunshine.co.jp/pages/gdcs/" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article><article class="gtTheater"><b>109シネマズ大阪エキスポシティ</b><strong>シアター11</strong><span class="note">大阪府 · IMAX GT</span><a href="https://109cinemas.net/osaka-expocity/establishment.html" target="_blank" rel="noopener noreferrer">劇場公式で確認 →</a></article></div></section></main>
+<script>
+(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
+</script>
+<script id="experienceSpriteLoader">
+document.body.classList.add("experienceSpriteLoading","aspectBaseLoading");
+(async()=>{
+  const loadParts=async(prefix,count,version)=>{
+    const urls=Array.from({length:count},(_,i)=>prefix+String(i+1).padStart(2,"0")+"?v="+version);
+    const chunks=await Promise.all(urls.map(async u=>{
+      const r=await fetch(u,{cache:"force-cache"});
+      if(!r.ok) throw new Error(u+" "+r.status);
+      return (await r.text()).trim();
+    }));
+    return chunks.join("").replace(/\s+/g,"");
+  };
+  try{
+    const [sprite64,aspect64]=await Promise.all([
+      loadParts("assets/experience-sprite.part",15,2),
+      loadParts("assets/aspect-base.part",11,1)
+    ]);
+    document.documentElement.style.setProperty("--experience-sprite",'url("data:image/webp;base64,'+sprite64+'")');
+    document.documentElement.style.setProperty("--aspect-base",'url("data:image/webp;base64,'+aspect64+'")');
+    document.body.classList.remove("experienceSpriteLoading","aspectBaseLoading");
+    document.body.classList.add("experienceSpriteReady","aspectBaseReady");
+  }catch(err){
+    console.error("Cinemap experience artwork failed",err);
+    document.body.classList.remove("experienceSpriteLoading","aspectBaseLoading");
+    document.body.classList.add("experienceSpriteError");
+  }
+})();
+</script>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.62</div>
+<style id="experience-candidate-search-v2">
+.filmCandidates{margin-top:10px;border:1px solid #2b2f35;border-radius:10px;overflow:hidden;background:#101216}
+.filmCandidates[hidden]{display:none!important}
+.filmCandidate{width:100%;display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;align-items:center;padding:8px 10px;border:0;border-top:1px solid #24282e;background:#101216;color:#f2f2f2;text-align:left;cursor:pointer}
+.filmCandidate:first-child{border-top:0}.filmCandidate:active{background:#171a20}
+.filmCandidatePoster{width:48px;aspect-ratio:2/3;border-radius:5px;object-fit:cover;background:#24272e;display:block}
+.filmCandidatePosterFallback{width:48px;aspect-ratio:2/3;border-radius:5px;background:#24272e;display:grid;place-items:center;color:#70757f;font-size:9px;text-align:center;padding:3px}
+.filmCandidateBody{min-width:0}.filmCandidateBody b{display:block;font-size:13px;line-height:1.3}.filmCandidateMeta{display:block;margin-top:3px;font-size:10px;color:#9ca3ad;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.candidateMore{width:100%;border:0;border-top:1px solid #2b2f35;background:#16191e;color:#ddd;padding:10px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.candidateState{padding:12px;color:#999;font-size:12px}
+.selectedMovieCard{margin-top:10px;display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;align-items:center;padding:9px 10px;border:1px solid #30343a;border-radius:10px;background:#101216}.selectedMovieCard[hidden]{display:none!important}.selectedMoviePoster{width:54px;aspect-ratio:2/3;border-radius:6px;object-fit:cover;background:#24272e}.selectedMoviePosterFallback{width:54px;aspect-ratio:2/3;border-radius:6px;background:#24272e;display:grid;place-items:center;color:#70757f;font-size:9px}.selectedMovieBody b{display:block;font-size:13px}.selectedMovieBody span{display:block;margin-top:3px;font-size:10px;color:#9ca3ad}
+</style>
+
+<script id="experience-decision-js-v2">(()=>{
+const input=document.getElementById('formatFilm'),candidateBox=document.getElementById('formatCandidates'),selectedMovieCard=document.getElementById('formatSelectedMovie'),out=document.getElementById('formatResult');if(!input||!candidateBox||!out)return;
+let candidates=[],selectedMovie=null,candidateTimer=null,candidateRequest=null,visibleCandidateCount=5;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clamp=n=>Math.max(1,Math.min(5,n));
+function movieYear(m){const d=m.release_date||m.first_air_date||m.year||m.date||'';return String(d).slice(0,4)}
+function genresOf(m){return (m.genres||m.genre_names||[]).map(x=>String(typeof x==='string'?x:(x&&x.name)||'').toLowerCase()).join(' ')}
+function normalizeSearchText(v){return String(v||'').normalize('NFKC').toLowerCase().replace(/[\s\u3000・･·\.．,，:：;；!！?？'’"“”()（）\[\]【】「」『』\-‐‑‒–—―ー]/g,'')}
+function searchLabel(m){return m.title||m.name||''}
+function searchOriginal(m){return m.original_title||m.original_name||''}
+function candidateRank(m,q){const nq=normalizeSearchText(q),nt=normalizeSearchText(searchLabel(m)),no=normalizeSearchText(searchOriginal(m));let rank=0;if(nt===nq||no===nq)rank=1000;else if(nt.startsWith(nq)||no.startsWith(nq))rank=800;else if(nt.includes(nq)||no.includes(nq))rank=600;else if(nq.includes(nt)||nq.includes(no))rank=350;const votes=Number(m.votes??m.vote_count??0),rating=Number(m.score??m.vote_average??0);return rank+Math.min(80,Math.log10(votes+1)*18)+Math.min(20,rating*2)}
+function scoreMovie(m){const g=genresOf(m),s={'通常上映':4,'IMAX':3.5,'Dolby Cinema':3.5,'4DX / MX4D':2,'ScreenX':2};if(/action|アクション|adventure|アドベンチャー|science fiction|sf|fantasy|ファンタジー/.test(g)){s.IMAX+=1;s['Dolby Cinema']+=.5;s['4DX / MX4D']+=.8;s.ScreenX+=.4}if(/horror|ホラー|thriller|スリラー|crime|犯罪/.test(g)){s['Dolby Cinema']+=1;s.IMAX+=.3;s['4DX / MX4D']+=.3}if(/animation|アニメ/.test(g)){s.IMAX+=.6;s['Dolby Cinema']+=.5;s.ScreenX+=.2}if(/drama|ドラマ|romance|恋愛|documentary|ドキュメンタリー/.test(g)){s['通常上映']+=.5;s['Dolby Cinema']+=.2;s['4DX / MX4D']-=.8;s.ScreenX-=.5}Object.keys(s).forEach(k=>s[k]=clamp(s[k]));return s}
+const stars=n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));
+function summary(k){return k==='IMAX'?'大画面・スケール感を重視':k==='Dolby Cinema'?'黒・コントラストと立体音響を重視':k==='4DX / MX4D'?'座席の動きと環境効果を重視':k==='ScreenX'?'左右へ広がる視界を重視':'追加演出なしで作品に集中'}
+function tabFor(k){return k==='IMAX'?'aspect':k==='Dolby Cinema'?'visual':k==='4DX / MX4D'||k==='ScreenX'?'special':null}
+function tabLabel(k){return k==='IMAX'?'画角を詳しく見る':k==='Dolby Cinema'?'映像を詳しく見る':k==='4DX / MX4D'||k==='ScreenX'?'体感を詳しく見る':''}
+function evidenceFor(m,k){const raw=[...(Array.isArray(m.formats)?m.formats:[]),...(Array.isArray(m.screening_formats)?m.screening_formats:[]),...(Array.isArray(m.special_formats)?m.special_formats:[])].map(String).join(' ').toLowerCase();if(k==='IMAX'&&(m.imax===true||raw.includes('imax')))return '作品データ上でIMAXに関する明示情報を確認できたため、IMAXを候補として評価しています。';if(k==='Dolby Cinema'&&(m.dolby_cinema===true||raw.includes('dolby cinema')))return '作品データ上でDolby Cinemaに関する明示情報を確認できたため、Dolby Cinemaを候補として評価しています。';if(k==='ScreenX'&&(m.screenx===true||raw.includes('screenx')))return '作品データ上でScreenXに関する明示情報を確認できたため、ScreenXを候補として評価しています。';if(k==='4DX / MX4D'&&(m.fourdx===true||m.mx4d===true||raw.includes('4dx')||raw.includes('mx4d')))return '作品データ上で4DX / MX4Dに関する明示情報を確認できたため、体感上映を候補として評価しています。';return ''}
+function normalizePayload(d){const pools=[];if(Array.isArray(d))pools.push(d);if(Array.isArray(d?.movies))pools.push(d.movies);if(Array.isArray(d?.external))pools.push(d.external);if(Array.isArray(d?.results))pools.push(d.results);if(Array.isArray(d?.items))pools.push(d.items);return pools.flat()}
+function mergeCandidates(rows,q){const seen=new Set(),out=[];for(const m of rows){if(!m||(!m.title&&!m.name))continue;const key=String(m.tmdbId||m.id||'')+'|'+normalizeSearchText(searchLabel(m))+'|'+movieYear(m);if(seen.has(key))continue;seen.add(key);out.push(m)}return out.sort((a,b)=>candidateRank(b,q)-candidateRank(a,q)).slice(0,20)}
+function candidatePoster(m){return m.poster||m.posterUrl||m.poster_url||''}
+function renderSelectedMovie(){if(!selectedMovie){selectedMovieCard.hidden=true;selectedMovieCard.innerHTML='';return}const poster=candidatePoster(selectedMovie),title=searchLabel(selectedMovie)||'タイトル不明',original=searchOriginal(selectedMovie),meta=[movieYear(selectedMovie)||'年不明',original&&normalizeSearchText(original)!==normalizeSearchText(title)?original:''].filter(Boolean).join(' · ');selectedMovieCard.innerHTML=(poster?'<img class="selectedMoviePoster" src="'+esc(poster)+'" alt="" decoding="async">':'<span class="selectedMoviePosterFallback">NO IMAGE</span>')+'<span class="selectedMovieBody"><b>'+esc(title)+'</b><span>'+esc(meta)+'</span></span>';selectedMovieCard.hidden=false}
+function renderCandidates(){const shown=candidates.slice(0,visibleCandidateCount);candidateBox.innerHTML=shown.map((m,i)=>{const poster=candidatePoster(m),title=searchLabel(m)||'タイトル不明',original=searchOriginal(m),meta=[movieYear(m)||'年不明',original&&normalizeSearchText(original)!==normalizeSearchText(title)?original:''].filter(Boolean).join(' · ');return '<button type="button" class="filmCandidate" role="option" data-candidate-index="'+i+'">'+(poster?'<img class="filmCandidatePoster" src="'+esc(poster)+'" alt="" loading="lazy" decoding="async">':'<span class="filmCandidatePosterFallback">NO IMAGE</span>')+'<span class="filmCandidateBody"><b>'+esc(title)+'</b><span class="filmCandidateMeta">'+esc(meta)+'</span></span></button>'}).join('')+(candidates.length>visibleCandidateCount?'<button type="button" class="candidateMore" data-candidate-more>さらに見る（残り'+(candidates.length-visibleCandidateCount)+'件）</button>':'');candidateBox.hidden=!candidates.length;input.setAttribute('aria-expanded',candidates.length?'true':'false');candidateBox.querySelectorAll('[data-candidate-index]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.candidateIndex);selectedMovie=candidates[i];input.value=searchLabel(selectedMovie)||input.value;candidateBox.innerHTML='';candidateBox.hidden=true;input.setAttribute('aria-expanded','false');renderSelectedMovie();renderRecommendation()}));candidateBox.querySelector('[data-candidate-more]')?.addEventListener('click',()=>{visibleCandidateCount+=5;renderCandidates()})}
+async function fetchCandidateQuery(q,signal){const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?q='+encodeURIComponent(q)+'&limit=20',{cache:'no-store',signal});if(!r.ok)throw new Error('HTTP '+r.status);return normalizePayload(await r.json())}
+async function loadCandidates(){const q=input.value.trim();if(q.length<2){candidates=[];candidateBox.hidden=true;input.setAttribute('aria-expanded','false');return}if(candidateRequest)candidateRequest.abort();candidateRequest=new AbortController();candidateBox.hidden=false;candidateBox.innerHTML='<div class="candidateState">候補を検索中…</div>';input.setAttribute('aria-expanded','true');visibleCandidateCount=5;try{let rows=await fetchCandidateQuery(q,candidateRequest.signal);let merged=mergeCandidates(rows,q),nq=normalizeSearchText(q),strong=merged.some(m=>normalizeSearchText(searchLabel(m))===nq||normalizeSearchText(searchOriginal(m))===nq);if(!strong&&q.length>=3){const broad=q.slice(0,3);const extra=await fetchCandidateQuery(broad,candidateRequest.signal);rows=rows.concat(extra);merged=mergeCandidates(rows,q)}candidates=merged;if(!candidates.length){candidateBox.innerHTML='<div class="candidateState">候補が見つかりませんでした。</div>';return}renderCandidates()}catch(e){if(e.name==='AbortError')return;candidateBox.hidden=false;candidateBox.innerHTML='<div class="candidateState">候補を取得できませんでした。入力を変えてお試しください。</div>';input.setAttribute('aria-expanded','true')}}
+function renderRecommendation(){if(!selectedMovie)return;candidateBox.hidden=true;input.setAttribute('aria-expanded','false');const scores=scoreMovie(selectedMovie),rows=[['通常上映',scores['通常上映']],...Object.entries(scores).filter(([k])=>k!=='通常上映').sort((a,b)=>b[1]-a[1])],title=searchLabel(selectedMovie)||input.value.trim();out.innerHTML='<div class="decisionNote"><b>'+esc(title)+'</b>の作品傾向からの目安</div>'+rows.map(([k,v])=>{const target=tabFor(k),tabLink=target?'<button type="button" class="formatScoreCta" data-go-tab="'+target+'">'+tabLabel(k)+' →</button>':'',evidence=evidenceFor(selectedMovie,k),evidenceHtml=evidence?'<span class="formatEvidence"><b>確認できた根拠</b><br>'+esc(evidence)+'</span>':'';return '<div class="formatScore"><b>'+k+'</b><strong>'+stars(v)+'</strong><span class="formatScoreMeta"><span>'+summary(k)+'</span><span class="formatScoreActions">'+tabLink+'</span>'+evidenceHtml+'</span></div>'}).join('')+'<div class="decisionNote">※星はジャンル等からの相性目安です。「理由」は確認できる作品固有の根拠がある場合のみ表示します。作品固有の上映仕様・上映有無は劇場公式情報を確認してください。</div>';out.querySelectorAll('[data-go-tab]').forEach(el=>el.addEventListener('click',()=>window.switchExperienceTab&&window.switchExperienceTab(el.dataset.goTab,true)))}
+input.addEventListener('input',()=>{selectedMovie=null;out.innerHTML='<div class="decisionNote">候補から作品を選んでください。</div>';clearTimeout(candidateTimer);candidateTimer=setTimeout(loadCandidates,250)});input.addEventListener('focus',()=>{if(candidates.length&&!selectedMovie){candidateBox.hidden=false;input.setAttribute('aria-expanded','true')}});
+})();</script>
+
+<script id="experience-tabs-js">
+(()=>{
+ const tabs=[...document.querySelectorAll('[data-exp-tab]')];
+ const panels=[...document.querySelectorAll('[data-exp-panel]')];
+ if(!tabs.length||!panels.length)return;
+ function show(key){
+  tabs.forEach(tab=>{const on=tab.dataset.expTab===key;tab.classList.toggle('active',on);tab.setAttribute('aria-selected',on?'true':'false')});
+  panels.forEach(panel=>{const on=panel.dataset.expPanel===key;panel.hidden=true;if(on)panel.hidden=false});
+ }
+ window.switchExperienceTab=(key,scroll)=>{show(key);if(scroll){const nav=document.querySelector('.expTabs');if(nav)nav.scrollIntoView({behavior:'smooth',block:'start'})}};
+ tabs.forEach(tab=>tab.addEventListener('click',()=>window.switchExperienceTab(tab.dataset.expTab,false)));
+ show('recommend');
+})();
+</script>
+</body></html>

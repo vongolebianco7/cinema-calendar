@@ -1,0 +1,15 @@
+{
+  "name": "CINELVA",
+  "short_name": "CINELVA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0c0f",
+  "theme_color": "#0a0c0f",
+  "icons": [
+    {
+      "src": "../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png",
+      "sizes": "1254x1254",
+      "type": "image/png"
+    }
+  ]
+}

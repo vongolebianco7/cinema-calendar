@@ -28,6 +28,7 @@ html[data-theme="light"] :is(.chip.active,.preset.active,.expTab.active,.criticO
 html[data-theme="light"] .modeTab.active { background:#f9e5e4; color:#84212b; }
 html[data-theme="light"] :where(.selects select,.filters select,.filters input) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
 html[data-theme="light"] :where(.panel li a,.sources a,main.wrap>a,main.wrap p>a) { color:#795a20; }
+html[data-theme="light"] .hero a { color:#795a20!important; }
 html[data-theme="light"] .row button { color:var(--bg); }
 html[data-theme="light"] :where(.coverageWarn,.note) { background:transparent; }
 html[data-theme="light"] .coverageWarn { color:#705525; }

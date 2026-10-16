@@ -238,7 +238,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <style id="cinelva-modal-compact-20261017">
 @media(max-width:760px){#detail .experienceFitGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#detail .experienceFitCard{min-width:0!important;padding:10px!important}#detail .experienceFitCard span{flex-wrap:wrap;gap:2px!important}#detail .experienceFitCard small{font-size:10px!important;line-height:1.5!important}#detail .experienceFitCard .small{font-size:10px!important}#detail .experienceFitCard .experienceStars{font-size:11px!important}}
 #detail .experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#detail .history>summary{list-style:revert;min-height:44px;display:list-item;padding:12px}#detail .history .timelineSection{border:0;padding:10px 0}
-</style></head>
+</style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style></head>
 <body>
 
 
@@ -258,8 +258,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
  <a href="rankings.html">ランキング</a>
  <a href="theaters.html">映画館を探す</a>
  <a href="experience.html">上映方式</a>
- <a href="my-cinemap.html">My Cinelva</a>
- <a href="my-cinelva/">映画棚・映画地図</a>
+ <a href="my-cinelva/">My Cinelva</a>
 </aside>
 <main class="wrap">
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinelva/" class="heroAction ghost">My Cinelva</a></div></section>
@@ -751,7 +750,7 @@ function experienceFitHtml(m){
  const rows=window.ScreeningModelV7?window.ScreeningModelV7.scoreMovie(m,INDEX_SCREENING_EVIDENCE):[];
  const stars=n=>window.ScreeningModelV7.stars(n);
  const cards=rows.map(x=>{const sub=x.subscores?'<div class="small" style="margin-top:5px">映像 '+stars(x.subscores.picture)+'　音響 '+stars(x.subscores.audio)+'</div>':'';const src=(x.sources||[]).length?'<div class="small" style="margin-top:6px">'+x.sources.map(a=>'<a target="_blank" rel="noopener noreferrer" href="'+a.url+'">'+a.label+' ↗</a>').join('　')+'</div>':'';return '<div class="experienceFitCard"><span><b>'+x.name+'</b><em class="experienceStars" aria-label="'+x.score+' / 5">'+stars(x.score)+'</em></span>'+sub+'<small>'+x.reason+'</small><div class="small" style="margin-top:6px">'+x.availability+'</div>'+src+'</div>'}).join('');
- return '<section class="detailSection experienceFit" data-index-screening-v7><h3>どの上映方式で観る？</h3><p class="small" style="margin:0 0 12px">★は作品と上映方式の相性を示す参考値です。公式対応の有無と、作品の映像・音響・身体性・空間性を分けて扱います。</p><div class="experienceFitGrid">'+cards+'</div><p class="small" style="margin-top:9px">「公式版未確認」は非対応を意味しません。確認できた作品固有情報がない場合も、情報不足を理由に★1へ下げません。</p><a class="experienceTheaterLink" href="search.html?id='+encodeURIComponent(m.tmdbId||m.id||"")+'&search='+encodeURIComponent(m.title||"")+'">詳しい根拠を見る →</a></section>'
+ return '<section class="detailSection experienceFit" data-index-screening-v7><h3>劇場で観るなら、どの上映方式？</h3><p class="small" style="margin:0 0 12px">★は作品と上映方式の相性を示す参考値です。公式対応の有無と、作品の映像・音響・身体性・空間性を分けて扱います。</p><div class="experienceFitGrid">'+cards+'</div><p class="small" style="margin-top:9px">「公式版未確認」は非対応を意味しません。確認できた作品固有情報がない場合も、情報不足を理由に★1へ下げません。</p><a class="experienceTheaterLink" href="experience.html">上映方式の違いを見る →</a></section>'
 }
 function festivalAwardOrg(title){let t=String(title||"");if(t.includes("アカデミー賞"))return "アカデミー賞";if(t.includes("ゴールデングローブ"))return "ゴールデングローブ賞";if(t.includes("BAFTA"))return "BAFTA";if(t.includes("カンヌ"))return "カンヌ国際映画祭";if(t.includes("ヴェネチア"))return "ヴェネチア国際映画祭";if(t.includes("ベルリン"))return "ベルリン国際映画祭";return ""}
 function openMovie(m){

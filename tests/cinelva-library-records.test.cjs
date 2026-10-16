@@ -46,3 +46,44 @@ test('storage failure is reported rather than pretending to save',()=>{
   const {api,storage}=setup();storage.setItem=()=>{throw new Error('quota')};
   assert.throws(()=>api.save(movie,5,null),/quota/);
 });
+
+test('editing and saving preserves classification, original identity, and legacy date metadata',()=>{
+ const {api}=setup({'42':{title:'Old',watched:true,rating:null,watchedAt:'2024-05',countries:['Japan'],runtime:95}});
+ assert.equal(api.all()[0].watchedAt,'2024-05');
+ api.save({...movie,countries:['Japan'],runtime:95,original_title:'Original',formats:['実写'],workForms:['フィクション']},4);
+ const record=api.all()[0];
+ assert.equal(record.watchedAt,'2024-05');
+ assert.deepEqual(Array.from(record.countries),['Japan']);
+ assert.equal(record.runtime,95);
+ assert.equal(record.original_title,'Original');
+ assert.equal(api.summary([record,{id:43,rating:null,watched:true,watchedAt:'2026-10'}],2026,10).total,2);
+});
+
+test('restore validates every row before writing and retains unrated and unwatched state',()=>{
+ const {api,data}=setup();api.save(movie,0,'2026');
+ assert.equal(typeof api.restore,'function');
+ const before=data.get(api.KEY);
+ assert.throws(()=>api.restore([{id:43,title:'Valid',rating:null},{id:44,title:'Invalid',rating:8}]));
+ assert.equal(data.get(api.KEY),before);
+ api.restore([{id:43,title:'Unrated',rating:null,watchedAt:'2025-02',countries:['France']},{id:44,title:'Not watched',rating:null,watched:false}]);
+ assert.equal(api.all().find(r=>r.id==='44').watched,false);
+ assert.equal(api.all().find(r=>r.id==='43').rating,null);
+ assert.equal(api.summary(api.all(),2026,10).total,2);
+});
+
+test('restore rolls back legacy visibility when record storage quota fails',()=>{
+ const {api,data,storage}=setup({'42':{title:'Old',watched:true,rating:null}});
+ api.remove(42);const before=data.get(api.KEY),deleted=data.get(api.DELETED);
+ const original=storage.setItem;storage.setItem=(key,val)=>{if(key===api.KEY)throw Error('quota');original(key,val);};
+ assert.throws(()=>api.restore([{id:42,title:'Restored',rating:null}]),/quota/);
+ assert.equal(data.get(api.KEY),before);assert.equal(data.get(api.DELETED),deleted);
+ assert.equal(api.all().length,0);
+});
+
+test('malformed classification metadata is rejected before any restore write',()=>{
+ const {api,data}=setup();api.save(movie,0,null);const before=data.get(api.KEY);
+ for(const field of ['genres','countries','formats','workForms']){
+  assert.throws(()=>api.restore([{id:43,title:'Bad metadata',rating:null,[field]:{}}]));
+  assert.equal(data.get(api.KEY),before);
+ }
+});

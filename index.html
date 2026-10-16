@@ -238,7 +238,8 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <style id="cinelva-modal-compact-20261017">
 @media(max-width:760px){#detail .experienceFitGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#detail .experienceFitCard{min-width:0!important;padding:10px!important}#detail .experienceFitCard span{flex-wrap:wrap;gap:2px!important}#detail .experienceFitCard small{font-size:10px!important;line-height:1.5!important}#detail .experienceFitCard .small{font-size:10px!important}#detail .experienceFitCard .experienceStars{font-size:11px!important}}
 #detail .experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#detail .history>summary{list-style:revert;min-height:44px;display:list-item;padding:12px}#detail .history .timelineSection{border:0;padding:10px 0}
-</style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style><style id="cinelva-compact-formats">@media(min-width:400px){.experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.experienceFitCard{min-width:0;padding:10px}.experienceFitCard b{font-size:13px}.experienceFitCard small{font-size:11px}}.experienceFitCard.best{outline:2px solid #d6ae56;outline-offset:-2px}body:not(.dark) .gBrand{background:transparent!important}</style></head>
+</style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style><style id="cinelva-compact-formats">@media(min-width:400px){.experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.experienceFitCard{min-width:0;padding:10px}.experienceFitCard b{font-size:13px}.experienceFitCard small{font-size:11px}}.experienceFitCard.best{outline:2px solid #d6ae56;outline-offset:-2px}body:not(.dark) .gBrand{background:transparent!important}</style><script src="js/cinelva-data-quality.js"></script>
+</head>
 <body>
 
 
@@ -264,7 +265,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinelva/" class="heroAction ghost">My Cinelva</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
-<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>
+<section class="wrap" data-official-offers="calendar" hidden style="padding:18px"></section><footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","WOWOWオンデマンド"];
@@ -447,7 +448,7 @@ function groupedMovieCards(weekMovies,modeName){
   let cards=rows.sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b)).map(m=>{
    let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/");
    if(modeName==="streaming"){
-    let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)],flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
+    let av=m.id&&(availabilitySnapshot.movies||{})[String(m.id)],flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
     return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'<span class="streamMovieDate">'+date+'</span></div>'+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div></article>'
    }
    let kind=group==="午前十時の映画祭"?"asa10":group==="リバイバル上映"?"revival":"theatrical";
@@ -655,13 +656,13 @@ function movieTimelineHtml(m){
  });
  if(av&&av.checked_at){
    const d=String(av.checked_at).slice(0,10),services=[...(av.flatrate||av.services||[]),...(av.rent||[]),...(av.buy||[])];
-   if(services.length)add(d,"availability","現在の配信状況を観測",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
+   if(services.length)add(d,"availability","配信先の観測履歴",[...new Set(services)].join(" / "),av.source_url,"観測日であり配信開始日ではありません","observed");
  }
  items.sort((a,b)=>a.date.localeCompare(b.date)||a.type.localeCompare(b.type));
- const flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
+ const flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],buy=CinelvaDataQuality.availabilityIsFresh(av)?(av.buy||[]):[];
  const nowRows=[flat.length?'<b>見放題</b> '+flat.join(" / "):"",rent.length?'<b>レンタル</b> '+rent.join(" / "):"",buy.length?'<b>購入</b> '+buy.join(" / "):""].filter(Boolean);
  const upcoming=related(m).filter(x=>x.event==="tv"&&x.date>=new Date().toLocaleDateString("sv-SE")).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
- const nowHtml='<div class="timelineNow"><div><strong>いま観る</strong><span>'+(nowRows.length?nowRows.join('<br>'):'配信先を確認できていません')+'</span></div><div><strong>次のTV放映</strong><span>'+(upcoming.length?upcoming.map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません')+'</span></div></div>';
+ const nowHtml='<div class="timelineNow"><div><strong>配信先の観測情報</strong><span>'+(nowRows.length?nowRows.join('<br>'):'配信先を確認できていません')+'</span></div><div><strong>次のTV放映</strong><span>'+(upcoming.length?upcoming.map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません')+'</span></div></div>';
  if(!items.length)return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・配信・放送の履歴</h3></div></div>'+nowHtml+'<div class="small" style="margin-top:10px">出典または観測記録を確認できる履歴がまだありません。</div></section>';
  const typeName={theatrical:"THEATER",streaming:"STREAMING",tv:"TV",availability:"NOW"};
  return '<section class="detailSection history timelineSection"><div class="timelineHead"><div><p class="eyebrow">NOW / HISTORY</p><h3>公開・配信・放送の履歴</h3></div><span class="small">'+items.length+' records</span></div>'+nowHtml+'<div class="movieTimeline">'+items.map(x=>'<div class="timelineItem"><div class="timelineRail"><i></i></div><div class="timelineBody"><div class="timelineMeta"><time>'+x.date+'</time><span>'+typeName[x.type]+'</span></div><b>'+x.label+'</b>'+(x.detail?'<div class="small">'+x.detail+'</div>':'')+'<div class="timelineNote small">'+x.note+(x.source?' · <a target="_blank" rel="noopener noreferrer" href="'+x.source+'">出典</a>':'')+'</div></div></div>').join("")+'</div><p class="small timelineCaution">予定データ・過去の実施記録・現在の配信状況の観測を区別しています。観測日は配信開始日を意味しません。</p></section>'
@@ -684,6 +685,7 @@ function movieHistoryHtml(m){
 function availabilityHtml(m){
  const info=m.id&&(availabilitySnapshot.movies||{})[String(m.id)];
  if(!info||!info.checked_at)return '<div class="small">直近の配信状況は確認待ちです。</div>';
+ if(!CinelvaDataQuality.availabilityIsFresh(info))return '<div class="small">配信情報は更新確認が必要です。最終観測：'+String(info.checked_at).slice(0,10)+' UTC。 <a target="_blank" rel="noopener noreferrer" href="https://www.themoviedb.org/movie/'+encodeURIComponent(String(m.id))+'/watch?locale=JP">配信元で確認</a></div>';
  let f=info.flatrate||info.services||[],r=info.rent||[],b=info.buy||[];
  let rows=(f.length?'<div><b>見放題：</b>'+f.join(" / ")+'</div>':'')+(r.length?'<div style="margin-top:5px"><b>レンタル：</b>'+r.join(" / ")+'</div>':'')+(b.length?'<div style="margin-top:5px"><b>購入：</b>'+b.join(" / ")+'</div>':'');
  if(!rows)rows='<div>日本向け配信先を確認できませんでした</div>';
@@ -765,8 +767,8 @@ function openMovie(m){
  let streams=all.filter(x=>x.event==="streaming"&&x.service!=="劇場公開").sort((a,b)=>a.date.localeCompare(b.date));
  let tvs=all.filter(x=>x.event==="tv").sort((a,b)=>a.date.localeCompare(b.date));
  let todayIso=new Date().toLocaleDateString("sv-SE"),tvUpcoming=tvs.filter(x=>x.date>=todayIso),tvPast=tvs.filter(x=>x.date<todayIso);
- let av=m.availability||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
- let flat=av?(av.flatrate||av.services||[]):[],rent=av?(av.rent||[]):[],buy=av?(av.buy||[]):[];
+ let av=(m.availability?{...m.availability,checked_at:m.availability.checked_at||new Date().toISOString()}:null)||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
+ const freshAvailability=av&&CinelvaDataQuality.availabilityIsFresh(av);let flat=freshAvailability?(av.flatrate||av.services||[]):[],rent=freshAvailability?(av.rent||[]):[],buy=freshAvailability?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:(m.director_works||[]);
  let peopleIntro='<section class="detailSection info"><h3>監督・出演者</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+cinelvaCastLinks(m.cast.slice(0,8)):'')+'</div></section>';
  let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||"")===String(w.id||"")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span>';return local>=0?'<button type="button" class="filmItem relatedMovie" data-related="'+local+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+body+'</button>':'<div class="filmItem"><a target="_blank" rel="noopener noreferrer" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+body+'</a></div>'}).join("")+'</div></section>':"";
@@ -778,8 +780,8 @@ function openMovie(m){
  let nowStreaming=[flat.length?'見放題：'+flat.join(" / "):'',rent.length?'レンタル：'+rent.join(" / "):'',buy.length?'購入：'+buy.join(" / "):''].filter(Boolean).join('<br>')||'現在の配信先を確認できていません';
  let tvNext=tvUpcoming.length?tvUpcoming.slice(0,3).map(x=>(x.program||x.service)+' '+x.date+(x.time?' '+x.time:'')).join('<br>'):'放映予定を確認できていません';
  let timeline='<details class="detailSection history"><summary style="font-size:14px;font-weight:800;cursor:pointer">公開・配信・放送の履歴と出典を確認する</summary>'+movieTimelineHtml(m)+'</details>';
- let watch='<section class="detailSection streaming"><h3>いま観られる場所</h3><div class="watchSummaryGrid">'+
-   '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信中</div><div class="watchSummaryValue">'+nowStreaming+(av&&av.source_url?'<br><a class="small" target="_blank" rel="noopener noreferrer" href="'+av.source_url+'">提供元で確認</a>':'')+'</div></div>'+
+ let watch='<section class="detailSection streaming"><h3>配信・放送の確認先</h3><div class="watchSummaryGrid">'+
+   '<div class="watchSummaryRow"><div class="watchSummaryLabel">配信先の観測情報</div><div class="watchSummaryValue">'+nowStreaming+(av&&av.source_url?'<br><a class="small" target="_blank" rel="noopener noreferrer" href="'+av.source_url+'">提供元で確認</a>':'')+'</div></div>'+
    '<div class="watchSummaryRow"><div class="watchSummaryLabel">TV予定</div><div class="watchSummaryValue">'+tvNext+'</div></div>'+
   '</div></section>';
  let locations=filmingLocationHtml(m);
@@ -823,7 +825,7 @@ function renderLegend(){
 }
 const coverageText={theatrical:"国内の劇場公開情報と、手動で確認した一部の再上映を掲載しています。全国の上映回を網羅するものではありません。",streaming:"公式情報で確認した一部の配信開始予定です。現在の配信先の観測日を、配信開始日として扱いません。",tv:"確認できた一部の地上波映画放映予定です。全局・全作品を網羅していません。放映日時は番組公式サイトでご確認ください。",festival:"日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。"};function renderCoverage(){const el=document.getElementById("calendarCoverage");if(el)el.textContent=coverageText[mode]||""}
 function setMode(next){streamRangeStart=null;theatricalRangeStart=null;mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render();renderCoverage()}
-function render(){renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
+function render(){globalThis.CinelvaOfficialOffers?.setFilter({mode,service:active});renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
 let backendConfigPromise=null;
 async function getBackendConfig(){
   if(!backendConfigPromise){
@@ -937,4 +939,4 @@ window.addEventListener("load",applyHeaderSearchParam);
 </script>
 <!-- Cinelva deployment v0.4.58 -->
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->
-<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script></body></html>
+<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script><script src="js/cinelva-official-offers.js"></script></body></html>

@@ -3,7 +3,7 @@
 - New public URL: https://cinelva.vercel.app/
 - Retained production/fallback: https://vongolebianco7.github.io/cinema-calendar/
 - Existing Vercel frontend project: cinema-calendar, prj_BPmpSaJmKfVDQpVWOFKaoXHS1eeD, vongole1.
-- Current source: main 96109f0d0a48a30b811bb519d21834f48a229c2d; no unrelated development branches merged.
+- Initial source: main 96109f0d0a48a30b811bb519d21834f48a229c2d. The verified automatic Git release is main 87300d991440d466d724d714f166cb91a8c9c7c8; no unrelated development branches merged.
 - Preview dpl_G1Xx6k7caifMBmXGv358NiTcZN7S reached READY and rendered Cinelva before production.
 - Production dpl_6YU4nkncJnQkiFHJtv5cCSqgg8o9 reached READY. The branded alias is verified and attached to this project.
 - Anonymous HTTP requests returned the app directly. Calendar, discovery, rankings, theaters, critic, My Cinelva, backup, manifest, backup module, backend config and original graphic matched reviewed main bytes.
@@ -18,10 +18,10 @@ No automatic redirect, storage rewrite, or deletion. Local storage is separate b
 
 The root vercel.json enables only main for Git deployment. Public HTML/icons, assets, JS, data and preview files are copied to public; backend, scripts, tests and docs are excluded. Documentation/test-only commits skip the frontend build. Backend has its own root/config and is not modified. Existing GitHub Actions update the same main data files, so Vercel Git integration can deploy those changes without a new token or billable API.
 
-This configuration must pass the repository quality gate and then be observed deploying from merged main before automatic reflection is reported complete. Revert only the hosting configuration to disable automatic releases; the old GitHub Pages URL remains usable throughout.
+Verified: after all seven PR #225 workflows succeeded, merging main 87300d991440d466d724d714f166cb91a8c9c7c8 automatically created Vercel production deployment dpl_DWEAmGhuxEw2ihFrxKu39QiNaSQa (source=git, READY, alias cinelva.vercel.app). Eight public files matched final reviewed source bytes. The retained GitHub Pages run 38906882504 also succeeded, and four files there matched the final source. Live My Cinelva and backup migration screens were checked. Revert only the hosting configuration to disable automatic releases; the old GitHub Pages URL remains usable throughout.
 
 ## Remaining limits
 
-Cloudflare login failed in the cloud browser; no Cloudflare project/domain was created. is-a.dev was not requested because of its application rules and use restrictions. Independent trademark clearance, light mode and real iPhone Safari testing remain unconfirmed. This release changes hosting and does not resolve pre-existing feature/data-quality issues.
+Cloudflare login failed in the cloud browser; no Cloudflare project/domain was created. is-a.dev was not requested because of its application rules and use restrictions. System/light/dark mode is implemented and passed Chromium/WebKit CI in PR #225. Independent trademark clearance and real iPhone Safari testing remain unconfirmed. This release changes hosting and does not resolve pre-existing feature/data-quality issues.
 
 References: https://vercel.com/docs/plans/hobby ; https://vercel.com/docs/project-configuration/git-configuration

@@ -1,8 +1,8 @@
 # CINELVA rebrand — research and release status
 
-Date: 2026-10-16 (Japan). Status: **REVIEW REQUIRED; not released**. The user selected the original symbol with CINELVA text; this remains a draft and has not been adopted in production. No external registration, old-URL redirect/retirement or destructive data change has occurred.
+Date: 2026-10-16 (Japan). Status: **REVIEW REQUIRED; main production remains Cinemap**. The user selected the original symbol with CINELVA text. A public, noindex staging path was deployed and verified at https://vongolebianco7.github.io/cinema-calendar/cinelva/ ; the root production identity has not been changed. No external registration, old-URL redirect/retirement or destructive data change has occurred.
 
-## 1. Brand and trademark risk: 要注意
+## 1. Brand and trademark risk: 高リスク for unqualified public adoption; rights unconfirmed
 
 ### J-PlatPat, direct UI searches
 
@@ -34,10 +34,11 @@ Important observed candidates:
 | MinerVa Search / 登録6849258; MinerVa AI / 登録6849259 | 42 | active registrations | Same broad software service field; full services unconfirmed. 要注意. |
 | MINERVA / 国際登録1486304 | 41/42/45 | active registration | Full services unconfirmed. 要注意. |
 
-No high-risk exact registered conflict was established in this session. Equally, international clearance and all close candidates have **not** been cleared. Final adoption/release remains on hold pending a reasoned similarity review; user design approval does not replace it.
+No exact registered conflict was established in this session. International clearance and all close candidates have **not** been cleared. A subsequently found film-industry use of **Cinerva** materially raises the practical confusion risk for unqualified public adoption. The English names differ by one letter (L/R), and a Japanese reading may coincide with シネルヴァ. This is a risk assessment, **not** a finding of infringement or a verified registered trademark. Hold the main production rename pending specialist review of markets, priority, class-specific goods/services and actual use; user design approval does not replace that review.
 
 ### Existing services and search visibility
 
+- `Cinerva VFX Studio`, https://www.cinervavfx.com/ and https://www.cinervavfx.com/about-us , presents itself as a VFX/CGI and post-production provider for feature films and OTT. Its own site and a company listing establish public name use in an adjacent movie/entertainment field, but its trademark registrations, priority and geographic rights remain **unconfirmed**. 高リスク for brand differentiation; do not assume legal infringement or clearance. This finding was made after the noindex stage path was deployed.
 - `In Focus: シネルヴァ`, a Japanese-language visual novel released in 2020: https://novelgame.jp/games/show/3898 and creator page https://abysan.itch.io/synerva . Japanese name matches, entertainment is adjacent. 要注意; existence is not proof of trademark rights.
 - `Cineva: Tamil Movies & OTT`, Google Play app: https://play.google.com/store/apps/details?id=com.cine5.app . Nearby spelling in movies/streaming. 要注意; foreign pronunciation and territory-specific rights unconfirmed.
 - `Cinevia`, streaming site: https://cinevia.me/ . Nearby appearance, not the same name. 要注意; legal status unconfirmed.
@@ -71,7 +72,7 @@ The inspected repository has ~1,482 non-git files including drafts and no indivi
 
 ## 3. Designs
 
-See comparison.png and brand-guidelines.md. A is the recommended proposal. All three include dark/light wordmarks, favicon, 180/192/512px icons and 1200×630 OGP. **No final design has been adopted.** Existing production assets and manifest remain Cinemap.
+The user withdrew the three new proposals and chose the **original Cinemap graphic only** with all visible letters changed to CINELVA. The draft references the existing square symbol without modifying its pixels. The original combined raster with embedded Cinemap lettering remains in the repository for compatibility but is not displayed by the draft. No new symbol is proposed. Production-root assets and manifest remain Cinemap.
 
 ## 4. Audited code and data protection
 
@@ -101,7 +102,7 @@ The backup tool is additive and linked from the My CINELVA hero in the draft reb
 - Node backup suite: 7/7 passed (including round trip, conflict preservation, malformed input/unknown keys, version/size rejection, rollback, unavailable storage).
 - `python scripts/quality_gate.py`: PASSED.
 - Broader `python -m unittest discover -s tests`: 92 tests, 8 failures + 8 import-time errors. A clean `git archive` of the exact base reproduces the same 16 names; tracked existing files unchanged. See baseline-failures.md. Keep unrelated repairs separate.
-- Local mobile/desktop Chromium and WebKit could not start: Playwright browser binaries missing. An attempted official install failed with truncated archive downloads. No browser pass is claimed. The dedicated CI subsequently succeeded: Chromium and WebKit at 390px and 1280px all passed actual export/download, conflict-preserving import, invalid-file rejection, no horizontal overflow, and no page errors. Evidence: https://github.com/vongolebianco7/cinema-calendar/actions/runs/38844153050 (commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8).
+- Local mobile/desktop Chromium and WebKit could not start: Playwright browser binaries missing. An attempted official install failed with truncated archive downloads. The dedicated CI subsequently succeeded: Chromium and WebKit at 390px and 1280px all passed actual export/download, conflict-preserving import, invalid-file rejection, no horizontal overflow, and no page errors. Evidence: https://github.com/vongolebianco7/cinema-calendar/actions/runs/38844153050 (commit 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8).
 - Real iPhone Safari: unverified, distinct from CI WebKit.
 - Existing production https://vongolebianco7.github.io/cinema-calendar/ opened successfully in cloud browser, showing Cinemap v0.4.73 and current calendar controls; not a full regression pass. Streaming view includes an explicit partial-coverage note and sparse weeks. Freshness/completeness not certified by rebranding work.
 - Theater search/showtimes, Ocean visual quality, Movie DNA, all outbound links, SEO/OGP and cache/base-path checks remain pending for the final adopted version.
@@ -112,15 +113,22 @@ The backup tool is additive and linked from the My CINELVA hero in the draft reb
 The user selected the **existing Cinemap logo symbol**, paired with the new CINELVA text. User requested the full visible rename; this is taken as authorization for the final naming treatment, while the research and release gates below still apply. The combined old raster wordmark and A/B/C proposals were withdrawn. Production identity assets remain untouched; the existing square symbol is referenced in the review branch.
 
 1. Complete close-mark goods/services and international rights assessment; no guarantee of legal clearance.
-2. User explicitly approves final CINELVA brand adoption after review. The original symbol plus CINELVA text is the selected logo treatment.
+2. The user selected the original symbol plus CINELVA text and instructed a complete visible rename. This resolves the design choice but does not resolve the later close-name risk.
 3. Review the staged display-only rebrand (header, page copy, exported artwork and manifest); preserve internal identifiers and old page routes. Production is unchanged.
 4. Complete browser/data flow regressions and new-origin staging; get external registration approval only if needed.
 5. Resolve release-blocking defects, verify Actions and actual deployed revision.
 6. Retain old URL. Any redirect/retirement requires separate user approval.
 
-Current production remains Cinemap. No new CINELVA public URL exists from this work.
+Current production root remains Cinemap. The same-origin noindex staging path is live and has been verified separately; it is not a final public brand launch.
 
-## 7. Review delivery
+## 7. Same-origin staging update (2026-10-16)
+
+- Staging PR #221 (https://github.com/vongolebianco7/cinema-calendar/pull/221) was isolated from the unmerged main rebrand PR #220. Its 22-file nested `/cinelva/` entry-point copy and browser test were squash-merged as `16aba4390c1de72eb63d279363c713b338d4abd0`. The Pages build/deploy run 38850074960 succeeded.
+- Live browser checks opened https://vongolebianco7.github.io/cinema-calendar/cinelva/ with CINELVA text and the original icon, followed links to My CINELVA and the backup page, and independently opened https://vongolebianco7.github.io/cinema-calendar/ with Cinemap still visible. These checks do not constitute full feature regression or a real user-data migration test.
+- CI for #221 passed the staging browser flow in Chromium and WebKit at mobile and desktop widths, including a synthetic same-origin storage check. The existing storage keys remain unchanged. This path shares the old origin; a future `pages.dev` origin would still require explicit export/import.
+- Cinerva VFX was found after staging. **Do not merge #220, remove old URLs, register a new domain or promote this noindex path as a final brand until the close-name risk is resolved.** A specialist trademark review is recommended. If the name cannot be cleared, preserve the existing production identity and choose a researched distinct alternative.
+
+## 8. Review delivery
 
 Draft PR: https://github.com/vongolebianco7/cinema-calendar/pull/220
 

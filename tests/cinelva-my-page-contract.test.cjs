@@ -18,3 +18,19 @@ test('share image is generated only from existing viewing records', () => {
   assert.match(share, /実績画像/);
   assert.doesNotMatch(share, /自由に作品を追加|映画棚を作成|コレクション/);
 });
+
+test('a rerelease search keeps the original catalog year and refreshes authoritative details', async () => {
+  const vm = require('node:vm');
+  const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
+  const choose = source.slice(source.indexOf('  async function chooseMovie('), source.indexOf('  function saveRecord()'));
+  const film = {id:27205,title:'インセプション',year:2026,genres:['SF'],countries:['US'],director:'Christopher Nolan'};
+  const elements = {movieResults:{_movies:[film]},chosenMovie:{},saveRecord:{},recordDialog:{open:true}};
+  let detailCalls=0;
+  const context={state:{},metadataFor:()=>({...film,year:2010}),$:id=>elements[id],poster:()=>'',AbortSignal,
+    fetch:async()=>{detailCalls++;return {ok:true,json:async()=>({movie:{...film,year:'2010'}})}}};
+  await vm.runInNewContext(choose+'; chooseMovie(27205)',context);
+  assert.equal(detailCalls,1,'complete search metadata can still contain a rerelease year');
+  assert.equal(String(context.state.selected.year),'2010');
+  assert.match(elements.chosenMovie.textContent,/2010年/);
+  assert.equal(elements.saveRecord.disabled,false);
+});

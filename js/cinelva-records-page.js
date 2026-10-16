@@ -245,21 +245,20 @@
     if(!rows.length) rows=state.movies.filter(movie=>`${movie.title||''} ${movie.original_title||''}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())).slice(0,12);
     if(token!==state.searchToken)return;
     const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,12);
-    box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
+    box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
     box._movies=rows;
   }
   async function chooseMovie(id) {
     const result=$('movieResults')._movies?.find(item=>String(item.id||item.tmdbId)===String(id));
-    const movie={...metadataFor(id),...(result||{})}; if(!movie.title)return;
+    const metadata=metadataFor(id),movie={...metadata,...(result||{}),year:metadata.year||result?.year||null}; if(!movie.title)return;
     state.selected={...movie,id:String(id),year:movie.year||Number(String(movie.date||'').slice(0,4))||null,director:movie.director||movie.directors?.[0]||'',poster:poster(movie),genres:movie.genres||[],countries:movie.countries||[]};
     $('chosenMovie').textContent=`選択中：${state.selected.title}${state.selected.year?`（${state.selected.year}年）`:''}`;
-    if(state.selected.genres.length&&state.selected.countries.length&&state.selected.director)return;
     $('saveRecord').disabled=true;
     try {
       const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movie-detail?id=${encodeURIComponent(id)}`,{signal:AbortSignal.timeout(8000)});
       if(response.ok){const data=await response.json();if(data.movie&&String(state.selected?.id)===String(id)&&$('recordDialog').open){const details=Object.fromEntries(Object.entries(data.movie).filter(([,value])=>value!==null&&value!==''&&(!Array.isArray(value)||value.length)));state.selected={...state.selected,...details,id:String(id)};}}
     }catch(_){/* Preserve known metadata and allow recording while the API is unavailable. */}
-    finally{$('saveRecord').disabled=false;}
+    finally{if(String(state.selected?.id)===String(id)){$('saveRecord').disabled=false;$('chosenMovie').textContent=`選択中：${state.selected.title}${state.selected.year?`（${state.selected.year}年）`:''}`;}}
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}

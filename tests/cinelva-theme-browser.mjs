@@ -28,6 +28,15 @@ try {
    if(check.name==='calendarCoverage')assert.ok(check.backgroundLuminance>.75,`${prefix}${file} coverage note should use the light surface: ${check.backgroundLuminance}`);
   }
 
+  if(file==='discover.html') {
+   const cardContrast=await page.locator('.personExploreIntro').evaluate(el=>{
+    const lum=value=>{const c=value.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return c.reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);};
+    const bg=lum(getComputedStyle(el).backgroundColor);
+    return [...el.querySelectorAll('h2,p')].map(child=>{const fg=lum(getComputedStyle(child).color);return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05);});
+   });
+   for(const ratio of cardContrast)assert.ok(ratio>=4.5,`Discover people card text contrast: ${ratio}`);
+  }
+
   const menu=page.locator('#gMenuBtn');
   if(await menu.count())await menu.click();
   const select=page.getByLabel('表示テーマ',{exact:true});

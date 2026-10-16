@@ -60,3 +60,8 @@ html[data-theme="light"] :is(.gSearchBtn,.gMenuBtn,.gDrawerClose,.drawerClose,.m
 html[data-theme="light"] :is(.gMenuLines,.gMenuLines::before,.gMenuLines::after) {
   background:#171717!important;
 }
+
+/* Person discovery panels follow the selected surface, including their gradient. */
+html[data-theme="light"] :is(.personExploreIntro,.personProfile,.personMode,.conciergeChat) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
+html[data-theme="light"] :is(.personExploreIntro p,.personMode p,.personProfileRole) { color:var(--muted)!important; }
+html[data-theme="light"] :is(.personModeActions a,.originCard a) { color:var(--text)!important; }

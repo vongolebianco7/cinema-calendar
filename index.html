@@ -267,7 +267,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
-const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","WOWOW"];
+const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","WOWOWオンデマンド"];
 const services=["すべて","劇場公開",...STREAMING_SERVICES];
 let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
 const savedMode=localStorage.getItem("cinemaNow.mode");
@@ -283,10 +283,10 @@ function showModal(){modalScrollY=window.scrollY||document.documentElement.scrol
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
 function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.runtime||0);if(!r)return false;return (!runtimeMin||r>=runtimeMin)&&(!runtimeMax||r<=runtimeMax)}
 function theatricalCategory(m){return m.special_screening==="asa10"?"午前十時":m.service==="リバイバル上映"?"リバイバル":"通常"}
-function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=mode==="theatrical"?(active==="すべて"||theatricalCategory(m)===active):(active==="すべて"||m.service===active);return ok&&serviceOk})}
+function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=mode==="theatrical"?(active==="すべて"||theatricalCategory(m)===active):(active==="すべて"||m.service===active||(active==="WOWOWオンデマンド"&&m.service==="WOWOW"));return ok&&serviceOk})}
 function streamingReleaseServices(){
  const found=[...new Set(movies.filter(m=>m.event==="streaming"&&m.service).map(m=>m.service))];
- const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)).sort((a,b)=>a.localeCompare(b,"ja"));
+ const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)&&s!=="WOWOW").sort((a,b)=>a.localeCompare(b,"ja"));
  return [...STREAMING_SERVICES,...extras]
 }
 function renderChips(){

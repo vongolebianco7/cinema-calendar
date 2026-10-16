@@ -4,6 +4,7 @@ on:
     paths:
       - 'cinelva/**'
       - 'tests/cinelva-stage-browser.cjs'
+      - 'tests/cinelva-backup.test.cjs'
       - '.github/workflows/cinelva-stage.yml'
 permissions:
   contents: read
@@ -16,6 +17,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Reject invalid backup payloads before storage writes
+        env:
+          CINELVA_BACKUP_MODULE: cinelva/js/data-backup.js
+        run: node --test tests/cinelva-backup.test.cjs
       - run: |
           mkdir -p /tmp/cinelva-stage-deps
           npm install --prefix /tmp/cinelva-stage-deps --no-audit --no-fund playwright@1.59.0

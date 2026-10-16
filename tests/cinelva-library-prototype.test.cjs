@@ -34,3 +34,13 @@ test('demo presets produce exactly the requested unique records',()=>{
 test('prototype cannot touch real browser data',()=>{
  assert.doesNotMatch(html,/\b(localStorage|sessionStorage|indexedDB|fetch|XMLHttpRequest)\s*[.(]/);assert.match(html,/デモ/);
 });
+test('atlas genre groups preserve overlap without inventing records',()=>{
+ const rs=[{...movie,rating:4,genres:['SF','ドラマ','SF']}];
+ assert.equal(M.filter(rs,{genre:'SF'}).length,1);assert.equal(M.filter(rs,{genre:'ホラー'}).length,0);
+ const groups=M.atlasGroups(rs,'genre');assert.equal(groups.SF,1);assert.equal(groups['ドラマ'],1);
+});
+test('award atlas counts winners only and filters by organization',()=>{
+ const rs=[{...movie,rating:4,awards:[{organization:'A',result:'winner'},{organization:'A',result:'winner'}]},{...movie,id:2,rating:3,awards:[{organization:'B',result:'nominee'}]}];
+ assert.equal(M.atlasGroups(rs,'award').A,1);assert.equal(M.atlasGroups(rs,'award').B,undefined);
+ assert.equal(M.filter(rs,{awardOrg:'A'}).length,1);assert.equal(M.filter(rs,{awardOrg:'B'}).length,0);
+});

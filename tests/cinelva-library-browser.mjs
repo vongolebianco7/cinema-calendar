@@ -25,10 +25,23 @@ try {
  await page.getByRole('tab',{name:/プロフィール/}).click();
  assert.ok(await page.getByText('データ未接続',{exact:true}).isVisible(),'missing runtimes must not be reported as zero hours');
  await page.getByRole('tab',{name:/映画地図/}).click();
- await page.locator('.cell:not([data-level="0"])').first().click();
+ await page.locator('.atlas-chips [data-map-country]').first().click();
  assert.ok(await page.locator('#mapDrill .movie').count()>0,'map drilldown shows matching films');
- await page.locator('.cell[data-level="0"]').first().click();
- assert.ok(await page.getByRole('heading',{name:'この条件の記録はありません'}).isVisible());
+ await page.getByRole('button',{name:'ジャンル星図',exact:true}).click();
+ assert.ok(await page.locator('.genre-svg').isVisible());
+ await page.locator('.atlas-chips [data-map-genre]').first().click();
+ assert.ok(await page.locator('#mapDrill .movie').count()>0,'genre drilldown shows films');
+ await noOverflow();
+ await page.getByRole('button',{name:'映画賞',exact:true}).click();
+ assert.ok(await page.locator('.award-film').count()>0,'source-matched awards appear');
+ assert.ok(await page.locator('.award-film.unrated').count()>0,'unrated films stay distinct');
+ const awardUnratedBefore=await page.locator('.award-film.unrated').count();
+ await page.locator('.award-film.unrated').first().click();
+ await page.getByLabel('あなたの評価',{exact:true}).press('End');
+ await page.getByRole('button',{name:'この点数で記録'}).click();
+ assert.equal(await page.locator('.award-film.unrated').count(),awardUnratedBefore-1,'saved award film becomes collected');
+ await page.getByRole('button',{name:'世界地図',exact:true}).click();
+ await noOverflow();
  await page.getByLabel('試作する記録件数').selectOption('0');
  await page.getByRole('tab',{name:/映画棚/}).click();
  assert.ok(await page.getByRole('heading',{name:'ここから、映画棚がはじまる。'}).isVisible());
@@ -51,6 +64,8 @@ try {
  assert.equal(await page.locator('#shelfContent .movie').count(),60,'large collection paginates posters');
  assert.equal(await page.locator('#summary .stat').last().locator('b').innerText(),'1,000');
  for(const tab of ['映画棚','映画地図','プロフィール']){await page.getByRole('tab',{name:new RegExp(tab)}).click();await noOverflow();}
+ await page.getByRole('tab',{name:/映画地図/}).click();
+ for(const mode of ['世界地図','ジャンル星図','映画賞']){await page.getByRole('button',{name:mode,exact:true}).click();await noOverflow();if(mode==='ジャンル星図')assert.ok(await page.getByText(/ジャンル情報あり .*ジャンル情報なし/).isVisible());await page.screenshot({path:`artifacts/library-prototype/${name}-atlas-${mode}.png`,fullPage:true});}
  await page.getByRole('button',{name:'ダーク表示に切り替える'}).click();
  assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');await noOverflow();
  await page.screenshot({path:`artifacts/library-prototype/${name}-dark.png`,fullPage:true});

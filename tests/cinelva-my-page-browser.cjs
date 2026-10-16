@@ -144,7 +144,7 @@ async function freePort() {
     const fallbackDownload=page.waitForEvent('download');await page.locator('#save').click();assert.match((await fallbackDownload).suggestedFilename(),/\.png$/);
     const phone=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1'});
     await phone.addInitScript(()=>{localStorage.setItem('cinelva-library-records-v2','{"77":{"id":"77","title":"Phone Film","rating":0,"watchedAt":"2026-01-01"}}');});
-    const phonePage=await phone.newPage();await phonePage.goto(`${base}/my-cinemap.html`,{waitUntil:'networkidle'});await phonePage.locator('#save').click();assert.equal(await phonePage.locator('#saveDialog').isVisible(),true);assert.match(await phonePage.locator('#download').getAttribute('href'),/^blob:/);await phone.close();
+    const phonePage=await phone.newPage();await phonePage.goto(`${base}/my-cinemap.html`,{waitUntil:'networkidle'});await phonePage.locator('#save').click();await phonePage.locator('#saveDialog').waitFor({state:'visible'});assert.equal(await phonePage.locator('#saveDialog').isVisible(),true);assert.match(await phonePage.locator('#download').getAttribute('href'),/^blob:/);await phone.close();
     await page.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(...args){return this.id==='worldCanvas'?null:get.apply(this,args);};});
     await page.route('**/data/awards.json',route=>route.fulfill({status:503,body:'Unavailable'}));
     await page.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});await page.locator('[data-tab="world"]').click();

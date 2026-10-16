@@ -11,7 +11,7 @@ fs.mkdirSync('artifacts/library-prototype',{recursive:true});
 try {
  await page.goto(base,{waitUntil:'domcontentloaded'});
  const noOverflow=async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,'390px page must not overflow');
- for(const tab of ['映画棚','映画地図','プロフィール']){
+ for(const tab of ['映画棚','アトラス','振り返り']){
   await page.getByRole('tab',{name:new RegExp(tab)}).click();await noOverflow();
   assert.equal(await page.getByRole('tab',{name:new RegExp(tab)}).getAttribute('aria-selected'),'true');
   await page.screenshot({path:`artifacts/library-prototype/${name}-${tab}.png`,fullPage:true});
@@ -22,9 +22,9 @@ try {
  await page.getByRole('button',{name:'前の月',exact:true}).click();
  assert.equal(await page.locator('#summary .stat').nth(1).innerText(),monthSummary,'browsing another month must not change this month');
  await page.getByRole('button',{name:'ポスター',exact:true}).click();
- await page.getByRole('tab',{name:/プロフィール/}).click();
- assert.ok(await page.getByText('データ未接続',{exact:true}).isVisible(),'missing runtimes must not be reported as zero hours');
- await page.getByRole('tab',{name:/映画地図/}).click();
+ await page.getByRole('tab',{name:/振り返り/}).click();
+ assert.ok(await page.getByText('上映時間ベース',{exact:true}).isVisible());
+ await page.getByRole('tab',{name:/アトラス/}).click();
  await page.locator('.atlas-chips [data-map-country]').first().click();
  assert.ok(await page.locator('#mapDrill .movie').count()>0,'map drilldown shows matching films');
  await page.getByRole('button',{name:'ジャンル星図',exact:true}).click();
@@ -36,10 +36,57 @@ try {
  assert.ok(await page.locator('.award-film').count()>0,'source-matched awards appear');
  assert.ok(await page.locator('.award-film.unrated').count()>0,'unrated films stay distinct');
  const awardUnratedBefore=await page.locator('.award-film.unrated').count();
- await page.locator('.award-film.unrated').first().click();
+ await page.locator('.award-film.unrated button').first().click();
  await page.getByLabel('あなたの評価',{exact:true}).press('End');
  await page.getByRole('button',{name:'この点数で記録'}).click();
  assert.equal(await page.locator('.award-film.unrated').count(),awardUnratedBefore-1,'saved award film becomes collected');
+ await page.getByRole('button',{name:'歴代受賞作の回廊',exact:true}).click();
+ assert.ok(await page.locator('.award-era').count()>0);
+ await page.getByRole('button',{name:'年別ボード',exact:true}).click();
+ assert.ok(await page.locator('.year-board').isVisible());
+ await page.getByRole('button',{name:'賞の背表紙',exact:true}).click();
+ assert.ok(await page.locator('.award-book').count()>0);
+ await page.locator('.award-book').first().click();
+ assert.ok(await page.locator('.award-era').count()>0);
+ await page.getByRole('button',{name:'監督',exact:true}).click();
+ await page.locator('[data-open-director]').first().click();
+ assert.ok(await page.locator('.film-timeline .movie').count()>0);
+ await page.locator('[data-pin-director]').click();
+ assert.ok((await page.locator('[data-pin-director]').innerText()).includes('外す'));
+ await page.getByRole('button',{name:'自分のベストを棚にする'}).click();
+ assert.ok(await page.locator('.custom-area').count()===1);
+ await page.getByRole('button',{name:'＋ 棚をつくる',exact:true}).click();
+ await page.getByLabel('棚の名前',{exact:true}).fill('試作の映画棚');
+ await page.locator('[data-collection-pick]').nth(0).check();
+ await page.locator('[data-collection-pick]').nth(1).check();
+ await page.getByRole('button',{name:'棚を保存',exact:true}).click();
+ const own=page.locator('.own-collection').filter({hasText:'試作の映画棚'});
+ assert.equal(await own.locator('.own-film').count(),2);
+ const firstTitle=await own.locator('.name').first().innerText();
+ await own.locator('[data-direction="1"]').first().click();
+ assert.notEqual(await own.locator('.name').first().innerText(),firstTitle);
+ assert.equal(await page.locator('.custom-area').count(),1,'rerender must not duplicate collection area');
+ await own.getByRole('button',{name:'編集',exact:true}).click();
+ await page.getByRole('button',{name:'棚を削除',exact:true}).click();
+ await page.getByRole('button',{name:'棚の削除を取り消す',exact:true}).click();
+ assert.ok(await own.isVisible());
+ await page.getByRole('tab',{name:/アトラス/}).click();
+ for(const mode of ['decade','actor','series']){
+  await page.getByLabel('その他の切り口',{exact:true}).selectOption(mode);await noOverflow();
+  if(mode==='decade'){await page.locator('[data-open-decade]').first().click();assert.ok(await page.locator('#mapDrill .movie').count()>0);}
+  if(mode==='actor')assert.ok(await page.locator('.film-timeline .movie').count()>0);
+  if(mode==='series')assert.equal(await page.locator('.film-timeline .movie').count(),3);
+ }
+ await page.getByRole('button',{name:'世界地図',exact:true}).click();
+ await page.getByRole('button',{name:'自分の平均点',exact:true}).click();
+ assert.ok(await page.locator('.metric-note').isVisible());
+ await page.getByRole('tab',{name:/振り返り/}).click();
+ await page.getByRole('button',{name:'映画年鑑',exact:true}).click();
+ assert.ok(await page.locator('.yearbook').isVisible());await noOverflow();
+ const downloadPromise=page.waitForEvent('download');
+ await page.getByRole('button',{name:'年鑑カードをPNG保存',exact:true}).click();
+ assert.equal((await downloadPromise).suggestedFilename(),'cinelva-2026-yearbook.png');
+ await page.getByRole('tab',{name:/アトラス/}).click();
  await page.getByRole('button',{name:'世界地図',exact:true}).click();
  await noOverflow();
  await page.getByLabel('試作する記録件数').selectOption('0');
@@ -63,8 +110,8 @@ try {
  await page.getByRole('button',{name:'ポスター',exact:true}).click();
  assert.equal(await page.locator('#shelfContent .movie').count(),60,'large collection paginates posters');
  assert.equal(await page.locator('#summary .stat').last().locator('b').innerText(),'1,000');
- for(const tab of ['映画棚','映画地図','プロフィール']){await page.getByRole('tab',{name:new RegExp(tab)}).click();await noOverflow();}
- await page.getByRole('tab',{name:/映画地図/}).click();
+ for(const tab of ['映画棚','アトラス','振り返り']){await page.getByRole('tab',{name:new RegExp(tab)}).click();await noOverflow();}
+ await page.getByRole('tab',{name:/アトラス/}).click();
  for(const mode of ['世界地図','ジャンル星図','映画賞']){await page.getByRole('button',{name:mode,exact:true}).click();await noOverflow();if(mode==='ジャンル星図')assert.ok(await page.getByText(/ジャンル情報あり .*ジャンル情報なし/).isVisible());await page.screenshot({path:`artifacts/library-prototype/${name}-atlas-${mode}.png`,fullPage:true});}
  await page.getByRole('button',{name:'ダーク表示に切り替える'}).click();
  assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');await noOverflow();

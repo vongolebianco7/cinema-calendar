@@ -44,3 +44,19 @@ test('award atlas counts winners only and filters by organization',()=>{
  assert.equal(M.atlasGroups(rs,'award').A,1);assert.equal(M.atlasGroups(rs,'award').B,undefined);
  assert.equal(M.filter(rs,{awardOrg:'A'}).length,1);assert.equal(M.filter(rs,{awardOrg:'B'}).length,0);
 });
+test('actor and year filters distinguish known metadata and date precision',()=>{
+ const rs=[{...movie,rating:4,cast:['俳優A'],watchedAt:'2026'},{...movie,id:2,rating:3,cast:[],watchedAt:null}];
+ assert.equal(M.filter(rs,{actor:'俳優A'}).length,1);assert.equal(M.filter(rs,{actor:'俳優B'}).length,0);
+ assert.equal(M.filter(rs,{year:2026}).length,1);assert.equal(M.filter(rs,{year:2025}).length,0);
+});
+test('custom collections validate, deduplicate and retain caller-selected order',()=>{
+ const rs=[{...movie,rating:4},{...movie,id:2,rating:3}];
+ const c=M.collectionFrom(rs,' 私の棚 ',[2,1,2],'紹介','demo-1');
+ assert.equal(c.name,'私の棚');assert.equal(c.movieIds.join(','),'2,1');assert.equal(c.id,'demo-1');
+ assert.equal(rs.length,2);assert.equal(rs[0].rating,4);
+ for(const [name,ids]of [['', [1]],['長'.repeat(41),[1]],['棚',[]],['棚',[99]]])assert.throws(()=>M.collectionFrom(rs,name,ids,'','bad'));
+});
+test('collection editing and moving preserve manual order around hidden members',()=>{
+ assert.deepEqual(Array.from(M.collectionOrder([3,1,2],[1,3,4])),[3,1,4]);
+ assert.deepEqual(Array.from(M.moveCollection([99,1,2],1,1,[1,2])),[99,2,1]);
+});

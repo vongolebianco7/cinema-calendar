@@ -50,4 +50,13 @@ html[data-theme="light"] .gTop a>span { color:var(--text)!important; }
 html[data-theme="light"] body :is(button,input,select,textarea) { background:var(--panel2)!important; color:var(--text)!important; border-color:var(--line)!important; }
 html[data-theme="light"] body .modeTab.active { background:#f9e5e4!important; color:#84212b!important; }
 html[data-theme="light"] body :is(.chip.active,.preset.active,.expTab.active,.dateBtn.active,.formatFilter.active) { background:var(--text)!important; color:var(--bg)!important; }
-html[data-theme="light"] .gBrandImage { background:#171717; border-radius:5px; }
+html[data-theme="light"] .gBrandImage { background:transparent; border-radius:5px; }
+html[data-theme="light"] :is(.gSearchBtn,.gMenuBtn,.gDrawerClose,.drawerClose,.menuBtn) {
+  background:transparent!important;color:#171717!important;border-color:transparent!important;
+}
+html[data-theme="light"] :is(.gSearchBtn,.gMenuBtn,.gDrawerClose,.drawerClose,.menuBtn) :is(svg,path,line) {
+  stroke:currentColor!important;
+}
+html[data-theme="light"] :is(.gMenuLines,.gMenuLines::before,.gMenuLines::after) {
+  background:#171717!important;
+}

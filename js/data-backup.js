@@ -1,7 +1,7 @@
 /* Additive, origin-local backup. Existing keys and records are never renamed. */
 (function(root){
  'use strict';
- const KEYS = new Set(['cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates','cinemap-my-font-style','cinemap-my-cinema-theme','cinemap-my-cinema-background','cinemaNow.mode','cinemaNow.active','cinema-theater-prefecture']);
+ const KEYS = new Set(['cinelva-library-records-v2','cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates','cinemap-my-font-style','cinemap-my-cinema-theme','cinemap-my-cinema-background','cinemaNow.mode','cinemaNow.active','cinema-theater-prefecture']);
  const LIMIT=10*1024*1024;
  function envelope(text){
   if(typeof text!=='string'||text.length>LIMIT||new TextEncoder().encode(text).length>LIMIT)throw Error('バックアップは10 MiB以内のJSONを指定してください。');
@@ -22,8 +22,9 @@
    &&['title','sub','theme','font','format','layout'].every(key=>optionalString(value[key]));
  }
  function validPayload(key,raw){
-  if(!['cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates'].includes(key))return true;
+  if(!['cinelva-library-records-v2','cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates'].includes(key))return true;
   let value;try{value=JSON.parse(raw);}catch{return false;}
+  if(key==='cinelva-library-records-v2')return object(value)&&Object.entries(value).every(([id,item])=>/^[1-9]\d*$/.test(id)&&movie(item)&&typeof item.rating==='number'&&Number.isFinite(item.rating)&&item.rating>=0&&item.rating<=5&&(item.watchedAt==null||typeof item.watchedAt==='string'));
   if(key==='cinemap-my-list'||key==='cinemap-my-candidates')return movies(value);
   if(key==='cinemap-my-saved-list')return value===null||list(value);
   if(key==='cinemap-my-saved-lists')return Array.isArray(value)&&value.every(list);

@@ -106,8 +106,10 @@ The backup tool is additive and not linked into existing app pages yet. No produ
 
 ## 6. Pending release gates
 
+The user selected the **existing Cinemap logo unchanged**. The A/B/C proposals were withdrawn. The embedded wordmark still visibly reads “Cinemap”; this conflicts with a complete CINELVA naming change and requires an explicit resolution before release. No production identity asset was altered.
+
 1. Complete close-mark goods/services and international rights assessment; no guarantee of legal clearance.
-2. User chooses final identity and explicitly approves CINELVA adoption after review.
+2. User confirms the final CINELVA naming treatment after reviewing the old embedded wordmark and explicitly approves CINELVA adoption.
 3. Complete display-only rebrand, preserving internal identifiers and old pages.
 4. Complete browser/data flow regressions and new-origin staging; get external registration approval only if needed.
 5. Resolve release-blocking defects, verify Actions and actual deployed revision.

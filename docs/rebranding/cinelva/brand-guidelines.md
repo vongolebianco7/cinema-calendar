@@ -1,38 +1,11 @@
-# CINELVA identity proposals — adoption pending
+# Existing Cinemap logo retained
 
-## A — Projection (recommended)
-C-shaped aperture + expanding projection beam. Most direct cinema cue; legible small silhouette. Wordmark is original vector geometry, not a licensed font. A few optical spacing refinements can follow selection. Gold accent should be reserved for the logo, selected states and highlights.
+The user chose the existing Cinemap logo without alteration. The proposed A/B/C marks are withdrawn and must not be used in the application, manifest, favicon, PWA assets or OGP. Keep the existing production assets and their dimensions, colors and typography exactly as they are:
 
-## B — Screen
-Curved cinema screen with screen-light bars. Strong framing; at favicon sizes the horizontal bars can read as menu/text lines, so cinema association is weaker than A.
+- Header wordmark: `assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png` (2172 × 724, transparent)
+- Existing square app mark: `assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png` (1254 × 1254, transparent)
+- Existing `favicon.svg`, `icon-192.png`, `icon-512.png` and any other production icons remain untouched.
 
-## C — Monogram
-C/V construction. Most compact and editorial; cinema association is less explicit and monogram originality needs a separate visual trademark search before registration.
+The header image embeds **Cinemap** and the tagline “EXPLORE CINEMA” into its pixels. Literal reuse therefore leaves a visible Cinemap wordmark even if nearby text, document titles or metadata say CINELVA. Record this mismatch explicitly during final brand review. Do not redraw, crop, mask or silently replace the mark to conceal the old name. A future wordmark edit requires a separate instruction.
 
-| Design criterion (editorial assessment, 5 best) | A | B | C |
-|---|---:|---:|---:|
-| Cinema association | 5 | 4 | 3 |
-| Small icon legibility | 5 | 3 | 4 |
-| Dark/light adaptability | 5 | 5 | 5 |
-| Distinctive silhouette | 4 | 3 | 3 |
-| Total | 19 | 15 | 15 |
-
-These scores are design judgment, not user testing or trademark clearance. No proposal has been adopted.
-
-## Tokens (proposed A)
-- Ink/background dark: #101418
-- Paper/background light: #F4F0E8
-- Text dark: #182027
-- Primary gold on dark: #D8BD87
-- Accessible gold on light: #735B32
-- Dark secondary text: #AAB4BB
-- Light secondary text: #5C6467
-- Body: system-ui, -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif. No network font dependency.
-- UI text >= 16px for inputs, line-height 1.6; titles restrained, weight 650–700.
-- Wordmark uses original SVG paths; UI/body never spaced letter-by-letter.
-- Recommended clear space: half icon width; never distort aspect ratio.
-- App icon drawing stays within the central 80% safe region. Square icon may be used as maskable only after platform cropping verification.
-- Tokens are proposals; do not blanket override existing app CSS before contrast and mobile regression checks.
-
-## Files
-Each proposal includes dark/light SVG wordmark, icon.svg, 32px favicon.png, 180px Apple icon, 192px/512px PWA icons, and 1200×630 SVG/PNG OGP. comparison.png is a review board. These are draft assets under docs; production favicon, manifest and OGP are unchanged.
+Existing dark/light styles and CSS tokens remain the brand palette until any separately authorized design change is tested.

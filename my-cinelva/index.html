@@ -111,6 +111,6 @@ $('atlasMore').onchange=e=>{if(e.target.value){atlasMode=e.target.value;mapQuery
 
 function loadLive(){return globalThis.CinelvaLibraryRecords.all().filter(r=>typeof r.rating==='number').map(r=>{const known=F.find(f=>String(f.id)===String(r.id))||{};return {...known,...r,id:Number(r.id),countries:known.countries||(!r.region?[]:[r.region]),genres:r.genres?.length?r.genres:(known.genres||[]),cast:known.cast||[],awards:known.awards||[],rating:r.rating,watchedAt:r.watchedAt??null};});}
 $('toggleLive').onclick=()=>{if(!liveMode){try{records=loadLive();liveMode=true;}catch(err){notify('保存データを読み込めません: '+err.message);return;}}else{liveMode=false;records=M.makeDemo(Number($('preset').value),F);} $('toggleLive').textContent=liveMode?'デモに戻る':'このブラウザの記録を表示';$('demoPresetLabel').hidden=liveMode;$('modeBanner').textContent=liveMode?'このドメインのブラウザ内記録を表示中。旧形式は読み取り専用。映画賞・出演者情報は収録作品のみ表示します。':'デモの架空記録を表示中。';$('storageNotice').textContent=liveMode?'このページと同じドメイン内のデータのみ読み書きします。本番が別ドメインなら記録は自動で共有されません。':'デモ内の変更は保存されません。';$('add').textContent=liveMode?'＋ 作品を採点':'＋ 採点を試す';query={};mapQuery=null;render();};
-render();
+$('toggleLive').click();
 })();
 </script></body></html>

@@ -1,5 +1,5 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
-const path=require('node:path').join(__dirname,'../js/data-backup.js');
+const path=require('node:path').resolve(__dirname,'..',process.env.CINELVA_BACKUP_MODULE||'js/data-backup.js');
 function setup(initial={},failure=null){const map=new Map(Object.entries(initial));const storage={get length(){return map.size},key:i=>[...map.keys()][i],getItem:k=>map.get(k)??null,setItem(k,v){if(k===failure)throw Error('quota');map.set(k,v)},removeItem:k=>map.delete(k)};const ctx={globalThis:{},TextEncoder,Date,JSON,Object,Error,Set};vm.runInNewContext(fs.readFileSync(path,'utf8'),ctx);return{api:ctx.globalThis.CinemapBackup,storage,map}}
 test('backup module is available',()=>assert.ok(fs.existsSync(path),'missing data-backup.js'));
 if(fs.existsSync(path)){

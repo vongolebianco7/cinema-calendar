@@ -39,3 +39,5 @@
 
 ## Execution ledger
 Native execution in the existing isolated worktree; previous release files are untouched by the prototype's Git tree. The user's approval covers the synthetic three-screen prototype. No per-task confirmation is needed for reversible prototype work.
+
+Review ledger: model 8/8 and shared quality gate passed. Independent review identified mutable current-month summary; browser reproduction showed October changing to September. Fix keeps summary at the demo current month October while calendar navigation stays independent. Missing runtime is shown as unknown, not zero. Filtered empty map state is distinct from first-time onboarding. Deferred prototype gaps: joint directors are display-string groups; filtered unknown-date helper uses the whole-library count; calendar helper does not yet enumerate month-only records. These are not production-ready claims.

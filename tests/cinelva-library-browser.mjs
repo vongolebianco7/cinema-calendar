@@ -16,9 +16,19 @@ try {
   assert.equal(await page.getByRole('tab',{name:new RegExp(tab)}).getAttribute('aria-selected'),'true');
   await page.screenshot({path:`artifacts/library-prototype/${name}-${tab}.png`,fullPage:true});
  }
+ await page.getByRole('tab',{name:/映画棚/}).click();
+ const monthSummary=await page.locator('#summary .stat').nth(1).innerText();
+ await page.getByRole('button',{name:'カレンダー',exact:true}).click();
+ await page.getByRole('button',{name:'前の月',exact:true}).click();
+ assert.equal(await page.locator('#summary .stat').nth(1).innerText(),monthSummary,'browsing another month must not change this month');
+ await page.getByRole('button',{name:'ポスター',exact:true}).click();
+ await page.getByRole('tab',{name:/プロフィール/}).click();
+ assert.ok(await page.getByText('データ未接続',{exact:true}).isVisible(),'missing runtimes must not be reported as zero hours');
  await page.getByRole('tab',{name:/映画地図/}).click();
  await page.locator('.cell:not([data-level="0"])').first().click();
  assert.ok(await page.locator('#mapDrill .movie').count()>0,'map drilldown shows matching films');
+ await page.locator('.cell[data-level="0"]').first().click();
+ assert.ok(await page.getByRole('heading',{name:'この条件の記録はありません'}).isVisible());
  await page.getByLabel('試作する記録件数').selectOption('0');
  await page.getByRole('tab',{name:/映画棚/}).click();
  assert.ok(await page.getByRole('heading',{name:'ここから、映画棚がはじまる。'}).isVisible());
@@ -33,6 +43,7 @@ try {
  for(let i=0;i<8;i++)await page.getByLabel('あなたの評価',{exact:true}).press('ArrowLeft');
  await page.getByRole('button',{name:'この点数で記録'}).click();
  assert.equal(await page.locator('#summary .stat').last().locator('b').innerText(),'1');
+ assert.equal(await page.locator('#shelfContent .score').first().innerText(),'4.2');
  await page.getByRole('button',{name:'カレンダー',exact:true}).click();
  assert.equal(await page.locator('.day.has').count(),0,'unknown date must not populate calendar');
  await page.getByLabel('試作する記録件数').selectOption('1000');

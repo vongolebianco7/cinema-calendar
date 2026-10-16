@@ -133,3 +133,7 @@ Current production root remains Cinemap. The same-origin noindex staging path is
 Draft PR: https://github.com/vongolebianco7/cinema-calendar/pull/220
 
 Implementation commit: 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8 (39 additive files, zero deletions). File groups: `data-backup.html`, `js/data-backup.js`, `tests/cinelva-backup*.cjs`, `.github/workflows/cinelva-backup.yml`, this research folder including all identity materials, and design/implementation-plan documents under `docs/superpowers`. The PR Files changed tab is the exact authoritative list. This follow-up note records the verified CI result and further trademark/storage observations. No production file or user storage key was replaced.
+
+## 9. Continued verification and independent review
+
+See [release-readiness.md](release-readiness.md) for the current acceptance matrix, live checks, known pre-existing product gaps, no-cost trademark consultation questions and rollback procedure. Commit 1ba3021 passed all 12 observed Actions, including a 22-metric Chromium/WebKit comparison with the exact pre-rebrand baseline. A subsequent independent review found an invalid-payload import crash; the final fix validates stored JSON shapes before any write and preserves damaged source strings on export for recovery. Local Node checks after the fix: 10 passed; release Python checks: 2 passed. Final browser CI must be checked on the final fix commit. Main-root promotion remains held under the original trademark condition; do not describe staging as a completed brand launch.

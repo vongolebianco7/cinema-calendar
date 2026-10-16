@@ -6,6 +6,8 @@ on:
       - '*.html'
       - 'manifest.webmanifest'
       - 'js/data-backup.js'
+      - 'js/my-cinemap-*.js'
+      - 'preview/ocean/**'
       - 'tests/cinelva-backup*.cjs'
       - 'tests/cinelva-brand-browser.cjs'
       - 'tests/cinelva-storage.test.cjs'

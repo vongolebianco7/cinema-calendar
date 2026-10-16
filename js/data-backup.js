@@ -3,11 +3,36 @@
  'use strict';
  const KEYS = new Set(['cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates','cinemap-my-font-style','cinemap-my-cinema-theme','cinemap-my-cinema-background','cinemaNow.mode','cinemaNow.active','cinema-theater-prefecture']);
  const LIMIT=10*1024*1024;
- function inspect(text){
+ function envelope(text){
   if(typeof text!=='string'||text.length>LIMIT||new TextEncoder().encode(text).length>LIMIT)throw Error('バックアップは10 MiB以内のJSONを指定してください。');
   const data=JSON.parse(text);
   if(!data||data.format!=='cinemap-backup'||data.version!==1||!data.entries||typeof data.entries!=='object'||Array.isArray(data.entries))throw Error('対応していないバックアップ形式です。');
   for(const [key,value]of Object.entries(data.entries))if(!KEYS.has(key)||typeof value!=='string')throw Error('対応していないデータ項目が含まれています。');
+  return data;
+ }
+ const object=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
+ const optionalString=value=>value==null||typeof value==='string';
+ function movie(value){
+  return object(value)&&['title','director','poster','region','movieComment'].every(key=>optionalString(value[key]))
+   &&(value.genres==null||(Array.isArray(value.genres)&&value.genres.every(x=>typeof x==='string')));
+ }
+ const movies=value=>Array.isArray(value)&&value.every(movie);
+ function list(value){
+  return object(value)&&(value.picks===undefined||movies(value.picks))
+   &&['title','sub','theme','font','format','layout'].every(key=>optionalString(value[key]));
+ }
+ function validPayload(key,raw){
+  if(!['cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates'].includes(key))return true;
+  let value;try{value=JSON.parse(raw);}catch{return false;}
+  if(key==='cinemap-my-list'||key==='cinemap-my-candidates')return movies(value);
+  if(key==='cinemap-my-saved-list')return value===null||list(value);
+  if(key==='cinemap-my-saved-lists')return Array.isArray(value)&&value.every(list);
+  if(key==='cinemap:ocean:last-shown-growth')return value===null||(object(value)&&(value.stats===undefined||object(value.stats))&&(value.milestone==null||object(value.milestone)));
+  return object(value)&&Object.values(value).every(movie);
+ }
+ function inspect(text){
+  const data=envelope(text);
+  for(const [key,value]of Object.entries(data.entries))if(!validPayload(key,value))throw Error('保存データの形式が不正です（'+key+'）。既存データは変更していません。');
   return data;
  }
  function exportData(storage){
@@ -15,7 +40,8 @@
   const entries=Object.create(null);
   for(const key of KEYS){const value=storage.getItem(key);if(value!==null)entries[key]=value;}
   const data={format:'cinemap-backup',version:1,createdAt:new Date().toISOString(),entries};
-  inspect(JSON.stringify(data));return data;
+  // Export damaged legacy values verbatim for recovery; only import validates payloads.
+  envelope(JSON.stringify(data));return data;
  }
  function restore(storage,text){
   const data=inspect(text);if(!storage)throw Error('保存領域を利用できません。');

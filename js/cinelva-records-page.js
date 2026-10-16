@@ -75,7 +75,8 @@
   function populateYears() {
     const years = [...new Set(recordMovies().map(dateOf).filter(value => /^\d{4}/.test(value)).map(value => value.slice(0, 4)))].sort((a, b) => b.localeCompare(a));
     $('recordYear').innerHTML = '<option value="all">すべての年</option>' + years.map(year => `<option>${year}</option>`).join('');
-    $('worldYear').innerHTML = '<option value="all">すべて</option>' + years.map(year => `<option>${year}</option>`).join('');
+    const releaseYears = [...new Set(recordMovies().map(enriched).map(record => record.year).filter(year => Number.isFinite(Number(year))).map(Number))].sort((a, b) => b - a);
+    $('worldYear').innerHTML = '<option value="all">すべて</option>' + releaseYears.map(year => `<option>${year}</option>`).join('');
     const genres = Insights.GENRE_TAXONOMY.filter(genre => recordMovies().some(record => recordGenres(record).includes(genre)));
     $('worldGenre').innerHTML = '<option value="all">すべて</option>' + genres.map(genre => `<option>${escapeHTML(genre)}</option>`).join('');
     const countries = [...new Set(recordMovies().flatMap(record => enriched(record).countries || []).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ja'));
@@ -190,7 +191,7 @@
     ctx.fillStyle='#f4b266';ctx.fillText('1900',width*.14,height*.61);ctx.fillText('現在',width*.83,height*.6);ctx.fillText('北',width*.4,height*.18);ctx.fillText('南',width*.4,height*.82);
     const chosenYear=$('worldYear').value;
     const chosenGenre=$('worldGenre').value, chosenCountry=$('worldCountry').value;
-    const data=recordMovies().map(enriched).map(record=>({record,plot:Insights.pointForRecord(record)})).filter(item=>(chosenYear==='all'||dateOf(item.record).slice(0,4)===chosenYear)&&(chosenCountry==='all'||item.plot.country===chosenCountry)&&(chosenGenre==='all'||recordGenres(item.record).includes(chosenGenre)));
+    const data=recordMovies().map(enriched).map(record=>({record,plot:Insights.pointForRecord(record)})).filter(item=>(chosenYear==='all'||String(item.plot.year)===chosenYear)&&(chosenCountry==='all'||item.plot.country===chosenCountry)&&(chosenGenre==='all'||recordGenres(item.record).includes(chosenGenre)));
     data.sort((a,b)=>a.plot.coordinates.z-b.plot.coordinates.z);
     const hit=[];
     data.forEach(item=>{const p=projectPoint(item.plot.coordinates,width,height);const genreIndex=Math.max(0,Insights.GENRE_TAXONOMY.indexOf(item.plot.genre));const color=GENRE_COLORS[genreIndex%GENRE_COLORS.length];const radius=3.2*item.plot.size;ctx.beginPath();ctx.arc(p.x,p.y,radius+3,0,Math.PI*2);ctx.fillStyle=color+'44';ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();hit.push({x:p.x,y:p.y,r:Math.max(radius+5,8),record:item.record});});

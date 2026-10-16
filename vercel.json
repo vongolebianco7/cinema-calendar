@@ -7,7 +7,7 @@
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- '*.html' '*.png' '*.svg' '*.webmanifest' '*.css' '*.js' assets/ js/ data/ preview/ vercel.json",
   "git": {
     "deploymentEnabled": {
-      "*": false,
+      "**": false,
       "main": true
     }
   }

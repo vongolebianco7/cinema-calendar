@@ -3,6 +3,7 @@
   'use strict';
   const KEY='cinelva-library-records-v2';
   const LEGACY='cinemap-viewing-records-v1';
+  const DELETED='cinelva-library-deleted-legacy-v1';
   const own=(object,key)=>Object.prototype.hasOwnProperty.call(object,key);
   const validId=id=>/^[1-9]\d*$/.test(String(id));
   const validScore=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=5&&Math.round(value*10)===value*10;
@@ -31,10 +32,17 @@
   }
   function load() { return parseMap(storage().getItem(KEY),'My Cinelva'); }
   function legacy() { return parseMap(storage().getItem(LEGACY),'旧鑑賞記録'); }
+  function deleted() {
+    const raw=storage().getItem(DELETED);
+    if(raw===null)return [];
+    let parsed;try{parsed=JSON.parse(raw);}catch{throw new Error('旧鑑賞記録の削除情報を読み取れません');}
+    if(!Array.isArray(parsed)||parsed.some(id=>!validId(id)))throw new Error('旧鑑賞記録の削除情報が不正です');
+    return parsed.map(String);
+  }
   function all() {
-    const current=load(), older=legacy(), output=[];
+    const current=load(), older=legacy(), hidden=new Set(deleted()), output=[];
     for(const [id, old] of Object.entries(older)) {
-      if(!validId(id)||!old||typeof old!=='object'||Array.isArray(old)) continue;
+      if(!validId(id)||hidden.has(id)||!old||typeof old!=='object'||Array.isArray(old)) continue;
       if(own(current,id)) continue;
       output.push({id,title:String(old.title||''),poster:String(old.poster||''),year:old.year||null,
         director:String(old.director||''),genres:Array.isArray(old.genres)?old.genres:[],
@@ -63,16 +71,44 @@
       rating,watchedAt:date,createdAt:old.createdAt||now,updatedAt:now};
     const next={...current,[id]:value};
     storage().setItem(KEY,JSON.stringify(next));
+    const hidden=deleted().filter(item=>item!==id);
+    if(hidden.length!==deleted().length)storage().setItem(DELETED,JSON.stringify(hidden));
+    return value;
+  }
+  function saveUnrated(movie,watchedAt) {
+    const id=String(movie?.tmdbId??movie?.id??'');
+    if(!validId(id)) throw new Error('作品IDが不正です');
+    const current=load(), old=current[id]||{}, source=legacy()[id]||{};
+    const date=watchedAt===undefined?(old.watchedAt??null):watchedAt;
+    if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');
+    const now=new Date().toISOString();
+    const value={...old,id,title:String(movie.title??old.title??source.title??'').slice(0,160),
+      poster:String(movie.poster??old.poster??source.poster??'').slice(0,500),
+      year:movie.year??old.year??source.year??null,
+      director:String(movie.director??old.director??source.director??'').slice(0,120),
+      genres:Array.isArray(movie.genres)?movie.genres.slice(0,12):(old.genres??source.genres??[]),
+      region:String(movie.region??old.region??source.region??'').slice(0,60),
+      rating:null,watchedAt:date,createdAt:old.createdAt||now,updatedAt:now};
+    storage().setItem(KEY,JSON.stringify({...current,[id]:value}));
+    const hidden=deleted().filter(item=>item!==id);
+    if(hidden.length!==deleted().length)storage().setItem(DELETED,JSON.stringify(hidden));
     return value;
   }
   function remove(id) {
     id=String(id);
     if(!validId(id)) throw new Error('作品IDが不正です');
     const current=load();
-    if(!own(current,id)) return false;
+    const old=legacy();
+    if(!own(current,id)&&!own(old,id)) return false;
+    const storageArea=storage();
+    const priorDeleted=storageArea.getItem(DELETED);
+    const hidden=new Set(deleted());
+    if(own(old,id))hidden.add(id);else hidden.delete(id);
+    storageArea.setItem(DELETED,JSON.stringify([...hidden]));
     const next={...current};
     delete next[id];
-    storage().setItem(KEY,JSON.stringify(next));
+    try{storageArea.setItem(KEY,JSON.stringify(next));}
+    catch(error){if(priorDeleted===null){if(typeof storageArea.removeItem==='function')storageArea.removeItem(DELETED);else storageArea.setItem(DELETED,'[]');}else storageArea.setItem(DELETED,priorDeleted);throw error;}
     return true;
   }
   function summary(records,year,month) {
@@ -83,5 +119,7 @@
       month:rated.filter(r=>typeof r.watchedAt==='string'&&r.watchedAt.slice(0,7)===monthPrefix).length,
       unknownDate:rated.filter(r=>!r.watchedAt).length,legacyUnrated:records.filter(r=>r.legacy&&r.watched&&r.rating===null).length};
   }
-  root.CinelvaLibraryRecords={KEY,all,save,remove,summary,validDate,validScore};
+  const api={KEY,LEGACY,DELETED,all,save,saveUnrated,remove,summary,validDate,validScore};
+  root.CinelvaLibraryRecords=api;
+  if(typeof module!=='undefined'&&module.exports) module.exports=api;
 })(typeof window==='undefined'?globalThis:window);

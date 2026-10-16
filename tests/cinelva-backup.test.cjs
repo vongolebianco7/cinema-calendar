@@ -30,4 +30,13 @@ test('export preserves damaged existing raw data for recovery without silently i
  assert.equal(s.api.exportData(s.storage).entries['cinemap-my-candidates'],'[null]');
  assert.throws(()=>s.api.inspect(JSON.stringify(s.api.exportData(s.storage))));
 });
+test('backup round trip preserves unrated records and legacy deletion markers',()=>{
+ const original={
+  'cinelva-library-records-v2':JSON.stringify({'42':{id:'42',title:'未評価作品',rating:null,watchedAt:'2026-10'}}),
+  'cinelva-library-deleted-legacy-v1':'["7"]',
+ };
+ const source=setup(original),payload=source.api.exportData(source.storage),target=setup();
+ target.api.restore(target.storage,JSON.stringify(payload));
+ for(const [key,value]of Object.entries(original))assert.equal(target.map.get(key),value);
+});
 }

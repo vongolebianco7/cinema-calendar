@@ -1,0 +1,33 @@
+name: Cinelva library prototype
+on:
+  pull_request:
+    paths:
+      - 'preview/my-cinelva/**'
+      - 'tests/cinelva-library-*'
+      - '.github/workflows/cinelva-library-prototype.yml'
+permissions:
+  contents: read
+jobs:
+  prototype:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node --test tests/cinelva-library-prototype.test.cjs
+      - run: npm install --no-save --no-package-lock playwright@1.55.0
+      - run: npx playwright install --with-deps chromium webkit
+      - run: python3 -m http.server 4173 >/tmp/cinelva-prototype-http.log 2>&1 &
+      - run: CINEMAP_BROWSER=chromium node tests/cinelva-library-browser.mjs
+      - run: CINEMAP_BROWSER=webkit node tests/cinelva-library-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cinelva-library-prototype
+          path: artifacts/library-prototype/
+          retention-days: 7

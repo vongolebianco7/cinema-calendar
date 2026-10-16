@@ -48,7 +48,10 @@ for m in movies:
 # Prioritize streaming calendar entries, then nearby theatrical releases.
 # Coverage was previously capped at 100 titles, which made later-added
 # providers such as Apple TV+, ABEMA and Lemino appear under-populated.
-candidates=sorted(\n by_id.items(),\n key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])\n)
+candidates=sorted(
+ by_id.items(),
+ key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])
+)
 selected=[]
 for mid,pair in candidates:
  item=cache.get(str(mid),{})

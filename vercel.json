@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "mkdir public && cp *.html *.png *.svg *.webmanifest public/ && cp -R assets js data preview public/",
+  "installCommand": "",
+  "outputDirectory": "public",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- '*.html' '*.png' '*.svg' '*.webmanifest' '*.css' '*.js' assets/ js/ data/ preview/ vercel.json",
   "git": {
-    "deploymentEnabled": false
+    "deploymentEnabled": {
+      "**": false,
+      "main": true
+    }
   }
 }

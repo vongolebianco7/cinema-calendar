@@ -1,0 +1,48 @@
+/* Theme chrome only. Posters, original logo, artwork, Ocean and media retain their colors. */
+html[data-theme="dark"] { color-scheme:dark; }
+html[data-theme="light"] {
+  color-scheme:light;
+  --bg:#f8f6f1; --panel:#fffefa; --panel2:#eeeae2; --text:#242521;
+  --muted:#64645d; --line:#d4d0c7; --accent:#b52e38; --red:#b52e38;
+  --p:#fffefa; --t:#242521; --m:#64645d; --a:#b52e38;
+}
+/* The backup page has its own legacy OS-dark media rule. Explicit choice wins. */
+html[data-theme="dark"] body:has(#export) {
+  --bg:#101418; --text:#f4f0e8; --panel:#192027; --line:#46515a; --accent:#d8bd87;
+}
+html[data-theme="light"] body { background:var(--bg); color:var(--text); }
+html[data-theme="light"] :where(.gTop,.top,.dock,.expTabs) {
+  background:#f8f6f1f5!important; border-color:var(--line)!important;
+}
+html[data-theme="light"] :where(.gDrawer,.drawer,.sheet,.modalSheet,.detailSheet,.searchResults,.suggest,.filters,.concierge,.conciergeMsg.ai,.msg.ai,.creatorTrail,.dnaCell,.watchAction,.viewGuide,.criticIntro,.criticGate,.criticPathStep,.criticNode,.criticPanel,.criticConsent,.criticMatrix,.criticMatrixHead,.criticMatrixChannel,.criticVideo,.filmCandidates,.filmCandidate,.selectedMovieCard,.olderEras,.theaterTable th,.theaterTable td:first-child,.movieLinks a,.formatEvidence,.formatReasonBody,.experienceCompare th,.candidateMore) {
+  background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important;
+}
+html[data-theme="light"] :where(.gSearchForm,.search,.form input,.personInput,.conciergeInput input,.filmPicker input,.row input,.search input,.prefectureFilterRow select,.formatFilter,.suggest button,.result button,.move button,.remove,.more,.criticAction,.criticOverview button,.examples button) {
+  background:var(--panel2)!important; color:var(--text)!important; border-color:var(--line)!important;
+}
+html[data-theme="light"] :where(.gSearch,.gSearchBtn,.gMenuBtn,.gDrawerClose,.gDrawer>a,.drawer a,.menuBtn,.drawerClose,.gTop a,.gBrandWord,.brand,.back,.title,.hero h1,.section h2,.panel h2,.criticNode,.criticAction,.watchAction,.formatReasonToggle,.formatScoreCta,.chip:not(.active),.dateBtn:not(.active),.showing b,.official,.btn,.awardLinks a,.olderEras summary,.label,.exportOptions label,.previewControls label) { color:var(--text)!important; }
+html[data-theme="light"] :where(.brand)::after { color:#756443!important; }
+html[data-theme="light"] :where(.muted,.small,.meta,.status,.empty,.foot,.note,.conditionHint,.revivalEditorialLink,.sources small,.criticConsent,.criticTag,.formatEvidence,.formatReasonBody,.filterLabel,.pickerLabel,.theaterHero .area,.verifiedNote,.place,.theaterToolsTitle,.equipmentSummary,.legal,.exportLegal) { color:var(--muted)!important; }
+html[data-theme="light"] :where(.tag,.criticTag,.calHead button) { background:var(--panel2)!important; color:var(--text)!important; }
+html[data-theme="light"] :is(.chip.active,.preset.active,.expTab.active,.criticOverview button.active,.dateBtn.active,.formatFilter.active) { background:var(--text)!important; color:var(--bg)!important; border-color:var(--text)!important; }
+html[data-theme="light"] .modeTab.active { background:#f9e5e4; color:#84212b; }
+html[data-theme="light"] :where(.selects select,.filters select,.filters input) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
+html[data-theme="light"] :where(.panel li a,.sources a,main.wrap>a,main.wrap p>a) { color:#795a20; }
+html[data-theme="light"] .row button { color:var(--bg); }
+html[data-theme="light"] :where(.coverageWarn,.note) { background:transparent; }
+html[data-theme="light"] .coverageWarn { color:#705525; }
+html[data-theme="light"] .gTop a>span { color:var(--text)!important; }
+/* Menus can remain operable at 390px width and short landscape heights. */
+.gDrawer,.drawer { overflow-y:auto; overscroll-behavior:contain; }
+.cinelvaTheme {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:8px; max-width:100%; margin:20px 0 8px; padding:12px 0;
+  border-top:1px solid var(--line,#363636); color:var(--text,#f2f2f2); font-size:13px;
+}
+.cinelvaTheme select {
+  width:auto; min-width:0; max-width:100%; min-height:44px; margin:0;
+  padding:8px 10px; border:1px solid var(--line,#363636); border-radius:8px;
+  background:var(--panel,#151515); color:inherit; font:inherit;
+}
+.cinelvaTheme select:focus-visible { outline:3px solid var(--accent,#ef3f3f); outline-offset:3px; }
+@media(prefers-reduced-motion:reduce) { .gDrawer,.drawer { transition:none; } }

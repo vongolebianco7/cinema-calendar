@@ -18,7 +18,7 @@
 <section id="shelf" role="tabpanel" aria-labelledby="tab-shelf"><div class="sectionhead"><h2>あなたの映画棚</h2><div class="switch" aria-label="棚の表示"><button id="posterview" aria-pressed="true">ポスター</button><button id="calendarview" aria-pressed="false">カレンダー</button></div></div><div id="shelfContent"></div><div class="sectionhead"><h2>コレクション</h2><span class="muted small">記録から生まれる小さな棚</span></div><div class="collections" id="collections"></div><p class="hint">映画賞の回廊・監督・年代・シリーズは、アトラスで切り替えられます。</p></section>
 <section id="map" role="tabpanel" aria-labelledby="tab-map" hidden><div class="maplead"><div><div class="eyebrow">YOUR EXPANDING CINEMA</div><h2>ひとつの記録。広がる世界。</h2></div></div><p class="muted small">国、ジャンル、映画賞。同じ映画を、違う景色から見返す。</p><div class="atlas-switch" aria-label="映画地図の切り口"><button data-atlas-mode="country" aria-pressed="true">世界地図</button><button data-atlas-mode="genre" aria-pressed="false">ジャンル星図</button><button data-atlas-mode="award" aria-pressed="false">映画賞</button><button data-atlas-mode="director" aria-pressed="false">監督</button><select class="atlas-more" id="atlasMore" aria-label="その他の切り口"><option value="">その他の切り口</option><option value="decade">公開年代</option><option value="actor">俳優・声の出演</option><option value="series">シリーズ</option></select></div><div class="metric-toolbar" id="atlasMetric"><span>表示する数字</span><button data-metric="count" aria-pressed="true">本数</button><button data-metric="rating" aria-pressed="false">自分の平均点</button></div><div id="atlasVisual"></div><div class="drill" id="mapDrill" aria-live="polite"></div></section>
 <section id="profile" role="tabpanel" aria-labelledby="tab-profile" hidden><div id="profileContent"></div></section>
-<aside class="control"><button class="secondary" id="toggleLive" type="button">デモ表示に切り替える</button><button class="secondary" id="exportRecords" type="button">鑑賞記録をJSONでバックアップ</button><a class="secondary" href="../my-cinemap.html" style="display:inline-flex;align-items:center;text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:5px">映画棚から共有画像を作成</a><label id="demoPresetLabel">試作する記録件数<select id="preset"><option value="0">0本 · はじめて</option><option value="5">5本 · 小さな棚</option><option value="20" selected>20本 · 好みの輪郭</option><option value="200">200本 · 広がる映画地図</option><option value="1000">1,000本 · 大きな映画棚</option></select></label><span class="muted small" id="storageNotice">デモ内の変更は保存されません。</span></aside>
+<aside class="control"><button class="secondary" id="toggleLive" type="button">デモ表示に切り替える</button><button class="secondary" id="exportRecords" type="button">鑑賞記録をJSONでバックアップ</button><button class="secondary" id="importRecords" type="button">バックアップから復元</button><input id="importRecordsFile" type="file" accept=".json,application/json" hidden><a class="secondary" href="../my-cinemap.html" style="display:inline-flex;align-items:center;text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:5px">映画棚から共有画像を作成</a><label id="demoPresetLabel">試作する記録件数<select id="preset"><option value="0">0本 · はじめて</option><option value="5">5本 · 小さな棚</option><option value="20" selected>20本 · 好みの輪郭</option><option value="200">200本 · 広がる映画地図</option><option value="1000">1,000本 · 大きな映画棚</option></select></label><span class="muted small" id="storageNotice">デモ内の変更は保存されません。</span></aside>
 <footer class="footer">映画情報・ポスター：既存Cinelvaデータ／TMDB。デモモードでは架空の鑑賞記録を使用します。200本・1,000本のデモには負荷確認用の架空作品が含まれます。<br>This product uses the TMDB API but is not endorsed or certified by TMDB. <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">TMDB</a><br>鑑賞記録はこのブラウザ内に保存され、JSONバックアップをダウンロードできます。アカウント同期・Ocean連携は未検証です。地図データ：<a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth（public domain）</a>。</footer></main>
 <dialog id="recordDialog" aria-labelledby="dialogTitle"><div class="dialoghead"><h2 id="dialogTitle">映画を選ぶ</h2><button class="round" id="closeDialog" aria-label="閉じる">×</button></div><div class="dialogbody" id="dialogContent"></div></dialog><div class="toast" id="toast" role="status" hidden></div>
 <script id="demo-model">
@@ -112,6 +112,28 @@ $('atlasMore').onchange=e=>{if(e.target.value){atlasMode=e.target.value;mapQuery
 function loadLive(){return globalThis.CinelvaLibraryRecords.all().filter(r=>typeof r.rating==='number').map(r=>{const known=F.find(f=>String(f.id)===String(r.id))||{};return {...known,...r,id:Number(r.id),countries:known.countries||(!r.region?[]:[r.region]),genres:r.genres?.length?r.genres:(known.genres||[]),cast:known.cast||[],awards:known.awards||[],rating:r.rating,watchedAt:r.watchedAt??null};});}
 $('toggleLive').onclick=()=>{if(!liveMode){try{records=loadLive();liveMode=true;}catch(err){notify('保存データを読み込めません: '+err.message);return;}}else{liveMode=false;records=M.makeDemo(Number($('preset').value),F);} $('toggleLive').textContent=liveMode?'デモに戻る':'このブラウザの記録を表示';$('demoPresetLabel').hidden=liveMode;$('modeBanner').textContent=liveMode?'このドメインのブラウザ内記録を表示中。旧形式は読み取り専用。映画賞・出演者情報は収録作品のみ表示します。':'デモの架空記録を表示中。';$('storageNotice').textContent=liveMode?'このページと同じドメイン内のデータのみ読み書きします。本番が別ドメインなら記録は自動で共有されません。':'デモ内の変更は保存されません。';$('add').textContent=liveMode?'＋ 作品を採点':'＋ 採点を試す';query={};mapQuery=null;render();};
 $('exportRecords').onclick=()=>{try{if(!liveMode){notify('デモ表示中です。実記録に切り替えてからバックアップしてください。');return;}const payload={format:'cinelva-records-backup',version:1,exportedAt:new Date().toISOString(),source:'browser-records',records:records.map(r=>({...r}))};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='cinelva-records-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);notify(liveMode?'鑑賞記録のバックアップを作成しました':'デモデータを書き出しました（実記録ではありません）');}catch(err){notify('バックアップに失敗しました: '+err.message);}};
+$('importRecords').onclick=()=>{$('importRecordsFile').click();};
+$('importRecordsFile').onchange=async event=>{
+ const file=event.target.files?.[0];event.target.value='';if(!file)return;
+ try{
+  if(file.size>5*1024*1024)throw new Error('5MB以下のバックアップを選択してください');
+  const payload=JSON.parse(await file.text());
+  if(payload?.format!=='cinelva-records-backup'||!Array.isArray(payload.records))throw new Error('My Cinelvaのバックアップ形式ではありません');
+  if(payload.records.length>10000)throw new Error('記録件数が多すぎます');
+  const valid=payload.records.map(r=>{
+   const id=String(r?.id??r?.tmdbId??'');
+   if(!/^[1-9]\\d*$/.test(id)||typeof r.title!=='string'||!globalThis.CinelvaLibraryRecords.validScore(r.rating)||!globalThis.CinelvaLibraryRecords.validDate(r.watchedAt??null))throw new Error('不正な作品ID・評価・鑑賞日が含まれています');
+   return {...r,id};
+  });
+  if(!confirm(valid.length+'件の鑑賞記録を取り込みます。同じ作品IDの現在の記録は上書きされます。続けますか？'))return;
+  const lib=globalThis.CinelvaLibraryRecords;
+  const backup=localStorage.getItem(lib.KEY);
+  try{for(const r of valid)lib.save(r,r.rating,r.watchedAt??null);}
+  catch(err){if(backup===null)localStorage.removeItem(lib.KEY);else localStorage.setItem(lib.KEY,backup);throw err;}
+  if(!liveMode)$('toggleLive').click();else{records=loadLive();render();}
+  notify(valid.length+'件の鑑賞記録を復元しました');
+ }catch(err){notify('復元できません: '+err.message);}
+};
 try{$('toggleLive').click();}catch(err){notify('鑑賞記録の初期化に失敗しました: '+err.message);}
 })();
 </script></body></html>

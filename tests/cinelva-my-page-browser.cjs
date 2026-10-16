@@ -99,6 +99,13 @@ async function freePort() {
     assert.equal(await page.locator('#recordDialog').isVisible(),true);
     assert.match(await page.locator('#chosenMovie').textContent(),/./);
     await page.locator('#closeDialog').click();
+    const rerelease={id:27205,title:'インセプション',year:2026,director:'Christopher Nolan',genres:['SF'],countries:['US']};
+    await page.route('https://backend-one-gray-94.vercel.app/api/movies*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movies:[rerelease],external:[]})}));
+    await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...rerelease,year:'2010'}})}));
+    await page.locator('#addRecord').click();await page.locator('#movieQuery').fill('インセプション');await page.locator('[data-choose-movie="27205"]').click();
+    await page.waitForFunction(()=>!document.getElementById('saveRecord').disabled&&document.getElementById('chosenMovie').textContent.includes('2010年'));
+    await page.locator('#closeDialog').click();
+    await page.unroute('https://backend-one-gray-94.vercel.app/api/movies*');await page.unroute('https://backend-one-gray-94.vercel.app/api/movie-detail*');
     await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.abort());
     await page.route('https://backend-one-gray-94.vercel.app/api/movies*', route => route.fulfill({
       status: 200,

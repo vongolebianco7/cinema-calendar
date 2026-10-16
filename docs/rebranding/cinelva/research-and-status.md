@@ -91,7 +91,7 @@ Base commit: 65dc9f109d93dadba74da9e4a96695b2d91575a9. GitHub connector confirme
 
 No IndexedDB, service-worker registration or app cookie persistence was found in the inspected JS/HTML paths. This does not establish that a user's previously installed app has no legacy worker/cache. Check actual clients and retain old asset paths before release.
 
-The backup tool is additive and not linked into existing app pages yet. No production user data was read by the agent. Unit tests use synthetic records. Same-origin paths share localStorage; other hostnames do not. Keep original browser/URL until imported records and derived Ocean/DNA are verified. Existing records in a destination key are skipped in full; this is not a record-level merge tool.
+The backup tool is additive and linked from the My CINELVA hero in the draft rebrand. No production user data was read by the agent. Unit tests use synthetic records. Same-origin paths share localStorage; other hostnames do not. Keep original browser/URL until imported records and derived Ocean/DNA are verified. Existing records in a destination key are skipped in full; this is not a record-level merge tool.
 
 ## 5. Validation and known limits
 
@@ -106,7 +106,7 @@ The backup tool is additive and not linked into existing app pages yet. No produ
 
 ## 6. Pending release gates
 
-The user selected the **existing Cinemap logo symbol**, paired with the new CINELVA text. The combined old raster wordmark and A/B/C proposals were withdrawn. Production identity assets remain untouched; the existing square symbol is referenced in the review branch.
+The user selected the **existing Cinemap logo symbol**, paired with the new CINELVA text. User requested the full visible rename; this is taken as authorization for the final naming treatment, while the research and release gates below still apply. The combined old raster wordmark and A/B/C proposals were withdrawn. Production identity assets remain untouched; the existing square symbol is referenced in the review branch.
 
 1. Complete close-mark goods/services and international rights assessment; no guarantee of legal clearance.
 2. User explicitly approves final CINELVA brand adoption after review. The original symbol plus CINELVA text is the selected logo treatment.

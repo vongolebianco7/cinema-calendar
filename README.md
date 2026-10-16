@@ -1,4 +1,4 @@
-# Cinemap
+# CINELVA
 
 映画を探す・公開/配信予定を追う・作品を深く掘るための映画サービスです。
 
@@ -6,7 +6,7 @@
 
 **Frontend (production):** https://vongolebianco7.github.io/cinema-calendar/
 
-Cinemap のユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
+CINELVA のユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
 
 Vercel のフロントエンドは旧環境として扱い、今後の本番判定には使用しません。Vercel は、必要なバックエンド/API用途のみ継続利用します。
 

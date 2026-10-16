@@ -3,8 +3,11 @@ on:
   pull_request:
     paths:
       - 'data-backup.html'
+      - '*.html'
+      - 'manifest.webmanifest'
       - 'js/data-backup.js'
       - 'tests/cinelva-backup*.cjs'
+      - 'tests/cinelva-brand-browser.cjs'
       - '.github/workflows/cinelva-backup.yml'
   workflow_dispatch:
 permissions:
@@ -30,3 +33,4 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-http.log 2>&1 &
           node tests/cinelva-backup-browser.cjs
+          node tests/cinelva-brand-browser.cjs

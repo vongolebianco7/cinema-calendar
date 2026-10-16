@@ -1,6 +1,6 @@
 # CINELVA rebrand — research and release status
 
-Date: 2026-10-16 (Japan). Status: **REVIEW REQUIRED; main production remains Cinemap**. The user selected the original symbol with CINELVA text. A public, noindex staging path was deployed and verified at https://vongolebianco7.github.io/cinema-calendar/cinelva/ ; the root production identity has not been changed. No external registration, old-URL redirect/retirement or destructive data change has occurred.
+Date: 2026-10-16 (Japan). Current status: **CINELVA published at the existing production URL after explicit user approval of the close-name risk**. PR #220 merged as 43e6cd2eacdbf35baa4261204b36504c78303e5d; Pages deployment and actual browser display verified. The following research and hold decisions are the pre-approval audit trail; see [release-log.md](release-log.md) for current status and remaining limitations.
 
 ## 1. Brand and trademark risk: 高リスク for unqualified public adoption; rights unconfirmed
 
@@ -137,3 +137,7 @@ Implementation commit: 0a0f5822243a0c3c6c3c2b1412694cadb005f7d8 (39 additive fil
 ## 9. Continued verification and independent review
 
 See [release-readiness.md](release-readiness.md) for the current acceptance matrix, live checks, known pre-existing product gaps, no-cost trademark consultation questions and rollback procedure. Commit 1ba3021 passed all 12 observed Actions, including a 22-metric Chromium/WebKit comparison with the exact pre-rebrand baseline. A subsequent independent review found an invalid-payload import crash; the final fix validates stored JSON shapes before any write and preserves damaged source strings on export for recovery. Local Node checks after the fix: 10 passed; release Python checks: 2 passed. Final browser CI must be checked on the final fix commit. Main-root promotion remains held under the original trademark condition; do not describe staging as a completed brand launch.
+
+## 10. Approval and production release
+
+After reviewing the close-name risk, the user explicitly approved CINELVA adoption and switching the current production URL. PR #220 was merged as 43e6cd2eacdbf35baa4261204b36504c78303e5d. Pages run38872938863 succeeded; the normal root URL, My CINELVA and the backup link were verified in the live browser. Review code a682f41 passed all10 observed Actions. Trademark registrations/priority remain unconfirmed; approval is a product decision, not legal clearance. Old URL, storage namespaces and original symbol remain in place. No external registration, redirect or destructive data migration occurred. See release-log.md for final evidence and limitations.

@@ -1,4 +1,4 @@
-/* My CINELVA art-direction controls: compact editor, fonts, uploaded cinema templates, and director hydration. */
+/* My Cinelva art-direction controls: compact editor, fonts, uploaded cinema templates, and director hydration. */
 (() => {
   const FONT_KEY='cinemap-my-font-style';
   const FONT_VALUES=['modern','clean','classic'];
@@ -211,7 +211,7 @@
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20260927-compact-performance-v1';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20261016-cinelva-case';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,scheduleDirectorHydration,mountFontPicker,mountCinemaTemplates,removeDeprecatedTemplates,markEditorRanking,bindExportControlsToEnhancedRender,bindLightweightTextInputs,scheduleArtworkRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

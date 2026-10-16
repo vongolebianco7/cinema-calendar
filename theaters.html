@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>映画館を探す | CINELVA</title>
+<title>映画館を探す | Cinelva</title>
 <style>
 :root{--bg:#090909;--panel:#111;--panel2:#181818;--text:#f2f2f2;--muted:#929292;--line:#292929;--accent:#ef3f3f}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}.wrap{max-width:1080px;margin:auto;padding:0 18px}a{color:inherit;text-decoration:none}
@@ -153,7 +153,7 @@ html,body{overflow-x:hidden}
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
+ <a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -162,13 +162,13 @@ html,body{overflow-x:hidden}
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
  <a href="rankings.html">ランキング</a>
  <a href="theaters.html">映画館を探す</a>
  <a href="experience.html">上映方式</a>
- <a href="my-cinemap.html">My CINELVA</a>
+ <a href="my-cinemap.html">My Cinelva</a>
 </aside>
 <main class="wrap">
 <section class="hero"><h1>映画館を探す</h1><p>行きたい映画館を地域・名前から探し、場所や公式の上映スケジュールへ進むためのページです。上映方式にこだわる場合は設備比較から探せます。</p><a class="experienceCta" href="experience.html"><span>IMAX・Dolby・4DX</span><b>上映方式の違いを見る</b><i>→</i></a></section>
@@ -219,7 +219,7 @@ function renderTheaterChips(){
 }
 function renderTheaterDetail(){
  const defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=(scheduleData.schedules||[]).filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
- if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">CINELVA内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
+ if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinelva内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
  const dates=[...new Set(rows.map(x=>x.date))].sort(),today=new Date().toLocaleDateString("sv-SE");
  if(!selectedDate||!dates.includes(selectedDate)){
    const requested=param("date");
@@ -282,7 +282,7 @@ boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>
-<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">CINELVA v0.4.61</div>
+<div style="margin:28px auto 12px;text-align:center;color:#777;font-size:11px">Cinelva v0.4.61</div>
 
 
 

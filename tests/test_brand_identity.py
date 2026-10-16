@@ -14,7 +14,7 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn("cinemap-brand-image-v3", text, page)
             self.assertIn("gBrandImage", text, page)
             self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
-            self.assertGreaterEqual(text.count('class="gBrandWord">CINELVA</span>'), 2, page)
+            self.assertGreaterEqual(text.count('class="gBrandWord">Cinelva</span>'), 2, page)
             self.assertIn('.gNav{height:56px!important;gap:8px!important}', text, page)
             self.assertIn('.gBrandImage{display:block;width:132px;height:auto;max-width:none}', text, page)
             self.assertIn('@media(max-width:370px){.gBrandImage{width:118px}}', text, page)
@@ -25,7 +25,7 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn("gBrandTagline", text, page)
             self.assertNotIn('src="assets/cinemap-logo.png?v=2"', text, page)
 
-            lockup = f'<a class="gBrand" href="index.html" aria-label="CINELVA"><img class="gBrandImage" src="{ICON_ASSET}" alt=""><span class="gBrandWord">CINELVA</span></a>'
+            lockup = f'<a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="{ICON_ASSET}" alt=""><span class="gBrandWord">Cinelva</span></a>'
             self.assertGreaterEqual(text.count(lockup), 2, page)
 
     def test_primary_pages_use_uploaded_icon_asset(self):
@@ -47,8 +47,8 @@ class BrandIdentityTests(unittest.TestCase):
 
     def test_manifest_is_cinelva_branded_with_existing_symbol(self):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["name"], "CINELVA")
-        self.assertEqual(manifest["short_name"], "CINELVA")
+        self.assertEqual(manifest["name"], "Cinelva")
+        self.assertEqual(manifest["short_name"], "Cinelva")
         self.assertTrue(all(item["src"] == ICON_ASSET for item in manifest["icons"]))
         self.assertEqual(manifest["theme_color"], "#0a0c0f")
 

@@ -19,7 +19,7 @@ for(const page of pages){
  }
  for(const match of html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="([^"]+)"/gi)){
   const ref=match[1].split(/[?#]/)[0];
-  if(!ref||/^(https?:|data:|mailto:|\/\/)/i.test(ref)||ref.startsWith('/'))continue;
+  if(!ref||/^(https?:|data:|mailto:|\/\/)/i.test(ref)||ref.startsWith('/')||ref.startsWith('#')||ref.includes('{{'))continue;
   check(fs.existsSync(path.resolve(path.dirname(page),ref)),'missing asset '+page+' -> '+ref);
  }
 }

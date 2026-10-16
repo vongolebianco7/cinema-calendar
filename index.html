@@ -791,9 +791,10 @@ function openMovie(m){
  let story='<section class="detailSection story"><h3>あらすじ</h3><div style="line-height:1.7">'+(m.overview||"あらすじ情報はありません。")+'</div></section>';
  let fullDetailHref=CinemapCalendarContext.detailHref(m)||('search.html?id='+encodeURIComponent(m.tmdbId||m.id)+'&search='+encodeURIComponent(m.title||''));
  let deepDive='';
- let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links"><a target="_blank" href="'+trailer+'"> 予告</a><a target="_blank" href="'+teaser+'"> 特報</a>'+(m.tmdb?'<a target="_blank" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarks</a></div></section>';
+ let videos='<section class="detailSection"><h3>予告編・特報を見る</h3><div class="links"><a target="_blank" rel="noopener noreferrer" href="'+trailer+'">'+(m.trailer_url?'予告編を見る ↗':'公式予告編をYouTubeで探す ↗')+'</a><a target="_blank" rel="noopener noreferrer" href="'+teaser+'">特報・ティザーをYouTubeで探す ↗</a></div></section>'; 
+ let links='<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links">'+(m.tmdb?'<a target="_blank" rel="noopener noreferrer" href="'+m.tmdb+'">TMDB</a>':"")+(m.source_url?'<a target="_blank" rel="noopener noreferrer" href="'+m.source_url+'">情報源</a>':"")+'<a target="_blank" rel="noopener noreferrer" href="https://filmarks.com/search/movies?q='+encodeURIComponent(m.title)+'">Filmarksで作品を検索</a></div></section>';
  let theater=theatrical?'<section class="detailSection theater"><h3>劇場別上映スケジュール</h3><div id="theaterResult">'+theaterScheduleHtml(m)+'</div></section>':"";
- $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+story+experienceFit+peopleIntro+filmHtml+locations+watch+timeline+links+theater;
+ $("#detail").innerHTML='<p class="eyebrow">MOVIE</p><h2 style="font-size:24px;line-height:1.25;margin:8px 0 8px">'+m.title+'</h2>'+rating+info+story+experienceFit+peopleIntro+filmHtml+locations+watch+timeline+videos+links+theater;
  showModal();
  document.querySelectorAll(".relatedMovie").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))
 }

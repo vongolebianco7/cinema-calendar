@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const page=fs.readFileSync('my-cinelva/index.html','utf8');
 test('live atlas inline executable scripts are valid JavaScript',()=>{
-  const scripts=[...page.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(x=>x[1]);
+  const scripts=[...page.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(x=>!x[1].includes('application/json')&&!x[1].includes('src=')).map(x=>x[2]);
   for(const js of scripts.filter(Boolean)) assert.doesNotThrow(()=>new Function(js));
 });
 test('live atlas loads real records from the shared origin by default',()=>{

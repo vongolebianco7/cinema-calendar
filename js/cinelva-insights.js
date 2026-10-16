@@ -28,7 +28,6 @@ const ALIASES_BY_NAME = new Map([
   ['ファンタジー', 'ファンタジー'], ['ホラー', 'ホラー'], ['恋愛', '恋愛'], ['ロマンス', '恋愛'],
   ['ファミリー', '家族'], ['ファミリー映画', '家族'], ['戦争', '戦争'], ['音楽', '音楽・ミュージカル'],
   ['ヒストリー', '歴史・時代劇'], ['歴史', '歴史・時代劇'], ['ミュージカル', '音楽・ミュージカル'],
-  ['ドキュメンタリー', 'ヒューマン'],
   ['時代劇', '歴史・時代劇'], ['青春', '青春・成長'], ['成長', '青春・成長'],
   ['音楽', '音楽・ミュージカル'], ['ミュージカル', '音楽・ミュージカル'],
   ['ヒューマンドラマ', 'ヒューマン'], ['人間ドラマ', 'ヒューマン'],
@@ -49,10 +48,14 @@ function classifyGenres(genres) {
   const items = Array.isArray(genres) ? genres : [];
   const found = new Set(), formats = new Set(), workForms = new Set();
   for (const item of items) {
-    const id = Number(item?.id);
+    const id = Number(item?.id ?? (typeof item === 'number' || /^\d+$/.test(String(item)) ? item : NaN));
     const name = String(item?.name ?? item ?? '').trim();
     if (FORMAT_NAMES.has(id) || /^(animation|アニメーション|アニメ)$/i.test(name)) formats.add('アニメーション');
     if (id === 99 || /^(documentary|ドキュメンタリー)$/i.test(name)) workForms.add('ドキュメンタリー');
+    if (/^(stop[ -]?motion|ストップモーション)$/i.test(name)) formats.add('ストップモーション');
+    if (/^(live[ -]?action|実写)$/i.test(name)) formats.add('実写');
+    if (/^(fiction|フィクション)$/i.test(name)) workForms.add('フィクション');
+    if (GENRE_TAXONOMY.includes(name)) found.add(name);
     const canonical = GENRE_ALIASES.get(id) || ALIASES_BY_NAME.get(name.toLocaleLowerCase()) || ALIASES_BY_NAME.get(name);
     if (canonical) found.add(canonical);
   }
@@ -64,16 +67,16 @@ function pointForRecord(record) {
   const country = (Array.isArray(record?.countries) ? record.countries : [record?.region]).find(Boolean) || '国不明';
   const classified = classifyGenres(record?.genres || []);
   const genre = classified.genres[0] || '分類なし';
-  const genreIndex = Math.max(0, GENRE_TAXONOMY.indexOf(genre));
+  const genreIndex = GENRE_TAXONOMY.indexOf(genre);
   const latitude = COUNTRY_LATITUDE.get(country);
-  const rating = Number(record?.rating);
+  const rating = record?.rating == null ? NaN : Number(record.rating);
   return {
     id: String(record?.id ?? record?.tmdbId ?? ''), record,
-    year, country, genre, format: classified.formats[0] || '形式不明',
+    year, country, genre, latitude: latitude ?? null, format: classified.formats[0] || '形式不明',
     coordinates: {
       x: year === null ? 0.03 : 0.12 + clamp((year - 1900) / 130, 0, 1) * 0.88,
-      y: latitude === undefined ? 0.5 : clamp(0.5 + latitude / 180, 0, 1),
-      z: genreIndex / (GENRE_TAXONOMY.length - 1),
+      y: latitude === undefined ? 0.03 : clamp(0.5 + latitude / 180, 0, 1),
+      z: (genreIndex + 1) / GENRE_TAXONOMY.length,
     },
     size: Number.isFinite(rating) ? Math.round((0.75 + rating * 0.155) * 100) / 100 : 0.75,
   };
@@ -83,36 +86,49 @@ function awardOrganizations(awards) {
   return [...new Set((Array.isArray(awards) ? awards : []).map(item => item?.organization).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ja'));
 }
 
-function buildAwardHeatmap(records, awards) {
-  const watched = (Array.isArray(records) ? records : []).filter(record => record && record.id != null);
+function buildAwardHeatmap(records, awards, coverage = {}) {
+  const watched = (Array.isArray(records) ? records : []).filter(record => record && record.id != null && record.watched !== false);
   const rows = Array.isArray(awards) ? awards : [];
   const organizations = awardOrganizations(rows);
   const decades = [...new Set(rows.map(item => Math.floor(Number(item?.year) / 10) * 10).filter(Number.isFinite))].sort((a, b) => a - b);
   const cells = Object.create(null);
-  const matches = new Set();
   for (const award of rows) {
     const year = Number(award?.year);
-    if (!award?.organization || !Number.isFinite(year)) continue;
-    const decade = Math.floor(year / 10) * 10;
-    if (!cells[award.organization + ':' + decade]) cells[award.organization + ':' + decade] = { organization: award.organization, decade, count: 0, films: [], coverage: 'partial', completionRate: null, sourceCount: 0 };
-    const coveredCell = cells[award.organization + ':' + decade];
-    coveredCell.sourceCount += 1;
-    const awardTitle = normalizedText(award.title);
-    if (!awardTitle) continue;
-    for (const record of watched) {
-      const names = [record.title, record.originalTitle, record.original_title].map(normalizedText).filter(Boolean);
-      if (!names.includes(awardTitle)) continue;
-      const key = award.organization + ':' + decade + ':' + String(record.id);
-      if (matches.has(key)) continue;
-      matches.add(key);
-      coveredCell.films.push(record);
+    if (!award?.organization || !Number.isInteger(year) || year < 1895 || !award.title) continue;
+    const decade = Math.floor(year / 10) * 10, key = award.organization + ':' + decade;
+    const cell = cells[key] ||= { organization: award.organization, decade, count: 0, films: [], entries: [], coverage: 'partial', completionRate: null, sourceCount: 0 };
+    cell.sourceCount++;
+    const movieId = award.tmdb_id ?? award.tmdbId;
+    const title = award.film_title || award.title;
+    let record = movieId != null ? watched.find(item => String(item.tmdbId ?? item.id) === String(movieId)) : null;
+    if (movieId == null && award.match_status !== 'ambiguous') {
+      const candidates = watched.filter(item => {
+        const releaseYear = Number(item.year), expected = Number(award.release_year);
+        const sameYear = expected ? releaseYear === expected : releaseYear > 0 && releaseYear <= year && releaseYear >= year - 2;
+        return sameYear && [item.title,item.originalTitle,item.original_title].map(normalizedText).includes(normalizedText(title));
+      });
+      if (new Set(candidates.map(item => String(item.id))).size === 1) record = candidates[0];
+    }
+    const id = movieId != null ? String(movieId) : record ? String(record.id) : null;
+    const workKey = id ? 'tmdb:' + id : award.work_id || `${award.organization}:${year}:${normalizedText(title)}`;
+    let entry = cell.entries.find(item => item.workKey === workKey);
+    if (!entry) {
+      entry = { workKey, id, title: record?.title || award.display_title || title, year: award.release_year || record?.year || null, watched: Boolean(record), record: record || null, categories: [], sources: [], awardYears: [] };
+      cell.entries.push(entry);
+    }
+    if (award.category && !entry.categories.includes(award.category)) entry.categories.push(award.category);
+    if (/^https:\/\//.test(award.source || '') && !entry.sources.includes(award.source)) entry.sources.push(award.source);
+    if (!entry.awardYears.includes(year)) entry.awardYears.push(year);
+  }
+  for (const [key,cell] of Object.entries(cells)) {
+    cell.entries.sort((a,b) => a.title.localeCompare(b.title,'ja'));
+    cell.films = cell.entries.filter(entry => entry.watched).map(entry => entry.record);
+    cell.count = cell.films.length;
+    if (coverage[key]?.complete === true && cell.entries.length && cell.entries.every(entry => entry.id != null)) {
+      cell.coverage = 'complete'; cell.total = cell.entries.length; cell.completionRate = cell.count / cell.total;
     }
   }
-  for (const cell of Object.values(cells)) {
-    cell.films.sort((a, b) => String(a.title).localeCompare(String(b.title), 'ja'));
-    cell.count = cell.films.length;
-  }
-  return { organizations, decades, cells, coverage: 'partial' };
+  return { organizations, decades, cells, coverage: Object.values(cells).every(cell => cell.coverage === 'complete') ? 'complete' : 'partial' };
 }
 
 const api = { GENRE_TAXONOMY, classifyGenres, pointForRecord, awardOrganizations, buildAwardHeatmap };

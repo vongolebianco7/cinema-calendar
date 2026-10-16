@@ -41,6 +41,10 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/enrich_special_screenings.py
+      - name: Reconcile sourced award identities with the local catalog
+        run: python scripts/enrich_award_catalog.py
+      - name: Validate award and official on-demand provenance
+        run: python scripts/check_release_data.py
       - name: Observe Japan streaming availability
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

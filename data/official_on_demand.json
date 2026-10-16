@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-17",
+  "note": "公式のオンデマンド作品掲載情報。TV放送予定・配信開始日・リアルタイム配信確認ではありません。自動スクレイピングは行わず、7日後または掲載終了予定日を過ぎると推薦対象から除外。",
+  "offers": [
+    {
+      "id": 285783,
+      "title": "ザ・ウォーク",
+      "year": 2015,
+      "service": "WOWOWオンデマンド",
+      "source_url": "https://wod.wowow.co.jp/content/108841",
+      "source_type": "official_on_demand_listing",
+      "checked_at": "2026-10-16T22:09:16.340449+00:00",
+      "ends_at": "2026-10-31T23:59:00+09:00",
+      "starts_at": null,
+      "certainty": "listing",
+      "verified_current": false,
+      "verification_method": "official_page_browser_review",
+      "note": "公式作品ページの配信期間表示を確認。現在の契約・再生可否は提供元で確認。配信開始日は不明。"
+    },
+    {
+      "id": 718498,
+      "title": "あのこは貴族",
+      "year": 2021,
+      "service": "WOWOWオンデマンド",
+      "source_url": "https://wod.wowow.co.jp/watch/46240",
+      "source_type": "official_on_demand_listing",
+      "checked_at": "2026-10-16T22:09:16.340449+00:00",
+      "ends_at": "2026-10-31T23:59:00+09:00",
+      "starts_at": null,
+      "certainty": "listing",
+      "verified_current": false,
+      "verification_method": "official_page_browser_review",
+      "note": "公式作品ページの配信期間表示を確認。現在の契約・再生可否は提供元で確認。配信開始日は不明。"
+    }
+  ]
+}

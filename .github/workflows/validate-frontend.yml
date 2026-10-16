@@ -114,14 +114,20 @@ jobs:
           node --check js/cinelva-insights.js
           node --check js/cinelva-records-page.js
           node --check js/cinelva-share-image.js
+          node --check js/cinelva-data-quality.js
+          node --check js/cinelva-official-offers.js
+          node --test tests/cinelva-data-quality.test.cjs
+          python -m unittest tests.test_availability_update tests.test_award_identity
+          python scripts/check_release_data.py
           node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
       - name: Run My Cinelva mobile browser journey
         run: |
           npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0
-          "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium
+          "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

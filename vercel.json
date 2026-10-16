@@ -4,7 +4,7 @@
   "buildCommand": "mkdir public && cp *.html *.png *.svg *.webmanifest public/ && cp -R assets js data preview my-cinelva public/",
   "installCommand": "",
   "outputDirectory": "public",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- '*.html' '*.png' '*.svg' '*.webmanifest' '*.css' '*.js' assets/ js/ data/ preview/ vercel.json",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- '*.html' '*.png' '*.svg' '*.webmanifest' '*.css' '*.js' assets/ js/ data/ preview/ my-cinelva/ vercel.json",
   "git": {
     "deploymentEnabled": {
       "**": false,

@@ -4,7 +4,7 @@
 
 ## Production
 
-**Frontend (production):** https://vongolebianco7.github.io/cinema-calendar/
+**Brand URL:** https://cinelva.vercel.app/\n\n**Existing GitHub Pages origin (preserved for browser-local records):** https://vongolebianco7.github.io/cinema-calendar/
 
 ユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。2026-10-16にCinelvaへ改名しました。元のロゴ図形、既存URL、端末内データの保存キーを維持しています。公開状況と残件は[リリース記録](docs/rebranding/cinelva/release-log.md)を参照してください。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
 

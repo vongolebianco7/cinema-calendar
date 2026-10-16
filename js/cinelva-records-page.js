@@ -150,10 +150,10 @@
     $('classificationSummary').innerHTML=groups.map(([label,get])=>`<div class="breakdown"><strong>${label}</strong>${countBy(get).map(([name,count])=>`${escapeHTML(name)} ${count}本`).join('<br>')}</div>`).join('');
   }
   function renderGenres() {
-    const rows = classifiedRecords(), names = Insights.GENRE_TAXONOMY;
+    const rows = classifiedRecords(), names = Insights.GENRE_TAXONOMY, genreSets=rows.map(record=>new Set(recordGenres(record)));
     const counts = Object.fromEntries(names.map(name => [name, 0]));
     for (const record of rows) for (const name of recordGenres(record)) counts[name]++;
-    const html = `<table><thead><tr><th>ジャンル</th>${names.map(name => `<th>${escapeHTML(name)}</th>`).join('')}</tr></thead><tbody>` + names.map((name, i) => `<tr><th><button data-genre="${escapeHTML(name)}">${escapeHTML(name)} · ${counts[name]}</button></th>${names.map((other, j) => { const overlap = rows.filter(record => { const genres = recordGenres(record); return genres.includes(name) && genres.includes(other); }).length; return `<td><button class="heat-${Math.min(4, overlap)}" data-genre-pair="${escapeHTML(name)}|${escapeHTML(other)}" aria-label="${escapeHTML(name)}と${escapeHTML(other)}の重なり ${overlap}本">${overlap || '·'}</button></td>`; }).join('')}</tr>`).join('') + '</tbody></table>';
+    const html = `<table><thead><tr><th>ジャンル</th>${names.map(name => `<th>${escapeHTML(name)}</th>`).join('')}</tr></thead><tbody>` + names.map((name, i) => `<tr><th><button data-genre="${escapeHTML(name)}">${escapeHTML(name)} · ${counts[name]}</button></th>${names.map((other, j) => { const overlap = genreSets.filter(genres=>genres.has(name)&&genres.has(other)).length; return `<td><button class="heat-${Math.min(4, overlap)}" data-genre-pair="${escapeHTML(name)}|${escapeHTML(other)}" aria-label="${escapeHTML(name)}と${escapeHTML(other)}の重なり ${overlap}本">${overlap || '·'}</button></td>`; }).join('')}</tr>`).join('') + '</tbody></table>';
     $('genreMatrix').innerHTML = html; renderClassifications(rows);
     const unclassified = rows.filter(record => !recordGenres(record).length).length;
     $('genreSummary').innerHTML = `<span class="chip">分類可能 ${rows.length - unclassified}本</span><span class="chip">未分類 ${unclassified}本</span><span class="chip">数字は交差する作品数</span>`;
@@ -197,7 +197,7 @@
       const awardIds=new Set(state.awards.map(item=>String(item.tmdb_id||'')));
       const width=Math.max(700,sorted.length*90), lanes=[];
       const nodes=sorted.map(work=>{const x=30+(Number(work.year)-min)/span*(width-60),seen=watched.has(String(work.id)),awarded=awardIds.has(String(work.id)),highRated=Number(work.votes)>=100&&Number(work.score)>=7.5;let lane=lanes.findIndex(last=>x-last>110);if(lane<0)lane=lanes.length;lanes[lane]=x;return `<button class="timeline-node ${seen?'':'unwatched'} ${awarded?'awarded':''} ${highRated?'high-rated':''}" style="left:${x}px;top:${32+lane*80}px" data-director-film="${escapeHTML(work.id)}" aria-label="${escapeHTML(work.title)} · ${work.year}${seen?' · 鑑賞済み':' · 未鑑賞'}${awarded?' · 受賞記録あり':''}${highRated?' · TMDB高評価':''}" title="${escapeHTML(work.title)} · ${work.year}${awarded?' · 受賞記録あり':''}"><span>${escapeHTML(work.title)}${awarded?' ★':''}</span></button>`;}).join('');
-      const years = [...new Set([min, Math.round((min+max)/2), max])].map(year => `<span class="timeline-year" style="left:${2+(year-min)/span*96}%">${year}</span>`).join('');
+      const years = [...new Set([min, Math.round((min+max)/2), max])].map(year => `<span class="timeline-year" style="left:${30+(year-min)/span*(width-60)}px;top:0">${year}</span>`).join('');
       return `<div class="panel"><div class="section-head"><h3>${escapeHTML(name)}</h3><span class="hint">一覧 ${works.length}作品 · 鑑賞済み ${sorted.filter(work => watched.has(String(work.id))).length}作品</span></div><div class="timeline"><div class="timeline-row" style="width:${width}px;height:${Math.max(150,lanes.length*80+80)}px">${nodes}${years}</div></div><p class="hint">収録済み作品一覧に基づく表示です。全フィルモグラフィーの網羅性は保証されないため達成率を表示しません。金色の縁は収録された受賞作品、外枠はTMDB評価7.5以上・100票以上です。</p></div>`;
     }).join('');
     $('directorTimeline').innerHTML = html || '<div class="empty">鑑賞記録から監督を特定できませんでした。</div>';
@@ -230,14 +230,14 @@
     ctx.fillStyle='#f4b266';ctx.fillText('1900年／南／分類順の始点',Math.max(4,origin.x),Math.min(height-8,origin.y+18));
     const chosenYear=$('worldYear').value;
     const chosenGenre=$('worldGenre').value, chosenCountry=$('worldCountry').value;
-    const data=rows.map(record=>({record,plot:Insights.pointForRecord(record)}));
-    data.sort((a,b)=>projectPoint(b.plot.coordinates,width,height).depth-projectPoint(a.plot.coordinates,width,height).depth);
+    const data=rows.map(record=>({record,plot:Insights.pointForRecord(record)})).map(item=>({...item,projected:projectPoint(item.plot.coordinates,width,height)}));
+    data.sort((a,b)=>b.projected.depth-a.projected.depth);
     const hit=[];
-    data.forEach(item=>{const p=projectPoint(item.plot.coordinates,width,height);const genreIndex=Math.max(0,Insights.GENRE_TAXONOMY.indexOf(item.plot.genre));const color=item.plot.genre==='分類なし'?'#aaaaaa':GENRE_COLORS[genreIndex%GENRE_COLORS.length];const radius=3.2*item.plot.size*Math.sqrt(state.plotZoom);ctx.beginPath();ctx.arc(p.x,p.y,radius+3,0,Math.PI*2);ctx.fillStyle=color+'44';ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();hit.push({x:p.x,y:p.y,r:Math.max(radius+5,8),record:item.record});});
+    data.forEach(item=>{const p=item.projected;const genreIndex=Math.max(0,Insights.GENRE_TAXONOMY.indexOf(item.plot.genre));const color=item.plot.genre==='分類なし'?'#aaaaaa':GENRE_COLORS[genreIndex%GENRE_COLORS.length];const radius=3.2*item.plot.size*Math.sqrt(state.plotZoom);ctx.beginPath();ctx.arc(p.x,p.y,radius+3,0,Math.PI*2);ctx.fillStyle=color+'44';ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();hit.push({x:p.x,y:p.y,r:Math.max(radius+5,8),record:item.record});});
     canvas._points=hit; $('worldStatus').textContent=`${data.length}作品を表示。ドラッグで回転、ピンチまたはスクロールで拡大縮小できます。点の色はジャンル、点の大きさは評価を表します。`;
     $('worldLegend').innerHTML='<span class="chip">灰色：ジャンル未分類</span>'+Insights.GENRE_TAXONOMY.map((genre,index)=>`<span class="chip" style="border-color:${GENRE_COLORS[index]};color:${GENRE_COLORS[index]}">${escapeHTML(genre)}</span>`).join('');
   }
-  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); renderGenres(); renderAwards(); if(!$('worldView').hidden)drawWorld(); if(!$('directorsView').hidden)renderDirectors(); }
+  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); if(!$('awardsView').hidden)renderAwards(); if(!$('worldView').hidden)drawWorld(); if(!$('directorsView').hidden)renderDirectors(); }
   async function searchMovies(query) {
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];
@@ -316,7 +316,7 @@
     const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};
     const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
-    populateYears();bindEvents();drawYearCalendar();renderGenres();renderAwards();
+    populateYears();bindEvents();drawYearCalendar();
   }
   init();
 })();

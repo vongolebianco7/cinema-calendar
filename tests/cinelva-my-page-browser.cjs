@@ -119,12 +119,12 @@ async function freePort() {
     await page.reload({ waitUntil: 'networkidle' });
     assert.equal(await page.locator('#statTotal').textContent(), '3');
 
-    await page.locator('[data-edit="99999999"]').click();
+    await page.locator('#recordList [data-edit="99999999"]').click();
     await page.locator('#watchedAt').fill('2026-06-12');await page.locator('#unrated').check();await page.locator('#saveRecord').click();
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999'].rating),null);
     const backupWait=page.waitForEvent('download');await page.locator('#exportRecords').click();
     const backupDownload=await backupWait, backupData=fs.readFileSync(await backupDownload.path());
-    page.once('dialog',dialog=>dialog.accept());await page.locator('[data-delete="99999999"]').click();
+    page.once('dialog',dialog=>dialog.accept());await page.locator('#recordList [data-delete="99999999"]').click();
     assert.equal(await page.locator('#statTotal').textContent(),'2');
     page.once('dialog',dialog=>dialog.accept());await page.locator('#importFile').setInputFiles({name:'records.json',mimeType:'application/json',buffer:backupData});
     await page.waitForFunction(()=>document.getElementById('statTotal').textContent==='3');
@@ -149,6 +149,11 @@ async function freePort() {
     await page.route('**/data/awards.json',route=>route.fulfill({status:503,body:'Unavailable'}));
     await page.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});await page.locator('[data-tab="world"]').click();
     assert.equal(await page.locator('#worldList').isVisible(),true);assert.equal(await page.locator('#worldList [data-record-card]').count(),3);
+    const dense=await browser.newContext({viewport:{width:390,height:844}});
+    await dense.addInitScript(()=>{const rows=Object.fromEntries(Array.from({length:1000},(_,i)=>[String(8000000+i),{id:String(8000000+i),title:'Film '+i,year:1950+i%70,countries:['Japan'],genres:['SF','アクション'],formats:[i%2?'アニメーション':'実写'],rating:4,watchedAt:'2026-01-01'}]));localStorage.setItem('cinelva-library-records-v2',JSON.stringify(rows));});
+    const densePage=await dense.newPage();await densePage.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});assert.equal(await densePage.locator('#statTotal').textContent(),'1,000');
+    await densePage.locator('[data-tab="genres"]').click();await densePage.locator('#genreFormat').selectOption('アニメーション');await densePage.locator('[data-genre-pair="SF|アクション"]').click();assert.equal(await densePage.locator('#genreFilms [data-record-card]').count(),500);
+    await densePage.locator('[data-tab="world"]').click();await densePage.waitForFunction(()=>document.getElementById('worldCanvas')._points?.length===1000,{},{timeout:5000});assert.ok(await densePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await dense.close();
     assert.deepEqual(errors, []);
     console.log('My Cinelva mobile records, insights, persistence and PNG export passed');
   } finally {

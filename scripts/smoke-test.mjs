@@ -11,12 +11,12 @@ for(const page of pages){
  if(!fs.existsSync(page))continue;
  const html=read(page);
  check(html.includes('<html')&&html.includes('</html>'),'invalid page shell: '+page);
- const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+ const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
  for(const [i,script] of scripts.entries()){
   if(!script[1].trim())continue;
   try{new vm.Script(script[1],{filename:page+'#inline'+i});}catch(e){check(false,'JS parse: '+e.message);}
  }
- for(const match of html.matchAll(/<(?:script|link)\\b[^>]*(?:src|href)="([^"]+)"/gi)){
+ for(const match of html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="([^"]+)"/gi)){
   const ref=match[1].split(/[?#]/)[0];
   if(!ref||/^(https?:|data:|mailto:|\/\/)/i.test(ref)||ref.startsWith('/'))continue;
   check(fs.existsSync(path.resolve(path.dirname(page),ref)),'missing asset '+page+' -> '+ref);

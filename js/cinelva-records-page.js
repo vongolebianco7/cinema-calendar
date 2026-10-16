@@ -48,6 +48,25 @@
     $('statYear').textContent = yearCount.toLocaleString('ja-JP');
     $('statAverage').textContent = rated.length ? (rated.reduce((sum, item) => sum + item.rating, 0) / rated.length).toFixed(1) : '—';
     $('statOrigin').textContent = `${japan} / ${foreign}`;
+    renderAnnualComparison();
+  }
+  function renderAnnualComparison() {
+    const counts = new Map();
+    for (const item of recordMovies()) {
+      const match = dateOf(item).match(/^(\d{4})(?:-|$)/);
+      if (match) counts.set(Number(match[1]), (counts.get(Number(match[1])) || 0) + 1);
+    }
+    const years = [...counts.keys()].sort((a, b) => b - a);
+    const target = $('annualComparison');
+    if (!target) return;
+    if (!years.length) { target.innerHTML = '<p class="hint">鑑賞年が分かる記録はまだありません。</p>'; return; }
+    const maximum = Math.max(...counts.values(), 1);
+    target.innerHTML = `<table aria-label="年間鑑賞本数の比較"><thead><tr><th>年</th><th>鑑賞本数</th><th>前年との比較</th></tr></thead><tbody>${years.map(year => {
+      const count = counts.get(year), previous = counts.get(year - 1);
+      const change = previous == null ? '比較できる前年データなし' : previous === 0 ? '前年は0本' : `${count - previous > 0 ? '+' : ''}${count - previous}本`;
+      const width = Math.round(count / maximum * 100);
+      return `<tr><th scope="row">${year}年</th><td><div class="annual-count"><span>${count}本</span><span class="annual-bar" aria-hidden="true" style="width:${width}%"></span></div></td><td>${change}</td></tr>`;
+    }).join('')}</tbody></table>`;
   }
   function posterHTML(movie) {
     const source = poster(movie);

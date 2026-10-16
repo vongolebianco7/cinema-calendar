@@ -46,6 +46,10 @@ async function freePort() {
     await page.goto(`${base}/my-cinelva/`, { waitUntil: 'networkidle' });
     assert.equal(await page.locator('#statTotal').textContent(), '2');
     assert.equal(await page.locator('#statOrigin').textContent(), '2 / 0');
+    const annual = await page.locator('#annualComparison').textContent();
+    assert.match(annual, /2026年[\s\S]*1本/);
+    assert.match(annual, /2025年[\s\S]*1本/);
+    assert.match(annual, /前年との比較/);
     assert.ok(await page.locator('#recordList [data-record-card]').count() === 2);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'page should not overflow at 390px');
 

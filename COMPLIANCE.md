@@ -98,7 +98,7 @@ Automated workflows must pass `scripts/check_sources.py` before collecting produ
 
 ## Zero-cost / non-commercial release gate
 
-CINELVA is operated as a personal, non-commercial project. Paid APIs, metered paid add-ons, advertising, subscriptions, purchases, donations, affiliate monetization, and any feature that can create an automatic usage charge are out of scope.
+Cinelva is operated as a personal, non-commercial project. Paid APIs, metered paid add-ons, advertising, subscriptions, purchases, donations, affiliate monetization, and any feature that can create an automatic usage charge are out of scope.
 
 Before enabling a service or feature in production, confirm all of the following:
 
@@ -116,12 +116,12 @@ If any item is unclear, keep the integration disabled until the terms or permiss
 ### Hosting constraints
 
 - GitHub Pages must remain within its permitted project-hosting use and must not be used as a commercial SaaS/e-commerce host.
-- Vercel Hobby must remain personal and non-commercial. CINELVA must not opt into paid plans or paid overage features.
+- Vercel Hobby must remain personal and non-commercial. Cinelva must not opt into paid plans or paid overage features.
 - Hitting a free-tier limit is treated as a service-availability event, not a reason to enable billing automatically.
 
 ### Generative AI
 
-Production CINELVA must not require OpenAI or another paid generative-AI API. The concierge may use deterministic parsing and approved free data APIs only unless this policy is explicitly changed after a fresh cost/compliance review.
+Production Cinelva must not require OpenAI or another paid generative-AI API. The concierge may use deterministic parsing and approved free data APIs only unless this policy is explicitly changed after a fresh cost/compliance review.
 
 ### Social exports
 

@@ -18,7 +18,7 @@ checks={
  "search standalone critic entry":(search,["批評の傾向と出典を見る","critic.html?id="]),
  "search inline evidence":(search,["js/critic-evidence.js","data/critic_evidence.json","function renderInlineCriticism(","批評情報がまだ十分に集まっていません"]),
  "calendar deep dive":(index,["批評は出典を確認できた作品から掲載します","作品情報を見る"]),
- "ranking internal detail":(rankings,["CINELVAで深掘る","search.html?id="]),
+ "ranking internal detail":(rankings,["Cinelvaで深掘る","search.html?id="]),
  # My Cinemap enters the existing movie-detail journey first; that page owns the critic CTA.
  "my cinemap deep dive":(my,["search.html?id="]),
  "creator origin cycle":(discover,["元の作品の批評へ戻る","作り手の作品をたどる"]),

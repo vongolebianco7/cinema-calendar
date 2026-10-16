@@ -34,6 +34,14 @@ class DisplayCopy(HTMLParser):
 
 
 class RebrandReleaseTests(unittest.TestCase):
+    def test_changed_artwork_scripts_have_a_new_cache_version(self):
+        for path in ['my-cinemap.html', 'cinelva/my-cinemap.html', 'js/my-cinemap-art.js', 'cinelva/js/my-cinemap-art.js', 'js/my-cinemap-art-direction.js', 'cinelva/js/my-cinemap-art-direction.js']:
+            with self.subTest(path=path):
+                source = (ROOT / path).read_text()
+                urls = re.findall(r'''js/my-cinemap-(?:art|tools|art-direction|cinema-templates)\.js\?([^'"\s]+)''', source)
+                self.assertTrue(urls)
+                self.assertTrue(all(url == 'v=20261016-cinelva-case' for url in urls), urls)
+
     def test_legacy_namespaces_and_record_modules_are_preserved(self):
         contract = json.loads((ROOT / 'docs/rebranding/cinelva/storage-contract.json').read_text())
         for path, expected in contract['namespaces'].items():
@@ -53,6 +61,7 @@ class RebrandReleaseTests(unittest.TestCase):
                 parser.feed(path.read_text())
                 old = [s.strip() for s in parser.copy if re.search('cinemap', s, re.I)]
                 self.assertEqual(old, [])
+                self.assertFalse(any('CINELVA' in s for s in parser.copy), 'display brand must use Cinelva capitalization')
 
 
 if __name__ == '__main__':

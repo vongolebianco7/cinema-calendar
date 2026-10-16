@@ -1,6 +1,8 @@
-# CINELVA リリース記録
+# Cinelva リリース記録
 
 公開日: 2026-10-16
+
+表示名はユーザーの追加指定により **Cinelva / My Cinelva** とする。#223で画面、PWA、OGP、共有画像、検証ページまで先頭のみ大文字へ統一し、変更した共有画像スクリプトのキャッシュ識別子も更新する。元の図形と保存データの識別子は変更しない。
 
 **本番URL: https://vongolebianco7.github.io/cinema-calendar/**
 

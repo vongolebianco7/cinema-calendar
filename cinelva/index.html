@@ -2,9 +2,9 @@
 <html lang="ja">
 <head><base href="../"><meta name="robots" content="noindex,nofollow">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CINELVA</title>
-<meta name="description" content="CINELVA｜映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
-<meta property="og:title" content="CINELVA｜映画の公開・配信カレンダー">
+<title>Cinelva</title>
+<meta name="description" content="Cinelva｜映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
+<meta property="og:title" content="Cinelva｜映画の公開・配信カレンダー">
 <meta property="og:description" content="映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
 <meta property="og:image" content="https://vongolebianco7.github.io/cinema-calendar/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
@@ -228,7 +228,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a>
+ <a class="gBrand" href="cinelva/index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
  <form class="gSearchForm" action="cinelva/search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -237,19 +237,19 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html" aria-label="CINELVA"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">CINELVA</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="cinelva/index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="cinelva/index.html">カレンダー</a>
  <a href="cinelva/discover.html">映画を探す</a>
  <a href="cinelva/rankings.html">ランキング</a>
  <a href="cinelva/theaters.html">映画館を探す</a>
  <a href="cinelva/experience.html">上映方式</a>
- <a href="cinelva/my-cinemap.html">My CINELVA</a>
+ <a href="cinelva/my-cinemap.html">My Cinelva</a>
 </aside>
 <main class="wrap">
-<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="cinelva/discover.html" class="heroAction ghost">映画を探す</a><a href="cinelva/experience.html" class="heroAction ghost">上映方式</a><a href="cinelva/rankings.html" class="heroAction ghost">ランキング</a><a href="cinelva/my-cinemap.html" class="heroAction ghost">My CINELVA</a></div></section>
+<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="cinelva/discover.html" class="heroAction ghost">映画を探す</a><a href="cinelva/experience.html" class="heroAction ghost">上映方式</a><a href="cinelva/rankings.html" class="heroAction ghost">ランキング</a><a href="cinelva/my-cinemap.html" class="heroAction ghost">My Cinelva</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="cinelva/revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
-<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="cinelva/credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">CINELVA v0.4.73</span></footer></main>
+<footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="cinelva/credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino"];
@@ -611,7 +611,7 @@ function showMoreTheaters(){
 }
 function theaterScheduleHtml(m){
  // theater-official-links-v2: static, dependency-free renderer to avoid breaking detail view.
- return '<div class="theaterOfficialOnly"><p class="small">CINELVA内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links"><a href="https://www.tohotheater.jp/" target="_blank" rel="noopener noreferrer">TOHOシネマズ</a><a href="https://www.aeoncinema.com/" target="_blank" rel="noopener noreferrer">イオンシネマ</a><a href="https://www.unitedcinemas.jp/" target="_blank" rel="noopener noreferrer">ユナイテッド・シネマ</a><a href="https://www.smt-cinema.com/" target="_blank" rel="noopener noreferrer">MOVIX／ピカデリー</a><a href="https://tjoy.jp/" target="_blank" rel="noopener noreferrer">T・ジョイ</a><a href="https://109cinemas.net/" target="_blank" rel="noopener noreferrer">109シネマズ</a></div></div>';
+ return '<div class="theaterOfficialOnly"><p class="small">Cinelva内では一部劇場だけの上映時刻は表示していません。</p><strong>上映時間を公式サイトで確認</strong><div class="links"><a href="https://www.tohotheater.jp/" target="_blank" rel="noopener noreferrer">TOHOシネマズ</a><a href="https://www.aeoncinema.com/" target="_blank" rel="noopener noreferrer">イオンシネマ</a><a href="https://www.unitedcinemas.jp/" target="_blank" rel="noopener noreferrer">ユナイテッド・シネマ</a><a href="https://www.smt-cinema.com/" target="_blank" rel="noopener noreferrer">MOVIX／ピカデリー</a><a href="https://tjoy.jp/" target="_blank" rel="noopener noreferrer">T・ジョイ</a><a href="https://109cinemas.net/" target="_blank" rel="noopener noreferrer">109シネマズ</a></div></div>';
 }
 
 function movieTimelineHtml(m){
@@ -696,11 +696,11 @@ function contextHtml(m){
  const sameCountry=(m.countries||[]).length?peers.filter(x=>(x.countries||[]).some(g=>(m.countries||[]).includes(g))):[];
  const recurring=(m.cast||[]).map(name=>({name,n:peers.filter(x=>(x.cast||[]).includes(name)).length})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,4);
  let rows=[];
- if(m.director)rows.push('<div class="contextCard"><b>同じ監督</b><span>CINELVA内で他 '+sameDirector.length+'作品を確認</span></div>');
+ if(m.director)rows.push('<div class="contextCard"><b>同じ監督</b><span>Cinelva内で他 '+sameDirector.length+'作品を確認</span></div>');
  if((m.genres||[]).length)rows.push('<div class="contextCard"><b>同じジャンル</b><span>'+m.genres.slice(0,3).join(" / ")+'を共有する作品 '+sameGenre.length+'本</span></div>');
  if((m.countries||[]).length)rows.push('<div class="contextCard"><b>同じ製作国</b><span>'+m.countries.slice(0,3).join(" / ")+'を含む作品 '+sameCountry.length+'本</span></div>');
  if(recurring.length)rows.push('<div class="contextCard"><b>同じ出演者</b><span>'+recurring.map(x=>x.name+'：他 '+x.n+'本').join(" · ")+'</span></div>');
- return '<section class="detailSection info"><h3>確認できるつながり</h3><div class="contextGrid">'+(rows.length?rows.join(""):'<div class="small">現在のデータでは、追加のつながりを確認できません。</div>')+'</div><p class="small" style="margin-top:10px">CINELVAが現在保持している作品データ内で確認できる一致のみ表示しています。作品史上の位置づけや作風の解釈は表示していません。</p></section>'
+ return '<section class="detailSection info"><h3>確認できるつながり</h3><div class="contextGrid">'+(rows.length?rows.join(""):'<div class="small">現在のデータでは、追加のつながりを確認できません。</div>')+'</div><p class="small" style="margin-top:10px">Cinelvaが現在保持している作品データ内で確認できる一致のみ表示しています。作品史上の位置づけや作風の解釈は表示していません。</p></section>'
 }
 function exploreHtml(m){
  const peers=uniqueByMovie(movies.filter(x=>x.event!=="festival"&&movieIdentity(x)!==movieIdentity(m)));
@@ -739,7 +739,7 @@ function experienceFitHtml(m){
 function festivalAwardOrg(title){let t=String(title||"");if(t.includes("アカデミー賞"))return "アカデミー賞";if(t.includes("ゴールデングローブ"))return "ゴールデングローブ賞";if(t.includes("BAFTA"))return "BAFTA";if(t.includes("カンヌ"))return "カンヌ国際映画祭";if(t.includes("ヴェネチア"))return "ヴェネチア国際映画祭";if(t.includes("ベルリン"))return "ベルリン国際映画祭";return ""}
 function openMovie(m){
  detailMovie=m;theaterExpanded=false;
- if(m.special_screening==="asa10"&&!m.id&&!m.tmdbId){$("#detail").innerHTML='<p class="eyebrow">SPECIAL SCREENING</p><h2 style="font-size:24px;line-height:1.25">'+m.title+'</h2><section class="detailSection release"><h3>午前十時の映画祭16</h3><div class="small">'+m.date+' 〜 '+(m.end_date||m.date)+' · グループ '+(m.group||'')+'</div><div class="small" style="margin-top:8px">上映開始時間は劇場・作品により異なります。</div></section><section class="detailSection linksSec"><div class="links"><a href="cinelva/search.html?search='+encodeURIComponent(m.title)+'">CINELVAで作品を開く</a><a target="_blank" rel="noopener noreferrer" href="'+m.source_url+'">公式スケジュール</a></div></section>';showModal();return}
+ if(m.special_screening==="asa10"&&!m.id&&!m.tmdbId){$("#detail").innerHTML='<p class="eyebrow">SPECIAL SCREENING</p><h2 style="font-size:24px;line-height:1.25">'+m.title+'</h2><section class="detailSection release"><h3>午前十時の映画祭16</h3><div class="small">'+m.date+' 〜 '+(m.end_date||m.date)+' · グループ '+(m.group||'')+'</div><div class="small" style="margin-top:8px">上映開始時間は劇場・作品により異なります。</div></section><section class="detailSection linksSec"><div class="links"><a href="cinelva/search.html?search='+encodeURIComponent(m.title)+'">Cinelvaで作品を開く</a><a target="_blank" rel="noopener noreferrer" href="'+m.source_url+'">公式スケジュール</a></div></section>';showModal();return}
  if(m.event==="festival"){
   let source=m.source_url?'<a target="_blank" href="'+m.source_url+'">公式サイト</a>':'';
   let visual=m.visual_url?'<img src="'+m.visual_url+'" alt="" loading="lazy">':'';let awardOrg=festivalAwardOrg(m.title),awardLink=awardOrg?'<a href="cinelva/rankings.html?axis=awards&year='+encodeURIComponent(String((m.date||"").slice(0,4)))+'&award='+encodeURIComponent(awardOrg)+'">受賞作品を見る</a>':'';$("#detail").innerHTML='<p class="eyebrow">FESTIVAL / EVENT</p><div class="festivalHero">'+visual+'<span class="festivalKind">'+(m.service||"映画祭")+'</span><h2 style="font-size:24px;line-height:1.25;margin:6px 0 0">'+m.title+'</h2>'+(m.venue?'<div class="festivalVenue">'+m.venue+'</div>':'')+'</div><section class="detailSection release"><h3>開催情報</h3><div><b>開催期間</b><br>'+(m.start_date||m.date)+(m.end_date&&m.end_date!==(m.start_date||m.date)?' 〜 '+m.end_date:'')+'</div>'+(m.venue?'<div style="margin-top:8px"><b>会場</b><br>'+m.venue+'</div>':'')+'</section>'+(m.overview?'<section class="detailSection story"><h3>概要</h3><div style="line-height:1.7">'+m.overview+'</div></section>':'')+'<section class="detailSection linksSec"><h3>関連リンク</h3><div class="links">'+awardLink+source+(m.trailer_url?'<a target="_blank" rel="noopener noreferrer" href="'+m.trailer_url+'">公式予告編</a>':'')+'</div></section>';
@@ -918,6 +918,6 @@ function applyHeaderSearchParam(){
 }
 window.addEventListener("load",applyHeaderSearchParam);
 </script>
-<!-- CINELVA deployment v0.4.58 -->
+<!-- Cinelva deployment v0.4.58 -->
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->
 <script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script></body></html>

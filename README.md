@@ -1,4 +1,4 @@
-# CINELVA
+# Cinelva
 
 映画を探す・公開/配信予定を追う・作品を深く掘るための映画サービスです。
 
@@ -6,7 +6,7 @@
 
 **Frontend (production):** https://vongolebianco7.github.io/cinema-calendar/
 
-ユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。2026-10-16にCINELVAへ改名しました。元のロゴ図形、既存URL、端末内データの保存キーを維持しています。公開状況と残件は[リリース記録](docs/rebranding/cinelva/release-log.md)を参照してください。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
+ユーザー向けフロントエンドは **GitHub Pages を正式な本番環境**とします。2026-10-16にCinelvaへ改名しました。元のロゴ図形、既存URL、端末内データの保存キーを維持しています。公開状況と残件は[リリース記録](docs/rebranding/cinelva/release-log.md)を参照してください。`main` に反映されたフロントエンド変更は GitHub Pages を基準に確認します。
 
 Vercel のフロントエンドは旧環境として扱い、今後の本番判定には使用しません。Vercel は、必要なバックエンド/API用途のみ継続利用します。
 

@@ -1,4 +1,4 @@
-/* My CINELVA: editorial ranking export rendered locally without poster/still artwork. */
+/* My Cinelva: editorial ranking export rendered locally without poster/still artwork. */
 const artPalettes = {
   minimal: {bg:'#f3efe7', fg:'#1f1d19', muted:'#7b746c', line:'#d3cab9', accent:'#b9aa8d', border:'#b9aa8d', dark:false},
   noir: {bg:'#1b1c1d', fg:'#f4efe6', muted:'#b9b0a5', line:'#514c46', accent:'#b8955d', border:'#8d744d', dark:true},
@@ -150,7 +150,7 @@ function drawBrand(ctx,w,h,theme,y=h-98){
   rule(ctx,78,lineY,lineW,p.line,isMinimal?.30:.42);rule(ctx,w-78-lineW,lineY,lineW,p.line,isMinimal?.30:.42);
   ctx.save();ctx.strokeStyle=outline;ctx.globalAlpha=isMinimal?.76:1;ctx.lineWidth=isMinimal?1.15:1.35;ctx.strokeRect(x,y,tile,tile);
   const beam=ctx.createLinearGradient(x+15,y,x+tile+8,y);beam.addColorStop(0,dark?'rgba(255,235,196,.68)':isMinimal?'rgba(154,143,124,.38)':'rgba(166,127,72,.52)');beam.addColorStop(1,'rgba(222,187,131,0)');ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+15,y+13);ctx.lineTo(x+tile+8,y+7);ctx.lineTo(x+tile+8,y+(isMinimal?25:28));ctx.lineTo(x+15,y+(isMinimal?20:21));ctx.closePath();ctx.fill();
-  ctx.globalAlpha=1;ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 ${isMinimal?23:26}px ${artDisplay}`;ctx.fillText('C',x+(isMinimal?5:6),y+1);ctx.font=`500 ${isMinimal?23:25}px ${artDisplay}`;ctx.fillText('CINELVA',x+tile+12,y-1);
+  ctx.globalAlpha=1;ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 ${isMinimal?23:26}px ${artDisplay}`;ctx.fillText('C',x+(isMinimal?5:6),y+1);ctx.font=`500 ${isMinimal?23:25}px ${artDisplay}`;ctx.fillText('Cinelva',x+tile+12,y-1);
   ctx.fillStyle=tagline;ctx.globalAlpha=isMinimal?.82:1;ctx.font=`600 ${isMinimal?6:6.5}px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+13,y+(isMinimal?25:27));ctx.restore();
 }
 function layoutMetrics(shape,columns,theme){
@@ -220,9 +220,9 @@ function openImageForSaving(){const dialog=document.getElementById('saveImageDia
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
 window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
-  s.src='cinelva/js/my-cinemap-tools.js?v=20260927-my-cinemap-live-v13';
+  s.src='cinelva/js/my-cinemap-tools.js?v=20261016-cinelva-case';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='cinelva/js/my-cinemap-art-direction.js?v=20260927-logo-footer-v4';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='cinelva/js/my-cinemap-art-direction.js?v=20261016-cinelva-case';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

@@ -1,4 +1,4 @@
-/* My Cinelva: editorial ranking export rendered locally without poster/still artwork. */
+/* My Cinelva: editorial ranking export with CORS-safe poster artwork where available. */
 const artPalettes = {
   minimal: {bg:'#f3efe7', fg:'#1f1d19', muted:'#7b746c', line:'#d3cab9', accent:'#b9aa8d', border:'#b9aa8d', dark:false},
   noir: {bg:'#1b1c1d', fg:'#f4efe6', muted:'#b9b0a5', line:'#514c46', accent:'#b8955d', border:'#8d744d', dark:true},
@@ -158,7 +158,18 @@ function layoutMetrics(shape,columns,theme){
   if(shape==='square')return {titleY:96,titleSize:58,listTop:222,rowH:columns===2?220:110,footerGap:42,pad:118};
   return {titleY:66,titleSize:46,listTop:182,rowH:columns===2?136:68,footerGap:30,pad:104};
 }
+const posterCache=new Map();
+function safePosterImage(url){
+  if(!url||typeof url!=='string'||!/^https:\/\//i.test(url))return null;
+  if(posterCache.has(url))return posterCache.get(url);
+  const item={status:'loading',image:null};posterCache.set(url,item);
+  const image=new Image();image.crossOrigin='anonymous';image.referrerPolicy='no-referrer';
+  image.onload=()=>{item.status='ready';item.image=image;if(Array.isArray(window.cinelvaArtworkMovies))drawArtwork(window.cinelvaArtworkMovies);};
+  image.onerror=()=>{item.status='failed';};
+  image.src=url;return item;
+}
 function drawArtwork(movies){
+  window.cinelvaArtworkMovies=movies;
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
@@ -198,7 +209,16 @@ function drawArtwork(movies){
     const medalScale=theme==='minimal'?minimalMedalScale:1;
     if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
-    const offset=columns===2?92:112,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
+    const poster=safePosterImage(m.poster);
+    const posterW=columns===2?64:74,posterH=Math.min(rowH-12,posterW*1.5);
+    const posterX=x+(columns===2?80:94),posterY=y+(rowH-posterH)/2;
+    if(poster?.status==='ready'&&poster.image){
+      ctx.save();ctx.beginPath();ctx.rect(posterX,posterY,posterW,posterH);ctx.clip();
+      const im=poster.image,scale=Math.max(posterW/im.naturalWidth,posterH/im.naturalHeight);
+      ctx.drawImage(im,posterX+(posterW-im.naturalWidth*scale)/2,posterY+(posterH-im.naturalHeight*scale)/2,im.naturalWidth*scale,im.naturalHeight*scale);
+      ctx.restore();
+    }
+    const offset=columns===2?154:182,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
     const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;

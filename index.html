@@ -6,7 +6,7 @@
 <meta name="description" content="Cinelva｜映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
 <meta property="og:title" content="Cinelva｜映画の公開・配信カレンダー">
 <meta property="og:description" content="映画の劇場公開、配信開始、テレビ放映、映画祭をまとめて確認できるカレンダー。">
-<meta property="og:image" content="https://vongolebianco7.github.io/cinema-calendar/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -156,6 +156,13 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 /* timeline integrated + format stars */
 .timelineNow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 15px}.timelineNow>div{border:1px solid #2d3036;border-radius:7px;padding:9px 10px;background:#111}.timelineNow strong{display:block;font-size:10px;color:#ddd;margin-bottom:5px}.timelineNow span{display:block;font-size:10px;line-height:1.55;color:#aaa}.experienceFitCard.best{border-color:#75652f;background:linear-gradient(135deg,#191710,#0b0d11)}.experienceStars{font-style:normal!important;color:#f0c86a!important;border:0!important;padding:0!important;font-size:12px!important;letter-spacing:.03em!important}.experienceFitCard.best b:after{content:"  おすすめ";font-size:8px;color:#f0c86a;font-weight:700}
 @media(max-width:600px){.timelineNow{grid-template-columns:1fr}}
+</style><style id="cinelva-mobile-grid-patch">
+@media(max-width:760px){
+ .grid,.movieGrid,.filmGrid,.posterGrid,.cardsGrid,.theatricalGrid,.streamingGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .heroActions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .heroAction{min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;text-align:center!important;padding:10px 6px!important;font-size:11px!important;white-space:normal!important;overflow:visible!important}
+ .heroAction:after{position:static!important;flex:0 0 auto;font-size:14px!important;line-height:1}
+}
 </style><script src="js/screening-model-v7.js"></script>
 <style>
 /* movie-detail-mobile-overflow-v1 */
@@ -225,6 +232,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 .gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
 @media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
 </style><link rel="stylesheet" href="assets/theme.css">
+<link rel="canonical" href="https://cinelva.vercel.app/">
 </head>
 <body>
 
@@ -249,7 +257,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
  <a href="my-cinelva/">映画棚・映画地図</a>
 </aside>
 <main class="wrap">
-<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinemap.html" class="heroAction ghost">My Cinelva</a></div></section>
+<section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinelva/" class="heroAction ghost">My Cinelva</a></div></section>
 <div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#666;font-size:11px">Cinelva v0.4.73</span></footer></main>

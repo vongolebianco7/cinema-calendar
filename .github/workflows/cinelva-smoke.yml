@@ -1,0 +1,26 @@
+name: CINELVA smoke tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static and data smoke tests
+        run: node scripts/smoke-test.mjs
+      - name: Verify Vercel publish paths
+        run: |
+          mkdir -p public
+          cp *.html *.png *.svg *.webmanifest public/
+          cp -R assets js data preview my-cinelva public/
+          test -f public/index.html
+          test -f public/my-cinelva/index.html
+          test -f public/js/my-cinemap-art.js

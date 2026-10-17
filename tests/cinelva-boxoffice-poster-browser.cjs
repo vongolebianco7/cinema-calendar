@@ -4,7 +4,7 @@ const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 
-function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\\p{L}\\p{N}]/gu, ''); }
+function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); }
 
 async function freePort() {
   const server = net.createServer();

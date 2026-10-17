@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-17T14:07:00+09:00",
+  "status": "in_progress",
+  "issue": 239,
+  "base_branch": "main",
+  "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
+  "branch": "work/cinelva-restartable-p0",
+  "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc",
+  "pull_request": {
+    "number": 246,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
+    "status": "open",
+    "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc"
+  },
+  "work_items": [
+    {
+      "id": "P0-RESTART",
+      "title": "Restart runbook and durable work state",
+      "status": "ci_passed",
+      "acceptance": "A new Work session can identify current work and the next action from GitHub issue #239 plus the runbook and JSON checkpoint."
+    },
+    {
+      "id": "P0-240",
+      "title": "Retire stale Ocean development instructions",
+      "status": "pr_created",
+      "issue": 240,
+      "acceptance": "Active agent instructions identify #239 as the roadmap and prohibit new Ocean feature development while preserving existing saved data and backups."
+    },
+    {
+      "id": "P0-241",
+      "title": "Keep validation running without Vercel deployment",
+      "status": "ci_passed",
+      "issue": 241,
+      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
+    },
+    {
+      "id": "P0-AUDIT",
+      "title": "Audit and fix confirmed production blockers",
+      "status": "in_progress",
+      "issue": 239,
+      "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
+      "ci": "PR #253 head b32e60d74f4377d2a8e6e594dd7c318960a088fe passed all eight Actions checks. The new malformed saved-list recovery journey passed in Chromium/WebKit; raw malformed JSON remains unchanged for recovery. Main-branch route scan: 37 HTML pages, no links to preview/ocean; 477 paths under preview/ocean (8 HTML), plus 11 Ocean-only workflows and 156 Ocean-named docs. Full code/test reference inventory is next."
+    },
+    {
+      "id": "P0-244",
+      "title": "Hide stale theater showtimes from users",
+      "status": "ci_passed",
+      "issue": 244,
+      "pull_request": {
+        "number": 247,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/247",
+        "branch": "fix/hide-stale-theater-schedules",
+        "head_sha": "b0f0bbce33ca0c89eecb61afeb57095a045c345f"
+      },
+      "acceptance": "Only schedules generated within 24 hours and dated today or later are shown; stale or invalid data shows an explicit notice and official theater link.",
+      "ci": "Earlier validate-frontend run failed only during existing My CINELVA browser flow with undici Parser.finish assert after an external connection closed; failed job rerun requested."
+    },
+    {
+      "id": "P0-242-WOWOW",
+      "title": "Remove unsupported top placement of WOWOW listings",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 248,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/248",
+        "branch": "fix/cinelva-discovery-offer-order",
+        "head_sha": "1039df212855aeef81b111ebb6166fb7bedea31c"
+      },
+      "acceptance": "The curated official listing module follows the general theater, streaming, and catalog discovery shelves; a CI regression protects this order."
+    },
+    {
+      "id": "P0-242-COUNTS",
+      "title": "Clarify discovery results, category meaning, and full access",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 249,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/249",
+        "branch": "fix/cinelva-discovery-shelf-counts",
+        "head_sha": "01c39c89fb024c960ababf6a7f0dbaffc4663e7d"
+      },
+      "acceptance": "Filtered counts match their result sets; every result is reachable; history wording alone does not claim a true story; the general catalog is not mislabeled as film history."
+    },
+    {
+      "id": "P0-242-STREAMING-COVERAGE",
+      "title": "Audit per-service streaming freshness coverage",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 250,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/250",
+        "branch": "docs/cinelva-streaming-coverage-audit",
+        "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf"
+      },
+      "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability.",
+      "ci": "Coverage snapshot PR #250 passed smoke, autonomous quality gate, and completeness scorecard on its current head. The audited counts remain a generated-data snapshot, not proof of a provider's complete catalogue."
+    },
+    {
+      "id": "P0-242-RECORD",
+      "title": "Route movie details to shared watched-record form",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 251,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
+        "branch": "fix/cinelva-record-entry-route",
+        "head_sha": "c5324134a9f1172b2f6b5bd69684ff03004586ed"
+      },
+      "acceptance": "From actual calendar events, ranking/detail routes, and root/preview pages, the selected ID/title and calendar context open the existing My CINELVA record form without duplicate storage logic.",
+      "ci": "All six PR Actions checks passed on head c5324134a9f1172b2f6b5bd69684ff03004586ed. Validate run 39000738040 covers offline 390px journeys from calendar event, search result, direct detail, context URL, ranking, and My CINELVA's 3D world map keyboard selection into the existing edit dialog. Added full response consumption to local server-readiness probes after an intermittent undici Parser.finish teardown error; the final Validate run passes."
+    },
+    {
+      "id": "P0-242-POSTERS",
+      "title": "Keep missing box-office posters visibly safe",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 252,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/252",
+        "branch": "fix/cinelva-boxoffice-poster-fallback",
+        "head_sha": "70f5ff07c1592bbd02ab4ad99418a806b529a2d5"
+      },
+      "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px.",
+      "ci": "On head 70f5ff0: Validate frontend (including all-time 100-row poster fallback journey at 390px and 1280px), autonomous quality gate, smoke, brand, backup safety, and Completeness scorecard all passed. Fixed an inherited workflow reference to theater fixtures absent from this PR branch by running that regression only when its source/test files are present; PR #247 still runs it."
+    },
+    {
+      "id": "P0-242-BRAND",
+      "title": "Restore the approved mark on backup routes",
+      "status": "ci_passed",
+      "issue": 242,
+      "pull_request": {
+        "number": 253,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
+        "branch": "fix/cinelva-backup-brand-header",
+        "head_sha": "9f8872505be3e93aa6e7fc94594dd366bcb7c866"
+      },
+      "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
+      "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed. Follow-up head 49eda1af1fc57533641898eca8771ca69dabb5fd also passes the all-route visible-brand test rejecting superseded uppercase CINELVA."
+    }
+  ],
+  "verification": [
+    {
+      "command": "python scripts/quality_gate.py",
+      "result": "passed_on_work_branch",
+      "details": "2026-10-17: shared deterministic gate passed after branch edits; the gate now omits retired Ocean-only checks."
+    },
+    {
+      "command": "python -m unittest discover -s tests",
+      "result": "failed_stale_string_contracts_classified",
+      "details": "Latest local discovery run: 98 tests, 8 assertion failures and 8 import-time assertion errors (these are not missing-dependency imports). The failures assert old box-office country chips or prior experience.html IDs/copy, while current product behavior uses domestic/foreign buckets, explicit candidate selection, evidence-only reasons, semantic buttons, and updated Dolby wording. The 8 error modules are seven My CINELVA legacy CSS/renderer string checks plus one old official-theater renderer marker; they fail assertions during import. Full suite remains red and was not counted as passing."
+    },
+    {
+      "command": "python scripts/check_work_state.py && python -m unittest tests.test_work_state && git diff --check",
+      "result": "passed_on_work_branch",
+      "details": "Checkpoint schema, 2 validator tests, and whitespace check passed."
+    },
+    {
+      "command": "GitHub Actions for PR #246",
+      "result": "deterministic_quality_and_smoke_passed_provider_deploy_blocked",
+      "details": "Duplicate work-item ID was removed. Latest Autonomous quality gate and CINELVA smoke checks pass. Vercel backend GitHub status is still failure with target upgradeToPro=build-rate-limit; no production deployment attempted."
+    },
+    {
+      "command": "GitHub Actions Completeness score for PR #246",
+      "result": "passed_latest_run",
+      "details": "The latest scorecard run 38996748606 completed with all producer jobs successful and the Completeness score job passing. Earlier failure was associated with missing/canceled producer metrics; latest run passed."
+    },
+    {
+      "command": "PR #247 local verification",
+      "result": "passed_locally_actions_pending",
+      "details": "3 Node regression tests for fresh/stale/future-dated schedule filtering passed; python scripts/quality_gate.py, YAML parse, and git diff --check passed. PR head b0f0bbce; remote Actions not yet fully complete."
+    },
+    {
+      "command": "PR #248 local implementation and Actions",
+      "result": "actions_pending",
+      "details": "Confirmed discover.html mounted the official-offer shelf immediately after the hero and before all general discovery shelves. Moved it after the theater/streaming/catalog shelves; added tests/cinelva-discovery-offer-order.test.cjs and wired it into validate-frontend.yml. PR head 1039df21."
+    },
+    {
+      "command": "PR #247 validate-frontend",
+      "result": "failed_external_browser_journey_retry_requested",
+      "details": "Inline syntax, record model, export tests passed. Existing My CINELVA Chromium/WebKit journey failed in undici Parser.finish after an external connection closed; unrelated to theater schedule files. Requested retry of failed job only."
+    },
+    {
+      "command": "PR #248 GitHub Actions",
+      "result": "passed",
+      "details": "Validate frontend, autonomous quality gate, CINELVA smoke, brand identity, backup safety, and completeness scorecard all passed on head 1039df21."
+    },
+    {
+      "command": "PR #249 local design checks and GitHub Actions",
+      "result": "previous_head_passed_latest_classification_checks_running",
+      "details": "All required checks passed on the prior shelf-expansion head. Added true-story classification that excludes generic historical-fiction wording plus tests on latest head 01c39c89; new PR Actions are running."
+    },
+    {
+      "command": "PR #247 retry",
+      "result": "passed",
+      "details": "The failed validate-frontend job was retried only and passed, including the existing My CINELVA browser journey and stale-showtimes check. Other relevant PR checks passed; Vercel quota remains the external deployment blocker."
+    },
+    {
+      "command": "PR #250 streaming coverage audit",
+      "result": "snapshot_recomputed_pr_created",
+      "details": "Added service-level fresh/stale unique movie counts to docs/cinelva-data-coverage.md, computed from data/availability.json generated_at 2026-10-16T18:49:04Z as of 2026-10-17 11:58 JST. Counts: Netflix 10 fresh/6 stale; Prime Video 45/11; Disney+ 1/1; U-NEXT 46/10; Hulu 28/0; Apple TV+ 2/0; ABEMA, Lemino, WOWOW 0/0. No collection call or dataset modification."
+    },
+    {
+      "command": "Brand and palette audit baseline",
+      "result": "automated_primary_pages_passed_full_surface_review_pending",
+      "details": "Existing approved guideline says preserve original symbol and existing palette; it records no palette redesign. Existing test_brand_identity.py checks 9 primary root pages, PWA icon/manifest and theme-color. It passed in PR #248/#249 Actions. Nested pages, OG/share assets, modals, previews, and all light/dark states are not yet exhaustively audited; no palette changes made."
+    },
+    {
+      "command": "PR #251 shared record-route implementation",
+      "result": "validate_passed_quality_and_scorecard_pending",
+      "details": "Latest head 39239f0d Validate frontend passed, including the record-route test and existing Chromium/WebKit My CINELVA mobile journey. Brand, smoke and backup-safety checks passed; Autonomous quality gate and Completeness scorecard are still running."
+    },
+    {
+      "command": "Brand static inventory",
+      "result": "partial_audit_recorded",
+      "details": "Found 29 non-Ocean HTML pages in the local tree. Existing test_brand_identity.py covers nine primary root pages, PWA icon/manifest/theme-color and passed in current PR Actions. Eleven nested /cinelva/ HTML files contain legacy Cinemap strings in CSS/JS identifiers or preserved backup links; they need case-by-case classification before any copy changes. No palette redesign was made."
+    },
+    {
+      "command": "PR #246 Autonomous quality gate run 38997487860",
+      "result": "failed_checkpoint_enum_values",
+      "details": "Root cause: six work_items.status values used descriptive strings outside the validator's allowed enum. This is a checkpoint schema defect, not a product code failure. iPhone Chromium/WebKit smoke and completeness scorecard passed. Normalizing statuses in this checkpoint and awaiting CI rerun."
+    },
+    {
+      "command": "PR #246 Ocean milestone ecosystem v2 run 38997488004",
+      "result": "failed_retired_ocean_workflow",
+      "details": "The repository still runs a retired Ocean milestone workflow on PRs and it fails. Remove or disable the retired Ocean-only workflow invocation through a scoped workflow change after inspecting its triggers and dependencies."
+    },
+    {
+      "command": "PR #251 Actions on 39239f0d",
+      "result": "passed_all_required_checks",
+      "details": "Validate frontend, Autonomous quality gate, CINELVA smoke, brand identity, backup safety, and Completeness scorecard all completed successfully."
+    },
+    {
+      "command": "PR #246 checkpoint and Ocean workflow correction",
+      "result": "quality_gate_passed_scorecard_pending",
+      "details": "Checkpoint statuses were normalized to the allowed enum; Autonomous quality gate run 38997767713 and CINELVA smoke run 38997767622 passed. Completeness scorecard run 38997767586 is still in progress. Retired Ocean milestone checks were changed to manual-only, so future CINELVA PRs no longer trigger them."
+    },
+    {
+      "command": "PR #252 poster fallback implementation",
+      "result": "pr_created_actions_running",
+      "details": "Added a visible image-missing placeholder and browser regression that blocks the application movie API and TMDB image host at 390px/1280px. Local inline syntax and test syntax passed; local Playwright is unavailable, so browser execution is delegated to the existing Validate frontend Actions job. No poster source or data was changed."
+    },
+    {
+      "command": "Brand audit and PR #253",
+      "result": "validation_passed_scorecard_pending",
+      "details": "Static visible-copy scan found no Cinemap/CINEMAP in page text, title, alt, aria-label, or title attributes across 29 non-Ocean HTML pages. Root and nested backup pages were the only root/nested HTML routes without the approved square symbol; PR #253 adds it and brand tests pass in Validate frontend, backup safety, isolated Pages stage, smoke, and autonomous quality gate. Completeness scorecard is pending."
+    },
+    {
+      "command": "PR #252 box-office poster resolver regression",
+      "result": "all_time_browser_audit_running",
+      "details": "A real data-shape bug was found: ranking records are nested region/genre/era, while localBoxMovies only traversed one level and missed them. Recursive poster indexing raises exact local all-time title matches from 11/100 movies-only to 63/100. PR adds visible placeholder copy and a browser audit for all 100 rows at 390px and 1280px with image/API hosts blocked. Latest Actions on head acb6629 are running; previous failed attempts are recorded in PR history."
+    },
+    {
+      "command": "PR #252 poster CI after branch-local theater fixture guard",
+      "result": "all_required_checks_passed",
+      "details": "Latest PR head 70f5ff07c1592bbd02ab4ad99418a806b529a2d5. Browser test covered all 100 all-time rows at 390px and 1280px with movie API and TMDB image host blocked; Validate frontend, autonomous quality gate, smoke, brand, backup safety, and completeness scorecard passed."
+    },
+    {
+      "command": "PR #253 scorecard",
+      "result": "in_progress",
+      "details": "Validate frontend, brand identity, smoke, backup safety, isolated Pages stage, and autonomous quality gate passed on 2e5a9af. Completeness scorecard run 38998283751 has producer jobs complete and WebKit/mobile scoring still running."
+    },
+    {
+      "command": "PR #246 Ocean workflow and checkpoint",
+      "result": "workflow_contract_passed_other_checks_running",
+      "details": "Latest branch head 3f2b822 changes Ocean parallel probe triggers to Ocean-specific paths and retains a workflow contract test. Ocean parallel workflow contract run 38999224237 passed; updated autonomous quality, smoke, scorecard, and one-time existing parallel probe are in progress."
+    },
+    {
+      "command": "PR #251 detail and ranking record journey",
+      "result": "passed",
+      "details": "Latest head bae8aef: Validate frontend Chromium test blocks the backend and verifies movie detail and ratings-ranking selection lead to the shared My CINELVA record dialog at 390px. For unindexed ranking titles, the existing search field receives the selected title. All Actions checks including completeness passed."
+    },
+    {
+      "command": "PR #253 full brand scan and WebKit scorecard stabilization",
+      "result": "passed_core_checks_quality_gate_running",
+      "details": "Head e86a5ed passed brand identity, frontend, backup safety, isolated Pages, smoke, and Completeness scorecard. The scorecard's previous 0.5-point WebKit false negative was addressed with state polling and scenario/error details. Autonomous quality gate remains in progress; no production deploy."
+    },
+    {
+      "command": "PR #253 approved mark full-route and modal regression",
+      "result": "brand_identity_passed_browser_checks_running",
+      "details": "Head e00bd611bbf2792c8b508f816ab71f6852258437: check-brand-identity and smoke passed. The new browser assertion covers approved asset loaded behind the record dialog and mobile dialog width; Validate frontend and related checks are running."
+    },
+    {
+      "command": "Vercel quota follow-up",
+      "result": "scheduled",
+      "details": "One-time Work automation will re-read Vercel quota and GitHub release readiness on 2026-10-18 07:05 Asia/Tokyo. It will not deploy while the provider cap remains, and will follow required checks/review policy."
+    },
+    {
+      "command": "PR #251 actual calendar record-entry journey",
+      "result": "all_actions_passed",
+      "details": "Found that the real homepage calendar modal built a fullDetailHref but never rendered it, so its record path was absent despite direct detail/context tests. Added a link from calendar modal to shared detail and an offline 390px browser journey from event → detail → My CINELVA record form. All PR checks passed on head c4f81ba2edfc026fffca032c3525f2fe4cf71bb4."
+    },
+    {
+      "command": "PR #253 approved mark full-route and modal regression",
+      "result": "all_actions_passed",
+      "details": "Head e00bd611bbf2792c8b508f816ab71f6852258437 passed Validate frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, and autonomous quality gate; Chromium/WebKit modal assertions passed."
+    },
+    {
+      "command": "PR #246 restart checkpoint",
+      "result": "all_actions_passed",
+      "details": "Head db957f31a81abcef378b84fb2ecc2f26e5b1a612 passed CINELVA smoke, Ocean workflow contract, one-time Ocean parallel probe, autonomous quality gate, and Completeness scorecard."
+    },
+    {
+      "command": "PR #251 search and calendar shared-record flows",
+      "result": "all_required_actions_passed",
+      "details": "Head c263c6815032b771f3429a14a025b988618b4af9 passed Validate frontend, autonomous quality, smoke, brand identity, backup safety, and Completeness scorecard. Validate run 39000238427 log confirms the actual calendar event and search-page result → detail → existing My CINELVA record form at 390px with backend offline."
+    },
+    {
+      "command": "PR #253 route-wide CINELVA brand/PWA/Open Graph metadata",
+      "result": "all_required_actions_passed",
+      "details": "Head 8260f8efb00be08895f298b436a18721dd7b9b5b passed Validate frontend, autonomous quality gate, smoke, brand identity, backup safety, isolated Pages, completeness scorecard, and scoped Ocean probe."
+    },
+    {
+      "command": "PR #246 latest durable checkpoint",
+      "result": "all_required_actions_passed",
+      "details": "Head bfc1dac9d35d54fd813e31920411349b2a098f7f passed CINELVA smoke, Ocean workflow contract, scoped Ocean probe, autonomous quality gate, and Completeness scorecard. This checkpoint records the verified #251 and #253 heads."
+    },
+    {
+      "command": "PR #251 map edit entry and browser-server cleanup regression",
+      "result": "all_required_actions_passed",
+      "details": "Head c5324134a9f1172b2f6b5bd69684ff03004586ed passed Validate frontend, autonomous quality, smoke, brand identity, backup safety, and Completeness scorecard. Validate run 39000738040 log shows calendar, search, direct detail/context, ranking, existing record persistence, and My CINELVA 3D world map keyboard selection opening the selected saved record for edit. An earlier run hit undici Parser.finish during the preceding existing browser flow; each browser test now consumes the local readiness response body before server teardown, and the refreshed run passes."
+    },
+    {
+      "command": "One-time Ocean PR probe trigger",
+      "result": "workflow_contract_passed_ocean_probe_not_retriggered_on_sync",
+      "details": "On PR #246 head 16db3f49ac10749542db353a8a270fcab22fd308, workflow contract run 39000934752 and smoke run 39000934844 passed. Ocean parallel probe now runs once when a PR is opened/reopened, remains manually dispatchable, and no longer repeats on each checkpoint synchronize. Autonomous quality and Completeness scorecard for this head were still running at checkpoint time."
+    },
+    {
+      "command": "PR #253 29-route mobile/desktop light/dark browser audit",
+      "result": "all_required_actions_passed",
+      "details": "Head 9f8872505be3e93aa6e7fc94594dd366bcb7c866 passed Validate frontend, autonomous quality gate, smoke, brand identity, backup safety, isolated Pages, Completeness scorecard, and scoped Ocean probe. Browser audit covered 29 non-Ocean HTML pages at 390px and 1280px in light and dark (116 page loads) with no uncaught errors. It discovered theme.js executed before the static theme-color meta tag on agent.html, leaving #0a0c0f in light mode; calling apply() again during DOMContentLoaded mount fixed all routes."
+    },
+    {
+      "command": "PR #246 latest checkpoint",
+      "result": "all_required_actions_passed",
+      "details": "Head 3f125bb4e6e951ba4c4def5341e9d0907fa42fa1 passed smoke 39001008211, Ocean workflow contract 39001008192, autonomous quality 39001008189, and Completeness scorecard 39001008184. Ocean probe is one-time on PR opened/reopened and remains manually dispatchable; it no longer repeats on checkpoint pushes."
+    },
+    {
+      "command": "PR #253 route asset and brand-casing follow-up",
+      "result": "all_required_actions_passed_vercel_rate_limited",
+      "details": "Head 49eda1af1fc57533641898eca8771ca69dabb5fd passed Validate frontend (39003982251), autonomous quality gate (39003982243), CINELVA smoke (39003982228), brand identity (39003982245), backup safety (39003982231), isolated Pages (39003982266), Completeness scorecard (39003982256), and scoped Ocean probe (39003982246). The route audit now fails on missing local documents/scripts/stylesheets/images/fonts. Brand regression rejects visible all-caps CINELVA. Independent static scan covered all 29 non-Ocean HTML pages and found no broken same-origin HTML links or local asset references. Vercel backend still reported build-rate-limit; no deployment attempted."
+    }
+  ],
+  "deployment": {
+    "status": "deployment_pending",
+    "target_sha": null,
+    "production_url": "https://cinelva.vercel.app/",
+    "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
+    "last_observed_vercel_production_sha": "266b280c4bab0092d54cb1cd0316f1f67674a28c",
+    "last_observed_vercel_production_status": "READY",
+    "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
+    "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
+    "next_action": "At the scheduled 2026-10-18 07:05 JST check, inspect provider team/project quota and PR checks. Deploy one tested SHA only after Vercel confirms the cap is clear and repository release/review requirements are satisfied; otherwise record blocker.",
+    "provider_preview_status": "Vercel backend check on PR #253 failed with api-deployments-free-per-day (>100 deployments in 24h), pointing to upgradeToPro=build-rate-limit. No retry or production deployment attempted.",
+    "blockers": [
+      "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
+    ]
+  },
+  "blockers": [
+    "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
+  ],
+  "next_action": "Continue P0-02 Ocean retirement now. Inventory references from all 11 Ocean-specific workflows, Ocean tests, and docs to preview/ocean; classify each before removal. Disable/remove only retired feature-specific workflow/test/assets after proving there are no links from production routes. Preserve localStorage identifiers and legacy backup round-trip. Create a focused PR and run CI; do not wait for another scheduled task run.",
+  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
+}

@@ -23,6 +23,10 @@ class OceanParallelQualityWorkflowTests(unittest.TestCase):
         self.assertNotIn("'tests/product/**'", self.text)
         self.assertNotIn("'tests/journeys/**'", self.text)
 
+    def test_pull_request_probe_is_one_time_and_manual_reruns_remain_available(self):
+        self.assertIn('types: [opened, reopened]', self.text)
+        self.assertIn('workflow_dispatch:', self.text)
+
     def test_observation_jobs_do_not_mutate_ocean_product_code(self):
         self.assertIn('permissions:\n  contents: read', self.text)
         self.assertNotIn('git push', self.text)

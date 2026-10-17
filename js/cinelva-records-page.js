@@ -316,6 +316,13 @@
     const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
+    const params=new URLSearchParams(location.search),requestedId=params.get('record');
+    if(requestedId){
+      const requestedTitle=params.get('title')||'',existing=state.records.find(item=>String(item.id)===String(requestedId));
+      if(existing||byId.has(String(requestedId)))openKnownMovie(requestedId);
+      else if(requestedTitle){openDialog();$('movieQuery').value=requestedTitle;searchMovies(requestedTitle);}
+      else notify('作品名で検索して記録してください。');
+    }
   }
   init();
 })();

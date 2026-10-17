@@ -121,7 +121,7 @@ jobs:
           node --test tests/cinelva-data-quality.test.cjs tests/cinelva-share-image.test.cjs
           python -m unittest tests.test_availability_update tests.test_award_identity
           python scripts/check_release_data.py
-          node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs
+          node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
       - name: Run My Cinelva mobile browser journey
@@ -131,23 +131,23 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources
         run: python scripts/check_sources.py
       - name: Check discovery UI integrations
-        run: python scripts/check_discovery_ui.py
+        run: |
+          python scripts/check_discovery_ui.py
+          node --test tests/cinelva-discovery-offer-order.test.cjs
       - name: Check Cinemap core journey
         run: python scripts/check_core_journey.py
       - name: Check Critic Map compliance gate
         run: python scripts/check_critic_map.py
       - name: Check critic evidence thresholds and sources
         run: node scripts/check_critic_evidence.js
-      - name: Reject stale cinema showtimes when its regression fixture is present
+      - name: Reject stale cinema showtimes
         run: |
-          if [ -f js/cinelva-theater-schedule.js ] && [ -f tests/cinelva-theater-schedule.test.cjs ]; then
-            node --check js/cinelva-theater-schedule.js
-            node --test tests/cinelva-theater-schedule.test.cjs
-          else
-            echo "Theater schedule regression fixture is not part of this branch; its feature PR runs it."
-          fi
+          node --check js/cinelva-theater-schedule.js
+          node --test tests/cinelva-theater-schedule.test.cjs

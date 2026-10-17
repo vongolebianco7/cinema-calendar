@@ -5,6 +5,7 @@ on:
     paths:
       - "*.html"
       - "js/cinelva-*.js"
+      - "js/theme.js"
       - "js/data-backup.js"
       - "my-cinelva/**"
       - "tests/cinelva-insights.test.cjs"
@@ -41,6 +42,7 @@ on:
     paths:
       - "*.html"
       - "js/cinelva-*.js"
+      - "js/theme.js"
       - "js/data-backup.js"
       - "my-cinelva/**"
       - "tests/cinelva-insights.test.cjs"

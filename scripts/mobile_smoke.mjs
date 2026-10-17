@@ -32,7 +32,7 @@ for(const path of candidates){
  await page.waitForTimeout(250);
  console.log(`${browserName}: DOM ready ${path}`);
  console.log(`${browserName}: measuring overflow ${path}`);
- const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+ const overflow=await Promise.race([page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth),new Promise((_,reject)=>setTimeout(()=>reject(new Error(`${path}: browser main thread unresponsive during overflow measurement`)),12000))]);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
  const safeName=path.replace(/\.html$/,'').replaceAll('/','-');
  // WebKit rejects any screenshot dimension beyond 32767 device pixels.

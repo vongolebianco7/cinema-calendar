@@ -1,17 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T17:32:00+09:00",
+  "updated_at": "2026-10-17T18:24:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "2dcd76bc46cf3ecc5e0810834f064baa6f7eab20",
-  "branch": "work/route-audit-evidence",
-  "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6",
+  "base_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e",
+  "branch": "main",
+  "head_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e",
   "pull_request": {
     "number": 257,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257",
-    "status": "open",
-    "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6"
+    "status": "merged",
+    "head_sha": "34a256b897b831cfd31394bc0f256b49ecafc2e1",
+    "merge_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e"
   },
   "work_items": [
     {
@@ -40,14 +41,19 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "PRs #253-#256 are merged. Ocean routes and active CI coupling are retired, the 29-route inventory is machine-readable, and all nine external-data categories are classified. PR #257 adds downloadable per-route browser evidence; local shared quality gate passed and Actions are running."
+      "ci": "PRs #253–#257 merged. Active route inventory and per-route Chromium/WebKit evidence integrated. Remaining: Python legacy contracts, external showtime/TV availability and public deployment verification."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
       "title": "Retire Ocean routes and active CI coupling without deleting saved records",
       "status": "merged",
       "issue": 239,
-      "pull_request": {"number": 254, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/254", "branch": "work/ocean-route-retirement", "head_sha": "ec6dc9b689c2705092e6f09818d05d4b0bfc8561"},
+      "pull_request": {
+        "number": 254,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/254",
+        "branch": "work/ocean-route-retirement",
+        "head_sha": "ec6dc9b689c2705092e6f09818d05d4b0bfc8561"
+      },
       "acceptance": "Eight legacy routes redirect to My CINELVA, legacy storage remains backup-compatible, Ocean-only workflows and score paths no longer run.",
       "ci": "Merged as main 1966870b9033a668a09b70a7cea6615b02a7da93 after Validate frontend 39016229094, Completeness 39016229104, autonomous quality 39016229137, smoke 39016229189, backup safety 39016229088, and scorecard contract 39016229084 all passed."
     },
@@ -56,25 +62,40 @@
       "title": "Create the machine-readable active route audit inventory",
       "status": "merged",
       "issue": 243,
-      "pull_request": {"number": 255, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/255", "branch": "work/route-audit-manifest", "head_sha": "37b01733af68a861b67e4fc90d852dd45dca66c3"},
+      "pull_request": {
+        "number": 255,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/255",
+        "branch": "work/route-audit-manifest",
+        "head_sha": "37b01733af68a861b67e4fc90d852dd45dca66c3"
+      },
       "acceptance": "All 29 active non-Ocean HTML routes declare surface, purpose, data ownership, count contract, CTA and sources; CI and the browser audit consume the same inventory.",
       "ci": "Merged as main 05afc8134bd9eef69d08a1c09ad4c2af1d468d5a after Validate frontend 39016610567, Completeness 39016610592, autonomous quality 39016610574, smoke 39016610584, and scorecard contract 39016610605 passed."
     },
     {
       "id": "P0-243-AUDIT-EVIDENCE",
       "title": "Preserve per-route browser audit evidence",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 243,
-      "pull_request": {"number": 257, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257", "branch": "work/route-audit-evidence", "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6"},
+      "pull_request": {
+        "number": 257,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257",
+        "branch": "work/route-audit-evidence",
+        "head_sha": "34a256b897b831cfd31394bc0f256b49ecafc2e1"
+      },
       "acceptance": "Validate frontend publishes a machine-readable report for each route, viewport and theme, including partial evidence when the audit fails.",
-      "ci": "Local route contract tests 3/3 and the shared deterministic quality gate passed; Actions are running."
+      "ci": "PR #257 head 34a256b: Validate frontend 39019957145, Completeness 39019957111, Autonomous quality 39019957098, smoke 39019957100 all passed. Merged to main as cef1648c798bef394bc0d3e3b88b4fb3702ac76e. Browser route evidence is uploaded; production not verified."
     },
     {
       "id": "P0-244-DATA-REGISTRY",
       "title": "Classify external data automation and freshness",
       "status": "merged",
       "issue": 244,
-      "pull_request": {"number": 256, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/256", "branch": "work/external-data-registry", "head_sha": "dd0e937a6893814104f33f6429b05e445f8dfa89"},
+      "pull_request": {
+        "number": 256,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/256",
+        "branch": "work/external-data-registry",
+        "head_sha": "dd0e937a6893814104f33f6429b05e445f8dfa89"
+      },
       "acceptance": "Every requested external-data category states its source, acquisition mode, coverage, update path and freshness enforcement without claiming unavailable automation.",
       "ci": "Merged as main 2dcd76bc46cf3ecc5e0810834f064baa6f7eab20 after autonomous quality 39016886916, Completeness 39016886921, smoke 39016886875, and scorecard contract 39016886922 passed. The live audit classified streaming and movie data fresh, theater showtimes stale, and television schedules unavailable."
     },
@@ -385,6 +406,11 @@
       "command": "PR #257 route audit evidence",
       "result": "passed_locally_actions_running",
       "details": "Contract tests first failed without artifact and WebKit support, then passed 3/3 after implementation. Run 39017468031 proved Chromium 116/116 but exposed a WebKit timing defect on cinelva/agent.html: asynchronous main content was sampled at DOMContentLoaded. The audit now waits for meaningful main content; the shared quality gate passes and a refreshed Actions run is pending. Artifact 12095507026 preserved both the passing Chromium report and partial WebKit failure report."
+    },
+    {
+      "command": "PR #257 GitHub Actions + GitHub merge",
+      "result": "merged_ci_passed",
+      "details": "Four PR Actions workflows green on 34a256b; merged using GitHub as cef1648c798bef394bc0d3e3b88b4fb3702ac76e. Do not infer production deploy."
     }
   ],
   "deployment": {
@@ -405,6 +431,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Finish PR #257 Actions, inspect the uploaded route-audit artifact, and merge only if both Chromium and WebKit reports contain 116 page loads each and required checks pass. Then continue #243 with screenshots/failure fixtures or #244 with visible last-confirmed freshness metadata. Do not deploy while the Vercel rate limit remains.",
+  "next_action": "Run Python full-suite baseline and classify remaining 8 failures plus 8 import-time assertions against current CINELVA contracts; address confirmed regressions and replace obsolete assertions with behavioral tests. GitHub Actions should run repeatable checks. No Vercel deployment until restriction cleared and current release SHA verified.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

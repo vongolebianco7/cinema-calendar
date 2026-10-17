@@ -234,7 +234,8 @@
     data.sort((a,b)=>b.projected.depth-a.projected.depth);
     const hit=[];
     data.forEach(item=>{const p=item.projected;const genreIndex=Math.max(0,Insights.GENRE_TAXONOMY.indexOf(item.plot.genre));const color=item.plot.genre==='分類なし'?'#aaaaaa':GENRE_COLORS[genreIndex%GENRE_COLORS.length];const radius=3.2*item.plot.size*Math.sqrt(state.plotZoom);ctx.beginPath();ctx.arc(p.x,p.y,radius+3,0,Math.PI*2);ctx.fillStyle=color+'44';ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();hit.push({x:p.x,y:p.y,r:Math.max(radius+5,8),record:item.record});});
-    canvas._points=hit; $('worldStatus').textContent=`${data.length}作品を表示。ドラッグで回転、ピンチまたはスクロールで拡大縮小できます。点の色はジャンル、点の大きさは評価を表します。`;
+    const unknownCountryCount=data.filter(item=>item.plot.latitude===null).length;
+    canvas._points=hit; $('worldStatus').textContent=`${data.length}作品を表示。ドラッグで回転、ピンチまたはスクロールで拡大縮小できます。点の色はジャンル、点の大きさは評価を表します。${unknownCountryCount?'製作国の緯度が未確認の'+unknownCountryCount+'作品は中央の基準面に配置しています。':''}`;
     $('worldLegend').innerHTML='<span class="chip">灰色：ジャンル未分類</span>'+Insights.GENRE_TAXONOMY.map((genre,index)=>`<span class="chip" style="border-color:${GENRE_COLORS[index]};color:${GENRE_COLORS[index]}">${escapeHTML(genre)}</span>`).join('');
   }
   function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); if(!$('awardsView').hidden)renderAwards(); if(!$('worldView').hidden)drawWorld(); if(!$('directorsView').hidden)renderDirectors(); }

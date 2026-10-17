@@ -87,6 +87,19 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn("Cinemap", visible, str(page))
             self.assertNotIn("CINEMAP", visible, str(page))
 
+    def test_all_non_ocean_routes_share_pwa_and_open_graph_icon_metadata(self):
+        pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html")) + list((ROOT / "my-cinelva").glob("*.html"))
+        self.assertGreaterEqual(len(pages), 29)
+        for page in pages:
+            relative = page.relative_to(ROOT).as_posix()
+            prefix = "../" if relative.startswith(("cinelva/", "my-cinelva/")) else ""
+            text = page.read_text(encoding="utf-8")
+            self.assertIn(f'<link rel="icon" href="{prefix}{ICON_ASSET}" type="image/png">', text, relative)
+            self.assertIn(f'<link rel="apple-touch-icon" href="{prefix}{ICON_ASSET}">', text, relative)
+            self.assertIn(f'<link rel="manifest" href="{prefix}manifest.webmanifest">', text, relative)
+            self.assertIn('name="theme-color" content="#0a0c0f"', text, relative)
+            self.assertIn('property="og:image" content="https://cinelva.vercel.app/' + ICON_ASSET + '"', text, relative)
+
     def test_uploaded_brand_assets_exist(self):
         self.assertTrue((ROOT / BRAND_ASSET).exists())
         self.assertTrue((ROOT / ICON_ASSET).exists())

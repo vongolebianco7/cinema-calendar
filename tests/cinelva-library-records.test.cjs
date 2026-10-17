@@ -87,3 +87,19 @@ test('malformed classification metadata is rejected before any restore write',()
   assert.equal(data.get(api.KEY),before);
  }
 });
+
+test('date editor contract supports partial year and clears dates intentionally',()=>{
+ const fs=require('node:fs');
+ const page=fs.readFileSync('my-cinelva/index.html','utf8');
+ const script=fs.readFileSync('js/cinelva-records-page.js','utf8');
+ assert.match(page,/id="watchedAt" type="text"/);
+ assert.match(page,/YYYY \/ YYYY-MM \/ YYYY-MM-DD/);
+ assert.match(script,/const typedDate=\$\('watchedAt'\)\.value\.trim\(\), date=typedDate\|\|null/);
+ const {api}=setup();
+ api.save(movie,0,'2025-05');
+ api.save(movie,0,'2025');
+ assert.equal(api.all()[0].watchedAt,'2025');
+ api.save(movie,0,null);
+ assert.equal(api.all()[0].watchedAt,null);
+ assert.equal(api.all()[0].rating,0);
+});

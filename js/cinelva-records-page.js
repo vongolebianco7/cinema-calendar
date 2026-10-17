@@ -24,7 +24,7 @@
     $('movieResults').replaceChildren();
     $('chosenMovie').textContent = record ? `${record.title}${record.year ? `（${record.year}年）` : ''}` : '作品を検索して選択してください。';
     $('recordFormat').value=record?.format||''; $('recordWorkForm').value=record?.workForm||''; $('watchedAt').value = record?.watchedAt || '';
-    $('dateHint').textContent = record?.watchedAt && /^\d{4}(?:-\d{2})?$/.test(record.watchedAt) ? `この記録の日付は「${record.watchedAt}」まで分かっています。変更しない場合、その時期情報を保持します。` : '';
+    $('dateHint').textContent = record?.watchedAt ? `現在の鑑賞日：${record.watchedAt}。年だけ・年月だけでも編集可能です。空欄で保存すると日付を削除します。` : '年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。';
     $('movieQuery').parentElement.hidden = Boolean(record);
     $('saveRecord').disabled=false; $('unrated').checked = Boolean(record && record.rating == null);
     $('rating').value = record?.rating ?? 3;
@@ -263,7 +263,7 @@
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}
-    try { state.selected.format=$('recordFormat').value;state.selected.workForm=$('recordWorkForm').value; const typedDate=$('watchedAt').value, partialDate=/^\d{4}(?:-\d{2})?$/.test(state.selected.watchedAt||'')&&!typedDate, date=typedDate|| (partialDate?state.selected.watchedAt:null); const value=$('unrated').checked?Records.saveUnrated(state.selected,date):Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
+    try { state.selected.format=$('recordFormat').value;state.selected.workForm=$('recordWorkForm').value; const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=$('unrated').checked?Records.saveUnrated(state.selected,date):Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
     catch(error){notify(`保存できませんでした：${error.message}`);}
   }
   function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }

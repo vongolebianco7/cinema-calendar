@@ -7,12 +7,19 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
+const getRecord=movie=>{
+ const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ if(!validId(id))return null;
+ const records=Records.all();
+ return records.find(r=>r.tmdbId!=null&&String(r.tmdbId)===String(id)) ||
+   records.find(r=>r.tmdbId==null&&String(r.id)===String(id)) || null;
+};
 const style=document.createElement('style');
 style.textContent=`
 .cinelva-rate-button{min-height:38px;border:1px solid #a78a50;border-radius:6px;background:#25211a;color:#f9e8c8;padding:7px 12px;margin:8px 0;font:600 13px system-ui;cursor:pointer}
 .cinelva-rate-dialog{border:1px solid #7a715e;border-radius:12px;background:#202020;color:#f8f5ee;padding:0;width:min(94vw,470px);max-height:min(85dvh,680px);position:fixed;inset:auto 12px 12px auto;margin:0;z-index:10001;box-shadow:0 16px 60px #0009}
 .cinelva-rate-dialog::backdrop{background:#0009}.cinelva-rate-inner{padding:20px;display:grid;gap:12px}.cinelva-rate-inner label{display:grid;gap:5px;font:13px system-ui}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{width:100%;padding:10px;border:1px solid #68635a;background:#121212;color:#fff;border-radius:5px;box-sizing:border-box}
-.cinelva-rate-inner textarea{min-height:78px;resize:vertical}.cinelva-rate-actions{display:flex;gap:10px;justify-content:space-between}.cinelva-rate-actions button{min-height:44px;flex:1;border-radius:6px;border:1px solid #a78a50;background:#f3e3c4;color:#211c15;font-weight:700}.cinelva-rate-actions button:first-child{background:#343434;color:#fff}.cinelva-rate-actions button{font-size:12px;padding:7px 4px}
+.cinelva-rate-inner textarea{min-height:78px;resize:vertical}.cinelva-rate-actions{display:flex;gap:10px;justify-content:space-between}.cinelva-rate-actions button{min-height:44px;flex:1;border-radius:6px;border:1px solid #a78a50;background:#f3e3c4;color:#211c15;font-weight:700}.cinelva-rate-actions button:first-child{background:#343434;color:#fff}.cinelva-rate-actions button{font-size:12px;padding:7px 4px}.cinelva-rate-saved{display:inline-block;margin:4px 6px;padding:4px 8px;border-radius:4px;background:#294335;color:#d4ffe3;font:700 12px system-ui}.cinelva-rate-saved[hidden]{display:none}
 `;
 document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
@@ -24,7 +31,7 @@ $('cinelvaRateScore').oninput=()=>$('cinelvaRateValue').textContent=Number($('ci
 function open(movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id)){return false;}
- const existing=Records.all().find(r=>String(r.tmdbId??r.id)===String(id));
+ const existing=getRecord(movie);
  selected={...movie,...existing,id:String(existing?.id??id),tmdbId:id,title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
@@ -64,28 +71,47 @@ function nextMovie(){
 $('cinelvaRateNext').onclick=nextMovie;
 // Keep the actual existing calendar/ranking/search listings. A sibling rating
 // action leaves the original movie detail link/button operational.
+function movieFromCard(card,kind){
+ if(kind==='rankings'){
+  const u=new URL(card.href,location.href);
+  return {id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
+ }
+ return root.CinelvaRatingResolve?.(card.dataset.i,kind);
+}
+function refreshBadges(){
+ for(const wrap of document.querySelectorAll('.cinelva-rate-wrap')){
+  const card=wrap.querySelector('.rankCard,.card[data-i]');
+  const badge=wrap.querySelector('.cinelva-rate-saved');
+  if(!card||!badge)continue;
+  const item=getRecord(movieFromCard(card,wrap.dataset.rateKind));
+  badge.hidden=!item;
+  if(item)badge.textContent='採点済み ★ '+Number(item.rating??0).toFixed(1);
+ }
+}
+root.addEventListener('cinelva-record-updated',refreshBadges);
+root.addEventListener('storage',event=>{
+ if(event.key==='cinelva-library-records-v2'||event.key===null)refreshBadges();
+});
 function enhanceGrid(grid,kind){
  if(!grid)return;
  const decorate=()=>{
   for(const card of [...grid.querySelectorAll(kind==='rankings'?'a.rankCard':'.card[data-i]')]){
    if(card.parentElement?.classList.contains('cinelva-rate-wrap'))continue;
-   const wrap=document.createElement('div');wrap.className='cinelva-rate-wrap';
+   const wrap=document.createElement('div');wrap.className='cinelva-rate-wrap';wrap.dataset.rateKind=kind;
    card.parentElement.insertBefore(wrap,card);
    wrap.append(card);
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
    rate.textContent='★ 採点・コメント';rate.setAttribute('aria-label','この作品を採点・コメント');
+   const badge=document.createElement('span');badge.className='cinelva-rate-saved';badge.hidden=true;badge.setAttribute('aria-label','この作品の保存済み評価');wrap.append(badge);
    rate.onclick=event=>{
     event.stopPropagation();event.preventDefault();
     activeCard=wrap;
-    let movie=null;
-    if(kind==='rankings'){
-     const u=new URL(card.href,location.href),id=u.searchParams.get('id');
-     movie={id,title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
-    }else movie=root.CinelvaRatingResolve?.(card.dataset.i,kind);
+    const movie=movieFromCard(card,kind);
     if(!open(movie))rate.textContent='作品IDを確認できません';
    };
    wrap.append(rate);
   }
+  refreshBadges();
  };
  const observer=new MutationObserver(decorate);
  observer.observe(grid,{childList:true,subtree:false});

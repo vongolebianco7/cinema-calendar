@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:06:00+09:00",
+  "updated_at": "2026-10-17T12:06:01+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "e8e194e15103bb14a440fd3fcbe44a0e20708be7",
+  "head_sha": "dd1b719a40770bdf4f0dee20cfeaff05e13bf1f6",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "e8e194e15103bb14a440fd3fcbe44a0e20708be7"
+    "head_sha": "dd1b719a40770bdf4f0dee20cfeaff05e13bf1f6"
   },
   "work_items": [
     {
@@ -97,7 +97,7 @@
     {
       "id": "P0-242-RECORD",
       "title": "Route movie details to shared watched-record form",
-      "status": "validate_running",
+      "status": "validate_passed_actions_in_progress",
       "issue": 242,
       "pull_request": {
         "number": 251,
@@ -176,8 +176,8 @@
     },
     {
       "command": "PR #251 shared record-route implementation",
-      "result": "validate_running",
-      "details": "Record-route tests updated for nested noindex preview. Latest head 39239f0d: CINELVA smoke and brand checks passed; Validate frontend and quality/scorecard workflows are running."
+      "result": "validate_passed_quality_and_scorecard_pending",
+      "details": "Latest head 39239f0d Validate frontend passed, including the record-route test and existing Chromium/WebKit My CINELVA mobile journey. Brand, smoke and backup-safety checks passed; Autonomous quality gate and Completeness scorecard are still running."
     },
     {
       "command": "Brand static inventory",
@@ -203,6 +203,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Refresh PR #251 Validate frontend and remaining checks for head 39239f0d. Continue #242 route-by-route record QA (including ranking/calendar entry), distinguish old internal brand identifiers from visible copy in the nested preview, and verify box-office missing-image fallback. Keep Vercel deploy paused until provider limit clears.",
+  "next_action": "Refresh PR #251 quality gate and scorecard. Continue #242 audit of visible copy versus legacy identifiers on 11 nested /cinelva/ pages, all record entry routes, and box-office poster fallback. Do not deploy until Vercel build-rate-limit clears.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

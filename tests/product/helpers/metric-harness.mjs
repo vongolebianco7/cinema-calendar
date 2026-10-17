@@ -24,7 +24,7 @@ export function attachPageErrorCollector(page) {
 }
 
 export async function pageOverflowPx(page) {
-  return page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  return Promise.race([page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), new Promise((_,reject)=>setTimeout(()=>reject(new Error('Browser main thread unresponsive during overflow measurement')),12000))]);
 }
 
 export async function assertNoPageOverflow(page, tolerance = 2) {

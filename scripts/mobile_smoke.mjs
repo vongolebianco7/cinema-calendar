@@ -7,7 +7,7 @@ const browserType={chromium,webkit}[browserName];
 if(!browserType)throw new Error(`Unsupported CINEMAP_BROWSER: ${browserName}`);
 const browser=await browserType.launch();
 const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3});
-await context.route(/backend-one-gray-94\.vercel\.app\/api\/movies/,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
+await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[],"theaters":[],"schedules":[]}'}));
 const page=await context.newPage();
 const errors=[];
 const optionalMovieBackendError=/backend-one-gray-94\.vercel\.app\/api\/movies.*access control checks/i;
@@ -24,6 +24,7 @@ async function navigate(path){
 for(const path of candidates){
  const res=await navigate(path);
  if(!res||res.status()>=400){if(path==='index.html')errors.push(`${path}: HTTP ${res?.status()??'no response'}`);continue}
+ if(path==='index.html')await page.waitForLoadState('networkidle',{timeout:15000});
  await page.waitForTimeout(250);
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);

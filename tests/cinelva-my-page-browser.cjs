@@ -23,7 +23,7 @@ async function freePort() {
     await new Promise((resolve, reject) => {
       const deadline = Date.now() + 10000;
       const poll = async () => {
-        try { const response = await fetch(base); if (response.ok) return resolve(); } catch (_) {}
+        try { const response = await fetch(base); await response.arrayBuffer(); if (response.ok) return resolve(); } catch (_) {}
         if (Date.now() > deadline) return reject(new Error('local static server did not start'));
         setTimeout(poll, 100);
       };

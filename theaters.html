@@ -201,8 +201,9 @@ html,body{overflow-x:hidden}
 
 
 
-<div class="note">上映時刻は映画館公式サイト由来の取得データを表示しています。上映内容は変更される場合があるため、鑑賞前に公式スケジュールを確認してください。<br><a href="credits.html">Credits / Data Sources</a></div>
+<div class="note">上映時刻は24時間以内に確認できた映画館公式データのみ表示します。データが古い場合は時刻を隠して公式スケジュールへ案内します。鑑賞前にも公式情報を確認してください。<br><a href="credits.html">Credits / Data Sources</a></div>
 </main>
+<script src="js/cinelva-theater-schedule.js?v=20261017"></script>
 <script>
 const $=s=>document.querySelector(s);
 let theaters=[],osmTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
@@ -215,17 +216,28 @@ function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("the
 function renderTheaterChips(){
  const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
  if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
- const scheduleNames=new Set((scheduleData.theaters||[]).map(x=>x.name)),list=directoryCache.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,30);
+ const available=CinelvaTheaterSchedule.snapshot(scheduleData).rows;
+ const scheduleNames=new Set(available.map(x=>x.theater)),list=directoryCache.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,30);
  $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(t.name)?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
 }
 function renderTheaterDetail(){
- const defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=(scheduleData.schedules||[]).filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+ const snapshot=CinelvaTheaterSchedule.snapshot(scheduleData),defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=snapshot.rows.filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+ if(!snapshot.fresh||!rows.length){
+  const t=directoryCache.find(x=>x.name===selectedTheater)||def;
+  const reason=!snapshot.fresh
+   ? '上映時刻の更新が24時間以内に確認できないため、取得済み時刻は表示していません。'
+   : '本日以降の取得済み上映時刻はありません。上映状況は公式スケジュールで確認してください。';
+  $("#theaterDetail").innerHTML=t
+   ? '<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc(t.area||[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ")||"")+'</div></div><div class="verifiedNote">'+reason+'</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>'
+   : '<div class="empty">映画館を選択してください。</div>';
+  return;
+ }
  if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinelva内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
- const dates=[...new Set(rows.map(x=>x.date))].sort(),today=new Date().toLocaleDateString("sv-SE");
+ const dates=[...new Set(rows.map(x=>x.date))].sort(),today=snapshot.today;
  if(!selectedDate||!dates.includes(selectedDate)){
    const requested=param("date");
-   selectedDate=requested&&dates.includes(requested)?requested:(dates.find(d=>d>=today)||dates[dates.length-1]||"")
+   selectedDate=requested&&dates.includes(requested)?requested:(dates.find(d=>d>=today)||"")
  }
  const day=rows.filter(x=>x.date===selectedDate),byMovie=new Map();
  for(const x of day){if(!byMovie.has(x.title))byMovie.set(x.title,[]);byMovie.get(x.title).push(x)}

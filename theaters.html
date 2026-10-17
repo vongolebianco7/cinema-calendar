@@ -222,7 +222,16 @@ function renderTheaterChips(){
 }
 function renderTheaterDetail(){
  const snapshot=CinelvaTheaterSchedule.snapshot(scheduleData),defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=snapshot.rows.filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
- if(!snapshot.fresh||!rows.length){const t=directoryCache.find(x=>x.name===selectedTheater)||def;const reason=!snapshot.fresh?"上映時刻の更新が24時間以内に確認できないため、取得済み時刻は表示していません。":"本日以降の取得済み上映時刻はありません。上映状況は公式スケジュールで確認してください。";$("#theaterDetail").innerHTML=t?"<div class=\\"theaterHero\\"><h2>"+esc(t.name)+"</h2><div class=\\"area\\">"+esc(t.area||[t.prefecture,t.municipality,t.address].filter(Boolean).join(\" \")||\"\")+"</div></div><div class=\\"verifiedNote\\">"+reason+"</div><a class=\\"official\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\""+scheduleUrl(t)+"\\">公式の上映スケジュールを確認</a>":"<div class=\\"empty\\">映画館を選択してください。</div>";return}
+ if(!snapshot.fresh||!rows.length){
+  const t=directoryCache.find(x=>x.name===selectedTheater)||def;
+  const reason=!snapshot.fresh
+   ? '上映時刻の更新が24時間以内に確認できないため、取得済み時刻は表示していません。'
+   : '本日以降の取得済み上映時刻はありません。上映状況は公式スケジュールで確認してください。';
+  $("#theaterDetail").innerHTML=t
+   ? '<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc(t.area||[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ")||"")+'</div></div><div class="verifiedNote">'+reason+'</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>'
+   : '<div class="empty">映画館を選択してください。</div>';
+  return;
+ }
  if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinelva内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
  const dates=[...new Set(rows.map(x=>x.date))].sort(),today=snapshot.today;
  if(!selectedDate||!dates.includes(selectedDate)){

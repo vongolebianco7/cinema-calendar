@@ -56,6 +56,16 @@ class CompletenessWorkflowTests(unittest.TestCase):
         self.assertIn('pattern: completeness-*-metrics', text)
         self.assertIn('merge-multiple: true', text)
 
+    def test_non_ui_audit_changes_do_not_install_two_browsers(self):
+        text = WORKFLOW.read_text(encoding='utf-8')
+        self.assertIn('paths-ignore:', text)
+        for path in [
+            "'docs/**'",
+            "'tests/**/*.py'",
+            "'quality/external-data-registry.json'",
+        ]:
+            self.assertIn(path, text)
+
 
 if __name__ == '__main__':
     unittest.main()

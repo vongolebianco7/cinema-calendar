@@ -130,6 +130,7 @@ async function freePort() {
     await page.reload({ waitUntil: 'networkidle' });
     assert.equal(await page.locator('#statTotal').textContent(), '3');
 
+    await page.locator('[data-tab="records"]').click();
     await page.locator('#recordList [data-edit="99999999"]').click();
     await page.locator('#watchedAt').fill('2026-06-12');await page.locator('#viewingMethod').selectOption('配信');
     await page.locator('#recordComment').fill('自宅で見直した感想');await page.locator('#saveRecord').click();

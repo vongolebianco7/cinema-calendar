@@ -32,6 +32,45 @@
     $('recordDialog').showModal();
     if (!record) $('movieQuery').focus();
   }
+
+  // The summary is derived from existing local records; no mock films or invented counts.
+  function renderCinemaSummary() {
+    const selector=$('csPeriod'); if(!selector)return;
+    const all=recordMovies().map(enriched);
+    const years=[...new Set(all.map(r=>dateOf(r).slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
+    const previous=selector.value;
+    selector.innerHTML='<option value="all">オールタイム</option>'+[...new Set([String(currentYear),...years])].sort((a,b)=>Number(b)-Number(a)).map(y=>'<option value="'+y+'">'+y+'年</option>').join('');
+    selector.value=previous&&[...selector.options].some(o=>o.value===previous)?previous:String(currentYear);
+    const period=selector.value, filtered=period==='all'?all:all.filter(r=>dateOf(r).slice(0,4)===period);
+    $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
+    $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';
+    const prism='<svg class="cs-prism" viewBox="0 0 30 36" aria-hidden="true"><path d="M15 1 28 9v18L15 35 2 27V9Z" fill="#b8c9df" stroke="#e0e8f1" stroke-width=".9"/><path d="M15 1v17L2 9Z" fill="#e4eaf2"/><path d="M15 1 28 9 15 18Z" fill="#a4b2d8"/><path d="M2 9 15 18 2 27Z" fill="#95bad4"/><path d="M28 9 15 18 28 27Z" fill="#b5b4d7"/><path d="M2 27 15 18v17Z" fill="#809cc7"/><path d="M28 27 15 18v17Z" fill="#a7d1cf"/><path d="M15 1v34M2 9l26 18M28 9 2 27" stroke="#f0f5fa" stroke-width=".6" fill="none"/></svg>';
+    $('csPrisms').innerHTML=prism.repeat(Math.floor(all.length/1000));
+    const achieved=Math.floor(all.length%1000/100);
+    $('csCrowns').innerHTML=Array.from({length:10},(_,i)=>'<svg class="cs-crown" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 2 5l6 5 3-7 3 7 6-5-1 11ZM3 19h16" fill="none" stroke="'+(i<achieved?'#d9bd7f':'#66737d')+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>').join('');
+    const counts=new Map();all.forEach(r=>{const y=dateOf(r).slice(0,4);if(/^\d{4}$/.test(y))counts.set(y,(counts.get(y)||0)+1)});
+    const max=Math.max(1,...counts.values());
+    $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
+    const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a))).slice(0,10);
+    $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);return '<div class="cs-film">'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy">':'<div class="cs-poster-empty">ポスターなし</div>')+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-score">★ '+Number(r.rating).toFixed(1)+'</div></div>'}).join(''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
+    const renderRows=(id,items,colors)=>{const max=Math.max(1,...items.map(x=>x[1]));$(id).innerHTML=items.length?items.map(([name,count],i)=>'<div class="cs-row"><span>'+escapeHTML(name)+'</span><div class="cs-track"><i style="width:'+(count/max*100)+'%;background:'+colors[i%colors.length]+'"></i></div><span class="cs-count">'+count+'</span></div>').join(''):'<p class="cs-empty">集計できる記録がありません。</p>'};
+    const genreCounts=new Map(),countryCounts=new Map(),methodCounts=new Map(),decades=new Map();
+    filtered.forEach(r=>{
+      for(const g of new Set(Insights.classifyGenres(r.genres||[]).genres))genreCounts.set(g,(genreCounts.get(g)||0)+1);
+      for(const c of new Set(r.countries||[]))countryCounts.set(c,(countryCounts.get(c)||0)+1);
+      const method=String(r.viewingMethod||'').trim()||'不明';methodCounts.set(method,(methodCounts.get(method)||0)+1);
+      const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
+    });
+    const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
+    renderRows('csGenres',sorted(genreCounts).slice(0,8),['#8fa9cb']);
+    renderRows('csMethods',sorted(methodCounts),['#86a8ca','#c9ae78','#86948e','#b59cb7']);
+    const countries=sorted(countryCounts),palette=['#85a8c5','#c9a4b9','#d1b581','#8db6a8','#a8a0ce','#ca9e83','#9aaab4','#c5b9a0'];
+    $('csCountries').innerHTML=countries.length?'<div class="cs-strip">'+countries.map(([,n],i)=>'<span style="flex:'+n+';background:'+palette[i%palette.length]+'"></span>').join('')+'</div>':'';
+    renderRows('csCountries',countries.slice(0,10),palette);
+    const ds=[...decades].sort((a,b)=>a[0]-b[0]),dm=Math.max(1,...ds.map(x=>x[1]));
+    $('csDecades').innerHTML=ds.length?'<div class="cs-decade">'+ds.map(([d,n])=>'<div class="cs-decade-item"><span>'+n+'</span><i style="height:'+Math.max(2,Math.round(n/dm*65))+'px"></i><span>'+d+'s</span></div>').join('')+'</div>':'<p class="cs-empty">公開年の情報がありません。</p>';
+  }
+
   function renderStats() {
     const records = recordMovies();
     const rated = records; // Older unrated records are displayed as zero without rewriting storage.
@@ -49,6 +88,7 @@
     $('statAverage').textContent = rated.length ? (rated.reduce((sum, item) => sum + (item.rating ?? 0), 0) / rated.length).toFixed(1) : '—';
     $('statOrigin').textContent = `${japan} / ${foreign}`;
     renderAnnualComparison();
+    renderCinemaSummary();
   }
   function renderAnnualComparison() {
     const counts = new Map();
@@ -284,6 +324,7 @@
     $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);
     $('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};
+    $('csPeriod').onchange=renderCinemaSummary;
     $('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};

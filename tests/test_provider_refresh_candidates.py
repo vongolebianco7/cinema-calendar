@@ -22,6 +22,16 @@ class ProviderRefreshTests(unittest.TestCase):
   due=module.select_due_observations(candidates,cache,datetime.datetime(2026,10,17,tzinfo=datetime.timezone.utc),limit=2)
   self.assertEqual({mid for mid,_ in due},{101,103})
 
+ def test_cached_title_disappearing_from_calendar_still_refreshes(self):
+  today=datetime.date(2026,10,17)
+  cache={"765432":{"title":"Archived observed film","checked_at":"2026-08-01T00:00:00+00:00"},
+         "0":{"checked_at":"2026-08-01T00:00:00+00:00"},
+         "not-an-id":{"checked_at":"2026-08-01T00:00:00+00:00"}}
+  candidates=module.build_candidates([],cache,today)
+  self.assertEqual([mid for mid,_ in candidates],[765432])
+  due=module.select_due_observations(candidates,cache,datetime.datetime(2026,10,17,tzinfo=datetime.timezone.utc),limit=60)
+  self.assertEqual([mid for mid,_ in due],[765432])
+
  def test_recent_cached_title_is_not_refetched_before_seven_days(self):
   today=datetime.date(2026,10,17)
   items=[{"id":200,"date":"2010-01-01","event":"streaming"}]

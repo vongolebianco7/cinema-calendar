@@ -103,6 +103,16 @@ def build_candidates(movies, cache, today):
   # Prefer the closest calendar entry when a title occurs more than once.
   if mid not in by_id or distance<by_id[mid][0]:
    by_id[mid]=(distance,movie)
+ # Existing approved TMDB observations must remain refreshable even when
+ # their former calendar entries disappear from the rolling movie feeds.
+ for raw_id, observed in cache.items():
+  if not isinstance(raw_id,str) or not raw_id.isdecimal() or raw_id.startswith("0"):
+   continue
+  mid=int(raw_id)
+  if mid<=0 or mid in by_id or not isinstance(observed,dict):
+   continue
+  by_id[mid]=(366,{"id":mid,"title":observed.get("title") or "",
+                    "event":"streaming"})
  return sorted(by_id.items(),key=lambda item:(
   0 if item[1][1].get("event")=="streaming" else 1,item[1][0]
  ))

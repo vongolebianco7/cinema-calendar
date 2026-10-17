@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:46:00+09:00",
+  "updated_at": "2026-10-17T13:50:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -40,7 +40,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "All eight issue #242 workstreams have focused regression coverage and implementation PRs: #247 stale listings, #248 WOWOW shelf order, #249 discovery counts/classification, #250 streaming coverage, #251 shared record route including calendar/search/ranking/map, #252 box-office poster fallback, #253 all-route brand/PWA/OG/theme. Route audit now covers all 29 non-Ocean HTML pages at two viewports and both themes. Remaining: any error/empty-state gaps, review/release policy, quota-clear deployment, and post-deploy confirmation."
+      "ci": "All eight #242 workstreams have implementation PRs. The latest #253 route audit at 49eda1af1fc57533641898eca8771ca69dabb5fd passed all required Actions, including route loads at 390/1280 in light/dark and a new guard against missing local documents/scripts/styles/images/fonts. Brand casing test now rejects visible all-caps CINELVA and passes. A separate static scan of all 29 non-Ocean HTML pages found zero broken same-origin HTML links or local asset references. Remaining: interactive error/empty-state gaps, full Ocean retirement acceptance, review/release policy, quota-clear deployment, and post-deploy verification."
     },
     {
       "id": "P0-244",
@@ -136,7 +136,7 @@
         "head_sha": "9f8872505be3e93aa6e7fc94594dd366bcb7c866"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed."
+      "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed. Follow-up head 49eda1af1fc57533641898eca8771ca69dabb5fd also passes the all-route visible-brand test rejecting superseded uppercase CINELVA."
     }
   ],
   "verification": [
@@ -334,6 +334,11 @@
       "command": "PR #246 latest checkpoint",
       "result": "all_required_actions_passed",
       "details": "Head 3f125bb4e6e951ba4c4def5341e9d0907fa42fa1 passed smoke 39001008211, Ocean workflow contract 39001008192, autonomous quality 39001008189, and Completeness scorecard 39001008184. Ocean probe is one-time on PR opened/reopened and remains manually dispatchable; it no longer repeats on checkpoint pushes."
+    },
+    {
+      "command": "PR #253 route asset and brand-casing follow-up",
+      "result": "all_required_actions_passed_vercel_rate_limited",
+      "details": "Head 49eda1af1fc57533641898eca8771ca69dabb5fd passed Validate frontend (39003982251), autonomous quality gate (39003982243), CINELVA smoke (39003982228), brand identity (39003982245), backup safety (39003982231), isolated Pages (39003982266), Completeness scorecard (39003982256), and scoped Ocean probe (39003982246). The route audit now fails on missing local documents/scripts/stylesheets/images/fonts. Brand regression rejects visible all-caps CINELVA. Independent static scan covered all 29 non-Ocean HTML pages and found no broken same-origin HTML links or local asset references. Vercel backend still reported build-rate-limit; no deployment attempted."
     }
   ],
   "deployment": {
@@ -354,6 +359,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Resume by checking live main/PR heads and CI, then continue the remaining #242 error/empty-state audit. When any ready item passes, immediately select the next READY task in Issue #239 within the same work run; do not stop at a minor success or wait for the next scheduled tick. Save work-state.json and an Issue #239 checkpoint every 30–60 minutes and after milestones; make an overall priority assessment about every two hours. Keep using GitHub Actions while Vercel Hobby is rate-limited. After quota clears, satisfy repository review requirements, batch tested changes into one deployment, and verify production flows.",
+  "next_action": "Continue #242 interactive error/empty-state audit (offline, no-record, malformed-data and storage-failure paths), then proceed immediately to full P0-02 Ocean retirement audit/implementation rather than waiting for a later task run. Preserve existing localStorage keys and backup round-trip. Update the checkpoint after each substantive batch. Keep Vercel deployment blocked until quota is independently verified clear; do not merge/release without required review and test conditions.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

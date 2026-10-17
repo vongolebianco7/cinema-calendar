@@ -48,5 +48,41 @@ function save() {
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
 }
 $('cinelvaRateSave').onclick=save;
+// Keep the actual existing calendar/ranking/search listings. A sibling rating
+// action leaves the original movie detail link/button operational.
+function enhanceGrid(grid,kind){
+ if(!grid)return;
+ const decorate=()=>{
+  for(const card of [...grid.querySelectorAll(kind==='rankings'?'a.rankCard':'.card[data-i]')]){
+   if(card.parentElement?.classList.contains('cinelva-rate-wrap'))continue;
+   const wrap=document.createElement('div');wrap.className='cinelva-rate-wrap';
+   card.parentElement.insertBefore(wrap,card);
+   wrap.append(card);
+   const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
+   rate.textContent='★ 採点・コメント';rate.setAttribute('aria-label','この作品を採点・コメント');
+   rate.onclick=event=>{
+    event.stopPropagation();event.preventDefault();
+    let movie=null;
+    if(kind==='rankings'){
+     const u=new URL(card.href,location.href),id=u.searchParams.get('id');
+     movie={id,title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
+    }else movie=root.CinelvaRatingResolve?.(card.dataset.i,kind);
+    if(!open(movie))rate.textContent='作品IDを確認できません';
+   };
+   wrap.append(rate);
+  }
+ };
+ const observer=new MutationObserver(decorate);
+ observer.observe(grid,{childList:true,subtree:false});
+ decorate();
+}
+style.textContent+=`
+.cinelva-rate-wrap{min-width:0;position:relative}
+.cinelva-rate-wrap>.card,.cinelva-rate-wrap>.rankCard{display:block;width:100%;height:auto}
+.cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}
+`;
+enhanceGrid(document.querySelector('#cards'),'calendar');
+enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');
 root.CinelvaQuickRate={open,normalize};
+
 })(window);

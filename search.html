@@ -147,7 +147,7 @@
  <a href="experience.html">上映方式</a>
  <a href="my-cinelva/">My Cinelva</a></aside><main class="wrap"><div class="hero"><h1>作品検索</h1><p>公開中の作品だけでなく、過去作品も検索できます。</p></div><div id="status" class="status"></div><div id="grid" class="grid"></div></main><div id="modal" class="modal"><div class="sheet"><button id="close" class="close">×</button><div id="detail"></div></div></div><script src="js/calendar-context.js"></script><script>const criticVideoCache=new Map(),API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),q=document.querySelector(".gSearch"),grid=document.getElementById("grid"),status=document.getElementById("status"),modal=document.getElementById("modal"),detail=document.getElementById("detail");let results=[];async function search(){
  const term=q.value.trim();if(!term)return;
- const normalize=globalThis.CinelvaQuickRate?.normalize||((value)=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\\s\\p{P}\\p{S}]+/gu,'')),needle=normalize(term);
+ const normalize=globalThis.CinelvaQuickRate?.normalize||((value)=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'')),needle=normalize(term);
  history.replaceState(null,"","search.html?search="+encodeURIComponent(term));
  status.textContent="「"+term+"」を検索中…";grid.innerHTML="";
  let remote=[],local=[],errors=0;

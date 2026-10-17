@@ -54,7 +54,7 @@ async function getPort(){
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   await page.locator('#cinelvaRatePlace').selectOption('配信');
   await page.locator('#cinelvaRateSave').click();
-  assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0.0');
+  assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0');
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
@@ -71,7 +71,7 @@ async function getPort(){
   });
   await page.locator('#dates .cinelva-rate-button').first().waitFor({timeout:10000});
   assert.equal(await page.locator('#dates .cinelva-inline-score input').first().inputValue(),'4.5');
-  assert.equal(await page.locator('#dates .cinelva-inline-score input').nth(1).inputValue(),'0.0');
+  assert.equal(await page.locator('#dates .cinelva-inline-score input').nth(1).inputValue(),'0');
   await page.locator('#dates .cinelva-rate-button').first().click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film One/);
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'ランキングから記録');

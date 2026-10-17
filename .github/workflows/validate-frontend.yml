@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "*.html"
+      - "preview/ocean/**/*.html"
+      - "tests/cinelva-ocean-route-retirement.cjs"
+      - "tests/cinelva-ocean-workflow-retirement.test.cjs"
       - "js/cinelva-*.js"
       - "js/data-backup.js"
       - "my-cinelva/**"
@@ -40,6 +43,9 @@ on:
   pull_request:
     paths:
       - "*.html"
+      - "preview/ocean/**/*.html"
+      - "tests/cinelva-ocean-route-retirement.cjs"
+      - "tests/cinelva-ocean-workflow-retirement.test.cjs"
       - "js/cinelva-*.js"
       - "js/data-backup.js"
       - "my-cinelva/**"
@@ -131,6 +137,8 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
+          node --test tests/cinelva-ocean-workflow-retirement.test.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
       - name: Check Cinemap brand identity

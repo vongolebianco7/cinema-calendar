@@ -3,7 +3,6 @@
 'use strict';
 const Records=root.CinelvaLibraryRecords;
 if(!Records)return;
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
@@ -64,10 +63,44 @@ function nextMovie(){
 $('cinelvaRateNext').onclick=nextMovie;
 // Keep the actual existing calendar/ranking/search listings. A sibling rating
 // action leaves the original movie detail link/button operational.
+function savedFor(movie){
+ const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ if(!validId(id))return null;
+ return Records.all().find(r=>String(r.tmdbId??r.id)===String(id))||null;
+}
+function paintSavedIndicators(grid){
+ const existing=Records.all();
+ for(const wrap of grid.querySelectorAll('.cinelva-rate-wrap')){
+  const card=wrap.querySelector('.rankCard,.card[data-i],.streamMovie[data-mi],.tvMovie[data-mi],.dayMovie[data-mi]');
+  const button=wrap.querySelector('.cinelva-rate-button');
+  if(!card||!button)continue;
+  let id=card.dataset.mi??card.dataset.i;
+  if(card.matches('.rankCard')){
+   try{id=new URL(card.href,location.href).searchParams.get('id');}catch{id=null;}
+  }else{
+   const movie=root.CinelvaRatingResolve?.(id,card.dataset.mi!=null?'calendar':'search');
+   id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+  }
+  const record=validId(id)?existing.find(x=>String(x.tmdbId??x.id)===String(id)):null;
+  const score=record?'★ '+Number(record.rating??0).toFixed(1)+' 保存済み':null;
+  let badge=wrap.querySelector('.cinelva-saved-score');
+  if(score){
+   if(!badge){badge=document.createElement('span');badge.className='cinelva-saved-score';wrap.insertBefore(badge,button);}
+   badge.textContent=score;
+   button.textContent='★ 採点を編集';
+   button.setAttribute('aria-label',score+'・採点を編集');
+  }else{
+   if(badge)badge.remove();
+   button.textContent='★ 採点・コメント';
+   button.setAttribute('aria-label','この作品を採点・コメント');
+  }
+ }
+}
 function enhanceGrid(grid,kind){
  if(!grid)return;
  const decorate=()=>{
-  for(const card of [...grid.querySelectorAll(kind==='rankings'?'a.rankCard':'.card[data-i]')]){
+  const selector=kind==='rankings'?'a.rankCard':kind==='calendar'?'.streamMovie[data-mi],.tvMovie[data-mi],.dayMovie[data-mi]':'.card[data-i]';
+  for(const card of [...grid.querySelectorAll(selector)]){
    if(card.parentElement?.classList.contains('cinelva-rate-wrap'))continue;
    const wrap=document.createElement('div');wrap.className='cinelva-rate-wrap';
    card.parentElement.insertBefore(wrap,card);
@@ -81,11 +114,12 @@ function enhanceGrid(grid,kind){
     if(kind==='rankings'){
      const u=new URL(card.href,location.href),id=u.searchParams.get('id');
      movie={id,title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
-    }else movie=root.CinelvaRatingResolve?.(card.dataset.i,kind);
+    }else movie=root.CinelvaRatingResolve?.(card.dataset.mi??card.dataset.i,kind);
     if(!open(movie))rate.textContent='作品IDを確認できません';
    };
    wrap.append(rate);
   }
+  paintSavedIndicators(grid);
  };
  const observer=new MutationObserver(decorate);
  observer.observe(grid,{childList:true,subtree:false});
@@ -95,9 +129,17 @@ style.textContent+=`
 .cinelva-rate-wrap{min-width:0;position:relative}
 .cinelva-rate-wrap>.card,.cinelva-rate-wrap>.rankCard{display:block;width:100%;height:auto}
 .cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}
+.cinelva-rate-wrap>.cinelva-saved-score{display:inline-block;margin:5px 6px 0;padding:3px 8px;border-radius:6px;color:#1f241e;background:#d4e8cb;font:700 12px system-ui}
+#dates .cinelva-rate-wrap{min-width:0}
+#dates .cinelva-rate-wrap>.cinelva-rate-button{margin:4px 3px 8px;width:calc(100% - 6px);font-size:12px}
 `;
 enhanceGrid(document.querySelector('#cards'),'calendar');
+enhanceGrid(document.querySelector('#dates'),'calendar');
 enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');
+root.addEventListener('cinelva-record-updated',()=>document.querySelectorAll('#dates,#cards,#grid').forEach(paintSavedIndicators));
+root.addEventListener('storage',event=>{
+ if(event.key===Records.KEY)document.querySelectorAll('#dates,#cards,#grid').forEach(paintSavedIndicators);
+});
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -146,6 +146,18 @@
 #calendarView .cy-month-head{font-size:12px}
 #calendarView .cy-month-count{font-size:9px}
 }
+
+/* Explicitly override legacy .heatgrid and light theme in the annual calendar. */
+#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-rows:none!important;grid-auto-flow:row!important;grid-auto-columns:auto!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px 14px!important;overflow:visible!important;padding:0!important;width:100%!important}
+#calendarView #yearHeatmap .cy-month{min-width:0!important;width:auto!important;max-width:100%!important;overflow:hidden}
+#calendarView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-auto-flow:row!important;grid-template-rows:none!important;gap:4px!important;width:100%!important}
+#calendarView #yearHeatmap .cy-day,#calendarView #yearHeatmap .cy-empty{width:100%!important;min-width:0!important;max-width:100%!important;aspect-ratio:1!important;height:auto!important;border-radius:3px!important}
+#calendarView #yearHeatmap .cy-month-head{color:#f2f2f2!important}
+#calendarView #yearHeatmap .cy-month-count{color:#aaa!important}
+#calendarView .panel h2,#calendarView .section-head h2{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans",sans-serif!important;color:#f2f2f2!important;font-size:20px!important;font-weight:500!important}
+#calendarView .panel{background:#111!important;color:#f2f2f2!important}
+#calendarView .cw-history{color:#f2f2f2}
+@media(max-width:650px){#calendarView #yearHeatmap.cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 8px!important}#calendarView #yearHeatmap .cy-dots{gap:2px!important}}
 </style>
 </head>
 <body>

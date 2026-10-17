@@ -64,21 +64,20 @@ async function freePort() {
     await page.locator('#detail .recordAction a').click();
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
-    await page.goto(`${base}/index.html`, { waitUntil: 'domcontentloaded' });
-    const query = page.locator('#q');
-    await query.fill(movie.title);
-    const result = page.locator('.searchResult[data-mi]').first();
+    await page.route('**/api/movies*', route => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ movies: [movie], external: [] })
+    }));
+    await page.goto(`${base}/search.html?search=${encodeURIComponent(movie.title)}`, { waitUntil: 'domcontentloaded' });
+    const result = page.locator('#grid .card').first();
     await result.waitFor({ state: 'visible', timeout: 10000 });
     await result.click();
-    await page.locator('#modal.show').waitFor({ state: 'visible', timeout: 5000 });
-    const searchDetail = page.locator('#detail .links a[href*="search.html?id="]').first();
-    await searchDetail.waitFor({ state: 'visible', timeout: 5000 });
-    await searchDetail.click();
     await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
     await page.locator('#detail .recordAction a').click();
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
-    console.log('Calendar event and search result → movie detail → shared record form passed at 390px with backend offline.');
+    console.log('Calendar event and search-page result → detail → shared record form passed at 390px with backend offline.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

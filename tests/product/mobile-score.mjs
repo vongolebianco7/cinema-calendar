@@ -28,6 +28,8 @@ const pages = [
 ];
 
 const browser = await browserType.launch();
+const watchdog=setTimeout(()=>{console.error(`${browserName}: mobile score exceeded 150 seconds; terminating hung browser`);process.exit(124)},150000);
+watchdog.unref();
 const context = await browser.newContext({viewport:{width:390,height:844}, deviceScaleFactor:3});
 await routeDeterministicMovieBackend(context);
 fs.mkdirSync('artifacts/completeness/screenshots',{recursive:true});
@@ -35,6 +37,7 @@ fs.mkdirSync('artifacts/completeness/screenshots',{recursive:true});
 const rows = [];
 const observations = new Map();
 for (const [area, path] of pages) {
+  console.log(`${browserName}: scoring ${area} (${path})`);
   const page = await context.newPage();
   const errors = attachPageErrorCollector(page);
   let response = null;
@@ -51,7 +54,7 @@ for (const [area, path] of pages) {
   observations.set(area,{loaded,clean,overflow:overflow.pass,status:response?.status?.(),errors,overflowPx:overflow.overflow});
   if (!navigationError) {
     const height=await page.evaluate(()=>document.documentElement.scrollHeight);
-    await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000});
+    await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000,timeout:20000,animations:'disabled'});
   }
   await page.close();
 }
@@ -80,4 +83,5 @@ emit('CROSS-MOBILE',5.0,mobilePass,JSON.stringify(Object.fromEntries(observation
 
 writeMetrics(metricOutputPath('mobile',browserName),rows);
 await browser.close();
+clearTimeout(watchdog);
 console.log(`Wrote ${rows.length} mobile score metrics for ${browserName}`);

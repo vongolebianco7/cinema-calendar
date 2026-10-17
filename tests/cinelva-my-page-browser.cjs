@@ -98,7 +98,7 @@ async function freePort() {
     await page.locator('[data-director-film]').last().click();
     assert.equal(await page.locator('#recordDialog').isVisible(),true);
     assert.match(await page.locator('#chosenMovie').textContent(),/./);
-    const modalBrand=page.locator('header.top .brand img');
+    const modalBrand=page.locator('.gTop .gBrandImage');
     assert.equal(await modalBrand.getAttribute('src'),'../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png');
     assert.equal(await modalBrand.evaluate(img=>img.complete&&img.naturalWidth>0),true,'approved symbol stays present behind the record modal');
     assert.ok(await page.locator('#recordDialog').evaluate(dialog=>dialog.getBoundingClientRect().width<=window.innerWidth),'record modal fits the mobile viewport');

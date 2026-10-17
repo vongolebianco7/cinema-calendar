@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T10:08:12.234Z",
+  "updated_at": "2026-10-17T13:13:19.252Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c41b36b156fab285140f07e42af73491e5ebf158",
+  "base_sha": "521de933f8234b87c5afb84158ec3a9384e199c2",
   "branch": "main",
-  "head_sha": "c41b36b156fab285140f07e42af73491e5ebf158",
+  "head_sha": "521de933f8234b87c5afb84158ec3a9384e199c2",
   "pull_request": {
-    "number": 261,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/261",
+    "number": 273,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/273",
     "status": "merged",
-    "head_sha": "03d67474299746bd244b2596ca006f5a89ed9a09",
-    "merge_sha": "c41b36b156fab285140f07e42af73491e5ebf158"
+    "head_sha": "6a386f3cb166d9fd9108b4e1efa400c9cf2c00c3",
+    "merge_sha": "521de933f8234b87c5afb84158ec3a9384e199c2"
   },
   "work_items": [
     {
@@ -230,6 +230,20 @@
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/261",
         "merge_sha": "c41b36b156fab285140f07e42af73491e5ebf158"
       }
+    },
+    {
+      "id": "P0-273-CALENDAR-QUICK-RATE",
+      "title": "Enable quick rating on actual calendar cards and display saved score on existing listings",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 273,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/273",
+        "head_sha": "6a386f3cb166d9fd9108b4e1efa400c9cf2c00c3",
+        "merge_sha": "521de933f8234b87c5afb84158ec3a9384e199c2"
+      },
+      "acceptance": "Calendar/ranking/search score controls work at 390px including 0 rating and continue-to-next; preserve existing records",
+      "ci": "4/4 passed: smoke 39035470192, Autonomous quality 39035470229, Validate frontend 39035470159, Completeness 39035470140."
     }
   ],
   "verification": [

@@ -124,3 +124,12 @@ test('invalid viewing method and excessive comments are rejected before any stor
  assert.throws(()=>api.save({...movie,comment:'x'.repeat(2001)},0,null),/コメント/);
  assert.equal(data.get(api.KEY),previous);
 });
+
+test('Gregorian leap dates are validated correctly for years 1–99 and century boundaries',()=>{
+ const {api}=setup();
+ for(const date of ['0004-02-29','0096-02-29','1600-02-29','2000-02-29','2024-02-29']) assert.equal(api.validDate(date),true,date);
+ for(const date of ['0001-02-29','0099-02-29','0100-02-29','1700-02-29','1900-02-29','2026-02-29']) assert.equal(api.validDate(date),false,date);
+ api.save({...movie,id:97},0,'0096-02-29');
+ assert.equal(api.all()[0].watchedAt,'0096-02-29');
+ assert.throws(()=>api.save({...movie,id:98},0,'0099-02-29'));
+});

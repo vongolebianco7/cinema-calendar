@@ -98,6 +98,10 @@ async function freePort() {
     await page.locator('[data-director-film]').last().click();
     assert.equal(await page.locator('#recordDialog').isVisible(),true);
     assert.match(await page.locator('#chosenMovie').textContent(),/./);
+    const modalBrand=page.locator('header.top .brand img');
+    assert.equal(await modalBrand.getAttribute('src'),'../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png');
+    assert.equal(await modalBrand.evaluate(img=>img.complete&&img.naturalWidth>0),true,'approved symbol stays present behind the record modal');
+    assert.ok(await page.locator('#recordDialog').evaluate(dialog=>dialog.getBoundingClientRect().width<=window.innerWidth),'record modal fits the mobile viewport');
     await page.locator('#closeDialog').click();
     const rerelease={id:27205,title:'インセプション',year:2026,director:'Christopher Nolan',genres:['SF'],countries:['US']};
     await page.route('https://backend-one-gray-94.vercel.app/api/movies*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movies:[rerelease],external:[]})}));

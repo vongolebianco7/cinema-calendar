@@ -89,6 +89,7 @@ function enhanceGrid(grid,kind){
     if(!open(movie))rate.textContent='作品IDを確認できません';
    };
    wrap.append(rate);
+   const u=new URL(card.href,location.href);attachInlineScore(rate,kind==='rankings'?{id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent}:root.CinelvaRatingResolve?.(card.dataset.i,kind));
   }
  };
  const observer=new MutationObserver(decorate);
@@ -96,6 +97,8 @@ function enhanceGrid(grid,kind){
  decorate();
 }
 style.textContent+=`
+.cinelva-inline-score{display:inline-flex;align-items:center;margin:0 6px 8px}.cinelva-inline-score input{width:65px;min-height:36px;border:1px solid #a78a50;border-radius:6px;background:#25211a;color:#f9e8c8;text-align:center;font:600 15px system-ui}
+
 .cinelva-rate-wrap{min-width:0;position:relative}
 .cinelva-rate-wrap>.card,.cinelva-rate-wrap>.rankCard{display:block;width:100%;height:auto}
 .cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}
@@ -118,12 +121,25 @@ function enhanceCalendar(grid){
     if(!open(movie))rate.textContent='作品IDを確認できません';
    };
    card.append(rate);
+   attachInlineScore(rate,root.CinelvaRatingResolve?.(card.dataset.mi,'calendar'));
   }
   refreshRatingLabels();
  };
  const observer=new MutationObserver(decorate);
  observer.observe(grid,{childList:true,subtree:true});
  decorate();
+}
+function attachInlineScore(button, movie) {
+ const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ if(!validId(id))return;
+ const existing=Records.all().find(r=>String(r.id)===String(id));
+ const wrap=document.createElement('span');wrap.className='cinelva-inline-score';
+ const input=document.createElement('input');input.type='number';input.min='0';input.max='5';input.step='0.1';input.inputMode='decimal';
+ input.value=Number(existing?.rating??0).toFixed(1);input.setAttribute('aria-label','一覧で点数を入力');
+ input.onclick=e=>e.stopPropagation();
+ input.onchange=e=>{e.stopPropagation();const score=Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.round(score*10)!==score*10){input.value=Number(existing?.rating??0).toFixed(1);return;}
+ try{Records.save({...movie,id:String(id),title:movie.title||movie.name||existing?.title||'作品'},score,existing?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ wrap.append(input);button.after(wrap);
 }
 function refreshRatingLabels(){
  const saved=Records.all();

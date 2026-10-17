@@ -49,6 +49,17 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_availability.py
+      - name: Audit per-title streaming observation freshness
+        if: always()
+        run: python scripts/audit_availability_freshness.py
+      - name: Upload streaming freshness diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: streaming-freshness-audit
+          path: artifacts/availability-freshness.json
+          retention-days: 7
+          if-no-files-found: warn
       - name: Archive sourced publication history
         run: python scripts/update_history.py
 

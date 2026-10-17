@@ -87,6 +87,7 @@ async function freePort() {
         });
 
         for (const route of routes) {
+          try {
           const response = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
           assert.ok(response && response.ok(), `${route} responds successfully at ${width}px in ${theme} mode`);
           // A legacy route may replace its URL during document load. Wait for the
@@ -111,8 +112,20 @@ async function freePort() {
           assert.ok(state.textLength > 10, `${route} has visible main content`);
           assert.equal(state.colorScheme, theme, `${route} applies the ${theme} color scheme`);
           assert.equal(state.themeColor, theme === 'dark' ? '#0a0c0f' : '#f8f6f1', `${route} updates its browser theme color`);
+          // Keep one mobile/light screenshot per active route and browser for
+          // visual review without multiplying the artifact by four states.
+          let screenshot = null;
+          if (width === 390 && theme === 'light') {
+            const slug = route.replace(/[^a-z0-9.-]+/gi, '-');
+            const relative = path.join('screenshots', browserName, `${slug}.png`);
+            const destination = path.join(root, 'artifacts', 'route-audit', relative);
+            fs.mkdirSync(path.dirname(destination), { recursive: true });
+            await page.screenshot({ path: destination, fullPage: false, animations: 'disabled' });
+            screenshot = relative.split(path.sep).join('/');
+          }
           report.results.push({
             route,
+            screenshot,
             browser: browserName,
             viewport: { width, height: 844 },
             theme,
@@ -121,6 +134,21 @@ async function freePort() {
             ...state
           });
           checked++;
+          } catch (error) {
+            // Preserve a useful screenshot of the failing route even when the
+            // browser assertions abort before the report row is appended.
+            const slug = route.replace(/[^a-z0-9.-]+/gi, '-');
+            const relative = path.join('screenshots', browserName,
+              `failure-${width}-${theme}-${slug}.png`);
+            const destination = path.join(root, 'artifacts', 'route-audit', relative);
+            fs.mkdirSync(path.dirname(destination), { recursive: true });
+            await page.screenshot({ path: destination, fullPage: false, timeout: 5000 }).catch(() => {});
+            report.failure_context = {
+              route, browser: browserName, viewport_width: width, theme,
+              screenshot: relative.split(path.sep).join('/')
+            };
+            throw error;
+          }
         }
         await context.close();
       }

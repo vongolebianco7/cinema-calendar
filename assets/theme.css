@@ -65,3 +65,24 @@ html[data-theme="light"] :is(.gMenuLines,.gMenuLines::before,.gMenuLines::after)
 html[data-theme="light"] :is(.personExploreIntro,.personProfile,.personMode,.conciergeChat) { background:var(--panel)!important; color:var(--text)!important; border-color:var(--line)!important; }
 html[data-theme="light"] :is(.personExploreIntro p,.personMode p,.personProfileRole) { color:var(--muted)!important; }
 html[data-theme="light"] :is(.personModeActions a,.originCard a) { color:var(--text)!important; }
+
+/* Light mode: preserve readable contrast on experience and shared navigation. */
+html[data-theme="light"] .decisionBox,
+html[data-theme="light"] .expTabPanel .decisionBox {
+  background:#fffefa!important;color:#242521!important;border-color:#d4d0c7!important;
+}
+html[data-theme="light"] .decisionBox h2,
+html[data-theme="light"] .decisionBox :is(h3,strong,b,label) {color:#242521!important}
+html[data-theme="light"] .decisionBox :is(p,.hint,.formatScore span) {color:#565952!important}
+html[data-theme="light"] .decisionBox :is(input,select,textarea) {
+  background:#f1eee7!important;color:#242521!important;border-color:#a9a69e!important;
+}
+html[data-theme="light"] .decisionBox input::placeholder,
+html[data-theme="light"] .gSearch::placeholder {color:#686a64!important;opacity:1}
+html[data-theme="light"] .gBrandImage {
+  background:#171717!important;border-radius:7px;padding:2px;
+}
+html[data-theme="light"] .gDrawer,
+html[data-theme="light"] .drawer {background:#fffefa!important}
+html[data-theme="light"] :is(.gDrawer>a,.drawer a) {color:#242521!important;border-color:#d4d0c7!important}
+html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}

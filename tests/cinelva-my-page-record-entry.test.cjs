@@ -5,8 +5,8 @@ const fs = require('node:fs');
 const detail = fs.readFileSync('search.html', 'utf8');
 const records = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
 
-test('movie detail links the selected film to the shared CINELVA record form', () => {
-  assert.match(detail, /my-cinelva\/\?/);
+test('movie detail links the selected film to the shared CINELVA record form on root and preview paths', () => {
+  assert.ok(detail.includes('recordPath=location.pathname.split("/").includes("cinelva")?"../my-cinelva/":"my-cinelva/"'));
   assert.match(detail, /record:String\(m\.tmdbId\|\|m\.id\|\|""\)/);
   assert.match(detail, /鑑賞を記録/);
 });

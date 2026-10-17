@@ -21,9 +21,11 @@ test('browser route audit preserves machine-readable evidence in CI', () => {
   const browserAudit = fs.readFileSync(path.join(root, 'tests', 'cinelva-route-audit-browser.cjs'), 'utf8');
   const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'validate-frontend.yml'), 'utf8');
   assert.match(browserAudit, /artifacts[\\/'].*route-audit/);
-  assert.match(browserAudit, /report\.json/);
   assert.match(browserAudit, /JSON\.stringify\(report/);
+  assert.match(browserAudit, /CINELVA_BROWSER/);
+  assert.match(browserAudit, /report-\$\{browserName\}\.json/);
   assert.match(workflow, /name: cinelva-route-audit/);
   assert.match(workflow, /path: artifacts\/route-audit\//);
   assert.match(workflow, /if: always\(\)/);
+  assert.match(workflow, /CINELVA_BROWSER=webkit[^\n]*cinelva-route-audit-browser\.cjs/);
 });

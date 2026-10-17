@@ -384,7 +384,7 @@
     {
       "command": "PR #257 route audit evidence",
       "result": "passed_locally_actions_running",
-      "details": "Contract test first failed without artifact support, then passed 3/3 after implementation. python scripts/quality_gate.py and workflow YAML parsing passed. Validate frontend will upload artifacts/route-audit/report.json for 14 days and preserve partial results on audit failure."
+      "details": "Contract tests first failed without artifact and WebKit support, then passed 3/3 after implementation. python scripts/quality_gate.py and workflow YAML parsing passed. Validate frontend will upload Chromium and WebKit reports for 14 days and preserve partial results on audit failure."
     }
   ],
   "deployment": {
@@ -405,6 +405,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Finish PR #257 Actions, inspect the uploaded route-audit artifact, and merge only if the report contains all 116 page loads and required checks pass. Then continue #243 with a discrepancy ledger or #244 with visible last-confirmed freshness metadata. Do not deploy while the Vercel rate limit remains.",
+  "next_action": "Finish PR #257 Actions, inspect the uploaded route-audit artifact, and merge only if both Chromium and WebKit reports contain 116 page loads each and required checks pass. Then continue #243 with screenshots/failure fixtures or #244 with visible last-confirmed freshness metadata. Do not deploy while the Vercel rate limit remains.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

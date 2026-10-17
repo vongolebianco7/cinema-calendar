@@ -4,7 +4,10 @@ const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const net = require('node:net');
 const path = require('node:path');
-const { chromium } = require('playwright');
+const playwright = require('playwright');
+const browserName = process.env.CINELVA_BROWSER || 'chromium';
+const browserType = playwright[browserName];
+assert.ok(['chromium', 'webkit'].includes(browserName) && browserType, `unsupported browser: ${browserName}`);
 
 async function freePort() {
   const server = net.createServer();
@@ -30,7 +33,11 @@ async function freePort() {
     schema_version: 1,
     generated_at: new Date().toISOString(),
     manifest: 'quality/route-manifest.json',
-    matrix: manifest.audit_matrix,
+    matrix: {
+      viewports: manifest.audit_matrix.viewports,
+      themes: manifest.audit_matrix.themes,
+      browser: browserName
+    },
     expected_page_loads: routes.length * 4,
     status: 'running',
     results: [],
@@ -52,7 +59,7 @@ async function freePort() {
       poll();
     });
 
-    browser = await chromium.launch({ headless: true });
+    browser = await browserType.launch({ headless: true });
     let checked = 0;
     for (const width of [390, 1280]) {
       for (const theme of ['light', 'dark']) {
@@ -83,6 +90,7 @@ async function freePort() {
           assert.equal(state.themeColor, theme === 'dark' ? '#0a0c0f' : '#f8f6f1', `${route} updates its browser theme color`);
           report.results.push({
             route,
+            browser: browserName,
             viewport: { width, height: 844 },
             theme,
             http_status: response.status(),
@@ -96,7 +104,7 @@ async function freePort() {
     assert.deepEqual(pageErrors, [], 'routes load without uncaught browser JavaScript exceptions');
     assert.deepEqual(localAssetFailures, [], 'routes load without missing local documents, scripts, stylesheets, images, or fonts');
     report.status = 'passed';
-    console.log(`CINELVA route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
+    console.log(`Cinelva ${browserName} route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
   } catch (error) {
     report.status = 'failed';
     report.failure = error instanceof Error ? error.message : String(error);
@@ -108,6 +116,6 @@ async function freePort() {
     report.completed_at = new Date().toISOString();
     const evidenceDir = path.join(root, 'artifacts', 'route-audit');
     fs.mkdirSync(evidenceDir, { recursive: true });
-    fs.writeFileSync(path.join(evidenceDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
+    fs.writeFileSync(path.join(evidenceDir, `report-${browserName}.json`), `${JSON.stringify(report, null, 2)}\n`);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

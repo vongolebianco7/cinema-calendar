@@ -74,7 +74,7 @@ async function freePort() {
           // WebKit reports canceled in-flight fetches from the outgoing document
           // as page errors during intentional route navigation. Keep this
           // evidence separate; other runtime exceptions remain release blockers.
-          if (browserName === 'webkit' && /due to access control checks\\.?$/.test(error.message)) {
+          if (browserName === 'webkit' && /due to access control checks\.?$/.test(error.message)) {
             navigationCancellationWarnings.push(detail);
           } else {
             pageErrors.push(detail);

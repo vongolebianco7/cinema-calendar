@@ -96,9 +96,12 @@ async function freePort() {
             await page.waitForURL(url =>
               url.pathname.endsWith('/cinelva/discover.html') &&
               url.searchParams.get('mode') === 'concierge',
-              { timeout: 15000 }
+              { timeout: 15000, waitUntil: 'commit' }
             );
-            await page.waitForLoadState('domcontentloaded');
+            // The correct redirect destination is asserted above. WebKit
+            // occasionally reports an internal error while waiting for a
+            // legacy page's load event after a location.replace navigation.
+            // The theme/main-content assertions below confirm readiness.
           }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
           await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);

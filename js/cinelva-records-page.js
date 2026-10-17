@@ -23,19 +23,18 @@
     $('movieQuery').value = '';
     $('movieResults').replaceChildren();
     $('chosenMovie').textContent = record ? `${record.title}${record.year ? `（${record.year}年）` : ''}` : '作品を検索して選択してください。';
-    $('recordFormat').value=record?.format||''; $('recordWorkForm').value=record?.workForm||''; $('watchedAt').value = record?.watchedAt || '';
+    $('viewingMethod').value=record?.viewingMethod||''; $('recordComment').value=record?.comment||''; $('watchedAt').value = record?.watchedAt || '';
     $('dateHint').textContent = record?.watchedAt ? `現在の鑑賞日：${record.watchedAt}。年だけ・年月だけでも編集可能です。空欄で保存すると日付を削除します。` : '年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。';
     $('movieQuery').parentElement.hidden = Boolean(record);
-    $('saveRecord').disabled=false; $('unrated').checked = Boolean(record && record.rating == null);
-    $('rating').value = record?.rating ?? 3;
-    $('rating').disabled = $('unrated').checked;
-    $('ratingOut').value = $('unrated').checked ? '—' : Number($('rating').value).toFixed(1);
+    $('saveRecord').disabled=false;
+    $('rating').value = record?.rating ?? 0;
+    $('ratingOut').value = Number($('rating').value).toFixed(1);
     $('recordDialog').showModal();
     if (!record) $('movieQuery').focus();
   }
   function renderStats() {
     const records = recordMovies();
-    const rated = records.filter(item => typeof item.rating === 'number');
+    const rated = records; // Older unrated records are displayed as zero without rewriting storage.
     const yearCount = records.filter(item => dateOf(item).slice(0, 4) === String(currentYear)).length;
     const japan = records.filter(item => {
       const countries = enriched(item).countries || [];
@@ -47,7 +46,7 @@
     }).length;
     $('statTotal').textContent = records.length.toLocaleString('ja-JP');
     $('statYear').textContent = yearCount.toLocaleString('ja-JP');
-    $('statAverage').textContent = rated.length ? (rated.reduce((sum, item) => sum + item.rating, 0) / rated.length).toFixed(1) : '—';
+    $('statAverage').textContent = rated.length ? (rated.reduce((sum, item) => sum + (item.rating ?? 0), 0) / rated.length).toFixed(1) : '—';
     $('statOrigin').textContent = `${japan} / ${foreign}`;
     renderAnnualComparison();
   }
@@ -74,7 +73,7 @@
     return `<div class="poster">${source ? `<img src="${escapeHTML(source)}" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">` : ''}<span ${source ? 'hidden' : ''}>${escapeHTML(movie.title || '作品画像なし')}</span></div>`;
   }
   function card(movie) {
-    return `<article class="movie" data-record-card="${escapeHTML(movie.id)}">${posterHTML(movie)}<strong>${escapeHTML(movie.title)}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small><small class="score ${Number(movie.rating)>=4?'high-rating':''}">${movie.rating == null ? '未評価' : `★ ${Number(movie.rating).toFixed(1)}`}</small><div class="record-actions"><button data-edit="${escapeHTML(movie.id)}">編集</button><button data-delete="${escapeHTML(movie.id)}">削除</button></div></article>`;
+    return `<article class="movie" data-record-card="${escapeHTML(movie.id)}">${posterHTML(movie)}<strong>${escapeHTML(movie.title)}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small><small class="score ${Number(movie.rating)>=4?'high-rating':''}">★ ${Number(movie.rating ?? 0).toFixed(1)}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-actions"><button data-edit="${escapeHTML(movie.id)}">編集</button><button data-delete="${escapeHTML(movie.id)}">削除</button></div></article>`;
   }
   function renderList() {
     const query = $('recordSearch').value.trim().toLocaleLowerCase();
@@ -243,7 +242,7 @@
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];
     try { const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movies?q=${encodeURIComponent(query)}&limit=12`,{signal:AbortSignal.timeout(8000)}); if(response.ok){const data=await response.json();rows=[...(data.movies||[]),...(data.external||[])];} } catch (_) { /* Local catalog fallback follows. */ }
-    if(!rows.length) rows=state.movies.filter(movie=>`${movie.title||''} ${movie.original_title||''}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())).slice(0,12);
+    if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,12); }
     if(token!==state.searchToken)return;
     const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,12);
     box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
@@ -263,7 +262,7 @@
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}
-    try { state.selected.format=$('recordFormat').value;state.selected.workForm=$('recordWorkForm').value; const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=$('unrated').checked?Records.saveUnrated(state.selected,date):Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
+    try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
     catch(error){notify(`保存できませんでした：${error.message}`);}
   }
   function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }
@@ -282,7 +281,7 @@
     document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
     $('addRecord').onclick=()=>openDialog(); $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
     $('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);
-    $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);}; $('unrated').onchange=()=>{$('rating').disabled=$('unrated').checked;$('ratingOut').value=$('unrated').checked?'—':Number($('rating').value).toFixed(1);};
+    $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);
     $('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};
     $('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;
@@ -306,7 +305,7 @@
     canvas.addEventListener('pointermove',event=>{if(!state.plotPointers.has(event.pointerId))return;const prior=state.plotPointers.get(event.pointerId);if(Math.hypot(event.clientX-prior.x,event.clientY-prior.y)>3)state.plotWasDragged=true;state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];if(points.length>1&&state.plotDrag?.mode==='pinch'){const distance=pointerDistance(points),center=pointerCenter(points);state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(distance/Math.max(1,state.plotDrag.distance))));state.plotOffset.x+=center.x-state.plotDrag.center.x;state.plotOffset.y+=center.y-state.plotDrag.center.y;state.plotDrag={mode:'pinch',distance,center};}else if(points.length===1&&state.plotDrag?.mode==='rotate'){state.plotRotation.y+= (event.clientX-state.plotDrag.x)*.008;state.plotRotation.x=Math.max(-1.35,Math.min(1.35,state.plotRotation.x+(event.clientY-state.plotDrag.y)*.008));state.plotDrag={...state.plotDrag,x:event.clientX,y:event.clientY};}drawWorld();});
     const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
     canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});
-    canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · ${record.rating==null?'未評価':`★ ${Number(record.rating).toFixed(1)}`}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
+    canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · ★ ${Number(record.rating ?? 0).toFixed(1)}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
     window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});
     window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
   }

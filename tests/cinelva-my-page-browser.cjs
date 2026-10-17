@@ -121,8 +121,8 @@ async function freePort() {
     await page.locator('[data-choose-movie="99999999"]').click();
     await page.locator('#watchedAt').fill('2026-06-11');
     await page.locator('#rating').evaluate(input => { input.value = '0'; input.dispatchEvent(new Event('input', { bubbles: true })); });
-    await page.locator('#unrated').uncheck();
-    await page.locator('#recordFormat').selectOption('実写');await page.locator('#recordWorkForm').selectOption('フィクション');
+    await page.locator('#viewingMethod').selectOption('映画館');
+    await page.locator('#recordComment').fill('映画館で見た感想');
     await page.locator('#saveRecord').click();
     await page.waitForFunction(() => document.getElementById('statTotal').textContent === '3');
     assert.match(await page.locator('#recordList').textContent(), /New Browser Film/);
@@ -131,8 +131,10 @@ async function freePort() {
     assert.equal(await page.locator('#statTotal').textContent(), '3');
 
     await page.locator('#recordList [data-edit="99999999"]').click();
-    await page.locator('#watchedAt').fill('2026-06-12');await page.locator('#unrated').check();await page.locator('#saveRecord').click();
-    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999'].rating),null);
+    await page.locator('#watchedAt').fill('2026-06-12');await page.locator('#viewingMethod').selectOption('配信');
+    await page.locator('#recordComment').fill('自宅で見直した感想');await page.locator('#saveRecord').click();
+    const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999']);
+    assert.equal(updated.rating,0);assert.equal(updated.viewingMethod,'配信');assert.equal(updated.comment,'自宅で見直した感想');
     const backupWait=page.waitForEvent('download');await page.locator('#exportRecords').click();
     const backupDownload=await backupWait, backupData=fs.readFileSync(await backupDownload.path());
     page.once('dialog',dialog=>dialog.accept());await page.locator('#recordList [data-delete="99999999"]').click();

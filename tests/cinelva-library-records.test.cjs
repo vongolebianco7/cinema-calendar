@@ -103,3 +103,24 @@ test('date editor contract supports partial year and clears dates intentionally'
  assert.equal(api.all()[0].watchedAt,null);
  assert.equal(api.all()[0].rating,0);
 });
+
+test('comments and viewing method survive rating edits and backup restore',()=>{
+ const {api}=setup();
+ const noted={...movie,viewingMethod:'映画館',comment:'初日の感想'};
+ api.save(noted,0,'2026-10-17');
+ api.save(movie,4.5,'2026-10-17');
+ assert.equal(api.all()[0].viewingMethod,'映画館');
+ assert.equal(api.all()[0].comment,'初日の感想');
+ assert.equal(api.all()[0].rating,4.5);
+ const {api:restored}=setup();
+ restored.restore(api.all());
+ assert.equal(restored.all()[0].viewingMethod,'映画館');
+ assert.equal(restored.all()[0].comment,'初日の感想');
+});
+test('invalid viewing method and excessive comments are rejected before any storage write',()=>{
+ const {api,data}=setup();
+ const previous=data.get(api.KEY);
+ assert.throws(()=>api.save({...movie,viewingMethod:'不正'},0,null),/鑑賞方法/);
+ assert.throws(()=>api.save({...movie,comment:'x'.repeat(2001)},0,null),/コメント/);
+ assert.equal(data.get(api.KEY),previous);
+});

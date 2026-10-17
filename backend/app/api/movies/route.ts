@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   const q = searchParams.get("q")?.trim();
   const limit = Math.min(Math.max(Number(searchParams.get("limit") || 50), 1), 100);
 
-  const rows = await prisma.movie.findMany({
+  let rows = await prisma.movie.findMany({
     where: q ? { OR: [
       { title: { contains: q, mode: "insensitive" } },
       { originalTitle: { contains: q, mode: "insensitive" } },
@@ -28,6 +28,28 @@ export async function GET(request: Request) {
     orderBy: [{ updatedAt: "desc" }, { title: "asc" }],
     take: limit,
   });
+
+  // Fallback for searches such as スターウォーズ versus スター・ウォーズ.
+  // The value is bound by Prisma's tagged SQL API, not concatenated into SQL.
+  const compact = (q || "").normalize("NFKC").toLocaleLowerCase()
+    .replace(/[\s\p{P}\p{S}]+/gu, "");
+  if (q && compact.length >= 2 && rows.length < limit) {
+    const normalizedMatches = await prisma.$queryRaw<Array<{ id: string }>>`
+      SELECT "id" FROM "Movie"
+      WHERE regexp_replace(lower("title"), '[[:space:][:punct:]・･：！？（）「」『』【】―]', '', 'g') LIKE ${"%" + compact + "%"}
+         OR regexp_replace(lower(COALESCE("originalTitle", '')), '[[:space:][:punct:]・･：！？（）「」『』【】―]', '', 'g') LIKE ${"%" + compact + "%"}
+      LIMIT ${limit}
+    `;
+    const extraIds = normalizedMatches.map(row => row.id).filter(id => !rows.some(row => row.id === id));
+    if (extraIds.length) {
+      const extra = await prisma.movie.findMany({
+        where: { id: { in: extraIds } },
+        include: { releases: { orderBy: { date: "asc" } } },
+        take: limit - rows.length,
+      });
+      rows = [...rows, ...extra];
+    }
+  }
 
   // Keep the response shape identical to TMDB catalog results so the static
   // frontend can render local DB hits and remote hits through the same path.

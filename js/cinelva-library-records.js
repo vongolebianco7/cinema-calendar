@@ -60,6 +60,10 @@
     if(!validId(id)||!(rating===null||validScore(rating))) throw new Error('作品IDまたは評価が不正です');
     for(const field of ['genres','countries','formats','workForms'])if(movie[field]!=null&&!Array.isArray(movie[field]))throw new Error('分類メタデータの形式が不正です');
     for(const field of ['countries','formats','workForms'])if(Array.isArray(movie[field])&&movie[field].some(value=>typeof value!=='string'))throw new Error('分類メタデータの値が不正です');
+    if(movie.comment!==undefined && (typeof movie.comment!=='string'||movie.comment.length>2000))
+      throw new Error('コメントは2000文字以内で入力してください');
+    if(movie.viewingMethod!==undefined && !['','映画館','配信'].includes(movie.viewingMethod))
+      throw new Error('鑑賞方法が不正です');
     const old=current[id]||{}, source=older[id]||{};
     const date=watchedAt===undefined?(old.watchedAt??source.watchedAt??null):watchedAt;
     if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');
@@ -69,7 +73,7 @@
       director:String(movie.director??old.director??source.director??'').slice(0,120),
       genres:Array.isArray(movie.genres)?movie.genres.slice(0,12):(old.genres??source.genres??[]),
       countries:Array.isArray(movie.countries)?movie.countries.slice(0,20):(old.countries??source.countries??[]),
-      rating,watchedAt:date,watched:movie.watched!==false,legacy:false,createdAt:old.createdAt||source.createdAt||now,updatedAt:now};
+      rating,watchedAt:date,comment:movie.comment??old.comment??source.comment??'',viewingMethod:movie.viewingMethod??old.viewingMethod??source.viewingMethod??'',watched:movie.watched!==false,legacy:false,createdAt:old.createdAt||source.createdAt||now,updatedAt:now};
   }
   function writeRecords(next,hidden) {
     const area=storage(), priorDeleted=area.getItem(DELETED), nextDeleted=JSON.stringify(hidden);

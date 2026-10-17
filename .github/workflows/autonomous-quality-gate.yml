@@ -52,10 +52,6 @@ jobs:
         run: CINEMAP_BROWSER=chromium node tests/cinelva-theme-browser.mjs
       - name: Verify theme controls and mobile layouts in WebKit
         run: CINEMAP_BROWSER=webkit node tests/cinelva-theme-browser.mjs
-      - name: Run Ocean record/grow/reload persistence check
-        run: node scripts/ocean_persistence_smoke.mjs
-      - name: Run Ocean iPhone visual gate
-        run: node scripts/ocean_visual_smoke.mjs
       - name: Upload mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4

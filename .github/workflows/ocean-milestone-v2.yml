@@ -1,19 +1,6 @@
-name: Ocean milestone ecosystem v2
+name: Archived Ocean milestone checks (manual only)
 on:
-  pull_request:
-    paths:
-      - 'preview/ocean/**'
-      - 'tests/ocean-*.test.cjs'
-      - 'scripts/quality_gate.py'
-      - '.github/workflows/ocean-milestone-v2.yml'
-  push:
-    branches:
-      - 'design/ocean-milestone-ecosystem-v2'
-    paths:
-      - 'preview/ocean/**'
-      - 'tests/ocean-*.test.cjs'
-      - 'scripts/quality_gate.py'
-      - '.github/workflows/ocean-milestone-v2.yml'
+  workflow_dispatch:
 jobs:
   milestone-contract:
     runs-on: ubuntu-latest
@@ -24,11 +11,3 @@ jobs:
           node-version: 22
       - run: node --test tests/ocean-milestone-rewards.test.cjs tests/ocean-milestone-assets.test.cjs tests/ocean-milestone-gallery.test.cjs tests/ocean-milestone-integration.test.cjs tests/ocean-milestone-preview.test.cjs tests/ocean-14-milestone-finish.test.cjs tests/ocean-articulated-specials.test.cjs tests/ocean-hq-megafauna.test.cjs
       - run: node --test tests/ocean-photo-four-points.test.cjs tests/ocean-500-performance-contract.test.cjs tests/ocean-natural-population-layout.test.cjs tests/ocean-milestone-stars.test.cjs
-  full-quality-gate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: python scripts/quality_gate.py

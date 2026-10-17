@@ -1,0 +1,25 @@
+name: External data freshness audit
+on:
+  schedule:
+    - cron: '23 2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freshness-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit published dataset timestamps
+        run: python scripts/audit_data_freshness.py --output freshness-report.json
+      - name: Preserve report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-report
+          path: freshness-report.json
+          if-no-files-found: warn

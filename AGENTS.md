@@ -1,6 +1,10 @@
-# Cinemap autonomous development rules
+# CINELVA autonomous development rules
 
-## Goal
+## Active product goal
+Build CINELVA as a reliable, free-only movie discovery → watch → record → visualize → discover experience. The current roadmap and task order are in GitHub issue #239. Follow that queue; do not restart Ocean/Aquarium development.
+
+Ocean is retired as a product feature. Do not add new Ocean UI, renderer, assets, marketing, or tests. Existing saved records, storage keys, ratings, rankings, backups and restore compatibility must be preserved. Ocean cleanup is a separate, non-destructive retirement task governed by #239.
+
 Converge on approved product acceptance criteria through small, reversible changes with deterministic validation. A pull request is not a development-cycle boundary.
 
 ## Non-negotiable constraints
@@ -38,8 +42,12 @@ Only these states may terminate an autonomous run:
 
 Notifications and stopping are separate. Reporting a meaningful result merged to `main` must not itself terminate execution when another safe action remains executable.
 
-## Active Ocean/Aquarium goal
-For Ocean/Aquarium, use `docs/ocean-acceptance.md`. The target is a personal marine ecosystem that visibly grows as the user watches and rates films, not a genre map with fish substituted for genre nodes.
+## Restartable execution
+- Read `docs/operations/work-resume.md` and `docs/operations/work-state.json` before resuming work.
+- Treat current GitHub state (main SHA, open PRs, checks, and deployments) as authoritative over a stale checkpoint.
+- Save a checkpoint to `docs/operations/work-state.json` and summarize it in issue #239 at least every 30–60 minutes and after each major task. Include exact test results and the next command/action.
+- Make a consolidated progress review in issue #239 at least every two hours. Never label a task complete until its acceptance evidence exists.
+- Keep secrets, credentials, personal data, and sensitive deployment details out of checkpoints.
 
 ## UI invariants
 - No page-level horizontal overflow at 390px viewport width.

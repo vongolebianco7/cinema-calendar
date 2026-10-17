@@ -16,6 +16,17 @@ class OceanParallelQualityWorkflowTests(unittest.TestCase):
         self.assertIn('needs: [baseline, performance-probe, iphone-interaction-probe, visual-gap-probe]', self.text)
         self.assertGreaterEqual(self.text.count('BASELINE_SHA: ${{ needs.baseline.outputs.sha }}'), 3)
 
+    def test_pull_requests_only_trigger_on_ocean_specific_paths(self):
+        self.assertIn("'preview/ocean/**'", self.text)
+        self.assertIn("'scripts/ocean_*'", self.text)
+        self.assertIn("'tests/ocean-*'", self.text)
+        self.assertNotIn("'tests/product/**'", self.text)
+        self.assertNotIn("'tests/journeys/**'", self.text)
+
+    def test_pull_request_probe_is_one_time_and_manual_reruns_remain_available(self):
+        self.assertIn('types: [opened, reopened]', self.text)
+        self.assertIn('workflow_dispatch:', self.text)
+
     def test_observation_jobs_do_not_mutate_ocean_product_code(self):
         self.assertIn('permissions:\n  contents: read', self.text)
         self.assertNotIn('git push', self.text)

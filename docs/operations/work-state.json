@@ -1,19 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T20:08:01.147Z",
+  "updated_at": "2026-10-18",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d9d629717d4b886f4d9a2941479c246bba166996",
+  "base_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6",
   "branch": "main",
-  "head_sha": "d9d629717d4b886f4d9a2941479c246bba166996",
-  "pull_request": {
-    "number": 279,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/279",
-    "status": "merged",
-    "head_sha": "80aedabce762bab6899c0d7aff01f4ac6a22119e",
-    "merge_sha": "d9d629717d4b886f4d9a2941479c246bba166996"
-  },
+  "head_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6",
+  "pull_request": 280,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -314,6 +308,20 @@
       },
       "acceptance": "Zero successful checks when scheduled checks exist fails CI without corrupting prior snapshot; logs attempted/success/failed.",
       "ci": "4/4 success: Python 39065259733, smoke 39065259779, quality 39065259700, completeness 39065259694. No deployment."
+    },
+    {
+      "id": "P0-280-QUICK-REVIEW",
+      "title": "Compact review and inline 0.1 score on existing movie listings",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 280,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/280",
+        "head_sha": "d5c11b1e139aacc54acb3be09627a65a6b12d7cc",
+        "merge_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6"
+      },
+      "acceptance": "Review labels, native date input, 0.1 rating, venue persistence, close X, direct inline list scores.",
+      "ci": "5/5 successful: Scorecard contract 39066252747; smoke 39066252775; completeness 39066252702; frontend 39066252707; quality 39066252742. No deployment."
     }
   ],
   "verification": [
@@ -566,6 +574,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Prioritize #244: verify whether any legally authorized free television/showtime feeds can be configured; until permissions exist, retain disabled collectors, hide stale schedules, show official links/unverified state. Then complete #239 My Cinelva real-record visualizations, safe origin/storage migration and real iPhone Safari regression. Vercel production deploy forbidden while rate limit active; confirm quota before one release. App Store requires owner account/approval.",
+  "next_action": "Review production deployment readiness and verify live user flow; confirm actual TMDB provider workflow and fresh provider coverage.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

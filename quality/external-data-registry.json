@@ -1,14 +1,173 @@
 {
   "schema_version": 1,
   "categories": [
-    {"id":"streaming-availability","category":"streaming","status":"automated","dataset":"data/availability.json","generated_at_field":"generated_at","max_age_hours":48,"freshness_enforced":true,"source":"TMDB watch/providers (JustWatch)","source_url":"https://developer.themoviedb.org/reference/movie-watch-providers","acquisition":"official API through TMDB; no scraping","coverage":"Japan observations for configured providers; not a complete provider catalogue","workflow":".github/workflows/update-movies.yml","trigger":"daily 18:17 UTC and manual","ui_routes":["discover.html","search.html"]},
-    {"id":"streaming-premieres","category":"streaming","status":"manual","dataset":"data/streaming.json","generated_at_field":"generated_at","max_age_hours":168,"freshness_enforced":false,"source":"source-reviewed official service announcements","source_url":"per-record source_url","acquisition":"curated official announcements imported by script","coverage":"dated premieres with citations; not current availability","workflow":".github/workflows/update-movies.yml","trigger":"daily validation/import plus manual source updates","ui_routes":["index.html","discover.html"]},
-    {"id":"theater-showtimes","category":"theater-schedules","status":"disabled-pending-permission","dataset":"data/theater_schedules.json","generated_at_field":"generated_at","max_age_hours":24,"freshness_enforced":true,"source":"official theater schedules","source_url":"per-theater official_url","acquisition":"collector disabled pending explicit permission","coverage":"legacy snapshot for three 109 Cinemas locations; stale rows are hidden","workflow":".github/workflows/update-theaters.yml","trigger":"job disabled","ui_routes":["theaters.html"]},
-    {"id":"theater-directory","category":"theater-directory","status":"disabled-resource-scope","dataset":"data/theaters_osm.json","generated_at_field":"generated_at","max_age_hours":720,"freshness_enforced":false,"source":"OpenStreetMap contributors","source_url":"https://www.openstreetmap.org/copyright","acquisition":"Overpass query disabled because unattended nationwide scope is too broad","coverage":"stored ODbL snapshot; official links are preferred for schedules","workflow":".github/workflows/update-theater-directory.yml","trigger":"job disabled","ui_routes":["theaters.html"]},
-    {"id":"television-schedules","category":"television","status":"unavailable","dataset":null,"generated_at_field":null,"max_age_hours":null,"freshness_enforced":false,"source":"none approved","source_url":null,"acquisition":"no free approved feed configured; no schedule is claimed","coverage":"unavailable","workflow":null,"trigger":"none","ui_routes":[]},
-    {"id":"box-office","category":"box-office","status":"manual","dataset":"data/boxoffice.json","generated_at_field":"generated_at","max_age_hours":720,"freshness_enforced":false,"source":"official/industry source URLs embedded in dataset","source_url":"data/boxoffice.json sources[].url","acquisition":"curated source-backed snapshot; no unattended scraping","coverage":"Japan all-time and annual rows represented by the dataset","workflow":".github/workflows/check-boxoffice-minimum-per-year.yml","trigger":"validation on dataset changes","ui_routes":["rankings.html"]},
-    {"id":"movies-and-posters","category":"movies-posters","status":"automated","dataset":"data/movies.json","generated_at_field":"generated_at","max_age_hours":48,"freshness_enforced":true,"source":"TMDB API plus source-reviewed release records","source_url":"https://developer.themoviedb.org/","acquisition":"official API and local source-reviewed records","coverage":"configured calendar/discovery catalogue; poster fallback remains explicit","workflow":".github/workflows/update-movies.yml","trigger":"daily 18:17 UTC and manual","ui_routes":["index.html","discover.html","search.html","rankings.html"]},
-    {"id":"awards","category":"awards","status":"manual","dataset":"data/awards.json","generated_at_field":"generated_at","max_age_hours":8760,"freshness_enforced":false,"source":"official award archives and Wikidata identifiers","source_url":"per-record source_url","acquisition":"manual workflow plus deterministic reconciliation","coverage":"documented organizations/categories in dataset; not every award worldwide","workflow":".github/workflows/import-awards-full-history.yml","trigger":"manual and importer changes","ui_routes":["rankings.html","my-cinelva/index.html"]},
-    {"id":"editorial-features","category":"features","status":"manual","dataset":null,"generated_at_field":null,"max_age_hours":null,"freshness_enforced":false,"source":"editorial configuration and cited official offers","source_url":"per-entry citations where applicable","acquisition":"reviewed repository changes","coverage":"curated modules only; placement is not sponsorship unless explicitly documented","workflow":null,"trigger":"reviewed pull request","ui_routes":["discover.html","experience.html","revivals.html"]}
+    {
+      "id": "streaming-availability",
+      "category": "streaming",
+      "status": "automated",
+      "dataset": "data/availability.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 168,
+      "freshness_enforced": true,
+      "source": "TMDB watch/providers (JustWatch)",
+      "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "acquisition": "official API through TMDB; no scraping",
+      "coverage": "Japan observations for configured providers; 7-day freshness is evaluated per movie checked_at, not snapshot generated_at. Up to 60 movies/day are checked, subject to API success; not a complete provider catalogue.",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "daily 18:17 UTC and manual",
+      "ui_routes": [
+        "discover.html",
+        "search.html"
+      ]
+    },
+    {
+      "id": "streaming-premieres",
+      "category": "streaming",
+      "status": "manual",
+      "dataset": "data/streaming.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 168,
+      "freshness_enforced": false,
+      "source": "source-reviewed official service announcements",
+      "source_url": "per-record source_url",
+      "acquisition": "curated official announcements imported by script",
+      "coverage": "dated premieres with citations; not current availability",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "daily validation/import plus manual source updates",
+      "ui_routes": [
+        "index.html",
+        "discover.html"
+      ]
+    },
+    {
+      "id": "theater-showtimes",
+      "category": "theater-schedules",
+      "status": "disabled-pending-permission",
+      "dataset": "data/theater_schedules.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 24,
+      "freshness_enforced": true,
+      "source": "official theater schedules",
+      "source_url": "per-theater official_url",
+      "acquisition": "collector disabled pending explicit permission",
+      "coverage": "legacy snapshot for three 109 Cinemas locations; stale rows are hidden",
+      "workflow": ".github/workflows/update-theaters.yml",
+      "trigger": "job disabled",
+      "ui_routes": [
+        "theaters.html"
+      ]
+    },
+    {
+      "id": "theater-directory",
+      "category": "theater-directory",
+      "status": "disabled-resource-scope",
+      "dataset": "data/theaters_osm.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "acquisition": "Overpass query disabled because unattended nationwide scope is too broad",
+      "coverage": "stored ODbL snapshot; official links are preferred for schedules",
+      "workflow": ".github/workflows/update-theater-directory.yml",
+      "trigger": "job disabled",
+      "ui_routes": [
+        "theaters.html"
+      ]
+    },
+    {
+      "id": "television-schedules",
+      "category": "television",
+      "status": "unavailable",
+      "dataset": null,
+      "generated_at_field": null,
+      "max_age_hours": null,
+      "freshness_enforced": false,
+      "source": "none approved",
+      "source_url": null,
+      "acquisition": "no free approved feed configured; no schedule is claimed",
+      "coverage": "unavailable",
+      "workflow": null,
+      "trigger": "none",
+      "ui_routes": []
+    },
+    {
+      "id": "box-office",
+      "category": "box-office",
+      "status": "manual",
+      "dataset": "data/boxoffice.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "source": "official/industry source URLs embedded in dataset",
+      "source_url": "data/boxoffice.json sources[].url",
+      "acquisition": "curated source-backed snapshot; no unattended scraping",
+      "coverage": "Japan all-time and annual rows represented by the dataset",
+      "workflow": ".github/workflows/check-boxoffice-minimum-per-year.yml",
+      "trigger": "validation on dataset changes",
+      "ui_routes": [
+        "rankings.html"
+      ]
+    },
+    {
+      "id": "movies-and-posters",
+      "category": "movies-posters",
+      "status": "automated",
+      "dataset": "data/movies.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 48,
+      "freshness_enforced": true,
+      "source": "TMDB API plus source-reviewed release records",
+      "source_url": "https://developer.themoviedb.org/",
+      "acquisition": "official API and local source-reviewed records",
+      "coverage": "configured calendar/discovery catalogue; poster fallback remains explicit",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "daily 18:17 UTC and manual",
+      "ui_routes": [
+        "index.html",
+        "discover.html",
+        "search.html",
+        "rankings.html"
+      ]
+    },
+    {
+      "id": "awards",
+      "category": "awards",
+      "status": "manual",
+      "dataset": "data/awards.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 8760,
+      "freshness_enforced": false,
+      "source": "official award archives and Wikidata identifiers",
+      "source_url": "per-record source_url",
+      "acquisition": "manual workflow plus deterministic reconciliation",
+      "coverage": "documented organizations/categories in dataset; not every award worldwide",
+      "workflow": ".github/workflows/import-awards-full-history.yml",
+      "trigger": "manual and importer changes",
+      "ui_routes": [
+        "rankings.html",
+        "my-cinelva/index.html"
+      ]
+    },
+    {
+      "id": "editorial-features",
+      "category": "features",
+      "status": "manual",
+      "dataset": null,
+      "generated_at_field": null,
+      "max_age_hours": null,
+      "freshness_enforced": false,
+      "source": "editorial configuration and cited official offers",
+      "source_url": "per-entry citations where applicable",
+      "acquisition": "reviewed repository changes",
+      "coverage": "curated modules only; placement is not sponsorship unless explicitly documented",
+      "workflow": null,
+      "trigger": "reviewed pull request",
+      "ui_routes": [
+        "discover.html",
+        "experience.html",
+        "revivals.html"
+      ]
+    }
   ]
 }

@@ -163,15 +163,27 @@
     renderYearHeatmap(map);
   }
   function renderYearHeatmap() {
-    const year = state.year, start = new Date(year, 0, 1);
-    $('yearHeatmapTitle').textContent=`${year}年の鑑賞頻度`;
-    const daysInYear = (new Date(year + 1, 0, 1) - start) / 86400000;
-    const counts = new Map();
-    for (const item of recordMovies()) { const date = dateOf(item); if (/^\d{4}-\d{2}-\d{2}$/.test(date) && date.slice(0, 4) === String(year)) counts.set(date, (counts.get(date) || 0) + 1); }
-    const offset = start.getDay(), cells = Array(offset).fill('<span class="heat-day empty" aria-hidden="true"></span>');
-    for (let index = 0; index < daysInYear; index++) { const date = new Date(year, 0, index + 1), iso = `${year}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`, count = counts.get(iso) || 0, level = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3; cells.push(`<span class="heat-day" data-level="${level}" title="${iso}：${count}本" aria-label="${iso}、${count}本"></span>`); }
-    $('yearHeatmap').innerHTML = cells.join('');
-    $('yearHeatmap').setAttribute('aria-label', `${year}年の日付付き鑑賞記録。${counts.size}日、${[...counts.values()].reduce((a,b)=>a+b,0)}本`);
+    const year=state.year, records=recordMovies(), daily=new Map(), monthly=Array(12).fill(0);
+    for(const item of records){
+      const date=dateOf(item); if(!date.startsWith(String(year)))continue;
+      const month=Number(date.slice(5,7))-1;
+      if(month>=0&&month<12)monthly[month]++;
+      if(/^\d{4}-\d{2}-\d{2}$/.test(date))daily.set(date,(daily.get(date)||0)+1);
+    }
+    $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
+    $('yearHeatmap').classList.add('cinelva-annual-calendar');
+    $('yearHeatmap').innerHTML=monthly.map((count,m)=>{
+      const first=new Date(year,m,1).getDay(),length=new Date(year,m+1,0).getDate();
+      const cells=Array.from({length:first},()=>'<span class="cy-empty" aria-hidden="true"></span>');
+      for(let d=1;d<=length;d++){
+        const date=year+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        const n=daily.get(date)||0;
+        cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.4+n*.2)+'"></button>');
+      }
+      const rank=count>=5?'GOLD':count>=3?'SILVER':'';
+      return '<section class="cy-month" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本'+(rank?' <b class="cy-rank '+rank.toLowerCase()+'">'+rank+'</b>':'')+'</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+    }).join('');
+    $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー。月3本でSILVER、月5本でGOLD');
   }
   function renderDateFilms(date) {
     const rows = recordMovies().filter(item => dateOf(item) === date);

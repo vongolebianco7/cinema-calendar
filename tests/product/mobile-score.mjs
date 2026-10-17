@@ -24,7 +24,7 @@ const pages = [
   ['experience', 'experience.html'],
   ['my-cinemap', 'my-cinemap.html'],
   ['critic', 'critic.html'],
-  ['ocean', 'preview/ocean/real-fish/ecosystem.html?preview=1'],
+  ['data-backup', 'data-backup.html'],
 ];
 
 const browser = await browserType.launch();
@@ -41,7 +41,7 @@ for (const [area, path] of pages) {
   let navigationError = null;
   try {
     response = await page.goto(`${base}/${path}`, {waitUntil:'domcontentloaded', timeout:30000});
-    await page.waitForTimeout(area === 'ocean' ? 500 : 250);
+    await page.waitForTimeout(250);
   } catch (error) {
     navigationError = error;
   }
@@ -69,8 +69,8 @@ emit('DISC-02',1.0,discover.clean,detail('discover'));
 emit('DISC-03',0.5,discover.overflow,detail('discover'));
 
 const my = observations.get('my-cinemap');
-emit('MY-08',0.5,my.overflow,detail('my-cinemap'));
-emit('MY-09',0.5,my.loaded&&my.clean,detail('my-cinemap'));
+emit('MY-08',1.0,my.overflow,detail('my-cinemap'));
+emit('MY-09',1.0,my.loaded&&my.clean,detail('my-cinemap'));
 
 const mobilePass = [...observations.values()].every(x=>x.loaded&&x.clean&&x.overflow);
 emit('CROSS-MOBILE',5.0,mobilePass,JSON.stringify(Object.fromEntries(observations)));

@@ -25,3 +25,14 @@ test('retired Ocean-only workflows are absent so old probes and bot commits cann
     assert.equal(fs.existsSync(path.join(root, '.github', 'workflows', name)), false, name);
   }
 });
+
+test('active completeness scoring no longer executes or scores retired Ocean behavior', () => {
+  const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'completeness-scorecard.yml'), 'utf8');
+  const scorecard = fs.readFileSync(path.join(root, 'quality', 'scorecard.json'), 'utf8');
+  const mobile = fs.readFileSync(path.join(root, 'tests', 'product', 'mobile-score.mjs'), 'utf8');
+  const performance = fs.readFileSync(path.join(root, 'tests', 'product', 'performance-score.mjs'), 'utf8');
+  const journeys = fs.readFileSync(path.join(root, 'tests', 'journeys', 'core-journeys.mjs'), 'utf8');
+  for (const [name, source] of Object.entries({ workflow, scorecard, mobile, performance, journeys })) {
+    assert.doesNotMatch(source, /ocean/i, name);
+  }
+});

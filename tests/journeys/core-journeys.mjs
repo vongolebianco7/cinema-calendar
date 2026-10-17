@@ -99,9 +99,9 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
     await page.goto(`${base}/my-cinemap.html`,{waitUntil:'domcontentloaded'});myReflected=(await bodyText(page)).includes(fixture.title);
   }
   emit('DETAIL-04',1,setRating,'rating 1-5 set');emit('DETAIL-05',1,immediate,'saved state reflects immediately');emit('DETAIL-06',1,persisted,'saved record survives reload');emit('DETAIL-07',.5,changed,'rating can be changed');
-  emit('MY-01',1,myReflected,'saved movie appears in My Cinemap');emit('MY-02',1,myReflected&&changed,'My Cinemap rating matches canonical record');emit('MY-03',1,myReflected&&persisted,'My Cinemap state survives source-page reload');
-  const earned=(detailLoaded?1:0)+(controlVisible?1.5:0)+(immediate?1.5:0)+(saved?2:0)+(persisted?2:0)+(myReflected?2:0),flowPass=detailLoaded&&controlVisible&&immediate&&saved&&persisted&&myReflected&&errors.length===0;
-  emit('FLOW-RECORD',10,flowPass,JSON.stringify({detailLoaded,controlVisible,immediate,saved,persisted,myReflected,errors}),earned);await page.close();
+  emit('MY-01',2,myReflected,'saved movie appears in My CINELVA');emit('MY-02',2,myReflected&&changed,'My CINELVA rating matches canonical record');emit('MY-03',2,myReflected&&persisted,'My CINELVA state survives source-page reload');
+  const earned=(detailLoaded?1:0)+(controlVisible?2:0)+(immediate?3:0)+(saved?4:0)+(persisted?4:0)+(myReflected?3:0),flowPass=detailLoaded&&controlVisible&&immediate&&saved&&persisted&&myReflected&&errors.length===0;
+  emit('FLOW-RECORD',17,flowPass,JSON.stringify({detailLoaded,controlVisible,immediate,saved,persisted,myReflected,errors}),earned);await page.close();
 }
 
 // Related-work and creator navigation.
@@ -136,26 +136,36 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
 // Fresh-user operability.
 {
   const page=await context.newPage();await page.addInitScript(()=>localStorage.clear());const discover=await page.goto(`${base}/discover.html`,{waitUntil:'domcontentloaded'}).then(r=>Boolean(r&&r.status()<400)).catch(()=>false),detail=await openFixture(page);
-  const control=recordSelector(page),recordable=(await control.count())>0&&await control.isVisible().catch(()=>false),oceanLink=(await page.locator('a[href*="ocean"]').count())>0,earned=(discover?1:0)+(detail?1:0)+(recordable?1:0)+(oceanLink?1:0);
-  emit('FLOW-FIRSTUSE',4,discover&&detail&&recordable&&oceanLink,JSON.stringify({discover,detail,recordable,oceanLink}),earned);await page.close();
+  const control=recordSelector(page),recordable=(await control.count())>0&&await control.isVisible().catch(()=>false),myCinelvaLink=(await page.locator('a[href*="my-cinelva"]').count())>0,earned=(discover?1:0)+(detail?1:0)+(recordable?1:0)+(myCinelvaLink?1:0);
+  emit('FLOW-FIRSTUSE',4,discover&&detail&&recordable&&myCinelvaLink,JSON.stringify({discover,detail,recordable,myCinelvaLink}),earned);await page.close();
 }
 
 // Eight independent error/empty-state cases, 0.5 point each.
 {
   const checks=[];
-  async function scenario(url,predicate,setup){
-    const page=await context.newPage();if(setup)await page.addInitScript(setup);const errors=attachPageErrorCollector(page);let ok=false;
-    try{await page.goto(`${base}/${url}`,{waitUntil:'domcontentloaded',timeout:10000});await page.waitForTimeout(180);ok=Boolean(await predicate(page))&&errors.length===0;}catch{ok=false;}await page.close();checks.push(ok);return ok;
+  async function scenario(name,url,predicate,setup){
+    const page=await context.newPage();if(setup)await page.addInitScript(setup);const errors=attachPageErrorCollector(page),started=Date.now();let ok=false;
+    try{
+      await page.goto(`${base}/${url}`,{waitUntil:'domcontentloaded',timeout:10000});
+      const deadline=Date.now()+4000;let condition=false;
+      while(Date.now()<deadline){
+        condition=Boolean(await predicate(page).catch(()=>false));
+        if(condition){await page.waitForTimeout(50);break;}
+        await page.waitForTimeout(50);
+      }
+      ok=condition&&errors.length===0;
+    }catch{}
+    const result={name,ok,elapsed_ms:Date.now()-started,errors:[...errors]};await page.close();checks.push(result);return ok;
   }
-  await scenario('discover.html',async p=>(await bodyText(p)).trim().length>20);
-  await scenario('search.html?id=ci-minimal&search=CI%20Minimal%20Film',async p=>(await bodyText(p)).includes('CI Minimal Film'));
-  await scenario('search.html?id=ci-minimal&search=CI%20Minimal%20Film',async p=>(await bodyText(p)).includes('配信情報を確認できていません'));
-  await scenario('search.html?id=ci-no-related&search=CI%20No%20Related%20Film',async p=>(await bodyText(p)).includes('関連作品の情報はまだありません'));
-  await scenario('critic.html?id=ci-none&search=CI%20None',async p=>(await bodyText(p)).includes('まだ掲載していません'));
-  await scenario('my-cinemap.html',async p=>(await bodyText(p)).trim().length>20,()=>localStorage.setItem('cinemap-corrupt-test','{broken-json'));
-  await scenario('search.html?id=ci-error-500&search=CI%20Error',async p=>(await bodyText(p)).includes('作品情報を取得できませんでした'));
-  await scenario('search.html?id=ci-error-timeout&search=CI%20Timeout',async p=>(await bodyText(p)).includes('作品情報を取得できませんでした'));
-  const earned=checks.filter(Boolean).length*.5;emit('FLOW-ERROR',4,earned===4,JSON.stringify({checks}),earned);
+  await scenario('discover empty state','discover.html',async p=>(await bodyText(p)).trim().length>20);
+  await scenario('minimal detail title','search.html?id=ci-minimal&search=CI%20Minimal%20Film',async p=>(await bodyText(p)).includes('CI Minimal Film'));
+  await scenario('unknown availability','search.html?id=ci-minimal&search=CI%20Minimal%20Film',async p=>(await bodyText(p)).includes('配信情報を確認できていません'));
+  await scenario('no related titles','search.html?id=ci-no-related&search=CI%20No%20Related%20Film',async p=>(await bodyText(p)).includes('関連作品の情報はまだありません'));
+  await scenario('empty critic evidence','critic.html?id=ci-none&search=CI%20None',async p=>(await bodyText(p)).includes('まだ掲載していません'));
+  await scenario('corrupt legacy local storage','my-cinemap.html',async p=>(await bodyText(p)).trim().length>20,()=>localStorage.setItem('cinemap-corrupt-test','{broken-json'));
+  await scenario('HTTP 500 detail error','search.html?id=ci-error-500&search=CI%20Error',async p=>(await bodyText(p)).includes('作品情報を取得できませんでした'));
+  await scenario('detail request timeout','search.html?id=ci-error-timeout&search=CI%20Timeout',async p=>(await bodyText(p)).includes('作品情報を取得できませんでした'));
+  const earned=checks.filter(check=>check.ok).length*.5;emit('FLOW-ERROR',4,earned===4,JSON.stringify({checks}),earned);
 }
 
 writeMetrics(metricOutputPath('journeys',browserName),rows);await browser.close();console.log(`Wrote ${rows.length} journey metrics for ${browserName}`);

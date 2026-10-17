@@ -129,6 +129,7 @@ def main():
 
  selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=DAILY_OBSERVATION_LIMIT)
  count=0
+ failed=0
  for mid,(_,m) in selected:
   url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})
   try:
@@ -153,6 +154,7 @@ def main():
    count+=1
    time.sleep(1.5)
   except Exception as exc:
+   failed+=1
    print("provider check skipped:",mid,type(exc).__name__)
 
  print(f"Daily provider observation budget: {DAILY_OBSERVATION_LIMIT}; eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
@@ -163,6 +165,8 @@ def main():
   temporary.replace(PATH)
  else:
   print("No successful provider observations; preserving previous snapshot and update timestamp")
- print("Watch provider snapshots updated:",count)
+ print(f"Watch provider snapshots updated: {count}; failed: {failed}; attempted: {len(selected)}")
+ if selected and count==0:
+  raise RuntimeError("All TMDB provider observations failed; previous snapshot preserved")
 
 if __name__=="__main__":main()

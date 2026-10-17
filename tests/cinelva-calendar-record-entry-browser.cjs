@@ -77,6 +77,22 @@ async function freePort() {
     await page.locator('#detail .recordAction a').click();
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
+    await page.addInitScript(row => localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
+      [row.id]: {
+        id: String(row.id), title: row.title, poster: row.poster || '',
+        year: Number(String(row.date || '').slice(0, 4)) || null,
+        director: row.director || '', genres: row.genres || [],
+        countries: row.countries || [], rating: 4, watchedAt: '2026-10-17', watched: true
+      }
+    })), movie);
+    await page.goto(`${base}/my-cinelva/`, { waitUntil: 'domcontentloaded' });
+    await page.locator('[data-tab="world"]').click();
+    await page.locator('#worldCanvas').press('Enter');
+    const mappedRecord = page.locator('#worldFilm [data-edit]').first();
+    await mappedRecord.waitFor({ state: 'visible', timeout: 10000 });
+    await mappedRecord.click();
+    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 10000 });
+    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'world-map selection opens the existing record in edit mode');
     console.log('Calendar event and search-page result → detail → shared record form passed at 390px with backend offline.');
   } finally {
     if (browser) await browser.close();

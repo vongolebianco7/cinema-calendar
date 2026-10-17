@@ -106,4 +106,59 @@ if errors:
     for e in errors:
         print("-", e)
     sys.exit(1)
+print("Discovery/UI integration gate passed.")# The shelf is supplied by the page's discovery renderer; check its identifier without relying on attribute serialization.
+if 'streamingPopularGrid' not in discover:
+    errors.append('Discover recommendation/search integration missing: streamingPopularGrid')
+if 'loadPreset();load(true);' in discover:
+    errors.append("Discover must not auto-load recommendation results into condition search")
+if "repeat(3,minmax(0,1fr))" not in discover:
+    errors.append("Condition search results must use a three-column grid")
+
+# Calendar UX gates.
+for required in ['["すべて","通常","リバイバル","午前十時"]', "theatricalCategory", "repeat(3,minmax(0,1fr))"]:
+    if required not in calendar:
+        errors.append(f"Calendar UX integration missing: {required}")
+if "firstSeg" not in calendar or "（継続）" not in calendar:
+    errors.append("Calendar UX integration missing continuation marker")
+
+# My Cinelva is based on stored viewing history and its image is generated from that history.
+my = text("my-cinemap.html")
+library = text("js/cinelva-library-records.js")
+share = text("js/cinelva-share-image.js")
+for required in ["鑑賞実績の共有画像", "js/cinelva-library-records.js", "js/cinelva-share-image.js", "data-backup.html"]:
+    if required not in my:
+        errors.append(f"Cinelva viewing-record share page missing: {required}")
+for required in ["records.all()", "canvas.toBlob", "crossOrigin = 'anonymous'", "navigator.share"]:
+    if required not in share:
+        errors.append(f"Cinelva viewing-record image export missing: {required}")
+for required in ["saveUnrated", "function remove(", "cinelva-library-deleted-legacy-v1"]:
+    if required not in library:
+        errors.append(f"Cinelva record compatibility missing: {required}")
+for forbidden in ["候補に追加", "自由に作品を追加", "自分でつくる映画棚", "＋ 棚をつくる"]:
+    if forbidden in my:
+        errors.append(f"Removed manual collection UI returned: {forbidden}")
+for js_path in ["js/cinelva-share-image.js", "js/cinelva-records-page.js", "js/cinelva-insights.js"]:
+    p = ROOT / js_path
+    r = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+    if r.returncode:
+        errors.append(f"JavaScript syntax failed for {js_path}: {r.stderr.strip()}")
+
+# IMAX GT directory must include verified screens and an experience-page path.
+if not any(x.get("format") == "IMAX GT" and x.get("screen") for x in formats):
+    errors.append("No verified IMAX GT screen entries")
+if "format=IMAX%20GT" not in text("experience.html"):
+    errors.append("Experience page does not link to IMAX GT screen directory")
+for required in ["グランドシネマサンシャイン 池袋", "シアター12", "109シネマズ大阪エキスポシティ", "シアター11"]:
+    if required not in text("experience.html"):
+        errors.append(f"Experience IMAX GT detail missing: {required}")
+
+for page in ["index.html","search.html","rankings.html","theaters.html","experience.html","my-cinemap.html","critic.html"]:
+    if '<a href="agent.html">映画コンシェルジュ</a>' in text(page):
+        errors.append(f"Standalone concierge nav remains in {page}")
+
+if errors:
+    print("Discovery/UI integration gate failed:")
+    for e in errors:
+        print("-", e)
+    sys.exit(1)
 print("Discovery/UI integration gate passed.")

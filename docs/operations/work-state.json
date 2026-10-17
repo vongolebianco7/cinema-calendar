@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:45:00+09:00",
+  "updated_at": "2026-10-17T12:55:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "db957f31a81abcef378b84fb2ecc2f26e5b1a612",
+  "head_sha": "bfc1dac9d35d54fd813e31920411349b2a098f7f",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "db957f31a81abcef378b84fb2ecc2f26e5b1a612"
+    "head_sha": "bfc1dac9d35d54fd813e31920411349b2a098f7f"
   },
   "work_items": [
     {
@@ -104,10 +104,10 @@
         "number": 251,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
         "branch": "fix/cinelva-record-entry-route",
-        "head_sha": "c4f81ba2edfc026fffca032c3525f2fe4cf71bb4"
+        "head_sha": "c263c6815032b771f3429a14a025b988618b4af9"
       },
       "acceptance": "From actual calendar events, ranking/detail routes, and root/preview pages, the selected ID/title and calendar context open the existing My CINELVA record form without duplicate storage logic.",
-      "ci": "On head c4f81ba2edfc026fffca032c3525f2fe4cf71bb4, Validate frontend, autonomous quality, smoke, brand, backup safety, and Completeness scorecard passed. Validate log confirms the actual calendar event → detail → shared record form journey at 390px with backend blocked; direct detail, calendar context, and rankings journeys also pass. Vercel preview check remains blocked by provider daily rate limit."
+      "ci": "On head c263c6815032b771f3429a14a025b988618b4af9 all six PR Actions passed: Validate frontend, autonomous quality, smoke, brand identity, backup safety, and completeness. Validate frontend run 39000238427 confirms actual calendar event and search-page result → detail → shared My CINELVA record form at 390px with backend offline; smoke, backup, and scorecard pass."
     },
     {
       "id": "P0-242-POSTERS",
@@ -132,10 +132,10 @@
         "number": 253,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
         "branch": "fix/cinelva-backup-brand-header",
-        "head_sha": "e00bd611bbf2792c8b508f816ab71f6852258437"
+        "head_sha": "8260f8efb00be08895f298b436a18721dd7b9b5b"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "On head e00bd611bbf2792c8b508f816ab71f6852258437, frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, and autonomous quality all passed. Chromium/WebKit mobile journey confirms the approved symbol loads behind the record dialog and dialog fits at 390px."
+      "ci": "All seven CI runs passed on head 8260f8efb00be08895f298b436a18721dd7b9b5b: frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, Ocean probe, and autonomous quality gate. Route-wide brand/PWA/OG tests cover all 29 non-Ocean HTML routes."
     }
   ],
   "verification": [
@@ -298,6 +298,21 @@
       "command": "PR #246 restart checkpoint",
       "result": "all_actions_passed",
       "details": "Head db957f31a81abcef378b84fb2ecc2f26e5b1a612 passed CINELVA smoke, Ocean workflow contract, one-time Ocean parallel probe, autonomous quality gate, and Completeness scorecard."
+    },
+    {
+      "command": "PR #251 search and calendar shared-record flows",
+      "result": "all_required_actions_passed",
+      "details": "Head c263c6815032b771f3429a14a025b988618b4af9 passed Validate frontend, autonomous quality, smoke, brand identity, backup safety, and Completeness scorecard. Validate run 39000238427 log confirms the actual calendar event and search-page result → detail → existing My CINELVA record form at 390px with backend offline."
+    },
+    {
+      "command": "PR #253 route-wide CINELVA brand/PWA/Open Graph metadata",
+      "result": "all_required_actions_passed",
+      "details": "Head 8260f8efb00be08895f298b436a18721dd7b9b5b passed Validate frontend, autonomous quality gate, smoke, brand identity, backup safety, isolated Pages, completeness scorecard, and scoped Ocean probe."
+    },
+    {
+      "command": "PR #246 latest durable checkpoint",
+      "result": "all_required_actions_passed",
+      "details": "Head bfc1dac9d35d54fd813e31920411349b2a098f7f passed CINELVA smoke, Ocean workflow contract, scoped Ocean probe, autonomous quality gate, and Completeness scorecard. This checkpoint records the verified #251 and #253 heads."
     }
   ],
   "deployment": {
@@ -318,6 +333,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh the new checkpoint commit's CI. Continue #242 route-level audit for critic/map/search entry points and light/dark contrast, share/OG/PWA, and previews; verify release only after Vercel confirms the daily deployment cap is clear.",
+  "next_action": "Continue #242's remaining screen-level audit (My CINELVA map/critic routes, light/dark contrast, share/OG/PWA behavior and error/empty states) with offline browser regressions where a confirmed gap exists. Refresh live PR heads before any status check. Keep release separate from Actions and do not deploy until Vercel confirms quota is clear and repository review requirements are met.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

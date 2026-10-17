@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:55:00+09:00",
+  "updated_at": "2026-10-17T13:15:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "bfc1dac9d35d54fd813e31920411349b2a098f7f",
+  "head_sha": "16db3f49ac10749542db353a8a270fcab22fd308",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "bfc1dac9d35d54fd813e31920411349b2a098f7f"
+    "head_sha": "16db3f49ac10749542db353a8a270fcab22fd308"
   },
   "work_items": [
     {
@@ -39,7 +39,8 @@
       "title": "Audit and fix confirmed production blockers",
       "status": "in_progress",
       "issue": 239,
-      "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check."
+      "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
+      "ci": "Completed and CI-passed: stale theater #247, discovery order/count/classification #248/#249, per-service coverage #250, shared record routes #251, box-office poster fallback #252, and cross-route brand/PWA/OG #253. Continue remaining cross-screen map/critic, light/dark, error/empty and production-release verification."
     },
     {
       "id": "P0-244",
@@ -104,10 +105,10 @@
         "number": 251,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
         "branch": "fix/cinelva-record-entry-route",
-        "head_sha": "c263c6815032b771f3429a14a025b988618b4af9"
+        "head_sha": "c5324134a9f1172b2f6b5bd69684ff03004586ed"
       },
       "acceptance": "From actual calendar events, ranking/detail routes, and root/preview pages, the selected ID/title and calendar context open the existing My CINELVA record form without duplicate storage logic.",
-      "ci": "On head c263c6815032b771f3429a14a025b988618b4af9 all six PR Actions passed: Validate frontend, autonomous quality, smoke, brand identity, backup safety, and completeness. Validate frontend run 39000238427 confirms actual calendar event and search-page result → detail → shared My CINELVA record form at 390px with backend offline; smoke, backup, and scorecard pass."
+      "ci": "All six PR Actions checks passed on head c5324134a9f1172b2f6b5bd69684ff03004586ed. Validate run 39000738040 covers offline 390px journeys from calendar event, search result, direct detail, context URL, ranking, and My CINELVA's 3D world map keyboard selection into the existing edit dialog. Added full response consumption to local server-readiness probes after an intermittent undici Parser.finish teardown error; the final Validate run passes."
     },
     {
       "id": "P0-242-POSTERS",
@@ -313,6 +314,16 @@
       "command": "PR #246 latest durable checkpoint",
       "result": "all_required_actions_passed",
       "details": "Head bfc1dac9d35d54fd813e31920411349b2a098f7f passed CINELVA smoke, Ocean workflow contract, scoped Ocean probe, autonomous quality gate, and Completeness scorecard. This checkpoint records the verified #251 and #253 heads."
+    },
+    {
+      "command": "PR #251 map edit entry and browser-server cleanup regression",
+      "result": "all_required_actions_passed",
+      "details": "Head c5324134a9f1172b2f6b5bd69684ff03004586ed passed Validate frontend, autonomous quality, smoke, brand identity, backup safety, and Completeness scorecard. Validate run 39000738040 log shows calendar, search, direct detail/context, ranking, existing record persistence, and My CINELVA 3D world map keyboard selection opening the selected saved record for edit. An earlier run hit undici Parser.finish during the preceding existing browser flow; each browser test now consumes the local readiness response body before server teardown, and the refreshed run passes."
+    },
+    {
+      "command": "One-time Ocean PR probe trigger",
+      "result": "workflow_contract_passed_ocean_probe_not_retriggered_on_sync",
+      "details": "On PR #246 head 16db3f49ac10749542db353a8a270fcab22fd308, workflow contract run 39000934752 and smoke run 39000934844 passed. Ocean parallel probe now runs once when a PR is opened/reopened, remains manually dispatchable, and no longer repeats on each checkpoint synchronize. Autonomous quality and Completeness scorecard for this head were still running at checkpoint time."
     }
   ],
   "deployment": {
@@ -333,6 +344,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Continue #242's remaining screen-level audit (My CINELVA map/critic routes, light/dark contrast, share/OG/PWA behavior and error/empty states) with offline browser regressions where a confirmed gap exists. Refresh live PR heads before any status check. Keep release separate from Actions and do not deploy until Vercel confirms quota is clear and repository review requirements are met.",
+  "next_action": "Refresh checks for PR #246 head 16db3f49ac10749542db353a8a270fcab22fd308. Then continue remaining #242 route audit (critic/map, light/dark contrast, share/OG/PWA, error/empty states) and release verification after provider quota is clear. Refresh all PR heads and required review policy before release; no deployment while Vercel cap remains.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

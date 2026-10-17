@@ -38,14 +38,17 @@ def finish_snapshot(old, cache, count, now):
  if not count:return old
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}
 
-def select_due_observations(candidates, cache, now, limit=20):
- """Refresh oldest observations first while prioritizing streaming premieres.
+DAILY_OBSERVATION_LIMIT=60
 
- A successful update of one title must never make old title-level observations
- current. Invalid or absent checked_at values are checked first. This helper
- is pure and deliberately makes no network requests.
+def select_due_observations(candidates, cache, now, limit=20):
+ """Return oldest due observations with reserved capacity for both release types.
+
+ Streaming premiere records receive up to two-thirds of the daily capacity,
+ while theatrical candidates have a reserved one-third. If one category has
+ fewer due titles, its unused slots flow to the other. This avoids indefinite
+ starvation of theatrical records while continuing to prioritize streaming.
  """
- due=[]
+ due={"streaming":[],"other":[]}
  for mid, (distance, movie) in candidates:
   checked=(cache.get(str(mid)) or {}).get("checked_at")
   checked_dt=None
@@ -60,13 +63,22 @@ def select_due_observations(candidates, cache, now, limit=20):
     checked_dt=None
   if checked_dt is not None and datetime.timedelta(0) <= now-checked_dt < datetime.timedelta(days=7):
    continue
-  priority=0 if movie.get("event")=="streaming" else 1
-  # Unchecked records rank ahead of records already observed. Within each
-  # bucket, the least recently observed comes before nearer release dates.
+  bucket="streaming" if movie.get("event")=="streaming" else "other"
   sort_age=checked_dt.timestamp() if checked_dt else float("-inf")
-  due.append(((priority,sort_age,distance,mid),(mid,(distance,movie))))
- due.sort(key=lambda pair:pair[0])
- return [item for _,item in due[:limit]]
+  due[bucket].append(((sort_age,distance,mid),(mid,(distance,movie))))
+ for rows in due.values():
+  rows.sort(key=lambda pair:pair[0])
+ limit=max(0,int(limit))
+ streaming_quota=(limit*2+2)//3
+ other_quota=limit-streaming_quota
+ picked=due["streaming"][:streaming_quota]+due["other"][:other_quota]
+ remaining=due["streaming"][streaming_quota:]+due["other"][other_quota:]
+ # Fill unused reservations, preferring the least-recently-checked title.
+ remaining.sort(key=lambda pair:pair[0])
+ picked+=remaining[:max(0,limit-len(picked))]
+ return [entry for _,entry in picked]
+
+
 
 
 def main():
@@ -91,7 +103,7 @@ def main():
   by_id.items(),
   key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])
  )
- selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc))
+ selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=DAILY_OBSERVATION_LIMIT)
  count=0
  for mid,(_,m) in selected:
   url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})
@@ -119,6 +131,7 @@ def main():
   except Exception as exc:
    print("provider check skipped:",mid,type(exc).__name__)
 
+ print(f"Daily provider observation budget: {DAILY_OBSERVATION_LIMIT}; eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
  if count:
   result=finish_snapshot(old,cache,count,NOW)
   temporary=PATH.with_suffix('.tmp')

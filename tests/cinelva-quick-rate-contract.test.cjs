@@ -9,7 +9,7 @@ function setup(existing=[]){
   if(!nodes.has(id))nodes.set(id,{id,value:'',textContent:'',onclick:null});
   return nodes.get(id);
  };
- const dialog={open:false,innerHTML:'',className:'',querySelector:s=>element(s.slice(1)),showModal(){this.open=true},close(){this.open=false}};
+ const dialog={open:false,innerHTML:'',className:'',querySelector:s=>element(s.slice(1)),show(){this.open=true},showModal(){this.open=true},close(){this.open=false}};
  const document={
   head:{append(){}},body:{append(){}},
   querySelector(){return null},
@@ -41,7 +41,7 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
  assert.equal(writes[0][0].comment,'また観たい');
  assert.equal(writes[0][1],4.5);
  assert.equal(writes[0][2],'2026-10');
- assert.equal(dialog.open,false);
+ assert.equal(dialog.open,true);
 });
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};
@@ -50,10 +50,10 @@ test('invalid date does not persist and existing zero rating remains zero',()=>{
  assert.equal(element('cinelvaRateScore').value,0);
  assert.equal(element('cinelvaRatePlace').value,'配信');
  assert.equal(element('cinelvaRateComment').value,'短評');
- element('cinelvaRateDate').value='2026-99-99';
- // The record engine remains the final validation authority for dates.
+ element('cinelvaRateDate').value='not-a-date';
  element('cinelvaRateSave').onclick();
- assert.equal(writes.length,1);
+ assert.equal(writes.length,0);
+ assert.match(element('cinelvaRateMessage').textContent,/YYYY/);
 });
 test('all three existing pages load the shared inline rating workflow',()=>{
  for(const name of ['index.html','rankings.html','search.html']){

@@ -77,6 +77,16 @@ async function freePort() {
         for (const route of routes) {
           const response = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
           assert.ok(response && response.ok(), `${route} responds successfully at ${width}px in ${theme} mode`);
+          // A legacy route may replace its URL during document load. Wait for the
+          // concierge destination rather than sampling the outgoing document.
+          if (route === 'cinelva/agent.html') {
+            await page.waitForURL(url =>
+              url.pathname.endsWith('/cinelva/discover.html') &&
+              url.searchParams.get('mode') === 'concierge',
+              { timeout: 15000 }
+            );
+            await page.waitForLoadState('domcontentloaded');
+          }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
           await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);
           const state = await page.evaluate(() => ({
@@ -95,6 +105,7 @@ async function freePort() {
             viewport: { width, height: 844 },
             theme,
             http_status: response.status(),
+            resolved_url: page.url().replace(base, ''),
             ...state
           });
           checked++;

@@ -10,6 +10,7 @@ on:
       - "tests/cinelva-insights.test.cjs"
       - "tests/cinelva-library-records.test.cjs"
       - "tests/cinelva-my-page-*.cjs"
+      - "tests/cinelva-boxoffice-poster-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
       - "tests/test_my_cinemap_three_column_export.py"
@@ -45,6 +46,7 @@ on:
       - "tests/cinelva-insights.test.cjs"
       - "tests/cinelva-library-records.test.cjs"
       - "tests/cinelva-my-page-*.cjs"
+      - "tests/cinelva-boxoffice-poster-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
       - "tests/test_my_cinemap_three_column_export.py"
@@ -128,6 +130,7 @@ jobs:
           "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources
@@ -140,3 +143,7 @@ jobs:
         run: python scripts/check_critic_map.py
       - name: Check critic evidence thresholds and sources
         run: node scripts/check_critic_evidence.js
+      - name: Reject stale cinema showtimes
+        run: |
+          node --check js/cinelva-theater-schedule.js
+          node --test tests/cinelva-theater-schedule.test.cjs

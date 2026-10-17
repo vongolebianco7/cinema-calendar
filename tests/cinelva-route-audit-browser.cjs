@@ -78,6 +78,7 @@ async function freePort() {
           const response = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
           assert.ok(response && response.ok(), `${route} responds successfully at ${width}px in ${theme} mode`);
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
+          await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);
           const state = await page.evaluate(() => ({
             title: document.title.trim(),
             textLength: document.querySelector('main')?.textContent.trim().length || 0,

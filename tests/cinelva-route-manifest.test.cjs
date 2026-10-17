@@ -24,6 +24,7 @@ test('browser route audit preserves machine-readable evidence in CI', () => {
   assert.match(browserAudit, /JSON\.stringify\(report/);
   assert.match(browserAudit, /CINELVA_BROWSER/);
   assert.match(browserAudit, /report-\$\{browserName\}\.json/);
+  assert.match(browserAudit, /waitForFunction\([^\n]*querySelector\('main'\)/);
   assert.match(workflow, /name: cinelva-route-audit/);
   assert.match(workflow, /path: artifacts\/route-audit\//);
   assert.match(workflow, /if: always\(\)/);

@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T17:25:00+09:00",
+  "updated_at": "2026-10-17T17:32:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "2dcd76bc46cf3ecc5e0810834f064baa6f7eab20",
   "branch": "work/route-audit-evidence",
-  "head_sha": "cc5200f3a6103de21cb9128f277ec6a2f2abfe0f",
+  "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6",
   "pull_request": {
     "number": 257,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257",
     "status": "open",
-    "head_sha": "cc5200f3a6103de21cb9128f277ec6a2f2abfe0f"
+    "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6"
   },
   "work_items": [
     {
@@ -65,7 +65,7 @@
       "title": "Preserve per-route browser audit evidence",
       "status": "pr_created",
       "issue": 243,
-      "pull_request": {"number": 257, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257", "branch": "work/route-audit-evidence", "head_sha": "cc5200f3a6103de21cb9128f277ec6a2f2abfe0f"},
+      "pull_request": {"number": 257, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257", "branch": "work/route-audit-evidence", "head_sha": "8d74856ccaa502c9ab228870eec0cfe89873f4c6"},
       "acceptance": "Validate frontend publishes a machine-readable report for each route, viewport and theme, including partial evidence when the audit fails.",
       "ci": "Local route contract tests 3/3 and the shared deterministic quality gate passed; Actions are running."
     },
@@ -384,7 +384,7 @@
     {
       "command": "PR #257 route audit evidence",
       "result": "passed_locally_actions_running",
-      "details": "Contract tests first failed without artifact and WebKit support, then passed 3/3 after implementation. python scripts/quality_gate.py and workflow YAML parsing passed. Validate frontend will upload Chromium and WebKit reports for 14 days and preserve partial results on audit failure."
+      "details": "Contract tests first failed without artifact and WebKit support, then passed 3/3 after implementation. Run 39017468031 proved Chromium 116/116 but exposed a WebKit timing defect on cinelva/agent.html: asynchronous main content was sampled at DOMContentLoaded. The audit now waits for meaningful main content; the shared quality gate passes and a refreshed Actions run is pending. Artifact 12095507026 preserved both the passing Chromium report and partial WebKit failure report."
     }
   ],
   "deployment": {

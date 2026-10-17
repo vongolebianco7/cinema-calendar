@@ -133,7 +133,9 @@ jobs:
       - name: Check approved data sources
         run: python scripts/check_sources.py
       - name: Check discovery UI integrations
-        run: python scripts/check_discovery_ui.py
+        run: |
+          python scripts/check_discovery_ui.py
+          node --test tests/cinelva-discovery-offer-order.test.cjs
       - name: Check discovery shelf count and expansion
         run: node --test tests/cinelva-discovery-shelf.test.cjs
       - name: Check Cinemap core journey
@@ -142,3 +144,7 @@ jobs:
         run: python scripts/check_critic_map.py
       - name: Check critic evidence thresholds and sources
         run: node scripts/check_critic_evidence.js
+      - name: Reject stale cinema showtimes
+        run: |
+          node --check js/cinelva-theater-schedule.js
+          node --test tests/cinelva-theater-schedule.test.cjs

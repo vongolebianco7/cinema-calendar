@@ -146,3 +146,13 @@ test('award heatmap respects deliberately unwatched stored films', () => {
   assert.equal(cell.count,0);
   assert.equal(cell.entries[0].watched,false);
 });
+
+test('ISO alpha-2 production country codes share known plot latitude with named countries', () => {
+  for (const [code,name] of [['US','United States'],['GB','United Kingdom'],['FR','France'],['DE','Germany'],['KR','South Korea'],['JP','日本'],['AU','Australia']]) {
+    const byCode=Insights.pointForRecord({id:code,countries:[code],genres:['SF']});
+    const byName=Insights.pointForRecord({id:name,countries:[name],genres:['SF']});
+    assert.equal(byCode.latitude,byName.latitude,code);
+    assert.equal(byCode.coordinates.y,byName.coordinates.y,code);
+  }
+  assert.equal(Insights.pointForRecord({id:'unknown',countries:['ZZ']}).latitude,null);
+});

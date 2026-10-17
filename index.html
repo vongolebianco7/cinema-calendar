@@ -767,7 +767,7 @@ function openMovie(m){
  let streams=all.filter(x=>x.event==="streaming"&&x.service!=="劇場公開").sort((a,b)=>a.date.localeCompare(b.date));
  let tvs=all.filter(x=>x.event==="tv").sort((a,b)=>a.date.localeCompare(b.date));
  let todayIso=new Date().toLocaleDateString("sv-SE"),tvUpcoming=tvs.filter(x=>x.date>=todayIso),tvPast=tvs.filter(x=>x.date<todayIso);
- let av=(m.availability?{...m.availability,checked_at:m.availability.checked_at||new Date().toISOString()}:null)||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
+ let av=(m.availability?{...m.availability}:null)||(m.catalog?null:(m.id&&(availabilitySnapshot.movies||{})[String(m.id)]));
  const freshAvailability=av&&CinelvaDataQuality.availabilityIsFresh(av);let flat=freshAvailability?(av.flatrate||av.services||[]):[],rent=freshAvailability?(av.rent||[]):[],buy=freshAvailability?(av.buy||[]):[];
  let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:(m.director_works||[]);
  let peopleIntro='<section class="detailSection info"><h3>監督・出演者</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+cinelvaCastLinks(m.cast.slice(0,8)):'')+'</div></section>';

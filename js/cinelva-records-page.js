@@ -190,21 +190,21 @@
     const html = selected.map(name => {
       const entry = Object.values(state.directors).find(director => normalizeName(director.name) === normalizeName(name));
       const works = Array.isArray(entry?.works) ? entry.works.filter(work => Number(work.year)) : [];
-      const watched = new Set(recordMovies().map(record => String(record.id)));
+      const matchedRecord = work => Insights.directorViewingRecord(state.records, work);
       if (!works.length) return `<div class="panel"><h3>${escapeHTML(name)}</h3><p class="hint">収録済みフィルモグラフィーがありません。鑑賞済み作品のみ表示します。</p>${recordMovies().filter(record => enriched(record).director === name).map(enriched).map(card).join('')}</div>`;
       const min = Math.min(...works.map(work => Number(work.year))), max = Math.max(...works.map(work => Number(work.year))), span = Math.max(1, max - min);
       const sorted = works.slice().sort((a,b) => Number(a.year) - Number(b.year));
       const awardIds=new Set(state.awards.map(item=>String(item.tmdb_id||'')));
       const width=Math.max(700,sorted.length*90), lanes=[];
-      const nodes=sorted.map(work=>{const x=30+(Number(work.year)-min)/span*(width-60),seen=watched.has(String(work.id)),awarded=awardIds.has(String(work.id)),highRated=Number(work.votes)>=100&&Number(work.score)>=7.5;let lane=lanes.findIndex(last=>x-last>110);if(lane<0)lane=lanes.length;lanes[lane]=x;return `<button class="timeline-node ${seen?'':'unwatched'} ${awarded?'awarded':''} ${highRated?'high-rated':''}" style="left:${x}px;top:${32+lane*80}px" data-director-film="${escapeHTML(work.id)}" aria-label="${escapeHTML(work.title)} · ${work.year}${seen?' · 鑑賞済み':' · 未鑑賞'}${awarded?' · 受賞記録あり':''}${highRated?' · TMDB高評価':''}" title="${escapeHTML(work.title)} · ${work.year}${awarded?' · 受賞記録あり':''}"><span>${escapeHTML(work.title)}${awarded?' ★':''}</span></button>`;}).join('');
+      const nodes=sorted.map(work=>{const x=30+(Number(work.year)-min)/span*(width-60),seen=Boolean(matchedRecord(work)),awarded=awardIds.has(String(work.id)),highRated=Number(work.votes)>=100&&Number(work.score)>=7.5;let lane=lanes.findIndex(last=>x-last>110);if(lane<0)lane=lanes.length;lanes[lane]=x;return `<button class="timeline-node ${seen?'':'unwatched'} ${awarded?'awarded':''} ${highRated?'high-rated':''}" style="left:${x}px;top:${32+lane*80}px" data-director-film="${escapeHTML(work.id)}" aria-label="${escapeHTML(work.title)} · ${work.year}${seen?' · 鑑賞済み':' · 未鑑賞'}${awarded?' · 受賞記録あり':''}${highRated?' · TMDB高評価':''}" title="${escapeHTML(work.title)} · ${work.year}${awarded?' · 受賞記録あり':''}"><span>${escapeHTML(work.title)}${awarded?' ★':''}</span></button>`;}).join('');
       const years = [...new Set([min, Math.round((min+max)/2), max])].map(year => `<span class="timeline-year" style="left:${30+(year-min)/span*(width-60)}px;top:0">${year}</span>`).join('');
-      return `<div class="panel"><div class="section-head"><h3>${escapeHTML(name)}</h3><span class="hint">一覧 ${works.length}作品 · 鑑賞済み ${sorted.filter(work => watched.has(String(work.id))).length}作品</span></div><div class="timeline"><div class="timeline-row" style="width:${width}px;height:${Math.max(150,lanes.length*80+80)}px">${nodes}${years}</div></div><p class="hint">収録済み作品一覧に基づく表示です。全フィルモグラフィーの網羅性は保証されないため達成率を表示しません。金色の縁は収録された受賞作品、外枠はTMDB評価7.5以上・100票以上です。</p></div>`;
+      return `<div class="panel"><div class="section-head"><h3>${escapeHTML(name)}</h3><span class="hint">一覧 ${works.length}作品 · 鑑賞済み ${sorted.filter(work => matchedRecord(work)).length}作品</span></div><div class="timeline"><div class="timeline-row" style="width:${width}px;height:${Math.max(150,lanes.length*80+80)}px">${nodes}${years}</div></div><p class="hint">収録済み作品一覧に基づく表示です。全フィルモグラフィーの網羅性は保証されないため達成率を表示しません。金色の縁は収録された受賞作品、外枠はTMDB評価7.5以上・100票以上です。</p></div>`;
     }).join('');
     $('directorTimeline').innerHTML = html || '<div class="empty">鑑賞記録から監督を特定できませんでした。</div>';
     if (selected.length === 1) {
       const entry = Object.values(state.directors).find(director => normalizeName(director.name) === normalizeName(selected[0]));
-      const watched = new Set(recordMovies().map(record => String(record.id)));
-      $('directorWorks').innerHTML = (entry?.works || []).filter(work => watched.has(String(work.id))).map(work => ({ ...work, id: work.id, rating: recordMovies().find(record => String(record.id) === String(work.id))?.rating, watchedAt: recordMovies().find(record => String(record.id) === String(work.id))?.watchedAt })).map(card).join('');
+      const matchedRecord = work => Insights.directorViewingRecord(state.records, work);
+      $('directorWorks').innerHTML = (entry?.works || []).map(work => ({ work, record: matchedRecord(work) })).filter(item => item.record).map(({work,record}) => ({...work,...record,id:record.id,title:record.title||work.title,year:record.year||work.year})).map(card).join('');
     } else $('directorWorks').replaceChildren();
   }
   function resizeCanvas(canvas) { const rect = canvas.getBoundingClientRect(), dpr = Math.min(2, globalThis.devicePixelRatio || 1); canvas.width = Math.max(1, Math.round(rect.width * dpr)); canvas.height = Math.max(1, Math.round(rect.height * dpr)); const context = canvas.getContext('2d'); context.scale(dpr, dpr); return { context, width: rect.width, height: rect.height }; }
@@ -309,7 +309,7 @@
     window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});
     window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
   }
-  function openKnownMovie(id){const existing=state.records.find(item=>String(item.id)===String(id)),movie=byId.get(String(id));if(existing)openDialog(existing);else if(movie){openDialog({...movie,id:String(id),watchedAt:null,rating:null});$('dialogTitle').textContent='鑑賞を記録';$('deleteRecord').hidden=true;}else notify('この作品の情報が未収録です。作品検索から追加してください。');}
+  function openKnownMovie(id){const existing=Insights.directorViewingRecord(state.records,{id}),movie=byId.get(String(id));if(existing)openDialog(existing);else if(movie){openDialog({...movie,id:String(id),watchedAt:null,rating:null});$('dialogTitle').textContent='鑑賞を記録';$('deleteRecord').hidden=true;}else notify('この作品の情報が未収録です。作品検索から追加してください。');}
   async function init() {
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};

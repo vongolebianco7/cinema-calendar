@@ -29,7 +29,7 @@
     isTrueStoryCandidate(movie) {
       const text=[movie?.title,movie?.original_title,movie?.originalTitle,movie?.overview].filter(Boolean).join(" ").toLowerCase();
       const tags=[...(Array.isArray(movie?.genres)?movie.genres:[]),...(Array.isArray(movie?.keywords)?movie.keywords:[])].map(x=>String(typeof x==="string"?x:x?.name||"").toLowerCase());
-      const positive=/実話に基づ|実話を基に|実際の事件|実際の出来事|実在の人物|実録|伝記|based on (a )?true story|based on (true|real|actual) events|based on real (people|life)|biograph|true account/i;
+      const positive=/実話に基づ|実話を(?:基|もと)に|実際の事件|実際の出来事|実在の人物|実録|伝記|based on (a )?true story|based on (true|real|actual) events|based on real (people|life)|biograph|true account/i;
       const negative=/実話ではない|実話ではありません|架空の物語|フィクションです|not based on (a )?true story|fictional story/i;
       if(negative.test(text))return false;
       if(positive.test(text))return true;

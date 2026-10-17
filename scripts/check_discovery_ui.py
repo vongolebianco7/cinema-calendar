@@ -46,7 +46,9 @@ for required in [
     'id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap",
     "scroll-snap-type:x proximity", 'class="presetCard"',
     'id="conditionResults"', '#grid .card',
-    'id="theatricalPopularGrid"', 'id="streamingPopularGrid"',
+    'id="theatricalPopularGrid"', 'id="catalogPopularGrid"',
+    'data-availability="all"', 'data-availability="available"',
+    'data-availability="unknown"', 'currentCatalogList',
     'loadPopularShelves', 'loadPopularShelves',
     'data/theatrical.json', 'data/streaming.json'
 ]:

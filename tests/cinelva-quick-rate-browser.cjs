@@ -48,6 +48,7 @@ async function port(){
   assert.equal(first[0].viewingMethod,'映画館');
   assert.equal(first[0].comment,'初回鑑賞。よかった。');
   assert.equal(first[0].watchedAt,'2026-10');
+  assert.match(await page.locator('#grid .cinelva-rate-saved').first().innerText(),/採点済み ★ 4\.5/);
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true,'rating panel stays available for continuous rating');
   await page.locator('.gSearch').fill('映画テスト');
   await page.locator('.gSearchForm').evaluate(form=>form.requestSubmit());
@@ -65,11 +66,13 @@ async function port(){
   assert.equal(rows.length,2);
   assert.equal(rows.find(r=>r.id==='222').rating,0);
   assert.equal(rows.find(r=>r.id==='222').comment,'気軽に採点。');
+  assert.match(await page.locator('#grid .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\.0/);
   await page.reload({waitUntil:'domcontentloaded'});
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'気軽に採点。');
   assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');
+  assert.match(await page.locator('#grid .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\.0/);
   assert.deepEqual(errors,[],'no uncaught browser errors');
   console.log((process.env.CINELVA_BROWSER||'chromium')+' existing-page quick rating, search variants and persistence passed');
  }finally{if(browser)await browser.close();server.kill();}

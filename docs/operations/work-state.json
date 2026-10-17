@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:12:18+09:00",
+  "updated_at": "2026-10-17T12:21:09+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "be1913cae96718de967f9c4ff12afe76db7f2837",
+  "head_sha": "99a0f78f1745d18522d9d3fd41b3dcfca98b13fe",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "be1913cae96718de967f9c4ff12afe76db7f2837"
+    "head_sha": "99a0f78f1745d18522d9d3fd41b3dcfca98b13fe"
   },
   "work_items": [
     {
@@ -103,22 +103,38 @@
         "number": 251,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
         "branch": "fix/cinelva-record-entry-route",
-        "head_sha": "39239f0dcc6dfdea66a17cf0614f816d800867c1"
+        "head_sha": "feb0ab43e2df48191b3ac63a0934cbf52577efea"
       },
-      "acceptance": "From the branded root and nested noindex preview, movie detail passes selected ID/title to the existing My CINELVA form; no duplicate storage logic or key."
+      "acceptance": "From the branded root and nested noindex preview, movie detail passes selected ID/title to the existing My CINELVA form; no duplicate storage logic or key.",
+      "ci": "Validate frontend, autonomous quality gate, smoke, brand, backup-safety, and completeness scorecard passed. Offline detail-to-record browser flow passed at 390px."
     },
     {
       "id": "P0-242-POSTERS",
       "title": "Keep missing box-office posters visibly safe",
-      "status": "pr_created",
+      "status": "in_progress",
       "issue": 242,
       "pull_request": {
         "number": 252,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/252",
         "branch": "fix/cinelva-boxoffice-poster-fallback",
-        "head_sha": "947dc168cb68234d833f02e5dff1344026bc2c01"
+        "head_sha": "acb6629afec46c6d92484c6ade260c50ab3aaaa3"
       },
-      "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px."
+      "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px.",
+      "ci": "Browser regression updated to walk all 100 all-time rows at 390px and 1280px, block both external image/API hosts, and confirm title + fallback without broken icons. Latest Actions are running; earlier attempt caught an over-broad assertion, which was narrowed to the selected card."
+    },
+    {
+      "id": "P0-242-BRAND",
+      "title": "Restore the approved mark on backup routes",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": {
+        "number": 253,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
+        "branch": "fix/cinelva-backup-brand-header",
+        "head_sha": "2e5a9af0524290e722fbd5215ee536f80351feb9"
+      },
+      "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
+      "ci": "Validate frontend, brand identity, smoke, backup safety, isolated Pages stage, and autonomous quality gate passed; Completeness scorecard is pending."
     }
   ],
   "verification": [
@@ -129,8 +145,8 @@
     },
     {
       "command": "python -m unittest discover -s tests",
-      "result": "failed_baseline_8_failures_8_import_errors",
-      "details": "100 tests ran on base 71b31626: 8 assertion failures and 8 import errors. Assertion failures: test_boxoffice_country_bucket_reads_all_country_shapes, test_boxoffice_regions_are_single_level, test_official_foreign_rows_never_disappear, test_live_candidates_require_explicit_selection_before_recommendations, test_reasons_are_only_shown_with_concrete_evidence, test_reason_toggle_and_tab_link_are_separate, test_tappable_rows_have_visible_affordance, test_dolby_atmos_heading_and_links_include_dolby_cinema. Import errors: test_my_cinemap_art_direction_cache_bust, test_my_cinemap_cache_refresh, test_my_cinemap_editor_export_decoupling, test_my_cinemap_editor_fixed_two_column, test_my_cinemap_exact_cinema_templates, test_my_cinemap_mobile_two_column, test_my_cinemap_selection_layout_final, test_official_theater_links_only. Not yet product-classified; box-office assertions appear to disagree about the expected region model."
+      "result": "failed_stale_string_contracts_classified",
+      "details": "Latest local discovery run: 98 tests, 8 assertion failures and 8 import-time assertion errors (these are not missing-dependency imports). The failures assert old box-office country chips or prior experience.html IDs/copy, while current product behavior uses domestic/foreign buckets, explicit candidate selection, evidence-only reasons, semantic buttons, and updated Dolby wording. The 8 error modules are seven My CINELVA legacy CSS/renderer string checks plus one old official-theater renderer marker; they fail assertions during import. Full suite remains red and was not counted as passing."
     },
     {
       "command": "python scripts/check_work_state.py && python -m unittest tests.test_work_state && git diff --check",
@@ -221,6 +237,16 @@
       "command": "PR #252 poster fallback implementation",
       "result": "pr_created_actions_running",
       "details": "Added a visible image-missing placeholder and browser regression that blocks the application movie API and TMDB image host at 390px/1280px. Local inline syntax and test syntax passed; local Playwright is unavailable, so browser execution is delegated to the existing Validate frontend Actions job. No poster source or data was changed."
+    },
+    {
+      "command": "Brand audit and PR #253",
+      "result": "validation_passed_scorecard_pending",
+      "details": "Static visible-copy scan found no Cinemap/CINEMAP in page text, title, alt, aria-label, or title attributes across 29 non-Ocean HTML pages. Root and nested backup pages were the only root/nested HTML routes without the approved square symbol; PR #253 adds it and brand tests pass in Validate frontend, backup safety, isolated Pages stage, smoke, and autonomous quality gate. Completeness scorecard is pending."
+    },
+    {
+      "command": "PR #252 box-office poster resolver regression",
+      "result": "all_time_browser_audit_running",
+      "details": "A real data-shape bug was found: ranking records are nested region/genre/era, while localBoxMovies only traversed one level and missed them. Recursive poster indexing raises exact local all-time title matches from 11/100 movies-only to 63/100. PR adds visible placeholder copy and a browser audit for all 100 rows at 390px and 1280px with image/API hosts blocked. Latest Actions on head acb6629 are running; previous failed attempts are recorded in PR history."
     }
   ],
   "deployment": {
@@ -241,6 +267,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Refresh PR #246 Completeness scorecard and PR #252 Validate frontend, then review browser results. Continue #242 full route verification of record-entry actions and remaining brand/palette surfaces. Do not deploy until the Vercel build-rate-limit clears.",
+  "next_action": "Refresh PR #252 all-time poster browser and full checks, then PR #253 Completeness scorecard. Continue #242 coverage of remaining brand/modal/share surfaces and route-level record entry. Keep production deployment locked until a fresh Vercel status no longer reports build-rate-limit.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

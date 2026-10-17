@@ -26,9 +26,12 @@ async function navigate(path){
 for(const path of candidates){
  console.log(`${browserName}: checking ${path}`);
  const res=await navigate(path);
+ console.log(`${browserName}: navigated ${path} HTTP ${res?.status()}`);
  if(!res||res.status()>=400){if(path==='index.html')errors.push(`${path}: HTTP ${res?.status()??'no response'}`);continue}
  if(path==='index.html')await page.waitForLoadState('networkidle',{timeout:5000}).catch(()=>console.warn('Index remained network-active; proceeding with DOM-ready smoke checks'));
  await page.waitForTimeout(250);
+ console.log(`${browserName}: DOM ready ${path}`);
+ console.log(`${browserName}: measuring overflow ${path}`);
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
  const safeName=path.replace(/\.html$/,'').replaceAll('/','-');
@@ -38,6 +41,7 @@ for(const path of candidates){
  const docHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
  const fullPage=docHeight*3<=30000;
  if(!fullPage)console.warn(`${browserName} ${path}: document ${docHeight}px is too tall for a full-page screenshot at DPR 3; preserving viewport evidence`);
+ console.log(`${browserName}: capturing ${path}`);
  await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage,timeout:20000,animations:'disabled'});
 }
 await browser.close();

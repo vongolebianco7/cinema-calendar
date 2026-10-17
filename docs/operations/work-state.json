@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:02:00+09:00",
+  "updated_at": "2026-10-17T14:03:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "326ba2c6f3c9574f1425f82dcf04259f51882a2a",
+  "head_sha": "e714a7c6c20b26a2cf5ecea981e24863d51c5920",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "326ba2c6f3c9574f1425f82dcf04259f51882a2a"
+    "head_sha": "e714a7c6c20b26a2cf5ecea981e24863d51c5920"
   },
   "work_items": [
     {
@@ -40,7 +40,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "PR #253 latest head 6ac60fc043889d2e7c1a891348046a6e100ef38a passed all eight GitHub Actions checks: frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages stage, Completeness scorecard, and scoped Ocean probe. The stale accessible-name selector in the isolated Pages browser test was updated; the rerun passed. Vercel remains quota-blocked; no deploy attempted."
+      "ci": "PR #253 head b32e60d74f4377d2a8e6e594dd7c318960a088fe adds an offline browser regression for malformed My CINELVA saved-list JSON and catches storage/JSON parse failure with a recovery message while preserving the raw value. Smoke and brand identity checks passed; full browser/scorecard Actions are still running. All 37 main-branch HTML pages were scanned: no production-page links to preview/ocean found; remaining Ocean mentions are retired preview pages, generic movie-discovery keyword scoring, and backup migration copy currently removed on #253."
     },
     {
       "id": "P0-244",
@@ -359,6 +359,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Immediately continue the #242 interactive error/empty-state audit. Cover offline, no-record, malformed-backup/data, quota/storage-write failure and recovery paths; implement a deterministic regression for the next confirmed P0. Then proceed to full P0-02 Ocean retirement while preserving localStorage and backup compatibility. Do not wait for a later scheduled run after finishing a task.",
+  "next_action": "Wait for the already-started PR #253 checks for head b32e60d74f4377d2a8e6e594dd7c318960a088fe; diagnose any failure immediately. Then record the result and start P0-02 retirement inventory/implementation for the unlinked preview/ocean surface (477 paths including 8 HTML entry points) and 11 Ocean-only workflows; classify docs/tests before deletion and preserve legacy localStorage and backup keys.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

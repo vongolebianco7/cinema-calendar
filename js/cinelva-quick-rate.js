@@ -111,8 +111,8 @@ enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings
 // another listing page or alter the original calendar click-to-detail action.
 function enhanceCalendar(grid){
  if(!grid)return;
- const decorate=()=>{
-  for(const card of grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]')){
+ const decorate=(cards=grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]'))=>{
+  for(const card of cards){
    if(card.querySelector('.cinelva-rate-button'))continue;
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
    rate.setAttribute('aria-label','この映画をレビュー');
@@ -130,8 +130,13 @@ function enhanceCalendar(grid){
  // Calendar renders large batches. Ignore mutations created by our own rating controls;
  // otherwise subtree observation repeatedly scans the entire calendar and can lock the UI.
  const observer=new MutationObserver(records=>{
-  const newCards=records.some(record=>[...record.addedNodes].some(node=>node.nodeType===1 && (node.matches?.('.streamMovie[data-mi],.tvMovie[data-mi]') || node.querySelector?.('.streamMovie[data-mi],.tvMovie[data-mi]'))));
-  if(newCards)decorate();
+  const newCards=[];
+  for(const record of records)for(const node of record.addedNodes){
+   if(node.nodeType!==1)continue;
+   if(node.matches?.('.streamMovie[data-mi],.tvMovie[data-mi]'))newCards.push(node);
+   node.querySelectorAll?.('.streamMovie[data-mi],.tvMovie[data-mi]').forEach(card=>newCards.push(card));
+  }
+  if(newCards.length)decorate(newCards);
  });
  observer.observe(grid,{childList:true,subtree:true});
  decorate();

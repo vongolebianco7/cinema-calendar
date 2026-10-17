@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:08:00+09:00",
+  "updated_at": "2026-10-17T11:51:25+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "a96e8a69ffb6cebf9d54d8f48e13a53a2823210c",
+  "head_sha": "fdfb463d10892da4bf7815f063b2c4dd3082c52d",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "a96e8a69ffb6cebf9d54d8f48e13a53a2823210c"
+    "head_sha": "fdfb463d10892da4bf7815f063b2c4dd3082c52d"
   },
   "work_items": [
     {
@@ -37,7 +37,7 @@
     {
       "id": "P0-AUDIT",
       "title": "Audit and fix confirmed production blockers",
-      "status": "planned",
+      "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check."
     },
@@ -53,6 +53,19 @@
         "head_sha": "b0f0bbce33ca0c89eecb61afeb57095a045c345f"
       },
       "acceptance": "Only schedules generated within 24 hours and dated today or later are shown; stale or invalid data shows an explicit notice and official theater link."
+    },
+    {
+      "id": "P0-242-WOWOW",
+      "title": "Remove unsupported top placement of WOWOW listings",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": {
+        "number": 248,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/248",
+        "branch": "fix/cinelva-discovery-offer-order",
+        "head_sha": "1039df212855aeef81b111ebb6166fb7bedea31c"
+      },
+      "acceptance": "The curated official listing module follows the general theater, streaming, and catalog discovery shelves; a CI regression protects this order."
     }
   ],
   "verification": [
@@ -85,6 +98,11 @@
       "command": "PR #247 local verification",
       "result": "passed_locally_actions_pending",
       "details": "3 Node regression tests for fresh/stale/future-dated schedule filtering passed; python scripts/quality_gate.py, YAML parse, and git diff --check passed. PR head b0f0bbce; remote Actions not yet fully complete."
+    },
+    {
+      "command": "PR #248 local implementation and Actions",
+      "result": "actions_pending",
+      "details": "Confirmed discover.html mounted the official-offer shelf immediately after the hero and before all general discovery shelves. Moved it after the theater/streaming/catalog shelves; added tests/cinelva-discovery-offer-order.test.cjs and wired it into validate-frontend.yml. PR head 1039df21."
     }
   ],
   "deployment": {
@@ -101,5 +119,6 @@
   "blockers": [
     "Vercel project-specific usage and restriction reset status were not available from the connected read-only Vercel API."
   ],
-  "next_action": "Refresh PR #246/#247 Actions; resolve/check whether #246 scorecard metric artifacts are missing because producer jobs were canceled; triage the 8+8 baseline Python failures; continue Issue #242 P0 audit, then update this checkpoint and Issue #239 before stopping. Deploy once only after provider restriction is independently confirmed clear."
+  "next_action": "Refresh checks for PRs #246, #247 and #248; diagnose #246 scorecard's missing metric artifacts and classify the 8+8 baseline Python failures; continue #242 across all eight acceptance areas, fixing reproducible P0s with regression tests. Checkpoint again within 30–60 minutes and add an approximately 2-hour summary to #239.",
+  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

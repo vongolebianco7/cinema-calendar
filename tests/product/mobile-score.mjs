@@ -49,7 +49,10 @@ for (const [area, path] of pages) {
   const loaded = Boolean(response && response.status() < 400 && !navigationError);
   const clean = errors.length === 0 && !navigationError;
   observations.set(area,{loaded,clean,overflow:overflow.pass,status:response?.status?.(),errors,overflowPx:overflow.overflow});
-  if (!navigationError) await page.screenshot({path:screenshotPath(area,browserName),fullPage:true});
+  if (!navigationError) {
+    const height=await page.evaluate(()=>document.documentElement.scrollHeight);
+    await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000});
+  }
   await page.close();
 }
 

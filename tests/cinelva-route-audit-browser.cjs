@@ -28,6 +28,7 @@ async function freePort() {
   const server = spawn('python', ['-m', 'http.server', String(port), '--bind', '127.0.0.1'], { cwd: root, stdio: 'ignore' });
   let browser;
   const pageErrors = [];
+  const localAssetFailures = [];
   try {
     await new Promise((resolve, reject) => {
       const deadline = Date.now() + 10000;
@@ -52,6 +53,11 @@ async function freePort() {
         await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
         const page = await context.newPage();
         page.on('pageerror', error => pageErrors.push(`${width}px ${theme} ${page.url()}: ${error.message}`));
+        page.on('response', response => {
+          const request = response.request();
+          const localAsset = response.url().startsWith(`${base}/`) && ['document', 'script', 'stylesheet', 'image', 'font'].includes(request.resourceType());
+          if (localAsset && response.status() >= 400) localAssetFailures.push(`${width}px ${theme} ${response.status()} ${response.url()}`);
+        });
 
         for (const route of routes) {
           const response = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
@@ -73,7 +79,8 @@ async function freePort() {
       }
     }
     assert.deepEqual(pageErrors, [], 'routes load without uncaught browser JavaScript exceptions');
-    console.log(`CINELVA route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors.`);
+    assert.deepEqual(localAssetFailures, [], 'routes load without missing local documents, scripts, stylesheets, images, or fonts');
+    console.log(`CINELVA route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

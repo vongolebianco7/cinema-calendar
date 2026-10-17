@@ -36,7 +36,7 @@ function open(movie) {
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
  $('cinelvaRateVenue').value=existing?.viewingVenue||'';
  $('cinelvaRateVenueRow').hidden=!$('cinelvaRatePlace').value;
- $('cinelvaRateDate').value=existing?.watchedAt||'';
+ $('cinelvaRateDate').value=/^\\d{4}-\\d{2}-\\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:'';
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
  if(!dialog.open)dialog.show();
@@ -45,7 +45,7 @@ function open(movie) {
 function save() {
  if(!selected)return;
  const date=$('cinelvaRateDate').value.trim()||null,comment=$('cinelvaRateComment').value.trim();
- if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='日付はYYYY、YYYY-MM、YYYY-MM-DDで入力してください';return;}
+ if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
   Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRateVenue').value.trim()},Number($('cinelvaRateScore').value),date);
   $('cinelvaRateMessage').textContent='保存しました。別の作品を選んで続けて評価できます。';
@@ -89,7 +89,8 @@ function enhanceGrid(grid,kind){
     if(!open(movie))rate.textContent='作品IDを確認できません';
    };
    wrap.append(rate);
-   const u=new URL(card.href,location.href);attachInlineScore(rate,kind==='rankings'?{id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent}:root.CinelvaRatingResolve?.(card.dataset.i,kind));
+   const movie=kind==='rankings'?(()=>{const u=new URL(card.href,location.href);return {id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};})():root.CinelvaRatingResolve?.(card.dataset.i,kind);
+   attachInlineScore(rate,movie);
   }
  };
  const observer=new MutationObserver(decorate);
@@ -135,14 +136,20 @@ function attachInlineScore(button, movie) {
  const existing=Records.all().find(r=>String(r.id)===String(id));
  const wrap=document.createElement('span');wrap.className='cinelva-inline-score';
  const input=document.createElement('input');input.type='number';input.min='0';input.max='5';input.step='0.1';input.inputMode='decimal';
- input.value=Number(existing?.rating??0).toFixed(1);input.setAttribute('aria-label','一覧で点数を入力');
+ input.value=Number(existing?.rating??0).toFixed(1);input.dataset.movieId=String(id);input.setAttribute('aria-label','一覧で点数を入力');
  input.onclick=e=>e.stopPropagation();
- input.onchange=e=>{e.stopPropagation();const score=Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.round(score*10)!==score*10){input.value=Number(existing?.rating??0).toFixed(1);return;}
- try{Records.save({...movie,id:String(id),title:movie.title||movie.name||existing?.title||'作品'},score,existing?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ input.onkeydown=e=>e.stopPropagation();
+ input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.round(score*10)!==score*10){input.value=Number(existing?.rating??0).toFixed(1);return;}
+ try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  wrap.append(input);button.after(wrap);
 }
 function refreshRatingLabels(){
  const saved=Records.all();
+ for(const input of document.querySelectorAll('.cinelva-inline-score input')){
+  if(document.activeElement===input)continue;
+  const id=input.dataset.movieId;
+  if(id){const record=saved.find(r=>String(r.id)===id);input.value=Number(record?.rating??0).toFixed(1);}
+ }
  const byId=new Map();
  for(const record of saved){
   if(record.watched===false)continue;

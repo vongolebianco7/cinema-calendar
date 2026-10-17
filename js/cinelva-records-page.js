@@ -65,8 +65,8 @@
     renderRows('csGenres',sorted(genreCounts).slice(0,8),['#8fa9cb']);
     renderRows('csMethods',sorted(methodCounts),['#86a8ca','#c9ae78','#86948e','#b59cb7']);
     const countries=sorted(countryCounts),palette=['#85a8c5','#c9a4b9','#d1b581','#8db6a8','#a8a0ce','#ca9e83','#9aaab4','#c5b9a0'];
-    $('csCountries').innerHTML=countries.length?'<div class="cs-strip">'+countries.map(([,n],i)=>'<span style="flex:'+n+';background:'+palette[i%palette.length]+'"></span>').join('')+'</div>':'';
     renderRows('csCountries',countries.slice(0,10),palette);
+    $('csCountries').insertAdjacentHTML('afterbegin',countries.length?'<div class="cs-strip">'+countries.map(([,n],i)=>'<span style="flex:'+n+';background:'+palette[i%palette.length]+'"></span>').join('')+'</div>':'');
     const ds=[...decades].sort((a,b)=>a[0]-b[0]),dm=Math.max(1,...ds.map(x=>x[1]));
     $('csDecades').innerHTML=ds.length?'<div class="cs-decade">'+ds.map(([d,n])=>'<div class="cs-decade-item"><span>'+n+'</span><i style="height:'+Math.max(2,Math.round(n/dm*65))+'px"></i><span>'+d+'s</span></div>').join('')+'</div>':'<p class="cs-empty">公開年の情報がありません。</p>';
   }
@@ -145,7 +145,7 @@
     const records=recordMovies().map(enriched), dates=new Map();
     for(const r of records){const date=dateOf(r);if(/^\d{4}-\d{2}-\d{2}$/.test(date))dates.set(date,[...(dates.get(date)||[]),r]);}
     const sorted=[...dates.keys()].sort();
-    const latest=sorted.length?new Date(sorted[sorted.length-1]+'T12:00:00'):new Date();
+    const latest=new Date();
     const earliest=sorted.length?new Date(sorted[0]+'T12:00:00'):new Date(latest);
     const start=new Date(earliest);start.setDate(start.getDate()-start.getDay());
     const end=new Date(latest);end.setDate(end.getDate()+(6-end.getDay()));
@@ -350,7 +350,7 @@
     $('annualComparison').onclick=event=>{const button=event.target.closest('[data-calendar-year]');if(button){state.year=Number(button.dataset.calendarYear);state.month=0;renderCalendar();}};
     $('calendarMode').onchange=renderCalendar;
     $('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};
-    $('yearHeatmap').onclick=event=>{const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;state.month=Number(date.slice(5,7))-1;renderCalendar();renderDateFilms(date);return;}const month=event.target.closest('[data-calendar-month]');if(month){state.month=Number(month.dataset.calendarMonth);renderCalendar();$('calendar').scrollIntoView({behavior:'smooth',block:'nearest'});}};
+    $('yearHeatmap').onclick=event=>{const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padStart(2,'0')+'-';const target=[...$('calendar').querySelectorAll('[data-date]')].find(el=>el.dataset.date.startsWith(prefix));target?.scrollIntoView({behavior:'smooth',block:'center'});}};
     $('genreMatrix').onclick=event=>{const button=event.target.closest('[data-genre],[data-genre-pair]');if(!button)return;if(button.dataset.genrePair){const [first,second]=button.dataset.genrePair.split('|');const rows=classifiedRecords().filter(record=>recordGenres(record).includes(first)&&recordGenres(record).includes(second));$('genreFilms').innerHTML=rows.length?rows.map(card).join(''):`<div class="empty" style="grid-column:1/-1">${escapeHTML(first)}と${escapeHTML(second)}の両方に分類された記録はありません。</div>`;return;}renderGenreFilms(button.dataset.genre);};
     $('awardMatrix').onclick=event=>{const button=event.target.closest('[data-award-cell]');if(!button)return;const [organization,decade]=button.dataset.awardCell.split('|');state.awardSelection={organization,decade:Number(decade)};renderAwards();};
     $('genreFormat').onchange=renderGenres; $('genreWorkForm').onchange=renderGenres; $('awardMode').onchange=renderAwards;

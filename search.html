@@ -145,7 +145,36 @@
  <a href="rankings.html">ランキング</a>
  <a href="theaters.html">映画館を探す</a>
  <a href="experience.html">上映方式</a>
- <a href="my-cinelva/">My Cinelva</a></aside><main class="wrap"><div class="hero"><h1>作品検索</h1><p>公開中の作品だけでなく、過去作品も検索できます。</p></div><div id="status" class="status"></div><div id="grid" class="grid"></div></main><div id="modal" class="modal"><div class="sheet"><button id="close" class="close">×</button><div id="detail"></div></div></div><script src="js/calendar-context.js"></script><script>const criticVideoCache=new Map(),API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),q=document.querySelector(".gSearch"),grid=document.getElementById("grid"),status=document.getElementById("status"),modal=document.getElementById("modal"),detail=document.getElementById("detail");let results=[];async function search(){let term=q.value.trim();if(!term)return;history.replaceState(null,"","search.html?search="+encodeURIComponent(term));status.textContent="「"+term+"」を検索中…";grid.innerHTML="";try{let r=await fetch(API+"/api/movies?q="+encodeURIComponent(term)+"&limit=20",{cache:"no-store"}),d=await r.json(),seen=new Set();results=[...(d.movies||[]),...(d.external||[])].filter(m=>{let k=String(m.tmdbId||m.id||m.title);if(seen.has(k))return false;seen.add(k);return true});status.textContent="「"+term+"」 "+results.length+"件";grid.innerHTML=results.map((m,i)=>'<button class="card" data-i="'+i+'" style="padding:0;text-align:left"><div class="poster">'+(m.poster?'<img src="'+E(m.poster)+'" loading="lazy">':'')+'</div><div class="body"><div class="title">'+E(m.title)+'</div><div class="meta">'+E(m.year||String(m.date||"").slice(0,4))+'</div><div class="score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="status">該当作品なし</div>';document.querySelectorAll(".card").forEach(x=>x.onclick=()=>openMovie(results[+x.dataset.i]))}catch(e){status.textContent="検索データを取得できませんでした。"}}function syncTrailUrl(m){const p=new URL(location.href);p.searchParams.set("id",m.tmdbId||m.id||"");p.searchParams.set("search",m.title||"");history.replaceState(null,"",p)}
+ <a href="my-cinelva/">My Cinelva</a></aside><main class="wrap"><div class="hero"><h1>作品検索</h1><p>公開中の作品だけでなく、過去作品も検索できます。</p></div><div id="status" class="status"></div><div id="grid" class="grid"></div></main><div id="modal" class="modal"><div class="sheet"><button id="close" class="close">×</button><div id="detail"></div></div></div><script src="js/calendar-context.js"></script><script>const criticVideoCache=new Map(),API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),q=document.querySelector(".gSearch"),grid=document.getElementById("grid"),status=document.getElementById("status"),modal=document.getElementById("modal"),detail=document.getElementById("detail");let results=[];async function search(){
+ const term=q.value.trim();if(!term)return;
+ const normalize=CinelvaQuickRate.normalize,needle=normalize(term);
+ history.replaceState(null,"","search.html?search="+encodeURIComponent(term));
+ status.textContent="「"+term+"」を検索中…";grid.innerHTML="";
+ let remote=[],local=[],errors=0;
+ try{
+  const r=await fetch(API+"/api/movies?q="+encodeURIComponent(term)+"&limit=20",{cache:"no-store"});
+  if(!r.ok)throw Error("search unavailable");
+  const d=await r.json();remote=[...(d.movies||[]),...(d.external||[])];
+ }catch(_){errors++;}
+ // The local verified catalogue is searched with punctuation-insensitive keys,
+ // so スターウォーズ and スター・ウォーズ share the same normalized identity.
+ try{
+  const r=await fetch("data/movies.json");
+  if(!r.ok)throw Error("catalogue unavailable");
+  const d=await r.json(),catalog=Array.isArray(d)?d:(d.movies||[]);
+  local=catalog.filter(m=>[m.title,m.original_title,m.originalTitle,...(m.aliases||[])].some(x=>normalize(x).includes(needle))).slice(0,30);
+ }catch(_){errors++;}
+ const seen=new Set();
+ results=[...local,...remote].filter(m=>{
+  const id=String(m.tmdbId||m.tmdb_id||m.id||''),year=String(m.year||String(m.date||'').slice(0,4)||'');
+  const key=id||year+':'+normalize(m.title);
+  if(!key||seen.has(key))return false;seen.add(key);return true;
+ }).slice(0,30);
+ status.textContent="「"+term+"」 "+results.length+"件"+(errors===2?"（検索元を取得できませんでした）":"");
+ grid.innerHTML=results.map((m,i)=>'<button class="card" data-i="'+i+'" style="padding:0;text-align:left"><div class="poster">'+(m.poster?'<img src="'+E(m.poster)+'" loading="lazy">':'')+'</div><div class="body"><div class="title">'+E(m.title)+'</div><div class="meta">'+E(m.year||String(m.date||"").slice(0,4))+'</div><div class="score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="status">該当作品なし</div>';
+ grid.querySelectorAll(".card[data-i]").forEach(card=>card.onclick=()=>openMovie(results[+card.dataset.i]));
+}
+function syncTrailUrl(m){const p=new URL(location.href);p.searchParams.set("id",m.tmdbId||m.id||"");p.searchParams.set("search",m.title||"");history.replaceState(null,"",p)}
 const FORMAT_ORDER=["standard","imax","dolby_cinema","motion","screenx"];
 let screeningEvidencePromise=null;
 function withTimeout(promise,ms=9000,message="読み込みがタイムアウトしました"){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))])}

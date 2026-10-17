@@ -6,8 +6,6 @@ on:
       - 'preview/ocean/**'
       - 'scripts/ocean_*'
       - 'tests/ocean-*'
-      - 'tests/product/**'
-      - 'tests/journeys/**'
       - '.github/workflows/ocean-parallel-quality.yml'
       - 'tests/test_ocean_parallel_quality_workflow.py'
   workflow_dispatch:

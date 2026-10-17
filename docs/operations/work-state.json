@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T18:24:00+09:00",
+  "updated_at": "2026-10-17T10:08:12.234Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e",
+  "base_sha": "c41b36b156fab285140f07e42af73491e5ebf158",
   "branch": "main",
-  "head_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e",
+  "head_sha": "c41b36b156fab285140f07e42af73491e5ebf158",
   "pull_request": {
-    "number": 257,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/257",
+    "number": 261,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/261",
     "status": "merged",
-    "head_sha": "34a256b897b831cfd31394bc0f256b49ecafc2e1",
-    "merge_sha": "cef1648c798bef394bc0d3e3b88b4fb3702ac76e"
+    "head_sha": "03d67474299746bd244b2596ca006f5a89ed9a09",
+    "merge_sha": "c41b36b156fab285140f07e42af73491e5ebf158"
   },
   "work_items": [
     {
@@ -41,7 +41,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "PRs #253–#257 merged. Active route inventory and per-route Chromium/WebKit evidence integrated. Remaining: Python legacy contracts, external showtime/TV availability and public deployment verification."
+      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. Remaining external-data permission, cross-device reliability, real-device verification, and release readiness are NOT complete."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
@@ -194,6 +194,42 @@
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
       "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed. Follow-up head 49eda1af1fc57533641898eca8771ca69dabb5fd also passes the all-route visible-brand test rejecting superseded uppercase CINELVA."
+    },
+    {
+      "id": "P0-TEST-SUITE",
+      "title": "Full Python suite repaired and regression gate enabled",
+      "status": "merged",
+      "issue": 241,
+      "acceptance": "All known failed/import-time legacy Python tests are replaced with current behavior contract tests; full suite 104 tests passes and future failure causes CI failure.",
+      "pull_request": {
+        "number": 259,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/259",
+        "merge_sha": "947f5b7678a957ab8862768ab8a81eadb9c5550e"
+      }
+    },
+    {
+      "id": "P0-243-SCREENSHOTS",
+      "title": "Preserve browser visual baseline screenshots and failure captures",
+      "status": "merged",
+      "issue": 243,
+      "acceptance": "Every active route has a mobile light screenshot in Chromium/WebKit CI artifacts and any failed assertion saves an annotated route screenshot.",
+      "pull_request": {
+        "number": 260,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/260",
+        "merge_sha": "027aecdc7d2eba3328f7473ef70460a262e0fa0d"
+      }
+    },
+    {
+      "id": "P1-SUPPORT-GUIDANCE",
+      "title": "Privacy-safe FAQ and public support guidance",
+      "status": "merged",
+      "issue": 239,
+      "acceptance": "Root/nested privacy and credits provide backup/local-only storage, verified freshness limitations, and public feedback link with data-privacy warning.",
+      "pull_request": {
+        "number": 261,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/261",
+        "merge_sha": "c41b36b156fab285140f07e42af73491e5ebf158"
+      }
     }
   ],
   "verification": [
@@ -411,6 +447,21 @@
       "command": "PR #257 GitHub Actions + GitHub merge",
       "result": "merged_ci_passed",
       "details": "Four PR Actions workflows green on 34a256b; merged using GitHub as cef1648c798bef394bc0d3e3b88b4fb3702ac76e. Do not infer production deploy."
+    },
+    {
+      "command": "PR #259 GitHub Actions: Full Python contract suite, smoke, Autonomous quality, Completeness",
+      "result": "passed_merged",
+      "details": "104 Python tests: 0 failures and 0 errors. Full suite strict on relevant PR changes. PR merged as 947f5b7678a957ab8862768ab8a81eadb9c5550e."
+    },
+    {
+      "command": "PR #260 GitHub Actions: frontend route audits/screenshots, smoke, quality, completeness",
+      "result": "passed_merged",
+      "details": "All four Actions green, active route visual evidence captured for 390px light Chromium/WebKit; PR merged as 027aecdc7d2eba3328f7473ef70460a262e0fa0d."
+    },
+    {
+      "command": "PR #261 GitHub Actions: frontend, brand, backup, Pages, smoke, quality, Python, completeness",
+      "result": "passed_merged",
+      "details": "All eight Actions green; FAQ/support/privacy guidance merged as c41b36b156fab285140f07e42af73491e5ebf158."
     }
   ],
   "deployment": {
@@ -431,6 +482,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Run Python full-suite baseline and classify remaining 8 failures plus 8 import-time assertions against current CINELVA contracts; address confirmed regressions and replace obsolete assertions with behavioral tests. GitHub Actions should run repeatable checks. No Vercel deployment until restriction cleared and current release SHA verified.",
+  "next_action": "Prioritize #244: verify whether any legally authorized free television/showtime feeds can be configured; until permissions exist, retain disabled collectors, hide stale schedules, show official links/unverified state. Then complete #239 My Cinelva real-record visualizations, safe origin/storage migration and real iPhone Safari regression. Vercel production deploy forbidden while rate limit active; confirm quota before one release. App Store requires owner account/approval.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

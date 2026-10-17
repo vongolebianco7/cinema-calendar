@@ -6,10 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATASETS = {
-    "streaming": ("data/streaming.json", 48),
-    "theater_schedules": ("data/theater_schedules.json", 24),
-}
+REGISTRY_PATH = ROOT / "quality" / "external-data-registry.json"
 
 def parse_date(value):
     if not value:
@@ -20,28 +17,38 @@ def parse_date(value):
     except (TypeError, ValueError):
         return None
 
-def audit(now=None):
+def audit(now=None, registry=None, root=ROOT):
     now = now or dt.datetime.now(dt.timezone.utc)
+    registry = registry or json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
     results = {}
-    for name, (relative_path, max_age_hours) in DATASETS.items():
-        path = ROOT / relative_path
-        result = {"path": relative_path, "max_age_hours": max_age_hours, "status": "missing"}
-        if path.exists():
+    enforced_failures = []
+    for entry in registry.get("categories", []):
+        name = entry["id"]
+        relative_path = entry.get("dataset")
+        max_age_hours = entry.get("max_age_hours")
+        result = {"category": entry.get("category", name), "status": entry.get("status"), "path": relative_path, "max_age_hours": max_age_hours, "freshness_enforced": bool(entry.get("freshness_enforced")), "freshness": "not_applicable"}
+        path = root / relative_path if relative_path else None
+        if path and path.exists():
             try:
                 data = json.loads(path.read_text(encoding="utf-8"))
-                generated = parse_date(data.get("generated_at")) if isinstance(data, dict) else None
-                result["generated_at"] = data.get("generated_at") if isinstance(data, dict) else None
+                field = entry.get("generated_at_field") or "generated_at"
+                generated = parse_date(data.get(field)) if isinstance(data, dict) else None
+                result["generated_at"] = data.get(field) if isinstance(data, dict) else None
                 if generated is None:
-                    result["status"] = "unknown"
+                    result["freshness"] = "unknown"
                 else:
                     age = (now - generated).total_seconds() / 3600
                     result["age_hours"] = round(age, 1)
-                    result["status"] = "fresh" if -1 <= age <= max_age_hours else "stale"
+                    result["freshness"] = "fresh" if max_age_hours is not None and -1 <= age <= max_age_hours else "stale"
             except (OSError, ValueError, UnicodeError) as exc:
-                result["status"] = "invalid"
+                result["freshness"] = "invalid"
                 result["error"] = str(exc)[:200]
+        elif relative_path:
+            result["freshness"] = "missing"
+        if result["freshness_enforced"] and result["freshness"] != "fresh":
+            enforced_failures.append(name)
         results[name] = result
-    return {"checked_at": now.isoformat(), "datasets": results}
+    return {"checked_at": now.isoformat(), "registry": "quality/external-data-registry.json", "datasets": results, "enforced_failures": enforced_failures}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -54,4 +61,4 @@ if __name__ == "__main__":
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(content, encoding="utf-8")
-    raise SystemExit(1 if any(x["status"] != "fresh" for x in report["datasets"].values()) else 0)
+    raise SystemExit(1 if report["enforced_failures"] else 0)

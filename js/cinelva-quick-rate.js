@@ -85,7 +85,7 @@ function refreshBadges(){
   if(!card||!badge)continue;
   const item=getRecord(movieFromCard(card,wrap.dataset.rateKind));
   badge.hidden=!item;
-  if(item)badge.textContent='採点済み ★ '+Number(item.rating??0).toFixed(1);
+  if(item){const label='採点済み ★ '+Number(item.rating??0).toFixed(1);if(badge.textContent!==label)badge.textContent=label;}
  }
 }
 root.addEventListener('cinelva-record-updated',refreshBadges);

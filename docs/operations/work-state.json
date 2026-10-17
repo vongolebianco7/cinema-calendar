@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:50:00+09:00",
+  "updated_at": "2026-10-17T14:02:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "9c3a8fc82c511dc256ad85505ca7f64bf6c79406",
+  "head_sha": "326ba2c6f3c9574f1425f82dcf04259f51882a2a",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "9c3a8fc82c511dc256ad85505ca7f64bf6c79406"
+    "head_sha": "326ba2c6f3c9574f1425f82dcf04259f51882a2a"
   },
   "work_items": [
     {
@@ -40,7 +40,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "All eight #242 workstreams have implementation PRs. The latest #253 route audit at 49eda1af1fc57533641898eca8771ca69dabb5fd passed all required Actions, including route loads at 390/1280 in light/dark and a new guard against missing local documents/scripts/styles/images/fonts. Brand casing test now rejects visible all-caps CINELVA and passes. A separate static scan of all 29 non-Ocean HTML pages found zero broken same-origin HTML links or local asset references. Remaining: interactive error/empty-state gaps, full Ocean retirement acceptance, review/release policy, quota-clear deployment, and post-deploy verification."
+      "ci": "PR #253 latest head 6ac60fc043889d2e7c1a891348046a6e100ef38a passed all eight GitHub Actions checks: frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages stage, Completeness scorecard, and scoped Ocean probe. The stale accessible-name selector in the isolated Pages browser test was updated; the rerun passed. Vercel remains quota-blocked; no deploy attempted."
     },
     {
       "id": "P0-244",
@@ -359,6 +359,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Continue #242 interactive error/empty-state audit (offline, no-record, malformed-data and storage-failure paths), then proceed immediately to full P0-02 Ocean retirement audit/implementation rather than waiting for a later task run. Preserve existing localStorage keys and backup round-trip. Update the checkpoint after each substantive batch. Keep Vercel deployment blocked until quota is independently verified clear; do not merge/release without required review and test conditions.",
+  "next_action": "Immediately continue the #242 interactive error/empty-state audit. Cover offline, no-record, malformed-backup/data, quota/storage-write failure and recovery paths; implement a deterministic regression for the next confirmed P0. Then proceed to full P0-02 Ocean retirement while preserving localStorage and backup compatibility. Do not wait for a later scheduled run after finishing a task.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

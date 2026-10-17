@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-17T11:53:00+09:00",
+  "status": "in_progress",
+  "issue": 239,
+  "base_branch": "main",
+  "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
+  "branch": "work/cinelva-restartable-p0",
+  "head_sha": "53e0356dcaabb13f0233804c790b6170f838b6c8",
+  "pull_request": null,
+  "work_items": [
+    {
+      "id": "P0-RESTART",
+      "title": "Restart runbook and durable work state",
+      "status": "in_progress",
+      "acceptance": "A new Work session can identify current work and the next action from GitHub issue #239 plus the runbook and JSON checkpoint."
+    },
+    {
+      "id": "P0-240",
+      "title": "Retire stale Ocean development instructions",
+      "status": "in_progress",
+      "issue": 240,
+      "acceptance": "Active agent instructions identify #239 as the roadmap and prohibit new Ocean feature development while preserving existing saved data and backups."
+    },
+    {
+      "id": "P0-241",
+      "title": "Keep validation running without Vercel deployment",
+      "status": "planned",
+      "issue": 241,
+      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
+    },
+    {
+      "id": "P0-AUDIT",
+      "title": "Audit and fix confirmed production blockers",
+      "status": "planned",
+      "issue": 239,
+      "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check."
+    }
+  ],
+  "verification": [
+    {
+      "command": "python scripts/quality_gate.py",
+      "result": "passed_on_work_branch",
+      "details": "2026-10-17: shared deterministic gate passed after branch edits; the gate now omits retired Ocean-only checks."
+    },
+    {
+      "command": "python -m unittest discover -s tests",
+      "result": "failed_baseline_8_failures_8_import_errors",
+      "details": "100 tests ran on base 71b31626. Failures are documented in the session log and must be triaged; this broad legacy discovery is not the shared quality-gate contract."
+    },
+    {
+      "command": "python scripts/check_work_state.py && python -m unittest tests.test_work_state && git diff --check",
+      "result": "passed_on_work_branch",
+      "details": "Checkpoint schema, 2 validator tests, and whitespace check passed."
+    }
+  ],
+  "deployment": {
+    "status": "deployment_pending",
+    "target_sha": null,
+    "production_url": "https://cinelva.vercel.app/",
+    "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
+    "last_observed_vercel_production_sha": "266b280c4bab0092d54cb1cd0316f1f67674a28c",
+    "last_observed_vercel_production_status": "READY",
+    "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
+    "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
+    "next_action": "After required checks pass, inspect Vercel team usage and project deployment state; deploy the tested SHA once only if the restriction is cleared."
+  },
+  "blockers": [
+    "Vercel project-specific usage and restriction reset status were not available from the connected read-only Vercel API."
+  ],
+  "next_action": "Run the state validator and quality gate after the current branch edits; then update this checkpoint with commit, PR, and GitHub Actions URLs."
+}

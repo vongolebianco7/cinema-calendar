@@ -65,6 +65,12 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn('<span>Cinelva</span>', text, page)
             self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
 
+    def test_my_cinelva_page_uses_approved_symbol_and_wordmark(self):
+        text = (ROOT / "my-cinelva/index.html").read_text(encoding="utf-8")
+        self.assertIn(f'<img src="../{ICON_ASSET}" alt="">', text)
+        self.assertIn('<span>Cinelva</span>', text)
+        self.assertNotIn(f'src="{BRAND_ASSET}"', text)
+
     def test_visible_brand_copy_has_no_retired_cinemap_wordmark(self):
         pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html")) + list((ROOT / "my-cinelva").glob("*.html"))
         self.assertGreaterEqual(len(pages), 20)

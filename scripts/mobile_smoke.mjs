@@ -6,6 +6,8 @@ const browserName=process.env.CINEMAP_BROWSER||'chromium';
 const browserType={chromium,webkit}[browserName];
 if(!browserType)throw new Error(`Unsupported CINEMAP_BROWSER: ${browserName}`);
 const browser=await browserType.launch();
+const watchdog=setTimeout(()=>{console.error(`${browserName}: mobile smoke exceeded 150 seconds; terminating hung browser`);process.exit(124)},150000);
+watchdog.unref();
 const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3});
 await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[],"theaters":[],"schedules":[]}'}));
 const page=await context.newPage();
@@ -22,6 +24,7 @@ async function navigate(path){
  throw lastError;
 }
 for(const path of candidates){
+ console.log(`${browserName}: checking ${path}`);
  const res=await navigate(path);
  if(!res||res.status()>=400){if(path==='index.html')errors.push(`${path}: HTTP ${res?.status()??'no response'}`);continue}
  if(path==='index.html')await page.waitForLoadState('networkidle',{timeout:5000}).catch(()=>console.warn('Index remained network-active; proceeding with DOM-ready smoke checks'));
@@ -35,8 +38,9 @@ for(const path of candidates){
  const docHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
  const fullPage=docHeight*3<=30000;
  if(!fullPage)console.warn(`${browserName} ${path}: document ${docHeight}px is too tall for a full-page screenshot at DPR 3; preserving viewport evidence`);
- await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage});
+ await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage,timeout:20000,animations:'disabled'});
 }
 await browser.close();
+clearTimeout(watchdog);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log(`Mobile smoke checks passed in ${browserName} at 390x844, DPR 3.`);

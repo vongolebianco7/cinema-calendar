@@ -15,7 +15,9 @@
     if(m===undefined) return true;
     if(m<1||m>12) return false;
     if(d===undefined) return true;
-    const last=new Date(Date.UTC(y, m, 0)).getUTCDate();
+    // Date.UTC maps years 00–99 to 1900–1999, producing incorrect leap-day validation.
+    const leap=y%4===0&&(y%100!==0||y%400===0);
+    const last=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31][m-1];
     return d>=1&&d<=last;
   };
   function storage() {

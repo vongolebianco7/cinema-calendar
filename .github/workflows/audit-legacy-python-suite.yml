@@ -1,10 +1,14 @@
-name: Audit full legacy Python suite (diagnostic only)
+name: Full Python contract suite
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
       - 'scripts/audit_python_suite.py'
+      - 'rankings.html'
+      - 'experience.html'
+      - 'my-cinemap.html'
+      - 'index.html'
       - 'tests/**/*.py'
       - '.github/workflows/audit-legacy-python-suite.yml'
   schedule:
@@ -28,8 +32,8 @@ jobs:
           python-version: '3.12'
       - name: Check diagnostic parser contracts
         run: python -m unittest discover -s tests -p test_python_suite_audit.py -v
-      - name: Run complete Python unittest suite (diagnostic, not a release gate)
-        run: python scripts/audit_python_suite.py
+      - name: Run full Python contract suite (fail on regressions)
+        run: python scripts/audit_python_suite.py --strict
       - name: Publish true suite outcome
         if: always()
         run: |
@@ -43,7 +47,7 @@ jobs:
               r = json.loads(file.read_text())
               message = (f"Legacy Python suite: **{r['status'].upper()}**. "
                          f"Run: {r['tests_run']}; failures: {r['failures']}; errors: {r['errors']}. "
-                         "See attached JSON and full log. This diagnostic is not release approval.")
+                         "See attached JSON and full log. Other required browser/data checks still apply.")
           print(message)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
               out.write(message + '\n')

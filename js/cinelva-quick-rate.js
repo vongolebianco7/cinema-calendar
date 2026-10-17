@@ -16,7 +16,7 @@ style.textContent=`
 .cinelva-rate-dialog::backdrop{background:#0009}.cinelva-rate-inner{padding:20px;display:grid;gap:12px}.cinelva-rate-inner label{display:grid;gap:5px;font:13px system-ui}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{width:100%;padding:10px;border:1px solid #68635a;background:#121212;color:#fff;border-radius:5px;box-sizing:border-box}
 .cinelva-rate-inner textarea{min-height:78px;resize:vertical}.cinelva-rate-actions{display:flex;gap:10px;justify-content:space-between}.cinelva-rate-actions button{min-height:44px;flex:1;border-radius:6px;border:1px solid #a78a50;background:#f3e3c4;color:#211c15;font-weight:700}.cinelva-rate-actions button:first-child{background:#343434;color:#fff}.cinelva-rate-actions button{font-size:12px;padding:7px 4px}
 `;
-document.head.append(style);
+style.textContent+=`\n/* Compact overrides must follow the base dialog declarations. */\n.cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}\n.cinelva-rate-inner{padding:14px;gap:9px}\n.cinelva-rate-inner textarea{min-height:52px}\n`;\ndocument.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
 dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-row"><label>鑑賞日<input aria-label="鑑賞日をカレンダーから選択" id="cinelvaRateDate" type="date"></label><label>鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label></div><label id="cinelvaRateVenueRow" hidden>映画館・サービス<input id="cinelvaRateVenue" maxlength="120" list="cinelvaRateVenueOptions" placeholder="名称を選択・入力"><datalist id="cinelvaRateVenueOptions"><option value="TOHOシネマズ"><option value="イオンシネマ"><option value="109シネマズ"><option value="MOVIX"><option value="T・ジョイ"><option value="ユナイテッド・シネマ"><option value="Netflix"><option value="Prime Video"><option value="Disney+"><option value="U-NEXT"><option value="Hulu"><option value="Apple TV+"><option value="Lemino"></datalist></label><label>レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="2"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">閉じる</button><button type="button" id="cinelvaRateSave">保存</button><button type="button" id="cinelvaRateNext">次へ →</button></div></form>`;
 document.body.append(dialog);
@@ -44,7 +44,7 @@ function open(movie) {
 }
 function save() {
  if(!selected)return;
- const date=$('cinelvaRateDate').value.trim()||null,comment=$('cinelvaRateComment').value.trim();
+ const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\\d{4}-\\d{2}-\\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
   Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRateVenue').value.trim()},Number($('cinelvaRateScore').value),date);

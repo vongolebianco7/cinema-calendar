@@ -142,25 +142,32 @@
     $('worldCountry').innerHTML = '<option value="all">すべて</option>' + countries.map(country => `<option>${escapeHTML(country)}</option>`).join('');
   }
   function renderCalendar() {
-    const first = new Date(state.year, state.month, 1), days = new Date(state.year, state.month + 1, 0).getDate(), offset = first.getDay();
-    const map = new Map();
-    for (const item of recordMovies()) { const date = dateOf(item); if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue; map.set(date, [...(map.get(date) || []), item]); }
-    const monthCount=recordMovies().filter(item=>dateOf(item).startsWith(`${state.year}-${String(state.month+1).padStart(2,'0')}`)).length;
-    $('calendarMonth').textContent = `${state.year}年${state.month + 1}月 · ${monthCount}本`;
-    let html = '<table style="min-width:0"><thead><tr>' + ['日','月','火','水','木','金','土'].map(day => `<th>${day}</th>`).join('') + '</tr></thead><tbody><tr>';
-    for (let i = 0; i < offset; i++) html += '<td class="heat-0"></td>';
-    for (let day = 1; day <= days; day++) {
-      const date = `${state.year}-${String(state.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`, records = map.get(date) || [];
-      html += `<td><button class="award-cell heat-${Math.min(4, records.length)}" style="width:100%" data-date="${date}" aria-label="${day}日、${records.length}本">${day}${records.length ? `<small> ${records.length}</small>` : ''}</button></td>`;
-      if ((offset + day) % 7 === 0 && day !== days) html += '</tr><tr>';
-    }
-    const trailing = (7 - (offset + days) % 7) % 7;
-    for (let i = 0; i < trailing; i++) html += '<td class="heat-0"></td>';
-    html += '</tr></tbody></table>';
-    $('calendar').innerHTML = html;
-    $('monthPrev').disabled = state.year <= 1900 && state.month === 0;
-    $('monthNext').disabled = state.year >= currentYear && state.month >= new Date().getMonth();
-    renderYearHeatmap(map);
+    const records=recordMovies().map(enriched), dates=new Map();
+    for(const r of records){const date=dateOf(r);if(/^\d{4}-\d{2}-\d{2}$/.test(date))dates.set(date,[...(dates.get(date)||[]),r]);}
+    const sorted=[...dates.keys()].sort();
+    const latest=sorted.length?new Date(sorted[sorted.length-1]+'T12:00:00'):new Date();
+    const earliest=sorted.length?new Date(sorted[0]+'T12:00:00'):new Date(latest);
+    const start=new Date(earliest);start.setDate(start.getDate()-start.getDay());
+    const end=new Date(latest);end.setDate(end.getDate()+(6-end.getDay()));
+    const weeks=[];for(let cursor=new Date(end);cursor>=start;cursor.setDate(cursor.getDate()-7)){const sunday=new Date(cursor);sunday.setDate(sunday.getDate()-6);weeks.push(new Date(sunday));}
+    const mode=$('calendarMode')?.value||'count';
+    $('calendarMonth').textContent=sorted.length?sorted[0].slice(0,4)+'〜'+sorted[sorted.length-1].slice(0,4)+'年':'鑑賞履歴';
+    const dayNames=['日','月','火','水','木','金','土'];
+    const rows=weeks.map(week=>{
+      const cells=Array.from({length:7},(_,i)=>{
+        const day=new Date(week);day.setDate(day.getDate()+i);
+        const iso=day.getFullYear()+'-'+String(day.getMonth()+1).padStart(2,'0')+'-'+String(day.getDate()).padStart(2,'0');
+        const films=dates.get(iso)||[],n=films.length,average=n?films.reduce((a,r)=>a+Number(r.rating||0),0)/n:0;
+        const cinema=films.filter(r=>r.viewingMethod==='映画館').length,stream=films.filter(r=>r.viewingMethod==='配信').length;
+        const detail=mode==='date'?String(day.getDate()):mode==='rating'?(n?'★'+average.toFixed(1):''):mode==='method'?(n?cinema+'館/'+stream+'配':''):(n?String(n):'');
+        const level=n?Math.min(4,n):0;
+        return '<button class="cw-day'+(n?' has-film':'')+'" data-date="'+iso+'" data-count="'+n+'" data-level="'+level+'" title="'+iso+'：'+n+'本" aria-label="'+iso+'、'+n+'本"><span class="cw-date">'+(day.getMonth()+1)+'/'+day.getDate()+'</span><span class="cw-value">'+escapeHTML(detail)+'</span></button>';
+      }).join('');
+      return '<div class="cw-week"><span class="cw-week-label">'+(week.getMonth()+1)+'/'+week.getDate()+'〜</span>'+cells+'</div>';
+    }).join('');
+    $('calendar').innerHTML='<div class="cw-history"><div class="cw-week cw-weekdays"><span></span>'+dayNames.map(x=>'<span>'+x+'</span>').join('')+'</div>'+rows+'</div>';
+    $('monthPrev').hidden=true;$('monthNext').hidden=true;
+    renderYearHeatmap();
   }
   function renderYearHeatmap() {
     const year=state.year, records=recordMovies(), daily=new Map(), monthly=Array(12).fill(0);
@@ -178,12 +185,12 @@
       for(let d=1;d<=length;d++){
         const date=year+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
         const n=daily.get(date)||0;
-        cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.4+n*.2)+'"></button>');
+        cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      const rank=count>=5?'GOLD':count>=3?'SILVER':'';
+      const rank=count>=5?'GOLD':'';
       return '<section class="cy-month" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本'+(rank?' <b class="cy-rank '+rank.toLowerCase()+'">'+rank+'</b>':'')+'</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
-    $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー。月3本でSILVER、月5本でGOLD');
+    $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー。月5本以上でGOLD');
   }
   function renderDateFilms(date) {
     const rows = recordMovies().filter(item => dateOf(item) === date);
@@ -341,6 +348,7 @@
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};
     $('annualComparison').onclick=event=>{const button=event.target.closest('[data-calendar-year]');if(button){state.year=Number(button.dataset.calendarYear);state.month=0;renderCalendar();}};
+    $('calendarMode').onchange=renderCalendar;
     $('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};
     $('yearHeatmap').onclick=event=>{const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;state.month=Number(date.slice(5,7))-1;renderCalendar();renderDateFilms(date);return;}const month=event.target.closest('[data-calendar-month]');if(month){state.month=Number(month.dataset.calendarMonth);renderCalendar();$('calendar').scrollIntoView({behavior:'smooth',block:'nearest'});}};
     $('genreMatrix').onclick=event=>{const button=event.target.closest('[data-genre],[data-genre-pair]');if(!button)return;if(button.dataset.genrePair){const [first,second]=button.dataset.genrePair.split('|');const rows=classifiedRecords().filter(record=>recordGenres(record).includes(first)&&recordGenres(record).includes(second));$('genreFilms').innerHTML=rows.length?rows.map(card).join(''):`<div class="empty" style="grid-column:1/-1">${escapeHTML(first)}と${escapeHTML(second)}の両方に分類された記録はありません。</div>`;return;}renderGenreFilms(button.dataset.genre);};

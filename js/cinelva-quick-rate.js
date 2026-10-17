@@ -102,7 +102,7 @@ style.textContent+=`
 
 .cinelva-rate-wrap{min-width:0;position:relative}
 .cinelva-rate-wrap>.card,.cinelva-rate-wrap>.rankCard{display:block;width:100%;height:auto}
-.cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}
+.cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;place-items:center;width:40px;height:40px;margin:6px 8px;border-radius:50%}
 `;
 enhanceGrid(document.querySelector('#cards'),'calendar');
 enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');

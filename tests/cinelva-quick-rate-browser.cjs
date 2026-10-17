@@ -34,9 +34,11 @@ async function port(){
   await page.goto(base+'/search.html?search='+encodeURIComponent('スターウォーズ'),{waitUntil:'domcontentloaded'});
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
   assert.match(await page.locator('#grid').innerText(),/スター・ウォーズ/);
-  await page.locator('#grid .cinelva-inline-score input').first().fill('4.1');
+  await page.locator('#grid .cinelva-inline-score input').first().evaluate(el=>{el.value='4.1';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#grid .cinelva-inline-score input').first().dispatchEvent('change');
   assert.equal((await page.evaluate(()=>window.CinelvaLibraryRecords.all()))[0].rating,4.1);
+  assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),true);
+  assert.equal(await page.locator('#grid .cinelva-rate-button').first().innerText(),'◉');
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'4.1');

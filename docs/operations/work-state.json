@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T07:07:59+09:00",
+  "updated_at": "2026-10-18T07:24:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "08abcd9af0a4bc346d0a960cfcfe9d076c933f0a",
-  "branch": "fix/review-date-layout-legacy",
-  "head_sha": "670fe6efef89281582709e6ac8c469e2a25926fe",
-  "pull_request": 282,
+  "base_sha": "24b3b932766c1f54895ed0da44e832e99a1c4bb7",
+  "branch": "fix/my-cinelva-mobile-hierarchy-20261018",
+  "head_sha": "790625f0bba4e16efdc27939fa9cc38061729442",
+  "pull_request": 289,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -35,12 +35,12 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. On PR #282, the shared quality gate passes after fixing a MutationObserver refresh loop and aligning the discovery contract with the unified availability shelf. Chromium/WebKit Actions remain required before merge."
+      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. PR #282 fixed the MutationObserver refresh loop and legacy dates and merged after all Actions passed. PR #288 improved discovery ranking and factual real-story classification and merged after all Actions passed. PR #289 is the current My Cinelva mobile hierarchy work."
     },
     {
       "id": "P0-282-REVIEW-LOOP",
       "title": "Stop calendar quick-rating observer loop and preserve partial legacy dates",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 239,
       "pull_request": {
         "number": 282,
@@ -49,7 +49,35 @@
         "head_sha": "670fe6efef89281582709e6ac8c469e2a25926fe"
       },
       "acceptance": "The calendar quick-rating observer reaches a stable state, the compact review editor preserves year-only/month-only legacy dates, and current discovery shelf checks match the unified UI.",
-      "ci": "Local quick-rate contract 5/5 and scripts/quality_gate.py passed. Branch merged current main 08abcd9a. Push and Chromium/WebKit Actions are next."
+      "ci": "All seven required Actions passed on f8643e0, including Chromium/WebKit frontend validation and Autonomous quality. Squash-merged as 2d88079831eb2ddb49a6fdb592b37653ccc18bab."
+    },
+    {
+      "id": "P0-288-DISCOVERY-QUALITY",
+      "title": "Improve curated discovery ranking and factual real-story classification",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 288,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/288",
+        "branch": "feat/discovery-quality-rules-20261018",
+        "merge_sha": "24b3b932766c1f54895ed0da44e832e99a1c4bb7"
+      },
+      "acceptance": "Curated discovery uses stable quality signals and only explicit factual markers classify a work as based on a true story.",
+      "ci": "All six required Actions passed on bcabd8a. Squash-merged as 24b3b932766c1f54895ed0da44e832e99a1c4bb7."
+    },
+    {
+      "id": "P0-289-MOBILE-HIERARCHY",
+      "title": "Clarify My Cinelva primary action and mobile information hierarchy",
+      "status": "in_progress",
+      "issue": 239,
+      "pull_request": {
+        "number": 289,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/289",
+        "branch": "fix/my-cinelva-mobile-hierarchy-20261018",
+        "head_sha": "790625f0bba4e16efdc27939fa9cc38061729442"
+      },
+      "acceptance": "The mobile page keeps record creation primary, groups secondary utilities accessibly, uses readable two-column stats and scrollable tabs, and preserves backup/restore behavior.",
+      "ci": "Smoke, completeness and Autonomous quality passed on 790625f. Validate frontend exposed an E2E mismatch after backup controls moved into a details menu. The test now opens the menu and verifies the export control is visible before download; latest main 24b3b932 is merged locally and full validation is next."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
@@ -592,16 +620,16 @@
     "last_observed_vercel_production_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-18T07:00:14+09:00",
-    "reported_restriction": "A production deployment for c0e15d1 is READY, but the Vercel backend check on PR #282 head 670fe6ef still reports build-rate-limit. Treat the Hobby deployment restriction as continuing.",
+    "reported_restriction": "A production deployment for c0e15d1 is READY, but new PR checks still report build-rate-limit. Treat the Hobby deployment restriction as continuing.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
-    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but PR #282 head 670fe6ef still fails Vercel backend with upgradeToPro=build-rate-limit. Latest main 08abcd9a is newer than the observed production SHA.",
+    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but new PR checks still fail Vercel backend with upgradeToPro=build-rate-limit. Latest main 24b3b932 is newer than the observed production SHA.",
     "blockers": [
-      "Vercel preview/build quota remains rate-limited on PR #282. This blocks release verification only, not development or GitHub Actions."
+      "Vercel preview/build quota remains rate-limited on new PR heads. This blocks release verification only, not development or GitHub Actions."
     ]
   },
   "blockers": [
-    "Vercel preview/build quota remains rate-limited on PR #282. Continue development and do not retry deployment until independently clear."
+    "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Verify PR #282 head fcc7256d in Chromium/WebKit and required Actions, repair any deterministic failure, merge when green, then re-read latest main and continue the next READY item.",
+  "next_action": "Run the full local gate for PR #289 after merging main 24b3b932, push the menu-aware browser regression, require a green Validate frontend and Autonomous quality run, then merge and select the next READY item.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

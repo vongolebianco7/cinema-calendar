@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T07:24:00+09:00",
+  "updated_at": "2026-10-18T07:32:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "24b3b932766c1f54895ed0da44e832e99a1c4bb7",
-  "branch": "fix/my-cinelva-mobile-hierarchy-20261018",
-  "head_sha": "790625f0bba4e16efdc27939fa9cc38061729442",
-  "pull_request": 289,
+  "base_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8",
+  "branch": "fix/freshness-disabled-source-noise",
+  "head_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8",
+  "pull_request": 290,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -35,7 +35,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. PR #282 fixed the MutationObserver refresh loop and legacy dates and merged after all Actions passed. PR #288 improved discovery ranking and factual real-story classification and merged after all Actions passed. PR #289 is the current My Cinelva mobile hierarchy work."
+      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. PRs #282, #288 and #289 merged after required Actions passed. PR #290 is the current external-data audit noise fix."
     },
     {
       "id": "P0-282-REVIEW-LOOP",
@@ -68,16 +68,30 @@
     {
       "id": "P0-289-MOBILE-HIERARCHY",
       "title": "Clarify My Cinelva primary action and mobile information hierarchy",
-      "status": "in_progress",
+      "status": "merged",
       "issue": 239,
       "pull_request": {
         "number": 289,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/289",
         "branch": "fix/my-cinelva-mobile-hierarchy-20261018",
-        "head_sha": "790625f0bba4e16efdc27939fa9cc38061729442"
+        "merge_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8"
       },
       "acceptance": "The mobile page keeps record creation primary, groups secondary utilities accessibly, uses readable two-column stats and scrollable tabs, and preserves backup/restore behavior.",
-      "ci": "Smoke, completeness and Autonomous quality passed on 790625f. Validate frontend exposed an E2E mismatch after backup controls moved into a details menu. The test now opens the menu and verifies the export control is visible before download; latest main 24b3b932 is merged locally and full validation is next."
+      "ci": "Smoke, completeness, Autonomous quality and Chromium/WebKit Validate frontend passed on 3332b14. Squash-merged as 97ad220ec7e4561345a05484f126fc934e63a8f8."
+    },
+    {
+      "id": "P0-290-FRESHNESS-NOISE",
+      "title": "Keep disabled external sources visible without failing the daily audit forever",
+      "status": "pr_created",
+      "issue": 244,
+      "pull_request": {
+        "number": 290,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/290",
+        "branch": "fix/freshness-disabled-source-noise",
+        "head_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8"
+      },
+      "acceptance": "A source explicitly disabled pending permission remains reported as stale, but cannot be marked freshness-enforced or consume daily Actions as a guaranteed red run.",
+      "ci": "Regression first failed because disabled theater showtimes were freshness-enforced. The registry invariant now passes, the audit still reports theater=stale with enforcement false, and scripts/quality_gate.py passes locally."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
@@ -622,7 +636,7 @@
     "last_observed_vercel_check_at": "2026-10-18T07:00:14+09:00",
     "reported_restriction": "A production deployment for c0e15d1 is READY, but new PR checks still report build-rate-limit. Treat the Hobby deployment restriction as continuing.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
-    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but new PR checks still fail Vercel backend with upgradeToPro=build-rate-limit. Latest main 24b3b932 is newer than the observed production SHA.",
+    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but new PR checks still fail Vercel backend with upgradeToPro=build-rate-limit. Latest main 97ad220e is newer than the observed production SHA.",
     "blockers": [
       "Vercel preview/build quota remains rate-limited on new PR heads. This blocks release verification only, not development or GitHub Actions."
     ]
@@ -630,6 +644,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Run the full local gate for PR #289 after merging main 24b3b932, push the menu-aware browser regression, require a green Validate frontend and Autonomous quality run, then merge and select the next READY item.",
+  "next_action": "Push PR #290, require the focused registry test and shared quality gate to remain green, merge when required Actions pass, then continue the P0 external-data audit without attempting Vercel deployment.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

@@ -45,7 +45,17 @@ async function freePort() {
     await recordLink.click();
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'offline movie detail selects the same catalog movie in the record form');
-    console.log('Offline movie detail to My CINELVA record flow passed at 390px.');
+
+    await page.goto(`${base}/rankings.html?axis=rating`, { waitUntil: 'domcontentloaded' });
+    const rankedMovie = page.locator('#grid .rankCard[href*="search.html?id="]').first();
+    await rankedMovie.waitFor({ state: 'visible', timeout: 15000 });
+    const rankedTitle = (await rankedMovie.locator('.title').textContent()).trim();
+    await rankedMovie.click();
+    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
+    await page.locator('#detail .recordAction a').click();
+    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
+    assert.ok((await page.locator('#chosenMovie').textContent()).includes(rankedTitle), 'ranking selection remains preselected in the shared record form');
+    console.log('Offline movie detail and ranking to My CINELVA record flows passed at 390px.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

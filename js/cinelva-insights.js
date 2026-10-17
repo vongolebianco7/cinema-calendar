@@ -41,6 +41,14 @@ const COUNTRY_LATITUDE = new Map([
   ['Italy', 41.9], ['イタリア', 41.9], ['Spain', 40.5], ['スペイン', 40.5],
   ['Canada', 56.1], ['カナダ', 56.1], ['Australia', -25.3], ['オーストラリア', -25.3],
 ]);
+// Movie sources sometimes provide ISO 3166-1 alpha-2 production codes
+// instead of display names. Normalize only verified aliases; never infer
+// a location for unfamiliar codes.
+const COUNTRY_ISO_LATITUDE = new Map([
+  ['US', 39.8], ['GB', 54.0], ['FR', 46.2], ['DE', 51.2],
+  ['KR', 36.5], ['CN', 35.9], ['IN', 20.6], ['IT', 41.9],
+  ['ES', 40.5], ['CA', 56.1], ['AU', -25.3], ['JP', 36.2],
+]);
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const normalizedText = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
 
@@ -68,7 +76,7 @@ function pointForRecord(record) {
   const classified = classifyGenres(record?.genres || []);
   const genre = classified.genres[0] || '分類なし';
   const genreIndex = GENRE_TAXONOMY.indexOf(genre);
-  const latitude = COUNTRY_LATITUDE.get(country);
+  const latitude = COUNTRY_LATITUDE.get(country) ?? COUNTRY_ISO_LATITUDE.get(String(country).toUpperCase());
   const rating = record?.rating == null ? NaN : Number(record.rating);
   return {
     id: String(record?.id ?? record?.tmdbId ?? ''), record,

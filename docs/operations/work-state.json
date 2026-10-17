@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T07:32:00+09:00",
+  "updated_at": "2026-10-18T07:40:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8",
-  "branch": "fix/freshness-disabled-source-noise",
-  "head_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8",
-  "pull_request": 290,
+  "base_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5",
+  "branch": "ci/skip-browser-scorecard-non-ui",
+  "head_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5",
+  "pull_request": 291,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -18,7 +18,7 @@
     {
       "id": "P0-240",
       "title": "Retire stale Ocean development instructions",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 240,
       "acceptance": "Active agent instructions identify #239 as the roadmap and prohibit new Ocean feature development while preserving existing saved data and backups."
     },
@@ -88,10 +88,24 @@
         "number": 290,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/290",
         "branch": "fix/freshness-disabled-source-noise",
-        "head_sha": "97ad220ec7e4561345a05484f126fc934e63a8f8"
+        "merge_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5"
       },
       "acceptance": "A source explicitly disabled pending permission remains reported as stale, but cannot be marked freshness-enforced or consume daily Actions as a guaranteed red run.",
-      "ci": "Regression first failed because disabled theater showtimes were freshness-enforced. The registry invariant now passes, the audit still reports theater=stale with enforcement false, and scripts/quality_gate.py passes locally."
+      "ci": "Full Python, scorecard contract, smoke, Autonomous quality and completeness all passed on 3271537. Squash-merged as 7d69f5dc6987573d9b04abd8313baa7e35b693a5."
+    },
+    {
+      "id": "P0-291-CI-CREDIT-SAVING",
+      "title": "Skip heavy browser completeness runs for non-UI audit-only changes",
+      "status": "pr_created",
+      "issue": 241,
+      "pull_request": {
+        "number": 291,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/291",
+        "branch": "ci/skip-browser-scorecard-non-ui",
+        "head_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5"
+      },
+      "acceptance": "Operations docs, Python-only contracts, and the external-data registry do not install Chromium and WebKit twice in the completeness workflow; UI/runtime changes still run the complete scorecard.",
+      "ci": "A workflow contract first failed without paths-ignore. The focused test now passes after adding the three non-UI exclusions; the PR itself changes the workflow and therefore still runs its full validation once."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
@@ -636,7 +650,7 @@
     "last_observed_vercel_check_at": "2026-10-18T07:00:14+09:00",
     "reported_restriction": "A production deployment for c0e15d1 is READY, but new PR checks still report build-rate-limit. Treat the Hobby deployment restriction as continuing.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
-    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but new PR checks still fail Vercel backend with upgradeToPro=build-rate-limit. Latest main 97ad220e is newer than the observed production SHA.",
+    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1, but new PR checks still fail Vercel backend with upgradeToPro=build-rate-limit. Latest main 7d69f5dc is newer than the observed production SHA.",
     "blockers": [
       "Vercel preview/build quota remains rate-limited on new PR heads. This blocks release verification only, not development or GitHub Actions."
     ]
@@ -644,6 +658,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Push PR #290, require the focused registry test and shared quality gate to remain green, merge when required Actions pass, then continue the P0 external-data audit without attempting Vercel deployment.",
+  "next_action": "Push PR #291, require the workflow contract and full one-time scorecard validation to pass, merge, then verify that a later non-UI audit PR no longer starts the heavy completeness workflow.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

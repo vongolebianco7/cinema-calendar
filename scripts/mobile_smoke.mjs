@@ -29,7 +29,12 @@ for(const path of candidates){
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
  const safeName=path.replace(/\.html$/,'').replaceAll('/','-');
- await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage:true});
+ // WebKit enforces a 32,767 physical-pixel cap. Keep visual evidence
+ // even for naturally long movie calendars without hiding overflow assertions.
+ const pageHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
+ const fullPage=pageHeight*3<=30000;
+ await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage});
+ if(!fullPage)console.log(`${path}: captured viewport screenshot (full page ${pageHeight}px exceeds safe WebKit image limit)`);
 }
 await browser.close();
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}

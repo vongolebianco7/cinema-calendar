@@ -38,6 +38,37 @@ def finish_snapshot(old, cache, count, now):
  if not count:return old
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}
 
+def select_due_observations(candidates, cache, now, limit=20):
+ """Refresh oldest observations first while prioritizing streaming premieres.
+
+ A successful update of one title must never make old title-level observations
+ current. Invalid or absent checked_at values are checked first. This helper
+ is pure and deliberately makes no network requests.
+ """
+ due=[]
+ for mid, (distance, movie) in candidates:
+  checked=(cache.get(str(mid)) or {}).get("checked_at")
+  checked_dt=None
+  if checked:
+   try:
+    checked_dt=datetime.datetime.fromisoformat(checked.replace("Z","+00:00"))
+    if checked_dt.tzinfo is None:
+     checked_dt=None
+    else:
+     checked_dt=checked_dt.astimezone(datetime.timezone.utc)
+   except (TypeError, ValueError, AttributeError):
+    checked_dt=None
+  if checked_dt is not None and datetime.timedelta(0) <= now-checked_dt < datetime.timedelta(days=7):
+   continue
+  priority=0 if movie.get("event")=="streaming" else 1
+  # Unchecked records rank ahead of records already observed. Within each
+  # bucket, the least recently observed comes before nearer release dates.
+  sort_age=checked_dt.timestamp() if checked_dt else float("-inf")
+  due.append(((priority,sort_age,distance,mid),(mid,(distance,movie))))
+ due.sort(key=lambda pair:pair[0])
+ return [item for _,item in due[:limit]]
+
+
 def main():
  KEY=os.environ["TMDB_API_KEY"]
  movies=load(ROOT/"movies.json",{}).get("movies",[])+load(ROOT/"awards.json",{}).get("catalog",[])
@@ -60,19 +91,7 @@ def main():
   by_id.items(),
   key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])
  )
- selected=[]
- for mid,pair in candidates:
-  item=cache.get(str(mid),{})
-  checked=item.get("checked_at")
-  stale=True
-  if checked:
-   try:
-    checked_dt=datetime.datetime.fromisoformat(checked.replace("Z","+00:00"))
-    stale=(datetime.datetime.now(datetime.timezone.utc)-checked_dt).days>=7
-   except Exception:
-    stale=True
-  if stale:selected.append((mid,pair))
-  if len(selected)>=20:break
+ selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc))
  count=0
  for mid,(_,m) in selected:
   url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})

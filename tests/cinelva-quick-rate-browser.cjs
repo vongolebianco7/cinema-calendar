@@ -81,7 +81,7 @@ async function port(){
     grid.innerHTML='<a class="rankCard" href="search.html?id=111&search=%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA"><span class="title">スター・ウォーズ</span></a>';
   });
   await page.locator('#grid .cinelva-rate-saved').first().waitFor({timeout:10000});
-  assert.match(await page.locator('#grid .cinelva-rate-saved').first().innerText(),/採点済み ★ 4\\.5/);
+  assert.match(await page.locator('#grid .cinelva-rate-saved').first().innerText(),/採点済み ★ 4\.5/);
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('#cinelvaRateScore').inputValue(),'4.5');
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
@@ -91,7 +91,7 @@ async function port(){
     document.getElementById('cards').innerHTML='<article class="card" data-i="0"><span class="title">映画 テスト</span></article>';
   });
   await page.locator('#cards .cinelva-rate-saved').first().waitFor({timeout:10000});
-  assert.match(await page.locator('#cards .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\\.0/);
+  assert.match(await page.locator('#cards .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\.0/);
   await page.locator('#cards .cinelva-rate-button').first().click();
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'気軽に採点。');
   assert.deepEqual(errors,[],'no uncaught browser errors');

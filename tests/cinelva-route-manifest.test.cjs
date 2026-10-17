@@ -30,3 +30,11 @@ test('browser route audit preserves machine-readable evidence in CI', () => {
   assert.match(workflow, /if: always\(\)/);
   assert.match(workflow, /CINELVA_BROWSER=webkit[^\n]*cinelva-route-audit-browser\.cjs/);
 });
+
+test('route audit preserves bounded visual proof and failure screenshots', () => {
+  const audit = fs.readFileSync(path.join(root, 'tests/cinelva-route-audit-browser.cjs'), 'utf8');
+  assert.match(audit, /width === 390 && theme === 'light'/);
+  assert.match(audit, /page\.screenshot\(/);
+  assert.match(audit, /failure_context/);
+  assert.match(audit, /screenshot: relative\.split\(path\.sep\)/);
+});

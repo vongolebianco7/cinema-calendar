@@ -49,15 +49,16 @@ async function getPort(){
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRateComment').fill('ランキングから記録');
   await page.locator('#cinelvaRateSave').click();
-  await page.locator('#grid .cinelva-rate-button').first().getByText('4.5点').waitFor();
+  await page.waitForFunction(()=>document.querySelector('#grid .cinelva-inline-score input')?.value==='4.5');
   await page.locator('#cinelvaRateNext').click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   await page.locator('#cinelvaRatePlace').selectOption('配信');
   await page.locator('#cinelvaRateSave').click();
-  assert.equal(await page.locator('#grid .cinelva-rate-button').nth(1).innerText(),'★ 0.0点 · 評価済み');
+  assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0');
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
+  try{await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate),null,{timeout:15000});}
+  catch(error){const diagnostics=await page.evaluate(()=>({url:location.href,readyState:document.readyState,quickRateScript:!!document.querySelector('script[src*="cinelva-quick-rate"]'),records:!!window.CinelvaLibraryRecords,dates:!!document.querySelector('#dates'),scriptTags:[...document.scripts].slice(-8).map(s=>s.src)}));throw new Error('Calendar quick-rate initialization failed: '+JSON.stringify(diagnostics),{cause:error});}
   // Let asynchronous calendar data initialization finish before replacing its
   // visible fixture cards, and lock the resolver to the supplied test records.
   await page.waitForFunction(()=>document.querySelector('#dates')?.children.length>0,{timeout:15000});
@@ -70,8 +71,8 @@ async function getPort(){
      '<article class="tvMovie" data-mi="1">Film Two</article></section>';
   });
   await page.locator('#dates .cinelva-rate-button').first().waitFor({timeout:10000});
-  assert.equal(await page.locator('#dates .cinelva-rate-button').first().innerText(),'★ 4.5点 · 評価済み');
-  assert.equal(await page.locator('#dates .cinelva-rate-button').nth(1).innerText(),'★ 0.0点 · 評価済み');
+  assert.equal(await page.locator('#dates .cinelva-inline-score input').first().inputValue(),'4.5');
+  assert.equal(await page.locator('#dates .cinelva-inline-score input').nth(1).inputValue(),'0');
   await page.locator('#dates .cinelva-rate-button').first().click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film One/);
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'ランキングから記録');

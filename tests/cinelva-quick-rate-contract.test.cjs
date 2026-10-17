@@ -13,11 +13,12 @@ function setup(existing=[]){
  const document={
   head:{append(){}},body:{append(){}},
   querySelector(){return null},
+  querySelectorAll(){return []},
   createElement(tag){return tag==='dialog'?dialog:{textContent:'',className:''}},
  };
  const Records={all:()=>existing,validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
- const window={CinelvaLibraryRecords:Records,dispatchEvent(){},};
- vm.runInNewContext(source,{window,document,CustomEvent:class{constructor(){}},MutationObserver:class{}});
+ const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
+ vm.runInNewContext(source,{window,document,location:{pathname:'/'},CustomEvent:class{constructor(){}},MutationObserver:class{}});
  return {api:window.CinelvaQuickRate,dialog,element,writes};
 }
 test('middle dot, spaces and Unicode punctuation do not prevent title matching',()=>{
@@ -53,7 +54,7 @@ test('invalid date does not persist and existing zero rating remains zero',()=>{
  element('cinelvaRateDate').value='not-a-date';
  element('cinelvaRateSave').onclick();
  assert.equal(writes.length,0);
- assert.match(element('cinelvaRateMessage').textContent,/YYYY/);
+ assert.match(element('cinelvaRateMessage').textContent,/カレンダー/);
 });
 test('all three existing pages load the shared inline rating workflow',()=>{
  for(const name of ['index.html','rankings.html','search.html']){
@@ -65,4 +66,12 @@ test('all three existing pages load the shared inline rating workflow',()=>{
  assert.match(fs.readFileSync('my-cinelva/index.html','utf8'),/id="recordComment"/);
  assert.match(fs.readFileSync('my-cinelva/index.html','utf8'),/id="viewingMethod"/);
  assert.doesNotMatch(fs.readFileSync('my-cinelva/index.html','utf8'),/id="unrated"/);
+});
+
+test('calendar observer refresh is quiescent when an inline score is unchanged',()=>{
+ assert.match(
+  source,
+  /if\(value\.textContent!==text\)value\.textContent=text/,
+  'updating an unchanged output node retriggers the subtree MutationObserver forever'
+ );
 });

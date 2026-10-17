@@ -10,7 +10,7 @@ let selected=null;
 const style=document.createElement('style');
 style.textContent=`
 .cinelva-rate-button{min-height:38px;border:1px solid #a78a50;border-radius:6px;background:#25211a;color:#f9e8c8;padding:7px 12px;margin:8px 0;font:600 13px system-ui;cursor:pointer}
-.cinelva-rate-dialog{border:1px solid #7a715e;border-radius:12px;background:#202020;color:#f8f5ee;padding:0;width:min(94vw,470px);max-height:90dvh;box-shadow:0 16px 60px #0009}
+.cinelva-rate-dialog{border:1px solid #7a715e;border-radius:12px;background:#202020;color:#f8f5ee;padding:0;width:min(94vw,470px);max-height:min(85dvh,680px);position:fixed;inset:auto 12px 12px auto;margin:0;z-index:10001;box-shadow:0 16px 60px #0009}
 .cinelva-rate-dialog::backdrop{background:#0009}.cinelva-rate-inner{padding:20px;display:grid;gap:12px}.cinelva-rate-inner label{display:grid;gap:5px;font:13px system-ui}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{width:100%;padding:10px;border:1px solid #68635a;background:#121212;color:#fff;border-radius:5px;box-sizing:border-box}
 .cinelva-rate-inner textarea{min-height:78px;resize:vertical}.cinelva-rate-actions{display:flex;gap:10px;justify-content:space-between}.cinelva-rate-actions button{min-height:44px;flex:1;border-radius:6px;border:1px solid #a78a50;background:#f3e3c4;color:#211c15;font-weight:700}.cinelva-rate-actions button:first-child{background:#343434;color:#fff}
 `;
@@ -33,7 +33,7 @@ function open(movie) {
  $('cinelvaRateDate').value=existing?.watchedAt||'';
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
- if(!dialog.open)dialog.showModal();
+ if(!dialog.open)dialog.show();
  return true;
 }
 function save() {
@@ -44,7 +44,8 @@ function save() {
   Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value},Number($('cinelvaRateScore').value),date);
   $('cinelvaRateMessage').textContent='保存しました。別の作品を選んで続けて評価できます。';
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
-  dialog.close();
+  // Keep the non-modal editor open: another existing list card can be
+  // selected without returning to a separate record-management page.
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
 }
 $('cinelvaRateSave').onclick=save;

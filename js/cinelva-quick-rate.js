@@ -127,7 +127,12 @@ function enhanceCalendar(grid){
   }
   refreshRatingLabels();
  };
- const observer=new MutationObserver(decorate);
+ // Calendar renders large batches. Ignore mutations created by our own rating controls;
+ // otherwise subtree observation repeatedly scans the entire calendar and can lock the UI.
+ const observer=new MutationObserver(records=>{
+  const newCards=records.some(record=>[...record.addedNodes].some(node=>node.nodeType===1 && (node.matches?.('.streamMovie[data-mi],.tvMovie[data-mi]') || node.querySelector?.('.streamMovie[data-mi],.tvMovie[data-mi]'))));
+  if(newCards)decorate();
+ });
  observer.observe(grid,{childList:true,subtree:true});
  decorate();
 }

@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:15:00+09:00",
+  "updated_at": "2026-10-17T12:12:18+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "dd1b719a40770bdf4f0dee20cfeaff05e13bf1f6",
+  "head_sha": "be1913cae96718de967f9c4ff12afe76db7f2837",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "dd1b719a40770bdf4f0dee20cfeaff05e13bf1f6"
+    "head_sha": "be1913cae96718de967f9c4ff12afe76db7f2837"
   },
   "work_items": [
     {
@@ -105,7 +105,20 @@
         "branch": "fix/cinelva-record-entry-route",
         "head_sha": "39239f0dcc6dfdea66a17cf0614f816d800867c1"
       },
-      "acceptance": "From branded root and nested noindex GitHub Pages preview, shared movie detail passes selected ID/title to existing My CINELVA record form; no duplicate storage logic or key."
+      "acceptance": "From the branded root and nested noindex preview, movie detail passes selected ID/title to the existing My CINELVA form; no duplicate storage logic or key."
+    },
+    {
+      "id": "P0-242-POSTERS",
+      "title": "Keep missing box-office posters visibly safe",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": {
+        "number": 252,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/252",
+        "branch": "fix/cinelva-boxoffice-poster-fallback",
+        "head_sha": "947dc168cb68234d833f02e5dff1344026bc2c01"
+      },
+      "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px."
     }
   ],
   "verification": [
@@ -193,6 +206,21 @@
       "command": "PR #246 Ocean milestone ecosystem v2 run 38997488004",
       "result": "failed_retired_ocean_workflow",
       "details": "The repository still runs a retired Ocean milestone workflow on PRs and it fails. Remove or disable the retired Ocean-only workflow invocation through a scoped workflow change after inspecting its triggers and dependencies."
+    },
+    {
+      "command": "PR #251 Actions on 39239f0d",
+      "result": "passed_all_required_checks",
+      "details": "Validate frontend, Autonomous quality gate, CINELVA smoke, brand identity, backup safety, and Completeness scorecard all completed successfully."
+    },
+    {
+      "command": "PR #246 checkpoint and Ocean workflow correction",
+      "result": "quality_gate_passed_scorecard_pending",
+      "details": "Checkpoint statuses were normalized to the allowed enum; Autonomous quality gate run 38997767713 and CINELVA smoke run 38997767622 passed. Completeness scorecard run 38997767586 is still in progress. Retired Ocean milestone checks were changed to manual-only, so future CINELVA PRs no longer trigger them."
+    },
+    {
+      "command": "PR #252 poster fallback implementation",
+      "result": "pr_created_actions_running",
+      "details": "Added a visible image-missing placeholder and browser regression that blocks the application movie API and TMDB image host at 390px/1280px. Local inline syntax and test syntax passed; local Playwright is unavailable, so browser execution is delegated to the existing Validate frontend Actions job. No poster source or data was changed."
     }
   ],
   "deployment": {
@@ -213,6 +241,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Check new PR #246 CI after the checkpoint enum fix. Inspect and remove the failing Ocean-only PR workflow from shared release gates. Continue #242 route-by-route record UI verification and box-office image fallback audit. Do not deploy until Vercel build-rate-limit clears.",
+  "next_action": "Refresh PR #246 Completeness scorecard and PR #252 Validate frontend, then review browser results. Continue #242 full route verification of record-entry actions and remaining brand/palette surfaces. Do not deploy until the Vercel build-rate-limit clears.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

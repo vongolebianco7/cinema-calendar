@@ -1,4 +1,5 @@
 from pathlib import Path
+from html.parser import HTMLParser
 import json
 import unittest
 
@@ -8,7 +9,7 @@ BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
 ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
 
 
-class VisibleCopyParser(__import__("html.parser", fromlist=["HTMLParser"]).HTMLParser):
+class VisibleCopyParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.hidden = 0

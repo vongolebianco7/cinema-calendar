@@ -27,15 +27,19 @@ async function freePort(){
   const page=await context.newPage();
   await page.route(/^https:\/\//,route=>route.abort());
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+  await page.waitForLoadState('networkidle',{timeout:12000}).catch(()=>{});
   await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate&&window.CinelvaLibraryRecords));
   await page.evaluate(()=>{
    window.CinelvaRatingResolve=index=>[{id:991001,title:'Calendar A'}, {id:991002,title:'Calendar B'}][Number(index)];
    document.querySelector('#dates').innerHTML='<article class="streamMovie" data-mi="0">Calendar A</article><article class="streamMovie" data-mi="1">Calendar B</article>';
   });
+  await page.waitForFunction(()=>document.querySelector('#dates .streamMovie[data-mi="0"]')?.parentElement?.classList.contains('cinelva-rate-wrap'));
+  assert.equal(await page.evaluate(()=>window.CinelvaRatingResolve(0)?.title),'Calendar A');
   await page.locator('#dates .cinelva-rate-button').first().waitFor();
   assert.equal(await page.locator('#dates .cinelva-rate-button').count(),2);
   await page.locator('#dates .cinelva-rate-button').first().click();
-  assert.equal(await page.locator('#cinelvaRateTitle').innerText(),'Calendar A');
+  assert.equal(await page.locator('#cinelvaRateTitle').innerText(),'Calendar A',
+    JSON.stringify(await page.evaluate(()=>({resolve:window.CinelvaRatingResolve(0),button:document.querySelector('#dates .cinelva-rate-button')?.textContent})))));
   assert.equal(await page.locator('#cinelvaRateScore').inputValue(),'0');
   await page.locator('#cinelvaRatePlace').selectOption('配信');
   await page.locator('#cinelvaRateComment').fill('初めてのコメント');

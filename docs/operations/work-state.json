@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:34:00+09:00",
+  "updated_at": "2026-10-17T12:40:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "3f2b822c9a501714c685ab992331580e7aec42c0",
+  "head_sha": "936802e8f263943195d1d6d1428e30d5572cf912",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "3f2b822c9a501714c685ab992331580e7aec42c0"
+    "head_sha": "936802e8f263943195d1d6d1428e30d5572cf912"
   },
   "work_items": [
     {
@@ -84,7 +84,7 @@
     {
       "id": "P0-242-STREAMING-COVERAGE",
       "title": "Audit per-service streaming freshness coverage",
-      "status": "pr_created",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 250,
@@ -92,7 +92,8 @@
         "branch": "docs/cinelva-streaming-coverage-audit",
         "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf"
       },
-      "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability."
+      "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability.",
+      "ci": "Coverage snapshot PR #250 passed smoke, autonomous quality gate, and completeness scorecard on its current head. The audited counts remain a generated-data snapshot, not proof of a provider's complete catalogue."
     },
     {
       "id": "P0-242-RECORD",
@@ -131,10 +132,10 @@
         "number": 253,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
         "branch": "fix/cinelva-backup-brand-header",
-        "head_sha": "e86a5ed52f13c9ebe021d1df0a28c008fe64945b"
+        "head_sha": "e00bd611bbf2792c8b508f816ab71f6852258437"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "Adds approved mark/wordmark to both backup pages and the My CINELVA records route after a full static logo scan found that route missing it. Brand identity, Validate frontend, backup safety, isolated Pages stage, smoke, and completeness scorecard passed on e86a5ed; autonomous quality and Ocean probe checks are still running. The previous scorecard's WebKit FLOW-ERROR dropped 0.5 points after a fixed 180ms wait; the scenario now polls for expected UI and records scenario diagnostics, and the refreshed scorecard passed."
+      "ci": "The identity suite on e00bd61 passes the approved-symbol check across all 29 non-Ocean HTML routes. Chromium/WebKit mobile browser journey now also verifies the loaded symbol remains present behind the record modal and the dialog fits 390px. Smoke and identity pass; Validate frontend, backup safety, isolated Pages, Completeness scorecard, autonomous quality, and one-time Ocean probe are running."
     }
   ],
   "verification": [
@@ -272,6 +273,16 @@
       "command": "PR #253 full brand scan and WebKit scorecard stabilization",
       "result": "passed_core_checks_quality_gate_running",
       "details": "Head e86a5ed passed brand identity, frontend, backup safety, isolated Pages, smoke, and Completeness scorecard. The scorecard's previous 0.5-point WebKit false negative was addressed with state polling and scenario/error details. Autonomous quality gate remains in progress; no production deploy."
+    },
+    {
+      "command": "PR #253 approved mark full-route and modal regression",
+      "result": "brand_identity_passed_browser_checks_running",
+      "details": "Head e00bd611bbf2792c8b508f816ab71f6852258437: check-brand-identity and smoke passed. The new browser assertion covers approved asset loaded behind the record dialog and mobile dialog width; Validate frontend and related checks are running."
+    },
+    {
+      "command": "Vercel quota follow-up",
+      "result": "scheduled",
+      "details": "One-time Work automation will re-read Vercel quota and GitHub release readiness on 2026-10-18 07:05 Asia/Tokyo. It will not deploy while the provider cap remains, and will follow required checks/review policy."
     }
   ],
   "deployment": {
@@ -283,7 +294,7 @@
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
     "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
-    "next_action": "After required checks pass, inspect Vercel team usage and project deployment state; deploy the tested SHA once only if the restriction is cleared.",
+    "next_action": "At the scheduled 2026-10-18 07:05 JST check, inspect provider team/project quota and PR checks. Deploy one tested SHA only after Vercel confirms the cap is clear and repository release/review requirements are satisfied; otherwise record blocker.",
     "provider_preview_status": "Vercel backend check on PR #253 failed with api-deployments-free-per-day (>100 deployments in 24h), pointing to upgradeToPro=build-rate-limit. No retry or production deployment attempted.",
     "blockers": [
       "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
@@ -292,6 +303,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh and record the final runs for PR #246 head 3f2b822 and PR #253 head e86a5ed. Then continue #242 route-by-route QA, especially remaining modal/share/OG/PWA/light-dark brand surfaces and record entry from calendar/map/critic sources; verify visual states at 390px/1280px. Keep PRs open and production deployment locked while Vercel reports api-deployments-free-per-day/build-rate-limit. Before one release attempt, independently confirm the provider limit has cleared.",
+  "next_action": "Refresh the in-progress PR #253 checks on e00bd61. Continue #242 route-level QA from calendar/map/critic and visual states (390px/1280px), plus remaining share/OG/light-dark surfaces. A one-time quota/readiness check is scheduled for 2026-10-18 07:05 JST; keep the production deploy blocked until the provider clears the daily deployment cap and release prerequisites are met.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

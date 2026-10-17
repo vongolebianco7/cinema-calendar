@@ -22,6 +22,8 @@ class ExternalDataRegistryTests(unittest.TestCase):
             self.assertTrue(row["source"])
             self.assertTrue(row["acquisition"])
             self.assertTrue(row["coverage"])
+            if row["status"].startswith("disabled-") or row["status"] == "unavailable":
+                self.assertFalse(row["freshness_enforced"], f"{row['id']} cannot refresh while disabled")
         television = next(row for row in rows if row["category"] == "television")
         self.assertEqual(television["status"], "unavailable")
         self.assertFalse(television["freshness_enforced"])

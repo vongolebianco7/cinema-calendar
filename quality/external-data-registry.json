@@ -46,7 +46,7 @@
       "dataset": "data/theater_schedules.json",
       "generated_at_field": "generated_at",
       "max_age_hours": 24,
-      "freshness_enforced": true,
+      "freshness_enforced": false,
       "source": "official theater schedules",
       "source_url": "per-theater official_url",
       "acquisition": "collector disabled pending explicit permission",

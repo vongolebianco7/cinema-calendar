@@ -56,6 +56,50 @@
 .cs-top{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.cs-number{font-size:clamp(30px,5vw,54px);font-weight:300;line-height:1.15;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.cs-muted{font-size:12px;color:var(--muted)}.cs-milestones{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}.cs-prisms{display:flex;flex-wrap:wrap;gap:5px;max-width:310px}.cs-prism{width:29px;height:35px;flex:none}.cs-crowns{display:grid;grid-template-columns:repeat(5,18px);gap:4px}.cs-crown{width:18px;height:18px}.cs-year-bars{display:flex;align-items:end;gap:7px;overflow-x:auto;min-height:104px;padding:10px 0 0}.cs-year{min-width:34px;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:3px;font-size:10px;color:var(--muted)}.cs-year .bar{width:22px;min-height:2px;background:#677581;border-radius:2px 2px 0 0}.cs-year.active .bar{background:#d9bd7f}.cs-year.active{color:var(--gold)}.cs-section{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel)}.cs-section h3{font-size:16px;font-weight:500;margin:0 0 14px}.cs-posters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.cs-film{min-width:0}.cs-film img,.cs-film .cs-poster-empty{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;background:var(--soft)}.cs-film .cs-poster-empty{display:grid;place-items:center;color:var(--muted);font-size:11px}.cs-film-name{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cs-score{font-size:12px;color:var(--gold)}.cs-breakdowns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.cs-breakdowns .cs-section{margin-top:0}.cs-row{display:grid;grid-template-columns:minmax(75px,1fr) 2fr auto;gap:8px;align-items:center;margin:7px 0;font-size:12px}.cs-track{height:6px;background:var(--soft);border-radius:5px;overflow:hidden}.cs-track i{display:block;height:100%;border-radius:5px}.cs-strip{display:flex;height:9px;overflow:hidden;border-radius:5px;background:var(--soft);margin-bottom:12px}.cs-strip span{min-width:1px}.cs-decade{display:flex;align-items:end;gap:4px;min-height:95px;overflow-x:auto}.cs-decade-item{flex:1;min-width:32px;text-align:center;font-size:10px;color:var(--muted)}.cs-decade-item i{display:block;width:70%;margin:auto;background:#8994a1;border-radius:2px 2px 0 0}.cs-empty{color:var(--muted);font-size:13px}.cs-count{font-variant-numeric:tabular-nums}
 @media(max-width:650px){.cs-top{padding:13px;gap:12px}.cs-head h2{font-size:19px}.cs-prism{width:24px;height:29px}.cs-prisms{max-width:145px}.cs-crowns{grid-template-columns:repeat(5,14px);gap:3px}.cs-crown{width:14px;height:14px}.cs-posters{gap:5px}.cs-film-name{font-size:9px}.cs-score{font-size:10px}.cs-breakdowns{grid-template-columns:1fr}.cs-year{min-width:23px}.cs-year .bar{width:16px}.cs-muted{font-size:11px}}
  .stats[hidden]{display:none!important}.cinema-summary{margin-top:18px}.cs-top{border-radius:8px}.cs-section{border-radius:8px}@media(max-width:650px){.cs-section{padding:12px}.cs-top{padding:12px}.cs-head{margin-bottom:12px}}
+
+/* My Cinelva summary — refined editorial layout */
+#summaryView{--cs-ink:#f2f2f2;--cs-gold:#d9bd7f;color:var(--cs-ink);max-width:1120px;margin:30px auto 54px}
+#summaryView .cs-head{margin-bottom:28px;align-items:baseline}
+#summaryView .cs-head h2{font-size:clamp(22px,3vw,30px);font-weight:400;letter-spacing:-.035em}
+#summaryView .cs-head select{background:#151515;color:#f2f2f2;border:1px solid #353535;border-radius:6px;padding:10px 30px 10px 13px}
+#summaryView .cs-top{background:transparent;border:0;border-radius:0;padding:0;gap:clamp(20px,5vw,64px);grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+#summaryView .cs-top>div{min-width:0;padding:24px 0 26px;border-top:1px solid #393632;border-bottom:1px solid #262626}
+#summaryView .cs-number{font-size:clamp(46px,7vw,84px);font-weight:300;line-height:1.18;letter-spacing:-.065em;margin:7px 0 10px}
+#summaryView .cs-muted{font-size:12px;letter-spacing:.075em;color:#a6a4a1}
+#summaryView .cs-milestones{min-height:74px;gap:16px;align-items:center}
+#summaryView .cs-prisms{gap:7px;max-width:none}
+#summaryView .cs-prism{width:36px;height:42px;filter:drop-shadow(0 3px 5px #91b6c52c)}
+#summaryView .cs-crowns{grid-template-columns:repeat(5,18px);gap:7px 8px}
+#summaryView .cs-crown{width:18px;height:18px}
+#summaryView .cs-year-bars{min-height:112px}
+#summaryView .cs-section{background:transparent;border:0;border-radius:0;padding:0;margin-top:34px}
+#summaryView .cs-section h3{font-size:14px;font-weight:500;letter-spacing:.045em;padding-bottom:12px;border-bottom:1px solid #303030;margin-bottom:17px}
+#summaryView .cs-posters{gap:clamp(8px,1.6vw,18px)}
+#summaryView .cs-film img,#summaryView .cs-poster-empty{border-radius:3px;display:block}
+#summaryView .cs-film-name{margin-top:8px;font-size:12px;line-height:1.5}
+#summaryView .cs-score{font-size:13px;margin-top:3px}
+#summaryView .cs-breakdowns{gap:6px 36px;margin-top:22px!important}
+#summaryView .cs-breakdowns .cs-section{margin-top:22px}
+#summaryView .cs-row{margin:11px 0;gap:10px}
+#summaryView .cs-track{height:5px;background:#252525}
+#summaryView .cs-strip{height:7px}
+@media(max-width:650px){
+#summaryView{margin:22px auto 40px}
+#summaryView .cs-head{margin-bottom:20px}
+#summaryView .cs-top{gap:14px}
+#summaryView .cs-top>div{padding:16px 0 20px}
+#summaryView .cs-number{font-size:clamp(35px,10vw,54px)}
+#summaryView .cs-milestones{gap:9px;min-height:65px;align-items:flex-start}
+#summaryView .cs-prisms{gap:4px}
+#summaryView .cs-prism{width:24px;height:30px}
+#summaryView .cs-crowns{grid-template-columns:repeat(5,12px);gap:4px}
+#summaryView .cs-crown{width:12px;height:12px}
+#summaryView .cs-posters{gap:6px}
+#summaryView .cs-film-name{font-size:10px;line-height:1.35}
+#summaryView .cs-score{font-size:11px}
+#summaryView .cs-section{margin-top:26px}
+#summaryView .cs-breakdowns{gap:0}
+}
 </style>
 </head>
 <body>

@@ -64,7 +64,21 @@ async function freePort() {
     await page.locator('#detail .recordAction a').click();
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
-    console.log('Calendar event → movie detail → shared watched-record form passed at 390px with backend offline.');
+    await page.goto(`${base}/index.html`, { waitUntil: 'domcontentloaded' });
+    const query = page.locator('#q');
+    await query.fill(movie.title);
+    const result = page.locator('.searchResult[data-mi]').first();
+    await result.waitFor({ state: 'visible', timeout: 10000 });
+    await result.click();
+    await page.locator('#modal.show').waitFor({ state: 'visible', timeout: 5000 });
+    const searchDetail = page.locator('#detail .links a[href*="search.html?id="]').first();
+    await searchDetail.waitFor({ state: 'visible', timeout: 5000 });
+    await searchDetail.click();
+    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
+    await page.locator('#detail .recordAction a').click();
+    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
+    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
+    console.log('Calendar event and search result → movie detail → shared record form passed at 390px with backend offline.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

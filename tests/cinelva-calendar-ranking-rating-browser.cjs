@@ -57,7 +57,8 @@ async function getPort(){
   assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0');
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
+  try{await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate),null,{timeout:15000});}
+  catch(error){const diagnostics=await page.evaluate(()=>({url:location.href,readyState:document.readyState,quickRateScript:!!document.querySelector('script[src*="cinelva-quick-rate"]'),records:!!window.CinelvaLibraryRecords,dates:!!document.querySelector('#dates'),scriptTags:[...document.scripts].slice(-8).map(s=>s.src)}));throw new Error('Calendar quick-rate initialization failed: '+JSON.stringify(diagnostics),{cause:error});}
   // Let asynchronous calendar data initialization finish before replacing its
   // visible fixture cards, and lock the resolver to the supplied test records.
   await page.waitForFunction(()=>document.querySelector('#dates')?.children.length>0,{timeout:15000});

@@ -36,7 +36,7 @@ function open(movie) {
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
  $('cinelvaRateVenue').value=existing?.viewingVenue||'';
  $('cinelvaRateVenueRow').hidden=!$('cinelvaRatePlace').value;
- $('cinelvaRateDate').value=/^\\d{4}-\\d{2}-\\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:'';
+ $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:'';
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
  if(!dialog.open)dialog.show();
@@ -44,7 +44,7 @@ function open(movie) {
 }
 function save() {
  if(!selected)return;
- const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\\d{4}-\\d{2}-\\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
+ const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
   Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRateVenue').value.trim()},Number($('cinelvaRateScore').value),date);

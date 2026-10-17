@@ -73,7 +73,7 @@
     return `<div class="poster">${source ? `<img src="${escapeHTML(source)}" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">` : ''}<span ${source ? 'hidden' : ''}>${escapeHTML(movie.title || '作品画像なし')}</span></div>`;
   }
   function card(movie) {
-    return `<article class="movie" data-record-card="${escapeHTML(movie.id)}">${posterHTML(movie)}<strong>${escapeHTML(movie.title)}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small><small class="score ${Number(movie.rating)>=4?'high-rating':''}">★ ${Number(movie.rating ?? 0).toFixed(1)}</small><div class="record-actions"><button data-edit="${escapeHTML(movie.id)}">編集</button><button data-delete="${escapeHTML(movie.id)}">削除</button></div></article>`;
+    return `<article class="movie" data-record-card="${escapeHTML(movie.id)}">${posterHTML(movie)}<strong>${escapeHTML(movie.title)}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small><small class="score ${Number(movie.rating)>=4?'high-rating':''}">★ ${Number(movie.rating ?? 0).toFixed(1)}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-actions"><button data-edit="${escapeHTML(movie.id)}">編集</button><button data-delete="${escapeHTML(movie.id)}">削除</button></div></article>`;
   }
   function renderList() {
     const query = $('recordSearch').value.trim().toLocaleLowerCase();

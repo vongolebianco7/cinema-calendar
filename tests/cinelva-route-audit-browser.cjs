@@ -28,6 +28,7 @@ async function freePort() {
   const server = spawn('python', ['-m', 'http.server', String(port), '--bind', '127.0.0.1'], { cwd: root, stdio: 'ignore' });
   let browser;
   const pageErrors = [];
+  const navigationCancellationWarnings = [];
   const localAssetFailures = [];
   const report = {
     schema_version: 1,
@@ -42,6 +43,7 @@ async function freePort() {
     status: 'running',
     results: [],
     page_errors: pageErrors,
+    navigation_cancellation_warnings: navigationCancellationWarnings,
     local_asset_failures: localAssetFailures
   };
   try {
@@ -67,7 +69,17 @@ async function freePort() {
         await context.addInitScript(value => localStorage.setItem('cinelva-theme-v1', value), theme);
         await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
         const page = await context.newPage();
-        page.on('pageerror', error => pageErrors.push(`${width}px ${theme} ${page.url()}: ${error.message}`));
+        page.on('pageerror', error => {
+          const detail = `${width}px ${theme} ${page.url()}: ${error.message}`;
+          // WebKit reports canceled in-flight fetches from the outgoing document
+          // as page errors during intentional route navigation. Keep this
+          // evidence separate; other runtime exceptions remain release blockers.
+          if (browserName === 'webkit' && /due to access control checks\\.?$/.test(error.message)) {
+            navigationCancellationWarnings.push(detail);
+          } else {
+            pageErrors.push(detail);
+          }
+        });
         page.on('response', response => {
           const request = response.request();
           const localAsset = response.url().startsWith(`${base}/`) && ['document', 'script', 'stylesheet', 'image', 'font'].includes(request.resourceType());

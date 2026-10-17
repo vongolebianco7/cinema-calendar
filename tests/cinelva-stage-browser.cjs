@@ -22,6 +22,10 @@ const assert=require('node:assert/strict');
     const response=await page.request.get(origin+'/'+path);assert.equal(response.status(),200,path);
    }
    await page.goto(origin+'/cinelva/my-cinemap.html',{waitUntil:'domcontentloaded'});
+   await page.evaluate(()=>localStorage.setItem('cinemap-my-saved-list','{'));
+   await page.getByRole('button',{name:'保存済みを読み込む'}).click();
+   assert.match(await page.locator('#msg').textContent(),/保存済みのリストを読み込めませんでした/);
+   assert.equal(await page.evaluate(()=>localStorage.getItem('cinemap-my-saved-list')),'{','damaged local data stays available for backup recovery');
    await page.getByRole('link',{name:'鑑賞記録・設定のバックアップと復元'}).click();
    assert.match(page.url(),/\/cinelva\/data-backup\.html$/);
    console.log(`${name} ${width}: original root, nested Cinelva, shared records, assets and backup PASS`);

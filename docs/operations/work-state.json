@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:42:42.173Z",
+  "updated_at": "2026-10-17T14:38:37.701Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c",
+  "base_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3",
   "branch": "main",
-  "head_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c",
+  "head_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3",
   "pull_request": {
-    "number": 277,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/277",
+    "number": 278,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/278",
     "status": "merged",
-    "head_sha": "4cb10686ff3e620c8aa07c1bfbf136b724e30fa3",
-    "merge_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c"
+    "head_sha": "f550bc974322fde2cf7bcbefeab25c91cf515475",
+    "merge_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3"
   },
   "work_items": [
     {
@@ -286,6 +286,20 @@
       },
       "acceptance": "Missing checked_at remains unknown, not current; the existing 7-day freshness gate remains active.",
       "ci": "7/7 success: autonomous 39037476697, backup 39037476664, frontend 39037476644, brand 39037476660, completeness 39037476663, smoke 39037476693, Python 39037476653. Production not verified."
+    },
+    {
+      "id": "P0-278-CACHE-COVERAGE",
+      "title": "Keep cached provider observations eligible after they disappear from rolling catalog",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 278,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/278",
+        "head_sha": "f550bc974322fde2cf7bcbefeab25c91cf515475",
+        "merge_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3"
+      },
+      "acceptance": "All previously observed valid movie IDs can be considered in seven-day TMDB-only bounded refresh, even if absent from the current calendar, without new title discovery",
+      "ci": "4/4 success: Python 39041474689, smoke 39041474599, Completeness 39041474620, Autonomous quality 39041474702; production not verified."
     }
   ],
   "verification": [

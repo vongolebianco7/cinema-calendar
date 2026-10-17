@@ -22,7 +22,7 @@ const assert=require('node:assert/strict');
     const response=await page.request.get(origin+'/'+path);assert.equal(response.status(),200,path);
    }
    await page.goto(origin+'/cinelva/my-cinemap.html',{waitUntil:'domcontentloaded'});
-   await page.getByRole('link',{name:'鑑賞記録・Ocean・設定のバックアップと復元'}).click();
+   await page.getByRole('link',{name:'鑑賞記録・設定のバックアップと復元'}).click();
    assert.match(page.url(),/\/cinelva\/data-backup\.html$/);
    console.log(`${name} ${width}: original root, nested Cinelva, shared records, assets and backup PASS`);
    await context.close();

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:06:01+09:00",
+  "updated_at": "2026-10-17T12:15:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -17,7 +17,7 @@
     {
       "id": "P0-RESTART",
       "title": "Restart runbook and durable work state",
-      "status": "checks_passed_pending_provider_limit",
+      "status": "ci_passed",
       "acceptance": "A new Work session can identify current work and the next action from GitHub issue #239 plus the runbook and JSON checkpoint."
     },
     {
@@ -30,7 +30,7 @@
     {
       "id": "P0-241",
       "title": "Keep validation running without Vercel deployment",
-      "status": "checks_passed_pending_provider_limit",
+      "status": "ci_passed",
       "issue": 241,
       "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
     },
@@ -44,7 +44,7 @@
     {
       "id": "P0-244",
       "title": "Hide stale theater showtimes from users",
-      "status": "checks_passed",
+      "status": "ci_passed",
       "issue": 244,
       "pull_request": {
         "number": 247,
@@ -58,7 +58,7 @@
     {
       "id": "P0-242-WOWOW",
       "title": "Remove unsupported top placement of WOWOW listings",
-      "status": "checks_passed",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 248,
@@ -71,7 +71,7 @@
     {
       "id": "P0-242-COUNTS",
       "title": "Clarify discovery results, category meaning, and full access",
-      "status": "checks_passed",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 249,
@@ -97,7 +97,7 @@
     {
       "id": "P0-242-RECORD",
       "title": "Route movie details to shared watched-record form",
-      "status": "validate_passed_actions_in_progress",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 251,
@@ -183,6 +183,16 @@
       "command": "Brand static inventory",
       "result": "partial_audit_recorded",
       "details": "Found 29 non-Ocean HTML pages in the local tree. Existing test_brand_identity.py covers nine primary root pages, PWA icon/manifest/theme-color and passed in current PR Actions. Eleven nested /cinelva/ HTML files contain legacy Cinemap strings in CSS/JS identifiers or preserved backup links; they need case-by-case classification before any copy changes. No palette redesign was made."
+    },
+    {
+      "command": "PR #246 Autonomous quality gate run 38997487860",
+      "result": "failed_checkpoint_enum_values",
+      "details": "Root cause: six work_items.status values used descriptive strings outside the validator's allowed enum. This is a checkpoint schema defect, not a product code failure. iPhone Chromium/WebKit smoke and completeness scorecard passed. Normalizing statuses in this checkpoint and awaiting CI rerun."
+    },
+    {
+      "command": "PR #246 Ocean milestone ecosystem v2 run 38997488004",
+      "result": "failed_retired_ocean_workflow",
+      "details": "The repository still runs a retired Ocean milestone workflow on PRs and it fails. Remove or disable the retired Ocean-only workflow invocation through a scoped workflow change after inspecting its triggers and dependencies."
     }
   ],
   "deployment": {
@@ -203,6 +213,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Refresh PR #251 quality gate and scorecard. Continue #242 audit of visible copy versus legacy identifiers on 11 nested /cinelva/ pages, all record entry routes, and box-office poster fallback. Do not deploy until Vercel build-rate-limit clears.",
+  "next_action": "Check new PR #246 CI after the checkpoint enum fix. Inspect and remove the failing Ocean-only PR workflow from shared release gates. Continue #242 route-by-route record UI verification and box-office image fallback audit. Do not deploy until Vercel build-rate-limit clears.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

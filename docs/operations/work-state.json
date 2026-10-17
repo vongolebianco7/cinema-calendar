@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:38:37.701Z",
+  "updated_at": "2026-10-17T20:08:01.147Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3",
+  "base_sha": "d9d629717d4b886f4d9a2941479c246bba166996",
   "branch": "main",
-  "head_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3",
+  "head_sha": "d9d629717d4b886f4d9a2941479c246bba166996",
   "pull_request": {
-    "number": 278,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/278",
+    "number": 279,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/279",
     "status": "merged",
-    "head_sha": "f550bc974322fde2cf7bcbefeab25c91cf515475",
-    "merge_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3"
+    "head_sha": "80aedabce762bab6899c0d7aff01f4ac6a22119e",
+    "merge_sha": "d9d629717d4b886f4d9a2941479c246bba166996"
   },
   "work_items": [
     {
@@ -300,6 +300,20 @@
       },
       "acceptance": "All previously observed valid movie IDs can be considered in seven-day TMDB-only bounded refresh, even if absent from the current calendar, without new title discovery",
       "ci": "4/4 success: Python 39041474689, smoke 39041474599, Completeness 39041474620, Autonomous quality 39041474702; production not verified."
+    },
+    {
+      "id": "P0-279-PROVIDER-OUTAGE",
+      "title": "Surface total TMDB provider refresh outage in CI",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 279,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/279",
+        "head_sha": "80aedabce762bab6899c0d7aff01f4ac6a22119e",
+        "merge_sha": "d9d629717d4b886f4d9a2941479c246bba166996"
+      },
+      "acceptance": "Zero successful checks when scheduled checks exist fails CI without corrupting prior snapshot; logs attempted/success/failed.",
+      "ci": "4/4 success: Python 39065259733, smoke 39065259779, quality 39065259700, completeness 39065259694. No deployment."
     }
   ],
   "verification": [

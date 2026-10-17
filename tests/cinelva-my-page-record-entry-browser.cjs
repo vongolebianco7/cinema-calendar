@@ -3,6 +3,7 @@ const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const CalendarContext = require('../js/calendar-context.js');
 
 async function freePort() {
   const server = net.createServer();
@@ -46,6 +47,13 @@ async function freePort() {
     await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
     assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'offline movie detail selects the same catalog movie in the record form');
 
+    const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
+    await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });
+    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
+    await page.locator('#detail .recordAction a').click();
+    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
+    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'calendar context reaches the shared record form with the same title');
+
     await page.goto(`${base}/rankings.html?axis=rating`, { waitUntil: 'domcontentloaded' });
     const rankedMovie = page.locator('#grid .rankCard[href*="search.html?id="]').first();
     await rankedMovie.waitFor({ state: 'visible', timeout: 15000 });
@@ -57,7 +65,7 @@ async function freePort() {
     const chosenLabel = await page.locator('#chosenMovie').textContent();
     const searchFallback = await page.locator('#movieQuery').inputValue();
     assert.ok(chosenLabel.includes(rankedTitle) || searchFallback === rankedTitle, 'ranking selection is preselected or carried into the existing movie-search fallback');
-    console.log('Offline movie detail and ranking to My CINELVA record flows passed at 390px.');
+    console.log('Offline movie detail, calendar-context, and ranking to My CINELVA record flows passed at 390px.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

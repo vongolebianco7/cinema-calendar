@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:03:00+09:00",
+  "updated_at": "2026-10-17T14:07:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "e714a7c6c20b26a2cf5ecea981e24863d51c5920",
+  "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "e714a7c6c20b26a2cf5ecea981e24863d51c5920"
+    "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc"
   },
   "work_items": [
     {
@@ -40,7 +40,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "PR #253 head b32e60d74f4377d2a8e6e594dd7c318960a088fe adds an offline browser regression for malformed My CINELVA saved-list JSON and catches storage/JSON parse failure with a recovery message while preserving the raw value. Smoke and brand identity checks passed; full browser/scorecard Actions are still running. All 37 main-branch HTML pages were scanned: no production-page links to preview/ocean found; remaining Ocean mentions are retired preview pages, generic movie-discovery keyword scoring, and backup migration copy currently removed on #253."
+      "ci": "PR #253 head b32e60d74f4377d2a8e6e594dd7c318960a088fe passed all eight Actions checks. The new malformed saved-list recovery journey passed in Chromium/WebKit; raw malformed JSON remains unchanged for recovery. Main-branch route scan: 37 HTML pages, no links to preview/ocean; 477 paths under preview/ocean (8 HTML), plus 11 Ocean-only workflows and 156 Ocean-named docs. Full code/test reference inventory is next."
     },
     {
       "id": "P0-244",
@@ -359,6 +359,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Wait for the already-started PR #253 checks for head b32e60d74f4377d2a8e6e594dd7c318960a088fe; diagnose any failure immediately. Then record the result and start P0-02 retirement inventory/implementation for the unlinked preview/ocean surface (477 paths including 8 HTML entry points) and 11 Ocean-only workflows; classify docs/tests before deletion and preserve legacy localStorage and backup keys.",
+  "next_action": "Continue P0-02 Ocean retirement now. Inventory references from all 11 Ocean-specific workflows, Ocean tests, and docs to preview/ocean; classify each before removal. Disable/remove only retired feature-specific workflow/test/assets after proving there are no links from production routes. Preserve localStorage identifiers and legacy backup round-trip. Create a focused PR and run CI; do not wait for another scheduled task run.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

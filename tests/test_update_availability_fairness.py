@@ -50,5 +50,26 @@ class WatchProviderFairnessTests(unittest.TestCase):
         self.assertEqual(len(candidates), 25)
         self.assertEqual(cache, {})
 
+
+    def test_daily_capacity_covers_weekly_snapshot_and_reserves_theatrical_slots(self):
+        candidates = [candidate(i, "streaming") for i in range(1, 81)]
+        candidates += [candidate(i, "theatrical") for i in range(101, 141)]
+        selected = MODULE.select_due_observations(candidates, {}, NOW, limit=MODULE.DAILY_OBSERVATION_LIMIT)
+        ids = [mid for mid, _ in selected]
+        self.assertEqual(MODULE.DAILY_OBSERVATION_LIMIT, 60)
+        self.assertEqual(len(ids), 60)
+        self.assertEqual(sum(mid < 100 for mid in ids), 40)
+        self.assertEqual(sum(mid > 100 for mid in ids), 20)
+        self.assertEqual(len(set(ids)), 60)
+
+    def test_unused_reserved_slots_are_reassigned_without_wasting_api_calls(self):
+        candidates = [candidate(i) for i in range(1, 5)]
+        candidates += [candidate(i, "theatrical") for i in range(101, 170)]
+        selected = MODULE.select_due_observations(candidates, {}, NOW, limit=60)
+        ids = [mid for mid, _ in selected]
+        self.assertEqual(len(ids), 60)
+        self.assertEqual(sum(mid < 100 for mid in ids), 4)
+        self.assertEqual(sum(mid > 100 for mid in ids), 56)
+
 if __name__ == "__main__":
     unittest.main()

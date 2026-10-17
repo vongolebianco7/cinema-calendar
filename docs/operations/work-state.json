@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:40:00+09:00",
+  "updated_at": "2026-10-17T12:45:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "936802e8f263943195d1d6d1428e30d5572cf912",
+  "head_sha": "db957f31a81abcef378b84fb2ecc2f26e5b1a612",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "936802e8f263943195d1d6d1428e30d5572cf912"
+    "head_sha": "db957f31a81abcef378b84fb2ecc2f26e5b1a612"
   },
   "work_items": [
     {
@@ -104,10 +104,10 @@
         "number": 251,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
         "branch": "fix/cinelva-record-entry-route",
-        "head_sha": "bae8aef748616bdacb1341fa95905a8123a4ba3c"
+        "head_sha": "c4f81ba2edfc026fffca032c3525f2fe4cf71bb4"
       },
-      "acceptance": "From the branded root and nested noindex preview, movie detail passes selected ID/title to the existing My CINELVA form; no duplicate storage logic or key.",
-      "ci": "On head bae8aef, Validate frontend passed: offline Chromium test traversed direct movie detail → record form and rankings card → record form at 390px. Catalog matches preselect; otherwise the title is transferred to the existing search fallback. Quality, smoke, brand, backup safety, and completeness checks passed."
+      "acceptance": "From actual calendar events, ranking/detail routes, and root/preview pages, the selected ID/title and calendar context open the existing My CINELVA record form without duplicate storage logic.",
+      "ci": "On head c4f81ba2edfc026fffca032c3525f2fe4cf71bb4, Validate frontend, autonomous quality, smoke, brand, backup safety, and Completeness scorecard passed. Validate log confirms the actual calendar event → detail → shared record form journey at 390px with backend blocked; direct detail, calendar context, and rankings journeys also pass. Vercel preview check remains blocked by provider daily rate limit."
     },
     {
       "id": "P0-242-POSTERS",
@@ -126,7 +126,7 @@
     {
       "id": "P0-242-BRAND",
       "title": "Restore the approved mark on backup routes",
-      "status": "in_progress",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 253,
@@ -135,7 +135,7 @@
         "head_sha": "e00bd611bbf2792c8b508f816ab71f6852258437"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "The identity suite on e00bd61 passes the approved-symbol check across all 29 non-Ocean HTML routes. Chromium/WebKit mobile browser journey now also verifies the loaded symbol remains present behind the record modal and the dialog fits 390px. Smoke and identity pass; Validate frontend, backup safety, isolated Pages, Completeness scorecard, autonomous quality, and one-time Ocean probe are running."
+      "ci": "On head e00bd611bbf2792c8b508f816ab71f6852258437, frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, and autonomous quality all passed. Chromium/WebKit mobile journey confirms the approved symbol loads behind the record dialog and dialog fits at 390px."
     }
   ],
   "verification": [
@@ -283,6 +283,21 @@
       "command": "Vercel quota follow-up",
       "result": "scheduled",
       "details": "One-time Work automation will re-read Vercel quota and GitHub release readiness on 2026-10-18 07:05 Asia/Tokyo. It will not deploy while the provider cap remains, and will follow required checks/review policy."
+    },
+    {
+      "command": "PR #251 actual calendar record-entry journey",
+      "result": "all_actions_passed",
+      "details": "Found that the real homepage calendar modal built a fullDetailHref but never rendered it, so its record path was absent despite direct detail/context tests. Added a link from calendar modal to shared detail and an offline 390px browser journey from event → detail → My CINELVA record form. All PR checks passed on head c4f81ba2edfc026fffca032c3525f2fe4cf71bb4."
+    },
+    {
+      "command": "PR #253 approved mark full-route and modal regression",
+      "result": "all_actions_passed",
+      "details": "Head e00bd611bbf2792c8b508f816ab71f6852258437 passed Validate frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, and autonomous quality gate; Chromium/WebKit modal assertions passed."
+    },
+    {
+      "command": "PR #246 restart checkpoint",
+      "result": "all_actions_passed",
+      "details": "Head db957f31a81abcef378b84fb2ecc2f26e5b1a612 passed CINELVA smoke, Ocean workflow contract, one-time Ocean parallel probe, autonomous quality gate, and Completeness scorecard."
     }
   ],
   "deployment": {
@@ -303,6 +318,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh the in-progress PR #253 checks on e00bd61. Continue #242 route-level QA from calendar/map/critic and visual states (390px/1280px), plus remaining share/OG/light-dark surfaces. A one-time quota/readiness check is scheduled for 2026-10-18 07:05 JST; keep the production deploy blocked until the provider clears the daily deployment cap and release prerequisites are met.",
+  "next_action": "Refresh the new checkpoint commit's CI. Continue #242 route-level audit for critic/map/search entry points and light/dark contrast, share/OG/PWA, and previews; verify release only after Vercel confirms the daily deployment cap is clear.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

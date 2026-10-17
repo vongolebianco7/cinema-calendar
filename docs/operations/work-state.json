@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T11:56:00+09:00",
+  "updated_at": "2026-10-17T11:58:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "8e546a7528346d46bbbda15210334fdcd82494c8",
+  "head_sha": "fb012f16677271f5583803c0c4ef3be7aca822e4",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "8e546a7528346d46bbbda15210334fdcd82494c8"
+    "head_sha": "fb012f16677271f5583803c0c4ef3be7aca822e4"
   },
   "work_items": [
     {
@@ -100,13 +100,13 @@
     },
     {
       "command": "GitHub Actions for PR #246",
-      "result": "in_progress",
-      "details": "At 2026-10-17 11:58 JST, deterministic checks and smoke job passed; Chromium/WebKit mobile smoke checks still running. Cloudflare Pages PR preview succeeded. Vercel front-end preview was ignored by project scope; no production deploy."
+      "result": "deterministic_gate_duplicate_fixed_actions_running",
+      "details": "Earlier state validation failed because duplicate P0-242-WOWOW item entries were appended; removed the duplicate in commit fb012f16. Actions rerun is pending. GitHub combined status currently shows Vercel – backend failure target upgradeToPro=build-rate-limit."
     },
     {
       "command": "GitHub Actions Completeness score for PR #246",
       "result": "failed_phase_a_baseline_comparison",
-      "details": "Score artifact reports main baseline 39.5, current 1.5, delta -38.0, with many missing metrics; 16 new unverified blockers and 13 touched-area regressions result from absent metrics, not a reported failing deterministic code test. Investigate workflow artifact production/cancellation before treating this as a product regression."
+      "details": "Score artifact reports main baseline 39.5, current 1.5, delta -38.0, with many missing metrics; 16 new unverified blockers and 13 touched-area regressions result from absent metrics, not a reported failing deterministic code test. Investigate workflow artifact production/cancellation before treating this as a product regression. Latest run after the duplicate fix is pending."
     },
     {
       "command": "PR #247 local verification",
@@ -132,6 +132,11 @@
       "command": "PR #249 local design checks and GitHub Actions",
       "result": "pr_created_checks_not_started",
       "details": "Full filtered counts are already displayed while each rail renders only list.slice(0,16). Added per-rail accessible expand/collapse controls and pure boundary tests for 0, 1, 16, 17, and 100 results; CI run not yet reported."
+    },
+    {
+      "command": "PR #247 retry",
+      "result": "passed",
+      "details": "Failed validate-frontend job was rerun without re-running successful jobs. Existing My CINELVA browser journey and stale-showtimes check both passed; other checks also successful."
     }
   ],
   "deployment": {
@@ -143,11 +148,15 @@
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
     "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
-    "next_action": "After required checks pass, inspect Vercel team usage and project deployment state; deploy the tested SHA once only if the restriction is cleared."
+    "next_action": "After required checks pass, inspect Vercel team usage and project deployment state; deploy the tested SHA once only if the restriction is cleared.",
+    "provider_preview_status": "Vercel – backend GitHub status failed with target containing upgradeToPro=build-rate-limit on PR #246 at 2026-10-17; no automatic retry or production deploy made.",
+    "blockers": [
+      "Vercel PR backend check is currently blocked by the provider's build-rate-limit (observed on commit fb012f16); exact Hobby usage and reset time remain unavailable."
+    ]
   },
   "blockers": [
-    "Vercel project-specific usage and restriction reset status were not available from the connected read-only Vercel API."
+    "Vercel team/project usage and reset timestamp are unavailable through the connected read-only API. A PR backend check explicitly returned build-rate-limit; no production deployment attempted."
   ],
-  "next_action": "Refresh Actions for PRs #246, #247 retry, #248 and #249; diagnose scorecard artifact gaps and broad baseline test failures; continue remaining #242 P0 items. Update the checkpoint and #239 within 30–60 minutes.",
+  "next_action": "Continue local and GitHub Actions checks without triggering Vercel retries; wait for the provider quota to clear. Refresh PR #246's post-duplicate-fix gate, #248 status (all substantive checks passed), and #249 tests; continue the remaining #242 audit and checkpoint on #239.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

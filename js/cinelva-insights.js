@@ -75,7 +75,7 @@ function pointForRecord(record) {
     year, country, genre, latitude: latitude ?? null, format: classified.formats[0] || '形式不明',
     coordinates: {
       x: year === null ? 0.03 : 0.12 + clamp((year - 1900) / 130, 0, 1) * 0.88,
-      y: latitude === undefined ? 0.03 : clamp(0.5 + latitude / 180, 0, 1),
+      y: latitude === undefined ? 0.5 : clamp(0.5 + latitude / 180, 0, 1),
       z: (genreIndex + 1) / GENRE_TAXONOMY.length,
     },
     size: Number.isFinite(rating) ? Math.round((0.75 + rating * 0.155) * 100) / 100 : 0.75,

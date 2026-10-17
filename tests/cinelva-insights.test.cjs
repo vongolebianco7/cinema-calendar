@@ -106,3 +106,14 @@ test('director identity prefers explicit TMDB match and does not equate conflict
   assert.equal(Insights.directorViewingRecord(records,{id:222}),null);
   assert.equal(Insights.directorViewingRecord(records,{id:null}),null);
 });
+
+test('unsourced countries remain unknown instead of being plotted near the south pole', () => {
+  for (const countries of [[], ['Unknownland']]) {
+    const plot=Insights.pointForRecord({id:'x',year:2025,countries,genres:['SF'],rating:null});
+    assert.equal(plot.latitude,null);
+    assert.equal(plot.coordinates.y,0.5);
+    assert.equal(plot.size,0.75);
+  }
+  const japan=Insights.pointForRecord({id:'jp',year:2025,countries:['日本'],genres:['SF']});
+  assert.ok(japan.coordinates.y>0.5);
+});

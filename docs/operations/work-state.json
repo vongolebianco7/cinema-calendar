@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T14:07:00+09:00",
+  "updated_at": "2026-10-17T17:14:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
-  "branch": "work/cinelva-restartable-p0",
-  "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc",
+  "base_sha": "1966870b9033a668a09b70a7cea6615b02a7da93",
+  "branch": "work/route-audit-manifest",
+  "head_sha": "80c6e522bb84231b32983c82ea7d6f3f00a3e234",
   "pull_request": {
-    "number": 246,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
+    "number": 255,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/255",
     "status": "open",
-    "head_sha": "6d7160a77a14410fcea0ef2d173a9ed425002bbc"
+    "head_sha": "80c6e522bb84231b32983c82ea7d6f3f00a3e234"
   },
   "work_items": [
     {
@@ -41,6 +41,24 @@
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
       "ci": "PR #253 head b32e60d74f4377d2a8e6e594dd7c318960a088fe passed all eight Actions checks. The new malformed saved-list recovery journey passed in Chromium/WebKit; raw malformed JSON remains unchanged for recovery. Main-branch route scan: 37 HTML pages, no links to preview/ocean; 477 paths under preview/ocean (8 HTML), plus 11 Ocean-only workflows and 156 Ocean-named docs. Full code/test reference inventory is next."
+    },
+    {
+      "id": "P0-OCEAN-RETIREMENT",
+      "title": "Retire Ocean routes and active CI coupling without deleting saved records",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {"number": 254, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/254", "branch": "work/ocean-route-retirement", "head_sha": "ec6dc9b689c2705092e6f09818d05d4b0bfc8561"},
+      "acceptance": "Eight legacy routes redirect to My CINELVA, legacy storage remains backup-compatible, Ocean-only workflows and score paths no longer run.",
+      "ci": "Merged as main 1966870b9033a668a09b70a7cea6615b02a7da93 after Validate frontend 39016229094, Completeness 39016229104, autonomous quality 39016229137, smoke 39016229189, backup safety 39016229088, and scorecard contract 39016229084 all passed."
+    },
+    {
+      "id": "P0-243-ROUTE-MANIFEST",
+      "title": "Create the machine-readable active route audit inventory",
+      "status": "pr_created",
+      "issue": 243,
+      "pull_request": {"number": 255, "url": "https://github.com/vongolebianco7/cinema-calendar/pull/255", "branch": "work/route-audit-manifest", "head_sha": "80c6e522bb84231b32983c82ea7d6f3f00a3e234"},
+      "acceptance": "All 29 active non-Ocean HTML routes declare surface, purpose, data ownership, count contract, CTA and sources; CI and the browser audit consume the same inventory.",
+      "ci": "Local route-manifest tests 2/2 and the shared deterministic quality gate passed; Actions pending."
     },
     {
       "id": "P0-244",
@@ -359,6 +377,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Continue P0-02 Ocean retirement now. Inventory references from all 11 Ocean-specific workflows, Ocean tests, and docs to preview/ocean; classify each before removal. Disable/remove only retired feature-specific workflow/test/assets after proving there are no links from production routes. Preserve localStorage identifiers and legacy backup round-trip. Create a focused PR and run CI; do not wait for another scheduled task run.",
+  "next_action": "Finish PR #255 Actions and merge only if all checks pass. Then continue #243 by generating per-route audit evidence/artifacts from the manifest, or start the next independent #244 data-freshness contract if browser CI is still running. Do not deploy while the Vercel rate limit remains.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

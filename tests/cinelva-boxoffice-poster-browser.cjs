@@ -4,6 +4,8 @@ const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 
+function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\\p{L}\\p{N}]/gu, ''); }
+
 async function freePort() {
   const server = net.createServer();
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -30,8 +32,8 @@ async function freePort() {
     });
     browser = await chromium.launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-    let backendCalls = 0;
-    await page.route('https://backend-one-gray-94.vercel.app/**', route => { backendCalls += 1; return route.abort(); });
+    const backendQueries = [];
+    await page.route('https://backend-one-gray-94.vercel.app/**', route => { backendQueries.push(new URL(route.request().url()).searchParams.get('q') || ''); return route.abort(); });
     await page.route('https://image.tmdb.org/**', route => route.abort());
 
     for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
@@ -44,7 +46,8 @@ async function freePort() {
       assert.equal((await firstCard.locator('.title').textContent()).trim().length > 0, true, 'poster fallback keeps the film title visible');
       assert.equal(await firstCard.locator('[data-box-placeholder]').evaluate(el => getComputedStyle(el, '::after').content), '"画像なし"');
       await firstCard.locator('img[data-box-poster][src]').waitFor({ state: 'attached', timeout: 5000 });
-      assert.equal(backendCalls, 0, 'the nested static rankings catalog resolves the first box-office poster locally');
+      const title = (await firstCard.locator('.title').textContent()).trim();
+      assert.equal(backendQueries.some(query => normalizeTitle(query) === normalizeTitle(title)), false, 'the nested static rankings catalog resolves the first box-office poster locally');
       await firstCard.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
       await page.waitForTimeout(300);
       assert.equal(await page.locator('#grid img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');

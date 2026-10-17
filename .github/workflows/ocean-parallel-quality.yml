@@ -2,6 +2,7 @@ name: Ocean parallel quality probes
 
 on:
   pull_request:
+    types: [opened, reopened]
     paths:
       - 'preview/ocean/**'
       - 'scripts/ocean_*'

@@ -133,8 +133,9 @@ jobs:
       - name: Check approved data sources
         run: python scripts/check_sources.py
       - name: Check discovery UI integrations
-        run: python scripts/check_discovery_ui.py
-          && node --test tests/cinelva-discovery-offer-order.test.cjs
+        run: |
+          python scripts/check_discovery_ui.py
+          node --test tests/cinelva-discovery-offer-order.test.cjs
       - name: Check Cinemap core journey
         run: python scripts/check_core_journey.py
       - name: Check Critic Map compliance gate

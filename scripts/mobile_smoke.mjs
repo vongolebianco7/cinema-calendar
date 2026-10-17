@@ -29,7 +29,13 @@ for(const path of candidates){
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);
  const safeName=path.replace(/\.html$/,'').replaceAll('/','-');
- await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage:true});
+ // WebKit rejects any screenshot dimension beyond 32767 device pixels.
+ // Preserve a genuine viewport screenshot for tall pages instead of
+ // silently treating screenshot infrastructure limits as layout failures.
+ const docHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
+ const fullPage=docHeight*3<=30000;
+ if(!fullPage)console.warn(`${browserName} ${path}: document ${docHeight}px is too tall for a full-page screenshot at DPR 3; preserving viewport evidence`);
+ await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage});
 }
 await browser.close();
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}

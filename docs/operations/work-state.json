@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:18:09.100Z",
+  "updated_at": "2026-10-17T13:24:22.759Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334",
+  "base_sha": "628da6ce2439baa70db55663ff18325680fec74a",
   "branch": "main",
-  "head_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334",
+  "head_sha": "628da6ce2439baa70db55663ff18325680fec74a",
   "pull_request": {
-    "number": 275,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/275",
+    "number": 276,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/276",
     "status": "merged",
-    "head_sha": "f6981909e851adaff2514974f83cdb2c198437ec",
-    "merge_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334"
+    "head_sha": "6f1aa3549418819d291c102bd3a779615edbfdd4",
+    "merge_sha": "628da6ce2439baa70db55663ff18325680fec74a"
   },
   "work_items": [
     {
@@ -258,6 +258,20 @@
       },
       "acceptance": "Year 1–99 and century-year leap days have accurate date validation without storage or backup migration.",
       "ci": "4/4 success: Validate frontend 39035791077, smoke 39035791193, Autonomous quality gate 39035791170, Completeness 39035791075. Production not verified."
+    },
+    {
+      "id": "P0-276-PROVIDER-REFRESH",
+      "title": "Refresh older already-observed streaming titles without extending unlicensed discovery",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 276,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/276",
+        "head_sha": "6f1aa3549418819d291c102bd3a779615edbfdd4",
+        "merge_sha": "628da6ce2439baa70db55663ff18325680fec74a"
+      },
+      "acceptance": "Previously cached older titles in the approved catalog re-enter normal seven-day observation scheduling; uncached historical titles stay excluded.",
+      "ci": "4/4 success: smoke 39036262448, Python 39036262395, Autonomous quality 39036262376, Completeness 39036262391. Actual provider refresh and production not verified."
     }
   ],
   "verification": [

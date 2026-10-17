@@ -99,9 +99,9 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
     await page.goto(`${base}/my-cinemap.html`,{waitUntil:'domcontentloaded'});myReflected=(await bodyText(page)).includes(fixture.title);
   }
   emit('DETAIL-04',1,setRating,'rating 1-5 set');emit('DETAIL-05',1,immediate,'saved state reflects immediately');emit('DETAIL-06',1,persisted,'saved record survives reload');emit('DETAIL-07',.5,changed,'rating can be changed');
-  emit('MY-01',1,myReflected,'saved movie appears in My Cinemap');emit('MY-02',1,myReflected&&changed,'My Cinemap rating matches canonical record');emit('MY-03',1,myReflected&&persisted,'My Cinemap state survives source-page reload');
-  const earned=(detailLoaded?1:0)+(controlVisible?1.5:0)+(immediate?1.5:0)+(saved?2:0)+(persisted?2:0)+(myReflected?2:0),flowPass=detailLoaded&&controlVisible&&immediate&&saved&&persisted&&myReflected&&errors.length===0;
-  emit('FLOW-RECORD',10,flowPass,JSON.stringify({detailLoaded,controlVisible,immediate,saved,persisted,myReflected,errors}),earned);await page.close();
+  emit('MY-01',2,myReflected,'saved movie appears in My CINELVA');emit('MY-02',2,myReflected&&changed,'My CINELVA rating matches canonical record');emit('MY-03',2,myReflected&&persisted,'My CINELVA state survives source-page reload');
+  const earned=(detailLoaded?1:0)+(controlVisible?2:0)+(immediate?3:0)+(saved?4:0)+(persisted?4:0)+(myReflected?3:0),flowPass=detailLoaded&&controlVisible&&immediate&&saved&&persisted&&myReflected&&errors.length===0;
+  emit('FLOW-RECORD',17,flowPass,JSON.stringify({detailLoaded,controlVisible,immediate,saved,persisted,myReflected,errors}),earned);await page.close();
 }
 
 // Related-work and creator navigation.
@@ -136,8 +136,8 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
 // Fresh-user operability.
 {
   const page=await context.newPage();await page.addInitScript(()=>localStorage.clear());const discover=await page.goto(`${base}/discover.html`,{waitUntil:'domcontentloaded'}).then(r=>Boolean(r&&r.status()<400)).catch(()=>false),detail=await openFixture(page);
-  const control=recordSelector(page),recordable=(await control.count())>0&&await control.isVisible().catch(()=>false),oceanLink=(await page.locator('a[href*="ocean"]').count())>0,earned=(discover?1:0)+(detail?1:0)+(recordable?1:0)+(oceanLink?1:0);
-  emit('FLOW-FIRSTUSE',4,discover&&detail&&recordable&&oceanLink,JSON.stringify({discover,detail,recordable,oceanLink}),earned);await page.close();
+  const control=recordSelector(page),recordable=(await control.count())>0&&await control.isVisible().catch(()=>false),myCinelvaLink=(await page.locator('a[href*="my-cinelva"]').count())>0,earned=(discover?1:0)+(detail?1:0)+(recordable?1:0)+(myCinelvaLink?1:0);
+  emit('FLOW-FIRSTUSE',4,discover&&detail&&recordable&&myCinelvaLink,JSON.stringify({discover,detail,recordable,myCinelvaLink}),earned);await page.close();
 }
 
 // Eight independent error/empty-state cases, 0.5 point each.

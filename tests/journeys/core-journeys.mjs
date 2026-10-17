@@ -146,8 +146,12 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
   async function scenario(name,url,predicate,setup){
     const page=await context.newPage();if(setup)await page.addInitScript(setup);const errors=attachPageErrorCollector(page),started=Date.now();let ok=false;
     try{
-      await page.goto(`${base}/${url}`,{waitUntil:'domcontentloaded',timeout:10000});
-      const deadline=Date.now()+4000;let condition=false;
+      // WebKit can defer DOMContentLoaded on a fixture route while other
+      // nonessential requests are in flight. Navigation commit plus explicit
+      // UI predicates tests the actual user-visible outcome, not load timing.
+      const navigation=await page.goto(`${base}/${url}`,{waitUntil:'commit',timeout:15000});
+      if(!navigation || !navigation.ok()) throw new Error(`fixture route unavailable: ${url}`);
+      const deadline=Date.now()+10000;let condition=false;
       while(Date.now()<deadline){
         condition=Boolean(await predicate(page).catch(()=>false));
         if(condition){await page.waitForTimeout(50);break;}

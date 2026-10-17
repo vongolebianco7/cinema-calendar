@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T11:57:05+09:00",
+  "updated_at": "2026-10-17T12:00:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "30dac4a49399be3951c8e002b6a8f1e543e496a8",
+  "head_sha": "a86941b2cb58f649c86da971d4c3e1c62b597bed",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "30dac4a49399be3951c8e002b6a8f1e543e496a8"
+    "head_sha": "a86941b2cb58f649c86da971d4c3e1c62b597bed"
   },
   "work_items": [
     {
@@ -70,16 +70,29 @@
     },
     {
       "id": "P0-242-COUNTS",
-      "title": "Show all discovery rail results",
+      "title": "Clarify discovery results, category meaning, and full access",
       "status": "checks_passed",
       "issue": 242,
       "pull_request": {
         "number": 249,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/249",
         "branch": "fix/cinelva-discovery-shelf-counts",
-        "head_sha": "64ac89613a51423607af9a78701824d79930e4c3"
+        "head_sha": "01c39c89fb024c960ababf6a7f0dbaffc4663e7d"
       },
-      "acceptance": "Full filtered counts remain accurate and every filtered result can be reached via an expandable horizontal rail."
+      "acceptance": "Filtered counts match their result sets; every result is reachable; history wording alone does not claim a true story; the general catalog is not mislabeled as film history."
+    },
+    {
+      "id": "P0-242-STREAMING-COVERAGE",
+      "title": "Audit per-service streaming freshness coverage",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": {
+        "number": 250,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/250",
+        "branch": "docs/cinelva-streaming-coverage-audit",
+        "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf"
+      },
+      "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability."
     }
   ],
   "verification": [
@@ -130,13 +143,18 @@
     },
     {
       "command": "PR #249 local design checks and GitHub Actions",
-      "result": "passed",
-      "details": "Validate frontend, autonomous quality gate, CINELVA smoke, brand identity, backup safety, and completeness scorecard all passed on head 64ac8961."
+      "result": "previous_head_passed_latest_classification_checks_running",
+      "details": "All required checks passed on the prior shelf-expansion head. Added true-story classification that excludes generic historical-fiction wording plus tests on latest head 01c39c89; new PR Actions are running."
     },
     {
       "command": "PR #247 retry",
       "result": "passed",
       "details": "The failed validate-frontend job was retried only and passed, including the existing My CINELVA browser journey and stale-showtimes check. Other relevant PR checks passed; Vercel quota remains the external deployment blocker."
+    },
+    {
+      "command": "PR #250 streaming coverage audit",
+      "result": "snapshot_recomputed_pr_created",
+      "details": "Added service-level fresh/stale unique movie counts to docs/cinelva-data-coverage.md, computed from data/availability.json generated_at 2026-10-16T18:49:04Z as of 2026-10-17 11:58 JST. Counts: Netflix 10 fresh/6 stale; Prime Video 45/11; Disney+ 1/1; U-NEXT 46/10; Hulu 28/0; Apple TV+ 2/0; ABEMA, Lemino, WOWOW 0/0. No collection call or dataset modification."
     }
   ],
   "deployment": {
@@ -157,6 +175,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Continue remaining P0 audit areas from #242 (brand/palette, record entry from all screens, poster coverage/fallback, streaming freshness, history vs true-story separation). Keep PRs open for user review. Recheck Vercel build-rate-limit later; deploy tested SHA only once provider status clears.",
+  "next_action": "Refresh latest PR #246/#249 checks and PR #250 docs check. Continue #242 full-page brand/palette and record-entry audit; check box-office poster failure UI and current per-title availability; classify the 8+8 baseline tests. Keep Vercel deployment paused until provider rate-limit clears.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

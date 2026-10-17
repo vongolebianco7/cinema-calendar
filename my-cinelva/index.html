@@ -14,13 +14,63 @@
     @media(max-width:760px){main{padding:22px 14px 60px}.top{padding:10px 14px}.brand{font-size:23px}.hero{align-items:start;flex-direction:column}.hero h1{font-size:30px}.actions{justify-content:start}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.record-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 10px}.panel{padding:13px}.canvasbox canvas{height:360px}.tabs{margin-left:-4px;margin-right:-4px}.section-head{align-items:start;flex-direction:column}.toolbar input{min-width:100%}.award-matrix{margin-right:-13px}}
     .heatgrid{display:grid;grid-template-rows:repeat(7,13px);grid-auto-flow:column;grid-auto-columns:13px;gap:3px;overflow:auto;padding:8px 2px}.heat-day{width:13px;height:13px;border-radius:2px;background:var(--soft)}.heat-day[data-level="1"]{background:#d9bd7f}.heat-day[data-level="2"]{background:#a77d35}.heat-day[data-level="3"]{background:#673d27}.heat-day.empty{opacity:.25}.timeline-node.awarded{border-color:var(--gold);box-shadow:0 0 0 5px color-mix(in srgb,var(--gold) 30%,transparent)}.timeline-node.high-rated{outline:2px solid var(--gold);outline-offset:3px}.breakdown{border:1px solid var(--line);padding:10px;flex:1;min-width:150px}.breakdown strong{display:block}.annual-count{display:flex;align-items:center;gap:9px;min-width:120px}.annual-bar{display:block;height:10px;min-width:2px;max-width:100%;border-radius:6px;background:var(--brand)}.annual-comparison table{min-width:0}.annual-comparison th,.annual-comparison td{text-align:left}.annual-comparison td:last-child{color:var(--muted);font-size:12px}
   </style>
+<style id="shared-header">html[data-theme]{color-scheme:dark}body{--page:#0a0a0a;--panel:#111;--ink:#f2f2f2;--muted:#aaa;--line:#303030;--soft:#222;--brand:#e6a5ac;--gold:#d9bd7f;background:var(--page);color:var(--ink)}.gTop{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans",sans-serif}.gTop button,.gTop input{font:inherit}.gTop button{cursor:pointer}.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+.gLogo{display:block;height:31px;width:auto;max-width:170px;object-fit:contain}
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}.gLogo{height:27px;max-width:124px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+</style>
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style>
 <link rel="icon" href="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
 <link rel="apple-touch-icon" href="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="manifest" href="../manifest.webmanifest">
 <meta property="og:image" content="https://cinelva.vercel.app/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 </head>
 <body>
-  <header class="top"><a class="brand" href="../index.html" aria-label="Cinelva home"><img src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span>Cinelva</span></a><a href="../index.html">映画を探す</a></header>
+  <header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
+ <form class="gSearchForm" action="../search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="../index.html">カレンダー</a>
+ <a href="../discover.html">映画を探す</a>
+ <a href="../rankings.html">ランキング</a>
+ <a href="../theaters.html">映画館を探す</a>
+ <a href="../experience.html">上映方式</a>
+ <a href="./">My Cinelva</a>
+</aside>
+
   <main>
     <section class="hero"><div><div class="eyebrow">YOUR CINEMA, GROWING WITH YOU</div><h1>My Cinelva</h1><p>鑑賞記録を重ねて、自分だけの映画の世界を振り返る。</p></div><div class="actions"><button class="button primary" id="addRecord">＋ 鑑賞を記録</button><button class="button" id="exportRecords">記録をバックアップ</button><button class="button" id="importRecords">バックアップを復元</button><input id="importFile" type="file" accept="application/json,.json" hidden><a class="button" href="../my-cinemap.html">実績画像を作る</a></div></section>
     <p id="originNote" class="hint">記録はこのブラウザとドメインに保存されます。端末間で自動同期はされません。</p>
@@ -37,4 +87,4 @@
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
   <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js"></script><script src="../js/cinelva-records-page.js"></script>
-</body></html>
+<script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script></body></html>

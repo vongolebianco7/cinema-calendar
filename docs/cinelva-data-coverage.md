@@ -19,3 +19,22 @@
 - Restoration validates the entire input before writing and preserves legacy deletion markers on a failed record write. Watched-without-rating, zero rating, partial dates and unwatched legacy entries retain their meaning.
 - Formats and work forms are independent. Documentary does not imply human drama; lack of animation metadata does not establish live action. Users can enter a known medium/work form explicitly.
 - Director lists are partial TMDB filmographies. Gold highlights mean a sourced award match; outlined nodes mean TMDB score >= 7.5 and >= 100 votes. No full-career completion percentage is claimed.
+
+
+### Per-service coverage snapshot
+
+Snapshot file: `data/availability.json` (`generated_at=2026-10-16T18:49:04.484983+00:00`). Counts below are unique movie records per service, observed across subscription, rental or purchase listings; “fresh” means the movie's `checked_at` is no more than 7 days old as of 2026-10-17 11:58 JST. Old observations are excluded from recommendation results. A zero means no record in this snapshot, not that the provider has no catalog.
+
+| Service | Fresh movie records | Stale movie records |
+|---|---:|---:|
+| Netflix | 10 | 6 |
+| Prime Video | 45 | 11 |
+| Disney+ | 1 | 1 |
+| U-NEXT | 46 | 10 |
+| Hulu | 28 | 0 |
+| Apple TV+ | 2 | 0 |
+| ABEMA | 0 | 0 |
+| Lemino | 0 | 0 |
+| WOWOWオンデマンド | 0 | 0 |
+
+Provider names are normalized using the aliases in `scripts/update_availability.py`; counts can include a movie appearing in more than one listing type, but each movie is counted once per service. Timestamp freshness is determined by each movie's `checked_at`, not file modification time.

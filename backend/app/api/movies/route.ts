@@ -32,7 +32,7 @@ export async function GET(request: Request) {
   // Fallback for searches such as スターウォーズ versus スター・ウォーズ.
   // The value is bound by Prisma's tagged SQL API, not concatenated into SQL.
   const compact = (q || "").normalize("NFKC").toLocaleLowerCase()
-    .replace(/[\\s\\p{P}\\p{S}]+/gu, "");
+    .replace(/[\s\p{P}\p{S}]+/gu, "");
   if (q && compact.length >= 2 && rows.length < limit) {
     const normalizedMatches = await prisma.$queryRaw<Array<{ id: string }>>`
       SELECT "id" FROM "Movie"

@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:13:19.252Z",
+  "updated_at": "2026-10-17T13:18:09.100Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "521de933f8234b87c5afb84158ec3a9384e199c2",
+  "base_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334",
   "branch": "main",
-  "head_sha": "521de933f8234b87c5afb84158ec3a9384e199c2",
+  "head_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334",
   "pull_request": {
-    "number": 273,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/273",
+    "number": 275,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/275",
     "status": "merged",
-    "head_sha": "6a386f3cb166d9fd9108b4e1efa400c9cf2c00c3",
-    "merge_sha": "521de933f8234b87c5afb84158ec3a9384e199c2"
+    "head_sha": "f6981909e851adaff2514974f83cdb2c198437ec",
+    "merge_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334"
   },
   "work_items": [
     {
@@ -244,6 +244,20 @@
       },
       "acceptance": "Calendar/ranking/search score controls work at 390px including 0 rating and continue-to-next; preserve existing records",
       "ci": "4/4 passed: smoke 39035470192, Autonomous quality 39035470229, Validate frontend 39035470159, Completeness 39035470140."
+    },
+    {
+      "id": "P0-275-RECORD-DATE-VALIDATION",
+      "title": "Correct Gregorian leap-day validation in watched date records",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 275,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/275",
+        "head_sha": "f6981909e851adaff2514974f83cdb2c198437ec",
+        "merge_sha": "b0422216c7f5d65fa18711a09eb90cbea9577334"
+      },
+      "acceptance": "Year 1–99 and century-year leap days have accurate date validation without storage or backup migration.",
+      "ci": "4/4 success: Validate frontend 39035791077, smoke 39035791193, Autonomous quality gate 39035791170, Completeness 39035791075. Production not verified."
     }
   ],
   "verification": [

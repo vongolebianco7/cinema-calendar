@@ -32,6 +32,7 @@
     host.append(label);
     select = label.querySelector('select');
     select.value = preference;
+    apply(); // The theme-color meta tag may appear after this head script.
     select.addEventListener('change', () => {
       preference = valid(select.value);
       try {

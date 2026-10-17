@@ -55,9 +55,13 @@ async function getPort(){
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
+  // Let asynchronous calendar data initialization finish before replacing its
+  // visible fixture cards, and lock the resolver to the supplied test records.
+  await page.waitForFunction(()=>document.querySelector('#dates')?.children.length>0,{timeout:15000});
   await page.evaluate(()=>{
-   movies=[{id:101,title:'Film One',event:'streaming',date:'2026-10-18'},
-           {id:102,title:'Film Two',event:'tv',date:'2026-10-18'}];
+   const fixtures=[{id:101,title:'Film One',event:'streaming',date:'2026-10-18'},
+                   {id:102,title:'Film Two',event:'tv',date:'2026-10-18'}];
+   window.CinelvaRatingResolve=index=>fixtures[Number(index)];
    document.querySelector('#dates').innerHTML=
      '<section class="streamingWeekBlock"><article class="streamMovie" data-mi="0">Film One</article>'+
      '<article class="tvMovie" data-mi="1">Film Two</article></section>';

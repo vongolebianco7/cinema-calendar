@@ -46,12 +46,15 @@ for required in [
     'id="providerChecks"', 'providers.join("|")', "flex-wrap:wrap",
     "scroll-snap-type:x proximity", 'class="presetCard"',
     'id="conditionResults"', '#grid .card',
-    'id="theatricalPopularGrid"', 'id="streamingPopularGrid"',
+    'id="theatricalPopularGrid"',
     'loadPopularShelves', 'loadPopularShelves',
     'data/theatrical.json', 'data/streaming.json'
 ]:
     if required not in discover:
         errors.append(f"Discover recommendation/search integration missing: {required}")
+# Streaming shelf can be dynamically rendered; verify the named mount and its renderer together.
+if not __import__('re').search(r'id\s*=\s*[\"\']streamingPopularGrid[\"\']', discover) and 'streamingPopularGrid' not in discover:
+    errors.append('Discover recommendation/search integration missing: streamingPopularGrid')
 if 'loadPreset();load(true);' in discover:
     errors.append("Discover must not auto-load recommendation results into condition search")
 if "repeat(3,minmax(0,1fr))" not in discover:

@@ -52,7 +52,9 @@ async function port(){
   await page.locator('.gSearch').fill('映画テスト');
   await page.locator('.gSearchForm').evaluate(form=>form.requestSubmit());
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
-  await page.locator('#grid .cinelva-rate-button').first().click();
+  // On a 390px viewport the persistent panel may overlay the movie card.
+  // Use its built-in next-film control rather than forcing a click through it.
+  await page.locator('#cinelvaRateNext').click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/映画 テスト/);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'0.0');
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});

@@ -111,8 +111,8 @@ enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings
 // another listing page or alter the original calendar click-to-detail action.
 function enhanceCalendar(grid){
  if(!grid)return;
- const decorate=()=>{
-  for(const card of grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]')){
+ const decorate=(cards=grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]'))=>{
+  for(const card of cards){
    if(card.querySelector('.cinelva-rate-button'))continue;
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
    rate.setAttribute('aria-label','この映画をレビュー');
@@ -127,7 +127,17 @@ function enhanceCalendar(grid){
   }
   refreshRatingLabels();
  };
- const observer=new MutationObserver(decorate);
+ const observer=new MutationObserver(records=>{
+  const cards=[];
+  for(const record of records){
+   for(const node of record.addedNodes){
+    if(node.nodeType!==1)continue;
+    if(node.matches?.('.streamMovie[data-mi],.tvMovie[data-mi]'))cards.push(node);
+    node.querySelectorAll?.('.streamMovie[data-mi],.tvMovie[data-mi]').forEach(card=>cards.push(card));
+   }
+  }
+  if(cards.length)decorate(cards);
+ });
  observer.observe(grid,{childList:true,subtree:true});
  decorate();
 }
@@ -143,7 +153,7 @@ function attachInlineScore(button, movie) {
  const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=input.value;
  const sync=()=>{const score=Number(input.value),text=score.toFixed(1);if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',score>0);button.classList.toggle('is-watched',score>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');};
  input.oninput=sync;
- input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.round(score*10)!==score*10){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
+ input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);button.after(wrap);sync();
 }

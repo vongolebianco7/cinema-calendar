@@ -38,7 +38,7 @@
     const selector=$('csPeriod'); if(!selector)return;
     const all=recordMovies().map(enriched);
     const years=[...new Set(all.map(r=>dateOf(r).slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
-    const previous=selector.value;
+    const previous=selector.dataset.initialized==='true'?selector.value:String(currentYear); selector.dataset.initialized='true';
     selector.innerHTML='<option value="all">オールタイム</option>'+[...new Set([String(currentYear),...years])].sort((a,b)=>Number(b)-Number(a)).map(y=>'<option value="'+y+'">'+y+'年</option>').join('');
     selector.value=previous&&[...selector.options].some(o=>o.value===previous)?previous:String(currentYear);
     const period=selector.value, filtered=period==='all'?all:all.filter(r=>dateOf(r).slice(0,4)===period);

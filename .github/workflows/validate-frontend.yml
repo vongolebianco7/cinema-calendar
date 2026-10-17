@@ -140,3 +140,7 @@ jobs:
         run: python scripts/check_critic_map.py
       - name: Check critic evidence thresholds and sources
         run: node scripts/check_critic_evidence.js
+      - name: Reject stale cinema showtimes
+        run: |
+          node --check js/cinelva-theater-schedule.js
+          node --test tests/cinelva-theater-schedule.test.cjs

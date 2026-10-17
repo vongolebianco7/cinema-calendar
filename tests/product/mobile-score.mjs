@@ -45,15 +45,18 @@ for (const [area, path] of pages) {
   try {
     response = await page.goto(`${base}/${path}`, {waitUntil:'domcontentloaded', timeout:30000});
     await page.waitForTimeout(250);
+    console.log(`${browserName}: navigated ${area} HTTP ${response?.status()}`);
   } catch (error) {
     navigationError = error;
   }
+  console.log(`${browserName}: measuring ${area}`);
   const overflow = navigationError ? {pass:false, overflow:9999} : await assertNoPageOverflow(page);
   const loaded = Boolean(response && response.status() < 400 && !navigationError);
   const clean = errors.length === 0 && !navigationError;
   observations.set(area,{loaded,clean,overflow:overflow.pass,status:response?.status?.(),errors,overflowPx:overflow.overflow});
   if (!navigationError) {
     const height=await page.evaluate(()=>document.documentElement.scrollHeight);
+    console.log(`${browserName}: capturing ${area}`);
     await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000,timeout:20000,animations:'disabled'});
   }
   await page.close();

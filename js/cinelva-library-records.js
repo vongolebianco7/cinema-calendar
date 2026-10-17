@@ -66,6 +66,7 @@
       throw new Error('コメントは2000文字以内で入力してください');
     if(movie.viewingMethod!==undefined && !['','映画館','配信'].includes(movie.viewingMethod))
       throw new Error('鑑賞方法が不正です');
+    if(movie.viewingVenue!==undefined && (typeof movie.viewingVenue!=='string'||movie.viewingVenue.length>120)) throw new Error('鑑賞先は120文字以内で入力してください');
     const old=current[id]||{}, source=older[id]||{};
     const date=watchedAt===undefined?(old.watchedAt??source.watchedAt??null):watchedAt;
     if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');
@@ -75,7 +76,7 @@
       director:String(movie.director??old.director??source.director??'').slice(0,120),
       genres:Array.isArray(movie.genres)?movie.genres.slice(0,12):(old.genres??source.genres??[]),
       countries:Array.isArray(movie.countries)?movie.countries.slice(0,20):(old.countries??source.countries??[]),
-      rating,watchedAt:date,comment:movie.comment??old.comment??source.comment??'',viewingMethod:movie.viewingMethod??old.viewingMethod??source.viewingMethod??'',watched:movie.watched!==false,legacy:false,createdAt:old.createdAt||source.createdAt||now,updatedAt:now};
+      rating,watchedAt:date,comment:movie.comment??old.comment??source.comment??'',viewingMethod:movie.viewingMethod??old.viewingMethod??source.viewingMethod??'',viewingVenue:movie.viewingVenue??old.viewingVenue??source.viewingVenue??'',watched:movie.watched!==false,legacy:false,createdAt:old.createdAt||source.createdAt||now,updatedAt:now};
   }
   function writeRecords(next,hidden) {
     const area=storage(), priorDeleted=area.getItem(DELETED), nextDeleted=JSON.stringify(hidden);

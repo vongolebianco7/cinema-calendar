@@ -117,3 +117,32 @@ test('unsourced countries remain unknown instead of being plotted near the south
   const japan=Insights.pointForRecord({id:'jp',year:2025,countries:['日本'],genres:['SF']});
   assert.ok(japan.coordinates.y>0.5);
 });
+
+test('award heatmap uses TMDB identity when imported viewing IDs differ', () => {
+  const records=[
+    {id:'local-a',tmdbId:42,title:'Actually Watched',year:2020,rating:0},
+    {id:'42',tmdbId:99,title:'Conflicting Local ID',year:2020,rating:5},
+  ];
+  const awards=[{organization:'映画賞',year:2021,title:'Actually Watched',film_title:'Actually Watched',tmdb_id:42,category:'作品賞'}];
+  const cell=Insights.buildAwardHeatmap(records,awards).cells['映画賞:2020'];
+  assert.equal(cell.count,1);
+  assert.equal(cell.films[0].id,'local-a');
+  assert.equal(cell.films[0].rating,0);
+  assert.equal(cell.entries[0].id,'42');
+});
+
+test('award explicit identity never silently matches a conflicting local record ID', () => {
+  const records=[{id:'77',tmdbId:88,title:'Another Work',year:2020}];
+  const awards=[{organization:'映画賞',year:2021,title:'Different Work',tmdb_id:77,category:'作品賞'}];
+  const cell=Insights.buildAwardHeatmap(records,awards).cells['映画賞:2020'];
+  assert.equal(cell.count,0);
+  assert.equal(cell.entries[0].watched,false);
+});
+
+test('award heatmap respects deliberately unwatched stored films', () => {
+  const records=[{id:'local-unwatched',tmdbId:123,watched:false,title:'Not Seen'}];
+  const awards=[{organization:'映画賞',year:2022,title:'Not Seen',tmdb_id:123,category:'作品賞'}];
+  const cell=Insights.buildAwardHeatmap(records,awards).cells['映画賞:2020'];
+  assert.equal(cell.count,0);
+  assert.equal(cell.entries[0].watched,false);
+});

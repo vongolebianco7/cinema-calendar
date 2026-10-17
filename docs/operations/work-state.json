@@ -4,10 +4,10 @@
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6",
+  "base_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
   "branch": "main",
-  "head_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6",
-  "pull_request": 280,
+  "head_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
+  "pull_request": 281,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -322,6 +322,20 @@
       },
       "acceptance": "Review labels, native date input, 0.1 rating, venue persistence, close X, direct inline list scores.",
       "ci": "5/5 successful: Scorecard contract 39066252747; smoke 39066252775; completeness 39066252702; frontend 39066252707; quality 39066252742. No deployment."
+    },
+    {
+      "id": "P0-281-INLINE-SCORE-COMPAT",
+      "title": "Fix non-link inline score and preserve existing records",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 281,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/281",
+        "head_sha": "59b9f3e7fbaf80e369fd898cdd43dca1f92b6e47",
+        "merge_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b"
+      },
+      "acceptance": "No URL parsing on non-link cards; preserve existing record metadata; reject empty numeric input; legacy partial dates handled; inline score browser regression.",
+      "ci": "4/4 success: smoke 39066651486, frontend 39066651520, completeness 39066651525, quality 39066651524. No deploy."
     }
   ],
   "verification": [
@@ -574,6 +588,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Review production deployment readiness and verify live user flow; confirm actual TMDB provider workflow and fresh provider coverage.",
+  "next_action": "Verify production deployment readiness and provider refresh workflow, then assess real browser experience.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

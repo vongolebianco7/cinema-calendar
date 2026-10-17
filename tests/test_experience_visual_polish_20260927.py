@@ -10,8 +10,8 @@ class ExperienceVisualPolishTests(unittest.TestCase):
     def test_scope_context_is_explicit_for_normal_screening(self):
         self.assertIn('この比較では通常上映をシネマスコープ（2.39:1）として表示', self.text)
 
-    def test_dolby_atmos_heading_and_links_include_dolby_cinema(self):
-        self.assertIn('<h3>Dolby Atmos <small>Dolby Cinema</small></h3>', self.text)
+    def test_dolby_atmos_and_cinema_are_separately_labeled(self):
+        self.assertIn('<h3>Dolby Cinema</h3>', self.text)
         self.assertIn('Dolby Atmos対応スクリーンを見る →', self.text)
         self.assertIn('Dolby Cinema対応スクリーンを見る →', self.text)
 

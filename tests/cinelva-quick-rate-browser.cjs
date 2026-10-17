@@ -72,6 +72,7 @@ async function port(){
   assert.equal(rows.length,2);
   assert.equal(rows.find(r=>r.id==='222').rating,0);
   assert.equal(rows.find(r=>r.id==='222').comment,'気軽に採点。');
+  assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),false,'zero rating stays neutral');
   await page.reload({waitUntil:'domcontentloaded'});
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
   await page.locator('#grid .cinelva-rate-button').first().click();

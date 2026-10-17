@@ -37,7 +37,7 @@ async function port(){
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'0.0');
-  await page.locator('#cinelvaRateScore').fill('4.5');
+  await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRatePlace').selectOption('映画館');
   await page.locator('#cinelvaRateComment').fill('初回鑑賞。よかった。');
   await page.locator('#cinelvaRateDate').fill('2026-10');
@@ -55,7 +55,7 @@ async function port(){
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/映画 テスト/);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'0.0');
-  await page.locator('#cinelvaRateScore').fill('0');
+  await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRatePlace').selectOption('配信');
   await page.locator('#cinelvaRateComment').fill('気軽に採点。');
   await page.locator('#cinelvaRateSave').click();

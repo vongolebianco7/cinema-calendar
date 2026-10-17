@@ -1,31 +1,36 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T11:53:00+09:00",
+  "updated_at": "2026-10-17T11:58:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "53e0356dcaabb13f0233804c790b6170f838b6c8",
-  "pull_request": null,
+  "head_sha": "7afbd2486cc12b183cef058e2c3251cc8e0b9b6d",
+  "pull_request": {
+    "number": 246,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
+    "status": "open",
+    "head_sha": "7afbd2486cc12b183cef058e2c3251cc8e0b9b6d"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
       "title": "Restart runbook and durable work state",
-      "status": "in_progress",
+      "status": "pr_created",
       "acceptance": "A new Work session can identify current work and the next action from GitHub issue #239 plus the runbook and JSON checkpoint."
     },
     {
       "id": "P0-240",
       "title": "Retire stale Ocean development instructions",
-      "status": "in_progress",
+      "status": "pr_created",
       "issue": 240,
       "acceptance": "Active agent instructions identify #239 as the roadmap and prohibit new Ocean feature development while preserving existing saved data and backups."
     },
     {
       "id": "P0-241",
       "title": "Keep validation running without Vercel deployment",
-      "status": "planned",
+      "status": "in_progress",
       "issue": 241,
       "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
     },
@@ -52,6 +57,11 @@
       "command": "python scripts/check_work_state.py && python -m unittest tests.test_work_state && git diff --check",
       "result": "passed_on_work_branch",
       "details": "Checkpoint schema, 2 validator tests, and whitespace check passed."
+    },
+    {
+      "command": "GitHub Actions for PR #246",
+      "result": "in_progress",
+      "details": "At 2026-10-17 11:58 JST, deterministic checks and smoke job passed; Chromium/WebKit mobile smoke checks still running. Cloudflare Pages PR preview succeeded. Vercel front-end preview was ignored by project scope; no production deploy."
     }
   ],
   "deployment": {
@@ -68,5 +78,5 @@
   "blockers": [
     "Vercel project-specific usage and restriction reset status were not available from the connected read-only Vercel API."
   ],
-  "next_action": "Run the state validator and quality gate after the current branch edits; then update this checkpoint with commit, PR, and GitHub Actions URLs."
+  "next_action": "Refresh PR #246 checks, then start a separate P0 fix PR after diagnosing the 8 failing and 8 import-error Python tests; prioritize stale availability claims and the eight reported user-facing defects."
 }

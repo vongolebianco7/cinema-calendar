@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:21:09+09:00",
+  "updated_at": "2026-10-17T13:25:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "99a0f78f1745d18522d9d3fd41b3dcfca98b13fe",
+  "head_sha": "d225928e6d7c129d475260819896b0817d299866",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "99a0f78f1745d18522d9d3fd41b3dcfca98b13fe"
+    "head_sha": "d225928e6d7c129d475260819896b0817d299866"
   },
   "work_items": [
     {
@@ -111,16 +111,16 @@
     {
       "id": "P0-242-POSTERS",
       "title": "Keep missing box-office posters visibly safe",
-      "status": "in_progress",
+      "status": "ci_passed",
       "issue": 242,
       "pull_request": {
         "number": 252,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/252",
         "branch": "fix/cinelva-boxoffice-poster-fallback",
-        "head_sha": "acb6629afec46c6d92484c6ade260c50ab3aaaa3"
+        "head_sha": "70f5ff07c1592bbd02ab4ad99418a806b529a2d5"
       },
       "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px.",
-      "ci": "Browser regression updated to walk all 100 all-time rows at 390px and 1280px, block both external image/API hosts, and confirm title + fallback without broken icons. Latest Actions are running; earlier attempt caught an over-broad assertion, which was narrowed to the selected card."
+      "ci": "On head 70f5ff0: Validate frontend (including all-time 100-row poster fallback journey at 390px and 1280px), autonomous quality gate, smoke, brand, backup safety, and Completeness scorecard all passed. Fixed an inherited workflow reference to theater fixtures absent from this PR branch by running that regression only when its source/test files are present; PR #247 still runs it."
     },
     {
       "id": "P0-242-BRAND",
@@ -134,7 +134,7 @@
         "head_sha": "2e5a9af0524290e722fbd5215ee536f80351feb9"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "Validate frontend, brand identity, smoke, backup safety, isolated Pages stage, and autonomous quality gate passed; Completeness scorecard is pending."
+      "ci": "Validate frontend, brand identity, smoke, backup safety, isolated Pages stage, and autonomous quality gate pass on 2e5a9af; Completeness scorecard run 38998283751 is still running WebKit/mobile checks."
     }
   ],
   "verification": [
@@ -247,6 +247,16 @@
       "command": "PR #252 box-office poster resolver regression",
       "result": "all_time_browser_audit_running",
       "details": "A real data-shape bug was found: ranking records are nested region/genre/era, while localBoxMovies only traversed one level and missed them. Recursive poster indexing raises exact local all-time title matches from 11/100 movies-only to 63/100. PR adds visible placeholder copy and a browser audit for all 100 rows at 390px and 1280px with image/API hosts blocked. Latest Actions on head acb6629 are running; previous failed attempts are recorded in PR history."
+    },
+    {
+      "command": "PR #252 poster CI after branch-local theater fixture guard",
+      "result": "all_required_checks_passed",
+      "details": "Latest PR head 70f5ff07c1592bbd02ab4ad99418a806b529a2d5. Browser test covered all 100 all-time rows at 390px and 1280px with movie API and TMDB image host blocked; Validate frontend, autonomous quality gate, smoke, brand, backup safety, and completeness scorecard passed."
+    },
+    {
+      "command": "PR #253 scorecard",
+      "result": "in_progress",
+      "details": "Validate frontend, brand identity, smoke, backup safety, isolated Pages stage, and autonomous quality gate passed on 2e5a9af. Completeness scorecard run 38998283751 has producer jobs complete and WebKit/mobile scoring still running."
     }
   ],
   "deployment": {
@@ -259,14 +269,14 @@
     "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
     "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
     "next_action": "After required checks pass, inspect Vercel team usage and project deployment state; deploy the tested SHA once only if the restriction is cleared.",
-    "provider_preview_status": "Vercel – backend status failed with target containing upgradeToPro=build-rate-limit at 2026-10-17; production and preview deploys are not being retried.",
+    "provider_preview_status": "Vercel backend deployment check on PR #253 failed with api-deployments-free-per-day (>100 deployments in 24 hours), pointing to upgradeToPro=build-rate-limit. No retry or production deployment attempted.",
     "blockers": [
-      "Vercel PR backend check is currently blocked by the provider's build-rate-limit (observed on commit fb012f16); exact Hobby usage and reset time remain unavailable."
+      "Vercel backend GitHub check is blocked by provider deployment-rate-limit (observed on PR #253, 2026-10-17). Exact reset/quota remains unavailable; do not retry until independently confirmed clear."
     ]
   },
   "blockers": [
-    "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
+    "Vercel backend GitHub check is blocked by provider deployment-rate-limit (observed on PR #253, 2026-10-17). Exact reset/quota remains unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh PR #252 all-time poster browser and full checks, then PR #253 Completeness scorecard. Continue #242 coverage of remaining brand/modal/share surfaces and route-level record entry. Keep production deployment locked until a fresh Vercel status no longer reports build-rate-limit.",
+  "next_action": "Wait for PR #253 scorecard; then continue #242 audit across modal/share/OG/PWA/light-dark brand surfaces and verify movie-to-record navigation from calendar, rankings, search, and map/critic entry points. Track any genuine gaps in small PRs and deterministic browser tests. Keep production deployment locked while Vercel reports build-rate-limit; no merge or production deploy.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

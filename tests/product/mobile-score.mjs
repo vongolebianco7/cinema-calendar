@@ -28,6 +28,8 @@ const pages = [
 ];
 
 const browser = await browserType.launch();
+const watchdog=setTimeout(()=>{console.error(`${browserName}: mobile score exceeded 150 seconds; terminating hung browser`);process.exit(124)},150000);
+watchdog.unref();
 const context = await browser.newContext({viewport:{width:390,height:844}, deviceScaleFactor:3});
 await routeDeterministicMovieBackend(context);
 fs.mkdirSync('artifacts/completeness/screenshots',{recursive:true});
@@ -35,6 +37,7 @@ fs.mkdirSync('artifacts/completeness/screenshots',{recursive:true});
 const rows = [];
 const observations = new Map();
 for (const [area, path] of pages) {
+  console.log(`${browserName}: scoring ${area} (${path})`);
   const page = await context.newPage();
   const errors = attachPageErrorCollector(page);
   let response = null;
@@ -42,16 +45,19 @@ for (const [area, path] of pages) {
   try {
     response = await page.goto(`${base}/${path}`, {waitUntil:'domcontentloaded', timeout:30000});
     await page.waitForTimeout(250);
+    console.log(`${browserName}: navigated ${area} HTTP ${response?.status()}`);
   } catch (error) {
     navigationError = error;
   }
+  console.log(`${browserName}: measuring ${area}`);
   const overflow = navigationError ? {pass:false, overflow:9999} : await assertNoPageOverflow(page);
   const loaded = Boolean(response && response.status() < 400 && !navigationError);
   const clean = errors.length === 0 && !navigationError;
   observations.set(area,{loaded,clean,overflow:overflow.pass,status:response?.status?.(),errors,overflowPx:overflow.overflow});
   if (!navigationError) {
     const height=await page.evaluate(()=>document.documentElement.scrollHeight);
-    await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000});
+    console.log(`${browserName}: capturing ${area}`);
+    await page.screenshot({path:screenshotPath(area,browserName),fullPage:height<=10000,timeout:20000,animations:'disabled'});
   }
   await page.close();
 }
@@ -80,4 +86,5 @@ emit('CROSS-MOBILE',5.0,mobilePass,JSON.stringify(Object.fromEntries(observation
 
 writeMetrics(metricOutputPath('mobile',browserName),rows);
 await browser.close();
+clearTimeout(watchdog);
 console.log(`Wrote ${rows.length} mobile score metrics for ${browserName}`);

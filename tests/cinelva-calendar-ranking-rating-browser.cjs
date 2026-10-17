@@ -18,7 +18,14 @@ async function getPort(){
  try{
   const base='http://127.0.0.1:'+port;
   for(let i=0;i<80;i++){
-   try{if((await fetch(base)).ok)break;}catch{}
+   // A short TCP probe avoids Node's undici fetch/Socket parser race when
+   // the temporary local HTTP server is terminated after the browser test.
+   const ready=await new Promise(resolve=>{
+    const socket=net.connect(port,'127.0.0.1');
+    socket.once('connect',()=>{socket.destroy();resolve(true);});
+    socket.once('error',()=>resolve(false));
+   });
+   if(ready)break;
    if(i===79)throw Error('server unavailable');
    await new Promise(resolve=>setTimeout(resolve,100));
   }

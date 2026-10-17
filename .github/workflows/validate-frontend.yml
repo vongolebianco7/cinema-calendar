@@ -141,6 +141,8 @@ jobs:
         run: |
           python scripts/check_discovery_ui.py
           node --test tests/cinelva-discovery-offer-order.test.cjs
+      - name: Check discovery shelf count and expansion
+        run: node --test tests/cinelva-discovery-shelf.test.cjs
       - name: Check Cinemap core journey
         run: python scripts/check_core_journey.py
       - name: Check Critic Map compliance gate

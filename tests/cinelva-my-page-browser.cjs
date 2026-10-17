@@ -135,6 +135,8 @@ async function freePort() {
     await page.locator('#recordComment').fill('自宅で見直した感想');await page.locator('#saveRecord').click();
     const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999']);
     assert.equal(updated.rating,0);assert.equal(updated.viewingMethod,'配信');assert.equal(updated.comment,'自宅で見直した感想');
+    await page.locator('.recordUtilities summary').click();
+    assert.equal(await page.locator('#exportRecords').isVisible(),true);
     const backupWait=page.waitForEvent('download');await page.locator('#exportRecords').click();
     const backupDownload=await backupWait, backupData=fs.readFileSync(await backupDownload.path());
     page.once('dialog',dialog=>dialog.accept());await page.locator('#recordList [data-delete="99999999"]').click();

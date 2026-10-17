@@ -27,5 +27,5 @@ test('true-story discovery excludes historical fiction and keeps explicit factua
   }), false);
   assert.equal(isTrueStoryCandidate({ overview: '実話をもとにした物語。' }), true);
   assert.equal(isTrueStoryCandidate({ overview: 'Based on a true story.' }), true);
-  assert.equal(isTrueStoryCandidate({ genres: ['ドキュメンタリー'] }), true);
+  assert.equal(isTrueStoryCandidate({ genres: ['ドキュメンタリー'] }), false);
 });

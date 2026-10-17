@@ -36,6 +36,9 @@ async function getPort(){
   // external movie feeds offline and deterministic.
   await page.goto(base+'/rankings.html',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
+  // Wait for the application's asynchronous initial ranking render before
+  // inserting deterministic fixtures; otherwise it overwrites test cards.
+  await page.waitForFunction(()=>Boolean(document.querySelector('#sourceNote')?.textContent?.trim()) && document.querySelectorAll('#grid a.rankCard').length>0);
   await page.evaluate(()=>{
    document.querySelector('#grid').innerHTML=
     '<a class="rankCard" href="search.html?id=101&search=Film%20One"><span class="title">Film One</span></a>'+

@@ -1,13 +1,14 @@
 from pathlib import Path
+import unittest
 
-direction = Path('js/my-cinemap-art-direction.js').read_text(encoding='utf-8')
+ROOT = Path(__file__).resolve().parents[1]
 
-# Editor layout must not depend on helper-added classes that can be lost when render() rebuilds the list.
-assert '#list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))' in direction
-assert '#list .item:nth-child(-n+5){grid-column:1!important}' in direction
-assert '#list .item:nth-child(n+6){grid-column:2!important}' in direction
-assert '.compactMovieItem:nth-child(-n+5)' not in direction
-
-# Export controls must redraw only the canvas, not rebuild the editor list.
-assert "control.onchange=()=>drawArtwork(picks)" in direction
-assert "control.onchange=()=>{render();markEditorRanking()}" not in direction
+class ShareImageSelectionTests(unittest.TestCase):
+    def test_share_page_uses_record_filters_instead_of_custom_shelf(self):
+        page = (ROOT / 'my-cinemap.html').read_text(encoding='utf-8')
+        self.assertIn('id="period"', page)
+        self.assertIn('value="year"', page)
+        self.assertIn('value="all"', page)
+        self.assertIn('id="imageSort"', page)
+        self.assertNotIn('id="list"', page)
+        self.assertNotIn('id="layout"', page)

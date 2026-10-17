@@ -1,0 +1,62 @@
+name: Full Python contract suite
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/audit_python_suite.py'
+      - 'rankings.html'
+      - 'experience.html'
+      - 'my-cinemap.html'
+      - 'index.html'
+      - 'tests/**/*.py'
+      - '.github/workflows/audit-legacy-python-suite.yml'
+  schedule:
+    - cron: '41 2 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: legacy-python-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check diagnostic parser contracts
+        run: python -m unittest discover -s tests -p test_python_suite_audit.py -v
+      - name: Run full Python contract suite (fail on regressions)
+        run: python scripts/audit_python_suite.py --strict
+      - name: Publish true suite outcome
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          file = Path('artifacts/python-suite/report.json')
+          if not file.exists():
+              message = 'Full Python suite diagnostic failed to produce a report; see job log.'
+          else:
+              r = json.loads(file.read_text())
+              message = (f"Legacy Python suite: **{r['status'].upper()}**. "
+                         f"Run: {r['tests_run']}; failures: {r['failures']}; errors: {r['errors']}. "
+                         "See attached JSON and full log. Other required browser/data checks still apply.")
+          print(message)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write(message + '\n')
+          PY
+      - name: Upload Python failure inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-python-suite-diagnostics
+          path: artifacts/python-suite/
+          retention-days: 14
+          if-no-files-found: warn

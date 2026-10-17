@@ -130,6 +130,7 @@ jobs:
           python -m unittest tests.test_availability_update tests.test_award_identity
           python scripts/check_release_data.py
           node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs
+          node --test tests/cinelva-route-manifest.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
       - name: Run My Cinelva mobile browser journey

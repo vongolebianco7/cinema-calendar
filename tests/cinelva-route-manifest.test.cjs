@@ -1,0 +1,18 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const test = require('node:test');
+const root = path.resolve(__dirname, '..');
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'quality', 'route-manifest.json'), 'utf8'));
+const inventory = [...fs.readdirSync(root).filter(file => file.endsWith('.html')),...fs.readdirSync(path.join(root, 'cinelva')).filter(file => file.endsWith('.html')).map(file => `cinelva/${file}`),'my-cinelva/index.html'].sort();
+
+test('route manifest covers every active non-Ocean HTML route exactly once', () => {
+  const routes = manifest.routes.map(route => route.path).sort();
+  assert.deepEqual(routes, inventory);assert.equal(new Set(routes).size, routes.length);assert.equal(routes.length, 29);assert.equal(routes.some(route => /ocean/i.test(route)), false);
+});
+
+test('every route declares ownership, counts, CTA, sources and audit defaults', () => {
+  assert.deepEqual(manifest.audit_matrix.viewports,[390,1280]);assert.deepEqual(manifest.audit_matrix.themes,['light','dark']);assert.deepEqual(manifest.audit_matrix.browsers,['chromium','webkit']);assert.match(manifest.defaults.brand_component,/Cinelva/);
+  for(const route of manifest.routes){for(const field of ['path','surface','purpose','data_owner','count_contract','primary_cta']){assert.equal(typeof route[field],'string',`${route.path}: ${field}`);assert.ok(route[field].trim(),`${route.path}: ${field}`)}assert.ok(Array.isArray(route.source_refs)&&route.source_refs.length,`${route.path}: source_refs`);assert.equal(fs.existsSync(path.join(root,route.path)),true,route.path)}
+});

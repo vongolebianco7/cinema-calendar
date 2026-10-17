@@ -88,11 +88,11 @@ async function port(){
   await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate));
   await page.evaluate(()=>{
     window.CinelvaRatingResolve=()=>({id:222,title:'映画 テスト'});
-    document.getElementById('cards').innerHTML='<article class="card" data-i="0"><span class="title">映画 テスト</span></article>';
+    document.getElementById('dates').innerHTML='<article class="streamMovie" data-mi="0"><span class="streamMovieTitle">映画 テスト</span></article>';
   });
-  await page.locator('#cards .cinelva-rate-saved').first().waitFor({timeout:10000});
-  assert.match(await page.locator('#cards .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\.0/);
-  await page.locator('#cards .cinelva-rate-button').first().click();
+  await page.locator('#dates .cinelva-rate-saved').first().waitFor({timeout:10000});
+  assert.match(await page.locator('#dates .cinelva-rate-saved').first().innerText(),/採点済み ★ 0\.0/);
+  await page.locator('#dates .cinelva-rate-button').first().click();
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'気軽に採点。');
   assert.deepEqual(errors,[],'no uncaught browser errors');
   console.log((process.env.CINELVA_BROWSER||'chromium')+' existing-page quick rating, search variants and persistence passed');

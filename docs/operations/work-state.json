@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:15:00+09:00",
+  "updated_at": "2026-10-17T13:10:16+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "16db3f49ac10749542db353a8a270fcab22fd308",
+  "head_sha": "3f125bb4e6e951ba4c4def5341e9d0907fa42fa1",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "16db3f49ac10749542db353a8a270fcab22fd308"
+    "head_sha": "3f125bb4e6e951ba4c4def5341e9d0907fa42fa1"
   },
   "work_items": [
     {
@@ -40,7 +40,7 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "Completed and CI-passed: stale theater #247, discovery order/count/classification #248/#249, per-service coverage #250, shared record routes #251, box-office poster fallback #252, and cross-route brand/PWA/OG #253. Continue remaining cross-screen map/critic, light/dark, error/empty and production-release verification."
+      "ci": "All eight issue #242 workstreams have focused regression coverage and implementation PRs: #247 stale listings, #248 WOWOW shelf order, #249 discovery counts/classification, #250 streaming coverage, #251 shared record route including calendar/search/ranking/map, #252 box-office poster fallback, #253 all-route brand/PWA/OG/theme. Route audit now covers all 29 non-Ocean HTML pages at two viewports and both themes. Remaining: any error/empty-state gaps, review/release policy, quota-clear deployment, and post-deploy confirmation."
     },
     {
       "id": "P0-244",
@@ -133,10 +133,10 @@
         "number": 253,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
         "branch": "fix/cinelva-backup-brand-header",
-        "head_sha": "8260f8efb00be08895f298b436a18721dd7b9b5b"
+        "head_sha": "9f8872505be3e93aa6e7fc94594dd366bcb7c866"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
-      "ci": "All seven CI runs passed on head 8260f8efb00be08895f298b436a18721dd7b9b5b: frontend, brand identity, smoke, backup safety, isolated Pages, Completeness scorecard, Ocean probe, and autonomous quality gate. Route-wide brand/PWA/OG tests cover all 29 non-Ocean HTML routes."
+      "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed."
     }
   ],
   "verification": [
@@ -324,6 +324,16 @@
       "command": "One-time Ocean PR probe trigger",
       "result": "workflow_contract_passed_ocean_probe_not_retriggered_on_sync",
       "details": "On PR #246 head 16db3f49ac10749542db353a8a270fcab22fd308, workflow contract run 39000934752 and smoke run 39000934844 passed. Ocean parallel probe now runs once when a PR is opened/reopened, remains manually dispatchable, and no longer repeats on each checkpoint synchronize. Autonomous quality and Completeness scorecard for this head were still running at checkpoint time."
+    },
+    {
+      "command": "PR #253 29-route mobile/desktop light/dark browser audit",
+      "result": "all_required_actions_passed",
+      "details": "Head 9f8872505be3e93aa6e7fc94594dd366bcb7c866 passed Validate frontend, autonomous quality gate, smoke, brand identity, backup safety, isolated Pages, Completeness scorecard, and scoped Ocean probe. Browser audit covered 29 non-Ocean HTML pages at 390px and 1280px in light and dark (116 page loads) with no uncaught errors. It discovered theme.js executed before the static theme-color meta tag on agent.html, leaving #0a0c0f in light mode; calling apply() again during DOMContentLoaded mount fixed all routes."
+    },
+    {
+      "command": "PR #246 latest checkpoint",
+      "result": "all_required_actions_passed",
+      "details": "Head 3f125bb4e6e951ba4c4def5341e9d0907fa42fa1 passed smoke 39001008211, Ocean workflow contract 39001008192, autonomous quality 39001008189, and Completeness scorecard 39001008184. Ocean probe is one-time on PR opened/reopened and remains manually dispatchable; it no longer repeats on checkpoint pushes."
     }
   ],
   "deployment": {
@@ -344,6 +354,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh checks for PR #246 head 16db3f49ac10749542db353a8a270fcab22fd308. Then continue remaining #242 route audit (critic/map, light/dark contrast, share/OG/PWA, error/empty states) and release verification after provider quota is clear. Refresh all PR heads and required review policy before release; no deployment while Vercel cap remains.",
+  "next_action": "Refresh latest PR heads after the new checkpoint commit and confirm its checks. Continue remaining #242 error/empty-state audit and release checklist. Keep validation on GitHub/Actions while Vercel Hobby deployment limit remains; do not deploy until quota is independently confirmed clear, then deploy one tested SHA only after repository review requirements and verify public production flows.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

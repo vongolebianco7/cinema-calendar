@@ -52,14 +52,12 @@ $('cinelvaRateSave').onclick=save;
 // A persistent panel must not trap mobile users behind its own overlay.
 // Navigate among the existing listing cards from inside the panel itself.
 function nextMovie(){
- const grid=activeCard?.closest('#cards,#grid') || document.querySelector('#grid,#cards');
+ const grid=activeCard?.closest('#cards,#grid,#dates') || document.querySelector('#grid,#cards,#dates');
  if(!grid)return;
- const cards=[...grid.querySelectorAll('.cinelva-rate-wrap')];
- if(!cards.length)return;
- const index=cards.indexOf(activeCard);
- const next=cards[(index+1)%cards.length];
- const button=next?.querySelector('.cinelva-rate-button');
- if(button)button.click();
+ const actions=[...grid.querySelectorAll('.cinelva-rate-button')].filter(button=>button.isConnected);
+ if(!actions.length)return;
+ const index=actions.indexOf(activeCard);
+ actions[(index+1+actions.length)%actions.length].click();
 }
 $('cinelvaRateNext').onclick=nextMovie;
 // Keep the actual existing calendar/ranking/search listings. A sibling rating
@@ -76,7 +74,7 @@ function enhanceGrid(grid,kind){
    rate.textContent='★ 採点・コメント';rate.setAttribute('aria-label','この作品を採点・コメント');
    rate.onclick=event=>{
     event.stopPropagation();event.preventDefault();
-    activeCard=wrap;
+    activeCard=rate;
     let movie=null;
     if(kind==='rankings'){
      const u=new URL(card.href,location.href),id=u.searchParams.get('id');
@@ -98,6 +96,54 @@ style.textContent+=`
 `;
 enhanceGrid(document.querySelector('#cards'),'calendar');
 enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');
+// The real index calendar renders cards in #dates, not #cards. Do not add
+// another listing page or alter the original calendar click-to-detail action.
+function enhanceCalendar(grid){
+ if(!grid)return;
+ const decorate=()=>{
+  for(const card of grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]')){
+   if(card.querySelector('.cinelva-rate-button'))continue;
+   const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
+   rate.setAttribute('aria-label','この映画を採点・コメント');
+   rate.onclick=event=>{
+    event.stopPropagation();event.preventDefault();
+    activeCard=rate;
+    const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
+    if(!open(movie))rate.textContent='作品IDを確認できません';
+   };
+   card.append(rate);
+  }
+  refreshRatingLabels();
+ };
+ const observer=new MutationObserver(decorate);
+ observer.observe(grid,{childList:true,subtree:true});
+ decorate();
+}
+function refreshRatingLabels(){
+ const saved=Records.all();
+ const byId=new Map();
+ for(const record of saved){
+  if(record.watched===false)continue;
+  const id=record.tmdbId??record.id;
+  if(validId(id))byId.set(String(id),record);
+ }
+ for(const button of document.querySelectorAll('.cinelva-rate-button')){
+  const card=button.closest('a.rankCard,.card[data-i],.streamMovie[data-mi],.tvMovie[data-mi]')||
+    button.parentElement?.querySelector('a.rankCard,.card[data-i]');
+  let id=null;
+  if(card?.matches('a.rankCard')) id=new URL(card.href,location.href).searchParams.get('id');
+  else if(card?.dataset.mi!==undefined) id=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar')?.id;
+  else if(card?.dataset.i!==undefined) id=root.CinelvaRatingResolve?.(card.dataset.i,'listing')?.id;
+  const record=id!=null?byId.get(String(id)):null;
+  const label=record?'★ '+Number(record.rating??0).toFixed(1)+'点 · 評価済み':'★ 採点・コメント';
+  if(button.textContent!==label)button.textContent=label;
+  button.setAttribute('aria-label',record?'この映画の評価を編集':'この映画を採点・コメント');
+ }
+}
+enhanceCalendar(document.querySelector('#dates'));
+root.addEventListener('cinelva-record-updated',refreshRatingLabels);
+root.addEventListener('storage',refreshRatingLabels);
+refreshRatingLabels();
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

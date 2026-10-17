@@ -15,6 +15,7 @@ on:
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
+      - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
@@ -56,6 +57,7 @@ on:
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
+      - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
@@ -146,6 +148,8 @@ jobs:
           node --test tests/cinelva-ocean-workflow-retirement.test.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs

@@ -60,6 +60,9 @@
     if(!validId(id)||!(rating===null||validScore(rating))) throw new Error('作品IDまたは評価が不正です');
     for(const field of ['genres','countries','formats','workForms'])if(movie[field]!=null&&!Array.isArray(movie[field]))throw new Error('分類メタデータの形式が不正です');
     for(const field of ['countries','formats','workForms'])if(Array.isArray(movie[field])&&movie[field].some(value=>typeof value!=='string'))throw new Error('分類メタデータの値が不正です');
+    if(movie.viewings!==undefined&&(!Array.isArray(movie.viewings)||movie.viewings.length>1000||
+      movie.viewings.some(value=>value===null||!validDate(value))))
+      throw new Error('再鑑賞履歴の形式・件数が不正です');
     const old=current[id]||{}, source=older[id]||{};
     const date=watchedAt===undefined?(old.watchedAt??source.watchedAt??null):watchedAt;
     if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');
@@ -96,6 +99,21 @@
     writeRecords(next,deleted().filter(id=>!ids.has(id)));
     return rows.length;
   }
+  // Each additional viewing is a separate occurrence; the original watchedAt
+  // remains untouched so edits, older backups and unique-film statistics work.
+  function addRewatch(id, date) {
+    id=String(id);
+    if(!validId(id)||date===null||!validDate(date)) throw new Error('再鑑賞日が不正です');
+    const existing=all().find(item=>item.id===id);
+    if(!existing||existing.watched===false) throw new Error('鑑賞済み作品が見つかりません');
+    const viewings=existing.viewings??[];
+    if(!Array.isArray(viewings)||viewings.length>=1000||viewings.some(value=>value===null||!validDate(value)))
+      throw new Error('再鑑賞履歴の形式・件数が不正です');
+    const current=load(), older=legacy(), value=recordValue(existing,existing.rating??null,existing.watchedAt??null,current,older);
+    value.viewings=[...viewings,date];
+    writeRecords({...current,[id]:value},deleted().filter(item=>item!==id));
+    return value;
+  }
   function remove(id) {
     id=String(id);
     if(!validId(id)) throw new Error('作品IDが不正です');
@@ -119,7 +137,7 @@
       month:watched.filter(r=>typeof r.watchedAt==='string'&&r.watchedAt.slice(0,7)===monthPrefix).length,
       unknownDate:watched.filter(r=>!r.watchedAt).length,legacyUnrated:records.filter(r=>r.legacy&&r.watched&&r.rating===null).length};
   }
-  const api={KEY,LEGACY,DELETED,all,save,saveUnrated,restore,remove,summary,validDate,validScore};
+  const api={KEY,LEGACY,DELETED,all,save,saveUnrated,addRewatch,restore,remove,summary,validDate,validScore};
   root.CinelvaLibraryRecords=api;
   if(typeof module!=='undefined'&&module.exports) module.exports=api;
 })(typeof window==='undefined'?globalThis:window);

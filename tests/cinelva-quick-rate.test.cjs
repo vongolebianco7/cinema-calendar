@@ -44,3 +44,9 @@ test('record comments and viewing method survive edits without overwriting origi
   assert.throws(()=>api.save({id:124,title:'Bad',comment:'x'.repeat(2001)},1,null),/コメント/);
   assert.throws(()=>api.save({id:124,title:'Bad',viewingMethod:'other'},1,null),/鑑賞方法/);
 });
+
+test('saved comment and viewing method appear safely in the existing My CINELVA list',()=>{
+ const page=fs.readFileSync('js/cinelva-records-page.js','utf8');
+ assert.match(page,/movie\.viewingMethod\?'<small>'\+escapeHTML\(movie\.viewingMethod\)/);
+ assert.match(page,/movie\.comment\?'<p class="record-comment">'\+escapeHTML\(movie\.comment\)/);
+});

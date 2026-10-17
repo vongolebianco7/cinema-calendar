@@ -38,7 +38,7 @@ async function port(){
   await page.locator('#grid .cinelva-inline-score input').first().dispatchEvent('change');
   assert.equal((await page.evaluate(()=>window.CinelvaLibraryRecords.all()))[0].rating,4.1);
   assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),true);
-  assert.equal(await page.locator('#grid .cinelva-rate-button').first().innerText(),'◉');
+  assert.equal(await page.locator('#grid .cinelva-rate-button').first().innerText(),'👁');
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'4.1');

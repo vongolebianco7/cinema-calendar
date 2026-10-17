@@ -82,6 +82,19 @@ function pointForRecord(record) {
   };
 }
 
+// Director filmographies use TMDB IDs while imported viewing records may carry
+// a distinct local ID. Match explicit TMDB identities first, then legacy IDs.
+// Never treat an unwatched marker as a viewing record.
+function directorViewingRecord(records, work) {
+  const target = work?.tmdb_id ?? work?.tmdbId ?? work?.id;
+  if (target == null || String(target) === '') return null;
+  const watched = (Array.isArray(records) ? records : []).filter(item => item && item.watched !== false);
+  const byTmdb = watched.find(item => item.tmdbId != null && String(item.tmdbId) === String(target));
+  if (byTmdb) return byTmdb;
+  return watched.find(item => item.id != null && String(item.id) === String(target) &&
+    (item.tmdbId == null || String(item.tmdbId) === String(target))) || null;
+}
+
 function awardOrganizations(awards) {
   return [...new Set((Array.isArray(awards) ? awards : []).map(item => item?.organization).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ja'));
 }
@@ -131,6 +144,6 @@ function buildAwardHeatmap(records, awards, coverage = {}) {
   return { organizations, decades, cells, coverage: Object.values(cells).every(cell => cell.coverage === 'complete') ? 'complete' : 'partial' };
 }
 
-const api = { GENRE_TAXONOMY, classifyGenres, pointForRecord, awardOrganizations, buildAwardHeatmap };
+const api = { GENRE_TAXONOMY, classifyGenres, pointForRecord, directorViewingRecord, awardOrganizations, buildAwardHeatmap };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (typeof globalThis !== 'undefined') globalThis.CinelvaInsights = api;

@@ -9,8 +9,8 @@ import subprocess
 import sys
 
 CASE_RE = re.compile(r'^(FAIL|ERROR): (.+)$', re.MULTILINE)
-COUNT_RE = re.compile(r'^Ran (\\d+) tests? in ', re.MULTILINE)
-SUMMARY_RE = re.compile(r'^FAILED \\(([^\\n]+)\\)$', re.MULTILINE)
+COUNT_RE = re.compile(r'^Ran (\d+) tests? in ', re.MULTILINE)
+SUMMARY_RE = re.compile(r'^FAILED \(([^\n]+)\)$', re.MULTILINE)
 
 def parse_output(output, returncode):
     cases = [{'type': kind.lower(), 'test': name.strip()} for kind, name in CASE_RE.findall(output)]

@@ -23,13 +23,12 @@
     $('movieQuery').value = '';
     $('movieResults').replaceChildren();
     $('chosenMovie').textContent = record ? `${record.title}${record.year ? `（${record.year}年）` : ''}` : '作品を検索して選択してください。';
-    $('recordFormat').value=record?.format||''; $('recordWorkForm').value=record?.workForm||''; $('watchedAt').value = record?.watchedAt || '';
+    $('viewingMethod').value=record?.viewingMethod||''; $('recordComment').value=record?.comment||''; $('watchedAt').value = record?.watchedAt || '';
     $('dateHint').textContent = record?.watchedAt ? `現在の鑑賞日：${record.watchedAt}。年だけ・年月だけでも編集可能です。空欄で保存すると日付を削除します。` : '年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。';
     $('movieQuery').parentElement.hidden = Boolean(record);
-    $('saveRecord').disabled=false; $('unrated').checked = Boolean(record && record.rating == null);
-    $('rating').value = record?.rating ?? 3;
-    $('rating').disabled = $('unrated').checked;
-    $('ratingOut').value = $('unrated').checked ? '—' : Number($('rating').value).toFixed(1);
+    $('saveRecord').disabled=false;
+    $('rating').value = record?.rating ?? 0;
+    $('ratingOut').value = Number($('rating').value).toFixed(1);
     $('recordDialog').showModal();
     if (!record) $('movieQuery').focus();
   }
@@ -263,7 +262,7 @@
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}
-    try { state.selected.format=$('recordFormat').value;state.selected.workForm=$('recordWorkForm').value; const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=$('unrated').checked?Records.saveUnrated(state.selected,date):Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
+    try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
     catch(error){notify(`保存できませんでした：${error.message}`);}
   }
   function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }
@@ -282,7 +281,7 @@
     document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
     $('addRecord').onclick=()=>openDialog(); $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
     $('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);
-    $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);}; $('unrated').onchange=()=>{$('rating').disabled=$('unrated').checked;$('ratingOut').value=$('unrated').checked?'—':Number($('rating').value).toFixed(1);};
+    $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);
     $('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};
     $('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;

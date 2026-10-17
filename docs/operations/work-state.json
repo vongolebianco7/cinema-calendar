@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18",
+  "updated_at": "2026-10-18T07:07:59+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
-  "branch": "main",
-  "head_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
-  "pull_request": 281,
+  "base_sha": "08abcd9af0a4bc346d0a960cfcfe9d076c933f0a",
+  "branch": "fix/review-date-layout-legacy",
+  "head_sha": "453ac3c3fc901a7a194907e798f7015056daad1a",
+  "pull_request": 282,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -35,7 +35,21 @@
       "status": "in_progress",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. Remaining external-data permission, cross-device reliability, real-device verification, and release readiness are NOT complete."
+      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. On PR #282, the shared quality gate passes after fixing a MutationObserver refresh loop and aligning the discovery contract with the unified availability shelf. Chromium/WebKit Actions remain required before merge."
+    },
+    {
+      "id": "P0-282-REVIEW-LOOP",
+      "title": "Stop calendar quick-rating observer loop and preserve partial legacy dates",
+      "status": "pr_created",
+      "issue": 239,
+      "pull_request": {
+        "number": 282,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/282",
+        "branch": "fix/review-date-layout-legacy",
+        "head_sha": "453ac3c3fc901a7a194907e798f7015056daad1a"
+      },
+      "acceptance": "The calendar quick-rating observer reaches a stable state, the compact review editor preserves year-only/month-only legacy dates, and current discovery shelf checks match the unified UI.",
+      "ci": "Local quick-rate contract 5/5 and scripts/quality_gate.py passed. Branch merged current main 08abcd9a. Push and Chromium/WebKit Actions are next."
     },
     {
       "id": "P0-OCEAN-RETIREMENT",
@@ -572,22 +586,18 @@
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": null,
+    "target_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "266b280c4bab0092d54cb1cd0316f1f67674a28c",
+    "last_observed_vercel_production_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-17T11:47:00+09:00",
-    "reported_restriction": "User reported Vercel deployment restriction until the following day at 07:00 JST; exact quota/reset and current status not independently verified.",
-    "next_action": "At the scheduled 2026-10-18 07:05 JST check, inspect provider team/project quota and PR checks. Deploy one tested SHA only after Vercel confirms the cap is clear and repository release/review requirements are satisfied; otherwise record blocker.",
-    "provider_preview_status": "Vercel backend check on PR #253 failed with api-deployments-free-per-day (>100 deployments in 24h), pointing to upgradeToPro=build-rate-limit. No retry or production deployment attempted.",
-    "blockers": [
-      "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
-    ]
+    "last_observed_vercel_check_at": "2026-10-18T07:00:14+09:00",
+    "reported_restriction": null,
+    "next_action": "Do not manually redeploy. Complete and merge tested PRs, then verify the Git-integrated production deployment for the resulting main SHA.",
+    "provider_preview_status": "Vercel team vongole1 and project cinema-calendar were independently queried. Production deployment dpl_E95KafaN4RwSUqBjSnfDHjfrZCDD is READY for c0e15d1; the prior daily deployment restriction is cleared. Latest main 08abcd9a is newer than the observed production SHA.",
+    "blockers": []
   },
-  "blockers": [
-    "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
-  ],
-  "next_action": "Verify production deployment readiness and provider refresh workflow, then assess real browser experience.",
+  "blockers": [],
+  "next_action": "Push PR #282 head 453ac3c3, verify Chromium/WebKit and required Actions, repair any deterministic failure, merge when green, then re-read latest main and continue the next READY item.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

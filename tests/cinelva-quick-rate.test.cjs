@@ -50,3 +50,19 @@ test('saved comment and viewing method appear safely in the existing My CINELVA 
  assert.match(page,/movie\.viewingMethod\?'<small>'\+escapeHTML\(movie\.viewingMethod\)/);
  assert.match(page,/movie\.comment\?'<p class="record-comment">'\+escapeHTML\(movie\.comment\)/);
 });
+
+test('calendar quick ratings bind to the real dates container and weekly movie cards',()=>{
+ const index=fs.readFileSync('index.html','utf8');
+ assert.match(index,/id="dates"/);
+ assert.match(src,/enhanceGrid\(document\.querySelector\('#dates'\),'calendar'\)/);
+ assert.match(src,/\.streamMovie\[data-mi\]/);
+ assert.match(src,/\.tvMovie\[data-mi\]/);
+ assert.match(src,/\.dayMovie\[data-mi\]/);
+ assert.match(src,/card\.dataset\.mi\?\?card\.dataset\.i/);
+});
+test('zero-point saved films receive persistent badges and update events',()=>{
+ assert.match(src,/\.cinelva-saved-score/);
+ assert.match(src,/Number\(record\.rating\?\?0\)\.toFixed\(1\)/);
+ assert.match(src,/root\.addEventListener\('cinelva-record-updated'/);
+ assert.match(src,/root\.addEventListener\('storage'/);
+});

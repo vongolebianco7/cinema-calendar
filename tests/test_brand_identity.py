@@ -88,6 +88,14 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertNotIn("CINEMAP", visible, str(page))
             self.assertNotIn("CINELVA", visible, str(page))
 
+    def test_retired_ocean_is_not_user_facing_in_backup_or_my_page(self):
+        for page in ["data-backup.html", "cinelva/data-backup.html", "cinelva/my-cinemap.html"]:
+            parser = VisibleCopyParser()
+            parser.feed((ROOT / page).read_text(encoding="utf-8"))
+            visible = " ".join(parser.copy).lower()
+            self.assertNotIn("ocean", visible, page)
+            self.assertNotIn("aquarium", visible, page)
+
     def test_all_non_ocean_routes_share_pwa_and_open_graph_icon_metadata(self):
         pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html")) + list((ROOT / "my-cinelva").glob("*.html"))
         self.assertGreaterEqual(len(pages), 29)

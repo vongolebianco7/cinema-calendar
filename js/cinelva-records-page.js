@@ -151,7 +151,7 @@
     const end=new Date(latest);end.setDate(end.getDate()+(6-end.getDay()));
     const weeks=[];for(let cursor=new Date(end);cursor>=start;cursor.setDate(cursor.getDate()-7)){const sunday=new Date(cursor);sunday.setDate(sunday.getDate()-6);weeks.push(new Date(sunday));}
     const mode=$('calendarMode')?.value||'count';
-    $('calendarMonth').textContent=sorted.length?sorted[0].slice(0,4)+'〜'+sorted[sorted.length-1].slice(0,4)+'年':'鑑賞履歴';
+    $('calendarMonth').textContent=sorted.length?sorted[0].slice(0,4)+'〜'+String(latest.getFullYear())+'年':'鑑賞履歴';
     const dayNames=['日','月','火','水','木','金','土'];
     const rows=weeks.map(week=>{
       const cells=Array.from({length:7},(_,i)=>{
@@ -187,10 +187,9 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      const rank=count>=5?'GOLD':'';
-      return '<section class="cy-month" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本'+(rank?' <b class="cy-rank '+rank.toLowerCase()+'">'+rank+'</b>':'')+'</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      return '<section class="cy-month" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
-    $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー。月5本以上でGOLD');
+    $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
   function renderDateFilms(date) {
     const rows = recordMovies().filter(item => dateOf(item) === date);

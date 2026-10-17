@@ -7,6 +7,26 @@ PAGES = ["index.html", "discover.html", "experience.html", "my-cinemap.html", "s
 BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
 ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
 
+
+class VisibleCopyParser(__import__("html.parser", fromlist=["HTMLParser"]).HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.hidden = 0
+        self.copy = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in {"script", "style", "template"}:
+            self.hidden += 1
+        self.copy.extend(value for key, value in attrs if key in {"alt", "aria-label", "title"} and value)
+
+    def handle_endtag(self, tag):
+        if tag in {"script", "style", "template"} and self.hidden:
+            self.hidden -= 1
+
+    def handle_data(self, data):
+        if not self.hidden:
+            self.copy.append(data)
+
 class BrandIdentityTests(unittest.TestCase):
     def test_primary_pages_use_original_symbol_with_cinelva_text(self):
         for page in PAGES:
@@ -35,6 +55,24 @@ class BrandIdentityTests(unittest.TestCase):
             self.assertIn(f'rel="apple-touch-icon" href="{ICON_ASSET}"', text, page)
             self.assertIn('rel="manifest" href="manifest.webmanifest"', text, page)
             self.assertIn('name="theme-color" content="#0a0c0f"', text, page)
+
+
+    def test_backup_routes_use_original_symbol_and_live_cinelva_wordmark(self):
+        for page in ["data-backup.html", "cinelva/data-backup.html"]:
+            text = (ROOT / page).read_text(encoding="utf-8")
+            self.assertIn(f'<img src="{ICON_ASSET}" alt="">', text, page)
+            self.assertIn('<span>Cinelva</span>', text, page)
+            self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
+
+    def test_visible_brand_copy_has_no_retired_cinemap_wordmark(self):
+        pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html"))
+        self.assertGreaterEqual(len(pages), 20)
+        for page in pages:
+            parser = VisibleCopyParser()
+            parser.feed(page.read_text(encoding="utf-8"))
+            visible = " ".join(parser.copy)
+            self.assertNotIn("Cinemap", visible, str(page))
+            self.assertNotIn("CINEMAP", visible, str(page))
 
     def test_uploaded_brand_assets_exist(self):
         self.assertTrue((ROOT / BRAND_ASSET).exists())

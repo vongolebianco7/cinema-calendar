@@ -16,11 +16,8 @@ async function freePort() {
 
 (async () => {
   const root = path.resolve(__dirname, '..');
-  const routes = [
-    ...fs.readdirSync(root).filter(file => file.endsWith('.html')),
-    ...fs.readdirSync(path.join(root, 'cinelva')).filter(file => file.endsWith('.html')).map(file => `cinelva/${file}`),
-    'my-cinelva/index.html'
-  ].sort();
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'quality', 'route-manifest.json'), 'utf8'));
+  const routes = manifest.routes.map(route => route.path).sort();
   assert.equal(routes.length, 29, 'route audit covers all current non-Ocean HTML pages');
 
   const port = await freePort();

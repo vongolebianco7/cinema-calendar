@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T12:00:00+09:00",
+  "updated_at": "2026-10-17T12:03:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "a86941b2cb58f649c86da971d4c3e1c62b597bed",
+  "head_sha": "cb8e5d4f5f55b18cc4515bb780d468c2cbb70432",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "a86941b2cb58f649c86da971d4c3e1c62b597bed"
+    "head_sha": "cb8e5d4f5f55b18cc4515bb780d468c2cbb70432"
   },
   "work_items": [
     {
@@ -93,6 +93,19 @@
         "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf"
       },
       "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability."
+    },
+    {
+      "id": "P0-242-RECORD",
+      "title": "Route movie details to shared watched-record form",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": {
+        "number": 251,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
+        "branch": "fix/cinelva-record-entry-route",
+        "head_sha": "3d30c0a5a7e673e9a97a1f923567b1cdfcd3ee2f"
+      },
+      "acceptance": "From the shared movie detail opened by calendar, ranking, discovery or search, the selected ID/title reach the existing My CINELVA record form; no duplicate storage logic or key is added."
     }
   ],
   "verification": [
@@ -155,6 +168,16 @@
       "command": "PR #250 streaming coverage audit",
       "result": "snapshot_recomputed_pr_created",
       "details": "Added service-level fresh/stale unique movie counts to docs/cinelva-data-coverage.md, computed from data/availability.json generated_at 2026-10-16T18:49:04Z as of 2026-10-17 11:58 JST. Counts: Netflix 10 fresh/6 stale; Prime Video 45/11; Disney+ 1/1; U-NEXT 46/10; Hulu 28/0; Apple TV+ 2/0; ABEMA, Lemino, WOWOW 0/0. No collection call or dataset modification."
+    },
+    {
+      "command": "Brand and palette audit baseline",
+      "result": "automated_primary_pages_passed_full_surface_review_pending",
+      "details": "Existing approved guideline says preserve original symbol and existing palette; it records no palette redesign. Existing test_brand_identity.py checks 9 primary root pages, PWA icon/manifest and theme-color. It passed in PR #248/#249 Actions. Nested pages, OG/share assets, modals, previews, and all light/dark states are not yet exhaustively audited; no palette changes made."
+    },
+    {
+      "command": "PR #251 shared record-route implementation",
+      "result": "pr_created_actions_pending",
+      "details": "Added a movie-detail '鑑賞を記録' link passing ID/title to my-cinelva/?record=; shared My CINELVA page opens an existing record for edit, preselects known catalogue film or preloads existing search for an unknown ID. Added test and wired into Validate frontend. Latest PR checks pending."
     }
   ],
   "deployment": {
@@ -175,6 +198,6 @@
   "blockers": [
     "Vercel PR backend check is blocked by provider build-rate-limit (observed); exact team usage and reset time are unavailable through the connected API. No production deploy attempted."
   ],
-  "next_action": "Refresh latest PR #246/#249 checks and PR #250 docs check. Continue #242 full-page brand/palette and record-entry audit; check box-office poster failure UI and current per-title availability; classify the 8+8 baseline tests. Keep Vercel deployment paused until provider rate-limit clears.",
+  "next_action": "Refresh PR #251 Validate frontend, check #249's latest discovery classification and shelf tests (head 01c39c89), then continue #242 audit: test record CTA across calendar/rankings/search/detail/map; verify missing boxoffice-image fallback; complete nested-brand/palette coverage. Keep Vercel deployments paused until the build-rate-limit status clears.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:24:22.759Z",
+  "updated_at": "2026-10-17T13:42:42.173Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "628da6ce2439baa70db55663ff18325680fec74a",
+  "base_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c",
   "branch": "main",
-  "head_sha": "628da6ce2439baa70db55663ff18325680fec74a",
+  "head_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c",
   "pull_request": {
-    "number": 276,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/276",
+    "number": 277,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/277",
     "status": "merged",
-    "head_sha": "6f1aa3549418819d291c102bd3a779615edbfdd4",
-    "merge_sha": "628da6ce2439baa70db55663ff18325680fec74a"
+    "head_sha": "4cb10686ff3e620c8aa07c1bfbf136b724e30fa3",
+    "merge_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c"
   },
   "work_items": [
     {
@@ -272,6 +272,20 @@
       },
       "acceptance": "Previously cached older titles in the approved catalog re-enter normal seven-day observation scheduling; uncached historical titles stay excluded.",
       "ci": "4/4 success: smoke 39036262448, Python 39036262395, Autonomous quality 39036262376, Completeness 39036262391. Actual provider refresh and production not verified."
+    },
+    {
+      "id": "P0-277-NO-FAKE-AVAILABILITY-TIMESTAMP",
+      "title": "Never fabricate streaming observation dates on calendar detail",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 277,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/277",
+        "head_sha": "4cb10686ff3e620c8aa07c1bfbf136b724e30fa3",
+        "merge_sha": "4ce039b8700c5248b2beb81c0dfd481fd34a972c"
+      },
+      "acceptance": "Missing checked_at remains unknown, not current; the existing 7-day freshness gate remains active.",
+      "ci": "7/7 success: autonomous 39037476697, backup 39037476664, frontend 39037476644, brand 39037476660, completeness 39037476663, smoke 39037476693, Python 39037476653. Production not verified."
     }
   ],
   "verification": [

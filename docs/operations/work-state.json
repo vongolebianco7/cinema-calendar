@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17T13:10:16+09:00",
+  "updated_at": "2026-10-17T13:46:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "71b31626abe6c06d2ba8eb25fab9f9fa2d45943e",
   "branch": "work/cinelva-restartable-p0",
-  "head_sha": "3f125bb4e6e951ba4c4def5341e9d0907fa42fa1",
+  "head_sha": "9c3a8fc82c511dc256ad85505ca7f64bf6c79406",
   "pull_request": {
     "number": 246,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/246",
     "status": "open",
-    "head_sha": "3f125bb4e6e951ba4c4def5341e9d0907fa42fa1"
+    "head_sha": "9c3a8fc82c511dc256ad85505ca7f64bf6c79406"
   },
   "work_items": [
     {
@@ -354,6 +354,6 @@
   "blockers": [
     "Vercel backend GitHub check reports provider deployment-rate-limit (api-deployments-free-per-day, >100 in 24h; upgradeToPro=build-rate-limit) on 2026-10-17. Exact reset/quota is unavailable; do not retry until independently confirmed clear."
   ],
-  "next_action": "Refresh latest PR heads after the new checkpoint commit and confirm its checks. Continue remaining #242 error/empty-state audit and release checklist. Keep validation on GitHub/Actions while Vercel Hobby deployment limit remains; do not deploy until quota is independently confirmed clear, then deploy one tested SHA only after repository review requirements and verify public production flows.",
+  "next_action": "Resume by checking live main/PR heads and CI, then continue the remaining #242 error/empty-state audit. When any ready item passes, immediately select the next READY task in Issue #239 within the same work run; do not stop at a minor success or wait for the next scheduled tick. Save work-state.json and an Issue #239 checkpoint every 30–60 minutes and after milestones; make an overall priority assessment about every two hours. Keep using GitHub Actions while Vercel Hobby is rate-limited. After quota clears, satisfy repository review requirements, batch tested changes into one deployment, and verify production flows.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

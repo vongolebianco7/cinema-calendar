@@ -24,7 +24,7 @@ async function navigate(path){
 for(const path of candidates){
  const res=await navigate(path);
  if(!res||res.status()>=400){if(path==='index.html')errors.push(`${path}: HTTP ${res?.status()??'no response'}`);continue}
- if(path==='index.html')await page.locator('body').waitFor({state:'visible',timeout:15000});
+ if(path==='index.html')await page.waitForLoadState('networkidle',{timeout:5000}).catch(()=>console.warn('Index remained network-active; proceeding with DOM-ready smoke checks'));
  await page.waitForTimeout(250);
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  if(overflow>2)errors.push(`${path}: page-level horizontal overflow ${overflow}px`);

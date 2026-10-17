@@ -37,7 +37,7 @@
   function renderCinemaSummary() {
     const selector=$('csPeriod'); if(!selector)return;
     const all=recordMovies().map(enriched);
-    const years=[...new Set(all.map(r=>dateOf(r).slice(0,4)).filter(y=>/^\\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
+    const years=[...new Set(all.map(r=>dateOf(r).slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
     const previous=selector.value;
     selector.innerHTML='<option value="all">オールタイム</option>'+[...new Set([String(currentYear),...years])].sort((a,b)=>Number(b)-Number(a)).map(y=>'<option value="'+y+'">'+y+'年</option>').join('');
     selector.value=previous&&[...selector.options].some(o=>o.value===previous)?previous:String(currentYear);
@@ -48,7 +48,7 @@
     $('csPrisms').innerHTML=prism.repeat(Math.floor(all.length/1000));
     const achieved=Math.floor(all.length%1000/100);
     $('csCrowns').innerHTML=Array.from({length:10},(_,i)=>'<svg class="cs-crown" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 2 5l6 5 3-7 3 7 6-5-1 11ZM3 19h16" fill="none" stroke="'+(i<achieved?'#d9bd7f':'#66737d')+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>').join('');
-    const counts=new Map();all.forEach(r=>{const y=dateOf(r).slice(0,4);if(/^\\d{4}$/.test(y))counts.set(y,(counts.get(y)||0)+1)});
+    const counts=new Map();all.forEach(r=>{const y=dateOf(r).slice(0,4);if(/^\d{4}$/.test(y))counts.set(y,(counts.get(y)||0)+1)});
     const max=Math.max(1,...counts.values());
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
     const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a))).slice(0,10);

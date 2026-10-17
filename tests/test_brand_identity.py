@@ -86,6 +86,7 @@ class BrandIdentityTests(unittest.TestCase):
             visible = " ".join(parser.copy)
             self.assertNotIn("Cinemap", visible, str(page))
             self.assertNotIn("CINEMAP", visible, str(page))
+            self.assertNotIn("CINELVA", visible, str(page))
 
     def test_all_non_ocean_routes_share_pwa_and_open_graph_icon_metadata(self):
         pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html")) + list((ROOT / "my-cinelva").glob("*.html"))

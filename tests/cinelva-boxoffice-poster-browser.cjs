@@ -49,8 +49,15 @@ async function freePort() {
       const title = (await firstCard.locator('.title').textContent()).trim();
       assert.equal(backendQueries.some(query => normalizeTitle(query) === normalizeTitle(title)), false, 'the nested static rankings catalog resolves the first box-office poster locally');
       await firstCard.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
-      await page.waitForTimeout(300);
-      assert.equal(await page.locator('#grid img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');
+      const cards = page.locator('#grid [data-box-film]');
+      for (let index = 0; index < await cards.count(); index += 1) {
+        const card = cards.nth(index);
+        await card.scrollIntoViewIfNeeded();
+        await card.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
+        assert.ok((await card.locator('.title').textContent()).trim(), 'every source row keeps its film title visible');
+        await page.waitForTimeout(10);
+        assert.equal(await card.locator('img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');
+      }
     }
     console.log('Box-office poster fallback passed at 390px and 1280px with image/API requests unavailable.');
   } finally {

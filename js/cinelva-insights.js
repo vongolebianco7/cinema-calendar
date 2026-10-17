@@ -113,7 +113,7 @@ function buildAwardHeatmap(records, awards, coverage = {}) {
     cell.sourceCount++;
     const movieId = award.tmdb_id ?? award.tmdbId;
     const title = award.film_title || award.title;
-    let record = movieId != null ? watched.find(item => String(item.tmdbId ?? item.id) === String(movieId)) : null;
+    let record = movieId != null ? directorViewingRecord(watched, { tmdbId: movieId }) : null;
     if (movieId == null && award.match_status !== 'ambiguous') {
       const candidates = watched.filter(item => {
         const releaseYear = Number(item.year), expected = Number(award.release_year);

@@ -80,29 +80,43 @@ def select_due_observations(candidates, cache, now, limit=20):
 
 
 
+def build_candidates(movies, cache, today):
+ """Keep a bounded refresh path for previously observed older titles.
+
+ The release calendar is only a discovery window, not a guarantee that
+ previously observed streaming titles cease to need freshness checks.
+ Revisit old snapshots only when their IDs still exist in our approved
+ local movie catalog. Do not discover new distant-history titles.
+ """
+ by_id={}
+ for movie in movies:
+  mid=movie.get("id")
+  if not isinstance(mid,int) or mid<=0:
+   continue
+  try:
+   released=datetime.date.fromisoformat(movie.get("date") or str(today))
+  except (TypeError,ValueError):
+   continue
+  distance=abs((released-today).days)
+  if distance>365 and str(mid) not in cache:
+   continue
+  # Prefer the closest calendar entry when a title occurs more than once.
+  if mid not in by_id or distance<by_id[mid][0]:
+   by_id[mid]=(distance,movie)
+ return sorted(by_id.items(),key=lambda item:(
+  0 if item[1][1].get("event")=="streaming" else 1,item[1][0]
+ ))
+
+
+
 
 def main():
  KEY=os.environ["TMDB_API_KEY"]
  movies=load(ROOT/"movies.json",{}).get("movies",[])+load(ROOT/"awards.json",{}).get("catalog",[])
  old=load(PATH,{"generated_at":None,"source":"TMDB watch/providers (JustWatch)","country":"JP","movies":{}})
  cache=old.get("movies",{})
- by_id={}
- for m in movies:
-  mid=m.get("id")
-  if not isinstance(mid,int):continue
-  try:date=datetime.date.fromisoformat(m.get("date") or str(TODAY))
-  except (KeyError,ValueError):continue
-  distance=abs((date-TODAY).days)
-  if distance>365:continue
-  if mid not in by_id or distance<by_id[mid][0]:by_id[mid]=(distance,m)
+ candidates=build_candidates(movies,cache,TODAY)
 
- # Prioritize streaming calendar entries, then nearby theatrical releases.
- # Coverage was previously capped at 100 titles, which made later-added
- # providers such as Apple TV+, ABEMA and Lemino appear under-populated.
- candidates=sorted(
-  by_id.items(),
-  key=lambda item:(0 if item[1][1].get("event")=="streaming" else 1, item[1][0])
- )
  selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=DAILY_OBSERVATION_LIMIT)
  count=0
  for mid,(_,m) in selected:

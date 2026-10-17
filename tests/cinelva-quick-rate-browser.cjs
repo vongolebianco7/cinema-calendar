@@ -39,7 +39,7 @@ async function port(){
   assert.equal((await page.evaluate(()=>window.CinelvaLibraryRecords.all()))[0].rating,4.1);
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
-  assert.equal(await page.locator('#cinelvaRateValue').textContent(),'0.0');
+  assert.equal(await page.locator('#cinelvaRateValue').textContent(),'4.1');
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRatePlace').selectOption('映画館');
   await page.locator('#cinelvaRateVenue').fill('TOHOシネマズ日吉');

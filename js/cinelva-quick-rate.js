@@ -59,9 +59,9 @@ $('cinelvaRateSave').onclick=save;
 // A persistent panel must not trap mobile users behind its own overlay.
 // Navigate among the existing listing cards from inside the panel itself.
 function nextMovie(){
- const grid=activeCard?.closest('#cards,#grid') || document.querySelector('#grid,#cards');
+ const grid=activeCard?.closest('#dates,#cards,#grid') || document.querySelector('#dates,#grid,#cards');
  if(!grid)return;
- const cards=[...grid.querySelectorAll('.cinelva-rate-wrap')];
+ const cards=[...grid.querySelectorAll('.cinelva-rate-wrap,.cinelva-rate-calendar-card')];
  if(!cards.length)return;
  const index=cards.indexOf(activeCard);
  const next=cards[(index+1)%cards.length];
@@ -76,11 +76,11 @@ function movieFromCard(card,kind){
   const u=new URL(card.href,location.href);
   return {id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
  }
- return root.CinelvaRatingResolve?.(card.dataset.i,kind);
+ return root.CinelvaRatingResolve?.(card.dataset.mi??card.dataset.i,kind);
 }
 function refreshBadges(){
- for(const wrap of document.querySelectorAll('.cinelva-rate-wrap')){
-  const card=wrap.querySelector('.rankCard,.card[data-i]');
+ for(const wrap of document.querySelectorAll('.cinelva-rate-wrap,.cinelva-rate-calendar-card')){
+  const card=wrap.matches('.cinelva-rate-calendar-card')?wrap:wrap.querySelector('.rankCard,.card[data-i]');
   const badge=wrap.querySelector('.cinelva-rate-saved');
   if(!card||!badge)continue;
   const item=getRecord(movieFromCard(card,wrap.dataset.rateKind));
@@ -120,10 +120,38 @@ function enhanceGrid(grid,kind){
 style.textContent+=`
 .cinelva-rate-wrap{min-width:0;position:relative}
 .cinelva-rate-wrap>.card,.cinelva-rate-wrap>.rankCard{display:block;width:100%;height:auto}
-.cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}
+.cinelva-rate-wrap>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:4px 6px 9px}.cinelva-rate-calendar-card>.cinelva-rate-button{display:block;width:calc(100% - 12px);margin:6px;position:relative;z-index:2}
 `;
+function enhanceCalendar(){
+ const dates=document.querySelector('#dates');
+ if(!dates)return;
+ const decorate=()=>{
+  for(const card of dates.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]')){
+   if(card.classList.contains('cinelva-rate-calendar-card'))continue;
+   card.classList.add('cinelva-rate-calendar-card');
+   card.dataset.rateKind='calendar';
+   const badge=document.createElement('span');
+   badge.className='cinelva-rate-saved';badge.hidden=true;
+   badge.setAttribute('aria-label','この作品の保存済み評価');
+   const button=document.createElement('button');
+   button.type='button';button.className='cinelva-rate-button';
+   button.textContent='★ 採点・コメント';
+   button.setAttribute('aria-label','この作品を採点・コメント');
+   button.onclick=event=>{
+    event.preventDefault();event.stopPropagation();
+    activeCard=card;
+    if(!open(movieFromCard(card,'calendar')))button.textContent='作品IDを確認できません';
+   };
+   card.append(badge,button);
+  }
+  refreshBadges();
+ };
+ new MutationObserver(decorate).observe(dates,{childList:true,subtree:true});
+ decorate();
+}
 enhanceGrid(document.querySelector('#cards'),'calendar');
 enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');
+enhanceCalendar();
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -26,6 +26,17 @@ async function freePort() {
   let browser;
   const pageErrors = [];
   const localAssetFailures = [];
+  const report = {
+    schema_version: 1,
+    generated_at: new Date().toISOString(),
+    manifest: 'quality/route-manifest.json',
+    matrix: manifest.audit_matrix,
+    expected_page_loads: routes.length * 4,
+    status: 'running',
+    results: [],
+    page_errors: pageErrors,
+    local_asset_failures: localAssetFailures
+  };
   try {
     await new Promise((resolve, reject) => {
       const deadline = Date.now() + 10000;
@@ -70,6 +81,13 @@ async function freePort() {
           assert.ok(state.textLength > 10, `${route} has visible main content`);
           assert.equal(state.colorScheme, theme, `${route} applies the ${theme} color scheme`);
           assert.equal(state.themeColor, theme === 'dark' ? '#0a0c0f' : '#f8f6f1', `${route} updates its browser theme color`);
+          report.results.push({
+            route,
+            viewport: { width, height: 844 },
+            theme,
+            http_status: response.status(),
+            ...state
+          });
           checked++;
         }
         await context.close();
@@ -77,9 +95,19 @@ async function freePort() {
     }
     assert.deepEqual(pageErrors, [], 'routes load without uncaught browser JavaScript exceptions');
     assert.deepEqual(localAssetFailures, [], 'routes load without missing local documents, scripts, stylesheets, images, or fonts');
+    report.status = 'passed';
     console.log(`CINELVA route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
+  } catch (error) {
+    report.status = 'failed';
+    report.failure = error instanceof Error ? error.message : String(error);
+    throw error;
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');
+    report.completed_page_loads = report.results.length;
+    report.completed_at = new Date().toISOString();
+    const evidenceDir = path.join(root, 'artifacts', 'route-audit');
+    fs.mkdirSync(evidenceDir, { recursive: true });
+    fs.writeFileSync(path.join(evidenceDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -16,3 +16,14 @@ test('every route declares ownership, counts, CTA, sources and audit defaults', 
   assert.deepEqual(manifest.audit_matrix.viewports,[390,1280]);assert.deepEqual(manifest.audit_matrix.themes,['light','dark']);assert.deepEqual(manifest.audit_matrix.browsers,['chromium','webkit']);assert.match(manifest.defaults.brand_component,/Cinelva/);
   for(const route of manifest.routes){for(const field of ['path','surface','purpose','data_owner','count_contract','primary_cta']){assert.equal(typeof route[field],'string',`${route.path}: ${field}`);assert.ok(route[field].trim(),`${route.path}: ${field}`)}assert.ok(Array.isArray(route.source_refs)&&route.source_refs.length,`${route.path}: source_refs`);assert.equal(fs.existsSync(path.join(root,route.path)),true,route.path)}
 });
+
+test('browser route audit preserves machine-readable evidence in CI', () => {
+  const browserAudit = fs.readFileSync(path.join(root, 'tests', 'cinelva-route-audit-browser.cjs'), 'utf8');
+  const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'validate-frontend.yml'), 'utf8');
+  assert.match(browserAudit, /artifacts[\\/'].*route-audit/);
+  assert.match(browserAudit, /report\.json/);
+  assert.match(browserAudit, /JSON\.stringify\(report/);
+  assert.match(workflow, /name: cinelva-route-audit/);
+  assert.match(workflow, /path: artifacts\/route-audit\//);
+  assert.match(workflow, /if: always\(\)/);
+});

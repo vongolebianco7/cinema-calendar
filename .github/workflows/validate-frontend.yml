@@ -145,6 +145,14 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
+      - name: Preserve route audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinelva-route-audit
+          path: artifacts/route-audit/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

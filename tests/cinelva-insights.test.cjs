@@ -81,3 +81,28 @@ test('title fallback rejects ambiguous same-title works and ignores unwatched re
   assert.equal(result.cells['賞:2020'].count,0);
   assert.equal(Insights.buildAwardHeatmap([{id:1,title:'Same',year:2024,watched:false}], [a]).cells['賞:2020'].count,0);
 });
+
+test('director films reconcile imported local IDs with TMDB identity without losing rating zero', () => {
+  const records=[
+    {id:'local-123',tmdbId:456,title:'Seen',rating:0,watched:true},
+    {id:'unwatched',tmdbId:789,title:'Not Seen',watched:false},
+  ];
+  const seen=Insights.directorViewingRecord(records,{id:456});
+  assert.equal(seen.id,'local-123');
+  assert.equal(seen.rating,0);
+  assert.equal(Insights.directorViewingRecord(records,{id:789}),null);
+  assert.equal(Insights.directorViewingRecord(records,{id:999}),null);
+});
+
+test('director identity prefers explicit TMDB match and does not equate conflicting local IDs', () => {
+  const records=[
+    {id:'123',tmdbId:333,title:'Different TMDB film'},
+    {id:'some-key',tmdbId:123,title:'Actual match',rating:null},
+    {id:'111',title:'Legacy entry'},
+  ];
+  assert.equal(Insights.directorViewingRecord(records,{id:123})?.title,'Actual match');
+  assert.equal(Insights.directorViewingRecord(records,{id:333})?.title,'Different TMDB film');
+  assert.equal(Insights.directorViewingRecord(records,{id:111})?.title,'Legacy entry');
+  assert.equal(Insights.directorViewingRecord(records,{id:222}),null);
+  assert.equal(Insights.directorViewingRecord(records,{id:null}),null);
+});

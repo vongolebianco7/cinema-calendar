@@ -51,7 +51,7 @@ $('cinelvaRateSave').onclick=save;
 // A persistent panel must not trap mobile users behind its own overlay.
 // Navigate among the existing listing cards from inside the panel itself.
 function nextMovie(){
- const grid=activeCard?.closest('#cards,#grid') || document.querySelector('#grid,#cards');
+ const grid=activeCard?.closest('#dates,#cards,#grid') || document.querySelector('#dates,#cards,#grid');
  if(!grid)return;
  const cards=[...grid.querySelectorAll('.cinelva-rate-wrap')];
  if(!cards.length)return;

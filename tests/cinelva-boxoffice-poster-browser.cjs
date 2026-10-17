@@ -30,7 +30,8 @@ async function freePort() {
     });
     browser = await chromium.launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-    await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+    let backendCalls = 0;
+    await page.route('https://backend-one-gray-94.vercel.app/**', route => { backendCalls += 1; return route.abort(); });
     await page.route('https://image.tmdb.org/**', route => route.abort());
 
     for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
@@ -43,6 +44,7 @@ async function freePort() {
       assert.equal((await firstCard.locator('.title').textContent()).trim().length > 0, true, 'poster fallback keeps the film title visible');
       assert.equal(await firstCard.locator('[data-box-placeholder]').evaluate(el => getComputedStyle(el, '::after').content), '"画像なし"');
       await firstCard.locator('img[data-box-poster][src]').waitFor({ state: 'attached', timeout: 5000 });
+      assert.equal(backendCalls, 0, 'the nested static rankings catalog resolves the first box-office poster locally');
       await firstCard.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
       await page.waitForTimeout(300);
       assert.equal(await page.locator('#grid img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');

@@ -80,6 +80,33 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/directors.json
-          git diff --cached --quiet || git commit -m 'Refresh sourced director names profiles and complete directing credits'
-          git push origin "HEAD:$WORK_BRANCH"
+          cp data/directors.json /tmp/cinelva-refreshed-directors.json
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$WORK_BRANCH"
+            git checkout -B director-data-publish FETCH_HEAD
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('data/directors.json')
+          latest = json.loads(path.read_text())
+          refreshed = json.loads(Path('/tmp/cinelva-refreshed-directors.json').read_text())
+          # Reconcile concurrent writes instead of overwriting the latest main.
+          for identifier, entry in refreshed['directors'].items():
+              previous = latest['directors'].get(identifier, {})
+              if str(entry.get('checked_at', '')) >= str(previous.get('checked_at', '')):
+                  latest['directors'][identifier] = entry
+          path.write_text(json.dumps(latest, ensure_ascii=False, indent=2) + '\\n')
+          PY
+            git add data/directors.json
+            if git diff --cached --quiet; then
+              echo 'Director snapshot already up to date'
+              exit 0
+            fi
+            git commit -m 'Refresh sourced director names profiles and complete directing credits'
+            if git push origin "HEAD:$WORK_BRANCH"; then
+              exit 0
+            fi
+            echo "Concurrent push detected; reconciling attempt $attempt/5"
+          done
+          echo 'Could not save director data after five concurrent-update retries' >&2
+          exit 1

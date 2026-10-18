@@ -622,152 +622,69 @@ dialog.cinelva-rate-dialog[open]{
 }
 `;
 style.textContent+=`
-/* Two-row card rating: eye | score + value | clear; slider below. */
-.cinelva-rating-controls{
- box-sizing:border-box!important;
- display:grid!important;
- grid-template-columns:minmax(0,1fr)!important;
- grid-template-rows:25px 26px!important;
- height:56px!important;min-height:56px!important;
- padding:2px 6px 3px!important;
- overflow:hidden!important;
- position:relative!important;
-}
-.cinelva-rating-controls>.cinelva-inline-score{
- grid-column:1!important;grid-row:1/3!important;
- display:grid!important;grid-template-columns:minmax(0,1fr)!important;
- grid-template-rows:25px 26px!important;
- min-width:0!important;width:100%!important;
- position:relative!important;pointer-events:none!important;
-}
-.cinelva-rating-controls>.cinelva-inline-score::before{content:none!important;display:none!important}
-.cinelva-rating-controls .cinelva-inline-value{
- grid-column:1!important;grid-row:1!important;
- justify-self:center!important;align-self:center!important;
- position:static!important;top:auto!important;
- margin:0!important;padding:0!important;
- width:auto!important;max-width:calc(100% - 112px)!important;
- min-width:0!important;line-height:20px!important;
- text-align:center!important;white-space:nowrap!important;
- font-size:11px!important;letter-spacing:0!important;
-}
-.cinelva-rating-controls .cinelva-inline-value::before{
- content:"スコア "!important;color:#c3c8d0!important;font-weight:500!important;
-}
-.cinelva-rating-controls>.cinelva-rate-button{
- grid-column:1!important;grid-row:1!important;
- justify-self:start!important;align-self:center!important;
- position:relative!important;z-index:6!important;
- margin:0!important;
-}
-.cinelva-rating-controls>.cinelva-rating-clear{
- position:absolute!important;top:3px!important;right:5px!important;
- box-sizing:border-box!important;z-index:7!important;
- height:23px!important;min-height:23px!important;
- max-width:64px!important;margin:0!important;
- padding:2px 6px!important;line-height:16px!important;
- border:1px solid #aeb5c07a!important;border-radius:5px!important;
- background:#ffffff0d!important;
-}
-.cinelva-rating-controls .cinelva-score-track{
- grid-column:1!important;grid-row:2!important;
- min-width:0!important;width:100%!important;
-}
-`;
-style.textContent+=`
-/* Compact review header: rating and date on one row, slider directly below. */
-.cinelva-rate-dialog .cinelva-review-score{
- display:grid!important;
- grid-template-columns:auto auto minmax(0,1fr)!important;
- grid-template-rows:42px 30px!important;
- column-gap:5px!important;row-gap:5px!important;
- align-items:center!important;
-}
-.cinelva-rate-dialog .cinelva-review-score output{
- grid-column:1!important;grid-row:1!important;
- font-size:28px!important;line-height:1!important;
-}
-.cinelva-rate-dialog .cinelva-review-score>span{
- grid-column:2!important;grid-row:1!important;
- font-size:13px!important;white-space:nowrap!important;
-}
-.cinelva-rate-dialog .cinelva-review-score .cinelva-review-date{
- grid-column:3!important;grid-row:1!important;
- min-width:0!important;width:auto!important;
- max-width:none!important;justify-self:end!important;
-}
-.cinelva-rate-dialog .cinelva-review-score .cinelva-review-date label{
- display:flex!important;flex-direction:row!important;
- align-items:center!important;justify-content:flex-end!important;
- gap:5px!important;white-space:nowrap!important;
- font-size:11px!important;
-}
-.cinelva-rate-dialog .cinelva-review-score .cinelva-review-date input[type=date]{
- flex:0 1 116px!important;width:116px!important;max-width:116px!important;
- min-width:0!important;height:34px!important;min-height:34px!important;
- padding:3px 4px!important;font-size:12px!important;
-}
-.cinelva-rate-dialog .cinelva-review-score input[type=range]{
- grid-column:1/-1!important;grid-row:2!important;
- margin:0!important;height:30px!important;min-height:30px!important;
-}
-@media(max-width:370px){
- .cinelva-rate-dialog .cinelva-review-score .cinelva-review-date label{font-size:10px!important}
- .cinelva-rate-dialog .cinelva-review-score .cinelva-review-date input[type=date]{width:108px!important;max-width:108px!important}
-}
-`;
-style.textContent+=`
-/* Stable three-row card layout: controls, score, slider. No overlapping text. */
+/* Final narrow-card layout. Explicit fixed tracks avoid inherited grid min-size overflow. */
 .cinelva-rating-controls{
  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
- grid-template-rows:24px 17px 25px!important;
- box-sizing:border-box!important;
- height:70px!important;min-height:70px!important;
- padding:2px 7px!important;gap:0!important;
- overflow:hidden!important;position:relative!important;
+ grid-template-rows:22px 16px 22px!important;
+ align-content:start!important;align-items:stretch!important;
+ height:64px!important;min-height:64px!important;max-height:64px!important;
+ padding:2px 6px!important;margin:0!important;gap:0!important;
+ box-sizing:border-box!important;overflow:hidden!important;position:relative!important;
 }
 .cinelva-rating-controls>.cinelva-inline-score{
  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
- grid-template-rows:24px 17px 25px!important;
+ grid-template-rows:22px 16px 22px!important;
+ align-content:start!important;align-items:stretch!important;
  grid-column:1!important;grid-row:1/4!important;
+ height:60px!important;min-height:0!important;max-height:60px!important;
  width:100%!important;min-width:0!important;
- margin:0!important;padding:0!important;
- pointer-events:none!important;
+ margin:0!important;padding:0!important;gap:0!important;
+ box-sizing:border-box!important;overflow:visible!important;
+ pointer-events:none!important;position:relative!important;
 }
-.cinelva-rating-controls>.cinelva-inline-score::before{content:none!important;display:none!important}
+.cinelva-rating-controls>.cinelva-inline-score::before{display:none!important;content:none!important}
 .cinelva-rating-controls>.cinelva-rate-button{
  grid-column:1!important;grid-row:1!important;
  justify-self:start!important;align-self:center!important;
- z-index:7!important;margin:0!important;
+ width:25px!important;height:22px!important;min-height:22px!important;
+ position:relative!important;z-index:7!important;margin:0!important;
 }
 .cinelva-rating-controls>.cinelva-rating-clear{
- position:absolute!important;right:6px!important;top:3px!important;
- max-width:calc(100% - 45px)!important;
- min-height:22px!important;height:22px!important;
- padding:1px 6px!important;line-height:18px!important;
- box-sizing:border-box!important;z-index:7!important;
+ position:absolute!important;top:2px!important;right:6px!important;
+ height:22px!important;min-height:22px!important;max-height:22px!important;
+ max-width:calc(100% - 36px)!important;
+ padding:1px 5px!important;margin:0!important;
+ line-height:18px!important;box-sizing:border-box!important;
  border:1px solid #aeb5c07a!important;border-radius:5px!important;
+ background:#ffffff0d!important;z-index:7!important;
 }
 .cinelva-rating-controls .cinelva-inline-value{
- grid-column:1!important;grid-row:2!important;
- justify-self:center!important;align-self:center!important;
+ display:block!important;grid-column:1!important;grid-row:2!important;
  position:static!important;top:auto!important;
- margin:0!important;padding:0!important;
- max-width:100%!important;width:auto!important;
- font:600 11px/16px system-ui!important;
- white-space:nowrap!important;text-align:center!important;
+ justify-self:center!important;align-self:center!important;
+ width:auto!important;max-width:100%!important;min-width:0!important;
+ height:16px!important;min-height:0!important;
+ padding:0!important;margin:0!important;
+ font:600 10px/16px system-ui!important;
+ text-align:center!important;white-space:nowrap!important;
+ letter-spacing:0!important;overflow:hidden!important;
 }
 .cinelva-rating-controls .cinelva-inline-value::before{
- content:"スコア  "!important;font-weight:400!important;color:#c3c8d0!important;
+ content:"スコア "!important;color:#c3c8d0!important;font-weight:400!important;
 }
 .cinelva-rating-controls .cinelva-score-track{
- grid-column:1!important;grid-row:3!important;
- width:100%!important;min-width:0!important;
- height:25px!important;min-height:25px!important;
+ display:block!important;grid-column:1!important;grid-row:3!important;
  align-self:center!important;
+ position:relative!important;
+ width:100%!important;min-width:0!important;
+ height:22px!important;min-height:22px!important;max-height:22px!important;
+ margin:0!important;padding:0!important;
+ box-sizing:border-box!important;overflow:visible!important;
 }
 .cinelva-rating-controls .cinelva-score-track input[type=range]{
- height:25px!important;min-height:25px!important;
+ display:block!important;width:100%!important;
+ height:22px!important;min-height:22px!important;max-height:22px!important;
+ margin:0!important;padding:0!important;
 }
 `;
 root.CinelvaQuickRate={open,normalize};

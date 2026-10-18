@@ -149,7 +149,7 @@ body,button,input,select,textarea,summary,.cinema-summary,.gTop,#calendarView .p
 #directorsView #directorWorks:not(:empty){margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 </style><style id="my-cinelva-clarity-105">
 :root{--my-font:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
-body,body *:not(svg):not(path){font-family:var(--my-font)!important}
+body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!important}
 .hero{margin-bottom:16px!important}
 .hero .eyebrow{font-size:10px!important;letter-spacing:.12em!important}
 .hero h1{font-size:clamp(27px,5vw,38px)!important;line-height:1.18!important;letter-spacing:-.035em!important}
@@ -207,7 +207,7 @@ body,body *:not(svg):not(path){font-family:var(--my-font)!important}
 #awardsView .award-watch-state{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:700}
 #awardsView .award-watch-state.is-watched{background:#204f47;color:#a9e4cc}
 #awardsView .award-watch-state.is-unwatched{background:#51402a;color:#f5d49a}
-</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style></head>
+</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
@@ -244,7 +244,7 @@ body,body *:not(svg):not(path){font-family:var(--my-font)!important}
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-106"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-109"></script>
+  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-110"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

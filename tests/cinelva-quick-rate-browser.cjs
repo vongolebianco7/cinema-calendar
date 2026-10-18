@@ -38,30 +38,27 @@ async function port(){
   await page.locator('#grid .cinelva-inline-score input').first().dispatchEvent('change');
   assert.equal((await page.evaluate(()=>window.CinelvaLibraryRecords.all()))[0].rating,4.1);
   assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),true);
-  assert.equal(await page.locator('#grid .cinelva-rate-button').first().innerText(),'👁');
-  await page.locator('#grid .cinelva-rate-button').first().click();
-  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
+  assert.match(await page.locator('#grid .cinelva-rate-button').first().getAttribute('aria-label'),/この映画の評価を編集/);
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true,'rating without a date opens the review panel');
+  assert.equal(await page.locator('#cinelvaDatePicker').isVisible(),true,'date picker opens automatically after inline rating');
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'4.1');
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRatePlace').selectOption('映画館');
-  await page.locator('#cinelvaRateVenue').fill('TOHOシネマズ日吉');
   await page.locator('#cinelvaRateComment').fill('初回鑑賞。よかった。');
-  await page.locator('#cinelvaRateDate').fill('2026-10-18');
+  await page.locator('#cinelvaRateDate').evaluate(el=>{el.value='2026-10-18';document.getElementById('cinelvaDateTrigger').textContent='2026/10/18';});
   await page.locator('#cinelvaRateSave').click();
   const first=await page.evaluate(()=>window.CinelvaLibraryRecords.all());
   assert.equal(first.length,1);
   assert.equal(first[0].rating,4.5);
   assert.equal(first[0].viewingMethod,'映画館');
-  assert.equal(first[0].viewingVenue,'TOHOシネマズ日吉');
   assert.equal(first[0].comment,'初回鑑賞。よかった。');
   assert.equal(first[0].watchedAt,'2026-10-18');
-  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true,'rating panel stays available for continuous rating');
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),false,'save closes the review panel');
   await page.locator('.gSearch').fill('映画テスト');
   await page.locator('.gSearchForm').evaluate(form=>form.requestSubmit());
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
-  // On a 390px viewport the persistent panel may overlay the movie card.
-  // Use its built-in next-film control rather than forcing a click through it.
-  await page.locator('#cinelvaRateNext').click();
+  await page.locator('#grid .cinelva-rate-button').first().click();
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),true);
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/映画 テスト/);
   assert.equal(await page.locator('#cinelvaRateValue').textContent(),'0.0');
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});
@@ -72,7 +69,8 @@ async function port(){
   assert.equal(rows.length,2);
   assert.equal(rows.find(r=>r.id==='222').rating,0);
   assert.equal(rows.find(r=>r.id==='222').comment,'気軽に採点。');
-  assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),false,'zero rating stays neutral');
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(d=>d.open),false,'saving zero closes the review panel');
+  assert.equal(await page.locator('#grid .cinelva-inline-score').first().evaluate(el=>el.classList.contains('is-watched')),true,'zero is a saved, visible viewing record');
   await page.reload({waitUntil:'domcontentloaded'});
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:15000});
   await page.locator('#grid .cinelva-rate-button').first().click();

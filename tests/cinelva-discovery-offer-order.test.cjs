@@ -8,8 +8,8 @@ const offers = page.indexOf('<section class="presetShelf" data-official-offers="
 const catalog = page.indexOf('id="catalogPopularGrid"');
 const personExplore = page.indexOf('<section class="personExploreIntro"');
 
-test('official on-demand offers follow the standard discovery shelves', () => {
-  assert.notEqual(offers, -1, 'official offer module remains available');
-  assert.ok(catalog < offers, 'general discovery shelves come first');
-  assert.ok(offers < personExplore, 'offer module stays below the general shelves');
+test('standalone promotional offer blocks are retired from discovery', () => {
+  assert.equal(offers, -1, 'standalone offer blocks remain absent');
+  assert.notEqual(catalog, -1, 'general discovery shelves remain available');
+  assert.notEqual(personExplore, -1, 'person discovery remains available');
 });

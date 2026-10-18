@@ -41,18 +41,19 @@ async function freePort() {
     const recordLink = page.locator('#detail .recordAction a');
     await recordLink.waitFor({ state: 'visible', timeout: 15000 });
     const href = await recordLink.getAttribute('href');
-    assert.match(href, /^my-cinelva\/\?record=/);
-    assert.ok(href.includes(encodeURIComponent(String(movie.id))));
+    assert.match(href, /^search\.html\?search=/);
+    assert.equal(new URL(href, base).searchParams.get('search'), movie.title);
     await recordLink.click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
-    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'offline movie detail selects the same catalog movie in the record form');
+    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
+    assert.equal(await page.locator('.gSearch').inputValue(), movie.title, 'movie detail returns to its searchable listing without opening a record window');
+    assert.equal(await page.locator('#modal').getAttribute('class'), 'modal');
 
     const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
     await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });
     await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
     await page.locator('#detail .recordAction a').click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
-    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'calendar context reaches the shared record form with the same title');
+    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
+    assert.equal(await page.locator('.gSearch').inputValue(), movie.title, 'calendar context returns to the searchable listing');
 
     await page.goto(`${base}/rankings.html?axis=rating`, { waitUntil: 'domcontentloaded' });
     const rankedMovie = page.locator('#grid .rankCard[href*="search.html?id="]').first();
@@ -61,11 +62,9 @@ async function freePort() {
     await rankedMovie.click();
     await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
     await page.locator('#detail .recordAction a').click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
-    const chosenLabel = await page.locator('#chosenMovie').textContent();
-    const searchFallback = await page.locator('#movieQuery').inputValue();
-    assert.ok(chosenLabel.includes(rankedTitle) || searchFallback === rankedTitle, 'ranking selection is preselected or carried into the existing movie-search fallback');
-    console.log('Offline movie detail, calendar-context, and ranking to My CINELVA record flows passed at 390px.');
+    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
+    assert.equal(await page.locator('.gSearch').inputValue(), rankedTitle, 'ranking selection returns to a searchable list without opening a record window');
+    console.log('Offline movie detail, calendar-context, and ranking to the searchable rating list passed at 390px.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

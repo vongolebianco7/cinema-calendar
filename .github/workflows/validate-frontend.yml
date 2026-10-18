@@ -12,8 +12,11 @@ on:
       - "my-cinelva/**"
       - "tests/cinelva-insights.test.cjs"
       - "tests/cinelva-library-records.test.cjs"
+      - "tests/cinelva-theme.test.cjs"
+      - "tests/cinelva-discovery-offer-order.test.cjs"
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
+      - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
@@ -54,8 +57,11 @@ on:
       - "my-cinelva/**"
       - "tests/cinelva-insights.test.cjs"
       - "tests/cinelva-library-records.test.cjs"
+      - "tests/cinelva-theme.test.cjs"
+      - "tests/cinelva-discovery-offer-order.test.cjs"
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
+      - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
@@ -133,7 +139,7 @@ jobs:
           node --test tests/cinelva-data-quality.test.cjs tests/cinelva-share-image.test.cjs
           python -m unittest tests.test_availability_update tests.test_award_identity
           python scripts/check_release_data.py
-          node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs
+          node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs tests/cinelva-my-page-bookmark-list.test.cjs tests/cinelva-my-page-presentation.test.cjs tests/cinelva-quick-rate.test.cjs
           node --test tests/cinelva-route-manifest.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py

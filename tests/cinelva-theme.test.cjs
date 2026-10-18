@@ -45,7 +45,7 @@ test('every public and isolated page loads the shared theme before rendering',()
   for(const prefix of ['', 'cinelva/']){
    const html=fs.readFileSync(path.join(root,prefix,name),'utf8');
    assert.match(html,/<script src="js\/theme.js"><\/script>/,prefix+name);
-   assert.match(html,/<link rel="stylesheet" href="assets\/theme.css">/,prefix+name);
+   assert.match(html,/<link rel="stylesheet" href="assets\/theme\.css(?:\?[^"]*)?">/,prefix+name);
    assert.ok(html.indexOf('js/theme.js')<html.indexOf('<style'),prefix+name+' early theme');
    if(prefix)assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
   }

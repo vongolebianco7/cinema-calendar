@@ -70,8 +70,8 @@ def enrich_director(old, profile, today, aliases=None):
         if work.get('media_type') in ('tv', 'episode') or work.get('is_short') is True:
             continue
         date = work.get('release_date') or work.get('date') or ''
-        if date and date > today:
-            continue
+        # Keep announced future films linked to the director; release dates may change.
+        # The scheduled refresh updates these credits as TMDB changes.
         poster_path = work.get('poster_path')
         work = compact_work(work)
         works[str(credit['id'])] = {**work, 'title': title, 'year': date[:4] or work.get('year'), 'date': date,

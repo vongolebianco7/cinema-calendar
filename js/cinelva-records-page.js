@@ -343,7 +343,7 @@
     // A TMDB directing credit alone does not prove feature-film length:
     // exclude runtime-unverified catalog credits until movie detail is fetched.
     // Saved viewing records retain their existing handling.
-    if (work.source==='tmdb' && (!Number.isFinite(duration)||duration<=0)) return false;
+    // TMDB person movie credits do not contain runtime. Unknown runtime must not discard a verified directing credit.
     const type=String(work.type||work.media_type||work.format||'').toLowerCase();
     if (/\bshort\b|短編|短篇|\btv\b|\btv_series\b|\bepisode\b/.test(type)) return false;
     if (work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;
@@ -406,11 +406,9 @@
       for(const work of director?.works||[]){const id=filmIdentity(work),combined={...work,...(movieById.get(id)||{}),id};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(id,combined);}
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
       const films=[...all.values()];
-      const sourcedCount=(director?.works||[]).filter(work=>isDirectorCredit(work,group.name)).length;
-      // A partial catalog must never be presented as a complete filmography.
-      const minimumByPersonId={'488':10,'190':20,'525':5,'4762':8};
-      const minimum=minimumByPersonId[String(director?.id)]||1;
-      const catalogAvailable=Boolean(sourcedCount>=minimum && director?.coverage?.truncated!==true);
+      // Counts are derived from distinct, verified director credits, not arbitrary minimums per person.
+      const sourcedCount=new Set((director?.works||[]).filter(work=>isDirectorCredit(work,group.name)).map(filmIdentity)).size;
+      const catalogAvailable=Boolean(director && sourcedCount>0 && director?.coverage?.truncated!==true);
       return {director,watched,films,catalogAvailable,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };
     const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.watchedCount>0).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));

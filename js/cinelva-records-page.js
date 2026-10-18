@@ -262,6 +262,51 @@
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);
+  for(const [en,ja] of Object.entries({
+    "jordan peele":"ジョーダン・ピール","ari aster":"アリ・アスター","robert eggers":"ロバート・エガース","jordan vogt-roberts":"ジョーダン・ヴォート＝ロバーツ",
+    "sam mendes":"サム・メンデス","danny boyle":"ダニー・ボイル","david lynch":"デヴィッド・リンチ","david cronenberg":"デヴィッド・クローネンバーグ",
+    "david o. russell":"デヴィッド・O・ラッセル","alex garland":"アレックス・ガーランド","jonathan glazer":"ジョナサン・グレイザー",
+    "taika waititi":"タイカ・ワイティティ","james gunn":"ジェームズ・ガン","james wan":"ジェームズ・ワン",
+    "chloe zhao":"クロエ・ジャオ","chloé zhao":"クロエ・ジャオ","barry jenkins":"バリー・ジェンキンス",
+    "ryusuke hamaguchi":"濱口竜介","takashi miike":"三池崇史","takeshi kitano":"北野武","isao takahata":"高畑勲",
+    "satoshi kon":"今敏","mamoru hosoda":"細田守","mamoru oshii":"押井守","hideaki anno":"庵野秀明",
+    "naoko yamada":"山田尚子","kore-eda hirokazu":"是枝裕和","shunji iwai":"岩井俊二",
+    "akira kurosawa":"黒澤明","yasujiro ozu":"小津安二郎","yasujirō ozu":"小津安二郎",
+    "masaki kobayashi":"小林正樹","kenji mizoguchi":"溝口健二","nagisa oshima":"大島渚",
+    "terry gilliam":"テリー・ギリアム","terry george":"テリー・ジョージ","michael mann":"マイケル・マン",
+    "michael bay":"マイケル・ベイ","michael haneke":"ミヒャエル・ハネケ","lars von trier":"ラース・フォン・トリアー",
+    "pedro almodóvar":"ペドロ・アルモドバル","pedro almodovar":"ペドロ・アルモドバル",
+    "alejandro gonzález iñárritu":"アレハンドロ・ゴンサレス・イニャリトゥ",
+    "alejandro gonzalez inarritu":"アレハンドロ・ゴンサレス・イニャリトゥ",
+    "ang lee":"アン・リー","wong kar-wai":"ウォン・カーウァイ","wong kar wai":"ウォン・カーウァイ",
+    "john woo":"ジョン・ウー","zhang yimou":"チャン・イーモウ","zhang yì móu":"チャン・イーモウ",
+    "bong joon ho":"ポン・ジュノ","park chan wook":"パク・チャヌク",
+    "joel coen":"ジョエル・コーエン","ethan coen":"イーサン・コーエン",
+    "coen brothers":"コーエン兄弟","the wachowskis":"ウォシャウスキー姉妹",
+    "lana wachowski":"ラナ・ウォシャウスキー","lilly wachowski":"リリー・ウォシャウスキー",
+    "greta gerwig":"グレタ・ガーウィグ","noah baumbach":"ノア・バームバック",
+    "richard linklater":"リチャード・リンクレイター","robert altman":"ロバート・アルトマン",
+    "brian de palma":"ブライアン・デ・パルマ","brian de palma":"ブライアン・デ・パルマ",
+    "oliver stone":"オリバー・ストーン","ron howard":"ロン・ハワード","rob reiner":"ロブ・ライナー",
+    "john carpenter":"ジョン・カーペンター","wes craven":"ウェス・クレイヴン",
+    "j.j. abrams":"J・J・エイブラムス","j. j. abrams":"J・J・エイブラムス",
+    "m. night shyamalan":"M・ナイト・シャマラン","m night shyamalan":"M・ナイト・シャマラン",
+    "jon favreau":"ジョン・ファヴロー","peter weir":"ピーター・ウィアー",
+    "edgar wright":"エドガー・ライト","guy ritchie":"ガイ・リッチー","matthew vaughn":"マシュー・ヴォーン",
+    "joe wright":"ジョー・ライト","joe russo":"ジョー・ルッソ","anthony russo":"アンソニー・ルッソ",
+    "brad bird":"ブラッド・バード","pete docter":"ピート・ドクター","andrew stanton":"アンドリュー・スタントン",
+    "lee unkrich":"リー・アンクリッチ","john lasseter":"ジョン・ラセター",
+    "charlie kaufman":"チャーリー・カウフマン","spike jonze":"スパイク・ジョーンズ",
+    "spike lee":"スパイク・リー","jane campion":"ジェーン・カンピオン",
+    "kathryn bigelow":"キャスリン・ビグロー","patty jenkins":"パティ・ジェンキンス",
+    "luc besson":"リュック・ベッソン","jean-pierre jeunet":"ジャン＝ピエール・ジュネ",
+    "michel gondry":"ミシェル・ゴンドリー","olivier nakache":"オリヴィエ・ナカシュ",
+    "asghar farhadi":"アスガー・ファルハディ","abbas kiarostami":"アッバス・キアロスタミ",
+    "andrei tarkovsky":"アンドレイ・タルコフスキー","ingmar bergman":"イングマール・ベルイマン",
+    "federico fellini":"フェデリコ・フェリーニ","sergio leone":"セルジオ・レオーネ",
+    "alfred hitchcock":"アルフレッド・ヒッチコック","billy wilder":"ビリー・ワイルダー",
+    "orson welles":"オーソン・ウェルズ","charlie chaplin":"チャールズ・チャップリン"
+  })) directorJapaneseNames.set(en,ja);
   let directorAliasSource=null;
   let directorAliases=new Map();
   const directorJapanese = name => {
@@ -289,7 +334,8 @@
     if(department && department!=='directing' && department!=='監督') return false;
     const named=work.director||work.director_name||work.directorName;
     if(named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
-    return role==='director'||role==='監督'||!!named||work.is_director===true||work.isDirector===true;
+    // Director-specific filmographies commonly omit the role field. Missing is not a negative credit.
+    return true;
   };
   function renderDirectors() {
     const groups=new Map();

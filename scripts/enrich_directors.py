@@ -179,7 +179,7 @@ def main():
     refresh_budget = 800 - (200 if args.discover_names else 0) - (100 if args.verify_person else 0)
     # Prioritize known prolific directors with implausibly small catalogs before
     # the general daily refresh, including records marked checked earlier today.
-    minimum_credits = {'488': 10, '190': 20, '525': 5}
+    minimum_credits = {'488': 10, '190': 20, '525': 5, '4762': 8}
     candidates = [(identifier, value) for identifier, value in directors.items()
                   if not str(value.get('checked_at', '')).startswith(today)
                   or len(value.get('works', [])) < minimum_credits.get(identifier, 1)]
@@ -221,7 +221,7 @@ def main():
     # slice on every refresh, retaining verified runtimes across runs.
     verification_budget = 240
     verification_order = sorted(directors, key=lambda identifier: (
-        0 if identifier in ('488', '525', '190') else 1,
+        0 if identifier in ('488', '525', '190', '4762') else 1,
         -sum(not (work.get('runtime') or work.get('duration'))
              for work in directors[identifier].get('works', [])),
         identifier))

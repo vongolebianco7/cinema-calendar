@@ -113,11 +113,9 @@
     if (!target) return;
     if (!years.length) { target.innerHTML = '<p class="hint">鑑賞年が分かる記録はまだありません。</p>'; return; }
     const maximum = Math.max(...counts.values(), 1);
-    target.innerHTML = `<table aria-label="年間鑑賞本数の比較"><thead><tr><th>年</th><th>鑑賞本数</th><th>前年との比較</th></tr></thead><tbody>${years.map(year => {
-      const count = counts.get(year), previous = counts.get(year - 1);
-      const change = previous == null ? '比較できる前年データなし' : previous === 0 ? '前年は0本' : `${count - previous > 0 ? '+' : ''}${count - previous}本`;
-      const width = Math.round(count / maximum * 100);
-      return `<tr><th scope="row"><button class="button" data-calendar-year="${year}">${year}年</button></th><td><div class="annual-count"><span>${count}本</span><span class="annual-bar" aria-hidden="true" style="width:${width}%"></span></div></td><td>${change}</td></tr>`;
+    target.innerHTML = `<table aria-label="年間鑑賞本数"><thead><tr><th>年</th><th>鑑賞本数</th></tr></thead><tbody>${years.map(year => {
+      const count = counts.get(year), width = Math.round(count / maximum * 100);
+      return `<tr><th scope="row"><button class="button" data-calendar-year="${year}">${year}年</button></th><td><div class="annual-count"><span>${count}本</span><span class="annual-bar" aria-hidden="true" style="width:${width}%"></span></div></td></tr>`;
     }).join('')}</tbody></table>`;
   }
   function posterHTML(movie) {

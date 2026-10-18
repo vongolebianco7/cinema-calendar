@@ -199,7 +199,28 @@
     const eyeIcon='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M2 12s3.7-6 10-6 10 6 10 6-3.7 6-10 6S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>';
     let bookmarked=false;
     try{bookmarked=Boolean(JSON.parse(localStorage.getItem('cinelva-want-to-watch-v1')||'{}')[String(movie.id)]);}catch{}
-    return `<article class="movie" data-record-card="${id}">${posterHTML(movie)}<strong>${title}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-actions record-actions-compact"><span class="record-watched-icon" aria-label="鑑賞済み" title="鑑賞済み">${eyeIcon}</span><button type="button" class="record-score-gauge" data-edit="${id}" title="あなたの評価・レビューを編集" aria-label="あなたの評価・レビューを編集：${title}"><span class="record-gauge-track"><span class="record-gauge-fill" style="width:${Math.max(0,Math.min(100,rating*20))}%"></span></span><span class="record-gauge-value">${rating.toFixed(1)}</span></button><button type="button" class="record-bookmark-icon${bookmarked?' is-bookmarked':''}" data-record-bookmark="${id}" aria-label="ブックマーク：${title}" aria-pressed="${bookmarked}">${bookmarkIcon}</button><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}" title="記録を削除"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div></article>`;
+    return `<article class="movie" data-record-card="${id}">${posterHTML(movie)}<strong>${title}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-actions record-actions-compact"><button type="button" class="record-watched-icon record-review-detail-trigger" data-review-detail="${id}" aria-label="レビュー詳細を見る：${title}" title="レビュー詳細を見る">${eyeIcon}</button><button type="button" class="record-score-gauge" data-edit="${id}" title="あなたの評価・レビューを編集" aria-label="あなたの評価・レビューを編集：${title}"><span class="record-gauge-track"><span class="record-gauge-fill" style="width:${Math.max(0,Math.min(100,rating*20))}%"></span></span><span class="record-gauge-value">${rating.toFixed(1)}</span></button><button type="button" class="record-bookmark-icon${bookmarked?' is-bookmarked':''}" data-record-bookmark="${id}" aria-label="ブックマーク：${title}" aria-pressed="${bookmarked}">${bookmarkIcon}</button><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}" title="記録を削除"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div></article>`;
+  }
+  function showReviewDetail(id) {
+    const record=state.records.find(item=>String(item.id)===String(id));
+    const dialog=$('reviewDetailDialog'),body=$('reviewDetailBody');
+    if(!record||!dialog||!body)return;
+    const movie=enriched(record),rating=Number(record.rating??0);
+    const date=record.watchedAt||record.watched_at||'';
+    const method=record.viewingMethod||record.viewing_method||'';
+    const comment=record.comment||record.review||'';
+    const fields=[
+      ['鑑賞日', date?formatDate(date):'未登録'],
+      ['鑑賞方法',method||'未登録'],
+      ['公開年',movie.year||'不明'],
+    ];
+    body.innerHTML='<div class="review-detail-film">'+posterHTML(movie)
+      +'<div class="review-detail-film-copy"><h3>'+escapeHTML(movie.title||'作品名不明')+'</h3>'
+      +'<p class="review-detail-score"><span>あなたの評価</span><strong>'+rating.toFixed(1)+'</strong><small> / 5.0</small></p></div></div>'
+      +'<dl class="review-detail-info">'+fields.map(([label,value])=>'<div><dt>'+escapeHTML(label)+'</dt><dd>'+escapeHTML(String(value))+'</dd></div>').join('')+'</dl>'
+      +'<div class="review-detail-comment"><h4>レビュー・感想</h4><p>'+escapeHTML(String(comment).trim()||'まだ感想は記録されていません。')+'</p></div>';
+    $('reviewDetailEdit').dataset.reviewEdit=String(record.id);
+    dialog.showModal();
   }
   const normalizeRecordSearch = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   function renderList() {
@@ -794,6 +815,17 @@
         window.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{marked,id}}));
       }catch(error){console.warn('Bookmark save failed',error);}
     });
+    document.addEventListener('click',event=>{
+      const trigger=event.target.closest('[data-review-detail]');
+      if(trigger){event.preventDefault();showReviewDetail(trigger.dataset.reviewDetail);return;}
+      const edit=event.target.closest('[data-review-edit]');
+      if(edit){
+        const record=state.records.find(item=>String(item.id)===edit.dataset.reviewEdit);
+        $('reviewDetailDialog').close();
+        if(record)openDialog(record);
+      }
+    });
+    $('reviewDetailClose').onclick=()=>$('reviewDetailDialog').close();
     document.addEventListener('click',event=>{const edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');if(edit){const record=state.records.find(item=>String(item.id)===edit.dataset.edit);if(record)openDialog(record);}if(del)deleteRecord(del.dataset.delete);});
     const canvas=$('worldCanvas');
     canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=','Enter'].includes(event.key))return;event.preventDefault();if(event.key==='Enter'){const rows=worldRecords();if(rows.length)showWorldFilm(rows[state.keyboardPoint++%rows.length]);return;}if(['+','='].includes(event.key))state.plotZoom=Math.min(2.5,state.plotZoom*1.1);else if(event.key==='-')state.plotZoom=Math.max(.65,state.plotZoom/1.1);else if(event.key==='ArrowLeft')state.plotRotation.y-=.15;else if(event.key==='ArrowRight')state.plotRotation.y+=.15;else if(event.key==='ArrowUp')state.plotRotation.x-=.15;else state.plotRotation.x+=.15;drawWorld();});

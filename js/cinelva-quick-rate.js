@@ -550,6 +550,14 @@ style.textContent+=`
 .cinelva-rate-dialog .cinelva-review-score input[type=range]::-moz-range-track{background:#777b83!important}
 .cinelva-rate-dialog .cinelva-review-score input[type=range]::-moz-range-progress{background:#e7b944!important}
 `;
+style.textContent+=`
+/* iOS Safari zooms focused textareas when the computed font size is under 16px. */
+.cinelva-rate-dialog #cinelvaRateComment{
+ font-size:16px!important;
+ line-height:1.5!important;
+ -webkit-text-size-adjust:100%;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

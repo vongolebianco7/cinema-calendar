@@ -458,6 +458,16 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 #yearHeatmap .cy-month.light-month .cy-month-total strong{color:#112b3c!important}
 /* Monthly intensity is conveyed by background tone only; no decorative symbols. */
 </style>
+<style id="cinelva-calendar-monotonic-tone-20261019">
+/* Progressive blue intensity for 1–4 films, gold for 5+. */
+#yearHeatmap .cy-month.one-month{background:linear-gradient(145deg,#cfe5f4,#b8d8ec)!important;color:#20384e!important;border:1px solid #9ebfd5!important}
+#yearHeatmap .cy-month.light-month{background:linear-gradient(145deg,#9fc9e4,#7eb4d9)!important;color:#16384f!important;border:1px solid #6b9fc4!important}
+#yearHeatmap .cy-month.mid-month{background:linear-gradient(145deg,#5e9bc8,#367baa)!important;color:#fff!important;border:1px solid #467da6!important}
+#yearHeatmap .cy-month.deep-month{background:linear-gradient(145deg,#295c87,#173d66)!important;color:#fff!important;border:1px solid #315d84!important}
+#yearHeatmap .cy-month.one-month .cy-month-total strong,#yearHeatmap .cy-month.light-month .cy-month-total strong{color:#16384f!important}
+#yearHeatmap .cy-month.mid-month .cy-month-total strong,#yearHeatmap .cy-month.deep-month .cy-month-total strong{color:#fff!important}
+#yearHeatmap .cy-month .cy-month-name::after{content:none!important}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">

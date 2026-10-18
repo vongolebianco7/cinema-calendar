@@ -153,7 +153,7 @@ function attachInlineScore(button, movie) {
  input.onkeydown=e=>e.stopPropagation();
  const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=Number(input.value)>0?Number(input.value).toFixed(1):'未鑑賞';
  let committedScore=Number(existing?.rating??0);
- const sync=()=>{const score=Number(input.value),text=score>0?score.toFixed(1):'未鑑賞';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',committedScore>0);button.classList.toggle('is-watched',committedScore>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');};
+ const sync=()=>{const score=Number(input.value),text=score>0?score.toFixed(1):'未鑑賞';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',committedScore>0);button.classList.toggle('is-watched',committedScore>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');track.style.setProperty('--score-progress',String(score/5*100)+'%');};
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
@@ -163,10 +163,13 @@ function attachInlineScore(button, movie) {
  const moveTo=x=>{
   const rect=track.getBoundingClientRect();
   if(!rect.width)return;
-  const score=Math.max(0,Math.min(50,Math.round((x-rect.left)/rect.width*50)))/10;
+  const fraction=Math.max(0,Math.min(1,(x-rect.left)/rect.width));
+  // Keep visual position continuous while the saved score remains in 0.1 increments.
+  track.style.setProperty('--smooth-progress',(fraction*100).toFixed(3)+'%');
+  const score=Math.round(fraction*50)/10;
   if(Number(input.value)!==score){input.value=String(score);sync();}
  };
- const finish=()=>{activePointer=null;activeTouch=null;input.dispatchEvent(new Event('change'));};
+ const finish=()=>{activePointer=null;activeTouch=null;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));};
  track.addEventListener('pointerdown',e=>{
   if(e.pointerType==='touch')return;
   if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -175,7 +178,7 @@ function attachInlineScore(button, movie) {
  });
  track.addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);});
  track.addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);finish();});
- track.addEventListener('pointercancel',()=>{activePointer=null;});
+ track.addEventListener('pointercancel',()=>{activePointer=null;track.style.removeProperty('--smooth-progress');});
  track.addEventListener('touchstart',e=>{
   const touch=e.changedTouches[0];if(!touch)return;
   activeTouch=touch.identifier;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
@@ -188,7 +191,7 @@ function attachInlineScore(button, movie) {
   const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
   if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();finish();
  },{passive:false});
- track.addEventListener('touchcancel',()=>{activeTouch=null;});
+ track.addEventListener('touchcancel',()=>{activeTouch=null;track.style.removeProperty('--smooth-progress');});
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
  const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
  clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};
@@ -436,6 +439,18 @@ style.textContent+=`
 .cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-runnable-track{height:5px!important;border-radius:3px!important}
 .cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{-webkit-appearance:none!important;width:4px!important;height:19px!important;margin-top:-7px!important;border-radius:2px!important;box-shadow:none!important}
 .cinelva-rating-controls>.cinelva-rating-clear{top:2px!important;min-height:22px!important}
+`;
+style.textContent+=`
+/* Render a continuous thumb position independently of 0.1-point rounding. */
+.cinelva-rating-controls .cinelva-score-track{position:relative!important;--smooth-progress:var(--score-progress,0%)}
+.cinelva-rating-controls .cinelva-score-track::after{
+ content:""!important;display:block!important;position:absolute!important;
+ left:clamp(2px,var(--smooth-progress,0%),calc(100% - 2px))!important;
+ top:50%!important;transform:translate(-50%,-50%)!important;
+ width:3px!important;height:19px!important;border-radius:2px!important;
+ background:#f0c86c!important;pointer-events:none!important;z-index:40!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{opacity:0!important;background:transparent!important;box-shadow:none!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

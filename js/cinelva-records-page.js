@@ -337,6 +337,10 @@
     if ([work.is_short,work.isShort,work.short_film,work.shortFilm].some(x=>x===true)) return false;
     const duration=Number(work.runtime??work.duration??work.length_minutes??work.runtime_minutes);
     if (Number.isFinite(duration)&&duration>0&&duration<60) return false;
+    // A TMDB directing credit alone does not prove feature-film length:
+    // exclude runtime-unverified catalog credits until movie detail is fetched.
+    // Saved viewing records retain their existing handling.
+    if (work.source==='tmdb' && (!Number.isFinite(duration)||duration<=0)) return false;
     const type=String(work.type||work.media_type||work.format||'').toLowerCase();
     if (/\bshort\b|短編|短篇|\btv\b|\btv_series\b|\bepisode\b/.test(type)) return false;
     if (work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;

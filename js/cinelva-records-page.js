@@ -17,6 +17,7 @@
   const formatDate = value => value ? value.replaceAll('-', '.') : '鑑賞日未登録';
   function notify(message) { $('status').textContent = message; }
   function openDialog(record = null) {
+    if(record&&globalThis.CinelvaQuickRate?.open){globalThis.CinelvaQuickRate.open(enriched(record));return;}
     state.selected = record ? enriched(record) : null;
     $('dialogTitle').textContent = record ? '鑑賞記録を編集' : '鑑賞を記録';
     $('deleteRecord').hidden = !record;
@@ -314,7 +315,7 @@
       const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movie-detail?id=${encodeURIComponent(id)}`,{signal:AbortSignal.timeout(8000)});
       if(response.ok){const data=await response.json();if(data.movie&&String(state.selected?.id)===String(id)&&$('recordDialog').open){const details=Object.fromEntries(Object.entries(data.movie).filter(([,value])=>value!==null&&value!==''&&(!Array.isArray(value)||value.length)));state.selected={...state.selected,...details,id:String(id)};}}
     }catch(_){/* Preserve known metadata and allow recording while the API is unavailable. */}
-    finally{if(String(state.selected?.id)===String(id)){$('saveRecord').disabled=false;$('chosenMovie').textContent=`選択中：${state.selected.title}${state.selected.year?`（${state.selected.year}年）`:''}`;}}
+    finally{if(String(state.selected?.id)===String(id)){$('saveRecord').disabled=false;$('chosenMovie').textContent=`選択中：${state.selected.title}${state.selected.year?`（${state.selected.year}年）`:''}`;if(globalThis.CinelvaQuickRate?.open){const chosen=state.selected;$('recordDialog').close();globalThis.CinelvaQuickRate.open(chosen);}}}
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}
@@ -365,10 +366,11 @@
     const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
     canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});
     canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · ★ ${Number(record.rating ?? 0).toFixed(1)}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
+    window.addEventListener('cinelva-record-updated',()=>{state.records=Records.all();populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();});
     window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});
     window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
   }
-  function openKnownMovie(id){const existing=Insights.directorViewingRecord(state.records,{id}),movie=byId.get(String(id));if(existing)openDialog(existing);else if(movie){openDialog({...movie,id:String(id),watchedAt:null,rating:null});$('dialogTitle').textContent='鑑賞を記録';$('deleteRecord').hidden=true;}else notify('この作品の情報が未収録です。作品検索から追加してください。');}
+  function openKnownMovie(id){const existing=Insights.directorViewingRecord(state.records,{id}),movie=byId.get(String(id));if(existing)openDialog(existing);else if(movie){if(globalThis.CinelvaQuickRate?.open)globalThis.CinelvaQuickRate.open({...movie,id:String(id)});else openDialog({...movie,id:String(id),watchedAt:null,rating:null});}else notify('この作品の情報が未収録です。作品検索から追加してください。');}
   async function init() {
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};

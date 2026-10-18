@@ -23,11 +23,18 @@
       }
       return '';
     };
+    // Prefer explicit artwork; resolve missing record artwork from the catalog
+    // using a unique TMDB identifier before attempting title-based recovery.
+    const catalogPoster = id => {
+      if(!id)return '';
+      const match=state.movies.find(item=>String(item.tmdbId??item.tmdb_id??item.id??'')===String(id)&&sourceFrom(item));
+      return match?sourceFrom(match):'';
+    };
     const direct=sourceFrom(movie);
     if(direct)return direct;
     const id=String(movie.tmdbId??movie.tmdb_id??movie.id??'');
     const metadata=metadataFor(id);
-    const byIdentifier=sourceFrom(metadata);
+    const byIdentifier=sourceFrom(metadata)||catalogPoster(id);
     if(byIdentifier)return byIdentifier;
     // Imported records sometimes use a different local ID from the catalog.
     // Only reuse artwork when normalized title and release year both match.

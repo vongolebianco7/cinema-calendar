@@ -262,10 +262,22 @@
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);
+  let directorAliasSource=null;
+  let directorAliases=new Map();
   const directorJapanese = name => {
     const raw=String(name||'').trim();
-    const metadata=Object.values(state.directors||{}).find(d=>[d.name,d.nameJa,d.name_ja,d.japanese_name].some(v=>normalizeName(v)===normalizeName(raw)));
-    return metadata?.nameJa||metadata?.name_ja||metadata?.japanese_name||directorJapaneseNames.get(raw.toLowerCase())||raw;
+    if(state.directors!==directorAliasSource){
+      directorAliasSource=state.directors;
+      directorAliases=new Map();
+      for(const d of Object.values(state.directors||{})){
+        const ja=d.nameJa||d.name_ja||d.japanese_name||directorJapaneseNames.get(String(d.name||'').toLowerCase())||d.name;
+        if(!ja)continue;
+        for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name]){
+          if(alias)directorAliases.set(normalizeName(alias),ja);
+        }
+      }
+    }
+    return directorAliases.get(normalizeName(raw))||directorJapaneseNames.get(raw.toLowerCase())||raw;
   };
   const isDirectorCredit = (work, directorName) => {
     if (!work || typeof work !== 'object') return false;
@@ -282,11 +294,13 @@
   function renderDirectors() {
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
+    const knownByName=new Map(knownDirectors.map(d=>[normalizeName(directorJapanese(d.nameJa||d.japanese_name||d.name_ja||d.name)),d]));
+    const movieById=new Map(state.movies.map(movie=>[String(movie.id),movie]));
     const directorKey=name=>normalizeName(directorJapanese(name));
     for(const record of recordMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
-      const key=directorKey(name),displayName=directorJapanese(name);
+      const displayName=directorJapanese(name),key=normalizeName(displayName);
       if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
@@ -309,10 +323,10 @@
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
-      const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
+      const director=knownByName.get(directorKey(group.name));
       const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
       const all=new Map();
-      for(const work of director?.works||[]){if(!isDirectorCredit(work,group.name))continue;all.set(String(work.id),{...work,...(state.movies.find(movie=>String(movie.id)===String(work.id))||{})});}
+      for(const work of director?.works||[]){if(!isDirectorCredit(work,group.name))continue;all.set(String(work.id),{...work,...(movieById.get(String(work.id))||{})});}
       for(const movie of group.records){if(!isDirectorCredit({...movie,is_director:true},group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
       const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const unseen=films.length-group.records.length;
@@ -328,7 +342,7 @@
     };
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
-      const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
+      const director=knownByName.get(directorKey(group.name));
       const knownIds=new Set([...(director?.works||[]).filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id)),...group.records.filter(w=>isDirectorCredit({...w,is_director:true},group.name)).map(w=>String(w.id))]);
       row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'/'+knownIds.size+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});

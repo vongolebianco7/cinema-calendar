@@ -159,7 +159,9 @@ function attachInlineScore(button, movie) {
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- button.before(controls);controls.append(button,wrap);
+ const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
+ clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};
+ button.before(controls);controls.append(button,wrap,clear);
  // Prevent card-level detail handlers from receiving any interaction in the rating area.
  // Capture phase is needed because some card handlers listen before bubbling.
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -380,6 +382,17 @@ style.textContent+=`
  -webkit-appearance:none!important;width:20px!important;height:26px!important;
  margin-top:-10px!important;border-radius:5px!important;
 }
+`;
+style.textContent+=`
+/* Wide, responsive native slider and unobtrusive explicit clear action. */
+.cinelva-rating-controls{position:relative!important;grid-template-rows:28px 44px!important;min-height:78px!important}
+.cinelva-rating-controls>.cinelva-inline-score{grid-template-rows:28px 44px!important}
+.cinelva-rating-controls .cinelva-score-track{height:44px!important;min-height:44px!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{pointer-events:auto!important;touch-action:pan-y!important;height:44px!important;min-height:44px!important;z-index:30!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{-webkit-appearance:none!important;width:24px!important;height:26px!important;margin-top:-10px!important;border-radius:6px!important}
+.cinelva-rating-controls>.cinelva-rating-clear{position:absolute!important;right:7px!important;top:5px!important;z-index:5!important;background:transparent!important;border:0!important;padding:0 2px!important;margin:0!important;min-height:24px!important;font:500 10px system-ui!important;color:#9da3ac!important;cursor:pointer!important}
+.cinelva-rating-controls .cinelva-inline-value{margin-right:34px!important}
+.cinelva-rating-controls .cinelva-rating-clear:focus-visible{outline:2px solid #e7c477!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

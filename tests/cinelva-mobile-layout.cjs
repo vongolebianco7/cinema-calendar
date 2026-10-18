@@ -11,7 +11,7 @@ const fs = require('fs');
     const watchedAt = year + '-06-15';
     await page.addInitScript(({ watchedAt }) => {
       localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
-        '999001': { id: '999001', title: 'CINELVA QA fixture', watched: true, watchedAt, rating: 4.5, viewingMethod: '映画館', genres: [], countries: [] }
+        '999001': { id: '999001', title: 'CINELVA QA fixture', watched: true, watchedAt, rating: 4.5, viewingMethod: '映画館', genres: ['アクション','アドベンチャー','ドラマ','サスペンス','SF','ファンタジー'], countries: ['日本','アメリカ','イギリス'] }
       }));
     }, { watchedAt });
     page.on('pageerror', error => errors.push(error.message));
@@ -88,7 +88,7 @@ const fs = require('fs');
         });
       });
       await page.screenshot({path:'test-results/cinelva/donuts-'+width+'-'+valueMode+'.png',fullPage:true});
-      if(charts.some(c=>c.violations.length)){failed=true;console.error('donut layout',width,valueMode,JSON.stringify(charts));}
+      if(charts.some(c=>c.violations.length || c.legend===0) || charts.every(c=>c.labels===0)){failed=true;console.error('donut layout',width,valueMode,JSON.stringify(charts));}
       else console.log('donut layout',width,valueMode,'PASS',JSON.stringify(charts));
     }
     const yearSelect = page.locator('#calendarYearSelect');

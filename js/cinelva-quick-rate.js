@@ -7,6 +7,7 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
+const reviewIcon='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7"/><path d="m16 19 4-4 2 2-4 4-3 1z"/></svg>';
 const style=document.createElement('style');
 style.textContent=`
 .cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}.cinelva-rate-inner{padding:14px;gap:9px}.cinelva-review-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.cinelva-review-header strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cinelva-review-header button{background:transparent;border:0;color:inherit;font-size:27px;width:36px;height:36px;cursor:pointer}.cinelva-review-score{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}.cinelva-review-score output{font-size:30px;font-weight:750}.cinelva-review-score input{flex-basis:100%}.cinelva-review-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cinelva-rate-inner label[hidden]{display:none}.cinelva-rate-inner textarea{min-height:52px}
@@ -78,7 +79,7 @@ function enhanceGrid(grid,kind){
    card.parentElement.insertBefore(wrap,card);
    wrap.append(card);
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
-   rate.textContent='👁';rate.setAttribute('aria-label','この作品をレビュー');
+   rate.innerHTML=reviewIcon;rate.setAttribute('aria-label','この作品をレビュー');
    rate.onclick=event=>{
     event.stopPropagation();event.preventDefault();
     activeCard=rate;
@@ -87,7 +88,7 @@ function enhanceGrid(grid,kind){
      const u=new URL(card.href,location.href),id=u.searchParams.get('id');
      movie={id,title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};
     }else movie=root.CinelvaRatingResolve?.(card.dataset.i,kind);
-    if(!open(movie))rate.textContent='作品IDを確認できません';
+    if(!open(movie))rate.setAttribute('aria-label','作品IDを確認できません');
    };
    wrap.append(rate);
    const movie=kind==='rankings'?(()=>{const u=new URL(card.href,location.href);return {id:u.searchParams.get('id'),title:u.searchParams.get('search')||card.querySelector('.title')?.textContent};})():root.CinelvaRatingResolve?.(card.dataset.i,kind);
@@ -115,12 +116,12 @@ function enhanceCalendar(grid){
   for(const card of cards){
    if(card.querySelector('.cinelva-rate-button'))continue;
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
-   rate.setAttribute('aria-label','この映画をレビュー');
+   rate.setAttribute('aria-label','この映画をレビュー');rate.innerHTML=reviewIcon;
    rate.onclick=event=>{
     event.stopPropagation();event.preventDefault();
     activeCard=rate;
     const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
-    if(!open(movie))rate.textContent='作品IDを確認できません';
+    if(!open(movie))rate.setAttribute('aria-label','作品IDを確認できません');
    };
    card.append(rate);
    attachInlineScore(rate,root.CinelvaRatingResolve?.(card.dataset.mi,'calendar'));
@@ -178,8 +179,7 @@ function refreshRatingLabels(){
   else if(card?.dataset.mi!==undefined) id=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar')?.id;
   else if(card?.dataset.i!==undefined) id=root.CinelvaRatingResolve?.(card.dataset.i,'listing')?.id;
   const record=id!=null?byId.get(String(id)):null;
-  const label='👁';
-  if(button.textContent!==label)button.textContent=label;
+  if(!button.querySelector('svg'))button.innerHTML=reviewIcon;
   button.setAttribute('aria-label',record?'この映画の評価を編集':'この映画をレビュー');
  }
 }
@@ -187,6 +187,26 @@ enhanceCalendar(document.querySelector('#dates'));
 root.addEventListener('cinelva-record-updated',refreshRatingLabels);
 root.addEventListener('storage',refreshRatingLabels);
 refreshRatingLabels();
+style.textContent+=`
+/* Minimal review icon and substantial, accessible rating tracks. */
+.cinelva-rate-button{border:1px solid #ffffff26;background:transparent;color:#e6e7e9;box-shadow:none}
+.cinelva-rate-button svg{display:block;width:19px;height:19px;pointer-events:none}
+.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#ffffff12;border-color:#ffffff70;color:#fff}
+.cinelva-rate-button.is-watched{border-color:#e7b94477;color:#e7b944}
+.cinelva-score-track{min-height:44px;height:44px}
+.cinelva-score-track::before{display:none}
+.cinelva-inline-score input{height:44px;min-height:44px}
+.cinelva-inline-score input::-webkit-slider-runnable-track{height:12px;border-radius:999px;background:linear-gradient(90deg,#e7b944 var(--score-progress),#ffffff29 var(--score-progress))}
+.cinelva-inline-score input::-webkit-slider-thumb{width:24px;height:24px;margin-top:-6px;border:3px solid #171819;box-shadow:0 0 0 1px #e7b94480}
+.cinelva-inline-score input::-moz-range-track{height:12px;border-radius:999px;background:#ffffff29}
+.cinelva-inline-score input::-moz-range-progress{height:12px;border-radius:999px;background:#e7b944}
+.cinelva-inline-score input::-moz-range-thumb{width:22px;height:22px;border:3px solid #171819}
+.cinelva-review-score input[type=range]{appearance:none;-webkit-appearance:none;height:44px;padding:0;background:transparent;border:0;cursor:pointer}
+.cinelva-review-score input[type=range]::-webkit-slider-runnable-track{height:12px;border-radius:999px;background:#e7b944}
+.cinelva-review-score input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-6px;border:3px solid #171819;border-radius:50%;background:#fff}
+.cinelva-review-score input[type=range]::-moz-range-track{height:12px;border-radius:999px;background:#e7b944}
+.cinelva-review-score input[type=range]::-moz-range-thumb{width:22px;height:22px;border:3px solid #171819;border-radius:50%;background:#fff}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

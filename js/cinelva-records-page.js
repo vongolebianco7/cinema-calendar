@@ -65,17 +65,37 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
-    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];
+    const palettes=[
+      ['#2563eb','#0e7490','#7c3aed','#0284c7','#1d4ed8','#0891b2','#4f46e5','#0369a1'],
+      ['#ea580c','#b91c1c','#f59e0b','#be123c','#c2410c','#d97706','#9f1239','#92400e'],
+      ['#7e22ce','#db2777','#4338ca','#a21caf','#9333ea','#be185d','#6d28d9','#831843'],
+      ['#059669','#65a30d','#0d9488','#15803d','#4d7c0f','#0f766e','#047857','#3f6212']
+    ];
+    const shortLabel=(id,name)=>id==='csCountries'?({'アメリカ':'米国','イギリス':'英国','日本':'日本'}[name]||name):id==='csDecades'?String(name).replace('年代','s'):name;
     function renderDonut(id,entries,multi=false){
-      const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
+      const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const visible=all.slice(0,7),other=all.slice(7).reduce((sum,item)=>sum+item[1],0);
       if(other)visible.push(['その他',other]);
+      const polar=(angle,r)=>{const rad=(angle-90)*Math.PI/180;return [100+Math.cos(rad)*r,100+Math.sin(rad)*r];};
       let cursor=0;
-      const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return palette[i%palette.length]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
-      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+palette[i%palette.length]+'"></i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
-      host.innerHTML='<div class="cs-donut-layout"><div class="cs-donut" role="img" aria-label="'+escapeHTML(visible.map(([name,n])=>name+' '+n+'件').join('、'))+'" style="background:conic-gradient('+stops.join(',')+')"></div><div class="cs-donut-legend">'+legend+'</div>'+(multi?'<div class="cs-donut-note">複数ジャンルを含む登録件数の構成比</div>':'')+'</div>';
+      const sectors=visible.map(([name,n],i)=>{
+        const fraction=n/total,from=cursor,to=cursor+fraction*360;cursor=to;
+        const start=polar(from,95),end=polar(to-0.001,95);
+        const path=fraction>=0.99999?'M 100 5 A 95 95 0 1 1 99.999 5 A 95 95 0 1 1 100 5 Z':'M 100 100 L '+start.join(' ')+' A 95 95 0 '+(fraction>0.5?1:0)+' 1 '+end.join(' ')+' Z';
+        const mid=polar((from+to)/2,71);
+        const pct=Math.round(fraction*100);
+        return '<path class="cs-segment" d="'+path+'" fill="'+palette[i%palette.length]+'" data-name="'+escapeHTML(name)+'" data-percent="'+pct+'" tabindex="0" role="button" aria-label="'+escapeHTML(name)+' '+pct+'%" />'+(fraction>=0.075?'<text class="cs-segment-pct" x="'+mid[0].toFixed(2)+'" y="'+mid[1].toFixed(2)+'" text-anchor="middle" dominant-baseline="middle" aria-hidden="true">'+pct+'%</text>':'');
+      }).join('');
+      const label=visible[0][0],percent=Math.round(visible[0][1]/total*100);
+      host.innerHTML='<div class="cs-donut-layout"><div class="cs-donut-ring"><svg class="cs-donut-svg" viewBox="0 0 200 200" role="group" aria-label="'+escapeHTML(visible.map(([name,n])=>name+' '+Math.round(n/total*100)+'%').join('、'))+'">'+sectors+'<circle cx="100" cy="100" r="48" class="cs-donut-hole" pointer-events="none"/></svg><div class="cs-donut-center" aria-live="polite"><span class="cs-donut-selected">'+escapeHTML(shortLabel(id,label))+'</span><strong class="cs-donut-selected-pct">'+percent+'%</strong></div></div>'+(multi?'<div class="cs-donut-note">複数ジャンルを含む割合</div>':'')+'</div>';
+      const selected=host.querySelector('.cs-donut-selected'),selectedPct=host.querySelector('.cs-donut-selected-pct');
+      host.querySelectorAll('.cs-segment').forEach(segment=>{
+        const activate=()=>{selected.textContent=shortLabel(id,segment.dataset.name);selectedPct.textContent=segment.dataset.percent+'%';};
+        segment.addEventListener('click',activate);
+        segment.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+      });
     }
     renderDonut('csGenres',genreCounts,true);
     renderDonut('csCountries',countryCounts);

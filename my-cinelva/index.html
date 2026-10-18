@@ -207,7 +207,22 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 #awardsView .award-watch-state{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:700}
 #awardsView .award-watch-state.is-watched{background:#204f47;color:#a9e4cc}
 #awardsView .award-watch-state.is-unwatched{background:#51402a;color:#f5d49a}
-</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style></head>
+</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style><style id="cinelva-donut-113">
+#summaryView .cs-breakdowns{gap:24px 14px!important}
+#summaryView .cs-breakdowns .cs-section{overflow:visible!important}
+.cs-donut-layout{gap:6px!important}
+.cs-donut-ring{width:min(100%,176px);aspect-ratio:1;position:relative;margin-inline:auto}
+.cs-donut-svg{display:block;width:100%;height:100%;overflow:visible}
+.cs-segment{stroke:#111;stroke-width:1.3;cursor:pointer;outline:none}
+.cs-segment:focus-visible{stroke:#fff;stroke-width:4}
+.cs-segment-pct{fill:#fff;font-size:17px;font-weight:750;paint-order:stroke;stroke:#10151e;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.cs-donut-hole{fill:#111}
+.cs-donut-center{position:absolute;inset:28%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;pointer-events:none;color:#f5f6f8}
+.cs-donut-selected{font-size:11px;line-height:1.15;max-width:100%;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cs-donut-selected-pct{font-size:18px;font-weight:800;line-height:1}
+.cs-donut-note{text-align:center;font-size:10px!important;max-width:180px}
+@media(max-width:400px){.cs-donut-ring{width:min(100%,158px)}.cs-segment-pct{font-size:16px}.cs-donut-selected{font-size:10px}.cs-donut-selected-pct{font-size:16px}}
+</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
@@ -244,7 +259,7 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-112"></script>
+  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-113"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

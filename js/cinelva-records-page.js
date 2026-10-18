@@ -122,8 +122,22 @@
       const colors=visible.map(([name],i)=>id==='csCountries'?(countryColor(name)||vivid[i%vivid.length]):id==='csGenres'?vivid[i%vivid.length]:palette[i%palette.length]);
       let cursor=0;
       const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return colors[i]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
-      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+colors[i]+'">'+(i+1)+'</i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
-      const labels=visible.map(([,n],i)=>{const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);const angle=(before+n/2)/total*Math.PI*2-Math.PI/2;const x=50+35*Math.cos(angle),y=50+35*Math.sin(angle);return '<text x="'+x.toFixed(2)+'" y="'+y.toFixed(2)+'" text-anchor="middle" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" font-size="7" font-weight="600" letter-spacing=".1" fill="#fff" stroke="#252525" stroke-width=".35" paint-order="stroke">'+(i+1)+'</text>';}).join('');
+      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+colors[i]+'"></i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
+      // Direct labels: show category and percentage together inside each donut slice.
+      // Omit only labels that cannot fit safely, retaining their text in the legend.
+      const labels=visible.map(([name,n],i)=>{
+        const fraction=n/total,percent=Math.round(fraction*100);
+        if(fraction<0.075)return '';
+        const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);
+        const angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
+        const radius=fraction<0.13?37:36;
+        const x=50+radius*Math.cos(angle),y=50+radius*Math.sin(angle);
+        const text=String(name);
+        const maxChars=fraction<0.13?3:fraction<0.20?5:7;
+        if([...text].length>maxChars)return '';
+        const size=fraction<0.13?4.4:fraction<0.20?5.2:6;
+        return '<text x="'+x.toFixed(2)+'" y="'+(y-3).toFixed(2)+'" text-anchor="middle" dominant-baseline="central" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" font-size="'+size+'" font-weight="600" fill="#fff" stroke="#252525" stroke-width=".35" paint-order="stroke"><tspan x="'+x.toFixed(2)+'" dy="0">'+escapeHTML(text)+'</tspan><tspan x="'+x.toFixed(2)+'" dy="'+(size+1).toFixed(1)+'">'+percent+'%</tspan></text>';
+      }).join('');
       host.innerHTML='<div class="cs-donut-layout"><div class="cs-donut" role="img" aria-label="'+escapeHTML(visible.map(([name,n])=>name+' '+n+'件').join('、'))+'" style="background:conic-gradient('+stops.join(',')+')"><svg class="cs-donut-numbers" viewBox="0 0 100 100" aria-hidden="true">'+labels+'</svg></div><div class="cs-donut-legend">'+legend+'</div>'+(multi?'<div class="cs-donut-note">複数ジャンルを含む登録件数の構成比</div>':'')+'</div>';
     }
     renderDonut('csGenres',genreCounts,true);

@@ -70,10 +70,13 @@
     const more=$('csTopMore');if(more)more.addEventListener('click',()=>{
       const extras=[...$('csTop').querySelectorAll('[data-top-extra]')];
       const hidden=extras.filter(el=>el.style.display==='none');
-      if(!hidden.length){extras.forEach(el=>el.style.display='none');more.textContent='さらに10本表示（全'+top.length+'本）';more.setAttribute('aria-expanded','false');return;}
+      if(!hidden.length){extras.forEach(el=>el.style.display='none');more.textContent='さらに10本表示（全'+top.length+'本）';more.setAttribute('aria-expanded','false');const collapse=$('csTopCollapse');if(collapse)collapse.hidden=true;return;}
       hidden.slice(0,10).forEach(el=>el.style.display='');
       const remaining=extras.filter(el=>el.style.display==='none').length;
       more.textContent=remaining?'さらに10本表示（残り'+remaining+'本）':'閉じる';
+      let collapse=$('csTopCollapse');
+      if(!collapse){collapse=document.createElement('button');collapse.type='button';collapse.id='csTopCollapse';collapse.className='cs-top-collapse';collapse.textContent='×';collapse.setAttribute('aria-label','ランキングを閉じる');collapse.addEventListener('click',()=>{extras.forEach(el=>el.style.display='none');more.textContent='さらに10本表示（全'+top.length+'本）';more.setAttribute('aria-expanded','false');collapse.hidden=true;more.scrollIntoView({block:'center',behavior:'smooth'});});$('csTop').append(collapse);}
+      collapse.hidden=false;
       more.setAttribute('aria-expanded',String(!remaining));
     });
     const renderRows=(id,items,colors)=>{const max=Math.max(1,...items.map(x=>x[1]));$(id).innerHTML=items.length?items.map(([name,count],i)=>'<div class="cs-row"><span>'+escapeHTML(name)+'</span><div class="cs-track"><i style="width:'+(count/max*100)+'%;background:'+colors[i%colors.length]+'"></i></div><span class="cs-count">'+count+'</span></div>').join(''):'<p class="cs-empty">集計できる記録がありません。</p>'};

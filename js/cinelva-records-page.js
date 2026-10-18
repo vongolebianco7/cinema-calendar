@@ -117,7 +117,7 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
-    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];
+    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#456FAD','#C27B4A','#75A69A','#B65B79','#A89A59','#806AB1','#6597B0','#B4A3A0'],['#418F88','#D09A52','#7C6FB4','#C76F7A','#5D8DB8','#9DAD69','#A87A9F','#B4A187']];
     const countryColor=name=>{const n=String(name).normalize('NFKC').toLowerCase();const rules=[[/日本|japan/,'#c34261'],[/アメリカ|united states|usa/,'#3176c7'],[/韓国|south korea|korea/,'#7252bf'],[/イギリス|united kingdom|uk|britain/,'#31528a'],[/フランス|france/,'#26a39b'],[/イタリア|italy/,'#26844e'],[/ドイツ|germany/,'#d2a137'],[/中国|china/,'#bd6033'],[/インド|india/,'#db8535'],[/スペイン|spain/,'#b65e97']];return rules.find(([re])=>re.test(n))?.[1]||null;};
     function renderDonut(id,entries,multi=false){
       const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
@@ -196,6 +196,15 @@
         }
       }
       donut.append(svg);layout.append(donut);
+      const legend=document.createElement('div');legend.className='cs-donut-legend';
+      visible.forEach(([name,n],i)=>{
+        const row=document.createElement('div');row.className='cs-donut-legend-row';
+        const dot=document.createElement('span');dot.className='cs-donut-dot';dot.style.background=colors[i];dot.setAttribute('aria-hidden','true');dot.textContent='';
+        const label=document.createElement('span');label.className='cs-donut-label';label.textContent=name;
+        const value=document.createElement('span');value.className='cs-donut-value';value.textContent=mode==='count'?n+'本':(n/total*100).toFixed(1).replace(/\\.0$/,'')+'%';
+        row.append(dot,label,value);legend.append(row);
+      });
+      layout.append(legend);
       if(multi){const note=document.createElement('div');note.className='cs-donut-note';note.textContent='複数ジャンルを含む登録件数の構成比';layout.append(note);}
       host.replaceChildren(layout);
     }

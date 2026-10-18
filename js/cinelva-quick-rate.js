@@ -159,7 +159,14 @@ function attachInlineScore(button, movie) {
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- button.before(controls);controls.append(button,wrap);sync();
+ button.before(controls);controls.append(button,wrap);
+ // Prevent card-level detail handlers from receiving any interaction in the rating area.
+ // Capture phase is needed because some card handlers listen before bubbling.
+ for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
+  controls.addEventListener(type,event=>event.stopPropagation(),true);
+ }
+ controls.addEventListener('keydown',event=>event.stopPropagation());
+ sync();
 }
 function refreshRatingLabels(){
  const saved=Records.all();

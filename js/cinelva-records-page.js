@@ -416,8 +416,8 @@
     // from an authoritative directing credit is a safe additional lookup.
     const personIdsByFilmTitleYear=new Map();
     const titleYearKey=(title,year)=>{
-      const normalized=String(title||'').normalize('NFKC').toLowerCase().replace(/[\\s・･:：!！?？'’"“”.,，。－ー-]/g,'');
-      const date=String(year||'').match(/(?:18|19|20)\\d{2}/)?.[0];
+      const normalized=String(title||'').normalize('NFKC').toLowerCase().replace(/[\s・･:：!！?？'’"“”.,，。－ー-]/g,'');
+      const date=String(year||'').match(/(?:18|19|20)\d{2}/)?.[0];
       return normalized&&date?normalized+'|'+date:'';
     };
     for(const person of knownDirectors)for(const work of person.works||[]){

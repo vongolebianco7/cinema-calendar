@@ -38,11 +38,13 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           cp data/directors-mobile.json /tmp/directors-mobile.json
+          cp data/directors.json /tmp/directors-repaired.json
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git checkout -B mobile-catalog-publish FETCH_HEAD
             cp /tmp/directors-mobile.json data/directors-mobile.json
-            git add data/directors-mobile.json
+            cp /tmp/directors-repaired.json data/directors.json
+            git add data/directors-mobile.json data/directors.json
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'Publish compact director catalog for My Cinelva'
             if git push origin HEAD:main; then exit 0; fi

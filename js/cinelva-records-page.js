@@ -146,61 +146,66 @@
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','cs-donut-numbers');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');
       const namespace='http://www.w3.org/2000/svg';
       const font='"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
-      // Fit labels against actual browser text metrics, not character-count guesses.
-      const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
-      const measure=(value,size)=>{if(!ctx)return [...value].length*size;ctx.font='600 '+size+'px '+font;return ctx.measureText(value).width;};
-      const labelData=visible.map(([name,n],i)=>{
+      const ctx=document.createElement('canvas').getContext('2d');
+      const measure=(str,size)=>{if(!ctx)return Array.from(str).length*size;ctx.font='600 '+size+'px '+font;return ctx.measureText(str).width;};
+      // Each chart has a fixed 100x100 coordinate system. Never allow a label to
+      // cross the central hole, the outer circle, or the neighbouring chart.
+      svg.setAttribute('viewBox','0 0 100 100');
+      const svgText=(x,y,lines,size,anchor='middle')=>{
+        const text=document.createElementNS(namespace,'text');
+        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',y.toFixed(2));
+        text.setAttribute('text-anchor',anchor);text.setAttribute('font-size',String(size));
+        text.setAttribute('font-family',font);text.setAttribute('font-weight','600');
+        text.setAttribute('fill','#fff');text.setAttribute('paint-order','stroke');
+        text.setAttribute('stroke','#161616');text.setAttribute('stroke-width','.28');
+        lines.forEach((line,index)=>{const span=document.createElementNS(namespace,'tspan');span.setAttribute('x',x.toFixed(2));if(index)span.setAttribute('dy',String(size*1.25));span.textContent=line;text.append(span);});
+        return text;
+      };
+      const labels=visible.map(([name,n],i)=>{
         const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);
         const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
-        const value=mode==='count'?n+'本':Math.round(fraction*100)+'%';
-        return {name:String(name),value,fraction,angle,side:Math.cos(angle)>=0?1:-1};
+        return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
       });
-      const makeText=(x,y,size,anchor,name,value)=>{
-        const el=document.createElementNS(namespace,'text');
-        el.setAttribute('x',x);el.setAttribute('y',y);el.setAttribute('text-anchor',anchor);
-        el.setAttribute('font-family',font);el.setAttribute('font-size',size);
-        el.setAttribute('font-weight','600');el.setAttribute('fill','#fff');
-        el.setAttribute('stroke','#161616');el.setAttribute('stroke-width','.35');el.setAttribute('paint-order','stroke');
-        for(const [index,line] of [name,value].entries()){
-          const t=document.createElementNS(namespace,'tspan');t.setAttribute('x',x);
-          if(index)t.setAttribute('dy',size*1.18);t.textContent=line;el.append(t);
-        }
-        return el;
-      };
-      // SVG viewBox remains 0..100 so coordinates match the doughnut.
-      // External labels are constrained to the chart itself; the legend is the fallback.
-      const outside=[];
-      labelData.forEach(item=>{
-        const radius=36,size=5.2;
-        const x=50+radius*Math.cos(item.angle),y=50+radius*Math.sin(item.angle);
+      const deferred=[];
+      for(const item of labels){
+        const size=4.5,radial=36,arc=2*Math.PI*radial*item.fraction;
         const width=Math.max(measure(item.name,size),measure(item.value,size));
-        const angularRoom=2*Math.PI*item.fraction*radius;
-        const innerFit=item.fraction>=.085 && width<=angularRoom*.87 && width<=23 &&
-          x-width/2>=3 && x+width/2<=97 && y>=12 && y<=87;
-        if(innerFit)svg.append(makeText(x.toFixed(2),(y-size*.35).toFixed(2),size,'middle',item.name,item.value));
-        else outside.push(item);
-      });
-      // Only show callouts when they physically fit; all categories stay in the legend.
+        const x=50+radial*Math.cos(item.angle),y=50+radial*Math.sin(item.angle);
+        // Arc-length and actual text width are both required. Keep labels within
+        // a safe ring (r=29..46), with sufficient vertical room for two lines.
+        const angularWidth=width/radial;
+        const room=item.fraction*2*Math.PI;
+        const safe=room>angularWidth+0.17 && width<=19 && item.fraction>=.12 &&
+          x-width/2>=4 && x+width/2<=96 && y>=12 && y<=82;
+        if(safe)svg.append(svgText(x,y-2,[item.name,item.value],size));
+        else deferred.push(item);
+      }
+      // Narrow segments: a short percentage callout only, with collision avoidance.
+      // Long category names remain in the full legend rather than being clipped.
       for(const side of [-1,1]){
-        const items=outside.filter(item=>item.side===side).sort((a,b)=>Math.sin(a.angle)-Math.sin(b.angle));
-        const accepted=[];
-        for(const item of items){
-          const size=4.8,width=Math.max(measure(item.name,size),measure(item.value,size));
-          const x=side===1?99:1;
-          if(width>25)continue;
-          let y=Math.max(9,Math.min(85,50+46*Math.sin(item.angle)));
-          if(accepted.length)y=Math.max(y,accepted[accepted.length-1]+13);
-          if(y>85)continue;
-          accepted.push(y);
-          const x1=50+44*Math.cos(item.angle),y1=50+44*Math.sin(item.angle);
-          const line=document.createElementNS(namespace,'path');
-          line.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+(side===1?96:4)+' '+y.toFixed(2));
-          line.setAttribute('stroke','#eee');line.setAttribute('stroke-width','.35');line.setAttribute('fill','none');
-          svg.append(line);
-          // Labels remain within SVG bounds, rather than spilling into the next column.
-          svg.append(makeText(x,y-2,size,side===1?'end':'start',item.name,item.value));
+        const candidates=deferred.filter(item=>(Math.cos(item.angle)>=0?1:-1)===side)
+          .sort((a,b)=>Math.sin(a.angle)-Math.sin(b.angle));
+        const used=[];
+        for(const item of candidates){
+          const size=4.1;
+          const content=item.value;
+          const width=measure(content,size);
+          const x=side>0?93:7;
+          let y=Math.max(10,Math.min(88,50+43*Math.sin(item.angle)));
+          if(used.length)y=Math.max(y,used[used.length-1]+9);
+          if(y>88 || width>14)continue;
+          // The label must be fully within the SVG bounds.
+          if(side>0 && x+width/2>99 || side<0 && x-width/2<1)continue;
+          const sx=50+45*Math.cos(item.angle),sy=50+45*Math.sin(item.angle);
+          const path=document.createElementNS(namespace,'path');
+          path.setAttribute('d','M '+sx.toFixed(2)+' '+sy.toFixed(2)+' L '+x+' '+(y-2).toFixed(2));
+          path.setAttribute('fill','none');path.setAttribute('stroke','#e6e6e6');path.setAttribute('stroke-width','.32');
+          svg.append(path);svg.append(svgText(x,y,[content],size));used.push(y);
         }
       }
+      const center=document.createElement('div');center.className='cs-donut-center';
+      center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
+      donut.append(center);
       donut.append(svg);layout.append(donut);
       const legend=document.createElement('div');legend.className='cs-donut-legend';
       visible.forEach(([name,n],i)=>{

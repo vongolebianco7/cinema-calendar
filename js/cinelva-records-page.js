@@ -84,7 +84,8 @@
     selector.value=previous&&[...selector.options].some(o=>o.value===previous)?previous:String(currentYear);
     const period=selector.value, filtered=period==='all'?all:all.filter(r=>dateOf(r).slice(0,4)===period);
     const selectedYear=period==='all'?currentYear:Number(period);
-    if(state.year!==selectedYear){state.year=selectedYear;renderYearHeatmap();}
+    if(state.year!==selectedYear)state.year=selectedYear;
+    renderYearHeatmap();
     $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
     $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';
     const prism='<svg class="cs-prism" viewBox="0 0 42 48" aria-hidden="true"><defs><linearGradient id="csFacetA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4e7f0"/><stop offset=".48" stop-color="#b6d8df"/><stop offset="1" stop-color="#8f9dc8"/></linearGradient><linearGradient id="csFacetB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5e8ee"/><stop offset="1" stop-color="#9cabc9"/></linearGradient></defs><path d="M21 2 37 10v28L21 46 5 38V10Z" fill="#b5c5da" stroke="#e2e5ef" stroke-width="1.1"/><path d="M21 2 37 10 21 18 5 10Z" fill="#e7dce9"/><path d="M5 10 21 18v28L5 38Z" fill="url(#csFacetA)"/><path d="M37 10 21 18v28l16-8Z" fill="url(#csFacetB)"/><path d="M21 2v16M5 10l16 8 16-8M21 18v28" stroke="#f4f4f8" stroke-width=".9" fill="none"/><path d="M10 15v19M33 14v20" stroke="#fff" stroke-opacity=".3" stroke-width=".8"/></svg>';
@@ -333,7 +334,36 @@
     renderYearHeatmap();
   }
   function syncCalendarYear(){const period=$('csPeriod');if(period){const year=String(state.year);if(![...period.options].some(option=>option.value===year))period.add(new Option(year+'年',year));period.value=year;renderCinemaSummary();}renderYearHeatmap();}
+  function renderAllTimeYears() {
+    const totals=new Map(),months=new Map();
+    for(const record of recordMovies()){
+      const date=dateOf(record),match=/^(\\d{4})(?:-(\\d{2}))?/.exec(date);
+      if(!match)continue;
+      const year=Number(match[1]),month=Number(match[2]);
+      if(year<1900||year>2100)continue;
+      totals.set(year,(totals.get(year)||0)+1);
+      if(!months.has(year))months.set(year,Array(12).fill(0));
+      if(month>=1&&month<=12)months.get(year)[month-1]++;
+    }
+    const years=[...new Set([currentYear,...totals.keys()])].sort((a,b)=>b-a);
+    $('yearHeatmapTitle').textContent='年間鑑賞カレンダー · オールタイム';
+    const select=$('calendarYearSelect');
+    if(select){select.innerHTML='<option value="all">オールタイム</option>'+years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');select.value='all';}
+    const host=$('yearHeatmap');
+    host.classList.remove('cinelva-annual-calendar');
+    host.classList.add('cinelva-alltime-years');
+    host.innerHTML=years.map(year=>{
+      const total=totals.get(year)||0,monthly=months.get(year)||Array(12).fill(0);
+      const gold=total>=50;
+      return '<button type="button" class="cy-year-card'+(gold?' is-gold':'')+'" data-calendar-year="'+year+'" aria-label="'+year+'年、'+total+'本'+(gold?'、GOLD':'')+'">'+
+        '<span class="cy-year-head"><strong>'+year+'</strong><span class="cy-year-count">'+total+'<small>本</small></span>'+(gold?'<span class="cy-year-gold">GOLD</span>':'')+'</span>'+
+        '<span class="cy-year-months">'+monthly.map((n,i)=>'<span class="cy-year-month" title="'+(i+1)+'月：'+n+'本"><i style="--cy-year-level:'+Math.min(1,.18+n*.16)+';'+(n?'':'opacity:.16;')+'"></i><small>'+(i+1)+'</small></span>').join('')+'</span></button>';
+    }).join('');
+    host.setAttribute('aria-label','年別鑑賞実績。年間50本以上はGOLD');
+    $('calendarFilms').innerHTML='';
+  }
   function renderYearHeatmap() {
+    if($('csPeriod')?.value==='all'){renderAllTimeYears();return;}
     const year=state.year, records=recordMovies(), daily=new Map(), monthly=Array(12).fill(0);
     for(const item of records){
       const date=dateOf(item); if(!date.startsWith(String(year)))continue;
@@ -344,6 +374,7 @@
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
     const yearSelect=$('calendarYearSelect');
     if(yearSelect){const years=[...new Set([currentYear,state.year,...recordMovies().map(r=>Number(dateOf(r).slice(0,4))).filter(y=>y>=1900&&y<=2100)])].sort((a,b)=>b-a);yearSelect.innerHTML=years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');yearSelect.value=String(state.year);}
+    $('yearHeatmap').classList.remove('cinelva-alltime-years');
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
     const medal='<span class="cy-medal" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 10-2 11 5-3 5 3-2-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>GOLD</span></span>';
     $('yearHeatmap').innerHTML=monthly.map((count,m)=>{

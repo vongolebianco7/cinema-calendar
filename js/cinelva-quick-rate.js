@@ -669,8 +669,14 @@ style.textContent+=`
  text-align:center!important;white-space:nowrap!important;
  letter-spacing:0!important;overflow:hidden!important;
 }
-.cinelva-rating-controls .cinelva-inline-value::before{
- content:"スコア "!important;color:#c3c8d0!important;font-weight:400!important;
+.cinelva-rating-controls .cinelva-inline-value::before{content:none!important;display:none!important}
+.cinelva-rating-controls .cinelva-inline-score::after{
+ content:"スコア"!important;display:block!important;
+ grid-column:1!important;grid-row:2!important;
+ justify-self:start!important;align-self:center!important;
+ position:relative!important;z-index:1!important;
+ font:400 10px/16px system-ui!important;color:#c3c8d0!important;
+ pointer-events:none!important;
 }
 .cinelva-rating-controls .cinelva-score-track{
  display:block!important;grid-column:1!important;grid-row:3!important;

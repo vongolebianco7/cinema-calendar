@@ -177,7 +177,16 @@ def main():
     names = existing_name_aliases()
     today = datetime.date.today().isoformat()
     refresh_budget = 800 - (200 if args.discover_names else 0) - (100 if args.verify_person else 0)
-    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, refresh_budget))]
+    # Prioritize known prolific directors with implausibly small catalogs before
+    # the general daily refresh, including records marked checked earlier today.
+    minimum_credits = {'488': 10, '190': 20, '525': 5}
+    candidates = [(identifier, value) for identifier, value in directors.items()
+                  if not str(value.get('checked_at', '')).startswith(today)
+                  or len(value.get('works', [])) < minimum_credits.get(identifier, 1)]
+    candidates.sort(key=lambda item: (
+        0 if len(item[1].get('works', [])) < minimum_credits.get(item[0], 1) else 1,
+        str(item[1].get('checked_at', '')), item[0]))
+    pending = [] if args.normalize_only else candidates[:max(0, min(args.limit, refresh_budget))]
     lock = threading.Lock()
     last_request = [0.0]
 

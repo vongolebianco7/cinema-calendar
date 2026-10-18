@@ -40,7 +40,25 @@ function updateVenueOptions(selectedVenue=''){
  if(selectedVenue&&!options.includes(selectedVenue))options.push(selectedVenue);
  for(const item of options){const option=document.createElement('option');option.value=item;option.textContent=item||'選択してください';venue.append(option);}
  venue.value=selectedVenue||'';
+ renderVenueChips();
 }
+function renderVenueChips(){
+ const venue=$('cinelvaRateVenue'),row=$('cinelvaRateVenueRow');
+ let chips=dialog.querySelector('#cinelvaVenueChips');
+ if(!chips){chips=document.createElement('div');chips.id='cinelvaVenueChips';chips.className='cinelva-venue-chips';row.after(chips);}
+ const method=$('cinelvaRatePlace').value;
+ chips.replaceChildren();
+ chips.hidden=!method;
+ if(!method)return;
+ for(const name of venueOptions[method]||[]){
+  const chip=document.createElement('button');
+  chip.type='button';chip.className='cinelva-venue-chip';
+  chip.textContent=name;chip.setAttribute('aria-pressed',String(venue.value===name));
+  chip.onclick=()=>{venue.value=name;renderVenueChips();};
+  chips.append(chip);
+ }
+}
+$('cinelvaRateVenue').addEventListener('change',renderVenueChips);
 $('cinelvaRatePlace').onchange=()=>updateVenueOptions();
 function syncDialogScore(){
  const score=Number($('cinelvaRateScore').value);
@@ -728,6 +746,24 @@ style.textContent+=`
 .cinelva-rate-dialog .cinelva-rate-inner>.cinelva-review-date input[type=date]{
  flex:0 0 148px!important;width:148px!important;max-width:148px!important;
  height:36px!important;font-size:14px!important;
+}
+`;
+style.textContent+=`
+/* Trademark-safe text chips: no third-party logo assets or implied endorsement. */
+.cinelva-rate-dialog .cinelva-venue-chips{
+ display:flex!important;flex-wrap:wrap!important;gap:6px!important;
+ margin-top:-3px!important;margin-bottom:3px!important;
+}
+.cinelva-rate-dialog .cinelva-venue-chips[hidden]{display:none!important}
+.cinelva-rate-dialog .cinelva-venue-chip{
+ appearance:none!important;border:1px solid #ffffff35!important;
+ border-radius:7px!important;background:#292b30!important;color:#e9e9ed!important;
+ padding:6px 9px!important;min-height:32px!important;
+ font:500 12px/18px system-ui!important;white-space:nowrap!important;
+ cursor:pointer!important;
+}
+.cinelva-rate-dialog .cinelva-venue-chip[aria-pressed="true"]{
+ border-color:#e7b944!important;background:#e7b94426!important;color:#f5d17c!important;
 }
 `;
 root.CinelvaQuickRate={open,normalize};

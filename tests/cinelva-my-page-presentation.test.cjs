@@ -24,7 +24,7 @@ test('quick-rate source has no next-film action', () => {
 
 test('annual history keeps the agreed 3 by 4 calendar, medal reward, and active tab', () => {
   assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-  assert.match(records, /const achieved=count>=10;/);
+  assert.match(records, /const achieved=count>=5;/);
   assert.match(records, /const medal='<span class="cy-medal" aria-label="金メダル"><svg/);
   assert.match(records, /<circle cx="12" cy="7" r="4"/);
   assert.doesNotMatch(records + html, /👑|習慣/);

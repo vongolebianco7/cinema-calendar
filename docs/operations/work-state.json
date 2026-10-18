@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:44:31+09:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-18T20:51:00+09:00",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "4bac142449f9df00fcd3c44d444093676354d326",
-  "branch": "fix/my-cinelva-feedback-audit-20261018",
-  "head_sha": "4bac142449f9df00fcd3c44d444093676354d326",
-  "pull_request": null,
+  "base_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
+  "branch": "fix/undated-review-five-film-medals",
+  "head_sha": "08ab1c8d1cc532bf9d59db1f24a1d83acaa272b4",
+  "pull_request": {
+    "number": 385,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/385",
+    "branch": "fix/undated-review-five-film-medals"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -452,6 +456,13 @@
       "title": "Normalize My CINELVA record search and reconcile reviewed-director regression harness",
       "status": "in_progress",
       "acceptance": "Separator/width/case variants and original titles match the same saved film; viewing-year filter remains effective; catalog-only and zero/unrated directors remain hidden. Chromium and WebKit mobile regression must pass before merge."
+    },
+    {
+      "id": "P0-ACCEPTANCE-385",
+      "title": "Keep new reviews undated and award calendar GOLD at five films",
+      "status": "pr_created",
+      "acceptance": "New rating/comment alone saves null date; explicit dates and existing precision survive; GOLD starts at5films/month; preserve #386 search normalization and reviewed-only directors.",
+      "ci": "Original08ab1c8d16/16check-runs passed after one WebKit internal-error retry. Concurrent main#386 caused merge conflicts; resolved retaining both changes. New commit requires fresh CI. Local28activefiles121/121, Python121/121, sharedgate pass; focused review ready."
     }
   ],
   "verification": [
@@ -729,17 +740,21 @@
       "command": "python scripts/quality_gate.py; node --test tests/cinelva-record-list-search.test.cjs tests/cinelva-director-render.test.cjs",
       "result": "passed_locally",
       "details": "116 active Node tests pass; all quality checks pass. Record-search regressions reproduced before fix. #384 introduced missing ratedMovies in isolated test harness; real production selector is now executed with rated fixtures. Local browser launch is blocked by missing Playwright executable; existing frontend CI covers Chromium/WebKit at 390px with added search assertions."
+    },
+    {
+      "check": "2026-10-18 cross-thread acceptance audit",
+      "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "df18d1e6eacc9ee7dd3fc006993aaba155401491",
+    "target_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-18T20:15:15+09:00",
-    "reported_restriction": "Current observed main df18d1e6eacc9ee7dd3fc006993aaba155401491 still reports build-rate-limit; no manual retry was made.",
+    "reported_restriction": "Latest observed main4bac142 frontend/backendstatuses build-rate-limit; no manualdeploymentretry. Main advanced#386; currentlimit must be independentlychecked before release.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
     "provider_preview_status": "Latest observed production remains dpl_8pLTgFogy3Nauy3opWNxWa4qWaHh at cc02eb47 (#295). It does not include recent main changes.",
     "blockers": [
@@ -749,6 +764,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Find PR for fix/my-cinelva-feedback-audit-20261018; inspect its exact current head and all Actions, fix failures then merge when required quality/mobile checks pass. Production remains separate and blocked by Vercel build-rate-limit; no retry until independently cleared.",
+  "next_action": "Inspect required CI on PR#385 reconciled head, fix failures and merge only when green. Refresh main; continue ready source acceptance gaps. Independently confirmVercelcapcleared before onebatchrelease and canonicalproduction smoke; actualSafari and5–10user tests remain unverified.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

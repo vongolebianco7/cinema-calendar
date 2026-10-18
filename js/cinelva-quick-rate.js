@@ -64,10 +64,8 @@ function save() {
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
   Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRateVenue').value.trim()},Number($('cinelvaRateScore').value),date);
-  $('cinelvaRateMessage').textContent='保存しました。別の作品を選んで続けて評価できます。';
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
-  // Keep the non-modal editor open: another existing list card can be
-  // selected without returning to a separate record-management page.
+  dialog.close();
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
 }
 $('cinelvaRateSave').onclick=save;

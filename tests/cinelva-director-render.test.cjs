@@ -92,3 +92,11 @@ test('filmography excludes missing and conflicting director credits', () => {
   row.listeners.click();
   assert.doesNotMatch(detail.innerHTML, /担当不明|出演のみ|別監督/);
 });
+
+
+test('zero-score films do not expose a director under the current reviewed-only rule', () => {
+  const film = { id: 14, title: '採点なしの鑑賞作品', director: 'Other Director', year: 2020, runtime: 120, rating: 0 };
+  const { row, host } = render({ records: [film], works: [film], name: 'Other Director' });
+  assert.equal(row, undefined);
+  assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
+});

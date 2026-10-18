@@ -1,6 +1,6 @@
 # Cinelva acceptance evidence — 2026-10-18
 
-Baseline: main `4bac142449f9df00fcd3c44d444093676354d326` (#384).
+Initial baseline: main `4bac142449f9df00fcd3c44d444093676354d326` (#384). Concurrent #386 (`a4d2b04`) saved-film search normalization and zero-score director regression are preserved during reconciliation.
 Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-sized tasks and are not a defensible percentage denominator. Historical work-state item counts are not release completion counts.
 
 `Verified locally` means the named deterministic check was executed in this run. `Partial` means implementation/evidence exists but at least one part of the bullet is still open. `Pending` means the listed evidence is not available. Production evidence is separate from source/CI evidence.

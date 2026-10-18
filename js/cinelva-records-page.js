@@ -8,14 +8,36 @@
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const byId = new Map();
   const poster = movie => {
-    const sources=[movie.poster,movie.poster_url,movie.posterUrl,movie.poster_path,movie.posterPath,metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).poster_path];
-    for(const raw of sources){
-      if(typeof raw!=='string'||!raw.trim())continue;
-      const value=raw.trim();
+    const validSource = item => {
+      if(typeof item!=='string'||!item.trim())return '';
+      const value=item.trim();
       if(value.startsWith('/'))return 'https://image.tmdb.org/t/p/w342'+value;
-      if(/^https:\/\//.test(value))return value;
-    }
-    return '';
+      if(/^https:\/\//i.test(value))return value;
+      return '';
+    };
+    const sourceFrom = item => {
+      if(!item)return '';
+      for(const value of [item.poster,item.poster_url,item.posterUrl,item.poster_path,item.posterPath,item.posterURL,item.images?.poster,item.images?.poster_path]){
+        const url=validSource(value);
+        if(url)return url;
+      }
+      return '';
+    };
+    const direct=sourceFrom(movie);
+    if(direct)return direct;
+    const id=String(movie.tmdbId??movie.tmdb_id??movie.id??'');
+    const metadata=metadataFor(id);
+    const byIdentifier=sourceFrom(metadata);
+    if(byIdentifier)return byIdentifier;
+    // Imported records sometimes use a different local ID from the catalog.
+    // Only reuse artwork when normalized title and release year both match.
+    const normalizedTitle=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[\\s\\u3000・･:：!！?？'’"“”()（）\-ー]/g,'');
+    const title=normalizedTitle(movie.title);
+    const year=Number(movie.year||String(movie.release_date||movie.date||'').slice(0,4));
+    if(!title||!year||!Array.isArray(state.movies))return '';
+    const matches=state.movies.filter(item=>normalizedTitle(item.title)===title&&Number(item.year||String(item.release_date||item.date||'').slice(0,4))===year);
+    if(matches.length!==1)return '';
+    return sourceFrom(matches[0]);
   };
   const recordMovies = () => state.records.filter(record => record.watched !== false);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');

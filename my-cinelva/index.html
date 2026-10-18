@@ -323,6 +323,19 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 #directorsView .director-film-tile.is-unwatched{opacity:.72}
 @media(max-width:650px){#directorsView .director-picker{grid-template-columns:1fr!important}#directorsView .director-pick{min-height:104px}#directorsView .director-poster-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 </style>
+<style id="cinelva-director-mobile-fix-20261019">
+/* The original director-pick has a 3-column grid; override it without leaving a phantom fourth column. */
+#directorsView .director-picker{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))!important}
+#directorsView .director-pick{width:100%!important;min-width:0!important;grid-template-columns:60px minmax(0,1fr) 42px!important;grid-template-rows:1fr!important;align-items:center!important;gap:12px!important;min-height:96px!important;padding:12px!important;overflow:hidden}
+#directorsView .director-pick-photo,#directorsView .director-pick-monogram{grid-column:1!important;grid-row:1!important;width:60px;height:72px}
+#directorsView .director-pick-main{grid-column:2!important;grid-row:1!important;min-width:0!important;overflow:hidden;align-self:center}
+#directorsView .director-pick-name{display:block!important;overflow-wrap:normal!important;word-break:keep-all!important;line-break:strict!important;font-size:clamp(13px,3.6vw,16px)!important;line-height:1.4!important;letter-spacing:-.035em}
+#directorsView .director-pick-caption{font-size:11px!important;white-space:normal}
+#directorsView .director-pick-total{grid-column:3!important;grid-row:1!important;justify-self:end!important;white-space:nowrap!important;font-size:13px!important}
+#directorsView .director-pick-chevron{display:none!important}
+#directorsView .director-filmography{width:100%!important;min-width:0!important;overflow:hidden}
+@media(max-width:650px){#directorsView .director-picker{grid-template-columns:1fr!important;gap:9px!important}#directorsView .director-pick{min-height:90px!important;border-radius:13px!important}#directorsView .director-pick-photo,#directorsView .director-pick-monogram{height:66px;width:55px}#directorsView .director-pick{grid-template-columns:55px minmax(0,1fr) 38px!important}#directorsView .director-pick-total{font-size:12px!important}}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">

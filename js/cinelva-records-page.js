@@ -584,6 +584,23 @@
     $('worldZoomIn').onclick=()=>{state.plotZoom=Math.min(2.5,state.plotZoom*1.2);drawWorld();};$('worldZoomOut').onclick=()=>{state.plotZoom=Math.max(.65,state.plotZoom/1.2);drawWorld();};$('worldReset').onclick=()=>{state.plotRotation={x:-.32,y:-.58};state.plotZoom=1;state.plotOffset={x:0,y:0};drawWorld();};$('worldToggle').onclick=()=>{state.flatWorld=!state.flatWorld;drawWorld();};
 
 
+    document.addEventListener('click',event=>{
+      const button=event.target.closest('[data-record-bookmark]');
+      if(!button)return;
+      const id=String(button.dataset.recordBookmark),record=state.records.find(item=>String(item.id)===id);
+      if(!record)return;
+      try{
+        const key='cinelva-want-to-watch-v1';
+        const data=JSON.parse(localStorage.getItem(key)||'{}');
+        if(data[id])delete data[id];
+        else data[id]={id,title:record.title||'',savedAt:new Date().toISOString()};
+        localStorage.setItem(key,JSON.stringify(data));
+        const marked=Boolean(data[id]);
+        button.classList.toggle('is-bookmarked',marked);
+        button.setAttribute('aria-pressed',String(marked));
+        window.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{marked,id}}));
+      }catch(error){console.warn('Bookmark save failed',error);}
+    });
     document.addEventListener('click',event=>{const edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');if(edit){const record=state.records.find(item=>String(item.id)===edit.dataset.edit);if(record)openDialog(record);}if(del)deleteRecord(del.dataset.delete);});
     const canvas=$('worldCanvas');
     canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=','Enter'].includes(event.key))return;event.preventDefault();if(event.key==='Enter'){const rows=worldRecords();if(rows.length)showWorldFilm(rows[state.keyboardPoint++%rows.length]);return;}if(['+','='].includes(event.key))state.plotZoom=Math.min(2.5,state.plotZoom*1.1);else if(event.key==='-')state.plotZoom=Math.max(.65,state.plotZoom/1.1);else if(event.key==='ArrowLeft')state.plotRotation.y-=.15;else if(event.key==='ArrowRight')state.plotRotation.y+=.15;else if(event.key==='ArrowUp')state.plotRotation.x-=.15;else state.plotRotation.x+=.15;drawWorld();});

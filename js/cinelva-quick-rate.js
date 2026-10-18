@@ -41,7 +41,12 @@ function updateVenueOptions(selectedVenue=''){
  venue.value=selectedVenue||'';
 }
 $('cinelvaRatePlace').onchange=()=>updateVenueOptions();
-$('cinelvaRateScore').oninput=()=>$('cinelvaRateValue').textContent=Number($('cinelvaRateScore').value).toFixed(1);
+function syncDialogScore(){
+ const score=Number($('cinelvaRateScore').value);
+ $('cinelvaRateValue').textContent=score.toFixed(1);
+ $('cinelvaRateScore').style.setProperty('--dialog-progress',(score/5*100)+'%');
+}
+$('cinelvaRateScore').oninput=syncDialogScore;
 function open(movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id)){return false;}
@@ -49,7 +54,7 @@ function open(movie) {
  selected={...movie,...existing,id:String(existing?.id??id),tmdbId:id,title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
- $('cinelvaRateValue').textContent=Number($('cinelvaRateScore').value).toFixed(1);
+ syncDialogScore();
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
  updateVenueOptions(existing?.viewingVenue||'');
  $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
@@ -526,6 +531,23 @@ style.textContent+=`
 .cinelva-rate-dialog .cinelva-review-method label[hidden]{display:none!important}
 .cinelva-rate-dialog .cinelva-review-method select{width:100%!important;min-width:0!important;max-width:100%!important;height:42px!important;box-sizing:border-box!important;font-size:14px!important;padding:7px 24px 7px 8px!important}
 .cinelva-rate-dialog #cinelvaRateComment{display:block!important;min-height:94px!important;height:94px!important;line-height:1.5!important;resize:vertical!important}
+`;
+style.textContent+=`
+/* iPhone: keep the date picker compact, with no oversized inherited input width. */
+.cinelva-rate-dialog .cinelva-review-date{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important}
+.cinelva-rate-dialog .cinelva-review-date label{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;min-width:0!important}
+.cinelva-rate-dialog .cinelva-review-date input[type=date]{
+ display:block!important;flex:0 0 148px!important;width:148px!important;max-width:148px!important;
+ min-width:0!important;height:36px!important;min-height:36px!important;
+ padding:4px 7px!important;margin:0!important;box-sizing:border-box!important;
+ font-size:14px!important;line-height:24px!important;color-scheme:dark!important;
+}
+/* Only the portion to the LEFT of the slider thumb is yellow. */
+.cinelva-rate-dialog .cinelva-review-score input[type=range]::-webkit-slider-runnable-track{
+ background:linear-gradient(to right,#e7b944 0%,#e7b944 var(--dialog-progress,0%),#777b83 var(--dialog-progress,0%),#777b83 100%)!important;
+}
+.cinelva-rate-dialog .cinelva-review-score input[type=range]::-moz-range-track{background:#777b83!important}
+.cinelva-rate-dialog .cinelva-review-score input[type=range]::-moz-range-progress{background:#e7b944!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

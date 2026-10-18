@@ -264,6 +264,30 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 </style><style id="calendar-depth-122">
 #summaryView #yearHeatmap>.cy-month.light-month,#summaryView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,color-mix(in srgb,#b8d4e7, #294e73 var(--cy-mix)),color-mix(in srgb,#a8c8df,#193b5d var(--cy-mix)))!important;color:#f8fbff!important}
 #summaryView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(140deg,color-mix(in srgb,#d8b87a,#6e4a18 var(--cy-mix)),color-mix(in srgb,#c69d54,#654215 var(--cy-mix)))!important}
+</style><style id="director-poster-grid-125">
+#directorsView .director-picker{display:flex;flex-direction:column;gap:6px}
+#directorsView .director-pick{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto 18px;align-items:center;gap:12px;padding:13px 14px;text-align:left;background:#171b23;color:#f1f1f1;border:1px solid #343944;border-radius:9px;font-size:15px;cursor:pointer}
+#directorsView .director-pick strong{color:#d7c28e;font-size:13px}
+#directorsView .director-pick.active{border-color:#d2b878;background:#25271f}
+#directorsView .director-filmography{min-width:0;margin:7px 0 13px;padding:12px;border:1px solid #51515a;border-radius:12px;background:#12151b}
+#directorsView .director-filmography[hidden]{display:none!important}
+#directorsView .director-filmography-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#directorsView .director-filmography-head h3{margin:0;font-size:17px}
+#directorsView .director-filmography-head p{margin:0;font-size:12px;color:#b7bdc6}
+#directorsView .director-poster-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 7px}
+#directorsView .director-film-tile{min-width:0}
+#directorsView .director-film-poster{display:block;width:100%;aspect-ratio:2/3;overflow:hidden;border-radius:5px;border:1px solid #424754;background:#222a36}
+#directorsView .director-film-poster .poster{width:100%!important;height:100%!important;aspect-ratio:2/3!important;margin:0!important;padding:0!important;border:0!important}
+#directorsView .director-film-poster .poster img{display:block;width:100%;height:100%;object-fit:cover}
+#directorsView .director-film-poster .poster span{font-size:11px;overflow-wrap:anywhere}
+#directorsView .director-film-meta{display:flex;flex-direction:column;gap:3px;padding-top:5px}
+#directorsView .director-film-year{font-size:10px;color:#a8b1c1}
+#directorsView .director-film-title{font-size:11px;line-height:1.35;font-weight:650;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#directorsView .director-film-rating{font-size:12px;color:#e9c77c;font-weight:800}
+#directorsView .director-film-pending{font-size:11px;color:#8993a3}
+#directorsView .director-film-tile.is-unwatched .director-film-poster{opacity:.67}
+#directorsView .director-coverage-note{font-size:11px;color:#9fa8b5;margin:13px 0 0}
+@media(min-width:700px){#directorsView .director-poster-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px 12px}}
 </style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
@@ -300,7 +324,7 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-120"></script><script src="../js/cinelva-records-page.js?v=20261018-my-122"></script>
+  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-120"></script><script src="../js/cinelva-records-page.js?v=20261018-my-125"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

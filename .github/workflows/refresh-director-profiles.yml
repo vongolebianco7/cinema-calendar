@@ -66,8 +66,11 @@ jobs:
             data/directors.json
           if-no-files-found: warn
           retention-days: 14
-      - name: Validate the refreshed snapshot before storing it
-        run: python scripts/quality_gate.py
+      - name: Validate director snapshot and feature-film attribution before storing
+        run: |
+          python -m unittest tests.test_director_enrichment
+          node --test tests/cinelva-director-render.test.cjs
+          python scripts/check_sources.py
       - name: Store only the reviewed director snapshot on the work branch
         if: github.event_name == 'pull_request' || github.event_name == 'schedule' || github.event_name == 'push'
         env:

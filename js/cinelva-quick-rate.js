@@ -482,6 +482,19 @@ style.textContent+=`
  font-variant-numeric:tabular-nums!important;
 }
 `;
+style.textContent+=`
+/* Live fill follows the same continuous finger position as the thumb. */
+.cinelva-rating-controls .cinelva-score-track::before{
+ content:""!important;display:block!important;position:absolute!important;
+ left:0!important;right:0!important;top:50%!important;
+ height:5px!important;transform:translateY(-50%)!important;
+ border-radius:3px!important;pointer-events:none!important;z-index:35!important;
+ background:linear-gradient(to right,#e7b944 0%,#e7b944 var(--smooth-progress,var(--score-progress,0%)),#ffffff40 var(--smooth-progress,var(--score-progress,0%)),#ffffff40 100%)!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-runnable-track{
+ background:transparent!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

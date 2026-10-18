@@ -482,7 +482,26 @@
     list.style.setProperty('flex-direction','initial','important');
     list.dataset.layout='three-column';
     detail.style.setProperty('grid-column','1 / -1','important');
-    host.append(list,detail);
+    const sortBar=document.createElement('div');
+    sortBar.className='director-sort-bar';
+    sortBar.style.cssText='display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:0 0 12px;flex-wrap:wrap';
+    const sortLabel=document.createElement('label');
+    sortLabel.textContent='並び順';
+    sortLabel.setAttribute('for','directorCollectionSort');
+    sortLabel.style.cssText='font-size:12px;color:#c5c5c5';
+    const sortSelect=document.createElement('select');
+    sortSelect.id='directorCollectionSort';
+    sortSelect.setAttribute('aria-label','監督コレクションの並び順');
+    sortSelect.style.cssText='max-width:210px;min-height:36px;padding:6px 10px;border:1px solid #555;border-radius:8px;background:#171b23;color:#f1f1f1;font-size:13px';
+    for(const [value,label] of [
+      ['reviewed','レビュー済み本数順'],
+      ['completion','鑑賞率が高い順'],
+      ['total','監督作品が多い順'],
+      ['name','監督名の五十音順']
+    ]){const option=document.createElement('option');option.value=value;option.textContent=label;sortSelect.append(option);}
+    try{const saved=sessionStorage.getItem('cinelva-director-sort');if([...sortSelect.options].some(x=>x.value===saved))sortSelect.value=saved;}catch(_){}
+    sortBar.append(sortLabel,sortSelect);
+    host.append(sortBar,list,detail);
     const directorFilmYear = (movie,directorName) => {
       const candidates=[movie.year,movie.release_year,movie.releaseYear,movie.release_date,movie.releaseDate,movie.first_air_date,movie.date,movie.premiere];
       for(const candidate of candidates){
@@ -540,6 +559,28 @@
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });
+    const cards=[...list.children].map((row,index)=>({row,group:sorted[index]}));
+    const compareCards=(a,b)=>{
+      const aCount=a.group.filmography.watchedCount,bCount=b.group.filmography.watchedCount;
+      const aTotal=a.group.filmography.catalogAvailable?a.group.filmography.films.length:null;
+      const bTotal=b.group.filmography.catalogAvailable?b.group.filmography.films.length:null;
+      const name=()=>a.group.name.localeCompare(b.group.name,'ja');
+      switch(sortSelect.value){
+        case 'completion': return (bTotal?bCount/bTotal:-1)-(aTotal?aCount/aTotal:-1)||bCount-aCount||name();
+        case 'total': return (bTotal??-1)-(aTotal??-1)||bCount-aCount||name();
+        case 'name': return name();
+        default: return bCount-aCount||name();
+      }
+    };
+    const applySort=()=>{
+      // Close the expanded profile before moving its parent card.
+      detail.hidden=true;
+      list.querySelectorAll('.director-pick.active').forEach(row=>{row.classList.remove('active');row.setAttribute('aria-expanded','false');});
+      cards.sort(compareCards).forEach(({row})=>list.append(row));
+      try{sessionStorage.setItem('cinelva-director-sort',sortSelect.value);}catch(_){}
+    };
+    sortSelect.addEventListener('change',applySort);
+    applySort();
     works.hidden=true;
   }
   function drawWorld() {

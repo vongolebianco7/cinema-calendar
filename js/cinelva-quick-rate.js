@@ -167,7 +167,7 @@ function attachInlineScore(button, movie) {
   // Keep visual position continuous while the saved score remains in 0.1 increments.
   track.style.setProperty('--smooth-progress',(fraction*100).toFixed(3)+'%');
   const score=Math.round(fraction*50)/10;
-  if(Number(input.value)!==score){input.value=String(score);sync();}
+  if(Number(input.value)!==score){input.value=String(score);value.textContent=score>0?score.toFixed(1):'未鑑賞';}
  };
  const finish=()=>{activePointer=null;activeTouch=null;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));};
  track.addEventListener('pointerdown',e=>{

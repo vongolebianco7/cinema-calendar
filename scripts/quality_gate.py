@@ -21,6 +21,7 @@ run(['node','--test','tests/cinelva-static-build.test.cjs'])
 run(['node','--test','tests/cinelva-director-render.test.cjs'])
 run(['node','--test','tests/cinelva-route-manifest.test.cjs'])
 run(['python','-m','unittest','tests.test_external_data_registry'])
+run(['node','--test','tests/cinelva-quick-rate-dates.test.cjs'])
 for cmd in commands:
  if any('ocean-' in token or 'ocean_' in token or token.startswith('test_ocean') for token in cmd): continue
  if (ROOT/cmd[1]).exists() if len(cmd)>1 and ('/' in cmd[1] or cmd[1].endswith('.js') or cmd[1].endswith('.cjs')) else True: run(cmd)

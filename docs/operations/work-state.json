@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:05:04+09:00",
+  "updated_at": "2026-10-18T20:10:05+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
-  "branch": "fix/director-count-consistency-20261018",
-  "head_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
+  "base_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
+  "branch": "fix/review-date-preservation-20261018",
+  "head_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
   "pull_request": null,
   "work_items": [
     {
@@ -426,10 +426,18 @@
     {
       "id": "P1-DIRECTOR-COUNT-CONSISTENCY",
       "title": "Keep director selection and filmography counts consistent after credit exclusions",
-      "status": "in_progress",
+      "status": "merged",
       "issue": 239,
       "acceptance": "Selection rows and expanded filmography use the same accepted works, watched numerator and total denominator. Excluded shorts remain excluded from both counts. Unknown-year Duel by another director does not throw or borrow Spielberg year.",
-      "ci": "Three runtime regression tests reproduced the two count contradictions and group-is-not-defined exception; all pass after correction. Shared quality gate and browser CI required."
+      "ci": "PR #380 all five Actions passed on 73b916907a40d271f0e3c2afe066034c973c8411; focused review found no critical/important issue. Merged as 24939d4b87a501f4c93589b74de44bea7c7639cd."
+    },
+    {
+      "id": "P0-REVIEW-DATE-PRECISION",
+      "title": "Preserve partial and unknown viewing dates through rating/comment edits",
+      "status": "in_progress",
+      "issue": 239,
+      "acceptance": "Editing a saved year-only, month-only or unknown viewing date does not replace it with today. Selecting an explicit date still updates it; new records default to today.",
+      "ci": "Three real-record-library regressions first failed because open/save invented today. Five runtime tests pass after the two-line fix, and local quality gate passed; focused review found no critical/important issue. PR browser Actions pending."
     }
   ],
   "verification": [
@@ -682,11 +690,16 @@
       "command": "PR #379 Actions at 821f15f69806d542cca7d34c1a49ebbc6cf47d31",
       "result": "passed_merged",
       "details": "Smoke 39121446563, mobile layout 39121446481, quality 39121446525, completeness 39121446438 all passed; merged as 81587315b6b808dc519fa20dabfcdd4054a083c3. Reviewer compared all 344 artifact files byte-for-byte and found no unintended output changes."
+    },
+    {
+      "command": "PR #380 Actions at 73b916907a40d271f0e3c2afe066034c973c8411",
+      "result": "passed_merged",
+      "details": "Smoke 39121854640, mobile layout 39121854637, quality 39121854647, completeness 39121854629, frontend 39121854683 all passed. Merged as 24939d4b87a501f4c93589b74de44bea7c7639cd."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
+    "target_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
@@ -702,6 +715,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Find/open PR for fix/director-count-consistency-20261018; require shared quality gate and Chromium/WebKit frontend CI, review and merge. Vercel statuses for main 81587315 still report build-rate-limit; do not retry deployment without new evidence that the restriction cleared. Continue highest ready #239 acceptance audit.",
+  "next_action": "Find/open PR for fix/review-date-preservation-20261018; require green shared quality and Chromium/WebKit frontend Actions, review and merge. Then refresh main, verify Vercel status without retrying while rate-limited, and continue #239 acceptance audit. Real-device Safari and latest-production smoke remain unverified.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

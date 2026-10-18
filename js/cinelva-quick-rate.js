@@ -87,8 +87,8 @@ function open(movie,options={}) {
  $('cinelvaRateScore').value=existing?.rating??0;
  syncDialogScore();
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
- $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
- dateTrigger.textContent=dateInput.value.replaceAll('-','/');closeDatePicker();
+ $('cinelvaRateDate').value=existing?(existing.watchedAt||''):new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+ dateTrigger.textContent=dateInput.value?dateInput.value.replaceAll('-','/'):'鑑賞日未登録';closeDatePicker();
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
  if(!dialog.open)dialog.showModal();

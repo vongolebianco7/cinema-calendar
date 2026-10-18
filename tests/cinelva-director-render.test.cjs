@@ -204,3 +204,18 @@ test('complete Spielberg catalog can show a sourced denominator', () => {
   const { row } = render({ records: [{ ...films[0], rating: 4 }], works: films, profile: { id: 488, coverage: { truncated: false } } });
   assert.match(row.innerHTML, /1\\/12本/);
 });
+
+test('kana variants in sourced credit names retain every directed film', () => {
+  const rated = { id: 90001, title: '鑑賞作', director: 'スティーヴン・スピルバーグ', runtime: 120, rating: 4 };
+  const works = Array.from({length:12}, (_,i) => ({
+    id:90001+i, title:'映画'+i, director:'スティーブン・スピルバーグ',
+    job:'Director', is_director:true, runtime:120, year:2000+i
+  }));
+  const {row,detail}=render({records:[rated], works, name:'スティーブン・スピルバーグ', profile:{
+    id:488, nameJa:'スティーブン・スピルバーグ', original_name:'Steven Spielberg',
+    also_known_as:['スティーヴン・スピルバーグ'], coverage:{truncated:false}
+  }});
+  assert.match(row.innerHTML,/1\\/12本/);
+  row.listeners.click();
+  assert.match(detail.innerHTML,/1 \\/ 12本 鑑賞済み/);
+});

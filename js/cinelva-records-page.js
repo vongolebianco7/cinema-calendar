@@ -204,7 +204,7 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+(count>=10?'👑 ':'')+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+(count>=10?'<span class="cy-medal" title="月10本達成" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h5l4 9-4 3z" fill="#608dc6"/><path d="M14 2h5l-5 12-4-3z" fill="#c0d4eb"/><circle cx="12" cy="15" r="7.5" fill="#d4a441" stroke="#f2d786" stroke-width="1.4"/><circle cx="12" cy="15" r="5.4" fill="none" stroke="#a9782e" stroke-width=".8"/><path d="m12 11 1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#fff0bb"/></svg></span>':'')+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
@@ -359,7 +359,7 @@
   async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));state.records=Records.all();populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }
   function bindEvents() {
     document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
-    $('addRecord').onclick=()=>openDialog(); $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
+    $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
     $('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);
     $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);

@@ -340,6 +340,17 @@ dialog.cinelva-rate-dialog{box-sizing:border-box!important;position:fixed!import
 .cinelva-rate-dialog .cinelva-rate-actions button{width:100%!important;min-width:0!important;min-height:38px!important;margin:0!important;padding:6px 3px!important;font-size:12px!important}
 @media(max-width:370px){.cinelva-rate-dialog .cinelva-review-row{grid-template-columns:minmax(0,1fr)!important}}
 `;
+style.textContent+=`
+/* Two-row rating: full-width touch slider, eye + status above. */
+.cinelva-rating-controls{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:22px 34px!important;gap:0!important;padding:5px 8px 4px!important;overflow:visible!important;touch-action:pan-y}
+.cinelva-rating-controls>.cinelva-rate-button{grid-column:1!important;grid-row:1!important;justify-self:start!important;width:23px!important;height:22px!important;min-height:22px!important;min-width:23px!important;margin:0!important;z-index:1!important}
+.cinelva-rating-controls>.cinelva-inline-score{grid-column:1!important;grid-row:1/3!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:22px 34px!important;width:100%!important;min-width:0!important;gap:0!important;padding:0!important;margin:0!important;pointer-events:none!important}
+.cinelva-rating-controls .cinelva-inline-value{grid-column:1!important;grid-row:1!important;justify-self:end!important;align-self:center!important;width:auto!important;max-width:calc(100% - 27px)!important;min-width:0!important;font-size:11px!important;line-height:20px!important;pointer-events:none!important}
+.cinelva-rating-controls .cinelva-score-track{grid-column:1!important;grid-row:2!important;display:block!important;width:100%!important;height:34px!important;min-height:34px!important;min-width:0!important;pointer-events:auto!important;touch-action:pan-y!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{display:block!important;position:relative!important;width:100%!important;min-width:0!important;height:34px!important;min-height:34px!important;max-width:none!important;box-sizing:border-box!important;pointer-events:auto!important;touch-action:pan-y!important;cursor:pointer!important;z-index:10!important;opacity:1!important;-webkit-appearance:none!important;appearance:none!important;background:transparent!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-runnable-track{height:6px!important;border-radius:2px!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{width:12px!important;height:22px!important;margin-top:-8px!important;border-radius:3px!important;box-shadow:none!important}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -180,29 +180,10 @@
         if(safe)svg.append(svgText(x,y-2,[item.name,item.value],size));
         else deferred.push(item);
       }
-      // Narrow segments: a short percentage callout only, with collision avoidance.
-      // Long category names remain in the full legend rather than being clipped.
-      for(const side of [-1,1]){
-        const candidates=deferred.filter(item=>(Math.cos(item.angle)>=0?1:-1)===side)
-          .sort((a,b)=>Math.sin(a.angle)-Math.sin(b.angle));
-        const used=[];
-        for(const item of candidates){
-          const size=4.1;
-          const content=item.value;
-          const width=measure(content,size);
-          const x=side>0?93:7;
-          let y=Math.max(10,Math.min(88,50+43*Math.sin(item.angle)));
-          if(used.length)y=Math.max(y,used[used.length-1]+9);
-          if(y>88 || width>14)continue;
-          // The label must be fully within the SVG bounds.
-          if(side>0 && x+width/2>99 || side<0 && x-width/2<1)continue;
-          const sx=50+45*Math.cos(item.angle),sy=50+45*Math.sin(item.angle);
-          const path=document.createElementNS(namespace,'path');
-          path.setAttribute('d','M '+sx.toFixed(2)+' '+sy.toFixed(2)+' L '+x+' '+(y-2).toFixed(2));
-          path.setAttribute('fill','none');path.setAttribute('stroke','#e6e6e6');path.setAttribute('stroke-width','.32');
-          svg.append(path);svg.append(svgText(x,y,[content],size));used.push(y);
-        }
-      }
+      // Do not draw orphan leader lines. Small/long categories remain in the
+      // color-keyed legend, where their full names and values are readable.
+      // On a 2-column phone layout the available SVG canvas is too narrow
+      // to place long external callouts without crossing chart boundaries.
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
       donut.append(center);

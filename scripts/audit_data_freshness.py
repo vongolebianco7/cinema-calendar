@@ -5,6 +5,11 @@ import datetime as dt
 import json
 from pathlib import Path
 
+if __package__:
+    from .audit_availability_freshness import summarize as summarize_observations
+else:
+    from audit_availability_freshness import summarize as summarize_observations
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "quality" / "external-data-registry.json"
 
@@ -26,7 +31,7 @@ def audit(now=None, registry=None, root=ROOT):
         name = entry["id"]
         relative_path = entry.get("dataset")
         max_age_hours = entry.get("max_age_hours")
-        result = {"category": entry.get("category", name), "status": entry.get("status"), "path": relative_path, "max_age_hours": max_age_hours, "freshness_enforced": bool(entry.get("freshness_enforced")), "freshness": "not_applicable"}
+        result = {"category": entry.get("category", name), "status": entry.get("status"), "path": relative_path, "max_age_hours": max_age_hours, "freshness_enforced": bool(entry.get("freshness_enforced")), "freshness": "not_applicable", "freshness_scope": "snapshot_timestamp", "enforcement_scope": "snapshot_timestamp"}
         path = root / relative_path if relative_path else None
         if path and path.exists():
             try:
@@ -40,12 +45,23 @@ def audit(now=None, registry=None, root=ROOT):
                     age = (now - generated).total_seconds() / 3600
                     result["age_hours"] = round(age, 1)
                     result["freshness"] = "fresh" if max_age_hours is not None and -1 <= age <= max_age_hours else "stale"
+                if name == "streaming-availability" and isinstance(data, dict):
+                    # A successful batch update does not re-check every cached film.
+                    observations = summarize_observations(data, now)
+                    result["snapshot_freshness"] = result["freshness"]
+                    result["freshness_scope"] = "title_observations"
+                    result["observations"] = observations
+                    total, fresh = observations["total"], observations["fresh_7d"]
+                    result["freshness"] = "unknown" if not total else "fresh" if fresh == total else "stale" if not fresh else "partial"
             except (OSError, ValueError, UnicodeError) as exc:
                 result["freshness"] = "invalid"
                 result["error"] = str(exc)[:200]
         elif relative_path:
             result["freshness"] = "missing"
-        if result["freshness_enforced"] and result["freshness"] != "fresh":
+        # Preserve the declared batch-update SLA; partial catalogue coverage is
+        # reported honestly and never mistaken for a failed batch refresh.
+        enforced_freshness = result.get("snapshot_freshness", result["freshness"])
+        if result["freshness_enforced"] and enforced_freshness != "fresh":
             enforced_failures.append(name)
         results[name] = result
     return {"checked_at": now.isoformat(), "registry": "quality/external-data-registry.json", "datasets": results, "enforced_failures": enforced_failures}

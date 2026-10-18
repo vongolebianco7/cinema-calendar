@@ -138,7 +138,7 @@
         button.onclick=()=>{
           if(value===donutMode)return;
           try{localStorage.setItem(storageKey,value);}catch(_){}
-          renderSummary();
+          renderCinemaSummary();
         };
         toolbar.append(button);
       }

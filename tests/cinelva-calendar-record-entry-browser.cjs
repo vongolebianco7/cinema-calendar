@@ -60,10 +60,13 @@ async function freePort() {
     assert.ok(detailHref.includes('date='));
     assert.ok(detailHref.includes('event=streaming'));
     await detailLink.click();
-    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
-    await page.locator('#detail .recordAction a').click();
-    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
-    assert.equal(await page.locator('.gSearch').inputValue(), movie.title);
+    const calendarReview = page.locator('#detail [data-detail-review]');
+    await calendarReview.waitFor({ state: 'visible', timeout: 15000 });
+    await calendarReview.click();
+    await page.locator('.cinelva-rate-dialog').waitFor({ state: 'visible', timeout: 10000 });
+    assert.equal(await page.locator('#cinelvaRateTitle').innerText(), movie.title);
+    await page.locator('#cinelvaRateClose').click();
+    await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     await page.route('**/api/movies*', route => route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -73,10 +76,13 @@ async function freePort() {
     const result = page.locator('#grid .card').first();
     await result.waitFor({ state: 'visible', timeout: 10000 });
     await result.click();
-    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
-    await page.locator('#detail .recordAction a').click();
-    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
-    assert.equal(await page.locator('.gSearch').inputValue(), movie.title);
+    const searchDetailReview = page.locator('#detail [data-detail-review]');
+    await searchDetailReview.waitFor({ state: 'visible', timeout: 15000 });
+    await searchDetailReview.click();
+    await page.locator('.cinelva-rate-dialog').waitFor({ state: 'visible', timeout: 10000 });
+    assert.equal(await page.locator('#cinelvaRateTitle').innerText(), movie.title);
+    await page.locator('#cinelvaRateClose').click();
+    await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     await page.addInitScript(row => localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
       [row.id]: {
         id: String(row.id), title: row.title, poster: row.poster || '',
@@ -90,7 +96,7 @@ async function freePort() {
     const savedRecord = page.locator(`[data-record-card="${movie.id}"]`);
     await savedRecord.waitFor({ state: 'visible', timeout: 10000 });
     assert.ok((await savedRecord.innerText()).includes(movie.title), 'saved viewing record remains visible in the current records list');
-    console.log('Calendar event and search-page result → detail → searchable rating list, plus saved-record visibility, passed at 390px with backend offline.');
+    console.log('Calendar event and search-page result → detail → shared review dialog, plus saved-record visibility, passed at 390px with backend offline.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

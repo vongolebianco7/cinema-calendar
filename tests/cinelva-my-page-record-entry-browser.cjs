@@ -38,33 +38,31 @@ async function freePort() {
     await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
     await page.goto(`${base}/search.html?id=${encodeURIComponent(movie.id)}&search=${encodeURIComponent(movie.title)}`, { waitUntil: 'domcontentloaded' });
 
-    const recordLink = page.locator('#detail .recordAction a');
-    await recordLink.waitFor({ state: 'visible', timeout: 15000 });
-    const href = await recordLink.getAttribute('href');
-    assert.match(href, /^search\.html\?search=/);
-    assert.equal(new URL(href, base).searchParams.get('search'), movie.title);
-    await recordLink.click();
-    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
-    assert.equal(await page.locator('.gSearch').inputValue(), movie.title, 'movie detail returns to its searchable listing without opening a record window');
-    assert.equal(await page.locator('#modal').getAttribute('class'), 'modal');
+    async function expectDirectReview(title) {
+      const detailUrl = page.url();
+      const recordButton = page.locator('#detail [data-detail-review]');
+      await recordButton.waitFor({ state: 'visible', timeout: 15000 });
+      await recordButton.click();
+      await page.locator('.cinelva-rate-dialog').waitFor({ state: 'visible', timeout: 10000 });
+      assert.equal(await page.locator('#cinelvaRateTitle').innerText(), title);
+      assert.equal(page.url(), detailUrl, 'review opens directly without navigating away from detail');
+      assert.equal(await page.locator('.cinelva-rate-dialog').getByRole('button', { name: '次へ', exact: true }).count(), 0, 'review has no next action');
+      await page.locator('#cinelvaRateClose').click();
+      await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
+    }
+    await expectDirectReview(movie.title);
 
     const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
     await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });
-    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
-    await page.locator('#detail .recordAction a').click();
-    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
-    assert.equal(await page.locator('.gSearch').inputValue(), movie.title, 'calendar context returns to the searchable listing');
+    await expectDirectReview(movie.title);
 
     await page.goto(`${base}/rankings.html?axis=rating`, { waitUntil: 'domcontentloaded' });
     const rankedMovie = page.locator('#grid .rankCard[href*="search.html?id="]').first();
     await rankedMovie.waitFor({ state: 'visible', timeout: 15000 });
     const rankedTitle = (await rankedMovie.locator('.title').textContent()).trim();
     await rankedMovie.click();
-    await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
-    await page.locator('#detail .recordAction a').click();
-    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
-    assert.equal(await page.locator('.gSearch').inputValue(), rankedTitle, 'ranking selection returns to a searchable list without opening a record window');
-    console.log('Offline movie detail, calendar-context, and ranking to the searchable rating list passed at 390px.');
+    await expectDirectReview(rankedTitle);
+    console.log('Offline movie detail, calendar-context, and ranking open the shared review dialog directly at 390px.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

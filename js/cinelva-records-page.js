@@ -416,6 +416,15 @@
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';
     detail.id='directorFilmography';
+    // Keep mobile columns independent of legacy stylesheet precedence and cached CSS.
+    list.style.setProperty('display','grid','important');
+    list.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr))','important');
+    list.style.setProperty('gap','8px','important');
+    list.style.setProperty('width','100%','important');
+    list.style.setProperty('max-width','none','important');
+    list.style.setProperty('flex-direction','initial','important');
+    list.dataset.layout='three-column';
+    detail.style.setProperty('grid-column','1 / -1','important');
     host.append(list,detail);
     const directorFilmYear = (movie,directorName) => {
       const candidates=[movie.year,movie.release_year,movie.releaseYear,movie.release_date,movie.releaseDate,movie.first_air_date,movie.date,movie.premiere];

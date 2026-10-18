@@ -73,6 +73,28 @@ async function port(){
   await page.locator('#grid .cinelva-rate-button').first().click();
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'気軽に採点。');
   assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');
+  await page.locator('#cinelvaRateClose').click();
+  await page.evaluate(()=>{
+   const key='cinelva-library-records-v2',data=JSON.parse(localStorage.getItem(key));
+   const film={...data['111'],id:'900001',tmdb_id:111};delete film.tmdbId;
+   delete data['111'];data['900001']=film;localStorage.setItem(key,JSON.stringify(data));
+  });
+  await page.goto(base+'/search.html?search='+encodeURIComponent('スターウォーズ'),{waitUntil:'domcontentloaded'});
+  const importedInput=page.locator('#grid .cinelva-inline-score input').first();
+  await importedInput.waitFor({timeout:15000});
+  assert.equal(await importedInput.inputValue(),'4.5','imported rating is displayed using explicit film identity');
+  await importedInput.evaluate(el=>{el.value='4.2';el.dispatchEvent(new Event('input',{bubbles:true}));});
+  await importedInput.dispatchEvent('change');
+  const importedRows=await page.evaluate(()=>CinelvaLibraryRecords.all());
+  assert.equal(importedRows.length,2,'inline edits do not add a duplicate of an imported film');
+  const imported=importedRows.find(row=>row.id==='900001');
+  assert.equal(imported.rating,4.2);
+  assert.equal(imported.watchedAt,'2026-10-18');
+  assert.equal(imported.comment,'初回鑑賞。よかった。');
+  await page.locator('#grid .cinelva-rate-button').first().click();
+  assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'初回鑑賞。よかった。');
+  await page.locator('#cinelvaRateSave').click();
+  assert.equal((await page.evaluate(()=>CinelvaLibraryRecords.all())).length,2,'dialog edits keep the local imported key');
   assert.deepEqual(errors,[],'no uncaught browser errors');
   console.log((process.env.CINELVA_BROWSER||'chromium')+' existing-page quick rating, search variants and persistence passed');
  }finally{if(browser)await browser.close();server.kill();}

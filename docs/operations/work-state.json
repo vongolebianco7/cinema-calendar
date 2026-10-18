@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T12:27:25.075Z",
-  "status": "pr_created",
+  "updated_at": "2026-10-18T19:00:47.696095+00:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
+  "base_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
   "branch": "fix/director-data-completion-20261018",
-  "head_sha": "5e579825a54cfd2eb91a4526424b3ff7e9aa02dd",
+  "head_sha": "4ba252511946a213dca85175e430eeb66ec9bb35",
   "pull_request": {
     "number": 391,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/391",
@@ -481,14 +481,21 @@
     {
       "id": "P0-IMPORTED-FILM-IDENTITY",
       "title": "Use canonical film identity in director counts and record metadata",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "ImportedlocalIDsandexplicitTMDBIDsrepresentonefilm; conflictinglocalIDsnevermatchwrongfilm; metadata usesexplicitidentitywhilelocaleditIDsandsavedfieldsremainunchanged.",
-      "ci": "Threeactualruntimefailuresreproducedbeforefix;11focusedtests,30activeCinelvafiles128/128,Python125/125andsharedgatepass. Browserfixturewithlocal900003andcanonicalfilmIDadded;CIpending."
+      "ci": "PR#390 mergedb2876171 after11successfulcheck-runs oneadbf0a1. ActualimportedidentitybrowserfixturepassesChromium/WebKit; transientundiciserverteardownrootfixedbysharedboundedTCPreadiness. Local128activeNodeandPython125passed."
+    },
+    {
+      "id": "P0-IMPORTED-REVIEW-EDITS",
+      "title": "Edit imported reviews without duplication or identity overwrite",
+      "status": "in_progress",
+      "acceptance": "Editor/inline/labelsrecognizebothTMDBaliasesandpreserveexistinglocalID/date/comment; contradictoryexplicitidentitysave/restorefailsbeforeanywrite.",
+      "ci": "Threeactualeditor/inlinefailuresandcorestorecollisionreproducedbeforefix;33focusedtests,135activeNode,Python125/125passed. Browserfixturecoversimportedinlineanddialogedits;newCIrequired."
     },
     {
       "id": "MY-DIRECTOR-COMPLETE",
       "title": "Sourced director names, uncapped credits, profiles, accurate watched progress",
-      "status": "pr_created",
+      "status": "in_progress",
       "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge."
     }
   ],
@@ -777,19 +784,18 @@
       "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
     },
     {
-      "command": "TMDB director refresh Actions39125924187; local python scripts/quality_gate.py and tests.test_director_enrichment",
-      "result": "data_refreshed_and_locally_verified",
-      "details": "788/788 profile+credits requests succeeded;9086 works;524 profile photos;74 Japanese biographies.200 names absent in TMDB Japanese fields use explicit curated kana transliteration with original retained, not fabricated official name/kanji. Unit tests cover profile/source/aliases, all snapshot primary labels, credit roles and no truncation, progress count. Snapshot compacted by removing unused overview/transport fields,13,316,683 to7,559,747bytes, same9086works. Follow-up workflow skips same-day fetched directors, so no repeat788requests. Final CI pending after normalized snapshot is stored."
+      "check": "PR390integration",
+      "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
     },
     {
-      "command": "Director normalization run39127251263 on official snapshot; local merged baseline quality_gate",
-      "result": "passed_final_data_normalization",
-      "details": "0 repeat TMDB requests,0 failures,0 missing Japanese primary labels;524photos,200 explicitly-transliterated names with originals,74Japanese biographies;9086credits retained and snapshot reduced to7.56MB. Fresh normalized-data quality gate passed before botcommit5e579825. Local130/130Node and7directorPython tests passed after merging b2876171 identity changes. Final checkpoint commit requires fresh CI."
+      "command": "Independent focused code review and locale-alias regression",
+      "result": "important_finding_fixed_verified",
+      "details": "Han-only multilingual aliases no longer qualify as Japanese. KnownJPmap/localizedprofile/kana aliases take priority.44 affected alias selections replaced with explicit retained-original kana readings, total244transliterated. Independent reviewer verified fix;8enrichment tests pass. Browser expectation now checks2watched films(revised+zero) while imported canonical film remainsunique. Latest main safeimported edits are preserved."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
+    "target_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
@@ -805,6 +811,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "PR#391 final normalized dataset has been stored and quality-tested. Inspect newest checkpoint head and require all Actions green including exact-head full Python, quality and 390px Chromium/WebKit frontend. Merge only green; refresh current main. Production is separate: verify Vercel cap cleared before one canonical release, no manual retry while build-rate-limit.",
+  "next_action": "PR#391: normalize retained fetched data and merge any newly-added main director IDs; exact final-head quality/fullPython/Chromium/WebKit required. All source-name pronunciation fallbacks retain originals and are markedtransliterated. Vercel release is separate and must not retry while rate-limited.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

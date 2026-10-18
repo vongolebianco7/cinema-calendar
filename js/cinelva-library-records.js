@@ -68,6 +68,8 @@
       throw new Error('鑑賞方法が不正です');
     if(movie.viewingVenue!==undefined && (typeof movie.viewingVenue!=='string'||movie.viewingVenue.length>120)) throw new Error('鑑賞先は120文字以内で入力してください');
     const old=current[id]||{}, source=older[id]||{};
+    const stored=own(current,id)?old:source, priorIdentity=stored.tmdbId??stored.tmdb_id, nextIdentity=movie.tmdbId??movie.tmdb_id;
+    if(priorIdentity!=null&&nextIdentity!=null&&String(priorIdentity)!==String(nextIdentity))throw new Error('保存IDが別の作品に使われています。既存の記録は変更していません');
     const date=watchedAt===undefined?(old.watchedAt??source.watchedAt??null):watchedAt;
     if(!validDate(date)) throw new Error('鑑賞日の形式が不正です');
     const now=new Date().toISOString();

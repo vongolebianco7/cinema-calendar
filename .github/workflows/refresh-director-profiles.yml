@@ -25,6 +25,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Preserve directors added by the latest main snapshot
+        run: |
+          git fetch --depth=1 origin main
+          git show FETCH_HEAD:data/directors.json > /tmp/cinelva-main-directors.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('data/directors.json')
+          current = json.loads(path.read_text())
+          latest = json.loads(Path('/tmp/cinelva-main-directors.json').read_text())
+          before = len(current['directors'])
+          for identifier, director in latest['directors'].items():
+              current['directors'].setdefault(identifier, director)
+          path.write_text(json.dumps(current, ensure_ascii=False, indent=2) + '\n')
+          print('Preserved additional main director IDs:', len(current['directors']) - before)
+          PY
       - name: Verify source permissions and director transformation
         run: |
           python scripts/check_sources.py

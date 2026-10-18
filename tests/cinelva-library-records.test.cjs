@@ -133,3 +133,22 @@ test('Gregorian leap dates are validated correctly for years 1–99 and century 
  assert.equal(api.all()[0].watchedAt,'0096-02-29');
  assert.throws(()=>api.save({...movie,id:98},0,'0099-02-29'));
 });
+
+test('an explicit film identity collision is rejected before changing existing saved data',()=>{
+ for(const field of ['tmdbId','tmdb_id']){
+  const existing={'42':{id:'42',[field]:999,title:'別の保存作品',rating:4,watchedAt:'2024',custom:'keep'}};
+  const {api,data}=setup({},existing);
+  const before=[...data];
+  assert.throws(()=>api.save({id:42,tmdbId:123,title:'新しい作品'},3,null),/別の作品/);
+  assert.throws(()=>api.restore([{id:43,title:'追加作品',rating:3},{id:42,tmdbId:123,title:'衝突作品',rating:3}]),/別の作品/);
+  assert.deepEqual([...data],before);
+ }
+});
+
+test('local-ID-only edits retain the stored explicit film identity',()=>{
+ const {api}=setup({}, {'321':{id:'321',tmdbId:123,title:'保存作品',rating:4,watchedAt:'2024'}});
+ api.save({id:321},4.5);
+ assert.equal(api.all().length,1);
+ assert.equal(api.all()[0].tmdbId,123);
+ assert.equal(api.all()[0].watchedAt,'2024');
+});

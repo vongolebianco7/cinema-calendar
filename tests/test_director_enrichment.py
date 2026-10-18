@@ -66,6 +66,16 @@ class DirectorEnrichmentTests(unittest.TestCase):
         refreshed = self.module.enrich_director(result, profile, '2026-10-18')
         self.assertEqual(refreshed['name_status'], 'transliterated')
 
+    def test_multilingual_han_alias_is_not_mistaken_for_japanese(self):
+        profile = self.profile()
+        profile.update(id=999991, name='Unmapped Person', also_known_as=['里克·罗曼·沃夫'])
+        result = self.module.enrich_director({'id': 999991, 'name': 'Unmapped Person'}, profile, '2026-10-18')
+        self.assertEqual(result['name_status'], 'japanese_unavailable')
+        self.assertEqual(result['name'], 'Unmapped Person')
+        profile['also_known_as'].append('アンマップド・パーソン')
+        translated = self.module.enrich_director({'id': 999991}, profile, '2026-10-18')
+        self.assertEqual(translated['nameJa'], 'アンマップド・パーソン')
+
     def test_snapshot_uses_japanese_labels_and_verified_uncapped_credits(self):
         import json
         directors = json.loads((ROOT / 'data/directors.json').read_text())['directors']

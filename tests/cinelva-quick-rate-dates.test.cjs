@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-function editor(initialDate, existing = true) {
+function editor(initialDate, existing = true, identity = {}) {
   const storage = new Map();
   const context = vm.createContext({ localStorage: {
     getItem: key => storage.get(key) ?? null,
@@ -11,7 +11,7 @@ function editor(initialDate, existing = true) {
   } });
   vm.runInContext(fs.readFileSync('js/cinelva-library-records.js', 'utf8'), context);
   const Records = context.CinelvaLibraryRecords;
-  if (existing) Records.save({ id: 123, title: '日付精度テスト', comment: '元の感想' }, 4, initialDate);
+  if (existing) Records.save({ id: 123, title: '日付精度テスト', comment: '元の感想', ...identity }, 4, initialDate);
   const nodes = new Map();
   const element = id => {
     if (!nodes.has(id)) nodes.set(id, { value: '', textContent: '' });
@@ -33,7 +33,7 @@ function editor(initialDate, existing = true) {
   const actions = source.slice(source.indexOf('function open(movie,'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
   vm.runInContext('let selected;\n' + actions + '\nglobalThis.actions={open,save};', context);
   context.actions.open({ id: 123, title: '日付精度テスト' });
-  return { Records, element, actions: context.actions, dialog: context.dialog };
+  return { Records, element, actions: context.actions, dialog: context.dialog, context };
 }
 
 for (const date of ['2024', '2024-03', null]) {
@@ -73,4 +73,51 @@ test('a new review stores a viewing date only when explicitly selected', () => {
   element('cinelvaRateDate').value = '2024-05-06';
   actions.save();
   assert.equal(Records.all()[0].watchedAt, '2024-05-06');
+});
+
+
+for (const field of ['tmdbId', 'tmdb_id']) {
+  test(`shared editor updates an imported ${field} record without duplicating it`, () => {
+    const { Records, element, actions } = editor('2024', true, { id: 321, [field]: 123 });
+    element('cinelvaRateScore').value = '4.5';
+    actions.save();
+    const rows = Records.all();
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].id, '321');
+    assert.equal(rows[0].watchedAt, '2024');
+    assert.equal(rows[0].rating, 4.5);
+    assert.equal(rows[0].comment, '元の感想');
+  });
+
+  test(`inline scoring updates the imported ${field} record and preserves its date`, () => {
+    const { Records, context } = editor('2024', true, { id: 321, [field]: 123 });
+    Object.assign(context, {
+      id: 123, movie: { id: 123, title: '日付精度テスト' }, button: {},
+      input: { value: '4.5', dataset: {}, setCustomValidity(message) { assert.fail(message); } },
+      prompt: {}, sync() {}, open() {},
+    });
+    const source = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
+    const start = source.indexOf(' input.onchange=e=>');
+    const handler = source.slice(start, source.indexOf('\n const track=', start));
+    vm.runInContext(handler, context);
+    context.input.onchange({ stopPropagation() {} });
+    const rows = Records.all();
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].id, '321');
+    assert.equal(rows[0].rating, 4.5);
+    assert.equal(rows[0].watchedAt, '2024');
+    assert.equal(rows[0].comment, '元の感想');
+  });
+}
+
+
+test('a conflicting local ID never replaces another imported film', () => {
+  const { Records, actions, element } = editor('2024', true, { id: 123, tmdbId: 999 });
+  actions.save();
+  const rows = Records.all();
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].tmdbId, 999);
+  assert.equal(rows[0].rating, 4);
+  assert.equal(rows[0].watchedAt, '2024');
+  assert.match(element('cinelvaRateMessage').textContent, /別の作品/);
 });

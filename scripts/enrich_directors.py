@@ -17,7 +17,8 @@ import urllib.parse
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-JAPANESE = re.compile(r'[\u3040-\u30ff\u3400-\u9fff]')
+JAPANESE = re.compile(r'[ぁ-ゖァ-ヺ\u3400-\u9fff]')
+KANA = re.compile(r'[ぁ-ゖァ-ヺ]')
 EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
 
 
@@ -43,8 +44,10 @@ def enrich_director(old, profile, today, aliases=None):
     aliases = aliases or {}
     old_names = [] if old.get('name_status') == 'transliterated' else [old.get('nameJa'), old.get('name_ja'), old.get('name')]
     candidates = [profile.get('name'), *profile.get('also_known_as', []), *old_names]
-    candidates += [aliases.get(str(name).lower()) for name in candidates if name]
-    japanese = next((name.strip() for name in candidates if isinstance(name, str) and JAPANESE.search(name)), '')
+    # also_known_as is multilingual. Han aliases alone do not establish Japanese.
+    known = next((aliases[str(name).lower()] for name in candidates if name and str(name).lower() in aliases), '')
+    localized = profile.get('name') or ''
+    japanese = known or (localized if JAPANESE.search(localized) else '') or next((name.strip() for name in candidates if isinstance(name, str) and KANA.search(name)), '')
     reading = name_readings().get(str(profile['id']))
     transliterated = False
     if not japanese and reading and reading['original_name'] in [old.get('name'), old.get('original_name'), profile.get('name'), *profile.get('also_known_as', [])]:
@@ -140,6 +143,9 @@ def main():
     for identifier, director in directors.items():
         reading = name_readings().get(identifier)
         previous_name = director.get('name')
+        known_names = set(names.values())
+        if director.get('name_status') == 'japanese' and not KANA.search(previous_name or '') and previous_name != director.get('original_name') and previous_name not in known_names:
+            director.update(name=director.get('original_name') or previous_name, name_status='japanese_unavailable', nameJa='')
         if director.get('name_status') == 'japanese_unavailable' and reading and reading['original_name'] in [previous_name, director.get('original_name')]:
             director.update(name=reading['nameJa'], nameJa=reading['nameJa'], name_status='transliterated')
             director['also_known_as'] = list(dict.fromkeys([*director.get('also_known_as', []), previous_name]))

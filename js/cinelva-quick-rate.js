@@ -20,12 +20,27 @@ style.textContent=`
 style.textContent+=`\n/* Compact overrides must follow the base dialog declarations. */\n.cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}\n.cinelva-rate-inner{padding:14px;gap:9px}\n.cinelva-rate-inner textarea{min-height:52px}\n`;
 style.textContent+=`\n.cinelva-score-track{position:relative;display:flex;align-items:center;flex:1;min-width:0;height:32px}.cinelva-score-track::before{content:'';pointer-events:none;position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);height:13px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(10% - 1px),#ffffff65 calc(10% - 1px),#ffffff65 10%);opacity:.8}.cinelva-score-track input{position:relative;z-index:1}.cinelva-inline-score input::-webkit-slider-thumb{width:22px;height:22px;margin-top:-8.5px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}.cinelva-inline-score input::-moz-range-thumb{width:20px;height:20px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}\n`;style.textContent+=`\n.cinelva-rate-button{display:inline-grid;place-items:center;min-width:40px;width:40px;height:40px;padding:0;border-radius:50%;font-size:21px;background:#ffffff0d;color:#eae4d6;border-color:#ffffff38;transition:all .18s}.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#e7b94420;border-color:#e7b944}.cinelva-rate-button.is-watched{color:#f3c84e;border-color:#e7b94488}.cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;width:40px;margin:6px 8px}.cinelva-rate-dialog{background:#161719;border:1px solid #ffffff24;border-radius:18px;box-shadow:0 20px 70px #000b}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{border-radius:10px;background:#232427;border-color:#ffffff28}.cinelva-rate-actions button{border-radius:999px}.cinelva-review-score output{color:#f3c84e}.cinelva-review-header button{border-radius:50%}.cinelva-review-header button:hover{background:#ffffff16}\n`;document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
-dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-row"><label>▦ 鑑賞日<input aria-label="鑑賞日をカレンダーから選択" id="cinelvaRateDate" type="date"></label><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label></div><label id="cinelvaRateVenueRow" hidden>映画館・サービス<input id="cinelvaRateVenue" maxlength="120" list="cinelvaRateVenueOptions" placeholder="名称を選択・入力"><datalist id="cinelvaRateVenueOptions"><option value="TOHOシネマズ"><option value="イオンシネマ"><option value="109シネマズ"><option value="MOVIX"><option value="T・ジョイ"><option value="ユナイテッド・シネマ"><option value="Netflix"><option value="Prime Video"><option value="Disney+"><option value="U-NEXT"><option value="Hulu"><option value="Apple TV+"><option value="Lemino"></datalist></label><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="2"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
+dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>▦ 鑑賞日<input aria-label="鑑賞日" id="cinelvaRateDate" type="date"></label></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
 $('cinelvaRateClose').onclick=()=>dialog.close();
 $('cinelvaRateX').onclick=()=>dialog.close();
-$('cinelvaRatePlace').onchange=()=>{$('cinelvaRateVenueRow').hidden=!$('cinelvaRatePlace').value;};
+const venueOptions={
+ '映画館':['TOHOシネマズ','イオンシネマ','109シネマズ','MOVIX','T・ジョイ','ユナイテッド・シネマ','シネマサンシャイン','109シネマズ','その他の映画館'],
+ '配信':['Netflix','Amazon Prime Video','Disney+','U-NEXT','Hulu','Apple TV+','Lemino','ABEMA','WOWOWオンデマンド','その他の配信'],
+ 'TV':['地上波','BS','CS','その他のTV'],
+ 'その他':['DVD・Blu-ray','機内上映','その他']
+};
+function updateVenueOptions(selectedVenue=''){
+ const method=$('cinelvaRatePlace').value, row=$('cinelvaRateVenueRow'), venue=$('cinelvaRateVenue');
+ row.hidden=!method;
+ venue.replaceChildren();
+ const options=['',...(venueOptions[method]||[])];
+ if(selectedVenue&&!options.includes(selectedVenue))options.push(selectedVenue);
+ for(const item of options){const option=document.createElement('option');option.value=item;option.textContent=item||'選択してください';venue.append(option);}
+ venue.value=selectedVenue||'';
+}
+$('cinelvaRatePlace').onchange=()=>updateVenueOptions();
 $('cinelvaRateScore').oninput=()=>$('cinelvaRateValue').textContent=Number($('cinelvaRateScore').value).toFixed(1);
 function open(movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
@@ -36,8 +51,7 @@ function open(movie) {
  $('cinelvaRateScore').value=existing?.rating??0;
  $('cinelvaRateValue').textContent=Number($('cinelvaRateScore').value).toFixed(1);
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
- $('cinelvaRateVenue').value=existing?.viewingVenue||'';
- $('cinelvaRateVenueRow').hidden=!$('cinelvaRatePlace').value;
+ updateVenueOptions(existing?.viewingVenue||'');
  $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
@@ -503,6 +517,17 @@ style.textContent+=`
 .cinelva-rate-dialog .cinelva-review-row select{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;margin:0!important;height:44px!important;font-size:16px!important}
 .cinelva-rate-dialog .cinelva-rate-actions{display:grid!important;grid-template-columns:1fr 2fr!important;gap:10px!important}
 .cinelva-rate-dialog .cinelva-rate-actions button{min-height:44px!important}
+`;
+style.textContent+=`
+/* Compact date; dependent method + venue selectors in one row. */
+.cinelva-rate-dialog .cinelva-review-date{max-width:190px!important;min-width:0!important}
+.cinelva-rate-dialog .cinelva-review-date label{min-width:0!important}
+.cinelva-rate-dialog .cinelva-review-date input[type=date]{width:100%!important;max-width:190px!important;min-width:0!important;height:38px!important;padding:5px 8px!important;font-size:14px!important;box-sizing:border-box!important}
+.cinelva-rate-dialog .cinelva-review-method{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;align-items:end!important}
+.cinelva-rate-dialog .cinelva-review-method label{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important}
+.cinelva-rate-dialog .cinelva-review-method label[hidden]{display:none!important}
+.cinelva-rate-dialog .cinelva-review-method select{width:100%!important;min-width:0!important;max-width:100%!important;height:42px!important;box-sizing:border-box!important;font-size:14px!important;padding:7px 24px 7px 8px!important}
+.cinelva-rate-dialog #cinelvaRateComment{display:block!important;min-height:94px!important;height:94px!important;line-height:1.5!important;resize:vertical!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

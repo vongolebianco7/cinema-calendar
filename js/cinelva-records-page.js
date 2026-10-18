@@ -166,24 +166,21 @@
         const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
         return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
       });
-      const deferred=[];
+      // A mobile two-column donut cannot fit full Japanese category names on
+      // every wedge. Show a value on sufficiently wide wedges and keep every
+      // complete category/value pair in the color-keyed legend below.
+      // Never draw leader lines without readable text.
       for(const item of labels){
-        const size=4.5,radial=36,arc=2*Math.PI*radial*item.fraction;
-        const width=Math.max(measure(item.name,size),measure(item.value,size));
-        const x=50+radial*Math.cos(item.angle),y=50+radial*Math.sin(item.angle);
-        // Arc-length and actual text width are both required. Keep labels within
-        // a safe ring (r=29..46), with sufficient vertical room for two lines.
-        const angularWidth=width/radial;
-        const room=item.fraction*2*Math.PI;
-        const safe=room>angularWidth+0.17 && width<=19 && item.fraction>=.12 &&
-          x-width/2>=4 && x+width/2<=96 && y>=12 && y<=82;
-        if(safe)svg.append(svgText(x,y-2,[item.name,item.value],size));
-        else deferred.push(item);
+        const radial=37;
+        const x=50+radial*Math.cos(item.angle);
+        const y=50+radial*Math.sin(item.angle);
+        const size=5.2;
+        const width=measure(item.value,size);
+        const availableArc=2*Math.PI*radial*item.fraction;
+        const fits=item.fraction>=.13 && availableArc>=width+5 &&
+          x-width/2>=7 && x+width/2<=93 && y>=10 && y<=90;
+        if(fits)svg.append(svgText(x,y+size*.32,[item.value],size));
       }
-      // Do not draw orphan leader lines. Small/long categories remain in the
-      // color-keyed legend, where their full names and values are readable.
-      // On a 2-column phone layout the available SVG canvas is too narrow
-      // to place long external callouts without crossing chart boundaries.
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
       donut.append(center);

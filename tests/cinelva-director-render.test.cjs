@@ -219,3 +219,21 @@ test('kana variants in sourced credit names retain every directed film', () => {
   row.listeners.click();
   assert.match(detail.innerHTML,/1 \\/ 12本 鑑賞済み/);
 });
+
+test('TMDB runtime-unverified shorts do not leak into director feature count', () => {
+  const long = { id: 7100, title:'長編', director:'Other Director', source:'tmdb', job:'Director', runtime:110, rating:4 };
+  const unknown = { id: 7101, title:'短編らしい作品', director:'Other Director', source:'tmdb', job:'Director' };
+  const short = { id: 7102, title:'短編', director:'Other Director', source:'tmdb', job:'Director', runtime:19 };
+  const {row,detail}=render({records:[long],works:[long,unknown,short],name:'Other Director'});
+  assert.match(row.innerHTML,/1\\/1本/);
+  row.listeners.click();
+  assert.doesNotMatch(detail.innerHTML,/短編らしい作品|短編/);
+});
+
+test('verified TMDB feature remains after unknown-runtime credits are filtered', () => {
+  const watched={id:7110,title:'鑑賞した長編',director:'Other Director',rating:4,runtime:125};
+  const known={...watched,source:'tmdb',job:'Director'};
+  const unknown={id:7111,title:'未確認作品',source:'tmdb',director:'Other Director',job:'Director'};
+  const {row}=render({records:[watched],works:[known,unknown],name:'Other Director'});
+  assert.match(row.innerHTML,/1\\/1本/);
+});

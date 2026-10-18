@@ -65,8 +65,9 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
-    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
+    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];
     function renderDonut(id,entries,multi=false){
+      const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
       const visible=all.slice(0,7),other=all.slice(7).reduce((sum,item)=>sum+item[1],0);

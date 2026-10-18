@@ -462,6 +462,13 @@
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+progress+'</strong>'+progressTrack+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+biography+'</div></div>'+
         '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)),group.name)).join('')+'</div>'+
         '<p class="director-coverage-note">'+coverageNote+(sourceUrl?' <a href="'+escapeHTML(sourceUrl)+'" target="_blank" rel="noopener noreferrer">監督の出典情報</a>':'')+'</p>';
+      const close=document.createElement('button');
+      close.type='button';
+      close.className='director-filmography-close';
+      close.textContent='✕ 閉じる';
+      close.setAttribute('aria-label',group.name+'の作品一覧を閉じる');
+      close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});
+      detail.prepend(close);
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };

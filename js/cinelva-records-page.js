@@ -353,13 +353,25 @@
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
     const canonical=name=>normalizeName(directorJapanese(name)).replace(/[・･.．\s\u3000]/g,'').replace(/ヴ/g,'ブ').replace(/ィ/g,'イ').replace(/ェ/g,'エ').replace(/ー/g,'');
+    // A one-character difference is not sufficient evidence to merge people.
+    // Prefer the stable sourced TMDB person ID; reject ambiguous aliases.
     const knownByName=new Map();
+    const ambiguousNames=new Set();
     for(const d of knownDirectors)for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name,d.original_name,...(d.also_known_as||[])]){
-      if(alias)knownByName.set(canonical(alias),d);
+      if(!alias)continue;
+      const key=canonical(alias);
+      if(knownByName.has(key)&&String(knownByName.get(key).id)!==String(d.id))ambiguousNames.add(key);
+      else knownByName.set(key,d);
     }
+    for(const key of ambiguousNames)knownByName.delete(key);
+    const resolveDirector=name=>knownByName.get(canonical(name));
+    const directorIdentity=name=>{
+      const found=resolveDirector(name);
+      return found?'tmdb-person:'+found.id:'name:'+canonical(name);
+    };
     const filmIdentity=movie=>String(movie.tmdbId??movie.tmdb_id??movie.id);
     const movieById=new Map(state.movies.map(movie=>[filmIdentity(movie),movie]));
-    const directorKey=name=>canonical(name);
+    const directorKey=name=>directorIdentity(name);
     for(const record of ratedMovies().filter(item=>Number(item.rating)>0)){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
@@ -377,7 +389,7 @@
     host.replaceChildren();works.replaceChildren();
     // Director selection is based on the user's reviewed movies only; catalog-only directors stay hidden.
     const filmographyFor=group=>{
-      const director=knownByName.get(directorKey(group.name));
+      const director=resolveDirector(group.name);
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
       const all=new Map();
       for(const work of director?.works||[]){const id=filmIdentity(work),combined={...work,...(movieById.get(id)||{}),id};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(id,combined);}

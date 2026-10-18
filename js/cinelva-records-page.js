@@ -255,19 +255,21 @@
     $('awardFilms').innerHTML=cell?awardHeading+awardEntries.map(entry=>`<article class="panel"><strong>${escapeHTML(entry.title)}</strong><p><span class="award-watch-state ${entry.watched?'is-watched':'is-unwatched'}">${entry.watched?'✓ 鑑賞済み':entry.id?'○ 未鑑賞':'? 鑑賞状況未確認'}</span> · 授賞年 ${entry.awardYears.join('・')}</p><p class="hint">${escapeHTML(entry.categories.join('・'))}</p>${entry.id?`<button class="button" data-award-film="${escapeHTML(entry.id)}">${entry.watched?'記録を編集':'鑑賞を記録'}</button>`:''}${entry.sources.map(url=>` <a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">受賞の出典</a>`).join('')}</article>`).join(''):'<p class="hint" style="grid-column:1/-1">セルを選ぶと収録済みの受賞作品と鑑賞状況を確認できます。作品IDがない受賞記録は照合保留です。</p>';
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+  const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);
+  const directorJapanese = name => directorJapaneseNames.get(String(name||'').trim().toLowerCase()) || name;
   function renderDirectors() {
     const groups=new Map();
     for(const record of recordMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
-      const key=normalizeName(name);
-      if(!groups.has(key))groups.set(key,{name,records:[],ids:new Set()});
+      const displayName=directorJapanese(name),key=normalizeName(displayName);
+      if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
     }
     const normalizeDirector=name=>{
       const source=Object.values(state.directors).find(d=>normalizeName(d.name)===normalizeName(name)||normalizeName(d.nameJa)===normalizeName(name)||normalizeName(d.japanese_name)===normalizeName(name));
-      return source?.nameJa||source?.japanese_name||source?.name_ja||name;
+      return source?.nameJa||source?.japanese_name||source?.name_ja||directorJapanese(name);
     };
     const sorted=[...groups.values()].sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
     const host=$('directorTimeline');host.replaceChildren();$('directorWorks').replaceChildren();
@@ -288,7 +290,7 @@
         chart.querySelectorAll('.director-bar-row').forEach(el=>{el.classList.remove('active');el.setAttribute('aria-expanded','false');});
         if(active){works.replaceChildren();return;}
         row.classList.add('active');row.setAttribute('aria-expanded','true');
-        const director=Object.values(state.directors).find(d=>normalizeName(d.name)===normalizeName(group.name));
+        const director=Object.values(state.directors).find(d=>normalizeName(directorJapanese(d.name))===normalizeName(group.name));
         const known=Array.isArray(director?.works)?director.works:[];
         const watchedIds=new Set(group.records.map(x=>String(x.id)));
         const unseen=known.filter(x=>!watchedIds.has(String(x.id)));

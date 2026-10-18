@@ -63,7 +63,7 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
-    const palette=['#85a8c5','#c9a4b9','#d1b581','#8db6a8','#a8a0ce','#ca9e83','#9aaab4','#c5b9a0','#9fa6d8','#b7a5a2'];
+    const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
     function renderDonut(id,entries,multi=false){
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
@@ -204,7 +204,7 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+(count>=10?'👑 ':'')+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
@@ -248,7 +248,9 @@
     $('awardCoverage').textContent=`作品数を表示しています。収録は一部の主要賞と確認可能な授賞記録に限られます。${hasRate?'対象作品を全件確認できたセルのみ達成率を表示できます。':'対象作品の全件性を確認できないため達成率は表示しません。'} — は受賞データ未収録、0は収録範囲での鑑賞0本です。`;
     $('awardMatrix').innerHTML=`<table><thead><tr><th>映画賞 · 授賞年</th>${decades.map(d=>`<th>${d}年代</th>`).join('')}</tr></thead><tbody>${data.organizations.map(name=>`<tr><th>${escapeHTML(name)}</th>${decades.map(decade=>{const cell=data.cells[`${name}:${decade}`];if(!cell)return '<td><span class="hint" aria-label="受賞データ未収録">—</span></td>';const value=rate?(cell.completionRate===null?'—':`${Math.round(cell.completionRate*100)}%`):cell.count;return `<td><button class="award-cell heat-${rate?Math.ceil((cell.completionRate||0)*4):Math.min(4,cell.count)}" data-award-cell="${escapeHTML(name)}|${decade}" aria-label="${escapeHTML(name)}、${decade}年代、鑑賞済み受賞作品${cell.count}本">${value}</button></td>`;}).join('')}</tr>`).join('')}</tbody></table>`;
     const cell=state.awardSelection&&data.cells[`${state.awardSelection.organization}:${state.awardSelection.decade}`];
-    $('awardFilms').innerHTML=cell?cell.entries.map(entry=>`<article class="panel"><strong>${escapeHTML(entry.title)}</strong><p>${entry.watched?'鑑賞済み':entry.id?'未鑑賞':'作品ID未照合・判定保留'} · 授賞年 ${entry.awardYears.join('・')}</p><p class="hint">${escapeHTML(entry.categories.join('・'))}</p>${entry.id?`<button class="button" data-award-film="${escapeHTML(entry.id)}">${entry.watched?'記録を編集':'鑑賞を記録'}</button>`:''}${entry.sources.map(url=>` <a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">受賞の出典</a>`).join('')}</article>`).join(''):'<p class="hint" style="grid-column:1/-1">セルを選ぶと収録済みの受賞作品と鑑賞状況を確認できます。作品IDがない受賞記録は照合保留です。</p>';
+    const awardHeading=state.awardSelection?'<div class="award-detail-head"><h3>'+escapeHTML(state.awardSelection.organization)+'・'+state.awardSelection.decade+'年代</h3><p>受賞作品の鑑賞状況</p></div>':'';
+    const awardEntries=cell?[...cell.entries].sort((a,b)=>Number(a.watched)-Number(b.watched)):null;
+    $('awardFilms').innerHTML=cell?awardHeading+awardEntries.map(entry=>`<article class="panel"><strong>${escapeHTML(entry.title)}</strong><p><span class="award-watch-state ${entry.watched?'is-watched':'is-unwatched'}">${entry.watched?'✓ 鑑賞済み':entry.id?'○ 未鑑賞':'? 鑑賞状況未確認'}</span> · 授賞年 ${entry.awardYears.join('・')}</p><p class="hint">${escapeHTML(entry.categories.join('・'))}</p>${entry.id?`<button class="button" data-award-film="${escapeHTML(entry.id)}">${entry.watched?'記録を編集':'鑑賞を記録'}</button>`:''}${entry.sources.map(url=>` <a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">受賞の出典</a>`).join('')}</article>`).join(''):'<p class="hint" style="grid-column:1/-1">セルを選ぶと収録済みの受賞作品と鑑賞状況を確認できます。作品IDがない受賞記録は照合保留です。</p>';
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   function renderDirectors() {

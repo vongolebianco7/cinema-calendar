@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:07:53+09:00",
+  "updated_at": "2026-10-19T04:12:33+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
+  "base_sha": "04d4b3f631d6311bfe6f5ff2a5ad9c8c2003ddd0",
   "branch": "fix/search-film-release-date-20261019",
-  "head_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
+  "head_sha": "ea41e33a85a10dafbbc90e18e91bcd49ac5bc3c2",
   "pull_request": null,
   "work_items": [
     {
@@ -489,6 +489,12 @@
       "ci": "PR #392 merged as 139677684b047220cd78d667ef74f75c8c9dcf20; final head995e1013 all14check-runs succeeded. Imported record IDs, date/comment/unknown fields preserved; conflicting film overwrites rejected."
     },
     {
+      "id": "MY-DIRECTOR-COMPLETE",
+      "title": "Sourced director names, uncapped credits, profiles, accurate watched progress",
+      "status": "in_progress",
+      "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge."
+    },
+    {
       "id": "P0-DEPLOYMENT-BOUNDARIES",
       "title": "Make deployment change detection independent of working directory",
       "status": "merged",
@@ -504,6 +510,27 @@
     }
   ],
   "verification": [
+    {
+      "command": "Independent focused code review and locale-alias regression",
+      "result": "important_finding_fixed_verified",
+      "details": "Han-only multilingual aliases no longer qualify as Japanese. KnownJPmap/localizedprofile/kana aliases take priority.44 affected alias selections replaced with explicit retained-original kana readings, total244transliterated. Independent reviewer verified fix;8enrichment tests pass. Browser expectation now checks2watched films(revised+zero) while imported canonical film remainsunique. Latest main safeimported edits are preserved."
+    },
+    {
+      "check": "2026-10-18 cross-thread acceptance audit",
+      "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
+    },
+    {
+      "check": "Mergedsourceacceptance21:12JST",
+      "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
+    },
+    {
+      "check": "PR390integration",
+      "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
+    },
+    {
+      "check": "Canonical production source smoke",
+      "result": "Vercel READY production dadc773a79ad6175bb02c79d1f5e3c6a795fe978, alias cinelva.vercel.app confirmed. Six actual canonical URLs returned200 and exact main bytes: index, MyCinelva, search, quick-rate, library records, legacy redirect. This is HTTP/source evidence, not browser interaction or real-iPhone acceptance."
+    },
     {
       "command": "python scripts/quality_gate.py",
       "result": "passed_on_work_branch",
@@ -780,28 +807,16 @@
       "details": "116 active Node tests pass; all quality checks pass. Record-search regressions reproduced before fix. #384 introduced missing ratedMovies in isolated test harness; real production selector is now executed with rated fixtures. Local browser launch is blocked by missing Playwright executable; existing frontend CI covers Chromium/WebKit at 390px with added search assertions."
     },
     {
-      "check": "2026-10-18 cross-thread acceptance audit",
-      "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
-    },
-    {
-      "check": "Mergedsourceacceptance21:12JST",
-      "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
-    },
-    {
-      "check": "PR390integration",
-      "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
-    },
-    {
-      "check": "Canonical production source smoke",
-      "result": "Vercel READY production dadc773a79ad6175bb02c79d1f5e3c6a795fe978, alias cinelva.vercel.app confirmed. Six actual canonical URLs returned200 and exact main bytes: index, MyCinelva, search, quick-rate, library records, legacy redirect. This is HTTP/source evidence, not browser interaction or real-iPhone acceptance."
-    },
-    {
       "check": "Canonical production browser smoke on dadc773",
       "result": "Cloud Chrome actual MyCinelva empty state -> search Interstellar -> detail -> shared review dialog verified. Only close/save controls; no next action. Did not save test data. Discovered official streaming date2026-09-01 misrendered as film year and detail lookup skipped; source fix now under review. Extension-metadata errors observed are chrome-extension URLs, not app errors. Real iPhone remains unverified."
     },
     {
       "check": "Follow-up deployment schema and canonical identity safety",
       "result": "Long ignoreCommand reproduced provider256char validationfailure; new5th regression firstfails thenpasses with shortcommand. All9 focused real-Git/runtime tests pass; quality144Node/fullPython125pass. Focused review identified URL/offlinereview identitygap, nowcorrected and covered by actualfunctions."
+    },
+    {
+      "check": "Concurrent #391 integration",
+      "result": "Director profiles merged04d4b3f while#394CIpassed. Only checkpoint conflict; preserve director data/reading/credit behavior and auto-merged browser assertions. Re-run combined gate and CI before merge. Combined quality gate146Node/fullPython133pass; fresh CI required on merged tree."
     }
   ],
   "deployment": {
@@ -810,12 +825,14 @@
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
-    "last_observed_vercel_production_status": "ERROR",
+    "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-19T04:02:25+09:00",
     "reported_restriction": "0adf128 automatic release rejected because ignoreCommand exceeds256characters. Canonical remains READY dadc773. Follow-up uses short command plus root-anchored script; no manual retry.",
     "next_action": "Observe one automatic release after schema-safe fix passes CI and merges. No manual retry. Verify canonical corrected event date and review identity.",
     "provider_preview_status": "Failed release dpl_9txVt6GMrE5bA6tfJnLyocsgB2rP at0adf128; previous READY dadc773 remains canonical.",
-    "blockers": []
+    "blockers": [],
+    "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
+    "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
   "next_action": "Publish one tested batch: short Vercel ignore script plus search event date/identity fix. Require focused review and fresh Chromium/WebKit CI; merge green then verify automatic deployment/canonical interaction. Preserve independent#391 work.",

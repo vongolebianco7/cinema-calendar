@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-function render({ records, works, movies = works, name = 'Steven Spielberg' }) {
+function render({ records, works, movies = works, name = 'Steven Spielberg', profile = {} }) {
   function element() {
     const node = { children: [], className: '', innerHTML: '', listeners: {},
       replaceChildren() { this.children = []; },
@@ -22,7 +22,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg' }) {
   }
   const elements = { directorTimeline: element(), directorWorks: element() };
   const context = {
-    state: { records, movies, directors: { one: { name, works } } },
+    state: { records, movies, directors: { one: { name, works, ...profile } } },
     recordMovies: () => records,
     enriched: movie => movie,
     escapeHTML: value => String(value ?? ''),
@@ -99,6 +99,32 @@ test('zero-score films do not expose a director under the current reviewed-only 
   const { row, host } = render({ records: [film], works: [film], name: 'Other Director' });
   assert.equal(row, undefined);
   assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
+});
+
+test('a reviewed director includes every watched feature in progress', () => {
+  const reviewed = { id: 20, title: 'レビュー済み', director: 'Other Director', year: 2020, runtime: 120, rating: 4 };
+  const unrated = { id: 21, title: '鑑賞済み評価なし', director: 'Other Director', year: 2021, runtime: 120, rating: 0 };
+  const unseen = { id: 22, title: '未鑑賞', director: 'Other Director', year: 2022, runtime: 120 };
+  const { row, detail } = render({ records: [reviewed, unrated], works: [reviewed, unrated, unseen], name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>2\/3本<\/strong>/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /2 \/ 3本 鑑賞済み/);
+});
+
+test('Japanese aliases connect original-name records to sourced profile and full credits', () => {
+  const film = { id: 30, title: '監督作品', director: 'Example Director', year: 2020, rating: 4 };
+  const profile = { nameJa: 'エグザンプル・ディレクター', original_name: 'Example Director', also_known_as: ['Example D.'], name_status: 'transliterated', profile_path: '/director.jpg', birthday: '1970-01-02', biography_ja: '日本語の紹介', source_url: 'https://www.themoviedb.org/person/1', coverage: { truncated: false } };
+  const { row, detail } = render({ records: [film], works: [film], name: 'エグザンプル・ディレクター', profile });
+  assert.match(row.innerHTML, /エグザンプル・ディレクター/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /https:\/\/image.tmdb.org\/t\/p\/w185\/director.jpg/);
+  assert.match(detail.innerHTML, /1970-01-02/);
+  assert.match(detail.innerHTML, /日本語の紹介/);
+  assert.match(detail.innerHTML, /<details class="director-biography"><summary>経歴を読む<\/summary>/);
+  assert.match(detail.innerHTML, /原名：Example Director/);
+  assert.match(detail.innerHTML, /原名からのカタカナ表記/);
+  assert.match(detail.innerHTML, /本数による切り捨てなし/);
+  assert.match(detail.innerHTML, /監督の出典情報/);
 });
 
 test('an imported local ID and its TMDB film count as one watched director work', () => {

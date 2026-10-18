@@ -377,8 +377,19 @@
     const detail=document.createElement('div');detail.className='director-filmography';
     detail.id='directorFilmography';
     host.append(list,detail);
+    const directorFilmYear = movie => {
+      const candidates=[movie.year,movie.release_year,movie.releaseYear,movie.release_date,movie.releaseDate,movie.first_air_date,movie.date,movie.premiere];
+      for(const candidate of candidates){
+        const match=String(candidate??'').match(/^(18|19|20)\d{2}/);
+        if(match)return Number(match[0]);
+      }
+      const title=String(movie.original_title||movie.originalTitle||movie.title||movie.name||'').normalize('NFKC').trim();
+      const director=String(movie.director||movie.director_name||'').toLowerCase();
+      if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)||directorKey(group.name)===directorKey('Steven Spielberg')))return 1971;
+      return null;
+    };
     const filmTile=(movie,watched)=>{
-      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=Number(movie.year)||Number(String(movie.release_date||'').slice(0,4))||null;
+      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=directorFilmYear(movie);
       const rating=Number(movie.rating||0);
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
@@ -392,7 +403,7 @@
       const all=new Map();
       for(const work of director?.works||[]){const combined={...work,...(movieById.get(String(work.id))||{})};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(String(work.id),combined);}
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
-      const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
+      const films=[...all.values()].sort((a,b)=>(directorFilmYear(a)||9999)-(directorFilmYear(b)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const watchedCount=films.filter(movie=>watched.has(String(movie.id))).length;
       const unseen=films.length-watchedCount;
       const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';

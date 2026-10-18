@@ -213,7 +213,8 @@
       const achieved=count>=5;
       const tone=achieved?'gold-month':count===0?'empty-month':count>=3?'mid-month':'light-month';
       const depth=Math.min(1,count/12);
-      return '<section class="cy-month '+tone+'" style="--cy-depth:'+depth.toFixed(3)+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+(achieved?medal:'')+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      const mix=Math.round((achieved?20:10)+depth*(achieved?65:80));
+      return '<section class="cy-month '+tone+'" style="--cy-depth:'+depth.toFixed(3)+';--cy-mix:'+mix+'%" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+(achieved?medal:'')+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }

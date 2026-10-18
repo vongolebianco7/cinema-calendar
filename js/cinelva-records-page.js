@@ -448,8 +448,8 @@
       const scores=[...unique.values()].map(entry=>ratingById.get(String(entry.id||entry.title))).filter(v=>Number.isFinite(v)&&v>0);
       return {name,watched:unique.size,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
     }).filter(row=>row.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
-    let awardAffinityHost=$('awardAffinity');
-    if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='awardAffinity';awardAffinityHost.className='cinelva-affinity';$('awardSummary')?.insertAdjacentElement('afterend',awardAffinityHost);}
+    let awardAffinityHost=$('csAwardAffinity');
+    if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
     awardAffinityHost.innerHTML='<h3>相性の良い映画賞</h3><p class="cinelva-affinity-note">鑑賞した受賞作品の評価から集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
       (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,8).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(awardDisplayName(row.name))+'</strong><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
@@ -699,7 +699,7 @@
     affinityPanel.className='cinelva-affinity';
     affinityPanel.innerHTML='<h3>高評価の監督</h3><p class="cinelva-affinity-note">平均評価・評価本数・4点以上の本数。評価3本未満は順位を補正します。</p>'+
       (affinity.length?'<div class="cinelva-affinity-list">'+affinity.slice(0,8).map((group,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(group.name)+'</strong><span class="cinelva-affinity-meta">★ '+group.average.toFixed(2)+' · '+group.scored+'本評価 · 4点以上 '+group.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">監督別の評価記録がありません。</p>');
-    host.append(affinityPanel);
+    $('csDirectorAffinity')?.replaceChildren(affinityPanel);
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';
@@ -843,7 +843,7 @@
     canvas._points=hit; $('worldStatus').textContent=`${data.length}作品を表示。ドラッグで回転、ピンチまたはスクロールで拡大縮小できます。点の色はジャンル、点の大きさは評価を表します。${unknownCountryCount?'製作国の緯度が未確認の'+unknownCountryCount+'作品は中央の基準面に配置しています。':''}`;
     $('worldLegend').innerHTML='<span class="chip">灰色：ジャンル未分類</span>'+Insights.GENRE_TAXONOMY.map((genre,index)=>`<span class="chip" style="border-color:${GENRE_COLORS[index]};color:${GENRE_COLORS[index]}">${escapeHTML(genre)}</span>`).join('');
   }
-  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); if(!$('awardsView').hidden)renderAwards(); if(!$('worldView').hidden)drawWorld(); if(!$('directorsView').hidden)renderDirectors(); }
+  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); renderAwards(); if(!$('worldView').hidden)drawWorld(); renderDirectors(); }
   async function searchMovies(query) {
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];

@@ -127,11 +127,12 @@
   function card(movie) {
     return `<article class="movie" data-record-card="${escapeHTML(movie.id)}">${posterHTML(movie)}<strong>${escapeHTML(movie.title)}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small><small class="score ${Number(movie.rating)>=4?'high-rating':''}">★ ${Number(movie.rating ?? 0).toFixed(1)}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-actions"><button data-edit="${escapeHTML(movie.id)}">編集</button><button data-delete="${escapeHTML(movie.id)}">削除</button></div></article>`;
   }
+  const normalizeRecordSearch = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   function renderList() {
-    const query = $('recordSearch').value.trim().toLocaleLowerCase();
+    const query = normalizeRecordSearch($('recordSearch').value);
     const year = $('recordYear').value;
     const sort = $('recordSort').value;
-    let rows = recordMovies().map(enriched).filter(item => (!query || `${item.title} ${item.director || ''}`.toLocaleLowerCase().includes(query)) && (year === 'all' || dateOf(item).slice(0, 4) === year));
+    let rows = recordMovies().map(enriched).filter(item => (!query || [item.title, item.original_title, item.originalTitle, item.director].some(value => normalizeRecordSearch(value).includes(query))) && (year === 'all' || dateOf(item).slice(0, 4) === year));
     const userScore=m=>Number(m.vote_average??m.voteAverage??m.tmdbRating??m.score??metadataFor(m.id).vote_average??metadataFor(m.id).score??-1);
     const release=m=>String(m.release_date||m.releaseDate||m.date||m.year||'');
     rows.sort(sort==='userRating'?(a,b)=>userScore(b)-userScore(a)||a.title.localeCompare(b.title,'ja'):sort==='releaseNew'?(a,b)=>release(b).localeCompare(release(a)):sort==='releaseOld'?(a,b)=>release(a).localeCompare(release(b)):sort === 'title' ? (a, b) => a.title.localeCompare(b.title, 'ja') : sort === 'rating' ? (a, b) => (b.rating ?? -1) - (a.rating ?? -1) || dateOf(b).localeCompare(dateOf(a)) : (a, b) => dateOf(b).localeCompare(dateOf(a)) || a.title.localeCompare(b.title, 'ja'));

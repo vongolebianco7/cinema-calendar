@@ -32,7 +32,8 @@ function render({ records, works, movies = works, name = 'Steven Spielberg' }) {
   };
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
-  vm.runInNewContext(directorView + '\nrenderDirectors();', context);
+  const ratedMovies = source.match(/  const ratedMovies = [^\n]+/)[0];
+  vm.runInNewContext(ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
   const [picker, detail] = elements.directorTimeline.children;
   return { row: picker?.children[0], detail, host: elements.directorTimeline };
 }
@@ -49,8 +50,8 @@ test('director picker and filmography exclude watched shorts from the same count
 });
 
 test('director picker applies enriched metadata exclusions to its denominator', () => {
-  const feature = { id: 1, title: '長編作品', director: 'Steven Spielberg', year: 1975, runtime: 120 };
-  const rawWork = { id: 2, title: '形式未確認の作品', year: 1976 };
+  const feature = { id: 1, title: '長編作品', director: 'Steven Spielberg', year: 1975, runtime: 120, rating: 4 };
+  const rawWork = { id: 2, title: '形式未確認の作品', director: 'Steven Spielberg', year: 1976 };
   const { row, detail } = render({ records: [feature], works: [feature, rawWork], movies: [feature, { ...rawWork, runtime: 15 }] });
   assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
   row.listeners.click();
@@ -59,7 +60,7 @@ test('director picker applies enriched metadata exclusions to its denominator', 
 });
 
 test('a different director film named Duel with an unknown year keeps the view operable', () => {
-  const film = { id: 7, title: 'Duel', director: 'Other Director', runtime: 100 };
+  const film = { id: 7, title: 'Duel', director: 'Other Director', runtime: 100, rating: 4 };
   const { row, detail } = render({ records: [film], works: [film], name: 'Other Director' });
   assert.doesNotThrow(() => row.listeners.click());
   assert.match(detail.innerHTML, /年不明/);
@@ -70,4 +71,24 @@ test('catalog-only directors stay hidden until one of their films is reviewed', 
   const { row, host } = render({ records: [], works: [film], name: 'Other Director' });
   assert.equal(row, undefined);
   assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
+});
+
+
+test('unreviewed saved films do not add a director selection', () => {
+  const film = { id: 9, title: '未レビュー作品', director: 'Other Director', year: 2020, rating: null };
+  const { row } = render({ records: [film], works: [film], name: 'Other Director' });
+  assert.equal(row, undefined);
+});
+
+test('filmography excludes missing and conflicting director credits', () => {
+  const film = { id: 10, title: '監督作品', director: 'Other Director', year: 2020, rating: 4 };
+  const works = [film,
+    { id: 11, title: '担当不明の作品', year: 2021 },
+    { id: 12, title: '出演のみの作品', year: 2022, job: 'Actor' },
+    { id: 13, title: '別監督の作品', year: 2023, director: 'Someone Else' },
+  ];
+  const { row, detail } = render({ records: [film], works, name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  row.listeners.click();
+  assert.doesNotMatch(detail.innerHTML, /担当不明|出演のみ|別監督/);
 });

@@ -57,9 +57,20 @@ test('choosing an explicit viewing day replaces a partial date', () => {
   assert.equal(Records.all()[0].watchedAt, '2024-05-06');
 });
 
-test('a new review still defaults to a valid complete viewing day', () => {
+test('a new rating and comment do not invent a viewing day', () => {
   const { Records, element, actions } = editor(null, false);
-  assert.match(element('cinelvaRateDate').value, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(element('cinelvaRateDate').value, '');
+  element('cinelvaRateScore').value = '4.5';
+  element('cinelvaRateComment').value = '日付不明の感想';
   actions.save();
-  assert.equal(Records.all()[0].watchedAt, element('cinelvaRateDate').value);
+  assert.equal(Records.all()[0].watchedAt, null);
+  assert.equal(Records.all()[0].rating, 4.5);
+  assert.equal(Records.all()[0].comment, '日付不明の感想');
+});
+
+test('a new review stores a viewing date only when explicitly selected', () => {
+  const { Records, element, actions } = editor(null, false);
+  element('cinelvaRateDate').value = '2024-05-06';
+  actions.save();
+  assert.equal(Records.all()[0].watchedAt, '2024-05-06');
 });

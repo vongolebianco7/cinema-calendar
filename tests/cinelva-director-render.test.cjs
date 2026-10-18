@@ -167,3 +167,23 @@ test('missing director catalog never presents saved records as the filmography t
   assert.match(detail.innerHTML, /総数未取得/);
   assert.doesNotMatch(detail.innerHTML, /director-progress-track|1 \/ 1本|収録作品 1本/);
 });
+
+test('ヴ and ブ spelling variants resolve to one sourced director identity', () => {
+  const film = { id: 501, title: '監督作品', director: 'スティーヴン・スピルバーグ', year: 2001, runtime: 120, rating: 4 };
+  const { row, detail } = render({
+    records: [film],
+    works: [{ ...film, director: 'スティーブン・スピルバーグ', rating: undefined }],
+    name: 'スティーブン・スピルバーグ',
+    profile: { id: 190, nameJa: 'スティーブン・スピルバーグ', original_name: 'Steven Spielberg', also_known_as: ['スティーヴン・スピルバーグ'] },
+  });
+  assert.match(row.innerHTML, /1\\/1本/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /1 \\/ 1本 鑑賞済み/);
+});
+
+test('one-character name difference does not merge distinct unsourced people', () => {
+  const first = { id: 601, title: '作品A', director: '山田太郎', runtime: 120, rating: 4 };
+  const second = { id: 602, title: '作品B', director: '山田次郎', runtime: 120, rating: 4 };
+  const { host } = render({ records: [first, second], works: [first], name: '山田太郎' });
+  assert.equal(host.children[0].children.length, 2);
+});

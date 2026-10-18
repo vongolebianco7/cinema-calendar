@@ -403,7 +403,14 @@
       const director=resolveDirector(group.name);
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
       const all=new Map();
-      for(const work of director?.works||[]){const id=filmIdentity(work),combined={...work,...(movieById.get(id)||{}),id};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(id,combined);}
+      for(const work of director?.works||[]){
+        // Sourced director credits are authoritative. General movie metadata may
+        // have another lead director or missing runtime and must not veto them.
+        if(!isDirectorCredit(work,group.name))continue;
+        const id=filmIdentity(work), metadata=movieById.get(id)||{};
+        const combined={...metadata,...work,id};
+        all.set(id,combined);
+      }
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
       const films=[...all.values()];
       // Counts are derived from distinct, verified director credits, not arbitrary minimums per person.

@@ -269,6 +269,19 @@ style.textContent+=`
 .cinelva-inline-value{min-width:3.6em;font-size:11px;white-space:nowrap}
 .cinelva-inline-score:not(.is-watched) .cinelva-inline-value{color:#b9b9b9}
 `;
+style.textContent+=`
+/* Subtle blue-charcoal rating surface: distinct from the movie card without a pill border. */
+.cinelva-rating-controls{
+ background:#292d35!important;border:0!important;border-radius:6px!important;
+ padding:3px 7px!important;margin:4px 0 5px!important;
+ box-sizing:border-box!important;box-shadow:none!important;
+}
+.cinelva-rating-controls>.cinelva-rate-button{color:#dce0e7}
+.cinelva-rating-controls>.cinelva-inline-score{background:transparent!important;border:0!important}
+.cinelva-rating-controls .cinelva-inline-value{color:#dce0e7}
+.cinelva-rating-controls .cinelva-inline-score.is-watched .cinelva-inline-value{color:#f1c44e}
+.cinelva-rating-controls .cinelva-rate-button.is-watched{color:#f1c44e}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

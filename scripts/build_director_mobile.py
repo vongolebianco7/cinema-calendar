@@ -12,7 +12,7 @@ if raw.lstrip()[end:].strip():
     # Repair trailing concurrent-write debris without changing sourced credits.
     print("Repairing trailing invalid content after director JSON document")
     (ROOT / "data/directors.json").write_text(
-        json.dumps(source, ensure_ascii=False, indent=2) + "\\n"
+        json.dumps(source, ensure_ascii=False, indent=2) + chr(10)
     )
 result = {"generated_at": source.get("generated_at"), "directors": {}}
 for key, director in source.get("directors", {}).items():

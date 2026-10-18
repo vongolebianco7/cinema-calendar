@@ -326,15 +326,28 @@
   };
   const isDirectorCredit = (work, directorName) => {
     if (!work || typeof work !== 'object') return false;
-    // Compilation and anthology releases are not individual directorial films.
-    if (/^cinema\s*16\s*[:：]/i.test(String(work.title||work.name||work.original_title||''))) return false;
+    const title=String(work.title||work.name||work.original_title||'').trim();
+    const original=String(work.original_title||'').trim();
+    const titleText=(title+' '+original).toLowerCase();
+    const name=String(directorName||'').toLowerCase();
+    // A director's filmography is feature films only. Exclude shorts, compilations,
+    // anthologies, behind-the-scenes films and clearly unrelated credits.
+    if (/cinema\s*16\b|verity\s+or\s*[:：]?\s*how\s+i\s+learned|short\s*films?|short\s*film\s*collection|shorts\s*collection|anthology|compilation|behind.the.scenes|making.of/i.test(titleText)) return false;
+    const genreText=[...(Array.isArray(work.genres)?work.genres:[]),...(Array.isArray(work.genre_names)?work.genre_names:[])].map(g=>typeof g==='string'?g:g?.name||'').join(' ').toLowerCase();
+    if (/\bshort\b|短編/.test(genreText)) return false;
+    if (work.is_short===true||work.isShort===true||work.short_film===true||work.shortFilm===true) return false;
+    const duration=Number(work.runtime??work.duration??work.length_minutes??work.runtime_minutes);
+    if(Number.isFinite(duration)&&duration>0&&duration<40) return false;
+    const type=String(work.type||work.media_type||work.format||'').toLowerCase();
+    if(/\bshort\b|短編/.test(type)) return false;
     const role=String(work.job||work.role||work.credit_type||work.creditType||'').trim().toLowerCase();
     if(role && !['director','監督'].includes(role)) return false;
     const department=String(work.department||'').trim().toLowerCase();
     if(department && department!=='directing' && department!=='監督') return false;
     const named=work.director||work.director_name||work.directorName;
     if(named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
-    // Director-specific filmographies commonly omit the role field. Missing is not a negative credit.
+    // Do not treat an uncredited appearance/production entry as a directing credit.
+    if(work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;
     return true;
   };
   function renderDirectors() {
@@ -377,8 +390,8 @@
       const director=knownByName.get(directorKey(group.name));
       const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
       const all=new Map();
-      for(const work of director?.works||[]){if(!isDirectorCredit(work,group.name))continue;all.set(String(work.id),{...work,...(movieById.get(String(work.id))||{})});}
-      for(const movie of group.records){if(!isDirectorCredit({...movie,is_director:true},group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
+      for(const work of director?.works||[]){const combined={...work,...(movieById.get(String(work.id))||{})};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(String(work.id),combined);}
+      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
       const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const watchedCount=films.filter(movie=>watched.has(String(movie.id))).length;
       const unseen=films.length-watchedCount;
@@ -395,7 +408,7 @@
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
       const director=knownByName.get(directorKey(group.name));
-      const knownIds=new Set([...(director?.works||[]).filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id)),...group.records.filter(w=>isDirectorCredit({...w,is_director:true},group.name)).map(w=>String(w.id))]);
+      const knownIds=new Set([...(director?.works||[]).filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id)),...group.records.filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id))]);
       row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'/'+knownIds.size+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);

@@ -19,6 +19,10 @@ jobs:
           node-version: '22'
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/cinelva-records-page.js
+          node --check tests/cinelva-mobile-layout.cjs
       - name: Serve checked-out source
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-http.log 2>&1 &

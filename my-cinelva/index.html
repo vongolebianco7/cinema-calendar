@@ -207,7 +207,30 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 #awardsView .award-watch-state{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:700}
 #awardsView .award-watch-state.is-watched{background:#204f47;color:#a9e4cc}
 #awardsView .award-watch-state.is-unwatched{background:#51402a;color:#f5d49a}
-</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style></head>
+</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style><style id="cinelva-calendar-reference-115">
+#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-flow:row!important;gap:16px 12px!important}
+#calendarView #yearHeatmap>.cy-month{position:relative;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1.25;min-width:0;padding:14px 12px 16px!important;border-radius:14px;border:1px solid #aac7db;box-shadow:inset 0 1px 0 #ffffff30;background:linear-gradient(135deg,#6c91af,#a2c8e2);color:#14283b;overflow:hidden}
+#calendarView #yearHeatmap>.cy-month.light-month{background:linear-gradient(140deg,#7194af,#9fc6df)}
+#calendarView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,#84a9c6,#b2d4e9)}
+#calendarView #yearHeatmap>.cy-month.deep-month{background:linear-gradient(140deg,#486a87,#789db9);color:#f4f8ff}
+#calendarView #yearHeatmap>.cy-month.empty-month{background:linear-gradient(140deg,#303b49,#45576a);border-color:#71849a;color:#e0e7f1}
+#calendarView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(135deg,#8d6b37,#b28e4e);border-color:#e5bd69;color:#fff5dd}
+#calendarView #yearHeatmap .cy-month-head{display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:flex-start!important;gap:8px!important;position:relative;flex:1;min-height:0!important;width:100%;padding:0!important;margin:0!important;border:0!important;background:transparent!important;color:inherit!important;text-align:left}
+#calendarView #yearHeatmap .cy-month-name{font-size:14px;font-weight:600;line-height:1.1}
+#calendarView #yearHeatmap .cy-month-total{display:flex;align-items:baseline;gap:4px;font-size:12px;line-height:1}
+#calendarView #yearHeatmap .cy-month-total strong{font-size:34px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
+#calendarView #yearHeatmap .cy-month-total small{font-size:12px;font-weight:500}
+#calendarView #yearHeatmap .cy-medal{position:absolute;right:0;top:0;display:flex;flex-direction:column;align-items:center;gap:1px;color:#ffe8ae;font-size:9px;font-weight:800;letter-spacing:.09em}
+#calendarView #yearHeatmap .cy-medal svg{display:block;width:19px;height:19px}
+#calendarView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-template-rows:repeat(6,minmax(0,auto))!important;gap:3px!important;width:100%;margin-top:12px;flex-shrink:0}
+#calendarView #yearHeatmap .cy-dots>.cy-day,#calendarView #yearHeatmap .cy-dots>.cy-empty{width:100%;aspect-ratio:1.15;min-height:0;border-radius:3px}
+#calendarView #yearHeatmap .cy-dots>.cy-day{background:#243b50!important;opacity:.23}
+#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#f4fbff!important;opacity:1;box-shadow:0 0 5px #f4fbff44}
+#calendarView #yearHeatmap>.gold-month .cy-dots>.cy-day{background:#49361e!important;opacity:.25}
+#calendarView #yearHeatmap>.gold-month .cy-dots>.cy-day.watched{background:#fff1c7!important;opacity:1}
+#calendarView #yearHeatmap>.empty-month .cy-dots>.cy-day{background:#172433!important;opacity:.45}
+@media(max-width:650px){#calendarView #yearHeatmap.cinelva-annual-calendar{gap:10px 7px!important}#calendarView #yearHeatmap>.cy-month{padding:9px 7px 10px!important;border-radius:10px;aspect-ratio:1/1.34}#calendarView #yearHeatmap .cy-month-name{font-size:12px}#calendarView #yearHeatmap .cy-month-total strong{font-size:26px}#calendarView #yearHeatmap .cy-month-total small{font-size:10px}#calendarView #yearHeatmap .cy-dots{gap:2px!important;margin-top:6px}#calendarView #yearHeatmap .cy-medal{font-size:7px}#calendarView #yearHeatmap .cy-medal svg{width:15px;height:15px}}
+</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
@@ -244,7 +267,7 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-114"></script>
+  <script src="../js/cinelva-library-records.js"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-my-104"></script><script src="../js/cinelva-records-page.js?v=20261018-my-115"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

@@ -199,6 +199,7 @@
     const yearSelect=$('calendarYearSelect');
     if(yearSelect){const years=[...new Set([currentYear,state.year,...recordMovies().map(r=>Number(dateOf(r).slice(0,4))).filter(y=>y>=1900&&y<=2100)])].sort((a,b)=>b-a);yearSelect.innerHTML=years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');yearSelect.value=String(state.year);}
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
+    const medal='<span class="cy-medal" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 10-2 11 5-3 5 3-2-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>GOLD</span></span>';
     $('yearHeatmap').innerHTML=monthly.map((count,m)=>{
       const first=new Date(year,m,1).getDay(),length=new Date(year,m+1,0).getDate();
       const cells=Array.from({length:first},()=>'<span class="cy-empty" aria-hidden="true"></span>');
@@ -207,7 +208,9 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+(count>=10?'<span class="cy-medal" title="月10本達成" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h5l4 9-4 3z" fill="#608dc6"/><path d="M14 2h5l-5 12-4-3z" fill="#c0d4eb"/><circle cx="12" cy="15" r="7.5" fill="#d4a441" stroke="#f2d786" stroke-width="1.4"/><circle cx="12" cy="15" r="5.4" fill="none" stroke="#a9782e" stroke-width=".8"/><path d="m12 11 1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#fff0bb"/></svg></span>':'')+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      const achieved=count>=10;
+      const tone=achieved?'gold-month':count===0?'empty-month':count>=7?'deep-month':count>=4?'mid-month':'light-month';
+      return '<section class="cy-month '+tone+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+(achieved?medal:'')+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }

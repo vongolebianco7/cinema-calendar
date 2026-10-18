@@ -432,12 +432,13 @@
     // Director selection is based on the user's reviewed movies only; catalog-only directors stay hidden.
     const filmographyFor=group=>{
       const director=resolveDirector(group.name,group.records);
+      const sourcedName=director?.name||group.name;
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
       const all=new Map();
       for(const work of director?.works||[]){
         // Sourced director credits are authoritative. General movie metadata may
         // have another lead director or missing runtime and must not veto them.
-        if(!isDirectorCredit(work,group.name))continue;
+        if(!isDirectorCredit(work,sourcedName))continue;
         const id=filmIdentity(work), metadata=movieById.get(id)||{};
         const combined={...metadata,...work,id};
         all.set(id,combined);
@@ -445,7 +446,7 @@
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
       const films=[...all.values()];
       // Counts are derived from distinct, verified director credits, not arbitrary minimums per person.
-      const sourcedCount=new Set((director?.works||[]).filter(work=>isDirectorCredit(work,group.name)).map(filmIdentity)).size;
+      const sourcedCount=new Set((director?.works||[]).filter(work=>isDirectorCredit(work,sourcedName)).map(filmIdentity)).size;
       const catalogAvailable=Boolean(director && sourcedCount>0 && director?.coverage?.truncated!==true);
       return {director,watched,films,catalogAvailable,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };

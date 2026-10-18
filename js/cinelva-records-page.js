@@ -370,7 +370,7 @@
     }
     const host=$('directorTimeline'),works=$('directorWorks');
     host.replaceChildren();works.replaceChildren();
-    for(const director of knownDirectors){const name=directorJapanese(director.nameJa||director.japanese_name||director.name_ja||director.name),key=directorKey(name);if(!groups.has(key))groups.set(key,{name,records:[],ids:new Set()});}
+    // Director selection is based on the user's reviewed movies only; catalog-only directors stay hidden.
     const filmographyFor=group=>{
       const director=knownByName.get(directorKey(group.name));
       const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
@@ -380,7 +380,7 @@
       const films=[...all.values()];
       return {director,watched,films,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };
-    const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.films.length).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));
+    const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.watchedCount>0).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';

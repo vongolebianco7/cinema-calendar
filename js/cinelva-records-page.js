@@ -69,15 +69,17 @@
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
     const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#9b79b5','#c2a0d8','#6f558f','#e1c9ed','#b48da4','#86649b','#d2b7dc','#a9a0bf'],['#429d91','#8fc9b8','#2d736f','#b8dfcc','#74b4a1','#588b80','#c9e8db','#83a8a2']];
+    const countryColor=name=>{const n=String(name).normalize('NFKC').toLowerCase();const rules=[[/日本|japan/,'#c34261'],[/アメリカ|united states|usa/,'#3176c7'],[/韓国|south korea|korea/,'#7252bf'],[/イギリス|united kingdom|uk|britain/,'#31528a'],[/フランス|france/,'#26a39b'],[/イタリア|italy/,'#26844e'],[/ドイツ|germany/,'#d2a137'],[/中国|china/,'#bd6033'],[/インド|india/,'#db8535'],[/スペイン|spain/,'#b65e97']];return rules.find(([re])=>re.test(n))?.[1]||null;};
     function renderDonut(id,entries,multi=false){
       const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
       const visible=all.slice(0,7),other=all.slice(7).reduce((sum,item)=>sum+item[1],0);
       if(other)visible.push(['その他',other]);
+      const colors=visible.map(([name],i)=>id==='csCountries'?(countryColor(name)||palette[i%palette.length]):palette[i%palette.length]);
       let cursor=0;
-      const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return palette[i%palette.length]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
-      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+palette[i%palette.length]+'"></i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
+      const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return colors[i]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
+      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+colors[i]+'"></i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
       host.innerHTML='<div class="cs-donut-layout"><div class="cs-donut" role="img" aria-label="'+escapeHTML(visible.map(([name,n])=>name+' '+n+'件').join('、'))+'" style="background:conic-gradient('+stops.join(',')+')"></div><div class="cs-donut-legend">'+legend+'</div>'+(multi?'<div class="cs-donut-note">複数ジャンルを含む登録件数の構成比</div>':'')+'</div>';
     }
     renderDonut('csGenres',genreCounts,true);
@@ -447,7 +449,7 @@
       if(director?.name_status==='transliterated'&&director.original_name){profileDetails.unshift('原名：'+director.original_name);profileDetails.push('日本語名は原名からのカタカナ表記です。');}
       const biography=director?.biography_ja?'<details class="director-biography"><summary>経歴を読む</summary><p>'+escapeHTML(director.biography_ja)+'</p></details>':'';
       const sourceUrl=/^https:\/\/www\.themoviedb\.org\/person\/\d+$/.test(director?.source_url||'')?director.source_url:'';
-      const progress=catalogAvailable?watchedCount+' / '+films.length+'本 鑑賞済み':watchedCount+'本 鑑賞済み · 総数未取得';
+      const progress=catalogAvailable?watchedCount+' / '+films.length+'本 採点済み':watchedCount+'本 鑑賞済み · 総数未取得';
       const progressTrack=catalogAvailable?'<div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>':'';
       const coverageNote=catalogAvailable?'収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。'+(director?.coverage?.truncated===false?'TMDBの監督クレジットから収録（本数による切り捨てなし）。':'※全フィルモグラフィーを保証する数字ではありません。'):'監督作品の一覧は未取得です。鑑賞記録のある作品だけを表示しています。';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+progress+'</strong>'+progressTrack+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+biography+'</div></div>'+
@@ -458,7 +460,7 @@
     };
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
-      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+(group.filmography.catalogAvailable?group.filmography.watchedCount+'/'+group.filmography.films.length+'本':'鑑賞'+group.filmography.watchedCount+'本 · 総数未取得')+'</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+(group.filmography.catalogAvailable?group.filmography.watchedCount+'/'+group.filmography.films.length+'本':'鑑賞'+group.filmography.watchedCount+'本 · 作品総数を確認中')+'</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });

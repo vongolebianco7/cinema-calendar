@@ -429,6 +429,29 @@
     const awardCount=new Set(populated.flatMap(cell=>cell.entries.map(entry=>String(entry.id||entry.title)))).size;
     const activeDecades=decades.filter(decade=>organizations.some(name=>(scopedCell(name,decade)?.count||0)>0)).length;
     const topAward=[...organizations].map(name=>({name,count:decades.reduce((sum,d)=>sum+(scopedCell(name,d)?.count||0),0)})).sort((a,b)=>b.count-a.count)[0];
+    // Personal award affinity: unique watched winners only, never nominations.
+    const ratingById=new Map();
+    for(const record of recordMovies()){
+      const movie=enriched(record),rating=Number(record.rating);
+      if(Number.isFinite(rating)&&rating>0){
+        for(const key of [movie.tmdbId,movie.tmdb_id,movie.id,movie.title].filter(Boolean))
+          ratingById.set(String(key),rating);
+      }
+    }
+    const awardAffinity=organizations.map(name=>{
+      const unique=new Map();
+      for(const decade of decades)for(const entry of scopedCell(name,decade)?.entries||[]){
+        if(!entry.watched)continue;
+        const key=String(entry.id||entry.title);
+        if(!unique.has(key))unique.set(key,entry);
+      }
+      const scores=[...unique.values()].map(entry=>ratingById.get(String(entry.id||entry.title))).filter(v=>Number.isFinite(v)&&v>0);
+      return {name,watched:unique.size,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
+    }).filter(row=>row.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
+    let awardAffinityHost=$('awardAffinity');
+    if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='awardAffinity';awardAffinityHost.className='cinelva-affinity';$('awardSummary')?.insertAdjacentElement('afterend',awardAffinityHost);}
+    awardAffinityHost.innerHTML='<h3>相性の良い映画賞</h3><p class="cinelva-affinity-note">鑑賞した受賞作品の評価から集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
+      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,8).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(awardDisplayName(row.name))+'</strong><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した受賞作品</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>収録対象作品</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最も鑑賞した映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
     $('awardCoverage').textContent=`収録された主要映画賞の受賞作品に基づく記録です。網羅的な受賞歴ではありません。${hasRate?'達成率は対象作品の全件性を確認できた年代のみ表示します。':'対象作品の全件性が確認できないため、達成率は表示できません。'}`;
@@ -666,6 +689,17 @@
       return {director,watched,films,catalogAvailable,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };
     const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.watchedCount>0).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));
+    // Director affinity uses reviewed films only. Unrated watches never
+    // contribute a zero to the mean, and a single review is not over-ranked.
+    const affinity=sorted.map(group=>{
+      const scores=group.records.map(movie=>Number(movie.rating)).filter(v=>Number.isFinite(v)&&v>0);
+      return {...group,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
+    }).filter(group=>group.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
+    const affinityPanel=document.createElement('section');
+    affinityPanel.className='cinelva-affinity';
+    affinityPanel.innerHTML='<h3>高評価の監督</h3><p class="cinelva-affinity-note">平均評価・評価本数・4点以上の本数。評価3本未満は順位を補正します。</p>'+
+      (affinity.length?'<div class="cinelva-affinity-list">'+affinity.slice(0,8).map((group,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(group.name)+'</strong><span class="cinelva-affinity-meta">★ '+group.average.toFixed(2)+' · '+group.scored+'本評価 · 4点以上 '+group.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">監督別の評価記録がありません。</p>');
+    host.append(affinityPanel);
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';

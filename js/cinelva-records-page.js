@@ -150,11 +150,11 @@
       svg.setAttribute('class','cs-donut-numbers');
       svg.setAttribute('viewBox','0 0 100 100');
       svg.setAttribute('aria-hidden','true');
-      const font='"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
+      const font='-apple-system,"Helvetica Neue","Hiragino Sans","Noto Sans JP",sans-serif';
       const ctx=document.createElement('canvas').getContext('2d');
       const measure=(str,size)=>{
         if(!ctx)return Array.from(str).length*size;
-        ctx.font='600 '+size+'px '+font;
+        ctx.font='500 '+size+'px '+font;
         return ctx.measureText(str).width;
       };
       const polar=(r,a)=>[50+r*Math.cos(a),50+r*Math.sin(a)];
@@ -185,10 +185,10 @@
         const text=document.createElementNS(namespace,'text');
         text.setAttribute('x',x.toFixed(2));text.setAttribute('y',(y-size*.52).toFixed(2));
         text.setAttribute('text-anchor','middle');text.setAttribute('font-size',String(size));
-        text.setAttribute('font-family',font);text.setAttribute('font-weight','600');
+        text.setAttribute('font-family',font);text.setAttribute('font-weight','500');
         text.setAttribute('fill','#fff');text.setAttribute('stroke','#161616');
-        text.setAttribute('stroke-width','.3');text.setAttribute('paint-order','stroke');
-        [name,value].forEach((line,i)=>{
+        text.setAttribute('stroke-width','.12');text.setAttribute('paint-order','stroke');
+        [name,value].filter(Boolean).forEach((line,i)=>{
           const t=document.createElementNS(namespace,'tspan');
           t.setAttribute('x',x.toFixed(2));if(i)t.setAttribute('dy',String(size*1.25));
           t.textContent=line;text.append(t);
@@ -197,27 +197,48 @@
       };
       const norm=a=>(a%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
       const occupied=[];
+      // Large sectors keep full labels. Narrow sectors use a shorter name
+      // or the numeric value alone if their arc cannot hold two lines.
       for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
-        if(item.fraction<.105)continue;
-        const size=4.25;
-        const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const w=Math.max(measure(name,size),measure(item.value,size))+1,h=size*2.5;
-        // Test the label centre and avoid other labels. This is deliberately
-        // permissive: the complete legend provides exact values regardless.
+        if(item.fraction<.07)continue;
+        const narrow=item.fraction<.20;
+        const size=narrow?3.65:4.35;
+        const fullName=item.name.length>7?item.name.slice(0,6)+'…':item.name;
+        const shortName=item.name==='アドベンチャー'?'冒険':item.name==='ファンタジー'?'幻想':
+          item.name==='サスペンス'?'サスペンス':fullName;
+        const arc=2*Math.PI*37*item.fraction;
+        const name=narrow?shortName:fullName;
+        const twoLines=arc>=Math.max(measure(name,size),measure(item.value,size))+3;
+        const lines=twoLines?[name,item.value]:[item.value];
+        const w=Math.max(...lines.map(line=>measure(line,size)))+1.4;
+        const h=size*(lines.length===2?2.45:1.3);
         let chosen=null;
         for(let degree=0;degree<360;degree+=2){
           const angle=(degree-90)*Math.PI/180;
           const delta=norm(angle-item.start);
-          if(delta<.08||delta>item.span-.08)continue;
-          for(const radius of [37,39,35,41,33]){
+          if(delta<.07||delta>item.span-.07)continue;
+          for(const radius of [37,39,35,41]){
             const [x,y]=polar(radius,angle);
-            if(x-w/2<2||x+w/2>98||y-h/2<2||y+h/2>98)continue;
-            if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+2&&Math.abs(o.y-y)<(o.h+h)/2+2))continue;
-            const score=Math.abs(radius-37)*.1+Math.abs(delta-item.span/2)/Math.max(item.span,.1);
+            if(x-w/2<3||x+w/2>97||y-h/2<3||y+h/2>97)continue;
+            // Check the label rectangle against the inner and outer ring.
+            // For narrow slices, also check both horizontal edges.
+            const samples=[[x-w/2,y-h/2],[x+w/2,y-h/2],
+              [x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
+            if(samples.some(([px,py])=>{
+              const distance=Math.hypot(px-50,py-50);
+              return distance<29||distance>48;
+            }))continue;
+            if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&
+              Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
+            const score=Math.abs(radius-37)*.1+
+              Math.abs(delta-item.span/2)/Math.max(item.span,.1);
             if(!chosen||score<chosen.score)chosen={x,y,score};
           }
         }
-        if(chosen){svgLabel(chosen.x,chosen.y,name,item.value,size);occupied.push({...chosen,w,h});}
+        if(chosen){
+          svgLabel(chosen.x,chosen.y,lines[0],lines[1]||'',size);
+          occupied.push({...chosen,w,h});
+        }
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

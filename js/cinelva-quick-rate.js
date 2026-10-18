@@ -193,10 +193,10 @@ function attachInlineScore(button, movie) {
  const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
  clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};
  button.before(controls);controls.append(button,wrap,clear);
- // Prevent card-level detail handlers from receiving any interaction in the rating area.
- // Capture phase is needed because some card handlers listen before bubbling.
+ // Bubble-phase isolation allows the slider's own touch handlers to run first.
+ // Capture-phase stopPropagation on controls prevented track touch events entirely.
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
-  controls.addEventListener(type,event=>event.stopPropagation(),true);
+  controls.addEventListener(type,event=>event.stopPropagation());
  }
  controls.addEventListener('keydown',event=>event.stopPropagation());
  sync();

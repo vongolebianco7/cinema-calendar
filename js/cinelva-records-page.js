@@ -272,7 +272,7 @@
   const isDirectorCredit = (work, directorName) => {
     if (!work || typeof work !== 'object') return false;
     // Compilation and anthology releases are not individual directorial films.
-    if (/^(cinema\s*16\s*[:：]|cinema\s*16\b)/i.test(String(work.title||work.name||work.original_title||''))) return false;
+    if (/^cinema\s*16\s*[:：]/i.test(String(work.title||work.name||work.original_title||''))) return false;
     const role=String(work.job||work.role||work.credit_type||work.creditType||'').trim().toLowerCase();
     if(role && !['director','監督'].includes(role)) return false;
     const department=String(work.department||'').trim().toLowerCase();

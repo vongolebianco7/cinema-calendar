@@ -568,7 +568,7 @@
       const close=document.createElement('button');
       close.type='button';
       close.className='director-filmography-close';
-      close.textContent='✕ 閉じる';
+      close.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
       close.setAttribute('aria-label',group.name+'の作品一覧を閉じる');
       close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});
       detail.prepend(close);

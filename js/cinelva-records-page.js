@@ -464,8 +464,8 @@
       const portrait=photo.startsWith('/')?'https://image.tmdb.org/t/p/w185'+photo:photo;
       const photoMarkup=/^https:\/\//.test(portrait)?'<img class="director-pick-photo" src="'+escapeHTML(portrait)+'" alt="" loading="lazy">':'<span class="director-pick-monogram" aria-hidden="true">🎬</span>';
       const seen=group.filmography.watchedCount,total=group.filmography.films.length,complete=group.filmography.catalogAvailable;
-      const percent=complete?Math.min(100,Math.round(seen/Math.max(1,total)*100)):null;
-      row.innerHTML=photoMarkup+'<span class="director-pick-main"><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-pick-caption">採点済み '+seen+'本'+(complete?' / 収録 '+total+'本':'')+'</span><span class="director-pick-meter"><i style="width:'+(percent??0)+'%"></i></span></span><span class="director-pick-total">'+(percent===null?seen+'本':percent+'%')+'</span><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      row.innerHTML='<span class="director-card-photo">'+photoMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
+      row.setAttribute('aria-label',group.name+'、レビュー済み'+seen+'本、監督作品総数'+(complete?total+'本':'未確認'));
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });

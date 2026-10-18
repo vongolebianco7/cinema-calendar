@@ -267,47 +267,54 @@
   const directorJapanese = name => directorJapaneseNames.get(String(name||'').trim().toLowerCase()) || name;
   function renderDirectors() {
     const groups=new Map();
+    const knownDirectors=Object.values(state.directors||{});
+    const directorKey=name=>normalizeName(directorJapanese(name));
     for(const record of recordMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
-      const displayName=directorJapanese(name),key=normalizeName(displayName);
+      const key=directorKey(name),displayName=directorJapanese(name);
       if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
     }
-    const normalizeDirector=name=>{
-      const source=Object.values(state.directors).find(d=>normalizeName(d.name)===normalizeName(name)||normalizeName(d.nameJa)===normalizeName(name)||normalizeName(d.japanese_name)===normalizeName(name));
-      return source?.nameJa||source?.japanese_name||source?.name_ja||directorJapanese(name);
-    };
+    const host=$('directorTimeline'),works=$('directorWorks');
+    host.replaceChildren();works.replaceChildren();
     const sorted=[...groups.values()].sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
-    const host=$('directorTimeline');host.replaceChildren();$('directorWorks').replaceChildren();
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
-    const max=sorted[0].records.length;
-    const chart=document.createElement('div');chart.className='director-bars';
-    const works=$('directorWorks');
-    sorted.forEach((group,index)=>{
-      const row=document.createElement('button');row.type='button';row.className='director-bar-row';
-      row.setAttribute('aria-expanded','false');
-      const name=document.createElement('span');name.className='director-bar-name';name.textContent=normalizeDirector(group.name);
-      const track=document.createElement('span');track.className='director-bar-track';
-      const fill=document.createElement('span');fill.className='director-bar-fill';fill.style.width=(group.records.length/max*100)+'%';track.append(fill);
-      const count=document.createElement('strong');count.className='director-bar-count';count.textContent=group.records.length+'本';
-      row.append(name,track,count);
-      row.onclick=()=>{
-        const active=row.classList.contains('active');
-        chart.querySelectorAll('.director-bar-row').forEach(el=>{el.classList.remove('active');el.setAttribute('aria-expanded','false');});
-        if(active){works.replaceChildren();return;}
-        row.classList.add('active');row.setAttribute('aria-expanded','true');
-        const director=Object.values(state.directors).find(d=>normalizeName(directorJapanese(d.name))===normalizeName(group.name));
-        const known=Array.isArray(director?.works)?director.works:[];
-        const watchedIds=new Set(group.records.map(x=>String(x.id)));
-        const unseen=known.filter(x=>!watchedIds.has(String(x.id)));
-        works.innerHTML='<div class="director-work-group"><h3>鑑賞済み '+group.records.length+'本</h3><div class="record-grid">'+group.records.slice().sort((a,b)=>Number(b.year||0)-Number(a.year||0)).map(card).join('')+'</div></div>'+
-          '<div class="director-work-group"><h3>未鑑賞の収録作品 '+unseen.length+'本</h3>'+(unseen.length?'<div class="director-work-list">'+unseen.map(work=>'<button type="button" class="director-work" data-director-film="'+escapeHTML(work.id)+'">'+escapeHTML(work.title||'作品')+'<small>'+escapeHTML(work.year||'公開年不明')+'</small></button>').join('')+'</div>':'<p class="hint">未鑑賞の収録作品はありません。</p>')+'<p class="hint">※全作品を網羅したリストではなく、収録済み作品に限ります。</p></div>';
-      };
-      chart.append(row);
+    const list=document.createElement('div');list.className='director-picker';
+    const detail=document.createElement('div');detail.className='director-filmography';
+    detail.id='directorFilmography';
+    host.append(list,detail);
+    const filmTile=(movie,watched)=>{
+      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=Number(movie.year)||Number(String(movie.release_date||'').slice(0,4))||null;
+      const rating=Number(movie.rating||0);
+      return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
+        '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
+        '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
+        (watched?'<span class="director-film-rating">★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'</div></article>';
+    };
+    const show=(group,row)=>{
+      list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
+      const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
+      const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
+      const all=new Map();
+      for(const work of director?.works||[])all.set(String(work.id),{...work,...(state.movies.find(movie=>String(movie.id)===String(work.id))||{})});
+      for(const movie of group.records)all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});
+      const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
+      const unseen=films.length-group.records.length;
+      detail.innerHTML='<div class="director-filmography-head"><h3>'+escapeHTML(group.name)+'</h3><p>鑑賞済み '+group.records.length+'本 · 未鑑賞の収録作品 '+Math.max(0,unseen)+'本</p></div>'+
+        '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)))).join('')+'</div>'+
+        '<p class="director-coverage-note">※収録済み作品を公開年の古い順に表示しています。未収録の監督作品は含まれません。</p>';
+      detail.hidden=false;
+      row.insertAdjacentElement('afterend',detail);
+    };
+    sorted.forEach(group=>{
+      const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
+      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
+      list.append(row);
     });
-    host.append(chart);
+    works.hidden=true;
   }
   function drawWorld() {
     const canvas = $('worldCanvas'); if (!canvas || $('worldView').hidden) return;

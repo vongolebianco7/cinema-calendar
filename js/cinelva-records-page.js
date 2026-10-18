@@ -721,7 +721,7 @@
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
         '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
-        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'</div></article>';
+        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'<span class="director-film-rate-slot" data-film-index="'+index+'"></span></div></article>';
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
@@ -747,16 +747,13 @@
       close.setAttribute('aria-label',group.name+'の作品一覧を閉じる');
       close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});
       detail.prepend(close);
-      // Match other movie lists: tap the poster itself to open quick rating.
-      detail.querySelectorAll('.director-film-poster').forEach((anchor,index)=>{
-        anchor.addEventListener('click',event=>{
-          if(!globalThis.CinelvaQuickRate?.open)return;
-          event.preventDefault();
-          const movie=films[index];
-          if(!movie)return;
-          const existing=group.records.find(item=>String(filmIdentity(item))===String(filmIdentity(movie)));
-          globalThis.CinelvaQuickRate.open(existing?{...movie,...existing}:movie);
-        });
+      // Reuse the exact eye-shaped control from other movie lists.
+      detail.querySelectorAll('.director-film-rate-slot').forEach(slot=>{
+        const movie=films[Number(slot.dataset.filmIndex)];
+        if(!movie)return;
+        const existing=group.records.find(item=>String(filmIdentity(item))===String(filmIdentity(movie)));
+        const target=existing?{...movie,...existing}:movie;
+        globalThis.CinelvaQuickRate?.mountInline?.(slot,target);
       });
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);

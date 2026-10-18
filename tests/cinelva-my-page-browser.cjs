@@ -86,7 +86,9 @@ async function freePort() {
     const directorTile=page.locator('#directorFilmography .director-film-tile').last();
     await directorTile.waitFor({state:'visible'});
     const directorTitle=(await directorTile.locator('.director-film-title').innerText()).trim();
-    await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...work,title:directorTitle}})}));
+    const directorId=new URL(await directorTile.locator('a.director-film-poster').getAttribute('href'),base).searchParams.get('id');
+    assert.ok(directorId,'selected director film has a movie identity');
+    await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...work,id:Number(directorId),tmdbId:Number(directorId),title:directorTitle}})}));
     await directorTile.locator('a.director-film-poster').click();
     await page.waitForURL(url=>url.pathname.endsWith('/search.html')&&url.searchParams.has('id'));
     const detailReview=page.locator('#detail [data-detail-review]');

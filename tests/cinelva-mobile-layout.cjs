@@ -11,7 +11,7 @@ const fs = require('fs');
     const watchedAt = year + '-06-15';
     await page.addInitScript(({ watchedAt }) => {
       localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
-        '999001': { id: '999001', title: 'CINELVA QA fixture', watched: true, watchedAt, rating: 4.5, viewingMethod: '映画館', genres: ['アクション','アドベンチャー','ドラマ','サスペンス','SF','ファンタジー'], countries: ['日本','アメリカ','イギリス'] }
+        '999001': { id: '999001', title: 'CINELVA QA fixture', year: 2020, watched: true, watchedAt, rating: 4.5, viewingMethod: '映画館', genres: ['アクション','アドベンチャー','ドラマ','サスペンス','SF','ファンタジー'], countries: ['日本','アメリカ','イギリス'] }
       }));
     }, { watchedAt });
     page.on('pageerror', error => errors.push(error.message));

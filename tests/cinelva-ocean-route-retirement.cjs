@@ -1,3 +1,4 @@
+const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const { chromium, webkit } = require('playwright');
 const browserName = process.env.CINELVA_BROWSER || 'chromium';
 const engine = { chromium, webkit }[browserName];
@@ -34,19 +35,7 @@ async function freePort() {
   let browser;
   try {
     const base = `http://127.0.0.1:${port}`;
-    await new Promise((resolve, reject) => {
-      const deadline = Date.now() + 10000;
-      const poll = async () => {
-        try {
-          const response = await fetch(base);
-          await response.arrayBuffer();
-          if (response.ok) return resolve();
-        } catch (_) {}
-        if (Date.now() > deadline) return reject(new Error('local static server did not start'));
-        setTimeout(poll, 100);
-      };
-      poll();
-    });
+    await waitForLocalServer(port);
     browser = await engine.launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     const errors = [];

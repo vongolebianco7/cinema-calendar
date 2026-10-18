@@ -71,7 +71,7 @@ jobs:
       - name: Validate director snapshot and feature-film attribution before storing
         run: |
           python -m unittest tests.test_director_enrichment
-          node --test tests/cinelva-director-render.test.cjs
+          node --check js/cinelva-records-page.js
           python scripts/check_sources.py
       - name: Store only the reviewed director snapshot on the work branch
         if: github.event_name == 'pull_request' || github.event_name == 'schedule' || github.event_name == 'push'

@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T21:18:14+09:00",
+  "updated_at": "2026-10-18T21:25:10+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
+  "base_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
   "branch": "fix/director-data-completion-20261018",
-  "head_sha": "21eda94383e70336b36e6b83be114afe6373caaf",
+  "head_sha": "331bcc07dc41aeb8615fe5a07134ccdb6bfff7a3",
   "pull_request": {
-    "number": 389,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/389",
+    "number": 391,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/391",
     "branch": "fix/director-data-completion-20261018"
   },
   "work_items": [
@@ -460,9 +460,30 @@
     {
       "id": "P0-ACCEPTANCE-385",
       "title": "Keep new reviews undated and award calendar GOLD at five films",
-      "status": "pr_created",
+      "status": "merged",
       "acceptance": "New rating/comment alone saves null date; explicit dates and existing precision survive; GOLD starts at5films/month; preserve #386 search normalization and reviewed-only directors.",
-      "ci": "Original08ab1c8d16/16check-runs passed after one WebKit internal-error retry. Concurrent main#386 caused merge conflicts; resolved retaining both changes. New commit requires fresh CI. Local28activefiles121/121, Python121/121, sharedgate pass; focused review ready."
+      "ci": "Merged610b2966 after all16check-runs oncc1283d0 passed; mainVercel frontend/backend stillbuild-rate-limit."
+    },
+    {
+      "id": "P0-LEGACY-RECORD-DESTINATION",
+      "title": "Redirect retired URLs to actual record dashboard",
+      "status": "merged",
+      "acceptance": "All eight retired URLs reach /my-cinelva/ rather than shared-image page, preserve query/hash/origin and0/1/1000 savedrecords; dashboard works inChromium/WebKit at390px.",
+      "ci": "PR#387 merged2e294c02 after12successfulcheck-runs; ChromiumandWebKit eachverified8routes×0/1/1000records, actualdashboardcounts/rawsaveddata/390px/noerrors."
+    },
+    {
+      "id": "P0-OBSERVATION-FRESHNESS-SCOPE",
+      "title": "Separate per-title observation freshness from snapshot SLA",
+      "status": "merged",
+      "acceptance": "Auditneverclaimsallcachedtitlesfresh fromgenerated_at alone; true per-titlecoverage andbatchSLAreportedseparately; malformeddata/stalesnapshotsstillfail.",
+      "ci": "PR#388 merged8b89f1b after11successfulcheck-runs;9focusedtests,Python125/125andqualitygatepassed."
+    },
+    {
+      "id": "P0-IMPORTED-FILM-IDENTITY",
+      "title": "Use canonical film identity in director counts and record metadata",
+      "status": "in_progress",
+      "acceptance": "ImportedlocalIDsandexplicitTMDBIDsrepresentonefilm; conflictinglocalIDsnevermatchwrongfilm; metadata usesexplicitidentitywhilelocaleditIDsandsavedfieldsremainunchanged.",
+      "ci": "Threeactualruntimefailuresreproducedbeforefix;11focusedtests,30activeCinelvafiles128/128,Python125/125andsharedgatepass. Browserfixturewithlocal900003andcanonicalfilmIDadded;CIpending."
     },
     {
       "id": "MY-DIRECTOR-COMPLETE",
@@ -752,6 +773,10 @@
       "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
     },
     {
+      "check": "Mergedsourceacceptance21:12JST",
+      "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
+    },
+    {
       "command": "TMDB director refresh Actions39125924187; local python scripts/quality_gate.py and tests.test_director_enrichment",
       "result": "data_refreshed_and_locally_verified",
       "details": "788/788 profile+credits requests succeeded;9086 works;524 profile photos;74 Japanese biographies.200 names absent in TMDB Japanese fields use explicit curated kana transliteration with original retained, not fabricated official name/kanji. Unit tests cover profile/source/aliases, all snapshot primary labels, credit roles and no truncation, progress count. Snapshot compacted by removing unused overview/transport fields,13,316,683 to7,559,747bytes, same9086works. Follow-up workflow skips same-day fetched directors, so no repeat788requests. Final CI pending after normalized snapshot is stored."
@@ -759,13 +784,13 @@
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
+    "target_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-18T20:15:15+09:00",
-    "reported_restriction": "Latest observed main4bac142 frontend/backendstatuses build-rate-limit; no manualdeploymentretry. Main advanced#386; currentlimit must be independentlychecked before release.",
+    "reported_restriction": "Main8b89f1b frontend/backendstatuses bothbuild-rate-limit. No manualretry. Sourcefixesremainunverifiedoncanonicalproduction.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
     "provider_preview_status": "Latest observed production remains dpl_8pLTgFogy3Nauy3opWNxWa4qWaHh at cc02eb47 (#295). It does not include recent main changes.",
     "blockers": [
@@ -775,6 +800,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Inspect PR#389 current head and finite director refresh job; it normalizes already-fetched data without repeating requests, stores snapshot. Then validate exact final data head with all required Actions and Chromium/WebKit, merge only green. Keep original-name/transliteration distinctions. Check Vercelcap independently before one verified production release; current source merge is not production proof.",
+  "next_action": "Resolve PR#391 against current main b2876171 (imported-film identity changes preserved); normalize the already-fetched director snapshot without repeat API requests; run exact-head quality and mobile Chromium/WebKit checks, merge only green. Verify Vercelcap independently before canonical release.200kana readings retain originals and explicit transliteration status.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

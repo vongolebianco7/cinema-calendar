@@ -13,7 +13,7 @@
   const metadataFor = id => byId.get(String(id)) || {};
   const countryAliases = {"united states":"アメリカ","united states of america":"アメリカ","usa":"アメリカ","us":"アメリカ","アメリカ合衆国":"アメリカ","united kingdom":"イギリス","uk":"イギリス","gb":"イギリス","great britain":"イギリス","英国":"イギリス","japan":"日本","jp":"日本","france":"フランス","germany":"ドイツ","italy":"イタリア","spain":"スペイン","canada":"カナダ","australia":"オーストラリア","south korea":"韓国","china":"中国","hong kong":"香港","taiwan":"台湾","india":"インド","brazil":"ブラジル","mexico":"メキシコ","russia":"ロシア","new zealand":"ニュージーランド","sweden":"スウェーデン","denmark":"デンマーク","norway":"ノルウェー","finland":"フィンランド","netherlands":"オランダ","switzerland":"スイス","austria":"オーストリア","ireland":"アイルランド","poland":"ポーランド","argentina":"アルゼンチン","thailand":"タイ","vietnam":"ベトナム","philippines":"フィリピン","indonesia":"インドネシア","turkey":"トルコ","iran":"イラン","israel":"イスラエル","portugal":"ポルトガル","greece":"ギリシャ","belgium":"ベルギー"};
   const countryJP = value => countryAliases[String(value||'').trim().toLowerCase()] || String(value||'').trim();
-  const enriched = record => {const metadata=metadataFor(record.id),array=value=>Array.isArray(value)?value:[],countries=array(record.countries).length?array(record.countries):array(metadata.countries).length?array(metadata.countries):(record.region?[record.region]:[]);return {...metadata,...record,countries:[...new Set(countries.filter(country=>typeof country==='string').map(countryJP))],genres:array(record.genres).length?array(record.genres):array(metadata.genres),year:record.year||metadata.year||Number(String(metadata.date||'').slice(0,4))||null,director:record.director||metadata.director||''};};
+  const enriched = record => {const metadata=metadataFor(record.tmdbId??record.tmdb_id??record.id),array=value=>Array.isArray(value)?value:[],countries=array(record.countries).length?array(record.countries):array(metadata.countries).length?array(metadata.countries):(record.region?[record.region]:[]);return {...metadata,...record,countries:[...new Set(countries.filter(country=>typeof country==='string').map(countryJP))],genres:array(record.genres).length?array(record.genres):array(metadata.genres),year:record.year||metadata.year||Number(String(metadata.date||'').slice(0,4))||null,director:record.director||metadata.director||''};};
   const dateOf = record => typeof record.watchedAt === 'string' ? record.watchedAt : '';
   const classificationFor = record => { const movie=enriched(record); const classified=Insights.classifyGenres([...(movie.genres||[]),...(Array.isArray(movie.formats)?movie.formats:[]),...(Array.isArray(movie.workForms)?movie.workForms:[])]);return {...classified,formats:movie.format?[movie.format]:classified.formats,workForms:movie.workForm?[movie.workForm]:classified.workForms}; };
   const formatDate = value => value ? value.replaceAll('-', '.') : '鑑賞日未登録';
@@ -357,30 +357,31 @@
     for(const d of knownDirectors)for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name,d.original_name,...(d.also_known_as||[])]){
       if(alias)knownByName.set(canonical(alias),d);
     }
-    const movieById=new Map(state.movies.map(movie=>[String(movie.id),movie]));
+    const filmIdentity=movie=>String(movie.tmdbId??movie.tmdb_id??movie.id);
+    const movieById=new Map(state.movies.map(movie=>[filmIdentity(movie),movie]));
     const directorKey=name=>canonical(name);
     for(const record of ratedMovies().filter(item=>Number(item.rating)>0)){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
       const displayName=directorJapanese(name),key=directorKey(name);
       if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
-      const group=groups.get(key),id=String(movie.id);
+      const group=groups.get(key),id=filmIdentity(movie);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
     }
     // Reviews determine which directors appear; every watched film counts for those directors.
     for(const record of recordMovies()){
       const movie=enriched(record),group=groups.get(directorKey(movie.director));
-      if(group&&!group.ids.has(String(movie.id))){group.ids.add(String(movie.id));group.records.push(movie);}
+      if(group&&!group.ids.has(filmIdentity(movie))){group.ids.add(filmIdentity(movie));group.records.push(movie);}
     }
     const host=$('directorTimeline'),works=$('directorWorks');
     host.replaceChildren();works.replaceChildren();
     // Director selection is based on the user's reviewed movies only; catalog-only directors stay hidden.
     const filmographyFor=group=>{
       const director=knownByName.get(directorKey(group.name));
-      const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
+      const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
       const all=new Map();
-      for(const work of director?.works||[]){const combined={...work,...(movieById.get(String(work.id))||{})};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(String(work.id),combined);}
-      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
+      for(const work of director?.works||[]){const id=filmIdentity(work),combined={...work,...(movieById.get(id)||{}),id};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(id,combined);}
+      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
       const films=[...all.values()];
       return {director,watched,films,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };

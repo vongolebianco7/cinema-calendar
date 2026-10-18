@@ -46,5 +46,54 @@ class ExternalDataRegistryTests(unittest.TestCase):
             self.assertEqual(report["enforced_failures"], [])
 
 
+    def availability_audit(self, snapshot):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "availability.json").write_text(json.dumps(snapshot))
+            registry = {"categories": [{"id": "streaming-availability", "status": "automated",
+                "dataset": "availability.json", "max_age_hours": 168, "freshness_enforced": True}]}
+            return audit(now=dt.datetime(2026, 10, 18, 12, tzinfo=dt.timezone.utc), registry=registry, root=root)
+
+    def test_recent_snapshot_does_not_claim_all_title_observations_are_fresh(self):
+        report = self.availability_audit({"generated_at": "2026-10-18T11:00:00Z", "movies": {
+            "1": {"checked_at": "2026-10-18T10:00:00Z"},
+            "2": {"checked_at": "2026-09-01T10:00:00Z"},
+            "3": {},
+        }})
+        row = report["datasets"]["streaming-availability"]
+        self.assertEqual(row["freshness"], "partial")
+        self.assertEqual(row["snapshot_freshness"], "fresh")
+        self.assertEqual(row["freshness_scope"], "title_observations")
+        self.assertEqual(row["observations"]["fresh_7d"], 1)
+        self.assertEqual(row["observations"]["stale_7d"], 2)
+        self.assertEqual(row["enforcement_scope"], "snapshot_timestamp")
+        self.assertEqual(report["enforced_failures"], [])
+
+    def test_expired_snapshot_still_fails_even_when_observed_titles_are_current(self):
+        report = self.availability_audit({"generated_at": "2026-09-01T11:00:00Z", "movies": {
+            "1": {"checked_at": "2026-10-18T10:00:00Z"},
+        }})
+        row = report["datasets"]["streaming-availability"]
+        self.assertEqual(row["freshness"], "fresh")
+        self.assertEqual(row["snapshot_freshness"], "stale")
+        self.assertEqual(report["enforced_failures"], ["streaming-availability"])
+
+    def test_malformed_observations_are_not_hidden_by_a_recent_snapshot(self):
+        report = self.availability_audit({"generated_at": "2026-10-18T11:00:00Z", "movies": []})
+        self.assertEqual(report["datasets"]["streaming-availability"]["freshness"], "invalid")
+        self.assertEqual(report["enforced_failures"], ["streaming-availability"])
+
+
+    def test_no_current_title_observations_are_not_reported_as_fresh(self):
+        for movies, expected in [({}, "unknown"), ({"1": {"checked_at": "2026-09-01T10:00:00Z"}}, "stale")]:
+            with self.subTest(movies=movies):
+                report = self.availability_audit({"generated_at": "2026-10-18T11:00:00Z", "movies": movies})
+                row = report["datasets"]["streaming-availability"]
+                self.assertEqual(row["freshness"], expected)
+                self.assertEqual(row["snapshot_freshness"], "fresh")
+                self.assertEqual(row["observations"]["fresh_7d"], 0)
+                self.assertEqual(report["enforced_failures"], [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,3 +1,4 @@
+const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const { chromium } = require('playwright');
 const { spawn } = require('node:child_process');
 const net = require('node:net');
@@ -20,15 +21,7 @@ async function freePort() {
   let browser;
   try {
     const base = `http://127.0.0.1:${port}`;
-    await new Promise((resolve, reject) => {
-      const deadline = Date.now() + 10000;
-      const poll = async () => {
-        try { const response = await fetch(base); await response.arrayBuffer(); if (response.ok) return resolve(); } catch (_) {}
-        if (Date.now() > deadline) return reject(new Error('local static server did not start'));
-        setTimeout(poll, 100);
-      };
-      poll();
-    });
+    await waitForLocalServer(port);
     const catalog = await fetch(`${base}/data/movies.json`).then(response => response.json());
     const movie = catalog.movies.find(row => row.id && row.title);
     assert.ok(movie, 'fixture has a movie with an ID and title');

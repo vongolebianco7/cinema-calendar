@@ -126,3 +126,33 @@ test('Japanese aliases connect original-name records to sourced profile and full
   assert.match(detail.innerHTML, /本数による切り捨てなし/);
   assert.match(detail.innerHTML, /監督の出典情報/);
 });
+
+test('an imported local ID and its TMDB film count as one watched director work', () => {
+  const film = { id: 42, title: '同じ監督作品', director: 'Other Director', year: 2020, runtime: 120 };
+  const imported = { ...film, id: 900001, tmdbId: 42, rating: 4.2 };
+  const before = JSON.stringify(imported);
+  const { row, detail } = render({ records: [imported], works: [film], name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  row.listeners.click();
+  assert.equal((detail.innerHTML.match(/class="director-film-tile /g) || []).length, 1);
+  assert.match(detail.innerHTML, /search\.html\?id=42"/);
+  assert.match(detail.innerHTML, /★ 4\.2/);
+  assert.equal(JSON.stringify(imported), before, 'rendering must not migrate stored IDs');
+});
+
+test('an explicit TMDB ID does not mark a conflicting local-ID film watched', () => {
+  const film = { id: 42, title: '未鑑賞の別作品', director: 'Other Director', year: 2020, runtime: 120 };
+  const imported = { id: 42, tmdbId: 99, title: '実際の鑑賞作品', director: 'Other Director', year: 2021, runtime: 100, rating: 4 };
+  const { row, detail } = render({ records: [imported], works: [film], name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>1\/2本<\/strong>/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /is-unwatched[^]*?未鑑賞の別作品/);
+  assert.match(detail.innerHTML, /search\.html\?id=99"/);
+});
+
+
+test('duplicate imported aliases of one director film do not inflate the counter', () => {
+  const film = { id: 42, title: '同一作品', director: 'Other Director', year: 2020, runtime: 120 };
+  const { row } = render({ records: [{ ...film, rating: 4 }, { ...film, id: 900001, tmdb_id: 42, rating: 3 }], works: [film], name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+});

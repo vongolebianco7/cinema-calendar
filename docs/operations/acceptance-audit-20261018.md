@@ -23,7 +23,7 @@ Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-s
 | P0-02.1 | Remove Ocean production entry points | Existing retirement tests and static build filter; full canonical production audit pending | Partial |
 | P0-02.2 | Retire renderer/assets/demo/tests/dependencies after reference inventory | #379 excludes75.8MB retired payload from published output, preserves redirects; source retirement archive remains, complete dead dependency inventory not established | Partial |
 | P0-02.3 | Preserve shared records/ratings/backups/legacy keys | Actual store and backup unit tests in quality gate; no user storage mutation | Verified locally |
-| P0-02.4 | Old URLs graceful,0/1/1000 records | Eight redirect files retained; backup1000 fixture exists; exact combined zero/one/1000 legacy-route production acceptance still unverified | Partial |
+| P0-02.4 | Old URLs graceful,0/1/1000 records | Found all eight redirects landed on shared-image page rather than records. Fixed destination to /my-cinelva/; actual redirect script passes0/1/1000-record/query/hash/origin/fallback checks. Chromium/WebKit dashboard checks added; CI and canonical production remain unverified | Partial |
 | P0-02.5 | Supersede #111/#113/#143 only after release | Keep pending until verified canonical production deployment | Pending |
 | P0-03.1 | Shared detail/record/rating/date CRUD | #372 browser journeys; current runtime date repair; zero/partial dates tests. Rewatch requirement superseded by user: edit existing record | Partial |
 | P0-03.2 | Import/export/unknown fields/conflicts/offline/refresh | Store/backup tests cover preservation, rollback and conflicts; existing browser backup round-trip. Current canonical upgrade verification pending | Partial |

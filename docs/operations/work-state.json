@@ -1,17 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:51:00+09:00",
-  "status": "pr_created",
+  "updated_at": "2026-10-18T21:02:31+09:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
-  "branch": "fix/undated-review-five-film-medals",
-  "head_sha": "08ab1c8d1cc532bf9d59db1f24a1d83acaa272b4",
-  "pull_request": {
-    "number": 385,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/385",
-    "branch": "fix/undated-review-five-film-medals"
-  },
+  "base_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
+  "branch": "test/legacy-route-record-safety-20261018",
+  "head_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -460,9 +456,16 @@
     {
       "id": "P0-ACCEPTANCE-385",
       "title": "Keep new reviews undated and award calendar GOLD at five films",
-      "status": "pr_created",
+      "status": "merged",
       "acceptance": "New rating/comment alone saves null date; explicit dates and existing precision survive; GOLD starts at5films/month; preserve #386 search normalization and reviewed-only directors.",
-      "ci": "Original08ab1c8d16/16check-runs passed after one WebKit internal-error retry. Concurrent main#386 caused merge conflicts; resolved retaining both changes. New commit requires fresh CI. Local28activefiles121/121, Python121/121, sharedgate pass; focused review ready."
+      "ci": "Merged610b2966 after all16check-runs oncc1283d0 passed; mainVercel frontend/backend stillbuild-rate-limit."
+    },
+    {
+      "id": "P0-LEGACY-RECORD-DESTINATION",
+      "title": "Redirect retired URLs to actual record dashboard",
+      "status": "in_progress",
+      "acceptance": "All eight retired URLs reach /my-cinelva/ rather than shared-image page, preserve query/hash/origin and0/1/1000 savedrecords; dashboard works inChromium/WebKit at390px.",
+      "ci": "Actual script regression first failed3/3 onwrongdestination, now3/3pass. Sharedqualitygate passes124activeNode tests; Python121/121. BrowserCI required before merge."
     }
   ],
   "verification": [
@@ -764,6 +767,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Inspect required CI on PR#385 reconciled head, fix failures and merge only when green. Refresh main; continue ready source acceptance gaps. Independently confirmVercelcapcleared before onebatchrelease and canonicalproduction smoke; actualSafari and5–10user tests remain unverified.",
+  "next_action": "Publish legacy record destination fix PR, require focusedreview and freshfrontendChromium/WebKit CI; fix failures and mergewhen green. Refreshmain and continuehighest readyacceptance. Vercelcapstillblocksproduction; no manualretry.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

@@ -154,31 +154,10 @@ function attachInlineScore(button, movie) {
  const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=Number(input.value)>0?Number(input.value).toFixed(1):'未鑑賞';
  let committedScore=Number(existing?.rating??0);
  const sync=()=>{const score=Number(input.value),text=score>0?score.toFixed(1):'未鑑賞';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',committedScore>0);button.classList.toggle('is-watched',committedScore>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');};
- // Explicit pointer handling avoids mobile card swipe/drag handlers swallowing range input.
- const pointerScore=e=>{
-  const rect=track.getBoundingClientRect();
-  if(rect.width<=0)return;
-  const fraction=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
-  input.value=(Math.round(fraction*50)/10).toFixed(1);
-  sync();
- };
- let dragging=false;
- const onPointerDown=e=>{
-  if(e.pointerType==='mouse'&&e.button!==0)return;
-  e.stopPropagation();e.preventDefault();
-  dragging=true;track.setPointerCapture?.(e.pointerId);pointerScore(e);
- };
- const onPointerMove=e=>{if(!dragging)return;e.stopPropagation();e.preventDefault();pointerScore(e);};
- const onPointerEnd=e=>{
-  if(!dragging)return;
-  e.stopPropagation();e.preventDefault();pointerScore(e);dragging=false;
-  input.dispatchEvent(new Event('change',{bubbles:false}));
- };
- // Attach after track is constructed below.
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
- try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
- const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);track.addEventListener('pointerdown',onPointerDown);track.addEventListener('pointermove',onPointerMove);track.addEventListener('pointerup',onPointerEnd);track.addEventListener('pointercancel',()=>{dragging=false});wrap.append(track,value);
+ try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
  button.before(controls);controls.append(button,wrap);sync();
 }
@@ -376,6 +355,24 @@ style.textContent+=`
 .cinelva-rating-controls .cinelva-score-track{touch-action:none!important;pointer-events:auto!important;cursor:pointer!important}
 .cinelva-rating-controls .cinelva-score-track input[type=range]{pointer-events:none!important;touch-action:none!important}
 .cinelva-rating-controls>.cinelva-inline-score{pointer-events:auto!important}
+`;
+style.textContent+=`
+/* Restore native iOS range dragging; previous pointer interception disabled it. */
+.cinelva-rating-controls .cinelva-score-track{pointer-events:auto!important;touch-action:pan-y!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{
+ pointer-events:auto!important;touch-action:pan-y!important;
+ width:100%!important;height:44px!important;min-height:44px!important;
+ position:relative!important;z-index:20!important;cursor:pointer!important;
+}
+.cinelva-rating-controls .cinelva-score-track{height:44px!important;min-height:44px!important}
+.cinelva-rating-controls{grid-template-rows:28px 44px!important;padding:4px 7px!important}
+.cinelva-rating-controls>.cinelva-rate-button{height:28px!important;min-height:28px!important;align-self:center!important;justify-self:start!important}
+.cinelva-rating-controls>.cinelva-inline-score{grid-template-rows:28px 44px!important}
+.cinelva-rating-controls .cinelva-inline-value{align-self:center!important;line-height:28px!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{
+ -webkit-appearance:none!important;width:20px!important;height:26px!important;
+ margin-top:-10px!important;border-radius:5px!important;
+}
 `;
 root.CinelvaQuickRate={open,normalize};
 

@@ -4,7 +4,7 @@
   "buildCommand": "node scripts/build-static.cjs",
   "installCommand": "",
   "outputDirectory": "public",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ':(top,glob)*.html' ':(top,glob)*.png' ':(top,glob)*.svg' ':(top,glob)*.webmanifest' ':(top,glob)*.css' ':(top,glob)*.js' ':(top)assets/' ':(top)js/' ':(top)data/' ':(top)preview/' ':(top)my-cinelva/' ':(top)scripts/build-static.cjs' ':(top)vercel.json'",
+  "ignoreCommand": "bash \"$(git rev-parse --show-toplevel)/scripts/ignore-frontend-build.sh\"",
   "git": {
     "deploymentEnabled": {
       "**": false,

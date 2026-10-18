@@ -446,6 +446,19 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 .record-actions-compact .record-delete-icon{grid-column:4!important;grid-row:2!important;justify-self:center!important}
 }
 </style>
+<style id="cinelva-chart-calendar-contrast-20261019">
+/* Distinguish donut slices by number as well as hue. */
+#summaryView .cs-donut{position:relative!important}
+#summaryView .cs-donut-numbers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#summaryView .cs-donut-dot{display:inline-flex!important;align-items:center;justify-content:center;width:20px!important;height:20px!important;flex:0 0 20px!important;border-radius:5px!important;color:white!important;font-size:11px!important;font-weight:800!important;text-shadow:0 1px 2px #000a!important}
+/* One film and two films must be visually distinct, not two adjacent blues. */
+#yearHeatmap .cy-month.one-month{background:linear-gradient(145deg,#273f59,#345d78)!important;color:#fff!important;border:1px solid #678ea8!important}
+#yearHeatmap .cy-month.light-month{background:linear-gradient(145deg,#c0e8f2,#82c8db)!important;color:#112b3c!important;border:2px solid #d8f5ff!important}
+#yearHeatmap .cy-month.one-month .cy-month-total strong{color:#fff!important}
+#yearHeatmap .cy-month.light-month .cy-month-total strong{color:#112b3c!important}
+#yearHeatmap .cy-month.one-month .cy-month-name::after{content:" ●";font-size:9px;color:#f2c77d}
+#yearHeatmap .cy-month.light-month .cy-month-name::after{content:" ◆◆";font-size:8px;color:#163e55}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">
@@ -482,7 +495,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-ranking-collapse-float"></script>
+  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-donut-calendar-contrast"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

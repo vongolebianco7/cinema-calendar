@@ -178,24 +178,32 @@
         labels.push({name:String(rawName),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',
           fraction,start,span,index:i});
       });
+      // Layout engine v2: sample the whole ring, not only the sector midpoint.
+      // The previous midpoint search could not place a 46% or 89% segment:
+      // their angular midpoints often fell near the lower SVG boundary.
       const norm=a=>(a%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
-      const fits=(x,y,w,h,item)=>{
-        const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],
-          [x,y-h/2],[x,y+h/2],[x-w/2,y],[x+w/2,y]];
-        return corners.every(([px,py])=>{
-          const dx=px-50,dy=py-50,r=Math.hypot(dx,dy);
-          return r>=28.5&&r<=48.5&&norm(Math.atan2(dy,dx)-item.start)>=.025&&
-            norm(Math.atan2(dy,dx)-item.start)<=item.span-.025;
-        });
+      const contains=(px,py,item)=>{
+        const dx=px-50,dy=py-50,r=Math.hypot(dx,dy);
+        const delta=norm(Math.atan2(dy,dx)-item.start);
+        return r>=29&&r<=47.5&&delta>=.025&&delta<=item.span-.025;
+      };
+      const rectangleFits=(x,y,w,h,item)=>{
+        // Test perimeter and interior, not just corners. A rectangle can
+        // cross the central hole even when all four corners are outside it.
+        for(let i=0;i<=6;i++)for(let j=0;j<=4;j++){
+          const px=x-w/2+w*i/6,py=y-h/2+h*j/4;
+          if(!contains(px,py,item))return false;
+        }
+        return true;
       };
       const placed=[];
       const svgLabel=(x,y,name,value,size)=>{
         const text=document.createElementNS(namespace,'text');
-        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',(y-size*.43).toFixed(2));
+        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',(y-size*.48).toFixed(2));
         text.setAttribute('text-anchor','middle');text.setAttribute('font-size',String(size));
         text.setAttribute('font-family',font);text.setAttribute('font-weight','600');
         text.setAttribute('fill','#fff');text.setAttribute('stroke','#161616');
-        text.setAttribute('stroke-width','.3');text.setAttribute('paint-order','stroke');
+        text.setAttribute('stroke-width','.25');text.setAttribute('paint-order','stroke');
         [name,value].forEach((line,i)=>{
           const t=document.createElementNS(namespace,'tspan');
           t.setAttribute('x',x.toFixed(2));if(i)t.setAttribute('dy',String(size*1.25));
@@ -203,20 +211,24 @@
         });
         svg.append(text);
       };
-      // Prefer big sectors, searching the full sector rather than only its midpoint.
+      // Largest first. Search every 3 degrees across the full segment,
+      // then choose the clearest position nearest the upper-right/upper-left
+      // half of the chart where feasible.
       for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
         if(item.fraction<.105)continue;
-        const size=4.4,name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const w=Math.max(measure(name,size),measure(item.value,size))+1.5,h=size*2.5;
+        const size=4.35,name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
+        const w=Math.max(measure(name,size),measure(item.value,size))+1.8,h=size*2.6;
         let best=null;
-        for(const radius of [37,35,39,33,41]){
-          for(let k=0;k<=60;k++){
-            const ratio=k===0?.5:(k%2?.5+Math.ceil(k/2)*.012:.5-Math.ceil(k/2)*.012);
-            if(ratio<=.03||ratio>=.97)continue;
-            const [x,y]=polar(radius,item.start+item.span*ratio);
-            if(!fits(x,y,w,h,item))continue;
+        for(let degree=0;degree<360;degree+=3){
+          const angle=(degree-90)*Math.PI/180;
+          const delta=norm(angle-item.start);
+          if(delta<.035||delta>item.span-.035)continue;
+          for(const radius of [37,35,39,33,41,43]){
+            const [x,y]=polar(radius,angle);
+            if(!rectangleFits(x,y,w,h,item))continue;
             if(placed.some(o=>Math.abs(x-o.x)<(w+o.w)/2+1&&Math.abs(y-o.y)<(h+o.h)/2+1))continue;
-            const score=Math.abs(ratio-.5)+Math.abs(radius-37)*.01;
+            const score=Math.abs(radius-37)*.05+Math.abs(delta-item.span/2)/Math.max(item.span,.1)*.3+
+              (y>75?.1:0);
             if(!best||score<best.score)best={x,y,score};
           }
         }

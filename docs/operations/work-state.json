@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T19:00:47.696095+00:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-18T19:03:55.985Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
   "branch": "fix/director-data-completion-20261018",
-  "head_sha": "4ba252511946a213dca85175e430eeb66ec9bb35",
+  "head_sha": "026e6940077f52c5143111b1fc64e84051fb6475",
   "pull_request": {
     "number": 391,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/391",
@@ -791,6 +791,11 @@
       "command": "Independent focused code review and locale-alias regression",
       "result": "important_finding_fixed_verified",
       "details": "Han-only multilingual aliases no longer qualify as Japanese. KnownJPmap/localizedprofile/kana aliases take priority.44 affected alias selections replaced with explicit retained-original kana readings, total244transliterated. Independent reviewer verified fix;8enrichment tests pass. Browser expectation now checks2watched films(revised+zero) while imported canonical film remainsunique. Latest main safeimported edits are preserved."
+    },
+    {
+      "command": "Independent review locale fix and normalized data run39156888103",
+      "result": "passed_review_and_normalization",
+      "details": "Important finding fixed: Han-only multilingual aliases are not Japanese.44affected names have retained-original kana readings,244total marked transliterations; review recheck passed. Normalization0newrequests/0failures/0missing primarylabels;0newmainIDs;524photos/74Japanese biographies. Browser regression now separately checks2watchedfeatures and canonical imported-film uniqueness. Final exact-head full CI pending."
     }
   ],
   "deployment": {
@@ -811,6 +816,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "PR#391: normalize retained fetched data and merge any newly-added main director IDs; exact final-head quality/fullPython/Chromium/WebKit required. All source-name pronunciation fallbacks retain originals and are markedtransliterated. Vercel release is separate and must not retry while rate-limited.",
+  "next_action": "PR#391: require all checks on newest checkpoint head including frontend Chromium/WebKit, full Python, quality, smoke, scorecard; merge only green. Earlier failed frontend expected only reviewed watched tiles and is superseded by correct all-watched count assertion. Inspect actual Vercel production state anew; prior build-rate-limit observation may now be stale. Preserve source IDs, kana provenance and user records.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

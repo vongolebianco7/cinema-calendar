@@ -6,17 +6,18 @@ const detail = fs.readFileSync('search.html', 'utf8');
 const records = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
 const myPage = fs.readFileSync('my-cinelva/index.html', 'utf8');
 
-test('movie detail sends the selected title to the existing searchable listing', () => {
-  assert.ok(detail.includes('recordEntryUrl(id,title)'));
-  assert.ok(detail.includes('location.pathname.split("/").includes("cinelva")?"../search.html":"search.html"'));
-  assert.match(detail, /recordEntryUrl\(m\.tmdbId\|\|m\.id\|\|""/);
-  assert.match(detail, /一覧で評価する/);
-  assert.doesNotMatch(detail, /my-cinelva\/\?record=/);
+test('movie detail opens the shared review dialog for the selected movie', () => {
+  assert.match(detail, /data-detail-review data-movie-id=/);
+  assert.match(detail, /globalThis\.CinelvaQuickRate\?\.open\(\{id,title\}\)/);
+  assert.match(detail, /鑑賞・レビューを記録/);
+  assert.match(detail, /else location\.href=recordEntryUrl\(id,title\)/);
+  assert.match(detail, /location\.pathname\.split\("\/"\)\.includes\("cinelva"\)\?"\.\.\/my-cinelva\/":"my-cinelva\/"/);
+  assert.doesNotMatch(detail, /次へ/);
 });
 
 test('detail metadata failure keeps a selected movie record action', () => {
   assert.match(detail, /catch\(\(\)=>\{const title=initialParams\.get\("search"\)\|\|"";detail\.innerHTML/);
-  assert.match(detail, /recordEntryUrl\(initialId,title\)/);
+  assert.ok(detail.includes("data-detail-review data-movie-id=\"'+E(initialId||'')+'\" data-movie-title=\"'+E(title||'')+'\">鑑賞・レビューを記録</button>"));
 });
 
 test('empty record list sends new entries to movie search instead of an unapproved record window', () => {

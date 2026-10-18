@@ -13,6 +13,57 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)
 
+    def test_discovers_absent_named_director_and_keeps_only_directing_credits(self):
+        calls = []
+        def request(endpoint, params=None):
+            calls.append(endpoint)
+            if endpoint == '/search/person':
+                return {'results': [{'id': 190, 'name': 'Clint Eastwood'}]}
+            profile = self.profile()
+            profile.update(id=190, name='Clint Eastwood', also_known_as=[])
+            profile['movie_credits']['crew'].append({'id': 100, 'job': 'Actor', 'title': '出演のみ'})
+            return profile
+        directors = {}
+        result = self.module.discover_named_directors(directors, {'clint eastwood': 'クリント・イーストウッド'}, request, '2026-10-18')
+        self.assertEqual(result['added'], ['190'])
+        self.assertEqual(len(directors['190']['works']), 41)
+        self.assertEqual(directors['190']['nameJa'], 'クリント・イーストウッド')
+        self.assertEqual(calls, ['/search/person', '/person/190'])
+        calls.clear()
+        self.module.discover_named_directors(directors, {'clint eastwood': 'クリント・イーストウッド'}, request, '2026-10-18')
+        self.assertEqual(calls, [])
+
+    def test_discovery_never_guesses_between_same_named_people(self):
+        directors = {}
+        def request(endpoint, params=None):
+            self.assertEqual(endpoint, '/search/person')
+            return {'results': [{'id': 1, 'name': 'Example'}, {'id': 2, 'name': 'Example'}]}
+        result = self.module.discover_named_directors(directors, {'example': 'エグザンプル'}, request, '2026-10-18')
+        self.assertFalse(directors)
+        self.assertEqual(result['unresolved'], ['example'])
+
+    def test_verified_runtime_excludes_short_and_packaged_tv_compilation(self):
+        director = {'id': 190, 'works': [
+            {'id': 1, 'title': 'Feature'}, {'id': 2, 'title': 'Vanessa in the Garden'},
+            {'id': 3, 'title': 'Amazing Stories: The Movie IV'}]}
+        def request(endpoint, params=None):
+            identifier = int(endpoint.rsplit('/', 1)[1])
+            return {'id': identifier, 'runtime': 25 if identifier == 2 else 100}
+        result = self.module.verify_director_runtimes(director, request)
+        self.assertEqual([work['id'] for work in result['works']], [1])
+        self.assertEqual(result['works'][0]['runtime'], 100)
+        self.assertEqual(result['coverage']['runtime_unverified'], 0)
+
+    def test_eastwood_snapshot_has_sourced_feature_credits_not_a_saved_record_total(self):
+        import json
+        director = json.loads((ROOT / 'data/directors.json').read_text())['directors']['190']
+        self.assertGreaterEqual(len(director['works']), 40)
+        identifiers = {work['id'] for work in director['works']}
+        self.assertTrue({33, 70, 13223, 1106739}.issubset(identifiers))
+        self.assertFalse({1309305, 1126932, 524469} & identifiers)
+        self.assertEqual(director['coverage']['runtime_unverified'], 0)
+        self.assertTrue(all(work['runtime'] >= 60 and work['job'] == 'Director' for work in director['works']))
+
     def profile(self):
         return {'id': 1, 'name': 'Example Director', 'also_known_as': ['エグザンプル・ディレクター'],
                 'birthday': '1970-01-02', 'place_of_birth': 'Tokyo', 'profile_path': '/person.jpg',

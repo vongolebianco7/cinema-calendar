@@ -12,7 +12,7 @@ concurrency:
 jobs:
   refresh:
     # One finite repair batch on our own branch. Never expose secrets to forks.
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'fix/director-data-completion-20261018')
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'fix/director-data-completion-20261018' || github.head_ref == 'fix/director-missing-catalog-20261019'))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -48,7 +48,7 @@ jobs:
       - name: Refresh all existing directors through the approved TMDB API
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: python scripts/enrich_directors.py --limit 800
+        run: python scripts/enrich_directors.py --limit 800 --discover-names --verify-person 190
       - name: Preserve completeness and missing-source report
         if: always()
         uses: actions/upload-artifact@v4

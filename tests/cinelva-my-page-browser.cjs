@@ -176,6 +176,26 @@ async function freePort() {
     const densePage=await dense.newPage();await densePage.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});assert.equal(await densePage.locator('#statTotal').textContent(),'1,000');
     await densePage.locator('[data-tab="records"]').click();assert.equal(await densePage.locator('#recordList [data-record-card]').count(),1000);
     assert.ok(await densePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await dense.close();
+    const eastwood=directors['190'];
+    assert.ok(eastwood?.works.length>1, 'Eastwood must have a sourced catalog beyond a saved record');
+    const eastwoodContext=await browser.newContext({viewport:{width:390,height:844}});
+    await eastwoodContext.addInitScript(film=>{
+      localStorage.setItem('cinelva-library-records-v2',JSON.stringify({[film.id]:{...film,director:'Clint Eastwood',rating:4}}));
+    },eastwood.works[0]);
+    const eastwoodPage=await eastwoodContext.newPage();
+    eastwoodPage.on('pageerror',error=>errors.push(error.stack||error.message));
+    await eastwoodPage.route(`${base}/data/movies.json`,route=>route.fulfill({json:{movies:[]}}));
+    await eastwoodPage.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});
+    await eastwoodPage.locator('[data-tab="directors"]').click();
+    const eastwoodPick=eastwoodPage.locator('#directorTimeline .director-pick');
+    assert.equal(await eastwoodPick.count(),1);
+    assert.match(await eastwoodPick.textContent(),/クリント・イーストウッド/);
+    assert.match(await eastwoodPick.textContent(),new RegExp('1/'+eastwood.works.length+'本'));
+    await eastwoodPick.click();
+    assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile.is-watched').count(),1);
+    assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile').count(),eastwood.works.length);
+    assert.ok(await eastwoodPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await eastwoodContext.close();
     const premiereContext=await browser.newContext({viewport:{width:390,height:844}});
     const premierePage=await premiereContext.newPage();
     premierePage.on('pageerror',error=>errors.push(error.stack||error.message));

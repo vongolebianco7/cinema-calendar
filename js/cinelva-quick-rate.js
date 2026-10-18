@@ -61,7 +61,7 @@ function open(movie) {
  $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
- if(!dialog.open)dialog.show();
+ if(!dialog.open)dialog.showModal();
  return true;
 }
 function save() {
@@ -557,6 +557,21 @@ style.textContent+=`
  line-height:1.5!important;
  -webkit-text-size-adjust:100%;
 }
+`;
+style.textContent+=`
+/* Review textarea stays three lines tall and scrolls internally for long reviews. */
+.cinelva-rate-dialog #cinelvaRateComment{
+ height:96px!important;min-height:96px!important;max-height:96px!important;
+ overflow-y:auto!important;overscroll-behavior:contain!important;resize:none!important;
+ -webkit-overflow-scrolling:touch;font-size:16px!important;
+}
+/* A real modal dialog blocks interaction and scrolling behind it. */
+.cinelva-rate-dialog[open]{
+ position:fixed!important;inset:0!important;margin:auto!important;
+ width:min(94vw,390px)!important;max-height:min(85dvh,700px)!important;
+ overflow-y:auto!important;overscroll-behavior:contain!important;
+}
+.cinelva-rate-dialog::backdrop{background:rgba(0,0,0,.65)!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

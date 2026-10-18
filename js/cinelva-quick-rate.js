@@ -282,6 +282,42 @@ style.textContent+=`
 .cinelva-rating-controls .cinelva-inline-score.is-watched .cinelva-inline-value{color:#f1c44e}
 .cinelva-rating-controls .cinelva-rate-button.is-watched{color:#f1c44e}
 `;
+style.textContent+=`
+/* Mobile fix: the native range must own measurable horizontal space. */
+.cinelva-rating-controls{display:flex!important;align-items:center!important;gap:5px!important;padding:4px 7px!important}
+.cinelva-rating-controls>.cinelva-rate-button{flex:0 0 25px!important;width:25px!important;min-width:25px!important;height:32px!important}
+.cinelva-rating-controls>.cinelva-inline-score{
+ display:flex!important;flex:1 1 0%!important;width:0!important;min-width:0!important;
+ max-width:none!important;align-items:center!important;gap:5px!important;
+}
+.cinelva-rating-controls .cinelva-score-track{
+ display:block!important;position:relative!important;flex:1 1 0%!important;
+ width:100%!important;min-width:24px!important;height:36px!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type="range"]{
+ display:block!important;position:relative!important;box-sizing:border-box!important;
+ width:100%!important;min-width:24px!important;max-width:none!important;
+ margin:0!important;padding:0!important;appearance:none!important;-webkit-appearance:none!important;
+ height:36px!important;background:transparent!important;border:0!important;
+}
+.cinelva-rating-controls .cinelva-inline-value{
+ display:block!important;flex:0 0 3.7em!important;min-width:3.7em!important;
+ width:auto!important;white-space:nowrap!important;text-align:right!important;
+ font-size:10px!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type="range"]::-webkit-slider-runnable-track{
+ height:6px!important;border:0!important;border-radius:2px!important;
+ background:linear-gradient(90deg,#e7b944 var(--score-progress),#ffffff40 var(--score-progress))!important;
+}
+.cinelva-rating-controls .cinelva-inline-score:not(.is-watched) input[type="range"]::-webkit-slider-runnable-track{
+ background:linear-gradient(90deg,#9da3ac var(--score-progress),#ffffff40 var(--score-progress))!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type="range"]::-webkit-slider-thumb{
+ -webkit-appearance:none!important;appearance:none!important;width:4px!important;height:19px!important;
+ margin-top:-6.5px!important;border:0!important;border-radius:1px!important;background:#f2d178!important;
+}
+.cinelva-rating-controls .cinelva-inline-score:not(.is-watched) input[type="range"]::-webkit-slider-thumb{background:#c7cbd1!important}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

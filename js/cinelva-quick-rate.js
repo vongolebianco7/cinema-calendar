@@ -158,6 +158,37 @@ function attachInlineScore(button, movie) {
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
+ // The visible track owns gestures. Native range drag on iOS is unreliable inside swipeable cards.
+ let activePointer=null, activeTouch=null;
+ const moveTo=x=>{
+  const rect=track.getBoundingClientRect();
+  if(!rect.width)return;
+  const score=Math.max(0,Math.min(50,Math.round((x-rect.left)/rect.width*50)))/10;
+  if(Number(input.value)!==score){input.value=String(score);sync();}
+ };
+ const finish=()=>{activePointer=null;activeTouch=null;input.dispatchEvent(new Event('change'));};
+ track.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='touch')return;
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  e.preventDefault();e.stopPropagation();activePointer=e.pointerId;
+  track.setPointerCapture?.(e.pointerId);moveTo(e.clientX);
+ });
+ track.addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);});
+ track.addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);finish();});
+ track.addEventListener('pointercancel',()=>{activePointer=null;});
+ track.addEventListener('touchstart',e=>{
+  const touch=e.changedTouches[0];if(!touch)return;
+  activeTouch=touch.identifier;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
+ },{passive:false});
+ track.addEventListener('touchmove',e=>{
+  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
+  if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
+ },{passive:false});
+ track.addEventListener('touchend',e=>{
+  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
+  if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();finish();
+ },{passive:false});
+ track.addEventListener('touchcancel',()=>{activeTouch=null;});
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
  const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
  clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};
@@ -393,6 +424,18 @@ style.textContent+=`
 .cinelva-rating-controls>.cinelva-rating-clear{position:absolute!important;right:7px!important;top:5px!important;z-index:5!important;background:transparent!important;border:0!important;padding:0 2px!important;margin:0!important;min-height:24px!important;font:500 10px system-ui!important;color:#9da3ac!important;cursor:pointer!important}
 .cinelva-rating-controls .cinelva-inline-value{margin-right:34px!important}
 .cinelva-rating-controls .cinelva-rating-clear:focus-visible{outline:2px solid #e7c477!important}
+`;
+style.textContent+=`
+/* Compact two-line quick rating; slim vertical handle and responsive direct-touch track. */
+.cinelva-rating-controls{grid-template-rows:22px 26px!important;min-height:0!important;height:56px!important;padding:3px 6px 4px!important;gap:0!important}
+.cinelva-rating-controls>.cinelva-inline-score{grid-template-rows:22px 26px!important}
+.cinelva-rating-controls>.cinelva-rate-button{height:22px!important;min-height:22px!important;align-self:center!important}
+.cinelva-rating-controls .cinelva-inline-value{line-height:22px!important;align-self:center!important}
+.cinelva-rating-controls .cinelva-score-track{height:26px!important;min-height:26px!important;touch-action:none!important;pointer-events:auto!important;cursor:pointer!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{height:26px!important;min-height:26px!important;pointer-events:none!important;touch-action:none!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-runnable-track{height:5px!important;border-radius:3px!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{-webkit-appearance:none!important;width:4px!important;height:19px!important;margin-top:-7px!important;border-radius:2px!important;box-shadow:none!important}
+.cinelva-rating-controls>.cinelva-rating-clear{top:2px!important;min-height:22px!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

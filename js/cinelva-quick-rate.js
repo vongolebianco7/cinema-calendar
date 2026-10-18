@@ -7,7 +7,7 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
-const reviewIcon='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7"/><path d="m16 19 4-4 2 2-4 4-3 1z"/></svg>';
+const reviewIcon='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>';
 const style=document.createElement('style');
 style.textContent=`
 .cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}.cinelva-rate-inner{padding:14px;gap:9px}.cinelva-review-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.cinelva-review-header strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cinelva-review-header button{background:transparent;border:0;color:inherit;font-size:27px;width:36px;height:36px;cursor:pointer}.cinelva-review-score{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}.cinelva-review-score output{font-size:30px;font-weight:750}.cinelva-review-score input{flex-basis:100%}.cinelva-review-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cinelva-rate-inner label[hidden]{display:none}.cinelva-rate-inner textarea{min-height:52px}
@@ -151,11 +151,12 @@ function attachInlineScore(button, movie) {
  input.value=Number(existing?.rating??0).toFixed(1);input.dataset.movieId=String(id);input.setAttribute('aria-label','一覧で点数をゲージで設定');
  input.onclick=e=>e.stopPropagation();
  input.onkeydown=e=>e.stopPropagation();
- const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=input.value;
- const sync=()=>{const score=Number(input.value),text=score.toFixed(1);if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',score>0);button.classList.toggle('is-watched',score>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');};
+ const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=Number(input.value)>0?Number(input.value).toFixed(1):'未鑑賞';
+ let committedScore=Number(existing?.rating??0);
+ const sync=()=>{const score=Number(input.value),text=score>0?score.toFixed(1):'未鑑賞';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',committedScore>0);button.classList.toggle('is-watched',committedScore>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');};
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
- try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
  button.before(controls);controls.append(button,wrap);sync();
@@ -165,7 +166,7 @@ function refreshRatingLabels(){
  for(const input of document.querySelectorAll('.cinelva-inline-score input')){
   if(document.activeElement===input)continue;
   const id=input.dataset.movieId;
-  if(id){const record=saved.find(r=>String(r.id)===id);input.value=Number(record?.rating??0).toFixed(1);input.dispatchEvent(new Event('input'));}
+  if(id){const record=saved.find(r=>String(r.id)===id);input.value=Number(record?.rating??0).toFixed(1);input.dispatchEvent(new Event('input'));input.closest('.cinelva-inline-score')?.classList.toggle('is-watched',Number(record?.rating??0)>0);}
  }
  const byId=new Map();
  for(const record of saved){
@@ -258,6 +259,15 @@ style.textContent+=`
 .cinelva-rating-controls>.cinelva-inline-score{flex:1 1 auto;width:auto;max-width:none;min-width:0;margin:0;padding:0 2px}
 .cinelva-rating-controls .cinelva-score-track{flex:1 1 auto;min-width:0}
 .cinelva-rating-controls .cinelva-inline-value{flex:0 0 auto}
+`;
+style.textContent+=`
+/* Neutral while sliding; yellow after releasing and successfully saving. */
+.cinelva-inline-score:not(.is-watched) input::-webkit-slider-runnable-track{background:linear-gradient(90deg,#9da3ac var(--score-progress),#ffffff40 var(--score-progress))}
+.cinelva-inline-score:not(.is-watched) input::-webkit-slider-thumb{background:#c7cbd1}
+.cinelva-inline-score:not(.is-watched) input::-moz-range-progress{background:#9da3ac}
+.cinelva-inline-score:not(.is-watched) input::-moz-range-thumb{background:#c7cbd1}
+.cinelva-inline-value{min-width:3.6em;font-size:11px;white-space:nowrap}
+.cinelva-inline-score:not(.is-watched) .cinelva-inline-value{color:#b9b9b9}
 `;
 root.CinelvaQuickRate={open,normalize};
 

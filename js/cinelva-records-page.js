@@ -166,21 +166,21 @@
         const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
         return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
       });
-      // Put readable names and values on wide wedges. Keep the full legend
-      // for narrow wedges, and avoid the central hole and SVG edges.
+      // The ring is narrow on mobile: reserve the complete name/value for
+      // the legend and put two-line labels only on wedges that can hold them.
+      // A dominant wedge must remain labelled, even when its angle is near
+      // the bottom of the chart.
       for(const item of labels){
         const radial=37;
         const x=50+radial*Math.cos(item.angle);
         const y=50+radial*Math.sin(item.angle);
-        const nameSize=4.1,valueSize=4.4;
+        const size=4.7;
         const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const nameWidth=measure(name,nameSize);
-        const valueWidth=measure(item.value,valueSize);
-        const width=Math.max(nameWidth,valueWidth);
+        const width=Math.max(measure(name,size),measure(item.value,size));
         const availableArc=2*Math.PI*radial*item.fraction;
         const fits=item.fraction>=.12 && availableArc>=width+2 &&
-          x-width/2>=5 && x+width/2<=95 && y>=12 && y<=85;
-        if(fits)svg.append(svgText(x,y-2,[name,item.value],nameSize));
+          x-width/2>=4 && x+width/2<=96 && y>=9 && y<=91;
+        if(fits)svg.append(svgText(x,y-2,[name,item.value],size));
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

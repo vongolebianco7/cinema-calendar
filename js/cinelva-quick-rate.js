@@ -621,6 +621,59 @@ dialog.cinelva-rate-dialog[open]{
  max-height:85dvh!important;
 }
 `;
+style.textContent+=`
+/* Two-row card rating: eye | score + value | clear; slider below. */
+.cinelva-rating-controls{
+ box-sizing:border-box!important;
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr)!important;
+ grid-template-rows:25px 26px!important;
+ height:56px!important;min-height:56px!important;
+ padding:2px 6px 3px!important;
+ overflow:hidden!important;
+ position:relative!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score{
+ grid-column:1!important;grid-row:1/3!important;
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ grid-template-rows:25px 26px!important;
+ min-width:0!important;width:100%!important;
+ position:relative!important;pointer-events:none!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score::before{content:none!important;display:none!important}
+.cinelva-rating-controls .cinelva-inline-value{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:center!important;align-self:center!important;
+ position:static!important;top:auto!important;
+ margin:0!important;padding:0!important;
+ width:auto!important;max-width:calc(100% - 112px)!important;
+ min-width:0!important;line-height:20px!important;
+ text-align:center!important;white-space:nowrap!important;
+ font-size:11px!important;letter-spacing:0!important;
+}
+.cinelva-rating-controls .cinelva-inline-value::before{
+ content:"スコア "!important;color:#c3c8d0!important;font-weight:500!important;
+}
+.cinelva-rating-controls>.cinelva-rate-button{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:start!important;align-self:center!important;
+ position:relative!important;z-index:6!important;
+ margin:0!important;
+}
+.cinelva-rating-controls>.cinelva-rating-clear{
+ position:absolute!important;top:3px!important;right:5px!important;
+ box-sizing:border-box!important;z-index:7!important;
+ height:23px!important;min-height:23px!important;
+ max-width:64px!important;margin:0!important;
+ padding:2px 6px!important;line-height:16px!important;
+ border:1px solid #aeb5c07a!important;border-radius:5px!important;
+ background:#ffffff0d!important;
+}
+.cinelva-rating-controls .cinelva-score-track{
+ grid-column:1!important;grid-row:2!important;
+ min-width:0!important;width:100%!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -580,6 +580,34 @@ style.textContent+=`
  top:7px!important;
 }
 `;
+style.textContent+=`
+/* Make the clear action visually identifiable without changing its hit target. */
+.cinelva-rating-controls>.cinelva-rating-clear{
+ border:1px solid #aeb5c07a!important;
+ border-radius:5px!important;
+ background:#ffffff0d!important;
+ padding:2px 6px!important;
+ line-height:16px!important;
+ color:#dce0e7!important;
+}
+/* Label the slider directly above its track, not over the clear/eye actions. */
+.cinelva-rating-controls .cinelva-score-track::after{
+ content:""!important;
+}
+.cinelva-rating-controls .cinelva-score-track::before{
+ /* Keep the existing live yellow fill intact. */
+}
+.cinelva-rating-controls .cinelva-inline-score{position:relative!important}
+.cinelva-rating-controls .cinelva-inline-score::before{
+ content:"スコア"!important;
+ position:absolute!important;
+ left:3px!important;top:-14px!important;
+ font:500 10px/12px system-ui!important;
+ letter-spacing:.02em!important;
+ color:#c3c8d0!important;
+ pointer-events:none!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

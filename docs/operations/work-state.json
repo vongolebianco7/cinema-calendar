@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T21:23:31+09:00",
+  "updated_at": "2026-10-19T04:02:25+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
-  "branch": "fix/imported-review-edits-20261018",
-  "head_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
+  "base_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
+  "branch": "fix/deployment-path-boundaries-20261018",
+  "head_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
   "pull_request": null,
   "work_items": [
     {
@@ -484,9 +484,16 @@
     {
       "id": "P0-IMPORTED-REVIEW-EDITS",
       "title": "Edit imported reviews without duplication or identity overwrite",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "Editor/inline/labelsrecognizebothTMDBaliasesandpreserveexistinglocalID/date/comment; contradictoryexplicitidentitysave/restorefailsbeforeanywrite.",
-      "ci": "Threeactualeditor/inlinefailuresandcorestorecollisionreproducedbeforefix;33focusedtests,135activeNode,Python125/125passed. Browserfixturecoversimportedinlineanddialogedits;newCIrequired."
+      "ci": "PR #392 merged as 139677684b047220cd78d667ef74f75c8c9dcf20; final head995e1013 all14check-runs succeeded. Imported record IDs, date/comment/unknown fields preserved; conflicting film overwrites rejected."
+    },
+    {
+      "id": "P0-DEPLOYMENT-BOUNDARIES",
+      "title": "Make deployment change detection independent of working directory",
+      "status": "in_progress",
+      "acceptance": "Backend-only changes build only backend; frontend inputs build only frontend; docs/tests skip both from root or backend directory.",
+      "ci": "Old configuration fails3/4 real-Git regressions. Root-anchored pathspecs pass4/4; quality gate139Node and fullPython125pass; focused review ready. PR CI pending."
     }
   ],
   "verification": [
@@ -776,26 +783,26 @@
     {
       "check": "PR390integration",
       "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
+    },
+    {
+      "check": "Canonical production source smoke",
+      "result": "Vercel READY production dadc773a79ad6175bb02c79d1f5e3c6a795fe978, alias cinelva.vercel.app confirmed. Six actual canonical URLs returned200 and exact main bytes: index, MyCinelva, search, quick-rate, library records, legacy redirect. This is HTTP/source evidence, not browser interaction or real-iPhone acceptance."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
+    "target_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
+    "last_observed_vercel_production_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-18T20:15:15+09:00",
-    "reported_restriction": "Main8b89f1b frontend/backendstatuses bothbuild-rate-limit. No manualretry. Sourcefixesremainunverifiedoncanonicalproduction.",
-    "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
-    "provider_preview_status": "Latest observed production remains dpl_8pLTgFogy3Nauy3opWNxWa4qWaHh at cc02eb47 (#295). It does not include recent main changes.",
-    "blockers": [
-      "Vercel preview/build quota remains rate-limited on new PR heads. This blocks release verification only, not development or GitHub Actions."
-    ]
+    "last_observed_vercel_check_at": "2026-10-19T04:02:25+09:00",
+    "reported_restriction": "Previous build-rate-limit no longer applies to latest main: frontend deployment succeeded; backend ignored unchanged inputs.",
+    "next_action": "After boundary PR CI/merge, observe automatic deployment once. Verify canonical browser journeys; no manual redeploy needed.",
+    "provider_preview_status": "Canonical alias points to READY production dpl_E281etJSx94ybpGjvSz92GkPQ5Em at dadc773; six source URLs match main.",
+    "blockers": []
   },
-  "blockers": [
-    "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
-  ],
-  "next_action": "Publish importedrevieweditfixPR; requirefocusedreview andfreshbrowser/backup/qualityCI, mergeonlywhengreen. Preserveconcurrent#389directorprofiledatawork. Refreshmainandcontinueacceptancegaps; independentlyconfirmVercelcapclearedbeforeonebatchedcanonicalrelease.",
+  "blockers": [],
+  "next_action": "Publish deployment-boundary PR; require CI and merge after successful checks. Preserve open #391 director-profile work. Verify canonical production browser journeys and continue remaining acceptance gates; no overall percentage claim.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

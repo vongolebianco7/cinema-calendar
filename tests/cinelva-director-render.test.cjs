@@ -249,3 +249,18 @@ test('30-minute films remain, while 29-minute films are excluded', () => {
   assert.match(detail.innerHTML, /45分作品/);
   assert.doesNotMatch(detail.innerHTML, /29分作品/);
 });
+
+test('Paul Thomas Anderson partial TMDB catalog never reports a false 1/1 total', () => {
+  const film={id:7345,title:'ゼア・ウィル・ビー・ブラッド',director:'Paul Thomas Anderson',runtime:158,rating:4.5,source:'tmdb',job:'Director'};
+  const {row,detail}=render({records:[film],works:[film],name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false}}});
+  assert.match(row.innerHTML,/総数未取得/);
+  assert.doesNotMatch(row.innerHTML,/1\\/1本/);
+  row.listeners.click();
+  assert.doesNotMatch(detail.innerHTML,/1 \\/ 1本 鑑賞済み/);
+});
+
+test('Paul Thomas Anderson shows real denominator after 8 verified features', () => {
+  const works=Array.from({length:9},(_,i)=>({id:85000+i,title:'長編'+i,director:'Paul Thomas Anderson',runtime:100+i,source:'tmdb',job:'Director',is_director:true,year:2000+i}));
+  const {row}=render({records:[{...works[0],rating:4}],works,name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false,runtime_unverified:0}}});
+  assert.match(row.innerHTML,/1\\/9本/);
+});

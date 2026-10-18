@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T19:32:53.589776+00:00",
+  "generated_at": "2026-10-18T20:42:53.129861+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -8518,7 +8518,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1368337"
+          "source_url": "https://www.themoviedb.org/movie/1368337",
+          "runtime": 173
         },
         {
           "id": 872585,
@@ -8542,7 +8543,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/872585"
+          "source_url": "https://www.themoviedb.org/movie/872585",
+          "runtime": 180
         },
         {
           "id": 577922,
@@ -8566,7 +8568,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/577922"
+          "source_url": "https://www.themoviedb.org/movie/577922",
+          "runtime": 150
         },
         {
           "id": 374720,
@@ -8590,29 +8593,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/374720"
-        },
-        {
-          "id": 352114,
-          "title": "Quay",
-          "year": "2015",
-          "date": "2015-08-19",
-          "poster": "https://image.tmdb.org/t/p/w342/uluMeKfYFVvfZlmHgFBXqbnHXE2.jpg",
-          "score": 6.0,
-          "votes": 73,
-          "tmdb": "https://www.themoviedb.org/movie/352114",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Quay",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "クリストファー・ノーラン",
-          "director_id": 525,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/352114"
+          "source_url": "https://www.themoviedb.org/movie/374720",
+          "runtime": 106
         },
         {
           "id": 157336,
@@ -8636,7 +8618,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/157336"
+          "source_url": "https://www.themoviedb.org/movie/157336",
+          "runtime": 169
         },
         {
           "id": 49026,
@@ -8660,7 +8643,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/49026"
+          "source_url": "https://www.themoviedb.org/movie/49026",
+          "runtime": 164
         },
         {
           "id": 27205,
@@ -8684,7 +8668,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/27205"
+          "source_url": "https://www.themoviedb.org/movie/27205",
+          "runtime": 148
         },
         {
           "id": 155,
@@ -8708,7 +8693,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/155"
+          "source_url": "https://www.themoviedb.org/movie/155",
+          "runtime": 152
         },
         {
           "id": 1124,
@@ -8732,7 +8718,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1124"
+          "source_url": "https://www.themoviedb.org/movie/1124",
+          "runtime": 130
         },
         {
           "id": 272,
@@ -8756,7 +8743,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/272"
+          "source_url": "https://www.themoviedb.org/movie/272",
+          "runtime": 140
         },
         {
           "id": 320,
@@ -8780,7 +8768,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/320"
+          "source_url": "https://www.themoviedb.org/movie/320",
+          "runtime": 118
         },
         {
           "id": 77,
@@ -8803,7 +8792,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/77"
+          "source_url": "https://www.themoviedb.org/movie/77",
+          "runtime": 113
         },
         {
           "id": 11660,
@@ -8826,74 +8816,8 @@
           "director_id": 525,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/11660"
-        },
-        {
-          "id": 43629,
-          "title": "Doodlebug",
-          "year": "1997",
-          "date": "1997-01-01",
-          "poster": "https://image.tmdb.org/t/p/w342/cXDFFv6yZNW3vUHOKKUPJNnL0So.jpg",
-          "score": 6.5,
-          "votes": 510,
-          "tmdb": "https://www.themoviedb.org/movie/43629",
-          "genre_ids": [
-            27
-          ],
-          "original_title": "Doodlebug",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "クリストファー・ノーラン",
-          "director_id": 525,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/43629"
-        },
-        {
-          "id": 456684,
-          "title": "Larceny",
-          "year": "1996",
-          "date": "1996-07-14",
-          "poster": "https://image.tmdb.org/t/p/w342/jBWtTViwpr9xN6PWuzp8WlxTSXB.jpg",
-          "score": 5.8,
-          "votes": 8,
-          "tmdb": "https://www.themoviedb.org/movie/456684",
-          "genre_ids": [
-            80,
-            18
-          ],
-          "original_title": "Larceny",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "クリストファー・ノーラン",
-          "director_id": 525,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/456684"
-        },
-        {
-          "id": 804706,
-          "title": "Tarantella",
-          "year": "1990",
-          "date": "1990-09-12",
-          "poster": "https://image.tmdb.org/t/p/w342/eqFhruWEIRwjkvqgJN48VPuR50Q.jpg",
-          "score": 5.1,
-          "votes": 56,
-          "tmdb": "https://www.themoviedb.org/movie/804706",
-          "genre_ids": [
-            27
-          ],
-          "original_title": "Tarantella",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "クリストファー・ノーラン",
-          "director_id": 525,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/804706"
+          "source_url": "https://www.themoviedb.org/movie/11660",
+          "runtime": 68
         }
       ],
       "nameJa": "クリストファー・ノーラン",
@@ -8918,7 +8842,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 17
+        "runtime_unverified": 0
       }
     },
     "488": {
@@ -8946,7 +8870,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1275779"
+          "source_url": "https://www.themoviedb.org/movie/1275779",
+          "runtime": 146
         },
         {
           "id": 804095,
@@ -8968,7 +8893,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/804095"
+          "source_url": "https://www.themoviedb.org/movie/804095",
+          "runtime": 151
         },
         {
           "id": 511809,
@@ -8992,7 +8918,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/511809"
+          "source_url": "https://www.themoviedb.org/movie/511809",
+          "runtime": 156
         },
         {
           "id": 333339,
@@ -9016,7 +8943,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/333339"
+          "source_url": "https://www.themoviedb.org/movie/333339",
+          "runtime": 140
         },
         {
           "id": 446354,
@@ -9039,7 +8967,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/446354"
+          "source_url": "https://www.themoviedb.org/movie/446354",
+          "runtime": 116
         },
         {
           "id": 267935,
@@ -9063,7 +8992,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/267935"
+          "source_url": "https://www.themoviedb.org/movie/267935",
+          "runtime": 117
         },
         {
           "id": 296098,
@@ -9086,7 +9016,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/296098"
+          "source_url": "https://www.themoviedb.org/movie/296098",
+          "runtime": 141
         },
         {
           "id": 72976,
@@ -9109,7 +9040,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/72976"
+          "source_url": "https://www.themoviedb.org/movie/72976",
+          "runtime": 150
         },
         {
           "id": 57212,
@@ -9133,7 +9065,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/57212"
+          "source_url": "https://www.themoviedb.org/movie/57212",
+          "runtime": 146
         },
         {
           "id": 17578,
@@ -9157,30 +9090,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/17578"
-        },
-        {
-          "id": 1198548,
-          "title": "A Timeless Call",
-          "year": "2008",
-          "date": "2008-08-27",
-          "poster": "https://image.tmdb.org/t/p/w342/eSIJDlKvMt1OllOCBqfZ0bmRqqQ.jpg",
-          "score": 5.0,
-          "votes": 3,
-          "tmdb": "https://www.themoviedb.org/movie/1198548",
-          "genre_ids": [
-            99,
-            10752
-          ],
-          "original_title": "A Timeless Call",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "スティーヴン・スピルバーグ",
-          "director_id": 488,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1198548"
+          "source_url": "https://www.themoviedb.org/movie/17578",
+          "runtime": 107
         },
         {
           "id": 217,
@@ -9203,7 +9114,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/217"
+          "source_url": "https://www.themoviedb.org/movie/217",
+          "runtime": 124
         },
         {
           "id": 612,
@@ -9227,7 +9139,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/612"
+          "source_url": "https://www.themoviedb.org/movie/612",
+          "runtime": 164
         },
         {
           "id": 74,
@@ -9251,7 +9164,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/74"
+          "source_url": "https://www.themoviedb.org/movie/74",
+          "runtime": 117
         },
         {
           "id": 594,
@@ -9274,7 +9188,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/594"
+          "source_url": "https://www.themoviedb.org/movie/594",
+          "runtime": 129
         },
         {
           "id": 640,
@@ -9297,7 +9212,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/640"
+          "source_url": "https://www.themoviedb.org/movie/640",
+          "runtime": 141
         },
         {
           "id": 180,
@@ -9321,7 +9237,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/180"
+          "source_url": "https://www.themoviedb.org/movie/180",
+          "runtime": 145
         },
         {
           "id": 644,
@@ -9345,30 +9262,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/644"
-        },
-        {
-          "id": 793912,
-          "title": "The Unfinished Journey",
-          "year": "1999",
-          "date": "1999-12-31",
-          "poster": "https://image.tmdb.org/t/p/w342/iwOxkJJAFZhRHb97drDzaRtm6WW.jpg",
-          "score": 6.5,
-          "votes": 4,
-          "tmdb": "https://www.themoviedb.org/movie/793912",
-          "genre_ids": [
-            99,
-            36
-          ],
-          "original_title": "The Unfinished Journey",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "スティーヴン・スピルバーグ",
-          "director_id": 488,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/793912"
+          "source_url": "https://www.themoviedb.org/movie/644",
+          "runtime": 146
         },
         {
           "id": 857,
@@ -9392,7 +9287,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/857"
+          "source_url": "https://www.themoviedb.org/movie/857",
+          "runtime": 169
         },
         {
           "id": 11831,
@@ -9416,7 +9312,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/11831"
+          "source_url": "https://www.themoviedb.org/movie/11831",
+          "runtime": 155
         },
         {
           "id": 330,
@@ -9440,7 +9337,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/330"
+          "source_url": "https://www.themoviedb.org/movie/330",
+          "runtime": 129
         },
         {
           "id": 424,
@@ -9464,7 +9362,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/424"
+          "source_url": "https://www.themoviedb.org/movie/424",
+          "runtime": 195
         },
         {
           "id": 329,
@@ -9487,7 +9386,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/329"
+          "source_url": "https://www.themoviedb.org/movie/329",
+          "runtime": 127
         },
         {
           "id": 879,
@@ -9512,7 +9412,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/879"
+          "source_url": "https://www.themoviedb.org/movie/879",
+          "runtime": 142
         },
         {
           "id": 1309288,
@@ -9536,7 +9437,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1309288"
+          "source_url": "https://www.themoviedb.org/movie/1309288",
+          "runtime": 120
         },
         {
           "id": 11352,
@@ -9560,7 +9462,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/11352"
+          "source_url": "https://www.themoviedb.org/movie/11352",
+          "runtime": 122
         },
         {
           "id": 89,
@@ -9583,7 +9486,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/89"
+          "source_url": "https://www.themoviedb.org/movie/89",
+          "runtime": 127
         },
         {
           "id": 10110,
@@ -9607,7 +9511,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/10110"
+          "source_url": "https://www.themoviedb.org/movie/10110",
+          "runtime": 153
         },
         {
           "id": 576510,
@@ -9632,7 +9537,8 @@
           "director_id": 488,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/576510"
+          "source_url": "https://www.themoviedb.org/movie/576510",
+          "runtime": 111
         },
         {
           "genre_ids": [
@@ -9653,7 +9559,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/873",
           "score": 7.724,
-          "votes": 2047
+          "votes": 2047,
+          "runtime": 154
         },
         {
           "genre_ids": [
@@ -9675,7 +9582,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/87",
           "score": 7.3,
-          "votes": 10453
+          "votes": 10453,
+          "runtime": 118
         },
         {
           "genre_ids": [
@@ -9698,7 +9606,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/15301",
           "score": 6.5,
-          "votes": 855
+          "votes": 855,
+          "runtime": 101
         },
         {
           "genre_ids": [
@@ -9721,7 +9630,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/601",
           "score": 7.5,
-          "votes": 12337
+          "votes": 12337,
+          "runtime": 115
         },
         {
           "genre_ids": [
@@ -9743,7 +9653,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/85",
           "score": 7.928,
-          "votes": 14111
+          "votes": 14111,
+          "runtime": 115
         },
         {
           "genre_ids": [
@@ -9765,7 +9676,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/11519",
           "score": 5.771,
-          "votes": 741
+          "votes": 741,
+          "runtime": 118
         },
         {
           "genre_ids": [
@@ -9787,7 +9699,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/840",
           "score": 7.351,
-          "votes": 4882
+          "votes": 4882,
+          "runtime": 135
         },
         {
           "genre_ids": [
@@ -9810,7 +9723,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/578",
           "score": 7.688,
-          "votes": 11943
+          "votes": 11943,
+          "runtime": 124
         },
         {
           "genre_ids": [
@@ -9832,7 +9746,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/5121",
           "score": 6.6,
-          "votes": 488
+          "votes": 488,
+          "runtime": 110
         },
         {
           "genre_ids": [
@@ -9856,7 +9771,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/110747",
           "score": 5.5,
-          "votes": 14
+          "votes": 14,
+          "runtime": 73
         },
         {
           "genre_ids": [
@@ -9878,7 +9794,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/85483",
           "score": 5.393,
-          "votes": 61
+          "votes": 61,
+          "runtime": 73
         },
         {
           "genre_ids": [
@@ -9901,7 +9818,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/839",
           "score": 7.419,
-          "votes": 2161
+          "votes": 2161,
+          "runtime": 74
         },
         {
           "genre_ids": [
@@ -9924,29 +9842,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/391069",
           "score": 6.7,
-          "votes": 27
-        },
-        {
-          "genre_ids": [
-            18,
-            10749
-          ],
-          "id": 97105,
-          "title": "Amblin'",
-          "original_title": "Amblin'",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1968",
-          "date": "1968-12-18",
-          "director": "スティーヴン・スピルバーグ",
-          "director_id": 488,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/1By3fBCDxIkkeLIY3Vn2p1i0agC.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/97105",
-          "score": 6.1,
-          "votes": 52
+          "votes": 27,
+          "runtime": 98
         },
         {
           "genre_ids": [
@@ -9967,7 +9864,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1692079",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         }
       ],
       "nameJa": "スティーヴン・スピルバーグ",
@@ -9988,7 +9886,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 45
+        "runtime_unverified": 1
       }
     },
     "64141": {
@@ -57000,7 +56898,27 @@
     "6243060": {
       "id": 6243060,
       "name": "末廣朋樹",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [],
+          "id": 1703008,
+          "title": "月の糸杉",
+          "original_title": "月の糸杉",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-10-23",
+          "director": "末廣朋樹",
+          "director_id": 6243060,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/mntDfwy3aPhEMSyNFT92ILg4bOY.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1703008"
+        }
+      ],
       "nameJa": "末廣朋樹",
       "original_name": "末廣朋樹",
       "also_known_as": [
@@ -57014,11 +56932,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/6243060",
       "credits_source_url": "https://api.themoviedb.org/3/person/6243060/movie_credits",
-      "checked_at": "2026-10-18T12:07:35.490370+00:00",
+      "checked_at": "2026-10-18T20:41:17.354439+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "2493314": {
@@ -59791,11 +59709,33 @@
     "6485774": {
       "id": 6485774,
       "name": "イナガキ・マサヒロ",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1773014,
+          "title": "4アウト ─もう一度、プレイボール─",
+          "original_title": "4アウト ─もう一度、プレイボール─",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-06",
+          "director": "イナガキ・マサヒロ",
+          "director_id": 6485774,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/jc3MtWlLeuHQJwEYlvb5SVcVhCv.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1773014"
+        }
+      ],
       "nameJa": "イナガキ・マサヒロ",
       "original_name": "Masahiro Inagaki",
       "also_known_as": [
-        "Masahiro Inagaki"
+        "イナガキ・マサヒロ"
       ],
       "name_status": "transliterated",
       "profile_path": null,
@@ -59805,11 +59745,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/6485774",
       "credits_source_url": "https://api.themoviedb.org/3/person/6485774/movie_credits",
-      "checked_at": "2026-10-18T12:07:39.678172+00:00",
+      "checked_at": "2026-10-18T20:41:17.471057+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "1102622": {
@@ -63361,7 +63301,29 @@
     "2911110": {
       "id": 2911110,
       "name": "渡邉直子",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1767360,
+          "title": "月がみている",
+          "original_title": "月がみている",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-20",
+          "director": "渡邉直子",
+          "director_id": 2911110,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/fP2IG82kQ8EEYGeRrCzMcHcRUBz.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1767360"
+        }
+      ],
       "nameJa": "渡邉直子",
       "original_name": "渡邉直子",
       "also_known_as": [
@@ -63376,21 +63338,43 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/2911110",
       "credits_source_url": "https://api.themoviedb.org/3/person/2911110/movie_credits",
-      "checked_at": "2026-10-18T12:07:45.284978+00:00",
+      "checked_at": "2026-10-18T20:41:17.821569+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "6430795": {
       "id": 6430795,
       "name": "クマモト・リョウヘイ",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1754757,
+          "title": "はじまりのさよなら",
+          "original_title": "はじまりのさよなら",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-20",
+          "director": "クマモト・リョウヘイ",
+          "director_id": 6430795,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7gF6z6pCFHcuw17yhTtepJ42tEP.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1754757"
+        }
+      ],
       "nameJa": "クマモト・リョウヘイ",
       "original_name": "Ryohei Kumamoto",
       "also_known_as": [
-        "Ryohei Kumamoto"
+        "クマモト・リョウヘイ"
       ],
       "name_status": "transliterated",
       "profile_path": null,
@@ -63400,11 +63384,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/6430795",
       "credits_source_url": "https://api.themoviedb.org/3/person/6430795/movie_credits",
-      "checked_at": "2026-10-18T12:07:45.631869+00:00",
+      "checked_at": "2026-10-18T20:41:18.171503+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "555050": {
@@ -65818,7 +65802,32 @@
     "1819861": {
       "id": 1819861,
       "name": "飯野慎也",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            16,
+            18,
+            878,
+            14
+          ],
+          "id": 1700953,
+          "title": "タコピーの原罪 -ありがとう、また明日-",
+          "original_title": "タコピーの原罪 -ありがとう、また明日-",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-27",
+          "director": "飯野慎也",
+          "director_id": 1819861,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/d8naDZPJ4NBlJW7SiiUrEAqDeSC.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1700953"
+        }
+      ],
       "nameJa": "飯野慎也",
       "original_name": "飯野慎也",
       "also_known_as": [
@@ -65836,11 +65845,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/1819861",
       "credits_source_url": "https://api.themoviedb.org/3/person/1819861/movie_credits",
-      "checked_at": "2026-10-18T12:07:48.078466+00:00",
+      "checked_at": "2026-10-18T20:41:18.521084+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "2121587": {
@@ -75812,7 +75821,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1054867"
+          "source_url": "https://www.themoviedb.org/movie/1054867",
+          "runtime": 162
         },
         {
           "id": 718032,
@@ -75836,29 +75846,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/718032"
-        },
-        {
-          "id": 610120,
-          "title": "Anima",
-          "year": "2019",
-          "date": "2019-06-26",
-          "poster": "https://image.tmdb.org/t/p/w342/xCBOjFAzsz8d2kABIPfwIAOeJ5t.jpg",
-          "score": 7.28,
-          "votes": 497,
-          "tmdb": "https://www.themoviedb.org/movie/610120",
-          "genre_ids": [
-            10402
-          ],
-          "original_title": "Anima",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/610120"
+          "source_url": "https://www.themoviedb.org/movie/718032",
+          "runtime": 133
         },
         {
           "id": 400617,
@@ -75881,49 +75870,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/400617"
-        },
-        {
-          "id": 536213,
-          "title": "HAIM / Valentine",
-          "year": "2017",
-          "date": "2017-07-14",
-          "poster": "https://image.tmdb.org/t/p/w342/pTQq8eczXH8tfGwS0eadzZnIaAe.jpg",
-          "score": 7.2,
-          "votes": 12,
-          "tmdb": "https://www.themoviedb.org/movie/536213",
-          "genre_ids": [
-            10402
-          ],
-          "original_title": "HAIM / Valentine",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/536213"
-        },
-        {
-          "id": 1755498,
-          "title": "Daydreaming",
-          "year": "2016",
-          "date": "2016-05-06",
-          "poster": null,
-          "score": 0.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/1755498",
-          "genre_ids": [],
-          "original_title": "Daydreaming",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1755498"
+          "source_url": "https://www.themoviedb.org/movie/400617",
+          "runtime": 130
         },
         {
           "id": 355600,
@@ -75946,7 +75894,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/355600"
+          "source_url": "https://www.themoviedb.org/movie/355600",
+          "runtime": 54
         },
         {
           "id": 171274,
@@ -75970,7 +75919,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/171274"
+          "source_url": "https://www.themoviedb.org/movie/171274",
+          "runtime": 149
         },
         {
           "id": 68722,
@@ -75992,7 +75942,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/68722"
+          "source_url": "https://www.themoviedb.org/movie/68722",
+          "runtime": 137
         },
         {
           "id": 7345,
@@ -76014,93 +75965,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/7345"
-        },
-        {
-          "id": 182673,
-          "title": "Mattress Man Commercial",
-          "year": "2003",
-          "date": "2003-07-02",
-          "poster": "https://image.tmdb.org/t/p/w342/iOS9p6NeTwu9dbYTiBL3Mq3prki.jpg",
-          "score": 7.0,
-          "votes": 62,
-          "tmdb": "https://www.themoviedb.org/movie/182673",
-          "genre_ids": [
-            35
-          ],
-          "original_title": "Mattress Man Commercial",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/182673"
-        },
-        {
-          "id": 1723392,
-          "title": "12 Scopitones",
-          "year": "2003",
-          "date": "2003-06-24",
-          "poster": null,
-          "score": 7.0,
-          "votes": 1,
-          "tmdb": "https://www.themoviedb.org/movie/1723392",
-          "genre_ids": [],
-          "original_title": "12 Scopitones",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1723392"
-        },
-        {
-          "id": 68568,
-          "title": "Couch",
-          "year": "2003",
-          "date": "2003-05-14",
-          "poster": "https://image.tmdb.org/t/p/w342/lNJ91ZPm51oIc4kH9rtA8rxEyw.jpg",
-          "score": 4.551,
-          "votes": 59,
-          "tmdb": "https://www.themoviedb.org/movie/68568",
-          "genre_ids": [
-            35
-          ],
-          "original_title": "Couch",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/68568"
-        },
-        {
-          "id": 704455,
-          "title": "Ballchewer",
-          "year": "2002",
-          "date": "2002-11-01",
-          "poster": "https://image.tmdb.org/t/p/w342/deBTOTzUEpeI57T6SM9jDRqvY5A.jpg",
-          "score": 5.0,
-          "votes": 7,
-          "tmdb": "https://www.themoviedb.org/movie/704455",
-          "genre_ids": [
-            18
-          ],
-          "original_title": "Ballchewer",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/704455"
+          "source_url": "https://www.themoviedb.org/movie/7345",
+          "runtime": 158
         },
         {
           "id": 8051,
@@ -76124,7 +75990,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/8051"
+          "source_url": "https://www.themoviedb.org/movie/8051",
+          "runtime": 96
         },
         {
           "id": 334,
@@ -76146,30 +76013,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/334"
-        },
-        {
-          "id": 495449,
-          "title": "Flagpole Special",
-          "year": "1998",
-          "date": "1998-06-16",
-          "poster": "https://image.tmdb.org/t/p/w342/4tWCLFrFT08EQNEl6LNfIcwKjwS.jpg",
-          "score": 6.2,
-          "votes": 4,
-          "tmdb": "https://www.themoviedb.org/movie/495449",
-          "genre_ids": [
-            35,
-            18
-          ],
-          "original_title": "Flagpole Special",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/495449"
+          "source_url": "https://www.themoviedb.org/movie/334",
+          "runtime": 189
         },
         {
           "id": 4995,
@@ -76192,7 +76037,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/4995"
+          "source_url": "https://www.themoviedb.org/movie/4995",
+          "runtime": 155
         },
         {
           "id": 8052,
@@ -76215,52 +76061,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/8052"
-        },
-        {
-          "id": 107380,
-          "title": "Cigarettes & Coffee",
-          "year": "1993",
-          "date": "1993-08-03",
-          "poster": "https://image.tmdb.org/t/p/w342/coz58zPNbVDLbm6r6n7IdppgwUX.jpg",
-          "score": 6.6,
-          "votes": 60,
-          "tmdb": "https://www.themoviedb.org/movie/107380",
-          "genre_ids": [
-            18,
-            80
-          ],
-          "original_title": "Cigarettes & Coffee",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/107380"
-        },
-        {
-          "id": 966259,
-          "title": "Production Assistant",
-          "year": "1992",
-          "date": "1992-11-29",
-          "poster": "https://image.tmdb.org/t/p/w342/2fMdXPm1NhgSkhDnm3rejqVT2gj.jpg",
-          "score": 2.0,
-          "votes": 1,
-          "tmdb": "https://www.themoviedb.org/movie/966259",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Production Assistant",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ポール・トーマス・アンダーソン",
-          "director_id": 4762,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/966259"
+          "source_url": "https://www.themoviedb.org/movie/8052",
+          "runtime": 102
         },
         {
           "id": 107384,
@@ -76283,7 +76085,8 @@
           "director_id": 4762,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/107384"
+          "source_url": "https://www.themoviedb.org/movie/107384",
+          "runtime": 31
         }
       ],
       "nameJa": "ポール・トーマス・アンダーソン",
@@ -76311,7 +76114,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 22
+        "runtime_unverified": 0
       }
     },
     "1827034": {
@@ -149966,7 +149769,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1466682"
+          "source_url": "https://www.themoviedb.org/movie/1466682",
+          "runtime": 121
         },
         {
           "id": 669651,
@@ -149988,7 +149792,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/669651"
+          "source_url": "https://www.themoviedb.org/movie/669651",
+          "runtime": 112
         },
         {
           "id": 1242981,
@@ -150010,7 +149815,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1242981"
+          "source_url": "https://www.themoviedb.org/movie/1242981",
+          "runtime": 60
         },
         {
           "id": 1257320,
@@ -150032,7 +149838,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1257320"
+          "source_url": "https://www.themoviedb.org/movie/1257320",
+          "runtime": 66
         },
         {
           "id": 1244632,
@@ -150054,7 +149861,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1244632"
+          "source_url": "https://www.themoviedb.org/movie/1244632",
+          "runtime": 63
         },
         {
           "id": 1017793,
@@ -150077,7 +149885,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1017793"
+          "source_url": "https://www.themoviedb.org/movie/1017793",
+          "runtime": 92
         },
         {
           "id": 1077528,
@@ -150097,7 +149906,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1077528"
+          "source_url": "https://www.themoviedb.org/movie/1077528",
+          "runtime": 60
         },
         {
           "id": 1076994,
@@ -150117,7 +149927,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1076994"
+          "source_url": "https://www.themoviedb.org/movie/1076994",
+          "runtime": 60
         },
         {
           "id": 1256958,
@@ -150139,7 +149950,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256958"
+          "source_url": "https://www.themoviedb.org/movie/1256958",
+          "runtime": 60
         },
         {
           "id": 1046971,
@@ -150159,7 +149971,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1046971"
+          "source_url": "https://www.themoviedb.org/movie/1046971",
+          "runtime": 60
         },
         {
           "id": 256204,
@@ -150181,7 +149994,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/256204"
+          "source_url": "https://www.themoviedb.org/movie/256204",
+          "runtime": 102
         },
         {
           "id": 1243892,
@@ -150203,7 +150017,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1243892"
+          "source_url": "https://www.themoviedb.org/movie/1243892",
+          "runtime": 59
         },
         {
           "id": 1253790,
@@ -150225,7 +150040,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1253790"
+          "source_url": "https://www.themoviedb.org/movie/1253790",
+          "runtime": 60
         },
         {
           "id": 1076564,
@@ -150247,7 +150063,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1076564"
+          "source_url": "https://www.themoviedb.org/movie/1076564",
+          "runtime": 60
         },
         {
           "id": 1076470,
@@ -150267,7 +150084,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1076470"
+          "source_url": "https://www.themoviedb.org/movie/1076470",
+          "runtime": 60
         },
         {
           "id": 1256961,
@@ -150289,7 +150107,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256961"
+          "source_url": "https://www.themoviedb.org/movie/1256961",
+          "runtime": 60
         },
         {
           "id": 1256964,
@@ -150311,7 +150130,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256964"
+          "source_url": "https://www.themoviedb.org/movie/1256964",
+          "runtime": 60
         },
         {
           "id": 1075215,
@@ -150331,7 +150151,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1075215"
+          "source_url": "https://www.themoviedb.org/movie/1075215",
+          "runtime": 60
         },
         {
           "id": 1256974,
@@ -150353,7 +150174,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256974"
+          "source_url": "https://www.themoviedb.org/movie/1256974",
+          "runtime": 60
         },
         {
           "id": 1256971,
@@ -150375,7 +150197,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256971"
+          "source_url": "https://www.themoviedb.org/movie/1256971",
+          "runtime": 60
         },
         {
           "id": 1256467,
@@ -150398,7 +150221,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1256467"
+          "source_url": "https://www.themoviedb.org/movie/1256467",
+          "runtime": 60
         },
         {
           "id": 972281,
@@ -150420,7 +150244,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/972281"
+          "source_url": "https://www.themoviedb.org/movie/972281",
+          "runtime": 95
         },
         {
           "id": 678948,
@@ -150440,7 +150265,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/678948"
+          "source_url": "https://www.themoviedb.org/movie/678948",
+          "runtime": 60
         },
         {
           "id": 391330,
@@ -150462,7 +150288,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/391330"
+          "source_url": "https://www.themoviedb.org/movie/391330",
+          "runtime": 60
         },
         {
           "id": 1225493,
@@ -150484,7 +150311,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1225493"
+          "source_url": "https://www.themoviedb.org/movie/1225493",
+          "runtime": 60
         },
         {
           "id": 1257258,
@@ -150506,7 +150334,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1257258"
+          "source_url": "https://www.themoviedb.org/movie/1257258",
+          "runtime": 60
         },
         {
           "id": 825222,
@@ -150526,7 +150355,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/825222"
+          "source_url": "https://www.themoviedb.org/movie/825222",
+          "runtime": 61
         },
         {
           "id": 1242992,
@@ -150548,7 +150378,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1242992"
+          "source_url": "https://www.themoviedb.org/movie/1242992",
+          "runtime": 59
         },
         {
           "id": 391306,
@@ -150570,7 +150401,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/391306"
+          "source_url": "https://www.themoviedb.org/movie/391306",
+          "runtime": 61
         },
         {
           "id": 1227008,
@@ -150590,7 +150422,8 @@
           "director_id": 1269394,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1227008"
+          "source_url": "https://www.themoviedb.org/movie/1227008",
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150611,7 +150444,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243837",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150632,7 +150466,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243834",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 57
         },
         {
           "genre_ids": [
@@ -150653,7 +150488,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243896",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150676,7 +150512,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/505873",
           "score": 3.1,
-          "votes": 4
+          "votes": 4,
+          "runtime": 100
         },
         {
           "genre_ids": [
@@ -150697,7 +150534,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242917",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150718,7 +150556,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/857437",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150739,7 +150578,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242929",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150760,7 +150600,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242935",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150781,7 +150622,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242940",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150802,7 +150644,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242945",
           "score": 3.0,
-          "votes": 4
+          "votes": 4,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150823,7 +150666,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242953",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150844,7 +150688,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/583955",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150866,7 +150711,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1225997",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150887,7 +150733,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243885",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150908,7 +150755,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/960485",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 108
         },
         {
           "genre_ids": [],
@@ -150927,7 +150775,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258512",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -150948,7 +150797,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/391323",
           "score": 5.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 62
         },
         {
           "genre_ids": [
@@ -150969,7 +150819,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256317",
           "score": 3.3,
-          "votes": 3
+          "votes": 3,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -150990,7 +150841,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243773",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 57
         },
         {
           "genre_ids": [],
@@ -151009,7 +150861,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258403",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151028,7 +150881,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258399",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151049,7 +150903,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244051",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151070,7 +150925,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243767",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151091,7 +150947,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244056",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151110,7 +150967,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276628",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151131,7 +150989,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244589",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151150,7 +151009,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276621",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151171,7 +151031,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1233323",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 56
         },
         {
           "genre_ids": [
@@ -151192,7 +151053,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244060",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151213,7 +151075,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244278",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -151232,7 +151095,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/864093",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151253,7 +151117,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244640",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151274,7 +151139,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243845",
           "score": 1.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -151293,7 +151159,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276625",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151314,7 +151181,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256309",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151333,7 +151201,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276626",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151354,7 +151223,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243847",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -151373,7 +151243,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276612",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151394,7 +151265,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243010",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151413,7 +151285,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258397",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151434,7 +151307,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244651",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -151453,7 +151327,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256299",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -151474,7 +151349,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256289",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151495,7 +151371,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243889",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -151516,7 +151393,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/864096",
           "score": 1.7,
-          "votes": 3
+          "votes": 3,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151537,7 +151415,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256283",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151556,7 +151435,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1222883",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [
@@ -151577,7 +151457,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244638",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151596,7 +151477,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258392",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151615,7 +151497,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1072483",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151637,7 +151520,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/864084",
           "score": 4.0,
-          "votes": 3
+          "votes": 3,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151656,7 +151540,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258388",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151675,7 +151560,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242507",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151694,7 +151580,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258385",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151715,7 +151602,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244172",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151736,7 +151624,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256279",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151755,7 +151644,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1151777",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -151774,7 +151664,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/897066",
           "score": 6.3,
-          "votes": 5
+          "votes": 5,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151793,7 +151684,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276617",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151812,7 +151704,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276613",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151831,7 +151724,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258382",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151852,7 +151746,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242977",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151871,7 +151766,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258342",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151890,7 +151786,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258336",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151909,7 +151806,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243907",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -151930,7 +151828,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1085637",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -151949,7 +151848,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256352",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -151968,7 +151868,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258306",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -151987,7 +151888,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258303",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152006,7 +151908,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258299",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152027,7 +151930,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242961",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152046,7 +151950,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/861840",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 61
         },
         {
           "genre_ids": [
@@ -152067,7 +151972,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258296",
           "score": 3.7,
-          "votes": 3
+          "votes": 3,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152086,7 +151992,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1255865",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152105,7 +152012,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258294",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152126,7 +152034,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256274",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152145,7 +152054,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258290",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152164,7 +152074,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242999",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -152183,7 +152094,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244602",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152202,7 +152114,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1227562",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 61
         },
         {
           "genre_ids": [
@@ -152223,7 +152136,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1247414",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152244,7 +152158,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242519",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152263,7 +152178,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258286",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152282,7 +152198,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256367",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 57
         },
         {
           "genre_ids": [],
@@ -152301,7 +152218,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256361",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152320,7 +152238,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256358",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 57
         },
         {
           "genre_ids": [],
@@ -152339,7 +152258,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258284",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152360,7 +152280,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1243005",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152381,7 +152302,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256270",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152402,7 +152324,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244608",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 61
         },
         {
           "genre_ids": [],
@@ -152421,7 +152344,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256383",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [
@@ -152442,7 +152366,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1226103",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -152463,7 +152388,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244622",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152484,7 +152410,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242986",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152503,7 +152430,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276608",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152522,7 +152450,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276480",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 57
         },
         {
           "genre_ids": [],
@@ -152541,7 +152470,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276104",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152560,7 +152490,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1262817",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 48
         },
         {
           "genre_ids": [],
@@ -152579,7 +152510,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258283",
           "score": 1.7,
-          "votes": 3
+          "votes": 3,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152598,7 +152530,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256453",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152619,7 +152552,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244594",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -152638,7 +152572,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1261473",
           "score": 2.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152657,7 +152592,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258282",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152676,7 +152612,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276103",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152695,7 +152632,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276100",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152716,7 +152654,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1244585",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -152735,7 +152674,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276606",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152754,7 +152694,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276099",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152773,7 +152714,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258279",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152792,7 +152734,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258277",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 61
         },
         {
           "genre_ids": [],
@@ -152811,7 +152754,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258274",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152830,7 +152774,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258272",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152849,7 +152794,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1276093",
           "score": 3.5,
-          "votes": 1
+          "votes": 1,
+          "runtime": 0
         },
         {
           "genre_ids": [],
@@ -152868,7 +152814,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258269",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152887,7 +152834,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258268",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -152906,7 +152854,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258264",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [
@@ -152927,7 +152876,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1226100",
           "score": 4.0,
-          "votes": 3
+          "votes": 3,
+          "runtime": 56
         },
         {
           "genre_ids": [],
@@ -152946,7 +152896,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258265",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -152967,7 +152918,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1242984",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 60
         },
         {
           "genre_ids": [],
@@ -152986,7 +152938,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1258263",
           "score": 2.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -153005,7 +152958,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256458",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -153024,7 +152978,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256456",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -153043,7 +152998,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256455",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -153062,7 +153018,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256374",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 59
         },
         {
           "genre_ids": [],
@@ -153081,7 +153038,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1256371",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 58
         },
         {
           "genre_ids": [
@@ -153102,7 +153060,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1138797",
           "score": 4.0,
-          "votes": 3
+          "votes": 3,
+          "runtime": 58
         },
         {
           "genre_ids": [],
@@ -154221,7 +154180,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 211
+        "runtime_unverified": 65
       }
     },
     "3196572": {
@@ -210328,7 +210287,7 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/6236375",
       "credits_source_url": "https://api.themoviedb.org/3/person/6236375/movie_credits",
-      "checked_at": "2026-10-18T12:10:49.103359+00:00",
+      "checked_at": "2026-10-18T20:41:18.872450+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
@@ -210715,7 +210674,7 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/3099765",
       "credits_source_url": "https://api.themoviedb.org/3/person/3099765/movie_credits",
-      "checked_at": "2026-10-18T12:10:50.843376+00:00",
+      "checked_at": "2026-10-18T20:41:19.221341+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
@@ -215293,11 +215252,37 @@
     "1229796": {
       "id": 1229796,
       "name": "エリカ・リヴィノージャ",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            16,
+            35,
+            12,
+            14,
+            10751
+          ],
+          "id": 1117898,
+          "title": "キャット・イン・ザ・ハット",
+          "original_title": "The Cat in the Hat",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-04",
+          "director": "エリカ・リヴィノージャ",
+          "director_id": 1229796,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/mWN6knIVJ2o7eGwSm7mOgSCwNUc.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1117898"
+        }
+      ],
       "nameJa": "エリカ・リヴィノージャ",
       "original_name": "Erica Rivinoja",
       "also_known_as": [
-        "Erica Rivinoja",
+        "エリカ・リヴィノージャ",
         "Erica Ravinoja",
         "Jane Smith"
       ],
@@ -215309,11 +215294,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/1229796",
       "credits_source_url": "https://api.themoviedb.org/3/person/1229796/movie_credits",
-      "checked_at": "2026-10-18T12:11:01.351801+00:00",
+      "checked_at": "2026-10-18T20:41:19.573876+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "1289548": {
@@ -216709,7 +216694,29 @@
     "4416510": {
       "id": 4416510,
       "name": "梛川善郎",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1753605,
+          "title": "劇場版「虎に翼」",
+          "original_title": "劇場版「虎に翼」",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2027",
+          "date": "2027-01-15",
+          "director": "梛川善郎",
+          "director_id": 4416510,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/mRg5WCLGXJ1hsBRIyi8r4Si7H2k.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1753605"
+        }
+      ],
       "nameJa": "梛川善郎",
       "original_name": "梛川善郎",
       "also_known_as": [
@@ -216724,11 +216731,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/4416510",
       "credits_source_url": "https://api.themoviedb.org/3/person/4416510/movie_credits",
-      "checked_at": "2026-10-18T12:11:03.105509+00:00",
+      "checked_at": "2026-10-18T20:41:19.921633+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "1113443": {
@@ -217248,7 +217255,29 @@
     "1619426": {
       "id": 1619426,
       "name": "原田マハ",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1739413,
+          "title": "無用の人",
+          "original_title": "無用の人",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2027",
+          "date": "2027-01-29",
+          "director": "原田マハ",
+          "director_id": 1619426,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/bgapSeASBoacEvypu6lp7yIqubP.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1739413"
+        }
+      ],
       "nameJa": "原田マハ",
       "original_name": "原田マハ",
       "also_known_as": [
@@ -217262,11 +217291,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/1619426",
       "credits_source_url": "https://api.themoviedb.org/3/person/1619426/movie_credits",
-      "checked_at": "2026-10-18T12:11:04.157501+00:00",
+      "checked_at": "2026-10-18T20:41:20.277030+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "130459": {
@@ -218143,7 +218172,30 @@
     "2157982": {
       "id": 2157982,
       "name": "金井紘",
-      "works": [],
+      "works": [
+        {
+          "genre_ids": [
+            9648,
+            18
+          ],
+          "id": 1677235,
+          "title": "殺人の門",
+          "original_title": "殺人の門",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2027",
+          "date": "2027-02-19",
+          "director": "金井紘",
+          "director_id": 2157982,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/reKfPJre09EH3ori1G7hmIK62cV.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1677235"
+        }
+      ],
       "nameJa": "金井紘",
       "original_name": "金井紘",
       "also_known_as": [
@@ -218160,11 +218212,11 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/2157982",
       "credits_source_url": "https://api.themoviedb.org/3/person/2157982/movie_credits",
-      "checked_at": "2026-10-18T12:11:06.261275+00:00",
+      "checked_at": "2026-10-18T20:41:20.647455+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 0
+        "runtime_unverified": 1
       }
     },
     "1848755": {
@@ -257891,4 +257943,4 @@
       }
     }
   }
-}
+}\n

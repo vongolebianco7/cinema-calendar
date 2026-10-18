@@ -553,6 +553,31 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 .record-grid .movie .record-own-rating-label span{font-size:9px;opacity:.7;font-weight:400}
 @media(max-width:699px){.record-grid .movie .record-own-rating-label{font-size:9px;white-space:nowrap}.record-grid .movie .record-own-rating-label span{font-size:8px}}
 </style>
+
+<style id="cinelva-award-movie-grid-20261019">
+/* Award details use the same compact film tiles as the viewing collection. */
+#awardsView #awardFilms.award-detail-list{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px 13px!important;align-items:start!important}
+#awardsView #awardFilms .award-detail-head,#awardsView #awardFilms .award-invite{grid-column:1/-1}
+#awardsView #awardFilms .award-film-unit{min-width:0;display:flex;flex-direction:column;gap:5px}
+#awardsView #awardFilms .award-film-unit .movie{min-width:0;display:flex;flex-direction:column;gap:5px}
+#awardsView #awardFilms .award-film-unit .poster{width:100%;aspect-ratio:2/3}
+#awardsView #awardFilms .award-film-unit strong{font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+#awardsView #awardFilms .award-film-top{display:flex;align-items:center;justify-content:space-between;gap:3px;min-height:23px}
+#awardsView #awardFilms .award-watch-state{font-size:10px;white-space:nowrap;padding:2px 5px}
+#awardsView #awardFilms .award-film-year{font-size:10px}
+#awardsView #awardFilms .award-card-category{color:var(--muted);font-size:10px;line-height:1.45}
+#awardsView #awardFilms .award-card-not-rated{font-size:12px;color:var(--muted)}
+#awardsView #awardFilms .award-film-actions{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+#awardsView #awardFilms .award-card-open{width:100%;text-align:center;font:inherit;font-size:11px;padding:7px 3px;line-height:1.3;border:1px solid var(--line);background:transparent;color:var(--gold);border-radius:5px;cursor:pointer}
+#awardsView #awardFilms .award-card-source{font-size:10px;color:var(--muted)}
+#awardsView #awardFilms .award-card-unmatched{font-size:10px;color:var(--muted)}
+@media(max-width:699px){
+ #awardsView #awardFilms.award-detail-list{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 9px!important}
+ #awardsView #awardFilms .award-film-unit strong{font-size:12px!important}
+ #awardsView #awardFilms .award-film-unit .record-actions.record-actions-compact{gap:2px!important}
+ #awardsView #awardFilms .award-film-unit .record-actions button{min-width:0}
+}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">
@@ -594,7 +619,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <div class="review-detail-footer"><button type="button" class="button primary" id="reviewDetailEdit">レビューを編集</button></div>
   </dialog>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-personal-rating-label"></script>
+  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-award-unified-film-cards"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

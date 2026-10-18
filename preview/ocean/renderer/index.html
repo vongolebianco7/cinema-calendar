@@ -6,13 +6,13 @@
   <!-- JavaScript preserves query/hash context; the body link remains available without it. -->
   <title>My Cinelvaへ移動</title>
   <script>
-    const destination = new URL('../../../my-cinemap.html', location.href);
+    const destination = new URL('../../../my-cinelva/', location.href);
     destination.search = location.search;
     destination.hash = location.hash;
     location.replace(destination.href);
   </script>
 </head>
 <body>
-  <p>Oceanは終了しました。記録を確認するには<a href="../../../my-cinemap.html">My Cinelvaを開いてください</a>。</p>
+  <p>Oceanは終了しました。記録を確認するには<a href="../../../my-cinelva/">My Cinelvaを開いてください</a>。</p>
 </body>
 </html>

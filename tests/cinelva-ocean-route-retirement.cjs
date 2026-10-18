@@ -1,8 +1,11 @@
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
+const browserName = process.env.CINELVA_BROWSER || 'chromium';
+const engine = { chromium, webkit }[browserName];
 const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+assert.ok(engine, 'browser must be chromium or webkit');
 
 const routes = [
   'preview/ocean/index.html',
@@ -40,20 +43,27 @@ async function freePort() {
       };
       poll();
     });
-    browser = await chromium.launch({ headless: true });
+    browser = await engine.launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
     for (const count of [0, 1, 1000]) {
-      const records = Object.fromEntries(Array.from({ length: count }, (_, index) => [String(index + 1), { id: String(index + 1), title: `保存記録 ${index + 1}`, watched: true }]));
+      const records = Object.fromEntries(Array.from({ length: count }, (_, index) => [String(index + 900001), { id: String(index + 900001), title: `保存記録 ${index + 1}`, watched: true, rating: 4.2, watchedAt: '2026-01-02', custom: { preserve: true } }]));
       const serialized = JSON.stringify(records);
       await page.goto(`${base}/my-cinemap.html`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(([key, value]) => localStorage.setItem(key, value), [recordKey, serialized]);
       for (const route of routes) {
         await page.goto(`${base}/${route}?retirement-test=${count}#records`, { waitUntil: 'domcontentloaded' });
-        await page.waitForURL(url => url.pathname === '/my-cinemap.html' && url.searchParams.get('retirement-test') === String(count) && url.hash === '#records');
+        await page.waitForURL(url => url.pathname === '/my-cinelva/' && url.searchParams.get('retirement-test') === String(count) && url.hash === '#records');
+        await page.waitForFunction(expected => document.getElementById('csLifetime')?.textContent === String(expected), count);
+        assert.equal(await page.evaluate(() => CinelvaLibraryRecords.all().length), count);
         assert.equal(await page.evaluate(key => localStorage.getItem(key), recordKey), serialized, `${route} preserves ${count} records exactly`);
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} fits 390px`);
       }
     }
-    console.log('All eight retired Ocean routes redirect to My CINELVA and preserve 0/1/1000-record storage snapshots.');
+    assert.deepEqual(errors, [], 'retired URLs must open a working record dashboard');
+    console.log(browserName + ': All eight retired Ocean routes redirect to My CINELVA and preserve 0/1/1000-record storage snapshots.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

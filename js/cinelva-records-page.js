@@ -408,7 +408,7 @@
       const films=[...all.values()];
       const sourcedCount=(director?.works||[]).filter(work=>isDirectorCredit(work,group.name)).length;
       // A partial catalog must never be presented as a complete filmography.
-      const minimumByPersonId={'488':10,'190':20,'525':5};
+      const minimumByPersonId={'488':10,'190':20,'525':5,'4762':8};
       const minimum=minimumByPersonId[String(director?.id)]||1;
       const catalogAvailable=Boolean(sourcedCount>=minimum && director?.coverage?.truncated!==true);
       return {director,watched,films,catalogAvailable,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};

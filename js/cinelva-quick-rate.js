@@ -23,12 +23,28 @@ const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dia
 dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
+const dateYear=document.createElement('select');
+dateYear.id='cinelvaDateYear';dateYear.setAttribute('aria-label','鑑賞年を選択');
+const dateMonth=document.createElement('select');
+dateMonth.id='cinelvaDateMonthSelect';dateMonth.setAttribute('aria-label','鑑賞月を選択');
+for(let m=0;m<12;m++){const option=document.createElement('option');option.value=String(m);option.textContent=(m+1)+'月';dateMonth.append(option);}
+const monthTitle=$('cinelvaDateMonth');
+monthTitle.replaceWith(dateYear,dateMonth);
+function fillDateYears(){
+ const current=new Date().getFullYear();
+ const max=Math.max(current+5,pickerYear),min=Math.min(1900,pickerYear);
+ dateYear.replaceChildren();
+ for(let y=max;y>=min;y--){const option=document.createElement('option');option.value=String(y);option.textContent=y+'年';dateYear.append(option);}
+}
+dateYear.onchange=()=>{pickerYear=Number(dateYear.value);drawDatePicker();};
+dateMonth.onchange=()=>{pickerMonth=Number(dateMonth.value);drawDatePicker();};
 const dateInput=$('cinelvaRateDate'),dateTrigger=$('cinelvaDateTrigger'),datePicker=$('cinelvaDatePicker');
 let pickerYear=0,pickerMonth=0;
 const dateISO=(y,m,d)=>String(y).padStart(4,'0')+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
 function closeDatePicker(){datePicker.hidden=true;dateTrigger.setAttribute('aria-expanded','false');}
 function drawDatePicker(){
- $('cinelvaDateMonth').textContent=pickerYear+'年'+(pickerMonth+1)+'月';
+ if(![...dateYear.options].some(option=>Number(option.value)===pickerYear))fillDateYears();
+ dateYear.value=String(pickerYear);dateMonth.value=String(pickerMonth);
  const grid=$('cinelvaDateGrid');grid.replaceChildren();
  for(const label of ['日','月','火','水','木','金','土']){
   const el=document.createElement('span');el.className='cinelva-date-weekday';el.textContent=label;grid.append(el);
@@ -49,7 +65,7 @@ dateTrigger.onclick=()=>{
  if(!datePicker.hidden){closeDatePicker();return;}
  const [y,m]=dateInput.value.split('-').map(Number);
  const now=new Date();pickerYear=y||now.getFullYear();pickerMonth=(m||now.getMonth()+1)-1;
- drawDatePicker();datePicker.hidden=false;dateTrigger.setAttribute('aria-expanded','true');
+ fillDateYears();drawDatePicker();datePicker.hidden=false;dateTrigger.setAttribute('aria-expanded','true');
 };
 $('cinelvaDatePrev').onclick=()=>{pickerMonth--;if(pickerMonth<0){pickerMonth=11;pickerYear--;}drawDatePicker();};
 $('cinelvaDateNext').onclick=()=>{pickerMonth++;if(pickerMonth>11){pickerMonth=0;pickerYear++;}drawDatePicker();};
@@ -972,6 +988,18 @@ style.textContent+=`
 .cinelva-rating-date-prompt{grid-column:1/-1!important;grid-row:3!important;width:100%!important;padding:3px 0!important;margin:0!important;border:0!important;background:transparent!important;color:#e7b944!important;font-size:10px!important;text-align:center!important}
 .cinelva-rating-date-prompt[hidden]{display:none!important}
 @media(max-width:760px){.tvMovie>.cinelva-rating-controls:has(.cinelva-rating-date-prompt:not([hidden])){flex:0 0 auto!important}}
+`;
+style.textContent+=`
+.cinelva-rate-dialog .cinelva-date-nav{gap:5px!important}
+.cinelva-rate-dialog #cinelvaDateYear,.cinelva-rate-dialog #cinelvaDateMonthSelect{
+ min-width:0!important;max-width:100%!important;min-height:32px!important;
+ padding:3px 5px!important;border:1px solid #ffffff35!important;
+ border-radius:7px!important;background:#33353a!important;color:#fff!important;
+ font:600 13px system-ui!important;
+}
+.cinelva-rate-dialog #cinelvaDateYear{flex:1 1 100px!important}
+.cinelva-rate-dialog #cinelvaDateMonthSelect{flex:0 1 74px!important}
+.cinelva-rate-dialog .cinelva-date-nav>button{flex:0 0 30px!important;width:30px!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

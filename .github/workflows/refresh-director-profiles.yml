@@ -95,7 +95,7 @@ jobs:
               previous = latest['directors'].get(identifier, {})
               if str(entry.get('checked_at', '')) >= str(previous.get('checked_at', '')):
                   latest['directors'][identifier] = entry
-          path.write_text(json.dumps(latest, ensure_ascii=False, indent=2) + '\\n')
+          path.write_text(json.dumps(latest, ensure_ascii=False, indent=2) + chr(10))
           PY
             git add data/directors.json
             if git diff --cached --quiet; then

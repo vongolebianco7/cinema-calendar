@@ -716,6 +716,60 @@ style.textContent+=`
  .cinelva-rate-dialog .cinelva-review-score .cinelva-review-date input[type=date]{width:108px!important;max-width:108px!important}
 }
 `;
+style.textContent+=`
+/* Stable three-row card layout: controls, score, slider. No overlapping text. */
+.cinelva-rating-controls{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ grid-template-rows:24px 17px 25px!important;
+ box-sizing:border-box!important;
+ height:70px!important;min-height:70px!important;
+ padding:2px 7px!important;gap:0!important;
+ overflow:hidden!important;position:relative!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ grid-template-rows:24px 17px 25px!important;
+ grid-column:1!important;grid-row:1/4!important;
+ width:100%!important;min-width:0!important;
+ margin:0!important;padding:0!important;
+ pointer-events:none!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score::before{content:none!important;display:none!important}
+.cinelva-rating-controls>.cinelva-rate-button{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:start!important;align-self:center!important;
+ z-index:7!important;margin:0!important;
+}
+.cinelva-rating-controls>.cinelva-rating-clear{
+ position:absolute!important;right:6px!important;top:3px!important;
+ max-width:calc(100% - 45px)!important;
+ min-height:22px!important;height:22px!important;
+ padding:1px 6px!important;line-height:18px!important;
+ box-sizing:border-box!important;z-index:7!important;
+ border:1px solid #aeb5c07a!important;border-radius:5px!important;
+}
+.cinelva-rating-controls .cinelva-inline-value{
+ grid-column:1!important;grid-row:2!important;
+ justify-self:center!important;align-self:center!important;
+ position:static!important;top:auto!important;
+ margin:0!important;padding:0!important;
+ max-width:100%!important;width:auto!important;
+ font:600 11px/16px system-ui!important;
+ white-space:nowrap!important;text-align:center!important;
+}
+.cinelva-rating-controls .cinelva-inline-value::before{
+ content:"スコア  "!important;font-weight:400!important;color:#c3c8d0!important;
+}
+.cinelva-rating-controls .cinelva-score-track{
+ grid-column:1!important;grid-row:3!important;
+ width:100%!important;min-width:0!important;
+ height:25px!important;min-height:25px!important;
+ align-self:center!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{
+ height:25px!important;min-height:25px!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

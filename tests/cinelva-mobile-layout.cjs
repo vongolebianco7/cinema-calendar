@@ -15,10 +15,10 @@ const fs = require('fs');
       }));
     }, { watchedAt });
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto('http://127.0.0.1:8765/my-cinelva/', { waitUntil: 'networkidle', timeout: 30000 });
+    await page.goto('http://127.0.0.1:8765/my-cinelva/', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.locator('[data-tab="calendar"]').click();
     await page.locator('#calendarView').waitFor({ state: 'visible' });
-    await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible' });
+    await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible', timeout: 15000 });
     await page.waitForTimeout(150);
     const result = await page.evaluate(({ year }) => {
       const root = document.querySelector('#yearHeatmap');
@@ -27,6 +27,8 @@ const fs = require('fs');
       const overlaps = [];
       const monthRects = months.map(m => m.getBoundingClientRect());
       const visible = root.getBoundingClientRect().width > 0 && root.getBoundingClientRect().height > 0;
+      const days = [...root.querySelectorAll('.cy-day')];
+      if (days.some(d => d.getBoundingClientRect().height > 32 || d.getBoundingClientRect().width > 32)) overlaps.push('oversized day cells');
       if (!visible) overlaps.push('annual calendar hidden');
       if (root.classList.contains('heatgrid')) overlaps.push('legacy heatgrid class still applied');
       for (let i=0; i<monthRects.length; i++) for (let j=i+1; j<monthRects.length; j++) {

@@ -274,6 +274,7 @@
   const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);
   for(const [en,ja] of Object.entries({
     "jordan peele":"ジョーダン・ピール","ari aster":"アリ・アスター","robert eggers":"ロバート・エガース","jordan vogt-roberts":"ジョーダン・ヴォート＝ロバーツ",
+    "josef rusnak":"ジョセフ・ラスナック","paul greengrass":"ポール・グリーングラス","martin campbell":"マーティン・キャンベル",
     "sam mendes":"サム・メンデス","danny boyle":"ダニー・ボイル","david lynch":"デヴィッド・リンチ","david cronenberg":"デヴィッド・クローネンバーグ",
     "david o. russell":"デヴィッド・O・ラッセル","alex garland":"アレックス・ガーランド","jonathan glazer":"ジョナサン・グレイザー",
     "taika waititi":"タイカ・ワイティティ","james gunn":"ジェームズ・ガン","james wan":"ジェームズ・ワン",
@@ -381,7 +382,31 @@
       else knownByName.set(key,d);
     }
     for(const key of ambiguousNames)knownByName.delete(key);
-    const resolveDirector=name=>knownByName.get(canonical(name));
+    // Look up by stable person identity first; translated names can differ between
+    // historical viewing records and the current TMDB snapshot.
+    const directorByPersonId=new Map(knownDirectors.map(person=>[String(person.id),person]));
+    const personIdsByMovie=new Map();
+    for(const person of knownDirectors)for(const work of person.works||[]){
+      const key=String(work.id),ids=personIdsByMovie.get(key)||new Set();
+      ids.add(String(person.id));personIdsByMovie.set(key,ids);
+    }
+    const resolveDirector=(name,records=[])=>{
+      const matched=knownByName.get(canonical(name));
+      if(matched)return matched;
+      // A unique sourced director of a reviewed movie is a safe fallback when
+      // the old record uses an unrecognized Japanese/English spelling.
+      const candidates=new Set();
+      for(const movie of records){
+        const explicitId=movie.director_id??movie.directorId;
+        if(explicitId&&directorByPersonId.has(String(explicitId)))
+          candidates.add(String(explicitId));
+        else{
+          const ids=personIdsByMovie.get(String(movie.tmdbId??movie.tmdb_id??movie.id));
+          if(ids?.size===1)candidates.add([...ids][0]);
+        }
+      }
+      return candidates.size===1?directorByPersonId.get([...candidates][0]):undefined;
+    };
     const directorIdentity=name=>{
       const found=resolveDirector(name);
       return found?'tmdb-person:'+found.id:'name:'+canonical(name);
@@ -406,7 +431,7 @@
     host.replaceChildren();works.replaceChildren();
     // Director selection is based on the user's reviewed movies only; catalog-only directors stay hidden.
     const filmographyFor=group=>{
-      const director=resolveDirector(group.name);
+      const director=resolveDirector(group.name,group.records);
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
       const all=new Map();
       for(const work of director?.works||[]){

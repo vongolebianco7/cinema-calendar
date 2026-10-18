@@ -264,3 +264,11 @@ test('Paul Thomas Anderson shows real denominator after 8 verified features', ()
   const {row}=render({records:[{...works[0],rating:4}],works,name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false,runtime_unverified:0}}});
   assert.match(row.innerHTML,/1\/9本/);
 });
+
+test('sourced PTA films are not vetoed by conflicting generic movie metadata', () => {
+  const works=Array.from({length:12},(_,i)=>({id:95000+i,title:'PTA作品'+i,director:'ポール・トーマス・アンダーソン',runtime:110+i,source:'tmdb',job:'Director',is_director:true}));
+  const record={...works[0],rating:4};
+  const movies=works.map((work,i)=>({...work,director:i===0?work.director:'別名の監督',runtime:i===0?work.runtime:undefined,job:i===0?'Director':'Producer'}));
+  const {row}=render({records:[record],works,movies,name:'ポール・トーマス・アンダーソン',profile:{id:4762,nameJa:'ポール・トーマス・アンダーソン',coverage:{truncated:false}}});
+  assert.match(row.innerHTML,/12本/);
+});

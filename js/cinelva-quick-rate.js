@@ -20,7 +20,7 @@ style.textContent=`
 style.textContent+=`\n/* Compact overrides must follow the base dialog declarations. */\n.cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}\n.cinelva-rate-inner{padding:14px;gap:9px}\n.cinelva-rate-inner textarea{min-height:52px}\n`;
 style.textContent+=`\n.cinelva-score-track{position:relative;display:flex;align-items:center;flex:1;min-width:0;height:32px}.cinelva-score-track::before{content:'';pointer-events:none;position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);height:13px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(10% - 1px),#ffffff65 calc(10% - 1px),#ffffff65 10%);opacity:.8}.cinelva-score-track input{position:relative;z-index:1}.cinelva-inline-score input::-webkit-slider-thumb{width:22px;height:22px;margin-top:-8.5px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}.cinelva-inline-score input::-moz-range-thumb{width:20px;height:20px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}\n`;style.textContent+=`\n.cinelva-rate-button{display:inline-grid;place-items:center;min-width:40px;width:40px;height:40px;padding:0;border-radius:50%;font-size:21px;background:#ffffff0d;color:#eae4d6;border-color:#ffffff38;transition:all .18s}.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#e7b94420;border-color:#e7b944}.cinelva-rate-button.is-watched{color:#f3c84e;border-color:#e7b94488}.cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;width:40px;margin:6px 8px}.cinelva-rate-dialog{background:#161719;border:1px solid #ffffff24;border-radius:18px;box-shadow:0 20px 70px #000b}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{border-radius:10px;background:#232427;border-color:#ffffff28}.cinelva-rate-actions button{border-radius:999px}.cinelva-review-score output{color:#f3c84e}.cinelva-review-header button{border-radius:50%}.cinelva-review-header button:hover{background:#ffffff16}\n`;document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
-dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><div class="cinelva-review-date"><label>鑑賞日<input aria-label="鑑賞日" id="cinelvaRateDate" type="date"></label></div><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
+dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input aria-label="鑑賞日" id="cinelvaRateDate" type="date"></label></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
 $('cinelvaRateClose').onclick=()=>dialog.close();
@@ -691,6 +691,43 @@ style.textContent+=`
  display:block!important;width:100%!important;
  height:22px!important;min-height:22px!important;max-height:22px!important;
  margin:0!important;padding:0!important;
+}
+`;
+style.textContent+=`
+/* Review order: score, slider, date. Keep the score denominator beside its value. */
+.cinelva-rate-dialog .cinelva-review-score{
+ display:grid!important;
+ grid-template-columns:max-content max-content minmax(0,1fr)!important;
+ grid-template-rows:40px 32px!important;
+ justify-content:start!important;
+ column-gap:6px!important;row-gap:5px!important;
+ align-items:center!important;
+}
+.cinelva-rate-dialog .cinelva-review-score output{
+ grid-column:1!important;grid-row:1!important;
+ justify-self:start!important;align-self:center!important;
+}
+.cinelva-rate-dialog .cinelva-review-score>span{
+ grid-column:2!important;grid-row:1!important;
+ justify-self:start!important;align-self:center!important;
+ margin:0!important;white-space:nowrap!important;
+}
+.cinelva-rate-dialog .cinelva-review-score input[type=range]{
+ grid-column:1/-1!important;grid-row:2!important;
+ width:100%!important;min-width:0!important;
+}
+.cinelva-rate-dialog>.cinelva-review-date,
+.cinelva-rate-dialog .cinelva-rate-inner>.cinelva-review-date{
+ display:block!important;max-width:100%!important;
+}
+.cinelva-rate-dialog .cinelva-rate-inner>.cinelva-review-date label{
+ display:flex!important;flex-direction:row!important;
+ justify-content:flex-start!important;align-items:center!important;
+ gap:10px!important;
+}
+.cinelva-rate-dialog .cinelva-rate-inner>.cinelva-review-date input[type=date]{
+ flex:0 0 148px!important;width:148px!important;max-width:148px!important;
+ height:36px!important;font-size:14px!important;
 }
 `;
 root.CinelvaQuickRate={open,normalize};

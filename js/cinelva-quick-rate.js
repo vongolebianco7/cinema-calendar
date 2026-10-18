@@ -318,6 +318,28 @@ style.textContent+=`
 }
 .cinelva-rating-controls .cinelva-inline-score:not(.is-watched) input[type="range"]::-webkit-slider-thumb{background:#c7cbd1!important}
 `;
+style.textContent+=`
+/* Mobile 3-column cards: reserve width for a real horizontal rating track. */
+.cinelva-rating-controls{width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:20px minmax(0,1fr)!important;column-gap:5px!important;padding:5px!important;overflow:hidden!important}
+.cinelva-rating-controls>.cinelva-rate-button{width:20px!important;min-width:20px!important;height:28px!important;min-height:28px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.cinelva-rating-controls>.cinelva-inline-score{width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:4px!important;padding:0!important;margin:0!important}
+.cinelva-rating-controls .cinelva-score-track{width:100%!important;min-width:0!important;height:28px!important;display:flex!important;align-items:center!important}
+.cinelva-rating-controls .cinelva-score-track::before{display:none!important}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;height:28px!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+.cinelva-rating-controls .cinelva-inline-value{min-width:0!important;width:auto!important;flex:none!important;font-size:10px!important;letter-spacing:-.3px!important;text-align:right!important}
+/* Dialog: isolate from global page form styles and fit a narrow phone viewport. */
+dialog.cinelva-rate-dialog{box-sizing:border-box!important;position:fixed!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:min(92vw,390px)!important;max-width:92vw!important;max-height:85dvh!important;margin:0!important;padding:0!important;overflow-x:hidden!important;overflow-y:auto!important;border-radius:12px!important}
+.cinelva-rate-dialog .cinelva-rate-inner{box-sizing:border-box!important;width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;padding:14px!important}
+.cinelva-rate-dialog .cinelva-rate-inner *{box-sizing:border-box!important;min-width:0}
+.cinelva-rate-dialog .cinelva-review-header{display:flex!important;align-items:center!important;justify-content:space-between!important}
+.cinelva-rate-dialog .cinelva-review-score{display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;gap:6px!important}
+.cinelva-rate-dialog .cinelva-review-score input[type=range]{grid-column:1/-1!important;width:100%!important;min-width:0!important;display:block!important}
+.cinelva-rate-dialog .cinelva-review-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.cinelva-rate-dialog .cinelva-rate-inner input:not([type=range]),.cinelva-rate-dialog .cinelva-rate-inner select,.cinelva-rate-dialog .cinelva-rate-inner textarea{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important}
+.cinelva-rate-dialog .cinelva-rate-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+.cinelva-rate-dialog .cinelva-rate-actions button{width:100%!important;min-width:0!important;min-height:38px!important;margin:0!important;padding:6px 3px!important;font-size:12px!important}
+@media(max-width:370px){.cinelva-rate-dialog .cinelva-review-row{grid-template-columns:minmax(0,1fr)!important}}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -216,11 +216,48 @@ def main():
             else:
                 directors[identifier] = director
     discovery = discover_named_directors(directors, names, request, today) if args.discover_names and not args.normalize_only else {'added': [], 'unresolved': [], 'failures': []}
-    if args.verify_person and not args.normalize_only:
+    # TMDB person/movie_credits omits runtime. Fetch the movie detail to
+    # distinguish genuine feature films from short films. Process a bounded
+    # slice on every refresh, retaining verified runtimes across runs.
+    verification_budget = 240
+    verification_order = sorted(directors, key=lambda identifier: (
+        0 if identifier in ('488', '525', '190') else 1,
+        -sum(not (work.get('runtime') or work.get('duration'))
+             for work in directors[identifier].get('works', [])),
+        identifier))
+    if args.verify_person:
         identifier = str(args.verify_person)
         if identifier not in directors:
             raise ValueError('Requested director is not in the sourced snapshot')
-        directors[identifier] = verify_director_runtimes(directors[identifier], request)
+        verification_order = [identifier] + [item for item in verification_order if item != identifier]
+    runtime_verified = 0
+    runtime_failures = []
+    if not args.normalize_only:
+        for identifier in verification_order:
+            director = directors[identifier]
+            retained = []
+            for work in director.get('works', []):
+                runtime = work.get('runtime') or work.get('duration')
+                if not runtime and verification_budget:
+                    verification_budget -= 1
+                    try:
+                        detail = request('/movie/' + str(int(work['id'])))
+                        if detail.get('id') != work['id']:
+                            raise ValueError('Mismatched movie metadata')
+                        runtime = detail.get('runtime')
+                        work = {**work, 'runtime': runtime}
+                        if isinstance(runtime, (int, float)) and runtime > 0:
+                            runtime_verified += 1
+                    except Exception as error:
+                        runtime_failures.append({'id': work['id'], 'error': type(error).__name__})
+                if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+                    continue
+                retained.append(work)
+            director['works'] = retained
+            director['coverage'] = {**director.get('coverage', {}),
+                'runtime_unverified': sum(not work.get('runtime') for work in retained)}
+            if verification_budget == 0:
+                break
     for identifier, director in directors.items():
         reading = name_readings().get(identifier)
         previous_name = director.get('name')
@@ -242,6 +279,7 @@ def main():
     report = {'attempted': len(pending), 'refreshed': len(pending) - len(failures), 'failures': failures, 'discovery': discovery,
         'japanese_unavailable': [{'id': key, 'name': value.get('name')} for key, value in directors.items() if value.get('name_status') == 'japanese_unavailable'],
         'unrefreshed': [key for key, value in directors.items() if not value.get('checked_at')],
+        'runtime_verified': runtime_verified, 'runtime_failures': runtime_failures,
         'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
         'transliterated_names': sum(value.get('name_status') == 'transliterated' for value in directors.values()),
         'japanese_biographies': sum(bool(value.get('biography_ja')) for value in directors.values())}

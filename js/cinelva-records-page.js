@@ -166,21 +166,52 @@
         const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
         return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
       });
-      // The ring is narrow on mobile: reserve the complete name/value for
-      // the legend and put two-line labels only on wedges that can hold them.
-      // A dominant wedge must remain labelled, even when its angle is near
-      // the bottom of the chart.
-      for(const item of labels){
-        const radial=37;
-        const x=50+radial*Math.cos(item.angle);
-        const y=50+radial*Math.sin(item.angle);
-        const size=4.7;
+      // Fit labels by testing the entire two-line text rectangle against the
+      // actual annular sector, rather than testing the centre point only.
+      // In particular, the midpoint of a dominant (>50%) sector can lie near
+      // the SVG edge; sample multiple angles and radii to find a safe spot.
+      const occupied=[];
+      const normalAngle=a=>(a%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+      const inSector=(theta,start,span)=>{
+        const delta=normalAngle(theta-start);
+        return delta>=.045 && delta<=span-.045;
+      };
+      const fitsSector=(cx,cy,w,h,item)=>{
+        const corners=[[cx-w/2,cy-h/2],[cx+w/2,cy-h/2],[cx-w/2,cy+h/2],[cx+w/2,cy+h/2],
+          [cx,cy-h/2],[cx,cy+h/2],[cx-w/2,cy],[cx+w/2,cy]];
+        return corners.every(([px,py])=>{
+          const dx=px-50,dy=py-50,r=Math.hypot(dx,dy);
+          return r>=28.8 && r<=48 && inSector(Math.atan2(dy,dx),item.start,item.fraction*2*Math.PI);
+        });
+      };
+      // Place largest sectors first; smaller sectors retain the complete legend.
+      const ranked=labels.map((item,i)=>({...item,index:i,start:-Math.PI/2+
+        visible.slice(0,i).reduce((sum,entry)=>sum+entry[1],0)/total*2*Math.PI}))
+        .sort((a,b)=>b.fraction-a.fraction);
+      for(const item of ranked){
+        if(item.fraction<.105)continue;
+        const size=4.45;
         const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const width=Math.max(measure(name,size),measure(item.value,size));
-        const availableArc=2*Math.PI*radial*item.fraction;
-        const fits=item.fraction>=.12 && availableArc>=width+2 &&
-          x-width/2>=4 && x+width/2<=96 && y>=9 && y<=91;
-        if(fits)svg.append(svgText(x,y-2,[name,item.value],size));
+        const width=Math.max(measure(name,size),measure(item.value,size))+1.5;
+        const height=size*2.5;
+        const span=item.fraction*2*Math.PI;
+        const candidates=[];
+        for(const radius of [37,39,35,41,33]){
+          for(let step=0;step<=20;step++){
+            const ratio=step===0?.5:(step%2?.5+Math.ceil(step/2)*.022:.5-Math.ceil(step/2)*.022);
+            if(ratio<=0||ratio>=1)continue;
+            const angle=item.start+span*ratio;
+            const x=50+radius*Math.cos(angle),y=50+radius*Math.sin(angle);
+            if(fitsSector(x,y,width,height,item)&&
+              !occupied.some(o=>Math.abs(o.x-x)<(o.w+width)/2+1&&Math.abs(o.y-y)<(o.h+height)/2+1))
+              candidates.push({x,y,score:Math.abs(ratio-.5)+Math.abs(radius-37)*.012});
+          }
+        }
+        candidates.sort((a,b)=>a.score-b.score);
+        if(!candidates.length)continue;
+        const {x,y}=candidates[0];
+        svg.append(svgText(x,y-size*.5,[name,item.value],size));
+        occupied.push({x,y,w:width,h:height});
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

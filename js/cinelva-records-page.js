@@ -213,7 +213,6 @@
       const norm=a=>(a%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
       const occupied=[];
       const outside=[];
-      const callouts=[];
       // Use interior labels only where the complete text rectangle fits.
       // Small sectors receive leader lines in an independent outer SVG layer.
       for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
@@ -246,49 +245,40 @@
           outside.push(item);
         }
       }
-      // The callout layer is larger than the ring and is not clipped by it.
-      // Two columns of callouts, spaced vertically to avoid collisions.
-      if(outside.length){
-        const calloutSvg=document.createElementNS(namespace,'svg');
-        calloutSvg.setAttribute('class','cs-donut-callouts');
-        calloutSvg.setAttribute('viewBox','-30 -12 160 124');
-        calloutSvg.setAttribute('aria-hidden','true');
-        for(const side of [-1,1]){
-          const group=outside.filter(item=>Math.cos(item.start+item.span/2)*side>=0)
-            .sort((a,b)=>Math.sin(a.start+a.span/2)-Math.sin(b.start+b.span/2));
-          const count=group.length;
-          group.forEach((item,i)=>{
-            const angle=item.start+item.span/2;
-            const [x1,y1]=polar(49,angle);
-            const [x2,y2]=polar(54,angle);
-            const targetY=Math.max(7,Math.min(93,50+Math.sin(angle)*53));
-            const spacedY=Math.max(7,Math.min(93,targetY+(i-(count-1)/2)*Math.max(0,9-count*1.2)));
-            const endX=side>0?113:-13;
-            const path=document.createElementNS(namespace,'path');
-            path.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+x2.toFixed(2)+' '+y2.toFixed(2)+' L '+endX+' '+spacedY.toFixed(2));
-            path.setAttribute('fill','none');path.setAttribute('stroke','#b8b0a4');
-            path.setAttribute('stroke-width','.45');calloutSvg.append(path);
-            const text=document.createElementNS(namespace,'text');
-            text.setAttribute('x',String(endX+(side>0?2:-2)));
-            text.setAttribute('y',String(spacedY-1));
-            text.setAttribute('text-anchor',side>0?'start':'end');
-            text.setAttribute('font-family',font);text.setAttribute('font-size','3.8');
-            text.setAttribute('font-weight','500');text.setAttribute('fill','#f0ede8');
-            [item.name,item.value].forEach((line,j)=>{
-              const t=document.createElementNS(namespace,'tspan');
-              t.setAttribute('x',String(endX+(side>0?2:-2)));
-              if(j)t.setAttribute('dy','4.5');
-              t.textContent=line;text.append(t);
-            });
-            calloutSvg.append(text);
-          });
-        }
-        callouts.push(calloutSvg);
+      // A two-column mobile card has no horizontal space for wide callouts.
+      // Keep all callouts inside this donut's own 100x100 SVG viewport.
+      // If the text cannot fit without crossing the ring or other labels,
+      // leave the complete name and value in the legend below instead.
+      const calloutBoxes=[];
+      for(const item of outside){
+        const angle=item.start+item.span/2;
+        const side=Math.cos(angle)>=0?1:-1;
+        const value=item.value;
+        const size=3.25;
+        const label=item.name.length>5?item.name.slice(0,4)+'…':item.name;
+        const width=Math.max(measure(label,size),measure(value,size))+1;
+        const anchorX=side>0?98-width/2:2+width/2;
+        const anchorY=50+Math.sin(angle)*47;
+        const x=anchorX,y=Math.max(9,Math.min(91,anchorY));
+        // Never render labels over another slice, the center, or a neighbor.
+        // Only use the tiny side margins when there is sufficient space.
+        const textEdge=side>0?x-width/2:x+width/2;
+        if(side>0?textEdge<88:textEdge>12)continue;
+        if(calloutBoxes.some(box=>Math.abs(box.y-y)<11&&box.side===side))continue;
+        const [x1,y1]=polar(49,angle);
+        const endX=side>0?textEdge-1:textEdge+1;
+        if(Math.abs(endX-x1)>10||Math.abs(y-y1)>10)continue;
+        const path=document.createElementNS(namespace,'path');
+        path.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+endX.toFixed(2)+' '+y.toFixed(2));
+        path.setAttribute('fill','none');path.setAttribute('stroke','#c8c1b5');
+        path.setAttribute('stroke-width','.4');svg.append(path);
+        svgLabel(x,y,label,value,size);
+        calloutBoxes.push({x,y,side});
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
       donut.append(center);
-      donut.append(svg);layout.append(donut);callouts.forEach(layer=>layout.append(layer));
+      donut.append(svg);layout.append(donut);
       const legend=document.createElement('div');legend.className='cs-donut-legend';
       visible.forEach(([name,n],i)=>{
         const row=document.createElement('div');row.className='cs-donut-legend-row';

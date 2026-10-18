@@ -416,6 +416,7 @@
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';
     detail.id='directorFilmography';
+    detail.hidden=true; // Do not show an empty gold-bordered panel before a director is selected.
     // Keep mobile columns independent of legacy stylesheet precedence and cached CSS.
     list.style.setProperty('display','grid','important');
     list.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr))','important');

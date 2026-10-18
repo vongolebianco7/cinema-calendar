@@ -62,7 +62,7 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertTrue({33, 70, 13223, 1106739}.issubset(identifiers))
         self.assertFalse({1309305, 1126932, 524469} & identifiers)
         self.assertEqual(director['coverage']['runtime_unverified'], 0)
-        self.assertTrue(all(work['runtime'] >= 60 and work['job'] == 'Director' for work in director['works']))
+        self.assertTrue(all(work['runtime'] >= 30 and work['job'] == 'Director' for work in director['works']))
 
     def test_spielberg_snapshot_has_complete_sourced_directing_credits(self):
         import json

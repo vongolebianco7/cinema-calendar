@@ -145,27 +145,56 @@
       donut.style.background='conic-gradient('+stops.join(',')+')';
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','cs-donut-numbers');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');
       const namespace='http://www.w3.org/2000/svg';
+      const outside=[];
       visible.forEach(([name,n],i)=>{
         const fraction=n/total,percent=Math.round(fraction*100);
-        if(fraction<0.075)return;
         const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);
         const angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
-        const radius=36,x=50+radius*Math.cos(angle),y=50+radius*Math.sin(angle);
-        const text=String(name),maxChars=fraction<0.13?3:fraction<0.20?5:7;
+        const x=50+36*Math.cos(angle),y=50+36*Math.sin(angle);
+        const nameText=String(name),valueText=mode==='count'?n+'本':percent+'%';
+        const long=[...nameText].length>(fraction<0.13?3:fraction<0.20?5:7);
+        if(long||fraction<0.075){
+          outside.push({name:nameText,value:valueText,angle,side:Math.cos(angle)>=0?1:-1,y:50+47*Math.sin(angle)});
+          return;
+        }
         const size=fraction<0.13?4.2:fraction<0.20?4.8:5.5;
         const label=document.createElementNS(namespace,'text');
         label.setAttribute('x',x.toFixed(2));label.setAttribute('y',(y-3).toFixed(2));label.setAttribute('text-anchor','middle');
-        label.setAttribute('font-family','-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif');
+        label.setAttribute('font-family','"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif');
         label.setAttribute('font-size',String(size));label.setAttribute('font-weight','500');
-        label.setAttribute('fill','#fff');label.setAttribute('stroke','#252525');label.setAttribute('stroke-width','.25');label.setAttribute('paint-order','stroke');
-        if([...text].length<=maxChars){
-          const title=document.createElementNS(namespace,'tspan');title.setAttribute('x',x.toFixed(2));title.textContent=text;label.append(title);
-          const number=document.createElementNS(namespace,'tspan');number.setAttribute('x',x.toFixed(2));number.setAttribute('dy',String(size+1));number.textContent=mode==='count'?n+'本':percent+'%';label.append(number);
-        }else{
-          label.setAttribute('y',y.toFixed(2));label.textContent=mode==='count'?n+'本':percent+'%';
-        }
+        label.setAttribute('fill','#fff');label.setAttribute('stroke','#252525');label.setAttribute('stroke-width','.2');label.setAttribute('paint-order','stroke');
+        const title=document.createElementNS(namespace,'tspan');title.setAttribute('x',x.toFixed(2));title.textContent=nameText;label.append(title);
+        const number=document.createElementNS(namespace,'tspan');number.setAttribute('x',x.toFixed(2));number.setAttribute('dy',String(size+1));number.textContent=valueText;label.append(number);
         svg.append(label);
       });
+      // Keep every category name visible. Long and narrow slices use leader lines
+      // and collision-spaced labels instead of dropping their names.
+      svg.setAttribute('viewBox','-42 -12 184 124');
+      svg.style.overflow='visible';
+      for(const side of [-1,1]){
+        const items=outside.filter(item=>item.side===side).sort((a,b)=>a.y-b.y);
+        items.forEach((item,index)=>{item.labelY=Math.max(4,Math.min(96,item.y));if(index)item.labelY=Math.max(item.labelY,items[index-1].labelY+11);});
+        if(items.length&&items[items.length-1].labelY>96){
+          const shift=items[items.length-1].labelY-96;
+          items.forEach(item=>item.labelY-=shift);
+        }
+        for(const item of items){
+          const x1=50+43*Math.cos(item.angle),y1=50+43*Math.sin(item.angle);
+          const tx=side===1?105:-5;
+          const line=document.createElementNS(namespace,'path');
+          line.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+(side===1?100:0)+' '+item.labelY.toFixed(2));
+          line.setAttribute('stroke','#b5b5b5');line.setAttribute('stroke-width','.45');line.setAttribute('fill','none');svg.append(line);
+          const label=document.createElementNS(namespace,'text');
+          label.setAttribute('x',String(tx));label.setAttribute('y',String(item.labelY-1));
+          label.setAttribute('text-anchor',side===1?'start':'end');
+          label.setAttribute('font-family','"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif');
+          label.setAttribute('font-size','4.6');label.setAttribute('font-weight','500');
+          label.setAttribute('fill','#f0f0f0');
+          const nameLine=document.createElementNS(namespace,'tspan');nameLine.setAttribute('x',String(tx));nameLine.textContent=item.name;label.append(nameLine);
+          const valueLine=document.createElementNS(namespace,'tspan');valueLine.setAttribute('x',String(tx));valueLine.setAttribute('dy','5');valueLine.textContent=item.value;label.append(valueLine);
+          svg.append(label);
+        }
+      }
       donut.append(svg);layout.append(donut);
       if(multi){const note=document.createElement('div');note.className='cs-donut-note';note.textContent='複数ジャンルを含む登録件数の構成比';layout.append(note);}
       host.replaceChildren(layout);

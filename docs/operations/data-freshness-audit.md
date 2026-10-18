@@ -20,3 +20,5 @@ Malformed observation data fails the enforced audit. An expired snapshot also fa
 Other registry categories retain their snapshot timestamp status and enforcement. Disabled sources remain explicitly disabled; this change does not grant acquisition permission, change the 60-title daily observation limit, call APIs, or alter published availability data. UI availability expiry remains independent.
 
 On 2026-10-18 the audited cache contained 355 observations, 79 current and 276 stale/unchecked. This is cached observation coverage, not a catalogue-wide provider availability guarantee.
+
+On 2026-10-19 an offline recount of released data found 138/395 observations within seven days and 257 stale/unchecked. No API refresh was performed by this audit; this is not overall project progress.

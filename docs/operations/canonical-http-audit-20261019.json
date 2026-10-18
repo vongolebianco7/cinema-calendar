@@ -1,0 +1,183 @@
+{
+  "observed_at": "2026-10-19T04:24:02+09:00",
+  "production_url": "https://cinelva.vercel.app/",
+  "released_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+  "deployment_id": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh",
+  "scope": "HTTP status, resolved URL, and exact released HTML bytes; not interactive validation of every page",
+  "routes": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/index.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "discover.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/discover.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "search.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/search.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "rankings.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/rankings.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "theaters.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/theaters.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "experience.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/experience.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "revivals.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/revivals.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "critic.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/critic.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "my-cinelva/index.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/my-cinelva/index.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "my-cinemap.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/my-cinemap.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "data-backup.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/data-backup.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "agent.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/agent.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "credits.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/credits.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "privacy.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/privacy.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "terms.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/terms.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/index.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/index.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/discover.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/discover.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/search.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/search.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/rankings.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/rankings.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/theaters.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/theaters.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/experience.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/experience.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/revivals.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/revivals.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/critic.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/critic.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/my-cinemap.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/my-cinemap.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/data-backup.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/data-backup.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/agent.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/agent.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/credits.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/credits.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/privacy.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/privacy.html",
+      "exact_released_bytes": true
+    },
+    {
+      "path": "cinelva/terms.html",
+      "status": 200,
+      "url": "https://cinelva.vercel.app/terms.html",
+      "exact_released_bytes": true
+    }
+  ]
+}

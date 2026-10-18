@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:18:00+09:00",
+  "updated_at": "2026-10-19T04:24:02+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
-  "branch": "fix/published-route-compatibility-20261019",
-  "head_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
+  "base_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+  "branch": "docs/canonical-release-evidence-20261019",
+  "head_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
   "pull_request": null,
   "work_items": [
     {
@@ -497,23 +497,23 @@
     {
       "id": "P0-DEPLOYMENT-BOUNDARIES",
       "title": "Make deployment change detection independent of working directory",
-      "status": "merged",
+      "status": "production_verified",
       "acceptance": "Backend-only changes build only backend; frontend inputs build only frontend; docs/tests skip both from root or backend directory.",
-      "ci": "PR #393 head1a25541d all10check-runs succeeded; merged0adf128. Real-Git boundaries4/4 pass, quality139Node/fullPython125pass; focused review ready. Automatic Vercel release rejected long ignoreCommand (>256chars). Follow-up moves command into actual tested bash script and adds provider-length regression;5/5 boundary checks pass. Release pending."
+      "ci": "PR #393 head1a25541d all10check-runs succeeded; merged0adf128. Real-Git boundaries4/4 pass, quality139Node/fullPython125pass; focused review ready. Automatic Vercel release rejected long ignoreCommand (>256chars). Follow-up moves command into actual tested bash script and adds provider-length regression;5/5 boundary checks pass. Release pending. Follow-up#394shortscriptfix deployedREADYd07eb073, thenbd6a1c99. No manualredeploy; earlierlengthfailurepreservedinhistory."
     },
     {
       "id": "P0-SEARCH-EVENT-RELEASE-DATE",
       "title": "Keep event dates separate from original film release metadata",
-      "status": "merged",
+      "status": "production_verified",
       "acceptance": "Official local events resolve their explicit TMDB identity; unavailable release years remain unknown; streaming/broadcast/screening dates keep their meaning and values.",
-      "ci": "PR#394 merged d07eb073 after all15checks on7958f2a9 succeeded. Combined146Node/fullPython133pass; actualChromium/WebKit390px verifiescanonicalURL/detail/offlineID. Vercel automatic productionqueued dpl_9r1hFPD84qxNsXxhXwHQPvHv5Pj8."
+      "ci": "PR#394 merged d07eb073 after all15checks on7958f2a9 succeeded. Combined146Node/fullPython133pass; actualChromium/WebKit390px verifiescanonicalURL/detail/offlineID. Vercel automatic productionqueued dpl_9r1hFPD84qxNsXxhXwHQPvHv5Pj8. CanonicalChrome confirms2014detail andsharedreviewwithclose/save/noNext; no testrecordsaved."
     },
     {
       "id": "P0-PUBLISHED-LEGACY-ROUTES",
       "title": "Keep legacy Cinelva URLs reachable in the actual published artifact",
-      "status": "in_progress",
+      "status": "production_verified",
       "acceptance": "All29manifestURLs are published or redirect on the same origin to a publishedcanonicalpage. Query/hash/records preserved; no stale duplicatedUI exposed.",
-      "ci": "ActualcanonicalHTTPaudit15/29success14nested404. Real buildartifactregression firstfailed, nowpasses with temporary /cinelva/:path* -> /:path* redirect. ActualsourceHTMLfiles copied into fixture; all29outputs/targetschecked. Quality147Node/fullPython133pass. Focusedreviewready; CIandproductionquery/hashpending."
+      "ci": "PR#396 mergedbd6a1c99 after10/10successfulcheck-runs on3193c3b1. Vercel READY dpl_CMGesLg49kxQmdVvpfXexPQDZwnh canonicalaliasconfirmed. Actual307Locationpreservesquery; cloudChromelegacysearchredirectpreservesid/search/hashandshows2014. All29HTTP200/exactreleasedHTMLverified; durableJSONandreleaseevidencecommitted."
     }
   ],
   "verification": [
@@ -828,24 +828,32 @@
     {
       "check": "Published route compatibility",
       "result": "Actualreleaseddadc773:15canonicalrootpages200exactbytes,14nestedcinelvaHTML404. Providerdocsconfirm temporarywildcardredirectsyntax. Regressionusesactualbuildandactual29sourceHTML. Rootdestinationsexist; focusedreviewready afterfixturegapcorrected. No crossoriginorstoragekeychange."
+    },
+    {
+      "check": "Canonical release and retired queues",
+      "result": "bd6a1c99 READY/aliasconfirmed. ActualHTTP307preserves?id=157336&search=test; actualCloudChromelegacysearchpreservesid/search/#reviewanddetail2014. All8Oceanredirectsources200andbyteidenticald07; actualOceanroute landsMyCinelva. Issues111/113/143closednot_plannedasretired/superseded239, notimplementedOceanfeatures. No userdatawrites."
+    },
+    {
+      "check": "All29canonicalroutes",
+      "result": "29/29HTTP200 and exactreleasedHTML atbd6a1c99; durable docs/operations/canonical-http-audit-20261019.json. No whole-application completion claim."
     }
   ],
   "deployment": {
-    "status": "deployment_pending",
-    "target_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
+    "status": "production_verified",
+    "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
+    "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-19T04:02:25+09:00",
-    "reported_restriction": "0adf128 automatic release rejected because ignoreCommand exceeds256characters. Canonical remains READY dadc773. Follow-up uses short command plus root-anchored script; no manual retry.",
-    "next_action": "Observe d07eb073 automatic release; no manualretry. After legacy-route PR CI/merge, verify one automaticdeployment plus all29canonicalURLs and actualbrowserquery/hash/recordjourney.",
-    "provider_preview_status": "Failed release dpl_9txVt6GMrE5bA6tfJnLyocsgB2rP at0adf128; previous READY dadc773 remains canonical.",
+    "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
+    "reported_restriction": "EarlierignoreCommandlengthfailure repaired. bd6a1c99automaticproductionREADY; no providerquota blocker currentlyobserved.",
+    "next_action": "Keep currentcanonicalorigin. Save release evidence and continue remaining acceptanceaudit, distinguishing realiPhone/human tests and source/coverage gaps from verified fixes.",
+    "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Publish legacy-route compatibility PR; require gate/review/CI, mergegreen, then verifyautomaticproductionall29URLs, redirectquery/hash and corrected2014detail/no-nextreview. Preserveallmergeddirectorprofilework. Then updateacceptanceaudit and releaseevidence; realiPhone/humantests remainseparate.",
+  "next_action": "Require docs checkpoint PR checks, merge evidence. Continue partial acceptanceaudit: provider/source/closedcinema/license/performance coverage; realiPhoneSafari and5-10independent usertests requirehuman execution. Latest productionbd6a1c99verified. Do not deploy docs-only changes manually or invent overallpercentage.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

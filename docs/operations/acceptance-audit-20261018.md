@@ -5,6 +5,10 @@ Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-s
 
 `Verified locally` means the named deterministic check was executed in this run. `Partial` means implementation/evidence exists but at least one part of the bullet is still open. `Pending` means the listed evidence is not available. Production evidence is separate from source/CI evidence.
 
+## Latest release evidence — 2026-10-19
+
+[Verified release bd6a1c99](release-verification-20261019.md): canonical Vercel READY,29/29HTTP/source checks, actual legacy query/hash and original-year/shared-review smoke. Latest local suite147Node/133Python passes. The table retains partial/pending classifications where broader acceptance evidence is still missing; it is not an overall progress percentage.
+
 ## Current direct feedback
 
 - New review: rating/comment alone must not assign a viewing day. Before this patch `open()` assigned today for a new movie; runtime regression failed. New blank default passes; explicitly selected dates and existing year/month/null precision remain covered.
@@ -16,20 +20,20 @@ Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-s
 
 | ID | Acceptance scope | Evidence / remaining action | State |
 |---|---|---|---|
-| P0-01.1 | Reconcile main, issues, docs, release settings | main #384 and open PRs #368/#339 inspected; Vercel main status still build-rate-limit; historical release docs have stale Pages references; complete cross-document reconciliation remains | Partial |
-| P0-01.2 | Entire suite and Python baseline classification | `audit_python_suite.py --strict`:121 tests,0 failures,0 errors. Active Cinelva Node suite is covered by shared gate; retired Ocean feature suites intentionally excluded | Verified locally |
+| P0-01.1 | Reconcile main, issues, docs, release settings | mainbd6a1c99, #391/#394/#396 and latestdeployment reconciled. Canonical Vercel READY; historicalrelease docs now point to current evidence. Broaderissueinventory remainspartial | Partial |
+| P0-01.2 | Entire suite and Python baseline classification | Latestqualitygate147Nodepass; strictfullPython133tests,0failures,0errors. RetiredOceanfeature suites intentionallyexcluded | Verified locally |
 | P0-01.3 | CI lint/unit/browser/accessibility/links/backup/dependencies/licenses/data | Existing quality, frontend Chromium/WebKit390/1280, scorecard, backup and source/data checks; comprehensive dependency/license gate and full external dead-link coverage not established in this audit | Partial |
-| P0-01.4 | Artifacts and enforce checks before release | Existing frontend/scorecard artifacts, premerge gate; this patch requires fresh CI and review; production remains unverified | Partial |
+| P0-01.4 | Artifacts and enforce checks before release | Existing frontend/scorecard artifacts, premerge gate; latest#394/#396 source CI and canonical releaseverified; comprehensive deploymentpolicy enforcement stillpartial | Partial |
 | P0-02.1 | Remove Ocean production entry points | Existing retirement tests and static build filter; full canonical production audit pending | Partial |
 | P0-02.2 | Retire renderer/assets/demo/tests/dependencies after reference inventory | #379 excludes75.8MB retired payload from published output, preserves redirects; source retirement archive remains, complete dead dependency inventory not established | Partial |
 | P0-02.3 | Preserve shared records/ratings/backups/legacy keys | Actual store and backup unit tests in quality gate; no user storage mutation | Verified locally |
-| P0-02.4 | Old URLs graceful,0/1/1000 records | Found all eight redirects landed on shared-image page rather than records. Fixed destination to /my-cinelva/; actual redirect script passes0/1/1000-record/query/hash/origin/fallback checks. PR#387 passedChromium/WebKit dashboard/count/storage/390px checks for8routes×0/1/1000records; merged2e294c02. Canonicalproduction remainsunverified | Partial |
-| P0-02.5 | Supersede #111/#113/#143 only after release | Keep pending until verified canonical production deployment | Pending |
+| P0-02.4 | Old URLs graceful,0/1/1000 records | All8redirectsources verified200/exactreleasedbytes; actualcanonicalOceanURL landsMyCinelva. #394CI covers8routes×0/1/1000records inChromium/WebKit preservingrawstorage. See latestreleaseevidence | Verified source/CI/production |
+| P0-02.5 | Supersede #111/#113/#143 only after release | Issues111/113/143closednot_planned aftercanonicalREADYandlegacyredirectverification; supersededby239, notimplementedOceanfeatures | Verified source/CI/production |
 | P0-03.1 | Shared detail/record/rating/date CRUD | #372 browser journeys; current runtime date repair; zero/partial dates tests. Rewatch requirement superseded by user: edit existing record | Partial |
-| P0-03.2 | Import/export/unknown fields/conflicts/offline/refresh | Store/backup tests cover preservation, rollback and conflicts; existing browser backup round-trip. Importedrevieweditor/inlineduplicateandexplicitidentityoverwritegapsreproduced/fixedwithnon-writingconflictchecks;newCIpending. Current canonical upgrade verification pending | Partial |
+| P0-03.2 | Import/export/unknown fields/conflicts/offline/refresh | Importedreview/editor/inlineidentity fixes merged#392 and#394; store/backup/conflict/offline browser checks passed. Correctedmodules arepublished; fullreal-userproductionupgrade exercise remainsunverified | Partial |
 | P0-03.3 | Local-only storage guidance/quota/errors | Page footer and data-backup guidance; storage/backup error tests in gate | Verified locally |
 | P0-03.4 | Reconcile #228, no custom shelves | Existing My page contract; custom collections not reintroduced. Full issue reconciliation not established here | Partial |
-| P0-04.1 | Source provenance/freshness/unknown display | External data registry, timestamp/data quality tests and check_sources; PR#388 distinguishes actualtitlecoverage frombatchtimestamp (79/355current); merged8b89f1b. Completeprovider-by-provider liveevidence stillneedsaudit | Partial |
+| P0-04.1 | Source provenance/freshness/unknown display | External data registry, timestamp/data quality tests and check_sources; PR#388 distinguishes actualtitlecoverage frombatchtimestamp; latest offline recount 138/395currentwithin7days, 257stale/unchecked. Completeprovider-by-provider liveevidence stillneedsaudit | Partial |
 | P0-04.2 | Stale availability/schedules/duplicates/closed cinemas | Expired availability and duplicate tests; all closed cinema cases not verified | Partial |
 | P0-04.3 | Free-only/no scraping/rights/truthful availability | Existing compliance policy/checks, freshness tests; no new external requests or data sources in patch | Partial |
 | P1-05.1 | Canonical calendar/counts/country/director/decade/genre | Shared record store, insights tests, director runtime tests, summary implementation; Importedlocal/TMDBID mismatchreproduced causingdoublecounts/wrongmetadata; viewidentityfix/regressionsmergedin#390 after11successfulchecks. Completeuser-facingdrilldownauditpending | Partial |
@@ -40,18 +44,18 @@ Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-s
 | P1-06.3 | No demos/custom shelves/Atlas naming | Current nav has summary/records/awards/directors; hidden legacy implementation retained; full published text/route inventory still required | Partial |
 | P1-07.1 | Explainable record-based discovery/unwatched/gaps | Curated discovery tests and existing implementation; complete personal recommendation relevance audit pending | Partial |
 | P1-07.2 | Duration/mood/genre/trusted availability filters | Existing discovery/source contracts; all requested filter combinations not established | Partial |
-| P1-07.3 | Discovery/detail/record/visualization loop | #372 shared-review entry browser tests; new null-date path must pass fresh frontend CI | Partial |
+| P1-07.3 | Discovery/detail/record/visualization loop | CanonicalactualMyCinelva→search→detail→sharedreview/noNext verified; CIchecksrecordsave/null/partialdate/refresh. Completepersonaldiscoveryloopacceptance remainspartial | Partial |
 | P1-08.1 | Actual iPhone Safari | No physical device attached; CI WebKit is separate | Pending |
-| P1-08.2 |390px,touch,scroll,states,themes,a11y,large data | Existing mobile/route audit/backup evidence; fresh current patch CI and complete large-data interaction performance audit pending | Partial |
+| P1-08.2 |390px,touch,scroll,states,themes,a11y,large data | Existing mobile/route audit/backup evidence; latestCIpassed; complete large-data interaction performance audit pending | Partial |
 | P1-08.3 | Performance/no layout shifts | Artifact reduction is not measured page speed. Existing timing producer is not comprehensive CLS or gesture-latency evidence | Partial |
-| P1-09.1 | Canonical origin/data continuity | Canonical https://cinelva.vercel.app/; no origin migration. Latest tested source not yet production | Partial |
+| P1-09.1 | Canonical origin/data continuity | Canonicalcinelva.vercel.appREADY; nohostmigration/recordkeychange. All29declaredURLsresolvepublishedpages; historicaldocsmarkedwithcurrentpointer. OldPagesdata staysorigin-scoped | Partial |
 | P1-09.2 | Naming/legal/film-data-image rights | Existing branding/legal review docs; no renewed legal clearance or per-asset license conclusion in this audit | Partial |
 | P1-09.3 |5–10 user tests/appropriate opt-in metrics | No evidence of5–10 independent user tests; do not substitute automated tests or fabricate participants | Pending |
-| P1-09.4 | Production smoke and rollback evidence | Vercel main statuses fail build-rate-limit; latest confirmed productioncc02eb47. No manual deployment retry | Pending |
+| P1-09.4 | Production smoke and rollback evidence | Canonicalbd6a1c99READY,29/29HTTP/sourcechecks andactualbrowserdetail/review/legacyquery/hash verified. PriorREADYd07eb073 andsafe rollbackscope documented; rollbacknotexecuted | Partial |
 
 ## Next executable checks
 
-1. Pass this patch's shared gate, focused review and required CI; merge only after results are green.
-2. Continue source acceptance gaps; do not treat a merged PR or this document as overall completion.
-3. Check release limit independently before one batched deployment; do not blindly retry or change origin.
-4. Verify all canonical production routes and upgrade/backup flow on the exact released SHA. Real Safari and human user testing remain separate evidence.
+1. Keep canonical bd6a1c99 production evidence separate from source/CI and real-device acceptance.
+2. Continue remaining source/provider/closed-cinema/license/performance audit gaps; do not treat a merged PR as overall completion.
+3. Real iPhone Safari and5–10independent user tests remain unperformed. Do not substitute CI WebKit or automated tests.
+4. Preserve the canonical origin and saved keys; no manual deployment is required for documentation-only evidence updates.

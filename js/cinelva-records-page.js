@@ -345,7 +345,11 @@
     const department=String(work.department||'').trim().toLowerCase();
     if (department && !['directing','監督'].includes(department)) return false;
     const named=String(work.director||work.director_name||work.directorName||'').trim();
-    if (named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
+    // Use the same kana-equivalence rules as the director picker.
+    // Without this, sourced works can disappear for ヴ/ブ or イィ spellings.
+    const directorSpellingKey=value=>normalizeName(directorJapanese(value))
+      .replace(/ヴ/g,'ブ').replace(/ィ/g,'イ').replace(/ェ/g,'エ').replace(/ー/g,'');
+    if (named && directorSpellingKey(named)!==directorSpellingKey(directorName)) return false;
     // Missing credits are not evidence of direction; require an explicit match.
     return role==='director'||role==='監督'||work.is_director===true||work.isDirector===true||Boolean(named);
   };

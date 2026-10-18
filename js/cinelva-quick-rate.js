@@ -20,9 +20,40 @@ style.textContent=`
 style.textContent+=`\n/* Compact overrides must follow the base dialog declarations. */\n.cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}\n.cinelva-rate-inner{padding:14px;gap:9px}\n.cinelva-rate-inner textarea{min-height:52px}\n`;
 style.textContent+=`\n.cinelva-score-track{position:relative;display:flex;align-items:center;flex:1;min-width:0;height:32px}.cinelva-score-track::before{content:'';pointer-events:none;position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);height:13px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(10% - 1px),#ffffff65 calc(10% - 1px),#ffffff65 10%);opacity:.8}.cinelva-score-track input{position:relative;z-index:1}.cinelva-inline-score input::-webkit-slider-thumb{width:22px;height:22px;margin-top:-8.5px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}.cinelva-inline-score input::-moz-range-thumb{width:20px;height:20px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}\n`;style.textContent+=`\n.cinelva-rate-button{display:inline-grid;place-items:center;min-width:40px;width:40px;height:40px;padding:0;border-radius:50%;font-size:21px;background:#ffffff0d;color:#eae4d6;border-color:#ffffff38;transition:all .18s}.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#e7b94420;border-color:#e7b944}.cinelva-rate-button.is-watched{color:#f3c84e;border-color:#e7b94488}.cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;width:40px;margin:6px 8px}.cinelva-rate-dialog{background:#161719;border:1px solid #ffffff24;border-radius:18px;box-shadow:0 20px 70px #000b}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{border-radius:10px;background:#232427;border-color:#ffffff28}.cinelva-rate-actions button{border-radius:999px}.cinelva-review-score output{color:#f3c84e}.cinelva-review-header button{border-radius:50%}.cinelva-review-header button:hover{background:#ffffff16}\n`;document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
-dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input aria-label="鑑賞日" id="cinelvaRateDate" type="date"></label></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
+dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>▣ 鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="TV">TV</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueRow" hidden>映画館・サービス<select id="cinelvaRateVenue"><option value="">選択してください</option></select></label></div><label>✎ レビュー<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">×</button><button type="button" id="cinelvaRateSave">✓ 保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
+const dateInput=$('cinelvaRateDate'),dateTrigger=$('cinelvaDateTrigger'),datePicker=$('cinelvaDatePicker');
+let pickerYear=0,pickerMonth=0;
+const dateISO=(y,m,d)=>String(y).padStart(4,'0')+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+function closeDatePicker(){datePicker.hidden=true;dateTrigger.setAttribute('aria-expanded','false');}
+function drawDatePicker(){
+ $('cinelvaDateMonth').textContent=pickerYear+'年'+(pickerMonth+1)+'月';
+ const grid=$('cinelvaDateGrid');grid.replaceChildren();
+ for(const label of ['日','月','火','水','木','金','土']){
+  const el=document.createElement('span');el.className='cinelva-date-weekday';el.textContent=label;grid.append(el);
+ }
+ const offset=new Date(pickerYear,pickerMonth,1).getDay();
+ const days=new Date(pickerYear,pickerMonth+1,0).getDate();
+ for(let i=0;i<offset;i++){const spacer=document.createElement('span');grid.append(spacer);}
+ for(let d=1;d<=days;d++){
+  const iso=dateISO(pickerYear,pickerMonth,d);
+  const btn=document.createElement('button');btn.type='button';btn.textContent=String(d);
+  btn.className='cinelva-date-day';btn.setAttribute('aria-label',iso);
+  if(iso===dateInput.value)btn.setAttribute('aria-current','date');
+  btn.onclick=()=>{dateInput.value=iso;dateTrigger.textContent=iso.replaceAll('-','/');closeDatePicker();dateTrigger.focus();};
+  grid.append(btn);
+ }
+}
+dateTrigger.onclick=()=>{
+ if(!datePicker.hidden){closeDatePicker();return;}
+ const [y,m]=dateInput.value.split('-').map(Number);
+ const now=new Date();pickerYear=y||now.getFullYear();pickerMonth=(m||now.getMonth()+1)-1;
+ drawDatePicker();datePicker.hidden=false;dateTrigger.setAttribute('aria-expanded','true');
+};
+$('cinelvaDatePrev').onclick=()=>{pickerMonth--;if(pickerMonth<0){pickerMonth=11;pickerYear--;}drawDatePicker();};
+$('cinelvaDateNext').onclick=()=>{pickerMonth++;if(pickerMonth>11){pickerMonth=0;pickerYear++;}drawDatePicker();};
+dialog.addEventListener('click',event=>{if(!datePicker.hidden&&!event.target.closest('.cinelva-review-date'))closeDatePicker();});
 $('cinelvaRateClose').onclick=()=>dialog.close();
 $('cinelvaRateX').onclick=()=>dialog.close();
 const venueOptions={
@@ -60,6 +91,7 @@ function open(movie) {
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
  updateVenueOptions(existing?.viewingVenue||'');
  $('cinelvaRateDate').value=/^\d{4}-\d{2}-\d{2}$/.test(existing?.watchedAt||'')?existing.watchedAt:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+ dateTrigger.textContent=dateInput.value.replaceAll('-','/');closeDatePicker();
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
  if(!dialog.open)dialog.showModal();
@@ -815,6 +847,34 @@ style.textContent+=`
 .cinelva-rating-controls>.cinelva-rating-clear{display:none!important}
 .cinelva-rate-dialog .cinelva-venue-chips{display:none!important}
 .cinelva-rate-dialog .cinelva-review-method{margin-bottom:7px!important}
+`;
+style.textContent+=`
+.cinelva-rate-dialog .cinelva-review-date{position:relative!important}
+.cinelva-rate-dialog .cinelva-review-date label{display:flex!important;align-items:center!important;gap:10px!important}
+.cinelva-rate-dialog #cinelvaDateTrigger{
+ width:148px!important;max-width:148px!important;min-height:36px!important;
+ padding:6px 9px!important;background:#232427!important;color:#f4f4f4!important;
+ border:1px solid #ffffff35!important;border-radius:9px!important;
+ font:500 14px/20px system-ui!important;text-align:center!important;
+}
+.cinelva-rate-dialog .cinelva-date-picker{
+ position:relative!important;margin-top:7px!important;width:min(100%,320px)!important;
+ padding:9px!important;background:#25272b!important;border:1px solid #ffffff35!important;
+ border-radius:10px!important;box-sizing:border-box!important;
+}
+.cinelva-rate-dialog .cinelva-date-picker[hidden]{display:none!important}
+.cinelva-rate-dialog .cinelva-date-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.cinelva-rate-dialog .cinelva-date-nav button{
+ width:36px;height:32px;border:1px solid #ffffff35;border-radius:7px;
+ background:#33353a;color:#fff;font-size:23px;
+}
+.cinelva-rate-dialog .cinelva-date-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.cinelva-rate-dialog .cinelva-date-weekday{font-size:11px;color:#adb1ba;line-height:27px}
+.cinelva-rate-dialog .cinelva-date-day{
+ min-width:0;width:100%;height:33px;padding:0;border:0;border-radius:6px;
+ background:transparent;color:#f4f4f4;font:500 13px system-ui;
+}
+.cinelva-rate-dialog .cinelva-date-day[aria-current="date"]{background:#e7b944;color:#181818;font-weight:700}
 `;
 root.CinelvaQuickRate={open,normalize};
 

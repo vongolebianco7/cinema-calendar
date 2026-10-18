@@ -1,0 +1,50 @@
+name: Publish compact director catalog
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/directors.json
+      - scripts/build_director_mobile.py
+      - .github/workflows/publish-director-mobile.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: compact-director-catalog
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Generate and verify mobile catalog
+        run: |
+          python scripts/build_director_mobile.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source = json.loads(Path('data/directors.json').read_text())['directors']
+          mobile = json.loads(Path('data/directors-mobile.json').read_text())['directors']
+          assert source.keys() == mobile.keys()
+          for key in source:
+              assert {w['id'] for w in source[key]['works']} == {w['id'] for w in mobile[key]['works']}
+          print('Every director and movie credit retained')
+          PY
+      - name: Publish mobile catalog despite concurrent commits
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          cp data/directors-mobile.json /tmp/directors-mobile.json
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git checkout -B mobile-catalog-publish FETCH_HEAD
+            cp /tmp/directors-mobile.json data/directors-mobile.json
+            git add data/directors-mobile.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Publish compact director catalog for My Cinelva'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1

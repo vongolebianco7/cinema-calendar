@@ -175,6 +175,15 @@ def main():
     before = json.dumps(snapshot, ensure_ascii=False, sort_keys=True)
     directors = snapshot['directors']
     names = existing_name_aliases()
+    # Explicitly requested directors missing from the catalog. TMDB search
+    # still requires one exact matching person name and actual directing credits.
+    priority_names = {
+        'Paul Greengrass': 'ポール・グリーングラス',
+        'Martin Campbell': 'マーティン・キャンベル',
+        'Richard Donner': 'リチャード・ドナー',
+        'Joseph Rusnak': 'ジョセフ・ラスナック',
+    }
+    names = {**priority_names, **names}
     today = datetime.date.today().isoformat()
     refresh_budget = 800 - (200 if args.discover_names else 0) - (100 if args.verify_person else 0)
     # Prioritize known prolific directors with implausibly small catalogs before
@@ -220,8 +229,10 @@ def main():
     # distinguish genuine feature films from short films. Process a bounded
     # slice on every refresh, retaining verified runtimes across runs.
     verification_budget = 240
+    newly_discovered = set(discovery.get('added', []))
     verification_order = sorted(directors, key=lambda identifier: (
-        0 if identifier in ('488', '525', '190', '4762') else 1,
+        0 if identifier in newly_discovered else
+        1 if identifier in ('488', '525', '190', '4762') else 2,
         -sum(not (work.get('runtime') or work.get('duration'))
              for work in directors[identifier].get('works', [])),
         identifier))

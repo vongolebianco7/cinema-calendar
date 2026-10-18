@@ -18,14 +18,15 @@ test('quick rating exists on all three current list views',()=>{
     assert.match(html,/js\/cinelva-quick-rate\.js/);
   }
   assert.match(src,/cinelva-rate-button/);
-  assert.match(src,/保存して次へ/);
+  assert.match(src,/id="cinelvaRateSave">保存/);
+  assert.doesNotMatch(src,/保存して次へ/);
   assert.match(src,/cinelvaRateComment/);
   assert.match(src,/cinelvaRatePlace/);
   assert.match(src,/value="0"/);
 });
 test('movie search locally normalizes aliases and Japanese middle dot',()=>{
   const html=fs.readFileSync('search.html','utf8');
-  assert.match(html,/CinelvaQuickRate\.normalize/);
+  assert.match(html,/normalize=globalThis\.CinelvaQuickRate\?\.normalize\|\|/);
   assert.match(html,/data\/movies\.json/);
   assert.match(html,/m\.aliases\|\|\[\]/);
 });

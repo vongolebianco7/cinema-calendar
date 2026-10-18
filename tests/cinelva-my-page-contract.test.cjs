@@ -9,7 +9,7 @@ test('My Cinelva is a real-record page without demo, collection, or Atlas contro
   assert.match(page, /cinelva-records-page\.js/);
   assert.match(page, /映画の世界/);
   assert.match(page, /映画賞ヒートマップ/);
-  assert.match(page, /監督のフィルモグラフィー/);
+  assert.match(page, /よく観る監督/);
   assert.doesNotMatch(page, /デモ|コレクション|コレクションを作成|アトラス|Atlas/);
 });
 

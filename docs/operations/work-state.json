@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T07:40:00+09:00",
+  "updated_at": "2026-10-18T15:57:32+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5",
-  "branch": "ci/skip-browser-scorecard-non-ui",
-  "head_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5",
-  "pull_request": 291,
+  "base_sha": "2179c075f89b0127907b55f64e141cd14458a125",
+  "branch": "fix/my-cinelva-record-visibility-20261018",
+  "head_sha": "276478ddfbb7edf700b1c0f0e2c4414e32153dd7",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -406,6 +406,14 @@
       },
       "acceptance": "No URL parsing on non-link cards; preserve existing record metadata; reject empty numeric input; legacy partial dates handled; inline score browser regression.",
       "ci": "4/4 success: smoke 39066651486, frontend 39066651520, completeness 39066651525, quality 39066651524. No deploy."
+    },
+    {
+      "id": "P0-CINELVA-FEEDBACK-20261018",
+      "title": "Apply My CINELVA feedback and remove unwanted next action",
+      "status": "in_progress",
+      "issue": 239,
+      "acceptance": "Bookmarks open the visible 見たい映画 list; saved entries are visible on first load; new record entry points to search; ratings preserve zero; viewing method is limited to cinema or streaming; award/director actions use the searchable listing; the rating panel has no 次へ action; annual calendar and medal behavior remain intact.",
+      "ci": "Rebased onto latest main 2179c075. python scripts/quality_gate.py passed; focused CINELVA Node tests passed 20/20. Browser workflows still need GitHub Actions verification."
     }
   ],
   "verification": [
@@ -638,6 +646,11 @@
       "command": "PR #261 GitHub Actions: frontend, brand, backup, Pages, smoke, quality, Python, completeness",
       "result": "passed_merged",
       "details": "All eight Actions green; FAQ/support/privacy guidance merged as c41b36b156fab285140f07e42af73491e5ebf158."
+    },
+    {
+      "command": "CINELVA feedback regression suite and quality gate",
+      "result": "passed_on_work_branch",
+      "details": "2026-10-18: focused My CINELVA/quick-rate tests 20/20 passed; python scripts/quality_gate.py passed; JS syntax checks for changed scripts/browser tests and git diff --check passed. Playwright browser binaries are unavailable locally; browser checks are delegated to the PR workflow."
     }
   ],
   "deployment": {
@@ -658,6 +671,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Push PR #291, require the workflow contract and full one-time scorecard validation to pass, merge, then verify that a later non-UI audit PR no longer starts the heavy completeness workflow.",
+  "next_action": "Push the feedback branch and open its PR; wait for required GitHub Actions including browser validation. Do not deploy to Vercel while the build rate limit remains.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

@@ -62,8 +62,8 @@ async function freePort() {
     await detailLink.click();
     await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
     await page.locator('#detail .recordAction a').click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
-    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
+    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
+    assert.equal(await page.locator('.gSearch').inputValue(), movie.title);
     await page.route('**/api/movies*', route => route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -75,8 +75,8 @@ async function freePort() {
     await result.click();
     await page.locator('#detail .recordAction a').waitFor({ state: 'visible', timeout: 15000 });
     await page.locator('#detail .recordAction a').click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 15000 });
-    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title));
+    await page.waitForURL(url => url.pathname.endsWith('/search.html') && url.searchParams.has('search'));
+    assert.equal(await page.locator('.gSearch').inputValue(), movie.title);
     await page.addInitScript(row => localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
       [row.id]: {
         id: String(row.id), title: row.title, poster: row.poster || '',
@@ -86,14 +86,11 @@ async function freePort() {
       }
     })), movie);
     await page.goto(`${base}/my-cinelva/`, { waitUntil: 'domcontentloaded' });
-    await page.locator('[data-tab="world"]').click();
-    await page.locator('#worldCanvas').press('Enter');
-    const mappedRecord = page.locator('#worldFilm [data-edit]').first();
-    await mappedRecord.waitFor({ state: 'visible', timeout: 10000 });
-    await mappedRecord.click();
-    await page.locator('#recordDialog').waitFor({ state: 'visible', timeout: 10000 });
-    assert.ok((await page.locator('#chosenMovie').textContent()).includes(movie.title), 'world-map selection opens the existing record in edit mode');
-    console.log('Calendar event and search-page result → detail → shared record form passed at 390px with backend offline.');
+    await page.locator('[data-tab="records"]').click();
+    const savedRecord = page.locator(`[data-record-card="${movie.id}"]`);
+    await savedRecord.waitFor({ state: 'visible', timeout: 10000 });
+    assert.ok((await savedRecord.innerText()).includes(movie.title), 'saved viewing record remains visible in the current records list');
+    console.log('Calendar event and search-page result → detail → searchable rating list, plus saved-record visibility, passed at 390px with backend offline.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

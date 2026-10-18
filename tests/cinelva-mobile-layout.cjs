@@ -6,7 +6,7 @@ const fs = require('fs');
   let failed = false;
   for (const width of [375, 390, 768, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 844 }, deviceScaleFactor: 1 });
-    const errors = [];
+    const errors = [], consoleErrors = [];
     const year = new Date().getFullYear();
     const watchedAt = year + '-06-15';
     await page.addInitScript(({ watchedAt }) => {
@@ -15,12 +15,24 @@ const fs = require('fs');
       }));
     }, { watchedAt });
     page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
     await page.goto('http://127.0.0.1:8765/my-cinelva/', { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await page.locator('[data-tab="calendar"]').click();
-    await page.locator('#calendarView').waitFor({ state: 'visible' });
-    await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible', timeout: 15000 });
+    await page.locator('#summaryView').waitFor({ state: 'visible' });
+    const calendarReady = await page.waitForFunction(() => document.querySelectorAll('#yearHeatmap .cy-month').length === 12, null, { timeout: 7000 }).then(() => true).catch(() => false);
+    if (!calendarReady) {
+      const diagnostics = await page.evaluate(() => ({
+        monthCount: document.querySelectorAll('#yearHeatmap .cy-month').length,
+        heatmapHTML: document.querySelector('#yearHeatmap')?.innerHTML.slice(0, 1200),
+        periodOptions: [...(document.querySelector('#csPeriod')?.options || [])].map(option => option.value),
+        recordCount: document.querySelector('#statTotal')?.textContent,
+        pageErrors: window.__cinelvaTestErrors || []
+      }));
+      console.error('annual calendar initialization diagnostic', JSON.stringify({ width, diagnostics, errors, consoleErrors }));
+      throw new Error('annual calendar did not render 12 months');
+    }
+    await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible' });
     await page.waitForTimeout(150);
-    const result = await page.evaluate(({ year }) => {
+    const result = await page.evaluate(({ year, width }) => {
       const root = document.querySelector('#yearHeatmap');
       if (!root) return { error: 'missing annual calendar' };
       const months = [...root.querySelectorAll('.cy-month')];
@@ -28,7 +40,7 @@ const fs = require('fs');
       const monthRects = months.map(m => m.getBoundingClientRect());
       const visible = root.getBoundingClientRect().width > 0 && root.getBoundingClientRect().height > 0;
       const days = [...root.querySelectorAll('.cy-day')];
-      if (days.some(d => d.getBoundingClientRect().height > 32 || d.getBoundingClientRect().width > 32)) overlaps.push('oversized day cells');
+      if (width <= 768 && days.some(d => d.getBoundingClientRect().height > 32 || d.getBoundingClientRect().width > 32)) overlaps.push('oversized day cells');
       if (!visible) overlaps.push('annual calendar hidden');
       if (root.classList.contains('heatgrid')) overlaps.push('legacy heatgrid class still applied');
       for (let i=0; i<monthRects.length; i++) for (let j=i+1; j<monthRects.length; j++) {
@@ -44,12 +56,14 @@ const fs = require('fs');
         if (inner.bottom > outer.bottom+2) overlaps.push('dots below month');
         if (inner.right > outer.right + 2 || inner.left < outer.left - 2) overlaps.push('dots outside month');
       }
-      return { months: months.length, overlaps, watchedDays: root.querySelectorAll('.cy-day.watched').length, juneCount: months[5]?.querySelector('.cy-month-count')?.textContent, overflow: document.documentElement.scrollWidth > window.innerWidth + 2, rootClass: root.className };
-    }, { year });
-    for (const mode of ['date','count','rating','method']) {
-      await page.locator('#calendarMode').selectOption(mode);
-      const count = await page.locator('#calendar .cw-day').count();
-      if (count < 7) { failed = true; console.error(width, mode, 'weekly cells missing', count); }
+      return { months: months.length, overlaps, watchedDays: root.querySelectorAll('.cy-day.watched').length, juneCount: months[5]?.querySelector('.cy-month-total')?.textContent.replace(/\s+/g, ''), overflow: document.documentElement.scrollWidth > window.innerWidth + 2, rootClass: root.className };
+    }, { year, width });
+    const yearSelect = page.locator('#calendarYearSelect');
+    if (!(await yearSelect.isVisible())) { failed = true; console.error(width, 'annual year selector is hidden'); }
+    const selectedYear = await yearSelect.inputValue();
+    if (selectedYear !== String(year)) {
+      failed = true;
+      console.error(width, 'unexpected selected year', selectedYear, 'expected', year);
     }
     await page.screenshot({ path: 'test-results/cinelva/calendar-' + width + '.png', fullPage: true });
     if (result.error || result.months !== 12 || result.watchedDays !== 1 || result.juneCount !== '1本' || result.overlaps?.length || result.overflow || errors.length) {

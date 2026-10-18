@@ -50,10 +50,12 @@ async function getPort(){
   await page.locator('#cinelvaRateComment').fill('ランキングから記録');
   await page.locator('#cinelvaRateSave').click();
   await page.waitForFunction(()=>document.querySelector('#grid .cinelva-inline-score input')?.value==='4.5');
-  await page.locator('#cinelvaRateNext').click();
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(dialog=>dialog.open),false,'saving closes the rating panel');
+  await page.locator('#grid .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   await page.locator('#cinelvaRatePlace').selectOption('配信');
   await page.locator('#cinelvaRateSave').click();
+  assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(dialog=>dialog.open),false);
   assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0');
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
@@ -76,11 +78,13 @@ async function getPort(){
   await page.locator('#dates .cinelva-rate-button').first().click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film One/);
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'ランキングから記録');
-  await page.locator('#cinelvaRateNext').click();
+  await page.locator('#cinelvaRateClose').click();
+  await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
+  await page.locator('#dates .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');
   const records=await page.evaluate(()=>window.CinelvaLibraryRecords.all());
   assert.equal(records.length,2);
-  console.log((process.env.CINELVA_BROWSER||'chromium')+' existing ranking/calendar score badges and next-film actions passed');
+  console.log((process.env.CINELVA_BROWSER||'chromium')+' existing ranking/calendar score badges and close-to-list rating actions passed');
  }finally{if(browser)await browser.close();server.kill();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

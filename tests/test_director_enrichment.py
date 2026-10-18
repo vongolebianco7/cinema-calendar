@@ -54,6 +54,16 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertEqual(result['works'][0]['runtime'], 100)
         self.assertEqual(result['coverage']['runtime_unverified'], 0)
 
+    def test_eastwood_snapshot_has_sourced_feature_credits_not_a_saved_record_total(self):
+        import json
+        director = json.loads((ROOT / 'data/directors.json').read_text())['directors']['190']
+        self.assertGreaterEqual(len(director['works']), 40)
+        identifiers = {work['id'] for work in director['works']}
+        self.assertTrue({33, 70, 13223, 1106739}.issubset(identifiers))
+        self.assertFalse({1309305, 1126932, 524469} & identifiers)
+        self.assertEqual(director['coverage']['runtime_unverified'], 0)
+        self.assertTrue(all(work['runtime'] >= 60 and work['job'] == 'Director' for work in director['works']))
+
     def profile(self):
         return {'id': 1, 'name': 'Example Director', 'also_known_as': ['エグザンプル・ディレクター'],
                 'birthday': '1970-01-02', 'place_of_birth': 'Tokyo', 'profile_path': '/person.jpg',

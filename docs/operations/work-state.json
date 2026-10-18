@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:33:00+09:00",
+  "updated_at": "2026-10-19T04:35:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
   "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "dd98b0e097bb849aed902447bd5417b0a531bfdd",
+  "head_sha": "5ca58a55912d278b12f0c3185f19fb1e7b5f89f3",
   "pull_request": 398,
   "work_items": [
     {
@@ -839,6 +839,10 @@
     {
       "check": "Absent director source discovery",
       "result": "Actions39158919785 succeeded:61additional directors,849total. Eastwood190 has44raw directing credits; runtime checks now required to remove short works and packaged AmazingStories compilation before final browser assertion.25names unresolved by unambiguous search; these remain honestly unknown rather than inferred."
+    },
+    {
+      "check": "Eastwood verified source snapshot and regression",
+      "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
     }
   ],
   "deployment": {
@@ -857,6 +861,6 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Run bounded official API discovery for supported missing director names, inspect Eastwood person190 and exact final snapshot, require fresh UI/mobile CI and review then merge and verify canonical release. Previous completion claim covered only788cached directors and missed absent directors.",
+  "next_action": "Check exact final PR398head allrequiredActions including new Eastwood browser journey, mergewhen green thenverify canonical releaseSHA andsource41filmdata. Unresolved othernamequeries stayunknown; do notclaim allworlddirectors complete.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

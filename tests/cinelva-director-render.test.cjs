@@ -176,9 +176,9 @@ test('ヴ and ブ spelling variants resolve to one sourced director identity', (
     name: 'スティーブン・スピルバーグ',
     profile: { id: 190, nameJa: 'スティーブン・スピルバーグ', original_name: 'Steven Spielberg', also_known_as: ['スティーヴン・スピルバーグ'] },
   });
-  assert.match(row.innerHTML, /1\\/1本/);
+  assert.match(row.innerHTML, /1\/1本/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /1 \\/ 1本 鑑賞済み/);
+  assert.match(detail.innerHTML, /1 \/ 1本 鑑賞済み/);
 });
 
 test('one-character name difference does not merge distinct unsourced people', () => {
@@ -192,9 +192,9 @@ test('incomplete Spielberg catalog never reports a false 1/1 total', () => {
   const film = { id: 901, title: '監督作', director: 'Steven Spielberg', runtime: 120, rating: 4 };
   const { row, detail } = render({ records: [film], works: [film], profile: { id: 488 } });
   assert.match(row.innerHTML, /総数未取得/);
-  assert.doesNotMatch(row.innerHTML, /1\\/1本/);
+  assert.doesNotMatch(row.innerHTML, /1\/1本/);
   row.listeners.click();
-  assert.doesNotMatch(detail.innerHTML, /1 \\/ 1本 鑑賞済み/);
+  assert.doesNotMatch(detail.innerHTML, /1 \/ 1本 鑑賞済み/);
 });
 
 test('complete Spielberg catalog can show a sourced denominator', () => {
@@ -202,7 +202,7 @@ test('complete Spielberg catalog can show a sourced denominator', () => {
     id: 1000 + n, title: '監督作' + n, director: 'Steven Spielberg', runtime: 120, year: 1980+n
   }));
   const { row } = render({ records: [{ ...films[0], rating: 4 }], works: films, profile: { id: 488, coverage: { truncated: false } } });
-  assert.match(row.innerHTML, /1\\/12本/);
+  assert.match(row.innerHTML, /1\/12本/);
 });
 
 test('kana variants in sourced credit names retain every directed film', () => {
@@ -215,9 +215,9 @@ test('kana variants in sourced credit names retain every directed film', () => {
     id:488, nameJa:'スティーブン・スピルバーグ', original_name:'Steven Spielberg',
     also_known_as:['スティーヴン・スピルバーグ'], coverage:{truncated:false}
   }});
-  assert.match(row.innerHTML,/1\\/12本/);
+  assert.match(row.innerHTML,/1\/12本/);
   row.listeners.click();
-  assert.match(detail.innerHTML,/1 \\/ 12本 鑑賞済み/);
+  assert.match(detail.innerHTML,/1 \/ 12本 鑑賞済み/);
 });
 
 test('TMDB runtime-unverified shorts do not leak into director feature count', () => {
@@ -225,7 +225,7 @@ test('TMDB runtime-unverified shorts do not leak into director feature count', (
   const unknown = { id: 7101, title:'短編らしい作品', director:'Other Director', source:'tmdb', job:'Director' };
   const short = { id: 7102, title:'短編', director:'Other Director', source:'tmdb', job:'Director', runtime:19 };
   const {row,detail}=render({records:[long],works:[long,unknown,short],name:'Other Director'});
-  assert.match(row.innerHTML,/1\\/1本/);
+  assert.match(row.innerHTML,/1\/1本/);
   row.listeners.click();
   assert.doesNotMatch(detail.innerHTML,/短編らしい作品|短編/);
 });
@@ -235,7 +235,7 @@ test('verified TMDB feature remains after unknown-runtime credits are filtered',
   const known={...watched,source:'tmdb',job:'Director'};
   const unknown={id:7111,title:'未確認作品',source:'tmdb',director:'Other Director',job:'Director'};
   const {row}=render({records:[watched],works:[known,unknown],name:'Other Director'});
-  assert.match(row.innerHTML,/1\\/1本/);
+  assert.match(row.innerHTML,/1\/1本/);
 });
 
 test('30-minute films remain, while 29-minute films are excluded', () => {
@@ -243,7 +243,7 @@ test('30-minute films remain, while 29-minute films are excluded', () => {
   const under = { id: 8301, title: '29分作品', director: 'Other Director', runtime: 29 };
   const fortyFive = { id: 8302, title: '45分作品', director: 'Other Director', runtime: 45 };
   const { row, detail } = render({ records: [rated], works: [rated, under, fortyFive], name: 'Other Director' });
-  assert.match(row.innerHTML, /1\\/2本/);
+  assert.match(row.innerHTML, /1\/2本/);
   row.listeners.click();
   assert.match(detail.innerHTML, /30分作品/);
   assert.match(detail.innerHTML, /45分作品/);
@@ -254,13 +254,13 @@ test('Paul Thomas Anderson partial TMDB catalog never reports a false 1/1 total'
   const film={id:7345,title:'ゼア・ウィル・ビー・ブラッド',director:'Paul Thomas Anderson',runtime:158,rating:4.5,source:'tmdb',job:'Director'};
   const {row,detail}=render({records:[film],works:[film],name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false}}});
   assert.match(row.innerHTML,/総数未取得/);
-  assert.doesNotMatch(row.innerHTML,/1\\/1本/);
+  assert.doesNotMatch(row.innerHTML,/1\/1本/);
   row.listeners.click();
-  assert.doesNotMatch(detail.innerHTML,/1 \\/ 1本 鑑賞済み/);
+  assert.doesNotMatch(detail.innerHTML,/1 \/ 1本 鑑賞済み/);
 });
 
 test('Paul Thomas Anderson shows real denominator after 8 verified features', () => {
   const works=Array.from({length:9},(_,i)=>({id:85000+i,title:'長編'+i,director:'Paul Thomas Anderson',runtime:100+i,source:'tmdb',job:'Director',is_director:true,year:2000+i}));
   const {row}=render({records:[{...works[0],rating:4}],works,name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false,runtime_unverified:0}}});
-  assert.match(row.innerHTML,/1\\/9本/);
+  assert.match(row.innerHTML,/1\/9本/);
 });

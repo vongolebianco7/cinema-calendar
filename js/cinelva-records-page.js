@@ -269,6 +269,18 @@
     const metadata=Object.values(state.directors||{}).find(d=>[d.name,d.nameJa,d.name_ja,d.japanese_name].some(v=>normalizeName(v)===normalizeName(raw)));
     return metadata?.nameJa||metadata?.name_ja||metadata?.japanese_name||directorJapaneseNames.get(raw.toLowerCase())||raw;
   };
+  const isDirectorCredit = (work, directorName) => {
+    if (!work || typeof work !== 'object') return false;
+    // Compilation and anthology releases are not individual directorial films.
+    if (/^cinema\s*16\s*[:：]/i.test(String(work.title||work.name||work.original_title||''))) return false;
+    const role=String(work.job||work.role||work.credit_type||work.creditType||'').trim().toLowerCase();
+    if(role && !['director','監督'].includes(role)) return false;
+    const department=String(work.department||'').trim().toLowerCase();
+    if(department && department!=='directing' && department!=='監督') return false;
+    const named=work.director||work.director_name||work.directorName;
+    if(named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
+    return role==='director'||role==='監督'||!!named||work.is_director===true||work.isDirector===true;
+  };
   function renderDirectors() {
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
@@ -302,8 +314,8 @@
       const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
       const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
       const all=new Map();
-      for(const work of director?.works||[])all.set(String(work.id),{...work,...(state.movies.find(movie=>String(movie.id)===String(work.id))||{})});
-      for(const movie of group.records)all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});
+      for(const work of director?.works||[]){if(!isDirectorCredit(work,group.name))continue;all.set(String(work.id),{...work,...(state.movies.find(movie=>String(movie.id)===String(work.id))||{})});}
+      for(const movie of group.records){if(!isDirectorCredit({...movie,is_director:true},group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
       const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const unseen=films.length-group.records.length;
       const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';
@@ -319,7 +331,7 @@
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
       const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
-      const knownIds=new Set([...(director?.works||[]).map(w=>String(w.id)),...group.records.map(w=>String(w.id))]);
+      const knownIds=new Set([...(director?.works||[]).filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id)),...group.records.filter(w=>isDirectorCredit({...w,is_director:true},group.name)).map(w=>String(w.id))]);
       row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'/'+knownIds.size+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);

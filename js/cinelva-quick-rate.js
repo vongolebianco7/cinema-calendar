@@ -207,6 +207,48 @@ style.textContent+=`
 .cinelva-review-score input[type=range]::-moz-range-track{height:12px;border-radius:999px;background:#e7b944}
 .cinelva-review-score input[type=range]::-moz-range-thumb{width:22px;height:22px;border:3px solid #171819;border-radius:50%;background:#fff}
 `;
+style.textContent+=`
+/* Compact single-line card controls: icon and score share one row. */
+.cinelva-rate-button,.cinelva-rate-wrap>.cinelva-rate-button{
+ width:32px;min-width:32px;height:36px;min-height:36px;margin:2px 0 2px 4px;
+ padding:0;border:0;border-radius:4px;background:transparent;color:#d6d6d6;
+ box-shadow:none;vertical-align:middle;
+}
+.cinelva-rate-button svg{width:17px;height:17px}
+.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#ffffff12;border-color:transparent}
+.cinelva-rate-button.is-watched{border-color:transparent;color:#e7b944}
+.cinelva-inline-score{
+ display:inline-flex;vertical-align:middle;width:calc(100% - 43px);max-width:220px;
+ min-width:0;height:36px;min-height:36px;box-sizing:border-box;
+ gap:5px;margin:2px 3px 2px 2px;padding:0 3px;
+ border:0;border-radius:0;background:transparent;
+}
+.cinelva-inline-score.is-watched{border:0;background:transparent}
+.cinelva-score-track{height:36px;min-height:36px;min-width:0}
+.cinelva-inline-score input{height:36px;min-height:36px;touch-action:pan-y}
+.cinelva-inline-score input::-webkit-slider-runnable-track{
+ height:6px;border-radius:2px;
+ background:linear-gradient(90deg,#e7b944 var(--score-progress),#ffffff40 var(--score-progress));
+}
+.cinelva-inline-score input::-webkit-slider-thumb{
+ width:4px;height:19px;margin-top:-6.5px;border:0;border-radius:1px;
+ background:#f2d178;box-shadow:0 0 0 1px #171819;
+}
+.cinelva-inline-score input::-moz-range-track{height:6px;border-radius:2px;background:#ffffff40}
+.cinelva-inline-score input::-moz-range-progress{height:6px;border-radius:2px;background:#e7b944}
+.cinelva-inline-score input::-moz-range-thumb{
+ width:4px;height:19px;border:0;border-radius:1px;background:#f2d178;
+}
+.cinelva-inline-value{min-width:2.4em;font-size:12px;font-weight:600;color:#b9b9b9}
+.cinelva-review-score input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:2px}
+.cinelva-review-score input[type=range]::-webkit-slider-thumb{
+ width:5px;height:22px;margin-top:-8px;border:0;border-radius:1px;background:#fff;
+}
+.cinelva-review-score input[type=range]::-moz-range-track{height:6px;border-radius:2px}
+.cinelva-review-score input[type=range]::-moz-range-thumb{
+ width:5px;height:22px;border:0;border-radius:1px;background:#fff;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

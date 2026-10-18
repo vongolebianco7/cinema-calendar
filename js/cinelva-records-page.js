@@ -371,13 +371,22 @@
     const host=$('directorTimeline'),works=$('directorWorks');
     host.replaceChildren();works.replaceChildren();
     for(const director of knownDirectors){const name=directorJapanese(director.nameJa||director.japanese_name||director.name_ja||director.name),key=directorKey(name);if(!groups.has(key))groups.set(key,{name,records:[],ids:new Set()});}
-    const sorted=[...groups.values()].filter(g=>g.records.length||(knownByName.get(directorKey(g.name))?.works||[]).some(w=>isDirectorCredit(w,g.name))).sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
+    const filmographyFor=group=>{
+      const director=knownByName.get(directorKey(group.name));
+      const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
+      const all=new Map();
+      for(const work of director?.works||[]){const combined={...work,...(movieById.get(String(work.id))||{})};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(String(work.id),combined);}
+      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
+      const films=[...all.values()];
+      return {director,watched,films,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
+    };
+    const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.films.length).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';
     detail.id='directorFilmography';
     host.append(list,detail);
-    const directorFilmYear = movie => {
+    const directorFilmYear = (movie,directorName) => {
       const candidates=[movie.year,movie.release_year,movie.releaseYear,movie.release_date,movie.releaseDate,movie.first_air_date,movie.date,movie.premiere];
       for(const candidate of candidates){
         const match=String(candidate??'').match(/^(18|19|20)\d{2}/);
@@ -385,11 +394,11 @@
       }
       const title=String(movie.original_title||movie.originalTitle||movie.title||movie.name||'').normalize('NFKC').trim();
       const director=String(movie.director||movie.director_name||'').toLowerCase();
-      if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)||directorKey(group.name)===directorKey('Steven Spielberg')))return 1971;
+      if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)||directorKey(directorName)===directorKey('Steven Spielberg')))return 1971;
       return null;
     };
-    const filmTile=(movie,watched)=>{
-      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=directorFilmYear(movie);
+    const filmTile=(movie,watched,directorName)=>{
+      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=directorFilmYear(movie,directorName);
       const rating=Number(movie.rating||0);
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
@@ -398,29 +407,21 @@
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
-      const director=knownByName.get(directorKey(group.name));
-      const watched=new Map(group.records.map(movie=>[String(movie.id),movie]));
-      const all=new Map();
-      for(const work of director?.works||[]){const combined={...work,...(movieById.get(String(work.id))||{})};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(String(work.id),combined);}
-      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
-      const films=[...all.values()].sort((a,b)=>(directorFilmYear(a)||9999)-(directorFilmYear(b)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
-      const watchedCount=films.filter(movie=>watched.has(String(movie.id))).length;
-      const unseen=films.length-watchedCount;
+      const {director,watched,watchedCount}=group.filmography;
+      const films=[...group.filmography.films].sort((a,b)=>(directorFilmYear(a,group.name)||9999)-(directorFilmYear(b,group.name)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';
       const photoUrl=profileImage.startsWith('/')?'https://image.tmdb.org/t/p/w185'+profileImage:profileImage;
       const safePhoto=/^https:\/\//.test(photoUrl)?photoUrl:'';
       const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||director?.biography||''].filter(Boolean);
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+watchedCount+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
-        '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)))).join('')+'</div>'+
+        '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)),group.name)).join('')+'</div>'+
         '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。※全フィルモグラフィーを保証する数字ではありません。</p>';
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
-      const director=knownByName.get(directorKey(group.name));
-      const knownIds=new Set([...(director?.works||[]).filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id)),...group.records.filter(w=>isDirectorCredit(w,group.name)).map(w=>String(w.id))]);
-      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'/'+knownIds.size+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.filmography.watchedCount+'/'+group.filmography.films.length+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });

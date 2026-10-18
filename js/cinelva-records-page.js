@@ -239,46 +239,40 @@
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   function renderDirectors() {
-    const names = [...new Set([...recordMovies().map(item => enriched(item).director),...Object.values(state.directors).map(item=>item.name)].filter(Boolean))].sort((a,b) => a.localeCompare(b,'ja'));
-    const options = '<option value="">監督を選択</option>' + names.map(name => `<option>${escapeHTML(name)}</option>`).join('');
-    const one=$('directorOne').value,two=$('directorTwo').value;
-    $('directorOne').innerHTML=options; $('directorTwo').innerHTML='<option value="">比較しない</option>'+names.map(name=>`<option>${escapeHTML(name)}</option>`).join('');
-    $('directorOne').value=one||recordMovies().map(enriched).find(item=>item.director)?.director||''; $('directorTwo').value=two;
-    drawDirectorTimelines();
+    const groups=new Map();
+    for(const record of recordMovies()){
+      const movie=enriched(record),name=String(movie.director||'').trim();
+      if(!name)continue;
+      const key=normalizeName(name);
+      if(!groups.has(key))groups.set(key,{name,records:[],ids:new Set()});
+      const group=groups.get(key),id=String(movie.id);
+      if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
+    }
+    const sorted=[...groups.values()].sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
+    const host=$('directorTimeline');host.replaceChildren();$('directorWorks').replaceChildren();
+    if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
+    const max=sorted[0].records.length;
+    const chart=document.createElement('div');chart.className='director-bars';
+    const works=$('directorWorks');
+    sorted.forEach((group,index)=>{
+      const row=document.createElement('button');row.type='button';row.className='director-bar-row';
+      row.setAttribute('aria-expanded','false');
+      const name=document.createElement('span');name.className='director-bar-name';name.textContent=group.name;
+      const track=document.createElement('span');track.className='director-bar-track';
+      const fill=document.createElement('span');fill.className='director-bar-fill';fill.style.width=(group.records.length/max*100)+'%';track.append(fill);
+      const count=document.createElement('strong');count.className='director-bar-count';count.textContent=group.records.length+'本';
+      row.append(name,track,count);
+      row.onclick=()=>{
+        const active=row.classList.contains('active');
+        chart.querySelectorAll('.director-bar-row').forEach(el=>{el.classList.remove('active');el.setAttribute('aria-expanded','false');});
+        if(active){works.replaceChildren();return;}
+        row.classList.add('active');row.setAttribute('aria-expanded','true');
+        works.innerHTML=group.records.slice().sort((a,b)=>Number(b.year||0)-Number(a.year||0)).map(card).join('');
+      };
+      chart.append(row);
+    });
+    host.append(chart);
   }
-  function drawDirectorTimelines() {
-    const selected = [$('directorOne').value, $('directorTwo').value].filter(Boolean);
-    const html = selected.map(name => {
-      const entry = Object.values(state.directors).find(director => normalizeName(director.name) === normalizeName(name));
-      const works = Array.isArray(entry?.works) ? entry.works.filter(work => Number(work.year)) : [];
-      const matchedRecord = work => Insights.directorViewingRecord(state.records, work);
-      if (!works.length) return `<div class="panel"><h3>${escapeHTML(name)}</h3><p class="hint">収録済みフィルモグラフィーがありません。鑑賞済み作品のみ表示します。</p>${recordMovies().filter(record => enriched(record).director === name).map(enriched).map(card).join('')}</div>`;
-      const min = Math.min(...works.map(work => Number(work.year))), max = Math.max(...works.map(work => Number(work.year))), span = Math.max(1, max - min);
-      const sorted = works.slice().sort((a,b) => Number(a.year) - Number(b.year));
-      const awardIds=new Set(state.awards.map(item=>String(item.tmdb_id||'')));
-      const width=Math.max(700,sorted.length*90), lanes=[];
-      const nodes=sorted.map(work=>{const x=30+(Number(work.year)-min)/span*(width-60),seen=Boolean(matchedRecord(work)),awarded=awardIds.has(String(work.id)),highRated=Number(work.votes)>=100&&Number(work.score)>=7.5;let lane=lanes.findIndex(last=>x-last>110);if(lane<0)lane=lanes.length;lanes[lane]=x;return `<button class="timeline-node ${seen?'':'unwatched'} ${awarded?'awarded':''} ${highRated?'high-rated':''}" style="left:${x}px;top:${32+lane*80}px" data-director-film="${escapeHTML(work.id)}" aria-label="${escapeHTML(work.title)} · ${work.year}${seen?' · 鑑賞済み':' · 未鑑賞'}${awarded?' · 受賞記録あり':''}${highRated?' · TMDB高評価':''}" title="${escapeHTML(work.title)} · ${work.year}${awarded?' · 受賞記録あり':''}"><span>${escapeHTML(work.title)}${awarded?' ★':''}</span></button>`;}).join('');
-      const years = [...new Set([min, Math.round((min+max)/2), max])].map(year => `<span class="timeline-year" style="left:${30+(year-min)/span*(width-60)}px;top:0">${year}</span>`).join('');
-      return `<div class="panel"><div class="section-head"><h3>${escapeHTML(name)}</h3><span class="hint">一覧 ${works.length}作品 · 鑑賞済み ${sorted.filter(work => matchedRecord(work)).length}作品</span></div><div class="timeline"><div class="timeline-row" style="width:${width}px;height:${Math.max(150,lanes.length*80+80)}px">${nodes}${years}</div></div><p class="hint">収録済み作品一覧に基づく表示です。全フィルモグラフィーの網羅性は保証されないため達成率を表示しません。金色の縁は収録された受賞作品、外枠はTMDB評価7.5以上・100票以上です。</p></div>`;
-    }).join('');
-    $('directorTimeline').innerHTML = html || '<div class="empty">鑑賞記録から監督を特定できませんでした。</div>';
-    if (selected.length === 1) {
-      const entry = Object.values(state.directors).find(director => normalizeName(director.name) === normalizeName(selected[0]));
-      const matchedRecord = work => Insights.directorViewingRecord(state.records, work);
-      $('directorWorks').innerHTML = (entry?.works || []).map(work => ({ work, record: matchedRecord(work) })).filter(item => item.record).map(({work,record}) => ({...work,...record,id:record.id,title:record.title||work.title,year:record.year||work.year})).map(card).join('');
-    } else $('directorWorks').replaceChildren();
-  }
-  function resizeCanvas(canvas) { const rect = canvas.getBoundingClientRect(), dpr = Math.min(2, globalThis.devicePixelRatio || 1); canvas.width = Math.max(1, Math.round(rect.width * dpr)); canvas.height = Math.max(1, Math.round(rect.height * dpr)); const context = canvas.getContext('2d'); context.scale(dpr, dpr); return { context, width: rect.width, height: rect.height }; }
-  function projectPoint(coords, width, height) {
-    let x = coords.x * 2 - 1, y = coords.y * 2 - 1, z = coords.z * 2 - 1;
-    const { x: rx, y: ry } = state.plotRotation;
-    const cosY = Math.cos(ry), sinY = Math.sin(ry), x1 = x*cosY - z*sinY, z1 = x*sinY + z*cosY;
-    const cosX = Math.cos(rx), sinX = Math.sin(rx), y1 = y*cosX-z1*sinX, z2 = y*sinX+z1*cosX;
-    const perspective = 3.2/(3.2+z2), scale = Math.min(width, height)*.36*state.plotZoom*perspective;
-    return { x: width/2 + x1*scale + state.plotOffset.x, y: height/2 - y1*scale + state.plotOffset.y, depth: z2, scale };
-  }
-  function worldRecords(){return recordMovies().map(enriched).filter(record=>{const p=Insights.pointForRecord(record);return ($('worldYear').value==='all'||String(p.year)===$('worldYear').value)&&($('worldCountry').value==='all'||(record.countries||[]).includes($('worldCountry').value))&&($('worldGenre').value==='all'||recordGenres(record).includes($('worldGenre').value));});}
-  function showWorldFilm(record){$('worldFilm').innerHTML=card(record);}
   function drawWorld() {
     const canvas = $('worldCanvas'); if (!canvas || $('worldView').hidden) return;
     const rows=worldRecords(); $('worldList').hidden=!state.flatWorld; canvas.parentElement.hidden=state.flatWorld; $('worldToggle').setAttribute('aria-pressed',String(state.flatWorld)); $('worldToggle').textContent=state.flatWorld?'3Dマップで見る':'2D一覧で見る';
@@ -359,8 +353,8 @@
     $('genreFormat').onchange=renderGenres; $('genreWorkForm').onchange=renderGenres; $('awardMode').onchange=renderAwards;
     $('awardFilms').onclick=event=>{const button=event.target.closest('[data-award-film]');if(button)openKnownMovie(button.dataset.awardFilm);};
     $('worldZoomIn').onclick=()=>{state.plotZoom=Math.min(2.5,state.plotZoom*1.2);drawWorld();};$('worldZoomOut').onclick=()=>{state.plotZoom=Math.max(.65,state.plotZoom/1.2);drawWorld();};$('worldReset').onclick=()=>{state.plotRotation={x:-.32,y:-.58};state.plotZoom=1;state.plotOffset={x:0,y:0};drawWorld();};$('worldToggle').onclick=()=>{state.flatWorld=!state.flatWorld;drawWorld();};
-    $('directorOne').onchange=drawDirectorTimelines; $('directorTwo').onchange=drawDirectorTimelines;
-    $('directorTimeline').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};
+
+
     document.addEventListener('click',event=>{const add=event.target.closest('[data-add-record]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');if(add)openDialog();if(edit){const record=state.records.find(item=>String(item.id)===edit.dataset.edit);if(record)openDialog(record);}if(del)deleteRecord(del.dataset.delete);});
     const canvas=$('worldCanvas');
     canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=','Enter'].includes(event.key))return;event.preventDefault();if(event.key==='Enter'){const rows=worldRecords();if(rows.length)showWorldFilm(rows[state.keyboardPoint++%rows.length]);return;}if(['+','='].includes(event.key))state.plotZoom=Math.min(2.5,state.plotZoom*1.1);else if(event.key==='-')state.plotZoom=Math.max(.65,state.plotZoom/1.1);else if(event.key==='ArrowLeft')state.plotRotation.y-=.15;else if(event.key==='ArrowRight')state.plotRotation.y+=.15;else if(event.key==='ArrowUp')state.plotRotation.x-=.15;else state.plotRotation.x+=.15;drawWorld();});

@@ -272,3 +272,18 @@ test('sourced PTA films are not vetoed by conflicting generic movie metadata', (
   const {row}=render({records:[record],works,movies,name:'ポール・トーマス・アンダーソン',profile:{id:4762,nameJa:'ポール・トーマス・アンダーソン',coverage:{truncated:false}}});
   assert.match(row.innerHTML,/12本/);
 });
+
+test('legacy director spelling resolves a unique TMDB person from rated movie credit', () => {
+  const works=Array.from({length:12},(_,i)=>({id:97000+i,title:'長編'+i,director:'ポール・トーマス・アンダーソン',director_id:4762,job:'Director',is_director:true,runtime:110+i,source:'tmdb'}));
+  const reviewed={id:97000,title:'長編0',director:'Paul T Anderson',director_id:4762,rating:4,runtime:110};
+  const {row}=render({records:[reviewed],works,name:'ポール・トーマス・アンダーソン',profile:{id:4762,coverage:{truncated:false}}});
+  assert.match(row.innerHTML,/12/);
+  assert.doesNotMatch(row.innerHTML,/監督作品総数<\\/small><\\/span><span><b>—/);
+});
+
+test('a unique source movie credit resolves old spellings without explicit person id', () => {
+  const works=Array.from({length:9},(_,i)=>({id:98000+i,title:'作品'+i,director:'サム・ハーグレイヴ',job:'Director',is_director:true,runtime:100,source:'tmdb'}));
+  const reviewed={id:98000,title:'作品0',director:'Sam Hargreave',rating:4,runtime:100};
+  const {row}=render({records:[reviewed],works,name:'サム・ハーグレイヴ',profile:{id:1120883,coverage:{truncated:false}}});
+  assert.match(row.innerHTML,/9/);
+});

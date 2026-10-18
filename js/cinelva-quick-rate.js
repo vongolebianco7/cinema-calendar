@@ -156,7 +156,9 @@ function attachInlineScore(button, movie) {
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
  try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
- const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);button.after(wrap);sync();
+ const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
+ const controls=document.createElement('div');controls.className='cinelva-rating-controls';
+ button.before(controls);controls.append(button,wrap);sync();
 }
 function refreshRatingLabels(){
  const saved=Records.all();
@@ -248,6 +250,14 @@ style.textContent+=`
 .cinelva-review-score input[type=range]::-moz-range-thumb{
  width:5px;height:22px;border:0;border-radius:1px;background:#fff;
 }
+`;
+style.textContent+=`
+/* Structural flex row: prevent card CSS from wrapping note and rating onto separate lines. */
+.cinelva-rating-controls{display:flex!important;flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;width:100%;max-width:100%;min-width:0;gap:3px;margin:2px 0 3px}
+.cinelva-rating-controls>.cinelva-rate-button{flex:0 0 32px;display:grid!important;place-items:center;margin:0;padding:0}
+.cinelva-rating-controls>.cinelva-inline-score{flex:1 1 auto;width:auto;max-width:none;min-width:0;margin:0;padding:0 2px}
+.cinelva-rating-controls .cinelva-score-track{flex:1 1 auto;min-width:0}
+.cinelva-rating-controls .cinelva-inline-value{flex:0 0 auto}
 `;
 root.CinelvaQuickRate={open,normalize};
 

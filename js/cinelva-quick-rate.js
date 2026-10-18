@@ -608,6 +608,19 @@ style.textContent+=`
  pointer-events:none!important;
 }
 `;
+style.textContent+=`
+/* Center the native modal: override older translate(-50%,-50%) positioning. */
+dialog.cinelva-rate-dialog[open]{
+ position:fixed!important;
+ inset:0!important;
+ top:0!important;right:0!important;bottom:0!important;left:0!important;
+ margin:auto!important;
+ transform:none!important;
+ width:min(94vw,390px)!important;
+ max-width:94vw!important;
+ max-height:85dvh!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

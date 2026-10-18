@@ -262,9 +262,8 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 #summaryView #yearHeatmap .cy-month-head{flex:1 1 auto!important;min-height:0!important}
 @media(max-width:650px){#summaryView #yearHeatmap .cy-dots{gap:1.5px!important}#summaryView #yearHeatmap>.cy-month{aspect-ratio:1/1.48!important;padding:7px 5px 8px!important}}
 </style><style id="calendar-depth-122">
-#summaryView #yearHeatmap>.cy-month.light-month,#summaryView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,color-mix(in srgb,#b8d4e7 calc(100% - var(--cy-depth)*65%),#294e73 calc(var(--cy-depth)*65%)),color-mix(in srgb,#a8c8df calc(100% - var(--cy-depth)*70%),#193b5d calc(var(--cy-depth)*70%)))!important}
-#summaryView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(140deg,color-mix(in srgb,#d8b87a calc(100% - var(--cy-depth)*48%),#6e4a18 calc(var(--cy-depth)*48%)),color-mix(in srgb,#c69d54 calc(100% - var(--cy-depth)*52%),#654215 calc(var(--cy-depth)*52%)))!important}
-#summaryView #yearHeatmap>.cy-month{transition:background-color .2s ease}
+#summaryView #yearHeatmap>.cy-month.light-month,#summaryView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,color-mix(in srgb,#b8d4e7, #294e73 var(--cy-mix)),color-mix(in srgb,#a8c8df,#193b5d var(--cy-mix)))!important;color:#f8fbff!important}
+#summaryView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(140deg,color-mix(in srgb,#d8b87a,#6e4a18 var(--cy-mix)),color-mix(in srgb,#c69d54,#654215 var(--cy-mix)))!important}
 </style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">

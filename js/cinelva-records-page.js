@@ -63,13 +63,21 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
-    renderRows('csGenres',sorted(genreCounts).slice(0,8),['#8fa9cb']);
-    renderRows('csMethods',sorted(methodCounts),['#86a8ca','#c9ae78','#86948e','#b59cb7']);
-    const countries=sorted(countryCounts),palette=['#85a8c5','#c9a4b9','#d1b581','#8db6a8','#a8a0ce','#ca9e83','#9aaab4','#c5b9a0'];
-    renderRows('csCountries',countries.slice(0,10),palette);
-    $('csCountries').insertAdjacentHTML('afterbegin',countries.length?'<div class="cs-strip">'+countries.map(([,n],i)=>'<span style="flex:'+n+';background:'+palette[i%palette.length]+'"></span>').join('')+'</div>':'');
-    const ds=[...decades].sort((a,b)=>a[0]-b[0]),dm=Math.max(1,...ds.map(x=>x[1]));
-    $('csDecades').innerHTML=ds.length?'<div class="cs-decade">'+ds.map(([d,n])=>'<div class="cs-decade-item"><span>'+n+'</span><i style="height:'+Math.max(2,Math.round(n/dm*65))+'px"></i><span>'+d+'s</span></div>').join('')+'</div>':'<p class="cs-empty">公開年の情報がありません。</p>';
+    const palette=['#85a8c5','#c9a4b9','#d1b581','#8db6a8','#a8a0ce','#ca9e83','#9aaab4','#c5b9a0','#9fa6d8','#b7a5a2'];
+    function renderDonut(id,entries,multi=false){
+      const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
+      if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
+      const visible=all.slice(0,7),other=all.slice(7).reduce((sum,item)=>sum+item[1],0);
+      if(other)visible.push(['その他',other]);
+      let cursor=0;
+      const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return palette[i%palette.length]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
+      const legend=visible.map(([name,n],i)=>'<div class="cs-donut-legend-row"><i class="cs-donut-dot" style="background:'+palette[i%palette.length]+'"></i><span class="cs-donut-label">'+escapeHTML(String(name))+'</span><span class="cs-donut-value">'+Math.round(n/total*100)+'%</span></div>').join('');
+      host.innerHTML='<div class="cs-donut-layout"><div class="cs-donut" role="img" aria-label="'+escapeHTML(visible.map(([name,n])=>name+' '+n+'件').join('、'))+'" style="background:conic-gradient('+stops.join(',')+')"></div><div class="cs-donut-legend">'+legend+'</div>'+(multi?'<div class="cs-donut-note">複数ジャンルを含む登録件数の構成比</div>':'')+'</div>';
+    }
+    renderDonut('csGenres',genreCounts,true);
+    renderDonut('csCountries',countryCounts);
+    renderDonut('csDecades',new Map([...decades].map(([year,count])=>[year+'年代',count])));
+    renderDonut('csMethods',methodCounts);
   }
 
   function renderStats() {

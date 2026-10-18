@@ -10,5 +10,12 @@
       "**": false,
       "main": true
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/cinelva/:path*",
+      "destination": "/:path*",
+      "permanent": false
+    }
+  ]
 }

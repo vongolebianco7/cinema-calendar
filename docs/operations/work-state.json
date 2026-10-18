@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:12:33+09:00",
+  "updated_at": "2026-10-19T04:18:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "04d4b3f631d6311bfe6f5ff2a5ad9c8c2003ddd0",
-  "branch": "fix/search-film-release-date-20261019",
-  "head_sha": "ea41e33a85a10dafbbc90e18e91bcd49ac5bc3c2",
+  "base_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
+  "branch": "fix/published-route-compatibility-20261019",
+  "head_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
   "pull_request": null,
   "work_items": [
     {
@@ -504,9 +504,16 @@
     {
       "id": "P0-SEARCH-EVENT-RELEASE-DATE",
       "title": "Keep event dates separate from original film release metadata",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "Official local events resolve their explicit TMDB identity; unavailable release years remain unknown; streaming/broadcast/screening dates keep their meaning and values.",
-      "ci": "4 runtime tests pass, including actual URL and offline review identity with a localID/TMDBlink. Three initial regressions failed before fix. Quality gate144Node/fullPython125pass. Existing Chromium/WebKit390px browser test extended; PR CI pending."
+      "ci": "PR#394 merged d07eb073 after all15checks on7958f2a9 succeeded. Combined146Node/fullPython133pass; actualChromium/WebKit390px verifiescanonicalURL/detail/offlineID. Vercel automatic productionqueued dpl_9r1hFPD84qxNsXxhXwHQPvHv5Pj8."
+    },
+    {
+      "id": "P0-PUBLISHED-LEGACY-ROUTES",
+      "title": "Keep legacy Cinelva URLs reachable in the actual published artifact",
+      "status": "in_progress",
+      "acceptance": "All29manifestURLs are published or redirect on the same origin to a publishedcanonicalpage. Query/hash/records preserved; no stale duplicatedUI exposed.",
+      "ci": "ActualcanonicalHTTPaudit15/29success14nested404. Real buildartifactregression firstfailed, nowpasses with temporary /cinelva/:path* -> /:path* redirect. ActualsourceHTMLfiles copied into fixture; all29outputs/targetschecked. Quality147Node/fullPython133pass. Focusedreviewready; CIandproductionquery/hashpending."
     }
   ],
   "verification": [
@@ -817,24 +824,28 @@
     {
       "check": "Concurrent #391 integration",
       "result": "Director profiles merged04d4b3f while#394CIpassed. Only checkpoint conflict; preserve director data/reading/credit behavior and auto-merged browser assertions. Re-run combined gate and CI before merge. Combined quality gate146Node/fullPython133pass; fresh CI required on merged tree."
+    },
+    {
+      "check": "Published route compatibility",
+      "result": "Actualreleaseddadc773:15canonicalrootpages200exactbytes,14nestedcinelvaHTML404. Providerdocsconfirm temporarywildcardredirectsyntax. Regressionusesactualbuildandactual29sourceHTML. Rootdestinationsexist; focusedreviewready afterfixturegapcorrected. No crossoriginorstoragekeychange."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
+    "target_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-19T04:02:25+09:00",
     "reported_restriction": "0adf128 automatic release rejected because ignoreCommand exceeds256characters. Canonical remains READY dadc773. Follow-up uses short command plus root-anchored script; no manual retry.",
-    "next_action": "Observe one automatic release after schema-safe fix passes CI and merges. No manual retry. Verify canonical corrected event date and review identity.",
+    "next_action": "Observe d07eb073 automatic release; no manualretry. After legacy-route PR CI/merge, verify one automaticdeployment plus all29canonicalURLs and actualbrowserquery/hash/recordjourney.",
     "provider_preview_status": "Failed release dpl_9txVt6GMrE5bA6tfJnLyocsgB2rP at0adf128; previous READY dadc773 remains canonical.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Publish one tested batch: short Vercel ignore script plus search event date/identity fix. Require focused review and fresh Chromium/WebKit CI; merge green then verify automatic deployment/canonical interaction. Preserve independent#391 work.",
+  "next_action": "Publish legacy-route compatibility PR; require gate/review/CI, mergegreen, then verifyautomaticproductionall29URLs, redirectquery/hash and corrected2014detail/no-nextreview. Preserveallmergeddirectorprofilework. Then updateacceptanceaudit and releaseevidence; realiPhone/humantests remainseparate.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

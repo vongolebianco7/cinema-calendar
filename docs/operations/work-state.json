@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T21:11:41+09:00",
+  "updated_at": "2026-10-18T21:23:31+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
-  "branch": "fix/director-import-identities-20261018",
-  "head_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
+  "base_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
+  "branch": "fix/imported-review-edits-20261018",
+  "head_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
   "pull_request": null,
   "work_items": [
     {
@@ -477,9 +477,16 @@
     {
       "id": "P0-IMPORTED-FILM-IDENTITY",
       "title": "Use canonical film identity in director counts and record metadata",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "ImportedlocalIDsandexplicitTMDBIDsrepresentonefilm; conflictinglocalIDsnevermatchwrongfilm; metadata usesexplicitidentitywhilelocaleditIDsandsavedfieldsremainunchanged.",
-      "ci": "Threeactualruntimefailuresreproducedbeforefix;11focusedtests,30activeCinelvafiles128/128,Python125/125andsharedgatepass. Browserfixturewithlocal900003andcanonicalfilmIDadded;CIpending."
+      "ci": "PR#390 mergedb2876171 after11successfulcheck-runs oneadbf0a1. ActualimportedidentitybrowserfixturepassesChromium/WebKit; transientundiciserverteardownrootfixedbysharedboundedTCPreadiness. Local128activeNodeandPython125passed."
+    },
+    {
+      "id": "P0-IMPORTED-REVIEW-EDITS",
+      "title": "Edit imported reviews without duplication or identity overwrite",
+      "status": "in_progress",
+      "acceptance": "Editor/inline/labelsrecognizebothTMDBaliasesandpreserveexistinglocalID/date/comment; contradictoryexplicitidentitysave/restorefailsbeforeanywrite.",
+      "ci": "Threeactualeditor/inlinefailuresandcorestorecollisionreproducedbeforefix;33focusedtests,135activeNode,Python125/125passed. Browserfixturecoversimportedinlineanddialogedits;newCIrequired."
     }
   ],
   "verification": [
@@ -765,11 +772,15 @@
     {
       "check": "Mergedsourceacceptance21:12JST",
       "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
+    },
+    {
+      "check": "PR390integration",
+      "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
+    "target_sha": "b2876171cc4de2b31c4faf96433aee08b19c5b36",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
@@ -785,6 +796,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Publish importedfilmidentityfixwithfocusedreview; requirefreshfrontendChromium/WebKit CIbeforemerge. Refreshmainandcontinuehighestreadyacceptance. IndependentlyconfirmVercellimitclearedbeforeonebatchedrelease; realSafari/humanusertests/productionupgraderecoveryremainunverified.",
+  "next_action": "Publish importedrevieweditfixPR; requirefocusedreview andfreshbrowser/backup/qualityCI, mergeonlywhengreen. Preserveconcurrent#389directorprofiledatawork. Refreshmainandcontinueacceptancegaps; independentlyconfirmVercelcapclearedbeforeonebatchedcanonicalrelease.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

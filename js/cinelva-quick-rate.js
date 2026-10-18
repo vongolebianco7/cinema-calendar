@@ -81,7 +81,7 @@ $('cinelvaRateScore').oninput=syncDialogScore;
 function open(movie,options={}) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id)){return false;}
- const existing=Records.all().find(r=>String(r.tmdbId??r.id)===String(id));
+ const existing=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
  selected={...movie,...existing,id:String(existing?.id??id),tmdbId:id,title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
@@ -183,7 +183,7 @@ function enhanceCalendar(grid){
 function attachInlineScore(button, movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id))return;
- const existing=Records.all().find(r=>String(r.id)===String(id));
+ const existing=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
  const prompt=document.createElement('button');prompt.type='button';prompt.className='cinelva-rating-date-prompt';prompt.hidden=true;prompt.textContent='鑑賞日が未設定です　日付を設定 ›';prompt.onclick=e=>{e.stopPropagation();e.preventDefault();activeCard=button;open(movie,{showDate:true});};
  const wrap=document.createElement('span');wrap.className='cinelva-inline-score';
  const input=document.createElement('input');input.type='range';input.min='0';input.max='5';input.step='0.1';
@@ -194,7 +194,7 @@ function attachInlineScore(button, movie) {
  const sync=()=>{const score=Number(input.value),text=score.toFixed(1),hasRecord=input.dataset.hasRecord==='true';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',hasRecord);button.classList.toggle('is-watched',hasRecord);button.setAttribute('aria-label',hasRecord?'この映画の評価を編集':'この映画をレビュー');input.style.setProperty('--score-progress',String(score/5*100)+'%');track.style.setProperty('--score-progress',String(score/5*100)+'%');};
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
- try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);input.dataset.hasRecord='true';if(score>0&&!latest?.watchedAt){prompt.hidden=true;activeCard=button;open({...movie,id:String(id),rating:score},{showDate:true});}else{prompt.hidden=true;}root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ try{const latest=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));Records.save({...movie,id:String(latest?.id??id),tmdbId:id,title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);input.dataset.hasRecord='true';if(score>0&&!latest?.watchedAt){prompt.hidden=true;activeCard=button;open({...movie,id:String(id),rating:score},{showDate:true});}else{prompt.hidden=true;}root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  // The visible track owns gestures. Native range drag on iOS is unreliable inside swipeable cards.
  let activePointer=null, activeTouch=null;
@@ -275,7 +275,7 @@ function attachInlineScore(button, movie) {
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key,marked:!marked}}));
   }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
  };
- root.addEventListener('cinelva-record-updated',()=>{const rec=Records.all().find(x=>String(x.id)===String(id));if(rec?.watchedAt)prompt.hidden=true;});
+ root.addEventListener('cinelva-record-updated',()=>{const rec=Records.all().find(x=>String(x.tmdbId??x.tmdb_id??x.id)===String(id));if(rec?.watchedAt)prompt.hidden=true;});
  root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
@@ -294,12 +294,12 @@ function refreshRatingLabels(){
  for(const input of document.querySelectorAll('.cinelva-inline-score input')){
   if(document.activeElement===input||input.dataset.dragging==='true')continue;
   const id=input.dataset.movieId;
-  if(id){const record=saved.find(r=>String(r.id)===id);input.value=Number(record?.rating??0).toFixed(1);input.dataset.hasRecord=String(Boolean(record));input.dispatchEvent(new Event('input'));input.closest('.cinelva-inline-score')?.classList.toggle('is-watched',Boolean(record));}
+  if(id){const record=saved.find(r=>String(r.tmdbId??r.tmdb_id??r.id)===id);input.value=Number(record?.rating??0).toFixed(1);input.dataset.hasRecord=String(Boolean(record));input.dispatchEvent(new Event('input'));input.closest('.cinelva-inline-score')?.classList.toggle('is-watched',Boolean(record));}
  }
  const byId=new Map();
  for(const record of saved){
   if(record.watched===false)continue;
-  const id=record.tmdbId??record.id;
+  const id=record.tmdbId??record.tmdb_id??record.id;
   if(validId(id))byId.set(String(id),record);
  }
  for(const button of document.querySelectorAll('.cinelva-rate-button')){

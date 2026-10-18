@@ -12,7 +12,7 @@ test('award navigation uses natural Japanese wording', () => {
 });
 
 test('inline rating stores zero as a real score and offers only cinema or streaming', () => {
-  assert.match(quickRate, /Records\.save\(\{\.\.\.movie,id:String\(id\),title:[^;]+\},score,latest\?\.watchedAt\?\?null\)/);
+  assert.match(quickRate, /Records\.save\(\{\.\.\.movie,id:String\(latest\?\.id\?\?id\),tmdbId:id,title:[^;]+\},score,latest\?\.watchedAt\?\?null\)/);
   assert.match(quickRate, /<option value="映画館">映画館<\/option><option value="配信">配信<\/option>/);
   assert.doesNotMatch(quickRate, /<option value="TV">|<option value="その他">/);
 });

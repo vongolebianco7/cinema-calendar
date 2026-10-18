@@ -695,13 +695,13 @@
       if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)||directorKey(directorName)===directorKey('Steven Spielberg')))return 1971;
       return null;
     };
-    const filmTile=(movie,watched,directorName)=>{
+    const filmTile=(movie,watched,directorName,index)=>{
       const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=directorFilmYear(movie,directorName);
       const rating=Number(movie.rating||0);
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
         '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
-        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'</div></article>';
+        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'<button type="button" class="director-film-review" data-film-index="'+index+'" aria-label="'+title+'のレビューを開く" style="margin-top:7px;padding:6px 9px;border:1px solid #bca579;border-radius:7px;background:#211e19;color:#e6cca0;font:500 12px system-ui;cursor:pointer">'+(watched?'レビューを編集':'レビューする')+'</button></div></article>';
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
@@ -718,7 +718,7 @@
       const progressTrack=catalogAvailable?'<div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>':'';
       const coverageNote=catalogAvailable?'収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。'+(director?.coverage?.truncated===false?'TMDBの監督クレジットから収録（本数による切り捨てなし）。':'※全フィルモグラフィーを保証する数字ではありません。'):'監督作品の一覧は未取得です。鑑賞記録のある作品だけを表示しています。';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+progress+'</strong>'+progressTrack+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+biography+'</div></div>'+
-        '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)),group.name)).join('')+'</div>'+
+        '<div class="director-poster-grid">'+films.map((movie,index)=>filmTile(movie,watched.has(String(movie.id)),group.name,index)).join('')+'</div>'+
         '<p class="director-coverage-note">'+coverageNote+(sourceUrl?' <a href="'+escapeHTML(sourceUrl)+'" target="_blank" rel="noopener noreferrer">監督の出典情報</a>':'')+'</p>';
       const close=document.createElement('button');
       close.type='button';
@@ -727,6 +727,18 @@
       close.setAttribute('aria-label',group.name+'の作品一覧を閉じる');
       close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});
       detail.prepend(close);
+      // Open the same review popup used elsewhere, without navigating away.
+      detail.querySelectorAll('.director-film-review').forEach(button=>{
+        button.addEventListener('click',event=>{
+          event.preventDefault();event.stopPropagation();
+          const movie=films[Number(button.dataset.filmIndex)];
+          if(!movie)return;
+          const existing=group.records.find(item=>String(filmIdentity(item))===String(filmIdentity(movie)));
+          const target=existing?{...movie,...existing}:{...movie};
+          if(globalThis.CinelvaQuickRate?.open)globalThis.CinelvaQuickRate.open(target);
+          else openDialog(existing||target);
+        });
+      });
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };

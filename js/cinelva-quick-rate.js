@@ -902,6 +902,33 @@ style.textContent+=`
  }
 }
 `;
+style.textContent+=`
+/* Tighten vertical distance between eye/score and the rating slider. */
+.cinelva-rating-controls{
+ grid-template-rows:20px 22px!important;
+ height:46px!important;min-height:46px!important;max-height:46px!important;
+ padding:2px 5px!important;row-gap:0!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score{
+ grid-template-rows:20px 22px!important;
+ grid-row:1/3!important;height:42px!important;min-height:42px!important;max-height:42px!important;
+}
+.cinelva-rating-controls>.cinelva-rate-button{
+ grid-row:1!important;height:20px!important;min-height:20px!important;
+}
+.cinelva-rating-controls .cinelva-inline-value{
+ grid-row:1!important;height:18px!important;line-height:18px!important;
+}
+.cinelva-rating-controls .cinelva-score-track{
+ grid-row:2!important;height:22px!important;min-height:22px!important;max-height:22px!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{
+ height:22px!important;min-height:22px!important;max-height:22px!important;
+}
+@media(max-width:760px){
+ .tvMovie>.cinelva-rating-controls{flex:0 0 46px!important}
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

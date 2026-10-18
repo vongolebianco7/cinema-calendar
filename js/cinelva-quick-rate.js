@@ -573,6 +573,13 @@ style.textContent+=`
 }
 .cinelva-rate-dialog::backdrop{background:rgba(0,0,0,.65)!important}
 `;
+style.textContent+=`
+/* Inline movie-card rating: lower the score/unwatched label below the action icons. */
+.cinelva-rating-controls .cinelva-inline-value{
+ position:relative!important;
+ top:7px!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

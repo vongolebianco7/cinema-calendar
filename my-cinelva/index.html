@@ -365,6 +365,18 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 @media(min-width:1100px){#directorsView .director-picker{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 @media(max-width:699px){#directorsView .director-picker{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#directorsView .director-pick{padding:9px!important}#directorsView .director-card-photo{height:96px}#directorsView .director-card-stats small{font-size:9px}}
 </style>
+<style id="director-three-column-mobile-20261019">
+@media(max-width:699px){
+#directorsView .director-picker{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+#directorsView .director-pick{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px!important;padding:7px!important;min-width:0!important;min-height:0!important;border-radius:12px!important;text-align:center!important}
+#directorsView .director-card-photo{height:78px!important;border-radius:7px!important}
+#directorsView .director-pick-name{font-size:11px!important;line-height:1.35!important;min-height:2.7em!important;overflow-wrap:anywhere!important}
+#directorsView .director-card-stats{gap:2px!important;padding-top:6px!important}
+#directorsView .director-card-stats b{font-size:16px!important}
+#directorsView .director-card-stats small{font-size:8px!important;line-height:1.25!important}
+#directorsView .director-filmography{grid-column:1/-1!important}
+}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">

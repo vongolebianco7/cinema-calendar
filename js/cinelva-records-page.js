@@ -166,20 +166,21 @@
         const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
         return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
       });
-      // A mobile two-column donut cannot fit full Japanese category names on
-      // every wedge. Show a value on sufficiently wide wedges and keep every
-      // complete category/value pair in the color-keyed legend below.
-      // Never draw leader lines without readable text.
+      // Put readable names and values on wide wedges. Keep the full legend
+      // for narrow wedges, and avoid the central hole and SVG edges.
       for(const item of labels){
         const radial=37;
         const x=50+radial*Math.cos(item.angle);
         const y=50+radial*Math.sin(item.angle);
-        const size=5.2;
-        const width=measure(item.value,size);
+        const nameSize=4.1,valueSize=4.4;
+        const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
+        const nameWidth=measure(name,nameSize);
+        const valueWidth=measure(item.value,valueSize);
+        const width=Math.max(nameWidth,valueWidth);
         const availableArc=2*Math.PI*radial*item.fraction;
-        const fits=item.fraction>=.13 && availableArc>=width+5 &&
-          x-width/2>=7 && x+width/2<=93 && y>=10 && y<=90;
-        if(fits)svg.append(svgText(x,y+size*.32,[item.value],size));
+        const fits=item.fraction>=.12 && availableArc>=width+2 &&
+          x-width/2>=5 && x+width/2<=95 && y>=12 && y<=85;
+        if(fits)svg.append(svgText(x,y-2,[name,item.value],nameSize));
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

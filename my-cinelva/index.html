@@ -579,19 +579,24 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 }
 </style>
 
-<style id="cinelva-mobile-summary-layout-fix-20261019">
-/* Mobile-first: never squeeze two annotated doughnuts into a phone viewport. */
+
+
+<style id="cinelva-mobile-two-column-chart-repair-20261019">
 @media(max-width:700px){
- #summaryView .cs-breakdowns{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:28px!important;margin-top:22px!important}
- #summaryView .cs-breakdowns .cs-section{min-width:0!important;width:100%!important;margin:0!important;padding:0 4px 20px!important;border-bottom:1px solid #303030}
- #summaryView .cs-donut-layout{width:100%!important;max-width:100%!important;gap:14px!important;align-items:center!important;overflow:visible!important}
- #summaryView .cs-donut{width:min(55vw,230px)!important;max-width:230px!important;min-width:175px!important;flex-shrink:0!important;margin:14px auto 20px!important}
- #summaryView .cs-donut-numbers{overflow:visible!important}
- #summaryView .cs-donut-mode{width:100%!important;justify-content:center!important;margin:8px 0 0!important}
- #summaryView .cs-donut-mode button{min-height:36px!important;min-width:56px!important;font-size:13px!important}
- #summaryView .cs-section>h3{font-size:18px!important;line-height:1.5!important;margin-bottom:12px!important}
+ #summaryView .cs-breakdowns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px 12px!important;margin-top:16px!important}
+ #summaryView .cs-breakdowns .cs-section{min-width:0!important;width:auto!important;margin:0!important;padding:0 0 12px!important;border-bottom:1px solid #303030}
+ #summaryView .cs-breakdowns .cs-section>h3{font-size:15px!important;line-height:1.4!important;margin:0 0 8px!important}
+ #summaryView .cs-donut-layout{width:100%!important;gap:7px!important;align-items:center!important;overflow:hidden!important}
+ #summaryView .cs-donut{width:min(100%,160px)!important;min-width:0!important;max-width:160px!important;margin:8px auto!important}
+ #summaryView .cs-donut-numbers{display:none!important}
+ #summaryView .cs-donut-mode{width:100%!important;justify-content:center!important;gap:5px!important;margin:0 0 4px!important}
+ #summaryView .cs-donut-mode button{min-height:32px!important;min-width:45px!important;font-size:12px!important;padding:4px 7px!important}
+ #summaryView .cs-donut-legend{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:5px!important;width:100%!important}
+ #summaryView .cs-donut-legend-row{font-size:11px!important;line-height:1.4!important;gap:5px!important;min-width:0!important}
+ #summaryView .cs-donut-label{overflow-wrap:anywhere!important}
+ #summaryView .cs-donut-value{font-size:11px!important}
+ #summaryView .cs-donut-note{font-size:10px!important}
 }
-@media(max-width:380px){#summaryView .cs-donut{width:54vw!important;min-width:160px!important}}
 </style>
 </head>
 <body>

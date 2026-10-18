@@ -460,7 +460,12 @@
     };
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
-      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+(group.filmography.catalogAvailable?group.filmography.watchedCount+'/'+group.filmography.films.length+'本':'鑑賞'+group.filmography.watchedCount+'本 · 作品総数を確認中')+'</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      const d=group.filmography.director,photo=d?.profile_path||d?.profilePath||d?.photo||d?.image||'';
+      const portrait=photo.startsWith('/')?'https://image.tmdb.org/t/p/w185'+photo:photo;
+      const photoMarkup=/^https:\/\//.test(portrait)?'<img class="director-pick-photo" src="'+escapeHTML(portrait)+'" alt="" loading="lazy">':'<span class="director-pick-monogram" aria-hidden="true">🎬</span>';
+      const seen=group.filmography.watchedCount,total=group.filmography.films.length,complete=group.filmography.catalogAvailable;
+      const percent=complete?Math.min(100,Math.round(seen/Math.max(1,total)*100)):null;
+      row.innerHTML=photoMarkup+'<span class="director-pick-main"><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-pick-caption">採点済み '+seen+'本'+(complete?' / 収録 '+total+'本':'')+'</span><span class="director-pick-meter"><i style="width:'+(percent??0)+'%"></i></span></span><span class="director-pick-total">'+(percent===null?seen+'本':percent+'%')+'</span><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });

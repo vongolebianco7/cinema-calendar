@@ -80,7 +80,7 @@ function syncDialogScore(){
  $('cinelvaRateScore').style.setProperty('--dialog-progress',(score/5*100)+'%');
 }
 $('cinelvaRateScore').oninput=syncDialogScore;
-function open(movie) {
+function open(movie,options={}) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id)){return false;}
  const existing=Records.all().find(r=>String(r.tmdbId??r.id)===String(id));
@@ -95,6 +95,7 @@ function open(movie) {
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';
  if(!dialog.open)dialog.showModal();
+ if(options.showDate)dateTrigger.click();
  return true;
 }
 function save() {
@@ -197,6 +198,7 @@ function attachInlineScore(button, movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id))return;
  const existing=Records.all().find(r=>String(r.id)===String(id));
+ const prompt=document.createElement('button');prompt.type='button';prompt.className='cinelva-rating-date-prompt';prompt.hidden=true;prompt.textContent='鑑賞日が未設定です　日付を設定 ›';prompt.onclick=e=>{e.stopPropagation();e.preventDefault();activeCard=button;open(movie,{showDate:true});};
  const wrap=document.createElement('span');wrap.className='cinelva-inline-score';
  const input=document.createElement('input');input.type='range';input.min='0';input.max='5';input.step='0.1';
  input.value=Number(existing?.rating??0).toFixed(1);input.dataset.movieId=String(id);input.setAttribute('aria-label','一覧で点数をゲージで設定');
@@ -207,7 +209,7 @@ function attachInlineScore(button, movie) {
  const sync=()=>{const score=Number(input.value),text=score>0?score.toFixed(1):'未鑑賞';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',committedScore>0);button.classList.toggle('is-watched',committedScore>0);input.style.setProperty('--score-progress',String(score/5*100)+'%');track.style.setProperty('--score-progress',String(score/5*100)+'%');};
  input.oninput=sync;
  input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
- try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
+ try{const latest=Records.all().find(r=>String(r.id)===String(id));Records.save({...movie,id:String(id),title:movie.title||movie.name||latest?.title||'作品'},score===0?null:score,latest?.watchedAt??null);committedScore=score;if(score>0&&!latest?.watchedAt&&!sessionStorage.getItem('date-prompt-'+id)){prompt.hidden=false;sessionStorage.setItem('date-prompt-'+id,'1');}else if(score===0||latest?.watchedAt)prompt.hidden=true;root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
  const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
  // The visible track owns gestures. Native range drag on iOS is unreliable inside swipeable cards.
  let activePointer=null, activeTouch=null;
@@ -288,11 +290,12 @@ function attachInlineScore(button, movie) {
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key}}));
   }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
  };
+ root.addEventListener('cinelva-record-updated',()=>{const rec=Records.all().find(x=>String(x.id)===String(id));if(rec?.watchedAt)prompt.hidden=true;});
  root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
 const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- button.before(controls);controls.append(button,wrap,bookmark);
+ button.before(controls);controls.append(button,wrap,bookmark,prompt);
  // Bubble-phase isolation allows the slider's own touch handlers to run first.
  // Capture-phase stopPropagation on controls prevented track touch events entirely.
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -963,6 +966,12 @@ style.textContent+=`
 @media(max-width:760px){
  .tvMovie>.cinelva-rating-controls{flex:0 0 46px!important;margin-top:5px!important}
 }
+`;
+style.textContent+=`
+.cinelva-rating-controls:has(.cinelva-rating-date-prompt:not([hidden])){height:auto!important;max-height:none!important;grid-template-rows:20px 22px auto!important}
+.cinelva-rating-date-prompt{grid-column:1/-1!important;grid-row:3!important;width:100%!important;padding:3px 0!important;margin:0!important;border:0!important;background:transparent!important;color:#e7b944!important;font-size:10px!important;text-align:center!important}
+.cinelva-rating-date-prompt[hidden]{display:none!important}
+@media(max-width:760px){.tvMovie>.cinelva-rating-controls:has(.cinelva-rating-date-prompt:not([hidden])){flex:0 0 auto!important}}
 `;
 root.CinelvaQuickRate={open,normalize};
 

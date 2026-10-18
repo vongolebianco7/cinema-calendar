@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:10:05+09:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-18T20:17:33+09:00",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
-  "branch": "fix/review-date-preservation-20261018",
-  "head_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
-  "pull_request": null,
+  "base_sha": "ab24c7aaa1257e8234302508bb014b9600887ddd",
+  "branch": "test/active-cinelva-baseline-20261018",
+  "head_sha": "f1f1dc946769d2383250db553350001a27cd0328",
+  "pull_request": {
+    "number": 383,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/383",
+    "branch": "test/active-cinelva-baseline-20261018"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -434,10 +438,18 @@
     {
       "id": "P0-REVIEW-DATE-PRECISION",
       "title": "Preserve partial and unknown viewing dates through rating/comment edits",
-      "status": "in_progress",
+      "status": "merged",
       "issue": 239,
       "acceptance": "Editing a saved year-only, month-only or unknown viewing date does not replace it with today. Selecting an explicit date still updates it; new records default to today.",
-      "ci": "Three real-record-library regressions first failed because open/save invented today. Five runtime tests pass after the two-line fix, and local quality gate passed; focused review found no critical/important issue. PR browser Actions pending."
+      "ci": "PR #381 all eight Actions passed on 5f2cac96fde776a5ca293476c53123a1e32db315; focused review found no critical/important issue. Merged as df18d1e6eacc9ee7dd3fc006993aaba155401491."
+    },
+    {
+      "id": "P0-ACTIVE-NODE-BASELINE",
+      "title": "Reconcile stale tests and automatically gate the full active CINELVA unit suite",
+      "status": "pr_created",
+      "issue": 239,
+      "acceptance": "Discover every cinelva-*.test.cjs file, fail on a newly introduced regression, keep current review behavior assertions, and exclude obsolete Atlas expectations and retired Ocean feature tests.",
+      "ci": "After reconciling PR #382 reviewed-only director visibility, 26files112/112 tests and full shared gate pass. Unknown-year Duel test now uses a reviewed record, and a new regression protects hiding catalog-only directors. Focused review passed before this test-only reconciliation; latest PR Actions required."
     }
   ],
   "verification": [
@@ -695,17 +707,32 @@
       "command": "PR #380 Actions at 73b916907a40d271f0e3c2afe066034c973c8411",
       "result": "passed_merged",
       "details": "Smoke 39121854640, mobile layout 39121854637, quality 39121854647, completeness 39121854629, frontend 39121854683 all passed. Merged as 24939d4b87a501f4c93589b74de44bea7c7639cd."
+    },
+    {
+      "command": "PR #381 Actions at 5f2cac96fde776a5ca293476c53123a1e32db315",
+      "result": "passed_merged",
+      "details": "All eight workflows succeeded including full Python39122181965, frontend39122181941, backup39122182002, brand39122181971, smoke39122181995, mobile39122181978, quality39122181983, completeness39122181985. Merged as df18d1e6eacc9ee7dd3fc006993aaba155401491."
+    },
+    {
+      "command": "Full active Node baseline and quality-gate discovery probe",
+      "result": "passed_on_work_branch",
+      "details": "26files111/111 tests passed after integrating #381. An intentional new active test with CINELVA_GATE_PROBE made quality_gate fail, proving future tests are discovered. Removed the probe and reran the full gate successfully. No product code changed by this baseline repair."
+    },
+    {
+      "command": "Latest main #382 integration + python scripts/quality_gate.py",
+      "result": "passed_on_work_branch",
+      "details": "26files112/112 Node tests passed. The prior Duel fixture expected a catalog-only director to be shown; it was updated to a reviewed film after #382 intentionally hid unreviewed directors. New test verifies catalog-only directors remain hidden. No product behavior reverted."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "24939d4b87a501f4c93589b74de44bea7c7639cd",
+    "target_sha": "df18d1e6eacc9ee7dd3fc006993aaba155401491",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-18T19:59:18+09:00",
-    "reported_restriction": "Current main 1140ca41d5a25d2560a3c7b04f7ff5fd31386f08 reports Vercel frontend and backend build-rate-limit failures; no manual retry was made.",
+    "last_observed_vercel_check_at": "2026-10-18T20:15:15+09:00",
+    "reported_restriction": "Current observed main df18d1e6eacc9ee7dd3fc006993aaba155401491 still reports build-rate-limit; no manual retry was made.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
     "provider_preview_status": "Latest observed production remains dpl_8pLTgFogy3Nauy3opWNxWa4qWaHh at cc02eb47 (#295). It does not include recent main changes.",
     "blockers": [
@@ -715,6 +742,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Find/open PR for fix/review-date-preservation-20261018; require green shared quality and Chromium/WebKit frontend Actions, review and merge. Then refresh main, verify Vercel status without retrying while rate-limited, and continue #239 acceptance audit. Real-device Safari and latest-production smoke remain unverified.",
+  "next_action": "Inspect latest PR #383 head after main #382 reconciliation. Require all Actions green, then merge and refresh main; preserve direct-review, date-precision, filtered director counts and reviewed-only director visibility. Vercel release remains rate-limited; do not claim latest production verification.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

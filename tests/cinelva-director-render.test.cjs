@@ -34,7 +34,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg' }) {
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
   vm.runInNewContext(directorView + '\nrenderDirectors();', context);
   const [picker, detail] = elements.directorTimeline.children;
-  return { row: picker.children[0], detail };
+  return { row: picker?.children[0], detail, host: elements.directorTimeline };
 }
 
 test('director picker and filmography exclude watched shorts from the same counts', () => {
@@ -60,7 +60,14 @@ test('director picker applies enriched metadata exclusions to its denominator', 
 
 test('a different director film named Duel with an unknown year keeps the view operable', () => {
   const film = { id: 7, title: 'Duel', director: 'Other Director', runtime: 100 };
-  const { row, detail } = render({ records: [], works: [film], name: 'Other Director' });
+  const { row, detail } = render({ records: [film], works: [film], name: 'Other Director' });
   assert.doesNotThrow(() => row.listeners.click());
   assert.match(detail.innerHTML, /年不明/);
+});
+
+test('catalog-only directors stay hidden until one of their films is reviewed', () => {
+  const film = { id: 8, title: '未鑑賞作品', director: 'Other Director', year: 2020 };
+  const { row, host } = render({ records: [], works: [film], name: 'Other Director' });
+  assert.equal(row, undefined);
+  assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
 });

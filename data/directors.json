@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T20:42:53.129861+00:00",
+  "generated_at": "2026-10-18T21:04:06.252916+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -40989,7 +40989,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1697647",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 94
         },
         {
           "id": 1423983,
@@ -41012,7 +41013,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1423983"
+          "source_url": "https://www.themoviedb.org/movie/1423983",
+          "runtime": 129
         },
         {
           "id": 1363103,
@@ -41035,7 +41037,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1363103"
+          "source_url": "https://www.themoviedb.org/movie/1363103",
+          "runtime": 120
         },
         {
           "id": 1411564,
@@ -41059,7 +41062,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1411564"
+          "source_url": "https://www.themoviedb.org/movie/1411564",
+          "runtime": 93
         },
         {
           "id": 1137142,
@@ -41084,7 +41088,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1137142"
+          "source_url": "https://www.themoviedb.org/movie/1137142",
+          "runtime": 118
         },
         {
           "id": 845611,
@@ -41108,7 +41113,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/845611"
+          "source_url": "https://www.themoviedb.org/movie/845611",
+          "runtime": 129
         },
         {
           "id": 746808,
@@ -41133,7 +41139,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/746808"
+          "source_url": "https://www.themoviedb.org/movie/746808",
+          "runtime": 118
         },
         {
           "id": 799197,
@@ -41157,7 +41164,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/799197"
+          "source_url": "https://www.themoviedb.org/movie/799197",
+          "runtime": 77
         },
         {
           "id": 729483,
@@ -41182,7 +41190,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/729483"
+          "source_url": "https://www.themoviedb.org/movie/729483",
+          "runtime": 80
         },
         {
           "id": 635842,
@@ -41204,7 +41213,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/635842"
+          "source_url": "https://www.themoviedb.org/movie/635842",
+          "runtime": 115
         },
         {
           "id": 597094,
@@ -41228,7 +41238,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/597094"
+          "source_url": "https://www.themoviedb.org/movie/597094",
+          "runtime": 108
         },
         {
           "id": 489891,
@@ -41252,7 +41263,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/489891"
+          "source_url": "https://www.themoviedb.org/movie/489891",
+          "runtime": 115
         },
         {
           "id": 431572,
@@ -41276,7 +41288,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/431572"
+          "source_url": "https://www.themoviedb.org/movie/431572",
+          "runtime": 119
         },
         {
           "id": 426284,
@@ -41301,30 +41314,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/426284"
-        },
-        {
-          "id": 746825,
-          "title": "アイドル×戦士 ミラクルちゅーんず!",
-          "year": "2017",
-          "date": "2017-04-02",
-          "poster": "https://image.tmdb.org/t/p/w342/49jD5hAtuI0ydLDnSoqDUT42tZO.jpg",
-          "score": 8.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/746825",
-          "genre_ids": [
-            14,
-            10751
-          ],
-          "original_title": "アイドル×戦士 ミラクルちゅーんず!",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "三池崇史",
-          "director_id": 17282,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/746825"
+          "source_url": "https://www.themoviedb.org/movie/426284",
+          "runtime": 141
         },
         {
           "id": 417413,
@@ -41348,7 +41339,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/417413"
+          "source_url": "https://www.themoviedb.org/movie/417413",
+          "runtime": 129
         },
         {
           "id": 330070,
@@ -41372,7 +41364,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/330070"
+          "source_url": "https://www.themoviedb.org/movie/330070",
+          "runtime": 109
         },
         {
           "id": 283127,
@@ -41396,7 +41389,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/283127"
+          "source_url": "https://www.themoviedb.org/movie/283127",
+          "runtime": 115
         },
         {
           "id": 363425,
@@ -41418,7 +41412,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/363425"
+          "source_url": "https://www.themoviedb.org/movie/363425",
+          "runtime": 139
         },
         {
           "id": 241863,
@@ -41442,7 +41437,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/241863"
+          "source_url": "https://www.themoviedb.org/movie/241863",
+          "runtime": 117
         },
         {
           "id": 199925,
@@ -41464,7 +41460,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/199925"
+          "source_url": "https://www.themoviedb.org/movie/199925",
+          "runtime": 94
         },
         {
           "id": 199926,
@@ -41488,7 +41485,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/199926"
+          "source_url": "https://www.themoviedb.org/movie/199926",
+          "runtime": 130
         },
         {
           "id": 1167198,
@@ -41511,7 +41509,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1167198"
+          "source_url": "https://www.themoviedb.org/movie/1167198",
+          "runtime": 60
         },
         {
           "id": 180900,
@@ -41536,7 +41535,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/180900"
+          "source_url": "https://www.themoviedb.org/movie/180900",
+          "runtime": 125
         },
         {
           "id": 120852,
@@ -41559,7 +41559,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/120852"
+          "source_url": "https://www.themoviedb.org/movie/120852",
+          "runtime": 129
         },
         {
           "id": 110430,
@@ -41584,7 +41585,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/110430"
+          "source_url": "https://www.themoviedb.org/movie/110430",
+          "runtime": 133
         },
         {
           "id": 91694,
@@ -41608,7 +41610,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/91694"
+          "source_url": "https://www.themoviedb.org/movie/91694",
+          "runtime": 135
         },
         {
           "id": 85836,
@@ -41631,7 +41634,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/85836"
+          "source_url": "https://www.themoviedb.org/movie/85836",
+          "runtime": 128
         },
         {
           "id": 95576,
@@ -41655,7 +41659,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/95576"
+          "source_url": "https://www.themoviedb.org/movie/95576",
+          "runtime": 99
         },
         {
           "id": 58857,
@@ -41679,7 +41684,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/58857"
+          "source_url": "https://www.themoviedb.org/movie/58857",
+          "runtime": 141
         },
         {
           "id": 49608,
@@ -41704,7 +41710,8 @@
           "director_id": 17282,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/49608"
+          "source_url": "https://www.themoviedb.org/movie/49608",
+          "runtime": 106
         },
         {
           "genre_ids": [
@@ -41730,7 +41737,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/25716",
           "score": 7.222,
-          "votes": 255
+          "votes": 255,
+          "runtime": 133
         },
         {
           "genre_ids": [
@@ -41752,7 +41760,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/24561",
           "score": 6.093,
-          "votes": 91
+          "votes": 91,
+          "runtime": 111
         },
         {
           "genre_ids": [
@@ -41773,7 +41782,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/55956",
           "score": 6.1,
-          "votes": 18
+          "votes": 18,
+          "runtime": 134
         },
         {
           "genre_ids": [
@@ -41796,7 +41806,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/290071",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 160
         },
         {
           "genre_ids": [
@@ -41819,7 +41830,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/746537",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 46
         },
         {
           "genre_ids": [
@@ -41842,7 +41854,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/14943",
           "score": 7.12,
-          "votes": 409
+          "votes": 409,
+          "runtime": 130
         },
         {
           "genre_ids": [
@@ -41867,7 +41880,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/28467",
           "score": 5.9,
-          "votes": 22
+          "votes": 22,
+          "runtime": 99
         },
         {
           "genre_ids": [
@@ -41892,7 +41906,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/13637",
           "score": 6.184,
-          "votes": 374
+          "votes": 374,
+          "runtime": 121
         },
         {
           "genre_ids": [
@@ -41916,7 +41931,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/28796",
           "score": 6.5,
-          "votes": 75
+          "votes": 75,
+          "runtime": 110
         },
         {
           "genre_ids": [
@@ -41940,7 +41956,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1164804",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 45
         },
         {
           "genre_ids": [
@@ -41962,7 +41979,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/288032",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 107
         },
         {
           "genre_ids": [
@@ -41986,7 +42004,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/52401",
           "score": 7.1,
-          "votes": 23
+          "votes": 23,
+          "runtime": 117
         },
         {
           "genre_ids": [
@@ -42008,7 +42027,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/35027",
           "score": 6.0,
-          "votes": 13
+          "votes": 13,
+          "runtime": 43
         },
         {
           "genre_ids": [
@@ -42030,7 +42050,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/319314",
           "score": 6.8,
-          "votes": 197
+          "votes": 197,
+          "runtime": 63
         },
         {
           "genre_ids": [
@@ -42053,7 +42074,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104372",
           "score": 4.9,
-          "votes": 13
+          "votes": 13,
+          "runtime": 84
         },
         {
           "genre_ids": [
@@ -42077,7 +42099,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/13315",
           "score": 6.5,
-          "votes": 58
+          "votes": 58,
+          "runtime": 85
         },
         {
           "genre_ids": [
@@ -42100,7 +42123,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/42000",
           "score": 6.3,
-          "votes": 78
+          "votes": 78,
+          "runtime": 124
         },
         {
           "genre_ids": [
@@ -42121,7 +42145,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1167193",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 98
         },
         {
           "genre_ids": [
@@ -42145,7 +42170,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/746845",
           "score": 6.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 90
         },
         {
           "genre_ids": [
@@ -42167,7 +42193,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/25622",
           "score": 6.6,
-          "votes": 5
+          "votes": 5,
+          "runtime": 130
         },
         {
           "genre_ids": [
@@ -42190,7 +42217,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/12580",
           "score": 6.0,
-          "votes": 106
+          "votes": 106,
+          "runtime": 128
         },
         {
           "genre_ids": [
@@ -42211,7 +42239,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/33908",
           "score": 6.806,
-          "votes": 433
+          "votes": 433,
+          "runtime": 123
         },
         {
           "genre_ids": [
@@ -42234,7 +42263,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/746813",
           "score": 8.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 114
         },
         {
           "genre_ids": [
@@ -42257,7 +42287,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36223",
           "score": 6.3,
-          "votes": 95
+          "votes": 95,
+          "runtime": 115
         },
         {
           "genre_ids": [
@@ -42280,7 +42311,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/9694",
           "score": 6.22,
-          "votes": 508
+          "votes": 508,
+          "runtime": 112
         },
         {
           "genre_ids": [
@@ -42304,7 +42336,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36219",
           "score": 7.143,
-          "votes": 14
+          "votes": 14,
+          "runtime": 107
         },
         {
           "genre_ids": [
@@ -42330,7 +42363,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/12487",
           "score": 6.8,
-          "votes": 247
+          "votes": 247,
+          "runtime": 130
         },
         {
           "genre_ids": [
@@ -42353,7 +42387,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/64579",
           "score": 6.2,
-          "votes": 14
+          "votes": 14,
+          "runtime": 100
         },
         {
           "genre_ids": [
@@ -42375,7 +42410,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/265850",
           "score": 6.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 107
         },
         {
           "genre_ids": [
@@ -42397,7 +42433,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36255",
           "score": 6.4,
-          "votes": 9
+          "votes": 9,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -42420,7 +42457,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/746811",
           "score": 7.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 114
         },
         {
           "genre_ids": [
@@ -42444,7 +42482,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36274",
           "score": 6.6,
-          "votes": 36
+          "votes": 36,
+          "runtime": 96
         },
         {
           "genre_ids": [
@@ -42466,7 +42505,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/46130",
           "score": 7.2,
-          "votes": 10
+          "votes": 10,
+          "runtime": 104
         },
         {
           "genre_ids": [
@@ -42487,7 +42527,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/193538",
           "score": 6.0,
-          "votes": 3
+          "votes": 3,
+          "runtime": 122
         },
         {
           "genre_ids": [
@@ -42511,7 +42552,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/20646",
           "score": 6.3,
-          "votes": 62
+          "votes": 62,
+          "runtime": 131
         },
         {
           "genre_ids": [
@@ -42533,7 +42575,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/114160",
           "score": 6.8,
-          "votes": 12
+          "votes": 12,
+          "runtime": 122
         },
         {
           "genre_ids": [
@@ -42556,7 +42599,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/16184",
           "score": 6.9,
-          "votes": 233
+          "votes": 233,
+          "runtime": 113
         },
         {
           "genre_ids": [
@@ -42582,7 +42626,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36222",
           "score": 5.6,
-          "votes": 70
+          "votes": 70,
+          "runtime": 89
         },
         {
           "genre_ids": [
@@ -42605,7 +42650,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/9696",
           "score": 6.995,
-          "votes": 1161
+          "votes": 1161,
+          "runtime": 129
         },
         {
           "genre_ids": [
@@ -42628,7 +42674,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/2896",
           "score": 6.4,
-          "votes": 47
+          "votes": 47,
+          "runtime": 150
         },
         {
           "genre_ids": [
@@ -42650,7 +42697,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/355185",
           "score": 4.2,
-          "votes": 6
+          "votes": 6,
+          "runtime": 82
         },
         {
           "genre_ids": [
@@ -42672,7 +42720,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/62298",
           "score": 6.9,
-          "votes": 14
+          "votes": 14,
+          "runtime": 114
         },
         {
           "genre_ids": [
@@ -42696,7 +42745,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/4241",
           "score": 6.326,
-          "votes": 565
+          "votes": 565,
+          "runtime": 84
         },
         {
           "genre_ids": [
@@ -42720,7 +42770,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/115213",
           "score": 5.4,
-          "votes": 8
+          "votes": 8,
+          "runtime": 79
         },
         {
           "genre_ids": [
@@ -42743,7 +42794,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/13899",
           "score": 6.8,
-          "votes": 109
+          "votes": 109,
+          "runtime": 97
         },
         {
           "genre_ids": [
@@ -42766,28 +42818,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36273",
           "score": 6.2,
-          "votes": 52
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 744522,
-          "title": "塚本晋也が乱歩する",
-          "original_title": "塚本晋也が乱歩する",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2000",
-          "date": "2000-05-12",
-          "director": "三池崇史",
-          "director_id": 17282,
-          "is_director": true,
-          "poster": null,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/744522",
-          "score": 7.0,
-          "votes": 1
+          "votes": 52,
+          "runtime": 103
         },
         {
           "genre_ids": [
@@ -42809,7 +42841,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/11075",
           "score": 7.1,
-          "votes": 1877
+          "votes": 1877,
+          "runtime": 115
         },
         {
           "genre_ids": [
@@ -42832,7 +42865,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/11315",
           "score": 6.4,
-          "votes": 182
+          "votes": 182,
+          "runtime": 105
         },
         {
           "genre_ids": [
@@ -42856,7 +42890,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/123342",
           "score": 5.7,
-          "votes": 3
+          "votes": 3,
+          "runtime": 202
         },
         {
           "genre_ids": [
@@ -42879,7 +42914,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/93750",
           "score": 5.5,
-          "votes": 10
+          "votes": 10,
+          "runtime": 110
         },
         {
           "genre_ids": [
@@ -42904,7 +42940,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/38068",
           "score": 5.036,
-          "votes": 14
+          "votes": 14,
+          "runtime": 79
         },
         {
           "genre_ids": [
@@ -42928,7 +42965,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/19337",
           "score": 6.4,
-          "votes": 56
+          "votes": 56,
+          "runtime": 105
         },
         {
           "genre_ids": [
@@ -42951,7 +42989,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/80314",
           "score": 6.4,
-          "votes": 17
+          "votes": 17,
+          "runtime": 92
         },
         {
           "genre_ids": [
@@ -42975,7 +43014,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36242",
           "score": 6.6,
-          "votes": 37
+          "votes": 37,
+          "runtime": 107
         },
         {
           "genre_ids": [
@@ -42997,7 +43037,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/76806",
           "score": 5.0,
-          "votes": 18
+          "votes": 18,
+          "runtime": 109
         },
         {
           "genre_ids": [
@@ -43021,7 +43062,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/28638",
           "score": 7.2,
-          "votes": 92
+          "votes": 92,
+          "runtime": 118
         },
         {
           "genre_ids": [
@@ -43046,7 +43088,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/42099",
           "score": 5.9,
-          "votes": 56
+          "votes": 56,
+          "runtime": 102
         },
         {
           "genre_ids": [
@@ -43070,7 +43113,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36244",
           "score": 6.8,
-          "votes": 90
+          "votes": 90,
+          "runtime": 94
         },
         {
           "genre_ids": [
@@ -43093,7 +43137,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104375",
           "score": 7.3,
-          "votes": 7
+          "votes": 7,
+          "runtime": 108
         },
         {
           "genre_ids": [
@@ -43114,7 +43159,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/278321",
           "score": 7.0,
-          "votes": 2
+          "votes": 2,
+          "runtime": 98
         },
         {
           "genre_ids": [
@@ -43139,7 +43185,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36282",
           "score": 6.7,
-          "votes": 81
+          "votes": 81,
+          "runtime": 99
         },
         {
           "genre_ids": [
@@ -43162,7 +43209,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/91057",
           "score": 7.5,
-          "votes": 4
+          "votes": 4,
+          "runtime": 114
         },
         {
           "genre_ids": [
@@ -43184,7 +43232,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/279246",
           "score": 6.5,
-          "votes": 2
+          "votes": 2,
+          "runtime": 87
         },
         {
           "genre_ids": [
@@ -43205,7 +43254,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/113876",
           "score": 7.2,
-          "votes": 5
+          "votes": 5,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -43227,7 +43277,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104353",
           "score": 9.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 85
         },
         {
           "genre_ids": [
@@ -43249,7 +43300,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104351",
           "score": 9.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 86
         },
         {
           "genre_ids": [
@@ -43273,7 +43325,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36250",
           "score": 6.25,
-          "votes": 72
+          "votes": 72,
+          "runtime": 101
         },
         {
           "genre_ids": [
@@ -43296,7 +43349,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/48571",
           "score": 7.0,
-          "votes": 7
+          "votes": 7,
+          "runtime": 101
         },
         {
           "genre_ids": [
@@ -43317,7 +43371,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/282485",
           "score": 8.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 74
         },
         {
           "genre_ids": [
@@ -43339,7 +43394,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104348",
           "score": 8.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 93
         },
         {
           "genre_ids": [
@@ -43360,7 +43416,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104968",
           "score": 6.3,
-          "votes": 3
+          "votes": 3,
+          "runtime": 64
         },
         {
           "genre_ids": [
@@ -43582,7 +43639,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 112
+        "runtime_unverified": 9
       }
     },
     "572028": {
@@ -118849,26 +118906,6 @@
       "name": "ジャン＝リュック・ゴダール",
       "works": [
         {
-          "id": 1071568,
-          "title": "Sang titre",
-          "year": "2025",
-          "date": "2025-07-25",
-          "poster": "https://image.tmdb.org/t/p/w342/15ONcGeY6rQG2X3If77691V2EEp.jpg",
-          "score": 0.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/1071568",
-          "genre_ids": [],
-          "original_title": "Sang titre",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1071568"
-        },
-        {
           "id": 1477561,
           "title": "L'histoire de \"Scénario\"",
           "year": "2025",
@@ -118888,7 +118925,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1477561"
+          "source_url": "https://www.themoviedb.org/movie/1477561",
+          "runtime": 61
         },
         {
           "id": 1287695,
@@ -118910,49 +118948,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1287695"
-        },
-        {
-          "id": 1220338,
-          "title": "シナリオ",
-          "year": "2024",
-          "date": "2024-05-17",
-          "poster": "https://image.tmdb.org/t/p/w342/xkxeIpQMd4Ijgw6ONSbzsjWcEjH.jpg",
-          "score": 9.0,
-          "votes": 1,
-          "tmdb": "https://www.themoviedb.org/movie/1220338",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Scénarios",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1220338"
-        },
-        {
-          "id": 1065727,
-          "title": "Film annonce du film qui n’existera jamais: «Drôles de guerres»",
-          "year": "2023",
-          "date": "2023-12-15",
-          "poster": "https://image.tmdb.org/t/p/w342/wDOYIEHFnUWnK1Mx8WgMUBJWp6E.jpg",
-          "score": 5.9,
-          "votes": 22,
-          "tmdb": "https://www.themoviedb.org/movie/1065727",
-          "genre_ids": [],
-          "original_title": "Film annonce du film qui n’existera jamais: «Drôles de guerres»",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1065727"
+          "source_url": "https://www.themoviedb.org/movie/1287695",
+          "runtime": 36
         },
         {
           "id": 414030,
@@ -118975,29 +118972,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/414030"
-        },
-        {
-          "id": 331320,
-          "title": "Message de salutations: Prix suisse / remerciements / mort ou vif",
-          "year": "2015",
-          "date": "2015-03-13",
-          "poster": "https://image.tmdb.org/t/p/w342/mKVxbaqhRfujdybUgOBZw5nlAPW.jpg",
-          "score": 5.0,
-          "votes": 4,
-          "tmdb": "https://www.themoviedb.org/movie/331320",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Message de salutations: Prix suisse / remerciements / mort ou vif",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/331320"
+          "source_url": "https://www.themoviedb.org/movie/414030",
+          "runtime": 88
         },
         {
           "id": 284051,
@@ -119020,7 +118996,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/284051"
+          "source_url": "https://www.themoviedb.org/movie/284051",
+          "runtime": 114
         },
         {
           "id": 114982,
@@ -119043,74 +119020,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/114982"
-        },
-        {
-          "id": 660781,
-          "title": "Le Pont des soupirs",
-          "year": "2014",
-          "date": "2014-05-22",
-          "poster": "https://image.tmdb.org/t/p/w342/25AmcjyDDhYAlb1GSuya7LJLGwt.jpg",
-          "score": 0.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/660781",
-          "genre_ids": [
-            99,
-            36
-          ],
-          "original_title": "Le Pont des soupirs",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/660781"
-        },
-        {
-          "id": 271945,
-          "title": "Khan Khanne, sélection naturelle",
-          "year": "2014",
-          "date": "2014-05-21",
-          "poster": "https://image.tmdb.org/t/p/w342/1PDRFTDucTrz66N7CT7SLbjQiFf.jpg",
-          "score": 6.9,
-          "votes": 7,
-          "tmdb": "https://www.themoviedb.org/movie/271945",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Khan Khanne, sélection naturelle",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/271945"
-        },
-        {
-          "id": 1061928,
-          "title": "Les trois désastres",
-          "year": "2013",
-          "date": "2013-05-23",
-          "poster": "https://image.tmdb.org/t/p/w342/l0DqOGXlcuVdnyyy7sArq5O3rAF.jpg",
-          "score": 0.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/1061928",
-          "genre_ids": [
-            18
-          ],
-          "original_title": "Les trois désastres",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1061928"
+          "source_url": "https://www.themoviedb.org/movie/114982",
+          "runtime": 69
         },
         {
           "id": 196327,
@@ -119133,29 +119044,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/196327"
-        },
-        {
-          "id": 1252863,
-          "title": "20 Little Films",
-          "year": "2012",
-          "date": "2012-02-13",
-          "poster": "https://image.tmdb.org/t/p/w342/4iTM7ASRNdQvFr9MYc5kUZrytMF.jpg",
-          "score": 6.0,
-          "votes": 1,
-          "tmdb": "https://www.themoviedb.org/movie/1252863",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "20 Little Films",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1252863"
+          "source_url": "https://www.themoviedb.org/movie/196327",
+          "runtime": 70
         },
         {
           "id": 54083,
@@ -119177,29 +119067,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/54083"
-        },
-        {
-          "id": 148404,
-          "title": "Il y avait quoi (pour Éric Rohmer)",
-          "year": "2010",
-          "date": "2010-02-08",
-          "poster": "https://image.tmdb.org/t/p/w342/jRGU6CNzlCQuwkSebalufCR8qWq.jpg",
-          "score": 4.5,
-          "votes": 10,
-          "tmdb": "https://www.themoviedb.org/movie/148404",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Il y avait quoi (pour Éric Rohmer)",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/148404"
+          "source_url": "https://www.themoviedb.org/movie/54083",
+          "runtime": 102
         },
         {
           "id": 116408,
@@ -119222,30 +119091,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116408"
-        },
-        {
-          "id": 425656,
-          "title": "Journal des réalisateurs",
-          "year": "2008",
-          "date": "2008-05-14",
-          "poster": "https://image.tmdb.org/t/p/w342/oRsH66pvllj55HoagNZgJIvPKnk.jpg",
-          "score": 0.0,
-          "votes": 0,
-          "tmdb": "https://www.themoviedb.org/movie/425656",
-          "genre_ids": [
-            99,
-            10770
-          ],
-          "original_title": "Journal des réalisateurs",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/425656"
+          "source_url": "https://www.themoviedb.org/movie/116408",
+          "runtime": 51
         },
         {
           "id": 293990,
@@ -119267,7 +119114,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/293990"
+          "source_url": "https://www.themoviedb.org/movie/293990",
+          "runtime": 55
         },
         {
           "id": 293242,
@@ -119289,7 +119137,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/293242"
+          "source_url": "https://www.themoviedb.org/movie/293242",
+          "runtime": 47
         },
         {
           "id": 139243,
@@ -119311,7 +119160,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/139243"
+          "source_url": "https://www.themoviedb.org/movie/139243",
+          "runtime": 84
         },
         {
           "id": 116403,
@@ -119333,135 +119183,8 @@
           "director_id": 3776,
           "is_director": true,
           "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116403"
-        },
-        {
-          "id": 116402,
-          "title": "Histoire(s) du cinéma 4a : le contrôle de l'univers",
-          "year": "2006",
-          "date": "2006-02-12",
-          "poster": "https://image.tmdb.org/t/p/w342/1xOG2ejvdoAAmQhOsaj6gznMYle.jpg",
-          "score": 6.4,
-          "votes": 19,
-          "tmdb": "https://www.themoviedb.org/movie/116402",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Histoire(s) du cinéma 4a : le contrôle de l'univers",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116402"
-        },
-        {
-          "id": 116401,
-          "title": "Histoire(s) du cinéma 3a : la monnaie de l'absolu",
-          "year": "2006",
-          "date": "2006-02-12",
-          "poster": "https://image.tmdb.org/t/p/w342/1xOG2ejvdoAAmQhOsaj6gznMYle.jpg",
-          "score": 6.5,
-          "votes": 18,
-          "tmdb": "https://www.themoviedb.org/movie/116401",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Histoire(s) du cinéma 3a : la monnaie de l'absolu",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116401"
-        },
-        {
-          "id": 116398,
-          "title": "Histoire(s) du cinéma 3b : une vague nouvelle",
-          "year": "2006",
-          "date": "2006-02-12",
-          "poster": "https://image.tmdb.org/t/p/w342/1xOG2ejvdoAAmQhOsaj6gznMYle.jpg",
-          "score": 6.4,
-          "votes": 20,
-          "tmdb": "https://www.themoviedb.org/movie/116398",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Histoire(s) du cinéma 3b : une vague nouvelle",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116398"
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 116397,
-          "title": "Histoire(s) du cinéma 2b : fatale beauté",
-          "original_title": "Histoire(s) du cinéma 2b : fatale beauté",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2006",
-          "date": "2006-02-11",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/1xOG2ejvdoAAmQhOsaj6gznMYle.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116397",
-          "score": 6.2,
-          "votes": 20
-        },
-        {
-          "id": 116396,
-          "title": "Histoire(s) du cinéma 2a : seul le cinéma",
-          "year": "2006",
-          "date": "2006-02-11",
-          "poster": "https://image.tmdb.org/t/p/w342/1xOG2ejvdoAAmQhOsaj6gznMYle.jpg",
-          "score": 6.2,
-          "votes": 23,
-          "tmdb": "https://www.themoviedb.org/movie/116396",
-          "genre_ids": [
-            99
-          ],
-          "original_title": "Histoire(s) du cinéma 2a : seul le cinéma",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/116396"
-        },
-        {
-          "genre_ids": [],
-          "id": 293988,
-          "title": "Ecce Homo",
-          "original_title": "Ecce Homo",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2006",
-          "date": "2006-01-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/sBDjQ5C3RWNb4jq5iR3882kO6a5.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/293988",
-          "score": 0.0,
-          "votes": 0
+          "source_url": "https://www.themoviedb.org/movie/116403",
+          "runtime": 37
         },
         {
           "genre_ids": [
@@ -119482,7 +119205,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/26347",
           "score": 6.7,
-          "votes": 42
+          "votes": 42,
+          "runtime": 80
         },
         {
           "genre_ids": [],
@@ -119501,29 +119225,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/416373",
           "score": 0.0,
-          "votes": 0
-        },
-        {
-          "genre_ids": [
-            99,
-            18
-          ],
-          "id": 292187,
-          "title": "Prières pour refuzniks",
-          "original_title": "Prières pour refuzniks",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2004",
-          "date": "2004-01-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/a0USV4jzrpQ0kwl7XAcAD3ZoyXR.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/292187",
-          "score": 6.8,
-          "votes": 6
+          "votes": 0,
+          "runtime": 133
         },
         {
           "genre_ids": [
@@ -119546,47 +119249,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/79591",
           "score": 6.6,
-          "votes": 33
-        },
-        {
-          "genre_ids": [
-            18
-          ],
-          "id": 323563,
-          "title": "Dans le noir du temps",
-          "original_title": "Dans le noir du temps",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2002",
-          "date": "2002-09-03",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/hcGGIvQPCzn2YBjwGeYzynDMn6G.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/323563",
-          "score": 7.4,
-          "votes": 26
-        },
-        {
-          "genre_ids": [],
-          "id": 44605,
-          "title": "Liberté et Patrie",
-          "original_title": "Liberté et Patrie",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2002",
-          "date": "2002-08-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/62DbWVnFqCyHBUX4ECybPDj1tRy.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/44605",
-          "score": 5.8,
-          "votes": 10
+          "votes": 33,
+          "runtime": 106
         },
         {
           "genre_ids": [
@@ -119607,7 +119271,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/52717",
           "score": 6.5,
-          "votes": 49
+          "votes": 49,
+          "runtime": 99
         },
         {
           "genre_ids": [
@@ -119628,51 +119293,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/194532",
           "score": 6.5,
-          "votes": 6
-        },
-        {
-          "genre_ids": [
-            99,
-            36,
-            10752
-          ],
-          "id": 215464,
-          "title": "De l'origine du XXIe siècle",
-          "original_title": "De l'origine du XXIe siècle",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "2000",
-          "date": "2000-05-10",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/g2Sv51nG20zpd5Dq1Q6DxLLMxUt.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/215464",
-          "score": 6.6,
-          "votes": 28
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 160977,
-          "title": "Adieu au TNS",
-          "original_title": "Adieu au TNS",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1998",
-          "date": "1998-12-15",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": null,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/160977",
-          "score": 4.5,
-          "votes": 6
+          "votes": 6,
+          "runtime": 49
         },
         {
           "genre_ids": [
@@ -119695,45 +119317,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/111367",
           "score": 5.9,
-          "votes": 22
-        },
-        {
-          "genre_ids": [],
-          "id": 386004,
-          "title": "Le monde comme il ne va pas",
-          "original_title": "Le monde comme il ne va pas",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1996",
-          "date": "1996-11-26",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/8LwcEWQXPgAgh1f07in29lyvlTx.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/386004",
-          "score": 5.5,
-          "votes": 4
-        },
-        {
-          "genre_ids": [],
-          "id": 386003,
-          "title": "Espoir/Microcosmos",
-          "original_title": "Espoir/Microcosmos",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1996",
-          "date": "1996-11-26",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/p60i8997O7LPzOOxESAPw935p6o.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/386003",
-          "score": 0.0,
-          "votes": 0
+          "votes": 22,
+          "runtime": 85
         },
         {
           "genre_ids": [
@@ -119754,7 +119339,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104931",
           "score": 6.4,
-          "votes": 43
+          "votes": 43,
+          "runtime": 56
         },
         {
           "genre_ids": [
@@ -119777,7 +119363,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/52713",
           "score": 6.326,
-          "votes": 43
+          "votes": 43,
+          "runtime": 84
         },
         {
           "genre_ids": [
@@ -119798,28 +119385,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/104981",
           "score": 6.2,
-          "votes": 5
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 174473,
-          "title": "たたえられよ、サラエヴォ",
-          "original_title": "Je vous salue, Sarajevo",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1993",
-          "date": "1993-04-13",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/mpB11iFrJhYM2DbkY4Cb9bxsaui.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/174473",
-          "score": 6.9,
-          "votes": 70
+          "votes": 5,
+          "runtime": 58
         },
         {
           "genre_ids": [
@@ -119840,7 +119407,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/53016",
           "score": 6.7,
-          "votes": 30
+          "votes": 30,
+          "runtime": 63
         },
         {
           "genre_ids": [
@@ -119862,28 +119430,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/698564",
           "score": 8.0,
-          "votes": 1
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 386002,
-          "title": "インドネシア、トーマス・ワインガイのために",
-          "original_title": "Pour Thomas Wainggai",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1991",
-          "date": "1991-12-11",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/tOODwzpWrXVbQVCytBWFXmN209e.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/386002",
-          "score": 6.0,
-          "votes": 1
+          "votes": 1,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -119905,7 +119453,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/49116",
           "score": 7.0,
-          "votes": 3
+          "votes": 3,
+          "runtime": 112
         },
         {
           "genre_ids": [
@@ -119926,7 +119475,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/522822",
           "score": 4.3,
-          "votes": 10
+          "votes": 10,
+          "runtime": 91
         },
         {
           "genre_ids": [],
@@ -119945,29 +119495,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1799794",
           "score": 0.0,
-          "votes": 0
-        },
-        {
-          "genre_ids": [
-            18,
-            10752
-          ],
-          "id": 287225,
-          "title": "L'enfance de l'art",
-          "original_title": "L'enfance de l'art",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1990",
-          "date": "1990-11-08",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/8q7dgcQFhqAWuC1ZzsxxTPD35yy.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/287225",
-          "score": 5.5,
-          "votes": 4
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [
@@ -119988,7 +119517,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/32691",
           "score": 5.8,
-          "votes": 37
+          "votes": 37,
+          "runtime": 89
         },
         {
           "genre_ids": [
@@ -120009,7 +119539,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/116393",
           "score": 6.3,
-          "votes": 33
+          "votes": 33,
+          "runtime": 51
         },
         {
           "genre_ids": [
@@ -120030,7 +119561,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/91296",
           "score": 6.6,
-          "votes": 27
+          "votes": 27,
+          "runtime": 42
         },
         {
           "genre_ids": [],
@@ -120049,51 +119581,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/293426",
           "score": 6.5,
-          "votes": 2
-        },
-        {
-          "genre_ids": [
-            18,
-            10749
-          ],
-          "id": 146583,
-          "title": "言葉の力",
-          "original_title": "Puissance de la parole",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1988",
-          "date": "1988-12-31",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/cESiMHSqY8u9idiESfQ50K8jHy8.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/146583",
-          "score": 6.0,
-          "votes": 15
-        },
-        {
-          "genre_ids": [
-            35,
-            18
-          ],
-          "id": 386001,
-          "title": "最後の言葉",
-          "original_title": "Le Dernier Mot",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1988",
-          "date": "1988-10-26",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/wwEV9PSrKvWiJisIoqhjBtReUIg.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/386001",
-          "score": 0.0,
-          "votes": 0
+          "votes": 2,
+          "runtime": 50
         },
         {
           "genre_ids": [
@@ -120116,26 +119605,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/341961",
           "score": 6.9,
-          "votes": 19
-        },
-        {
-          "genre_ids": [],
-          "id": 239330,
-          "title": "On s'est tous défilé",
-          "original_title": "On s'est tous défilé",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1988",
-          "date": "1988-03-11",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/txBcNHmyAfx9ZtpoW84GScjdZUh.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/239330",
-          "score": 6.4,
-          "votes": 7
+          "votes": 19,
+          "runtime": 76
         },
         {
           "genre_ids": [
@@ -120157,7 +119628,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/50012",
           "score": 6.5,
-          "votes": 36
+          "votes": 36,
+          "runtime": 91
         },
         {
           "genre_ids": [
@@ -120178,7 +119650,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/676179",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 129
         },
         {
           "genre_ids": [
@@ -120201,29 +119674,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/65612",
           "score": 6.1,
-          "votes": 25
-        },
-        {
-          "genre_ids": [
-            10402,
-            10749
-          ],
-          "id": 813350,
-          "title": "アルミード",
-          "original_title": "Armide",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1987",
-          "date": "1987-05-27",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/rlazHD2gxAuCXu7v8tFXqAeMUcE.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/813350",
-          "score": 6.0,
-          "votes": 1
+          "votes": 25,
+          "runtime": 82
         },
         {
           "genre_ids": [
@@ -120246,7 +119698,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/25832",
           "score": 5.49,
-          "votes": 51
+          "votes": 51,
+          "runtime": 97
         },
         {
           "genre_ids": [
@@ -120268,28 +119721,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/271799",
           "score": 6.1,
-          "votes": 24
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 61415,
-          "title": "ウディ・アレン会見",
-          "original_title": "Meetin' WA",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1986",
-          "date": "1986-05-19",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/fMMmxO4Bk424jDwfm9D5u3sfWww.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/61415",
-          "score": 6.3,
-          "votes": 51
+          "votes": 24,
+          "runtime": 92
         },
         {
           "genre_ids": [
@@ -120312,7 +119745,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/52710",
           "score": 5.244,
-          "votes": 70
+          "votes": 70,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -120334,7 +119768,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/228957",
           "score": 6.0,
-          "votes": 4
+          "votes": 4,
+          "runtime": 49
         },
         {
           "genre_ids": [
@@ -120355,7 +119790,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/32720",
           "score": 6.2,
-          "votes": 96
+          "votes": 96,
+          "runtime": 72
         },
         {
           "genre_ids": [
@@ -120379,49 +119815,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/32689",
           "score": 6.009,
-          "votes": 117
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 104951,
-          "title": "Lettre à Freddy Buache",
-          "original_title": "Lettre à Freddy Buache",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1983",
-          "date": "1983-06-24",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/bi3xED8eEo8gOrlhODzsCxHgA4m.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/104951",
-          "score": 6.3,
-          "votes": 11
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 293424,
-          "title": "映画「こんにちは、マリア」のためのささやかな覚書",
-          "original_title": "Petites notes à propos du film 'Je vous salue, Marie'",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1983",
-          "date": "1983-01-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/cXGUydBKdoCY11yL8U7HhTBuLLc.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/293424",
-          "score": 5.3,
-          "votes": 9
+          "votes": 117,
+          "runtime": 85
         },
         {
           "genre_ids": [
@@ -120443,7 +119838,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/32692",
           "score": 5.6,
-          "votes": 68
+          "votes": 68,
+          "runtime": 87
         },
         {
           "genre_ids": [
@@ -120464,28 +119860,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/383427",
           "score": 0.0,
-          "votes": 0
-        },
-        {
-          "genre_ids": [
-            10770
-          ],
-          "id": 227898,
-          "title": "映像を変えること",
-          "original_title": "Changer d'image : Lettre à la bien-aimée",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1982",
-          "date": "1982-05-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/jAvUP1gniy6jL4sGhicouLHJX51.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/227898",
-          "score": 4.9,
-          "votes": 7
+          "votes": 0,
+          "runtime": 39
         },
         {
           "genre_ids": [
@@ -120506,7 +119882,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/188321",
           "score": 5.9,
-          "votes": 11
+          "votes": 11,
+          "runtime": 54
         },
         {
           "genre_ids": [
@@ -120527,7 +119904,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/780397",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 97
         },
         {
           "genre_ids": [
@@ -120548,28 +119926,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/384468",
           "score": 8.0,
-          "votes": 2
-        },
-        {
-          "genre_ids": [
-            18
-          ],
-          "id": 293987,
-          "title": "Une bonne à tout faire",
-          "original_title": "Une bonne à tout faire",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1981",
-          "date": "1981-01-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/jVcfyoDXlibUTFCrPLWLfLVXT0R.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/293987",
-          "score": 6.0,
-          "votes": 5
+          "votes": 2,
+          "runtime": 102
         },
         {
           "genre_ids": [
@@ -120590,28 +119948,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/113479",
           "score": 6.11,
-          "votes": 86
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 230893,
-          "title": "「勝手に逃げろ/人生」のシナリオ",
-          "original_title": "Quelques remarques sur la réalisation et la production du film 'Sauve qui peut (la vie)'",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1979",
-          "date": "1979-04-10",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/5mq8b3U3XSiJPOTajMiiCuw8vlK.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/230893",
-          "score": 7.0,
-          "votes": 1
+          "votes": 86,
+          "runtime": 88
         },
         {
           "genre_ids": [
@@ -120633,7 +119971,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/259023",
           "score": 6.7,
-          "votes": 5
+          "votes": 5,
+          "runtime": 312
         },
         {
           "genre_ids": [
@@ -120654,30 +119993,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/248319",
           "score": 6.1,
-          "votes": 16
-        },
-        {
-          "genre_ids": [
-            10770,
-            10402,
-            99
-          ],
-          "id": 385191,
-          "title": "Faut pas rêver",
-          "original_title": "Faut pas rêver",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1977",
-          "date": "1977-12-31",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/dDKlwkajiZcLKmbzNLYBJ58LFxH.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/385191",
-          "score": 5.6,
-          "votes": 5
+          "votes": 16,
+          "runtime": 78
         },
         {
           "genre_ids": [
@@ -120698,7 +120015,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/26298",
           "score": 6.7,
-          "votes": 30
+          "votes": 30,
+          "runtime": 55
         },
         {
           "genre_ids": [
@@ -120720,7 +120038,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/259026",
           "score": 8.7,
-          "votes": 3
+          "votes": 3,
+          "runtime": 600
         },
         {
           "genre_ids": [
@@ -120742,7 +120061,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/112823",
           "score": 6.0,
-          "votes": 31
+          "votes": 31,
+          "runtime": 88
         },
         {
           "genre_ids": [
@@ -120763,7 +120083,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/156982",
           "score": 7.2,
-          "votes": 13
+          "votes": 13,
+          "runtime": 52
         },
         {
           "genre_ids": [
@@ -120784,7 +120105,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/8071",
           "score": 6.6,
-          "votes": 77
+          "votes": 77,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -120805,7 +120127,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/143437",
           "score": 6.2,
-          "votes": 9
+          "votes": 9,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -120826,7 +120149,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/293425",
           "score": 7.1,
-          "votes": 23
+          "votes": 23,
+          "runtime": 60
         },
         {
           "genre_ids": [
@@ -120847,7 +120171,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/89494",
           "score": 6.6,
-          "votes": 17
+          "votes": 17,
+          "runtime": 106
         },
         {
           "genre_ids": [
@@ -120869,7 +120194,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/113629",
           "score": 6.7,
-          "votes": 29
+          "votes": 29,
+          "runtime": 100
         },
         {
           "genre_ids": [
@@ -120890,7 +120216,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/190872",
           "score": 5.8,
-          "votes": 13
+          "votes": 13,
+          "runtime": 61
         },
         {
           "genre_ids": [
@@ -120911,7 +120238,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/39239",
           "score": 5.2,
-          "votes": 28
+          "votes": 28,
+          "runtime": 52
         },
         {
           "genre_ids": [
@@ -120932,28 +120260,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/51205",
           "score": 6.1,
-          "votes": 28
-        },
-        {
-          "genre_ids": [
-            18
-          ],
-          "id": 1095145,
-          "title": "L'amore",
-          "original_title": "L'amore",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1969",
-          "date": "1969-05-29",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/bOWDRnEzZATjUIxoRJ8NgOa47gY.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1095145",
-          "score": 0.0,
-          "votes": 0
+          "votes": 28,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -120974,7 +120282,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/49456",
           "score": 5.2,
-          "votes": 31
+          "votes": 31,
+          "runtime": 102
         },
         {
           "genre_ids": [
@@ -120996,7 +120305,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/50789",
           "score": 6.3,
-          "votes": 68
+          "votes": 68,
+          "runtime": 115
         },
         {
           "genre_ids": [
@@ -121018,7 +120328,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/899732",
           "score": 0.0,
-          "votes": 0
+          "votes": 0,
+          "runtime": 0
         },
         {
           "genre_ids": [
@@ -121039,28 +120350,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/47617",
           "score": 6.8,
-          "votes": 19
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 264765,
-          "title": "Film-Tract n° 1968",
-          "original_title": "Film-Tract n° 1968",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1968",
-          "date": "1968-06-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/rUPCbgXwcRAOpk9FanxUJOqLFrE.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/264765",
-          "score": 6.5,
-          "votes": 4
+          "votes": 19,
+          "runtime": 108
         },
         {
           "genre_ids": [
@@ -121081,7 +120372,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/287929",
           "score": 7.9,
-          "votes": 7
+          "votes": 7,
+          "runtime": 90
         },
         {
           "genre_ids": [
@@ -121102,7 +120394,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/8075",
           "score": 6.9,
-          "votes": 318
+          "votes": 318,
+          "runtime": 104
         },
         {
           "genre_ids": [
@@ -121125,7 +120418,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/36140",
           "score": 7.2,
-          "votes": 28
+          "votes": 28,
+          "runtime": 116
         },
         {
           "genre_ids": [
@@ -121147,29 +120441,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1629",
           "score": 7.0,
-          "votes": 248
-        },
-        {
-          "genre_ids": [
-            18,
-            35
-          ],
-          "id": 1493731,
-          "title": "Anticipation, ou l'Amour en l'an 2000",
-          "original_title": "Anticipation, ou l'Amour en l'an 2000",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1967",
-          "date": "1967-04-07",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/dXPT7f3OhQ2QpqX7Li2wcuUVyAA.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1493731",
-          "score": 6.0,
-          "votes": 1
+          "votes": 248,
+          "runtime": 96
         },
         {
           "genre_ids": [
@@ -121191,7 +120464,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/103613",
           "score": 5.0,
-          "votes": 34
+          "votes": 34,
+          "runtime": 119
         },
         {
           "genre_ids": [
@@ -121213,7 +120487,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/8074",
           "score": 6.246,
-          "votes": 224
+          "votes": 224,
+          "runtime": 87
         },
         {
           "genre_ids": [
@@ -121236,7 +120511,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/29369",
           "score": 6.133,
-          "votes": 108
+          "votes": 108,
+          "runtime": 85
         },
         {
           "genre_ids": [
@@ -121258,7 +120534,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/4710",
           "score": 7.2,
-          "votes": 434
+          "votes": 434,
+          "runtime": 105
         },
         {
           "genre_ids": [
@@ -121281,29 +120558,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/2786",
           "score": 7.3,
-          "votes": 975
-        },
-        {
-          "genre_ids": [
-            18,
-            35
-          ],
-          "id": 784971,
-          "title": "モンパルナスとルヴァロア",
-          "original_title": "Montparnasse et Levallois",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1965",
-          "date": "1965-10-07",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/mMKU1KuqyJUUiaPvgw1Hw5PUzBt.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/784971",
-          "score": 4.5,
-          "votes": 2
+          "votes": 975,
+          "runtime": 110
         },
         {
           "genre_ids": [
@@ -121325,7 +120581,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/51808",
           "score": 6.6,
-          "votes": 36
+          "votes": 36,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -121348,7 +120605,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/8072",
           "score": 6.891,
-          "votes": 641
+          "votes": 641,
+          "runtime": 99
         },
         {
           "genre_ids": [
@@ -121370,26 +120628,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/40652",
           "score": 6.885,
-          "votes": 135
-        },
-        {
-          "genre_ids": [],
-          "id": 805746,
-          "title": "立派な詐欺師",
-          "original_title": "Le Grand Escroc",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1964",
-          "date": "1964-08-14",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/gDaQOewplkXDwNDONYhKH6oGH6T.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/805746",
-          "score": 7.7,
-          "votes": 3
+          "votes": 135,
+          "runtime": 95
         },
         {
           "genre_ids": [
@@ -121411,7 +120651,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/78786",
           "score": 5.4,
-          "votes": 23
+          "votes": 23,
+          "runtime": 108
         },
         {
           "genre_ids": [
@@ -121434,28 +120675,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/8073",
           "score": 7.478,
-          "votes": 630
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 1149311,
-          "title": "Reportage sur Orly",
-          "original_title": "Reportage sur Orly",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1964",
-          "date": "1964-01-01",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": null,
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1149311",
-          "score": 9.0,
-          "votes": 1
+          "votes": 630,
+          "runtime": 97
         },
         {
           "genre_ids": [
@@ -121477,7 +120698,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/266",
           "score": 7.027,
-          "votes": 1005
+          "votes": 1005,
+          "runtime": 103
         },
         {
           "genre_ids": [
@@ -121500,29 +120722,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/52705",
           "score": 6.5,
-          "votes": 99
-        },
-        {
-          "genre_ids": [
-            18,
-            878
-          ],
-          "id": 1112090,
-          "title": "Il nuovo mondo",
-          "original_title": "Il nuovo mondo",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1963",
-          "date": "1963-02-19",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/phyqipOPoA02E5VmfkoqAxY3Jpf.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/1112090",
-          "score": 6.5,
-          "votes": 2
+          "votes": 99,
+          "runtime": 80
         },
         {
           "genre_ids": [
@@ -121544,7 +120745,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/59045",
           "score": 7.2,
-          "votes": 133
+          "votes": 133,
+          "runtime": 122
         },
         {
           "genre_ids": [
@@ -121566,7 +120768,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/50785",
           "score": 6.9,
-          "votes": 188
+          "votes": 188,
+          "runtime": 88
         },
         {
           "genre_ids": [
@@ -121587,29 +120790,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/1626",
           "score": 7.7,
-          "votes": 725
-        },
-        {
-          "genre_ids": [
-            18,
-            35
-          ],
-          "id": 366441,
-          "title": "怠惰の罪",
-          "original_title": "La Paresse",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1962",
-          "date": "1962-03-07",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/yxgcgO91md0Bom5os8MqGOWAXWe.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/366441",
-          "score": 5.5,
-          "votes": 2
+          "votes": 725,
+          "runtime": 84
         },
         {
           "genre_ids": [
@@ -121630,7 +120812,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/72898",
           "score": 5.9,
-          "votes": 21
+          "votes": 21,
+          "runtime": 113
         },
         {
           "genre_ids": [
@@ -121653,29 +120836,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/31522",
           "score": 7.307,
-          "votes": 415
-        },
-        {
-          "genre_ids": [
-            35,
-            10749
-          ],
-          "id": 45948,
-          "title": "水の話",
-          "original_title": "Une histoire d'eau",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1961",
-          "date": "1961-03-03",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/knJdTZL4VtodAFvmoIfDLIqXn8s.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/45948",
-          "score": 6.5,
-          "votes": 65
+          "votes": 415,
+          "runtime": 83
         },
         {
           "genre_ids": [
@@ -121698,93 +120860,8 @@
           "source": "tmdb",
           "source_url": "https://www.themoviedb.org/movie/269",
           "score": 7.5,
-          "votes": 2107
-        },
-        {
-          "genre_ids": [
-            35,
-            10749
-          ],
-          "id": 78572,
-          "title": "男の子の名前はみんなパトリックっていうの",
-          "original_title": "Charlotte et Véronique, ou Tous les garçons s'appellent Patrick",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1959",
-          "date": "1959-05-06",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/kYQkJyulUz92NCApG46ApfXZnaV.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/78572",
-          "score": 6.7,
-          "votes": 70
-        },
-        {
-          "genre_ids": [
-            35
-          ],
-          "id": 44461,
-          "title": "シャルロットとジュール",
-          "original_title": "Charlotte et son Jules",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1958",
-          "date": "1958-12-31",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/eWnjLCJVcE6FljaEuBMvlFlvnmZ.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/44461",
-          "score": 6.4,
-          "votes": 60
-        },
-        {
-          "genre_ids": [
-            99
-          ],
-          "id": 104975,
-          "title": "コンクリート作業",
-          "original_title": "Opération \"Béton\"",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1958",
-          "date": "1958-07-02",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/w4F7oqyXUU25uxVzdq4NuC3NL1l.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/104975",
-          "score": 5.4,
-          "votes": 14
-        },
-        {
-          "genre_ids": [
-            35,
-            10749
-          ],
-          "id": 366851,
-          "title": "コケティッシュな女",
-          "original_title": "Une femme coquette",
-          "softcore": false,
-          "department": "Directing",
-          "job": "Director",
-          "year": "1955",
-          "date": "1955-02-26",
-          "director": "ジャン＝リュック・ゴダール",
-          "director_id": 3776,
-          "is_director": true,
-          "poster": "https://image.tmdb.org/t/p/w342/gDU7OQrV6q03tiqBzBeiIwtlgtF.jpg",
-          "source": "tmdb",
-          "source_url": "https://www.themoviedb.org/movie/366851",
-          "score": 5.5,
-          "votes": 35
+          "votes": 2107,
+          "runtime": 90
         }
       ],
       "nameJa": "ジャン＝リュック・ゴダール",
@@ -121814,7 +120891,7 @@
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
-        "runtime_unverified": 136
+        "runtime_unverified": 2
       }
     },
     "100764": {
@@ -210287,7 +209364,7 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/6236375",
       "credits_source_url": "https://api.themoviedb.org/3/person/6236375/movie_credits",
-      "checked_at": "2026-10-18T20:41:18.872450+00:00",
+      "checked_at": "2026-10-18T21:02:31.711559+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
@@ -210674,7 +209751,7 @@
       "biography_ja": "",
       "source_url": "https://www.themoviedb.org/person/3099765",
       "credits_source_url": "https://api.themoviedb.org/3/person/3099765/movie_credits",
-      "checked_at": "2026-10-18T20:41:19.221341+00:00",
+      "checked_at": "2026-10-18T21:02:32.002419+00:00",
       "coverage": {
         "source": "tmdb_director_movie_credits",
         "truncated": false,
@@ -257941,6 +257018,793 @@
         "truncated": false,
         "runtime_unverified": 77
       }
+    },
+    "15361": {
+      "id": 15361,
+      "name": "ジョセフ・ラスナック",
+      "nameJa": "ジョセフ・ラスナック",
+      "original_name": "Josef Rusnak",
+      "also_known_as": [
+        "Josef Rusnak"
+      ],
+      "name_status": "japanese",
+      "profile_path": "/5JyP3gfajmY1s2ZgWWKr2Ydu2vG.jpg",
+      "birthday": "1958-11-25",
+      "deathday": null,
+      "place_of_birth": "Stalinabad, Tajik SSR, USSR (now Tajikistan)",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/15361",
+      "credits_source_url": "https://api.themoviedb.org/3/person/15361/movie_credits",
+      "checked_at": "2026-10-18T21:02:33.740298+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            80,
+            53
+          ],
+          "id": 1519481,
+          "title": "Düstersee",
+          "original_title": "Düstersee",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.0,
+          "votes": 2,
+          "year": "2023",
+          "date": "2023-02-04",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1519481"
+        },
+        {
+          "genre_ids": [
+            80,
+            10770
+          ],
+          "id": 682618,
+          "title": "Der Schneegänger",
+          "original_title": "Der Schneegänger",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.0,
+          "votes": 11,
+          "year": "2020",
+          "date": "2020-03-05",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/r29mva54MBdO2Su7EFnJuUZUISk.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/682618"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 401686,
+          "title": "Berlin, I Love You",
+          "original_title": "Berlin, I Love You",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.8,
+          "votes": 66,
+          "year": "2019",
+          "date": "2019-12-04",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/i9LdjJWgYIaOkvG7NtTcq5Ox4nO.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/401686"
+        },
+        {
+          "genre_ids": [
+            53,
+            10770
+          ],
+          "id": 87293,
+          "title": "Beyond",
+          "original_title": "Beyond",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.8,
+          "votes": 26,
+          "year": "2012",
+          "date": "2012-03-29",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/kibpCAsb6PWspawPDY3FNlbPGeG.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/87293"
+        },
+        {
+          "genre_ids": [],
+          "id": 118240,
+          "title": "Valerie",
+          "original_title": "Valerie",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 2.3,
+          "votes": 3,
+          "year": "2010",
+          "date": "2010-09-21",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/118240"
+        },
+        {
+          "genre_ids": [
+            27,
+            53
+          ],
+          "id": 36604,
+          "title": "Perfect Life",
+          "original_title": "Perfect Life",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 3.5,
+          "votes": 12,
+          "year": "2010",
+          "date": "2010-04-27",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/tdshNasZJARHGzasuxvf963DRPR.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/36604"
+        },
+        {
+          "genre_ids": [
+            27,
+            878
+          ],
+          "id": 23174,
+          "title": "It's Alive",
+          "original_title": "It's Alive",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.1,
+          "votes": 65,
+          "year": "2009",
+          "date": "2009-08-15",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/uDm89EnXGswts0v5l8TSoqAvyij.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/23174"
+        },
+        {
+          "genre_ids": [
+            28,
+            53
+          ],
+          "id": 13988,
+          "title": "アート・オブ・ウォー2",
+          "original_title": "The Art of War II: Betrayal",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.7,
+          "votes": 130,
+          "year": "2008",
+          "date": "2008-08-12",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/gJmkrZSJmPckuB3uwhZTOqZIRDo.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/13988"
+        },
+        {
+          "genre_ids": [
+            28,
+            12,
+            18,
+            53
+          ],
+          "id": 15071,
+          "title": "ザ・シューター",
+          "original_title": "The Contractor",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.5,
+          "votes": 209,
+          "year": "2007",
+          "date": "2007-05-11",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/udf7WGMqLeq4C91a4xEoS7WAh1.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/15071"
+        },
+        {
+          "genre_ids": [
+            53,
+            878,
+            9648
+          ],
+          "id": 1090,
+          "title": "13F",
+          "original_title": "The Thirteenth Floor",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.08,
+          "votes": 1646,
+          "year": "1999",
+          "date": "1999-04-16",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7oaie3ZBc9UuWZLF24crro1pone.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1090"
+        },
+        {
+          "genre_ids": [
+            18,
+            53
+          ],
+          "id": 294521,
+          "title": "No Strings Attached",
+          "original_title": "No Strings Attached",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 2.8,
+          "votes": 4,
+          "year": "1997",
+          "date": "1997-08-27",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/iGVmuWtSMokKc5SvG34fBA4Fqi1.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/294521"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 118949,
+          "title": "Quiet Days in Hollywood",
+          "original_title": "Quiet Days in Hollywood",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 3.3,
+          "votes": 11,
+          "year": "1997",
+          "date": "1997-01-01",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/hImp4NmhIO0F45O9xTH4Zle931t.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/118949"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 293568,
+          "title": "Kaltes Fieber",
+          "original_title": "Kaltes Fieber",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 10.0,
+          "votes": 1,
+          "year": "1984",
+          "date": "1984-09-07",
+          "director": "ジョセフ・ラスナック",
+          "director_id": 15361,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/nAHDbz7qfx3JRtESelH11NmGEYj.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/293568"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 13
+      }
+    },
+    "25598": {
+      "id": 25598,
+      "name": "ポール・グリーングラス",
+      "nameJa": "ポール・グリーングラス",
+      "original_name": "ポール・グリーングラス",
+      "also_known_as": [
+        "Paul Greengrass"
+      ],
+      "name_status": "japanese",
+      "profile_path": "/35y15k2QAgLUwXQ9R60DPeftCbB.jpg",
+      "birthday": "1955-08-13",
+      "deathday": null,
+      "place_of_birth": "Cheam, Surrey, England, UK",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/25598",
+      "credits_source_url": "https://api.themoviedb.org/3/person/25598/movie_credits",
+      "checked_at": "2026-10-18T21:02:34.443367+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            28,
+            18,
+            36
+          ],
+          "id": 977942,
+          "title": "The Uprising",
+          "original_title": "The Uprising",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 8.0,
+          "votes": 337,
+          "year": "2026",
+          "date": "2026-09-10",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7TUl15TOsIvndKlgMWTtLgtEzZP.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/977942"
+        },
+        {
+          "genre_ids": [
+            18,
+            53
+          ],
+          "id": 1236470,
+          "title": "ロスト・バス",
+          "original_title": "The Lost Bus",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.0,
+          "votes": 851,
+          "year": "2025",
+          "date": "2025-09-19",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/yZ30etI4cgdyXZKj13sKTDbABfE.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1236470"
+        },
+        {
+          "genre_ids": [
+            18,
+            37,
+            12
+          ],
+          "id": 581032,
+          "title": "この茫漠たる荒野で",
+          "original_title": "News of the World",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.9,
+          "votes": 2008,
+          "year": "2020",
+          "date": "2020-12-25",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/xIoB3HAnnPwdjnjOBqReMKlaCA9.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/581032"
+        },
+        {
+          "genre_ids": [
+            80,
+            18,
+            36,
+            53
+          ],
+          "id": 474354,
+          "title": "7月22日",
+          "original_title": "22 July",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.057,
+          "votes": 1303,
+          "year": "2018",
+          "date": "2018-10-04",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/1eLb3GiEmbilnvRYFfZAHsyQm6N.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/474354"
+        },
+        {
+          "genre_ids": [
+            28,
+            12,
+            53
+          ],
+          "id": 324668,
+          "title": "ジェイソン・ボーン",
+          "original_title": "Jason Bourne",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.386,
+          "votes": 6420,
+          "year": "2016",
+          "date": "2016-07-27",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/v3UnscarS7tGthG2zyzd4ETjOiR.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/324668"
+        },
+        {
+          "genre_ids": [
+            28,
+            18,
+            53
+          ],
+          "id": 109424,
+          "title": "キャプテン・フィリップス",
+          "original_title": "Captain Phillips",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.535,
+          "votes": 7745,
+          "year": "2013",
+          "date": "2013-10-10",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/eZhGCYFXZHPhzk5KTArEtFdxhEp.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/109424"
+        },
+        {
+          "genre_ids": [
+            10752,
+            28,
+            12,
+            18,
+            53
+          ],
+          "id": 22972,
+          "title": "グリーン・ゾーン",
+          "original_title": "Green Zone",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.486,
+          "votes": 2480,
+          "year": "2010",
+          "date": "2010-03-11",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/5GuKtGbDY3fXplDsUoqtATKINln.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/22972"
+        },
+        {
+          "genre_ids": [
+            28,
+            18,
+            9648,
+            53
+          ],
+          "id": 2503,
+          "title": "ボーン・アルティメイタム",
+          "original_title": "The Bourne Ultimatum",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.445,
+          "votes": 8680,
+          "year": "2007",
+          "date": "2007-08-03",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/g3agWechZFe4QVcFEbNafd04O6b.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/2503"
+        },
+        {
+          "genre_ids": [
+            18,
+            36,
+            53
+          ],
+          "id": 9829,
+          "title": "ユナイテッド93",
+          "original_title": "United 93",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.135,
+          "votes": 1708,
+          "year": "2006",
+          "date": "2006-04-28",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/r3mdSgsnpoi4UiUufdybhjha68t.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/9829"
+        },
+        {
+          "genre_ids": [
+            28,
+            18,
+            53
+          ],
+          "id": 2502,
+          "title": "ボーン・スプレマシー",
+          "original_title": "The Bourne Supremacy",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.336,
+          "votes": 8486,
+          "year": "2004",
+          "date": "2004-07-23",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/gSiV2W8a2pyxysqxw1SOS6wH7Hw.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/2502"
+        },
+        {
+          "genre_ids": [
+            18,
+            36
+          ],
+          "id": 4107,
+          "title": "Bloody Sunday",
+          "original_title": "Bloody Sunday",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.227,
+          "votes": 375,
+          "year": "2002",
+          "date": "2002-01-25",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/oqdQMDJucR7R0ol0LFvzmqcDyEb.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/4107"
+        },
+        {
+          "genre_ids": [
+            18,
+            10770
+          ],
+          "id": 267992,
+          "title": "The Murder of Stephen Lawrence",
+          "original_title": "The Murder of Stephen Lawrence",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.8,
+          "votes": 4,
+          "year": "1999",
+          "date": "1999-02-18",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/ahKbJXFtSyZiWZKOLQfZkWtic8U.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/267992"
+        },
+        {
+          "genre_ids": [
+            18,
+            35,
+            10749
+          ],
+          "id": 76857,
+          "title": "The Theory of Flight",
+          "original_title": "The Theory of Flight",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.3,
+          "votes": 46,
+          "year": "1999",
+          "date": "1999-01-22",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/wnvKxQ2PwqLf1QOtblr8ICrxXTi.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/76857"
+        },
+        {
+          "genre_ids": [
+            18,
+            10770
+          ],
+          "id": 215517,
+          "title": "The Fix",
+          "original_title": "The Fix",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 3.8,
+          "votes": 5,
+          "year": "1997",
+          "date": "1997-01-04",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/fRA3f3A8ujzbwa6wkP5gXHCp2QA.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/215517"
+        },
+        {
+          "genre_ids": [
+            10752,
+            18,
+            10770
+          ],
+          "id": 30092,
+          "title": "The One That Got Away",
+          "original_title": "The One That Got Away",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.4,
+          "votes": 8,
+          "year": "1996",
+          "date": "1996-02-18",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/mGEQWiiburaddfE2WvzZpLwOIrW.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/30092"
+        },
+        {
+          "genre_ids": [
+            80,
+            18,
+            10770
+          ],
+          "id": 405401,
+          "title": "Open Fire",
+          "original_title": "Open Fire",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.3,
+          "votes": 3,
+          "year": "1994",
+          "date": "1994-11-12",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/paOXHz370Vcy6QjYrhbBX98QLIv.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/405401"
+        },
+        {
+          "genre_ids": [
+            10752,
+            9648
+          ],
+          "id": 77292,
+          "title": "Resurrected",
+          "original_title": "Resurrected",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.4,
+          "votes": 23,
+          "year": "1989",
+          "date": "1989-03-12",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/pnbxKwuvJPKtPlykMmPIvusekkX.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/77292"
+        },
+        {
+          "genre_ids": [
+            18,
+            53
+          ],
+          "id": 1102942,
+          "title": "Drowning: The Rescue of Flight 1421",
+          "original_title": "Drowning: The Rescue of Flight 1421",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": null,
+          "date": "",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/jhtCJpddkcL7KlhMCmG7xeOwiP5.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1102942"
+        },
+        {
+          "genre_ids": [
+            53
+          ],
+          "id": 819149,
+          "title": "Night of Camp David",
+          "original_title": "Night of Camp David",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": null,
+          "date": "",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/rcLg8c2g4htNEPkpW10qwB6xpxO.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/819149"
+        },
+        {
+          "genre_ids": [
+            10402
+          ],
+          "id": 339840,
+          "title": "Untitled Jimi Hendrix Film",
+          "original_title": "Untitled Jimi Hendrix Film",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": null,
+          "date": "",
+          "director": "ポール・グリーングラス",
+          "director_id": 25598,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/xmDRTAYkKGsN6RIe7ml2n74b6Kk.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/339840"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 20
+      }
     }
   }
-}
+}\n

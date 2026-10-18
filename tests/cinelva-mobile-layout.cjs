@@ -7,13 +7,20 @@ const fs = require('fs');
   for (const width of [375, 390, 768, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 844 }, deviceScaleFactor: 1 });
     const errors = [];
+    const year = new Date().getFullYear();
+    const watchedAt = year + '-06-15';
+    await page.addInitScript(({ watchedAt }) => {
+      localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
+        '999001': { id: '999001', title: 'CINELVA QA fixture', watched: true, watchedAt, rating: 4.5, viewingMethod: '映画館', genres: [], countries: [] }
+      }));
+    }, { watchedAt });
     page.on('pageerror', error => errors.push(error.message));
     await page.goto('http://127.0.0.1:8765/my-cinelva/', { waitUntil: 'networkidle', timeout: 30000 });
     await page.locator('[data-tab="calendar"]').click();
     await page.locator('#calendarView').waitFor({ state: 'visible' });
     await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible' });
     await page.waitForTimeout(150);
-    const result = await page.evaluate(() => {
+    const result = await page.evaluate(({ year }) => {
       const root = document.querySelector('#yearHeatmap');
       if (!root) return { error: 'missing annual calendar' };
       const months = [...root.querySelectorAll('.cy-month')];
@@ -35,15 +42,15 @@ const fs = require('fs');
         if (inner.bottom > outer.bottom+2) overlaps.push('dots below month');
         if (inner.right > outer.right + 2 || inner.left < outer.left - 2) overlaps.push('dots outside month');
       }
-      return { months: months.length, overlaps, overflow: document.documentElement.scrollWidth > window.innerWidth + 2, rootClass: root.className };
-    });
+      return { months: months.length, overlaps, watchedDays: root.querySelectorAll('.cy-day.watched').length, juneCount: months[5]?.querySelector('.cy-month-count')?.textContent, overflow: document.documentElement.scrollWidth > window.innerWidth + 2, rootClass: root.className };
+    }, { year });
     for (const mode of ['date','count','rating','method']) {
       await page.locator('#calendarMode').selectOption(mode);
       const count = await page.locator('#calendar .cw-day').count();
       if (count < 7) { failed = true; console.error(width, mode, 'weekly cells missing', count); }
     }
     await page.screenshot({ path: 'test-results/cinelva/calendar-' + width + '.png', fullPage: true });
-    if (result.error || result.months !== 12 || result.overlaps?.length || result.overflow || errors.length) {
+    if (result.error || result.months !== 12 || result.watchedDays !== 1 || result.juneCount !== '1本' || result.overlaps?.length || result.overflow || errors.length) {
       failed = true;
       console.error(width, JSON.stringify({ result, errors }));
     } else console.log(width, 'PASS', JSON.stringify(result));

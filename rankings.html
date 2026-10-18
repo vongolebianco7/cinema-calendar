@@ -166,7 +166,7 @@ document.addEventListener('click',async event=>{
  let id=card.dataset.boxId||card.dataset.awardId||'';
  let movie=id?{id,title}:null;
  if(!/^[0-9]+$/.test(String(id))){movie=await resolveMovie(title);id=movie?.tmdbId||movie?.id;}
- if(!/^[0-9]+$/.test(String(id))){button.textContent='作品を特定できません';return;}
+ if(!/^[0-9]+$/.test(String(id))){location.href='search.html?search='+encodeURIComponent(title);return;}
  globalThis.CinelvaQuickRate?.open({...movie,id,title:movie?.title||title});
 });
 function render(){$("#moreBtn").style.display="none";document.querySelectorAll("[data-axis]").forEach(b=>b.classList.toggle("active",b.dataset.axis===axis));$("#ratingFilters").style.display=axis==="rating"?"block":"none";$("#boxFilters").style.display=axis==="boxoffice"?"block":"none";$("#awardsIntro").style.display=axis==="awards"?"block":"none";axis==="boxoffice"?renderBox():axis==="awards"?renderAwards():renderRating()}

@@ -20,7 +20,7 @@ import unicodedata
 ROOT = Path(__file__).resolve().parents[1]
 JAPANESE = re.compile(r'[ぁ-ゖァ-ヺ\u3400-\u9fff]')
 KANA = re.compile(r'[ぁ-ゖァ-ヺ]')
-EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
+EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|amazing\s*stories:\s*the\s*movie|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
 
 
 @lru_cache(maxsize=1)
@@ -106,6 +106,25 @@ def person_name_key(name):
                    if c.isalnum() and not unicodedata.combining(c))
 
 
+def verify_director_runtimes(director, request):
+    """Verify a bounded directorography against movie metadata, excluding known shorts."""
+    works = []
+    for index, work in enumerate(director.get('works', [])):
+        if index < 100 and not work.get('runtime'):
+            detail = request('/movie/' + str(int(work['id'])))
+            if detail.get('id') != work['id']:
+                raise ValueError('Mismatched movie metadata')
+            work = {**work, 'runtime': detail.get('runtime')}
+        runtime = work.get('runtime')
+        if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+            continue
+        if EXCLUDED.search(str(work.get('title', '')) + ' ' + str(work.get('original_title', ''))):
+            continue
+        works.append(work)
+    return {**director, 'works': works, 'coverage': {**director.get('coverage', {}),
+        'runtime_unverified': sum(not work.get('runtime') for work in works)}}
+
+
 def discover_named_directors(directors, aliases, request, today):
     """Resolve missing supported names, never infer a person from a partial match."""
     seen = {person_name_key(name) for director in directors.values()
@@ -146,6 +165,7 @@ def main():
     parser.add_argument('--limit', type=int, default=800)
     parser.add_argument('--normalize-only', action='store_true')
     parser.add_argument('--discover-names', action='store_true')
+    parser.add_argument('--verify-person', type=int)
     args = parser.parse_args()
     key = os.environ.get('TMDB_API_KEY')
     if not key and not args.normalize_only:
@@ -156,7 +176,8 @@ def main():
     directors = snapshot['directors']
     names = existing_name_aliases()
     today = datetime.date.today().isoformat()
-    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, 600 if args.discover_names else 800))]
+    refresh_budget = 800 - (200 if args.discover_names else 0) - (100 if args.verify_person else 0)
+    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, refresh_budget))]
     lock = threading.Lock()
     last_request = [0.0]
 
@@ -186,6 +207,11 @@ def main():
             else:
                 directors[identifier] = director
     discovery = discover_named_directors(directors, names, request, today) if args.discover_names and not args.normalize_only else {'added': [], 'unresolved': [], 'failures': []}
+    if args.verify_person and not args.normalize_only:
+        identifier = str(args.verify_person)
+        if identifier not in directors:
+            raise ValueError('Requested director is not in the sourced snapshot')
+        directors[identifier] = verify_director_runtimes(directors[identifier], request)
     for identifier, director in directors.items():
         reading = name_readings().get(identifier)
         previous_name = director.get('name')

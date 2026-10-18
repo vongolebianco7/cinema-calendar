@@ -48,7 +48,7 @@ jobs:
       - name: Refresh all existing directors through the approved TMDB API
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: python scripts/enrich_directors.py --limit 800 --discover-names
+        run: python scripts/enrich_directors.py --limit 800 --discover-names --verify-person 190
       - name: Preserve completeness and missing-source report
         if: always()
         uses: actions/upload-artifact@v4

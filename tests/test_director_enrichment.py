@@ -42,6 +42,18 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertFalse(directors)
         self.assertEqual(result['unresolved'], ['example'])
 
+    def test_verified_runtime_excludes_short_and_packaged_tv_compilation(self):
+        director = {'id': 190, 'works': [
+            {'id': 1, 'title': 'Feature'}, {'id': 2, 'title': 'Vanessa in the Garden'},
+            {'id': 3, 'title': 'Amazing Stories: The Movie IV'}]}
+        def request(endpoint, params=None):
+            identifier = int(endpoint.rsplit('/', 1)[1])
+            return {'id': identifier, 'runtime': 25 if identifier == 2 else 100}
+        result = self.module.verify_director_runtimes(director, request)
+        self.assertEqual([work['id'] for work in result['works']], [1])
+        self.assertEqual(result['works'][0]['runtime'], 100)
+        self.assertEqual(result['coverage']['runtime_unverified'], 0)
+
     def profile(self):
         return {'id': 1, 'name': 'Example Director', 'also_known_as': ['エグザンプル・ディレクター'],
                 'birthday': '1970-01-02', 'place_of_birth': 'Tokyo', 'profile_path': '/person.jpg',

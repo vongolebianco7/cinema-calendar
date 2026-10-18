@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:31:00+09:00",
+  "updated_at": "2026-10-19T04:33:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
   "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
-  "pull_request": null,
+  "head_sha": "dd98b0e097bb849aed902447bd5417b0a531bfdd",
+  "pull_request": 398,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -835,6 +835,10 @@
     {
       "check": "Published route compatibility",
       "result": "Actualreleaseddadc773:15canonicalrootpages200exactbytes,14nestedcinelvaHTML404. Providerdocsconfirm temporarywildcardredirectsyntax. Regressionusesactualbuildandactual29sourceHTML. Rootdestinationsexist; focusedreviewready afterfixturegapcorrected. No crossoriginorstoragekeychange."
+    },
+    {
+      "check": "Absent director source discovery",
+      "result": "Actions39158919785 succeeded:61additional directors,849total. Eastwood190 has44raw directing credits; runtime checks now required to remove short works and packaged AmazingStories compilation before final browser assertion.25names unresolved by unambiguous search; these remain honestly unknown rather than inferred."
     }
   ],
   "deployment": {

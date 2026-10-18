@@ -331,7 +331,7 @@
     const original=String(work.original_title||'').trim();
     const titleText=(title+' '+original).toLowerCase();
     // These are standalone feature-film directorographies, not all person credits.
-    if (/cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス/i.test(titleText)) return false;
+    if (/cinema\s*16\b|short\s*films?|shorts?\s*collection|amazing\s*stories:\s*the\s*movie|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス/i.test(titleText)) return false;
     const genres=[...(Array.isArray(work.genres)?work.genres:[]),...(Array.isArray(work.genre_names)?work.genre_names:[])].map(g=>typeof g==='string'?g:g?.name||'').join(' ').toLowerCase();
     if (/\bshort\b|短編|短篇/.test(genres)) return false;
     if ([work.is_short,work.isShort,work.short_film,work.shortFilm].some(x=>x===true)) return false;

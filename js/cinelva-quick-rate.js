@@ -171,19 +171,19 @@ function attachInlineScore(button, movie) {
   value.textContent=score===0?'未鑑賞':score.toFixed(1);
   value.value=value.textContent;
  };
- const finish=()=>{activePointer=null;activeTouch=null;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));};
+ const finish=()=>{activePointer=null;activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));delete input.dataset.dragging;};
  track.addEventListener('pointerdown',e=>{
   if(e.pointerType==='touch')return;
   if(e.pointerType==='mouse'&&e.button!==0)return;
-  e.preventDefault();e.stopPropagation();activePointer=e.pointerId;
+  e.preventDefault();e.stopPropagation();activePointer=e.pointerId;input.dataset.dragging='true';
   track.setPointerCapture?.(e.pointerId);moveTo(e.clientX);
  });
  track.addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);});
  track.addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);finish();});
- track.addEventListener('pointercancel',()=>{activePointer=null;track.style.removeProperty('--smooth-progress');});
+ track.addEventListener('pointercancel',()=>{activePointer=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});
  track.addEventListener('touchstart',e=>{
   const touch=e.changedTouches[0];if(!touch)return;
-  activeTouch=touch.identifier;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
+  activeTouch=touch.identifier;input.dataset.dragging='true';moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
  },{passive:false});
  track.addEventListener('touchmove',e=>{
   const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
@@ -209,7 +209,7 @@ function attachInlineScore(button, movie) {
 function refreshRatingLabels(){
  const saved=Records.all();
  for(const input of document.querySelectorAll('.cinelva-inline-score input')){
-  if(document.activeElement===input)continue;
+  if(document.activeElement===input||input.dataset.dragging==='true')continue;
   const id=input.dataset.movieId;
   if(id){const record=saved.find(r=>String(r.id)===id);input.value=Number(record?.rating??0).toFixed(1);input.dispatchEvent(new Event('input'));input.closest('.cinelva-inline-score')?.classList.toggle('is-watched',Number(record?.rating??0)>0);}
  }

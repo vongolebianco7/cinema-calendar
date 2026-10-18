@@ -40,25 +40,8 @@ function updateVenueOptions(selectedVenue=''){
  if(selectedVenue&&!options.includes(selectedVenue))options.push(selectedVenue);
  for(const item of options){const option=document.createElement('option');option.value=item;option.textContent=item||'選択してください';venue.append(option);}
  venue.value=selectedVenue||'';
- renderVenueChips();
+
 }
-function renderVenueChips(){
- const venue=$('cinelvaRateVenue'),row=$('cinelvaRateVenueRow');
- let chips=dialog.querySelector('#cinelvaVenueChips');
- if(!chips){chips=document.createElement('div');chips.id='cinelvaVenueChips';chips.className='cinelva-venue-chips';row.after(chips);}
- const method=$('cinelvaRatePlace').value;
- chips.replaceChildren();
- chips.hidden=!method;
- if(!method)return;
- for(const name of venueOptions[method]||[]){
-  const chip=document.createElement('button');
-  chip.type='button';chip.className='cinelva-venue-chip';
-  chip.textContent=name;chip.setAttribute('aria-pressed',String(venue.value===name));
-  chip.onclick=()=>{venue.value=name;renderVenueChips();};
-  chips.append(chip);
- }
-}
-$('cinelvaRateVenue').addEventListener('change',renderVenueChips);
 $('cinelvaRatePlace').onchange=()=>updateVenueOptions();
 function syncDialogScore(){
  const score=Number($('cinelvaRateScore').value);
@@ -251,9 +234,7 @@ function attachInlineScore(button, movie) {
   }
  },{capture:true,passive:true});
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
- clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};
- button.before(controls);controls.append(button,wrap,clear);
+ button.before(controls);controls.append(button,wrap);
  // Bubble-phase isolation allows the slider's own touch handlers to run first.
  // Capture-phase stopPropagation on controls prevented track touch events entirely.
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -825,6 +806,15 @@ style.textContent+=`
 }
 .cinelva-rating-controls{grid-template-columns:29px minmax(0,1fr) 42px!important}
 .cinelva-rating-controls>.cinelva-inline-score{grid-template-columns:29px minmax(0,1fr) 42px!important}
+`;
+style.textContent+=`
+/* Two-row quick rating without redundant clear control. */
+.cinelva-rating-controls,.cinelva-rating-controls>.cinelva-inline-score{
+ grid-template-columns:29px minmax(0,1fr) 29px!important;
+}
+.cinelva-rating-controls>.cinelva-rating-clear{display:none!important}
+.cinelva-rate-dialog .cinelva-venue-chips{display:none!important}
+.cinelva-rate-dialog .cinelva-review-method{margin-bottom:7px!important}
 `;
 root.CinelvaQuickRate={open,normalize};
 

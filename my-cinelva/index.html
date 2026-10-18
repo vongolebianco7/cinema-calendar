@@ -523,7 +523,31 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 #awardsView .award-other-toggle{cursor:pointer}
 #awardsView .award-other-toggle input{accent-color:#b9a17b;width:16px;height:16px}
 @media(max-width:560px){#awardsView .award-filters{align-items:center}#awardsView .award-filters label{font-size:12px}}
-</style></head>
+</style><style id="cinelva-review-detail-modal-20261019">
+.record-review-detail-trigger{appearance:none;border:0;background:none;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:8px}
+.record-review-detail-trigger:hover,.record-review-detail-trigger:focus-visible{color:var(--brand,#d9bd84);outline:1px solid currentColor}
+.review-detail-dialog{width:min(92vw,510px);max-width:510px;max-height:min(85dvh,760px);margin:auto;padding:0;color:var(--ink,#eee);background:var(--panel,#161718);border:1px solid var(--line,#343434);border-radius:18px;box-shadow:0 24px 90px #0009;overflow:auto}
+.review-detail-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(4px)}
+.review-detail-header,.review-detail-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 20px}
+.review-detail-header{border-bottom:1px solid var(--line,#343434)}
+.review-detail-footer{justify-content:flex-end;border-top:1px solid var(--line,#343434)}
+.review-detail-body{padding:20px}
+.review-detail-film{display:grid;grid-template-columns:100px minmax(0,1fr);gap:16px;align-items:start}
+.review-detail-film .poster{width:100px;min-height:145px}
+.review-detail-film h3{margin:0 0 18px;line-height:1.45;font-size:18px;overflow-wrap:anywhere}
+.review-detail-score{margin:0}.review-detail-score span{display:block;font-size:12px;color:var(--muted,#999)}
+.review-detail-score strong{font-size:38px;color:var(--brand,#d9bd84);font-variant-numeric:tabular-nums}
+.review-detail-score small{color:var(--muted,#999)}
+.review-detail-info{margin:22px 0;display:grid;gap:12px}
+.review-detail-info>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line,#343434);padding-bottom:10px}
+.review-detail-info dt{font-size:12px;color:var(--muted,#999)}
+.review-detail-info dd{margin:0;text-align:right;font-size:13px}
+.review-detail-comment{border-top:1px solid var(--line,#343434);padding-top:15px}
+.review-detail-comment h4{font-size:12px;letter-spacing:.04em;color:var(--muted,#999);margin:0 0 12px}
+.review-detail-comment p{margin:0;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+@media(max-width:440px){.review-detail-dialog{width:calc(100vw - 30px)}.review-detail-body{padding:17px}.review-detail-header,.review-detail-footer{padding:14px 17px}}
+</style>
+</head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
@@ -558,8 +582,13 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <p id="status" class="status" role="status" aria-live="polite"></p>
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
+  <dialog id="reviewDetailDialog" class="review-detail-dialog" aria-label="レビュー詳細を見る">
+    <div class="review-detail-header"><strong>レビュー詳細を見る</strong><button type="button" class="button" id="reviewDetailClose" aria-label="閉じる">閉じる ×</button></div>
+    <div id="reviewDetailBody" class="review-detail-body"></div>
+    <div class="review-detail-footer"><button type="button" class="button primary" id="reviewDetailEdit">レビューを編集</button></div>
+  </dialog>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-awards-categories-order"></script>
+  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-review-detail-dialog"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

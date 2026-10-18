@@ -76,8 +76,9 @@ async function freePort() {
 
     await page.locator('[data-tab="directors"]').click();
     await page.locator('#directorTimeline .director-pick').first().click();
-    const importedFilm = page.locator('#directorFilmography .director-film-tile.is-watched');
+    const importedFilm = page.locator('#directorFilmography .director-film-tile').filter({has: page.locator('a[href="../search.html?id=' + work.id + '"]')});
     assert.equal(await importedFilm.count(), 1, 'one imported record maps to one canonical director film');
+    assert.equal(await importedFilm.evaluate(tile => tile.classList.contains('is-watched')), true);
     assert.equal(await importedFilm.locator('a').getAttribute('href'), '../search.html?id=' + work.id);
     const storedImport = await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['900003']);
     assert.equal(storedImport.id, '900003', 'director rendering preserves the local edit key');

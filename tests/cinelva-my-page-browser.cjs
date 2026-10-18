@@ -1,3 +1,4 @@
+const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const { chromium, webkit } = require('playwright');
 const fs = require('node:fs');
 const { spawn } = require('node:child_process');
@@ -20,15 +21,7 @@ async function freePort() {
   let browser;
   try {
     const base = `http://127.0.0.1:${port}`;
-    await new Promise((resolve, reject) => {
-      const deadline = Date.now() + 10000;
-      const poll = async () => {
-        try { const response = await fetch(base); await response.arrayBuffer(); if (response.ok) return resolve(); } catch (_) {}
-        if (Date.now() > deadline) return reject(new Error('local static server did not start'));
-        setTimeout(poll, 100);
-      };
-      poll();
-    });
+    await waitForLocalServer(port);
     browser = await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch({ headless: true });
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, acceptDownloads: true });
     const page = await context.newPage();
@@ -50,7 +43,7 @@ async function freePort() {
     const work = director.works[0];
     await context.addInitScript(({ key, film, directorName }) => {
       if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({
-        [String(film.id)]: { id: String(film.id), title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], formats:['アニメーション'], workForms:['フィクション'], countries: ['Japan'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
+        '900003': { id: '900003', tmdbId: film.id, title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], formats:['アニメーション'], workForms:['フィクション'], countries: ['Japan'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
         '900001': { id: '900001', title: 'スター・ウォーズ', original_title: 'Star Wars', year: 2002, director: directorName, genres: ['SF', 'Crime'], formats:['実写'], workForms:['フィクション'], region: '日本', rating: 0, watchedAt: '2025-04-15' },
       }));
     }, { key: 'cinelva-library-records-v2', film: work, directorName: director.name });
@@ -83,6 +76,13 @@ async function freePort() {
 
     await page.locator('[data-tab="directors"]').click();
     await page.locator('#directorTimeline .director-pick').first().click();
+    const importedFilm = page.locator('#directorFilmography .director-film-tile.is-watched');
+    assert.equal(await importedFilm.count(), 1, 'one imported record maps to one canonical director film');
+    assert.equal(await importedFilm.locator('a').getAttribute('href'), '../search.html?id=' + work.id);
+    const storedImport = await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['900003']);
+    assert.equal(storedImport.id, '900003', 'director rendering preserves the local edit key');
+    assert.equal(String(storedImport.tmdbId), String(work.id));
+
     const directorTile=page.locator('#directorFilmography .director-film-tile').last();
     await directorTile.waitFor({state:'visible'});
     const directorTitle=(await directorTile.locator('.director-film-title').innerText()).trim();

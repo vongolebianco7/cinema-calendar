@@ -1,3 +1,4 @@
+const { waitForLocalServer } = require('./helpers/local-server.cjs');
 'use strict';
 const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
@@ -47,19 +48,7 @@ async function freePort() {
     local_asset_failures: localAssetFailures
   };
   try {
-    await new Promise((resolve, reject) => {
-      const deadline = Date.now() + 10000;
-      const poll = async () => {
-        try {
-          const response = await fetch(base);
-          await response.arrayBuffer();
-          if (response.ok) return resolve();
-        } catch (_) {}
-        if (Date.now() > deadline) return reject(new Error('local static server did not start'));
-        setTimeout(poll, 100);
-      };
-      poll();
-    });
+    await waitForLocalServer(port);
 
     browser = await browserType.launch({ headless: true });
     let checked = 0;

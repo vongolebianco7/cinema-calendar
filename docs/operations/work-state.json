@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T21:02:31+09:00",
+  "updated_at": "2026-10-18T21:11:41+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
-  "branch": "test/legacy-route-record-safety-20261018",
-  "head_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
+  "base_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
+  "branch": "fix/director-import-identities-20261018",
+  "head_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
   "pull_request": null,
   "work_items": [
     {
@@ -463,9 +463,23 @@
     {
       "id": "P0-LEGACY-RECORD-DESTINATION",
       "title": "Redirect retired URLs to actual record dashboard",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "All eight retired URLs reach /my-cinelva/ rather than shared-image page, preserve query/hash/origin and0/1/1000 savedrecords; dashboard works inChromium/WebKit at390px.",
-      "ci": "Actual script regression first failed3/3 onwrongdestination, now3/3pass. Sharedqualitygate passes124activeNode tests; Python121/121. BrowserCI required before merge."
+      "ci": "PR#387 merged2e294c02 after12successfulcheck-runs; ChromiumandWebKit eachverified8routes×0/1/1000records, actualdashboardcounts/rawsaveddata/390px/noerrors."
+    },
+    {
+      "id": "P0-OBSERVATION-FRESHNESS-SCOPE",
+      "title": "Separate per-title observation freshness from snapshot SLA",
+      "status": "merged",
+      "acceptance": "Auditneverclaimsallcachedtitlesfresh fromgenerated_at alone; true per-titlecoverage andbatchSLAreportedseparately; malformeddata/stalesnapshotsstillfail.",
+      "ci": "PR#388 merged8b89f1b after11successfulcheck-runs;9focusedtests,Python125/125andqualitygatepassed."
+    },
+    {
+      "id": "P0-IMPORTED-FILM-IDENTITY",
+      "title": "Use canonical film identity in director counts and record metadata",
+      "status": "in_progress",
+      "acceptance": "ImportedlocalIDsandexplicitTMDBIDsrepresentonefilm; conflictinglocalIDsnevermatchwrongfilm; metadata usesexplicitidentitywhilelocaleditIDsandsavedfieldsremainunchanged.",
+      "ci": "Threeactualruntimefailuresreproducedbeforefix;11focusedtests,30activeCinelvafiles128/128,Python125/125andsharedgatepass. Browserfixturewithlocal900003andcanonicalfilmIDadded;CIpending."
     }
   ],
   "verification": [
@@ -747,17 +761,21 @@
     {
       "check": "2026-10-18 cross-thread acceptance audit",
       "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
+    },
+    {
+      "check": "Mergedsourceacceptance21:12JST",
+      "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
+    "target_sha": "8b89f1b595abbb5d868cab6bffd369fedba950bf",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-18T20:15:15+09:00",
-    "reported_restriction": "Latest observed main4bac142 frontend/backendstatuses build-rate-limit; no manualdeploymentretry. Main advanced#386; currentlimit must be independentlychecked before release.",
+    "reported_restriction": "Main8b89f1b frontend/backendstatuses bothbuild-rate-limit. No manualretry. Sourcefixesremainunverifiedoncanonicalproduction.",
     "next_action": "Do not manually redeploy or retry Vercel. Continue local/GitHub Actions development; after the provider limit clears, deploy/verify one tested main SHA.",
     "provider_preview_status": "Latest observed production remains dpl_8pLTgFogy3Nauy3opWNxWa4qWaHh at cc02eb47 (#295). It does not include recent main changes.",
     "blockers": [
@@ -767,6 +785,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Publish legacy record destination fix PR, require focusedreview and freshfrontendChromium/WebKit CI; fix failures and mergewhen green. Refreshmain and continuehighest readyacceptance. Vercelcapstillblocksproduction; no manualretry.",
+  "next_action": "Publish importedfilmidentityfixwithfocusedreview; requirefreshfrontendChromium/WebKit CIbeforemerge. Refreshmainandcontinuehighestreadyacceptance. IndependentlyconfirmVercellimitclearedbeforeonebatchedrelease; realSafari/humanusertests/productionupgraderecoveryremainunverified.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

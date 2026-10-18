@@ -1,3 +1,4 @@
+const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const {chromium,webkit}=require('playwright');
 const {spawn}=require('node:child_process');
 const net=require('node:net');
@@ -16,11 +17,7 @@ async function port(){
  let browser;
  try{
   const base='http://127.0.0.1:'+p;
-  for(let i=0;i<60;i++){
-   try{const r=await fetch(base);if(r.ok)break;}catch{}
-   if(i===59)throw Error('server startup timed out');
-   await new Promise(r=>setTimeout(r,100));
-  }
+  await waitForLocalServer(p);
   browser=await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch({headless:true});
   const context=await browser.newContext({viewport:{width:390,height:844}});
   const page=await context.newPage();

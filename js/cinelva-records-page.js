@@ -407,6 +407,23 @@
       const key=String(work.id),ids=personIdsByMovie.get(key)||new Set();
       ids.add(String(person.id));personIdsByMovie.set(key,ids);
     }
+    // Legacy imports sometimes have no TMDB ID. A unique exact title/year pair
+    // from an authoritative directing credit is a safe additional lookup.
+    const personIdsByFilmTitleYear=new Map();
+    const titleYearKey=(title,year)=>{
+      const normalized=String(title||'').normalize('NFKC').toLowerCase().replace(/[\\s・･:：!！?？'’"“”.,，。－ー-]/g,'');
+      const date=String(year||'').match(/(?:18|19|20)\\d{2}/)?.[0];
+      return normalized&&date?normalized+'|'+date:'';
+    };
+    for(const person of knownDirectors)for(const work of person.works||[]){
+      for(const title of [work.original_title,work.title]){
+        const key=titleYearKey(title,work.year||work.release_date||work.date);
+        if(!key)continue;
+        const ids=personIdsByFilmTitleYear.get(key)||new Set();
+        ids.add(String(person.id));
+        personIdsByFilmTitleYear.set(key,ids);
+      }
+    }
     const resolveDirector=(name,records=[])=>{
       const matched=knownByName.get(canonical(name));
       if(matched)return matched;
@@ -420,6 +437,16 @@
         else{
           const ids=personIdsByMovie.get(String(movie.tmdbId??movie.tmdb_id??movie.id));
           if(ids?.size===1)candidates.add([...ids][0]);
+          else if(!ids?.size){
+            // Only match when both the exact title/year and its credited
+            // director are unambiguous across all sourced profiles.
+            const titles=[movie.original_title,movie.originalTitle,movie.title];
+            for(const title of titles){
+              const key=titleYearKey(title,movie.year||movie.release_date||movie.releaseDate||movie.date);
+              const matches=personIdsByFilmTitleYear.get(key);
+              if(matches?.size===1){candidates.add([...matches][0]);break;}
+            }
+          }
         }
       }
       return candidates.size===1?directorByPersonId.get([...candidates][0]):undefined;

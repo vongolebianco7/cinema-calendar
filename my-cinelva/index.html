@@ -403,6 +403,19 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 .record-actions-compact .record-delete-icon{display:flex!important;flex:0 0 30px!important;align-items:center!important;justify-content:center!important;color:var(--muted)!important}
 @media(max-width:600px){.record-actions-compact .record-score-gauge svg{display:none!important}.record-actions-compact .record-delete-icon{flex-basis:26px!important}.record-actions-compact button{padding:3px!important}}
 </style>
+<style id="cinelva-record-list-three-cols-20261019">
+/* Reviewed movie lists use three readable columns on iPhone, never four. */
+@media(max-width:699px){
+#recordsView #recordList.record-grid,
+#worldView #worldList.record-grid,
+#genreView #genreFilms.record-grid,
+#directorsView #directorWorks.record-grid{
+display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 9px!important
+}
+#recordsView #recordList .movie{min-width:0!important}
+#recordsView #recordList .movie strong{overflow-wrap:anywhere!important;word-break:normal!important}
+}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">

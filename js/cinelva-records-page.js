@@ -123,7 +123,11 @@
     rows.sort(sort === 'title' ? (a, b) => a.title.localeCompare(b.title, 'ja') : sort === 'rating' ? (a, b) => (b.rating ?? -1) - (a.rating ?? -1) || dateOf(b).localeCompare(dateOf(a)) : (a, b) => dateOf(b).localeCompare(dateOf(a)) || a.title.localeCompare(b.title, 'ja'));
     $('recordList').innerHTML = rows.length ? rows.map(card).join('') : `<div class="empty" style="grid-column:1/-1"><strong>${recordMovies().length ? '条件に合う鑑賞記録はありません。' : 'ここから、映画の記録がはじまります。'}</strong><p>作品検索から鑑賞日と評価を保存できます。</p><button class="button primary" data-add-record>鑑賞を記録</button></div>`;
   }
+  const TAB_STORAGE_KEY = 'cinelva-active-tab-v1';
   function setTab(tab) {
+    const tabs = [...document.querySelectorAll('.tab[data-tab]')];
+    if (!tabs.some(button => button.dataset.tab === tab) || !$(tab + 'View')) return;
+    try { sessionStorage.setItem(TAB_STORAGE_KEY, tab); } catch (_) { /* Storage may be unavailable. */ }
     document.querySelectorAll('.tab').forEach(button => button.setAttribute('aria-selected', String(button.dataset.tab === tab)));
     document.querySelectorAll('.view').forEach(section => { section.hidden = section.id !== tab + 'View'; });
     if (tab === 'world') drawWorld();
@@ -377,6 +381,11 @@
     const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
+    // Restore the selected tab after a refresh, without affecting record deep links.
+    try {
+      const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);
+      if (savedTab) setTab(savedTab);
+    } catch (_) { /* Private browsing can disable storage. */ }
     const params=new URLSearchParams(location.search),requestedId=params.get('record');
     if(requestedId){
       const requestedTitle=params.get('title')||'',existing=state.records.find(item=>String(item.id)===String(requestedId));

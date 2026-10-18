@@ -265,8 +265,34 @@ function attachInlineScore(button, movie) {
    activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');
   }
  },{capture:true,passive:true});
- const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- button.before(controls);controls.append(button,wrap);
+  const bookmark=document.createElement('button');
+ bookmark.type='button';bookmark.className='cinelva-bookmark-button';
+ bookmark.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>';
+ bookmark.dataset.bookmarkId=String(id);
+ const bookmarkKey='cinelva-want-to-watch-v1';
+ const getBookmarks=()=>{try{const v=JSON.parse(localStorage.getItem(bookmarkKey)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
+ const syncBookmark=()=>{
+  const marked=!!getBookmarks()[String(id)];
+  bookmark.classList.toggle('is-bookmarked',marked);
+  bookmark.setAttribute('aria-pressed',String(marked));
+  bookmark.setAttribute('aria-label',marked?'観たいを解除':'観たいに登録');
+  bookmark.title=marked?'観たいを解除':'観たいに登録';
+ };
+ bookmark.onclick=event=>{
+  event.preventDefault();event.stopPropagation();
+  try{
+   const data=getBookmarks(),key=String(id);
+   if(data[key])delete data[key];
+   else data[key]={id:key,title:movie.title||movie.name||'作品',savedAt:new Date().toISOString()};
+   localStorage.setItem(bookmarkKey,JSON.stringify(data));
+   root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key}}));
+  }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
+ };
+ root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
+ root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
+ syncBookmark();
+const controls=document.createElement('div');controls.className='cinelva-rating-controls';
+ button.before(controls);controls.append(button,wrap,bookmark);
  // Bubble-phase isolation allows the slider's own touch handlers to run first.
  // Capture-phase stopPropagation on controls prevented track touch events entirely.
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -900,6 +926,42 @@ style.textContent+=`
   margin-top:6px!important;margin-bottom:0!important;
   flex:0 0 54px!important;align-self:stretch!important;
  }
+}
+`;
+style.textContent+=`
+/* Compact eye / score / bookmark row above the rating track. */
+.cinelva-rating-controls{
+ grid-template-columns:27px minmax(0,1fr) 27px!important;
+ grid-template-rows:20px 22px!important;
+ height:46px!important;min-height:46px!important;max-height:46px!important;
+ padding:2px 5px!important;column-gap:0!important;row-gap:0!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score{
+ grid-template-columns:27px minmax(0,1fr) 27px!important;
+ grid-template-rows:20px 22px!important;
+ height:42px!important;max-height:42px!important;
+}
+.cinelva-rating-controls>.cinelva-rate-button{
+ width:25px!important;min-width:25px!important;height:20px!important;
+ margin:0!important;padding:0!important;grid-column:1!important;grid-row:1!important;
+}
+.cinelva-rating-controls .cinelva-inline-value{grid-column:2!important;grid-row:1!important;line-height:20px!important}
+.cinelva-rating-controls .cinelva-score-track{
+ grid-column:1/-1!important;grid-row:2!important;height:22px!important;
+}
+.cinelva-rating-controls>.cinelva-bookmark-button{
+ grid-column:3!important;grid-row:1!important;
+ align-self:center!important;justify-self:end!important;
+ display:grid!important;place-items:center!important;
+ width:25px!important;height:20px!important;min-height:20px!important;
+ padding:0!important;margin:0!important;border:0!important;
+ background:transparent!important;color:#aeb3bd!important;
+ border-radius:4px!important;cursor:pointer!important;z-index:6!important;
+}
+.cinelva-rating-controls>.cinelva-bookmark-button.is-bookmarked{color:#f3c84e!important}
+.cinelva-rating-controls>.cinelva-bookmark-button.is-bookmarked svg{fill:#f3c84e!important}
+@media(max-width:760px){
+ .tvMovie>.cinelva-rating-controls{flex:0 0 46px!important;margin-top:5px!important}
 }
 `;
 root.CinelvaQuickRate={open,normalize};

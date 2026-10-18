@@ -187,3 +187,20 @@ test('one-character name difference does not merge distinct unsourced people', (
   const { host } = render({ records: [first, second], works: [first], name: '山田太郎' });
   assert.equal(host.children[0].children.length, 2);
 });
+
+test('incomplete Spielberg catalog never reports a false 1/1 total', () => {
+  const film = { id: 901, title: '監督作', director: 'Steven Spielberg', runtime: 120, rating: 4 };
+  const { row, detail } = render({ records: [film], works: [film], profile: { id: 488 } });
+  assert.match(row.innerHTML, /総数未取得/);
+  assert.doesNotMatch(row.innerHTML, /1\\/1本/);
+  row.listeners.click();
+  assert.doesNotMatch(detail.innerHTML, /1 \\/ 1本 鑑賞済み/);
+});
+
+test('complete Spielberg catalog can show a sourced denominator', () => {
+  const films = Array.from({ length: 12 }, (_, n) => ({
+    id: 1000 + n, title: '監督作' + n, director: 'Steven Spielberg', runtime: 120, year: 1980+n
+  }));
+  const { row } = render({ records: [{ ...films[0], rating: 4 }], works: films, profile: { id: 488, coverage: { truncated: false } } });
+  assert.match(row.innerHTML, /1\\/12本/);
+});

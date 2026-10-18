@@ -148,15 +148,25 @@
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
       // Preserve every category: never silently group the long tail as "other".
-      // One restrained hue family per chart. Lightness is distributed across
-      // every category without repeating the same color after eight entries.
-      const hueByChart={csGenres:209,csCountries:153,csDecades:35,csMethods:266};
-      const hue=hueByChart[id]??209;
+      // Coordinated muted multi-hue palettes: distinct adjacent categories,
+      // while each chart keeps its own overall color character.
+      const chartPalettes={
+        csGenres:['#7299B0','#B08C72','#8E82B0','#75A49A','#B17F92','#A5A06C','#7291A1','#A28B85'],
+        csCountries:['#629D88','#A18E68','#718FA7','#A77986','#8E9F70','#9A82A8','#B08F72','#6E9B9D'],
+        csDecades:['#B69A64','#8E91B2','#A97D74','#7F9F8C','#B08BA3','#7896A9','#A49B72','#9687A4'],
+        csMethods:['#9382B4','#7398AB','#AD897B','#819F8A','#B28CA0','#A29B70','#7E91B1','#9D8D85']
+      };
+      const swatches=chartPalettes[id]||chartPalettes.csGenres;
       const colors=all.map((_,i)=>{
-        const t=all.length<=1?0:i/(all.length-1);
-        const lightness=all.length<=1?60:36+43*t;
-        const saturation=id==='csDecades'?36:29;
-        return 'hsl('+hue+' '+saturation+'% '+lightness.toFixed(1)+'%)';
+        const base=swatches[i%swatches.length];
+        if(i<swatches.length)return base;
+        // Keep the hue family but differentiate long-tail categories by lightness.
+        const cycle=Math.floor(i/swatches.length);
+        const adjustment=cycle%2===1?10:-10;
+        const hex=base.slice(1);
+        const rgb=[0,2,4].map(k=>parseInt(hex.slice(k,k+2),16));
+        const adjusted=rgb.map(v=>Math.max(0,Math.min(255,Math.round(v+(adjustment>0?(255-v)*adjustment/100:v*adjustment/100)))));
+        return '#'+adjusted.map(v=>v.toString(16).padStart(2,'0')).join('');
       });
       const mode=donutMode;
       const layout=document.createElement('div');layout.className='cs-stack-layout';

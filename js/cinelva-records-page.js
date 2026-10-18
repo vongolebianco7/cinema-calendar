@@ -264,7 +264,11 @@
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);
-  const directorJapanese = name => directorJapaneseNames.get(String(name||'').trim().toLowerCase()) || name;
+  const directorJapanese = name => {
+    const raw=String(name||'').trim();
+    const metadata=Object.values(state.directors||{}).find(d=>[d.name,d.nameJa,d.name_ja,d.japanese_name].some(v=>normalizeName(v)===normalizeName(raw)));
+    return metadata?.nameJa||metadata?.name_ja||metadata?.japanese_name||directorJapaneseNames.get(raw.toLowerCase())||raw;
+  };
   function renderDirectors() {
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
@@ -302,15 +306,21 @@
       for(const movie of group.records)all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});
       const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
       const unseen=films.length-group.records.length;
-      detail.innerHTML='<div class="director-filmography-head"><h3>'+escapeHTML(group.name)+'</h3><p>鑑賞済み '+group.records.length+'本 · 未鑑賞の収録作品 '+Math.max(0,unseen)+'本</p></div>'+
+      const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';
+      const photoUrl=profileImage.startsWith('/')?'https://image.tmdb.org/t/p/w185'+profileImage:profileImage;
+      const safePhoto=/^https:\/\//.test(photoUrl)?photoUrl:'';
+      const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||director?.biography||''].filter(Boolean);
+      detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+group.records.length+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(group.records.length/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
         '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)))).join('')+'</div>'+
-        '<p class="director-coverage-note">※収録済み作品を公開年の古い順に表示しています。未収録の監督作品は含まれません。</p>';
+        '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+group.records.length+'本を鑑賞。公開年の古い順に表示。※全フィルモグラフィーを保証する数字ではありません。</p>';
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
-      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
+      const director=knownDirectors.find(d=>directorKey(d.nameJa||d.japanese_name||d.name_ja||d.name)===directorKey(group.name));
+      const knownIds=new Set([...(director?.works||[]).map(w=>String(w.id)),...group.records.map(w=>String(w.id))]);
+      row.innerHTML='<span>'+escapeHTML(group.name)+'</span><strong>'+group.records.length+'/'+knownIds.size+'本</strong><span class="director-pick-chevron" aria-hidden="true">⌄</span>';
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });

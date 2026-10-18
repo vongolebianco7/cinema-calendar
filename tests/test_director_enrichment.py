@@ -64,6 +64,13 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertEqual(director['coverage']['runtime_unverified'], 0)
         self.assertTrue(all(work['runtime'] >= 60 and work['job'] == 'Director' for work in director['works']))
 
+    def test_spielberg_snapshot_has_complete_sourced_directing_credits(self):
+        import json
+        director = json.loads((ROOT / 'data/directors.json').read_text())['directors']['488']
+        self.assertGreaterEqual(len(director['works']), 40)
+        self.assertTrue(all(work['job'] == 'Director' for work in director['works']))
+        self.assertEqual(len({work['id'] for work in director['works']}), len(director['works']))
+
     def profile(self):
         return {'id': 1, 'name': 'Example Director', 'also_known_as': ['エグザンプル・ディレクター'],
                 'birthday': '1970-01-02', 'place_of_birth': 'Tokyo', 'profile_path': '/person.jpg',

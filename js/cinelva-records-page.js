@@ -552,8 +552,25 @@
   function openKnownMovie(id){const existing=Insights.directorViewingRecord(state.records,{id}),movie=byId.get(String(id)),title=movie?.title||existing?.title;if(!title){notify('この作品の情報が未収録です。作品検索から追加してください。');return;}location.href='../search.html?'+new URLSearchParams({search:title});}
   async function init() {
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
-    const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
+    const load=async(url,fallback)=>{
+      const essential=/\/data\/directors\.json(?:[?#]|$)/.test(url);
+      for(let attempt=0;attempt<(essential?3:1);attempt++){
+        try{
+          const response=await fetch(url,{cache:essential?'no-store':'default'});
+          if(!response.ok)throw new Error('HTTP '+response.status);
+          const result=await response.json();
+          if(essential&&(!result.directors||!Object.keys(result.directors).length))throw new Error('Empty director catalog');
+          return result;
+        }catch(error){
+          if(attempt===(essential?2:0)){
+            if(essential)notify('監督作品データを取得できませんでした。通信状況を確認して再読み込みしてください。');
+            return fallback;
+          }
+        }
+      }
+      return fallback;
+    };
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json?v=20261019-full-catalog',{directors:{}})]);
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.

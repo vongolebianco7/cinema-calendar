@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T19:59:18+09:00",
+  "updated_at": "2026-10-18T20:05:04+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "1140ca41d5a25d2560a3c7b04f7ff5fd31386f08",
-  "branch": "fix/retired-ocean-build-20261018",
-  "head_sha": "1140ca41d5a25d2560a3c7b04f7ff5fd31386f08",
+  "base_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
+  "branch": "fix/director-count-consistency-20261018",
+  "head_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
   "pull_request": null,
   "work_items": [
     {
@@ -418,10 +418,18 @@
     {
       "id": "P0-OCEAN-RELEASE-PAYLOAD",
       "title": "Exclude retired Ocean payload from production build",
-      "status": "in_progress",
+      "status": "merged",
       "issue": 239,
       "acceptance": "Publish only the eight legacy Ocean redirect HTML files; retain active routes, assets, saved-record modules and original query/hash redirects. Archive source remains in git.",
-      "ci": "Regression failed against old Vercel build; passes with filtered static builder. Local quality gate passed. Full build reduces preview/ocean output from 75,799,154 bytes / 457 files to 5,276 bytes / 8 files. GitHub Actions still required."
+      "ci": "PR #379 all four Actions passed on 821f15f69806d542cca7d34c1a49ebbc6cf47d31; focused review found no critical/important issue. Merged as 81587315b6b808dc519fa20dabfcdd4054a083c3. Production remains blocked by Vercel build-rate-limit."
+    },
+    {
+      "id": "P1-DIRECTOR-COUNT-CONSISTENCY",
+      "title": "Keep director selection and filmography counts consistent after credit exclusions",
+      "status": "in_progress",
+      "issue": 239,
+      "acceptance": "Selection rows and expanded filmography use the same accepted works, watched numerator and total denominator. Excluded shorts remain excluded from both counts. Unknown-year Duel by another director does not throw or borrow Spielberg year.",
+      "ci": "Three runtime regression tests reproduced the two count contradictions and group-is-not-defined exception; all pass after correction. Shared quality gate and browser CI required."
     }
   ],
   "verification": [
@@ -669,11 +677,16 @@
       "command": "node --test tests/cinelva-static-build.test.cjs; python scripts/quality_gate.py; node scripts/build-static.cjs",
       "result": "passed_on_work_branch",
       "details": "Old build failed the retired texture exclusion assertion. New build passes and preserves active files and all eight byte-identical redirects. Full artifact inspected; no live-reference hits for retired Ocean payload outside the retired tree. Browser route/storage tests already pass in #372, but this build change still requires PR CI."
+    },
+    {
+      "command": "PR #379 Actions at 821f15f69806d542cca7d34c1a49ebbc6cf47d31",
+      "result": "passed_merged",
+      "details": "Smoke 39121446563, mobile layout 39121446481, quality 39121446525, completeness 39121446438 all passed; merged as 81587315b6b808dc519fa20dabfcdd4054a083c3. Reviewer compared all 344 artifact files byte-for-byte and found no unintended output changes."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "1140ca41d5a25d2560a3c7b04f7ff5fd31386f08",
+    "target_sha": "81587315b6b808dc519fa20dabfcdd4054a083c3",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "cc02eb47bc109edbca1e6a496b5d98f2b46d9216",
@@ -689,6 +702,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Find/open PR for fix/retired-ocean-build-20261018; require green Actions including static-build regression and quality gate, review and merge; refresh main afterward. Do not retry Vercel while current main reports build-rate-limit. Audit remaining #239 acceptance gates independently.",
+  "next_action": "Find/open PR for fix/director-count-consistency-20261018; require shared quality gate and Chromium/WebKit frontend CI, review and merge. Vercel statuses for main 81587315 still report build-rate-limit; do not retry deployment without new evidence that the restriction cleared. Continue highest ready #239 acceptance audit.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

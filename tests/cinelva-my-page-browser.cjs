@@ -51,7 +51,7 @@ async function freePort() {
     await context.addInitScript(({ key, film, directorName }) => {
       if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({
         [String(film.id)]: { id: String(film.id), title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], formats:['アニメーション'], workForms:['フィクション'], countries: ['Japan'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
-        '900001': { id: '900001', title: 'Browser Test Film', year: 2002, director: directorName, genres: ['SF', 'Crime'], formats:['実写'], workForms:['フィクション'], region: '日本', rating: 0, watchedAt: '2025-04-15' },
+        '900001': { id: '900001', title: 'スター・ウォーズ', original_title: 'Star Wars', year: 2002, director: directorName, genres: ['SF', 'Crime'], formats:['実写'], workForms:['フィクション'], region: '日本', rating: 0, watchedAt: '2025-04-15' },
       }));
     }, { key: 'cinelva-library-records-v2', film: work, directorName: director.name });
     await page.goto(`${base}/my-cinelva/`, { waitUntil: 'networkidle' });
@@ -124,6 +124,16 @@ async function freePort() {
     await page.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});
     await page.locator('[data-tab="records"]').click();
     assert.match(await page.locator('#recordList').textContent(), /New Browser Film/);
+    for (const query of ['スターウォーズ', 'スター　ウォーズ', 'ＳＴＡＲ ＷＡＲＳ']) {
+      await page.locator('#recordSearch').fill(query);
+      assert.equal(await page.locator('#recordList [data-record-card]').count(), 1);
+      assert.equal(await page.locator('#recordList [data-record-card]').getAttribute('data-record-card'), '900001');
+    }
+    await page.locator('#recordYear').selectOption('2026');
+    assert.equal(await page.locator('#recordList [data-record-card]').count(), 0);
+    await page.locator('#recordYear').selectOption('all');
+    await page.locator('#recordSearch').fill('');
+    assert.equal(await page.locator('#recordList [data-record-card]').count(), 3);
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999'].rating), 0);
     await page.reload({ waitUntil: 'networkidle' });
     assert.equal(await page.locator('#statTotal').textContent(), '3');

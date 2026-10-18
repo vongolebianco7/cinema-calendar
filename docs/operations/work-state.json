@@ -1,17 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:17:33+09:00",
-  "status": "pr_created",
+  "updated_at": "2026-10-18T20:44:31+09:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "ab24c7aaa1257e8234302508bb014b9600887ddd",
-  "branch": "test/active-cinelva-baseline-20261018",
-  "head_sha": "f1f1dc946769d2383250db553350001a27cd0328",
-  "pull_request": {
-    "number": 383,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/383",
-    "branch": "test/active-cinelva-baseline-20261018"
-  },
+  "base_sha": "4bac142449f9df00fcd3c44d444093676354d326",
+  "branch": "fix/my-cinelva-feedback-audit-20261018",
+  "head_sha": "4bac142449f9df00fcd3c44d444093676354d326",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -450,6 +446,12 @@
       "issue": 239,
       "acceptance": "Discover every cinelva-*.test.cjs file, fail on a newly introduced regression, keep current review behavior assertions, and exclude obsolete Atlas expectations and retired Ocean feature tests.",
       "ci": "After reconciling PR #382 reviewed-only director visibility, 26files112/112 tests and full shared gate pass. Unknown-year Duel test now uses a reviewed record, and a new regression protects hiding catalog-only directors. Focused review passed before this test-only reconciliation; latest PR Actions required."
+    },
+    {
+      "id": "MY-RECORD-SEARCH",
+      "title": "Normalize My CINELVA record search and reconcile reviewed-director regression harness",
+      "status": "in_progress",
+      "acceptance": "Separator/width/case variants and original titles match the same saved film; viewing-year filter remains effective; catalog-only and zero/unrated directors remain hidden. Chromium and WebKit mobile regression must pass before merge."
     }
   ],
   "verification": [
@@ -722,6 +724,11 @@
       "command": "Latest main #382 integration + python scripts/quality_gate.py",
       "result": "passed_on_work_branch",
       "details": "26files112/112 Node tests passed. The prior Duel fixture expected a catalog-only director to be shown; it was updated to a reviewed film after #382 intentionally hid unreviewed directors. New test verifies catalog-only directors remain hidden. No product behavior reverted."
+    },
+    {
+      "command": "python scripts/quality_gate.py; node --test tests/cinelva-record-list-search.test.cjs tests/cinelva-director-render.test.cjs",
+      "result": "passed_locally",
+      "details": "116 active Node tests pass; all quality checks pass. Record-search regressions reproduced before fix. #384 introduced missing ratedMovies in isolated test harness; real production selector is now executed with rated fixtures. Local browser launch is blocked by missing Playwright executable; existing frontend CI covers Chromium/WebKit at 390px with added search assertions."
     }
   ],
   "deployment": {
@@ -742,6 +749,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Inspect latest PR #383 head after main #382 reconciliation. Require all Actions green, then merge and refresh main; preserve direct-review, date-precision, filtered director counts and reviewed-only director visibility. Vercel release remains rate-limited; do not claim latest production verification.",
+  "next_action": "Find PR for fix/my-cinelva-feedback-audit-20261018; inspect its exact current head and all Actions, fix failures then merge when required quality/mobile checks pass. Production remains separate and blocked by Vercel build-rate-limit; no retry until independently cleared.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

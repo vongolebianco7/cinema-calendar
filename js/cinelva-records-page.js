@@ -7,7 +7,16 @@
   const state = { records: [], movies: [], awards: [], directors: {}, month: new Date().getMonth(), year: currentYear, selected: null, searchToken: 0, plotRotation: { x: -.32, y: -.58 }, plotZoom: 1, plotOffset: { x: 0, y: 0 }, plotPointers: new Map(), plotDrag: null, activeGenre: null, awardSelection: null, awardCoverage: {}, flatWorld: false, keyboardPoint: 0 };
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const byId = new Map();
-  const poster = movie => movie.poster || movie.poster_path && `https://image.tmdb.org/t/p/w342${movie.poster_path}` || '';
+  const poster = movie => {
+    const sources=[movie.poster,movie.poster_url,movie.posterUrl,movie.poster_path,movie.posterPath,metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).poster_path];
+    for(const raw of sources){
+      if(typeof raw!=='string'||!raw.trim())continue;
+      const value=raw.trim();
+      if(value.startsWith('/'))return 'https://image.tmdb.org/t/p/w342'+value;
+      if(/^https:\/\//.test(value))return value;
+    }
+    return '';
+  };
   const recordMovies = () => state.records.filter(record => record.watched !== false);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');
   const metadataFor = id => byId.get(String(id)) || {};

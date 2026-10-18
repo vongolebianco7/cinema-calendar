@@ -65,7 +65,7 @@ def enrich_director(old, profile, today, aliases=None):
         if EXCLUDED.search(title + ' ' + (work.get('original_title') or '')):
             continue
         runtime = work.get('runtime') or work.get('duration')
-        if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+        if isinstance(runtime, (int, float)) and 0 < runtime < 30:
             continue
         if work.get('media_type') in ('tv', 'episode') or work.get('is_short') is True:
             continue
@@ -116,7 +116,7 @@ def verify_director_runtimes(director, request):
                 raise ValueError('Mismatched movie metadata')
             work = {**work, 'runtime': detail.get('runtime')}
         runtime = work.get('runtime')
-        if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+        if isinstance(runtime, (int, float)) and 0 < runtime < 30:
             continue
         if EXCLUDED.search(str(work.get('title', '')) + ' ' + str(work.get('original_title', ''))):
             continue
@@ -250,7 +250,7 @@ def main():
                             runtime_verified += 1
                     except Exception as error:
                         runtime_failures.append({'id': work['id'], 'error': type(error).__name__})
-                if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+                if isinstance(runtime, (int, float)) and 0 < runtime < 30:
                     continue
                 retained.append(work)
             director['works'] = retained

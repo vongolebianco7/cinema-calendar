@@ -45,6 +45,8 @@
     selector.innerHTML='<option value="all">オールタイム</option>'+[...new Set([String(currentYear),...years])].sort((a,b)=>Number(b)-Number(a)).map(y=>'<option value="'+y+'">'+y+'年</option>').join('');
     selector.value=previous&&[...selector.options].some(o=>o.value===previous)?previous:String(currentYear);
     const period=selector.value, filtered=period==='all'?all:all.filter(r=>dateOf(r).slice(0,4)===period);
+    const selectedYear=period==='all'?currentYear:Number(period);
+    if(state.year!==selectedYear){state.year=selectedYear;renderYearHeatmap();}
     $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
     $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';
     const prism='<svg class="cs-prism" viewBox="0 0 42 48" aria-hidden="true"><defs><linearGradient id="csFacetA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4e7f0"/><stop offset=".48" stop-color="#b6d8df"/><stop offset="1" stop-color="#8f9dc8"/></linearGradient><linearGradient id="csFacetB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5e8ee"/><stop offset="1" stop-color="#9cabc9"/></linearGradient></defs><path d="M21 2 37 10v28L21 46 5 38V10Z" fill="#b5c5da" stroke="#e2e5ef" stroke-width="1.1"/><path d="M21 2 37 10 21 18 5 10Z" fill="#e7dce9"/><path d="M5 10 21 18v28L5 38Z" fill="url(#csFacetA)"/><path d="M37 10 21 18v28l16-8Z" fill="url(#csFacetB)"/><path d="M21 2v16M5 10l16 8 16-8M21 18v28" stroke="#f4f4f8" stroke-width=".9" fill="none"/><path d="M10 15v19M33 14v20" stroke="#fff" stroke-opacity=".3" stroke-width=".8"/></svg>';
@@ -186,6 +188,7 @@
     $('monthPrev').hidden=true;$('monthNext').hidden=true;
     renderYearHeatmap();
   }
+  function syncCalendarYear(){const period=$('csPeriod');if(period){const year=String(state.year);if(![...period.options].some(option=>option.value===year))period.add(new Option(year+'年',year));period.value=year;renderCinemaSummary();}renderYearHeatmap();}
   function renderYearHeatmap() {
     const year=state.year, records=recordMovies(), daily=new Map(), monthly=Array(12).fill(0);
     for(const item of records){
@@ -371,15 +374,15 @@
     $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);
     $('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};
-    $('csPeriod').onchange=renderCinemaSummary;
+    $('csPeriod').onchange=()=>{renderCinemaSummary();renderYearHeatmap();};
     $('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};
     $('annualComparison').onclick=event=>{const button=event.target.closest('[data-calendar-year]');if(button){state.year=Number(button.dataset.calendarYear);state.month=0;renderCalendar();}};
     $('directorWorks').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};
-    $('calendarYearSelect').onchange=()=>{state.year=Number($('calendarYearSelect').value);renderCalendar();};
-    $('calendarYearPrev').onclick=()=>{state.year--;renderCalendar();};
-    $('calendarYearNext').onclick=()=>{state.year++;renderCalendar();};
+    $('calendarYearSelect').onchange=()=>{state.year=Number($('calendarYearSelect').value);syncCalendarYear();};
+    $('calendarYearPrev').onclick=()=>{state.year--;syncCalendarYear();};
+    $('calendarYearNext').onclick=()=>{state.year++;syncCalendarYear();};
     $('calendarMode').onchange=renderCalendar;
     $('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};
     $('yearHeatmap').onclick=event=>{const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padStart(2,'0')+'-';const rows=recordMovies().filter(item=>dateOf(item).startsWith(prefix)).map(enriched);$('calendarFilms').innerHTML=rows.length?'<strong>'+state.year+'年'+(Number(month.dataset.calendarMonth)+1)+'月 · '+rows.length+'本</strong><div class="record-grid">'+rows.map(card).join('')+'</div>':'<span class="hint">この月の鑑賞記録はありません。</span>';$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});}};

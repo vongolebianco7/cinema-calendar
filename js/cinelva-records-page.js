@@ -212,68 +212,34 @@
       };
       const norm=a=>(a%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
       const occupied=[];
-      const outside=[];
-      // Use interior labels only where the complete text rectangle fits.
-      // Small sectors receive leader lines in an independent outer SVG layer.
+      // No leader lines or exterior labels. Only render text that fits inside
+      // its own segment; the complete category/value list remains below.
       for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
+        if(item.fraction<.145)continue;
         const size=4.15;
         const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
         const w=Math.max(measure(name,size),measure(item.value,size))+1.4,h=size*2.5;
         let chosen=null;
-        if(item.fraction>=.145){
-          for(let degree=0;degree<360;degree+=2){
-            const angle=(degree-90)*Math.PI/180;
-            const delta=norm(angle-item.start);
-            if(delta<.08||delta>item.span-.08)continue;
-            for(const radius of [37,39,35,41]){
-              const [x,y]=polar(radius,angle);
-              const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
-              if(corners.some(([px,py])=>{
-                const distance=Math.hypot(px-50,py-50);
-                return distance<29||distance>48;
-              }))continue;
-              if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
-              const score=Math.abs(radius-37)*.1+Math.abs(delta-item.span/2)/Math.max(item.span,.1);
-              if(!chosen||score<chosen.score)chosen={x,y,score};
-            }
+        for(let degree=0;degree<360;degree+=2){
+          const angle=(degree-90)*Math.PI/180;
+          const delta=norm(angle-item.start);
+          if(delta<.08||delta>item.span-.08)continue;
+          for(const radius of [37,39,35,41]){
+            const [x,y]=polar(radius,angle);
+            const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
+            if(corners.some(([px,py])=>{
+              const distance=Math.hypot(px-50,py-50);
+              return distance<29||distance>48;
+            }))continue;
+            if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
+            const score=Math.abs(radius-37)*.1+Math.abs(delta-item.span/2)/Math.max(item.span,.1);
+            if(!chosen||score<chosen.score)chosen={x,y,score};
           }
         }
         if(chosen){
           svgLabel(chosen.x,chosen.y,name,item.value,size);
           occupied.push({...chosen,w,h});
-        }else{
-          outside.push(item);
         }
-      }
-      // A two-column mobile card has no horizontal space for wide callouts.
-      // Keep all callouts inside this donut's own 100x100 SVG viewport.
-      // If the text cannot fit without crossing the ring or other labels,
-      // leave the complete name and value in the legend below instead.
-      const calloutBoxes=[];
-      for(const item of outside){
-        const angle=item.start+item.span/2;
-        const side=Math.cos(angle)>=0?1:-1;
-        const value=item.value;
-        const size=3.25;
-        const label=item.name.length>5?item.name.slice(0,4)+'…':item.name;
-        const width=Math.max(measure(label,size),measure(value,size))+1;
-        const anchorX=side>0?98-width/2:2+width/2;
-        const anchorY=50+Math.sin(angle)*47;
-        const x=anchorX,y=Math.max(9,Math.min(91,anchorY));
-        // Never render labels over another slice, the center, or a neighbor.
-        // Only use the tiny side margins when there is sufficient space.
-        const textEdge=side>0?x-width/2:x+width/2;
-        if(side>0?textEdge<88:textEdge>12)continue;
-        if(calloutBoxes.some(box=>Math.abs(box.y-y)<11&&box.side===side))continue;
-        const [x1,y1]=polar(49,angle);
-        const endX=side>0?textEdge-1:textEdge+1;
-        if(Math.abs(endX-x1)>10||Math.abs(y-y1)>10)continue;
-        const path=document.createElementNS(namespace,'path');
-        path.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+endX.toFixed(2)+' '+y.toFixed(2));
-        path.setAttribute('fill','none');path.setAttribute('stroke','#c8c1b5');
-        path.setAttribute('stroke-width','.4');svg.append(path);
-        svgLabel(x,y,label,value,size);
-        calloutBoxes.push({x,y,side});
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

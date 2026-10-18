@@ -5,16 +5,21 @@ const vm=require('node:vm');
 const source=fs.readFileSync('js/cinelva-quick-rate.js','utf8');
 function setup(existing=[]){
  const nodes=new Map(),writes=[];
+ const node=()=>({value:'',textContent:'',onclick:null,children:[],options:[],
+  style:{setProperty(){}},setAttribute(){},replaceWith(){},addEventListener(){},
+  append(child){this.children.push(child);this.options.push(child);},
+  replaceChildren(){this.children=[];this.options=[];}
+ });
  const element=id=>{
-  if(!nodes.has(id))nodes.set(id,{id,value:'',textContent:'',onclick:null});
+  if(!nodes.has(id))nodes.set(id,{...node(),id});
   return nodes.get(id);
  };
- const dialog={open:false,innerHTML:'',className:'',querySelector:s=>element(s.slice(1)),show(){this.open=true},showModal(){this.open=true},close(){this.open=false}};
+ const dialog={...node(),open:false,innerHTML:'',className:'',querySelector:s=>element(s.slice(1)),show(){this.open=true},showModal(){this.open=true},close(){this.open=false}};
  const document={
   head:{append(){}},body:{append(){}},
   querySelector(){return null},
   querySelectorAll(){return []},
-  createElement(tag){return tag==='dialog'?dialog:{textContent:'',className:''}},
+  createElement(tag){return tag==='dialog'?dialog:node()},
  };
  const Records={all:()=>existing,validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
  const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
@@ -42,7 +47,7 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
  assert.equal(writes[0][0].comment,'また観たい');
  assert.equal(writes[0][1],4.5);
  assert.equal(writes[0][2],'2026-10');
- assert.equal(dialog.open,true);
+ assert.equal(dialog.open,false);
 });
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};

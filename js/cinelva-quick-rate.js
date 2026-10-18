@@ -162,12 +162,14 @@ function attachInlineScore(button, movie) {
  let activePointer=null, activeTouch=null;
  const moveTo=x=>{
   const rect=track.getBoundingClientRect();
-  if(!rect.width)return;
+  if(rect.width<=0)return;
   const fraction=Math.max(0,Math.min(1,(x-rect.left)/rect.width));
-  // Keep visual position continuous while the saved score remains in 0.1 increments.
-  track.style.setProperty('--smooth-progress',(fraction*100).toFixed(3)+'%');
   const score=Math.round(fraction*50)/10;
-  if(Number(input.value)!==score){input.value=String(score);value.textContent=score>0?score.toFixed(1):'未鑑賞';}
+  // Update thumb, native input, and numeric label together on every gesture.
+  track.style.setProperty('--smooth-progress',(fraction*100).toFixed(3)+'%');
+  input.value=score.toFixed(1);
+  value.textContent=score===0?'未鑑賞':score.toFixed(1);
+  value.value=value.textContent;
  };
  const finish=()=>{activePointer=null;activeTouch=null;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));};
  track.addEventListener('pointerdown',e=>{
@@ -451,6 +453,14 @@ style.textContent+=`
  background:#f0c86c!important;pointer-events:none!important;z-index:40!important;
 }
 .cinelva-rating-controls .cinelva-score-track input[type=range]::-webkit-slider-thumb{opacity:0!important;background:transparent!important;box-shadow:none!important}
+`;
+style.textContent+=`
+/* Make the live score visible during drag regardless of watched/saved state. */
+.cinelva-rating-controls .cinelva-inline-value{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ position:relative!important;z-index:45!important;pointer-events:none!important;
+ font-variant-numeric:tabular-nums!important;
+}
 `;
 root.CinelvaQuickRate={open,normalize};
 

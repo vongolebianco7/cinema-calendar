@@ -596,7 +596,7 @@
   async function init() {
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{
-      const essential=/\/data\/directors\.json(?:[?#]|$)/.test(url);
+      const essential=/\/data\/directors(?:-mobile)?\.json(?:[?#]|$)/.test(url);
       for(let attempt=0;attempt<(essential?3:1);attempt++){
         try{
           const response=await fetch(url,{cache:essential?'no-store':'default'});
@@ -613,7 +613,12 @@
       }
       return fallback;
     };
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json?v=20261019-full-catalog',{directors:{}})]);
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
+    // If the compact catalog has not been deployed yet, fall back to the full sourced snapshot.
+    if(!Object.keys(directorData.directors||{}).length){
+      const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});
+      Object.assign(directorData,original);
+    }
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.

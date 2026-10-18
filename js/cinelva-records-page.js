@@ -145,54 +145,60 @@
       donut.style.background='conic-gradient('+stops.join(',')+')';
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','cs-donut-numbers');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');
       const namespace='http://www.w3.org/2000/svg';
-      const outside=[];
-      visible.forEach(([name,n],i)=>{
-        const fraction=n/total,percent=Math.round(fraction*100);
+      const font='"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
+      // Fit labels against actual browser text metrics, not character-count guesses.
+      const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
+      const measure=(value,size)=>{if(!ctx)return [...value].length*size;ctx.font='600 '+size+'px '+font;return ctx.measureText(value).width;};
+      const labelData=visible.map(([name,n],i)=>{
         const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);
-        const angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
-        const x=50+36*Math.cos(angle),y=50+36*Math.sin(angle);
-        const nameText=String(name),valueText=mode==='count'?n+'本':percent+'%';
-        const long=[...nameText].length>(fraction<0.13?3:fraction<0.20?5:7);
-        if(long||fraction<0.075){
-          outside.push({name:nameText,value:valueText,angle,side:Math.cos(angle)>=0?1:-1,y:50+47*Math.sin(angle)});
-          return;
-        }
-        const size=fraction<0.13?4.2:fraction<0.20?4.8:5.5;
-        const label=document.createElementNS(namespace,'text');
-        label.setAttribute('x',x.toFixed(2));label.setAttribute('y',(y-3).toFixed(2));label.setAttribute('text-anchor','middle');
-        label.setAttribute('font-family','"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif');
-        label.setAttribute('font-size',String(size));label.setAttribute('font-weight','500');
-        label.setAttribute('fill','#fff');label.setAttribute('stroke','#252525');label.setAttribute('stroke-width','.2');label.setAttribute('paint-order','stroke');
-        const title=document.createElementNS(namespace,'tspan');title.setAttribute('x',x.toFixed(2));title.textContent=nameText;label.append(title);
-        const number=document.createElementNS(namespace,'tspan');number.setAttribute('x',x.toFixed(2));number.setAttribute('dy',String(size+1));number.textContent=valueText;label.append(number);
-        svg.append(label);
+        const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
+        const value=mode==='count'?n+'本':Math.round(fraction*100)+'%';
+        return {name:String(name),value,fraction,angle,side:Math.cos(angle)>=0?1:-1};
       });
-      // Keep every category name visible. Long and narrow slices use leader lines
-      // and collision-spaced labels instead of dropping their names.
-      svg.setAttribute('viewBox','-42 -12 184 124');
-      svg.style.overflow='visible';
-      for(const side of [-1,1]){
-        const items=outside.filter(item=>item.side===side).sort((a,b)=>a.y-b.y);
-        items.forEach((item,index)=>{item.labelY=Math.max(4,Math.min(96,item.y));if(index)item.labelY=Math.max(item.labelY,items[index-1].labelY+11);});
-        if(items.length&&items[items.length-1].labelY>96){
-          const shift=items[items.length-1].labelY-96;
-          items.forEach(item=>item.labelY-=shift);
+      const makeText=(x,y,size,anchor,name,value)=>{
+        const el=document.createElementNS(namespace,'text');
+        el.setAttribute('x',x);el.setAttribute('y',y);el.setAttribute('text-anchor',anchor);
+        el.setAttribute('font-family',font);el.setAttribute('font-size',size);
+        el.setAttribute('font-weight','600');el.setAttribute('fill','#fff');
+        el.setAttribute('stroke','#161616');el.setAttribute('stroke-width','.35');el.setAttribute('paint-order','stroke');
+        for(const [index,line] of [name,value].entries()){
+          const t=document.createElementNS(namespace,'tspan');t.setAttribute('x',x);
+          if(index)t.setAttribute('dy',size*1.18);t.textContent=line;el.append(t);
         }
+        return el;
+      };
+      // SVG viewBox remains 0..100 so coordinates match the doughnut.
+      // External labels are constrained to the chart itself; the legend is the fallback.
+      const outside=[];
+      labelData.forEach(item=>{
+        const radius=36,size=5.2;
+        const x=50+radius*Math.cos(item.angle),y=50+radius*Math.sin(item.angle);
+        const width=Math.max(measure(item.name,size),measure(item.value,size));
+        const angularRoom=2*Math.PI*item.fraction*radius;
+        const innerFit=item.fraction>=.085 && width<=angularRoom*.87 && width<=23 &&
+          x-width/2>=3 && x+width/2<=97 && y>=12 && y<=87;
+        if(innerFit)svg.append(makeText(x.toFixed(2),(y-size*.35).toFixed(2),size,'middle',item.name,item.value));
+        else outside.push(item);
+      });
+      // Only show callouts when they physically fit; all categories stay in the legend.
+      for(const side of [-1,1]){
+        const items=outside.filter(item=>item.side===side).sort((a,b)=>Math.sin(a.angle)-Math.sin(b.angle));
+        const accepted=[];
         for(const item of items){
-          const x1=50+43*Math.cos(item.angle),y1=50+43*Math.sin(item.angle);
-          const tx=side===1?105:-5;
+          const size=4.8,width=Math.max(measure(item.name,size),measure(item.value,size));
+          const x=side===1?99:1;
+          if(width>25)continue;
+          let y=Math.max(9,Math.min(85,50+46*Math.sin(item.angle)));
+          if(accepted.length)y=Math.max(y,accepted[accepted.length-1]+13);
+          if(y>85)continue;
+          accepted.push(y);
+          const x1=50+44*Math.cos(item.angle),y1=50+44*Math.sin(item.angle);
           const line=document.createElementNS(namespace,'path');
-          line.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+(side===1?100:0)+' '+item.labelY.toFixed(2));
-          line.setAttribute('stroke','#b5b5b5');line.setAttribute('stroke-width','.45');line.setAttribute('fill','none');svg.append(line);
-          const label=document.createElementNS(namespace,'text');
-          label.setAttribute('x',String(tx));label.setAttribute('y',String(item.labelY-1));
-          label.setAttribute('text-anchor',side===1?'start':'end');
-          label.setAttribute('font-family','"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif');
-          label.setAttribute('font-size','4.6');label.setAttribute('font-weight','500');
-          label.setAttribute('fill','#f0f0f0');
-          const nameLine=document.createElementNS(namespace,'tspan');nameLine.setAttribute('x',String(tx));nameLine.textContent=item.name;label.append(nameLine);
-          const valueLine=document.createElementNS(namespace,'tspan');valueLine.setAttribute('x',String(tx));valueLine.setAttribute('dy','5');valueLine.textContent=item.value;label.append(valueLine);
-          svg.append(label);
+          line.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+(side===1?96:4)+' '+y.toFixed(2));
+          line.setAttribute('stroke','#eee');line.setAttribute('stroke-width','.35');line.setAttribute('fill','none');
+          svg.append(line);
+          // Labels remain within SVG bounds, rather than spilling into the next column.
+          svg.append(makeText(x,y-2,size,side===1?'end':'start',item.name,item.value));
         }
       }
       donut.append(svg);layout.append(donut);

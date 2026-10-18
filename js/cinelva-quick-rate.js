@@ -26,7 +26,7 @@ const $=id=>dialog.querySelector('#'+id);
 $('cinelvaRateClose').onclick=()=>dialog.close();
 $('cinelvaRateX').onclick=()=>dialog.close();
 const venueOptions={
- '映画館':['TOHOシネマズ','イオンシネマ','109シネマズ','MOVIX','T・ジョイ','ユナイテッド・シネマ','シネマサンシャイン','109シネマズ','その他の映画館'],
+ '映画館':['通常上映','IMAX','Dolby Cinema','Dolby Atmos','4DX','MX4D','ScreenX','その他の上映方式'],
  '配信':['Netflix','Amazon Prime Video','Disney+','U-NEXT','Hulu','Apple TV+','Lemino','ABEMA','WOWOWオンデマンド','その他の配信'],
  'TV':['地上波','BS','CS','その他のTV'],
  'その他':['DVD・Blu-ray','機内上映','その他']
@@ -34,6 +34,7 @@ const venueOptions={
 function updateVenueOptions(selectedVenue=''){
  const method=$('cinelvaRatePlace').value, row=$('cinelvaRateVenueRow'), venue=$('cinelvaRateVenue');
  row.hidden=!method;
+ row.firstChild.textContent=method==='映画館'?'上映方式':method==='配信'?'配信サービス':method==='TV'?'放送種別':'鑑賞形式';
  venue.replaceChildren();
  const options=['',...(venueOptions[method]||[])];
  if(selectedVenue&&!options.includes(selectedVenue))options.push(selectedVenue);

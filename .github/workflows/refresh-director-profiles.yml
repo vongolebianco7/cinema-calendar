@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - scripts/enrich_directors.py
+      - tests/cinelva-director-render.test.cjs
+      - tests/test_director_enrichment.py
       - .github/workflows/refresh-director-profiles.yml
   schedule:
     - cron: '17 3 * * *'

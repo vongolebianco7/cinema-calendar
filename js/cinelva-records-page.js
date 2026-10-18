@@ -119,6 +119,30 @@
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
     const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#456FAD','#C27B4A','#75A69A','#B65B79','#A89A59','#806AB1','#6597B0','#B4A3A0'],['#418F88','#D09A52','#7C6FB4','#C76F7A','#5D8DB8','#9DAD69','#A87A9F','#B4A187']];
     const countryColor=name=>{const n=String(name).normalize('NFKC').toLowerCase();const rules=[[/日本|japan/,'#c34261'],[/アメリカ|united states|usa/,'#3176c7'],[/韓国|south korea|korea/,'#7252bf'],[/イギリス|united kingdom|uk|britain/,'#31528a'],[/フランス|france/,'#26a39b'],[/イタリア|italy/,'#26844e'],[/ドイツ|germany/,'#d2a137'],[/中国|china/,'#bd6033'],[/インド|india/,'#db8535'],[/スペイン|spain/,'#b65e97']];return rules.find(([re])=>re.test(n))?.[1]||null;};
+    const storageKey='cinelva-donut-value-mode';
+    let donutMode='percent';
+    try{donutMode=localStorage.getItem(storageKey)==='count'?'count':'percent';}catch(_){}
+    const breakdowns=document.querySelector('#summaryView .cs-breakdowns');
+    if(breakdowns){
+      let toolbar=breakdowns.previousElementSibling;
+      if(!toolbar||!toolbar.classList.contains('cs-donut-global-mode')){
+        toolbar=document.createElement('div');
+        toolbar.className='cs-donut-global-mode';
+        breakdowns.before(toolbar);
+      }
+      toolbar.replaceChildren();
+      const label=document.createElement('span');label.textContent='グラフの表示';toolbar.append(label);
+      for(const [value,title] of [['percent','%'],['count','本数']]){
+        const button=document.createElement('button');button.type='button';
+        button.textContent=title;button.setAttribute('aria-pressed',String(donutMode===value));
+        button.onclick=()=>{
+          if(value===donutMode)return;
+          try{localStorage.setItem(storageKey,value);}catch(_){}
+          renderSummary();
+        };
+        toolbar.append(button);
+      }
+    }
     function renderDonut(id,entries,multi=false){
       const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
@@ -129,17 +153,8 @@
       const colors=visible.map(([name],i)=>id==='csCountries'?(countryColor(name)||vivid[i%vivid.length]):id==='csGenres'?vivid[i%vivid.length]:palette[i%palette.length]);
       let cursor=0;
       const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return colors[i]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
-      const storageKey='cinelva-donut-value-mode';
-      let mode='percent';try{mode=localStorage.getItem(storageKey)==='count'?'count':'percent';}catch(_){}
+      const mode=donutMode;
       const layout=document.createElement('div');layout.className='cs-donut-layout';
-      const toggle=document.createElement('div');toggle.className='cs-donut-mode';toggle.style.cssText='display:flex;justify-content:flex-end;gap:5px;margin-bottom:8px';
-      for(const [value,label] of [['percent','%'],['count','本数']]){
-        const button=document.createElement('button');button.type='button';button.textContent=label;
-        button.setAttribute('aria-pressed',String(mode===value));button.style.cssText='font-size:12px;border:1px solid #555;border-radius:7px;padding:5px 10px;background:'+(mode===value?'#b9a077':'#222')+';color:'+(mode===value?'#111':'#ddd');
-        button.onclick=()=>{try{localStorage.setItem(storageKey,value);}catch(_){}renderDonut(id,entries,multi);};
-        toggle.append(button);
-      }
-      layout.append(toggle);
       const donut=document.createElement('div');donut.className='cs-donut';donut.setAttribute('role','img');
       donut.setAttribute('aria-label',visible.map(([name,n])=>name+' '+n+'本').join('、'));
       // Single SVG owns both the colored sectors and their labels.
@@ -197,53 +212,83 @@
       };
       const norm=a=>(a%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
       const occupied=[];
-      // Large sectors keep full labels. Narrow sectors use a shorter name
-      // or the numeric value alone if their arc cannot hold two lines.
+      const outside=[];
+      const callouts=[];
+      // Use interior labels only where the complete text rectangle fits.
+      // Small sectors receive leader lines in an independent outer SVG layer.
       for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
-        if(item.fraction<.07)continue;
-        const narrow=item.fraction<.20;
-        const size=narrow?3.65:4.35;
-        const fullName=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const shortName=item.name==='アドベンチャー'?'冒険':item.name==='ファンタジー'?'幻想':
-          item.name==='サスペンス'?'サスペンス':fullName;
-        const arc=2*Math.PI*37*item.fraction;
-        const name=narrow?shortName:fullName;
-        const twoLines=arc>=Math.max(measure(name,size),measure(item.value,size))+3;
-        const lines=twoLines?[name,item.value]:[item.value];
-        const w=Math.max(...lines.map(line=>measure(line,size)))+1.4;
-        const h=size*(lines.length===2?2.45:1.3);
+        const size=4.15;
+        const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
+        const w=Math.max(measure(name,size),measure(item.value,size))+1.4,h=size*2.5;
         let chosen=null;
-        for(let degree=0;degree<360;degree+=2){
-          const angle=(degree-90)*Math.PI/180;
-          const delta=norm(angle-item.start);
-          if(delta<.07||delta>item.span-.07)continue;
-          for(const radius of [37,39,35,41]){
-            const [x,y]=polar(radius,angle);
-            if(x-w/2<3||x+w/2>97||y-h/2<3||y+h/2>97)continue;
-            // Check the label rectangle against the inner and outer ring.
-            // For narrow slices, also check both horizontal edges.
-            const samples=[[x-w/2,y-h/2],[x+w/2,y-h/2],
-              [x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
-            if(samples.some(([px,py])=>{
-              const distance=Math.hypot(px-50,py-50);
-              return distance<29||distance>48;
-            }))continue;
-            if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&
-              Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
-            const score=Math.abs(radius-37)*.1+
-              Math.abs(delta-item.span/2)/Math.max(item.span,.1);
-            if(!chosen||score<chosen.score)chosen={x,y,score};
+        if(item.fraction>=.145){
+          for(let degree=0;degree<360;degree+=2){
+            const angle=(degree-90)*Math.PI/180;
+            const delta=norm(angle-item.start);
+            if(delta<.08||delta>item.span-.08)continue;
+            for(const radius of [37,39,35,41]){
+              const [x,y]=polar(radius,angle);
+              const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
+              if(corners.some(([px,py])=>{
+                const distance=Math.hypot(px-50,py-50);
+                return distance<29||distance>48;
+              }))continue;
+              if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
+              const score=Math.abs(radius-37)*.1+Math.abs(delta-item.span/2)/Math.max(item.span,.1);
+              if(!chosen||score<chosen.score)chosen={x,y,score};
+            }
           }
         }
         if(chosen){
-          svgLabel(chosen.x,chosen.y,lines[0],lines[1]||'',size);
+          svgLabel(chosen.x,chosen.y,name,item.value,size);
           occupied.push({...chosen,w,h});
+        }else{
+          outside.push(item);
         }
+      }
+      // The callout layer is larger than the ring and is not clipped by it.
+      // Two columns of callouts, spaced vertically to avoid collisions.
+      if(outside.length){
+        const calloutSvg=document.createElementNS(namespace,'svg');
+        calloutSvg.setAttribute('class','cs-donut-callouts');
+        calloutSvg.setAttribute('viewBox','-30 -12 160 124');
+        calloutSvg.setAttribute('aria-hidden','true');
+        for(const side of [-1,1]){
+          const group=outside.filter(item=>Math.cos(item.start+item.span/2)*side>=0)
+            .sort((a,b)=>Math.sin(a.start+a.span/2)-Math.sin(b.start+b.span/2));
+          const count=group.length;
+          group.forEach((item,i)=>{
+            const angle=item.start+item.span/2;
+            const [x1,y1]=polar(49,angle);
+            const [x2,y2]=polar(54,angle);
+            const targetY=Math.max(7,Math.min(93,50+Math.sin(angle)*53));
+            const spacedY=Math.max(7,Math.min(93,targetY+(i-(count-1)/2)*Math.max(0,9-count*1.2)));
+            const endX=side>0?113:-13;
+            const path=document.createElementNS(namespace,'path');
+            path.setAttribute('d','M '+x1.toFixed(2)+' '+y1.toFixed(2)+' L '+x2.toFixed(2)+' '+y2.toFixed(2)+' L '+endX+' '+spacedY.toFixed(2));
+            path.setAttribute('fill','none');path.setAttribute('stroke','#b8b0a4');
+            path.setAttribute('stroke-width','.45');calloutSvg.append(path);
+            const text=document.createElementNS(namespace,'text');
+            text.setAttribute('x',String(endX+(side>0?2:-2)));
+            text.setAttribute('y',String(spacedY-1));
+            text.setAttribute('text-anchor',side>0?'start':'end');
+            text.setAttribute('font-family',font);text.setAttribute('font-size','3.8');
+            text.setAttribute('font-weight','500');text.setAttribute('fill','#f0ede8');
+            [item.name,item.value].forEach((line,j)=>{
+              const t=document.createElementNS(namespace,'tspan');
+              t.setAttribute('x',String(endX+(side>0?2:-2)));
+              if(j)t.setAttribute('dy','4.5');
+              t.textContent=line;text.append(t);
+            });
+            calloutSvg.append(text);
+          });
+        }
+        callouts.push(calloutSvg);
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
       donut.append(center);
-      donut.append(svg);layout.append(donut);
+      donut.append(svg);layout.append(donut);callouts.forEach(layer=>layout.append(layer));
       const legend=document.createElement('div');legend.className='cs-donut-legend';
       visible.forEach(([name,n],i)=>{
         const row=document.createElement('div');row.className='cs-donut-legend-row';

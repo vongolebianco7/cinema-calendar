@@ -101,74 +101,40 @@
 #summaryView .cs-breakdowns{gap:0}
 }
 
-/* Twelve-month viewing calendar: quiet cinematic dot grid */
-#calendarView .cinelva-annual-calendar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 18px;overflow:visible}
-#calendarView .cy-month{min-width:0}
-#calendarView .cy-month-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 0 10px;margin:0 0 8px;border:0;border-bottom:1px solid #383838;background:transparent;color:#f0efec;cursor:pointer;text-align:left;font-size:14px}
-#calendarView .cy-month-count{font-size:11px;color:#aaa;white-space:nowrap}
-#calendarView .cy-rank{font-size:9px;letter-spacing:.06em;font-weight:600;margin-left:3px}
-#calendarView .cy-rank.gold{color:#d9bd7f}
-#calendarView .cy-rank.silver{color:#b8c3cc}
-#calendarView .cy-dots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
-#calendarView .cy-day,#calendarView .cy-empty{display:block;width:100%;aspect-ratio:1;border-radius:50%;border:0;background:#303030;min-width:0;padding:0}
-#calendarView .cy-empty{background:transparent}
-#calendarView .cy-day.watched{background:rgba(217,189,127,var(--cy-intensity));box-shadow:0 0 0 1px #d9bd7f33}
-#calendarView .cy-day{cursor:pointer}
-#calendarView .cy-day:focus-visible,#calendarView .cy-month-head:focus-visible{outline:2px solid #d9bd7f;outline-offset:3px}
-@media(max-width:700px){#calendarView .cinelva-annual-calendar{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}#calendarView .cy-dots{gap:4px}}
-
-/* Full viewing history, one week per row */
-#calendarView .cw-mode-label{font-size:12px;color:#a8a8a8;display:flex;align-items:center;gap:8px}
+/* Viewing calendar: single authoritative layout (no legacy heatgrid rules). */
+#calendarView .panel{background:#111;color:#f2f2f2}
+#calendarView .panel h2,#calendarView .section-head h2{font-family:system-ui,-apple-system,"Hiragino Sans",sans-serif;font-size:20px;font-weight:500;color:#f2f2f2}
+#calendarView .cw-mode-label{display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa}
 #calendarView #calendarMode{background:#151515;color:#eee;border:1px solid #353535;border-radius:6px;padding:8px}
 #calendarView .cw-history{display:grid;gap:5px;max-height:640px;overflow-y:auto;overscroll-behavior:contain}
 #calendarView .cw-week{display:grid;grid-template-columns:60px repeat(7,minmax(0,1fr));gap:5px;align-items:stretch}
-#calendarView .cw-weekdays{position:sticky;top:0;z-index:2;background:#171717;text-align:center;color:#a5a5a5;font-size:11px;padding:7px 0}
+#calendarView .cw-weekdays{position:sticky;top:0;z-index:2;background:#171717;text-align:center;color:#aaa;font-size:11px;padding:7px 0}
 #calendarView .cw-week-label{align-self:center;font-size:11px;color:#999}
-#calendarView .cw-day{min-width:0;min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#25292d;border:1px solid transparent;border-radius:5px;color:#d8d8d8;cursor:pointer}
+#calendarView .cw-day{min-width:0;min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#25292d;border:1px solid transparent;border-radius:5px;color:#ddd}
 #calendarView .cw-day.has-film{background:#314b60;border-color:#57728b}
 #calendarView .cw-day[data-level="2"]{background:#42637c}
 #calendarView .cw-day[data-level="3"],#calendarView .cw-day[data-level="4"]{background:#577b96}
-#calendarView .cw-day:focus-visible{outline:2px solid #d9bd7f}
 #calendarView .cw-date{font-size:9px;opacity:.7}
 #calendarView .cw-value{font-size:12px;font-weight:600;white-space:nowrap}
-#calendarView .cy-day.watched{background:rgba(108,147,177,var(--cy-intensity));box-shadow:none}
-#calendarView .cy-month:has(.cy-rank.gold) .cy-day.watched{background:rgba(217,189,127,var(--cy-intensity))}
-#calendarView .cy-day{border-radius:3px}
-#calendarView .cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr))}
+#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;gap:24px 18px;padding:0;overflow:visible}
+#calendarView #yearHeatmap>.cy-month{min-width:0;max-width:100%;margin:0;padding:0}
+#calendarView .cy-month-head{width:100%;min-height:30px;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 0 6px;margin:0 0 10px;border:0;border-bottom:1px solid #383838;background:transparent;color:#f0efec;text-align:left;font-size:14px}
+#calendarView .cy-month-count{font-size:11px;color:#aaa;white-space:nowrap}
+#calendarView #yearHeatmap .cy-dots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,auto));grid-auto-flow:row;gap:3px;width:100%;overflow:hidden}
+#calendarView #yearHeatmap .cy-dots>.cy-day,#calendarView #yearHeatmap .cy-dots>.cy-empty{display:block;width:100%;min-width:0;max-width:100%;height:auto;aspect-ratio:1;border:0;border-radius:3px;margin:0;padding:0;box-shadow:none}
+#calendarView #yearHeatmap .cy-dots>.cy-empty{background:transparent}
+#calendarView #yearHeatmap .cy-dots>.cy-day{background:#303030}
+#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#a18a5b}
+#calendarView .cy-day:focus-visible,#calendarView .cy-month-head:focus-visible,#calendarView .cw-day:focus-visible{outline:2px solid #d9bd7f;outline-offset:2px}
 @media(max-width:650px){
 #calendarView .cw-week{grid-template-columns:35px repeat(7,minmax(0,1fr));gap:3px}
 #calendarView .cw-day{min-height:41px;gap:3px}
 #calendarView .cw-date{font-size:8px}
-#calendarView .cw-value{font-size:9px}
-#calendarView .cw-week-label{font-size:9px}
-#calendarView .cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px}
-#calendarView .cy-dots{gap:2px}
+#calendarView .cw-value,#calendarView .cw-week-label{font-size:9px}
+#calendarView #yearHeatmap.cinelva-annual-calendar{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
 #calendarView .cy-month-head{font-size:12px}
-#calendarView .cy-month-count{font-size:9px}
+#calendarView .cy-month-count{font-size:10px}
 }
-
-/* Explicitly override legacy .heatgrid and light theme in the annual calendar. */
-#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-rows:none!important;grid-auto-flow:row!important;grid-auto-columns:auto!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px 14px!important;overflow:visible!important;padding:0!important;width:100%!important}
-#calendarView #yearHeatmap .cy-month{min-width:0!important;width:auto!important;max-width:100%!important;overflow:hidden}
-#calendarView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-auto-flow:row!important;grid-template-rows:none!important;gap:4px!important;width:100%!important}
-#calendarView #yearHeatmap .cy-day,#calendarView #yearHeatmap .cy-empty{width:100%!important;min-width:0!important;max-width:100%!important;aspect-ratio:1!important;height:auto!important;border-radius:3px!important}
-#calendarView #yearHeatmap .cy-month-head{color:#f2f2f2!important}
-#calendarView #yearHeatmap .cy-month-count{color:#aaa!important}
-#calendarView .panel h2,#calendarView .section-head h2{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans",sans-serif!important;color:#f2f2f2!important;font-size:20px!important;font-weight:500!important}
-#calendarView .panel{background:#111!important;color:#f2f2f2!important}
-#calendarView .cw-history{color:#f2f2f2}
-@media(max-width:650px){#calendarView #yearHeatmap.cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 8px!important}#calendarView #yearHeatmap .cy-dots{gap:2px!important}}
-
-/* Calendar layout isolation: legacy .heatgrid must never size nested month cells. */
-#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:none!important;grid-auto-rows:auto!important;grid-auto-flow:row!important;align-items:start!important;overflow:visible!important;min-height:0!important;height:auto!important;gap:22px 12px!important}
-#calendarView #yearHeatmap.cinelva-annual-calendar>.cy-month{display:block!important;position:relative!important;grid-column:auto!important;grid-row:auto!important;align-self:start!important;min-width:0!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;margin:0!important;padding:0!important}
-#calendarView #yearHeatmap .cy-month-head{position:relative!important;display:flex!important;width:100%!important;margin:0 0 10px!important;padding:0 0 6px!important;height:auto!important;min-height:30px!important;line-height:1.4!important;white-space:nowrap!important}
-#calendarView #yearHeatmap .cy-dots{display:grid!important;position:relative!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-template-rows:repeat(6,minmax(0,auto))!important;grid-auto-columns:auto!important;grid-auto-rows:auto!important;grid-auto-flow:row!important;align-items:start!important;justify-items:stretch!important;gap:3px!important;width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important}
-#calendarView #yearHeatmap .cy-dots>.cy-day,#calendarView #yearHeatmap .cy-dots>.cy-empty{position:relative!important;display:block!important;float:none!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1/1!important;margin:0!important;padding:0!important;border:0!important;border-radius:3px!important;box-shadow:none!important}
-#calendarView #yearHeatmap .cy-dots>.cy-empty{background:transparent!important}
-#calendarView #yearHeatmap .cy-dots>.cy-day{background:#303030!important}
-#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#a18a5b!important}
-@media(min-width:760px){#calendarView #yearHeatmap.cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px 20px!important}}
 </style>
 </head>
 <body>

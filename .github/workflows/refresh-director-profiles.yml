@@ -1,6 +1,8 @@
 name: Refresh director profiles and credits
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
   pull_request:
     paths:
       - scripts/enrich_directors.py
@@ -12,7 +14,7 @@ concurrency:
 jobs:
   refresh:
     # One finite repair batch on our own branch. Never expose secrets to forks.
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'fix/director-data-completion-20261018' || github.head_ref == 'fix/director-missing-catalog-20261019'))
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'fix/director-data-completion-20261018' || github.head_ref == 'fix/director-missing-catalog-20261019'))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -62,9 +64,9 @@ jobs:
       - name: Validate the refreshed snapshot before storing it
         run: python scripts/quality_gate.py
       - name: Store only the reviewed director snapshot on the work branch
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'schedule'
         env:
-          WORK_BRANCH: ${{ github.head_ref }}
+          WORK_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

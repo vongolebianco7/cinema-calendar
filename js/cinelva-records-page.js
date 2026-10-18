@@ -384,8 +384,8 @@
         if(match)return Number(match[0]);
       }
       const title=String(movie.original_title||movie.originalTitle||movie.title||movie.name||'').normalize('NFKC').trim();
-      const director=String(movie.director||'').toLowerCase();
-      if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)))return 1971;
+      const director=String(movie.director||movie.director_name||'').toLowerCase();
+      if((title==='激突！'||title==='激突!'||title==='Duel'||title==='Duel (1971)')&&(/spielberg/.test(director)||/スピルバーグ/.test(director)||directorKey(group.name)===directorKey('Steven Spielberg')))return 1971;
       return null;
     };
     const filmTile=(movie,watched)=>{

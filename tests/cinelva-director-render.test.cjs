@@ -100,3 +100,13 @@ test('zero-score films do not expose a director under the current reviewed-only 
   assert.equal(row, undefined);
   assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
 });
+
+test('a reviewed director includes every watched feature in progress', () => {
+  const reviewed = { id: 20, title: 'レビュー済み', director: 'Other Director', year: 2020, runtime: 120, rating: 4 };
+  const unrated = { id: 21, title: '鑑賞済み評価なし', director: 'Other Director', year: 2021, runtime: 120, rating: 0 };
+  const unseen = { id: 22, title: '未鑑賞', director: 'Other Director', year: 2022, runtime: 120 };
+  const { row, detail } = render({ records: [reviewed, unrated], works: [reviewed, unrated, unseen], name: 'Other Director' });
+  assert.match(row.innerHTML, /<strong>2\/3本<\/strong>/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /2 \/ 3本 鑑賞済み/);
+});

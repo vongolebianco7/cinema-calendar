@@ -20,6 +20,7 @@ commands=[['node','--check','js/cinelva-records-page.js'],['node','--check','js/
 active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('cinelva-*.test.cjs'))
 run(['node','--test',*active_node_tests])
 run(['python','-m','unittest','tests.test_external_data_registry'])
+run(['python','-m','unittest','tests.test_director_enrichment'])
 for cmd in commands:
  if cmd[:2]==['node','--test'] and all(path in active_node_tests for path in cmd[2:]): continue
  if any('ocean-' in token or 'ocean_' in token or token.startswith('test_ocean') for token in cmd): continue

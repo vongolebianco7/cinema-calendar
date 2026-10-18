@@ -337,18 +337,14 @@ for m in events:
  key=str(did)
  if key in directors: continue
  try:
-  credits=get(f"/person/{did}/movie_credits")
+  profile=get(f"/person/{did}",{"append_to_response":"movie_credits"})
  except Exception:
   continue
- seen_ids=set(); works=[]
- for w in credits.get("crew",[]):
-  if w.get("job")!="Director" or not w.get("id") or w.get("id") in seen_ids: continue
-  rd=w.get("release_date") or ""
-  if not rd or rd[:10] >= str(today): continue
-  seen_ids.add(w["id"])
-  works.append({"id":w["id"],"title":w.get("title") or w.get("original_title"),"year":rd[:4],"date":rd[:10],"poster":("https://image.tmdb.org/t/p/w342"+w["poster_path"]) if w.get("poster_path") else None,"score":w.get("vote_average",0),"votes":w.get("vote_count",0),"tmdb":"https://www.themoviedb.org/movie/"+str(w["id"])})
- works.sort(key=lambda x:x.get("date",""),reverse=True)
- directors[key]={"id":did,"name":m.get("director"),"works":works[:30]}
+ from enrich_directors import enrich_director, existing_name_aliases
+ try:
+  directors[key]=enrich_director({"id":did,"name":m.get("director")},profile,str(today),existing_name_aliases())
+ except ValueError:
+  continue
 with open("data/directors.json","w",encoding="utf-8") as fh:
  json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"directors":directors},fh,ensure_ascii=False,indent=2)
 

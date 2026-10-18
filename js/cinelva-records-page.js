@@ -318,7 +318,7 @@
       for(const d of Object.values(state.directors||{})){
         const ja=d.nameJa||d.name_ja||d.japanese_name||directorJapaneseNames.get(String(d.name||'').toLowerCase())||d.name;
         if(!ja)continue;
-        for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name]){
+        for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name,d.original_name,...(d.also_known_as||[])]){
           if(alias)directorAliases.set(normalizeName(alias),ja);
         }
       }
@@ -354,7 +354,7 @@
     const knownDirectors=Object.values(state.directors||{});
     const canonical=name=>normalizeName(directorJapanese(name)).replace(/[・･.．\s\u3000]/g,'').replace(/ヴ/g,'ブ').replace(/ィ/g,'イ').replace(/ェ/g,'エ').replace(/ー/g,'');
     const knownByName=new Map();
-    for(const d of knownDirectors)for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name]){
+    for(const d of knownDirectors)for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name,d.original_name,...(d.also_known_as||[])]){
       if(alias)knownByName.set(canonical(alias),d);
     }
     const movieById=new Map(state.movies.map(movie=>[String(movie.id),movie]));
@@ -366,6 +366,11 @@
       if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
+    }
+    // Reviews determine which directors appear; every watched film counts for those directors.
+    for(const record of recordMovies()){
+      const movie=enriched(record),group=groups.get(directorKey(movie.director));
+      if(group&&!group.ids.has(String(movie.id))){group.ids.add(String(movie.id));group.records.push(movie);}
     }
     const host=$('directorTimeline'),works=$('directorWorks');
     host.replaceChildren();works.replaceChildren();
@@ -411,10 +416,11 @@
       const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';
       const photoUrl=profileImage.startsWith('/')?'https://image.tmdb.org/t/p/w185'+profileImage:profileImage;
       const safePhoto=/^https:\/\//.test(photoUrl)?photoUrl:'';
-      const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||director?.biography||''].filter(Boolean);
+      const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||''].filter(Boolean);
+      const sourceUrl=/^https:\/\/www\.themoviedb\.org\/person\/\d+$/.test(director?.source_url||'')?director.source_url:'';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+watchedCount+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
         '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)),group.name)).join('')+'</div>'+
-        '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。※全フィルモグラフィーを保証する数字ではありません。</p>';
+        '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。'+(director?.coverage?.truncated===false?'TMDBの監督クレジットから収録（本数による切り捨てなし）。':'※全フィルモグラフィーを保証する数字ではありません。')+(sourceUrl?' <a href="'+escapeHTML(sourceUrl)+'" target="_blank" rel="noopener noreferrer">監督の出典情報</a>':'')+'</p>';
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };

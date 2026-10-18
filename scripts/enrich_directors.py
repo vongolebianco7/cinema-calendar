@@ -1,0 +1,133 @@
+"""Refresh the existing director snapshot from the approved TMDB API only.
+
+One request per director, no scraping, no generated names or biographies.
+Failures preserve the previous director entry. Credits are never capped at 30.
+"""
+import argparse
+import concurrent.futures
+import datetime
+import json
+import os
+from pathlib import Path
+import re
+import threading
+import time
+import urllib.parse
+import urllib.request
+
+ROOT = Path(__file__).resolve().parents[1]
+JAPANESE = re.compile(r'[\u3040-\u30ff\u3400-\u9fff]')
+EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
+
+
+def enrich_director(old, profile, today, aliases=None):
+    if str(profile.get('id')) != str(old.get('id')) or not isinstance(profile.get('movie_credits', {}).get('crew'), list):
+        raise ValueError('Missing or mismatched TMDB person/directing credits')
+    aliases = aliases or {}
+    candidates = [profile.get('name'), *profile.get('also_known_as', []), old.get('nameJa'), old.get('name_ja'), old.get('name')]
+    candidates += [aliases.get(str(name).lower()) for name in candidates if name]
+    japanese = next((name.strip() for name in candidates if isinstance(name, str) and JAPANESE.search(name)), '')
+    name = japanese or old.get('name') or profile.get('name') or ''
+    previous = {str(work.get('id')): work for work in old.get('works', [])}
+    works = {}
+    for credit in profile['movie_credits']['crew']:
+        if credit.get('job') != 'Director' or not isinstance(credit.get('id'), int):
+            continue
+        work = {**previous.get(str(credit['id']), {}), **credit}
+        title = work.get('title') or work.get('original_title') or ''
+        if EXCLUDED.search(title + ' ' + (work.get('original_title') or '')):
+            continue
+        runtime = work.get('runtime') or work.get('duration')
+        if isinstance(runtime, (int, float)) and 0 < runtime < 60:
+            continue
+        if work.get('media_type') in ('tv', 'episode') or work.get('is_short') is True:
+            continue
+        date = work.get('release_date') or work.get('date') or ''
+        if date and date > today:
+            continue
+        poster_path = work.get('poster_path')
+        works[str(credit['id'])] = {**work, 'title': title, 'year': date[:4] or work.get('year'), 'date': date,
+            'director': name, 'director_id': profile['id'], 'job': 'Director', 'is_director': True,
+            'poster': 'https://image.tmdb.org/t/p/w342' + poster_path if poster_path else work.get('poster'),
+            'source': 'tmdb', 'source_url': f"https://www.themoviedb.org/movie/{credit['id']}"}
+    biography = profile.get('biography') or ''
+    return {**old, 'id': profile['id'], 'name': name, 'nameJa': japanese,
+        'original_name': profile.get('name') or old.get('name'),
+        'also_known_as': list(dict.fromkeys(filter(None, [old.get('name'), *profile.get('also_known_as', [])]))),
+        'name_status': 'japanese' if japanese else 'japanese_unavailable',
+        'profile_path': profile.get('profile_path'), 'birthday': profile.get('birthday'),
+        'deathday': profile.get('deathday'), 'place_of_birth': profile.get('place_of_birth'),
+        'biography_ja': biography if JAPANESE.search(biography) else '',
+        'source_url': f"https://www.themoviedb.org/person/{profile['id']}",
+        'credits_source_url': f"https://api.themoviedb.org/3/person/{profile['id']}/movie_credits",
+        'checked_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'works': sorted(works.values(), key=lambda work: (work.get('date') or '', work['id']), reverse=True),
+        'coverage': {'source': 'tmdb_director_movie_credits', 'truncated': False,
+                     'runtime_unverified': sum(not work.get('runtime') for work in works.values())}}
+
+
+def existing_name_aliases():
+    source = (ROOT / 'js/cinelva-records-page.js').read_text()
+    pairs = json.loads(re.search(r'directorJapaneseNames = new Map\((\[.*?\])\);', source, re.S)[1])
+    extra = json.loads(re.search(r'for\(const \[en,ja\] of Object.entries\((\{.*?\})\)\)', source, re.S)[1])
+    return {**dict(pairs), **extra}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--limit', type=int, default=800)
+    args = parser.parse_args()
+    key = os.environ.get('TMDB_API_KEY')
+    if not key:
+        raise SystemExit('TMDB_API_KEY is required; previous snapshot preserved')
+    path = ROOT / 'data/directors.json'
+    snapshot = json.loads(path.read_text())
+    directors = snapshot['directors']
+    names = existing_name_aliases()
+    today = datetime.date.today().isoformat()
+    pending = list(directors.items())[:max(0, min(args.limit, 800))]
+    lock = threading.Lock()
+    last_request = [0.0]
+
+    def refresh(item):
+        identifier, old = item
+        with lock:
+            time.sleep(max(0, .35 - (time.monotonic() - last_request[0])))
+            last_request[0] = time.monotonic()
+        query = urllib.parse.urlencode({'api_key': key, 'language': 'ja-JP', 'append_to_response': 'movie_credits'})
+        try:
+            request = urllib.request.Request(f'https://api.themoviedb.org/3/person/{int(identifier)}?{query}', headers={'Accept': 'application/json'})
+            with urllib.request.urlopen(request, timeout=25) as response:
+                profile = json.load(response)
+            return identifier, enrich_director(old, profile, today, names), None
+        except Exception as error:
+            # Do not print exception URLs: they may contain the API key.
+            return identifier, old, type(error).__name__
+
+    failures = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for identifier, director, error in pool.map(refresh, pending):
+            if error:
+                failures.append({'id': identifier, 'error': error})
+            else:
+                directors[identifier] = director
+    snapshot['generated_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    temporary = path.with_suffix('.tmp')
+    temporary.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n')
+    temporary.replace(path)
+    report = {'attempted': len(pending), 'refreshed': len(pending) - len(failures), 'failures': failures,
+        'japanese_unavailable': [{'id': key, 'name': value.get('name')} for key, value in directors.items() if value.get('name_status') == 'japanese_unavailable'],
+        'unrefreshed': [key for key, value in directors.items() if not value.get('checked_at')],
+        'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
+        'japanese_biographies': sum(bool(value.get('biography_ja')) for value in directors.values())}
+    report_path = ROOT / 'artifacts/director-enrichment.json'
+    report_path.parent.mkdir(exist_ok=True)
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+    print(json.dumps({key: value for key, value in report.items() if key not in ('japanese_unavailable', 'failures', 'unrefreshed')}, ensure_ascii=False))
+    print('Missing Japanese names:', len(report['japanese_unavailable']), 'Failed:', len(failures))
+    if failures:
+        raise SystemExit(1)
+
+
+if __name__ == '__main__':
+    main()

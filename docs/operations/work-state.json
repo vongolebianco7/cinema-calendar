@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:15:15+09:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-18T20:17:33+09:00",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "df18d1e6eacc9ee7dd3fc006993aaba155401491",
+  "base_sha": "ab24c7aaa1257e8234302508bb014b9600887ddd",
   "branch": "test/active-cinelva-baseline-20261018",
-  "head_sha": "df18d1e6eacc9ee7dd3fc006993aaba155401491",
-  "pull_request": null,
+  "head_sha": "f1f1dc946769d2383250db553350001a27cd0328",
+  "pull_request": {
+    "number": 383,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/383",
+    "branch": "test/active-cinelva-baseline-20261018"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -442,10 +446,10 @@
     {
       "id": "P0-ACTIVE-NODE-BASELINE",
       "title": "Reconcile stale tests and automatically gate the full active CINELVA unit suite",
-      "status": "in_progress",
+      "status": "pr_created",
       "issue": 239,
       "acceptance": "Discover every cinelva-*.test.cjs file, fail on a newly introduced regression, keep current review behavior assertions, and exclude obsolete Atlas expectations and retired Ocean feature tests.",
-      "ci": "Initial full audit:26files112tests108pass4fail, classified as one obsolete Atlas expectation plus three stale review DOM stub errors. After reconciliation and #381 integration:26files111/111 pass, shared quality gate passed. Intentional new probe was detected as a gate failure; probe removed and clean suite rerun succeeded. GitHub PR checks pending."
+      "ci": "After reconciling PR #382 reviewed-only director visibility, 26files112/112 tests and full shared gate pass. Unknown-year Duel test now uses a reviewed record, and a new regression protects hiding catalog-only directors. Focused review passed before this test-only reconciliation; latest PR Actions required."
     }
   ],
   "verification": [
@@ -713,6 +717,11 @@
       "command": "Full active Node baseline and quality-gate discovery probe",
       "result": "passed_on_work_branch",
       "details": "26files111/111 tests passed after integrating #381. An intentional new active test with CINELVA_GATE_PROBE made quality_gate fail, proving future tests are discovered. Removed the probe and reran the full gate successfully. No product code changed by this baseline repair."
+    },
+    {
+      "command": "Latest main #382 integration + python scripts/quality_gate.py",
+      "result": "passed_on_work_branch",
+      "details": "26files112/112 Node tests passed. The prior Duel fixture expected a catalog-only director to be shown; it was updated to a reviewed film after #382 intentionally hid unreviewed directors. New test verifies catalog-only directors remain hidden. No product behavior reverted."
     }
   ],
   "deployment": {
@@ -733,6 +742,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Find/open PR for test/active-cinelva-baseline-20261018; require all Actions green and focused review, merge then refresh main. Vercel still limits release: do not retry until independent evidence it cleared. Next release verification must test canonical production SHA, core review/backup flows and 390px layouts; real-device Safari remains unverified.",
+  "next_action": "Inspect latest PR #383 head after main #382 reconciliation. Require all Actions green, then merge and refresh main; preserve direct-review, date-precision, filtered director counts and reviewed-only director visibility. Vercel release remains rate-limited; do not claim latest production verification.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

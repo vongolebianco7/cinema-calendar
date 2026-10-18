@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T20:51:00+09:00",
-  "status": "pr_created",
+  "updated_at": "2026-10-18T21:18:14+09:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "a4d2b04f3ebea110d1c3b65514e3a217d3d30c08",
-  "branch": "fix/undated-review-five-film-medals",
-  "head_sha": "08ab1c8d1cc532bf9d59db1f24a1d83acaa272b4",
+  "base_sha": "610b2966ea5307943721679d13e3e9021e6b4258",
+  "branch": "fix/director-data-completion-20261018",
+  "head_sha": "21eda94383e70336b36e6b83be114afe6373caaf",
   "pull_request": {
-    "number": 385,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/385",
-    "branch": "fix/undated-review-five-film-medals"
+    "number": 389,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/389",
+    "branch": "fix/director-data-completion-20261018"
   },
   "work_items": [
     {
@@ -463,6 +463,12 @@
       "status": "pr_created",
       "acceptance": "New rating/comment alone saves null date; explicit dates and existing precision survive; GOLD starts at5films/month; preserve #386 search normalization and reviewed-only directors.",
       "ci": "Original08ab1c8d16/16check-runs passed after one WebKit internal-error retry. Concurrent main#386 caused merge conflicts; resolved retaining both changes. New commit requires fresh CI. Local28activefiles121/121, Python121/121, sharedgate pass; focused review ready."
+    },
+    {
+      "id": "MY-DIRECTOR-COMPLETE",
+      "title": "Sourced director names, uncapped credits, profiles, accurate watched progress",
+      "status": "in_progress",
+      "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge."
     }
   ],
   "verification": [
@@ -744,6 +750,11 @@
     {
       "check": "2026-10-18 cross-thread acceptance audit",
       "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
+    },
+    {
+      "command": "TMDB director refresh Actions39125924187; local python scripts/quality_gate.py and tests.test_director_enrichment",
+      "result": "data_refreshed_and_locally_verified",
+      "details": "788/788 profile+credits requests succeeded;9086 works;524 profile photos;74 Japanese biographies.200 names absent in TMDB Japanese fields use explicit curated kana transliteration with original retained, not fabricated official name/kanji. Unit tests cover profile/source/aliases, all snapshot primary labels, credit roles and no truncation, progress count. Snapshot compacted by removing unused overview/transport fields,13,316,683 to7,559,747bytes, same9086works. Follow-up workflow skips same-day fetched directors, so no repeat788requests. Final CI pending after normalized snapshot is stored."
     }
   ],
   "deployment": {
@@ -764,6 +775,6 @@
   "blockers": [
     "Vercel preview/build quota remains rate-limited on new PR heads. Continue development and do not retry deployment until independently clear."
   ],
-  "next_action": "Inspect required CI on PR#385 reconciled head, fix failures and merge only when green. Refresh main; continue ready source acceptance gaps. Independently confirmVercelcapcleared before onebatchrelease and canonicalproduction smoke; actualSafari and5–10user tests remain unverified.",
+  "next_action": "Inspect PR#389 current head and finite director refresh job; it normalizes already-fetched data without repeating requests, stores snapshot. Then validate exact final data head with all required Actions and Chromium/WebKit, merge only green. Keep original-name/transliteration distinctions. Check Vercelcap independently before one verified production release; current source merge is not production proof.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

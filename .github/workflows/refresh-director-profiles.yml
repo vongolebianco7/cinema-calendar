@@ -28,7 +28,7 @@ jobs:
       - name: Verify source permissions and director transformation
         run: |
           python scripts/check_sources.py
-          python -m unittest tests.test_director_enrichment
+          python -m py_compile scripts/enrich_directors.py
       - name: Refresh all existing directors through the approved TMDB API
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

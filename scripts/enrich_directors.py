@@ -6,6 +6,7 @@ Failures preserve the previous director entry. Credits are never capped at 30.
 import argparse
 import concurrent.futures
 import datetime
+from functools import lru_cache
 import json
 import os
 from pathlib import Path
@@ -20,13 +21,35 @@ JAPANESE = re.compile(r'[\u3040-\u30ff\u3400-\u9fff]')
 EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
 
 
+@lru_cache(maxsize=1)
+def name_readings():
+    path = ROOT / 'data/director_name_readings.json'
+    return json.loads(path.read_text())['directors'] if path.exists() else {}
+
+
+def compact_work(work):
+    work = dict(work)
+    work['score'] = work.get('vote_average', work.get('score', 0))
+    work['votes'] = work.get('vote_count', work.get('votes', 0))
+    for field in ('overview', 'popularity', 'credit_id', 'adult', 'video', 'original_language',
+                  'vote_average', 'vote_count', 'poster_path', 'backdrop_path', 'release_date'):
+        work.pop(field, None)
+    return work
+
+
 def enrich_director(old, profile, today, aliases=None):
     if str(profile.get('id')) != str(old.get('id')) or not isinstance(profile.get('movie_credits', {}).get('crew'), list):
         raise ValueError('Missing or mismatched TMDB person/directing credits')
     aliases = aliases or {}
-    candidates = [profile.get('name'), *profile.get('also_known_as', []), old.get('nameJa'), old.get('name_ja'), old.get('name')]
+    old_names = [] if old.get('name_status') == 'transliterated' else [old.get('nameJa'), old.get('name_ja'), old.get('name')]
+    candidates = [profile.get('name'), *profile.get('also_known_as', []), *old_names]
     candidates += [aliases.get(str(name).lower()) for name in candidates if name]
     japanese = next((name.strip() for name in candidates if isinstance(name, str) and JAPANESE.search(name)), '')
+    reading = name_readings().get(str(profile['id']))
+    transliterated = False
+    if not japanese and reading and reading['original_name'] in [old.get('name'), old.get('original_name'), profile.get('name'), *profile.get('also_known_as', [])]:
+        japanese = reading['nameJa']
+        transliterated = True
     name = japanese or old.get('name') or profile.get('name') or ''
     previous = {str(work.get('id')): work for work in old.get('works', [])}
     works = {}
@@ -46,6 +69,7 @@ def enrich_director(old, profile, today, aliases=None):
         if date and date > today:
             continue
         poster_path = work.get('poster_path')
+        work = compact_work(work)
         works[str(credit['id'])] = {**work, 'title': title, 'year': date[:4] or work.get('year'), 'date': date,
             'director': name, 'director_id': profile['id'], 'job': 'Director', 'is_director': True,
             'poster': 'https://image.tmdb.org/t/p/w342' + poster_path if poster_path else work.get('poster'),
@@ -54,7 +78,7 @@ def enrich_director(old, profile, today, aliases=None):
     return {**old, 'id': profile['id'], 'name': name, 'nameJa': japanese,
         'original_name': profile.get('name') or old.get('name'),
         'also_known_as': list(dict.fromkeys(filter(None, [old.get('name'), *profile.get('also_known_as', [])]))),
-        'name_status': 'japanese' if japanese else 'japanese_unavailable',
+        'name_status': 'transliterated' if transliterated else 'japanese' if japanese else 'japanese_unavailable',
         'profile_path': profile.get('profile_path'), 'birthday': profile.get('birthday'),
         'deathday': profile.get('deathday'), 'place_of_birth': profile.get('place_of_birth'),
         'biography_ja': biography if JAPANESE.search(biography) else '',
@@ -76,16 +100,17 @@ def existing_name_aliases():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--limit', type=int, default=800)
+    parser.add_argument('--normalize-only', action='store_true')
     args = parser.parse_args()
     key = os.environ.get('TMDB_API_KEY')
-    if not key:
+    if not key and not args.normalize_only:
         raise SystemExit('TMDB_API_KEY is required; previous snapshot preserved')
     path = ROOT / 'data/directors.json'
     snapshot = json.loads(path.read_text())
     directors = snapshot['directors']
     names = existing_name_aliases()
     today = datetime.date.today().isoformat()
-    pending = list(directors.items())[:max(0, min(args.limit, 800))]
+    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, 800))]
     lock = threading.Lock()
     last_request = [0.0]
 
@@ -111,6 +136,16 @@ def main():
                 failures.append({'id': identifier, 'error': error})
             else:
                 directors[identifier] = director
+    for identifier, director in directors.items():
+        reading = name_readings().get(identifier)
+        previous_name = director.get('name')
+        if director.get('name_status') == 'japanese_unavailable' and reading and reading['original_name'] in [previous_name, director.get('original_name')]:
+            director.update(name=reading['nameJa'], nameJa=reading['nameJa'], name_status='transliterated')
+            director['also_known_as'] = list(dict.fromkeys([*director.get('also_known_as', []), previous_name]))
+            for work in director.get('works', []):
+                if work.get('director') == previous_name:
+                    work['director'] = reading['nameJa']
+        director['works'] = [compact_work(work) for work in director.get('works', [])]
     snapshot['generated_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     temporary = path.with_suffix('.tmp')
     temporary.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n')
@@ -119,6 +154,7 @@ def main():
         'japanese_unavailable': [{'id': key, 'name': value.get('name')} for key, value in directors.items() if value.get('name_status') == 'japanese_unavailable'],
         'unrefreshed': [key for key, value in directors.items() if not value.get('checked_at')],
         'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
+        'transliterated_names': sum(value.get('name_status') == 'transliterated' for value in directors.values()),
         'japanese_biographies': sum(bool(value.get('biography_ja')) for value in directors.values())}
     report_path = ROOT / 'artifacts/director-enrichment.json'
     report_path.parent.mkdir(exist_ok=True)

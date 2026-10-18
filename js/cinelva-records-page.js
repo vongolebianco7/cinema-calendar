@@ -417,6 +417,7 @@
       const photoUrl=profileImage.startsWith('/')?'https://image.tmdb.org/t/p/w185'+profileImage:profileImage;
       const safePhoto=/^https:\/\//.test(photoUrl)?photoUrl:'';
       const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||''].filter(Boolean);
+      if(director?.name_status==='transliterated'&&director.original_name){profileDetails.unshift('原名：'+director.original_name);profileDetails.push('日本語名は原名からのカタカナ表記です。');}
       const sourceUrl=/^https:\/\/www\.themoviedb\.org\/person\/\d+$/.test(director?.source_url||'')?director.source_url:'';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+watchedCount+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
         '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)),group.name)).join('')+'</div>'+

@@ -47,6 +47,39 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertNotIn(1, [w['id'] for w in result['works']])
         self.assertEqual(next(w for w in result['works'] if w['id'] == 2)['custom'], 'film')
 
+    def test_credit_snapshot_omits_unused_overviews_and_api_transport_fields(self):
+        profile = self.profile()
+        profile['movie_credits']['crew'][0].update(overview='unneeded text' * 100, popularity=25, credit_id='abc')
+        result = self.module.enrich_director({'id': 1}, profile, '2026-10-18')
+        work = next(w for w in result['works'] if w['id'] == 1)
+        self.assertNotIn('overview', work)
+        self.assertNotIn('popularity', work)
+        self.assertNotIn('credit_id', work)
+
+    def test_reading_fallback_keeps_original_and_is_not_marked_official(self):
+        profile = self.profile()
+        profile.update(id=7775, name='Stephen Sommers', also_known_as=[])
+        result = self.module.enrich_director({'id': 7775, 'name': 'Stephen Sommers'}, profile, '2026-10-18')
+        self.assertEqual(result['nameJa'], 'スティーヴン・ソマーズ')
+        self.assertEqual(result['original_name'], 'Stephen Sommers')
+        self.assertEqual(result['name_status'], 'transliterated')
+        refreshed = self.module.enrich_director(result, profile, '2026-10-18')
+        self.assertEqual(refreshed['name_status'], 'transliterated')
+
+    def test_snapshot_uses_japanese_labels_and_verified_uncapped_credits(self):
+        import json
+        directors = json.loads((ROOT / 'data/directors.json').read_text())['directors']
+        self.assertTrue(directors)
+        for identifier, director in directors.items():
+            self.assertRegex(director['name'], '[ぁ-ゖァ-ヺ一-鿿]', identifier)
+            self.assertFalse(director['coverage']['truncated'])
+            self.assertEqual(director['source_url'], f'https://www.themoviedb.org/person/{identifier}')
+            works = director['works']
+            self.assertEqual(len({work['id'] for work in works}), len(works))
+            self.assertTrue(all(work['job'] == 'Director' for work in works))
+            if director['name_status'] == 'transliterated':
+                self.assertTrue(director['original_name'])
+
     def test_missing_translation_is_explicit_and_partial_payload_rejected(self):
         profile = self.profile()
         profile['also_known_as'] = []

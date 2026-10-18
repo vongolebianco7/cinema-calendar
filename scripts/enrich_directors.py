@@ -15,6 +15,7 @@ import threading
 import time
 import urllib.parse
 import urllib.request
+import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 JAPANESE = re.compile(r'[ぁ-ゖァ-ヺ\u3400-\u9fff]')
@@ -100,10 +101,51 @@ def existing_name_aliases():
     return {**dict(pairs), **extra}
 
 
+def person_name_key(name):
+    return ''.join(c for c in unicodedata.normalize('NFKD', str(name)).casefold()
+                   if c.isalnum() and not unicodedata.combining(c))
+
+
+def discover_named_directors(directors, aliases, request, today):
+    """Resolve missing supported names, never infer a person from a partial match."""
+    seen = {person_name_key(name) for director in directors.values()
+            for name in [director.get('name'), director.get('nameJa'), director.get('original_name'),
+                         *director.get('also_known_as', [])] if name}
+    queries = {}
+    for english, japanese in aliases.items():
+        if person_name_key(english) not in seen and person_name_key(japanese) not in seen:
+            queries.setdefault(japanese, english)
+    report = {'added': [], 'unresolved': [], 'failures': []}
+    # At most 100 searches and 100 person requests, alongside at most 600 refreshes.
+    for japanese, english in list(queries.items())[:100]:
+        try:
+            found = request('/search/person', {'query': english, 'language': 'en-US'})
+            matches = {str(person['id']): person for person in found.get('results', [])
+                       if isinstance(person.get('id'), int) and person_name_key(english) in
+                       {person_name_key(person.get('name')), person_name_key(person.get('original_name'))}}
+            if len(matches) != 1:
+                report['unresolved'].append(english)
+                continue
+            identifier, person = next(iter(matches.items()))
+            if identifier in directors:
+                continue
+            profile = request('/person/' + identifier, {'append_to_response': 'movie_credits'})
+            director = enrich_director({'id': person['id'], 'name': person['name']}, profile, today, aliases)
+            if not director['works']:
+                report['unresolved'].append(english)
+                continue
+            directors[identifier] = director
+            report['added'].append(identifier)
+        except Exception as error:
+            report['failures'].append({'name': english, 'error': type(error).__name__})
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--limit', type=int, default=800)
     parser.add_argument('--normalize-only', action='store_true')
+    parser.add_argument('--discover-names', action='store_true')
     args = parser.parse_args()
     key = os.environ.get('TMDB_API_KEY')
     if not key and not args.normalize_only:
@@ -114,20 +156,23 @@ def main():
     directors = snapshot['directors']
     names = existing_name_aliases()
     today = datetime.date.today().isoformat()
-    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, 800))]
+    pending = [] if args.normalize_only else [(key, value) for key, value in directors.items() if not str(value.get('checked_at', '')).startswith(today)][:max(0, min(args.limit, 600 if args.discover_names else 800))]
     lock = threading.Lock()
     last_request = [0.0]
 
-    def refresh(item):
-        identifier, old = item
+    def request(endpoint, params=None):
         with lock:
             time.sleep(max(0, .35 - (time.monotonic() - last_request[0])))
             last_request[0] = time.monotonic()
-        query = urllib.parse.urlencode({'api_key': key, 'language': 'ja-JP', 'append_to_response': 'movie_credits'})
+        query = urllib.parse.urlencode({'api_key': key, 'language': 'ja-JP', **(params or {})})
+        req = urllib.request.Request('https://api.themoviedb.org/3' + endpoint + '?' + query, headers={'Accept': 'application/json'})
+        with urllib.request.urlopen(req, timeout=25) as response:
+            return json.load(response)
+
+    def refresh(item):
+        identifier, old = item
         try:
-            request = urllib.request.Request(f'https://api.themoviedb.org/3/person/{int(identifier)}?{query}', headers={'Accept': 'application/json'})
-            with urllib.request.urlopen(request, timeout=25) as response:
-                profile = json.load(response)
+            profile = request(f'/person/{int(identifier)}', {'append_to_response': 'movie_credits'})
             return identifier, enrich_director(old, profile, today, names), None
         except Exception as error:
             # Do not print exception URLs: they may contain the API key.
@@ -140,6 +185,7 @@ def main():
                 failures.append({'id': identifier, 'error': error})
             else:
                 directors[identifier] = director
+    discovery = discover_named_directors(directors, names, request, today) if args.discover_names and not args.normalize_only else {'added': [], 'unresolved': [], 'failures': []}
     for identifier, director in directors.items():
         reading = name_readings().get(identifier)
         previous_name = director.get('name')
@@ -158,7 +204,7 @@ def main():
     temporary = path.with_suffix('.tmp')
     temporary.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n')
     temporary.replace(path)
-    report = {'attempted': len(pending), 'refreshed': len(pending) - len(failures), 'failures': failures,
+    report = {'attempted': len(pending), 'refreshed': len(pending) - len(failures), 'failures': failures, 'discovery': discovery,
         'japanese_unavailable': [{'id': key, 'name': value.get('name')} for key, value in directors.items() if value.get('name_status') == 'japanese_unavailable'],
         'unrefreshed': [key for key, value in directors.items() if not value.get('checked_at')],
         'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
@@ -169,7 +215,7 @@ def main():
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({key: value for key, value in report.items() if key not in ('japanese_unavailable', 'failures', 'unrefreshed')}, ensure_ascii=False))
     print('Missing Japanese names:', len(report['japanese_unavailable']), 'Failed:', len(failures))
-    if failures:
+    if failures or discovery['failures']:
         raise SystemExit(1)
 
 

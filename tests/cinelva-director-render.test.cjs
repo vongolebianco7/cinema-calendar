@@ -156,3 +156,14 @@ test('duplicate imported aliases of one director film do not inflate the counter
   const { row } = render({ records: [{ ...film, rating: 4 }, { ...film, id: 900001, tmdb_id: 42, rating: 3 }], works: [film], name: 'Other Director' });
   assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
 });
+
+
+test('missing director catalog never presents saved records as the filmography total', () => {
+  const film = { id: 1, title: '鑑賞作品', director: 'Clint Eastwood', rating: 4 };
+  const { row, detail } = render({ records: [film], works: [], name: 'Other Director' });
+  assert.match(row.innerHTML, /鑑賞1本.*総数未取得/);
+  assert.doesNotMatch(row.innerHTML, /1\/1本/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /総数未取得/);
+  assert.doesNotMatch(detail.innerHTML, /director-progress-track|1 \/ 1本|収録作品 1本/);
+});

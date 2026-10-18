@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:18:00+09:00",
+  "updated_at": "2026-10-19T04:31:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
-  "branch": "fix/published-route-compatibility-20261019",
-  "head_sha": "d07eb0731858bd1084c1cb615f4e674a7677df4a",
+  "base_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+  "branch": "fix/director-missing-catalog-20261019",
+  "head_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
   "pull_request": null,
   "work_items": [
     {
@@ -514,6 +514,13 @@
       "status": "in_progress",
       "acceptance": "All29manifestURLs are published or redirect on the same origin to a publishedcanonicalpage. Query/hash/records preserved; no stale duplicatedUI exposed.",
       "ci": "ActualcanonicalHTTPaudit15/29success14nested404. Real buildartifactregression firstfailed, nowpasses with temporary /cinelva/:path* -> /:path* redirect. ActualsourceHTMLfiles copied into fixture; all29outputs/targetschecked. Quality147Node/fullPython133pass. Focusedreviewready; CIandproductionquery/hashpending."
+    },
+    {
+      "id": "MY-DIRECTOR-MISSING-CATALOG",
+      "title": "Repair absent legacy directors and stop presenting records as a complete catalog",
+      "status": "in_progress",
+      "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
+      "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
     }
   ],
   "verification": [
@@ -846,6 +853,6 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Publish legacy-route compatibility PR; require gate/review/CI, mergegreen, then verifyautomaticproductionall29URLs, redirectquery/hash and corrected2014detail/no-nextreview. Preserveallmergeddirectorprofilework. Then updateacceptanceaudit and releaseevidence; realiPhone/humantests remainseparate.",
+  "next_action": "Run bounded official API discovery for supported missing director names, inspect Eastwood person190 and exact final snapshot, require fresh UI/mobile CI and review then merge and verify canonical release. Previous completion claim covered only788cached directors and missed absent directors.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

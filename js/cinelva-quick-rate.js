@@ -876,6 +876,32 @@ style.textContent+=`
 }
 .cinelva-rate-dialog .cinelva-date-day[aria-current="date"]{background:#e7b944;color:#181818;font-weight:700}
 `;
+style.textContent+=`
+/* Calendar three-column cards: consistent content rhythm and tight review placement. */
+@media(max-width:760px){
+ .tvWeekMovies{align-items:stretch!important}
+ .tvWeekMovies>.tvMovie{
+  display:flex!important;flex-direction:column!important;
+  min-width:0!important;padding:6px!important;gap:0!important;
+ }
+ .tvMoviePoster{flex:0 0 auto!important}
+ .tvMovieTop{margin-top:7px!important}
+ .tvMovieChannel{margin-top:5px!important}
+ .tvMovieProgram{margin-top:5px!important;line-height:1.3!important}
+ .tvMovieTitle{
+  margin-top:4px!important;line-height:1.35!important;
+  min-height:2.7em!important;max-height:2.7em!important;
+ }
+ .tvMovieStatus{
+  margin-top:4px!important;min-height:14px!important;
+  align-content:start!important;
+ }
+ .tvMovie>.cinelva-rating-controls{
+  margin-top:6px!important;margin-bottom:0!important;
+  flex:0 0 54px!important;align-self:stretch!important;
+ }
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

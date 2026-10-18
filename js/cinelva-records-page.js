@@ -440,7 +440,27 @@
     const cell=state.awardSelection&&scopedCell(state.awardSelection.organization,state.awardSelection.decade);
     const awardHeading=state.awardSelection?'<div class="award-detail-head"><div><span class="award-detail-kicker">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>受賞作品の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type="button" class="award-detail-close" data-close-award aria-label="詳細を閉じる">×</button></div>':'';
     const awardEntries=cell?[...cell.entries].sort((a,b)=>Number(b.watched)-Number(a.watched)||String(a.title).localeCompare(String(b.title),'ja')):null;
-    $('awardFilms').innerHTML=cell?awardHeading+(awardEntries.length?awardEntries.map(entry=>`<article class="panel award-film-card"><div class="award-film-top"><span class="award-watch-state ${entry.watched?'is-watched':'is-unwatched'}">${entry.watched?'鑑賞済み':entry.id?'未鑑賞':'照合保留'}</span><span class="award-film-year">${escapeHTML(entry.awardYears.join('・'))}</span></div><strong>${escapeHTML(entry.title)}</strong><p class="hint">${escapeHTML(entry.categories.join('・'))}</p><div class="award-film-actions">${entry.id?`<button class="button" data-award-film="${escapeHTML(entry.id)}">作品を見る・評価する</button>`:''}${entry.sources.map(url=>`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">出典 ↗</a>`).join('')}</div></article>`).join(''):'<p class="hint">この年代の受賞作品はまだ収録されていません。</p>'):'<div class="award-invite"><span aria-hidden="true">✦</span><p>マトリクスの数字をタップすると、その年代の受賞作品と鑑賞状況を見られます。</p></div>';
+    const awardCard=entry=>{
+      const entryId=String(entry.id||'');
+      const record=state.records.find(item=>entryId&&String(item.id)===entryId)
+        ||state.records.find(item=>normalizeRecordSearch(item.title)===normalizeRecordSearch(entry.title));
+      const info=byId.get(entryId)||state.movies.find(item=>entryId&&String(item.id)===entryId)||{};
+      const metadata={...info,id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.awardYears?.[0]||''};
+      const status=record?'鑑賞済み':entryId?'未鑑賞':'照合保留';
+      const headline='<div class="award-film-top"><span class="award-watch-state '+(record?'is-watched':'is-unwatched')+'">'+status+'</span><span class="award-film-year">'+escapeHTML((entry.awardYears||[]).join('・'))+'</span></div>';
+      const awardCategory='<small class="award-card-category">'+escapeHTML((entry.categories||[]).join('・'))+'</small>';
+      const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
+      if(record){
+        const film=enriched(record);
+        return '<div class="award-film-unit">'+headline+card(film)+awardCategory+sources+'</div>';
+      }
+      const open=entryId?'<button class="award-card-open" type="button" data-award-film="'+escapeHTML(entryId)+'" aria-label="作品を開いて評価する：'+escapeHTML(metadata.title)+'">作品を開く・評価する ↗</button>':'<span class="award-card-unmatched">作品データ照合待ち</span>';
+      return '<article class="movie award-film-unit award-film-unwatched">'+headline+posterHTML(metadata)
+        +'<strong>'+escapeHTML(metadata.title)+'</strong>'+awardCategory
+        +'<div class="record-own-rating-label">あなたの評価</div><span class="award-card-not-rated">未評価</span>'
+        +'<div class="award-film-actions">'+open+sources+'</div></article>';
+    };
+    $('awardFilms').innerHTML=cell?awardHeading+(awardEntries.length?awardEntries.map(awardCard).join(''):'<p class="hint">この年代の受賞作品はまだ収録されていません。</p>'):'<div class="award-invite"><span aria-hidden="true">✦</span><p>マトリクスの数字をタップすると、その年代の受賞作品と鑑賞状況を見られます。</p></div>';
   }
   const normalizeName = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
   const directorJapaneseNames = new Map([["christopher nolan","クリストファー・ノーラン"],["steven spielberg","スティーヴン・スピルバーグ"],["martin scorsese","マーティン・スコセッシ"],["quentin tarantino","クエンティン・タランティーノ"],["david fincher","デヴィッド・フィンチャー"],["denis villeneuve","ドゥニ・ヴィルヌーヴ"],["james cameron","ジェームズ・キャメロン"],["ridley scott","リドリー・スコット"],["stanley kubrick","スタンリー・キューブリック"],["wes anderson","ウェス・アンダーソン"],["greta gerwig","グレタ・ガーウィグ"],["bong joon-ho","ポン・ジュノ"],["park chan-wook","パク・チャヌク"],["hayao miyazaki","宮崎駿"],["akira kurosawa","黒澤明"],["hirokazu kore-eda","是枝裕和"],["makoto shinkai","新海誠"],["yorgos lanthimos","ヨルゴス・ランティモス"],["guillermo del toro","ギレルモ・デル・トロ"],["alfonso cuarón","アルフォンソ・キュアロン"],["paul thomas anderson","ポール・トーマス・アンダーソン"],["francis ford coppola","フランシス・フォード・コッポラ"],["sofia coppola","ソフィア・コッポラ"],["clint eastwood","クリント・イーストウッド"],["tim burton","ティム・バートン"],["peter jackson","ピーター・ジャクソン"],["george lucas","ジョージ・ルーカス"],["rian johnson","ライアン・ジョンソン"],["damien chazelle","デイミアン・チャゼル"],["robert zemeckis","ロバート・ゼメキス"]]);

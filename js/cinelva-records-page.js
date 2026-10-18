@@ -395,7 +395,11 @@
       for(const work of director?.works||[]){const id=filmIdentity(work),combined={...work,...(movieById.get(id)||{}),id};if(!isDirectorCredit(work,group.name)||!isDirectorCredit(combined,group.name))continue;all.set(id,combined);}
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
       const films=[...all.values()];
-      return {director,watched,films,catalogAvailable:Boolean(director?.works?.length),watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
+      const sourcedCount=(director?.works||[]).filter(work=>isDirectorCredit(work,group.name)).length;
+      // A partial catalog must never be presented as a complete filmography.
+      const verified=director?.coverage?.truncated===false && sourcedCount>0;
+      const catalogAvailable=Boolean(verified && sourcedCount>=Math.min(2,films.length));
+      return {director,watched,films,catalogAvailable,watchedCount:films.filter(movie=>watched.has(String(movie.id))).length};
     };
     const sorted=[...groups.values()].map(group=>({...group,filmography:filmographyFor(group)})).filter(group=>group.filmography.watchedCount>0).sort((a,b)=>b.filmography.watchedCount-a.filmography.watchedCount||a.name.localeCompare(b.name,'ja'));
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}

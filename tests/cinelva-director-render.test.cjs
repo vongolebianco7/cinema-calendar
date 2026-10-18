@@ -237,3 +237,15 @@ test('verified TMDB feature remains after unknown-runtime credits are filtered',
   const {row}=render({records:[watched],works:[known,unknown],name:'Other Director'});
   assert.match(row.innerHTML,/1\\/1本/);
 });
+
+test('30-minute films remain, while 29-minute films are excluded', () => {
+  const rated = { id: 8300, title: '30分作品', director: 'Other Director', runtime: 30, rating: 4 };
+  const under = { id: 8301, title: '29分作品', director: 'Other Director', runtime: 29 };
+  const fortyFive = { id: 8302, title: '45分作品', director: 'Other Director', runtime: 45 };
+  const { row, detail } = render({ records: [rated], works: [rated, under, fortyFive], name: 'Other Director' });
+  assert.match(row.innerHTML, /1\\/2本/);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /30分作品/);
+  assert.match(detail.innerHTML, /45分作品/);
+  assert.doesNotMatch(detail.innerHTML, /29分作品/);
+});

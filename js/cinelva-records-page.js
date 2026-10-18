@@ -696,12 +696,12 @@
       return null;
     };
     const filmTile=(movie,watched,directorName,index)=>{
-      const title=escapeHTML(movie.title||movie.name||'作品名不明'),id=escapeHTML(String(movie.id||'')),year=directorFilmYear(movie,directorName);
+      const title=escapeHTML(movie.title||movie.name||'作品名不明'),year=directorFilmYear(movie,directorName);
       const rating=Number(movie.rating||0);
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
         '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
-        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'<button type="button" class="director-film-review" data-film-index="'+index+'" aria-label="'+title+'のレビューを開く" style="margin-top:7px;padding:6px 9px;border:1px solid #bca579;border-radius:7px;background:#211e19;color:#e6cca0;font:500 12px system-ui;cursor:pointer">'+(watched?'レビューを編集':'レビューする')+'</button></div></article>';
+        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'</div></article>';
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});
@@ -727,16 +727,15 @@
       close.setAttribute('aria-label',group.name+'の作品一覧を閉じる');
       close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});
       detail.prepend(close);
-      // Open the same review popup used elsewhere, without navigating away.
-      detail.querySelectorAll('.director-film-review').forEach(button=>{
-        button.addEventListener('click',event=>{
-          event.preventDefault();event.stopPropagation();
-          const movie=films[Number(button.dataset.filmIndex)];
+      // Match other movie lists: tap the poster itself to open quick rating.
+      detail.querySelectorAll('.director-film-poster').forEach((anchor,index)=>{
+        anchor.addEventListener('click',event=>{
+          if(!globalThis.CinelvaQuickRate?.open)return;
+          event.preventDefault();
+          const movie=films[index];
           if(!movie)return;
           const existing=group.records.find(item=>String(filmIdentity(item))===String(filmIdentity(movie)));
-          const target=existing?{...movie,...existing}:{...movie};
-          if(globalThis.CinelvaQuickRate?.open)globalThis.CinelvaQuickRate.open(target);
-          else openDialog(existing||target);
+          globalThis.CinelvaQuickRate.open(existing?{...movie,...existing}:movie);
         });
       });
       detail.hidden=false;

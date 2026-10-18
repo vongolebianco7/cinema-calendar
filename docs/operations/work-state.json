@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:36:00+09:00",
+  "updated_at": "2026-10-19T04:39:22+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "042e6c98192794793a686502735b8282cb3cc3b1",
-  "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "1e90ac592b26d80dda41fb6427f62e61849406a8",
-  "pull_request": 398,
+  "base_sha": "cd1840a2d13048187b80d214f7189fd0f15014a5",
+  "branch": "docs/progress-evidence-20261019",
+  "head_sha": "cd1840a2d13048187b80d214f7189fd0f15014a5",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -518,9 +518,9 @@
     {
       "id": "MY-DIRECTOR-MISSING-CATALOG",
       "title": "Repair absent legacy directors and stop presenting records as a complete catalog",
-      "status": "in_progress",
+      "status": "deployment_pending",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
-      "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
+      "ci": "PR #398 merged as cd1840a2 after all seven workflows passed on 45e5ecd: frontend 39159442900, smoke 39159442902, Python 39159442983, refresh 39159442943, mobile 39159442928, quality 39159442934, scorecard 39159442920. Fresh local gate 148 Node and full Python 137 pass. Production still has 788 directors and no person190; main deployment is rate-limited."
     }
   ],
   "verification": [
@@ -576,24 +576,30 @@
     {
       "check": "Eastwood verified source snapshot and regression",
       "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
+    },
+    {
+      "check": "Overall acceptance recount and director integration",
+      "result": "32 acceptance bullets: 6 verified (4 local, 2 source/CI/production), 24 partial, 2 pending. Verified-acceptance ratio 18.75%; unequal scope means this is not an implementation or effort percentage. #398 source has849directors, Eastwood41works; live JSON still788directors and absent190."
     }
   ],
   "deployment": {
-    "status": "production_verified",
-    "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "status": "blocked",
+    "target_sha": "cd1840a2d13048187b80d214f7189fd0f15014a5",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
-    "reported_restriction": "EarlierignoreCommandlengthfailure repaired. bd6a1c99automaticproductionREADY; no providerquota blocker currentlyobserved.",
-    "next_action": "Keep currentcanonicalorigin. Save release evidence and continue remaining acceptanceaudit, distinguishing realiPhone/human tests and source/coverage gaps from verified fixes.",
+    "reported_restriction": "Main cd1840a2 combined statuses: frontend and backend fail with build-rate-limit. Do not retry until provider cap clears.",
+    "next_action": "Observe existing quota/release readiness without repeated deploys. After cap clears release tested main once, then verify canonical source/data and actual director UI.",
     "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
-  "blockers": [],
-  "next_action": "Check exact final PR398head allrequiredActions including new Eastwood browser journey, mergewhen green thenverify canonical releaseSHA andsource41filmdata. Unresolved othernamequeries stayunknown; do notclaim allworlddirectors complete.",
+  "blockers": [
+    "Vercel free deployment daily limit blocks #398 publication; previous canonical bd6a1c99 remains live."
+  ],
+  "next_action": "Check provider quota before any release attempt. When available, publish tested cd1840a2 or newer tested main and verify Eastwood41/849directors plus actual mobile UI. Independently continue partial source/closed-cinema/license/performance acceptance audits. Physical iPhone and independent user tests remain pending.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

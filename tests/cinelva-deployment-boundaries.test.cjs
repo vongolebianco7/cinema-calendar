@@ -7,6 +7,10 @@ const { spawnSync } = require('node:child_process');
 const frontend = JSON.parse(fs.readFileSync('vercel.json', 'utf8')).ignoreCommand;
 const backend = JSON.parse(fs.readFileSync('backend/vercel.json', 'utf8')).ignoreCommand;
 
+test('configured ignore commands fit the deployment provider schema', () => {
+  for (const command of [frontend, backend]) assert.ok(command.length <= 256);
+});
+
 function fixture(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'cinelva-deploy-scope-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
@@ -15,6 +19,8 @@ function fixture(t) {
     assert.equal(result.status, 0, result.stderr);
   };
   fs.mkdirSync(path.join(directory, 'backend'));
+  fs.mkdirSync(path.join(directory, 'scripts'));
+  if (fs.existsSync('scripts/ignore-frontend-build.sh')) fs.copyFileSync('scripts/ignore-frontend-build.sh', path.join(directory, 'scripts/ignore-frontend-build.sh'));
   fs.writeFileSync(path.join(directory, 'index.html'), 'baseline');
   git('init', '--quiet');
   git('config', 'user.name', 'Deployment test');
@@ -25,7 +31,7 @@ function fixture(t) {
     change(file) {
       const target = path.join(directory, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.writeFileSync(target, 'changed');
+      fs.writeFileSync(target, file === 'scripts/ignore-frontend-build.sh' ? fs.readFileSync(target, 'utf8') + '# changed\n' : 'changed');
       git('add', '.'); git('commit', '--quiet', '-m', file);
     },
     check(command, expected, label) {
@@ -53,7 +59,7 @@ test('backend-only HTML is not mistaken for a published root HTML page', t => {
 
 test('all frontend publication inputs build the frontend and skip the backend', t => {
   const repo = fixture(t);
-  for (const file of ['index.html', 'icon.png', 'logo.svg', 'manifest.webmanifest', 'js/app.js', 'assets/theme.css', 'data/movies.json', 'my-cinelva/index.html', 'preview/brand/index.html', 'scripts/build-static.cjs', 'vercel.json']) {
+  for (const file of ['index.html', 'icon.png', 'logo.svg', 'manifest.webmanifest', 'js/app.js', 'assets/theme.css', 'data/movies.json', 'my-cinelva/index.html', 'preview/brand/index.html', 'scripts/build-static.cjs', 'scripts/ignore-frontend-build.sh', 'vercel.json']) {
     repo.change(file);
     repo.check(frontend, 1, file + ' must build frontend');
     repo.check(backend, 0, file + ' must not build backend');

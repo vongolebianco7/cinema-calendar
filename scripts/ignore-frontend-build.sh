@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Exit 0 skips the build; changed publication inputs return 1.
+git diff --quiet HEAD^ HEAD -- ':(top,glob)*.html' ':(top,glob)*.png' ':(top,glob)*.svg' ':(top,glob)*.webmanifest' ':(top,glob)*.css' ':(top,glob)*.js' ':(top)assets/' ':(top)js/' ':(top)data/' ':(top)preview/' ':(top)my-cinelva/' ':(top)scripts/build-static.cjs' ':(top)vercel.json' ':(top)scripts/ignore-frontend-build.sh'

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:02:25+09:00",
+  "updated_at": "2026-10-19T04:07:53+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
-  "branch": "fix/deployment-path-boundaries-20261018",
-  "head_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
+  "base_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
+  "branch": "fix/search-film-release-date-20261019",
+  "head_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
   "pull_request": null,
   "work_items": [
     {
@@ -491,9 +491,16 @@
     {
       "id": "P0-DEPLOYMENT-BOUNDARIES",
       "title": "Make deployment change detection independent of working directory",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "Backend-only changes build only backend; frontend inputs build only frontend; docs/tests skip both from root or backend directory.",
-      "ci": "Old configuration fails3/4 real-Git regressions. Root-anchored pathspecs pass4/4; quality gate139Node and fullPython125pass; focused review ready. PR CI pending."
+      "ci": "PR #393 head1a25541d all10check-runs succeeded; merged0adf128. Real-Git boundaries4/4 pass, quality139Node/fullPython125pass; focused review ready. Automatic Vercel release rejected long ignoreCommand (>256chars). Follow-up moves command into actual tested bash script and adds provider-length regression;5/5 boundary checks pass. Release pending."
+    },
+    {
+      "id": "P0-SEARCH-EVENT-RELEASE-DATE",
+      "title": "Keep event dates separate from original film release metadata",
+      "status": "in_progress",
+      "acceptance": "Official local events resolve their explicit TMDB identity; unavailable release years remain unknown; streaming/broadcast/screening dates keep their meaning and values.",
+      "ci": "4 runtime tests pass, including actual URL and offline review identity with a localID/TMDBlink. Three initial regressions failed before fix. Quality gate144Node/fullPython125pass. Existing Chromium/WebKit390px browser test extended; PR CI pending."
     }
   ],
   "verification": [
@@ -787,22 +794,30 @@
     {
       "check": "Canonical production source smoke",
       "result": "Vercel READY production dadc773a79ad6175bb02c79d1f5e3c6a795fe978, alias cinelva.vercel.app confirmed. Six actual canonical URLs returned200 and exact main bytes: index, MyCinelva, search, quick-rate, library records, legacy redirect. This is HTTP/source evidence, not browser interaction or real-iPhone acceptance."
+    },
+    {
+      "check": "Canonical production browser smoke on dadc773",
+      "result": "Cloud Chrome actual MyCinelva empty state -> search Interstellar -> detail -> shared review dialog verified. Only close/save controls; no next action. Did not save test data. Discovered official streaming date2026-09-01 misrendered as film year and detail lookup skipped; source fix now under review. Extension-metadata errors observed are chrome-extension URLs, not app errors. Real iPhone remains unverified."
+    },
+    {
+      "check": "Follow-up deployment schema and canonical identity safety",
+      "result": "Long ignoreCommand reproduced provider256char validationfailure; new5th regression firstfails thenpasses with shortcommand. All9 focused real-Git/runtime tests pass; quality144Node/fullPython125pass. Focused review identified URL/offlinereview identitygap, nowcorrected and covered by actualfunctions."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
+    "target_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "dadc773a79ad6175bb02c79d1f5e3c6a795fe978",
-    "last_observed_vercel_production_status": "READY",
+    "last_observed_vercel_production_status": "ERROR",
     "last_observed_vercel_check_at": "2026-10-19T04:02:25+09:00",
-    "reported_restriction": "Previous build-rate-limit no longer applies to latest main: frontend deployment succeeded; backend ignored unchanged inputs.",
-    "next_action": "After boundary PR CI/merge, observe automatic deployment once. Verify canonical browser journeys; no manual redeploy needed.",
-    "provider_preview_status": "Canonical alias points to READY production dpl_E281etJSx94ybpGjvSz92GkPQ5Em at dadc773; six source URLs match main.",
+    "reported_restriction": "0adf128 automatic release rejected because ignoreCommand exceeds256characters. Canonical remains READY dadc773. Follow-up uses short command plus root-anchored script; no manual retry.",
+    "next_action": "Observe one automatic release after schema-safe fix passes CI and merges. No manual retry. Verify canonical corrected event date and review identity.",
+    "provider_preview_status": "Failed release dpl_9txVt6GMrE5bA6tfJnLyocsgB2rP at0adf128; previous READY dadc773 remains canonical.",
     "blockers": []
   },
   "blockers": [],
-  "next_action": "Publish deployment-boundary PR; require CI and merge after successful checks. Preserve open #391 director-profile work. Verify canonical production browser journeys and continue remaining acceptance gates; no overall percentage claim.",
+  "next_action": "Publish one tested batch: short Vercel ignore script plus search event date/identity fix. Require focused review and fresh Chromium/WebKit CI; merge green then verify automatic deployment/canonical interaction. Preserve independent#391 work.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

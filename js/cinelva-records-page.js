@@ -129,7 +129,9 @@
     const year = $('recordYear').value;
     const sort = $('recordSort').value;
     let rows = recordMovies().map(enriched).filter(item => (!query || `${item.title} ${item.director || ''}`.toLocaleLowerCase().includes(query)) && (year === 'all' || dateOf(item).slice(0, 4) === year));
-    rows.sort(sort === 'title' ? (a, b) => a.title.localeCompare(b.title, 'ja') : sort === 'rating' ? (a, b) => (b.rating ?? -1) - (a.rating ?? -1) || dateOf(b).localeCompare(dateOf(a)) : (a, b) => dateOf(b).localeCompare(dateOf(a)) || a.title.localeCompare(b.title, 'ja'));
+    const userScore=m=>Number(m.vote_average??m.voteAverage??m.tmdbRating??m.score??metadataFor(m.id).vote_average??metadataFor(m.id).score??-1);
+    const release=m=>String(m.release_date||m.releaseDate||m.date||m.year||'');
+    rows.sort(sort==='userRating'?(a,b)=>userScore(b)-userScore(a)||a.title.localeCompare(b.title,'ja'):sort==='releaseNew'?(a,b)=>release(b).localeCompare(release(a)):sort==='releaseOld'?(a,b)=>release(a).localeCompare(release(b)):sort === 'title' ? (a, b) => a.title.localeCompare(b.title, 'ja') : sort === 'rating' ? (a, b) => (b.rating ?? -1) - (a.rating ?? -1) || dateOf(b).localeCompare(dateOf(a)) : (a, b) => dateOf(b).localeCompare(dateOf(a)) || a.title.localeCompare(b.title, 'ja'));
     $('recordList').innerHTML = rows.length ? rows.map(card).join('') : `<div class="empty" style="grid-column:1/-1"><strong>${recordMovies().length ? '条件に合う鑑賞記録はありません。' : 'ここから、映画の記録がはじまります。'}</strong><p>作品検索から鑑賞日と評価を保存できます。</p><button class="button primary" data-add-record>鑑賞を記録</button></div>`;
   }
   const TAB_STORAGE_KEY = 'cinelva-active-tab-v1';
@@ -191,6 +193,8 @@
       if(/^\d{4}-\d{2}-\d{2}$/.test(date))daily.set(date,(daily.get(date)||0)+1);
     }
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
+    const yearSelect=$('calendarYearSelect');
+    if(yearSelect){const years=[...new Set([currentYear,state.year,...recordMovies().map(r=>Number(dateOf(r).slice(0,4))).filter(y=>y>=1900&&y<=2100)])].sort((a,b)=>b-a);yearSelect.innerHTML=years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');yearSelect.value=String(state.year);}
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
     $('yearHeatmap').innerHTML=monthly.map((count,m)=>{
       const first=new Date(year,m,1).getDay(),length=new Date(year,m+1,0).getDate();
@@ -200,7 +204,7 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      return '<section class="cy-month" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      return '<section class="cy-month'+(count>=10?' gold-month':'')+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span>'+(m+1)+'月</span><span class="cy-month-count">'+count+'本</span></button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
@@ -257,6 +261,10 @@
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
     }
+    const normalizeDirector=name=>{
+      const source=Object.values(state.directors).find(d=>normalizeName(d.name)===normalizeName(name)||normalizeName(d.nameJa)===normalizeName(name)||normalizeName(d.japanese_name)===normalizeName(name));
+      return source?.nameJa||source?.japanese_name||source?.name_ja||name;
+    };
     const sorted=[...groups.values()].sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
     const host=$('directorTimeline');host.replaceChildren();$('directorWorks').replaceChildren();
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
@@ -266,7 +274,7 @@
     sorted.forEach((group,index)=>{
       const row=document.createElement('button');row.type='button';row.className='director-bar-row';
       row.setAttribute('aria-expanded','false');
-      const name=document.createElement('span');name.className='director-bar-name';name.textContent=group.name;
+      const name=document.createElement('span');name.className='director-bar-name';name.textContent=normalizeDirector(group.name);
       const track=document.createElement('span');track.className='director-bar-track';
       const fill=document.createElement('span');fill.className='director-bar-fill';fill.style.width=(group.records.length/max*100)+'%';track.append(fill);
       const count=document.createElement('strong');count.className='director-bar-count';count.textContent=group.records.length+'本';
@@ -276,7 +284,12 @@
         chart.querySelectorAll('.director-bar-row').forEach(el=>{el.classList.remove('active');el.setAttribute('aria-expanded','false');});
         if(active){works.replaceChildren();return;}
         row.classList.add('active');row.setAttribute('aria-expanded','true');
-        works.innerHTML=group.records.slice().sort((a,b)=>Number(b.year||0)-Number(a.year||0)).map(card).join('');
+        const director=Object.values(state.directors).find(d=>normalizeName(d.name)===normalizeName(group.name));
+        const known=Array.isArray(director?.works)?director.works:[];
+        const watchedIds=new Set(group.records.map(x=>String(x.id)));
+        const unseen=known.filter(x=>!watchedIds.has(String(x.id)));
+        works.innerHTML='<div class="director-work-group"><h3>鑑賞済み '+group.records.length+'本</h3><div class="record-grid">'+group.records.slice().sort((a,b)=>Number(b.year||0)-Number(a.year||0)).map(card).join('')+'</div></div>'+
+          '<div class="director-work-group"><h3>未鑑賞の収録作品 '+unseen.length+'本</h3>'+(unseen.length?'<div class="director-work-list">'+unseen.map(work=>'<button type="button" class="director-work" data-director-film="'+escapeHTML(work.id)+'">'+escapeHTML(work.title||'作品')+'<small>'+escapeHTML(work.year||'公開年不明')+'</small></button>').join('')+'</div>':'<p class="hint">未鑑賞の収録作品はありません。</p>')+'<p class="hint">※全作品を網羅したリストではなく、収録済み作品に限ります。</p></div>';
       };
       chart.append(row);
     });
@@ -354,6 +367,10 @@
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};
     $('annualComparison').onclick=event=>{const button=event.target.closest('[data-calendar-year]');if(button){state.year=Number(button.dataset.calendarYear);state.month=0;renderCalendar();}};
+    $('directorWorks').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};
+    $('calendarYearSelect').onchange=()=>{state.year=Number($('calendarYearSelect').value);renderCalendar();};
+    $('calendarYearPrev').onclick=()=>{state.year--;renderCalendar();};
+    $('calendarYearNext').onclick=()=>{state.year++;renderCalendar();};
     $('calendarMode').onchange=renderCalendar;
     $('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};
     $('yearHeatmap').onclick=event=>{const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padStart(2,'0')+'-';const target=[...$('calendar').querySelectorAll('[data-date]')].find(el=>el.dataset.date.startsWith(prefix));target?.scrollIntoView({behavior:'smooth',block:'center'});}};
@@ -388,7 +405,7 @@
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {
       const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);
-      if (savedTab) setTab(savedTab);
+      if (savedTab) setTab(savedTab==='genres'||savedTab==='world'?'summary':savedTab);
     } catch (_) { /* Private browsing can disable storage. */ }
     const params=new URLSearchParams(location.search),requestedId=params.get('record');
     if(requestedId){

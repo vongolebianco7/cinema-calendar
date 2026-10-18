@@ -58,7 +58,15 @@
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
     const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
     $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'>'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy">':'<div class="cs-poster-empty">ポスターなし</div>')+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-score">★ '+Number(r.rating).toFixed(1)+'</div></div>'}).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
-    const more=$('csTopMore');if(more)more.addEventListener('click',()=>{const hidden=[...$('csTop').querySelectorAll('[data-top-extra]')].filter(el=>el.style.display==='none');hidden.slice(0,10).forEach(el=>el.style.display='');if(hidden.length<=10)more.remove();});
+    const more=$('csTopMore');if(more)more.addEventListener('click',()=>{
+      const extras=[...$('csTop').querySelectorAll('[data-top-extra]')];
+      const hidden=extras.filter(el=>el.style.display==='none');
+      if(!hidden.length){extras.forEach(el=>el.style.display='none');more.textContent='さらに10本表示（全'+top.length+'本）';more.setAttribute('aria-expanded','false');return;}
+      hidden.slice(0,10).forEach(el=>el.style.display='');
+      const remaining=extras.filter(el=>el.style.display==='none').length;
+      more.textContent=remaining?'さらに10本表示（残り'+remaining+'本）':'閉じる';
+      more.setAttribute('aria-expanded',String(!remaining));
+    });
     const renderRows=(id,items,colors)=>{const max=Math.max(1,...items.map(x=>x[1]));$(id).innerHTML=items.length?items.map(([name,count],i)=>'<div class="cs-row"><span>'+escapeHTML(name)+'</span><div class="cs-track"><i style="width:'+(count/max*100)+'%;background:'+colors[i%colors.length]+'"></i></div><span class="cs-count">'+count+'</span></div>').join(''):'<p class="cs-empty">集計できる記録がありません。</p>'};
     const genreCounts=new Map(),countryCounts=new Map(),methodCounts=new Map(),decades=new Map();
     filtered.forEach(r=>{

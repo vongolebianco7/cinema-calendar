@@ -86,3 +86,11 @@ html[data-theme="light"] .gDrawer,
 html[data-theme="light"] .drawer {background:#fffefa!important}
 html[data-theme="light"] :is(.gDrawer>a,.drawer a) {color:#242521!important;border-color:#d4d0c7!important}
 html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}
+
+/* iOS Safari zooms the entire viewport when a focused form control has text below 16px.
+   Keep native pinch zoom enabled; only normalize form control font size on touch phones. */
+@media (hover:none) and (pointer:coarse) and (max-width:767px) {
+  html :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),textarea,select) {
+    font-size:16px!important;
+  }
+}

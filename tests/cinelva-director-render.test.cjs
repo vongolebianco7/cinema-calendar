@@ -120,6 +120,7 @@ test('Japanese aliases connect original-name records to sourced profile and full
   assert.match(detail.innerHTML, /https:\/\/image.tmdb.org\/t\/p\/w185\/director.jpg/);
   assert.match(detail.innerHTML, /1970-01-02/);
   assert.match(detail.innerHTML, /日本語の紹介/);
+  assert.match(detail.innerHTML, /<details class="director-biography"><summary>経歴を読む<\/summary>/);
   assert.match(detail.innerHTML, /原名：Example Director/);
   assert.match(detail.innerHTML, /原名からのカタカナ表記/);
   assert.match(detail.innerHTML, /本数による切り捨てなし/);

@@ -107,6 +107,7 @@ def main():
         raise SystemExit('TMDB_API_KEY is required; previous snapshot preserved')
     path = ROOT / 'data/directors.json'
     snapshot = json.loads(path.read_text())
+    before = json.dumps(snapshot, ensure_ascii=False, sort_keys=True)
     directors = snapshot['directors']
     names = existing_name_aliases()
     today = datetime.date.today().isoformat()
@@ -146,7 +147,8 @@ def main():
                 if work.get('director') == previous_name:
                     work['director'] = reading['nameJa']
         director['works'] = [compact_work(work) for work in director.get('works', [])]
-    snapshot['generated_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    if json.dumps(snapshot, ensure_ascii=False, sort_keys=True) != before:
+        snapshot['generated_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     temporary = path.with_suffix('.tmp')
     temporary.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n')
     temporary.replace(path)

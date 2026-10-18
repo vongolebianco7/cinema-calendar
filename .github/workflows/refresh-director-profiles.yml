@@ -42,8 +42,16 @@ jobs:
           import json
           from pathlib import Path
           path = Path('data/directors.json')
-          current = json.loads(path.read_text())
-          latest = json.loads(Path('/tmp/cinelva-main-directors.json').read_text())
+          def parse_catalog(file):
+              raw = file.read_text().lstrip()
+              parsed, end = json.JSONDecoder().raw_decode(raw)
+              if not isinstance(parsed, dict) or not parsed.get('directors'):
+                  raise ValueError(f'Empty director catalog: {file}')
+              if raw[end:].strip():
+                  print(f'Repairing malformed trailing content in {file}')
+              return parsed
+          current = parse_catalog(path)
+          latest = parse_catalog(Path('/tmp/cinelva-main-directors.json'))
           before = len(current['directors'])
           for identifier, director in latest['directors'].items():
               current['directors'].setdefault(identifier, director)
@@ -88,8 +96,13 @@ jobs:
           import json
           from pathlib import Path
           path = Path('data/directors.json')
-          latest = json.loads(path.read_text())
-          refreshed = json.loads(Path('/tmp/cinelva-refreshed-directors.json').read_text())
+          def read_catalog(file):
+              data, _ = json.JSONDecoder().raw_decode(file.read_text().lstrip())
+              if not isinstance(data, dict) or not data.get('directors'):
+                  raise ValueError(f'Empty director catalog: {file}')
+              return data
+          latest = read_catalog(path)
+          refreshed = read_catalog(Path('/tmp/cinelva-refreshed-directors.json'))
           # Reconcile concurrent writes instead of overwriting the latest main.
           for identifier, entry in refreshed['directors'].items():
               previous = latest['directors'].get(identifier, {})

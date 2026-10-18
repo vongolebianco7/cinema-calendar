@@ -809,6 +809,23 @@ style.textContent+=`
 .cinelva-rating-controls .cinelva-inline-value{grid-column:2!important;grid-row:1!important;justify-self:center!important;align-self:center!important;position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;text-align:center!important;font:600 10px/20px system-ui!important;overflow:hidden!important;white-space:nowrap!important}
 .cinelva-rating-controls .cinelva-score-track{grid-column:1/-1!important;grid-row:2!important;width:100%!important;min-width:0!important}
 `;
+style.textContent+=`
+/* Consistent review baseline in three-column cards, including one-line titles. */
+.streamMovieTitle{min-height:2.6em!important;max-height:2.6em!important;line-height:1.3!important;-webkit-line-clamp:2!important}
+.streamMovie{display:flex!important;flex-direction:column!important;min-width:0!important}
+.streamMovie>.cinelva-rating-controls{margin-top:auto!important}
+.tvMovieTitle{min-height:2.7em!important;line-height:1.35!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+.tvMovie{display:flex!important;flex-direction:column!important;min-width:0!important}
+.tvMovie>.cinelva-rating-controls{margin-top:auto!important}
+.cinelva-rating-controls>.cinelva-rating-clear{
+ width:42px!important;max-width:42px!important;
+ height:20px!important;min-height:20px!important;max-height:20px!important;
+ font-size:10px!important;line-height:16px!important;
+ padding:1px 2px!important;border-radius:4px!important;
+}
+.cinelva-rating-controls{grid-template-columns:29px minmax(0,1fr) 42px!important}
+.cinelva-rating-controls>.cinelva-inline-score{grid-template-columns:29px minmax(0,1fr) 42px!important}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

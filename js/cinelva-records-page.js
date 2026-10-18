@@ -329,26 +329,24 @@
     const title=String(work.title||work.name||work.original_title||'').trim();
     const original=String(work.original_title||'').trim();
     const titleText=(title+' '+original).toLowerCase();
-    const name=String(directorName||'').toLowerCase();
-    // A director's filmography is feature films only. Exclude shorts, compilations,
-    // anthologies, behind-the-scenes films and clearly unrelated credits.
-    if (/cinema\s*16\b|verity\s+or\s*[:：]?\s*how\s+i\s+learned|short\s*films?|short\s*film\s*collection|shorts\s*collection|anthology|compilation|behind.the.scenes|making.of/i.test(titleText)) return false;
-    const genreText=[...(Array.isArray(work.genres)?work.genres:[]),...(Array.isArray(work.genre_names)?work.genre_names:[])].map(g=>typeof g==='string'?g:g?.name||'').join(' ').toLowerCase();
-    if (/\bshort\b|短編/.test(genreText)) return false;
-    if (work.is_short===true||work.isShort===true||work.short_film===true||work.shortFilm===true) return false;
+    // These are standalone feature-film directorographies, not all person credits.
+    if (/cinema\s*16\b|short\s*films?|shorts?\s*collection|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス/i.test(titleText)) return false;
+    const genres=[...(Array.isArray(work.genres)?work.genres:[]),...(Array.isArray(work.genre_names)?work.genre_names:[])].map(g=>typeof g==='string'?g:g?.name||'').join(' ').toLowerCase();
+    if (/\bshort\b|短編|短篇/.test(genres)) return false;
+    if ([work.is_short,work.isShort,work.short_film,work.shortFilm].some(x=>x===true)) return false;
     const duration=Number(work.runtime??work.duration??work.length_minutes??work.runtime_minutes);
-    if(Number.isFinite(duration)&&duration>0&&duration<40) return false;
+    if (Number.isFinite(duration)&&duration>0&&duration<60) return false;
     const type=String(work.type||work.media_type||work.format||'').toLowerCase();
-    if(/\bshort\b|短編/.test(type)) return false;
+    if (/\bshort\b|短編|短篇|\btv\b|\btv_series\b|\bepisode\b/.test(type)) return false;
+    if (work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;
     const role=String(work.job||work.role||work.credit_type||work.creditType||'').trim().toLowerCase();
-    if(role && !['director','監督'].includes(role)) return false;
+    if (role && !['director','監督'].includes(role)) return false;
     const department=String(work.department||'').trim().toLowerCase();
-    if(department && department!=='directing' && department!=='監督') return false;
-    const named=work.director||work.director_name||work.directorName;
-    if(named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
-    // Do not treat an uncredited appearance/production entry as a directing credit.
-    if(work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;
-    return true;
+    if (department && !['directing','監督'].includes(department)) return false;
+    const named=String(work.director||work.director_name||work.directorName||'').trim();
+    if (named && normalizeName(directorJapanese(named))!==normalizeName(directorJapanese(directorName))) return false;
+    // Missing credits are not evidence of direction; require an explicit match.
+    return role==='director'||role==='監督'||work.is_director===true||work.isDirector===true||Boolean(named);
   };
   function renderDirectors() {
     const groups=new Map();
@@ -360,7 +358,7 @@
     }
     const movieById=new Map(state.movies.map(movie=>[String(movie.id),movie]));
     const directorKey=name=>canonical(name);
-    for(const record of recordMovies()){
+    for(const record of ratedMovies().filter(item=>Number(item.rating)>0)){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
       const displayName=directorJapanese(name),key=directorKey(name);
@@ -531,7 +529,7 @@
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};
     const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
-    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:work.director||director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
+    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {

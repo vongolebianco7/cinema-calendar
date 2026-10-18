@@ -147,67 +147,30 @@
       const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
-      const visible=all.slice(0,7),other=all.slice(7).reduce((sum,item)=>sum+item[1],0);
-      if(other)visible.push(['その他',other]);
+      // Preserve every category: never silently group the long tail as "other".
       const vivid=['#B88E75','#76A69C','#9888AC','#819DB5','#B68194','#B4A27C','#8DA88D','#9C8D86'];
-      const colors=visible.map(([name],i)=>id==='csCountries'?(countryColor(name)||vivid[i%vivid.length]):id==='csGenres'?vivid[i%vivid.length]:palette[i%palette.length]);
-      let cursor=0;
-      const stops=visible.map(([,n],i)=>{const from=cursor;cursor+=n/total*100;return colors[i]+' '+from.toFixed(3)+'% '+cursor.toFixed(3)+'%';});
+      const colors=all.map(([name],i)=>id==='csCountries'?(countryColor(name)||vivid[i%vivid.length]):id==='csGenres'?vivid[i%vivid.length]:palette[i%palette.length]);
       const mode=donutMode;
-      const layout=document.createElement('div');layout.className='cs-donut-layout';
-      const donut=document.createElement('div');donut.className='cs-donut';donut.setAttribute('role','img');
-      donut.setAttribute('aria-label',visible.map(([name,n])=>name+' '+n+'本').join('、'));
-      // Single SVG owns both the colored sectors and their labels.
-      // Do not mix conic-gradient painting with a separate label overlay.
-      donut.style.background='transparent';
-      const namespace='http://www.w3.org/2000/svg';
-      const svg=document.createElementNS(namespace,'svg');
-      svg.setAttribute('class','cs-donut-numbers');
-      svg.setAttribute('viewBox','0 0 100 100');
-      svg.setAttribute('aria-hidden','true');
-      const font='-apple-system,"Helvetica Neue","Hiragino Sans","Noto Sans JP",sans-serif';
-      const ctx=document.createElement('canvas').getContext('2d');
-      const measure=(str,size)=>{
-        if(!ctx)return Array.from(str).length*size;
-        ctx.font='500 '+size+'px '+font;
-        return ctx.measureText(str).width;
-      };
-      const polar=(r,a)=>[50+r*Math.cos(a),50+r*Math.sin(a)];
-      const ringPath=(start,span)=>{
-        const end=start+span,large=span>Math.PI?1:0;
-        const [ox,oy]=polar(50,start),[ex,ey]=polar(50,end);
-        const [ix,iy]=polar(27,start),[jx,jy]=polar(27,end);
-        return 'M '+ox+' '+oy+' A 50 50 0 '+large+' 1 '+ex+' '+ey+
-          ' L '+jx+' '+jy+' A 27 27 0 '+large+' 0 '+ix+' '+iy+' Z';
-      };
-      const labels=[];
-      let running=0;
-      visible.forEach(([rawName,n],i)=>{
-        const fraction=n/total,start=-Math.PI/2+running*2*Math.PI,span=fraction*2*Math.PI;
-        running+=fraction;
-        const wedge=document.createElementNS(namespace,'path');
-        // A 100% wedge needs two half-arcs (SVG arcs cannot draw a full circle).
-        wedge.setAttribute('d',span>=Math.PI*2-1e-6?
-          ringPath(start,Math.PI)+' '+ringPath(start+Math.PI,Math.PI):ringPath(start,span));
-        wedge.setAttribute('fill',colors[i]);svg.append(wedge);
-        labels.push({name:String(rawName),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',
-          fraction,start,span,index:i});
+      const layout=document.createElement('div');layout.className='cs-stack-layout';
+      const bar=document.createElement('div');bar.className='cs-stack-bar';
+      bar.setAttribute('role','img');
+      bar.setAttribute('aria-label',all.map(([name,n])=>name+' '+n+'本').join('、'));
+      all.forEach(([name,n],i)=>{
+        const segment=document.createElement('span');
+        segment.className='cs-stack-segment';
+        segment.style.flexGrow=String(n);
+        segment.style.backgroundColor=colors[i];
+        segment.title=name+'：'+n+'本（'+(n/total*100).toFixed(1)+'%）';
+        bar.append(segment);
       });
-      // A label must never disappear because a rectangle failed a geometric
-      // test. Render all meaningful sectors, then choose a stable anchor.
-      // Narrow slices rely on the always-visible legend.
-      // Intentionally no labels inside the ring. The compact legend below
-      // is the single source of truth for category names and values.
-      const center=document.createElement('div');center.className='cs-donut-center';
-      center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
-      donut.append(center);
-      donut.append(svg);layout.append(donut);
-      const legend=document.createElement('div');legend.className='cs-donut-legend';
-      visible.forEach(([name,n],i)=>{
+      layout.append(bar);
+      const legend=document.createElement('div');legend.className='cs-donut-legend cs-stack-legend';
+      all.forEach(([name,n],i)=>{
         const row=document.createElement('div');row.className='cs-donut-legend-row';
-        const dot=document.createElement('span');dot.className='cs-donut-dot';dot.style.background=colors[i];dot.setAttribute('aria-hidden','true');dot.textContent='';
-        const label=document.createElement('span');label.className='cs-donut-label';label.textContent=name;
-        const value=document.createElement('span');value.className='cs-donut-value';value.textContent=mode==='count'?n+'本':(n/total*100).toFixed(1).replace(/\\.0$/,'')+'%';
+        const dot=document.createElement('span');dot.className='cs-donut-dot';dot.style.background=colors[i];dot.setAttribute('aria-hidden','true');
+        const label=document.createElement('span');label.className='cs-donut-label';label.textContent=name;label.title=name;
+        const value=document.createElement('span');value.className='cs-donut-value';
+        value.textContent=mode==='count'?n+'本':(n/total*100).toFixed(1).replace(/\\.0$/,'')+'%';
         row.append(dot,label,value);legend.append(row);
       });
       layout.append(legend);

@@ -142,76 +142,85 @@
       layout.append(toggle);
       const donut=document.createElement('div');donut.className='cs-donut';donut.setAttribute('role','img');
       donut.setAttribute('aria-label',visible.map(([name,n])=>name+' '+n+'本').join('、'));
-      donut.style.background='conic-gradient('+stops.join(',')+')';
-      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','cs-donut-numbers');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');
+      // Single SVG owns both the colored sectors and their labels.
+      // Do not mix conic-gradient painting with a separate label overlay.
+      donut.style.background='transparent';
       const namespace='http://www.w3.org/2000/svg';
+      const svg=document.createElementNS(namespace,'svg');
+      svg.setAttribute('class','cs-donut-numbers');
+      svg.setAttribute('viewBox','0 0 100 100');
+      svg.setAttribute('aria-hidden','true');
       const font='"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
       const ctx=document.createElement('canvas').getContext('2d');
-      const measure=(str,size)=>{if(!ctx)return Array.from(str).length*size;ctx.font='600 '+size+'px '+font;return ctx.measureText(str).width;};
-      // Each chart has a fixed 100x100 coordinate system. Never allow a label to
-      // cross the central hole, the outer circle, or the neighbouring chart.
-      svg.setAttribute('viewBox','0 0 100 100');
-      const svgText=(x,y,lines,size,anchor='middle')=>{
-        const text=document.createElementNS(namespace,'text');
-        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',y.toFixed(2));
-        text.setAttribute('text-anchor',anchor);text.setAttribute('font-size',String(size));
-        text.setAttribute('font-family',font);text.setAttribute('font-weight','600');
-        text.setAttribute('fill','#fff');text.setAttribute('paint-order','stroke');
-        text.setAttribute('stroke','#161616');text.setAttribute('stroke-width','.28');
-        lines.forEach((line,index)=>{const span=document.createElementNS(namespace,'tspan');span.setAttribute('x',x.toFixed(2));if(index)span.setAttribute('dy',String(size*1.25));span.textContent=line;text.append(span);});
-        return text;
+      const measure=(str,size)=>{
+        if(!ctx)return Array.from(str).length*size;
+        ctx.font='600 '+size+'px '+font;
+        return ctx.measureText(str).width;
       };
-      const labels=visible.map(([name,n],i)=>{
-        const before=visible.slice(0,i).reduce((sum,item)=>sum+item[1],0);
-        const fraction=n/total,angle=(before+n/2)/total*Math.PI*2-Math.PI/2;
-        return {name:String(name),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',fraction,angle};
+      const polar=(r,a)=>[50+r*Math.cos(a),50+r*Math.sin(a)];
+      const ringPath=(start,span)=>{
+        const end=start+span,large=span>Math.PI?1:0;
+        const [ox,oy]=polar(50,start),[ex,ey]=polar(50,end);
+        const [ix,iy]=polar(27,start),[jx,jy]=polar(27,end);
+        return 'M '+ox+' '+oy+' A 50 50 0 '+large+' 1 '+ex+' '+ey+
+          ' L '+jx+' '+jy+' A 27 27 0 '+large+' 0 '+ix+' '+iy+' Z';
+      };
+      const labels=[];
+      let running=0;
+      visible.forEach(([rawName,n],i)=>{
+        const fraction=n/total,start=-Math.PI/2+running*2*Math.PI,span=fraction*2*Math.PI;
+        running+=fraction;
+        const wedge=document.createElementNS(namespace,'path');
+        // A 100% wedge needs two half-arcs (SVG arcs cannot draw a full circle).
+        wedge.setAttribute('d',span>=Math.PI*2-1e-6?
+          ringPath(start,Math.PI)+' '+ringPath(start+Math.PI,Math.PI):ringPath(start,span));
+        wedge.setAttribute('fill',colors[i]);svg.append(wedge);
+        labels.push({name:String(rawName),value:mode==='count'?n+'本':Math.round(fraction*100)+'%',
+          fraction,start,span,index:i});
       });
-      // Fit labels by testing the entire two-line text rectangle against the
-      // actual annular sector, rather than testing the centre point only.
-      // In particular, the midpoint of a dominant (>50%) sector can lie near
-      // the SVG edge; sample multiple angles and radii to find a safe spot.
-      const occupied=[];
-      const normalAngle=a=>(a%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
-      const inSector=(theta,start,span)=>{
-        const delta=normalAngle(theta-start);
-        return delta>=.045 && delta<=span-.045;
-      };
-      const fitsSector=(cx,cy,w,h,item)=>{
-        const corners=[[cx-w/2,cy-h/2],[cx+w/2,cy-h/2],[cx-w/2,cy+h/2],[cx+w/2,cy+h/2],
-          [cx,cy-h/2],[cx,cy+h/2],[cx-w/2,cy],[cx+w/2,cy]];
+      const norm=a=>(a%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+      const fits=(x,y,w,h,item)=>{
+        const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],
+          [x,y-h/2],[x,y+h/2],[x-w/2,y],[x+w/2,y]];
         return corners.every(([px,py])=>{
           const dx=px-50,dy=py-50,r=Math.hypot(dx,dy);
-          return r>=28.8 && r<=48 && inSector(Math.atan2(dy,dx),item.start,item.fraction*2*Math.PI);
+          return r>=28.5&&r<=48.5&&norm(Math.atan2(dy,dx)-item.start)>=.025&&
+            norm(Math.atan2(dy,dx)-item.start)<=item.span-.025;
         });
       };
-      // Place largest sectors first; smaller sectors retain the complete legend.
-      const ranked=labels.map((item,i)=>({...item,index:i,start:-Math.PI/2+
-        visible.slice(0,i).reduce((sum,entry)=>sum+entry[1],0)/total*2*Math.PI}))
-        .sort((a,b)=>b.fraction-a.fraction);
-      for(const item of ranked){
+      const placed=[];
+      const svgLabel=(x,y,name,value,size)=>{
+        const text=document.createElementNS(namespace,'text');
+        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',(y-size*.43).toFixed(2));
+        text.setAttribute('text-anchor','middle');text.setAttribute('font-size',String(size));
+        text.setAttribute('font-family',font);text.setAttribute('font-weight','600');
+        text.setAttribute('fill','#fff');text.setAttribute('stroke','#161616');
+        text.setAttribute('stroke-width','.3');text.setAttribute('paint-order','stroke');
+        [name,value].forEach((line,i)=>{
+          const t=document.createElementNS(namespace,'tspan');
+          t.setAttribute('x',x.toFixed(2));if(i)t.setAttribute('dy',String(size*1.25));
+          t.textContent=line;text.append(t);
+        });
+        svg.append(text);
+      };
+      // Prefer big sectors, searching the full sector rather than only its midpoint.
+      for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
         if(item.fraction<.105)continue;
-        const size=4.45;
-        const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const width=Math.max(measure(name,size),measure(item.value,size))+1.5;
-        const height=size*2.5;
-        const span=item.fraction*2*Math.PI;
-        const candidates=[];
-        for(const radius of [37,39,35,41,33]){
-          for(let step=0;step<=20;step++){
-            const ratio=step===0?.5:(step%2?.5+Math.ceil(step/2)*.022:.5-Math.ceil(step/2)*.022);
-            if(ratio<=0||ratio>=1)continue;
-            const angle=item.start+span*ratio;
-            const x=50+radius*Math.cos(angle),y=50+radius*Math.sin(angle);
-            if(fitsSector(x,y,width,height,item)&&
-              !occupied.some(o=>Math.abs(o.x-x)<(o.w+width)/2+1&&Math.abs(o.y-y)<(o.h+height)/2+1))
-              candidates.push({x,y,score:Math.abs(ratio-.5)+Math.abs(radius-37)*.012});
+        const size=4.4,name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
+        const w=Math.max(measure(name,size),measure(item.value,size))+1.5,h=size*2.5;
+        let best=null;
+        for(const radius of [37,35,39,33,41]){
+          for(let k=0;k<=60;k++){
+            const ratio=k===0?.5:(k%2?.5+Math.ceil(k/2)*.012:.5-Math.ceil(k/2)*.012);
+            if(ratio<=.03||ratio>=.97)continue;
+            const [x,y]=polar(radius,item.start+item.span*ratio);
+            if(!fits(x,y,w,h,item))continue;
+            if(placed.some(o=>Math.abs(x-o.x)<(w+o.w)/2+1&&Math.abs(y-o.y)<(h+o.h)/2+1))continue;
+            const score=Math.abs(ratio-.5)+Math.abs(radius-37)*.01;
+            if(!best||score<best.score)best={x,y,score};
           }
         }
-        candidates.sort((a,b)=>a.score-b.score);
-        if(!candidates.length)continue;
-        const {x,y}=candidates[0];
-        svg.append(svgText(x,y-size*.5,[name,item.value],size));
-        occupied.push({x,y,w:width,h:height});
+        if(best){svgLabel(best.x,best.y,name,item.value,size);placed.push({...best,w,h});}
       }
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';

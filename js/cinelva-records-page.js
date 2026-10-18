@@ -144,12 +144,20 @@
       }
     }
     function renderDonut(id,entries,multi=false){
-      const palette=palettes[['csGenres','csCountries','csDecades','csMethods'].indexOf(id)]||palettes[0];
+
       const host=$(id),all=sorted(entries),total=all.reduce((sum,item)=>sum+item[1],0);
       if(!total){host.innerHTML='<p class="cs-empty">集計できる記録がありません。</p>';return;}
       // Preserve every category: never silently group the long tail as "other".
-      const vivid=['#B88E75','#76A69C','#9888AC','#819DB5','#B68194','#B4A27C','#8DA88D','#9C8D86'];
-      const colors=all.map(([name],i)=>id==='csCountries'?(countryColor(name)||vivid[i%vivid.length]):id==='csGenres'?vivid[i%vivid.length]:palette[i%palette.length]);
+      // One restrained hue family per chart. Lightness is distributed across
+      // every category without repeating the same color after eight entries.
+      const hueByChart={csGenres:209,csCountries:153,csDecades:35,csMethods:266};
+      const hue=hueByChart[id]??209;
+      const colors=all.map((_,i)=>{
+        const t=all.length<=1?0:i/(all.length-1);
+        const lightness=all.length<=1?60:36+43*t;
+        const saturation=id==='csDecades'?36:29;
+        return 'hsl('+hue+' '+saturation+'% '+lightness.toFixed(1)+'%)';
+      });
       const mode=donutMode;
       const layout=document.createElement('div');layout.className='cs-stack-layout';
       const bar=document.createElement('div');bar.className='cs-stack-bar';

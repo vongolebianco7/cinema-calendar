@@ -196,51 +196,8 @@
       // A label must never disappear because a rectangle failed a geometric
       // test. Render all meaningful sectors, then choose a stable anchor.
       // Narrow slices rely on the always-visible legend.
-      const svgLabel=(x,y,name,value,size)=>{
-        const text=document.createElementNS(namespace,'text');
-        text.setAttribute('x',x.toFixed(2));text.setAttribute('y',(y-size*.52).toFixed(2));
-        text.setAttribute('text-anchor','middle');text.setAttribute('font-size',String(size));
-        text.setAttribute('font-family',font);text.setAttribute('font-weight','500');
-        text.setAttribute('fill','#fff');text.setAttribute('stroke','#161616');
-        text.setAttribute('stroke-width','.12');text.setAttribute('paint-order','stroke');
-        [name,value].filter(Boolean).forEach((line,i)=>{
-          const t=document.createElementNS(namespace,'tspan');
-          t.setAttribute('x',x.toFixed(2));if(i)t.setAttribute('dy',String(size*1.25));
-          t.textContent=line;text.append(t);
-        });
-        svg.append(text);
-      };
-      const norm=a=>(a%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
-      const occupied=[];
-      // No leader lines or exterior labels. Only render text that fits inside
-      // its own segment; the complete category/value list remains below.
-      for(const item of [...labels].sort((a,b)=>b.fraction-a.fraction)){
-        if(item.fraction<.145)continue;
-        const size=4.15;
-        const name=item.name.length>7?item.name.slice(0,6)+'…':item.name;
-        const w=Math.max(measure(name,size),measure(item.value,size))+1.4,h=size*2.5;
-        let chosen=null;
-        for(let degree=0;degree<360;degree+=2){
-          const angle=(degree-90)*Math.PI/180;
-          const delta=norm(angle-item.start);
-          if(delta<.08||delta>item.span-.08)continue;
-          for(const radius of [37,39,35,41]){
-            const [x,y]=polar(radius,angle);
-            const corners=[[x-w/2,y-h/2],[x+w/2,y-h/2],[x-w/2,y+h/2],[x+w/2,y+h/2],[x,y]];
-            if(corners.some(([px,py])=>{
-              const distance=Math.hypot(px-50,py-50);
-              return distance<29||distance>48;
-            }))continue;
-            if(occupied.some(o=>Math.abs(o.x-x)<(o.w+w)/2+1.5&&Math.abs(o.y-y)<(o.h+h)/2+1.5))continue;
-            const score=Math.abs(radius-37)*.1+Math.abs(delta-item.span/2)/Math.max(item.span,.1);
-            if(!chosen||score<chosen.score)chosen={x,y,score};
-          }
-        }
-        if(chosen){
-          svgLabel(chosen.x,chosen.y,name,item.value,size);
-          occupied.push({...chosen,w,h});
-        }
-      }
+      // Intentionally no labels inside the ring. The compact legend below
+      // is the single source of truth for category names and values.
       const center=document.createElement('div');center.className='cs-donut-center';
       center.innerHTML='<span>合計</span><strong>'+total.toLocaleString('ja-JP')+'</strong><span>本</span>';
       donut.append(center);

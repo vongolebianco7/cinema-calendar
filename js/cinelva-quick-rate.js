@@ -171,7 +171,7 @@ function attachInlineScore(button, movie) {
   value.textContent=score===0?'未鑑賞':score.toFixed(1);
   value.value=value.textContent;
  };
- const finish=()=>{activePointer=null;activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));delete input.dataset.dragging;};
+ const finish=()=>{activePointer=null;activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));};
  track.addEventListener('pointerdown',e=>{
   if(e.pointerType==='touch')return;
   if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -193,7 +193,27 @@ function attachInlineScore(button, movie) {
   const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
   if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();finish();
  },{passive:false});
- track.addEventListener('touchcancel',()=>{activeTouch=null;track.style.removeProperty('--smooth-progress');});
+ track.addEventListener('touchcancel',()=>{activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});
+ // Keep the live number following the finger even when iOS retargets touchmove
+ // to the swipeable card or a parent outside the small rating track.
+ const followTouch=e=>{
+  if(activeTouch===null)return;
+  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
+  if(!touch)return;
+  moveTo(touch.clientX);
+  e.preventDefault();
+ };
+ document.addEventListener('touchmove',followTouch,{capture:true,passive:false});
+ document.addEventListener('touchend',e=>{
+  if(activeTouch===null)return;
+  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
+  if(touch){moveTo(touch.clientX);finish();}
+ },{capture:true,passive:true});
+ document.addEventListener('touchcancel',e=>{
+  if(activeTouch!==null&&Array.from(e.changedTouches).some(t=>t.identifier===activeTouch)){
+   activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');
+  }
+ },{capture:true,passive:true});
  const controls=document.createElement('div');controls.className='cinelva-rating-controls';
  const clear=document.createElement('button');clear.type='button';clear.className='cinelva-rating-clear';clear.textContent='クリア';clear.setAttribute('aria-label','評価をクリア');
  clear.onclick=e=>{e.preventDefault();e.stopPropagation();input.value='0';input.dispatchEvent(new Event('input'));input.dispatchEvent(new Event('change'));};

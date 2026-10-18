@@ -970,6 +970,6 @@ style.textContent+=`
 .cinelva-rate-dialog #cinelvaDateMonthSelect{flex:0 1 74px!important}
 .cinelva-rate-dialog .cinelva-date-nav>button{flex:0 0 30px!important;width:30px!important}
 `;
-root.CinelvaQuickRate={open,normalize};
+root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 })(window);

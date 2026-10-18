@@ -377,6 +377,12 @@ body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!impor
 #directorsView .director-filmography{grid-column:1/-1!important}
 }
 </style>
+<style id="director-portrait-no-crop-20261019">
+/* Show the entire portrait rather than cropping the lower half of the photo. */
+#directorsView .director-card-photo{height:110px!important;overflow:hidden!important;background:#232831!important}
+#directorsView .director-card-photo .director-pick-photo{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important}
+@media(max-width:699px){#directorsView .director-card-photo{height:94px!important}}
+</style>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">

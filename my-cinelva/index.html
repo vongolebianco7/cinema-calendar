@@ -193,7 +193,7 @@
   if(!entries.length){const empty=document.createElement('p');empty.className='hint';empty.textContent='気になる映画のブックマークがここに表示されます。';list.append(empty);return;}
   for(const item of entries){
    const row=document.createElement('div');row.className='want-watch-item';
-   const link=document.createElement('a');link.href='../movie.html?id='+encodeURIComponent(item.id);link.textContent=item.title||'作品';row.append(link);
+   const link=document.createElement('a');link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');link.textContent=item.title||'作品';row.append(link);
    const remove=document.createElement('button');remove.type='button';remove.textContent='解除';
    remove.setAttribute('aria-label',(item.title||'作品')+'を観たいリストから解除');
    remove.onclick=()=>{try{const data=read();delete data[String(item.id)];localStorage.setItem(key,JSON.stringify(data));render();}catch{remove.textContent='保存失敗';}};

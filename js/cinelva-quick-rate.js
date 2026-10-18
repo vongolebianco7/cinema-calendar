@@ -766,6 +766,41 @@ style.textContent+=`
  border-color:#e7b944!important;background:#e7b94426!important;color:#f5d17c!important;
 }
 `;
+style.textContent+=`
+/* Compact list-card review: two rows only, no スコア label. */
+.cinelva-rating-controls{
+ grid-template-rows:24px 26px!important;
+ height:54px!important;min-height:54px!important;max-height:54px!important;
+ padding:2px 6px!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score{
+ grid-template-rows:24px 26px!important;
+ grid-row:1/3!important;height:50px!important;max-height:50px!important;
+}
+.cinelva-rating-controls>.cinelva-inline-score::after{
+ display:none!important;content:none!important;
+}
+.cinelva-rating-controls .cinelva-inline-value{
+ grid-row:1!important;grid-column:1!important;
+ justify-self:center!important;align-self:center!important;
+ max-width:calc(100% - 88px)!important;
+ font:600 11px/20px system-ui!important;height:20px!important;
+}
+.cinelva-rating-controls .cinelva-inline-value::before{display:none!important;content:none!important}
+.cinelva-rating-controls>.cinelva-rate-button{
+ grid-row:1!important;align-self:center!important;
+}
+.cinelva-rating-controls>.cinelva-rating-clear{
+ top:3px!important;right:5px!important;
+ padding:1px 4px!important;
+}
+.cinelva-rating-controls .cinelva-score-track{
+ grid-row:2!important;height:26px!important;min-height:26px!important;max-height:26px!important;
+}
+.cinelva-rating-controls .cinelva-score-track input[type=range]{
+ height:26px!important;min-height:26px!important;max-height:26px!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize};
 
 })(window);

@@ -340,20 +340,25 @@
   function renderDirectors() {
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
-    const knownByName=new Map(knownDirectors.map(d=>[normalizeName(directorJapanese(d.nameJa||d.japanese_name||d.name_ja||d.name)),d]));
+    const canonical=name=>normalizeName(directorJapanese(name)).replace(/[・･.．\s\u3000]/g,'').replace(/ヴ/g,'ブ').replace(/ィ/g,'イ').replace(/ェ/g,'エ').replace(/ー/g,'');
+    const knownByName=new Map();
+    for(const d of knownDirectors)for(const alias of [d.name,d.nameJa,d.name_ja,d.japanese_name]){
+      if(alias)knownByName.set(canonical(alias),d);
+    }
     const movieById=new Map(state.movies.map(movie=>[String(movie.id),movie]));
-    const directorKey=name=>normalizeName(directorJapanese(name));
+    const directorKey=name=>canonical(name);
     for(const record of recordMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
-      const displayName=directorJapanese(name),key=normalizeName(displayName);
+      const displayName=directorJapanese(name),key=directorKey(name);
       if(!groups.has(key))groups.set(key,{name:displayName,records:[],ids:new Set()});
       const group=groups.get(key),id=String(movie.id);
       if(!group.ids.has(id)){group.ids.add(id);group.records.push(movie);}
     }
     const host=$('directorTimeline'),works=$('directorWorks');
     host.replaceChildren();works.replaceChildren();
-    const sorted=[...groups.values()].sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
+    for(const director of knownDirectors){const name=directorJapanese(director.nameJa||director.japanese_name||director.name_ja||director.name),key=directorKey(name);if(!groups.has(key))groups.set(key,{name,records:[],ids:new Set()});}
+    const sorted=[...groups.values()].filter(g=>g.records.length||(knownByName.get(directorKey(g.name))?.works||[]).some(w=>isDirectorCredit(w,g.name))).sort((a,b)=>b.records.length-a.records.length||a.name.localeCompare(b.name,'ja'));
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';
     const detail=document.createElement('div');detail.className='director-filmography';
@@ -375,14 +380,15 @@
       for(const work of director?.works||[]){if(!isDirectorCredit(work,group.name))continue;all.set(String(work.id),{...work,...(movieById.get(String(work.id))||{})});}
       for(const movie of group.records){if(!isDirectorCredit({...movie,is_director:true},group.name))continue;all.set(String(movie.id),{...(all.get(String(movie.id))||{}),...movie});}
       const films=[...all.values()].sort((a,b)=>(Number(a.year)||9999)-(Number(b.year)||9999)||String(a.title||'').localeCompare(String(b.title||''),'ja'));
-      const unseen=films.length-group.records.length;
+      const watchedCount=films.filter(movie=>watched.has(String(movie.id))).length;
+      const unseen=films.length-watchedCount;
       const profileImage=director?.profile_path||director?.profilePath||director?.photo||director?.image||'';
       const photoUrl=profileImage.startsWith('/')?'https://image.tmdb.org/t/p/w185'+profileImage:profileImage;
       const safePhoto=/^https:\/\//.test(photoUrl)?photoUrl:'';
       const profileDetails=[director?.birth_date||director?.birthday?('生年月日：'+(director.birth_date||director.birthday)):'',director?.place_of_birth?('出身地：'+director.place_of_birth):'',director?.biography_ja||director?.biography||''].filter(Boolean);
-      detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+group.records.length+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(group.records.length/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
+      detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+watchedCount+' / '+films.length+'本 鑑賞済み</strong><div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>'+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+'</div></div>'+
         '<div class="director-poster-grid">'+films.map(movie=>filmTile(movie,watched.has(String(movie.id)))).join('')+'</div>'+
-        '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+group.records.length+'本を鑑賞。公開年の古い順に表示。※全フィルモグラフィーを保証する数字ではありません。</p>';
+        '<p class="director-coverage-note">収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。※全フィルモグラフィーを保証する数字ではありません。</p>';
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };
@@ -500,7 +506,7 @@
     try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{try{const response=await fetch(url);return response.ok?await response.json():fallback;}catch{return fallback;}};
     const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors.json',{directors:{}})]);
-    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
+    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[])byId.set(String(work.id),{...work,director:work.director||director.name});for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {

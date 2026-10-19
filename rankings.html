@@ -147,13 +147,34 @@ async function localBoxMovies(){if(!boxMovieIndexPromise)boxMovieIndexPromise=Pr
 function boxMovieId(row){return row.tmdbId||row.tmdb_id||row.movieId||null}
 function boxPosterUrl(value){const raw=String(value||'').trim();if(!raw)return '';if(/^https?:\/\//i.test(raw))return raw;if(raw.startsWith('//'))return 'https:'+raw;if(raw.startsWith('/'))return raw.startsWith('/images/')?raw:'https://image.tmdb.org/t/p/w342'+raw;if(/^(?:w\d+|original)\//.test(raw))return 'https://image.tmdb.org/t/p/'+raw;return ''}
 async function resolveMovie(name,id,year){
- const key=String(id||'')+'|'+name+'|'+String(year||'');if(movieLookupCache.has(key))return movieLookupCache.get(key);
- const norm=normalizeBoxTitle(name);let hit=null;
- try{const local=await localBoxMovies();hit=(id&&local.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(id)))||local.find(m=>(normalizeBoxTitle(m.title)===norm||normalizeBoxTitle(m.original_title)===norm)&&(!year||!m.year||Number(m.year)===Number(year)))||null;}catch{}
- if(!hit||!boxPosterUrl(hit.poster||hit.posterUrl||hit.poster_url||hit.poster_path)){
-  try{const p=new URLSearchParams({q:name,limit:'20'});const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?'+p,{cache:'no-store'});if(r.ok){const d=await r.json();const rows=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];const match=(id&&rows.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(id)))||rows.find(m=>(normalizeBoxTitle(m.title)===norm||normalizeBoxTitle(m.original_title)===norm)&&(!year||!m.year||Number(m.year)===Number(year)))||null;if(match)hit=match;}}catch{}
+ const key=String(id||'')+'|'+name+'|'+String(year||'');
+ if(movieLookupCache.has(key))return movieLookupCache.get(key);
+ const norm=normalizeBoxTitle(name);
+ let hit=null;
+ try{
+  const local=await localBoxMovies();
+  hit=(id&&local.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(id)))||
+   local.find(m=>(normalizeBoxTitle(m.title)===norm||normalizeBoxTitle(m.original_title)===norm)&&(!year||!m.year||Number(m.year)===Number(year)))||null;
+ }catch{}
+ const posterOf=m=>boxPosterUrl(m?.poster||m?.posterUrl||m?.poster_url||m?.poster_path||m?.posterPath||m?.image);
+ if(!hit||!posterOf(hit)){
+  try{
+   const p=new URLSearchParams({q:name,limit:'30'});
+   const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?'+p,{cache:'no-store'});
+   if(r.ok){
+    const d=await r.json();
+    const rows=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];
+    const names=m=>[m.title,m.original_title,m.originalTitle,m.name,m.japanese_title].map(normalizeBoxTitle);
+    const matches=rows.filter(m=>names(m).includes(norm));
+    const match=(id&&rows.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(id)))||
+      matches.find(m=>!year||Number(m.year||String(m.release_date||m.releaseDate||'').slice(0,4))===Number(year))||
+      matches[0]||null;
+    if(match)hit=posterOf(match)?match:hit||match;
+   }
+  }catch{}
  }
- movieLookupCache.set(key,hit);return hit;
+ movieLookupCache.set(key,hit);
+ return hit;
 }
 async function hydrateOneBoxCard(card){
  const name=card.dataset.boxFilm;if(!name)return;

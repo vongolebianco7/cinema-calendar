@@ -4,7 +4,7 @@ import { chromium, webkit } from 'playwright';
 const name=process.env.CINEMAP_BROWSER||'chromium';
 const browser=await ({chromium,webkit}[name]).launch();
 const base=process.env.CINELVA_TEST_BASE||'http://127.0.0.1:4173';
-const pages=fs.readdirSync('.').filter(file=>file.endsWith('.html'));
+const pages=[...fs.readdirSync('.').filter(file=>file.endsWith('.html')),...fs.readdirSync('cinelva').filter(file=>file.endsWith('.html')).map(file=>`cinelva/${file}`)];
 const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:'light',reducedMotion:'reduce'});
 await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
 const page=await context.newPage();
@@ -12,8 +12,8 @@ const errors=[];
 page.on('pageerror',error=>errors.push(error.message));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
- for (const prefix of ['', 'cinelva/']) for (const file of pages) {
-  await page.goto(`${base}/${prefix}${file}`,{waitUntil:'domcontentloaded'});
+ for (const routePath of pages) {\n  const file=routePath.split('/').at(-1);
+  await page.goto(`${base}/${routePath}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(document.querySelector('.cinelvaTheme select')));
   assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' system theme');
   assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',prefix+file+' light body');
@@ -24,7 +24,7 @@ try {
    return elements.map(el=>{const c=getComputedStyle(el),fg=lum(c.color),bg=lum(c.backgroundColor);return {name:el.className||el.textContent,backgroundLuminance:bg,ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)}});
   });
   for(const check of contrasts) {
-   assert.ok(check.ratio>=4.5,`${prefix}${file} light text contrast ${check.name}: ${check.ratio}`);
+   assert.ok(check.ratio>=4.5,`${routePath} light text contrast ${check.name}: ${check.ratio}`);
    if(check.name==='calendarCoverage')assert.ok(check.backgroundLuminance>.75,`${prefix}${file} coverage note should use the light surface: ${check.backgroundLuminance}`);
   }
 
@@ -56,11 +56,11 @@ try {
   await page.waitForFunction(()=>document.documentElement.dataset.theme==='dark');
   await page.emulateMedia({colorScheme:'light'});
   await page.waitForFunction(()=>document.documentElement.dataset.theme==='light');
-  if(['index.html','my-cinemap.html','discover.html'].includes(file)&&!prefix) {
+  if(['index.html','my-cinemap.html','discover.html'].includes(routePath)) {
    if(await menu.count())await page.locator('#gDrawerClose').click();
-   await page.screenshot({path:`artifacts/mobile-smoke/${name}-theme-light-${file}.png`,fullPage:true});
+   await page.screenshot({path:`artifacts/mobile-smoke/${name}-theme-light-${routePath.replaceAll('/','-')}.png`,fullPage:true});
   }
  }
  assert.deepEqual(errors,[],'No page errors during theme journeys');
- console.log(`Theme browser checks passed in ${name}: ${pages.length*2} routes, 390px, OS preference, override and reload.`);
+ console.log(`Theme browser checks passed in ${name}: ${pages.length} routes, 390px, OS preference, override and reload.`);
 } finally {await browser.close();}

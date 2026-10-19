@@ -1875,7 +1875,7 @@
       "purpose": "viewing records and insights",
       "controls": [
         {
-          "line": 758,
+          "line": 767,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1884,7 +1884,7 @@
           }
         },
         {
-          "line": 760,
+          "line": 769,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -1896,7 +1896,7 @@
           }
         },
         {
-          "line": 761,
+          "line": 770,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -1905,7 +1905,7 @@
           }
         },
         {
-          "line": 763,
+          "line": 772,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -1914,7 +1914,7 @@
           }
         },
         {
-          "line": 767,
+          "line": 776,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1923,7 +1923,7 @@
           }
         },
         {
-          "line": 767,
+          "line": 776,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -1932,54 +1932,54 @@
           }
         },
         {
-          "line": 768,
+          "line": 777,
           "tag": "a",
           "attributes": {
             "href": "../index.html"
           }
         },
         {
-          "line": 769,
+          "line": 778,
           "tag": "a",
           "attributes": {
             "href": "../discover.html"
           }
         },
         {
-          "line": 770,
+          "line": 779,
           "tag": "a",
           "attributes": {
             "href": "../rankings.html"
           }
         },
         {
-          "line": 771,
+          "line": 780,
           "tag": "a",
           "attributes": {
             "href": "../theaters.html"
           }
         },
         {
-          "line": 772,
+          "line": 781,
           "tag": "a",
           "attributes": {
             "href": "../experience.html"
           }
         },
         {
-          "line": 773,
+          "line": 782,
           "tag": "a",
           "attributes": {
             "href": "./"
           }
         },
         {
-          "line": 777,
+          "line": 786,
           "tag": "summary",
           "attributes": {}
         },
         {
-          "line": 777,
+          "line": 786,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -1987,7 +1987,7 @@
           }
         },
         {
-          "line": 777,
+          "line": 786,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -1995,7 +1995,7 @@
           }
         },
         {
-          "line": 777,
+          "line": 786,
           "tag": "a",
           "attributes": {
             "class": "button",
@@ -2003,7 +2003,7 @@
           }
         },
         {
-          "line": 777,
+          "line": 786,
           "tag": "input",
           "attributes": {
             "id": "importFile",
@@ -2013,7 +2013,7 @@
           }
         },
         {
-          "line": 781,
+          "line": 790,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2023,7 +2023,7 @@
           }
         },
         {
-          "line": 781,
+          "line": 790,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2033,7 +2033,7 @@
           }
         },
         {
-          "line": 781,
+          "line": 790,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2043,7 +2043,7 @@
           }
         },
         {
-          "line": 781,
+          "line": 790,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2053,7 +2053,7 @@
           }
         },
         {
-          "line": 781,
+          "line": 790,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2063,7 +2063,7 @@
           }
         },
         {
-          "line": 782,
+          "line": 791,
           "tag": "select",
           "attributes": {
             "id": "csPeriod",
@@ -2071,7 +2071,7 @@
           }
         },
         {
-          "line": 782,
+          "line": 791,
           "tag": "input",
           "attributes": {
             "id": "recordSearch",
@@ -2080,7 +2080,7 @@
           }
         },
         {
-          "line": 782,
+          "line": 791,
           "tag": "select",
           "attributes": {
             "id": "recordSort",
@@ -2088,7 +2088,7 @@
           }
         },
         {
-          "line": 782,
+          "line": 791,
           "tag": "select",
           "attributes": {
             "id": "recordYear",
@@ -2096,49 +2096,49 @@
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "select",
           "attributes": {
             "id": "calendarMode"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "id": "monthPrev"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "id": "monthNext"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "select",
           "attributes": {
             "id": "worldYear"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "select",
           "attributes": {
             "id": "worldGenre"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "select",
           "attributes": {
             "id": "worldCountry"
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2147,7 +2147,7 @@
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2156,7 +2156,7 @@
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2164,7 +2164,7 @@
           }
         },
         {
-          "line": 783,
+          "line": 792,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2173,35 +2173,35 @@
           }
         },
         {
-          "line": 784,
+          "line": 793,
           "tag": "select",
           "attributes": {
             "id": "genreFormat"
           }
         },
         {
-          "line": 784,
+          "line": 793,
           "tag": "select",
           "attributes": {
             "id": "genreWorkForm"
           }
         },
         {
-          "line": 785,
+          "line": 794,
           "tag": "select",
           "attributes": {
             "id": "awardMode"
           }
         },
         {
-          "line": 785,
+          "line": 794,
           "tag": "select",
           "attributes": {
             "id": "awardCategory"
           }
         },
         {
-          "line": 785,
+          "line": 794,
           "tag": "input",
           "attributes": {
             "id": "awardOther",
@@ -2209,7 +2209,7 @@
           }
         },
         {
-          "line": 785,
+          "line": 794,
           "tag": "a",
           "attributes": {
             "class": "award-ranking-link",
@@ -2217,21 +2217,21 @@
           }
         },
         {
-          "line": 789,
+          "line": 798,
           "tag": "a",
           "attributes": {
             "href": "../data-backup.html"
           }
         },
         {
-          "line": 789,
+          "line": 798,
           "tag": "a",
           "attributes": {
             "href": "../privacy.html"
           }
         },
         {
-          "line": 792,
+          "line": 801,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2241,7 +2241,7 @@
           }
         },
         {
-          "line": 794,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2250,7 +2250,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2259,7 +2259,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "input",
           "attributes": {
             "id": "movieQuery",
@@ -2269,7 +2269,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "input",
           "attributes": {
             "id": "watchedAt",
@@ -2281,14 +2281,14 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "select",
           "attributes": {
             "id": "viewingMethod"
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "textarea",
           "attributes": {
             "id": "recordComment",
@@ -2297,7 +2297,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "input",
           "attributes": {
             "id": "rating",
@@ -2309,7 +2309,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2319,7 +2319,7 @@
           }
         },
         {
-          "line": 796,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -6292,199 +6292,199 @@
           "source_excerpt": "const html = `<table><thead><tr><th>ジャンル</th>${names.map(name => `<th>${escapeHTML(name)}</th>`).join('')}</tr></thead><tbody>` + names.map((name, i) => `<tr><th><button data-genre=\"${escapeHTML(name)}\">${escapeHTML(name)} · ${counts[name]}</button></th>${names.map((other, j) => { const overlap = genreSets.filter(genres=>genres.has(name)&&genres.has(other)).length; return `<td><button class=\"heat-${Math.min(4, overlap)}\" data-genre-pair=\"${escapeHTML(name)}|${escapeHTML(other)}\" aria-label=\"${es"
         },
         {
-          "line": 540,
+          "line": 537,
           "source_excerpt": "'<div class=\"cs-highlight\"><span class=\"cs-highlight-label\">映画賞別の鑑賞記録</span><button type=\"button\" class=\"cs-highlight-value\" data-dashboard-tab=\"awards\">映画賞コレクションを見る →</button></div>'+"
         },
         {
-          "line": 545,
+          "line": 542,
           "source_excerpt": "(awardAffinity.length?'<div class=\"cinelva-affinity-list\">'+awardAffinity.slice(0,5).map((row,i)=>'<div class=\"cinelva-affinity-row\"><span class=\"cinelva-affinity-rank\">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type=\"button\" class=\"cinelva-affinity-link\" data-dashboard-tab=\"awards\" aria-label=\"映画賞コレクションを開く\">'+escapeHTML(awardDisplayName(row.name))+'</button><span class=\"cinelva-affinity-meta\">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</"
         },
         {
-          "line": 549,
+          "line": 546,
           "source_excerpt": "$('awardMatrix').innerHTML=`<table class=\"award-table\"><thead><tr><th scope=\"col\">映画賞</th>${decades.map(d=>`<th scope=\"col\">${d}<small>年代</small></th>`).join('')}<th scope=\"col\" class=\"award-total-head\">鑑賞計</th></tr></thead><tbody>${organizations.map(name=>{const total=decades.reduce((sum,decade)=>sum+(scopedCell(name,decade)?.count||0),0);return `<tr><th scope=\"row\">${escapeHTML(awardDisplayName(name))}</th>${decades.map(decade=>{const cell=scopedCell(name,decade);if(!cell)return '<td class=\"aw"
         },
         {
-          "line": 551,
+          "line": 548,
           "source_excerpt": "const awardHeading=state.awardSelection?'<div class=\"award-detail-head\"><div><span class=\"award-detail-kicker\">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>受賞作品の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type=\"button\" class=\"award-detail-close\" data-close-award aria-label=\"詳細を閉じる\">×</button></div>':'';"
         },
         {
-          "line": 571,
+          "line": 568,
           "source_excerpt": "+(entryId?'<div class=\"record-own-rating-label\">あなたの評価</div><div class=\"record-shared-controls\" data-film-controls=\"'+escapeHTML(entryId)+'\"></div>':'<span class=\"award-card-unmatched\">作品データ照合待ち</span>')"
         },
         {
-          "line": 805,
+          "line": 802,
           "source_excerpt": "'<div class=\"cs-highlight\"><span class=\"cs-highlight-label\">監督別の鑑賞記録</span><button type=\"button\" class=\"cs-highlight-value\" data-dashboard-tab=\"directors\">監督コレクションを見る →</button></div>'+"
         },
         {
-          "line": 810,
+          "line": 807,
           "source_excerpt": "(affinity.length?'<div class=\"cinelva-affinity-list\">'+affinity.slice(0,10).map((group,i)=>'<div class=\"cinelva-affinity-row\"><span class=\"cinelva-affinity-rank\">'+(i+1)+'</span><span class=\"cinelva-affinity-visual\">'+(()=>{const profile=group.filmography?.director;const source=String(profile?.profile_path||profile?.profilePath||profile?.photo||profile?.image||'');const url=source.startsWith('/')?'https://image.tmdb.org/t/p/w185'+source:source;return /^https:\\/\\//i.test(url)?'<img src=\"'+escapeH"
         },
         {
-          "line": 887,
+          "line": 884,
           "source_excerpt": "close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});"
         },
         {
-          "line": 908,
+          "line": 905,
           "source_excerpt": "row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});"
         },
         {
-          "line": 929,
+          "line": 926,
           "source_excerpt": "try{sessionStorage.setItem('cinelva-director-sort',sortSelect.value);}catch(_){}"
         },
         {
-          "line": 931,
+          "line": 928,
           "source_excerpt": "sortSelect.addEventListener('change',applySort);"
         },
         {
-          "line": 963,
+          "line": 960,
           "source_excerpt": "box.innerHTML=rows.length?rows.map(movie=>`<button type=\"button\" class=\"search-result\" data-choose-movie=\"${escapeHTML(movie.id||movie.tmdbId)}\"><img src=\"${escapeHTML(poster(movie))}\" alt=\"\" onerror=\"this.hidden=true\"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class=\"hint\">作品が見つかりません。作品名を変え"
         },
         {
-          "line": 980,
+          "line": 977,
           "source_excerpt": "try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }"
         },
         {
-          "line": 983,
+          "line": 980,
           "source_excerpt": "function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }"
         },
         {
-          "line": 994,
+          "line": 991,
           "source_excerpt": "async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));state.records=Records.all();populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }"
         },
         {
-          "line": 996,
+          "line": 993,
           "source_excerpt": "document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));"
         },
         {
-          "line": 997,
+          "line": 994,
           "source_excerpt": "if($('addRecord')) $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;"
         },
         {
-          "line": 998,
+          "line": 995,
           "source_excerpt": "$('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);"
         },
         {
-          "line": 999,
+          "line": 996,
           "source_excerpt": "$('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};"
         },
         {
-          "line": 1000,
+          "line": 997,
           "source_excerpt": "$('movieQuery').oninput=event=>searchMovies(event.target.value);"
         },
         {
-          "line": 1001,
+          "line": 998,
           "source_excerpt": "$('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};"
         },
         {
-          "line": 1002,
+          "line": 999,
           "source_excerpt": "$('csPeriod').onchange=()=>{renderCinemaSummary();renderYearHeatmap();};"
         },
         {
-          "line": 1003,
+          "line": 1000,
           "source_excerpt": "$('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;"
         },
         {
-          "line": 1004,
+          "line": 1001,
           "source_excerpt": "$('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};"
         },
         {
-          "line": 1005,
+          "line": 1002,
           "source_excerpt": "$('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};"
         },
         {
-          "line": 1006,
+          "line": 1003,
           "source_excerpt": "$('directorWorks').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};"
         },
         {
-          "line": 1007,
+          "line": 1004,
           "source_excerpt": "$('calendarMode').onchange=renderCalendar;"
         },
         {
-          "line": 1008,
+          "line": 1005,
           "source_excerpt": "$('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};"
         },
         {
-          "line": 1009,
+          "line": 1006,
           "source_excerpt": "$('yearHeatmap').onclick=event=>{const year=event.target.closest('[data-calendar-year]');if(year){state.year=Number(year.dataset.calendarYear);syncCalendarYear();return;}const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padSta"
         },
         {
-          "line": 1010,
+          "line": 1007,
           "source_excerpt": "$('genreMatrix').onclick=event=>{const button=event.target.closest('[data-genre],[data-genre-pair]');if(!button)return;if(button.dataset.genrePair){const [first,second]=button.dataset.genrePair.split('|');const rows=classifiedRecords().filter(record=>recordGenres(record).includes(first)&&recordGenres(record).includes(second));$('genreFilms').innerHTML=rows.length?rows.map(card).join(''):`<div class=\"empty\" style=\"grid-column:1/-1\">${escapeHTML(first)}と${escapeHTML(second)}の両方に分類された記録はありません。</div"
         },
         {
-          "line": 1011,
+          "line": 1008,
           "source_excerpt": "$('awardMatrix').onclick=event=>{const button=event.target.closest('[data-award-cell]');if(!button)return;const [organization,decade]=button.dataset.awardCell.split('|');state.awardSelection={organization,decade:Number(decade)};renderAwards();};"
         },
         {
-          "line": 1012,
+          "line": 1009,
           "source_excerpt": "$('genreFormat').onchange=renderGenres; $('genreWorkForm').onchange=renderGenres; $('awardMode').onchange=renderAwards; $('awardCategory').onchange=renderAwards; $('awardOther').onchange=renderAwards;"
         },
         {
-          "line": 1013,
+          "line": 1010,
           "source_excerpt": "$('awardFilms').onclick=event=>{if(event.target.closest('[data-close-award]')){state.awardSelection=null;renderAwards();return;}const button=event.target.closest('[data-award-film]');if(button)openKnownMovie(button.dataset.awardFilm);};"
         },
         {
-          "line": 1014,
+          "line": 1011,
           "source_excerpt": "$('worldZoomIn').onclick=()=>{state.plotZoom=Math.min(2.5,state.plotZoom*1.2);drawWorld();};$('worldZoomOut').onclick=()=>{state.plotZoom=Math.max(.65,state.plotZoom/1.2);drawWorld();};$('worldReset').onclick=()=>{state.plotRotation={x:-.32,y:-.58};state.plotZoom=1;state.plotOffset={x:0,y:0};drawWorld();};$('worldToggle').onclick=()=>{state.flatWorld=!state.flatWorld;drawWorld();};"
         },
         {
-          "line": 1017,
+          "line": 1014,
           "source_excerpt": "document.addEventListener('click',event=>{"
         },
         {
-          "line": 1018,
+          "line": 1015,
           "source_excerpt": "const trigger=event.target.closest('[data-review-detail]');"
         },
         {
-          "line": 1020,
+          "line": 1017,
           "source_excerpt": "const edit=event.target.closest('[data-review-edit]');"
         },
         {
-          "line": 1027,
+          "line": 1024,
           "source_excerpt": "$('reviewDetailClose').onclick=()=>$('reviewDetailDialog').close();"
         },
         {
-          "line": 1028,
+          "line": 1025,
           "source_excerpt": "document.addEventListener('click',event=>{const edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');if(edit){const record=state.records.find(item=>String(item.id)===edit.dataset.edit);if(record)openDialog(record);}if(del)deleteRecord(del.dataset.delete);});"
         },
         {
-          "line": 1030,
+          "line": 1027,
           "source_excerpt": "canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=','Enter'].includes(event.key))return;event.preventDefault();if(event.key==='Enter'){const rows=worldRecords();if(rows.length)showWorldFilm(rows[state.keyboardPoint++%rows.length]);return;}if(['+','='].includes(event.key))state.plotZoom=Math.min(2.5,state.plotZoom*1.1);else if(event.key==='-')state.plotZoom=Math.max(.65,state.plotZoom/1.1);else if(event.key==='ArrowLeft')state.plotRotation.y-="
         },
         {
-          "line": 1033,
+          "line": 1030,
           "source_excerpt": "canvas.addEventListener('pointerdown',event=>{state.plotWasDragged=false;canvas.setPointerCapture(event.pointerId);state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];state.plotDrag=points.length>1?{mode:'pinch',distance:pointerDistance(points),center:pointerCenter(points)}:{mode:'rotate',x:event.clientX,y:event.clientY,rotation:{...state.plotRotation}};});"
         },
         {
-          "line": 1034,
+          "line": 1031,
           "source_excerpt": "canvas.addEventListener('pointermove',event=>{if(!state.plotPointers.has(event.pointerId))return;const prior=state.plotPointers.get(event.pointerId);if(Math.hypot(event.clientX-prior.x,event.clientY-prior.y)>3)state.plotWasDragged=true;state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];if(points.length>1&&state.plotDrag?.mode==='pinch'){const distance=pointerDistance(points),center=pointerCenter(points);state.plotZoom=Math.max("
         },
         {
-          "line": 1035,
+          "line": 1032,
           "source_excerpt": "const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);"
         },
         {
-          "line": 1036,
+          "line": 1033,
           "source_excerpt": "canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});"
         },
         {
-          "line": 1037,
+          "line": 1034,
           "source_excerpt": "canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · あなたの評価 ★ ${Number(record.rating "
         },
         {
-          "line": 1038,
+          "line": 1035,
           "source_excerpt": "window.addEventListener('cinelva-record-updated',()=>{state.records=Records.all();populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();});"
         },
         {
-          "line": 1039,
+          "line": 1036,
           "source_excerpt": "window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});"
         },
         {
-          "line": 1040,
+          "line": 1037,
           "source_excerpt": "window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});"
         },
         {
-          "line": 1070,
+          "line": 1067,
           "source_excerpt": "const controlObserver=new MutationObserver(changes=>{if(changes.some(change=>[...change.addedNodes].some(node=>node.nodeType===1&&(node.matches?.('[data-film-controls]')||node.querySelector?.('[data-film-controls]')))))mountFilmControls();});"
         }
       ]
@@ -6594,59 +6594,59 @@
       "file": "my-cinelva/index.html",
       "operations": [
         {
-          "line": 760,
+          "line": 769,
           "source_excerpt": "<input class=\"gSearch\" name=\"search\" type=\"search\" placeholder=\"作品・映画館を検索\" autocomplete=\"off\" aria-label=\"作品・映画館を検索\">"
         },
         {
-          "line": 761,
+          "line": 770,
           "source_excerpt": "<button class=\"gSearchBtn\" type=\"submit\" aria-label=\"検索\">⌕</button>"
         },
         {
-          "line": 763,
+          "line": 772,
           "source_excerpt": "<button class=\"gMenuBtn\" id=\"gMenuBtn\" aria-label=\"メニュー\"><span class=\"gMenuLines\" aria-hidden=\"true\"></span></button>"
         },
         {
-          "line": 767,
+          "line": 776,
           "source_excerpt": "<div class=\"gDrawerHead\"><a class=\"gBrand\" href=\"../index.html\" aria-label=\"Cinelva\"><img class=\"gBrandImage\" src=\"../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\"><span class=\"gBrandWord\">Cinelva</span></a><button class=\"gDrawerClose\" id=\"gDrawerClose\" aria-label=\"閉じる\">×</button></div>"
         },
         {
-          "line": 777,
+          "line": 786,
           "source_excerpt": "<section class=\"hero\"><div><div class=\"eyebrow\">YOUR MOVIE HISTORY</div><h1>My Cinelva</h1><p>観た映画を記録して、年間の歩みや好きな作品を振り返る。</p></div><div class=\"actions\"><details class=\"recordUtilities\"><summary>その他の操作 <span aria-hidden=\"true\">⌄</span></summary><div class=\"utilityItems\"><button class=\"button\" id=\"exportRecords\">記録をバックアップ</button><button class=\"button\" id=\"importRecords\">バックアップを復元</button><a class=\"button\" href=\"../my-cinemap.html\">実績画像を作る</a></div></details><input id=\"importFile\" type=\"file\" acce"
         },
         {
-          "line": 781,
+          "line": 790,
           "source_excerpt": "<nav class=\"tabs\" role=\"tablist\" aria-label=\"鑑賞記録の表示\"><button class=\"tab\" role=\"tab\" aria-selected=\"true\" data-tab=\"summary\">ダッシュボード</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"records\">鑑賞した映画</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"watchlist\">見たい映画</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"awards\">映画賞</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"directors\">監督別</button></nav>"
         },
         {
-          "line": 782,
+          "line": 791,
           "source_excerpt": "<section id=\"summaryView\" class=\"cinema-summary view\" role=\"tabpanel\" aria-label=\"鑑賞サマリー\"><div class=\"cs-head\"><h2>あなたの鑑賞実績</h2><select id=\"csPeriod\" aria-label=\"集計期間\"><option value=\"all\">オールタイム</option></select></div><div class=\"cs-top\"><div><div class=\"cs-muted\">生涯鑑賞本数</div><div class=\"cs-number\" id=\"csLifetime\">0</div><div class=\"cs-milestones\"><div id=\"csPrisms\" class=\"cs-prisms\"></div><div id=\"csCrowns\" class=\"cs-crowns\"></div></div></div><div><div class=\"cs-muted\" id=\"csPeriodLabel\">今年の鑑賞本"
         },
         {
-          "line": 783,
+          "line": 792,
           "source_excerpt": "<section id=\"calendarView\" class=\"view\" role=\"tabpanel\" hidden><div hidden aria-hidden=\"true\"><select id=\"calendarMode\"><option value=\"count\">本数</option><option value=\"date\">日付</option><option value=\"rating\">評価</option><option value=\"method\">映画館／配信</option></select><button id=\"monthPrev\">‹</button><strong id=\"calendarMonth\"></strong><button id=\"monthNext\">›</button><div id=\"calendar\"></div></div></section><section id=\"worldView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head\"><div>"
         },
         {
-          "line": 784,
+          "line": 793,
           "source_excerpt": "<section id=\"genresView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head\"><div><h2>ジャンルの重なり</h2><p>複数ジャンルの記録を数え、よく一緒に観ている組み合わせを示します。未分類作品は推測で振り分けません。</p></div></div><div class=\"toolbar\"><label>表現形式<select id=\"genreFormat\"><option value=\"all\">すべて</option><option>実写</option><option>アニメーション</option><option>ストップモーション</option><option value=\"unknown\">不明</option></select></label><label>作品形式<select id=\"genreWorkForm\"><option value=\"all\">すべて</option><option>フィクション</option><option>ドキュメンタリー</o"
         },
         {
-          "line": 785,
+          "line": 794,
           "source_excerpt": "<section id=\"awardsView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head award-titlebar\"><div><span class=\"award-eyebrow\">MY CINELVA / AWARDS</span><h2>映画賞コレクション</h2><p>時代と映画賞を越えて、鑑賞した名作の足跡を集める。</p></div><label>表示<select id=\"awardMode\"><option value=\"count\">鑑賞本数</option><option value=\"rate\" disabled>達成率（集計可能な賞のみ）</option></select></label></div><div class=\"award-filters\" aria-label=\"映画賞の絞り込み\"><label>受賞部門<select id=\"awardCategory\"><option value=\"all\">全部門</option><option value=\"picture"
         },
         {
-          "line": 792,
+          "line": 801,
           "source_excerpt": "<div class=\"review-detail-header\"><strong>レビュー詳細を見る</strong><button type=\"button\" class=\"button\" id=\"reviewDetailClose\" aria-label=\"閉じる\">閉じる ×</button></div>"
         },
         {
-          "line": 794,
+          "line": 803,
           "source_excerpt": "<div class=\"review-detail-footer\"><button type=\"button\" class=\"button primary\" id=\"reviewDetailEdit\">レビューを編集</button></div>"
         },
         {
-          "line": 796,
+          "line": 805,
           "source_excerpt": "<dialog id=\"recordDialog\"><form method=\"dialog\" id=\"recordForm\"><div class=\"dialog-head\"><strong id=\"dialogTitle\">鑑賞を記録</strong><button type=\"button\" class=\"button\" id=\"closeDialog\">閉じる</button></div><div class=\"dialog-body\"><label class=\"field\">作品を検索<input id=\"movieQuery\" type=\"search\" autocomplete=\"off\" placeholder=\"作品名\"><span class=\"hint\">記録済み作品の編集時は検索を省略できます。</span></label><div id=\"movieResults\" class=\"search-results\"></div><div id=\"chosenMovie\" class=\"hint\"></div><label class=\"field\">鑑賞日（任意"
         },
         {
-          "line": 798,
+          "line": 807,
           "source_excerpt": "<script>(()=>{const b=document.getElementById(\"gMenuBtn\"),d=document.getElementById(\"gDrawer\"),m=document.getElementById(\"gDrawerMask\"),x=document.getElementById(\"gDrawerClose\");if(!b||!d||!m)return;const open=()=>{d.classList.add(\"show\");m.classList.add(\"show\")},close=()=>{d.classList.remove(\"show\");m.classList.remove(\"show\")};b.addEventListener(\"click\",open);m.addEventListener(\"click\",close);x&&x.addEventListener(\"click\",close)})();</script><style>"
         }
       ]

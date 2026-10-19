@@ -987,6 +987,17 @@ style.textContent+=`
 .record-shared-controls .cinelva-rating-date-prompt,.want-watch-controls .cinelva-rating-date-prompt,.recordAction .cinelva-rating-date-prompt{grid-row:3!important}
 .recordAction{max-width:440px}.movie>a,.cs-film>a{color:inherit;text-decoration:none}#summaryView .cs-film>a{display:block;min-width:0}.movie>.record-delete-icon{align-self:flex-end;min-height:32px;margin-top:4px;border:0;background:transparent;color:inherit;font-size:11px}
 `;
+style.textContent+=`
+/* Narrow streaming/search tiles stack actions so none are clipped below 96px. */
+.cinelva-rate-wrap,.streamMovie[data-mi],.tvMovie[data-mi],.awardCard,.cinelva-discovery-unit{container-type:inline-size}
+@container (max-width:95px){
+ .cinelva-rating-controls{flex-wrap:wrap!important;justify-content:center!important;gap:2px 5px!important}
+ .cinelva-rating-controls>.cinelva-rate-button,.cinelva-rating-controls>.cinelva-bookmark-button{order:0;flex:0 0 25px!important;width:25px!important;min-width:25px!important;height:30px!important;min-height:30px!important}
+ .cinelva-rating-controls>.cinelva-bookmark-button{order:1}
+ .cinelva-rating-controls>.cinelva-inline-score{order:2;flex:1 0 100%!important;width:100%!important;min-width:0!important;margin:0!important}
+ .cinelva-rating-controls .cinelva-score-track{min-width:0!important}
+}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);button.dataset.movieTitle=movie.title||'';}button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 if(root.CinelvaDiscoveryResolve){

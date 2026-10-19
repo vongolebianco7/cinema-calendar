@@ -6,13 +6,14 @@ const browser=await ({chromium,webkit}[name]).launch();
 const base=process.env.CINELVA_TEST_BASE||'http://127.0.0.1:4173';
 const pages=[...fs.readdirSync('.').filter(file=>file.endsWith('.html')),...fs.readdirSync('cinelva').filter(file=>file.endsWith('.html')).map(file=>`cinelva/${file}`)];
 const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:'light',reducedMotion:'reduce'});
-await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
+await context.route('**/api/**',route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
 const page=await context.newPage();
-const errors=[];
-page.on('pageerror',error=>errors.push(error.message));
+const errors=[];let currentRoute='';
+page.on('pageerror',error=>errors.push(`${currentRoute}: ${error.message}`));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
  for (const routePath of pages) {
+  currentRoute=routePath;
   const file=routePath.split('/').at(-1);
   await page.goto(`${base}/${routePath}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(document.querySelector('.cinelvaTheme select')));

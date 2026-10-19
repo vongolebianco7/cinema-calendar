@@ -1075,6 +1075,33 @@ style.textContent+=`
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{width:22px!important;min-width:22px!important;height:22px!important;flex:0 0 22px!important;padding:2px!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{align-self:center!important}
 `;
+style.textContent+=`
+/* Uniform rating tiles across calendar, search and rankings. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 24px!important;grid-template-rows:44px!important;
+ width:100%!important;min-width:0!important;height:54px!important;min-height:54px!important;max-height:54px!important;
+ box-sizing:border-box!important;padding:5px 7px!important;gap:4px!important;align-items:center!important;overflow:hidden!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;gap:2px!important;
+ width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;max-height:44px!important;
+ overflow:hidden!important;align-self:center!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{
+ display:block!important;width:100%!important;min-width:0!important;height:16px!important;min-height:16px!important;
+ line-height:16px!important;font-size:10px!important;font-weight:600!important;white-space:nowrap!important;
+ overflow:hidden!important;text-overflow:clip!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:2px!important;width:24px!important;min-width:24px!important;height:44px!important;min-height:44px!important;max-height:44px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{
+ width:21px!important;min-width:21px!important;max-width:21px!important;height:21px!important;min-height:21px!important;
+ max-height:21px!important;flex:0 0 21px!important;padding:1px!important;margin:0!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{width:16px!important;height:16px!important}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 })(window);

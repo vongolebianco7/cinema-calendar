@@ -94,18 +94,13 @@
       const cinema=filtered.filter(r=>methodOf(r)==='映画館').length;
       const streaming=filtered.filter(r=>methodOf(r)==='配信').length;
       const avg=scored.length?(scored.reduce((a,b)=>a+b,0)/scored.length).toFixed(2):'—';
-      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館 / 配信',cinema+' / '+streaming+'本']];
+      const other=filtered.length-cinema-streaming;
+      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館',cinema+'本'],['配信',streaming+'本'],['未設定・その他',other+'本']];
+      statsHost.setAttribute('aria-label','鑑賞方法：映画館'+cinema+'本、配信'+streaming+'本、未設定・その他'+other+'本、合計'+filtered.length+'本');
       statsHost.replaceChildren(...items.map(([label,value])=>{const card=document.createElement('div');card.className='cs-extra-stat';const l=document.createElement('span');l.textContent=label;const v=document.createElement('strong');v.textContent=value;card.append(l,v);return card;}));
     }
 
     $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';
-    const prism='<svg class="cs-prism" viewBox="0 0 42 48" aria-hidden="true"><defs><linearGradient id="csFacetA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4e7f0"/><stop offset=".48" stop-color="#b6d8df"/><stop offset="1" stop-color="#8f9dc8"/></linearGradient><linearGradient id="csFacetB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5e8ee"/><stop offset="1" stop-color="#9cabc9"/></linearGradient></defs><path d="M21 2 37 10v28L21 46 5 38V10Z" fill="#b5c5da" stroke="#e2e5ef" stroke-width="1.1"/><path d="M21 2 37 10 21 18 5 10Z" fill="#e7dce9"/><path d="M5 10 21 18v28L5 38Z" fill="url(#csFacetA)"/><path d="M37 10 21 18v28l16-8Z" fill="url(#csFacetB)"/><path d="M21 2v16M5 10l16 8 16-8M21 18v28" stroke="#f4f4f8" stroke-width=".9" fill="none"/><path d="M10 15v19M33 14v20" stroke="#fff" stroke-opacity=".3" stroke-width=".8"/></svg>';
-    $('csPrisms').innerHTML=prism.repeat(Math.floor(all.length/1000));
-    const achieved=Math.floor(all.length%1000/100);
-    $('csCrowns').innerHTML=Array.from({length:10},(_,i)=>'<svg class="cs-crown" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 2 5l6 5 3-7 3 7 6-5-1 11ZM3 19h16" fill="none" stroke="'+(i<achieved?'#d9bd7f':'#66737d')+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>').join('');
-    const counts=new Map();all.forEach(r=>{const y=dateOf(r).slice(0,4);if(/^\d{4}$/.test(y))counts.set(y,(counts.get(y)||0)+1)});
-    const max=Math.max(1,...counts.values());
-    $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
     const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
     $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'>'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="cs-poster-empty" hidden>ポスターなし</div>':'<div class="cs-poster-empty">ポスターなし</div>')+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-score" title="あなたが記録した評価">あなたの評価 ★ '+Number(r.rating).toFixed(1)+'</div></div>'}).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
     const more=$('csTopMore');if(more)more.addEventListener('click',()=>{
@@ -129,6 +124,8 @@
       const release=Number(r.year);if(release>=1880&&release<=2100){const d=Math.floor(release/10)*10;decades.set(d,(decades.get(d)||0)+1)}
     });
     const sorted=m=>[...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ja'));
+    const tendency=(label,entry)=>'<div><span>'+label+'</span><strong>'+escapeHTML(entry?.[0]||'—')+'</strong><small>'+(entry?entry[1]+'本':'記録なし')+'</small></div>';
+    $('csTendencies').innerHTML=tendency('最多ジャンル',sorted(genreCounts)[0])+tendency('最多製作国',sorted(countryCounts)[0]);
     const palettes=[['#4b92cf','#81b7e0','#b0d4ed','#285b8d','#d3e6f4','#6383b4','#9db9d5','#456477'],['#b88a50','#e2bf79','#8b693f','#efd9a5','#aa7e69','#c9a478','#725638','#d9c7ad'],['#456FAD','#C27B4A','#75A69A','#B65B79','#A89A59','#806AB1','#6597B0','#B4A3A0'],['#418F88','#D09A52','#7C6FB4','#C76F7A','#5D8DB8','#9DAD69','#A87A9F','#B4A187']];
     const countryColor=name=>{const n=String(name).normalize('NFKC').toLowerCase();const rules=[[/日本|japan/,'#c34261'],[/アメリカ|united states|usa/,'#3176c7'],[/韓国|south korea|korea/,'#7252bf'],[/イギリス|united kingdom|uk|britain/,'#31528a'],[/フランス|france/,'#26a39b'],[/イタリア|italy/,'#26844e'],[/ドイツ|germany/,'#d2a137'],[/中国|china/,'#bd6033'],[/インド|india/,'#db8535'],[/スペイン|spain/,'#b65e97']];return rules.find(([re])=>re.test(n))?.[1]||null;};
     const storageKey='cinelva-donut-value-mode';
@@ -211,6 +208,14 @@
     renderDonut('csCountries',countryCounts);
     renderDonut('csDecades',new Map([...decades].map(([year,count])=>[year+'年代',count])));
     renderDonut('csMethods',methodCounts);
+  }
+
+  function summaryCollection(kind,entries){
+    const host=$('csSummaryCollections');if(!host)return;
+    const target=kind==='director'?'directors':'awards';
+    let section=host.querySelector('[data-summary-kind="'+kind+'"]');
+    if(!section){section=document.createElement('section');section.dataset.summaryKind=kind;host.append(section);}
+    section.innerHTML=entries.map(([label,name,detail,key])=>'<div class="cs-summary-entry"><span>'+label+'</span>'+(name?'<button type="button" data-dashboard-tab="'+target+'" data-collection-key="'+escapeHTML(key)+'">'+escapeHTML(name)+' →</button>':'<strong>対象なし</strong>')+'<small>'+escapeHTML(detail)+'</small></div>').join('');
   }
 
   function renderStats() {
@@ -314,7 +319,10 @@
     const tab=shortcut.dataset.dashboardTab;
     if(tab!=='awards'&&tab!=='directors')return;
     setTab(tab);
-    document.getElementById(tab+'View')?.scrollIntoView({block:'start'});
+    const key=shortcut.dataset.collectionKey;
+    if(key&&tab==='directors'){const pick=[...document.querySelectorAll('#directorTimeline .director-pick')].find(button=>button.dataset.directorKey===key);pick?.click();pick?.scrollIntoView({block:'center'});}
+    if(key&&tab==='awards'){const cell=[...document.querySelectorAll('#awardMatrix [data-award-cell]')].find(button=>button.dataset.awardCell.split('|')[0]===key);cell?.click();cell?.scrollIntoView({block:'center'});}
+    if(!key)document.getElementById(tab+'View')?.scrollIntoView({block:'start'});
   });
   function populateYears() {
     const years = [...new Set(recordMovies().map(dateOf).filter(value => /^\d{4}/.test(value)).map(value => value.slice(0, 4)))].sort((a, b) => b.localeCompare(a));
@@ -354,7 +362,7 @@
     $('monthPrev').hidden=true;$('monthNext').hidden=true;
     renderYearHeatmap();
   }
-  function syncCalendarYear(){const period=$('csPeriod');if(period){const year=String(state.year);if(![...period.options].some(option=>option.value===year))period.add(new Option(year+'年',year));period.value=year;renderCinemaSummary();}renderYearHeatmap();}
+  function syncCalendarYear(){const period=$('csPeriod');if(period){const year=String(state.year);if(![...period.options].some(option=>option.value===year))period.add(new Option(year+'年',year));period.value=year;renderCinemaSummary();renderAwards();renderDirectors();}renderYearHeatmap();}
   function renderAllTimeYears() {
     const totals=new Map(),months=new Map();
     for(const record of recordMovies()){
@@ -499,7 +507,7 @@
       }
       const scores=[...unique.values()].map(entry=>ratingById.get(String(entry.id||entry.title))).filter(v=>Number.isFinite(v)&&v>0);
       return {name,watched:unique.size,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
-    }).filter(row=>row.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
+    }).filter(row=>row.scored>=3).sort((a,b)=>b.average-a.average||b.scored-a.scored||a.name.localeCompare(b.name,'ja'));
     const allAwardGroups=organizations.map(name=>{
       const ids=new Set();
       for(const decade of decades)for(const entry of pictureEntries(name,decade))if(entry.watched)ids.add(String(entry.id||entry.title));
@@ -507,6 +515,26 @@
     });
     const mostWatchedAward=[...allAwardGroups].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'ja'))[0];
     const highestAward=awardAffinity[0];
+    const period=$('csPeriod')?.value||'all';
+    const selectedRecords=recordMovies().map(enriched).filter(r=>period==='all'||dateOf(r).slice(0,4)===period);
+    const selectedIds=new Set(selectedRecords.flatMap(r=>[r.tmdbId,r.tmdb_id,r.id,r.title].filter(Boolean).map(String)));
+    const selectedRatings=new Map(selectedRecords.filter(r=>Number(r.rating)>0).flatMap(r=>[r.tmdbId,r.tmdb_id,r.id,r.title].filter(Boolean).map(key=>[String(key),Number(r.rating)])));
+    const awardRows=organizations.map(name=>{
+      const unique=new Map();
+      for(const decade of decades)for(const entry of pictureEntries(name,decade)){
+        const key=String(entry.id||entry.title);
+        if(selectedIds.has(key))unique.set(key,entry);
+      }
+      const scores=[...unique.keys()].map(key=>selectedRatings.get(key)).filter(score=>Number.isFinite(score)&&score>0);
+      return {name,count:unique.size,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0};
+    });
+    const mostAward=awardRows.filter(row=>row.count).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'ja'))[0];
+    const bestAward=awardRows.filter(row=>row.scored>=3).sort((a,b)=>b.average-a.average||b.scored-a.scored||a.name.localeCompare(b.name,'ja'))[0];
+    summaryCollection('award',[
+      ['最多鑑賞映画賞',mostAward&&awardDisplayName(mostAward.name),mostAward?mostAward.count+'本 · 作品賞受賞作':'作品賞の鑑賞記録なし',mostAward?.name||''],
+      ['最高評価映画賞',bestAward&&awardDisplayName(bestAward.name),bestAward?'★ '+bestAward.average.toFixed(2)+' · '+bestAward.scored+'本評価':'3本以上の評価が必要',bestAward?.name||'']
+    ]);
+
     const awardHighlights='<div class="cs-collection-highlights">'+
       '<div class="cs-highlight"><span class="cs-highlight-label">作品賞を鑑賞した映画賞</span><strong class="cs-highlight-value">'+allAwardGroups.filter(x=>x.count>0).length+'賞</strong></div>'+
       '<div class="cs-highlight"><span class="cs-highlight-label">作品賞を最も鑑賞した映画賞</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedAward?.count?awardDisplayName(mostWatchedAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedAward?.count||0)+'本</small></div>'+
@@ -515,7 +543,7 @@
       '</div>';
     let awardAffinityHost=$('csAwardAffinity');
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
-    awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>高評価の作品賞 TOP5</h3><p class="cinelva-affinity-note">各映画賞の作品賞受賞作のみを集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
+    awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>高評価の作品賞 TOP5</h3><p class="cinelva-affinity-note">各映画賞の作品賞受賞作のみを集計。平均評価は3本以上評価した映画賞のみ。未評価は平均点から除外します。</p>'+
       (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><span class="cinelva-affinity-visual cinelva-award-mark" aria-hidden="true">'+(()=>{const n=String(row.name);return /アカデミー賞|Oscar/i.test(n)?'OSC':/カンヌ/i.test(n)?'CANNES':/ヴェネチア|ベネチア/i.test(n)?'VENICE':/ベルリン/i.test(n)?'BERLIN':/BAFTA|英国アカデミー/i.test(n)?'BAFTA':/ゴールデングローブ/i.test(n)?'GLOBE':/日本アカデミー/i.test(n)?'JAPAN':'AWARD';})()+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した受賞作品</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>収録対象作品</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最も鑑賞した映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
@@ -759,7 +787,7 @@
     const affinity=sorted.map(group=>{
       const scores=group.records.map(movie=>Number(movie.rating)).filter(v=>Number.isFinite(v)&&v>0);
       return {...group,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
-    }).filter(group=>group.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
+    }).filter(group=>group.scored>=3).sort((a,b)=>b.average-a.average||b.scored-a.scored||a.name.localeCompare(b.name,'ja'));
     const watchedDirectorGroups=new Map();
     for(const record of recordMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
@@ -770,6 +798,23 @@
     }
     const mostWatchedDirector=[...watchedDirectorGroups.values()].sort((a,b)=>b.ids.size-a.ids.size||a.name.localeCompare(b.name,'ja'))[0];
     const highestDirector=affinity[0];
+    const period=$('csPeriod')?.value||'all';
+    const selected=recordMovies().map(enriched).filter(r=>period==='all'||dateOf(r).slice(0,4)===period);
+    const directorRows=new Map();
+    for(const movie of selected){
+      const name=String(movie.director||'').trim();if(!name)continue;
+      const key=directorKey(name);
+      if(!directorRows.has(key))directorRows.set(key,{name:directorJapanese(name),key,ids:new Set(),scores:[]});
+      const row=directorRows.get(key);row.ids.add(filmIdentity(movie));
+      const score=Number(movie.rating);if(Number.isFinite(score)&&score>0)row.scores.push(score);
+    }
+    const mostDirector=[...directorRows.values()].filter(row=>row.ids.size).sort((a,b)=>b.ids.size-a.ids.size||a.name.localeCompare(b.name,'ja'))[0];
+    const bestDirector=[...directorRows.values()].filter(row=>row.scores.length>=3).sort((a,b)=>(b.scores.reduce((x,y)=>x+y,0)/b.scores.length)-(a.scores.reduce((x,y)=>x+y,0)/a.scores.length)||b.scores.length-a.scores.length||a.name.localeCompare(b.name,'ja'))[0];
+    summaryCollection('director',[
+      ['最多鑑賞監督',mostDirector?.name,mostDirector?mostDirector.ids.size+'本':'監督情報のある記録なし',mostDirector?.key||''],
+      ['最高評価監督',bestDirector?.name,bestDirector?'★ '+(bestDirector.scores.reduce((a,b)=>a+b,0)/bestDirector.scores.length).toFixed(2)+' · '+bestDirector.scores.length+'本評価':'3本以上の評価が必要',bestDirector?.key||'']
+    ]);
+
     const directorHighlights='<div class="cs-collection-highlights">'+
       '<div class="cs-highlight"><span class="cs-highlight-label">鑑賞した監督</span><strong class="cs-highlight-value">'+watchedDirectorGroups.size+'人</strong></div>'+
       '<div class="cs-highlight"><span class="cs-highlight-label">最も鑑賞した監督</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedDirector?.name||'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedDirector?.ids.size||0)+'本</small></div>'+
@@ -778,7 +823,7 @@
       '</div>';
     const affinityPanel=document.createElement('section');
     affinityPanel.className='cinelva-affinity';
-    affinityPanel.innerHTML='<h3>監督の鑑賞分析</h3>'+directorHighlights+'<h3>高評価の監督 TOP10</h3><p class="cinelva-affinity-note">平均評価・評価本数・4点以上の本数。評価3本未満は順位を補正します。</p>'+
+    affinityPanel.innerHTML='<h3>監督の鑑賞分析</h3>'+directorHighlights+'<h3>高評価の監督 TOP10</h3><p class="cinelva-affinity-note">平均評価・評価本数・4点以上の本数。平均評価は3本以上評価した監督のみ。</p>'+
       (affinity.length?'<div class="cinelva-affinity-list">'+affinity.slice(0,10).map((group,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><span class="cinelva-affinity-visual">'+(()=>{const profile=group.filmography?.director;const source=String(profile?.profile_path||profile?.profilePath||profile?.photo||profile?.image||'');const url=source.startsWith('/')?'https://image.tmdb.org/t/p/w185'+source:source;return /^https:\/\//i.test(url)?'<img src="'+escapeHTML(url)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span class="cinelva-affinity-placeholder" aria-hidden="true">監督</span>';})()+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="directors" aria-label="監督コレクションを開く">'+escapeHTML(group.name)+'</button><span class="cinelva-affinity-meta">★ '+group.average.toFixed(2)+' · '+group.scored+'本評価 · 4点以上 '+group.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">監督別の評価記録がありません。</p>');
     $('csDirectorAffinity')?.replaceChildren(affinityPanel);
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
@@ -870,7 +915,7 @@
       row.insertAdjacentElement('afterend',detail);
     };
     sorted.forEach(group=>{
-      const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
+      const row=document.createElement('button');row.type='button';row.className='director-pick';row.dataset.directorKey=directorKey(group.name);row.setAttribute('aria-expanded','false');
       const d=group.filmography.director,photo=d?.profile_path||d?.profilePath||d?.photo||d?.image||'';
       const portrait=photo.startsWith('/')?'https://image.tmdb.org/t/p/w185'+photo:photo;
       const photoMarkup=/^https:\/\//.test(portrait)?'<img class="director-pick-photo" src="'+escapeHTML(portrait)+'" alt="" loading="lazy">':'<span class="director-pick-monogram" aria-hidden="true">🎬</span>';
@@ -971,7 +1016,7 @@
     $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);
     $('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};
-    $('csPeriod').onchange=()=>{renderCinemaSummary();renderYearHeatmap();};
+    $('csPeriod').onchange=()=>{renderCinemaSummary();renderAwards();renderDirectors();};
     $('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};

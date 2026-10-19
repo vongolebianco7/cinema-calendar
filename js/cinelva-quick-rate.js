@@ -216,8 +216,20 @@ function attachInlineScore(button,movie) {
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
 
+ const ratings=document.createElement('div');ratings.className='cinelva-rating-pair';
+ const personal=document.createElement('span'),audience=document.createElement('span');
+ const updatePersonal=()=>{
+  const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched!==false);
+  personal.textContent='あなたの評価 '+(rec?Number(rec.rating??0).toFixed(1):'未鑑賞');
+ };
+ const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
+ const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
+ audience.textContent='見た人の評価（TMDB） '+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'評価なし');
+ ratings.append(personal,audience);
+ root.addEventListener('cinelva-record-updated',updatePersonal);
+ updatePersonal();
  const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';
- button.before(controls);controls.append(button,bookmark);
+ button.before(controls);controls.append(ratings,button,bookmark);
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
   controls.addEventListener(type,event=>event.stopPropagation());
  }

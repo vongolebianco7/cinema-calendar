@@ -239,6 +239,13 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 @media(max-width:760px){#detail .experienceFitGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#detail .experienceFitCard{min-width:0!important;padding:10px!important}#detail .experienceFitCard span{flex-wrap:wrap;gap:2px!important}#detail .experienceFitCard small{font-size:10px!important;line-height:1.5!important}#detail .experienceFitCard .small{font-size:10px!important}#detail .experienceFitCard .experienceStars{font-size:11px!important}}
 #detail .experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#detail .history>summary{list-style:revert;min-height:44px;display:list-item;padding:12px}#detail .history .timelineSection{border:0;padding:10px 0}
 </style><style id="cinelva-display-fixes">.experienceFitCard:has(.experienceStars[aria-label^="4"]),.experienceFitCard:has(.experienceStars[aria-label^="5"]){outline:2px solid #d6ae56;outline-offset:-2px;border-radius:12px}html[data-theme="light"] body,body[data-theme="light"]{color:#171717}html[data-theme="light"] .gBrand,body[data-theme="light"] .gBrand{background:transparent!important}html[data-theme="light"] .gBrand img,body[data-theme="light"] .gBrand img{background:transparent!important}</style><style id="cinelva-compact-formats">@media(min-width:400px){.experienceFitGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.experienceFitCard{min-width:0;padding:10px}.experienceFitCard b{font-size:13px}.experienceFitCard small{font-size:11px}}.experienceFitCard.best{outline:2px solid #d6ae56;outline-offset:-2px}body:not(.dark) .gBrand{background:transparent!important}</style><script src="js/cinelva-data-quality.js"></script>
+<style id="cinelva-calendar-card-frame-restore">
+/* Restore the separation between individual movie tiles without adding tall gaps. */
+.calendar .cinelva-rate-wrap{display:flex!important;flex-direction:column!important;gap:4px!important;min-width:0!important;height:100%!important}
+.calendar .cinelva-rate-wrap>.card{border:1px solid #38383d!important;border-radius:9px!important;overflow:hidden!important;box-sizing:border-box!important;flex:1 1 auto!important;margin:0!important}
+.calendar .cinelva-rate-wrap>.cinelva-rating-controls{margin:0!important;border:1px solid #38383d!important;border-radius:8px!important;flex:0 0 auto!important}
+.calendar .cinelva-rate-wrap>.card .body{box-sizing:border-box!important}
+</style>
 </head>
 <body>
 

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:00:00+09:00",
+  "updated_at": "2026-10-19T12:50:52+07:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "cb17bae79ca830dfe3fb0aa95a70a1a93de3b8af",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "780131b85fda9ce19a7e6d5e759997607809e6e7",
+  "head_sha": "0adc0db543805ee1d24f1fcd2da431641d76f962",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,7 +527,20 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "PR401 head 780131b8. Added discovery poster fallback contract and Playwright journey (discovery shelf, condition results, rating save, review save, bookmark persistence, detail link, 390/1280, Chromium/WebKit). Local quality_gate.py passed (175 active Node tests); discovery-related Node tests 10/10 and inline syntax/git diff checks pass. Browser run and all required PR Actions still pending; PR currently mergeable=false against main f4278998."
+      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required."
+    },
+    {
+      "id": "DISCOVERY-P0-20261019",
+      "title": "Repair and audit movie discovery surfaces",
+      "status": "in_progress",
+      "issue": 239,
+      "pull_request": {
+        "number": 401,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/401",
+        "latest_code_sha": "0adc0db543805ee1d24f1fcd2da431641d76f962"
+      },
+      "acceptance": "Every visible discovery tab/preset/filter produces its expected content or query; all movie tiles show poster or fallback and expose shared controls; browser journey passes on Chromium/WebKit at mobile and desktop widths; production is verified after merge/deploy.",
+      "ci": "Local quality gate 178/178 Node tests passed plus Python/data/compliance/UI gates. Browser test expanded but not locally executed; GitHub Actions pending. PR remains unmergeable and Vercel reports build-rate-limit. Full route audit and production verification remain open."
     }
   ],
   "verification": [
@@ -593,8 +606,8 @@
       "result": "Actions39183704965 on32fe88ee: Chromium390/1280PASS, WebKit390/1280PASS. Real clicks, same-page/tab storage sync, canonical imported IDs, raw record preservation, summary hit bounds, awards/directors/detail. Full frontend failed later on stale Eastwood display text; source behavior verified but integration not yet green."
     },
     {
-      "check": "2026-10-19 discovery full-screen follow-up",
-      "result": "Root cause confirmed in discover.html: shelf/search/person/concierge cards rendered blank poster containers or images without an error fallback and did not yet carry browser regression coverage. Added accessible text fallback for missing/broken posters; added real browser assertions for all shared controls and detail navigation. Local Python quality gate passed; active Node suite 175/175, discovery tests 10/10. No browser binary locally. Production not changed."
+      "check": "Discovery P0 follow-up: movie finder tabs, presets, and poster fallback",
+      "result": "PR #401 adds visible fallback for missing/failed posters across recommendation, condition-search, person, and concierge result cards. Regression coverage now enumerates all 23 recommendation axes and validates tab/filter wiring; Chromium/WebKit journey covers availability filters, AI/condition tabs, genre query, shared rating/review/bookmark, fallback, and detail navigation at 390/1280px. Local quality_gate.py passed: 178 Node tests plus Python, release-data, compliance, UI, and work-state checks. Browser journey not executed locally (no browser binary); GitHub Actions result pending. Production not verified."
     }
   ],
   "deployment": {
@@ -614,23 +627,7 @@
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
-  "blockers": [
-    {
-      "id": "PR401_BASE_DIVERGENCE",
-      "status": "active",
-      "detail": "PR401 diverges from current main f4278998 and GitHub reports mergeable=false; production integration remains blocked until resolved."
-    },
-    {
-      "id": "PR401_BROWSER_CI",
-      "status": "active",
-      "detail": "GitHub Actions run for added discovery Chromium/WebKit journey is not yet observable; local browser executable unavailable."
-    },
-    {
-      "id": "PRODUCTION_DEPLOY_LIMIT",
-      "status": "active",
-      "detail": "Vercel backend status is build-rate-limit failure; no deployment attempted."
-    }
-  ],
-  "next_action": "Reconcile PR401 with current main f4278998f28cc726931b114f43a441bcceecdf29 (PR currently mergeable=false), obtain a fresh required Actions run for head 780131b85fda9ce19a7e6d5e759997607809e6e7, complete Chromium/WebKit discovery journeys and repair any reproduced failures. Do not deploy until CI passes; Vercel currently reports build-rate-limit.",
+  "blockers": [],
+  "next_action": "Refresh live PR #401 head and required Actions. Reconcile against current main, resolve merge conflicts safely, run Chromium/WebKit discovery and existing regression journeys, then proceed to remaining route/tab/function inventory. Do not deploy while Vercel reports build-rate-limit; verify production only after required checks pass.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

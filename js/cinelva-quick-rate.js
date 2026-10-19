@@ -1158,6 +1158,31 @@ style.textContent+=`
  width:14px!important;height:14px!important;min-width:14px!important;min-height:14px!important;flex:0 0 14px!important;
 }
 `;
+style.textContent+=`
+/* Match the eye and bookmark exactly, including the clickable frame. */
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{
+ display:grid!important;grid-template-columns:20px!important;grid-template-rows:20px 20px!important;
+ row-gap:2px!important;justify-content:center!important;align-content:center!important;
+ width:20px!important;min-width:20px!important;max-width:20px!important;
+ height:42px!important;min-height:42px!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{
+ appearance:none!important;display:grid!important;place-items:center!important;
+ width:20px!important;min-width:20px!important;max-width:20px!important;
+ height:20px!important;min-height:20px!important;max-height:20px!important;
+ flex:none!important;box-sizing:border-box!important;padding:0!important;margin:0!important;
+ border:1px solid #525765!important;border-radius:4px!important;background:transparent!important;
+ box-shadow:none!important;transform:none!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{
+ display:block!important;width:15px!important;min-width:15px!important;max-width:15px!important;
+ height:15px!important;min-height:15px!important;max-height:15px!important;
+ margin:0!important;padding:0!important;flex:none!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{
+ grid-template-columns:minmax(0,1fr) 20px!important;column-gap:3px!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 })(window);

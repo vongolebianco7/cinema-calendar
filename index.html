@@ -270,17 +270,17 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 </aside>
 <main class="wrap">
 <section class="hero"><h1>映画カレンダー</h1><p>劇場公開、配信開始、TV放映、映画祭をひとつに。気になる作品から上映館や作品情報まで辿れます。</p><div class="heroActions"><a href="discover.html" class="heroAction ghost">映画を探す</a><a href="experience.html" class="heroAction ghost">上映方式</a><a href="rankings.html" class="heroAction ghost">ランキング</a><a href="my-cinelva/" class="heroAction ghost">My Cinelva</a></div></section>
-<div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button><a class="modeTab cinelvaEventTab" href="events.html">イベント</a></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
+<div class="modeTabs"><button type="button" class="modeTab" data-mode="theatrical" onclick="setMode('theatrical')"> 劇場公開</button><button type="button" class="modeTab active" data-mode="streaming" onclick="setMode('streaming')"> 配信公開</button><button type="button" class="modeTab" data-mode="tv" onclick="setMode('tv')">テレビ放映</button><button type="button" class="modeTab" data-mode="festival" onclick="setMode('festival')">映画祭</button><button type="button" class="modeTab" data-mode="events" onclick="setMode('events')">イベント</button></div><div class="chips" id="chips"></div><p class="calendarCoverage" id="calendarCoverage" role="note"></p>
 <section class="section"><div class="sectionHead"><h2>カレンダー</h2><a class="revivalEditorialLink" href="revivals.html">劇場公開の特集：再上映情報 →</a></div><div class="legend" id="legend"></div><div class="calendar"><div class="calHead"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div><div class="days" id="weekdays"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class="dates" id="dates"></div></div></section>
 <footer class="wrap small" style="padding:24px 18px 50px;line-height:1.7">This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Streaming availability data is provided via TMDB watch providers and JustWatch.<br><a href="credits.html">Credits / Data Sources</a><br><span id="publicVersion" style="display:inline-block;margin-top:8px;color:#888;font-size:11px">Cinelva v0.4.128</span></footer></main>
 <div class="modal" id="modal"><div class="sheet"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script src="js/calendar-context.js"></script><script src="js/calendar-dedupe.js"></script><script>
 const STREAMING_SERVICES=["Netflix","Prime Video","Disney+","U-NEXT","Hulu","Apple TV+","ABEMA","Lemino","WOWOWオンデマンド"];
 const services=["すべて","劇場公開",...STREAMING_SERVICES];
-let movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
+let outdoorEvents=[],movies=[],directors={},festivalEvents=[],theaterSchedules={},releaseHistory={records:[]},availabilitySnapshot={movies:{}},filmingLocations={movies:{}};
 const savedMode=localStorage.getItem("cinemaNow.mode");
 const savedActive=localStorage.getItem("cinemaNow.active");
-let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival"].includes(savedMode)?savedMode:"theatrical", view=new Date(),streamRangeStart=null,theatricalRangeStart=null;
+let active=savedActive||"すべて", mode=["streaming","theatrical","tv","festival","events"].includes(savedMode)?savedMode:"theatrical", view=new Date(),streamRangeStart=null,theatricalRangeStart=null;
 const calendarReturn=CinemapCalendarContext.initialCalendar(new URLSearchParams(location.search));if(calendarReturn){mode=calendarReturn.mode;view=new Date(calendarReturn.date+"T12:00:00")}
 // Saved filters must never make the calendar appear empty after navigation/UI changes.
 if(mode!=="streaming"&&active!=="すべて")active="すべて";
@@ -301,7 +301,7 @@ function renderChips(){
  let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
  let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
  let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
- let ss=mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
+ let ss=mode==="events"?["すべて","東京","神奈川"]:mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","国内イベント"].filter(x=>x==="すべて"||movies.some(m=>m.event==="festival"&&m.service===x)):["すべて"];
  if(!ss.includes(active))active="すべて";
  $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
@@ -464,7 +464,11 @@ function groupedMovieCards(weekMovies,modeName){
   return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group+'</div><div class="weekGroupCount">'+rows.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
  }).join("")
 }
-function renderCal(){
+
+async function loadOutdoorEvents(){try{const r=await fetch("data/outdoor-events.json",{cache:"no-store"});const d=await r.json();outdoorEvents=d.events||[]}catch(e){outdoorEvents=[]}if(mode==="events")render()}
+function renderOutdoorCalendar(){const cal=document.querySelector(".calendar");cal.classList.remove("festivalMode","streamingWeekMode","theatricalCompact");cal.classList.add("festivalMode");$("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";const y=view.getFullYear(),m=view.getMonth(),start=new Date(y,m,1),offset=(start.getDay()+6)%7,groups=new Map();for(const e of outdoorEvents){if(active!=="すべて"&&active!==e.area)continue;const key=e.event_id||[e.name,e.area,e.place].join("|");if(!groups.has(key))groups.set(key,{...e,first:e.start_date||e.date,last:e.end_date||e.date,films:[]});const g=groups.get(key);if((e.start_date||e.date)<g.first)g.first=e.start_date||e.date;if((e.end_date||e.date)>g.last)g.last=e.end_date||e.date;if(e.movie)g.films.push(e)}const all=[...groups.values()],weeks=Math.ceil((offset+new Date(y,m+1,0).getDate())/7);$("#month").textContent=y+"年 "+(m+1)+"月";let html="";for(let w=0;w<weeks;w++){const ws=new Date(y,m,1-offset+w*7),we=new Date(ws);we.setDate(ws.getDate()+6);const shown=all.filter(g=>new Date(g.first+"T12:00:00")<=we&&new Date(g.last+"T12:00:00")>=ws);html+='<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-bottom:6px;overflow:hidden">';for(let k=0;k<7;k++){const d=new Date(ws);d.setDate(ws.getDate()+k);html+='<div style="grid-column:'+(k+1)+';grid-row:1;min-width:0;background:#202020;padding:5px;border-radius:4px">'+d.getDate()+'</div>'}shown.forEach((g,i)=>{const a=new Date(g.first+"T12:00:00"),z=new Date(g.last+"T12:00:00"),l=a>ws?a:ws,r=z<we?z:we,from=((l.getDay()+6)%7)+1,to=((r.getDay()+6)%7)+2;html+='<div style="grid-column:'+from+'/'+to+';grid-row:'+(i+2)+';min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#624722;border:1px solid #b18a52;border-radius:4px;padding:5px;font-size:11px">'+g.name+'</div>'});html+='</div>'}const min=y+"-"+String(m+1).padStart(2,"0")+"-01",max=y+"-"+String(m+1).padStart(2,"0")+"-"+new Date(y,m+1,0).getDate();for(const g of all.filter(g=>g.first<=max&&g.last>=min)){html+='<section style="border-top:1px solid #333;padding:15px 4px"><div class="small">'+g.first+' 〜 '+g.last+' · '+g.area+'</div><h3>'+g.name+'</h3><p class="small">'+g.place+'</p><a target="_blank" rel="noopener noreferrer" href="'+g.url+'">公式情報 ↗</a><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:12px">';for(const film of g.films){html+='<a style="color:inherit;text-decoration:none" href="search.html?search='+encodeURIComponent(film.movie)+'"><div style="aspect-ratio:2/3;background:#252525;display:grid;place-items:center;color:#777">'+(film.poster_url?'<img style="width:100%;height:100%;object-fit:cover" src="'+film.poster_url+'">':'POSTER')+'</div><b style="font-size:12px">'+film.movie+'</b></a>'}html+='</div></section>'}$("#dates").innerHTML=html}
+
+function renderCal(){if(mode==="events"){renderOutdoorCalendar();return;}
  let calendarPriorityBudget=12;
  function calendarThumbUrl(url){return String(url||"").replace(/\/(?:original|w780|w500|w342)\//,"/w185/")}
  function calendarImg(url){let priority=calendarPriorityBudget>0;calendarPriorityBudget--;return '<img src="'+calendarThumbUrl(url)+'" alt="" loading="'+(priority?'eager':'lazy')+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>'}
@@ -818,7 +822,7 @@ function tvChannelColor(name){
  const colors={"日本テレビ":"#d8b62f","テレビ朝日":"#d85a4d","TBS":"#4b78d1","テレビ東京":"#53a06b","フジテレビ":"#7d68c4","NHK総合":"#8a8f98"};
  return colors[name]||"#7d8796"
 }
-function renderLegend(){
+function renderLegend(){if(mode==="events"){$("#legend").innerHTML="屋外上映・野外映画祭";return;}
  if(mode==="streaming"){
   $("#legend").innerHTML=streamingReleaseServices().map(s=>'<span><i style="background:'+streamServiceColor(s)+'"></i>'+s+'</span>').join("")
  }else if(mode==="theatrical"){
@@ -830,8 +834,8 @@ function renderLegend(){
   $("#legend").innerHTML='<span><i style="background:#7b61d1"></i>国内映画祭</span><span><i style="background:#c65a8a"></i>海外映画祭</span><span><i style="background:#b07a2d"></i>国内イベント</span>'
  }
 }
-const coverageText={theatrical:"国内の劇場公開情報と、手動で確認した一部の再上映を掲載しています。全国の上映回を網羅するものではありません。",streaming:"公式情報で確認した一部の配信開始予定です。現在の配信先の観測日を、配信開始日として扱いません。",tv:"確認できた一部の地上波映画放映予定です。全局・全作品を網羅していません。放映日時は番組公式サイトでご確認ください。",festival:"日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。"};function renderCoverage(){const el=document.getElementById("calendarCoverage");if(el)el.textContent=coverageText[mode]||""}
-function setMode(next){streamRangeStart=null;theatricalRangeStart=null;mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render();renderCoverage()}
+const coverageText={events:"東京・神奈川の屋外上映。日程・上映作品は主催者の公式サイトでご確認ください。",theatrical:"国内の劇場公開情報と、手動で確認した一部の再上映を掲載しています。全国の上映回を網羅するものではありません。",streaming:"公式情報で確認した一部の配信開始予定です。現在の配信先の観測日を、配信開始日として扱いません。",tv:"確認できた一部の地上波映画放映予定です。全局・全作品を網羅していません。放映日時は番組公式サイトでご確認ください。",festival:"日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。"};function renderCoverage(){const el=document.getElementById("calendarCoverage");if(el)el.textContent=coverageText[mode]||""}
+function setMode(next){if(next==="events"&&!outdoorEvents.length)loadOutdoorEvents();streamRangeStart=null;theatricalRangeStart=null;mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render();renderCoverage()}
 function render(){globalThis.CinelvaOfficialOffers?.setFilter({mode,service:active});renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
 let backendConfigPromise=null;
 async function getBackendConfig(){

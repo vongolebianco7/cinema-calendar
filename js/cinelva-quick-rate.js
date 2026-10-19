@@ -220,13 +220,13 @@ function attachInlineScore(button,movie) {
  const personal=document.createElement('span'),audience=document.createElement('span');
  const updatePersonal=()=>{
   const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched!==false);
-  personal.innerHTML='<span class="rating-label">MY RATING</span><span class="rating-number">'+(rec?Number(rec.rating??0).toFixed(1):'—')+'</span>';
+  personal.innerHTML='<span class="rating-label">あなたの評価</span><span class="rating-number">'+(rec?Number(rec.rating??0).toFixed(1):'—')+'</span>';
  };
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
- audience.innerHTML='<span class="rating-label">TMDB RATING</span><span class="rating-number">'+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'—')+'</span>';
+ audience.innerHTML='<span class="rating-label">みんなの評価</span><span class="rating-number">'+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'—')+'</span>';
  personal.title='あなたの評価';audience.title='見た人の評価（TMDB）';
- ratings.setAttribute('aria-label','MY RATING / TMDB RATING');
+ ratings.setAttribute('aria-label','あなたの評価 / みんなの評価（TMDB）');
  ratings.append(personal,audience);
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
@@ -962,6 +962,12 @@ style.textContent+=`
 .cinelva-rating-controls-no-gauge>.cinelva-rating-actions{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:6px!important;width:100%!important;min-width:0!important}
 .cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{position:relative!important;margin:0!important;flex:0 0 24px!important;width:24px!important;min-width:24px!important;height:24px!important;padding:2px!important}
 .cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{width:17px!important;height:17px!important}
+`;
+style.textContent+=`
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair .rating-label{font-size:9px!important;letter-spacing:-.3px!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:first-child .rating-label,.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:first-child .rating-number{color:#e4bd70!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:nth-child(2) .rating-label,.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:nth-child(2) .rating-number{color:#b8c6d9!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span{grid-template-columns:minmax(0,1fr) 24px!important}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

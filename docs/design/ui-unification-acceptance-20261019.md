@@ -4,10 +4,13 @@ Status: implementation contract, not proof of implementation. Source of truth: l
 
 ## Common movie interactions
 - Poster/title: navigate to canonical standalone movie detail URL; browser back restores tab, filter, sorting, search and scroll.
-- Rating: visible on appropriate list rows/cards, 0–5 by 0.1; pointer gesture must not hijack scrolling before explicit activation. Persist once, prevent accidental updates, support keyboard/touch. Zero means unrated; never invent watched status.
+- Rating: retain the CURRENT implemented gauge behavior and its already-fixed accidental-operation handling. This is a regression-only check, NOT a request to reimplement or redesign gauge gesture logic. Confirm current scoring scale from live source before asserting it. Never invent watched status.
 - Eye icon: exactly one consistent review modal per movie; default date today for new records, retain existing dates when editing. No duplicate eye action. Save/cancel/close/escape/focus behavior consistent. Theater/streaming only.
 - Bookmark: one toggle everywhere relevant, independent of viewing/rating/review; blue filled when active, accessible state and transient auto-dismiss toast 'ブックマークしました' on add, appropriate removal feedback. Dedicated watchlist page; no redundant bookmark list in My CINELVA dashboard.
 - Show 'あなたの評価' vs '見た人の評価' distinctly; do not duplicate TMDB/community values; distinguish missing from zero. Posters must display wherever available and show consistent placeholder otherwise.
+
+## Freshness / no-regression gate
+Before implementation, inspect current main, open PR #401, latest issue #239 comments, docs/operations/work-state.json, and any PR-branch docs/operations/movie-operation-contract.md and ui-operation-inventory.json. Classify each requirement as already implemented / pending PR / broken / missing / production unverified. Do not recreate shared bookmark store, watchlist tab, gauge behavior or controls that already exist. The inventory is reported as 29 routes, but its current PR branch must be fetched and checked before treating it as merged. CI or PR status is not production verification. Respect Vercel rate limit and avoid redundant deploy attempts.
 
 ## Coverage matrix
 Check each active route from machine-readable route manifest, plus dialogs, embedded cards, rankings, awards, directors, search, calendars, film festivals, outdoor screenings, streaming, My CINELVA and watchlist. Record applicable interactions, layout variant, mobile/desktop, theme, empty/loading/error states, keyboard and touch. Non-movie rows must not receive movie controls.
@@ -24,7 +27,7 @@ Unify card boundaries, spacing, gaps, poster aspect ratios, alignment, title tru
 ## Regression gate
 1. Generate coverage from route manifest; fail CI if any active route lacks a classification and screenshot evidence at narrow phone and desktop widths.
 2. Exercise each applicable poster/detail, rating, eye/review and bookmark flow with persistent storage round-trip and cross-route synchronization.
-3. Verify touch scroll does not change rating, modal defaults and edit retention, keyboard focus/escape, toast timeout, no duplicate action, no layout overflow, poster fallback, stable navigation state.
+3. Regression-check existing gauge touch behavior without redesigning it; verify modal defaults and edit retention, keyboard focus/escape, toast timeout, no duplicate action, no layout overflow, poster fallback, stable navigation state.
 4. Preserve saved data/backups; no mock/demo content in production; no extra external paid services or unauthorized scraping.
 5. Record test counts and failing routes, fix until green, merge only after required checks, deploy only when available, then verify actual production URL/SHA and screenshots. Never equate PR/CI with production.
 

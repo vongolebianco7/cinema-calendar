@@ -6,7 +6,7 @@
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "2ef32b266b65701bd551aee8f57209008e136ee2",
+  "head_sha": "5e697ebda62a45173413dae9a5d7641c2e38975f",
   "pull_request": 401,
   "work_items": [
     {
@@ -625,6 +625,10 @@
     {
       "check": "PR #401 latest-main integration and route inventory",
       "result": "Resolved all seven source conflicts in an isolated integration worktree while keeping main behavior and PR shared operations. Added main’s active events.html as route 30 and its brand/PWA metadata; regenerated source inventory (30 routes, 34 source files, 666 controls, 276 operation lines). Fixed inline-review edits to preserve unknown viewing dates instead of silently assigning today, and updated the regression harness to include the current venue/date editor. Full python scripts/quality_gate.py passed locally after integration. Browser journey awaits PR Actions; production remains unchanged and Vercel build-rate-limit blocks deployment."
+    },
+    {
+      "check": "PR #401 Actions triage and brand correction",
+      "result": "Latest Actions found one Python release-brand failure and one backup-safety failure, both caused by the newly active events.html page title using the old uppercase brand form. Changed its title to the approved Cinelva casing. Local strict Python contract suite passes 138/138; backup/storage Node checks pass 13/13; brand identity passes 11/11; full quality_gate.py had passed 178/178 before this wording-only correction. Re-run PR Actions after the follow-up commit; no deploy."
     }
   ],
   "deployment": {

@@ -18,7 +18,7 @@ async function ready(){
  try{
   await ready();
   browser=await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch({headless:true});
-  const movie={id:42,tmdbId:42,title:'Discovery test film',year:2024,date:new Date().toISOString().slice(0,10),score:9.1,votes:1200,popularity:80,poster:null,runtime:100,genres:['Science Fiction'],overview:'A test film.'};
+  const movie={id:42,tmdbId:42,title:'Discovery test film',year:2024,date:new Date().toISOString().slice(0,10),score:9.1,votes:1200,popularity:80,poster:'https://image.tmdb.org/t/p/w342/broken-poster.jpg',runtime:100,genres:['Science Fiction'],overview:'A test film.'};
   for(const width of [390,1280]){
    const context=await browser.newContext({viewport:{width,height:900}}),errors=[];
    const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
@@ -27,12 +27,14 @@ async function ready(){
     const payload=url.pathname.endsWith('/api/calendar')?{movies:[{...movie,event:'theatrical',service:'劇場公開'}]}:{movies:[movie],total_results:1,total_pages:1};
     route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(payload)});
    });
+   await context.route('https://image.tmdb.org/**',route=>route.abort());
    await page.goto(`http://127.0.0.1:${port}/discover.html`);
    await page.locator('#apply').click();
-   const result=page.locator('#grid .cinelva-discovery-unit').filter({has:page.locator('#grid [data-id="42"]')}).first();
+   const result=page.locator('#grid .cinelva-discovery-unit').filter({has:page.locator('[data-id="42"]')}).first();
    await result.waitFor();
    assert.equal(await result.locator('.cinelva-inline-score input[type="range"]').count(),1,'condition results expose the shared rating gauge');
    assert.equal(await result.locator('.cinelva-rate-button').count(),1,'condition results expose the shared review action');
+   await result.locator('.posterFallback').waitFor({state:'visible'});
    const bookmark=result.locator('.cinelva-bookmark-button');await bookmark.waitFor();await bookmark.click();
    assert.equal(await bookmark.getAttribute('aria-pressed'),'true','bookmark saves from discovery results');
    assert.ok(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-want-to-watch-v1')||'{}')['42']),'bookmark persists in the shared store');
@@ -48,8 +50,10 @@ async function ready(){
    await shelf.waitFor();
    assert.equal(await shelf.locator('.cinelva-rate-button').count(),1,'recommendation shelves use shared review controls');
    assert.equal(await shelf.locator('.cinelva-bookmark-button').count(),1,'recommendation shelves use shared bookmarks');
+   await shelf.locator('.posterFallback').waitFor({state:'visible'});
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'page has no horizontal overflow');
    assert.deepEqual(errors,[],'page has no uncaught errors');
+   await Promise.all([page.waitForURL(url=>url.pathname.endsWith('/search.html')&&url.searchParams.get('id')==='42'),page.locator('#grid [data-id="42"]').click()]);
    await context.close();
    console.log(`discovery shared controls ${width}px PASS`);
   }

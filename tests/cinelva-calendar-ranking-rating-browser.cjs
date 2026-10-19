@@ -90,6 +90,7 @@ async function getPort(){
   await page.locator('#cinelvaRateClose').click();
   await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
   const tvReviewHitTarget=await page.locator('#dates .cinelva-rate-button').nth(1).evaluate(button=>{
+   const rect=button.getBoundingClientRect(),hit=document.elementFromPoint(rect.left+rect.width/2,rect.top+rect.height/2);
    const styleOf=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return {tag:el.tagName,class:typeof el.className==='string'?el.className:'',pointer:s.pointerEvents,position:s.position,zIndex:s.zIndex,display:s.display,opacity:s.opacity,visibility:s.visibility,rect:{x:r.x,y:r.y,w:r.width,h:r.height}}};
    return {hitInsideButton:!!hit&&button.contains(hit),hitStack:document.elementsFromPoint(rect.left+rect.width/2,rect.top+rect.height/2).slice(0,6).map(styleOf),button:styleOf(button),controls:styleOf(button.closest('.cinelva-rating-controls')),card:styleOf(button.closest('.tvMovie')),buttonRect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}};
   });

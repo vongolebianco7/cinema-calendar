@@ -347,8 +347,6 @@
     }
     const years=[...new Set([currentYear,...totals.keys()])].sort((a,b)=>b-a);
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー · オールタイム';
-    const select=$('calendarYearSelect');
-    if(select){select.innerHTML='<option value="all">オールタイム</option>'+years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');select.value='all';}
     const host=$('yearHeatmap');
     host.classList.remove('cinelva-annual-calendar');
     host.classList.add('cinelva-alltime-years');
@@ -372,8 +370,6 @@
       if(/^\d{4}-\d{2}-\d{2}$/.test(date))daily.set(date,(daily.get(date)||0)+1);
     }
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
-    const yearSelect=$('calendarYearSelect');
-    if(yearSelect){const years=[...new Set([currentYear,state.year,...recordMovies().map(r=>Number(dateOf(r).slice(0,4))).filter(y=>y>=1900&&y<=2100)])].sort((a,b)=>b-a);yearSelect.innerHTML=years.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');yearSelect.value=String(state.year);}
     $('yearHeatmap').classList.remove('cinelva-alltime-years');
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
     const medal='<span class="cy-medal" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 10-2 11 5-3 5 3-2-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>GOLD</span></span>';
@@ -926,9 +922,6 @@
     $('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};
     $('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};
     $('directorWorks').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};
-    $('calendarYearSelect').onchange=()=>{const value=$('calendarYearSelect').value;if(value==='all'){$('csPeriod').value='all';renderCinemaSummary();return;}state.year=Number(value);syncCalendarYear();};
-    $('calendarYearPrev').onclick=()=>{state.year--;syncCalendarYear();};
-    $('calendarYearNext').onclick=()=>{state.year++;syncCalendarYear();};
     $('calendarMode').onchange=renderCalendar;
     $('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};
     $('yearHeatmap').onclick=event=>{const year=event.target.closest('[data-calendar-year]');if(year){state.year=Number(year.dataset.calendarYear);syncCalendarYear();return;}const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padStart(2,'0')+'-';const rows=recordMovies().filter(item=>dateOf(item).startsWith(prefix)).map(enriched);$('calendarFilms').innerHTML=rows.length?'<strong>'+state.year+'年'+(Number(month.dataset.calendarMonth)+1)+'月 · '+rows.length+'本</strong><div class="record-grid">'+rows.map(card).join('')+'</div>':'<span class="hint">この月の鑑賞記録はありません。</span>';$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});}};

@@ -6,6 +6,7 @@ on:
       - 'js/cinelva-records-page.js'
       - 'tests/cinelva-mobile-layout.cjs'
       - 'tests/cinelva-rating-visible.cjs'
+      - 'tests/cinelva-rating-visible.cjs'
       - 'js/cinelva-quick-rate.js'
       - 'index.html'
       - '.github/workflows/cinelva-mobile-visual.yml'

@@ -961,7 +961,7 @@ async function hydrateStreamingPosters(){
  const rows=movies.filter(m=>m&&!m.poster&&String(m.title||'').trim()&&
    (String(m.mode||m.type||m.release_type||'').toLowerCase().includes('stream')||
     m.service||m.platform||m.streaming_service||m.provider));
- const candidates=rows.slice(0,90);let cursor=0,updated=0;
+ const candidates=rows;let cursor=0,updated=0;
  const norm=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,'');
  async function worker(){
   while(cursor<candidates.length){
@@ -970,10 +970,10 @@ async function hydrateStreamingPosters(){
     const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:m.title,limit:'12'}),{cache:'force-cache'});
     if(!r.ok)continue;
     const d=await r.json(),list=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];
-    const hit=list.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(m.title)))||null;
+    const hit=list.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(m.title)))||list.find(x=>String(x.tmdbId||x.id)===String(m.tmdbId||m.id)&&Boolean(m.tmdbId||m.id))||null;
     if(!hit)continue;
-    let poster=hit.poster||hit.posterUrl||hit.poster_path||hit.posterPath;
-    if(poster&&String(poster).startsWith('/'))poster='https://image.tmdb.org/t/p/w342'+poster;
+    let poster=hit.poster||hit.posterUrl||hit.poster_url||hit.poster_path||hit.posterPath||hit.image;
+    if(poster&&String(poster).startsWith('/')&&!String(poster).startsWith('/images/'))poster='https://image.tmdb.org/t/p/w342'+poster;
     if(!poster)continue;
     m.poster=poster;m.id=m.id||hit.tmdbId||hit.id;m.tmdbId=m.tmdbId||hit.tmdbId||hit.id;updated++;
    }catch{}
@@ -1038,4 +1038,4 @@ window.addEventListener("load",applyHeaderSearchParam);
 .cinelvaEventTab{text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center}
 </style>
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->
-<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script><script src="js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script>window.CinelvaRatingResolve=(i)=>movies[Number(i)];</script><script src="js/cinelva-quick-rate.js?v=20261019-bookmark-blue-method"></script></body></html>
+<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script><script src="js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script>window.CinelvaRatingResolve=(i)=>movies[Number(i)];</script><script src="js/cinelva-quick-rate.js?v=20261019-streaming-card-fix"></script></body></html>

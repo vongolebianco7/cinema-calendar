@@ -1052,7 +1052,7 @@
       Object.assign(directorData,original);
     }
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
-    populateYears();bindEvents();drawYearCalendar();
+    populateYears();bindEvents();drawYearCalendar();setTab('summary');
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {
       const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);

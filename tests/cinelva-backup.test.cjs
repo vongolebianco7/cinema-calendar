@@ -40,3 +40,10 @@ test('backup round trip preserves unrated records and legacy deletion markers',(
  for(const [key,value]of Object.entries(original))assert.equal(target.map.get(key),value);
 });
 }
+test('bookmark backup preserves raw legacy values and unknown fields without changing viewing records',()=>{
+ const original={'cinelva-want-to-watch-v1':JSON.stringify({900:{id:900,title:'旧ブックマーク',savedAt:'2020',extra:{keep:true}}}),'cinelva-library-records-v2':JSON.stringify({900:{id:900,tmdbId:42,title:'映画',rating:4,watchedAt:null}})};
+ const s=setup(original),payload=s.api.exportData(s.storage),target=setup();
+ assert.equal(payload.entries['cinelva-want-to-watch-v1'],original['cinelva-want-to-watch-v1']);
+ s.api.inspect(JSON.stringify(payload));target.api.restore(target.storage,JSON.stringify(payload));
+ for(const [key,value]of Object.entries(original))assert.equal(target.map.get(key),value);
+});

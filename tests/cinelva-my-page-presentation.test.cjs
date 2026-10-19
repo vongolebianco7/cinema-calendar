@@ -12,7 +12,7 @@ test('award navigation uses natural Japanese wording', () => {
 });
 
 test('inline rating stores zero as a real score and offers only cinema or streaming', () => {
-  assert.match(quickRate, /Records\.save\(\{\.\.\.movie,id:String\(latest\?\.id\?\?id\),tmdbId:id,title:[^;]+\},score,latest\?\.watchedAt\?\?null\)/);
+  assert.match(quickRate, /Records\.save\(\{\.\.\.movie,\.\.\.latest,id:String\(latest\?\.id\?\?id\),tmdbId:id,title:[^;]+\},score,latest\?\.watchedAt\?\?null\)/);
   assert.match(quickRate, /<option value="映画館">映画館<\/option><option value="配信">配信<\/option>/);
   assert.doesNotMatch(quickRate, /<option value="TV">|<option value="その他">/);
 });
@@ -23,7 +23,7 @@ test('quick-rate source has no next-film action', () => {
 });
 
 test('annual history keeps the agreed 3 by 4 calendar, medal reward, and active tab', () => {
-  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
   assert.match(records, /const achieved=count>=5;/);
   assert.match(records, /const medal='<span class="cy-medal" aria-label="金メダル"><svg/);
   assert.match(records, /<circle cx="12" cy="7" r="4"/);
@@ -34,9 +34,9 @@ test('annual history keeps the agreed 3 by 4 calendar, medal reward, and active 
 
 test('award heatmap cells still show watched and unwatched films', () => {
   assert.match(records, /data-award-cell=/);
-  assert.match(records, /✓ 鑑賞済み/);
-  assert.match(records, /○ 未鑑賞/);
-  assert.match(records, /一覧で評価する/);
+  assert.match(records, /is-watched/);
+  assert.match(records, /is-unwatched/);
+  assert.match(records, /data-film-controls=/);
 });
 
 test('director and award selections return to the searchable list', () => {

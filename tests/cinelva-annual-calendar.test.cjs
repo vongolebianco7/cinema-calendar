@@ -6,7 +6,7 @@ const vm = require('node:vm');
 function month(count) {
   const nodes = new Map();
   const $ = id => {
-    if (!nodes.has(id)) nodes.set(id, { classList: { add() {} }, setAttribute() {} });
+    if (!nodes.has(id)) nodes.set(id, { classList: { add() {}, remove() {} }, setAttribute() {} });
     return nodes.get(id);
   };
   const records = Array.from({ length: count }, (_, i) => ({ id: i + 1, watchedAt: '2026-01-02' }));

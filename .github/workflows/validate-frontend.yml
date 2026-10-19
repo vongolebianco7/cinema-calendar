@@ -140,7 +140,7 @@ jobs:
           python -m unittest tests.test_availability_update tests.test_award_identity
           python scripts/check_release_data.py
           node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs tests/cinelva-my-page-bookmark-list.test.cjs tests/cinelva-my-page-presentation.test.cjs tests/cinelva-quick-rate.test.cjs
-          node --test tests/cinelva-route-manifest.test.cjs
+          node --test tests/cinelva-route-manifest.test.cjs tests/cinelva-bookmarks.test.cjs tests/cinelva-bookmark-coverage.test.cjs tests/cinelva-unified-controls.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
       - name: Run My Cinelva mobile browser journey
@@ -155,6 +155,8 @@ jobs:
           node --test tests/cinelva-ocean-workflow-retirement.test.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-bookmarks-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-bookmarks-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs

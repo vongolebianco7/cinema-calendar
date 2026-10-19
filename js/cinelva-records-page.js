@@ -252,14 +252,19 @@
     const source = poster(movie);
     return `<div class="poster">${source ? `<img src="${escapeHTML(source)}" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">` : ''}<span ${source ? 'hidden' : ''}>${escapeHTML(movie.title || '作品画像なし')}</span></div>`;
   }
+  const filmIdentity=movie=>String(movie.tmdbId??movie.tmdb_id??movie.id);
+  function detailURL(movie){return '../search.html?'+new URLSearchParams({id:String(filmIdentity(movie)||''),search:movie.title||''});}
   function card(movie) {
-    const id=escapeHTML(movie.id),title=escapeHTML(movie.title);
-    const rating=Number(movie.rating||0);
-    const bookmarkIcon='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
-    const eyeIcon='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M2 12s3.7-6 10-6 10 6 10 6-3.7 6-10 6S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>';
-    let bookmarked=false;
-    try{bookmarked=Boolean(JSON.parse(localStorage.getItem('cinelva-want-to-watch-v1')||'{}')[String(movie.id)]);}catch{}
-    return `<article class="movie" data-record-card="${id}">${posterHTML(movie)}<strong>${title}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-own-rating-label">あなたの評価 <span>／ 5.0</span></div><div class="record-actions record-actions-compact"><button type="button" class="record-watched-icon record-review-detail-trigger" data-review-detail="${id}" aria-label="レビュー詳細を見る：${title}" title="レビュー詳細を見る">${eyeIcon}</button><button type="button" class="record-score-gauge" data-edit="${id}" title="あなたの評価・レビューを編集" aria-label="あなたの評価・レビューを編集：${title}"><span class="record-gauge-track"><span class="record-gauge-fill" style="width:${Math.max(0,Math.min(100,rating*20))}%"></span></span><span class="record-gauge-value">${rating.toFixed(1)}</span></button><button type="button" class="record-bookmark-icon${bookmarked?' is-bookmarked':''}" data-record-bookmark="${id}" aria-label="ブックマーク：${title}" aria-pressed="${bookmarked}">${bookmarkIcon}</button><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}" title="記録を削除"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div></article>`;
+    const id=escapeHTML(movie.id),title=escapeHTML(movie.title),href=escapeHTML(detailURL(movie));
+    return `<article class="movie" data-record-card="${id}"><a href="${href}" aria-label="${title}の作品詳細">${posterHTML(movie)}</a><a href="${href}"><strong>${title}</strong></a><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-own-rating-label">あなたの評価 <span>／ 5.0</span></div><div class="record-shared-controls" data-film-controls="${escapeHTML(filmIdentity(movie))}"></div><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}" title="記録を削除">記録を削除</button></article>`;
+  }
+  function mountFilmControls(){
+    document.querySelectorAll('[data-film-controls]:not([data-gauge-mounted])').forEach(slot=>{
+      const id=slot.dataset.filmControls;
+      const record=state.records.find(item=>String(filmIdentity(item))===String(id));
+      const movie=record?enriched(record):byId.get(String(id));
+      if(movie)globalThis.CinelvaQuickRate?.mountInline?.(slot,movie);
+    });
   }
   function showReviewDetail(id) {
     const record=state.records.find(item=>String(item.id)===String(id));
@@ -559,11 +564,13 @@
         const film=enriched(record);
         return '<div class="award-film-unit">'+headline+card(film)+awardCategory+sources+'</div>';
       }
-      const open=entryId?'<button class="award-card-open" type="button" data-award-film="'+escapeHTML(entryId)+'" aria-label="作品を開いて評価する：'+escapeHTML(metadata.title)+'">作品を開く・評価する ↗</button>':'<span class="award-card-unmatched">作品データ照合待ち</span>';
-      return '<article class="movie award-film-unit award-film-unwatched">'+headline+posterHTML(metadata)
-        +'<strong>'+escapeHTML(metadata.title)+'</strong>'+awardCategory
-        +'<div class="record-own-rating-label">あなたの評価</div><span class="award-card-not-rated">未評価</span>'
-        +'<div class="award-film-actions">'+open+sources+'</div></article>';
+      if(entryId&&!byId.has(entryId))byId.set(entryId,metadata);
+      const href=escapeHTML(detailURL(metadata));
+      return '<article class="movie award-film-unit award-film-unwatched">'+headline
+        +(entryId?'<a href="'+href+'">'+posterHTML(metadata)+'</a><a href="'+href+'"><strong>'+escapeHTML(metadata.title)+'</strong></a>':posterHTML(metadata)+'<strong>'+escapeHTML(metadata.title)+'</strong>')+awardCategory
+        +(entryId?'<div class="record-own-rating-label">あなたの評価</div><div class="record-shared-controls" data-film-controls="'+escapeHTML(entryId)+'"></div>':'<span class="award-card-unmatched">作品データ照合待ち</span>')
+        +'<div class="award-film-actions">'+sources+'</div></article>';
+
     };
     $('awardFilms').innerHTML=cell?awardHeading+(awardEntries.length?awardEntries.map(awardCard).join(''):'<p class="hint">この年代の受賞作品はまだ収録されていません。</p>'):'<div class="award-invite"><span aria-hidden="true">✦</span><p>マトリクスの数字をタップすると、その年代の受賞作品と鑑賞状況を見られます。</p></div>';
   }
@@ -1008,23 +1015,6 @@
 
 
     document.addEventListener('click',event=>{
-      const button=event.target.closest('[data-record-bookmark]');
-      if(!button)return;
-      const id=String(button.dataset.recordBookmark),record=state.records.find(item=>String(item.id)===id);
-      if(!record)return;
-      try{
-        const key='cinelva-want-to-watch-v1';
-        const data=JSON.parse(localStorage.getItem(key)||'{}');
-        if(data[id])delete data[id];
-        else data[id]={id,title:record.title||'',savedAt:new Date().toISOString()};
-        localStorage.setItem(key,JSON.stringify(data));
-        const marked=Boolean(data[id]);
-        button.classList.toggle('is-bookmarked',marked);
-        button.setAttribute('aria-pressed',String(marked));
-        window.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{marked,id}}));
-      }catch(error){console.warn('Bookmark save failed',error);}
-    });
-    document.addEventListener('click',event=>{
       const trigger=event.target.closest('[data-review-detail]');
       if(trigger){event.preventDefault();showReviewDetail(trigger.dataset.reviewDetail);return;}
       const edit=event.target.closest('[data-review-edit]');
@@ -1077,7 +1067,9 @@
       Object.assign(directorData,original);
     }
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
-    populateYears();bindEvents();drawYearCalendar();setTab('summary');
+    const controlObserver=new MutationObserver(changes=>{if(changes.some(change=>[...change.addedNodes].some(node=>node.nodeType===1&&(node.matches?.('[data-film-controls]')||node.querySelector?.('[data-film-controls]')))))mountFilmControls();});
+    controlObserver.observe(document.querySelector('main'),{childList:true,subtree:true});
+    populateYears();bindEvents();drawYearCalendar();mountFilmControls();setTab('summary');
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {
       const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);

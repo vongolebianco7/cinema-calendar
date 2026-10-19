@@ -8,9 +8,9 @@ test('My Cinelva is a real-record page without demo, collection, or Atlas contro
   assert.match(page, /cinelva-library-records\.js/);
   assert.match(page, /cinelva-records-page\.js/);
   assert.match(page, /映画の世界/);
-  assert.match(page, /映画賞ヒートマップ/);
-  assert.match(page, /よく観る監督/);
-  assert.doesNotMatch(page, /デモ|コレクション|コレクションを作成|アトラス|Atlas/);
+  assert.match(page, /映画賞コレクション/);
+  assert.match(page, /監督別/);
+  assert.doesNotMatch(page, /デモ|コレクションを作成|アトラス|Atlas/);
 });
 
 test('share image is generated only from existing viewing records', () => {

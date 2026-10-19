@@ -1,7 +1,7 @@
 /* Additive, origin-local backup. Existing keys and records are never renamed. */
 (function(root){
  'use strict';
- const KEYS = new Set(['cinelva-library-records-v2','cinelva-library-deleted-legacy-v1','cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates','cinemap-my-font-style','cinemap-my-cinema-theme','cinemap-my-cinema-background','cinemaNow.mode','cinemaNow.active','cinema-theater-prefecture']);
+ const KEYS = new Set(['cinelva-want-to-watch-v1','cinelva-library-records-v2','cinelva-library-deleted-legacy-v1','cinemap-viewing-records-v1','cinemap-ocean-demo-records-v1','cinemap:ocean:last-shown-growth','cinemap-my-list','cinemap-my-saved-list','cinemap-my-saved-lists','cinemap-my-candidates','cinemap-my-font-style','cinemap-my-cinema-theme','cinemap-my-cinema-background','cinemaNow.mode','cinemaNow.active','cinema-theater-prefecture']);
  const LIMIT=10*1024*1024;
  function envelope(text){
   if(typeof text!=='string'||text.length>LIMIT||new TextEncoder().encode(text).length>LIMIT)throw Error('バックアップは10 MiB以内のJSONを指定してください。');

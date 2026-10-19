@@ -26,7 +26,10 @@ async function ready(){
    await context.route('**/api/**',route=>{
     const url=new URL(route.request().url());
     if(url.pathname.endsWith('/api/agent'))return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({answer:'検索結果を表示します。',movies:[movie]})});
-    if(url.pathname.endsWith('/api/people'))return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({people:[{id:999,name:'Christopher Nolan',department:'Directing',known_for:['Interstellar']}]})});
+    if(url.pathname.endsWith('/api/people')){
+     const payload=url.searchParams.get('role')==='director'?{ids:[42]}:{people:[{id:999,name:'Christopher Nolan',department:'Directing',known_for:['Interstellar']}]};
+     return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(payload)});
+    }
     if(url.pathname.endsWith('/api/discover'))discoverRequests.push(url);
     const payload=url.pathname.endsWith('/api/calendar')?{movies:[{...movie,event:'theatrical',service:'劇場公開'}]}:{movies:[movie,unknownMovie],total_results:2,total_pages:1};
     route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(payload)});
@@ -84,6 +87,7 @@ async function ready(){
    await directorSuggestion.click();
    const personResult=page.locator('#grid .cinelva-discovery-unit').filter({has:page.locator('[data-id="42"]')}).first();
    await personResult.waitFor();
+   assert.equal(await page.locator('#grid [data-id="43"]').count(),0,'director results exclude films where the person only has non-director crew credits');
    assert.ok(discoverRequests.some(url=>url.searchParams.get('crew')==='999'),'director selection changes the actual API query');
    assert.equal(await personResult.locator('.cinelva-inline-score input[type="range"]').count(),1,'director filmography exposes the shared rating gauge');
    assert.equal(await personResult.locator('.cinelva-rate-button').count(),1,'director filmography exposes the shared review action');

@@ -18,6 +18,14 @@ const { chromium } = require('playwright');
    });
    console.log(width,JSON.stringify(result));
    if(!result.ok||result.visible.length!==2||result.visible.some(x=>!x)||!result.text[0].includes('あなたの評価')||!result.text[1].includes('みんなの評価')||result.actions!==2)throw Error('rating visibility failed '+width);
+   // Real search results use the same production card renderer, not just a synthetic mount.
+   await page.route('**/api/movies?*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[],external:[]})}));
+   await page.route('**/data/movies.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[{id:111,title:'スター・ウォーズ',year:1977,vote_average:7.2,vote_count:100}]})}));
+   await page.goto('http://127.0.0.1:8765/search.html?search='+encodeURIComponent('スターウォーズ'),{waitUntil:'domcontentloaded'});
+   await page.locator('#grid .cinelva-rating-pair').first().waitFor({state:'visible',timeout:15000});
+   const live=await page.locator('#grid .cinelva-rating-pair').first().evaluate(el=>({text:el.innerText,lines:[...el.querySelectorAll('.cinelva-rating-line')].map(x=>{const b=x.getBoundingClientRect();return {text:x.textContent,width:b.width,height:b.height,display:getComputedStyle(x).display};})}));
+   console.log('search card',width,JSON.stringify(live));
+   if(!live.text.includes('あなたの評価')||!live.text.includes('みんなの評価')||live.lines.length!==2||live.lines.some(x=>x.width<=0||x.height<=0||x.display==='none'))throw Error('real search card ratings hidden '+width);
    await page.close();
   }
  } finally {await browser.close();}

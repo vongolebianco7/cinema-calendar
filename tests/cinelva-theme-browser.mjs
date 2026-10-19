@@ -12,12 +12,13 @@ const errors=[];
 page.on('pageerror',error=>errors.push(error.message));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
- for (const routePath of pages) {\n  const file=routePath.split('/').at(-1);
+ for (const routePath of pages) {
+  const file=routePath.split('/').at(-1);
   await page.goto(`${base}/${routePath}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(document.querySelector('.cinelvaTheme select')));
-  assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' system theme');
-  assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',prefix+file+' light body');
-  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,prefix+file+' light overflow');
+  assert.equal(await page.locator('html').getAttribute('data-theme'),'light',routePath+' system theme');
+  assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',routePath+' light body');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,routePath+' light overflow');
   const contrasts=await page.locator('.heroAction,.legend>span,.gDrawerClose,.calendarCoverage').evaluateAll(elements=>{
    const rgb=value=>value.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});
    const lum=value=>rgb(value).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
@@ -25,7 +26,7 @@ try {
   });
   for(const check of contrasts) {
    assert.ok(check.ratio>=4.5,`${routePath} light text contrast ${check.name}: ${check.ratio}`);
-   if(check.name==='calendarCoverage')assert.ok(check.backgroundLuminance>.75,`${prefix}${file} coverage note should use the light surface: ${check.backgroundLuminance}`);
+   if(check.name==='calendarCoverage')assert.ok(check.backgroundLuminance>.75,`${routePath} coverage note should use the light surface: ${check.backgroundLuminance}`);
   }
 
   if(file==='discover.html') {
@@ -42,14 +43,14 @@ try {
   const select=page.getByLabel('表示テーマ',{exact:true});
   await page.emulateMedia({colorScheme:'dark'});
   await select.selectOption('light');
-  assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' light override on dark OS');
-  assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',prefix+file+' explicit light body on dark OS');
+  assert.equal(await page.locator('html').getAttribute('data-theme'),'light',routePath+' light override on dark OS');
+  assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(248, 246, 241)',routePath+' explicit light body on dark OS');
   await page.emulateMedia({colorScheme:'light'});
   await select.selectOption('dark');
   assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
   await page.reload({waitUntil:'domcontentloaded'});
-  assert.equal(await page.locator('html').getAttribute('data-theme'),'dark',prefix+file+' reload persistence');
-  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,prefix+file+' dark overflow');
+  assert.equal(await page.locator('html').getAttribute('data-theme'),'dark',routePath+' reload persistence');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)<=2,routePath+' dark overflow');
   if(await menu.count())await menu.click();
   await select.selectOption('system');
   await page.emulateMedia({colorScheme:'dark'});

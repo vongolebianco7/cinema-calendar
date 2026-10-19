@@ -251,7 +251,7 @@ function attachInlineScore(button,movie) {
   const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched===true);
   const watched=Boolean(rec);
   const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
-  personal.textContent='あなたの評価  '+score;
+  personal.textContent='MY評価  '+score;
   personal.classList.toggle('is-unwatched',!watched);
   personal.style.setProperty('color',watched?'#e4bd70':'#aab0bb','important');
  };
@@ -272,8 +272,8 @@ function attachInlineScore(button,movie) {
   },{rootMargin:'180px'});
   observer.observe(button);
  }
- personal.title='あなたの評価';audience.title='TMDB評価';
- ratings.setAttribute('aria-label','あなたの評価 / TMDB評価');
+ personal.title='MY評価';audience.title='TMDB評価';
+ ratings.setAttribute('aria-label','MY評価 / TMDB評価');
  ratings.append(personal,audience);
  // Inline layout is intentional: page-level movie-card styles must not hide ratings.
  Object.assign(ratings.style,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',height:'auto',flex:'0 0 auto',gap:'2px',visibility:'visible',opacity:'1',overflow:'visible'});
@@ -293,7 +293,7 @@ function attachInlineScore(button,movie) {
  // Compact two-line layout: rating labels on the left, both actions on the right.
  force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) auto','grid-template-rows':'auto','align-items':'center','gap':'4px','height':'auto','min-height':'0','max-height':'none','padding':'5px 6px','overflow':'visible'});
  force(ratings,{'grid-column':'1','grid-row':'1','min-height':'0','gap':'1px'});
- force(actions,{'grid-column':'2','grid-row':'1','display':'flex','align-items':'center','gap':'3px','height':'auto','min-height':'0','width':'auto','flex':'0 0 auto'});
+ force(actions,{'grid-column':'2','grid-row':'1','display':'flex','flex-direction':'column','align-items':'center','justify-content':'center','gap':'2px','height':'auto','min-height':'0','width':'auto','flex':'0 0 auto'});
  force(personal,{'font-size':'9px','line-height':'13px','height':'13px','min-height':'13px'});
  force(audience,{'font-size':'9px','line-height':'13px','height':'13px','min-height':'13px'});
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -1069,6 +1069,11 @@ style.textContent+=`
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{grid-column:1!important;grid-row:1!important;min-height:0!important;gap:1px!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{grid-column:2!important;grid-row:1!important;width:auto!important;height:auto!important;min-height:0!important;display:flex!important;gap:3px!important;align-items:center!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge .cinelva-rating-line{font-size:9px!important;line-height:13px!important;height:13px!important;min-height:13px!important}
+`;
+style.textContent+=`
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:2px!important}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{width:22px!important;min-width:22px!important;height:22px!important;flex:0 0 22px!important;padding:2px!important}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{align-self:center!important}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

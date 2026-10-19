@@ -92,8 +92,10 @@ async function getPort(){
   const tvReviewHitTarget=await page.locator('#dates .cinelva-rate-button').nth(1).evaluate(button=>{
    const rect=button.getBoundingClientRect(),hit=document.elementFromPoint(rect.left+rect.width/2,rect.top+rect.height/2);
    const styleOf=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return {tag:el.tagName,class:typeof el.className==='string'?el.className:'',pointer:s.pointerEvents,position:s.position,zIndex:s.zIndex,display:s.display,opacity:s.opacity,visibility:s.visibility,rect:{x:r.x,y:r.y,w:r.width,h:r.height}}};
-   return {hitInsideButton:!!hit&&button.contains(hit),hitStack:document.elementsFromPoint(rect.left+rect.width/2,rect.top+rect.height/2).slice(0,6).map(styleOf),button:styleOf(button),controls:styleOf(button.closest('.cinelva-rating-controls')),card:styleOf(button.closest('.tvMovie')),buttonRect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}};
+   const card=button.closest('.tvMovie'),cardRect=card.getBoundingClientRect();
+   return {hitInsideButton:!!hit&&button.contains(hit),hitInsideCard:rect.left>=cardRect.left&&rect.right<=cardRect.right&&rect.top>=cardRect.top&&rect.bottom<=cardRect.bottom,hitStack:document.elementsFromPoint(rect.left+rect.width/2,rect.top+rect.height/2).slice(0,6).map(styleOf),button:styleOf(button),controls:styleOf(button.closest('.cinelva-rating-controls')),card:styleOf(card),buttonRect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}};
   });
+  assert.equal(tvReviewHitTarget.hitInsideCard,true,'TV review button stays inside its card: '+JSON.stringify(tvReviewHitTarget));
   assert.equal(tvReviewHitTarget.hitInsideButton,true,'TV review WebKit hit stack: '+JSON.stringify(tvReviewHitTarget));
   await page.locator('#dates .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);

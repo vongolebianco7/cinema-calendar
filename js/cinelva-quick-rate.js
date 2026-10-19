@@ -833,9 +833,9 @@ style.textContent+=`
 .streamMovie>.cinelva-rating-controls{margin-top:auto!important}
 .tvMovieTitle{min-height:2.7em!important;line-height:1.35!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
 .tvMovie{display:flex!important;flex-direction:column!important;min-width:0!important}
-.tvMovie[data-mi]{pointer-events:none!important}
-.tvMovie[data-mi]>*{pointer-events:auto!important}
-.tvMovie[data-mi]>.cinelva-rating-controls,.tvMovie[data-mi]>.cinelva-rating-controls *{pointer-events:auto!important;position:relative!important;z-index:2147483000!important}
+.tvMovie[data-mi]>.cinelva-rating-controls{position:relative!important;z-index:2!important;pointer-events:auto!important}
+/* Keep the review hit box inside the very narrow TV card on WebKit. */
+.tvMovie[data-mi]>.cinelva-rating-controls>.cinelva-rate-button{position:absolute!important;left:6px!important;top:2px!important;right:auto!important;bottom:auto!important;transform:none!important;z-index:3!important;pointer-events:auto!important}
 .cinelva-rating-controls>.cinelva-rating-clear{
  width:42px!important;max-width:42px!important;
  height:20px!important;min-height:20px!important;max-height:20px!important;

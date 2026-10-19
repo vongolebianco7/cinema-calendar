@@ -145,7 +145,7 @@ let boxMovieIndexPromise=null;
 function collectPosterMovies(value,rows){if(Array.isArray(value)){for(const item of value){if(item&&typeof item==='object'&&item.poster&&(item.title||item.original_title))rows.push(item);else collectPosterMovies(item,rows)}return}if(value&&typeof value==='object')Object.values(value).forEach(item=>collectPosterMovies(item,rows))}
 async function localBoxMovies(){if(!boxMovieIndexPromise)boxMovieIndexPromise=Promise.allSettled([fetch('data/movies.json').then(r=>{if(!r.ok)throw Error('movies');return r.json()}),fetch('data/rankings.json').then(r=>{if(!r.ok)throw Error('rankings');return r.json()})]).then(parts=>{let rows=[];for(const p of parts){if(p.status!=='fulfilled')continue;const v=p.value;collectPosterMovies(Array.isArray(v)?v:(v.movies||[]),rows);collectPosterMovies(v.rankings||{},rows)}return rows});return boxMovieIndexPromise;}
 function boxMovieId(row){return row.tmdbId||row.tmdb_id||row.movieId||null}
-function boxPosterUrl(value){const raw=String(value||'');if(!raw)return '';if(raw.startsWith('https://'))return raw;if(raw.startsWith('/'))return 'https://image.tmdb.org/t/p/w342'+raw;return ''}
+function boxPosterUrl(value){const raw=String(value||'').trim();if(!raw)return '';if(/^https?:\/\//i.test(raw))return raw;if(raw.startsWith('//'))return 'https:'+raw;if(raw.startsWith('/'))return raw.startsWith('/images/')?raw:'https://image.tmdb.org/t/p/w342'+raw;if(/^(?:w\d+|original)\//.test(raw))return 'https://image.tmdb.org/t/p/'+raw;return ''}
 async function resolveMovie(name,id,year){
  const key=String(id||'')+'|'+name+'|'+String(year||'');if(movieLookupCache.has(key))return movieLookupCache.get(key);
  const norm=normalizeBoxTitle(name);let hit=null;
@@ -160,7 +160,7 @@ async function hydrateOneBoxCard(card){
  const id=card.dataset.boxId||null,year=card.dataset.boxYear||null;
  const movie=await resolveMovie(name,id,year);if(!movie)return;
  const img=card.querySelector('[data-box-poster]'),ph=card.querySelector('[data-box-placeholder]');
- const poster=boxPosterUrl(movie.poster||movie.posterUrl||movie.poster_url||movie.poster_path);
+ const poster=boxPosterUrl(movie.poster||movie.posterUrl||movie.poster_url||movie.poster_path||movie.posterPath||movie.image);
  if(img&&poster){img.onerror=()=>{img.hidden=true;if(ph)ph.hidden=false};img.onload=()=>{img.hidden=false;if(ph)ph.hidden=true};img.src=poster}
  const resolvedId=movie.tmdbId||movie.tmdb_id||movie.id||id;
  if(resolvedId){card.dataset.boxId=String(resolvedId);const link=card.querySelector('a.rankCard');if(link)link.href='search.html?id='+encodeURIComponent(resolvedId)+'&search='+encodeURIComponent(movie.title||name);}
@@ -184,7 +184,7 @@ async function mountRankingGauges(){
    const title=card.dataset.boxFilm||card.dataset.awardFilm||'';
    const rawId=card.dataset.boxId||card.dataset.awardId||'';
    let movie=/^[1-9]\d*$/.test(String(rawId))?{id:rawId,title}:await resolveMovie(title,rawId,card.dataset.boxYear);
-   if(!movie||!/^[1-9]\d*$/.test(String(movie.tmdbId||movie.id||''))){target.textContent='作品を照合できません';continue;}
+   if(!movie||!/^[1-9]\d*$/.test(String(movie.tmdbId||movie.id||''))){target.remove();continue;}
    if(target.tagName==='BUTTON'){const container=document.createElement('div');container.dataset.rankReview='';target.replaceWith(container);target=container;}api.mountInline(target,{...movie,id:String(movie.tmdbId||movie.id),title:movie.title||title});
   }
  }

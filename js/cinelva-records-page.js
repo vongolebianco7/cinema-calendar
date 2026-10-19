@@ -1063,6 +1063,7 @@
       if (savedTab) setTab(savedTab==='genres'||savedTab==='world'?'summary':savedTab);
     } catch (_) { /* Private browsing can disable storage. */ }
     const params=new URLSearchParams(location.search),requestedId=params.get('record'),requestedTitle=params.get('title');
+    if(!requestedId&&!requestedTitle&&params.get('tab')==='watchlist')setTab('watchlist');
     if(requestedId||requestedTitle){const query=requestedTitle||requestedId;location.replace('../search.html?'+new URLSearchParams({search:query}));}
   }
   init();

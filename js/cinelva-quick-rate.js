@@ -234,6 +234,11 @@ function attachInlineScore(button,movie) {
  Object.assign(ratings.style,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',height:'auto',flex:'0 0 auto',gap:'2px',visibility:'visible',opacity:'1',overflow:'visible'});
  Object.assign(personal.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#e4bd70',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
  Object.assign(audience.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#b8c6d9',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
+ // Force the two rating rows to remain visible even if legacy page CSS uses !important.
+ const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
+ force(ratings,{'display':'flex','flex-direction':'column','visibility':'visible','opacity':'1','height':'auto','min-height':'30px','width':'100%','flex':'0 0 auto','overflow':'visible','position':'relative','color':'#e4bd70'});
+ force(personal,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','color':'#e4bd70','white-space':'nowrap'});
+ force(audience,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','color':'#b8c6d9','white-space':'nowrap'});
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
  const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';

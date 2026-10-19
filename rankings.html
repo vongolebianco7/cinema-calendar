@@ -213,7 +213,7 @@ async function resolveMovie(name,id,year){
 async function hydrateOneBoxCard(card){
  const name=card.dataset.boxFilm;if(!name)return;
  const id=card.dataset.boxId||null,year=card.dataset.boxYear||null;
- if(card.querySelector('[data-box-poster]')?.getAttribute('src'))return;
+ if(card.querySelector('[data-box-poster]')?.getAttribute('src') && !card.querySelector('[data-box-poster]')?.hidden)return;
  const movie=await resolveMovie(name,id,year);if(!movie)return;
  const img=card.querySelector('[data-box-poster]'),ph=card.querySelector('[data-box-placeholder]');
  const poster=boxPosterUrl(movie.poster||movie.posterUrl||movie.poster_url||movie.poster_path||movie.posterPath||movie.image);

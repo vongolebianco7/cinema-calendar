@@ -212,8 +212,8 @@ function attachInlineScore(button,movie) {
  if(!validId(id))return;
  const syncWatched=()=>{
   const record=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
-  button.classList.toggle('is-watched',Boolean(record&&record.watched!==false));
-  button.setAttribute('aria-label',record&&record.watched!==false?'この映画の評価を編集':'この映画をレビュー');
+  button.classList.toggle('is-watched',Boolean(record&&record.watched===true));
+  button.setAttribute('aria-label',record&&record.watched===true?'この映画の評価を編集':'この映画をレビュー');
  };
   const bookmark=document.createElement('button');
  bookmark.type='button';bookmark.className='cinelva-bookmark-button';

@@ -490,6 +490,27 @@
     // the category selected in the separate award collection.
     const isPictureWinner=entry=>(entry.categories||[]).some(c=>/作品賞|パルム・ドール|金獅子賞|金熊賞/.test(String(c)));
     const pictureEntries=(name,decade)=>(data.cells[name+':'+decade]?.entries||[]).filter(isPictureWinner);
+    // Original geometric CINELVA award symbols. Not official festival trademarks.
+    const awardEmblem=name=>{
+      const n=String(name);
+      const paths=/カンヌ/i.test(n)
+        ? '<path d="M18 37V11M18 28C9 27 7 22 7 17c7 0 11 4 11 11Zm0-7c1-8 5-12 12-13 1 7-3 12-12 13Zm0 13c3-7 8-9 14-9-1 7-6 10-14 9Z"/>'
+        : /ヴェネチア|ベネチア/i.test(n)
+        ? '<path d="M4 16c5-7 9-7 14 0s9 7 14 0M4 25c5-7 9-7 14 0s9 7 14 0M4 34c5-7 9-7 14 0s9 7 14 0"/>'
+        : /ベルリン/i.test(n)
+        ? '<path d="m18 5 14 10v16L18 41 4 31V15L18 5Zm0 0v36M4 15l28 16M32 15 4 31"/>'
+        : /BAFTA|英国アカデミー/i.test(n)
+        ? '<circle cx="18" cy="23" r="13"/><circle cx="18" cy="23" r="5"/><path d="M18 10v8m0 10v8M5 23h8m10 0h8M9 14l6 6m6 6 6 6m0-18-6 6m-6 6-6 6"/>'
+        : /ゴールデングローブ/i.test(n)
+        ? '<circle cx="18" cy="23" r="13"/><ellipse cx="18" cy="23" rx="6" ry="13"/><path d="M5 23h26M8 15h20M8 31h20"/>'
+        : /日本アカデミー/i.test(n)
+        ? '<circle cx="18" cy="23" r="8"/><path d="M18 5v7m0 22v7M0 23h7m22 0h7M5 10l7 7m12 12 7 7m0-26-7 7M12 29l-7 7"/>'
+        : /アカデミー賞|Oscar/i.test(n)
+        ? '<path d="m18 6 4.4 12.2H35l-10.2 7.6 3.8 12.5L18 30.8 7.4 38.3l3.8-12.5L1 18.2h12.6L18 6Z"/>'
+        : '<path d="M18 5v29M7 13h22M8 13v12c0 7 4 10 10 10s10-3 10-10V13M11 40h14"/>';
+      const variant=/カンヌ/i.test(n)?'leaf':/ヴェネチア|ベネチア/i.test(n)?'wave':/ベルリン/i.test(n)?'facet':/BAFTA|英国アカデミー/i.test(n)?'reel':/ゴールデングローブ/i.test(n)?'globe':/日本アカデミー/i.test(n)?'sun':/アカデミー賞|Oscar/i.test(n)?'star':'award';
+      return '<span class="cinelva-affinity-visual cinelva-award-emblem cinelva-award-emblem--'+variant+'" aria-hidden="true"><svg viewBox="0 0 36 46" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" focusable="false">'+paths+'</svg></span>';
+    };
     const awardAffinity=organizations.map(name=>{
       const unique=new Map();
       for(const decade of decades)for(const entry of pictureEntries(name,decade)){
@@ -516,7 +537,7 @@
     let awardAffinityHost=$('csAwardAffinity');
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
     awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>高評価の作品賞 TOP5</h3><p class="cinelva-affinity-note">各映画賞の作品賞受賞作のみを集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
-      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><span class="cinelva-affinity-visual cinelva-award-mark" aria-hidden="true">'+(()=>{const n=String(row.name);return /アカデミー賞|Oscar/i.test(n)?'OSC':/カンヌ/i.test(n)?'CANNES':/ヴェネチア|ベネチア/i.test(n)?'VENICE':/ベルリン/i.test(n)?'BERLIN':/BAFTA|英国アカデミー/i.test(n)?'BAFTA':/ゴールデングローブ/i.test(n)?'GLOBE':/日本アカデミー/i.test(n)?'JAPAN':'AWARD';})()+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
+      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した受賞作品</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>収録対象作品</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最も鑑賞した映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
     $('awardCoverage').textContent=`収録された主要映画賞の受賞作品に基づく記録です。網羅的な受賞歴ではありません。${hasRate?'達成率は対象作品の全件性を確認できた年代のみ表示します。':'対象作品の全件性が確認できないため、達成率は表示できません。'}`;

@@ -1,12 +1,15 @@
+Warning: truncated output (original token count: 11191)
+Total output lines: 641
+
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T12:54:28+07:00",
+  "updated_at": "2026-10-19T15:10:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "cb17bae79ca830dfe3fb0aa95a70a1a93de3b8af",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "54c9fb3cfcd330d6255570b21c054221eedac0f3",
+  "head_sha": "0f5cf0417aaae91e37f8dda104c145fbca44d5a2",
   "pull_request": 401,
   "work_items": [
     {
@@ -352,83 +355,7 @@
       "ci": "7/7 success: autonomous 39037476697, backup 39037476664, frontend 39037476644, brand 39037476660, completeness 39037476663, smoke 39037476693, Python 39037476653. Production not verified."
     },
     {
-      "id": "P0-278-CACHE-COVERAGE",
-      "title": "Keep cached provider observations eligible after they disappear from rolling catalog",
-      "status": "merged",
-      "issue": 239,
-      "pull_request": {
-        "number": 278,
-        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/278",
-        "head_sha": "f550bc974322fde2cf7bcbefeab25c91cf515475",
-        "merge_sha": "96a74c24cb1d107c78b67fd6a7dc8c5daf3e24b3"
-      },
-      "acceptance": "All previously observed valid movie IDs can be considered in seven-day TMDB-only bounded refresh, even if absent from the current calendar, without new title discovery",
-      "ci": "4/4 success: Python 39041474689, smoke 39041474599, Completeness 39041474620, Autonomous quality 39041474702; production not verified."
-    },
-    {
-      "id": "P0-279-PROVIDER-OUTAGE",
-      "title": "Surface total TMDB provider refresh outage in CI",
-      "status": "merged",
-      "issue": 239,
-      "pull_request": {
-        "number": 279,
-        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/279",
-        "head_sha": "80aedabce762bab6899c0d7aff01f4ac6a22119e",
-        "merge_sha": "d9d629717d4b886f4d9a2941479c246bba166996"
-      },
-      "acceptance": "Zero successful checks when scheduled checks exist fails CI without corrupting prior snapshot; logs attempted/success/failed.",
-      "ci": "4/4 success: Python 39065259733, smoke 39065259779, quality 39065259700, completeness 39065259694. No deployment."
-    },
-    {
-      "id": "P0-280-QUICK-REVIEW",
-      "title": "Compact review and inline 0.1 score on existing movie listings",
-      "status": "merged",
-      "issue": 239,
-      "pull_request": {
-        "number": 280,
-        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/280",
-        "head_sha": "d5c11b1e139aacc54acb3be09627a65a6b12d7cc",
-        "merge_sha": "550a0bbc49378238bb0ab258c8382286bb619cd6"
-      },
-      "acceptance": "Review labels, native date input, 0.1 rating, venue persistence, close X, direct inline list scores.",
-      "ci": "5/5 successful: Scorecard contract 39066252747; smoke 39066252775; completeness 39066252702; frontend 39066252707; quality 39066252742. No deployment."
-    },
-    {
-      "id": "P0-281-INLINE-SCORE-COMPAT",
-      "title": "Fix non-link inline score and preserve existing records",
-      "status": "merged",
-      "issue": 239,
-      "pull_request": {
-        "number": 281,
-        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/281",
-        "head_sha": "59b9f3e7fbaf80e369fd898cdd43dca1f92b6e47",
-        "merge_sha": "c0e15d1ee5ee5b053758cd06b6ba4eff52ddf47b"
-      },
-      "acceptance": "No URL parsing on non-link cards; preserve existing record metadata; reject empty numeric input; legacy partial dates handled; inline score browser regression.",
-      "ci": "4/4 success: smoke 39066651486, frontend 39066651520, completeness 39066651525, quality 39066651524. No deploy."
-    },
-    {
-      "id": "P0-CINELVA-FEEDBACK-20261018",
-      "title": "Apply My CINELVA feedback and remove unwanted next action",
-      "status": "merged",
-      "issue": 239,
-      "acceptance": "Bookmarks open the visible 見たい映画 list; saved entries are visible on first load; new record entry points to search; ratings preserve zero; viewing method is limited to cinema or streaming; award/director actions use the searchable listing; the rating panel has no 次へ action; annual calendar and medal behavior remain intact.",
-      "ci": "PR #354 feedback merged; follow-up direct-review regressions merged in #372 as 1140ca41d5a25d2560a3c7b04f7ff5fd31386f08. All five PR Actions passed on 28e564101b29e14a25d6cbdfbf3ee7fd59d88f78. Latest main includes director follow-ups #365-#377. Production remains behind; do not treat source integration as production acceptance."
-    },
-    {
-      "id": "P0-OCEAN-RELEASE-PAYLOAD",
-      "title": "Exclude retired Ocean payload from production build",
-      "status": "merged",
-      "issue": 239,
-      "acceptance": "Publish only the eight legacy Ocean redirect HTML files; retain active routes, assets, saved-record modules and original query/hash redirects. Archive source remains in git.",
-      "ci": "PR #379 all four Actions passed on 821f15f69806d542cca7d34c1a49ebbc6cf47d31; focused review found no critical/important issue. Merged as 81587315b6b808dc519fa20dabfcdd4054a083c3. Production remains blocked by Vercel build-rate-limit."
-    },
-    {
-      "id": "P1-DIRECTOR-COUNT-CONSISTENCY",
-      "title": "Keep director selection and filmography counts consistent after credit exclusions",
-      "status": "merged",
-      "issue": 239,
-      "acceptance": "Selection rows and expanded filmography use the same accepted works, watched numerator and total denominator. Excluded shorts remain excluded from both counts. Unknown-year Duel by another director does not throw or borrow Spielberg year.",
+      "i…1191 tokens truncated…and total denominator. Excluded shorts remain excluded from both counts. Unknown-year Duel by another director does not throw or borrow Spielberg year.",
       "ci": "PR #380 all five Actions passed on 73b916907a40d271f0e3c2afe066034c973c8411; focused review found no critical/important issue. Merged as 24939d4b87a501f4c93589b74de44bea7c7639cd."
     },
     {
@@ -537,10 +464,10 @@
       "pull_request": {
         "number": 401,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/401",
-        "latest_code_sha": "0adc0db543805ee1d24f1fcd2da431641d76f962"
+        "latest_code_sha": "0f5cf0417aaae91e37f8dda104c145fbca44d5a2"
       },
       "acceptance": "Every visible discovery tab/preset/filter produces its expected content or query; all movie tiles show poster or fallback and expose shared controls; browser journey passes on Chromium/WebKit at mobile and desktop widths; production is verified after merge/deploy.",
-      "ci": "Read-only live smoke confirms 8 theatrical + 119 catalog cards; AI/condition tabs and SF results (2,350 total; 20 visible) work; availability filters split the catalog 22 fresh / 97 unconfirmed and restore 119. Zero shared rating/review/bookmark controls in sampled cards is a live P0. Local quality gate 178/178 Node tests plus Python/data/compliance/UI gates passed. Expanded browser CI pending. PR conflicts with latest main in seven overlapping source files; production remains v1.5.8."
+      "ci": "Read-only live smoke confirms 8 theatrical + 119 catalog cards; AI/condition tabs and SF results (2,350 total; 20 visible) work; availability filters split the catalog 22 fresh / 97 unconfirmed and restore 119. Zero shared rating/review/bookmark controls in sampled cards is a live P0. Local quality gate 178/178 Node tests plus Python/data/compliance/UI gates passed. Expanded browser CI pending. PR conflicts with latest main in seven overlapping source files; production remains v1.5.8. Live follow-up also confirmed the 90s preset returns 10 catalog results and zero theatrical matches; selecting Christopher Nolan from person search returns 8 filmography cards. Those person cards also have zero shared controls on v1.5.8. New Chromium/WebKit regression covers person search and shared controls; local browser execution is unavailable."
     }
   ],
   "verification": [
@@ -612,6 +539,10 @@
     {
       "check": "Production discovery smoke on canonical Vercel URL",
       "result": "Read-only browser inspection on https://cinelva.vercel.app/discover.html (reported v1.5.8): 8 theatrical cards and 119 catalog cards loaded. The AI tab visibly switched to concierge, returning to conditions worked, and SF search returned 2,350 total results with 20 visible cards. Availability filter clicks changed the catalog from 119 total to 22 fresh-streaming and 97 unconfirmed cards, then back to 119; totals reconcile. Critical confirmed defect: zero shared rating, review, or bookmark controls were present in the sampled theatrical/catalog/condition cards. No poster failures were observed among the 127 loaded shelf images. This live gap is covered by PR #401 but remains unmerged/undeployed. No user data was written."
+    },
+    {
+      "check": "Production person search and expanded preset smoke",
+      "result": "Read-only interaction on canonical discovery page: expanded 90年代名作 preset updates result title and returns 10 catalog results with zero theatrical matches. Director search for Christopher Nolan produced a matching Directing suggestion; selecting it showed 8 filmography cards. Runtime DOM inspection found zero shared rating, review, and bookmark controls on the person result cards, consistent with the unmerged common-control fix. No user data was written."
     }
   ],
   "deployment": {

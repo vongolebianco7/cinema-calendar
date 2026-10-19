@@ -13,7 +13,7 @@ const tmdbCache=new Map();let tmdbActive=0;const tmdbQueue=[];
 const normalizedTitle=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 let backendBasePromise=null;
 function ratingBackend(){
- return backendBasePromise??=(fetch('data/backend.json').then(r=>r.ok?r.json():null).then(c=>c?.enabled&&String(c.base_url||'').startsWith('https://')?c.base_url.replace(/\/$/,''):null).catch(()=>null));
+ return backendBasePromise??=(fetch(new URL('../data/backend.json',document.querySelector('script[src*="cinelva-quick-rate.js"]')?.src||location.href)).then(r=>r.ok?r.json():null).then(c=>c?.enabled&&String(c.base_url||'').startsWith('https://')?c.base_url.replace(/\/$/,''):null).catch(()=>null));
 }
 function resolveCommunityRating(movie,done){
  const title=movie?.title||movie?.name;

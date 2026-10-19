@@ -10,10 +10,10 @@ let selected=null,activeCard=null;
 // Fill missing community scores only when a card becomes visible. Strict title matching
 // avoids attributing an unrelated film's TMDB rating to a release.
 const tmdbCache=new Map();let tmdbActive=0;const tmdbQueue=[];
-const normalizedTitle=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\\s\\p{P}\\p{S}]+/gu,'');
+const normalizedTitle=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 let backendBasePromise=null;
 function ratingBackend(){
- return backendBasePromise??=(fetch('data/backend.json').then(r=>r.ok?r.json():null).then(c=>c?.enabled&&/^https:\\/\\//.test(c.base_url)?c.base_url.replace(/\\/$/,''):null).catch(()=>null));
+ return backendBasePromise??=(fetch('data/backend.json').then(r=>r.ok?r.json():null).then(c=>c?.enabled&&String(c.base_url||'').startsWith('https://')?c.base_url.replace(/\/$/,''):null).catch(()=>null));
 }
 function resolveCommunityRating(movie,done){
  const title=movie?.title||movie?.name;

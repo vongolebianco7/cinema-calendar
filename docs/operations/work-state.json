@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T12:50:52+07:00",
+  "updated_at": "2026-10-19T12:53:35+07:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "cb17bae79ca830dfe3fb0aa95a70a1a93de3b8af",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "0adc0db543805ee1d24f1fcd2da431641d76f962",
+  "head_sha": "0e5236c2b6e1cf03b80876ed430039742696e590",
   "pull_request": 401,
   "work_items": [
     {
@@ -540,7 +540,7 @@
         "latest_code_sha": "0adc0db543805ee1d24f1fcd2da431641d76f962"
       },
       "acceptance": "Every visible discovery tab/preset/filter produces its expected content or query; all movie tiles show poster or fallback and expose shared controls; browser journey passes on Chromium/WebKit at mobile and desktop widths; production is verified after merge/deploy.",
-      "ci": "Local quality gate 178/178 Node tests passed plus Python/data/compliance/UI gates. Browser test expanded but not locally executed; GitHub Actions pending. PR remains unmergeable and Vercel reports build-rate-limit. Full route audit and production verification remain open."
+      "ci": "Live read-only production smoke confirmed 8 theatrical + 119 catalog cards, working AI/condition switching, and SF results (2,350 total; 20 visible). No common rating/review/bookmark controls in sampled cards. Local quality gate 178/178 Node tests and other gates passed. Browser CI pending; PR has seven merge conflicts against current main; production remains on v1.5.8 and was not changed."
     }
   ],
   "verification": [
@@ -608,6 +608,10 @@
     {
       "check": "Discovery P0 follow-up: movie finder tabs, presets, and poster fallback",
       "result": "PR #401 adds visible fallback for missing/failed posters across recommendation, condition-search, person, and concierge result cards. Regression coverage now enumerates all 23 recommendation axes and validates tab/filter wiring; Chromium/WebKit journey covers availability filters, AI/condition tabs, genre query, shared rating/review/bookmark, fallback, and detail navigation at 390/1280px. Local quality_gate.py passed: 178 Node tests plus Python, release-data, compliance, UI, and work-state checks. Browser journey not executed locally (no browser binary); GitHub Actions result pending. Production not verified."
+    },
+    {
+      "check": "Production discovery smoke on canonical Vercel URL",
+      "result": "Read-only browser inspection on https://cinelva.vercel.app/discover.html (reported v1.5.8): 8 theatrical cards and 119 catalog cards loaded; AI tab visibly switched to concierge; switching back and applying SF returned 2,350 results / 20 visible cards. Critical confirmed defect: zero shared rating, review, or bookmark controls were present in sampled theatrical/catalog/condition cards. No poster failures were observed among the loaded shelf images (127 checked). This is the live implementation gap addressed by PR #401 but still not merged/deployed. No user data was written."
     }
   ],
   "deployment": {
@@ -628,6 +632,6 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Refresh live PR #401 head and required Actions. Reconcile against current main, resolve merge conflicts safely, run Chromium/WebKit discovery and existing regression journeys, then proceed to remaining route/tab/function inventory. Do not deploy while Vercel reports build-rate-limit; verify production only after required checks pass.",
+  "next_action": "Resolve seven documented conflicts between PR #401 and current main without dropping either accepted main fixes or the common movie controls; run local quality gate plus Chromium/WebKit journeys. Obtain/inspect Actions. Do not deploy while Vercel reports build-rate-limit; verify controls on production only after an approved green merge/deploy.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

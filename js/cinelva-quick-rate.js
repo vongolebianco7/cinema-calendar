@@ -251,14 +251,14 @@ function attachInlineScore(button,movie) {
   const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched===true);
   const watched=Boolean(rec);
   const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
-  personal.textContent='MY評価  '+score;
+  personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
   personal.classList.toggle('is-unwatched',!watched);
   personal.style.setProperty('color',watched?'#e4bd70':'#aab0bb','important');
  };
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
  const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
- audience.textContent='TMDB評価  '+(validTmdb?(tmdbScore/2).toFixed(1):'評価なし');
+ audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'評価なし';
  audience.classList.toggle('is-unrated',!validTmdb);
  if(!validTmdb&&typeof IntersectionObserver!=='undefined'){
   const observer=new IntersectionObserver(entries=>{
@@ -266,7 +266,7 @@ function attachInlineScore(button,movie) {
    observer.disconnect();
    resolveCommunityRating(movie,score=>{
     if(!score||!audience.isConnected)return;
-    audience.textContent='TMDB評価  '+(score/2).toFixed(1);
+    audience.querySelector('.rating-value').textContent=(score/2).toFixed(1);
     audience.classList.remove('is-unrated');
    });
   },{rootMargin:'180px'});
@@ -1101,6 +1101,24 @@ style.textContent+=`
  max-height:21px!important;flex:0 0 21px!important;padding:1px!important;margin:0!important;
 }
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{width:16px!important;height:16px!important}
+`;
+style.textContent+=`
+/* Consistent value column and matching action button frames. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;column-gap:3px!important;
+}
+.cinelva-rating-controls-no-gauge .rating-caption{display:block!important;min-width:0!important;white-space:nowrap!important}
+.cinelva-rating-controls-no-gauge .rating-value{display:block!important;text-align:right!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:21px!important;min-width:21px!important;max-width:21px!important;
+ height:21px!important;min-height:21px!important;max-height:21px!important;
+ padding:1px!important;border:1px solid #525765!important;border-radius:5px!important;
+ background:transparent!important;box-sizing:border-box!important;box-shadow:none!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{
+ display:block!important;width:16px!important;height:16px!important;flex:0 0 16px!important;
+}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

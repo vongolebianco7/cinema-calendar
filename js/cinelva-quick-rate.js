@@ -277,7 +277,7 @@ const controls=document.createElement('div');controls.className='cinelva-rating-
   controls.addEventListener(type,event=>event.stopPropagation());
  }
  controls.addEventListener('keydown',event=>event.stopPropagation());
- syncWatched();
+ refreshRatingLabels();
 }
 function refreshRatingLabels(){
  const saved=Records.all();

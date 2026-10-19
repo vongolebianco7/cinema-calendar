@@ -26,6 +26,16 @@ const { chromium } = require('playwright');
    const live=await page.locator('#grid .cinelva-rating-pair').first().evaluate(el=>({text:el.innerText,lines:[...el.querySelectorAll('.cinelva-rating-line')].map(x=>{const b=x.getBoundingClientRect();return {text:x.textContent,width:b.width,height:b.height,display:getComputedStyle(x).display};})}));
    console.log('search card',width,JSON.stringify(live));
    if(!live.text.includes('あなたの評価')||!live.text.includes('みんなの評価')||live.lines.length!==2||live.lines.some(x=>x.width<=0||x.height<=0||x.display==='none'))throw Error('real search card ratings hidden '+width);
+   // The production calendar has its own fixed-height legacy CSS; verify no clipping.
+   await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+   await page.locator('#cards .cinelva-rating-controls-no-gauge').first().waitFor({state:'visible',timeout:20000});
+   const calendar=await page.locator('#cards .cinelva-rating-controls-no-gauge').first().evaluate(el=>{
+     const outer=el.getBoundingClientRect(),pair=el.querySelector('.cinelva-rating-pair'),actions=el.querySelector('.cinelva-rating-actions');
+     const a=pair?.getBoundingClientRect(),b=actions?.getBoundingClientRect();
+     return {height:outer.height,maxHeight:getComputedStyle(el).maxHeight,text:pair?.innerText,pairHeight:a?.height,actionsHeight:b?.height,clipped:!a||!b||a.top<outer.top-1||b.bottom>outer.bottom+1};
+   });
+   console.log('calendar card',width,JSON.stringify(calendar));
+   if(calendar.clipped||calendar.height<55||!calendar.text?.includes('あなたの評価')||!calendar.text?.includes('みんなの評価'))throw Error('calendar rating clipped '+width);
    await page.close();
   }
  } finally {await browser.close();}

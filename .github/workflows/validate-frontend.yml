@@ -17,6 +17,7 @@ on:
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
       - "tests/cinelva-discovery-browser.cjs"
+      - "tests/cinelva-discovery-poster.test.cjs"
       - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
@@ -63,6 +64,7 @@ on:
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
       - "tests/cinelva-discovery-browser.cjs"
+      - "tests/cinelva-discovery-poster.test.cjs"
       - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
@@ -182,7 +184,7 @@ jobs:
       - name: Check discovery UI integrations
         run: |
           python scripts/check_discovery_ui.py
-          node --test tests/cinelva-discovery-offer-order.test.cjs
+          node --test tests/cinelva-discovery-offer-order.test.cjs tests/cinelva-discovery-poster.test.cjs
       - name: Check discovery shelf count and expansion
         run: node --test tests/cinelva-discovery-shelf.test.cjs
       - name: Check Cinemap core journey

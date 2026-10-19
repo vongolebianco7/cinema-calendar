@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:28:00+09:00",
+  "updated_at": "2026-10-19T15:33:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "f2b1d983ddd808a3471ead18094aa65fdb1acbac",
+  "head_sha": "15644ea7efcb5921cb66c2870a584940a53de30f",
   "pull_request": 401,
   "work_items": [
     {
@@ -659,6 +659,10 @@
     {
       "check": "PR #401 default review date and discovery modal test correction",
       "result": "Set today as the default viewing date for new entries and existing records without a date, while preserving partial legacy dates (year/month) during edits. Updated the discovery browser check to assert the date prompt is visible and today is preselected. Targeted Node suite passes 11/11; browser CI must confirm Chromium/WebKit behavior on head f2b1d98."
+    },
+    {
+      "check": "P0 discovery director-credit correction",
+      "result": "Read-only production inspection showed the Christopher Nolan explorer labeled results as director works while including non-director crew titles. Root cause: /api/discover maps crew to TMDB with_crew, which covers any crew job. Added a cached TMDB person movie_credits lookup filtered to job=Director and intersected rendered director results with those IDs; browser regression fixture includes a crew-only false positive and asserts it is excluded. Full local quality_gate.py passes 178/178; browser CI pending. Production remains unchanged."
     }
   ]
 }

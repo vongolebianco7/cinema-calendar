@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T10:04:40+09:00",
+  "updated_at": "2026-10-19T10:07:33+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "4b10e567ca3be052c6a205f0bd0c1a31442535ce",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "007a94976b9c7864d0584e9951ef0cbd4854f830",
+  "head_sha": "32fe88ee04073e8665e3fe25691431632adb9a3f",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,7 +527,7 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "Local quality gate175activeNodepass. PR401 previous run8of9Actions succeeded; frontend uncovered stale selectors/copy and then aboutblank test initialization. Fixed fixtures; latest browser run revealed summary fixture filtered to wrong year, now selects all-time. Real CI required on final head."
+      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required."
     }
   ],
   "verification": [
@@ -587,6 +587,10 @@
     {
       "check": "Bookmark independent store and operation inventory",
       "result": "Local regression175activeNodepass; aliases, historical canonical/local-ID collision, malformed storage/quota, latest review preservation, raw backup roundtrip.29routes652staticcontrols281operationlines. Review blockers repaired with failing-before/passing-after tests. Production not verified."
+    },
+    {
+      "check": "PR401 dedicated bookmark browser",
+      "result": "Actions39183704965 on32fe88ee: Chromium390/1280PASS, WebKit390/1280PASS. Real clicks, same-page/tab storage sync, canonical imported IDs, raw record preservation, summary hit bounds, awards/directors/detail. Full frontend failed later on stale Eastwood display text; source behavior verified but integration not yet green."
     }
   ],
   "deployment": {

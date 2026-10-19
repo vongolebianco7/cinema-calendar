@@ -195,7 +195,7 @@ async function freePort() {
     const eastwoodPick=eastwoodPage.locator('#directorTimeline .director-pick');
     assert.equal(await eastwoodPick.count(),1);
     assert.match(await eastwoodPick.textContent(),/クリント・イーストウッド/);
-    assert.match(await eastwoodPick.textContent(),new RegExp('1/'+eastwood.works.length+'本'));
+    assert.match(await eastwoodPick.getAttribute('aria-label'),new RegExp('レビュー済み1本、監督作品総数'+eastwood.works.length+'本'));
     await eastwoodPick.click();
     assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile.is-watched').count(),1);
     assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile').count(),eastwood.works.length);

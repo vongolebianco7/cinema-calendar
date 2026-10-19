@@ -180,86 +180,14 @@ function enhanceCalendar(grid){
  observer.observe(grid,{childList:true,subtree:true});
  decorate();
 }
-function attachInlineScore(button, movie) {
+function attachInlineScore(button,movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id))return;
- const existing=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
- const prompt=document.createElement('button');prompt.type='button';prompt.className='cinelva-rating-date-prompt';prompt.hidden=true;prompt.textContent='鑑賞日が未設定です　日付を設定 ›';prompt.onclick=e=>{e.stopPropagation();e.preventDefault();activeCard=button;open(movie,{showDate:true});};
- const wrap=document.createElement('span');wrap.className='cinelva-inline-score';
- const input=document.createElement('input');input.type='range';input.min='0';input.max='5';input.step='0.1';
- input.value=Number(existing?.rating??0).toFixed(1);input.dataset.movieId=String(id);input.dataset.hasRecord=String(Boolean(existing));input.setAttribute('aria-label','一覧で点数をゲージで設定');
- input.onclick=e=>e.stopPropagation();
- input.onkeydown=e=>e.stopPropagation();
- const value=document.createElement('output');value.className='cinelva-inline-value';value.textContent=Number(input.value).toFixed(1);
- const sync=()=>{const score=Number(input.value),text=score.toFixed(1),hasRecord=input.dataset.hasRecord==='true';if(value.textContent!==text)value.textContent=text;wrap.classList.toggle('is-watched',hasRecord);button.classList.toggle('is-watched',hasRecord);button.setAttribute('aria-label',hasRecord?'この映画の評価を編集':'この映画をレビュー');input.style.setProperty('--score-progress',String(score/5*100)+'%');track.style.setProperty('--score-progress',String(score/5*100)+'%');};
- input.oninput=()=>{if(armed)sync();};
- input.onchange=e=>{e.stopPropagation();if(!armed&&input.dataset.dragging!=='true')return;const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}
- try{const latest=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));Records.save({...movie,id:String(latest?.id??id),tmdbId:id,title:movie.title||movie.name||latest?.title||'作品'},score,latest?.watchedAt??null);input.dataset.hasRecord='true';if(score>0&&!latest?.watchedAt){prompt.hidden=true;activeCard=button;open({...movie,id:String(id),rating:score},{showDate:true});}else{prompt.hidden=true;}root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:String(id)}}));sync();}catch(error){input.setCustomValidity(error.message);input.reportValidity();}};
- let armed=false;
- const arm=state=>{armed=state;wrap.classList.toggle('is-editing',state);input.tabIndex=state?0:-1;input.style.pointerEvents=state?'auto':'none';};
- const track=document.createElement('span');track.className='cinelva-score-track';track.append(input);wrap.append(track,value);
- track.tabIndex=0;track.setAttribute('role','button');track.setAttribute('aria-label','タップして採点を有効化');arm(false);
- track.addEventListener('keydown',e=>{if(!armed&&(e.key==='Enter'||e.key===' ')){e.preventDefault();arm(true);input.focus();}});
- document.addEventListener('pointerdown',e=>{if(armed&&!wrap.contains(e.target))arm(false);},true);
- window.addEventListener('scroll',()=>{if(armed)arm(false);},{passive:true,capture:true});
- // The visible track owns gestures. Native range drag on iOS is unreliable inside swipeable cards.
- let activePointer=null, activeTouch=null;
- const moveTo=x=>{
-  const rect=track.getBoundingClientRect();
-  if(rect.width<=0)return;
-  const fraction=Math.max(0,Math.min(1,(x-rect.left)/rect.width));
-  const score=Math.round(fraction*50)/10;
-  // Update thumb, native input, and numeric label together on every gesture.
-  track.style.setProperty('--smooth-progress',(fraction*100).toFixed(3)+'%');
-  input.value=score.toFixed(1);
-  value.textContent=score===0?'未鑑賞':score.toFixed(1);
-  value.value=value.textContent;
+ const syncWatched=()=>{
+  const record=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
+  button.classList.toggle('is-watched',Boolean(record&&record.watched!==false));
+  button.setAttribute('aria-label',record&&record.watched!==false?'この映画の評価を編集':'この映画をレビュー');
  };
- const finish=()=>{activePointer=null;activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');input.dispatchEvent(new Event('change'));arm(false);};
- track.addEventListener('pointerdown',e=>{
-  if(e.pointerType==='touch')return;
-  if(!armed){e.preventDefault();e.stopPropagation();arm(true);return;}
-  if(e.pointerType==='mouse'&&e.button!==0)return;
-  e.preventDefault();e.stopPropagation();activePointer=e.pointerId;input.dataset.dragging='true';
-  track.setPointerCapture?.(e.pointerId);moveTo(e.clientX);
- });
- track.addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);});
- track.addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);finish();});
- track.addEventListener('pointercancel',()=>{activePointer=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});
- track.addEventListener('touchstart',e=>{
-  const touch=e.changedTouches[0];if(!touch)return;
-  if(!armed){e.stopPropagation();e.preventDefault();arm(true);return;}
-  activeTouch=touch.identifier;input.dataset.dragging='true';moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
- },{passive:false});
- track.addEventListener('touchmove',e=>{
-  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
-  if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();
- },{passive:false});
- track.addEventListener('touchend',e=>{
-  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
-  if(!touch)return;moveTo(touch.clientX);e.stopPropagation();e.preventDefault();finish();
- },{passive:false});
- track.addEventListener('touchcancel',()=>{activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});
- // Keep the live number following the finger even when iOS retargets touchmove
- // to the swipeable card or a parent outside the small rating track.
- const followTouch=e=>{
-  if(activeTouch===null)return;
-  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
-  if(!touch)return;
-  moveTo(touch.clientX);
-  e.preventDefault();
- };
- document.addEventListener('touchmove',followTouch,{capture:true,passive:false});
- document.addEventListener('touchend',e=>{
-  if(activeTouch===null)return;
-  const touch=Array.from(e.changedTouches).find(t=>t.identifier===activeTouch);
-  if(touch){moveTo(touch.clientX);finish();}
- },{capture:true,passive:true});
- document.addEventListener('touchcancel',e=>{
-  if(activeTouch!==null&&Array.from(e.changedTouches).some(t=>t.identifier===activeTouch)){
-   activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');
-  }
- },{capture:true,passive:true});
   const bookmark=document.createElement('button');
  bookmark.type='button';bookmark.className='cinelva-bookmark-button';
  bookmark.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>';
@@ -283,19 +211,18 @@ function attachInlineScore(button, movie) {
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key,marked:!marked}}));
   }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
  };
- root.addEventListener('cinelva-record-updated',()=>{const rec=Records.all().find(x=>String(x.tmdbId??x.tmdb_id??x.id)===String(id));if(rec?.watchedAt)prompt.hidden=true;});
+ root.addEventListener('cinelva-record-updated',syncWatched);
  root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
-const controls=document.createElement('div');controls.className='cinelva-rating-controls';
- button.before(controls);controls.append(button,wrap,bookmark,prompt);
- // Bubble-phase isolation allows the slider's own touch handlers to run first.
- // Capture-phase stopPropagation on controls prevented track touch events entirely.
+
+ const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';
+ button.before(controls);controls.append(button,bookmark);
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
   controls.addEventListener(type,event=>event.stopPropagation());
  }
  controls.addEventListener('keydown',event=>event.stopPropagation());
- sync();
+ syncWatched();
 }
 function refreshRatingLabels(){
  const saved=Records.all();

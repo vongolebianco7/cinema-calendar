@@ -9,7 +9,7 @@ const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
 const reviewIcon='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>';
 const style=document.createElement('style');
-style.textContent=`
+style.textContent=`\n.cinelva-rating-pair{display:flex;flex:1 1 auto;flex-wrap:wrap;gap:3px 9px;min-width:0;font-size:10px;line-height:1.4;color:#c9cbd0}.cinelva-rating-pair span{white-space:nowrap}.cinelva-rating-controls-no-gauge{justify-content:flex-end!important;gap:8px!important}.cinelva-rating-controls-no-gauge>.cinelva-rate-button{margin:0!important}\n
 .cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}.cinelva-rate-inner{padding:14px;gap:9px}.cinelva-review-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.cinelva-review-header strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cinelva-review-header button{background:transparent;border:0;color:inherit;font-size:27px;width:36px;height:36px;cursor:pointer}.cinelva-review-score{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}.cinelva-review-score output{font-size:30px;font-weight:750}.cinelva-review-score input{flex-basis:100%}.cinelva-review-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cinelva-rate-inner label[hidden]{display:none}.cinelva-rate-inner textarea{min-height:52px}
 
 .cinelva-rate-button{min-height:38px;border:1px solid #a78a50;border-radius:6px;background:#25211a;color:#f9e8c8;padding:7px 12px;margin:8px 0;font:600 13px system-ui;cursor:pointer}

@@ -6527,11 +6527,11 @@
       "file": "js/data-backup.js",
       "operations": [
         {
-          "line": 53,
+          "line": 54,
           "source_excerpt": "try{for(const [key,value]of pending){storage.setItem(key,value);written.push(key);}}"
         },
         {
-          "line": 54,
+          "line": 55,
           "source_excerpt": "catch(error){let rollbackFailed=false;for(const key of written){try{storage.removeItem(key);}catch{rollbackFailed=true;}}"
         }
       ]

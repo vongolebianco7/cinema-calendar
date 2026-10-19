@@ -47,3 +47,10 @@ test('bookmark backup preserves raw legacy values and unknown fields without cha
  s.api.inspect(JSON.stringify(payload));target.api.restore(target.storage,JSON.stringify(payload));
  for(const [key,value]of Object.entries(original))assert.equal(target.map.get(key),value);
 });
+test('invalid bookmark backups are rejected before any storage writes',()=>{
+ for(const raw of ['{','[]','null','{"42":null}','{"42":{"id":"bad"}}']){
+  const s=setup({'cinelva-want-to-watch-v1':'{"7":{"id":7,"title":"safe"}}'});
+  assert.throws(()=>s.api.restore(s.storage,JSON.stringify({format:'cinemap-backup',version:1,entries:{'cinelva-want-to-watch-v1':raw}})));
+  assert.equal(s.map.get('cinelva-want-to-watch-v1'),'{"7":{"id":7,"title":"safe"}}');
+ }
+});

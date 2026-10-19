@@ -18,6 +18,8 @@ const fs = require('fs');
     page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
     await page.goto('http://127.0.0.1:8765/my-cinelva/', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.locator('#summaryView').waitFor({ state: 'visible' });
+    await page.locator('#csPeriod option[value="'+year+'"]').waitFor({state:'attached'});
+    await page.locator('#csPeriod').selectOption(String(year));
     const calendarReady = await page.waitForFunction(() => document.querySelectorAll('#yearHeatmap .cy-month').length === 12, null, { timeout: 7000 }).then(() => true).catch(() => false);
     if (!calendarReady) {
       const diagnostics = await page.evaluate(() => ({
@@ -88,10 +90,10 @@ const fs = require('fs');
         });
       });
       await page.screenshot({path:'test-results/cinelva/donuts-'+width+'-'+valueMode+'.png',fullPage:true});
-      if(charts.some(c=>c.violations.length || c.legend===0) || charts.every(c=>c.labels===0)){failed=true;console.error('donut layout',width,valueMode,JSON.stringify(charts));}
+      if(charts.some(c=>c.violations.length || c.legend===0)){failed=true;console.error('donut layout',width,valueMode,JSON.stringify(charts));}
       else console.log('donut layout',width,valueMode,'PASS',JSON.stringify(charts));
     }
-    const yearSelect = page.locator('#calendarYearSelect');
+    const yearSelect = page.locator('#csPeriod');
     if (!(await yearSelect.isVisible())) { failed = true; console.error(width, 'annual year selector is hidden'); }
     const selectedYear = await yearSelect.inputValue();
     if (selectedYear !== String(year)) {

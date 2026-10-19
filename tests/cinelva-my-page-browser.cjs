@@ -52,17 +52,22 @@ async function freePort() {
       localStorage.setItem('cinelva-want-to-watch-v1', JSON.stringify({ '900002': { id: '900002', title: '見たい作品テスト', savedAt: new Date().toISOString() } }));
       window.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated', { detail: { id: '900002', marked: true } }));
     });
-    assert.equal(await page.locator('#wantToWatchSection').evaluate(section => section.open), true);
+    assert.equal(await page.locator('#summaryView').isVisible(), true);
+    assert.equal(await page.locator('#watchlistView').isVisible(), false);
+    await page.locator('[data-tab="watchlist"]').click();
     assert.match(await page.locator('#wantWatchList').textContent(), /見たい作品テスト/);
-    assert.match(await page.locator('#wantToWatchSection summary').textContent(), /見たい映画/);
+    assert.equal(await page.locator('#watchlistView').isVisible(),true);
+    await page.locator('[data-tab="summary"]').click();
+    await page.locator('#csPeriod').selectOption('2026');
     assert.equal(await page.locator('#statTotal').textContent(), '2');
     assert.equal(await page.locator('#statOrigin').textContent(), '2 / 0');
     assert.equal(await page.locator('#yearHeatmapTitle').textContent(), '年間鑑賞カレンダー');
     assert.equal(await page.locator('#annualComparison').count(), 0, 'duplicate annual comparison is not displayed');
-    await page.locator('#calendarYearSelect').selectOption('2025');
+    await page.locator('#csPeriod').selectOption('2025');
     assert.equal(await page.locator('#csPeriod').inputValue(), '2025');
     await page.locator('#csPeriod').selectOption('2026');
-    assert.equal(await page.locator('#calendarYearSelect').inputValue(), '2026');
+    assert.equal(await page.locator('#calendarYearSelect').count(), 0);
+    assert.match(await page.locator('#yearHeatmap').getAttribute('aria-label'),/2026年/);
     assert.ok(await page.locator('#recordList [data-record-card]').count() === 2);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'page should not overflow at 390px');
 
@@ -141,7 +146,7 @@ async function freePort() {
     assert.equal(await page.locator('#statTotal').textContent(), '3');
 
     await page.locator('[data-tab="records"]').click();
-    await page.locator('#recordList [data-edit="99999999"]').click();
+    await page.locator('#recordList [data-record-card="99999999"] .cinelva-rate-button').click();
     await page.locator('#cinelvaRateDate').evaluate(input=>{input.value='2026-06-12';document.getElementById('cinelvaDateTrigger').textContent='2026/06/12';});await page.locator('#cinelvaRatePlace').selectOption('配信');
     await page.locator('#cinelvaRateComment').fill('自宅で見た感想');await page.locator('#cinelvaRateSave').click();
     const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999']);

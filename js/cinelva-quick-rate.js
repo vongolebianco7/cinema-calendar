@@ -275,27 +275,19 @@ function attachInlineScore(button,movie) {
  personal.title='MY評価';audience.title='TMDB評価';
  ratings.setAttribute('aria-label','MY評価 / TMDB評価');
  ratings.append(personal,audience);
- // Inline layout is intentional: page-level movie-card styles must not hide ratings.
- Object.assign(ratings.style,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',height:'auto',flex:'0 0 auto',gap:'2px',visibility:'visible',opacity:'1',overflow:'visible'});
- Object.assign(personal.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
- Object.assign(audience.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#b8c6d9',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
- // Force the two rating rows to remain visible even if legacy page CSS uses !important.
- const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
- force(ratings,{'display':'flex','flex-direction':'column','visibility':'visible','opacity':'1','height':'auto','min-height':'30px','width':'100%','flex':'0 0 auto','overflow':'visible','position':'relative','color':'#e4bd70'});
- force(personal,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','white-space':'nowrap'});
- force(audience,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','color':'#b8c6d9','white-space':'nowrap'});
- root.addEventListener('cinelva-record-updated',updatePersonal);
- updatePersonal();
  const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';
  button.before(controls);
  const actions=document.createElement('div');actions.className='cinelva-rating-actions';
  actions.append(button,bookmark);controls.append(ratings,actions);
- // Compact two-line layout: rating labels on the left, both actions on the right.
- force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) auto','grid-template-rows':'auto','align-items':'center','gap':'4px','height':'auto','min-height':'0','max-height':'none','padding':'5px 6px','overflow':'visible'});
- force(ratings,{'grid-column':'1','grid-row':'1','min-height':'0','gap':'1px'});
- force(actions,{'grid-column':'2','grid-row':'1','display':'flex','flex-direction':'column','align-items':'center','justify-content':'center','gap':'2px','height':'auto','min-height':'0','width':'auto','flex':'0 0 auto'});
- force(personal,{'font-size':'9px','line-height':'13px','height':'13px','min-height':'13px'});
- force(audience,{'font-size':'9px','line-height':'13px','height':'13px','min-height':'13px'});
+ // One geometry definition: two 20px rows, matching 20px action buttons.
+ const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
+ force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) 20px','grid-template-rows':'42px','align-items':'center','column-gap':'4px','width':'100%','box-sizing':'border-box','height':'52px','min-height':'52px','max-height':'52px','padding':'5px 6px','overflow':'hidden'});
+ force(ratings,{'display':'grid','grid-template-columns':'minmax(0,1fr)','grid-template-rows':'20px 20px','grid-column':'1','grid-row':'1','align-items':'center','width':'100%','min-width':'0','height':'42px','min-height':'42px','max-height':'42px','gap':'2px','overflow':'hidden','visibility':'visible','opacity':'1'});
+ for(const line of [personal,audience])force(line,{'display':'grid','grid-template-columns':'minmax(0,1fr) auto','align-items':'center','gap':'2px','width':'100%','min-width':'0','height':'20px','min-height':'20px','max-height':'20px','font-size':'10px','line-height':'20px','overflow':'hidden','white-space':'nowrap','visibility':'visible'});
+ force(actions,{'display':'grid','grid-template-columns':'20px','grid-template-rows':'20px 20px','grid-column':'2','grid-row':'1','align-items':'center','justify-content':'center','gap':'2px','width':'20px','height':'42px','min-height':'42px','max-height':'42px'});
+ for(const action of [button,bookmark]){force(action,{'display':'grid','place-items':'center','width':'20px','min-width':'20px','max-width':'20px','height':'20px','min-height':'20px','max-height':'20px','padding':'0','margin':'0','border':'1px solid #525765','border-radius':'4px','box-sizing':'border-box','background':'transparent','transform':'none'});const svg=action.querySelector('svg');if(svg)force(svg,{'width':'15px','height':'15px','min-width':'15px','min-height':'15px'});}
+ root.addEventListener('cinelva-record-updated',updatePersonal);
+ updatePersonal();
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
   controls.addEventListener(type,event=>event.stopPropagation());
  }

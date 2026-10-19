@@ -466,7 +466,10 @@ function groupedMovieCards(weekMovies,modeName){
  }).join("")
 }
 
-async function loadOutdoorEvents(){try{const r=await fetch("data/outdoor-events.json",{cache:"no-store"});const d=await r.json();outdoorEvents=d.events||[]}catch(e){outdoorEvents=[]}if(mode==="events")render()}
+let outdoorPosterCache={};
+async function loadOutdoorEvents(){try{const r=await fetch("data/outdoor-events.json",{cache:"no-store"});if(!r.ok)throw Error("outdoor feed");const d=await r.json();outdoorEvents=Array.isArray(d.events)?d.events:[]}catch(e){console.warn("Outdoor event feed failed",e);outdoorEvents=[]}if(mode==="events")render();hydrateOutdoorPosters().catch(console.warn)}
+async function hydrateOutdoorPosters(){const titles=[...new Set(outdoorEvents.filter(e=>e.movie&&!e.poster_url).map(e=>e.movie))];let cursor=0,changed=false;const norm=x=>String(x||"").normalize("NFKC").toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,"");async function worker(){while(cursor<titles.length){const title=titles[cursor++];if(outdoorPosterCache[title])continue;try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?"+new URLSearchParams({q:title,limit:"12"}),{cache:"force-cache"});if(!r.ok)continue;const d=await r.json();const hits=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];const hit=hits.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(title)));if(!hit)continue;let poster=hit.poster||hit.posterUrl||hit.poster_path||hit.posterPath;if(poster&&poster.startsWith("/"))poster="https://image.tmdb.org/t/p/w342"+poster;if(poster&&poster.startsWith("https://")){outdoorPosterCache[title]=poster;changed=true}}catch(e){}}}await Promise.all([worker(),worker(),worker()]);if(changed&&mode==="events")renderOutdoorCalendar()}
+
 function renderOutdoorCalendar(){
  const cal=document.querySelector(".calendar");
  cal.classList.remove("streamingWeekMode","theatricalCompact");cal.classList.add("festivalMode");
@@ -509,7 +512,7 @@ function renderOutdoorCalendar(){
   if(g.films.length){
    html+='<div class="outdoorFilmGrid">';
    for(const film of g.films){
-    html+='<a class="outdoorFilmItem" href="search.html?search='+encodeURIComponent(film.movie)+'">'+(film.poster_url?'<img loading="lazy" src="'+film.poster_url+'" alt="">':'<div class="outdoorFilmPlaceholder">POSTER</div>')+'<span>'+film.movie+'</span></a>'
+    html+='<a class="outdoorFilmItem" href="search.html?search='+encodeURIComponent(film.movie)+'">'+((film.poster_url||outdoorPosterCache[film.movie])?'<img loading="lazy" src="'+(film.poster_url||outdoorPosterCache[film.movie])+'" alt="">':'<div class="outdoorFilmPlaceholder">POSTER</div>')+'<span>'+film.movie+'</span></a>'
    }
    html+='</div>'
   }
@@ -1007,7 +1010,7 @@ if(mode==="streaming"&&active!=="すべて"){
 }
 if(tr&&tr.ok){let td=await tr.json();for(let t of(td.movies||[])){let base=movies.find(x=>x.title===t.title);movies.push({...base,...t})}}if(er&&er.ok){let ed=await er.json();festivalEvents=ed.events||[];festivalEvents.forEach(ev=>movies.push({...ev,start_date:ev.date,event:"festival"}))}if(sr&&sr.ok){theaterSchedules=await sr.json()}if(hr&&hr.ok){releaseHistory=await hr.json()}if(ar&&ar.ok){availabilitySnapshot=await ar.json()}if(lr&&lr.ok){filmingLocations=await lr.json()}if(tdr&&tdr.ok){let td=await tdr.json();theaterDirectory=td.theaters||[]}if(dr&&dr.ok){let dd=await dr.json();directors=dd.directors||{}}movies=CinemapCalendarDedupe.dedupe(movies);applyRevivalClassification();await hydrateMorningTenPosters();render();hydrateStreamingPosters().catch(()=>{});const initialSearch=new URLSearchParams(location.search).get("search");if(initialSearch){$("#q").value=initialSearch;document.querySelectorAll(".gSearch").forEach(x=>x.value=initialSearch);renderSearchResults();await fetchRemoteMovieResults(initialSearch)}}catch(e){$("#dates").innerHTML='<div class="empty">データを読み込めませんでした</div>'} }
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal").classList.contains("show"))hideModal();if(e.key==="Escape")closeDrawer()});function openDrawer(){$("#gDrawer").classList.add("show");$("#gDrawerMask").classList.add("show")}function closeDrawer(){$("#gDrawer").classList.remove("show");$("#gDrawerMask").classList.remove("show")}$("#gMenuBtn").onclick=openDrawer;$("#gDrawerClose").onclick=closeDrawer;$("#gDrawerMask").onclick=closeDrawer;
-renderCoverage();boot();
+renderCoverage();if(mode==="events")loadOutdoorEvents();boot();
 </script><script>
 (()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();
 </script>

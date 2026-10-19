@@ -991,6 +991,23 @@ style.textContent+=`
 .cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-audience{color:#b8c6d9!important}
 .cinelva-rating-controls-no-gauge>.cinelva-rating-actions{display:flex!important;justify-content:space-between!important;width:100%!important}
 `;
+style.textContent+=`
+/* ROOT FIX: legacy inline-gauge CSS fixes all controls to 46-64px, clipping ratings. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{
+ display:flex!important;flex-direction:column!important;grid-template-columns:none!important;grid-template-rows:none!important;
+ height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;
+ overflow:visible!important;align-self:stretch!important;align-content:normal!important;
+ padding:6px 7px!important;gap:4px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{
+ display:flex!important;flex-direction:column!important;min-height:30px!important;height:auto!important;
+ flex:0 0 auto!important;visibility:visible!important;overflow:visible!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{
+ display:flex!important;flex:0 0 24px!important;height:24px!important;min-height:24px!important;
+ align-items:center!important;justify-content:space-between!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 })(window);

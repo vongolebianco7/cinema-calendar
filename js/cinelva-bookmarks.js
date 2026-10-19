@@ -2,6 +2,7 @@
 (function(root){
  'use strict';
  const KEY='cinelva-want-to-watch-v1';
+ const normalize=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
  const valid=id=>/^[1-9]\d*$/.test(String(id??''));
  const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
  function identity(movie){
@@ -23,18 +24,19 @@
    for(const [key,row] of Object.entries(records)){
     if(!row||typeof row!=='object')continue;
     const explicit=row.tmdbId??row.tmdb_id;
-    if(valid(explicit)){if(valid(row.id))map.set(String(row.id),String(explicit));if(valid(key))map.set(String(key),String(explicit));}
+    if(valid(explicit)){const alias={id:String(explicit),titles:[row.title,row.original_title,row.originalTitle].map(normalize).filter(Boolean)};if(valid(row.id))map.set(String(row.id),alias);if(valid(key))map.set(String(key),alias);}
    }
   }
   return map;
  }
+ function resolveAlias(id,row,map){const alias=map.get(String(id)),title=normalize(row?.title||row?.name);return alias&&title&&alias.titles.includes(title)?alias.id:String(id);}
  function matchingKeys(data,movie){
   const id=identity(movie),map=aliases();
   const canonical=id;
   return Object.keys(data).filter(key=>{
    const row=data[key];const explicit=row&&typeof row==='object'?(row.tmdbId??row.tmdb_id):null;
    const candidate=explicit??(row&&typeof row==='object'?row.id:null)??key;
-   return valid(candidate)&&(explicit!=null?String(candidate):(map.get(String(candidate))||String(candidate)))===canonical;
+   return valid(candidate)&&(explicit!=null?String(candidate):resolveAlias(candidate,row,map))===canonical;
   });
  }
  function has(movie){return matchingKeys(read(KEY),movie).length>0;}
@@ -43,7 +45,7 @@
   for(const [key,row] of Object.entries(data)){
    if(!row||typeof row!=='object'||Array.isArray(row))continue;
    const source=row.tmdbId??row.tmdb_id??row.id??key;if(!valid(source))continue;
-   const id=(row.tmdbId??row.tmdb_id)!=null?String(source):(map.get(String(source))||String(source));
+   const id=(row.tmdbId??row.tmdb_id)!=null?String(source):resolveAlias(source,row,map);
    if(seen.has(id))continue;seen.add(id);rows.push({...row,id:row.id??key,tmdbId:id});
   }
   return rows.sort((a,b)=>String(b.savedAt||'').localeCompare(String(a.savedAt||'')));

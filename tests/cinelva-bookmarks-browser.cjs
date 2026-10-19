@@ -14,7 +14,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('**/data/awards.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({awards:[{organization:'アカデミー賞',year:2021,title:movie.title,tmdb_id:42,category:'作品賞'},{organization:'アカデミー賞',year:2022,title:'未鑑賞受賞作',tmdb_id:43,category:'作品賞'}],catalog:[{id:43,title:'未鑑賞受賞作',year:2021}]})}));
    await context.route('**/data/directors*.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({directors:{one:{id:1,name:'Other Director',works:[movie],coverage:{truncated:false}}}})}));
    const raw=JSON.stringify({900:{...movie,id:900,rating:4.3,watched:true,watchedAt:'2025-01',comment:'既存レビュー',unknown:'keep'}});
-   await context.addInitScript(raw=>{if(!localStorage.getItem('bookmark-test-init')){localStorage.setItem('cinelva-library-records-v2',raw);localStorage.setItem('cinelva-want-to-watch-v1',JSON.stringify({7:{id:7,title:'以前のブックマーク',custom:'keep'}}));localStorage.setItem('bookmark-test-init','yes')}},raw);
+   await context.addInitScript(raw=>{if(!/^https?:$/.test(location.protocol))return;if(!localStorage.getItem('bookmark-test-init')){localStorage.setItem('cinelva-library-records-v2',raw);localStorage.setItem('cinelva-want-to-watch-v1',JSON.stringify({7:{id:7,title:'以前のブックマーク',custom:'keep'}}));localStorage.setItem('bookmark-test-init','yes')}},raw);
    const base='http://127.0.0.1:'+port,page=await context.newPage();
    await page.goto(base+'/search.html?search='+encodeURIComponent(movie.title));
    const mark=page.locator('#grid [data-bookmark-id="42"]').first();await mark.waitFor();await mark.click();assert.equal(await mark.getAttribute('aria-pressed'),'true');
@@ -22,6 +22,12 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.goto(base+'/my-cinelva/?tab=watchlist');await page.locator('#watchlistView .cinelva-bookmark-button').first().waitFor();
    assert.equal(await page.locator('#summaryView #wantWatchList').count(),0);
    assert.match(await page.locator('#wantWatchList').innerText(),/共通作品テスト/);
+   await page.locator('[data-tab="summary"]').click();
+   await page.locator('#csTop [data-bookmark-id="42"]').waitFor();
+   for(const selector of ['#csTop .cinelva-rate-button','#csTop .cinelva-bookmark-button']){
+    const bounds=await page.locator(selector).first().evaluate(button=>{const box=button.getBoundingClientRect(),card=button.closest('.cs-film').getBoundingClientRect();return {width:box.width,height:box.height,inside:box.left>=card.left&&box.right<=card.right+1};});
+    assert.ok(bounds.width>=44&&bounds.height>=44&&bounds.inside,'summary controls remain inside their movie card');
+   }
    await page.locator('[data-tab="records"]').click();
    const recordMark=page.locator('#recordList [data-bookmark-id="42"]');await recordMark.waitFor();assert.equal(await recordMark.getAttribute('aria-pressed'),'true');
    // Another tab's storage events must update every same-film control.

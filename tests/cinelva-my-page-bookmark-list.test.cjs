@@ -26,6 +26,6 @@ test('adding and removing synchronize the dedicated list without switching the d
 });
 test('legacy imported bookmarks survive and display the canonical detail URL',()=>{
  const raw=JSON.stringify({900:{id:900,title:'旧作品',extra:'keep'}});
- const p=page({'cinelva-want-to-watch-v1':raw,'cinelva-library-records-v2':JSON.stringify({900:{id:900,tmdbId:42,rating:4}})});
+ const p=page({'cinelva-want-to-watch-v1':raw,'cinelva-library-records-v2':JSON.stringify({900:{id:900,tmdbId:42,title:'旧作品',rating:4}})});
  assert.match(p.list.children[0].children[0].href,/id=42/);assert.equal(p.values.get('cinelva-want-to-watch-v1'),raw);
 });

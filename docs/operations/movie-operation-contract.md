@@ -29,7 +29,7 @@
 
 ## データ・同期・失敗時
 
-既存のキー・保存値を移行／初期化しない。読み込み時に旧local record IDを既存レコードの明示的TMDB IDへ解決する。既存の不明フィールド・保存日時を保持。旧IDとTMDB IDの重複は表示では同一作品にまとめ、解除時はその作品の同義キーだけ削除する。
+既存のキー・保存値を移行／初期化しない。読み込み時に旧local record IDを既存レコードの明示的TMDB IDへ解決する。ただし旧形式のcanonical IDとlocal IDが衝突した場合、作品名が一致しないデータを別作品へ付け替えない。既存の不明フィールド・保存日時を保持。旧IDとTMDB IDの重複は表示では同一作品にまとめ、解除時はその作品の同義キーだけ削除する。
 
 同一ページの更新イベントと別タブのstorageイベント、履歴復帰のpageshowで再同期する。これは同一ブラウザ・同一オリジンの同期であり、端末間クラウド同期を意味しない。毎回最新の保存値を読む。壊れたJSON／不正形式／保存領域不足では、既存データを空オブジェクトに置換せずエラーを表示する。未知ID・矛盾する明示的identityは保存しない。
 
@@ -40,3 +40,21 @@
 `python scripts/inventory-ui-operations.py` で `quality/route-manifest.json` の全29ルートを走査し、実効canonical HTMLのbutton/input/select/textarea/summary/link、ローカルscript、動的ボタン生成、イベントハンドラ、保存書き込み箇所を `ui-operation-inventory.json` に出力する。`cinelva/*` は本番の既存redirect先を実効ソースとして記録する。
 
 機能ごとの仕様は上表を正とする。新しい作品一覧は独自の保存処理や目／ゲージ／ブックマークを作らず `mountInline` を利用する。作品の確定IDが無ければ詳細検索へ誘導する。テストではブックマーク前後の鑑賞記録raw JSONを比較し、既存データ保持・別タブ同期・解除・再読込・狭幅配置を確認する。機械棚卸しは実行時の全分岐を保証するものではないため、ブラウザ検証と併用する。
+
+## その他の既存操作の共通仕様・適用先
+
+| 機能 | 共通仕様 | 適用先／代表的な識別子 |
+|---|---|---|
+| 全体検索 | 同じ作品検索ページへ。記号・空白・幅・大文字小文字を正規化 | 共通ヘッダー `.gSearchForm`、検索 `#q`、記録 `#recordSearch` |
+| タブ | 同一階層の表示を切替。選択状態をARIAに反映し再読込時に復元 | My `.tab[data-tab]`、`cinelva-my-active-tab` |
+| 集計年 | サマリーの選択年を鑑賞カレンダーにも適用。カレンダー専用の重複セレクターは置かない | `#csPeriod` → `#yearHeatmap` |
+| 検索条件・ソート | 現在の一覧に適用し、表示数と対象集合を一致させる | `#recordSort`、`#recordYear`、`#directorCollectionSort`、ランキング選択、見つける条件 |
+| 映画賞・監督の掘り下げ | 選択対象の下に実作品を表示し、作品操作は上記共通コンポーネントへ | `[data-award-cell]`、`.director-pick`、`.director-filmography` |
+| レビューを閉じる／保存 | 閉じる・×は変更を破棄、保存は選択作品の記録だけを更新。保存して次へは設けない | `#cinelvaRateClose`、`#cinelvaRateX`、`#cinelvaRateSave` |
+| 日付・鑑賞方法・コメント | 日付の未登録・年のみ・年月のみを保持。映画館／配信、任意コメントを同じ記録へ保存 | 共通レビュー内date picker・`#cinelvaRatePlace`・`#cinelvaRateComment` |
+| 記録バックアップ／復元 | 既存データを保持し、形式検証と既存の確認・競合ルールを使う。全体バックアップにはブックマークも含む | `.recordUtilities`、`#exportRecords`、`#importFile`、`data-backup.html` |
+| 実績画像 | 保存済み記録から出力。ブックマークや鑑賞状態を変更しない | `my-cinemap.html`、`#save`／`#download` |
+| テーマ・メニュー | 共通ヘッダー・既存テーマ保存キーを使用 | `js/theme.js`、`#gMenuBtn`、`#gDrawerClose`、`#gDrawerMask` |
+| 出典・公式案内・ヘルプ | 情報確認へのリンク。押しても鑑賞・評価・ブックマークを保存しない | 各画面出典リンク、映画館の公式案内、privacy／terms／credits |
+
+ダッシュボードの高評価作品TOP10も作品表示として扱い、ポスター・作品名を詳細リンクにし、共通の目／ゲージ／ブックマークを付ける。これは「見たい映画」の一覧をダッシュボードへ置く変更ではない。

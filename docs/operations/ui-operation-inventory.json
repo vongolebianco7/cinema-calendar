@@ -5996,23 +5996,23 @@
       "file": "js/cinelva-bookmarks.js",
       "operations": [
         {
-          "line": 13,
+          "line": 14,
           "source_excerpt": "const raw=root.localStorage.getItem(key);if(raw===null)return {};"
         },
         {
-          "line": 58,
+          "line": 60,
           "source_excerpt": "root.localStorage.setItem(KEY,JSON.stringify(data));"
         },
         {
-          "line": 70,
+          "line": 72,
           "source_excerpt": "button.onclick=event=>{event.preventDefault();event.stopPropagation();try{toggle(movie);}catch(error){button.setAttribute('aria-label','保存できません：'+error.message);button.title=error.message;}};"
         },
         {
-          "line": 75,
+          "line": 77,
           "source_excerpt": "root.document.querySelectorAll('[data-bookmark-id]').forEach(button=>{const movie=bindings.get(button);if(movie)sync(button,movie);});"
         },
         {
-          "line": 77,
+          "line": 79,
           "source_excerpt": "if(root.addEventListener){root.addEventListener('cinelva-bookmarks-updated',refresh);root.addEventListener('storage',event=>{if(event.key===KEY||event.key===null)refresh();});root.addEventListener('pageshow',refresh);}"
         }
       ]
@@ -6219,7 +6219,7 @@
           "source_excerpt": "root.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null)refreshInlineScores();});"
         },
         {
-          "line": 976,
+          "line": 977,
           "source_excerpt": "root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);bu"
         }
       ]

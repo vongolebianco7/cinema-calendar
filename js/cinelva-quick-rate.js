@@ -961,6 +961,7 @@ root.addEventListener('cinelva-record-updated',refreshInlineScores);
 root.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null)refreshInlineScores();});
 style.textContent+=`
 /* Shared operations on record, award, detail and wanted-film surfaces. */
+@media(max-width:699px){#summaryView #csTop.cs-posters{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .record-shared-controls,.want-watch-controls{min-width:0;width:100%}
 .record-shared-controls .cinelva-rating-controls,.want-watch-controls .cinelva-rating-controls,.recordAction .cinelva-rating-controls{width:100%!important;margin:5px 0!important}
 .want-watch-item{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:4px!important}

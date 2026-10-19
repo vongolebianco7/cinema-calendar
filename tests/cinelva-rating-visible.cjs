@@ -60,13 +60,13 @@ function inspectControls(root) {
 
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.evaluate(()=>{
-     const grid=document.querySelector('#cards');
+     const grid=document.querySelector('#dates');
      if(!grid)throw Error('calendar grid missing');
      window.CinelvaRatingResolve=()=>({id:111,title:'Calendar fixture',vote_average:7.2,vote_count:100});
-     const card=document.createElement('a');card.className='card';card.dataset.i='0';card.dataset.ratingFixture='calendar';card.href='#';card.textContent='Calendar fixture';
+     const card=document.createElement('div');card.className='streamMovie';card.dataset.mi='fixture';card.dataset.ratingFixture='calendar';card.textContent='Calendar fixture';
      grid.append(card);
    });
-   const calendarCard=page.locator('#cards .card[data-rating-fixture="calendar"]');
+   const calendarCard=page.locator('#dates .streamMovie[data-rating-fixture="calendar"]');
    await calendarCard.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:20000});
    const calendar=await calendarCard.evaluate(root=>{
      const outer=root.querySelector('.cinelva-rating-controls').getBoundingClientRect();

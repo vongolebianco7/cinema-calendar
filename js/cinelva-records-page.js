@@ -306,6 +306,15 @@
     if (tab === 'awards') renderAwards();
     if (tab === 'directors') renderDirectors();
   }
+  // Dashboard shortcuts use the same tab transition as the main navigation.
+  document.getElementById('summaryView')?.addEventListener('click',event=>{
+    const shortcut=event.target.closest('[data-dashboard-tab]');
+    if(!shortcut)return;
+    const tab=shortcut.dataset.dashboardTab;
+    if(tab!=='awards'&&tab!=='directors')return;
+    setTab(tab);
+    document.getElementById(tab+'View')?.scrollIntoView({block:'start'});
+  });
   function populateYears() {
     const years = [...new Set(recordMovies().map(dateOf).filter(value => /^\d{4}/.test(value)).map(value => value.slice(0, 4)))].sort((a, b) => b.localeCompare(a));
     $('recordYear').innerHTML = '<option value="all">すべての年</option>' + years.map(year => `<option>${year}</option>`).join('');
@@ -489,7 +498,7 @@
     let awardAffinityHost=$('csAwardAffinity');
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
     awardAffinityHost.innerHTML='<h3>高評価の映画賞 TOP5</h3><p class="cinelva-affinity-note">鑑賞した受賞作品の評価から集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
-      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(awardDisplayName(row.name))+'</strong><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
+      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した受賞作品</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>収録対象作品</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最も鑑賞した映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
     $('awardCoverage').textContent=`収録された主要映画賞の受賞作品に基づく記録です。網羅的な受賞歴ではありません。${hasRate?'達成率は対象作品の全件性を確認できた年代のみ表示します。':'対象作品の全件性が確認できないため、達成率は表示できません。'}`;
@@ -736,7 +745,7 @@
     const affinityPanel=document.createElement('section');
     affinityPanel.className='cinelva-affinity';
     affinityPanel.innerHTML='<h3>高評価の監督 TOP5</h3><p class="cinelva-affinity-note">平均評価・評価本数・4点以上の本数。評価3本未満は順位を補正します。</p>'+
-      (affinity.length?'<div class="cinelva-affinity-list">'+affinity.slice(0,5).map((group,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><strong>'+escapeHTML(group.name)+'</strong><span class="cinelva-affinity-meta">★ '+group.average.toFixed(2)+' · '+group.scored+'本評価 · 4点以上 '+group.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">監督別の評価記録がありません。</p>');
+      (affinity.length?'<div class="cinelva-affinity-list">'+affinity.slice(0,5).map((group,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="directors" aria-label="監督コレクションを開く">'+escapeHTML(group.name)+'</button><span class="cinelva-affinity-meta">★ '+group.average.toFixed(2)+' · '+group.scored+'本評価 · 4点以上 '+group.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">監督別の評価記録がありません。</p>');
     $('csDirectorAffinity')?.replaceChildren(affinityPanel);
     if(!sorted.length){host.innerHTML='<p class="empty">監督情報がある鑑賞記録はまだありません。</p>';return;}
     const list=document.createElement('div');list.className='director-picker';

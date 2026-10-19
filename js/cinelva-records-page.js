@@ -486,9 +486,13 @@
           ratingById.set(String(key),rating);
       }
     }
+    // Dashboard award metrics always mean the top picture prize, regardless of
+    // the category selected in the separate award collection.
+    const isPictureWinner=entry=>(entry.categories||[]).some(c=>/作品賞|パルム・ドール|金獅子賞|金熊賞/.test(String(c)));
+    const pictureEntries=(name,decade)=>(data.cells[name+':'+decade]?.entries||[]).filter(isPictureWinner);
     const awardAffinity=organizations.map(name=>{
       const unique=new Map();
-      for(const decade of decades)for(const entry of scopedCell(name,decade)?.entries||[]){
+      for(const decade of decades)for(const entry of pictureEntries(name,decade)){
         if(!entry.watched)continue;
         const key=String(entry.id||entry.title);
         if(!unique.has(key))unique.set(key,entry);
@@ -498,20 +502,20 @@
     }).filter(row=>row.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
     const allAwardGroups=organizations.map(name=>{
       const ids=new Set();
-      for(const decade of decades)for(const entry of scopedCell(name,decade)?.entries||[])if(entry.watched)ids.add(String(entry.id||entry.title));
+      for(const decade of decades)for(const entry of pictureEntries(name,decade))if(entry.watched)ids.add(String(entry.id||entry.title));
       return {name,count:ids.size};
     });
     const mostWatchedAward=[...allAwardGroups].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'ja'))[0];
     const highestAward=awardAffinity[0];
     const awardHighlights='<div class="cs-collection-highlights">'+
-      '<div class="cs-highlight"><span class="cs-highlight-label">鑑賞した映画賞</span><strong class="cs-highlight-value">'+allAwardGroups.filter(x=>x.count>0).length+'賞</strong></div>'+
-      '<div class="cs-highlight"><span class="cs-highlight-label">最も鑑賞した映画賞</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedAward?.count?awardDisplayName(mostWatchedAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedAward?.count||0)+'本</small></div>'+
-      '<div class="cs-highlight"><span class="cs-highlight-label">最高平均評価の映画賞</span><strong class="cs-highlight-value">'+escapeHTML(highestAward?awardDisplayName(highestAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(highestAward?'★ '+highestAward.average.toFixed(2)+' / '+highestAward.scored+'本評価':'評価なし')+'</small></div>'+
+      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞を鑑賞した映画賞</span><strong class="cs-highlight-value">'+allAwardGroups.filter(x=>x.count>0).length+'賞</strong></div>'+
+      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞を最も鑑賞した映画賞</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedAward?.count?awardDisplayName(mostWatchedAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedAward?.count||0)+'本</small></div>'+
+      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞の平均評価が最高の映画賞</span><strong class="cs-highlight-value">'+escapeHTML(highestAward?awardDisplayName(highestAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(highestAward?'★ '+highestAward.average.toFixed(2)+' / '+highestAward.scored+'本評価':'評価なし')+'</small></div>'+
       '<div class="cs-highlight"><span class="cs-highlight-label">映画賞別の鑑賞記録</span><button type="button" class="cs-highlight-value" data-dashboard-tab="awards">映画賞コレクションを見る →</button></div>'+
       '</div>';
     let awardAffinityHost=$('csAwardAffinity');
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
-    awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>高評価の映画賞 TOP5</h3><p class="cinelva-affinity-note">鑑賞した受賞作品の評価から集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
+    awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>高評価の作品賞 TOP5</h3><p class="cinelva-affinity-note">各映画賞の作品賞受賞作のみを集計。評価3本未満は順位を補正し、未評価は平均点から除外します。</p>'+
       (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span><span class="cinelva-affinity-visual cinelva-award-mark" aria-hidden="true">'+(()=>{const n=String(row.name);return /アカデミー賞|Oscar/i.test(n)?'OSC':/カンヌ/i.test(n)?'CANNES':/ヴェネチア|ベネチア/i.test(n)?'VENICE':/ベルリン/i.test(n)?'BERLIN':/BAFTA|英国アカデミー/i.test(n)?'BAFTA':/ゴールデングローブ/i.test(n)?'GLOBE':/日本アカデミー/i.test(n)?'JAPAN':'AWARD';})()+'</span><button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した受賞作品</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>収録対象作品</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最も鑑賞した映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;

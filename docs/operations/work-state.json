@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:10:34+09:00",
+  "updated_at": "2026-10-19T15:28:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "5e697ebda62a45173413dae9a5d7641c2e38975f",
+  "head_sha": "f2b1d983ddd808a3471ead18094aa65fdb1acbac",
   "pull_request": 401,
   "work_items": [
     {
@@ -629,6 +629,10 @@
     {
       "check": "PR #401 Actions triage and brand correction",
       "result": "Latest Actions found one Python release-brand failure and one backup-safety failure, both caused by the newly active events.html page title using the old uppercase brand form. Changed its title to the approved Cinelva casing. Local strict Python contract suite passes 138/138; backup/storage Node checks pass 13/13; brand identity passes 11/11; full quality_gate.py had passed 178/178 before this wording-only correction. Re-run PR Actions after the follow-up commit; no deploy."
+    },
+    {
+      "check": "PR #401 discovery browser CI regression triage",
+      "result": "Latest integrated Playwright run 39209267912 reached the discovery journey and exposed that setting a positive inline score correctly opens the undated-review date prompt, so the subsequent review-button click was blocked by the open modal. Updated the browser regression to assert the date prompt appears and close it before testing the review button. Local browser binaries are unavailable; await Chromium/WebKit Actions on the next PR head."
     }
   ],
   "deployment": {
@@ -650,5 +654,11 @@
   },
   "blockers": [],
   "next_action": "Push the locally validated merge of latest main into PR #401, wait for the existing Chromium/WebKit Actions to report, then inspect discovery and common-control regressions. Do not deploy while Vercel build-rate-limit remains active. Continue the route/tab inventory and only mark live items complete after production verification.",
-  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
+  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
+  "checks": [
+    {
+      "check": "PR #401 default review date and discovery modal test correction",
+      "result": "Set today as the default viewing date for new entries and existing records without a date, while preserving partial legacy dates (year/month) during edits. Updated the discovery browser check to assert the date prompt is visible and today is preselected. Targeted Node suite passes 11/11; browser CI must confirm Chromium/WebKit behavior on head f2b1d98."
+    }
+  ]
 }

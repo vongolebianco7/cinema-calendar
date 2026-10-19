@@ -130,7 +130,7 @@ function open(movie,options={}) {
  syncDialogScore();
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
  syncViewingVenue(existing?.viewingVenue||'');
- $('cinelvaRateDate').value=existing?.watchedAt||'';
+ $('cinelvaRateDate').value=existing?.watchedAt||new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
  dateTrigger.textContent=dateInput.value?dateInput.value.replaceAll('-','/'):'鑑賞日未登録';closeDatePicker();
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateMessage').textContent='';

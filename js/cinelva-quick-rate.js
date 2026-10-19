@@ -7,6 +7,33 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
 let selected=null,activeCard=null;
+// Fill missing community scores only when a card becomes visible. Strict title matching
+// avoids attributing an unrelated film's TMDB rating to a release.
+const tmdbCache=new Map();let tmdbActive=0;const tmdbQueue=[];
+const normalizedTitle=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\\s\\p{P}\\p{S}]+/gu,'');
+let backendBasePromise=null;
+function ratingBackend(){
+ return backendBasePromise??=(fetch('data/backend.json').then(r=>r.ok?r.json():null).then(c=>c?.enabled&&/^https:\\/\\//.test(c.base_url)?c.base_url.replace(/\\/$/,''):null).catch(()=>null));
+}
+function resolveCommunityRating(movie,done){
+ const title=movie?.title||movie?.name;
+ if(!title)return;
+ const key=normalizedTitle(title);if(!key)return;
+ if(tmdbCache.has(key)){tmdbCache.get(key).then(done);return;}
+ const task=new Promise(resolve=>{tmdbQueue.push(async()=>{
+  try{
+   const base=await ratingBackend();if(!base)return resolve(null);
+   const response=await fetch(base+'/api/movies?q='+encodeURIComponent(title)+'&limit=8');
+   if(!response.ok)return resolve(null);
+   const data=await response.json(),candidates=[...(data.movies||[]),...(data.external||[])];
+   const match=candidates.find(x=>normalizedTitle(x.title)===key||normalizedTitle(x.original_title)===key);
+   const score=Number(match?.vote_average??match?.score);
+   resolve(Number.isFinite(score)&&score>0?score:null);
+  }catch{resolve(null);}
+ });pumpTmdb();});
+ tmdbCache.set(key,task);task.then(done);
+}
+function pumpTmdb(){while(tmdbActive<2&&tmdbQueue.length){tmdbActive++;tmdbQueue.shift()().finally(()=>{tmdbActive--;pumpTmdb()});}}
 const reviewIcon='<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>';
 const style=document.createElement('style');
 style.textContent=`\n.cinelva-rating-pair{display:flex;flex:1 1 auto;flex-wrap:wrap;gap:3px 9px;min-width:0;font-size:10px;line-height:1.4;color:#c9cbd0}.cinelva-rating-pair span{white-space:nowrap}.cinelva-rating-controls-no-gauge{justify-content:flex-end!important;gap:8px!important}.cinelva-rating-controls-no-gauge>.cinelva-rate-button{margin:0!important}\n
@@ -233,6 +260,18 @@ function attachInlineScore(button,movie) {
  const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
  audience.textContent='みんなの評価  '+(validTmdb?(tmdbScore/2).toFixed(1):'評価なし');
  audience.classList.toggle('is-unrated',!validTmdb);
+ if(!validTmdb&&typeof IntersectionObserver!=='undefined'){
+  const observer=new IntersectionObserver(entries=>{
+   if(!entries.some(e=>e.isIntersecting))return;
+   observer.disconnect();
+   resolveCommunityRating(movie,score=>{
+    if(!score||!audience.isConnected)return;
+    audience.textContent='みんなの評価  '+(score/2).toFixed(1);
+    audience.classList.remove('is-unrated');
+   });
+  },{rootMargin:'180px'});
+  observer.observe(button);
+ }
  personal.title='あなたの評価';audience.title='みんなの評価（TMDB）';
  ratings.setAttribute('aria-label','あなたの評価 / みんなの評価（TMDB）');
  ratings.append(personal,audience);

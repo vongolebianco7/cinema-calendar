@@ -54,3 +54,19 @@ For every feature on every active route, record owner/source, input, transformat
 - Prioritize reproducible P0 functional defects (wrong counts, lost records, broken navigation, missing images), then P1 visual/accessibility, then P2 polish. Write regression tests before or with fixes and retest affected neighboring pages.
 - Exercise at least empty, single, normal, large, stale, API error, offline, reload, import/restore, duplicate identity and legacy data scenarios where applicable.
 - Merge and production-verify tested SHA only when checks pass and deployment limits permit. Record evidence in #239 and durable work-state. Do not require the user to manually debug or report issues to find regressions.
+
+## Mandatory detection of systemic defects (2026-10-19 addendum)
+A screenshot or click-success assertion alone is NOT evidence that a feature works.
+
+### Five failure classes and required evidence
+- Duplicate/non-shared implementation: search all movie actions, storage adapters, date controls, posters, card components, modals, layout tokens and API clients for divergent implementations. Establish a canonical implementation and explicit approved exceptions; detect duplicates by import/call graph and code review, not merely visual resemblance.
+- Standards drift: lint hardcoded visual tokens, route shell/brand/navigation discrepancies, inconsistent labels/semantics, missing accessibility and data-contract violations. Maintain an exception register; fail CI on unapproved drift.
+- Missing automation: inventory every data source and recurring refresh, actual trigger (Actions cron/manual/webhook), permission/credentials, last success, freshness SLA, downstream consumers, alert on failures, and whether a manual step remains. Never label unsupported sources automated.
+- Single route/tab anomalies: enumerate all routes AND tabs, filters, modal states, viewports, themes, signed-in/out where applicable, data conditions; compare component contracts, DOM layout, screenshot diffs and functional behavior against equivalent pages. Audit direct load, refresh and back navigation.
+- Dead/no-op feature: enumerate every actionable element (including icon-only, menus, links, cards and keyboard shortcuts); click/activate it with deterministic fixtures; assert meaningful output such as route change, modal with correct data, network result, persisted mutation or explicit user-facing error. Reject empty panels, no-op handlers, placeholder links, swallowed exceptions and silent failures. Follow the resulting workflow to completion.
+
+### Additional fault classes
+Broken cross-route sync, stale/false data, missing posters, invalid film identities, incorrect aggregates, race conditions, non-idempotent saves, memory/performance regressions, orphaned code and unreachable features, incorrect empty/loading/error messaging, missing fallback, inaccessible controls, dead external links, untested scheduled jobs, duplicate or contradictory navigation, localStorage corruption and backup restore failures.
+
+### Evidence format and fail-closed rules
+For each route/tab/action create an audit row with URL, selector/action, expected behavior, observed behavior, test fixture, screenshots/log, source component, severity, status, CI run and production SHA. Empty output requires a documented valid empty-state contract; never count a click alone as a pass. Maintain route × tab × action × state coverage and a separate scheduled-job × source × freshness matrix. Automated test discovery plus manual architecture review is required: neither can guarantee perfect completeness alone. Detect missing requirements by reconciling user-facing inventory, routes, DOM controls, source handlers, and product specifications. Report uncovered cells explicitly rather than assuming success.

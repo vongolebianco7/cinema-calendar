@@ -89,6 +89,11 @@ async function getPort(){
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'ランキングから記録');
   await page.locator('#cinelvaRateClose').click();
   await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
+  const tvReviewHitTarget=await page.locator('#dates .cinelva-rate-button').nth(1).evaluate(button=>{
+   const rect=button.getBoundingClientRect(),hit=document.elementFromPoint(rect.left+rect.width/2,rect.top+rect.height/2);
+   return {hitInsideButton:!!hit&&button.contains(hit),hitTag:hit?.tagName,hitClass:hit?.className,buttonRect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}};
+  });
+  assert.equal(tvReviewHitTarget.hitInsideButton,true,'TV review button must receive the WebKit hit: '+JSON.stringify(tvReviewHitTarget));
   await page.locator('#dates .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');

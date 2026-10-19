@@ -28,6 +28,13 @@ const { chromium } = require('playwright');
    if(!live.text.includes('あなたの評価')||!live.text.includes('みんなの評価')||live.lines.length!==2||live.lines.some(x=>x.width<=0||x.height<=0||x.display==='none'))throw Error('real search card ratings hidden '+width);
    // The production calendar has its own fixed-height legacy CSS; verify no clipping.
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+   await page.evaluate(()=>{
+     const grid=document.querySelector('#cards');
+     if(!grid)throw Error('calendar grid missing');
+     window.CinelvaRatingResolve=()=>({id:111,title:'Calendar fixture',vote_average:7.2,vote_count:100});
+     const card=document.createElement('a');card.className='card';card.dataset.i='0';card.href='#';card.textContent='Calendar fixture';
+     grid.append(card);
+   });
    await page.locator('#cards .cinelva-rating-controls-no-gauge').first().waitFor({state:'visible',timeout:20000});
    const calendar=await page.locator('#cards .cinelva-rating-controls-no-gauge').first().evaluate(el=>{
      const outer=el.getBoundingClientRect(),pair=el.querySelector('.cinelva-rating-pair'),actions=el.querySelector('.cinelva-rating-actions');

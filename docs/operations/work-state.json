@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:33:00+09:00",
+  "updated_at": "2026-10-19T17:20:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "15644ea7efcb5921cb66c2870a584940a53de30f",
+  "head_sha": "cfa4072ba147e23a6e29c6685acfd43140faee23",
   "pull_request": 401,
   "work_items": [
     {
@@ -653,7 +653,7 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Push the locally validated merge of latest main into PR #401, wait for the existing Chromium/WebKit Actions to report, then inspect discovery and common-control regressions. Do not deploy while Vercel build-rate-limit remains active. Continue the route/tab inventory and only mark live items complete after production verification.",
+  "next_action": "Inspect current Actions for PR #401 commit cfa4072ba147e23a6e29c6685acfd43140faee23. Fix reproducible failures with one batched commit, then continue finder route/tab audit and update Issue #239. Keep production verification pending; do not deploy while Vercel build rate limit is active.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "checks": [
     {
@@ -663,6 +663,10 @@
     {
       "check": "P0 discovery director-credit correction",
       "result": "Read-only production inspection showed the Christopher Nolan explorer labeled results as director works while including non-director crew titles. Root cause: /api/discover maps crew to TMDB with_crew, which covers any crew job. Added a cached TMDB person movie_credits lookup filtered to job=Director and intersected rendered director results with those IDs; browser regression fixture includes a crew-only false positive and asserts it is excluded. Full local quality_gate.py passes 178/178; browser CI pending. Production remains unchanged."
+    },
+    {
+      "check": "100-row box-office and 291-card award visual audit",
+      "result": "Audited all 100 all-time box-office rows: 100 unique title/year pairs, gross values present, 44 domestic/56 foreign. Found five cards in two official gross ties (73rd place tie of 2 and 88th tie of 3) rendered as separate sequential positions. rankings.html now uses competition ranks after filters. Browser regression checks all 100 titles/order/ranks/detail links, fallback behavior offline, all 100 common review/bookmark controls with lookup fixture, and domestic/year filter combinations. Production award-list audit had separately found 31/291 cards without poster fallback and 35/291 without common review/bookmark controls; PR #401 adds fallback, shared lookup, and Chromium/WebKit responsive regression. Local quality_gate.py passes all 178 Node tests plus Python/data/compliance/UI gates. Local Playwright binaries unavailable. PR Actions pending on cfa4072; prior attempt had failures needing triage. Production remains unchanged pending CI/merge/deployment."
     }
   ]
 }

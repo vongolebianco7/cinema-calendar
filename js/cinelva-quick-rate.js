@@ -217,21 +217,25 @@ function attachInlineScore(button,movie) {
  syncBookmark();
 
  const ratings=document.createElement('div');ratings.className='cinelva-rating-pair';
- const personal=document.createElement('span'),audience=document.createElement('span');
+ const personal=document.createElement('div'),audience=document.createElement('div');
+ personal.className='cinelva-rating-line cinelva-rating-personal';
+ audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
   const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched!==false);
-  personal.innerHTML='<span class="rating-label">あなたの評価</span><span class="rating-number">'+(rec?Number(rec.rating??0).toFixed(1):'—')+'</span>';
+  personal.textContent='あなたの評価  '+(rec?Number(rec.rating??0).toFixed(1):'—');
  };
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
- audience.innerHTML='<span class="rating-label">みんなの評価</span><span class="rating-number">'+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'—')+'</span>';
- personal.title='あなたの評価';audience.title='見た人の評価（TMDB）';
+ audience.textContent='みんなの評価  '+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'—');
+ personal.title='あなたの評価';audience.title='みんなの評価（TMDB）';
  ratings.setAttribute('aria-label','あなたの評価 / みんなの評価（TMDB）');
  ratings.append(personal,audience);
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
  const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';
- button.before(controls);const actions=document.createElement('div');actions.className='cinelva-rating-actions';actions.append(button,bookmark);controls.append(ratings,actions);
+ button.before(controls);
+ const actions=document.createElement('div');actions.className='cinelva-rating-actions';
+ actions.append(button,bookmark);controls.append(ratings,actions);
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
   controls.addEventListener(type,event=>event.stopPropagation());
  }
@@ -968,6 +972,15 @@ style.textContent+=`
 .cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:first-child .rating-label,.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:first-child .rating-number{color:#e4bd70!important}
 .cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:nth-child(2) .rating-label,.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span:nth-child(2) .rating-number{color:#b8c6d9!important}
 .cinelva-rating-controls-no-gauge>.cinelva-rating-pair>span{grid-template-columns:minmax(0,1fr) 24px!important}
+`;
+style.textContent+=`
+/* Explicit visible text lines: prevent old nested-span rules from hiding the ratings. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:4px!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{display:flex!important;flex-direction:column!important;visibility:visible!important;opacity:1!important;width:100%!important;min-width:0!important;flex:0 0 auto!important;height:auto!important;overflow:visible!important;gap:2px!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;width:100%!important;height:auto!important;white-space:nowrap!important;overflow:visible!important;font:600 9px/1.4 system-ui,sans-serif!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-personal{color:#e4bd70!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-audience{color:#b8c6d9!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{display:flex!important;justify-content:space-between!important;width:100%!important}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

@@ -769,7 +769,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 </aside>
 
   <main>
-    <section class="hero"><div><div class="eyebrow">YOUR MOVIE HISTORY</div><h1>My Cinelva</h1><p>観た映画を記録して、年間の歩みや好きな作品を振り返る。</p></div><div class="actions"><details class="recordUtilities"><summary>その他の操作 <span aria-hidden="true">⌄</span></summary><div class="utilityItems"><button class="button" id="exportRecords">記録をバックアップ</button><button class="button" id="importRecords">バックアップを復元</button><a class="button" href="../my-cinemap.html">実績画像を作る</a></div></details><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    <section class="hero"><div><div class="eyebrow">YOUR MOVIE HISTORY</div><h1>My Cinelva</h1><p>観た映画を記録して、年間の歩みや好きな作品を振り返る。</p></div><div class="actions"><a class="button" href="./watchlist.html">見たい映画</a><details class="recordUtilities"><summary>その他の操作 <span aria-hidden="true">⌄</span></summary><div class="utilityItems"><button class="button" id="exportRecords">記録をバックアップ</button><button class="button" id="importRecords">バックアップを復元</button><a class="button" href="../my-cinemap.html">実績画像を作る</a></div></details><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     <p id="originNote" class="hint">記録はこのブラウザとドメインに保存されます。端末間で自動同期はされません。</p>
     <section class="stats" aria-label="鑑賞実績" hidden><div class="stat"><span>鑑賞記録</span><b id="statTotal">0</b><small>本</small></div><div class="stat"><span>今年</span><b id="statYear">0</b><small>本</small></div><div class="stat"><span>生涯平均評価</span><b id="statAverage">—</b></div><div class="stat"><span>邦画／洋画</span><b id="statOrigin">0 / 0</b><small>邦画・洋画の内訳</small></div></section>
     
@@ -779,7 +779,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <section id="genresView" class="view" role="tabpanel" hidden><div class="section-head"><div><h2>ジャンルの重なり</h2><p>複数ジャンルの記録を数え、よく一緒に観ている組み合わせを示します。未分類作品は推測で振り分けません。</p></div></div><div class="toolbar"><label>表現形式<select id="genreFormat"><option value="all">すべて</option><option>実写</option><option>アニメーション</option><option>ストップモーション</option><option value="unknown">不明</option></select></label><label>作品形式<select id="genreWorkForm"><option value="all">すべて</option><option>フィクション</option><option>ドキュメンタリー</option><option value="unknown">不明</option></select></label></div><div id="classificationSummary" class="legend"></div><div id="genreSummary" class="legend"></div><div id="genreMatrix" class="genre-matrix"></div><div id="genreFilms" class="record-grid"></div></section>
     <section id="awardsView" class="view" role="tabpanel" hidden><div class="section-head award-titlebar"><div><span class="award-eyebrow">MY CINELVA / AWARDS</span><h2>映画賞コレクション</h2><p>時代と映画賞を越えて、鑑賞した名作の足跡を集める。</p></div><label>表示<select id="awardMode"><option value="count">鑑賞本数</option><option value="rate" disabled>達成率（集計可能な賞のみ）</option></select></label></div><div class="award-filters" aria-label="映画賞の絞り込み"><label>受賞部門<select id="awardCategory"><option value="all">全部門</option><option value="picture">作品賞・最高賞</option><option value="director">監督賞</option><option value="acting">演技賞</option><option value="writing">脚本・脚色賞</option><option value="animation">アニメーション賞</option><option value="technical">技術・音楽賞</option></select></label><label class="award-other-toggle"><input id="awardOther" type="checkbox">キネマ旬報も表示</label></div><div id="awardSummary" class="award-summary" aria-label="映画賞コレクションの鑑賞サマリー"></div><div class="award-legend"><span>鑑賞作品数</span><span class="award-legend-swatch heat-0"></span><span class="award-legend-swatch heat-1"></span><span class="award-legend-swatch heat-2"></span><span class="award-legend-swatch heat-3"></span><span class="award-legend-swatch heat-4"></span><span class="award-legend-caption">少ない → 多い</span></div><p class="hint" id="awardCoverage"></p><p class="hint award-notation">数字は鑑賞した作品数。0は該当作品の鑑賞なし、— はデータ未収録です。同一作品が複数の映画賞で集計される場合があります。</p><div id="awardMatrix" class="award-matrix" tabindex="0" aria-label="映画賞と10年単位の鑑賞ヒートマップ。横にスクロールできます。"></div><div id="awardFilms" class="award-detail-list"></div><a class="award-ranking-link" href="../rankings.html">映画賞ランキングを見る <span aria-hidden="true">↗</span></a></section>
     <section id="directorsView" class="view" role="tabpanel" hidden><div class="section-head"><div><h2>監督コレクション</h2><p>映画を観るほど広がる、監督たちの作品世界。気になる監督を選んで、観てきた作品とこれから出会う一本を探しましょう。</p></div></div><div id="directorTimeline"></div><div id="directorWorks" class="record-grid"></div></section>
-    <details id="wantToWatchSection" class="want-watch-section"><summary>▣ 見たい映画 <span id="wantWatchCount">0本</span></summary><div id="wantWatchList" class="want-watch-list"></div></details>
+    
     <p id="status" class="status" role="status" aria-live="polite"></p>
     <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
   </main>
@@ -789,7 +789,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <div class="review-detail-footer"><button type="button" class="button primary" id="reviewDetailEdit">レビューを編集</button></div>
   </dialog>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-director-award-insights"></script>
+  <script src="../js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-insights.js?v=20261018-110"></script><script src="../js/cinelva-quick-rate.js?v=20261018-safe-film-edits"></script><script src="../js/cinelva-records-page.js?v=20261019-awards-picture"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}
@@ -799,29 +799,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 .want-watch-item a{color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
 .want-watch-item button{flex:none;padding:5px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel);font-size:12px}
 </style>
-<script>
-(()=>{'use strict';
- const key='cinelva-want-to-watch-v1',section=document.getElementById('wantToWatchSection'),list=document.getElementById('wantWatchList'),count=document.getElementById('wantWatchCount');let rendered=false;
- const read=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
- function render(){
-  const entries=Object.values(read()).filter(x=>x&&/^[1-9]\d*$/.test(String(x.id))).sort((a,b)=>String(b.savedAt||'').localeCompare(String(a.savedAt||'')));
-  if(entries.length&&!rendered)section.open=true;
-  rendered=true;
-  count.textContent=entries.length+'本';list.replaceChildren();
-  if(!entries.length){const empty=document.createElement('p');empty.className='hint';empty.textContent='見たい映画に追加した作品がここに表示されます。';list.append(empty);return;}
-  for(const item of entries){
-   const row=document.createElement('div');row.className='want-watch-item';
-   const link=document.createElement('a');link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');link.textContent=item.title||'作品';row.append(link);
-   const remove=document.createElement('button');remove.type='button';remove.textContent='解除';
-   remove.setAttribute('aria-label',(item.title||'作品')+'を観たいリストから解除');
-   remove.onclick=()=>{try{const data=read();delete data[String(item.id)];localStorage.setItem(key,JSON.stringify(data));render();}catch{remove.textContent='保存失敗';}};
-   row.append(remove);list.append(row);
-  }
- }
- window.addEventListener('storage',e=>{if(e.key===key)render();});
- window.addEventListener('cinelva-bookmarks-updated',event=>{render();if(event.detail?.marked)section.open=true;});render();
-})();
-</script><div id="cinelvaBuildVersion" aria-label="CINELVA バージョン" style="position:relative;display:block;width:max-content;margin:28px 12px 12px auto;background:rgba(28,31,37,.87);color:#fff;border-radius:8px;padding:5px 9px;font:11px/1.4 system-ui,sans-serif;pointer-events:none">CINELVA v2026.10.19.20</div><style id="cinelva-record-card-row-alignment-20261019">
+<div id="cinelvaBuildVersion" aria-label="CINELVA バージョン" style="position:relative;display:block;width:max-content;margin:28px 12px 12px auto;background:rgba(28,31,37,.87);color:#fff;border-radius:8px;padding:5px 9px;font:11px/1.4 system-ui,sans-serif;pointer-events:none">CINELVA v2026.10.19.20</div><style id="cinelva-record-card-row-alignment-20261019">
 @media(max-width:699px){
 #recordsView #recordList.record-grid{align-items:stretch!important}
 #recordsView #recordList.record-grid>.movie{display:flex!important;flex-direction:column!important;min-width:0!important;height:100%!important}

@@ -62,9 +62,11 @@ function inspectControls(root) {
    await page.evaluate(()=>{
      const grid=document.querySelector('#dates');
      if(!grid)throw Error('calendar grid missing');
+     grid.style.display='block';
      window.CinelvaRatingResolve=()=>({id:111,title:'Calendar fixture',vote_average:7.2,vote_count:100});
+     const shelf=document.createElement('div');shelf.className='streamingWeekMovies';shelf.style.cssText='display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%';grid.append(shelf);
      const card=document.createElement('div');card.className='streamMovie';card.dataset.mi='fixture';card.dataset.ratingFixture='calendar';card.textContent='Calendar fixture';
-     grid.append(card);
+     shelf.append(card);
    });
    const calendarCard=page.locator('#dates .streamMovie[data-rating-fixture="calendar"]');
    await calendarCard.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:20000});

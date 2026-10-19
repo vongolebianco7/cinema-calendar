@@ -47,7 +47,7 @@ style.textContent=`\n.cinelva-rating-pair{display:flex;flex:1 1 auto;flex-wrap:w
 style.textContent+=`\n/* Compact overrides must follow the base dialog declarations. */\n.cinelva-rate-dialog{width:min(94vw,390px);max-height:85dvh;overflow:auto}\n.cinelva-rate-inner{padding:14px;gap:9px}\n.cinelva-rate-inner textarea{min-height:52px}\n`;
 style.textContent+=`\n.cinelva-inline-score.is-editing{border-color:#e7b944!important;box-shadow:0 0 0 1px #e7b94455}.cinelva-inline-score.is-editing .cinelva-score-track{touch-action:none}\n.cinelva-score-track{position:relative;display:flex;align-items:center;flex:1;min-width:0;height:32px}.cinelva-score-track::before{content:'';pointer-events:none;position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);height:13px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(10% - 1px),#ffffff65 calc(10% - 1px),#ffffff65 10%);opacity:.8}.cinelva-score-track input{position:relative;z-index:1}.cinelva-inline-score input::-webkit-slider-thumb{width:22px;height:22px;margin-top:-8.5px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}.cinelva-inline-score input::-moz-range-thumb{width:20px;height:20px;border:3px solid #1b1b1b;box-shadow:0 0 0 2px #f1c95a,0 2px 8px #0009}\n`;style.textContent+=`\n.cinelva-rate-button{display:inline-grid;place-items:center;min-width:40px;width:40px;height:40px;padding:0;border-radius:50%;font-size:21px;background:#ffffff0d;color:#eae4d6;border-color:#ffffff38;transition:all .18s}.cinelva-rate-button:hover,.cinelva-rate-button:focus-visible{background:#e7b94420;border-color:#e7b944}.cinelva-rate-button.is-watched{color:#f3c84e;border-color:#e7b94488}.cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;width:40px;margin:6px 8px}.cinelva-rate-dialog{background:#161719;border:1px solid #ffffff24;border-radius:18px;box-shadow:0 20px 70px #000b}.cinelva-rate-inner input,.cinelva-rate-inner textarea,.cinelva-rate-inner select{border-radius:10px;background:#232427;border-color:#ffffff28}.cinelva-rate-actions button{border-radius:999px}.cinelva-review-score output{color:#f3c84e}.cinelva-review-header button{border-radius:50%}.cinelva-review-header button:hover{background:#ffffff16}\n`;document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
-dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label></div><label>感想（任意）<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">閉じる</button><button type="button" id="cinelvaRateSave">保存</button></div></form>`;
+dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option></select></label><label id="cinelvaRateVenueWrap" hidden><span id="cinelvaRateVenueLabel">方式</span><select id="cinelvaRateVenue"></select></label></div><label>感想（任意）<textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></label><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">閉じる</button><button type="button" id="cinelvaRateSave">保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
 const dateYear=document.createElement('select');
@@ -103,8 +103,23 @@ function syncDialogScore(){
  const score=Number($('cinelvaRateScore').value);
  $('cinelvaRateValue').textContent=score.toFixed(1);
  $('cinelvaRateScore').style.setProperty('--dialog-progress',(score/5*100)+'%');
+ $('cinelvaRateValue').style.setProperty('color',score===0?'#fff':'#e4bd70','important');
 }
 $('cinelvaRateScore').oninput=syncDialogScore;
+const cinemaOptions=['通常','IMAX','Dolby Cinema','Dolby Atmos','4DX','MX4D','ScreenX','その他'];
+const streamingOptions=['Netflix','Amazon Prime Video','Disney+','U-NEXT','Hulu','Apple TV+','ABEMA','DMM TV','Lemino','WOWOW','その他'];
+function syncViewingVenue(saved=''){
+ const method=$('cinelvaRatePlace').value,wrap=$('cinelvaRateVenueWrap'),select=$('cinelvaRateVenue');
+ wrap.hidden=!method;select.replaceChildren();
+ if(!method)return;
+ $('cinelvaRateVenueLabel').textContent=method==='映画館'?'上映方式':'配信サービス';
+ const options=method==='映画館'?cinemaOptions:streamingOptions;
+ for(const value of ['',...options,...(saved&&!options.includes(saved)?[saved]:[])]){
+  const option=document.createElement('option');option.value=value;option.textContent=value||'未指定';select.append(option);
+ }
+ select.value=saved||'';
+}
+$('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
 function open(movie,options={}) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id)){return false;}
@@ -114,6 +129,7 @@ function open(movie,options={}) {
  $('cinelvaRateScore').value=existing?.rating??0;
  syncDialogScore();
  $('cinelvaRatePlace').value=existing?.viewingMethod||'';
+ syncViewingVenue(existing?.viewingVenue||'');
  $('cinelvaRateDate').value=existing?.watchedAt||'';
  dateTrigger.textContent=dateInput.value?dateInput.value.replaceAll('-','/'):'鑑賞日未登録';closeDatePicker();
  $('cinelvaRateComment').value=existing?.comment||'';
@@ -127,7 +143,7 @@ function save() {
  const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
-  Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value},Number($('cinelvaRateScore').value),date);
+  Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
   dialog.close();
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
@@ -219,13 +235,21 @@ function attachInlineScore(button,movie) {
  bookmark.type='button';bookmark.className='cinelva-bookmark-button';
  bookmark.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>';
  bookmark.dataset.bookmarkId=String(id);
+ let bookmarkToastTimer;
+ function showBookmarkToast(message){
+  let toast=document.getElementById('cinelva-bookmark-toast');
+  if(!toast){toast=document.createElement('div');toast.id='cinelva-bookmark-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');document.body.append(toast);}
+  toast.textContent=message;toast.classList.add('is-visible');
+  clearTimeout(bookmarkToastTimer);
+  bookmarkToastTimer=setTimeout(()=>toast.classList.remove('is-visible'),1800);
+ }
  const bookmarkKey='cinelva-want-to-watch-v1';
  const getBookmarks=()=>{try{const v=JSON.parse(localStorage.getItem(bookmarkKey)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
  const syncBookmark=()=>{
   const marked=!!getBookmarks()[String(id)];
   bookmark.classList.toggle('is-bookmarked',marked);
-  bookmark.style.setProperty('color',marked?'#f3c84e':'#aeb3bd','important');
-  bookmark.querySelector('svg')?.style.setProperty('fill',marked?'#f3c84e':'none','important');
+  bookmark.style.setProperty('color',marked?'#329cff':'#aeb3bd','important');
+  bookmark.querySelector('svg')?.style.setProperty('fill',marked?'#329cff':'none','important');
   bookmark.setAttribute('aria-pressed',String(marked));
   bookmark.setAttribute('aria-label',marked?'観たいを解除':'観たいに登録');
   bookmark.title=marked?'観たいを解除':'観たいに登録';
@@ -238,6 +262,7 @@ function attachInlineScore(button,movie) {
    else data[key]={id:key,title:movie.title||movie.name||'作品',savedAt:new Date().toISOString()};
    localStorage.setItem(bookmarkKey,JSON.stringify(data));
    syncBookmark();
+   showBookmarkToast(marked?'ブックマークを解除しました':'ブックマークしました');
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key,marked:!marked}}));
   }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
  };
@@ -1226,6 +1251,16 @@ style.textContent+=`
  width:12px!important;min-width:12px!important;max-width:12px!important;
  height:12px!important;min-height:12px!important;max-height:12px!important;flex:none!important;
 }
+`;
+style.textContent+=`
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button.is-bookmarked{color:#329cff!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button.is-bookmarked svg{fill:#329cff!important;stroke:#329cff!important}
+#cinelva-bookmark-toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);opacity:0;pointer-events:none;z-index:2147483647;background:#272e3b;color:#fff;border:1px solid #50617a;border-radius:20px;padding:9px 16px;font:600 13px system-ui;box-shadow:0 5px 24px #0009;transition:opacity .2s,transform .2s;white-space:nowrap}
+#cinelva-bookmark-toast.is-visible{opacity:1;transform:translate(-50%,0)}
+.cinelva-review-method{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cinelva-review-method label{min-width:0}
+.cinelva-review-method select{width:100%;max-width:100%}
+.cinelva-review-method label[hidden]{display:none!important}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

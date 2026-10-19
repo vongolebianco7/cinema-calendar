@@ -230,6 +230,10 @@ function attachInlineScore(button,movie) {
  personal.title='あなたの評価';audience.title='みんなの評価（TMDB）';
  ratings.setAttribute('aria-label','あなたの評価 / みんなの評価（TMDB）');
  ratings.append(personal,audience);
+ // Inline layout is intentional: page-level movie-card styles must not hide ratings.
+ Object.assign(ratings.style,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',height:'auto',flex:'0 0 auto',gap:'2px',visibility:'visible',opacity:'1',overflow:'visible'});
+ Object.assign(personal.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#e4bd70',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
+ Object.assign(audience.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#b8c6d9',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
  const controls=document.createElement('div');controls.className='cinelva-rating-controls cinelva-rating-controls-no-gauge';

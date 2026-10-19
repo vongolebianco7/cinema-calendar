@@ -23,7 +23,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.equal(await page.locator('#summaryView #wantWatchList').count(),0);
    assert.match(await page.locator('#wantWatchList').innerText(),/共通作品テスト/);
    await page.locator('[data-tab="summary"]').click();
+   await page.locator('#csPeriod').selectOption('all');
    await page.locator('#csTop [data-bookmark-id="42"]').waitFor();
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'summary stays inside the viewport');
    for(const selector of ['#csTop .cinelva-rate-button','#csTop .cinelva-bookmark-button']){
     const bounds=await page.locator(selector).first().evaluate(button=>{const box=button.getBoundingClientRect(),card=button.closest('.cs-film').getBoundingClientRect();return {width:box.width,height:box.height,inside:box.left>=card.left&&box.right<=card.right+1};});
     assert.ok(bounds.width>=44&&bounds.height>=44&&bounds.inside,'summary controls remain inside their movie card');

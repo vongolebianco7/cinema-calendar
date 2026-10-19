@@ -46,7 +46,7 @@
 | 機能 | 共通仕様 | 適用先／代表的な識別子 |
 |---|---|---|
 | 全体検索 | 同じ作品検索ページへ。記号・空白・幅・大文字小文字を正規化 | 共通ヘッダー `.gSearchForm`、検索 `#q`、記録 `#recordSearch` |
-| タブ | 同一階層の表示を切替。選択状態をARIAに反映し再読込時に復元 | My `.tab[data-tab]`、`cinelva-my-active-tab` |
+| タブ | 同一階層の表示を切替。選択状態をARIAに反映し再読込時に復元 | My `.tab[data-tab]`、`cinelva-active-tab-v1` |
 | 集計年 | サマリーの選択年を鑑賞カレンダーにも適用。カレンダー専用の重複セレクターは置かない | `#csPeriod` → `#yearHeatmap` |
 | 検索条件・ソート | 現在の一覧に適用し、表示数と対象集合を一致させる | `#recordSort`、`#recordYear`、`#directorCollectionSort`、ランキング選択、見つける条件 |
 | 映画賞・監督の掘り下げ | 選択対象の下に実作品を表示し、作品操作は上記共通コンポーネントへ | `[data-award-cell]`、`.director-pick`、`.director-filmography` |

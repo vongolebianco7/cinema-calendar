@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:36:00+09:00",
+  "updated_at": "2026-10-19T10:04:40+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "042e6c98192794793a686502735b8282cb3cc3b1",
-  "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "1e90ac592b26d80dda41fb6427f62e61849406a8",
-  "pull_request": 398,
+  "base_sha": "4b10e567ca3be052c6a205f0bd0c1a31442535ce",
+  "branch": "feat/unified-bookmarks-20261019",
+  "head_sha": "007a94976b9c7864d0584e9951ef0cbd4854f830",
+  "pull_request": 401,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -521,6 +521,13 @@
       "status": "in_progress",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
       "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
+    },
+    {
+      "id": "BOOKMARK-COMMON-OPERATIONS",
+      "title": "Unify independent bookmarks and movie controls across all applicable screens",
+      "status": "in_progress",
+      "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
+      "ci": "Local quality gate175activeNodepass. PR401 previous run8of9Actions succeeded; frontend uncovered stale selectors/copy and then aboutblank test initialization. Fixed fixtures; latest browser run revealed summary fixture filtered to wrong year, now selects all-time. Real CI required on final head."
     }
   ],
   "verification": [
@@ -576,24 +583,30 @@
     {
       "check": "Eastwood verified source snapshot and regression",
       "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
+    },
+    {
+      "check": "Bookmark independent store and operation inventory",
+      "result": "Local regression175activeNodepass; aliases, historical canonical/local-ID collision, malformed storage/quota, latest review preservation, raw backup roundtrip.29routes652staticcontrols281operationlines. Review blockers repaired with failing-before/passing-after tests. Production not verified."
     }
   ],
   "deployment": {
-    "status": "production_verified",
-    "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "status": "blocked",
+    "target_sha": "007a94976b9c7864d0584e9951ef0cbd4854f830",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "last_observed_vercel_production_sha": "fe1eed54d6da6cebc6787b8f4d707ffb0a3d9369",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
-    "reported_restriction": "EarlierignoreCommandlengthfailure repaired. bd6a1c99automaticproductionREADY; no providerquota blocker currentlyobserved.",
-    "next_action": "Keep currentcanonicalorigin. Save release evidence and continue remaining acceptanceaudit, distinguishing realiPhone/human tests and source/coverage gaps from verified fixes.",
+    "reported_restriction": "Currentmain4b10e567frontendandbackendchecks bothfail build-rate-limit; canonicalalias stillservesfe1eed54. No manual retry.",
+    "next_action": "After final required PR401CI passes, merge reviewed head and check automatic production release. Do not claim release until exact source and interaction evidence exists.",
     "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
-    "blockers": [],
+    "blockers": [
+      "Vercel build-rate-limit on frontend and backend commit status"
+    ],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Check exact final PR398head allrequiredActions including new Eastwood browser journey, mergewhen green thenverify canonical releaseSHA andsource41filmdata. Unresolved othernamequeries stayunknown; do notclaim allworlddirectors complete.",
+  "next_action": "Refresh PR401 exact head and required Actions. Complete Chromium/WebKit390/1280bookmark journeys and remaining existing browser regressions; fix confirmed failures, merge only with required checks green. Then verify canonical release; Vercel build-rate-limit currently blocks production.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

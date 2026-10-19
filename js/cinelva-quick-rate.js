@@ -972,7 +972,7 @@ style.textContent+=`
 .record-shared-controls .cinelva-inline-value,.want-watch-controls .cinelva-inline-value,.recordAction .cinelva-inline-value{line-height:44px!important}
 .record-shared-controls .cinelva-score-track,.want-watch-controls .cinelva-score-track,.recordAction .cinelva-score-track{height:30px!important}
 .record-shared-controls .cinelva-rating-date-prompt,.want-watch-controls .cinelva-rating-date-prompt,.recordAction .cinelva-rating-date-prompt{grid-row:3!important}
-.recordAction{max-width:440px}.movie>a,.cs-film>a{color:inherit;text-decoration:none}.movie>.record-delete-icon{align-self:flex-end;min-height:32px;margin-top:4px;border:0;background:transparent;color:inherit;font-size:11px}
+.recordAction{max-width:440px}.movie>a,.cs-film>a{color:inherit;text-decoration:none}#summaryView .cs-film>a{display:block;min-width:0}.movie>.record-delete-icon{align-self:flex-end;min-height:32px;margin-top:4px;border:0;background:transparent;color:inherit;font-size:11px}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);button.dataset.movieTitle=movie.title||'';}button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

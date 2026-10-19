@@ -58,10 +58,10 @@ function inspectControls(root) {
      const grid=document.querySelector('#cards');
      if(!grid)throw Error('calendar grid missing');
      window.CinelvaRatingResolve=()=>({id:111,title:'Calendar fixture',vote_average:7.2,vote_count:100});
-     const card=document.createElement('a');card.className='card';card.dataset.i='0';card.href='#';card.textContent='Calendar fixture';
+     const card=document.createElement('a');card.className='card';card.dataset.i='0';card.dataset.ratingFixture='calendar';card.href='#';card.textContent='Calendar fixture';
      grid.append(card);
    });
-   const calendarCard=page.locator('#cards .card[data-i="0"]');
+   const calendarCard=page.locator('#cards .card[data-rating-fixture="calendar"]');
    await calendarCard.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:20000});
    const calendar=await calendarCard.evaluate(root=>{
      const outer=root.querySelector('.cinelva-rating-controls').getBoundingClientRect();

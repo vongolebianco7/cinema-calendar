@@ -21,7 +21,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
     return node;
   }
   const elements = { directorTimeline: element(), directorWorks: element() };
-  const context = {
+  const context = {URLSearchParams,
     state: { records, movies, directors: { one: { name, works, ...profile } } },
     recordMovies: () => records,
     enriched: movie => movie,
@@ -33,7 +33,8 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
   const ratedMovies = source.match(/  const ratedMovies = [^\n]+/)[0];
-  vm.runInNewContext(ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
+  const shared=source.match(/^  const filmIdentity=[^\n]+/m)[0]+'\n'+source.match(/^  function detailURL[^\n]+/m)[0];
+  vm.runInNewContext(shared+'\n'+ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
   const picker=elements.directorTimeline.children.find(x=>x.className==='director-picker'),detail=elements.directorTimeline.children.find(x=>x.className==='director-filmography');
   return { row: picker?.children[0], detail, host: elements.directorTimeline };
 }

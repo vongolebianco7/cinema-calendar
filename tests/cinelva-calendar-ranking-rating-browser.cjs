@@ -45,6 +45,10 @@ async function getPort(){
     '<a class="rankCard" href="search.html?id=102&search=Film%20Two"><span class="title">Film Two</span></a>';
   });
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:10000});
+  const beforeBookmark=await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2'));
+  await page.locator('#grid [data-bookmark-id="101"]').click();
+  assert.equal(await page.locator('#grid [data-bookmark-id="101"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2')),beforeBookmark);
   await page.locator('#grid .cinelva-rate-button').first().click();
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRateComment').fill('ランキングから記録');
@@ -73,6 +77,11 @@ async function getPort(){
      '<article class="tvMovie" data-mi="1">Film Two</article></section>';
   });
   await page.locator('#dates .cinelva-rate-button').first().waitFor({timeout:10000});
+  assert.equal(await page.locator('#dates [data-bookmark-id="101"]').getAttribute('aria-pressed'),'true');
+  const beforeCalendarBookmark=await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2'));
+  await page.locator('#dates [data-bookmark-id="101"]').click();
+  assert.equal(await page.locator('#dates [data-bookmark-id="101"]').getAttribute('aria-pressed'),'false');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2')),beforeCalendarBookmark);
   assert.equal(await page.locator('#dates .cinelva-inline-score input').first().inputValue(),'4.5');
   assert.equal(await page.locator('#dates .cinelva-inline-score input').nth(1).inputValue(),'0');
   await page.locator('#dates .cinelva-rate-button').first().click();

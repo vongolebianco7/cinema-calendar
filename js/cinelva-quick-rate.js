@@ -971,9 +971,9 @@ style.textContent+=`
 .record-shared-controls .cinelva-inline-value,.want-watch-controls .cinelva-inline-value,.recordAction .cinelva-inline-value{line-height:44px!important}
 .record-shared-controls .cinelva-score-track,.want-watch-controls .cinelva-score-track,.recordAction .cinelva-score-track{height:30px!important}
 .record-shared-controls .cinelva-rating-date-prompt,.want-watch-controls .cinelva-rating-date-prompt,.recordAction .cinelva-rating-date-prompt{grid-row:3!important}
-.recordAction{max-width:440px}.movie>a{color:inherit;text-decoration:none}.movie>.record-delete-icon{align-self:flex-end;min-height:32px;margin-top:4px;border:0;background:transparent;color:inherit;font-size:11px}
+.recordAction{max-width:440px}.movie>a,.cs-film>a{color:inherit;text-decoration:none}.movie>.record-delete-icon{align-self:flex-end;min-height:32px;margin-top:4px;border:0;background:transparent;color:inherit;font-size:11px}
 `;
-root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);button.dataset.movieTitle=movie.title||'';}button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 if(root.CinelvaDiscoveryResolve){
  const enhanceDiscovery=()=>{
@@ -985,7 +985,7 @@ if(root.CinelvaDiscoveryResolve){
   });
  };
  new MutationObserver(changes=>{if(changes.some(change=>[...change.addedNodes].some(node=>node.nodeType===1&&!node.closest?.('.cinelva-discovery-unit'))))enhanceDiscovery();}).observe(document.querySelector('main'),{childList:true,subtree:true});
- style.textContent+=`.cinelva-discovery-unit{min-width:0;width:100%}.cinelva-discovery-unit>.presetCard,.cinelva-discovery-unit>.card,.cinelva-discovery-unit>.personFeatureCard{width:100%;height:auto}.popularGrid>.cinelva-discovery-unit{scroll-snap-align:start}.cinelva-discovery-unit .cinelva-rating-controls{margin:4px 0!important}`;
+ style.textContent+=`.cinelva-discovery-unit{min-width:0;width:100%}.cinelva-discovery-unit>.presetCard,.cinelva-discovery-unit>.card,.cinelva-discovery-unit>.personFeatureCard{width:100%;height:auto}.popularShelves .cinelva-discovery-unit{flex:0 0 92px!important;width:92px!important;min-width:92px!important;max-width:92px!important;scroll-snap-align:start}.popularShelves .cinelva-discovery-unit>.presetCard{width:100%!important;min-width:0!important;max-width:none!important}@media(max-width:650px){.popularShelves .cinelva-discovery-unit{flex-basis:84px!important;width:84px!important;min-width:84px!important;max-width:84px!important}}.cinelva-discovery-unit .cinelva-rating-controls{margin:4px 0!important}`;
  enhanceDiscovery();
 }
 

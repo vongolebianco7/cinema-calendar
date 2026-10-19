@@ -107,7 +107,7 @@
     const max=Math.max(1,...counts.values());
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
     const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
-    $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'>'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="cs-poster-empty" hidden>ポスターなし</div>':'<div class="cs-poster-empty">ポスターなし</div>')+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-score" title="あなたが記録した評価">あなたの評価 ★ '+Number(r.rating).toFixed(1)+'</div></div>'}).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
+    $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);const href=escapeHTML(detailURL(r));return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'><a href="'+href+'">'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="cs-poster-empty" hidden>ポスターなし</div>':'<div class="cs-poster-empty">ポスターなし</div>')+'</a><a href="'+href+'" class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</a><div class="cs-score" title="あなたが記録した評価">あなたの評価 ★ '+Number(r.rating).toFixed(1)+'</div><div class="record-shared-controls" data-film-controls="'+escapeHTML(filmIdentity(r))+'"></div></div>'}).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
     const more=$('csTopMore');if(more)more.addEventListener('click',()=>{
       const extras=[...$('csTop').querySelectorAll('[data-top-extra]')];
       const hidden=extras.filter(el=>el.style.display==='none');
@@ -856,7 +856,7 @@
       const rating=Number(movie.rating||0);
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
-        '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
+        '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><a href="'+escapeHTML(detailURL(movie))+'" class="director-film-title" title="'+title+'">'+title+'</a>'+
         (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'<span class="director-film-rate-slot" data-film-index="'+index+'"></span></div></article>';
     };
     const show=(group,row)=>{

@@ -76,7 +76,7 @@ async function freePort() {
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
     await page.getByLabel('表示テーマ',{exact:true}).selectOption('light');
     await page.locator('[data-tab="awards"]').click();
-    assert.match(await page.locator('#awardCoverage').textContent(), /達成率は表示しません/);
+    assert.match(await page.locator('#awardCoverage').textContent(), /達成率は(?:表示しません|対象作品の全件性を確認できた年代のみ表示します)/);
     assert.ok((await page.locator('#awardMatrix').textContent()).includes('年代'));
 
     await page.locator('[data-tab="directors"]').click();
@@ -85,7 +85,7 @@ async function freePort() {
     const importedFilm = page.locator('#directorFilmography .director-film-tile.is-watched:has(a[href="../search.html?id=' + work.id + '"])');
     assert.equal(await importedFilm.count(), 1, 'one imported record maps to one canonical director film');
     assert.equal(await importedFilm.evaluate(tile => tile.classList.contains('is-watched')), true);
-    assert.equal(await importedFilm.locator('a').getAttribute('href'), '../search.html?id=' + work.id);
+    assert.equal(await importedFilm.locator('a.director-film-poster').getAttribute('href'), '../search.html?id=' + work.id);
     const storedImport = await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['900003']);
     assert.equal(storedImport.id, '900003', 'director rendering preserves the local edit key');
     assert.equal(String(storedImport.tmdbId), String(work.id));
@@ -109,8 +109,8 @@ async function freePort() {
     const rerelease={id:27205,title:'インセプション',year:2026,director:'Christopher Nolan',genres:['SF'],countries:['US']};
     await page.route('https://backend-one-gray-94.vercel.app/api/movies*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movies:[rerelease],external:[]})}));
     await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...rerelease,year:'2010'}})}));
-    assert.equal(await page.locator('#addRecord').getAttribute('href'),'../search.html','new records begin on the existing searchable listing');
-    await page.locator('#addRecord').click();
+    assert.equal(await page.locator('.gSearchForm').getAttribute('action'),'../search.html');
+    await page.locator('.gSearch').fill('');await page.locator('.gSearchBtn').click();
     await page.waitForURL(url=>url.pathname.endsWith('/search.html'));
     assert.equal(await page.locator('#modal').getAttribute('class'),'modal','the new-record action does not open an unapproved window');
     await page.unroute('https://backend-one-gray-94.vercel.app/api/movies*');await page.unroute('https://backend-one-gray-94.vercel.app/api/movie-detail*');

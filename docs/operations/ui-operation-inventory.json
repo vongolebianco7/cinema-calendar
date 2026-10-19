@@ -6220,7 +6220,7 @@
         },
         {
           "line": 976,
-          "source_excerpt": "root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);at"
+          "source_excerpt": "root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);bu"
         }
       ]
     },
@@ -6229,7 +6229,7 @@
       "operations": [
         {
           "line": 110,
-          "source_excerpt": "$('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);return '<div class=\"cs-film\"'+(i>=10?' style=\"display:none\" data-top-extra=\"1\"':'')+'>'+(src?'<img src=\"'+escapeHTML(src)+'\" alt=\"'+escapeHTML(r.title||'')+'\" loading=\"lazy\" onerror=\"this.hidden=true;this.nextElementSibling.hidden=false\"><div class=\"cs-poster-empty\" hidden>ポスターなし</div>':'<div class=\"cs-poster-empty\">ポスターなし</div>')+'<div class=\"cs-film-name\" title=\"'+escapeHTML(r.title)+'\">'+(i+1)+'. '+escapeHTML(r.title)+'</div>"
+          "source_excerpt": "$('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r);const href=escapeHTML(detailURL(r));return '<div class=\"cs-film\"'+(i>=10?' style=\"display:none\" data-top-extra=\"1\"':'')+'><a href=\"'+href+'\">'+(src?'<img src=\"'+escapeHTML(src)+'\" alt=\"'+escapeHTML(r.title||'')+'\" loading=\"lazy\" onerror=\"this.hidden=true;this.nextElementSibling.hidden=false\"><div class=\"cs-poster-empty\" hidden>ポスターなし</div>':'<div class=\"cs-poster-empty\">ポスターなし</div>')+'</a><a href=\"'+href+'\" class=\"cs-film-name\""
         },
         {
           "line": 111,

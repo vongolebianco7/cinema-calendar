@@ -6,7 +6,7 @@ const browser=await ({chromium,webkit}[name]).launch();
 const base=process.env.CINELVA_TEST_BASE||'http://127.0.0.1:4173';
 const pages=[...fs.readdirSync('.').filter(file=>file.endsWith('.html')),...fs.readdirSync('cinelva').filter(file=>file.endsWith('.html')).map(file=>`cinelva/${file}`)];
 const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:'light',reducedMotion:'reduce'});
-await context.route('**/api/**',route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
+await context.route('**/api/**',route=>route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{"results":[],"movies":[]}'}));
 const page=await context.newPage();
 const errors=[];let currentRoute='';
 page.on('pageerror',error=>errors.push(`${currentRoute}: ${error.message}`));

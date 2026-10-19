@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T17:56:00+09:00",
+  "updated_at": "2026-10-19T18:02:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "c92dda4a52aea2c38dc7d2efa5d0158dcc5ced8e",
+  "head_sha": "24f400f2080417b69f71f2409ac1cbc3f1d22489",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,8 +527,8 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required. Latest frontend Actions reproduced a mobile WebKit failure: the calendar TV review button is visibly present but the card intercepts the click. Added a WebKit hit-test assertion and a scoped stacking/hit-testing fix for TV review controls. The fix is pending rerun; local Playwright browser binaries are unavailable. First targeted WebKit run rejected the attempted z-index-only change: hit testing still returned `article.tvMovie`. That falsified the first fix. Updated the action's pointer hit-area rules to keep the card itself from intercepting while restoring pointer events to all child content, and expanded failure output with the complete hit stack and computed CSS. The new behavior is pending rerun. Second Actions run stopped in the new diagnostic assertion itself (`ReferenceError: hit is not defined`), before reaching the WebKit hit-target assertion. This is a test-only initialization error, not evidence on the product fix. Initialize the hit-test result before checking computed styles, then rerun to determine whether pointer-target rules solve the card interception. Corrected hit-target diagnostics ran on mobile WebKit and showed the rate-button box x=5.7..30.7 while the TV card starts at x=14; the center fell through to the week section. The pointer-only hypothesis is rejected. Position the review action explicitly inside its narrow card (relative to controls at left 6px/top 2px), and assert both card containment and actual hit target. Pending browser rerun.",
-      "latest": " Latest Actions now expose the calendar TV review click interception on mobile WebKit; scoped fix and regression assertion are pending CI. Initial z-index-only fix did not pass WebKit hit testing; second scoped pointer-target fix and computed-style diagnostics committed for rerun. Browser diagnostic harness had a ReferenceError before testing the second pointer-target fix; corrected and pending a clean rerun. WebKit evidence isolated a 8px left overflow of the review button on a 47px TV tile; scoped positioning and containment/hit-target regression are pending CI."
+      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required. Latest frontend Actions reproduced a mobile WebKit failure: the calendar TV review button is visibly present but the card intercepts the click. Added a WebKit hit-test assertion and a scoped stacking/hit-testing fix for TV review controls. The fix is pending rerun; local Playwright browser binaries are unavailable. First targeted WebKit run rejected the attempted z-index-only change: hit testing still returned `article.tvMovie`. That falsified the first fix. Updated the action's pointer hit-area rules to keep the card itself from intercepting while restoring pointer events to all child content, and expanded failure output with the complete hit stack and computed CSS. The new behavior is pending rerun. Second Actions run stopped in the new diagnostic assertion itself (`ReferenceError: hit is not defined`), before reaching the WebKit hit-target assertion. This is a test-only initialization error, not evidence on the product fix. Initialize the hit-test result before checking computed styles, then rerun to determine whether pointer-target rules solve the card interception. Corrected hit-target diagnostics ran on mobile WebKit and showed the rate-button box x=5.7..30.7 while the TV card starts at x=14; the center fell through to the week section. The pointer-only hypothesis is rejected. Position the review action explicitly inside its narrow card (relative to controls at left 6px/top 2px), and assert both card containment and actual hit target. Pending browser rerun. Latest WebKit evidence after absolute placement showed the button receives the hit, but its left edge is still 2.3px outside the article (button x=11.72, card left=14). Move it 9px further inward to x≈20.7, inside both the card and controls; browser CI rerun pending.",
+      "latest": " Latest Actions now expose the calendar TV review click interception on mobile WebKit; scoped fix and regression assertion are pending CI. Initial z-index-only fix did not pass WebKit hit testing; second scoped pointer-target fix and computed-style diagnostics committed for rerun. Browser diagnostic harness had a ReferenceError before testing the second pointer-target fix; corrected and pending a clean rerun. WebKit evidence isolated a 8px left overflow of the review button on a 47px TV tile; scoped positioning and containment/hit-target regression are pending CI. Absolute placement restored the correct WebKit hit target; one geometry assertion found a remaining 2.3px card overflow, corrected in the latest commit."
     },
     {
       "id": "DISCOVERY-P0-20261019",
@@ -654,7 +654,7 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Run CI after keeping the TV review hit box within its article; require mobile WebKit to pass both card containment and elementFromPoint assertions. Then inspect the remaining route and browser audit steps; production remains unverified.",
+  "next_action": "Verify the latest button box is fully inside the TV card and is the WebKit center-point target; wait for the complete frontend route/browser suite. Then record exact CI and production state.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "checks": [
     {

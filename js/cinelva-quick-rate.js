@@ -835,7 +835,7 @@ style.textContent+=`
 .tvMovie{display:flex!important;flex-direction:column!important;min-width:0!important}
 .tvMovie[data-mi]>.cinelva-rating-controls{position:relative!important;z-index:2!important;pointer-events:auto!important}
 /* Keep the review hit box inside the very narrow TV card on WebKit. */
-.tvMovie[data-mi]>.cinelva-rating-controls>.cinelva-rate-button{position:absolute!important;left:6px!important;top:2px!important;right:auto!important;bottom:auto!important;transform:none!important;z-index:3!important;pointer-events:auto!important}
+.tvMovie[data-mi]>.cinelva-rating-controls>.cinelva-rate-button{position:absolute!important;left:15px!important;top:2px!important;right:auto!important;bottom:auto!important;transform:none!important;z-index:3!important;pointer-events:auto!important}
 .cinelva-rating-controls>.cinelva-rating-clear{
  width:42px!important;max-width:42px!important;
  height:20px!important;min-height:20px!important;max-height:20px!important;

@@ -491,25 +491,22 @@
     const isPictureWinner=entry=>(entry.categories||[]).some(c=>/作品賞|パルム・ドール|金獅子賞|金熊賞/.test(String(c)));
     const pictureEntries=(name,decade)=>(data.cells[name+':'+decade]?.entries||[]).filter(isPictureWinner);
     // Original geometric CINELVA award symbols. Not official festival trademarks.
+    // CINELVA-original simplified illustrations, not official award marks.
+    // Solid silhouettes stay legible at the 44x50px ranking thumbnail size.
     const awardEmblem=name=>{
       const n=String(name);
-      const paths=/カンヌ/i.test(n)
-        ? '<path d="M18 37V11M18 28C9 27 7 22 7 17c7 0 11 4 11 11Zm0-7c1-8 5-12 12-13 1 7-3 12-12 13Zm0 13c3-7 8-9 14-9-1 7-6 10-14 9Z"/>'
-        : /ヴェネチア|ベネチア/i.test(n)
-        ? '<path d="M4 16c5-7 9-7 14 0s9 7 14 0M4 25c5-7 9-7 14 0s9 7 14 0M4 34c5-7 9-7 14 0s9 7 14 0"/>'
-        : /ベルリン/i.test(n)
-        ? '<path d="m18 5 14 10v16L18 41 4 31V15L18 5Zm0 0v36M4 15l28 16M32 15 4 31"/>'
-        : /BAFTA|英国アカデミー/i.test(n)
-        ? '<circle cx="18" cy="23" r="13"/><circle cx="18" cy="23" r="5"/><path d="M18 10v8m0 10v8M5 23h8m10 0h8M9 14l6 6m6 6 6 6m0-18-6 6m-6 6-6 6"/>'
-        : /ゴールデングローブ/i.test(n)
-        ? '<circle cx="18" cy="23" r="13"/><ellipse cx="18" cy="23" rx="6" ry="13"/><path d="M5 23h26M8 15h20M8 31h20"/>'
-        : /日本アカデミー/i.test(n)
-        ? '<circle cx="18" cy="23" r="8"/><path d="M18 5v7m0 22v7M0 23h7m22 0h7M5 10l7 7m12 12 7 7m0-26-7 7M12 29l-7 7"/>'
-        : /アカデミー賞|Oscar/i.test(n)
-        ? '<path d="m18 6 4.4 12.2H35l-10.2 7.6 3.8 12.5L18 30.8 7.4 38.3l3.8-12.5L1 18.2h12.6L18 6Z"/>'
-        : '<path d="M18 5v29M7 13h22M8 13v12c0 7 4 10 10 10s10-3 10-10V13M11 40h14"/>';
-      const variant=/カンヌ/i.test(n)?'leaf':/ヴェネチア|ベネチア/i.test(n)?'wave':/ベルリン/i.test(n)?'facet':/BAFTA|英国アカデミー/i.test(n)?'reel':/ゴールデングローブ/i.test(n)?'globe':/日本アカデミー/i.test(n)?'sun':/アカデミー賞|Oscar/i.test(n)?'star':'award';
-      return '<span class="cinelva-affinity-visual cinelva-award-emblem cinelva-award-emblem--'+variant+'" aria-hidden="true"><svg viewBox="0 0 36 46" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" focusable="false">'+paths+'</svg></span>';
+      const designs={
+        trophy:'<path d="M14 10h8l1.5 5-2 11-3.5 4-3.5-4-2-11L14 10Z"/><circle cx="18" cy="7" r="3"/><path d="M15 29h6v6h-6zM10 35h16v4H10z"/>',
+        palm:'<path d="M7 37 27 12" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M12 30C4 28 4 23 4 21c6 0 10 3 10 7M17 24C9 22 8 16 9 13c6 2 9 5 10 9M22 18c-4-7 0-12 3-14 3 6 2 10-1 14M23 17c6-7 10-7 13-7-1 6-5 9-13 9M16 26c8-5 12-4 15-3-3 5-8 6-15 5M9 34c7-4 11-3 14-1-5 4-9 4-14 3"/>',
+        lion:'<path d="M7 19c-3-5-1-10 5-12l4 2 2-3 5 3-1 7 4 5 6-1c3 6 1 12-4 14l-1 6h-4l-1-7-9-1-2 8H7l1-11-4-5 3-5Z"/><path d="M20 18c8-12 12-12 15-9-2 8-7 12-13 14Z" opacity=".75"/><circle cx="13" cy="14" r="1" fill="#fff" stroke="none"/>',
+        bear:'<path d="M10 11a4 4 0 0 1 7-3 5 5 0 0 1 7 4l5 5-2 5-5-3-1 9 4 10h-6l-5-9-3 10H5l4-15-5-3 2-5 5 3-1-8Z"/><circle cx="13" cy="13" r="1" fill="#fff" stroke="none"/>',
+        mask:'<path d="M7 8Q18 2 29 8L27 27Q24 36 18 39Q12 36 9 27Z"/><path d="M11 19q4-3 7 0-3 4-7 0Zm7 0q4-3 7 0-3 4-7 0Z" fill="#fff" stroke="none"/><path d="M15 30q3 3 6 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>',
+        globe:'<circle cx="18" cy="18" r="12"/><path d="M7 18h22M18 6c-7 7-7 17 0 24 7-7 7-17 0-24" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M15 31h6v5h-6zM9 36h18v4H9z"/>',
+        sun:'<circle cx="18" cy="19" r="9"/><path d="m18 3 2 5-2 2-2-2 2-5Zm0 32 2-5-2-2-2 2 2 5ZM2 19l6-2 2 2-2 2-6-2Zm32 0-6-2-2 2 2 2 6-2Z"/>',
+        award:'<path d="M9 8h18v17c0 8-5 11-9 11S9 33 9 25V8Zm0 3H4v8c0 6 3 8 8 8m15-16h5v8c0 6-3 8-8 8M13 39h10"/>'
+      };
+      const variant=/カンヌ/i.test(n)?'palm':/ヴェネチア|ベネチア/i.test(n)?'lion':/ベルリン/i.test(n)?'bear':/BAFTA|英国アカデミー/i.test(n)?'mask':/ゴールデングローブ/i.test(n)?'globe':/日本アカデミー/i.test(n)?'sun':/アカデミー賞|Oscar/i.test(n)?'trophy':'award';
+      return '<span class="cinelva-affinity-visual cinelva-award-emblem cinelva-award-emblem--'+variant+'" aria-hidden="true"><svg viewBox="0 0 36 46" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" focusable="false">'+designs[variant]+'</svg></span>';
     };
     const awardAffinity=organizations.map(name=>{
       const unique=new Map();

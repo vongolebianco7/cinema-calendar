@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T18:08:00+09:00",
+  "updated_at": "2026-10-19T18:17:30+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "e36f38e752929145d4942b873b2433c2cc5cc714",
+  "head_sha": "5758dd0e63aebe4a70a83c64642133d96bf37a61",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,8 +527,13 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required. Latest frontend Actions reproduced a mobile WebKit failure: the calendar TV review button is visibly present but the card intercepts the click. Added a WebKit hit-test assertion and a scoped stacking/hit-testing fix for TV review controls. The fix is pending rerun; local Playwright browser binaries are unavailable. First targeted WebKit run rejected the attempted z-index-only change: hit testing still returned `article.tvMovie`. That falsified the first fix. Updated the action's pointer hit-area rules to keep the card itself from intercepting while restoring pointer events to all child content, and expanded failure output with the complete hit stack and computed CSS. The new behavior is pending rerun. Second Actions run stopped in the new diagnostic assertion itself (`ReferenceError: hit is not defined`), before reaching the WebKit hit-target assertion. This is a test-only initialization error, not evidence on the product fix. Initialize the hit-test result before checking computed styles, then rerun to determine whether pointer-target rules solve the card interception. Corrected hit-target diagnostics ran on mobile WebKit and showed the rate-button box x=5.7..30.7 while the TV card starts at x=14; the center fell through to the week section. The pointer-only hypothesis is rejected. Position the review action explicitly inside its narrow card (relative to controls at left 6px/top 2px), and assert both card containment and actual hit target. Pending browser rerun. Latest WebKit evidence after absolute placement showed the button receives the hit, but its left edge is still 2.3px outside the article (button x=11.72, card left=14). Move it 9px further inward to x≈20.7, inside both the card and controls; browser CI rerun pending. The WebKit calendar review target and card-containment assertions passed, followed by Chromium/WebKit quick-rate and calendar record journeys. Frontend step then stopped at route-audit startup because a hardcoded test expected 29 while the current manifest correctly has 30 routes (including `events.html`). Replaced the stale count with a non-empty manifest precondition; `tests/cinelva-route-manifest.test.cjs` remains the dynamic exact-coverage gate. Full route audit rerun pending.",
-      "latest": " Latest Actions now expose the calendar TV review click interception on mobile WebKit; scoped fix and regression assertion are pending CI. Initial z-index-only fix did not pass WebKit hit testing; second scoped pointer-target fix and computed-style diagnostics committed for rerun. Browser diagnostic harness had a ReferenceError before testing the second pointer-target fix; corrected and pending a clean rerun. WebKit evidence isolated a 8px left overflow of the review button on a 47px TV tile; scoped positioning and containment/hit-target regression are pending CI. Absolute placement restored the correct WebKit hit target; one geometry assertion found a remaining 2.3px card overflow, corrected in the latest commit. Target calendar hit-test passed in both browsers. The next audit exposed a stale `29` assertion against the 30-route manifest; fixed the audit precondition and rerun pending."
+      "ci": "PR #401 head 5758dd0: all 10 Actions workflows passed. Validate frontend passed Chromium/WebKit browser journeys: discovery controls, bookmarks, My CINELVA 1,000-record persistence, 100-row box-office checks, 291 award cards, quick rating, calendar, record entry, and route audit. The route matrix audited 30 routes × 2 viewports (390/1280) × 2 themes (light/dark): 120 page loads per browser, with no uncaught page errors or missing local assets. Route audit artifact uploaded. The TV-card WebKit hitbox and stale 29-route assertion were found and corrected in this run. Local browser binaries are absent; GitHub Actions is the browser evidence.",
+      "latest": "Confirmed fixes and coverage: 291 award cards audited (31 poster fallback gaps and 35 missing shared controls fixed); 100 box-office ranking entries audited (two equal-gross groups, 5 affected entries, corrected competition ranks); malformed shared rating JavaScript and undefined syncWatched fixed; new/undated review default is today; discovery loading no longer leaves stale results; TV-card review hitbox aligned inside card. Full route/browser matrix passes. PR is still unmerged and production is not verified; overall audit continues.",
+      "pull_request": {
+        "number": 401,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/401",
+        "latest_code_sha": "5758dd0e63aebe4a70a83c64642133d96bf37a61"
+      }
     },
     {
       "id": "DISCOVERY-P0-20261019",
@@ -654,7 +659,7 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Run the frontend route audit on all 30 manifest routes at the declared viewports/themes and both browsers; resolve any actual per-route failures. Then update PR/Issue #239 with CI evidence. Production remains unverified.",
+  "next_action": "Continue the remaining tabs, data-integrity, automation freshness/failure behavior, accessibility, and performance audit. Keep the PR open until review and merge; verify production only after deployment is allowed. Do not report overall completion until all features and production checks are accounted for.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "checks": [
     {

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T17:35:23+09:00",
+  "updated_at": "2026-10-19T17:42:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "3aa887f9c57338a88368c7481eff980ff3f1d5c3",
+  "head_sha": "28b704c9d3b78e6e5a853c46db0165110fa704b8",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,8 +527,8 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required. Latest frontend Actions reproduced a mobile WebKit failure: the calendar TV review button is visibly present but the card intercepts the click. Added a WebKit hit-test assertion and a scoped stacking/hit-testing fix for TV review controls. The fix is pending rerun; local Playwright browser binaries are unavailable.",
-      "latest": " Latest Actions now expose the calendar TV review click interception on mobile WebKit; scoped fix and regression assertion are pending CI."
+      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required. Latest frontend Actions reproduced a mobile WebKit failure: the calendar TV review button is visibly present but the card intercepts the click. Added a WebKit hit-test assertion and a scoped stacking/hit-testing fix for TV review controls. The fix is pending rerun; local Playwright browser binaries are unavailable. First targeted WebKit run rejected the attempted z-index-only change: hit testing still returned `article.tvMovie`. That falsified the first fix. Updated the action's pointer hit-area rules to keep the card itself from intercepting while restoring pointer events to all child content, and expanded failure output with the complete hit stack and computed CSS. The new behavior is pending rerun.",
+      "latest": " Latest Actions now expose the calendar TV review click interception on mobile WebKit; scoped fix and regression assertion are pending CI. Initial z-index-only fix did not pass WebKit hit testing; second scoped pointer-target fix and computed-style diagnostics committed for rerun."
     },
     {
       "id": "DISCOVERY-P0-20261019",
@@ -654,7 +654,7 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Run the existing Chromium/WebKit frontend workflow on the pending fix, inspect the WebKit hit target and all dependent browser checks, then continue remaining discovery and route audits. Production is not verified and remains unchanged.",
+  "next_action": "Run the targeted Chromium/WebKit journey again. If the hit target still is not the review button, use the emitted element stack and computed styles to make the smallest structural correction. Continue route audit and keep production unverified.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "checks": [
     {

@@ -5,6 +5,9 @@ on:
       - 'my-cinelva/**'
       - 'js/cinelva-records-page.js'
       - 'tests/cinelva-mobile-layout.cjs'
+      - 'tests/cinelva-rating-visible.cjs'
+      - 'js/cinelva-quick-rate.js'
+      - 'index.html'
       - '.github/workflows/cinelva-mobile-visual.yml'
   pull_request:
   workflow_dispatch:
@@ -23,12 +26,16 @@ jobs:
         run: |
           node --check js/cinelva-records-page.js
           node --check tests/cinelva-mobile-layout.cjs
+          node --check tests/cinelva-rating-visible.cjs
+          node --check js/cinelva-quick-rate.js
       - name: Serve checked-out source
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/cinelva-http.log 2>&1 &
           for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/my-cinelva/ > /dev/null && exit 0; sleep 1; done
           cat /tmp/cinelva-http.log
           exit 1
+      - name: Verify movie rating labels are visible
+        run: node tests/cinelva-rating-visible.cjs
       - name: Test mobile calendar
         run: node tests/cinelva-mobile-layout.cjs
       - uses: actions/upload-artifact@v4

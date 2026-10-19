@@ -1,4 +1,4 @@
-# CINELVA UI/UX unification and exhaustive acceptance contract (2026-10-19)
+# CINELVA full-product functional and UI audit acceptance contract (2026-10-19)
 
 Status: implementation contract, not proof of implementation. Source of truth: live main, issue #239, route manifest, CI evidence. Preserve brand logo, name, colors, user data and origin.
 
@@ -33,3 +33,24 @@ Unify card boundaries, spacing, gaps, poster aspect ratios, alignment, title tru
 
 ## Implementation order
 P0 shared movie model and four actions -> P0 missing posters and duplicated controls -> P1 shared cards and layout tokens -> P1 domain pages -> P1 responsive/accessibility -> P0 regression and release evidence. Continue independent work while deployment blocked. Update issue #239 and docs/operations/work-state.json after meaningful milestones.
+
+## Mandatory full-product functional audit (not only UI)
+For every feature on every active route, record owner/source, input, transformation, output, persisted state, edge cases, evidence, severity, status, fix PR and production verification. Do not mark complete based on code existence.
+
+### Functional domains
+1. Search and discovery: Japanese/English names, punctuation normalization (スターウォーズ/スター・ウォーズ), typos, filtering, sorting, pagination, duplicate handling, empty results and deep links.
+2. Movies and metadata: identity across TMDB/local IDs, posters, localized titles, credits, genres, durations, dates, cast/director mapping and correct detail URLs.
+3. User records: quick rating, modal review, watched/unwatched, date defaults and partial dates, theater/streaming, edits/deletes, bookmark independence, cross-route consistency, storage reload and import/export.
+4. Calendars and schedules: film release calendars, year selection synchronization, viewing calendars, multi-day event boundaries, timezone, unavailable and stale cinema/streaming listings.
+5. Rankings/awards/directors: box office ordering, awards categories/years/decade matrix, director filmography inclusion and counts, watched counts, averages, minimum sample rules and drilldowns.
+6. My CINELVA analytics: lifetime/year counts, distribution totals, 4+ scores, genre/country/decade, directors/awards, maps, Movie DNA and every chart's source records; zero/one/large dataset handling.
+7. Navigation/accessibility: links, state retention, browser back, modal focus, touch/keyboard, responsive layouts, semantic labeling and consistent errors.
+8. Runtime/performance: initial load, slow API, offline, failed images, partial responses, concurrency, repeated event handlers, unbounded fetches, memory leaks, console errors, WebKit/iPhone behavior.
+9. Compliance/operations: free-only, authorized APIs, poster attribution and rights, external source freshness, privacy, backups, production domain/origin, CI gates, deployment SHA, rollback and support.
+
+### Execution requirements
+- Inventory ALL active routes and every user action, API, storage mutation, data transform and scheduled update. Join route manifest and PR #401 interaction inventory, then inspect source for uncovered code paths.
+- Create a traceable route × feature × state × viewport × browser matrix, with test ID and screenshots/logs. Classify implemented/PR pending/bug/missing/production unverified. Count verified cells and report failures; never fabricate an overall completion percentage.
+- Prioritize reproducible P0 functional defects (wrong counts, lost records, broken navigation, missing images), then P1 visual/accessibility, then P2 polish. Write regression tests before or with fixes and retest affected neighboring pages.
+- Exercise at least empty, single, normal, large, stale, API error, offline, reload, import/restore, duplicate identity and legacy data scenarios where applicable.
+- Merge and production-verify tested SHA only when checks pass and deployment limits permit. Record evidence in #239 and durable work-state. Do not require the user to manually debug or report issues to find regressions.

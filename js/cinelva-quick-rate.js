@@ -221,23 +221,29 @@ function attachInlineScore(button,movie) {
  personal.className='cinelva-rating-line cinelva-rating-personal';
  audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
-  const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched!==false);
-  personal.textContent='あなたの評価  '+(rec?Number(rec.rating??0).toFixed(1):'—');
+  const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched===true);
+  const watched=Boolean(rec);
+  const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
+  personal.textContent='あなたの評価  '+score;
+  personal.classList.toggle('is-unwatched',!watched);
+  personal.style.setProperty('color',watched?'#e4bd70':'#aab0bb','important');
  };
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
- audience.textContent='みんなの評価  '+(Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0?(tmdbScore/2).toFixed(1):'—');
+ const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
+ audience.textContent='みんなの評価  '+(validTmdb?(tmdbScore/2).toFixed(1):'評価なし');
+ audience.classList.toggle('is-unrated',!validTmdb);
  personal.title='あなたの評価';audience.title='みんなの評価（TMDB）';
  ratings.setAttribute('aria-label','あなたの評価 / みんなの評価（TMDB）');
  ratings.append(personal,audience);
  // Inline layout is intentional: page-level movie-card styles must not hide ratings.
  Object.assign(ratings.style,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',height:'auto',flex:'0 0 auto',gap:'2px',visibility:'visible',opacity:'1',overflow:'visible'});
- Object.assign(personal.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#e4bd70',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
+ Object.assign(personal.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
  Object.assign(audience.style,{display:'block',width:'100%',height:'auto',fontSize:'10px',lineHeight:'1.5',fontWeight:'600',color:'#b8c6d9',whiteSpace:'nowrap',visibility:'visible',opacity:'1'});
  // Force the two rating rows to remain visible even if legacy page CSS uses !important.
  const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
  force(ratings,{'display':'flex','flex-direction':'column','visibility':'visible','opacity':'1','height':'auto','min-height':'30px','width':'100%','flex':'0 0 auto','overflow':'visible','position':'relative','color':'#e4bd70'});
- force(personal,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','color':'#e4bd70','white-space':'nowrap'});
+ force(personal,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','white-space':'nowrap'});
  force(audience,{'display':'block','visibility':'visible','opacity':'1','font-size':'10px','line-height':'15px','height':'15px','min-height':'15px','color':'#b8c6d9','white-space':'nowrap'});
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
@@ -1007,6 +1013,11 @@ style.textContent+=`
  display:flex!important;flex:0 0 24px!important;height:24px!important;min-height:24px!important;
  align-items:center!important;justify-content:space-between!important;
 }
+`;
+style.textContent+=`
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-personal.is-unwatched{color:#aab0bb!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-audience.is-unrated{color:#9da8b8!important}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{font-size:10px!important;line-height:1.5!important}
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 

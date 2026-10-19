@@ -1,4 +1,26 @@
 const { chromium } = require('playwright');
+
+function inspectControls(root) {
+ const controls=root.querySelector('.cinelva-rating-controls');
+ const review=controls?.querySelector('.cinelva-rate-button');
+ const score=controls?.querySelector('.cinelva-inline-score input[type="range"]');
+ const bookmark=controls?.querySelector('.cinelva-bookmark-button');
+ const rect=controls?.getBoundingClientRect();
+ return {
+  ok:root.dataset.mounted==='true',
+  controls:Boolean(controls),
+  review:Boolean(review),
+  score:Boolean(score),
+  bookmark:Boolean(bookmark),
+  visible:[review,score,bookmark].map(el=>{
+   if(!el)return false;
+   const r=el.getBoundingClientRect();
+   return r.width>0&&r.height>0&&getComputedStyle(el).visibility==='visible'&&getComputedStyle(el).display!=='none';
+  }),
+  box:{width:rect?.width,height:rect?.height,scrollWidth:controls?.scrollWidth,clientWidth:controls?.clientWidth}
+ };
+}
+
 (async () => {
  const browser=await chromium.launch({headless:true});
  try {
@@ -6,27 +28,31 @@ const { chromium } = require('playwright');
    const page=await browser.newPage({viewport:{width,height:844}});
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate?.mountInline),null,{timeout:20000});
-   const result=await page.evaluate(()=>{
+   await page.evaluate(()=>{
     const host=document.createElement('div');
+    host.id='rating-fixture';
     host.style.cssText='width:190px;max-width:190px;background:#282c36;color:white;position:relative;z-index:999999;padding:0';
     document.body.prepend(host);
-    const ok=window.CinelvaQuickRate.mountInline(host,{id:550,title:'Rating fixture',vote_average:7.2,vote_count:100});
-    const pair=host.querySelector('.cinelva-rating-pair');
-    const lines=[...host.querySelectorAll('.cinelva-rating-line')];
-    const box=pair?.getBoundingClientRect();
-    return {ok,text:lines.map(x=>x.textContent),display:pair&&getComputedStyle(pair).display,box:{width:box?.width,height:box?.height},visible:lines.map(x=>{const r=x.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(x).visibility==='visible';}),actions:host.querySelectorAll('.cinelva-rating-actions button').length};
+    host.dataset.mounted=String(window.CinelvaQuickRate.mountInline(host,{id:550,title:'Rating fixture',vote_average:7.2,vote_count:100}));
    });
+   const result=await page.locator('#rating-fixture').evaluate(inspectControls);
    console.log(width,JSON.stringify(result));
-   if(!result.ok||result.visible.length!==2||result.visible.some(x=>!x)||!result.text[0].includes('あなたの評価')||!result.text[1].includes('みんなの評価')||result.actions!==2)throw Error('rating visibility failed '+width);
-   // Real search results use the same production card renderer, not just a synthetic mount.
+   if(!result.ok||!result.controls||!result.review||!result.score||!result.bookmark||result.visible.some(x=>!x)||result.box.scrollWidth>result.box.clientWidth+1)throw Error('shared rating controls are missing or clipped '+width);
+   await page.locator('.cinelva-rate-button').first().click();
+   if(!await page.locator('.cinelva-rate-dialog[open]').count())throw Error('review action did not open the shared dialog '+width);
+   const today=new Date().toLocaleDateString('sv-SE');
+   if(await page.locator('#cinelvaRateDate').inputValue()!==today)throw Error('new review did not default its viewing date to today '+width);
+   await page.locator('.cinelva-rate-dialog [aria-label="閉じる"]').click();
+
    await page.route('**/api/movies?*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[],external:[]})}));
    await page.route('**/data/movies.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[{id:111,title:'スター・ウォーズ',year:1977,vote_average:7.2,vote_count:100}]})}));
    await page.goto('http://127.0.0.1:8765/search.html?search='+encodeURIComponent('スターウォーズ'),{waitUntil:'domcontentloaded'});
-   await page.locator('#grid .cinelva-rating-pair').first().waitFor({state:'visible',timeout:15000});
-   const live=await page.locator('#grid .cinelva-rating-pair').first().evaluate(el=>({text:el.innerText,lines:[...el.querySelectorAll('.cinelva-rating-line')].map(x=>{const b=x.getBoundingClientRect();return {text:x.textContent,width:b.width,height:b.height,display:getComputedStyle(x).display};})}));
+   const card=page.locator('#grid .card').first();
+   await card.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:15000});
+   const live=await card.evaluate(inspectControls);
    console.log('search card',width,JSON.stringify(live));
-   if(!live.text.includes('あなたの評価')||!live.text.includes('みんなの評価')||live.lines.length!==2||live.lines.some(x=>x.width<=0||x.height<=0||x.display==='none'))throw Error('real search card ratings hidden '+width);
-   // The production calendar has its own fixed-height legacy CSS; verify no clipping.
+   if(!live.controls||!live.review||!live.score||!live.bookmark||live.visible.some(x=>!x)||live.box.scrollWidth>live.box.clientWidth+1)throw Error('search result shared controls are missing or clipped '+width);
+
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.evaluate(()=>{
      const grid=document.querySelector('#cards');
@@ -35,14 +61,15 @@ const { chromium } = require('playwright');
      const card=document.createElement('a');card.className='card';card.dataset.i='0';card.href='#';card.textContent='Calendar fixture';
      grid.append(card);
    });
-   await page.locator('#cards .cinelva-rating-controls-no-gauge').first().waitFor({state:'visible',timeout:20000});
-   const calendar=await page.locator('#cards .cinelva-rating-controls-no-gauge').first().evaluate(el=>{
-     const outer=el.getBoundingClientRect(),pair=el.querySelector('.cinelva-rating-pair'),actions=el.querySelector('.cinelva-rating-actions');
-     const a=pair?.getBoundingClientRect(),b=actions?.getBoundingClientRect();
-     return {height:outer.height,maxHeight:getComputedStyle(el).maxHeight,text:pair?.innerText,pairHeight:a?.height,actionsHeight:b?.height,clipped:!a||!b||a.top<outer.top-1||b.bottom>outer.bottom+1};
+   const calendarCard=page.locator('#cards .card[data-i="0"]');
+   await calendarCard.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:20000});
+   const calendar=await calendarCard.evaluate(root=>{
+     const outer=root.querySelector('.cinelva-rating-controls').getBoundingClientRect();
+     const children=[...root.querySelectorAll('.cinelva-rate-button,.cinelva-inline-score,.cinelva-bookmark-button')].map(el=>{const r=el.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}});
+     return {height:outer.height,width:outer.width,scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,children,clipped:children.length!==3||children.some(r=>r.width<=0||r.height<=0||r.left<outer.left-1||r.right>outer.right+1||r.top<outer.top-1||r.bottom>outer.bottom+1)};
    });
    console.log('calendar card',width,JSON.stringify(calendar));
-   if(calendar.clipped||calendar.height<55||!calendar.text?.includes('あなたの評価')||!calendar.text?.includes('みんなの評価'))throw Error('calendar rating clipped '+width);
+   if(calendar.clipped||calendar.scrollWidth>calendar.clientWidth+1)throw Error('calendar shared controls are clipped '+width);
    await page.close();
   }
  } finally {await browser.close();}

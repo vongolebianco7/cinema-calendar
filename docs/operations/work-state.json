@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T10:07:33+09:00",
+  "updated_at": "2026-10-19T15:00:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "cb17bae79ca830dfe3fb0aa95a70a1a93de3b8af",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "af6563246aa1a36af8d7563d315ab93442e93b4b",
+  "head_sha": "780131b85fda9ce19a7e6d5e759997607809e6e7",
   "pull_request": 401,
   "work_items": [
     {
@@ -527,7 +527,7 @@
       "title": "Unify independent bookmarks and movie controls across all applicable screens",
       "status": "in_progress",
       "acceptance": "Four common movie actions; dedicated wanted tab; preserve raw records and legacy bookmarks; sync same-origin pages/tabs; inventory all29routes; CI browser and production evidence required.",
-      "ci": "PR401head32fe88ee: dedicated bookmark browser PASS in Chromium/WebKit at390/1280px. Existing MyCinelva journey reached Eastwood assertion after records/edit/backup/dense1000checks, then failed old1/41text expectation; now checks real aria-label with same counts. Final full frontend CI still required."
+      "ci": "PR401 head 780131b8. Added discovery poster fallback contract and Playwright journey (discovery shelf, condition results, rating save, review save, bookmark persistence, detail link, 390/1280, Chromium/WebKit). Local quality_gate.py passed (175 active Node tests); discovery-related Node tests 10/10 and inline syntax/git diff checks pass. Browser run and all required PR Actions still pending; PR currently mergeable=false against main f4278998."
     }
   ],
   "verification": [
@@ -591,6 +591,10 @@
     {
       "check": "PR401 dedicated bookmark browser",
       "result": "Actions39183704965 on32fe88ee: Chromium390/1280PASS, WebKit390/1280PASS. Real clicks, same-page/tab storage sync, canonical imported IDs, raw record preservation, summary hit bounds, awards/directors/detail. Full frontend failed later on stale Eastwood display text; source behavior verified but integration not yet green."
+    },
+    {
+      "check": "2026-10-19 discovery full-screen follow-up",
+      "result": "Root cause confirmed in discover.html: shelf/search/person/concierge cards rendered blank poster containers or images without an error fallback and did not yet carry browser regression coverage. Added accessible text fallback for missing/broken posters; added real browser assertions for all shared controls and detail navigation. Local Python quality gate passed; active Node suite 175/175, discovery tests 10/10. No browser binary locally. Production not changed."
     }
   ],
   "deployment": {
@@ -610,7 +614,23 @@
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
-  "blockers": [],
-  "next_action": "Refresh PR401 exact head and required Actions. Complete Chromium/WebKit390/1280bookmark journeys and remaining existing browser regressions; fix confirmed failures, merge only with required checks green. Then verify canonical release; Vercel build-rate-limit currently blocks production.",
+  "blockers": [
+    {
+      "id": "PR401_BASE_DIVERGENCE",
+      "status": "active",
+      "detail": "PR401 diverges from current main f4278998 and GitHub reports mergeable=false; production integration remains blocked until resolved."
+    },
+    {
+      "id": "PR401_BROWSER_CI",
+      "status": "active",
+      "detail": "GitHub Actions run for added discovery Chromium/WebKit journey is not yet observable; local browser executable unavailable."
+    },
+    {
+      "id": "PRODUCTION_DEPLOY_LIMIT",
+      "status": "active",
+      "detail": "Vercel backend status is build-rate-limit failure; no deployment attempted."
+    }
+  ],
+  "next_action": "Reconcile PR401 with current main f4278998f28cc726931b114f43a441bcceecdf29 (PR currently mergeable=false), obtain a fresh required Actions run for head 780131b85fda9ce19a7e6d5e759997607809e6e7, complete Chromium/WebKit discovery journeys and repair any reproduced failures. Do not deploy until CI passes; Vercel currently reports build-rate-limit.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

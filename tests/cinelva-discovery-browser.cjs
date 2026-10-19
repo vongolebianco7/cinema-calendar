@@ -87,7 +87,8 @@ async function ready(){
    await directorSuggestion.click();
    const personResult=page.locator('#grid .cinelva-discovery-unit').filter({has:page.locator('[data-id="42"]')}).first();
    await personResult.waitFor();
-   assert.equal(await page.locator('#grid [data-id="43"]').count(),0,'director results exclude films where the person only has non-director crew credits');
+   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('作品（監督作品）'));
+   assert.equal(await page.locator('#grid [data-id="43"]').count(),0,'director results exclude films where the person only has non-director crew credits after the new director search completes');
    assert.ok(discoverRequests.some(url=>url.searchParams.get('crew')==='999'),'director selection changes the actual API query');
    assert.equal(await personResult.locator('.cinelva-inline-score input[type="range"]').count(),1,'director filmography exposes the shared rating gauge');
    assert.equal(await personResult.locator('.cinelva-rate-button').count(),1,'director filmography exposes the shared review action');

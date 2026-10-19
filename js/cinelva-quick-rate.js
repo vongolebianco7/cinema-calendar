@@ -258,7 +258,7 @@ function attachInlineScore(button,movie) {
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
  const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
- audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'評価なし';
+ audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'—';
  audience.classList.toggle('is-unrated',!validTmdb);
  if(!validTmdb&&typeof IntersectionObserver!=='undefined'){
   const observer=new IntersectionObserver(entries=>{

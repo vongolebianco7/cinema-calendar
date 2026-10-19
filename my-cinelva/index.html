@@ -703,7 +703,35 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 #summaryView .cy-year-month small{font-size:8px;color:#aeb7c2;font-variant-numeric:tabular-nums}
 @media(max-width:700px){#summaryView .cinelva-alltime-years{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:390px){#summaryView .cinelva-alltime-years{grid-template-columns:minmax(0,1fr)}}
-</style><style id="dashboard-extra-stats-20261019">#summaryView .cs-extra-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}#summaryView .cs-extra-stat{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);min-width:0}#summaryView .cs-extra-stat span{display:block;font-size:12px;color:var(--muted)}#summaryView .cs-extra-stat strong{display:block;font-size:23px;line-height:1.4;font-variant-numeric:tabular-nums}#summaryView .cs-affinities{display:grid;grid-template-columns:1fr;gap:14px}#summaryView .cinelva-affinity-row{min-width:0}@media(min-width:850px){#summaryView .cs-extra-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}</style></head>
+</style><style id="dashboard-extra-stats-20261019">#summaryView .cs-extra-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}#summaryView .cs-extra-stat{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);min-width:0}#summaryView .cs-extra-stat span{display:block;font-size:12px;color:var(--muted)}#summaryView .cs-extra-stat strong{display:block;font-size:23px;line-height:1.4;font-variant-numeric:tabular-nums}#summaryView .cs-affinities{display:grid;grid-template-columns:1fr;gap:14px}#summaryView .cinelva-affinity-row{min-width:0}@media(min-width:850px){#summaryView .cs-extra-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}</style><style id="cinelva-dashboard-unified-20261019">
+/* Dashboard-only design system. Leave navigation, logo and other pages untouched. */
+#summaryView{--dash-bg:var(--panel);--dash-line:var(--line);--dash-muted:var(--muted);--dash-ink:var(--ink);--dash-accent:var(--gold)}
+#summaryView .cs-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+#summaryView .cs-head h2{margin:0;font-size:clamp(19px,3vw,25px);font-weight:750;letter-spacing:-.025em}
+#summaryView .cs-head select{max-width:170px;min-height:38px;border-radius:9px}
+#summaryView .cs-top,#summaryView .cs-extra-stat,#summaryView>.panel,#summaryView .cs-section,#summaryView .cinelva-affinity{background:var(--dash-bg)!important;border:1px solid var(--dash-line)!important;border-radius:12px!important;box-shadow:none!important;color:var(--dash-ink)!important}
+#summaryView .cs-top{padding:18px!important;margin:0 0 12px!important}
+#summaryView .cs-extra-stats{margin:0 0 14px!important;gap:10px!important}
+#summaryView .cs-extra-stat{padding:13px!important}
+#summaryView .cs-extra-stat span{font-size:12px!important;color:var(--dash-muted)!important}
+#summaryView .cs-extra-stat strong{font-size:clamp(17px,2.5vw,23px)!important;color:var(--dash-ink)!important}
+#summaryView>.panel{padding:16px!important;margin:0 0 14px!important}
+#summaryView .cs-section{margin:0 0 14px!important;padding:16px!important;min-width:0!important}
+#summaryView .cs-section h3,#summaryView .cinelva-affinity h3{font-size:16px!important;line-height:1.4!important;font-weight:750!important;letter-spacing:0!important;color:var(--dash-ink)!important;border:0!important;padding:0!important;margin:0 0 12px!important}
+#summaryView .cs-affinities{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0 0 14px!important}
+#summaryView .cs-affinities>div{min-width:0!important}
+#summaryView .cinelva-affinity{padding:16px!important;margin:0!important;height:100%!important}
+#summaryView .cinelva-affinity-note{color:var(--dash-muted)!important;font-size:11px!important}
+#summaryView .cinelva-affinity-row{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;gap:2px 9px!important;align-items:center!important;padding:10px 0!important;border-top:1px solid var(--dash-line)!important}
+#summaryView .cinelva-affinity-rank{grid-column:1!important;grid-row:1/3!important;color:var(--dash-accent)!important}
+#summaryView .cinelva-affinity-row strong{grid-column:2!important;font-size:13px!important;color:var(--dash-ink)!important}
+#summaryView .cinelva-affinity-meta{grid-column:2!important;white-space:normal!important;font-size:11px!important;color:var(--dash-muted)!important}
+#summaryView .cs-breakdowns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important}
+#summaryView .cs-breakdowns .cs-section{margin:0!important;padding:16px!important;border:1px solid var(--dash-line)!important;min-width:0!important}
+#summaryView .cs-donut-layout{min-width:0!important}
+@media(max-width:699px){#summaryView .cs-affinities{grid-template-columns:minmax(0,1fr)!important}#summaryView .cs-breakdowns{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#summaryView .cs-breakdowns .cs-section{padding:11px!important}#summaryView .cs-section{padding:13px!important}#summaryView .cs-top{padding:13px!important}#summaryView>.panel{padding:13px!important}#summaryView .cs-affinities{gap:9px!important}}
+@media(max-width:370px){#summaryView .cs-breakdowns{grid-template-columns:1fr!important}}
+</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>

@@ -286,13 +286,13 @@ function attachInlineScore(button,movie) {
  bookmark.style.setProperty('cursor','pointer','important');
  bookmark.style.setProperty('position','relative','important');
  bookmark.style.setProperty('z-index','10','important');
- // One geometry definition: two 20px rows, matching 20px action buttons.
+ // Compact geometry: 2 x 17px rows, 17px buttons, 4px vertical padding.
  const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
- force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) 20px','grid-template-rows':'42px','align-items':'center','column-gap':'4px','width':'100%','box-sizing':'border-box','height':'52px','min-height':'52px','max-height':'52px','padding':'5px 6px','overflow':'hidden'});
- force(ratings,{'display':'grid','grid-template-columns':'minmax(0,1fr)','grid-template-rows':'20px 20px','grid-column':'1','grid-row':'1','align-items':'center','width':'100%','min-width':'0','height':'42px','min-height':'42px','max-height':'42px','gap':'2px','overflow':'hidden','visibility':'visible','opacity':'1'});
- for(const line of [personal,audience])force(line,{'display':'grid','grid-template-columns':'minmax(0,1fr) auto','align-items':'center','gap':'2px','width':'100%','min-width':'0','height':'20px','min-height':'20px','max-height':'20px','font-size':'10px','line-height':'20px','overflow':'hidden','white-space':'nowrap','visibility':'visible'});
- force(actions,{'display':'grid','grid-template-columns':'20px','grid-template-rows':'20px 20px','grid-column':'2','grid-row':'1','align-items':'center','justify-content':'center','gap':'2px','width':'20px','height':'42px','min-height':'42px','max-height':'42px'});
- for(const action of [button,bookmark]){force(action,{'display':'grid','place-items':'center','width':'20px','min-width':'20px','max-width':'20px','height':'20px','min-height':'20px','max-height':'20px','padding':'0','margin':'0','border':'1px solid #525765','border-radius':'4px','box-sizing':'border-box','background':'transparent','transform':'none'});const svg=action.querySelector('svg');if(svg)force(svg,{'width':'15px','height':'15px','min-width':'15px','min-height':'15px'});}
+ force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) 17px','grid-template-rows':'35px','align-items':'center','column-gap':'3px','width':'100%','box-sizing':'border-box','height':'43px','min-height':'43px','max-height':'43px','padding':'4px 5px','overflow':'hidden'});
+ force(ratings,{'display':'grid','grid-template-columns':'minmax(0,1fr)','grid-template-rows':'17px 17px','grid-column':'1','grid-row':'1','align-items':'center','width':'100%','min-width':'0','height':'35px','min-height':'35px','max-height':'35px','gap':'1px','overflow':'hidden','visibility':'visible','opacity':'1'});
+ for(const line of [personal,audience])force(line,{'display':'grid','grid-template-columns':'minmax(0,1fr) auto','align-items':'center','gap':'2px','width':'100%','min-width':'0','height':'17px','min-height':'17px','max-height':'17px','font-size':'10px','line-height':'17px','overflow':'hidden','white-space':'nowrap','visibility':'visible'});
+ force(actions,{'display':'grid','grid-template-columns':'17px','grid-template-rows':'17px 17px','grid-column':'2','grid-row':'1','align-items':'center','justify-content':'center','gap':'1px','width':'17px','height':'35px','min-height':'35px','max-height':'35px'});
+ for(const action of [button,bookmark]){force(action,{'display':'grid','place-items':'center','width':'17px','min-width':'17px','max-width':'17px','height':'17px','min-height':'17px','max-height':'17px','padding':'0','margin':'0','border':'1px solid #525765','border-radius':'4px','box-sizing':'border-box','background':'transparent','transform':'none'});const svg=action.querySelector('svg');if(svg)force(svg,{'width':'12px','height':'12px','min-width':'12px','min-height':'12px'});}
  root.addEventListener('cinelva-record-updated',updatePersonal);
  updatePersonal();
  for(const type of ['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend','mousedown','mouseup','click','dblclick']){
@@ -1198,6 +1198,33 @@ style.textContent+=`
 }
 .cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button:not(.is-bookmarked) svg{
  fill:none!important;
+}
+`;
+style.textContent+=`
+/* Final compact dimensions override all earlier legacy tile rules. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{
+ grid-template-columns:minmax(0,1fr) 17px!important;grid-template-rows:35px!important;
+ height:43px!important;min-height:43px!important;max-height:43px!important;
+ padding:4px 5px!important;column-gap:3px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{
+ grid-template-rows:17px 17px!important;height:35px!important;min-height:35px!important;max-height:35px!important;gap:1px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{
+ height:17px!important;min-height:17px!important;max-height:17px!important;line-height:17px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{
+ grid-template-columns:17px!important;grid-template-rows:17px 17px!important;
+ width:17px!important;min-width:17px!important;max-width:17px!important;
+ height:35px!important;min-height:35px!important;max-height:35px!important;gap:1px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{
+ width:17px!important;min-width:17px!important;max-width:17px!important;
+ height:17px!important;min-height:17px!important;max-height:17px!important;flex:none!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{
+ width:12px!important;min-width:12px!important;max-width:12px!important;
+ height:12px!important;min-height:12px!important;max-height:12px!important;flex:none!important;
 }
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};

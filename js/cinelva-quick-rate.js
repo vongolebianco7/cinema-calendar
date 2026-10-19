@@ -224,6 +224,8 @@ function attachInlineScore(button,movie) {
  const syncBookmark=()=>{
   const marked=!!getBookmarks()[String(id)];
   bookmark.classList.toggle('is-bookmarked',marked);
+  bookmark.style.setProperty('color',marked?'#f3c84e':'#aeb3bd','important');
+  bookmark.querySelector('svg')?.style.setProperty('fill',marked?'#f3c84e':'none','important');
   bookmark.setAttribute('aria-pressed',String(marked));
   bookmark.setAttribute('aria-label',marked?'観たいを解除':'観たいに登録');
   bookmark.title=marked?'観たいを解除':'観たいに登録';
@@ -235,6 +237,7 @@ function attachInlineScore(button,movie) {
    if(marked)delete data[key];
    else data[key]={id:key,title:movie.title||movie.name||'作品',savedAt:new Date().toISOString()};
    localStorage.setItem(bookmarkKey,JSON.stringify(data));
+   syncBookmark();
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key,marked:!marked}}));
   }catch(error){bookmark.setAttribute('aria-label','保存できませんでした');}
  };
@@ -279,6 +282,10 @@ function attachInlineScore(button,movie) {
  button.before(controls);
  const actions=document.createElement('div');actions.className='cinelva-rating-actions';
  actions.append(button,bookmark);controls.append(ratings,actions);
+ bookmark.style.setProperty('pointer-events','auto','important');
+ bookmark.style.setProperty('cursor','pointer','important');
+ bookmark.style.setProperty('position','relative','important');
+ bookmark.style.setProperty('z-index','10','important');
  // One geometry definition: two 20px rows, matching 20px action buttons.
  const force=(el,values)=>Object.entries(values).forEach(([k,v])=>el.style.setProperty(k,v,'important'));
  force(controls,{'display':'grid','grid-template-columns':'minmax(0,1fr) 20px','grid-template-rows':'42px','align-items':'center','column-gap':'4px','width':'100%','box-sizing':'border-box','height':'52px','min-height':'52px','max-height':'52px','padding':'5px 6px','overflow':'hidden'});
@@ -1173,6 +1180,24 @@ style.textContent+=`
 }
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{
  grid-template-columns:minmax(0,1fr) 20px!important;column-gap:3px!important;
+}
+`;
+style.textContent+=`
+.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-personal .rating-value{
+ font-weight:800!important;font-variant-numeric:tabular-nums!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button{
+ pointer-events:auto!important;cursor:pointer!important;position:relative!important;z-index:10!important;
+ color:#aeb3bd!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button.is-bookmarked{
+ color:#f3c84e!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button.is-bookmarked svg{
+ fill:#f3c84e!important;stroke:#f3c84e!important;
+}
+.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>.cinelva-bookmark-button:not(.is-bookmarked) svg{
+ fill:none!important;
 }
 `;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};

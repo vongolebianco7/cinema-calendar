@@ -94,9 +94,10 @@
       const cinema=filtered.filter(r=>methodOf(r)==='映画館').length;
       const streaming=filtered.filter(r=>methodOf(r)==='配信').length;
       const avg=scored.length?(scored.reduce((a,b)=>a+b,0)/scored.length).toFixed(2):'—';
-      const other=filtered.length-cinema-streaming;
-      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館',cinema+'本'],['配信',streaming+'本'],['未設定・その他',other+'本']];
-      statsHost.setAttribute('aria-label','鑑賞方法：映画館'+cinema+'本、配信'+streaming+'本、未設定・その他'+other+'本、合計'+filtered.length+'本');
+      const unset=filtered.filter(r=>!methodOf(r)).length;
+      const other=filtered.length-cinema-streaming-unset;
+      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館',cinema+'本'],['配信',streaming+'本'],['未設定',unset+'本'],['その他',other+'本']];
+      statsHost.setAttribute('aria-label','鑑賞方法：映画館'+cinema+'本、配信'+streaming+'本、未設定'+unset+'本、その他'+other+'本、合計'+filtered.length+'本');
       statsHost.replaceChildren(...items.map(([label,value])=>{const card=document.createElement('div');card.className='cs-extra-stat';const l=document.createElement('span');l.textContent=label;const v=document.createElement('strong');v.textContent=value;card.append(l,v);return card;}));
     }
 

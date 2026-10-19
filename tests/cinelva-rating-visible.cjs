@@ -52,7 +52,7 @@ function inspectControls(root) {
    await page.waitForFunction(()=>document.querySelectorAll('#grid .card').length>0||document.querySelector('#status')?.textContent.includes('件'),null,{timeout:15000});
    const searchState=await page.evaluate(()=>({query:document.querySelector('.gSearch')?.value,status:document.querySelector('#status')?.textContent,cards:document.querySelectorAll('#grid .card').length,rateLoaded:Boolean(window.CinelvaQuickRate?.mountInline),movie:window.CinelvaRatingResolve?.(0),grid:document.querySelector('#grid')?.innerHTML.slice(0,350)}));
    console.log('search state',width,JSON.stringify({...searchState,requestFailures:searchRequests}));
-   const card=page.locator('#grid .card').first();
+   const card=page.locator('#grid .cinelva-rate-wrap').first();
    await card.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:15000});
    const live=await card.evaluate(inspectControls);
    console.log('search card',width,JSON.stringify(live));

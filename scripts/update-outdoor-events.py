@@ -49,7 +49,7 @@ def extract(url):
     if not page:
         return []
     results = []
-    scripts = re.findall(r'<script[^>]+type=[^>]*application/ld\\+json[^>]*>(.*?)</script>', page, re.I | re.S)
+    scripts = re.findall(r'<script[^>]+type=[^>]*application/ld\+json[^>]*>(.*?)</script>', page, re.I | re.S)
     for raw in scripts:
         try:
             nodes = list(objects(json.loads(html.unescape(raw))))

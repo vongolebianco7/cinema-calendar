@@ -301,6 +301,7 @@
     try { sessionStorage.setItem(TAB_STORAGE_KEY, tab); } catch (_) { /* Storage may be unavailable. */ }
     document.querySelectorAll('.tab').forEach(button => button.setAttribute('aria-selected', String(button.dataset.tab === tab)));
     document.querySelectorAll('.view').forEach(section => { section.hidden = section.id !== tab + 'View'; });
+    if (tab === 'summary') { renderCinemaSummary(); renderAwards(); renderDirectors(); }
     if (tab === 'world') drawWorld();
     if (tab === 'genres') renderGenres();
     if (tab === 'awards') renderAwards();
@@ -961,7 +962,7 @@
   async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));state.records=Records.all();populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }
   function bindEvents() {
     document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
-    $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
+    if($('addRecord')) $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
     $('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);
     $('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};
     $('movieQuery').oninput=event=>searchMovies(event.target.value);

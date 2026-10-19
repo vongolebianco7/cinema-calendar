@@ -22,6 +22,7 @@ on:
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
+      - "tests/cinelva-rankings-awards-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
       - "tests/test_my_cinemap_three_column_export.py"
@@ -69,6 +70,7 @@ on:
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
+      - "tests/cinelva-rankings-awards-browser.cjs"
       - "tests/cinelva-storage.test.cjs"
       - "tests/cinelva-backup.test.cjs"
       - "tests/test_my_cinemap_three_column_export.py"
@@ -158,6 +160,8 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-rankings-awards-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-rankings-awards-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
           node --test tests/cinelva-ocean-workflow-retirement.test.cjs

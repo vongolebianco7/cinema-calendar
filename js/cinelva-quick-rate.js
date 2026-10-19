@@ -195,7 +195,7 @@ function enhanceCalendar(grid){
  if(!grid)return;
  const decorate=(cards=grid.querySelectorAll('.streamMovie[data-mi],.tvMovie[data-mi]'))=>{
   for(const card of cards){
-   if(card.querySelector('.cinelva-rate-button'))continue;
+   if(card.querySelector('.cinelva-rate-button')||card.querySelector('.cinelva-rating-controls'))continue;
    const rate=document.createElement('button');rate.type='button';rate.className='cinelva-rate-button';
    rate.setAttribute('aria-label','この映画をレビュー');rate.innerHTML=reviewIcon;
    rate.onclick=event=>{
@@ -204,8 +204,11 @@ function enhanceCalendar(grid){
     const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
     if(!open(movie))rate.setAttribute('aria-label','作品IDを確認できません');
    };
+   const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
+   const movieId=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+   if(!validId(movieId))continue;
    card.append(rate);
-   attachInlineScore(rate,root.CinelvaRatingResolve?.(card.dataset.mi,'calendar'));
+   attachInlineScore(rate,movie);
   }
   refreshRatingLabels();
  };
@@ -223,6 +226,13 @@ function enhanceCalendar(grid){
  observer.observe(grid,{childList:true,subtree:true});
  decorate();
 }
+style.textContent+=`
+/* Streaming and theatrical movie tiles share one compact, aligned review area. */
+.streamingWeekMovies>.streamMovie{display:flex!important;flex-direction:column!important;min-width:0}
+.streamingWeekMovies>.streamMovie>.streamMovieTitle{flex:1 1 auto!important}
+.streamingWeekMovies>.streamMovie>.cinelva-rating-controls{margin-top:4px!important}
+.streamingWeekMovies>.streamMovie>.cinelva-rate-button{display:none!important}
+`;
 function attachInlineScore(button,movie) {
  const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
  if(!validId(id))return;

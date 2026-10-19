@@ -47,6 +47,8 @@ function inspectControls(root) {
    await page.route('**/api/movies?*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[],external:[]})}));
    await page.route('**/data/movies.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({movies:[{id:111,tmdbId:111,catalog:'tmdb',title:'スター・ウォーズ',year:1977,vote_average:7.2,vote_count:100}]})}));
    await page.goto('http://127.0.0.1:8765/search.html?search='+encodeURIComponent('スターウォーズ'),{waitUntil:'domcontentloaded'});
+   const searchState=await page.evaluate(()=>({query:document.querySelector('.gSearch')?.value,status:document.querySelector('#status')?.textContent,cards:document.querySelectorAll('#grid .card').length,rateLoaded:Boolean(window.CinelvaQuickRate?.mountInline),movie:window.CinelvaRatingResolve?.(0),grid:document.querySelector('#grid')?.innerHTML.slice(0,350)}));
+   console.log('search state',width,JSON.stringify(searchState));
    const card=page.locator('#grid .card').first();
    await card.locator('.cinelva-rating-controls').waitFor({state:'visible',timeout:15000});
    const live=await card.evaluate(inspectControls);

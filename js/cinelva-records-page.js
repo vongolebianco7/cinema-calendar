@@ -87,6 +87,17 @@
     if(state.year!==selectedYear)state.year=selectedYear;
     renderYearHeatmap();
     $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
+    const statsHost=$('csExtraStats');
+    if(statsHost){
+      const scored=filtered.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>0);
+      const methodOf=r=>String(r.viewingMethod||r.viewing_method||r.method||'').trim();
+      const cinema=filtered.filter(r=>methodOf(r)==='映画館').length;
+      const streaming=filtered.filter(r=>methodOf(r)==='配信').length;
+      const avg=scored.length?(scored.reduce((a,b)=>a+b,0)/scored.length).toFixed(2):'—';
+      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館 / 配信',cinema+' / '+streaming+'本'],['未評価',filtered.length-scored.length+'本']];
+      statsHost.replaceChildren(...items.map(([label,value])=>{const card=document.createElement('div');card.className='cs-extra-stat';const l=document.createElement('span');l.textContent=label;const v=document.createElement('strong');v.textContent=value;card.append(l,v);return card;}));
+    }
+
     $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';
     const prism='<svg class="cs-prism" viewBox="0 0 42 48" aria-hidden="true"><defs><linearGradient id="csFacetA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4e7f0"/><stop offset=".48" stop-color="#b6d8df"/><stop offset="1" stop-color="#8f9dc8"/></linearGradient><linearGradient id="csFacetB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5e8ee"/><stop offset="1" stop-color="#9cabc9"/></linearGradient></defs><path d="M21 2 37 10v28L21 46 5 38V10Z" fill="#b5c5da" stroke="#e2e5ef" stroke-width="1.1"/><path d="M21 2 37 10 21 18 5 10Z" fill="#e7dce9"/><path d="M5 10 21 18v28L5 38Z" fill="url(#csFacetA)"/><path d="M37 10 21 18v28l16-8Z" fill="url(#csFacetB)"/><path d="M21 2v16M5 10l16 8 16-8M21 18v28" stroke="#f4f4f8" stroke-width=".9" fill="none"/><path d="M10 15v19M33 14v20" stroke="#fff" stroke-opacity=".3" stroke-width=".8"/></svg>';
     $('csPrisms').innerHTML=prism.repeat(Math.floor(all.length/1000));

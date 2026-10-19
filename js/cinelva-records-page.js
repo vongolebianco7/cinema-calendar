@@ -1063,11 +1063,11 @@
       Object.assign(directorData,original);
     }
     state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
-    populateYears();bindEvents();drawYearCalendar();setTab('summary');
+    populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {
       const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);
-      if (savedTab) setTab(savedTab==='genres'||savedTab==='world'?'summary':savedTab);
+      setTab(savedTab==='genres'||savedTab==='world'?'summary':(savedTab||'summary'));
     } catch (_) { /* Private browsing can disable storage. */ }
     const params=new URLSearchParams(location.search),requestedId=params.get('record'),requestedTitle=params.get('title');
     if(!requestedId&&!requestedTitle&&params.get('tab')==='watchlist')setTab('watchlist');

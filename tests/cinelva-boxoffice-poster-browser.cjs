@@ -68,7 +68,7 @@ async function freePort() {
         priorRank = rank;
         const href = new URL(await card.locator('a.rankCard').getAttribute('href'), base);
         assert.equal(href.pathname, '/search.html', `box-office row ${index + 1} links to search`);
-        const normalizeMovieTitle=value=>value.normalize('NFKC').toLocaleLowerCase('ja').replace(/[\s・･]/gu,'');
+        const normalizeMovieTitle=value=>value.normalize('NFKC').toLocaleLowerCase('ja').replace(/[^\\p{L}\\p{N}]/gu,'');
         assert.equal(normalizeMovieTitle(href.searchParams.get('search')), normalizeMovieTitle(expected[index].title), `box-office row ${index + 1} links with the right title`);
         await page.waitForTimeout(10);
         assert.equal(await card.locator('img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');

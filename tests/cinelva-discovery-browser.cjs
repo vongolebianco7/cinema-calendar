@@ -65,6 +65,13 @@ async function ready(){
    const rating=result.locator('.cinelva-inline-score input');
    await rating.evaluate(input=>{input.value='4.2';input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));});
    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().find(x=>String(x.tmdbId??x.id)==='42')?.rating),4.2,'rating saves from discovery results');
+   const reviewDialog=page.locator('dialog.cinelva-rate-dialog');
+   await reviewDialog.waitFor({state:'visible'});
+   assert.equal(await page.locator('#cinelvaDatePicker').isVisible(),true,'new inline rating opens the date prompt');
+   const today=new Date();
+   const expectedToday=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+   assert.equal(await page.locator('#cinelvaRateDate').inputValue(),expectedToday,'new inline rating defaults its viewing date to today');
+   await page.locator('#cinelvaRateClose').click();
    await result.locator('.cinelva-rate-button').click();
    assert.equal(await page.locator('#cinelvaRateTitle').textContent(),'Discovery test film','review action opens the populated shared review dialog');
    await page.locator('#cinelvaRateComment').fill('Discovery review');

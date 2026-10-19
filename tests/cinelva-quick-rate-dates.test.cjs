@@ -37,7 +37,7 @@ function editor(initialDate, existing = true, identity = {}) {
   return { Records, element, actions: context.actions, dialog: context.dialog, context };
 }
 
-for (const date of ['2024', '2024-03', null]) {
+for (const date of ['2024', '2024-03']) {
   test(`editing rating and comment preserves existing viewing date ${JSON.stringify(date)}`, () => {
     const { Records, element, actions, dialog } = editor(date);
     element('cinelvaRateScore').value = '4.5';
@@ -58,22 +58,35 @@ test('choosing an explicit viewing day replaces a partial date', () => {
   assert.equal(Records.all()[0].watchedAt, '2024-05-06');
 });
 
-test('a new rating and comment do not invent a viewing day', () => {
+test('a new rating defaults the viewing date to today', () => {
   const { Records, element, actions } = editor(null, false);
-  assert.equal(element('cinelvaRateDate').value, '');
+  const now = new Date();
+  const today = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
+  assert.equal(element('cinelvaRateDate').value, today);
   element('cinelvaRateScore').value = '4.5';
   element('cinelvaRateComment').value = '日付不明の感想';
   actions.save();
-  assert.equal(Records.all()[0].watchedAt, null);
+  assert.equal(Records.all()[0].watchedAt, today);
   assert.equal(Records.all()[0].rating, 4.5);
   assert.equal(Records.all()[0].comment, '日付不明の感想');
 });
 
-test('a new review stores a viewing date only when explicitly selected', () => {
+test('an existing undated record also opens with today as the editable default', () => {
+  const { Records, element, actions } = editor(null, true);
+  const now = new Date();
+  const today = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
+  assert.equal(element('cinelvaRateDate').value, today);
+  actions.save();
+  assert.equal(Records.all()[0].watchedAt, today);
+});
+
+test('a new review keeps the default date when no alternate day is selected', () => {
   const { Records, element, actions } = editor(null, false);
+  const today = element('cinelvaRateDate').value;
   element('cinelvaRateDate').value = '2024-05-06';
   actions.save();
   assert.equal(Records.all()[0].watchedAt, '2024-05-06');
+  assert.notEqual(today, '');
 });
 
 

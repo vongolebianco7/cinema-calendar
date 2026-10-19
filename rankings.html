@@ -51,6 +51,17 @@ body{background:#090909}.rankCard{background:transparent!important;box-shadow:no
 }
 </style>
 
+<style id="cinelva-ranking-card-spacing-v2">
+/* Keep the poster card and the shared rating controls as one balanced visual unit. */
+.rankGrid>.rankReviewWrap,.rankGrid>.cinelva-rate-wrap{display:flex!important;flex-direction:column!important;gap:7px!important;height:100%!important;min-width:0}
+.rankGrid>.rankReviewWrap>.rankCard,.rankGrid>.cinelva-rate-wrap>.rankCard{flex:1 1 auto!important;min-height:0!important;margin:0!important}
+.rankGrid>.rankReviewWrap>[data-rank-review],.rankGrid>.rankReviewWrap>.cinelva-rate-wrap,
+.rankGrid>.cinelva-rate-wrap>.cinelva-rating-controls{margin:0!important}
+.rankGrid>.rankReviewWrap .cinelva-rating-controls,.rankGrid>.rankReviewWrap .cinelva-rating-pair,
+.rankGrid>.cinelva-rate-wrap .cinelva-rating-controls{min-width:0}
+.rankGrid .rankCard{border-radius:8px!important}
+@media(max-width:760px){.rankGrid>.rankReviewWrap,.rankGrid>.cinelva-rate-wrap{gap:7px!important}}
+</style>
 <link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <link rel="manifest" href="manifest.webmanifest">

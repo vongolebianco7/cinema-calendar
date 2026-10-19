@@ -180,7 +180,7 @@ async function search(){
   if(!key||seen.has(key))return false;seen.add(key);return true;
  }).slice(0,30);
  status.textContent="「"+term+"」 "+results.length+"件"+(errors===2?"（検索元を取得できませんでした）":"");
- grid.innerHTML=results.map((m,i)=>'<button class="card" data-i="'+i+'" style="padding:0;text-align:left"><div class="poster">'+(m.poster?'<img src="'+E(m.poster)+'" loading="lazy">':'')+'</div><div class="body"><div class="title">'+E(m.title)+'</div><div class="meta">'+E(movieReleaseYear(m)||"公開年未確認")+'</div><div class="score">TMDB ★ '+Number(m.score||0).toFixed(1)+'</div></div></button>').join("")||'<div class="status">該当作品なし</div>';
+ grid.innerHTML=results.map((m,i)=>'<button class="card" data-i="'+i+'" style="padding:0;text-align:left"><div class="poster">'+(m.poster?'<img src="'+E(m.poster)+'" loading="lazy">':'')+'</div><div class="body"><div class="title">'+E(m.title)+'</div><div class="meta">'+E(movieReleaseYear(m)||"公開年未確認")+'</div><div class="score">見た人の評価（TMDB） '+(Number(m.score)>0?(Number(m.score)/2).toFixed(1)+' / 5.0':'評価なし')+'</div></div></button>').join("")||'<div class="status">該当作品なし</div>';
  grid.querySelectorAll(".card[data-i]").forEach(card=>card.onclick=()=>openMovie(results[+card.dataset.i]));
 }
 function syncTrailUrl(m){const p=new URL(location.href);p.searchParams.set("id",movieTmdbId(m)||m.id||"");p.searchParams.set("search",m.title||"");history.replaceState(null,"",p)}

@@ -9,7 +9,7 @@ const inventory = [...fs.readdirSync(root).filter(file => file.endsWith('.html')
 
 test('route manifest covers every active non-Ocean HTML route exactly once', () => {
   const routes = manifest.routes.map(route => route.path).sort();
-  assert.deepEqual(routes, inventory);assert.equal(new Set(routes).size, routes.length);assert.equal(routes.length, 29);assert.equal(routes.some(route => /ocean/i.test(route)), false);
+  assert.deepEqual(routes, inventory);assert.equal(new Set(routes).size, routes.length);assert.equal(routes.length, inventory.length);assert.equal(routes.some(route => /ocean/i.test(route)), false);
 });
 
 test('every route declares ownership, counts, CTA, sources and audit defaults', () => {

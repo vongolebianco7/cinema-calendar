@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T15:40:00+09:00",
+  "updated_at": "2026-10-19T15:10:34+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "cb17bae79ca830dfe3fb0aa95a70a1a93de3b8af",
+  "base_sha": "f4278998f28cc726931b114f43a441bcceecdf29",
   "branch": "feat/unified-bookmarks-20261019",
-  "head_sha": "7175f39a69e7f5dc7ecb16a480dd71af95731655",
+  "head_sha": "6503c2abc5d5b75f7f4fcd58ca5b4bb009a26dd3",
   "pull_request": 401,
   "work_items": [
     {
@@ -540,7 +540,8 @@
         "latest_code_sha": "0f5cf0417aaae91e37f8dda104c145fbca44d5a2"
       },
       "acceptance": "Every visible discovery tab/preset/filter produces its expected content or query; all movie tiles show poster or fallback and expose shared controls; browser journey passes on Chromium/WebKit at mobile and desktop widths; production is verified after merge/deploy.",
-      "ci": "Read-only live smoke confirms 8 theatrical + 119 catalog cards; AI/condition tabs and SF results (2,350 total; 20 visible) work; availability filters split the catalog 22 fresh / 97 unconfirmed and restore 119. Zero shared rating/review/bookmark controls in sampled cards is a live P0. Local quality gate 178/178 Node tests plus Python/data/compliance/UI gates passed. Expanded browser CI pending. PR conflicts with latest main in seven overlapping source files; production remains v1.5.8. Live follow-up also confirmed the 90s preset returns 10 catalog results and zero theatrical matches; selecting Christopher Nolan from person search returns 8 filmography cards. Those person cards also have zero shared controls on v1.5.8. New Chromium/WebKit regression covers person search and shared controls; local browser execution is unavailable. Conflict-integration probe against latest main found a new active `events.html` absent from the current 29-route manifest, so route inventory must be regenerated to 30 at merge. That merge also must preserve main's current quick-rate behavior; its browser/UI integration remains unverified."
+      "ci": "Read-only live smoke confirms 8 theatrical + 119 catalog cards; AI/condition tabs and SF results (2,350 total; 20 visible) work; availability filters split the catalog 22 fresh / 97 unconfirmed and restore 119. Zero shared rating/review/bookmark controls in sampled cards is a live P0. Local quality gate 178/178 Node tests plus Python/data/compliance/UI gates passed. Expanded browser CI pending. PR conflicts with latest main in seven overlapping source files; production remains v1.5.8. Live follow-up also confirmed the 90s preset returns 10 catalog results and zero theatrical matches; selecting Christopher Nolan from person search returns 8 filmography cards. Those person cards also have zero shared controls on v1.5.8. New Chromium/WebKit regression covers person search and shared controls; local browser execution is unavailable. Conflict-integration probe against latest main found a new active `events.html` absent from the current 29-route manifest, so route inventory must be regenerated to 30 at merge. That merge also must preserve main's current quick-rate behavior; its browser/UI integration remains unverified.",
+      "latest": "Poster fallback, common controls on finder/person results, preset/filter regression coverage, and director-search Playwright checks are committed in PR #401. Local integrated quality gate passes; browser CI and production verification remain pending."
     }
   ],
   "verification": [
@@ -620,6 +621,10 @@
     {
       "check": "Latest-main conflict and route inventory probe",
       "result": "Read-only merge-tree showed seven overlapping source conflicts. A local merged-tree probe exposed events.html as a 30th active HTML route not yet listed in the 29-route manifest. Route manifest and source inventory were regenerated in the isolated probe; related regression expectation was made count-dynamic. Quick-rate merge still needs browser and full CI validation; no integration commit or deploy was made."
+    },
+    {
+      "check": "PR #401 latest-main integration and route inventory",
+      "result": "Resolved all seven source conflicts in an isolated integration worktree while keeping main behavior and PR shared operations. Added main’s active events.html as route 30 and its brand/PWA metadata; regenerated source inventory (30 routes, 34 source files, 666 controls, 276 operation lines). Fixed inline-review edits to preserve unknown viewing dates instead of silently assigning today, and updated the regression harness to include the current venue/date editor. Full python scripts/quality_gate.py passed locally after integration. Browser journey awaits PR Actions; production remains unchanged and Vercel build-rate-limit blocks deployment."
     }
   ],
   "deployment": {
@@ -640,6 +645,6 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [],
-  "next_action": "Resolve the seven conflicts semantically, including main's new events.html as active route 30; regenerate route manifest and UI inventory, preserve main's newer fixes plus PR common controls, then run local quality and Chromium/WebKit CI. Keep production unchanged while Vercel reports build-rate-limit.",
+  "next_action": "Push the locally validated merge of latest main into PR #401, wait for the existing Chromium/WebKit Actions to report, then inspect discovery and common-control regressions. Do not deploy while Vercel build-rate-limit remains active. Continue the route/tab inventory and only mark live items complete after production verification.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

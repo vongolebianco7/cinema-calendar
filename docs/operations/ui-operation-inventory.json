@@ -8,7 +8,7 @@
       "purpose": "calendar",
       "controls": [
         {
-          "line": 247,
+          "line": 255,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -17,7 +17,7 @@
           }
         },
         {
-          "line": 249,
+          "line": 257,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -29,7 +29,7 @@
           }
         },
         {
-          "line": 250,
+          "line": 258,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -38,7 +38,7 @@
           }
         },
         {
-          "line": 252,
+          "line": 260,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -47,7 +47,7 @@
           }
         },
         {
-          "line": 256,
+          "line": 264,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -56,7 +56,7 @@
           }
         },
         {
-          "line": 256,
+          "line": 264,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -65,49 +65,49 @@
           }
         },
         {
-          "line": 257,
+          "line": 265,
           "tag": "a",
           "attributes": {
             "href": "index.html"
           }
         },
         {
-          "line": 258,
+          "line": 266,
           "tag": "a",
           "attributes": {
             "href": "discover.html"
           }
         },
         {
-          "line": 259,
+          "line": 267,
           "tag": "a",
           "attributes": {
             "href": "rankings.html"
           }
         },
         {
-          "line": 260,
+          "line": 268,
           "tag": "a",
           "attributes": {
             "href": "theaters.html"
           }
         },
         {
-          "line": 261,
+          "line": 269,
           "tag": "a",
           "attributes": {
             "href": "experience.html"
           }
         },
         {
-          "line": 262,
+          "line": 270,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/"
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "discover.html",
@@ -115,7 +115,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "experience.html",
@@ -123,7 +123,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "rankings.html",
@@ -131,7 +131,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/",
@@ -139,7 +139,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -149,7 +149,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -159,7 +159,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -169,7 +169,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -179,7 +179,17 @@
           }
         },
         {
-          "line": 267,
+          "line": 274,
+          "tag": "button",
+          "attributes": {
+            "type": "button",
+            "class": "modeTab",
+            "data-mode": "events",
+            "onclick": "setMode('events')"
+          }
+        },
+        {
+          "line": 275,
           "tag": "a",
           "attributes": {
             "class": "revivalEditorialLink",
@@ -187,28 +197,28 @@
           }
         },
         {
-          "line": 267,
+          "line": 275,
           "tag": "button",
           "attributes": {
             "id": "prev"
           }
         },
         {
-          "line": 267,
+          "line": 275,
           "tag": "button",
           "attributes": {
             "id": "next"
           }
         },
         {
-          "line": 268,
+          "line": 276,
           "tag": "a",
           "attributes": {
             "href": "credits.html"
           }
         },
         {
-          "line": 269,
+          "line": 277,
           "tag": "button",
           "attributes": {
             "class": "close",
@@ -1009,7 +1019,7 @@
       "purpose": "rankings and awards",
       "controls": [
         {
-          "line": 109,
+          "line": 155,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1018,7 +1028,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -1030,7 +1040,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -1039,7 +1049,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -1048,7 +1058,7 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1057,7 +1067,7 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -1066,49 +1076,49 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "index.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "discover.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "rankings.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "theaters.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "experience.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/"
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip active",
@@ -1116,7 +1126,7 @@
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip",
@@ -1124,7 +1134,7 @@
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip",
@@ -1132,12 +1142,12 @@
           }
         },
         {
-          "line": 114,
+          "line": 160,
           "tag": "summary",
           "attributes": {}
         },
         {
-          "line": 116,
+          "line": 162,
           "tag": "button",
           "attributes": {
             "class": "moreBtn",
@@ -1875,7 +1885,7 @@
       "purpose": "viewing records and insights",
       "controls": [
         {
-          "line": 767,
+          "line": 780,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1884,7 +1894,7 @@
           }
         },
         {
-          "line": 769,
+          "line": 782,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -1896,7 +1906,7 @@
           }
         },
         {
-          "line": 770,
+          "line": 783,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -1905,7 +1915,7 @@
           }
         },
         {
-          "line": 772,
+          "line": 785,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -1914,7 +1924,7 @@
           }
         },
         {
-          "line": 776,
+          "line": 789,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -1923,7 +1933,7 @@
           }
         },
         {
-          "line": 776,
+          "line": 789,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -1932,54 +1942,54 @@
           }
         },
         {
-          "line": 777,
+          "line": 790,
           "tag": "a",
           "attributes": {
             "href": "../index.html"
           }
         },
         {
-          "line": 778,
+          "line": 791,
           "tag": "a",
           "attributes": {
             "href": "../discover.html"
           }
         },
         {
-          "line": 779,
+          "line": 792,
           "tag": "a",
           "attributes": {
             "href": "../rankings.html"
           }
         },
         {
-          "line": 780,
+          "line": 793,
           "tag": "a",
           "attributes": {
             "href": "../theaters.html"
           }
         },
         {
-          "line": 781,
+          "line": 794,
           "tag": "a",
           "attributes": {
             "href": "../experience.html"
           }
         },
         {
-          "line": 782,
+          "line": 795,
           "tag": "a",
           "attributes": {
             "href": "./"
           }
         },
         {
-          "line": 786,
+          "line": 799,
           "tag": "summary",
           "attributes": {}
         },
         {
-          "line": 786,
+          "line": 799,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -1987,7 +1997,7 @@
           }
         },
         {
-          "line": 786,
+          "line": 799,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -1995,7 +2005,7 @@
           }
         },
         {
-          "line": 786,
+          "line": 799,
           "tag": "a",
           "attributes": {
             "class": "button",
@@ -2003,7 +2013,7 @@
           }
         },
         {
-          "line": 786,
+          "line": 799,
           "tag": "input",
           "attributes": {
             "id": "importFile",
@@ -2013,7 +2023,7 @@
           }
         },
         {
-          "line": 790,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2023,7 +2033,7 @@
           }
         },
         {
-          "line": 790,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2033,7 +2043,7 @@
           }
         },
         {
-          "line": 790,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2043,7 +2053,7 @@
           }
         },
         {
-          "line": 790,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2053,7 +2063,7 @@
           }
         },
         {
-          "line": 790,
+          "line": 803,
           "tag": "button",
           "attributes": {
             "class": "tab",
@@ -2063,7 +2073,7 @@
           }
         },
         {
-          "line": 791,
+          "line": 804,
           "tag": "select",
           "attributes": {
             "id": "csPeriod",
@@ -2071,7 +2081,7 @@
           }
         },
         {
-          "line": 791,
+          "line": 804,
           "tag": "input",
           "attributes": {
             "id": "recordSearch",
@@ -2080,7 +2090,7 @@
           }
         },
         {
-          "line": 791,
+          "line": 804,
           "tag": "select",
           "attributes": {
             "id": "recordSort",
@@ -2088,7 +2098,7 @@
           }
         },
         {
-          "line": 791,
+          "line": 804,
           "tag": "select",
           "attributes": {
             "id": "recordYear",
@@ -2096,49 +2106,49 @@
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "select",
           "attributes": {
             "id": "calendarMode"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "id": "monthPrev"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "id": "monthNext"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "select",
           "attributes": {
             "id": "worldYear"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "select",
           "attributes": {
             "id": "worldGenre"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "select",
           "attributes": {
             "id": "worldCountry"
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2147,7 +2157,7 @@
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2156,7 +2166,7 @@
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2164,7 +2174,7 @@
           }
         },
         {
-          "line": 792,
+          "line": 805,
           "tag": "button",
           "attributes": {
             "class": "button",
@@ -2173,35 +2183,35 @@
           }
         },
         {
-          "line": 793,
+          "line": 806,
           "tag": "select",
           "attributes": {
             "id": "genreFormat"
           }
         },
         {
-          "line": 793,
+          "line": 806,
           "tag": "select",
           "attributes": {
             "id": "genreWorkForm"
           }
         },
         {
-          "line": 794,
+          "line": 807,
           "tag": "select",
           "attributes": {
             "id": "awardMode"
           }
         },
         {
-          "line": 794,
+          "line": 807,
           "tag": "select",
           "attributes": {
             "id": "awardCategory"
           }
         },
         {
-          "line": 794,
+          "line": 807,
           "tag": "input",
           "attributes": {
             "id": "awardOther",
@@ -2209,7 +2219,7 @@
           }
         },
         {
-          "line": 794,
+          "line": 807,
           "tag": "a",
           "attributes": {
             "class": "award-ranking-link",
@@ -2217,21 +2227,21 @@
           }
         },
         {
-          "line": 798,
+          "line": 811,
           "tag": "a",
           "attributes": {
             "href": "../data-backup.html"
           }
         },
         {
-          "line": 798,
+          "line": 811,
           "tag": "a",
           "attributes": {
             "href": "../privacy.html"
           }
         },
         {
-          "line": 801,
+          "line": 814,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2241,7 +2251,7 @@
           }
         },
         {
-          "line": 803,
+          "line": 816,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2250,7 +2260,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2259,7 +2269,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "input",
           "attributes": {
             "id": "movieQuery",
@@ -2269,7 +2279,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "input",
           "attributes": {
             "id": "watchedAt",
@@ -2281,14 +2291,14 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "select",
           "attributes": {
             "id": "viewingMethod"
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "textarea",
           "attributes": {
             "id": "recordComment",
@@ -2297,7 +2307,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "input",
           "attributes": {
             "id": "rating",
@@ -2309,7 +2319,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -2319,7 +2329,7 @@
           }
         },
         {
-          "line": 805,
+          "line": 818,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -3043,7 +3053,7 @@
       "purpose": "calendar",
       "controls": [
         {
-          "line": 247,
+          "line": 255,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -3052,7 +3062,7 @@
           }
         },
         {
-          "line": 249,
+          "line": 257,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -3064,7 +3074,7 @@
           }
         },
         {
-          "line": 250,
+          "line": 258,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -3073,7 +3083,7 @@
           }
         },
         {
-          "line": 252,
+          "line": 260,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -3082,7 +3092,7 @@
           }
         },
         {
-          "line": 256,
+          "line": 264,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -3091,7 +3101,7 @@
           }
         },
         {
-          "line": 256,
+          "line": 264,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -3100,49 +3110,49 @@
           }
         },
         {
-          "line": 257,
+          "line": 265,
           "tag": "a",
           "attributes": {
             "href": "index.html"
           }
         },
         {
-          "line": 258,
+          "line": 266,
           "tag": "a",
           "attributes": {
             "href": "discover.html"
           }
         },
         {
-          "line": 259,
+          "line": 267,
           "tag": "a",
           "attributes": {
             "href": "rankings.html"
           }
         },
         {
-          "line": 260,
+          "line": 268,
           "tag": "a",
           "attributes": {
             "href": "theaters.html"
           }
         },
         {
-          "line": 261,
+          "line": 269,
           "tag": "a",
           "attributes": {
             "href": "experience.html"
           }
         },
         {
-          "line": 262,
+          "line": 270,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/"
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "discover.html",
@@ -3150,7 +3160,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "experience.html",
@@ -3158,7 +3168,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "rankings.html",
@@ -3166,7 +3176,7 @@
           }
         },
         {
-          "line": 265,
+          "line": 273,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/",
@@ -3174,7 +3184,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -3184,7 +3194,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -3194,7 +3204,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -3204,7 +3214,7 @@
           }
         },
         {
-          "line": 266,
+          "line": 274,
           "tag": "button",
           "attributes": {
             "type": "button",
@@ -3214,7 +3224,17 @@
           }
         },
         {
-          "line": 267,
+          "line": 274,
+          "tag": "button",
+          "attributes": {
+            "type": "button",
+            "class": "modeTab",
+            "data-mode": "events",
+            "onclick": "setMode('events')"
+          }
+        },
+        {
+          "line": 275,
           "tag": "a",
           "attributes": {
             "class": "revivalEditorialLink",
@@ -3222,28 +3242,28 @@
           }
         },
         {
-          "line": 267,
+          "line": 275,
           "tag": "button",
           "attributes": {
             "id": "prev"
           }
         },
         {
-          "line": 267,
+          "line": 275,
           "tag": "button",
           "attributes": {
             "id": "next"
           }
         },
         {
-          "line": 268,
+          "line": 276,
           "tag": "a",
           "attributes": {
             "href": "credits.html"
           }
         },
         {
-          "line": 269,
+          "line": 277,
           "tag": "button",
           "attributes": {
             "class": "close",
@@ -4044,7 +4064,7 @@
       "purpose": "rankings and awards",
       "controls": [
         {
-          "line": 109,
+          "line": 155,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -4053,7 +4073,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "input",
           "attributes": {
             "class": "gSearch",
@@ -4065,7 +4085,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "button",
           "attributes": {
             "class": "gSearchBtn",
@@ -4074,7 +4094,7 @@
           }
         },
         {
-          "line": 109,
+          "line": 155,
           "tag": "button",
           "attributes": {
             "class": "gMenuBtn",
@@ -4083,7 +4103,7 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "class": "gBrand",
@@ -4092,7 +4112,7 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "button",
           "attributes": {
             "class": "gDrawerClose",
@@ -4101,49 +4121,49 @@
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "index.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "discover.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "rankings.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "theaters.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "experience.html"
           }
         },
         {
-          "line": 110,
+          "line": 156,
           "tag": "a",
           "attributes": {
             "href": "my-cinelva/"
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip active",
@@ -4151,7 +4171,7 @@
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip",
@@ -4159,7 +4179,7 @@
           }
         },
         {
-          "line": 112,
+          "line": 158,
           "tag": "button",
           "attributes": {
             "class": "chip",
@@ -4167,12 +4187,12 @@
           }
         },
         {
-          "line": 114,
+          "line": 160,
           "tag": "summary",
           "attributes": {}
         },
         {
-          "line": 116,
+          "line": 162,
           "tag": "button",
           "attributes": {
             "class": "moreBtn",
@@ -5602,6 +5622,107 @@
       "scripts": [
         "js/theme.js"
       ]
+    },
+    {
+      "route": "events.html",
+      "effective_source": "events.html",
+      "purpose": "film festivals and outdoor screenings",
+      "controls": [
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "class": "brand",
+            "href": "index.html",
+            "aria-label": "Cinelva"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "href": "index.html"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "href": "index.html"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "href": "index.html"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "href": "index.html"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "href": "index.html"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "a",
+          "attributes": {
+            "class": "active",
+            "href": "events.html",
+            "aria-current": "page"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "button",
+          "attributes": {
+            "class": "active",
+            "data-area": "all"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "button",
+          "attributes": {
+            "data-area": "東京"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "button",
+          "attributes": {
+            "data-area": "神奈川"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "button",
+          "attributes": {
+            "id": "prev",
+            "aria-label": "前の月"
+          }
+        },
+        {
+          "line": 6,
+          "tag": "button",
+          "attributes": {
+            "id": "next",
+            "aria-label": "次の月"
+          }
+        }
+      ],
+      "scripts": [
+        "js/theme.js"
+      ]
     }
   ],
   "sources": [
@@ -5883,15 +6004,15 @@
           "source_excerpt": "<style id=\"discover-unified-shelf\">.availabilityTabs{display:flex;gap:7px;margin:10px 0;flex-wrap:wrap}.availabilityTab{border:1px solid var(--line);border-radius:20px;padding:8px 15px;background:var(--panel);color:var(--text);font-weight:700}.availabilityTab.active{background:var(--text);color:var(--bg);border-color:var(--text)}.availabilityNote{font-size:12px;color:var(--muted);margin:0 0 12px}.presetShelfGrid{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;flex-wr",
           "tokens": [
             {
-              "column": 983,
+              "column": 1258,
               "operation": "<input class=\"gSearch\" name=\"search\" type=\"search\" placeholder=\"作品を検索\" aria-"
             },
             {
-              "column": 1073,
+              "column": 1348,
               "operation": "<button class=\"gSearchBtn\" aria-label=\"検索\">⌕</button></form><button class=\"gM"
             },
             {
-              "column": 1133,
+              "column": 1408,
               "operation": "<button class=\"gMenuBtn\" id=\"gMenuBtn\" aria-label=\"メニュー\"><span class=\"gMenuLi"
             }
           ]
@@ -6200,7 +6321,7 @@
         },
         {
           "line": 115,
-          "source_excerpt": "function popularCardHtml(m,kind){const id=m.tmdbId||m.id||\"\",title=m.title||\"\",year=m.year||String(m.date||\"\").slice(0,4),score=Number(m.score||0),poster=m.poster||\"\";return '<button class=\"presetCard\" data-popular-kind=\"'+kind+'\" data-popular-id=\"'+E(id)+'\"><div class=\"presetCardPoster\">'+(poster?'<img loading=\"lazy\" src=\"'+E(poster)+'\">':'')+'</div><div class=\"presetCardBody\"><div class=\"presetCardTitle\">'+E(title)+'</div><div class=\"presetCardMeta\">'+E(year)+(score?' · TMDB ★ '+score.toFixed(",
+          "source_excerpt": "function popularCardHtml(m,kind){const id=m.tmdbId||m.id||\"\",title=m.title||\"\",year=m.year||String(m.date||\"\").slice(0,4),score=Number(m.score||0),poster=m.poster||\"\";return '<button class=\"presetCard\" data-popular-kind=\"'+kind+'\" data-popular-id=\"'+E(id)+'\"><div class=\"presetCardPoster\">'+(poster?'<img loading=\"lazy\" src=\"'+E(poster)+'\" alt=\"\" onerror=\"this.hidden=true;this.nextElementSibling.hidden=false\"><span class=\"posterFallback\" hidden>ポスター未取得</span>':'<span class=\"posterFallback\">ポスター未取得",
           "tokens": [
             {
               "column": 176,
@@ -6230,21 +6351,21 @@
         },
         {
           "line": 186,
-          "source_excerpt": "function render(){$(\"#grid\").innerHTML=items.map(m=>'<button class=\"card\" data-id=\"'+m.tmdbId+'\"><div class=\"poster\">'+(m.poster?'<img loading=\"lazy\" src=\"'+E(m.poster)+'\">':'')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title)+'</div><div class=\"meta\">'+E(m.year||\"\")+\" · TMDB ★ \"+Number(m.score||0).toFixed(1)+'</div></div></button>').join(\"\")||'<div class=\"empty\">条件に合う作品がありません。</div>';document.querySelectorAll(\"#grid .card\").forEach(b=>b.onclick=()=>{const movie=items.find(x=>String(x.tm",
+          "source_excerpt": "function render(){$(\"#grid\").innerHTML=items.map(m=>'<button class=\"card\" data-id=\"'+m.tmdbId+'\"><div class=\"poster\">'+(m.poster?'<img loading=\"lazy\" src=\"'+E(m.poster)+'\" alt=\"\" onerror=\"this.hidden=true;this.nextElementSibling.hidden=false\"><span class=\"posterFallback\" hidden>ポスター未取得</span>':'<span class=\"posterFallback\">ポスター未取得</span>')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title)+'</div><div class=\"meta\">'+E(m.year||\"\")+\" · TMDB ★ \"+Number(m.score||0).toFixed(1)+'</div></div></bu",
           "tokens": [
             {
               "column": 54,
               "operation": "<button class=\"card\" data-id=\"'+m.tmdbId+'\"><div class=\"poster\">'+(m.poster?'"
             },
             {
-              "column": 450,
+              "column": 614,
               "operation": ".onclick=()=>{const movie=items.find(x=>String(x.tmdbId)===b.dataset.id),p=new "
             }
           ]
         },
         {
           "line": 188,
-          "source_excerpt": "function personCardHtml(m){return '<button class=\"personFeatureCard\" data-person-movie=\"'+E(m.tmdbId||m.id||\"\")+'\"><div class=\"poster\">'+(m.poster?'<img loading=\"lazy\" src=\"'+E(m.poster)+'\">':'')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title||\"\")+'</div><div class=\"meta\">'+E(m.year||\"\")+' · ★ '+Number(m.score||0).toFixed(1)+'</div></div></button>'}",
+          "source_excerpt": "function personCardHtml(m){return '<button class=\"personFeatureCard\" data-person-movie=\"'+E(m.tmdbId||m.id||\"\")+'\"><div class=\"poster\">'+(m.poster?'<img loading=\"lazy\" src=\"'+E(m.poster)+'\" alt=\"\" onerror=\"this.hidden=true;this.nextElementSibling.hidden=false\"><span class=\"posterFallback\" hidden>ポスター未取得</span>':'<span class=\"posterFallback\">ポスター未取得</span>')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title||\"\")+'</div><div class=\"meta\">'+E(m.year||\"\")+' · ★ '+Number(m.score||0).toFixed(1)+",
           "tokens": [
             {
               "column": 36,
@@ -6349,6 +6470,75 @@
             {
               "column": 363,
               "operation": ".onclick=c})();</script><script src=\"js/movie-grid-sort.js?v=20260927-sort-v3\" "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "events.html",
+      "operations": [
+        {
+          "line": 6,
+          "source_excerpt": "</style></head><body><header><div class=\"wrap nav\"><a class=\"brand\" href=\"index.html\" aria-label=\"Cinelva\"><img src=\"assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\" style=\"width:32px;height:32px;object-fit:contain\"><span>Cinelva</span></a><a href=\"index.html\">映画カレンダーに戻る ↗</a></div></header><main class=\"wrap\"><h1>映画カレンダー</h1><p class=\"lead\">東京・神奈川の野外映画祭・屋外上映イベント</p><nav class=\"tabs\" aria-label=\"カレンダーの種類\"><a href=\"index.html\" >劇場公開</a><a href=\"index.html\">配信公開</a><a href=\"index.html\">テレビ放映",
+          "tokens": [
+            {
+              "column": 638,
+              "operation": "<button class=\"active\" data-area=\"all\">すべて</button><button data-area=\"東京\">東京<"
+            },
+            {
+              "column": 689,
+              "operation": "<button data-area=\"東京\">東京</button><button data-area=\"神奈川\">神奈川</button></div><"
+            },
+            {
+              "column": 723,
+              "operation": "<button data-area=\"神奈川\">神奈川</button></div><div class=\"layout\"><section class="
+            },
+            {
+              "column": 829,
+              "operation": "<button id=\"prev\" aria-label=\"前の月\">‹</button><strong id=\"month\"></strong><but"
+            },
+            {
+              "column": 902,
+              "operation": "<button id=\"next\" aria-label=\"次の月\">›</button></div><div class=\"week\"><span>月<"
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "source_excerpt": "let events=[];const TMDB_POSTER_CACHE_KEY=\"cinelva.events.posters.v1\";let posterCache={};try{posterCache=JSON.parse(localStorage.getItem(TMDB_POSTER_CACHE_KEY)||\"{}\")}catch(e){}",
+          "tokens": [
+            {
+              "column": 117,
+              "operation": "localStorage.getItem(TMDB_POSTER_CACHE_KEY)||\"{}\")}catch(e){}"
+            }
+          ]
+        },
+        {
+          "line": 21,
+          "source_excerpt": "async function hydratePosters(){const titles=[...new Set(events.filter(e=>e.movie&&!e.poster_url).map(e=>e.movie))];let changed=false;let cursor=0;const norm=x=>String(x||\"\").normalize(\"NFKC\").toLowerCase().replace(/[\\\\s・:：!！?？'’\"“”()（）-]/g,\"\");async function worker(){while(cursor<titles.length){const title=titles[cursor++];if(Object.prototype.hasOwnProperty.call(posterCache,title))continue;try{const res=await fetch(\"https://backend-one-gray-94.vercel.app/api/movies?\"+new URLSearchParams({q:titl",
+          "tokens": [
+            {
+              "column": 1108,
+              "operation": "localStorage.setItem(TMDB_POSTER_CACHE_KEY,JSON.stringify(posterCache))}catch(e){}r"
+            }
+          ]
+        },
+        {
+          "line": 24,
+          "source_excerpt": "$(\"#prev\").onclick=()=>{view.setMonth(view.getMonth()-1);render()};$(\"#next\").onclick=()=>{view.setMonth(view.getMonth()+1);render()};document.querySelectorAll(\"[data-area]\").forEach(b=>b.onclick=()=>{area=b.dataset.area;document.querySelectorAll(\"[data-area]\").forEach(x=>x.classList.toggle(\"active\",x===b));render()});loadEvents();",
+          "tokens": [
+            {
+              "column": 11,
+              "operation": ".onclick=()=>{view.setMonth(view.getMonth()-1);render()};$(\"#next\").onclick=()="
+            },
+            {
+              "column": 78,
+              "operation": ".onclick=()=>{view.setMonth(view.getMonth()+1);render()};document.querySelector"
+            },
+            {
+              "column": 188,
+              "operation": ".onclick=()=>{area=b.dataset.area;document.querySelectorAll(\"[data-area]\").forE"
             }
           ]
         }
@@ -6541,7 +6731,7 @@
       "file": "index.html",
       "operations": [
         {
-          "line": 249,
+          "line": 257,
           "source_excerpt": "<input class=\"gSearch\" name=\"search\" type=\"search\" placeholder=\"作品・映画館を検索\" autocomplete=\"off\" aria-label=\"作品・映画館を検索\">",
           "tokens": [
             {
@@ -6551,7 +6741,7 @@
           ]
         },
         {
-          "line": 250,
+          "line": 258,
           "source_excerpt": "<button class=\"gSearchBtn\" type=\"submit\" aria-label=\"検索\">⌕</button>",
           "tokens": [
             {
@@ -6561,7 +6751,7 @@
           ]
         },
         {
-          "line": 252,
+          "line": 260,
           "source_excerpt": "<button class=\"gMenuBtn\" id=\"gMenuBtn\" aria-label=\"メニュー\"><span class=\"gMenuLines\" aria-hidden=\"true\"></span></button>",
           "tokens": [
             {
@@ -6571,7 +6761,7 @@
           ]
         },
         {
-          "line": 256,
+          "line": 264,
           "source_excerpt": "<div class=\"gDrawerHead\"><a class=\"gBrand\" href=\"index.html\" aria-label=\"Cinelva\"><img class=\"gBrandImage\" src=\"assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\"><span class=\"gBrandWord\">Cinelva</span></a><button class=\"gDrawerClose\" id=\"gDrawerClose\" aria-label=\"閉じる\">×</button></div>",
           "tokens": [
             {
@@ -6581,8 +6771,8 @@
           ]
         },
         {
-          "line": 266,
-          "source_excerpt": "<div class=\"modeTabs\"><button type=\"button\" class=\"modeTab\" data-mode=\"theatrical\" onclick=\"setMode('theatrical')\"> 劇場公開</button><button type=\"button\" class=\"modeTab active\" data-mode=\"streaming\" onclick=\"setMode('streaming')\"> 配信公開</button><button type=\"button\" class=\"modeTab\" data-mode=\"tv\" onclick=\"setMode('tv')\">テレビ放映</button><button type=\"button\" class=\"modeTab\" data-mode=\"festival\" onclick=\"setMode('festival')\">映画祭</button></div><div class=\"chips\" id=\"chips\"></div><p class=\"calendarCoverag",
+          "line": 274,
+          "source_excerpt": "<div class=\"modeTabs\"><button type=\"button\" class=\"modeTab\" data-mode=\"theatrical\" onclick=\"setMode('theatrical')\"> 劇場公開</button><button type=\"button\" class=\"modeTab active\" data-mode=\"streaming\" onclick=\"setMode('streaming')\"> 配信公開</button><button type=\"button\" class=\"modeTab\" data-mode=\"tv\" onclick=\"setMode('tv')\">テレビ放映</button><button type=\"button\" class=\"modeTab\" data-mode=\"festival\" onclick=\"setMode('festival')\">映画祭</button><button type=\"button\" class=\"modeTab\" data-mode=\"events\" onclick=\"s",
           "tokens": [
             {
               "column": 23,
@@ -6599,11 +6789,15 @@
             {
               "column": 333,
               "operation": "<button type=\"button\" class=\"modeTab\" data-mode=\"festival\" onclick=\"setMode('"
+            },
+            {
+              "column": 434,
+              "operation": "<button type=\"button\" class=\"modeTab\" data-mode=\"events\" onclick=\"setMode('ev"
             }
           ]
         },
         {
-          "line": 267,
+          "line": 275,
           "source_excerpt": "<section class=\"section\"><div class=\"sectionHead\"><h2>カレンダー</h2><a class=\"revivalEditorialLink\" href=\"revivals.html\">劇場公開の特集：再上映情報 →</a></div><div class=\"legend\" id=\"legend\"></div><div class=\"calendar\"><div class=\"calHead\"><button id=\"prev\">‹</button><strong id=\"month\"></strong><button id=\"next\">›</button></div><div class=\"days\" id=\"weekdays\"><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div></div><div class=\"dates\" id=\"dates\"></div></div></section>",
           "tokens": [
             {
@@ -6617,7 +6811,7 @@
           ]
         },
         {
-          "line": 269,
+          "line": 277,
           "source_excerpt": "<div class=\"modal\" id=\"modal\"><div class=\"sheet\"><button class=\"close\" id=\"close\">×</button><div id=\"detail\"></div></div></div>",
           "tokens": [
             {
@@ -6627,7 +6821,7 @@
           ]
         },
         {
-          "line": 274,
+          "line": 282,
           "source_excerpt": "const savedMode=localStorage.getItem(\"cinemaNow.mode\");",
           "tokens": [
             {
@@ -6637,7 +6831,7 @@
           ]
         },
         {
-          "line": 275,
+          "line": 283,
           "source_excerpt": "const savedActive=localStorage.getItem(\"cinemaNow.active\");",
           "tokens": [
             {
@@ -6647,7 +6841,7 @@
           ]
         },
         {
-          "line": 299,
+          "line": 307,
           "source_excerpt": "$(\"#chips\").innerHTML=ss.map(s=>'<button class=\"chip '+(s===active?'active':'')+'\" data-s=\"'+s+'\">'+s+'</button>').join(\"\");",
           "tokens": [
             {
@@ -6657,7 +6851,7 @@
           ]
         },
         {
-          "line": 300,
+          "line": 308,
           "source_excerpt": "document.querySelectorAll(\".chip\").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem(\"cinemaNow.active\",active);render()})",
           "tokens": [
             {
@@ -6671,17 +6865,17 @@
           ]
         },
         {
-          "line": 303,
+          "line": 311,
           "source_excerpt": "function renderCards(){let a=filtered(),groups=new Map();for(let m of a){let k=m.id?(\"id:\"+m.id):(\"title:\"+m.title);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m)}let cards=[...groups.values()];$(\"#count\").textContent=cards.length+\"作品\";$(\"#cards\").innerHTML=cards.length?cards.map(g=>{let m=g[0],sourceIndex=movies.indexOf(m);if(!m.poster){const sibling=g.find(x=>x.poster);const normalized=normTitle(m.title);const sameMovie=movies.find(x=>x.poster&&(String(x.id||'')===String(m.id||'')&&m",
           "tokens": [
             {
-              "column": 2258,
+              "column": 2301,
               "operation": ".onclick=()=>openMovie(movies[+x.dataset.i]))}"
             }
           ]
         },
         {
-          "line": 356,
+          "line": 364,
           "source_excerpt": "document.querySelectorAll(\".searchResult[data-mi]\").forEach(x=>x.onclick=()=>{closeSearchFocus();requestAnimationFrame(()=>openMovie(movies[+x.dataset.mi]))});",
           "tokens": [
             {
@@ -6691,7 +6885,7 @@
           ]
         },
         {
-          "line": 357,
+          "line": 365,
           "source_excerpt": "document.querySelectorAll(\".searchResult[data-ri]\").forEach(x=>x.onclick=()=>{closeSearchFocus();openRemoteMovie(remote[+x.dataset.ri])})",
           "tokens": [
             {
@@ -6701,7 +6895,17 @@
           ]
         },
         {
-          "line": 496,
+          "line": 523,
+          "source_excerpt": "document.querySelectorAll(\"[data-outdoor]\").forEach(el=>el.onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const target=[...document.querySelectorAll(\".outdoorEventItem\")].find(x=>x.querySelector(\"h3\")?.textContent===all.find(g=>(g.event_id||g.name)===key)?.name);target?.scrollIntoView({behavior:\"smooth\",block:\"center\"})})",
+          "tokens": [
+            {
+              "column": 60,
+              "operation": ".onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const target=[.."
+            }
+          ]
+        },
+        {
+          "line": 562,
           "source_excerpt": "document.querySelectorAll(\".streamMovie\").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))",
           "tokens": [
             {
@@ -6711,7 +6915,7 @@
           ]
         },
         {
-          "line": 521,
+          "line": 587,
           "source_excerpt": "document.querySelectorAll(\".tvMovie\").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))",
           "tokens": [
             {
@@ -6721,7 +6925,7 @@
           ]
         },
         {
-          "line": 552,
+          "line": 618,
           "source_excerpt": "document.querySelectorAll(\".festivalSpan\").forEach(x=>x.onclick=()=>{",
           "tokens": [
             {
@@ -6731,7 +6935,7 @@
           ]
         },
         {
-          "line": 577,
+          "line": 643,
           "source_excerpt": "document.querySelectorAll(\".streamMovie\").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))",
           "tokens": [
             {
@@ -6741,7 +6945,7 @@
           ]
         },
         {
-          "line": 590,
+          "line": 656,
           "source_excerpt": "document.querySelectorAll(\".calGroup[data-date]\").forEach(x=>x.onclick=e=>{e.stopPropagation();openDay(x.dataset.date)});",
           "tokens": [
             {
@@ -6751,7 +6955,7 @@
           ]
         },
         {
-          "line": 591,
+          "line": 657,
           "source_excerpt": "document.querySelectorAll(\".day[data-date]\").forEach(x=>x.onclick=()=>openDay(x.dataset.date))",
           "tokens": [
             {
@@ -6761,7 +6965,7 @@
           ]
         },
         {
-          "line": 598,
+          "line": 664,
           "source_excerpt": "document.querySelectorAll(\".dayMovie\").forEach(x=>x.onclick=()=>openMovie(movies[+x.dataset.mi]))",
           "tokens": [
             {
@@ -6771,17 +6975,17 @@
           ]
         },
         {
-          "line": 600,
+          "line": 666,
           "source_excerpt": "function openDay(iso){let ms=dayMovies(iso);if(!ms.length)return;$(\"#detail\").innerHTML='<p class=\"eyebrow\">'+iso+' の新着</p><h2 style=\"font-size:26px;line-height:1.2;font-weight:800\">作品一覧</h2>'+ms.map(m=>'<article class=\"dayMovie\" data-mi=\"'+movies.indexOf(m)+'\" style=\"padding:14px 0;border-top:1px solid var(--line);cursor:pointer;display:grid;grid-template-columns:64px 1fr;gap:11px\">'+(m.poster?'<img src=\"'+m.poster+'\" style=\"width:64px;aspect-ratio:2/3;object-fit:cover;border-radius:7px;backgro",
           "tokens": [
             {
-              "column": 2277,
+              "column": 2320,
               "operation": ".onclick=()=>openMovie(movies[+x.dataset.mi]))}"
             }
           ]
         },
         {
-          "line": 604,
+          "line": 670,
           "source_excerpt": "let selectedTheaterPrefecture=localStorage.getItem(\"cinema-theater-prefecture\")||\"神奈川県\";",
           "tokens": [
             {
@@ -6791,7 +6995,7 @@
           ]
         },
         {
-          "line": 620,
+          "line": 686,
           "source_excerpt": "try{localStorage.setItem(\"cinema-theater-prefecture\",p)}catch(e){}",
           "tokens": [
             {
@@ -6801,7 +7005,7 @@
           ]
         },
         {
-          "line": 739,
+          "line": 805,
           "source_excerpt": "const cards=r=>r.slice(0,6).map(z=>'<button type=\"button\" class=\"filmItem relatedMovie\" data-related=\"'+movies.indexOf(z.x)+'\" style=\"border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer\">'+(z.x.poster?'<img src=\"'+z.x.poster+'\" loading=\"lazy\">':'<div style=\"width:108px;aspect-ratio:2/3;background:#222;border-radius:8px\"></div>')+'<b>'+z.x.title+'</b><span class=\"small\">'+z.reasons.slice(0,3).join(\" · \")+'</span></button>').join(\"\");",
           "tokens": [
             {
@@ -6811,7 +7015,7 @@
           ]
         },
         {
-          "line": 774,
+          "line": 840,
           "source_excerpt": "let filmHtml=works.length?'<section class=\"detailSection info\"><h3>'+(m.director||\"監督\")+'の作品を辿る</h3><div class=\"small\" style=\"margin-bottom:10px\">監督のフィルモグラフィー</div><div class=\"filmography\">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||\"\")===String(w.id||\"\")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src=\"'+w.poster+'\" loading=\"lazy\">':'<div style=\"width:108px;aspect-ratio:2/3;background:#222;border-radius:8px\"></div>')+'<b>'+w.title+'</b><span cla",
           "tokens": [
             {
@@ -6821,7 +7025,7 @@
           ]
         },
         {
-          "line": 801,
+          "line": 867,
           "source_excerpt": "document.querySelectorAll(\".relatedMovie\").forEach(b=>b.onclick=()=>openMovie(movies[+b.dataset.related]))",
           "tokens": [
             {
@@ -6831,21 +7035,21 @@
           ]
         },
         {
-          "line": 827,
-          "source_excerpt": "function setMode(next){streamRangeStart=null;theatricalRangeStart=null;mode=next;active=\"すべて\";localStorage.setItem(\"cinemaNow.mode\",mode);localStorage.setItem(\"cinemaNow.active\",active);render();renderCoverage()}",
+          "line": 893,
+          "source_excerpt": "function setMode(next){if(next===\"events\"&&!outdoorEvents.length)loadOutdoorEvents();streamRangeStart=null;theatricalRangeStart=null;mode=next;active=\"すべて\";localStorage.setItem(\"cinemaNow.mode\",mode);localStorage.setItem(\"cinemaNow.active\",active);render();renderCoverage()}",
           "tokens": [
             {
-              "column": 95,
+              "column": 157,
               "operation": "localStorage.setItem(\"cinemaNow.mode\",mode);localStorage.setItem(\"cinemaNow.active\""
             },
             {
-              "column": 139,
+              "column": 201,
               "operation": "localStorage.setItem(\"cinemaNow.active\",active);render();renderCoverage()}"
             }
           ]
         },
         {
-          "line": 861,
+          "line": 927,
           "source_excerpt": "if(runtimePresetEl)runtimePresetEl.onchange=()=>{applyRuntimePreset();if(searchFilterPanelEl)searchFilterPanelEl.classList.remove(\"show\");if(searchFilterBtnEl)searchFilterBtnEl.setAttribute(\"aria-expanded\",\"false\");renderSearchResults()};",
           "tokens": [
             {
@@ -6855,7 +7059,7 @@
           ]
         },
         {
-          "line": 862,
+          "line": 928,
           "source_excerpt": "if(runtimeMinEl)runtimeMinEl.oninput=()=>{if(runtimePresetEl)runtimePresetEl.value=\"custom\";runtimeMin=Math.max(0,Number(runtimeMinEl.value)||0);renderSearchResults()};",
           "tokens": [
             {
@@ -6865,7 +7069,7 @@
           ]
         },
         {
-          "line": 863,
+          "line": 929,
           "source_excerpt": "if(runtimeMaxEl)runtimeMaxEl.oninput=()=>{if(runtimePresetEl)runtimePresetEl.value=\"custom\";runtimeMax=Math.max(0,Number(runtimeMaxEl.value)||0);renderSearchResults()};",
           "tokens": [
             {
@@ -6875,7 +7079,7 @@
           ]
         },
         {
-          "line": 864,
+          "line": 930,
           "source_excerpt": "if(searchFilterBtnEl)searchFilterBtnEl.onclick=e=>{e.stopPropagation();if(!searchFilterPanelEl)return;let show=!searchFilterPanelEl.classList.contains(\"show\");searchFilterPanelEl.classList.toggle(\"show\",show);searchFilterBtnEl.setAttribute(\"aria-expanded\",show?\"true\":\"false\")};",
           "tokens": [
             {
@@ -6885,7 +7089,7 @@
           ]
         },
         {
-          "line": 866,
+          "line": 932,
           "source_excerpt": "localSearchEl.oninput=renderSearchResults;",
           "tokens": [
             {
@@ -6895,7 +7099,7 @@
           ]
         },
         {
-          "line": 869,
+          "line": 935,
           "source_excerpt": "document.addEventListener(\"click\",e=>{if(!e.target.closest(\".searchBox\")){const sr=$(\"#searchResults\");if(sr)sr.classList.remove(\"show\");if(searchFilterPanelEl)searchFilterPanelEl.classList.remove(\"show\");if(searchFilterBtnEl)searchFilterBtnEl.setAttribute(\"aria-expanded\",\"false\")}});",
           "tokens": [
             {
@@ -6905,7 +7109,7 @@
           ]
         },
         {
-          "line": 870,
+          "line": 936,
           "source_excerpt": "$(\"#prev\").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);if(mode===\"streaming\")streamRangeStart=monthPageStart(view);else if(mode===\"theatrical\")theatricalRangeStart=monthPageStart(view);renderCal()};",
           "tokens": [
             {
@@ -6915,7 +7119,7 @@
           ]
         },
         {
-          "line": 871,
+          "line": 937,
           "source_excerpt": "$(\"#next\").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);if(mode===\"streaming\")streamRangeStart=monthPageStart(view);else if(mode===\"theatrical\")theatricalRangeStart=monthPageStart(view);renderCal()};",
           "tokens": [
             {
@@ -6925,7 +7129,7 @@
           ]
         },
         {
-          "line": 872,
+          "line": 938,
           "source_excerpt": "$(\"#close\").onclick=hideModal;",
           "tokens": [
             {
@@ -6935,7 +7139,7 @@
           ]
         },
         {
-          "line": 873,
+          "line": 939,
           "source_excerpt": "$(\"#modal\").onclick=e=>{if(e.target.id===\"modal\")hideModal()};",
           "tokens": [
             {
@@ -6945,7 +7149,7 @@
           ]
         },
         {
-          "line": 911,
+          "line": 1002,
           "source_excerpt": "if(mode===\"streaming\"&&active!==\"すべて\"&&!movies.some(m=>m.event===\"streaming\"&&m.service===active)){active=\"すべて\";localStorage.setItem(\"cinemaNow.active\",active)}",
           "tokens": [
             {
@@ -6955,7 +7159,7 @@
           ]
         },
         {
-          "line": 918,
+          "line": 1009,
           "source_excerpt": "if(movies.some(inWindow)&&!movies.some(m=>inWindow(m)&&m.service===active)){active=\"すべて\";localStorage.setItem(\"cinemaNow.active\",active)}",
           "tokens": [
             {
@@ -6965,7 +7169,7 @@
           ]
         },
         {
-          "line": 921,
+          "line": 1012,
           "source_excerpt": "document.addEventListener(\"keydown\",e=>{if(e.key===\"Escape\"&&$(\"#modal\").classList.contains(\"show\"))hideModal();if(e.key===\"Escape\")closeDrawer()});function openDrawer(){$(\"#gDrawer\").classList.add(\"show\");$(\"#gDrawerMask\").classList.add(\"show\")}function closeDrawer(){$(\"#gDrawer\").classList.remove(\"show\");$(\"#gDrawerMask\").classList.remove(\"show\")}$(\"#gMenuBtn\").onclick=openDrawer;$(\"#gDrawerClose\").onclick=closeDrawer;$(\"#gDrawerMask\").onclick=closeDrawer;",
           "tokens": [
             {
@@ -6987,7 +7191,7 @@
           ]
         },
         {
-          "line": 924,
+          "line": 1015,
           "source_excerpt": "(()=>{const b=document.getElementById(\"gMenuBtn\"),d=document.getElementById(\"gDrawer\"),m=document.getElementById(\"gDrawerMask\"),x=document.getElementById(\"gDrawerClose\");if(!b||!d||!m)return;const open=()=>{d.classList.add(\"show\");m.classList.add(\"show\")},close=()=>{d.classList.remove(\"show\");m.classList.remove(\"show\")};b.addEventListener(\"click\",open);m.addEventListener(\"click\",close);x&&x.addEventListener(\"click\",close)})();",
           "tokens": [
             {
@@ -7005,7 +7209,7 @@
           ]
         },
         {
-          "line": 938,
+          "line": 1029,
           "source_excerpt": "window.addEventListener(\"load\",applyHeaderSearchParam);",
           "tokens": [
             {
@@ -7195,7 +7399,7 @@
       "file": "js/cinelva-quick-rate.js",
       "operations": [
         {
-          "line": 23,
+          "line": 50,
           "source_excerpt": "dialog.innerHTML=`<form class=\"cinelva-rate-inner\" method=\"dialog\"><div class=\"cinelva-review-header\"><strong id=\"cinelvaRateTitle\">レビュー</strong><button type=\"button\" id=\"cinelvaRateX\" aria-label=\"閉じる\">×</button></div><div class=\"cinelva-review-score\"><output id=\"cinelvaRateValue\">0.0</output><span>/ 5.0</span><input aria-label=\"点数\" id=\"cinelvaRateScore\" type=\"range\" min=\"0\" max=\"5\" step=\"0.1\" value=\"0\"></div><div class=\"cinelva-review-date\"><label>鑑賞日<input id=\"cinelvaRateDate\" type=\"hidden\"><b",
           "tokens": [
             {
@@ -7227,21 +7431,25 @@
               "operation": "<select id=\"cinelvaRatePlace\"><option value=\"\">未指定</option><option value=\"映画館"
             },
             {
-              "column": 1153,
+              "column": 1216,
+              "operation": "<select id=\"cinelvaRateVenue\"></select></label></div><label>感想（任意）<textarea i"
+            },
+            {
+              "column": 1282,
               "operation": "<textarea id=\"cinelvaRateComment\" maxlength=\"2000\" rows=\"3\"></textarea></label>"
             },
             {
-              "column": 1343,
+              "column": 1472,
               "operation": "<button type=\"button\" id=\"cinelvaRateClose\">閉じる</button><button type=\"button\""
             },
             {
-              "column": 1399,
+              "column": 1528,
               "operation": "<button type=\"button\" id=\"cinelvaRateSave\">保存</button></div></form>`;"
             }
           ]
         },
         {
-          "line": 39,
+          "line": 66,
           "source_excerpt": "dateYear.onchange=()=>{pickerYear=Number(dateYear.value);drawDatePicker();};",
           "tokens": [
             {
@@ -7251,7 +7459,7 @@
           ]
         },
         {
-          "line": 40,
+          "line": 67,
           "source_excerpt": "dateMonth.onchange=()=>{pickerMonth=Number(dateMonth.value);drawDatePicker();};",
           "tokens": [
             {
@@ -7261,7 +7469,7 @@
           ]
         },
         {
-          "line": 60,
+          "line": 87,
           "source_excerpt": "btn.onclick=()=>{dateInput.value=iso;dateTrigger.textContent=iso.replaceAll('-','/');closeDatePicker();dateTrigger.focus();};",
           "tokens": [
             {
@@ -7271,7 +7479,7 @@
           ]
         },
         {
-          "line": 64,
+          "line": 91,
           "source_excerpt": "dateTrigger.onclick=()=>{",
           "tokens": [
             {
@@ -7281,7 +7489,7 @@
           ]
         },
         {
-          "line": 70,
+          "line": 97,
           "source_excerpt": "$('cinelvaDatePrev').onclick=()=>{pickerMonth--;if(pickerMonth<0){pickerMonth=11;pickerYear--;}drawDatePicker();};",
           "tokens": [
             {
@@ -7291,7 +7499,7 @@
           ]
         },
         {
-          "line": 71,
+          "line": 98,
           "source_excerpt": "$('cinelvaDateNext').onclick=()=>{pickerMonth++;if(pickerMonth>11){pickerMonth=0;pickerYear++;}drawDatePicker();};",
           "tokens": [
             {
@@ -7301,7 +7509,7 @@
           ]
         },
         {
-          "line": 72,
+          "line": 99,
           "source_excerpt": "dialog.addEventListener('click',event=>{if(!datePicker.hidden&&!event.target.closest('.cinelva-review-date'))closeDatePicker();});",
           "tokens": [
             {
@@ -7311,7 +7519,7 @@
           ]
         },
         {
-          "line": 73,
+          "line": 100,
           "source_excerpt": "$('cinelvaRateClose').onclick=()=>dialog.close();",
           "tokens": [
             {
@@ -7321,7 +7529,7 @@
           ]
         },
         {
-          "line": 74,
+          "line": 101,
           "source_excerpt": "$('cinelvaRateX').onclick=()=>dialog.close();",
           "tokens": [
             {
@@ -7331,7 +7539,7 @@
           ]
         },
         {
-          "line": 80,
+          "line": 108,
           "source_excerpt": "$('cinelvaRateScore').oninput=syncDialogScore;",
           "tokens": [
             {
@@ -7341,17 +7549,27 @@
           ]
         },
         {
-          "line": 103,
-          "source_excerpt": "Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value},Number($('cinelvaRateScore').value),date);",
+          "line": 122,
+          "source_excerpt": "$('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());",
           "tokens": [
             {
-              "column": 3,
-              "operation": "Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value},Numbe"
+              "column": 23,
+              "operation": "addEventListener('change',()=>syncViewingVenue());"
             }
           ]
         },
         {
-          "line": 108,
+          "line": 146,
+          "source_excerpt": "Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);",
+          "tokens": [
+            {
+              "column": 3,
+              "operation": "Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewin"
+            }
+          ]
+        },
+        {
+          "line": 151,
           "source_excerpt": "$('cinelvaRateSave').onclick=save;",
           "tokens": [
             {
@@ -7361,7 +7579,7 @@
           ]
         },
         {
-          "line": 121,
+          "line": 164,
           "source_excerpt": "rate.onclick=event=>{",
           "tokens": [
             {
@@ -7371,7 +7589,7 @@
           ]
         },
         {
-          "line": 158,
+          "line": 201,
           "source_excerpt": "rate.onclick=event=>{",
           "tokens": [
             {
@@ -7381,7 +7599,7 @@
           ]
         },
         {
-          "line": 187,
+          "line": 240,
           "source_excerpt": "const prompt=document.createElement('button');prompt.type='button';prompt.className='cinelva-rating-date-prompt';prompt.hidden=true;prompt.textContent='鑑賞日が未設定です　日付を設定 ›';prompt.onclick=e=>{e.stopPropagation();e.preventDefault();activeCard=button;open(movie,{showDate:true});};",
           "tokens": [
             {
@@ -7391,7 +7609,7 @@
           ]
         },
         {
-          "line": 191,
+          "line": 244,
           "source_excerpt": "input.onclick=e=>e.stopPropagation();",
           "tokens": [
             {
@@ -7401,7 +7619,7 @@
           ]
         },
         {
-          "line": 195,
+          "line": 248,
           "source_excerpt": "input.oninput=sync;",
           "tokens": [
             {
@@ -7411,7 +7629,7 @@
           ]
         },
         {
-          "line": 196,
+          "line": 249,
           "source_excerpt": "input.onchange=e=>{e.stopPropagation();const score=input.value.trim()===''?NaN:Number(input.value);if(!Number.isFinite(score)||score<0||score>5||Math.abs(Math.round(score*10)-score*10)>1e-7){input.value=Number(existing?.rating??0).toFixed(1);sync();return;}",
           "tokens": [
             {
@@ -7421,7 +7639,7 @@
           ]
         },
         {
-          "line": 197,
+          "line": 250,
           "source_excerpt": "try{const latest=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));Records.save({...movie,...latest,id:String(latest?.id??id),tmdbId:id,title:latest?.title||movie.title||movie.name||'作品'},score,latest?.watchedAt??null);input.dataset.hasRecord='true';if(score>0&&!latest?.watchedAt){prompt.hidden=true;activeCard=button;open({...movie,id:String(id),rating:score},{showDate:true});}else{prompt.hidden=true;}root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:Str",
           "tokens": [
             {
@@ -7431,117 +7649,7 @@
           ]
         },
         {
-          "line": 213,
-          "source_excerpt": "track.addEventListener('pointerdown',e=>{",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('pointerdown',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 219,
-          "source_excerpt": "track.addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);});",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('pointermove',e=>{if(activePointer!==e.pointerId)return;e.preventDefau"
-            }
-          ]
-        },
-        {
-          "line": 220,
-          "source_excerpt": "track.addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault();e.stopPropagation();moveTo(e.clientX);finish();});",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('pointerup',e=>{if(activePointer!==e.pointerId)return;e.preventDefault"
-            }
-          ]
-        },
-        {
-          "line": 221,
-          "source_excerpt": "track.addEventListener('pointercancel',()=>{activePointer=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('pointercancel',()=>{activePointer=null;delete input.dataset.dragging;"
-            }
-          ]
-        },
-        {
-          "line": 222,
-          "source_excerpt": "track.addEventListener('touchstart',e=>{",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('touchstart',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 226,
-          "source_excerpt": "track.addEventListener('touchmove',e=>{",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('touchmove',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 230,
-          "source_excerpt": "track.addEventListener('touchend',e=>{",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('touchend',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 234,
-          "source_excerpt": "track.addEventListener('touchcancel',()=>{activeTouch=null;delete input.dataset.dragging;track.style.removeProperty('--smooth-progress');});",
-          "tokens": [
-            {
-              "column": 8,
-              "operation": "addEventListener('touchcancel',()=>{activeTouch=null;delete input.dataset.dragging;trac"
-            }
-          ]
-        },
-        {
-          "line": 244,
-          "source_excerpt": "document.addEventListener('touchmove',followTouch,{capture:true,passive:false});",
-          "tokens": [
-            {
-              "column": 11,
-              "operation": "addEventListener('touchmove',followTouch,{capture:true,passive:false});"
-            }
-          ]
-        },
-        {
-          "line": 245,
-          "source_excerpt": "document.addEventListener('touchend',e=>{",
-          "tokens": [
-            {
-              "column": 11,
-              "operation": "addEventListener('touchend',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 250,
-          "source_excerpt": "document.addEventListener('touchcancel',e=>{",
-          "tokens": [
-            {
-              "column": 11,
-              "operation": "addEventListener('touchcancel',e=>{"
-            }
-          ]
-        },
-        {
-          "line": 265,
+          "line": 275,
           "source_excerpt": "controls.addEventListener(type,event=>event.stopPropagation());",
           "tokens": [
             {
@@ -7551,7 +7659,7 @@
           ]
         },
         {
-          "line": 267,
+          "line": 277,
           "source_excerpt": "controls.addEventListener('keydown',event=>event.stopPropagation());",
           "tokens": [
             {
@@ -7561,7 +7669,7 @@
           ]
         },
         {
-          "line": 296,
+          "line": 306,
           "source_excerpt": "root.addEventListener('cinelva-record-updated',refreshRatingLabels);",
           "tokens": [
             {
@@ -7571,7 +7679,7 @@
           ]
         },
         {
-          "line": 297,
+          "line": 307,
           "source_excerpt": "root.addEventListener('storage',refreshRatingLabels);",
           "tokens": [
             {
@@ -7581,7 +7689,7 @@
           ]
         },
         {
-          "line": 960,
+          "line": 970,
           "source_excerpt": "root.addEventListener('cinelva-record-updated',refreshInlineScores);",
           "tokens": [
             {
@@ -7591,7 +7699,7 @@
           ]
         },
         {
-          "line": 961,
+          "line": 971,
           "source_excerpt": "root.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null)refreshInlineScores();});",
           "tokens": [
             {
@@ -7601,7 +7709,7 @@
           ]
         },
         {
-          "line": 978,
+          "line": 988,
           "source_excerpt": "root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.tmdb_id??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;if(target.matches?.('.recordAction')){button.dataset.detailReview='';button.dataset.movieId=String(movie.tmdbId??movie.tmdb_id??movie.id);bu",
           "tokens": [
             {
@@ -7792,7 +7900,7 @@
           ]
         },
         {
-          "line": 535,
+          "line": 526,
           "source_excerpt": "'<div class=\"cs-highlight\"><span class=\"cs-highlight-label\">映画賞別の鑑賞記録</span><button type=\"button\" class=\"cs-highlight-value\" data-dashboard-tab=\"awards\">映画賞コレクションを見る →</button></div>'+",
           "tokens": [
             {
@@ -7802,7 +7910,7 @@
           ]
         },
         {
-          "line": 540,
+          "line": 531,
           "source_excerpt": "(awardAffinity.length?'<div class=\"cinelva-affinity-list\">'+awardAffinity.slice(0,5).map((row,i)=>'<div class=\"cinelva-affinity-row\"><span class=\"cinelva-affinity-rank\">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type=\"button\" class=\"cinelva-affinity-link\" data-dashboard-tab=\"awards\" aria-label=\"映画賞コレクションを開く\">'+escapeHTML(awardDisplayName(row.name))+'</button><span class=\"cinelva-affinity-meta\">★ '+row.average.toFixed(2)+' · '+row.scored+'本評価 · 4点以上 '+row.high+'本</span></div>').join('')+'</",
           "tokens": [
             {
@@ -7812,7 +7920,7 @@
           ]
         },
         {
-          "line": 544,
+          "line": 535,
           "source_excerpt": "$('awardMatrix').innerHTML=`<table class=\"award-table\"><thead><tr><th scope=\"col\">映画賞</th>${decades.map(d=>`<th scope=\"col\">${d}<small>年代</small></th>`).join('')}<th scope=\"col\" class=\"award-total-head\">鑑賞計</th></tr></thead><tbody>${organizations.map(name=>{const total=decades.reduce((sum,decade)=>sum+(scopedCell(name,decade)?.count||0),0);return `<tr><th scope=\"row\">${escapeHTML(awardDisplayName(name))}</th>${decades.map(decade=>{const cell=scopedCell(name,decade);if(!cell)return '<td class=\"aw",
           "tokens": [
             {
@@ -7822,7 +7930,7 @@
           ]
         },
         {
-          "line": 546,
+          "line": 537,
           "source_excerpt": "const awardHeading=state.awardSelection?'<div class=\"award-detail-head\"><div><span class=\"award-detail-kicker\">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>受賞作品の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type=\"button\" class=\"award-detail-close\" data-close-award aria-label=\"詳細を閉じる\">×</button></div>':'';",
           "tokens": [
             {
@@ -7832,7 +7940,7 @@
           ]
         },
         {
-          "line": 566,
+          "line": 557,
           "source_excerpt": "+(entryId?'<div class=\"record-own-rating-label\">あなたの評価</div><div class=\"record-shared-controls\" data-film-controls=\"'+escapeHTML(entryId)+'\"></div>':'<span class=\"award-card-unmatched\">作品データ照合待ち</span>')",
           "tokens": [
             {
@@ -7842,7 +7950,7 @@
           ]
         },
         {
-          "line": 800,
+          "line": 791,
           "source_excerpt": "'<div class=\"cs-highlight\"><span class=\"cs-highlight-label\">監督別の鑑賞記録</span><button type=\"button\" class=\"cs-highlight-value\" data-dashboard-tab=\"directors\">監督コレクションを見る →</button></div>'+",
           "tokens": [
             {
@@ -7852,7 +7960,7 @@
           ]
         },
         {
-          "line": 805,
+          "line": 796,
           "source_excerpt": "(affinity.length?'<div class=\"cinelva-affinity-list\">'+affinity.slice(0,10).map((group,i)=>'<div class=\"cinelva-affinity-row\"><span class=\"cinelva-affinity-rank\">'+(i+1)+'</span><span class=\"cinelva-affinity-visual\">'+(()=>{const profile=group.filmography?.director;const source=String(profile?.profile_path||profile?.profilePath||profile?.photo||profile?.image||'');const url=source.startsWith('/')?'https://image.tmdb.org/t/p/w185'+source:source;return /^https:\\/\\//i.test(url)?'<img src=\"'+escapeH",
           "tokens": [
             {
@@ -7862,7 +7970,7 @@
           ]
         },
         {
-          "line": 882,
+          "line": 873,
           "source_excerpt": "close.addEventListener('click',()=>{detail.hidden=true;row.classList.remove('active');row.setAttribute('aria-expanded','false');row.focus({preventScroll:true});row.scrollIntoView({block:'center',behavior:'smooth'});});",
           "tokens": [
             {
@@ -7872,7 +7980,7 @@
           ]
         },
         {
-          "line": 903,
+          "line": 894,
           "source_excerpt": "row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});",
           "tokens": [
             {
@@ -7882,7 +7990,7 @@
           ]
         },
         {
-          "line": 924,
+          "line": 915,
           "source_excerpt": "try{sessionStorage.setItem('cinelva-director-sort',sortSelect.value);}catch(_){}",
           "tokens": [
             {
@@ -7892,7 +8000,7 @@
           ]
         },
         {
-          "line": 926,
+          "line": 917,
           "source_excerpt": "sortSelect.addEventListener('change',applySort);",
           "tokens": [
             {
@@ -7902,7 +8010,7 @@
           ]
         },
         {
-          "line": 958,
+          "line": 949,
           "source_excerpt": "box.innerHTML=rows.length?rows.map(movie=>`<button type=\"button\" class=\"search-result\" data-choose-movie=\"${escapeHTML(movie.id||movie.tmdbId)}\"><img src=\"${escapeHTML(poster(movie))}\" alt=\"\" onerror=\"this.hidden=true\"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class=\"hint\">作品が見つかりません。作品名を変え",
           "tokens": [
             {
@@ -7912,7 +8020,7 @@
           ]
         },
         {
-          "line": 975,
+          "line": 966,
           "source_excerpt": "try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }",
           "tokens": [
             {
@@ -7922,7 +8030,7 @@
           ]
         },
         {
-          "line": 978,
+          "line": 969,
           "source_excerpt": "function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }",
           "tokens": [
             {
@@ -7932,7 +8040,7 @@
           ]
         },
         {
-          "line": 989,
+          "line": 980,
           "source_excerpt": "async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));state.records=Records.all();populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }",
           "tokens": [
             {
@@ -7942,7 +8050,7 @@
           ]
         },
         {
-          "line": 991,
+          "line": 982,
           "source_excerpt": "document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));",
           "tokens": [
             {
@@ -7952,7 +8060,7 @@
           ]
         },
         {
-          "line": 992,
+          "line": 983,
           "source_excerpt": "if($('addRecord')) $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;",
           "tokens": [
             {
@@ -7970,7 +8078,7 @@
           ]
         },
         {
-          "line": 993,
+          "line": 984,
           "source_excerpt": "$('deleteRecord').onclick=()=>state.selected&&deleteRecord(state.selected.id);",
           "tokens": [
             {
@@ -7980,7 +8088,7 @@
           ]
         },
         {
-          "line": 994,
+          "line": 985,
           "source_excerpt": "$('rating').oninput=()=>{$('ratingOut').value=Number($('rating').value).toFixed(1);};",
           "tokens": [
             {
@@ -7990,7 +8098,7 @@
           ]
         },
         {
-          "line": 995,
+          "line": 986,
           "source_excerpt": "$('movieQuery').oninput=event=>searchMovies(event.target.value);",
           "tokens": [
             {
@@ -8000,7 +8108,7 @@
           ]
         },
         {
-          "line": 996,
+          "line": 987,
           "source_excerpt": "$('movieResults').onclick=event=>{const button=event.target.closest('[data-choose-movie]');if(button)chooseMovie(button.dataset.chooseMovie);};",
           "tokens": [
             {
@@ -8010,7 +8118,7 @@
           ]
         },
         {
-          "line": 997,
+          "line": 988,
           "source_excerpt": "$('csPeriod').onchange=()=>{renderCinemaSummary();renderYearHeatmap();};",
           "tokens": [
             {
@@ -8020,7 +8128,7 @@
           ]
         },
         {
-          "line": 998,
+          "line": 989,
           "source_excerpt": "$('recordSearch').oninput=renderList; $('recordSort').onchange=renderList; $('recordYear').onchange=renderList; $('worldYear').onchange=drawWorld; $('worldGenre').onchange=drawWorld; $('worldCountry').onchange=drawWorld;",
           "tokens": [
             {
@@ -8050,7 +8158,7 @@
           ]
         },
         {
-          "line": 999,
+          "line": 990,
           "source_excerpt": "$('exportRecords').onclick=exportRecords; $('importRecords').onclick=()=>$('importFile').click(); $('importFile').onchange=event=>{const file=event.target.files?.[0];event.target.value='';importRecords(file);};",
           "tokens": [
             {
@@ -8068,7 +8176,7 @@
           ]
         },
         {
-          "line": 1000,
+          "line": 991,
           "source_excerpt": "$('monthPrev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--;}renderCalendar();}; $('monthNext').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++;}renderCalendar();};",
           "tokens": [
             {
@@ -8082,7 +8190,7 @@
           ]
         },
         {
-          "line": 1001,
+          "line": 992,
           "source_excerpt": "$('directorWorks').onclick=event=>{const button=event.target.closest('[data-director-film]');if(button)openKnownMovie(button.dataset.directorFilm);};",
           "tokens": [
             {
@@ -8092,7 +8200,7 @@
           ]
         },
         {
-          "line": 1002,
+          "line": 993,
           "source_excerpt": "$('calendarMode').onchange=renderCalendar;",
           "tokens": [
             {
@@ -8102,7 +8210,7 @@
           ]
         },
         {
-          "line": 1003,
+          "line": 994,
           "source_excerpt": "$('calendar').onclick=event=>{const button=event.target.closest('[data-date]');if(button)renderDateFilms(button.dataset.date);};",
           "tokens": [
             {
@@ -8112,7 +8220,7 @@
           ]
         },
         {
-          "line": 1004,
+          "line": 995,
           "source_excerpt": "$('yearHeatmap').onclick=event=>{const year=event.target.closest('[data-calendar-year]');if(year){state.year=Number(year.dataset.calendarYear);syncCalendarYear();return;}const day=event.target.closest('[data-date]');if(day){const date=day.dataset.date;renderDateFilms(date);$('calendarFilms').scrollIntoView({behavior:'smooth',block:'center'});return;}const month=event.target.closest('[data-calendar-month]');if(month){const prefix=state.year+'-'+String(Number(month.dataset.calendarMonth)+1).padSta",
           "tokens": [
             {
@@ -8122,7 +8230,7 @@
           ]
         },
         {
-          "line": 1005,
+          "line": 996,
           "source_excerpt": "$('genreMatrix').onclick=event=>{const button=event.target.closest('[data-genre],[data-genre-pair]');if(!button)return;if(button.dataset.genrePair){const [first,second]=button.dataset.genrePair.split('|');const rows=classifiedRecords().filter(record=>recordGenres(record).includes(first)&&recordGenres(record).includes(second));$('genreFilms').innerHTML=rows.length?rows.map(card).join(''):`<div class=\"empty\" style=\"grid-column:1/-1\">${escapeHTML(first)}と${escapeHTML(second)}の両方に分類された記録はありません。</div",
           "tokens": [
             {
@@ -8132,7 +8240,7 @@
           ]
         },
         {
-          "line": 1006,
+          "line": 997,
           "source_excerpt": "$('awardMatrix').onclick=event=>{const button=event.target.closest('[data-award-cell]');if(!button)return;const [organization,decade]=button.dataset.awardCell.split('|');state.awardSelection={organization,decade:Number(decade)};renderAwards();};",
           "tokens": [
             {
@@ -8142,7 +8250,7 @@
           ]
         },
         {
-          "line": 1007,
+          "line": 998,
           "source_excerpt": "$('genreFormat').onchange=renderGenres; $('genreWorkForm').onchange=renderGenres; $('awardMode').onchange=renderAwards; $('awardCategory').onchange=renderAwards; $('awardOther').onchange=renderAwards;",
           "tokens": [
             {
@@ -8168,7 +8276,7 @@
           ]
         },
         {
-          "line": 1008,
+          "line": 999,
           "source_excerpt": "$('awardFilms').onclick=event=>{if(event.target.closest('[data-close-award]')){state.awardSelection=null;renderAwards();return;}const button=event.target.closest('[data-award-film]');if(button)openKnownMovie(button.dataset.awardFilm);};",
           "tokens": [
             {
@@ -8178,7 +8286,7 @@
           ]
         },
         {
-          "line": 1009,
+          "line": 1000,
           "source_excerpt": "$('worldZoomIn').onclick=()=>{state.plotZoom=Math.min(2.5,state.plotZoom*1.2);drawWorld();};$('worldZoomOut').onclick=()=>{state.plotZoom=Math.max(.65,state.plotZoom/1.2);drawWorld();};$('worldReset').onclick=()=>{state.plotRotation={x:-.32,y:-.58};state.plotZoom=1;state.plotOffset={x:0,y:0};drawWorld();};$('worldToggle').onclick=()=>{state.flatWorld=!state.flatWorld;drawWorld();};",
           "tokens": [
             {
@@ -8200,7 +8308,7 @@
           ]
         },
         {
-          "line": 1012,
+          "line": 1003,
           "source_excerpt": "document.addEventListener('click',event=>{",
           "tokens": [
             {
@@ -8210,7 +8318,7 @@
           ]
         },
         {
-          "line": 1013,
+          "line": 1004,
           "source_excerpt": "const trigger=event.target.closest('[data-review-detail]');",
           "tokens": [
             {
@@ -8220,7 +8328,7 @@
           ]
         },
         {
-          "line": 1015,
+          "line": 1006,
           "source_excerpt": "const edit=event.target.closest('[data-review-edit]');",
           "tokens": [
             {
@@ -8230,7 +8338,7 @@
           ]
         },
         {
-          "line": 1022,
+          "line": 1013,
           "source_excerpt": "$('reviewDetailClose').onclick=()=>$('reviewDetailDialog').close();",
           "tokens": [
             {
@@ -8240,7 +8348,7 @@
           ]
         },
         {
-          "line": 1023,
+          "line": 1014,
           "source_excerpt": "document.addEventListener('click',event=>{const edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');if(edit){const record=state.records.find(item=>String(item.id)===edit.dataset.edit);if(record)openDialog(record);}if(del)deleteRecord(del.dataset.delete);});",
           "tokens": [
             {
@@ -8258,7 +8366,7 @@
           ]
         },
         {
-          "line": 1025,
+          "line": 1016,
           "source_excerpt": "canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=','Enter'].includes(event.key))return;event.preventDefault();if(event.key==='Enter'){const rows=worldRecords();if(rows.length)showWorldFilm(rows[state.keyboardPoint++%rows.length]);return;}if(['+','='].includes(event.key))state.plotZoom=Math.min(2.5,state.plotZoom*1.1);else if(event.key==='-')state.plotZoom=Math.max(.65,state.plotZoom/1.1);else if(event.key==='ArrowLeft')state.plotRotation.y-=",
           "tokens": [
             {
@@ -8268,7 +8376,7 @@
           ]
         },
         {
-          "line": 1028,
+          "line": 1019,
           "source_excerpt": "canvas.addEventListener('pointerdown',event=>{state.plotWasDragged=false;canvas.setPointerCapture(event.pointerId);state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];state.plotDrag=points.length>1?{mode:'pinch',distance:pointerDistance(points),center:pointerCenter(points)}:{mode:'rotate',x:event.clientX,y:event.clientY,rotation:{...state.plotRotation}};});",
           "tokens": [
             {
@@ -8278,7 +8386,7 @@
           ]
         },
         {
-          "line": 1029,
+          "line": 1020,
           "source_excerpt": "canvas.addEventListener('pointermove',event=>{if(!state.plotPointers.has(event.pointerId))return;const prior=state.plotPointers.get(event.pointerId);if(Math.hypot(event.clientX-prior.x,event.clientY-prior.y)>3)state.plotWasDragged=true;state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];if(points.length>1&&state.plotDrag?.mode==='pinch'){const distance=pointerDistance(points),center=pointerCenter(points);state.plotZoom=Math.max(",
           "tokens": [
             {
@@ -8288,7 +8396,7 @@
           ]
         },
         {
-          "line": 1030,
+          "line": 1021,
           "source_excerpt": "const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);",
           "tokens": [
             {
@@ -8302,7 +8410,7 @@
           ]
         },
         {
-          "line": 1031,
+          "line": 1022,
           "source_excerpt": "canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});",
           "tokens": [
             {
@@ -8312,7 +8420,7 @@
           ]
         },
         {
-          "line": 1032,
+          "line": 1023,
           "source_excerpt": "canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · あなたの評価 ★ ${Number(record.rating ",
           "tokens": [
             {
@@ -8322,7 +8430,7 @@
           ]
         },
         {
-          "line": 1033,
+          "line": 1024,
           "source_excerpt": "window.addEventListener('cinelva-record-updated',()=>{state.records=Records.all();populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();});",
           "tokens": [
             {
@@ -8332,7 +8440,7 @@
           ]
         },
         {
-          "line": 1034,
+          "line": 1025,
           "source_excerpt": "window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});",
           "tokens": [
             {
@@ -8342,7 +8450,7 @@
           ]
         },
         {
-          "line": 1035,
+          "line": 1026,
           "source_excerpt": "window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});",
           "tokens": [
             {
@@ -8352,7 +8460,7 @@
           ]
         },
         {
-          "line": 1065,
+          "line": 1056,
           "source_excerpt": "const controlObserver=new MutationObserver(changes=>{if(changes.some(change=>[...change.addedNodes].some(node=>node.nodeType===1&&(node.matches?.('[data-film-controls]')||node.querySelector?.('[data-film-controls]')))))mountFilmControls();});",
           "tokens": [
             {
@@ -8588,7 +8696,7 @@
       "file": "my-cinelva/index.html",
       "operations": [
         {
-          "line": 769,
+          "line": 782,
           "source_excerpt": "<input class=\"gSearch\" name=\"search\" type=\"search\" placeholder=\"作品・映画館を検索\" autocomplete=\"off\" aria-label=\"作品・映画館を検索\">",
           "tokens": [
             {
@@ -8598,7 +8706,7 @@
           ]
         },
         {
-          "line": 770,
+          "line": 783,
           "source_excerpt": "<button class=\"gSearchBtn\" type=\"submit\" aria-label=\"検索\">⌕</button>",
           "tokens": [
             {
@@ -8608,7 +8716,7 @@
           ]
         },
         {
-          "line": 772,
+          "line": 785,
           "source_excerpt": "<button class=\"gMenuBtn\" id=\"gMenuBtn\" aria-label=\"メニュー\"><span class=\"gMenuLines\" aria-hidden=\"true\"></span></button>",
           "tokens": [
             {
@@ -8618,7 +8726,7 @@
           ]
         },
         {
-          "line": 776,
+          "line": 789,
           "source_excerpt": "<div class=\"gDrawerHead\"><a class=\"gBrand\" href=\"../index.html\" aria-label=\"Cinelva\"><img class=\"gBrandImage\" src=\"../assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\"><span class=\"gBrandWord\">Cinelva</span></a><button class=\"gDrawerClose\" id=\"gDrawerClose\" aria-label=\"閉じる\">×</button></div>",
           "tokens": [
             {
@@ -8628,7 +8736,7 @@
           ]
         },
         {
-          "line": 786,
+          "line": 799,
           "source_excerpt": "<section class=\"hero\"><div><div class=\"eyebrow\">YOUR MOVIE HISTORY</div><h1>My Cinelva</h1><p>観た映画を記録して、年間の歩みや好きな作品を振り返る。</p></div><div class=\"actions\"><details class=\"recordUtilities\"><summary>その他の操作 <span aria-hidden=\"true\">⌄</span></summary><div class=\"utilityItems\"><button class=\"button\" id=\"exportRecords\">記録をバックアップ</button><button class=\"button\" id=\"importRecords\">バックアップを復元</button><a class=\"button\" href=\"../my-cinemap.html\">実績画像を作る</a></div></details><input id=\"importFile\" type=\"file\" acce",
           "tokens": [
             {
@@ -8646,7 +8754,7 @@
           ]
         },
         {
-          "line": 790,
+          "line": 803,
           "source_excerpt": "<nav class=\"tabs\" role=\"tablist\" aria-label=\"鑑賞記録の表示\"><button class=\"tab\" role=\"tab\" aria-selected=\"true\" data-tab=\"summary\">ダッシュボード</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"records\">鑑賞した映画</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"watchlist\">見たい映画</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"awards\">映画賞</button><button class=\"tab\" role=\"tab\" aria-selected=\"false\" data-tab=\"directors\">監督別</button></nav>",
           "tokens": [
             {
@@ -8672,7 +8780,7 @@
           ]
         },
         {
-          "line": 791,
+          "line": 804,
           "source_excerpt": "<section id=\"summaryView\" class=\"cinema-summary view\" role=\"tabpanel\" aria-label=\"鑑賞サマリー\"><div class=\"cs-head\"><h2>あなたの鑑賞実績</h2><select id=\"csPeriod\" aria-label=\"集計期間\"><option value=\"all\">オールタイム</option></select></div><div class=\"cs-top\"><div><div class=\"cs-muted\">生涯鑑賞本数</div><div class=\"cs-number\" id=\"csLifetime\">0</div><div class=\"cs-milestones\"><div id=\"csPrisms\" class=\"cs-prisms\"></div><div id=\"csCrowns\" class=\"cs-crowns\"></div></div></div><div><div class=\"cs-muted\" id=\"csPeriodLabel\">今年の鑑賞本",
           "tokens": [
             {
@@ -8688,13 +8796,13 @@
               "operation": "<select id=\"recordSort\" aria-label=\"並び順\"><option value=\"date\">鑑賞日が新しい順</optio"
             },
             {
-              "column": 2305,
+              "column": 2310,
               "operation": "<select id=\"recordYear\" aria-label=\"鑑賞年\"><option value=\"all\">すべての年</option></"
             }
           ]
         },
         {
-          "line": 792,
+          "line": 805,
           "source_excerpt": "<section id=\"calendarView\" class=\"view\" role=\"tabpanel\" hidden><div hidden aria-hidden=\"true\"><select id=\"calendarMode\"><option value=\"count\">本数</option><option value=\"date\">日付</option><option value=\"rating\">評価</option><option value=\"method\">映画館／配信</option></select><button id=\"monthPrev\">‹</button><strong id=\"calendarMonth\"></strong><button id=\"monthNext\">›</button><div id=\"calendar\"></div></div></section><section id=\"worldView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head\"><div>",
           "tokens": [
             {
@@ -8740,7 +8848,7 @@
           ]
         },
         {
-          "line": 793,
+          "line": 806,
           "source_excerpt": "<section id=\"genresView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head\"><div><h2>ジャンルの重なり</h2><p>複数ジャンルの記録を数え、よく一緒に観ている組み合わせを示します。未分類作品は推測で振り分けません。</p></div></div><div class=\"toolbar\"><label>表現形式<select id=\"genreFormat\"><option value=\"all\">すべて</option><option>実写</option><option>アニメーション</option><option>ストップモーション</option><option value=\"unknown\">不明</option></select></label><label>作品形式<select id=\"genreWorkForm\"><option value=\"all\">すべて</option><option>フィクション</option><option>ドキュメンタリー</o",
           "tokens": [
             {
@@ -8754,7 +8862,7 @@
           ]
         },
         {
-          "line": 794,
+          "line": 807,
           "source_excerpt": "<section id=\"awardsView\" class=\"view\" role=\"tabpanel\" hidden><div class=\"section-head award-titlebar\"><div><span class=\"award-eyebrow\">MY CINELVA / AWARDS</span><h2>映画賞コレクション</h2><p>時代と映画賞を越えて、鑑賞した名作の足跡を集める。</p></div><label>表示<select id=\"awardMode\"><option value=\"count\">鑑賞本数</option><option value=\"rate\" disabled>達成率（集計可能な賞のみ）</option></select></label></div><div class=\"award-filters\" aria-label=\"映画賞の絞り込み\"><label>受賞部門<select id=\"awardCategory\"><option value=\"all\">全部門</option><option value=\"picture",
           "tokens": [
             {
@@ -8772,7 +8880,7 @@
           ]
         },
         {
-          "line": 801,
+          "line": 814,
           "source_excerpt": "<div class=\"review-detail-header\"><strong>レビュー詳細を見る</strong><button type=\"button\" class=\"button\" id=\"reviewDetailClose\" aria-label=\"閉じる\">閉じる ×</button></div>",
           "tokens": [
             {
@@ -8782,7 +8890,7 @@
           ]
         },
         {
-          "line": 803,
+          "line": 816,
           "source_excerpt": "<div class=\"review-detail-footer\"><button type=\"button\" class=\"button primary\" id=\"reviewDetailEdit\">レビューを編集</button></div>",
           "tokens": [
             {
@@ -8792,7 +8900,7 @@
           ]
         },
         {
-          "line": 805,
+          "line": 818,
           "source_excerpt": "<dialog id=\"recordDialog\"><form method=\"dialog\" id=\"recordForm\"><div class=\"dialog-head\"><strong id=\"dialogTitle\">鑑賞を記録</strong><button type=\"button\" class=\"button\" id=\"closeDialog\">閉じる</button></div><div class=\"dialog-body\"><label class=\"field\">作品を検索<input id=\"movieQuery\" type=\"search\" autocomplete=\"off\" placeholder=\"作品名\"><span class=\"hint\">記録済み作品の編集時は検索を省略できます。</span></label><div id=\"movieResults\" class=\"search-results\"></div><div id=\"chosenMovie\" class=\"hint\"></div><label class=\"field\">鑑賞日（任意",
           "tokens": [
             {
@@ -8830,7 +8938,7 @@
           ]
         },
         {
-          "line": 808,
+          "line": 821,
           "source_excerpt": "<script>(()=>{const b=document.getElementById(\"gMenuBtn\"),d=document.getElementById(\"gDrawer\"),m=document.getElementById(\"gDrawerMask\"),x=document.getElementById(\"gDrawerClose\");if(!b||!d||!m)return;const open=()=>{d.classList.add(\"show\");m.classList.add(\"show\")},close=()=>{d.classList.remove(\"show\");m.classList.remove(\"show\")};b.addEventListener(\"click\",open);m.addEventListener(\"click\",close);x&&x.addEventListener(\"click\",close)})();</script><style>",
           "tokens": [
             {
@@ -8943,7 +9051,7 @@
       "file": "rankings.html",
       "operations": [
         {
-          "line": 109,
+          "line": 155,
           "source_excerpt": "<header class=\"gTop\"><div class=\"wrap gNav\"><a class=\"gBrand\" href=\"index.html\" aria-label=\"Cinelva\"><img class=\"gBrandImage\" src=\"assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\"><span class=\"gBrandWord\">Cinelva</span></a><form class=\"gSearchForm\" action=\"search.html\" method=\"get\"><input class=\"gSearch\" name=\"search\" type=\"search\" placeholder=\"作品を検索\" autocomplete=\"off\" aria-label=\"作品を検索\"><button class=\"gSearchBtn\" type=\"submit\" aria-label=\"検索\">⌕</button></form><button class=\"gMenuBtn\" id",
           "tokens": [
             {
@@ -8961,7 +9069,7 @@
           ]
         },
         {
-          "line": 110,
+          "line": 156,
           "source_excerpt": "<div class=\"gDrawerMask\" id=\"gDrawerMask\"></div><aside class=\"gDrawer\" id=\"gDrawer\"><div class=\"gDrawerHead\"><a class=\"gBrand\" href=\"index.html\" aria-label=\"Cinelva\"><img class=\"gBrandImage\" src=\"assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png\" alt=\"\"><span class=\"gBrandWord\">Cinelva</span></a><button class=\"gDrawerClose\" id=\"gDrawerClose\" aria-label=\"閉じる\">×</button></div><a href=\"index.html\">カレンダー</a><a href=\"discover.html\">映画を探す</a><a href=\"rankings.html\">ランキング</a><a href=\"theaters.html\">映画館を探",
           "tokens": [
             {
@@ -8971,7 +9079,7 @@
           ]
         },
         {
-          "line": 112,
+          "line": 158,
           "source_excerpt": "<div class=\"chartAxes\"><div class=\"filterLabel\">ランキング</div><div class=\"chips\" id=\"axisChips\"><button class=\"chip active\" data-axis=\"rating\">ユーザー評価</button><button class=\"chip\" data-axis=\"boxoffice\">興行収入</button><button class=\"chip\" data-axis=\"awards\">受賞作品</button></div></div>",
           "tokens": [
             {
@@ -8989,7 +9097,7 @@
           ]
         },
         {
-          "line": 116,
+          "line": 162,
           "source_excerpt": "<div class=\"rankGrid\" id=\"grid\"></div><div class=\"moreWrap\"><button class=\"moreBtn\" id=\"moreBtn\">もっと見る</button></div><div class=\"note\" id=\"sourceNote\"></div><div style=\"margin:28px 0 12px;text-align:center;color:#777;font-size:11px\">Cinelva v0.4.67</div></main>",
           "tokens": [
             {
@@ -8999,7 +9107,7 @@
           ]
         },
         {
-          "line": 128,
+          "line": 174,
           "source_excerpt": "const regionOpts=allRegions();$(\"#regionChips\").innerHTML=regionOpts.map(x=>'<button class=\"chip '+(x===regionActive?'active':'')+'\" data-region=\"'+x+'\">'+x+'</button>').join(\"\");const genreOpts=Object.keys(ASIA_GENRES);if(!genreOpts.includes(genreActive))genreActive=\"すべて\";$(\"#genreChips\").innerHTML=genreOpts.map(x=>'<button class=\"chip '+(x===genreActive?'active':'')+'\" data-genre=\"'+x+'\">'+x+'</button>').join(\"\");const eraOpts=[\"すべて\",\"今年\",\"2020年代\",\"2010年代\",\"2000年代\",\"1990年代\",\"1980年代\"];if(!eraOp",
           "tokens": [
             {
@@ -9029,7 +9137,7 @@
           ]
         },
         {
-          "line": 130,
+          "line": 176,
           "source_excerpt": "function renderRating(){if(regionActive===\"アジア\"){renderAsiaRating();return}const regions=baseRegions(),genres=allGenres(regions),genreOpts=[\"すべて\",...genres];if(!genreOpts.includes(genreActive))genreActive=\"すべて\";const useGenres=genreActive===\"すべて\"?genres:[genreActive];let eras=availableEras(regions,useGenres);const eraNum=e=>{const m=String(e).match(/(\\d{4})/);return m?Number(m[1]):-1};eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),\"ja\"));const eraOpts=[\"すべて\",\"今年\",...eras",
           "tokens": [
             {
@@ -9059,7 +9167,7 @@
           ]
         },
         {
-          "line": 158,
+          "line": 226,
           "source_excerpt": "async function renderBox(){const regions=[\"すべて\",\"国内\",\"国外\"];$(\"#boxRegionChips\").innerHTML=regions.map(x=>'<button class=\"chip '+(x===boxRegion?'active':'')+'\" data-box-region=\"'+x+'\">'+x+'</button>').join(\"\");const years=Object.keys(boxoffice.by_year||{}).sort((a,b)=>Number(b)-Number(a)),periods=[\"歴代\",...years];if(!periods.includes(boxEra))boxEra=\"歴代\";$(\"#boxEraChips\").innerHTML=periods.map(x=>'<button class=\"chip '+(x===boxEra?'active':'')+'\" data-box-era=\"'+x+'\">'+x+'</button>').join(\"\");docum",
           "tokens": [
             {
@@ -9077,15 +9185,11 @@
             {
               "column": 666,
               "operation": ".onclick=()=>{boxEra=b.dataset.boxEra;render()});let raw=boxEra===\"歴代\"?(boxoffi"
-            },
-            {
-              "column": 2132,
-              "operation": "<button type=\"button\" class=\"rankReviewButton\" data-rank-review aria-label=\"こ"
             }
           ]
         },
         {
-          "line": 162,
+          "line": 230,
           "source_excerpt": "function renderAwards(){const decadeOf=y=>Math.floor(Number(y)/10)*10+\"年代\",allEras=[...new Set(awards.map(x=>decadeOf(x.year)))].sort((a,b)=>Number(b.slice(0,4))-Number(a.slice(0,4))),recentEras=allEras.filter(x=>Number(x.slice(0,4))>=1980),oldEras=allEras.filter(x=>Number(x.slice(0,4))<1980);if(![\"すべて\",...allEras].includes(awardEra))awardEra=\"すべて\";const inEra=awardEra===\"すべて\"?awards:awards.filter(x=>decadeOf(x.year)===awardEra),years=[\"すべて\",...[...new Set(inEra.map(x=>String(x.year)))].sort((a,",
           "tokens": [
             {
@@ -9127,17 +9231,17 @@
           ]
         },
         {
-          "line": 182,
-          "source_excerpt": "async function boot(){try{const [r,m,y,b,a]=await Promise.all([fetch(\"data/rankings.json?\"+Date.now()),fetch(\"data/rankings_manifest.json?\"+Date.now()).catch(()=>null),fetch(\"data/rankings_year.json?\"+Date.now()).catch(()=>null),fetch(\"data/boxoffice.json?\"+Date.now()),fetch(\"data/awards.json?\"+Date.now())]);const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};manifest=m&&m.ok?await m.json():{};const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year|",
+          "line": 250,
+          "source_excerpt": "async function boot(){try{const [r,m,y,b,a]=await Promise.all([fetch(\"data/rankings.json?\"+Date.now()),fetch(\"data/rankings_manifest.json?\"+Date.now()).catch(()=>null),fetch(\"data/rankings_year.json?\"+Date.now()).catch(()=>null),fetch(\"data/boxoffice.json?v=20261019-poster-precomputed\"),fetch(\"data/awards.json?\"+Date.now())]);const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};manifest=m&&m.ok?await m.json():{};const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};",
           "tokens": [
             {
-              "column": 654,
+              "column": 672,
               "operation": ".onclick=()=>{axis=btn.dataset.axis;render()});render()}catch(err){$(\"#grid\").i"
             }
           ]
         },
         {
-          "line": 183,
+          "line": 251,
           "source_excerpt": "</script><script>(()=>{const b=document.getElementById(\"gMenuBtn\"),d=document.getElementById(\"gDrawer\"),m=document.getElementById(\"gDrawerMask\"),x=document.getElementById(\"gDrawerClose\");if(!b||!d||!m)return;const open=()=>{d.classList.add(\"show\");m.classList.add(\"show\")},close=()=>{d.classList.remove(\"show\");m.classList.remove(\"show\")};b.addEventListener(\"click\",open);m.addEventListener(\"click\",close);x&&x.addEventListener(\"click\",close)})();</script>",
           "tokens": [
             {
@@ -9250,7 +9354,7 @@
         },
         {
           "line": 183,
-          "source_excerpt": "grid.innerHTML=results.map((m,i)=>'<button class=\"card\" data-i=\"'+i+'\" style=\"padding:0;text-align:left\"><div class=\"poster\">'+(m.poster?'<img src=\"'+E(m.poster)+'\" loading=\"lazy\">':'')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title)+'</div><div class=\"meta\">'+E(movieReleaseYear(m)||\"公開年未確認\")+'</div><div class=\"score\">TMDB ★ '+Number(m.score||0).toFixed(1)+'</div></div></button>').join(\"\")||'<div class=\"status\">該当作品なし</div>';",
+          "source_excerpt": "grid.innerHTML=results.map((m,i)=>'<button class=\"card\" data-i=\"'+i+'\" style=\"padding:0;text-align:left\"><div class=\"poster\">'+(m.poster?'<img src=\"'+E(m.poster)+'\" loading=\"lazy\">':'')+'</div><div class=\"body\"><div class=\"title\">'+E(m.title)+'</div><div class=\"meta\">'+E(movieReleaseYear(m)||\"公開年未確認\")+'</div><div class=\"score\">見た人の評価（TMDB） '+(Number(m.score)>0?(Number(m.score)/2).toFixed(1)+' / 5.0':'評価なし')+'</div></div></button>').join(\"\")||'<div class=\"status\">該当作品なし</div>';",
           "tokens": [
             {
               "column": 37,

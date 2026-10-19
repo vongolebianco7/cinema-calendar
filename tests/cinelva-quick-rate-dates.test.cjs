@@ -14,7 +14,7 @@ function editor(initialDate, existing = true, identity = {}) {
   if (existing) Records.save({ id: 123, title: '日付精度テスト', comment: '元の感想', ...identity }, 4, initialDate);
   const nodes = new Map();
   const element = id => {
-    if (!nodes.has(id)) nodes.set(id, { value: '', textContent: '' });
+    if (!nodes.has(id)) nodes.set(id, { value: '', textContent: '', hidden: false, style: { setProperty() {} }, addEventListener() {}, replaceChildren() {} });
     return nodes.get(id);
   };
   Object.assign(context, {
@@ -27,10 +27,11 @@ function editor(initialDate, existing = true, identity = {}) {
     dateTrigger: element('dateTrigger'),
     dialog: { open: false, showModal() { this.open = true; }, close() { this.open = false; } },
     root: { dispatchEvent() {} },
+    document: { createElement() { return { value: '', textContent: '' }; } },
     CustomEvent: class {},
   });
   const source = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
-  const actions = source.slice(source.indexOf('function open(movie,'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
+  const actions = source.slice(source.indexOf('function syncViewingVenue('), source.indexOf("$('cinelvaRateSave').onclick=save;"));
   vm.runInContext('let selected;\n' + actions + '\nglobalThis.actions={open,save};', context);
   context.actions.open({ id: 123, title: '日付精度テスト' });
   return { Records, element, actions: context.actions, dialog: context.dialog, context };

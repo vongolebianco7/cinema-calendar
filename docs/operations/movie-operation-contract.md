@@ -17,11 +17,11 @@
 | カレンダーの劇場公開／配信／TV作品 | quick-rate `enhanceCalendar` | 予定日を鑑賞日と誤認して自動保存しない |
 | 作品検索一覧 | quick-rate `enhanceGrid` | カード内に操作ボタンを入れ子にしない |
 | ランキング／受賞ランキング／興行収入 | quick-rate／`mountRankingGauges` | 同じゲージ・目・ブックマーク |
-| 作品詳細 | `renderDetail` → `mountInline` | 大きい独自の記録ボタンを共通操作で置換 |
+| 作品詳細・関連作品・同じ監督の作品 | `renderDetail` → `mountInline` | 独自の記録ボタンを共通操作で置換。関連作品にも同じ保存操作 |
 | My CINELVA 鑑賞した映画、カレンダー抽出、ジャンル抽出 | `card` → `mountFilmControls` | ポスター／作品名を独立詳細へ。削除は別操作 |
 | My CINELVA 映画賞の既鑑賞・未鑑賞作品 | `card`／`mountFilmControls` | 未照合の作品IDは操作を捏造せず照合待ち |
 | My CINELVA 監督作品一覧 | `mountInline` | imported IDはTMDB identityを使い、保存record IDは保持 |
-| 見つけるの作品棚・条件検索・作り手の作品 | `CinelvaDiscoveryResolve` → `mountInline` | 検索条件／棚の展開操作とは独立 |
+| 見つけるの作品棚・条件検索・作り手の作品・コンシェルジュの提案 | `CinelvaDiscoveryResolve` → `mountInline` | 検索条件／棚の展開操作とは独立 |
 | My CINELVA 見たい映画 | `cinelva-watchlist.js` → `mountInline` | 鑑賞した映画の横の専用タブ。ダッシュボードには一覧を置かない |
 | 再上映情報・劇場ディレクトリ・批評出典 | 作品詳細へのリンク／公式情報へのリンク | 固有の作品IDが無い行は直接保存しない。詳細で操作 |
 | ヘルプ／規約／クレジット | 作品操作対象外 | ナビ・テーマ・戻る操作を維持 |

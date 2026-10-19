@@ -961,6 +961,7 @@ root.addEventListener('cinelva-record-updated',refreshInlineScores);
 root.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null)refreshInlineScores();});
 style.textContent+=`
 /* Shared operations on record, award, detail and wanted-film surfaces. */
+.cinelva-related-unit{min-width:0;width:100%}.cinelva-related-unit>.work{display:block;width:100%}
 @media(max-width:699px){#summaryView #csTop.cs-posters{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .record-shared-controls,.want-watch-controls{min-width:0;width:100%}
 .record-shared-controls .cinelva-rating-controls,.want-watch-controls .cinelva-rating-controls,.recordAction .cinelva-rating-controls{width:100%!important;margin:5px 0!important}
@@ -978,7 +979,7 @@ root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||targ
 
 if(root.CinelvaDiscoveryResolve){
  const enhanceDiscovery=()=>{
-  document.querySelectorAll('button[data-popular-id],button[data-person-movie],button.card[data-id]').forEach(card=>{
+  document.querySelectorAll('button[data-popular-id],button[data-person-movie],button.card[data-id],a.conciergeMovie[data-movie-id]').forEach(card=>{
    if(card.parentElement?.classList.contains('cinelva-discovery-unit'))return;
    const movie=root.CinelvaDiscoveryResolve(card);if(!validId(movie?.tmdbId??movie?.id))return;
    const wrap=document.createElement('div');wrap.className='cinelva-discovery-unit';

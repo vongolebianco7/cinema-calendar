@@ -24,7 +24,7 @@ for route in manifest['routes']:
 sources=[]
 pattern=re.compile(r'addEventListener\(|\.on(?:click|change|input|submit)\s*=|localStorage\.|\.setItem\(|\.removeItem\(|Records\.(?:save|restore|remove)|data-(?:bookmark|review|edit|delete|film-controls)|<button|<input|<select|<textarea')
 for p in sorted(files):
- matches=[{'line':n,'source_excerpt':line.strip()[:500]} for n,line in enumerate(p.read_text().splitlines(),1) if pattern.search(line)]
+ matches=[{'line':n,'source_excerpt':line.strip()[:500],'tokens':[{'column':m.start()+1,'operation':line[m.start():min(len(line),m.end()+70)]} for m in pattern.finditer(line)]} for n,line in enumerate(p.read_text().splitlines(),1) if pattern.search(line)]
  sources.append({'file':str(p.relative_to(ROOT)),'operations':matches})
 result={'schema_version':1,'scope':'all active route-manifest routes, effective canonical HTML, and their local scripts; includes dynamically generated controls/handlers/storage writes','routes':routes,'sources':sources}
 out=ROOT/'docs/operations/ui-operation-inventory.json';out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')

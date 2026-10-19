@@ -1120,6 +1120,44 @@ style.textContent+=`
  display:block!important;width:16px!important;height:16px!important;flex:0 0 16px!important;
 }
 `;
+style.textContent+=`
+/* Two legible rows: reserve space for right-aligned values before icon column. */
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 18px!important;
+ grid-template-rows:40px!important;column-gap:3px!important;
+ padding:4px 5px!important;height:48px!important;min-height:48px!important;max-height:48px!important;
+ overflow:visible!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair{
+ display:grid!important;grid-template-rows:18px 18px!important;
+ width:100%!important;min-width:0!important;height:40px!important;min-height:40px!important;max-height:40px!important;
+ gap:1px!important;overflow:visible!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-pair>.cinelva-rating-line{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(13px,auto)!important;
+ width:100%!important;min-width:0!important;height:18px!important;min-height:18px!important;
+ gap:2px!important;align-items:center!important;overflow:visible!important;
+ font-size:9px!important;line-height:18px!important;
+}
+.cinelva-rating-controls-no-gauge .rating-caption{font-size:9px!important;white-space:nowrap!important;letter-spacing:-.25px!important}
+.cinelva-rating-controls-no-gauge .rating-value{
+ font-size:9px!important;display:block!important;min-width:13px!important;text-align:right!important;
+ white-space:nowrap!important;overflow:visible!important;font-variant-numeric:tabular-nums!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;
+ width:18px!important;min-width:18px!important;max-width:18px!important;height:40px!important;min-height:40px!important;
+ gap:2px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button{
+ width:18px!important;min-width:18px!important;max-width:18px!important;
+ height:18px!important;min-height:18px!important;max-height:18px!important;flex:0 0 18px!important;
+ padding:1px!important;border:1px solid #525765!important;border-radius:4px!important;
+}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge>.cinelva-rating-actions>button svg{
+ width:14px!important;height:14px!important;min-width:14px!important;min-height:14px!important;flex:0 0 14px!important;
+}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 
 })(window);

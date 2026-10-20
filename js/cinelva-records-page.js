@@ -528,11 +528,17 @@
       if(/キネマ旬報/.test(org))return /^(?:日本映画|外国映画)作品賞（第1位）$/.test(prize);
       return prize==='作品賞';
     };
+    const awardScope=$('awardCategory')?.value==='all'?'all':'picture';
+    document.querySelectorAll('[data-award-scope]').forEach(button=>{
+      const selected=button.dataset.awardScope===awardScope;
+      button.classList.toggle('active',selected);
+      button.setAttribute('aria-pressed',String(selected));
+    });
     const scopedCell=(name,decade)=>{
       const original=data.cells[`${name}:${decade}`];
       if(!original)return null;
-      const entries=(original.entries||[]).filter(entry=>(entry.categories||[]).some(category=>isHighestPicturePrize(name,category)));
-      // Multiple prize categories on one film count as a single watched film.
+      const entries=awardScope==='all'?(original.entries||[]):(original.entries||[]).filter(entry=>(entry.categories||[]).some(category=>isHighestPicturePrize(name,category)));
+      // One title contributes once per award and decade, irrespective of prize count.
       const count=entries.filter(entry=>entry.watched).length;
       return {...original,entries,count,completionRate:null};
     };
@@ -594,8 +600,10 @@
     awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>作品賞受賞作のMY平均評価 TOP5</h3><p class="cinelva-affinity-note">各映画賞で作品賞を受賞し、あなたが鑑賞した映画が対象です。自分の平均評価が高い順（評価3本未満は補正）。未評価作品は平均点に含みません。</p>'+
       (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">鑑賞 '+row.watched+'本 · MY平均 ★ '+row.average.toFixed(2)+'（評価 '+row.scored+'本）· 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
-    if(summary)summary.innerHTML=`<div class="award-stat"><span>鑑賞した最高作品賞受賞作</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>最高作品賞の収録対象</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>最高作品賞受賞作を最も観た映画賞</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
-    $('awardCoverage').textContent='各映画賞の最高作品賞（作品賞・パルム・ドール・金獅子賞・金熊賞など）を受賞した映画のみを集計しています。審査員賞・監督賞・演技賞などは含みません。収録が完全でないため達成率は表示しません。';
+    if(summary)summary.innerHTML=`<div class="award-stat"><span>${awardScope==='all'?'鑑賞した受賞作':'鑑賞した最高賞受賞作'}</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'収録済み受賞作':'最高賞の収録対象'}</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'受賞作を最も観た映画賞':'最高賞受賞作を最も観た映画賞'}</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
+    $('awardCoverage').textContent=awardScope==='all'?'収録済みの各部門の受賞作品を対象としています（最高賞を含む）。同じ映画が同じ賞の複数部門を受賞しても1作品として集計します。網羅的な受賞歴ではありません。':'最高賞（作品賞・パルム・ドール・金獅子賞・金熊賞など）の受賞作品だけを対象とします。他部門は集計しません。受賞記録は網羅的ではありません。';
+    const awardNotation=$('awardNotation');
+    if(awardNotation)awardNotation.textContent=awardScope==='all'?'数字は収録済みの受賞作を観た本数。最高賞も含みます。0は未鑑賞、— は受賞作未収録。同一作品が複数の映画賞に登場する場合は賞ごとに集計します。':'数字は最高賞の受賞作を観た本数。0は未鑑賞、— は対象受賞作未収録。同一作品が複数の映画賞に登場する場合は賞ごとに集計します。';
     $('awardMatrix').innerHTML=`<table class="award-table"><thead><tr><th scope="col">映画賞</th>${decades.map(d=>`<th scope="col">${d}<small>年代</small></th>`).join('')}<th scope="col" class="award-total-head">鑑賞計</th></tr></thead><tbody>${organizations.map(name=>{const total=decades.reduce((sum,decade)=>sum+(scopedCell(name,decade)?.count||0),0);return `<tr><th scope="row">${escapeHTML(awardDisplayName(name))}</th>${decades.map(decade=>{const cell=scopedCell(name,decade);if(!cell)return '<td class="award-empty" aria-label="受賞データの確認対象外"><span aria-hidden="true">—</span></td>';const value=!cell.entries.length?'—':rate?(cell.completionRate===null?'—':`${Math.round(cell.completionRate*100)}%`):cell.count;const selected=state.awardSelection?.organization===name&&state.awardSelection?.decade===decade;const level=rate?Math.ceil((cell.completionRate||0)*4):Math.min(4,cell.count);return `<td><button type="button" class="award-cell heat-${level}${selected?' is-selected':''}" aria-pressed="${selected}" data-award-cell="${escapeHTML(name)}|${decade}" aria-label="${escapeHTML(awardDisplayName(name))}、${decade}年代、鑑賞済み最高作品賞受賞作${cell.count}本">${value}</button></td>`;}).join('')}<td class="award-row-total">${total}<small>本</small></td></tr>`;}).join('')}</tbody></table>`;
     const cell=state.awardSelection&&scopedCell(state.awardSelection.organization,state.awardSelection.decade);
     const awardHeading=state.awardSelection?'<div class="award-detail-head"><div><span class="award-detail-kicker">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>最高作品賞受賞作の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type="button" class="award-detail-close" data-close-award aria-label="詳細を閉じる">×</button></div>':'';
@@ -608,7 +616,8 @@
       const metadata={...info,...(record?enriched(record):{}),id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.awardYears?.[0]||''};
       const status=record?'鑑賞済み':entryId?'未鑑賞':'照合保留';
       const headline='<div class="award-film-top"><span class="award-watch-state '+(record?'is-watched':'is-unwatched')+'">'+status+'</span><span class="award-film-year">'+escapeHTML((entry.awardYears||[]).join('・'))+'</span></div>';
-      const category='<small class="award-card-category">'+escapeHTML((entry.categories||[]).join('・'))+'</small>';
+      const categoryNames=awardScope==='all'?(entry.categories||[]):(entry.categories||[]).filter(prize=>isHighestPicturePrize(state.awardSelection.organization,prize));
+      const category='<small class="award-card-category">'+escapeHTML(categoryNames.join('・'))+'</small>';
       const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
       const id=String(metadata.id||'');
       const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<strong>'+escapeHTML(metadata.title)+'</strong>';
@@ -1120,6 +1129,12 @@
     $('genreMatrix').onclick=event=>{const button=event.target.closest('[data-genre],[data-genre-pair]');if(!button)return;if(button.dataset.genrePair){const [first,second]=button.dataset.genrePair.split('|');const rows=classifiedRecords().filter(record=>recordGenres(record).includes(first)&&recordGenres(record).includes(second));$('genreFilms').innerHTML=rows.length?rows.map(card).join(''):`<div class="empty" style="grid-column:1/-1">${escapeHTML(first)}と${escapeHTML(second)}の両方に分類された記録はありません。</div>`;return;}renderGenreFilms(button.dataset.genre);};
     $('awardMatrix').onclick=event=>{const button=event.target.closest('[data-award-cell]');if(!button)return;const [organization,decade]=button.dataset.awardCell.split('|');state.awardSelection={organization,decade:Number(decade)};renderAwards();};
     $('genreFormat').onchange=renderGenres; $('genreWorkForm').onchange=renderGenres; $('awardMode').onchange=renderAwards; $('awardCategory').onchange=renderAwards; $('awardOther').onchange=renderAwards;
+    document.querySelectorAll('[data-award-scope]').forEach(button=>button.addEventListener('click',()=>{
+      const selector=$('awardCategory'),scope=button.dataset.awardScope;
+      if(!selector||!['picture','all'].includes(scope)||selector.value===scope)return;
+      selector.value=scope;
+      renderAwards();
+    }));
     $('awardFilms').onclick=event=>{if(event.target.closest('[data-close-award]')){state.awardSelection=null;renderAwards();return;}const button=event.target.closest('[data-award-film]');if(button)openKnownMovie(button.dataset.awardFilm);};
     $('worldZoomIn').onclick=()=>{state.plotZoom=Math.min(2.5,state.plotZoom*1.2);drawWorld();};$('worldZoomOut').onclick=()=>{state.plotZoom=Math.max(.65,state.plotZoom/1.2);drawWorld();};$('worldReset').onclick=()=>{state.plotRotation={x:-.32,y:-.58};state.plotZoom=1;state.plotOffset={x:0,y:0};drawWorld();};$('worldToggle').onclick=()=>{state.flatWorld=!state.flatWorld;drawWorld();};
 

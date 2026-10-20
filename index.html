@@ -256,7 +256,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 .presetShelfGrid img,.cinelva-discover-review-wrap .poster img,#grid .cinelva-rate-wrap .poster img{display:block;width:100%;height:100%;object-fit:cover}
 .cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
-</style><style id="outdoor-film-common-review">.outdoorFilmGrid>.outdoorFilmEntry{min-width:0;display:flex;flex-direction:column}.outdoorFilmEntry>.outdoorFilmItem{flex:1}.outdoorFilmReview{margin-top:auto;min-width:0}.outdoorScreeningTime{font-weight:700;color:#b9cde4}</style></head>
+</style><style id="outdoor-film-common-review">.outdoorFilmGrid>.outdoorFilmEntry{min-width:0;display:flex;flex-direction:column}.outdoorFilmEntry>.outdoorFilmItem{flex:1}.outdoorFilmReview{margin-top:auto;min-width:0}.outdoorScreeningTime{font-weight:700;color:#b9cde4}</style><style id="festival-details-list">.cinelvaFestivalDetails{display:grid;gap:12px;margin:20px 0}.cinelvaFestivalDetail{border:1px solid #34373c;background:#14171b;border-radius:10px;padding:14px}.cinelvaFestivalDetail h3{margin:7px 0}.cinelvaFestivalDetail p{margin:7px 0;line-height:1.6;color:#c5c9d0}.cinelvaFestivalDetail a{color:#8bc7ff}</style></head>
 <body>
 
 
@@ -626,6 +626,9 @@ function renderCal(){if(mode==="events"){renderOutdoorCalendar();return;}
    }).join("");
    out+='<div class="festivalWeek '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'">'+cells+spans+'</div>'
   }
+  const visible=festivalEvents.filter(ev=>ev.service!=="国内イベント"&&ev.date<=view.getFullYear()+"-"+String(view.getMonth()+1).padStart(2,"0")+"-"+String(new Date(view.getFullYear(),view.getMonth()+1,0).getDate()).padStart(2,"0")&&(ev.end_date||ev.date)>=view.getFullYear()+"-"+String(view.getMonth()+1).padStart(2,"0")+"-01");
+  const escapeEvent=x=>String(x||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  out+='<div class="cinelvaFestivalDetails">'+visible.map(ev=>'<article class="cinelvaFestivalDetail"><div class="small">'+escapeEvent(ev.date)+(ev.end_date&&ev.end_date!==ev.date?' 〜 '+escapeEvent(ev.end_date):'')+' · '+escapeEvent(ev.service)+'</div><h3>'+escapeEvent(ev.title)+'</h3><p>'+escapeEvent(ev.venue||"会場未発表")+'</p>'+(ev.overview?'<p>'+escapeEvent(ev.overview)+'</p>':'')+(ev.source_url?'<a href="'+escapeEvent(ev.source_url)+'" target="_blank" rel="noopener noreferrer">公式情報 ↗</a>':'')+'</article>').join("")+'</div>';
   $("#dates").innerHTML=out;
   document.querySelectorAll(".festivalSpan").forEach(x=>x.onclick=()=>{
    let title=decodeURIComponent(x.dataset.eventTitle),m=festivalEvents.find(e=>e.title===title);

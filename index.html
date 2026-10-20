@@ -976,28 +976,41 @@ async function hydrateMorningTenPosters(){
 }
 
 async function hydrateStreamingPosters(){
- const rows=movies.filter(m=>m&&!m.poster&&String(m.title||'').trim()&&
-   (String(m.mode||m.type||m.release_type||'').toLowerCase().includes('stream')||
-    m.service||m.platform||m.streaming_service||m.provider));
- const candidates=rows;let cursor=0,updated=0;
- const norm=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,'');
+ const rows=movies.filter(m=>m&&m.event==="streaming"&&!m.poster&&String(m.title||"").trim());
+ const normalize=x=>String(x||"").normalize("NFKC").toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,"");
+ const filmYear=x=>{const v=x.release_date||x.releaseDate||x.year||x.release_year||"";const y=String(v).match(/(?:19|20)\\d{2}/);return y?y[0]:""};
+ const validPoster=x=>{let p=x.poster||x.posterUrl||x.poster_url||x.poster_path||x.posterPath||"";if(typeof p!=="string")return "";if(p.startsWith("/")&&!p.startsWith("//")&&!p.includes(".."))p="https://image.tmdb.org/t/p/w342"+p;return p.startsWith("https://")?p:""};
+ let cursor=0,updated=0,unresolved=0,ambiguous=0;
+ const seen=new Map();
  async function worker(){
-  while(cursor<candidates.length){
-   const m=candidates[cursor++];
-   try{
-    const r=await fetch('https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:m.title,limit:'12'}),{cache:'force-cache'});
-    if(!r.ok)continue;
-    const d=await r.json(),list=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];
-    const hit=list.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(m.title)))||list.find(x=>String(x.tmdbId||x.id)===String(m.tmdbId||m.id)&&Boolean(m.tmdbId||m.id))||null;
-    if(!hit)continue;
-    let poster=hit.poster||hit.posterUrl||hit.poster_url||hit.poster_path||hit.posterPath||hit.image;
-    if(poster&&String(poster).startsWith('/')&&!String(poster).startsWith('/images/'))poster='https://image.tmdb.org/t/p/w342'+poster;
-    if(!poster)continue;
-    m.poster=poster;m.id=m.id||hit.tmdbId||hit.id;m.tmdbId=m.tmdbId||hit.tmdbId||hit.id;updated++;
-   }catch{}
+  while(cursor<rows.length){
+   const m=rows[cursor++],id=Number(m.tmdbId||m.tmdb_id||0),year=filmYear(m);
+   const local=window.CinelvaMovieIdentity?.resolve({tmdbId:id||undefined,title:m.title,year:year||undefined});
+   if(local&&validPoster(local)&&id&&Number(local.tmdbId||local.id)===id){m.poster=validPoster(local);updated++;continue}
+   const key=normalize(m.title)+"|"+year+"|"+id;
+   if(!seen.has(key))seen.set(key,fetch("https://backend-one-gray-94.vercel.app/api/movies?"+new URLSearchParams({q:m.title,limit:"25"}),{cache:"force-cache"}).then(r=>r.ok?r.json():null).catch(()=>null));
+   const d=await seen.get(key);
+   if(!d){unresolved++;continue}
+   const list=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];
+   const matches=list.filter(x=>{
+    const xid=Number(x.tmdbId||x.tmdb_id||x.id||0);
+    if(id)return xid===id;
+    if(![x.title,x.original_title,x.originalTitle,x.name].some(t=>normalize(t)===normalize(m.title)))return false;
+    const foundYear=filmYear(x);
+    return Boolean(year&&foundYear&&year===foundYear);
+   });
+   const uniqueIds=new Set(matches.map(x=>String(x.tmdbId||x.tmdb_id||x.id||"")));
+   if(uniqueIds.size!==1){if(matches.length)ambiguous++;else unresolved++;continue}
+   const hit=matches.find(x=>validPoster(x));
+   if(!hit){unresolved++;continue}
+   const hitId=Number(hit.tmdbId||hit.tmdb_id||hit.id||0);
+   if(!hitId){unresolved++;continue}
+   m.poster=validPoster(hit);m.tmdbId=hitId;updated++;
+   window.CinelvaMovieIdentity?.ingest(hit);
   }
  }
  await Promise.all([worker(),worker(),worker()]);
+ window.CinelvaStreamingPosterAudit={total:movies.filter(m=>m.event==="streaming").length,initiallyMissing:rows.length,recovered:updated,unresolved,ambiguous,remaining:rows.filter(m=>!m.poster).length};
  if(updated)render();
 }
 async function fastInitialCalendarPaint(){

@@ -188,7 +188,7 @@ style.textContent+=`
 .cinelva-rate-wrap>.cinelva-rate-button{display:inline-grid;place-items:center;width:40px;height:40px;margin:6px 8px;border-radius:50%}
 `;
 enhanceGrid(document.querySelector('#cards'),'calendar');
-enhanceGrid(document.querySelector('#grid'),location.pathname.includes('rankings')?'rankings':'search');
+if(!location.pathname.includes('rankings'))enhanceGrid(document.querySelector('#grid'),'search'); // Rankings supply their own shared review region.
 // The real index calendar renders cards in #dates, not #cards. Do not add
 // another listing page or alter the original calendar click-to-detail action.
 function enhanceCalendar(grid){

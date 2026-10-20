@@ -289,14 +289,11 @@
   }
   function card(movie) {
     const id=escapeHTML(movie.id),title=escapeHTML(movie.title||'作品名不明');
-    const when=escapeHTML(formatDate(dateOf(movie)));
-    const method=escapeHTML(movie.viewingMethod||'');
     return '<article class="movie cinelva-unified-record-card" data-record-card="'+id+'">'+
       '<div class="cinelva-record-poster">'+posterHTML(movie)+'</div>'+
       '<strong class="cinelva-record-title">'+title+'</strong>'+
-      '<div class="cinelva-record-meta"><small>'+escapeHTML(movie.year||'公開年不明')+'</small><small>'+when+'</small><small>'+(method||'鑑賞方法未設定')+'</small></div>'+
-      '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div>'+
-      '<div class="cinelva-record-footer"><button type="button" class="record-delete-icon" data-delete="'+id+'" aria-label="鑑賞記録を削除：'+title+'" title="記録を削除">削除</button></div></article>';
+      '<div class="cinelva-record-meta"><small>'+escapeHTML(movie.year||'公開年不明')+'</small></div>'+
+      '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
   function mountRecordReviewAreas(scope){
     if(!scope)return;
@@ -386,7 +383,7 @@
   });
   function populateYears() {
     const years = [...new Set(recordMovies().map(dateOf).filter(value => /^\d{4}/.test(value)).map(value => value.slice(0, 4)))].sort((a, b) => b.localeCompare(a));
-    $('recordYear').innerHTML = '<option value="all">すべての年</option>' + years.map(year => `<option>${year}</option>`).join('');
+    $('recordYear').innerHTML = '<option value="all">全年</option>' + years.map(year => `<option value="${year}">${year}年</option>`).join('');
     const releaseYears = [...new Set(recordMovies().map(enriched).map(record => record.year).filter(year => Number.isFinite(Number(year))).map(Number))].sort((a, b) => b - a);
     $('worldYear').innerHTML = '<option value="all">すべて</option>' + releaseYears.map(year => `<option>${year}</option>`).join('');
     const genres = Insights.GENRE_TAXONOMY.filter(genre => recordMovies().some(record => recordGenres(record).includes(genre)));

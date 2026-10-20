@@ -843,6 +843,42 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 #recordsView #recordList.record-grid>.movie .record-actions{margin-top:auto!important}
 }
 </style>
-<script id="cinelva-watchlist-tab">
-(()=>{'use strict';const key='cinelva-want-to-watch-v1',list=document.getElementById('wantWatchList'),view=document.getElementById('watchlistView');const read=()=>{try{const value=JSON.parse(localStorage.getItem(key)||'{}');return value&&typeof value==='object'?value:{}}catch{return {}}};function render(){const entries=Object.values(read()).filter(x=>x&&/^[1-9]\d*$/.test(String(x.id))).sort((a,b)=>String(b.savedAt||'').localeCompare(String(a.savedAt||'')));list.replaceChildren();if(!entries.length){const p=document.createElement('p');p.className='hint';p.textContent='見たい映画はまだありません。映画一覧のブックマークから追加できます。';list.append(p);return;}for(const item of entries){const row=document.createElement('div');row.className='want-watch-item';const link=document.createElement('a');link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');link.textContent=item.title||'作品';const remove=document.createElement('button');remove.type='button';remove.textContent='解除';remove.onclick=()=>{const data=read();delete data[String(item.id)];localStorage.setItem(key,JSON.stringify(data));render()};row.append(link,remove);list.append(row)}}document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',render);window.addEventListener('storage',e=>{if(e.key===key)render()});window.addEventListener('cinelva-bookmarks-updated',render);render()})();
+<style id="cinelva-watchlist-grid">
+#wantWatchList.want-watch-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;align-items:stretch!important}
+#wantWatchList .want-watch-item{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:initial!important;min-width:0!important;padding:0!important;border:1px solid var(--line)!important;border-radius:8px!important;overflow:hidden!important;gap:0!important}
+#wantWatchList .want-watch-film{display:flex;flex-direction:column;flex:1;min-width:0;color:var(--ink);text-decoration:none}
+#wantWatchList .want-watch-poster{width:100%;aspect-ratio:2/3;background:var(--soft);display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;color:var(--muted)}
+#wantWatchList .want-watch-poster img{display:block;width:100%;height:100%;object-fit:cover}
+#wantWatchList .want-watch-film strong{font-size:12px;line-height:1.4;padding:7px;overflow-wrap:anywhere}
+#wantWatchList .want-watch-review{margin-top:auto;min-width:0}
+#wantWatchList .want-watch-remove{align-self:stretch!important;margin:4px!important;font-size:10px!important;padding:6px 2px!important;white-space:normal!important}
+@media(max-width:600px){#watchlistView .panel{padding:10px!important}}
+</style><script id="cinelva-watchlist-tab">
+(()=>{'use strict';
+const key='cinelva-want-to-watch-v1',list=document.getElementById('wantWatchList');
+const read=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}};
+function render(){
+ const entries=Object.values(read()).filter(x=>x&&Number(x.id)>0).sort((a,b)=>String(b.savedAt||'').localeCompare(String(a.savedAt||'')));
+ list.replaceChildren();
+ if(!entries.length){const p=document.createElement('p');p.className='hint';p.textContent='見たい映画はまだありません。映画一覧のブックマークから追加できます。';list.append(p);return}
+ for(const item of entries){
+  const card=document.createElement('article');card.className='want-watch-item';
+  const link=document.createElement('a');link.className='want-watch-film';link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');
+  const poster=document.createElement('div');poster.className='want-watch-poster';
+  const url=String(item.poster||item.posterUrl||item.poster_path||'');
+  if(url){const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=url.startsWith('/')?'https://image.tmdb.org/t/p/w342'+url:url;img.onerror=()=>{img.remove();poster.textContent='ポスター未取得'};poster.append(img)}
+  else poster.textContent='ポスター未取得';
+  const title=document.createElement('strong');title.textContent=item.title||'作品';link.append(poster,title);
+  const review=document.createElement('div');review.className='want-watch-review';
+  const remove=document.createElement('button');remove.type='button';remove.className='want-watch-remove';remove.textContent='ブックマーク解除';
+  remove.onclick=()=>{const data=read();delete data[String(item.id)];localStorage.setItem(key,JSON.stringify(data));render()};
+  card.append(link,review,remove);list.append(card);
+  globalThis.CinelvaQuickRate?.mountInline?.(review,{...item,id:Number(item.id),tmdbId:Number(item.id),title:item.title||'作品'});
+ }
+}
+document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',render);
+window.addEventListener('storage',e=>{if(e.key===key)render()});
+window.addEventListener('cinelva-bookmarks-updated',render);
+render();
+})();
 </script></body></html>

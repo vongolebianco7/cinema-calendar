@@ -591,7 +591,12 @@
       "recipient": "Adrien Brody",
       "film_title": "The Brutalist",
       "work_id": "award-work:95d3f7ef456a0406ba66",
-      "match_status": "unresolved"
+      "match_status": "resolved",
+      "tmdb_id": 1390687,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1390687",
+      "poster": "https://image.tmdb.org/t/p/w342/95c26oMRIjRH1kAQPsdVAYMeHJ2.jpg",
+      "display_title": "The Brutalist"
     },
     {
       "year": 2025,
@@ -799,7 +804,12 @@
       "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
       "film_title": "The Brutalist",
       "work_id": "award-work:2f34a841f420e8118935",
-      "match_status": "unresolved"
+      "match_status": "resolved",
+      "tmdb_id": 1390687,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1390687",
+      "poster": "https://image.tmdb.org/t/p/w342/95c26oMRIjRH1kAQPsdVAYMeHJ2.jpg",
+      "display_title": "The Brutalist"
     },
     {
       "year": 2025,
@@ -1365,7 +1375,12 @@
       "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
       "film_title": "Anora",
       "work_id": "award-work:dee20b0f14a713ac8772",
-      "match_status": "unresolved"
+      "match_status": "resolved",
+      "tmdb_id": 1064213,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1064213",
+      "poster": "https://image.tmdb.org/t/p/w342/oPzW7Juxp2545owUEVC6ppRqQBj.jpg",
+      "display_title": "ANORA アノーラ"
     },
     {
       "year": 2024,
@@ -1392,7 +1407,12 @@
       "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
       "film_title": "Emilia Pérez",
       "work_id": "award-work:670945e5d8e940ff2fd5",
-      "match_status": "unresolved"
+      "match_status": "resolved",
+      "tmdb_id": 974950,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/974950",
+      "poster": "https://image.tmdb.org/t/p/w342/fko8fTfL6BcAqOUh6BZYUjt4SQP.jpg",
+      "display_title": "エミリア・ペレス"
     },
     {
       "year": 2024,
@@ -1896,7 +1916,12 @@
       "source": "https://www.labiennale.org/en/history/recent-years",
       "film_title": "Nomadland",
       "work_id": "award-work:92ba1c055be9002e321e",
-      "match_status": "unresolved"
+      "match_status": "resolved",
+      "tmdb_id": 581734,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/581734",
+      "poster": "https://image.tmdb.org/t/p/w342/lWa055UrRPhbVsfwCv2yFUD7Q9u.jpg",
+      "display_title": "ノマドランド"
     },
     {
       "year": 2020,
@@ -3018,8 +3043,13 @@
       "title": "The Hurt Locker",
       "film_title": "The Hurt Locker",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:2009:the-hurt-locker"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:2009:the-hurt-locker",
+      "tmdb_id": 12162,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/12162",
+      "poster": "https://image.tmdb.org/t/p/w342/lDDxfyV8Py03I2WWtfY1ugg9E3d.jpg",
+      "display_title": "ハート・ロッカー"
     },
     {
       "year": 2009,
@@ -3065,8 +3095,13 @@
       "film_title": "Slumdog Millionaire",
       "release_year": 2008,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:2009"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:2009",
+      "tmdb_id": 12405,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/12405",
+      "poster": "https://image.tmdb.org/t/p/w342/eRYIQp8pmpcGErzlVBMaKOu7Uok.jpg",
+      "display_title": "スラムドッグ＄ミリオネア"
     },
     {
       "year": 2009,
@@ -3108,8 +3143,13 @@
       "title": "Slumdog Millionaire",
       "film_title": "Slumdog Millionaire",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:2008:slumdog-millionaire"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:2008:slumdog-millionaire",
+      "tmdb_id": 12405,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/12405",
+      "poster": "https://image.tmdb.org/t/p/w342/eRYIQp8pmpcGErzlVBMaKOu7Uok.jpg",
+      "display_title": "スラムドッグ＄ミリオネア"
     },
     {
       "year": 2008,
@@ -3509,8 +3549,13 @@
       "film_title": "The Lord of the Rings: The Return of the King",
       "release_year": 2003,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:2004"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:2004",
+      "tmdb_id": 122,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/122",
+      "poster": "https://image.tmdb.org/t/p/w342/1ERoOlu6Icv5J7Wnx79H5QmA7uH.jpg",
+      "display_title": "ロード・オブ・ザ・リング／王の帰還"
     },
     {
       "year": 2004,
@@ -3552,8 +3597,13 @@
       "title": "The Lord of the Rings: The Return of the King",
       "film_title": "The Lord of the Rings: The Return of the King",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:2003:the-lord-of-the-rings-the-return-of-the-king"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:2003:the-lord-of-the-rings-the-return-of-the-king",
+      "tmdb_id": 122,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/122",
+      "poster": "https://image.tmdb.org/t/p/w342/1ERoOlu6Icv5J7Wnx79H5QmA7uH.jpg",
+      "display_title": "ロード・オブ・ザ・リング／王の帰還"
     },
     {
       "year": 2003,
@@ -3683,8 +3733,13 @@
       "film_title": "A Beautiful Mind",
       "release_year": 2001,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:2002"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:2002",
+      "tmdb_id": 453,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/453",
+      "poster": "https://image.tmdb.org/t/p/w342/uhekyaBXxGMSu832lDzIoYnoqhm.jpg",
+      "display_title": "ビューティフル・マインド"
     },
     {
       "year": 2002,
@@ -3783,8 +3838,13 @@
       "film_title": "Gladiator",
       "release_year": 2000,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:2001"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:2001",
+      "tmdb_id": 98,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/98",
+      "poster": "https://image.tmdb.org/t/p/w342/gcXdbLu9aatgLNYCxu3QMATrDoo.jpg",
+      "display_title": "グラディエーター"
     },
     {
       "year": 2001,
@@ -3826,8 +3886,13 @@
       "title": "Gladiator",
       "film_title": "Gladiator",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:2000:gladiator"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:2000:gladiator",
+      "tmdb_id": 98,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/98",
+      "poster": "https://image.tmdb.org/t/p/w342/gcXdbLu9aatgLNYCxu3QMATrDoo.jpg",
+      "display_title": "グラディエーター"
     },
     {
       "year": 2000,
@@ -3873,8 +3938,13 @@
       "film_title": "American Beauty",
       "release_year": 1999,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:2000"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:2000",
+      "tmdb_id": 14,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/14",
+      "poster": "https://image.tmdb.org/t/p/w342/toq7UrFKL6GkZlsZ4eR5VncMwUh.jpg",
+      "display_title": "アメリカン・ビューティー"
     },
     {
       "year": 2000,
@@ -3916,8 +3986,13 @@
       "title": "American Beauty",
       "film_title": "American Beauty",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1999:american-beauty"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1999:american-beauty",
+      "tmdb_id": 14,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/14",
+      "poster": "https://image.tmdb.org/t/p/w342/toq7UrFKL6GkZlsZ4eR5VncMwUh.jpg",
+      "display_title": "アメリカン・ビューティー"
     },
     {
       "year": 1999,
@@ -3974,8 +4049,13 @@
       "film_title": "Shakespeare in Love",
       "release_year": 1998,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1999"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1999",
+      "tmdb_id": 1934,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1934",
+      "poster": "https://image.tmdb.org/t/p/w342/1YocgFx0U02KJEQeGpFfiWqoV2K.jpg",
+      "display_title": "恋におちたシェイクスピア"
     },
     {
       "year": 1999,
@@ -4006,8 +4086,13 @@
       "title": "Shakespeare in Love",
       "film_title": "Shakespeare in Love",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1998:shakespeare-in-love"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1998:shakespeare-in-love",
+      "tmdb_id": 1934,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1934",
+      "poster": "https://image.tmdb.org/t/p/w342/1YocgFx0U02KJEQeGpFfiWqoV2K.jpg",
+      "display_title": "恋におちたシェイクスピア"
     },
     {
       "year": 1998,
@@ -4053,8 +4138,13 @@
       "film_title": "Titanic",
       "release_year": 1997,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1998"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1998",
+      "tmdb_id": 597,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/597",
+      "poster": "https://image.tmdb.org/t/p/w342/ofhCnW6i7mQIiLSSucBHqZQ7XT7.jpg",
+      "display_title": "タイタニック"
     },
     {
       "year": 1998,
@@ -4153,8 +4243,13 @@
       "film_title": "The English Patient",
       "release_year": 1996,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1997"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1997",
+      "tmdb_id": 409,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/409",
+      "poster": "https://image.tmdb.org/t/p/w342/q9eoZ215sUNGIYcEVFOSbFBRnJw.jpg",
+      "display_title": "イングリッシュ・ペイシェント"
     },
     {
       "year": 1997,
@@ -4196,8 +4291,13 @@
       "title": "The English Patient",
       "film_title": "The English Patient",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1996:the-english-patient"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1996:the-english-patient",
+      "tmdb_id": 409,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/409",
+      "poster": "https://image.tmdb.org/t/p/w342/q9eoZ215sUNGIYcEVFOSbFBRnJw.jpg",
+      "display_title": "イングリッシュ・ペイシェント"
     },
     {
       "year": 1996,
@@ -4333,8 +4433,13 @@
       "film_title": "Forrest Gump",
       "release_year": 1994,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1995"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1995",
+      "tmdb_id": 13,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/13",
+      "poster": "https://image.tmdb.org/t/p/w342/pplybKImR7LKzSVzRylK6Cl4dzm.jpg",
+      "display_title": "フォレスト・ガンプ／一期一会"
     },
     {
       "year": 1995,
@@ -4433,8 +4538,13 @@
       "film_title": "Schindler's List",
       "release_year": 1993,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1994"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1994",
+      "tmdb_id": 424,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/424",
+      "poster": "https://image.tmdb.org/t/p/w342/dWVnnqInKFHmNie1fyThdlDbGnG.jpg",
+      "display_title": "シンドラーのリスト"
     },
     {
       "year": 1994,
@@ -4476,8 +4586,13 @@
       "title": "Schindler's List",
       "film_title": "Schindler's List",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1993:schindler-s-list"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1993:schindler-s-list",
+      "tmdb_id": 424,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/424",
+      "poster": "https://image.tmdb.org/t/p/w342/dWVnnqInKFHmNie1fyThdlDbGnG.jpg",
+      "display_title": "シンドラーのリスト"
     },
     {
       "year": 1993,
@@ -4733,8 +4848,13 @@
       "film_title": "Dances with Wolves",
       "release_year": 1990,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1991"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1991",
+      "tmdb_id": 581,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/581",
+      "poster": "https://image.tmdb.org/t/p/w342/kPpgCnxxx35Ztv4I3JOQe5AuHV5.jpg",
+      "display_title": "ダンス・ウィズ・ウルブズ"
     },
     {
       "year": 1991,
@@ -4834,8 +4954,13 @@
       "film_title": "Driving Miss Daisy",
       "release_year": 1989,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1990"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1990",
+      "tmdb_id": 403,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/403",
+      "poster": "https://image.tmdb.org/t/p/w342/qa8Rge4V17Bkj50UI3m3zrrSD5J.jpg",
+      "display_title": "ドライビング Miss デイジー"
     },
     {
       "year": 1990,
@@ -4923,8 +5048,13 @@
       "film_title": "Rain Man",
       "release_year": 1988,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1989"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1989",
+      "tmdb_id": 380,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/380",
+      "poster": "https://image.tmdb.org/t/p/w342/oEWMYDwVQoU2xDJjt6cqXGNDyG3.jpg",
+      "display_title": "レインマン"
     },
     {
       "year": 1989,
@@ -4944,8 +5074,13 @@
       "title": "Rain Man",
       "film_title": "Rain Man",
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
-      "match_status": "unresolved",
-      "work_id": "historical:ベルリン国際映画祭:1989:rain-man"
+      "match_status": "resolved",
+      "work_id": "historical:ベルリン国際映画祭:1989:rain-man",
+      "tmdb_id": 380,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/380",
+      "poster": "https://image.tmdb.org/t/p/w342/oEWMYDwVQoU2xDJjt6cqXGNDyG3.jpg",
+      "display_title": "レインマン"
     },
     {
       "year": 1989,
@@ -4966,8 +5101,13 @@
       "title": "The Last Emperor",
       "film_title": "The Last Emperor",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1988:the-last-emperor"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1988:the-last-emperor",
+      "tmdb_id": 746,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/746",
+      "poster": "https://image.tmdb.org/t/p/w342/oENsYvZfOBLrovMVb0Qo7peabRX.jpg",
+      "display_title": "ラストエンペラー"
     },
     {
       "year": 1988,
@@ -5013,8 +5153,13 @@
       "film_title": "The Last Emperor",
       "release_year": 1987,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1988"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1988",
+      "tmdb_id": 746,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/746",
+      "poster": "https://image.tmdb.org/t/p/w342/oENsYvZfOBLrovMVb0Qo7peabRX.jpg",
+      "display_title": "ラストエンペラー"
     },
     {
       "year": 1988,
@@ -5103,8 +5248,13 @@
       "film_title": "Platoon",
       "release_year": 1986,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1987"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1987",
+      "tmdb_id": 792,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/792",
+      "poster": "https://image.tmdb.org/t/p/w342/e3WjsyOsKkbsDpDSV9RgE6eSxDa.jpg",
+      "display_title": "プラトーン"
     },
     {
       "year": 1987,
@@ -5193,8 +5343,13 @@
       "film_title": "Out of Africa",
       "release_year": 1985,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1986"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1986",
+      "tmdb_id": 606,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/606",
+      "poster": "https://image.tmdb.org/t/p/w342/tU0gV3seiuauyvDEO4JTBcXdd2W.jpg",
+      "display_title": "愛と哀しみの果て"
     },
     {
       "year": 1986,
@@ -5283,8 +5438,13 @@
       "film_title": "Amadeus",
       "release_year": 1984,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1985"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1985",
+      "tmdb_id": 279,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/279",
+      "poster": "https://image.tmdb.org/t/p/w342/5ZCP2OqdEKOiUqZsVkwmDkzDThp.jpg",
+      "display_title": "アマデウス"
     },
     {
       "year": 1985,
@@ -5383,8 +5543,13 @@
       "film_title": "Terms of Endearment",
       "release_year": 1983,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1984"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1984",
+      "tmdb_id": 11050,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/11050",
+      "poster": "https://image.tmdb.org/t/p/w342/eGGg2t7iAFKVMgIsOzaxVYrFpjD.jpg",
+      "display_title": "愛と追憶の日々"
     },
     {
       "year": 1984,
@@ -5526,8 +5691,13 @@
       "title": "Gandhi",
       "film_title": "Gandhi",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1982:gandhi"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1982:gandhi",
+      "tmdb_id": 783,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/783",
+      "poster": "https://image.tmdb.org/t/p/w342/qX1javesDba5Q4oJkh8w0liGPQr.jpg",
+      "display_title": "ガンジー"
     },
     {
       "year": 1982,
@@ -5626,8 +5796,13 @@
       "title": "Chariots of Fire",
       "film_title": "Chariots of Fire",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1981:chariots-of-fire"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1981:chariots-of-fire",
+      "tmdb_id": 9443,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/9443",
+      "poster": "https://image.tmdb.org/t/p/w342/oKldVy2TWtiAohsuHa7yBH2qYUY.jpg",
+      "display_title": "炎のランナー"
     },
     {
       "year": 1981,
@@ -5673,8 +5848,13 @@
       "film_title": "Ordinary People",
       "release_year": 1980,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1981"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1981",
+      "tmdb_id": 16619,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/16619",
+      "poster": "https://image.tmdb.org/t/p/w342/5gQLGRmBV8XoqWgkxuRFwe3jZV7.jpg",
+      "display_title": "普通の人々"
     },
     {
       "year": 1981,
@@ -5783,8 +5963,13 @@
       "film_title": "Kramer vs. Kramer",
       "release_year": 1979,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1980"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1980",
+      "tmdb_id": 12102,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/12102",
+      "poster": "https://image.tmdb.org/t/p/w342/rtjpX18grVqIlCnvEHZl7drImmN.jpg",
+      "display_title": "クレイマー、クレイマー"
     },
     {
       "year": 1980,
@@ -6016,8 +6201,13 @@
       "title": "Annie Hall",
       "film_title": "Annie Hall",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1977:annie-hall"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1977:annie-hall",
+      "tmdb_id": 703,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/703",
+      "poster": "https://image.tmdb.org/t/p/w342/n4Z6iQMCmO9kRDJ5UfQxfVZTwtN.jpg",
+      "display_title": "アニー・ホール"
     },
     {
       "year": 1977,
@@ -6078,8 +6268,13 @@
       "title": "One Flew Over the Cuckoo's Nest",
       "film_title": "One Flew Over the Cuckoo's Nest",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1976:one-flew-over-the-cuckoo-s-nest"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1976:one-flew-over-the-cuckoo-s-nest",
+      "tmdb_id": 510,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/510",
+      "poster": "https://image.tmdb.org/t/p/w342/y9uHWRM9mppWcbumoxYti3c1b6J.jpg",
+      "display_title": "カッコーの巣の上で"
     },
     {
       "year": 1976,
@@ -6115,8 +6310,13 @@
       "film_title": "One Flew Over the Cuckoo's Nest",
       "release_year": 1975,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1976"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1976",
+      "tmdb_id": 510,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/510",
+      "poster": "https://image.tmdb.org/t/p/w342/y9uHWRM9mppWcbumoxYti3c1b6J.jpg",
+      "display_title": "カッコーの巣の上で"
     },
     {
       "year": 1976,
@@ -6299,8 +6499,13 @@
       "film_title": "The Godfather",
       "release_year": 1972,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1973"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1973",
+      "tmdb_id": 238,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/238",
+      "poster": "https://image.tmdb.org/t/p/w342/hJ1oIGxEoskl4YfNpQ4AFUO5uub.jpg",
+      "display_title": "ゴッドファーザー"
     },
     {
       "year": 1973,
@@ -6357,8 +6562,13 @@
       "film_title": "The French Connection",
       "release_year": 1971,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1972"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1972",
+      "tmdb_id": 1051,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1051",
+      "poster": "https://image.tmdb.org/t/p/w342/huQRJrU50WN9w5aTomMYmuMKg6w.jpg",
+      "display_title": "フレンチ・コネクション"
     },
     {
       "year": 1972,
@@ -6494,8 +6704,13 @@
       "title": "Midnight Cowboy",
       "film_title": "Midnight Cowboy",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1969:midnight-cowboy"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1969:midnight-cowboy",
+      "tmdb_id": 3116,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/3116",
+      "poster": "https://image.tmdb.org/t/p/w342/6xrqsIpre7JvOJRFf5AR7nZ5DPE.jpg",
+      "display_title": "真夜中のカーボーイ"
     },
     {
       "year": 1969,
@@ -6532,8 +6747,13 @@
       "film_title": "Oliver!",
       "release_year": 1968,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1969"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1969",
+      "tmdb_id": 17917,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/17917",
+      "poster": "https://image.tmdb.org/t/p/w342/uMNTAfRSQhld6HvWWfHndNK74xc.jpg",
+      "display_title": "オリバー！"
     },
     {
       "year": 1969,
@@ -6589,8 +6809,13 @@
       "film_title": "In the Heat of the Night",
       "release_year": 1967,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1968"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1968",
+      "tmdb_id": 10633,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/10633",
+      "poster": "https://image.tmdb.org/t/p/w342/s6rlARhegkO6fJFLEuQ7bRAsWga.jpg",
+      "display_title": "夜の大捜査線"
     },
     {
       "year": 1968,
@@ -6620,8 +6845,13 @@
       "title": "A Man For All Seasons",
       "film_title": "A Man For All Seasons",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1967:a-man-for-all-seasons"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1967:a-man-for-all-seasons",
+      "tmdb_id": 874,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/874",
+      "poster": "https://image.tmdb.org/t/p/w342/15d6ftsoy5U9MZLYtRnQZTPtvyA.jpg",
+      "display_title": "わが命つきるとも"
     },
     {
       "year": 1967,
@@ -6657,8 +6887,13 @@
       "film_title": "A Man for All Seasons",
       "release_year": 1966,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1967"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1967",
+      "tmdb_id": 874,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/874",
+      "poster": "https://image.tmdb.org/t/p/w342/15d6ftsoy5U9MZLYtRnQZTPtvyA.jpg",
+      "display_title": "わが命つきるとも"
     },
     {
       "year": 1967,
@@ -6736,8 +6971,13 @@
       "film_title": "The Sound of Music",
       "release_year": 1965,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1966"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1966",
+      "tmdb_id": 15121,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/15121",
+      "poster": "https://image.tmdb.org/t/p/w342/ysygp4x2a0YvQU9tVFPih7vXQqa.jpg",
+      "display_title": "サウンド・オブ・ミュージック"
     },
     {
       "year": 1966,
@@ -6756,8 +6996,13 @@
       "title": "My Fair Lady",
       "film_title": "My Fair Lady",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1965:my-fair-lady"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1965:my-fair-lady",
+      "tmdb_id": 11113,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/11113",
+      "poster": "https://image.tmdb.org/t/p/w342/qip9Mh9OLJlgdoedTketGRRehMP.jpg",
+      "display_title": "マイ・フェア・レディ"
     },
     {
       "year": 1965,
@@ -6804,8 +7049,13 @@
       "film_title": "My Fair Lady",
       "release_year": 1964,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1965"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1965",
+      "tmdb_id": 11113,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/11113",
+      "poster": "https://image.tmdb.org/t/p/w342/qip9Mh9OLJlgdoedTketGRRehMP.jpg",
+      "display_title": "マイ・フェア・レディ"
     },
     {
       "year": 1965,
@@ -6872,8 +7122,13 @@
       "film_title": "Tom Jones",
       "release_year": 1963,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1964"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1964",
+      "tmdb_id": 5769,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/5769",
+      "poster": "https://image.tmdb.org/t/p/w342/yKuZKLMhe74PJzaxYLh2s8h4P2P.jpg",
+      "display_title": "トム・ジョーンズの華麗な冒険"
     },
     {
       "year": 1964,
@@ -6892,8 +7147,13 @@
       "title": "Tom Jones",
       "film_title": "Tom Jones",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1963:tom-jones"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1963:tom-jones",
+      "tmdb_id": 5769,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/5769",
+      "poster": "https://image.tmdb.org/t/p/w342/yKuZKLMhe74PJzaxYLh2s8h4P2P.jpg",
+      "display_title": "トム・ジョーンズの華麗な冒険"
     },
     {
       "year": 1963,
@@ -6939,8 +7199,13 @@
       "film_title": "Lawrence of Arabia",
       "release_year": 1962,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1963"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1963",
+      "tmdb_id": 947,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/947",
+      "poster": "https://image.tmdb.org/t/p/w342/AiAm0EtDvyGqNpVoieRw4u65vD1.jpg",
+      "display_title": "アラビアのロレンス"
     },
     {
       "year": 1963,
@@ -6980,8 +7245,13 @@
       "title": "Lawrence of Arabia",
       "film_title": "Lawrence of Arabia",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1962:lawrence-of-arabia"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1962:lawrence-of-arabia",
+      "tmdb_id": 947,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/947",
+      "poster": "https://image.tmdb.org/t/p/w342/AiAm0EtDvyGqNpVoieRw4u65vD1.jpg",
+      "display_title": "アラビアのロレンス"
     },
     {
       "year": 1962,
@@ -7146,8 +7416,13 @@
       "film_title": "The Apartment",
       "release_year": 1960,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1961"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1961",
+      "tmdb_id": 284,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/284",
+      "poster": "https://image.tmdb.org/t/p/w342/bYgqt9i72hgWbCgbTkg162tddz9.jpg",
+      "display_title": "アパートの鍵貸します"
     },
     {
       "year": 1961,
@@ -7166,8 +7441,13 @@
       "title": "The Apartment",
       "film_title": "The Apartment",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1960:the-apartment"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1960:the-apartment",
+      "tmdb_id": 284,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/284",
+      "poster": "https://image.tmdb.org/t/p/w342/bYgqt9i72hgWbCgbTkg162tddz9.jpg",
+      "display_title": "アパートの鍵貸します"
     },
     {
       "year": 1960,
@@ -7213,8 +7493,13 @@
       "film_title": "Ben-Hur",
       "release_year": 1959,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1960"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1960",
+      "tmdb_id": 665,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/665",
+      "poster": "https://image.tmdb.org/t/p/w342/x91KOxy14FyXKrBJZshfyhZEV2M.jpg",
+      "display_title": "ベン・ハー"
     },
     {
       "year": 1960,
@@ -7244,8 +7529,13 @@
       "title": "Ben-Hur",
       "film_title": "Ben-Hur",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1959:ben-hur"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1959:ben-hur",
+      "tmdb_id": 665,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/665",
+      "poster": "https://image.tmdb.org/t/p/w342/x91KOxy14FyXKrBJZshfyhZEV2M.jpg",
+      "display_title": "ベン・ハー"
     },
     {
       "year": 1959,
@@ -7369,8 +7659,13 @@
       "film_title": "The Bridge on the River Kwai",
       "release_year": 1957,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1958"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1958",
+      "tmdb_id": 826,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/826",
+      "poster": "https://image.tmdb.org/t/p/w342/pFPiPEq1JppemNvasfeCZut6tK3.jpg",
+      "display_title": "戦場にかける橋"
     },
     {
       "year": 1958,
@@ -7400,8 +7695,13 @@
       "title": "The Bridge on the River Kwai",
       "film_title": "The Bridge on the River Kwai",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1957:the-bridge-on-the-river-kwai"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1957:the-bridge-on-the-river-kwai",
+      "tmdb_id": 826,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/826",
+      "poster": "https://image.tmdb.org/t/p/w342/pFPiPEq1JppemNvasfeCZut6tK3.jpg",
+      "display_title": "戦場にかける橋"
     },
     {
       "year": 1957,
@@ -7447,8 +7747,13 @@
       "film_title": "Around the World in 80 Days",
       "release_year": 1956,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1957"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1957",
+      "tmdb_id": 2897,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/2897",
+      "poster": "https://image.tmdb.org/t/p/w342/dNrG3C4Xt4K7YZGwECH4HfEklto.jpg",
+      "display_title": "80日間世界一周"
     },
     {
       "year": 1957,
@@ -7587,8 +7892,13 @@
       "film_title": "On the Waterfront",
       "release_year": 1954,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1955"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1955",
+      "tmdb_id": 654,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/654",
+      "poster": "https://image.tmdb.org/t/p/w342/jUx8NtOw9ji7GIG26WOOcv8EVlW.jpg",
+      "display_title": "波止場"
     },
     {
       "year": 1955,
@@ -7682,8 +7992,13 @@
       "film_title": "The Greatest Show on Earth",
       "release_year": 1952,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Drama",
-      "match_status": "unresolved",
-      "work_id": "award-globes-drama:1953"
+      "match_status": "resolved",
+      "work_id": "award-globes-drama:1953",
+      "tmdb_id": 27191,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/27191",
+      "poster": "https://image.tmdb.org/t/p/w342/orfTX2r7zgxJjCpVT2ic7hvG54r.jpg",
+      "display_title": "地上最大のショウ"
     },
     {
       "year": 1953,
@@ -7751,8 +8066,13 @@
       "film_title": "An American in Paris",
       "release_year": 1951,
       "source": "https://en.wikipedia.org/wiki/Golden_Globe_Award_for_Best_Motion_Picture_%E2%80%93_Musical_or_Comedy",
-      "match_status": "unresolved",
-      "work_id": "award-globes-comedy:1952"
+      "match_status": "resolved",
+      "work_id": "award-globes-comedy:1952",
+      "tmdb_id": 2769,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/2769",
+      "poster": "https://image.tmdb.org/t/p/w342/5jjeJlobJFp6DBWJbQ0elDhOj0m.jpg",
+      "display_title": "巴里のアメリカ人"
     },
     {
       "year": 1951,
@@ -7808,8 +8128,13 @@
       "title": "All About Eve",
       "film_title": "All About Eve",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:1950:all-about-eve"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:1950:all-about-eve",
+      "tmdb_id": 705,
+      "match_method": "unique_sourced_catalog_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/705",
+      "poster": "https://image.tmdb.org/t/p/w342/rqXgpuOOnO0vxw1EHDA3DssNMgA.jpg",
+      "display_title": "イヴの総て"
     },
     {
       "year": 1950,

@@ -1328,7 +1328,7 @@
       }
       return fallback;
     };
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-expanded-677',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-clean-674',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
     // If the compact catalog has not been deployed yet, fall back to the full sourced snapshot.
     if(!Object.keys(directorData.directors||{}).length){
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});

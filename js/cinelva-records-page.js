@@ -872,7 +872,7 @@
       return '<article class="director-film-tile '+(watched?'is-watched':'is-unwatched')+'">'+
         '<a class="director-film-poster" href="../search.html?id='+encodeURIComponent(String(movie.id||''))+'" aria-label="'+title+'の作品情報">'+posterHTML(movie)+'</a>'+
         '<div class="director-film-meta"><span class="director-film-year">'+(year||'年不明')+'</span><span class="director-film-title" title="'+title+'">'+title+'</span>'+
-        (watched?'<span class="director-film-rating" title="あなたの評価" aria-label="あなたの評価">あなたの評価 ★ '+rating.toFixed(1)+'</span>':'<span class="director-film-pending">未鑑賞</span>')+'<span class="director-film-rate-slot" data-film-index="'+index+'"></span></div></article>';
+        ''+'<span class="director-film-rate-slot" data-film-index="'+index+'"></span></div></article>';
     };
     const show=(group,row)=>{
       list.querySelectorAll('.director-pick').forEach(button=>{button.classList.toggle('active',button===row);button.setAttribute('aria-expanded',String(button===row));});

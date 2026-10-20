@@ -104,7 +104,15 @@
     const prism='<svg class="cs-prism" viewBox="0 0 42 48" aria-hidden="true"><defs><linearGradient id="csFacetA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4e7f0"/><stop offset=".48" stop-color="#b6d8df"/><stop offset="1" stop-color="#8f9dc8"/></linearGradient><linearGradient id="csFacetB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5e8ee"/><stop offset="1" stop-color="#9cabc9"/></linearGradient></defs><path d="M21 2 37 10v28L21 46 5 38V10Z" fill="#b5c5da" stroke="#e2e5ef" stroke-width="1.1"/><path d="M21 2 37 10 21 18 5 10Z" fill="#e7dce9"/><path d="M5 10 21 18v28L5 38Z" fill="url(#csFacetA)"/><path d="M37 10 21 18v28l16-8Z" fill="url(#csFacetB)"/><path d="M21 2v16M5 10l16 8 16-8M21 18v28" stroke="#f4f4f8" stroke-width=".9" fill="none"/><path d="M10 15v19M33 14v20" stroke="#fff" stroke-opacity=".3" stroke-width=".8"/></svg>';
     $('csPrisms').innerHTML=prism.repeat(Math.floor(all.length/1000));
     const achieved=Math.floor(all.length%1000/100);
-    $('csCrowns').innerHTML=Array.from({length:10},(_,i)=>'<svg class="cs-crown" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 2 5l6 5 3-7 3 7 6-5-1 11ZM3 19h16" fill="none" stroke="'+(i<achieved?'#d9bd7f':'#66737d')+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>').join('');
+    $('csCrowns').innerHTML=Array.from({length:achieved},()=>'<svg class="cs-crown" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16 2 5l6 5 3-7 3 7 6-5-1 11ZM3 19h16" fill="none" stroke="#d9bd7f" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>').join('');
+
+    /* Earned-only lifetime milestones: one prism per 1,000 and one gold crown per remaining 100. */
+    if(!document.getElementById('cinelva-earned-milestones-style')){
+      const medalStyle=document.createElement('style');
+      medalStyle.id='cinelva-earned-milestones-style';
+      medalStyle.textContent='.cs-milestones{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:0}.cs-prisms{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.cs-crowns{display:grid;grid-template-columns:repeat(5,22px);gap:2px 4px;align-items:center}.cs-crown{width:22px;height:22px}.cs-prism{width:38px;height:44px;display:block}.cs-prisms:empty,.cs-crowns:empty,.cs-milestones:has(.cs-prisms:empty):has(.cs-crowns:empty){display:none}';
+      document.head.append(medalStyle);
+    }
     const counts=new Map();all.forEach(r=>{const y=dateOf(r).slice(0,4);if(/^\d{4}$/.test(y))counts.set(y,(counts.get(y)||0)+1)});
     const max=Math.max(1,...counts.values());
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';

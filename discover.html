@@ -129,7 +129,26 @@
 }
 #theatricalPopularGrid .cinelva-discover-review-wrap>.presetCard,
 #catalogPopularGrid .cinelva-discover-review-wrap>.presetCard{width:100%!important}
-</style><style id="cinelva-discover-more-inline">#theatricalShelfMore,#catalogShelfMore{flex:0 0 126px!important;align-self:stretch!important;min-height:185px;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap;border:1px solid var(--line);border-radius:9px;background:#191919;color:#f5f5f5;font-size:13px;font-weight:700}#theatricalShelfMore[hidden],#catalogShelfMore[hidden]{display:none!important}</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
+</style><style id="cinelva-discover-more-inline">#theatricalShelfMore,#catalogShelfMore{flex:0 0 126px!important;align-self:stretch!important;min-height:185px;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap;border:1px solid var(--line);border-radius:9px;background:#191919;color:#f5f5f5;font-size:13px;font-weight:700}#theatricalShelfMore[hidden],#catalogShelfMore[hidden]{display:none!important}</style><style id="cinelva-discover-equal-height-shelf-20261020">
+/* The shelf is one horizontal row; each review sits on a common baseline. */
+#theatricalPopularGrid.presetShelfGrid,#catalogPopularGrid.presetShelfGrid{align-items:stretch!important}
+#theatricalPopularGrid>.cinelva-discover-review-wrap,#catalogPopularGrid>.cinelva-discover-review-wrap{align-self:stretch!important;height:auto!important;display:flex!important;flex-direction:column!important;gap:0!important}
+#theatricalPopularGrid .presetCard,#catalogPopularGrid .presetCard{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important}
+#theatricalPopularGrid .presetCardBody,#catalogPopularGrid .presetCardBody{display:flex!important;flex-direction:column!important;flex:1 1 auto!important}
+#theatricalPopularGrid .presetCardTitle,#catalogPopularGrid .presetCardTitle{line-height:1.35!important;min-height:2.7em!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;line-clamp:2!important;overflow:hidden!important}
+#theatricalPopularGrid .presetCardMeta,#catalogPopularGrid .presetCardMeta{margin-top:auto!important}
+#theatricalPopularGrid .cinelva-discover-review,#catalogPopularGrid .cinelva-discover-review{flex:0 0 auto!important;min-height:48px!important}
+#theatricalPopularGrid>#theatricalShelfMore,#catalogPopularGrid>#catalogShelfMore{display:flex!important;flex:0 0 126px!important;align-self:stretch!important;height:auto!important;min-height:0!important;margin:0!important;order:999!important;scroll-snap-align:end!important;white-space:normal!important;text-align:center!important;padding:12px!important}
+#theatricalPopularGrid>#theatricalShelfMore[hidden],#catalogPopularGrid>#catalogShelfMore[hidden]{display:none!important}
+#theatricalPopularGrid>#theatricalShelfMore:disabled,#catalogPopularGrid>#catalogShelfMore:disabled{opacity:.6!important;cursor:default!important}
+#grid.grid{align-items:stretch!important}
+#grid.grid>.cinelva-discover-review-wrap{display:flex!important;flex-direction:column!important;height:100%!important;min-width:0!important}
+#grid.grid>.cinelva-discover-review-wrap>.card{flex:1 1 auto!important;display:flex!important;flex-direction:column!important}
+#grid.grid .card .body{flex:1 1 auto!important;display:flex!important;flex-direction:column!important}
+#grid.grid .card .title{line-height:1.35!important;min-height:2.7em!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;line-clamp:2!important;overflow:hidden!important}
+#grid.grid .card .meta{margin-top:auto!important}
+#grid.grid .cinelva-discover-review{min-height:48px!important;flex:0 0 auto!important}
+</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
@@ -156,8 +175,10 @@ function renderPopularShelves(){
   grid.innerHTML=shelfVisibleMovies(key,movies).map(m=>popularCardHtml(m,kind)).join("")||'<div class="empty">'+empty+'</div>';
   const button=document.getElementById(key+'ShelfMore');
   if(button){
-   button.hidden=movies.length<=10;
-   button.textContent=discoverShelfExpanded[key]?'閉じる −':'さらに開く ＋';
+   const hasMore=movies.length>10;
+   button.hidden=movies.length===0;
+   button.disabled=!hasMore;
+   button.textContent=!hasMore?'すべて表示中':discoverShelfExpanded[key]?'閉じる −':'さらに見る ＋';
    button.setAttribute('aria-expanded',String(discoverShelfExpanded[key]));
    button.onclick=()=>{
     const opening=!discoverShelfExpanded[key];

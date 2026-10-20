@@ -87,3 +87,4 @@ test("concurrent cards share lookup and ambiguous title-year results stay unreso
   assert.ok(r.every((x) => x === null));
   assert.equal(calls(), 1);
 });
+test('known TMDB identity can recover a poster without guessing a title',async()=>{const window={};let requested='';vm.runInNewContext(fs.readFileSync('js/cinelva-movie-identity.js','utf8'),{window,URL,URLSearchParams,localStorage:{getItem:()=>null,setItem(){}},fetch:async url=>{requested=url;return{ok:true,json:async()=>({movie:{id:128,title:'もののけ姫',year:1997,poster:'/mononoke.jpg'}})}}});assert.match((await window.CinelvaMovieIdentity.fetchOne({tmdbId:128}))?.poster||'',/mononoke.jpg$/);assert.match(requested,/movie-detail\?id=128/)});

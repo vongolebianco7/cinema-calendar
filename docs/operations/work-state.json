@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T09:17:30.331887+00:00",
+  "updated_at": "2026-10-20T09:26:58.465407+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
   "branch": "fix/final-quality-20261020",
-  "head_sha": "8dbf723536999d43b9d5763413c887a81d960441",
-  "pull_request": null,
+  "head_sha": "da1c162824ca368d60be7cdfb3228b71945548d0",
+  "pull_request": 437,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -525,9 +525,9 @@
     {
       "id": "FINAL-QA-20261020",
       "title": "Unify poster failure recovery and repair current-spec quality checks",
-      "status": "in_progress",
+      "status": "pr_created",
       "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
-      "ci": "Local: 167 Node tests pass, 138 Python tests pass, quality_gate.py passes, smoke 207 checks pass. Chromium review/bookmark persistence and My Cinelva backup/restore/PNG/1000-record journeys pass. Mobile calendar passes at 375/390/768/1440. Route audit: 30 routes at 375/390/768 in light/dark, 180 page loads pass. CI and final desktop/WebKit audit pending."
+      "ci": "PR #437: Validate frontend (including Chromium/WebKit), mobile layout, brand identity, full Python, completeness, backup, smoke, and scorecard contract passed on da1c162. Autonomous gate exposed a duplicated theme loader on events.html; fixed locally for the next revision. Local quality gate passes, 168 Node tests pass. A new deterministic browser regression verifies immediate fallback under forced display CSS and successful shared retry."
     }
   ],
   "verification": [

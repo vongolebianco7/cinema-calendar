@@ -18,7 +18,7 @@ const { chromium } = require("playwright"),
     await waitForLocalServer(port);
   }
   const base = process.env.CINELVA_TEST_BASE || `http://127.0.0.1:${port}`,
-    browser = await chromium.launch(),
+    browser = await chromium.launch(process.env.CINELVA_TEST_PROXY && process.env.HTTPS_PROXY ? {proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}} : {}),
     report = { base, generated_at: new Date().toISOString(), results: [] };
   fs.mkdirSync("artifacts/final-quality", { recursive: true });
   try {
@@ -26,6 +26,7 @@ const { chromium } = require("playwright"),
       for (const theme of ["light", "dark"]) {
         const context = await browser.newContext({
           viewport: { width, height: 844 },
+          ignoreHTTPSErrors: Boolean(process.env.CINELVA_TEST_PROXY),
         });
         await context.addInitScript(
           (t) => localStorage.setItem("cinelva-theme-v1", t),

@@ -160,11 +160,12 @@
     const wanted = id(q),
       y = year(q),
       title = q?.film_title || q?.title || "";
-    if (!title || (!wanted && !y)) return cached || null;
+    if ((!title && !wanted) || (!wanted && !y)) return cached || null;
     const key = wanted || norm(title) + "|" + y;
     if (pending.has(key)) return pending.get(key);
     const task = (async () => {
       try {
+        if(wanted && !title){const r=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?'+new URLSearchParams({id:String(wanted)}));if(!r.ok)return cached||null;const data=await r.json(),movie=fromApi(data.movie||{});return id(movie)===wanted?ingest(movie):cached||null;}
         const r = await fetch(
           "https://backend-one-gray-94.vercel.app/api/movies?" +
             new URLSearchParams({ q: title, limit: "30" }),
@@ -232,6 +233,7 @@
     };
     const fail = () => {
       image.hidden = true;
+      image.style.setProperty("display", "none", "important");
       image.dataset.posterFailed = "1";
       if (parent && !fallback) {
         fallback = document.createElement("span");
@@ -243,6 +245,7 @@
     };
     image.addEventListener("load", show);
     image.addEventListener("error", async () => {
+      fail();
       reportBroken(m, image.currentSrc || image.src);
       if (image.dataset.posterRetry === "1") {
         fail();
@@ -264,7 +267,7 @@
       } else fail();
     });
     const url = posterFor(m);
-    if (url && image.getAttribute("src") !== url) image.src = url;
+    if (url && normalizePoster(image.getAttribute("src")) !== url) image.src = url;
     if (image.complete && image.naturalWidth > 0) show();
     else if (image.complete && image.getAttribute("src"))
       image.dispatchEvent(new Event("error"));
@@ -281,7 +284,7 @@
         container.appendChild(image);
       }
       hydratePoster(image, m);
-      if (image.getAttribute("src") !== url) image.src = url;
+      if (normalizePoster(image.getAttribute("src")) !== url) image.src = url;
     };
     const direct = posterFor(m);
     if (direct) {

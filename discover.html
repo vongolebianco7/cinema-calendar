@@ -108,7 +108,28 @@
 .cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
 .presetShelfGrid{display:grid!important;overflow:visible!important}.presetShelfGrid>.cinelva-discover-review-wrap>.presetCard{width:100%!important;max-width:none!important;flex:none!important}
-</style><style id="discover-shelf-expand-controls">#theatricalShelfMore,#catalogShelfMore{display:block;margin:12px auto 3px;cursor:pointer}#theatricalShelfMore[hidden],#catalogShelfMore[hidden]{display:none!important}</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
+</style><style id="discover-shelf-expand-controls">#theatricalShelfMore,#catalogShelfMore{display:block;margin:12px auto 3px;cursor:pointer}#theatricalShelfMore[hidden],#catalogShelfMore[hidden]{display:none!important}</style><style id="cinelva-keyword-shelves-horizontal">
+/* Only keyword/preset recommendation results scroll horizontally; all other movie grids stay 3-column. */
+#theatricalPopularGrid.presetShelfGrid,
+#catalogPopularGrid.presetShelfGrid,
+.popularShelves #theatricalPopularGrid.presetShelfGrid,
+.popularShelves #catalogPopularGrid.presetShelfGrid{
+ display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+ overflow-x:auto!important;overflow-y:hidden!important;
+ overscroll-behavior-x:contain;scroll-snap-type:x proximity!important;
+ -webkit-overflow-scrolling:touch;touch-action:pan-x!important;
+ gap:9px!important;max-width:100%;padding:2px 1px 12px!important;
+}
+#theatricalPopularGrid.presetShelfGrid>.cinelva-discover-review-wrap,
+#catalogPopularGrid.presetShelfGrid>.cinelva-discover-review-wrap,
+#theatricalPopularGrid.presetShelfGrid>.presetCard,
+#catalogPopularGrid.presetShelfGrid>.presetCard{
+ flex:0 0 clamp(118px,28vw,170px)!important;width:clamp(118px,28vw,170px)!important;
+ min-width:0!important;max-width:none!important;scroll-snap-align:start;
+}
+#theatricalPopularGrid .cinelva-discover-review-wrap>.presetCard,
+#catalogPopularGrid .cinelva-discover-review-wrap>.presetCard{width:100%!important}
+</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>

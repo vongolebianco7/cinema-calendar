@@ -783,6 +783,15 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 .presetShelfGrid img,.cinelva-discover-review-wrap .poster img,#grid .cinelva-rate-wrap .poster img{display:block;width:100%;height:100%;object-fit:cover}
 .cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
+</style><style id="cinelva-award-collection-common-review-20261020">
+#awardsView #awardFilms.award-detail-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;gap:9px!important}
+#awardsView #awardFilms .award-film-unit{display:flex!important;flex-direction:column!important;min-width:0!important;height:100%!important;gap:5px!important;overflow:hidden!important}
+#awardsView #awardFilms .award-film-unit .poster{width:100%!important;aspect-ratio:2/3!important;flex:0 0 auto!important}
+#awardsView #awardFilms .award-film-unit>strong{font-size:12px!important;line-height:1.35!important;min-height:2.7em!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important}
+#awardsView #awardFilms .award-film-unit .award-card-category{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;min-height:2.8em!important}
+#awardsView #awardFilms .award-common-review{margin-top:auto!important;min-width:0!important;width:100%!important;min-height:48px!important}
+#awardsView #awardFilms .award-film-unit .award-card-source{font-size:10px!important}
+#awardsView #awardFilms .award-film-unit .award-film-top{min-height:23px!important}
 </style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
@@ -870,10 +879,20 @@ function render(){
   else poster.textContent='ポスター未取得';
   const title=document.createElement('strong');title.textContent=item.title||'作品';link.append(poster,title);
   const review=document.createElement('div');review.className='want-watch-review';
-  const remove=document.createElement('button');remove.type='button';remove.className='want-watch-remove';remove.textContent='ブックマーク解除';
-  remove.onclick=()=>{const data=read();delete data[String(item.id)];localStorage.setItem(key,JSON.stringify(data));render()};
-  card.append(link,review,remove);list.append(card);
+  card.append(link,review);list.append(card);
   globalThis.CinelvaQuickRate?.mountInline?.(review,{...item,id:Number(item.id),tmdbId:Number(item.id),title:item.title||'作品'});
+  if(!url){
+   fetch('https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:item.title||'',limit:'20'}))
+    .then(response=>response.ok?response.json():null).then(data=>{
+     const candidates=[...(data?.movies||[]),...(data?.external||[])];
+     const match=candidates.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(item.id));
+     const raw=String(match?.poster||match?.posterUrl||match?.poster_path||'');
+     if(!raw||!card.isConnected)return;
+     const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=raw.startsWith('/')?'https://image.tmdb.org/t/p/w342'+raw:raw;
+     img.onload=()=>{poster.replaceChildren(img);const saved=read();if(saved[String(item.id)]){saved[String(item.id)].poster=raw;localStorage.setItem(key,JSON.stringify(saved))}};
+    }).catch(()=>{});
+  }
+
  }
 }
 document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',render);

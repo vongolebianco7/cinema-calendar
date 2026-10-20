@@ -308,7 +308,7 @@ async function hydrateAwardCards(groups){
     if(fallback&&(!group.id||Number(fallback.tmdbId||fallback.tmdb_id||fallback.id)===group.id))movie=fallback;
    }
    if(!card.isConnected||card.dataset.awardKey!==key)continue;
-   const poster=boxPosterUrl(movie?.poster||movie?.posterUrl||movie?.poster_path||movie?.posterPath||movie?.poster_url||movie?.image);
+   const poster=window.CinelvaMovieIdentity?.posterFor(movie)||boxPosterUrl(movie?.poster||movie?.posterUrl||movie?.poster_path||movie?.posterPath||movie?.poster_url||movie?.image);
    const img=card.querySelector('[data-award-poster]'),ph=card.querySelector('[data-award-placeholder]');
    if(img&&poster){
     img.onload=()=>{img.hidden=false;if(ph)ph.hidden=true};

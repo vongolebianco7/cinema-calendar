@@ -555,8 +555,23 @@
     // Partial source lists cannot be certified complete merely by watching all their rows.
     const awardGoldStatus=(name,decade,cell)=>{
       if(!cell?.entries?.length)return {gold:false,complete:false};
-      const verified=state.awardCoverage?.[name+':'+decade]?.complete===true;
-      const complete=verified&&cell.count===cell.entries.length;
+      // For past full decades, ten distinct ceremony years with a sourced top
+      // picture winner in every year provides a conservative coverage check.
+      // Ongoing decades and periods with historical gaps cannot be completed.
+      const entries=data.cells[name+':'+decade]?.entries||[];
+      const isTopPrize=(category)=>{
+        if(/カンヌ/.test(name))return category==='パルム・ドール';
+        if(/ヴェネチア|ベネチア/.test(name))return category==='金獅子賞';
+        if(/ベルリン/.test(name))return category==='金熊賞';
+        if(/ゴールデングローブ/.test(name))return /^作品賞（(?:ドラマ|ミュージカル[／\\/]コメディ)）$/.test(category);
+        if(/日本アカデミー/.test(name))return category==='最優秀作品賞';
+        return category==='作品賞';
+      };
+      const topEntries=entries.filter(entry=>(entry.categories||[]).some(isTopPrize));
+      const prizeYears=new Set(topEntries.flatMap(entry=>(entry.awardYears||[]).map(Number)).filter(y=>y>=decade&&y<decade+10));
+      const fullDecade=decade<Math.floor(new Date().getFullYear()/10)*10&&prizeYears.size===10;
+      const verified=state.awardCoverage?.[name+':'+decade]?.complete===true||fullDecade;
+      const complete=verified&&cell.entries.every(entry=>entry.watched);
       return {gold:cell.count>=10||complete,complete};
     };
     const awardScope=$('awardCategory')?.value==='all'?'all':'picture';

@@ -513,7 +513,7 @@
     // Editorial order is intentionally curated, not an objective numeric rating of prestige.
     const priority=['アカデミー賞','カンヌ国際映画祭','ヴェネチア国際映画祭','ベルリン国際映画祭','英国アカデミー賞','BAFTA','ゴールデングローブ賞','日本アカデミー賞','キネマ旬報ベスト・テン'];
     const awardRank=name=>{const index=priority.indexOf(name);return index<0?priority.length:index;};
-    const organizations=[...data.organizations].sort((a,b)=>awardRank(a)-awardRank(b)||a.localeCompare(b,'ja'));
+    const organizations=[...data.organizations].filter(name=>name!=='キネマ旬報ベスト・テン').sort((a,b)=>awardRank(a)-awardRank(b)||a.localeCompare(b,'ja'));
     // The collection measures only each organization's highest picture prize.
     // Other awards remain in source data and must not affect completion counts.
     const isHighestPicturePrize=(organization,category)=>{
@@ -608,6 +608,19 @@
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
     awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>作品賞受賞作のMY平均評価 TOP5</h3><p class="cinelva-affinity-note">各映画賞で作品賞を受賞し、あなたが鑑賞した映画が対象です。自分の平均評価が高い順（評価3本未満は補正）。未評価作品は平均点に含みません。</p>'+
       (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(prizeDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">鑑賞 '+row.watched+'本 · MY平均 ★ '+row.average.toFixed(2)+'（評価 '+row.scored+'本）· 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
+    // Kinema Junpo is a critics' ranking, not a film-festival highest prize.
+    // Show it separately and exclude it from all main-award counts and heatmaps.
+    const criticsHost=$('awardCritics');
+    if(criticsHost){
+      const criticsRows=state.awards.filter(item=>item.organization==='キネマ旬報ベスト・テン'&&/(?:日本映画|外国映画)作品賞（第1位）/.test(String(item.category||'')));
+      criticsHost.innerHTML='<h3>映画批評・年間ベスト</h3><p class="hint">キネマ旬報ベスト・テンは評論家らの年間選出結果です。主要映画賞の集計には含めません。</p>'+
+       (criticsRows.length?'<div class="cinelva-critics-best">'+criticsRows.sort((a,b)=>Number(b.selection_year||b.year)-Number(a.selection_year||a.year)).map(item=>{
+         const id=Number(item.tmdb_id||item.tmdbId||0),year=item.selection_year||item.year;
+         const title=escapeHTML(item.display_title||item.film_title||item.title||'');
+         const link=id?'<a href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(item.film_title||item.title||'')+'">'+title+'</a>':title;
+         return '<div class="cinelva-critics-best-row"><small>'+escapeHTML(year)+'年 · '+escapeHTML(String(item.category).replace('作品賞（第1位）','第1位'))+'</small><strong>'+link+'</strong></div>';
+       }).join('')+'</div>':'<p class="hint">収録済みの選出結果はまだありません。</p>');
+    }
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>${awardScope==='all'?'鑑賞した受賞作':'鑑賞した最高賞受賞作'}</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'収録済み受賞作':'最高賞の収録対象'}</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'受賞作を最も観た映画賞':'最高賞受賞作を最も観た映画賞'}</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
     $('awardCoverage').textContent=awardScope==='all'?'収録済みの各部門の受賞作品を対象としています（最高賞を含む）。同じ映画が同じ賞の複数部門を受賞しても1作品として集計します。網羅的な受賞歴ではありません。':'最高賞（作品賞・パルム・ドール・金獅子賞・金熊賞など）の受賞作品だけを対象とします。他部門は集計しません。受賞記録は網羅的ではありません。' + ' ※2010年より前はアカデミー賞以外の収録が不足しています。— は未鑑賞ではなく受賞データ未収録を意味します。';

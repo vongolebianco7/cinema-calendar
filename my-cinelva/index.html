@@ -792,7 +792,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 #awardsView #awardFilms .award-common-review{margin-top:auto!important;min-width:0!important;width:100%!important;min-height:48px!important}
 #awardsView #awardFilms .award-film-unit .award-card-source{font-size:10px!important}
 #awardsView #awardFilms .award-film-unit .award-film-top{min-height:23px!important}
-</style><script src="../js/cinelva-movie-identity.js?v=20261020-shared-poster-registry" defer></script>
+</style><script src="../js/cinelva-movie-identity.js?v=20261020-shared-poster-registry"></script>
 </head>
 <body>
   <header class="gTop"><div class="wrap gNav">
@@ -875,8 +875,8 @@ function render(){
   const card=document.createElement('article');card.className='want-watch-item';
   const link=document.createElement('a');link.className='want-watch-film';link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');
   const poster=document.createElement('div');poster.className='want-watch-poster';
-  const url=String(item.poster||item.posterUrl||item.poster_path||'');
-  if(url){const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=url.startsWith('/')?'https://image.tmdb.org/t/p/w342'+url:url;img.onerror=()=>{img.remove();poster.textContent='ポスター未取得'};poster.append(img)}
+  const url=String(globalThis.CinelvaMovieIdentity?.posterFor(item)||item.poster||item.posterUrl||item.poster_path||'');
+  if(url){const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=url.startsWith('/')?'https://image.tmdb.org/t/p/w342'+url:url;img.onerror=()=>{img.remove();poster.textContent='ポスター未取得'};poster.append(img);globalThis.CinelvaMovieIdentity?.hydratePoster(img,item)}
   else poster.textContent='ポスター未取得';
   const title=document.createElement('strong');title.textContent=item.title||'作品';link.append(poster,title);
   const review=document.createElement('div');review.className='want-watch-review';

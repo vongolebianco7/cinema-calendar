@@ -64,7 +64,7 @@
     for(const field of ['countries','formats','workForms'])if(Array.isArray(movie[field])&&movie[field].some(value=>typeof value!=='string'))throw new Error('分類メタデータの値が不正です');
     if(movie.comment!==undefined && (typeof movie.comment!=='string'||movie.comment.length>2000))
       throw new Error('コメントは2000文字以内で入力してください');
-    if(movie.viewingMethod!==undefined && !['','映画館','配信','配信・サブスク','TV','DVD・Blu-ray','その他'].includes(movie.viewingMethod))
+    if(movie.viewingMethod!==undefined && !['','映画館','配信','配信・サブスク','TV','DVD・Blu-ray','DVD／ブルーレイ','その他'].includes(movie.viewingMethod))
       throw new Error('鑑賞方法が不正です');
     if(movie.hasSpoilers!==undefined && typeof movie.hasSpoilers!=='boolean') throw new Error('ネタバレ設定が不正です');
     if(movie.viewingVenue!==undefined && (typeof movie.viewingVenue!=='string'||movie.viewingVenue.length>120)) throw new Error('鑑賞先は120文字以内で入力してください');

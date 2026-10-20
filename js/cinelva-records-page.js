@@ -643,7 +643,7 @@
       const category='<small class="award-card-category">'+escapeHTML(categoryNames.join('・'))+'</small>';
       const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
       const id=String(metadata.id||'');
-      const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<strong>'+escapeHTML(metadata.title)+'</strong>';
+      const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<a class="award-card-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>';
       return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'"></div>'+sources+'</article>';
     };
     // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
@@ -677,27 +677,42 @@
     const hydrateAwardPosters=()=>{
       const identity=globalThis.CinelvaMovieIdentity;
       if(!identity?.fetchOne)return;
-      const cards=[...$('awardFilms').querySelectorAll('.award-film-unit')];
-      for(const card of cards){
+      for(const card of $('awardFilms').querySelectorAll('.award-film-unit')){
         const entry=awardEntries?.[Number(card.dataset.awardEntryIndex)];
-        if(!entry)continue;
-        const holder=card.querySelector('.poster');if(!holder)return;
-        const image=holder.querySelector('img');
-        if(image&&image.complete&&image.naturalWidth>0)continue;
-        if(card.dataset.awardPosterLookup==='1')continue;
-        const ids=Number(entry.id||0),awardYear=Number((entry.awardYears||[])[0]||0);
-        if(!ids&&!awardYear)continue;
+        if(!entry||card.dataset.awardPosterLookup==='1')continue;
+        const holder=card.querySelector('.poster');
+        if(!holder)continue;
+        const tmdbId=Number(entry.id||0),year=Number(entry.year||entry.awardYears?.[0]||0);
+        if(!tmdbId&&!year)continue;
         card.dataset.awardPosterLookup='1';
-        const query={id:ids||undefined,tmdbId:ids||undefined,title:entry.title||'',year:Number(entry.year||awardYear)||undefined};
-        awardPosterSearch(query,identity).then(res=>{
-          if(!res?.poster||!holder.isConnected)return;
-          const img=holder.querySelector('img')||document.createElement('img');
-          img.loading='lazy';img.alt='';
-          img.onload=()=>{holder.querySelectorAll('span').forEach(node=>node.hidden=true)};
-          img.onerror=()=>{identity.reportBroken?.(query,img.currentSrc||img.src);img.remove();holder.querySelectorAll('span').forEach(node=>node.hidden=false)};
-          img.src=res.poster;
-          if(!img.isConnected)holder.prepend(img);
-        }).catch(()=>{});
+        const query={id:tmdbId||undefined,tmdbId:tmdbId||undefined,title:entry.title||'',year:year||undefined};
+        let didRetry=false;
+        const attempt=async()=>{
+          let resolved=await awardPosterSearch(query,identity);
+          if(!resolved?.poster||!holder.isConnected)return;
+          const photo=holder.querySelector('img')||document.createElement('img');
+          photo.alt='';photo.loading='lazy';
+          photo.onload=()=>{holder.querySelectorAll('span').forEach(el=>el.hidden=true)};
+          photo.onerror=()=>{
+            identity.reportBroken?.(resolved,photo.currentSrc||photo.src);
+            photo.remove();holder.querySelectorAll('span').forEach(el=>el.hidden=false);
+            if(!didRetry){didRetry=true;identity.fetchOne({...query,poster:'',poster_path:''}).then(next=>{
+              if(next?.poster&&next.poster!==resolved.poster&&holder.isConnected){resolved=next;photo.src=next.poster;holder.prepend(photo)}
+            }).catch(()=>{});}
+          };
+          if(photo.getAttribute('src')!==resolved.poster)photo.src=resolved.poster;
+          if(!photo.isConnected)holder.prepend(photo);
+          const id=Number(resolved.tmdbId??resolved.tmdb_id??resolved.id);
+          if(Number.isSafeInteger(id)&&id>0&&!tmdbId){
+            const link=card.querySelector('.award-card-open,.award-card-search');
+            if(link){link.href='../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(entry.title||'');link.classList.remove('award-card-search');link.classList.add('award-card-open');}
+            const review=card.querySelector('.award-common-review');
+            if(review&&!review.dataset.gaugeMounted)globalThis.CinelvaQuickRate?.mountInline?.(review,{...resolved,id,tmdbId:id,title:entry.title});
+          }
+        };
+        const initial=holder.querySelector('img');
+        if(initial&&initial.complete&&initial.naturalWidth>0)continue;
+        attempt().catch(error=>console.warn('Award poster unavailable',error));
       }
     };
     $('awardFilms').innerHTML=cell?awardHeading+(awardEntries.length?awardEntries.map(awardCard).join(''):'<p class="hint">この年代の受賞作品はまだ収録されていません。</p>'):'<div class="award-invite"><span aria-hidden="true">✦</span><p>マトリクスの数字をタップすると、その年代の受賞作品と鑑賞状況を見られます。</p></div>';
@@ -1308,7 +1323,7 @@
       }
       return fallback;
     };
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-historical-514',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-expanded-677',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
     // If the compact catalog has not been deployed yet, fall back to the full sourced snapshot.
     if(!Object.keys(directorData.directors||{}).length){
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});

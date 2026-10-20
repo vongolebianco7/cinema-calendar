@@ -660,10 +660,10 @@
   const directorMedalHistory=new Map();
   let directorMedalUpdatePending=false;
   const directorMedalTier=(watched,total,verified)=>{
-    if(verified&&total>0&&watched>=total)return {rank:4,label:'全作',symbol:'★'};
-    if(watched>=20)return {rank:3,label:'20作',symbol:'金'};
-    if(watched>=10)return {rank:2,label:'10作',symbol:'銀'};
-    if(watched>=5)return {rank:1,label:'5作',symbol:'銅'};
+    if(verified&&total>0&&watched>=total)return {rank:4,label:'Complete',symbol:'★'};
+    if(watched>=20)return {rank:3,label:'Gold',symbol:'G'};
+    if(watched>=10)return {rank:2,label:'Silver',symbol:'S'};
+    if(watched>=5)return {rank:1,label:'Bronze',symbol:'B'};
     return null;
   };
   const ensureDirectorMedalStyles=()=>{

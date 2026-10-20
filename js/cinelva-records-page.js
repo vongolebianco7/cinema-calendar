@@ -141,8 +141,19 @@
     const max=Math.max(1,...counts.values());
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('')||'<span class="cs-empty">鑑賞年の記録なし</span>';
     const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
-    $('csTop').innerHTML=top.length?top.map((r,i)=>{const src=poster(r),id=escapeHTML(r.tmdbId??r.tmdb_id??r.id);return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'>'+(src?'<img src="'+escapeHTML(src)+'" alt="'+escapeHTML(r.title||'')+'" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="cs-poster-empty" hidden>ポスターなし</div>':'<div class="cs-poster-empty">ポスターなし</div>')+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-top-review" data-top-review-id="'+id+'"></div></div>'}).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
-    $('csTop').querySelectorAll('[data-top-review-id]').forEach(node=>{const movie=top.find(r=>String(r.tmdbId??r.tmdb_id??r.id)===node.dataset.topReviewId);if(movie){const id=Number(movie.tmdbId??movie.tmdb_id??movie.id);globalThis.CinelvaQuickRate?.mountInline?.(node,{...movie,id,tmdbId:id});}});
+    $('csTop').innerHTML=top.length?top.map((r,i)=>{
+      const src=poster(r),id=escapeHTML(r.tmdbId??r.tmdb_id??r.id);
+      const art='<div class="cs-film-art">'+(src?'<img src="'+escapeHTML(src)+'" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">':'')+'<span class="cs-poster-empty"'+(src?' hidden':'')+'>ポスター未取得</span></div>';
+      return '<div class="cs-film"'+(i>=10?' style="display:none" data-top-extra="1"':'')+'>'+art+'<div class="cs-film-name" title="'+escapeHTML(r.title)+'">'+(i+1)+'. '+escapeHTML(r.title)+'</div><div class="cs-top-review" data-top-review-id="'+id+'"></div></div>';
+    }).join('')+(top.length>10?'<button type="button" id="csTopMore" class="button" style="grid-column:1/-1">さらに10本表示（全'+top.length+'本）</button>':''):'<p class="cs-empty" style="grid-column:1/-1">評価済みの作品はありません。</p>';
+    $('csTop').querySelectorAll('[data-top-review-id]').forEach(node=>{
+      const movie=top.find(r=>String(r.tmdbId??r.tmdb_id??r.id)===node.dataset.topReviewId);
+      if(!movie)return;
+      const id=Number(movie.tmdbId??movie.tmdb_id??movie.id);
+      const film={...movie,id,tmdbId:id};
+      globalThis.CinelvaQuickRate?.mountInline?.(node,film);
+      if(Number.isSafeInteger(id)&&id>0)globalThis.CinelvaMovieIdentity?.hydrateCard?.(node.closest('.cs-film')?.querySelector('.cs-film-art'),film);
+    });
     const more=$('csTopMore');if(more)more.addEventListener('click',()=>{
       const extras=[...$('csTop').querySelectorAll('[data-top-extra]')];
       const hidden=extras.filter(el=>el.style.display==='none');

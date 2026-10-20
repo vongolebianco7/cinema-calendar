@@ -259,11 +259,11 @@ async function renderBox(){const regions=["すべて","国内","国外"];$("#box
 function awardFilmName(m){return String(m.film_title||m.title||"").split(" — ")[0].trim()}
 function awardEscape(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
 function groupAwardWorks(rows){
- const grouped=new Map();
+ const grouped=new Map(),idByTitle=new Map();
+ for(const m of rows){const title=normalizeBoxTitle(awardFilmName(m)),id=Number(m.tmdb_id||0);if(id>0&&title)idByTitle.set(title,id);}
  for(const m of rows){
-  const title=awardFilmName(m),id=Number(m.tmdb_id||0);
-  // TMDB ID is authoritative. Unresolved records are grouped only by their original work_id.
-  const key=id>0?'tmdb:'+id:m.work_id||'unresolved:'+normalizeBoxTitle(title)+'|'+m.year;
+  const title=awardFilmName(m),name=normalizeBoxTitle(title),id=Number(m.tmdb_id||0)||idByTitle.get(name)||0;
+  const key=id>0?'tmdb:'+id:name?'title:'+name:'unresolved:'+String(m.work_id||m.year);
   if(!grouped.has(key))grouped.set(key,{key,id,title,rows:[],year:m.year,workId:m.work_id||'',source:m.source});
   grouped.get(key).rows.push(m);
  }
@@ -303,9 +303,12 @@ async function hydrateAwardCards(groups){
     const found=await (window.CinelvaMovieIdentity?.fetchOne({title:group.title,tmdbId:group.id})||resolveMovie(group.title,String(group.id)));
     if(Number(found?.tmdbId||found?.tmdb_id||found?.id)===group.id)movie=found;
    }
-   if(!group.id&&!boxPosterUrl(movie?.poster))movie=await resolveUnmatchedAwardFilm(group);
+   if(!boxPosterUrl(movie?.poster||movie?.posterUrl||movie?.poster_path||movie?.posterPath)){
+    const fallback=await resolveUnmatchedAwardFilm(group);
+    if(fallback&&(!group.id||Number(fallback.tmdbId||fallback.tmdb_id||fallback.id)===group.id))movie=fallback;
+   }
    if(!card.isConnected||card.dataset.awardKey!==key)continue;
-   const poster=boxPosterUrl(movie?.poster||movie?.posterUrl||movie?.poster_path||movie?.posterPath);
+   const poster=boxPosterUrl(movie?.poster||movie?.posterUrl||movie?.poster_path||movie?.posterPath||movie?.poster_url||movie?.image);
    const img=card.querySelector('[data-award-poster]'),ph=card.querySelector('[data-award-placeholder]');
    if(img&&poster){
     img.onload=()=>{img.hidden=false;if(ph)ph.hidden=true};

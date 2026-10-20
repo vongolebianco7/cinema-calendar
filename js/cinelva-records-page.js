@@ -99,7 +99,7 @@
         let category='その他';
         if(!method)category='未指定';
         else if(method==='映画館'||method==='cinema'||method==='theater'||method==='theatre')category='映画館';
-        else if(method==='配信'||method==='streaming'||method==='stream'||method==='vod'||method==='サブスク')category='配信';
+        else if(method==='配信'||method==='配信・サブスク'||method==='streaming'||method==='stream'||method==='vod'||method==='サブスク')category='配信';
         else if(/dvd|blu.?ray|ブルーレイ|ブルーレー|bd|ディスク/.test(method))category='DVD／ブルーレイ';
         totals[category]++;
       }

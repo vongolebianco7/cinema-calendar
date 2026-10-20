@@ -134,9 +134,10 @@ function buildAwardHeatmap(records, awards, coverage = {}) {
     const workKey = id ? 'tmdb:' + id : award.work_id || `${award.organization}:${year}:${normalizedText(title)}`;
     let entry = cell.entries.find(item => item.workKey === workKey);
     if (!entry) {
-      entry = { workKey, id, title: record?.title || award.display_title || title, year: award.release_year || record?.year || null, watched: Boolean(record), record: record || null, categories: [], sources: [], awardYears: [] };
+      entry = { workKey, id, title: record?.title || award.display_title || title, year: award.release_year || record?.year || null, watched: Boolean(record), record: record || null, poster: award.poster || award.poster_path || '', categories: [], sources: [], awardYears: [] };
       cell.entries.push(entry);
     }
+    if (!entry.poster && (award.poster || award.poster_path)) entry.poster = award.poster || award.poster_path;
     if (award.category && !entry.categories.includes(award.category)) entry.categories.push(award.category);
     if (/^https:\/\//.test(award.source || '') && !entry.sources.includes(award.source)) entry.sources.push(award.source);
     if (!entry.awardYears.includes(year)) entry.awardYears.push(year);

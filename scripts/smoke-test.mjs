@@ -36,5 +36,31 @@ if(Array.isArray(streaming.movies)){
   if(/WOWOW/i.test(m.service||''))check(m.event==='streaming','WOWOW on-demand must be streaming');
  }
 }
+
+const posterSource=read('js/cinelva-movie-identity.js');
+try {
+ const store=new Map();
+ const localStorage={getItem:key=>store.get(key)||null,setItem:(key,value)=>store.set(key,value)};
+ const window={};
+ const context=vm.createContext({window,localStorage,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({movies:[]})})});
+ new vm.Script(posterSource,{filename:'js/cinelva-movie-identity.js'}).runInContext(context);
+ const identity=window.CinelvaMovieIdentity;
+ check(!!identity,'canonical poster registry is initialized');
+ if(identity){
+  const local=identity.ingest({id:345,title:'Local record',poster:'/local.jpg'});
+  check(local===null,'local IDs are not silently treated as TMDB IDs');
+  const canonical=identity.ingest({id:345,tmdb_id:678,title:'Canonical',year:2024,poster_path:'/canonical.jpg'});
+  check(canonical?.tmdbId===678,'explicit TMDB ID takes priority over local ID');
+  const url=identity.posterFor({tmdb_id:678});
+  check(url.includes('/canonical.jpg'),'poster registry resolves canonical artwork');
+  identity.reportBroken({tmdb_id:678},url);
+  check(!identity.posterFor({tmdb_id:678}),'broken poster is invalidated');
+  identity.ingest({tmdb_id:678,title:'Canonical',poster_path:'/canonical.jpg'});
+  check(!identity.posterFor({tmdb_id:678}),'broken poster cannot be reintroduced by ingest');
+ }
+} catch(error){check(false,'poster registry regression: '+error.message)}
+for(const page of ['index.html','discover.html','search.html','rankings.html','my-cinelva/index.html','events.html','experience.html']){
+ check(read(page).includes('cinelva-movie-identity.js'),'shared poster registry not loaded on '+page);
+}
 console.log(checks+' checks; '+failures+' failures');
 if(failures)process.exit(1);

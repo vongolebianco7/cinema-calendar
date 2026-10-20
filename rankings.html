@@ -199,7 +199,8 @@ async function resolveMovie(name,id,year){
  const key=String(id||'')+'|'+name+'|'+String(year||'');
  if(movieLookupCache.has(key))return movieLookupCache.get(key);
  const norm=normalizeBoxTitle(name);
- let hit=null;
+ const identity=window.CinelvaMovieIdentity;
+ let hit=identity?.resolve({title:name,tmdbId:id,year})||null;
  try{
   const local=await localBoxMovies();
   hit=(id&&local.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(id)))||
@@ -227,6 +228,7 @@ async function resolveMovie(name,id,year){
   const alias=name==='アナと雪の女王'?'Frozen':'Frozen II';
   try{const response=await fetch('https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:alias,limit:'30'}),{cache:'no-store'});if(response.ok){const data=await response.json();const id=name==='アナと雪の女王'?109445:330457;const rows=[...(data.movies||[]),...(data.external||[]),...(data.results||[])];const found=rows.find(m=>Number(m.tmdbId||m.tmdb_id||m.id)===id&&posterOf(m));if(found)hit=found;}}catch{}
  }
+ if(hit)hit=identity?.ingest(hit)||hit;
  movieLookupCache.set(key,hit);
  return hit;
 }
@@ -234,7 +236,7 @@ async function hydrateOneBoxCard(card){
  const name=card.dataset.boxFilm;if(!name)return;
  const id=card.dataset.boxId||null,year=card.dataset.boxYear||null;
  const current=card.querySelector('[data-box-poster]');if(current?.complete&&current.naturalWidth>0)return;
- const movie=await resolveMovie(name,id,year);if(!movie)return;
+ const movie=await (window.CinelvaMovieIdentity?.fetchOne({title:name,tmdbId:id,year})||resolveMovie(name,id,year));if(!movie)return;
  const img=card.querySelector('[data-box-poster]'),ph=card.querySelector('[data-box-placeholder]');
  const poster=boxPosterUrl(movie.poster||movie.posterUrl||movie.poster_url||movie.poster_path||movie.posterPath||movie.image);
  if(img&&poster){img.onerror=()=>{img.hidden=true;if(ph)ph.hidden=false};img.onload=()=>{img.hidden=false;if(ph)ph.hidden=true};img.src=poster}
@@ -259,8 +261,7 @@ function groupAwardWorks(rows){
  return [...grouped.values()];
 }
 function awardCatalogMovie(group){
- const catalog=Array.isArray(awardCatalog)?awardCatalog:[];
- return group.id?catalog.find(m=>Number(m.id||m.tmdbId)===group.id)||null:null;
+ return group.id?window.CinelvaMovieIdentity?.resolve({tmdbId:group.id})||null:null;
 }
 async function hydrateAwardCards(groups){
  const cards=[...document.querySelectorAll('#grid .awardCard[data-award-key]')];
@@ -274,7 +275,7 @@ async function hydrateAwardCards(groups){
    // Unresolved identity must not be assigned a poster from an unrelated title match.
    let movie=existing;
    if(group.id&&!boxPosterUrl(existing?.poster)){
-    const found=await resolveMovie(group.title,String(group.id));
+    const found=await (window.CinelvaMovieIdentity?.fetchOne({title:group.title,tmdbId:group.id})||resolveMovie(group.title,String(group.id)));
     if(Number(found?.tmdbId||found?.tmdb_id||found?.id)===group.id)movie=found;
    }
    if(!card.isConnected||card.dataset.awardKey!==key)continue;
@@ -333,6 +334,6 @@ async function mountRankingGauges(){
  await Promise.all([worker(),worker(),worker()]);
 }
 function render(){saveRankingState();$("#moreBtn").style.display="none";document.querySelectorAll("[data-axis]").forEach(b=>b.classList.toggle("active",b.dataset.axis===axis));$("#ratingFilters").style.display=axis==="rating"?"block":"none";$("#boxFilters").style.display=axis==="boxoffice"?"block":"none";$("#awardsIntro").style.display=axis==="awards"?"block":"none";axis==="boxoffice"?renderBox():axis==="awards"?renderAwards():renderRating()}
-async function boot(){try{const [r,m,y,b,a]=await Promise.all([fetch("data/rankings.json?"+Date.now()),fetch("data/rankings_manifest.json?"+Date.now()).catch(()=>null),fetch("data/rankings_year.json?"+Date.now()).catch(()=>null),fetch("data/boxoffice.json?v=20261019-poster-precomputed"),fetch("data/awards.json?"+Date.now())]);const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};manifest=m&&m.ok?await m.json():{};const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year||new Date().getFullYear();boxoffice=await b.json();const ad=await a.json();awards=ad.awards||[];awardCatalog=ad.catalog||[];document.querySelectorAll("[data-axis]").forEach(btn=>btn.onclick=()=>{axis=btn.dataset.axis;render()});render()}catch(err){$("#grid").innerHTML='<p>チャートデータを読み込めませんでした。</p>'}}boot();
+async function boot(){try{const [r,m,y,b,a]=await Promise.all([fetch("data/rankings.json?"+Date.now()),fetch("data/rankings_manifest.json?"+Date.now()).catch(()=>null),fetch("data/rankings_year.json?"+Date.now()).catch(()=>null),fetch("data/boxoffice.json?v=20261019-poster-precomputed"),fetch("data/awards.json?"+Date.now())]);const d=await r.json();rankings=d.rankings||{};legacyGenres=d.genres||{};manifest=m&&m.ok?await m.json():{};const yd=y&&y.ok?await y.json():{};yearRankings=yd.rankings||{};yearValue=yd.year||new Date().getFullYear();boxoffice=await b.json();const ad=await a.json();awards=ad.awards||[];awardCatalog=ad.catalog||[];window.CinelvaMovieIdentity?.ingestMany(awardCatalog);window.CinelvaMovieIdentity?.ingestMany(boxoffice.all_time||[]);for(const rows of Object.values(boxoffice.by_year||{}))window.CinelvaMovieIdentity?.ingestMany(rows);document.querySelectorAll("[data-axis]").forEach(btn=>btn.onclick=()=>{axis=btn.dataset.axis;render()});render()}catch(err){$("#grid").innerHTML='<p>チャートデータを読み込めませんでした。</p>'}}boot();
 </script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script>
-<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script><script src="js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="js/cinelva-quick-rate.js?v=20261019-box-poster-data"></script><script>mountRankingGauges();</script></body></html>
+<script src="js/movie-grid-sort.js?v=20260927-sort-v3" defer></script><script src="js/cinelva-movie-identity.js"></script><script src="js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script src="js/cinelva-quick-rate.js?v=20261019-box-poster-data"></script><script>mountRankingGauges();</script></body></html>

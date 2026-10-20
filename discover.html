@@ -129,7 +129,7 @@
 }
 #theatricalPopularGrid .cinelva-discover-review-wrap>.presetCard,
 #catalogPopularGrid .cinelva-discover-review-wrap>.presetCard{width:100%!important}
-</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
+</style><style id="cinelva-discover-more-inline">#theatricalShelfMore,#catalogShelfMore{flex:0 0 126px!important;align-self:stretch!important;min-height:185px;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap;border:1px solid var(--line);border-radius:9px;background:#191919;color:#f5f5f5;font-size:13px;font-weight:700}#theatricalShelfMore[hidden],#catalogShelfMore[hidden]{display:none!important}</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
@@ -155,7 +155,18 @@ function renderPopularShelves(){
   const grid=$("#"+key+"PopularGrid");if(!grid)continue;
   grid.innerHTML=shelfVisibleMovies(key,movies).map(m=>popularCardHtml(m,kind)).join("")||'<div class="empty">'+empty+'</div>';
   const button=document.getElementById(key+'ShelfMore');
-  if(button){button.hidden=movies.length<=10;button.textContent=discoverShelfExpanded[key]?'閉じる −':'さらに開く ＋';button.setAttribute('aria-expanded',String(discoverShelfExpanded[key]));button.onclick=()=>{discoverShelfExpanded[key]=!discoverShelfExpanded[key];renderPopularShelves();if(!discoverShelfExpanded[key])grid.scrollIntoView({block:'start',behavior:'smooth'})}}
+  if(button){
+   button.hidden=movies.length<=10;
+   button.textContent=discoverShelfExpanded[key]?'閉じる −':'さらに開く ＋';
+   button.setAttribute('aria-expanded',String(discoverShelfExpanded[key]));
+   button.onclick=()=>{
+    const opening=!discoverShelfExpanded[key];
+    discoverShelfExpanded[key]=opening;renderPopularShelves();
+    if(opening){const next=document.getElementById(key+'PopularGrid');next?.querySelectorAll('.presetCard')[10]?.scrollIntoView({block:'nearest',inline:'start',behavior:'smooth'})}
+    else grid.scrollTo({left:0,behavior:'smooth'});
+   };
+   if(!button.hidden)grid.appendChild(button);
+  }
  }
  $("#catalogPopularStatus").textContent=list.length+"作品";
  document.querySelectorAll("[data-availability]").forEach(b=>{const active=b.dataset.availability===availabilityFilter;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));b.onclick=()=>{availabilityFilter=b.dataset.availability;renderPopularShelves()}});
@@ -210,10 +221,13 @@ async function loadHistoricalCatalog(){
   {to:"2015",rating:"7",votes:"50",sort:"vote_average.desc"}
  ];
  const results=await Promise.allSettled(searches.map(async filters=>{
-  const params=new URLSearchParams({...filters,page:"1"});
-  const response=await fetch(API+"/api/discover?"+params,{cache:"no-store"});
-  if(!response.ok)throw Error("catalog "+response.status);
-  const data=await response.json();return (data.movies||data.results||[]).map(normalizeLocalMovie);
+  const pages=await Promise.allSettled([1,2,3,4].map(async page=>{
+   const params=new URLSearchParams({...filters,page:String(page)});
+   const response=await fetch(API+"/api/discover?"+params,{cache:"no-store"});
+   if(!response.ok)throw Error("catalog "+response.status);
+   const data=await response.json();return (data.movies||data.results||[]).map(normalizeLocalMovie);
+  }));
+  return pages.flatMap(r=>r.status==="fulfilled"?r.value:[]);
  }));
  catalogSource=dedupePopular([...catalogSource,...results.flatMap(r=>r.status==="fulfilled"?r.value:[])]);
  applyRecommendationAxis(preset);

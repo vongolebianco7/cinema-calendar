@@ -651,7 +651,7 @@
       const record=state.records.find(item=>entryId&&String(item.id)===entryId)
         ||state.records.find(item=>normalizeRecordSearch(item.title)===normalizeRecordSearch(entry.title));
       const info=byId.get(entryId)||state.movies.find(item=>entryId&&String(item.id)===entryId)||{};
-      const metadata={...info,...(record?enriched(record):{}),id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.year||entry.awardYears?.[0]||''};
+      const metadata={...info,...(record?enriched(record):{}),poster:info.poster||record?.poster||entry.poster||'',id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.year||entry.awardYears?.[0]||''};
       const seen=Boolean(record||entry.watched);
       const status=seen?'鑑賞済み':entryId?'未鑑賞':'照合保留';
       const headline='<div class="award-film-top"><span class="award-watch-state '+(seen?'is-watched':'is-unwatched')+'">'+status+'</span><span class="award-film-year">'+escapeHTML((entry.awardYears||[]).join('・'))+'</span></div>';
@@ -1339,7 +1339,7 @@
       }
       return fallback;
     };
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-clean-674',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-posters-219',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
     // If the compact catalog has not been deployed yet, fall back to the full sourced snapshot.
     if(!Object.keys(directorData.directors||{}).length){
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});

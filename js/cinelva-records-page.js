@@ -93,11 +93,35 @@
     if(statsHost){
       const scored=filtered.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>0);
       const methodOf=r=>String(r.viewingMethod||r.viewing_method||r.method||'').trim();
-      const cinema=filtered.filter(r=>methodOf(r)==='映画館').length;
-      const streaming=filtered.filter(r=>methodOf(r)==='配信').length;
+      const totals={'映画館':0,'配信':0,'DVD／ブルーレイ':0,'その他':0,'未指定':0};
+      for(const record of filtered){
+        const method=methodOf(record).normalize('NFKC').toLowerCase().replace(/\\s+/g,'');
+        let category='その他';
+        if(!method)category='未指定';
+        else if(method==='映画館'||method==='cinema'||method==='theater'||method==='theatre')category='映画館';
+        else if(method==='配信'||method==='streaming'||method==='stream'||method==='vod'||method==='サブスク')category='配信';
+        else if(/dvd|blu.?ray|ブルーレイ|ブルーレー|bd|ディスク/.test(method))category='DVD／ブルーレイ';
+        totals[category]++;
+      }
       const avg=scored.length?(scored.reduce((a,b)=>a+b,0)/scored.length).toFixed(2):'—';
-      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本'],['映画館 / 配信',cinema+' / '+streaming+'本']];
+      const items=[['平均評価',avg==='—'?avg:'★ '+avg],['4点以上',scored.filter(n=>n>=4).length+'本']];
       statsHost.replaceChildren(...items.map(([label,value])=>{const card=document.createElement('div');card.className='cs-extra-stat';const l=document.createElement('span');l.textContent=label;const v=document.createElement('strong');v.textContent=value;card.append(l,v);return card;}));
+      let breakdown=document.getElementById('csMethodBreakdown');
+      if(!breakdown){breakdown=document.createElement('section');breakdown.id='csMethodBreakdown';breakdown.className='cs-method-breakdown';statsHost.insertAdjacentElement('afterend',breakdown);}
+      const heading=document.createElement('h3');heading.textContent='鑑賞方法の内訳（'+(period==='all'?'オールタイム':period+'年')+'）';
+      const grid=document.createElement('div');grid.className='cs-method-grid';
+      const categories=['映画館','配信','DVD／ブルーレイ','その他',...(totals['未指定']?['未指定']:[])];
+      for(const category of categories){
+        const count=totals[category];
+        const cell=document.createElement('div');cell.className='cs-method-item';
+        const name=document.createElement('span');name.className='cs-method-name';name.textContent=category;
+        const value=document.createElement('strong');value.textContent=count+'本';
+        const track=document.createElement('div');track.className='cs-method-track';
+        const fill=document.createElement('span');fill.style.width=(filtered.length?count/filtered.length*100:0)+'%';track.append(fill);
+        const pct=document.createElement('small');pct.textContent=(filtered.length?Math.round(count/filtered.length*100):0)+'%';
+        cell.append(name,value,track,pct);grid.append(cell);
+      }
+      breakdown.replaceChildren(heading,grid);
     }
 
     $('csPeriodLabel').textContent=period==='all'?'全期間の鑑賞本数':period+'年の鑑賞本数';

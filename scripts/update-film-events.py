@@ -48,7 +48,7 @@ def extract(url,scope):
  try:page=fetch(url)
  except (OSError,ValueError):return []
  output=[]
- for raw in re.findall(r'<script\b[^>]*type\s*=\s*["\\\']application/ld\+json["\\\'][^>]*>(.*?)</script>',page,re.I|re.S):
+ for raw in re.findall(r"<script\\b[^>]*type\\s*=\\s*[^>]*application/ld\\+json[^>]*>(.*?)</script>",page,re.I|re.S):
   try:values=list(nodes(json.loads(html.unescape(raw))))
   except (ValueError,TypeError):continue
   for item in values:

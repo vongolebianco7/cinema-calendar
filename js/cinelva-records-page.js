@@ -617,7 +617,7 @@
     const cell=state.awardSelection&&scopedCell(state.awardSelection.organization,state.awardSelection.decade);
     const awardHeading=state.awardSelection?'<div class="award-detail-head"><div><span class="award-detail-kicker">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>'+(awardScope==='all'?'収録済み受賞作':'最高賞受賞作')+'の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type="button" class="award-detail-close" data-close-award aria-label="詳細を閉じる">×</button></div>':'';
     const awardEntries=cell?[...cell.entries].sort((a,b)=>Math.max(0,...(b.awardYears||[]).map(Number))-Math.max(0,...(a.awardYears||[]).map(Number))||String(a.title).localeCompare(String(b.title),'ja')):null;
-    const awardCard=entry=>{
+    const awardCard=(entry,index)=>{
       const entryId=String(entry.id||'');
       const record=state.records.find(item=>entryId&&String(item.id)===entryId)
         ||state.records.find(item=>normalizeRecordSearch(item.title)===normalizeRecordSearch(entry.title));
@@ -631,9 +631,37 @@
       const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
       const id=String(metadata.id||'');
       const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<strong>'+escapeHTML(metadata.title)+'</strong>';
-      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'"></div>'+sources+'</article>';
+      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'"></div>'+sources+'</article>';
+    };
+    // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
+    const hydrateAwardPosters=()=>{
+      const identity=globalThis.CinelvaMovieIdentity;
+      if(!identity?.fetchOne)return;
+      const cards=[...$('awardFilms').querySelectorAll('.award-film-unit')];
+      for(const card of cards){
+        const entry=awardEntries?.[Number(card.dataset.awardEntryIndex)];
+        if(!entry)continue;
+        const holder=card.querySelector('.poster');if(!holder)return;
+        const image=holder.querySelector('img');
+        if(image&&image.complete&&image.naturalWidth>0)continue;
+        if(card.dataset.awardPosterLookup==='1')continue;
+        const ids=Number(entry.id||0),awardYear=Number((entry.awardYears||[])[0]||0);
+        if(!ids&&!awardYear)continue;
+        card.dataset.awardPosterLookup='1';
+        const query={id:ids||undefined,tmdbId:ids||undefined,title:entry.title||'',year:Number(entry.year||awardYear)||undefined};
+        identity.fetchOne(query).then(res=>{
+          if(!res?.poster||!holder.isConnected)return;
+          const img=holder.querySelector('img')||document.createElement('img');
+          img.loading='lazy';img.alt='';
+          img.onload=()=>{holder.querySelectorAll('span').forEach(node=>node.hidden=true)};
+          img.onerror=()=>{identity.reportBroken?.(query,img.currentSrc||img.src);img.remove();holder.querySelectorAll('span').forEach(node=>node.hidden=false)};
+          img.src=res.poster;
+          if(!img.isConnected)holder.prepend(img);
+        }).catch(()=>{});
+      }
     };
     $('awardFilms').innerHTML=cell?awardHeading+(awardEntries.length?awardEntries.map(awardCard).join(''):'<p class="hint">この年代の受賞作品はまだ収録されていません。</p>'):'<div class="award-invite"><span aria-hidden="true">✦</span><p>マトリクスの数字をタップすると、その年代の受賞作品と鑑賞状況を見られます。</p></div>';
+    if(cell)hydrateAwardPosters();
     if(cell&&globalThis.CinelvaQuickRate?.mountInline){
       $('awardFilms').querySelectorAll('[data-award-review-id]').forEach(node=>{
         const id=node.dataset.awardReviewId;

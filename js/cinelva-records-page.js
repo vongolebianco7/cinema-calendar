@@ -660,26 +660,27 @@
   const directorMedalHistory=new Map();
   let directorMedalUpdatePending=false;
   const directorMedalTier=(watched,total,verified)=>{
-    if(verified&&total>0&&watched>=total)return {rank:4,label:'コンプリート',symbol:'✦'};
-    if(watched>=20)return {rank:3,label:'20作品',symbol:'Ⅲ'};
-    if(watched>=10)return {rank:2,label:'10作品',symbol:'Ⅱ'};
-    if(watched>=5)return {rank:1,label:'5作品',symbol:'Ⅰ'};
+    if(verified&&total>0&&watched>=total)return {rank:4,label:'全作',symbol:'✦'};
+    if(watched>=20)return {rank:3,label:'20作',symbol:'20'};
+    if(watched>=10)return {rank:2,label:'10作',symbol:'10'};
+    if(watched>=5)return {rank:1,label:'5作',symbol:'5'};
     return null;
   };
   const ensureDirectorMedalStyles=()=>{
     if(document.getElementById('cinelva-director-medals-style'))return;
     const style=document.createElement('style');style.id='cinelva-director-medals-style';
     style.textContent=`
+      /* One restrained, typographic seal; never a stack of badges. */
       .director-pick{position:relative}
-      .director-medal{display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:100%;min-width:0;margin:4px auto 0;padding:3px 6px;border:1px solid #a5aab25c;border-radius:999px;color:#d8dce2;background:#ffffff0a;font-size:10px;line-height:1.25;font-weight:650;white-space:nowrap;box-sizing:border-box}
-      .director-medal-symbol{display:inline-grid;place-items:center;flex:0 0 17px;width:17px;height:17px;border:1px solid currentColor;border-radius:50%;font-size:10px;line-height:1}
-      .director-medal[data-tier="2"]{border-color:#b2bdca7a;color:#d6e0ed}
-      .director-medal[data-tier="3"]{border-color:#d3b67b88;color:#e8d3a7}
-      .director-medal[data-tier="4"]{border-color:#e4c57b;color:#f5d99d;background:#c29a3920}
-      .director-medal-earned{animation:cinelva-medal-earned 1.15s ease-out both}
-      @keyframes cinelva-medal-earned{0%{box-shadow:0 0 0 0 #e4c57b77;transform:scale(.94)}45%{box-shadow:0 0 0 7px #e4c57b00;transform:scale(1.05)}100%{box-shadow:none;transform:scale(1)}}
-      @media(max-width:390px){.director-medal{font-size:9px;padding:2px 4px;gap:2px}.director-medal-symbol{width:15px;height:15px;flex-basis:15px;font-size:9px}}
-      @media(prefers-reduced-motion:reduce){.director-medal-earned{animation:none!important}}
+      .director-medal{display:inline-flex;align-items:center;justify-content:center;gap:5px;max-width:calc(100% - 8px);min-width:0;margin:5px auto 0;padding:0;border:0;background:transparent;color:#aab0b9;font-size:10px;line-height:1.3;font-weight:550;letter-spacing:.02em;white-space:nowrap;box-sizing:border-box}
+      .director-medal-symbol{display:inline-grid;place-items:center;flex:0 0 19px;width:19px;height:19px;border:1px solid currentColor;border-radius:50%;font-family:Georgia,serif;font-size:10px;line-height:1;font-weight:500}
+      .director-medal[data-tier="2"]{color:#c4cbd3}
+      .director-medal[data-tier="3"]{color:#d2ba8d}
+      .director-medal[data-tier="4"]{color:#e6cb95}
+      .director-medal-earned .director-medal-symbol{animation:cinelva-medal-earned .85s ease-out both}
+      @keyframes cinelva-medal-earned{0%{transform:scale(.75);opacity:.45}50%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
+      @media(max-width:390px){.director-medal{gap:3px;font-size:9px;letter-spacing:0}.director-medal-symbol{flex-basis:17px;width:17px;height:17px;font-size:9px}}
+      @media(prefers-reduced-motion:reduce){.director-medal-earned .director-medal-symbol{animation:none!important}}
     `;
     document.head.append(style);
   };

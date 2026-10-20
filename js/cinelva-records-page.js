@@ -646,9 +646,11 @@
       const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
       const id=String(metadata.id||'');
       const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<a class="award-card-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>';
-      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'">'+(!id?'<a class="award-review-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索して記録：'+escapeHTML(metadata.title)+'">作品を検索して記録</a>':'')+'</div>'+sources+'</article>';
+      // Unverified award entries must not borrow another same-title film poster.
+      const verifiedPoster=id?posterHTML(metadata):'<div class="poster"><span>作品ID未照合</span></div>';
+      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+verifiedPoster+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'">'+(!id?'<a class="award-review-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索して記録：'+escapeHTML(metadata.title)+'">作品を検索して記録</a>':'')+'</div>'+sources+'</article>';
     };
-    // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
+    // Fill missing award posters only for trusted, identified TMDB movies.
     const awardPosterSearch=async (query,identity)=>{
       // Only use the verified TMDB ID. Ambiguous same-title search is prohibited.
       const id=Number(query.tmdbId||query.id||0);
@@ -667,7 +669,7 @@
         const holder=card.querySelector('.poster');
         if(!holder)continue;
         const tmdbId=Number(entry.id||0),year=Number(entry.year||entry.awardYears?.[0]||0);
-        if(!tmdbId&&!year)continue;
+        if(!Number.isSafeInteger(tmdbId)||tmdbId<=0)continue;
         card.dataset.awardPosterLookup='1';
         const query={id:tmdbId||undefined,tmdbId:tmdbId||undefined,title:entry.title||'',year:year||undefined};
         let didRetry=false;

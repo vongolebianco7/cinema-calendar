@@ -635,6 +635,33 @@
       return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'"></div>'+sources+'</article>';
     };
     // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
+    const awardPosterSearch=async (query,identity)=>{
+      const direct=await identity.fetchOne(query);
+      if(direct?.poster)return direct;
+      // An award ceremony year can differ from the movie's release year.
+      // Resolve by exact normalized title and a narrow date window; never choose ambiguous matches.
+      if(!query.title||!query.year)return null;
+      try{
+        const endpoint='https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:query.title,limit:'30'});
+        const response=await fetch(endpoint);
+        if(!response.ok)return null;
+        const data=await response.json();
+        const norm=title=>String(title||'').normalize('NFKC').toLocaleLowerCase().replace(/[^\\p{L}\\p{N}]/gu,'');
+        const title=norm(query.title),year=Number(query.year);
+        const candidates=[...(data.movies||[]),...(data.external||[]),...(data.results||[])];
+        const matches=candidates.filter(item=>{
+          const yearFound=Number(item.release_year||item.year||String(item.release_date||'').slice(0,4));
+          const exact=[item.title,item.original_title,item.originalTitle,item.name].some(value=>norm(value)===title);
+          const id=Number(item.tmdbId??item.tmdb_id??item.id);
+          return Number.isSafeInteger(id)&&id>0&&exact&&yearFound>=year-3&&yearFound<=year+1;
+        });
+        const ids=[...new Set(matches.map(item=>Number(item.tmdbId??item.tmdb_id??item.id)))];
+        if(ids.length!==1)return null;
+        const match=matches.find(item=>identity.posterFor(item));
+        if(!match)return null;
+        return identity.ingest?.({...match,tmdbId:ids[0]})||match;
+      }catch{return null;}
+    };
     const hydrateAwardPosters=()=>{
       const identity=globalThis.CinelvaMovieIdentity;
       if(!identity?.fetchOne)return;
@@ -650,7 +677,7 @@
         if(!ids&&!awardYear)continue;
         card.dataset.awardPosterLookup='1';
         const query={id:ids||undefined,tmdbId:ids||undefined,title:entry.title||'',year:Number(entry.year||awardYear)||undefined};
-        identity.fetchOne(query).then(res=>{
+        awardPosterSearch(query,identity).then(res=>{
           if(!res?.poster||!holder.isConnected)return;
           const img=holder.querySelector('img')||document.createElement('img');
           img.loading='lazy';img.alt='';
@@ -1269,7 +1296,7 @@
       }
       return fallback;
     };
-    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
+    const [movieData,awardData,directorData]=await Promise.all([load('../data/movies.json',{movies:[]}),load('../data/awards.json?v=20261021-historical-514',{awards:[]}),load('../data/directors-mobile.json?v=20261019-mobile-catalog',{directors:{}})]);
     // If the compact catalog has not been deployed yet, fall back to the full sourced snapshot.
     if(!Object.keys(directorData.directors||{}).length){
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});

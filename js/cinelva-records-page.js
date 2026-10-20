@@ -655,6 +655,34 @@
     // Missing credits are not evidence of direction; require an explicit match.
     return role==='director'||role==='監督'||work.is_director===true||work.isDirector===true||Boolean(named);
   };
+  // Milestones use distinct watched feature films, not review edits or ratings.
+  // A complete collection is only awarded when the full filmography is known.
+  const directorMedalHistory=new Map();
+  let directorMedalUpdatePending=false;
+  const directorMedalTier=(watched,total,verified)=>{
+    if(verified&&total>0&&watched>=total)return {rank:4,label:'コンプリート',symbol:'✦'};
+    if(watched>=20)return {rank:3,label:'20作品',symbol:'Ⅲ'};
+    if(watched>=10)return {rank:2,label:'10作品',symbol:'Ⅱ'};
+    if(watched>=5)return {rank:1,label:'5作品',symbol:'Ⅰ'};
+    return null;
+  };
+  const ensureDirectorMedalStyles=()=>{
+    if(document.getElementById('cinelva-director-medals-style'))return;
+    const style=document.createElement('style');style.id='cinelva-director-medals-style';
+    style.textContent=`
+      .director-pick{position:relative}
+      .director-medal{display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:100%;min-width:0;margin:4px auto 0;padding:3px 6px;border:1px solid #a5aab25c;border-radius:999px;color:#d8dce2;background:#ffffff0a;font-size:10px;line-height:1.25;font-weight:650;white-space:nowrap;box-sizing:border-box}
+      .director-medal-symbol{display:inline-grid;place-items:center;flex:0 0 17px;width:17px;height:17px;border:1px solid currentColor;border-radius:50%;font-size:10px;line-height:1}
+      .director-medal[data-tier="2"]{border-color:#b2bdca7a;color:#d6e0ed}
+      .director-medal[data-tier="3"]{border-color:#d3b67b88;color:#e8d3a7}
+      .director-medal[data-tier="4"]{border-color:#e4c57b;color:#f5d99d;background:#c29a3920}
+      .director-medal-earned{animation:cinelva-medal-earned 1.15s ease-out both}
+      @keyframes cinelva-medal-earned{0%{box-shadow:0 0 0 0 #e4c57b77;transform:scale(.94)}45%{box-shadow:0 0 0 7px #e4c57b00;transform:scale(1.05)}100%{box-shadow:none;transform:scale(1)}}
+      @media(max-width:390px){.director-medal{font-size:9px;padding:2px 4px;gap:2px}.director-medal-symbol{width:15px;height:15px;flex-basis:15px;font-size:9px}}
+      @media(prefers-reduced-motion:reduce){.director-medal-earned{animation:none!important}}
+    `;
+    document.head.append(style);
+  };
   function renderDirectors() {
     const groups=new Map();
     const knownDirectors=Object.values(state.directors||{});
@@ -881,17 +909,25 @@
       detail.hidden=false;
       row.insertAdjacentElement('afterend',detail);
     };
+    ensureDirectorMedalStyles();
     sorted.forEach(group=>{
       const row=document.createElement('button');row.type='button';row.className='director-pick';row.setAttribute('aria-expanded','false');
       const d=group.filmography.director,photo=d?.profile_path||d?.profilePath||d?.photo||d?.image||'';
       const portrait=photo.startsWith('/')?'https://image.tmdb.org/t/p/w185'+photo:photo;
       const photoMarkup=/^https:\/\//.test(portrait)?'<img class="director-pick-photo" src="'+escapeHTML(portrait)+'" alt="" loading="lazy">':'<span class="director-pick-monogram" aria-hidden="true">🎬</span>';
       const seen=group.filmography.watchedCount,total=group.filmography.films.length,complete=group.filmography.catalogAvailable;
-      row.innerHTML='<span class="director-card-photo">'+photoMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
+      const tier=directorMedalTier(seen,total,complete);
+      const medalKey=String(d?.id||group.name);
+      const previous=directorMedalHistory.get(medalKey);
+      const earned=directorMedalUpdatePending&&previous!==undefined&&tier&&tier.rank>previous;
+      directorMedalHistory.set(medalKey,tier?.rank||0);
+      const medalMarkup=tier?'<span class="director-medal'+(earned?' director-medal-earned':'')+'" data-tier="'+tier.rank+'" aria-label="監督コレクション '+tier.label+'達成"><span class="director-medal-symbol" aria-hidden="true">'+tier.symbol+'</span><span>'+tier.label+'</span></span>':'';
+      row.innerHTML='<span class="director-card-photo">'+photoMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>'+medalMarkup;
       row.setAttribute('aria-label',group.name+'、レビュー済み'+seen+'本、監督作品総数'+(complete?total+'本':'未確認'));
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);
     });
+    directorMedalUpdatePending=false;
     const cards=[...list.children].map((row,index)=>({row,group:sorted[index]}));
     const compareCards=(a,b)=>{
       const aCount=a.group.filmography.watchedCount,bCount=b.group.filmography.watchedCount;
@@ -1051,6 +1087,7 @@
       populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();
     };
     window.addEventListener('cinelva-record-updated',()=>{
+      directorMedalUpdatePending=true;
       state.records=Records.all();
       refreshAfterReview();
     });

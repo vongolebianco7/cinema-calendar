@@ -11,6 +11,7 @@ root.addEventListener('storage',()=>{recordCache=null});
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
+const canonicalId=movie=>root.CinelvaMovieIdentity?.id(movie)||movie?.tmdbId||movie?.tmdb_id||movie?.id;
 let selected=null,activeCard=null;
 // Fill missing community scores only when a card becomes visible. Strict title matching
 // avoids attributing an unrelated film's TMDB rating to a release.
@@ -22,8 +23,8 @@ function ratingBackend(){
 }
 function resolveCommunityRating(movie,done){
  const title=movie?.title||movie?.name;
- if(!title)return;
- const key=normalizedTitle(title);if(!key)return;
+ if(!title||movie._localRecord)return;
+ const titleKey=normalizedTitle(title),wanted=Number(root.CinelvaMovieIdentity?.id(movie)||movie.tmdbId||movie.tmdb_id||movie.id||0),releaseYear=Number(movie.year||String(movie.release_date||'').slice(0,4));const key=String(wanted)+'|'+titleKey+'|'+releaseYear;if(!titleKey||(!wanted&&!releaseYear))return;
  if(tmdbCache.has(key)){tmdbCache.get(key).then(done);return;}
  const task=new Promise(resolve=>{tmdbQueue.push(async()=>{
   try{
@@ -31,7 +32,7 @@ function resolveCommunityRating(movie,done){
    const response=await fetch(base+'/api/movies?q='+encodeURIComponent(title)+'&limit=8');
    if(!response.ok)return resolve(null);
    const data=await response.json(),candidates=[...(data.movies||[]),...(data.external||[])];
-   const match=candidates.find(x=>normalizedTitle(x.title)===key||normalizedTitle(x.original_title)===key);
+   const matches=candidates.filter(x=>wanted?Number(x.tmdbId||x.tmdb_id||x.id)===wanted:Number(x.year||String(x.release_date||'').slice(0,4))===releaseYear&&[x.title,x.original_title].some(t=>normalizedTitle(t)===titleKey));const unique=new Set(matches.map(x=>String(x.tmdbId||x.tmdb_id||x.id)));const match=unique.size===1?matches[0]:null;
    const score=Number(match?.vote_average??match?.score);
    resolve(Number.isFinite(score)&&score>0?score:null);
   }catch{resolve(null);}
@@ -126,10 +127,10 @@ function syncViewingVenue(saved=''){
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
 function open(movie,options={}) {
- const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ const id=canonicalId(movie);
  if(!validId(id)){return false;}
- const existing=allRecords().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
- selected={...movie,...existing,id:String(existing?.id??id),tmdbId:id,title:existing?.title||movie.title||movie.name||'作品'};
+ const existing=allRecords().find(r=>movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year)));
+ selected={...movie,...existing,_editingExisting:Boolean(existing),id:String(existing?.id??id),...(movie._localRecord?{}:{tmdbId:id}),title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
  syncDialogScore();
@@ -148,8 +149,8 @@ function save() {
  const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
-  if(Number($('cinelvaRateScore').value)===0){if(allRecords().some(r=>String(r.id)===String(selected.id)&&String(r.tmdbId??r.tmdb_id??r.id)===String(selected.tmdbId)))Records.remove(selected.id);}
-  else Records.save({...selected,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);
+  if(Number($('cinelvaRateScore').value)===0){if(selected._editingExisting&&allRecords().some(r=>String(r.id)===String(selected.id)&&String(r.tmdbId??r.tmdb_id??r.id)===String(selected.tmdbId??selected.id)))Records.remove(selected.id);}
+  else {const {_editingExisting,_localRecord,...movie}=selected;Records.save({...movie,comment,viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);}
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
   dialog.close();
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
@@ -211,7 +212,7 @@ function enhanceCalendar(grid){
     if(!open(movie))rate.setAttribute('aria-label','作品IDを確認できません');
    };
    const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
-   const movieId=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+   const movieId=canonicalId(movie);
    if(!validId(movieId))continue;
    card.append(rate);
    attachInlineScore(rate,movie);
@@ -240,10 +241,10 @@ style.textContent+=`
 .streamingWeekMovies>.streamMovie>.cinelva-rate-button{display:none!important}
 `;
 function attachInlineScore(button,movie) {
- const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ const id=canonicalId(movie);
  if(!validId(id))return;
  const syncWatched=()=>{
-  const record=allRecords().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
+  const record=allRecords().find(r=>(movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year))));
   button.classList.toggle('is-watched',Boolean(record&&record.watched===true));
   button.setAttribute('aria-label',record&&record.watched===true?'この映画の評価を編集':'この映画をレビュー');
  };
@@ -286,13 +287,14 @@ function attachInlineScore(button,movie) {
  root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
+ if(movie._localRecord){bookmark.disabled=true;bookmark.setAttribute('aria-pressed','false');bookmark.classList.remove('is-bookmarked');bookmark.title='作品ID未確認';bookmark.onclick=null;}
 
  const ratings=document.createElement('div');ratings.className='cinelva-rating-pair';
  const personal=document.createElement('div'),audience=document.createElement('div');
  personal.className='cinelva-rating-line cinelva-rating-personal';
  audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
-  const rec=allRecords().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched===true);
+  const rec=allRecords().find(r=>(movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year)))&&r.watched===true);
   const watched=Boolean(rec&&rec.rating!==0);
   const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
   personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
@@ -1278,8 +1280,8 @@ style.textContent+=`
 .cinelva-review-method select{width:100%;max-width:100%}
 .cinelva-review-method label[hidden]{display:none!important}
 `;
-root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
-function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:movie.tmdbId??movie.tmdb_id??movie.id});}}
+root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie))||undefined,_localRecord:!(root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie)))});}}
 if(typeof MutationObserver!=='undefined'){const start=()=>{mountRecordReviews();new MutationObserver(rows=>{for(const row of rows)for(const node of row.addedNodes)if(node.nodeType===1)mountRecordReviews(node)}).observe(document.body,{childList:true,subtree:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}
 
 

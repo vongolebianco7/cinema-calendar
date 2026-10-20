@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T09:26:58.465407+00:00",
+  "updated_at": "2026-10-20T09:47:47.252536+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
   "branch": "fix/final-quality-20261020",
-  "head_sha": "da1c162824ca368d60be7cdfb3228b71945548d0",
+  "head_sha": "f841e17b4992b52828d3ecfcf6c92485a6db2ef5",
   "pull_request": 437,
   "work_items": [
     {
@@ -527,7 +527,7 @@
       "title": "Unify poster failure recovery and repair current-spec quality checks",
       "status": "pr_created",
       "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
-      "ci": "PR #437: Validate frontend (including Chromium/WebKit), mobile layout, brand identity, full Python, completeness, backup, smoke, and scorecard contract passed on da1c162. Autonomous gate exposed a duplicated theme loader on events.html; fixed locally for the next revision. Local quality gate passes, 168 Node tests pass. A new deterministic browser regression verifies immediate fallback under forced display CSS and successful shared retry."
+      "ci": "Local: shared quality gate passes; Node tests now include 8 identity/cache cases, current-spec UI contracts, and browser regressions for immediate poster fallback and stalled remote search. My Cinelva 1000-record/backup/restore/PNG journey, rating visibility 375/390/768, mobile calendar 375/390/768/1440, 240-load Chromium route audit, and 30-route theme browser checks pass. PR #437 first/second CI Validate frontend including WebKit passed. Autonomous gate additionally exposed an attempted nonexistent cinelva/events.html in the theme test inventory; test now checks existing active routes only. Final CI pending on next revision."
     }
   ],
   "verification": [
@@ -583,6 +583,10 @@
     {
       "check": "Eastwood verified source snapshot and regression",
       "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
+    },
+    {
+      "check": "Final QA review and actual CDN sampling 2026-10-20",
+      "result": "173 active Node unit tests and shared quality gate pass; 138 Python tests passed. 30 routes x4 widths x2 themes audited. Actual CDN sample:60 page loads,242/242 image loads,0 failed/pending,0 overflow/page errors. Reviewer blockers fixed with current/legacy local-ID overwrite and zero-delete regressions;31 targeted tests pass. Search/critic hanging API and deterministic poster retry browser regressions pass. Final remote CI/merge/Pages still pending."
     }
   ],
   "deployment": {

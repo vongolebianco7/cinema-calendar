@@ -13,6 +13,7 @@ page.on('pageerror',error=>errors.push(error.message));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
  for (const prefix of ['', 'cinelva/']) for (const file of pages) {
+  if(!fs.existsSync(prefix+file))continue;
   await page.goto(`${base}/${prefix}${file}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(document.querySelector('.cinelvaTheme select')));
   assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' system theme');

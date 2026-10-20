@@ -2,9 +2,10 @@ const { test } = require("node:test"),
   assert = require("node:assert/strict"),
   vm = require("node:vm"),
   fs = require("node:fs");
-function registry(rows = [], cache = {}) {
+function registry(rows = [], cache = {}, broken = []) {
   const values = new Map([
       ["cinelva-poster-registry-v1", JSON.stringify(cache)],
+      ["cinelva-broken-posters-v1", JSON.stringify(broken)],
     ]),
     window = {};
   let calls = 0;
@@ -63,7 +64,7 @@ test("invalid cache paths are excluded and normalized artwork is reused across v
     "https://image.tmdb.org/t/p/w500/ok.jpg",
   );
 });
-test("broken artwork variants stay invalid after reload and do not poison other posters", () => {
+test("broken artwork variants are invalidated within the document and removed from persistent cache", () => {
   const { api, values } = registry();
   api.ingest({ tmdbId: 99, title: "Film", poster: "/bad.jpg" });
   api.reportBroken({ tmdbId: 99 }, "https://image.tmdb.org/t/p/w342/bad.jpg");
@@ -87,4 +88,38 @@ test("concurrent cards share lookup and ambiguous title-year results stay unreso
   assert.ok(r.every((x) => x === null));
   assert.equal(calls(), 1);
 });
-test('known TMDB identity can recover a poster without guessing a title',async()=>{const window={};let requested='';vm.runInNewContext(fs.readFileSync('js/cinelva-movie-identity.js','utf8'),{window,URL,URLSearchParams,localStorage:{getItem:()=>null,setItem(){}},fetch:async url=>{requested=url;return{ok:true,json:async()=>({movie:{id:128,title:'もののけ姫',year:1997,poster:'/mononoke.jpg'}})}}});assert.match((await window.CinelvaMovieIdentity.fetchOne({tmdbId:128}))?.poster||'',/mononoke.jpg$/);assert.match(requested,/movie-detail\?id=128/)});
+test("known TMDB identity can recover a poster without guessing a title", async () => {
+  const window = {};
+  let requested = "";
+  vm.runInNewContext(fs.readFileSync("js/cinelva-movie-identity.js", "utf8"), {
+    window,
+    URL,
+    URLSearchParams,
+    localStorage: { getItem: () => null, setItem() {} },
+    fetch: async (url) => {
+      requested = url;
+      return {
+        ok: true,
+        json: async () => ({
+          movie: {
+            id: 128,
+            title: "もののけ姫",
+            year: 1997,
+            poster: "/mononoke.jpg",
+          },
+        }),
+      };
+    },
+  });
+  assert.match(
+    (await window.CinelvaMovieIdentity.fetchOne({ tmdbId: 128 }))?.poster || "",
+    /mononoke.jpg$/,
+  );
+  assert.match(requested, /movie-detail\?id=128/);
+});
+
+test("a transient failure in a previous document cannot permanently block healthy artwork", () => {
+  const url = "https://image.tmdb.org/t/p/w500/recovered.jpg";
+  const { api } = registry([], { 99: url }, [url]);
+  assert.equal(api.posterFor({ tmdbId: 99, poster: "/recovered.jpg" }), url);
+});

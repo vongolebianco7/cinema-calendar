@@ -52,7 +52,7 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};
  const {api,element,writes}=setup([old]);
- assert.equal(api.open({id:22,title:'作品'}),true);
+ assert.equal(api.open({id:22,title:'作品',_localRecord:true}),true);
  assert.equal(element('cinelvaRateScore').value,0);
  assert.equal(element('cinelvaRatePlace').value,'配信');
  assert.equal(element('cinelvaRateComment').value,'短評');

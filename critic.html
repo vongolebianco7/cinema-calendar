@@ -99,7 +99,8 @@ async function load(){
   if(!evidence.ok)throw Error('evidence');const data=await evidence.json();
   const entry=data.films?.[String(id||'')]||{};
   const m={id,tmdbId:Number(id),title:entry.title||title||'',year:entry.year||'',related:[]};
-  const resolved=await window.CinelvaMovieIdentity?.fetchOne(m);render({...m,...resolved,title:resolved?.title||m.title||'作品名を確認できませんでした'},data);
+  render({...m,title:m.title||'作品名を確認できませんでした'},data);
+  window.CinelvaMovieIdentity?.fetchOne(m).then(resolved=>{if(resolved){const image=app.querySelector('.hero .poster');if(image)window.CinelvaMovieIdentity.hydratePoster(image,resolved);else window.CinelvaMovieIdentity.hydrateCard(app.querySelector('.hero'),resolved);if(!m.title&&resolved.title){app.querySelector('h1').textContent=resolved.title;}}}).catch(()=>{});
  }catch(e){app.innerHTML='<p>批評情報を読み込めませんでした。</p><button type="button" id="retry">再試行</button>';document.getElementById('retry').onclick=load}
 }
 load();

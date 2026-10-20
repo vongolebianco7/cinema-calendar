@@ -70,7 +70,7 @@
   try {
     broken = JSON.parse(localStorage.getItem(BAD_KEY) || "[]");
   } catch {}
-  const badPosters = new Set(
+  const previousFailures = new Set(
     Array.isArray(broken) ? broken.map(normalizePoster).filter(Boolean) : [],
   );
   if (!stored || typeof stored !== "object" || Array.isArray(stored))
@@ -79,16 +79,16 @@
     Object.entries(stored)
       .filter(([key]) => positive(key))
       .map(([key, url]) => [key, normalizePoster(url)])
-      .filter(([, url]) => url && !badPosters.has(url)),
+      .filter(([, url]) => url && !previousFailures.has(url)),
   );
+  // Image errors can be transient. Quarantine only within this document;
+  // remove failed URLs from persistent poster storage without a permanent blacklist.
+  const badPosters = new Set();
   function save() {
     try {
       stored = Object.fromEntries(Object.entries(stored).slice(-MAX_CACHE));
       localStorage.setItem(CACHE_KEY, JSON.stringify(stored));
-      localStorage.setItem(
-        BAD_KEY,
-        JSON.stringify([...badPosters].slice(-500)),
-      );
+      localStorage.setItem(BAD_KEY, JSON.stringify([]));
     } catch {}
   }
   const poster = (m) =>
@@ -165,7 +165,16 @@
     if (pending.has(key)) return pending.get(key);
     const task = (async () => {
       try {
-        if(wanted && !title){const r=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?'+new URLSearchParams({id:String(wanted)}));if(!r.ok)return cached||null;const data=await r.json(),movie=fromApi(data.movie||{});return id(movie)===wanted?ingest(movie):cached||null;}
+        if (wanted && !title) {
+          const r = await fetch(
+            "https://backend-one-gray-94.vercel.app/api/movie-detail?" +
+              new URLSearchParams({ id: String(wanted) }),
+          );
+          if (!r.ok) return cached || null;
+          const data = await r.json(),
+            movie = fromApi(data.movie || {});
+          return id(movie) === wanted ? ingest(movie) : cached || null;
+        }
         const r = await fetch(
           "https://backend-one-gray-94.vercel.app/api/movies?" +
             new URLSearchParams({ q: title, limit: "30" }),
@@ -229,6 +238,8 @@
       image.style.removeProperty("display");
       parent?.classList.remove("posterMissing");
       if (fallback) fallback.hidden = true;
+      for(const placeholder of parent?.querySelectorAll('[data-poster-fallback],.calMissing,.filmPlaceholder,.theatricalPosterFallback,.selectedMoviePosterFallback,.filmCandidatePosterFallback')||[]){placeholder.hidden=true;placeholder.style.setProperty('display','none','important');}
+      if(parent?.matches('.poster,.want-watch-poster,.streamMoviePoster,.tvMoviePoster,.presetCardPoster'))for(const node of [...parent.childNodes])if(node.nodeType===3)node.remove();
       image.dataset.posterFailed = "";
     };
     const fail = () => {
@@ -241,7 +252,7 @@
         fallback.textContent = "ポスター未取得";
         parent.append(fallback);
       }
-      if (fallback) fallback.hidden = false;
+      if (fallback){fallback.hidden = false;fallback.style.removeProperty('display');}
     };
     image.addEventListener("load", show);
     image.addEventListener("error", async () => {
@@ -267,7 +278,8 @@
       } else fail();
     });
     const url = posterFor(m);
-    if (url && normalizePoster(image.getAttribute("src")) !== url) image.src = url;
+    if (url && normalizePoster(image.getAttribute("src")) !== url)
+      image.src = url;
     if (image.complete && image.naturalWidth > 0) show();
     else if (image.complete && image.getAttribute("src"))
       image.dispatchEvent(new Event("error"));
@@ -347,7 +359,7 @@
         if (record)
           movie = {
             ...record,
-            tmdbId: record.tmdbId ?? record.tmdb_id ?? record.id,
+            tmdbId: id(record) || id(resolve(record)),
           };
       }
       const link = card.matches('a[href*="search.html"]')

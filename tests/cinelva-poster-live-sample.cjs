@@ -1,4 +1,4 @@
-const { chromium } = require("playwright"),
+const { chromium, request } = require("playwright"),
   { spawn } = require("child_process"),
   { waitForLocalServer } = require("./helpers/local-server.cjs"),
   net = require("net"),
@@ -18,16 +18,55 @@ const { chromium } = require("playwright"),
     await waitForLocalServer(port);
   }
   const base = process.env.CINELVA_TEST_BASE || `http://127.0.0.1:${port}`,
-    browser = await chromium.launch(process.env.CINELVA_TEST_PROXY && process.env.HTTPS_PROXY ? {proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}} : {}),
-    report = { base, generated_at: new Date().toISOString(), results: [] };
+    browser = await chromium.launch(),
+    report = {
+      base,
+      image_transport: process.env.CINELVA_TEST_PROXY
+        ? "actual CDN bytes through configured environment proxy"
+        : "browser network",
+      api_mode: process.env.CINELVA_OFFLINE_API ? "offline fallback" : "live",
+      generated_at: new Date().toISOString(),
+      results: [],
+    };
   fs.mkdirSync("artifacts/final-quality", { recursive: true });
+  const cdn = process.env.CINELVA_TEST_PROXY
+    ? await request.newContext({
+        proxy: { server: process.env.HTTPS_PROXY },
+        ignoreHTTPSErrors: true,
+      })
+    : null;
+  const cdnCache = new Map();
   try {
     for (const width of [375, 390, 768])
       for (const theme of ["light", "dark"]) {
         const context = await browser.newContext({
           viewport: { width, height: 844 },
-          ignoreHTTPSErrors: Boolean(process.env.CINELVA_TEST_PROXY),
         });
+        if (cdn)
+          await context.route("https://image.tmdb.org/**", async (route) => {
+            try {
+              const url = route.request().url();
+              if (!cdnCache.has(url))
+                cdnCache.set(
+                  url,
+                  cdn
+                    .get(url, { timeout: 15000 })
+                    .then(async (response) => ({
+                      status: response.status(),
+                      headers: response.headers(),
+                      body: await response.body(),
+                    })),
+                );
+              await route.fulfill(await cdnCache.get(url));
+            } catch {
+              await route.abort();
+            }
+          });
+        if (process.env.CINELVA_OFFLINE_API)
+          await context.route(
+            "https://backend-one-gray-94.vercel.app/**",
+            (route) => route.abort(),
+          );
         await context.addInitScript(
           (t) => localStorage.setItem("cinelva-theme-v1", t),
           theme,
@@ -58,7 +97,29 @@ const { chromium } = require("playwright"),
             await page.goto(base + "/" + path, {
               waitUntil: "domcontentloaded",
             });
-            await page.waitForTimeout(1500);
+            await page
+              .locator("main,.wrap")
+              .first()
+              .waitFor({ state: "attached" });
+            await page.waitForTimeout(2000);
+            await page
+              .waitForFunction(
+                () =>
+                  [
+                    ...document.querySelectorAll(
+                      ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.filmPoster,img.poster,[data-box-poster]",
+                    ),
+                  ]
+                    .filter((i) => {
+                      const r = i.getBoundingClientRect();
+                      return r.top < innerHeight + 240 && r.bottom > 0;
+                    })
+                    .slice(0, 12)
+                    .every((i) => i.complete),
+                null,
+                { polling: 200, timeout: 15000 },
+              )
+              .catch(() => {});
             const samples = await page
               .locator(
                 ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.want-watch-poster img,.filmPoster,img.poster,[data-box-poster]",
@@ -73,9 +134,11 @@ const { chromium } = require("playwright"),
                   .map((i) => ({
                     title:
                       i
-                        .closest("article,.card,.presetCard,.filmCard,.hero")
+                        .closest(
+                          "article,.card,.rankCard,.awardCard,.presetCard,.filmCard,.hero",
+                        )
                         ?.querySelector(
-                          ".title,.streamMovieTitle,.tvMovieTitle,strong,b,h1,.filmTitle",
+                          ".title,.presetCardTitle,.streamMovieTitle,.tvMovieTitle,strong,b,h1,.filmTitle",
                         )?.textContent || i.alt,
                     src: i.currentSrc || i.src,
                     complete: i.complete,
@@ -114,6 +177,7 @@ const { chromium } = require("playwright"),
         await context.close();
       }
   } finally {
+    await cdn?.dispose();
     await browser.close();
     server?.kill();
     fs.writeFileSync(

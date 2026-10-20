@@ -114,6 +114,19 @@ const { chromium, webkit } = require("playwright"),
     );
     await bookmark.click();
     assert.equal(await bookmark.getAttribute("aria-pressed"), "false");
+    await page.evaluate(()=>{CinelvaLibraryRecords.save({id:550,title:'Unmapped imported film',year:2020},4,'2024');});
+    await page.goto(`http://127.0.0.1:${port}/my-cinelva/index.html`,{waitUntil:'domcontentloaded'});
+    await page.locator('[data-tab="records"]').click();
+    const imported=page.locator('[data-record-card="550"]');
+    await imported.locator('.cinelva-rate-button').waitFor();
+    assert.equal(new URL(await imported.locator('a').first().getAttribute('href'),'http://local/').searchParams.get('id'),'');
+    assert.equal(await imported.locator('.cinelva-bookmark-button').isDisabled(),true);
+    await imported.locator('.cinelva-rate-button').click();
+    assert.equal(await page.locator('#cinelvaRateTitle').innerText(),'Unmapped imported film');
+    await page.locator('#cinelvaRateScore').fill('4.3');
+    await page.locator('#cinelvaRateSave').click();
+    const local=await page.evaluate(()=>CinelvaLibraryRecords.all().find(r=>r.id==='550'));
+    assert.equal(local.rating,4.3);assert.equal(local.tmdbId,undefined);
     assert.deepEqual(errors, []);
     console.log(
       "Shared review, 0.1 score, today, save/close, zero/unwatched, bookmark/toast, reload and imported-ID edit passed",

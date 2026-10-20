@@ -20,6 +20,7 @@ function editor(initialDate, existing = true, identity = {}) {
   Object.assign(context, {
     Records,
     allRecords:()=>Records.all(),
+    canonicalId:m=>m.tmdbId??m.tmdb_id??m.id,
     $: element,
     validId: id => /^[1-9]\d*$/.test(String(id)),
     syncDialogScore() {},
@@ -34,7 +35,7 @@ function editor(initialDate, existing = true, identity = {}) {
   const source = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
   const actions = source.slice(source.indexOf('function open(movie,'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
   vm.runInContext('let selected;\n' + actions + '\nglobalThis.actions={open,save};', context);
-  context.actions.open({ id: 123, title: '日付精度テスト' });
+  context.actions.open({ id: 123, title: '日付精度テスト', ...(existing&&!identity.tmdbId&&!identity.tmdb_id?{_localRecord:true}:{}) });
   return { Records, element, actions: context.actions, dialog: context.dialog, context };
 }
 
@@ -120,4 +121,33 @@ test('a conflicting local ID never replaces another imported film', () => {
   assert.equal(rows[0].rating, 4);
   assert.equal(rows[0].watchedAt, '2024');
   assert.match(element('cinelvaRateMessage').textContent, /別の作品/);
+});
+
+test('editing an unmapped imported storage ID never invents a TMDB identity', () => {
+ const {Records,actions,element}=editor('2024',true);
+ actions.open({id:123,title:'日付精度テスト',_localRecord:true});
+ element('cinelvaRateScore').value='4.5';actions.save();
+ assert.equal(Records.all()[0].rating,4.5);
+ assert.equal(Records.all()[0].tmdbId,undefined);
+});
+
+test('a canonical movie never overwrites an occupied unmapped storage ID', () => {
+ const {Records,actions,element}=editor('2024',true);
+ actions.open({id:123,tmdbId:123,title:'Different canonical film',year:2020});
+ element('cinelvaRateScore').value='4.5';actions.save();
+ assert.equal(Records.all()[0].title,'日付精度テスト');
+ assert.equal(Records.all()[0].rating,4);
+ assert.equal(Records.all()[0].tmdbId,undefined);
+ assert.match(element('cinelvaRateMessage').textContent,/別の作品/);
+});
+
+for(const legacy of [false,true])test(`unmapped ${legacy?'legacy':'current'} collision cannot be removed by zero or overwritten`,()=>{
+ const {Records,actions,element,context}=editor('2024',true);
+ if(legacy){const rows=Records.all();context.localStorage.setItem(Records.KEY,'{}');context.localStorage.setItem(Records.LEGACY,JSON.stringify(Object.fromEntries(rows.map(r=>[r.id,r]))));}
+ actions.open({id:123,tmdbId:123,title:'Different canonical film',year:2020});
+ element('cinelvaRateScore').value='0';actions.save();
+ assert.equal(Records.all().length,1);assert.equal(Records.all()[0].title,'日付精度テスト');
+ actions.open({id:123,tmdbId:123,title:'Different canonical film',year:2020});
+ element('cinelvaRateScore').value='4.5';actions.save();
+ assert.equal(Records.all()[0].title,'日付精度テスト');assert.equal(Records.all()[0].tmdbId,undefined);
 });

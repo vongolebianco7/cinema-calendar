@@ -48,7 +48,7 @@ def extract(url,scope):
  try:page=fetch(url)
  except (OSError,ValueError):return []
  output=[]
- for raw in re.findall(r'<script\\b[^>]*type\\s*=\\s*["\\\']application/ld\\+json["\\\'][^>]*>(.*?)</script>',page,re.I|re.S):
+ for raw in re.findall(r'<script\b[^>]*type\s*=\s*["\\\']application/ld\+json["\\\'][^>]*>(.*?)</script>',page,re.I|re.S):
   try:values=list(nodes(json.loads(html.unescape(raw))))
   except (ValueError,TypeError):continue
   for item in values:
@@ -79,7 +79,7 @@ def main():
  data=json.loads(FEED.read_text())
  config=json.loads(SOURCES.read_text())
  existing=data.get('events',[])
- def key(e):return (re.sub(r'\\W+','',str(e.get('title','')).casefold()),e.get('date',''))
+ def key(e):return (re.sub(r'\W+','',str(e.get('title','')).casefold()),e.get('date',''))
  merged={key(e):e for e in existing}
  found=0
  for group,scope in [('domestic_official_pages','domestic'),('overseas_official_pages','overseas')]:
@@ -90,6 +90,6 @@ def main():
  data['events']=sorted(merged.values(),key=lambda e:(e.get('date',''),e.get('title','')))
  data['generated_at']=dt.date.today().isoformat()
  data['discovery_count']=found
- FEED.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\\n')
+ FEED.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  print(f'Official event feed: {len(data["events"])} records; {found} new verified events')
 if __name__=='__main__':main()

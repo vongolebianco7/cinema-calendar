@@ -289,10 +289,12 @@
   }
   function card(movie) {
     const id=escapeHTML(movie.id),title=escapeHTML(movie.title||'作品名不明');
+    const releaseCandidate=String(movie.release_date||movie.releaseDate||movie.releaseDateJP||movie.release_date_jp||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).release_date||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).releaseDate||'').trim();
+    const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','.'):(movie.year?String(movie.year):'公開日未取得');
     return '<article class="movie cinelva-unified-record-card" data-record-card="'+id+'">'+
       '<div class="cinelva-record-poster">'+posterHTML(movie)+'</div>'+
       '<strong class="cinelva-record-title">'+title+'</strong>'+
-      '<div class="cinelva-record-meta"><small>'+escapeHTML(movie.year||'公開年不明')+'</small></div>'+
+      '<div class="cinelva-record-meta"><small>'+escapeHTML(releaseDate)+'</small></div>'+
       '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
   function mountRecordReviewAreas(scope){
@@ -528,7 +530,7 @@
       if(/カンヌ/.test(name))return 'パルム・ドール';
       if(/ヴェネチア|ベネチア/.test(name))return '金獅子賞';
       if(/ベルリン/.test(name))return '金熊賞';
-      if(/ゴールデングローブ/.test(name))return '映画作品賞：ドラマ／ミュージカル・コメディ（同格2部門）';
+      if(/ゴールデングローブ/.test(name))return '映画作品賞';
       if(/日本アカデミー/.test(name))return '最優秀作品賞';
       if(/キネマ旬報/.test(name))return '日本・外国映画ベスト1';
       return '作品賞';

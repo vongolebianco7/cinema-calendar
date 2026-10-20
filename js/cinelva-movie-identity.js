@@ -21,6 +21,26 @@ function reportBroken(movie,url){const key=id(movie),broken=String(url||poster(m
 function hydratePoster(image,movie){if(!image||!movie)return;const key=id(movie);if(key<=0)return;const resolved=posterFor(movie);if(resolved&&(!image.getAttribute('src')||image.dataset.posterFailed==='1')){image.dataset.posterFailed='';image.src=resolved}
 image.addEventListener('error',async()=>{if(image.dataset.posterRetry==='1')return;image.dataset.posterRetry='1';reportBroken(movie,image.currentSrc||image.src);const next=await fetchOne({...movie,poster:'',poster_url:'',posterUrl:'',poster_path:''});const alternative=next?.poster;if(alternative&&!badPosters.has(alternative)&&image.isConnected){image.dataset.posterFailed='';image.src=alternative}else image.dataset.posterFailed='1'},{once:true});
 }
+function hydrateCard(container,movie){
+ if(!container||!movie)return;
+ const idValue=id(movie);if(!Number.isSafeInteger(idValue)||idValue<=0)return;
+ const apply=url=>{
+  if(!url||!container.isConnected)return;
+  let image=container.querySelector('img');
+  if(!image){image=document.createElement('img');image.loading='lazy';image.alt='';container.appendChild(image)}
+  if(image.getAttribute('src')!==url)image.src=url;
+  hydratePoster(image,movie);
+ };
+ const direct=posterFor(movie);
+ if(direct){apply(direct);return}
+ if(container.dataset.cinelvaPosterPending==='1')return;
+ container.dataset.cinelvaPosterPending='1';
+ const run=async()=>{try{const result=await fetchOne(movie);if(result?.poster)apply(result.poster)}finally{delete container.dataset.cinelvaPosterPending}};
+ if(typeof IntersectionObserver!=='undefined'){
+  const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();run()}},{rootMargin:'240px'});
+  observer.observe(container);
+ }else run();
+}
 function posterStats(){return {movies:byId.size,posters:Object.keys(stored).length,aliases:aliases.size}}
-root.CinelvaMovieIdentity={ingest,ingestMany,resolve,fetchOne,posterFor,hydratePoster,reportBroken,stats:posterStats};
+root.CinelvaMovieIdentity={ingest,ingestMany,resolve,fetchOne,posterFor,hydratePoster,hydrateCard,reportBroken,stats:posterStats};
 })(window);

@@ -256,7 +256,7 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 .presetShelfGrid img,.cinelva-discover-review-wrap .poster img,#grid .cinelva-rate-wrap .poster img{display:block;width:100%;height:100%;object-fit:cover}
 .cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
-</style></head>
+</style><style id="outdoor-film-common-review">.outdoorFilmGrid>.outdoorFilmEntry{min-width:0;display:flex;flex-direction:column}.outdoorFilmEntry>.outdoorFilmItem{flex:1}.outdoorFilmReview{margin-top:auto;min-width:0}.outdoorScreeningTime{font-weight:700;color:#b9cde4}</style></head>
 <body>
 
 
@@ -475,10 +475,11 @@ function groupedMovieCards(weekMovies,modeName){
  }).join("")
 }
 
-let outdoorPosterCache={};
+let outdoorPosterCache={};let outdoorMovieCache={};
 async function loadOutdoorEvents(){try{const r=await fetch("data/outdoor-events.json",{cache:"no-store"});if(!r.ok)throw Error("outdoor feed");const d=await r.json();outdoorEvents=Array.isArray(d.events)?d.events:[]}catch(e){console.warn("Outdoor event feed failed",e);outdoorEvents=[]}if(mode==="events")render();hydrateOutdoorPosters().catch(console.warn)}
-async function hydrateOutdoorPosters(){const titles=[...new Set(outdoorEvents.filter(e=>e.movie&&!e.poster_url).map(e=>e.movie))];let cursor=0,changed=false;const norm=x=>String(x||"").normalize("NFKC").toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,"");async function worker(){while(cursor<titles.length){const title=titles[cursor++];if(outdoorPosterCache[title])continue;try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?"+new URLSearchParams({q:title,limit:"12"}),{cache:"force-cache"});if(!r.ok)continue;const d=await r.json();const hits=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];const hit=hits.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(title)));if(!hit)continue;let poster=hit.poster||hit.posterUrl||hit.poster_path||hit.posterPath;if(poster&&poster.startsWith("/"))poster="https://image.tmdb.org/t/p/w342"+poster;if(poster&&poster.startsWith("https://")){outdoorPosterCache[title]=poster;changed=true}}catch(e){}}}await Promise.all([worker(),worker(),worker()]);if(changed&&mode==="events")renderOutdoorCalendar()}
+async function hydrateOutdoorPosters(){const titles=[...new Set(outdoorEvents.filter(e=>e.movie&&!e.poster_url).map(e=>e.movie))];let cursor=0,changed=false;const norm=x=>String(x||"").normalize("NFKC").toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,"");async function worker(){while(cursor<titles.length){const title=titles[cursor++];if(outdoorPosterCache[title])continue;try{const r=await fetch("https://backend-one-gray-94.vercel.app/api/movies?"+new URLSearchParams({q:title,limit:"12"}),{cache:"force-cache"});if(!r.ok)continue;const d=await r.json();const hits=[...(d.movies||[]),...(d.external||[]),...(d.results||[])];const hit=hits.find(x=>[x.title,x.original_title,x.originalTitle,x.name].some(t=>norm(t)===norm(title)));if(!hit)continue;window.CinelvaMovieIdentity?.ingest(hit);outdoorMovieCache[title]=hit;let poster=hit.poster||hit.posterUrl||hit.poster_path||hit.posterPath;if(poster&&poster.startsWith("/"))poster="https://image.tmdb.org/t/p/w342"+poster;if(poster&&poster.startsWith("https://")){outdoorPosterCache[title]=poster;changed=true}}catch(e){}}}await Promise.all([worker(),worker(),worker()]);if(mode==="events"&&(changed||Object.keys(outdoorMovieCache).length))renderOutdoorCalendar()}
 
+function mountCalendarOutdoorReviews(){document.querySelectorAll('[data-outdoor-title]').forEach(el=>{if(el.dataset.gaugeMounted)return;const title=el.dataset.outdoorTitle,id=Number(el.dataset.outdoorId||0),movie=window.CinelvaMovieIdentity?.resolve({title})||{};const found=outdoorMovieCache[title]||movie;const resolved=id||Number(found.tmdbId||found.id||0);if(resolved)window.CinelvaQuickRate?.mountInline(el,{...found,id:resolved,tmdbId:resolved,title:found.title||title})})}
 function renderOutdoorCalendar(){
  const cal=document.querySelector(".calendar");
  cal.classList.remove("streamingWeekMode","theatricalCompact");cal.classList.add("festivalMode");
@@ -521,7 +522,8 @@ function renderOutdoorCalendar(){
   if(g.films.length){
    html+='<div class="outdoorFilmGrid">';
    for(const film of g.films){
-    html+='<a class="outdoorFilmItem" href="search.html?search='+encodeURIComponent(film.movie)+'">'+((film.poster_url||outdoorPosterCache[film.movie])?'<img loading="lazy" src="'+(film.poster_url||outdoorPosterCache[film.movie])+'" alt="">':'<div class="outdoorFilmPlaceholder">POSTER</div>')+'<span>'+film.movie+'</span></a>'
+    const name=String(film.movie||''),date=film.date||'日付未発表',time=film.time||film.start_time||'開始時刻未発表',id=Number(film.tmdb_id||film.tmdbId||0),poster=film.poster_url||outdoorPosterCache[name]||'';
+    html+='<div class="outdoorFilmEntry"><a class="outdoorFilmItem" href="search.html?'+(id?'id='+encodeURIComponent(id)+'&':'')+'search='+encodeURIComponent(name)+'">'+(poster?'<img loading="lazy" src="'+poster+'" alt="">':'<div class="outdoorFilmPlaceholder">POSTER</div>')+'<span>'+name+'</span><span class="outdoorScreeningTime">'+date+' · '+time+'</span></a><div class="outdoorFilmReview" data-outdoor-title="'+name.replace(/"/g,'&quot;')+'" data-outdoor-id="'+(id||'')+'"></div></div>'
    }
    html+='</div>'
   }
@@ -529,6 +531,7 @@ function renderOutdoorCalendar(){
  }
  html+='</div>';
  $("#dates").innerHTML=html;
+ mountCalendarOutdoorReviews();
  document.querySelectorAll("[data-outdoor]").forEach(el=>el.onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const target=[...document.querySelectorAll(".outdoorEventItem")].find(x=>x.querySelector("h3")?.textContent===all.find(g=>(g.event_id||g.name)===key)?.name);target?.scrollIntoView({behavior:"smooth",block:"center"})})
 }
 

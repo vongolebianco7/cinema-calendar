@@ -321,7 +321,7 @@ const isHighestMovieAward=(org,prize)=>{
  if(/ベルリン/.test(o))return c==='金熊賞';
  if(/ゴールデングローブ/.test(o))return /^作品賞（(?:ドラマ|ミュージカル[／/]コメディ)）$/.test(c);
  if(/日本アカデミー/.test(o))return c==='最優秀作品賞';
- if(/キネマ旬報/.test(o))return /^(?:日本映画|外国映画)作品賞（第1位）$/.test(c);
+
  return c==='作品賞';
 };
 async function showMovieAwardHistory(host,m){

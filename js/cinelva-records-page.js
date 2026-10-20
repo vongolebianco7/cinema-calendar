@@ -671,14 +671,19 @@
     const style=document.createElement('style');style.id='cinelva-director-medals-style';
     style.textContent=`
       .director-pick{position:relative}
-      .director-card-photo{position:relative;display:block}\n      .director-medal-wrap{position:absolute;z-index:2;right:4px;bottom:4px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;filter:drop-shadow(0 1px 3px #0008)}\n      .director-medal-label{font:700 9px/1.15 system-ui,sans-serif;color:#fff;letter-spacing:.01em;text-shadow:0 1px 3px #000,0 0 4px #000;text-align:center;white-space:nowrap}
-      .director-medal{position:relative;display:block;width:32px;height:32px;border-radius:50%;box-sizing:border-box;overflow:hidden;pointer-events:none;box-shadow:0 2px 7px #0008;background-image:url('../assets/E2B78401-CCF3-46CB-B9AB-32CE69754AC0.png');background-repeat:no-repeat;background-size:161.28px 53.76px;background-position:-6px -9.6px}
-      .director-medal[data-tier="2"]{background-position:-45px -9.6px}
-      .director-medal[data-tier="3"]{background-position:-84px -9.6px}
-      .director-medal[data-tier="4"]{background-position:-123px -9.6px}
+      .director-card-photo{position:relative;display:block}
+      .director-medal-wrap{position:absolute;z-index:2;right:4px;bottom:4px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;filter:drop-shadow(0 1px 3px #0008)}
+      .director-medal-label{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:9px;font-weight:500;line-height:1.15;letter-spacing:.02em;color:#c48b60;text-shadow:0 1px 3px #000,0 0 4px #000;text-align:center;white-space:nowrap}
+      .director-medal-label[data-tier="2"]{color:#b9c3d2}
+      .director-medal-label[data-tier="3"]{color:#e6bc5b}
+      .director-medal-label[data-tier="4"]{color:#73b7f6}
+      .director-medal{position:relative;display:block;width:24px;height:24px;flex:none;border-radius:50%;box-sizing:border-box;overflow:hidden;pointer-events:none;box-shadow:0 2px 5px #0008;background-image:url('../assets/E2B78401-CCF3-46CB-B9AB-32CE69754AC0.png');background-repeat:no-repeat;background-size:120.96px 40.32px;background-position:-4.46px -7.2px}
+      .director-medal[data-tier="2"]{background-position:-33.68px -7.2px}
+      .director-medal[data-tier="3"]{background-position:-63.2px -7.2px}
+      .director-medal[data-tier="4"]{background-position:-92.58px -7.2px}
       .director-medal-wrap.director-medal-earned{animation:cinelva-medal-earned .85s ease-out both}
       @keyframes cinelva-medal-earned{0%{transform:scale(.75);opacity:.45}50%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
-      @media(max-width:390px){.director-medal-wrap{right:3px;bottom:3px}.director-medal-label{font-size:8px}}
+      @media(max-width:390px){.director-medal-wrap{right:3px;bottom:3px}}
       @media(prefers-reduced-motion:reduce){.director-medal-wrap.director-medal-earned{animation:none!important}}
     `;
     document.head.append(style);
@@ -923,7 +928,7 @@
       directorMedalHistory.set(medalKey,tier?.rank||0);
       const laurel='<path d="M12 23C7 20 5 16 6 11M12 23c5-3 7-7 6-12M6.2 17.7 3.7 15.5 3.5 12.7M7.1 14.4 4.8 11.9 5.3 9.5M8.5 11.1 7 8.3 8.3 6.2M17.8 17.7l2.5-2.2.2-2.8M16.9 14.4l2.3-2.5-.5-2.4M15.5 11.1 17 8.3l-1.3-2.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 18l-3-1 1-3 3 2M6 13l-3-2 2-3 2 3M8 9L7 5l3-2v4M19 18l3-1-1-3-3 2M18 13l3-2-2-3-2 3M16 9l1-4-3-2v4" fill="currentColor" opacity=".9"/>';
       const crown='<path d="M5 16 3.5 8.5 8.5 12l3.5-6 3.5 6 5-3.5L19 16Z" fill="currentColor"/><path d="M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="3.5" cy="8.5" r="1" fill="currentColor"/><circle cx="12" cy="6" r="1" fill="currentColor"/><circle cx="20.5" cy="8.5" r="1" fill="currentColor"/>';
-      const medalMarkup=tier?'<span class="director-medal-wrap'+(earned?' director-medal-earned':'')+'" role="img" aria-label="監督コレクション '+tier.label+'達成"><span class="director-medal" data-tier="'+tier.rank+'" aria-hidden="true"></span><span class="director-medal-label" aria-hidden="true">'+tier.label+'</span></span>':'';
+      const medalMarkup=tier?'<span class="director-medal-wrap'+(earned?' director-medal-earned':'')+'" role="img" aria-label="監督コレクション '+tier.label+'達成"><span class="director-medal" data-tier="'+tier.rank+'" aria-hidden="true"></span><span class="director-medal-label" data-tier="'+tier.rank+'" aria-hidden="true">'+tier.label+'</span></span>':'';
       row.innerHTML='<span class="director-card-photo">'+photoMarkup+medalMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
       row.setAttribute('aria-label',group.name+'、レビュー済み'+seen+'本、監督作品総数'+(complete?total+'本':'未確認'));
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});

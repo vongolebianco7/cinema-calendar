@@ -1036,7 +1036,34 @@
     const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
     canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});
     canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · あなたの評価 ★ ${Number(record.rating ?? 0).toFixed(1)}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
-    window.addEventListener('cinelva-record-updated',()=>{state.records=Records.all();populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();});
+    // Updating a review must not destroy the director/award/review overlay that opened it.
+    // Defer the affected DOM refresh until those overlays have been dismissed.
+    let pendingReviewRefresh=false;
+    const hasParentOverlay=()=>Boolean(
+      document.querySelector('#directorFilmography:not([hidden])')||
+      document.querySelector('#reviewDetailDialog[open]')||
+      document.querySelector('#recordDialog[open]')||
+      document.querySelector('.award-detail-head')
+    );
+    const refreshAfterReview=()=>{
+      if(hasParentOverlay()){pendingReviewRefresh=true;return;}
+      pendingReviewRefresh=false;
+      populateYears();drawYearCalendar();renderAwards();renderDirectors();renderList();
+    };
+    window.addEventListener('cinelva-record-updated',()=>{
+      state.records=Records.all();
+      refreshAfterReview();
+    });
+    // Closing a parent overlay resumes the deferred refresh without closing it on save.
+    document.addEventListener('click',event=>{
+      if(!pendingReviewRefresh)return;
+      if(event.target.closest('.director-filmography-close,[data-close-award],[data-close-review-detail],.review-detail-close')) {
+        setTimeout(()=>{if(pendingReviewRefresh)refreshAfterReview();},0);
+      }
+    });
+    document.addEventListener('close',()=>{
+      if(pendingReviewRefresh)setTimeout(()=>refreshAfterReview(),0);
+    },true);
     window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});
     window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
   }

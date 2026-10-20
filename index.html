@@ -247,7 +247,16 @@ button.active *,.chip.active *,.dateBtn.active *{color:#111!important}.modeTab.a
 .calendar .cinelva-rate-wrap>.cinelva-rating-controls{margin:0!important;border:1px solid #38383d!important;border-radius:8px!important;flex:0 0 auto!important}
 .calendar .cinelva-rate-wrap>.card .body{box-sizing:border-box!important}
 </style>
-</head>
+<style id="cinelva-movie-row-alignment">
+/* CINELVA shared movie-row alignment: equal columns, card heights and actions. */
+.presetShelfGrid,#grid.grid,#grid.rankGrid,.rankGrid,.awardGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;grid-auto-flow:row!important;gap:9px!important}
+.presetShelfGrid>.cinelva-discover-review-wrap,#grid>.cinelva-discover-review-wrap,#grid>.cinelva-rate-wrap,.rankGrid>.rankReviewWrap,.awardGrid>.awardCard{min-width:0!important;align-self:stretch!important;display:flex!important;flex-direction:column!important;height:100%!important}
+.cinelva-discover-review-wrap>.presetCard,.cinelva-discover-review-wrap>.card,.cinelva-rate-wrap>.card,.rankReviewWrap>.rankCard{flex:1 1 auto!important;width:100%!important;min-width:0!important;max-width:none!important}
+.presetShelfGrid .presetCardPoster,.cinelva-discover-review-wrap .poster,#grid .cinelva-rate-wrap .poster,.rankGrid .rankCard img,.awardGrid .awardPoster{width:100%!important;aspect-ratio:2/3!important;object-fit:cover!important;overflow:hidden!important}
+.presetShelfGrid img,.cinelva-discover-review-wrap .poster img,#grid .cinelva-rate-wrap .poster img{display:block;width:100%;height:100%;object-fit:cover}
+.cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
+</style></head>
 <body>
 
 

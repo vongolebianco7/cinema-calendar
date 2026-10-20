@@ -303,7 +303,7 @@
     try { sessionStorage.setItem(TAB_STORAGE_KEY, tab); } catch (_) { /* Storage may be unavailable. */ }
     document.querySelectorAll('.tab').forEach(button => button.setAttribute('aria-selected', String(button.dataset.tab === tab)));
     document.querySelectorAll('.view').forEach(section => { section.hidden = section.id !== tab + 'View'; });
-    if (tab === 'summary') { renderCinemaSummary(); renderAwards(); renderDirectors(); }
+    if (tab === 'summary') { renderCinemaSummary(); renderAwards(); }
     if (tab === 'world') drawWorld();
     if (tab === 'genres') renderGenres();
     if (tab === 'awards') renderAwards();
@@ -976,7 +976,7 @@
     canvas._points=hit; $('worldStatus').textContent=`${data.length}作品を表示。ドラッグで回転、ピンチまたはスクロールで拡大縮小できます。点の色はジャンル、点の大きさは評価を表します。${unknownCountryCount?'製作国の緯度が未確認の'+unknownCountryCount+'作品は中央の基準面に配置しています。':''}`;
     $('worldLegend').innerHTML='<span class="chip">灰色：ジャンル未分類</span>'+Insights.GENRE_TAXONOMY.map((genre,index)=>`<span class="chip" style="border-color:${GENRE_COLORS[index]};color:${GENRE_COLORS[index]}">${escapeHTML(genre)}</span>`).join('');
   }
-  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); renderAwards(); if(!$('worldView').hidden)drawWorld(); renderDirectors(); }
+  function drawYearCalendar() { populateYears(); renderStats(); renderList(); renderCalendar(); if(!$('genresView').hidden)renderGenres(); renderAwards(); if(!$('worldView').hidden)drawWorld(); }
   async function searchMovies(query) {
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];

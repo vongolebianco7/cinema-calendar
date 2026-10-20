@@ -23,7 +23,7 @@ function setup(existing=[]){
  };
  const Records={all:()=>existing,validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
  const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
- vm.runInNewContext(source,{window,document,location:{pathname:'/'},CustomEvent:class{constructor(){}},MutationObserver:class{}});
+ vm.runInNewContext(source,{window,document,location:{pathname:'/'},CustomEvent:class{constructor(){}},MutationObserver:class{observe(){}}});
  return {api:window.CinelvaQuickRate,dialog,element,writes};
 }
 test('middle dot, spaces and Unicode punctuation do not prevent title matching',()=>{
@@ -73,10 +73,8 @@ test('all three existing pages load the shared inline rating workflow',()=>{
  assert.doesNotMatch(fs.readFileSync('my-cinelva/index.html','utf8'),/id="unrated"/);
 });
 
-test('calendar observer refresh is quiescent when an inline score is unchanged',()=>{
- assert.match(
-  source,
-  /if\(value\.textContent!==text\)value\.textContent=text/,
-  'updating an unchanged output node retriggers the subtree MutationObserver forever'
- );
+test('calendar observer decorates only added movie cards rather than its own rating text',()=>{
+ assert.match(source,/for\(const node of record.addedNodes\)/);
+ assert.match(source,/if\(cards.length\)decorate\(cards\)/);
+ assert.match(source,/if\(card.querySelector/);
 });

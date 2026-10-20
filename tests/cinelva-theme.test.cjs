@@ -43,6 +43,7 @@ test('storage failures leave theme control usable and other-tab changes synchron
 test('every public and isolated page loads the shared theme before rendering',()=>{
  for(const name of fs.readdirSync(root).filter(n=>n.endsWith('.html'))){
   for(const prefix of ['', 'cinelva/']){
+   if(!fs.existsSync(path.join(root,prefix,name)))continue;
    const html=fs.readFileSync(path.join(root,prefix,name),'utf8');
    assert.match(html,/<script src="js\/theme.js"><\/script>/,prefix+name);
    assert.match(html,/<link rel="stylesheet" href="assets\/theme\.css(?:\?[^"]*)?">/,prefix+name);

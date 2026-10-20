@@ -58,46 +58,17 @@ const fs = require('fs');
       }
       return { months: months.length, overlaps, watchedDays: root.querySelectorAll('.cy-day.watched').length, juneCount: months[5]?.querySelector('.cy-month-total')?.textContent.replace(/\s+/g, ''), overflow: document.documentElement.scrollWidth > window.innerWidth + 2, rootClass: root.className };
     }, { year, width });
-    // Donut regression: check both value modes and reject labels outside the
-    // circle or overlapping the central counter. The legend is the fallback.
-    for (const valueMode of ['percent','count']) {
-      await page.evaluate(mode => {
-        localStorage.setItem('cinelva-donut-value-mode',mode);
-        const button=[...document.querySelectorAll('#csGenres .cs-donut-mode button')]
-          .find(el=>el.textContent.trim()===(mode==='count'?'本数':'%'));
-        if(button)button.click();
-      },valueMode);
-      await page.waitForTimeout(80);
-      const charts=await page.evaluate(()=>{
-        const ids=['csGenres','csCountries','csDecades','csMethods'];
-        return ids.map(id=>{
-          const root=document.getElementById(id),donut=root?.querySelector('.cs-donut');
-          const ring=donut?.getBoundingClientRect(),center=donut?.querySelector('.cs-donut-center')?.getBoundingClientRect();
-          const labels=[...(donut?.querySelectorAll('svg text')||[])];
-          const violations=[];
-          for(const label of labels){
-            const box=label.getBoundingClientRect();
-            if(!ring||box.left<ring.left-1||box.right>ring.right+1||box.top<ring.top-1||box.bottom>ring.bottom+1)violations.push('outside donut');
-            if(center&&box.left<center.right-2&&box.right>center.left+2&&box.top<center.bottom-2&&box.bottom>center.top+2)violations.push('overlaps center');
-          }
-          for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++){
-            const a=labels[i].getBoundingClientRect(),b=labels[j].getBoundingClientRect();
-            if(a.left<b.right-1&&a.right>b.left+1&&a.top<b.bottom-1&&a.bottom>b.top+1)violations.push('label overlap');
-          }
-          return {id,labels:labels.length,legend:root?.querySelectorAll('.cs-donut-legend-row').length||0,violations};
-        });
-      });
-      await page.screenshot({path:'test-results/cinelva/donuts-'+width+'-'+valueMode+'.png',fullPage:true});
-      if(charts.some(c=>c.violations.length || c.legend===0) || charts.every(c=>c.labels===0)){failed=true;console.error('donut layout',width,valueMode,JSON.stringify(charts));}
-      else console.log('donut layout',width,valueMode,'PASS',JSON.stringify(charts));
-    }
-    const yearSelect = page.locator('#calendarYearSelect');
-    if (!(await yearSelect.isVisible())) { failed = true; console.error(width, 'annual year selector is hidden'); }
-    const selectedYear = await yearSelect.inputValue();
-    if (selectedYear !== String(year)) {
-      failed = true;
-      console.error(width, 'unexpected selected year', selectedYear, 'expected', year);
-    }
+    // Current summaries use one stacked bar with an external legend.
+    const charts=await page.evaluate(()=>['csGenres','csCountries','csDecades','csMethods'].map(id=>{
+      const root=document.getElementById(id),bar=root?.querySelector('.cs-stack-bar'),labels=[...(root?.querySelectorAll('.cs-donut-legend-row')||[])];
+      const outer=root?.getBoundingClientRect(),box=bar?.getBoundingClientRect();
+      return {id,segments:bar?.children.length||0,legend:labels.length,clipped:!box||box.left<outer.left-1||box.right>outer.right+1,accessible:!!bar?.getAttribute('aria-label')};
+    }));
+    if(charts.some(c=>!c.segments||c.segments!==c.legend||c.clipped||!c.accessible)){failed=true;console.error('stacked chart layout',width,JSON.stringify(charts));}
+    const yearSelect=page.locator('#csPeriod');
+    if(!(await yearSelect.isVisible())||await yearSelect.inputValue()!==String(year)){failed=true;console.error(width,'summary period selector must control the calendar');}
+    const columns=await page.locator('#yearHeatmap').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
+    if(columns!==4){failed=true;console.error(width,'expected four calendar columns, got',columns);}
     await page.screenshot({ path: 'test-results/cinelva/calendar-' + width + '.png', fullPage: true });
     if (result.error || result.months !== 12 || result.watchedDays !== 1 || result.juneCount !== '1本' || result.overlaps?.length || result.overflow || errors.length) {
       failed = true;

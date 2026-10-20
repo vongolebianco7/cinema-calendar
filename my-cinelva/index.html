@@ -882,17 +882,7 @@ function render(){
   const review=document.createElement('div');review.className='want-watch-review';
   card.append(link,review);list.append(card);
   globalThis.CinelvaQuickRate?.mountInline?.(review,{...item,id:Number(item.id),tmdbId:Number(item.id),title:item.title||'作品'});
-  if(!url){
-   fetch('https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:item.title||'',limit:'20'}))
-    .then(response=>response.ok?response.json():null).then(data=>{
-     const candidates=[...(data?.movies||[]),...(data?.external||[])];
-     const match=candidates.find(m=>String(m.tmdbId||m.tmdb_id||m.id)===String(item.id));
-     const raw=String(match?.poster||match?.posterUrl||match?.poster_path||'');
-     if(!raw||!card.isConnected)return;
-     const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=raw.startsWith('/')?'https://image.tmdb.org/t/p/w342'+raw:raw;
-     img.onload=()=>{poster.replaceChildren(img);const saved=read();if(saved[String(item.id)]){saved[String(item.id)].poster=raw;localStorage.setItem(key,JSON.stringify(saved))}};
-    }).catch(()=>{});
-  }
+  globalThis.CinelvaMovieIdentity?.hydrateCard(poster,{...item,tmdbId:Number(item.id)});
 
  }
 }

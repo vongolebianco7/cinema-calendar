@@ -11,10 +11,11 @@ test('award navigation uses natural Japanese wording', () => {
   assert.doesNotMatch(html, /映画賞ランキングへ/);
 });
 
-test('inline rating stores zero as a real score and offers only cinema or streaming', () => {
-  assert.match(quickRate, /Records\.save\(\{\.\.\.movie,id:String\(latest\?\.id\?\?id\),tmdbId:id,title:[^;]+\},score,latest\?\.watchedAt\?\?null\)/);
-  assert.match(quickRate, /<option value="映画館">映画館<\/option><option value="配信">配信<\/option>/);
-  assert.doesNotMatch(quickRate, /<option value="TV">|<option value="その他">/);
+test('zero means unwatched and the shared editor retains viewing method choices', () => {
+  assert.match(quickRate, /Number\(\$\('cinelvaRateScore'\)\.value\)===0/);
+  assert.match(quickRate, /Records\.remove\(selected\.id\)/);
+  assert.match(quickRate, /step="0\.1"/);
+  for(const method of ['映画館','配信','TV','その他']) assert.ok(quickRate.includes('value="'+method+'"'));
 });
 
 test('quick-rate source has no next-film action', () => {
@@ -22,11 +23,10 @@ test('quick-rate source has no next-film action', () => {
   assert.doesNotMatch(quickRate, /保存して次へ/);
 });
 
-test('annual history keeps the agreed 3 by 4 calendar, medal reward, and active tab', () => {
-  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-  assert.match(records, /const achieved=count>=5;/);
-  assert.match(records, /const medal='<span class="cy-medal" aria-label="金メダル"><svg/);
-  assert.match(records, /<circle cx="12" cy="7" r="4"/);
+test('annual history keeps the agreed 4 by 3 blue calendar, and active tab', () => {
+  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+  assert.doesNotMatch(records, /achieved\?'gold-month'/);
+  assert.match(records, /count>=4\?'deep-month'/);
   assert.doesNotMatch(records + html, /👑|習慣/);
   assert.match(records, /sessionStorage\.setItem\(TAB_STORAGE_KEY, tab\)/);
   assert.match(records, /const savedTab = sessionStorage\.getItem\(TAB_STORAGE_KEY\)/);
@@ -34,9 +34,10 @@ test('annual history keeps the agreed 3 by 4 calendar, medal reward, and active 
 
 test('award heatmap cells still show watched and unwatched films', () => {
   assert.match(records, /data-award-cell=/);
-  assert.match(records, /✓ 鑑賞済み/);
-  assert.match(records, /○ 未鑑賞/);
-  assert.match(records, /一覧で評価する/);
+  assert.match(records, /record\?'鑑賞済み'/);
+  assert.match(records, /entryId\?'未鑑賞'/);
+  assert.match(records, /data-award-review-id/);
+  assert.match(records, /CinelvaQuickRate\.mountInline/);
 });
 
 test('director and award selections return to the searchable list', () => {

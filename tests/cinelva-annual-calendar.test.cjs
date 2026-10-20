@@ -6,7 +6,7 @@ const vm = require('node:vm');
 function month(count) {
   const nodes = new Map();
   const $ = id => {
-    if (!nodes.has(id)) nodes.set(id, { classList: { add() {} }, setAttribute() {} });
+    if (!nodes.has(id)) nodes.set(id, { classList: { add() {},remove() {} }, setAttribute() {} });
     return nodes.get(id);
   };
   const records = Array.from({ length: count }, (_, i) => ({ id: i + 1, watchedAt: '2026-01-02' }));
@@ -21,12 +21,11 @@ function month(count) {
   return months[0];
 }
 
-test('annual calendar awards GOLD at five films in a month', () => {
+test('annual calendar keeps high-volume months in the deepest blue tone', () => {
   for (const count of [5, 6, 10]) {
     const html = month(count);
-    assert.match(html, /cy-month gold-month/);
-    assert.match(html, /aria-label="金メダル"/);
-    assert.match(html, /<span>GOLD<\/span>/);
+    assert.match(html, /cy-month deep-month/);
+    assert.doesNotMatch(html, /gold-month|cy-medal|GOLD/);
     assert.match(html, new RegExp('1月 ' + count + '本'));
   }
 });

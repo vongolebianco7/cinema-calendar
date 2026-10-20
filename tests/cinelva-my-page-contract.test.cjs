@@ -7,10 +7,10 @@ const share = fs.readFileSync('my-cinemap.html', 'utf8');
 test('My Cinelva is a real-record page without demo, collection, or Atlas controls', () => {
   assert.match(page, /cinelva-library-records\.js/);
   assert.match(page, /cinelva-records-page\.js/);
-  assert.match(page, /映画の世界/);
-  assert.match(page, /映画賞ヒートマップ/);
-  assert.match(page, /よく観る監督/);
-  assert.doesNotMatch(page, /デモ|コレクション|コレクションを作成|アトラス|Atlas/);
+  assert.match(page, /あなたの鑑賞実績/);
+  assert.match(page, /映画賞コレクション/);
+  assert.match(page, /監督コレクション/);
+  assert.doesNotMatch(page, /デモ|コレクションを作成|映画棚を作成|アトラス|Atlas/);
 });
 
 test('share image is generated only from existing viewing records', () => {

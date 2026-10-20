@@ -22,7 +22,7 @@ async function freePort() {
   const root = path.resolve(__dirname, '..');
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'quality', 'route-manifest.json'), 'utf8'));
   const routes = manifest.routes.map(route => route.path).sort();
-  assert.equal(routes.length, 29, 'route audit covers all current non-Ocean HTML pages');
+  assert.equal(routes.length, 30, 'route audit covers all current non-Ocean HTML pages');
 
   const port = await freePort();
   const base = `http://127.0.0.1:${port}`;
@@ -40,7 +40,7 @@ async function freePort() {
       themes: manifest.audit_matrix.themes,
       browser: browserName
     },
-    expected_page_loads: routes.length * 4,
+    expected_page_loads: routes.length * manifest.audit_matrix.viewports.length * 2,
     status: 'running',
     results: [],
     page_errors: pageErrors,
@@ -52,7 +52,7 @@ async function freePort() {
 
     browser = await browserType.launch({ headless: true });
     let checked = 0;
-    for (const width of [390, 1280]) {
+    for (const width of manifest.audit_matrix.viewports) {
       for (const theme of ['light', 'dark']) {
         const context = await browser.newContext({ viewport: { width, height: 844 } });
         await context.addInitScript(value => localStorage.setItem('cinelva-theme-v1', value), theme);
@@ -148,7 +148,7 @@ async function freePort() {
     assert.deepEqual(pageErrors, [], 'routes load without uncaught browser JavaScript exceptions');
     assert.deepEqual(localAssetFailures, [], 'routes load without missing local documents, scripts, stylesheets, images, or fonts');
     report.status = 'passed';
-    console.log(`Cinelva ${browserName} route audit passed: ${routes.length} routes × 2 viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
+    console.log(`Cinelva ${browserName} route audit passed: ${routes.length} routes × ${manifest.audit_matrix.viewports.length} viewports × 2 themes (${checked} page loads), no uncaught page errors or missing local assets.`);
   } catch (error) {
     report.status = 'failed';
     report.failure = error instanceof Error ? error.message : String(error);

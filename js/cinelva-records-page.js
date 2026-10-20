@@ -48,7 +48,7 @@
     if(matches.length!==1)return '';
     return sourceFrom(matches[0]);
   };
-  const recordMovies = () => state.records.filter(record => record.watched !== false);
+  const recordMovies = () => state.records.filter(record => record.watched !== false && record.rating !== 0);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');
   const metadataFor = id => byId.get(String(id)) || {};
   const countryAliases = {"united states":"アメリカ","united states of america":"アメリカ","usa":"アメリカ","us":"アメリカ","アメリカ合衆国":"アメリカ","united kingdom":"イギリス","uk":"イギリス","gb":"イギリス","great britain":"イギリス","英国":"イギリス","japan":"日本","jp":"日本","france":"フランス","germany":"ドイツ","italy":"イタリア","spain":"スペイン","canada":"カナダ","australia":"オーストラリア","south korea":"韓国","china":"中国","hong kong":"香港","taiwan":"台湾","india":"インド","brazil":"ブラジル","mexico":"メキシコ","russia":"ロシア","new zealand":"ニュージーランド","sweden":"スウェーデン","denmark":"デンマーク","norway":"ノルウェー","finland":"フィンランド","netherlands":"オランダ","switzerland":"スイス","austria":"オーストリア","ireland":"アイルランド","poland":"ポーランド","argentina":"アルゼンチン","thailand":"タイ","vietnam":"ベトナム","philippines":"フィリピン","indonesia":"インドネシア","turkey":"トルコ","iran":"イラン","israel":"イスラエル","portugal":"ポルトガル","greece":"ギリシャ","belgium":"ベルギー"};
@@ -261,7 +261,9 @@
     const eyeIcon='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M2 12s3.7-6 10-6 10 6 10 6-3.7 6-10 6S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>';
     let bookmarked=false;
     try{bookmarked=Boolean(JSON.parse(localStorage.getItem('cinelva-want-to-watch-v1')||'{}')[String(movie.id)]);}catch{}
-    return `<article class="movie" data-record-card="${id}">${posterHTML(movie)}<strong>${title}</strong><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-own-rating-label">あなたの評価 ${rating.toFixed(1)} / 5.0</div><div class="record-actions record-actions-compact"><button type="button" class="record-watched-icon record-review-detail-trigger" data-review-detail="${id}" aria-label="レビュー詳細を見る：${title}" title="レビュー詳細を見る">${eyeIcon}</button><button type="button" class="record-bookmark-icon${bookmarked?' is-bookmarked':''}" data-record-bookmark="${id}" aria-label="ブックマーク：${title}" aria-pressed="${bookmarked}">${bookmarkIcon}</button><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}" title="記録を削除"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div></article>`;
+    const detail='../search.html?id='+encodeURIComponent(movie.tmdbId??movie.tmdb_id??movie.id)+'&search='+encodeURIComponent(movie.title);
+    return `<article class="movie" data-record-card="${id}"><a href="${escapeHTML(detail)}">${posterHTML(movie)}<strong>${title}</strong></a><small>${escapeHTML(movie.year || '公開年不明')} · ${escapeHTML(formatDate(dateOf(movie)))}</small>${movie.viewingMethod?'<small>'+escapeHTML(movie.viewingMethod)+'</small>':''}${movie.comment?'<p class="record-comment">'+escapeHTML(movie.comment)+'</p>':''}<div class="record-common-review" data-record-id="${id}"></div><button type="button" class="record-delete-icon" data-delete="${id}" aria-label="鑑賞記録を削除：${title}">記録を削除</button></article>`;
+
   }
   function showReviewDetail(id) {
     const record=state.records.find(item=>String(item.id)===String(id));
@@ -395,7 +397,7 @@
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
     $('yearHeatmap').classList.remove('cinelva-alltime-years');
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
-    const medal='<span class="cy-medal" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 10-2 11 5-3 5 3-2-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>GOLD</span></span>';
+
     $('yearHeatmap').innerHTML=monthly.map((count,m)=>{
       const first=new Date(year,m,1).getDay(),length=new Date(year,m+1,0).getDate();
       const cells=Array.from({length:first},()=>'<span class="cy-empty" aria-hidden="true"></span>');
@@ -404,9 +406,8 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      const achieved=count>=5;
-      const tone=achieved?'gold-month':count===0?'empty-month':count===4?'deep-month':count===3?'mid-month':count===2?'light-month':'one-month';
-      return '<section class="cy-month '+tone+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+(achieved?medal:'')+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      const tone=count===0?'empty-month':count>=4?'deep-month':count===3?'mid-month':count===2?'light-month':'one-month';
+      return '<section class="cy-month '+tone+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
@@ -755,7 +756,8 @@
         // have another lead director or missing runtime and must not veto them.
         if(!isDirectorCredit(work,sourcedName))continue;
         const id=filmIdentity(work), metadata=movieById.get(id)||{};
-        const combined={...metadata,...work,id};
+        const combined={...metadata,...work,id,runtime:work.runtime??metadata.runtime};
+        if(!isDirectorCredit(combined,sourcedName))continue;
         all.set(id,combined);
       }
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}

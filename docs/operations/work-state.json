@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:36:00+09:00",
+  "updated_at": "2026-10-20T09:17:30.331887+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "042e6c98192794793a686502735b8282cb3cc3b1",
-  "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "1e90ac592b26d80dda41fb6427f62e61849406a8",
-  "pull_request": 398,
+  "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
+  "branch": "fix/final-quality-20261020",
+  "head_sha": "8dbf723536999d43b9d5763413c887a81d960441",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -521,6 +521,13 @@
       "status": "in_progress",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
       "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
+    },
+    {
+      "id": "FINAL-QA-20261020",
+      "title": "Unify poster failure recovery and repair current-spec quality checks",
+      "status": "in_progress",
+      "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
+      "ci": "Local: 167 Node tests pass, 138 Python tests pass, quality_gate.py passes, smoke 207 checks pass. Chromium review/bookmark persistence and My Cinelva backup/restore/PNG/1000-record journeys pass. Mobile calendar passes at 375/390/768/1440. Route audit: 30 routes at 375/390/768 in light/dark, 180 page loads pass. CI and final desktop/WebKit audit pending."
     }
   ],
   "verification": [
@@ -579,21 +586,24 @@
     }
   ],
   "deployment": {
-    "status": "production_verified",
+    "status": "deployment_pending",
     "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
-    "reported_restriction": "EarlierignoreCommandlengthfailure repaired. bd6a1c99automaticproductionREADY; no providerquota blocker currentlyobserved.",
-    "next_action": "Keep currentcanonicalorigin. Save release evidence and continue remaining acceptanceaudit, distinguishing realiPhone/human tests and source/coverage gaps from verified fixes.",
+    "reported_restriction": "PR #433 Vercel bot reported api-deployments-free-per-day (>100), 2026-10-20 08:33 UTC. No manual redeploy requested in this run.",
+    "next_action": "Batch release only after all required Actions pass and quota clearance is independently confirmed. No paid plan.",
     "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
-  "blockers": [],
-  "next_action": "Check exact final PR398head allrequiredActions including new Eastwood browser journey, mergewhen green thenverify canonical releaseSHA andsource41filmdata. Unresolved othernamequeries stayunknown; do notclaim allworlddirectors complete.",
+  "blockers": [
+    "35 streaming source rows lack verified TMDB ID and original release year; exact rows and remediation are in poster-data-gaps-20261020.json.",
+    "Local WebKit system dependencies cannot be installed through this environment network allowlist; verify WebKit in GitHub Actions."
+  ],
+  "next_action": "Run the final QA PR checks, inspect every failing job, then merge only when required checks pass. Recheck Pages at the merged SHA. Do not retry Vercel during quota restriction.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

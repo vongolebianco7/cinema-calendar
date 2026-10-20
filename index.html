@@ -485,7 +485,7 @@ function renderOutdoorCalendar(){
  cal.classList.remove("streamingWeekMode","theatricalCompact");cal.classList.add("festivalMode");
  $("#weekdays").innerHTML="<div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>";
  const groups=new Map();
- for(const e of [...outdoorEvents,...festivalEvents.filter(ev=>ev.service==="国内イベント").map(ev=>({id:"domestic-event:"+ev.title,date:ev.date,start_date:ev.date,end_date:ev.end_date||ev.date,name:ev.title,area:"東京",place:ev.venue||"開催地未確認",url:ev.source_url||"",fee:"",movie:"",kind:"国内イベント"}))]){
+ for(const e of [...outdoorEvents,...festivalEvents.filter(ev=>ev.service==="国内イベント").map(ev=>({id:"domestic-event:"+ev.title,date:ev.date,start_date:ev.date,end_date:ev.end_date||ev.date,name:ev.title,area:/神奈川|横浜|川崎/.test(ev.venue||"")?"神奈川":/東京|幕張|千葉/.test(ev.venue||"")?"東京":"その他",place:ev.venue||"開催地未確認",url:ev.source_url||"",fee:"",movie:"",kind:"国内イベント"}))]){
   if(active!=="すべて"&&active!==e.area)continue;
   const key=e.event_id||[e.name,e.area,e.place].join("|");
   if(!groups.has(key))groups.set(key,{...e,first:e.start_date||e.date,last:e.end_date||e.date,films:[]});

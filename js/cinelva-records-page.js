@@ -536,6 +536,7 @@
       if(/キネマ旬報/.test(name))return '日本・外国映画ベスト1';
       return '作品賞';
     };
+    const prizeDisplayName=name=>name?awardDisplayName(name)+' · '+highestPrizeLabel(name):'—';
     const awardHeatLevel=count=>count>=7?4:count>=4?3:count>=2?2:count>=1?1:0;
     const awardScope=$('awardCategory')?.value==='all'?'all':'picture';
     document.querySelectorAll('[data-award-scope]').forEach(button=>{
@@ -600,14 +601,14 @@
     const highestAward=awardAffinity[0];
     const awardHighlights='<div class="cs-collection-highlights">'+
       '<div class="cs-highlight"><span class="cs-highlight-label">作品賞受賞作を観た映画賞の数</span><strong class="cs-highlight-value">'+allAwardGroups.filter(x=>x.count>0).length+'賞</strong></div>'+
-      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞受賞作を最も多く観た映画賞</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedAward?.count?awardDisplayName(mostWatchedAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedAward?.count||0)+'本</small></div>'+
-      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞受賞作のMY平均評価が最高の映画賞</span><strong class="cs-highlight-value">'+escapeHTML(highestAward?awardDisplayName(highestAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(highestAward?'MY平均 ★ '+highestAward.average.toFixed(2)+' / '+highestAward.scored+'本評価':'評価なし')+'</small></div>'+
+      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞受賞作を最も多く観た映画賞</span><strong class="cs-highlight-value">'+escapeHTML(mostWatchedAward?.count?prizeDisplayName(mostWatchedAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(mostWatchedAward?.count||0)+'本</small></div>'+
+      '<div class="cs-highlight"><span class="cs-highlight-label">作品賞受賞作のMY平均評価が最高の映画賞</span><strong class="cs-highlight-value">'+escapeHTML(highestAward?prizeDisplayName(highestAward.name):'—')+'</strong><small class="cs-highlight-detail">'+(highestAward?'MY平均 ★ '+highestAward.average.toFixed(2)+' / '+highestAward.scored+'本評価':'評価なし')+'</small></div>'+
       '<div class="cs-highlight"><span class="cs-highlight-label">映画賞別の鑑賞記録</span><button type="button" class="cs-highlight-value" data-dashboard-tab="awards">映画賞コレクションを見る →</button></div>'+
       '</div>';
     let awardAffinityHost=$('csAwardAffinity');
     if(!awardAffinityHost){awardAffinityHost=document.createElement('section');awardAffinityHost.id='csAwardAffinity';awardAffinityHost.className='cinelva-affinity';$('csAffinities')?.append(awardAffinityHost);}
     awardAffinityHost.innerHTML='<h3>映画賞の鑑賞分析</h3>'+awardHighlights+'<h3>作品賞受賞作のMY平均評価 TOP5</h3><p class="cinelva-affinity-note">各映画賞で作品賞を受賞し、あなたが鑑賞した映画が対象です。自分の平均評価が高い順（評価3本未満は補正）。未評価作品は平均点に含みません。</p>'+
-      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(awardDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">鑑賞 '+row.watched+'本 · MY平均 ★ '+row.average.toFixed(2)+'（評価 '+row.scored+'本）· 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
+      (awardAffinity.length?'<div class="cinelva-affinity-list">'+awardAffinity.slice(0,5).map((row,i)=>'<div class="cinelva-affinity-row"><span class="cinelva-affinity-rank">'+(i+1)+'</span>'+awardEmblem(row.name)+'<button type="button" class="cinelva-affinity-link" data-dashboard-tab="awards" aria-label="映画賞コレクションを開く">'+escapeHTML(prizeDisplayName(row.name))+'</button><span class="cinelva-affinity-meta">鑑賞 '+row.watched+'本 · MY平均 ★ '+row.average.toFixed(2)+'（評価 '+row.scored+'本）· 4点以上 '+row.high+'本</span></div>').join('')+'</div>':'<p class="cs-empty">評価済みの受賞作品がありません。</p>');
     const summary=$('awardSummary');
     if(summary)summary.innerHTML=`<div class="award-stat"><span>${awardScope==='all'?'鑑賞した受賞作':'鑑賞した最高賞受賞作'}</span><strong>${watchedIds.size}<small>本</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'収録済み受賞作':'最高賞の収録対象'}</span><strong>${awardCount}<small>本</small></strong></div><div class="award-stat"><span>鑑賞がある年代</span><strong>${activeDecades}<small>年代</small></strong></div><div class="award-stat"><span>${awardScope==='all'?'受賞作を最も観た映画賞':'最高賞受賞作を最も観た映画賞'}</span><strong class="award-stat-name">${escapeHTML(topAward?.count?awardDisplayName(topAward.name):'—')}</strong></div>`;
     $('awardCoverage').textContent=awardScope==='all'?'収録済みの各部門の受賞作品を対象としています（最高賞を含む）。同じ映画が同じ賞の複数部門を受賞しても1作品として集計します。網羅的な受賞歴ではありません。':'最高賞（作品賞・パルム・ドール・金獅子賞・金熊賞など）の受賞作品だけを対象とします。他部門は集計しません。受賞記録は網羅的ではありません。' + ' ※2010年より前はアカデミー賞以外の収録が不足しています。— は未鑑賞ではなく受賞データ未収録を意味します。';

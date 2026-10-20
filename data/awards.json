@@ -16,6 +16,65 @@
     {
       "year": 2026,
       "organization": "BAFTA",
+      "category": "英国作品賞",
+      "title": "Hamnet",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "Hamnet",
+      "work_id": "award-work:87e6d35dc08de63df518",
+      "match_status": "resolved",
+      "tmdb_id": 858024,
+      "release_year": 2026,
+      "display_title": "ハムネット",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/858024",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "監督賞",
+      "title": "One Battle After Another — Paul Thomas Anderson",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Paul Thomas Anderson",
+      "film_title": "One Battle After Another",
+      "work_id": "award-work:9a7ba221e9311f3c36a7",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "脚色賞",
+      "title": "One Battle After Another — Paul Thomas Anderson",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "One Battle After Another — Paul Thomas Anderson",
+      "work_id": "award-work:478a34b00cfafbf7b84a",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "One Battle After Another",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "One Battle After Another",
+      "work_id": "award-work:9a7ba221e9311f3c36a7",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
       "category": "主演女優賞",
       "title": "Hamnet — Jessie Buckley",
       "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
@@ -50,22 +109,6 @@
     {
       "year": 2026,
       "organization": "BAFTA",
-      "category": "作品賞",
-      "title": "One Battle After Another",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "One Battle After Another",
-      "work_id": "award-work:9a7ba221e9311f3c36a7",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
       "category": "助演女優賞",
       "title": "Sinners — Wunmi Mosaku",
       "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
@@ -93,49 +136,6 @@
     },
     {
       "year": 2026,
-      "organization": "BAFTA",
-      "category": "監督賞",
-      "title": "One Battle After Another — Paul Thomas Anderson",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Paul Thomas Anderson",
-      "film_title": "One Battle After Another",
-      "work_id": "award-work:9a7ba221e9311f3c36a7",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "脚色賞",
-      "title": "One Battle After Another — Paul Thomas Anderson",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "One Battle After Another — Paul Thomas Anderson",
-      "work_id": "award-work:478a34b00cfafbf7b84a",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "英国作品賞",
-      "title": "Hamnet",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "Hamnet",
-      "work_id": "award-work:87e6d35dc08de63df518",
-      "match_status": "resolved",
-      "tmdb_id": 858024,
-      "release_year": 2026,
-      "display_title": "ハムネット",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/858024",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
       "organization": "アカデミー賞",
       "category": "メイクアップ＆ヘアスタイリング賞",
       "title": "Frankenstein",
@@ -143,6 +143,52 @@
       "film_title": "Frankenstein",
       "work_id": "award-work:af9da602c0b661cc6fba",
       "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "アカデミー賞",
+      "category": "歌曲賞",
+      "title": "KPop Demon Hunters — Golden",
+      "source": "https://www.oscars.org/oscars/ceremonies/2026",
+      "film_title": "KPop Demon Hunters — Golden",
+      "work_id": "award-work:c218d69fe0e0b6f551b3",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "アカデミー賞",
+      "category": "国際長編映画賞",
+      "title": "Sentimental Value",
+      "source": "https://www.oscars.org/oscars/ceremonies/2026",
+      "film_title": "Sentimental Value",
+      "work_id": "award-work:8b0fb42e81481de9b5ba",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "アカデミー賞",
+      "category": "作曲賞",
+      "title": "Sinners",
+      "source": "https://www.oscars.org/oscars/ceremonies/2026",
+      "film_title": "Sinners",
+      "work_id": "award-work:c4df89509cb507bea58a",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "One Battle after Another",
+      "source": "https://www.oscars.org/oscars/ceremonies/2026",
+      "film_title": "One Battle after Another",
+      "work_id": "award-work:0e50b1acc27a38b5d41a",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2026,
@@ -168,32 +214,6 @@
       "title": "Sinners — Michael B. Jordan",
       "source": "https://www.oscars.org/oscars/ceremonies/2026",
       "recipient": "Michael B. Jordan",
-      "film_title": "Sinners",
-      "work_id": "award-work:c4df89509cb507bea58a",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "One Battle after Another",
-      "source": "https://www.oscars.org/oscars/ceremonies/2026",
-      "film_title": "One Battle after Another",
-      "work_id": "award-work:0e50b1acc27a38b5d41a",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "アカデミー賞",
-      "category": "作曲賞",
-      "title": "Sinners",
-      "source": "https://www.oscars.org/oscars/ceremonies/2026",
       "film_title": "Sinners",
       "work_id": "award-work:c4df89509cb507bea58a",
       "match_status": "unresolved"
@@ -235,22 +255,18 @@
     {
       "year": 2026,
       "organization": "アカデミー賞",
-      "category": "国際長編映画賞",
-      "title": "Sentimental Value",
+      "category": "長編アニメ映画賞",
+      "title": "KPop Demon Hunters",
       "source": "https://www.oscars.org/oscars/ceremonies/2026",
-      "film_title": "Sentimental Value",
-      "work_id": "award-work:8b0fb42e81481de9b5ba",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "アカデミー賞",
-      "category": "歌曲賞",
-      "title": "KPop Demon Hunters — Golden",
-      "source": "https://www.oscars.org/oscars/ceremonies/2026",
-      "film_title": "KPop Demon Hunters — Golden",
-      "work_id": "award-work:c218d69fe0e0b6f551b3",
-      "match_status": "unresolved"
+      "film_title": "KPop Demon Hunters",
+      "work_id": "award-work:1696b5172acb1b1574f1",
+      "match_status": "resolved",
+      "tmdb_id": 803796,
+      "release_year": 2026,
+      "display_title": "KPOPガールズ! デーモン・ハンターズ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/803796",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2026,
@@ -267,43 +283,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1054867",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "アカデミー賞",
-      "category": "長編アニメ映画賞",
-      "title": "KPop Demon Hunters",
-      "source": "https://www.oscars.org/oscars/ceremonies/2026",
-      "film_title": "KPop Demon Hunters",
-      "work_id": "award-work:1696b5172acb1b1574f1",
-      "match_status": "resolved",
-      "tmdb_id": 803796,
-      "release_year": 2026,
-      "display_title": "KPOPガールズ! デーモン・ハンターズ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/803796",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "女優賞",
-      "title": "WOMAN UNKNOWN — Mathilde Arcel",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "recipient": "Mathilde Arcel",
-      "film_title": "WOMAN UNKNOWN",
-      "work_id": "award-work:c9090a2b7d0575a53167",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "審査員大賞",
-      "title": "POSSIBLE LOVE",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "film_title": "POSSIBLE LOVE",
-      "work_id": "award-work:16e092f29446395d2a1a",
-      "match_status": "unresolved"
     },
     {
       "year": 2026,
@@ -330,6 +309,27 @@
       "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
       "film_title": "WOMAN UNKNOWN",
       "work_id": "award-work:c9090a2b7d0575a53167",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "女優賞",
+      "title": "WOMAN UNKNOWN — Mathilde Arcel",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "recipient": "Mathilde Arcel",
+      "film_title": "WOMAN UNKNOWN",
+      "work_id": "award-work:c9090a2b7d0575a53167",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "審査員大賞",
+      "title": "POSSIBLE LOVE",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "film_title": "POSSIBLE LOVE",
+      "work_id": "award-work:16e092f29446395d2a1a",
       "match_status": "unresolved"
     },
     {
@@ -373,44 +373,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1401459",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "カンヌ国際映画祭",
-      "category": "女優賞",
-      "title": "SOUDAIN — Virginie Efira / Tao Okamoto",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
-      "recipient": "Virginie Efira / Tao Okamoto",
-      "film_title": "SOUDAIN",
-      "work_id": "award-work:9c4de5bef0760a2c0b76",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "カンヌ国際映画祭",
-      "category": "審査員賞",
-      "title": "DAS GETRÄUMTE ABENTEUER",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
-      "film_title": "DAS GETRÄUMTE ABENTEUER",
-      "work_id": "award-work:c0b582125a34241e56c1",
-      "match_status": "resolved",
-      "tmdb_id": 1013822,
-      "release_year": 2026,
-      "display_title": "Das geträumte Abenteuer",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1013822",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "カンヌ国際映画祭",
-      "category": "男優賞",
-      "title": "COWARD — Emmanuel Macchia / Valentin Campagne",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
-      "recipient": "Emmanuel Macchia / Valentin Campagne",
-      "film_title": "COWARD",
-      "work_id": "award-work:2ee872d4d167ee3d3f35",
-      "match_status": "unresolved"
     },
     {
       "year": 2026,
@@ -465,6 +427,44 @@
     },
     {
       "year": 2026,
+      "organization": "カンヌ国際映画祭",
+      "category": "女優賞",
+      "title": "SOUDAIN — Virginie Efira / Tao Okamoto",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
+      "recipient": "Virginie Efira / Tao Okamoto",
+      "film_title": "SOUDAIN",
+      "work_id": "award-work:9c4de5bef0760a2c0b76",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "カンヌ国際映画祭",
+      "category": "審査員賞",
+      "title": "DAS GETRÄUMTE ABENTEUER",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
+      "film_title": "DAS GETRÄUMTE ABENTEUER",
+      "work_id": "award-work:c0b582125a34241e56c1",
+      "match_status": "resolved",
+      "tmdb_id": 1013822,
+      "release_year": 2026,
+      "display_title": "Das geträumte Abenteuer",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1013822",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "カンヌ国際映画祭",
+      "category": "男優賞",
+      "title": "COWARD — Emmanuel Macchia / Valentin Campagne",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-79th-festival-de-cannes-winners-list/",
+      "recipient": "Emmanuel Macchia / Valentin Campagne",
+      "film_title": "COWARD",
+      "work_id": "award-work:2ee872d4d167ee3d3f35",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
       "organization": "ゴールデングローブ賞",
       "category": "アニメーション作品賞",
       "title": "KPop Demon Hunters",
@@ -478,34 +478,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/803796",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "ゴールデングローブ賞",
-      "category": "主演女優賞（ドラマ）",
-      "title": "Hamnet — Jessie Buckley",
-      "source": "https://goldenglobes.com/winners-nominees/",
-      "recipient": "Jessie Buckley",
-      "film_title": "Hamnet",
-      "work_id": "award-work:0262b472ca4b9895ab7b",
-      "match_status": "resolved",
-      "tmdb_id": 858024,
-      "release_year": 2026,
-      "display_title": "ハムネット",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/858024",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "ゴールデングローブ賞",
-      "category": "主演男優賞（ドラマ）",
-      "title": "The Secret Agent — Wagner Moura",
-      "source": "https://goldenglobes.com/winners-nominees/",
-      "recipient": "Wagner Moura",
-      "film_title": "The Secret Agent",
-      "work_id": "award-work:1791080dcb31b123b716",
-      "match_status": "unresolved"
     },
     {
       "year": 2026,
@@ -542,12 +514,56 @@
     {
       "year": 2026,
       "organization": "ゴールデングローブ賞",
+      "category": "主演女優賞（ドラマ）",
+      "title": "Hamnet — Jessie Buckley",
+      "source": "https://goldenglobes.com/winners-nominees/",
+      "recipient": "Jessie Buckley",
+      "film_title": "Hamnet",
+      "work_id": "award-work:0262b472ca4b9895ab7b",
+      "match_status": "resolved",
+      "tmdb_id": 858024,
+      "release_year": 2026,
+      "display_title": "ハムネット",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/858024",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "ゴールデングローブ賞",
+      "category": "主演男優賞（ドラマ）",
+      "title": "The Secret Agent — Wagner Moura",
+      "source": "https://goldenglobes.com/winners-nominees/",
+      "recipient": "Wagner Moura",
+      "film_title": "The Secret Agent",
+      "work_id": "award-work:1791080dcb31b123b716",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "ゴールデングローブ賞",
       "category": "非英語映画賞",
       "title": "The Secret Agent",
       "source": "https://goldenglobes.com/winners-nominees/",
       "film_title": "The Secret Agent",
       "work_id": "award-work:1791080dcb31b123b716",
       "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Anora",
+      "source": "https://www.oscars.org/oscars/ceremonies/2025",
+      "film_title": "Anora",
+      "work_id": "award-work:b1091f1c09aa88919f8b",
+      "match_status": "resolved",
+      "tmdb_id": 1064213,
+      "release_year": 2025,
+      "display_title": "ANORA アノーラ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1064213",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
@@ -576,22 +592,6 @@
       "film_title": "The Brutalist",
       "work_id": "award-work:95d3f7ef456a0406ba66",
       "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Anora",
-      "source": "https://www.oscars.org/oscars/ceremonies/2025",
-      "film_title": "Anora",
-      "work_id": "award-work:b1091f1c09aa88919f8b",
-      "match_status": "resolved",
-      "tmdb_id": 1064213,
-      "release_year": 2025,
-      "display_title": "ANORA アノーラ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1064213",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
@@ -640,38 +640,6 @@
     {
       "year": 2025,
       "organization": "ヴェネチア国際映画祭",
-      "category": "女優賞",
-      "title": "The Sun Rises on Us All — Xin Zhilei",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Xin Zhilei",
-      "film_title": "The Sun Rises on Us All",
-      "work_id": "award-work:0e1015a5fd26cf8e9fd7",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "審査員大賞",
-      "title": "The Voice of Hind Rajab",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "film_title": "The Voice of Hind Rajab",
-      "work_id": "award-work:a3790890bb5934a7b70d",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "男優賞",
-      "title": "La Grazia — Toni Servillo",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Toni Servillo",
-      "film_title": "La Grazia",
-      "work_id": "award-work:e7a09ba0bf6be6df2df0",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
       "category": "監督賞",
       "title": "The Smashing Machine — Benny Safdie",
       "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
@@ -703,6 +671,38 @@
     },
     {
       "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "女優賞",
+      "title": "The Sun Rises on Us All — Xin Zhilei",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Xin Zhilei",
+      "film_title": "The Sun Rises on Us All",
+      "work_id": "award-work:0e1015a5fd26cf8e9fd7",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "審査員大賞",
+      "title": "The Voice of Hind Rajab",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "film_title": "The Voice of Hind Rajab",
+      "work_id": "award-work:a3790890bb5934a7b70d",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "男優賞",
+      "title": "La Grazia — Toni Servillo",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Toni Servillo",
+      "film_title": "La Grazia",
+      "work_id": "award-work:e7a09ba0bf6be6df2df0",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
       "organization": "カンヌ国際映画祭",
       "category": "グランプリ",
       "title": "Sentimental Value",
@@ -725,6 +725,28 @@
       "source": "https://www.festival-cannes.com/en/press/press-releases/the-78th-festival-de-cannes-winners-list/",
       "film_title": "Un Simple Accident",
       "work_id": "award-work:5504a6a9a7e7af6a4c7c",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "カンヌ国際映画祭",
+      "category": "監督賞",
+      "title": "Once Upon a Time in Gaza — Arab & Tarzan Nasser",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-78th-festival-de-cannes-winners-list/",
+      "recipient": "Arab & Tarzan Nasser",
+      "film_title": "Once Upon a Time in Gaza",
+      "work_id": "award-work:6db364d2a115805aece9",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "カンヌ国際映画祭",
+      "category": "脚本賞",
+      "title": "Pillion — Harry Lighton",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-78th-festival-de-cannes-winners-list/",
+      "recipient": "Harry Lighton",
+      "film_title": "Pillion",
+      "work_id": "award-work:83a77bd8bbdd5854cbe3",
       "match_status": "unresolved"
     },
     {
@@ -761,28 +783,6 @@
     },
     {
       "year": 2025,
-      "organization": "カンヌ国際映画祭",
-      "category": "監督賞",
-      "title": "Once Upon a Time in Gaza — Arab & Tarzan Nasser",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-78th-festival-de-cannes-winners-list/",
-      "recipient": "Arab & Tarzan Nasser",
-      "film_title": "Once Upon a Time in Gaza",
-      "work_id": "award-work:6db364d2a115805aece9",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "カンヌ国際映画祭",
-      "category": "脚本賞",
-      "title": "Pillion — Harry Lighton",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-78th-festival-de-cannes-winners-list/",
-      "recipient": "Harry Lighton",
-      "film_title": "Pillion",
-      "work_id": "award-work:83a77bd8bbdd5854cbe3",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
       "selection_year": 2024,
       "organization": "キネマ旬報ベスト・テン",
       "category": "外国映画作品賞（第1位）",
@@ -793,6 +793,21 @@
       "work_id": "award-work:3a4640928bf7a468c117",
       "tmdb_id": 872585,
       "release_year": 2023,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "selection_year": 2024,
+      "organization": "キネマ旬報ベスト・テン",
+      "category": "日本映画作品賞（第1位）",
+      "title": "夜明けのすべて",
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
+      "reviewed_at": "2026-10-17",
+      "film_title": "夜明けのすべて",
+      "work_id": "award-work:44a51380bec1d26a7e9d",
+      "tmdb_id": 1086011,
+      "release_year": 2024,
       "match_status": "resolved",
       "match_method": "unique_catalog_title_and_release_year"
     },
@@ -813,21 +828,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1253027",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "selection_year": 2024,
-      "organization": "キネマ旬報ベスト・テン",
-      "category": "日本映画作品賞（第1位）",
-      "title": "夜明けのすべて",
-      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
-      "reviewed_at": "2026-10-17",
-      "film_title": "夜明けのすべて",
-      "work_id": "award-work:44a51380bec1d26a7e9d",
-      "tmdb_id": 1086011,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2025,
@@ -884,6 +884,44 @@
     {
       "year": 2025,
       "organization": "ベルリン国際映画祭",
+      "category": "監督賞",
+      "title": "Living the Land — Huo Meng",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "recipient": "Huo Meng",
+      "film_title": "Living the Land",
+      "work_id": "award-work:08cac7166fa0d5273003",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ベルリン国際映画祭",
+      "category": "脚本賞",
+      "title": "Kontinental '25 — Radu Jude",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "recipient": "Radu Jude",
+      "film_title": "Kontinental '25",
+      "work_id": "award-work:41b4d0f309a32ef09c83",
+      "match_status": "resolved",
+      "tmdb_id": 1410189,
+      "release_year": 2025,
+      "display_title": "Kontinental '25",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1410189",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Dreams (Sex Love)",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Dreams (Sex Love)",
+      "work_id": "award-work:184a7aba922168854356",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ベルリン国際映画祭",
       "category": "主演俳優賞",
       "title": "If I Had Legs I'd Kick You — Rose Byrne",
       "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
@@ -923,44 +961,6 @@
     },
     {
       "year": 2025,
-      "organization": "ベルリン国際映画祭",
-      "category": "監督賞",
-      "title": "Living the Land — Huo Meng",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "recipient": "Huo Meng",
-      "film_title": "Living the Land",
-      "work_id": "award-work:08cac7166fa0d5273003",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ベルリン国際映画祭",
-      "category": "脚本賞",
-      "title": "Kontinental '25 — Radu Jude",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "recipient": "Radu Jude",
-      "film_title": "Kontinental '25",
-      "work_id": "award-work:41b4d0f309a32ef09c83",
-      "match_status": "resolved",
-      "tmdb_id": 1410189,
-      "release_year": 2025,
-      "display_title": "Kontinental '25",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1410189",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Dreams (Sex Love)",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Dreams (Sex Love)",
-      "work_id": "award-work:184a7aba922168854356",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
       "organization": "日本アカデミー賞",
       "category": "最優秀アニメーション作品賞",
       "title": "ルックバック",
@@ -975,6 +975,99 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1244492",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀音楽賞",
+      "title": "カラオケ行こ！",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "カラオケ行こ！",
+      "work_id": "award-work:dad75195c5d8ecf093f2",
+      "match_status": "resolved",
+      "tmdb_id": 1070507,
+      "release_year": 2024,
+      "display_title": "カラオケ行こ！",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1070507",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀外国作品賞",
+      "title": "オッペンハイマー",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "オッペンハイマー",
+      "work_id": "award-work:11050ba400b212009675",
+      "tmdb_id": 872585,
+      "release_year": 2023,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀監督賞",
+      "title": "正体",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "正体",
+      "work_id": "award-work:40ec281b8c346ac2af9a",
+      "tmdb_id": 1356890,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀脚本賞",
+      "title": "ラストマイル",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "ラストマイル",
+      "work_id": "award-work:694d5ff877c09108586c",
+      "match_status": "resolved",
+      "tmdb_id": 1276108,
+      "release_year": 2024,
+      "display_title": "ラストマイル",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1276108",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "侍タイムスリッパー",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "侍タイムスリッパー",
+      "work_id": "award-work:d05b607ba5a4eea7cc0c",
+      "match_status": "resolved",
+      "tmdb_id": 1287819,
+      "release_year": 2024,
+      "display_title": "侍タイムスリッパー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1287819",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀撮影賞",
+      "title": "キングダム 大将軍の帰還",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "キングダム 大将軍の帰還",
+      "work_id": "award-work:ef6b7c66d2d71244416c",
+      "tmdb_id": 1241320,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2025,
@@ -1010,23 +1103,6 @@
     {
       "year": 2025,
       "organization": "日本アカデミー賞",
-      "category": "最優秀作品賞",
-      "title": "侍タイムスリッパー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "侍タイムスリッパー",
-      "work_id": "award-work:d05b607ba5a4eea7cc0c",
-      "match_status": "resolved",
-      "tmdb_id": 1287819,
-      "release_year": 2024,
-      "display_title": "侍タイムスリッパー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1287819",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
       "category": "最優秀助演女優賞",
       "title": "正体",
       "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
@@ -1055,34 +1131,6 @@
     {
       "year": 2025,
       "organization": "日本アカデミー賞",
-      "category": "最優秀外国作品賞",
-      "title": "オッペンハイマー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "オッペンハイマー",
-      "work_id": "award-work:11050ba400b212009675",
-      "tmdb_id": 872585,
-      "release_year": 2023,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀撮影賞",
-      "title": "キングダム 大将軍の帰還",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "キングダム 大将軍の帰還",
-      "work_id": "award-work:ef6b7c66d2d71244416c",
-      "tmdb_id": 1241320,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
       "category": "最優秀照明賞",
       "title": "キングダム 大将軍の帰還",
       "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
@@ -1093,37 +1141,6 @@
       "release_year": 2024,
       "match_status": "resolved",
       "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀監督賞",
-      "title": "正体",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "正体",
-      "work_id": "award-work:40ec281b8c346ac2af9a",
-      "tmdb_id": 1356890,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀編集賞",
-      "title": "侍タイムスリッパー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "侍タイムスリッパー",
-      "work_id": "award-work:d05b607ba5a4eea7cc0c",
-      "match_status": "resolved",
-      "tmdb_id": 1287819,
-      "release_year": 2024,
-      "display_title": "侍タイムスリッパー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1287819",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
@@ -1145,18 +1162,18 @@
     {
       "year": 2025,
       "organization": "日本アカデミー賞",
-      "category": "最優秀脚本賞",
-      "title": "ラストマイル",
+      "category": "最優秀編集賞",
+      "title": "侍タイムスリッパー",
       "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
       "reviewed_at": "2026-10-17",
-      "film_title": "ラストマイル",
-      "work_id": "award-work:694d5ff877c09108586c",
+      "film_title": "侍タイムスリッパー",
+      "work_id": "award-work:d05b607ba5a4eea7cc0c",
       "match_status": "resolved",
-      "tmdb_id": 1276108,
+      "tmdb_id": 1287819,
       "release_year": 2024,
-      "display_title": "ラストマイル",
+      "display_title": "侍タイムスリッパー",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1276108",
+      "identity_source": "https://www.themoviedb.org/movie/1287819",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1174,21 +1191,83 @@
       "match_method": "unique_catalog_title_and_release_year"
     },
     {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀音楽賞",
-      "title": "カラオケ行こ！",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "カラオケ行こ！",
-      "work_id": "award-work:dad75195c5d8ecf093f2",
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "監督賞",
+      "title": "Oppenheimer — Christopher Nolan",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "recipient": "Christopher Nolan",
+      "film_title": "Oppenheimer",
+      "work_id": "award-work:aee38077c387a0135c88",
       "match_status": "resolved",
-      "tmdb_id": 1070507,
-      "release_year": 2024,
-      "display_title": "カラオケ行こ！",
+      "tmdb_id": 872585,
+      "release_year": 2023,
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "脚色賞",
+      "title": "American Fiction",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "film_title": "American Fiction",
+      "work_id": "award-work:90d84d55c87180de949f",
+      "match_status": "resolved",
+      "tmdb_id": 1056360,
+      "release_year": 2023,
+      "display_title": "アメリカン・フィクション",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1070507",
+      "identity_source": "https://www.themoviedb.org/movie/1056360",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "脚本賞",
+      "title": "Anatomy of a Fall",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "film_title": "Anatomy of a Fall",
+      "work_id": "award-work:b1106207b941a711e7e6",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "国際長編映画賞",
+      "title": "The Zone of Interest",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "film_title": "The Zone of Interest",
+      "work_id": "award-work:62e0c110a9762176a34f",
+      "match_status": "resolved",
+      "tmdb_id": 467244,
+      "release_year": 2024,
+      "display_title": "関心領域",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/467244",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Oppenheimer",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "film_title": "Oppenheimer",
+      "work_id": "award-work:aee38077c387a0135c88",
+      "match_status": "resolved",
+      "tmdb_id": 872585,
+      "release_year": 2023,
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2024,
+      "organization": "アカデミー賞",
+      "category": "視覚効果賞",
+      "title": "Godzilla Minus One",
+      "source": "https://www.oscars.org/oscars/ceremonies/2024",
+      "film_title": "Godzilla Minus One",
+      "work_id": "award-work:3d8bb9c558af6eb72981",
+      "match_status": "unresolved"
     },
     {
       "year": 2024,
@@ -1214,19 +1293,6 @@
       "title": "Oppenheimer — Cillian Murphy",
       "source": "https://www.oscars.org/oscars/ceremonies/2024",
       "recipient": "Cillian Murphy",
-      "film_title": "Oppenheimer",
-      "work_id": "award-work:aee38077c387a0135c88",
-      "match_status": "resolved",
-      "tmdb_id": 872585,
-      "release_year": 2023,
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Oppenheimer",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
       "film_title": "Oppenheimer",
       "work_id": "award-work:aee38077c387a0135c88",
       "match_status": "resolved",
@@ -1268,77 +1334,38 @@
     {
       "year": 2024,
       "organization": "アカデミー賞",
-      "category": "国際長編映画賞",
-      "title": "The Zone of Interest",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
-      "film_title": "The Zone of Interest",
-      "work_id": "award-work:62e0c110a9762176a34f",
-      "match_status": "resolved",
-      "tmdb_id": 467244,
-      "release_year": 2024,
-      "display_title": "関心領域",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/467244",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Oppenheimer — Christopher Nolan",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
-      "recipient": "Christopher Nolan",
-      "film_title": "Oppenheimer",
-      "work_id": "award-work:aee38077c387a0135c88",
-      "match_status": "resolved",
-      "tmdb_id": 872585,
-      "release_year": 2023,
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
-      "category": "脚本賞",
-      "title": "Anatomy of a Fall",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
-      "film_title": "Anatomy of a Fall",
-      "work_id": "award-work:b1106207b941a711e7e6",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
-      "category": "脚色賞",
-      "title": "American Fiction",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
-      "film_title": "American Fiction",
-      "work_id": "award-work:90d84d55c87180de949f",
-      "match_status": "resolved",
-      "tmdb_id": 1056360,
-      "release_year": 2023,
-      "display_title": "アメリカン・フィクション",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1056360",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
-      "category": "視覚効果賞",
-      "title": "Godzilla Minus One",
-      "source": "https://www.oscars.org/oscars/ceremonies/2024",
-      "film_title": "Godzilla Minus One",
-      "work_id": "award-work:3d8bb9c558af6eb72981",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "アカデミー賞",
       "category": "長編アニメ映画賞",
       "title": "The Boy and the Heron",
       "source": "https://www.oscars.org/oscars/ceremonies/2024",
       "film_title": "The Boy and the Heron",
       "work_id": "award-work:79f11535c6cd41b47876",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "監督賞",
+      "title": "The Brutalist — Brady Corbet",
+      "source": "https://www.labiennale.org/en/news/official-awards-81st-venice-international-film-festival",
+      "recipient": "Brady Corbet",
+      "film_title": "The Brutalist",
+      "work_id": "award-work:5eb4ff27a60b259da249",
+      "match_status": "resolved",
+      "tmdb_id": 1390687,
+      "release_year": 2024,
+      "display_title": "The Brutalist",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1390687",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2024,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Room Next Door",
+      "source": "https://www.labiennale.org/en/news/official-awards-81st-venice-international-film-festival",
+      "film_title": "The Room Next Door",
+      "work_id": "award-work:e228f3573143d6452243",
       "match_status": "unresolved"
     },
     {
@@ -1370,33 +1397,6 @@
     },
     {
       "year": 2024,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "監督賞",
-      "title": "The Brutalist — Brady Corbet",
-      "source": "https://www.labiennale.org/en/news/official-awards-81st-venice-international-film-festival",
-      "recipient": "Brady Corbet",
-      "film_title": "The Brutalist",
-      "work_id": "award-work:5eb4ff27a60b259da249",
-      "match_status": "resolved",
-      "tmdb_id": 1390687,
-      "release_year": 2024,
-      "display_title": "The Brutalist",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1390687",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2024,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "金獅子賞",
-      "title": "The Room Next Door",
-      "source": "https://www.labiennale.org/en/news/official-awards-81st-venice-international-film-festival",
-      "film_title": "The Room Next Door",
-      "work_id": "award-work:e228f3573143d6452243",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
       "organization": "カンヌ国際映画祭",
       "category": "グランプリ",
       "title": "All We Imagine as Light",
@@ -1418,16 +1418,6 @@
     {
       "year": 2024,
       "organization": "カンヌ国際映画祭",
-      "category": "審査員賞",
-      "title": "Emilia Pérez",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
-      "film_title": "Emilia Pérez",
-      "work_id": "award-work:670945e5d8e940ff2fd5",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "カンヌ国際映画祭",
       "category": "監督賞",
       "title": "Grand Tour — Miguel Gomes",
       "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
@@ -1440,6 +1430,103 @@
       "display_title": "Grand Tour",
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1098709",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2024,
+      "organization": "カンヌ国際映画祭",
+      "category": "審査員賞",
+      "title": "Emilia Pérez",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
+      "film_title": "Emilia Pérez",
+      "work_id": "award-work:670945e5d8e940ff2fd5",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Godzilla Minus One",
+      "film_title": "Godzilla Minus One",
+      "display_title": "ゴジラ-1.0",
+      "release_year": 2023,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2024"
+    },
+    {
+      "year": 2023,
+      "organization": "アカデミー賞",
+      "category": "監督賞",
+      "title": "Everything Everywhere All at Once — Daniel Kwan / Daniel Scheinert",
+      "source": "https://www.oscars.org/oscars/ceremonies/2023",
+      "recipient": "Daniel Kwan / Daniel Scheinert",
+      "film_title": "Everything Everywhere All at Once",
+      "work_id": "award-work:f65a70d937e6c089bb73",
+      "match_status": "resolved",
+      "tmdb_id": 545611,
+      "release_year": 2023,
+      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/545611",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2023,
+      "organization": "アカデミー賞",
+      "category": "脚色賞",
+      "title": "Women Talking",
+      "source": "https://www.oscars.org/oscars/ceremonies/2023",
+      "film_title": "Women Talking",
+      "work_id": "award-work:252b9bd265476e9d86c8",
+      "match_status": "resolved",
+      "tmdb_id": 777245,
+      "release_year": 2022,
+      "display_title": "ウーマン・トーキング 私たちの選択",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/777245",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2023,
+      "organization": "アカデミー賞",
+      "category": "脚本賞",
+      "title": "Everything Everywhere All at Once",
+      "source": "https://www.oscars.org/oscars/ceremonies/2023",
+      "film_title": "Everything Everywhere All at Once",
+      "work_id": "award-work:f65a70d937e6c089bb73",
+      "match_status": "resolved",
+      "tmdb_id": 545611,
+      "release_year": 2023,
+      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/545611",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2023,
+      "organization": "アカデミー賞",
+      "category": "国際長編映画賞",
+      "title": "All Quiet on the Western Front",
+      "source": "https://www.oscars.org/oscars/ceremonies/2023",
+      "film_title": "All Quiet on the Western Front",
+      "work_id": "award-work:2507da2b2474d06e612f",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2023,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Everything Everywhere All at Once",
+      "source": "https://www.oscars.org/oscars/ceremonies/2023",
+      "film_title": "Everything Everywhere All at Once",
+      "work_id": "award-work:f65a70d937e6c089bb73",
+      "match_status": "resolved",
+      "tmdb_id": 545611,
+      "release_year": 2023,
+      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/545611",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1472,22 +1559,6 @@
       "tmdb_id": 785084,
       "release_year": 2022,
       "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2023,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Everything Everywhere All at Once",
-      "source": "https://www.oscars.org/oscars/ceremonies/2023",
-      "film_title": "Everything Everywhere All at Once",
-      "work_id": "award-work:f65a70d937e6c089bb73",
-      "match_status": "resolved",
-      "tmdb_id": 545611,
-      "release_year": 2023,
-      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/545611",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2023,
@@ -1526,65 +1597,6 @@
     {
       "year": 2023,
       "organization": "アカデミー賞",
-      "category": "国際長編映画賞",
-      "title": "All Quiet on the Western Front",
-      "source": "https://www.oscars.org/oscars/ceremonies/2023",
-      "film_title": "All Quiet on the Western Front",
-      "work_id": "award-work:2507da2b2474d06e612f",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2023,
-      "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Everything Everywhere All at Once — Daniel Kwan / Daniel Scheinert",
-      "source": "https://www.oscars.org/oscars/ceremonies/2023",
-      "recipient": "Daniel Kwan / Daniel Scheinert",
-      "film_title": "Everything Everywhere All at Once",
-      "work_id": "award-work:f65a70d937e6c089bb73",
-      "match_status": "resolved",
-      "tmdb_id": 545611,
-      "release_year": 2023,
-      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/545611",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2023,
-      "organization": "アカデミー賞",
-      "category": "脚本賞",
-      "title": "Everything Everywhere All at Once",
-      "source": "https://www.oscars.org/oscars/ceremonies/2023",
-      "film_title": "Everything Everywhere All at Once",
-      "work_id": "award-work:f65a70d937e6c089bb73",
-      "match_status": "resolved",
-      "tmdb_id": 545611,
-      "release_year": 2023,
-      "display_title": "エブリシング・エブリウェア・オール・アット・ワンス",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/545611",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2023,
-      "organization": "アカデミー賞",
-      "category": "脚色賞",
-      "title": "Women Talking",
-      "source": "https://www.oscars.org/oscars/ceremonies/2023",
-      "film_title": "Women Talking",
-      "work_id": "award-work:252b9bd265476e9d86c8",
-      "match_status": "resolved",
-      "tmdb_id": 777245,
-      "release_year": 2022,
-      "display_title": "ウーマン・トーキング 私たちの選択",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/777245",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2023,
-      "organization": "アカデミー賞",
       "category": "長編アニメ映画賞",
       "title": "Guillermo del Toro's Pinocchio",
       "source": "https://www.oscars.org/oscars/ceremonies/2023",
@@ -1597,30 +1609,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/555604",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2023,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "女優賞",
-      "title": "Priscilla — Cailee Spaeny",
-      "source": "https://www.labiennale.org/en/news/official-awards-80th-venice-film-festival",
-      "recipient": "Cailee Spaeny",
-      "film_title": "Priscilla",
-      "work_id": "award-work:c358e8dc7e716815c4cd",
-      "match_status": "resolved",
-      "tmdb_id": 1020006,
-      "release_year": 2023,
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2023,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "審査員大賞",
-      "title": "Evil Does Not Exist",
-      "source": "https://www.labiennale.org/en/news/official-awards-80th-venice-film-festival",
-      "film_title": "Evil Does Not Exist",
-      "work_id": "award-work:e7c9cda1c4b0ec5f16d9",
-      "match_status": "unresolved"
     },
     {
       "year": 2023,
@@ -1653,6 +1641,42 @@
       "match_method": "unique_catalog_title_and_release_year"
     },
     {
+      "year": 2023,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "女優賞",
+      "title": "Priscilla — Cailee Spaeny",
+      "source": "https://www.labiennale.org/en/news/official-awards-80th-venice-film-festival",
+      "recipient": "Cailee Spaeny",
+      "film_title": "Priscilla",
+      "work_id": "award-work:c358e8dc7e716815c4cd",
+      "match_status": "resolved",
+      "tmdb_id": 1020006,
+      "release_year": 2023,
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2023,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "審査員大賞",
+      "title": "Evil Does Not Exist",
+      "source": "https://www.labiennale.org/en/news/official-awards-80th-venice-film-festival",
+      "film_title": "Evil Does Not Exist",
+      "work_id": "award-work:e7c9cda1c4b0ec5f16d9",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2023,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "A Man",
+      "film_title": "A Man",
+      "display_title": "ある男",
+      "release_year": 2022,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2023"
+    },
+    {
       "year": 2022,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -1660,6 +1684,23 @@
       "source": "https://www.bafta.org/awards/film/",
       "film_title": "The Power of the Dog",
       "work_id": "award-work:dd99d1aaec4364bc5b5c",
+      "match_status": "resolved",
+      "tmdb_id": 600583,
+      "release_year": 2021,
+      "display_title": "パワー・オブ・ザ・ドッグ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/600583",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2022,
+      "organization": "アカデミー賞",
+      "category": "監督賞",
+      "title": "The Power of the Dog — Jane Campion",
+      "source": "https://www.oscars.org/oscars/ceremonies/2022",
+      "recipient": "Jane Campion",
+      "film_title": "The Power of the Dog",
+      "work_id": "award-work:046f0ea9ab3dad0e842d",
       "match_status": "resolved",
       "tmdb_id": 600583,
       "release_year": 2021,
@@ -1680,23 +1721,6 @@
       "tmdb_id": 776503,
       "release_year": 2021,
       "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2022,
-      "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "The Power of the Dog — Jane Campion",
-      "source": "https://www.oscars.org/oscars/ceremonies/2022",
-      "recipient": "Jane Campion",
-      "film_title": "The Power of the Dog",
-      "work_id": "award-work:046f0ea9ab3dad0e842d",
-      "match_status": "resolved",
-      "tmdb_id": 600583,
-      "release_year": 2021,
-      "display_title": "パワー・オブ・ザ・ドッグ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/600583",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2022,
@@ -1751,6 +1775,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2022,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Drive My Car",
+      "film_title": "Drive My Car",
+      "display_title": "ドライブ・マイ・カー",
+      "release_year": 2021,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2022"
+    },
+    {
       "year": 2021,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -1769,9 +1805,10 @@
     {
       "year": 2021,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Nomadland",
+      "category": "監督賞",
+      "title": "Nomadland — Chloé Zhao",
       "source": "https://www.oscars.org/oscars/ceremonies/2021",
+      "recipient": "Chloé Zhao",
       "film_title": "Nomadland",
       "work_id": "award-work:9944777c86bbfb37129f",
       "match_status": "resolved",
@@ -1785,10 +1822,9 @@
     {
       "year": 2021,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Nomadland — Chloé Zhao",
+      "category": "作品賞",
+      "title": "Nomadland",
       "source": "https://www.oscars.org/oscars/ceremonies/2021",
-      "recipient": "Chloé Zhao",
       "film_title": "Nomadland",
       "work_id": "award-work:9944777c86bbfb37129f",
       "match_status": "resolved",
@@ -1852,6 +1888,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2021,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Midnight Swan",
+      "film_title": "Midnight Swan",
+      "display_title": "ミッドナイトスワン",
+      "release_year": 2020,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2021"
+    },
+    {
       "year": 2020,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -1870,9 +1918,10 @@
     {
       "year": 2020,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Parasite",
+      "category": "監督賞",
+      "title": "Parasite — Bong Joon Ho",
       "source": "https://www.oscars.org/oscars/ceremonies/2020",
+      "recipient": "Bong Joon Ho",
       "film_title": "Parasite",
       "work_id": "award-work:968396de0a127c4a0100",
       "match_status": "unresolved"
@@ -1880,10 +1929,9 @@
     {
       "year": 2020,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Parasite — Bong Joon Ho",
+      "category": "作品賞",
+      "title": "Parasite",
       "source": "https://www.oscars.org/oscars/ceremonies/2020",
-      "recipient": "Bong Joon Ho",
       "film_title": "Parasite",
       "work_id": "award-work:968396de0a127c4a0100",
       "match_status": "unresolved"
@@ -1925,6 +1973,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2020,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Journalist",
+      "film_title": "The Journalist",
+      "display_title": "新聞記者",
+      "release_year": 2019,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2020"
+    },
+    {
       "year": 2019,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -1932,6 +1992,20 @@
       "source": "https://www.bafta.org/awards/film/",
       "film_title": "Roma",
       "work_id": "award-work:8b5d2000920249bad4e8",
+      "match_status": "resolved",
+      "tmdb_id": 426426,
+      "release_year": 2018,
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2019,
+      "organization": "アカデミー賞",
+      "category": "監督賞",
+      "title": "Roma — Alfonso Cuarón",
+      "source": "https://www.oscars.org/oscars/ceremonies/2019",
+      "recipient": "Alfonso Cuarón",
+      "film_title": "Roma",
+      "work_id": "award-work:134d1d276a2d3fc428b5",
       "match_status": "resolved",
       "tmdb_id": 426426,
       "release_year": 2018,
@@ -1952,20 +2026,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/490132",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2019,
-      "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Roma — Alfonso Cuarón",
-      "source": "https://www.oscars.org/oscars/ceremonies/2019",
-      "recipient": "Alfonso Cuarón",
-      "film_title": "Roma",
-      "work_id": "award-work:134d1d276a2d3fc428b5",
-      "match_status": "resolved",
-      "tmdb_id": 426426,
-      "release_year": 2018,
-      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2019,
@@ -2038,9 +2098,10 @@
     {
       "year": 2018,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "The Shape of Water",
+      "category": "監督賞",
+      "title": "The Shape of Water — Guillermo del Toro",
       "source": "https://www.oscars.org/oscars/ceremonies/2018",
+      "recipient": "Guillermo del Toro",
       "film_title": "The Shape of Water",
       "work_id": "award-work:20c2a9cb969a44602ceb",
       "match_status": "resolved",
@@ -2054,10 +2115,9 @@
     {
       "year": 2018,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "The Shape of Water — Guillermo del Toro",
+      "category": "作品賞",
+      "title": "The Shape of Water",
       "source": "https://www.oscars.org/oscars/ceremonies/2018",
-      "recipient": "Guillermo del Toro",
       "film_title": "The Shape of Water",
       "work_id": "award-work:20c2a9cb969a44602ceb",
       "match_status": "resolved",
@@ -2118,6 +2178,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2018,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Third Murder",
+      "film_title": "The Third Murder",
+      "display_title": "三度目の殺人",
+      "release_year": 2017,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2018"
+    },
+    {
       "year": 2017,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2136,16 +2208,6 @@
     {
       "year": 2017,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Moonlight",
-      "source": "https://www.oscars.org/oscars/ceremonies/2017",
-      "film_title": "Moonlight",
-      "work_id": "award-work:ef1b2e6a32d2417d1cb7",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2017,
-      "organization": "アカデミー賞",
       "category": "監督賞",
       "title": "La La Land — Damien Chazelle",
       "source": "https://www.oscars.org/oscars/ceremonies/2017",
@@ -2159,6 +2221,16 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/313369",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2017,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Moonlight",
+      "source": "https://www.oscars.org/oscars/ceremonies/2017",
+      "film_title": "Moonlight",
+      "work_id": "award-work:ef1b2e6a32d2417d1cb7",
+      "match_status": "unresolved"
     },
     {
       "year": 2017,
@@ -2207,6 +2279,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2017,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Shin Godzilla",
+      "film_title": "Shin Godzilla",
+      "display_title": "シン・ゴジラ",
+      "release_year": 2016,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2017"
+    },
+    {
       "year": 2016,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2225,16 +2309,6 @@
     {
       "year": 2016,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Spotlight",
-      "source": "https://www.oscars.org/oscars/ceremonies/2016",
-      "film_title": "Spotlight",
-      "work_id": "award-work:8a3a9be8726538ea9009",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2016,
-      "organization": "アカデミー賞",
       "category": "監督賞",
       "title": "The Revenant — Alejandro G. Iñárritu",
       "source": "https://www.oscars.org/oscars/ceremonies/2016",
@@ -2248,6 +2322,16 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/281957",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2016,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Spotlight",
+      "source": "https://www.oscars.org/oscars/ceremonies/2016",
+      "film_title": "Spotlight",
+      "work_id": "award-work:8a3a9be8726538ea9009",
+      "match_status": "unresolved"
     },
     {
       "year": 2016,
@@ -2299,6 +2383,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2016,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Our Little Sister",
+      "film_title": "Our Little Sister",
+      "display_title": "海街diary",
+      "release_year": 2015,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2016"
+    },
+    {
       "year": 2015,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2317,9 +2413,10 @@
     {
       "year": 2015,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Birdman or (The Unexpected Virtue of Ignorance)",
+      "category": "監督賞",
+      "title": "Birdman or (The Unexpected Virtue of Ignorance) — Alejandro G. Iñárritu",
       "source": "https://www.oscars.org/oscars/ceremonies/2015",
+      "recipient": "Alejandro G. Iñárritu",
       "film_title": "Birdman or (The Unexpected Virtue of Ignorance)",
       "work_id": "award-work:b982d97ec5c2c41b4c81",
       "match_status": "resolved",
@@ -2333,10 +2430,9 @@
     {
       "year": 2015,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "Birdman or (The Unexpected Virtue of Ignorance) — Alejandro G. Iñárritu",
+      "category": "作品賞",
+      "title": "Birdman or (The Unexpected Virtue of Ignorance)",
       "source": "https://www.oscars.org/oscars/ceremonies/2015",
-      "recipient": "Alejandro G. Iñárritu",
       "film_title": "Birdman or (The Unexpected Virtue of Ignorance)",
       "work_id": "award-work:b982d97ec5c2c41b4c81",
       "match_status": "resolved",
@@ -2400,6 +2496,18 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2015,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Eternal Zero",
+      "film_title": "The Eternal Zero",
+      "display_title": "永遠の0",
+      "release_year": 2014,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2015"
+    },
+    {
       "year": 2014,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2407,22 +2515,6 @@
       "source": "https://www.bafta.org/awards/film/",
       "film_title": "12 Years a Slave",
       "work_id": "award-work:b77903136f2be199f5e5",
-      "match_status": "resolved",
-      "tmdb_id": 76203,
-      "release_year": 2014,
-      "display_title": "それでも夜は明ける",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/76203",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2014,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "12 Years a Slave",
-      "source": "https://www.oscars.org/oscars/ceremonies/2014",
-      "film_title": "12 Years a Slave",
-      "work_id": "award-work:74a9ef5ca4b3904568fd",
       "match_status": "resolved",
       "tmdb_id": 76203,
       "release_year": 2014,
@@ -2444,6 +2536,22 @@
       "tmdb_id": 49047,
       "release_year": 2013,
       "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2014,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "12 Years a Slave",
+      "source": "https://www.oscars.org/oscars/ceremonies/2014",
+      "film_title": "12 Years a Slave",
+      "work_id": "award-work:74a9ef5ca4b3904568fd",
+      "match_status": "resolved",
+      "tmdb_id": 76203,
+      "release_year": 2014,
+      "display_title": "それでも夜は明ける",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/76203",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2014,
@@ -2492,6 +2600,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2014,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Great Passage",
+      "film_title": "The Great Passage",
+      "display_title": "舟を編む",
+      "release_year": 2013,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2014"
+    },
+    {
       "year": 2013,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2499,22 +2619,6 @@
       "source": "https://www.bafta.org/awards/film/",
       "film_title": "Argo",
       "work_id": "award-work:2e4abd4707718ac9dab1",
-      "match_status": "resolved",
-      "tmdb_id": 68734,
-      "release_year": 2012,
-      "display_title": "アルゴ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/68734",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2013,
-      "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "Argo",
-      "source": "https://www.oscars.org/oscars/ceremonies/2013",
-      "film_title": "Argo",
-      "work_id": "award-work:c27ea4e8041ae9f5fefe",
       "match_status": "resolved",
       "tmdb_id": 68734,
       "release_year": 2012,
@@ -2538,6 +2642,22 @@
       "display_title": "ライフ・オブ・パイ／トラと漂流した227日",
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/87827",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2013,
+      "organization": "アカデミー賞",
+      "category": "作品賞",
+      "title": "Argo",
+      "source": "https://www.oscars.org/oscars/ceremonies/2013",
+      "film_title": "Argo",
+      "work_id": "award-work:c27ea4e8041ae9f5fefe",
+      "match_status": "resolved",
+      "tmdb_id": 68734,
+      "release_year": 2012,
+      "display_title": "アルゴ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/68734",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -2593,6 +2713,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2013,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Kirishima Thing",
+      "film_title": "The Kirishima Thing",
+      "display_title": "桐島、部活やめるってよ",
+      "release_year": 2012,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2013"
+    },
+    {
       "year": 2012,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2605,9 +2737,10 @@
     {
       "year": 2012,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "The Artist",
+      "category": "監督賞",
+      "title": "The Artist — Michel Hazanavicius",
       "source": "https://www.oscars.org/oscars/ceremonies/2012",
+      "recipient": "Michel Hazanavicius",
       "film_title": "The Artist",
       "work_id": "award-work:679bf998acfb9762a6ac",
       "match_status": "unresolved"
@@ -2615,10 +2748,9 @@
     {
       "year": 2012,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "The Artist — Michel Hazanavicius",
+      "category": "作品賞",
+      "title": "The Artist",
       "source": "https://www.oscars.org/oscars/ceremonies/2012",
-      "recipient": "Michel Hazanavicius",
       "film_title": "The Artist",
       "work_id": "award-work:679bf998acfb9762a6ac",
       "match_status": "unresolved"
@@ -2673,6 +2805,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2012,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Rebirth",
+      "film_title": "Rebirth",
+      "display_title": "八日目の蝉",
+      "release_year": 2011,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2012"
+    },
+    {
       "year": 2011,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2691,9 +2835,10 @@
     {
       "year": 2011,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "The King's Speech",
+      "category": "監督賞",
+      "title": "The King's Speech — Tom Hooper",
       "source": "https://www.oscars.org/oscars/ceremonies/2011",
+      "recipient": "Tom Hooper",
       "film_title": "The King's Speech",
       "work_id": "award-work:c8cabf15d248fa1a3722",
       "match_status": "resolved",
@@ -2707,10 +2852,9 @@
     {
       "year": 2011,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "The King's Speech — Tom Hooper",
+      "category": "作品賞",
+      "title": "The King's Speech",
       "source": "https://www.oscars.org/oscars/ceremonies/2011",
-      "recipient": "Tom Hooper",
       "film_title": "The King's Speech",
       "work_id": "award-work:c8cabf15d248fa1a3722",
       "match_status": "resolved",
@@ -2780,6 +2924,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2011,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Confessions",
+      "film_title": "Confessions",
+      "display_title": "告白",
+      "release_year": 2010,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2011"
+    },
+    {
       "year": 2010,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2798,9 +2954,10 @@
     {
       "year": 2010,
       "organization": "アカデミー賞",
-      "category": "作品賞",
-      "title": "The Hurt Locker",
+      "category": "監督賞",
+      "title": "The Hurt Locker — Kathryn Bigelow",
       "source": "https://www.oscars.org/oscars/ceremonies/2010",
+      "recipient": "Kathryn Bigelow",
       "film_title": "The Hurt Locker",
       "work_id": "award-work:0a5d34763ba3a289e9a1",
       "match_status": "resolved",
@@ -2814,10 +2971,9 @@
     {
       "year": 2010,
       "organization": "アカデミー賞",
-      "category": "監督賞",
-      "title": "The Hurt Locker — Kathryn Bigelow",
+      "category": "作品賞",
+      "title": "The Hurt Locker",
       "source": "https://www.oscars.org/oscars/ceremonies/2010",
-      "recipient": "Kathryn Bigelow",
       "film_title": "The Hurt Locker",
       "work_id": "award-work:0a5d34763ba3a289e9a1",
       "match_status": "resolved",
@@ -2881,6 +3037,18 @@
       "match_status": "unresolved"
     },
     {
+      "year": 2010,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Unbroken",
+      "film_title": "The Unbroken",
+      "display_title": "沈まぬ太陽",
+      "release_year": 2009,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2010"
+    },
+    {
       "year": 2009,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -2935,6 +3103,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:2009:the-milk-of-sorrow"
+    },
+    {
+      "year": 2009,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Departures",
+      "film_title": "Departures",
+      "display_title": "おくりびと",
+      "release_year": 2008,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2009"
     },
     {
       "year": 2008,
@@ -2993,6 +3173,18 @@
       "work_id": "historical:ベルリン国際映画祭:2008:elite-squad"
     },
     {
+      "year": 2008,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+      "film_title": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+      "display_title": "東京タワー 〜オカンとボクと、時々、オトン〜",
+      "release_year": 2007,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2008"
+    },
+    {
       "year": 2007,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3049,6 +3241,18 @@
       "work_id": "historical:ベルリン国際映画祭:2007:tuya-s-marriage"
     },
     {
+      "year": 2007,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Hula Girls",
+      "film_title": "Hula Girls",
+      "display_title": "フラガール",
+      "release_year": 2006,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2007"
+    },
+    {
       "year": 2006,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3097,6 +3301,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:2006:grbavica"
+    },
+    {
+      "year": 2006,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Always Sanchōme no Yūhi",
+      "film_title": "Always Sanchōme no Yūhi",
+      "display_title": "ALWAYS 三丁目の夕日",
+      "release_year": 2005,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2006"
     },
     {
       "year": 2005,
@@ -3155,6 +3371,18 @@
       "work_id": "historical:ベルリン国際映画祭:2005:u-carmen-ekhayelitsha"
     },
     {
+      "year": 2005,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Half a Confession",
+      "film_title": "Half a Confession",
+      "display_title": "半落ち",
+      "release_year": 2004,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2005"
+    },
+    {
       "year": 2004,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3211,6 +3439,18 @@
       "work_id": "historical:ベルリン国際映画祭:2004:head-on"
     },
     {
+      "year": 2004,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "When the Last Sword Is Drawn",
+      "film_title": "When the Last Sword Is Drawn",
+      "display_title": "壬生義士伝",
+      "release_year": 2003,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2004"
+    },
+    {
       "year": 2003,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3259,6 +3499,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:2003:in-this-world"
+    },
+    {
+      "year": 2003,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Twilight Samurai",
+      "film_title": "The Twilight Samurai",
+      "display_title": "たそがれ清兵衛",
+      "release_year": 2002,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2003"
     },
     {
       "year": 2002,
@@ -3327,6 +3579,18 @@
       "work_id": "historical:ベルリン国際映画祭:2002:spirited-away"
     },
     {
+      "year": 2002,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Spirited Away",
+      "film_title": "Spirited Away",
+      "display_title": "千と千尋の神隠し",
+      "release_year": 2001,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2002"
+    },
+    {
       "year": 2001,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3381,6 +3645,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:2001:intimacy"
+    },
+    {
+      "year": 2001,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "After the Rain",
+      "film_title": "After the Rain",
+      "display_title": "雨あがる",
+      "release_year": 2000,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2001"
     },
     {
       "year": 2000,
@@ -3439,6 +3715,18 @@
       "work_id": "historical:ベルリン国際映画祭:2000:magnolia"
     },
     {
+      "year": 2000,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Poppoya",
+      "film_title": "Poppoya",
+      "display_title": "鉄道員",
+      "release_year": 1999,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:2000"
+    },
+    {
       "year": 1999,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3495,6 +3783,18 @@
       "work_id": "historical:ベルリン国際映画祭:1999:the-thin-red-line"
     },
     {
+      "year": 1999,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Begging for Love",
+      "film_title": "Begging for Love",
+      "display_title": "愛を乞うひと",
+      "release_year": 1998,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1999"
+    },
+    {
       "year": 1998,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3549,6 +3849,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1998:central-station"
+    },
+    {
+      "year": 1998,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Princess Mononoke",
+      "film_title": "Princess Mononoke",
+      "display_title": "もののけ姫",
+      "release_year": 1997,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1998"
     },
     {
       "year": 1997,
@@ -3617,6 +3929,18 @@
       "work_id": "historical:ベルリン国際映画祭:1997:the-people-vs-larry-flynt"
     },
     {
+      "year": 1997,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Shall We Dance?",
+      "film_title": "Shall We Dance?",
+      "display_title": "Shall we ダンス?",
+      "release_year": 1996,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1997"
+    },
+    {
       "year": 1996,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3673,6 +3997,18 @@
       "work_id": "historical:ベルリン国際映画祭:1996:sense-and-sensibility"
     },
     {
+      "year": 1996,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "A Last Note",
+      "film_title": "A Last Note",
+      "display_title": "午後の遺言状",
+      "release_year": 1995,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1996"
+    },
+    {
       "year": 1995,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3727,6 +4063,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1995:the-bait"
+    },
+    {
+      "year": 1995,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Crest of Betrayal",
+      "film_title": "Crest of Betrayal",
+      "display_title": "忠臣蔵外伝 四谷怪談",
+      "release_year": 1994,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1995"
     },
     {
       "year": 1994,
@@ -3793,6 +4141,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1994:in-the-name-of-the-father"
+    },
+    {
+      "year": 1994,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "A Class to Remember",
+      "film_title": "A Class to Remember",
+      "display_title": "学校",
+      "release_year": 1993,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1994"
     },
     {
       "year": 1993,
@@ -3881,6 +4241,18 @@
       "work_id": "historical:ベルリン国際映画祭:1993:woman-sesame-oil-maker"
     },
     {
+      "year": 1993,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Sumo Do, Sumo Don't",
+      "film_title": "Sumo Do, Sumo Don't",
+      "display_title": "シコふんじゃった。",
+      "release_year": 1992,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1993"
+    },
+    {
       "year": 1992,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3937,6 +4309,18 @@
       "work_id": "historical:ベルリン国際映画祭:1992:grand-canyon"
     },
     {
+      "year": 1992,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "My Sons",
+      "film_title": "My Sons",
+      "display_title": "息子",
+      "release_year": 1991,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1992"
+    },
+    {
       "year": 1991,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -3991,6 +4375,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1991:the-house-of-smiles"
+    },
+    {
+      "year": 1991,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Childhood Days",
+      "film_title": "Childhood Days",
+      "display_title": "少年時代",
+      "release_year": 1990,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1991"
     },
     {
       "year": 1990,
@@ -4059,6 +4455,18 @@
       "work_id": "historical:ベルリン国際映画祭:1990:music-box"
     },
     {
+      "year": 1990,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Black Rain",
+      "film_title": "Black Rain",
+      "display_title": "黒い雨",
+      "release_year": 1989,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1990"
+    },
+    {
       "year": 1989,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4113,6 +4521,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1989:rain-man"
+    },
+    {
+      "year": 1989,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Silk Road",
+      "film_title": "The Silk Road",
+      "display_title": "敦煌",
+      "release_year": 1988,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1989"
     },
     {
       "year": 1988,
@@ -4171,6 +4591,18 @@
       "work_id": "historical:ベルリン国際映画祭:1988:red-sorghum"
     },
     {
+      "year": 1988,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "A Taxing Woman",
+      "film_title": "A Taxing Woman",
+      "display_title": "マルサの女",
+      "release_year": 1987,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1988"
+    },
+    {
       "year": 1987,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4227,6 +4659,18 @@
       "work_id": "historical:ベルリン国際映画祭:1987:the-theme"
     },
     {
+      "year": 1987,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "House on Fire",
+      "film_title": "House on Fire",
+      "display_title": "火宅の人",
+      "release_year": 1986,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1987"
+    },
+    {
       "year": 1986,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4281,6 +4725,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1986:stammheim"
+    },
+    {
+      "year": 1986,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Gray Sunset",
+      "film_title": "Gray Sunset",
+      "display_title": "花いちもんめ",
+      "release_year": 1985,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1986"
     },
     {
       "year": 1985,
@@ -4349,6 +4805,18 @@
       "work_id": "historical:ベルリン国際映画祭:1985:the-woman-and-the-stranger"
     },
     {
+      "year": 1985,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Funeral",
+      "film_title": "The Funeral",
+      "display_title": "お葬式",
+      "release_year": 1984,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1985"
+    },
+    {
       "year": 1984,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4403,6 +4871,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1984:love-streams"
+    },
+    {
+      "year": 1984,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Ballad of Narayama",
+      "film_title": "The Ballad of Narayama",
+      "display_title": "楢山節考",
+      "release_year": 1983,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1984"
     },
     {
       "year": 1983,
@@ -4471,6 +4951,18 @@
       "work_id": "historical:ベルリン国際映画祭:1983:la-colmena"
     },
     {
+      "year": 1983,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Fall Guy",
+      "film_title": "Fall Guy",
+      "display_title": "蒲田行進曲",
+      "release_year": 1982,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1983"
+    },
+    {
       "year": 1982,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4537,6 +5029,18 @@
       "work_id": "historical:ベルリン国際映画祭:1982:veronika-voss"
     },
     {
+      "year": 1982,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Station",
+      "film_title": "Station",
+      "display_title": "駅 STATION",
+      "release_year": 1981,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1982"
+    },
+    {
       "year": 1981,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4591,6 +5095,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1981:deprisa-deprisa"
+    },
+    {
+      "year": 1981,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Zigeunerweisen",
+      "film_title": "Zigeunerweisen",
+      "display_title": "ツィゴイネルワイゼン",
+      "release_year": 1980,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1981"
     },
     {
       "year": 1980,
@@ -4679,6 +5195,18 @@
       "work_id": "historical:ベルリン国際映画祭:1980:palermo-or-wolfsburg"
     },
     {
+      "year": 1980,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "Vengeance Is Mine",
+      "film_title": "Vengeance Is Mine",
+      "display_title": "復讐するは我にあり",
+      "release_year": 1979,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1980"
+    },
+    {
       "year": 1979,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4735,6 +5263,18 @@
       "work_id": "historical:ベルリン国際映画祭:1979:david"
     },
     {
+      "year": 1979,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Incident",
+      "film_title": "The Incident",
+      "display_title": "事件",
+      "release_year": 1978,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1979"
+    },
+    {
       "year": 1978,
       "organization": "BAFTA",
       "category": "作品賞",
@@ -4789,6 +5329,18 @@
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
       "match_status": "unresolved",
       "work_id": "historical:ベルリン国際映画祭:1978:what-max-said"
+    },
+    {
+      "year": 1978,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "The Yellow Handkerchief",
+      "film_title": "The Yellow Handkerchief",
+      "display_title": "幸福の黄色いハンカチ",
+      "release_year": 1977,
+      "source": "https://en.wikipedia.org/wiki/Japan_Academy_Film_Prize_for_Picture_of_the_Year",
+      "match_status": "unresolved",
+      "work_id": "award-picture-japan:1978"
     },
     {
       "year": 1977,

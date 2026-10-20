@@ -1,0 +1,28 @@
+{
+  "collection": "映画批評・年間ベスト",
+  "source": "キネマ旬報ベスト・テン",
+  "note": "映画賞コレクションの最高賞とは別に扱う評論家等による年間選出結果。収録は一部。",
+  "selections": [
+    {
+      "selection_year": 2024,
+      "category": "日本映画第1位",
+      "title": "夜明けのすべて",
+      "tmdb_id": 1086011,
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb"
+    },
+    {
+      "selection_year": 2024,
+      "category": "外国映画第1位",
+      "title": "オッペンハイマー",
+      "tmdb_id": 872585,
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb"
+    },
+    {
+      "selection_year": 2024,
+      "category": "文化映画第1位",
+      "title": "正義の行方",
+      "tmdb_id": 1253027,
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb"
+    }
+  ]
+}

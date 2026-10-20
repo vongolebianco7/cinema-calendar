@@ -660,10 +660,10 @@
   const directorMedalHistory=new Map();
   let directorMedalUpdatePending=false;
   const directorMedalTier=(watched,total,verified)=>{
-    if(verified&&total>0&&watched>=total)return {rank:4,label:'全作',symbol:'✦'};
-    if(watched>=20)return {rank:3,label:'20作',symbol:'20'};
-    if(watched>=10)return {rank:2,label:'10作',symbol:'10'};
-    if(watched>=5)return {rank:1,label:'5作',symbol:'5'};
+    if(verified&&total>0&&watched>=total)return {rank:4,label:'全作',symbol:'★'};
+    if(watched>=20)return {rank:3,label:'20作',symbol:'金'};
+    if(watched>=10)return {rank:2,label:'10作',symbol:'銀'};
+    if(watched>=5)return {rank:1,label:'5作',symbol:'銅'};
     return null;
   };
   const ensureDirectorMedalStyles=()=>{
@@ -674,6 +674,11 @@
       .director-pick{position:relative}
       .director-medal{display:inline-flex;align-items:center;justify-content:center;gap:5px;max-width:calc(100% - 8px);min-width:0;margin:5px auto 0;padding:0;border:0;background:transparent;color:#aab0b9;font-size:10px;line-height:1.3;font-weight:550;letter-spacing:.02em;white-space:nowrap;box-sizing:border-box}
       .director-medal-symbol{display:inline-grid;place-items:center;flex:0 0 19px;width:19px;height:19px;border:1px solid currentColor;border-radius:50%;font-family:Georgia,serif;font-size:10px;line-height:1;font-weight:500}
+      .director-medal[data-tier="1"]{color:#cd956c}
+      .director-medal[data-tier="1"] .director-medal-symbol{background:linear-gradient(145deg,#edc39c,#ad6740);color:#28170e;border-color:#c98b62}
+      .director-medal[data-tier="2"] .director-medal-symbol{background:linear-gradient(145deg,#f4f5f6,#9aa3af);color:#2a3039;border-color:#c2c8d0}
+      .director-medal[data-tier="3"] .director-medal-symbol{background:linear-gradient(145deg,#ffe9aa,#c69836);color:#33230b;border-color:#dfbd69}
+      .director-medal[data-tier="4"] .director-medal-symbol{background:linear-gradient(145deg,#fff0b7,#b98727);color:#342207;border:2px double #f6d88c;box-shadow:0 0 0 2px #d2ac5d33}
       .director-medal[data-tier="2"]{color:#c4cbd3}
       .director-medal[data-tier="3"]{color:#d2ba8d}
       .director-medal[data-tier="4"]{color:#e6cb95}

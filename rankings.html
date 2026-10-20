@@ -308,7 +308,7 @@ $("#grid").innerHTML=works.length?works.map(g=>{
 }).join(""):'<div class="empty">該当する受賞作品がありません</div>';
 hydrateAwardCards(works);
 mountRankingGauges();
-$("#sourceNote").textContent=(awardEra==="すべて"?"全年代":awardEra)+" · "+(awardYear==="すべて"?"全授賞年":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";hydrateAwardCards(list);mountRankingGauges();}
+$("#sourceNote").textContent=(awardEra==="すべて"?"全年代":awardEra)+" · "+(awardYear==="すべて"?"全授賞年":awardYear+"年")+" · 主催者公式発表で確認した受賞結果";}
 async function mountRankingGauges(){
  const api=globalThis.CinelvaQuickRate;
  if(!api?.mountInline)return;

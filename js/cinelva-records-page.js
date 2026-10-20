@@ -342,7 +342,7 @@
     ];
     body.innerHTML='<div class="review-detail-film">'+posterHTML(movie)
       +'<div class="review-detail-film-copy"><h3>'+escapeHTML(movie.title||'作品名不明')+'</h3>'
-      +'<p class="review-detail-score"><span>あなたの評価</span><strong>'+rating.toFixed(1)+'</strong><small> / 5.0</small></p></div></div>'
+      +'<p class="review-detail-score"><span>MY評価</span><strong>'+rating.toFixed(1)+'</strong><small> / 5.0</small></p></div></div>'
       +'<dl class="review-detail-info">'+fields.map(([label,value])=>'<div><dt>'+escapeHTML(label)+'</dt><dd>'+escapeHTML(String(value))+'</dd></div>').join('')+'</dl>'
       +'<div class="review-detail-comment"><h4>レビュー・感想</h4><p>'+escapeHTML(String(comment).trim()||'まだ感想は記録されていません。')+'</p></div>';
     $('reviewDetailEdit').dataset.reviewEdit=String(record.id);
@@ -622,7 +622,7 @@
       const record=state.records.find(item=>entryId&&String(item.id)===entryId)
         ||state.records.find(item=>normalizeRecordSearch(item.title)===normalizeRecordSearch(entry.title));
       const info=byId.get(entryId)||state.movies.find(item=>entryId&&String(item.id)===entryId)||{};
-      const metadata={...info,...(record?enriched(record):{}),id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.awardYears?.[0]||''};
+      const metadata={...info,...(record?enriched(record):{}),id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.year||entry.awardYears?.[0]||''};
       const seen=Boolean(record||entry.watched);
       const status=seen?'鑑賞済み':entryId?'未鑑賞':'照合保留';
       const headline='<div class="award-film-top"><span class="award-watch-state '+(seen?'is-watched':'is-unwatched')+'">'+status+'</span><span class="award-film-year">'+escapeHTML((entry.awardYears||[]).join('・'))+'</span></div>';
@@ -631,7 +631,7 @@
       const sources=(entry.sources||[]).filter(url=>/^https:\/\//.test(url)).map(url=>'<a class="award-card-source" href="'+escapeHTML(url)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>').join('');
       const id=String(metadata.id||'');
       const detail=id?'<a class="award-card-open" href="../search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(metadata.title)+'" aria-label="作品詳細：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>':'<a class="award-card-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索：'+escapeHTML(metadata.title)+'">'+escapeHTML(metadata.title)+'</a>';
-      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'"></div>'+sources+'</article>';
+      return '<article class="movie award-film-unit'+(record||entry.watched?' is-watched':' is-unwatched')+'" data-award-entry-index="'+index+'">'+headline+posterHTML(metadata)+detail+category+'<div class="award-common-review" data-award-review-id="'+escapeHTML(id)+'">'+(!id?'<a class="award-review-search" href="../search.html?search='+encodeURIComponent(metadata.title)+'" aria-label="作品を検索して記録：'+escapeHTML(metadata.title)+'">作品を検索して記録</a>':'')+'</div>'+sources+'</article>';
     };
     // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
     const awardPosterSearch=async (query,identity)=>{
@@ -710,7 +710,7 @@
         if(!id)return;
         const entry=awardEntries.find(x=>String(x.id||'')===id);
         const film=byId.get(id)||state.movies.find(x=>String(x.id)===id)||{};
-        globalThis.CinelvaQuickRate.mountInline(node,{...film,id:Number(id),tmdbId:Number(id),title:film.title||entry?.title||'作品'});
+        try{const success=globalThis.CinelvaQuickRate.mountInline(node,{...film,id:Number(id),tmdbId:Number(id),title:film.title||entry?.title||'作品'});if(!success&&!node.childElementCount){const link=document.createElement('a');link.href='../search.html?search='+encodeURIComponent(film.title||entry?.title||'作品');link.className='award-review-search';link.textContent='作品を検索して記録';node.append(link);}}catch(error){console.warn('Award review mount failed',error);}
       });
     }
   }
@@ -1256,7 +1256,7 @@
     canvas.addEventListener('pointermove',event=>{if(!state.plotPointers.has(event.pointerId))return;const prior=state.plotPointers.get(event.pointerId);if(Math.hypot(event.clientX-prior.x,event.clientY-prior.y)>3)state.plotWasDragged=true;state.plotPointers.set(event.pointerId,{x:event.clientX,y:event.clientY});const points=[...state.plotPointers.values()];if(points.length>1&&state.plotDrag?.mode==='pinch'){const distance=pointerDistance(points),center=pointerCenter(points);state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(distance/Math.max(1,state.plotDrag.distance))));state.plotOffset.x+=center.x-state.plotDrag.center.x;state.plotOffset.y+=center.y-state.plotDrag.center.y;state.plotDrag={mode:'pinch',distance,center};}else if(points.length===1&&state.plotDrag?.mode==='rotate'){state.plotRotation.y+= (event.clientX-state.plotDrag.x)*.008;state.plotRotation.x=Math.max(-1.35,Math.min(1.35,state.plotRotation.x+(event.clientY-state.plotDrag.y)*.008));state.plotDrag={...state.plotDrag,x:event.clientX,y:event.clientY};}drawWorld();});
     const endDrag=event=>{state.plotPointers.delete(event.pointerId);const point=[...state.plotPointers.values()][0];state.plotDrag=point?{mode:'rotate',x:point.x,y:point.y,rotation:{...state.plotRotation}}:null;};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
     canvas.addEventListener('wheel',event=>{event.preventDefault();state.plotZoom=Math.max(.65,Math.min(2.5,state.plotZoom*(event.deltaY>0?.9:1.1)));drawWorld();},{passive:false});
-    canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · あなたの評価 ★ ${Number(record.rating ?? 0).toFixed(1)}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
+    canvas.addEventListener('click',event=>{if(state.plotDrag||state.plotWasDragged)return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top;const point=(canvas._points||[]).slice().reverse().find(item=>Math.hypot(item.x-x,item.y-y)<item.r);if(point){const record=point.record;$('worldFilm').innerHTML=`<strong>${escapeHTML(record.title)}</strong> · ${escapeHTML(record.year||'公開年不明')} · ${escapeHTML(record.director||'監督不明')} · MY評価 ★ ${Number(record.rating ?? 0).toFixed(1)}<br>${escapeHTML((recordGenres(record).join('・')||'ジャンル未分類'))} · ${escapeHTML((record.countries||[]).join('・')||'製作国不明')}<div>${card(record)}</div>`;}});
     // Updating a review must not destroy the director/award/review overlay that opened it.
     // Defer the affected DOM refresh until those overlays have been dismissed.
     let pendingReviewRefresh=false;

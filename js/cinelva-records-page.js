@@ -926,7 +926,7 @@
       const earned=directorMedalUpdatePending&&previous!==undefined&&tier&&tier.rank>previous;
       directorMedalHistory.set(medalKey,tier?.rank||0);
       const medalMarkup=tier?'<span class="director-medal'+(earned?' director-medal-earned':'')+'" data-tier="'+tier.rank+'" aria-label="監督コレクション '+tier.label+'達成"><span class="director-medal-symbol" aria-hidden="true">'+tier.symbol+'</span><span>'+tier.label+'</span></span>':'';
-      row.innerHTML='<span class="director-card-photo">'+photoMarkup+medalMarkup+'</span>'<span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
+      row.innerHTML='<span class="director-card-photo">'+photoMarkup+medalMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
       row.setAttribute('aria-label',group.name+'、レビュー済み'+seen+'本、監督作品総数'+(complete?total+'本':'未確認'));
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});
       list.append(row);

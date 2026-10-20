@@ -298,14 +298,33 @@
       '<div class="cinelva-record-footer"><button type="button" class="record-delete-icon" data-delete="'+id+'" aria-label="鑑賞記録を削除：'+title+'" title="記録を削除">削除</button></div></article>';
   }
   function mountRecordReviewAreas(scope){
-    if(!globalThis.CinelvaQuickRate?.mountInline)return;
+    if(!scope)return;
     scope.querySelectorAll('[data-record-review-id]').forEach(node=>{
-      if(node.dataset.mounted==='1')return;
+      if(node.dataset.gaugeMounted==='true')return;
       const id=node.dataset.recordReviewId;
       const record=state.records.find(item=>String(item.id)===id);
       const movie=record?enriched(record):state.movies.find(item=>String(item.id)===id);
       if(!movie)return;
-      try{globalThis.CinelvaQuickRate.mountInline(node,{...movie,id:Number(id)||id,tmdbId:Number(movie.tmdbId??movie.tmdb_id??id)||undefined});node.dataset.mounted='1';}catch(error){console.warn('Inline review could not mount',error);}
+      const tmdbId=Number(movie.tmdbId??movie.tmdb_id??movie.id??id);
+      const film={...movie,id:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:id,tmdbId:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:undefined};
+      let mounted=false;
+      try{mounted=globalThis.CinelvaQuickRate?.mountInline?.(node,film)===true;}catch(error){console.warn('Common review mount error',error);}
+      if(mounted)return;
+      // Keep ratings and review access visible even if an imported ID lacks TMDB metadata.
+      const score=Number(record?.rating??movie.rating??0);
+      const community=Number(movie.vote_average??movie.voteAverage??movie.tmdbRating??0);
+      node.replaceChildren();
+      const box=document.createElement('div');box.className='cinelva-rating-controls cinelva-record-review-fallback';
+      const ratings=document.createElement('div');ratings.className='cinelva-rating-pair';
+      for(const [name,value] of [['MY評価',Number.isFinite(score)?score.toFixed(1):'—'],['TMDB評価',community>0?(community/2).toFixed(1):'—']]){
+        const line=document.createElement('div');line.className='cinelva-rating-line';
+        const caption=document.createElement('span');caption.className='rating-caption';caption.textContent=name;
+        const number=document.createElement('span');number.className='rating-value';number.textContent=value;
+        line.append(caption,number);ratings.append(line);
+      }
+      const edit=document.createElement('button');edit.type='button';edit.className='cinelva-rate-button';edit.textContent='◉';edit.setAttribute('aria-label','レビューを編集');
+      edit.addEventListener('click',()=>{const latest=state.records.find(item=>String(item.id)===id);if(latest)openDialog(latest);});
+      box.append(ratings,edit);node.append(box);
     });
   }
   function showReviewDetail(id) {

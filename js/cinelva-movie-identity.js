@@ -27,8 +27,12 @@ function hydrateCard(container,movie){
  const apply=url=>{
   if(!url||!container.isConnected)return;
   let image=container.querySelector('img');
-  if(!image){image=document.createElement('img');image.loading='lazy';image.alt='';container.appendChild(image)}
+  if(!image){image=document.createElement('img');image.loading='lazy';image.alt='';container.prepend(image)}
+  // Keep placeholder text hidden whenever recovered artwork displays successfully.
+  image.addEventListener('load',()=>{image.hidden=false;container.querySelectorAll('span').forEach(label=>label.hidden=true)},{once:false});
+  image.addEventListener('error',()=>{image.hidden=true;container.querySelectorAll('span').forEach(label=>label.hidden=false)},{once:false});
   if(image.getAttribute('src')!==url)image.src=url;
+  else if(image.complete&&image.naturalWidth>0)container.querySelectorAll('span').forEach(label=>label.hidden=true);
   hydratePoster(image,movie);
  };
  const direct=posterFor(movie);

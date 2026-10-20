@@ -148,7 +148,7 @@
 .cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
 .cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
 </style><script src="js/cinelva-movie-identity.js?v=20261020-shared-poster-registry"></script>
-</head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
+<style id="cinelva-movie-award-history">.cinelva-award-history h4{font-size:14px;margin:16px 0 8px;color:var(--text)}.cinelva-award-history-list{padding:0;margin:0;list-style:none}.cinelva-award-history-list li{padding:9px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:13px}.cinelva-award-history-list li a{font-size:12px;color:#d8bd87;text-decoration:underline}.cinelva-award-history p.small{margin-top:12px}</style></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines"></span></button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer">
  <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
@@ -313,7 +313,44 @@ function renderMovieInformation(m){
 }
 document.addEventListener('click',event=>{const button=event.target.closest('[data-detail-review]');if(!button)return;event.preventDefault();const id=button.dataset.movieId,title=button.dataset.movieTitle;if(/^[0-9]+$/.test(id||''))globalThis.CinelvaQuickRate?.open({id,title});else location.href=recordEntryUrl(id,title);});
 function recordEntryUrl(id,title){const path=location.pathname.split("/").includes("cinelva")?"../my-cinelva/":"my-cinelva/";return path+"?"+new URLSearchParams({record:String(id||""),title:title||""}).toString()}
+let cinelvaAwardHistoryPromise;
+const isHighestMovieAward=(org,prize)=>{
+ const o=String(org||''),c=String(prize||'').trim();
+ if(/カンヌ/.test(o))return c==='パルム・ドール';
+ if(/ヴェネチア|ベネチア/.test(o))return c==='金獅子賞';
+ if(/ベルリン/.test(o))return c==='金熊賞';
+ if(/ゴールデングローブ/.test(o))return /^作品賞（(?:ドラマ|ミュージカル[／/]コメディ)）$/.test(c);
+ if(/日本アカデミー/.test(o))return c==='最優秀作品賞';
+ if(/キネマ旬報/.test(o))return /^(?:日本映画|外国映画)作品賞（第1位）$/.test(c);
+ return c==='作品賞';
+};
+async function showMovieAwardHistory(host,m){
+ try{
+  cinelvaAwardHistoryPromise??=fetch('data/awards.json').then(r=>r.ok?r.json():null).catch(()=>null);
+  const data=await cinelvaAwardHistoryPromise;
+  if(!host.isConnected)return;
+  const id=Number(movieTmdbId(m)||m.tmdbId||m.tmdb_id||0);
+  if(!id||!Array.isArray(data?.awards)){host.remove();return;}
+  const unique=new Map();
+  for(const entry of data.awards){
+   if(Number(entry.tmdb_id)!==id)continue;
+   const key=[entry.organization,entry.category,entry.year].join('|');
+   if(!unique.has(key))unique.set(key,entry);
+  }
+  if(!unique.size){host.remove();return;}
+  const all=[...unique.values()].sort((a,b)=>Number(b.year)-Number(a.year)||String(a.organization).localeCompare(String(b.organization),'ja'));
+  const top=all.filter(e=>isHighestMovieAward(e.organization,e.category));
+  const other=all.filter(e=>!isHighestMovieAward(e.organization,e.category));
+  const renderRows=entries=>'<ul class="cinelva-award-history-list">'+entries.map(e=>'<li><span>'+E(e.year)+'年 · '+E(e.organization)+' · <strong>'+E(e.category)+'</strong></span>'+(String(e.source||'').startsWith('https://')?' <a href="'+E(e.source)+'" target="_blank" rel="noopener noreferrer">出典 ↗</a>':'')+'</li>').join('')+'</ul>';
+  host.innerHTML='<h3>受賞歴（収録分）</h3>'+(top.length?'<h4>最高作品賞</h4>'+renderRows(top):'')+(other.length?'<h4>その他の受賞部門</h4>'+renderRows(other):'')+'<p class="small">収録済みの受賞情報です。全映画賞・全部門の網羅を保証するものではありません。</p>';
+ }catch(error){if(host.isConnected)host.remove();}
+}
 function renderDetail(m){let av=m.availability||{},dna=m.dna||{},related=m.related||[],p=[av.flatrate&&av.flatrate.length?"見放題："+av.flatrate.join(" / "):"",av.rent&&av.rent.length?"レンタル："+av.rent.join(" / "):"",av.buy&&av.buy.length?"購入："+av.buy.join(" / "):""].filter(Boolean).join("<br>")||"配信情報を確認できていません。",w=(m.director_works||[]).slice().sort((a,b)=>Number(a.year||9999)-Number(b.year||9999)||String(a.title||"").localeCompare(String(b.title||""),"ja")).slice(0,30);const trailParams=new URLSearchParams(location.search),recordHref=recordEntryUrl(movieTmdbId(m)||m.id||"",m.title||""),trailCreator=trailParams.get("creator"),trailRole=trailParams.get("role"),trailPerson=trailParams.get("person"),calendarOrigin=CinemapCalendarContext.read(trailParams,m),calendarOriginHtml=calendarOrigin?'<section class="calendarOrigin"><strong>カレンダーで選んだ予定</strong><p>'+E(calendarOrigin.date)+' · '+E(({streaming:"配信開始",theatrical:"劇場公開",tv:"TV放映"})[calendarOrigin.event])+(calendarOrigin.service?' · '+E(calendarOrigin.service):'')+'</p><a href="'+E(calendarOrigin.backHref)+'">選んだ月のカレンダーへ戻る →</a></section>':'';detail.innerHTML='<div class="detailTop">'+(m.poster?'<img src="'+E(m.poster)+'">':'<div></div>')+'<div><div class="small">'+E(movieReleaseYear(m)||"公開年未確認")+'</div><h2>'+E(m.title)+'</h2><div>見た人の評価（TMDB） '+(Number(m.score)>0?(Number(m.score)/2).toFixed(1)+' / 5.0':'評価なし')+'</div><div class="small">'+''+'</div>'+(trailCreator?'<div class="creatorTrail"><strong>作り手からのつながり</strong><span>'+E(trailCreator)+(trailRole?' · '+E(trailRole):'')+'を辿ってこの作品へ</span><div class="creatorTrailActions">'+(trailPerson?'<a href="discover.html?person='+encodeURIComponent(trailPerson)+'&role='+encodeURIComponent(trailRole||'')+'&name='+encodeURIComponent(trailCreator)+'">この作り手の作品へ戻る</a>':'')+'</div></div>':'')+'</div></div>'+calendarOriginHtml+'<div class="recordAction"><button type="button" data-detail-review data-movie-id="'+E(movieTmdbId(m)||m.id||'')+'" data-movie-title="'+E(m.title||'')+'">鑑賞・レビューを記録</button></div><div class="detailPhase"><div class="detailPhaseNo">01 · BEFORE WATCHING</div><h3>観る前に</h3><p>作品情報と、どこで・どう観るかを確認する。</p></div>'+screeningRecommendationV3Html(m)+(m.overview?'<div class="section"><h3>あらすじ</h3><div class="small">'+E(m.overview)+'</div></div>':'')+renderMovieInformation(m)+'<div class="section"><h3>公開・視聴タイムライン</h3>'+viewingTimelineHtml(m,av)+'</div>'+'<div class="detailPhase after" id="afterWatchingPhase" hidden><div class="detailPhaseNo">02 · AFTER WATCHING</div><h3>観た後に</h3><p>実在する批評の要約と出典を読む。</p></div>'+'<div class="section criticSection" id="criticSection" data-critic-id="'+E(movieTmdbId(m)||m.id||'')+'" hidden><div class="deepTitle"><h3>批評を読む</h3><span>実在する批評の要約と出典</span></div><p class="small">出典を確認できた意見だけを整理します。情報が少ない作品は、そのままお伝えします。</p><div class="inlineCriticGate"><p class="small">批評には結末などに触れる可能性があります。</p><button type="button" id="showInlineCritic">観たので批評を見る</button></div><div id="inlineCriticEvidence" data-critic-id="'+E(movieTmdbId(m)||m.id||'')+'"></div><a class="criticPreviewCta" href="critic.html?id='+encodeURIComponent(movieTmdbId(m)||m.id||'')+'&search='+encodeURIComponent(m.title||'')+'">批評の傾向と出典を見る →</a></div>'+(w.length?'<div class="detailPhase deeper"><div class="detailPhaseNo">03 · GO DEEPER</div><h3>作り手の別作品へ</h3><p>同じ作り手の作品をたどる。</p></div>':'')+(w.length?'<div class="section"><h3>'+E(m.director||"監督")+'の作品</h3><div class="works">'+w.map((x,i)=>'<button type="button" class="work directorWork" data-w="'+i+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+(x.poster?'<img src="'+E(x.poster)+'">':'')+'<b>'+E(x.title)+'</b><span class="small">'+E(x.year||"")+'</span></button>').join("")+'</div></div>':'')+'<div class="section links">'+(m.trailer_url?'<a target="_blank" href="'+E(m.trailer_url)+'">予告編</a>':'')+(m.tmdb?'<a target="_blank" href="'+E(m.tmdb)+'">TMDB</a>':'')+'</div>';const criticSection=document.getElementById("criticSection"),afterPhase=document.getElementById("afterWatchingPhase"),criticId=String(movieTmdbId(m)||m.id||"");
+
+ const movieAwardHost=document.createElement('section');movieAwardHost.className='section cinelva-award-history';
+ movieAwardHost.innerHTML='<h3>受賞歴（収録分）</h3><p class="small">受賞情報を確認中…</p>';
+ if(criticSection)criticSection.before(movieAwardHost);else detail.append(movieAwardHost);
+ showMovieAwardHistory(movieAwardHost,m);
  criticRegistry().then(data=>{
   if(!criticSection?.isConnected||criticSection.dataset.criticId!==criticId)return;
   const evidence=CinemapCriticEvidence.forMovie(data,criticId),count=evidence.sources.length;

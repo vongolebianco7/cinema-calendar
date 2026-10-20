@@ -979,7 +979,7 @@ async function hydrateStreamingPosters(){
  const rows=movies.filter(m=>m&&m.event==="streaming"&&!m.poster&&String(m.title||"").trim());
  const normalize=x=>String(x||"").normalize("NFKC").toLowerCase().replace(/[\\s・:：!！?？'’"“”()（）-]/g,"");
  const filmYear=x=>{const v=x.release_date||x.releaseDate||x.year||x.release_year||"";const y=String(v).match(/(?:19|20)\\d{2}/);return y?y[0]:""};
- const validPoster=x=>{let p=x.poster||x.posterUrl||x.poster_url||x.poster_path||x.posterPath||"";if(typeof p!=="string")return "";if(/^\\/[a-zA-Z0-9_-]+\\.(?:jpg|jpeg|png|webp)$/i.test(p))p="https://image.tmdb.org/t/p/w342"+p;return /^https:\\/\\//.test(p)?p:""};
+ const validPoster=x=>{let p=x.poster||x.posterUrl||x.poster_url||x.poster_path||x.posterPath||"";if(typeof p!=="string")return "";if(p.startsWith("/")&&!p.startsWith("//")&&!p.includes(".."))p="https://image.tmdb.org/t/p/w342"+p;return p.startsWith("https://")?p:""};
  let cursor=0,updated=0,unresolved=0,ambiguous=0;
  const seen=new Map();
  async function worker(){

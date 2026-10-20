@@ -527,6 +527,16 @@
       if(/キネマ旬報/.test(org))return /^(?:日本映画|外国映画)作品賞（第1位）$/.test(prize);
       return prize==='作品賞';
     };
+    const highestPrizeLabel=name=>{
+      if(/カンヌ/.test(name))return 'パルム・ドール';
+      if(/ヴェネチア|ベネチア/.test(name))return '金獅子賞';
+      if(/ベルリン/.test(name))return '金熊賞';
+      if(/ゴールデングローブ/.test(name))return '作品賞（ドラマ／コメディ）';
+      if(/日本アカデミー/.test(name))return '最優秀作品賞';
+      if(/キネマ旬報/.test(name))return '日本・外国映画ベスト1';
+      return '作品賞';
+    };
+    const awardHeatLevel=count=>count>=7?4:count>=4?3:count>=2?2:count>=1?1:0;
     const awardScope=$('awardCategory')?.value==='all'?'all':'picture';
     document.querySelectorAll('[data-award-scope]').forEach(button=>{
       const selected=button.dataset.awardScope===awardScope;
@@ -603,7 +613,7 @@
     $('awardCoverage').textContent=awardScope==='all'?'収録済みの各部門の受賞作品を対象としています（最高賞を含む）。同じ映画が同じ賞の複数部門を受賞しても1作品として集計します。網羅的な受賞歴ではありません。':'最高賞（作品賞・パルム・ドール・金獅子賞・金熊賞など）の受賞作品だけを対象とします。他部門は集計しません。受賞記録は網羅的ではありません。';
     const awardNotation=$('awardNotation');
     if(awardNotation)awardNotation.textContent=awardScope==='all'?'数字は収録済みの受賞作を観た本数。最高賞も含みます。0は未鑑賞、— は受賞作未収録。同一作品が複数の映画賞に登場する場合は賞ごとに集計します。':'数字は最高賞の受賞作を観た本数。0は未鑑賞、— は対象受賞作未収録。同一作品が複数の映画賞に登場する場合は賞ごとに集計します。';
-    $('awardMatrix').innerHTML=`<table class="award-table"><thead><tr><th scope="col">映画賞</th>${decades.map(d=>`<th scope="col">${d}<small>年代</small></th>`).join('')}<th scope="col" class="award-total-head">鑑賞計</th></tr></thead><tbody>${organizations.map(name=>{const total=decades.reduce((sum,decade)=>sum+(scopedCell(name,decade)?.count||0),0);return `<tr><th scope="row">${escapeHTML(awardDisplayName(name))}</th>${decades.map(decade=>{const cell=scopedCell(name,decade);if(!cell)return '<td class="award-empty" aria-label="受賞データの確認対象外"><span aria-hidden="true">—</span></td>';const value=!cell.entries.length?'—':rate?(cell.completionRate===null?'—':`${Math.round(cell.completionRate*100)}%`):cell.count;const selected=state.awardSelection?.organization===name&&state.awardSelection?.decade===decade;const level=rate?Math.ceil((cell.completionRate||0)*4):Math.min(4,cell.count);return `<td><button type="button" class="award-cell heat-${level}${selected?' is-selected':''}" aria-pressed="${selected}" data-award-cell="${escapeHTML(name)}|${decade}" aria-label="${escapeHTML(awardDisplayName(name))}、${decade}年代、鑑賞済み最高作品賞受賞作${cell.count}本">${value}</button></td>`;}).join('')}<td class="award-row-total">${total}<small>本</small></td></tr>`;}).join('')}</tbody></table>`;
+    $('awardMatrix').innerHTML=`<table class="award-table"><thead><tr><th scope="col">映画賞</th>${decades.map(d=>`<th scope="col">${d}<small>年代</small></th>`).join('')}<th scope="col" class="award-total-head">鑑賞計</th></tr></thead><tbody>${organizations.map(name=>{const total=decades.reduce((sum,decade)=>sum+(scopedCell(name,decade)?.count||0),0);return `<tr><th scope="row">${escapeHTML(awardDisplayName(name))}<small class="award-prize-subtitle">${awardScope==='all'?'収録済み各部門':highestPrizeLabel(name)}</small></th>${decades.map(decade=>{const cell=scopedCell(name,decade);if(!cell)return '<td class="award-empty" aria-label="受賞データの確認対象外"><span aria-hidden="true">—</span></td>';const value=!cell.entries.length?'—':rate?(cell.completionRate===null?'—':`${Math.round(cell.completionRate*100)}%`):cell.count;const selected=state.awardSelection?.organization===name&&state.awardSelection?.decade===decade;const level=awardHeatLevel(cell.count);return `<td><button type="button" class="award-cell heat-${level}${selected?' is-selected':''}" aria-pressed="${selected}" data-award-cell="${escapeHTML(name)}|${decade}" aria-label="${escapeHTML(awardDisplayName(name))}、${decade}年代、${awardScope==='all'?'収録済み受賞作':'最高賞受賞作'}を${cell.count}本鑑賞">${value}</button></td>`;}).join('')}<td class="award-row-total">${total}<small>本</small></td></tr>`;}).join('')}</tbody></table>`;
     const cell=state.awardSelection&&scopedCell(state.awardSelection.organization,state.awardSelection.decade);
     const awardHeading=state.awardSelection?'<div class="award-detail-head"><div><span class="award-detail-kicker">AWARD COLLECTION</span><h3>'+escapeHTML(awardDisplayName(state.awardSelection.organization))+' · '+state.awardSelection.decade+'年代</h3><p>'+(awardScope==='all'?'収録済み受賞作':'最高賞受賞作')+'の鑑賞状況 · '+(cell?.count||0)+'本鑑賞済み</p></div><button type="button" class="award-detail-close" data-close-award aria-label="詳細を閉じる">×</button></div>':'';
     const awardEntries=cell?[...cell.entries].sort((a,b)=>Math.max(0,...(b.awardYears||[]).map(Number))-Math.max(0,...(a.awardYears||[]).map(Number))||String(a.title).localeCompare(String(b.title),'ja')):null;

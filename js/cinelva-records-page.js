@@ -660,10 +660,10 @@
   const directorMedalHistory=new Map();
   let directorMedalUpdatePending=false;
   const directorMedalTier=(watched,total,verified)=>{
-    if(verified&&total>0&&watched>=total)return {rank:4,label:'Complete',symbol:'★'};
-    if(watched>=10)return {rank:3,label:'Gold',symbol:'G'};
-    if(watched>=5)return {rank:2,label:'Silver',symbol:'S'};
-    if(watched>=3)return {rank:1,label:'Bronze',symbol:'B'};
+    if(verified&&total>0&&watched>=total)return {rank:4,label:'Complete',symbol:'✦'};
+    if(watched>=10)return {rank:3,label:'Gold',symbol:'★'};
+    if(watched>=5)return {rank:2,label:'Silver',symbol:'★'};
+    if(watched>=3)return {rank:1,label:'Bronze',symbol:'★'};
     return null;
   };
   const ensureDirectorMedalStyles=()=>{
@@ -673,16 +673,16 @@
       /* Compact calendar-inspired medal over the portrait's top-right corner. */
       .director-pick{position:relative}
       .director-card-photo{position:relative;display:block}
-      .director-medal{position:absolute;z-index:2;top:7px;right:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:43px;height:43px;margin:0;padding:3px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:rgba(24,29,37,.88);box-shadow:0 2px 9px #0005;color:#d6b47a;font-size:7px;line-height:1.1;font-weight:700;letter-spacing:.025em;box-sizing:border-box;pointer-events:none}
-      .director-medal-symbol{display:grid;place-items:center;width:21px;height:21px;border:1.5px solid currentColor;border-radius:50%;font:600 11px Georgia,serif}
-      .director-medal[data-tier="1"]{color:#c98e68}
-      .director-medal[data-tier="2"]{color:#c9d0d9}
-      .director-medal[data-tier="3"]{color:#efd08a}
-      .director-medal[data-tier="4"]{color:#ffe5a0;border-color:#e6c978;background:rgba(45,36,20,.94)}
-      .director-medal[data-tier="4"] .director-medal-symbol{border-style:double;border-width:3px}
+      .director-medal{position:absolute;z-index:2;top:6px;right:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:39px;height:45px;padding:3px 2px 5px;box-sizing:border-box;clip-path:polygon(50% 0,89% 12%,100% 42%,87% 76%,50% 100%,13% 76%,0 42%,11% 12%);background:linear-gradient(145deg,#b77b50,#73472f);box-shadow:0 2px 8px #0007;color:#fff4df;font-size:7px;line-height:1.1;font-weight:750;letter-spacing:0;pointer-events:none;text-shadow:0 1px 2px #0007}
+      .director-medal-symbol{display:block;font:normal 18px/1 Georgia,serif;color:inherit}
+      .director-medal[data-tier="1"]{background:linear-gradient(145deg,#d6a17a,#885337);color:#fff1df}
+      .director-medal[data-tier="2"]{background:linear-gradient(145deg,#edf0f3,#8994a3);color:#293645;text-shadow:none}
+      .director-medal[data-tier="3"]{background:linear-gradient(145deg,#f8e5a3,#bc8629);color:#503814;text-shadow:none}
+      .director-medal[data-tier="4"]{background:linear-gradient(145deg,#f4e8b9,#bd922f 55%,#6f5422);color:#382a12;text-shadow:none}
+      .director-medal[data-tier="4"] .director-medal-symbol{font-size:19px}
       .director-medal-earned .director-medal-symbol{animation:cinelva-medal-earned .85s ease-out both}
       @keyframes cinelva-medal-earned{0%{transform:scale(.75);opacity:.45}50%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
-      @media(max-width:390px){.director-medal{top:5px;right:5px;width:37px;height:37px;font-size:6px}.director-medal-symbol{width:18px;height:18px;font-size:10px}}
+      @media(max-width:390px){.director-medal{top:4px;right:4px;width:33px;height:39px;font-size:6px}.director-medal-symbol{font-size:16px}}
       @media(prefers-reduced-motion:reduce){.director-medal-earned .director-medal-symbol{animation:none!important}}
     `;
     document.head.append(style);

@@ -1,10 +1,20 @@
 {
-  "updated_at": "2026-10-19",
+  "updated_at": "2026-10-20",
   "scope": [
     "東京",
     "神奈川"
   ],
   "events": [
+    {
+      "id": "auto-forestmoviefestivaljp-2026-10-03-6fb93247",
+      "date": "2026-10-03",
+      "name": "森の映画祭2026",
+      "area": "神奈川",
+      "place": "わんぱくらんど（いこいの森一帯）",
+      "movie": "",
+      "url": "https://forest-movie-festival.jp/",
+      "source_url": "https://forest-movie-festival.jp/"
+    },
     {
       "id": "hibiya-period",
       "event_id": "hibiya-cinema-2026",
@@ -283,5 +293,6 @@
       "url": "https://www.hibiya.tokyo-midtown.com/hibiya-cinema-festival/line-up/",
       "fee": "無料"
     }
-  ]
+  ],
+  "discovery_count": 1
 }

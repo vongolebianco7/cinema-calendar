@@ -648,8 +648,9 @@
     const awardEntries=cell?[...cell.entries].sort((a,b)=>Math.max(0,...(b.awardYears||[]).map(Number))-Math.max(0,...(a.awardYears||[]).map(Number))||String(a.title).localeCompare(String(b.title),'ja')):null;
     const awardCard=(entry,index)=>{
       const entryId=String(entry.id||'');
-      const record=state.records.find(item=>entryId&&String(item.id)===entryId)
-        ||state.records.find(item=>normalizeRecordSearch(item.title)===normalizeRecordSearch(entry.title));
+      // Award records must never inherit another same-title film's rating or watched state.
+      const record=entryId?(state.records.find(item=>String(item.tmdbId??item.tmdb_id??item.id)===entryId)
+        ||state.records.find(item=>String(item.id)===entryId&&(!item.tmdbId||String(item.tmdbId)===entryId))):null;
       const info=byId.get(entryId)||state.movies.find(item=>entryId&&String(item.id)===entryId)||{};
       const metadata={...info,...(record?enriched(record):{}),poster:info.poster||record?.poster||entry.poster||'',id:entryId||info.id||'',title:info.title||entry.title,year:info.year||entry.year||entry.awardYears?.[0]||''};
       const seen=Boolean(record||entry.watched);
@@ -664,30 +665,12 @@
     };
     // Fill missing award posters via TMDB identity first, and an exact title/release-window match second.
     const awardPosterSearch=async (query,identity)=>{
-      const direct=await identity.fetchOne(query);
-      if(direct?.poster)return direct;
-      // An award ceremony year can differ from the movie's release year.
-      // Resolve by exact normalized title and a narrow date window; never choose ambiguous matches.
-      if(!query.title||!query.year)return null;
+      // Only use the verified TMDB ID. Ambiguous same-title search is prohibited.
+      const id=Number(query.tmdbId||query.id||0);
+      if(!Number.isSafeInteger(id)||id<=0)return null;
       try{
-        const endpoint='https://backend-one-gray-94.vercel.app/api/movies?'+new URLSearchParams({q:query.title,limit:'30'});
-        const response=await fetch(endpoint);
-        if(!response.ok)return null;
-        const data=await response.json();
-        const norm=title=>String(title||'').normalize('NFKC').toLocaleLowerCase().replace(/[^\\p{L}\\p{N}]/gu,'');
-        const title=norm(query.title),year=Number(query.year);
-        const candidates=[...(data.movies||[]),...(data.external||[]),...(data.results||[])];
-        const matches=candidates.filter(item=>{
-          const yearFound=Number(item.release_year||item.year||String(item.release_date||'').slice(0,4));
-          const exact=[item.title,item.original_title,item.originalTitle,item.name].some(value=>norm(value)===title);
-          const id=Number(item.tmdbId??item.tmdb_id??item.id);
-          return Number.isSafeInteger(id)&&id>0&&exact&&yearFound>=year-3&&yearFound<=year+1;
-        });
-        const ids=[...new Set(matches.map(item=>Number(item.tmdbId??item.tmdb_id??item.id)))];
-        if(ids.length!==1)return null;
-        const match=matches.find(item=>identity.posterFor(item));
-        if(!match)return null;
-        return identity.ingest?.({...match,tmdbId:ids[0]})||match;
+        const resolved=await identity.fetchOne(query);
+        return resolved?.poster&&Number(resolved.tmdbId??resolved.tmdb_id??resolved.id)===id?resolved:null;
       }catch{return null;}
     };
     const hydrateAwardPosters=()=>{

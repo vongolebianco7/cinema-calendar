@@ -507,7 +507,7 @@
   function renderAwards() {
     const data = Insights.buildAwardHeatmap(recordMovies().map(enriched), state.awards, state.awardCoverage);
     const decades = [...new Set([...data.decades,1950,1960,1970,1980,1990,2000,2010,2020])].sort((a,b)=>b-a);
-    const awardDisplayName = name => /^(?:BAFTA|British Academy Film Awards|英国アカデミー賞)$/i.test(String(name).trim()) ? '英国アカデミー賞（BAFTA）' : name;
+    const awardDisplayName = name => /^(?:BAFTA|British Academy Film Awards|英国アカデミー賞)$/i.test(String(name).trim()) ? 'BAFTA' : name;
     // Editorial order is intentionally curated, not an objective numeric rating of prestige.
     const priority=['アカデミー賞','カンヌ国際映画祭','ヴェネチア国際映画祭','ベルリン国際映画祭','英国アカデミー賞','BAFTA','ゴールデングローブ賞','日本アカデミー賞','キネマ旬報ベスト・テン'];
     const awardRank=name=>{const index=priority.indexOf(name);return index<0?priority.length:index;};
@@ -528,7 +528,7 @@
       if(/カンヌ/.test(name))return 'パルム・ドール';
       if(/ヴェネチア|ベネチア/.test(name))return '金獅子賞';
       if(/ベルリン/.test(name))return '金熊賞';
-      if(/ゴールデングローブ/.test(name))return '作品賞（ドラマ／コメディ）';
+      if(/ゴールデングローブ/.test(name))return '映画作品賞：ドラマ／ミュージカル・コメディ（同格2部門）';
       if(/日本アカデミー/.test(name))return '最優秀作品賞';
       if(/キネマ旬報/.test(name))return '日本・外国映画ベスト1';
       return '作品賞';

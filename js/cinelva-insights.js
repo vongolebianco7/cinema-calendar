@@ -122,14 +122,8 @@ function buildAwardHeatmap(records, awards, coverage = {}) {
     const movieId = award.tmdb_id ?? award.tmdbId;
     const title = award.film_title || award.title;
     let record = movieId != null ? directorViewingRecord(watched, { tmdbId: movieId }) : null;
-    if (movieId == null && award.match_status !== 'ambiguous') {
-      const candidates = watched.filter(item => {
-        const releaseYear = Number(item.year), expected = Number(award.release_year);
-        const sameYear = expected ? releaseYear === expected : releaseYear > 0 && releaseYear <= year && releaseYear >= year - 2;
-        return sameYear && [item.title,item.originalTitle,item.original_title].map(normalizedText).includes(normalizedText(title));
-      });
-      if (new Set(candidates.map(item => String(item.id))).size === 1) record = candidates[0];
-    }
+    // Unresolved award records are never matched by title: same-title films are common.
+    // Count a film only when its award has a verified TMDB identifier.
     const id = movieId != null ? String(movieId) : record ? String(record.id) : null;
     const workKey = id ? 'tmdb:' + id : award.work_id || `${award.organization}:${year}:${normalizedText(title)}`;
     let entry = cell.entries.find(item => item.workKey === workKey);

@@ -670,20 +670,16 @@
     if(document.getElementById('cinelva-director-medals-style'))return;
     const style=document.createElement('style');style.id='cinelva-director-medals-style';
     style.textContent=`
-      /* Compact calendar-inspired medal over the portrait's top-right corner. */
       .director-pick{position:relative}
       .director-card-photo{position:relative;display:block}
-      .director-medal{position:absolute;z-index:2;top:5px;right:5px;display:grid;place-items:center;width:32px;height:32px;padding:0;border-radius:50%;box-sizing:border-box;background:linear-gradient(145deg,#dba781,#96502e 75%);border:1.5px solid #f2c5a0;box-shadow:0 2px 7px #0008,inset 0 0 0 2px #ffffff26;color:#ffddba;pointer-events:none}
-      .director-medal svg{width:27px;height:27px;overflow:visible;display:block;filter:drop-shadow(0 1px 1px #0005)}
-      .director-medal[data-tier="2"]{background:linear-gradient(145deg,#f3f5f8,#78838f 80%);border-color:#e5eaf0;color:#f9fbff}
-      .director-medal[data-tier="3"]{background:linear-gradient(145deg,#fff1b6,#b77a19 80%);border-color:#ffe39a;color:#fff0a4}
-      .director-medal[data-tier="4"]{background:radial-gradient(circle at 35% 22%,#2579bd,#06326b 65%,#071d46);border:2px solid #f2c765;color:#f7d475;box-shadow:0 2px 8px #0009,0 0 0 1px #6b4c15,inset 0 0 0 2px #ffe4a133}
-      .director-medal[data-tier="4"] svg{width:26px;height:26px}
-      .director-medal[data-tier="4"]::after{content:'✦';position:absolute;top:-10px;right:-7px;font-size:16px;color:#ffe6a1;text-shadow:0 0 7px #ffd35c}
-      .director-medal-earned svg{animation:cinelva-medal-earned .85s ease-out both}
+      .director-medal{position:absolute;z-index:2;top:5px;right:5px;width:32px;height:32px;border-radius:50%;box-sizing:border-box;overflow:hidden;pointer-events:none;box-shadow:0 2px 7px #0008;background-image:url('../assets/E2B78401-CCF3-46CB-B9AB-32CE69754AC0.png');background-repeat:no-repeat;background-size:161.28px 53.76px;background-position:-6px -9.6px}
+      .director-medal[data-tier="2"]{background-position:-45px -9.6px}
+      .director-medal[data-tier="3"]{background-position:-84px -9.6px}
+      .director-medal[data-tier="4"]{background-position:-123px -9.6px}
+      .director-medal-earned{animation:cinelva-medal-earned .85s ease-out both}
       @keyframes cinelva-medal-earned{0%{transform:scale(.75);opacity:.45}50%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
-      @media(max-width:390px){.director-medal{top:4px;right:4px;width:27px;height:27px}.director-medal svg{width:23px;height:23px}.director-medal[data-tier="4"] svg{width:22px;height:22px}}
-      @media(prefers-reduced-motion:reduce){.director-medal-earned svg{animation:none!important}}
+      @media(max-width:390px){.director-medal{top:4px;right:4px}}
+      @media(prefers-reduced-motion:reduce){.director-medal-earned{animation:none!important}}
     `;
     document.head.append(style);
   };
@@ -927,7 +923,7 @@
       directorMedalHistory.set(medalKey,tier?.rank||0);
       const laurel='<path d="M12 23C7 20 5 16 6 11M12 23c5-3 7-7 6-12M6.2 17.7 3.7 15.5 3.5 12.7M7.1 14.4 4.8 11.9 5.3 9.5M8.5 11.1 7 8.3 8.3 6.2M17.8 17.7l2.5-2.2.2-2.8M16.9 14.4l2.3-2.5-.5-2.4M15.5 11.1 17 8.3l-1.3-2.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 18l-3-1 1-3 3 2M6 13l-3-2 2-3 2 3M8 9L7 5l3-2v4M19 18l3-1-1-3-3 2M18 13l3-2-2-3-2 3M16 9l1-4-3-2v4" fill="currentColor" opacity=".9"/>';
       const crown='<path d="M5 16 3.5 8.5 8.5 12l3.5-6 3.5 6 5-3.5L19 16Z" fill="currentColor"/><path d="M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="3.5" cy="8.5" r="1" fill="currentColor"/><circle cx="12" cy="6" r="1" fill="currentColor"/><circle cx="20.5" cy="8.5" r="1" fill="currentColor"/>';
-      const medalMarkup=tier?'<span class="director-medal'+(earned?' director-medal-earned':'')+'" data-tier="'+tier.rank+'" role="img" aria-label="監督コレクション '+tier.label+'達成"><svg viewBox="0 0 24 24" aria-hidden="true">'+laurel+(tier.rank===4?crown:'')+'</svg></span>':'';
+      const medalMarkup=tier?'<span class="director-medal'+(earned?' director-medal-earned':'')+'" data-tier="'+tier.rank+'" role="img" aria-label="監督コレクション '+tier.label+'達成"></span>':'';
       row.innerHTML='<span class="director-card-photo">'+photoMarkup+medalMarkup+'</span><span class="director-pick-name">'+escapeHTML(group.name)+'</span><span class="director-card-stats"><span><b>'+seen+'</b><small>レビュー済み</small></span><span><b>'+(complete?total:'—')+'</b><small>監督作品総数</small></span></span>';
       row.setAttribute('aria-label',group.name+'、レビュー済み'+seen+'本、監督作品総数'+(complete?total+'本':'未確認'));
       row.addEventListener('click',()=>{if(row.classList.contains('active')){row.classList.remove('active');row.setAttribute('aria-expanded','false');detail.hidden=true;}else show(group,row);});

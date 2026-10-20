@@ -1,7 +1,139 @@
 {
   "generated_at": "2026-10-17",
-  "note": "主催者公式発表・公式アーカイブで確認した受賞情報。2010〜2022年は主要賞・主要国際映画祭の最高賞とアカデミー監督賞を補完。アカデミー作品賞は第1回（1927/28年対象・1929年授賞）から全授賞年を収録。年は授賞式年。",
+  "note": "主催者公式発表・公式アーカイブで確認した受賞情報。2010〜2022年は主要賞・主要国際映画祭の最高賞とアカデミー監督賞を補完。アカデミー作品賞は第1回（1927/28年対象・1929年授賞）から全授賞年を収録。年は授賞式年。 1950〜2009年の国際映画祭・BAFTA最高作品賞受賞作を公開歴代受賞作一覧を参照して追加。映画ID未照合はunresolvedとして保存。",
   "awards": [
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "オリジナル脚本賞",
+      "title": "Sinners — Ryan Coogler",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Ryan Coogler",
+      "film_title": "Sinners",
+      "work_id": "award-work:24134fb6b95ce799f46e",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "主演女優賞",
+      "title": "Hamnet — Jessie Buckley",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Jessie Buckley",
+      "film_title": "Hamnet",
+      "work_id": "award-work:87e6d35dc08de63df518",
+      "match_status": "resolved",
+      "tmdb_id": 858024,
+      "release_year": 2026,
+      "display_title": "ハムネット",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/858024",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "主演男優賞",
+      "title": "I Swear — Robert Aramayo",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Robert Aramayo",
+      "film_title": "I Swear",
+      "work_id": "award-work:c0b291294d2168dd0ae5",
+      "match_status": "resolved",
+      "tmdb_id": 1317149,
+      "release_year": 2025,
+      "display_title": "I Swear",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1317149",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "One Battle After Another",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "One Battle After Another",
+      "work_id": "award-work:9a7ba221e9311f3c36a7",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "助演女優賞",
+      "title": "Sinners — Wunmi Mosaku",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Wunmi Mosaku",
+      "film_title": "Sinners",
+      "work_id": "award-work:24134fb6b95ce799f46e",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "助演男優賞",
+      "title": "One Battle After Another — Sean Penn",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Sean Penn",
+      "film_title": "One Battle After Another",
+      "work_id": "award-work:9a7ba221e9311f3c36a7",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "監督賞",
+      "title": "One Battle After Another — Paul Thomas Anderson",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "recipient": "Paul Thomas Anderson",
+      "film_title": "One Battle After Another",
+      "work_id": "award-work:9a7ba221e9311f3c36a7",
+      "match_status": "resolved",
+      "tmdb_id": 1054867,
+      "release_year": 2025,
+      "display_title": "ワン・バトル・アフター・アナザー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1054867",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "脚色賞",
+      "title": "One Battle After Another — Paul Thomas Anderson",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "One Battle After Another — Paul Thomas Anderson",
+      "work_id": "award-work:478a34b00cfafbf7b84a",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "BAFTA",
+      "category": "英国作品賞",
+      "title": "Hamnet",
+      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+      "film_title": "Hamnet",
+      "work_id": "award-work:87e6d35dc08de63df518",
+      "match_status": "resolved",
+      "tmdb_id": 858024,
+      "release_year": 2026,
+      "display_title": "ハムネット",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/858024",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
     {
       "year": 2026,
       "organization": "アカデミー賞",
@@ -154,6 +286,54 @@
     },
     {
       "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "女優賞",
+      "title": "WOMAN UNKNOWN — Mathilde Arcel",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "recipient": "Mathilde Arcel",
+      "film_title": "WOMAN UNKNOWN",
+      "work_id": "award-work:c9090a2b7d0575a53167",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "審査員大賞",
+      "title": "POSSIBLE LOVE",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "film_title": "POSSIBLE LOVE",
+      "work_id": "award-work:16e092f29446395d2a1a",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "監督賞",
+      "title": "DAU — Ilya Khrzhanovsky",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "recipient": "Ilya Khrzhanovsky",
+      "film_title": "DAU",
+      "work_id": "award-work:81cae5e5334494f52f30",
+      "match_status": "resolved",
+      "tmdb_id": 1734147,
+      "release_year": 2026,
+      "display_title": "DAU",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1734147",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2026,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "WOMAN UNKNOWN",
+      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
+      "film_title": "WOMAN UNKNOWN",
+      "work_id": "award-work:c9090a2b7d0575a53167",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2026,
       "organization": "カンヌ国際映画祭",
       "category": "カメラ・ドール",
       "title": "BEN’IMANA",
@@ -285,54 +465,6 @@
     },
     {
       "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "女優賞",
-      "title": "WOMAN UNKNOWN — Mathilde Arcel",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "recipient": "Mathilde Arcel",
-      "film_title": "WOMAN UNKNOWN",
-      "work_id": "award-work:c9090a2b7d0575a53167",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "審査員大賞",
-      "title": "POSSIBLE LOVE",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "film_title": "POSSIBLE LOVE",
-      "work_id": "award-work:16e092f29446395d2a1a",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "監督賞",
-      "title": "DAU — Ilya Khrzhanovsky",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "recipient": "Ilya Khrzhanovsky",
-      "film_title": "DAU",
-      "work_id": "award-work:81cae5e5334494f52f30",
-      "match_status": "resolved",
-      "tmdb_id": 1734147,
-      "release_year": 2026,
-      "display_title": "DAU",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1734147",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "金獅子賞",
-      "title": "WOMAN UNKNOWN",
-      "source": "https://www.labiennale.org/en/news/official-awards-83rd-venice-international-film-festival",
-      "film_title": "WOMAN UNKNOWN",
-      "work_id": "award-work:c9090a2b7d0575a53167",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
       "organization": "ゴールデングローブ賞",
       "category": "アニメーション作品賞",
       "title": "KPop Demon Hunters",
@@ -416,138 +548,6 @@
       "film_title": "The Secret Agent",
       "work_id": "award-work:1791080dcb31b123b716",
       "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "オリジナル脚本賞",
-      "title": "Sinners — Ryan Coogler",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Ryan Coogler",
-      "film_title": "Sinners",
-      "work_id": "award-work:24134fb6b95ce799f46e",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "主演女優賞",
-      "title": "Hamnet — Jessie Buckley",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Jessie Buckley",
-      "film_title": "Hamnet",
-      "work_id": "award-work:87e6d35dc08de63df518",
-      "match_status": "resolved",
-      "tmdb_id": 858024,
-      "release_year": 2026,
-      "display_title": "ハムネット",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/858024",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "主演男優賞",
-      "title": "I Swear — Robert Aramayo",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Robert Aramayo",
-      "film_title": "I Swear",
-      "work_id": "award-work:c0b291294d2168dd0ae5",
-      "match_status": "resolved",
-      "tmdb_id": 1317149,
-      "release_year": 2025,
-      "display_title": "I Swear",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1317149",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "作品賞",
-      "title": "One Battle After Another",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "One Battle After Another",
-      "work_id": "award-work:9a7ba221e9311f3c36a7",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "助演女優賞",
-      "title": "Sinners — Wunmi Mosaku",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Wunmi Mosaku",
-      "film_title": "Sinners",
-      "work_id": "award-work:24134fb6b95ce799f46e",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "助演男優賞",
-      "title": "One Battle After Another — Sean Penn",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Sean Penn",
-      "film_title": "One Battle After Another",
-      "work_id": "award-work:9a7ba221e9311f3c36a7",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "監督賞",
-      "title": "One Battle After Another — Paul Thomas Anderson",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "recipient": "Paul Thomas Anderson",
-      "film_title": "One Battle After Another",
-      "work_id": "award-work:9a7ba221e9311f3c36a7",
-      "match_status": "resolved",
-      "tmdb_id": 1054867,
-      "release_year": 2025,
-      "display_title": "ワン・バトル・アフター・アナザー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1054867",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "脚色賞",
-      "title": "One Battle After Another — Paul Thomas Anderson",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "One Battle After Another — Paul Thomas Anderson",
-      "work_id": "award-work:478a34b00cfafbf7b84a",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2026,
-      "organization": "BAFTA",
-      "category": "英国作品賞",
-      "title": "Hamnet",
-      "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
-      "film_title": "Hamnet",
-      "work_id": "award-work:87e6d35dc08de63df518",
-      "match_status": "resolved",
-      "tmdb_id": 858024,
-      "release_year": 2026,
-      "display_title": "ハムネット",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/858024",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
@@ -639,6 +639,70 @@
     },
     {
       "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "女優賞",
+      "title": "The Sun Rises on Us All — Xin Zhilei",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Xin Zhilei",
+      "film_title": "The Sun Rises on Us All",
+      "work_id": "award-work:0e1015a5fd26cf8e9fd7",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "審査員大賞",
+      "title": "The Voice of Hind Rajab",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "film_title": "The Voice of Hind Rajab",
+      "work_id": "award-work:a3790890bb5934a7b70d",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "男優賞",
+      "title": "La Grazia — Toni Servillo",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Toni Servillo",
+      "film_title": "La Grazia",
+      "work_id": "award-work:e7a09ba0bf6be6df2df0",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "監督賞",
+      "title": "The Smashing Machine — Benny Safdie",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Benny Safdie",
+      "film_title": "The Smashing Machine",
+      "work_id": "award-work:65f991ee05c8136d2f07",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "脚本賞",
+      "title": "At Work — Valérie Donzelli / Gilles Marchand",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "recipient": "Valérie Donzelli / Gilles Marchand",
+      "film_title": "At Work",
+      "work_id": "award-work:202b295c26ca2fa56b9e",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Father Mother Sister Brother",
+      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
+      "film_title": "Father Mother Sister Brother",
+      "work_id": "award-work:081738ad87e692fd3373",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2025,
       "organization": "カンヌ国際映画祭",
       "category": "グランプリ",
       "title": "Sentimental Value",
@@ -719,67 +783,103 @@
     },
     {
       "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "女優賞",
-      "title": "The Sun Rises on Us All — Xin Zhilei",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Xin Zhilei",
-      "film_title": "The Sun Rises on Us All",
-      "work_id": "award-work:0e1015a5fd26cf8e9fd7",
+      "selection_year": 2024,
+      "organization": "キネマ旬報ベスト・テン",
+      "category": "外国映画作品賞（第1位）",
+      "title": "オッペンハイマー",
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
+      "reviewed_at": "2026-10-17",
+      "film_title": "オッペンハイマー",
+      "work_id": "award-work:3a4640928bf7a468c117",
+      "tmdb_id": 872585,
+      "release_year": 2023,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "selection_year": 2024,
+      "organization": "キネマ旬報ベスト・テン",
+      "category": "文化映画作品賞（第1位）",
+      "title": "正義の行方",
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
+      "reviewed_at": "2026-10-17",
+      "film_title": "正義の行方",
+      "work_id": "award-work:b1099ddda1a49be98bed",
+      "match_status": "resolved",
+      "tmdb_id": 1253027,
+      "release_year": 2024,
+      "display_title": "正義の行方",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1253027",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "selection_year": 2024,
+      "organization": "キネマ旬報ベスト・テン",
+      "category": "日本映画作品賞（第1位）",
+      "title": "夜明けのすべて",
+      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
+      "reviewed_at": "2026-10-17",
+      "film_title": "夜明けのすべて",
+      "work_id": "award-work:44a51380bec1d26a7e9d",
+      "tmdb_id": 1086011,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "ゴールデングローブ賞",
+      "category": "アニメーション作品賞",
+      "title": "Flow",
+      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
+      "film_title": "Flow",
+      "work_id": "award-work:35e29eee0c1b48763f3d",
       "match_status": "unresolved"
     },
     {
       "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "審査員大賞",
-      "title": "The Voice of Hind Rajab",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "film_title": "The Voice of Hind Rajab",
-      "work_id": "award-work:a3790890bb5934a7b70d",
+      "organization": "ゴールデングローブ賞",
+      "category": "作品賞（ドラマ）",
+      "title": "The Brutalist",
+      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
+      "film_title": "The Brutalist",
+      "work_id": "award-work:2f34a841f420e8118935",
       "match_status": "unresolved"
     },
     {
       "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "男優賞",
-      "title": "La Grazia — Toni Servillo",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Toni Servillo",
-      "film_title": "La Grazia",
-      "work_id": "award-work:e7a09ba0bf6be6df2df0",
-      "match_status": "unresolved"
+      "organization": "ゴールデングローブ賞",
+      "category": "作品賞（ミュージカル／コメディ）",
+      "title": "Emilia Pérez",
+      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
+      "film_title": "Emilia Pérez",
+      "work_id": "award-work:f6b4594ff04af7c4d317",
+      "match_status": "resolved",
+      "tmdb_id": 974950,
+      "release_year": 2025,
+      "display_title": "エミリア・ペレス",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/974950",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "監督賞",
-      "title": "The Smashing Machine — Benny Safdie",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Benny Safdie",
-      "film_title": "The Smashing Machine",
-      "work_id": "award-work:65f991ee05c8136d2f07",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "脚本賞",
-      "title": "At Work — Valérie Donzelli / Gilles Marchand",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "recipient": "Valérie Donzelli / Gilles Marchand",
-      "film_title": "At Work",
-      "work_id": "award-work:202b295c26ca2fa56b9e",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "金獅子賞",
-      "title": "Father Mother Sister Brother",
-      "source": "https://www.labiennale.org/en/news/official-awards-82nd-venice-international-film-festival",
-      "film_title": "Father Mother Sister Brother",
-      "work_id": "award-work:081738ad87e692fd3373",
-      "match_status": "unresolved"
+      "organization": "ゴールデングローブ賞",
+      "category": "非英語映画賞",
+      "title": "Emilia Pérez",
+      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
+      "film_title": "Emilia Pérez",
+      "work_id": "award-work:f6b4594ff04af7c4d317",
+      "match_status": "resolved",
+      "tmdb_id": 974950,
+      "release_year": 2025,
+      "display_title": "エミリア・ペレス",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/974950",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
@@ -861,54 +961,233 @@
     },
     {
       "year": 2025,
-      "organization": "ゴールデングローブ賞",
-      "category": "アニメーション作品賞",
-      "title": "Flow",
-      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
-      "film_title": "Flow",
-      "work_id": "award-work:35e29eee0c1b48763f3d",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ゴールデングローブ賞",
-      "category": "作品賞（ドラマ）",
-      "title": "The Brutalist",
-      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
-      "film_title": "The Brutalist",
-      "work_id": "award-work:2f34a841f420e8118935",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2025,
-      "organization": "ゴールデングローブ賞",
-      "category": "作品賞（ミュージカル／コメディ）",
-      "title": "Emilia Pérez",
-      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
-      "film_title": "Emilia Pérez",
-      "work_id": "award-work:f6b4594ff04af7c4d317",
+      "organization": "日本アカデミー賞",
+      "category": "最優秀アニメーション作品賞",
+      "title": "ルックバック",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "ルックバック",
+      "work_id": "award-work:82ee1c9d00ac51799644",
       "match_status": "resolved",
-      "tmdb_id": 974950,
-      "release_year": 2025,
-      "display_title": "エミリア・ペレス",
+      "tmdb_id": 1244492,
+      "release_year": 2024,
+      "display_title": "ルックバック",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/974950",
+      "identity_source": "https://www.themoviedb.org/movie/1244492",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2025,
-      "organization": "ゴールデングローブ賞",
-      "category": "非英語映画賞",
-      "title": "Emilia Pérez",
-      "source": "https://goldenglobes.com/articles/the-82nd-golden-globe-awards-winners/",
-      "film_title": "Emilia Pérez",
-      "work_id": "award-work:f6b4594ff04af7c4d317",
+      "organization": "日本アカデミー賞",
+      "category": "最優秀主演女優賞",
+      "title": "あんのこと",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "あんのこと",
+      "work_id": "award-work:4e53433dc788ea1eff29",
       "match_status": "resolved",
-      "tmdb_id": 974950,
-      "release_year": 2025,
-      "display_title": "エミリア・ペレス",
+      "tmdb_id": 1219439,
+      "release_year": 2024,
+      "display_title": "あんのこと",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/974950",
+      "identity_source": "https://www.themoviedb.org/movie/1219439",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀主演男優賞",
+      "title": "正体",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "正体",
+      "work_id": "award-work:40ec281b8c346ac2af9a",
+      "tmdb_id": 1356890,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀作品賞",
+      "title": "侍タイムスリッパー",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "侍タイムスリッパー",
+      "work_id": "award-work:d05b607ba5a4eea7cc0c",
+      "match_status": "resolved",
+      "tmdb_id": 1287819,
+      "release_year": 2024,
+      "display_title": "侍タイムスリッパー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1287819",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀助演女優賞",
+      "title": "正体",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "正体",
+      "work_id": "award-work:40ec281b8c346ac2af9a",
+      "tmdb_id": 1356890,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀助演男優賞",
+      "title": "キングダム 大将軍の帰還",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "キングダム 大将軍の帰還",
+      "work_id": "award-work:ef6b7c66d2d71244416c",
+      "tmdb_id": 1241320,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀外国作品賞",
+      "title": "オッペンハイマー",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "オッペンハイマー",
+      "work_id": "award-work:11050ba400b212009675",
+      "tmdb_id": 872585,
+      "release_year": 2023,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀撮影賞",
+      "title": "キングダム 大将軍の帰還",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "キングダム 大将軍の帰還",
+      "work_id": "award-work:ef6b7c66d2d71244416c",
+      "tmdb_id": 1241320,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀照明賞",
+      "title": "キングダム 大将軍の帰還",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "キングダム 大将軍の帰還",
+      "work_id": "award-work:ef6b7c66d2d71244416c",
+      "tmdb_id": 1241320,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀監督賞",
+      "title": "正体",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "正体",
+      "work_id": "award-work:40ec281b8c346ac2af9a",
+      "tmdb_id": 1356890,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀編集賞",
+      "title": "侍タイムスリッパー",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "侍タイムスリッパー",
+      "work_id": "award-work:d05b607ba5a4eea7cc0c",
+      "match_status": "resolved",
+      "tmdb_id": 1287819,
+      "release_year": 2024,
+      "display_title": "侍タイムスリッパー",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1287819",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀美術賞",
+      "title": "はたらく細胞",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "はたらく細胞",
+      "work_id": "award-work:a34040a3833de5ae11e6",
+      "match_status": "resolved",
+      "tmdb_id": 1303162,
+      "release_year": 2024,
+      "display_title": "はたらく細胞",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1303162",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀脚本賞",
+      "title": "ラストマイル",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "ラストマイル",
+      "work_id": "award-work:694d5ff877c09108586c",
+      "match_status": "resolved",
+      "tmdb_id": 1276108,
+      "release_year": 2024,
+      "display_title": "ラストマイル",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1276108",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀録音賞",
+      "title": "キングダム 大将軍の帰還",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "キングダム 大将軍の帰還",
+      "work_id": "award-work:ef6b7c66d2d71244416c",
+      "tmdb_id": 1241320,
+      "release_year": 2024,
+      "match_status": "resolved",
+      "match_method": "unique_catalog_title_and_release_year"
+    },
+    {
+      "year": 2025,
+      "organization": "日本アカデミー賞",
+      "category": "最優秀音楽賞",
+      "title": "カラオケ行こ！",
+      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
+      "reviewed_at": "2026-10-17",
+      "film_title": "カラオケ行こ！",
+      "work_id": "award-work:dad75195c5d8ecf093f2",
+      "match_status": "resolved",
+      "tmdb_id": 1070507,
+      "release_year": 2024,
+      "display_title": "カラオケ行こ！",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1070507",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1064,53 +1343,6 @@
     },
     {
       "year": 2024,
-      "organization": "カンヌ国際映画祭",
-      "category": "グランプリ",
-      "title": "All We Imagine as Light",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
-      "film_title": "All We Imagine as Light",
-      "work_id": "award-work:ab3751c43bfb06139ffa",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Anora",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
-      "film_title": "Anora",
-      "work_id": "award-work:dee20b0f14a713ac8772",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "カンヌ国際映画祭",
-      "category": "審査員賞",
-      "title": "Emilia Pérez",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
-      "film_title": "Emilia Pérez",
-      "work_id": "award-work:670945e5d8e940ff2fd5",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2024,
-      "organization": "カンヌ国際映画祭",
-      "category": "監督賞",
-      "title": "Grand Tour — Miguel Gomes",
-      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
-      "recipient": "Miguel Gomes",
-      "film_title": "Grand Tour",
-      "work_id": "award-work:62e41e1770044bf36e4f",
-      "match_status": "resolved",
-      "tmdb_id": 1098709,
-      "release_year": 2024,
-      "display_title": "Grand Tour",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1098709",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2024,
       "organization": "ヴェネチア国際映画祭",
       "category": "女優賞",
       "title": "Babygirl — Nicole Kidman",
@@ -1162,6 +1394,53 @@
       "film_title": "The Room Next Door",
       "work_id": "award-work:e228f3573143d6452243",
       "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "カンヌ国際映画祭",
+      "category": "グランプリ",
+      "title": "All We Imagine as Light",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
+      "film_title": "All We Imagine as Light",
+      "work_id": "award-work:ab3751c43bfb06139ffa",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Anora",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
+      "film_title": "Anora",
+      "work_id": "award-work:dee20b0f14a713ac8772",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "カンヌ国際映画祭",
+      "category": "審査員賞",
+      "title": "Emilia Pérez",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
+      "film_title": "Emilia Pérez",
+      "work_id": "award-work:670945e5d8e940ff2fd5",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2024,
+      "organization": "カンヌ国際映画祭",
+      "category": "監督賞",
+      "title": "Grand Tour — Miguel Gomes",
+      "source": "https://www.festival-cannes.com/en/press/press-releases/the-77th-festival-de-cannes-winners-list/",
+      "recipient": "Miguel Gomes",
+      "film_title": "Grand Tour",
+      "work_id": "award-work:62e41e1770044bf36e4f",
+      "match_status": "resolved",
+      "tmdb_id": 1098709,
+      "release_year": 2024,
+      "display_title": "Grand Tour",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/1098709",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2023,
@@ -1375,6 +1654,22 @@
     },
     {
       "year": 2022,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Power of the Dog",
+      "source": "https://www.bafta.org/awards/film/",
+      "film_title": "The Power of the Dog",
+      "work_id": "award-work:dd99d1aaec4364bc5b5c",
+      "match_status": "resolved",
+      "tmdb_id": 600583,
+      "release_year": 2021,
+      "display_title": "パワー・オブ・ザ・ドッグ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/600583",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2022,
       "organization": "アカデミー賞",
       "category": "作品賞",
       "title": "CODA",
@@ -1405,16 +1700,6 @@
     },
     {
       "year": 2022,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Triangle of Sadness",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Triangle of Sadness",
-      "work_id": "award-work:5ee75ecc847259231cf0",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2022,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "All the Beauty and the Bloodshed",
@@ -1431,12 +1716,12 @@
     },
     {
       "year": 2022,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Alcarràs",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Alcarràs",
-      "work_id": "award-work:580864d068ae2460fa67",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Triangle of Sadness",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Triangle of Sadness",
+      "work_id": "award-work:5ee75ecc847259231cf0",
       "match_status": "unresolved"
     },
     {
@@ -1457,18 +1742,28 @@
     },
     {
       "year": 2022,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Alcarràs",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Alcarràs",
+      "work_id": "award-work:580864d068ae2460fa67",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2021,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "The Power of the Dog",
+      "title": "Nomadland",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "The Power of the Dog",
-      "work_id": "award-work:dd99d1aaec4364bc5b5c",
+      "film_title": "Nomadland",
+      "work_id": "award-work:cb436ea00607bb90c02d",
       "match_status": "resolved",
-      "tmdb_id": 600583,
+      "tmdb_id": 581734,
       "release_year": 2021,
-      "display_title": "パワー・オブ・ザ・ドッグ",
+      "display_title": "ノマドランド",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/600583",
+      "identity_source": "https://www.themoviedb.org/movie/581734",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1506,6 +1801,16 @@
     },
     {
       "year": 2021,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Happening",
+      "source": "https://www.labiennale.org/en/history/recent-years",
+      "film_title": "Happening",
+      "work_id": "award-work:eb2c8138161e48da4b2b",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2021,
       "organization": "カンヌ国際映画祭",
       "category": "パルム・ドール",
       "title": "Titane",
@@ -1519,26 +1824,6 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/630240",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2021,
-      "organization": "ヴェネチア国際映画祭",
-      "category": "金獅子賞",
-      "title": "Happening",
-      "source": "https://www.labiennale.org/en/history/recent-years",
-      "film_title": "Happening",
-      "work_id": "award-work:eb2c8138161e48da4b2b",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2021,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Bad Luck Banging or Loony Porn",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Bad Luck Banging or Loony Porn",
-      "work_id": "award-work:b74fd1c4950160432504",
-      "match_status": "unresolved"
     },
     {
       "year": 2021,
@@ -1558,18 +1843,28 @@
     },
     {
       "year": 2021,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Bad Luck Banging or Loony Porn",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Bad Luck Banging or Loony Porn",
+      "work_id": "award-work:b74fd1c4950160432504",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2020,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "Nomadland",
+      "title": "1917",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "Nomadland",
-      "work_id": "award-work:cb436ea00607bb90c02d",
+      "film_title": "1917",
+      "work_id": "award-work:5a2f9ab923c1696e71d7",
       "match_status": "resolved",
-      "tmdb_id": 581734,
-      "release_year": 2021,
-      "display_title": "ノマドランド",
+      "tmdb_id": 530915,
+      "release_year": 2020,
+      "display_title": "1917 命をかけた伝令",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/581734",
+      "identity_source": "https://www.themoviedb.org/movie/530915",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1605,16 +1900,6 @@
     },
     {
       "year": 2020,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "There Is No Evil",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "There Is No Evil",
-      "work_id": "award-work:2fede367a110a72637e8",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2020,
       "organization": "ゴールデングローブ賞",
       "category": "作品賞（ドラマ）",
       "title": "1917",
@@ -1631,19 +1916,26 @@
     },
     {
       "year": 2020,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "There Is No Evil",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "There Is No Evil",
+      "work_id": "award-work:2fede367a110a72637e8",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2019,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "1917",
+      "title": "Roma",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "1917",
-      "work_id": "award-work:5a2f9ab923c1696e71d7",
+      "film_title": "Roma",
+      "work_id": "award-work:8b5d2000920249bad4e8",
       "match_status": "resolved",
-      "tmdb_id": 530915,
-      "release_year": 2020,
-      "display_title": "1917 命をかけた伝令",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/530915",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+      "tmdb_id": 426426,
+      "release_year": 2018,
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2019,
@@ -1677,16 +1969,6 @@
     },
     {
       "year": 2019,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Parasite",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Parasite",
-      "work_id": "award-work:77ff1ba42fa6d130ac05",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2019,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Joker",
@@ -1703,12 +1985,12 @@
     },
     {
       "year": 2019,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Synonyms",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Synonyms",
-      "work_id": "award-work:be8c7f430e45d0e2aa5b",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Parasite",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Parasite",
+      "work_id": "award-work:77ff1ba42fa6d130ac05",
       "match_status": "unresolved"
     },
     {
@@ -1729,16 +2011,29 @@
     },
     {
       "year": 2019,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Synonyms",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Synonyms",
+      "work_id": "award-work:be8c7f430e45d0e2aa5b",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2018,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "Roma",
+      "title": "Three Billboards Outside Ebbing, Missouri",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "Roma",
-      "work_id": "award-work:8b5d2000920249bad4e8",
+      "film_title": "Three Billboards Outside Ebbing, Missouri",
+      "work_id": "award-work:94233927a44c2ad95817",
       "match_status": "resolved",
-      "tmdb_id": 426426,
+      "tmdb_id": 359940,
       "release_year": 2018,
-      "match_method": "unique_catalog_title_and_release_year"
+      "display_title": "スリー・ビルボード",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/359940",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2018,
@@ -1775,16 +2070,6 @@
     },
     {
       "year": 2018,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Shoplifters",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Shoplifters",
-      "work_id": "award-work:4fa0e1d4f34933bc1fca",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2018,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Roma",
@@ -1798,12 +2083,12 @@
     },
     {
       "year": 2018,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Touch Me Not",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Touch Me Not",
-      "work_id": "award-work:a9be3da6690a392776f8",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Shoplifters",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Shoplifters",
+      "work_id": "award-work:4fa0e1d4f34933bc1fca",
       "match_status": "unresolved"
     },
     {
@@ -1824,18 +2109,28 @@
     },
     {
       "year": 2018,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Touch Me Not",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Touch Me Not",
+      "work_id": "award-work:a9be3da6690a392776f8",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2017,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "Three Billboards Outside Ebbing, Missouri",
+      "title": "La La Land",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "Three Billboards Outside Ebbing, Missouri",
-      "work_id": "award-work:94233927a44c2ad95817",
+      "film_title": "La La Land",
+      "work_id": "award-work:f34a5bdc0c293c186a1c",
       "match_status": "resolved",
-      "tmdb_id": 359940,
-      "release_year": 2018,
-      "display_title": "スリー・ビルボード",
+      "tmdb_id": 313369,
+      "release_year": 2017,
+      "display_title": "ラ・ラ・ランド",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/359940",
+      "identity_source": "https://www.themoviedb.org/movie/313369",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1867,16 +2162,6 @@
     },
     {
       "year": 2017,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "The Square",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "The Square",
-      "work_id": "award-work:d13b50e9a1989ee79dee",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2017,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "The Shape of Water",
@@ -1893,12 +2178,12 @@
     },
     {
       "year": 2017,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "On Body and Soul",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "On Body and Soul",
-      "work_id": "award-work:b697fd2815fbc4fee55e",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Square",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "The Square",
+      "work_id": "award-work:d13b50e9a1989ee79dee",
       "match_status": "unresolved"
     },
     {
@@ -1913,18 +2198,28 @@
     },
     {
       "year": 2017,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "On Body and Soul",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "On Body and Soul",
+      "work_id": "award-work:b697fd2815fbc4fee55e",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2016,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "La La Land",
+      "title": "The Revenant",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "La La Land",
-      "work_id": "award-work:f34a5bdc0c293c186a1c",
+      "film_title": "The Revenant",
+      "work_id": "award-work:63f4dd4108fc5c17421c",
       "match_status": "resolved",
-      "tmdb_id": 313369,
-      "release_year": 2017,
-      "display_title": "ラ・ラ・ランド",
+      "tmdb_id": 281957,
+      "release_year": 2016,
+      "display_title": "レヴェナント：蘇えりし者",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/313369",
+      "identity_source": "https://www.themoviedb.org/movie/281957",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -1956,19 +2251,6 @@
     },
     {
       "year": 2016,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "I, Daniel Blake",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "I, Daniel Blake",
-      "work_id": "award-work:6bcc20cd599ee7041342",
-      "match_status": "resolved",
-      "tmdb_id": 374473,
-      "release_year": 2016,
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2016,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "The Woman Who Left",
@@ -1979,13 +2261,16 @@
     },
     {
       "year": 2016,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Fire at Sea",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Fire at Sea",
-      "work_id": "award-work:a8227e5823d141cd7aa4",
-      "match_status": "unresolved"
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "I, Daniel Blake",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "I, Daniel Blake",
+      "work_id": "award-work:6bcc20cd599ee7041342",
+      "match_status": "resolved",
+      "tmdb_id": 374473,
+      "release_year": 2016,
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2016,
@@ -2005,18 +2290,28 @@
     },
     {
       "year": 2016,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Fire at Sea",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Fire at Sea",
+      "work_id": "award-work:a8227e5823d141cd7aa4",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2015,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "The Revenant",
+      "title": "Boyhood",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "The Revenant",
-      "work_id": "award-work:63f4dd4108fc5c17421c",
+      "film_title": "Boyhood",
+      "work_id": "award-work:fe13199a37005066bca7",
       "match_status": "resolved",
-      "tmdb_id": 281957,
-      "release_year": 2016,
-      "display_title": "レヴェナント：蘇えりし者",
+      "tmdb_id": 85350,
+      "release_year": 2014,
+      "display_title": "6才のボクが、大人になるまで。",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/281957",
+      "identity_source": "https://www.themoviedb.org/movie/85350",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -2054,16 +2349,6 @@
     },
     {
       "year": 2015,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Dheepan",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Dheepan",
-      "work_id": "award-work:1f038e6e456a238aada0",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2015,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "From Afar",
@@ -2074,19 +2359,13 @@
     },
     {
       "year": 2015,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Taxi",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Taxi",
-      "work_id": "award-work:e27ab1227613fe23f1bc",
-      "match_status": "resolved",
-      "tmdb_id": 345628,
-      "release_year": 2015,
-      "display_title": "タクシードライバー 奔放な女",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/345628",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Dheepan",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Dheepan",
+      "work_id": "award-work:1f038e6e456a238aada0",
+      "match_status": "unresolved"
     },
     {
       "year": 2015,
@@ -2106,18 +2385,34 @@
     },
     {
       "year": 2015,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Taxi",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Taxi",
+      "work_id": "award-work:e27ab1227613fe23f1bc",
+      "match_status": "resolved",
+      "tmdb_id": 345628,
+      "release_year": 2015,
+      "display_title": "タクシードライバー 奔放な女",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/345628",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2014,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "Boyhood",
+      "title": "12 Years a Slave",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "Boyhood",
-      "work_id": "award-work:fe13199a37005066bca7",
+      "film_title": "12 Years a Slave",
+      "work_id": "award-work:b77903136f2be199f5e5",
       "match_status": "resolved",
-      "tmdb_id": 85350,
+      "tmdb_id": 76203,
       "release_year": 2014,
-      "display_title": "6才のボクが、大人になるまで。",
+      "display_title": "それでも夜は明ける",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/85350",
+      "identity_source": "https://www.themoviedb.org/movie/76203",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -2152,16 +2447,6 @@
     },
     {
       "year": 2014,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Winter Sleep",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Winter Sleep",
-      "work_id": "award-work:b4d599799a5f3a54520a",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2014,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "A Pigeon Sat on a Branch Reflecting on Existence",
@@ -2172,12 +2457,12 @@
     },
     {
       "year": 2014,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Black Coal, Thin Ice",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Black Coal, Thin Ice",
-      "work_id": "award-work:9191b2937a7f281b413c",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Winter Sleep",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Winter Sleep",
+      "work_id": "award-work:b4d599799a5f3a54520a",
       "match_status": "unresolved"
     },
     {
@@ -2198,18 +2483,28 @@
     },
     {
       "year": 2014,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Black Coal, Thin Ice",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Black Coal, Thin Ice",
+      "work_id": "award-work:9191b2937a7f281b413c",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2013,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "12 Years a Slave",
+      "title": "Argo",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "12 Years a Slave",
-      "work_id": "award-work:b77903136f2be199f5e5",
+      "film_title": "Argo",
+      "work_id": "award-work:2e4abd4707718ac9dab1",
       "match_status": "resolved",
-      "tmdb_id": 76203,
-      "release_year": 2014,
-      "display_title": "それでも夜は明ける",
+      "tmdb_id": 68734,
+      "release_year": 2012,
+      "display_title": "アルゴ",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/76203",
+      "identity_source": "https://www.themoviedb.org/movie/68734",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -2247,16 +2542,6 @@
     },
     {
       "year": 2013,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Blue Is the Warmest Colour",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Blue Is the Warmest Colour",
-      "work_id": "award-work:d6eda979ba0cf54df64b",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2013,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Sacro GRA",
@@ -2273,12 +2558,12 @@
     },
     {
       "year": 2013,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Child's Pose",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Child's Pose",
-      "work_id": "award-work:05271040c55670c9f81b",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Blue Is the Warmest Colour",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Blue Is the Warmest Colour",
+      "work_id": "award-work:d6eda979ba0cf54df64b",
       "match_status": "unresolved"
     },
     {
@@ -2299,19 +2584,23 @@
     },
     {
       "year": 2013,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Child's Pose",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Child's Pose",
+      "work_id": "award-work:05271040c55670c9f81b",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2012,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "Argo",
+      "title": "The Artist",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "Argo",
-      "work_id": "award-work:2e4abd4707718ac9dab1",
-      "match_status": "resolved",
-      "tmdb_id": 68734,
-      "release_year": 2012,
-      "display_title": "アルゴ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/68734",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+      "film_title": "The Artist",
+      "work_id": "award-work:13593ae6438dbc7a066c",
+      "match_status": "unresolved"
     },
     {
       "year": 2012,
@@ -2336,19 +2625,6 @@
     },
     {
       "year": 2012,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Amour",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Amour",
-      "work_id": "award-work:d95d6914c9aafa27e73e",
-      "match_status": "resolved",
-      "tmdb_id": 86837,
-      "release_year": 2012,
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2012,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Pietà",
@@ -2359,13 +2635,16 @@
     },
     {
       "year": 2012,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Caesar Must Die",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Caesar Must Die",
-      "work_id": "award-work:7d84ec75029c6ce08166",
-      "match_status": "unresolved"
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Amour",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Amour",
+      "work_id": "award-work:d95d6914c9aafa27e73e",
+      "match_status": "resolved",
+      "tmdb_id": 86837,
+      "release_year": 2012,
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2012,
@@ -2385,13 +2664,29 @@
     },
     {
       "year": 2012,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Caesar Must Die",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Caesar Must Die",
+      "work_id": "award-work:7d84ec75029c6ce08166",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2011,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "The Artist",
+      "title": "The King's Speech",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "The Artist",
-      "work_id": "award-work:13593ae6438dbc7a066c",
-      "match_status": "unresolved"
+      "film_title": "The King's Speech",
+      "work_id": "award-work:d37073f14e8492f539c5",
+      "match_status": "resolved",
+      "tmdb_id": 45269,
+      "release_year": 2011,
+      "display_title": "英国王のスピーチ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/45269",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2011,
@@ -2428,22 +2723,6 @@
     },
     {
       "year": 2011,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "The Tree of Life",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "The Tree of Life",
-      "work_id": "award-work:0317929655b2e8572a5d",
-      "match_status": "resolved",
-      "tmdb_id": 8967,
-      "release_year": 2011,
-      "display_title": "ツリー・オブ・ライフ",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/8967",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2011,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Faust",
@@ -2460,13 +2739,19 @@
     },
     {
       "year": 2011,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "A Separation",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "A Separation",
-      "work_id": "award-work:02b34405919574401d88",
-      "match_status": "unresolved"
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Tree of Life",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "The Tree of Life",
+      "work_id": "award-work:0317929655b2e8572a5d",
+      "match_status": "resolved",
+      "tmdb_id": 8967,
+      "release_year": 2011,
+      "display_title": "ツリー・オブ・ライフ",
+      "match_method": "tmdb_api_exact_title_release_window",
+      "identity_source": "https://www.themoviedb.org/movie/8967",
+      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
       "year": 2011,
@@ -2486,18 +2771,28 @@
     },
     {
       "year": 2011,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "A Separation",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "A Separation",
+      "work_id": "award-work:02b34405919574401d88",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2010,
       "organization": "BAFTA",
       "category": "作品賞",
-      "title": "The King's Speech",
+      "title": "The Hurt Locker",
       "source": "https://www.bafta.org/awards/film/",
-      "film_title": "The King's Speech",
-      "work_id": "award-work:d37073f14e8492f539c5",
+      "film_title": "The Hurt Locker",
+      "work_id": "award-work:bc25a16f8407536310fd",
       "match_status": "resolved",
-      "tmdb_id": 45269,
-      "release_year": 2011,
-      "display_title": "英国王のスピーチ",
+      "tmdb_id": 12162,
+      "release_year": 2010,
+      "display_title": "ハート・ロッカー",
       "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/45269",
+      "identity_source": "https://www.themoviedb.org/movie/12162",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
@@ -2535,16 +2830,6 @@
     },
     {
       "year": 2010,
-      "organization": "カンヌ国際映画祭",
-      "category": "パルム・ドール",
-      "title": "Uncle Boonmee Who Can Recall His Past",
-      "source": "https://www.festival-cannes.com/en/retrospective/",
-      "film_title": "Uncle Boonmee Who Can Recall His Past",
-      "work_id": "award-work:5c3922f4e54559d97f7f",
-      "match_status": "unresolved"
-    },
-    {
-      "year": 2010,
       "organization": "ヴェネチア国際映画祭",
       "category": "金獅子賞",
       "title": "Somewhere",
@@ -2561,12 +2846,12 @@
     },
     {
       "year": 2010,
-      "organization": "ベルリン国際映画祭",
-      "category": "金熊賞",
-      "title": "Honey",
-      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
-      "film_title": "Honey",
-      "work_id": "award-work:ffec200b90d54775a4a4",
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Uncle Boonmee Who Can Recall His Past",
+      "source": "https://www.festival-cannes.com/en/retrospective/",
+      "film_title": "Uncle Boonmee Who Can Recall His Past",
+      "work_id": "award-work:5c3922f4e54559d97f7f",
       "match_status": "unresolved"
     },
     {
@@ -2587,19 +2872,23 @@
     },
     {
       "year": 2010,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Honey",
+      "source": "https://www.berlinale.de/en/archive/awards-juries/awards.html",
+      "film_title": "Honey",
+      "work_id": "award-work:ffec200b90d54775a4a4",
+      "match_status": "unresolved"
+    },
+    {
+      "year": 2009,
       "organization": "BAFTA",
       "category": "作品賞",
       "title": "The Hurt Locker",
-      "source": "https://www.bafta.org/awards/film/",
       "film_title": "The Hurt Locker",
-      "work_id": "award-work:bc25a16f8407536310fd",
-      "match_status": "resolved",
-      "tmdb_id": 12162,
-      "release_year": 2010,
-      "display_title": "ハート・ロッカー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/12162",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2009:the-hurt-locker"
     },
     {
       "year": 2009,
@@ -2618,6 +2907,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2009,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Lebanon",
+      "film_title": "Lebanon",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2009:lebanon"
+    },
+    {
+      "year": 2009,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The White Ribbon",
+      "film_title": "The White Ribbon",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2009:the-white-ribbon"
+    },
+    {
+      "year": 2009,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Milk of Sorrow",
+      "film_title": "The Milk of Sorrow",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2009:the-milk-of-sorrow"
+    },
+    {
+      "year": 2008,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Slumdog Millionaire",
+      "film_title": "Slumdog Millionaire",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2008:slumdog-millionaire"
+    },
+    {
       "year": 2008,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2632,6 +2961,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/6977",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2008,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Wrestler",
+      "film_title": "The Wrestler",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2008:the-wrestler"
+    },
+    {
+      "year": 2008,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Class",
+      "film_title": "The Class",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2008:the-class"
+    },
+    {
+      "year": 2008,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Elite Squad",
+      "film_title": "Elite Squad",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2008:elite-squad"
+    },
+    {
+      "year": 2007,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Atonement",
+      "film_title": "Atonement",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2007:atonement"
     },
     {
       "year": 2007,
@@ -2650,6 +3019,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2007,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Lust, Caution",
+      "film_title": "Lust, Caution",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2007:lust-caution"
+    },
+    {
+      "year": 2007,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "4 Months, 3 Weeks and 2 Days",
+      "film_title": "4 Months, 3 Weeks and 2 Days",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2007:4-months-3-weeks-and-2-days"
+    },
+    {
+      "year": 2007,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Tuya's Marriage",
+      "film_title": "Tuya's Marriage",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2007:tuya-s-marriage"
+    },
+    {
+      "year": 2006,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Queen",
+      "film_title": "The Queen",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2006:the-queen"
+    },
+    {
       "year": 2006,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2658,6 +3067,46 @@
       "film_title": "Crash",
       "work_id": "award-work:965230a48a6338a1bd09",
       "match_status": "unresolved"
+    },
+    {
+      "year": 2006,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Still Life",
+      "film_title": "Still Life",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2006:still-life"
+    },
+    {
+      "year": 2006,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Wind That Shakes the Barley",
+      "film_title": "The Wind That Shakes the Barley",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2006:the-wind-that-shakes-the-barley"
+    },
+    {
+      "year": 2006,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Grbavica",
+      "film_title": "Grbavica",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2006:grbavica"
+    },
+    {
+      "year": 2005,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Brokeback Mountain",
+      "film_title": "Brokeback Mountain",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2005:brokeback-mountain"
     },
     {
       "year": 2005,
@@ -2676,6 +3125,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2005,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Brokeback Mountain",
+      "film_title": "Brokeback Mountain",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2005:brokeback-mountain"
+    },
+    {
+      "year": 2005,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "L'Enfant",
+      "film_title": "L'Enfant",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2005:l-enfant"
+    },
+    {
+      "year": 2005,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "U-Carmen eKhayelitsha",
+      "film_title": "U-Carmen eKhayelitsha",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2005:u-carmen-ekhayelitsha"
+    },
+    {
+      "year": 2004,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Aviator",
+      "film_title": "The Aviator",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2004:the-aviator"
+    },
+    {
       "year": 2004,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2692,6 +3181,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2004,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Vera Drake",
+      "film_title": "Vera Drake",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2004:vera-drake"
+    },
+    {
+      "year": 2004,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Fahrenheit 9/11",
+      "film_title": "Fahrenheit 9/11",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2004:fahrenheit-9-11"
+    },
+    {
+      "year": 2004,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Head-On",
+      "film_title": "Head-On",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2004:head-on"
+    },
+    {
+      "year": 2003,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Lord of the Rings: The Return of the King",
+      "film_title": "The Lord of the Rings: The Return of the King",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2003:the-lord-of-the-rings-the-return-of-the-king"
+    },
+    {
       "year": 2003,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2700,6 +3229,46 @@
       "film_title": "Chicago",
       "work_id": "award-work:ba481f09fbb3ba5c88f0",
       "match_status": "unresolved"
+    },
+    {
+      "year": 2003,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Return",
+      "film_title": "The Return",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2003:the-return"
+    },
+    {
+      "year": 2003,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Elephant",
+      "film_title": "Elephant",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2003:elephant"
+    },
+    {
+      "year": 2003,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "In This World",
+      "film_title": "In This World",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2003:in-this-world"
+    },
+    {
+      "year": 2002,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Pianist",
+      "film_title": "The Pianist",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2002:the-pianist"
     },
     {
       "year": 2002,
@@ -2718,6 +3287,56 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2002,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Magdalene Sisters",
+      "film_title": "The Magdalene Sisters",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2002:the-magdalene-sisters"
+    },
+    {
+      "year": 2002,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Pianist",
+      "film_title": "The Pianist",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2002:the-pianist"
+    },
+    {
+      "year": 2002,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Bloody Sunday",
+      "film_title": "Bloody Sunday",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2002:bloody-sunday"
+    },
+    {
+      "year": 2002,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Spirited Away",
+      "film_title": "Spirited Away",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2002:spirited-away"
+    },
+    {
+      "year": 2001,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "film_title": "The Lord of the Rings: The Fellowship of the Ring",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2001:the-lord-of-the-rings-the-fellowship-of-the-ring"
+    },
+    {
       "year": 2001,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2732,6 +3351,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/98",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 2001,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Monsoon Wedding",
+      "film_title": "Monsoon Wedding",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2001:monsoon-wedding"
+    },
+    {
+      "year": 2001,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Son's Room",
+      "film_title": "The Son's Room",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2001:the-son-s-room"
+    },
+    {
+      "year": 2001,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Intimacy",
+      "film_title": "Intimacy",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2001:intimacy"
+    },
+    {
+      "year": 2000,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Gladiator",
+      "film_title": "Gladiator",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:2000:gladiator"
     },
     {
       "year": 2000,
@@ -2750,6 +3409,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 2000,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Circle",
+      "film_title": "The Circle",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:2000:the-circle"
+    },
+    {
+      "year": 2000,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Dancer in the Dark",
+      "film_title": "Dancer in the Dark",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:2000:dancer-in-the-dark"
+    },
+    {
+      "year": 2000,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Magnolia",
+      "film_title": "Magnolia",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:2000:magnolia"
+    },
+    {
+      "year": 1999,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "American Beauty",
+      "film_title": "American Beauty",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1999:american-beauty"
+    },
+    {
       "year": 1999,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2764,6 +3463,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/1934",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1999,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Not One Less",
+      "film_title": "Not One Less",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1999:not-one-less"
+    },
+    {
+      "year": 1999,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Rosetta",
+      "film_title": "Rosetta",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1999:rosetta"
+    },
+    {
+      "year": 1999,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Thin Red Line",
+      "film_title": "The Thin Red Line",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1999:the-thin-red-line"
+    },
+    {
+      "year": 1998,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Shakespeare in Love",
+      "film_title": "Shakespeare in Love",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1998:shakespeare-in-love"
     },
     {
       "year": 1998,
@@ -2782,6 +3521,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1998,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Way We Laughed",
+      "film_title": "The Way We Laughed",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1998:the-way-we-laughed"
+    },
+    {
+      "year": 1998,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Eternity and a Day",
+      "film_title": "Eternity and a Day",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1998:eternity-and-a-day"
+    },
+    {
+      "year": 1998,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Central Station",
+      "film_title": "Central Station",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1998:central-station"
+    },
+    {
+      "year": 1997,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Full Monty",
+      "film_title": "The Full Monty",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1997:the-full-monty"
+    },
+    {
       "year": 1997,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2796,6 +3575,56 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/409",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1997,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Hana-bi",
+      "film_title": "Hana-bi",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1997:hana-bi"
+    },
+    {
+      "year": 1997,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Eel",
+      "film_title": "The Eel",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1997:the-eel"
+    },
+    {
+      "year": 1997,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Taste of Cherry",
+      "film_title": "Taste of Cherry",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1997:taste-of-cherry"
+    },
+    {
+      "year": 1997,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The People vs. Larry Flynt",
+      "film_title": "The People vs. Larry Flynt",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1997:the-people-vs-larry-flynt"
+    },
+    {
+      "year": 1996,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The English Patient",
+      "film_title": "The English Patient",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1996:the-english-patient"
     },
     {
       "year": 1996,
@@ -2814,6 +3643,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1996,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Michael Collins",
+      "film_title": "Michael Collins",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1996:michael-collins"
+    },
+    {
+      "year": 1996,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Secrets & Lies",
+      "film_title": "Secrets & Lies",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1996:secrets-lies"
+    },
+    {
+      "year": 1996,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Sense and Sensibility",
+      "film_title": "Sense and Sensibility",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1996:sense-and-sensibility"
+    },
+    {
+      "year": 1995,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Sense and Sensibility",
+      "film_title": "Sense and Sensibility",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1995:sense-and-sensibility"
+    },
+    {
       "year": 1995,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2828,6 +3697,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/13",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1995,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Cyclo",
+      "film_title": "Cyclo",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1995:cyclo"
+    },
+    {
+      "year": 1995,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Underground",
+      "film_title": "Underground",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1995:underground"
+    },
+    {
+      "year": 1995,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Bait",
+      "film_title": "The Bait",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1995:the-bait"
+    },
+    {
+      "year": 1994,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Four Weddings and a Funeral",
+      "film_title": "Four Weddings and a Funeral",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1994:four-weddings-and-a-funeral"
     },
     {
       "year": 1994,
@@ -2846,6 +3755,56 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1994,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Before the Rain",
+      "film_title": "Before the Rain",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1994:before-the-rain"
+    },
+    {
+      "year": 1994,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Vive L'Amour",
+      "film_title": "Vive L'Amour",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1994:vive-l-amour"
+    },
+    {
+      "year": 1994,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Pulp Fiction",
+      "film_title": "Pulp Fiction",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1994:pulp-fiction"
+    },
+    {
+      "year": 1994,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "In the Name of the Father",
+      "film_title": "In the Name of the Father",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1994:in-the-name-of-the-father"
+    },
+    {
+      "year": 1993,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Schindler's List",
+      "film_title": "Schindler's List",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1993:schindler-s-list"
+    },
+    {
       "year": 1993,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2860,6 +3819,76 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/33",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1993,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Short Cuts",
+      "film_title": "Short Cuts",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1993:short-cuts"
+    },
+    {
+      "year": 1993,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Three Colours: Blue",
+      "film_title": "Three Colours: Blue",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1993:three-colours-blue"
+    },
+    {
+      "year": 1993,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Farewell My Concubine",
+      "film_title": "Farewell My Concubine",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1993:farewell-my-concubine"
+    },
+    {
+      "year": 1993,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Piano",
+      "film_title": "The Piano",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1993:the-piano"
+    },
+    {
+      "year": 1993,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Wedding Banquet",
+      "film_title": "The Wedding Banquet",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1993:the-wedding-banquet"
+    },
+    {
+      "year": 1993,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Woman Sesame Oil Maker",
+      "film_title": "Woman Sesame Oil Maker",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1993:woman-sesame-oil-maker"
+    },
+    {
+      "year": 1992,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Howards End",
+      "film_title": "Howards End",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1992:howards-end"
     },
     {
       "year": 1992,
@@ -2878,6 +3907,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1992,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Story of Qiu Ju",
+      "film_title": "The Story of Qiu Ju",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1992:the-story-of-qiu-ju"
+    },
+    {
+      "year": 1992,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Best Intentions",
+      "film_title": "The Best Intentions",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1992:the-best-intentions"
+    },
+    {
+      "year": 1992,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Grand Canyon",
+      "film_title": "Grand Canyon",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1992:grand-canyon"
+    },
+    {
+      "year": 1991,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Commitments",
+      "film_title": "The Commitments",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1991:the-commitments"
+    },
+    {
       "year": 1991,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2892,6 +3961,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/581",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1991,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Close to Eden",
+      "film_title": "Close to Eden",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1991:close-to-eden"
+    },
+    {
+      "year": 1991,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Barton Fink",
+      "film_title": "Barton Fink",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1991:barton-fink"
+    },
+    {
+      "year": 1991,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The House of Smiles",
+      "film_title": "The House of Smiles",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1991:the-house-of-smiles"
+    },
+    {
+      "year": 1990,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Goodfellas",
+      "film_title": "Goodfellas",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1990:goodfellas"
     },
     {
       "year": 1990,
@@ -2910,6 +4019,56 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1990,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Rosencrantz & Guildenstern Are Dead",
+      "film_title": "Rosencrantz & Guildenstern Are Dead",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1990:rosencrantz-guildenstern-are-dead"
+    },
+    {
+      "year": 1990,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Wild at Heart",
+      "film_title": "Wild at Heart",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1990:wild-at-heart"
+    },
+    {
+      "year": 1990,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Larks on a String",
+      "film_title": "Larks on a String",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1990:larks-on-a-string"
+    },
+    {
+      "year": 1990,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Music Box",
+      "film_title": "Music Box",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1990:music-box"
+    },
+    {
+      "year": 1989,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Dead Poets Society",
+      "film_title": "Dead Poets Society",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1989:dead-poets-society"
+    },
+    {
       "year": 1989,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2924,6 +4083,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/380",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1989,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "A City of Sadness",
+      "film_title": "A City of Sadness",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1989:a-city-of-sadness"
+    },
+    {
+      "year": 1989,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Sex, Lies, and Videotape",
+      "film_title": "Sex, Lies, and Videotape",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1989:sex-lies-and-videotape"
+    },
+    {
+      "year": 1989,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Rain Man",
+      "film_title": "Rain Man",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1989:rain-man"
+    },
+    {
+      "year": 1988,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Last Emperor",
+      "film_title": "The Last Emperor",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1988:the-last-emperor"
     },
     {
       "year": 1988,
@@ -2942,6 +4141,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1988,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Legend of the Holy Drinker",
+      "film_title": "The Legend of the Holy Drinker",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1988:the-legend-of-the-holy-drinker"
+    },
+    {
+      "year": 1988,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Pelle the Conqueror",
+      "film_title": "Pelle the Conqueror",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1988:pelle-the-conqueror"
+    },
+    {
+      "year": 1988,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Red Sorghum",
+      "film_title": "Red Sorghum",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1988:red-sorghum"
+    },
+    {
+      "year": 1987,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Jean de Florette",
+      "film_title": "Jean de Florette",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1987:jean-de-florette"
+    },
+    {
       "year": 1987,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2956,6 +4195,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/792",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1987,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Au revoir les enfants",
+      "film_title": "Au revoir les enfants",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1987:au-revoir-les-enfants"
+    },
+    {
+      "year": 1987,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Under the Sun of Satan",
+      "film_title": "Under the Sun of Satan",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1987:under-the-sun-of-satan"
+    },
+    {
+      "year": 1987,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Theme",
+      "film_title": "The Theme",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1987:the-theme"
+    },
+    {
+      "year": 1986,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "A Room with a View",
+      "film_title": "A Room with a View",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1986:a-room-with-a-view"
     },
     {
       "year": 1986,
@@ -2974,6 +4253,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1986,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Green Ray",
+      "film_title": "The Green Ray",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1986:the-green-ray"
+    },
+    {
+      "year": 1986,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Mission",
+      "film_title": "The Mission",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1986:the-mission"
+    },
+    {
+      "year": 1986,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Stammheim",
+      "film_title": "Stammheim",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1986:stammheim"
+    },
+    {
+      "year": 1985,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Purple Rose of Cairo",
+      "film_title": "The Purple Rose of Cairo",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1985:the-purple-rose-of-cairo"
+    },
+    {
       "year": 1985,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -2988,6 +4307,56 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/279",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1985,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Vagabond",
+      "film_title": "Vagabond",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1985:vagabond"
+    },
+    {
+      "year": 1985,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "When Father Was Away on Business",
+      "film_title": "When Father Was Away on Business",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1985:when-father-was-away-on-business"
+    },
+    {
+      "year": 1985,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Wetherby",
+      "film_title": "Wetherby",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1985:wetherby"
+    },
+    {
+      "year": 1985,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Woman and the Stranger",
+      "film_title": "The Woman and the Stranger",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1985:the-woman-and-the-stranger"
+    },
+    {
+      "year": 1984,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Killing Fields",
+      "film_title": "The Killing Fields",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1984:the-killing-fields"
     },
     {
       "year": 1984,
@@ -3006,6 +4375,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1984,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "A Year of the Quiet Sun",
+      "film_title": "A Year of the Quiet Sun",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1984:a-year-of-the-quiet-sun"
+    },
+    {
+      "year": 1984,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Paris, Texas",
+      "film_title": "Paris, Texas",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1984:paris-texas"
+    },
+    {
+      "year": 1984,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Love Streams",
+      "film_title": "Love Streams",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1984:love-streams"
+    },
+    {
+      "year": 1983,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Educating Rita",
+      "film_title": "Educating Rita",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1983:educating-rita"
+    },
+    {
       "year": 1983,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3020,6 +4429,56 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/783",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1983,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "First Name: Carmen",
+      "film_title": "First Name: Carmen",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1983:first-name-carmen"
+    },
+    {
+      "year": 1983,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Ballad of Narayama",
+      "film_title": "The Ballad of Narayama",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1983:the-ballad-of-narayama"
+    },
+    {
+      "year": 1983,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Ascendancy",
+      "film_title": "Ascendancy",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1983:ascendancy"
+    },
+    {
+      "year": 1983,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "La colmena",
+      "film_title": "La colmena",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1983:la-colmena"
+    },
+    {
+      "year": 1982,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Gandhi",
+      "film_title": "Gandhi",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1982:gandhi"
     },
     {
       "year": 1982,
@@ -3038,6 +4497,56 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1982,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The State of Things",
+      "film_title": "The State of Things",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1982:the-state-of-things"
+    },
+    {
+      "year": 1982,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Missing",
+      "film_title": "Missing",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1982:missing"
+    },
+    {
+      "year": 1982,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Yol",
+      "film_title": "Yol",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1982:yol"
+    },
+    {
+      "year": 1982,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Veronika Voss",
+      "film_title": "Veronika Voss",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1982:veronika-voss"
+    },
+    {
+      "year": 1981,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Chariots of Fire",
+      "film_title": "Chariots of Fire",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1981:chariots-of-fire"
+    },
+    {
       "year": 1981,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3052,6 +4561,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/16619",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1981,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Marianne and Juliane",
+      "film_title": "Marianne and Juliane",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1981:marianne-and-juliane"
+    },
+    {
+      "year": 1981,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Man of Iron",
+      "film_title": "Man of Iron",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1981:man-of-iron"
+    },
+    {
+      "year": 1981,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Deprisa, deprisa",
+      "film_title": "Deprisa, deprisa",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1981:deprisa-deprisa"
+    },
+    {
+      "year": 1980,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Elephant Man",
+      "film_title": "The Elephant Man",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1980:the-elephant-man"
     },
     {
       "year": 1980,
@@ -3070,6 +4619,76 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1980,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Atlantic City",
+      "film_title": "Atlantic City",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1980:atlantic-city"
+    },
+    {
+      "year": 1980,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "John Cassavetes",
+      "film_title": "John Cassavetes",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1980:john-cassavetes"
+    },
+    {
+      "year": 1980,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "All That Jazz",
+      "film_title": "All That Jazz",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1980:all-that-jazz"
+    },
+    {
+      "year": 1980,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Kagemusha",
+      "film_title": "Kagemusha",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1980:kagemusha"
+    },
+    {
+      "year": 1980,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Heartland",
+      "film_title": "Heartland",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1980:heartland"
+    },
+    {
+      "year": 1980,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Palermo or Wolfsburg",
+      "film_title": "Palermo or Wolfsburg",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1980:palermo-or-wolfsburg"
+    },
+    {
+      "year": 1979,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Manhattan",
+      "film_title": "Manhattan",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1979:manhattan"
+    },
+    {
       "year": 1979,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3084,6 +4703,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/11778",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1979,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Apocalypse Now",
+      "film_title": "Apocalypse Now",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1979:apocalypse-now"
+    },
+    {
+      "year": 1979,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Tin Drum",
+      "film_title": "The Tin Drum",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1979:the-tin-drum"
+    },
+    {
+      "year": 1979,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "David",
+      "film_title": "David",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1979:david"
+    },
+    {
+      "year": 1978,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Julia",
+      "film_title": "Julia",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1978:julia"
     },
     {
       "year": 1978,
@@ -3102,6 +4761,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1978,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Tree of Wooden Clogs",
+      "film_title": "The Tree of Wooden Clogs",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1978:the-tree-of-wooden-clogs"
+    },
+    {
+      "year": 1978,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Ascensor",
+      "film_title": "Ascensor",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1978:ascensor"
+    },
+    {
+      "year": 1978,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "What Max Said",
+      "film_title": "What Max Said",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1978:what-max-said"
+    },
+    {
+      "year": 1977,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Annie Hall",
+      "film_title": "Annie Hall",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1977:annie-hall"
+    },
+    {
       "year": 1977,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3110,6 +4809,36 @@
       "film_title": "Rocky",
       "work_id": "award-work:1817132b44c601c53d2a",
       "match_status": "unresolved"
+    },
+    {
+      "year": 1977,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Padre Padrone",
+      "film_title": "Padre Padrone",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1977:padre-padrone"
+    },
+    {
+      "year": 1977,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Ascent",
+      "film_title": "The Ascent",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1977:the-ascent"
+    },
+    {
+      "year": 1976,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "One Flew Over the Cuckoo's Nest",
+      "film_title": "One Flew Over the Cuckoo's Nest",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1976:one-flew-over-the-cuckoo-s-nest"
     },
     {
       "year": 1976,
@@ -3128,6 +4857,36 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1976,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Taxi Driver",
+      "film_title": "Taxi Driver",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1976:taxi-driver"
+    },
+    {
+      "year": 1976,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Buffalo Bill and the Indians, or Sitting Bull's History Lesson",
+      "film_title": "Buffalo Bill and the Indians, or Sitting Bull's History Lesson",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1976:buffalo-bill-and-the-indians-or-sitting-bull-s-history-lesson"
+    },
+    {
+      "year": 1975,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Alice Doesn't Live Here Anymore",
+      "film_title": "Alice Doesn't Live Here Anymore",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1975:alice-doesn-t-live-here-anymore"
+    },
+    {
       "year": 1975,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3142,6 +4901,36 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/240",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1975,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Chronicle of the Years of Fire",
+      "film_title": "Chronicle of the Years of Fire",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1975:chronicle-of-the-years-of-fire"
+    },
+    {
+      "year": 1975,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Adoption",
+      "film_title": "Adoption",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1975:adoption"
+    },
+    {
+      "year": 1974,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Lacombe, Lucien",
+      "film_title": "Lacombe, Lucien",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1974:lacombe-lucien"
     },
     {
       "year": 1974,
@@ -3160,6 +4949,26 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1974,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Apprenticeship of Duddy Kravitz",
+      "film_title": "The Apprenticeship of Duddy Kravitz",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1974:the-apprenticeship-of-duddy-kravitz"
+    },
+    {
+      "year": 1973,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Day for Night",
+      "film_title": "Day for Night",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1973:day-for-night"
+    },
+    {
       "year": 1973,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3174,6 +4983,26 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/238",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1973,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Distant Thunder",
+      "film_title": "Distant Thunder",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1973:distant-thunder"
+    },
+    {
+      "year": 1972,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Cabaret",
+      "film_title": "Cabaret",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1972:cabaret"
     },
     {
       "year": 1972,
@@ -3192,6 +5021,26 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1972,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Canterbury Tales",
+      "film_title": "The Canterbury Tales",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1972:the-canterbury-tales"
+    },
+    {
+      "year": 1971,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Sunday Bloody Sunday",
+      "film_title": "Sunday Bloody Sunday",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1971:sunday-bloody-sunday"
+    },
+    {
       "year": 1971,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3206,6 +5055,26 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/11202",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1971,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "The Garden of the Finzi-Continis",
+      "film_title": "The Garden of the Finzi-Continis",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1971:the-garden-of-the-finzi-continis"
+    },
+    {
+      "year": 1970,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Butch Cassidy and the Sundance Kid",
+      "film_title": "Butch Cassidy and the Sundance Kid",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1970:butch-cassidy-and-the-sundance-kid"
     },
     {
       "year": 1970,
@@ -3225,6 +5094,16 @@
     },
     {
       "year": 1969,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Midnight Cowboy",
+      "film_title": "Midnight Cowboy",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1969:midnight-cowboy"
+    },
+    {
+      "year": 1969,
       "organization": "アカデミー賞",
       "category": "作品賞",
       "title": "Oliver!",
@@ -3238,6 +5117,26 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/17917",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1969,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Early Works",
+      "film_title": "Early Works",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1969:early-works"
+    },
+    {
+      "year": 1968,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Graduate",
+      "film_title": "The Graduate",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1968:the-graduate"
     },
     {
       "year": 1968,
@@ -3256,6 +5155,36 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1968,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Artists Under the Big Top: Perplexed",
+      "film_title": "Artists Under the Big Top: Perplexed",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1968:artists-under-the-big-top-perplexed"
+    },
+    {
+      "year": 1968,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Who Saw Him Die?",
+      "film_title": "Who Saw Him Die?",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1968:who-saw-him-die-"
+    },
+    {
+      "year": 1967,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "A Man For All Seasons",
+      "film_title": "A Man For All Seasons",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1967:a-man-for-all-seasons"
+    },
+    {
       "year": 1967,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3270,6 +5199,36 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/874",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1967,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Belle de Jour",
+      "film_title": "Belle de Jour",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1967:belle-de-jour"
+    },
+    {
+      "year": 1967,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Le Départ",
+      "film_title": "Le Départ",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1967:le-d-part"
+    },
+    {
+      "year": 1966,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Who's Afraid of Virginia Woolf?",
+      "film_title": "Who's Afraid of Virginia Woolf?",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1966:who-s-afraid-of-virginia-woolf-"
     },
     {
       "year": 1966,
@@ -3288,6 +5247,36 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1966,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "The Battle of Algiers",
+      "film_title": "The Battle of Algiers",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1966:the-battle-of-algiers"
+    },
+    {
+      "year": 1966,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Cul-de-Sac",
+      "film_title": "Cul-de-Sac",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1966:cul-de-sac"
+    },
+    {
+      "year": 1965,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "My Fair Lady",
+      "film_title": "My Fair Lady",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1965:my-fair-lady"
+    },
+    {
       "year": 1965,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3302,6 +5291,36 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/11113",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1965,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Sandra",
+      "film_title": "Sandra",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1965:sandra"
+    },
+    {
+      "year": 1965,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Alphaville",
+      "film_title": "Alphaville",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1965:alphaville"
+    },
+    {
+      "year": 1964,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Dr. Strangelove",
+      "film_title": "Dr. Strangelove",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1964:dr-strangelove"
     },
     {
       "year": 1964,
@@ -3320,6 +5339,36 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1964,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Red Desert",
+      "film_title": "Red Desert",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1964:red-desert"
+    },
+    {
+      "year": 1964,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Dry Summer",
+      "film_title": "Dry Summer",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1964:dry-summer"
+    },
+    {
+      "year": 1963,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Tom Jones",
+      "film_title": "Tom Jones",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1963:tom-jones"
+    },
+    {
       "year": 1963,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3334,6 +5383,56 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/947",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1963,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Hands over the City",
+      "film_title": "Hands over the City",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1963:hands-over-the-city"
+    },
+    {
+      "year": 1963,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Leopard",
+      "film_title": "The Leopard",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1963:the-leopard"
+    },
+    {
+      "year": 1963,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Bushido, Samurai Saga",
+      "film_title": "Bushido, Samurai Saga",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1963:bushido-samurai-saga"
+    },
+    {
+      "year": 1963,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "To Bed or Not to Bed",
+      "film_title": "To Bed or Not to Bed",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1963:to-bed-or-not-to-bed"
+    },
+    {
+      "year": 1962,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Lawrence of Arabia",
+      "film_title": "Lawrence of Arabia",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1962:lawrence-of-arabia"
     },
     {
       "year": 1962,
@@ -3352,6 +5451,66 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1962,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Family Diary",
+      "film_title": "Family Diary",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1962:family-diary"
+    },
+    {
+      "year": 1962,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Ivan's Childhood",
+      "film_title": "Ivan's Childhood",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1962:ivan-s-childhood"
+    },
+    {
+      "year": 1962,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "O Pagador de Promessas",
+      "film_title": "O Pagador de Promessas",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1962:o-pagador-de-promessas"
+    },
+    {
+      "year": 1962,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "A Kind of Loving",
+      "film_title": "A Kind of Loving",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1962:a-kind-of-loving"
+    },
+    {
+      "year": 1961,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Ballad of a Soldier",
+      "film_title": "Ballad of a Soldier",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1961:ballad-of-a-soldier"
+    },
+    {
+      "year": 1961,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Hustler",
+      "film_title": "The Hustler",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1961:the-hustler"
+    },
+    {
       "year": 1961,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3366,6 +5525,56 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/284",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1961,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Last Year at Marienbad",
+      "film_title": "Last Year at Marienbad",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1961:last-year-at-marienbad"
+    },
+    {
+      "year": 1961,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Long Absence",
+      "film_title": "The Long Absence",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1961:the-long-absence"
+    },
+    {
+      "year": 1961,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Viridiana",
+      "film_title": "Viridiana",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1961:viridiana"
+    },
+    {
+      "year": 1961,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "La Notte",
+      "film_title": "La Notte",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1961:la-notte"
+    },
+    {
+      "year": 1960,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Apartment",
+      "film_title": "The Apartment",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1960:the-apartment"
     },
     {
       "year": 1960,
@@ -3384,6 +5593,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1960,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Tomorrow Is My Turn",
+      "film_title": "Tomorrow Is My Turn",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1960:tomorrow-is-my-turn"
+    },
+    {
+      "year": 1960,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "La dolce vita",
+      "film_title": "La dolce vita",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1960:la-dolce-vita"
+    },
+    {
+      "year": 1960,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "El Lazarillo de Tormes",
+      "film_title": "El Lazarillo de Tormes",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1960:el-lazarillo-de-tormes"
+    },
+    {
+      "year": 1959,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Ben-Hur",
+      "film_title": "Ben-Hur",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1959:ben-hur"
+    },
+    {
       "year": 1959,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3398,6 +5647,46 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/17281",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1959,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "General Della Rovere",
+      "film_title": "General Della Rovere",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1959:general-della-rovere"
+    },
+    {
+      "year": 1959,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Black Orpheus",
+      "film_title": "Black Orpheus",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1959:black-orpheus"
+    },
+    {
+      "year": 1959,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Les Cousins",
+      "film_title": "Les Cousins",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1959:les-cousins"
+    },
+    {
+      "year": 1958,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Room at the Top",
+      "film_title": "Room at the Top",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1958:room-at-the-top"
     },
     {
       "year": 1958,
@@ -3416,6 +5705,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1958,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Rickshaw Man",
+      "film_title": "Rickshaw Man",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1958:rickshaw-man"
+    },
+    {
+      "year": 1958,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Cranes Are Flying",
+      "film_title": "The Cranes Are Flying",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1958:the-cranes-are-flying"
+    },
+    {
+      "year": 1958,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Wild Strawberries",
+      "film_title": "Wild Strawberries",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1958:wild-strawberries"
+    },
+    {
+      "year": 1957,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Bridge on the River Kwai",
+      "film_title": "The Bridge on the River Kwai",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1957:the-bridge-on-the-river-kwai"
+    },
+    {
       "year": 1957,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3432,6 +5761,46 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1957,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Aparajito",
+      "film_title": "Aparajito",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1957:aparajito"
+    },
+    {
+      "year": 1957,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Friendly Persuasion",
+      "film_title": "Friendly Persuasion",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1957:friendly-persuasion"
+    },
+    {
+      "year": 1957,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "12 Angry Men",
+      "film_title": "12 Angry Men",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1957:12-angry-men"
+    },
+    {
+      "year": 1956,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Gervaise",
+      "film_title": "Gervaise",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1956:gervaise"
+    },
+    {
       "year": 1956,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3440,6 +5809,36 @@
       "film_title": "Marty",
       "work_id": "award-work:49b1f18a6489e5d235d1",
       "match_status": "unresolved"
+    },
+    {
+      "year": 1956,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "The Silent World",
+      "film_title": "The Silent World",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1956:the-silent-world"
+    },
+    {
+      "year": 1956,
+      "organization": "ベルリン国際映画祭",
+      "category": "金熊賞",
+      "title": "Invitation to the Dance",
+      "film_title": "Invitation to the Dance",
+      "source": "https://en.wikipedia.org/wiki/Golden_Bear",
+      "match_status": "unresolved",
+      "work_id": "historical:ベルリン国際映画祭:1956:invitation-to-the-dance"
+    },
+    {
+      "year": 1955,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Richard III",
+      "film_title": "Richard III",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1955:richard-iii"
     },
     {
       "year": 1955,
@@ -3458,6 +5857,36 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1955,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Ordet",
+      "film_title": "Ordet",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1955:ordet"
+    },
+    {
+      "year": 1955,
+      "organization": "カンヌ国際映画祭",
+      "category": "パルム・ドール",
+      "title": "Marty",
+      "film_title": "Marty",
+      "source": "https://en.wikipedia.org/wiki/Palme_d%27Or",
+      "match_status": "unresolved",
+      "work_id": "historical:カンヌ国際映画祭:1955:marty"
+    },
+    {
+      "year": 1954,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Wages of Fear",
+      "film_title": "The Wages of Fear",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1954:the-wages-of-fear"
+    },
+    {
       "year": 1954,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3472,6 +5901,26 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/11426",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1954,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Romeo and Juliet",
+      "film_title": "Romeo and Juliet",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1954:romeo-and-juliet"
+    },
+    {
+      "year": 1953,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "Forbidden Games",
+      "film_title": "Forbidden Games",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1953:forbidden-games"
     },
     {
       "year": 1953,
@@ -3491,6 +5940,16 @@
     },
     {
       "year": 1952,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "The Sound Barrier",
+      "film_title": "The Sound Barrier",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1952:the-sound-barrier"
+    },
+    {
+      "year": 1952,
       "organization": "アカデミー賞",
       "category": "作品賞",
       "title": "An American in Paris",
@@ -3504,6 +5963,26 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/2769",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1952,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Forbidden Games",
+      "film_title": "Forbidden Games",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1952:forbidden-games"
+    },
+    {
+      "year": 1951,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "La Ronde",
+      "film_title": "La Ronde",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1951:la-ronde"
     },
     {
       "year": 1951,
@@ -3522,6 +6001,26 @@
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     },
     {
+      "year": 1951,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Rashomon",
+      "film_title": "Rashomon",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1951:rashomon"
+    },
+    {
+      "year": 1950,
+      "organization": "BAFTA",
+      "category": "作品賞",
+      "title": "All About Eve",
+      "film_title": "All About Eve",
+      "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
+      "match_status": "unresolved",
+      "work_id": "historical:BAFTA:1950:all-about-eve"
+    },
+    {
       "year": 1950,
       "organization": "アカデミー賞",
       "category": "作品賞",
@@ -3536,6 +6035,16 @@
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/25430",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+    },
+    {
+      "year": 1950,
+      "organization": "ヴェネチア国際映画祭",
+      "category": "金獅子賞",
+      "title": "Justice Is Done",
+      "film_title": "Justice Is Done",
+      "source": "https://en.wikipedia.org/wiki/Golden_Lion",
+      "match_status": "unresolved",
+      "work_id": "historical:ヴェネチア国際映画祭:1950:justice-is-done"
     },
     {
       "year": 1949,
@@ -3811,285 +6320,6 @@
       "display_title": "つばさ",
       "match_method": "tmdb_api_exact_title_release_window",
       "identity_source": "https://www.themoviedb.org/movie/28966",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀作品賞",
-      "title": "侍タイムスリッパー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "侍タイムスリッパー",
-      "work_id": "award-work:d05b607ba5a4eea7cc0c",
-      "match_status": "resolved",
-      "tmdb_id": 1287819,
-      "release_year": 2024,
-      "display_title": "侍タイムスリッパー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1287819",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀アニメーション作品賞",
-      "title": "ルックバック",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "ルックバック",
-      "work_id": "award-work:82ee1c9d00ac51799644",
-      "match_status": "resolved",
-      "tmdb_id": 1244492,
-      "release_year": 2024,
-      "display_title": "ルックバック",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1244492",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀監督賞",
-      "title": "正体",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "正体",
-      "work_id": "award-work:40ec281b8c346ac2af9a",
-      "tmdb_id": 1356890,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀脚本賞",
-      "title": "ラストマイル",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "ラストマイル",
-      "work_id": "award-work:694d5ff877c09108586c",
-      "match_status": "resolved",
-      "tmdb_id": 1276108,
-      "release_year": 2024,
-      "display_title": "ラストマイル",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1276108",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀主演男優賞",
-      "title": "正体",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "正体",
-      "work_id": "award-work:40ec281b8c346ac2af9a",
-      "tmdb_id": 1356890,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀主演女優賞",
-      "title": "あんのこと",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "あんのこと",
-      "work_id": "award-work:4e53433dc788ea1eff29",
-      "match_status": "resolved",
-      "tmdb_id": 1219439,
-      "release_year": 2024,
-      "display_title": "あんのこと",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1219439",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀助演男優賞",
-      "title": "キングダム 大将軍の帰還",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "キングダム 大将軍の帰還",
-      "work_id": "award-work:ef6b7c66d2d71244416c",
-      "tmdb_id": 1241320,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀助演女優賞",
-      "title": "正体",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "正体",
-      "work_id": "award-work:40ec281b8c346ac2af9a",
-      "tmdb_id": 1356890,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀撮影賞",
-      "title": "キングダム 大将軍の帰還",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "キングダム 大将軍の帰還",
-      "work_id": "award-work:ef6b7c66d2d71244416c",
-      "tmdb_id": 1241320,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀照明賞",
-      "title": "キングダム 大将軍の帰還",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "キングダム 大将軍の帰還",
-      "work_id": "award-work:ef6b7c66d2d71244416c",
-      "tmdb_id": 1241320,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀音楽賞",
-      "title": "カラオケ行こ！",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "カラオケ行こ！",
-      "work_id": "award-work:dad75195c5d8ecf093f2",
-      "match_status": "resolved",
-      "tmdb_id": 1070507,
-      "release_year": 2024,
-      "display_title": "カラオケ行こ！",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1070507",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀美術賞",
-      "title": "はたらく細胞",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "はたらく細胞",
-      "work_id": "award-work:a34040a3833de5ae11e6",
-      "match_status": "resolved",
-      "tmdb_id": 1303162,
-      "release_year": 2024,
-      "display_title": "はたらく細胞",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1303162",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀録音賞",
-      "title": "キングダム 大将軍の帰還",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "キングダム 大将軍の帰還",
-      "work_id": "award-work:ef6b7c66d2d71244416c",
-      "tmdb_id": 1241320,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀編集賞",
-      "title": "侍タイムスリッパー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "侍タイムスリッパー",
-      "work_id": "award-work:d05b607ba5a4eea7cc0c",
-      "match_status": "resolved",
-      "tmdb_id": 1287819,
-      "release_year": 2024,
-      "display_title": "侍タイムスリッパー",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1287819",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
-    },
-    {
-      "year": 2025,
-      "organization": "日本アカデミー賞",
-      "category": "最優秀外国作品賞",
-      "title": "オッペンハイマー",
-      "source": "https://www.japan-academy-prize.jp/news/news_2025.php",
-      "reviewed_at": "2026-10-17",
-      "film_title": "オッペンハイマー",
-      "work_id": "award-work:11050ba400b212009675",
-      "tmdb_id": 872585,
-      "release_year": 2023,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "selection_year": 2024,
-      "organization": "キネマ旬報ベスト・テン",
-      "category": "日本映画作品賞（第1位）",
-      "title": "夜明けのすべて",
-      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
-      "reviewed_at": "2026-10-17",
-      "film_title": "夜明けのすべて",
-      "work_id": "award-work:44a51380bec1d26a7e9d",
-      "tmdb_id": 1086011,
-      "release_year": 2024,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "selection_year": 2024,
-      "organization": "キネマ旬報ベスト・テン",
-      "category": "外国映画作品賞（第1位）",
-      "title": "オッペンハイマー",
-      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
-      "reviewed_at": "2026-10-17",
-      "film_title": "オッペンハイマー",
-      "work_id": "award-work:3a4640928bf7a468c117",
-      "tmdb_id": 872585,
-      "release_year": 2023,
-      "match_status": "resolved",
-      "match_method": "unique_catalog_title_and_release_year"
-    },
-    {
-      "year": 2025,
-      "selection_year": 2024,
-      "organization": "キネマ旬報ベスト・テン",
-      "category": "文化映画作品賞（第1位）",
-      "title": "正義の行方",
-      "source": "https://kinejun.jp/posts/20250204-ar-e01cdb",
-      "reviewed_at": "2026-10-17",
-      "film_title": "正義の行方",
-      "work_id": "award-work:b1099ddda1a49be98bed",
-      "match_status": "resolved",
-      "tmdb_id": 1253027,
-      "release_year": 2024,
-      "display_title": "正義の行方",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/1253027",
       "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
     }
   ],

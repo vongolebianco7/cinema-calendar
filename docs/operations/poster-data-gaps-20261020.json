@@ -1,391 +1,87 @@
 {
   "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
-  "count": 35,
+  "count": 8,
   "movies": [
     {
-      "title": "デーヴァラ",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-01",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "Stray Kids : The dominATE Experience",
-      "id": null,
       "tmdbId": null,
       "year": null,
-      "event": "streaming",
       "date": "2026-09-02",
       "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
     },
     {
-      "title": "愛はステロイド",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-13",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "M.I.S.S.I.O.N. 歌劇な潜入捜査官",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-14",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "Perfume“コールドスリープ”-25 years Document-",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-15",
-      "source_url": "https://www.disneyplus.com/ja-jp/explore/tag/now-streaming",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "リロ＆スティッチ",
-      "id": null,
       "tmdbId": null,
       "year": null,
-      "event": "streaming",
       "date": "2026-09-17",
       "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/summer-promo-release",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
     },
     {
-      "title": "免許返納!?",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-18",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "スマッシング・マシーン",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-18",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ランニング・マン",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-18",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "劇場版 チェンソーマン レゼ篇",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-19",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "五香宮の猫",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-20",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ラブ・ハイポセシス",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-23",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ウィキッド 永遠の約束",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-27",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "オッペンハイマー",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-28",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "不思議の国でアリスと -Dive in Wonderland-",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-09-29",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "Matchbox The Movie",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-09",
-      "source_url": "https://www.apple.com/tv-pr/news/2026/02/apple-tv-sets-must-see-2026-lineup-of-star-studded-original-series-films-and-live-sports/",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "スオミの話をしよう",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-13",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "生涯の愛",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-14",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "スーパーマン",
-      "id": null,
       "tmdbId": null,
       "year": null,
-      "event": "streaming",
       "date": "2026-10-15",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
     },
     {
-      "title": "マスタープラン",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-16",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ギャビーのドールハウス ザ・ムービー",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-17",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "てんてん ずっと独身でいるつもり？",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-23",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ウォンカとチョコレート工場のはじまり",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-23",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ビューティフル・ジャーニー ふたりの時空旅行",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-25",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ロード・オブ・ザ・リング",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-26",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ロード・オブ・ザ・リング／二つの塔",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-26",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "ロード・オブ・ザ・リング／王の帰還",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-26",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "アギトー超能力戦争ー",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-28",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "ドライブ ー偽りの関係ー",
-      "id": null,
       "tmdbId": null,
       "year": null,
-      "event": "streaming",
       "date": "2026-10-28",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
     },
     {
-      "title": "ワン・バトル・アフター・アナザー",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-29",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "SAKAMOTO DAYS",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-10-30",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "アポカリプスZ：新しい世界",
-      "id": null,
       "tmdbId": null,
       "year": null,
-      "event": "streaming",
       "date": "2026-10-30",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
     },
     {
-      "title": "余命一年、男をかう",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-11-05",
-      "source_url": "https://about.netflix.com/ja/news/one-year-to-live-buy-a-man-trailer",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
-      "title": "Being Heumann",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
-      "date": "2026-11-13",
-      "source_url": "https://www.apple.com/tv-pr/news/2026/09/apple-original-films-debuts-teaser-trailer-for-being-heumann-the-powerful-new-film-directed-by-academy-award-winner-sin-heder/",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
-    },
-    {
+      "file": "data/streaming.json",
       "title": "僕の狂ったフェミ彼女",
-      "id": null,
-      "tmdbId": null,
-      "year": null,
-      "event": "streaming",
+      "tmdbId": 1591961,
+      "year": 2026,
       "date": "2026-12-03",
       "source_url": "https://about.netflix.com/ja/news/my-crazy-feminist-girlfriend-additionalcast",
-      "reason": "Original release year and verified TMDB ID are missing; automatic title-only assignment would risk remakes.",
-      "handling": "Keep the explicit poster fallback and title search link; enrich from an approved source with exact original year or TMDB ID."
+      "reason": "Canonical detail has no poster asset.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/outdoor-events.json",
+      "title": "ローマの休日",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-10",
+      "source_url": "https://www.hibiya.tokyo-midtown.com/hibiya-cinema-festival/line-up/",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "events.html fallbackEvents",
+      "title": "ルックバック",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-10",
+      "source_url": "https://sumidapark-cinema.com/",
+      "reason": "Fallback event does not identify which adaptation; same-title local catalog entry cannot establish the event identity.",
+      "handling": "Keep explicit fallback and title search until an approved lineup confirms original year/canonical ID."
     }
-  ]
+  ],
+  "existing_metadata_restored_to_source_rows": 58
 }

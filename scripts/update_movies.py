@@ -194,38 +194,32 @@ TITLE_ALIASES={
  "ウェズリー・スナイプス ザ・シューター":"The Contractor",
  "ウェズリー・スナイプス　ザ・シューター":"The Contractor",
 }
-def search_movie_match(title, original_title=None):
- variants=[title]
- if title in TITLE_ALIASES: variants.append(TITLE_ALIASES[title])
- simplified=re.sub(r"[【［\[][^】］\]]*[】］\]]","",title).strip()
- if simplified and simplified!=title: variants.append(simplified)
- if original_title: variants.append(original_title)
- seen_queries=set()
- fallback=[]
- for name in variants:
-  if not name or name in seen_queries:continue
-  seen_queries.add(name)
-  try:
-   results=get("/search/movie",{"query":name,"region":"JP","include_adult":"false"}).get("results",[])
+def search_movie_match(title, original_title=None, release_year=None):
+ # Event/premiere dates are not evidence of the original film's release year.
+ try: release_year=int(release_year)
+ except (TypeError,ValueError): return None
+ if not 1888 <= release_year <= 2100:return None
+ variants=[title,TITLE_ALIASES.get(title),original_title]
+ matches={}
+ for name in dict.fromkeys(variants):
+  if not name:continue
+  try:results=get("/search/movie",{"query":name,"region":"JP","include_adult":"false","year":release_year}).get("results",[])
   except Exception:continue
   needle=norm_movie_title(name)
-  for rank,x in enumerate(results[:10]):
-   candidate_names=[x.get("title"),x.get("original_title")]
-   normalized=[norm_movie_title(z) for z in candidate_names if z]
-   if needle and needle in normalized:
-    return x
-   # Allow close title matches so posters lost by punctuation/subtitle differences
-   # can recover, while keeping a conservative threshold to avoid wrong artwork.
-   for cand in normalized:
-    if not needle or not cand:continue
-    ratio=difflib.SequenceMatcher(None,needle,cand).ratio()
-    contains=(min(len(needle),len(cand))>=4 and (needle in cand or cand in needle))
-    if ratio>=0.78 or contains:
-     fallback.append((ratio+(0.03 if rank==0 else 0),x))
- if fallback:
-  fallback.sort(key=lambda z:z[0],reverse=True)
-  return fallback[0][1]
- return None
+  for row in results:
+   if str(row.get("release_date", ""))[:4]!=str(release_year):continue
+   if needle and needle in [norm_movie_title(t) for t in [row.get("title"),row.get("original_title")] if t]:
+    matches[row.get("id")]=row
+ return next(iter(matches.values())) if len(matches)==1 else None
+
+def verified_movie_metadata(movie):
+ # Only explicit TMDB provenance may bypass title/year matching.
+ link=re.match(r"^https://(?:www\.)?themoviedb\.org/movie/(\d+)(?:[/?#-]|$)",str(movie.get("tmdb") or movie.get("tmdb_url") or ""))
+ mid=movie.get("tmdbId") or movie.get("tmdb_id") or (int(link.group(1)) if link else None)
+ if isinstance(mid,int) and mid>0:
+  result=details(mid)
+  return result if result.get("id")==mid else None
+ return search_movie_match(movie.get("title",""),movie.get("original_title"),movie.get("release_year") or movie.get("year"))
 
 # Enrich verified streaming premieres with TMDB metadata/posters by title.
 # The premiere date and service always remain sourced from official announcements.
@@ -233,7 +227,7 @@ for m in stream_movies:
  if m.get("id") and m.get("poster") and m.get("director_id"):
   continue
  try:
-  x=search_movie_match(m["title"],m.get("original_title"))
+  x=verified_movie_metadata(m)
   if x:
    m["id"]=x.get("id")
    m["poster"]=("https://image.tmdb.org/t/p/w500"+x["poster_path"]) if x.get("poster_path") else m.get("poster")
@@ -242,7 +236,8 @@ for m in stream_movies:
    m["overview"]=x.get("overview",m.get("overview",""))
    m["tmdb"]="https://www.themoviedb.org/movie/"+str(x["id"])
    try:
-    md=details(x["id"])
+    md=x if "credits" in x else details(x["id"])
+    if str(md.get("release_date", ""))[:4].isdigit():m["release_year"]=int(md["release_date"][:4]);m["year"]=m["release_year"]
     m["director"]=next((z.get("name") for z in md.get("credits",{}).get("crew",[]) if z.get("job")=="Director"),None)
     m["director_id"]=next((z.get("id") for z in md.get("credits",{}).get("crew",[]) if z.get("job")=="Director"),None)
     m["cast"]=[z.get("name") for z in md.get("credits",{}).get("cast",[])[:4] if z.get("name")]
@@ -290,7 +285,7 @@ tv_updated=False
 for m in tv_data.get("movies",[]):
  if m.get("poster") and m.get("id"):continue
  try:
-  x=search_movie_match(m.get("title",""),m.get("original_title"))
+  x=verified_movie_metadata(m)
   if not x:continue
   if x.get("poster_path"):
    m["poster"]="https://image.tmdb.org/t/p/w500"+x["poster_path"]

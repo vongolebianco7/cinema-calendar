@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T09:47:47.252536+00:00",
+  "updated_at": "2026-10-20T10:04:21.643527+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
   "branch": "fix/final-quality-20261020",
-  "head_sha": "f841e17b4992b52828d3ecfcf6c92485a6db2ef5",
+  "head_sha": "bbd9b55f56db80dda48a65fcc3be6dfa6232cc53",
   "pull_request": 437,
   "work_items": [
     {
@@ -587,6 +587,10 @@
     {
       "check": "Final QA review and actual CDN sampling 2026-10-20",
       "result": "173 active Node unit tests and shared quality gate pass; 138 Python tests passed. 30 routes x4 widths x2 themes audited. Actual CDN sample:60 page loads,242/242 image loads,0 failed/pending,0 overflow/page errors. Reviewer blockers fixed with current/legacy local-ID overwrite and zero-delete regressions;31 targeted tests pass. Search/critic hanging API and deterministic poster retry browser regressions pass. Final remote CI/merge/Pages still pending."
+    },
+    {
+      "check": "Final source and secondary-card audit",
+      "result": "Canonical metadata supplemented for33streaming rows,18outdoor rows,3revivals plus2fallback events.58already-enriched calendar rows copied back to matching streaming source records to preserve refresh data. APIsearch+canonicaldetails checked; wrong proposed ID1124 rejected because it was ThePrestige; correct11257 verified. Daily refresh now accepts explicit provenance or strict unique title+originalyear;6Python regressions pass.144fullPython tests,173Node tests,sharedqualitygate pass. Revival/selectedexperience browser regression passes6viewport/theme combinations.30-route Chromium audit240loads passes. Previous final WebKit audit exposed redirect readiness race; fixed by waiting for mounted themecontrols before unchanged assertions. RequiredfinalCI pending."
     }
   ],
   "deployment": {
@@ -605,9 +609,9 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "35 streaming source rows lack verified TMDB ID and original release year; exact rows and remediation are in poster-data-gaps-20261020.json.",
-    "Local WebKit system dependencies cannot be installed through this environment network allowlist; verify WebKit in GitHub Actions."
+    "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
+    "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Run the final QA PR checks, inspect every failing job, then merge only when required checks pass. Recheck Pages at the merged SHA. Do not retry Vercel during quota restriction.",
+  "next_action": "Run required final Actions at PR437 newest head, repair failures, merge green PR, verify Pages merged SHA. Preserve8source gaps; no Vercel deployment retries.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

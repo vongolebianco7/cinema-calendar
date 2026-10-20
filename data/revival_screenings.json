@@ -9,7 +9,26 @@
       "service": "リバイバル上映",
       "revival": true,
       "venue": "シネ・リーブル神戸ほか",
-      "source_url": "https://www.ttcg.jp/compliment/"
+      "source_url": "https://www.ttcg.jp/compliment/",
+      "tmdbId": 476,
+      "tmdb": "https://www.themoviedb.org/movie/476",
+      "release_year": 1989,
+      "year": 1989,
+      "poster": "https://image.tmdb.org/t/p/w500/1URuvqnZcwL4wy8hIIwQ9p9AxVq.jpg",
+      "original_title": "Drugstore Cowboy",
+      "director": "ガス・ヴァン・サント",
+      "director_id": 5216,
+      "runtime": 98,
+      "genres": [
+        "ドラマ",
+        "犯罪"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "score": 7.075,
+      "votes": 643,
+      "identity_verified_at": "2026-10-20"
     },
     {
       "date": "2026-09-25",
@@ -18,7 +37,26 @@
       "service": "リバイバル上映",
       "revival": true,
       "venue": "テアトル梅田ほか",
-      "source_url": "https://www.ttcg.jp/compliment/"
+      "source_url": "https://www.ttcg.jp/compliment/",
+      "tmdbId": 11257,
+      "tmdb": "https://www.themoviedb.org/movie/11257",
+      "release_year": 1986,
+      "year": 1986,
+      "poster": "https://image.tmdb.org/t/p/w500/5xRAqywVo6tNUNQbAESGVP930la.jpg",
+      "original_title": "A Room with a View",
+      "director": "ジェイムズ・アイヴォリー",
+      "director_id": 54441,
+      "runtime": 117,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
+      ],
+      "countries": [
+        "United Kingdom"
+      ],
+      "score": 6.942,
+      "votes": 867,
+      "identity_verified_at": "2026-10-20"
     },
     {
       "date": "2026-10-23",
@@ -28,7 +66,27 @@
       "service": "リバイバル上映",
       "revival": true,
       "venue": "ヒューマントラストシネマ渋谷",
-      "source_url": "https://www.ttcg.jp/human_shibuya/topics/2026/09161417_37398.html"
+      "source_url": "https://www.ttcg.jp/human_shibuya/topics/2026/09161417_37398.html",
+      "tmdbId": 587,
+      "tmdb": "https://www.themoviedb.org/movie/587",
+      "release_year": 2003,
+      "year": 2003,
+      "poster": "https://image.tmdb.org/t/p/w500/fiPam4cMjYqYqJEWGdDX7dkNaB9.jpg",
+      "original_title": "Big Fish",
+      "director": "ティム・バートン",
+      "director_id": 510,
+      "runtime": 125,
+      "genres": [
+        "アドベンチャー",
+        "ファンタジー",
+        "ドラマ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "score": 7.744,
+      "votes": 7999,
+      "identity_verified_at": "2026-10-20"
     }
   ]
 }

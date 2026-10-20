@@ -94,6 +94,9 @@ async function freePort() {
           }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
           await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);
+          // Theme controls mount at DOMContentLoaded. A redirected WebKit document
+          // can expose its early html theme and main before the later meta tag is updated.
+          await page.waitForFunction(() => Boolean(document.querySelector('.cinelvaTheme select')));
           const state = await page.evaluate(() => ({
             title: document.title.trim(),
             textLength: document.querySelector('main')?.textContent.trim().length || 0,

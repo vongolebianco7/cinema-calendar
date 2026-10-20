@@ -35,6 +35,7 @@ const { chromium, request } = require("playwright"),
         ignoreHTTPSErrors: true,
       })
     : null;
+  const sampleMovie=JSON.parse(fs.readFileSync('data/revival_screenings.json','utf8')).screenings.find(m=>m.tmdbId===587);
   const cdnCache = new Map();
   try {
     for (const width of [375, 390, 768])
@@ -71,6 +72,7 @@ const { chromium, request } = require("playwright"),
           (t) => localStorage.setItem("cinelva-theme-v1", t),
           theme,
         );
+        await context.addInitScript(m=>localStorage.setItem('cinelva-library-records-v2',JSON.stringify({[m.tmdbId]:{...m,id:String(m.tmdbId),watched:true,rating:4.1,watchedAt:'2026-10-20'}})),sampleMovie);
         const page = await context.newPage();
         for (const path of [
           "index.html",
@@ -101,13 +103,21 @@ const { chromium, request } = require("playwright"),
               .locator("main,.wrap")
               .first()
               .waitFor({ state: "attached" });
+            if(path==='events.html')await page.locator('.filmPoster').first().scrollIntoViewIfNeeded().catch(()=>{});
+            if(path==='my-cinelva/')await page.locator('[data-tab="records"]').click();
+            if(path==='experience.html'){
+              // Replay a captured canonical API record; artwork still loads actual CDN bytes.
+              await page.route('**/api/movies?*',r=>r.fulfill({json:{movies:[sampleMovie],external:[]}}));
+              await page.locator('#formatFilm').fill(sampleMovie.title);
+              await page.locator('[data-candidate-index="0"]').first().click();
+            }
             await page.waitForTimeout(2000);
             await page
               .waitForFunction(
                 () =>
                   [
                     ...document.querySelectorAll(
-                      ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.filmPoster,img.poster,[data-box-poster]",
+                      ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.filmPoster,img.poster,img.selectedMoviePoster,[data-box-poster]",
                     ),
                   ]
                     .filter((i) => {
@@ -122,7 +132,7 @@ const { chromium, request } = require("playwright"),
               .catch(() => {});
             const samples = await page
               .locator(
-                ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.want-watch-poster img,.filmPoster,img.poster,[data-box-poster]",
+                ".poster img,.streamMoviePoster img,.tvMoviePoster img,.presetCardPoster img,.want-watch-poster img,.filmPoster,img.poster,img.selectedMoviePoster,[data-box-poster]",
               )
               .evaluateAll((images) =>
                 images

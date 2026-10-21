@@ -44,19 +44,21 @@ async function getPort(){
     '<a class="rankCard" href="search.html?id=101&search=Film%20One"><span class="title">Film One</span></a>'+
     '<a class="rankCard" href="search.html?id=102&search=Film%20Two"><span class="title">Film Two</span></a>';
   });
+  await page.evaluate(()=>{for(const card of document.querySelectorAll('#grid a.rankCard')){const u=new URL(card.href),slot=document.createElement('div');card.after(slot);CinelvaQuickRate.mountInline(slot,{id:Number(u.searchParams.get('id')),title:u.searchParams.get('search')});}});
   await page.locator('#grid .cinelva-rate-button').first().waitFor({timeout:10000});
   await page.locator('#grid .cinelva-rate-button').first().click();
   await page.locator('#cinelvaRateScore').evaluate(el=>{el.value='4.5';el.dispatchEvent(new Event('input',{bubbles:true}));});
   await page.locator('#cinelvaRateComment').fill('ランキングから記録');
   await page.locator('#cinelvaRateSave').click();
-  await page.waitForFunction(()=>document.querySelector('#grid .cinelva-inline-score input')?.value==='4.5');
+  await page.waitForFunction(()=>document.querySelector('#grid .cinelva-rating-personal')?.textContent.includes('4.5'));
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(dialog=>dialog.open),false,'saving closes the rating panel');
   await page.locator('#grid .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
-  await page.locator('#cinelvaRatePlace').selectOption('配信');
+  await page.locator('#cinelvaRateScore').fill('3.2');
+  await page.locator('#cinelvaRatePlace').selectOption('配信・サブスク');
   await page.locator('#cinelvaRateSave').click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(dialog=>dialog.open),false);
-  assert.equal(await page.locator('#grid .cinelva-inline-score input').nth(1).inputValue(),'0');
+  assert.match(await page.locator('#grid .cinelva-rating-personal').nth(1).innerText(),/3.2/);
 
   await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
   try{await page.waitForFunction(()=>Boolean(window.CinelvaQuickRate),null,{timeout:15000});}
@@ -64,6 +66,7 @@ async function getPort(){
   // Let asynchronous calendar data initialization finish before replacing its
   // visible fixture cards, and lock the resolver to the supplied test records.
   await page.waitForFunction(()=>document.querySelector('#dates')?.children.length>0,{timeout:15000});
+  await page.waitForFunction(()=>Boolean(window.CinelvaStreamingPosterAudit));
   await page.evaluate(()=>{
    const fixtures=[{id:101,title:'Film One',event:'streaming',date:'2026-10-18'},
                    {id:102,title:'Film Two',event:'tv',date:'2026-10-18'}];
@@ -73,8 +76,8 @@ async function getPort(){
      '<article class="tvMovie" data-mi="1">Film Two</article></section>';
   });
   await page.locator('#dates .cinelva-rate-button').first().waitFor({timeout:10000});
-  assert.equal(await page.locator('#dates .cinelva-inline-score input').first().inputValue(),'4.5');
-  assert.equal(await page.locator('#dates .cinelva-inline-score input').nth(1).inputValue(),'0');
+  assert.match(await page.locator('#dates .cinelva-rating-personal').first().innerText(),/4.5/);
+  assert.match(await page.locator('#dates .cinelva-rating-personal').nth(1).innerText(),/3.2/);
   await page.locator('#dates .cinelva-rate-button').first().click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film One/);
   assert.equal(await page.locator('#cinelvaRateComment').inputValue(),'ランキングから記録');
@@ -82,7 +85,7 @@ async function getPort(){
   await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
   await page.locator('#dates .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
-  assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');
+  assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信・サブスク');
   const records=await page.evaluate(()=>window.CinelvaLibraryRecords.all());
   assert.equal(records.length,2);
   console.log((process.env.CINELVA_BROWSER||'chromium')+' existing ranking/calendar score badges and close-to-list rating actions passed');

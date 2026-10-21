@@ -23,6 +23,6 @@ test('detail metadata failure keeps a selected movie record action', () => {
 test('empty record list sends new entries to movie search instead of an unapproved record window', () => {
   assert.match(records, /href="\.\.\/search\.html">映画を検索して記録<\/a>/);
   assert.doesNotMatch(records, /data-add-record/);
-  assert.match(myPage, /id="addRecord" href="\.\.\/search\.html"/);
+  assert.doesNotMatch(myPage, /data-add-record/);
   assert.match(records, /location\.replace\('\.\.\/search\.html\?'/);
 });

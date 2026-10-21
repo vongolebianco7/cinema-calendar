@@ -13,6 +13,8 @@ page.on('pageerror',error=>errors.push(error.message));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
  for (const prefix of ['', 'cinelva/']) for (const file of pages) {
+  if(!fs.existsSync(prefix+file))continue;
+  console.log(`${name}: theme checking ${prefix}${file}`);
   await page.goto(`${base}/${prefix}${file}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>Boolean(document.querySelector('.cinelvaTheme select')));
   assert.equal(await page.locator('html').getAttribute('data-theme'),'light',prefix+file+' system theme');
@@ -21,7 +23,7 @@ try {
   const contrasts=await page.locator('.heroAction,.legend>span,.gDrawerClose,.calendarCoverage').evaluateAll(elements=>{
    const rgb=value=>value.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});
    const lum=value=>rgb(value).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
-   return elements.map(el=>{const c=getComputedStyle(el),fg=lum(c.color),bg=lum(c.backgroundColor);return {name:el.className||el.textContent,backgroundLuminance:bg,ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)}});
+   return elements.filter(el=>el.isConnected&&el.getClientRects().length>0).map(el=>{const c=getComputedStyle(el);if(!c.color||!c.backgroundColor)throw new Error(`Missing computed colors for ${el.className}: ${c.color} / ${c.backgroundColor}`);const fg=lum(c.color),bg=lum(c.backgroundColor);return {name:el.className||el.textContent,backgroundLuminance:bg,ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)}});
   });
   for(const check of contrasts) {
    assert.ok(check.ratio>=4.5,`${prefix}${file} light text contrast ${check.name}: ${check.ratio}`);

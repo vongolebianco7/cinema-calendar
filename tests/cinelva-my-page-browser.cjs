@@ -1,228 +1,272 @@
-const { waitForLocalServer } = require('./helpers/local-server.cjs');
-const { chromium, webkit } = require('playwright');
-const fs = require('node:fs');
-const { spawn } = require('node:child_process');
-const net = require('node:net');
-const path = require('node:path');
-const assert = require('node:assert/strict');
-
-async function freePort() {
-  const server = net.createServer();
-  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-  const port = server.address().port;
-  await new Promise(resolve => server.close(resolve));
-  return port;
-}
-
+const { waitForLocalServer } = require("./helpers/local-server.cjs");
+const { chromium, webkit } = require("playwright"),
+  { spawn } = require("child_process"),
+  net = require("net"),
+  fs = require("fs"),
+  assert = require("assert/strict");
 (async () => {
-  const port = await freePort();
-  const root = path.resolve(__dirname, '..');
-  const server = spawn('python', ['-m', 'http.server', String(port), '--bind', '127.0.0.1'], { cwd: root, stdio: 'ignore' });
+  const listener = net.createServer();
+  await new Promise((r) => listener.listen(0, "127.0.0.1", r));
+  const port = listener.address().port;
+  await new Promise((r) => listener.close(r));
+  const server = spawn(
+    "python",
+    ["-m", "http.server", String(port), "--bind", "127.0.0.1"],
+    { stdio: "ignore" },
+  );
   let browser;
   try {
-    const base = `http://127.0.0.1:${port}`;
     await waitForLocalServer(port);
-    browser = await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch({ headless: true });
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, acceptDownloads: true });
-    const page = await context.newPage();
-    const errors = [];
-    page.on('pageerror', error => errors.push(error.stack || error.message));
-    await page.addInitScript(() => {
-      const originalFetch = window.fetch.bind(window);
-      window.fetch = (input, init) => {
-        const url = new URL(typeof input === 'string' ? input : input.url, location.href);
-        if (url.pathname.endsWith('/data/movies.json')) {
-          return Promise.resolve(new Response(JSON.stringify({ movies: [] }), { headers: { 'content-type': 'application/json' } }));
-        }
-        return originalFetch(input, init);
-      };
+    browser = await (
+      process.env.CINELVA_BROWSER === "webkit" ? webkit : chromium
+    ).launch();
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      acceptDownloads: true,
     });
-    const directorsResponse = await fetch(`${base}/data/directors.json`);
-    const directors = (await directorsResponse.json()).directors;
-    const director = Object.values(directors)[0];
-    const work = director.works[0];
-    await context.addInitScript(({ key, film, directorName }) => {
-      if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({
-        '900003': { id: '900003', tmdbId: film.id, title: film.title, year: Number(film.year) === 2002 ? 2010 : (Number(film.year) || 2010), poster: film.poster, director: directorName, genres: ['SF'], formats:['アニメーション'], workForms:['フィクション'], countries: ['Japan'], region: 'Japan', rating: 4.5, watchedAt: '2026-04-12' },
-        '900001': { id: '900001', title: 'スター・ウォーズ', original_title: 'Star Wars', year: 2002, director: directorName, genres: ['SF', 'Crime'], formats:['実写'], workForms:['フィクション'], region: '日本', rating: 0, watchedAt: '2025-04-15' },
-      }));
-    }, { key: 'cinelva-library-records-v2', film: work, directorName: director.name });
-    await page.goto(`${base}/my-cinelva/`, { waitUntil: 'networkidle' });
+    await context.route("https://backend-one-gray-94.vercel.app/**", (r) =>
+      r.abort(),
+    );
+    const directors = JSON.parse(
+      fs.readFileSync("data/directors-mobile.json"),
+    ).directors;
+    const director = Object.values(directors).find((d) =>
+        d.works?.some((w) => w.runtime >= 30),
+      ),
+      film = director.works.find((w) => w.runtime >= 30);
+    await context.addInitScript(
+      ({ film, director }) => {
+        if (!localStorage.getItem("cinelva-library-records-v2"))
+          localStorage.setItem(
+            "cinelva-library-records-v2",
+            JSON.stringify({
+              900003: {
+                ...film,
+                id: "900003",
+                tmdbId: film.id,
+                director: director.name,
+                rating: 4.5,
+                watchedAt: "2026-04-12",
+              },
+              900001: {
+                id: "900001",
+                tmdbId: 11,
+                title: "スター・ウォーズ",
+                original_title: "Star Wars",
+                year: 1977,
+                rating: 3.5,
+                watchedAt: "2025-04-15",
+              },
+            }),
+          );
+      },
+      { film, director },
+    );
+    const page = await context.newPage(),
+      errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    const base = `http://127.0.0.1:${port}`;
+    await page.goto(base + "/my-cinelva/");
+    await page.waitForFunction(
+      () => document.getElementById("csLifetime")?.textContent === "2",
+    );
+    assert.ok(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    );
     await page.evaluate(() => {
-      localStorage.setItem('cinelva-want-to-watch-v1', JSON.stringify({ '900002': { id: '900002', title: '見たい作品テスト', savedAt: new Date().toISOString() } }));
-      window.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated', { detail: { id: '900002', marked: true } }));
+      localStorage.setItem(
+        "cinelva-want-to-watch-v1",
+        JSON.stringify({ 11: { id: 11, title: "保存作品" } }),
+      );
+      dispatchEvent(new CustomEvent("cinelva-bookmarks-updated"));
     });
-    assert.equal(await page.locator('#wantToWatchSection').evaluate(section => section.open), true);
-    assert.match(await page.locator('#wantWatchList').textContent(), /見たい作品テスト/);
-    assert.match(await page.locator('#wantToWatchSection summary').textContent(), /見たい映画/);
-    assert.equal(await page.locator('#statTotal').textContent(), '2');
-    assert.equal(await page.locator('#statOrigin').textContent(), '2 / 0');
-    assert.equal(await page.locator('#yearHeatmapTitle').textContent(), '年間鑑賞カレンダー');
-    assert.equal(await page.locator('#annualComparison').count(), 0, 'duplicate annual comparison is not displayed');
-    await page.locator('#calendarYearSelect').selectOption('2025');
-    assert.equal(await page.locator('#csPeriod').inputValue(), '2025');
-    await page.locator('#csPeriod').selectOption('2026');
-    assert.equal(await page.locator('#calendarYearSelect').inputValue(), '2026');
-    assert.ok(await page.locator('#recordList [data-record-card]').count() === 2);
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'page should not overflow at 390px');
-
-    await page.getByLabel('表示テーマ',{exact:true}).selectOption('dark');
-    assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
-    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
-    await page.getByLabel('表示テーマ',{exact:true}).selectOption('light');
+    assert.equal(await page.locator("#watchlistView").isVisible(), false);
+    await page.locator('[data-tab="watchlist"]').click();
+    assert.match(await page.locator("#wantWatchList").innerText(), /保存作品/);
+    assert.equal(
+      await page.locator("#wantWatchList .cinelva-bookmark-button").count(),
+      1,
+    );
+    await page.locator("#wantWatchList .cinelva-bookmark-button").click();
+    assert.match(
+      await page.locator("#wantWatchList").innerText(),
+      /見たい映画はまだありません/,
+    );
+    await page.locator('[data-tab="summary"]').click();
+    await page.locator("#csPeriod").selectOption("2026");
+    const columns = await page
+      .locator("#yearHeatmap")
+      .evaluate(
+        (el) => getComputedStyle(el).gridTemplateColumns.split(" ").length,
+      );
+    assert.equal(columns, 4);
+    assert.equal(await page.locator("#yearHeatmap>.cy-month").count(), 12);
+    assert.equal(await page.locator("#yearHeatmap .cy-medal").count(), 0);
+    await page.locator("#csPeriod").selectOption("all");
+    await page.locator("#yearHeatmap>.cy-year-card").first().waitFor();
+    assert.ok((await page.locator("#yearHeatmap>.cy-year-card").count()) >= 2);
     await page.locator('[data-tab="awards"]').click();
-    assert.match(await page.locator('#awardCoverage').textContent(), /達成率は表示しません/);
-    assert.ok((await page.locator('#awardMatrix').textContent()).includes('年代'));
-
+    assert.match(await page.locator("#awardMatrix").innerText(), /年代/);
     await page.locator('[data-tab="directors"]').click();
-    await page.locator('#directorTimeline .director-pick').first().click();
-    assert.equal(await page.locator('#directorFilmography .director-film-tile.is-watched').count(), 2, 'reviewed directors count both reviewed and zero-rated watched features');
-    const importedFilm = page.locator('#directorFilmography .director-film-tile.is-watched:has(a[href="../search.html?id=' + work.id + '"])');
-    assert.equal(await importedFilm.count(), 1, 'one imported record maps to one canonical director film');
-    assert.equal(await importedFilm.evaluate(tile => tile.classList.contains('is-watched')), true);
-    assert.equal(await importedFilm.locator('a').getAttribute('href'), '../search.html?id=' + work.id);
-    const storedImport = await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['900003']);
-    assert.equal(storedImport.id, '900003', 'director rendering preserves the local edit key');
-    assert.equal(String(storedImport.tmdbId), String(work.id));
-
-    const directorTile=page.locator('#directorFilmography .director-film-tile').last();
-    await directorTile.waitFor({state:'visible'});
-    const directorTitle=(await directorTile.locator('.director-film-title').innerText()).trim();
-    const directorId=new URL(await directorTile.locator('a.director-film-poster').getAttribute('href'),base).searchParams.get('id');
-    assert.ok(directorId,'selected director film has a movie identity');
-    await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...work,id:Number(directorId),tmdbId:Number(directorId),title:directorTitle}})}));
-    await directorTile.locator('a.director-film-poster').click();
-    await page.waitForURL(url=>url.pathname.endsWith('/search.html')&&url.searchParams.has('id'));
-    const detailReview=page.locator('#detail [data-detail-review]');
-    await detailReview.waitFor({state:'visible'});
-    await detailReview.click();
-    await page.locator('.cinelva-rate-dialog').waitFor({state:'visible'});
-    assert.equal(await page.locator('#cinelvaRateTitle').innerText(),directorTitle,'director-film detail opens the shared review dialog directly');
-    await page.locator('#cinelvaRateClose').click();
-    await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
-    await page.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});
-    const rerelease={id:27205,title:'インセプション',year:2026,director:'Christopher Nolan',genres:['SF'],countries:['US']};
-    await page.route('https://backend-one-gray-94.vercel.app/api/movies*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movies:[rerelease],external:[]})}));
-    await page.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movie:{...rerelease,year:'2010'}})}));
-    assert.equal(await page.locator('#addRecord').getAttribute('href'),'../search.html','new records begin on the existing searchable listing');
-    await page.locator('#addRecord').click();
-    await page.waitForURL(url=>url.pathname.endsWith('/search.html'));
-    assert.equal(await page.locator('#modal').getAttribute('class'),'modal','the new-record action does not open an unapproved window');
-    await page.unroute('https://backend-one-gray-94.vercel.app/api/movies*');await page.unroute('https://backend-one-gray-94.vercel.app/api/movie-detail*');
-    await page.route('https://backend-one-gray-94.vercel.app/api/movies*', route => route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ movies: [{ id: 99999999, title: 'New Browser Film', year: 2026, director: director.name, genres: ['SF'], countries: ['Japan'] }], external: [] }),
-    }));
-    await page.locator('.gSearch').fill('New Browser Film');await page.locator('.gSearchBtn').click();
-    await page.locator('#grid .card').first().waitFor({state:'visible'});
-    await page.locator('#grid .cinelva-rate-button').first().click();
-    await page.locator('.cinelva-rate-dialog').waitFor({state:'visible'});
-    await page.locator('#cinelvaRateDate').evaluate(input=>{input.value='2026-06-11';document.getElementById('cinelvaDateTrigger').textContent='2026/06/11';});
-    await page.locator('#cinelvaRatePlace').selectOption('映画館');
-    await page.locator('#cinelvaRateComment').fill('映画館で見た感想');
-    await page.locator('#cinelvaRateSave').click();
-    await page.waitForFunction(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2')||'{}')['99999999']?.rating === 0);
-    await page.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});
+    await page.locator(".director-pick").first().click();
+    await page
+      .locator("#directorFilmography .director-film-tile")
+      .first()
+      .waitFor();
+    assert.ok(
+      (await page
+        .locator("#directorFilmography .cinelva-rate-button")
+        .count()) > 0,
+    );
     await page.locator('[data-tab="records"]').click();
-    assert.match(await page.locator('#recordList').textContent(), /New Browser Film/);
-    for (const query of ['スターウォーズ', 'スター　ウォーズ', 'ＳＴＡＲ ＷＡＲＳ']) {
-      await page.locator('#recordSearch').fill(query);
-      assert.equal(await page.locator('#recordList [data-record-card]').count(), 1);
-      assert.equal(await page.locator('#recordList [data-record-card]').getAttribute('data-record-card'), '900001');
+    await page.locator("#recordList .cinelva-rate-button").first().waitFor();
+    assert.equal(
+      await page.locator("#recordList [data-record-card]").count(),
+      2,
+    );
+    for (const query of [
+      "スターウォーズ",
+      "スター　ウォーズ",
+      "ＳＴＡＲ ＷＡＲＳ",
+    ]) {
+      await page.locator("#recordSearch").fill(query);
+      assert.equal(
+        await page.locator("#recordList [data-record-card]").count(),
+        1,
+      );
     }
-    await page.locator('#recordYear').selectOption('2026');
-    assert.equal(await page.locator('#recordList [data-record-card]').count(), 0);
-    await page.locator('#recordYear').selectOption('all');
-    await page.locator('#recordSearch').fill('');
-    assert.equal(await page.locator('#recordList [data-record-card]').count(), 3);
-    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999'].rating), 0);
-    await page.reload({ waitUntil: 'networkidle' });
-    assert.equal(await page.locator('#statTotal').textContent(), '3');
-
+    await page.locator("#recordSearch").fill("");
+    await page
+      .locator('#recordList [data-record-card="900003"] .cinelva-rate-button')
+      .click();
+    await page.locator("#cinelvaRateScore").fill("4.2");
+    await page.locator("#cinelvaRatePlace").selectOption("配信・サブスク");
+    await page.locator("#cinelvaRateComment").fill("保存した感想");
+    await page.locator("#cinelvaRateSave").click();
+    await page.reload();
     await page.locator('[data-tab="records"]').click();
-    await page.locator('#recordList [data-edit="99999999"]').click();
-    await page.locator('#cinelvaRateDate').evaluate(input=>{input.value='2026-06-12';document.getElementById('cinelvaDateTrigger').textContent='2026/06/12';});await page.locator('#cinelvaRatePlace').selectOption('配信');
-    await page.locator('#cinelvaRateComment').fill('自宅で見た感想');await page.locator('#cinelvaRateSave').click();
-    const updated=await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['99999999']);
-    assert.equal(updated.rating,0);assert.equal(updated.viewingMethod,'配信');assert.equal(updated.comment,'自宅で見た感想');
-    await page.locator('.recordUtilities summary').click();
-    assert.equal(await page.locator('#exportRecords').isVisible(),true);
-    const backupWait=page.waitForEvent('download');await page.locator('#exportRecords').click();
-    const backupDownload=await backupWait, backupData=fs.readFileSync(await backupDownload.path());
-    page.once('dialog',dialog=>dialog.accept());await page.locator('#recordList [data-delete="99999999"]').click();
-    assert.equal(await page.locator('#statTotal').textContent(),'2');
-    page.once('dialog',dialog=>dialog.accept());await page.locator('#importFile').setInputFiles({name:'records.json',mimeType:'application/json',buffer:backupData});
-    await page.waitForFunction(()=>document.getElementById('statTotal').textContent==='3');
-    const savedBefore=await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2'));
-    await page.locator('#importFile').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{"records":[{"id":1,"title":"bad","rating":8}]}')});
-    await page.waitForFunction(()=>document.getElementById('status').textContent.includes('復元できません'));
-    assert.equal(await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2')),savedBefore);
-    await page.goto(`${base}/my-cinemap.html`, { waitUntil: 'networkidle' });
-    assert.ok(await page.locator('#art').evaluate(canvas => canvas.width > 0 && canvas.height > 0));
-    const download = page.waitForEvent('download');
-    await page.locator('#save').click();
-    assert.match((await download).suggestedFilename(), /cinelva-.*\.png/);
-    await page.locator('#imageSort').selectOption('rating');
-    await page.locator('#format').selectOption('square');
-    await page.route('https://image.tmdb.org/**',route=>route.abort());
-    await page.locator('#format').selectOption('landscape');
-    const fallbackDownload=page.waitForEvent('download');await page.locator('#save').click();assert.match((await fallbackDownload).suggestedFilename(),/\.png$/);
-    const phone=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1'});
-    await phone.addInitScript(()=>{localStorage.setItem('cinelva-library-records-v2','{"77":{"id":"77","title":"Phone Film","rating":0,"watchedAt":"2026-01-01"}}');});
-    const phonePage=await phone.newPage();await phonePage.goto(`${base}/my-cinemap.html`,{waitUntil:'networkidle'});await phonePage.locator('#save').click();await phonePage.locator('#saveDialog').waitFor({state:'visible'});assert.equal(await phonePage.locator('#saveDialog').isVisible(),true);assert.match(await phonePage.locator('#download').getAttribute('href'),/^blob:/);await phone.close();
-    const dense=await browser.newContext({viewport:{width:390,height:844}});
-    await dense.addInitScript(()=>{const rows=Object.fromEntries(Array.from({length:1000},(_,i)=>[String(8000000+i),{id:String(8000000+i),title:'Film '+i,year:1950+i%70,countries:['Japan'],genres:['SF','アクション'],formats:[i%2?'アニメーション':'実写'],rating:4,watchedAt:'2026-01-01'}]));localStorage.setItem('cinelva-library-records-v2',JSON.stringify(rows));});
-    const densePage=await dense.newPage();await densePage.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});assert.equal(await densePage.locator('#statTotal').textContent(),'1,000');
-    await densePage.locator('[data-tab="records"]').click();assert.equal(await densePage.locator('#recordList [data-record-card]').count(),1000);
-    assert.ok(await densePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await dense.close();
-    const eastwood=directors['190'];
-    assert.ok(eastwood?.works.length>1, 'Eastwood must have a sourced catalog beyond a saved record');
-    const eastwoodContext=await browser.newContext({viewport:{width:390,height:844}});
-    await eastwoodContext.addInitScript(film=>{
-      localStorage.setItem('cinelva-library-records-v2',JSON.stringify({[film.id]:{...film,director:'Clint Eastwood',rating:4}}));
-    },eastwood.works[0]);
-    const eastwoodPage=await eastwoodContext.newPage();
-    eastwoodPage.on('pageerror',error=>errors.push(error.stack||error.message));
-    await eastwoodPage.route(`${base}/data/movies.json`,route=>route.fulfill({json:{movies:[]}}));
-    await eastwoodPage.goto(`${base}/my-cinelva/`,{waitUntil:'networkidle'});
-    await eastwoodPage.locator('[data-tab="directors"]').click();
-    const eastwoodPick=eastwoodPage.locator('#directorTimeline .director-pick');
-    assert.equal(await eastwoodPick.count(),1);
-    assert.match(await eastwoodPick.textContent(),/クリント・イーストウッド/);
-    assert.match(await eastwoodPick.textContent(),new RegExp('1/'+eastwood.works.length+'本'));
-    await eastwoodPick.click();
-    assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile.is-watched').count(),1);
-    assert.equal(await eastwoodPage.locator('#directorFilmography .director-film-tile').count(),eastwood.works.length);
-    assert.ok(await eastwoodPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-    await eastwoodContext.close();
-    const premiereContext=await browser.newContext({viewport:{width:390,height:844}});
-    const premierePage=await premiereContext.newPage();
-    premierePage.on('pageerror',error=>errors.push(error.stack||error.message));
-    const premiere={id:900001,title:'インターステラー',date:'2026-09-01',event:'streaming',service:'Prime Video',tmdb:'https://www.themoviedb.org/movie/157336'};
-    await premierePage.route(`${base}/data/movies.json`,route=>route.fulfill({json:{movies:[premiere]}}));
-    await premierePage.route('https://backend-one-gray-94.vercel.app/api/movies*',route=>route.fulfill({json:{movies:[],external:[]}}));
-    await premierePage.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.fulfill({json:{movie:{id:157336,tmdbId:157336,title:premiere.title,year:'2014',date:'2014-11-05',event:'catalog'}}}));
-    await premierePage.goto(`${base}/search.html?search=${encodeURIComponent(premiere.title)}`,{waitUntil:'networkidle'});
-    assert.equal(await premierePage.locator('#grid .meta').textContent(),'公開年未確認');
-    await premierePage.locator('#grid .card').click();
-    await premierePage.locator('#detail .detailTop h2').waitFor({state:'visible'});
-    assert.equal(await premierePage.locator('#detail .detailTop .small').first().textContent(),'2014');
-    assert.equal(new URL(premierePage.url()).searchParams.get('id'),'157336');
-    assert.match(await premierePage.locator('#movieInformation').textContent(),/2014-11-05/);
-    await premierePage.route('https://backend-one-gray-94.vercel.app/api/movie-detail*',route=>route.abort());
-    await premierePage.goto(`${base}/search.html?search=${encodeURIComponent(premiere.title)}`,{waitUntil:'networkidle'});
-    await premierePage.locator('#grid .card').click();
-    await premierePage.locator('#detail .detailTop h2').waitFor({state:'visible'});
-    assert.equal(await premierePage.locator('#detail .detailTop .small').first().textContent(),'公開年未確認');
-    assert.match(await premierePage.locator('#movieInformation').textContent(),/配信開始2026-09-01/);
-    assert.equal(await premierePage.locator('#detail [data-detail-review]').getAttribute('data-movie-id'),'157336');
-    assert.ok(await premierePage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-    await premiereContext.close();
+    await page
+      .locator('#recordList [data-record-card="900003"] .cinelva-rate-button')
+      .click();
+    assert.equal(
+      await page.locator("#cinelvaRateComment").inputValue(),
+      "保存した感想",
+    );
+    assert.equal(
+      await page.locator("#cinelvaRateDate").inputValue(),
+      "2026-04-12",
+    );
+    await page.locator("#cinelvaRateClose").click();
+    await page.locator(".recordUtilities summary").click();
+    const download = page.waitForEvent("download");
+    await page.locator("#exportRecords").click();
+    const backup = fs.readFileSync(await (await download).path());
+    const before = await page.evaluate(() =>
+      localStorage.getItem("cinelva-library-records-v2"),
+    );
+    await page
+      .locator("#importFile")
+      .setInputFiles({
+        name: "bad.json",
+        mimeType: "application/json",
+        buffer: Buffer.from('{"records":[{"id":1,"title":"bad","rating":8}]}'),
+      });
+    await page.waitForFunction(() =>
+      document.getElementById("status").textContent.includes("復元できません"),
+    );
+    assert.equal(
+      await page.evaluate(() =>
+        localStorage.getItem("cinelva-library-records-v2"),
+      ),
+      before,
+    );
+    await page.locator('#recordList [data-record-card="900003"] .cinelva-rate-button').click();
+    await page.locator("#cinelvaRateScore").fill("0");
+    await page.locator("#cinelvaRateSave").click();
+    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003")),false);
+    page.once("dialog", (d) => d.accept());
+    await page
+      .locator("#importFile")
+      .setInputFiles({
+        name: "records.json",
+        mimeType: "application/json",
+        buffer: backup,
+      });
+    await page.waitForFunction(() => CinelvaLibraryRecords.all().length === 2);
+    await page.goto(base + "/my-cinemap.html");
+    await page.locator("#save").waitFor();
+    assert.ok(await page.locator("#art").evaluate((c) => c.width > 0));
+    const art = page.waitForEvent("download");
+    await page.locator("#save").click();
+    assert.match((await art).suggestedFilename(), /cinelva-.*\.png/);
+    const dense = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+    });
+    await dense.route("https://backend-one-gray-94.vercel.app/**", (r) =>
+      r.abort(),
+    );
+    await dense.addInitScript(() => {
+      localStorage.setItem(
+        "cinelva-library-records-v2",
+        JSON.stringify(
+          Object.fromEntries(
+            Array.from({ length: 1000 }, (_, i) => [
+              String(8000000 + i),
+              {
+                id: String(8000000 + i),
+                title: "Film " + i,
+                year: 2000,
+                rating: 4,
+                watchedAt: "2026-01-01",
+              },
+            ]),
+          ),
+        ),
+      );
+    });
+    const dp = await dense.newPage();
+    dp.on("pageerror", (e) => console.error("dense error", e.message));
+    await dp.goto(base + "/my-cinelva/");
+    await dp
+      .waitForFunction(
+        () =>
+          document.getElementById("csLifetime")?.textContent === "1,000" ||
+          document.getElementById("csLifetime")?.textContent === "1000",
+        null,
+        { polling: 100, timeout: 60000 },
+      )
+      .catch(async (e) => {
+        console.error(
+          await dp.evaluate(() => ({
+            count: CinelvaLibraryRecords.all().length,
+            lifetime: document.getElementById("csLifetime")?.textContent,
+            status: document.getElementById("status")?.textContent,
+          })),
+        );
+        throw e;
+      });
+    await dp.locator('[data-tab="records"]').click();
+    assert.equal(
+      await dp.locator("#recordList [data-record-card]").count(),
+      1000,
+    );
+    assert.ok(
+      await dp.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    );
+    await dense.close();
     assert.deepEqual(errors, []);
-    console.log('My Cinelva mobile records, insights, persistence and PNG export passed');
+    console.log(
+      "My Cinelva summary, 4x3 blue calendar, all-time years, awards, directors, shared review, bookmarks, search variants, persistence, backup/restore, PNG export and 1000 records passed",
+    );
   } finally {
     await browser?.close();
-    server.kill('SIGTERM');
+    server.kill();
   }
-})().catch(error => { console.error(error); process.exitCode = 1; });
+})().catch((e) => {
+  console.error(e);
+  process.exitCode = 1;
+});

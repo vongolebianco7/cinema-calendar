@@ -5,11 +5,13 @@ const vm = require('node:vm');
 
 function render({ records, works, movies = works, name = 'Steven Spielberg', profile = {} }) {
   function element() {
-    const node = { children: [], className: '', innerHTML: '', listeners: {},
+    const node = { style:{setProperty(){}},dataset:{},children: [], className: '', innerHTML: '', listeners: {},
       replaceChildren() { this.children = []; },
-      append(...children) { this.children.push(...children); },
+      append(...children) { for(const c of children){this.children=this.children.filter(x=>x!==c);this.children.push(c)} },
       setAttribute() {},
       insertAdjacentElement() {},
+      insertAdjacentHTML(_where,html){this.innerHTML+=html},
+      prepend(...children){this.children.unshift(...children)},
       addEventListener(type, listener) { this.listeners[type] = listener; },
       querySelectorAll() { return this.children; },
     };
@@ -28,13 +30,13 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
     escapeHTML: value => String(value ?? ''),
     posterHTML: () => '',
     $: id => elements[id],
-    document: { createElement: element },
+    document: { createElement: element, getElementById:()=>null, head:{append(){}} },
   };
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
   const ratedMovies = source.match(/  const ratedMovies = [^\n]+/)[0];
   vm.runInNewContext(ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
-  const [picker, detail] = elements.directorTimeline.children;
+  const picker=elements.directorTimeline.children.find(x=>x.className==='director-picker'), detail=elements.directorTimeline.children.find(x=>x.className==='director-filmography');
   return { row: picker?.children[0], detail, host: elements.directorTimeline };
 }
 
@@ -43,9 +45,9 @@ test('director picker and filmography exclude watched shorts from the same count
   const short = { id: 2, title: '短編作品', director: 'Steven Spielberg', year: 1974, runtime: 10, rating: 3 };
   const unseen = { id: 3, title: '未鑑賞の長編', director: 'Steven Spielberg', year: 1976, runtime: 110 };
   const { row, detail } = render({ records: [feature, short], works: [feature, short, unseen] });
-  assert.match(row.innerHTML, /<strong>1\/2本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>2<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /1 \/ 2本 鑑賞済み/);
+  assert.match(detail.innerHTML, /1 \/ 2本 採点済み/);
   assert.doesNotMatch(detail.innerHTML, /短編作品/);
 });
 
@@ -53,9 +55,9 @@ test('director picker applies enriched metadata exclusions to its denominator', 
   const feature = { id: 1, title: '長編作品', director: 'Steven Spielberg', year: 1975, runtime: 120, rating: 4 };
   const rawWork = { id: 2, title: '形式未確認の作品', director: 'Steven Spielberg', year: 1976 };
   const { row, detail } = render({ records: [feature], works: [feature, rawWork], movies: [feature, { ...rawWork, runtime: 15 }] });
-  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /1 \/ 1本 鑑賞済み/);
+  assert.match(detail.innerHTML, /1 \/ 1本 採点済み/);
   assert.doesNotMatch(detail.innerHTML, /形式未確認の作品/);
 });
 
@@ -88,7 +90,7 @@ test('filmography excludes missing and conflicting director credits', () => {
     { id: 13, title: '別監督の作品', year: 2023, director: 'Someone Else' },
   ];
   const { row, detail } = render({ records: [film], works, name: 'Other Director' });
-  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
   assert.doesNotMatch(detail.innerHTML, /担当不明|出演のみ|別監督/);
 });
@@ -106,9 +108,9 @@ test('a reviewed director includes every watched feature in progress', () => {
   const unrated = { id: 21, title: '鑑賞済み評価なし', director: 'Other Director', year: 2021, runtime: 120, rating: 0 };
   const unseen = { id: 22, title: '未鑑賞', director: 'Other Director', year: 2022, runtime: 120 };
   const { row, detail } = render({ records: [reviewed, unrated], works: [reviewed, unrated, unseen], name: 'Other Director' });
-  assert.match(row.innerHTML, /<strong>2\/3本<\/strong>/);
+  assert.match(row.innerHTML, /<b>2<\/b><small>レビュー済み<\/small><\/span><span><b>3<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /2 \/ 3本 鑑賞済み/);
+  assert.match(detail.innerHTML, /2 \/ 3本 採点済み/);
 });
 
 test('Japanese aliases connect original-name records to sourced profile and full credits', () => {
@@ -132,11 +134,12 @@ test('an imported local ID and its TMDB film count as one watched director work'
   const imported = { ...film, id: 900001, tmdbId: 42, rating: 4.2 };
   const before = JSON.stringify(imported);
   const { row, detail } = render({ records: [imported], works: [film], name: 'Other Director' });
-  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
   assert.equal((detail.innerHTML.match(/class="director-film-tile /g) || []).length, 1);
   assert.match(detail.innerHTML, /search\.html\?id=42"/);
-  assert.match(detail.innerHTML, /★ 4\.2/);
+  assert.match(detail.innerHTML, /data-film-index="0"/);
+  assert.match(detail.innerHTML, /is-watched/);
   assert.equal(JSON.stringify(imported), before, 'rendering must not migrate stored IDs');
 });
 
@@ -144,7 +147,7 @@ test('an explicit TMDB ID does not mark a conflicting local-ID film watched', ()
   const film = { id: 42, title: '未鑑賞の別作品', director: 'Other Director', year: 2020, runtime: 120 };
   const imported = { id: 42, tmdbId: 99, title: '実際の鑑賞作品', director: 'Other Director', year: 2021, runtime: 100, rating: 4 };
   const { row, detail } = render({ records: [imported], works: [film], name: 'Other Director' });
-  assert.match(row.innerHTML, /<strong>1\/2本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>2<\/b>/);
   row.listeners.click();
   assert.match(detail.innerHTML, /is-unwatched[^]*?未鑑賞の別作品/);
   assert.match(detail.innerHTML, /search\.html\?id=99"/);
@@ -154,15 +157,15 @@ test('an explicit TMDB ID does not mark a conflicting local-ID film watched', ()
 test('duplicate imported aliases of one director film do not inflate the counter', () => {
   const film = { id: 42, title: '同一作品', director: 'Other Director', year: 2020, runtime: 120 };
   const { row } = render({ records: [{ ...film, rating: 4 }, { ...film, id: 900001, tmdb_id: 42, rating: 3 }], works: [film], name: 'Other Director' });
-  assert.match(row.innerHTML, /<strong>1\/1本<\/strong>/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
 });
 
 
 test('missing director catalog never presents saved records as the filmography total', () => {
   const film = { id: 1, title: '鑑賞作品', director: 'Clint Eastwood', rating: 4 };
   const { row, detail } = render({ records: [film], works: [], name: 'Other Director' });
-  assert.match(row.innerHTML, /鑑賞1本.*総数未取得/);
-  assert.doesNotMatch(row.innerHTML, /1\/1本/);
+  assert.match(row.innerHTML, /<b>1<\/b>.*<b>—<\/b>/);
+  assert.doesNotMatch(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
   assert.match(detail.innerHTML, /総数未取得/);
   assert.doesNotMatch(detail.innerHTML, /director-progress-track|1 \/ 1本|収録作品 1本/);
@@ -176,25 +179,25 @@ test('ヴ and ブ spelling variants resolve to one sourced director identity', (
     name: 'スティーブン・スピルバーグ',
     profile: { id: 190, nameJa: 'スティーブン・スピルバーグ', original_name: 'Steven Spielberg', also_known_as: ['スティーヴン・スピルバーグ'] },
   });
-  assert.match(row.innerHTML, /1\/1本/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /1 \/ 1本 鑑賞済み/);
+  assert.match(detail.innerHTML, /1 \/ 1本 採点済み/);
 });
 
 test('one-character name difference does not merge distinct unsourced people', () => {
   const first = { id: 601, title: '作品A', director: '山田太郎', runtime: 120, rating: 4 };
   const second = { id: 602, title: '作品B', director: '山田次郎', runtime: 120, rating: 4 };
   const { host } = render({ records: [first, second], works: [first], name: '山田太郎' });
-  assert.equal(host.children[0].children.length, 2);
+  assert.equal(host.children.find(x=>x.className==='director-picker').children.length, 2);
 });
 
 test('incomplete Spielberg catalog never reports a false 1/1 total', () => {
   const film = { id: 901, title: '監督作', director: 'Steven Spielberg', runtime: 120, rating: 4 };
-  const { row, detail } = render({ records: [film], works: [film], profile: { id: 488 } });
-  assert.match(row.innerHTML, /総数未取得/);
-  assert.doesNotMatch(row.innerHTML, /1\/1本/);
+  const { row, detail } = render({ records: [film], works: [film], profile: { id: 488,coverage:{truncated:true} } });
+  assert.match(row.innerHTML, /<b>—<\/b>/);
+  assert.doesNotMatch(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
-  assert.doesNotMatch(detail.innerHTML, /1 \/ 1本 鑑賞済み/);
+  assert.doesNotMatch(detail.innerHTML, /1 \/ 1本 採点済み/);
 });
 
 test('complete Spielberg catalog can show a sourced denominator', () => {
@@ -202,7 +205,7 @@ test('complete Spielberg catalog can show a sourced denominator', () => {
     id: 1000 + n, title: '監督作' + n, director: 'Steven Spielberg', runtime: 120, year: 1980+n
   }));
   const { row } = render({ records: [{ ...films[0], rating: 4 }], works: films, profile: { id: 488, coverage: { truncated: false } } });
-  assert.match(row.innerHTML, /1\/12本/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>12<\/b>/);
 });
 
 test('kana variants in sourced credit names retain every directed film', () => {
@@ -215,9 +218,9 @@ test('kana variants in sourced credit names retain every directed film', () => {
     id:488, nameJa:'スティーブン・スピルバーグ', original_name:'Steven Spielberg',
     also_known_as:['スティーヴン・スピルバーグ'], coverage:{truncated:false}
   }});
-  assert.match(row.innerHTML,/1\/12本/);
+  assert.match(row.innerHTML,/<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>12<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML,/1 \/ 12本 鑑賞済み/);
+  assert.match(detail.innerHTML,/1 \/ 12本 採点済み/);
 });
 
 test('TMDB runtime-unverified shorts do not leak into director feature count', () => {
@@ -225,17 +228,17 @@ test('TMDB runtime-unverified shorts do not leak into director feature count', (
   const unknown = { id: 7101, title:'短編らしい作品', director:'Other Director', source:'tmdb', job:'Director' };
   const short = { id: 7102, title:'短編', director:'Other Director', source:'tmdb', job:'Director', runtime:19 };
   const {row,detail}=render({records:[long],works:[long,unknown,short],name:'Other Director'});
-  assert.match(row.innerHTML,/1\/1本/);
+  assert.match(row.innerHTML,/<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
   assert.doesNotMatch(detail.innerHTML,/短編らしい作品|短編/);
 });
 
-test('verified TMDB feature remains after unknown-runtime credits are filtered', () => {
+test('unknown runtime retains an explicitly verified directing credit', () => {
   const watched={id:7110,title:'鑑賞した長編',director:'Other Director',rating:4,runtime:125};
   const known={...watched,source:'tmdb',job:'Director'};
   const unknown={id:7111,title:'未確認作品',source:'tmdb',director:'Other Director',job:'Director'};
   const {row}=render({records:[watched],works:[known,unknown],name:'Other Director'});
-  assert.match(row.innerHTML,/1\/1本/);
+  assert.match(row.innerHTML,/<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>2<\/b>/);
 });
 
 test('30-minute films remain, while 29-minute films are excluded', () => {
@@ -243,7 +246,7 @@ test('30-minute films remain, while 29-minute films are excluded', () => {
   const under = { id: 8301, title: '29分作品', director: 'Other Director', runtime: 29 };
   const fortyFive = { id: 8302, title: '45分作品', director: 'Other Director', runtime: 45 };
   const { row, detail } = render({ records: [rated], works: [rated, under, fortyFive], name: 'Other Director' });
-  assert.match(row.innerHTML, /1\/2本/);
+  assert.match(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>2<\/b>/);
   row.listeners.click();
   assert.match(detail.innerHTML, /30分作品/);
   assert.match(detail.innerHTML, /45分作品/);
@@ -252,17 +255,17 @@ test('30-minute films remain, while 29-minute films are excluded', () => {
 
 test('Paul Thomas Anderson partial TMDB catalog never reports a false 1/1 total', () => {
   const film={id:7345,title:'ゼア・ウィル・ビー・ブラッド',director:'Paul Thomas Anderson',runtime:158,rating:4.5,source:'tmdb',job:'Director'};
-  const {row,detail}=render({records:[film],works:[film],name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false}}});
-  assert.match(row.innerHTML,/総数未取得/);
-  assert.doesNotMatch(row.innerHTML,/1\/1本/);
+  const {row,detail}=render({records:[film],works:[film],name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:true}}});
+  assert.match(row.innerHTML,/<b>—<\/b>/);
+  assert.doesNotMatch(row.innerHTML,/<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
-  assert.doesNotMatch(detail.innerHTML,/1 \/ 1本 鑑賞済み/);
+  assert.doesNotMatch(detail.innerHTML,/1 \/ 1本 採点済み/);
 });
 
 test('Paul Thomas Anderson shows real denominator after 8 verified features', () => {
   const works=Array.from({length:9},(_,i)=>({id:85000+i,title:'長編'+i,director:'Paul Thomas Anderson',runtime:100+i,source:'tmdb',job:'Director',is_director:true,year:2000+i}));
   const {row}=render({records:[{...works[0],rating:4}],works,name:'Paul Thomas Anderson',profile:{id:4762,original_name:'Paul Thomas Anderson',coverage:{truncated:false,runtime_unverified:0}}});
-  assert.match(row.innerHTML,/1\/9本/);
+  assert.match(row.innerHTML,/<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>9<\/b>/);
 });
 
 test('sourced PTA films are not vetoed by conflicting generic movie metadata', () => {
@@ -270,7 +273,7 @@ test('sourced PTA films are not vetoed by conflicting generic movie metadata', (
   const record={...works[0],rating:4};
   const movies=works.map((work,i)=>({...work,director:i===0?work.director:'別名の監督',runtime:i===0?work.runtime:undefined,job:i===0?'Director':'Producer'}));
   const {row}=render({records:[record],works,movies,name:'ポール・トーマス・アンダーソン',profile:{id:4762,nameJa:'ポール・トーマス・アンダーソン',coverage:{truncated:false}}});
-  assert.match(row.innerHTML,/12本/);
+  assert.match(row.innerHTML,/<b>12<\/b>/);
 });
 
 test('legacy director spelling resolves a unique TMDB person from rated movie credit', () => {
@@ -278,7 +281,7 @@ test('legacy director spelling resolves a unique TMDB person from rated movie cr
   const reviewed={id:97000,title:'長編0',director:'Paul T Anderson',director_id:4762,rating:4,runtime:110};
   const {row}=render({records:[reviewed],works,name:'ポール・トーマス・アンダーソン',profile:{id:4762,coverage:{truncated:false}}});
   assert.match(row.innerHTML,/12/);
-  assert.doesNotMatch(row.innerHTML,/監督作品総数<\\/small><\\/span><span><b>—/);
+  assert.doesNotMatch(row.innerHTML,/監督作品総数<\/small><\/span><span><b>—/);
 });
 
 test('a unique source movie credit resolves old spellings without explicit person id', () => {

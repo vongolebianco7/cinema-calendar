@@ -6,7 +6,7 @@ const source=fs.readFileSync('js/cinelva-quick-rate.js','utf8');
 function setup(existing=[]){
  const nodes=new Map(),writes=[];
  const node=()=>({value:'',textContent:'',onclick:null,children:[],options:[],
-  style:{setProperty(){}},setAttribute(){},replaceWith(){},addEventListener(){},
+  style:{setProperty(){}},attributes:{},setAttribute(k,v){this.attributes[k]=String(v)},getAttribute(k){return this.attributes[k]??null},replaceWith(){},addEventListener(){},
   append(child){this.children.push(child);this.options.push(child);},
   replaceChildren(){this.children=[];this.options=[];}
  });
@@ -23,7 +23,7 @@ function setup(existing=[]){
  };
  const Records={all:()=>existing,validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
  const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
- vm.runInNewContext(source,{window,document,location:{pathname:'/'},CustomEvent:class{constructor(){}},MutationObserver:class{}});
+ vm.runInNewContext(source,{window,document,location:{pathname:'/'},CustomEvent:class{constructor(){}},MutationObserver:class{observe(){}}});
  return {api:window.CinelvaQuickRate,dialog,element,writes};
 }
 test('middle dot, spaces and Unicode punctuation do not prevent title matching',()=>{
@@ -52,9 +52,9 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};
  const {api,element,writes}=setup([old]);
- assert.equal(api.open({id:22,title:'作品'}),true);
+ assert.equal(api.open({id:22,title:'作品',_localRecord:true}),true);
  assert.equal(element('cinelvaRateScore').value,0);
- assert.equal(element('cinelvaRatePlace').value,'配信');
+ assert.equal(element('cinelvaRatePlace').value,'配信・サブスク');
  assert.equal(element('cinelvaRateComment').value,'短評');
  element('cinelvaRateDate').value='not-a-date';
  element('cinelvaRateSave').onclick();
@@ -73,10 +73,8 @@ test('all three existing pages load the shared inline rating workflow',()=>{
  assert.doesNotMatch(fs.readFileSync('my-cinelva/index.html','utf8'),/id="unrated"/);
 });
 
-test('calendar observer refresh is quiescent when an inline score is unchanged',()=>{
- assert.match(
-  source,
-  /if\(value\.textContent!==text\)value\.textContent=text/,
-  'updating an unchanged output node retriggers the subtree MutationObserver forever'
- );
+test('calendar observer decorates only added movie cards rather than its own rating text',()=>{
+ assert.match(source,/for\(const node of record.addedNodes\)/);
+ assert.match(source,/if\(cards.length\)decorate\(cards\)/);
+ assert.match(source,/if\(card.querySelector/);
 });

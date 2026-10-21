@@ -35,8 +35,8 @@
     const direct=sourceFrom(movie);
     if(direct){globalThis.CinelvaMovieIdentity?.ingest(movie);return direct;}
     const id=String(movie.tmdbId??movie.tmdb_id??movie.id??'');
-    const metadata=metadataFor(id);
-    const byIdentifier=sourceFrom(metadata)||catalogPoster(id);
+    const metadata=metadataFor(globalThis.CinelvaMovieIdentity?.id(movie));
+    const byIdentifier=sourceFrom(metadata)||catalogPoster(globalThis.CinelvaMovieIdentity?.id(movie));
     if(byIdentifier)return byIdentifier;
     // Imported records sometimes use a different local ID from the catalog.
     // Only reuse artwork when normalized title and release year both match.
@@ -48,12 +48,12 @@
     if(matches.length!==1)return '';
     return sourceFrom(matches[0]);
   };
-  const recordMovies = () => state.records.filter(record => record.watched !== false);
+  const recordMovies = () => state.records.filter(record => record.watched !== false && record.rating !== 0);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');
   const metadataFor = id => byId.get(String(id)) || {};
   const countryAliases = {"united states":"アメリカ","united states of america":"アメリカ","usa":"アメリカ","us":"アメリカ","アメリカ合衆国":"アメリカ","united kingdom":"イギリス","uk":"イギリス","gb":"イギリス","great britain":"イギリス","英国":"イギリス","japan":"日本","jp":"日本","france":"フランス","germany":"ドイツ","italy":"イタリア","spain":"スペイン","canada":"カナダ","australia":"オーストラリア","south korea":"韓国","china":"中国","hong kong":"香港","taiwan":"台湾","india":"インド","brazil":"ブラジル","mexico":"メキシコ","russia":"ロシア","new zealand":"ニュージーランド","sweden":"スウェーデン","denmark":"デンマーク","norway":"ノルウェー","finland":"フィンランド","netherlands":"オランダ","switzerland":"スイス","austria":"オーストリア","ireland":"アイルランド","poland":"ポーランド","argentina":"アルゼンチン","thailand":"タイ","vietnam":"ベトナム","philippines":"フィリピン","indonesia":"インドネシア","turkey":"トルコ","iran":"イラン","israel":"イスラエル","portugal":"ポルトガル","greece":"ギリシャ","belgium":"ベルギー"};
   const countryJP = value => countryAliases[String(value||'').trim().toLowerCase()] || String(value||'').trim();
-  const enriched = record => {const metadata=metadataFor(record.tmdbId??record.tmdb_id??record.id),array=value=>Array.isArray(value)?value:[],countries=array(record.countries).length?array(record.countries):array(metadata.countries).length?array(metadata.countries):(record.region?[record.region]:[]);return {...metadata,...record,countries:[...new Set(countries.filter(country=>typeof country==='string').map(countryJP))],genres:array(record.genres).length?array(record.genres):array(metadata.genres),year:record.year||metadata.year||Number(String(metadata.date||'').slice(0,4))||null,director:record.director||metadata.director||''};};
+  const enriched = record => {const identity=globalThis.CinelvaMovieIdentity,canonical=identity?.id(record)||record.tmdbId||record.tmdb_id||identity?.id(identity?.resolve(record)),metadata=canonical?metadataFor(canonical):{},array=value=>Array.isArray(value)?value:[],countries=array(record.countries).length?array(record.countries):array(metadata.countries).length?array(metadata.countries):(record.region?[record.region]:[]);return {...metadata,...record,...(canonical?{tmdbId:canonical}:{_localRecord:true}),countries:[...new Set(countries.filter(country=>typeof country==='string').map(countryJP))],genres:array(record.genres).length?array(record.genres):array(metadata.genres),year:record.year||metadata.year||Number(String(metadata.date||'').slice(0,4))||null,director:record.director||metadata.director||''};};
   const dateOf = record => typeof record.watchedAt === 'string' ? record.watchedAt : '';
   const classificationFor = record => { const movie=enriched(record); const classified=Insights.classifyGenres([...(movie.genres||[]),...(Array.isArray(movie.formats)?movie.formats:[]),...(Array.isArray(movie.workForms)?movie.workForms:[])]);return {...classified,formats:movie.format?[movie.format]:classified.formats,workForms:movie.workForm?[movie.workForm]:classified.workForms}; };
   const formatDate = value => value ? value.replaceAll('-', '.') : '鑑賞日未登録';
@@ -149,8 +149,9 @@
     $('csTop').querySelectorAll('[data-top-review-id]').forEach(node=>{
       const movie=top.find(r=>String(r.tmdbId??r.tmdb_id??r.id)===node.dataset.topReviewId);
       if(!movie)return;
-      const id=Number(movie.tmdbId??movie.tmdb_id??movie.id);
-      const film={...movie,id,tmdbId:id};
+      const identity=globalThis.CinelvaMovieIdentity;
+      const id=Number(identity?.id(movie)||identity?.id(identity?.resolve(movie))||0);
+      const film={...movie,id:id||movie.id,tmdbId:id||undefined,_localRecord:!id};
       globalThis.CinelvaQuickRate?.mountInline?.(node,film);
       if(Number.isSafeInteger(id)&&id>0)globalThis.CinelvaMovieIdentity?.hydrateCard?.(node.closest('.cs-film')?.querySelector('.cs-film-art'),film);
     });
@@ -300,11 +301,13 @@
   }
   function card(movie) {
     const id=escapeHTML(movie.id),title=escapeHTML(movie.title||'作品名不明');
+    const canonical=globalThis.CinelvaMovieIdentity?.id(movie);
+    const detail=escapeHTML('../search.html?'+(canonical?'id='+encodeURIComponent(canonical)+'&':'')+'search='+encodeURIComponent(movie.title||''));
     const releaseCandidate=String(movie.release_date||movie.releaseDate||movie.releaseDateJP||movie.release_date_jp||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).release_date||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).releaseDate||'').trim();
     const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','.'):(movie.year?String(movie.year):'公開日未取得');
     return '<article class="movie cinelva-unified-record-card" data-record-card="'+id+'">'+
-      '<div class="cinelva-record-poster">'+posterHTML(movie)+'</div>'+
-      '<strong class="cinelva-record-title">'+title+'</strong>'+
+      '<a class="cinelva-record-poster" href="'+detail+'" aria-label="作品詳細：'+title+'">'+posterHTML(movie)+'</a>'+
+      '<a class="cinelva-record-title" href="'+detail+'">'+title+'</a>'+
       '<div class="cinelva-record-meta"><small>'+escapeHTML(releaseDate)+'</small></div>'+
       '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
@@ -316,8 +319,8 @@
       const record=state.records.find(item=>String(item.id)===id);
       const movie=record?enriched(record):state.movies.find(item=>String(item.id)===id);
       if(!movie)return;
-      const tmdbId=Number(movie.tmdbId??movie.tmdb_id??movie.id??id);
-      const film={...movie,id:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:id,tmdbId:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:undefined};
+      const tmdbId=Number(globalThis.CinelvaMovieIdentity?.id(movie)||globalThis.CinelvaMovieIdentity?.id(globalThis.CinelvaMovieIdentity?.resolve(movie))||0);
+      const film={...movie,id:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:id,tmdbId:Number.isInteger(tmdbId)&&tmdbId>0?tmdbId:undefined,_localRecord:!(Number.isInteger(tmdbId)&&tmdbId>0)};
       // Reuse the shared poster identity recovery for watched and calendar cards.
       const posterTarget=node.closest('.cinelva-unified-record-card')?.querySelector('.cinelva-record-poster .poster');
       if(posterTarget)globalThis.CinelvaMovieIdentity?.hydrateCard?.(posterTarget,film);
@@ -474,7 +477,7 @@
     $('yearHeatmapTitle').textContent='年間鑑賞カレンダー';
     $('yearHeatmap').classList.remove('cinelva-alltime-years');
     $('yearHeatmap').classList.add('cinelva-annual-calendar');
-    const medal='<span class="cy-medal" aria-label="金メダル"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 10-2 11 5-3 5 3-2-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>GOLD</span></span>';
+
     $('yearHeatmap').innerHTML=monthly.map((count,m)=>{
       const first=new Date(year,m,1).getDay(),length=new Date(year,m+1,0).getDate();
       const cells=Array.from({length:first},()=>'<span class="cy-empty" aria-hidden="true"></span>');
@@ -483,9 +486,8 @@
         const n=daily.get(date)||0;
         cells.push('<button class="cy-day'+(n?' watched':'')+'" data-date="'+date+'" title="'+date+'：'+n+'本" aria-label="'+date+'、'+n+'本" style="--cy-intensity:'+Math.min(1,.28+n*.16)+'"></button>');
       }
-      const achieved=count>=5;
-      const tone=achieved?'gold-month':count===0?'empty-month':count===4?'deep-month':count===3?'mid-month':count===2?'light-month':'one-month';
-      return '<section class="cy-month '+tone+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+(achieved?medal:'')+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
+      const tone=count===0?'empty-month':count>=4?'deep-month':count===3?'mid-month':count===2?'light-month':'one-month';
+      return '<section class="cy-month '+tone+'" aria-label="'+(m+1)+'月 '+count+'本"><button class="cy-month-head" data-calendar-month="'+m+'"><span class="cy-month-name">'+(m+1)+'月</span><span class="cy-month-total"><strong>'+count+'</strong><small>本</small></span>'+'</button><div class="cy-dots">'+cells.join('')+'</div></section>';
     }).join('');
     $('yearHeatmap').setAttribute('aria-label',year+'年の年間鑑賞カレンダー');
   }
@@ -966,7 +968,8 @@
         // have another lead director or missing runtime and must not veto them.
         if(!isDirectorCredit(work,sourcedName))continue;
         const id=filmIdentity(work), metadata=movieById.get(id)||{};
-        const combined={...metadata,...work,id};
+        const combined={...metadata,...work,id,runtime:work.runtime??metadata.runtime};
+        if(!isDirectorCredit(combined,sourcedName))continue;
         all.set(id,combined);
       }
       for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}

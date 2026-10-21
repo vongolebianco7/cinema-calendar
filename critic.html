@@ -69,7 +69,7 @@
 </style><link rel="stylesheet" href="assets/theme.css">
 <meta property="og:image" content="https://cinelva.vercel.app/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
 <script src="js/cinelva-movie-identity.js?v=20261020-canonical"></script></head><body><header class="gTop"><div class="wrap gNav"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><form class="gSearchForm" action="search.html"><input class="gSearch" name="search" type="search" placeholder="作品を検索" aria-label="作品を検索"><button class="gSearchBtn" aria-label="検索">⌕</button></form><button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー">☰</button></div></header><div class="gDrawerMask" id="gDrawerMask"></div><aside class="gDrawer" id="gDrawer"><div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div><a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="rankings.html">ランキング</a><a href="theaters.html">映画館を探す</a><a href="experience.html">上映方式</a><a href="my-cinemap.html">My Cinelva</a></aside><main class="wrap"><a class="back" id="detailBack" href="search.html">← 作品詳細へ戻る</a><div id="app" class="status">作品を読み込み中…</div></main>
-<script src="js/critic-evidence.js"></script><script>
+<script src="js/critic-evidence.js"></script><script src="js/cinelva-library-records.js"></script><script src="js/cinelva-quick-rate.js"></script><script>
 const E=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])), app=document.getElementById("app");
 const movieId=m=>String(m.tmdbId||m.id||"");
 function renderEvidence(m,data){
@@ -88,7 +88,7 @@ function render(m,data){
  app.className='';app.innerHTML='<div class="hero">'+((window.CinelvaMovieIdentity?.posterFor(m)||m.poster)?'<img class="poster" src="'+E(window.CinelvaMovieIdentity?.posterFor(m)||m.poster)+'" alt="">':'')+'<div><h1>'+E(m.title)+'</h1><div class="muted">'+E(m.year||'')+(m.director?' · '+E(m.director):'')+'</div></div></div>'+
  (unlocked||!hasEvidence?'':'<div class="gate" id="gate"><p>批評には重要な展開や結末に触れる可能性があります。</p><button id="unlock" type="button">観たので批評を見る</button></div>')+
  '<div id="evidence" '+(unlocked||!hasEvidence?'':'hidden')+'>'+renderEvidence(m,data)+'<p class="deep"><a href="search.html?id='+encodeURIComponent(id)+'&search='+encodeURIComponent(m.title||'')+'">作品情報へ戻る →</a></p></div>';
- window.CinelvaMovieIdentity?.hydrateCard(app.querySelector('.hero'),m);
+ const hero=app.querySelector('.hero');window.CinelvaMovieIdentity?.hydrateCard(hero,m);const review=document.createElement('div');hero.after(review);window.CinelvaQuickRate?.mountInline(review,{...m,tmdbId:Number(id)});
  const unlock=document.getElementById('unlock');if(unlock)unlock.onclick=()=>{sessionStorage.setItem(key,'yes');document.getElementById('gate').remove();document.getElementById('evidence').hidden=false};
 }
 async function load(){
@@ -98,8 +98,9 @@ async function load(){
   const evidence=await fetch('data/critic_evidence.json?v=20260926b',{cache:'default'});
   if(!evidence.ok)throw Error('evidence');const data=await evidence.json();
   const entry=data.films?.[String(id||'')]||{};
-  const m={id,title:entry.title||title||'作品名を確認できませんでした',year:entry.year||'',related:[]};
-  render(m,data);
+  const m={id,tmdbId:Number(id),title:entry.title||title||'',year:entry.year||'',related:[]};
+  render({...m,title:m.title||'作品名を確認できませんでした'},data);
+  window.CinelvaMovieIdentity?.fetchOne(m).then(resolved=>{if(resolved){const image=app.querySelector('.hero .poster');if(image)window.CinelvaMovieIdentity.hydratePoster(image,resolved);else window.CinelvaMovieIdentity.hydrateCard(app.querySelector('.hero'),resolved);if(!m.title&&resolved.title){app.querySelector('h1').textContent=resolved.title;}}}).catch(()=>{});
  }catch(e){app.innerHTML='<p>批評情報を読み込めませんでした。</p><button type="button" id="retry">再試行</button>';document.getElementById('retry').onclick=load}
 }
 load();

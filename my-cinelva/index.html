@@ -932,7 +932,7 @@ function render(){
   const review=document.createElement('div');review.className='want-watch-review';
   card.append(link,review);list.append(card);
   globalThis.CinelvaQuickRate?.mountInline?.(review,{...item,id:Number(item.id),tmdbId:Number(item.id),title:item.title||'作品'});
-
+  globalThis.CinelvaMovieIdentity?.hydrateCard(poster,{...item,tmdbId:Number(item.id)});
 
  }
 }

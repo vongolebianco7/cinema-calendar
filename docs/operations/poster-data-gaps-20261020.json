@@ -1,0 +1,87 @@
+{
+  "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
+  "count": 8,
+  "movies": [
+    {
+      "file": "data/streaming.json",
+      "title": "Stray Kids : The dominATE Experience",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-09-02",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/streaming.json",
+      "title": "リロ＆スティッチ",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-09-17",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/summer-promo-release",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/streaming.json",
+      "title": "スーパーマン",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-15",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/streaming.json",
+      "title": "ドライブ ー偽りの関係ー",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-28",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/streaming.json",
+      "title": "アポカリプスZ：新しい世界",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-30",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/streaming.json",
+      "title": "僕の狂ったフェミ彼女",
+      "tmdbId": 1591961,
+      "year": 2026,
+      "date": "2026-12-03",
+      "source_url": "https://about.netflix.com/ja/news/my-crazy-feminist-girlfriend-additionalcast",
+      "reason": "Canonical detail has no poster asset.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "data/outdoor-events.json",
+      "title": "ローマの休日",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-10",
+      "source_url": "https://www.hibiya.tokyo-midtown.com/hibiya-cinema-festival/line-up/",
+      "reason": "No unique verified canonical ID; numeric local database IDs and ambiguous remakes were rejected.",
+      "handling": "Keep explicit poster fallback and title search; wait for verified source identity/artwork. Do not reuse a different film poster."
+    },
+    {
+      "file": "events.html fallbackEvents",
+      "title": "ルックバック",
+      "tmdbId": null,
+      "year": null,
+      "date": "2026-10-10",
+      "source_url": "https://sumidapark-cinema.com/",
+      "reason": "Fallback event does not identify which adaptation; same-title local catalog entry cannot establish the event identity.",
+      "handling": "Keep explicit fallback and title search until an approved lineup confirms original year/canonical ID."
+    }
+  ],
+  "existing_metadata_restored_to_source_rows": 58
+}

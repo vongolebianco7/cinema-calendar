@@ -3,9 +3,15 @@
 'use strict';
 const Records=root.CinelvaLibraryRecords;
 if(!Records)return;
+let recordCache=null,lastRecordData=null,lastLegacyData=null,lastDeletedData=null;
+const allRecords=()=>{let data,legacy,deleted;try{data=localStorage.getItem(Records.KEY);legacy=localStorage.getItem(Records.LEGACY);deleted=localStorage.getItem(Records.DELETED)}catch{}if(!recordCache||data!==lastRecordData||legacy!==lastLegacyData||deleted!==lastDeletedData){recordCache=Records.all();lastRecordData=data;lastLegacyData=legacy;lastDeletedData=deleted}return recordCache};
+root.addEventListener('cinelva-record-updated',()=>{recordCache=null});
+root.addEventListener('storage',()=>{recordCache=null});
+
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const validId=x=>/^[1-9]\d*$/.test(String(x??''));
+const canonicalId=movie=>root.CinelvaMovieIdentity?.id(movie)||movie?.tmdbId||movie?.tmdb_id||movie?.id;
 let selected=null,activeCard=null;
 // Fill missing community scores only when a card becomes visible. Strict title matching
 // avoids attributing an unrelated film's TMDB rating to a release.
@@ -17,8 +23,8 @@ function ratingBackend(){
 }
 function resolveCommunityRating(movie,done){
  const title=movie?.title||movie?.name;
- if(!title)return;
- const key=normalizedTitle(title);if(!key)return;
+ if(!title||movie._localRecord)return;
+ const titleKey=normalizedTitle(title),wanted=Number(root.CinelvaMovieIdentity?.id(movie)||movie.tmdbId||movie.tmdb_id||movie.id||0),releaseYear=Number(movie.year||String(movie.release_date||'').slice(0,4));const key=String(wanted)+'|'+titleKey+'|'+releaseYear;if(!titleKey||(!wanted&&!releaseYear))return;
  if(tmdbCache.has(key)){tmdbCache.get(key).then(done);return;}
  const task=new Promise(resolve=>{tmdbQueue.push(async()=>{
   try{
@@ -26,7 +32,7 @@ function resolveCommunityRating(movie,done){
    const response=await fetch(base+'/api/movies?q='+encodeURIComponent(title)+'&limit=8');
    if(!response.ok)return resolve(null);
    const data=await response.json(),candidates=[...(data.movies||[]),...(data.external||[])];
-   const match=candidates.find(x=>normalizedTitle(x.title)===key||normalizedTitle(x.original_title)===key);
+   const matches=candidates.filter(x=>wanted?Number(x.tmdbId||x.tmdb_id||x.id)===wanted:Number(x.year||String(x.release_date||'').slice(0,4))===releaseYear&&[x.title,x.original_title].some(t=>normalizedTitle(t)===titleKey));const unique=new Set(matches.map(x=>String(x.tmdbId||x.tmdb_id||x.id)));const match=unique.size===1?matches[0]:null;
    const score=Number(match?.vote_average??match?.score);
    resolve(Number.isFinite(score)&&score>0?score:null);
   }catch{resolve(null);}
@@ -54,7 +60,7 @@ style.textContent+="\n/* Larger review controls, without allowing horizontal ove
 style.textContent+="\n/* Review-specific spoiler toggle belongs beside its comment label, not below the field. */\n.cinelva-rate-dialog .cinelva-comment-field{display:grid;gap:7px;min-width:0;max-width:100%;width:100%;box-sizing:border-box}\n.cinelva-rate-dialog .cinelva-comment-heading{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;min-width:0;width:100%}\n.cinelva-rate-dialog .cinelva-comment-heading>label{display:block!important;flex:1 1 auto;min-width:0;width:auto!important;margin:0;font-size:clamp(14px,3.8vw,16px)!important;white-space:nowrap}\n.cinelva-rate-dialog .cinelva-spoiler-button{display:inline-flex!important;align-items:center;justify-content:center;flex:0 1 auto;gap:5px;min-width:0;max-width:54%;padding:6px 9px!important;border:1px solid #777f8c!important;border-radius:8px!important;background:rgba(115,125,140,.09)!important;color:#929ba8!important;white-space:nowrap!important;line-height:1.2!important;font-size:clamp(11px,3.2vw,13px)!important;cursor:pointer;box-sizing:border-box}\n.cinelva-rate-dialog .cinelva-spoiler-button .cinelva-spoiler-alert{display:grid;place-items:center;flex:0 0 15px;width:15px;height:15px;border:1.5px solid currentColor;border-radius:50%;font-size:10px;font-weight:800;line-height:1}\n.cinelva-rate-dialog .cinelva-spoiler-button[aria-pressed=\"true\"]{background:#9c2828!important;border-color:#ff7474!important;color:#fff!important}\n.cinelva-rate-dialog .cinelva-comment-field textarea{display:block;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}\n@media(max-width:350px){.cinelva-rate-dialog .cinelva-spoiler-button{padding:5px 6px!important;gap:3px!important;font-size:11px!important}}\n";
 document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='cinelva-rate-dialog';
-dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信・サブスク">配信・サブスク</option><option value="DVD・Blu-ray">DVD／ブルーレイ</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueWrap" hidden><span id="cinelvaRateVenueLabel">方式</span><select id="cinelvaRateVenue"></select></label></div><div class="cinelva-comment-field"><div class="cinelva-comment-heading"><label for="cinelvaRateComment">感想（任意）</label><button type="button" class="cinelva-spoiler-button" id="cinelvaRateSpoiler" aria-pressed="false"><span class="cinelva-spoiler-alert" aria-hidden="true">!</span><span>ネタバレあり</span></button></div><textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></div><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">閉じる</button><button type="button" id="cinelvaRateSave">保存</button></div></form>`;
+dialog.innerHTML=`<form class="cinelva-rate-inner" method="dialog"><div class="cinelva-review-header"><strong id="cinelvaRateTitle">レビュー</strong><button type="button" id="cinelvaRateX" aria-label="閉じる">×</button></div><div class="cinelva-review-score"><output id="cinelvaRateValue">0.0</output><span>/ 5.0</span><input aria-label="点数" id="cinelvaRateScore" type="range" min="0" max="5" step="0.1" value="0"></div><div class="cinelva-review-date"><label>鑑賞日<input id="cinelvaRateDate" type="hidden"><button type="button" id="cinelvaDateTrigger" aria-label="鑑賞日を選択" aria-expanded="false"></button></label><div id="cinelvaDatePicker" class="cinelva-date-picker" hidden><div class="cinelva-date-nav"><button type="button" id="cinelvaDatePrev" aria-label="前月">‹</button><strong id="cinelvaDateMonth"></strong><button type="button" id="cinelvaDateNext" aria-label="翌月">›</button></div><div id="cinelvaDateGrid" class="cinelva-date-grid"></div></div></div><div class="cinelva-review-method"><label>鑑賞方法<select id="cinelvaRatePlace"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信・サブスク">配信・サブスク</option><option value="TV">TV</option><option value="DVD・Blu-ray">DVD／ブルーレイ</option><option value="その他">その他</option></select></label><label id="cinelvaRateVenueWrap" hidden><span id="cinelvaRateVenueLabel">方式</span><select id="cinelvaRateVenue"></select></label></div><div class="cinelva-comment-field"><div class="cinelva-comment-heading"><label for="cinelvaRateComment">感想（任意）</label><button type="button" class="cinelva-spoiler-button" id="cinelvaRateSpoiler" aria-pressed="false"><span class="cinelva-spoiler-alert" aria-hidden="true">!</span><span>ネタバレあり</span></button></div><textarea id="cinelvaRateComment" maxlength="2000" rows="3"></textarea></div><p id="cinelvaRateMessage" role="status" style="margin:0;font-size:12px"></p><div class="cinelva-rate-actions"><button type="button" id="cinelvaRateClose">閉じる</button><button type="button" id="cinelvaRateSave">保存</button></div></form>`;
 document.body.append(dialog);
 const $=id=>dialog.querySelector('#'+id);
 const dateYear=document.createElement('select');
@@ -143,17 +149,28 @@ function syncViewingVenue(saved=''){
  select.value=saved||'';
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
+function viewingRecord(movie){
+ const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
+ return allRecords().find(record=>{
+  if(movie._localRecord)return String(record.id)===String(movie.id);
+  const explicit=identity?.id(record)||record.tmdbId||record.tmdb_id;
+  if(explicit)return String(explicit)===String(target);
+  const resolved=identity?.id(identity?.resolve(record));
+  if(resolved)return String(resolved)===String(target);
+  return String(record.id)===String(target)&&String(record.title)===String(movie.title)&&Number(record.year)>0&&Number(record.year)===Number(movie.year);
+ });
+}
 function open(movie,options={}) {
- const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ const id=canonicalId(movie);
  if(!validId(id)){return false;}
- const existing=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
- selected={...movie,...existing,id:String(existing?.id??id),tmdbId:id,title:existing?.title||movie.title||movie.name||'作品'};
+ const existing=viewingRecord(movie);
+ selected={...movie,...existing,_editingExisting:Boolean(existing),id:String(existing?.id??id),...(movie._localRecord?{}:{tmdbId:id}),title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
  syncDialogScore();
- $('cinelvaRatePlace').value=existing?.viewingMethod==='配信'?'配信・サブスク':existing?.viewingMethod==='TV'?'その他':existing?.viewingMethod==='DVD／ブルーレイ'?'DVD・Blu-ray':(existing?.viewingMethod||'');
+ $('cinelvaRatePlace').value=existing?.viewingMethod==='配信'?'配信・サブスク':existing?.viewingMethod==='DVD／ブルーレイ'?'DVD・Blu-ray':(existing?.viewingMethod||'');
  syncViewingVenue(existing?.viewingVenue||'');
- $('cinelvaRateDate').value=existing?.watchedAt||new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+ $('cinelvaRateDate').value=existing?existing.watchedAt||'':new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
  dateTrigger.textContent=dateInput.value?dateInput.value.replaceAll('-','/'):'鑑賞日未登録';closeDatePicker();
  $('cinelvaRateComment').value=existing?.comment||'';
  $('cinelvaRateSpoiler').setAttribute('aria-pressed',String(Boolean(existing?.hasSpoilers??existing?.spoiler??existing?.containsSpoilers)));
@@ -167,7 +184,8 @@ function save() {
  const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
-  Records.save({...selected,comment,hasSpoilers:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',spoiler:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',viewingMethod:$('cinelvaRatePlace').value,viewingVenue:!$('cinelvaRateVenueWrap').hidden?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);
+  if(Number($('cinelvaRateScore').value)===0){if(selected._editingExisting&&String(viewingRecord(selected)?.id)===String(selected.id))Records.remove(selected.id);}
+  else {const {_editingExisting,_localRecord,...movie}=selected;Records.save({...movie,comment,hasSpoilers:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',spoiler:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);}
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
   dialog.close();
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
@@ -229,7 +247,7 @@ function enhanceCalendar(grid){
     if(!open(movie))rate.setAttribute('aria-label','作品IDを確認できません');
    };
    const movie=root.CinelvaRatingResolve?.(card.dataset.mi,'calendar');
-   const movieId=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+   const movieId=canonicalId(movie);
    if(!validId(movieId))continue;
    card.append(rate);
    attachInlineScore(rate,movie);
@@ -258,10 +276,10 @@ style.textContent+=`
 .streamingWeekMovies>.streamMovie>.cinelva-rate-button{display:none!important}
 `;
 function attachInlineScore(button,movie) {
- const id=movie?.tmdbId??movie?.tmdb_id??movie?.id;
+ const id=canonicalId(movie);
  if(!validId(id))return;
  const syncWatched=()=>{
-  const record=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id));
+  const record=viewingRecord(movie);
   button.classList.toggle('is-watched',Boolean(record&&record.watched===true));
   button.setAttribute('aria-label',record&&record.watched===true?'この映画の評価を編集':'この映画をレビュー');
  };
@@ -304,14 +322,15 @@ function attachInlineScore(button,movie) {
  root.addEventListener('cinelva-bookmarks-updated',syncBookmark);
  root.addEventListener('storage',event=>{if(event.key===bookmarkKey)syncBookmark();});
  syncBookmark();
+ if(movie._localRecord){bookmark.disabled=true;bookmark.setAttribute('aria-pressed','false');bookmark.classList.remove('is-bookmarked');bookmark.title='作品ID未確認';bookmark.onclick=null;}
 
  const ratings=document.createElement('div');ratings.className='cinelva-rating-pair';
  const personal=document.createElement('div'),audience=document.createElement('div');
  personal.className='cinelva-rating-line cinelva-rating-personal';
  audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
-  const rec=Records.all().find(r=>String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&r.watched===true);
-  const watched=Boolean(rec);
+  const rec=viewingRecord(movie);
+  const watched=Boolean(rec&&rec.rating!==0);
   const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
   personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
   personal.classList.toggle('is-unwatched',!watched);
@@ -320,7 +339,7 @@ function attachInlineScore(button,movie) {
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
  const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
- audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'—';
+ audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'-';
  audience.classList.toggle('is-unrated',!validTmdb);
  if(!validTmdb&&typeof IntersectionObserver!=='undefined'){
   const observer=new IntersectionObserver(entries=>{
@@ -361,7 +380,7 @@ function attachInlineScore(button,movie) {
  syncWatched();
 }
 function refreshRatingLabels(){
- const saved=Records.all();
+ const saved=allRecords();
  for(const input of document.querySelectorAll('.cinelva-inline-score input')){
   if(document.activeElement===input||input.dataset.dragging==='true')continue;
   const id=input.dataset.movieId;
@@ -1296,6 +1315,9 @@ style.textContent+=`
 .cinelva-review-method select{width:100%;max-width:100%}
 .cinelva-review-method label[hidden]{display:none!important}
 `;
-root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(movie?.tmdbId??movie?.id))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie))||undefined,_localRecord:!(root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie)))});}}
+if(typeof MutationObserver!=='undefined'){const start=()=>{mountRecordReviews();new MutationObserver(rows=>{for(const row of rows)for(const node of row.addedNodes)if(node.nodeType===1)mountRecordReviews(node)}).observe(document.body,{childList:true,subtree:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}
+
 
 })(window);

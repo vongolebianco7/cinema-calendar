@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-19T04:36:00+09:00",
+  "updated_at": "2026-10-21T00:09:11.592759+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "042e6c98192794793a686502735b8282cb3cc3b1",
-  "branch": "fix/director-missing-catalog-20261019",
-  "head_sha": "1e90ac592b26d80dda41fb6427f62e61849406a8",
-  "pull_request": 398,
+  "base_sha": "0ae957d5708dd9cbe27b3e746a49e3679349503e",
+  "branch": "fix/final-quality-20261020",
+  "head_sha": "f5b4a23294e3251173927db83d23d66576539d65",
+  "pull_request": 437,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -521,6 +521,20 @@
       "status": "in_progress",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
       "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
+    },
+    {
+      "id": "FINAL-QA-20261020",
+      "title": "Unify poster failure recovery and repair current-spec quality checks",
+      "status": "pr_created",
+      "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
+      "ci": "Local: shared quality gate passes; Node tests now include 8 identity/cache cases, current-spec UI contracts, and browser regressions for immediate poster fallback and stalled remote search. My Cinelva 1000-record/backup/restore/PNG journey, rating visibility 375/390/768, mobile calendar 375/390/768/1440, 240-load Chromium route audit, and 30-route theme browser checks pass. PR #437 first/second CI Validate frontend including WebKit passed. Autonomous gate additionally exposed an attempted nonexistent cinelva/events.html in the theme test inventory; test now checks existing active routes only. Final CI pending on next revision."
+    },
+    {
+      "id": "P0-20261021-INTEGRATION",
+      "title": "Integrate latest UI specifications with final quality fixes and preserve resolved imports",
+      "status": "pr_created",
+      "pull_request": 437,
+      "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate."
     }
   ],
   "verification": [
@@ -576,24 +590,43 @@
     {
       "check": "Eastwood verified source snapshot and regression",
       "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
+    },
+    {
+      "check": "Final QA review and actual CDN sampling 2026-10-20",
+      "result": "173 active Node unit tests and shared quality gate pass; 138 Python tests passed. 30 routes x4 widths x2 themes audited. Actual CDN sample:60 page loads,242/242 image loads,0 failed/pending,0 overflow/page errors. Reviewer blockers fixed with current/legacy local-ID overwrite and zero-delete regressions;31 targeted tests pass. Search/critic hanging API and deterministic poster retry browser regressions pass. Final remote CI/merge/Pages still pending."
+    },
+    {
+      "check": "Final source and secondary-card audit",
+      "result": "Canonical metadata supplemented for33streaming rows,18outdoor rows,3revivals plus2fallback events.58already-enriched calendar rows copied back to matching streaming source records to preserve refresh data. APIsearch+canonicaldetails checked; wrong proposed ID1124 rejected because it was ThePrestige; correct11257 verified. Daily refresh now accepts explicit provenance or strict unique title+originalyear;6Python regressions pass.144fullPython tests,173Node tests,sharedqualitygate pass. Revival/selectedexperience browser regression passes6viewport/theme combinations.30-route Chromium audit240loads passes. Previous final WebKit audit exposed redirect readiness race; fixed by waiting for mounted themecontrols before unchanged assertions. RequiredfinalCI pending."
+    },
+    {
+      "check": "2026-10-21 integration of current main and PR437",
+      "result": "Local shared quality gate passes, including 175 Node tests; full Python suite 144/144; smoke209/209. Six merge conflicts resolved preserving latest medals, Gold/award names, release dates, spoiler button and comment visibility. Record poster/title detail links restored with canonical-ID regression (2 failing before fix, 2 passing after). Updated stale isolated DOM fixtures and exact-ID award fixtures without relaxing assertions. Chromium/WebKit download returned an invalid ZIP; browser checks must run in CI on this new head."
+    },
+    {
+      "check": "2026-10-21 reviewed integration follow-up",
+      "result": "Shared quality gate178 Node tests passes. Focused reviewer26 tests passes with no blockers. Resolved imports retain original key during edit/clear; Top10 uses verified identity. WebKit mobile CI failed specifically at screenshot32767px limit; dynamic body-height measurement and size-error-only viewport fallback added, failing-then-passing regression verified. Unrelated screenshot errors still fail."
     }
   ],
   "deployment": {
-    "status": "production_verified",
+    "status": "deployment_pending",
     "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "last_observed_vercel_production_sha": "b74140a5ea1456c275412128544adaa840149a58",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
-    "reported_restriction": "EarlierignoreCommandlengthfailure repaired. bd6a1c99automaticproductionREADY; no providerquota blocker currentlyobserved.",
-    "next_action": "Keep currentcanonicalorigin. Save release evidence and continue remaining acceptanceaudit, distinguishing realiPhone/human tests and source/coverage gaps from verified fixes.",
+    "last_observed_vercel_check_at": "2026-10-21T00:09:11.592759+00:00",
+    "reported_restriction": "2026-10-21 current main0ae957d5 combined statuses: Vercel frontend and backend both failure, target build-rate-limit. Canonical browser still shows retired Kinema and old BAFTA/Golden Globes labels. No manual deployment retry.",
+    "next_action": "Batch release only after all required Actions pass and quota clearance is independently confirmed. No paid plan.",
     "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
-  "blockers": [],
-  "next_action": "Check exact final PR398head allrequiredActions including new Eastwood browser journey, mergewhen green thenverify canonical releaseSHA andsource41filmdata. Unresolved othernamequeries stayunknown; do notclaim allworlddirectors complete.",
+  "blockers": [
+    "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
+    "Vercel reported free-plan deployment quota; no manual retry or paid plan."
+  ],
+  "next_action": "Run fresh required Actions on updated PR437, diagnose any browser failures, merge only green exact head. Production currently b74140a5; do not claim latest UI released until canonical smoke verifies it. Remaining artwork/identity exceptions inventoried.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

@@ -42,7 +42,7 @@ try {
  const store=new Map();
  const localStorage={getItem:key=>store.get(key)||null,setItem:(key,value)=>store.set(key,value)};
  const window={};
- const context=vm.createContext({window,localStorage,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({movies:[]})})});
+ const context=vm.createContext({window,localStorage,URL,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({movies:[]})})});
  new vm.Script(posterSource,{filename:'js/cinelva-movie-identity.js'}).runInContext(context);
  const identity=window.CinelvaMovieIdentity;
  check(!!identity,'canonical poster registry is initialized');

@@ -38,11 +38,19 @@ for(const path of candidates){
  // WebKit rejects any screenshot dimension beyond 32767 device pixels.
  // Preserve a genuine viewport screenshot for tall pages instead of
  // silently treating screenshot infrastructure limits as layout failures.
- const docHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
+ const docHeight=await page.evaluate(()=>Math.max(document.documentElement.scrollHeight,document.body?.scrollHeight||0));
  const fullPage=docHeight*3<=30000;
  if(!fullPage)console.warn(`${browserName} ${path}: document ${docHeight}px is too tall for a full-page screenshot at DPR 3; preserving viewport evidence`);
  console.log(`${browserName}: capturing ${path}`);
- await page.screenshot({path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage,timeout:20000,animations:'disabled'});
+ const captureOptions={path:`artifacts/mobile-smoke/${browserName}-${safeName}.png`,fullPage,timeout:20000,animations:'disabled'};
+ try{await page.screenshot(captureOptions)}
+ catch(error){
+  // Content can grow between measurement and capture; only this documented
+  // image-size limit may fall back. Browser failures still fail the gate.
+  if(!fullPage||!/Cannot take screenshot larger than 32767 pixels/.test(String(error?.message)))throw error;
+  console.warn(`${browserName} ${path}: screenshot grew beyond WebKit's image limit; preserving viewport evidence`);
+  await page.screenshot({...captureOptions,fullPage:false});
+ }
 }
 await browser.close();
 clearTimeout(watchdog);

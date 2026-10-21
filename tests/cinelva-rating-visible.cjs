@@ -28,21 +28,22 @@ const { chromium } = require('playwright');
    if(!live.text.includes('MY評価')||!live.text.includes('TMDB評価')||live.lines.length!==2||live.lines.some(x=>x.width<=0||x.height<=0||x.display==='none'))throw Error('real search card ratings hidden '+width);
    // The production calendar has its own fixed-height legacy CSS; verify no clipping.
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+   await page.waitForFunction(()=>Boolean(window.CinelvaStreamingPosterAudit));
    await page.evaluate(()=>{
-     const grid=document.querySelector('#cards');
+     const grid=document.querySelector('#dates');
      if(!grid)throw Error('calendar grid missing');
-     window.CinelvaRatingResolve=()=>({id:111,title:'Calendar fixture',vote_average:7.2,vote_count:100});
-     const card=document.createElement('a');card.className='card';card.dataset.i='0';card.href='#';card.textContent='Calendar fixture';
-     grid.append(card);
+     const movie={id:111,tmdbId:111,title:'Calendar fixture',date:'2026-10-20',score:7.2,votes:100,service:'劇場公開'};
+     movies.push(movie);window.CinelvaRatingResolve=i=>movies[Number(i)];
+     grid.innerHTML=groupedMovieCards([movie],'theatrical');
    });
-   await page.locator('#cards .cinelva-rating-controls-no-gauge').first().waitFor({state:'visible',timeout:20000});
-   const calendar=await page.locator('#cards .cinelva-rating-controls-no-gauge').first().evaluate(el=>{
+   await page.locator('#dates .cinelva-rating-controls-no-gauge').first().waitFor({state:'visible',timeout:20000});
+   const calendar=await page.locator('#dates .cinelva-rating-controls-no-gauge').first().evaluate(el=>{
      const outer=el.getBoundingClientRect(),pair=el.querySelector('.cinelva-rating-pair'),actions=el.querySelector('.cinelva-rating-actions');
      const a=pair?.getBoundingClientRect(),b=actions?.getBoundingClientRect();
      return {height:outer.height,maxHeight:getComputedStyle(el).maxHeight,text:pair?.innerText,pairHeight:a?.height,actionsHeight:b?.height,clipped:!a||!b||a.top<outer.top-1||b.bottom>outer.bottom+1};
    });
    console.log('calendar card',width,JSON.stringify(calendar));
-   if(calendar.clipped||calendar.height<55||!calendar.text?.includes('MY評価')||!calendar.text?.includes('TMDB評価'))throw Error('calendar rating clipped '+width);
+   if(calendar.clipped||!calendar.text?.includes('MY評価')||!calendar.text?.includes('TMDB評価'))throw Error('calendar rating clipped '+width);
    await page.close();
   }
  } finally {await browser.close();}

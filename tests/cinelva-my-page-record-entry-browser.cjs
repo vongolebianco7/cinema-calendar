@@ -44,6 +44,25 @@ async function freePort() {
       await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     }
     await expectDirectReview(movie.title);
+    await page.evaluate(baseMovie => renderDetail({ ...baseMovie,
+      related: [{ id: 992001, tmdbId: 992001, title: 'Related QA', year: '2020', score: 8, votes: 100 }],
+      director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]
+    }), movie);
+    for (const [kind,title,id] of [['related','Related QA','992001'],['director','Director QA','992002']]) {
+      const card=page.locator(`.detailRelatedCard[data-detail-kind="${kind}"]`);
+      const link=card.locator('a.work');
+      assert.equal(new URL(await link.getAttribute('href'),base).searchParams.get('id'),id);
+      assert.equal(await card.locator('input[type=range]').count(),0,'secondary cards use the shared badge, without list sliders');
+      await card.locator('.cinelva-rate-button').click();
+      assert.equal(await page.locator('#cinelvaRateTitle').innerText(),title);
+      await page.locator('#cinelvaRateClose').click();
+      const bookmark=card.locator('.cinelva-bookmark-button');
+      await bookmark.click();
+      assert.equal(await bookmark.getAttribute('aria-pressed'),'true');
+      assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().length),0,'bookmark does not create a viewing record');
+      assert.equal(await card.locator('.cinelva-rating-audience .rating-value').innerText(),kind==='related'?'4.0':'3.5');
+    }
+    assert.equal(await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
 
     const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
     await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });

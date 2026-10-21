@@ -118,7 +118,7 @@ const { chromium, webkit } = require("playwright"),
       .evaluate(
         (el) => getComputedStyle(el).gridTemplateColumns.split(" ").length,
       );
-    assert.equal(columns, 4);
+    assert.equal(columns, 3);
     assert.equal(await page.locator("#yearHeatmap>.cy-month").count(), 12);
     assert.equal(await page.locator("#yearHeatmap .cy-medal").count(), 0);
     await page.locator("#csPeriod").selectOption("all");
@@ -264,6 +264,8 @@ const { chromium, webkit } = require("playwright"),
         );
         throw e;
       });
+    assert.equal(await dp.locator('#csPrisms,#csCrowns,.cs-prism,.cs-crown').count(),0,
+      'retired lifetime reward decorations must stay removed at1000 records');
     await dp.locator('[data-tab="records"]').click();
     assert.equal(
       await dp.locator("#recordList [data-record-card]").count(),
@@ -275,9 +277,20 @@ const { chromium, webkit } = require("playwright"),
       ),
     );
     await dense.close();
+    const empty=await browser.newContext({viewport:{width:390,height:844}});
+    await empty.route('https://backend-one-gray-94.vercel.app/**',r=>r.abort());
+    const ep=await empty.newPage();
+    await ep.goto(base+'/my-cinelva/');
+    await ep.waitForFunction(()=>document.querySelectorAll('#yearHeatmap .cy-month').length===12);
+    assert.equal(await ep.locator('#csYears').isVisible(),false,'no empty year graph should reserve space');
+    assert.ok(await ep.locator('#summaryView .cs-top').evaluate(el=>el.getBoundingClientRect().height<190),
+      'zero-record lifetime and year counts must remain compact');
+    fs.mkdirSync('artifacts/route-audit/summary-empty',{recursive:true});
+    await ep.screenshot({path:`artifacts/route-audit/summary-empty/${process.env.CINELVA_BROWSER||'chromium'}-390.png`});
+    await empty.close();
     assert.deepEqual(errors, []);
     console.log(
-      "My Cinelva summary, 4x3 blue calendar, all-time years, awards, directors, shared review, bookmarks, search variants, persistence, backup/restore, PNG export and 1000 records passed",
+      "My Cinelva summary, 3x4 blue calendar, all-time years, awards, directors, shared review, bookmarks, search variants, persistence, backup/restore, PNG export and 1000 records passed",
     );
   } finally {
     await browser?.close();

@@ -1,17 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T21:13:35.146111+00:00",
+  "updated_at": "2026-10-21T21:24:08.522476+00:00",
   "status": "in_progress",
   "issue": 239,
-  "base_branch": "main",
-  "base_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
-  "branch": "fix/detail-related-review-20261022",
-  "head_sha": "9236fbacd882958e170148ded33d885f9ce78fdd",
-  "pull_request": {
-    "number": 464,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/464",
-    "head_sha": "9236fbacd882958e170148ded33d885f9ce78fdd"
-  },
+  "base_branch": "fix/detail-related-review-20261022",
+  "base_sha": "1ac14b187f505d6a868ceb4bc94756706b05bf95",
+  "branch": "fix/summary-retired-rewards-20261022",
+  "head_sha": "1ac14b187f505d6a868ceb4bc94756706b05bf95",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -712,9 +708,9 @@
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
-    "confirmed_defects": 7,
-    "verified_and_merged_fixes": 0,
-    "remaining_confirmed_defects": 7,
-    "next_action": "Merge463 after exact receipt-head checks, then retarget464 to main. Verify both browser engines, visual screenshots and one focused review; renew source proof and verify final head before464 integration. Continue remaining UI acceptance checks."
+    "confirmed_defects": 10,
+    "verified_and_merged_fixes": 4,
+    "remaining_confirmed_defects": 6,
+    "next_action": "Check PR464 latest source1ac14b after touch-scroll review correction; renew proof then final checks and merge with ancestry preserved. Third branch fixes obsolete summary rewards/empty graph,3-column annual layout and detail table light contrast. Verify source CI, images and final proof before merging; preserve all records."
   }
 }

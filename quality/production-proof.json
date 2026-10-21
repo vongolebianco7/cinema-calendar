@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1ac14b187f505d6a868ceb4bc94756706b05bf95",
-  "verified_at": "2026-10-21T21:30:59.561Z",
-  "note": "The four required source workflows passed: autonomous quality gate 39678296169, CINELVA smoke 39678296195, frontend 39678296170, reproducible backend build 39678296357. Chromium and WebKit related-card review/bookmark and vertical touch-scroll checks passed. Final-head checks are still required."
+  "head_sha": "83bda7af23a81a38c68f92fbea0f9e4d3e2b31f0",
+  "verified_at": "2026-10-21T21:39:58.115Z",
+  "note": "All six PR source workflows passed, including full Chromium/WebKit detail contrast, 0/1000-record summary, 3-column annual calendar and record safety checks. Integrates verified PR464 ancestry; final-head checks are required."
 }

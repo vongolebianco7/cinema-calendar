@@ -17,6 +17,18 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   assert.equal(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.some(s=>s.includes('closed'))),false);
   assert.match(await page.locator('#theaterOperationNote').innerText(),/営業状況は未確認/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  for(const width of [390,768,1280]) {
+   await page.setViewportSize({width,height:844});
+   const layout=await page.locator('#grid').evaluate(grid=>({
+    grid:grid.getBoundingClientRect().width,
+    table:grid.querySelector('.theaterTableWrap').getBoundingClientRect().width,
+    hintWidth:grid.querySelector('.tableHint').getBoundingClientRect().width,
+    hintHeight:grid.querySelector('.tableHint').getBoundingClientRect().height
+   }));
+   assert.ok(layout.table>=layout.grid-2,`cinema search table must span full directory at${width}px: ${JSON.stringify(layout)}`);
+   if(layout.hintHeight)assert.ok(layout.hintWidth>=layout.grid-2,`table scroll hint must span full directory at${width}px`);
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  }
   assert.deepEqual(errors,[]);
   console.log('Theater directory excludes known closure and duplicate source while retaining different same-name locations at390px');
  }finally{await browser?.close();server.kill('SIGTERM');}

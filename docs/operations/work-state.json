@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T21:50:34.944582+00:00",
+  "updated_at": "2026-10-21T22:09:32.185422+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
-  "branch": "test/full-page-ui-audit-20261022",
-  "head_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
+  "base_sha": "5ecf7ccc1bc16d34a3efcc3f4f671f2f0a7f112b",
+  "branch": "fix/full-page-theme-20261022",
+  "head_sha": "f7a86e253cae61573c97961ecb541559e70b3184",
   "pull_request": null,
   "work_items": [
     {
@@ -690,7 +690,7 @@
     "No physicaliPhoneSafari or5–10independent userparticipants available.",
     "54image/split-image assets lack exactasset permission records; attributionalone isnotlegalclearance."
   ],
-  "next_action": "Confirmed10 UI defects fixed and merged through465, source6/final7 green;20 cumulative fixes. Continue full-document UI evidence: prior30 screenshots were viewport-only. Current branch changes only route-audit capture to fullPage true and records documentHeight/screenshot_scope. Run quality, create PR, inspect all full-document lower sections/footers in both engines, diagnose actual defects rather than count stale source mirrors as production bugs. Source proof is exact-tree, so update proof after source workflows, require final checks before merge. Keep two broad UI acceptance gates open until real evidence supports closure. Vercel live-origin observation denied by auto-review; do not retry or use alternate origin to bypass. Do not rerun movie update74.",
+  "next_action": "Full-page sourcef1e7c08 all6/finalf7a86e2 all7 checks passed;466merged5ecf7cc. Full16 active root pages in each engine (110segments) reviewed; found8 more confirmed defects, all implemented in current branch. Run quality and focused review; create467 againstmain preserving466 ancestry. Verify both-engine contrast, failed-logo fallback, cinema grid and full images; month helper3cases firstRED thenGREEN. Source proof must be renewed after exact source workflows, final-head checks before merge. Counts25/32,20mergedfixes,18confirmed/10done/8remaining until actual integration. Vercel excluded; live origin observation auto-review denied, never retry/bypass. Do not rerun movie update74.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -701,16 +701,16 @@
     "confirmed_additional_fixes": 20
   },
   "last_merged_pull_request": {
-    "number": 465,
-    "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
-    "final_head": "a7897ecc69ac6960c4ab50eb63cb92c299992150"
+    "number": 466,
+    "merge_sha": "5ecf7ccc1bc16d34a3efcc3f4f671f2f0a7f112b",
+    "final_head": "f7a86e253cae61573c97961ecb541559e70b3184"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
-    "confirmed_defects": 10,
+    "confirmed_defects": 18,
     "verified_and_merged_fixes": 10,
-    "remaining_confirmed_defects": 0,
-    "next_action": "Confirmed10 UI defects fixed and merged through465, source6/final7 green;20 cumulative fixes. Continue full-document UI evidence: prior30 screenshots were viewport-only. Current branch changes only route-audit capture to fullPage true and records documentHeight/screenshot_scope. Run quality, create PR, inspect all full-document lower sections/footers in both engines, diagnose actual defects rather than count stale source mirrors as production bugs. Source proof is exact-tree, so update proof after source workflows, require final checks before merge. Keep two broad UI acceptance gates open until real evidence supports closure. Vercel live-origin observation denied by auto-review; do not retry or use alternate origin to bypass. Do not rerun movie update74."
+    "remaining_confirmed_defects": 8,
+    "next_action": "Full-page sourcef1e7c08 all6/finalf7a86e2 all7 checks passed;466merged5ecf7cc. Full16 active root pages in each engine (110segments) reviewed; found8 more confirmed defects, all implemented in current branch. Run quality and focused review; create467 againstmain preserving466 ancestry. Verify both-engine contrast, failed-logo fallback, cinema grid and full images; month helper3cases firstRED thenGREEN. Source proof must be renewed after exact source workflows, final-head checks before merge. Counts25/32,20mergedfixes,18confirmed/10done/8remaining until actual integration. Vercel excluded; live origin observation auto-review denied, never retry/bypass. Do not rerun movie update74."
   },
   "current_runtime": {
     "host_shell": "available",

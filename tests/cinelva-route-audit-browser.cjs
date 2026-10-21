@@ -1,4 +1,5 @@
 const { waitForLocalServer } = require('./helpers/local-server.cjs');
+const { assertTextContrast } = require('./helpers/text-contrast.cjs');
 'use strict';
 const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
@@ -57,6 +58,8 @@ async function freePort() {
         const context = await browser.newContext({ viewport: { width, height: 844 } });
         await context.addInitScript(value => localStorage.setItem('cinelva-theme-v1', value), theme);
         await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+        // Exercise attribution artwork failure without changing source or API attribution.
+        await context.route('https://www.themoviedb.org/assets/2/v4/logos/v2/**', route => route.abort());
         for (const route of routes) {
         // Each matrix cell audits one document. A fresh page releases the previous
         // dashboard and its pending work before WebKit loads the next route.
@@ -99,6 +102,33 @@ async function freePort() {
           // Theme controls mount at DOMContentLoaded. A redirected WebKit document
           // can expose its early html theme and main before the later meta tag is updated.
           await page.waitForFunction(() => Boolean(document.querySelector('.cinelvaTheme select')));
+          await assertTextContrast(page,[
+            '.hero a.specialLink','.providerCheck','.movieGridSort label',
+            '#summaryView .cs-donut-global-mode>span',
+            'body:has(#events) .tabs a[aria-current="page"]',
+            'body:has(#events) .filmTitle','body:has(#events) .filmMeta',
+            'body:has(#events) .eventGroup .date','body:has(#events) .eventGroup a.source',
+            'body:has(#events) .notice','body:has(#data-status) .card a'
+          ],`${route} ${width}px ${theme}`);
+          if(theme==='light') {
+            const backings=await page.locator('.brand img').evaluateAll(images=>images.map(img=>getComputedStyle(img).backgroundColor));
+            assert.ok(backings.every(color=>color!=='rgba(0, 0, 0, 0)'),`${route}: secondary logo must have a visible backing`);
+          }
+          if(route==='credits.html') {
+            await page.locator('.tmdbLogoFallback').waitFor({state:'visible'});
+            assert.equal(await page.locator('.tmdbLogo').isVisible(),false,'failed attribution artwork must not display a broken image icon');
+            assert.equal(await page.locator('.tmdbLogoFallback').innerText(),'TMDB');
+          }
+          if(route==='theaters.html') {
+            await page.locator('#grid>.empty').waitFor({state:'visible'});
+            const layout=await page.locator('#grid').evaluate(grid=>({
+              columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+              width:grid.getBoundingClientRect().width,
+              emptyWidth:grid.querySelector('.empty').getBoundingClientRect().width
+            }));
+            assert.equal(layout.columns,width<=520?1:width<=720?2:3,'cinema directory retains its own responsive columns');
+            assert.ok(layout.emptyWidth>=layout.width-2,'cinema empty state spans the directory width');
+          }
           const state = await page.evaluate(() => ({
             title: document.title.trim(),
             textLength: document.querySelector('main')?.textContent.trim().length || 0,

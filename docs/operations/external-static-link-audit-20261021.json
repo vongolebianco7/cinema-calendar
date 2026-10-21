@@ -1,0 +1,102 @@
+{
+  "checked_at": "2026-10-21T05:29:02.706163+00:00",
+  "method": "One bounded HEAD request per16static HTML external URLs,8s timeout,4workers, no content scraping or retries. Dynamic JS/data source URLs are outside this audit.",
+  "results": [
+    {
+      "url": "https://109cinemas.net/osaka-expocity/establishment.html",
+      "status": 200,
+      "resolved_url": "https://109cinemas.net/osaka-expocity/establishment.html",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://cinelva.vercel.app/",
+      "status": 200,
+      "resolved_url": "https://cinelva.vercel.app/",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://cinelva.vercel.app/data-backup.html",
+      "status": 200,
+      "resolved_url": "https://cinelva.vercel.app/data-backup.html",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://developer.themoviedb.org/docs/faq",
+      "status": 200,
+      "resolved_url": "https://developer.themoviedb.org/docs/faq",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "status": 200,
+      "resolved_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md",
+      "status": 200,
+      "resolved_url": "https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://github.com/vongolebianco7/cinema-calendar/issues/new",
+      "status": 200,
+      "resolved_url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fvongolebianco7%2Fcinema-calendar%2Fissues%2Fnew",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://policies.google.com/privacy",
+      "status": 200,
+      "resolved_url": "https://policies.google.com/privacy",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://vongolebianco7.github.io/cinema-calendar/data-backup.html",
+      "status": 200,
+      "resolved_url": "https://vongolebianco7.github.io/cinema-calendar/data-backup.html",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.cinemasunshine.co.jp/pages/gdcs/",
+      "status": 200,
+      "resolved_url": "https://www.cinemasunshine.co.jp/pages/gdcs/",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.openstreetmap.org/copyright",
+      "status": 200,
+      "resolved_url": "https://www.openstreetmap.org/copyright",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.pexels.com/photo/diver-and-coral-reef-10519044/",
+      "status": 200,
+      "resolved_url": "https://www.pexels.com/photo/diver-and-coral-reef-10519044/",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.themoviedb.org/",
+      "status": 200,
+      "resolved_url": "https://www.themoviedb.org/",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg",
+      "status": 200,
+      "resolved_url": "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "status": 200,
+      "resolved_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "classification": "reachable"
+    },
+    {
+      "url": "https://www.youtube.com/t/terms",
+      "status": 200,
+      "resolved_url": "https://www.youtube.com/t/terms",
+      "classification": "reachable"
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T05:14:02.792012+00:00",
+  "updated_at": "2026-10-21T10:02:46.008732+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
-  "branch": "audit/retirement-evidence-20261021",
-  "head_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "base_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+  "branch": "docs/release-and-rights-checkpoint-20261021",
+  "head_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
   "pull_request": null,
   "work_items": [
     {
@@ -645,35 +645,45 @@
       "name": "Current-spec retirement and discovery acceptance audit20261021",
       "status": "passed",
       "details": "Fullquality207Nodepass.8focused retirement/identity/build/route tests and4filterbehavior tests pass. PR453mergedf511101 after5greenActions. PR452exact-head1ba1d03pending; prior performanceall4casespassed, WebKitnavigationinternalerrorunderverification."
+    },
+    {
+      "check": "Reviewed source-status and dependency/performance/theater integration",
+      "result": "452/455/456 merged with all checks green; source457 localquality229/18focusedtests and independentreviewpassed;6of7Actions green, browserCIpending. Assets55inventoried with sha256, literalrefscope limitations and legal_clearance=false."
+    },
+    {
+      "check": "PR457 exact-headCI and actual canonical production smoke",
+      "result": "All7Actions passed inclfrontend39580306030/job119155982037. Bothengines390pxsource9categories/fetchfailure/no recordwrites and theaterclosed/dedupe fixturepassed. Merged768dda2b; actualmenu→9sourceUI verified. Progress27/32,5remaining,8mergedfixes,84.4%. See release-verification-20261021.md."
     }
   ],
   "deployment": {
     "status": "production_verified",
-    "target_sha": "f7d205b797a63c7075681487a608f73591760067",
+    "target_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "f7d205b797a63c7075681487a608f73591760067",
+    "last_observed_vercel_production_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-21T04:56:39.937284+00:00",
-    "reported_restriction": "Missed backend publication recovered automatically after #451. Actual canonical aliases both latest; no manualdeploy. Live Nolan search13Directorworks and sharedreview verified without saving user data.",
-    "next_action": "Preserve verified origin/storage; continue remaining acceptance gates. Production READY does not imply whole-product completion.",
-    "provider_preview_status": "Canonical frontenddpl_HEHWW9ZdgPWdLwpjb71CbXdekGhw and backenddpl_DgBGc8gjhLJaLQogKZzgQcEZf8on both READY atf7d205b7.",
+    "last_observed_vercel_check_at": "2026-10-21T10:02:46.008732+00:00",
+    "reported_restriction": "Quota restriction cleared; pinnedcf8633de release succeeded and source457 auto-deployed after7greenCI.",
+    "next_action": "Keep existing origins/storage; no additional release needed for docs-only checkpoint.",
+    "provider_preview_status": "Canonical frontenddpl_EtMFtVLimxXg6Ck28cP9TgNDGK4J READY768dda2b; canonicalbackenddpl_AXXuwZbxpdL1P6vpjRPGdqqdsDKf READYcf8633de. Rollback f7pair remainsREADY.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "8source rows have unresolved identity/artwork; keep explicit fallback, no inventedIDs or unrelatedposters.",
-    "Physical iPhone Safari and5–10 independent user participants are unavailable; do not substitute automated evidence."
+    "Update movie data workflow dispatch was rejected by automatic approval review for unspecified repository writes/external API/DB sync; explicit concrete approval still required. No dispatch or bypass occurred.",
+    "No physical iPhone Safari or5–10independent user participants available.",
+    "54image/split-image assets lack exact-asset permission records; attribution alone is not legal clearance.",
+    "Enforced release protection must reconcile direct-main data automation and the GITHUB_TOKEN PR-trigger limitation; no settings changed."
   ],
-  "next_action": "Integrate current-spec retirement/discovery evidence after quality CI; inspect PR452 exact-head1ba1d03 frontend and performance results. Then finish production smoke/rollback, data freshness/closed-venue and dependency/rights/release-policy gaps without inventing external evidence.",
+  "next_action": "Persist reviewed release/rights ledger checkpoint via docs PR and merge after quality CI. Then request concrete authorization for one existing Update movie data run (TMDB fetch up to200/deadline6min, production DB sync and JSON commit) because prior automatic review rejected dispatch; do not bypass. Other remaining gates require owner rights evidence, physicaliPhone and independent participants, or coherent release-policy architecture.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
     "total_tasks": 32,
-    "completed_tasks": 22,
-    "remaining_tasks": 10,
-    "completion_percent": 68.8,
-    "confirmed_additional_fixes": 4
+    "completed_tasks": 27,
+    "remaining_tasks": 5,
+    "completion_percent": 84.4,
+    "confirmed_additional_fixes": 8
   }
 }

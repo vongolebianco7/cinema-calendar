@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T05:13:51.029950+00:00",
+  "updated_at": "2026-10-21T10:02:46.008732+00:00",
   "source_issue": 239,
-  "source_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "source_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
-    "completed_tasks": 22,
-    "remaining_tasks": 10,
-    "completion_percent": 68.8,
-    "confirmed_additional_fixes": 4
+    "completed_tasks": 27,
+    "remaining_tasks": 5,
+    "completion_percent": 84.4,
+    "confirmed_additional_fixes": 8
   },
   "fixes": [
     {
@@ -40,6 +40,34 @@
       "pr": 453,
       "merge_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
       "status": "merged_ci_verified"
+    },
+    {
+      "id": "FIX-005",
+      "title": "Index exact poster identity lookups and measure real readiness, CLS and record input latency",
+      "pr": 452,
+      "merge_sha": "843ca848abc69954eaffd097be7fe52be42346f6",
+      "status": "merged_ci_verified"
+    },
+    {
+      "id": "FIX-006",
+      "title": "Exclude sourced closed theaters and exact duplicates without conflating distinct venues; repair updater syntax",
+      "pr": 455,
+      "merge_sha": "e79192157bedaa6d6bbee3ec69c0bc24f8483445",
+      "status": "merged_ci_verified"
+    },
+    {
+      "id": "FIX-007",
+      "title": "Lock dependency provenance and verify isolated reproducible backend builds",
+      "pr": 456,
+      "merge_sha": "cf8633ded44a42af30bed411b4d8c7e874d5d137",
+      "status": "merged_ci_verified"
+    },
+    {
+      "id": "FIX-008",
+      "title": "Show9source categories with observed dates, staleness, disabled/unavailable/unknown states and safe build inputs",
+      "pr": 457,
+      "merge_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+      "status": "merged_ci_and_production_verified"
     }
   ],
   "tasks": [
@@ -58,14 +86,14 @@
     {
       "id": "P0-01.3",
       "acceptance": "CI lint/unit/browser/accessibility/links/backup/dependencies/licenses/data",
-      "status": "pending",
-      "evidence": "Dependency/license inventory and bounded external dead-link coverage remain to establish."
+      "status": "done",
+      "evidence": "PR456 all5Actions green including backend-build39550344400 and quality39550344353. Lock/integrity/license inventory124entries, isolated npmci+Next build,16staticexternalURLsHTTP200. Complex license expressions remain explicitly manual review; no legal clearance claimed."
     },
     {
       "id": "P0-01.4",
       "acceptance": "Artifacts and enforce checks before release",
-      "status": "pending",
-      "evidence": "Audit fail-closed production build enforcement rather than assuming a green PR prevents every direct-main deployment."
+      "status": "blocked",
+      "evidence": "Artifacts and this pinned-CI release verified, but no GitHub branch protection. Enforced release/DB publication requires one coherent transition from direct-main data writes to reviewed validation/PR; GITHUB_TOKEN PR-trigger limitation remains. No credentials,bypass,settings changes made. See rights-review-20261021.md."
     },
     {
       "id": "P0-02.1",
@@ -124,20 +152,20 @@
     {
       "id": "P0-04.1",
       "acceptance": "Source provenance/freshness/unknown display",
-      "status": "in_progress",
-      "evidence": "Source registry9categories audited; real observations314/566fresh7d,252stale. Eligible1114exceeds old60/day capacity. Adaptive60..200/day,6day refresh,6minute deadline and atomic partial-save fix has5red-green regressions; fullPython149pass. Await review/CI/merge and real scheduled-data evidence; not marked complete."
+      "status": "done",
+      "evidence": "PR457 all7Actions green incl frontend39580306030; Chromium/WebKit390px9categories/fetch503/no recordwrites. FrontendcanonicalREADY768dda2b, actual menu→credits9categories/314fresh252stale/missingdate verified. This completes provenance/unknown display, not a claim of refreshed source data."
     },
     {
       "id": "P0-04.2",
       "acceptance": "Stale availability/schedules/duplicates/closed cinemas",
-      "status": "pending",
-      "evidence": "Stale showtimes hidden; complete closed-venue and duplicate-source audit."
+      "status": "done",
+      "evidence": "PR455 and457 all targetedCIgreen and canonicalproduction. Explicitclosed venues and10exactduplicates removed/flagged, distinct same-name locations retained, operationalunknown/officialconfirmation shown; staleavailability/showtimes hidden orflagged. Acceptance is remove/flag, not a fabricated assertion that all823venues operate or all1114eligible films were refreshed."
     },
     {
       "id": "P0-04.3",
       "acceptance": "Free-only/no scraping/rights/truthful availability",
-      "status": "pending",
-      "evidence": "Source and compliance gates pass; finish production attribution/rights evidence with no invented permissions."
+      "status": "blocked",
+      "evidence": "Free-only/no-scraping and truthful-availability source gates pass. Asset inventory55files/54images-or-fragments lacks exact-asset permission records. Existing credits are not proof of every current sprite origin. No new source enabled or rights invented."
     },
     {
       "id": "P1-05.1",
@@ -208,8 +236,8 @@
     {
       "id": "P1-08.3",
       "acceptance": "Performance/no layout shifts",
-      "status": "in_progress",
-      "evidence": "PR452 pending exact-head CI1ba1d03. Performance cases allpass on priorheadcee9:1000records ready2.1s,input<.9s,CLS<.043. Poster fullscan indexed; WebKitrouteaudit internalerror repaired by pageisolation, fullverificationpending."
+      "status": "done",
+      "evidence": "PR452 all6Actions green including frontend39549188309.1000records ready2076/2127ms,input893/887ms,CLS.0424/.0152. Exact-title/year poster lookup7242ms to26ms. Full Chromium/WebKit journeys and real route audit passed."
     },
     {
       "id": "P1-09.1",
@@ -220,8 +248,8 @@
     {
       "id": "P1-09.2",
       "acceptance": "Naming/legal/film-data-image rights",
-      "status": "pending",
-      "evidence": "Existing name-risk acceptance is documented. Finish asset/source attribution inventory; no assertion of legal clearance."
+      "status": "blocked",
+      "evidence": "Naming-risk acceptance2026-10-16 already documented; no repeated rename approval. Privacy/terms/attribution/source/dependency inventories reviewed.54image-or-fragment exact permissions unverified; see asset-rights-inventory-20261021.json. Legal clearance remains false."
     },
     {
       "id": "P1-09.3",
@@ -232,8 +260,8 @@
     {
       "id": "P1-09.4",
       "acceptance": "Production smoke and rollback evidence",
-      "status": "pending",
-      "evidence": "Canonical frontend and backendREADY f7d205b7, actual live Nolan13works/sharedreview/defaulttoday/fivemethods/spoiler smoke verified withoutsavingdata. Previous f50frontend/0adbackend safe fallback pair documented; rollbacknotexecuted. Persist final release evidence before counting gate complete."
+      "status": "done",
+      "evidence": "Latest frontend768dda2b and backendcf8633decanonicalREADY. ActualMyCinelva/Awards/Nolan13/menu→9sources smoke; PR457 all7CIgreen and bothbrowserfixtures passed. Earlier f7d205b7deploymentpair retainedREADY; rollback procedure and limits recorded in release-verification-20261021.md, rollback not executed."
     }
   ],
   "history": [
@@ -268,6 +296,22 @@
       "additional_fixes": 4,
       "percent": 68.8,
       "reason": "PR453 merged with5greenActions. Current-spec retirement and supported-discovery acceptance verified from actual published inventory and behavioral regressions, fullquality207pass. These evidence closures are not additional code fixes."
+    },
+    {
+      "at": "2026-10-21T09:58:07.907819+00:00",
+      "completed": 24,
+      "remaining": 8,
+      "additional_fixes": 7,
+      "percent": 75.0,
+      "reason": "Reconcile merged452/455/456 and their exact-head CI evidence. User reported deployment restriction ended; both canonical aliases nowREADY at tested cf8633de. Final source-status browser CI and post-release verification remain pending."
+    },
+    {
+      "at": "2026-10-21T10:02:46.008732+00:00",
+      "completed": 27,
+      "remaining": 5,
+      "additional_fixes": 8,
+      "percent": 84.4,
+      "reason": "PR457 all7CIgreen, merged768dda2b and canonicalproduction9category UI verified. Closes actual source display and stale/unknown flag acceptance plus latest release/rollback evidence; no data refresh, rights clearance, physical device or independent users invented."
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-21T20:56:31.329949+00:00",
+  "scope": "Actual UI verification and fixes; Vercel excluded",
+  "prior_completion_claim_retracted": true,
+  "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
+  "metrics": {
+    "confirmed_defects": 3,
+    "completed_fixes": 0,
+    "remaining_confirmed_defects": 3,
+    "fixes_implemented_pending_validation": 3,
+    "overall_ui_completion_percent": null
+  },
+  "coverage": {
+    "initial_mobile_chromium_screenshots_reviewed": 30,
+    "initial_mobile_chromium_screenshots_total": 30,
+    "warning": "Initial viewport screenshots are not complete page/interaction acceptance. Mirrored source routes can differ from generated published artifacts; source-only differences are not counted as confirmed production bugs."
+  },
+  "findings": [
+    {
+      "id": "UI-20261022-001",
+      "title": "Review score overlaps slider hit target by 10.59375px",
+      "status": "implemented_validation_pending",
+      "root_cause": "Fixed 40px/32px grid rows cannot contain a 55.2px number and 48px slider",
+      "test": "Existing quick-rate browser test:320/390/1348px geometry, Chromium and WebKit; captures screenshots"
+    },
+    {
+      "id": "UI-20261022-002",
+      "title": "Rating ranking audience scores show dash despite source score",
+      "status": "implemented_validation_pending",
+      "root_cause": "Renderer mounts shared review with only id and title; source score and vote count dropped",
+      "test": "Existing ranking/calendar browser test through real ranking renderer; 8.4 score becomes4.2"
+    },
+    {
+      "id": "UI-20261022-003",
+      "title": "Light-theme ranking title and metadata unreadable against fixed dark wrapper",
+      "status": "implemented_validation_pending",
+      "root_cause": "Theme sets dark text, integrated ranking wrapper fixes dark background",
+      "test": "Existing ranking/calendar browser test: title and metadata contrast >=4.5 in both themes"
+    }
+  ],
+  "pr": 463,
+  "remaining_audit": "Complete interaction, error/empty states, scroll and lower page content checks for active routes; do not equate 30 initial screenshots or CI success with bug-free UI."
+}

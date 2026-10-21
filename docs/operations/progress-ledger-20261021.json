@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T12:00:04.631Z",
+  "updated_at": "2026-10-21T20:56:31.329949+00:00",
   "source_issue": 239,
   "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
-    "completed_tasks": 27,
-    "remaining_tasks": 5,
-    "completion_percent": 84.4,
+    "completed_tasks": 25,
+    "remaining_tasks": 7,
+    "completion_percent": 78.1,
     "confirmed_additional_fixes": 10
   },
   "fixes": [
@@ -142,8 +142,8 @@
     {
       "id": "P0-03.1",
       "acceptance": "Shared detail/record/rating/date CRUD",
-      "status": "done",
-      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+      "status": "in_progress",
+      "evidence": "Reopened after actual UI audit reproduced score/slider overlap, missing ranking audience scores and unreadable light-theme ranking titles. PR463 repairs these; full interaction/visual acceptance is not established by prior automated passes."
     },
     {
       "id": "P0-03.2",
@@ -244,8 +244,8 @@
     {
       "id": "P1-08.2",
       "acceptance": "390px,touch,scroll,states,themes,a11y,large data",
-      "status": "done",
-      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+      "status": "in_progress",
+      "evidence": "Reopened after actual UI audit reproduced score/slider overlap, missing ranking audience scores and unreadable light-theme ranking titles. PR463 repairs these; full interaction/visual acceptance is not established by prior automated passes."
     },
     {
       "id": "P1-08.3",
@@ -342,6 +342,14 @@
       "additional_fixes": 10,
       "percent": 84.4,
       "reason": "Final461 merged2c504e8 after all7latestCIgreen. Latestmainproof-gatedPagespublish succeeded. Vercel new24hourlimit preventsnewbuild; previousproductionREADY. Host/browseroffline andlegacyPagesSource switch stillpending; rights2/device/usersblocked. No taskcompletioninvented."
+    },
+    {
+      "at": "2026-10-21T20:56:31.329949+00:00",
+      "completed": 25,
+      "remaining": 7,
+      "additional_fixes": 10,
+      "percent": 78.1,
+      "reason": "Correct unsupported zero-remaining claim. Reopen two existing UI acceptance gates after three visible defects; do not change denominator or count pending fixes as complete. Vercel is excluded from the current implementation task."
     }
   ]
 }

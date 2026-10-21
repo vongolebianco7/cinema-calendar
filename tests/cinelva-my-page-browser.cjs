@@ -142,7 +142,7 @@ const { chromium, webkit } = require("playwright"),
       .locator('#recordList [data-record-card="900003"] .cinelva-rate-button')
       .click();
     await page.locator("#cinelvaRateScore").fill("4.2");
-    await page.locator("#cinelvaRatePlace").selectOption("配信");
+    await page.locator("#cinelvaRatePlace").selectOption("配信・サブスク");
     await page.locator("#cinelvaRateComment").fill("保存した感想");
     await page.locator("#cinelvaRateSave").click();
     await page.reload();
@@ -182,8 +182,10 @@ const { chromium, webkit } = require("playwright"),
       ),
       before,
     );
-    page.once("dialog", (d) => d.accept());
-    await page.locator('#recordList [data-delete="900003"]').click();
+    await page.locator('#recordList [data-record-card="900003"] .cinelva-rate-button').click();
+    await page.locator("#cinelvaRateScore").fill("0");
+    await page.locator("#cinelvaRateSave").click();
+    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003")),false);
     page.once("dialog", (d) => d.accept());
     await page
       .locator("#importFile")

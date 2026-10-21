@@ -55,7 +55,7 @@ async function getPort(){
   await page.locator('#grid .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
   await page.locator('#cinelvaRateScore').fill('3.2');
-  await page.locator('#cinelvaRatePlace').selectOption('配信');
+  await page.locator('#cinelvaRatePlace').selectOption('配信・サブスク');
   await page.locator('#cinelvaRateSave').click();
   assert.equal(await page.locator('.cinelva-rate-dialog').evaluate(dialog=>dialog.open),false);
   assert.match(await page.locator('#grid .cinelva-rating-personal').nth(1).innerText(),/3.2/);
@@ -85,7 +85,7 @@ async function getPort(){
   await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
   await page.locator('#dates .cinelva-rate-button').nth(1).click();
   assert.match(await page.locator('#cinelvaRateTitle').innerText(),/Film Two/);
-  assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信');
+  assert.equal(await page.locator('#cinelvaRatePlace').inputValue(),'配信・サブスク');
   const records=await page.evaluate(()=>window.CinelvaLibraryRecords.all());
   assert.equal(records.length,2);
   console.log((process.env.CINELVA_BROWSER||'chromium')+' existing ranking/calendar score badges and close-to-list rating actions passed');

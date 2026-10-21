@@ -119,7 +119,7 @@ const { chromium, webkit } = require("playwright"),
     await page.locator('[data-tab="records"]').click();
     const imported=page.locator('[data-record-card="550"]');
     await imported.locator('.cinelva-rate-button').waitFor();
-    assert.equal(new URL(await imported.locator('a').first().getAttribute('href'),'http://local/').searchParams.get('id'),'');
+    assert.equal(new URL(await imported.locator('a').first().getAttribute('href'),'http://local/').searchParams.get('id'),null);
     assert.equal(await imported.locator('.cinelva-bookmark-button').isDisabled(),true);
     await imported.locator('.cinelva-rate-button').click();
     assert.equal(await page.locator('#cinelvaRateTitle').innerText(),'Unmapped imported film');

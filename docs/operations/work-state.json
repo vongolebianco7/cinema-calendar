@@ -611,6 +611,10 @@
     {
       "check": "PR437 exact-head final CI and integration",
       "result": "All9 Actions succeeded at f189d5850924c78539aefca2046b18da5df3ba87; merged as f6b71c88b58d727b29bbff5da8287be1ca6cccab. Frontend https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956603 ; Autonomous https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956482 . Local179Node/144Python/209smoke and reviewer26 passed. Local checkpoint tree313c5416 exactly equals tested remote source tree."
+    },
+    {
+      "check": "Residual PR401 source reconciliation",
+      "result": "Confirmed two changes absent from main: actual Director-credit filtering on discovery and equal-gross competition ranks. Added backend/loader regressions8 and rendering rank regressions2, failed before and pass after. Shared quality gate189 tests passes; Python144. Browser regressions cover non-directing Justice League/Cobol exclusion, shared reviews and all100 ranks; fresh CI required."
     }
   ],
   "deployment": {
@@ -632,6 +636,6 @@
     "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
     "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Inspect current Vercel quota/checks and canonical production SHA. If quota remains blocked, do not retry deployment or claim current UI visible. After quota clearance, release the tested main SHA once and verify canonical routes/review/bookmark/backup. External identity/artwork exceptions remain listed; actual iPhone/user acceptance is separate from CI.",
+  "next_action": "Finish residual discovery-director and box-office ties integration via PR448, run exact-head CI, then reconcile superseded PR399-402. PR437 is merged and production remains Vercel build-rate-limit pending.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

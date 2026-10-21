@@ -4,6 +4,7 @@ const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const boxRows=JSON.parse(require('node:fs').readFileSync('data/boxoffice.json','utf8')).all_time;
 
 function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); }
 
@@ -45,6 +46,10 @@ async function freePort() {
       const cards = page.locator('#grid [data-box-film]');
       for (let index = 0; index < await cards.count(); index += 1) {
         const card = cards.nth(index);
+        const title=await card.getAttribute('data-box-film');
+        const row=boxRows.find(x=>x.title===title);assert.ok(row,'displayed film has a source row');
+        const expectedRank=boxRows.filter(x=>Number(x.gross)>Number(row.gross)).length+1;
+        assert.equal((await card.locator('.no').innerText()).trim(),'#'+expectedRank,'all 100 source amounts retain competition ranks');
         await card.scrollIntoViewIfNeeded();
         await card.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
         assert.ok((await card.locator('.title').textContent()).trim(), 'every source row keeps its film title visible');

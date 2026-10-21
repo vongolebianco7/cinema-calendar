@@ -56,6 +56,23 @@ const { chromium, webkit } = require("playwright"),
       /ブックマークしました/,
     );
     await eye.click();
+    // Large score text and the slider hit target must occupy separate rows.
+    // Fixed tracks previously let both controls overflow and obscure the score.
+    for (const width of [320, 390, 1348]) {
+      await page.setViewportSize({ width, height: 844 });
+      const layout = await page.locator('.cinelva-review-score').evaluate(el => {
+        const score = el.querySelector('output').getBoundingClientRect();
+        const slider = el.querySelector('input[type=range]').getBoundingClientRect();
+        const parent = el.getBoundingClientRect();
+        return { scoreBottom: score.bottom, sliderTop: slider.top,
+          sliderBottom: slider.bottom, parentBottom: parent.bottom };
+      });
+      assert.ok(layout.scoreBottom <= layout.sliderTop,
+        `${width}px: score must not overlap the slider: ${JSON.stringify(layout)}`);
+      assert.ok(layout.sliderBottom <= layout.parentBottom + 1,
+        `${width}px: score group must contain the full slider hit target`);
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
     const today = await page.evaluate(() =>
       new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()

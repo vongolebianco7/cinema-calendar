@@ -833,7 +833,7 @@ style.textContent+=`
 .cinelva-rate-dialog .cinelva-review-score{
  display:grid!important;
  grid-template-columns:max-content max-content minmax(0,1fr)!important;
- grid-template-rows:40px 32px!important;
+ grid-template-rows:auto auto!important;
  justify-content:start!important;
  column-gap:6px!important;row-gap:5px!important;
  align-items:center!important;

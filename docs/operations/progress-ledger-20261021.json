@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T13:41:55.257102+09:00",
+  "updated_at": "2026-10-21T13:54:24.190239+09:00",
   "source_issue": 239,
-  "source_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+  "source_sha": "f7d205b797a63c7075681487a608f73591760067",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
     "completed_tasks": 16,
     "remaining_tasks": 16,
     "completion_percent": 50.0,
-    "confirmed_additional_fixes": 1
+    "confirmed_additional_fixes": 3,
+    "implemented_fixes": 3
   },
   "fixes": [
     {
@@ -23,7 +24,16 @@
     {
       "id": "FIX-002",
       "title": "Scale provider refresh to catalogue size with deadline and partial-save protection",
-      "status": "implemented_awaiting_ci"
+      "status": "merged",
+      "pr": 450,
+      "merge_sha": "52da16cabde99bf14d8f38cedb334b852f24647f"
+    },
+    {
+      "id": "FIX-003",
+      "title": "Recover missed frontend/backend publications using last successful deployment SHA",
+      "status": "merged_and_canonical_publication_verified",
+      "pr": 451,
+      "merge_sha": "f7d205b797a63c7075681487a608f73591760067"
     }
   ],
   "tasks": [
@@ -192,8 +202,8 @@
     {
       "id": "P1-08.3",
       "acceptance": "Performance/no layout shifts",
-      "status": "pending",
-      "evidence": "Measure active-page layout shifts and interaction latency; existing navigation-only timings are insufficient."
+      "status": "in_progress",
+      "evidence": "Existing navigation metrics did not measure active1000-record readiness, layout shifts or input response. Added0/1000records x390/1280Chrome measurement using actual Records.all count, standard CLS windows and real record-tab/search. Helper3tests/independentreview pass. CI measurement required; not counted complete."
     },
     {
       "id": "P1-09.1",
@@ -217,7 +227,7 @@
       "id": "P1-09.4",
       "acceptance": "Production smoke and rollback evidence",
       "status": "pending",
-      "evidence": "Verify latest canonical production, legacy routes and safe rollback procedure; avoid production rollback merely as a test."
+      "evidence": "Canonical frontend and backendREADY f7d205b7, actual live Nolan13works/sharedreview/defaulttoday/fivemethods/spoiler smoke verified withoutsavingdata. Previous f50frontend/0adbackend safe fallback pair documented; rollbacknotexecuted. Persist final release evidence before counting gate complete."
     }
   ],
   "history": [
@@ -236,6 +246,14 @@
       "additional_fixes": 1,
       "percent": 50.0,
       "reason": "Completed inventory reconciliation and closed superseded issue228; this verifies existing implementation, not two new code fixes."
+    },
+    {
+      "at": "2026-10-21T13:54:24.190239+09:00",
+      "completed": 16,
+      "remaining": 16,
+      "additional_fixes": 3,
+      "percent": 50.0,
+      "reason": "#450 all6CI checks and #451 all4CI checks passed and merged. Acceptance remains incomplete until broader real-data/publication checks are met."
     }
   ]
 }

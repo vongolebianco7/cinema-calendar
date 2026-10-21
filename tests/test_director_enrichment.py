@@ -138,8 +138,18 @@ class DirectorEnrichmentTests(unittest.TestCase):
         import json
         directors = json.loads((ROOT / 'data/directors.json').read_text())['directors']
         self.assertTrue(directors)
-        for identifier, director in directors.items():
+        # The raw approved API snapshot retains explicitly untranslated source
+        # identities. Check the compact published catalog's Japanese UI labels separately.
+        published = json.loads((ROOT / 'data/directors-mobile.json').read_text())['directors']
+        self.assertTrue(published)
+        for identifier, director in published.items():
             self.assertRegex(director['name'], '[ぁ-ゖァ-ヺ一-鿿]', identifier)
+        for identifier, director in directors.items():
+            if director.get('name_status') == 'japanese_unavailable':
+                self.assertFalse(director.get('nameJa'), identifier)
+                self.assertTrue(director.get('original_name'), identifier)
+            else:
+                self.assertRegex(director['name'], '[ぁ-ゖァ-ヺ一-鿿]', identifier)
             self.assertFalse(director['coverage']['truncated'])
             self.assertEqual(director['source_url'], f'https://www.themoviedb.org/person/{identifier}')
             works = director['works']

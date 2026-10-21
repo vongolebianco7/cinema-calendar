@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:09:11.592759+00:00",
+  "updated_at": "2026-10-21T00:19:43.502723+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "0ae957d5708dd9cbe27b3e746a49e3679349503e",
-  "branch": "fix/final-quality-20261020",
-  "head_sha": "f5b4a23294e3251173927db83d23d66576539d65",
+  "base_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
+  "branch": "main",
+  "head_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
   "pull_request": 437,
   "work_items": [
     {
@@ -532,9 +532,10 @@
     {
       "id": "P0-20261021-INTEGRATION",
       "title": "Integrate latest UI specifications with final quality fixes and preserve resolved imports",
-      "status": "pr_created",
+      "status": "merged",
       "pull_request": 437,
-      "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate."
+      "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate.",
+      "ci": "All9 required Actions succeeded at f189d585; squash merged as f6b71c88. Chromium/WebKit frontend/mobile/theme, backup, completeness, Python, smoke, brand and scorecard passed."
     }
   ],
   "verification": [
@@ -606,11 +607,19 @@
     {
       "check": "2026-10-21 reviewed integration follow-up",
       "result": "Shared quality gate178 Node tests passes. Focused reviewer26 tests passes with no blockers. Resolved imports retain original key during edit/clear; Top10 uses verified identity. WebKit mobile CI failed specifically at screenshot32767px limit; dynamic body-height measurement and size-error-only viewport fallback added, failing-then-passing regression verified. Unrelated screenshot errors still fail."
+    },
+    {
+      "check": "PR437 exact-head final CI and integration",
+      "result": "All9 Actions succeeded at f189d5850924c78539aefca2046b18da5df3ba87; merged as f6b71c88b58d727b29bbff5da8287be1ca6cccab. Frontend https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956603 ; Autonomous https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956482 . Local179Node/144Python/209smoke and reviewer26 passed. Local checkpoint tree313c5416 exactly equals tested remote source tree."
+    },
+    {
+      "check": "Residual PR401 source reconciliation",
+      "result": "Confirmed two changes absent from main: actual Director-credit filtering on discovery and equal-gross competition ranks. Added backend/loader regressions8 and rendering rank regressions2, failed before and pass after. Shared quality gate189 tests passes; Python144. Browser regressions cover non-directing Justice League/Cobol exclusion, shared reviews and all100 ranks; fresh CI required."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "target_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
     "last_observed_vercel_production_sha": "b74140a5ea1456c275412128544adaa840149a58",
@@ -627,6 +636,6 @@
     "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
     "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Run fresh required Actions on updated PR437, diagnose any browser failures, merge only green exact head. Production currently b74140a5; do not claim latest UI released until canonical smoke verifies it. Remaining artwork/identity exceptions inventoried.",
+  "next_action": "Finish residual discovery-director and box-office ties integration via PR448, run exact-head CI, then reconcile superseded PR399-402. PR437 is merged and production remains Vercel build-rate-limit pending.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

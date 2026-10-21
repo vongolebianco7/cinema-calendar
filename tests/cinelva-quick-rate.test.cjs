@@ -46,8 +46,8 @@ test('record comments and viewing method survive edits without overwriting origi
   assert.throws(()=>api.save({id:124,title:'Bad',viewingMethod:'other'},1,null),/鑑賞方法/);
 });
 
-test('saved comment and viewing method appear safely in the existing My CINELVA list',()=>{
+test('saved comment and viewing method remain escaped in review details',()=>{
  const page=fs.readFileSync('js/cinelva-records-page.js','utf8');
- assert.match(page,/movie\.viewingMethod\?'<small>'\+escapeHTML\(movie\.viewingMethod\)/);
- assert.match(page,/movie\.comment\?'<p class="record-comment">'\+escapeHTML\(movie\.comment\)/);
+ assert.match(page,/\['鑑賞方法',method\|\|'未登録'\]/);
+ assert.match(page,/escapeHTML\(String\(comment\)/);
 });

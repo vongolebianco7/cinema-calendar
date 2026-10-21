@@ -9,7 +9,7 @@ function search(query, records, year = 'all') {
   const helpers = source.slice(source.indexOf('  const normalizeRecordSearch ='), source.indexOf('  function renderList()'));
   const render = source.slice(source.indexOf('  function renderList()'), source.indexOf('  const TAB_STORAGE_KEY'));
   vm.runInNewContext(helpers + render + '\nrenderList();', {
-    $: id => elements[id], recordMovies: () => records, enriched: movie => movie,
+    $: id => elements[id], mountRecordReviewAreas(){},recordMovies: () => records, enriched: movie => movie,
     metadataFor: () => ({}), dateOf: movie => movie.watchedAt || '',
     card: movie => `<article>${movie.title}</article>`,
   });

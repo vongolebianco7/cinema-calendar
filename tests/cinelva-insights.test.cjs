@@ -21,11 +21,11 @@ test('3D plot coordinates use release year, country latitude, and genre category
 });
 
 test('award heatmap counts unique viewed films by award and decade', () => {
-  const records = [{ id: '1', title: 'Film A', year: 1999 }, { id: '2', title: 'Film B', year: 2001 }];
+  const records = [{ id: '1', tmdbId:1, title: 'Film A', year: 1999 }, { id: '2', tmdbId:2, title: 'Film B', year: 2001 }];
   const awards = [
-    { organization: 'カンヌ国際映画祭', year: 1999, title: 'Film A', category: '最高賞' },
-    { organization: 'カンヌ国際映画祭', year: 1999, title: 'Film A', category: '監督賞' },
-    { organization: 'カンヌ国際映画祭', year: 2001, title: 'Film B', category: '最高賞' },
+    { organization: 'カンヌ国際映画祭', year: 1999, title: 'Film A', tmdb_id:1, category: '最高賞' },
+    { organization: 'カンヌ国際映画祭', year: 1999, title: 'Film A', tmdb_id:1, category: '監督賞' },
+    { organization: 'カンヌ国際映画祭', year: 2001, title: 'Film B', tmdb_id:2, category: '最高賞' },
   ];
   const result = Insights.buildAwardHeatmap(records, awards);
   assert.deepEqual(result.decades, [1990, 2000]);

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T10:04:21.643527+00:00",
+  "updated_at": "2026-10-21T00:01:25.520337+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8dbf723536999d43b9d5763413c887a81d960441",
+  "base_sha": "0ae957d5708dd9cbe27b3e746a49e3679349503e",
   "branch": "fix/final-quality-20261020",
-  "head_sha": "bbd9b55f56db80dda48a65fcc3be6dfa6232cc53",
+  "head_sha": "4718cc0c3a54cbe700e13ec51117b7be92baacff",
   "pull_request": 437,
   "work_items": [
     {
@@ -591,6 +591,10 @@
     {
       "check": "Final source and secondary-card audit",
       "result": "Canonical metadata supplemented for33streaming rows,18outdoor rows,3revivals plus2fallback events.58already-enriched calendar rows copied back to matching streaming source records to preserve refresh data. APIsearch+canonicaldetails checked; wrong proposed ID1124 rejected because it was ThePrestige; correct11257 verified. Daily refresh now accepts explicit provenance or strict unique title+originalyear;6Python regressions pass.144fullPython tests,173Node tests,sharedqualitygate pass. Revival/selectedexperience browser regression passes6viewport/theme combinations.30-route Chromium audit240loads passes. Previous final WebKit audit exposed redirect readiness race; fixed by waiting for mounted themecontrols before unchanged assertions. RequiredfinalCI pending."
+    },
+    {
+      "check": "2026-10-21 integration of current main and PR437",
+      "result": "Local shared quality gate passes, including 175 Node tests; full Python suite 144/144; smoke209/209. Six merge conflicts resolved preserving latest medals, Gold/award names, release dates, spoiler button and comment visibility. Record poster/title detail links restored with canonical-ID regression (2 failing before fix, 2 passing after). Updated stale isolated DOM fixtures and exact-ID award fixtures without relaxing assertions. Chromium/WebKit download returned an invalid ZIP; browser checks must run in CI on this new head."
     }
   ],
   "deployment": {
@@ -612,6 +616,6 @@
     "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
     "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Run required final Actions at PR437 newest head, repair failures, merge green PR, verify Pages merged SHA. Preserve8source gaps; no Vercel deployment retries.",
+  "next_action": "Run required Actions on integrated PR437 head, diagnose any current-spec browser failures, merge only after green gates, then verify canonical production. Reconcile remaining open PRs semantically; do not assume stale checkpoint statuses are current.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

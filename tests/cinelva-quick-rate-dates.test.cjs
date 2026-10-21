@@ -14,7 +14,7 @@ function editor(initialDate, existing = true, identity = {}) {
   if (existing) Records.save({ id: 123, title: '日付精度テスト', comment: '元の感想', ...identity }, 4, initialDate);
   const nodes = new Map();
   const element = id => {
-    if (!nodes.has(id)) nodes.set(id, { value: '', textContent: '' });
+    if (!nodes.has(id)) nodes.set(id, { value: '', textContent: '', attributes: {}, setAttribute(k,v){this.attributes[k]=String(v)}, getAttribute(k){return this.attributes[k]??null} });
     return nodes.get(id);
   };
   Object.assign(context, {

@@ -10,6 +10,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
       append(...children) { for(const c of children){this.children=this.children.filter(x=>x!==c);this.children.push(c)} },
       setAttribute() {},
       insertAdjacentElement() {},
+      insertAdjacentHTML(_where,html){this.innerHTML+=html},
       prepend(...children){this.children.unshift(...children)},
       addEventListener(type, listener) { this.listeners[type] = listener; },
       querySelectorAll() { return this.children; },
@@ -29,7 +30,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
     escapeHTML: value => String(value ?? ''),
     posterHTML: () => '',
     $: id => elements[id],
-    document: { createElement: element },
+    document: { createElement: element, getElementById:()=>null, head:{append(){}} },
   };
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
@@ -137,7 +138,8 @@ test('an imported local ID and its TMDB film count as one watched director work'
   row.listeners.click();
   assert.equal((detail.innerHTML.match(/class="director-film-tile /g) || []).length, 1);
   assert.match(detail.innerHTML, /search\.html\?id=42"/);
-  assert.match(detail.innerHTML, /★ 4\.2/);
+  assert.match(detail.innerHTML, /data-film-index="0"/);
+  assert.match(detail.innerHTML, /is-watched/);
   assert.equal(JSON.stringify(imported), before, 'rendering must not migrate stored IDs');
 });
 

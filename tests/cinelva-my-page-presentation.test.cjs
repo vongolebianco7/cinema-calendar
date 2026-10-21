@@ -15,7 +15,7 @@ test('zero means unwatched and the shared editor retains viewing method choices'
   assert.match(quickRate, /Number\(\$\('cinelvaRateScore'\)\.value\)===0/);
   assert.match(quickRate, /Records\.remove\(selected\.id\)/);
   assert.match(quickRate, /step="0\.1"/);
-  for(const method of ['映画館','配信','TV','その他']) assert.ok(quickRate.includes('value="'+method+'"'));
+  for(const method of ['映画館','配信・サブスク','TV','DVD・Blu-ray','その他']) assert.ok(quickRate.includes('value="'+method+'"'));
 });
 
 test('quick-rate source has no next-film action', () => {
@@ -34,7 +34,7 @@ test('annual history keeps the agreed 4 by 3 blue calendar, and active tab', () 
 
 test('award heatmap cells still show watched and unwatched films', () => {
   assert.match(records, /data-award-cell=/);
-  assert.match(records, /record\?'鑑賞済み'/);
+  assert.match(records, /seen\?'鑑賞済み'/);
   assert.match(records, /entryId\?'未鑑賞'/);
   assert.match(records, /data-award-review-id/);
   assert.match(records, /CinelvaQuickRate\.mountInline/);

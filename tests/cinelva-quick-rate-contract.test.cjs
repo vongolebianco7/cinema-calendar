@@ -6,7 +6,7 @@ const source=fs.readFileSync('js/cinelva-quick-rate.js','utf8');
 function setup(existing=[]){
  const nodes=new Map(),writes=[];
  const node=()=>({value:'',textContent:'',onclick:null,children:[],options:[],
-  style:{setProperty(){}},setAttribute(){},replaceWith(){},addEventListener(){},
+  style:{setProperty(){}},attributes:{},setAttribute(k,v){this.attributes[k]=String(v)},getAttribute(k){return this.attributes[k]??null},replaceWith(){},addEventListener(){},
   append(child){this.children.push(child);this.options.push(child);},
   replaceChildren(){this.children=[];this.options=[];}
  });
@@ -54,7 +54,7 @@ test('invalid date does not persist and existing zero rating remains zero',()=>{
  const {api,element,writes}=setup([old]);
  assert.equal(api.open({id:22,title:'作品',_localRecord:true}),true);
  assert.equal(element('cinelvaRateScore').value,0);
- assert.equal(element('cinelvaRatePlace').value,'配信');
+ assert.equal(element('cinelvaRatePlace').value,'配信・サブスク');
  assert.equal(element('cinelvaRateComment').value,'短評');
  element('cinelvaRateDate').value='not-a-date';
  element('cinelvaRateSave').onclick();

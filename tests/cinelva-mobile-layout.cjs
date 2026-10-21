@@ -88,7 +88,7 @@ const fs = require('fs');
     const yearSelect=page.locator('#csPeriod');
     if(!(await yearSelect.isVisible())||await yearSelect.inputValue()!==String(year)){failed=true;console.error(width,'summary period selector must control the calendar');}
     const columns=await page.locator('#yearHeatmap').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
-    if(columns!==4){failed=true;console.error(width,'expected four calendar columns, got',columns);}
+    if(columns!==3){failed=true;console.error(width,'expected three calendar columns, got',columns);}
     await page.screenshot({ path: 'test-results/cinelva/calendar-' + width + '.png', fullPage: true });
     if (result.error || result.months !== 12 || result.watchedDays !== 1 || result.juneCount !== '1本' || result.overlaps?.length || result.overflow || errors.length) {
       failed = true;

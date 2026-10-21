@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T21:13:35.145301+00:00",
+  "updated_at": "2026-10-21T21:24:08.522476+00:00",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
-    "confirmed_defects": 7,
-    "completed_fixes": 0,
-    "remaining_confirmed_defects": 7,
-    "fixes_implemented_pending_validation": 7,
+    "confirmed_defects": 10,
+    "completed_fixes": 4,
+    "remaining_confirmed_defects": 6,
+    "fixes_implemented_pending_validation": 6,
     "overall_ui_completion_percent": null
   },
   "coverage": {
@@ -20,30 +20,38 @@
     {
       "id": "UI-20261022-001",
       "title": "Review score overlaps slider hit target by 10.59375px",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Fixed 40px/32px grid rows cannot contain a 55.2px number and 48px slider",
-      "test": "Existing quick-rate browser test:320/390/1348px geometry, Chromium and WebKit; captures screenshots"
+      "test": "Existing quick-rate browser test:320/390/1348px geometry, Chromium and WebKit; captures screenshots",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78"
     },
     {
       "id": "UI-20261022-002",
       "title": "Rating ranking audience scores show dash despite source score",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Renderer mounts shared review with only id and title; source score and vote count dropped",
-      "test": "Existing ranking/calendar browser test through real ranking renderer; 8.4 score becomes4.2"
+      "test": "Existing ranking/calendar browser test through real ranking renderer; 8.4 score becomes4.2",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78"
     },
     {
       "id": "UI-20261022-003",
       "title": "Light-theme ranking title and metadata unreadable against fixed dark wrapper",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Theme sets dark text, integrated ranking wrapper fixes dark background",
-      "test": "Existing ranking/calendar browser test: title and metadata contrast >=4.5 in both themes"
+      "test": "Existing ranking/calendar browser test: title and metadata contrast >=4.5 in both themes",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78"
     },
     {
       "id": "UI-20261022-004",
       "title": "My Cinelva summary heading and supporting text invisible or too pale in light theme",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Legacy dark variables on body shadow light theme root variables and summary forces white text",
-      "test": "Existing mobile layout browser test: summary heading, hero, utilities and count captions contrast >=4.5 in both themes"
+      "test": "Existing mobile layout browser test: summary heading, hero, utilities and count captions contrast >=4.5 in both themes",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78"
     },
     {
       "id": "UI-20261022-005",
@@ -65,6 +73,28 @@
       "status": "implemented_validation_pending",
       "root_cause": "Calendar-specific important transparent image background overrides common backing; legacy gLogo/wordmark missed shared theme selector",
       "test": "Existing route screenshots after shared CSS selector repair; approved image asset unchanged"
+    },
+    {
+      "id": "UI-20261022-008",
+      "title": "Retired lifetime crowns/prisms are generated at100/1000 records and zero-record summary reserves an empty year graph",
+      "status": "implemented_validation_pending",
+      "root_cause": "Obsolete reward generator and empty graph minimum height remain after requested removal",
+      "test": "Existing browser1000-record case asserts retired decorations absent; zero-record case asserts year graph hidden and summary height below190px; saved records unchanged"
+    },
+    {
+      "id": "UI-20261022-009",
+      "title": "Annual viewing calendar uses4 columns rather than requested3 columns by4 rows",
+      "status": "implemented_validation_pending",
+      "root_cause": "CSS and prior test contract encode reversed dimensions",
+      "test": "Existing multi-width layout and both-engine My Cinelva checks now require3 columns and12 months; unrelated dashboard grids unchanged"
+    },
+    {
+      "id": "UI-20261022-010",
+      "title": "Movie information dates and values are near-white against light page background",
+      "status": "implemented_validation_pending",
+      "root_cause": "Detailed information table retains dark-only hard-coded text colors",
+      "evidence": "Actual live release-date cell rgb222/222/222 against light page rgb248/246/241",
+      "test": "Existing two-engine detail journey requires information headings, labels and values contrast >=4.5"
     }
   ],
   "pr": 463,

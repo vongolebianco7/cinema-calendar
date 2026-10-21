@@ -94,6 +94,13 @@ html[data-theme="light"] .gBrand img:is(.gBrandImage,.gLogo) {
   background:#171717!important;border-radius:7px;padding:2px;
 }
 html[data-theme="light"] .gBrand>span { color:var(--text)!important; }
+/* The detailed information table used dark-only text colors. */
+html[data-theme="light"] #detail .movieInfo :is(h3,h4,dd,.infoPerson,.infoCast) {
+  color:var(--text)!important;
+}
+html[data-theme="light"] #detail .movieInfo :is(dt,.infoEmpty) {
+  color:var(--muted)!important;
+}
 html[data-theme="light"] .gDrawer,
 html[data-theme="light"] .drawer {background:#fffefa!important}
 html[data-theme="light"] :is(.gDrawer>a,.drawer a) {color:#242521!important;border-color:#d4d0c7!important}

@@ -46,6 +46,24 @@ async function freePort() {
       await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     }
     await expectDirectReview(movie.title);
+    await page.evaluate(()=>document.documentElement.dataset.theme='light');
+    const informationContrast=await page.locator('#movieInformation').evaluate(root=>{
+      const lum=value=>{
+        const rgb=value.match(/[\d.]+/g).slice(0,3).map(Number).map(n=>{
+          const s=n/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;
+        });
+        return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
+      };
+      let bg=root;
+      while(bg.parentElement&&getComputedStyle(bg).backgroundColor==='rgba(0, 0, 0, 0)')bg=bg.parentElement;
+      const background=lum(getComputedStyle(bg).backgroundColor);
+      return ['h4','dt','dd'].map(selector=>{
+        const foreground=lum(getComputedStyle(root.querySelector(selector)).color);
+        return {selector,ratio:(Math.max(background,foreground)+0.05)/(Math.min(background,foreground)+0.05)};
+      });
+    });
+    for(const text of informationContrast)assert.ok(text.ratio>=4.5,
+      `movie information ${text.selector} must be readable in light theme: ${text.ratio}`);
     await page.evaluate(baseMovie => renderDetail({ ...baseMovie,
       related: [{ id: 992001, tmdbId: 992001, title: 'Related QA', year: '2020', score: 8, votes: 100 }],
       director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]

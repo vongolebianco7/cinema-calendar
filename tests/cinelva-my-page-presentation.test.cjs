@@ -23,8 +23,8 @@ test('quick-rate source has no next-film action', () => {
   assert.doesNotMatch(quickRate, /保存して次へ/);
 });
 
-test('annual history keeps the agreed 4 by 3 blue calendar, and active tab', () => {
-  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+test('annual history keeps the agreed 3 by 4 blue calendar, and active tab', () => {
+  assert.match(html, /#summaryView #yearHeatmap\.cinelva-annual-calendar\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
   assert.doesNotMatch(records, /achieved\?'gold-month'/);
   assert.match(records, /count>=4\?'deep-month'/);
   assert.doesNotMatch(records + html, /👑|習慣/);

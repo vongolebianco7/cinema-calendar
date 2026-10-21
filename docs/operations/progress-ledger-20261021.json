@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T20:56:31.329949+00:00",
+  "updated_at": "2026-10-21T21:24:08.522476+00:00",
   "source_issue": 239,
   "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
@@ -10,7 +10,7 @@
     "completed_tasks": 25,
     "remaining_tasks": 7,
     "completion_percent": 78.1,
-    "confirmed_additional_fixes": 10
+    "confirmed_additional_fixes": 14
   },
   "fixes": [
     {
@@ -82,6 +82,34 @@
       "pr": 459,
       "merge_sha": "58929f9b76526f0d72bd06ea2c72a20f556c10ab",
       "status": "merged_final_ci_verified_Vercel_publication_rate_limited"
+    },
+    {
+      "id": "FIX-011",
+      "title": "Review score and slider overlap",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-012",
+      "title": "Ranking source TMDB score lost",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-013",
+      "title": "Light ranking card contrast",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-014",
+      "title": "Light My Cinelva summary and caption contrast",
+      "pr": 463,
+      "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78",
+      "status": "merged_ci_visual_verified"
     }
   ],
   "tasks": [
@@ -350,6 +378,14 @@
       "additional_fixes": 10,
       "percent": 78.1,
       "reason": "Correct unsupported zero-remaining claim. Reopen two existing UI acceptance gates after four visible defects; do not change denominator or count pending fixes as complete. Vercel is excluded from the current implementation task."
+    },
+    {
+      "at": "2026-10-21T21:24:08.522476+00:00",
+      "completed": 25,
+      "remaining": 7,
+      "additional_fixes": 14,
+      "percent": 78.1,
+      "reason": "PR463 four fixes merged after all10 final checks. UI acceptance gates remain open while additional confirmed defects are being fixed."
     }
   ]
 }

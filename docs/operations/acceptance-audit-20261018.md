@@ -1,5 +1,18 @@
 # Cinelva acceptance evidence — 2026-10-18
 
+> Historical evidence snapshot. Do not use this document's old product decisions as current implementation instructions. The latest user decisions and current source take precedence; see the supersession notice below. The 32-bullet table records evidence available at its original audit date, not today's completion status.
+
+## Current specification supersession — 2026-10-21
+
+- New shared reviews default the viewing date to today. Preserve an existing record's unknown, year-only or month-only date when editing; do not invent a more precise historical date.
+- The annual calendar uses four columns and three rows with blue intensity. The old monthly five-film Gold rule below is superseded. All-time year cards remain separate from film-award milestones.
+- Film-award decade cells show Gold for ten watched winners or a verified complete target collection. Partial source coverage alone cannot establish completion. Show each award's actual prize name; display BAFTA as BAFTA and the Golden Globes prize as 映画作品賞.
+- Kinema Junpo datasets, collection panels and empty placeholders are removed. Do not restore them from an old branch.
+- Movie lists use shared MY/TMDB score, review and independent bookmark controls. Inline list gauges and the duplicate あなたの評価 label are removed. Poster/title links open independent detail pages.
+- Shared reviews retain the comment-header spoiler button and cinema, streaming/subscription, TV, DVD/Blu-ray and other viewing methods. Zero means unwatched; clearing a review preserves its independent bookmark.
+- Preserve imported storage keys. Canonical identities must be explicit or uniquely resolved from verified title/year metadata; a numeric storage ID alone is not a TMDB identity.
+- Source/CI integration and canonical production verification remain separate. A READY older deployment does not prove that the current main changes are visible.
+
 Initial baseline: main `4bac142449f9df00fcd3c44d444093676354d326` (#384). Concurrent #386 (`a4d2b04`) saved-film search normalization and zero-score director regression are preserved during reconciliation.
 Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-sized tasks and are not a defensible percentage denominator. Historical work-state item counts are not release completion counts.
 
@@ -9,7 +22,7 @@ Issue #239 has **32 ordered acceptance bullets**, below. They are not 32 equal-s
 
 [Verified release bd6a1c99](release-verification-20261019.md): canonical Vercel READY,29/29HTTP/source checks, actual legacy query/hash and original-year/shared-review smoke. Latest local suite147Node/133Python passes. The table retains partial/pending classifications where broader acceptance evidence is still missing; it is not an overall progress percentage.
 
-## Current direct feedback
+## Historical direct feedback (superseded where listed above)
 
 - New review: rating/comment alone must not assign a viewing day. Before this patch `open()` assigned today for a new movie; runtime regression failed. New blank default passes; explicitly selected dates and existing year/month/null precision remain covered.
 - Annual calendar: latest user correction on 2026-10-18 16:52 JST is GOLD at **5** films/month, superseding 10. Actual renderer still used 10. Runtime regression failed at five; corrected threshold passes 0/1/4/5/6/10 boundary cases. Twelve months and existing 3-column layout retained.

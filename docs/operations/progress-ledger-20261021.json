@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T11:32:37.755Z",
+  "updated_at": "2026-10-21T12:00:04.631Z",
   "source_issue": 239,
-  "source_sha": "466f69a37de719320ad6128e5b637a4d430955fe",
+  "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
@@ -74,14 +74,14 @@
       "title": "Require exact-source successful CI before production builds and database writes",
       "pr": 459,
       "merge_sha": "58929f9b76526f0d72bd06ea2c72a20f556c10ab",
-      "status": "merged_guarded_DB_and_Pages_verified_Vercel_integration_pending"
+      "status": "merged_final_ci_verified_Vercel_publication_rate_limited"
     },
     {
       "id": "FIX-010",
       "title": "Fix installed deepmerge cyclic recursion without a major Prisma upgrade",
       "pr": 459,
       "merge_sha": "58929f9b76526f0d72bd06ea2c72a20f556c10ab",
-      "status": "merged_audit_zero_Vercel_pending"
+      "status": "merged_final_ci_verified_Vercel_publication_rate_limited"
     }
   ],
   "tasks": [
@@ -107,7 +107,7 @@
       "id": "P0-01.4",
       "acceptance": "Artifacts and enforce checks before release",
       "status": "blocked",
-      "evidence": "459/460mergedafterfinal7green. Actualproof-gatedDBsync39591844636 andPagesartifact39591844798 succeeded. Vercelrefuseddirtyvercel.json;461semanticcomparisonfollowuprequiresfreshCIandactualbuild. ExistingPagesSource stillbranch; no settingchangeattempt. Remainsincomplete."
+      "evidence": "459/460/461 merged after finalexactheadCI. Latestsource0dff andreceipt6c31 eachall7green,257Nodepass. ActualguardedDBsync39591844636 andlatestPagesartifact39595243091 succeeded (proofsource61eec13c...). Vercel bothprojects commitstatusfailure: Deployment rate limited — retry in24hours; actualVercelsemanticconfigintegration UNVERIFIED andpriorcanonicalfronta4/backendcf remainREADY. PagesSourcelastobservedbranchmain; browserofflinepreventsswitch. Do notclaimenforcementcomplete."
     },
     {
       "id": "P0-02.1",
@@ -334,6 +334,14 @@
       "additional_fixes": 10,
       "percent": 84.4,
       "reason": "Guarded DBsync andPagesartifact actualsuccess; Vercel refuses modifiedconfig. PR461RED4confirmed andimplementationCIpending. Exec environmentoffline; no completionfabricated."
+    },
+    {
+      "at": "2026-10-21T12:00:04.631Z",
+      "completed": 27,
+      "remaining": 5,
+      "additional_fixes": 10,
+      "percent": 84.4,
+      "reason": "Final461 merged2c504e8 after all7latestCIgreen. Latestmainproof-gatedPagespublish succeeded. Vercel new24hourlimit preventsnewbuild; previousproductionREADY. Host/browseroffline andlegacyPagesSource switch stillpending; rights2/device/usersblocked. No taskcompletioninvented."
     }
   ]
 }

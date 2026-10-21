@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-21T12:00:04.631Z",
+  "code_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
+  "status": "blocked_vercel_rate_limit_and_runtime_offline",
+  "metrics": {
+    "total_tasks": 32,
+    "completed_tasks": 27,
+    "remaining_tasks": 5,
+    "completion_percent": 84.4,
+    "confirmed_additional_fixes": 10
+  },
+  "source_ci": {
+    "head": "0dff69bc05a446e0e8c7529e10212184664185aa",
+    "all_seven_succeeded": true,
+    "node_passed": 257,
+    "node_failed": 0,
+    "focused_review": "no blockers"
+  },
+  "final_ci": {
+    "head": "6c31cbf63aa0e9b907a2a438cb896132e07ccdcf",
+    "all_seven_succeeded": true,
+    "latest_runs": [
+      {
+        "id": 39594224297,
+        "name": "CINELVA smoke tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223864,
+        "name": "Scorecard contract",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223962,
+        "name": "Reproducible backend build",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223710,
+        "name": "Cinemap completeness scorecard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223907,
+        "name": "CINELVA mobile layout smoke test",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223921,
+        "name": "Autonomous quality gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39594223689,
+        "name": "Validate frontend",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "proof": {
+    "source_digest": "61eec13c28d252112b69155cd5d9726e7a8900ceac88a9bdacfd63576947e865",
+    "observed_in": "Pages run39595243091, buildjob119205810035",
+    "actual_Vercel_configuration_normalization": "unverified_no_new_build_created"
+  },
+  "Vercel": {
+    "provider_message": "Deployment rate limited — retry in 24 hours.",
+    "affected": [
+      "cinema-calendar",
+      "backend"
+    ],
+    "extra_manual_retry_after_limit": false,
+    "paid_upgrade": false,
+    "prior_canonical_frontend": {
+      "sha": "a4d5ee012968d8de45bda2be07727502c969ede0",
+      "deployment": "dpl_3ecio6iBkDFdaZD29ha1YUmt8Zp4",
+      "state": "READY"
+    },
+    "prior_canonical_backend": {
+      "sha": "cf8633ded44a42af30bed411b4d8c7e874d5d137",
+      "deployment": "dpl_AXXuwZbxpdL1P6vpjRPGdqqdsDKf",
+      "state": "READY"
+    }
+  },
+  "database": {
+    "verified_run": 39591844636,
+    "guard_and_quality": "passed",
+    "movies": 1080,
+    "releases": 1113,
+    "tv": 12,
+    "theaters": 1225,
+    "theater_master": 322
+  },
+  "Pages": {
+    "verified_run": 39595243091,
+    "build_job": 119205810035,
+    "deploy_job": 119205963089,
+    "result": "success",
+    "source_last_browser_observation": "Deploy from branch main / root",
+    "source_setting_changed_by_agent": false,
+    "source_recheck": "blocked_by_environment_offline"
+  },
+  "local_runtime": {
+    "exec": "409 Conflict environment_offline",
+    "browser": "409 Conflict environment_offline",
+    "latest_local_tests_claimed": false
+  },
+  "remaining_gate_ids": [
+    "P0-01.4",
+    "P0-04.3",
+    "P1-08.1",
+    "P1-09.2",
+    "P1-09.3"
+  ],
+  "movie_update": {
+    "run": 39583606695,
+    "repeated": false,
+    "explicitly_approved": true,
+    "observed": 750,
+    "fresh_7d": 498,
+    "stale": 252,
+    "attempted": 186,
+    "succeeded": 184,
+    "failed": 2
+  }
+}

@@ -1,0 +1,39 @@
+name: Reproducible backend build
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'scripts/check_dependency_licenses.cjs'
+      - 'tests/cinelva-dependency-license.test.cjs'
+      - '.github/workflows/backend-build.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      DATABASE_URL: 'postgresql://cinelva:verification@127.0.0.1:5432/unused?schema=public'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Inventory exact dependency provenance and license metadata
+        run: node scripts/check_dependency_licenses.cjs --output dependency-license-inventory.json
+      - name: Install locked packages without lifecycle scripts
+        working-directory: backend
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Generate Prisma client and compile without production credentials
+        working-directory: backend
+        run: npm run build
+      - name: Preserve dependency evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-dependency-license-inventory
+          path: dependency-license-inventory.json
+          if-no-files-found: error

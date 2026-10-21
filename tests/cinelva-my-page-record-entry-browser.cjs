@@ -59,7 +59,7 @@ async function freePort() {
         return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
       };
       return ['.movieInfo h3','.movieInfo h4','.movieInfo dt','.movieInfo dd',
-        '.detailPhase h3','.watchTimelineWhen','.watchTimelineLabel','.watchTimelineDetail'].map(selector=>{
+        '.detailPhase h3','.detailPhaseNo','.detailPhase p','.relatedGroupTitle','.watchTimelineWhen','.watchTimelineLabel','.watchTimelineDetail'].map(selector=>{
         const element=root.querySelector(selector);
         if(!element)throw new Error(`Missing detail contrast fixture: ${selector}`);
         let bg=element;

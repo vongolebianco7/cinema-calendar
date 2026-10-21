@@ -1,5 +1,6 @@
 const { waitForLocalServer } = require('./helpers/local-server.cjs');
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
+const fs = require('node:fs');
 const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
@@ -26,7 +27,8 @@ async function freePort() {
     const movie = catalog.movies.find(row => row.id && row.title);
     assert.ok(movie, 'fixture has a movie with an ID and title');
 
-    browser = await chromium.launch({ headless: true });
+    const browserName=process.env.CINELVA_BROWSER==='webkit'?'webkit':'chromium';
+    browser = await ({chromium,webkit})[browserName].launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
     await page.goto(`${base}/search.html?id=${encodeURIComponent(movie.id)}&search=${encodeURIComponent(movie.title)}`, { waitUntil: 'domcontentloaded' });
@@ -44,6 +46,32 @@ async function freePort() {
       await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     }
     await expectDirectReview(movie.title);
+    await page.evaluate(baseMovie => renderDetail({ ...baseMovie,
+      related: [{ id: 992001, tmdbId: 992001, title: 'Related QA', year: '2020', score: 8, votes: 100 }],
+      director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]
+    }), movie);
+    for (const [kind,title,id] of [['related','Related QA','992001'],['director','Director QA','992002']]) {
+      const card=page.locator(`.detailRelatedCard[data-detail-kind="${kind}"]`);
+      const link=card.locator('a.work');
+      assert.equal(new URL(await link.getAttribute('href'),base).searchParams.get('id'),id);
+      assert.equal(await card.locator('input[type=range]').count(),0,'secondary cards use the shared badge, without list sliders');
+      await card.locator('.cinelva-rate-button').click();
+      assert.equal(await page.locator('#cinelvaRateTitle').innerText(),title);
+      await page.locator('#cinelvaRateClose').click();
+      const bookmark=card.locator('.cinelva-bookmark-button');
+      await bookmark.click();
+      assert.equal(await bookmark.getAttribute('aria-pressed'),'true');
+      assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().length),0,'bookmark does not create a viewing record');
+      assert.equal(await card.locator('.cinelva-rating-audience .rating-value').innerText(),kind==='related'?'4.0':'3.5');
+    }
+    assert.equal(await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
+    const touchAction=await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).touchAction);
+    assert.ok(touchAction==='auto'||touchAction==='manipulation'||touchAction.includes('pan-y'),
+      `vertical related-card grid must allow vertical touch scrolling, got ${touchAction}`);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'secondary cards must not cause horizontal page overflow');
+    await page.locator('.detailRelatedCard').first().scrollIntoViewIfNeeded();
+    fs.mkdirSync('artifacts/route-audit/related-cards',{recursive:true});
+    await page.screenshot({path:`artifacts/route-audit/related-cards/${browserName}-390.png`});
 
     const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
     await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });

@@ -9,6 +9,13 @@ const section = (start, end) => html.slice(html.indexOf(start), html.indexOf(end
 const event = {id:157336, title:'インターステラー', date:'2026-09-01', event:'streaming',
   service:'Prime Video', source:'Official announcement', tmdb:'https://www.themoviedb.org/movie/157336'};
 
+test('original release dates use the requested full-date caption', () => {
+  const context={};
+  vm.runInNewContext(helpers,context);
+  assert.equal(context.movieDateLabel({event:'catalog'}),'公開年月日');
+  assert.equal(context.movieDateLabel({event:'streaming'}),'配信開始');
+});
+
 test('local official events resolve authoritative film details using their explicit TMDB identity', async () => {
   for (const film of [event, {...event,tmdb:undefined,tmdb_id:157336}, {...event,id:900001,tmdb:'https://www.themoviedb.org/movie/157336'}]) {
     const calls=[], rendered=[], urls=[];
@@ -26,11 +33,11 @@ test('local official events resolve authoritative film details using their expli
 });
 
 test('offline review actions target the canonical film rather than a local event ID', () => {
-  const detail={append(){}};
+  const detail={append(){},querySelectorAll:()=>[]};
   const context={E:String,detail,URLSearchParams,location:{search:''},recordEntryUrl:String,
     CinemapCalendarContext:{read:()=>null},screeningRecommendationV3Html:()=>'',renderMovieInformation:()=>'',viewingTimelineHtml:()=>'',
     document:{createElement:()=>({innerHTML:'',querySelector:()=>null}),getElementById:()=>null,querySelectorAll:()=>[]},showMovieAwardHistory(){},criticRegistry:()=>Promise.resolve({})};
-  vm.runInNewContext(helpers+section('function renderDetail(', 'document.getElementById("close").onclick='),context);
+  vm.runInNewContext(helpers+section('function mountDetailRelatedReviews(', 'function relatedHtml(')+section('function renderDetail(', 'document.getElementById("close").onclick='),context);
   context.renderDetail({...event,id:900001});
   assert.match(detail.innerHTML,/data-detail-review data-movie-id="157336"/);
   assert.doesNotMatch(detail.innerHTML,/data-movie-id="900001"/);

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T03:44:55.697631+00:00",
+  "generated_at": "2026-10-21T10:18:56.305082+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -271716,6 +271716,97 @@
         "source": "tmdb_director_movie_credits",
         "truncated": false,
         "runtime_unverified": 1
+      }
+    },
+    "4971574": {
+      "id": 4971574,
+      "name": "Hiroya Brian Nakano",
+      "nameJa": "",
+      "original_name": "Hiroya Brian Nakano",
+      "also_known_as": [
+        "Hiroya Brian Nakano"
+      ],
+      "name_status": "japanese_unavailable",
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/4971574",
+      "credits_source_url": "https://api.themoviedb.org/3/person/4971574/movie_credits",
+      "checked_at": "2026-10-21T10:18:56.304460+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            99,
+            10402
+          ],
+          "id": 1802704,
+          "title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
+          "original_title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-20",
+          "director": "Hiroya Brian Nakano",
+          "director_id": 4971574,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/tiMQ6zWgrNGOEk3JdO2Ovt7R5Br.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1802704"
+        },
+        {
+          "genre_ids": [
+            99,
+            10402
+          ],
+          "id": 1471707,
+          "title": "Creepy Nuts Live at TOKYO DOME",
+          "original_title": "Creepy Nuts Live at TOKYO DOME",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2025",
+          "date": "2025-04-28",
+          "director": "Hiroya Brian Nakano",
+          "director_id": 4971574,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/w88ASVYJwnEyYMaD3ygWQNGKBd1.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1471707"
+        },
+        {
+          "genre_ids": [
+            10402,
+            99
+          ],
+          "id": 1295460,
+          "title": "BABYMETAL LEGEND - 43 The Movie",
+          "original_title": "BABYMETAL LEGEND - 43 The Movie",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 9.0,
+          "votes": 2,
+          "year": "2024",
+          "date": "2024-08-23",
+          "director": "Hiroya Brian Nakano",
+          "director_id": 4971574,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/PL4qFLH29dG32v1WRj2Kwu32us.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1295460"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 3
       }
     }
   }

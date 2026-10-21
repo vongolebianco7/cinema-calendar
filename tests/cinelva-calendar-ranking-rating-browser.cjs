@@ -32,6 +32,9 @@ async function getPort(){
   browser=await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch({headless:true});
   const context=await browser.newContext({viewport:{width:390,height:844}});
   const page=await context.newPage();
+  await page.route('**/data/rankings.json?*',route=>route.fulfill({json:{rankings:{'邦画':{'ドラマ':{'2020年代':[
+   {id:991101,title:'Ranking score fixture',year:'2024',score:8.4,votes:200}
+  ]}}}}}));
   // Test the real existing ranking DOM and calendar DOM, while keeping
   // external movie feeds offline and deterministic.
   await page.goto(base+'/rankings.html',{waitUntil:'domcontentloaded'});
@@ -39,6 +42,9 @@ async function getPort(){
   // Wait for the application's asynchronous initial ranking render before
   // inserting deterministic fixtures; otherwise it overwrites test cards.
   await page.waitForFunction(()=>Boolean(document.querySelector('#sourceNote')?.textContent?.trim()) && document.querySelectorAll('#grid a.rankCard').length>0);
+  await page.locator('#grid .cinelva-rating-audience').first().waitFor();
+  assert.match(await page.locator('#grid .cinelva-rating-audience').first().innerText(),/4\.2/,
+   'real ranking renderer must pass its source score to the shared rating badge');
   await page.evaluate(()=>{
    document.querySelector('#grid').innerHTML=
     '<a class="rankCard" href="search.html?id=101&search=Film%20One"><span class="title">Film One</span></a>'+

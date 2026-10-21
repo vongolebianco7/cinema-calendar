@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:41:47.049434+00:00",
+  "updated_at": "2026-10-21T04:45:37.316637+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8ca54a7be87133c4dda060016866254c374b19db",
-  "branch": "fix/director-snapshot-20261021",
-  "head_sha": "8ca54a7be87133c4dda060016866254c374b19db",
-  "pull_request": 448,
+  "base_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+  "branch": "work/remaining-acceptance-20261021",
+  "head_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+  "pull_request": 449,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -82,7 +82,7 @@
     {
       "id": "P0-290-FRESHNESS-NOISE",
       "title": "Keep disabled external sources visible without failing the daily audit forever",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 244,
       "pull_request": {
         "number": 290,
@@ -96,13 +96,14 @@
     {
       "id": "P0-291-CI-CREDIT-SAVING",
       "title": "Skip heavy browser completeness runs for non-UI audit-only changes",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 241,
       "pull_request": {
         "number": 291,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/291",
         "branch": "ci/skip-browser-scorecard-non-ui",
-        "head_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5"
+        "head_sha": "7d69f5dc6987573d9b04abd8313baa7e35b693a5",
+        "merge_sha": "f26faaf8c4875a7424af8288e565a4e465fe5664"
       },
       "acceptance": "Operations docs, Python-only contracts, and the external-data registry do not install Chromium and WebKit twice in the completeness workflow; UI/runtime changes still run the complete scorecard.",
       "ci": "A workflow contract first failed without paths-ignore. The focused test now passes after adding the three non-UI exclusions; the PR itself changes the workflow and therefore still runs its full validation once."
@@ -166,13 +167,14 @@
     {
       "id": "P0-244",
       "title": "Hide stale theater showtimes from users",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 244,
       "pull_request": {
         "number": 247,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/247",
         "branch": "fix/hide-stale-theater-schedules",
-        "head_sha": "b0f0bbce33ca0c89eecb61afeb57095a045c345f"
+        "head_sha": "b0f0bbce33ca0c89eecb61afeb57095a045c345f",
+        "merge_sha": "ebd951357dc07fb0305e56a20283ec413668376b"
       },
       "acceptance": "Only schedules generated within 24 hours and dated today or later are shown; stale or invalid data shows an explicit notice and official theater link.",
       "ci": "Earlier validate-frontend run failed only during existing My CINELVA browser flow with undici Parser.finish assert after an external connection closed; failed job rerun requested."
@@ -180,39 +182,42 @@
     {
       "id": "P0-242-WOWOW",
       "title": "Remove unsupported top placement of WOWOW listings",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 248,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/248",
         "branch": "fix/cinelva-discovery-offer-order",
-        "head_sha": "1039df212855aeef81b111ebb6166fb7bedea31c"
+        "head_sha": "1039df212855aeef81b111ebb6166fb7bedea31c",
+        "merge_sha": "b7d2b22630c2956cc0c9914160171577c7452f5d"
       },
       "acceptance": "The curated official listing module follows the general theater, streaming, and catalog discovery shelves; a CI regression protects this order."
     },
     {
       "id": "P0-242-COUNTS",
       "title": "Clarify discovery results, category meaning, and full access",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 249,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/249",
         "branch": "fix/cinelva-discovery-shelf-counts",
-        "head_sha": "01c39c89fb024c960ababf6a7f0dbaffc4663e7d"
+        "head_sha": "01c39c89fb024c960ababf6a7f0dbaffc4663e7d",
+        "merge_sha": "7dd048bb32c48ca6e57a35033ada9a4472e58252"
       },
       "acceptance": "Filtered counts match their result sets; every result is reachable; history wording alone does not claim a true story; the general catalog is not mislabeled as film history."
     },
     {
       "id": "P0-242-STREAMING-COVERAGE",
       "title": "Audit per-service streaming freshness coverage",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 250,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/250",
         "branch": "docs/cinelva-streaming-coverage-audit",
-        "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf"
+        "head_sha": "fc48a0d8e36cc5551c55d6d597b24681691676cf",
+        "merge_sha": "0afe65e249fc9c976983eba358944d275048841b"
       },
       "acceptance": "Current per-service observations and last update time are documented; zero observations do not imply provider unavailability.",
       "ci": "Coverage snapshot PR #250 passed smoke, autonomous quality gate, and completeness scorecard on its current head. The audited counts remain a generated-data snapshot, not proof of a provider's complete catalogue."
@@ -220,13 +225,14 @@
     {
       "id": "P0-242-RECORD",
       "title": "Route movie details to shared watched-record form",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 251,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/251",
         "branch": "fix/cinelva-record-entry-route",
-        "head_sha": "c5324134a9f1172b2f6b5bd69684ff03004586ed"
+        "head_sha": "c5324134a9f1172b2f6b5bd69684ff03004586ed",
+        "merge_sha": "7561642e89e60a71a84e79f9dddab40b28ed7ddd"
       },
       "acceptance": "From actual calendar events, ranking/detail routes, and root/preview pages, the selected ID/title and calendar context open the existing My CINELVA record form without duplicate storage logic.",
       "ci": "All six PR Actions checks passed on head c5324134a9f1172b2f6b5bd69684ff03004586ed. Validate run 39000738040 covers offline 390px journeys from calendar event, search result, direct detail, context URL, ranking, and My CINELVA's 3D world map keyboard selection into the existing edit dialog. Added full response consumption to local server-readiness probes after an intermittent undici Parser.finish teardown error; the final Validate run passes."
@@ -234,13 +240,14 @@
     {
       "id": "P0-242-POSTERS",
       "title": "Keep missing box-office posters visibly safe",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 252,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/252",
         "branch": "fix/cinelva-boxoffice-poster-fallback",
-        "head_sha": "70f5ff07c1592bbd02ab4ad99418a806b529a2d5"
+        "head_sha": "70f5ff07c1592bbd02ab4ad99418a806b529a2d5",
+        "merge_sha": "052af957ae13bc9cb24d63c9b82175adef7b878c"
       },
       "acceptance": "Box-office cards keep the film title visible and use a consistent explicit placeholder when no verified poster is available or an image request fails; browser checks cover 390px and 1280px.",
       "ci": "On head 70f5ff0: Validate frontend (including all-time 100-row poster fallback journey at 390px and 1280px), autonomous quality gate, smoke, brand, backup safety, and Completeness scorecard all passed. Fixed an inherited workflow reference to theater fixtures absent from this PR branch by running that regression only when its source/test files are present; PR #247 still runs it."
@@ -248,13 +255,14 @@
     {
       "id": "P0-242-BRAND",
       "title": "Restore the approved mark on backup routes",
-      "status": "ci_passed",
+      "status": "merged",
       "issue": 242,
       "pull_request": {
         "number": 253,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/253",
         "branch": "fix/cinelva-backup-brand-header",
-        "head_sha": "9f8872505be3e93aa6e7fc94594dd366bcb7c866"
+        "head_sha": "9f8872505be3e93aa6e7fc94594dd366bcb7c866",
+        "merge_sha": "cbc7fcfd75d20f23382ad7f774f29d3afca67227"
       },
       "acceptance": "Root and nested noindex backup pages use the existing square symbol and live Cinelva wordmark; visible copy across non-Ocean routes contains no retired Cinemap wordmark.",
       "ci": "All eight CI checks passed on head 9f8872505be3e93aa6e7fc94594dd366bcb7c866: Validate frontend, autonomous quality, smoke, brand identity, backup safety, isolated Pages, Completeness, and scoped Ocean probe. The browser route audit made 116 loads across all 29 non-Ocean HTML pages at 390px/1280px in light/dark, with no uncaught page errors. It exposed and fixed theme-color metadata being left dark in light mode when theme.js ran before the meta tag existed. Follow-up head 49eda1af1fc57533641898eca8771ca69dabb5fd also passes the all-route visible-brand test rejecting superseded uppercase CINELVA."
@@ -442,16 +450,17 @@
     {
       "id": "P0-ACTIVE-NODE-BASELINE",
       "title": "Reconcile stale tests and automatically gate the full active CINELVA unit suite",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 239,
       "acceptance": "Discover every cinelva-*.test.cjs file, fail on a newly introduced regression, keep current review behavior assertions, and exclude obsolete Atlas expectations and retired Ocean feature tests.",
-      "ci": "After reconciling PR #382 reviewed-only director visibility, 26files112/112 tests and full shared gate pass. Unknown-year Duel test now uses a reviewed record, and a new regression protects hiding catalog-only directors. Focused review passed before this test-only reconciliation; latest PR Actions required."
+      "ci": "Reconciled in current main f50cf7ca via #437/#448/#449; quality192/strictPython144 and finalfrontend39523358053 passed before subsequent refresh-capacity work."
     },
     {
       "id": "MY-RECORD-SEARCH",
       "title": "Normalize My CINELVA record search and reconcile reviewed-director regression harness",
-      "status": "in_progress",
-      "acceptance": "Separator/width/case variants and original titles match the same saved film; viewing-year filter remains effective; catalog-only and zero/unrated directors remain hidden. Chromium and WebKit mobile regression must pass before merge."
+      "status": "merged",
+      "acceptance": "Separator/width/case variants and original titles match the same saved film; viewing-year filter remains effective; catalog-only and zero/unrated directors remain hidden. Chromium and WebKit mobile regression must pass before merge.",
+      "ci": "Reconciled in current main f50cf7ca via #437/#448/#449; quality192/strictPython144 and finalfrontend39523358053 passed before subsequent refresh-capacity work."
     },
     {
       "id": "P0-ACCEPTANCE-385",
@@ -525,9 +534,9 @@
     {
       "id": "FINAL-QA-20261020",
       "title": "Unify poster failure recovery and repair current-spec quality checks",
-      "status": "pr_created",
+      "status": "merged",
       "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
-      "ci": "Local: shared quality gate passes; Node tests now include 8 identity/cache cases, current-spec UI contracts, and browser regressions for immediate poster fallback and stalled remote search. My Cinelva 1000-record/backup/restore/PNG journey, rating visibility 375/390/768, mobile calendar 375/390/768/1440, 240-load Chromium route audit, and 30-route theme browser checks pass. PR #437 first/second CI Validate frontend including WebKit passed. Autonomous gate additionally exposed an attempted nonexistent cinelva/events.html in the theme test inventory; test now checks existing active routes only. Final CI pending on next revision."
+      "ci": "Reconciled in current main f50cf7ca via #437/#448/#449; quality192/strictPython144 and finalfrontend39523358053 passed before subsequent refresh-capacity work."
     },
     {
       "id": "P0-20261021-INTEGRATION",
@@ -619,27 +628,40 @@
     {
       "check": "PR448 final CI and split production release",
       "result": "All8 Actions passed on7ef2817c; squash merged8ca54a7b. Frontend run39521938892 verified full30routes x4widths x2themes on Chromium and WebKit. OldPR399/400/401/402 closed as superseded. Frontend canonical alias now READY deploymentdpl_H1En35tTeA2k7EtgoNZkXbSsZThr at8ca54a7b; backend build-rate-limit leaves canonical backend0adf128e. Actual production awards confirmed BAFTA/film-prize names/Gold10 and noKinema. Actual Nolan discovery fails because old peopleAPI returns noids. Strict verified snapshot fallback is in progress."
+    },
+    {
+      "check": "Fixed acceptance count and provider refresh capacity",
+      "result": "User explicitly requests regular completed/remaining/fix/percent reports. Ledger32gates:16complete/16remaining/50.0%,additionalmergedfix1. #449 all7Actions passed28ceea15, mergedf50cf7ca and canonicalfrontendREADY. Actualbrowser Nolan13verifiedDirector works, snapshotdate2026-10-18, noJusticeLeague/Cobol. Latestconcurrentdata preserved; fullPython149 after5newcapacity/time-budget regressions. Openissues240/228closed with current-spec evidence. Capacityfix pendingCI; do not equate code fix with refreshed252staleobservations."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "8ca54a7be87133c4dda060016866254c374b19db",
+    "target_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "8ca54a7be87133c4dda060016866254c374b19db",
+    "last_observed_vercel_production_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
     "last_observed_vercel_production_status": "READY",
     "last_observed_vercel_check_at": "2026-10-21T00:41:47.049434+00:00",
-    "reported_restriction": "After #448 merge, frontend automatic Git deployment succeeded; backend failure build-rate-limit. Backend canonical alias remains0adf128e96889540bbd83472c651fb7bd351ea3c. No manual deploy retry.",
-    "next_action": "Verify snapshot compatibility fix, merge only with green exact-head Actions, then inspect automatic release. Backend quota remains an independent blocker.",
-    "provider_preview_status": "dpl_H1En35tTeA2k7EtgoNZkXbSsZThr READY at8ca54a7b with cinelva.vercel.app alias; no manualdeploy.",
+    "reported_restriction": "Frontend automatic publication succeeded. Actual backend alias remains0adf128e despite latestsuccessstatus; investigate missed-build recovery. No manual deployment retry.",
+    "next_action": "Verify current source with CI before integration; audit last-successful-deployment diff base rather than HEAD^ only.",
+    "provider_preview_status": "dpl_D3XmiZVETmYu9j87ijNkna5cp5oK READY with canonical alias. Backend combinedstatussuccess may mean ignored; actualalias remains0adf128e.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
-    "Vercel reported free-plan deployment quota; no manual retry or paid plan."
+    "8source rows have unresolved identity/artwork; keep explicit fallback, no inventedIDs or unrelatedposters.",
+    "Physical iPhone Safari and5–10 independent user participants are unavailable; do not substitute automated evidence."
   ],
-  "next_action": "Complete fix/director-snapshot-20261021 so verified catalog directors work with the older deployed backend; run exact-head CI and inspect automatic release. Issue239 is the post-merge checkpoint. Backend quota and external identity/artwork gaps remain explicit.",
-  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
+  "next_action": "Merge bounded provider-refresh and fixed-progress ledger only after greenCI; continue32gate ledger with dependency/license, build-skip recovery, performance and active-drilldown audit. Keep metricscompleted16/remaining16/fixes1/50.0 until acceptance changes.",
+  "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
+  "progress_ledger": "docs/operations/progress-ledger-20261021.json",
+  "progress_metrics": {
+    "total": 32,
+    "completed": 16,
+    "remaining": 16,
+    "additional_fixes": 1,
+    "percent": 50.0,
+    "basis": "Verified acceptance gate count; historical work_items are not the denominator."
+  }
 }

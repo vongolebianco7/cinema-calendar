@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "baseline_id": "master-acceptance-32-20261021",
+  "updated_at": "2026-10-21T13:41:55.257102+09:00",
+  "source_issue": 239,
+  "source_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+  "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
+  "metrics": {
+    "total_tasks": 32,
+    "completed_tasks": 16,
+    "remaining_tasks": 16,
+    "completion_percent": 50.0,
+    "confirmed_additional_fixes": 1
+  },
+  "fixes": [
+    {
+      "id": "FIX-001",
+      "title": "Director discovery works with older deployed backend using strictly verified snapshot fallback",
+      "pr": 449,
+      "merge_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+      "status": "merged_and_frontend_ready"
+    },
+    {
+      "id": "FIX-002",
+      "title": "Scale provider refresh to catalogue size with deadline and partial-save protection",
+      "status": "implemented_awaiting_ci"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "P0-01.1",
+      "acceptance": "Reconcile main, issues, docs, release settings",
+      "status": "done",
+      "evidence": "Live main f50cf7ca, all seven open GitHub issues and nine stale-PR merge states reconciled. Latest specification supersessions mapped to fixed32gate ledger; canonical frontend READY confirmed."
+    },
+    {
+      "id": "P0-01.2",
+      "acceptance": "Entire suite and Python baseline classification",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-01.3",
+      "acceptance": "CI lint/unit/browser/accessibility/links/backup/dependencies/licenses/data",
+      "status": "pending",
+      "evidence": "Dependency/license inventory and bounded external dead-link coverage remain to establish."
+    },
+    {
+      "id": "P0-01.4",
+      "acceptance": "Artifacts and enforce checks before release",
+      "status": "pending",
+      "evidence": "Audit fail-closed production build enforcement rather than assuming a green PR prevents every direct-main deployment."
+    },
+    {
+      "id": "P0-02.1",
+      "acceptance": "Remove Ocean production entry points",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-02.2",
+      "acceptance": "Retire renderer/assets/demo/tests/dependencies after reference inventory",
+      "status": "pending",
+      "evidence": "Retired payload excluded from production; finish source/dependency reference inventory without deleting shared storage compatibility."
+    },
+    {
+      "id": "P0-02.3",
+      "acceptance": "Preserve shared records/ratings/backups/legacy keys",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-02.4",
+      "acceptance": "Old URLs graceful,0/1/1000 records",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-02.5",
+      "acceptance": "Supersede #111/#113/#143 only after release",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-03.1",
+      "acceptance": "Shared detail/record/rating/date CRUD",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-03.2",
+      "acceptance": "Import/export/unknown fields/conflicts/offline/refresh",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-03.3",
+      "acceptance": "Local-only storage guidance/quota/errors",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P0-03.4",
+      "acceptance": "Reconcile #228, no custom shelves",
+      "status": "done",
+      "evidence": "Issue228 closed after verified current storage/UI reconciliation; custom shelves and obsolete zero-score semantics explicitly superseded."
+    },
+    {
+      "id": "P0-04.1",
+      "acceptance": "Source provenance/freshness/unknown display",
+      "status": "in_progress",
+      "evidence": "Source registry9categories audited; real observations314/566fresh7d,252stale. Eligible1114exceeds old60/day capacity. Adaptive60..200/day,6day refresh,6minute deadline and atomic partial-save fix has5red-green regressions; fullPython149pass. Await review/CI/merge and real scheduled-data evidence; not marked complete."
+    },
+    {
+      "id": "P0-04.2",
+      "acceptance": "Stale availability/schedules/duplicates/closed cinemas",
+      "status": "pending",
+      "evidence": "Stale showtimes hidden; complete closed-venue and duplicate-source audit."
+    },
+    {
+      "id": "P0-04.3",
+      "acceptance": "Free-only/no scraping/rights/truthful availability",
+      "status": "pending",
+      "evidence": "Source and compliance gates pass; finish production attribution/rights evidence with no invented permissions."
+    },
+    {
+      "id": "P1-05.1",
+      "acceptance": "Canonical calendar/counts/country/director/decade/genre",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-05.2",
+      "acceptance": "Every visualization drills to real films/unwatched",
+      "status": "pending",
+      "evidence": "Verify all active summary breakdown drilldowns; do not require retired views."
+    },
+    {
+      "id": "P1-05.3",
+      "acceptance": "Narrative genre separate from medium",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-06.1",
+      "acceptance": "Award rows/decades/count intensity/lists/counting policy",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-06.2",
+      "acceptance": "Grounded maps/DNA/3D/fallback",
+      "status": "pending",
+      "evidence": "Latest user removed maps/3D/custom shelves. Audit retirement and safe fallback; do not implement obsolete roadmap."
+    },
+    {
+      "id": "P1-06.3",
+      "acceptance": "No demos/custom shelves/Atlas naming",
+      "status": "pending",
+      "evidence": "Audit complete published artifact for demo/Atlas/custom-shelf entry points."
+    },
+    {
+      "id": "P1-07.1",
+      "acceptance": "Explainable record-based discovery/unwatched/gaps",
+      "status": "pending",
+      "evidence": "Verify actual record/director/award-gap discovery and explanation; do not restore rejected next-action widgets."
+    },
+    {
+      "id": "P1-07.2",
+      "acceptance": "Duration/mood/genre/trusted availability filters",
+      "status": "pending",
+      "evidence": "Verify supported filter combinations and unknown availability behavior."
+    },
+    {
+      "id": "P1-07.3",
+      "acceptance": "Discovery/detail/record/visualization loop",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-08.1",
+      "acceptance": "Actual iPhone Safari",
+      "status": "blocked",
+      "evidence": "Physical iPhone Safari device unavailable; CI WebKit is not an actual-device test."
+    },
+    {
+      "id": "P1-08.2",
+      "acceptance": "390px,touch,scroll,states,themes,a11y,large data",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-08.3",
+      "acceptance": "Performance/no layout shifts",
+      "status": "pending",
+      "evidence": "Measure active-page layout shifts and interaction latency; existing navigation-only timings are insufficient."
+    },
+    {
+      "id": "P1-09.1",
+      "acceptance": "Canonical origin/data continuity",
+      "status": "done",
+      "evidence": "Merged source437/448/449; quality192 Node, strict Python144, final Chromium/WebKit frontend39523358053, backup and mobile CI. Current specification supersessions apply."
+    },
+    {
+      "id": "P1-09.2",
+      "acceptance": "Naming/legal/film-data-image rights",
+      "status": "pending",
+      "evidence": "Existing name-risk acceptance is documented. Finish asset/source attribution inventory; no assertion of legal clearance."
+    },
+    {
+      "id": "P1-09.3",
+      "acceptance": "5–10 user tests/appropriate opt-in metrics",
+      "status": "blocked",
+      "evidence": "No five-to-ten independent user participants available. Do not fabricate users or equate automation with user research."
+    },
+    {
+      "id": "P1-09.4",
+      "acceptance": "Production smoke and rollback evidence",
+      "status": "pending",
+      "evidence": "Verify latest canonical production, legacy routes and safe rollback procedure; avoid production rollback merely as a test."
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-10-21T13:41:26.476475+09:00",
+      "completed": 14,
+      "remaining": 18,
+      "additional_fixes": 1,
+      "percent": 43.8,
+      "reason": "Initial conservative evidence-based recount. Historical work-item statuses are not the denominator."
+    },
+    {
+      "at": "2026-10-21T13:41:55.257102+09:00",
+      "completed": 16,
+      "remaining": 16,
+      "additional_fixes": 1,
+      "percent": 50.0,
+      "reason": "Completed inventory reconciliation and closed superseded issue228; this verifies existing implementation, not two new code fixes."
+    }
+  ]
+}

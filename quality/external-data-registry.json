@@ -12,7 +12,7 @@
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
       "acquisition": "official API through TMDB; no scraping",
-      "coverage": "Japan observations for configured providers; 7-day freshness is evaluated per movie checked_at, not snapshot generated_at. Up to 60 movies/day are checked, subject to API success; not a complete provider catalogue.",
+      "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "ui_routes": [

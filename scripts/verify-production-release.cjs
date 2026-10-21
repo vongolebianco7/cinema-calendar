@@ -1,5 +1,6 @@
 /* Public, read-only CI proof. No token, mutation, paid service or retry loop. */
 const {createHash}=require('node:crypto');
+const {isDeepStrictEqual}=require('node:util');
 const {execFileSync}=require('node:child_process');
 const fs=require('node:fs'),path=require('node:path');
 const REPOSITORY='vongolebianco7/cinema-calendar';
@@ -7,6 +8,13 @@ const RECEIPT='quality/production-proof.json';
 const REQUIRED_WORKFLOWS=['.github/workflows/autonomous-quality-gate.yml','.github/workflows/cinelva-smoke.yml','.github/workflows/validate-frontend.yml','.github/workflows/backend-build.yml'];
 const SHA=/^[a-f0-9]{40}$/;
 const GENERATED_DATA=new Set(['availability','awards','director_name_readings','directors-mobile','directors','events','movies','outdoor-events','rankings','rankings_extra','rankings_year','release_history','revival_screenings','source-status','special_screenings','streaming','theater_schedules','theaters_master','theaters_osm','theatrical','tv'].map(name=>`data/${name}.json`));
+function unchangedConfiguration(name,original,current){
+ if(!['vercel.json','backend/vercel.json'].includes(name))return false;
+ try{
+  const a=JSON.parse(original),b=JSON.parse(current);
+  return !!a&&!!b&&typeof a==='object'&&typeof b==='object'&&!Array.isArray(a)&&!Array.isArray(b)&&isDeepStrictEqual(a,b);
+ }catch{return false;}
+}
 function relevant(name){return name!==RECEIPT&&!name.startsWith('docs/')&&!name.endsWith('.md')&&!GENERATED_DATA.has(name)&&!/^data\/rankings\/[^/]+\.json$/.test(name);}
 function sourceDigest(entries){
  if(!Array.isArray(entries))throw Error('Invalid source tree');
@@ -47,9 +55,22 @@ async function main(argv=process.argv.slice(2),env=process.env){
  const git=(args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'});
  const currentEntries=git(['ls-tree','-rz','--full-tree','HEAD']).split('\0').filter(Boolean).map(line=>{const [metadata,...name]=line.split('\t');const [mode,type,sha]=metadata.split(' ');return {path:name.join('\t'),mode,type,sha};});
  const dirtyPaths=[...git(['diff','--name-only','-z','HEAD']).split('\0'),...git(['ls-files','--others','--exclude-standard','-z']).split('\0')].filter(Boolean);
+ const protectedDirtyPaths=dirtyPaths.filter(name=>{
+  if(!['vercel.json','backend/vercel.json'].includes(name))return true;
+  try{
+   const file=path.join(root,name);
+   if(!fs.lstatSync(file).isFile())return true;
+   const original=git(['show',`HEAD:${name}`]),current=fs.readFileSync(file,'utf8');
+   if(unchangedConfiguration(name,original,current))return false;
+   const a=JSON.parse(original),b=JSON.parse(current);
+   const keys=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])].filter(key=>!isDeepStrictEqual(a?.[key],b?.[key]));
+   console.error('Production configuration changed keys:',JSON.stringify({path:name,keys}));
+  }catch{/* Missing, unreadable or invalid configuration remains protected. */}
+  return true;
+ });
  const receipt=JSON.parse(fs.readFileSync(path.join(root,RECEIPT),'utf8'));
- const proof=await verifyProof({receipt,currentEntries,dirtyPaths,readJson});
+ const proof=await verifyProof({receipt,currentEntries,dirtyPaths:protectedDirtyPaths,readJson});
  console.log(`Production CI proof passed: ${proof.head_sha}, source ${proof.source_digest}; all${proof.workflows.length} required workflows succeeded.`);
 }
-module.exports={relevant,sourceDigest,verifyProof,REQUIRED_WORKFLOWS,GENERATED_DATA,main};
+module.exports={unchangedConfiguration,relevant,sourceDigest,verifyProof,REQUIRED_WORKFLOWS,GENERATED_DATA,main};
 if(require.main===module)main().catch(error=>{console.error('Production publication refused:',error.message);process.exitCode=1;});

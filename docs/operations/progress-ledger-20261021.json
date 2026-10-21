@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T10:02:46.008732+00:00",
+  "updated_at": "2026-10-21T11:32:37.755Z",
   "source_issue": 239,
-  "source_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+  "source_sha": "466f69a37de719320ad6128e5b637a4d430955fe",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
     "completed_tasks": 27,
     "remaining_tasks": 5,
     "completion_percent": 84.4,
-    "confirmed_additional_fixes": 8
+    "confirmed_additional_fixes": 10
   },
   "fixes": [
     {
@@ -68,6 +68,20 @@
       "pr": 457,
       "merge_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
       "status": "merged_ci_and_production_verified"
+    },
+    {
+      "id": "FIX-009",
+      "title": "Require exact-source successful CI before production builds and database writes",
+      "pr": 459,
+      "merge_sha": "58929f9b76526f0d72bd06ea2c72a20f556c10ab",
+      "status": "merged_guarded_DB_and_Pages_verified_Vercel_integration_pending"
+    },
+    {
+      "id": "FIX-010",
+      "title": "Fix installed deepmerge cyclic recursion without a major Prisma upgrade",
+      "pr": 459,
+      "merge_sha": "58929f9b76526f0d72bd06ea2c72a20f556c10ab",
+      "status": "merged_audit_zero_Vercel_pending"
     }
   ],
   "tasks": [
@@ -93,7 +107,7 @@
       "id": "P0-01.4",
       "acceptance": "Artifacts and enforce checks before release",
       "status": "blocked",
-      "evidence": "Artifacts and this pinned-CI release verified, but no GitHub branch protection. Enforced release/DB publication requires one coherent transition from direct-main data writes to reviewed validation/PR; GITHUB_TOKEN PR-trigger limitation remains. No credentials,bypass,settings changes made. See rights-review-20261021.md."
+      "evidence": "459/460mergedafterfinal7green. Actualproof-gatedDBsync39591844636 andPagesartifact39591844798 succeeded. Vercelrefuseddirtyvercel.json;461semanticcomparisonfollowuprequiresfreshCIandactualbuild. ExistingPagesSource stillbranch; no settingchangeattempt. Remainsincomplete."
     },
     {
       "id": "P0-02.1",
@@ -278,7 +292,7 @@
       "completed": 16,
       "remaining": 16,
       "additional_fixes": 1,
-      "percent": 50.0,
+      "percent": 50,
       "reason": "Completed inventory reconciliation and closed superseded issue228; this verifies existing implementation, not two new code fixes."
     },
     {
@@ -286,7 +300,7 @@
       "completed": 16,
       "remaining": 16,
       "additional_fixes": 3,
-      "percent": 50.0,
+      "percent": 50,
       "reason": "#450 all6CI checks and #451 all4CI checks passed and merged. Acceptance remains incomplete until broader real-data/publication checks are met."
     },
     {
@@ -302,7 +316,7 @@
       "completed": 24,
       "remaining": 8,
       "additional_fixes": 7,
-      "percent": 75.0,
+      "percent": 75,
       "reason": "Reconcile merged452/455/456 and their exact-head CI evidence. User reported deployment restriction ended; both canonical aliases nowREADY at tested cf8633de. Final source-status browser CI and post-release verification remain pending."
     },
     {
@@ -312,6 +326,14 @@
       "additional_fixes": 8,
       "percent": 84.4,
       "reason": "PR457 all7CIgreen, merged768dda2b and canonicalproduction9category UI verified. Closes actual source display and stale/unknown flag acceptance plus latest release/rollback evidence; no data refresh, rights clearance, physical device or independent users invented."
+    },
+    {
+      "at": "2026-10-21T11:32:37.755Z",
+      "completed": 27,
+      "remaining": 5,
+      "additional_fixes": 10,
+      "percent": 84.4,
+      "reason": "Guarded DBsync andPagesartifact actualsuccess; Vercel refuses modifiedconfig. PR461RED4confirmed andimplementationCIpending. Exec environmentoffline; no completionfabricated."
     }
   ]
 }

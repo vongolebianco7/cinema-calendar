@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "14c20b13ebb52c9d5a61f25f56fad72753a66830",
-  "verified_at": "2026-10-21T11:17:00.967Z",
-  "note": "All four required publication workflows succeeded on exact source. Initial optional completeness performance observation exceeded 1000ms once (1064.55ms); final-head scorecard must also pass before merge."
+  "head_sha": "0dff69bc05a446e0e8c7529e10212184664185aa",
+  "verified_at": "2026-10-21T11:41:11.505Z",
+  "note": "All seven PR workflows succeeded. Configuration comparison permits only identical JSON meaning for the two exact Vercel configuration paths."
 }

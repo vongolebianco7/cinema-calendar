@@ -46,6 +46,10 @@ async function freePort() {
       await page.waitForFunction(() => !document.querySelector('.cinelva-rate-dialog')?.open);
     }
     await expectDirectReview(movie.title);
+    await page.evaluate(baseMovie => renderDetail({ ...baseMovie,
+      related: [{ id: 992001, tmdbId: 992001, title: 'Related QA', year: '2020', score: 8, votes: 100 }],
+      director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]
+    }), movie);
     await page.evaluate(()=>document.documentElement.dataset.theme='light');
     const informationContrast=await page.locator('#movieInformation').evaluate(root=>{
       const lum=value=>{
@@ -64,10 +68,6 @@ async function freePort() {
     });
     for(const text of informationContrast)assert.ok(text.ratio>=4.5,
       `movie information ${text.selector} must be readable in light theme: ${text.ratio}`);
-    await page.evaluate(baseMovie => renderDetail({ ...baseMovie,
-      related: [{ id: 992001, tmdbId: 992001, title: 'Related QA', year: '2020', score: 8, votes: 100 }],
-      director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]
-    }), movie);
     for (const [kind,title,id] of [['related','Related QA','992001'],['director','Director QA','992002']]) {
       const card=page.locator(`.detailRelatedCard[data-detail-kind="${kind}"]`);
       const link=card.locator('a.work');

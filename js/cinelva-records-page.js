@@ -149,8 +149,9 @@
     $('csTop').querySelectorAll('[data-top-review-id]').forEach(node=>{
       const movie=top.find(r=>String(r.tmdbId??r.tmdb_id??r.id)===node.dataset.topReviewId);
       if(!movie)return;
-      const id=Number(movie.tmdbId??movie.tmdb_id??movie.id);
-      const film={...movie,id,tmdbId:id};
+      const identity=globalThis.CinelvaMovieIdentity;
+      const id=Number(identity?.id(movie)||identity?.id(identity?.resolve(movie))||0);
+      const film={...movie,id:id||movie.id,tmdbId:id||undefined,_localRecord:!id};
       globalThis.CinelvaQuickRate?.mountInline?.(node,film);
       if(Number.isSafeInteger(id)&&id>0)globalThis.CinelvaMovieIdentity?.hydrateCard?.(node.closest('.cs-film')?.querySelector('.cs-film-art'),film);
     });

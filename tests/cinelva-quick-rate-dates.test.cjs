@@ -33,7 +33,7 @@ function editor(initialDate, existing = true, identity = {}) {
     CustomEvent: class {},
   });
   const source = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
-  const actions = source.slice(source.indexOf('function open(movie,'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
+  const actions = source.slice(source.indexOf('function viewingRecord(movie)'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
   vm.runInContext('let selected;\n' + actions + '\nglobalThis.actions={open,save};', context);
   context.actions.open({ id: 123, title: '日付精度テスト', ...(existing&&!identity.tmdbId&&!identity.tmdb_id?{_localRecord:true}:{}) });
   return { Records, element, actions: context.actions, dialog: context.dialog, context };
@@ -150,4 +150,18 @@ for(const legacy of [false,true])test(`unmapped ${legacy?'legacy':'current'} col
  actions.open({id:123,tmdbId:123,title:'Different canonical film',year:2020});
  element('cinelvaRateScore').value='4.5';actions.save();
  assert.equal(Records.all()[0].title,'日付精度テスト');assert.equal(Records.all()[0].tmdbId,undefined);
+});
+
+test('a uniquely resolved imported record edits and clears its original storage key',()=>{
+ const {Records,element,actions,context}=editor('2024',true,{id:9001,year:2000});
+ context.root.CinelvaMovieIdentity={id:m=>Number(m?.tmdbId||0),resolve:m=>m.title==='日付精度テスト'&&m.year===2000?{tmdbId:123}:null};
+ actions.open({id:123,tmdbId:123,title:'日付精度テスト',year:2000});
+ assert.equal(Number(element('cinelvaRateScore').value),4,'resolved record must open its saved score');
+ element('cinelvaRateScore').value='4.6';actions.save();
+ assert.equal(Records.all().length,1,'editing must not duplicate the imported record');
+ assert.equal(Records.all()[0].id,'9001');
+ assert.equal(Records.all()[0].rating,4.6);
+ actions.open({id:123,tmdbId:123,title:'日付精度テスト',year:2000});
+ element('cinelvaRateScore').value='0';actions.save();
+ assert.equal(Records.all().length,0,'zero clears the actual imported storage key');
 });

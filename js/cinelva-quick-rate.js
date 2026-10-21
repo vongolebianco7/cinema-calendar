@@ -149,10 +149,21 @@ function syncViewingVenue(saved=''){
  select.value=saved||'';
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
+function viewingRecord(movie){
+ const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
+ return allRecords().find(record=>{
+  if(movie._localRecord)return String(record.id)===String(movie.id);
+  const explicit=identity?.id(record)||record.tmdbId||record.tmdb_id;
+  if(explicit)return String(explicit)===String(target);
+  const resolved=identity?.id(identity?.resolve(record));
+  if(resolved)return String(resolved)===String(target);
+  return String(record.id)===String(target)&&String(record.title)===String(movie.title)&&Number(record.year)>0&&Number(record.year)===Number(movie.year);
+ });
+}
 function open(movie,options={}) {
  const id=canonicalId(movie);
  if(!validId(id)){return false;}
- const existing=allRecords().find(r=>movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year)));
+ const existing=viewingRecord(movie);
  selected={...movie,...existing,_editingExisting:Boolean(existing),id:String(existing?.id??id),...(movie._localRecord?{}:{tmdbId:id}),title:existing?.title||movie.title||movie.name||'作品'};
  $('cinelvaRateTitle').textContent=selected.title;
  $('cinelvaRateScore').value=existing?.rating??0;
@@ -173,7 +184,7 @@ function save() {
  const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
-  if(Number($('cinelvaRateScore').value)===0){if(selected._editingExisting&&allRecords().some(r=>String(r.id)===String(selected.id)&&String(r.tmdbId??r.tmdb_id??r.id)===String(selected.tmdbId??selected.id)))Records.remove(selected.id);}
+  if(Number($('cinelvaRateScore').value)===0){if(selected._editingExisting&&String(viewingRecord(selected)?.id)===String(selected.id))Records.remove(selected.id);}
   else {const {_editingExisting,_localRecord,...movie}=selected;Records.save({...movie,comment,hasSpoilers:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',spoiler:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);}
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
   dialog.close();
@@ -268,7 +279,7 @@ function attachInlineScore(button,movie) {
  const id=canonicalId(movie);
  if(!validId(id))return;
  const syncWatched=()=>{
-  const record=allRecords().find(r=>(movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year))));
+  const record=viewingRecord(movie);
   button.classList.toggle('is-watched',Boolean(record&&record.watched===true));
   button.setAttribute('aria-label',record&&record.watched===true?'この映画の評価を編集':'この映画をレビュー');
  };
@@ -318,7 +329,7 @@ function attachInlineScore(button,movie) {
  personal.className='cinelva-rating-line cinelva-rating-personal';
  audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
-  const rec=allRecords().find(r=>(movie._localRecord?String(r.id)===String(movie.id):String(r.tmdbId??r.tmdb_id??r.id)===String(id)&&((r.tmdbId||r.tmdb_id)||String(r.title)===String(movie.title)&&Number(r.year)>0&&Number(r.year)===Number(movie.year)))&&r.watched===true);
+  const rec=viewingRecord(movie);
   const watched=Boolean(rec&&rec.rating!==0);
   const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
   personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;

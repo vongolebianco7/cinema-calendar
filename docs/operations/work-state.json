@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T10:02:46.008732+00:00",
+  "updated_at": "2026-10-21T10:34:47.510615+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
-  "branch": "docs/release-and-rights-checkpoint-20261021",
-  "head_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+  "base_sha": "a4d5ee012968d8de45bda2be07727502c969ede0",
+  "branch": "feat/verified-production-gate-20261021",
+  "head_sha": "5422e3b903049792c2e04f8deb7950ba873aa85e",
   "pull_request": null,
   "work_items": [
     {
@@ -653,6 +653,10 @@
     {
       "check": "PR457 exact-headCI and actual canonical production smoke",
       "result": "All7Actions passed inclfrontend39580306030/job119155982037. Bothengines390pxsource9categories/fetchfailure/no recordwrites and theaterclosed/dedupe fixturepassed. Merged768dda2b; actualmenu→9sourceUI verified. Progress27/32,5remaining,8mergedfixes,84.4%. See release-verification-20261021.md."
+    },
+    {
+      "check": "Explicitly authorized single Update movie data run74",
+      "result": "Run39583606695 succeeded, DB import ok1080movies/1113releases/12TV.184observations refreshed,2HTTPfailures.750observed/498fresh/252stale. Dataa4d5ee0canonicalfrontendREADY and actual9sourceUIcounts confirmed. No second run."
     }
   ],
   "deployment": {
@@ -671,12 +675,10 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "Update movie data workflow dispatch was rejected by automatic approval review for unspecified repository writes/external API/DB sync; explicit concrete approval still required. No dispatch or bypass occurred.",
     "No physical iPhone Safari or5–10independent user participants available.",
-    "54image/split-image assets lack exact-asset permission records; attribution alone is not legal clearance.",
-    "Enforced release protection must reconcile direct-main data automation and the GITHUB_TOKEN PR-trigger limitation; no settings changed."
+    "54image/split-image assets lack exact-asset permission records; attribution alone is not legal clearance."
   ],
-  "next_action": "Persist reviewed release/rights ledger checkpoint via docs PR and merge after quality CI. Then request concrete authorization for one existing Update movie data run (TMDB fetch up to200/deadline6min, production DB sync and JSON commit) because prior automatic review rejected dispatch; do not bypass. Other remaining gates require owner rights evidence, physicaliPhone and independent participants, or coherent release-policy architecture.",
+  "next_action": "Finish exact-source production guard on isolated feat/verified-production-gate-20261021:14focusedtests and fullqualitypassed. Local backend compilation and security advisory audit underway. Review,PR,allfourcriticalCI→receipt-onlycommit→finalCI→merge→productionverification. Keep fixed27/32/8fix until proven. Data workflow74 is complete and its prior approval blocker is resolved.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

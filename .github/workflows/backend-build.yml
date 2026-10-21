@@ -2,10 +2,31 @@ name: Reproducible backend build
 on:
   pull_request:
     paths:
-      - 'backend/**'
-      - 'scripts/check_dependency_licenses.cjs'
-      - 'tests/cinelva-dependency-license.test.cjs'
-      - '.github/workflows/backend-build.yml'
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!data/availability.json'
+      - '!data/awards.json'
+      - '!data/director_name_readings.json'
+      - '!data/directors-mobile.json'
+      - '!data/directors.json'
+      - '!data/events.json'
+      - '!data/movies.json'
+      - '!data/outdoor-events.json'
+      - '!data/rankings.json'
+      - '!data/rankings_extra.json'
+      - '!data/rankings_year.json'
+      - '!data/release_history.json'
+      - '!data/revival_screenings.json'
+      - '!data/source-status.json'
+      - '!data/special_screenings.json'
+      - '!data/streaming.json'
+      - '!data/theater_schedules.json'
+      - '!data/theaters_master.json'
+      - '!data/theaters_osm.json'
+      - '!data/theatrical.json'
+      - '!data/tv.json'
+      - '!data/rankings/*.json'
 permissions:
   contents: read
 jobs:
@@ -27,6 +48,11 @@ jobs:
       - name: Install locked packages without lifecycle scripts
         working-directory: backend
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Audit locked backend dependencies
+        working-directory: backend
+        run: npm audit --audit-level=high
+      - name: Verify installed configuration merge regression
+        run: node tests/cinelva-backend-deepmerge-security.cjs
       - name: Generate Prisma client and compile without production credentials
         working-directory: backend
         run: npm run build

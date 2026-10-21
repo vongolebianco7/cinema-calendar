@@ -9,7 +9,7 @@ elif [[ ! "$baseline" =~ ^[0-9a-fA-F]{40}$ ]]; then
   exit 1
 fi
 git cat-file -e "${baseline}^{commit}" 2>/dev/null || exit 1
-git diff --quiet "$baseline" HEAD -- ':(top)backend/' ':(top)scripts/ignore-backend-build.sh'
+git diff --quiet "$baseline" HEAD -- ':(top)backend/' ':(top)scripts/ignore-backend-build.sh' ':(top)scripts/production-checks.cjs' ':(top)scripts/verify-production-release.cjs' ':(top)quality/production-proof.json' ':(top)scripts/quality_gate.py'
 status=$?
 [[ "$status" == "0" ]] && exit 0
 exit 1

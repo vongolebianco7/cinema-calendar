@@ -99,3 +99,9 @@ Spend stronger-model capacity on ambiguous product/architecture decisions and ha
 - Production deploy happens only after the quality gate passes and the approved change reaches main.
 - Hosting migrations must be staged and reversible. Keep the current production host until the replacement is verified.
 - Frontend and backend may use different hosts when that reduces limits/risk.
+
+## Exact-source publication proof
+- Production builds and DB sync must pass scripts/verify-production-release.cjs and the shared quality gate before writes/publication.
+- For executable/configuration/asset changes, wait for Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build on the exact PR head. Then update quality/production-proof.json with that successful head in a receipt-only commit. Require final-head CI before merging.
+- The receipt does not grant access. GitHub verification failure blocks publication and preserves serving deployments. Do not override or disable the guard to work around an API limit.
+- Generated data and documentation may retain an unchanged source receipt. data/source_registry.json is executable policy and must renew proof.

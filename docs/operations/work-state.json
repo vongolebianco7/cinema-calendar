@@ -1,16 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T11:32:37.755Z",
-  "status": "in_progress",
+  "updated_at": "2026-10-21T12:00:04.631Z",
+  "status": "blocked",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "466f69a37de719320ad6128e5b637a4d430955fe",
-  "branch": "fix/semantic-vercel-proof-20261021",
-  "head_sha": "e07eef3688ca5bdda1f74a71da1f1bf188b7e6cb",
-  "pull_request": {
-    "number": 461,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/461"
-  },
+  "base_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
+  "branch": "docs/final-progress-checkpoint-20261021",
+  "head_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -664,28 +661,37 @@
     {
       "check": "Production integration459/460",
       "result": "460merged466f69a afterfinal7green. Firstscoreperformance1064.55ms failed1000ms once; unchangedsource finalscore4of4pass with1000records896/877ms. ActualguardedDBsync39591844636 succeeded1080movies/1113releases/12TV/1225theaters/322master; proofgatedPages39591844798 succeeded. Vercelbothrefuseddirtyvercel.json, so no fullpublicationclaim. Sourcebranchsettingnotchanged."
+    },
+    {
+      "check": "Final461 exact-head CI and real main publication evidence",
+      "result": "Source0dff69bc all7green; focusedreviewnoblockers. Finalreceipt6c31cbf all7latestgreen (reopenedonceafter3minzero-trigger; duplicateolderrunsnotconfusedwithlatest). Merged2c504e8. MainPages39595243091 build119205810035/deploy119205963089 succeeded: proof0dff source61eec13c28d252112b69155cd5d9726e7a8900ceac88a9bdacfd63576947e865 andsharedqualitypassed. Vercelcombinedstatuses explicitlyrate-limitedbothprojects, so semanticconfigintegrationinactualVercel remainsUNVERIFIED. EarlieractualDBsync39591844636 succeeded1080/1113/12/1225/322. Canonicalfronta4/backendcf remainREADY.27/32,5remaining,10mergedfixes,84.4%."
     }
   ],
   "deployment": {
-    "status": "production_verified",
-    "target_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+    "status": "blocked",
+    "target_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "768dda2b0e36b60eddb632ff43f813500f264c00",
+    "last_observed_vercel_production_sha": "a4d5ee012968d8de45bda2be07727502c969ede0",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-21T10:02:46.008732+00:00",
-    "reported_restriction": "Quota restriction cleared; pinnedcf8633de release succeeded and source457 auto-deployed after7greenCI.",
-    "next_action": "Keep existing origins/storage; no additional release needed for docs-only checkpoint.",
-    "provider_preview_status": "Canonical frontenddpl_EtMFtVLimxXg6Ck28cP9TgNDGK4J READY768dda2b; canonicalbackenddpl_AXXuwZbxpdL1P6vpjRPGdqqdsDKf READYcf8633de. Rollback f7pair remainsREADY.",
-    "blockers": [],
+    "last_observed_vercel_check_at": "2026-10-21T12:00:04.631Z",
+    "reported_restriction": "NEWprovidercommitstatuses: bothVercelprojects failure, Deployment rate limited — retry in24hours. Earlier user-reported restriction clearance was valid for preceding release; do not assume this newer limit cleared.",
+    "next_action": "After actual quota clearance, deploy verifiedSHAonce/project andinspect exactsourceproof/sharedquality/canonicalsmoke. No newpaidplan/token.",
+    "provider_preview_status": "Currentcanonicalfrontdpl_3ecio6iBkDFdaZD29ha1YUmt8Zp4 READY a4d5ee0; backenddpl_AXXuwZbxpdL1P6vpjRPGdqqdsDKf READY cf8633de. No deployment for2c504e8 was created because of rate limit.",
+    "blockers": [
+      "Vercel bothprojects rate-limited; no current2c504e8deployment created.",
+      "Hostexec andbrowser environment_offline; legacyPagesSource lastobservedbranchmain needs finaladminsettingverification."
+    ],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "No physical iPhone Safari or5–10independent user participants available.",
-    "54image/split-image assets lack exact-asset permission records; attribution alone is not legal clearance."
+    "Vercel newrate-limit explicitly requiresretryin24hours on bothprojectstatuses; servingproductionremainsREADY.",
+    "Hostexec/browser409Conflict environment_offline; no local/browserverificationafter disconnect. LegacyPages Source switch wasnotattempted; no administrationgrant ornewcredentials.",
+    "No physicaliPhoneSafari or5–10independent userparticipants available.",
+    "54image/split-image assets lack exactasset permission records; attributionalone isnotlegalclearance."
   ],
-  "next_action": "PR461: RED4cases confirmed job119196726937; semantic-only JSON comparison for exact2Vercel config paths, allmeaningfulchanges/otherfiles stayprotected. Hostexec environment_offline; use actualGitHubCI. Greenexacthead4CI→receipt-only→final7CI→merge→actualVercel. RealguardedDBsync39591844636 andproofgatedPagesartifact39591844798 succeeded. CanonicalVercel remainspriorserving; bothnewbuilds refusedpathvercel.json. Existing PagesSource notchanged.27/32,5remaining,10mergedfixes,84.4%; no secondmovieupdate.",
+  "next_action": "Resume by fetching live main/issues/checks first. All authorized code fixes are merged through461; finalexacthead7CI passed. Vercel statuses for both projects explicitly say Deployment rate limited — retry in24hours. Do not retry while limited, upgrade billing, add credentials or bypass guard. Once restriction actually clears, publish a pinned verified SHA (2c504e8 or later main with unchanged executable proof) once per existing project, inspect guard+quality logs and canonical aliases. Hostexec/browser environment_offline blocks local/browser work; recreate isolated worktree from live GitHub, preserve unrelated untracked originals. Existing PagesSource last observed Deployfrombranch main; prepared guardedworkflow alreadypublishes but source switch stillrequires permitted admin UI when browser returns. Do not addAdministration permission or newtoken. Complete rights2/device/users only with real evidence. Do NOT rerun movieupdate74; it completed once under specific userapproval.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -694,5 +700,10 @@
     "remaining_tasks": 5,
     "completion_percent": 84.4,
     "confirmed_additional_fixes": 10
+  },
+  "last_merged_pull_request": {
+    "number": 461,
+    "merge_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
+    "final_head": "6c31cbf63aa0e9b907a2a438cb896132e07ccdcf"
   }
 }

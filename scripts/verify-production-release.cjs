@@ -17,7 +17,8 @@ function sourceDigest(entries){
 }
 async function verifyProof({receipt,currentEntries,dirtyPaths=[],readJson}){
  if(receipt?.schema_version!==1||!SHA.test(receipt.head_sha))throw Error('Missing or invalid production CI receipt');
- if(dirtyPaths.some(relevant))throw Error('Modified tracked source cannot be published');
+ const changed=dirtyPaths.filter(relevant);
+ if(changed.length)throw Error(`Modified tracked source cannot be published: ${JSON.stringify(changed)}`);
  const head=receipt.head_sha;
  const commit=await readJson(`/commits/${head}`),treeSha=commit?.commit?.tree?.sha;
  if(commit?.sha!==head||!SHA.test(treeSha))throw Error('CI proof commit is invalid');

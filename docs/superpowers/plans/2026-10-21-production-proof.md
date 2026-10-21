@@ -10,6 +10,8 @@
 
 **Spec:** Issue239 P0-01.4 and AGENTS.md deployment policy.
 
+Production integration followup: Next16.4.2 rewrites tracked compiler configuration; commit its generated defaults and assert build immutability in CI. Ignore only platform-generated .vercel metadata and print refused paths for diagnosis. Actual legacy Pages settings still publish main directly; add main-only proof-gated artifact build and dependent Pages deployment, retain cinelva stage paths/origin, then switch the existing Pages source to Actions after final CI and verify its actual deployment. The existing site's ephemeral Pages publishing identity remains scoped to the same repository/site; no new secrets or external identity are introduced.
+
 ## Global Constraints
 
 - Preserve origins, storage keys, saved records and rollback deployments.

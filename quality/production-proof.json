@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": null,
-  "note": "Provider JSON normalization requires fresh exact-head successful CI proof."
+  "head_sha": "0dff69bc05a446e0e8c7529e10212184664185aa",
+  "verified_at": "2026-10-21T11:41:11.505Z",
+  "note": "All seven PR workflows succeeded. Configuration comparison permits only identical JSON meaning for the two exact Vercel configuration paths."
 }

@@ -1,17 +1,16 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T13:54:24.190239+09:00",
+  "updated_at": "2026-10-21T05:13:51.029950+00:00",
   "source_issue": 239,
-  "source_sha": "f7d205b797a63c7075681487a608f73591760067",
+  "source_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
-    "completed_tasks": 16,
-    "remaining_tasks": 16,
-    "completion_percent": 50.0,
-    "confirmed_additional_fixes": 3,
-    "implemented_fixes": 3
+    "completed_tasks": 22,
+    "remaining_tasks": 10,
+    "completion_percent": 68.8,
+    "confirmed_additional_fixes": 4
   },
   "fixes": [
     {
@@ -34,6 +33,13 @@
       "status": "merged_and_canonical_publication_verified",
       "pr": 451,
       "merge_sha": "f7d205b797a63c7075681487a608f73591760067"
+    },
+    {
+      "id": "FIX-004",
+      "title": "Summary genre/country/decade/viewing-method legends open current-period record/detail/review cards",
+      "pr": 453,
+      "merge_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+      "status": "merged_ci_verified"
     }
   ],
   "tasks": [
@@ -70,8 +76,8 @@
     {
       "id": "P0-02.2",
       "acceptance": "Retire renderer/assets/demo/tests/dependencies after reference inventory",
-      "status": "pending",
-      "evidence": "Retired payload excluded from production; finish source/dependency reference inventory without deleting shared storage compatibility."
+      "status": "done",
+      "evidence": "Published retirement audit356files, eight Ocean redirects5212bytes, no renderer/assets/manifests/runtime CDN. Backend and retired manifests inventoried. Existing build/route exclusions plus retirement-evidence-20261021.md."
     },
     {
       "id": "P0-02.3",
@@ -142,8 +148,8 @@
     {
       "id": "P1-05.2",
       "acceptance": "Every visualization drills to real films/unwatched",
-      "status": "pending",
-      "evidence": "Verify all active summary breakdown drilldowns; do not require retired views."
+      "status": "done",
+      "evidence": "PR453 f511101 merged after all5Actions passed, including Chromium/WebKit4category→sharedreview, period invalidation and focus restoration."
     },
     {
       "id": "P1-05.3",
@@ -160,26 +166,26 @@
     {
       "id": "P1-06.2",
       "acceptance": "Grounded maps/DNA/3D/fallback",
-      "status": "pending",
-      "evidence": "Latest user removed maps/3D/custom shelves. Audit retirement and safe fallback; do not implement obsolete roadmap."
+      "status": "done",
+      "evidence": "Latest user retired3D/maps. Actual restoration code verified for world/genres→summary, active-tab continuity and disabled session storage; no3D navigation or runtime engine."
     },
     {
       "id": "P1-06.3",
       "acceptance": "No demos/custom shelves/Atlas naming",
-      "status": "pending",
-      "evidence": "Audit complete published artifact for demo/Atlas/custom-shelf entry points."
+      "status": "done",
+      "evidence": "Published inventory and existing no-demo/custom-shelf/Atlas contracts, source/route/redirect audit verified. See retirement-evidence-20261021.md."
     },
     {
       "id": "P1-07.1",
       "acceptance": "Explainable record-based discovery/unwatched/gaps",
-      "status": "pending",
-      "evidence": "Verify actual record/director/award-gap discovery and explanation; do not restore rejected next-action widgets."
+      "status": "done",
+      "evidence": "Record-derived director selection, actual Director credits, explicit watched/unwatched award/director gaps, prize/year/source explanations and shared review covered by existing runtime/browser regressions. See discovery-evidence-20261021.md."
     },
     {
       "id": "P1-07.2",
       "acceptance": "Duration/mood/genre/trusted availability filters",
-      "status": "pending",
-      "evidence": "Verify supported filter combinations and unknown availability behavior."
+      "status": "done",
+      "evidence": "Four actual production-function regressions verify combinedfilters, director decade, supportedpresets, and fresh/stale/missing/future/empty availability. Existing Chromium/WebKit filter/sort/detail-back/zero-state journeys pass. See discovery-evidence-20261021.md."
     },
     {
       "id": "P1-07.3",
@@ -203,7 +209,7 @@
       "id": "P1-08.3",
       "acceptance": "Performance/no layout shifts",
       "status": "in_progress",
-      "evidence": "Existing navigation metrics did not measure active1000-record readiness, layout shifts or input response. Added0/1000records x390/1280Chrome measurement using actual Records.all count, standard CLS windows and real record-tab/search. Helper3tests/independentreview pass. CI measurement required; not counted complete."
+      "evidence": "PR452 pending exact-head CI1ba1d03. Performance cases allpass on priorheadcee9:1000records ready2.1s,input<.9s,CLS<.043. Poster fullscan indexed; WebKitrouteaudit internalerror repaired by pageisolation, fullverificationpending."
     },
     {
       "id": "P1-09.1",
@@ -254,6 +260,14 @@
       "additional_fixes": 3,
       "percent": 50.0,
       "reason": "#450 all6CI checks and #451 all4CI checks passed and merged. Acceptance remains incomplete until broader real-data/publication checks are met."
+    },
+    {
+      "at": "2026-10-21T05:13:51.029950+00:00",
+      "completed": 22,
+      "remaining": 10,
+      "additional_fixes": 4,
+      "percent": 68.8,
+      "reason": "PR453 merged with5greenActions. Current-spec retirement and supported-discovery acceptance verified from actual published inventory and behavioral regressions, fullquality207pass. These evidence closures are not additional code fixes."
     }
   ]
 }

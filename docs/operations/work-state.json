@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T04:54:24.191049+00:00",
+  "updated_at": "2026-10-21T05:14:02.792012+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f7d205b797a63c7075681487a608f73591760067",
-  "branch": "audit/active-performance-20261021",
-  "head_sha": "f7d205b797a63c7075681487a608f73591760067",
-  "pull_request": 451,
+  "base_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "branch": "audit/retirement-evidence-20261021",
+  "head_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -640,6 +640,11 @@
     {
       "check": "Actual #451 canonical recovery smoke",
       "result": "Both canonical aliasesREADY f7d205b7. ActualCloudBrowser Nolan13Directorworks now liveAPI(no snapshotdate). Sharedreview selectedcorrectOdyssey title, defaulttoday2026-10-21, 0.1slider0..5, fiveviewingmethods andcomment-header spoilerbutton. Closedwithoutsave. Previous frontendf50+backend0ad fallbackwasalreadyverified13works; safe rollbackpair retainsstoragekeys. Rollbacknotexecuted."
+    },
+    {
+      "name": "Current-spec retirement and discovery acceptance audit20261021",
+      "status": "passed",
+      "details": "Fullquality207Nodepass.8focused retirement/identity/build/route tests and4filterbehavior tests pass. PR453mergedf511101 after5greenActions. PR452exact-head1ba1d03pending; prior performanceall4casespassed, WebKitnavigationinternalerrorunderverification."
     }
   ],
   "deployment": {
@@ -661,15 +666,14 @@
     "8source rows have unresolved identity/artwork; keep explicit fallback, no inventedIDs or unrelatedposters.",
     "Physical iPhone Safari and5–10 independent user participants are unavailable; do not substitute automated evidence."
   ],
-  "next_action": "Run active0/1000record CLS/readiness/search performance audit in existing completenessCI; fix measured defects before counting P1-08.3 done. Inspect #451 auto backend release. Continue remaining16gates using fixed progress ledger; do not report whole application complete.",
+  "next_action": "Integrate current-spec retirement/discovery evidence after quality CI; inspect PR452 exact-head1ba1d03 frontend and performance results. Then finish production smoke/rollback, data freshness/closed-venue and dependency/rights/release-policy gaps without inventing external evidence.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
-    "total": 32,
-    "completed": 16,
-    "remaining": 16,
-    "additional_fixes": 3,
-    "percent": 50.0,
-    "basis": "Verified acceptance gate count; historical work_items are not the denominator."
+    "total_tasks": 32,
+    "completed_tasks": 22,
+    "remaining_tasks": 10,
+    "completion_percent": 68.8,
+    "confirmed_additional_fixes": 4
   }
 }

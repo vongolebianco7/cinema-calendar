@@ -84,9 +84,40 @@
     if (!record) $('movieQuery').focus();
   }
 
+  function summaryBreakdownRecords(rows, kind, value) {
+    return rows.filter(record => {
+      if (kind === 'csGenres') return Insights.classifyGenres(record.genres || []).genres.includes(value);
+      if (kind === 'csCountries') return (record.countries || []).includes(value);
+      if (kind === 'csMethods') return (String(record.viewingMethod || '').trim() || '不明') === value;
+      if (kind === 'csDecades') {
+        const year = Number(record.year);
+        return year >= 1880 && year <= 2100 && Math.floor(year / 10) * 10 + '年代' === value;
+      }
+      return false;
+    });
+  }
+  function openSummaryBreakdown(kind, value, rows, trigger) {
+    $('summaryBreakdownFilms')?.remove();
+    const films = summaryBreakdownRecords(rows, kind, value);
+    const section = document.createElement('section');
+    section.id = 'summaryBreakdownFilms'; section.className = 'cs-section';
+    const heading = document.createElement('h3');
+    heading.tabIndex = -1; heading.textContent = value + '：' + films.length + '本';
+    const close = document.createElement('button');
+    close.type = 'button'; close.textContent = '一覧を閉じる';
+    close.addEventListener('click', () => { section.remove(); trigger.focus(); });
+    const grid = document.createElement('div'); grid.className = 'record-grid';
+    grid.innerHTML = films.map(card).join('');
+    section.append(heading, close, grid);
+    document.querySelector('#summaryView .cs-breakdowns').after(section);
+    mountRecordReviewAreas(grid);
+    heading.focus();
+  }
+
   // The summary is derived from existing local records; no mock films or invented counts.
   function renderCinemaSummary() {
     const selector=$('csPeriod'); if(!selector)return;
+    $('summaryBreakdownFilms')?.remove?.();
     const all=recordMovies().map(enriched);
     const years=[...new Set(all.map(r=>dateOf(r).slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
     const previous=selector.dataset.initialized==='true'?selector.value:String(currentYear); selector.dataset.initialized='true';
@@ -251,7 +282,10 @@
       layout.append(bar);
       const legend=document.createElement('div');legend.className='cs-donut-legend cs-stack-legend';
       all.forEach(([name,n],i)=>{
-        const row=document.createElement('div');row.className='cs-donut-legend-row';
+        const row=document.createElement('button');row.type='button';row.className='cs-donut-legend-row';
+        row.dataset.summaryBreakdown=id;row.dataset.breakdownValue=name;
+        row.setAttribute('aria-label',name+' '+n+'本の鑑賞記録を表示');
+        row.addEventListener('click',()=>openSummaryBreakdown(id,name,filtered,row));
         const dot=document.createElement('span');dot.className='cs-donut-dot';dot.style.background=colors[i];dot.setAttribute('aria-hidden','true');
         const label=document.createElement('span');label.className='cs-donut-label';label.textContent=name;label.title=name;
         const value=document.createElement('span');value.className='cs-donut-value';

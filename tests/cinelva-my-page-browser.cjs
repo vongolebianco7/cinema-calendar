@@ -46,6 +46,7 @@ const { chromium, webkit } = require("playwright"),
                 tmdbId: film.id,
                 director: director.name,
                 rating: 4.5,
+                genres: ['SF'], countries: ['日本'], viewingMethod: '映画館',
                 watchedAt: "2026-04-12",
               },
               900001: {
@@ -96,6 +97,22 @@ const { chromium, webkit } = require("playwright"),
     );
     await page.locator('[data-tab="summary"]').click();
     await page.locator("#csPeriod").selectOption("2026");
+    for (const kind of ['csGenres', 'csCountries', 'csDecades', 'csMethods']) {
+      const legend = page.locator('#' + kind + ' [data-summary-breakdown]').first();
+      await legend.click();
+      assert.equal(await page.locator('#summaryBreakdownFilms [data-record-card]').count(), 1);
+      assert.equal(await page.locator('#summaryBreakdownFilms [data-record-card]').getAttribute('data-record-card'), '900003');
+      assert.ok(await page.locator('#summaryBreakdownFilms .cinelva-record-title').getAttribute('href'));
+      await page.locator('#summaryBreakdownFilms .cinelva-rate-button').click();
+      await page.locator('.cinelva-rate-dialog[open]').waitFor();
+      await page.locator('#cinelvaRateClose').first().click();
+      await page.locator('#summaryBreakdownFilms').getByRole('button', {name: '一覧を閉じる'}).click();
+      assert.equal(await legend.evaluate(el => document.activeElement === el), true);
+    }
+    await page.locator('#csMethods [data-summary-breakdown]').first().click();
+    await page.locator('#csPeriod').selectOption('all');
+    assert.equal(await page.locator('#summaryBreakdownFilms').count(), 0);
+    await page.locator('#csPeriod').selectOption('2026');
     const columns = await page
       .locator("#yearHeatmap")
       .evaluate(

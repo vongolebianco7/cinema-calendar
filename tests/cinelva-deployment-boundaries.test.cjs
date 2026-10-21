@@ -21,6 +21,7 @@ function fixture(t) {
   fs.mkdirSync(path.join(directory, 'backend'));
   fs.mkdirSync(path.join(directory, 'scripts'));
   if (fs.existsSync('scripts/ignore-frontend-build.sh')) fs.copyFileSync('scripts/ignore-frontend-build.sh', path.join(directory, 'scripts/ignore-frontend-build.sh'));
+  if (fs.existsSync('scripts/ignore-backend-build.sh')) fs.copyFileSync('scripts/ignore-backend-build.sh', path.join(directory, 'scripts/ignore-backend-build.sh'));
   fs.writeFileSync(path.join(directory, 'index.html'), 'baseline');
   git('init', '--quiet');
   git('config', 'user.name', 'Deployment test');
@@ -28,15 +29,16 @@ function fixture(t) {
   git('add', '.');
   git('commit', '--quiet', '-m', 'baseline');
   return {
+    sha() { return spawnSync('git', ['rev-parse', 'HEAD'], { cwd: directory, encoding: 'utf8' }).stdout.trim(); },
     change(file) {
       const target = path.join(directory, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.writeFileSync(target, file === 'scripts/ignore-frontend-build.sh' ? fs.readFileSync(target, 'utf8') + '# changed\n' : 'changed');
+      fs.writeFileSync(target, file.startsWith('scripts/ignore-') ? fs.readFileSync(target, 'utf8') + '# changed\n' : 'changed');
       git('add', '.'); git('commit', '--quiet', '-m', file);
     },
-    check(command, expected, label) {
+    check(command, expected, label, environment = {}) {
       for (const cwd of [directory, path.join(directory, 'backend')]) {
-        const result = spawnSync(command, { shell: true, cwd, encoding: 'utf8' });
+        const result = spawnSync(command, { shell: true, cwd, encoding: 'utf8', env: {...process.env, VERCEL: '', VERCEL_GIT_PREVIOUS_SHA: '', ...environment} });
         assert.equal(result.status, expected, `${label} from ${path.relative(directory, cwd) || 'root'}: ${result.stderr}`);
       }
     },
@@ -73,4 +75,45 @@ test('docs, workflow and test-only changes skip both application builds', t => {
     repo.check(frontend, 0, file + ' must skip frontend');
     repo.check(backend, 0, file + ' must skip backend');
   }
+});
+
+test('a backend release missed before a docs commit is still built from the last successful deployment', t => {
+  const repo = fixture(t), previous = repo.sha();
+  repo.change('backend/api/server.js');
+  repo.change('docs/operations/checkpoint.md');
+  repo.check(backend, 1, 'unpublished backend change', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: previous});
+  repo.check(frontend, 0, 'unchanged published frontend', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: previous});
+});
+
+test('a missed frontend release is detected across unrelated later commits', t => {
+  const repo = fixture(t), previous = repo.sha();
+  repo.change('index.html');
+  repo.change('docs/operations/checkpoint.md');
+  repo.check(frontend, 1, 'unpublished frontend change', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: previous});
+  repo.check(backend, 0, 'unchanged published backend', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: previous});
+});
+
+test('missing previous deployment history builds rather than skipping publication', t => {
+  const repo = fixture(t);
+  repo.change('docs/operations/checkpoint.md');
+  for (const command of [frontend, backend]) {
+    repo.check(command, 1, 'first Vercel deployment', {VERCEL: '1'});
+    repo.check(command, 1, 'unavailable previous deployment', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: 'a'.repeat(40)});
+  }
+});
+
+test('a successfully published change is not rebuilt for a later docs-only commit', t => {
+  const repo = fixture(t);
+  repo.change('backend/api/server.js');
+  repo.change('index.html');
+  const previous = repo.sha();
+  repo.change('docs/operations/checkpoint.md');
+  for (const command of [frontend, backend]) repo.check(command, 0, 'already published inputs', {VERCEL: '1', VERCEL_GIT_PREVIOUS_SHA: previous});
+});
+
+test('changing backend skip logic builds only the backend', t => {
+  const repo = fixture(t);
+  repo.change('scripts/ignore-backend-build.sh');
+  repo.check(backend, 1, 'backend skip logic changed');
+  repo.check(frontend, 0, 'backend skip logic does not change static frontend');
 });

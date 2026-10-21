@@ -8,6 +8,8 @@ QUERY_TEMPLATE = """
 SELECT ?theater ?theaterLabel ?coord ?website ?adminLabel ?address WHERE {
   ?theater wdt:P31 wd:Q41253;
            wdt:P17 wd:Q17.
+  # P576 is the sourced dissolution/demolition date; absence is not proof of operation.
+  FILTER NOT EXISTS { ?theater wdt:P576 ?closedAt. FILTER (?closedAt <= NOW()) }
   OPTIONAL { ?theater wdt:P625 ?coord. }
   OPTIONAL { ?theater wdt:P856 ?website. }
   OPTIONAL { ?theater wdt:P131 ?admin. }
@@ -78,6 +80,7 @@ while True:
             "longitude": lon,
             "website": b.get("website", {}).get("value"),
             "source_url": entity,
+            "operation_status": "unconfirmed",
         })
 
     print(f"Wikidata theater rows fetched: {len(rows)}")

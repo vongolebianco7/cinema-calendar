@@ -12,14 +12,20 @@ def v(t,*ks):
  for k in ks:
   if t.get(k):return str(t[k]).strip()
  return ""
+def is_closed(tags):
+ return any(str(tags.get(key, "")).lower() in {"yes", "true", "1"} for key in ("disused", "abandoned", "demolished", "closed")) or any(tags.get(key)=="cinema" for key in ("disused:amenity", "abandoned:amenity", "demolished:amenity"))
+def source_identity(element):
+ return (element["type"], element["id"]) if element.get("type") and element.get("id") is not None else None
 rows=[];seen=set()
 for e in get().get("elements",[]):
  t=e.get("tags",{});n=v(t,"name:ja","name");c=e.get("center",{});lat=e.get("lat",c.get("lat"));lon=e.get("lon",c.get("lon"))
- if not n:continue
- k=(n.replace(" ","").replace("　",""),round(float(lat),4) if lat else None,round(float(lon),4) if lon else None)
- if k in seen:continue
- seen.add(k);rows.append({"name":n,"prefecture":v(t,"addr:province","addr:state"),"municipality":v(t,"addr:city","addr:town","addr:village"),"address":v(t,"addr:full"),"lat":lat,"lon":lon,"website":v(t,"website","contact:website"),"operator":v(t,"operator"),"source":"OpenStreetMap","osm_type":e.get("type"),"osm_id":e.get("id")})
+ if not n or is_closed(t):continue
+ k=source_identity(e)
+ if k and k in seen:continue
+ if k:seen.add(k)
+ rows.append({"name":n,"prefecture":v(t,"addr:province","addr:state"),"municipality":v(t,"addr:city","addr:town","addr:village"),"address":v(t,"addr:full"),"lat":lat,"lon":lon,"website":v(t,"website","contact:website"),"operator":v(t,"operator"),"source":"OpenStreetMap","osm_type":e.get("type"),"osm_id":e.get("id")})
 rows.sort(key=lambda x:(x["prefecture"],x["municipality"],x["name"]))
 if len(rows)<300:raise RuntimeError("OSM cinema coverage unexpectedly low: "+str(len(rows)))
 with open("data/theaters_osm.json","w",encoding="utf-8") as f:json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"source":"OpenStreetMap contributors","license":"ODbL 1.0","theaters":rows},f,ensure_ascii=False,indent=2)
-print("OSM cinemas:",len(rows))\n# updater-version: 2
+print("OSM cinemas:",len(rows))
+# updater-version: 3

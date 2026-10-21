@@ -51,18 +51,21 @@ async function freePort() {
       director_works: [{ id: 992002, tmdbId: 992002, title: 'Director QA', year: '2021', score: 7, votes: 100 }]
     }), movie);
     await page.evaluate(()=>document.documentElement.dataset.theme='light');
-    const informationContrast=await page.locator('#movieInformation').evaluate(root=>{
+    const informationContrast=await page.locator('#detail').evaluate(root=>{
       const lum=value=>{
         const rgb=value.match(/[\d.]+/g).slice(0,3).map(Number).map(n=>{
           const s=n/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;
         });
         return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
       };
-      let bg=root;
-      while(bg.parentElement&&getComputedStyle(bg).backgroundColor==='rgba(0, 0, 0, 0)')bg=bg.parentElement;
-      const background=lum(getComputedStyle(bg).backgroundColor);
-      return ['h4','dt','dd'].map(selector=>{
-        const foreground=lum(getComputedStyle(root.querySelector(selector)).color);
+      return ['.movieInfo h3','.movieInfo h4','.movieInfo dt','.movieInfo dd',
+        '.detailPhase h3','.watchTimelineWhen','.watchTimelineLabel','.watchTimelineDetail'].map(selector=>{
+        const element=root.querySelector(selector);
+        if(!element)throw new Error(`Missing detail contrast fixture: ${selector}`);
+        let bg=element;
+        while(bg.parentElement&&getComputedStyle(bg).backgroundColor==='rgba(0, 0, 0, 0)')bg=bg.parentElement;
+        const background=lum(getComputedStyle(bg).backgroundColor);
+        const foreground=lum(getComputedStyle(element).color);
         return {selector,ratio:(Math.max(background,foreground)+0.05)/(Math.min(background,foreground)+0.05)};
       });
     });

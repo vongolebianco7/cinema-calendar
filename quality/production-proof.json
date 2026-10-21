@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "83bda7af23a81a38c68f92fbea0f9e4d3e2b31f0",
-  "verified_at": "2026-10-21T21:39:58.115Z",
-  "note": "All six PR source workflows passed, including full Chromium/WebKit detail contrast, 0/1000-record summary, 3-column annual calendar and record safety checks. Integrates verified PR464 ancestry; final-head checks are required."
+  "head_sha": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+  "verified_at": "2026-10-21T21:59:09.146Z",
+  "note": "All six source workflows passed. Route evidence now captures full scrollable documents in both browsers; source UI defects10/10 were fixed in PR463–465. Final-head checks and full-page visual review remain required before integration."
 }

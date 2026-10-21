@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T21:24:08.522476+00:00",
+  "updated_at": "2026-10-21T21:50:34.944582+00:00",
   "source_issue": 239,
   "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
@@ -10,7 +10,7 @@
     "completed_tasks": 25,
     "remaining_tasks": 7,
     "completion_percent": 78.1,
-    "confirmed_additional_fixes": 14
+    "confirmed_additional_fixes": 20
   },
   "fixes": [
     {
@@ -109,6 +109,48 @@
       "title": "Light My Cinelva summary and caption contrast",
       "pr": 463,
       "merge_sha": "7ef0776a21c7606a41a5501dd68c164472dbef78",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-015",
+      "title": "Related12 and director6 movie cards on movie detail have no shared review or bookmarks and show a separate10-point score",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-016",
+      "title": "Original release date caption still uses公開日 instead of requested公開年月日",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-017",
+      "title": "Light-theme calendar/source/legal header logo and wordmark fade against page background",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-018",
+      "title": "Retired lifetime crowns/prisms are generated at100/1000 records and zero-record summary reserves an empty year graph",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-019",
+      "title": "Annual viewing calendar uses4 columns rather than requested3 columns by4 rows",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
+      "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-020",
+      "title": "Movie detail information, phase captions and viewing timeline unreadable in light theme",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
       "status": "merged_ci_visual_verified"
     }
   ],
@@ -386,6 +428,22 @@
       "additional_fixes": 14,
       "percent": 78.1,
       "reason": "PR463 four fixes merged after all10 final checks. UI acceptance gates remain open while additional confirmed defects are being fixed."
+    },
+    {
+      "at": "2026-10-21T21:37:49.893002+00:00",
+      "completed": 25,
+      "remaining": 7,
+      "additional_fixes": 17,
+      "percent": 78.1,
+      "reason": "PR464 source8 and final9 workflows passed, focused review touch-scroll correction verified, merged b4390f7. Confirmed UI defects7/10 fixed; remaining3 in465. No blanket acceptance closure."
+    },
+    {
+      "at": "2026-10-21T21:50:34.944582+00:00",
+      "completed": 25,
+      "remaining": 7,
+      "additional_fixes": 20,
+      "percent": 78.1,
+      "reason": "PR465 source6 and final7 workflows passed, both-engine visual evidence checked, merged8b5b0de. Confirmed10/10 defects fixed. Broad UI acceptance remains pending full-document lower-content review. Initial final browser download TLS mismatch recovered on one unchanged-code retry with certificate verification intact."
     }
   ]
 }

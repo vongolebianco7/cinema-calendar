@@ -103,26 +103,28 @@ async function freePort() {
             title: document.title.trim(),
             textLength: document.querySelector('main')?.textContent.trim().length || 0,
             colorScheme: document.documentElement.style.colorScheme,
-            themeColor: document.querySelector('meta[name="theme-color"]')?.content || ''
+            themeColor: document.querySelector('meta[name="theme-color"]')?.content || '',
+            documentHeight: Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
           }));
           assert.ok(state.title, `${route} has a document title`);
           assert.ok(state.textLength > 10, `${route} has visible main content`);
           assert.equal(state.colorScheme, theme, `${route} applies the ${theme} color scheme`);
           assert.equal(state.themeColor, theme === 'dark' ? '#0a0c0f' : '#f8f6f1', `${route} updates its browser theme color`);
-          // Keep one mobile/light screenshot per active route and browser for
-          // visual review without multiplying the artifact by four states.
+          // Capture the full scrollable document in the mobile/light evidence.
+          // A viewport-only image cannot support review of lower sections or footers.
           let screenshot = null;
           if (width === 390 && theme === 'light') {
             const slug = route.replace(/[^a-z0-9.-]+/gi, '-');
             const relative = path.join('screenshots', browserName, `${slug}.png`);
             const destination = path.join(root, 'artifacts', 'route-audit', relative);
             fs.mkdirSync(path.dirname(destination), { recursive: true });
-            await page.screenshot({ path: destination, fullPage: false, animations: 'disabled' });
+            await page.screenshot({ path: destination, fullPage: true, animations: 'disabled' });
             screenshot = relative.split(path.sep).join('/');
           }
           report.results.push({
             route,
             screenshot,
+            screenshot_scope: screenshot ? 'full_document' : null,
             browser: browserName,
             viewport: { width, height: 844 },
             theme,

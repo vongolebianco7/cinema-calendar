@@ -1,20 +1,31 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T21:24:08.522476+00:00",
+  "updated_at": "2026-10-21T21:50:34.944582+00:00",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
     "confirmed_defects": 10,
-    "completed_fixes": 4,
-    "remaining_confirmed_defects": 6,
-    "fixes_implemented_pending_validation": 6,
-    "overall_ui_completion_percent": null
+    "completed_fixes": 10,
+    "remaining_confirmed_defects": 0,
+    "fixes_implemented_pending_validation": 0,
+    "overall_ui_completion_percent": null,
+    "confirmed_defect_completion_percent": 100
   },
   "coverage": {
     "initial_mobile_chromium_screenshots_reviewed": 30,
     "initial_mobile_chromium_screenshots_total": 30,
-    "warning": "Initial viewport screenshots are not complete page/interaction acceptance. Mirrored source routes can differ from generated published artifacts; source-only differences are not counted as confirmed production bugs."
+    "warning": "Initial viewport screenshots are not complete page/interaction acceptance. Mirrored source routes can differ from generated published artifacts; source-only differences are not counted as confirmed production bugs.",
+    "latest_mobile_chromium_source_screenshots_reviewed": 30,
+    "latest_visual_source": "1ac14b187f505d6a868ceb4bc94756706b05bf95",
+    "related_cards_browsers": [
+      "chromium",
+      "webkit"
+    ],
+    "latest_focused_visual_source": "83bda7af23a81a38c68f92fbea0f9e4d3e2b31f0",
+    "source_route_matrix_passed_per_browser": 240,
+    "source_route_js_errors": 0,
+    "source_route_local_asset_failures": 0
   },
   "findings": [
     {
@@ -56,48 +67,60 @@
     {
       "id": "UI-20261022-005",
       "title": "Related12 and director6 movie cards on movie detail have no shared review or bookmarks and show a separate10-point score",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Detail galleries render isolated buttons instead of shared movie actions",
-      "test": "Existing record-entry browser journey: related/director links, review identity, independent bookmark,5-point score,3 columns and mobile overflow in Chromium/WebKit"
+      "test": "Existing record-entry browser journey: related/director links, review identity, independent bookmark,5-point score,3 columns and mobile overflow in Chromium/WebKit",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302"
     },
     {
       "id": "UI-20261022-006",
       "title": "Original release date caption still uses公開日 instead of requested公開年月日",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Shared date caption helper retains old text",
-      "test": "Full date caption regression first failed with公開日 then passed with公開年月日; event captions preserved"
+      "test": "Full date caption regression first failed with公開日 then passed with公開年月日; event captions preserved",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302"
     },
     {
       "id": "UI-20261022-007",
       "title": "Light-theme calendar/source/legal header logo and wordmark fade against page background",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Calendar-specific important transparent image background overrides common backing; legacy gLogo/wordmark missed shared theme selector",
-      "test": "Existing route screenshots after shared CSS selector repair; approved image asset unchanged"
+      "test": "Existing route screenshots after shared CSS selector repair; approved image asset unchanged",
+      "pr": 464,
+      "merge_sha": "b4390f737884afac8dde797993f6ae362a5b0302"
     },
     {
       "id": "UI-20261022-008",
       "title": "Retired lifetime crowns/prisms are generated at100/1000 records and zero-record summary reserves an empty year graph",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Obsolete reward generator and empty graph minimum height remain after requested removal",
-      "test": "Existing browser1000-record case asserts retired decorations absent; zero-record case asserts year graph hidden and summary height below190px; saved records unchanged"
+      "test": "Existing browser1000-record case asserts retired decorations absent; zero-record case asserts year graph hidden and summary height below190px; saved records unchanged",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f"
     },
     {
       "id": "UI-20261022-009",
       "title": "Annual viewing calendar uses4 columns rather than requested3 columns by4 rows",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "CSS and prior test contract encode reversed dimensions",
-      "test": "Existing multi-width layout and both-engine My Cinelva checks now require3 columns and12 months; unrelated dashboard grids unchanged"
+      "test": "Existing multi-width layout and both-engine My Cinelva checks now require3 columns and12 months; unrelated dashboard grids unchanged",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f"
     },
     {
       "id": "UI-20261022-010",
-      "title": "Movie information dates and values are near-white against light page background",
-      "status": "implemented_validation_pending",
-      "root_cause": "Detailed information table retains dark-only hard-coded text colors",
+      "title": "Movie detail information, phase captions and viewing timeline unreadable in light theme",
+      "status": "merged_ci_visual_verified",
+      "root_cause": "Hard-coded dark-only information/phase text plus a fixed dark timeline background conflict with light-theme text",
       "evidence": "Actual live release-date cell rgb222/222/222 against light page rgb248/246/241",
-      "test": "Existing two-engine detail journey requires information headings, labels and values contrast >=4.5"
+      "test": "Existing two-engine detail journey requires actual information headings, labels, values, phase captions and timeline text contrast >=4.5 against each element’s effective background",
+      "pr": 465,
+      "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f"
     }
   ],
   "pr": 463,
-  "remaining_audit": "Complete interaction, error/empty states, scroll and lower page content checks for active routes; do not equate 30 initial screenshots or CI success with bug-free UI.",
-  "followup_pr": 464
+  "remaining_audit": "All10 confirmed defects are fixed. Existing route images were viewport-only; full document capture is being added to inspect lower sections/footers before closing the two broad UI acceptance gates. Vercel live-origin observation was denied by auto-review under the user exclusion; no retry or alternate live origin.",
+  "followup_pr": null
 }

@@ -31,4 +31,5 @@ for (const directory of ['assets', 'js', 'data', 'preview', 'my-cinelva']) {
     },
   });
 }
+fs.writeFileSync(path.join(output, 'data/source-status.json'), JSON.stringify(require('./source-status.cjs').fromRoot(root), null, 2) + '\n');
 console.log('Static site built; retired Ocean publishes only its eight legacy redirects.');

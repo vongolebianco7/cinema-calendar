@@ -94,3 +94,5 @@ html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}
     font-size:16px!important;
   }
 }
+
+.cinelvaSourcesLink{display:block;margin:14px 0;padding:8px 0;font-size:13px;line-height:1.5;color:inherit;overflow-wrap:anywhere}

@@ -1,0 +1,123 @@
+{
+  "checked_at": "2026-10-21T04:38:48.750767+00:00",
+  "registry": "quality/external-data-registry.json",
+  "datasets": {
+    "streaming-availability": {
+      "category": "streaming",
+      "status": "automated",
+      "path": "data/availability.json",
+      "max_age_hours": 168,
+      "freshness_enforced": true,
+      "freshness": "partial",
+      "freshness_scope": "title_observations",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-10-21T00:20:31.184255+00:00",
+      "age_hours": 4.3,
+      "snapshot_freshness": "fresh",
+      "observations": {
+        "total": 566,
+        "fresh_7d": 314,
+        "stale_7d": 252,
+        "missing_or_invalid_checked_at": 0,
+        "checked_within_48h": 176,
+        "observations_with_providers_fresh_7d": 197,
+        "snapshot_generated_at": "2026-10-21T00:20:31.184255+00:00",
+        "evaluated_at": "2026-10-21T04:38:48.750767+00:00",
+        "fresh_pct": 55.5
+      }
+    },
+    "streaming-premieres": {
+      "category": "streaming",
+      "status": "manual",
+      "path": "data/streaming.json",
+      "max_age_hours": 168,
+      "freshness_enforced": false,
+      "freshness": "stale",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-10-11",
+      "age_hours": 244.6
+    },
+    "theater-showtimes": {
+      "category": "theater-schedules",
+      "status": "disabled-pending-permission",
+      "path": "data/theater_schedules.json",
+      "max_age_hours": 24,
+      "freshness_enforced": false,
+      "freshness": "stale",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-09-24T12:10:06.014736+00:00",
+      "age_hours": 640.5
+    },
+    "theater-directory": {
+      "category": "theater-directory",
+      "status": "disabled-resource-scope",
+      "path": "data/theaters_osm.json",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "freshness": "fresh",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-09-25T05:21:34.965693+00:00",
+      "age_hours": 623.3
+    },
+    "television-schedules": {
+      "category": "television",
+      "status": "unavailable",
+      "path": null,
+      "max_age_hours": null,
+      "freshness_enforced": false,
+      "freshness": "not_applicable",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp"
+    },
+    "box-office": {
+      "category": "box-office",
+      "status": "manual",
+      "path": "data/boxoffice.json",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "freshness": "fresh",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-09-27",
+      "age_hours": 580.6
+    },
+    "movies-and-posters": {
+      "category": "movies-posters",
+      "status": "automated",
+      "path": "data/movies.json",
+      "max_age_hours": 48,
+      "freshness_enforced": true,
+      "freshness": "fresh",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-10-21T00:20:09.502403+00:00",
+      "age_hours": 4.3
+    },
+    "awards": {
+      "category": "awards",
+      "status": "manual",
+      "path": "data/awards.json",
+      "max_age_hours": 8760,
+      "freshness_enforced": false,
+      "freshness": "fresh",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp",
+      "generated_at": "2026-10-17",
+      "age_hours": 100.6
+    },
+    "editorial-features": {
+      "category": "features",
+      "status": "manual",
+      "path": null,
+      "max_age_hours": null,
+      "freshness_enforced": false,
+      "freshness": "not_applicable",
+      "freshness_scope": "snapshot_timestamp",
+      "enforcement_scope": "snapshot_timestamp"
+    }
+  },
+  "enforced_failures": []
+}

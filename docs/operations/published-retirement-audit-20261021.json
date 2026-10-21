@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "source_sha": "cee9e2c85785033bcdc52d3757a6fa677439c551",
+  "scope": "Actual static build from current source; static HTML references only. Dynamic JavaScript URLs, external reachability, trademark and image rights are not inferred.",
+  "published_files": 356,
+  "published_bytes": 73483769,
+  "retired_ocean_files": [
+    {
+      "path": "preview/ocean/index.html",
+      "bytes": 647
+    },
+    {
+      "path": "preview/ocean/ocean-demo.html",
+      "bytes": 647
+    },
+    {
+      "path": "preview/ocean/poc/index.html",
+      "bytes": 653
+    },
+    {
+      "path": "preview/ocean/real-fish/ecosystem.html",
+      "bytes": 653
+    },
+    {
+      "path": "preview/ocean/real-fish/index.html",
+      "bytes": 653
+    },
+    {
+      "path": "preview/ocean/real-fish/milestone-gallery.html",
+      "bytes": 653
+    },
+    {
+      "path": "preview/ocean/real-fish/ordinary-species-gallery.html",
+      "bytes": 653
+    },
+    {
+      "path": "preview/ocean/renderer/index.html",
+      "bytes": 653
+    }
+  ],
+  "external_runtime_script_or_stylesheet": [],
+  "missing_static_local_references": [],
+  "external_static_urls": [
+    "https://109cinemas.net/osaka-expocity/establishment.html",
+    "https://cinelva.vercel.app/",
+    "https://cinelva.vercel.app/data-backup.html",
+    "https://developer.themoviedb.org/docs/faq",
+    "https://developer.themoviedb.org/reference/movie-watch-providers",
+    "https://github.com/vongolebianco7/cinema-calendar/blob/main/COMPLIANCE.md",
+    "https://github.com/vongolebianco7/cinema-calendar/issues/new",
+    "https://policies.google.com/privacy",
+    "https://vongolebianco7.github.io/cinema-calendar/data-backup.html",
+    "https://www.cinemasunshine.co.jp/pages/gdcs/",
+    "https://www.openstreetmap.org/copyright",
+    "https://www.pexels.com/photo/diver-and-coral-reef-10519044/",
+    "https://www.themoviedb.org/",
+    "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg",
+    "https://www.wikidata.org/wiki/Wikidata:Licensing",
+    "https://www.youtube.com/t/terms"
+  ],
+  "package_manifests": [
+    {
+      "path": "backend/package.json",
+      "deployment_scope": "backend",
+      "dependencies": {
+        "@prisma/client": "^6.0.0",
+        "next": "^16.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+      },
+      "dev_dependencies": {
+        "@types/node": "^22.0.0",
+        "@types/react": "^19.0.0",
+        "prisma": "^6.0.0",
+        "tsx": "^4.0.0",
+        "typescript": "^5.0.0"
+      }
+    },
+    {
+      "path": "preview/ocean/renderer/package.json",
+      "deployment_scope": "retired archive, excluded from published output and production install",
+      "dependencies": {
+        "three": "0.185.1"
+      },
+      "dev_dependencies": {
+        "vite": "8.3.1"
+      }
+    }
+  ],
+  "unresolved": [
+    "No backend lockfile: exact transitive dependency versions/licenses cannot be attested from manifest ranges.",
+    "No blanket ownership/license assertion for uploaded image assets.",
+    "External URL reachability is not proven by this static scan."
+  ]
+}

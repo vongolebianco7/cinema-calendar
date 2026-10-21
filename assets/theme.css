@@ -18,6 +18,10 @@ html[data-theme="light"] body:has(#summaryView) {
 }
 html[data-theme="light"] #summaryView { --cs-ink:var(--ink); --cs-gold:var(--gold); }
 html[data-theme="light"] #summaryView .cs-muted { color:var(--muted)!important; }
+html[data-theme="light"] body:has(#summaryView) :is(.section-head p,.hint) {
+  color:var(--muted)!important;
+}
+html[data-theme="light"] #awardsView .award-eyebrow { color:var(--brand)!important; }
 html[data-theme="light"] :is(.gTop,.top,.dock,.expTabs) {
   background:#f8f6f1f5!important; border-color:var(--line)!important;
 }

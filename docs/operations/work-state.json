@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:01:25.520337+00:00",
+  "updated_at": "2026-10-21T00:09:11.592759+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "0ae957d5708dd9cbe27b3e746a49e3679349503e",
   "branch": "fix/final-quality-20261020",
-  "head_sha": "4718cc0c3a54cbe700e13ec51117b7be92baacff",
+  "head_sha": "f5b4a23294e3251173927db83d23d66576539d65",
   "pull_request": 437,
   "work_items": [
     {
@@ -528,6 +528,13 @@
       "status": "pr_created",
       "acceptance": "Tasks 6–10 from the October 20 handover: shared poster binding on every active movie surface, no local/event ID confusion, current review/bookmark behavior, source-gap inventory, mobile light/dark browser evidence and all required Actions green.",
       "ci": "Local: shared quality gate passes; Node tests now include 8 identity/cache cases, current-spec UI contracts, and browser regressions for immediate poster fallback and stalled remote search. My Cinelva 1000-record/backup/restore/PNG journey, rating visibility 375/390/768, mobile calendar 375/390/768/1440, 240-load Chromium route audit, and 30-route theme browser checks pass. PR #437 first/second CI Validate frontend including WebKit passed. Autonomous gate additionally exposed an attempted nonexistent cinelva/events.html in the theme test inventory; test now checks existing active routes only. Final CI pending on next revision."
+    },
+    {
+      "id": "P0-20261021-INTEGRATION",
+      "title": "Integrate latest UI specifications with final quality fixes and preserve resolved imports",
+      "status": "pr_created",
+      "pull_request": 437,
+      "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate."
     }
   ],
   "verification": [
@@ -595,6 +602,10 @@
     {
       "check": "2026-10-21 integration of current main and PR437",
       "result": "Local shared quality gate passes, including 175 Node tests; full Python suite 144/144; smoke209/209. Six merge conflicts resolved preserving latest medals, Gold/award names, release dates, spoiler button and comment visibility. Record poster/title detail links restored with canonical-ID regression (2 failing before fix, 2 passing after). Updated stale isolated DOM fixtures and exact-ID award fixtures without relaxing assertions. Chromium/WebKit download returned an invalid ZIP; browser checks must run in CI on this new head."
+    },
+    {
+      "check": "2026-10-21 reviewed integration follow-up",
+      "result": "Shared quality gate178 Node tests passes. Focused reviewer26 tests passes with no blockers. Resolved imports retain original key during edit/clear; Top10 uses verified identity. WebKit mobile CI failed specifically at screenshot32767px limit; dynamic body-height measurement and size-error-only viewport fallback added, failing-then-passing regression verified. Unrelated screenshot errors still fail."
     }
   ],
   "deployment": {
@@ -602,10 +613,10 @@
     "target_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "bd6a1c9972434c125128af2f424f3bde9340aabd",
+    "last_observed_vercel_production_sha": "b74140a5ea1456c275412128544adaa840149a58",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-19T04:23:07+09:00",
-    "reported_restriction": "PR #433 Vercel bot reported api-deployments-free-per-day (>100), 2026-10-20 08:33 UTC. No manual redeploy requested in this run.",
+    "last_observed_vercel_check_at": "2026-10-21T00:09:11.592759+00:00",
+    "reported_restriction": "2026-10-21 current main0ae957d5 combined statuses: Vercel frontend and backend both failure, target build-rate-limit. Canonical browser still shows retired Kinema and old BAFTA/Golden Globes labels. No manual deployment retry.",
     "next_action": "Batch release only after all required Actions pass and quota clearance is independently confirmed. No paid plan.",
     "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
@@ -616,6 +627,6 @@
     "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
     "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Run required Actions on integrated PR437 head, diagnose any current-spec browser failures, merge only after green gates, then verify canonical production. Reconcile remaining open PRs semantically; do not assume stale checkpoint statuses are current.",
+  "next_action": "Run fresh required Actions on updated PR437, diagnose any browser failures, merge only green exact head. Production currently b74140a5; do not claim latest UI released until canonical smoke verifies it. Remaining artwork/identity exceptions inventoried.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

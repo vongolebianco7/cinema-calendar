@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T04:45:37.316637+00:00",
+  "updated_at": "2026-10-21T05:14:02.792012+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
-  "branch": "work/remaining-acceptance-20261021",
-  "head_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
-  "pull_request": 449,
+  "base_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "branch": "audit/retirement-evidence-20261021",
+  "head_sha": "f5111010b18313b723fb907c411f1bcc39ed7e98",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -632,19 +632,32 @@
     {
       "check": "Fixed acceptance count and provider refresh capacity",
       "result": "User explicitly requests regular completed/remaining/fix/percent reports. Ledger32gates:16complete/16remaining/50.0%,additionalmergedfix1. #449 all7Actions passed28ceea15, mergedf50cf7ca and canonicalfrontendREADY. Actualbrowser Nolan13verifiedDirector works, snapshotdate2026-10-18, noJusticeLeague/Cobol. Latestconcurrentdata preserved; fullPython149 after5newcapacity/time-budget regressions. Openissues240/228closed with current-spec evidence. Capacityfix pendingCI; do not equate code fix with refreshed252staleobservations."
+    },
+    {
+      "check": "Provider capacity and deployment recovery integration",
+      "result": "#450 head665346a2 all6Actions succeeded, merged52da16ca. #451 head62fd4842 all4Actions succeeded, mergedf7d205b7. No manualdeploy. Progress16/32complete,16remaining,3mergedfixes,50.0%. Current perf-audit closes measurement gap; helper3cases and focusedreview pass, browserCIrequired. Five provider regressions and fullPython149pass; scheduling deadline is cooperative socket-timeout bound, actualthroughput/deferred still requires live observation."
+    },
+    {
+      "check": "Actual #451 canonical recovery smoke",
+      "result": "Both canonical aliasesREADY f7d205b7. ActualCloudBrowser Nolan13Directorworks now liveAPI(no snapshotdate). Sharedreview selectedcorrectOdyssey title, defaulttoday2026-10-21, 0.1slider0..5, fiveviewingmethods andcomment-header spoilerbutton. Closedwithoutsave. Previous frontendf50+backend0ad fallbackwasalreadyverified13works; safe rollbackpair retainsstoragekeys. Rollbacknotexecuted."
+    },
+    {
+      "name": "Current-spec retirement and discovery acceptance audit20261021",
+      "status": "passed",
+      "details": "Fullquality207Nodepass.8focused retirement/identity/build/route tests and4filterbehavior tests pass. PR453mergedf511101 after5greenActions. PR452exact-head1ba1d03pending; prior performanceall4casespassed, WebKitnavigationinternalerrorunderverification."
     }
   ],
   "deployment": {
-    "status": "deployment_pending",
-    "target_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+    "status": "production_verified",
+    "target_sha": "f7d205b797a63c7075681487a608f73591760067",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "f50cf7ca8fd7bd63d8392eccb7e2c65ad61cb0a3",
+    "last_observed_vercel_production_sha": "f7d205b797a63c7075681487a608f73591760067",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-21T00:41:47.049434+00:00",
-    "reported_restriction": "Frontend automatic publication succeeded. Actual backend alias remains0adf128e despite latestsuccessstatus; investigate missed-build recovery. No manual deployment retry.",
-    "next_action": "Verify current source with CI before integration; audit last-successful-deployment diff base rather than HEAD^ only.",
-    "provider_preview_status": "dpl_D3XmiZVETmYu9j87ijNkna5cp5oK READY with canonical alias. Backend combinedstatussuccess may mean ignored; actualalias remains0adf128e.",
+    "last_observed_vercel_check_at": "2026-10-21T04:56:39.937284+00:00",
+    "reported_restriction": "Missed backend publication recovered automatically after #451. Actual canonical aliases both latest; no manualdeploy. Live Nolan search13Directorworks and sharedreview verified without saving user data.",
+    "next_action": "Preserve verified origin/storage; continue remaining acceptance gates. Production READY does not imply whole-product completion.",
+    "provider_preview_status": "Canonical frontenddpl_HEHWW9ZdgPWdLwpjb71CbXdekGhw and backenddpl_DgBGc8gjhLJaLQogKZzgQcEZf8on both READY atf7d205b7.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
@@ -653,15 +666,14 @@
     "8source rows have unresolved identity/artwork; keep explicit fallback, no inventedIDs or unrelatedposters.",
     "Physical iPhone Safari and5–10 independent user participants are unavailable; do not substitute automated evidence."
   ],
-  "next_action": "Merge bounded provider-refresh and fixed-progress ledger only after greenCI; continue32gate ledger with dependency/license, build-skip recovery, performance and active-drilldown audit. Keep metricscompleted16/remaining16/fixes1/50.0 until acceptance changes.",
+  "next_action": "Integrate current-spec retirement/discovery evidence after quality CI; inspect PR452 exact-head1ba1d03 frontend and performance results. Then finish production smoke/rollback, data freshness/closed-venue and dependency/rights/release-policy gaps without inventing external evidence.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
-    "total": 32,
-    "completed": 16,
-    "remaining": 16,
-    "additional_fixes": 1,
-    "percent": 50.0,
-    "basis": "Verified acceptance gate count; historical work_items are not the denominator."
+    "total_tasks": 32,
+    "completed_tasks": 22,
+    "remaining_tasks": 10,
+    "completion_percent": 68.8,
+    "confirmed_additional_fixes": 4
   }
 }

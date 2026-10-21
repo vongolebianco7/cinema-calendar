@@ -39,6 +39,15 @@ def finish_snapshot(old, cache, count, now):
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}
 
 DAILY_OBSERVATION_LIMIT=60
+MAX_DAILY_OBSERVATIONS=200
+# Leave the rest of the25-minute job for other importers, checks and commit.
+MAX_BATCH_SECONDS=360
+REFRESH_AFTER_DAYS=6
+
+def observation_budget(candidate_count):
+ """Bound requests while leaving one day of headroom before UI expiry."""
+ return min(MAX_DAILY_OBSERVATIONS,max(DAILY_OBSERVATION_LIMIT,
+            (max(0,int(candidate_count))+REFRESH_AFTER_DAYS-1)//REFRESH_AFTER_DAYS))
 
 def select_due_observations(candidates, cache, now, limit=20):
  """Return oldest due observations with reserved capacity for both release types.
@@ -61,7 +70,7 @@ def select_due_observations(candidates, cache, now, limit=20):
      checked_dt=checked_dt.astimezone(datetime.timezone.utc)
    except (TypeError, ValueError, AttributeError):
     checked_dt=None
-  if checked_dt is not None and datetime.timedelta(0) <= now-checked_dt < datetime.timedelta(days=7):
+  if checked_dt is not None and datetime.timedelta(0) <= now-checked_dt < datetime.timedelta(days=REFRESH_AFTER_DAYS):
    continue
   bucket="streaming" if movie.get("event")=="streaming" else "other"
   sort_age=checked_dt.timestamp() if checked_dt else float("-inf")
@@ -127,13 +136,19 @@ def main():
  cache=old.get("movies",{})
  candidates=build_candidates(movies,cache,TODAY)
 
- selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=DAILY_OBSERVATION_LIMIT)
+ budget=observation_budget(len(candidates))
+ selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=budget)
  count=0
  failed=0
+ deadline=time.monotonic()+MAX_BATCH_SECONDS
  for mid,(_,m) in selected:
+  remaining=deadline-time.monotonic()
+  if remaining<=0:
+   print("::warning title=Provider refresh time budget::Stopping this batch and saving completed observations; unfinished titles remain due.")
+   break
   url="https://api.themoviedb.org/3/movie/"+str(mid)+"/watch/providers?"+urllib.parse.urlencode({"api_key":KEY})
   try:
-   with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"CINEMA-NOW/1.0"}),timeout=25) as r:
+   with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"CINEMA-NOW/1.0"}),timeout=min(25,remaining)) as r:
     jp=(json.load(r).get("results") or {}).get("JP") or {}
    flatrate=provider_names(jp.get("flatrate"))
    rent=provider_names(jp.get("rent"))
@@ -152,12 +167,14 @@ def main():
    item["title"]=m.get("title") or item.get("title")
    cache[str(mid)]=item
    count+=1
-   time.sleep(1.5)
+   time.sleep(min(1.5,max(0,deadline-time.monotonic())))
   except Exception as exc:
    failed+=1
    print("provider check skipped:",mid,type(exc).__name__)
 
- print(f"Daily provider observation budget: {DAILY_OBSERVATION_LIMIT}; eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
+ print(f"Daily provider observation budget: {budget} (hard cap {MAX_DAILY_OBSERVATIONS}); eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
+ if len(candidates)>budget*REFRESH_AFTER_DAYS:
+  print("::warning title=Provider refresh capacity::Catalogue exceeds the bounded six-day refresh capacity; some observations may expire. UI must retain unknown/stale handling.")
  if count:
   result=finish_snapshot(old,cache,count,NOW)
   temporary=PATH.with_suffix('.tmp')
@@ -165,7 +182,7 @@ def main():
   temporary.replace(PATH)
  else:
   print("No successful provider observations; preserving previous snapshot and update timestamp")
- print(f"Watch provider snapshots updated: {count}; failed: {failed}; attempted: {len(selected)}")
+ print(f"Watch provider snapshots updated: {count}; failed: {failed}; attempted: {count+failed}; deferred: {len(selected)-count-failed}")
  if selected and count==0:
   raise RuntimeError("All TMDB provider observations failed; previous snapshot preserved")
 

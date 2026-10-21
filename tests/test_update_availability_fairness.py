@@ -71,5 +71,31 @@ class WatchProviderFairnessTests(unittest.TestCase):
         self.assertEqual(sum(mid < 100 for mid in ids), 4)
         self.assertEqual(sum(mid > 100 for mid in ids), 56)
 
+    def test_budget_scales_to_the_actual_six_day_catalogue_with_a_hard_cap(self):
+        budget = getattr(MODULE, 'observation_budget', lambda count: MODULE.DAILY_OBSERVATION_LIMIT)
+        self.assertEqual(budget(0), 60)
+        self.assertEqual(budget(1114), 186)
+        self.assertEqual(budget(10000), 200)
+
+    def test_refresh_has_headroom_before_seven_day_display_expiry(self):
+        candidates = [candidate(1), candidate(2)]
+        cache = {'1': {'checked_at': (NOW-datetime.timedelta(days=6, hours=12)).isoformat()},
+                 '2': {'checked_at': (NOW-datetime.timedelta(days=5, hours=23)).isoformat()}}
+        self.assertEqual([mid for mid, _ in MODULE.select_due_observations(candidates, cache, NOW)], [1])
+
+    def test_current_catalogue_can_cycle_without_stale_titles_under_successful_api(self):
+        candidates = [candidate(i, 'streaming' if i < 90 else 'theatrical') for i in range(1,1115)]
+        budget = getattr(MODULE, 'observation_budget', lambda count: MODULE.DAILY_OBSERVATION_LIMIT)(len(candidates))
+        cache = {}
+        for day in range(21):
+            now = NOW+datetime.timedelta(days=day)
+            selected = MODULE.select_due_observations(candidates, cache, now, limit=budget)
+            self.assertLessEqual(len(selected),200)
+            for mid, _ in selected:
+                cache[str(mid)] = {'checked_at':now.isoformat()}
+            if day >= 6:
+                self.assertEqual(len(cache),1114)
+                self.assertTrue(all(now-datetime.datetime.fromisoformat(item['checked_at']) < datetime.timedelta(days=7) for item in cache.values()))
+
 if __name__ == "__main__":
     unittest.main()

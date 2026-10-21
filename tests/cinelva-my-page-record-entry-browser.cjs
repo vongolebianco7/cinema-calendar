@@ -65,6 +65,9 @@ async function freePort() {
       assert.equal(await card.locator('.cinelva-rating-audience .rating-value').innerText(),kind==='related'?'4.0':'3.5');
     }
     assert.equal(await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
+    const touchAction=await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).touchAction);
+    assert.ok(touchAction==='auto'||touchAction==='manipulation'||touchAction.includes('pan-y'),
+      `vertical related-card grid must allow vertical touch scrolling, got ${touchAction}`);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'secondary cards must not cause horizontal page overflow');
     await page.locator('.detailRelatedCard').first().scrollIntoViewIfNeeded();
     fs.mkdirSync('artifacts/route-audit/related-cards',{recursive:true});

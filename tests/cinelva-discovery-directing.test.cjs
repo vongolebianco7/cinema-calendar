@@ -29,3 +29,16 @@ test('composer and writer exploration keeps crew works without claiming directio
 test('pending pagination cannot skip a page through concurrent More requests',async()=>{
  let release,calls=0;const {ctx,$}=discovery(async()=>{calls++;await new Promise(r=>release=r);return {ok:true,json:async()=>({movies:[{id:2,title:'Page two'}],total_pages:3})}});ctx.directorId='';ctx.items=[{id:1,title:'Page one'}];ctx.page=2;const first=ctx.load(false);assert.equal($('#more').disabled,true);const second=ctx.load(false);assert.equal(calls,1);release();await first;await second;assert.deepEqual(Array.from(ctx.items,x=>x.id),[1,2]);assert.equal($('#more').disabled,false);
 });
+test('an older deployed people API falls back to verified published directing credits',async()=>{
+ const snapshot={generated_at:'2026-10-18T20:42:53Z',directors:{525:{id:525,source_url:'https://www.themoviedb.org/person/525',coverage:{source:'tmdb_director_movie_credits'},works:[{id:27205,director_id:525,job:'Director',source:'tmdb'},{id:141052,director_id:525,job:'Producer',source:'tmdb'},{id:57729,director_id:999,job:'Director',source:'tmdb'}]}}};
+ const {ctx,$}=discovery(async url=>({ok:true,json:async()=>url.includes('/api/people?')?{people:[]}:url.includes('directors-mobile.json')?snapshot:{movies:[{id:27205,title:'Inception'},{id:141052,title:'Justice League'},{id:57729,title:'The Cobol Job'}],total_results:3}}));
+ await ctx.load();assert.deepEqual(Array.from(ctx.items,x=>x.title),['Inception']);assert.match($('#status').textContent,/2026-10-18/);
+});
+test('unverified local catalogs do not authorize directing credits',async()=>{
+ const {ctx,$}=discovery(async url=>({ok:true,json:async()=>url.includes('/api/people?')?{people:[]}:url.includes('directors-mobile.json')?{directors:{525:{id:525,works:[{id:141052,job:'Director',director_id:525}]}}}:{movies:[{id:141052,title:'Justice League'}]}}));
+ await ctx.load();assert.equal(ctx.items.length,0);assert.match($('#status').textContent,/取得できません/);
+});
+test('failed snapshot fallback is evicted so a recovered live API can be retried',async()=>{
+ let available=false;const {ctx}=discovery(async url=>url.includes('/api/people?')?{ok:available,json:async()=>({ids:[27205]})}:url.includes('directors-mobile.json')?{ok:false}:{ok:true,json:async()=>({movies:[{id:27205,title:'Inception'}]})});
+ await ctx.load();assert.equal(ctx.items.length,0);available=true;await ctx.load();assert.deepEqual(Array.from(ctx.items,x=>x.title),['Inception']);
+});

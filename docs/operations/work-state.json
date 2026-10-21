@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T00:19:43.502723+00:00",
+  "updated_at": "2026-10-21T00:41:47.049434+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
-  "branch": "main",
-  "head_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
-  "pull_request": 437,
+  "base_sha": "8ca54a7be87133c4dda060016866254c374b19db",
+  "branch": "fix/director-snapshot-20261021",
+  "head_sha": "8ca54a7be87133c4dda060016866254c374b19db",
+  "pull_request": 448,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -615,19 +615,23 @@
     {
       "check": "Residual PR401 source reconciliation",
       "result": "Confirmed two changes absent from main: actual Director-credit filtering on discovery and equal-gross competition ranks. Added backend/loader regressions8 and rendering rank regressions2, failed before and pass after. Shared quality gate189 tests passes; Python144. Browser regressions cover non-directing Justice League/Cobol exclusion, shared reviews and all100 ranks; fresh CI required."
+    },
+    {
+      "check": "PR448 final CI and split production release",
+      "result": "All8 Actions passed on7ef2817c; squash merged8ca54a7b. Frontend run39521938892 verified full30routes x4widths x2themes on Chromium and WebKit. OldPR399/400/401/402 closed as superseded. Frontend canonical alias now READY deploymentdpl_H1En35tTeA2k7EtgoNZkXbSsZThr at8ca54a7b; backend build-rate-limit leaves canonical backend0adf128e. Actual production awards confirmed BAFTA/film-prize names/Gold10 and noKinema. Actual Nolan discovery fails because old peopleAPI returns noids. Strict verified snapshot fallback is in progress."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "target_sha": "f6b71c88b58d727b29bbff5da8287be1ca6cccab",
+    "target_sha": "8ca54a7be87133c4dda060016866254c374b19db",
     "production_url": "https://cinelva.vercel.app/",
     "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "b74140a5ea1456c275412128544adaa840149a58",
+    "last_observed_vercel_production_sha": "8ca54a7be87133c4dda060016866254c374b19db",
     "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-21T00:09:11.592759+00:00",
-    "reported_restriction": "2026-10-21 current main0ae957d5 combined statuses: Vercel frontend and backend both failure, target build-rate-limit. Canonical browser still shows retired Kinema and old BAFTA/Golden Globes labels. No manual deployment retry.",
-    "next_action": "Batch release only after all required Actions pass and quota clearance is independently confirmed. No paid plan.",
-    "provider_preview_status": "dpl_CMGesLg49kxQmdVvpfXexPQDZwnh READY with cinelva.vercel.app alias; no manualdeploy.",
+    "last_observed_vercel_check_at": "2026-10-21T00:41:47.049434+00:00",
+    "reported_restriction": "After #448 merge, frontend automatic Git deployment succeeded; backend failure build-rate-limit. Backend canonical alias remains0adf128e96889540bbd83472c651fb7bd351ea3c. No manual deploy retry.",
+    "next_action": "Verify snapshot compatibility fix, merge only with green exact-head Actions, then inspect automatic release. Backend quota remains an independent blocker.",
+    "provider_preview_status": "dpl_H1En35tTeA2k7EtgoNZkXbSsZThr READY at8ca54a7b with cinelva.vercel.app alias; no manualdeploy.",
     "blockers": [],
     "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
     "last_failed_deployment_status": "ERROR"
@@ -636,6 +640,6 @@
     "8 source rows still have ambiguous/unavailable canonical identity or no provider poster; exact rows and handling recorded in poster-data-gaps-20261020.json.",
     "Vercel reported free-plan deployment quota; no manual retry or paid plan."
   ],
-  "next_action": "Finish residual discovery-director and box-office ties integration via PR448, run exact-head CI, then reconcile superseded PR399-402. PR437 is merged and production remains Vercel build-rate-limit pending.",
+  "next_action": "Complete fix/director-snapshot-20261021 so verified catalog directors work with the older deployed backend; run exact-head CI and inspect automatic release. Issue239 is the post-merge checkpoint. Backend quota and external identity/artwork gaps remain explicit.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent."
 }

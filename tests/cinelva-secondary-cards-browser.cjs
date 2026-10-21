@@ -6,6 +6,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
  try{await waitForLocalServer(port);browser=await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();for(const width of [375,390,768])for(const theme of ['light','dark']){
   const context=await browser.newContext({viewport:{width,height:844}});await context.addInitScript(t=>localStorage.setItem('cinelva-theme-v1',t),theme);
   await context.route('https://image.tmdb.org/**',r=>r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aYl8AAAAASUVORK5CYII=','base64')}));
+  await context.route('**/api/calendar*',r=>r.fulfill({json:{movies:[{...movie,event:'theatrical',date:'2026-10-23'}]}}));
   await context.route('**/api/movies?*',r=>r.fulfill({json:{movies:[{...movie,tmdbId:undefined}],external:[]}}));await context.route('**/api/movie-detail?*',r=>r.fulfill({json:{movie}}));
   await context.route('**/data/revival_screenings.json',r=>r.fulfill({json:{generated_at:'2026-10-20',screenings:[{...movie,date:'2026-10-23',venue:'確認済み劇場',source_url:'https://www.ttcg.jp/'},{id:550,title:'ID未確認の上映',date:'2026-10-23',source_url:'https://www.ttcg.jp/'}]}}));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${port}/revivals.html`,{waitUntil:'domcontentloaded'});
@@ -20,6 +21,15 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#grid .card').waitFor();assert.equal(await page.locator('#grid .card').count(),1);
   assert.equal(await page.locator('#grid .title').innerText(),movie.title);
   await page.locator('#grid .cinelva-rate-button').waitFor();await page.locator('#grid .cinelva-rate-button').click();assert.equal(await page.locator('#cinelvaRateTitle').innerText(),movie.title);await page.locator('#cinelvaRateClose').click();
+  // Let independent discovery shelves settle before replacing the document.
+  // WebKit otherwise reports outgoing same-origin fetch cancellation as a pageerror.
+  await page.waitForLoadState('networkidle');
+  // An older backend returns people rather than ids: verify the real published snapshot path.
+  await context.route('**/api/people?*',r=>r.fulfill({json:{people:[]}}));
+  await context.route('**/api/discover?*',r=>r.fulfill({json:{movies:[{id:27205,tmdbId:27205,title:'インセプション',year:2010},{id:141052,tmdbId:141052,title:'Justice League',year:2017},{id:57729,tmdbId:57729,title:'The Cobol Job',year:2010}],total_pages:1,total_results:3}}));
+  await page.reload({waitUntil:'domcontentloaded'});await page.locator('#grid .card').waitFor();
+  assert.equal(await page.locator('#grid .card').count(),1);assert.equal(await page.locator('#grid .title').innerText(),'インセプション');
+  assert.match(await page.locator('#status').innerText(),/収録/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.deepEqual(errors,[]);await context.close();
  }console.log('Secondary revival and selected experience cards: 6 viewport/theme combinations passed');}finally{await browser?.close();server.kill()}
 })().catch(e=>{console.error(e);process.exitCode=1});

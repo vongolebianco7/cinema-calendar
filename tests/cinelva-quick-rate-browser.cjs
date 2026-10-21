@@ -1,4 +1,5 @@
 const { waitForLocalServer } = require("./helpers/local-server.cjs");
+const fs = require('node:fs');
 const { chromium, webkit } = require("playwright"),
   { spawn } = require("child_process"),
   net = require("net"),
@@ -71,6 +72,8 @@ const { chromium, webkit } = require("playwright"),
         `${width}px: score must not overlap the slider: ${JSON.stringify(layout)}`);
       assert.ok(layout.sliderBottom <= layout.parentBottom + 1,
         `${width}px: score group must contain the full slider hit target`);
+      fs.mkdirSync('artifacts/route-audit/reviews', { recursive: true });
+      await page.screenshot({ path: `artifacts/route-audit/reviews/${process.env.CINELVA_BROWSER || 'chromium'}-${width}.png` });
     }
     await page.setViewportSize({ width: 390, height: 844 });
     const today = await page.evaluate(() =>

@@ -4020,8 +4020,11 @@
       "title": "Bloody Sunday",
       "film_title": "Bloody Sunday",
       "source": "https://en.wikipedia.org/wiki/Golden_Bear",
-      "match_status": "unresolved",
-      "work_id": "historical:ベルリン国際映画祭:2002:bloody-sunday"
+      "match_status": "resolved",
+      "work_id": "historical:ベルリン国際映画祭:2002:bloody-sunday",
+      "tmdb_id": 4107,
+      "release_year": 2002,
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2002,
@@ -4056,8 +4059,11 @@
       "title": "The Lord of the Rings: The Fellowship of the Ring",
       "film_title": "The Lord of the Rings: The Fellowship of the Ring",
       "source": "https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film",
-      "match_status": "unresolved",
-      "work_id": "historical:BAFTA:2001:the-lord-of-the-rings-the-fellowship-of-the-ring"
+      "match_status": "resolved",
+      "work_id": "historical:BAFTA:2001:the-lord-of-the-rings-the-fellowship-of-the-ring",
+      "tmdb_id": 120,
+      "release_year": 2001,
+      "match_method": "unique_catalog_title_and_release_year"
     },
     {
       "year": 2001,

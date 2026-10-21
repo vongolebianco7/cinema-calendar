@@ -139,7 +139,7 @@ class DirectorEnrichmentTests(unittest.TestCase):
         directors = json.loads((ROOT / 'data/directors.json').read_text())['directors']
         self.assertTrue(directors)
         # The raw approved API snapshot retains explicitly untranslated source
-        # identities. Only the compact published catalog supplies UI labels.
+        # identities. Check the compact published catalog's Japanese UI labels separately.
         published = json.loads((ROOT / 'data/directors-mobile.json').read_text())['directors']
         self.assertTrue(published)
         for identifier, director in published.items():

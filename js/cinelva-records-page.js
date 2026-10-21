@@ -7,6 +7,7 @@
   const state = { records: [], movies: [], awards: [], directors: {}, month: new Date().getMonth(), year: currentYear, selected: null, searchToken: 0, plotRotation: { x: -.32, y: -.58 }, plotZoom: 1, plotOffset: { x: 0, y: 0 }, plotPointers: new Map(), plotDrag: null, activeGenre: null, awardSelection: null, awardCoverage: {}, flatWorld: false, keyboardPoint: 0 };
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const byId = new Map();
+  let posterCatalogCache = null;
   const poster = movie => {
     const validSource = item => {
       if(typeof item!=='string'||!item.trim())return '';
@@ -44,9 +45,16 @@
     const title=normalizedTitle(movie.title);
     const year=Number(movie.year||String(movie.release_date||movie.date||'').slice(0,4));
     if(!title||!year||!Array.isArray(state.movies))return '';
-    const matches=state.movies.filter(item=>normalizedTitle(item.title)===title&&Number(item.year||String(item.release_date||item.date||'').slice(0,4))===year);
-    if(matches.length!==1)return '';
-    return sourceFrom(matches[0]);
+    if(posterCatalogCache?.movies !== state.movies){
+      const titles = new Map();
+      for(const item of state.movies){
+        const key = JSON.stringify([normalizedTitle(item.title), Number(item.year||String(item.release_date||item.date||'').slice(0,4))]);
+        // An ambiguous title/year stays unresolved even when only one row has artwork.
+        titles.set(key, titles.has(key) ? null : item);
+      }
+      posterCatalogCache = {movies: state.movies, titles};
+    }
+    return sourceFrom(posterCatalogCache.titles.get(JSON.stringify([title, year])));
   };
   const recordMovies = () => state.records.filter(record => record.watched !== false && record.rating !== 0);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');

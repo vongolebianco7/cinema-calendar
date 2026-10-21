@@ -57,6 +57,9 @@ async function freePort() {
         const context = await browser.newContext({ viewport: { width, height: 844 } });
         await context.addInitScript(value => localStorage.setItem('cinelva-theme-v1', value), theme);
         await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+        for (const route of routes) {
+        // Each matrix cell audits one document. A fresh page releases the previous
+        // dashboard and its pending work before WebKit loads the next route.
         const page = await context.newPage();
         page.on('pageerror', error => {
           const detail = `${width}px ${theme} ${page.url()}: ${error.message}`;
@@ -75,7 +78,6 @@ async function freePort() {
           if (localAsset && response.status() >= 400) localAssetFailures.push(`${width}px ${theme} ${response.status()} ${response.url()}`);
         });
 
-        for (const route of routes) {
           try {
           const response = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
           assert.ok(response && response.ok(), `${route} responds successfully at ${width}px in ${theme} mode`);
@@ -143,6 +145,8 @@ async function freePort() {
               screenshot: relative.split(path.sep).join('/')
             };
             throw error;
+          } finally {
+            await page.close();
           }
         }
         await context.close();

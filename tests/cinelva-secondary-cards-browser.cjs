@@ -20,6 +20,12 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#grid .card').waitFor();assert.equal(await page.locator('#grid .card').count(),1);
   assert.equal(await page.locator('#grid .title').innerText(),movie.title);
   await page.locator('#grid .cinelva-rate-button').waitFor();await page.locator('#grid .cinelva-rate-button').click();assert.equal(await page.locator('#cinelvaRateTitle').innerText(),movie.title);await page.locator('#cinelvaRateClose').click();
+  // An older backend returns people rather than ids: verify the real published snapshot path.
+  await context.route('**/api/people?*',r=>r.fulfill({json:{people:[]}}));
+  await context.route('**/api/discover?*',r=>r.fulfill({json:{movies:[{id:27205,tmdbId:27205,title:'インセプション',year:2010},{id:141052,tmdbId:141052,title:'Justice League',year:2017},{id:57729,tmdbId:57729,title:'The Cobol Job',year:2010}],total_pages:1,total_results:3}}));
+  await page.reload({waitUntil:'domcontentloaded'});await page.locator('#grid .card').waitFor();
+  assert.equal(await page.locator('#grid .card').count(),1);assert.equal(await page.locator('#grid .title').innerText(),'インセプション');
+  assert.match(await page.locator('#status').innerText(),/収録/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.deepEqual(errors,[]);await context.close();
  }console.log('Secondary revival and selected experience cards: 6 viewport/theme combinations passed');}finally{await browser?.close();server.kill()}
 })().catch(e=>{console.error(e);process.exitCode=1});

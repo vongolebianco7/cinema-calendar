@@ -263,7 +263,19 @@ const directorCreditsCache=new Map();
 let discoveryLoadToken=0,discoveryLoading=false,currentCrewRole="director";
 async function loadDirectorCredits(id){
  const key=String(id);
- if(!directorCreditsCache.has(key))directorCreditsCache.set(key,fetch(API+"/api/people?"+new URLSearchParams({id:key,role:"director"}),{cache:"no-store"}).then(async response=>{if(!response.ok)throw Error("director credits "+response.status);const data=await response.json();if(!Array.isArray(data.ids))throw Error("invalid director credits");return new Set(data.ids.map(String))}).catch(error=>{directorCreditsCache.delete(key);throw error}));
+ if(!directorCreditsCache.has(key))directorCreditsCache.set(key,(async()=>{
+  try{
+   const response=await fetch(API+"/api/people?"+new URLSearchParams({id:key,role:"director"}),{cache:"no-store"});if(!response.ok)throw Error("director credits "+response.status);
+   const data=await response.json();if(!Array.isArray(data.ids))throw Error("invalid director credits");return {ids:new Set(data.ids.map(String)),asOf:""};
+  }catch(error){
+   // A verified, same-origin snapshot also works while the backend release is delayed.
+   const response=await fetch("data/directors-mobile.json",{cache:"no-store"});if(!response.ok)throw error;
+   const data=await response.json(),director=data.directors?.[key];
+   if(String(director?.id)!==key||director.source_url!=="https://www.themoviedb.org/person/"+key||director.coverage?.source!=="tmdb_director_movie_credits"||!Array.isArray(director.works))throw error;
+   const ids=director.works.filter(work=>work.job==="Director"&&String(work.director_id)===key&&work.source==="tmdb"&&Number.isInteger(Number(work.id))&&Number(work.id)>0).map(work=>String(Number(work.id)));
+   return {ids:new Set(ids),asOf:String(data.generated_at||"").slice(0,10)||"収録時点"};
+  }
+ })().catch(error=>{directorCreditsCache.delete(key);throw error}));
  return directorCreditsCache.get(key);
 }
 async function load(reset=true){
@@ -278,9 +290,9 @@ async function load(reset=true){
   const response=await fetch(API+"/api/discover?"+query,{cache:"no-store"});if(!response.ok)throw Error(response.status);
   const data=await response.json();if(token!==discoveryLoadToken)return;
   totalPages=data.total_pages||1;
-  const movies=(data.movies||[]).filter(movie=>!credits||credits.has(String(movie.tmdbId||movie.tmdb_id||movie.id)));
+  const movies=(data.movies||[]).filter(movie=>!credits||credits.ids.has(String(movie.tmdbId||movie.tmdb_id||movie.id)));
   items=items.concat(movies.map(normalizeLocalMovie));render();renderPersonProfile();
-  $("#status").textContent=credits?items.length.toLocaleString()+"作品（監督作品）":(data.total_results||items.length).toLocaleString()+"作品";
+  $("#status").textContent=credits?items.length.toLocaleString()+"作品（監督作品"+(credits.asOf?"・"+credits.asOf+"収録":"")+"）":(data.total_results||items.length).toLocaleString()+"作品";
   $("#more").style.display=page<Math.min(totalPages,20)?"block":"none";
  }catch(error){if(token!==discoveryLoadToken)return;$("#status").textContent="取得できませんでした";$("#grid").innerHTML='<div class="empty">作品データを取得できませんでした。</div>';$("#more").style.display="none"}
  finally{if(token===discoveryLoadToken){discoveryLoading=false;$("#more").disabled=false;}}

@@ -20,6 +20,9 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#grid .card').waitFor();assert.equal(await page.locator('#grid .card').count(),1);
   assert.equal(await page.locator('#grid .title').innerText(),movie.title);
   await page.locator('#grid .cinelva-rate-button').waitFor();await page.locator('#grid .cinelva-rate-button').click();assert.equal(await page.locator('#cinelvaRateTitle').innerText(),movie.title);await page.locator('#cinelvaRateClose').click();
+  // Let independent discovery shelves settle before replacing the document.
+  // WebKit otherwise reports outgoing same-origin fetch cancellation as a pageerror.
+  await page.waitForFunction(()=>['theatricalPopularStatus','catalogPopularStatus'].every(id=>{const text=document.getElementById(id)?.textContent||'';return text&&!text.includes('読み込み中');}));
   // An older backend returns people rather than ids: verify the real published snapshot path.
   await context.route('**/api/people?*',r=>r.fulfill({json:{people:[]}}));
   await context.route('**/api/discover?*',r=>r.fulfill({json:{movies:[{id:27205,tmdbId:27205,title:'インセプション',year:2010},{id:141052,tmdbId:141052,title:'Justice League',year:2017},{id:57729,tmdbId:57729,title:'The Cobol Job',year:2010}],total_pages:1,total_results:3}}));

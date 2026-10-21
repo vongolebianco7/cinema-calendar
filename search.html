@@ -172,7 +172,7 @@ function movieReleaseYear(m){
 function movieTmdbId(m){
  return m.tmdbId||m.tmdb_id||String(m.tmdb||"").match(/^https:\/\/(?:www\.)?themoviedb\.org\/movie\/(\d+)(?:[/?#-]|$)/)?.[1]||(m.catalog||m.source==="tmdb"?m.id:null);
 }
-function movieDateLabel(m){return ({streaming:"配信開始",tv:"TV放映",theatrical:"劇場上映日"})[m.event]||"公開日";}
+function movieDateLabel(m){return ({streaming:"配信開始",tv:"TV放映",theatrical:"劇場上映日"})[m.event]||"公開年月日";}
 let searchRequest=0;
 async function search(){
  const term=q.value.trim();if(!term)return;

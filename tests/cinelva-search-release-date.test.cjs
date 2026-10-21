@@ -9,6 +9,13 @@ const section = (start, end) => html.slice(html.indexOf(start), html.indexOf(end
 const event = {id:157336, title:'インターステラー', date:'2026-09-01', event:'streaming',
   service:'Prime Video', source:'Official announcement', tmdb:'https://www.themoviedb.org/movie/157336'};
 
+test('original release dates use the requested full-date caption', () => {
+  const context={};
+  vm.runInNewContext(helpers,context);
+  assert.equal(context.movieDateLabel({event:'catalog'}),'公開年月日');
+  assert.equal(context.movieDateLabel({event:'streaming'}),'配信開始');
+});
+
 test('local official events resolve authoritative film details using their explicit TMDB identity', async () => {
   for (const film of [event, {...event,tmdb:undefined,tmdb_id:157336}, {...event,id:900001,tmdb:'https://www.themoviedb.org/movie/157336'}]) {
     const calls=[], rendered=[], urls=[];

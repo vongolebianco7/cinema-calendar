@@ -38,6 +38,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npm install
+          node ../scripts/production-checks.cjs --require
           npx prisma generate
           npx tsx scripts/import-json.ts --theater-master-only
 

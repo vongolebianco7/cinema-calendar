@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+if (process.env.VERCEL_ENV === 'production') require('./production-checks.cjs').checkProduction();
 
 const root = process.cwd();
 const output = path.join(root, 'public');

@@ -4,6 +4,7 @@ from pathlib import Path
 import re, subprocess, sys, tempfile
 ROOT=Path(__file__).resolve().parents[1];failures=[]
 def run(cmd):
+ if cmd[0]=='python': cmd=[sys.executable,*cmd[1:]]
  print('+',' '.join(cmd));r=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True)
  if r.stdout: print(r.stdout,end='')
  if r.returncode:

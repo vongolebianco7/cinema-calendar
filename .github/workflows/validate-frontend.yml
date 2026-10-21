@@ -50,51 +50,31 @@ on:
       - ".github/workflows/validate-frontend.yml"
   pull_request:
     paths:
-      - "*.html"
-      - "preview/ocean/**/*.html"
-      - "tests/cinelva-ocean-route-retirement.cjs"
-      - "tests/cinelva-ocean-workflow-retirement.test.cjs"
-      - "js/cinelva-*.js"
-      - "js/data-backup.js"
-      - "my-cinelva/**"
-      - "tests/cinelva-insights.test.cjs"
-      - "tests/cinelva-library-records.test.cjs"
-      - "tests/cinelva-theme.test.cjs"
-      - "tests/cinelva-discovery-offer-order.test.cjs"
-      - "tests/cinelva-my-page-*.cjs"
-      - "tests/cinelva-quick-rate-browser.cjs"
-      - "tests/cinelva-calendar-record-entry-browser.cjs"
-      - "tests/cinelva-route-audit-browser.cjs"
-      - "tests/cinelva-theater-quality-browser.cjs"
-      - "tests/cinelva-source-status-browser.cjs"
-      - "tests/cinelva-calendar-ranking-rating-browser.cjs"
-      - "tests/cinelva-boxoffice-poster-browser.cjs"
-      - "tests/cinelva-storage.test.cjs"
-      - "tests/cinelva-backup.test.cjs"
-      - "tests/test_my_cinemap_three_column_export.py"
-      - "backend/app/api/critic-videos/route.ts"
-      - "js/critic-evidence.js"
-      - "js/my-cinemap-art.js"
-      - "data/critic_evidence.json"
-      - "scripts/check_critic_evidence.js"
-      - "data/source_registry.json"
-      - "data/special_screenings.json"
-      - "data/theater_formats.json"
-      - "scripts/check_sources.py"
-      - "scripts/check_discovery_ui.py"
-      - "scripts/check_core_journey.py"
-      - "scripts/check_critic_map.py"
-      - "scripts/apply_brand_identity_20260927.py"
-      - "scripts/fix_brand_header_20260927.py"
-      - "scripts/fix_my_cinemap_export_brand_20260927.py"
-      - "tests/test_brand_identity.py"
-      - "tests/test_my_cinemap_three_column_export.py"
-      - "manifest.webmanifest"
-      - "favicon.svg"
-      - "apple-touch-icon.png"
-      - "icon-192.png"
-      - "icon-512.png"
-      - ".github/workflows/validate-frontend.yml"
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!data/availability.json'
+      - '!data/awards.json'
+      - '!data/director_name_readings.json'
+      - '!data/directors-mobile.json'
+      - '!data/directors.json'
+      - '!data/events.json'
+      - '!data/movies.json'
+      - '!data/outdoor-events.json'
+      - '!data/rankings.json'
+      - '!data/rankings_extra.json'
+      - '!data/rankings_year.json'
+      - '!data/release_history.json'
+      - '!data/revival_screenings.json'
+      - '!data/source-status.json'
+      - '!data/special_screenings.json'
+      - '!data/streaming.json'
+      - '!data/theater_schedules.json'
+      - '!data/theaters_master.json'
+      - '!data/theaters_osm.json'
+      - '!data/theatrical.json'
+      - '!data/tv.json'
+      - '!data/rankings/*.json'
   workflow_dispatch:
 
 permissions:

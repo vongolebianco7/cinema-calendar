@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "bash \"$(git rev-parse --show-toplevel)/scripts/ignore-backend-build.sh\""
+  "ignoreCommand": "bash \"$(git rev-parse --show-toplevel)/scripts/ignore-backend-build.sh\"",
+  "installCommand": "npm ci --ignore-scripts --no-audit --no-fund"
 }

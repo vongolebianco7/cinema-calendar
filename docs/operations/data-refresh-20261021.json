@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-21T10:34:47.510615+00:00",
+  "authorization": "User explicitly approved the described single existing movie-data run, including official API requests, JSON commit and production DB sync.",
+  "run_id": 39583606695,
+  "run_number": 74,
+  "job_id": 119166967413,
+  "run_url": "https://github.com/vongolebianco7/cinema-calendar/actions/runs/39583606695",
+  "run_conclusion": "success",
+  "source_sha": "bdc46968c89bb7cb3a8e9d4b1e484d4d6352675c",
+  "data_commit": "a4d5ee012968d8de45bda2be07727502c969ede0",
+  "observations_before": {
+    "total": 566,
+    "fresh_7d": 314,
+    "stale_7d": 252
+  },
+  "observations_after": {
+    "total": 750,
+    "fresh_7d": 498,
+    "stale_7d": 252,
+    "fresh_pct": 66.4
+  },
+  "batch": {
+    "eligible": 1115,
+    "budget": 186,
+    "hard_cap": 200,
+    "attempted": 186,
+    "successful": 184,
+    "failed": 2,
+    "deferred": 0,
+    "failed_ids": [
+      1777404,
+      1749852
+    ]
+  },
+  "database_sync": {
+    "ok": true,
+    "movieCount": 1080,
+    "releaseCount": 1113,
+    "tvCount": 12,
+    "theaterCount": 1225,
+    "theaterMasterCount": 322,
+    "schema_already_in_sync": true
+  },
+  "artifact": {
+    "id": 12337903399,
+    "name": "streaming-freshness-audit"
+  },
+  "production": {
+    "frontend_deployment": "dpl_3ecio6iBkDFdaZD29ha1YUmt8Zp4",
+    "frontend_sha": "a4d5ee012968d8de45bda2be07727502c969ede0",
+    "canonical_ready": true,
+    "actual_browser_source_status": "750observed/498fresh/252stale verified at credits.html#data-status"
+  },
+  "limitations": [
+    "252older observations remain stale. This one authorized run was not repeated.",
+    "Official premiere-date editorial gaps remain; API observation is not a premiere date.",
+    "npm install reported3high-severity vulnerabilities; perform a separate advisory audit rather than assume a passing import clears dependencies."
+  ],
+  "screenshot": "evidence/update-movies-74-20261021.jpg"
+}

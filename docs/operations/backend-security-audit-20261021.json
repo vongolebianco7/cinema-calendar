@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-10-21T10:39:55.060030+00:00",
+  "official_advisory": "https://github.com/RebeccaStevens/deepmerge-ts/security/advisories/GHSA-ggr8-5vv4-36mx",
+  "before": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {
+      "@prisma/config": {
+        "name": "@prisma/config",
+        "severity": "high",
+        "isDirect": false,
+        "via": [
+          "deepmerge-ts"
+        ],
+        "effects": [
+          "prisma"
+        ],
+        "range": "6.13.0-dev.1 - 7.10.0 || 8.1.0-dev.1 - 8.1.0-dev.4",
+        "nodes": [
+          "node_modules/@prisma/config"
+        ],
+        "fixAvailable": true
+      },
+      "deepmerge-ts": {
+        "name": "deepmerge-ts",
+        "severity": "high",
+        "isDirect": false,
+        "via": [
+          {
+            "source": 1145093,
+            "name": "deepmerge-ts",
+            "dependency": "deepmerge-ts",
+            "title": "DeepmergeTS has stack exhaustion when merging recursive object graphs",
+            "url": "https://github.com/advisories/GHSA-ggr8-5vv4-36mx",
+            "severity": "high",
+            "cwe": [
+              "CWE-674"
+            ],
+            "cvss": {
+              "score": 0,
+              "vectorString": null
+            },
+            "range": "<8.0.0"
+          }
+        ],
+        "effects": [
+          "@prisma/config"
+        ],
+        "range": "<8.0.0",
+        "nodes": [
+          "node_modules/deepmerge-ts"
+        ],
+        "fixAvailable": true
+      },
+      "prisma": {
+        "name": "prisma",
+        "severity": "high",
+        "isDirect": true,
+        "via": [
+          "@prisma/config"
+        ],
+        "effects": [],
+        "range": "6.13.0-dev.1 - 7.10.0 || 8.0.0-rc.3 - 8.1.0-dev.4",
+        "nodes": [
+          "node_modules/prisma"
+        ],
+        "fixAvailable": true
+      }
+    },
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 3,
+        "critical": 0,
+        "total": 3
+      },
+      "dependencies": {
+        "prod": 53,
+        "dev": 33,
+        "optional": 66,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 124
+      }
+    }
+  },
+  "after": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {},
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 53,
+        "dev": 33,
+        "optional": 66,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 124
+      }
+    }
+  },
+  "fix": "Exact deepmerge-ts8.0.0 override; Prisma/client remain6.19.3. BSD-3-Clause license metadata retained in lock and inventory.",
+  "verification": [
+    "Installed7.x cyclic graph throws RangeError (red).",
+    "Installed8.0.0 safely handles/rejects cycles and preserves ordinary Prisma configuration merge (green).",
+    "Locked install and actual Prisma generation/Next production compilation passed with unused local dummy DATABASE_URL; no DB write.",
+    "npm audit reports zero known vulnerabilities after change. This is point-in-time evidence, not a guarantee of future absence."
+  ],
+  "exposure_note": "Affected package is reached through Prisma configuration tooling. The source advisory requires recursive object graphs; ordinary JSON alone does not create them. Do not equate three dependency-chain entries with three distinct remotely exploitable application defects."
+}

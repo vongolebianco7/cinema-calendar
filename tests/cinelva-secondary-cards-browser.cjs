@@ -1,9 +1,9 @@
-const {chromium}=require('playwright'),{spawn}=require('child_process'),net=require('net'),assert=require('assert/strict'),{waitForLocalServer}=require('./helpers/local-server.cjs');
+const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),net=require('net'),assert=require('assert/strict'),{waitForLocalServer}=require('./helpers/local-server.cjs');
 (async()=>{
  const listener=net.createServer();await new Promise(r=>listener.listen(0,'127.0.0.1',r));const port=listener.address().port;await new Promise(r=>listener.close(r));
  const server=spawn('python',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});let browser;
  const movie={id:587,tmdbId:587,title:'ビッグ・フィッシュ',year:2003,poster:'https://image.tmdb.org/t/p/w500/fiPam4cMjYqYqJEWGdDX7dkNaB9.jpg',vote_average:8,vote_count:100};
- try{await waitForLocalServer(port);browser=await chromium.launch();for(const width of [375,390,768])for(const theme of ['light','dark']){
+ try{await waitForLocalServer(port);browser=await (process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();for(const width of [375,390,768])for(const theme of ['light','dark']){
   const context=await browser.newContext({viewport:{width,height:844}});await context.addInitScript(t=>localStorage.setItem('cinelva-theme-v1',t),theme);
   await context.route('https://image.tmdb.org/**',r=>r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aYl8AAAAASUVORK5CYII=','base64')}));
   await context.route('**/api/movies?*',r=>r.fulfill({json:{movies:[{...movie,tmdbId:undefined}],external:[]}}));await context.route('**/api/movie-detail?*',r=>r.fulfill({json:{movie}}));

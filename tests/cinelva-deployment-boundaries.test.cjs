@@ -117,3 +117,4 @@ test('changing backend skip logic builds only the backend', t => {
   repo.check(backend, 1, 'backend skip logic changed');
   repo.check(frontend, 0, 'backend skip logic does not change static frontend');
 });
+for(const input of ['scripts/source-status.cjs','quality/external-data-registry.json'])test(input+' rebuilds public source status without rebuilding backend',t=>{const repo=fixture(t);repo.change(input);repo.check(frontend,1,'source status generation input');repo.check(backend,0,'frontend source status only');});

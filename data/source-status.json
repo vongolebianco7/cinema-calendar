@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-21T05:43:25.816Z",
+  "sources": [
+    {
+      "id": "streaming-availability",
+      "status": "automated",
+      "source": "TMDB watch/providers (JustWatch)",
+      "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
+      "source_observed_at": "2026-10-21T00:20:31.184Z",
+      "max_age_hours": 168,
+      "freshness": "within_window",
+      "observations": {
+        "total": 566,
+        "fresh": 314,
+        "stale": 252,
+        "unknown": 0
+      }
+    },
+    {
+      "id": "streaming-premieres",
+      "status": "manual",
+      "source": "source-reviewed official service announcements",
+      "source_url": null,
+      "source_observed_at": "2026-10-11T00:00:00.000Z",
+      "max_age_hours": 168,
+      "freshness": "stale"
+    },
+    {
+      "id": "theater-showtimes",
+      "status": "disabled-pending-permission",
+      "source": "official theater schedules",
+      "source_url": null,
+      "source_observed_at": "2026-09-24T12:10:06.014Z",
+      "max_age_hours": 24,
+      "freshness": "stale"
+    },
+    {
+      "id": "theater-directory",
+      "status": "disabled-resource-scope",
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "source_observed_at": "2026-09-25T05:21:34.965Z",
+      "max_age_hours": 720,
+      "freshness": "within_window"
+    },
+    {
+      "id": "television-schedules",
+      "status": "unavailable",
+      "source": "none approved",
+      "source_url": null,
+      "source_observed_at": null,
+      "max_age_hours": null,
+      "freshness": "unknown"
+    },
+    {
+      "id": "box-office",
+      "status": "manual",
+      "source": "official/industry source URLs embedded in dataset",
+      "source_url": null,
+      "source_observed_at": "2026-09-27T00:00:00.000Z",
+      "max_age_hours": 720,
+      "freshness": "within_window"
+    },
+    {
+      "id": "movies-and-posters",
+      "status": "automated",
+      "source": "TMDB API plus source-reviewed release records",
+      "source_url": "https://developer.themoviedb.org/",
+      "source_observed_at": "2026-10-21T00:20:09.502Z",
+      "max_age_hours": 48,
+      "freshness": "within_window"
+    },
+    {
+      "id": "awards",
+      "status": "manual",
+      "source": "official award archives and Wikidata identifiers",
+      "source_url": null,
+      "source_observed_at": "2026-10-17T00:00:00.000Z",
+      "max_age_hours": 8760,
+      "freshness": "within_window"
+    },
+    {
+      "id": "editorial-features",
+      "status": "manual",
+      "source": "editorial configuration and cited official offers",
+      "source_url": null,
+      "source_observed_at": null,
+      "max_age_hours": null,
+      "freshness": "unknown"
+    }
+  ]
+}

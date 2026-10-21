@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const key = 'cinelva-theme-v1';
+  const sourceHref = document.currentScript?.src ? new URL('../credits.html#data-status', document.currentScript.src).href : 'credits.html#data-status';
   const root = document.documentElement;
   const media = window.matchMedia('(prefers-color-scheme: dark)');
   let preference = 'system';
@@ -26,6 +27,9 @@
   function mount() {
     const host = document.querySelector('.gDrawer') || document.querySelector('main');
     if (!host) return;
+    const sourceLink = document.createElement('a');
+    sourceLink.className = 'cinelvaSourcesLink'; sourceLink.href = sourceHref; sourceLink.textContent = '情報源と収録日時';
+    host.append(sourceLink);
     const label = document.createElement('label');
     label.className = 'cinelvaTheme';
     label.innerHTML = '<span>表示テーマ</span><select aria-label="表示テーマ"><option value="system">端末に合わせる</option><option value="light">ライト</option><option value="dark">ダーク</option></select>';

@@ -31,6 +31,26 @@ const fs = require('fs');
       throw new Error('annual calendar did not render 12 months');
     }
     await page.locator('#yearHeatmap .cy-month').first().waitFor({ state: 'visible' });
+    for (const theme of ['light', 'dark']) {
+      await page.evaluate(value => document.documentElement.dataset.theme = value, theme);
+      const ratios = await page.evaluate(() => {
+        const lum = value => {
+          const rgb = value.match(/[\d.]+/g).slice(0,3).map(Number).map(n => {
+            const s=n/255; return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;
+          });
+          return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
+        };
+        return ['.hero p', '.recordUtilities summary', '#summaryView .cs-head h2', '#summaryView .cs-top .cs-muted'].map(selector => {
+          const el=document.querySelector(selector);
+          let ancestor=el;
+          while(ancestor.parentElement && getComputedStyle(ancestor).backgroundColor==='rgba(0, 0, 0, 0)') ancestor=ancestor.parentElement;
+          const fg=lum(getComputedStyle(el).color), bg=lum(getComputedStyle(ancestor).backgroundColor);
+          return {selector,ratio:(Math.max(fg,bg)+0.05)/(Math.min(fg,bg)+0.05)};
+        });
+      });
+      for (const text of ratios) if(text.ratio<4.5){failed=true;console.error(width,theme,'summary text contrast',text);}
+    }
+    await page.evaluate(() => document.documentElement.dataset.theme = 'light');
     await page.waitForTimeout(150);
     const result = await page.evaluate(({ year, width }) => {
       const root = document.querySelector('#yearHeatmap');

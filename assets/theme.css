@@ -11,6 +11,13 @@ html[data-theme="dark"] body:has(#export) {
   --bg:#101418; --text:#f4f0e8; --panel:#192027; --line:#46515a; --accent:#d8bd87;
 }
 html[data-theme="light"] body { background:var(--bg); color:var(--text); }
+/* My Cinelva's legacy dark body variables must follow the explicit theme too. */
+html[data-theme="light"] body:has(#summaryView) {
+  --page:#f8f6f1; --panel:#fffefa; --ink:#242521; --muted:#64645d;
+  --line:#d4d0c7; --soft:#eeeae2; --brand:#762f3d; --gold:#806027;
+}
+html[data-theme="light"] #summaryView { --cs-ink:var(--ink); --cs-gold:var(--gold); }
+html[data-theme="light"] #summaryView .cs-muted { color:var(--muted)!important; }
 html[data-theme="light"] :is(.gTop,.top,.dock,.expTabs) {
   background:#f8f6f1f5!important; border-color:var(--line)!important;
 }

@@ -349,7 +349,7 @@
       "remaining": 7,
       "additional_fixes": 10,
       "percent": 78.1,
-      "reason": "Correct unsupported zero-remaining claim. Reopen two existing UI acceptance gates after three visible defects; do not change denominator or count pending fixes as complete. Vercel is excluded from the current implementation task."
+      "reason": "Correct unsupported zero-remaining claim. Reopen two existing UI acceptance gates after four visible defects; do not change denominator or count pending fixes as complete. Vercel is excluded from the current implementation task."
     }
   ]
 }

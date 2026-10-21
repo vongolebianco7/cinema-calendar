@@ -712,9 +712,9 @@
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
-    "confirmed_defects": 3,
+    "confirmed_defects": 4,
     "verified_and_merged_fixes": 0,
-    "remaining_confirmed_defects": 3,
+    "remaining_confirmed_defects": 4,
     "next_action": "Wait for latest source CI; inspect review screenshots and contrast regression; renew source proof after critical CI; merge after final head checks. Then continue remaining UI journeys. Do not claim all tasks complete."
   }
 }

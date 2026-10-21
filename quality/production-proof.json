@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": null,
-  "note": "No production proof yet. Populate only after all four critical workflows succeed on the exact executable source."
+  "head_sha": "097797dd643ae1028ac50c19f9ccaf972bf35146",
+  "verified_at": "2026-10-21T10:55:32.931Z",
+  "note": "All seven PR workflows succeeded. This receipt changes no executable source."
 }

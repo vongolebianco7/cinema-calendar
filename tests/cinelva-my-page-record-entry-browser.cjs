@@ -1,5 +1,6 @@
 const { waitForLocalServer } = require('./helpers/local-server.cjs');
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
+const fs = require('node:fs');
 const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
@@ -26,7 +27,8 @@ async function freePort() {
     const movie = catalog.movies.find(row => row.id && row.title);
     assert.ok(movie, 'fixture has a movie with an ID and title');
 
-    browser = await chromium.launch({ headless: true });
+    const browserName=process.env.CINELVA_BROWSER==='webkit'?'webkit':'chromium';
+    browser = await ({chromium,webkit})[browserName].launch({ headless: true });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
     await page.goto(`${base}/search.html?id=${encodeURIComponent(movie.id)}&search=${encodeURIComponent(movie.title)}`, { waitUntil: 'domcontentloaded' });
@@ -63,6 +65,10 @@ async function freePort() {
       assert.equal(await card.locator('.cinelva-rating-audience .rating-value').innerText(),kind==='related'?'4.0':'3.5');
     }
     assert.equal(await page.locator('#detail .works').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'secondary cards must not cause horizontal page overflow');
+    await page.locator('.detailRelatedCard').first().scrollIntoViewIfNeeded();
+    fs.mkdirSync('artifacts/route-audit/related-cards',{recursive:true});
+    await page.screenshot({path:`artifacts/route-audit/related-cards/${browserName}-390.png`});
 
     const calendarHref = CalendarContext.detailHref({ id: movie.id, title: movie.title, date: '2026-10-17', event: 'streaming', service: 'Netflix' });
     await page.goto(`${base}/${calendarHref}`, { waitUntil: 'domcontentloaded' });

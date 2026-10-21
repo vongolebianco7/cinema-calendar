@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T18:50:13.489564+00:00",
+  "generated_at": "2026-10-21T00:20:31.184255+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。",
@@ -542,13 +542,29 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
         "Amazon Prime Video with Ads",
         "Prime Video"
       ],
-      "checked_at": "2026-10-05T18:36:47.269591+00:00",
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
       "source_url": "https://www.themoviedb.org/movie/967941-wicked-for-good/watch?locale=JP",
       "flatrate": [
         "Amazon Prime Video with Ads",
@@ -557,8 +573,7 @@
       "rent": [
         "Amazon Video",
         "Apple TV Store",
-        "FOD",
-        "U-NEXT"
+        "FOD"
       ],
       "buy": [
         "Amazon Video",
@@ -12096,6 +12111,1040 @@
       "buy": [],
       "checked_at": "2026-10-20T18:50:13.489564+00:00",
       "source_url": "https://www.themoviedb.org/movie/1257420/watch"
+    },
+    "787699": {
+      "title": "ウォンカとチョコレート工場のはじまり",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "HBO Max on U-Next",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu"
+      ],
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD",
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/787699-wonka/watch?locale=JP"
+    },
+    "1768182": {
+      "title": "てんてん ずっと独身でいるつもり？",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1768182/watch"
+    },
+    "1241921": {
+      "title": "ビューティフル・ジャーニー ふたりの時空旅行",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [],
+      "flatrate": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1241921-a-big-bold-beautiful-journey/watch?locale=JP"
+    },
+    "1280282": {
+      "title": "ギャビーのドールハウス ザ・ムービー",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1280282-gabby-s-dollhouse-the-movie/watch?locale=JP"
+    },
+    "120": {
+      "title": "ロード・オブ・ザ・リング",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/120-the-lord-of-the-rings-the-fellowship-of-the-ring/watch?locale=JP"
+    },
+    "121": {
+      "title": "ロード・オブ・ザ・リング／二つの塔",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/121-the-lord-of-the-rings-the-two-towers/watch?locale=JP"
+    },
+    "1561726": {
+      "title": "マスタープラン",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1561726-masterplan/watch?locale=JP"
+    },
+    "1381078": {
+      "title": "生涯の愛",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1381078-love-of-your-life/watch?locale=JP"
+    },
+    "1623568": {
+      "title": "アギトー超能力戦争ー",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "services": [],
+      "flatrate": [],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1623568/watch?locale=JP"
+    },
+    "1276849": {
+      "title": "スオミの話をしよう",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1276849/watch?locale=JP"
+    },
+    "1548708": {
+      "title": "SAKAMOTO DAYS",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "services": [],
+      "flatrate": [],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1548708-sakamoto-days/watch?locale=JP"
+    },
+    "1404326": {
+      "title": "366日",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "FOD Channel Amazon Channel",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "FOD Channel Amazon Channel",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "FOD Channel Amazon Channel",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1404326-366/watch?locale=JP"
+    },
+    "1591961": {
+      "title": "僕の狂ったフェミ彼女",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1591961/watch"
+    },
+    "1196776": {
+      "title": "Tamala 2030: A Punk Cat in Dark",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1196776/watch"
+    },
+    "1300926": {
+      "title": "アングリーバード／大奮闘！ファミリー・ミッション",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1300926/watch"
+    },
+    "1375441": {
+      "title": "プライムタイム",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1375441/watch"
+    },
+    "1560316": {
+      "title": "あきらめません！",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1560316/watch"
+    },
+    "1774278": {
+      "title": "劇場版 40までにしたい10のこと",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1774278/watch"
+    },
+    "152044": {
+      "title": "劇場版 魔法少女まどか☆マギカ[後編] 永遠の物語",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Anime Times Amazon Channel",
+            "FOD",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/152044/watch?locale=JP"
+    },
+    "1760205": {
+      "title": "The Tale of the Red Demon",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1760205/watch"
+    },
+    "1729352": {
+      "title": "King Gnu CEN＋RAL Tour 2026",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1729352/watch"
+    },
+    "1734045": {
+      "title": "Venus",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1734045/watch"
+    },
+    "891621": {
+      "title": "ワイルド・ホース・ナイン",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/891621/watch"
+    },
+    "1280738": {
+      "title": "フュリアス 怒りの頂上決戦",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1280738/watch"
+    },
+    "1711861": {
+      "title": "カイジ 人生リベンジゲーム",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1711861/watch"
+    },
+    "1739413": {
+      "title": "無用の人",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1739413/watch"
+    },
+    "1781662": {
+      "title": "Lemino修斗.7",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1781662/watch"
+    },
+    "1724844": {
+      "title": "EXO PLANET #6 - EXhOrizon in JAPAN",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1724844/watch"
+    },
+    "1781513": {
+      "title": "RISE 200",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1781513/watch"
+    },
+    "152042": {
+      "title": "劇場版 魔法少女まどか☆マギカ [前編] 始まりの物語",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Anime Times Amazon Channel",
+            "FOD",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video"
+          ],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/152042/watch?locale=JP"
+    },
+    "1151031": {
+      "title": "ブリング・ハー・バック",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1151031/watch"
+    },
+    "1184854": {
+      "title": "フォー・トレイルズ 限界を超えてゆけ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1184854/watch"
+    },
+    "1254808": {
+      "title": "ヌーヴェルヴァーグ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1254808/watch"
+    },
+    "1291608": {
+      "title": "ドゥランダル作戦",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1291608/watch?locale=JP"
+    },
+    "1422096": {
+      "title": "GOOD BOY／グッド・ボーイ",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [],
+          "rent": [
+            "U-NEXT"
+          ],
+          "buy": []
+        }
+      ],
+      "services": [],
+      "flatrate": [],
+      "rent": [
+        "U-NEXT"
+      ],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1422096-good-boy/watch?locale=JP"
+    },
+    "1464883": {
+      "title": "大統領のケーキ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1464883/watch"
+    },
+    "1582770": {
+      "title": "धुरंधर: द रिवेंज",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1582770/watch?locale=JP"
+    },
+    "1657017": {
+      "title": "トロフィー",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1657017/watch"
+    },
+    "1659338": {
+      "title": "死亡遊戯で飯を食う。 44:CLOUDY BEACH",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT",
+            "dAnime Amazon Channel"
+          ],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": []
+        }
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT",
+        "dAnime Amazon Channel"
+      ],
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT",
+        "dAnime Amazon Channel"
+      ],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1659338-44-cloudy-beach/watch?locale=JP"
+    },
+    "1787388": {
+      "title": "鬼平犯科帳 本所の銕",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1787388/watch"
+    },
+    "1788769": {
+      "title": "ガチャ-廻世界-",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1788769/watch"
+    },
+    "1725017": {
+      "title": "INANE FECIT",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1725017/watch"
+    },
+    "1154801": {
+      "title": "ラブライブ！虹ヶ咲学園スクールアイドル同好会 完結編 第3章",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1154801/watch"
+    },
+    "1657503": {
+      "title": "存在のすべてを",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1657503/watch"
+    },
+    "1765989": {
+      "title": "過怠",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1765989/watch"
+    },
+    "1772119": {
+      "title": "ハッピーリスト",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1772119/watch"
+    },
+    "1798422": {
+      "title": "認知症世界の歩き方",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1798422/watch"
+    },
+    "1674845": {
+      "title": "मितज्यू",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1674845/watch"
+    },
+    "1781792": {
+      "title": "KNOCK OUT MX LIVE",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1781792/watch"
+    },
+    "1721824": {
+      "title": "姫野みなみ 姫野さんに罵られたい",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1721824/watch"
+    },
+    "1722035": {
+      "title": "人生の天才",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1722035/watch"
+    },
+    "1084244": {
+      "title": "トイ・ストーリー５",
+      "changes": [
+        {
+          "observed_at": "2026-10-21T00:20:31.184255+00:00",
+          "flatrate": [],
+          "rent": [],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1084244-toy-story-5/watch?locale=JP"
+    },
+    "1127407": {
+      "title": "フランキー・フリーコ",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1127407/watch"
+    },
+    "1253000": {
+      "title": "デスストーカー",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1253000/watch"
+    },
+    "1258509": {
+      "title": "きれっぱしの愛",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1258509/watch"
+    },
+    "1264805": {
+      "title": "サヨナラの引力",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1264805/watch"
+    },
+    "1364904": {
+      "title": "ユースフル・ゴースト",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-10-21T00:20:31.184255+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1364904/watch"
     }
   }
 }

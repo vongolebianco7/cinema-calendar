@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-20T18:48:23.011816+00:00",
+  "generated_at": "2026-10-21T00:19:37.308415+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-20",
-      "2027-02-17"
+      "2026-09-21",
+      "2027-02-18"
     ],
     "background_slice": [
-      "2025-12-19",
-      "2026-02-16"
+      "2026-02-18",
+      "2026-04-18"
     ],
     "max_detail_requests": 40
   },
@@ -9617,6 +9617,26 @@
       "countries": [],
       "runtime": 30,
       "genres": []
+    },
+    {
+      "id": 1701357,
+      "title": "発熱タンゴ",
+      "original_title": "発熱タンゴ",
+      "date": "2026-03-31",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/72yilt0NlMFrnIkRz3eeJZei61q.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1701357",
+      "director": "Yoichiro Serizawa",
+      "director_id": 3339721,
+      "cast": [],
+      "countries": [],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-10-21T00:19:37.308415+00:00"
     },
     {
       "id": 991494,

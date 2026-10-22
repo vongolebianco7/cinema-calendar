@@ -49,3 +49,11 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
   else mount();
 })();
+
+/* Load exact logo edge extraction, without changing other theme functionality. */
+(() => {
+  const script=document.createElement('script');
+  script.src=new URL('./cinelva-icon-trim.js?v=20261023-precise-1',document.currentScript.src).href;
+  script.defer=true;
+  document.head.appendChild(script);
+})();

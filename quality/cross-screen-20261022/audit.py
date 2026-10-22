@@ -6,7 +6,7 @@ def summary(rows):
  dates=[str(r.get('end_date') or r.get('date') or r.get('start_date') or '')[:10] for r in rows]
  dates=[d for d in dates if len(d)==10]
  missing=[r.get('title') or r.get('movie') or r.get('name') for r in rows if not any(r.get(k) for k in ('poster','poster_url','poster_path'))]
- keys=collections.Counter((r.get('event'),r.get('date'),r.get('service'),r.get('title') or r.get('movie') or r.get('name')) for r in rows)
+ keys=collections.Counter((r.get('event'),r.get('date'),r.get('service'),r.get('title') or r.get('movie') or r.get('name'),r.get('theater'),r.get('screen'),r.get('start')) for r in rows)
  return dict(rows=len(rows),missing_poster_metadata=len(missing),missing_poster_examples=missing[:12],last_date=max(dates,default=None),months=dict(sorted(collections.Counter(d[:7] for d in dates).items())),duplicate_keys=[dict(key=k,count=v) for k,v in keys.items() if v>1])
 report={'source_sha':'2d47c6f27dd2a406a156e945154aff116e7a5642','as_of':'2026-10-22','scope':'source/data only; no live deployment or browser verification','feeds':{}}
 for n,k in [('movies','movies'),('streaming','movies'),('tv','movies'),('events','events'),('outdoor-events','events'),('revival_screenings','screenings'),('special_screenings','screenings'),('theater_schedules','schedules')]:

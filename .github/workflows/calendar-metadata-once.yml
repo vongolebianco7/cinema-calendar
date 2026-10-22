@@ -1,0 +1,23 @@
+name: Inspect missing movie metadata once
+on:
+  push:
+    branches: [qa/calendar-metadata-20261022]
+    paths: ['quality/calendar-metadata-20261022/inspect.py', '.github/workflows/calendar-metadata-once.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python quality/calendar-metadata-20261022/inspect.py
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: calendar-metadata-diagnostic
+          path: metadata-diagnostic.json

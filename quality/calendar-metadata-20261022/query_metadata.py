@@ -1,6 +1,6 @@
 import concurrent.futures,json,os,pathlib,urllib.parse,urllib.request
 key=os.environ['TMDB_API_KEY'];base='https://api.themoviedb.org/3'
-queries=[('/movie/1591961',{})]
+queries=[]
 out={'metadata':[],'poster_health':[]}
 for path,params in queries:
  try:
@@ -9,7 +9,7 @@ for path,params in queries:
   rows=d.get('results',[d])
   out['metadata'].append({'request':path,'query':params,'results':[{k:m.get(k) for k in ['id','title','original_title','release_date','poster_path']} for m in rows[:8]]})
  except Exception as e:out['metadata'].append({'request':path,'query':params,'error':type(e).__name__})
-urls=[]
+urls=['https://image.tmdb.org/t/p/w500/cru4ROm3U71JAuAH9LqwpAcZPIE.jpg','https://image.tmdb.org/t/p/w500/ucYuml5QqkcGKmWmJj7JpJdsPc1.jpg']
 def check(url):
  try:
   with urllib.request.urlopen(urllib.request.Request(url,method='HEAD'),timeout=8) as r:return {'url':url,'status':r.status}

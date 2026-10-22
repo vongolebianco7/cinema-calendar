@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T10:37:25.468659+00:00",
+  "generated_at": "2026-10-22T21:29:40.688308+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -61,67 +61,6 @@
         "Aaron Chen"
       ],
       "tmdbId": 1361774
-    },
-    {
-      "title": "旅と日々",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.1,
-      "votes": 16,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/d5kqa17dP6UqBBctkXJOsbhHjnm.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 1462735,
-      "tmdb": "https://www.themoviedb.org/movie/1462735",
-      "director": "三宅唱",
-      "director_id": 2223841,
-      "runtime": 89,
-      "genres": [
-        "ドラマ"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "シム・ウンギョン",
-        "河合優実",
-        "髙田万作",
-        "柴田貴哉"
-      ],
-      "tmdbId": 1462735
-    },
-    {
-      "title": "白夜行",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.7,
-      "votes": 18,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/y7U3wCHChO7LIJ3PG7P7O0mWYpY.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 138185,
-      "tmdb": "https://www.themoviedb.org/movie/138185",
-      "director": "深川栄洋",
-      "director_id": 133691,
-      "runtime": 150,
-      "genres": [
-        "ドラマ",
-        "犯罪"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "堀北真希",
-        "高良健吾",
-        "田中哲司",
-        "戸田恵子"
-      ],
-      "tmdbId": 138185
     },
     {
       "title": "G.I.ジョー",
@@ -194,105 +133,6 @@
       "tmdbId": 72559
     },
     {
-      "title": "バットマン ビギンズ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.731,
-      "votes": 23358,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/mpdTFukLMNAALO2j0yfViyoI2TF.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 272,
-      "tmdb": "https://www.themoviedb.org/movie/272",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 140,
-      "genres": [
-        "ドラマ",
-        "犯罪",
-        "アクション"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "クリスチャン・ベール",
-        "マイケル・ケイン",
-        "リーアム・ニーソン",
-        "ケイティ・ホームズ"
-      ],
-      "tmdbId": 272
-    },
-    {
-      "title": "ダークナイト",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 8.537,
-      "votes": 36999,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/nftQJb9550PtYFXhmTs7XiN0QhR.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 155,
-      "tmdb": "https://www.themoviedb.org/movie/155",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 152,
-      "genres": [
-        "アクション",
-        "スリラー",
-        "犯罪"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "クリスチャン・ベール",
-        "ヒース・レジャー",
-        "アーロン・エッカート",
-        "マイケル・ケイン"
-      ],
-      "tmdbId": 155
-    },
-    {
-      "title": "ダークナイト ライジング",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.799,
-      "votes": 25143,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/sJTxiMt4slbmTnQoV5UyA2HlYx4.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 49026,
-      "tmdb": "https://www.themoviedb.org/movie/49026",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 164,
-      "genres": [
-        "アクション",
-        "犯罪",
-        "スリラー"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "クリスチャン・ベール",
-        "ゲイリー・オールドマン",
-        "トム・ハーディ",
-        "ジョセフ・ゴードン＝レヴィット"
-      ],
-      "tmdbId": 49026
-    },
-    {
       "title": "インセプション",
       "date": "2026-09-01",
       "event": "streaming",
@@ -357,72 +197,6 @@
         "ジェシカ・チャステイン"
       ],
       "tmdbId": 157336
-    },
-    {
-      "title": "ダンケルク",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.45,
-      "votes": 18111,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 374720,
-      "tmdb": "https://www.themoviedb.org/movie/374720",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 106,
-      "genres": [
-        "戦争",
-        "アクション",
-        "履歴"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "フィン・ホワイトヘッド",
-        "トム・ハーディ",
-        "マーク・ライランス",
-        "ケネス・ブラナー"
-      ],
-      "tmdbId": 374720
-    },
-    {
-      "title": "テネット",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.172,
-      "votes": 11653,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/azzqSt3XPpRRIYyh0WT6rs2BCe7.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 577922,
-      "tmdb": "https://www.themoviedb.org/movie/577922",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 150,
-      "genres": [
-        "アクション",
-        "スリラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "ジョン・デヴィッド・ワシントン",
-        "ロバート・パティンソン",
-        "エリザベス・デビッキ",
-        "ケネス・ブラナー"
-      ],
-      "tmdbId": 577922
     },
     {
       "title": "インディ・ジョーンズ／クリスタル・スカルの王国",
@@ -517,6 +291,40 @@
       "tmdbId": 339994
     },
     {
+      "title": "シャークネード ラスト・チェーンソー",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 4.4,
+      "votes": 278,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/3344SkOTGT0gsDA6XaVVkibETHa.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 523849,
+      "tmdb": "https://www.themoviedb.org/movie/523849",
+      "director": "アンソニー・Ｃ・フェランテ",
+      "director_id": 85822,
+      "runtime": 86,
+      "genres": [
+        "アクション",
+        "コメディ",
+        "ホラー",
+        "サイエンスフィクション",
+        "テレビ映画"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "cast": [
+        "Ian Ziering",
+        "Tara Reid",
+        "Cassie Scerbo",
+        "ヴィヴィカ・A・フォックス"
+      ],
+      "tmdbId": 523849
+    },
+    {
       "title": "シャークネード ワールド・タイフーン",
       "date": "2026-09-01",
       "event": "streaming",
@@ -552,40 +360,6 @@
       "tmdbId": 438970
     },
     {
-      "title": "シャークネード ラスト・チェーンソー",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 4.4,
-      "votes": 278,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/3344SkOTGT0gsDA6XaVVkibETHa.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 523849,
-      "tmdb": "https://www.themoviedb.org/movie/523849",
-      "director": "アンソニー・Ｃ・フェランテ",
-      "director_id": 85822,
-      "runtime": 86,
-      "genres": [
-        "アクション",
-        "コメディ",
-        "ホラー",
-        "サイエンスフィクション",
-        "テレビ映画"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "cast": [
-        "Ian Ziering",
-        "Tara Reid",
-        "Cassie Scerbo",
-        "ヴィヴィカ・A・フォックス"
-      ],
-      "tmdbId": 523849
-    },
-    {
       "title": "ソーシャル・ネットワーク",
       "date": "2026-09-01",
       "event": "streaming",
@@ -614,6 +388,105 @@
         "ジャスティン・ティンバーレイク"
       ],
       "tmdbId": 37799
+    },
+    {
+      "title": "ダンケルク",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.45,
+      "votes": 18111,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 374720,
+      "tmdb": "https://www.themoviedb.org/movie/374720",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 106,
+      "genres": [
+        "戦争",
+        "アクション",
+        "履歴"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "フィン・ホワイトヘッド",
+        "トム・ハーディ",
+        "マーク・ライランス",
+        "ケネス・ブラナー"
+      ],
+      "tmdbId": 374720
+    },
+    {
+      "title": "ダークナイト",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 8.537,
+      "votes": 36999,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/nftQJb9550PtYFXhmTs7XiN0QhR.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 155,
+      "tmdb": "https://www.themoviedb.org/movie/155",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 152,
+      "genres": [
+        "アクション",
+        "スリラー",
+        "犯罪"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "クリスチャン・ベール",
+        "ヒース・レジャー",
+        "アーロン・エッカート",
+        "マイケル・ケイン"
+      ],
+      "tmdbId": 155
+    },
+    {
+      "title": "ダークナイト ライジング",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.799,
+      "votes": 25143,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/sJTxiMt4slbmTnQoV5UyA2HlYx4.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 49026,
+      "tmdb": "https://www.themoviedb.org/movie/49026",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 164,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "スリラー"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "クリスチャン・ベール",
+        "ゲイリー・オールドマン",
+        "トム・ハーディ",
+        "ジョセフ・ゴードン＝レヴィット"
+      ],
+      "tmdbId": 49026
     },
     {
       "title": "チャーリーとチョコレート工場",
@@ -648,6 +521,39 @@
         "ヘレナ・ボナム・カーター"
       ],
       "tmdbId": 118
+    },
+    {
+      "title": "テネット",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.172,
+      "votes": 11653,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/azzqSt3XPpRRIYyh0WT6rs2BCe7.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 577922,
+      "tmdb": "https://www.themoviedb.org/movie/577922",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 150,
+      "genres": [
+        "アクション",
+        "スリラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "ジョン・デヴィッド・ワシントン",
+        "ロバート・パティンソン",
+        "エリザベス・デビッキ",
+        "ケネス・ブラナー"
+      ],
+      "tmdbId": 577922
     },
     {
       "title": "デーヴァラ",
@@ -710,6 +616,72 @@
         "ザック・チェリー"
       ],
       "tmdbId": 1423191
+    },
+    {
+      "title": "バイオハザード ダムネーション",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.9,
+      "votes": 1031,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/cu3WaOhHgvvyvJ0KN42YrgZpHrX.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 133121,
+      "tmdb": "https://www.themoviedb.org/movie/133121",
+      "director": "神谷誠",
+      "director_id": 74950,
+      "runtime": 100,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "マシュー・マーサー",
+        "コートニー・テイラー",
+        "Robin Sachs",
+        "Dave Wittenberg"
+      ],
+      "tmdbId": 133121
+    },
+    {
+      "title": "バイオハザード ディジェネレーション",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.8,
+      "votes": 1211,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/m9Ey0uILyQD1rM9RibHxpf2T5WC.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 13648,
+      "tmdb": "https://www.themoviedb.org/movie/13648",
+      "director": "神谷誠",
+      "director_id": 74950,
+      "runtime": 97,
+      "genres": [
+        "アニメーション",
+        "ホラー",
+        "アクション",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "Paul Mercier",
+        "Alyson Court",
+        "ローラ・ベイリー",
+        "ロジャー・クレイグ・スミス"
+      ],
+      "tmdbId": 13648
     },
     {
       "title": "バイオハザードII アポカリプス",
@@ -781,39 +753,6 @@
       "tmdbId": 7737
     },
     {
-      "title": "バイオハザード ディジェネレーション",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.8,
-      "votes": 1211,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/m9Ey0uILyQD1rM9RibHxpf2T5WC.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 13648,
-      "tmdb": "https://www.themoviedb.org/movie/13648",
-      "director": "神谷誠",
-      "director_id": 74950,
-      "runtime": 97,
-      "genres": [
-        "アニメーション",
-        "ホラー",
-        "アクション",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "Paul Mercier",
-        "Alyson Court",
-        "ローラ・ベイリー",
-        "ロジャー・クレイグ・スミス"
-      ],
-      "tmdbId": 13648
-    },
-    {
       "title": "バイオハザードIV アフターライフ",
       "date": "2026-09-01",
       "event": "streaming",
@@ -883,37 +822,38 @@
       "tmdbId": 71679
     },
     {
-      "title": "バイオハザード ダムネーション",
+      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.9,
-      "votes": 1031,
+      "score": 5.948,
+      "votes": 2902,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/cu3WaOhHgvvyvJ0KN42YrgZpHrX.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 133121,
-      "tmdb": "https://www.themoviedb.org/movie/133121",
-      "director": "神谷誠",
-      "director_id": 74950,
-      "runtime": 100,
+      "id": 460458,
+      "tmdb": "https://www.themoviedb.org/movie/460458",
+      "director": "Johannes Roberts",
+      "director_id": 100734,
+      "runtime": 107,
       "genres": [
         "アクション",
-        "アニメーション",
-        "サイエンスフィクション",
-        "ホラー"
+        "ホラー",
+        "サイエンスフィクション"
       ],
       "countries": [
-        "Japan"
+        "Germany",
+        "United States of America",
+        "Canada"
       ],
       "cast": [
-        "マシュー・マーサー",
-        "コートニー・テイラー",
-        "Robin Sachs",
-        "Dave Wittenberg"
+        "カヤ・スコデラリオ",
+        "ハナ・ジョン＝カーメン",
+        "ロビー・アメル",
+        "Tom Hopper"
       ],
-      "tmdbId": 133121
+      "tmdbId": 460458
     },
     {
       "title": "バイオハザード：ザ・ファイナル",
@@ -951,6 +891,39 @@
       "tmdbId": 173897
     },
     {
+      "title": "バイオハザード：デスアイランド",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.264,
+      "votes": 1156,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1083862,
+      "tmdb": "https://www.themoviedb.org/movie/1083862",
+      "director": "羽住英一郎",
+      "director_id": 589915,
+      "runtime": 91,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "マシュー・マーサー",
+        "Nicole Tompkins",
+        "Kevin Dorman",
+        "Stephanie Panisello"
+      ],
+      "tmdbId": 1083862
+    },
+    {
       "title": "バイオハザード：ヴェンデッタ",
       "date": "2026-09-01",
       "event": "streaming",
@@ -986,71 +959,97 @@
       "tmdbId": 400136
     },
     {
-      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
+      "title": "バットマン ビギンズ",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 5.948,
-      "votes": 2902,
+      "score": 7.731,
+      "votes": 23358,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/mpdTFukLMNAALO2j0yfViyoI2TF.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 460458,
-      "tmdb": "https://www.themoviedb.org/movie/460458",
-      "director": "Johannes Roberts",
-      "director_id": 100734,
-      "runtime": 107,
+      "id": 272,
+      "tmdb": "https://www.themoviedb.org/movie/272",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 140,
       "genres": [
-        "アクション",
-        "ホラー",
-        "サイエンスフィクション"
+        "ドラマ",
+        "犯罪",
+        "アクション"
       ],
       "countries": [
-        "Germany",
-        "United States of America",
-        "Canada"
+        "United Kingdom",
+        "United States of America"
       ],
       "cast": [
-        "カヤ・スコデラリオ",
-        "ハナ・ジョン＝カーメン",
-        "ロビー・アメル",
-        "Tom Hopper"
+        "クリスチャン・ベール",
+        "マイケル・ケイン",
+        "リーアム・ニーソン",
+        "ケイティ・ホームズ"
       ],
-      "tmdbId": 460458
+      "tmdbId": 272
     },
     {
-      "title": "バイオハザード：デスアイランド",
+      "title": "宝くじの不時着 1等当選くじが飛んでいきました",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.264,
-      "votes": 1156,
+      "score": 6.8,
+      "votes": 54,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/bcTYSHyauco1BDaEm9HIrcN6z1d.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 1083862,
-      "tmdb": "https://www.themoviedb.org/movie/1083862",
-      "director": "羽住英一郎",
-      "director_id": 589915,
-      "runtime": 91,
+      "id": 821153,
+      "tmdb": "https://www.themoviedb.org/movie/821153",
+      "director": "박규태",
+      "director_id": 552154,
+      "runtime": 113,
       "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション",
-        "ホラー"
+        "コメディ"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "cast": [
+        "コ・ギョンピョ",
+        "イ・イギョン",
+        "음문석",
+        "パク・セワン"
+      ],
+      "tmdbId": 821153
+    },
+    {
+      "title": "旅と日々",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.1,
+      "votes": 16,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/d5kqa17dP6UqBBctkXJOsbhHjnm.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1462735,
+      "tmdb": "https://www.themoviedb.org/movie/1462735",
+      "director": "三宅唱",
+      "director_id": 2223841,
+      "runtime": 89,
+      "genres": [
+        "ドラマ"
       ],
       "countries": [
         "Japan"
       ],
       "cast": [
-        "マシュー・マーサー",
-        "Nicole Tompkins",
-        "Kevin Dorman",
-        "Stephanie Panisello"
+        "シム・ウンギョン",
+        "河合優実",
+        "髙田万作",
+        "柴田貴哉"
       ],
-      "tmdbId": 1083862
+      "tmdbId": 1462735
     },
     {
       "title": "極限境界線 救出までの18日間",
@@ -1085,66 +1084,66 @@
       "tmdbId": 606400
     },
     {
-      "title": "宝くじの不時着 1等当選くじが飛んでいきました",
+      "title": "白夜行",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.8,
-      "votes": 54,
+      "score": 6.7,
+      "votes": 18,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/bcTYSHyauco1BDaEm9HIrcN6z1d.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/y7U3wCHChO7LIJ3PG7P7O0mWYpY.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 821153,
-      "tmdb": "https://www.themoviedb.org/movie/821153",
-      "director": "박규태",
-      "director_id": 552154,
-      "runtime": 113,
+      "id": 138185,
+      "tmdb": "https://www.themoviedb.org/movie/138185",
+      "director": "深川栄洋",
+      "director_id": 133691,
+      "runtime": 150,
       "genres": [
-        "コメディ"
+        "ドラマ",
+        "犯罪"
       ],
       "countries": [
-        "South Korea"
+        "Japan"
       ],
       "cast": [
-        "コ・ギョンピョ",
-        "イ・イギョン",
-        "음문석",
-        "パク・セワン"
+        "堀北真希",
+        "高良健吾",
+        "田中哲司",
+        "戸田恵子"
       ],
-      "tmdbId": 821153
+      "tmdbId": 138185
     },
     {
-      "title": "悪夢の系譜【4Kデジタル修復版】",
+      "title": "I Like Movies アイ・ライク・ムービーズ",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.2,
-      "votes": 127,
+      "score": 6.908,
+      "votes": 87,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/7qDM0NnAI07S0JPHezTVVvit4S1.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/8Gu30dMoeLhz7fulx1uohyIOlqT.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
       "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
-      "id": 84993,
-      "tmdb": "https://www.themoviedb.org/movie/84993",
-      "director": "Tony Williams",
-      "director_id": 1192612,
-      "runtime": 89,
+      "id": 980996,
+      "tmdb": "https://www.themoviedb.org/movie/980996",
+      "director": "Chandler Levack",
+      "director_id": 1879567,
+      "runtime": 99,
       "genres": [
-        "ホラー",
-        "謎"
+        "コメディ",
+        "ドラマ"
       ],
       "countries": [
-        "Australia",
-        "New Zealand"
+        "Canada"
       ],
       "cast": [
-        "Jacki Kerin",
-        "John Jarratt",
-        "Alex Scott",
-        "Gerda Nicolson"
+        "Isaiah Lehtinen",
+        "Romina D'Ugo",
+        "Krista Bridges",
+        "パーシー・ハインズ・ホワイト"
       ],
-      "tmdbId": 84993
+      "tmdbId": 980996
     },
     {
       "title": "ハウス・オブ・ザ・デビル",
@@ -1214,35 +1213,36 @@
       "tmdbId": 4588
     },
     {
-      "title": "I Like Movies アイ・ライク・ムービーズ",
+      "title": "悪夢の系譜【4Kデジタル修復版】",
       "date": "2026-09-01",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.908,
-      "votes": 87,
+      "score": 6.2,
+      "votes": 127,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/8Gu30dMoeLhz7fulx1uohyIOlqT.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/7qDM0NnAI07S0JPHezTVVvit4S1.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
       "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
-      "id": 980996,
-      "tmdb": "https://www.themoviedb.org/movie/980996",
-      "director": "Chandler Levack",
-      "director_id": 1879567,
-      "runtime": 99,
+      "id": 84993,
+      "tmdb": "https://www.themoviedb.org/movie/84993",
+      "director": "Tony Williams",
+      "director_id": 1192612,
+      "runtime": 89,
       "genres": [
-        "コメディ",
-        "ドラマ"
+        "ホラー",
+        "謎"
       ],
       "countries": [
-        "Canada"
+        "Australia",
+        "New Zealand"
       ],
       "cast": [
-        "Isaiah Lehtinen",
-        "Romina D'Ugo",
-        "Krista Bridges",
-        "パーシー・ハインズ・ホワイト"
+        "Jacki Kerin",
+        "John Jarratt",
+        "Alex Scott",
+        "Gerda Nicolson"
       ],
-      "tmdbId": 980996
+      "tmdbId": 84993
     },
     {
       "title": "木の上の軍隊",
@@ -1306,6 +1306,23 @@
       "tmdbId": 1651162
     },
     {
+      "title": "Stray Kids : The dominATE Experience",
+      "date": "2026-09-02",
+      "event": "streaming",
+      "service": "Disney+",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/cx2dZzVe7HfEUEhQNTWhSmnwI21.jpg",
+      "source": "Disney+公式9月ラインナップ",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "tmdbId": 1600421,
+      "tmdb": "https://www.themoviedb.org/movie/1600421",
+      "release_year": 2026,
+      "original_title": "스트레이 키즈: 더 도미네이트 익스피리언스",
+      "identity_verified_at": "2026-10-22"
+    },
+    {
       "title": "スター・ウォーズ／マンダロリアン・アンド・グローグー",
       "date": "2026-09-02",
       "event": "streaming",
@@ -1338,21 +1355,36 @@
       "tmdbId": 1228710
     },
     {
-      "title": "Stray Kids : The dominATE Experience",
+      "title": "ザ・ランナー",
       "date": "2026-09-02",
       "event": "streaming",
-      "service": "Disney+",
-      "score": 0,
-      "votes": 0,
+      "service": "Prime Video",
+      "score": 6.736,
+      "votes": 677,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/cx2dZzVe7HfEUEhQNTWhSmnwI21.jpg",
-      "source": "Disney+公式9月ラインナップ",
-      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
-      "tmdbId": 1600421,
-      "tmdb": "https://www.themoviedb.org/movie/1600421",
-      "release_year": 2026,
-      "original_title": "스트레이 키즈: 더 도미네이트 익스피리언스",
-      "identity_verified_at": "2026-10-22"
+      "poster": "https://image.tmdb.org/t/p/w500/mJoXKYrKnL2Ibtf90rxjzuV4AW5.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1386315,
+      "tmdb": "https://www.themoviedb.org/movie/1386315",
+      "director": "ケヴィン・マクドナルド",
+      "director_id": 17350,
+      "runtime": 86,
+      "genres": [
+        "スリラー",
+        "アクション"
+      ],
+      "countries": [
+        "United States of America",
+        "United Kingdom"
+      ],
+      "cast": [
+        "ガル・ガドット",
+        "ダミアン・ルイス",
+        "Rory Wilmot",
+        "アルフレッド・イーノック"
+      ],
+      "tmdbId": 1386315
     },
     {
       "title": "赤羽骨子のボディガード",
@@ -1385,38 +1417,6 @@
         "奥平大兼"
       ],
       "tmdbId": 1302106
-    },
-    {
-      "title": "ザ・ランナー",
-      "date": "2026-09-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.736,
-      "votes": 677,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/mJoXKYrKnL2Ibtf90rxjzuV4AW5.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 1386315,
-      "tmdb": "https://www.themoviedb.org/movie/1386315",
-      "director": "ケヴィン・マクドナルド",
-      "director_id": 17350,
-      "runtime": 86,
-      "genres": [
-        "スリラー",
-        "アクション"
-      ],
-      "countries": [
-        "United States of America",
-        "United Kingdom"
-      ],
-      "cast": [
-        "ガル・ガドット",
-        "ダミアン・ルイス",
-        "Rory Wilmot",
-        "アルフレッド・イーノック"
-      ],
-      "tmdbId": 1386315
     },
     {
       "title": "1980 僕たちの光州事件",
@@ -1511,36 +1511,6 @@
       "tmdbId": 1137844
     },
     {
-      "title": "落下音",
-      "date": "2026-09-04",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 6.988,
-      "votes": 128,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/AkoaTwbFi8izwZaAs0yj6vEhWMB.jpg",
-      "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
-      "id": 1221061,
-      "tmdb": "https://www.themoviedb.org/movie/1221061",
-      "director": "Mascha Schilinski",
-      "director_id": 1756497,
-      "runtime": 148,
-      "genres": [
-        "ドラマ"
-      ],
-      "countries": [
-        "Germany"
-      ],
-      "cast": [
-        "Luise Heyer",
-        "レナ・ウルツェンドフスキ",
-        "Claudia Geisler-Bading",
-        "Lea Drinda"
-      ],
-      "tmdbId": 1221061
-    },
-    {
       "title": "未来",
       "date": "2026-09-04",
       "event": "streaming",
@@ -1569,6 +1539,36 @@
         "細田佳央太"
       ],
       "tmdbId": 1580374
+    },
+    {
+      "title": "落下音",
+      "date": "2026-09-04",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 6.988,
+      "votes": 128,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/AkoaTwbFi8izwZaAs0yj6vEhWMB.jpg",
+      "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
+      "id": 1221061,
+      "tmdb": "https://www.themoviedb.org/movie/1221061",
+      "director": "Mascha Schilinski",
+      "director_id": 1756497,
+      "runtime": 148,
+      "genres": [
+        "ドラマ"
+      ],
+      "countries": [
+        "Germany"
+      ],
+      "cast": [
+        "Luise Heyer",
+        "レナ・ウルツェンドフスキ",
+        "Claudia Geisler-Bading",
+        "Lea Drinda"
+      ],
+      "tmdbId": 1221061
     },
     {
       "title": "スラムドッグス",
@@ -1664,38 +1664,6 @@
       "tmdbId": 1023922
     },
     {
-      "title": "踊る大捜査線 THE MOVIE 湾岸署史上最悪の3日間!",
-      "date": "2026-09-11",
-      "event": "streaming",
-      "service": "Hulu",
-      "score": 6.5,
-      "votes": 30,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/4pveFVl8gyGrnfD4Tr8icw2fAjY.jpg",
-      "source": "Hulu公式",
-      "source_url": "https://www.hulu.jp/",
-      "id": 55382,
-      "tmdb": "https://www.themoviedb.org/movie/55382",
-      "director": "本広克行",
-      "director_id": 88784,
-      "runtime": 119,
-      "genres": [
-        "コメディ",
-        "ドラマ",
-        "犯罪"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "織田裕二",
-        "柳葉敏郎",
-        "深津絵里",
-        "水野美紀"
-      ],
-      "tmdbId": 55382
-    },
-    {
       "title": "交渉人 真下正義",
       "date": "2026-09-11",
       "event": "streaming",
@@ -1757,6 +1725,38 @@
         "柄本明"
       ],
       "tmdbId": 45070
+    },
+    {
+      "title": "踊る大捜査線 THE MOVIE 湾岸署史上最悪の3日間!",
+      "date": "2026-09-11",
+      "event": "streaming",
+      "service": "Hulu",
+      "score": 6.5,
+      "votes": 30,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/4pveFVl8gyGrnfD4Tr8icw2fAjY.jpg",
+      "source": "Hulu公式",
+      "source_url": "https://www.hulu.jp/",
+      "id": 55382,
+      "tmdb": "https://www.themoviedb.org/movie/55382",
+      "director": "本広克行",
+      "director_id": 88784,
+      "runtime": 119,
+      "genres": [
+        "コメディ",
+        "ドラマ",
+        "犯罪"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "織田裕二",
+        "柳葉敏郎",
+        "深津絵里",
+        "水野美紀"
+      ],
+      "tmdbId": 55382
     },
     {
       "title": "俺ではない炎上",
@@ -1998,34 +1998,6 @@
       "identity_verified_at": "2026-10-22"
     },
     {
-      "title": "免許返納!?",
-      "date": "2026-09-18",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/zhXGbk0YUHiVOTbiqQPO4fxIMFo.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "tmdbId": 1654870,
-      "tmdb": "https://www.themoviedb.org/movie/1654870",
-      "release_year": 2026,
-      "year": 2026,
-      "original_title": "免許返納!?",
-      "director": "河合勇人",
-      "director_id": 1500346,
-      "runtime": 119,
-      "genres": [
-        "コメディ",
-        "ドラマ"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "identity_verified_at": "2026-10-20"
-    },
-    {
       "title": "スマッシング・マシーン",
       "date": "2026-09-18",
       "event": "streaming",
@@ -2081,6 +2053,34 @@
       "countries": [
         "United States of America",
         "United Kingdom"
+      ],
+      "identity_verified_at": "2026-10-20"
+    },
+    {
+      "title": "免許返納!?",
+      "date": "2026-09-18",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/zhXGbk0YUHiVOTbiqQPO4fxIMFo.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "tmdbId": 1654870,
+      "tmdb": "https://www.themoviedb.org/movie/1654870",
+      "release_year": 2026,
+      "year": 2026,
+      "original_title": "免許返納!?",
+      "director": "河合勇人",
+      "director_id": 1500346,
+      "runtime": 119,
+      "genres": [
+        "コメディ",
+        "ドラマ"
+      ],
+      "countries": [
+        "Japan"
       ],
       "identity_verified_at": "2026-10-20"
     },
@@ -2359,6 +2359,168 @@
       "identity_verified_at": "2026-10-20"
     },
     {
+      "title": "キャンプ・ロック３",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "Disney+",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/i8mi7niHyFOBkAuYfnSb8sW2Gag.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "type": "見放題",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1493400,
+      "tmdb": "https://www.themoviedb.org/movie/1493400",
+      "release_year": 2026,
+      "original_title": "Camp Rock 3",
+      "identity_verified_at": "2026-10-22"
+    },
+    {
+      "title": "名探偵ミランダ 大富豪殺人の招待状",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "Lemino",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/ucYuml5QqkcGKmWmJj7JpJdsPc1.jpg",
+      "source": "公式配給会社の配信開始発表",
+      "source_url": "https://www.asmik-ace.co.jp/news/contents/19496/",
+      "type": "レンタル",
+      "checked_at": "2026-10-22",
+      "tmdbId": 989473,
+      "tmdb": "https://www.themoviedb.org/movie/989473",
+      "release_year": 2023,
+      "original_title": "Invitation to a Murder",
+      "identity_verified_at": "2026-10-22"
+    },
+    {
+      "title": "ラブ≠コメディ",
+      "date": "2026-10-03",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/zARaQtuRTBOCnnreB6P9WUVOIgk.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "type": "レンタル",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1701409,
+      "tmdb": "https://www.themoviedb.org/movie/1701409"
+    },
+    {
+      "title": "ウィキッド 永遠の約束",
+      "date": "2026-10-03",
+      "service": "WOWOWオンデマンド",
+      "type": "同時配信",
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "verified": true,
+      "content_type": "movie",
+      "event": "streaming",
+      "tmdbId": 967941,
+      "tmdb": "https://www.themoviedb.org/movie/967941",
+      "poster": "https://image.tmdb.org/t/p/w500/qzKgabRKPsMtFYqbjTLc37mwbBj.jpg",
+      "score": 6.568,
+      "votes": 1193,
+      "checked_at": "2026-10-22",
+      "time": "20:00"
+    },
+    {
+      "title": "山口くんはワルくない",
+      "date": "2026-10-05",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/tCDLAVDbxgP3bcseMAh5aehQZZX.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/yamaguchikun-2026-10-05",
+      "type": "レンタル",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1654395,
+      "tmdb": "https://www.themoviedb.org/movie/1654395",
+      "release_year": 2026
+    },
+    {
+      "title": "スパイダーマン：ブランド・ニュー・デイ",
+      "date": "2026-10-06",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/hvbs76wGMZYqJSvaRps5jDzHUhN.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "type": "レンタル",
+      "checked_at": "2026-10-22",
+      "tmdbId": 969681,
+      "tmdb": "https://www.themoviedb.org/movie/969681",
+      "release_year": 2026
+    },
+    {
+      "title": "わたしの幸せな結婚",
+      "date": "2026-10-07",
+      "event": "streaming",
+      "service": "Disney+",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/7zCBnKErHlERF2TY1SrTgZjmfBb.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "type": "見放題",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1037348,
+      "tmdb": "https://www.themoviedb.org/movie/1037348",
+      "release_year": 2023
+    },
+    {
+      "title": "ジョン・クランコ バレエの革命児",
+      "date": "2026-10-07",
+      "event": "streaming",
+      "service": "Lemino",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/cru4ROm3U71JAuAH9LqwpAcZPIE.jpg",
+      "source": "公式配給会社の配信開始発表",
+      "source_url": "https://www.asmik-ace.co.jp/news/contents/19524/",
+      "type": "レンタル",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1182881,
+      "tmdb": "https://www.themoviedb.org/movie/1182881",
+      "release_year": 2024,
+      "original_title": "Cranko",
+      "identity_verified_at": "2026-10-22"
+    },
+    {
+      "title": "映画 この素晴らしい世界に祝福を！紅伝説",
+      "date": "2026-10-09",
+      "service": "ABEMA",
+      "type": "期間限定無料",
+      "source": "AbemaTV公式 無料配信企画",
+      "source_url": "https://abematv.co.jp/posts/59335752/",
+      "verified": true,
+      "content_type": "movie",
+      "event": "streaming",
+      "score": 0,
+      "votes": 0,
+      "checked_at": "2026-10-22",
+      "tmdbId": 532067,
+      "tmdb": "https://www.themoviedb.org/movie/532067",
+      "release_year": 2019,
+      "original_title": "映画 この素晴らしい世界に祝福を！紅伝説",
+      "identity_verified_at": "2026-10-22",
+      "poster": "https://image.tmdb.org/t/p/w500/t37cFbjqWzcteiA3XrkNOUswPLa.jpg"
+    },
+    {
       "title": "Matchbox The Movie",
       "date": "2026-10-09",
       "event": "streaming",
@@ -2386,6 +2548,39 @@
         "United States of America"
       ],
       "identity_verified_at": "2026-10-20"
+    },
+    {
+      "title": "オアシス：ドント・ルック・バック・イン・アンガー",
+      "date": "2026-10-09",
+      "event": "streaming",
+      "service": "Disney+",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/5XoHhKZ1IROW6f5UlRpADHnTL2l.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "type": "見放題",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1447853,
+      "tmdb": "https://www.themoviedb.org/movie/1447853",
+      "release_year": 2026
+    },
+    {
+      "title": "ウィキッド ふたりの魔女",
+      "date": "2026-10-11",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/abWp6QofDjD8fDEHV92BZnznj4.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "type": "見放題",
+      "checked_at": "2026-10-22",
+      "tmdbId": 402431,
+      "tmdb": "https://www.themoviedb.org/movie/402431"
     },
     {
       "title": "スオミの話をしよう",
@@ -2590,6 +2785,24 @@
       "identity_verified_at": "2026-10-20"
     },
     {
+      "title": "てっぺんの向こうにあなたがいる",
+      "date": "2026-10-24",
+      "service": "WOWOWオンデマンド",
+      "type": "同時配信",
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "verified": true,
+      "content_type": "movie",
+      "event": "streaming",
+      "tmdbId": 1532481,
+      "tmdb": "https://www.themoviedb.org/movie/1532481",
+      "poster": "https://image.tmdb.org/t/p/w500/5GnO3HWgamhpX5BNrgE8RHFzqZn.jpg",
+      "score": 10,
+      "votes": 1,
+      "checked_at": "2026-10-22",
+      "time": "20:00"
+    },
+    {
       "title": "ビューティフル・ジャーニー ふたりの時空旅行",
       "date": "2026-10-25",
       "event": "streaming",
@@ -2620,6 +2833,25 @@
         "Ireland"
       ],
       "identity_verified_at": "2026-10-20"
+    },
+    {
+      "title": "脳内ニューヨーク",
+      "date": "2026-10-25",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/jQQ6JIZ8cFb6rMsRpjcqggKEV49.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "type": "配信",
+      "checked_at": "2026-10-22",
+      "tmdbId": 4960,
+      "tmdb": "https://www.themoviedb.org/movie/4960",
+      "release_year": 2008,
+      "original_title": "Synecdoche, New York",
+      "identity_verified_at": "2026-10-22"
     },
     {
       "title": "ロード・オブ・ザ・リング",
@@ -2765,6 +2997,25 @@
       "tmdb": "https://www.themoviedb.org/movie/1596275",
       "release_year": 2026,
       "original_title": "Drive - The Pretenders",
+      "identity_verified_at": "2026-10-22"
+    },
+    {
+      "title": "PEACOCK／ピーコック",
+      "date": "2026-10-28",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/jXAth8yqkjtI1GHeqy9IlDZtlV9.jpg",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "type": "配信",
+      "checked_at": "2026-10-22",
+      "tmdbId": 1245728,
+      "tmdb": "https://www.themoviedb.org/movie/1245728",
+      "release_year": 2025,
+      "original_title": "Pfau - Bin ich echt?",
       "identity_verified_at": "2026-10-22"
     },
     {
@@ -2934,219 +3185,6 @@
         "Japan"
       ],
       "identity_verified_at": "2026-10-20"
-    },
-    {
-      "title": "キャンプ・ロック３",
-      "date": "2026-10-02",
-      "event": "streaming",
-      "service": "Disney+",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/i8mi7niHyFOBkAuYfnSb8sW2Gag.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
-      "type": "見放題",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1493400,
-      "tmdb": "https://www.themoviedb.org/movie/1493400",
-      "release_year": 2026,
-      "original_title": "Camp Rock 3",
-      "identity_verified_at": "2026-10-22"
-    },
-    {
-      "title": "ラブ≠コメディ",
-      "date": "2026-10-03",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/zARaQtuRTBOCnnreB6P9WUVOIgk.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
-      "type": "レンタル",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1701409,
-      "tmdb": "https://www.themoviedb.org/movie/1701409"
-    },
-    {
-      "title": "山口くんはワルくない",
-      "date": "2026-10-05",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/tCDLAVDbxgP3bcseMAh5aehQZZX.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/yamaguchikun-2026-10-05",
-      "type": "レンタル",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1654395,
-      "tmdb": "https://www.themoviedb.org/movie/1654395",
-      "release_year": 2026
-    },
-    {
-      "title": "スパイダーマン：ブランド・ニュー・デイ",
-      "date": "2026-10-06",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/hvbs76wGMZYqJSvaRps5jDzHUhN.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
-      "type": "レンタル",
-      "checked_at": "2026-10-22",
-      "tmdbId": 969681,
-      "tmdb": "https://www.themoviedb.org/movie/969681",
-      "release_year": 2026
-    },
-    {
-      "title": "わたしの幸せな結婚",
-      "date": "2026-10-07",
-      "event": "streaming",
-      "service": "Disney+",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/7zCBnKErHlERF2TY1SrTgZjmfBb.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
-      "type": "見放題",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1037348,
-      "tmdb": "https://www.themoviedb.org/movie/1037348",
-      "release_year": 2023
-    },
-    {
-      "title": "オアシス：ドント・ルック・バック・イン・アンガー",
-      "date": "2026-10-09",
-      "event": "streaming",
-      "service": "Disney+",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/5XoHhKZ1IROW6f5UlRpADHnTL2l.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
-      "type": "見放題",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1447853,
-      "tmdb": "https://www.themoviedb.org/movie/1447853",
-      "release_year": 2026
-    },
-    {
-      "title": "ウィキッド ふたりの魔女",
-      "date": "2026-10-11",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/abWp6QofDjD8fDEHV92BZnznj4.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
-      "type": "見放題",
-      "checked_at": "2026-10-22",
-      "tmdbId": 402431,
-      "tmdb": "https://www.themoviedb.org/movie/402431"
-    },
-    {
-      "title": "脳内ニューヨーク",
-      "date": "2026-10-25",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/jQQ6JIZ8cFb6rMsRpjcqggKEV49.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
-      "type": "配信",
-      "checked_at": "2026-10-22",
-      "tmdbId": 4960,
-      "tmdb": "https://www.themoviedb.org/movie/4960",
-      "release_year": 2008,
-      "original_title": "Synecdoche, New York",
-      "identity_verified_at": "2026-10-22"
-    },
-    {
-      "title": "PEACOCK／ピーコック",
-      "date": "2026-10-28",
-      "event": "streaming",
-      "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/jXAth8yqkjtI1GHeqy9IlDZtlV9.jpg",
-      "source": "公式配信発表（2026-10-22確認）",
-      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
-      "type": "配信",
-      "checked_at": "2026-10-22",
-      "tmdbId": 1245728,
-      "tmdb": "https://www.themoviedb.org/movie/1245728",
-      "release_year": 2025,
-      "original_title": "Pfau - Bin ich echt?",
-      "identity_verified_at": "2026-10-22"
-    },
-    {
-      "title": "映画 この素晴らしい世界に祝福を！紅伝説",
-      "date": "2026-10-09",
-      "service": "ABEMA",
-      "type": "期間限定無料",
-      "source": "AbemaTV公式 無料配信企画",
-      "source_url": "https://abematv.co.jp/posts/59335752/",
-      "verified": true,
-      "content_type": "movie",
-      "event": "streaming",
-      "score": 0,
-      "votes": 0,
-      "checked_at": "2026-10-22",
-      "tmdbId": 532067,
-      "tmdb": "https://www.themoviedb.org/movie/532067",
-      "release_year": 2019,
-      "original_title": "映画 この素晴らしい世界に祝福を！紅伝説",
-      "identity_verified_at": "2026-10-22",
-      "poster": "https://image.tmdb.org/t/p/w500/t37cFbjqWzcteiA3XrkNOUswPLa.jpg"
-    },
-    {
-      "title": "ウィキッド 永遠の約束",
-      "date": "2026-10-03",
-      "service": "WOWOWオンデマンド",
-      "type": "同時配信",
-      "source": "WOWOW公式 2026年10月メガヒット劇場",
-      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
-      "verified": true,
-      "content_type": "movie",
-      "event": "streaming",
-      "tmdbId": 967941,
-      "tmdb": "https://www.themoviedb.org/movie/967941",
-      "poster": "https://image.tmdb.org/t/p/w500/qzKgabRKPsMtFYqbjTLc37mwbBj.jpg",
-      "score": 6.568,
-      "votes": 1193,
-      "checked_at": "2026-10-22",
-      "time": "20:00"
-    },
-    {
-      "title": "てっぺんの向こうにあなたがいる",
-      "date": "2026-10-24",
-      "service": "WOWOWオンデマンド",
-      "type": "同時配信",
-      "source": "WOWOW公式 2026年10月メガヒット劇場",
-      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
-      "verified": true,
-      "content_type": "movie",
-      "event": "streaming",
-      "tmdbId": 1532481,
-      "tmdb": "https://www.themoviedb.org/movie/1532481",
-      "poster": "https://image.tmdb.org/t/p/w500/5GnO3HWgamhpX5BNrgE8RHFzqZn.jpg",
-      "score": 10,
-      "votes": 1,
-      "checked_at": "2026-10-22",
-      "time": "20:00"
     }
   ]
 }

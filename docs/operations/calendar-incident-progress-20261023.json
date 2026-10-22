@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "scope": "Reported calendar defects and confirmed cross-screen regressions; source/main integration only. Vercel and global product completeness excluded.",
+  "tasks": [
+    {
+      "id": "eye-contrast",
+      "title": "鑑賞マークの可読性",
+      "status": "merged",
+      "pr": 475
+    },
+    {
+      "id": "streaming-posters",
+      "title": "配信作品ポスターの補完",
+      "status": "in_progress",
+      "remaining": "TMDB1591961 has no poster; five original missing identities repaired in PR473."
+    },
+    {
+      "id": "suomi-deduplication",
+      "title": "スオミの同日同サービス重複",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "streaming-providers",
+      "title": "不足サービスの公式日付付き映画情報",
+      "status": "pr_created",
+      "remaining": "Two Lemino films with explicit dates/provider list found in official distributor announcements; pending source/main verification.",
+      "sources": [
+        "https://www.asmik-ace.co.jp/news/contents/19524/",
+        "https://www.asmik-ace.co.jp/news/contents/19496/"
+      ]
+    },
+    {
+      "id": "november-tv",
+      "title": "11月以降のテレビ放映",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "festival-bar",
+      "title": "映画祭イベントバーの可読性",
+      "status": "merged",
+      "pr": 475
+    },
+    {
+      "id": "december-festivals",
+      "title": "12月以降の映画祭日程",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "event-coverage",
+      "title": "屋外イベント日程の補充",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "non-hibiya-films",
+      "title": "日比谷以外のイベント上映作品",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "stale-theaters",
+      "title": "期限切れ映画館時刻の露出",
+      "status": "merged",
+      "evidence": "Existing freshness/future-date filter and official links verified; no new fix counted."
+    },
+    {
+      "id": "festival-extractor",
+      "title": "公式イベント構造化データ取込",
+      "status": "merged",
+      "pr": 475
+    },
+    {
+      "id": "truthful-freshness",
+      "title": "確認ゼロ時の更新日時維持",
+      "status": "merged",
+      "pr": 473
+    },
+    {
+      "id": "calendar-detail-contrast",
+      "title": "映画祭・イベント詳細カードの可読性",
+      "status": "ci_passed",
+      "pr": 476,
+      "evidence": "Actual rendered title contrast1.003:1 reproduced; local quality gate passes, browser CI pending."
+    }
+  ],
+  "metrics": {
+    "total_tasks": 13,
+    "completed_tasks": 10,
+    "remaining_tasks": 3,
+    "confirmed_merged_fixes": 10,
+    "completion_percent": 76.9
+  },
+  "notes": [
+    "Task count increased from12 to13 after detailed screenshot review found the detail-card defect.",
+    "Completion requires the relevant repair merged after CI; pending implementations are not counted.",
+    "These metrics are not the prior32-gate release ledger or a product-quality estimate."
+  ],
+  "as_of": "2026-10-22T21:30:05.697Z"
+}

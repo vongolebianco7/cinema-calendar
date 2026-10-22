@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T10:41:43.193521+00:00",
+  "updated_at": "2026-10-22T21:30:05.697Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "branch": "fix/calendar-cross-screen-20261022",
-  "head_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "pull_request": 473,
+  "base_sha": "0f0250ffb84b0c710286be4ea0188742b08f1b3c",
+  "branch": "fix/lemino-dated-film-data-20261023",
+  "head_sha": "be63fa432313b4edab90be69347261d15b5b484f",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -547,6 +547,13 @@
       "pull_request": 437,
       "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate.",
       "ci": "All9 required Actions succeeded at f189d585; squash merged as f6b71c88. Chromium/WebKit frontend/mobile/theme, backup, completeness, Python, smoke, brand and scorecard passed."
+    },
+    {
+      "id": "P0-CALENDAR-INCIDENT-20261022",
+      "title": "Repair reported calendar defects and matching cross-screen failures",
+      "status": "in_progress",
+      "acceptance": "13-item incident ledger; merged after required CI, with unavailable source facts explicitly retained as open.",
+      "ci": "475 and473 merged;473 final required4/mobile/Python/contract passed. 476 source1a417676 required4/mobile/Python/contract passed with actual rendered detail-card regression; receiptbe63fa43 CI pending."
     }
   ],
   "verification": [
@@ -697,6 +704,10 @@
     {
       "check": "Executor recovery and safe artifact fallback",
       "result": "Local executor disconnected and returned environment_offline on three checks. No lost source: f11/176 source+receipt saved remotely. A bounded QA-only branch downloaded existing run39740981085 artifact12409767655 via GitHub actions/download-artifact, preserved exact8 source PNGs plus overview/footer comparisons, and made them readable through base64 GitHub file API. Run39748667542 success. Latest4profiles and both comparison sheets reviewed before merge. QA branch/workflow was not merged into production main."
+    },
+    {
+      "check": "Calendar incident source repair and independent screenshot review",
+      "result": "PR473 merged0f0250ff. Source ad574 all7 workflows passed. Finalafde required4/mobile/Python/contract passed after a package-mirror timeout rerun. Optional performance score failed1081/1064ms against1000ms; independent476source passed991/944ms with no threshold change. Actual light detail title1.003:1 reproduced and repaired; Chromium/WebKit rendered headings/dates/body/links/film text assertions passed. Local full Python161/161 passed."
     }
   ],
   "deployment": {
@@ -722,7 +733,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Finish exact-source CI and receipt for PR473, integrate verified calendar data additions, then repair remaining provider coverage and unavailable poster handling. Vercel excluded.",
+  "next_action": "Finish PR476 final-head checks and merge. Verify/merge the Lemino data branch with an exact-source receipt and final-head CI. Re-read live main/PR states before counting pending tasks. Preserve the actual-poster gap for1591961; do not substitute unrelated art. Vercel remains excluded.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -755,28 +766,25 @@
     "github": "available"
   },
   "calendar_regression_repair": {
-    "total_tasks": 12,
-    "completed_tasks": 0,
-    "remaining_tasks": 12,
-    "implemented_changes": 6,
-    "completion_percent": 0,
-    "acceptance": "Only verified and merged fixes count as complete. Diagnostic coverage is not product completeness.",
-    "source_pr": 473,
-    "data_branch": "fix/calendar-source-data-20261022",
-    "open": [
-      "light review icon across lists",
-      "streaming posters",
-      "mixed-identity duplicate",
-      "provider coverage",
-      "TV future dates",
-      "festival/event bar contrast",
-      "future festivals",
-      "outdoor coverage",
-      "non-Hibiya film details",
-      "expired theater data",
-      "official JSON-LD extractor",
-      "truthful update freshness"
+    "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
+    "total_tasks": 13,
+    "completed_tasks": 10,
+    "remaining_tasks": 3,
+    "confirmed_merged_fixes": 10,
+    "implemented_changes": 12,
+    "completion_percent": 76.9,
+    "ledger": "docs/operations/calendar-incident-progress-20261023.json",
+    "merged_prs": [
+      475,
+      473
     ],
-    "note": "Expired showtimes are already hidden by CinelvaTheaterSchedule; movie details already use official links. Do not report stale source rows as confirmed visible stale showtimes."
+    "pending_pr": 476,
+    "pending_branch": "fix/lemino-dated-film-data-20261023",
+    "open": [
+      "Calendar detail-card contrast: source CI and actual both-engine screenshot review passed, final receipt CI pending in476.",
+      "Two dated Lemino films newly verified from official distributor announcements, identity/posters verified via two bounded read-only TMDB queries; data repair pending CI/main.",
+      "Actual poster for TMDB1591961 remains unavailable."
+    ],
+    "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger."
   }
 }

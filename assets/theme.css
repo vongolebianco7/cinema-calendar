@@ -219,7 +219,3 @@ html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
   transform:none!important;
   transform-origin:center;
 }
-html[data-theme="light"] .gBrand .gBrandWord,
-html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
-  color:#946c32!important;
-}

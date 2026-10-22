@@ -11,6 +11,7 @@ export async function GET() {
 
   const movies = rows.map(({ movie, ...release }) => ({
     id: movie.tmdbId ?? movie.id,
+    tmdbId: movie.tmdbId,
     title: movie.title,
     original_title: movie.originalTitle,
     date: release.date.toISOString().slice(0, 10),

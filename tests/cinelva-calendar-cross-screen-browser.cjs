@@ -24,11 +24,13 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
  await page.screenshot({path:`artifacts/calendar-cross-screen/${engine}-${theme}-${route}.png`,fullPage:true});
  }
  await page.goto('http://127.0.0.1:8768/index.html',{waitUntil:'domcontentloaded'});
- await page.locator('.cinelva-rating-actions').first().waitFor();
+ await page.waitForFunction(()=>festivalEvents.length>0);
+ await page.evaluate(()=>loadOutdoorEvents());
+ await page.waitForFunction(()=>outdoorEvents.length>0);
  for(const mode of ['festival','events'])for(const month of [9,10,11]){
  await page.evaluate(({mode,month})=>{view=new Date(2026,month,1);setMode(mode)},{mode,month});
  const measured=await assertTextContrast(page,['.festivalSpan'],`${engine} ${theme} ${mode} ${month+1}`);
- if(mode==='festival'&&month<11||mode==='events'&&month!==10)assert.ok(measured.length,'real festival/event bars required');
+ if(mode==='festival'&&month<11||mode==='events'&&month!==10)assert.ok(measured.length,`${theme} ${mode} ${month+1}: real festival/event bars required`);
  await page.screenshot({path:`artifacts/calendar-cross-screen/${engine}-${theme}-${mode}-${month+1}.png`,fullPage:true});
  }
  await context.close();

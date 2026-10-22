@@ -31,9 +31,11 @@ const { chromium, webkit } = require("playwright"),
       fs.readFileSync("data/directors-mobile.json"),
     ).directors;
     const director = Object.values(directors).find((d) =>
+        d.name_status === 'transliterated' && d.original_name &&
         d.works?.some((w) => w.runtime >= 30),
       ),
-      film = director.works.find((w) => w.runtime >= 30);
+      film = director?.works.find((w) => w.runtime >= 30);
+    assert.ok(director && film, 'browser journey must use the generated director projection with name provenance');
     await context.addInitScript(
       ({ film, director }) => {
         if (!localStorage.getItem("cinelva-library-records-v2"))
@@ -127,7 +129,12 @@ const { chromium, webkit } = require("playwright"),
     await page.locator('[data-tab="awards"]').click();
     assert.match(await page.locator("#awardMatrix").innerText(), /年代/);
     await page.locator('[data-tab="directors"]').click();
-    await page.locator(".director-pick").first().click();
+    await page.locator(".director-pick").filter({hasText:director.name}).first().click();
+    const profileText = await page.locator("#directorFilmography .director-profile").innerText();
+    assert.ok(profileText.includes("原名：" + director.original_name), "generated mobile data must retain the original name");
+    assert.ok(profileText.includes("日本語名は原名からのカタカナ表記です。"), "editorial kana must remain explicitly labeled");
+    fs.mkdirSync("artifacts/route-audit/director-provenance", {recursive:true});
+    await page.screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||"chromium"}-390.png`});
     await page
       .locator("#directorFilmography .director-film-tile")
       .first()

@@ -1,6 +1,6 @@
 import concurrent.futures,json,os,pathlib,urllib.parse,urllib.request
 key=os.environ['TMDB_API_KEY'];base='https://api.themoviedb.org/3'
-queries=[('/movie/1061474',{}),('/movie/552524',{}),('/movie/1591961',{}),('/search/movie',{'query':'Stray Kids The dominATE Experience'}),('/search/movie',{'query':'Drive The Pretenders','year':'2026'}),('/search/movie',{'query':'Apocalypse Z','year':'2026'}),('/search/movie',{'query':'The Last Picture Show'})]
+queries=[('/search/movie',{'query':q,'year':y}) for q,y in [('Camp Rock 3','2026'),('Synecdoche New York','2008'),('Peacock','2024'),('Mufasa The Lion King','2024'),('Moana 2','2024'),('Robot Dreams','2023'),('Karate Kid Legends','2025'),('Kung Fu Panda 4','2024'),('Look Back','2024')]]
 out={'metadata':[],'poster_health':[]}
 for path,params in queries:
  try:
@@ -9,7 +9,7 @@ for path,params in queries:
   rows=d.get('results',[d])
   out['metadata'].append({'request':path,'query':params,'results':[{k:m.get(k) for k in ['id','title','original_title','release_date','poster_path']} for m in rows[:8]]})
  except Exception as e:out['metadata'].append({'request':path,'query':params,'error':type(e).__name__})
-urls=sorted({m['poster'] for m in json.load(open('data/streaming.json'))['movies'] if m.get('poster')})
+urls=[]
 def check(url):
  try:
   with urllib.request.urlopen(urllib.request.Request(url,method='HEAD'),timeout=8) as r:return {'url':url,'status':r.status}

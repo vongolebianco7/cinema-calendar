@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
-  "verified_at": "2026-10-22T08:16:13.228Z",
-  "note": "All seven exact-source workflows succeeded. Chromium/WebKit passed expanded active-director contrast, placeholder/rating controls, native select appearance and undimmed text ancestry in both themes, plus 240 route cells per engine. Final-head CI remains required; latest artifact visual review is separately recorded."
+  "head_sha": "ad574971767dbf7e0c7a5ed9f72adf1cc62a8395",
+  "verified_at": "2026-10-22T21:10:32.940Z",
+  "note": "Exact source passed all seven workflows including Chromium/WebKit calendar regressions, frontend route audits, mobile layout, backend build, smoke, Python and Autonomous quality. Covers sourced calendar data, outdoor extraction/freshness and calendar importer identity. Final-head CI required. Dated Lemino coverage and TMDB1591961 poster remain unresolved; Vercel excluded."
 }

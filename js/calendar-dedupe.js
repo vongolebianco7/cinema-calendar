@@ -6,8 +6,13 @@
     const title = String(row.title || '').normalize('NFKC').toLowerCase().replace(/[\p{P}\p{Z}\s]/gu, '');
     return title && row.date ? [row.event || '', row.date, row.service || '', title].join('|') : null;
   }
+  function movieId(row) {
+    const value = row.tmdbId ?? row.tmdb_id ?? row.id;
+    const number = Number(value);
+    return /^\d+$/.test(String(value)) && Number.isSafeInteger(number) && number > 0 ? String(number) : null;
+  }
   function quality(row) {
-    return Number(!!(row.id || row.tmdbId)) * 8 + Number(!!row.poster) * 4 + Number(!!row.source_url) * 2 + Number(!!row.overview);
+    return Number(!!movieId(row)) * 8 + Number(!!row.poster) * 4 + Number(!!row.source_url) * 2 + Number(!!row.overview);
   }
   function dedupe(rows) {
     const output = [], indices = new Map();
@@ -18,8 +23,8 @@
         output.push(row); continue;
       }
       const index = indices.get(identity), previous = output[index];
-      const previousId = previous.tmdbId || previous.tmdb_id || previous.id;
-      const currentId = row.tmdbId || row.tmdb_id || row.id;
+      const previousId = movieId(previous);
+      const currentId = movieId(row);
       if (previousId && currentId && String(previousId) !== String(currentId)) {
         output.push(row); continue;
       }

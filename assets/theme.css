@@ -125,7 +125,7 @@ html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}
 .cinelvaSourcesLink{display:block;margin:14px 0;padding:8px 0;font-size:13px;line-height:1.5;color:inherit;overflow-wrap:anywhere}
 
 /* Secondary headers use the same approved logo asset as the shared header. */
-html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] { background:#171717!important;border-radius:7px;padding:2px; }
+html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] { background:transparent!important;border-radius:0!important;padding:0!important; }
 html[data-theme="light"] .brand :is(a,span),
 html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] + span { color:var(--text)!important; }
 html[data-theme="light"] .specialLink,
@@ -217,3 +217,11 @@ html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
   transform: scale(1.34);
   transform-origin: center;
 }
+
+/* Keep the approved Cinelva wordmark in the brand's gold family,
+   instead of inheriting body text colors in light mode. */
+html[data-theme="light"] .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  color:#806027!important;
+}
+html[data-theme="dark"] .gBrand .gBrandWord { color:#f2dfbb!important; }

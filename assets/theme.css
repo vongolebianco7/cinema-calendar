@@ -191,3 +191,20 @@ html[data-theme] #directorsView .cinelva-rating-actions button { background:var(
 html[data-theme="light"] #directorsView .cinelva-rating-actions { --cinelva-bookmark-marked:#246996; }
 html[data-theme="dark"] #directorsView .cinelva-rating-actions { --cinelva-bookmark-marked:#73b7f6; }
 #directorsView .cinelva-rating-actions button { -webkit-appearance:none;appearance:none; }
+
+/* Shared review rows must follow the theme on every movie list, not just directors. */
+html[data-theme="light"] .cinelva-rating-controls.cinelva-rating-controls-no-gauge {
+  background:#eeeae2!important;color:#242521!important;
+  --cinelva-bookmark-ink:#242521;--cinelva-bookmark-marked:#246996;
+}
+html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-actions .cinelva-rate-button {
+  color:#242521!important;
+}
+html[data-theme="light"] .cinelva-rating-controls .rating-caption,
+html[data-theme="light"] .cinelva-rating-controls .rating-label { color:#64645d!important; }
+html[data-theme="light"] .cinelva-rating-controls .rating-value { color:#242521!important; }
+html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-personal:not(.is-unwatched) .rating-value {
+  color:#806027!important;
+}
+/* First segments inherit body ink; continuation segments already had explicit ink. */
+html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }

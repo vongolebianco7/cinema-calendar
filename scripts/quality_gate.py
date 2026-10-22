@@ -21,7 +21,8 @@ commands=[['node','--check','js/cinelva-records-page.js'],['node','--check','js/
 commands.append(['node','scripts/check_dependency_licenses.cjs'])
 active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('cinelva-*.test.cjs'))
 run(['node','--test',*active_node_tests])
-run(['python','-m','unittest','tests.test_external_data_registry'])
+run(['python','-m','unittest','tests.test_external_data_registry','tests.test_film_event_refresh'])
+run(['node','--test','tests/calendar-dedupe.test.cjs'])
 run(['python','-m','unittest','tests.test_director_enrichment'])
 for cmd in commands:
  if cmd[:2]==['node','--test'] and all(path in active_node_tests for path in cmd[2:]): continue

@@ -31,7 +31,9 @@ jobs:
       - name: Install temporary Playwright dependency
         run: npm install --no-save --no-package-lock playwright@1.55.0
       - name: Install Chromium and WebKit
-        run: npx playwright install --with-deps chromium webkit
+        run: |
+          bash scripts/prepare-browser-ci.sh
+          npx playwright install --with-deps chromium webkit
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/cinemap-scorecard-http.log 2>&1 &
       - name: Score Chromium mobile basics
@@ -61,7 +63,9 @@ jobs:
       - name: Install temporary Playwright dependency
         run: npm install --no-save --no-package-lock playwright@1.55.0
       - name: Install Chromium and WebKit
-        run: npx playwright install --with-deps chromium webkit
+        run: |
+          bash scripts/prepare-browser-ci.sh
+          npx playwright install --with-deps chromium webkit
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/cinemap-journey-http.log 2>&1 &
       - name: Score Chromium core journeys

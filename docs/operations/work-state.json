@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T21:30:05.697Z",
+  "updated_at": "2026-10-22T22:05:50.902Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "0f0250ffb84b0c710286be4ea0188742b08f1b3c",
-  "branch": "fix/lemino-dated-film-data-20261023",
-  "head_sha": "be63fa432313b4edab90be69347261d15b5b484f",
+  "branch": "fix/browser-ci-package-mirror-20261023",
+  "head_sha": "4d20b86477edd0de3a80bf40e14e1c5234c41f08",
   "pull_request": null,
   "work_items": [
     {
@@ -708,6 +708,10 @@
     {
       "check": "Calendar incident source repair and independent screenshot review",
       "result": "PR473 merged0f0250ff. Source ad574 all7 workflows passed. Finalafde required4/mobile/Python/contract passed after a package-mirror timeout rerun. Optional performance score failed1081/1064ms against1000ms; independent476source passed991/944ms with no threshold change. Actual light detail title1.003:1 reproduced and repaired; Chromium/WebKit rendered headings/dates/body/links/film text assertions passed. Local full Python161/161 passed."
+    },
+    {
+      "check": "Browser dependency timeout root cause and constrained CI repair",
+      "result": "Final476 Autonomous cancelled during Azure apt downloads; other7 workflows succeeded. Same installer preparation stalled in477. Mirror-only preparation added to existing five installer jobs in4 workflows; no assertions/timeouts removed. Shell syntax, YAML parse, signature/suite/protocol fixture and original-command equality checks pass. Shared quality gate passes; fresh CI must verify actual archive download and unchanged browser journeys."
     }
   ],
   "deployment": {
@@ -733,7 +737,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Finish PR476 final-head checks and merge. Verify/merge the Lemino data branch with an exact-source receipt and final-head CI. Re-read live main/PR states before counting pending tasks. Preserve the actual-poster gap for1591961; do not substitute unrelated art. Vercel remains excluded.",
+  "next_action": "Finish source/final CI for browser-ci-package-mirror branch, which contains all476/477 app/data repairs. If an earlier verified PR becomes mergeable first, integrate it; otherwise merge combined branch after exact-source receipt and final CI, then close superseded476/477. Reconcile current main before counting. No Vercel action.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -771,7 +775,7 @@
     "completed_tasks": 10,
     "remaining_tasks": 3,
     "confirmed_merged_fixes": 10,
-    "implemented_changes": 12,
+    "implemented_changes": 13,
     "completion_percent": 76.9,
     "ledger": "docs/operations/calendar-incident-progress-20261023.json",
     "merged_prs": [
@@ -785,6 +789,13 @@
       "Two dated Lemino films newly verified from official distributor announcements, identity/posters verified via two bounded read-only TMDB queries; data repair pending CI/main.",
       "Actual poster for TMDB1591961 remains unavailable."
     ],
-    "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger."
+    "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger.",
+    "pending_branches": [
+      "fix/calendar-light-card-contrast-20261022",
+      "fix/lemino-dated-film-data-20261023",
+      "fix/browser-ci-package-mirror-20261023"
+    ],
+    "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
+    "poster_recheck": "Read-only Actions39861525433 confirmed movie1591961 still returns poster_path:null."
   }
 }

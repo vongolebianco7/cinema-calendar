@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T06:38:15.710845+00:00",
+  "updated_at": "2026-10-22T07:19:06.082523+00:00",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
-    "confirmed_defects": 19,
-    "completed_fixes": 18,
+    "confirmed_defects": 20,
+    "completed_fixes": 19,
     "remaining_confirmed_defects": 1,
     "fixes_implemented_pending_validation": 1,
     "overall_ui_completion_percent": null,
-    "confirmed_defect_completion_percent": 94.7
+    "confirmed_defect_completion_percent": 95.0
   },
   "coverage": {
     "initial_mobile_chromium_screenshots_reviewed": 30,
@@ -233,16 +233,28 @@
     {
       "id": "UI-20261022-019",
       "title": "Mobile director catalog drops name-basis metadata and lags the complete source",
-      "status": "implemented_pending_ci_and_data_publication",
+      "status": "merged_ci_data_verified",
       "root_cause": "Projection omitted name_status and source fields; movie updates did not rebuild the projection and independent bot commits do not recursively trigger publication. Raw901/mobile849 before fix.",
-      "test": "RED real builder/render loses original-name and kana disclaimer; real Git offline generation introduced protected artifact; latest-source addition regression preserves parallel refresh IDs/works/dates. GREEN Python18, Node director27, shared quality Node273.",
-      "remaining": "Exact-source CI, receipt, merge and automatic publication with901 matching IDs and preserved works/dates. Official credits11/editorial readings8; all editorial readings retain original-name and disclaimer."
+      "test": "Python18, director UI Node27 and quality Node273 passed; actual generated901-person projection in both Chromium/WebKit; all901 IDs/original names/checked_at and11087 work IDs preserved in published raw/mobile. Source7/final8 workflows passed.",
+      "pr": 469,
+      "merge_sha": "55faca022cca3c21d888d3cd2eb391209e0f3163",
+      "verified_source": "0a2be38deb4be25bc74cd07efdde69337aa862eb",
+      "published_data_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31"
+    },
+    {
+      "id": "UI-20261022-020",
+      "title": "Active director controls, achievements and profile metadata retain pale dark-theme colors in light mode",
+      "status": "implemented_pending_ci_and_visual_review",
+      "root_cause": "Inline #c5c5c5 sort label and fixed pastel achievement/profile colors omitted from the light-theme overrides; hidden inactive tab escaped root-route-only contrast checks.",
+      "test": "Actual browser RED cd29db35: label rgb197,197,197 on body rgb248,246,241 ratio1.598. Existing mobile journey now opens real generated director profile and checks controls/achievement/profile/work/coverage text at>=4.5 in both themes; screenshots include full page and actual profile element. First light correction passed all light checks; dark source link exposed UA blue contrast2.009, corrected via existing dark gold token in59964853.",
+      "pr": 470,
+      "candidate_source": "59964853d741d9a10d1f338166c39fe4eb2cd751"
     }
   ],
   "pr": 463,
-  "remaining_audit": "18 confirmed defects merged and verified; director projection/provenance follow-up is implemented pending exact-source CI and generated-data publication. Unknown defects and physical-device acceptance remain separate.",
+  "remaining_audit": "19 confirmed defects verified and merged. Active director controls/profile light-theme contrast fix470 awaits exact-source/final CI, visual review and merge. No assertion that unknown bugs or physical-device acceptance are exhausted.",
   "followup_pr": 467,
-  "scope_version": 3,
+  "scope_version": 4,
   "scope_history": [
     {
       "version": 1,
@@ -261,6 +273,12 @@
       "confirmed": 19,
       "completed": 18,
       "note": "One additional director projection/provenance defect found; offline source/mobile synchronization and19 labels implemented, pending exact-source CI and generated-data publication. Stable32 denominator unchanged."
+    },
+    {
+      "version": 4,
+      "confirmed": 20,
+      "completed": 19,
+      "note": "469 data/provenance fix verified on published main; active director screenshot reveals contrast follow-up470. Stable32 denominator unchanged."
     }
   ]
 }

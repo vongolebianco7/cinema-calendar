@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "e6a315d7db42329342de69ccd9dddc7757400baf",
-  "verified_at": "2026-10-22T10:49:51.795Z",
-  "note": "Exact source passed all seven workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (real list review controls and festival/event bars in Chromium/WebKit), Reproducible backend build, mobile layout smoke, Python contracts and completeness. Source reproductions for extractor/freshness and mixed calendar/API identity pass. Data coverage work is separate; no full-calendar completion or Vercel claim."
+  "head_sha": "ad574971767dbf7e0c7a5ed9f72adf1cc62a8395",
+  "verified_at": "2026-10-22T21:10:32.940Z",
+  "note": "Exact source passed all seven workflows including Chromium/WebKit calendar regressions, frontend route audits, mobile layout, backend build, smoke, Python and Autonomous quality. Covers sourced calendar data, outdoor extraction/freshness and calendar importer identity. Final-head CI required. Dated Lemino coverage and TMDB1591961 poster remain unresolved; Vercel excluded."
 }

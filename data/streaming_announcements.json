@@ -1,4 +1,125 @@
 {
   "schema_version": 1,
-  "movies": []
+  "movies": [
+    {
+      "title": "山口くんはワルくない",
+      "date": "2026-10-05",
+      "service": "U-NEXT",
+      "type": "レンタル",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/yamaguchikun-2026-10-05",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "ラブ≠コメディ",
+      "date": "2026-10-03",
+      "service": "U-NEXT",
+      "type": "レンタル",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "スパイダーマン：ブランド・ニュー・デイ",
+      "date": "2026-10-06",
+      "service": "U-NEXT",
+      "type": "レンタル",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "ウィキッド ふたりの魔女",
+      "date": "2026-10-11",
+      "service": "U-NEXT",
+      "type": "見放題",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "脳内ニューヨーク",
+      "date": "2026-10-25",
+      "service": "U-NEXT",
+      "type": "配信",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "PEACOCK／ピーコック",
+      "date": "2026-10-28",
+      "service": "U-NEXT",
+      "type": "配信",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "わたしの幸せな結婚",
+      "date": "2026-10-07",
+      "service": "Disney+",
+      "type": "見放題",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "オアシス：ドント・ルック・バック・イン・アンガー",
+      "date": "2026-10-09",
+      "service": "Disney+",
+      "type": "見放題",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "キャンプ・ロック３",
+      "date": "2026-10-02",
+      "service": "Disney+",
+      "type": "見放題",
+      "source": "公式配信発表（2026-10-22確認）",
+      "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "映画 この素晴らしい世界に祝福を！紅伝説",
+      "date": "2026-10-09",
+      "service": "ABEMA",
+      "type": "期間限定無料",
+      "source": "AbemaTV公式 無料配信企画",
+      "source_url": "https://abematv.co.jp/posts/59335752/",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "ウィキッド 永遠の約束",
+      "date": "2026-10-03",
+      "service": "WOWOWオンデマンド",
+      "type": "同時配信",
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "verified": true,
+      "content_type": "movie"
+    },
+    {
+      "title": "てっぺんの向こうにあなたがいる",
+      "date": "2026-10-24",
+      "service": "WOWOWオンデマンド",
+      "type": "同時配信",
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "verified": true,
+      "content_type": "movie"
+    }
+  ]
 }

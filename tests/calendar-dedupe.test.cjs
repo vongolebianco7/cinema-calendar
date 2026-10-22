@@ -29,3 +29,9 @@ test('database row IDs do not split listings with the same verified TMDB identit
  const rows=[{id:'database-row-1',tmdbId:1276849,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video'}, {id:1276849,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video'}];
  assert.equal(dedupe(rows).length,1);
 });
+
+test('an internal database ID without a TMDB ID does not protect a duplicate release card', () => {
+ const rows=[{id:'cmovie-local-1',tmdbId:null,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video'}, {id:1276849,tmdbId:1276849,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video',poster:'suomi.jpg'}];
+ assert.equal(dedupe(rows).length,1);
+ assert.equal(dedupe(rows)[0].tmdbId,1276849);
+});

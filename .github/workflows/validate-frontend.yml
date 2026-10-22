@@ -168,6 +168,14 @@ jobs:
           path: artifacts/route-audit/
           if-no-files-found: warn
           retention-days: 14
+      - name: Preserve calendar regression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinelva-calendar-cross-screen
+          path: artifacts/calendar-cross-screen/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Check Cinemap brand identity
         run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
       - name: Check approved data sources

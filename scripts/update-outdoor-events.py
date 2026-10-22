@@ -94,7 +94,27 @@ def extract(url):
                 canonical = url
             slug = re.sub(r"[^a-z0-9]", "", urllib.parse.urlsplit(url).netloc.lower())[:35]
             event_id = f"auto-{slug}-{start}-{abs(__import__('zlib').crc32((name+place).encode())):08x}"
-            results.append(dict(id=event_id, date=start, name=name[:150], area=area, place=place[:150], movie="", url=canonical, source_url=url))
+            row = dict(id=event_id, event_id=event_id, date=start, name=name[:150], area=area, place=place[:150], movie="", url=canonical, source_url=url)
+            end = str(event.get("endDate") or "")[:10]
+            try:
+                if dt.date.fromisoformat(end) >= day:
+                    row.update(start_date=start, end_date=end)
+            except ValueError:
+                pass
+            featured = event.get("workFeatured") or {}
+            if isinstance(featured, dict):
+                kinds = featured.get("@type", [])
+                if isinstance(kinds, str):
+                    kinds = [kinds]
+                if "Movie" in kinds and str(featured.get("name") or "").strip():
+                    row["movie"] = str(featured["name"]).strip()[:160]
+                    stamp = str(event.get("startDate") or "")
+                    if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", stamp):
+                        row["time"] = stamp[11:16]
+                    identity = re.match(r"^https://(?:www\.)?themoviedb\.org/movie/(\d+)(?:[-/?#]|$)", str(featured.get("sameAs") or ""))
+                    if identity and int(identity.group(1)) > 0:
+                        row["tmdbId"] = int(identity.group(1))
+            results.append(row)
     return results
 
 def discover():
@@ -128,7 +148,9 @@ def main():
     for e in new:
         by_id[e["id"]] = e
     current["events"] = sorted(by_id.values(), key=lambda e: (e["date"], e["id"]))
-    current["updated_at"] = dt.date.today().isoformat()
+    if new:
+        current["updated_at"] = dt.date.today().isoformat()
+    current["last_attempt_at"] = dt.date.today().isoformat()
     current["discovery_count"] = len(new)
     OUTPUT.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n")
     print(f"Published {len(current['events'])} records; {len(new)} discovered on this run")

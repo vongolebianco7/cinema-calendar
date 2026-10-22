@@ -1,4 +1,5 @@
 const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),net=require('net'),assert=require('assert/strict'),{waitForLocalServer}=require('./helpers/local-server.cjs');
+const {assertTextContrast}=require('./helpers/text-contrast.cjs');
 (async()=>{
  const listener=net.createServer();await new Promise(r=>listener.listen(0,'127.0.0.1',r));const port=listener.address().port;await new Promise(r=>listener.close(r));
  const server=spawn('python',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});let browser;
@@ -30,6 +31,14 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.reload({waitUntil:'domcontentloaded'});await page.locator('#grid .card').waitFor();
   assert.equal(await page.locator('#grid .card').count(),1);assert.equal(await page.locator('#grid .title').innerText(),'インセプション');
   assert.match(await page.locator('#status').innerText(),/収録/);
+  await page.waitForLoadState('networkidle');
+  const event={id:'qa-outdoor',date:'2026-10-23',start_date:'2026-10-23',end_date:'2026-10-23',name:'QA上映イベント',area:'東京',place:'確認済み会場',url:'https://www.ttcg.jp/',movie:movie.title,tmdbId:movie.id,poster_url:movie.poster,time:'18:30'};
+  await context.route('**/data/outdoor-events.json',r=>r.fulfill({json:{events:[event]}}));
+  await context.route('**/data/events.json',r=>r.fulfill({json:{events:[]}}));
+  await page.goto(`http://127.0.0.1:${port}/events.html`,{waitUntil:'domcontentloaded'});
+  await page.evaluate(()=>{view=new Date(2026,9,1);render();});
+  await page.locator('.eventGroup .filmTitle').filter({hasText:movie.title}).waitFor();
+  await assertTextContrast(page,['.tabs a[aria-current="page"]','.eventGroup .filmTitle','.eventGroup .filmMeta','.eventGroup .date','.eventGroup a.source','.notice'],`outdoor event ${width}px ${theme}`);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.deepEqual(errors,[]);await context.close();
  }console.log('Secondary revival and selected experience cards: 6 viewport/theme combinations passed');}finally{await browser?.close();server.kill()}
 })().catch(e=>{console.error(e);process.exitCode=1});

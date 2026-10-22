@@ -425,7 +425,7 @@ function monthPageEnd(d){
  last.setHours(0,0,0,0);last.setDate(last.getDate()+(6-wd));return last
 }
 function monthPageWeekCount(d){
- const a=monthPageStart(d),z=monthPageEnd(d);return Math.round((z-a)/86400000/7)+1
+ const a=monthPageStart(d),z=monthPageEnd(d);return Math.floor((z-a)/86400000/7)+1
 }
 function currentWeekStart(){
  const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d

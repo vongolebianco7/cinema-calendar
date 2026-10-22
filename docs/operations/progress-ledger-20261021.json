@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T21:50:34.944582+00:00",
+  "updated_at": "2026-10-21T22:09:32.185422+00:00",
   "source_issue": 239,
   "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
@@ -444,6 +444,14 @@
       "additional_fixes": 20,
       "percent": 78.1,
       "reason": "PR465 source6 and final7 workflows passed, both-engine visual evidence checked, merged8b5b0de. Confirmed10/10 defects fixed. Broad UI acceptance remains pending full-document lower-content review. Initial final browser download TLS mismatch recovered on one unchanged-code retry with certificate verification intact."
+    },
+    {
+      "at": "2026-10-21T22:09:32.185422+00:00",
+      "completed": 25,
+      "remaining": 7,
+      "additional_fixes": 20,
+      "percent": 78.1,
+      "reason": "Full-page audit466 found8 additional UI defects, confirmed audit18/10done/8remaining. Implementations pending verification. Do not close either broad UI gate or increment merged fix count yet."
     }
   ]
 }

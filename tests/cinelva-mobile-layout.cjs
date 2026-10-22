@@ -40,7 +40,7 @@ const fs = require('fs');
           });
           return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
         };
-        return ['.hero p', '.recordUtilities summary', '#summaryView .cs-head h2', '#summaryView .cs-top .cs-muted', '#awardsView .award-titlebar p', '#directorsView .section-head p'].map(selector => {
+        return ['.hero p', '.recordUtilities summary', '#summaryView .cs-head h2', '#summaryView .cs-top .cs-muted', '#summaryView .cs-donut-global-mode>span', '#awardsView .award-titlebar p', '#directorsView .section-head p'].map(selector => {
           const el=document.querySelector(selector);
           let ancestor=el;
           while(ancestor.parentElement && getComputedStyle(ancestor).backgroundColor==='rgba(0, 0, 0, 0)') ancestor=ancestor.parentElement;

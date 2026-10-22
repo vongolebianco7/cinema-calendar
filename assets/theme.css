@@ -1,6 +1,7 @@
 /* Theme chrome only. Posters, original logo, artwork, Ocean and media retain their colors. */
 html[data-theme="dark"] { color-scheme:dark; }
-html[data-theme="light"] {
+html[data-theme="light"],
+html[data-theme="light"] body {
   color-scheme:light;
   --bg:#f8f6f1; --panel:#fffefa; --panel2:#eeeae2; --text:#242521;
   --muted:#64645d; --line:#d4d0c7; --accent:#b52e38; --red:#b52e38;
@@ -122,3 +123,26 @@ html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}
 }
 
 .cinelvaSourcesLink{display:block;margin:14px 0;padding:8px 0;font-size:13px;line-height:1.5;color:inherit;overflow-wrap:anywhere}
+
+/* Secondary headers use the same approved logo asset as the shared header. */
+html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] { background:#171717!important;border-radius:7px;padding:2px; }
+html[data-theme="light"] .brand :is(a,span),
+html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] + span { color:var(--text)!important; }
+html[data-theme="light"] .specialLink,
+html[data-theme="light"] .providerCheck { background:var(--panel2)!important;border-color:var(--line)!important;color:var(--text)!important; }
+html[data-theme="light"] .hero a.specialLink { color:var(--text)!important; }
+html[data-theme="light"] .providerCheck:has(input:checked) { background:var(--text)!important;color:var(--bg)!important; }
+html[data-theme="light"] body:has(#events) :is(.filmCard,.rangeDay,.filmPlaceholder) {
+  background:var(--panel2)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-theme="light"] body:has(#events) .filmCard { background:var(--panel)!important; }
+html[data-theme="light"] body:has(#events) :is(.filmMeta,.eventGroup .date,.detail,.notice,.week span,.rangeDay,.filmPlaceholder) { color:var(--muted)!important; }
+html[data-theme="light"] body:has(#events) .eventGroup a.source { color:#795a20!important; }
+html[data-theme="light"] .tabs a[aria-current="page"] { color:var(--text)!important; }
+html[data-theme="light"] body:has(#data-status) .card a { color:#795a20!important; }
+html[data-theme="light"] :is(.movieGridSort label,#summaryView .cs-donut-global-mode>span) { color:var(--muted)!important; }
+/* A cinema directory is not a three-column movie-poster list. */
+body:has(.theaterTools) #grid.grid { grid-template-columns:repeat(3,minmax(0,1fr))!important; }
+body:has(.theaterTools) #grid>:is(.empty,.tableHint,.theaterTableWrap) { grid-column:1/-1; }
+@media(max-width:720px) { body:has(.theaterTools) #grid.grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; } }
+@media(max-width:520px) { body:has(.theaterTools) #grid.grid { grid-template-columns:1fr!important; } }

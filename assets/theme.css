@@ -1,6 +1,7 @@
 /* Theme chrome only. Posters, original logo, artwork, Ocean and media retain their colors. */
 html[data-theme="dark"] { color-scheme:dark; }
-html[data-theme="light"] {
+html[data-theme="light"],
+html[data-theme="light"] body {
   color-scheme:light;
   --bg:#f8f6f1; --panel:#fffefa; --panel2:#eeeae2; --text:#242521;
   --muted:#64645d; --line:#d4d0c7; --accent:#b52e38; --red:#b52e38;

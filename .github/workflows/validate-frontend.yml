@@ -165,9 +165,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cinelva-route-audit
-          path: |
-            artifacts/route-audit/
-            artifacts/calendar-cross-screen/
+          path: artifacts/route-audit/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Preserve calendar regression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinelva-calendar-cross-screen
+          path: artifacts/calendar-cross-screen/
           if-no-files-found: warn
           retention-days: 14
       - name: Check Cinemap brand identity

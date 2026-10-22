@@ -321,7 +321,7 @@
       "tmdb": "https://www.themoviedb.org/movie/1394384",
       "poster": "https://image.tmdb.org/t/p/w500/mLAB5k1MwP3CmiT9BUL5HZiuFpC.jpg",
       "original_title": "Eastwood & Co.: Making 'Unforgiven'",
-      "score": 0.0,
+      "score": 0,
       "votes": 0
     },
     {
@@ -369,7 +369,7 @@
       "tmdb": "https://www.themoviedb.org/movie/1394384",
       "poster": "https://image.tmdb.org/t/p/w500/mLAB5k1MwP3CmiT9BUL5HZiuFpC.jpg",
       "original_title": "Eastwood & Co.: Making 'Unforgiven'",
-      "score": 0.0,
+      "score": 0,
       "votes": 0
     },
     {
@@ -684,7 +684,13 @@
       "event": "theatrical",
       "service": "午前十時の映画祭",
       "special_screening": "asa10",
-      "source_url": "https://asa10.eiga.com/2026/schedule/"
+      "source_url": "https://asa10.eiga.com/2026/schedule/",
+      "tmdbId": 25188,
+      "tmdb": "https://www.themoviedb.org/movie/25188",
+      "release_year": 1971,
+      "original_title": "The Last Picture Show",
+      "poster": "https://image.tmdb.org/t/p/w500/7NYePZc0lZrRomtmQsjOJMePTEb.jpg",
+      "identity_verified_at": "2026-10-22"
     },
     {
       "date": "2027-03-05",
@@ -694,7 +700,13 @@
       "event": "theatrical",
       "service": "午前十時の映画祭",
       "special_screening": "asa10",
-      "source_url": "https://asa10.eiga.com/2026/schedule/"
+      "source_url": "https://asa10.eiga.com/2026/schedule/",
+      "tmdbId": 25188,
+      "tmdb": "https://www.themoviedb.org/movie/25188",
+      "release_year": 1971,
+      "original_title": "The Last Picture Show",
+      "poster": "https://image.tmdb.org/t/p/w500/7NYePZc0lZrRomtmQsjOJMePTEb.jpg",
+      "identity_verified_at": "2026-10-22"
     },
     {
       "date": "2027-03-05",

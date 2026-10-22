@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T04:20:58.972Z",
+  "generated_at": "2026-10-22",
   "note": "Upcoming verified terrestrial television movie broadcasts in Japan. Schedule may change; source links are retained per item.",
   "movies": [
     {
@@ -306,6 +306,74 @@
       "votes": 6993,
       "tmdb": "https://www.themoviedb.org/movie/1022789",
       "overview": "どんな感情も、きっと宝物になる―ディズニー＆ピクサーが贈る、あなたの中に広がる＜感情たち＞の世界。少女ライリーを子どもの頃から見守ってきた頭の中の感情・ヨロコビたち。  ある日、高校入学という人生の転機を控えたライリーの中に、シンパイ率いる＜大人の感情＞たちが現れる。  「ライリーの将来のために、あなたたちはもう必要ない」―シンパイたちの暴走により、追放されるヨロコビたち。巻き起こる“感情の嵐”の中で、ライリーは自分らしさを失っていく…。  彼女を救うカギは、広大な世界の奥底に眠る“ある記憶”に隠されていた―。"
+    },
+    {
+      "title": "ALWAYS 三丁目の夕日",
+      "date": "2026-10-23",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/lineup/20261023",
+      "terrestrial_first": false,
+      "checked_at": "2026-10-22",
+      "tmdbId": 13430,
+      "tmdb": "https://www.themoviedb.org/movie/13430",
+      "poster": "https://image.tmdb.org/t/p/w342/yA4UEPUYJwE6UdKzHqD4LiSqkny.jpg",
+      "release_year": 2005
+    },
+    {
+      "title": "ゴジラ-1.0",
+      "date": "2026-10-30",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/lineup/20261030",
+      "terrestrial_first": false,
+      "checked_at": "2026-10-22",
+      "tmdbId": 940721,
+      "tmdb": "https://www.themoviedb.org/movie/940721",
+      "poster": "https://image.tmdb.org/t/p/w342/buvBq2zLP7CcJth8tjrI4znvfEO.jpg",
+      "release_year": 2023
+    },
+    {
+      "title": "ライオン・キング：ムファサ",
+      "date": "2026-11-06",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/lineup/20261106",
+      "terrestrial_first": true,
+      "checked_at": "2026-10-22",
+      "tmdbId": 762509,
+      "tmdb": "https://www.themoviedb.org/movie/762509",
+      "release_year": 2024,
+      "original_title": "Mufasa: The Lion King",
+      "identity_verified_at": "2026-10-22",
+      "poster": "https://image.tmdb.org/t/p/w500/kNmfi998pe4yR81OfU0F6jngYRS.jpg"
+    },
+    {
+      "title": "モアナと伝説の海2",
+      "date": "2026-11-13",
+      "time": "21:00",
+      "event": "tv",
+      "service": "日本テレビ",
+      "program": "金曜ロードショー",
+      "source": "日本テレビ 金曜ロードシネマクラブ",
+      "source_url": "https://kinro.ntv.co.jp/lineup/20261113",
+      "terrestrial_first": true,
+      "checked_at": "2026-10-22",
+      "tmdbId": 1241982,
+      "tmdb": "https://www.themoviedb.org/movie/1241982",
+      "release_year": 2024,
+      "original_title": "Moana 2",
+      "identity_verified_at": "2026-10-22",
+      "poster": "https://image.tmdb.org/t/p/w500/rSxAB3cIWUdwYvrx3ui8C0DUt9E.jpg"
     }
   ]
 }

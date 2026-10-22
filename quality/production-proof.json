@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
-  "verified_at": "2026-10-22T08:16:13.228Z",
-  "note": "All seven exact-source workflows succeeded. Chromium/WebKit passed expanded active-director contrast, placeholder/rating controls, native select appearance and undimmed text ancestry in both themes, plus 240 route cells per engine. Final-head CI remains required; latest artifact visual review is separately recorded."
+  "head_sha": "e6a315d7db42329342de69ccd9dddc7757400baf",
+  "verified_at": "2026-10-22T10:49:51.795Z",
+  "note": "Exact source passed all seven workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (real list review controls and festival/event bars in Chromium/WebKit), Reproducible backend build, mobile layout smoke, Python contracts and completeness. Source reproductions for extractor/freshness and mixed calendar/API identity pass. Data coverage work is separate; no full-calendar completion or Vercel claim."
 }

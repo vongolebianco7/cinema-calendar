@@ -1,0 +1,29 @@
+name: Cross screen diagnostic once
+on:
+  push:
+    branches: [qa/cross-screen-20261022]
+    paths: ['quality/cross-screen-20261022/browser.cjs', '.github/workflows/cross-screen-diagnostic.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --prefix /tmp/cinelva-audit playwright@1.59.0
+      - run: /tmp/cinelva-audit/node_modules/.bin/playwright install --with-deps ${{ matrix.browser }}
+      - run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/cinelva-audit-http.log 2>&1 &
+          NODE_PATH=/tmp/cinelva-audit/node_modules CINELVA_BROWSER=${{ matrix.browser }} node quality/cross-screen-20261022/browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cross-screen-${{ matrix.browser }}
+          path: audit-output/

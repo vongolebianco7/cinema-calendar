@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0a2be38deb4be25bc74cd07efdde69337aa862eb",
-  "verified_at": "2026-10-22T06:54:32.963Z",
-  "note": "Four required exact-source workflows succeeded. Frontend generated the same offline 901-director projection used by publication and passed Chromium/WebKit journeys with original-name/editorial-kana assertions. Final-head CI and generated-data verification remain required before completion."
+  "head_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
+  "verified_at": "2026-10-22T08:16:13.228Z",
+  "note": "All seven exact-source workflows succeeded. Chromium/WebKit passed expanded active-director contrast, placeholder/rating controls, native select appearance and undimmed text ancestry in both themes, plus 240 route cells per engine. Final-head CI remains required; latest artifact visual review is separately recorded."
 }

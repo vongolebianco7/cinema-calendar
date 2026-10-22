@@ -300,8 +300,8 @@ function attachInlineScore(button,movie) {
  const syncBookmark=()=>{
   const marked=!!getBookmarks()[String(id)];
   bookmark.classList.toggle('is-bookmarked',marked);
-  bookmark.style.setProperty('color',marked?'#329cff':'#aeb3bd','important');
-  bookmark.querySelector('svg')?.style.setProperty('fill',marked?'#329cff':'none','important');
+  bookmark.style.setProperty('color',marked?'var(--cinelva-bookmark-marked, #329cff)':'var(--cinelva-bookmark-ink, #aeb3bd)','important');
+  bookmark.querySelector('svg')?.style.setProperty('fill',marked?'var(--cinelva-bookmark-marked, #329cff)':'none','important');
   bookmark.setAttribute('aria-pressed',String(marked));
   bookmark.setAttribute('aria-label',marked?'観たいを解除':'観たいに登録');
   bookmark.title=marked?'観たいを解除':'観たいに登録';

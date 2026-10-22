@@ -1,3 +1,4 @@
+const { assertTextContrast } = require("./helpers/text-contrast.cjs");
 const { waitForLocalServer } = require("./helpers/local-server.cjs");
 const { chromium, webkit } = require("playwright"),
   { spawn } = require("child_process"),
@@ -134,7 +135,20 @@ const { chromium, webkit } = require("playwright"),
     assert.ok(profileText.includes("原名：" + director.original_name), "generated mobile data must retain the original name");
     assert.ok(profileText.includes("日本語名は原名からのカタカナ表記です。"), "editorial kana must remain explicitly labeled");
     fs.mkdirSync("artifacts/route-audit/director-provenance", {recursive:true});
-    await page.screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||"chromium"}-390.png`});
+    for (const theme of ['light', 'dark']) {
+      await page.evaluate(theme => { document.documentElement.dataset.theme = theme; }, theme);
+      await page.locator('#directorFilmography .director-profile').screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-profile-390.png`});
+      await page.screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-full-390.png`,fullPage:true});
+      await assertTextContrast(page, [
+        '.director-sort-bar label', '.director-achievement span',
+        '#directorFilmography .director-profile h3', '#directorFilmography .director-profile p',
+        '#directorFilmography .director-progress', '#directorFilmography .director-biography summary',
+        '#directorFilmography .director-film-year', '#directorFilmography .director-film-title',
+        '#directorFilmography .director-film-rating', '#directorFilmography .director-film-pending',
+        '#directorFilmography .director-coverage-note', '#directorFilmography .director-coverage-note a',
+      ], `active director ${theme} 390px`);
+    }
+    await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
     await page
       .locator("#directorFilmography .director-film-tile")
       .first()

@@ -18,8 +18,8 @@
         output.push(row); continue;
       }
       const index = indices.get(identity), previous = output[index];
-      const previousId = previous.id || previous.tmdbId;
-      const currentId = row.id || row.tmdbId;
+      const previousId = previous.tmdbId || previous.tmdb_id || previous.id;
+      const currentId = row.tmdbId || row.tmdb_id || row.id;
       if (previousId && currentId && String(previousId) !== String(currentId)) {
         output.push(row); continue;
       }

@@ -24,3 +24,8 @@ test('different films with the same title remain distinct when IDs disagree', ()
   const rows=[{id:123,title:'同名作品',date:'2026-09-04',event:'theater',service:'劇場公開'}, {id:456,title:'同名作品',date:'2026-09-04',event:'theater',service:'劇場公開'}];
   assert.equal(dedupe(rows).length,2);
 });
+
+test('database row IDs do not split listings with the same verified TMDB identity', () => {
+ const rows=[{id:'database-row-1',tmdbId:1276849,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video'}, {id:1276849,title:'スオミの話をしよう',date:'2026-10-13',event:'streaming',service:'Prime Video'}];
+ assert.equal(dedupe(rows).length,1);
+});

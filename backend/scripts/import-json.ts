@@ -8,6 +8,8 @@ const root = path.resolve(process.cwd(), "..");
 
 type MovieJson = {
   id?: number;
+  tmdbId?: number;
+  tmdb_id?: number;
   title: string;
   original_title?: string;
   date?: string;
@@ -63,11 +65,12 @@ function fingerprint(parts: unknown[]) {
 }
 
 async function upsertMovie(item: MovieJson) {
-  if (typeof item.id === "number") {
+  const tmdbId = item.tmdbId ?? item.tmdb_id ?? item.id;
+  if (typeof tmdbId === "number" && Number.isSafeInteger(tmdbId) && tmdbId > 0) {
     return prisma.movie.upsert({
-      where: { tmdbId: item.id },
+      where: { tmdbId },
       create: {
-        tmdbId: item.id,
+        tmdbId,
         title: item.title,
         originalTitle: item.original_title || null,
         posterUrl: item.poster || null,

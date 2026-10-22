@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-22T07:19:06.082523+00:00",
+  "updated_at": "2026-10-22T09:07:07.005Z",
   "source_issue": 239,
-  "source_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31",
+  "source_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
     "completed_tasks": 27,
     "remaining_tasks": 5,
     "completion_percent": 84.4,
-    "confirmed_additional_fixes": 29
+    "confirmed_additional_fixes": 30
   },
   "fixes": [
     {
@@ -226,6 +226,15 @@
       "status": "merged_ci_data_verified",
       "source_sha": "0a2be38deb4be25bc74cd07efdde69337aa862eb",
       "evidence": "source7/final8 successful workflows; actual generated901-person catalog in Chromium/WebKit; raw/mobile901 persons and11087 work IDs identical; original names and checked_at unchanged;652 Japanese names,249 explicitly labeled kana; offline normalization only; concurrent Git writer regression passed."
+    },
+    {
+      "id": "FIX-030",
+      "title": "Restore active director text and controls in both themes, including WebKit select and unwatched-card opacity",
+      "pr": 470,
+      "merge_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
+      "evidence": "PR470 sourcef11a9301 all7/final176a6365 all7 successful, mergedf4109367f6487a0f0cea1c0ea46ea9942a90177f. Actual Chromium/WebKit light/dark active-director label/profile/select/placeholder/rating/action contrast>=4.5, selectappearance:none and text ancestoropacity1. Each engine240 route loads,0 uncaught/local asset errors. Latest artifact12409767655 visually reviewed via QA-only branch (4profiles and overview/footer comparisons); native WebKit dark surface and fallback/ratings/source text readable. No Vercel/physical-device/global bug-free claim."
     }
   ],
   "tasks": [
@@ -389,7 +398,7 @@
       "id": "P1-08.2",
       "acceptance": "390px,touch,scroll,states,themes,a11y,large data",
       "status": "done",
-      "evidence": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent."
+      "evidence": "PR470 sourcef11a9301 all7/final176a6365 all7 successful, mergedf4109367f6487a0f0cea1c0ea46ea9942a90177f. Actual Chromium/WebKit light/dark active-director label/profile/select/placeholder/rating/action contrast>=4.5, selectappearance:none and text ancestoropacity1. Each engine240 route loads,0 uncaught/local asset errors. Latest artifact12409767655 visually reviewed via QA-only branch (4profiles and overview/footer comparisons); native WebKit dark surface and fallback/ratings/source text readable. No Vercel/physical-device/global bug-free claim."
     },
     {
       "id": "P1-08.3",
@@ -542,6 +551,22 @@
       "additional_fixes": 29,
       "percent": 84.4,
       "reason": "PR469 merged and automatic publisher verified against former main for all901 IDs/original_names/checked_at and11087 work IDs. Director contrast follow-up470 remains pending; stable32 acceptance denominator unchanged."
+    },
+    {
+      "at": "2026-10-22T09:07:07.005Z",
+      "completed": 26,
+      "remaining": 6,
+      "additional_fixes": 29,
+      "percent": 81.3,
+      "reason": "Records the interim reopening of P1-08.2 reported in issue239 while active-director contrast/native-control/opacity defects remained unmerged. Earlier27/32 checkpoint was superseded at that time."
+    },
+    {
+      "at": "2026-10-22T09:07:07.005Z",
+      "completed": 27,
+      "remaining": 5,
+      "additional_fixes": 30,
+      "percent": 84.4,
+      "reason": "470 merged after exact-source/final CI and latest-source artifact visual inspection; restore P1-08.2. Audit20/20 confirmed defects repaired. Stable32 denominator preserved."
     }
   ]
 }

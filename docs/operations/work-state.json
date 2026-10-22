@@ -1,18 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T07:19:06.082523+00:00",
+  "updated_at": "2026-10-22T09:07:07.005Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31",
-  "branch": "fix/director-active-contrast-20261022",
-  "head_sha": "59964853d741d9a10d1f338166c39fe4eb2cd751",
-  "pull_request": {
-    "number": 470,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/470",
-    "branch": "fix/director-active-contrast-20261022",
-    "head_sha": "59964853d741d9a10d1f338166c39fe4eb2cd751"
-  },
+  "base_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+  "branch": "docs/director-final-acceptance-checkpoint-20261022",
+  "head_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -690,6 +685,18 @@
     {
       "check": "PR469 source and generated-data integration",
       "result": "source0a2be38d all7/finalf16499a7 all8 successful. Actual generated901-person catalog in both engines and240 route cells perengine,0 uncaught/local asset errors. Source backend npm audit transient endpoint failure diagnosed against identical previous lockfile, one failed-job retry succeeded. automatic publisherfd8722e3 verified901 IDs/original names/checked_at and11087 work IDs retained. Extra contrast defect470 independently reproduced ratio1.598 and is pending."
+    },
+    {
+      "check": "PR470 exact-source/final integration and latest actual visual inspection",
+      "result": "PR470 sourcef11a9301 all7/final176a6365 all7 successful, mergedf4109367f6487a0f0cea1c0ea46ea9942a90177f. Actual Chromium/WebKit light/dark active-director label/profile/select/placeholder/rating/action contrast>=4.5, selectappearance:none and text ancestoropacity1. Each engine240 route loads,0 uncaught/local asset errors. Latest artifact12409767655 visually reviewed via QA-only branch (4profiles and overview/footer comparisons); native WebKit dark surface and fallback/ratings/source text readable. No Vercel/physical-device/global bug-free claim."
+    },
+    {
+      "check": "Director data retained after UI integration",
+      "result": "GitHub compare fd8722e3...f4109367f6487a0f0cea1c0ea46ea9942a90177f includes onlyCSS/quick-rate/browser/proof/docs; neither director JSON changed. Published901 persons/11087 works retained."
+    },
+    {
+      "check": "Executor recovery and safe artifact fallback",
+      "result": "Local executor disconnected and returned environment_offline on three checks. No lost source: f11/176 source+receipt saved remotely. A bounded QA-only branch downloaded existing run39740981085 artifact12409767655 via GitHub actions/download-artifact, preserved exact8 source PNGs plus overview/footer comparisons, and made them readable through base64 GitHub file API. Run39748667542 success. Latest4profiles and both comparison sheets reviewed before merge. QA branch/workflow was not merged into production main."
     }
   ],
   "deployment": {
@@ -715,7 +722,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "PR470 source59964853: quality/backend/smoke/mobile passed; frontend and scorecard pending at checkpoint. Light correction passed actual checks; dark source link contrast2.009 reproduced then corrected using existing gold. Await required source CI, receipt-only update, final CI, then inspect actual light/dark profile/full screenshots and merge. Vercel excluded; no manual API refresh/movie-data74 rerun.",
+  "next_action": "Source work469/470 and all20 specifically confirmed defects are integrated and verified. Publish this docs-only checkpoint with required CI. Then reconcile currentmain/open work against the five remaining acceptance gates; currently recorded gates require excluded Vercel work or rights/physical-device/independent-user evidence and must not be fabricated. Vercel remains excluded; no manual API refresh or repeat of movie-data74. If host reconnects, fetch latestmain before local edits. No global project-complete or unknown-bug-free claim.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -723,28 +730,28 @@
     "completed_tasks": 27,
     "remaining_tasks": 5,
     "completion_percent": 84.4,
-    "confirmed_additional_fixes": 29
+    "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 469,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/469",
-    "merge_sha": "55faca022cca3c21d888d3cd2eb391209e0f3163",
-    "source_sha": "0a2be38deb4be25bc74cd07efdde69337aa862eb",
-    "receipt_sha": "f16499a7edf6bb312b40ea4b6570ee95322de285",
-    "published_data_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31"
+    "number": 470,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/470",
+    "merge_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+    "source_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
+    "receipt_sha": "176a636594cd81572a095dace8849ce1f6b331f5"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
     "confirmed_defects": 20,
-    "verified_and_merged_fixes": 19,
-    "remaining_confirmed_defects": 1,
-    "next_action": "Finish470 exact-source/final CI, inspect light/dark actual profile/full-page screenshots, merge and checkpoint fix30. No global bug-free claim."
+    "verified_and_merged_fixes": 20,
+    "remaining_confirmed_defects": 0,
+    "next_action": "All20 specifically confirmed defects integrated and verified. Reconcile latestmain against remaining acceptance gates; do not invent unknown-bug absence or physical/legal/user-study acceptance."
   },
   "current_runtime": {
-    "host_shell": "available",
+    "host_shell": "environment_offline",
     "cloud_browser": "available",
     "vercel_scope": "excluded",
-    "note": "Earlier environment_offline observations are historical and no longer describe this session.",
-    "vercel_live_browser": "denied by auto-review under user Vercel exclusion; no retry"
+    "note": "Executor disconnected during latest verification; three attempts confirmed environment_offline. GitHub remains available and supplied all final CI, artifact visual verification and integration. Earlier environment-available observation is historical.",
+    "vercel_live_browser": "denied by auto-review under user Vercel exclusion; no retry",
+    "github": "available"
   }
 }

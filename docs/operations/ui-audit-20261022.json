@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T07:19:06.082523+00:00",
+  "updated_at": "2026-10-22T09:07:07.005Z",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
     "confirmed_defects": 20,
-    "completed_fixes": 19,
-    "remaining_confirmed_defects": 1,
-    "fixes_implemented_pending_validation": 1,
+    "completed_fixes": 20,
+    "remaining_confirmed_defects": 0,
+    "fixes_implemented_pending_validation": 0,
     "overall_ui_completion_percent": null,
-    "confirmed_defect_completion_percent": 95.0
+    "confirmed_defect_completion_percent": 100
   },
   "coverage": {
     "initial_mobile_chromium_screenshots_reviewed": 30,
@@ -48,7 +48,12 @@
       1348
     ],
     "opened_menu_width": 390,
-    "minimum_text_contrast": 4.5
+    "minimum_text_contrast": 4.5,
+    "latest_director_visual_source": "f11a9301cca54684e0211b65a3749923b4d4aeab",
+    "latest_director_profile_images_reviewed": 4,
+    "latest_director_full_image_overview_footer_comparisons": 4,
+    "latest_director_source_artifact": 12409767655,
+    "latest_route_matrix_source": "f11a9301cca54684e0211b65a3749923b4d4aeab"
   },
   "findings": [
     {
@@ -244,15 +249,18 @@
     {
       "id": "UI-20261022-020",
       "title": "Active director controls, achievements and profile metadata retain pale dark-theme colors in light mode",
-      "status": "implemented_pending_ci_and_visual_review",
-      "root_cause": "Inline #c5c5c5 sort label and fixed pastel achievement/profile colors omitted from the light-theme overrides; hidden inactive tab escaped root-route-only contrast checks.",
-      "test": "Actual browser RED cd29db35: label rgb197,197,197 on body rgb248,246,241 ratio1.598. Existing mobile journey now opens real generated director profile and checks controls/achievement/profile/work/coverage text at>=4.5 in both themes; screenshots include full page and actual profile element. First light correction passed all light checks; dark source link exposed UA blue contrast2.009, corrected via existing dark gold token in59964853.",
+      "status": "merged_ci_visual_verified",
+      "root_cause": "Fixed pale colors, UA default source/placeholder link colors, native WebKit select surface, and whole unwatched-card opacity .72 compounded with poster .67; inactive tab escaped earlier root-only coverage.",
+      "test": "PR470 sourcef11a9301 all7/final176a6365 all7 successful, mergedf4109367f6487a0f0cea1c0ea46ea9942a90177f. Actual Chromium/WebKit light/dark active-director label/profile/select/placeholder/rating/action contrast>=4.5, selectappearance:none and text ancestoropacity1. Each engine240 route loads,0 uncaught/local asset errors. Latest artifact12409767655 visually reviewed via QA-only branch (4profiles and overview/footer comparisons); native WebKit dark surface and fallback/ratings/source text readable. No Vercel/physical-device/global bug-free claim.",
       "pr": 470,
-      "candidate_source": "59964853d741d9a10d1f338166c39fe4eb2cd751"
+      "verified_source": "f11a9301cca54684e0211b65a3749923b4d4aeab",
+      "merge_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+      "artifact_id": 12409767655,
+      "qa_branch": "qa/director-visual-check-20261022"
     }
   ],
   "pr": 463,
-  "remaining_audit": "19 confirmed defects verified and merged. Active director controls/profile light-theme contrast fix470 awaits exact-source/final CI, visual review and merge. No assertion that unknown bugs or physical-device acceptance are exhausted.",
+  "remaining_audit": "All20 specifically confirmed defects repaired, integrated and verified. Latest active-director sourcef11 images reviewed in both engines/themes after CI. Earlier full-root-page visual coverage remains with its own source. This is not proof that all unknown interactions/defects or physical-device acceptance are exhausted.",
   "followup_pr": 467,
   "scope_version": 4,
   "scope_history": [
@@ -279,6 +287,12 @@
       "confirmed": 20,
       "completed": 19,
       "note": "469 data/provenance fix verified on published main; active director screenshot reveals contrast follow-up470. Stable32 denominator unchanged."
+    },
+    {
+      "version": 4,
+      "confirmed": 20,
+      "completed": 20,
+      "note": "470 source/final7 successful, actual latest-source profiles/overview/footer compared both themes/engines. 469 source/mobile901 IDs and11087 work IDs retained."
     }
   ]
 }

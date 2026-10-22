@@ -165,3 +165,29 @@ html[data-theme="light"] #directorsView .director-achievement[data-tier="3"] spa
 html[data-theme="light"] #directorsView .director-achievement[data-tier="2"] span { color:#5d6673; }
 html[data-theme="light"] #directorsView .director-achievement[data-tier="1"] span { color:#87502c; }
 html[data-theme="dark"] #directorsView .director-coverage-note a { color:var(--gold); }
+/* Dim only poster artwork, keeping unwatched film text and controls legible. */
+html[data-theme] #directorsView .director-film-tile.is-unwatched { opacity:1; }
+html[data-theme] #directorsView .director-film-poster:has(.poster span:not([hidden])) {
+  opacity:1!important;background:var(--soft)!important;color:var(--ink)!important;
+}
+html[data-theme] #directorsView .director-film-poster .poster span { color:var(--ink)!important; }
+html[data-theme] #directorsView #directorCollectionSort {
+  -webkit-appearance:none;appearance:none;background:var(--panel)!important;color:var(--ink)!important;padding-right:28px!important;
+}
+#directorsView .director-sort-bar { position:relative; }
+#directorsView .director-sort-bar::after {
+  content:"";position:absolute;right:12px;top:calc(50% - 5px);width:6px;height:6px;
+  border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg);pointer-events:none;
+}
+html[data-theme] #directorsView .cinelva-rating-controls {
+  background:var(--soft)!important;color:var(--ink)!important;
+}
+html[data-theme] #directorsView .cinelva-rating-controls .rating-caption { color:var(--muted)!important; }
+html[data-theme] #directorsView .cinelva-rating-controls .rating-value { color:var(--ink)!important; }
+html[data-theme] #directorsView .cinelva-rating-personal:not(.is-unwatched) .rating-value { color:var(--gold)!important; }
+html[data-theme] #directorsView .cinelva-rating-actions button { background:var(--panel)!important;color:var(--ink)!important; }
+
+#directorsView .cinelva-rating-actions { --cinelva-bookmark-ink:var(--ink); }
+html[data-theme="light"] #directorsView .cinelva-rating-actions { --cinelva-bookmark-marked:#246996; }
+html[data-theme="dark"] #directorsView .cinelva-rating-actions { --cinelva-bookmark-marked:#73b7f6; }
+#directorsView .cinelva-rating-actions button { -webkit-appearance:none;appearance:none; }

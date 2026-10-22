@@ -140,13 +140,22 @@ const { chromium, webkit } = require("playwright"),
       await page.locator('#directorFilmography .director-profile').screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-profile-390.png`});
       await page.screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-full-390.png`,fullPage:true});
       await assertTextContrast(page, [
-        '.director-sort-bar label', '.director-achievement span',
+        '.director-sort-bar label', '#directorCollectionSort', '.director-achievement span',
+        '#directorFilmography .poster span:not([hidden])',
+        '#directorFilmography .rating-caption', '#directorFilmography .rating-value',
+        '#directorFilmography .cinelva-rating-actions button',
         '#directorFilmography .director-profile h3', '#directorFilmography .director-profile p',
         '#directorFilmography .director-progress', '#directorFilmography .director-biography summary',
         '#directorFilmography .director-film-year', '#directorFilmography .director-film-title',
         '#directorFilmography .director-film-rating', '#directorFilmography .director-film-pending',
         '#directorFilmography .director-coverage-note', '#directorFilmography .director-coverage-note a',
       ], `active director ${theme} 390px`);
+      assert.equal(await page.locator('#directorCollectionSort').evaluate(el => getComputedStyle(el).appearance), 'none', 'WebKit must paint the selected theme rather than a native white select surface');
+      const fadedText = await page.locator('#directorFilmography .director-film-title').evaluateAll(elements => elements.some(el => {
+        for (let node = el; node; node = node.parentElement) if (Number(getComputedStyle(node).opacity) < 1) return true;
+        return false;
+      }));
+      assert.equal(fadedText, false, 'unwatched film text must not inherit dimmed artwork opacity');
     }
     await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
     await page

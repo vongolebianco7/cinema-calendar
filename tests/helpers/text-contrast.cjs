@@ -9,7 +9,12 @@ async function assertTextContrast(page,selectors,label='text') {
    const channels=color.match(/[\d.]+/g).slice(0,3).map(Number).map(n=>{const s=n/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;});
    return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
   };
-  return selectors.flatMap(selector=>[...document.querySelectorAll(selector)].filter(el=>el.isConnected&&el.getClientRects().length).map(el=>{
+  return selectors.flatMap(selector=>[...document.querySelectorAll(selector)].filter(el=>{
+   if(!el.isConnected||!el.getClientRects().length)return false;
+   // Keep lower-page text, but exclude closed drawers translated off the page.
+   const rect=el.getBoundingClientRect();
+   return rect.width>0&&rect.height>0&&rect.right>0&&rect.left<document.documentElement.clientWidth;
+  }).map(el=>{
    const ancestors=[];
    let bg=el;while(bg){
     const color=getComputedStyle(bg).backgroundColor;

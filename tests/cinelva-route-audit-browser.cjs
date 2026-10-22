@@ -102,6 +102,13 @@ async function freePort() {
           // Theme controls mount at DOMContentLoaded. A redirected WebKit document
           // can expose its early html theme and main before the later meta tag is updated.
           await page.waitForFunction(() => Boolean(document.querySelector('.cinelvaTheme select')));
+          if(width===390&&await page.locator('#gMenuBtn').count()&&await page.locator('#gDrawerClose').count()) {
+            await page.locator('#gMenuBtn').click();
+            await page.waitForFunction(()=>document.querySelector('#gDrawer')?.classList.contains('show'));
+            await assertTextContrast(page,['#gDrawer .gBrand span','#gDrawer>a','#gDrawer .cinelvaTheme span'],`${route} open menu ${theme}`);
+            if(theme==='light')assert.equal(await page.locator('#gDrawer').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 254, 250)',`${route}: open menu uses the light surface`);
+            await page.locator('#gDrawerClose').click();
+          }
           await assertTextContrast(page,[
             '.hero a.specialLink','.providerCheck','.movieGridSort label',
             'img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] + span',

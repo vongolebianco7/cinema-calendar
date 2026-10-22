@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ad574971767dbf7e0c7a5ed9f72adf1cc62a8395",
-  "verified_at": "2026-10-22T21:10:32.940Z",
-  "note": "Exact source passed all seven workflows including Chromium/WebKit calendar regressions, frontend route audits, mobile layout, backend build, smoke, Python and Autonomous quality. Covers sourced calendar data, outdoor extraction/freshness and calendar importer identity. Final-head CI required. Dated Lemino coverage and TMDB1591961 poster remain unresolved; Vercel excluded."
+  "head_sha": "1a4176765f94b65b6c3cf672aa10e24da4540da3",
+  "verified_at": "2026-10-22T21:24:18.362Z",
+  "note": "Exact source passed all four required workflows (Autonomous, smoke, frontend, backend), mobile layout, Python contracts and scorecard contract. Actual Chromium/WebKit assertions cover festival/outdoor headings, dates, body, official links and film labels plus shared review controls and bars. Optional completeness still running; not claimed green. Lemino dated-film coverage and TMDB1591961 actual poster remain open. No Vercel action."
 }

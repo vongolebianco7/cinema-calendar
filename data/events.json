@@ -183,6 +183,54 @@
       "source": "東京コミコン 公式",
       "source_url": "https://tokyocomiccon.jp/topics",
       "overview": "映画・コミックなどの最新情報、展示、ステージを行うポップカルチャーイベント。"
+    },
+    {
+      "title": "第27回東京フィルメックス",
+      "date": "2026-11-20",
+      "end_date": "2026-11-29",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "東京・有楽町ほか",
+      "source": "主催者公式発表",
+      "source_url": "https://filmex.jp/2026/about.html",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "title": "第18回福岡インディペンデント映画祭2026",
+      "date": "2026-12-03",
+      "end_date": "2026-12-06",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "福岡市美術館 ミュージアムホール",
+      "source": "主催・会場公式発表",
+      "source_url": "https://fcaf.jp/program/detail.php?id=1561",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "title": "サンダンス映画祭2027",
+      "date": "2027-01-21",
+      "end_date": "2027-01-31",
+      "event": "festival",
+      "service": "海外映画祭",
+      "scope": "overseas",
+      "venue": "Boulder, Colorado, USA",
+      "source": "主催者公式発表",
+      "source_url": "https://www.sundance.org/blogs/2027-sundance-film-festival-to-take-place-january-21-31-in-boulder-colorado/",
+      "checked_at": "2026-10-22"
+    },
+    {
+      "title": "恵比寿映像祭2027（仮）",
+      "date": "2027-02-05",
+      "end_date": "2027-02-21",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "東京都写真美術館ほか",
+      "source": "主催・会場公式発表",
+      "source_url": "https://topmuseum.jp/exhibition/5425/",
+      "checked_at": "2026-10-22"
     }
   ],
   "discovery_count": 0

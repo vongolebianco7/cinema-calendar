@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T09:07:07.005Z",
+  "updated_at": "2026-10-22T10:41:43.193521+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "branch": "docs/director-final-acceptance-checkpoint-20261022",
+  "branch": "fix/calendar-cross-screen-20261022",
   "head_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "pull_request": null,
+  "pull_request": 473,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -722,7 +722,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Source work469/470 and all20 specifically confirmed defects are integrated and verified. Publish this docs-only checkpoint with required CI. Then reconcile currentmain/open work against the five remaining acceptance gates; currently recorded gates require excluded Vercel work or rights/physical-device/independent-user evidence and must not be fabricated. Vercel remains excluded; no manual API refresh or repeat of movie-data74. If host reconnects, fetch latestmain before local edits. No global project-complete or unknown-bug-free claim.",
+  "next_action": "Finish exact-source CI and receipt for PR473, integrate verified calendar data additions, then repair remaining provider coverage and unavailable poster handling. Vercel excluded.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -753,5 +753,30 @@
     "note": "Executor disconnected during latest verification; three attempts confirmed environment_offline. GitHub remains available and supplied all final CI, artifact visual verification and integration. Earlier environment-available observation is historical.",
     "vercel_live_browser": "denied by auto-review under user Vercel exclusion; no retry",
     "github": "available"
+  },
+  "calendar_regression_repair": {
+    "total_tasks": 12,
+    "completed_tasks": 0,
+    "remaining_tasks": 12,
+    "implemented_changes": 6,
+    "completion_percent": 0,
+    "acceptance": "Only verified and merged fixes count as complete. Diagnostic coverage is not product completeness.",
+    "source_pr": 473,
+    "data_branch": "fix/calendar-source-data-20261022",
+    "open": [
+      "light review icon across lists",
+      "streaming posters",
+      "mixed-identity duplicate",
+      "provider coverage",
+      "TV future dates",
+      "festival/event bar contrast",
+      "future festivals",
+      "outdoor coverage",
+      "non-Hibiya film details",
+      "expired theater data",
+      "official JSON-LD extractor",
+      "truthful update freshness"
+    ],
+    "note": "Expired showtimes are already hidden by CinelvaTheaterSchedule; movie details already use official links. Do not report stale source rows as confirmed visible stale showtimes."
   }
 }

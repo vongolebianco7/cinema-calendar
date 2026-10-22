@@ -208,3 +208,14 @@ html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-personal:not(.
 }
 /* First segments inherit body ink; continuation segments already had explicit ink. */
 html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
+/* Calendar detail lists use the same selected surface as the calendar. */
+html[data-theme="light"] :is(.cinelvaFestivalDetail,.outdoorEventItem) {
+  background:var(--panel)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-theme="light"] :is(.cinelvaFestivalDetail,.outdoorEventItem) h3,
+html[data-theme="light"] .cinelvaFestivalDetail p { color:var(--text)!important; }
+html[data-theme="light"] :is(.cinelvaFestivalDetail a,.outdoorEventItem>a) { color:#795a20!important; }
+html[data-theme="light"] .outdoorScreeningTime { color:var(--muted)!important; }
+html[data-theme="light"] :is(.outdoorFilmItem,.outdoorFilmPlaceholder) {
+  background:var(--panel2)!important;color:var(--text)!important;border-color:var(--line)!important;
+}

@@ -219,3 +219,35 @@ html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
   transform:none!important;
   transform-origin:center;
 }
+
+/* Unified Cinelva wordmark plate on light surfaces only.
+   The C artwork remains untouched; its square black raster merges into this plate. */
+html[data-theme="light"] .gTop .gBrand,
+html[data-theme="light"] .gDrawerHead .gBrand,
+body[data-theme="light"] .gTop .gBrand,
+body[data-theme="light"] .gDrawerHead .gBrand {
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  padding:4px 11px 4px 5px!important;
+  background:#161616!important;
+  border-radius:10px!important;
+  text-decoration:none!important;
+}
+html[data-theme="light"] .gTop .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
+body[data-theme="light"] .gTop .gBrand .gBrandWord,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  color:#f2dfbb!important;
+}
+html[data-theme="light"] .gTop .gBrand .gBrandImage,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
+body[data-theme="light"] .gTop .gBrand .gBrandImage,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
+  background:transparent!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  transform:none!important;
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
-  "verified_at": "2026-10-21T21:59:09.146Z",
-  "note": "All six source workflows passed. Route evidence now captures full scrollable documents in both browsers; source UI defects10/10 were fixed in PR463–465. Final-head checks and full-page visual review remain required before integration."
+  "head_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
+  "verified_at": "2026-10-22T05:56:11.454Z",
+  "note": "All nine source workflows passed, including Chromium/WebKit 240-route matrices, explicit light body surfaces and opened-menu contrast checks. Final-head CI and visual review remain required before merge."
 }

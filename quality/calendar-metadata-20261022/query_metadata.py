@@ -1,6 +1,6 @@
 import concurrent.futures,json,os,pathlib,urllib.parse,urllib.request
 key=os.environ['TMDB_API_KEY'];base='https://api.themoviedb.org/3'
-queries=[('/search/movie',{'query':q}) for q in ['Cranko','Invitation to a Murder']]
+queries=[('/movie/1591961',{})]
 out={'metadata':[],'poster_health':[]}
 for path,params in queries:
  try:

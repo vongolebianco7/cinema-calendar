@@ -17,10 +17,19 @@ async function assertTextContrast(page,selectors,label='text') {
     if(!transparent(color)||!bg.parentElement)break;
     bg=bg.parentElement;
    }
-   const foreground=getComputedStyle(el).color,background=getComputedStyle(bg).backgroundColor;
-   if(transparent(background))throw new Error(`No painted background for ${selector}: ${JSON.stringify({theme:document.documentElement?.dataset.theme,ancestors})}`);
+   const foreground=getComputedStyle(el).color;
+   let background=getComputedStyle(bg).backgroundColor,backgroundElement=bg.tagName;
+   if(transparent(background)){
+    // With no painted ancestor, the browser's document canvas is the backdrop.
+    // CSS Canvas follows the active color scheme; never assume black or white.
+    const probe=document.createElement('span');probe.hidden=true;probe.style.backgroundColor='Canvas';
+    document.documentElement.append(probe);
+    try{background=getComputedStyle(probe).backgroundColor;}finally{probe.remove();}
+    backgroundElement='Canvas';
+    if(transparent(background))throw new Error(`No resolved canvas for ${selector}: ${JSON.stringify({theme:document.documentElement?.dataset.theme,ancestors})}`);
+   }
    const a=luminance(foreground),b=luminance(background);
-   return {selector,text:el.textContent.trim().slice(0,70),foreground,background,backgroundElement:bg.tagName,ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+   return {selector,text:el.textContent.trim().slice(0,70),foreground,background,backgroundElement,ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
   }));
  },selectors);
  for(const result of results)assert.ok(result.ratio>=4.5,`${label}: ${JSON.stringify(result)}`);

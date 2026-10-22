@@ -32,3 +32,23 @@ test('measurements wait for the new document to paint before sampling',async()=>
  const results=await assertTextContrast(page,['label']);
  assert.equal(frames.length,2);assert.ok(results[0].ratio>5);
 });
+
+for(const [scheme,canvas,foreground] of [['light','rgb(255, 255, 255)','rgb(100, 100, 93)'],['dark','rgb(0, 0, 0)','rgb(242, 242, 242)']]) {
+ function canvasPage(color){
+  const root={tagName:'HTML',parentElement:null,dataset:{theme:scheme},append:()=>{}};
+  const label={tagName:'LABEL',parentElement:root,isConnected:true,textContent:'イベント',getClientRects:()=>[{}]};
+  const probe={hidden:false,style:{},remove:()=>{}};
+  return {evaluate:async(fn,selectors)=>vm.runInNewContext(`(${fn.toString()})(selectors)`,{
+   selectors,document:{querySelectorAll:()=>[label],documentElement:root,createElement:()=>probe},
+   requestAnimationFrame:callback=>callback(),
+   getComputedStyle:el=>({color,backgroundColor:el===probe?canvas:'rgba(0, 0, 0, 0)'})
+  })};
+ }
+ test(`${scheme} transparent document uses the browser canvas, not transparent black`,async()=>{
+  const result=await assertTextContrast(canvasPage(foreground),['label']);
+  assert.equal(result[0].background,canvas);assert.equal(result[0].backgroundElement,'Canvas');
+ });
+ test(`${scheme} unreadable text still fails on the browser canvas`,async()=>{
+  await assert.rejects(assertTextContrast(canvasPage(canvas),['label']),/ratio/);
+ });
+}

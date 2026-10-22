@@ -104,6 +104,7 @@ async function freePort() {
           await page.waitForFunction(() => Boolean(document.querySelector('.cinelvaTheme select')));
           await assertTextContrast(page,[
             '.hero a.specialLink','.providerCheck','.movieGridSort label',
+            'img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] + span',
             '#summaryView .cs-donut-global-mode>span',
             'body:has(#events) .tabs a[aria-current="page"]',
             'body:has(#events) .filmTitle','body:has(#events) .filmMeta',
@@ -111,8 +112,8 @@ async function freePort() {
             'body:has(#events) .notice','body:has(#data-status) .card a'
           ],`${route} ${width}px ${theme}`);
           if(theme==='light') {
-            const backings=await page.locator('.brand img').evaluateAll(images=>images.map(img=>getComputedStyle(img).backgroundColor));
-            assert.ok(backings.every(color=>color!=='rgba(0, 0, 0, 0)'),`${route}: secondary logo must have a visible backing`);
+            const backings=await page.locator('img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"]').evaluateAll(images=>images.filter(img=>img.getClientRects().length).map(img=>getComputedStyle(img).backgroundColor));
+            assert.ok(backings.every(color=>color==='rgb(23, 23, 23)'),`${route}: secondary logo must have a visible backing`);
           }
           if(route==='credits.html') {
             await page.locator('.tmdbLogoFallback').waitFor({state:'visible'});

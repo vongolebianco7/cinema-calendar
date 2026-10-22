@@ -17,8 +17,9 @@ if raw.lstrip()[end:].strip():
 result = {"generated_at": source.get("generated_at"), "directors": {}}
 for key, director in source.get("directors", {}).items():
     slim = {k: director.get(k) for k in (
-        "id", "name", "nameJa", "original_name", "also_known_as", "profile_path",
-        "birthday", "deathday", "place_of_birth", "biography_ja", "coverage", "source_url"
+        "id", "name", "nameJa", "name_status", "name_source_url", "original_name", "also_known_as", "profile_path",
+        "birthday", "deathday", "place_of_birth", "biography_ja", "coverage", "source_url",
+        "credits_source_url", "checked_at"
     ) if director.get(k) is not None}
     slim["works"] = []
     for work in director.get("works", []):

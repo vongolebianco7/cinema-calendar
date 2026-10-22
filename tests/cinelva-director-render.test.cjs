@@ -290,3 +290,21 @@ test('a unique source movie credit resolves old spellings without explicit perso
   const {row}=render({records:[reviewed],works,name:'サム・ハーグレイヴ',profile:{id:1120883,coverage:{truncated:false}}});
   assert.match(row.innerHTML,/9/);
 });
+
+test('the real mobile projection keeps the original-name and unofficial-reading notice visible',()=>{
+  const os=require('node:os'),path=require('node:path'),{execFileSync}=require('node:child_process');
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-director-projection-'));
+  let projected;
+  try {
+    fs.mkdirSync(path.join(directory,'scripts'));fs.mkdirSync(path.join(directory,'data'));
+    fs.copyFileSync('scripts/build_director_mobile.py',path.join(directory,'scripts/build_director_mobile.py'));
+    const work={id:99101,title:'確認済み長編',director:'仮のカナ',job:'Director',source:'tmdb',runtime:120};
+    fs.writeFileSync(path.join(directory,'data/directors.json'),JSON.stringify({directors:{42:{id:42,name:'仮のカナ',nameJa:'仮のカナ',name_status:'transliterated',original_name:'Retained Source Name',coverage:{truncated:false},works:[work]}}}));
+    execFileSync('python',[path.join(directory,'scripts/build_director_mobile.py')]);
+    projected=JSON.parse(fs.readFileSync(path.join(directory,'data/directors-mobile.json'),'utf8')).directors['42'];
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+  const {row,detail}=render({records:[{...projected.works[0],rating:4}],works:projected.works,name:projected.name,profile:projected});
+  row.listeners.click();
+  assert.match(detail.innerHTML,/原名：Retained Source Name/);
+  assert.match(detail.innerHTML,/日本語名は原名からのカタカナ表記です。/);
+});

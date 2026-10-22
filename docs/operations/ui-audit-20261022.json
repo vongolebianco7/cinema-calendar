@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T06:06:58.943916+00:00",
+  "updated_at": "2026-10-22T06:38:15.710845+00:00",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
-    "confirmed_defects": 18,
+    "confirmed_defects": 19,
     "completed_fixes": 18,
-    "remaining_confirmed_defects": 0,
-    "fixes_implemented_pending_validation": 0,
+    "remaining_confirmed_defects": 1,
+    "fixes_implemented_pending_validation": 1,
     "overall_ui_completion_percent": null,
-    "confirmed_defect_completion_percent": 100.0
+    "confirmed_defect_completion_percent": 94.7
   },
   "coverage": {
     "initial_mobile_chromium_screenshots_reviewed": 30,
@@ -229,12 +229,20 @@
       "pr": 467,
       "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
       "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "UI-20261022-019",
+      "title": "Mobile director catalog drops name-basis metadata and lags the complete source",
+      "status": "implemented_pending_ci_and_data_publication",
+      "root_cause": "Projection omitted name_status and source fields; movie updates did not rebuild the projection and independent bot commits do not recursively trigger publication. Raw901/mobile849 before fix.",
+      "test": "RED real builder/render loses original-name and kana disclaimer; real Git offline generation introduced protected artifact; latest-source addition regression preserves parallel refresh IDs/works/dates. GREEN Python18, Node director27, shared quality Node273.",
+      "remaining": "Exact-source CI, receipt, merge and automatic publication with901 matching IDs and preserved works/dates. Official credits11/editorial readings8; all editorial readings retain original-name and disclaimer."
     }
   ],
   "pr": 463,
-  "remaining_audit": "All18 specifically confirmed defects are merged after source9/final10 successful workflows and visual review. This is not a claim that every possible interaction or unknown defect is exhausted. Earlier full-document review remains recorded with its own source; latest review covered all16 root-page edges in each browser plus changed source/event/summary sections, related cards and320px review forms. Physical-device acceptance is a separate gate.",
+  "remaining_audit": "18 confirmed defects merged and verified; director projection/provenance follow-up is implemented pending exact-source CI and generated-data publication. Unknown defects and physical-device acceptance remain separate.",
   "followup_pr": 467,
-  "scope_version": 2,
+  "scope_version": 3,
   "scope_history": [
     {
       "version": 1,
@@ -247,6 +255,12 @@
       "confirmed": 18,
       "completed": 18,
       "note": "Eight follow-up fixes merged in467 after exact-source9 and receipt10 workflows passed. Stable32 acceptance denominator unchanged."
+    },
+    {
+      "version": 3,
+      "confirmed": 19,
+      "completed": 18,
+      "note": "One additional director projection/provenance defect found; offline source/mobile synchronization and19 labels implemented, pending exact-source CI and generated-data publication. Stable32 denominator unchanged."
     }
   ]
 }

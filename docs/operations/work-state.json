@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T06:06:58.943916+00:00",
+  "updated_at": "2026-10-22T06:38:15.710845+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
-  "branch": "docs/ui-acceptance-checkpoint-20261022",
-  "head_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+  "base_sha": "9e0d0f325da003094fcd9ed59ca18c4dfcf94605",
+  "branch": "fix/director-mobile-projection-20261022",
+  "head_sha": "9e0d0f325da003094fcd9ed59ca18c4dfcf94605",
   "pull_request": null,
   "work_items": [
     {
@@ -677,6 +677,10 @@
       "source_frontend_run": 39729936196,
       "final_frontend_run": 39730885345,
       "source_artifact": 12405247420
+    },
+    {
+      "check": "Director projection/provenance offline regression",
+      "result": "Python18 and director Node27 passed; shared quality Node273 passed. Real Git fixture confirms normalization/builder introduce only allowed generated data. Focused review found protected-report and concurrent-director-overwrite paths; reports moved outside source and movie publisher merges absent IDs into latest source after rebasing other snapshots. New19 names use11 primary credits and8 explicitly editorial kana, without advancing source observation dates. No source/mobile publication yet."
     }
   ],
   "deployment": {
@@ -702,7 +706,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "PR467 merged3a190245; source9/final10 allgreen, audit18/18 repaired, progress27/32 residual5 fix28 84.4%. Publish this docs checkpoint after deterministic checks, then reconcile remaining approved work. Director catalog missing-person repair is complete;19 source names retain explicit Japanese-unavailable status pending reliable localization evidence. Never guess kanji or claim full Japanese localization. Vercel excluded; do not revisit provider/live-origin checks, and do not rerun the earlier authorized movie-data update74.",
+  "next_action": "Create source PR for director projection/provenance; exact-source four critical workflows must succeed, then receipt-only commit and final-head CI. Merge and verify automatic offline publisher yields901 matching full/mobile IDs, retained work IDs/checked_at and explicit name_status. Do not count fix29 until source and generated-data integration verified. Vercel excluded; no manual API refresh or repeat of movie-data update74.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -720,10 +724,10 @@
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
-    "confirmed_defects": 18,
+    "confirmed_defects": 19,
     "verified_and_merged_fixes": 18,
-    "remaining_confirmed_defects": 0,
-    "next_action": "Reconcile remaining acceptance gates; all18 specifically confirmed UI defects repaired in463–467. Do not fabricate global bug-free status or production publication. Vercel excluded."
+    "remaining_confirmed_defects": 1,
+    "next_action": "Finish exact-source CI and safe generated-data publication for901-person mobile projection with explicit official/editorial name provenance;18 other confirmed defects remain merged."
   },
   "current_runtime": {
     "host_shell": "available",

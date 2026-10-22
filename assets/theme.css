@@ -146,3 +146,21 @@ body:has(.theaterTools) #grid.grid { grid-template-columns:repeat(3,minmax(0,1fr
 body:has(.theaterTools) #grid>:is(.empty,.tableHint,.theaterTableWrap) { grid-column:1/-1; }
 @media(max-width:720px) { body:has(.theaterTools) #grid.grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; } }
 @media(max-width:520px) { body:has(.theaterTools) #grid.grid { grid-template-columns:1fr!important; } }
+
+/* Active director details retain readable text on the selected light surface. */
+html[data-theme="light"] #directorsView .director-filmography {
+  background:var(--panel)!important;color:var(--ink)!important;border-color:var(--line)!important;
+}
+html[data-theme="light"] #directorsView :is(.director-sort-bar label,.director-profile p,.director-filmography-head p,.director-film-year,.director-film-pending,.director-coverage-note) {
+  color:var(--muted)!important;
+}
+html[data-theme="light"] #directorsView :is(.director-progress,.director-film-rating,.director-coverage-note a) {
+  color:var(--gold)!important;
+}
+html[data-theme="light"] #directorsView .director-film-poster {
+  background:var(--soft)!important;color:var(--ink)!important;border-color:var(--line)!important;
+}
+html[data-theme="light"] #directorsView .director-achievement[data-tier="4"] span { color:#246996; }
+html[data-theme="light"] #directorsView .director-achievement[data-tier="3"] span { color:#806027; }
+html[data-theme="light"] #directorsView .director-achievement[data-tier="2"] span { color:#5d6673; }
+html[data-theme="light"] #directorsView .director-achievement[data-tier="1"] span { color:#87502c; }

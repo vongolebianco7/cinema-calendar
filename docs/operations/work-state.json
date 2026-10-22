@@ -1,13 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T06:38:15.710845+00:00",
+  "updated_at": "2026-10-22T07:19:06.082523+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "9e0d0f325da003094fcd9ed59ca18c4dfcf94605",
-  "branch": "fix/director-mobile-projection-20261022",
-  "head_sha": "9e0d0f325da003094fcd9ed59ca18c4dfcf94605",
-  "pull_request": null,
+  "base_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31",
+  "branch": "fix/director-active-contrast-20261022",
+  "head_sha": "59964853d741d9a10d1f338166c39fe4eb2cd751",
+  "pull_request": {
+    "number": 470,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/470",
+    "branch": "fix/director-active-contrast-20261022",
+    "head_sha": "59964853d741d9a10d1f338166c39fe4eb2cd751"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -500,10 +505,10 @@
     {
       "id": "MY-DIRECTOR-COMPLETE",
       "title": "Sourced director names, uncapped credits, profiles, accurate watched progress",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge.",
-      "ci": "Current catalog901/901 has source URL,checked_at anduntruncated credits;641 Japanese names,241 explicitly labeled transliterations,19 explicit Japanese-unavailable source names. Preserve truthful fallback; this is not a claim all901 names are Japanese.",
-      "remaining_name_localizations": 19
+      "ci": "469 source0a2be38d all7/finalf16499a7 all8 successful; merge55faca02; automatic publisherfd8722e3. Raw/mobile901 persons and11087 work IDs identical; every original_name/checked_at preserved.652 Japanese names and249 explicitly editorial kana with original-name/disclaimer; no inferred kanji or official claim for editorial readings. Both browser journeys use actual generated projection.",
+      "remaining_name_localizations": 0
     },
     {
       "id": "P0-DEPLOYMENT-BOUNDARIES",
@@ -531,7 +536,7 @@
       "title": "Repair absent legacy directors and stop presenting records as a complete catalog",
       "status": "merged",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
-      "ci": "Published901-person full catalog and849-person mobile catalog both include officialTMDB person190 with41 untruncated directing works. Alias/missing-catalog rendering and metadata tests pass in current272-test quality gate and latest browser journeys; unknown catalogs still show no invented denominator."
+      "ci": "Published raw/mobile catalogs now both901 persons, with person190/Eastwood41 untruncated feature directing works. All IDs/works/observation dates preserved. Unknown catalogs retain no invented denominator."
     },
     {
       "id": "FINAL-QA-20261020",
@@ -681,6 +686,10 @@
     {
       "check": "Director projection/provenance offline regression",
       "result": "Python18 and director Node27 passed; shared quality Node273 passed. Real Git fixture confirms normalization/builder introduce only allowed generated data. Focused review found protected-report and concurrent-director-overwrite paths; reports moved outside source and movie publisher merges absent IDs into latest source after rebasing other snapshots. New19 names use11 primary credits and8 explicitly editorial kana, without advancing source observation dates. No source/mobile publication yet."
+    },
+    {
+      "check": "PR469 source and generated-data integration",
+      "result": "source0a2be38d all7/finalf16499a7 all8 successful. Actual generated901-person catalog in both engines and240 route cells perengine,0 uncaught/local asset errors. Source backend npm audit transient endpoint failure diagnosed against identical previous lockfile, one failed-job retry succeeded. automatic publisherfd8722e3 verified901 IDs/original names/checked_at and11087 work IDs retained. Extra contrast defect470 independently reproduced ratio1.598 and is pending."
     }
   ],
   "deployment": {
@@ -706,7 +715,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Create source PR for director projection/provenance; exact-source four critical workflows must succeed, then receipt-only commit and final-head CI. Merge and verify automatic offline publisher yields901 matching full/mobile IDs, retained work IDs/checked_at and explicit name_status. Do not count fix29 until source and generated-data integration verified. Vercel excluded; no manual API refresh or repeat of movie-data update74.",
+  "next_action": "PR470 source59964853: quality/backend/smoke/mobile passed; frontend and scorecard pending at checkpoint. Light correction passed actual checks; dark source link contrast2.009 reproduced then corrected using existing gold. Await required source CI, receipt-only update, final CI, then inspect actual light/dark profile/full screenshots and merge. Vercel excluded; no manual API refresh/movie-data74 rerun.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -714,20 +723,22 @@
     "completed_tasks": 27,
     "remaining_tasks": 5,
     "completion_percent": 84.4,
-    "confirmed_additional_fixes": 28
+    "confirmed_additional_fixes": 29
   },
   "last_merged_pull_request": {
-    "number": 467,
-    "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
-    "final_head": "ab43a3809c2a4be884efbb085f4fad88ba06b8ed",
-    "source_head": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    "number": 469,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/469",
+    "merge_sha": "55faca022cca3c21d888d3cd2eb391209e0f3163",
+    "source_sha": "0a2be38deb4be25bc74cd07efdde69337aa862eb",
+    "receipt_sha": "f16499a7edf6bb312b40ea4b6570ee95322de285",
+    "published_data_sha": "fd8722e3d51e5831ab2b1b4197ff8322f22f1d31"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
-    "confirmed_defects": 19,
-    "verified_and_merged_fixes": 18,
+    "confirmed_defects": 20,
+    "verified_and_merged_fixes": 19,
     "remaining_confirmed_defects": 1,
-    "next_action": "Finish exact-source CI and safe generated-data publication for901-person mobile projection with explicit official/editorial name provenance;18 other confirmed defects remain merged."
+    "next_action": "Finish470 exact-source/final CI, inspect light/dark actual profile/full-page screenshots, merge and checkpoint fix30. No global bug-free claim."
   },
   "current_runtime": {
     "host_shell": "available",

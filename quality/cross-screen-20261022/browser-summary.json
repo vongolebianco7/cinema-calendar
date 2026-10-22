@@ -1,0 +1,160 @@
+{
+  "chromium": {
+    "states_inspected": 84,
+    "low_contrast_eye_states": [
+      {
+        "state": "index.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "rankings.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "revivals.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "events.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-10",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-11",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-12",
+        "contrast": 1.12
+      },
+      {
+        "state": "tv-10",
+        "contrast": 1.12
+      },
+      {
+        "state": "events-10",
+        "contrast": 1.12
+      }
+    ],
+    "low_contrast_bar_occurrences": [
+      {
+        "state": "festival-10",
+        "text": "第39回東京国際映画祭",
+        "contrast": 1.02
+      },
+      {
+        "state": "festival-11",
+        "text": "第39回東京国際映画祭",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "森の映画祭2026",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "HIBIYA CINEMA FESTIVAL 2026 →",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "← HIBIYA CINEMA FESTIVAL 2026 →",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "← HIBIYA CINEMA FESTIVAL 2026",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-12",
+        "text": "東京コミコン2026",
+        "contrast": 1.02
+      }
+    ],
+    "overflow_states": []
+  },
+  "webkit": {
+    "states_inspected": 84,
+    "low_contrast_eye_states": [
+      {
+        "state": "index.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "rankings.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "revivals.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "events.html",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-10",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-11",
+        "contrast": 1.12
+      },
+      {
+        "state": "streaming-12",
+        "contrast": 1.12
+      },
+      {
+        "state": "tv-10",
+        "contrast": 1.12
+      },
+      {
+        "state": "events-10",
+        "contrast": 1.12
+      }
+    ],
+    "low_contrast_bar_occurrences": [
+      {
+        "state": "festival-10",
+        "text": "第39回東京国際映画祭",
+        "contrast": 1.02
+      },
+      {
+        "state": "festival-11",
+        "text": "第39回東京国際映画祭",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "森の映画祭2026",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "HIBIYA CINEMA FESTIVAL 2026 →",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "← HIBIYA CINEMA FESTIVAL 2026 →",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-10",
+        "text": "← HIBIYA CINEMA FESTIVAL 2026",
+        "contrast": 1.02
+      },
+      {
+        "state": "events-12",
+        "text": "東京コミコン2026",
+        "contrast": 1.02
+      }
+    ],
+    "overflow_states": []
+  }
+}

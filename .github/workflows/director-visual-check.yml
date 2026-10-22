@@ -1,0 +1,50 @@
+name: Inspect director artifact once
+on:
+  push:
+    branches: [qa/director-visual-check-20261022]
+    paths: [.github/workflows/director-visual-check.yml]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: cinelva-route-audit
+          run-id: 39740981085
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/director-audit
+      - name: Prepare exact artifact previews
+        run: |
+          python -c 'import PIL' || python -m pip install --quiet Pillow
+          mkdir -p qa/director-provenance-20261022
+          cp "$RUNNER_TEMP"/director-audit/director-provenance/*.png qa/director-provenance-20261022/
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          root=Path('qa/director-provenance-20261022')
+          files=[root/f'{engine}-{theme}-full-390.png' for engine in ['chromium','webkit'] for theme in ['light','dark']]
+          for tag,height,position in [('overview',1250,'top'),('footer',700,'bottom')]:
+              sheet=Image.new('RGB',(1560,height+30),'#dddddd')
+              draw=ImageDraw.Draw(sheet)
+              for i,path in enumerate(files):
+                  image=Image.open(path).convert('RGB')
+                  top=0 if position=='top' else max(0,image.height-height)
+                  draw.text((i*390+4,7),path.name,fill='black')
+                  sheet.paste(image.crop((0,top,390,top+height)),(i*390,30))
+              sheet.save(root/f'{tag}-contact.png')
+          (root/'manifest.json').write_text(json.dumps({'source':'f11a9301cca54684e0211b65a3749923b4d4aeab','run_id':39740981085,'artifact_id':12409767655,'files':[{ 'name':p.name,'size':Image.open(p).size} for p in files]},indent=2)+'\n')
+          PY
+      - name: Save previews only on this QA branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add qa/director-provenance-20261022
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve exact director artifact previews for visual inspection'
+          git push origin HEAD:qa/director-visual-check-20261022

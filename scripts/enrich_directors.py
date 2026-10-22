@@ -53,7 +53,7 @@ def enrich_director(old, profile, today, aliases=None):
     transliterated = False
     if not japanese and reading and reading['original_name'] in [old.get('name'), old.get('original_name'), profile.get('name'), *profile.get('also_known_as', [])]:
         japanese = reading['nameJa']
-        transliterated = True
+        transliterated = reading.get('basis') != 'official_credit'
     name = japanese or old.get('name') or profile.get('name') or ''
     previous = {str(work.get('id')): work for work in old.get('works', [])}
     works = {}
@@ -83,6 +83,7 @@ def enrich_director(old, profile, today, aliases=None):
         'original_name': profile.get('name') or old.get('name'),
         'also_known_as': list(dict.fromkeys(filter(None, [old.get('name'), *profile.get('also_known_as', [])]))),
         'name_status': 'transliterated' if transliterated else 'japanese' if japanese else 'japanese_unavailable',
+        'name_source_url': reading.get('source_url') if reading and reading.get('basis') == 'official_credit' and name == reading['nameJa'] else old.get('name_source_url') if name == old.get('name') else None,
         'profile_path': profile.get('profile_path'), 'birthday': profile.get('birthday'),
         'deathday': profile.get('deathday'), 'place_of_birth': profile.get('place_of_birth'),
         'biography_ja': biography if JAPANESE.search(biography) else '',
@@ -164,9 +165,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--limit', type=int, default=800)
     parser.add_argument('--normalize-only', action='store_true')
+    parser.add_argument('--merge-additions', type=Path, help='Offline only: add absent IDs to the latest snapshot without replacing existing profiles')
+    parser.add_argument('--report-path', type=Path)
     parser.add_argument('--discover-names', action='store_true')
     parser.add_argument('--verify-person', type=int)
     args = parser.parse_args()
+    if args.merge_additions and not args.normalize_only:
+        parser.error('--merge-additions requires --normalize-only')
     key = os.environ.get('TMDB_API_KEY')
     if not key and not args.normalize_only:
         raise SystemExit('TMDB_API_KEY is required; previous snapshot preserved')
@@ -174,6 +179,10 @@ def main():
     snapshot = json.loads(path.read_text())
     before = json.dumps(snapshot, ensure_ascii=False, sort_keys=True)
     directors = snapshot['directors']
+    if args.merge_additions:
+        incoming = json.loads(args.merge_additions.read_text())['directors']
+        for identifier, director in incoming.items():
+            directors.setdefault(identifier, director)
     names = existing_name_aliases()
     # Explicitly requested directors missing from the catalog. TMDB search
     # still requires one exact matching person name and actual directing credits.
@@ -272,11 +281,14 @@ def main():
     for identifier, director in directors.items():
         reading = name_readings().get(identifier)
         previous_name = director.get('name')
-        known_names = set(names.values())
+        known_names = set(names.values()) | {entry['nameJa'] for entry in name_readings().values() if entry.get('basis') == 'official_credit'}
         if director.get('name_status') == 'japanese' and not KANA.search(previous_name or '') and previous_name != director.get('original_name') and previous_name not in known_names:
             director.update(name=director.get('original_name') or previous_name, name_status='japanese_unavailable', nameJa='')
         if director.get('name_status') == 'japanese_unavailable' and reading and reading['original_name'] in [previous_name, director.get('original_name')]:
-            director.update(name=reading['nameJa'], nameJa=reading['nameJa'], name_status='transliterated')
+            official = reading.get('basis') == 'official_credit'
+            director.update(name=reading['nameJa'], nameJa=reading['nameJa'], name_status='japanese' if official else 'transliterated')
+            if official:
+                director['name_source_url'] = reading['source_url']
             director['also_known_as'] = list(dict.fromkeys([*director.get('also_known_as', []), previous_name]))
             for work in director.get('works', []):
                 if work.get('director') == previous_name:
@@ -294,9 +306,11 @@ def main():
         'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
         'transliterated_names': sum(value.get('name_status') == 'transliterated' for value in directors.values()),
         'japanese_biographies': sum(bool(value.get('biography_ja')) for value in directors.values())}
-    report_path = ROOT / 'artifacts/director-enrichment.json'
-    report_path.parent.mkdir(exist_ok=True)
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+    # Offline projection must not create unreviewed files inside the source tree.
+    if args.report_path or not args.normalize_only:
+        report_path = args.report_path or ROOT / 'artifacts/director-enrichment.json'
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({key: value for key, value in report.items() if key not in ('japanese_unavailable', 'failures', 'unrefreshed')}, ensure_ascii=False))
     print('Missing Japanese names:', len(report['japanese_unavailable']), 'Failed:', len(failures))
     if failures or discovery['failures']:

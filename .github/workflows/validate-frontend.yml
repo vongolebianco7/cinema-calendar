@@ -127,6 +127,10 @@ jobs:
           node --test tests/cinelva-route-manifest.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
+      - name: Generate the same offline director projection used by publication
+        run: |
+          python scripts/enrich_directors.py --normalize-only
+          python scripts/build_director_mobile.py
       - name: Run My Cinelva mobile browser journey
         run: |
           npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0

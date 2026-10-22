@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "policy": "Editorial kana transliterations of the retained source name, not claims of official Japanese credit or inferred kanji. TMDB Japanese names take priority.",
+  "policy": "TMDB Japanese names take priority. official_credit entries retain a linked primary credit and matching source identity; transliteration entries are editorial kana readings of the retained source name, not official Japanese credits or inferred kanji.",
   "directors": {
     "2304850": {
       "original_name": "이상학",
@@ -1220,6 +1220,134 @@
     "3246439": {
       "original_name": "Wang Qi",
       "nameJa": "ワン・チー",
+      "basis": "transliteration"
+    },
+    "3339721": {
+      "original_name": "Yoichiro Serizawa",
+      "nameJa": "芹沢洋一郎",
+      "basis": "official_credit",
+      "source_url": "https://www.imageforum.co.jp/cinematheque/1097/index.html",
+      "checked_at": "2026-10-22",
+      "credit_title": "発熱タンゴ"
+    },
+    "2946613": {
+      "original_name": "Yuri Takei",
+      "nameJa": "武井佑吏",
+      "basis": "official_credit",
+      "source_url": "https://www.honbana.com/",
+      "checked_at": "2026-10-22",
+      "credit_title": "本当にあった話（の話）"
+    },
+    "6539186": {
+      "original_name": "Asato Sakamoto",
+      "nameJa": "坂本麻人",
+      "basis": "official_credit",
+      "source_url": "https://trout-lastwaltz.com/",
+      "checked_at": "2026-10-22",
+      "credit_title": "サクラマスのラストワルツ"
+    },
+    "1378577": {
+      "original_name": "நெல்சன் திலீப்குமார்",
+      "nameJa": "ネルソン・ディリープクマール",
+      "basis": "official_credit",
+      "source_url": "https://spaceboxjapan.jp/jailer/",
+      "checked_at": "2026-10-22",
+      "credit_title": "ஜெயிலர் 2"
+    },
+    "1175984": {
+      "original_name": "Jacky Woo",
+      "nameJa": "ジャッキー・ウー",
+      "basis": "official_credit",
+      "source_url": "https://enkanosakamichi.com/",
+      "checked_at": "2026-10-22",
+      "credit_title": "演歌の坂道"
+    },
+    "6532067": {
+      "original_name": "Haruko Konishi",
+      "nameJa": "小西晴子",
+      "basis": "official_credit",
+      "source_url": "https://motion-gallery.net/projects/ronganoumi",
+      "checked_at": "2026-10-22",
+      "credit_title": "ロンガの海"
+    },
+    "1583324": {
+      "original_name": "윤가은",
+      "nameJa": "ユン・ガウン",
+      "basis": "official_credit",
+      "source_url": "https://www.bitters.co.jp/jooin/",
+      "checked_at": "2026-10-22",
+      "credit_title": "극장의 시간들"
+    },
+    "2090609": {
+      "original_name": "Itaru Matsui",
+      "nameJa": "松井至",
+      "basis": "official_credit",
+      "source_url": "https://www.itarumatsui.com/",
+      "checked_at": "2026-10-22",
+      "credit_title": "走馬灯"
+    },
+    "6557325": {
+      "original_name": "Kenichiro Usui",
+      "nameJa": "臼井賢一郎",
+      "basis": "official_credit",
+      "source_url": "https://kbc-cinema.com/pages/movies/daiku",
+      "checked_at": "2026-10-22",
+      "credit_title": "キセキの第九"
+    },
+    "1535481": {
+      "original_name": "Janus Victoria",
+      "nameJa": "ジャヌス・ヴィクトリア",
+      "basis": "official_credit",
+      "source_url": "https://www.artscouncil-tokyo.jp/news/30022/",
+      "checked_at": "2026-10-22",
+      "credit_title": "ひとりで死ぬのはイヤだから"
+    },
+    "6551484": {
+      "original_name": "Yoshihiro Tamura",
+      "nameJa": "田村祥宏",
+      "basis": "official_credit",
+      "source_url": "https://issueplusdesign.jp/dementia_world/movie/",
+      "checked_at": "2026-10-22",
+      "credit_title": "認知症世界の歩き方"
+    },
+    "565121": {
+      "original_name": "Thomas Vincent",
+      "nameJa": "トマ・ヴァンサン",
+      "basis": "transliteration"
+    },
+    "1945933": {
+      "original_name": "Dipendra Lama",
+      "nameJa": "ディペンドラ・ラマ",
+      "basis": "transliteration"
+    },
+    "5361732": {
+      "original_name": "Park Sang-geun",
+      "nameJa": "パク・サングン",
+      "basis": "transliteration"
+    },
+    "3432927": {
+      "original_name": "Taehwan Yum",
+      "nameJa": "ヨム・テファン",
+      "basis": "transliteration"
+    },
+    "1364669": {
+      "original_name": "t.o.L",
+      "nameJa": "ティー・オー・エル",
+      "basis": "transliteration"
+    },
+    "93883": {
+      "original_name": "John Rice",
+      "nameJa": "ジョン・ライス",
+      "basis": "transliteration"
+    },
+    "6323070": {
+      "original_name": "Martin, Gudjencio",
+      "nameJa": "マーティン・グジェンシオ",
+      "basis": "transliteration"
+    },
+    "4971574": {
+      "original_name": "Hiroya Brian Nakano",
+      "nameJa": "ヒロヤ・ブライアン・ナカノ",
       "basis": "transliteration"
     }
   }

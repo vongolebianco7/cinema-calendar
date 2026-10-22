@@ -168,5 +168,131 @@ class DirectorEnrichmentTests(unittest.TestCase):
             self.module.enrich_director({'id': 1}, {'id': 1, 'name': 'Example'}, '2026-10-18')
 
 
+    def test_official_name_entries_retain_primary_credit_provenance(self):
+        import datetime
+        from urllib.parse import urlparse
+        for identifier, entry in self.module.name_readings().items():
+            self.assertIn(entry['basis'], ['transliteration', 'official_credit'], identifier)
+            self.assertTrue(entry['original_name'], identifier)
+            self.assertRegex(entry['nameJa'], '[ぁ-ゖァ-ヺ一-鿿]', identifier)
+            if entry['basis'] == 'official_credit':
+                url = urlparse(entry['source_url'])
+                self.assertEqual(url.scheme, 'https', identifier)
+                self.assertTrue(url.hostname, identifier)
+                datetime.date.fromisoformat(entry['checked_at'])
+
+    def test_official_credit_name_is_not_mislabeled_as_an_editorial_reading(self):
+        profile = self.profile()
+        profile.update(id=2946613, name='Yuri Takei', also_known_as=[])
+        old = {'id': 2946613, 'name': 'Yuri Takei'}
+        result = self.module.enrich_director(old, profile, '2026-10-22')
+        self.assertEqual(result['nameJa'], '武井佑吏')
+        self.assertEqual(result['name_status'], 'japanese')
+        self.assertEqual(result.get('name_source_url'), 'https://www.honbana.com/')
+        profile['name'] = 'Different Person'
+        mismatched = self.module.enrich_director({'id': 2946613, 'name': 'Different Person'}, profile, '2026-10-22')
+        self.assertEqual(mismatched['name_status'], 'japanese_unavailable')
+
+    def test_mobile_projection_retains_name_basis_and_observation_provenance(self):
+        import json
+        import shutil
+        import subprocess
+        import sys
+        import tempfile
+        source = {'generated_at': '2026-10-01', 'directors': {}}
+        for identifier, name, status in [('1', '仮のカナ', 'transliterated'), ('2', '武井佑吏', 'japanese'), ('3', 'Unknown Name', 'japanese_unavailable')]:
+            source['directors'][identifier] = {'id': int(identifier), 'name': name, 'name_status': status,
+                'original_name': 'Retained original', 'name_source_url': 'https://www.honbana.com/',
+                'source_url': f'https://www.themoviedb.org/person/{identifier}',
+                'credits_source_url': f'https://api.themoviedb.org/3/person/{identifier}/movie_credits',
+                'checked_at': '2026-10-01T00:00:00Z', 'works': [{'id': int(identifier), 'job': 'Director'}]}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'scripts').mkdir(); (root / 'data').mkdir()
+            shutil.copy(ROOT / 'scripts/build_director_mobile.py', root / 'scripts')
+            (root / 'data/directors.json').write_text(json.dumps(source))
+            subprocess.run([sys.executable, str(root / 'scripts/build_director_mobile.py')], check=True, capture_output=True)
+            mobile = json.loads((root / 'data/directors-mobile.json').read_text())
+        for identifier, director in source['directors'].items():
+            projected = mobile['directors'][identifier]
+            for field in ['name_status', 'original_name', 'name_source_url', 'source_url', 'credits_source_url', 'checked_at']:
+                self.assertEqual(projected.get(field), director[field], f'{identifier}: {field}')
+            self.assertEqual(projected['works'], director['works'])
+
+    def test_movie_additions_never_overwrite_a_concurrent_director_refresh(self):
+        import json
+        import os
+        import shutil
+        import subprocess
+        import sys
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'repo'
+            for folder in ['scripts', 'data', 'js']:
+                (root / folder).mkdir(parents=True)
+            for relative in ['scripts/enrich_directors.py', 'scripts/build_director_mobile.py',
+                             'data/director_name_readings.json', 'js/cinelva-records-page.js']:
+                shutil.copy(ROOT / relative, root / relative)
+            latest = {'directors': {
+                '1': {'id': 1, 'name': '更新済み監督', 'checked_at': '2026-10-22', 'works': [{'id': 42}]},
+                '2': {'id': 2, 'name': '並行追加監督', 'works': [{'id': 43}]}}}
+            stale = {'directors': {
+                '1': {'id': 1, 'name': '古い監督', 'checked_at': '2026-10-01', 'works': [{'id': 1}]},
+                '3': {'id': 3, 'name': '映画更新で追加', 'works': [{'id': 44}]}}}
+            (root / 'data/directors.json').write_text(json.dumps(latest))
+            incoming = Path(directory) / 'incoming.json'
+            incoming.write_text(json.dumps(stale))
+            report = Path(directory) / 'report.json'
+            env = {key: value for key, value in os.environ.items() if key != 'TMDB_API_KEY'}
+            subprocess.run([sys.executable, str(root / 'scripts/enrich_directors.py'), '--normalize-only',
+                            '--merge-additions', str(incoming), '--report-path', str(report)],
+                           env=env, check=True, capture_output=True)
+            merged = json.loads((root / 'data/directors.json').read_text())['directors']
+            self.assertEqual(set(merged), {'1', '2', '3'})
+            self.assertEqual([work['id'] for work in merged['1']['works']], [42])
+            self.assertEqual(merged['1']['checked_at'], '2026-10-22')
+            self.assertEqual([work['id'] for work in merged['2']['works']], [43])
+            self.assertEqual([work['id'] for work in merged['3']['works']], [44])
+            self.assertTrue(report.exists())
+            self.assertFalse((root / 'artifacts').exists())
+
+    def test_offline_normalization_projects_every_current_director_without_redating_sources(self):
+        import json
+        import os
+        import re
+        import shutil
+        import subprocess
+        import sys
+        import tempfile
+        original = json.loads((ROOT / 'data/directors.json').read_text())
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for folder in ['scripts', 'data', 'js']:
+                (root / folder).mkdir()
+            for relative in ['scripts/enrich_directors.py', 'scripts/build_director_mobile.py',
+                             'data/directors.json', 'data/director_name_readings.json', 'js/cinelva-records-page.js']:
+                shutil.copy(ROOT / relative, root / relative)
+            subprocess.run(['git', 'init', '-q', str(root)], check=True, capture_output=True)
+            subprocess.run(['git', 'add', '.'], cwd=root, check=True, capture_output=True)
+            subprocess.run(['git', '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'fixture'], cwd=root, check=True, capture_output=True)
+            env = {key: value for key, value in os.environ.items() if key != 'TMDB_API_KEY'}
+            subprocess.run([sys.executable, str(root / 'scripts/enrich_directors.py'), '--normalize-only'], env=env, check=True, capture_output=True)
+            subprocess.run([sys.executable, str(root / 'scripts/build_director_mobile.py')], env=env, check=True, capture_output=True)
+            dirty = subprocess.check_output(['git', 'diff', '--name-only', '-z', 'HEAD'], cwd=root).decode().split('\0')
+            dirty += subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard', '-z'], cwd=root).decode().split('\0')
+            guard = ROOT / 'scripts/verify-production-release.cjs'
+            protected = json.loads(subprocess.check_output(['node', '-e', 'const {relevant}=require(process.argv[1]); console.log(JSON.stringify(JSON.parse(process.argv[2]).filter(relevant)))', str(guard), json.dumps([name for name in dirty if name])]))
+            self.assertEqual(protected, [], 'offline generation must not introduce unreviewed source artifacts')
+            normalized = json.loads((root / 'data/directors.json').read_text())['directors']
+            mobile = json.loads((root / 'data/directors-mobile.json').read_text())['directors']
+        untranslated = [key for key, director in mobile.items() if not re.search('[ぁ-ゖァ-ヺ一-鿿]', director['name'])]
+        self.assertEqual(untranslated, [], 'current source identities need explicit Japanese labels')
+        self.assertEqual(mobile.keys(), original['directors'].keys())
+        for key, director in original['directors'].items():
+            self.assertEqual(normalized[key].get('checked_at'), director.get('checked_at'), key)
+            self.assertEqual({work['id'] for work in mobile[key]['works']}, {work['id'] for work in director['works']}, key)
+            self.assertEqual(mobile[key].get('name_status'), normalized[key]['name_status'], key)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,18 +1,8 @@
 name: Refresh director profiles and credits
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - scripts/enrich_directors.py
-      - tests/cinelva-director-render.test.cjs
-      - tests/test_director_enrichment.py
-      - .github/workflows/refresh-director-profiles.yml
   schedule:
     - cron: '17 3 * * *'
-  pull_request:
-    paths:
-      - scripts/enrich_directors.py
 permissions:
   contents: write
 concurrency:
@@ -20,8 +10,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
-    # One finite repair batch on our own branch. Never expose secrets to forks.
-    if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'fix/director-data-completion-20261018' || github.head_ref == 'fix/director-missing-catalog-20261019'))
+    # Source changes are checked by the normal PR quality gate, without live API calls.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -65,15 +55,18 @@ jobs:
       - name: Refresh all existing directors through the approved TMDB API
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: python scripts/enrich_directors.py --limit 800 --discover-names --verify-person 190
+        run: python scripts/enrich_directors.py --limit 800 --discover-names --verify-person 190 --report-path "$RUNNER_TEMP/director-enrichment.json"
+      - name: Build the mobile projection from the same refreshed source
+        run: python scripts/build_director_mobile.py
       - name: Preserve completeness and missing-source report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: director-enrichment
           path: |
-            artifacts/director-enrichment.json
+            ${{ runner.temp }}/director-enrichment.json
             data/directors.json
+            data/directors-mobile.json
           if-no-files-found: warn
           retention-days: 14
       - name: Validate director snapshot and feature-film attribution before storing
@@ -82,7 +75,6 @@ jobs:
           node --check js/cinelva-records-page.js
           python scripts/check_sources.py
       - name: Store only the reviewed director snapshot on the work branch
-        if: github.event_name == 'pull_request' || github.event_name == 'schedule' || github.event_name == 'push'
         env:
           WORK_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
@@ -110,7 +102,11 @@ jobs:
                   latest['directors'][identifier] = entry
           path.write_text(json.dumps(latest, ensure_ascii=False, indent=2) + chr(10))
           PY
-            git add data/directors.json
+            python scripts/enrich_directors.py --normalize-only
+            python scripts/build_director_mobile.py
+            python -m unittest tests.test_director_enrichment
+            node scripts/verify-production-release.cjs --require
+            git add data/directors.json data/directors-mobile.json
             if git diff --cached --quiet; then
               echo 'Director snapshot already up to date'
               exit 0

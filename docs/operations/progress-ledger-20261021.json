@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-21T22:09:32.185422+00:00",
+  "updated_at": "2026-10-22T06:06:58.943916+00:00",
   "source_issue": 239,
-  "source_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
+  "source_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
-    "completed_tasks": 25,
-    "remaining_tasks": 7,
-    "completion_percent": 78.1,
-    "confirmed_additional_fixes": 20
+    "completed_tasks": 27,
+    "remaining_tasks": 5,
+    "completion_percent": 84.4,
+    "confirmed_additional_fixes": 28
   },
   "fixes": [
     {
@@ -152,6 +152,70 @@
       "pr": 465,
       "merge_sha": "8b5b0de84461af36c44b5197810faa8db503ad7f",
       "status": "merged_ci_visual_verified"
+    },
+    {
+      "id": "FIX-021",
+      "title": "Discovery special links and provider controls lose light-theme contrast",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-022",
+      "title": "Event active tab, movie titles, dates, source links and notices unreadable in light theme",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-023",
+      "title": "Secondary backup/event/legal header logos fade against light backgrounds",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-024",
+      "title": "Source attribution links are too pale against light cards",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-025",
+      "title": "TMDB attribution displays broken SVG icon when image unavailable",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-026",
+      "title": "Search/ranking sort labels and My Cinelva chart-mode label are nearly invisible in light theme",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-027",
+      "title": "Cinema directory empty message collapses to one movie-card column",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
+    },
+    {
+      "id": "FIX-028",
+      "title": "Monthly calendar renders one extra complete week beyond its stated interval",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "status": "merged_ci_visual_verified",
+      "source_sha": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     }
   ],
   "tasks": [
@@ -212,8 +276,8 @@
     {
       "id": "P0-03.1",
       "acceptance": "Shared detail/record/rating/date CRUD",
-      "status": "in_progress",
-      "evidence": "Reopened after actual UI audit reproduced score/slider overlap, missing ranking audience scores and unreadable light-theme ranking titles. PR463 repairs these; full interaction/visual acceptance is not established by prior automated passes."
+      "status": "done",
+      "evidence": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent."
     },
     {
       "id": "P0-03.2",
@@ -314,8 +378,8 @@
     {
       "id": "P1-08.2",
       "acceptance": "390px,touch,scroll,states,themes,a11y,large data",
-      "status": "in_progress",
-      "evidence": "Reopened after actual UI audit reproduced score/slider overlap, missing ranking audience scores and unreadable light-theme ranking titles. PR463 repairs these; full interaction/visual acceptance is not established by prior automated passes."
+      "status": "done",
+      "evidence": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent."
     },
     {
       "id": "P1-08.3",
@@ -452,6 +516,14 @@
       "additional_fixes": 20,
       "percent": 78.1,
       "reason": "Full-page audit466 found8 additional UI defects, confirmed audit18/10done/8remaining. Implementations pending verification. Do not close either broad UI gate or increment merged fix count yet."
+    },
+    {
+      "at": "2026-10-22T06:06:58.943916+00:00",
+      "completed": 27,
+      "remaining": 5,
+      "additional_fixes": 28,
+      "percent": 84.4,
+      "reason": "PR467 eight fixes merged after source9/final10 checks and latest visual review. Closes the two previously reopened UI acceptance gates. Audit18/18 confirmed defects repaired. Vercel excluded; no legal/device/user-study acceptance invented."
     }
   ]
 }

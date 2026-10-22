@@ -1,28 +1,28 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T22:09:32.185422+00:00",
+  "updated_at": "2026-10-22T06:06:58.943916+00:00",
   "scope": "Actual UI verification and fixes; Vercel excluded",
   "prior_completion_claim_retracted": true,
   "source_head_before_new_findings": "9ffaa3cf7935d0ce6fae196b87e891189ccbce1a",
   "metrics": {
     "confirmed_defects": 18,
-    "completed_fixes": 10,
-    "remaining_confirmed_defects": 8,
-    "fixes_implemented_pending_validation": 8,
+    "completed_fixes": 18,
+    "remaining_confirmed_defects": 0,
+    "fixes_implemented_pending_validation": 0,
     "overall_ui_completion_percent": null,
-    "confirmed_defect_completion_percent": 55.6
+    "confirmed_defect_completion_percent": 100.0
   },
   "coverage": {
     "initial_mobile_chromium_screenshots_reviewed": 30,
     "initial_mobile_chromium_screenshots_total": 30,
     "warning": "Initial viewport screenshots are not complete page/interaction acceptance. Mirrored source routes can differ from generated published artifacts; source-only differences are not counted as confirmed production bugs.",
     "latest_mobile_chromium_source_screenshots_reviewed": 30,
-    "latest_visual_source": "1ac14b187f505d6a868ceb4bc94756706b05bf95",
+    "latest_visual_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
     "related_cards_browsers": [
       "chromium",
       "webkit"
     ],
-    "latest_focused_visual_source": "83bda7af23a81a38c68f92fbea0f9e4d3e2b31f0",
+    "latest_focused_visual_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
     "source_route_matrix_passed_per_browser": 240,
     "source_route_js_errors": 0,
     "source_route_local_asset_failures": 0,
@@ -36,7 +36,19 @@
       "chromium": 53,
       "webkit": 57
     },
-    "full_document_captures_verified": 60
+    "full_document_captures_verified": 60,
+    "latest_full_document_capture_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
+    "latest_full_document_captures_verified": 60,
+    "latest_root_page_edges_reviewed_per_browser": 16,
+    "latest_changed_section_contact_sheets_reviewed": 6,
+    "latest_root_edge_contact_sheets_reviewed": 8,
+    "review_form_widths_verified": [
+      320,
+      390,
+      1348
+    ],
+    "opened_menu_width": 390,
+    "minimum_text_contrast": 4.5
   },
   "findings": [
     {
@@ -133,71 +145,95 @@
     {
       "id": "UI-20261022-011",
       "title": "Discovery special links and provider controls lose light-theme contrast",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Hero link override sets dark gold on fixed dark special-link backgrounds",
       "test": "Full-document Chromium/WebKit discover screenshots and targeted contrast assertions",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-012",
       "title": "Event active tab, movie titles, dates, source links and notices unreadable in light theme",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Event-specific dark backgrounds and fixed white/gold/gray colors miss shared theme selectors",
       "test": "Both-engine full event images, deterministic outdoor fixture and contrast>=4.5",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-013",
       "title": "Secondary backup/event/legal header logos fade against light backgrounds",
-      "status": "implemented_validation_pending",
-      "root_cause": "Legacy .brand logo asset misses shared .gBrand selector",
+      "status": "merged_ci_visual_verified",
+      "root_cause": "Legacy .brand, .backupBrand, unclassed legal header and main logo instances missed the shared .gBrand selector.",
       "test": "Both-engine full-page images; target approved411DC24B PNG backing only, artwork unchanged",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-014",
       "title": "Source attribution links are too pale against light cards",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Credits local anchor color9dc8ff has no light override",
       "test": "Full credits page sections and visible card anchor contrast>=4.5",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-015",
       "title": "TMDB attribution displays broken SVG icon when image unavailable",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "External attribution logo has no text fallback on load failure",
       "test": "Abort exact official-logo request; require TMDB text visible and broken image hidden",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-016",
       "title": "Search/ranking sort labels and My Cinelva chart-mode label are nearly invisible in light theme",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Dynamically injected dark-only label colors override inherited light text",
       "test": "Common visible-label contrast checks across both engines and mobile chart layout",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-017",
       "title": "Cinema directory empty message collapses to one movie-card column",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Shared three-column movie rule overrides cinema responsive grid; empty item has no full-row span",
       "test": "390px full-page directory shows narrow placeholder; require responsive columns and full-width empty state",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     },
     {
       "id": "UI-20261022-018",
       "title": "Monthly calendar renders one extra complete week beyond its stated interval",
-      "status": "implemented_validation_pending",
+      "status": "merged_ci_visual_verified",
       "root_cause": "Math.round((end-start)/day/7)+1 rounds partial final week upward then adds another",
       "test": "Production helper regressions RED: October2026 6vs5, February2027 5vs4, August2026 7vs6; GREEN after Math.floor",
-      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f"
+      "evidence_source": "f1e7c086f17069570fc5fb4d788c5155d3e0881f",
+      "pr": 467,
+      "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+      "verified_source": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
     }
   ],
   "pr": 463,
-  "remaining_audit": "Eight new confirmed defects implemented in follow-up; require quality, focused review, both-engine browser regressions, full-page images and final exact-head checks before counting them complete. Old10 fixes stay closed. Lower-image unloaded lazy posters are not automatically treated as unavailable artwork.",
-  "followup_pr": null,
+  "remaining_audit": "All18 specifically confirmed defects are merged after source9/final10 successful workflows and visual review. This is not a claim that every possible interaction or unknown defect is exhausted. Earlier full-document review remains recorded with its own source; latest review covered all16 root-page edges in each browser plus changed source/event/summary sections, related cards and320px review forms. Physical-device acceptance is a separate gate.",
+  "followup_pr": 467,
   "scope_version": 2,
   "scope_history": [
     {
@@ -209,8 +245,8 @@
     {
       "version": 2,
       "confirmed": 18,
-      "completed": 10,
-      "note": "Eight additional independently visible/source-reproduced defects found by full-document review. Stable32 acceptance denominator is unchanged."
+      "completed": 18,
+      "note": "Eight follow-up fixes merged in467 after exact-source9 and receipt10 workflows passed. Stable32 acceptance denominator unchanged."
     }
   ]
 }

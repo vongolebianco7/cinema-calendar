@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-21T22:09:32.185422+00:00",
+  "updated_at": "2026-10-22T06:06:58.943916+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "5ecf7ccc1bc16d34a3efcc3f4f671f2f0a7f112b",
-  "branch": "fix/full-page-theme-20261022",
-  "head_sha": "f7a86e253cae61573c97961ecb541559e70b3184",
+  "base_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+  "branch": "docs/ui-acceptance-checkpoint-20261022",
+  "head_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
   "pull_request": null,
   "work_items": [
     {
@@ -32,10 +32,10 @@
     {
       "id": "P0-AUDIT",
       "title": "Audit and fix confirmed production blockers",
-      "status": "in_progress",
+      "status": "merged",
       "issue": 239,
       "acceptance": "Every reported P0 is reproduced or classified, fixed where confirmed, and covered by a deterministic regression check.",
-      "ci": "Python full suite 104/104 passed and merged in #259; per-route screenshot evidence merged in #260; privacy-safe FAQ/support/backup guidance merged in #261. PRs #282, #288 and #289 merged after required Actions passed. PR #290 is the current external-data audit noise fix."
+      "ci": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent."
     },
     {
       "id": "P0-282-REVIEW-LOOP",
@@ -501,7 +501,9 @@
       "id": "MY-DIRECTOR-COMPLETE",
       "title": "Sourced director names, uncapped credits, profiles, accurate watched progress",
       "status": "in_progress",
-      "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge."
+      "acceptance": "Existing788directors refreshed from official TMDB API; all primary labels Japanese with original-name and transliteration status where unofficial; no30-film cap; real Director credits only; count zero/unrated watched features after a director qualifies; preserve saved records; mobile CI and exact data head must pass before merge.",
+      "ci": "Current catalog901/901 has source URL,checked_at anduntruncated credits;641 Japanese names,241 explicitly labeled transliterations,19 explicit Japanese-unavailable source names. Preserve truthful fallback; this is not a claim all901 names are Japanese.",
+      "remaining_name_localizations": 19
     },
     {
       "id": "P0-DEPLOYMENT-BOUNDARIES",
@@ -527,9 +529,9 @@
     {
       "id": "MY-DIRECTOR-MISSING-CATALOG",
       "title": "Repair absent legacy directors and stop presenting records as a complete catalog",
-      "status": "in_progress",
+      "status": "merged",
       "acceptance": "Eastwood has official directing credits beyond saved records; all supported UI director aliases audited against the catalog; unknown catalogs show no total or progress ratio; records preserved.",
-      "ci": "Reproduced Eastwood missing person190. Missing-catalog rendering regression first fails thenpasses;13UI and10Python director tests pass. Bounded official API name discovery prepared; fresh snapshot and browser CI required."
+      "ci": "Published901-person full catalog and849-person mobile catalog both include officialTMDB person190 with41 untruncated directing works. Alias/missing-catalog rendering and metadata tests pass in current272-test quality gate and latest browser journeys; unknown catalogs still show no invented denominator."
     },
     {
       "id": "FINAL-QA-20261020",
@@ -665,6 +667,16 @@
     {
       "check": "Final461 exact-head CI and real main publication evidence",
       "result": "Source0dff69bc all7green; focusedreviewnoblockers. Finalreceipt6c31cbf all7latestgreen (reopenedonceafter3minzero-trigger; duplicateolderrunsnotconfusedwithlatest). Merged2c504e8. MainPages39595243091 build119205810035/deploy119205963089 succeeded: proof0dff source61eec13c28d252112b69155cd5d9726e7a8900ceac88a9bdacfd63576947e865 andsharedqualitypassed. Vercelcombinedstatuses explicitlyrate-limitedbothprojects, so semanticconfigintegrationinactualVercel remainsUNVERIFIED. EarlieractualDBsync39591844636 succeeded1080/1113/12/1225/322. Canonicalfronta4/backendcf remainREADY.27/32,5remaining,10mergedfixes,84.4%."
+    },
+    {
+      "check": "PR467 exact-source and receipt validation plus actual image review",
+      "status": "passed",
+      "details": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent.",
+      "source_head": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
+      "final_head": "ab43a3809c2a4be884efbb085f4fad88ba06b8ed",
+      "source_frontend_run": 39729936196,
+      "final_frontend_run": 39730885345,
+      "source_artifact": 12405247420
     }
   ],
   "deployment": {
@@ -686,31 +698,32 @@
     "last_failed_deployment_status": "ERROR"
   },
   "blockers": [
-    "Vercel newrate-limit explicitly requiresretryin24hours on bothprojectstatuses; servingproductionremainsREADY.",
-    "No physicaliPhoneSafari or5–10independent userparticipants available.",
-    "54image/split-image assets lack exactasset permission records; attributionalone isnotlegalclearance."
+    "Vercel operations are excluded by the user; no current provider state is inferred from historical rate-limit observations.",
+    "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
+    "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Full-page sourcef1e7c08 all6/finalf7a86e2 all7 checks passed;466merged5ecf7cc. Full16 active root pages in each engine (110segments) reviewed; found8 more confirmed defects, all implemented in current branch. Run quality and focused review; create467 againstmain preserving466 ancestry. Verify both-engine contrast, failed-logo fallback, cinema grid and full images; month helper3cases firstRED thenGREEN. Source proof must be renewed after exact source workflows, final-head checks before merge. Counts25/32,20mergedfixes,18confirmed/10done/8remaining until actual integration. Vercel excluded; live origin observation auto-review denied, never retry/bypass. Do not rerun movie update74.",
+  "next_action": "PR467 merged3a190245; source9/final10 allgreen, audit18/18 repaired, progress27/32 residual5 fix28 84.4%. Publish this docs checkpoint after deterministic checks, then reconcile remaining approved work. Director catalog missing-person repair is complete;19 source names retain explicit Japanese-unavailable status pending reliable localization evidence. Never guess kanji or claim full Japanese localization. Vercel excluded; do not revisit provider/live-origin checks, and do not rerun the earlier authorized movie-data update74.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
     "total_tasks": 32,
-    "completed_tasks": 25,
-    "remaining_tasks": 7,
-    "completion_percent": 78.1,
-    "confirmed_additional_fixes": 20
+    "completed_tasks": 27,
+    "remaining_tasks": 5,
+    "completion_percent": 84.4,
+    "confirmed_additional_fixes": 28
   },
   "last_merged_pull_request": {
-    "number": 466,
-    "merge_sha": "5ecf7ccc1bc16d34a3efcc3f4f671f2f0a7f112b",
-    "final_head": "f7a86e253cae61573c97961ecb541559e70b3184"
+    "number": 467,
+    "merge_sha": "3a1902456071bd8c9f62b2f76e503d65897516ab",
+    "final_head": "ab43a3809c2a4be884efbb085f4fad88ba06b8ed",
+    "source_head": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
     "confirmed_defects": 18,
-    "verified_and_merged_fixes": 10,
-    "remaining_confirmed_defects": 8,
-    "next_action": "Full-page sourcef1e7c08 all6/finalf7a86e2 all7 checks passed;466merged5ecf7cc. Full16 active root pages in each engine (110segments) reviewed; found8 more confirmed defects, all implemented in current branch. Run quality and focused review; create467 againstmain preserving466 ancestry. Verify both-engine contrast, failed-logo fallback, cinema grid and full images; month helper3cases firstRED thenGREEN. Source proof must be renewed after exact source workflows, final-head checks before merge. Counts25/32,20mergedfixes,18confirmed/10done/8remaining until actual integration. Vercel excluded; live origin observation auto-review denied, never retry/bypass. Do not rerun movie update74."
+    "verified_and_merged_fixes": 18,
+    "remaining_confirmed_defects": 0,
+    "next_action": "Reconcile remaining acceptance gates; all18 specifically confirmed UI defects repaired in463–467. Do not fabricate global bug-free status or production publication. Vercel excluded."
   },
   "current_runtime": {
     "host_shell": "available",

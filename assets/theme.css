@@ -247,10 +247,11 @@ html[data-theme="light"] .gTop .gBrand .gBrandImage,
 html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
 body[data-theme="light"] .gTop .gBrand .gBrandImage,
 body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
-  background:transparent!important;
+  /* Restore the icon's black field, independently of the gold wordmark. */
+  background:#161616!important;
   padding:0!important;
   border:0!important;
-  border-radius:0!important;
+  border-radius:7px!important;
   clip-path:none!important;
   transform:none!important;
 }

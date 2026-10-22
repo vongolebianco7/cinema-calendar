@@ -164,3 +164,4 @@ html[data-theme="light"] #directorsView .director-achievement[data-tier="4"] spa
 html[data-theme="light"] #directorsView .director-achievement[data-tier="3"] span { color:#806027; }
 html[data-theme="light"] #directorsView .director-achievement[data-tier="2"] span { color:#5d6673; }
 html[data-theme="light"] #directorsView .director-achievement[data-tier="1"] span { color:#87502c; }
+html[data-theme="dark"] #directorsView .director-coverage-note a { color:var(--gold); }

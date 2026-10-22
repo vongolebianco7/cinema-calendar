@@ -208,3 +208,12 @@ html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-personal:not(.
 }
 /* First segments inherit body ink; continuation segments already had explicit ink. */
 html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
+
+
+/* Cinelva brand icon: conceal the legacy black padding outside the fine frame.
+   Keep the original C artwork and its fine rounded outline untouched. */
+.gBrandImage[src*="411DC24B-E557-4A36-95D2-5FA3550E7BD7"] {
+  clip-path: inset(14% round 19%)!important;
+  transform: scale(1.34);
+  transform-origin: center;
+}

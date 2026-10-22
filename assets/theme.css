@@ -256,7 +256,8 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
   background:#161616!important;
   padding:0!important;
   border:0!important;
-  border-radius:7px!important;
+  /* Smooth the original square black raster's corners; never crop the inner gold frame. */
+  border-radius:22%!important;
   clip-path:none!important;
   transform:none!important;
 }

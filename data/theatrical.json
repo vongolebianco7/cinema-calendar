@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-21T10:18:39.044766+00:00",
+  "generated_at": "2026-10-23T12:21:11.921996+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-21",
-      "2027-02-18"
+      "2026-09-23",
+      "2027-02-20"
     ],
     "background_slice": [
-      "2026-02-18",
-      "2026-04-18"
+      "2026-06-20",
+      "2026-08-18"
     ],
     "max_detail_requests": 40
   },
@@ -17135,6 +17135,30 @@
       ]
     },
     {
+      "id": 1739954,
+      "title": "無敵なカタチ",
+      "original_title": "無敵なカタチ",
+      "date": "2026-07-25",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/nl6Hu71rNhhgI85eTLbUf1zQTCP.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1739954",
+      "director": "下本地崇",
+      "director_id": 6377613,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 75,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-23T12:21:11.921996+00:00"
+    },
+    {
       "id": 1728407,
       "title": "2026 &TEAM CONCERT TOUR 'BLAZE THE WAY' in JAPAN",
       "original_title": "2026 &TEAM CONCERT TOUR 'BLAZE THE WAY' in JAPAN",
@@ -17436,6 +17460,35 @@
         "ドキュメンタリー"
       ],
       "checked_at": "2026-10-10T18:31:25.870357+00:00"
+    },
+    {
+      "id": 1499673,
+      "title": "レンタル家族",
+      "original_title": "レンタル家族",
+      "date": "2026-07-31",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/WBQi5ATGOvrWXVXT9m7VBTG2Fk.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1499673",
+      "director": "Ryunosuke Kosaka",
+      "director_id": 5510470,
+      "cast": [
+        "荻野友里",
+        "駒塚由衣",
+        "黒岩徹",
+        "龍輝"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 89,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-23T12:21:11.921996+00:00"
     },
     {
       "id": 1374315,
@@ -21930,6 +21983,33 @@
         "コメディ"
       ],
       "checked_at": "2026-10-16T18:47:16.198708+00:00"
+    },
+    {
+      "id": 1803043,
+      "title": "Inochi Ga Umareru",
+      "original_title": "Inochi Ga Umareru",
+      "date": "2026-10-20",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/upbw6TJwIDXabpV0aKmDmbRMPS.jpg",
+      "score": 10.0,
+      "votes": 1,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1803043",
+      "director": "Nima Beheshtinia",
+      "director_id": 6269385,
+      "cast": [
+        "Nima Beheshtinia"
+      ],
+      "countries": [],
+      "runtime": 32,
+      "genres": [
+        "ドラマ",
+        "ドキュメンタリー",
+        "履歴",
+        "音楽"
+      ],
+      "checked_at": "2026-10-23T12:21:11.921996+00:00"
     },
     {
       "id": 1283320,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
-  "verified_at": "2026-10-23T08:26:14.943987+00:00",
-  "note": "Exact source passed all nine PR workflows, including Autonomous quality, smoke, frontend Chromium/WebKit, backend build, mobile, Python161, brand and completeness. Includes light detail-card fixes and two Lemino films. Approved logo assets and existing brand colors unchanged. No Vercel operation. TMDB1591961 poster remains unavailable."
+  "head_sha": "06c157af7411f06daf583a3bd37fde8a8bf296ce",
+  "verified_at": "2026-10-23T09:46:53.993Z",
+  "note": "Exact source passed all seven PR workflows: Autonomous quality, smoke, Chromium/WebKit frontend480 route loads, reproducible backend build with five unavailable-DB API smoke checks, Python162, mobile and completeness. Source includes narrow backend config materialization guard, snapshot fallback, guarded refresh order and verified same-work artwork. Remaining rights/device/independent-users and Neon recovery are not claimed complete. Final-head CI required."
 }

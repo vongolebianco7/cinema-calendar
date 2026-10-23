@@ -294,8 +294,8 @@ body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
 }
 
 /* New approved icon already contains its own frame. Never draw a second CSS frame. */
-.gTop .gBrand img.gBrandImage[src$="5AAEB2F3-B50B-49FC-9251-13FF1E773868.png"],
-.gDrawerHead .gBrand img.gBrandImage[src$="5AAEB2F3-B50B-49FC-9251-13FF1E773868.png"] {
+.gTop .gBrand img.gBrandImage[src$="99F95993-3507-4C63-B108-53E99B791322.png"],
+.gDrawerHead .gBrand img.gBrandImage[src$="99F95993-3507-4C63-B108-53E99B791322.png"] {
   border:0!important;
   outline:0!important;
   box-shadow:none!important;

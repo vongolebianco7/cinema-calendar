@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1a4176765f94b65b6c3cf672aa10e24da4540da3",
-  "verified_at": "2026-10-22T21:24:18.362Z",
-  "note": "Exact source passed all four required workflows (Autonomous, smoke, frontend, backend), mobile layout, Python contracts and scorecard contract. Actual Chromium/WebKit assertions cover festival/outdoor headings, dates, body, official links and film labels plus shared review controls and bars. Optional completeness still running; not claimed green. Lemino dated-film coverage and TMDB1591961 actual poster remain open. No Vercel action."
+  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
+  "verified_at": "2026-10-23T08:26:14.943987+00:00",
+  "note": "Exact source passed all nine PR workflows, including Autonomous quality, smoke, frontend Chromium/WebKit, backend build, mobile, Python161, brand and completeness. Includes light detail-card fixes and two Lemino films. Approved logo assets and existing brand colors unchanged. No Vercel operation. TMDB1591961 poster remains unavailable."
 }

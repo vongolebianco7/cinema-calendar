@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T22:05:50.902Z",
-  "status": "in_progress",
+  "updated_at": "2026-10-23T08:26:14.943987+00:00",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "0f0250ffb84b0c710286be4ea0188742b08f1b3c",
   "branch": "fix/browser-ci-package-mirror-20261023",
-  "head_sha": "4d20b86477edd0de3a80bf40e14e1c5234c41f08",
-  "pull_request": null,
+  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
+  "pull_request": 478,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -737,7 +737,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Finish source/final CI for browser-ci-package-mirror branch, which contains all476/477 app/data repairs. If an earlier verified PR becomes mergeable first, integrate it; otherwise merge combined branch after exact-source receipt and final CI, then close superseded476/477. Reconcile current main before counting. No Vercel action.",
+  "next_action": "Wait for final receipt-head CI, merge PR478 after all required checks pass, then close superseded PR476/477 and reconcile calendar ledger: ten merged, two verified pending integration, one unavailable actual poster. Vercel excluded.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -762,12 +762,11 @@
     "next_action": "All20 specifically confirmed defects integrated and verified. Reconcile latestmain against remaining acceptance gates; do not invent unknown-bug absence or physical/legal/user-study acceptance."
   },
   "current_runtime": {
-    "host_shell": "environment_offline",
-    "cloud_browser": "available",
+    "host_shell": "available",
+    "cloud_browser": "not used",
+    "github": "available",
     "vercel_scope": "excluded",
-    "note": "Executor disconnected during latest verification; three attempts confirmed environment_offline. GitHub remains available and supplied all final CI, artifact visual verification and integration. Earlier environment-available observation is historical.",
-    "vercel_live_browser": "denied by auto-review under user Vercel exclusion; no retry",
-    "github": "available"
+    "note": "Browser binary download unavailable locally; CI supplies Chromium/WebKit verification. Local quality gate and full Python161 passed."
   },
   "calendar_regression_repair": {
     "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
@@ -797,5 +796,12 @@
     ],
     "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
     "poster_recheck": "Read-only Actions39861525433 confirmed movie1591961 still returns poster_path:null."
-  }
+  },
+  "validation": [
+    {
+      "check": "PR478 exact source and approved-logo preservation",
+      "result": "77f27d01 all nine workflows successful. Local shared quality gate passed; Python161/161 passed. Independent code review found no blockers; all108 prior streaming entries retained plus two verified Lemino titles. Nine logo/header files byte-identical to main. Only outdated logo/cache-query assertions changed; ordinary UI contrast remains enforced. Final receipt-head CI pending.",
+      "source_sha": "77f27d014baecd52fc875201083f94fd4781a2c7"
+    }
+  ]
 }

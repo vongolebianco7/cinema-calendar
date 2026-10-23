@@ -1,9 +1,13 @@
 import datetime as dt
 import importlib.util
+import contextlib
+import io
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+import urllib.parse
 
 SCRIPT = Path(__file__).resolve().parents[1] / 'scripts/update_now_playing.py'
 NOW = dt.datetime(2026, 10, 24, 0, 0, tzinfo=dt.timezone.utc)
@@ -70,6 +74,64 @@ class NowPlayingUpdateTests(unittest.TestCase):
         self.module.ensure_approved({'sources':[{'id':'tmdb','mode':'approved'}]})
         for mode in ['disabled','link_only']:
             with self.assertRaises(ValueError):self.module.ensure_approved({'sources':[{'id':'tmdb','mode':mode}]})
+
+    def test_inconsistent_pages_use_only_official_upstream_window_equivalence(self):
+        first=self.page(1,[self.film(1)],2,2)
+        first['dates']={'minimum':'2026-09-16','maximum':'2026-10-28'}
+        called=[]
+        def original(number):return first if number==1 else self.page(2,[self.film(2)],2,3)
+        def equivalent(number,minimum,maximum):
+            called.append((number,minimum,maximum));return self.page(number,[self.film(number+10)],2,2)
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)/'snapshot.json';target.write_text('previous')
+            result=self.module.refresh(target,original,NOW,fetch_equivalent=equivalent)
+            self.assertEqual([m['id'] for m in result['movies']],[11,12])
+            self.assertEqual(called,[(1,'2026-09-16','2026-10-28'),(2,'2026-09-16','2026-10-28')])
+            self.assertEqual(result['source']['retrieval_endpoint'],'/discover/movie')
+            self.assertEqual(result['source']['upstream_window'],first['dates'])
+            self.assertTrue(result['complete'])
+
+    def test_equivalent_failures_or_invalid_dates_preserve_prior_file(self):
+        for dates in [None,{'minimum':'2026-10-28','maximum':'2026-09-16'},{'minimum':'bad','maximum':'2026-10-28'},{'minimum':'2026-09-16','maximum':'2026-10-28'}]:
+            with self.subTest(dates=dates),tempfile.TemporaryDirectory() as directory:
+                target=Path(directory)/'snapshot.json';target.write_bytes(b'previous')
+                first=dict(self.page(1,[self.film(1)],2,2),dates=dates)
+                def original(number):return first if number==1 else self.page(2,[self.film(2)],2,3)
+                def incomplete(number,minimum,maximum):return self.page(number,[self.film(3)],1,2)
+                with self.assertRaises(ValueError):self.module.refresh(target,original,NOW,fetch_equivalent=incomplete)
+                self.assertEqual(target.read_bytes(),b'previous')
+
+    def test_valid_direct_observation_never_calls_equivalent_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            def forbidden(*args):self.fail('Unnecessary equivalent request')
+            result=self.module.refresh(Path(directory)/'snapshot.json',lambda n:self.page(1,[self.film(1)]),NOW,fetch_equivalent=forbidden)
+            self.assertNotIn('retrieval_endpoint',result['source'])
+
+    def test_real_entrypoint_uses_exact_documented_equivalent_filters(self):
+        called=[]
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'data').mkdir()
+            (root/'data/source_registry.json').write_text(json.dumps({'sources':[{'id':'tmdb','mode':'approved'}]}))
+            def urlopen(request,timeout):
+                parsed=urllib.parse.urlparse(request.full_url);query=urllib.parse.parse_qs(parsed.query)
+                called.append((parsed.path,query));self.assertLessEqual(timeout,15)
+                if parsed.path.endswith('/now_playing'):
+                    number=int(query['page'][0]);data=self.page(number,[self.film(number)],2,2 if number==1 else 3)
+                    if number==1:data['dates']={'minimum':'2026-09-16','maximum':'2026-10-28'}
+                else:data=self.page(1,[self.film(11)])
+                return io.BytesIO(json.dumps(data).encode())
+            with patch.object(self.module,'ROOT',root),patch.dict(self.module.os.environ,{'TMDB_API_KEY':'synthetic-test-key'}),patch.object(self.module.urllib.request,'urlopen',urlopen),contextlib.redirect_stdout(io.StringIO()):
+                self.module.main()
+            path,query=called[-1];self.assertEqual(path,'/3/discover/movie')
+            self.assertEqual(query,{'api_key':['synthetic-test-key'],'language':['ja-JP'],'region':['JP'],'page':['1'],'include_adult':['false'],'include_video':['false'],'sort_by':['popularity.desc'],'with_release_type':['2|3'],'release_date.gte':['2026-09-16'],'release_date.lte':['2026-10-28']})
+            result=json.loads((root/'data/now_playing.json').read_text());self.assertTrue(result['complete']);self.assertEqual(result['movies'][0]['id'],11)
+
+    def test_invalid_movie_identity_is_not_reinterpreted_as_cache_inconsistency(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)/'snapshot.json';target.write_bytes(b'previous')
+            def forbidden(*args):self.fail('Malformed source must not be reinterpreted')
+            with self.assertRaises(ValueError):self.module.refresh(target,lambda n:self.page(1,[dict(self.film(1),id='bad')]),NOW,fetch_equivalent=forbidden)
+            self.assertEqual(target.read_bytes(),b'previous')
 
 
 if __name__=='__main__':unittest.main()

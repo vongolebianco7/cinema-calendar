@@ -210,25 +210,10 @@ html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-personal:not(.
 html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
 
 
-/* Cinelva brand icon: conceal the legacy black padding outside the fine frame.
-   Keep the original C artwork and its fine rounded outline untouched. */
-.gBrandImage[src*="411DC24B-E557-4A36-95D2-5FA3550E7BD7"] {
-  /* The original thin gold outline sits near the asset edge.
-     Do not crop or scale the artwork: both used to cut that outline. */
-  clip-path:none!important;
-  transform:none!important;
-  transform-origin:center;
-}
-
-/* Approved uploaded PNG is the complete icon; no CSS background or frame. */
-.gTop .gBrand img.gBrandImage,
-.gDrawerHead .gBrand img.gBrandImage,
-html[data-theme="light"] .gTop .gBrand img.gBrandImage,
-html[data-theme="light"] .gDrawerHead .gBrand img.gBrandImage,
-html[data-theme="dark"] .gTop .gBrand img.gBrandImage,
-html[data-theme="dark"] .gDrawerHead .gBrand img.gBrandImage {
+/* Use the uploaded icon as-is. No clipping, frame, padding or effects. */
+.gTop .gBrandImage,
+.gDrawerHead .gBrandImage {
   background:transparent!important;
-  background-image:none!important;
   border:0!important;
   outline:0!important;
   box-shadow:none!important;

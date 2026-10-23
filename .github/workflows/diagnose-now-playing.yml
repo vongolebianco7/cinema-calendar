@@ -1,0 +1,32 @@
+name: Diagnose now-playing response metadata
+on:
+  pull_request:
+    paths: [.github/workflows/diagnose-now-playing.yml]
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate approved source
+        run: python scripts/check_sources.py
+      - name: Read only non-sensitive pagination counts
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json,os,urllib.parse,urllib.request
+          key=os.environ.get('TMDB_API_KEY')
+          if not key:raise SystemExit('Existing TMDB credential unavailable')
+          for number in [1,2]:
+              query=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
+              try:
+                  with urllib.request.urlopen('https://api.themoviedb.org/3/movie/now_playing?'+query,timeout=15) as response:
+                      data=json.load(response)
+              except Exception as error:
+                  print('Metadata observation failed: '+type(error).__name__);raise SystemExit(1)
+              safe=lambda value:value if type(value) is int else 'invalid_type'
+              print(json.dumps({'requested_page':number,'api_page':safe(data.get('page')),'total_pages':safe(data.get('total_pages')),'total_results':safe(data.get('total_results')),'returned_rows':len(data['results']) if isinstance(data.get('results'),list) else 'invalid_type'}))
+          PY

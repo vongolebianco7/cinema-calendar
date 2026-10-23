@@ -267,3 +267,10 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
   -webkit-text-stroke:0!important;
   text-shadow:none!important;
 }
+
+/* Remove only the black pixels outside the existing gold icon perimeter.
+   Preserve the original gold outline, black interior, and C artwork. */
+.gTop .gBrand img.gBrandImage[src*="99F95993"],
+.gDrawerHead .gBrand img.gBrandImage[src*="99F95993"] {
+  clip-path: inset(8% round 13%)!important;
+}

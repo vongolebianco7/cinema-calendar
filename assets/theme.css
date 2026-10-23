@@ -220,99 +220,14 @@ html[data-theme="light"] .festivalSpan { color:#f2f2f2!important; }
   transform-origin:center;
 }
 
-/* Approved light brand option B: same pale gold as dark mode, without outlines or plate. */
-html[data-theme="light"] .gTop .gBrand,
-html[data-theme="light"] .gDrawerHead .gBrand,
-body[data-theme="light"] .gTop .gBrand,
-body[data-theme="light"] .gDrawerHead .gBrand {
-  display:inline-flex!important;
-  align-items:center!important;
-  gap:5px!important;
-  padding:0!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  text-decoration:none!important;
-}
-html[data-theme="light"] .gTop .gBrand .gBrandWord,
-html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
-body[data-theme="light"] .gTop .gBrand .gBrandWord,
-body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
-  /* Sampled from the approved B mockup: subdued metallic gold, not #F2DFBB. */
-  color:#b18e60!important;
-  background-image:linear-gradient(105deg,#aa814c 0%,#cbb08b 52%,#b18e60 100%)!important;
-  -webkit-background-clip:text!important;
-  background-clip:text!important;
-  -webkit-text-fill-color:transparent!important;
-  -webkit-text-stroke:0!important;
-  text-shadow:none!important;
-}
-html[data-theme="light"] .gTop .gBrand .gBrandImage,
-html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
-body[data-theme="light"] .gTop .gBrand .gBrandImage,
-body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
-  /* Preserve the solid dark interior of the original C emblem. */
-  background:#161616!important;
-  padding:0!important;
-  border:0.5px solid #f2dfbb!important;
-  border-radius:20%!important;
-  clip-path:none!important;
-  transform:none!important;
-}
-
-/* The approved single cream outline is identical in light and dark themes. */
-html[data-theme="dark"] .gTop .gBrand .gBrandImage,
-html[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage,
-body[data-theme="dark"] .gTop .gBrand .gBrandImage,
-body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
-  background:#161616!important;
-  padding:0!important;
-  border:0.5px solid #f2dfbb!important;
-  border-radius:20%!important;
-  clip-path:none!important;
-  transform:none!important;
-}
-
-/* Frame only: original icon stays at its original size.
-   The fine 0.5px line is inset, without scaling the C artwork. */
-html[data-theme="light"] .gTop .gBrand .gBrandImage,
-html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
-html[data-theme="dark"] .gTop .gBrand .gBrandImage,
-html[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage,
-body[data-theme="light"] .gTop .gBrand .gBrandImage,
-body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
-body[data-theme="dark"] .gTop .gBrand .gBrandImage,
-body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
-  box-sizing:border-box!important;
-  border:0!important;
-  outline:none!important;
-  box-shadow:inset 0 0 0 0.5px #f2dfbb!important;
-  transform:none!important;
-  background:#161616!important;
-  border-radius:20%!important;
-}
-
-/* New approved icon already contains its own frame. Never draw a second CSS frame. */
-.gTop .gBrand img.gBrandImage[src$="99F95993-3507-4C63-B108-53E99B791322.png"],
-.gDrawerHead .gBrand img.gBrandImage[src$="99F95993-3507-4C63-B108-53E99B791322.png"] {
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  padding:0!important;
-  background:transparent!important;
-  border-radius:0!important;
-  clip-path:none!important;
-  transform:none!important;
-}
-
-/* Light theme: render the uploaded logo image as-is, with no CSS frame or backdrop. */
+/* Approved uploaded PNG is the complete icon; no CSS background or frame. */
+.gTop .gBrand img.gBrandImage,
+.gDrawerHead .gBrand img.gBrandImage,
 html[data-theme="light"] .gTop .gBrand img.gBrandImage,
 html[data-theme="light"] .gDrawerHead .gBrand img.gBrandImage,
-body[data-theme="light"] .gTop .gBrand img.gBrandImage,
-body[data-theme="light"] .gDrawerHead .gBrand img.gBrandImage {
-  background:none!important;
-  background-color:transparent!important;
+html[data-theme="dark"] .gTop .gBrand img.gBrandImage,
+html[data-theme="dark"] .gDrawerHead .gBrand img.gBrandImage {
+  background:transparent!important;
   background-image:none!important;
   border:0!important;
   outline:0!important;

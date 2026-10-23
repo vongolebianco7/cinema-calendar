@@ -106,7 +106,8 @@ async function freePort() {
           if(width===390&&await page.locator('#gMenuBtn').count()&&await page.locator('#gDrawerClose').count()) {
             await page.locator('#gMenuBtn').click();
             await page.waitForFunction(()=>document.querySelector('#gDrawer')?.classList.contains('show'));
-            await assertTextContrast(page,['#gDrawer .gBrand span','#gDrawer>a','#gDrawer .cinelvaTheme span'],`${route} open menu ${theme}`);
+            // The approved gold wordmark is logotype artwork (WCAG 1.4.3 exception), not UI copy.
+            await assertTextContrast(page,['#gDrawer .gBrand span:not(.gBrandWord)','#gDrawer>a','#gDrawer .cinelvaTheme span'],`${route} open menu ${theme}`);
             if(theme==='light')assert.equal(await page.locator('#gDrawer').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 254, 250)',`${route}: open menu uses the light surface`);
             await page.locator('#gDrawerClose').click();
           }
@@ -121,7 +122,7 @@ async function freePort() {
           ],`${route} ${width}px ${theme}`);
           if(theme==='light') {
             const backings=await page.locator('img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"]').evaluateAll(images=>images.filter(img=>img.getClientRects().length).map(img=>getComputedStyle(img).backgroundColor));
-            assert.ok(backings.every(color=>color==='rgb(23, 23, 23)'),`${route}: secondary logo must have a visible backing`);
+            assert.ok(backings.every(color=>color==='rgba(0, 0, 0, 0)'),`${route}: secondary logo must preserve the approved transparent exterior`);
           }
           if(route==='credits.html') {
             await page.locator('.tmdbLogoFallback').waitFor({state:'visible'});

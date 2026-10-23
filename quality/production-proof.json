@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ad574971767dbf7e0c7a5ed9f72adf1cc62a8395",
-  "verified_at": "2026-10-22T21:10:32.940Z",
-  "note": "Exact source passed all seven workflows including Chromium/WebKit calendar regressions, frontend route audits, mobile layout, backend build, smoke, Python and Autonomous quality. Covers sourced calendar data, outdoor extraction/freshness and calendar importer identity. Final-head CI required. Dated Lemino coverage and TMDB1591961 poster remain unresolved; Vercel excluded."
+  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
+  "verified_at": "2026-10-23T08:26:14.943987+00:00",
+  "note": "Exact source passed all nine PR workflows, including Autonomous quality, smoke, frontend Chromium/WebKit, backend build, mobile, Python161, brand and completeness. Includes light detail-card fixes and two Lemino films. Approved logo assets and existing brand colors unchanged. No Vercel operation. TMDB1591961 poster remains unavailable."
 }

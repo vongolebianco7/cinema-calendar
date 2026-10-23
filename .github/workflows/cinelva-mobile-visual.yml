@@ -22,7 +22,9 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-save playwright
-      - run: npx playwright install --with-deps chromium
+      - run: |
+          bash scripts/prepare-browser-ci.sh
+          npx playwright install --with-deps chromium
       - name: Check JavaScript syntax
         run: |
           node --check js/cinelva-records-page.js

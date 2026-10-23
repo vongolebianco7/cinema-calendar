@@ -31,6 +31,12 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
  await page.evaluate(({mode,month})=>{view=new Date(2026,month,1);setMode(mode)},{mode,month});
  const measured=await assertTextContrast(page,['.festivalSpan'],`${engine} ${theme} ${mode} ${month+1}`);
  if(mode==='festival'&&month<11||mode==='events'&&month!==10)assert.ok(measured.length,`${theme} ${mode} ${month+1}: real festival/event bars required`);
+ const details=await assertTextContrast(page,[
+  '.cinelvaFestivalDetail h3','.cinelvaFestivalDetail .small','.cinelvaFestivalDetail p','.cinelvaFestivalDetail a',
+  '.outdoorEventItem h3','.outdoorEventItem .small','.outdoorEventItem>a',
+  '.outdoorFilmItem span','.outdoorFilmPlaceholder'
+ ],`${engine} ${theme} ${mode} ${month+1} detail cards`);
+ if(mode==='festival'||month===9)assert.ok(details.some(x=>x.selector.endsWith('h3')), 'real calendar detail headings required');
  await page.screenshot({path:`artifacts/calendar-cross-screen/${engine}-${theme}-${mode}-${month+1}.png`,fullPage:true});
  }
  await context.close();

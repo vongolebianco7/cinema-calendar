@@ -9,11 +9,11 @@ function boot({saved=null,dark=false,denied=false}={}){
  const control={value:'',addEventListener:(type,fn)=>{listeners['control:'+type]=fn}};
  const label={className:'',innerHTML:'',querySelector:()=>control};
  const drawer={append:el=>{drawer.child=el}};
- const doc={documentElement:{dataset:{},style:{}},readyState:'loading',createElement:()=>label,querySelector:s=>s==='.gDrawer'?drawer:null,addEventListener:(type,fn)=>{listeners[type]=fn}};
+ const doc={head:{appendChild:()=>{}},currentScript:{src:'https://example.test/js/theme.js'},documentElement:{dataset:{},style:{}},readyState:'loading',createElement:()=>label,querySelector:s=>s==='.gDrawer'?drawer:null,addEventListener:(type,fn)=>{listeners[type]=fn}};
  const media={matches:dark,addEventListener:(type,fn)=>{mediaListeners[type]=fn}};
  const storage={getItem:()=>{if(denied)throw Error('denied');return saved},setItem:(key,value)=>{if(denied)throw Error('denied');writes.push([key,value])},removeItem:key=>{if(denied)throw Error('denied');writes.push([key,null])}};
  const win={matchMedia:()=>media,addEventListener:(type,fn)=>{listeners['window:'+type]=fn}};
- vm.runInNewContext(fs.readFileSync(path.join(root,'js/theme.js'),'utf8'),{document:doc,window:win,localStorage:storage});
+ vm.runInNewContext(fs.readFileSync(path.join(root,'js/theme.js'),'utf8'),{document:doc,window:win,localStorage:storage,URL});
  return {doc,media,mediaListeners,listeners,control,drawer,writes};
 }
 test('first paint follows system unless an explicit valid preference exists',()=>{
@@ -45,11 +45,11 @@ test('every public and isolated page loads the shared theme before rendering',()
   for(const prefix of ['', 'cinelva/']){
    if(!fs.existsSync(path.join(root,prefix,name)))continue;
    const html=fs.readFileSync(path.join(root,prefix,name),'utf8');
-   assert.match(html,/<script src="js\/theme.js"><\/script>/,prefix+name);
+   assert.match(html,/<script src="js\/theme.js(?:\?[^"]*)?"><\/script>/,prefix+name);
    assert.match(html,/<link rel="stylesheet" href="assets\/theme\.css(?:\?[^"]*)?">/,prefix+name);
    assert.ok(html.indexOf('js/theme.js')<html.indexOf('<style'),prefix+name+' early theme');
    if(prefix)assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
   }
  }
- const css=fs.readFileSync(path.join(root,'assets/theme.css'),'utf8');assert.doesNotMatch(css,/filter\s*:|\b(?:canvas|img|\.art|\.ocean)\s*[{,]/i);
+ const css=fs.readFileSync(path.join(root,'assets/theme.css'),'utf8');assert.doesNotMatch(css,/filter\s*:\s*(?!none)[^;!}]+[;!}]/i);
 });

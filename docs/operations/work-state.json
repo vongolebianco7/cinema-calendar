@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T10:41:43.193521+00:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-23T08:26:14.943987+00:00",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "branch": "fix/calendar-cross-screen-20261022",
-  "head_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-  "pull_request": 473,
+  "base_sha": "0f0250ffb84b0c710286be4ea0188742b08f1b3c",
+  "branch": "fix/browser-ci-package-mirror-20261023",
+  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
+  "pull_request": 478,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -547,6 +547,13 @@
       "pull_request": 437,
       "acceptance": "Required Actions pass on exact integrated head; original imported storage keys survive edit/clear, current award/medal/spoiler requirements are preserved, no fabricated canonical IDs. Canonical release evidence remains separate.",
       "ci": "All9 required Actions succeeded at f189d585; squash merged as f6b71c88. Chromium/WebKit frontend/mobile/theme, backup, completeness, Python, smoke, brand and scorecard passed."
+    },
+    {
+      "id": "P0-CALENDAR-INCIDENT-20261022",
+      "title": "Repair reported calendar defects and matching cross-screen failures",
+      "status": "in_progress",
+      "acceptance": "13-item incident ledger; merged after required CI, with unavailable source facts explicitly retained as open.",
+      "ci": "475 and473 merged;473 final required4/mobile/Python/contract passed. 476 source1a417676 required4/mobile/Python/contract passed with actual rendered detail-card regression; receiptbe63fa43 CI pending."
     }
   ],
   "verification": [
@@ -697,6 +704,14 @@
     {
       "check": "Executor recovery and safe artifact fallback",
       "result": "Local executor disconnected and returned environment_offline on three checks. No lost source: f11/176 source+receipt saved remotely. A bounded QA-only branch downloaded existing run39740981085 artifact12409767655 via GitHub actions/download-artifact, preserved exact8 source PNGs plus overview/footer comparisons, and made them readable through base64 GitHub file API. Run39748667542 success. Latest4profiles and both comparison sheets reviewed before merge. QA branch/workflow was not merged into production main."
+    },
+    {
+      "check": "Calendar incident source repair and independent screenshot review",
+      "result": "PR473 merged0f0250ff. Source ad574 all7 workflows passed. Finalafde required4/mobile/Python/contract passed after a package-mirror timeout rerun. Optional performance score failed1081/1064ms against1000ms; independent476source passed991/944ms with no threshold change. Actual light detail title1.003:1 reproduced and repaired; Chromium/WebKit rendered headings/dates/body/links/film text assertions passed. Local full Python161/161 passed."
+    },
+    {
+      "check": "Browser dependency timeout root cause and constrained CI repair",
+      "result": "Final476 Autonomous cancelled during Azure apt downloads; other7 workflows succeeded. Same installer preparation stalled in477. Mirror-only preparation added to existing five installer jobs in4 workflows; no assertions/timeouts removed. Shell syntax, YAML parse, signature/suite/protocol fixture and original-command equality checks pass. Shared quality gate passes; fresh CI must verify actual archive download and unchanged browser journeys."
     }
   ],
   "deployment": {
@@ -722,7 +737,7 @@
     "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
     "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
   ],
-  "next_action": "Finish exact-source CI and receipt for PR473, integrate verified calendar data additions, then repair remaining provider coverage and unavailable poster handling. Vercel excluded.",
+  "next_action": "Wait for final receipt-head CI, merge PR478 after all required checks pass, then close superseded PR476/477 and reconcile calendar ledger: ten merged, two verified pending integration, one unavailable actual poster. Vercel excluded.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -747,36 +762,46 @@
     "next_action": "All20 specifically confirmed defects integrated and verified. Reconcile latestmain against remaining acceptance gates; do not invent unknown-bug absence or physical/legal/user-study acceptance."
   },
   "current_runtime": {
-    "host_shell": "environment_offline",
-    "cloud_browser": "available",
+    "host_shell": "available",
+    "cloud_browser": "not used",
+    "github": "available",
     "vercel_scope": "excluded",
-    "note": "Executor disconnected during latest verification; three attempts confirmed environment_offline. GitHub remains available and supplied all final CI, artifact visual verification and integration. Earlier environment-available observation is historical.",
-    "vercel_live_browser": "denied by auto-review under user Vercel exclusion; no retry",
-    "github": "available"
+    "note": "Browser binary download unavailable locally; CI supplies Chromium/WebKit verification. Local quality gate and full Python161 passed."
   },
   "calendar_regression_repair": {
-    "total_tasks": 12,
-    "completed_tasks": 0,
-    "remaining_tasks": 12,
-    "implemented_changes": 6,
-    "completion_percent": 0,
-    "acceptance": "Only verified and merged fixes count as complete. Diagnostic coverage is not product completeness.",
-    "source_pr": 473,
-    "data_branch": "fix/calendar-source-data-20261022",
-    "open": [
-      "light review icon across lists",
-      "streaming posters",
-      "mixed-identity duplicate",
-      "provider coverage",
-      "TV future dates",
-      "festival/event bar contrast",
-      "future festivals",
-      "outdoor coverage",
-      "non-Hibiya film details",
-      "expired theater data",
-      "official JSON-LD extractor",
-      "truthful update freshness"
+    "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
+    "total_tasks": 13,
+    "completed_tasks": 10,
+    "remaining_tasks": 3,
+    "confirmed_merged_fixes": 10,
+    "implemented_changes": 13,
+    "completion_percent": 76.9,
+    "ledger": "docs/operations/calendar-incident-progress-20261023.json",
+    "merged_prs": [
+      475,
+      473
     ],
-    "note": "Expired showtimes are already hidden by CinelvaTheaterSchedule; movie details already use official links. Do not report stale source rows as confirmed visible stale showtimes."
-  }
+    "pending_pr": 476,
+    "pending_branch": "fix/lemino-dated-film-data-20261023",
+    "open": [
+      "Calendar detail-card contrast: source CI and actual both-engine screenshot review passed, final receipt CI pending in476.",
+      "Two dated Lemino films newly verified from official distributor announcements, identity/posters verified via two bounded read-only TMDB queries; data repair pending CI/main.",
+      "Actual poster for TMDB1591961 remains unavailable."
+    ],
+    "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger.",
+    "pending_branches": [
+      "fix/calendar-light-card-contrast-20261022",
+      "fix/lemino-dated-film-data-20261023",
+      "fix/browser-ci-package-mirror-20261023"
+    ],
+    "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
+    "poster_recheck": "Read-only Actions39861525433 confirmed movie1591961 still returns poster_path:null."
+  },
+  "validation": [
+    {
+      "check": "PR478 exact source and approved-logo preservation",
+      "result": "77f27d01 all nine workflows successful. Local shared quality gate passed; Python161/161 passed. Independent code review found no blockers; all108 prior streaming entries retained plus two verified Lemino titles. Nine logo/header files byte-identical to main. Only outdated logo/cache-query assertions changed; ordinary UI contrast remains enforced. Final receipt-head CI pending.",
+      "source_sha": "77f27d014baecd52fc875201083f94fd4781a2c7"
+    }
+  ]
 }

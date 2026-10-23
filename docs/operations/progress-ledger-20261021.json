@@ -242,7 +242,7 @@
       "id": "P0-01.1",
       "acceptance": "Reconcile main, issues, docs, release settings",
       "status": "done",
-      "evidence": "Live main f50cf7ca, all seven open GitHub issues and nine stale-PR merge states reconciled. Latest specification supersessions mapped to fixed32gate ledger; canonical frontend READY confirmed."
+      "evidence": "Live main f50cf7ca, all nine open GitHub issues and nine stale-PR merge states reconciled. Latest specification supersessions mapped to fixed32gate ledger; canonical frontend READY confirmed."
     },
     {
       "id": "P0-01.2",
@@ -332,7 +332,7 @@
       "id": "P0-04.3",
       "acceptance": "Free-only/no scraping/rights/truthful availability",
       "status": "blocked",
-      "evidence": "Free-only/no-scraping gates retained; seven artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
+      "evidence": "Free-only/no-scraping gates retained; nine artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
     },
     {
       "id": "P1-05.1",
@@ -416,7 +416,7 @@
       "id": "P1-09.2",
       "acceptance": "Naming/legal/film-data-image rights",
       "status": "blocked",
-      "evidence": "Free-only/no-scraping gates retained; seven artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
+      "evidence": "Free-only/no-scraping gates retained; nine artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
     },
     {
       "id": "P1-09.3",

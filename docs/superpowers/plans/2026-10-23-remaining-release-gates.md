@@ -26,4 +26,4 @@
 - [x] Prepare bounded physical-iPhone and 5–10 participant test procedures/results templates; do not mark real execution complete without results.
 - [ ] Reconcile the stable32-gate and13-incident ledgers, run shared gate and affected tests, review and integrate through PRs.
 
-Implementation and local compiled API checks complete; exact-source CI, receipt, merge and real deployment verification pending. Seven generated asset matches verified; remaining rights evidence, physical device, independent participants and real DB restoration remain blocked.
+Implementation and local compiled API checks complete; exact-source CI, receipt, merge and real deployment verification pending. Nine generated asset matches verified; remaining rights evidence, physical device, independent participants and real DB restoration remain blocked.

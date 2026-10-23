@@ -5,7 +5,7 @@
   "scope": "Every assets/ file; active root HTML, JS, manifest and non-Ocean preview sources searched for literal references and split-image prefixes. This is a conservative inventory, not a browser reachability proof.",
   "legal_clearance": false,
   "asset_count": 59,
-  "image_or_split_asset_count": 32,
+  "image_or_split_asset_count": 58,
   "attribution_findings": [
     {
       "source": "TMDB / JustWatch",
@@ -211,8 +211,15 @@
       "bytes": 2107189,
       "sha256": "e9485e341602526ddae17925176b2ba00f4f1b02d76ac676db70e5ebc99bdd53",
       "active_source_references": [],
-      "rights_status": "exact_asset_permission_unverified",
-      "note": "Origin evidence is distinct from third-party rights clearance; approved artwork retained."
+      "rights_status": "generated_origin_verified",
+      "note": "Exact SHA-256 match to generation archive metadata model_generated:true; not independent legal clearance.",
+      "origin_evidence": {
+        "asset": "assets/AB933939-93EB-43D6-814A-C60BE58B42F6.png",
+        "sha256": "e9485e341602526ddae17925176b2ba00f4f1b02d76ac676db70e5ebc99bdd53",
+        "generated_source_filename": "image-gen-5(3).png",
+        "model_generated": true,
+        "match": "exact_bytes"
+      }
     },
     {
       "path": "assets/B3FA4217-3B0A-4F0A-8D84-6560C5E6F4B4.png",
@@ -237,8 +244,15 @@
       "bytes": 3196611,
       "sha256": "9cdde09dc9e056fe8d40b104552e5396b1a094b2bd96c6828a04ef8f5ff5da2d",
       "active_source_references": [],
-      "rights_status": "exact_asset_permission_unverified",
-      "note": "Origin evidence is distinct from third-party rights clearance; approved artwork retained."
+      "rights_status": "generated_origin_verified",
+      "note": "Exact SHA-256 match to generation archive metadata model_generated:true; not independent legal clearance.",
+      "origin_evidence": {
+        "asset": "assets/C39E8377-836A-4605-85D2-585A3F65BEE8.png",
+        "sha256": "9cdde09dc9e056fe8d40b104552e5396b1a094b2bd96c6828a04ef8f5ff5da2d",
+        "generated_source_filename": "光降り注ぐ色彩豊かな珊瑚礁海底.png",
+        "model_generated": true,
+        "match": "exact_bytes"
+      }
     },
     {
       "path": "assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png",
@@ -730,6 +744,6 @@
       "note": "Origin evidence is distinct from third-party rights clearance; approved artwork retained."
     }
   ],
-  "generated_origin_exact_matches": 7,
-  "remaining_evidence": "Remaining files include logo derivatives, archived unused images and split sprites. Seven exact generated origins verified; no blanket clearance. Award gallery visually matches source but transformation chain not verified."
+  "generated_origin_exact_matches": 9,
+  "remaining_evidence": "Remaining files include logo derivatives, archived unused images and split sprites. Nine exact generated origins verified; no blanket clearance. Award gallery visually matches source but transformation chain not verified."
 }

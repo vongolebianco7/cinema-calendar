@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T10:18:48.021812+00:00",
-  "status": "ci_passed",
+  "updated_at": "2026-10-23T10:40:57.097901+00:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
-  "branch": "audit/remaining-release-gates-20261023",
-  "head_sha": "45a8762c9572913707d325f12b4525219711a732",
-  "pull_request": 479,
+  "base_sha": "2493c6edbb09e57cafe4a80150ff7b60c9326594",
+  "branch": "fix/materialized-config-quality-20261023",
+  "head_sha": "2493c6edbb09e57cafe4a80150ff7b60c9326594",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -732,20 +732,24 @@
     {
       "check": "Source45 exact CI and bounded performance remeasurement",
       "result": "All8 source45a8762c workflows successful, including frontend39936962182 (both-engine route audit after root redirect wait), backend39936962240, Autonomous39936962269, smoke39936962204, Python39936962206, mobile39936962255, scorecard contract39936962260, completeness39936962301. First performance1000-record390px interaction1038ms exceeded unchanged1000ms budget; one unchanged-head mobile remeasurement passed741.86ms at390 and743.13ms at1280, ready1621.92/1654.81ms, CLS.04237/.01516, no errors. App/performance test source unchanged. Final CI and production still pending."
+    },
+    {
+      "check": "Actual backend materialized quality failure and fix",
+      "result": "DeploymentDfgo9h3 passed proof then failed12 source-config assertions. Same complete gate reproduced locally. Narrow reader validates exact committed config and uses frontend source only after verified backend marker; all assertions retained. Marker set after real proof, backend only; inherited frontend marker cleared. Normal and materialized full gates pass; focused review32/32 pass and no blockers. Materialized whole-gate smoke added backend CI; new helper watched by both projects."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "frontend": "9ad3d38e READY at cinelva.vercel.app",
-    "backend": "Latest9ad3d38e ERROR: root vercel.json materialized backend config; previous cf8633de serving. Narrow fix pending real deployment proof.",
-    "database": "HTTP402 egress exceeded; no DB writes or credentials fetched."
+    "frontend": "2493c6ed READY at existing canonical aliases; artwork fallback published.",
+    "backend": "2493c6ed ERROR: proof passes, quality assertions see materialized backend root config; previouscf8633 still serving. Source-config reader/marker and whole-gate CI reproduction fixed locally.",
+    "database": "Neon free egress exhausted; no paid plan or quota evasion. Writes remain blocked until Nov1 reset."
   },
   "blockers": [
     "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Renew receipt-only proof for all-green source45a8762c; require final-head CI, merge479, verify both canonical deployments and all5 read APIs, then reconcile final release ledgers.",
+  "next_action": "Publish materialized configuration quality fix; wait source CI, renew receipt-only proof, wait final CI; run full production-checks under actual materialization locally before merge, then verify backend canonical API publication.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -779,28 +783,25 @@
   "calendar_regression_repair": {
     "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
     "total_tasks": 13,
-    "completed_tasks": 12,
-    "remaining_tasks": 1,
+    "completed_tasks": 13,
+    "remaining_tasks": 0,
     "confirmed_merged_fixes": 10,
     "implemented_changes": 13,
-    "completion_percent": 76.9,
+    "completion_percent": 100,
     "ledger": "docs/operations/calendar-incident-progress-20261023.json",
     "merged_prs": [
       475,
       473,
-      478
+      478,
+      479
     ],
     "pending_pr": null,
     "pending_branch": "fix/lemino-dated-film-data-20261023",
-    "open": [
-      "Movie1591961 same-work backdrop complement pending integration/public verification; actual poster absent."
-    ],
+    "open": [],
     "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger.",
-    "pending_branches": [
-      "audit/remaining-release-gates-20261023"
-    ],
+    "pending_branches": [],
     "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
-    "poster_recheck": "Read-only Actions39861525433 confirmed movie1591961 still returns poster_path:null."
+    "poster_recheck": "Same-work backdrop published in frontend2493c6ed and image HEAD200. Actual TMDB poster remains unavailable; labelled fallback counts as artwork defect repair, not upstream poster availability."
   },
   "validation": [
     {

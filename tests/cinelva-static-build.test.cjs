@@ -1,3 +1,4 @@
+const {readSourceConfiguration}=require('../scripts/source-configuration.cjs');
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -42,7 +43,7 @@ test('production build omits retired Ocean payload while preserving legacy redir
     fs.writeFileSync(target, content);
   }
   fs.cpSync(path.join(root, 'scripts'), path.join(fixture, 'scripts'), { recursive: true });
-  const config = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'));
+  const config = readSourceConfiguration('vercel.json');
   const result = spawnSync(config.buildCommand, { cwd: fixture, shell: true, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const output = path.join(fixture, config.outputDirectory);

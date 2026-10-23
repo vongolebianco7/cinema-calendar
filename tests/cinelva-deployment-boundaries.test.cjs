@@ -4,7 +4,8 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const frontend = JSON.parse(fs.readFileSync('vercel.json', 'utf8')).ignoreCommand;
+const {readSourceConfiguration}=require('../scripts/source-configuration.cjs');
+const frontend = readSourceConfiguration('vercel.json').ignoreCommand;
 const backend = JSON.parse(fs.readFileSync('backend/vercel.json', 'utf8')).ignoreCommand;
 
 test('configured ignore commands fit the deployment provider schema', () => {
@@ -118,3 +119,7 @@ test('changing backend skip logic builds only the backend', t => {
   repo.check(frontend, 0, 'backend skip logic does not change static frontend');
 });
 for(const input of ['scripts/source-status.cjs','quality/external-data-registry.json'])test(input+' rebuilds public source status without rebuilding backend',t=>{const repo=fixture(t);repo.change(input);repo.check(frontend,1,'source status generation input');repo.check(backend,0,'frontend source status only');});
+
+for(const input of ['scripts/production-checks.cjs','scripts/source-configuration.cjs'])test(input+' rebuilds both projects as publication policy',t=>{
+ const repo=fixture(t);repo.change(input);repo.check(frontend,1,'publication guard input');repo.check(backend,1,'publication guard input');
+});

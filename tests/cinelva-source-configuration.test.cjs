@@ -1,0 +1,20 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {execFileSync}=require('node:child_process');
+test('source configuration resolves only the verified backend materialization and preserves ordinary working edits',t=>{
+ const {readSourceConfiguration}=require('../scripts/source-configuration.cjs');
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-source-config-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const frontend={buildCommand:'node scripts/build-static.cjs',ignoreCommand:'frontend'};
+ const backend={ignoreCommand:'backend',installCommand:'npm ci'};
+ fs.mkdirSync(path.join(root,'backend'));fs.writeFileSync(path.join(root,'vercel.json'),JSON.stringify(frontend));fs.writeFileSync(path.join(root,'backend/vercel.json'),JSON.stringify(backend));
+ const git=args=>execFileSync('git',args,{cwd:root,stdio:'pipe'});
+ git(['init','-q']);git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source']);
+ const env={VERCEL:'1',CINELVA_VERIFIED_BACKEND_CONFIG:'1'};
+ fs.writeFileSync(path.join(root,'vercel.json'),JSON.stringify(backend));
+ assert.deepEqual(readSourceConfiguration('vercel.json',{root,env}),frontend);
+ assert.deepEqual(readSourceConfiguration('backend/vercel.json',{root,env}),backend);
+ assert.deepEqual(readSourceConfiguration('vercel.json',{root,env:{VERCEL:'1'}}),backend);
+ const edited={...frontend,buildCommand:'node changed.cjs'};fs.writeFileSync(path.join(root,'vercel.json'),JSON.stringify(edited));
+ assert.deepEqual(readSourceConfiguration('vercel.json',{root,env:{}}),edited,'ordinary CI/local checks must inspect working edits');
+ assert.throws(()=>readSourceConfiguration('vercel.json',{root,env}),/Unverified materialized configuration/);
+});

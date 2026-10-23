@@ -58,6 +58,8 @@ jobs:
         run: npm run build
       - name: Verify built read APIs with the database unavailable
         run: node tests/cinelva-backend-snapshot-smoke.cjs
+      - name: Verify complete quality gate with materialized backend configuration
+        run: node tests/cinelva-materialized-config-quality.cjs
       - name: Reject compilation changes to tracked source
         run: git diff --exit-code -- backend
       - name: Preserve dependency evidence

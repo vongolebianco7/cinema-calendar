@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-23T09:30:42.334017+00:00",
+  "updated_at": "2026-10-23T12:22:42.681657+00:00",
   "source_issue": 239,
-  "source_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
+  "source_sha": "5cf977ac9f40ea1593f3c8de1b31f628cbff66cf",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
-    "completed_tasks": 27,
-    "remaining_tasks": 5,
-    "completion_percent": 84.4,
+    "completed_tasks": 28,
+    "remaining_tasks": 4,
+    "completion_percent": 87.5,
     "confirmed_additional_fixes": 30
   },
   "fixes": [
@@ -259,8 +259,8 @@
     {
       "id": "P0-01.4",
       "acceptance": "Artifacts and enforce checks before release",
-      "status": "blocked",
-      "evidence": "Exact-source guard enforced for Pages/DB/Vercel. Latest frontend9ad3 READY; backend materialization failure reproduced and narrowly fixed locally. Await exact-source/final CI plus actual backend release proof."
+      "status": "done",
+      "evidence": "PR480 source924e0763 all6/final52980b8e all7 workflows passed; full production-checks with actual backend configuration materialization passed source proof and entire quality gate. Merged5cf977ac; both frontend/backend canonical deployments READY. Actual canonical5 read APIs200/static_snapshot with original timestamps; health503 retains real Neon outage. Existing origins and former READY backend retained. No claim of restored DB writes."
     },
     {
       "id": "P0-02.1",
@@ -567,6 +567,14 @@
       "additional_fixes": 30,
       "percent": 84.4,
       "reason": "470 merged after exact-source/final CI and latest-source artifact visual inspection; restore P1-08.2. Audit20/20 confirmed defects repaired. Stable32 denominator preserved."
+    },
+    {
+      "at": "2026-10-23T12:22:42.681657+00:00",
+      "completed": 28,
+      "remaining": 4,
+      "additional_fixes": 30,
+      "percent": 87.5,
+      "reason": "Close P0-01.4 only after exact-source/final CI, full materialized production check, actual production READY and5 canonical API checks. DB quota remains an operational outage; rights2/physical iPhone/independent users are still blocked. Stable32 denominator retained."
     }
   ]
 }

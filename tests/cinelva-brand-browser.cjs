@@ -17,7 +17,8 @@ const assert=require('node:assert/strict');
           assert.equal(await brand.getAttribute('aria-label'),'Cinelva');
           assert.equal(await brand.locator('.gBrandWord').textContent(),'Cinelva');
           const img=brand.locator('img');
-          assert.match(await img.getAttribute('src'),/411DC24B-E557-4A36-95D2-5FA3550E7BD7\.png$/);
+          const expected=route==='index.html'?'assets/cinelva_original_colors_transparent.png':'assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png';
+          assert.equal((await img.getAttribute('src')).split('?')[0],expected);
           await img.evaluate(el=>el.decode());
           assert.ok(await img.evaluate(el=>el.naturalWidth>0));
         }

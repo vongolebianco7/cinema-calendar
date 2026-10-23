@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T07:05:13.437701+00:00",
+  "generated_at": "2026-10-23T12:26:51.869149+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -271987,6 +271987,1209 @@
         "source": "tmdb_director_movie_credits",
         "truncated": false,
         "runtime_unverified": 3
+      }
+    },
+    "6377613": {
+      "id": 6377613,
+      "name": "下本地崇",
+      "nameJa": "下本地崇",
+      "original_name": "下本地崇",
+      "also_known_as": [
+        "下本地崇"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/6377613",
+      "credits_source_url": "https://api.themoviedb.org/3/person/6377613/movie_credits",
+      "checked_at": "2026-10-23T12:21:35.235428+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            99
+          ],
+          "id": 1739954,
+          "title": "無敵なカタチ",
+          "original_title": "無敵なカタチ",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-07-25",
+          "director": "下本地崇",
+          "director_id": 6377613,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/nl6Hu71rNhhgI85eTLbUf1zQTCP.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1739954"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 1
+      }
+    },
+    "2770986": {
+      "id": 2770986,
+      "name": "紙谷楓",
+      "nameJa": "紙谷楓",
+      "original_name": "紙谷楓",
+      "also_known_as": [
+        "紙谷楓"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/2770986",
+      "credits_source_url": "https://api.themoviedb.org/3/person/2770986/movie_credits",
+      "checked_at": "2026-10-23T12:21:36.661753+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            10749,
+            35
+          ],
+          "id": 1701409,
+          "title": "ラブ≠コメディ",
+          "original_title": "ラブ≠コメディ",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.0,
+          "votes": 1,
+          "year": "2026",
+          "date": "2026-07-03",
+          "director": "紙谷楓",
+          "director_id": 2770986,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/zARaQtuRTBOCnnreB6P9WUVOIgk.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1701409"
+        },
+        {
+          "genre_ids": [
+            14,
+            53
+          ],
+          "id": 1720684,
+          "title": "世にも奇妙な物語 '26夏の特別編",
+          "original_title": "世にも奇妙な物語 '26夏の特別編",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.0,
+          "votes": 2,
+          "year": "2026",
+          "date": "2026-06-27",
+          "director": "紙谷楓",
+          "director_id": 2770986,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/HKfgkKFYLOCadKxuT5La9h7w0K.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1720684"
+        },
+        {
+          "genre_ids": [
+            35,
+            18
+          ],
+          "id": 786407,
+          "title": "半径1メートルの君 〜上を向いて歩こう〜",
+          "original_title": "半径1メートルの君 〜上を向いて歩こう〜",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 8.0,
+          "votes": 1,
+          "year": "2021",
+          "date": "2021-02-26",
+          "director": "紙谷楓",
+          "director_id": 2770986,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/hSs69bx6u41y2wiXjTlqz8mieYL.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/786407"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 3
+      }
+    },
+    "1561992": {
+      "id": 1561992,
+      "name": "塚原あゆ子",
+      "nameJa": "塚原あゆ子",
+      "original_name": "塚原あゆ子",
+      "also_known_as": [
+        "塚原あゆ子",
+        "塚原 あゆ子",
+        "Tsukahara Ayuko",
+        "츠카하라 아유코",
+        "つかはら あゆこ"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": "/h80rfDAsANWHQAbwXWJYYolU9Ix.jpg",
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": "Kuki, Saitama, Japan",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/1561992",
+      "credits_source_url": "https://api.themoviedb.org/3/person/1561992/movie_credits",
+      "checked_at": "2026-10-23T12:21:37.037841+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            18,
+            14,
+            10749
+          ],
+          "id": 1328862,
+          "title": "ファーストキス 1ST KISS",
+          "original_title": "ファーストキス 1ST KISS",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.267,
+          "votes": 30,
+          "year": "2025",
+          "date": "2025-02-07",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/6CKSVkMr0tl0YVQqszrnQee6M6D.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1328862"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1306061,
+          "title": "グランメゾン・パリ",
+          "original_title": "グランメゾン・パリ",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.5,
+          "votes": 16,
+          "year": "2024",
+          "date": "2024-12-30",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/oE56B7Meyd96CRMw3EcTy6cBPS1.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1306061"
+        },
+        {
+          "genre_ids": [
+            18,
+            10770
+          ],
+          "id": 1414051,
+          "title": "グランメゾン東京 スペシャル",
+          "original_title": "グランメゾン東京 スペシャル",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.4,
+          "votes": 7,
+          "year": "2024",
+          "date": "2024-12-29",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/xktdIXLRk5lnemX55Hdl9pplRHS.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1414051"
+        },
+        {
+          "genre_ids": [
+            18,
+            53,
+            80,
+            9648
+          ],
+          "id": 1276108,
+          "title": "ラストマイル",
+          "original_title": "ラストマイル",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.768,
+          "votes": 28,
+          "year": "2024",
+          "date": "2024-08-23",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/sZemGsip0CQuwE5kYjdf82NV5TE.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1276108"
+        },
+        {
+          "genre_ids": [
+            18,
+            10749,
+            14
+          ],
+          "id": 1037348,
+          "title": "わたしの幸せな結婚",
+          "original_title": "わたしの幸せな結婚",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.355,
+          "votes": 55,
+          "year": "2023",
+          "date": "2023-03-17",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7zCBnKErHlERF2TY1SrTgZjmfBb.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1037348"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 649431,
+          "title": "Aではない君と",
+          "original_title": "Aではない君と",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2018",
+          "date": "2018-09-21",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/enAiCzdgUH8mTQRit20Utjif00M.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/649431"
+        },
+        {
+          "genre_ids": [
+            14,
+            18
+          ],
+          "id": 526384,
+          "title": "コーヒーが冷めないうちに",
+          "original_title": "コーヒーが冷めないうちに",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.6,
+          "votes": 53,
+          "year": "2018",
+          "date": "2018-09-21",
+          "director": "塚原あゆ子",
+          "director_id": 1561992,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/5MbRPfsRPyKIQnpLgIpBzksiuM1.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/526384"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 7
+      }
+    },
+    "1281402": {
+      "id": 1281402,
+      "name": "金崎貴臣",
+      "nameJa": "金崎貴臣",
+      "original_name": "金崎貴臣",
+      "also_known_as": [
+        "金崎貴臣",
+        "かなさき たかおみ",
+        "金﨑 貴臣",
+        "金﨑貴臣"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": "1977-04-24",
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/1281402",
+      "credits_source_url": "https://api.themoviedb.org/3/person/1281402/movie_credits",
+      "checked_at": "2026-10-23T12:21:37.791274+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            16,
+            35,
+            14,
+            12
+          ],
+          "id": 1445721,
+          "title": "この素晴らしい世界に祝福を！３ーBONUS STAGEー",
+          "original_title": "この素晴らしい世界に祝福を！３ーBONUS STAGEー",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.6,
+          "votes": 7,
+          "year": "2025",
+          "date": "2025-03-14",
+          "director": "金崎貴臣",
+          "director_id": 1281402,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/sAwRXMgDT4g1heFHNeKLsrBdHXN.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1445721"
+        },
+        {
+          "genre_ids": [
+            16,
+            35,
+            14
+          ],
+          "id": 532067,
+          "title": "映画 この素晴らしい世界に祝福を！紅伝説",
+          "original_title": "映画 この素晴らしい世界に祝福を！紅伝説",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 8.029,
+          "votes": 647,
+          "year": "2019",
+          "date": "2019-08-30",
+          "director": "金崎貴臣",
+          "director_id": 1281402,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/t37cFbjqWzcteiA3XrkNOUswPLa.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/532067"
+        },
+        {
+          "genre_ids": [
+            28,
+            16,
+            35,
+            10770,
+            80,
+            12
+          ],
+          "id": 245928,
+          "title": "ルパン三世 princess of the breeze ～隠された空中都市～",
+          "original_title": "ルパン三世 princess of the breeze ～隠された空中都市～",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.4,
+          "votes": 23,
+          "year": "2013",
+          "date": "2013-11-15",
+          "director": "金崎貴臣",
+          "director_id": 1281402,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/x0Qq72e50HyqcatpxpktwTnqzz4.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/245928"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 3
+      }
+    },
+    "15218": {
+      "id": 15218,
+      "name": "ジェームズ・ガン",
+      "nameJa": "ジェームズ・ガン",
+      "original_name": "ジェームズ・ガン",
+      "also_known_as": [
+        "ジェームズ・ガン",
+        "詹姆斯·冈恩",
+        "جیمز گان",
+        "جيمس غان",
+        "เจมส์ กันน์"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": "/pnKqZub3IlKYbyH9RRTMDOoqEn0.jpg",
+      "birthday": "1966-08-05",
+      "deathday": null,
+      "place_of_birth": "St. Louis, Missouri, USA",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/15218",
+      "credits_source_url": "https://api.themoviedb.org/3/person/15218/movie_credits",
+      "checked_at": "2026-10-23T12:21:38.176634+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            28,
+            878,
+            12
+          ],
+          "id": 1523140,
+          "title": "Man of Tomorrow",
+          "original_title": "Man of Tomorrow",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2027",
+          "date": "2027-07-07",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/tYLgfKk3cEk7LskgxWyW37Nty01.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1523140"
+        },
+        {
+          "genre_ids": [
+            878,
+            12,
+            28
+          ],
+          "id": 1061474,
+          "title": "スーパーマン",
+          "original_title": "Superman",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.323,
+          "votes": 5641,
+          "year": "2025",
+          "date": "2025-07-09",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/eFnvujCLaUbhmrsRZzFy1bpdMko.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1061474"
+        },
+        {
+          "genre_ids": [
+            878,
+            12,
+            28
+          ],
+          "id": 447365,
+          "title": "ガーディアンズ・オブ・ギャラクシー：VOLUME 3",
+          "original_title": "Guardians of the Galaxy Vol. 3",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.933,
+          "votes": 8994,
+          "year": "2023",
+          "date": "2023-05-03",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/waTQqjV1dvGlbCAhN2VAIierdev.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/447365"
+        },
+        {
+          "genre_ids": [
+            35,
+            878,
+            12
+          ],
+          "id": 774752,
+          "title": "ガーディアンズ・オブ・ギャラ クシー ホリデー・スペシャル",
+          "original_title": "The Guardians of the Galaxy Holiday Special",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.082,
+          "votes": 2509,
+          "year": "2022",
+          "date": "2022-11-24",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7EMWk2JM7NutTcWzyyERLPnOHLB.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/774752"
+        },
+        {
+          "genre_ids": [
+            28,
+            35,
+            12
+          ],
+          "id": 436969,
+          "title": "ザ・スーサイド・スクワッド “極”悪党、集結",
+          "original_title": "The Suicide Squad",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.439,
+          "votes": 10014,
+          "year": "2021",
+          "date": "2021-07-28",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/xUtNtTqo31jBN9X5cnp5JYENBMW.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/436969"
+        },
+        {
+          "genre_ids": [
+            878,
+            12,
+            28
+          ],
+          "id": 283995,
+          "title": "ガーディアンズ・オブ・ギャラクシー：リミックス",
+          "original_title": "Guardians of the Galaxy Vol. 2",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.609,
+          "votes": 23625,
+          "year": "2017",
+          "date": "2017-04-25",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/nXguM4n72qP4o3qFVTEWZ33pjpB.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/283995"
+        },
+        {
+          "genre_ids": [
+            28,
+            878,
+            12
+          ],
+          "id": 118340,
+          "title": "ガーディアンズ・オブ・ギャラクシー",
+          "original_title": "Guardians of the Galaxy",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.908,
+          "votes": 30517,
+          "year": "2014",
+          "date": "2014-07-30",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/HZ9wW4KbX73rR5PQpgsuOkCU99.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/118340"
+        },
+        {
+          "genre_ids": [
+            35
+          ],
+          "id": 87818,
+          "title": "ムービー43",
+          "original_title": "Movie 43",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.7,
+          "votes": 2596,
+          "year": "2013",
+          "date": "2013-01-24",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/uYa06GxHsCsELx9vOQ11vsT0Aa6.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/87818"
+        },
+        {
+          "genre_ids": [
+            35,
+            28,
+            18
+          ],
+          "id": 45132,
+          "title": "スーパー！",
+          "original_title": "Super",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.528,
+          "votes": 1805,
+          "year": "2010",
+          "date": "2010-11-26",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/gaiDnfrT8fCRJ2ocgOq8lrcM1wP.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/45132"
+        },
+        {
+          "genre_ids": [
+            35,
+            28,
+            878
+          ],
+          "id": 567065,
+          "title": "Sparky & Mikaela",
+          "original_title": "Sparky & Mikaela",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.4,
+          "votes": 9,
+          "year": "2008",
+          "date": "2008-12-30",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/9DRze3NpoyWIflvXoi7iNUJOYhR.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/567065"
+        },
+        {
+          "genre_ids": [
+            35
+          ],
+          "id": 1059523,
+          "title": "Humanzee!",
+          "original_title": "Humanzee!",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.5,
+          "votes": 8,
+          "year": "2008",
+          "date": "2008-12-01",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/wgsjqvhlFmOTyVWRzcxskSonVl2.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1059523"
+        },
+        {
+          "genre_ids": [
+            27,
+            878,
+            35
+          ],
+          "id": 9035,
+          "title": "スリザー",
+          "original_title": "Slither",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.547,
+          "votes": 1820,
+          "year": "2006",
+          "date": "2006-03-31",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/zNlJvCY3Pz7SE09Lf4G7uPs5XFZ.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/9035"
+        },
+        {
+          "genre_ids": [
+            35
+          ],
+          "id": 899359,
+          "title": "Hamster PSA",
+          "original_title": "Hamster PSA",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.0,
+          "votes": 13,
+          "year": "1997",
+          "date": "1997-01-01",
+          "director": "ジェームズ・ガン",
+          "director_id": 15218,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/963WzW4EAn99DvnF5VcJcE5LjRp.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/899359"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 13
+      }
+    },
+    "202": {
+      "id": 202,
+      "name": "チャーリー・カウフマン",
+      "nameJa": "チャーリー・カウフマン",
+      "original_name": "チャーリー・カウフマン",
+      "also_known_as": [
+        "チャーリー・カウフマン",
+        "Charles Kaufman",
+        "Donald Kaufman"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": "/75aOpLBpvdtQM3BkWGFUvMs6LvH.jpg",
+      "birthday": "1958-11-19",
+      "deathday": null,
+      "place_of_birth": "New York City, New York, USA",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/202",
+      "credits_source_url": "https://api.themoviedb.org/3/person/202/movie_credits",
+      "checked_at": "2026-10-23T12:21:38.936951+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            14
+          ],
+          "id": 1517065,
+          "title": "How to Shoot a Ghost",
+          "original_title": "How to Shoot a Ghost",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.8,
+          "votes": 9,
+          "year": "2025",
+          "date": "2025-09-01",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/An0j7qKDpuW1FfeztmwjSyH0oFQ.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1517065"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1675257,
+          "title": "Jackals & Fireflies",
+          "original_title": "Jackals & Fireflies",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.2,
+          "votes": 4,
+          "year": "2023",
+          "date": "2023-02-09",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/w3Jy392Q7UPRJM908Fhuj0FbBgT.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1675257"
+        },
+        {
+          "genre_ids": [
+            9648,
+            53,
+            18
+          ],
+          "id": 500840,
+          "title": "もう終わりにしよう。",
+          "original_title": "I'm Thinking of Ending Things",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.533,
+          "votes": 2315,
+          "year": "2020",
+          "date": "2020-08-28",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/5ynWWapdl45hJXUh0KIevxSG9JQ.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/500840"
+        },
+        {
+          "genre_ids": [
+            16,
+            18,
+            10749,
+            35
+          ],
+          "id": 291270,
+          "title": "アノマリサ",
+          "original_title": "Anomalisa",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.088,
+          "votes": 1885,
+          "year": "2015",
+          "date": "2015-12-30",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/kV3wyP24UNptEh30w2XJ5w2M7ko.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/291270"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 4960,
+          "title": "脳内ニューヨーク",
+          "original_title": "Synecdoche, New York",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.5,
+          "votes": 1699,
+          "year": "2008",
+          "date": "2008-10-24",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/jQQ6JIZ8cFb6rMsRpjcqggKEV49.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/4960"
+        },
+        {
+          "genre_ids": [
+            18,
+            14,
+            35
+          ],
+          "id": 1439340,
+          "title": "Later the War",
+          "original_title": "Later the War",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": null,
+          "date": "",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1439340"
+        },
+        {
+          "genre_ids": [
+            18,
+            35,
+            14
+          ],
+          "id": 1194458,
+          "title": "How and Why",
+          "original_title": "How and Why",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": null,
+          "date": "",
+          "director": "チャーリー・カウフマン",
+          "director_id": 202,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1194458"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 7
+      }
+    },
+    "1017209": {
+      "id": 1017209,
+      "name": "カルレス・トレンス",
+      "nameJa": "カルレス・トレンス",
+      "original_name": "カルレス・トレンス",
+      "also_known_as": [
+        "カルレス・トレンス"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": "/jBGDX4BwsytGhPehgrrPKFFlIgn.jpg",
+      "birthday": "1984-01-01",
+      "deathday": null,
+      "place_of_birth": "Barcellona, Spagna",
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/1017209",
+      "credits_source_url": "https://api.themoviedb.org/3/person/1017209/movie_credits",
+      "checked_at": "2026-10-23T12:21:40.068879+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            27,
+            53
+          ],
+          "id": 1507696,
+          "title": "Apocalipsis Z: Nuevo mundo",
+          "original_title": "Apocalipsis Z: Nuevo mundo",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-10-09",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/wgSMJ3083ad5qKC4QzzVNJ4cv5D.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1507696"
+        },
+        {
+          "genre_ids": [
+            18,
+            28,
+            27
+          ],
+          "id": 1118031,
+          "title": "アポカリプスZ ～終末の始まり～",
+          "original_title": "Apocalipsis Z: el principio del fin",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 6.768,
+          "votes": 1313,
+          "year": "2024",
+          "date": "2024-10-04",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/7ljDdxHKbu47vW0ccFv0oKLzFZD.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1118031"
+        },
+        {
+          "genre_ids": [
+            878
+          ],
+          "id": 1102822,
+          "title": "Antes de que no haya tiempo",
+          "original_title": "Antes de que no haya tiempo",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2020",
+          "date": "2020-04-25",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/nGKGBqangEbXA1lhE7ijLXV7D53.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1102822"
+        },
+        {
+          "genre_ids": [
+            27,
+            53
+          ],
+          "id": 353979,
+          "title": "ペット 檻の中の乙女",
+          "original_title": "Pet",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.868,
+          "votes": 759,
+          "year": "2016",
+          "date": "2016-09-24",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/dCoUUDBqdz7Y7DjZEDc3mN5ICON.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/353979"
+        },
+        {
+          "genre_ids": [
+            27,
+            53,
+            35,
+            14,
+            878
+          ],
+          "id": 248781,
+          "title": "ABCs of Death 2 1/2",
+          "original_title": "ABCs of Death 2 1/2",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 4.629,
+          "votes": 66,
+          "year": "2016",
+          "date": "2016-08-02",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/mmtQE4p3fZGnQFOEZ1x9tEM4hL8.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/248781"
+        },
+        {
+          "genre_ids": [
+            27,
+            53
+          ],
+          "id": 1481989,
+          "title": "Hide and Seek",
+          "original_title": "Hide and Seek",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2014",
+          "date": "2014-05-16",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1481989"
+        },
+        {
+          "genre_ids": [
+            27
+          ],
+          "id": 369732,
+          "title": "M Is for Mom",
+          "original_title": "M Is for Mom",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2013",
+          "date": "2013-10-31",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/xZ6GcN99nNkQ8t6xC2lFriZfYrO.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/369732"
+        },
+        {
+          "genre_ids": [
+            28,
+            14,
+            9648,
+            27
+          ],
+          "id": 267025,
+          "title": "Sequence",
+          "original_title": "Sequence",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.4,
+          "votes": 13,
+          "year": "2013",
+          "date": "2013-10-11",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/zoiveQGCURHvcxaRwbKTKL6AlQD.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/267025"
+        },
+        {
+          "genre_ids": [
+            27,
+            53
+          ],
+          "id": 97795,
+          "title": "アパートメント：143",
+          "original_title": "Emergo",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 5.2,
+          "votes": 312,
+          "year": "2011",
+          "date": "2011-10-11",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/hAXqjMVgF6TS8oa40TIRfrNix5d.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/97795"
+        },
+        {
+          "genre_ids": [],
+          "id": 199018,
+          "title": "Plou a Barcelona",
+          "original_title": "Plou a Barcelona",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2009",
+          "date": "2009-01-20",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": null,
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/199018"
+        },
+        {
+          "genre_ids": [
+            35,
+            18
+          ],
+          "id": 651237,
+          "title": "Coming to Town",
+          "original_title": "Coming to Town",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 8.0,
+          "votes": 3,
+          "year": "2006",
+          "date": "2006-10-13",
+          "director": "カルレス・トレンス",
+          "director_id": 1017209,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/tWSR1HtQchfovJiKAXvue21tPte.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/651237"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 11
       }
     }
   }

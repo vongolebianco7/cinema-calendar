@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-23T12:22:42.681657+00:00",
+  "updated_at": "2026-10-23T12:58:10.971081+00:00",
   "source_issue": 239,
-  "source_sha": "5cf977ac9f40ea1593f3c8de1b31f628cbff66cf",
+  "source_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
@@ -575,6 +575,14 @@
       "additional_fixes": 30,
       "percent": 87.5,
       "reason": "Close P0-01.4 only after exact-source/final CI, full materialized production check, actual production READY and5 canonical API checks. DB quota remains an operational outage; rights2/physical iPhone/independent users are still blocked. Stable32 denominator retained."
+    },
+    {
+      "at": "2026-10-23T12:58:10.971081+00:00",
+      "completed": 28,
+      "remaining": 4,
+      "additional_fixes": 30,
+      "percent": 87.5,
+      "reason": "PR481 merged after exact source6/final7 green, full materialized production proof and17 realGit tests. Latest1030 data is inGitHub; serving5cf977ac backend1027 snapshot remains READY while new deployment is limited. Acceptance count unchanged; no rights/device/users/DB recovery fabricated."
     }
   ]
 }

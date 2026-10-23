@@ -1,13 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T12:31:34.729330+00:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-23T12:44:52.847Z",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "13a9e63ebb5ae671b787240c8f7e939118474fd1",
   "branch": "fix/backend-snapshot-publication-inputs-20261023",
-  "head_sha": "13a9e63ebb5ae671b787240c8f7e939118474fd1",
-  "pull_request": null,
+  "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29",
+  "pull_request": {
+    "number": 481,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/481",
+    "branch": "fix/backend-snapshot-publication-inputs-20261023",
+    "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -748,6 +753,10 @@
     {
       "check": "Guarded daily data publication and detected deployment boundaries",
       "result": "39939689022 attempt2 successfully passed fullquality/sourceproof and pushed13a9e63e:1030 movies, generated_at2026-10-23T12:21:40.307684+00:00; MissingJapanese0/Failed0. Subsequent DBsyncP1001 retained. Actual frontend GitHub Vercel status says Deployment rate limited retry24h; backend IgnoredBuildStep canceled. Added realGit regression for3 actual JSON imports; red3→green17/17 after3 exact backend pathspec additions. Both working directories and last-successful-SHA across laterdocs covered. Data/availability and UI-only inputs still skip backend."
+    },
+    {
+      "check": "PR481 exact-source CI",
+      "result": "Sourced2e534a2 all6 workflows successful: backend39954029766, completeness39954029615, Autonomous39954029951, mobile39954029738, frontend39954029705, smoke39954029637. Compiled calendar1030 and all5 APIs200/static_snapshot, health503; full materialized quality passed. RealGit regression red3→green17/17, focused review no blockers. Receipt-only final CI required before merge; actual Vercel latest data publication remains limited."
     }
   ],
   "deployment": {
@@ -763,7 +772,7 @@
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified.",
     "Vercel frontend data deployment rate limited for24hours after13a9e63e; no paid upgrade/retry/quota evasion.5cf977ac existing frontend/backend remain READY. Latest1030 snapshot not yet canonical."
   ],
-  "next_action": "Publish narrow backend snapshot publication-input fix, wait source CI, renew receipt-only proof and wait final CI; merge after gates. Do not retry Vercel while rate limited. Record release deferred and resume once quota is available.",
+  "next_action": "Wait receipt-only final CI for PR481, run exact-source materialized production check, merge authorized fix, inspect actual deployment once; do not retry rate limit. Then record blocked external gates, latest serving/source SHAs and reset conditions.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

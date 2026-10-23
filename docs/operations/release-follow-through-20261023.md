@@ -48,3 +48,7 @@ Final-head completeness measurement exposed real backend requests escaping the s
 Vercel preview736ff47a returned200/static_snapshot/database unavailable for all five read APIs (calendar1027,TV16, search1, Tokyo directory14,Lemino releases2); health remained503. Source timestamps and1591961 backdrop marker survived actual platform bundling. The backdrop image HEAD returned200,image/jpeg,65569bytes. This is preview evidence; production verification still pending.
 
 The repaired scored-mobile suite passed on source1eb1. Its frontend audit then reproduced a separate WebKit first-page readiness race at root agent.html/375px/light: blank screenshot, no page errors/local failures, timeout waiting main text. The existing exact redirect URL/mode wait covered only the prefixed legacy route; extend it to the root route too before theme/main assertions, retaining all assertions and timeouts.
+
+## Exact-source acceptance
+
+Source45a8762c passed all8 PR workflows, including both-engine route audit after the root redirect wait correction. Performance first measured1038ms for1000 records at390px against the unchanged1000ms budget. One bounded same-head remeasurement passed741.86ms at390px and743.13ms at1280px; readiness1621.92/1654.81ms, CLS.04237/.01516, no errors. Application and performance-test source were unchanged. Preserve both observations; this is synthetic CI evidence, not a physical-device performance guarantee. Receipt/final CI and production remain pending.

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T10:08:19.100755+00:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-23T10:18:48.021812+00:00",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
   "branch": "audit/remaining-release-gates-20261023",
-  "head_sha": "1eb1e9cf93d1ea1b0b07df9a8f01c638da82aa97",
+  "head_sha": "45a8762c9572913707d325f12b4525219711a732",
   "pull_request": 479,
   "work_items": [
     {
@@ -728,6 +728,10 @@
     {
       "check": "Vercel preview and source2 CI",
       "result": "Source1eb1 scored completeness now passes after fixture correction. Vercel preview736ff47a actual calendar/tv/movies/theater-directory/releases all200 static_snapshot, DB unavailable, health503, source timestamp preserved; backdrop HEAD200 image/jpeg65569bytes. Source1eb frontend failed on WebKit first cell root agent.html/375/light waiting main text:0 page errors/local failures, blank artifact. Existing exact URL/mode wait applied to both root and prefixed legacy-agent redirects; assertions/timeouts unchanged, focused review no blockers."
+    },
+    {
+      "check": "Source45 exact CI and bounded performance remeasurement",
+      "result": "All8 source45a8762c workflows successful, including frontend39936962182 (both-engine route audit after root redirect wait), backend39936962240, Autonomous39936962269, smoke39936962204, Python39936962206, mobile39936962255, scorecard contract39936962260, completeness39936962301. First performance1000-record390px interaction1038ms exceeded unchanged1000ms budget; one unchanged-head mobile remeasurement passed741.86ms at390 and743.13ms at1280, ready1621.92/1654.81ms, CLS.04237/.01516, no errors. App/performance test source unchanged. Final CI and production still pending."
     }
   ],
   "deployment": {
@@ -741,7 +745,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Publish root legacy-agent redirect readiness correction; require fresh source CI, receipt-only proof, final CI, merge479, verify production.",
+  "next_action": "Renew receipt-only proof for all-green source45a8762c; require final-head CI, merge479, verify both canonical deployments and all5 read APIs, then reconcile final release ledgers.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

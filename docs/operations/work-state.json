@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T22:17:42.751257+00:00",
+  "updated_at": "2026-10-23T22:55:20.903689+00:00",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "db3460ca3c80459e633c69eb33d7ac025208d1fb",
-  "branch": "feat/nationwide-now-playing-20261024",
-  "head_sha": "1415f995b396bd19e6b66181c96e96192ea3c6a6",
+  "base_sha": "3d9d82089b96fe99a2e9fb76e6c26742be814c60",
+  "branch": "fix/now-playing-initial-observation-20261024",
+  "head_sha": "45b2c01af7bb096be1abff763cf8e11c2998d8bf",
   "pull_request": {
-    "number": 483,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/483"
+    "number": 484,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/484"
   },
   "work_items": [
     {
@@ -561,10 +561,10 @@
     {
       "id": "FEATURE-NOW-PLAYING-20261024",
       "title": "Nationwide JP now-playing list with shared detail/review/bookmarks",
-      "status": "ci_passed",
+      "status": "deployment_pending",
       "acceptance": "User approved2026-10-24: discover section,3-column shared cards, full access/search, daily approved TMDB JP snapshot and source/update time, official cinema links. Independent current-list data; fail closed for stale/partial/invalid snapshots. Notifications follow as a later feature.",
-      "pull_request": 483,
-      "ci": "Exact source1415f995 all10 PR workflows succeeded, including full frontend and actual Chromium/WebKit nationwide root/prefix/light/dark geometry/actions/source states/contrast/overflow; collector7/UI7/full local quality pass.8 browser screenshots retained and representative routes visually checked. Focused review Important completeness repair verified red2→green; previous bytes preserved on truncated totals. Brand-source regression corrected for exact approved original sources and existing canvas framing, no logo changes."
+      "pull_request": 484,
+      "ci": "PR484 source45b2c01a all7 PR workflows passed, including full frontend, dedicated Chromium/WebKit nationwide controls, Autonomous, mobile, backend, smoke and Python/completeness. Collector12/fullquality passed; focused repair review no Critical/Important blockers. Documented upstream-window equivalent live diagnostic40034856714 observed100 complete titles; normal100/99 inconsistency remains. Temporary diagnostic workflow removed; no current-data snapshot publication claimed yet."
     }
   ],
   "verification": [
@@ -783,21 +783,30 @@
     {
       "check": "PR483 exact-source acceptance",
       "result": "Exact source1415f995 all10 PR workflows succeeded, including full frontend and actual Chromium/WebKit nationwide root/prefix/light/dark geometry/actions/source states/contrast/overflow; collector7/UI7/full local quality pass.8 browser screenshots retained and representative routes visually checked. Focused review Important completeness repair verified red2→green; previous bytes preserved on truncated totals. Brand-source regression corrected for exact approved original sources and existing canvas framing, no logo changes."
+    },
+    {
+      "check": "Initial real now-playing observation and documented equivalent diagnosis",
+      "result": "PR483 source10/final11 workflows and materialized proof/fullquality passed; merged3d9d8208 and canonical UI READY. Initial actual refresh correctly refused API pages100/99 totals. Official equivalent read-only query using exact upstream dates returned consistent5×20/100 and passed unchanged collector. Equivalent fallback implementation12 tests pass after red6; fullquality/review/new proof and real publication pending. No actual populated canonical snapshot yet."
+    },
+    {
+      "check": "PR484 exact-source equivalent retrieval acceptance",
+      "result": "PR484 source45b2c01a all7 PR workflows passed, including full frontend, dedicated Chromium/WebKit nationwide controls, Autonomous, mobile, backend, smoke and Python/completeness. Collector12/fullquality passed; focused repair review no Critical/Important blockers. Documented upstream-window equivalent live diagnostic40034856714 observed100 complete titles; normal100/99 inconsistency remains. Temporary diagnostic workflow removed; no current-data snapshot publication claimed yet."
     }
   ],
   "deployment": {
     "status": "production_verified",
-    "frontend": "db3460ca READY at unchanged cinelva.vercel.app; confirmed via current production deployment. New feature not published yet.",
+    "frontend": "3d9d8208 READY at unchanged cinelva.vercel.app; canonical discover includes new section/module. GET now_playing.json200 remains complete:false/generated_at:null/movies:[] after upstream inconsistency; no fake current list.",
     "backend": "db3460ca READY at unchanged backend-one-gray-94.vercel.app;1031-film static snapshot, DB unavailable; health503. New list has no DB dependency.",
     "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Current canonical db3460ca has1031 films, generated_at2026-10-23T18:50:23.357458+00:00. Earlier Vercel rate-limit evidence is superseded by both READY deployments. New now-playing data still explicitly uninitialized until approved workflow performs actual collection."
+    "latest_data": "Current canonical db3460ca has1031 films, generated_at2026-10-23T18:50:23.357458+00:00. Earlier Vercel rate-limit evidence is superseded by both READY deployments. New now-playing data still explicitly uninitialized until approved workflow performs actual collection.",
+    "now_playing": "Initial refresh40034078253 failed closed:100 vs99 total metadata. PR484 adds only officially equivalent retrieval after consistency failure, frozen API dates and unchanged all-page/raw-total checks. Real complete publication still pending."
   },
   "blockers": [
     "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Receipt-only commit pointing to successful1415f995; final-head CI and actual materialized production-checks, merge483, guarded initial TMDB refresh and canonical feature/data verification. Notifications are a later increment.",
+  "next_action": "Require final receipt-head CI and actual materialized production-checks, merge484, then observe guarded actual first complete collection and canonical nationwide list. Source45b2c01a all7 CI; UI already READY3d9d8208, live snapshot explicitly unavailable pending real complete publication.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -808,11 +817,11 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 481,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/481",
-    "merge_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
-    "source_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29",
-    "receipt_sha": "1c31122f1e9b5900f1d545f488067fa81f8fd990"
+    "number": 483,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/483",
+    "merge_sha": "3d9d82089b96fe99a2e9fb76e6c26742be814c60",
+    "source_sha": "1415f995b396bd19e6b66181c96e96192ea3c6a6",
+    "receipt_sha": "988a9e20b7961120d6a74e56770c6ec33ad79fba"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",

@@ -59,8 +59,31 @@ def collect_now_playing(fetch_page, now):
             'generated_at':now.isoformat(),'upstream_total_results':total,'movies':list(movies.values())}
 
 
-def refresh(output, fetch_page, now):
-    snapshot=collect_now_playing(fetch_page,now)
+def collect_observation(fetch_page, fetch_equivalent, now):
+    first=fetch_page(1)
+    try:
+        return collect_now_playing(lambda number:first if number==1 else fetch_page(number),now)
+    except ValueError as error:
+        if str(error) not in {'Incomplete or inconsistent now-playing page','Now-playing result count does not match upstream total'}:
+            raise
+    # TMDB documents this exact discover query as equivalent to now_playing.
+    # Freeze its upstream window; never infer a local recent-release cutoff.
+    dates=first.get('dates')
+    if not isinstance(dates,dict):raise ValueError('Invalid upstream now-playing window')
+    minimum=dates.get('minimum');maximum=dates.get('maximum')
+    if not all(isinstance(value,str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}',value) for value in [minimum,maximum]):
+        raise ValueError('Invalid upstream now-playing window')
+    try:
+        if dt.date.fromisoformat(minimum)>dt.date.fromisoformat(maximum):raise ValueError
+    except ValueError:
+        raise ValueError('Invalid upstream now-playing window') from None
+    snapshot=collect_now_playing(lambda number:fetch_equivalent(number,minimum,maximum),now)
+    snapshot['source']={**SOURCE,'retrieval_endpoint':'/discover/movie','upstream_window':{'minimum':minimum,'maximum':maximum}}
+    return snapshot
+
+
+def refresh(output, fetch_page, now, fetch_equivalent=None):
+    snapshot=collect_observation(fetch_page,fetch_equivalent,now) if fetch_equivalent else collect_now_playing(fetch_page,now)
     output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
     temporary=None
     try:
@@ -78,14 +101,17 @@ def main():
     key=os.environ.get('TMDB_API_KEY')
     if not key:raise ValueError('TMDB API credential unavailable')
     deadline=time.monotonic()+120
-    def fetch_page(number):
+    def request(endpoint,filters):
         remaining=deadline-time.monotonic()
         if remaining<=0:raise TimeoutError('Refresh deadline exceeded')
-        params=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
-        request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+params,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0'})
+        params=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP',**filters})
+        request=urllib.request.Request('https://api.themoviedb.org/3'+endpoint+'?'+params,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0','Cache-Control':'no-cache'})
         with urllib.request.urlopen(request,timeout=min(15,remaining)) as response:
             return json.load(response)
-    result=refresh(ROOT/'data/now_playing.json',fetch_page,dt.datetime.now(dt.timezone.utc))
+    def fetch_page(number):return request('/movie/now_playing',{'page':number})
+    def fetch_equivalent(number,minimum,maximum):
+        return request('/discover/movie',{'page':number,'include_adult':'false','include_video':'false','sort_by':'popularity.desc','with_release_type':'2|3','release_date.gte':minimum,'release_date.lte':maximum})
+    result=refresh(ROOT/'data/now_playing.json',fetch_page,dt.datetime.now(dt.timezone.utc),fetch_equivalent=fetch_equivalent)
     print(f"JP now-playing snapshot published: {len(result['movies'])} titles; complete observation {result['generated_at']}")
 
 

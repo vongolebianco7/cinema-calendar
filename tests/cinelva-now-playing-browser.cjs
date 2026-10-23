@@ -14,6 +14,9 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    await context.addInitScript(t=>localStorage.setItem('cinelva-theme-v1',t),theme);
    await context.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},contentType:'application/json',body:'{}'}));
    await context.route('https://image.tmdb.org/**',r=>r.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="200" height="300" fill="#555"/><text x="100" y="150" text-anchor="middle" fill="white">QA</text></svg>'}));
+   // Keep unrelated recommendation shelves empty: rapid state navigations must not
+   // cancel their background poster lookups and create WebKit CORS page errors.
+   await context.route('**/data/{movies,theatrical,streaming}.json*',r=>r.fulfill({json:{movies:[]}}));
    await context.route('**/data/now_playing.json*',r=>r.fulfill({status:fail?503:200,json:payload}));
    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});

@@ -52,3 +52,13 @@
 - At1415f995 the new browser job passed both engines with deterministic unrelated-shelf fixtures and zero page-error assertions intact. Shared quality passed. Backup/brand (including existing canvas framing), completeness, Autonomous, mobile, backend, smoke, Python and stage passed; full frontend regression pending before receipt.
 
 - Exact executable source1415f995: all10 PR workflows succeeded, including full frontend regression and the new both-engine list job. Final receipt/head CI and materialized production-checks precede integration; actual initial collection and canonical publication remain post-merge acceptance.
+
+## Initial observation repair, PR484
+- PR483 source1415f995 all10/final988a9e20 all11 passed; materialized public proof/fullquality passed, merge3d9d8208, canonical feature UI READY.
+- Actual refresh40034078253 failed closed on upstream100/99 pagination totals; snapshot remains explicitly uninitialized. Numeric-only diagnostics40034380005/40034539138/40034644214 reproduced ordinary/no-cache/canonical-order mismatch.
+- Official equivalent diagnostic40034856714 froze API window2026-09-16..2026-10-28 and observed5×20 rows, constant100 total, unchanged collector passed100 titles. This is evidence of the read-only retrieval, not production data publication.
+- Repair tests: new fallback/date/preservation/direct-no-extra-request/realCLI-exact-filter cases red6 missing-interface→green12 total. Use one equivalent pass only for pagination/raw-count mismatch; preserve original malformed/network failure semantics and shared deadline. Remove temporary diagnostic workflow.
+- Pending: focused repair review, shared/exact-source/final proof, merge484, actual complete guarded first refresh and canonical100-title observation.
+
+- PR484 focused repair review independently verified official endpoint equivalence and12 tests; no Critical/Important blockers. Nonblocking additional test ideas (network exception with fallback enabled, impossible calendar date and shared-deadline exhaustion) are not required for this repair; current code propagates network failures, parses actual dates and shares one request budget. urllib keeps its existing per-operation socket timeout; the job has an8minute overall bound.
+- Source45b2c01a all7 PR workflows passed including full frontend and dedicated Chromium/WebKit shared controls. Shared local quality passed. Final receipt/head CI, materialized production checks, merge and actual complete publication still pending.

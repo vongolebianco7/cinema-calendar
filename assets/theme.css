@@ -255,7 +255,7 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
   /* Preserve the solid dark interior of the original C emblem. */
   background:#161616!important;
   padding:0!important;
-  border:1px solid #f2dfbb!important;
+  border:0.5px solid #f2dfbb!important;
   border-radius:20%!important;
   clip-path:none!important;
   transform:none!important;
@@ -268,8 +268,16 @@ body[data-theme="dark"] .gTop .gBrand .gBrandImage,
 body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
   background:#161616!important;
   padding:0!important;
-  border:1px solid #f2dfbb!important;
+  border:0.5px solid #f2dfbb!important;
   border-radius:20%!important;
   clip-path:none!important;
   transform:none!important;
+}
+
+/* Keep the fine frame slightly inset from the icon's visible edges. */
+.gTop .gBrand .gBrandImage,
+.gDrawerHead .gBrand .gBrandImage {
+  box-sizing:border-box!important;
+  outline:none!important;
+  box-shadow:inset 0 0 0 0.5px #f2dfbb!important;
 }

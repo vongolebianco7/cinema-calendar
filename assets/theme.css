@@ -267,10 +267,3 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
   -webkit-text-stroke:0!important;
   text-shadow:none!important;
 }
-
-/* Trim the black square pixels outside the PNG's gold rounded outline.
-   Clip only the image, never its C artwork or wordmark. */
-.gTop .gBrand img.gBrandImage[src*="99F95993-3507-4C63-B108-53E99B791322"],
-.gDrawerHead .gBrand img.gBrandImage[src*="99F95993-3507-4C63-B108-53E99B791322"] {
-  clip-path:inset(7.5% round 17%)!important;
-}

@@ -23,7 +23,7 @@ active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('
 run(['node','--test',*active_node_tests])
 run(['python','-m','unittest','tests.test_external_data_registry','tests.test_film_event_refresh','tests.test_outdoor_event_refresh'])
 run(['node','--test','tests/calendar-dedupe.test.cjs'])
-run(['python','-m','unittest','tests.test_director_enrichment'])
+run(['python','-m','unittest','tests.test_director_enrichment','tests.test_now_playing_update'])
 for cmd in commands:
  if cmd[:2]==['node','--test'] and all(path in active_node_tests for path in cmd[2:]): continue
  if any('ocean-' in token or 'ocean_' in token or token.startswith('test_ocean') for token in cmd): continue

@@ -9,7 +9,7 @@ const assert=require('node:assert/strict');
       const page=await browser.newPage({viewport:{width,height:844}});
       for(const route of ['index.html','my-cinemap.html','search.html','privacy.html']){
         console.log(`${name} ${width}: checking ${route}`);
-        await page.goto('http://127.0.0.1:8765/'+route,{waitUntil:'domcontentloaded'});
+        const response=await page.goto('http://127.0.0.1:8765/'+route,{waitUntil:'domcontentloaded'});
         if(route==='privacy.html'){
           assert.ok(await page.getByText('Cinelva',{exact:true}).count(),`${name} ${width} ${route}: name`);
         }else{
@@ -17,7 +17,12 @@ const assert=require('node:assert/strict');
           assert.equal(await brand.getAttribute('aria-label'),'Cinelva');
           assert.equal(await brand.locator('.gBrandWord').textContent(),'Cinelva');
           const img=brand.locator('img');
-          assert.match(await img.getAttribute('src'),/411DC24B-E557-4A36-95D2-5FA3550E7BD7\.png$/);
+          const expected=route==='index.html'?'assets/cinelva_original_colors_transparent.png':'assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png';
+          // Verify the declared approved source; theme.js can render its frame as a canvas PNG.
+          const declared=(await response.text()).match(/<img\b[^>]*class="gBrandImage"[^>]*src="([^"]+)"/);
+          assert.equal(declared?.[1].split('?')[0],expected);
+          const rendered=await img.getAttribute('src');
+          assert.ok(rendered.startsWith('data:image/png;base64,')||rendered.split('?')[0]===expected);
           await img.evaluate(el=>el.decode());
           assert.ok(await img.evaluate(el=>el.naturalWidth>0));
         }

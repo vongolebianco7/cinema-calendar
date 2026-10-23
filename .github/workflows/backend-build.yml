@@ -12,6 +12,7 @@ on:
       - '!data/directors.json'
       - '!data/events.json'
       - '!data/movies.json'
+      - '!data/now_playing.json'
       - '!data/outdoor-events.json'
       - '!data/rankings.json'
       - '!data/rankings_extra.json'

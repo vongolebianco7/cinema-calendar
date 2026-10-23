@@ -16,7 +16,8 @@ test('movie detail opens the shared review dialog for the selected movie', () =>
 });
 
 test('detail metadata failure keeps a selected movie record action', () => {
-  assert.match(detail, /catch\(\(\)=>\{const title=initialParams\.get\("search"\)\|\|"";detail\.innerHTML/);
+  assert.match(detail, /catch\(async\(\)=>\{const fallback=await window\.CinelvaNowPlaying\?\.detailFallback\(initialId\)/);
+  assert.ok(detail.includes('const title=initialParams.get("search")||"";detail.innerHTML='));
   assert.ok(detail.includes("data-detail-review data-movie-id=\"'+E(initialId||'')+'\" data-movie-title=\"'+E(title||'')+'\">鑑賞・レビューを記録</button>"));
 });
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "region": "JP",
+  "language": "ja-JP",
+  "source": {
+    "id": "tmdb",
+    "endpoint": "/movie/now_playing",
+    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list"
+  },
+  "complete": false,
+  "generated_at": null,
+  "movies": []
+}

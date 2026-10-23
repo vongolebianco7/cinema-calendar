@@ -1,13 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T12:58:10.971081+00:00",
-  "status": "blocked",
+  "updated_at": "2026-10-23T22:17:42.751257+00:00",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
-  "branch": "docs/final-release-checkpoint-20261023",
-  "head_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
-  "pull_request": null,
+  "base_sha": "db3460ca3c80459e633c69eb33d7ac025208d1fb",
+  "branch": "feat/nationwide-now-playing-20261024",
+  "head_sha": "1415f995b396bd19e6b66181c96e96192ea3c6a6",
+  "pull_request": {
+    "number": 483,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/483"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -554,6 +557,14 @@
       "status": "in_progress",
       "acceptance": "13-item incident ledger; merged after required CI, with unavailable source facts explicitly retained as open.",
       "ci": "475 and473 merged;473 final required4/mobile/Python/contract passed. 476 source1a417676 required4/mobile/Python/contract passed with actual rendered detail-card regression; receiptbe63fa43 CI pending."
+    },
+    {
+      "id": "FEATURE-NOW-PLAYING-20261024",
+      "title": "Nationwide JP now-playing list with shared detail/review/bookmarks",
+      "status": "ci_passed",
+      "acceptance": "User approved2026-10-24: discover section,3-column shared cards, full access/search, daily approved TMDB JP snapshot and source/update time, official cinema links. Independent current-list data; fail closed for stale/partial/invalid snapshots. Notifications follow as a later feature.",
+      "pull_request": 483,
+      "ci": "Exact source1415f995 all10 PR workflows succeeded, including full frontend and actual Chromium/WebKit nationwide root/prefix/light/dark geometry/actions/source states/contrast/overflow; collector7/UI7/full local quality pass.8 browser screenshots retained and representative routes visually checked. Focused review Important completeness repair verified red2→green; previous bytes preserved on truncated totals. Brand-source regression corrected for exact approved original sources and existing canvas framing, no logo changes."
     }
   ],
   "verification": [
@@ -756,22 +767,37 @@
     {
       "check": "PR481 final source acceptance and integration",
       "result": "Source d2e534a2 all6/final1c31122f all7 successful workflows; realGit tests17/17 and focused review no blockers. Complete materialized production-checks passed public proof and fullquality, digest64289707b8e45ebf4896eb0ec6f99ea0fbb9d4f61c17cedd9e7a7d80e04d7b6d. Mergedd3452c12. Latest data deployment deferred; READY5cf977ac canonical API verification remains the actual serving evidence. Global28/32; remaining rights2/device/users plus operational deployment/DB quota blockers. No unverified completion or user results invented."
+    },
+    {
+      "check": "Nationwide now-playing baseline and initial feature",
+      "result": "Clean baseline fullquality passed atdb3460ca. Collector6 red missing→green; UI6 (including source-file/offline-detail checks) red missing→green; full shared gate passed. Partial API failures preserve previous file, sourceapproval/JP/pagination enforced,36h freshness/future5m checked. Local browser runtime lacked binary; runtime and pinned1.59 downloads both returned truncated0MB archives. No local browser pass claimed. Dedicated CI browser job added without extending existing15minute journey job. Full feature source/proof and actual API population still pending."
+    },
+    {
+      "check": "Nationwide list review and incomplete-response preservation",
+      "result": "Collector7 and UI6 units and full local quality passed. Focused review found one Important completeness bug; advertised raw totals now reconciled before filtering/dedup. Regression red2→green and prior bytes preserved. Real Chromium root/light shared actions, contrast and screenshot passed; prefix lazy posters require scrolling into view in test. Latest exact-source CI pending at c09f974f."
+    },
+    {
+      "check": "Nationwide final executable source browser and review evidence",
+      "result": "1415f995: collector7/UI7/full local shared quality passed; actual Chromium/WebKit nationwide root/prefix/light/dark cards, source states, search/expansion, review/bookmark persistence, exact-ID detail, contrast/overflow pass. Autonomous, mobile, smoke, reproducible backend, backup, completeness, Python, brand and isolated stage all succeeded; full frontend regression still running. Focused review Important raw-total finding fixed with preservation regression. No app logos, palette, origin or local records changed."
+    },
+    {
+      "check": "PR483 exact-source acceptance",
+      "result": "Exact source1415f995 all10 PR workflows succeeded, including full frontend and actual Chromium/WebKit nationwide root/prefix/light/dark geometry/actions/source states/contrast/overflow; collector7/UI7/full local quality pass.8 browser screenshots retained and representative routes visually checked. Focused review Important completeness repair verified red2→green; previous bytes preserved on truncated totals. Brand-source regression corrected for exact approved original sources and existing canvas framing, no logo changes."
     }
   ],
   "deployment": {
     "status": "production_verified",
-    "frontend": "5cf977ac READY at unchanged cinelva.vercel.app and existing aliases; approved logo/colors/local origin preserved.",
-    "backend": "5cf977ac READY at unchanged backend-one-gray-94.vercel.app;5 canonical read APIs200/static_snapshot, DB unavailable, source timestamps preserved. Health503. Previouscf8633 READY deployment retained.",
+    "frontend": "db3460ca READY at unchanged cinelva.vercel.app; confirmed via current production deployment. New feature not published yet.",
+    "backend": "db3460ca READY at unchanged backend-one-gray-94.vercel.app;1031-film static snapshot, DB unavailable; health503. New list has no DB dependency.",
     "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Daily data13a9e63e with1030 films published toGitHub. PR481 fix mergedd3452c12 after source6/final7 CI. Actual commit statuses for both frontend and backend say Deployment rate limited — retry24hours. Both canonical projects still serve READY5cf977ac; backend1027-film snapshot. No manual redeploy retries, paid changes or quota evasion."
+    "latest_data": "Current canonical db3460ca has1031 films, generated_at2026-10-23T18:50:23.357458+00:00. Earlier Vercel rate-limit evidence is superseded by both READY deployments. New now-playing data still explicitly uninitialized until approved workflow performs actual collection."
   },
   "blockers": [
     "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
-    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified.",
-    "Both Vercel projects on d3452c12 explicitly report deployment rate limited, retry24hours. Latest1030 snapshot and source fix are not yet canonical; READY5cf977ac preserved."
+    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "BLOCKED: no independently READY implementation remains. Once Vercel free capacity is confirmed, release the verified current main once and recheck canonical1030-film source/date plus all5 APIs. Neon free egress reset2026-11-01T00:00:00Z: verify real connectivity before existing guarded sync. Await actual physical Safari,5–10 independent participants and missing artwork origin/permission evidence. Preserve origins,approved UI/local records; no quota evasion or paid upgrade.",
+  "next_action": "Receipt-only commit pointing to successful1415f995; final-head CI and actual materialized production-checks, merge483, guarded initial TMDB refresh and canonical feature/data verification. Notifications are a later increment.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

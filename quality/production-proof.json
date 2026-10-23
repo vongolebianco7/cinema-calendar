@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29",
-  "verified_at": "2026-10-23T12:44:55.461Z",
-  "note": "Exact source passed all six PR workflows: Autonomous, smoke, frontend, reproducible backend, mobile and completeness. All3 real bundled JSON dependencies trigger backend publication;17 realGit boundary tests passed after red3 reproduction and focused review. Compiled latest1030-film calendar and all5 snapshot read APIs passed, health503; full materialized quality passed. No guard, thresholds, UI, origins or saved records changed. Require final-head CI before merge. Existing5cf977ac canonical projects READY; Vercel frontend latest-data publication rate limited24hours. Neon writes/rights/device/participants remain blocked."
+  "head_sha": "1415f995b396bd19e6b66181c96e96192ea3c6a6",
+  "verified_at": "2026-10-23T22:17:53.894Z",
+  "note": "PR483 exact source passed all10 PR workflows, collector7/UI7/fullquality and actual Chromium/WebKit root/prefix/light/dark nationwide list checks. Focused Important truncation finding fixed with red→green preservation regression. Shared review/bookmark persistence, offline exact-ID detail, physical3-column geometry, source states, contrast and390px overflow pass. No logos/palette/local records/origins changed. Final-head CI and real initial TMDB collection/canonical publication required."
 }

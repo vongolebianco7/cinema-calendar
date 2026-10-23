@@ -19,6 +19,7 @@ on:
       - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-theater-quality-browser.cjs"
+      - "tests/cinelva-now-playing-browser.cjs"
       - "tests/cinelva-source-status-browser.cjs"
       - "tests/cinelva-calendar-ranking-rating-browser.cjs"
       - "tests/cinelva-boxoffice-poster-browser.cjs"
@@ -60,6 +61,7 @@ on:
       - '!data/directors.json'
       - '!data/events.json'
       - '!data/movies.json'
+      - '!data/now_playing.json'
       - '!data/outdoor-events.json'
       - '!data/rankings.json'
       - '!data/rankings_extra.json'
@@ -197,3 +199,28 @@ jobs:
         run: |
           node --check js/cinelva-theater-schedule.js
           node --test tests/cinelva-theater-schedule.test.cjs
+  now-playing:
+    name: Nationwide now-playing shared controls (Chromium + WebKit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cinelva-now-playing" --no-audit --no-fund playwright@1.59.0
+          bash scripts/prepare-browser-ci.sh
+          "$RUNNER_TEMP/cinelva-now-playing/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Verify current, stale and unavailable list with real shared actions
+        run: |
+          NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
+      - name: Preserve rendered list evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nationwide-now-playing
+          path: artifacts/now-playing/
+          if-no-files-found: warn

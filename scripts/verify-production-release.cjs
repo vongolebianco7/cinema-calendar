@@ -7,7 +7,7 @@ const REPOSITORY='vongolebianco7/cinema-calendar';
 const RECEIPT='quality/production-proof.json';
 const REQUIRED_WORKFLOWS=['.github/workflows/autonomous-quality-gate.yml','.github/workflows/cinelva-smoke.yml','.github/workflows/validate-frontend.yml','.github/workflows/backend-build.yml'];
 const SHA=/^[a-f0-9]{40}$/;
-const GENERATED_DATA=new Set(['availability','awards','director_name_readings','directors-mobile','directors','events','movies','outdoor-events','rankings','rankings_extra','rankings_year','release_history','revival_screenings','source-status','special_screenings','streaming','theater_schedules','theaters_master','theaters_osm','theatrical','tv'].map(name=>`data/${name}.json`));
+const GENERATED_DATA=new Set(['availability','awards','director_name_readings','directors-mobile','directors','events','movies','now_playing','outdoor-events','rankings','rankings_extra','rankings_year','release_history','revival_screenings','source-status','special_screenings','streaming','theater_schedules','theaters_master','theaters_osm','theatrical','tv'].map(name=>`data/${name}.json`));
 function unchangedConfiguration(name,original,current,context={}){
  if(!['vercel.json','backend/vercel.json'].includes(name))return false;
  try{

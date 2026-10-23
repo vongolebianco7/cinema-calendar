@@ -92,7 +92,7 @@ html[data-theme="light"] .decisionBox :is(input,select,textarea) {
 html[data-theme="light"] .decisionBox input::placeholder,
 html[data-theme="light"] .gSearch::placeholder {color:#686a64!important;opacity:1}
 html[data-theme="light"] .gBrand img:is(.gBrandImage,.gLogo) {
-  background:#171717!important;border-radius:7px;padding:2px;
+  background:transparent!important;border-radius:0!important;padding:0!important;
 }
 html[data-theme="light"] .gBrand>span { color:var(--text)!important; }
 /* The detailed information table used dark-only text colors. */
@@ -125,7 +125,7 @@ html[data-theme="light"] .gDrawerHead .gBrandWord {color:#242521!important}
 .cinelvaSourcesLink{display:block;margin:14px 0;padding:8px 0;font-size:13px;line-height:1.5;color:inherit;overflow-wrap:anywhere}
 
 /* Secondary headers use the same approved logo asset as the shared header. */
-html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] { background:#171717!important;border-radius:7px;padding:2px; }
+html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] { background:transparent!important;border-radius:0!important;padding:0!important; }
 html[data-theme="light"] .brand :is(a,span),
 html[data-theme="light"] img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"] + span { color:var(--text)!important; }
 html[data-theme="light"] .specialLink,
@@ -221,10 +221,46 @@ html[data-theme="light"] :is(.outdoorFilmItem,.outdoorFilmPlaceholder) {
 }
 
 
-/* Cinelva brand icon: conceal the legacy black padding outside the fine frame.
-   Keep the original C artwork and its fine rounded outline untouched. */
-.gBrandImage[src*="411DC24B-E557-4A36-95D2-5FA3550E7BD7"] {
-  clip-path: inset(14% round 19%)!important;
-  transform: scale(1.34);
-  transform-origin: center;
+/* Use the uploaded icon as-is. No clipping, frame, padding or effects. */
+.gTop .gBrandImage,
+.gDrawerHead .gBrandImage {
+  background:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  filter:none!important;
+  transform:none!important;
 }
+
+/* Restore the original approved Cinelva wordmark color; icon cleanup must not change text. */
+html[data-theme="light"] .gTop .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
+body[data-theme="light"] .gTop .gBrand .gBrandWord,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  color:#b18e60!important;
+  background-image:linear-gradient(105deg,#aa814c 0%,#cbb08b 52%,#b18e60 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}
+
+/* Restore approved light-mode Cinelva wordmark color, independent of image styling. */
+html[data-theme="light"] .gTop .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
+body[data-theme="light"] .gTop .gBrand .gBrandWord,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  /* Sampled from the approved B mockup: subdued metallic gold, not #F2DFBB. */
+  color:#b18e60!important;
+  background-image:linear-gradient(105deg,#aa814c 0%,#cbb08b 52%,#b18e60 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}
+

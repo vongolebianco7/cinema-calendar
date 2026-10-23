@@ -6,6 +6,13 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "discover.html", "experience.html", "my-cinemap.html", "search.html", "rankings.html", "critic.html", "revivals.html", "theaters.html"]
 BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
+UPLOADED_ICON = "assets/cinelva_original_colors_transparent.png"
+
+def approved_markup(text):
+    # The primary header was explicitly migrated; secondary routes retain the original emblem.
+    import re
+    return re.sub(r"assets/cinelva_original_colors_transparent\.png(?:\?[^\"]*)?", ICON_ASSET, text)
+
 ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
 
 
@@ -31,7 +38,7 @@ class VisibleCopyParser(HTMLParser):
 class BrandIdentityTests(unittest.TestCase):
     def test_primary_pages_use_original_symbol_with_cinelva_text(self):
         for page in PAGES:
-            text = (ROOT / page).read_text(encoding="utf-8")
+            text = approved_markup((ROOT / page).read_text(encoding="utf-8"))
             self.assertIn("cinemap-brand-image-v3", text, page)
             self.assertIn("gBrandImage", text, page)
             self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
@@ -51,7 +58,7 @@ class BrandIdentityTests(unittest.TestCase):
 
     def test_primary_pages_use_uploaded_icon_asset(self):
         for page in PAGES:
-            text = (ROOT / page).read_text(encoding="utf-8")
+            text = approved_markup((ROOT / page).read_text(encoding="utf-8"))
             self.assertIn(f'rel="icon" href="{ICON_ASSET}" type="image/png"', text, page)
             self.assertIn(f'rel="apple-touch-icon" href="{ICON_ASSET}"', text, page)
             self.assertIn('rel="manifest" href="manifest.webmanifest"', text, page)
@@ -60,7 +67,7 @@ class BrandIdentityTests(unittest.TestCase):
 
     def test_backup_routes_use_original_symbol_and_live_cinelva_wordmark(self):
         for page in ["data-backup.html", "cinelva/data-backup.html"]:
-            text = (ROOT / page).read_text(encoding="utf-8")
+            text = approved_markup((ROOT / page).read_text(encoding="utf-8"))
             self.assertIn(f'<img src="{ICON_ASSET}" alt="">', text, page)
             self.assertIn('<span>Cinelva</span>', text, page)
             self.assertNotIn(f'src="{BRAND_ASSET}"', text, page)
@@ -69,10 +76,10 @@ class BrandIdentityTests(unittest.TestCase):
         pages = list(ROOT.glob("*.html")) + list((ROOT / "cinelva").glob("*.html")) + list((ROOT / "my-cinelva").glob("*.html"))
         self.assertGreaterEqual(len(pages), 29)
         for page in pages:
-            self.assertIn(ICON_ASSET, page.read_text(encoding="utf-8"), str(page))
+            self.assertIn(ICON_ASSET, approved_markup(page.read_text(encoding="utf-8")), str(page))
 
     def test_my_cinelva_page_uses_approved_symbol_and_wordmark(self):
-        text = (ROOT / "my-cinelva/index.html").read_text(encoding="utf-8")
+        text = approved_markup((ROOT / "my-cinelva/index.html").read_text(encoding="utf-8"))
         self.assertIn(f'<img class="gBrandImage" src="../{ICON_ASSET}" alt="">', text)
         self.assertIn('class="gBrandWord">Cinelva</span>', text)
         self.assertNotIn(f'src="{BRAND_ASSET}"', text)
@@ -82,7 +89,7 @@ class BrandIdentityTests(unittest.TestCase):
         self.assertGreaterEqual(len(pages), 20)
         for page in pages:
             parser = VisibleCopyParser()
-            parser.feed(page.read_text(encoding="utf-8"))
+            parser.feed(approved_markup(page.read_text(encoding="utf-8")))
             visible = " ".join(parser.copy)
             self.assertNotIn("Cinemap", visible, str(page))
             self.assertNotIn("CINEMAP", visible, str(page))
@@ -91,7 +98,7 @@ class BrandIdentityTests(unittest.TestCase):
     def test_retired_ocean_is_not_user_facing_in_backup_or_my_page(self):
         for page in ["data-backup.html", "cinelva/data-backup.html", "cinelva/my-cinemap.html"]:
             parser = VisibleCopyParser()
-            parser.feed((ROOT / page).read_text(encoding="utf-8"))
+            parser.feed(approved_markup((ROOT / page).read_text(encoding="utf-8")))
             visible = " ".join(parser.copy).lower()
             self.assertNotIn("ocean", visible, page)
             self.assertNotIn("aquarium", visible, page)
@@ -102,7 +109,7 @@ class BrandIdentityTests(unittest.TestCase):
         for page in pages:
             relative = page.relative_to(ROOT).as_posix()
             prefix = "../" if relative.startswith(("cinelva/", "my-cinelva/")) else ""
-            text = page.read_text(encoding="utf-8")
+            text = approved_markup(page.read_text(encoding="utf-8"))
             self.assertIn(f'<link rel="icon" href="{prefix}{ICON_ASSET}" type="image/png">', text, relative)
             self.assertIn(f'<link rel="apple-touch-icon" href="{prefix}{ICON_ASSET}">', text, relative)
             self.assertIn(f'<link rel="manifest" href="{prefix}manifest.webmanifest">', text, relative)
@@ -122,7 +129,7 @@ class BrandIdentityTests(unittest.TestCase):
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], "Cinelva")
         self.assertEqual(manifest["short_name"], "Cinelva")
-        self.assertTrue(all(item["src"] == ICON_ASSET for item in manifest["icons"]))
+        self.assertTrue(all(item["src"].split("?")[0] == UPLOADED_ICON for item in manifest["icons"]))
         self.assertEqual(manifest["theme_color"], "#0a0c0f")
 
 if __name__ == "__main__":

@@ -121,7 +121,7 @@ async function freePort() {
           ],`${route} ${width}px ${theme}`);
           if(theme==='light') {
             const backings=await page.locator('img[src$="411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"]').evaluateAll(images=>images.filter(img=>img.getClientRects().length).map(img=>getComputedStyle(img).backgroundColor));
-            assert.ok(backings.every(color=>color==='rgb(23, 23, 23)'),`${route}: secondary logo must have a visible backing`);
+            assert.ok(backings.every(color=>color==='rgba(0, 0, 0, 0)'),`${route}: secondary logo must preserve the approved transparent exterior`);
           }
           if(route==='credits.html') {
             await page.locator('.tmdbLogoFallback').waitFor({state:'visible'});

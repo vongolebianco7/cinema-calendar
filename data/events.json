@@ -173,18 +173,6 @@
       "trailer_url": "https://www.youtube.com/watch?v=HCD3vFAFvgc"
     },
     {
-      "title": "東京コミコン2026",
-      "date": "2026-12-11",
-      "end_date": "2026-12-13",
-      "event": "festival",
-      "service": "国内イベント",
-      "scope": "domestic",
-      "venue": "幕張メッセ",
-      "source": "東京コミコン 公式",
-      "source_url": "https://tokyocomiccon.jp/topics",
-      "overview": "映画・コミックなどの最新情報、展示、ステージを行うポップカルチャーイベント。"
-    },
-    {
       "title": "第27回東京フィルメックス",
       "date": "2026-11-20",
       "end_date": "2026-11-29",
@@ -207,6 +195,18 @@
       "source": "主催・会場公式発表",
       "source_url": "https://fcaf.jp/program/detail.php?id=1561",
       "checked_at": "2026-10-22"
+    },
+    {
+      "title": "東京コミコン2026",
+      "date": "2026-12-11",
+      "end_date": "2026-12-13",
+      "event": "festival",
+      "service": "国内イベント",
+      "scope": "domestic",
+      "venue": "幕張メッセ",
+      "source": "東京コミコン 公式",
+      "source_url": "https://tokyocomiccon.jp/topics",
+      "overview": "映画・コミックなどの最新情報、展示、ステージを行うポップカルチャーイベント。"
     },
     {
       "title": "サンダンス映画祭2027",
@@ -233,5 +233,7 @@
       "checked_at": "2026-10-22"
     }
   ],
-  "discovery_count": 0
+  "discovery_count": 0,
+  "last_attempt_at": "2026-10-23",
+  "verified_count": 0
 }

@@ -23,7 +23,7 @@ jobs:
           def fetch(number):
               query=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
               try:
-                  request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+query,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0'})
+                  request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+query,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0','Cache-Control':'no-cache'})
                   with urllib.request.urlopen(request,timeout=15) as response:
                       data=json.load(response)
               except Exception as error:

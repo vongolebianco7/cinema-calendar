@@ -238,3 +238,17 @@ html[data-theme="dark"] .gDrawerHead .gBrand img.gBrandImage {
   filter:none!important;
   transform:none!important;
 }
+
+/* Restore the original approved Cinelva wordmark color; icon cleanup must not change text. */
+html[data-theme="light"] .gTop .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
+body[data-theme="light"] .gTop .gBrand .gBrandWord,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  color:#b18e60!important;
+  background-image:linear-gradient(105deg,#aa814c 0%,#cbb08b 52%,#b18e60 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}

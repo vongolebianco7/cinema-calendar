@@ -292,3 +292,16 @@ body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
   background:#161616!important;
   border-radius:20%!important;
 }
+
+/* New approved icon already contains its own frame. Never draw a second CSS frame. */
+.gTop .gBrand img.gBrandImage[src$="5AAEB2F3-B50B-49FC-9251-13FF1E773868.png"],
+.gDrawerHead .gBrand img.gBrandImage[src$="5AAEB2F3-B50B-49FC-9251-13FF1E773868.png"] {
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  transform:none!important;
+}

@@ -22,6 +22,8 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    await cards.first().scrollIntoViewIfNeeded();
    await page.waitForFunction(()=>document.querySelector('#nowPlaying img')?.naturalWidth>0);
    assert.equal(await section.locator('[data-now-grid]').evaluate(g=>getComputedStyle(g).gridTemplateColumns.split(' ').length),3);
+   const boxes=await cards.evaluateAll(nodes=>nodes.slice(0,4).map(n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width};}));
+   assert.equal(boxes[0].y,boxes[2].y,'first three cards share a row');assert.ok(boxes[3].y>boxes[0].y,'fourth card wraps to the next row');assert.ok(boxes[1].x>boxes[0].x&&boxes[2].x>boxes[1].x);
    await section.locator('[data-now-more]').click();assert.equal(await cards.count(),17);assert.match(await section.innerText(),/画像未提供/);
    await section.locator('[data-now-search]').fill('スターウォーズ');assert.equal(await cards.count(),1);assert.equal(await section.locator('[data-now-more]').isVisible(),false);
    const wrap=section.locator('.cinelva-discover-review-wrap').first();await wrap.locator('.cinelva-bookmark-button').click();assert.equal(await wrap.locator('.cinelva-bookmark-button').getAttribute('aria-pressed'),'true');

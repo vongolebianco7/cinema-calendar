@@ -4,6 +4,15 @@ const file=require('node:path').join(__dirname,'../js/cinelva-now-playing.js');
 const now=Date.parse('2026-10-24T00:00:00Z');
 const snapshot=(extra={})=>({schema_version:1,region:'JP',source:{id:'tmdb',endpoint:'/movie/now_playing'},complete:true,generated_at:'2026-10-24T00:00:00Z',movies:[{id:1,title:'上映中'}],...extra});
 function api(){assert.ok(fs.existsSync(file),'now-playing module must exist');return require(file);}
+test('both discovery routes load shared identity and record controls before the nationwide list',()=>{
+ for(const route of ['discover.html','cinelva/discover.html']){
+  const html=fs.readFileSync(require('node:path').join(__dirname,'..',route),'utf8');
+  const scripts=[...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(x=>x[1].split('?')[0]);
+  for(const name of ['cinelva-movie-identity','cinelva-library-records','cinelva-quick-rate']){
+   const index=scripts.indexOf('js/'+name+'.js');assert.ok(index>=0&&index<scripts.indexOf('js/cinelva-now-playing.js'),route+' requires '+name);
+  }
+ }
+});
 test('only complete JP observations are current, with fresh empty results distinct',()=>{
  const {snapshotState}=api();assert.equal(snapshotState(snapshot(),now),'fresh');assert.equal(snapshotState(snapshot({movies:[]}),now),'empty');
  for(const extra of [{region:'US'},{complete:false},{source:{id:'other'}},{generated_at:null},{movies:[{id:'bad',title:'作品'}]}])assert.equal(snapshotState(snapshot(extra),now),'unavailable');

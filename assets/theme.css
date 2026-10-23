@@ -252,11 +252,11 @@ html[data-theme="light"] .gTop .gBrand .gBrandImage,
 html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
 body[data-theme="light"] .gTop .gBrand .gBrandImage,
 body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
-  /* Transparency is now in the pixel mask; do not repaint a black rectangle. */
-  background:transparent!important;
+  /* Preserve the solid dark interior of the original C emblem. */
+  background:#161616!important;
   padding:0!important;
   border:0!important;
-  border-radius:0!important;
+  border-radius:20%!important;
   clip-path:none!important;
   transform:none!important;
 }

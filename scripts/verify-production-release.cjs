@@ -8,11 +8,17 @@ const RECEIPT='quality/production-proof.json';
 const REQUIRED_WORKFLOWS=['.github/workflows/autonomous-quality-gate.yml','.github/workflows/cinelva-smoke.yml','.github/workflows/validate-frontend.yml','.github/workflows/backend-build.yml'];
 const SHA=/^[a-f0-9]{40}$/;
 const GENERATED_DATA=new Set(['availability','awards','director_name_readings','directors-mobile','directors','events','movies','outdoor-events','rankings','rankings_extra','rankings_year','release_history','revival_screenings','source-status','special_screenings','streaming','theater_schedules','theaters_master','theaters_osm','theatrical','tv'].map(name=>`data/${name}.json`));
-function unchangedConfiguration(name,original,current){
+function unchangedConfiguration(name,original,current,context={}){
  if(!['vercel.json','backend/vercel.json'].includes(name))return false;
  try{
   const a=JSON.parse(original),b=JSON.parse(current);
-  return !!a&&!!b&&typeof a==='object'&&typeof b==='object'&&!Array.isArray(a)&&!Array.isArray(b)&&isDeepStrictEqual(a,b);
+  if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)||Array.isArray(b))return false;
+  if(isDeepStrictEqual(a,b))return true;
+  // Vercel's backend project can materialize its effective config at repo root.
+  // Accept only the exact CI-verified backend config, and only in that build.
+  if(name!=='vercel.json'||context.vercel!==true||context.appDirectory!=='backend'||!context.backendConfiguration)return false;
+  const expected=JSON.parse(context.backendConfiguration);
+  return !!expected&&typeof expected==='object'&&!Array.isArray(expected)&&isDeepStrictEqual(expected,b);
  }catch{return false;}
 }
 function relevant(name){return name!==RECEIPT&&!name.startsWith('docs/')&&!name.endsWith('.md')&&!GENERATED_DATA.has(name)&&!/^data\/rankings\/[^/]+\.json$/.test(name);}
@@ -61,10 +67,12 @@ async function main(argv=process.argv.slice(2),env=process.env){
    const file=path.join(root,name);
    if(!fs.lstatSync(file).isFile())return true;
    const original=git(['show',`HEAD:${name}`]),current=fs.readFileSync(file,'utf8');
-   if(unchangedConfiguration(name,original,current))return false;
+   const context={vercel:env.VERCEL==='1',appDirectory:path.relative(root,process.cwd()).split(path.sep).join('/')};
+   if(name==='vercel.json'&&context.vercel&&context.appDirectory==='backend')context.backendConfiguration=git(['show','HEAD:backend/vercel.json']);
+   if(unchangedConfiguration(name,original,current,context))return false;
    const a=JSON.parse(original),b=JSON.parse(current);
    const keys=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])].filter(key=>!isDeepStrictEqual(a?.[key],b?.[key]));
-   console.error('Production configuration changed keys:',JSON.stringify({path:name,keys}));
+   console.error('Production configuration changed keys:',JSON.stringify({path:name,keys,current_keys:Object.keys(b||{})}));
   }catch{/* Missing, unreadable or invalid configuration remains protected. */}
   return true;
  });

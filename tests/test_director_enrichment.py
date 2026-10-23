@@ -13,6 +13,16 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)
 
+    def test_calendar_discovery_defers_untranslated_profiles_without_replacing_existing(self):
+        directors = {'190': {'id': 190, 'nameJa': '既存監督', 'works': [{'id': 1}]}}
+        previous = dict(directors)
+        self.assertFalse(self.module.admit_calendar_director(directors, {'id': 191, 'name': 'Unknown', 'nameJa': '', 'name_status': 'japanese_unavailable'}))
+        self.assertFalse(self.module.admit_calendar_director(directors, {'id': 190, 'nameJa': '別名', 'name_status': 'japanese'}))
+        self.assertEqual(directors, previous)
+        candidate = {'id': 192, 'nameJa': '確認済み', 'name_status': 'japanese'}
+        self.assertTrue(self.module.admit_calendar_director(directors, candidate))
+        self.assertEqual(directors['192'], candidate)
+
     def test_discovers_absent_named_director_and_keeps_only_directing_credits(self):
         calls = []
         def request(endpoint, params=None):

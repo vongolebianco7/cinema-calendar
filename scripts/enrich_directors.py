@@ -95,6 +95,15 @@ def enrich_director(old, profile, today, aliases=None):
                      'runtime_unverified': sum(not work.get('runtime') for work in works.values())}}
 
 
+def admit_calendar_director(directors, candidate):
+    """Add only a localized new profile; retain movie IDs for later editorial review."""
+    key = str(candidate['id'])
+    if key in directors or not candidate.get('nameJa') or candidate.get('name_status') == 'japanese_unavailable':
+        return False
+    directors[key] = candidate
+    return True
+
+
 def existing_name_aliases():
     source = (ROOT / 'js/cinelva-records-page.js').read_text()
     pairs = json.loads(re.search(r'directorJapaneseNames = new Map\((\[.*?\])\);', source, re.S)[1])

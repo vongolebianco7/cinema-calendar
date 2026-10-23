@@ -1,3 +1,4 @@
+import { readWithSnapshot, releaseSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json } from "../../../lib/http";
 
@@ -16,6 +17,7 @@ export async function GET(request: Request) {
   const to = startOfDay(searchParams.get("to"), new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 2, 1)));
   const service = searchParams.get("service")?.trim();
 
+  return json(await readWithSnapshot(async()=>{
   const releases = await prisma.release.findMany({
     where: {
       date: { gte: from, lt: to },
@@ -25,7 +27,8 @@ export async function GET(request: Request) {
     orderBy: [{ date: "asc" }, { service: "asc" }],
   });
 
-  return json({ releases, count: releases.length, from: from.toISOString(), to: to.toISOString() });
+  return { releases, count: releases.length, from: from.toISOString(), to: to.toISOString() };
+  }, ()=>releaseSnapshot(from.toISOString().slice(0,10),to.toISOString().slice(0,10),service||"")));
 }
 
 export async function OPTIONS() {

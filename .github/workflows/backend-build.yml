@@ -56,6 +56,8 @@ jobs:
       - name: Generate Prisma client and compile without production credentials
         working-directory: backend
         run: npm run build
+      - name: Verify built read APIs with the database unavailable
+        run: node tests/cinelva-backend-snapshot-smoke.cjs
       - name: Reject compilation changes to tracked source
         run: git diff --exit-code -- backend
       - name: Preserve dependency evidence

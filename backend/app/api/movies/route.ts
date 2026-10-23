@@ -1,3 +1,4 @@
+import { readWithSnapshot, movieSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json, rateLimited, options } from "../../../lib/http";
 
@@ -19,6 +20,7 @@ export async function GET(request: Request) {
   const q = searchParams.get("q")?.trim();
   const limit = Math.min(Math.max(Number(searchParams.get("limit") || 50), 1), 100);
 
+  const catalog = await readWithSnapshot(async()=>{
   let rows = await prisma.movie.findMany({
     where: q ? { OR: [
       { title: { contains: q, mode: "insensitive" } },
@@ -79,6 +81,9 @@ export async function GET(request: Request) {
     };
   });
 
+  return {movies};
+  }, ()=>movieSnapshot(q,limit));
+  const movies = catalog.movies as any[];
   let external: any[] = [];
   if (q && q.length >= 2) {
     try {
@@ -117,7 +122,7 @@ export async function GET(request: Request) {
     } catch (e) { console.warn("TMDB search unavailable", e); }
   }
 
-  return json({ movies, external, count: movies.length + external.length });
+  return json({ ...catalog, movies, external, count: movies.length + external.length });
 }
 
 export async function OPTIONS(request:Request){return options(request)}

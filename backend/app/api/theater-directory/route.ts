@@ -1,3 +1,4 @@
+import { readWithSnapshot, theaterSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json } from "../../../lib/http";
 
@@ -8,6 +9,7 @@ export async function GET(request: Request) {
   const q = (url.searchParams.get("q") || "").trim();
   const prefecture = (url.searchParams.get("prefecture") || "").trim();
 
+  return json(await readWithSnapshot(async()=>{
   const rows = await prisma.theater.findMany({
     where: {
       ...(q
@@ -38,13 +40,14 @@ export async function GET(request: Request) {
     source_url: row.sourceUrl,
   }));
 
-  return json({
+  return {
     generated_at: new Date().toISOString(),
     source: "Wikidata",
     license: "CC0 1.0",
     count: theaters.length,
     theaters,
-  });
+  };
+  }, ()=>theaterSnapshot(q,prefecture)));
 }
 
 export async function OPTIONS() {

@@ -35,7 +35,7 @@
 **Interfaces:** `snapshotState(snapshot, now)` returns `fresh|empty|stale|unavailable`; `selectMovies(movies, query, sort)` returns unique filtered results. DOM module uses existing `CinelvaQuickRate` and `CinelvaMovieIdentity`.
 - [x] Write and run failing unit cases for valid/empty/stale/future/wrong-source payloads, punctuation search and exact IDs, sorting and expansion.
 - [x] Implement section and module with12initial/all expansion, source/time copy and official cinema-directory link. Include shared reviews/bookmarks without a second implementation.
-- [ ] Run focused tests, shared quality, both-engine root/prefix/light/dark browser checks with screenshot evidence. Verify search, all-results access, review save/bookmark persistence/detail URL, source errors and390px overflow0.
+- [x] Run focused tests, shared quality, both-engine root/prefix/light/dark browser checks with screenshot evidence. Verify search, all-results access, review save/bookmark persistence/detail URL, source errors and390px overflow0.
 - [ ] Perform one focused whole-branch review, source CI, receipt-only proof and final CI; merge approved scope. Observe real initial collection and canonical publication; record any genuine external blocker.
 
 ## Execution record
@@ -44,3 +44,11 @@
 - Ruling: extend existing search detail fallback to the exact ID in the verified now-playing snapshot, since newly discovered films need not exist in the old catalog and DB/API failures must not break the approved detail link. Stale metadata can identify a film without making a current-showing claim; unavailable/invalid-source data cannot.
 - Browser tests run in a parallel frontend CI job to preserve the existing15-minute full-audit budget. Local browser downloads returned truncated archives twice, including the exact pinned CI version; no local browser success claimed.
 - Notifications are separate from this approved nationwide-list increment. Existing32-gate ledger remains a historical baseline; this added feature has its own work item and acceptance evidence.
+
+- Focused whole-branch review: one Important finding, raw API row totals could be truncated while nonempty. Regression reproduced both1/2-page cases; raw rows now reconcile before filtering/dedup and preserve prior bytes on mismatch. Collector7 passed.
+- Actual CI exposed a missing shared-script dependency on prefixed discovery; added original identity/library/rating modules and true scoped3-column CSS. Dependency contract red→green; UI7 passed. Root/prefix × light/dark × Chromium/WebKit, physical card rows, shared persistence, source states, detail, contrast and overflow all passed at664006f4;8 rendered screenshots retained and representative WebKit/Chromium routes visually checked.
+- Existing backup workflow exposed its old logo filename assertion on unchanged index.html. The browser test now requires the exact approved primary asset on index and the original secondary asset on record/search, ignores only the cache query, and retains decode/dimensions/layout checks. No product branding changed.
+
+- At1415f995 the new browser job passed both engines with deterministic unrelated-shelf fixtures and zero page-error assertions intact. Shared quality passed. Backup/brand (including existing canvas framing), completeness, Autonomous, mobile, backend, smoke, Python and stage passed; full frontend regression pending before receipt.
+
+- Exact executable source1415f995: all10 PR workflows succeeded, including full frontend regression and the new both-engine list job. Final receipt/head CI and materialized production-checks precede integration; actual initial collection and canonical publication remain post-merge acceptance.

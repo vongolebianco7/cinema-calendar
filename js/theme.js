@@ -49,3 +49,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
   else mount();
 })();
+
+(()=>{const s=document.createElement('script');s.src=new URL('cinelva-logo-frame.js?v=2',document.currentScript.src).href;document.head.appendChild(s)})();

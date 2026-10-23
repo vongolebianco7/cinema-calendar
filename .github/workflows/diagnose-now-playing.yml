@@ -21,7 +21,7 @@ jobs:
           key=os.environ.get('TMDB_API_KEY')
           if not key:raise SystemExit('Existing TMDB credential unavailable')
           def fetch(number):
-              query=urllib.parse.urlencode({'page':number,'language':'ja-JP','region':'JP','api_key':key})
+              query=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
               try:
                   request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+query,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0','Cache-Control':'no-cache'})
                   with urllib.request.urlopen(request,timeout=15) as response:
@@ -39,4 +39,21 @@ jobs:
               print('Complete collected title count:',len(result['movies']))
           except Exception as error:
               print('Validation reason:',str(error) if type(error) is ValueError and str(error) in safe_errors else type(error).__name__)
+          initial=fetch(1)
+          dates=initial.get('dates') or {}
+          minimum=dates.get('minimum');maximum=dates.get('maximum')
+          datetime.date.fromisoformat(minimum);datetime.date.fromisoformat(maximum)
+          print('Official now-playing window:',minimum,maximum)
+          def discover(number):
+              params={'api_key':key,'language':'ja-JP','region':'JP','page':number,'include_adult':'false','include_video':'false','sort_by':'popularity.desc','with_release_type':'2|3','release_date.gte':minimum,'release_date.lte':maximum}
+              request=urllib.request.Request('https://api.themoviedb.org/3/discover/movie?'+urllib.parse.urlencode(params),headers={'Accept':'application/json','User-Agent':'Cinelva/1.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(request,timeout=15) as response:data=json.load(response)
+              safe=lambda value:value if type(value) is int else 'invalid_type'
+              print(json.dumps({'equivalent_page':number,'total_pages':safe(data.get('total_pages')),'total_results':safe(data.get('total_results')),'returned_rows':len(data['results']) if isinstance(data.get('results'),list) else 'invalid_type'}))
+              return data
+          try:
+              result=module.collect_now_playing(discover,datetime.datetime.now(datetime.timezone.utc))
+              print('Complete equivalent title count:',len(result['movies']))
+          except Exception as error:
+              print('Equivalent validation reason:',str(error) if type(error) is ValueError and str(error) in safe_errors else type(error).__name__)
           PY

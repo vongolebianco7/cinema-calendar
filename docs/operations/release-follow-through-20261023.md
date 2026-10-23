@@ -42,3 +42,9 @@ Physical Safari results,5–10 independent participant results and missing asset
 ## CI isolation correction
 
 Final-head completeness measurement exposed real backend requests escaping the scored-mobile fixture. The existing helper intercepted movie search only; calendar,TV and theater-directory reached the quota-suspended production DB and produced WebKit CORS page errors. One bounded unchanged-head rerun reproduced the failure. The fixture now serves all five reviewed snapshot APIs with CORS, returns503 for unconfigured APIs and leaves pageerror/overflow/scoring assertions unchanged. Real canonical API verification remains a separate required post-merge action. A red→green regression covers the request boundary and snapshot payloads; fresh source/final CI proof is required.
+
+## Preview runtime and redirect readiness evidence
+
+Vercel preview736ff47a returned200/static_snapshot/database unavailable for all five read APIs (calendar1027,TV16, search1, Tokyo directory14,Lemino releases2); health remained503. Source timestamps and1591961 backdrop marker survived actual platform bundling. The backdrop image HEAD returned200,image/jpeg,65569bytes. This is preview evidence; production verification still pending.
+
+The repaired scored-mobile suite passed on source1eb1. Its frontend audit then reproduced a separate WebKit first-page readiness race at root agent.html/375px/light: blank screenshot, no page errors/local failures, timeout waiting main text. The existing exact redirect URL/mode wait covered only the prefixed legacy route; extend it to the root route too before theme/main assertions, retaining all assertions and timeouts.

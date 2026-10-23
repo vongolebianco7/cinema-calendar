@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T09:57:19.107553+00:00",
+  "updated_at": "2026-10-23T10:08:19.100755+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
   "branch": "audit/remaining-release-gates-20261023",
-  "head_sha": "736ff47ae165e98449f22587698cc94f9efd3c02",
+  "head_sha": "1eb1e9cf93d1ea1b0b07df9a8f01c638da82aa97",
   "pull_request": 479,
   "work_items": [
     {
@@ -724,6 +724,10 @@
     {
       "check": "Final completeness failure diagnosis",
       "result": "Receipt736ff47a mobile score leaked calendar/tv/theater-directory requests to real quota-suspended DB; WebKit CORS created DISC-02/CROSS-MOBILE regression. One unchanged-head mobile rerun reproduced. Existing helper mocked movies only. New red→green fixture regression covers all5 reviewed read snapshots with CORS and unknown API503; no assertions/thresholds weakened. Fresh source proof is required."
+    },
+    {
+      "check": "Vercel preview and source2 CI",
+      "result": "Source1eb1 scored completeness now passes after fixture correction. Vercel preview736ff47a actual calendar/tv/movies/theater-directory/releases all200 static_snapshot, DB unavailable, health503, source timestamp preserved; backdrop HEAD200 image/jpeg65569bytes. Source1eb frontend failed on WebKit first cell root agent.html/375/light waiting main text:0 page errors/local failures, blank artifact. Existing exact URL/mode wait applied to both root and prefixed legacy-agent redirects; assertions/timeouts unchanged, focused review no blockers."
     }
   ],
   "deployment": {
@@ -737,7 +741,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Publish scored-mobile fixture repair; wait fresh exact-source CI, renew receipt-only proof and final-head CI, merge479 and verify canonical production.",
+  "next_action": "Publish root legacy-agent redirect readiness correction; require fresh source CI, receipt-only proof, final CI, merge479, verify production.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

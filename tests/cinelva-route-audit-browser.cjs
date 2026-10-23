@@ -86,9 +86,10 @@ async function freePort() {
           assert.ok(response && response.ok(), `${route} responds successfully at ${width}px in ${theme} mode`);
           // A legacy route may replace its URL during document load. Wait for the
           // concierge destination rather than sampling the outgoing document.
-          if (route === 'cinelva/agent.html') {
+          if (route === 'agent.html' || route === 'cinelva/agent.html') {
+            const destination = route.startsWith('cinelva/') ? '/cinelva/discover.html' : '/discover.html';
             await page.waitForURL(url =>
-              url.pathname.endsWith('/cinelva/discover.html') &&
+              url.pathname === destination &&
               url.searchParams.get('mode') === 'concierge',
               { timeout: 15000, waitUntil: 'commit' }
             );

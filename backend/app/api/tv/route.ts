@@ -1,17 +1,20 @@
+import { readWithSnapshot, tvSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  return json(await readWithSnapshot(async()=>{
   const rows = await prisma.tvBroadcast.findMany({
     orderBy: [{ date: "asc" }, { time: "asc" }, { service: "asc" }],
   });
 
-  return json({
+  return {
     generated_at: new Date().toISOString(),
     movies: rows.map((row) => row.payload),
-  });
+  };
+  }, tvSnapshot));
 }
 
 export async function OPTIONS() {

@@ -12,7 +12,7 @@
       "id": "streaming-posters",
       "title": "配信作品ポスターの補完",
       "status": "in_progress",
-      "remaining": "TMDB1591961 has no poster; five original missing identities repaired in PR473."
+      "remaining": "Same-work TMDB backdrop verified and added locally for1591961; poster itself remains unavailable. Await integration and public image verification."
     },
     {
       "id": "suomi-deduplication",
@@ -23,12 +23,13 @@
     {
       "id": "streaming-providers",
       "title": "不足サービスの公式日付付き映画情報",
-      "status": "pr_created",
-      "remaining": "Two Lemino films with explicit dates/provider list found in official distributor announcements; pending source/main verification.",
+      "status": "merged",
       "sources": [
         "https://www.asmik-ace.co.jp/news/contents/19524/",
         "https://www.asmik-ace.co.jp/news/contents/19496/"
-      ]
+      ],
+      "pr": 478,
+      "evidence": "Source77f27d01 and final27ace401 all9 workflows passed; merged9ad3d38e; source matches canonical frontend."
     },
     {
       "id": "november-tv",
@@ -81,22 +82,22 @@
     {
       "id": "calendar-detail-contrast",
       "title": "映画祭・イベント詳細カードの可読性",
-      "status": "ci_passed",
-      "pr": 476,
-      "evidence": "Actual rendered title contrast1.003:1 reproduced; local quality gate passes, browser CI pending."
+      "status": "merged",
+      "pr": 478,
+      "evidence": "Source77f27d01 and final27ace401 all9 workflows passed; merged9ad3d38e; source matches canonical frontend."
     }
   ],
   "metrics": {
     "total_tasks": 13,
-    "completed_tasks": 10,
-    "remaining_tasks": 3,
+    "completed_tasks": 12,
+    "remaining_tasks": 1,
     "confirmed_merged_fixes": 10,
-    "completion_percent": 76.9
+    "completion_percent": 92.3
   },
   "notes": [
     "Task count increased from12 to13 after detailed screenshot review found the detail-card defect.",
     "Completion requires the relevant repair merged after CI; pending implementations are not counted.",
     "These metrics are not the prior32-gate release ledger or a product-quality estimate."
   ],
-  "as_of": "2026-10-22T21:30:05.697Z"
+  "as_of": "2026-10-23T09:30:42.334017+00:00"
 }

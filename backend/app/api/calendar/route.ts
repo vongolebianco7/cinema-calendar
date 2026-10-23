@@ -1,9 +1,11 @@
+import { readWithSnapshot, calendarSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  return json(await readWithSnapshot(async()=>{
   const rows = await prisma.release.findMany({
     include: { movie: true },
     orderBy: [{ date: "asc" }, { service: "asc" }],
@@ -29,7 +31,8 @@ export async function GET() {
     source_url: release.sourceUrl,
   }));
 
-  return json({ generated_at: new Date().toISOString(), movies });
+  return { generated_at: new Date().toISOString(), movies };
+  }, calendarSnapshot));
 }
 
 export async function OPTIONS() {

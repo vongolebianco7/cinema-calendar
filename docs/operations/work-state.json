@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T08:26:14.943987+00:00",
+  "updated_at": "2026-10-23T10:18:48.021812+00:00",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "0f0250ffb84b0c710286be4ea0188742b08f1b3c",
-  "branch": "fix/browser-ci-package-mirror-20261023",
-  "head_sha": "77f27d014baecd52fc875201083f94fd4781a2c7",
-  "pull_request": 478,
+  "base_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
+  "branch": "audit/remaining-release-gates-20261023",
+  "head_sha": "45a8762c9572913707d325f12b4525219711a732",
+  "pull_request": 479,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -712,32 +712,40 @@
     {
       "check": "Browser dependency timeout root cause and constrained CI repair",
       "result": "Final476 Autonomous cancelled during Azure apt downloads; other7 workflows succeeded. Same installer preparation stalled in477. Mirror-only preparation added to existing five installer jobs in4 workflows; no assertions/timeouts removed. Shell syntax, YAML parse, signature/suite/protocol fixture and original-command equality checks pass. Shared quality gate passes; fresh CI must verify actual archive download and unchanged browser journeys."
+    },
+    {
+      "check": "Remaining release gates local evidence",
+      "result": "Backend build and five unavailable-DB read API smoke passed; health503 retained. Guard regressions22 pass including pipeline order; Python director suite19 pass. Seven generated artwork exact SHA matches. Source/final CI and production proof still pending."
+    },
+    {
+      "check": "PR479 exact-source CI",
+      "result": "Source06c157af7411f06daf583a3bd37fde8a8bf296ce all7 workflows successful: Autonomous39932810180, smoke39932810260, backend39932810345, frontend39932810192, Python39932810199, mobile39932810185, completeness39932810209. Built5-API unavailable-DB smoke passed; Python162/162. Source frontend includes both engines240 route loads each; receipt/final CI and production pending."
+    },
+    {
+      "check": "Final completeness failure diagnosis",
+      "result": "Receipt736ff47a mobile score leaked calendar/tv/theater-directory requests to real quota-suspended DB; WebKit CORS created DISC-02/CROSS-MOBILE regression. One unchanged-head mobile rerun reproduced. Existing helper mocked movies only. New red→green fixture regression covers all5 reviewed read snapshots with CORS and unknown API503; no assertions/thresholds weakened. Fresh source proof is required."
+    },
+    {
+      "check": "Vercel preview and source2 CI",
+      "result": "Source1eb1 scored completeness now passes after fixture correction. Vercel preview736ff47a actual calendar/tv/movies/theater-directory/releases all200 static_snapshot, DB unavailable, health503, source timestamp preserved; backdrop HEAD200 image/jpeg65569bytes. Source1eb frontend failed on WebKit first cell root agent.html/375/light waiting main text:0 page errors/local failures, blank artifact. Existing exact URL/mode wait applied to both root and prefixed legacy-agent redirects; assertions/timeouts unchanged, focused review no blockers."
+    },
+    {
+      "check": "Source45 exact CI and bounded performance remeasurement",
+      "result": "All8 source45a8762c workflows successful, including frontend39936962182 (both-engine route audit after root redirect wait), backend39936962240, Autonomous39936962269, smoke39936962204, Python39936962206, mobile39936962255, scorecard contract39936962260, completeness39936962301. First performance1000-record390px interaction1038ms exceeded unchanged1000ms budget; one unchanged-head mobile remeasurement passed741.86ms at390 and743.13ms at1280, ready1621.92/1654.81ms, CLS.04237/.01516, no errors. App/performance test source unchanged. Final CI and production still pending."
     }
   ],
   "deployment": {
-    "status": "blocked",
-    "target_sha": "2c504e844ac5ddef6aaac0538806ef22287b0db3",
-    "production_url": "https://cinelva.vercel.app/",
-    "legacy_origin": "https://vongolebianco7.github.io/cinema-calendar/",
-    "last_observed_vercel_production_sha": "a4d5ee012968d8de45bda2be07727502c969ede0",
-    "last_observed_vercel_production_status": "READY",
-    "last_observed_vercel_check_at": "2026-10-21T12:00:04.631Z",
-    "reported_restriction": "NEWprovidercommitstatuses: bothVercelprojects failure, Deployment rate limited — retry in24hours. Earlier user-reported restriction clearance was valid for preceding release; do not assume this newer limit cleared.",
-    "next_action": "After actual quota clearance, deploy verifiedSHAonce/project andinspect exactsourceproof/sharedquality/canonicalsmoke. No newpaidplan/token.",
-    "provider_preview_status": "Currentcanonicalfrontdpl_3ecio6iBkDFdaZD29ha1YUmt8Zp4 READY a4d5ee0; backenddpl_AXXuwZbxpdL1P6vpjRPGdqqdsDKf READY cf8633de. No deployment for2c504e8 was created because of rate limit.",
-    "blockers": [
-      "Vercel bothprojects rate-limited; no current2c504e8deployment created.",
-      "Hostexec andbrowser environment_offline; legacyPagesSource lastobservedbranchmain needs finaladminsettingverification."
-    ],
-    "last_failed_deployment_sha": "0adf128e96889540bbd83472c651fb7bd351ea3c",
-    "last_failed_deployment_status": "ERROR"
+    "status": "deployment_pending",
+    "frontend": "9ad3d38e READY at cinelva.vercel.app",
+    "backend": "Latest9ad3d38e ERROR: root vercel.json materialized backend config; previous cf8633de serving. Narrow fix pending real deployment proof.",
+    "database": "HTTP402 egress exceeded; no DB writes or credentials fetched."
   },
   "blockers": [
-    "Vercel operations are excluded by the user; no current provider state is inferred from historical rate-limit observations.",
-    "Exact asset rights for54 inventoried image/fragments remain unverified; legal acceptance stays open.",
-    "Physical iPhone Safari and5–10 independent-user acceptance evidence remain unavailable; CI WebKit is not a substitute."
+    "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
+    "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
+    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Wait for final receipt-head CI, merge PR478 after all required checks pass, then close superseded PR476/477 and reconcile calendar ledger: ten merged, two verified pending integration, one unavailable actual poster. Vercel excluded.",
+  "next_action": "Renew receipt-only proof for all-green source45a8762c; require final-head CI, merge479, verify both canonical deployments and all5 read APIs, then reconcile final release ledgers.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -765,34 +773,31 @@
     "host_shell": "available",
     "cloud_browser": "not used",
     "github": "available",
-    "vercel_scope": "excluded",
-    "note": "Browser binary download unavailable locally; CI supplies Chromium/WebKit verification. Local quality gate and full Python161 passed."
+    "vercel_scope": "existing canonical release verification authorized by all remaining tasks request",
+    "note": "Neon connected and read-only diagnosis performed; no paid changes. Local compiled backend smoke passed5 APIs; Python162/162; focused review no blockers."
   },
   "calendar_regression_repair": {
     "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
     "total_tasks": 13,
-    "completed_tasks": 10,
-    "remaining_tasks": 3,
+    "completed_tasks": 12,
+    "remaining_tasks": 1,
     "confirmed_merged_fixes": 10,
     "implemented_changes": 13,
     "completion_percent": 76.9,
     "ledger": "docs/operations/calendar-incident-progress-20261023.json",
     "merged_prs": [
       475,
-      473
+      473,
+      478
     ],
-    "pending_pr": 476,
+    "pending_pr": null,
     "pending_branch": "fix/lemino-dated-film-data-20261023",
     "open": [
-      "Calendar detail-card contrast: source CI and actual both-engine screenshot review passed, final receipt CI pending in476.",
-      "Two dated Lemino films newly verified from official distributor announcements, identity/posters verified via two bounded read-only TMDB queries; data repair pending CI/main.",
-      "Actual poster for TMDB1591961 remains unavailable."
+      "Movie1591961 same-work backdrop complement pending integration/public verification; actual poster absent."
     ],
     "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger.",
     "pending_branches": [
-      "fix/calendar-light-card-contrast-20261022",
-      "fix/lemino-dated-film-data-20261023",
-      "fix/browser-ci-package-mirror-20261023"
+      "audit/remaining-release-gates-20261023"
     ],
     "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
     "poster_recheck": "Read-only Actions39861525433 confirmed movie1591961 still returns poster_path:null."

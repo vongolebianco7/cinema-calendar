@@ -335,9 +335,11 @@ for m in events:
   profile=get(f"/person/{did}",{"append_to_response":"movie_credits"})
  except Exception:
   continue
- from enrich_directors import enrich_director, existing_name_aliases
+ from enrich_directors import enrich_director, existing_name_aliases, admit_calendar_director
  try:
-  directors[key]=enrich_director({"id":did,"name":m.get("director")},profile,str(today),existing_name_aliases())
+  candidate=enrich_director({"id":did,"name":m.get("director")},profile,str(today),existing_name_aliases())
+  if not admit_calendar_director(directors,candidate):
+   print(f"WARNING: Director {did} deferred pending a verified Japanese name; movie references retained.")
  except ValueError:
   continue
 with open("data/directors.json","w",encoding="utf-8") as fh:

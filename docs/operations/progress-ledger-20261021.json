@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "baseline_id": "master-acceptance-32-20261021",
-  "updated_at": "2026-10-22T09:07:07.005Z",
+  "updated_at": "2026-10-23T09:30:42.334017+00:00",
   "source_issue": 239,
-  "source_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
+  "source_sha": "9ad3d38e62a3964da47b4a8117c05f875e585ebc",
   "definition": "Count completed acceptance gates, not effort, code lines, tests or PRs. All32 gates retain stable IDs; latest user supersessions replace obsolete behavior within those gates. Partial, verification-pending and blocked gates remain incomplete. Any future scope addition must be explicitly versioned and reported.",
   "metrics": {
     "total_tasks": 32,
@@ -242,7 +242,7 @@
       "id": "P0-01.1",
       "acceptance": "Reconcile main, issues, docs, release settings",
       "status": "done",
-      "evidence": "Live main f50cf7ca, all seven open GitHub issues and nine stale-PR merge states reconciled. Latest specification supersessions mapped to fixed32gate ledger; canonical frontend READY confirmed."
+      "evidence": "Live main f50cf7ca, all nine open GitHub issues and nine stale-PR merge states reconciled. Latest specification supersessions mapped to fixed32gate ledger; canonical frontend READY confirmed."
     },
     {
       "id": "P0-01.2",
@@ -260,7 +260,7 @@
       "id": "P0-01.4",
       "acceptance": "Artifacts and enforce checks before release",
       "status": "blocked",
-      "evidence": "Historical platform record predating current Vercel exclusion (not a new live observation): 459/460/461 merged after finalexactheadCI. Latestsource0dff andreceipt6c31 eachall7green,257Nodepass. ActualguardedDBsync39591844636 andlatestPagesartifact39595243091 succeeded (proofsource61eec13c...). Vercel bothprojects commitstatusfailure: Deployment rate limited — retry in24hours; actualVercelsemanticconfigintegration UNVERIFIED andpriorcanonicalfronta4/backendcf remainREADY. PagesSourcelastobservedbranchmain; browserofflinepreventsswitch. Do notclaimenforcementcomplete."
+      "evidence": "Exact-source guard enforced for Pages/DB/Vercel. Latest frontend9ad3 READY; backend materialization failure reproduced and narrowly fixed locally. Await exact-source/final CI plus actual backend release proof."
     },
     {
       "id": "P0-02.1",
@@ -332,7 +332,7 @@
       "id": "P0-04.3",
       "acceptance": "Free-only/no scraping/rights/truthful availability",
       "status": "blocked",
-      "evidence": "Free-only/no-scraping and truthful-availability source gates pass. Asset inventory55files/54images-or-fragments lacks exact-asset permission records. Existing credits are not proof of every current sprite origin. No new source enabled or rights invented."
+      "evidence": "Free-only/no-scraping gates retained; nine artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
     },
     {
       "id": "P1-05.1",
@@ -416,7 +416,7 @@
       "id": "P1-09.2",
       "acceptance": "Naming/legal/film-data-image rights",
       "status": "blocked",
-      "evidence": "Naming-risk acceptance2026-10-16 already documented; no repeated rename approval. Privacy/terms/attribution/source/dependency inventories reviewed.54image-or-fragment exact permissions unverified; see asset-rights-inventory-20261021.json. Legal clearance remains false."
+      "evidence": "Free-only/no-scraping gates retained; nine artwork files now match generated source archive exactly. Remaining artwork origins/permission chain unresolved; see asset-rights-inventory-20261023.json. Naming risk already accepted; no blanket legal clearance."
     },
     {
       "id": "P1-09.3",

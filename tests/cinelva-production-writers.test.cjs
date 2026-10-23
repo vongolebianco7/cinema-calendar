@@ -8,3 +8,24 @@ test('protected data configuration triggers required CI while known snapshot upd
 test('production installs the committed lock without lifecycle execution',()=>{assert.match(JSON.parse(fs.readFileSync('backend/vercel.json')).installCommand,/^npm ci --ignore-scripts/);});
 test('disabled master importer is also guarded without adding a schema write',()=>{const text=fs.readFileSync('.github/workflows/update-theater-master.yml','utf8');assert.match(text,/if: \$\{\{ false \}\}/);assert.ok(text.indexOf('production-checks.cjs --require')>0);assert.ok(text.indexOf('production-checks.cjs --require')<text.indexOf('npx tsx scripts/import-json.ts'));assert.doesNotMatch(text,/prisma db push|npm run db:sync/);});
 test('real production build stops before output when proof is missing',()=>{const os=require('node:os'),path=require('node:path'),{spawnSync}=require('node:child_process');const root=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-production-reject-'));try{fs.mkdirSync(path.join(root,'scripts'));fs.mkdirSync(path.join(root,'quality'));for(const name of ['build-static.cjs','production-checks.cjs','verify-production-release.cjs'])fs.copyFileSync('scripts/'+name,path.join(root,'scripts',name));fs.writeFileSync(path.join(root,'quality/production-proof.json'),'{"schema_version":1,"head_sha":null}');const git=args=>spawnSync('git',args,{cwd:root,encoding:'utf8'});assert.equal(git(['init','-q']).status,0);assert.equal(git(['add','.']).status,0);assert.equal(git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture']).status,0);const r=spawnSync(process.execPath,['scripts/build-static.cjs'],{cwd:root,encoding:'utf8',env:{...process.env,VERCEL_ENV:'production'}});assert.notEqual(r.status,0);assert.match(r.stderr,/invalid production CI receipt/);assert.equal(fs.existsSync(path.join(root,'public')),false);}finally{fs.rmSync(root,{recursive:true,force:true});}});
+test('production guard preserves backend working directory while locating shared scripts from the repository root',()=>{
+ const os=require('node:os'),path=require('node:path'),{spawnSync}=require('node:child_process');
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-backend-guard-'));
+ try {
+  fs.mkdirSync(path.join(root,'scripts'));fs.mkdirSync(path.join(root,'backend'));
+  fs.copyFileSync('scripts/production-checks.cjs',path.join(root,'scripts/production-checks.cjs'));
+  fs.writeFileSync(path.join(root,'scripts/verify-production-release.cjs'),"require('node:fs').writeFileSync(require('node:path').join(__dirname,'../observed-cwd'),process.cwd())");
+  fs.writeFileSync(path.join(root,'scripts/quality_gate.py'),'pass\n');
+  const r=spawnSync(process.execPath,[path.join(root,'scripts/production-checks.cjs')],{cwd:path.join(root,'backend'),encoding:'utf8',env:{...process.env,VERCEL_ENV:'production'}});
+  assert.equal(r.status,0,r.stderr);
+  assert.equal(fs.readFileSync(path.join(root,'observed-cwd'),'utf8'),path.join(root,'backend'));
+ } finally {fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('movie refresh publishes guarded validated snapshots before a separately failing DB sync',()=>{
+ const text=fs.readFileSync('.github/workflows/update-movies.yml','utf8');
+ assert.ok(text.indexOf('python scripts/quality_gate.py')<text.indexOf('git push origin main'));
+ assert.ok(text.indexOf('verify-production-release.cjs --require')<text.indexOf('git push origin main'));
+ assert.ok(text.indexOf('git push origin main')<text.indexOf('Sync fresh movie and TV data'));
+ assert.doesNotMatch(text,/continue-on-error/);
+});

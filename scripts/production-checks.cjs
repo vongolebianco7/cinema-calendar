@@ -3,7 +3,7 @@ const path=require('node:path');
 function checkProduction(env=process.env,required=false){
  if(env.VERCEL_ENV!=='production'&&!required)return;
  const root=path.resolve(__dirname,'..');
- execFileSync(process.execPath,['scripts/verify-production-release.cjs',...(required?['--require']:[])],{cwd:root,env,stdio:'inherit'});
+ execFileSync(process.execPath,[path.join(root,'scripts/verify-production-release.cjs'),...(required?['--require']:[])],{cwd:process.cwd(),env,stdio:'inherit'});
  // Isolated artifact fixtures are preview builds, not recursive production releases.
  execFileSync('python3',['scripts/quality_gate.py'],{cwd:root,env:{...env,VERCEL_ENV:'preview'},stdio:'inherit'});
 }

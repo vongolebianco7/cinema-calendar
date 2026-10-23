@@ -26870,7 +26870,7 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w780/7k3bwArupn0jdEpWETdJexxs21H.jpg",
       "source": "Netflix公式ニュースルーム",
       "source_url": "https://about.netflix.com/ja/news/my-crazy-feminist-girlfriend-additionalcast",
       "type": "見放題",
@@ -26895,7 +26895,10 @@
         "永野芽郁",
         "木戸大聖"
       ],
-      "runtime": 0
+      "runtime": 0,
+      "artwork_type": "backdrop",
+      "artwork_source": "TMDB movie-detail API: same-work backdrop used because poster is unavailable",
+      "artwork_verified_at": "2026-10-23"
     },
     {
       "id": 1287141,

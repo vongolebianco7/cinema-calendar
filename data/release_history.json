@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T12:26:49.948188+00:00",
+  "generated_at": "2026-10-23T18:55:58.348913+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -13784,6 +13784,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "椎名林檎 党大会 令和八年列島巡回",
+      "id": 1805382,
+      "original_title": "椎名林檎 党大会 令和八年列島巡回",
+      "date": "2026-10-16",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1805382",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "演歌の坂道",
       "id": 1799743,
       "original_title": "演歌の坂道",
@@ -14092,6 +14105,84 @@
       "program": "金曜ロードショー",
       "source": "日本テレビ 金曜ロードシネマクラブ",
       "source_url": "https://kinro.ntv.co.jp/lineup/20261023",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "てっぺんの向こうにあなたがいる",
+      "id": null,
+      "original_title": null,
+      "date": "2026-10-24",
+      "service": "WOWOWオンデマンド",
+      "time": "20:00",
+      "program": null,
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "てっぺんの向こうにあなたがいる",
+      "id": 1532481,
+      "original_title": null,
+      "date": "2026-10-24",
+      "service": "WOWOWオンデマンド",
+      "time": "20:00",
+      "program": null,
+      "source": "WOWOW公式 2026年10月メガヒット劇場",
+      "source_url": "https://note.wowow.co.jp/n/n3fc15a936115",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "NAZA ナザ",
+      "id": 1755291,
+      "original_title": "NAZA",
+      "date": "2026-10-24",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1755291",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "세븐틴 월드 투어 '뉴_'",
+      "id": 1797200,
+      "original_title": "세븐틴 월드 투어 '뉴_'",
+      "date": "2026-10-24",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1797200",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
+      "id": 1688795,
+      "original_title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
+      "date": "2026-10-24",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1688795",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "하이브 치어링 파티",
+      "id": 1797226,
+      "original_title": "하이브 치어링 파티",
+      "date": "2026-10-24",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1797226",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

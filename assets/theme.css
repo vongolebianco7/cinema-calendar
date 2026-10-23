@@ -274,10 +274,17 @@ body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
   transform:none!important;
 }
 
-/* Keep the fine frame slightly inset from the icon's visible edges. */
+/* Slightly reduce the icon footprint while retaining the 0.5px outline. */
 .gTop .gBrand .gBrandImage,
 .gDrawerHead .gBrand .gBrandImage {
   box-sizing:border-box!important;
   outline:none!important;
-  box-shadow:inset 0 0 0 0.5px #f2dfbb!important;
+  box-shadow:none!important;
+  transform:scale(.96)!important;
+  transform-origin:center!important;
 }
+
+html[data-theme="light"] .gTop .gBrand .gBrandImage,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
+html[data-theme="dark"] .gTop .gBrand .gBrandImage,
+html[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {transform:scale(.96)!important;}

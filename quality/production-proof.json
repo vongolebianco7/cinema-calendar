@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "06c157af7411f06daf583a3bd37fde8a8bf296ce",
-  "verified_at": "2026-10-23T09:46:53.993Z",
-  "note": "Exact source passed all seven PR workflows: Autonomous quality, smoke, Chromium/WebKit frontend480 route loads, reproducible backend build with five unavailable-DB API smoke checks, Python162, mobile and completeness. Source includes narrow backend config materialization guard, snapshot fallback, guarded refresh order and verified same-work artwork. Remaining rights/device/independent-users and Neon recovery are not claimed complete. Final-head CI required."
+  "head_sha": "45a8762c9572913707d325f12b4525219711a732",
+  "verified_at": "2026-10-23T10:19:00.929Z",
+  "note": "Exact source passed all eight PR workflows: Autonomous quality, smoke, Chromium/WebKit frontend480 route loads, reproducible backend build with five unavailable-DB API checks, Python162, mobile, completeness and scorecard contract. Narrow backend configuration materialization, snapshot fallback, guarded daily publication, verified artwork and deterministic scorecard/redirect readiness are covered. Preview all5 APIs200/static_snapshot; health503. One unchanged-head performance remeasurement passed without threshold changes; original observation retained in operations evidence. Rights/device/users and Neon recovery remain incomplete. Require final-head CI before merge."
 }

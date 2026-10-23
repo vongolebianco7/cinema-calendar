@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import snapshots from '../../../backend/lib/catalog-snapshot.cjs';
 
 const VALID_STATUSES = new Set(['pass', 'fail', 'partial', 'not_applicable']);
 
@@ -32,12 +33,27 @@ export async function assertNoPageOverflow(page, tolerance = 2) {
   return {pass: overflow <= tolerance, overflow};
 }
 
-export async function routeDeterministicMovieBackend(context, payload = {results: [], movies: []}) {
-  await context.route(/backend-one-gray-94\.vercel\.app\/api\/movies/, route => route.fulfill({
-    status: 200,
-    contentType: 'application/json',
-    body: JSON.stringify(payload),
-  }));
+export async function routeDeterministicMovieBackend(context, payload) {
+  // No scorecard request should depend on the serving DB, its quota or CORS.
+  // Keep browser/pageerror/overflow assertions intact; exercise reviewed snapshots.
+  await context.route(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//, async route => {
+    const url = new URL(route.request().url());
+    const q = url.searchParams;
+    let data;
+    switch (url.pathname) {
+      case '/api/calendar': data = snapshots.calendarSnapshot(); break;
+      case '/api/tv': data = snapshots.tvSnapshot(); break;
+      case '/api/movies': data = payload || snapshots.movieSnapshot(q.get('q') || '', q.get('limit') || 50); break;
+      case '/api/theater-directory': data = snapshots.theaterSnapshot(q.get('q') || '', q.get('prefecture') || ''); break;
+      case '/api/releases': data = snapshots.releaseSnapshot(q.get('from') || '2026-01-01', q.get('to') || '2027-01-01', q.get('service') || ''); break;
+    }
+    await route.fulfill({
+      status: data ? 200 : 503,
+      headers: {'Access-Control-Allow-Origin': '*'},
+      contentType: 'application/json',
+      body: JSON.stringify(data || {error: 'Unconfigured scorecard API fixture'}),
+    });
+  });
 }
 
 export function metricOutputPath(group, browser = '') {

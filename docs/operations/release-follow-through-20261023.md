@@ -38,3 +38,7 @@ For each participant record: ID, consent yes/no, device/browser, date, source SH
 ## Remaining external evidence
 
 Physical Safari results,5–10 independent participant results and missing asset origin/permission chains remain open. Quota prevents real DB restoration until the free reset. Deployment and CI must be verified after integration; local tests alone do not close publication gates.
+
+## CI isolation correction
+
+Final-head completeness measurement exposed real backend requests escaping the scored-mobile fixture. The existing helper intercepted movie search only; calendar,TV and theater-directory reached the quota-suspended production DB and produced WebKit CORS page errors. One bounded unchanged-head rerun reproduced the failure. The fixture now serves all five reviewed snapshot APIs with CORS, returns503 for unconfigured APIs and leaves pageerror/overflow/scoring assertions unchanged. Real canonical API verification remains a separate required post-merge action. A red→green regression covers the request boundary and snapshot payloads; fresh source/final CI proof is required.

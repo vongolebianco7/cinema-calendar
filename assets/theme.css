@@ -305,3 +305,21 @@ body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
   clip-path:none!important;
   transform:none!important;
 }
+
+/* Light theme: render the uploaded logo image as-is, with no CSS frame or backdrop. */
+html[data-theme="light"] .gTop .gBrand img.gBrandImage,
+html[data-theme="light"] .gDrawerHead .gBrand img.gBrandImage,
+body[data-theme="light"] .gTop .gBrand img.gBrandImage,
+body[data-theme="light"] .gDrawerHead .gBrand img.gBrandImage {
+  background:none!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  filter:none!important;
+  transform:none!important;
+}

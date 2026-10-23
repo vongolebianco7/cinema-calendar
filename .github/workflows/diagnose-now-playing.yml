@@ -17,16 +17,26 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           python - <<'PY'
-          import json,os,urllib.parse,urllib.request
+          import json,os,urllib.parse,urllib.request,importlib.util,datetime
           key=os.environ.get('TMDB_API_KEY')
           if not key:raise SystemExit('Existing TMDB credential unavailable')
-          for number in [1,2]:
+          def fetch(number):
               query=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
               try:
-                  with urllib.request.urlopen('https://api.themoviedb.org/3/movie/now_playing?'+query,timeout=15) as response:
+                  request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+query,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0'})
+                  with urllib.request.urlopen(request,timeout=15) as response:
                       data=json.load(response)
               except Exception as error:
                   print('Metadata observation failed: '+type(error).__name__);raise SystemExit(1)
               safe=lambda value:value if type(value) is int else 'invalid_type'
               print(json.dumps({'requested_page':number,'api_page':safe(data.get('page')),'total_pages':safe(data.get('total_pages')),'total_results':safe(data.get('total_results')),'returned_rows':len(data['results']) if isinstance(data.get('results'),list) else 'invalid_type'}))
+              return data
+          spec=importlib.util.spec_from_file_location('now_playing','scripts/update_now_playing.py')
+          module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+          safe_errors={'Invalid pagination or page budget exceeded','Incomplete or inconsistent now-playing page','Invalid movie identity','Now-playing result count does not match upstream total'}
+          try:
+              result=module.collect_now_playing(fetch,datetime.datetime.now(datetime.timezone.utc))
+              print('Complete collected title count:',len(result['movies']))
+          except Exception as error:
+              print('Validation reason:',str(error) if type(error) is ValueError and str(error) in safe_errors else type(error).__name__)
           PY

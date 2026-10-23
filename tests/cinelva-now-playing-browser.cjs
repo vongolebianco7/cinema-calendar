@@ -19,6 +19,7 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});
    const section=page.locator('#nowPlaying'),cards=section.locator('[data-now-playing-id]');await cards.first().waitFor();assert.equal(await cards.count(),12);
    assert.match(await section.locator('[data-now-status]').innerText(),/17作品/);assert.match(await section.locator('[data-now-observed]').innerText(),/日本時間/);
+   await cards.first().scrollIntoViewIfNeeded();
    await page.waitForFunction(()=>document.querySelector('#nowPlaying img')?.naturalWidth>0);
    assert.equal(await section.locator('[data-now-grid]').evaluate(g=>getComputedStyle(g).gridTemplateColumns.split(' ').length),3);
    await section.locator('[data-now-more]').click();assert.equal(await cards.count(),17);assert.match(await section.innerText(),/画像未提供/);

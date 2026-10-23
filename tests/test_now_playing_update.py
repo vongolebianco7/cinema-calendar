@@ -47,6 +47,15 @@ class NowPlayingUpdateTests(unittest.TestCase):
                 with self.assertRaises((ValueError,RuntimeError)):self.module.refresh(target,fetch,NOW)
                 self.assertEqual(target.read_text(),'previous verified snapshot')
 
+    def test_nonempty_truncated_pages_preserve_prior_snapshot(self):
+        for count in [1,2]:
+            with self.subTest(pages=count),tempfile.TemporaryDirectory() as directory:
+                target=Path(directory)/'now_playing.json';target.write_bytes(b'previous verified snapshot')
+                def fetch(number):
+                    return self.page(number,[self.film(number)],count,40)
+                with self.assertRaises(ValueError):self.module.refresh(target,fetch,NOW)
+                self.assertEqual(target.read_bytes(),b'previous verified snapshot')
+
     def test_over_budget_or_malformed_response_fails_closed(self):
         for page in [self.page(1,[],21,99),self.page(1,[dict(self.film(1),id='invalid')]),self.page(1,[],1,3)]:
             with self.subTest(page=page),self.assertRaises(ValueError):self.module.collect_now_playing(lambda n:page,NOW)

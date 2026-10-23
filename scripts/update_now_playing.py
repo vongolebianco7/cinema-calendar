@@ -28,11 +28,13 @@ def collect_now_playing(fetch_page, now):
         raise ValueError('Invalid pagination or page budget exceeded')
     today=now.astimezone(dt.timezone(dt.timedelta(hours=9))).date().isoformat()
     movies={}
+    raw_count=0
     for number in range(1,max(1,pages)+1):
         page=first if number==1 else fetch_page(number)
         rows=page.get('results')
         if page.get('page')!=number or page.get('total_pages')!=pages or page.get('total_results')!=total or not isinstance(rows,list) or (not rows and total):
             raise ValueError('Incomplete or inconsistent now-playing page')
+        raw_count+=len(rows)
         for row in rows:
             identity=row.get('id');title=row.get('title') or row.get('original_title')
             if type(identity) is not int or identity<=0 or not isinstance(title,str) or not title.strip():
@@ -51,6 +53,8 @@ def collect_now_playing(fetch_page, now):
                 'source_url':f'https://www.themoviedb.org/movie/{identity}',
             }
             movies.setdefault(identity,movie)
+    if raw_count!=total:
+        raise ValueError('Now-playing result count does not match upstream total')
     return {'schema_version':1,'region':'JP','language':'ja-JP','source':SOURCE,'complete':True,
             'generated_at':now.isoformat(),'upstream_total_results':total,'movies':list(movies.values())}
 

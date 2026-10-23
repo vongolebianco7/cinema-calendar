@@ -255,7 +255,7 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage {
   /* Preserve the solid dark interior of the original C emblem. */
   background:#161616!important;
   padding:0!important;
-  border:0!important;
+  border:1px solid #f2dfbb!important;
   border-radius:20%!important;
   clip-path:none!important;
   transform:none!important;

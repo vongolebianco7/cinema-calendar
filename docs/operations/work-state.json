@@ -1,13 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T10:40:57.097901+00:00",
+  "updated_at": "2026-10-23T11:55:35.645530+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "2493c6edbb09e57cafe4a80150ff7b60c9326594",
   "branch": "fix/materialized-config-quality-20261023",
-  "head_sha": "2493c6edbb09e57cafe4a80150ff7b60c9326594",
-  "pull_request": null,
+  "head_sha": "bd126fb8d50c6b7fca8eef9ab296eb1d38afe67f",
+  "pull_request": {
+    "number": 480,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/480",
+    "branch": "fix/materialized-config-quality-20261023",
+    "head_sha": "bd126fb8d50c6b7fca8eef9ab296eb1d38afe67f"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -808,6 +813,10 @@
       "check": "PR478 exact source and approved-logo preservation",
       "result": "77f27d01 all nine workflows successful. Local shared quality gate passed; Python161/161 passed. Independent code review found no blockers; all108 prior streaming entries retained plus two verified Lemino titles. Nine logo/header files byte-identical to main. Only outdated logo/cache-query assertions changed; ordinary UI contrast remains enforced. Final receipt-head CI pending.",
       "source_sha": "77f27d014baecd52fc875201083f94fd4781a2c7"
+    },
+    {
+      "check": "Changing-catalog daily publication regression",
+      "result": "Daily run39939689022 failed a fixed-title test after a legitimate catalog refresh. Controlled fixtures now cover identity/order/dedup; runtime searches use an available snapshot title. Six unit tests, compiled5-API smoke, full normal and materialized quality gates passed, including a temporary refreshed-catalog removal reproduction. Fresh source/final CI pending."
     }
   ]
 }

@@ -252,3 +252,18 @@ body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
   -webkit-text-stroke:0!important;
   text-shadow:none!important;
 }
+
+/* Restore approved light-mode Cinelva wordmark color, independent of image styling. */
+html[data-theme="light"] .gTop .gBrand .gBrandWord,
+html[data-theme="light"] .gDrawerHead .gBrand .gBrandWord,
+body[data-theme="light"] .gTop .gBrand .gBrandWord,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandWord {
+  /* Sampled from the approved B mockup: subdued metallic gold, not #F2DFBB. */
+  color:#b18e60!important;
+  background-image:linear-gradient(105deg,#aa814c 0%,#cbb08b 52%,#b18e60 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}

@@ -1,3 +1,4 @@
+const {readSourceConfiguration}=require('../scripts/source-configuration.cjs');
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -6,7 +7,7 @@ const path = require('node:path');
 const {spawnSync} = require('node:child_process');
 
 test('every declared active route is published or redirects to its published canonical page', t => {
-  const config=JSON.parse(fs.readFileSync('vercel.json','utf8'));
+  const config=readSourceConfiguration('vercel.json');
   const routes=JSON.parse(fs.readFileSync('quality/route-manifest.json','utf8')).routes;
   const fixture=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-published-routes-'));
   t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));

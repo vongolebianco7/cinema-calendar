@@ -11,8 +11,10 @@
     {
       "id": "streaming-posters",
       "title": "配信作品ポスターの補完",
-      "status": "in_progress",
-      "remaining": "Same-work TMDB backdrop verified and added locally for1591961; poster itself remains unavailable. Await integration and public image verification."
+      "status": "merged",
+      "pr": 479,
+      "resolution": "verified_same_work_backdrop_fallback",
+      "evidence": "Frontend2493c6ed canonical streaming.json HTTP200 publishes1591961 same-work backdrop marker/URL; image HEAD200,image/jpeg65569bytes. Actual TMDB poster remains unavailable; no invented poster."
     },
     {
       "id": "suomi-deduplication",
@@ -89,15 +91,16 @@
   ],
   "metrics": {
     "total_tasks": 13,
-    "completed_tasks": 12,
-    "remaining_tasks": 1,
+    "completed_tasks": 13,
+    "remaining_tasks": 0,
     "confirmed_merged_fixes": 10,
-    "completion_percent": 92.3
+    "completion_percent": 100
   },
   "notes": [
     "Task count increased from12 to13 after detailed screenshot review found the detail-card defect.",
     "Completion requires the relevant repair merged after CI; pending implementations are not counted.",
-    "These metrics are not the prior32-gate release ledger or a product-quality estimate."
+    "These metrics are not the prior32-gate release ledger or a product-quality estimate.",
+    "The last missing artwork is complemented by a verified same-work backdrop, explicitly labelled in source data; this is not a claim that TMDB now supplies a poster. The separate32 release gates remain incomplete."
   ],
-  "as_of": "2026-10-23T09:30:42.334017+00:00"
+  "as_of": "2026-10-23T10:41:22.594996+00:00"
 }

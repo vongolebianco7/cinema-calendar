@@ -21,7 +21,7 @@ jobs:
           key=os.environ.get('TMDB_API_KEY')
           if not key:raise SystemExit('Existing TMDB credential unavailable')
           def fetch(number):
-              query=urllib.parse.urlencode({'api_key':key,'language':'ja-JP','region':'JP','page':number})
+              query=urllib.parse.urlencode({'page':number,'language':'ja-JP','region':'JP','api_key':key})
               try:
                   request=urllib.request.Request('https://api.themoviedb.org/3/movie/now_playing?'+query,headers={'Accept':'application/json','User-Agent':'Cinelva/1.0','Cache-Control':'no-cache'})
                   with urllib.request.urlopen(request,timeout=15) as response:

@@ -274,17 +274,21 @@ body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
   transform:none!important;
 }
 
-/* Slightly reduce the icon footprint while retaining the 0.5px outline. */
-.gTop .gBrand .gBrandImage,
-.gDrawerHead .gBrand .gBrandImage {
-  box-sizing:border-box!important;
-  outline:none!important;
-  box-shadow:none!important;
-  transform:scale(.96)!important;
-  transform-origin:center!important;
-}
-
+/* Frame only: original icon stays at its original size.
+   The fine 0.5px line is inset, without scaling the C artwork. */
 html[data-theme="light"] .gTop .gBrand .gBrandImage,
 html[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
 html[data-theme="dark"] .gTop .gBrand .gBrandImage,
-html[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {transform:scale(.96)!important;}
+html[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage,
+body[data-theme="light"] .gTop .gBrand .gBrandImage,
+body[data-theme="light"] .gDrawerHead .gBrand .gBrandImage,
+body[data-theme="dark"] .gTop .gBrand .gBrandImage,
+body[data-theme="dark"] .gDrawerHead .gBrand .gBrandImage {
+  box-sizing:border-box!important;
+  border:0!important;
+  outline:none!important;
+  box-shadow:inset 0 0 0 0.5px #f2dfbb!important;
+  transform:none!important;
+  background:#161616!important;
+  border-radius:20%!important;
+}

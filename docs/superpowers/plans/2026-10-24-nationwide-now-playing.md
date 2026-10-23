@@ -36,7 +36,7 @@
 - [x] Write and run failing unit cases for valid/empty/stale/future/wrong-source payloads, punctuation search and exact IDs, sorting and expansion.
 - [x] Implement section and module with12initial/all expansion, source/time copy and official cinema-directory link. Include shared reviews/bookmarks without a second implementation.
 - [x] Run focused tests, shared quality, both-engine root/prefix/light/dark browser checks with screenshot evidence. Verify search, all-results access, review save/bookmark persistence/detail URL, source errors and390px overflow0.
-- [ ] Perform one focused whole-branch review, source CI, receipt-only proof and final CI; merge approved scope. Observe real initial collection and canonical publication; record any genuine external blocker.
+- [x] Perform one focused whole-branch review, source CI, receipt-only proof and final CI; merge approved scope. Observe real initial collection and canonical publication; record any genuine external blocker.
 
 ## Execution record
 
@@ -62,3 +62,11 @@
 
 - PR484 focused repair review independently verified official endpoint equivalence and12 tests; no Critical/Important blockers. Nonblocking additional test ideas (network exception with fallback enabled, impossible calendar date and shared-deadline exhaustion) are not required for this repair; current code propagates network failures, parses actual dates and shares one request budget. urllib keeps its existing per-operation socket timeout; the job has an8minute overall bound.
 - Source45b2c01a all7 PR workflows passed including full frontend and dedicated Chromium/WebKit shared controls. Shared local quality passed. Final receipt/head CI, materialized production checks, merge and actual complete publication still pending.
+
+## Completed release evidence
+- PR484 finalac222b69 all8 workflows passed; actual materialized public proof/fullquality passed, digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9. Merged3fae6b87.
+- Actual refresh40037837837 passed both public proof checks and fullquality, publishing100 unique films asb877e60e with real observation2026-10-23T23:07:46.612102+00:00. Direct endpoint was consistent in this run, so provenance correctly remains direct; equivalent fallback execution was proven by the live read-only diagnostic and entrypoint tests, not falsely claimed in production.
+- Frontend dpl_Em48nfoBbFurqRjHZV9yrjggEBp6 and backend dpl_HbKbqJoK7goG2tYVBezAbD38VgoZ READYb877e60e on existing origins. Canonical JSON200/complete:true/JP/count100/unique100/source/time confirmed.
+- Actual Chrome production shows100/initial12 and08:07JST, expands100, filters Street Fighter to1 and opens matching detail ID1153576/title and record action.13 real posters already loaded on expansion. A browser observation wait hit a protocol timeout; the next DOM observation confirmed the correct rendered detail. No production review/bookmark actions performed; no latency pass claimed.
+- Collector12/UI7 and both-engine persistence/offline/source/geometry/contrast checks passed. This approved increment is COMPLETE; notifications remain later work. Historical rights/physical-device/participant/Neon gates are not claimed complete.
+- Local execution environment became unavailable during the final documentation-only checkpoint. Code, tests, real collection and canonical browser verification were already complete; checkpoint persisted through GitHub and its normal CI rather than claiming an unreturned local documentation gate passed.

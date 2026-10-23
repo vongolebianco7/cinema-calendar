@@ -1,16 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T22:55:20.903689+00:00",
-  "status": "ci_passed",
+  "updated_at": "2026-10-23T23:16:05.448Z",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "3d9d82089b96fe99a2e9fb76e6c26742be814c60",
-  "branch": "fix/now-playing-initial-observation-20261024",
-  "head_sha": "45b2c01af7bb096be1abff763cf8e11c2998d8bf",
-  "pull_request": {
-    "number": 484,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/484"
-  },
+  "base_sha": "b877e60eabb6e16f65c3fc76a2b3dabfdf0d9b35",
+  "branch": "docs/now-playing-release-20261024",
+  "head_sha": "b877e60eabb6e16f65c3fc76a2b3dabfdf0d9b35",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -561,10 +558,10 @@
     {
       "id": "FEATURE-NOW-PLAYING-20261024",
       "title": "Nationwide JP now-playing list with shared detail/review/bookmarks",
-      "status": "deployment_pending",
+      "status": "production_verified",
       "acceptance": "User approved2026-10-24: discover section,3-column shared cards, full access/search, daily approved TMDB JP snapshot and source/update time, official cinema links. Independent current-list data; fail closed for stale/partial/invalid snapshots. Notifications follow as a later feature.",
       "pull_request": 484,
-      "ci": "PR484 source45b2c01a all7 PR workflows passed, including full frontend, dedicated Chromium/WebKit nationwide controls, Autonomous, mobile, backend, smoke and Python/completeness. Collector12/fullquality passed; focused repair review no Critical/Important blockers. Documented upstream-window equivalent live diagnostic40034856714 observed100 complete titles; normal100/99 inconsistency remains. Temporary diagnostic workflow removed; no current-data snapshot publication claimed yet."
+      "ci": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
     }
   ],
   "verification": [
@@ -791,22 +788,26 @@
     {
       "check": "PR484 exact-source equivalent retrieval acceptance",
       "result": "PR484 source45b2c01a all7 PR workflows passed, including full frontend, dedicated Chromium/WebKit nationwide controls, Autonomous, mobile, backend, smoke and Python/completeness. Collector12/fullquality passed; focused repair review no Critical/Important blockers. Documented upstream-window equivalent live diagnostic40034856714 observed100 complete titles; normal100/99 inconsistency remains. Temporary diagnostic workflow removed; no current-data snapshot publication claimed yet."
+    },
+    {
+      "check": "Nationwide actual collection and canonical production acceptance",
+      "result": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
     }
   ],
   "deployment": {
     "status": "production_verified",
-    "frontend": "3d9d8208 READY at unchanged cinelva.vercel.app; canonical discover includes new section/module. GET now_playing.json200 remains complete:false/generated_at:null/movies:[] after upstream inconsistency; no fake current list.",
-    "backend": "db3460ca READY at unchanged backend-one-gray-94.vercel.app;1031-film static snapshot, DB unavailable; health503. New list has no DB dependency.",
+    "frontend": "b877e60e READY dpl_Em48nfoBbFurqRjHZV9yrjggEBp6 at unchanged cinelva.vercel.app. Canonical JSON200/complete:true/100 unique JP titles; actual Chrome displays12/100, expands100, filters1 and opens matching detail. Existing origin preserved.",
+    "backend": "b877e60e READY dpl_HbKbqJoK7goG2tYVBezAbD38VgoZ at unchanged backend-one-gray-94.vercel.app. New list is independent of the database; no DB write/recovery performed in this increment.",
     "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Current canonical db3460ca has1031 films, generated_at2026-10-23T18:50:23.357458+00:00. Earlier Vercel rate-limit evidence is superseded by both READY deployments. New now-playing data still explicitly uninitialized until approved workflow performs actual collection.",
-    "now_playing": "Initial refresh40034078253 failed closed:100 vs99 total metadata. PR484 adds only officially equivalent retrieval after consistency failure, frozen API dates and unchanged all-page/raw-total checks. Real complete publication still pending."
+    "latest_data": "Actual guarded initial nationwide observationb877e60e:100 titles,2026-10-23T23:07:46.612102+00:00 (10/24 08:07JST), complete and canonical. Existing calendar1031-film baseline unchanged. Earlier deployment rate-limit evidence superseded by both READYb877e60e deployments.",
+    "now_playing": "Production verified. Initial100/99 inconsistency refused safely; documented equivalent read-only diagnostic validated100 titles. Direct endpoint had become consistent in successful production run40037837837, so final provenance correctly remains direct /movie/now_playing. Raw-row/pagination checks retained; daily03:13JST refresh configured, stale>36hours hidden."
   },
   "blockers": [
     "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Require final receipt-head CI and actual materialized production-checks, merge484, then observe guarded actual first complete collection and canonical nationwide list. Source45b2c01a all7 CI; UI already READY3d9d8208, live snapshot explicitly unavailable pending real complete publication.",
+  "next_action": "Nationwide now-playing increment COMPLETE and production verified. Notifications remain a separate later increment, not implemented here. Historical32-gate ledger remains28/32 with external rights/device/participant gates; Neon free quota reset2026-11-01T00:00:00Z remains unchanged. Do not repeat completed list work or claim all global tasks complete.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -817,11 +818,11 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 483,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/483",
-    "merge_sha": "3d9d82089b96fe99a2e9fb76e6c26742be814c60",
-    "source_sha": "1415f995b396bd19e6b66181c96e96192ea3c6a6",
-    "receipt_sha": "988a9e20b7961120d6a74e56770c6ec33ad79fba"
+    "number": 484,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/484",
+    "merge_sha": "3fae6b87f3ba181a3783d887779c14c9cccec801",
+    "source_sha": "45b2c01af7bb096be1abff763cf8e11c2998d8bf",
+    "receipt_sha": "ac222b69c37ce0f7e0acc6bdd283699b0831dc68"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",

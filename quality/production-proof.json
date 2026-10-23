@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "924e0763ea51ba4e8c8e01f40916231e9f6282bb",
-  "verified_at": "2026-10-23T12:08:32.504Z",
-  "note": "Exact source passed all six PR workflows: Autonomous quality, smoke, Chromium/WebKit frontend, reproducible backend including full materialized quality and five unavailable-DB APIs, mobile and completeness. Narrow verified configuration source reader and changing-catalog tests reviewed; normal/materialized full local gates and6 focused tests passed. No logo/colors, data policy or threshold changes. Require final-head CI and full production simulation before merge; canonical API release remains pending, Neon writes/rights/device/users remain incomplete."
+  "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29",
+  "verified_at": "2026-10-23T12:44:55.461Z",
+  "note": "Exact source passed all six PR workflows: Autonomous, smoke, frontend, reproducible backend, mobile and completeness. All3 real bundled JSON dependencies trigger backend publication;17 realGit boundary tests passed after red3 reproduction and focused review. Compiled latest1030-film calendar and all5 snapshot read APIs passed, health503; full materialized quality passed. No guard, thresholds, UI, origins or saved records changed. Require final-head CI before merge. Existing5cf977ac canonical projects READY; Vercel frontend latest-data publication rate limited24hours. Neon writes/rights/device/participants remain blocked."
 }

@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T12:08:30.804Z",
+  "updated_at": "2026-10-23T12:44:52.847Z",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "2493c6edbb09e57cafe4a80150ff7b60c9326594",
-  "branch": "fix/materialized-config-quality-20261023",
-  "head_sha": "924e0763ea51ba4e8c8e01f40916231e9f6282bb",
+  "base_sha": "13a9e63ebb5ae671b787240c8f7e939118474fd1",
+  "branch": "fix/backend-snapshot-publication-inputs-20261023",
+  "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29",
   "pull_request": {
-    "number": 480,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/480",
-    "branch": "fix/materialized-config-quality-20261023",
-    "head_sha": "924e0763ea51ba4e8c8e01f40916231e9f6282bb"
+    "number": 481,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/481",
+    "branch": "fix/backend-snapshot-publication-inputs-20261023",
+    "head_sha": "d2e534a2d3f56d6e0f1a90cb249cebf06e457b29"
   },
   "work_items": [
     {
@@ -741,35 +741,53 @@
     {
       "check": "Actual backend materialized quality failure and fix",
       "result": "DeploymentDfgo9h3 passed proof then failed12 source-config assertions. Same complete gate reproduced locally. Narrow reader validates exact committed config and uses frontend source only after verified backend marker; all assertions retained. Marker set after real proof, backend only; inherited frontend marker cleared. Normal and materialized full gates pass; focused review32/32 pass and no blockers. Materialized whole-gate smoke added backend CI; new helper watched by both projects."
+    },
+    {
+      "check": "PR480 production verified",
+      "result": "Source924e0763 all6/final52980b8e all7 CI; actual materialized production-checks public proof and full quality passed, source digest32e74873f80f81dbcfbd88579bfc3f71d6d9171bd787b6a7be9e5259a5dd29e6. Merged5cf977ac. Backend dpl_CbePaXkqu76aoowiGsU6dVVmrL6a and frontend dpl_CPEdZnJ1DFtwkgdu6wz2kPh8UQRD READY. Canonical calendar1027/TV16/search1/Tokyo14/Lemino2 all200/static_snapshot; original timestamps, health503. DB recovery remains blocked."
+    },
+    {
+      "check": "Main synthetic performance bounded remeasurement",
+      "result": "Main39952478680 mobile/performance first390px1000-record input1003.21ms exceeded unchanged1000ms by3.21ms; ready2211.44ms,CLS.04237,no errors. One unchanged-head remeasurement passed4/4:390px974.70ms/ready2112.34ms;1280px969.71ms/ready2134.61ms; CLS.04237/.01516,no errors. No app/performance/threshold changes; both observations preserved. Actual device gate remains open."
+    },
+    {
+      "check": "Guarded daily data publication and detected deployment boundaries",
+      "result": "39939689022 attempt2 successfully passed fullquality/sourceproof and pushed13a9e63e:1030 movies, generated_at2026-10-23T12:21:40.307684+00:00; MissingJapanese0/Failed0. Subsequent DBsyncP1001 retained. Actual frontend GitHub Vercel status says Deployment rate limited retry24h; backend IgnoredBuildStep canceled. Added realGit regression for3 actual JSON imports; red3→green17/17 after3 exact backend pathspec additions. Both working directories and last-successful-SHA across laterdocs covered. Data/availability and UI-only inputs still skip backend."
+    },
+    {
+      "check": "PR481 exact-source CI",
+      "result": "Sourced2e534a2 all6 workflows successful: backend39954029766, completeness39954029615, Autonomous39954029951, mobile39954029738, frontend39954029705, smoke39954029637. Compiled calendar1030 and all5 APIs200/static_snapshot, health503; full materialized quality passed. RealGit regression red3→green17/17, focused review no blockers. Receipt-only final CI required before merge; actual Vercel latest data publication remains limited."
     }
   ],
   "deployment": {
-    "status": "deployment_pending",
-    "frontend": "2493c6ed READY at existing canonical aliases; artwork fallback published.",
-    "backend": "2493c6ed ERROR: proof passes, quality assertions see materialized backend root config; previouscf8633 still serving. Source-config reader/marker and whole-gate CI reproduction fixed locally.",
-    "database": "Neon free egress exhausted; no paid plan or quota evasion. Writes remain blocked until Nov1 reset."
+    "status": "production_verified",
+    "frontend": "5cf977ac READY at unchanged cinelva.vercel.app and existing aliases; approved logo/colors/local origin preserved.",
+    "backend": "5cf977ac READY at unchanged backend-one-gray-94.vercel.app;5 canonical read APIs200/static_snapshot, DB unavailable, source timestamps preserved. Health503. Previouscf8633 READY deployment retained.",
+    "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
+    "latest_data": "13a9e63e contains1030 movies and director additions; guarded JSON publication succeeded. Frontend Vercel status: deployment rate limited,retry24hours. Backend data deployment canceled because3 bundled JSON inputs absent from ignore script; fix passes17 Git fixture tests and full quality, source/final CI pending. Serving5cf977ac remains1027 films with original source timestamp."
   },
   "blockers": [
     "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
-    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
+    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified.",
+    "Vercel frontend data deployment rate limited for24hours after13a9e63e; no paid upgrade/retry/quota evasion.5cf977ac existing frontend/backend remain READY. Latest1030 snapshot not yet canonical."
   ],
-  "next_action": "Renew receipt-only proof for924e0763; wait final CI; run full production-checks under exact backend materialization, merge480, then verify canonical backend5 read APIs and truthful health503.",
+  "next_action": "Wait receipt-only final CI for PR481, run exact-source materialized production check, merge authorized fix, inspect actual deployment once; do not retry rate limit. Then record blocked external gates, latest serving/source SHAs and reset conditions.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
     "total_tasks": 32,
-    "completed_tasks": 27,
-    "remaining_tasks": 5,
-    "completion_percent": 84.4,
+    "completed_tasks": 28,
+    "remaining_tasks": 4,
+    "completion_percent": 87.5,
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 470,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/470",
-    "merge_sha": "f4109367f6487a0f0cea1c0ea46ea9942a90177f",
-    "source_sha": "f11a9301cca54684e0211b65a3749923b4d4aeab",
-    "receipt_sha": "176a636594cd81572a095dace8849ce1f6b331f5"
+    "number": 480,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/480",
+    "merge_sha": "5cf977ac9f40ea1593f3c8de1b31f628cbff66cf",
+    "source_sha": "924e0763ea51ba4e8c8e01f40916231e9f6282bb",
+    "receipt_sha": "52980b8ebdaa0cf658ebf1fe3169967439a1dbb9"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",

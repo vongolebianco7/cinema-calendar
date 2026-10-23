@@ -62,11 +62,22 @@ test('backend-only HTML is not mistaken for a published root HTML page', t => {
 
 test('all frontend publication inputs build the frontend and skip the backend', t => {
   const repo = fixture(t);
-  for (const file of ['index.html', 'icon.png', 'logo.svg', 'manifest.webmanifest', 'js/app.js', 'assets/theme.css', 'data/movies.json', 'my-cinelva/index.html', 'preview/brand/index.html', 'scripts/build-static.cjs', 'scripts/ignore-frontend-build.sh', 'vercel.json']) {
+  for (const file of ['index.html', 'icon.png', 'logo.svg', 'manifest.webmanifest', 'js/app.js', 'assets/theme.css', 'data/availability.json', 'my-cinelva/index.html', 'preview/brand/index.html', 'scripts/build-static.cjs', 'scripts/ignore-frontend-build.sh', 'vercel.json']) {
     repo.change(file);
     repo.check(frontend, 1, file + ' must build frontend');
     repo.check(backend, 0, file + ' must not build backend');
   }
+});
+
+const snapshotInputs=[...fs.readFileSync('backend/lib/catalog-snapshot.cjs','utf8').matchAll(/require\(['"]\.\.\/\.\.\/(data\/[^'"]+\.json)['"]\)/g)].map(match=>match[1]);
+assert.ok(snapshotInputs.length>=3,'all bundled fallback snapshots must be exercised');
+for(const input of snapshotInputs)test(input+' rebuilds both bundled snapshots and frontend',t=>{
+  const repo=fixture(t),previous=repo.sha();
+  repo.change(input);
+  repo.check(backend,1,'changed bundled snapshot');
+  repo.check(frontend,1,'changed public snapshot');
+  repo.change('docs/operations/checkpoint.md');
+  for(const command of [frontend,backend])repo.check(command,1,'unpublished snapshot across later docs',{VERCEL:'1',VERCEL_GIT_PREVIOUS_SHA:previous});
 });
 
 test('docs, workflow and test-only changes skip both application builds', t => {

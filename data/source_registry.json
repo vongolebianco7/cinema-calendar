@@ -11,7 +11,8 @@
         "movie_metadata",
         "images",
         "ratings",
-        "release_dates"
+        "release_dates",
+        "now_playing"
       ],
       "basis": "Official developer API; non-commercial use with attribution.",
       "terms_url": "https://developer.themoviedb.org/docs/faq",

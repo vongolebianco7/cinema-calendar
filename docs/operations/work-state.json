@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T12:58:10.971081+00:00",
-  "status": "blocked",
+  "updated_at": "2026-10-23T21:44:14.016930+00:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
-  "branch": "docs/final-release-checkpoint-20261023",
-  "head_sha": "d3452c1210bdf641d39473648171964e66b5ac3b",
+  "base_sha": "db3460ca3c80459e633c69eb33d7ac025208d1fb",
+  "branch": "feat/nationwide-now-playing-20261024",
+  "head_sha": "db3460ca3c80459e633c69eb33d7ac025208d1fb",
   "pull_request": null,
   "work_items": [
     {
@@ -554,6 +554,12 @@
       "status": "in_progress",
       "acceptance": "13-item incident ledger; merged after required CI, with unavailable source facts explicitly retained as open.",
       "ci": "475 and473 merged;473 final required4/mobile/Python/contract passed. 476 source1a417676 required4/mobile/Python/contract passed with actual rendered detail-card regression; receiptbe63fa43 CI pending."
+    },
+    {
+      "id": "FEATURE-NOW-PLAYING-20261024",
+      "title": "Nationwide JP now-playing list with shared detail/review/bookmarks",
+      "status": "in_progress",
+      "acceptance": "User approved2026-10-24: discover section,3-column shared cards, full access/search, daily approved TMDB JP snapshot and source/update time, official cinema links. Independent current-list data; fail closed for stale/partial/invalid snapshots. Notifications follow as a later feature."
     }
   ],
   "verification": [
@@ -756,6 +762,10 @@
     {
       "check": "PR481 final source acceptance and integration",
       "result": "Source d2e534a2 all6/final1c31122f all7 successful workflows; realGit tests17/17 and focused review no blockers. Complete materialized production-checks passed public proof and fullquality, digest64289707b8e45ebf4896eb0ec6f99ea0fbb9d4f61c17cedd9e7a7d80e04d7b6d. Mergedd3452c12. Latest data deployment deferred; READY5cf977ac canonical API verification remains the actual serving evidence. Global28/32; remaining rights2/device/users plus operational deployment/DB quota blockers. No unverified completion or user results invented."
+    },
+    {
+      "check": "Nationwide now-playing baseline and initial feature",
+      "result": "Clean baseline fullquality passed atdb3460ca. Collector6 red missing→green; UI6 (including source-file/offline-detail checks) red missing→green; full shared gate passed. Partial API failures preserve previous file, sourceapproval/JP/pagination enforced,36h freshness/future5m checked. Local browser runtime lacked binary; runtime and pinned1.59 downloads both returned truncated0MB archives. No local browser pass claimed. Dedicated CI browser job added without extending existing15minute journey job. Full feature source/proof and actual API population still pending."
     }
   ],
   "deployment": {
@@ -771,7 +781,7 @@
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified.",
     "Both Vercel projects on d3452c12 explicitly report deployment rate limited, retry24hours. Latest1030 snapshot and source fix are not yet canonical; READY5cf977ac preserved."
   ],
-  "next_action": "BLOCKED: no independently READY implementation remains. Once Vercel free capacity is confirmed, release the verified current main once and recheck canonical1030-film source/date plus all5 APIs. Neon free egress reset2026-11-01T00:00:00Z: verify real connectivity before existing guarded sync. Await actual physical Safari,5–10 independent participants and missing artwork origin/permission evidence. Preserve origins,approved UI/local records; no quota evasion or paid upgrade.",
+  "next_action": "Run new dedicated real Chromium/WebKit browser checks in CI after local downloads returned truncated browser archives; normal full quality and12 new units pass. Fix confirmed UI failures, focused review, exact-source CI, receipt-only final CI, merge and verify actual initial data refresh plus canonical publication.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

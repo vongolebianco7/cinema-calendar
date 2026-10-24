@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T18:50:23.357458+00:00",
+  "generated_at": "2026-10-24T20:49:02.687048+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -18410,6 +18410,37 @@
       "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
+      "id": 1510435,
+      "title": "Útóipe Cheilteach",
+      "original_title": "Útóipe Cheilteach",
+      "date": "2026-08-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/tHLx6Kovze6JFslYfm5pOg9hGwU.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1510435",
+      "director": "Dennis Harvey",
+      "director_id": 3899480,
+      "cast": [
+        "Lilí Ní Dhomhnaill",
+        "Charles Hendy",
+        "Andrew Hendy",
+        "Róisín Barrett"
+      ],
+      "countries": [
+        "Sweden",
+        "Ireland"
+      ],
+      "runtime": 90,
+      "genres": [
+        "ドキュメンタリー",
+        "音楽"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "id": 1703744,
       "title": "गौंथली",
       "original_title": "गौंथली",
@@ -19379,8 +19410,8 @@
       "date": "2026-09-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.814,
-      "votes": 229,
+      "score": 6.8,
+      "votes": 230,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/fMvnCWdYpnHUwnMs6u3fKPBHDpP.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -20640,6 +20671,60 @@
       "checked_at": "2026-10-11T09:55:48.622171+00:00"
     },
     {
+      "id": 1768299,
+      "title": "GUN FISH あなたの知らないフグの世界",
+      "original_title": "GUN FISH あなたの知らないフグの世界",
+      "date": "2026-09-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/AszNRkIHpn0mBx5U187SjUDaySE.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "フグをめぐる日本独自の食文化、その歴史や流通、人々との関わりを追ったドキュメンタリー。",
+      "tmdb": "https://www.themoviedb.org/movie/1768299",
+      "director": "Wataru Uno",
+      "director_id": 4543335,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
+      "id": 1652668,
+      "title": "ホーム スイート ホーム",
+      "original_title": "ホーム スイート ホーム",
+      "date": "2026-09-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/opvkKsRtDC7sxFjqdZ6ipfd7oSe.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1652668",
+      "director": "吉川鮎太",
+      "director_id": 3137401,
+      "cast": [
+        "八村倫太郎",
+        "増子敦貴",
+        "駒木根葵汰",
+        "前田公輝"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドラマ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "title": "Mayday",
       "date": "2026-09-04",
       "event": "streaming",
@@ -21185,6 +21270,35 @@
       "checked_at": "2026-10-08T18:34:09.239976+00:00"
     },
     {
+      "id": 1308545,
+      "title": "リンカ リンカ〜あの夏の先",
+      "original_title": "一个夜晚与三个夏天",
+      "date": "2026-09-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/roeFWvFCCY8pwGw1kZC8KkVJP3m.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1308545",
+      "director": "Kangdrun",
+      "director_id": 5598515,
+      "cast": [
+        "Tsering Yangkyi",
+        "Tsekyi Metok",
+        "Dechen Banzom",
+        "Tangsang Lhamo"
+      ],
+      "countries": [
+        "China"
+      ],
+      "runtime": 100,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "title": "交渉人 真下正義",
       "date": "2026-09-11",
       "event": "streaming",
@@ -21405,8 +21519,8 @@
       "date": "2026-09-13",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.174,
-      "votes": 846,
+      "score": 6.173,
+      "votes": 849,
       "overview": "冴えない毎日を過ごすティーンエイジャーのオーウェンにとって、毎週土曜日の22時30分から放送される謎めいたテレビ番組「ピンク・オペーク」は、生きづらい現実を忘れさせてくれる唯一の居場所だった。オーウェンは同じくこの番組に夢中なマディとともに、番組の登場人物と自分たちを重ね合わせるようになっていく。しかしある日、マディはオーウェンの前から姿を消してしまう。ひとり残されたオーウェンは、自分はいったい何者なのか、知りたい気持ちとそれを知ることの怖さとの間で身動きが取れないまま、時間だけが過ぎていく。",
       "poster": "https://image.tmdb.org/t/p/w500/tZWz3jjrRWBA8va6NYEpANNCtQD.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
@@ -21438,8 +21552,8 @@
       "date": "2026-09-13",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.581,
-      "votes": 1055,
+      "score": 6.579,
+      "votes": 1057,
       "overview": "1989年。トレーニングジムで働くルーは、自分の夢をかなえるためラスベガスへ向かう野心家のボディビルダー、ジャッキーと運命的な出会いを果たし恋に落ちる。しかしルーは、街の裏社会を仕切り凶悪な犯罪を繰り返す父親や、夫からDVを受けている姉など、家族にさまざまな問題を抱えていた。そんなルーをかばおうとするジャッキーは、思いもよらない犯罪網へと引きずりこまれていく。",
       "poster": "https://image.tmdb.org/t/p/w500/1bxOOchvNo5SDFTwZ2JljpdOGu9.jpg",
       "source": "U-NEXT公式 2026年9月新着配信ラインナップ",
@@ -21571,8 +21685,8 @@
       "date": "2026-09-17",
       "event": "streaming",
       "service": "Disney+",
-      "score": 7.2,
-      "votes": 2337,
+      "score": 7.178,
+      "votes": 2340,
       "overview": "両親を失い姉と二人で暮らす少女リロは、少し変わった女の子。友達ができず、いつもひとりぼっちの彼女の前に現れたのは、見た目はモフモフで超キュートなのに、ものすごく暴れん坊の不思議な生き物。その正体は、破壊生物として開発されたエイリアン、別名“試作品626号”だった。何も知らずにスティッチと名づけ、彼を家に連れ帰るリロ。その出会いは、思いもよらぬ大事件と、素晴らしい奇跡の幕開けだった…。\r ハワイを舞台に、かけがえのない家族(オハナ)の絆を描く感動のハートフル・ファンタジー。",
       "poster": "https://image.tmdb.org/t/p/w500/hLJV5Ik4vQwU0bhm5P4grBFmrX9.jpg",
       "source": "Disney+公式",
@@ -21902,8 +22016,8 @@
       "date": "2026-09-18",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.718,
-      "votes": 2071,
+      "score": 6.714,
+      "votes": 2079,
       "overview": "プロの殺人ハンターに追われながら30日間生き残らなければならないデスゲーム番組「ランニング・マン」。娘の治療費を稼ぐため、番組に参加することになったベン・リチャーズは予想外に人気者となり、システム全体にとって脅威の存在へと変貌していく。",
       "poster": "https://image.tmdb.org/t/p/w500/nABHEEaT2kweMDOZ0wNLWE0EbTe.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -22089,8 +22203,8 @@
       "date": "2026-09-19",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 8.5,
-      "votes": 1253,
+      "score": 8.541,
+      "votes": 1255,
       "overview": "悪魔の心臓を持つ「チェンソーマン」となり、公安対魔特異4課のデビルハンターに所属する少年・デンジ。憧れのマキマとのデートでうかれる帰り道、雨宿りをしていると、カフェで働く少女レゼと出会いー!?",
       "poster": "https://image.tmdb.org/t/p/w500/dUbacBfy6M0EBLPssQhJFhtHxIU.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -22449,8 +22563,8 @@
       "date": "2026-09-23",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.984,
-      "votes": 645,
+      "score": 7.986,
+      "votes": 653,
       "overview": "ニューヨーク・タイムズのベストセラーを原作とした本作は、博士課程の学生オリーヴが、学科で最も威圧的な教授、アダム・カールセンに衝動的にキスをしてしまうところから物語が始まる。偽りの関係を必要としていた二人の思惑は、やがて化学実験のような関係へと変わっていく。果たして、愛という未知数を解くことはできるのだろうか。",
       "poster": "https://image.tmdb.org/t/p/w500/baZi0cpYCIb78xyhOe9EjC2iRy6.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -22514,7 +22628,7 @@
       "original_title": "Le Procès",
       "date": "2026-09-25",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gSSnEwxXErFMhHwDY8yBPuN6hIj.jpg",
       "score": 7.402,
       "votes": 596,
@@ -22539,7 +22653,10 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "revival": true,
+      "original_jp_release_date": "1964-01-28",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1425485,
@@ -22569,7 +22686,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 717787,
@@ -22594,14 +22711,14 @@
       "countries": [
         "South Korea"
       ],
-      "runtime": 96,
+      "runtime": 98,
       "genres": [
         "アニメーション",
         "ドラマ",
         "謎",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1382513,
@@ -22611,8 +22728,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/1P14ctR5Ym0x5ry5LW3PYizUcei.jpg",
-      "score": 6.949,
-      "votes": 39,
+      "score": 6.915,
+      "votes": 41,
       "overview": "養鶏場で生まれ育った1羽の黒い雌鶏が、出荷用のトラックから脱走した。人生で初めて自由を手に入れた雌鶏は、刺激と危険に満ちた世界を走り抜け、ある事情を抱えた一家が暮らす家にたどり着く。庭に建つニワトリ小屋で新生活をスタートさせた雌鶏はやがて恋をし、初めて産んだ卵を温め育てようとするが、大切な卵は毎日人間に回収されてしまう。我が子がヒヨコになる日を雌鶏が夢見る一方で、飼い主一家はとある事件に巻き込まれる。その先には、両者にとって思いがけない運命が待ち受けていた。",
       "tmdb": "https://www.themoviedb.org/movie/1382513",
       "director": "Pálfi György",
@@ -22633,7 +22750,7 @@
         "アドベンチャー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1263337,
@@ -22644,7 +22761,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/mGmnmCtodvzhpnMFQoZkeGDDVjU.jpg",
       "score": 7.4,
-      "votes": 304,
+      "votes": 326,
       "overview": "アラスカ上空を飛行中、不意のアクシデントにより“魔の領域（ハート・オブ・ビースト）”と呼ばれる奥地に不時着した、退役兵のジェームズと元偵察犬で義足のオーディン。立ちはだかる大自然を乗り越え「生きて還る」には、愛する存在のためにすべてを捧げる覚悟が必要だった。",
       "tmdb": "https://www.themoviedb.org/movie/1263337",
       "director": "デヴィッド・エアー",
@@ -22663,7 +22780,7 @@
         "アドベンチャー",
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1697647,
@@ -22690,7 +22807,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1670061,
@@ -22719,7 +22836,7 @@
         "スリラー",
         "犯罪"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1651263,
@@ -22750,7 +22867,7 @@
         "犯罪",
         "謎"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1595400,
@@ -22779,7 +22896,7 @@
       "genres": [
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1567787,
@@ -22808,7 +22925,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1496928,
@@ -22839,7 +22956,7 @@
         "アニメーション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1448971,
@@ -22871,7 +22988,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "title": "366日",
@@ -23047,7 +23164,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 8.023,
-      "votes": 12751,
+      "votes": 12762,
       "overview": "第2次世界大戦中、才能にあふれた物理学者のロバート・オッペンハイマーは、核開発を急ぐ米政府のマンハッタン計画において、原爆開発プロジェクトの委員長に任命される。しかし、実験で原爆の威力を目の当たりにし、さらにはそれが実戦で投下され、恐るべき大量破壊兵器を生み出したことに衝撃を受けたオッペンハイマーは、戦後、さらなる威力をもった水素爆弾の開発に反対するようになるが……。",
       "poster": "https://image.tmdb.org/t/p/w500/stEuHtfsjd7MYJcVzuAjVyvsXcj.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -23153,8 +23270,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vDnJLpE2jhu8OVcwpWuYCMF5hRU.jpg",
-      "score": 7.443,
-      "votes": 3690,
+      "score": 7.436,
+      "votes": 3828,
       "overview": "気象キャスターのマーガレットとサイバーセキュリティのエキスパート、ダニエル。接点のないはずの二人が衝撃的な機密情報を知ることとなった。やがて、その秘密を明らかにする使命を負った彼らの前に謎の組織が立ちはだかる――。",
       "tmdb": "https://www.themoviedb.org/movie/1275779",
       "director": "スティーヴン・スピルバーグ",
@@ -23173,7 +23290,7 @@
         "サイエンスフィクション",
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1054867,
@@ -23606,7 +23723,7 @@
       "original_title": "still dark",
       "date": "2026-10-03",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/tmJrPruWPchsLVeQHRPLJ8VENo.jpg",
       "score": 0.0,
       "votes": 0,
@@ -23624,7 +23741,10 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "revival": true,
+      "original_jp_release_date": "2020-02-04",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1393151,
@@ -23939,8 +24059,8 @@
       "date": "2026-10-06",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 8.468,
-      "votes": 5985,
+      "score": 8.47,
+      "votes": 6050,
       "overview": "愛する人たちを守るために、彼らの記憶から自らの存在を消すという決断をした『スパイダーマン：ノー・ウェイ・ホーム』の出来事から４年。大人になったピーター・パーカーはスパイダーマンとして、ニューヨークの負う彼の体に驚くべき身体的変異が起こり始める。同時に、街では姿なき不可解な犯罪が頻発。“親愛なる隣人”に、かつて直面したことのない大きな脅威が迫る──。",
       "poster": "https://image.tmdb.org/t/p/w500/hvbs76wGMZYqJSvaRps5jDzHUhN.jpg",
       "source": "公式配信発表（2026-10-22確認）",
@@ -24012,7 +24132,7 @@
       "event": "streaming",
       "service": "Lemino",
       "score": 8.2,
-      "votes": 9,
+      "votes": 10,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/cru4ROm3U71JAuAH9LqwpAcZPIE.jpg",
       "source": "公式配給会社の配信開始発表",
@@ -24079,7 +24199,7 @@
       "original_title": "La Haine",
       "date": "2026-10-09",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
       "score": 8.089,
       "votes": 4763,
@@ -24100,7 +24220,10 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "revival": true,
+      "original_jp_release_date": "1996-02-17",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1423191,
@@ -24274,7 +24397,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "title": "映画 この素晴らしい世界に祝福を！紅伝説",
@@ -24321,8 +24444,8 @@
       "date": "2026-10-09",
       "event": "streaming",
       "service": "Apple TV+",
-      "score": 7.8,
-      "votes": 471,
+      "score": 7.759,
+      "votes": 481,
       "overview": "子供の頃の友人グループが再結成する。すると、彼らは危険な国際的陰謀に遭遇することに。そして、その仲間たちの再会は意外な展開を見せる。世界を救うという使命が、彼らに託されるのであった。",
       "poster": "https://image.tmdb.org/t/p/w500/4bY4EvWpIoi8Q9F51l9OyeuDd5X.jpg",
       "source": "Apple TV Press 2026 lineup",
@@ -24445,7 +24568,7 @@
       "date": "2026-10-11",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.906,
+      "score": 6.905,
       "votes": 3295,
       "overview": "魔法と幻想の国・オズにあるシズ大学の学生として出会ったエルファバとグリンダ。緑色の肌をもち周囲から誤解されてしまうエルファバと、野心的で美しく人気者のグリンダは、寄宿舎で偶然ルームメイトになる。見た目も性格もまったく異なる2人は、最初こそ激しく衝突するが、次第に友情を深め、かけがえのない存在になっていく。しかしこの出会いが、やがてオズの国の運命を大きく変えることになる。",
       "poster": "https://image.tmdb.org/t/p/w500/abWp6QofDjD8fDEHV92BZnznj4.jpg",
@@ -24542,8 +24665,8 @@
       "date": "2026-10-14",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.746,
-      "votes": 126,
+      "score": 6.793,
+      "votes": 135,
       "overview": "「内なる炎」のレイチェル・モリソン監督が贈る「生涯の愛」。マヤとチャーリーの偶然の出会いは世紀のロマンスへと発展し、マヤの想像を超えた未来が開けていく。だが、その未来は突然 閉ざされ、彼女は思いがけず新たな人生へと投げ出される。マヤは自分が何者で、何を望んでいるのかを見つめ直し、再び人を愛する道を模索する。",
       "poster": "https://image.tmdb.org/t/p/w500/hPGQkr1FqOLOEX5q77KXFa33JYq.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -24609,8 +24732,8 @@
       "date": "2026-10-15",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.323,
-      "votes": 5644,
+      "score": 7.322,
+      "votes": 5654,
       "overview": "大手メディア「デイリー・プラネット」で平凡に働くクラーク・ケント、彼の本当の正体は人々を守るヒーロー「スーパーマン」。子どもも大人も、愛する地球で生きるすべての人を守り救うため、日々戦うスーパーマンは、誰からも愛される存在。そんな中、彼を地球の脅威とみなし暗躍する、最高の頭脳を持つ宿敵＝天才科学者して大富豪、レックス・ルーサーの世界を巻き込む綿密な計画が動き出すー",
       "poster": "https://image.tmdb.org/t/p/w500/eFnvujCLaUbhmrsRZzFy1bpdMko.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -24648,7 +24771,7 @@
       "original_title": "太陽を盗んだ男",
       "date": "2026-10-16",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/avcCRRIsQ1Toz0F18zvQ5zOg7QR.jpg",
       "score": 7.372,
       "votes": 43,
@@ -24671,7 +24794,10 @@
         "スリラー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "revival": true,
+      "original_jp_release_date": "1979-10-06",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 793058,
@@ -24945,7 +25071,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1805382,
@@ -24968,12 +25094,42 @@
       "checked_at": "2026-10-23T18:49:38.604313+00:00"
     },
     {
+      "id": 1462841,
+      "title": "LEONIDAS",
+      "original_title": "LEONIDAS",
+      "date": "2026-10-16",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/aiWQBdmDcZc0RjVCkie2LKPzMnu.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1462841",
+      "director": "Junki Tachibana",
+      "director_id": 3711357,
+      "cast": [
+        "Wataru Monma",
+        "永田凜",
+        "仲野温",
+        "Moctar Diouf"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 89,
+      "genres": [
+        "ドラマ",
+        "音楽"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "title": "マスタープラン",
       "date": "2026-10-16",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.0,
-      "votes": 147,
+      "score": 6.99,
+      "votes": 151,
       "overview": "ある伝説の泥棒が「モナ・リザ」を狙い、見知らぬ２人の若者を仲間に引き入れる。１人はイタリア人のサイバー犯罪のスペシャリスト、キアラ。もう１人はフランス人の爆発物のスペシャリスト、ジェイだ。そして自分が２人の父親であることを明かす。怒濤の展開で急に家族となった彼らが世紀の大強盗を成功させるには、協力し合い、互いに殺し合わないように努めなければならない。",
       "poster": "https://image.tmdb.org/t/p/w500/8EPrnSM1MjDd9NGuzXrcI5KlG9e.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25035,7 +25191,7 @@
       "date": "2026-10-17",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.696,
+      "score": 6.7,
       "votes": 102,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/sM1CDaFdb4WNjtxsbV1Rw78km0A.jpg",
@@ -25486,7 +25642,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.032,
-      "votes": 4605,
+      "votes": 4608,
       "overview": "世界中を虜にした名作『チャーリーとチョコレート工場』で有名な工場長ウィリー・ウォンカの若き日の物語。夢見ることを禁じられた町で、ウォンカは母と夢見た世界一のチョコレート工場をつくることができるのか―？「ハリー・ポッター」シリーズのプロデューサーが、次世代のジョニー・デップとの呼び声高いティモシー・シャラメ、名優ヒュー・グラントら超豪華キャストを迎えて贈る、歌と魔法と感動のファンタジー超大作！",
       "poster": "https://image.tmdb.org/t/p/w500/iKYFLQoYQRuogD2mh8QYZQXPnTT.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25679,8 +25835,8 @@
       "date": "2026-10-25",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.14,
-      "votes": 448,
+      "score": 6.141,
+      "votes": 449,
       "overview": "友人の結婚式で出会った男女がレンタカーのカーナビに導かれてたどり着いた、奇妙な“ドア”。通り抜けると＜人生で一番やり直したい日＞へとタイムスリップしていた…。【最悪な思い出】から【最高の愛】を見つけるための、ふたりの時空旅行がはじまる─。",
       "poster": "https://image.tmdb.org/t/p/w500/y0eo1A4EPKSg380hm4mYNQPuU3O.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25755,7 +25911,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 8.448,
-      "votes": 28658,
+      "votes": 28667,
       "overview": "はるか昔。闇の冥王サウロンは世界を滅ぼす魔力を秘めたひとつの指輪を作り出した。指輪の力に支配された中つ国では一人の勇者がサウロンの指を切り落とし、国を悪から救った。それから数千年の時を経た中つ国第3世紀。ある時、指輪がホビット族の青年フロドの手に渡る。しかし、指輪を取り戻そうとするサウロンの部下が迫っていた。世界を守るためには指輪をオロドルイン山の火口、“滅びの亀裂”に投げ込み破壊するしか方法はない。そこでフロドを中心とする9人の仲間が結成され、彼らは“滅びの亀裂”目指し、遥かなる冒険の旅に出るのだった。",
       "poster": "https://image.tmdb.org/t/p/w500/9H6kyppkOJ1xkVN1s3LIFcPQKPO.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25793,8 +25949,8 @@
       "date": "2026-10-26",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 8.431,
-      "votes": 24817,
+      "score": 8.432,
+      "votes": 24829,
       "overview": "オーク達の襲撃で離散してしまった「旅の仲間」達。フロドとサムは独力でモルドールの滅びの山への旅路を続けていた。荒涼とした景色が広がるをエミン・ムイル行くその2人の後を指輪の前の持ち主ゴラムが追跡していた。ゴラムを罠に掛けて捕らえた2人だが、すぐに殺そうと主張するサムに対し、フロドはエルフの綱につながれて苦しむゴラムを哀れに思い綱をほどく。フロドは情けをかけてゴラムを信じ、モルドールへの道案内を任せる事にする。",
       "poster": "https://image.tmdb.org/t/p/w500/3BEdEW1xzfXSohN9RSFxWe1inIW.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25833,7 +25989,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 8.505,
-      "votes": 27652,
+      "votes": 27659,
       "overview": "昼なお暗いモルドールの山。フロドが眠る隣でゴラムは、彼の“愛しいしと”たる指輪を初めて手に入れたときのことを思い出していた。彼はホビットの支族ストゥア族で スメアゴルと呼ばれていた。ある日、いっしょに川で魚を釣っていたデアゴルが川に落ちてたまたま指輪を拾う。スメアゴルはその指輪を見た瞬間に指輪に魅せられ、それを奪おうとしてデアゴルを殺してしまった。そのために村を追放された彼は、指輪だけを友に長い年月を過ごすうちに指輪の魔力に蝕まれ、徐々に心身ともに変貌し現在の姿になったのだ。眠りから目覚めたサムはゴラムの邪心を疑うが、フロドはそんなサムをいさめる。",
       "poster": "https://image.tmdb.org/t/p/w500/1ERoOlu6Icv5J7Wnx79H5QmA7uH.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -25984,7 +26140,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.337,
-      "votes": 4432,
+      "votes": 4445,
       "overview": "元革命家の頼りない中年男ボブ。彼はさらわれた愛娘を取り戻すため、かつての仲間や謎めいた空手のセンセイの助けを借りながら、恐ろしい軍人ロックジョーに立ち向かっていく。",
       "poster": "https://image.tmdb.org/t/p/w500/6963S9BQk07eEk8r26eaHgw0RNY.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -26227,7 +26383,7 @@
       "date": "2026-10-30",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.25,
+      "score": 7.2,
       "votes": 8,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/6IHypVNR2WBcfxU1E4WAZvCpN18.jpg",
@@ -26452,7 +26608,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1567149,
@@ -26483,7 +26639,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1527427,
@@ -26512,7 +26668,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1313587,
@@ -26524,7 +26680,7 @@
       "poster": "https://image.tmdb.org/t/p/w500/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
       "score": 0.0,
       "votes": 0,
-      "overview": "",
+      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
       "tmdb": "https://www.themoviedb.org/movie/1313587",
       "director": "錦織敦史",
       "director_id": 109192,
@@ -26544,7 +26700,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1283515,
@@ -26624,7 +26780,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 106378,
@@ -26632,7 +26788,7 @@
       "original_title": "南極料理人",
       "date": "2026-11-13",
       "event": "theatrical",
-      "service": "劇場公開",
+      "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/99vPuzrGf8cDIvpaLaTdyj0s9tF.jpg",
       "score": 7.083,
       "votes": 54,
@@ -26654,7 +26810,10 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "revival": true,
+      "original_jp_release_date": "2009-08-08",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1306816,
@@ -26684,7 +26843,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 338969,
@@ -26930,6 +27089,30 @@
         "ホラー"
       ],
       "checked_at": "2026-10-23T18:49:38.604313+00:00"
+    },
+    {
+      "id": 1806317,
+      "title": "......overcome with あふれた..",
+      "original_title": "......overcome with あふれた..",
+      "date": "2026-11-13",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/lI3GfPTxS6SN0D1BmfbkbmHBaSI.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "クリーニング店で働くシングルマザーのさくらは、周囲の人々と言葉を交わさないまま日々を過ごしている。彼女が沈黙を続ける理由は、やがて彼女がつづった1通の手紙により明らかになる。",
+      "tmdb": "https://www.themoviedb.org/movie/1806317",
+      "director": "加納美帆",
+      "director_id": 6572080,
+      "cast": [
+        "芋生悠",
+        "さとうほなみ",
+        "豊原功補"
+      ],
+      "countries": [],
+      "runtime": 38,
+      "genres": [],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "title": "Being Heumann",

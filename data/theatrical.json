@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-23T18:49:38.604313+00:00",
+  "generated_at": "2026-10-24T20:48:23.300025+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-23",
-      "2027-02-20"
+      "2026-09-24",
+      "2027-02-21"
     ],
     "background_slice": [
-      "2026-06-20",
-      "2026-08-18"
+      "2026-08-20",
+      "2026-10-18"
     ],
     "max_detail_requests": 40
   },
@@ -18359,6 +18359,37 @@
       "checked_at": "2026-09-28T18:31:59.587462+00:00"
     },
     {
+      "id": 1510435,
+      "title": "Útóipe Cheilteach",
+      "original_title": "Útóipe Cheilteach",
+      "date": "2026-08-22",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/tHLx6Kovze6JFslYfm5pOg9hGwU.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1510435",
+      "director": "Dennis Harvey",
+      "director_id": 3899480,
+      "cast": [
+        "Lilí Ní Dhomhnaill",
+        "Charles Hendy",
+        "Andrew Hendy",
+        "Róisín Barrett"
+      ],
+      "countries": [
+        "Sweden",
+        "Ireland"
+      ],
+      "runtime": 90,
+      "genres": [
+        "ドキュメンタリー",
+        "音楽"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "id": 1703744,
       "title": "गौंथली",
       "original_title": "गौंथली",
@@ -19146,6 +19177,60 @@
       "checked_at": "2026-10-11T09:55:48.622171+00:00"
     },
     {
+      "id": 1768299,
+      "title": "GUN FISH あなたの知らないフグの世界",
+      "original_title": "GUN FISH あなたの知らないフグの世界",
+      "date": "2026-09-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/AszNRkIHpn0mBx5U187SjUDaySE.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "フグをめぐる日本独自の食文化、その歴史や流通、人々との関わりを追ったドキュメンタリー。",
+      "tmdb": "https://www.themoviedb.org/movie/1768299",
+      "director": "Wataru Uno",
+      "director_id": 4543335,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
+      "id": 1652668,
+      "title": "ホーム スイート ホーム",
+      "original_title": "ホーム スイート ホーム",
+      "date": "2026-09-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/opvkKsRtDC7sxFjqdZ6ipfd7oSe.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1652668",
+      "director": "吉川鮎太",
+      "director_id": 3137401,
+      "cast": [
+        "八村倫太郎",
+        "増子敦貴",
+        "駒木根葵汰",
+        "前田公輝"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドラマ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+    },
+    {
       "id": 1485195,
       "title": "沼影市民プール",
       "original_title": "沼影市民プール",
@@ -19505,6 +19590,35 @@
         "音楽"
       ],
       "checked_at": "2026-10-08T18:34:09.239976+00:00"
+    },
+    {
+      "id": 1308545,
+      "title": "リンカ リンカ〜あの夏の先",
+      "original_title": "一个夜晚与三个夏天",
+      "date": "2026-09-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/roeFWvFCCY8pwGw1kZC8KkVJP3m.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1308545",
+      "director": "Kangdrun",
+      "director_id": 5598515,
+      "cast": [
+        "Tsering Yangkyi",
+        "Tsekyi Metok",
+        "Dechen Banzom",
+        "Tangsang Lhamo"
+      ],
+      "countries": [
+        "China"
+      ],
+      "runtime": 100,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1767856,
@@ -20294,7 +20408,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 717787,
@@ -20319,14 +20433,14 @@
       "countries": [
         "South Korea"
       ],
-      "runtime": 96,
+      "runtime": 98,
       "genres": [
         "アニメーション",
         "ドラマ",
         "謎",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1382513,
@@ -20336,8 +20450,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/1P14ctR5Ym0x5ry5LW3PYizUcei.jpg",
-      "score": 6.949,
-      "votes": 39,
+      "score": 6.915,
+      "votes": 41,
       "overview": "養鶏場で生まれ育った1羽の黒い雌鶏が、出荷用のトラックから脱走した。人生で初めて自由を手に入れた雌鶏は、刺激と危険に満ちた世界を走り抜け、ある事情を抱えた一家が暮らす家にたどり着く。庭に建つニワトリ小屋で新生活をスタートさせた雌鶏はやがて恋をし、初めて産んだ卵を温め育てようとするが、大切な卵は毎日人間に回収されてしまう。我が子がヒヨコになる日を雌鶏が夢見る一方で、飼い主一家はとある事件に巻き込まれる。その先には、両者にとって思いがけない運命が待ち受けていた。",
       "tmdb": "https://www.themoviedb.org/movie/1382513",
       "director": "Pálfi György",
@@ -20358,7 +20472,7 @@
         "アドベンチャー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1263337,
@@ -20369,7 +20483,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/mGmnmCtodvzhpnMFQoZkeGDDVjU.jpg",
       "score": 7.4,
-      "votes": 304,
+      "votes": 326,
       "overview": "アラスカ上空を飛行中、不意のアクシデントにより“魔の領域（ハート・オブ・ビースト）”と呼ばれる奥地に不時着した、退役兵のジェームズと元偵察犬で義足のオーディン。立ちはだかる大自然を乗り越え「生きて還る」には、愛する存在のためにすべてを捧げる覚悟が必要だった。",
       "tmdb": "https://www.themoviedb.org/movie/1263337",
       "director": "デヴィッド・エアー",
@@ -20388,7 +20502,7 @@
         "アドベンチャー",
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1697647,
@@ -20415,7 +20529,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1670061,
@@ -20444,7 +20558,7 @@
         "スリラー",
         "犯罪"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1651263,
@@ -20475,7 +20589,7 @@
         "犯罪",
         "謎"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1595400,
@@ -20504,7 +20618,7 @@
       "genres": [
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1567787,
@@ -20533,7 +20647,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1496928,
@@ -20564,7 +20678,7 @@
         "アニメーション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1448971,
@@ -20596,7 +20710,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1801103,
@@ -20693,8 +20807,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vDnJLpE2jhu8OVcwpWuYCMF5hRU.jpg",
-      "score": 7.443,
-      "votes": 3690,
+      "score": 7.436,
+      "votes": 3828,
       "overview": "気象キャスターのマーガレットとサイバーセキュリティのエキスパート、ダニエル。接点のないはずの二人が衝撃的な機密情報を知ることとなった。やがて、その秘密を明らかにする使命を負った彼らの前に謎の組織が立ちはだかる――。",
       "tmdb": "https://www.themoviedb.org/movie/1275779",
       "director": "スティーヴン・スピルバーグ",
@@ -20713,7 +20827,7 @@
         "サイエンスフィクション",
         "スリラー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1333141,
@@ -21488,7 +21602,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 621689,
@@ -21901,7 +22015,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1805382,
@@ -21922,6 +22036,36 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-10-23T18:49:38.604313+00:00"
+    },
+    {
+      "id": 1462841,
+      "title": "LEONIDAS",
+      "original_title": "LEONIDAS",
+      "date": "2026-10-16",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/aiWQBdmDcZc0RjVCkie2LKPzMnu.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1462841",
+      "director": "Junki Tachibana",
+      "director_id": 3711357,
+      "cast": [
+        "Wataru Monma",
+        "永田凜",
+        "仲野温",
+        "Moctar Diouf"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 89,
+      "genres": [
+        "ドラマ",
+        "音楽"
+      ],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1774868,
@@ -22762,7 +22906,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1567149,
@@ -22793,7 +22937,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1527427,
@@ -22822,7 +22966,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1313587,
@@ -22834,7 +22978,7 @@
       "poster": "https://image.tmdb.org/t/p/w500/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
       "score": 0.0,
       "votes": 0,
-      "overview": "",
+      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
       "tmdb": "https://www.themoviedb.org/movie/1313587",
       "director": "錦織敦史",
       "director_id": 109192,
@@ -22854,7 +22998,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1283515,
@@ -22934,7 +23078,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 106378,
@@ -22997,7 +23141,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-17T18:39:59.690227+00:00"
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 338969,
@@ -23243,6 +23387,30 @@
         "ホラー"
       ],
       "checked_at": "2026-10-23T18:49:38.604313+00:00"
+    },
+    {
+      "id": 1806317,
+      "title": "......overcome with あふれた..",
+      "original_title": "......overcome with あふれた..",
+      "date": "2026-11-13",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/lI3GfPTxS6SN0D1BmfbkbmHBaSI.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "クリーニング店で働くシングルマザーのさくらは、周囲の人々と言葉を交わさないまま日々を過ごしている。彼女が沈黙を続ける理由は、やがて彼女がつづった1通の手紙により明らかになる。",
+      "tmdb": "https://www.themoviedb.org/movie/1806317",
+      "director": "加納美帆",
+      "director_id": 6572080,
+      "cast": [
+        "芋生悠",
+        "さとうほなみ",
+        "豊原功補"
+      ],
+      "countries": [],
+      "runtime": 38,
+      "genres": [],
+      "checked_at": "2026-10-24T20:48:23.300025+00:00"
     },
     {
       "id": 1159206,

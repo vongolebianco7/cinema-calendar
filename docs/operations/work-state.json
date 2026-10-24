@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-24T11:45:05.651415+00:00",
-  "status": "ci_passed",
+  "updated_at": "2026-10-24T12:02:48.022761+00:00",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "ee534a32eb086d37e0117ee974c1a45e3ef1f44f",
   "branch": "fix/shared-now-playing-labels-20261024",
-  "head_sha": "4f1807f3ad155d8a8fb38f7594fee6bc40600dcd",
+  "head_sha": "eb9f6972000ea95ac89a87abbb28543640e1efe6",
   "pull_request": 489,
   "work_items": [
     {
@@ -573,9 +573,9 @@
     {
       "id": "FIX-SHARED-NOW-LABEL-20261024",
       "title": "Show current screening labels across movie views and official revival/morning periods",
-      "status": "ci_passed",
+      "status": "production_verified",
       "acceptance": "Exact IDs across shared posters and movie links; finite official screening periods inclusive Japan dates; start-only/ended/future excluded; current blue appearance preserved; local records/actions unchanged.",
-      "ci": "PR489 source4f1807f3 all6 workflows passed including Autonomous40090550391, smoke40090550482, frontend40090550462, backend40090550449.11 focused tests/shared quality passed.9 actual entry points bootstrap labels with fixture poster/link/current/ended/start-only coverage at390px in Chromium/WebKit; existing calendar themes/root/prefix/actions/expiry and full mobile journeys pass. One focused review found ranking fallback contract; fixed with image+placeholder preserved and browser failure check. Receipt/final CI/merge/production verification pending."
+      "ci": "PR489 source4f1807f3 all6 workflows passed including Autonomous40090550391, smoke40090550482, frontend40090550462, backend40090550449.11 focused tests/shared quality passed.9 actual entry points bootstrap labels with fixture poster/link/current/ended/start-only coverage at390px in Chromium/WebKit; existing calendar themes/root/prefix/actions/expiry and full mobile journeys pass. One focused review found ranking fallback contract; fixed with image+placeholder preserved and browser failure check. Receipt/final CI/merge/production verification pending. Final604c7572 all7 workflows passed; merged eb9f6972. Frontend dpl_Aoctitp5QUhQxHyrMpscmWKzfPLL READY exact merge. Canonical real browser: current morning-ten椿三十郎 and revivalビッグ・フィッシュ labels, ended/future absent; revival feature and standalone detail label587, discovery16 labels including4 outside now-playing list; default ranking80 IDs annotated, zero current-snapshot overlap and correctly zero badges. No page overflow. Materialized production proof+full quality passed."
     }
   ],
   "verification": [

@@ -3132,12 +3132,13 @@
       "film_title": "Faust",
       "work_id": "award-work:3fe28ce2c87a5fe275dd",
       "match_status": "resolved",
-      "tmdb_id": 11409,
-      "release_year": 2009,
-      "display_title": "Faust",
-      "match_method": "tmdb_api_exact_title_release_window",
-      "identity_source": "https://www.themoviedb.org/movie/11409",
-      "identity_checked_at": "2026-10-16T22:05:27.356164+00:00"
+      "tmdb_id": 77560,
+      "release_year": 2011,
+      "display_title": "ファウスト",
+      "match_method": "official_award_director_and_tmdb_detail_verified",
+      "identity_source": "https://www.themoviedb.org/movie/77560",
+      "identity_checked_at": "2026-10-25",
+      "poster": "https://image.tmdb.org/t/p/w500/91J0oGT1nIVea6TSnLanQhYQujZ.jpg"
     },
     {
       "year": 2011,
@@ -9575,13 +9576,13 @@
       "poster": "https://image.tmdb.org/t/p/w342/h2LfVPUJowJnwYtyb1no3M19mu9.jpg"
     },
     {
-      "id": 11409,
-      "title": "Faust",
+      "id": 77560,
+      "title": "ファウスト",
       "original_title": "Faust",
-      "year": "2009",
-      "poster": null,
-      "score": 0,
-      "votes": 0
+      "year": "2011",
+      "poster": "https://image.tmdb.org/t/p/w500/91J0oGT1nIVea6TSnLanQhYQujZ.jpg",
+      "score": 6.6,
+      "votes": 216
     },
     {
       "title": "ソーシャル・ネットワーク",

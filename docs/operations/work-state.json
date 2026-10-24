@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-24T07:56:11.918250+00:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-24T09:58:48.607098+00:00",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "2fd0d93f85a2266030264c586cf26e049d2dd2b4",
   "branch": "feat/calendar-now-playing-label-20261024",
-  "head_sha": "2fd0d93f85a2266030264c586cf26e049d2dd2b4",
-  "pull_request": null,
+  "head_sha": "cf64f3133fbea63c73bb6c2cbf7872696631a334",
+  "pull_request": 486,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -566,8 +566,9 @@
     {
       "id": "FEATURE-CALENDAR-NOW-LABEL-20261024",
       "title": "Show current nationwide now-playing labels on calendar posters",
-      "status": "in_progress",
-      "acceptance": "Root/prefix theatrical/streaming/TV/calendar thumbnails: exact TMDB ID and fresh verified nationwide snapshot only. No label on stale/future/unavailable data, no title/date inference. Preserve poster click/review/bookmark/date/layout/palette; rerenders idempotent, long-open pages expire status."
+      "status": "ci_passed",
+      "acceptance": "Root/prefix theatrical/streaming/TV/calendar thumbnails: exact TMDB ID and fresh verified nationwide snapshot only. No label on stale/future/unavailable data, no title/date inference. Preserve poster click/review/bookmark/date/layout/palette; rerenders idempotent, long-open pages expire status.",
+      "ci": "Source cf64f313 all10 workflows passed, including Autonomous40076367858, smoke40076367881, frontend40076367923, backend40076367869; shared quality passed locally. Chromium/WebKit root/prefix light/dark theatrical/streaming/TV, exact ID and37h expiry passed. Focused review: no Critical/Important. Receipt/final CI/merge/production verification pending."
     }
   ],
   "verification": [

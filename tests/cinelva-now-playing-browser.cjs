@@ -34,17 +34,17 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    await wrap.locator('.cinelva-rate-button').click();assert.equal(await page.locator('#cinelvaRateTitle').innerText(),movies[0].title);
    await page.locator('#cinelvaRateScore').fill('4.2');await page.locator('#cinelvaRateScore').dispatchEvent('input');await page.locator('#cinelvaRateComment').fill('上映中一覧から記録');await page.locator('#cinelvaRateSave').click();
    await page.waitForFunction(()=>!document.querySelector('.cinelva-rate-dialog')?.open);
-   await page.reload({waitUntil:'domcontentloaded'});await cards.first().waitFor();assert.equal(await wrap.locator('.cinelva-bookmark-button').getAttribute('aria-pressed'),'true');assert.match(await wrap.innerText(),/4\.2/);
+   await page.waitForLoadState('networkidle');await page.reload({waitUntil:'domcontentloaded'});await cards.first().waitFor();assert.equal(await wrap.locator('.cinelva-bookmark-button').getAttribute('aria-pressed'),'true');assert.match(await wrap.innerText(),/4\.2/);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await assertTextContrast(page,['#nowPlaying h2','#nowPlaying .now-playing-note','#nowPlaying .now-playing-source','#nowPlaying [data-now-status]','#nowPlaying .presetCardTitle','#nowPlaying label'],`${engine}/${theme}/${route}`);
    await section.screenshot({path:`artifacts/now-playing/${engine}-${theme}-${route.replaceAll('/','-')}.png`});
-   await cards.first().click();await page.locator('#detail h2').waitFor();assert.equal(await page.locator('#detail h2').innerText(),movies[0].title);assert.equal(new URL(page.url()).searchParams.get('id'),String(movies[0].id));
+   await page.waitForLoadState('networkidle');await cards.first().click();await page.locator('#detail h2').waitFor();assert.equal(await page.locator('#detail h2').innerText(),movies[0].title);assert.equal(new URL(page.url()).searchParams.get('id'),String(movies[0].id));
    if(theme==='light'&&route==='discover.html'){
     for(const [value,message] of [[{...fresh(),movies:[]},'確認できる上映中作品はありません'],[{...fresh(),generated_at:new Date(Date.now()-37*3600000).toISOString()},'更新が必要'],[{...fresh(),generated_at:new Date(Date.now()+3600000).toISOString()},'取得できません'],[{...fresh(),region:'US'},'取得できません'],[null,'取得できません']]){
-     payload=value;fail=value===null;await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});await page.waitForFunction(text=>document.querySelector('#nowPlaying [data-now-status]')?.textContent.includes(text),message);assert.equal(await cards.count(),0);assert.equal(await section.locator('[data-now-controls]').isVisible(),false);
+     payload=value;fail=value===null;await page.waitForLoadState('networkidle');await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});await page.waitForFunction(text=>document.querySelector('#nowPlaying [data-now-status]')?.textContent.includes(text),message);assert.equal(await cards.count(),0);assert.equal(await section.locator('[data-now-controls]').isVisible(),false);
     }
    }
-   assert.deepEqual(errors,[]);await context.close();
+   await page.waitForLoadState('networkidle');assert.deepEqual(errors,[]);await context.close();
   }
   console.log(`${engine}: nationwide now-playing root/prefix, light/dark,17-title expansion/search, shared review/bookmark persistence, offline detail and unavailable/stale/empty checks passed`);
  }finally{await browser?.close();server.kill();}

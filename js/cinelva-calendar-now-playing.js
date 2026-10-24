@@ -31,7 +31,8 @@
   function wrap(image){
    const parent=image.parentElement;
    if(parent.matches('[data-now-film-id],.poster,.cinelva-label-poster'))return parent;
-   const holder=doc.createElement('span');holder.className='cinelva-label-poster';image.before(holder);holder.append(image);return holder;
+   const fallback=image.getAttribute('onerror')?.includes('nextElementSibling')?image.nextElementSibling:null;
+   const holder=doc.createElement('span');holder.className='cinelva-label-poster';image.before(holder);holder.append(image);if(fallback)holder.append(fallback);return holder;
   }
  }
  function reconcile(doc,data,now=Date.now()){

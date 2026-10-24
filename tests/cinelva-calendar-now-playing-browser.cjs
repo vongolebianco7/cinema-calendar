@@ -43,12 +43,16 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.evaluate(()=>{
     const section=document.createElement('section');section.id='shared-label-proof';section.style='display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px';
     section.innerHTML=[42,43,44,45,46,47].map(id=>`<a href="search.html?id=${id}"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="display:block;width:100%;aspect-ratio:2/3"><span>作品${id}</span></a>`).join('');
+    section.insertAdjacentHTML('beforeend','<a class="rankCard" id="rank-failure-proof" href="search.html?id=43"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="width:100%" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="rankPosterPlaceholder" hidden>ポスター未取得</span></a>');
     document.body.prepend(section);
     const holder=document.createElement('div');holder.className='poster';holder.id='direct-hydrated-poster';section.append(holder);window.CinelvaMovieIdentity.hydrateCard(holder,{tmdbId:44,poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'});
    });
    for(const id of [42,44,45])await page.locator(`#shared-label-proof [data-now-film-id="${id}"] > .cinelva-now-playing-label`).first().waitFor();
    for(const id of [43,46,47])assert.equal(await page.locator(`#shared-label-proof [data-now-film-id="${id}"] > .cinelva-now-playing-label`).count(),0,route+' does not infer ended/start-only');
    assert.equal(await page.locator('#direct-hydrated-poster > .cinelva-now-playing-label').count(),1);
+   await page.locator('#rank-failure-proof .cinelva-label-poster').waitFor();
+   await page.locator('#rank-failure-proof img').dispatchEvent('error');
+   assert.equal(await page.locator('#rank-failure-proof .rankPosterPlaceholder').isVisible(),true,'real rank-card failure fallback survives label wrapper');
    const sizes=await page.locator('#shared-label-proof .cinelva-now-playing-label').evaluateAll(nodes=>nodes.map(e=>{const a=e.getBoundingClientRect(),b=e.parentElement.getBoundingClientRect();return a.left>=b.left&&a.right<=b.right+1&&a.width>0;}));assert(sizes.every(Boolean),route+' badges fit posters');
    await page.locator('#shared-label-proof').screenshot({path:`artifacts/now-playing/shared-label-${process.env.CINELVA_BROWSER||'chromium'}-${route.replace('/','-')}.png`});
    await context.close();

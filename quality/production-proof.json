@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "4f1807f3ad155d8a8fb38f7594fee6bc40600dcd",
-  "verified_at": "2026-10-24T11:45:24.200Z",
-  "note": "PR489 exact executable source passed all6 applicable workflows: Autonomous40090550391, smoke40090550482, frontend40090550462, backend40090550449, mobile and completeness. Full quality/11 focused tests passed. Chromium/WebKit390px root/prefix themes/calendar modes/actions/expiry plus9 real entry points shared bootstrap, exact-ID fixtures/official finite periods/start-only exclusion/ranking fallback passed. Focused review Important fallback finding resolved by retaining image sibling placeholder and browser failure regression. Require final-head CI, merge and canonical production verification. User-approved blue/size/records/origins unchanged."
+  "head_sha": "b20b9dbd5081fd11abce6f42db43a074a233d7bc",
+  "verified_at": "2026-10-24T20:40:05.000Z",
+  "note": "PR491 exact executable source: Autonomous40128581324, smoke40128581329, frontend40128581333, backend40128581359 all succeeded. Local full quality and22 focused regressions passed. Reported-issue Chromium/WebKit both themes/root-prefix logo/calendar dedupe/provider evidence/review alignment/IMAX and world-boxoffice checks succeeded. Source performance1057ms exceeded1000ms; unchanged-source bounded remeasurement in40128581320 remains pending; require final-head completeness and all required CI before merge. Existing scorecard legacy-gauge journey failures remain baseline, not cleared. Preserve original logo pixels, storage keys, origins and source limitations."
 }

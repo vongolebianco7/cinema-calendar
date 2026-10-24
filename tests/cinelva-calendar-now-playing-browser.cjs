@@ -44,7 +44,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     const section=document.createElement('section');section.id='shared-label-proof';section.style='display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px';
     section.innerHTML=[42,43,44,45,46,47].map(id=>`<a href="search.html?id=${id}"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="display:block;width:100%;aspect-ratio:2/3"><span>作品${id}</span></a>`).join('');
     document.body.prepend(section);
-    const holder=document.createElement('div');holder.className='poster';holder.id='direct-hydrated-poster';section.append(holder);window.CinelvaMovieIdentity.hydrateCard(holder,{id:44,poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'});
+    const holder=document.createElement('div');holder.className='poster';holder.id='direct-hydrated-poster';section.append(holder);window.CinelvaMovieIdentity.hydrateCard(holder,{tmdbId:44,poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'});
    });
    for(const id of [42,44,45])await page.locator(`#shared-label-proof [data-now-film-id="${id}"] > .cinelva-now-playing-label`).first().waitFor();
    for(const id of [43,46,47])assert.equal(await page.locator(`#shared-label-proof [data-now-film-id="${id}"] > .cinelva-now-playing-label`).count(),0,route+' does not infer ended/start-only');

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "cf64f3133fbea63c73bb6c2cbf7872696631a334",
-  "verified_at": "2026-10-24T09:59:06.554Z",
-  "note": "PR486 exact executable source passed all10 PR workflows including Autonomous40076367858, smoke40076367881, Validate frontend40076367923 and backend40076367869. Full shared quality passed locally. Chromium/WebKit calendar root/prefix light/dark theatrical/streaming/TV ID matching, stale expiry and390px overflow checks passed. Focused review has no Critical/Important findings. Require final-head CI then guarded production release and canonical verification. Logo/colors/records/origins unchanged."
+  "head_sha": "1fd15ce99647eff8e4971cd2b034ea9e431437db",
+  "verified_at": "2026-10-24T10:34:09.645Z",
+  "note": "PR487 exact CSS source passed all applicable workflows including Autonomous, smoke, Validate frontend and reproducible backend. Shared quality passed locally. Chromium/WebKit390px calendar label controls and overflow passed. Readability-only: dark blue/white,13px normal and10px tiny labels; no behavior/storage/origin changes. Require final-head CI before merge."
 }

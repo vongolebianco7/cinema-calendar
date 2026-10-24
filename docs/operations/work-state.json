@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-24T13:40:18.478612+00:00",
+  "updated_at": "2026-10-25T04:58:00+09:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f9c7e72adb6526e4393bcd66403c90da381c297b",
   "branch": "fix/reported-ui-data-audit-20261024",
-  "head_sha": "f9c7e72adb6526e4393bcd66403c90da381c297b",
-  "pull_request": null,
+  "head_sha": "7fa2187ee6d14a065497a4ff8a9cb4a231624ba4",
+  "pull_request": 491,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -828,7 +828,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Verify reported17-group audit with real390px Chromium/WebKit screenshots and integrated quality; one focused review; source proof/final CI; publish and verify canonical pages.2026/worldwide box-office source gaps remain explicit.",
+  "next_action": "Finish sourced current-year and worldwide box-office views; fix review date provenance and legacy light tab CSS; rerun exact-source browser CI, receipt-only proof, final CI, merge PR491 and verify canonical production.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

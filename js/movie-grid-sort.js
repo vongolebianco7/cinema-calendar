@@ -30,7 +30,7 @@
   }
   function fields(node){
     const movie=movieFor(node),meta=text(node,'.meta'),title=movie.title||text(node,'.title')||text(node,'.awardTitle')||text(node,'.tvMovieTitle');
-    return {title,year:year(movie.year||movie.release_date||(page==='index.html'?movie.original_release_date:movie.date)||text(node,'.awardYear')||meta),score:numeric(movie.score)||numeric(node.dataset.ratingScore)||numeric(meta.match(/★\s*([\d.]+)/)?.[1]),votes:numeric(movie.votes)||numeric(node.dataset.ratingVotes)||numeric(meta.match(/([\d,]+)票/)?.[1]?.replaceAll(',','')),gross:numeric(text(node,'.body').match(/([\d.]+)億円/)?.[1]),organization:text(node,'.awardMeta').split(' · ')[0],channel:movie.service||text(node,'.tvMovieChannel')};
+    return {title,year:year(movie.year||movie.release_date||(page==='index.html'?movie.original_release_date:movie.date)||text(node,'.awardYear')||meta),score:numeric(movie.score)||numeric(node.dataset.ratingScore)||numeric(meta.match(/★\s*([\d.]+)/)?.[1]),votes:numeric(movie.votes)||numeric(node.dataset.ratingVotes)||numeric(meta.match(/([\d,]+)票/)?.[1]?.replaceAll(',','')),gross:numeric(node.dataset.gross)||numeric(text(node,'.body').match(/([\d.]+)億円/)?.[1]),organization:text(node,'.awardMeta').split(' · ')[0],channel:movie.service||text(node,'.tvMovieChannel')};
   }
   function compare(a,b,sort){
     if(sort==='default')return Number(a.dataset.sortOrder)-Number(b.dataset.sortOrder);

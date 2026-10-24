@@ -56,12 +56,12 @@
     {
       "id": "boxoffice-this-year",
       "request": "2026年途中の興収データ取得",
-      "status": "source_gap"
+      "status": "implemented_pending_verification"
     },
     {
       "id": "boxoffice-world",
       "request": "日本市場の邦洋区分を明記し世界興収を検討",
-      "status": "source_gap"
+      "status": "implemented_pending_verification"
     },
     {
       "id": "kanagawa-imax",
@@ -90,7 +90,9 @@
     }
   ],
   "limits": [
-    "Current-year and worldwide box-office datasets remain unavailable; existing Japan-market financial values preserved.",
-    "No inferred days, provider observations, artwork or screening dates."
-  ]
+    "2026 Japan figures cover only distributor-published titles in the cited official TOHO interim report; not an all-distributor national annual ranking.",
+    "Worldwide figures are TMDB cumulative theatrical revenue in USD, filtered by primary release year when selected; excludes unknown/zero revenue and does not mean sales during that year.",
+    "Remaining unverified provider observations and artwork are not fabricated. Full dates are shown only when movie-release provenance exists, never inferred from streaming or revival dates."
+  ],
+  "updated_at": "2026-10-25"
 }

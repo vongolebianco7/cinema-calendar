@@ -13,6 +13,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('**/data/backend.json*',r=>r.fulfill({json:{enabled:false}}));
    const film=(id,title)=>({id:'local-'+id,tmdbId:id,title,date:'2026-10-02',event:'streaming',service:'Prime Video',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg',source_url:'https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026'});
    const films=[film(42,'短い作品'),film(43,'とても長い作品名の映画で二行以上の高さになっていた作品')];
+   await context.route('**/data/tv.json*',r=>r.fulfill({json:{movies:[{...film(44,'短い映画'),event:'tv',service:'テレビ東京',program:'短い番組',time:'13:40'},{...film(45,'長い映画名が続く二行の作品'),event:'tv',service:'テレビ東京',program:'とても長い番組名が何行も続いていても共通レビューの下端が揃う番組',time:'13:40'}]}}));
    await context.route('**/data/movies.json*',r=>r.fulfill({json:{movies:films}}));
    await context.route('**/data/availability.json*',r=>r.fulfill({json:{movies:{42:{checked_at:'2026-10-24T00:00:00Z',flatrate:['Prime Video']},43:{checked_at:'2026-10-24T00:00:00Z',flatrate:[]}}}}));
    await context.route('**/data/special_screenings.json*',r=>r.fulfill({json:{screenings:[{id:11878,tmdbId:11878,title:'用心棒',date:'2026-10-02',end_date:'2026-10-15',event:'theatrical',service:'午前十時の映画祭',special_screening:'asa10',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'}]}}));
@@ -28,7 +29,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    const boxes=await page.locator('.streamMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {y:r.y,height:r.height};}));assert.equal(boxes.length,2);assert(Math.abs(boxes[0].y-boxes[1].y)<1,'review baselines align');assert.equal(boxes[0].height,boxes[1].height);
    await page.screenshot({path:`artifacts/reported-audit/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-calendar.png`});
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);assert.deepEqual(errors,[]);
-   for(const route of ['discover.html','search.html','rankings.html','my-cinelva/index.html','credits.html','theaters.html']){
+   await page.locator('.modeTab[data-mode="tv"]').click();await page.locator('.tvMovie>.cinelva-rating-controls').first().waitFor();
+   const tvBoxes=await page.locator('.tvMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {bottom:r.bottom,height:r.height};}));assert.equal(tvBoxes.length,2);assert(Math.abs(tvBoxes[0].bottom-tvBoxes[1].bottom)<1,'TV reviews align despite unequal program text');assert.equal(tvBoxes[0].height,tvBoxes[1].height);
+   for(const route of ['cinelva/index.html','cinelva/credits.html','discover.html','search.html','rankings.html','my-cinelva/index.html','credits.html','theaters.html']){
     await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});
     const images=page.locator('.gBrand img,.brand img');await images.first().waitFor();
     const sources=await images.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')));assert(sources.every(x=>x.includes('cinelva_original_colors_transparent.png')),route+' uses unchanged supplied frame');

@@ -26,7 +26,12 @@
    const holder=link.querySelector('.poster,.awardPoster,.presetCardPoster,.cinelva-label-poster');
    if(holder)mark(holder,key);else if(image)mark(wrap(image),key);
   }
-  const detail=doc.querySelector('.detailTop > img'),key=id({id:new URL(doc.location?.href||'https://invalid/').searchParams.get('id')});
+  for(const button of doc.querySelectorAll('.cinelva-bookmark-button[data-bookmark-id]')){
+   const card=button.closest('.director-film-tile,.cinelva-unified-record-card,.cs-film,.award-film-unit,.cinelva-rate-wrap,.cinelva-discover-review-wrap,.detailRelatedCard,.rankCard,.card,[data-record-card]');
+   const holder=card?.querySelector('.poster,.awardPoster,.streamMoviePoster,.tvMoviePoster,.presetCardPoster,.cs-film-art,.cinelva-label-poster');
+   if(holder)mark(holder,id({id:button.dataset.bookmarkId}));
+  }
+  const detail=doc.querySelector('.detailTop > img'),key=id({id:doc.querySelector('[data-detail-review][data-movie-id]')?.dataset.movieId||new URL(doc.location?.href||'https://invalid/').searchParams.get('id')});
   if(detail&&key)mark(wrap(detail),key);
   function wrap(image){
    const parent=image.parentElement;

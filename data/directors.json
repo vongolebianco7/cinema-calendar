@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T08:10:16.523641+00:00",
+  "generated_at": "2026-10-24T20:54:22.431158+00:00",
   "directors": {
     "59611": {
       "id": 59611,
@@ -273195,6 +273195,169 @@
         "source": "tmdb_director_movie_credits",
         "truncated": false,
         "runtime_unverified": 11
+      }
+    },
+    "4543335": {
+      "id": 4543335,
+      "name": "ヲノワタル",
+      "nameJa": "ヲノワタル",
+      "original_name": "Wataru Uno",
+      "also_known_as": [
+        "Wataru Uno",
+        "ヲノワタル"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/4543335",
+      "credits_source_url": "https://api.themoviedb.org/3/person/4543335/movie_credits",
+      "checked_at": "2026-10-24T20:48:58.259590+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            99
+          ],
+          "id": 1768299,
+          "title": "GUN FISH あなたの知らないフグの世界",
+          "original_title": "GUN FISH あなたの知らないフグの世界",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-09-04",
+          "director": "ヲノワタル",
+          "director_id": 4543335,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/AszNRkIHpn0mBx5U187SjUDaySE.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1768299"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 1
+      }
+    },
+    "3137401": {
+      "id": 3137401,
+      "name": "吉川鮎太",
+      "nameJa": "吉川鮎太",
+      "original_name": "吉川鮎太",
+      "also_known_as": [
+        "吉川鮎太",
+        "Yoshikawa Ayuta"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/3137401",
+      "credits_source_url": "https://api.themoviedb.org/3/person/3137401/movie_credits",
+      "checked_at": "2026-10-24T20:48:58.681013+00:00",
+      "works": [
+        {
+          "genre_ids": [
+            18,
+            14
+          ],
+          "id": 1652668,
+          "title": "ホーム スイート ホーム",
+          "original_title": "ホーム スイート ホーム",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-09-04",
+          "director": "吉川鮎太",
+          "director_id": 3137401,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/opvkKsRtDC7sxFjqdZ6ipfd7oSe.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1652668"
+        },
+        {
+          "genre_ids": [
+            18
+          ],
+          "id": 1318613,
+          "title": "SOUND of LOVE",
+          "original_title": "SOUND of LOVE",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 7.0,
+          "votes": 1,
+          "year": "2024",
+          "date": "2024-09-27",
+          "director": "吉川鮎太",
+          "director_id": 3137401,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/9WsCauNasnTfyzSCZZJoybpBPZ9.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1318613"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 2
+      }
+    },
+    "6572080": {
+      "id": 6572080,
+      "name": "加納美帆",
+      "nameJa": "加納美帆",
+      "original_name": "加納美帆",
+      "also_known_as": [
+        "加納美帆"
+      ],
+      "name_status": "japanese",
+      "name_source_url": null,
+      "profile_path": null,
+      "birthday": null,
+      "deathday": null,
+      "place_of_birth": null,
+      "biography_ja": "",
+      "source_url": "https://www.themoviedb.org/person/6572080",
+      "credits_source_url": "https://api.themoviedb.org/3/person/6572080/movie_credits",
+      "checked_at": "2026-10-24T20:49:02.506978+00:00",
+      "works": [
+        {
+          "genre_ids": [],
+          "id": 1806317,
+          "title": "......overcome with あふれた..",
+          "original_title": "......overcome with あふれた..",
+          "softcore": false,
+          "department": "Directing",
+          "job": "Director",
+          "score": 0.0,
+          "votes": 0,
+          "year": "2026",
+          "date": "2026-11-13",
+          "director": "加納美帆",
+          "director_id": 6572080,
+          "is_director": true,
+          "poster": "https://image.tmdb.org/t/p/w342/lI3GfPTxS6SN0D1BmfbkbmHBaSI.jpg",
+          "source": "tmdb",
+          "source_url": "https://www.themoviedb.org/movie/1806317"
+        }
+      ],
+      "coverage": {
+        "source": "tmdb_director_movie_credits",
+        "truncated": false,
+        "runtime_unverified": 1
       }
     }
   }

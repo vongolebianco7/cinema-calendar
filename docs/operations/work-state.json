@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-24T09:58:48.607098+00:00",
+  "updated_at": "2026-10-24T11:45:05.651415+00:00",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "2fd0d93f85a2266030264c586cf26e049d2dd2b4",
-  "branch": "feat/calendar-now-playing-label-20261024",
-  "head_sha": "cf64f3133fbea63c73bb6c2cbf7872696631a334",
-  "pull_request": 486,
+  "base_sha": "ee534a32eb086d37e0117ee974c1a45e3ef1f44f",
+  "branch": "fix/shared-now-playing-labels-20261024",
+  "head_sha": "4f1807f3ad155d8a8fb38f7594fee6bc40600dcd",
+  "pull_request": 489,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -566,9 +566,16 @@
     {
       "id": "FEATURE-CALENDAR-NOW-LABEL-20261024",
       "title": "Show current nationwide now-playing labels on calendar posters",
-      "status": "ci_passed",
+      "status": "production_verified",
       "acceptance": "Root/prefix theatrical/streaming/TV/calendar thumbnails: exact TMDB ID and fresh verified nationwide snapshot only. No label on stale/future/unavailable data, no title/date inference. Preserve poster click/review/bookmark/date/layout/palette; rerenders idempotent, long-open pages expire status.",
-      "ci": "Source cf64f313 all10 workflows passed, including Autonomous40076367858, smoke40076367881, frontend40076367923, backend40076367869; shared quality passed locally. Chromium/WebKit root/prefix light/dark theatrical/streaming/TV, exact ID and37h expiry passed. Focused review: no Critical/Important. Receipt/final CI/merge/production verification pending."
+      "ci": "PR486/487/488 merged and production verified through ee534a32: bright blue/white11.5px label. Global28/32 unchanged."
+    },
+    {
+      "id": "FIX-SHARED-NOW-LABEL-20261024",
+      "title": "Show current screening labels across movie views and official revival/morning periods",
+      "status": "ci_passed",
+      "acceptance": "Exact IDs across shared posters and movie links; finite official screening periods inclusive Japan dates; start-only/ended/future excluded; current blue appearance preserved; local records/actions unchanged.",
+      "ci": "PR489 source4f1807f3 all6 workflows passed including Autonomous40090550391, smoke40090550482, frontend40090550462, backend40090550449.11 focused tests/shared quality passed.9 actual entry points bootstrap labels with fixture poster/link/current/ended/start-only coverage at390px in Chromium/WebKit; existing calendar themes/root/prefix/actions/expiry and full mobile journeys pass. One focused review found ranking fallback contract; fixed with image+placeholder preserved and browser failure check. Receipt/final CI/merge/production verification pending."
     }
   ],
   "verification": [

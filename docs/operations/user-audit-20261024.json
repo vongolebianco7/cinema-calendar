@@ -6,87 +6,87 @@
     {
       "id": "logo",
       "request": "全画面のロゴと枠を原本どおりに統一",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "morning-duplicate",
       "request": "午前十時の同一上映期間を重複させず期間表示",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "calendar-tabs",
       "request": "赤い四角を廃止し下線のタブに統一",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "netflix-october",
       "request": "10月Netflix公式配信予定を収録",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "review-height",
       "request": "共通レビュー領域を同じ段の下端で揃える",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "provider-tags",
       "request": "空のTMDB観測でも公式の配信開始情報を空白にしない",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "festival-awards",
       "request": "アカデミー等の開催予定を追加",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "domestic-events",
       "request": "国内映画関連イベントの公式日程補充",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "release-day",
       "request": "取得済み公開日を日単位で表示",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "missing-posters",
       "request": "興収と映画賞の画像・作品ID整合修正",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "boxoffice-this-year",
       "request": "2026年途中の興収データ取得",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "boxoffice-world",
       "request": "日本市場の邦洋区分を明記し世界興収を検討",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "kanagawa-imax",
       "request": "神奈川IMAXの設備登録と休止状況を区別",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "watchlist-sort",
       "request": "見たい映画に並び替えを追加",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "award-collection",
       "request": "映画賞コレクションの作品メタデータ拡充",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "retired-concierge",
       "request": "情報源ページの廃止済み導線を削除",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     },
     {
       "id": "sort-labels",
       "request": "ランキング順と元の表示順を削除",
-      "status": "implemented_pending_verification"
+      "status": "merged_and_publication_verified"
     }
   ],
   "limits": [
@@ -94,5 +94,16 @@
     "Worldwide figures are TMDB cumulative theatrical revenue in USD, filtered by primary release year when selected; excludes unknown/zero revenue and does not mean sales during that year.",
     "Remaining unverified provider observations and artwork are not fabricated. Full dates are shown only when movie-release provenance exists, never inferred from streaming or revival dates."
   ],
-  "updated_at": "2026-10-25"
+  "updated_at": "2026-10-25",
+  "verification": {
+    "pr": 491,
+    "merge_sha": "e84c0e47098114315d5f7b682817401b4ab3d588",
+    "source_sha": "b20b9dbd5081fd11abce6f42db43a074a233d7bc",
+    "receipt_sha": "7fcd02793f77f0e8c26bd0e361f3af007a60395e",
+    "local": "Full quality PASS; Python184/184; focused22/22",
+    "final_ci": "10 successful workflows; auxiliary isolated Pages cancelled during slow Azure Ubuntu downloads; identical executable source stage previously succeeded. Required four workflows and completeness passed.",
+    "performance": "1000 records:390px931ms/1280px973ms, unchanged1000ms budget. Initial1057ms observation retained.",
+    "production": "Frontend dpl_JBg94Nuxr4TjhBfv32Ae8vxZ96wr and backend dpl_14BzDBBFAFqkjtij6fBY9tsVMccm READY at exact merge; existing canonical origins retained.16 canonical HTTP200 files byte-identical; calendar1033/NetflixOctober2/world2026firstpage10 APIs200,worldpartialfalse. No production record writes performed.",
+    "scope": "Verifies the implemented corrections and publication; does not claim exhaustive provider/event/artwork coverage, recovered DB, actual iPhone or independent users. Legacy-gauge scorecard failures remain baseline."
+  }
 }

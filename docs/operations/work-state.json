@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T04:58:00+09:00",
-  "status": "in_progress",
+  "updated_at": "2026-10-25T06:00:00+09:00",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f9c7e72adb6526e4393bcd66403c90da381c297b",
   "branch": "fix/reported-ui-data-audit-20261024",
-  "head_sha": "7fa2187ee6d14a065497a4ff8a9cb4a231624ba4",
+  "head_sha": "e84c0e47098114315d5f7b682817401b4ab3d588",
   "pull_request": 491,
   "work_items": [
     {
@@ -828,7 +828,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Finish sourced current-year and worldwide box-office views; fix review date provenance and legacy light tab CSS; rerun exact-source browser CI, receipt-only proof, final CI, merge PR491 and verify canonical production.",
+  "next_action": "PR491 implemented corrections merged and canonical release verified. See user-audit-20261024.json for17-item evidence and retained source limits. Remaining global rights/device/users/DB gates stay open. Auxiliary isolated Pages Azure-mirror provisioning timeout remains a separate CI environment issue; no app test failure hidden.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -896,5 +896,13 @@
       "check": "PR480 latest exact-source CI",
       "result": "Source924e0763 all6 workflows successful: smoke39949592719, frontend39949592723, backend39949592721, mobile39949592636, completeness39949592711, Autonomous39949592727. Normal/materialized whole gates and6 changing-catalog unit checks passed; focused review no blockers. Receipt-only final CI and full production simulation required before merge."
     }
-  ]
+  ],
+  "reported_ui_audit_release": {
+    "ledger": "docs/operations/user-audit-20261024.json",
+    "pr": 491,
+    "merge_sha": "e84c0e47098114315d5f7b682817401b4ab3d588",
+    "frontend": "dpl_JBg94Nuxr4TjhBfv32Ae8vxZ96wr READY",
+    "backend": "dpl_14BzDBBFAFqkjtij6fBY9tsVMccm READY",
+    "canonical_evidence": "16HTTP200 byte-identical files; calendar1033,OctoberNetflix2,world2026firstpage10 API200. No actual-device/browser production writes or DB recovery claimed."
+  }
 }

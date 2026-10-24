@@ -38,5 +38,10 @@
     }
     return output;
   }
-  return { dedupe };
+  function inFirstVisibleWeek(row,weekStart,weekEnd,viewStart){
+    if(!row?.date)return false;
+    const first=row.date<viewStart?viewStart:row.date;
+    return first>=weekStart&&first<=weekEnd&&(row.end_date||row.date)>=weekStart;
+  }
+  return { dedupe, inFirstVisibleWeek };
 });

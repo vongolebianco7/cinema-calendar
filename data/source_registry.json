@@ -202,6 +202,21 @@
         "No automated scraping",
         "Prefer direct official theater/brand pages and periodically recheck current status"
       ]
+    },
+    {
+      "id": "manual_curated_film_event_schedule",
+      "name": "主催者公式発表の映画祭・映画賞・国内イベント日程",
+      "mode": "approved",
+      "purpose": [
+        "manual_film_event_schedule"
+      ],
+      "basis": "Factual dates and venues manually checked against organizer announcements; original summaries only. Curated inputs are preserved by existing refresh jobs; no new automated HTML discovery URLs.",
+      "terms_url": "https://www.oscars.org/",
+      "requirements": [
+        "Retain organizer URL, review date and local timezone",
+        "Do not infer films, dates or artwork",
+        "No new scraping permission; review additions manually"
+      ]
     }
   ]
 }

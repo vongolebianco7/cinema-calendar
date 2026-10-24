@@ -36,14 +36,30 @@ for entry in intake.get("movies", []):
     key = (service, title, date)
     if key in existing:
         continue
-    pending.append({
+    movie = {
         "title": title, "date": date, "event": "streaming",
         "service": service, "score": 0, "votes": 0,
         "overview": "", "poster": None,
         "source": entry.get("source", "Official provider announcement"),
         "source_url": url, "type": entry.get("type", "見放題"),
         "checked_at": datetime.date.today().isoformat()
-    })
+    }
+    # A premiere date is not evidence of the film's production/release year.
+    # Retain separately reviewed identity facts so the approved TMDB resolver
+    # can use strict title + year matching without inventing a database ID.
+    if isinstance(entry.get("original_title"), str):
+        movie["original_title"] = entry["original_title"]
+    year = entry.get("release_year")
+    if isinstance(year, int) and not isinstance(year, bool) and 1888 <= year <= 2100:
+        movie["release_year"] = year
+        movie["year"] = year
+    title_url = entry.get("title_url", "")
+    if title_url:
+        parsed_title = urlparse(title_url)
+        if parsed_title.scheme != "https" or not parsed_title.hostname:
+            raise ValueError(f"An HTTPS title URL is required: {title!r}")
+        movie["title_url"] = title_url
+    pending.append(movie)
     existing.add(key)
 if pending:
     current["movies"].extend(pending)

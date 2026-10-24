@@ -6,5 +6,48 @@
     "https://zushifilm.com/",
     "https://forest-movie-festival.jp/",
     "https://kinoiglu.com/event/"
+  ],
+  "curation_policy": "Manually reviewed official factual announcements; provenance URLs are not added to automated collection. Event-level records intentionally have no unverified movie or poster.",
+  "curated_events": [
+    {
+      "id": "tiff-outdoor-2026",
+      "event_id": "tiff-outdoor-2026",
+      "name": "東京国際映画祭 屋外上映会2026",
+      "date": "2026-10-27",
+      "start_date": "2026-10-27",
+      "end_date": "2026-11-04",
+      "area": "東京",
+      "place": "東京ミッドタウン日比谷 日比谷ステップ広場",
+      "movie": "",
+      "url": "https://2026.tiff-jp.net/news/ja/?p=69837",
+      "source_url": "https://2026.tiff-jp.net/news/ja/?p=69837",
+      "source": "東京国際映画祭 公式",
+      "fee": "無料",
+      "overview": "屋外上映の会期。個別作品・上映時刻は公式スケジュールをご確認ください。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-10-24",
+      "collection_method": "manual_official_announcement",
+      "venue_source_url": "https://2026.tiff-jp.net/ja/access/"
+    },
+    {
+      "id": "shinagawa-cinema-2026",
+      "event_id": "shinagawa-cinema-2026",
+      "name": "品川国際映画祭2026",
+      "date": "2026-11-09",
+      "start_date": "2026-11-09",
+      "end_date": "2026-11-14",
+      "time": "19:00",
+      "area": "東京",
+      "place": "品川インターシティ セントラルガーデン・品川グランドコモンズ イベントプラザ",
+      "movie": "",
+      "url": "https://shinagawa-cinema.com/access.html",
+      "source_url": "https://shinagawa-cinema.com/access.html",
+      "source": "品川国際映画祭 公式",
+      "fee": "無料",
+      "overview": "ショートフィルムの野外上映。メインシアターは毎日19:00開始。雨天・荒天時は中止の場合があります。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-10-24",
+      "collection_method": "manual_official_announcement"
+    }
   ]
 }

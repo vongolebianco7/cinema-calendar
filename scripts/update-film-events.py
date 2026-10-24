@@ -81,6 +81,12 @@ def main():
  existing=data.get('events',[])
  def key(e):return (re.sub(r'\W+','',str(e.get('title','')).casefold()),e.get('date',''))
  merged={key(e):e for e in existing}
+ # Reviewed prose announcements do not depend on JSON-LD or live availability.
+ curated=config.get("curated_events",[])
+ for item in curated:merged[key(item)]=item
+ if curated:
+  data["generated_at"]=max(data.get("generated_at",""),max(e["checked_at"] for e in curated))
+ data["curated_count"]=len(curated)
  found=0
  verified=0
  for group,scope in [('domestic_official_pages','domestic'),('overseas_official_pages','overseas')]:

@@ -7,9 +7,9 @@
   const choices={
     search:[['default','検索順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-desc','評価：高い順'],['score-asc','評価：低い順'],['votes-desc','評価件数順'],['title-asc','作品名順']],
     discover:[['default','おすすめ順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-desc','評価：高い順'],['score-asc','評価：低い順'],['votes-desc','評価件数順'],['title-asc','作品名順']],
-    rating:[['default','ランキング順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-desc','評価：高い順'],['score-asc','評価：低い順'],['votes-desc','評価件数順'],['title-asc','作品名順']],
+    rating:[['score-desc','評価：高い順'],['year-desc','公開年：新しい順'],['year-asc','公開年：古い順'],['score-asc','評価：低い順'],['votes-desc','評価件数順'],['title-asc','作品名順']],
     boxoffice:[['default','興収順'],['year-desc','集計年：新しい順'],['year-asc','集計年：古い順'],['gross-desc','興収：高い順'],['title-asc','作品名順']],
-    awards:[['default','元の表示順'],['year-desc','授賞年：新しい順'],['year-asc','授賞年：古い順'],['title-asc','作品名順'],['organization-asc','賞・映画祭順']],
+    awards:[['year-desc','授賞年：新しい順'],['year-asc','授賞年：古い順'],['title-asc','作品名順'],['organization-asc','賞・映画祭順']],
     tv:[['default','放送順'],['score-desc','評価：高い順'],['title-asc','作品名順'],['channel-asc','放送局順']]
   };
   const key=()=>page==='rankings.html'?document.querySelector('[data-axis].active')?.dataset.axis||'rating':page==='index.html'?'tv':page.replace('.html','');
@@ -30,7 +30,7 @@
   }
   function fields(node){
     const movie=movieFor(node),meta=text(node,'.meta'),title=movie.title||text(node,'.title')||text(node,'.awardTitle')||text(node,'.tvMovieTitle');
-    return {title,year:year(movie.year||movie.release_date||(page==='index.html'?movie.original_release_date:movie.date)||text(node,'.awardYear')||meta),score:numeric(movie.score)||numeric(meta.match(/★\s*([\d.]+)/)?.[1]),votes:numeric(movie.votes)||numeric(meta.match(/([\d,]+)票/)?.[1]?.replaceAll(',','')),gross:numeric(text(node,'.body').match(/([\d.]+)億円/)?.[1]),organization:text(node,'.awardMeta').split(' · ')[0],channel:movie.service||text(node,'.tvMovieChannel')};
+    return {title,year:year(movie.year||movie.release_date||(page==='index.html'?movie.original_release_date:movie.date)||text(node,'.awardYear')||meta),score:numeric(movie.score)||numeric(node.dataset.ratingScore)||numeric(meta.match(/★\s*([\d.]+)/)?.[1]),votes:numeric(movie.votes)||numeric(node.dataset.ratingVotes)||numeric(meta.match(/([\d,]+)票/)?.[1]?.replaceAll(',','')),gross:numeric(text(node,'.body').match(/([\d.]+)億円/)?.[1]),organization:text(node,'.awardMeta').split(' · ')[0],channel:movie.service||text(node,'.tvMovieChannel')};
   }
   function compare(a,b,sort){
     if(sort==='default')return Number(a.dataset.sortOrder)-Number(b.dataset.sortOrder);
@@ -43,7 +43,7 @@
   function apply(){
     if(busy)return;busy=true;observer.disconnect();
     groups().forEach(group=>{
-      const cards=[...group.children].filter(n=>n.matches('.card,.rankCard,.awardCard,.tvMovie'));
+      const cards=[...group.children].filter(n=>n.matches('.card,.rankCard,.rankReviewWrap,.awardCard,.tvMovie'));
       cards.forEach((node,i)=>{if(!node.hasAttribute('data-sort-order'))node.dataset.sortOrder=String(i)});
       if(cards.length>1)cards.sort((a,b)=>compare(a,b,select.value)).forEach(node=>group.append(node));
     });

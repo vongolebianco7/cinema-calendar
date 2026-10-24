@@ -6,6 +6,17 @@
   "use strict";
   const INITIAL_VISIBLE = 16;
   return {
+    displayDate(movie) {
+      // Dates supplied by the catalog/event feed remain exact. A year alone
+      // must never be expanded to January 1 or another guessed release day.
+      for (const value of [movie?.release_date, movie?.releaseDate, movie?.date]) {
+        if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) continue;
+        const parsed = new Date(value + "T00:00:00Z");
+        if (Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value) return value;
+      }
+      const year = String(movie?.release_year || movie?.year || "");
+      return /^\d{4}$/.test(year) ? year : "";
+    },
     hasMore(items) {
       return Array.isArray(items) && items.length > INITIAL_VISIBLE;
     },

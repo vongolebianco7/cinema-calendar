@@ -11,7 +11,7 @@ class BoxOfficeDomesticForeignTests(unittest.TestCase):
         self.assertIn('if(row.region==="洋画")return "国外"', text)
         self.assertNotIn('const regions=["すべて","日本","アメリカ","アジア","ヨーロッパ","その他"]', text)
         self.assertNotIn('const regions=["すべて","日本","海外"', text)
-        self.assertIn('国内/国外は公式資料の邦画/洋画区分を優先', text)
+        self.assertIn('日本市場のみ（海外映画も日本での収入） · 邦画/洋画は公式資料の区分', text)
 
 if __name__ == "__main__":
     unittest.main()

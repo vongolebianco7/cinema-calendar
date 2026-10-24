@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "45b2c01af7bb096be1abff763cf8e11c2998d8bf",
-  "verified_at": "2026-10-23T22:55:35.345Z",
-  "note": "PR484 exact source passed all7 PR workflows, full frontend/Chromium/WebKit controls, collector12 and fullquality. Focused repair review has no Critical/Important findings. Direct official API cache reports100/99 totals; documented equivalent using validated frozen API dates independently observed5x20/constant100 and passed unchanged completeness checks. Fallback preserves pagination/raw-count/identity/atomic/deadline rules; temporary diagnostic workflow removed. Require final-head CI, then actual complete guarded collection and canonical publication. UI/logo/colors/records/origins unchanged."
+  "head_sha": "cf64f3133fbea63c73bb6c2cbf7872696631a334",
+  "verified_at": "2026-10-24T09:59:06.554Z",
+  "note": "PR486 exact executable source passed all10 PR workflows including Autonomous40076367858, smoke40076367881, Validate frontend40076367923 and backend40076367869. Full shared quality passed locally. Chromium/WebKit calendar root/prefix light/dark theatrical/streaming/TV ID matching, stale expiry and390px overflow checks passed. Focused review has no Critical/Important findings. Require final-head CI then guarded production release and canonical verification. Logo/colors/records/origins unchanged."
 }

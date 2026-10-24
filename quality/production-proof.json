@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1fd15ce99647eff8e4971cd2b034ea9e431437db",
-  "verified_at": "2026-10-24T10:34:09.645Z",
-  "note": "PR487 exact CSS source passed all applicable workflows including Autonomous, smoke, Validate frontend and reproducible backend. Shared quality passed locally. Chromium/WebKit390px calendar label controls and overflow passed. Readability-only: dark blue/white,13px normal and10px tiny labels; no behavior/storage/origin changes. Require final-head CI before merge."
+  "head_sha": "9bc5221f9cbc5e15e34afd7b740585c77e17fb9d",
+  "verified_at": "2026-10-24T11:01:15.876Z",
+  "note": "PR488 exact CSS source passed all applicable workflows including Autonomous, smoke, frontend and backend build. Local shared quality passed; Chromium/WebKit390px calendar controls and overflow passed. Intermediate11.5px normal/9px tiny labels with brighter#1565c0 blue and white text. Behavior unchanged. Require final-head CI before merge."
 }

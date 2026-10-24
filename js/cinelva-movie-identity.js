@@ -1,6 +1,14 @@
 /* Shared movie identity. Local/event IDs are never implicitly TMDB IDs. */
 (function (root) {
   "use strict";
+  const identityScriptURL = typeof document!=='undefined'?document.currentScript?.src:null;
+  function loadCurrentLabels(){
+    if(!identityScriptURL||root.CinelvaCalendarNowPlaying)return;
+    const base=new URL('../',identityScriptURL);
+    if(!document.querySelector('link[href*="calendar-now-playing.css"]')){const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('assets/calendar-now-playing.css',base);document.head.append(css);}
+    const load=name=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=new URL('js/'+name,base);script.onload=resolve;script.onerror=reject;document.head.append(script);});
+    (async()=>{try{if(!root.CinelvaNowPlaying)await load('cinelva-now-playing.js');if(!root.CinelvaCalendarNowPlaying)await load('cinelva-calendar-now-playing.js');}catch{/* Optional labels must not block posters. */}})();
+  }
   const byId = new Map(),
     aliases = new Map(),
     pending = new Map(),
@@ -228,6 +236,7 @@
     save();
   }
   function hydratePoster(image, m) {
+    if(image?.parentElement&&id(m))image.parentElement.dataset.nowFilmId=id(m);
     if (!image || !m || bound.has(image)) return;
     bound.add(image);
     image.onerror = null;
@@ -286,6 +295,7 @@
   }
   function hydrateCard(container, m) {
     if (!container || !m) return;
+    if(id(m))container.dataset.nowFilmId=id(m);
     const apply = (url) => {
       if (!url || !container.isConnected) return;
       let image = container.querySelector("img");
@@ -411,6 +421,7 @@
       });
     };
     const start = () => {
+      loadCurrentLabels();
       bindPosters();
       new MutationObserver((records) => {
         if (records.some((r) => r.addedNodes.length)) schedule();

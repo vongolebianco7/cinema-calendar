@@ -24,6 +24,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.match(await page.locator('.streamMovie').filter({has:page.locator('.streamMovieTitle').filter({hasText:'用心棒'})}).locator('.streamMovieDate.isPeriod').innerText(),/10\/02.*10\/15/);
    const tab=await page.locator('.modeTab.active').evaluate(e=>({background:getComputedStyle(e).backgroundColor,shadow:getComputedStyle(e).boxShadow}));assert.equal(tab.background,'rgba(0, 0, 0, 0)');assert(!tab.shadow.includes('239, 63, 63'));
    await page.locator('.modeTab[data-mode="streaming"]').click();await page.locator('.streamMovie .cinelva-rating-controls').first().waitFor();
+   await page.locator('.streamMovieAvail').filter({hasText:'見放題 Prime Video'}).waitFor();
    assert.match(await page.locator('.streamMovieAvail').first().innerText(),/見放題 Prime Video/,'canonical TMDB ID finds observations despite local ID');
    assert.match(await page.locator('.streamMovieAvail').nth(1).innerText(),/Prime Video.*配信開始/,'official announcement remains visible without live providers');
    const boxes=await page.locator('.streamMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {y:r.y,height:r.height};}));assert.equal(boxes.length,2);assert(Math.abs(boxes[0].y-boxes[1].y)<1,'review baselines align');assert.equal(boxes[0].height,boxes[1].height);

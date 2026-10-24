@@ -108,6 +108,10 @@ export async function GET(request: Request) {
               original_title: m.original_title,
               overview: m.overview,
               date: m.release_date,
+              release_date: m.release_date || "",
+              // region=JP is a presentation preference, with a primary-date fallback.
+              release_date_source: "tmdb_region_with_primary_fallback",
+              release_date_region_requested: "JP",
               year: (m.release_date||"").slice(0,4),
               score: m.vote_average,
               votes: m.vote_count,

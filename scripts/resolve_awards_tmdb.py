@@ -27,7 +27,7 @@ def search(title):
     return title,[]
 
 def choose(row,movies):
-    title=normalized(row.get('film_title') or row['title']); year=int(row['year']); matches={}
+    title=normalized((row.get('film_title') or row['title']).split(' — ')[0]); year=int(row['year']); matches={}
     for movie in movies:
         mid=movie.get('tmdbId') or movie.get('id'); release=str(movie.get('year') or '')
         if not str(mid).isdigit() or not release.isdigit() or not 0<=year-int(release)<=3:continue
@@ -37,7 +37,7 @@ def choose(row,movies):
 
 if __name__=='__main__':
     path=ROOT/'data/awards.json';data=json.loads(path.read_text()); rows=data['awards']
-    titles=sorted({r.get('film_title') or r['title'] for r in rows if not r.get('tmdb_id')})
+    titles=sorted({(r.get('film_title') or r['title']).split(' — ')[0] for r in rows if not r.get('tmdb_id')})
     results={}; catalog={str(m['id']):m for m in data.get('catalog',[])}
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         for title,movies in pool.map(search,titles):
@@ -46,10 +46,12 @@ if __name__=='__main__':
     today=datetime.datetime.now(datetime.timezone.utc).isoformat()
     for row in rows:
         if row.get('tmdb_id'):continue
-        movie=choose(row,results.get(row.get('film_title') or row['title'],[]))
+        movie=choose(row,results.get((row.get('film_title') or row['title']).split(' — ')[0],[]))
         if not movie:continue
         mid=int(movie.get('tmdbId') or movie['id'])
         row.update(tmdb_id=mid,release_year=int(movie['year']),display_title=movie['title'],match_status='resolved',match_method='tmdb_api_exact_title_release_window',identity_source=f'https://www.themoviedb.org/movie/{mid}',identity_checked_at=today)
+        row['film_title']=(row.get('film_title') or row['title']).split(' — ')[0]
+        if movie.get('poster'):row['poster']=movie['poster']
         catalog[str(mid)]={k:movie[k] for k in ['id','title','original_title','year','poster','score','votes'] if k in movie}
     data['catalog']=list(catalog.values());data['identity_updated_at']=today
     path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')

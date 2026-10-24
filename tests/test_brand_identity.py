@@ -9,11 +9,11 @@ BRAND_ASSET = "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png"
 UPLOADED_ICON = "assets/cinelva_original_colors_transparent.png"
 
 def approved_markup(text):
-    # The primary header was explicitly migrated; secondary routes retain the original emblem.
+    # Every route must use the exact user-uploaded transparent symbol; only cache keys vary.
     import re
     return re.sub(r"assets/cinelva_original_colors_transparent\.png(?:\?[^\"]*)?", ICON_ASSET, text)
 
-ICON_ASSET = "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png"
+ICON_ASSET = UPLOADED_ICON
 
 
 class VisibleCopyParser(HTMLParser):

@@ -17,12 +17,12 @@ const assert=require('node:assert/strict');
           assert.equal(await brand.getAttribute('aria-label'),'Cinelva');
           assert.equal(await brand.locator('.gBrandWord').textContent(),'Cinelva');
           const img=brand.locator('img');
-          const expected=route==='index.html'?'assets/cinelva_original_colors_transparent.png':'assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png';
-          // Verify the declared approved source; theme.js can render its frame as a canvas PNG.
+          const expected='assets/cinelva_original_colors_transparent.png';
+          // Every route must preserve the supplied image, including its frame.
           const declared=(await response.text()).match(/<img\b[^>]*class="gBrandImage"[^>]*src="([^"]+)"/);
           assert.equal(declared?.[1].split('?')[0],expected);
           const rendered=await img.getAttribute('src');
-          assert.ok(rendered.startsWith('data:image/png;base64,')||rendered.split('?')[0]===expected);
+          assert.ok(rendered.split('?')[0]===expected);
           await img.evaluate(el=>el.decode());
           assert.ok(await img.evaluate(el=>el.naturalWidth>0));
         }

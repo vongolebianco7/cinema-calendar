@@ -1,5 +1,5 @@
 from pathlib import Path
-import json, re
+import datetime, json, re
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'data/theater_formats.json'
@@ -31,9 +31,12 @@ row('IMAX GT','グランドシネマサンシャイン 池袋','東京都',SUN,'
 
 def patch_data():
     data=json.loads(DATA.read_text(encoding='utf-8'))
-    other=[x for x in data.get('screens',[]) if not str(x.get('format','')).upper().startswith('IMAX')]
-    data['screens']=IMAX_ROWS+other
-    data['generated_at']='2026-09-27'
+    # This historical bootstrap is additive: later manual reviews are authoritative.
+    existing=data.get('screens',[])
+    known={str(x.get('theater','')).replace(' ','').replace('　','') for x in existing if str(x.get('format','')).upper().startswith('IMAX')}
+    missing=[x for x in IMAX_ROWS if x['theater'].replace(' ','').replace('　','') not in known]
+    data['screens']=existing+missing
+    if missing:data['generated_at']=datetime.date.today().isoformat()
     data['note']='公式チェーン/劇場ページで確認できる上映設備をCinemap用に整理。IMAXはIMAX/IMAXレーザー/IMAX GTを同一ファミリーとして検索し、GTは個別絞り込み可能。'
     DATA.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 

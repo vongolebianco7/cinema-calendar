@@ -100,6 +100,8 @@ JS = r'''
      if(!k)return;
      const matched=bestDirectoryMatch(x.theater,all);
      const base=matched?{...matched}:{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     // Official equipment geography takes precedence over incomplete directory admin labels.
+     if(x.prefecture)base.prefecture=x.prefecture;
      base._equipmentRows=allByTheater.get(k)||[];
      if(!map.has(k))map.set(k,base);
    });
@@ -117,8 +119,9 @@ JS = r'''
    const rows=Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t);
    const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(' ')||'所在地未確認';
    const screens=[...new Set(rows.map(x=>String(x.screen||'').trim()).filter(Boolean))];
-   const source=rows.find(x=>x.source_url)?.source_url||'';
-   const equipment=screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>';
+   const source=(rows.find(x=>x.status_note&&x.source_url)||rows.find(x=>x.source_url))?.source_url||'';
+   const notes=[...new Set(rows.map(x=>String(x.status_note||'').trim()).filter(Boolean))];
+   const equipment=(screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>')+(notes.length?'<br>'+notes.map(esc).join('<br>'):'');
    const links=(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
@@ -131,7 +134,7 @@ JS = r'''
    const q=$("#q").value.trim().toLowerCase();
    if(q)directory=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(' ').toLowerCase().includes(q));
    if(!q&&!equipmentFilter&&!prefectureFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
-   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter:'')+(prefectureFilter?' · '+prefectureFilter:'');
+   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter+'（設備登録・休止中を含む）':'')+(prefectureFilter?' · '+prefectureFilter:'');
    if(!directory.length){$("#grid").innerHTML='<div class="empty">条件に合う映画館がありません。</div>';return}
    $("#grid").innerHTML='<div class="tableHint">表は左右にスワイプできます</div><div class="theaterTableWrap"><table class="theaterTable"><thead><tr><th>映画館</th><th>エリア</th><th>IMAX</th><th>Dolby</th><th>4DX / MX4D</th><th>ScreenX</th><th>スクリーン設備</th><th>リンク</th></tr></thead><tbody>'+directory.slice(0,150).map(rowHtml).join('')+'</tbody></table></div>';
  }

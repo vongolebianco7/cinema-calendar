@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "outdoor-events.json"
+SOURCES = ROOT / "data" / "outdoor-event-sources.json"
 TERMS = ["野外シネマ", "野外映画", "屋外映画上映", "屋外シネマ", "星空上映会", "オープンエアシネマ"]
 REGIONS = {"東京都": "東京", "神奈川県": "神奈川", "Tokyo": "東京", "Kanagawa": "神奈川"}
 # Only accept a directly fetched organizer/venue page; reject news aggregators and search pages.
@@ -132,7 +133,7 @@ def discover():
             if link.startswith("https://") and "news.google.com" not in urllib.parse.urlsplit(link).netloc:
                 urls.add(link)
     # Curated official calendars can be extended without changing application code.
-    sources = ROOT / "data" / "outdoor-event-sources.json"
+    sources = SOURCES
     if sources.exists():
         for url in json.loads(sources.read_text()).get("official_pages", []):
             urls.add(url)
@@ -147,6 +148,14 @@ def main():
     new = discover()
     for e in new:
         by_id[e["id"]] = e
+    # Manual official announcements remain authoritative across failed refreshes.
+    config = json.loads(SOURCES.read_text()) if SOURCES.exists() else {}
+    curated = config.get("curated_events", [])
+    for event in curated:
+        by_id[event["id"]] = event
+    if curated:
+        current["updated_at"] = max(current.get("updated_at", ""), max(e["checked_at"] for e in curated))
+    current["curated_count"] = len(curated)
     current["events"] = sorted(by_id.values(), key=lambda e: (e["date"], e["id"]))
     if new:
         current["updated_at"] = dt.date.today().isoformat()

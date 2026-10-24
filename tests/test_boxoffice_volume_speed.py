@@ -13,8 +13,8 @@ class BoxOfficeVolumeSpeedTests(unittest.TestCase):
 
     def test_boxoffice_renders_before_movie_metadata_hydration(self):
         text = (ROOT / "rankings.html").read_text(encoding="utf-8")
-        start = text.index("async function renderBox()")
-        end = text.index("function awardFilmName", start)
+        start = text.index("async function renderJapanBox()")
+        end = text.index("async function renderBox()", start)
         block = text[start:end]
         self.assertNotIn("await Promise.all(raw.map", block)
         self.assertIn('const bucket=m=>productionBucket(null,m)', block)

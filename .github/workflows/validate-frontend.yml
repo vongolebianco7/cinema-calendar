@@ -226,3 +226,34 @@ jobs:
           name: nationwide-now-playing
           path: artifacts/now-playing/
           if-no-files-found: warn
+  reported-audit:
+    name: Reported UI and data regressions (Chromium + WebKit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cinelva-reported-audit" --no-audit --no-fund playwright@1.59.0
+          bash scripts/prepare-browser-ci.sh
+          "$RUNNER_TEMP/cinelva-reported-audit/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Verify reported calendar, brand, review, sort and theater issues
+        run: |
+          result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
+          exit "$result"
+      - name: Preserve reported issue evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reported-ui-audit
+          path: artifacts/reported-audit/
+          if-no-files-found: warn

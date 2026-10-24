@@ -8,19 +8,20 @@ function createBookmarkPage(initialBookmarks = null) {
   if (initialBookmarks) values.set('cinelva-want-to-watch-v1', JSON.stringify(initialBookmarks));
   const listeners = new Map();
   const section = { hidden: true };
-  const list = { children: [], replaceChildren() { this.children = []; }, append(node) { this.children.push(node); } };
+  function node(tag) {
+    return {tagName:tag, children:[], attributes:{}, handlers:{},
+      append(...nodes) {for(const item of nodes){if(item.parentNode)item.parentNode.children=item.parentNode.children.filter(child=>child!==item);item.parentNode=this;this.children.push(item)}},
+      before(item) {const parent=this.parentNode;assert.ok(parent,'before requires an attached reference node');if(item.parentNode)item.parentNode.children=item.parentNode.children.filter(child=>child!==item);item.parentNode=parent;parent.children.splice(parent.children.indexOf(this),0,item)},
+      replaceChildren(...nodes) {for(const child of this.children)child.parentNode=null;this.children=[];this.append(...nodes)},
+      setAttribute(name,value) {this.attributes[name]=value},
+      addEventListener(name,callback) {this.handlers[name]=callback},
+    };
+  }
+  const list=node('div'),panel=node('div');panel.append(list);
   const count = { textContent: '' };
   const document = {
     getElementById(id) { return ({ wantToWatchSection: section, wantWatchList: list, wantWatchCount: count })[id]; },
-    createElement(tag) {
-      return {
-        tagName: tag,
-        children: [],
-        attributes: {},
-        append(...nodes) { this.children.push(...nodes); },
-        setAttribute(name, value) { this.attributes[name] = value; },
-      };
-    },
+    createElement:node,
   };
   document.querySelector=()=>({addEventListener(){}});
   const window = { addEventListener(name, callback) { listeners.set(name, callback); } };
@@ -33,7 +34,7 @@ function createBookmarkPage(initialBookmarks = null) {
   assert.ok(widget, 'independent watchlist tab renderer is present');
   vm.runInNewContext(widget, { document, window, localStorage, encodeURIComponent, URLSearchParams,
     fetch:async()=>({ok:true,json:async()=>({movies:[]})}) });
-  return { values, listeners, section, list, count };
+  return { values, listeners, section, list, count, panel };
 }
 
 test('adding a bookmark refreshes the independent tab without opening the dashboard', () => {
@@ -70,4 +71,17 @@ test('want-to-watch section uses direct Japanese wording', () => {
   assert.match(html, /映画一覧のブックマークから追加できます/);
   const quickRate = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
   assert.ok(quickRate.includes("detail:{id:key,marked:!marked}"), 'bookmark updates report when a film was added');
+});
+
+test('watchlist sort control changes visible order without rewriting bookmarks',()=>{
+ const page=createBookmarkPage({1:{id:1,title:'B',year:2020},2:{id:2,title:'A',year:2024}});
+ const original=page.values.get('cinelva-want-to-watch-v1');
+ const toolbar=page.panel.children[0],select=toolbar.children[1];
+ assert.equal(page.panel.children[1],page.list,'toolbar is inserted before the saved-film list');
+ assert.equal(select.id,'wantWatchSort');assert.equal(select.children.length,5);
+ select.value='title';select.handlers.change();
+ assert.equal(page.list.children[0].children[0].children[1].textContent,'A');
+ select.value='releaseOld';select.handlers.change();
+ assert.equal(page.list.children[0].children[0].children[1].textContent,'B');
+ assert.equal(page.values.get('cinelva-want-to-watch-v1'),original);
 });

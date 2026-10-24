@@ -52,8 +52,8 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 
 .gLogo{display:block;height:31px;width:auto;max-width:180px;object-fit:contain}@media(max-width:600px){.gLogo{height:28px;max-width:150px}}
 </style>
-<link rel="icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<link rel="icon" href="assets/cinelva_original_colors_transparent.png?v=20261023-clean" type="image/png">
+<link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png?v=20261023-clean">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0a0c0f">
 
@@ -150,7 +150,7 @@ html,body{overflow-x:hidden}
 .gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
 @media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
 </style><link rel="stylesheet" href="assets/theme.css?v=20261023-frame-2">
-<meta property="og:image" content="https://cinelva.vercel.app/assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png?v=20261023-clean">
 <style id="cinelva-movie-row-alignment">
 /* CINELVA shared movie-row alignment: equal columns, card heights and actions. */
 .presetShelfGrid,#grid.grid,#grid.rankGrid,.rankGrid,.awardGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;grid-auto-flow:row!important;gap:9px!important}
@@ -165,7 +165,7 @@ html,body{overflow-x:hidden}
 
 
 <header class="gTop"><div class="wrap gNav">
- <a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a>
+ <a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
  <form class="gSearchForm" action="search.html" method="get">
   <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
   <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
@@ -174,7 +174,7 @@ html,body{overflow-x:hidden}
 </div></header>
 <div class="gDrawerMask" id="gDrawerMask"></div>
 <aside class="gDrawer" id="gDrawer">
- <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
  <a href="index.html">カレンダー</a>
  <a href="discover.html">映画を探す</a>
  <a href="rankings.html">ランキング</a>
@@ -358,6 +358,8 @@ boot();
      if(!k)return;
      const matched=bestDirectoryMatch(x.theater,all);
      const base=matched?{...matched}:{name:x.theater,prefecture:x.prefecture||'',municipality:'',address:'',website:'',_equipmentOnly:true};
+     // Official equipment geography takes precedence over incomplete directory admin labels.
+     if(x.prefecture)base.prefecture=x.prefecture;
      base._equipmentRows=allByTheater.get(k)||[];
      if(!map.has(k))map.set(k,base);
    });
@@ -375,8 +377,9 @@ boot();
    const rows=Array.isArray(t._equipmentRows)?t._equipmentRows:window.strictTheaterFormatRows(t);
    const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(' ')||'所在地未確認';
    const screens=[...new Set(rows.map(x=>String(x.screen||'').trim()).filter(Boolean))];
-   const source=rows.find(x=>x.source_url)?.source_url||'';
-   const equipment=screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>';
+   const source=(rows.find(x=>x.status_note&&x.source_url)||rows.find(x=>x.source_url))?.source_url||'';
+   const notes=[...new Set(rows.map(x=>String(x.status_note||'').trim()).filter(Boolean))];
+   const equipment=(screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>')+(notes.length?'<br>'+notes.map(esc).join('<br>'):'');
    const links=(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
@@ -388,7 +391,7 @@ boot();
    const q=$("#q").value.trim().toLowerCase();
    if(q)directory=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(' ').toLowerCase().includes(q));
    if(!q&&!equipmentFilter&&!prefectureFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
-   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter:'')+(prefectureFilter?' · '+prefectureFilter:'');
+   $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter+'（設備登録・休止中を含む）':'')+(prefectureFilter?' · '+prefectureFilter:'');
    if(!directory.length){$("#grid").innerHTML='<div class="empty">条件に合う映画館がありません。</div>';return}
    $("#grid").innerHTML='<div class="tableHint">表は左右にスワイプできます</div><div class="theaterTableWrap"><table class="theaterTable"><thead><tr><th>映画館</th><th>エリア</th><th>IMAX</th><th>Dolby</th><th>4DX / MX4D</th><th>ScreenX</th><th>スクリーン設備</th><th>リンク</th></tr></thead><tbody>'+directory.slice(0,150).map(rowHtml).join('')+'</tbody></table></div>';
  }

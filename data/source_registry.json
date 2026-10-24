@@ -12,7 +12,8 @@
         "images",
         "ratings",
         "release_dates",
-        "now_playing"
+        "now_playing",
+        "worldwide_boxoffice"
       ],
       "basis": "Official developer API; non-commercial use with attribution.",
       "terms_url": "https://developer.themoviedb.org/docs/faq",
@@ -201,6 +202,36 @@
         "Store factual theater/format/screen labels and source URLs",
         "No automated scraping",
         "Prefer direct official theater/brand pages and periodically recheck current status"
+      ]
+    },
+    {
+      "id": "manual_curated_film_event_schedule",
+      "name": "主催者公式発表の映画祭・映画賞・国内イベント日程",
+      "mode": "approved",
+      "purpose": [
+        "manual_film_event_schedule"
+      ],
+      "basis": "Factual dates and venues manually checked against organizer announcements; original summaries only. Curated inputs are preserved by existing refresh jobs; no new automated HTML discovery URLs.",
+      "terms_url": "https://www.oscars.org/",
+      "requirements": [
+        "Retain organizer URL, review date and local timezone",
+        "Do not infer films, dates or artwork",
+        "No new scraping permission; review additions manually"
+      ]
+    },
+    {
+      "id": "manual_toho_boxoffice_snapshot",
+      "name": "TOHO official interim box-office figures",
+      "mode": "approved",
+      "purpose": [
+        "manual_boxoffice_facts"
+      ],
+      "basis": "Manually reviewed factual film titles, release dates and numeric Japanese theatrical gross from the official TOHO interim report, with explicit subset coverage and as-of date; no automated acquisition or source images.",
+      "terms_url": "https://www.toho.co.jp/ir/2026/1015-ir-2.pdf",
+      "requirements": [
+        "Keep primary source link, publication date and as-of date",
+        "Describe TOHO-distributed subset; never imply complete nationwide annual ranking",
+        "No automated crawling, paid service or copied report imagery"
       ]
     }
   ]

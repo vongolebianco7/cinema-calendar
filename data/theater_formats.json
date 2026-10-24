@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27",
+  "generated_at": "2026-10-24",
   "note": "公式チェーン/劇場ページで確認できる上映設備をCinemap用に整理。IMAXはIMAX/IMAXレーザー/IMAX GTを同一ファミリーとして検索し、GTは個別絞り込み可能。",
   "screens": [
     {
@@ -136,25 +136,28 @@
       "source_url": "https://109cinemas.net/imax/"
     },
     {
-      "format": "IMAX",
+      "format": "IMAXレーザー",
       "theater": "109シネマズ川崎",
       "prefecture": "神奈川県",
-      "screen": "IMAX",
-      "source_url": "https://109cinemas.net/imax/"
+      "screen": "IMAXレーザー",
+      "source_url": "https://109cinemas.net/kawasaki/establishment.html",
+      "verified_at": "2026-10-24"
     },
     {
-      "format": "IMAX",
+      "format": "IMAXレーザー",
       "theater": "109シネマズ湘南",
       "prefecture": "神奈川県",
-      "screen": "IMAX",
-      "source_url": "https://109cinemas.net/imax/"
+      "screen": "IMAXレーザー",
+      "source_url": "https://109cinemas.net/shonan/establishment.html",
+      "verified_at": "2026-10-24"
     },
     {
-      "format": "IMAX",
+      "format": "IMAXレーザー",
       "theater": "109シネマズゆめが丘",
       "prefecture": "神奈川県",
-      "screen": "IMAX",
-      "source_url": "https://109cinemas.net/imax/"
+      "screen": "IMAXレーザー",
+      "source_url": "https://109cinemas.net/yumegaoka/establishment.html",
+      "verified_at": "2026-10-24"
     },
     {
       "format": "IMAX",
@@ -603,6 +606,19 @@
       "prefecture": "千葉県",
       "screen": "SCREENX with Dolby Atmos",
       "source_url": "https://faq.tjoy.jp/faq/detail?id=426&site=916369P4"
+    },
+    {
+      "format": "IMAX",
+      "theater": "横浜ブルク13",
+      "prefecture": "神奈川県",
+      "screen": "シアター7 / IMAX",
+      "source_url": "https://tjoy.jp/yokohama_burg13/theater_news/detail/44697",
+      "verified_at": "2026-10-24",
+      "status_note": "IMAXは改修のため上映休止中（2026-10-24確認）。IMAXレーザーは2026-11-01・02プレオープン、11-03正式導入予定。最新の上映状況は公式情報をご確認ください。",
+      "upgrade_format": "IMAXレーザー",
+      "upgrade_preview_date": "2026-11-01",
+      "upgrade_opening_date": "2026-11-03"
     }
-  ]
+  ],
+  "review_policy": "Manual official-source factual review only; preserve existing curated rows and provenance during refresh. Equipment coverage is not a live showing/availability count. Scheduled upgrades require a new review before changing the format label."
 }

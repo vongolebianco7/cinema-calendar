@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-23T23:16:05.448Z",
-  "status": "production_verified",
+  "updated_at": "2026-10-24T07:56:11.918250+00:00",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b877e60eabb6e16f65c3fc76a2b3dabfdf0d9b35",
-  "branch": "docs/now-playing-release-20261024",
-  "head_sha": "b877e60eabb6e16f65c3fc76a2b3dabfdf0d9b35",
+  "base_sha": "2fd0d93f85a2266030264c586cf26e049d2dd2b4",
+  "branch": "feat/calendar-now-playing-label-20261024",
+  "head_sha": "2fd0d93f85a2266030264c586cf26e049d2dd2b4",
   "pull_request": null,
   "work_items": [
     {
@@ -562,6 +562,12 @@
       "acceptance": "User approved2026-10-24: discover section,3-column shared cards, full access/search, daily approved TMDB JP snapshot and source/update time, official cinema links. Independent current-list data; fail closed for stale/partial/invalid snapshots. Notifications follow as a later feature.",
       "pull_request": 484,
       "ci": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
+    },
+    {
+      "id": "FEATURE-CALENDAR-NOW-LABEL-20261024",
+      "title": "Show current nationwide now-playing labels on calendar posters",
+      "status": "in_progress",
+      "acceptance": "Root/prefix theatrical/streaming/TV/calendar thumbnails: exact TMDB ID and fresh verified nationwide snapshot only. No label on stale/future/unavailable data, no title/date inference. Preserve poster click/review/bookmark/date/layout/palette; rerenders idempotent, long-open pages expire status."
     }
   ],
   "verification": [
@@ -807,7 +813,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Nationwide now-playing increment COMPLETE and production verified. Notifications remain a separate later increment, not implemented here. Historical32-gate ledger remains28/32 with external rights/device/participant gates; Neon free quota reset2026-11-01T00:00:00Z remains unchanged. Do not repeat completed list work or claim all global tasks complete.",
+  "next_action": "Run calendar label both-engine browser evidence, whole quality/source CI, source receipt/final CI, merge and canonical verification. User explicitly approved label semantics; no notification work.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

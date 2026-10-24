@@ -217,6 +217,8 @@ jobs:
         run: |
           NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-calendar-now-playing-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-calendar-now-playing-browser.cjs
       - name: Preserve rendered list evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "9bc5221f9cbc5e15e34afd7b740585c77e17fb9d",
-  "verified_at": "2026-10-24T11:01:15.876Z",
-  "note": "PR488 exact CSS source passed all applicable workflows including Autonomous, smoke, frontend and backend build. Local shared quality passed; Chromium/WebKit390px calendar controls and overflow passed. Intermediate11.5px normal/9px tiny labels with brighter#1565c0 blue and white text. Behavior unchanged. Require final-head CI before merge."
+  "head_sha": "4f1807f3ad155d8a8fb38f7594fee6bc40600dcd",
+  "verified_at": "2026-10-24T11:45:24.200Z",
+  "note": "PR489 exact executable source passed all6 applicable workflows: Autonomous40090550391, smoke40090550482, frontend40090550462, backend40090550449, mobile and completeness. Full quality/11 focused tests passed. Chromium/WebKit390px root/prefix themes/calendar modes/actions/expiry plus9 real entry points shared bootstrap, exact-ID fixtures/official finite periods/start-only exclusion/ranking fallback passed. Focused review Important fallback finding resolved by retaining image sibling placeholder and browser failure regression. Require final-head CI, merge and canonical production verification. User-approved blue/size/records/origins unchanged."
 }

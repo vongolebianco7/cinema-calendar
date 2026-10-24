@@ -20,7 +20,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:'domcontentloaded'});
    await page.locator('.modeTab[data-mode="theatrical"]').click();await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).waitFor();
    assert.equal(await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).count(),1,'one poster per finite period in displayed month');
-   assert.match(await page.locator('.streamMovieDate.isPeriod').innerText(),/10\/02.*10\/15/);
+   assert.match(await page.locator('.streamMovie').filter({has:page.locator('.streamMovieTitle').filter({hasText:'用心棒'})}).locator('.streamMovieDate.isPeriod').innerText(),/10\/02.*10\/15/);
    const tab=await page.locator('.modeTab.active').evaluate(e=>({background:getComputedStyle(e).backgroundColor,shadow:getComputedStyle(e).boxShadow}));assert.equal(tab.background,'rgba(0, 0, 0, 0)');assert(!tab.shadow.includes('239, 63, 63'));
    await page.locator('.modeTab[data-mode="streaming"]').click();await page.locator('.streamMovie .cinelva-rating-controls').first().waitFor();
    assert.match(await page.locator('.streamMovieAvail').first().innerText(),/見放題 Prime Video/,'canonical TMDB ID finds observations despite local ID');

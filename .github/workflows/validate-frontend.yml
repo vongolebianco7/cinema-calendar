@@ -242,12 +242,14 @@ jobs:
           "$RUNNER_TEMP/cinelva-reported-audit/node_modules/.bin/playwright" install --with-deps chromium webkit
       - name: Verify reported calendar, brand, review, sort and theater issues
         run: |
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs
+          result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
+          exit "$result"
       - name: Preserve reported issue evidence
         if: always()
         uses: actions/upload-artifact@v4

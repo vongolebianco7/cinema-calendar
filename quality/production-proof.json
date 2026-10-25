@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "2e689d9e7119e4d5dac8135d46631828fd10325e",
-  "verified_at": "2026-10-25T02:29:49.630Z",
-  "note": "PR495 exact executable source2e689d9e: all7 PR workflows succeeded, including Autonomous40153143714, smoke40153143720, frontend40153143883, backend40153143754, mobile40153143751, completeness40153143760 and scorecard40153143687. Full local quality gate passed on this head. Chromium/WebKit 30 routes x4 viewports x2 themes each pass; shared review/bookmark storage and reported regressions pass. First30 record cards render eagerly; later cards defer offscreen layout. Streaming249/249 artwork; provider coverage remains partial. Receipt-only final-head CI and canonical production verification required."
+  "head_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
+  "verified_at": "2026-10-25T05:42:32.709Z",
+  "note": "PR496 exact executable source dc7cc711: all10 PR workflows succeeded. Required Autonomous40165682904, smoke40165682926, frontend40165682828 and backend40165682781 succeeded; full Python, mobile, backup, completeness, brand and isolated stage also succeeded. Chromium/WebKit new root/prefix/light/dark regressions verify provider popup/title-search links,44px controls, historical/current cinema-format visibility, date-first/provider-within-date ordering and exact legend tag colors; current-label expiry/identity and full route journeys pass. Full local shared quality passed; focused review and representative CI screenshots checked. Nested index/search synchronized to root while retaining base/noindex/icon metadata. Original logos, palette, origins and stored records preserved. Final receipt-head CI and canonical verification required before completion."
 }

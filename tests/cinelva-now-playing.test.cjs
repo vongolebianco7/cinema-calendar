@@ -42,3 +42,7 @@ test('offline detail uses an exact identity and never an invalid or future obser
  try{assert.equal((await api().detailFallback(1)).title,'上映中');assert.equal(await api().detailFallback(2),null);data={...data,region:'US'};assert.equal(await api().detailFallback(1),null);}
  finally{global.fetch=original;}
 });
+test('screening recommendations require a fresh exact-ID Japanese now-playing observation',async()=>{
+ const original=global.fetch;let data=snapshot({generated_at:new Date().toISOString()});global.fetch=async()=>({ok:true,json:async()=>data});
+ try{assert.equal(typeof api().isCurrentlyPlaying,'function');assert.equal(await api().isCurrentlyPlaying(1),true);assert.equal(await api().isCurrentlyPlaying(2),false);data={...data,generated_at:'2000-01-01T00:00:00Z'};assert.equal(await api().isCurrentlyPlaying(1),false);data={...data,generated_at:new Date().toISOString(),complete:false};assert.equal(await api().isCurrentlyPlaying(1),false);}finally{global.fetch=original;}
+});

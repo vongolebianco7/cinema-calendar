@@ -37,7 +37,7 @@ test('offline review actions target the canonical film rather than a local event
   const context={E:String,detail,URLSearchParams,location:{search:''},recordEntryUrl:String,
     CinemapCalendarContext:{read:()=>null},screeningRecommendationV3Html:()=>'',renderMovieInformation:()=>'',viewingTimelineHtml:()=>'',
     document:{createElement:()=>({innerHTML:'',querySelector:()=>null}),getElementById:()=>null,querySelectorAll:()=>[]},showMovieAwardHistory(){},criticRegistry:()=>Promise.resolve({})};
-  vm.runInNewContext(helpers+section('function mountDetailRelatedReviews(', 'function relatedHtml(')+section('function renderDetail(', 'document.getElementById("close").onclick='),context);
+  vm.runInNewContext(helpers+section('function watchProvidersHtml(', 'function viewingTimelineHtml(')+section('function mountDetailRelatedReviews(', 'function relatedHtml(')+section('function renderDetail(', 'document.getElementById("close").onclick='),context);
   context.renderDetail({...event,id:900001});
   assert.match(detail.innerHTML,/data-detail-review data-movie-id="157336"/);
   assert.doesNotMatch(detail.innerHTML,/data-movie-id="900001"/);

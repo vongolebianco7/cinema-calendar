@@ -21,6 +21,10 @@
   return selected.sort(sort==='title'?(a,b)=>a.title.localeCompare(b.title,'ja')||Number(a.id)-Number(b.id):(a,b)=>(Number(b.popularity)||0)-(Number(a.popularity)||0)||a.title.localeCompare(b.title,'ja'));
  }
  async function readSnapshot(){const r=await root.fetch('data/now_playing.json',{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('snapshot unavailable');return r.json();}
+ async function isCurrentlyPlaying(identity){
+  if(!positive(identity))return false;
+  try{const data=await readSnapshot();return snapshotState(data)==='fresh'&&data.movies.some(m=>String(m.id)===String(identity));}catch{return false;}
+ }
  async function detailFallback(identity){
   if(!positive(identity))return null;
   try{const data=await readSnapshot(),state=snapshotState(data);if(state==='unavailable')return null;return data.movies.find(m=>String(m.id)===String(identity))||null;}catch{return null;}
@@ -62,5 +66,5 @@
    search.addEventListener('input',()=>{expanded=false;render();});sort.addEventListener('change',render);more.addEventListener('click',()=>{expanded=!expanded;render();});render();
   }catch{unavailable('上映中情報を取得できませんでした。時間をおいて再度お試しください。');}
  }
- return {snapshotState,selectMovies,detailFallback,mount};
+ return {snapshotState,selectMovies,detailFallback,isCurrentlyPlaying,mount};
 });

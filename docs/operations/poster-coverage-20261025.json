@@ -1,0 +1,34 @@
+{
+  "status": "ci_passed",
+  "pr": 493,
+  "source_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
+  "award_rows": 705,
+  "award_resolved_rows": 611,
+  "award_artwork_rows": 611,
+  "streaming_rows": 134,
+  "streaming_artwork_rows": 133,
+  "service_rows": {
+    "Apple TV+": 5,
+    "Prime Video": 63,
+    "U-NEXT": 38,
+    "Disney+": 7,
+    "Hulu": 11,
+    "Netflix": 5,
+    "Lemino": 2,
+    "WOWOWオンデマンド": 2,
+    "ABEMA": 1
+  },
+  "streaming_complete": false,
+  "remaining": [
+    "94 award entries lack verified movie identity/artwork",
+    "パンダのすごい世界: verified premiere, no matched approved TMDB artwork",
+    "Provider premiere collection is editorial partial coverage, not each provider's entire library"
+  ],
+  "next_action": "Wait final CI, merge493 and verify canonical publication. Do not count CI as production.",
+  "sources": [
+    "https://www.wikidata.org/wiki/Wikidata:Licensing",
+    "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
+    "https://news.hulu.jp/comingsoon_2609/",
+    "https://about.netflix.com/ja/new-to-watch"
+  ]
+}

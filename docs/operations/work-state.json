@@ -1180,5 +1180,22 @@
       "Provider libraries are not certified exhaustive",
       "Existing global free DB quota/physical iPhone/independent participants/artwork-rights gates remain open"
     ]
+  },
+  "cinema_discount_comparison": {
+    "status": "local_verified_pending_ci",
+    "branch": "feat/cinema-discount-comparison-20261025",
+    "base_sha": "9d4f486",
+    "venues": 6,
+    "source_review_date": "2026-10-25",
+    "scope": "Ordinary adult2D, Yokohama/Kawasaki, dates/area/evening/existing benefits; manually reviewed static tariffs only. No showtime availability claimed.",
+    "tests": "New unit8/8 passed; full shared quality gate passed; local Chromium root/prefix light/dark320–1280px,44px calendar targets,eligibility,persistence,evening,retry,malformed data and expired prices passed. WebKit and exact-head GitHub CI pending.",
+    "review": "Independent focused review no critical/important findings. Minor neutral stale wording,320px targets and malformed-data retry corrected; relevant browser regressions red-to-green. Local Chromium lacks Japanese fonts; screenshot layout inspected but final Japanese visual evidence pending CI.",
+    "remaining": [
+      "Source-head required CI",
+      "Receipt-only production proof update",
+      "Final-head CI",
+      "Merge and canonical publication verification"
+    ],
+    "next_action": "Push feature branch; open PR and inspect all exact-head workflow results."
   }
 }

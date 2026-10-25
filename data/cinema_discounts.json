@@ -1,0 +1,876 @@
+{
+  "version": 1,
+  "sourceId": "manual_cinema_discount_facts",
+  "coverage": "横浜・川崎の確認済み6館。一般大人1名・通常2D席の一部料金を比較。",
+  "benefits": [
+    {
+      "id": "tohoOne",
+      "label": "TOHO-ONE 対象有料プラン",
+      "condition": "スタンダード／プレミアムの有効会員本人"
+    },
+    {
+      "id": "cinema109",
+      "label": "109シネマズ シネマポイント会員",
+      "condition": "有効な有料会員本人"
+    },
+    {
+      "id": "aeonPlus",
+      "label": "ワタシアタープラス",
+      "condition": "有料会員本人・WEB本登録済み"
+    },
+    {
+      "id": "ponta",
+      "label": "Pontaパス",
+      "condition": "有料会員本人・クーポン取得が必要"
+    },
+    {
+      "id": "saison",
+      "label": "セゾンの木曜日 対象カード",
+      "condition": "対象カード会員本人・クーポン取得が必要"
+    },
+    {
+      "id": "aeonCard",
+      "label": "イオンマークのクレジットカード",
+      "condition": "対象カード本人・購入方法に応じた提示／決済が必要"
+    },
+    {
+      "id": "fod",
+      "label": "FODプレミアム 対象会員",
+      "condition": "対象有料会員本人・クーポン取得が必要"
+    }
+  ],
+  "venues": [
+    {
+      "id": "toho-kawasaki",
+      "name": "TOHOシネマズ 川崎",
+      "area": "川崎",
+      "place": "川崎駅周辺",
+      "sourceUrl": "https://www.tohotheater.jp/theater/010/price.html",
+      "scheduleUrl": "https://hlo.tohotheater.jp/net/schedule/010/TNPI2000J01.do",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2100,
+          "condition": "一般・通常2D席",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "wednesday",
+          "label": "TOHOウェンズデイ",
+          "price": 1400,
+          "condition": "毎週水曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1400,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "cinema-day",
+          "label": "映画の日",
+          "price": 1000,
+          "condition": "12月1日",
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member",
+          "label": "TOHO-ONEメンバーデイ",
+          "price": 1300,
+          "condition": "毎週火曜日・TOHO-ONEの対象有料プラン会員本人",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "requires": [
+            "tohoOne"
+          ],
+          "evening": false
+        },
+        {
+          "id": "ponta",
+          "label": "Pontaパス優待",
+          "price": 1100,
+          "condition": "月・水曜日。Pontaパス会員本人・対象クーポンの取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1,
+              3
+            ]
+          },
+          "requires": [
+            "ponta"
+          ],
+          "evening": false
+        },
+        {
+          "id": "saison",
+          "label": "セゾンの木曜日",
+          "price": 1200,
+          "condition": "木曜日。対象カード会員本人・セゾンPortal等でクーポン取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              4
+            ]
+          },
+          "requires": [
+            "saison"
+          ],
+          "evening": false
+        },
+        {
+          "id": "fod",
+          "label": "FODフライデイ",
+          "price": 1200,
+          "condition": "金曜日。対象FODプレミアム会員本人・クーポン取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              5
+            ]
+          },
+          "requires": [
+            "fod"
+          ],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "レイトショー",
+          "price": 1600,
+          "condition": "20時以降の対象回。実際の上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        }
+      ]
+    },
+    {
+      "id": "toho-yokohama",
+      "name": "TOHOシネマズ ららぽーと横浜",
+      "area": "横浜",
+      "place": "鴨居・ららぽーと横浜",
+      "sourceUrl": "https://www.tohotheater.jp/theater/036/price.html",
+      "scheduleUrl": "https://hlo.tohotheater.jp/net/schedule/036/TNPI2000J01.do",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2100,
+          "condition": "一般・通常2D席",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "wednesday",
+          "label": "TOHOウェンズデイ",
+          "price": 1400,
+          "condition": "毎週水曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1400,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "cinema-day",
+          "label": "映画の日",
+          "price": 1000,
+          "condition": "12月1日",
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member",
+          "label": "TOHO-ONEメンバーデイ",
+          "price": 1300,
+          "condition": "毎週火曜日・TOHO-ONEの対象有料プラン会員本人",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "requires": [
+            "tohoOne"
+          ],
+          "evening": false
+        },
+        {
+          "id": "ponta",
+          "label": "Pontaパス優待",
+          "price": 1100,
+          "condition": "月・水曜日。Pontaパス会員本人・対象クーポンの取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1,
+              3
+            ]
+          },
+          "requires": [
+            "ponta"
+          ],
+          "evening": false
+        },
+        {
+          "id": "saison",
+          "label": "セゾンの木曜日",
+          "price": 1200,
+          "condition": "木曜日。対象カード会員本人・セゾンPortal等でクーポン取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              4
+            ]
+          },
+          "requires": [
+            "saison"
+          ],
+          "evening": false
+        },
+        {
+          "id": "fod",
+          "label": "FODフライデイ",
+          "price": 1200,
+          "condition": "金曜日。対象FODプレミアム会員本人・クーポン取得が必要",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              5
+            ]
+          },
+          "requires": [
+            "fod"
+          ],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "レイトショー",
+          "price": 1600,
+          "condition": "20時以降の対象回。実際の上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        }
+      ]
+    },
+    {
+      "id": "109-kawasaki",
+      "name": "109シネマズ川崎",
+      "area": "川崎",
+      "place": "川崎駅周辺",
+      "sourceUrl": "https://109cinemas.net/kawasaki/prices.html",
+      "scheduleUrl": "https://109cinemas.net/kawasaki/",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2200,
+          "condition": "一般・通常2D席",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member",
+          "label": "シネマポイント会員料金",
+          "price": 2000,
+          "condition": "有効なシネマポイント会員本人",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "cinema109"
+          ],
+          "evening": false
+        },
+        {
+          "id": "tuesday",
+          "label": "メンバーズデイ",
+          "price": 1300,
+          "condition": "毎週火曜日・シネマポイント会員本人",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "requires": [
+            "cinema109"
+          ],
+          "evening": false
+        },
+        {
+          "id": "wednesday",
+          "label": "109シネマズデイ",
+          "price": 1400,
+          "condition": "毎週水曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-wednesday",
+          "label": "109シネマズデイ（会員）",
+          "price": 1300,
+          "condition": "水曜日・シネマポイント会員本人",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "requires": [
+            "cinema109"
+          ],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1400,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-first",
+          "label": "ファーストデイ（会員）",
+          "price": 1300,
+          "condition": "毎月1日・シネマポイント会員本人",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [
+            "cinema109"
+          ],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "レイトショー",
+          "price": 1600,
+          "condition": "20時以降の対象回。上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        },
+        {
+          "id": "member-late",
+          "label": "レイトショー（会員）",
+          "price": 1500,
+          "condition": "20時以降の対象回・シネマポイント会員本人",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "cinema109"
+          ],
+          "evening": true
+        }
+      ]
+    },
+    {
+      "id": "cinecitta",
+      "name": "チネチッタ",
+      "area": "川崎",
+      "place": "川崎駅周辺",
+      "sourceUrl": "https://cinecitta.co.jp/price",
+      "scheduleUrl": "https://cinecitta.co.jp/",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2100,
+          "condition": "一般・通常2D席。LIVE ZOUND等は追加料金",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "wednesday",
+          "label": "チネチッタデー",
+          "price": 1400,
+          "condition": "毎週水曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "23rd",
+          "label": "チネチッタデー",
+          "price": 1400,
+          "condition": "毎月23日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              23
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ファーストデー",
+          "price": 1400,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "レイトショー",
+          "price": 1600,
+          "condition": "20時以降の対象回。上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        }
+      ]
+    },
+    {
+      "id": "aeon-kohoku",
+      "name": "イオンシネマ 港北ニュータウン",
+      "area": "横浜",
+      "place": "センター北",
+      "sourceUrl": "https://www.aeoncinema.com/kohoku/price/",
+      "scheduleUrl": "https://theater.aeoncinema.com/theaters/kohoku/",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2000,
+          "condition": "一般・通常2D席",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member",
+          "label": "ワタシアタープラス会員料金",
+          "price": 1900,
+          "condition": "有料会員本人。WEB会員情報の本登録が必要",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "monday",
+          "label": "ハッピーマンデー",
+          "price": 1200,
+          "condition": "毎週月曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-monday",
+          "label": "ハッピーマンデー（会員）",
+          "price": 1100,
+          "condition": "月曜日。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ハッピーファースト",
+          "price": 1200,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-first",
+          "label": "ハッピーファースト（会員）",
+          "price": 1100,
+          "condition": "毎月1日。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "cinema-day",
+          "label": "映画の日",
+          "price": 1000,
+          "condition": "12月1日",
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "ハッピーナイト",
+          "price": 1400,
+          "condition": "20時以降に開始する対象回。上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        },
+        {
+          "id": "member-late",
+          "label": "ハッピーナイト（会員）",
+          "price": 1300,
+          "condition": "20時以降に開始。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": true
+        },
+        {
+          "id": "card",
+          "label": "イオンカード優待",
+          "price": 1700,
+          "condition": "イオンマークの対象クレジットカード払い。本人の一般料金",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonCard"
+          ],
+          "evening": false
+        },
+        {
+          "id": "member-card",
+          "label": "イオンカード優待（会員）",
+          "price": 1600,
+          "condition": "本登録済みプラス会員本人・対象イオンカード払い。公式掲載の会員料金",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus",
+            "aeonCard"
+          ],
+          "evening": false
+        },
+        {
+          "id": "thanks",
+          "label": "お客さま感謝デー",
+          "price": 1100,
+          "condition": "毎月20・30日（2月は20日と末日）。対象イオンカード本人。窓口は提示、WEB・券売機はカード決済",
+          "when": {
+            "kind": "aeonThanks"
+          },
+          "requires": [
+            "aeonCard"
+          ],
+          "evening": false
+        }
+      ]
+    },
+    {
+      "id": "aeon-minatomirai",
+      "name": "イオンシネマ みなとみらい",
+      "area": "横浜",
+      "place": "みなとみらい",
+      "sourceUrl": "https://www.aeoncinema.com/minatomirai/price/",
+      "scheduleUrl": "https://theater.aeoncinema.com/theaters/minatomirai/",
+      "verifiedAt": "2026-10-25",
+      "offers": [
+        {
+          "id": "ordinary",
+          "label": "一般",
+          "price": 2000,
+          "condition": "一般・通常2D席",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member",
+          "label": "ワタシアタープラス会員料金",
+          "price": 1900,
+          "condition": "有料会員本人。WEB会員情報の本登録が必要",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "monday",
+          "label": "ハッピーマンデー",
+          "price": 1200,
+          "condition": "毎週月曜日",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-monday",
+          "label": "ハッピーマンデー（会員）",
+          "price": 1100,
+          "condition": "月曜日。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "first",
+          "label": "ハッピーファースト",
+          "price": 1200,
+          "condition": "毎月1日",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "member-first",
+          "label": "ハッピーファースト（会員）",
+          "price": 1100,
+          "condition": "毎月1日。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": false
+        },
+        {
+          "id": "cinema-day",
+          "label": "映画の日",
+          "price": 1000,
+          "condition": "12月1日",
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "requires": [],
+          "evening": false
+        },
+        {
+          "id": "late",
+          "label": "ハッピーナイト",
+          "price": 1400,
+          "condition": "20時以降に開始する対象回。上映時刻は公式サイトで確認",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [],
+          "evening": true
+        },
+        {
+          "id": "member-late",
+          "label": "ハッピーナイト（会員）",
+          "price": 1300,
+          "condition": "20時以降に開始。有料プラス会員本人・WEB本登録済み",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus"
+          ],
+          "evening": true
+        },
+        {
+          "id": "card",
+          "label": "イオンカード優待",
+          "price": 1700,
+          "condition": "イオンマークの対象クレジットカード払い。本人の一般料金",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonCard"
+          ],
+          "evening": false
+        },
+        {
+          "id": "member-card",
+          "label": "イオンカード優待（会員）",
+          "price": 1600,
+          "condition": "本登録済みプラス会員本人・対象イオンカード払い。公式掲載の会員料金",
+          "when": {
+            "kind": "always"
+          },
+          "requires": [
+            "aeonPlus",
+            "aeonCard"
+          ],
+          "evening": false
+        },
+        {
+          "id": "thanks",
+          "label": "お客さま感謝デー",
+          "price": 1100,
+          "condition": "毎月20・30日（2月は20日と末日）。対象イオンカード本人。窓口は提示、WEB・券売機はカード決済",
+          "when": {
+            "kind": "aeonThanks"
+          },
+          "requires": [
+            "aeonCard"
+          ],
+          "evening": false
+        }
+      ]
+    }
+  ]
+}

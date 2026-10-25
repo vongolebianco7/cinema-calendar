@@ -362,6 +362,17 @@
       "source_refs": [
         "official-release-data"
       ]
+    },
+    {
+      "path": "my-best10.html",
+      "surface": "compatibility",
+      "purpose": "Create and share personal Best10 images",
+      "data_owner": "browser-local canonical record store",
+      "count_contract": "selected local records",
+      "primary_cta": "Save or share Best10 image",
+      "source_refs": [
+        "local-storage"
+      ]
     }
   ]
 }

@@ -252,6 +252,8 @@ jobs:
       - name: Verify reported calendar, brand, review, sort and theater issues
         run: |
           result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
@@ -264,5 +266,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: reported-ui-audit
-          path: artifacts/reported-audit/
+          path: |
+            artifacts/reported-audit/
+            artifacts/global-search/
           if-no-files-found: warn

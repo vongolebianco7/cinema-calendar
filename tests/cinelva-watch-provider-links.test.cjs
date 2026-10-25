@@ -7,7 +7,7 @@ const render=(movie,av)=>{assert.equal(typeof context.watchProvidersHtml,'functi
 test('separates subscriptions, free, rental and purchase and makes provider searches actionable',()=>{
  const out=render({id:157336,title:'インターステラー & 宇宙'},{flatrate:['Netflix','Netflix','Amazon Prime Video'],rent:['Amazon Video'],buy:['Apple TV Store'],free:['YouTube']});
  for(const s of ['見放題','無料','レンタル','購入','JustWatch','netflix.com/search?q=','amazon.co.jp/gp/video/search?phrase=','tv.apple.com/jp/search?term='])assert.ok(out.includes(s),s);
- assert.equal((out.match(/Netflixで検索/g)||[]).length,1);
+ assert.equal((out.match(/aria-label="Netflixで検索"/g)||[]).length,1);
  assert.ok(out.includes(encodeURIComponent('インターステラー & 宇宙')));
  assert.match(out,/target="_blank" rel="noopener noreferrer"/);
 });
@@ -25,3 +25,5 @@ test('provider controls are used by both shared detail routes before long work i
 });
 
 test('U-NEXT uses the official freeword search route',()=>{const out=render({id:42,title:'短い作品'},{flatrate:['U-NEXT']});assert.ok(out.includes('https://video.unext.jp/freeword?query='));});
+
+test('compact three columns use validated service icons and retain free labels',()=>{const out=render({id:42,title:'作品'},{flatrate:['Netflix'],free:['YouTube'],rent:['Amazon Video'],logos:{Netflix:'/logo.png',YouTube:'https://evil.example/a.png'}});assert.match(out,/>視聴可能なサービス</);assert.equal((out.match(/class="watchProviderGroup"/g)||[]).length,3);assert.match(out,/https:\/\/image.tmdb.org\/t\/p\/w92\/logo.png/);assert.ok(!out.includes('evil.example'));assert.match(out,/<small>無料<\/small>/);assert.match(out,/aria-label="Netflixで検索"/);});

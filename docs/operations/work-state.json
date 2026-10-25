@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T06:00:00+09:00",
+  "updated_at": "2026-10-25T01:05:44.681Z",
   "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f9c7e72adb6526e4393bcd66403c90da381c297b",
-  "branch": "fix/reported-ui-data-audit-20261024",
-  "head_sha": "e84c0e47098114315d5f7b682817401b4ab3d588",
-  "pull_request": 491,
+  "base_sha": "2fc777a59ce153782e04bd4f3fbd06f460963785",
+  "branch": "fix/poster-coverage-user-copy-20261025",
+  "head_sha": "2fc777a59ce153782e04bd4f3fbd06f460963785",
+  "pull_request": 493,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -583,6 +583,13 @@
       "status": "in_progress",
       "acceptance": "See docs/operations/user-audit-20261024.json. Preserve supplied logo pixels, existing storage/origins and no scraping/paid API. Unsupported yearly/worldwide financial datasets remain explicit.",
       "ci": "Integrated local quality passed before final safe award/API enrichment. New reported-issue browser regressions pending CI. No production completion claimed."
+    },
+    {
+      "id": "P0-493-POSTER-COVERAGE-COPY",
+      "title": "Repair award/streaming posters, expand reviewed entries and remove internal product copy",
+      "status": "production_verified",
+      "acceptance": "705/705 award entries (549 unique films) have verified identities/posters; streaming134/133; empty calendar metadata preserves award artwork; watched total before decades and saved-date labels verified both engines;10 canonical files match release.",
+      "ci": "35da222f all11 success; source3c605022 receipt retained."
     }
   ],
   "verification": [
@@ -828,7 +835,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "PR491 implemented corrections merged and canonical release verified. See user-audit-20261024.json for17-item evidence and retained source limits. Remaining global rights/device/users/DB gates stay open. Auxiliary isolated Pages Azure-mirror provisioning timeout remains a separate CI environment issue; no app test failure hidden.",
+  "next_action": "PR493 released and10 canonical files byte-verified. Remaining poster Panda requires a verified same-film approved source; provider premiere list is partial. Global DB/device/participant gates remain open.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -904,5 +911,86 @@
     "frontend": "dpl_JBg94Nuxr4TjhBfv32Ae8vxZ96wr READY",
     "backend": "dpl_14BzDBBFAFqkjtij6fBY9tsVMccm READY",
     "canonical_evidence": "16HTTP200 byte-identical files; calendar1033,OctoberNetflix2,world2026firstpage10 API200. No actual-device/browser production writes or DB recovery claimed."
+  },
+  "poster_coverage_release": {
+    "pr": 493,
+    "source_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
+    "final_head": "35da222f4039b429fb0a28e5e8ad00e5905d39e4",
+    "merge_sha": "2fc777a59ce153782e04bd4f3fbd06f460963785",
+    "award_entries": 705,
+    "unique_award_films": 549,
+    "award_artwork_entries": 705,
+    "streaming_entries": 134,
+    "streaming_artwork_entries": 133,
+    "streaming_complete": false,
+    "final_ci": "All11 workflows passed; reported browser regressions passed Chromium and WebKit.",
+    "frontend": "dpl_23eojEY8eq3hbui5msJfMMU7JcRE READY",
+    "backend": "dpl_EJ1pqGz314EiVrJEtjPTEEoqsJ4C READY",
+    "canonical_checks": [
+      {
+        "path": "data/awards.json",
+        "status": 200,
+        "equal": true,
+        "size": 601369
+      },
+      {
+        "path": "data/streaming.json",
+        "status": 200,
+        "equal": true,
+        "size": 119315
+      },
+      {
+        "path": "data/movies.json",
+        "status": 200,
+        "equal": true,
+        "size": 866681
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "equal": true,
+        "size": 127766
+      },
+      {
+        "path": "my-cinelva/index.html",
+        "status": 200,
+        "equal": true,
+        "size": 138049
+      },
+      {
+        "path": "js/cinelva-records-page.js",
+        "status": 200,
+        "equal": true,
+        "size": 122023
+      },
+      {
+        "path": "js/cinelva-movie-identity.js",
+        "status": 200,
+        "equal": true,
+        "size": 15895
+      },
+      {
+        "path": "rankings.html",
+        "status": 200,
+        "equal": true,
+        "size": 56519
+      },
+      {
+        "path": "revivals.html",
+        "status": 200,
+        "equal": true,
+        "size": 11839
+      },
+      {
+        "path": "data/source_registry.json",
+        "status": 200,
+        "equal": true,
+        "size": 8787
+      }
+    ],
+    "remaining": [
+      "パンダのすごい世界 has no verified matching approved poster.",
+      "Streaming premiere coverage remains partial; exhaustive provider libraries not available from current approved dated feeds."
+    ]
   }
 }

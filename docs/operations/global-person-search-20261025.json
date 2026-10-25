@@ -11,6 +11,6 @@
   ],
   "local_validation": "Full quality gate and17 focused unit/API tests pass; Chromium390px root/prefix/MyCinelva headers, tap/movie/Enter, exact person, stale responses, IME, ArrowUp, three columns, director metadata preservation and review save/reload; stalled movie shows people; stalled profile uses saved director fallback. Final source CI and final receipt CI pending.",
   "review": "Independent reviewer findings fixed and reproduced red→green; no unresolved important findings.",
-  "prior_ci": "Compact-only source30c83539 all9 except frontend. Both engine new UI regressions passed. Existing full route WebKit agent redirect timed out; one unchanged-source bounded rerun started. This combined source supersedes it; publication remains guarded.",
+  "prior_ci": "Combined source4e631291: all8 other workflows and full frontend validate480-page/record journeys passed. New global search passed Chromium+WebKit twice. Existing reported audit repeatedly counted WebKit outgoing-document fetch cancellation as current-page error. Provider route transitions now use fresh pages, retaining strict current-page error assertions. No product source changes in repair. Renew exact-source CI and receipt.",
   "next_action": "Wait exact combined-source CI, renew receipt in proof-only commit, require final CI, merge499 and verify canonical frontend/backend."
 }

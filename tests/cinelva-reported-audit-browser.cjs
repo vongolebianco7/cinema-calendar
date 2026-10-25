@@ -17,7 +17,10 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('**/data/movies.json*',r=>r.fulfill({json:{movies:films}}));
    await context.route('**/data/availability.json*',r=>r.fulfill({json:{movies:{42:{checked_at:'2026-10-24T00:00:00Z',flatrate:['Prime Video']},43:{checked_at:'2026-10-24T00:00:00Z',flatrate:[]}}}}));
    await context.route('**/data/special_screenings.json*',r=>r.fulfill({json:{screenings:[{id:11878,tmdbId:11878,title:'用心棒',date:'2026-10-02',end_date:'2026-10-15',event:'theatrical',service:'午前十時の映画祭',special_screening:'asa10',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'}]}}));
-   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});
+   const errors=[];let page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});
+   // A new document must not inherit WebKit errors from intentionally canceled
+   // background fetches in an outgoing document. Keep all current-page errors fatal.
+   const freshPage=async()=>{assert.deepEqual(errors,[]);page.removeAllListeners('pageerror');await page.close();page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});};
    await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:'domcontentloaded'});
    await page.locator('.modeTab[data-mode="theatrical"]').click();await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).waitFor();
    assert.equal(await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).count(),1,'one poster per finite period in displayed month');
@@ -58,6 +61,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('**/data/now_playing.json*',r=>r.fulfill({json:{schema_version:1,region:'JP',source:{id:'tmdb',endpoint:'/movie/now_playing'},complete:true,generated_at:'2026-10-24T00:00:00Z',movies:[{id:43,title:'上映中の作品'}]}}));
    await context.route('**/api/movie-detail?*',r=>r.fulfill({headers:{'access-control-allow-origin':'*'},json:{movie:{id:Number(new URL(r.request().url()).searchParams.get('id')),tmdbId:Number(new URL(r.request().url()).searchParams.get('id')),title:'短い作品',event:'catalog',availability:{logos:{Netflix:'/netflix.png','Amazon Prime Video':'/prime.png','Amazon Video':'/prime.png','Apple TV Store':'/apple.png'},flatrate:['Netflix','Amazon Prime Video'],rent:['Amazon Video'],buy:['Apple TV Store'],source_url:'https://www.themoviedb.org/movie/42/watch?locale=JP'}}}}));
    for(const prefix of ['', 'cinelva/']){
+    await freshPage();
     await page.goto(`http://127.0.0.1:${port}/${prefix}search.html?id=42`,{waitUntil:'domcontentloaded'});
     try{await page.getByRole('heading',{name:'視聴可能なサービス',exact:true}).waitFor();}catch(error){await page.screenshot({path:`artifacts/reported-audit/provider-failure-${prefix?'prefix':'root'}.png`});throw Error(JSON.stringify({errors,detail:await page.locator('#detail').innerText()})+' '+error.message);}
     assert.equal(await page.getByRole('heading',{name:'どの上映方式で見る？',exact:true}).count(),0,'old films do not show cinema formats');
@@ -71,9 +75,11 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     await page.screenshot({path:`artifacts/reported-audit/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${prefix?'prefix':'root'}-providers.png`});
     assert.deepEqual(errors,[]);
    }
+   await freshPage();
    await page.goto(`http://127.0.0.1:${port}/search.html?id=43`,{waitUntil:'domcontentloaded'});
    await page.getByRole('heading',{name:'どの上映方式で見る？',exact:true}).waitFor();
    assert.deepEqual(errors,[]);
+   await freshPage();
    await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>typeof groupedMovieCards==='function');
    const streamingOrder=await page.evaluate(()=>{movies=[{id:101,title:'Later Netflix',date:'2026-10-04',service:'Netflix',event:'streaming'},{id:102,title:'Early Prime',date:'2026-10-01',service:'Prime Video',event:'streaming'},{id:103,title:'Early Netflix',date:'2026-10-01',service:'Netflix',event:'streaming'},{id:104,title:'Early FOD',date:'2026-10-01',service:'FOD',event:'streaming'}];mode='streaming';active='すべて';view=new Date(2026,9,1);streamRangeStart=null;render();return {titles:[...document.querySelectorAll('.streamMovieTitle')].map(e=>e.textContent),tags:[...document.querySelectorAll('.streamMovieService')].map(e=>({name:e.textContent,color:getComputedStyle(e).backgroundColor,legend:getComputedStyle([...document.querySelectorAll('#legend span')].find(x=>x.textContent===e.textContent).querySelector('i')).backgroundColor}))};});

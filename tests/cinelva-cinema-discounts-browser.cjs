@@ -31,6 +31,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.equal(await page.locator('#discountResults .discountCard').count(),3);
    assert.match(await page.locator('#discountSummary').innerText(),/上映/);
    assert.equal(await page.locator('#discountCalendar button').count(),14);
+   const selectedBackground=await page.locator('#discountCalendar [aria-pressed="true"]').evaluate(x=>getComputedStyle(x).backgroundColor);
+   const otherBackground=await page.locator('#discountCalendar [aria-pressed="false"]').first().evaluate(x=>getComputedStyle(x).backgroundColor);
+   assert.notEqual(selectedBackground,otherBackground,`${theme} selected date must remain visible`);
    for(const width of [320,390,768,1280]){
     await page.setViewportSize({width,height:844});
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${route}/${theme}/${width} overflow`);

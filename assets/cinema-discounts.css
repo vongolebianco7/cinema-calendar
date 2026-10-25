@@ -14,7 +14,7 @@
 #discounts button{min-height:44px;min-width:44px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;cursor:pointer}
 #discounts .discountDay{padding:9px 2px;font-size:12px;line-height:1.5;min-width:0}
 #discounts .discountDay b{display:block;font-size:13px;white-space:nowrap}
-#discounts .discountDay[aria-pressed=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+#discounts .discountDay[aria-pressed=true]{background:var(--text)!important;color:var(--bg)!important;border-color:var(--text)!important}
 #discounts .discountResults{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #discounts .discountCard{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px}
 #discounts .discountCard h3{font-size:16px;line-height:1.5;margin:0 0 4px;overflow-wrap:anywhere}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8a75fb6853f3fafc6ff9f2c8f390777a5b73921d",
-  "verified_at": "2026-10-25T01:58:59.893Z",
-  "note": "PR495 exact executable source: all6 workflows succeeded, including Autonomous40151732365, smoke40151732370, frontend40151732356 (one bounded unchanged-source rerun after existing search bookmark assertion), backend40151732368, mobile and completeness. Data249/249 artwork; 115 reviewed premieres and Panda identity artwork. Original performance1126ms/repeat1003ms exceeded1000ms; offscreen layout repair now182/216ms for390/1280px1000-record interactions, all4 cases pass. Preserve all records, poster identities, storage keys, origins, logo pixels and timing budgets. Final-head CI and canonical verification still required."
+  "head_sha": "2e689d9e7119e4d5dac8135d46631828fd10325e",
+  "verified_at": "2026-10-25T02:29:49.630Z",
+  "note": "PR495 exact executable source2e689d9e: all7 PR workflows succeeded, including Autonomous40153143714, smoke40153143720, frontend40153143883, backend40153143754, mobile40153143751, completeness40153143760 and scorecard40153143687. Full local quality gate passed on this head. Chromium/WebKit 30 routes x4 viewports x2 themes each pass; shared review/bookmark storage and reported regressions pass. First30 record cards render eagerly; later cards defer offscreen layout. Streaming249/249 artwork; provider coverage remains partial. Receipt-only final-head CI and canonical production verification required."
 }

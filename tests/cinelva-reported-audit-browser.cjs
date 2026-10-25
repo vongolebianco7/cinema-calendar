@@ -56,17 +56,17 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.match((await page.locator('#wantWatchSort option').allTextContents()).join(' '),/保存した日/);
    assert.doesNotMatch(await page.locator('body').innerText(),/ソートキー|実装済み|作品ID未照合|照合保留/);
    await context.route('**/data/now_playing.json*',r=>r.fulfill({json:{schema_version:1,region:'JP',source:{id:'tmdb',endpoint:'/movie/now_playing'},complete:true,generated_at:'2026-10-24T00:00:00Z',movies:[{id:43,title:'上映中の作品'}]}}));
-   await context.route('**/api/movie-detail?*',r=>r.fulfill({headers:{'access-control-allow-origin':'*'},json:{movie:{id:Number(new URL(r.request().url()).searchParams.get('id')),tmdbId:Number(new URL(r.request().url()).searchParams.get('id')),title:'短い作品',event:'catalog',availability:{flatrate:['Netflix','Amazon Prime Video'],rent:['Amazon Video'],buy:['Apple TV Store'],source_url:'https://www.themoviedb.org/movie/42/watch?locale=JP'}}}}));
+   await context.route('**/api/movie-detail?*',r=>r.fulfill({headers:{'access-control-allow-origin':'*'},json:{movie:{id:Number(new URL(r.request().url()).searchParams.get('id')),tmdbId:Number(new URL(r.request().url()).searchParams.get('id')),title:'短い作品',event:'catalog',availability:{logos:{Netflix:'/netflix.png','Amazon Prime Video':'/prime.png','Amazon Video':'/prime.png','Apple TV Store':'/apple.png'},flatrate:['Netflix','Amazon Prime Video'],rent:['Amazon Video'],buy:['Apple TV Store'],source_url:'https://www.themoviedb.org/movie/42/watch?locale=JP'}}}}));
    for(const prefix of ['', 'cinelva/']){
     await page.goto(`http://127.0.0.1:${port}/${prefix}search.html?id=42`,{waitUntil:'domcontentloaded'});
-    try{await page.getByRole('heading',{name:'どこで観る？',exact:true}).waitFor();}catch(error){await page.screenshot({path:`artifacts/reported-audit/provider-failure-${prefix?'prefix':'root'}.png`});throw Error(JSON.stringify({errors,detail:await page.locator('#detail').innerText()})+' '+error.message);}
+    try{await page.getByRole('heading',{name:'視聴可能なサービス',exact:true}).waitFor();}catch(error){await page.screenshot({path:`artifacts/reported-audit/provider-failure-${prefix?'prefix':'root'}.png`});throw Error(JSON.stringify({errors,detail:await page.locator('#detail').innerText()})+' '+error.message);}
     assert.equal(await page.getByRole('heading',{name:'どの上映方式で見る？',exact:true}).count(),0,'old films do not show cinema formats');
     const panel=page.locator('.watchProviders');assert.match(await panel.innerText(),/見放題[\s\S]*レンタル[\s\S]*購入/);
-    const netflix=panel.getByRole('link',{name:'Netflixで検索 ↗',exact:true});
+    const netflix=panel.getByRole('link',{name:'Netflixで検索',exact:true});
     assert.equal(new URL(await netflix.getAttribute('href')).searchParams.get('q'),'短い作品');
     assert.equal(await netflix.evaluate(e=>e.getBoundingClientRect().height>=44),true);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-    assert.equal(await panel.locator('.watchProviderLink').count(),4);
+    assert.equal(await panel.locator('.watchProviderLink').count(),4);assert.equal(await panel.locator('.watchProviderLink img').count(),4);assert.equal(await panel.locator('.watchProviderGroup').count(),3);assert.equal(await panel.locator('.watchProviderColumns').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),3);
     const popupPromise=page.waitForEvent('popup');await netflix.click();const popup=await popupPromise;await popup.waitForLoadState('domcontentloaded');assert.equal(new URL(popup.url()).hostname,'www.netflix.com');await popup.close();
     await page.screenshot({path:`artifacts/reported-audit/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${prefix?'prefix':'root'}-providers.png`});
     assert.deepEqual(errors,[]);

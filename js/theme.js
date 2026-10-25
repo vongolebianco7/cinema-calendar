@@ -3,6 +3,7 @@
   'use strict';
   const key = 'cinelva-theme-v1';
   const sourceHref = document.currentScript?.src ? new URL('../credits.html#data-status', document.currentScript.src).href : 'credits.html#data-status';
+  const globalSearchHref = document.currentScript?.src ? new URL('cinelva-global-search.js?v=20261025-people', document.currentScript.src).href : '';
   const root = document.documentElement;
   const media = window.matchMedia('(prefers-color-scheme: dark)');
   let preference = 'system';
@@ -25,6 +26,9 @@
     apply();
   });
   function mount() {
+    if (globalSearchHref && document.querySelector('.gSearchForm')) {
+      const searchScript = document.createElement('script');searchScript.src = globalSearchHref;searchScript.async = false;document.head.appendChild(searchScript);
+    }
     const host = document.querySelector('.gDrawer') || document.querySelector('main');
     if (!host) return;
     const sourceLink = document.createElement('a');

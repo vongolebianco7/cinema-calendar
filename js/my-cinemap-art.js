@@ -142,35 +142,6 @@ function drawCinemaBackground(ctx,w,h,kind){
   ctx.fillStyle=dark?'rgba(0,0,0,.34)':'rgba(255,248,235,.24)';ctx.fillRect(0,0,w,h);ctx.restore();
 }
 
-/* The five original user-supplied cinematic backgrounds are unchanged assets. */
-const originalCinelvaBackgrounds=[
-  '105DE5C4-9F65-41AF-A72F-0731A88CA8E6.png',
-  '309A0142-0B8A-4070-A341-63A2446D0CBE.png',
-  '48E0565E-2BBD-45A0-B6C9-A3A554976D0D.png',
-  '99AFA977-5A97-4544-A7AD-60E16A93F874.png',
-  'AB933939-93EB-43D6-814A-C60BE58B42F6.png'
-];
-const originalCinelvaImages=new Map();
-function drawOriginalUploadedBackground(ctx,w,h,index){
-  const file=originalCinelvaBackgrounds[index-1];
-  if(!file)return;
-  let entry=originalCinelvaImages.get(file);
-  if(!entry){
-    const img=new Image();
-    entry={img,loaded:false,failed:false};
-    originalCinelvaImages.set(file,entry);
-    img.onload=()=>{entry.loaded=true;if(Array.isArray(window.cinelvaArtworkMovies))drawArtwork(window.cinelvaArtworkMovies);};
-    img.onerror=()=>{entry.failed=true;};
-    img.src='assets/'+file;
-  }
-  if(entry.loaded){
-    const image=entry.img,ratio=Math.max(w/image.naturalWidth,h/image.naturalHeight);
-    const iw=image.naturalWidth*ratio,ih=image.naturalHeight*ratio;
-    ctx.drawImage(image,(w-iw)/2,(h-ih)/2,iw,ih);
-    ctx.fillStyle='rgba(250,245,233,.82)';
-    ctx.fillRect(0,0,w,h);
-  }
-}
 function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal,dark=!!p.dark,isMinimal=theme==='minimal';
   const fg=dark?'#fbf6ed':p.fg,outline=dark?'rgba(239,230,216,.86)':p.border,tagline=dark?'#cbbca6':p.muted;
@@ -209,12 +180,8 @@ function drawArtwork(movies){
   const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
   ({minimal:drawMinimal,noir:drawNoir,burgundy:drawBurgundy,bluegray:drawBlueGray}[theme]||drawMinimal)(ctx,w,h,p);
   const cinemaBackground=artValue('cinemaBackground')||'none';
-  if(/^cinema-[1-5]$/.test(theme)){
-    drawOriginalUploadedBackground(ctx,w,h,Number(theme.slice(-1)));
-  }else{
-    drawCinemaBackground(ctx,w,h,cinemaBackground);
-    if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
-  }
+  drawCinemaBackground(ctx,w,h,cinemaBackground);
+  if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
   const title=artValue('title').trim()||'MY TOP OF 2026';
   ctx.textAlign='center';

@@ -58,6 +58,7 @@ on:
       - '!data/awards.json'
       - '!data/director_name_readings.json'
       - '!data/directors-mobile.json'
+      - '!data/director-feature-index.json'
       - '!data/directors.json'
       - '!data/events.json'
       - '!data/movies.json'
@@ -133,6 +134,7 @@ jobs:
         run: |
           python scripts/enrich_directors.py --normalize-only
           python scripts/build_director_mobile.py
+          node scripts/build-director-feature-index.cjs
       - name: Run My Cinelva mobile browser journey
         run: |
           npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0

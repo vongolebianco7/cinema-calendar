@@ -27,3 +27,5 @@
 ### Task 3
 - [ ] Record current Netflix date-feed scope/count, without claiming full library coverage.
 - [ ] Review complete diff; exact source CI, receipt-only CI, merge and verify canonical deployment.
+
+Actual-data finding: TMDB movie credits omit runtimes; pure predicate reuse alone retained Nolan shorts. Project verified ranking IDs to a110KB index, rebuild/stage with every director projection, and constrain complete director lists. This replaces loading4.9MB of biography/poster data for healthy profiles.

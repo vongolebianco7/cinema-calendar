@@ -9,12 +9,13 @@
     "Mobile movie-detail close control above sticky header"
   ],
   "verification": {
-    "focused_node": "48/48 passed",
-    "quality_gate": "passed;347 active node tests plus Python/route/data contracts",
+    "focused_node": "50/50 passed",
+    "quality_gate": "passed;349 active node tests plus Python/route/data contracts",
     "mobile_browser": "Chromium390px light/dark root,prefix,MyCinelva;independent movie/person stalls,photos,strict director exclusions,tab network reuse,common review save/reload,detail close and saved fallback passed",
     "fallback_timing": "One10s timeout in full browser test; unchanged application rerun passed. Isolated actual6s abort→saved fallback also passed.",
     "review": "Independent whole-change review: no critical/important findings.",
-    "live_prefix": "Existing production API トム returned actor1136406 as first result, confirming new bounded prefix recovery lookup covers reported actor. Full new endpoint requires deployment."
+    "live_prefix": "Existing production API トム returned actor1136406 as first result, confirming new bounded prefix recovery lookup covers reported actor. Full new endpoint requires deployment.",
+    "director_data_parity": "Shared policy projects911 verified complete director lists to110598-byte index. Nolan observed13 feature IDs, excluding raw runtime-unknown shorts from19 API credits. Generated with every source projection."
   },
   "netflix_scope": {
     "streaming_rows": 5,

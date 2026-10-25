@@ -32,3 +32,13 @@ test('suggestions choose safe person photos and movie posters',()=>{
  assert.equal(model.candidateImage({kind:'movie',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}),'https://image.tmdb.org/t/p/w185/poster.jpg');
  assert.equal(model.candidateImage({kind:'movie',poster:'https://untrusted.test/a.jpg'}),'');
 });
+test('verified ranking index excludes runtime-unknown short credits from live person results',()=>{
+ const films=model.creditFilms([{id:1,title:'Feature',job:'Director'},{id:2,title:'Quay',job:'Director'}],'director','Person',[1]);
+ assert.deepEqual(films.map(x=>x.id),[1]);
+});
+test('compact director index is synchronized with the ranking catalog and bounded in size',()=>{
+ const fs=require('node:fs');const {build}=require('../scripts/build-director-feature-index.cjs');
+ const source=JSON.parse(fs.readFileSync('data/directors-mobile.json','utf8')),published=JSON.parse(fs.readFileSync('data/director-feature-index.json','utf8'));
+ assert.deepEqual(published,build(source));assert.ok(Object.keys(published.directors).length>0);
+ assert.ok(fs.statSync('data/director-feature-index.json').size<160000);
+});

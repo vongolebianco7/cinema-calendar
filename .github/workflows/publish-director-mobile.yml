@@ -7,6 +7,8 @@ on:
       - data/director_name_readings.json
       - scripts/enrich_directors.py
       - scripts/build_director_mobile.py
+      - scripts/build-director-feature-index.cjs
+      - js/cinelva-global-search.js
       - .github/workflows/publish-director-mobile.yml
   workflow_dispatch:
 permissions:
@@ -36,9 +38,10 @@ jobs:
             # This path makes no external API requests or new observation dates.
             python scripts/enrich_directors.py --normalize-only
             python scripts/build_director_mobile.py
+            node scripts/build-director-feature-index.cjs
             python scripts/quality_gate.py
             node scripts/verify-production-release.cjs --require
-            git add data/directors-mobile.json data/directors.json
+            git add data/directors-mobile.json data/directors.json data/director-feature-index.json
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'Publish synchronized director catalog with retained name provenance'
             if git push origin HEAD:main; then exit 0; fi

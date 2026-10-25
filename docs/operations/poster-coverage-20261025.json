@@ -1,28 +1,84 @@
 {
-  "status": "publication_pending",
   "pr": 493,
   "source_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
-  "award_rows": 705,
-  "award_resolved_rows": 705,
-  "award_artwork_rows": 705,
-  "streaming_rows": 134,
-  "streaming_artwork_rows": 133,
+  "final_head": "35da222f4039b429fb0a28e5e8ad00e5905d39e4",
+  "merge_sha": "2fc777a59ce153782e04bd4f3fbd06f460963785",
+  "award_entries": 705,
+  "unique_award_films": 549,
+  "award_artwork_entries": 705,
+  "streaming_entries": 134,
+  "streaming_artwork_entries": 133,
   "streaming_complete": false,
+  "final_ci": "All11 workflows passed; reported browser regressions passed Chromium and WebKit.",
+  "frontend": "dpl_23eojEY8eq3hbui5msJfMMU7JcRE READY",
+  "backend": "dpl_EJ1pqGz314EiVrJEtjPTEEoqsJ4C READY",
+  "canonical_checks": [
+    {
+      "path": "data/awards.json",
+      "status": 200,
+      "equal": true,
+      "size": 601369
+    },
+    {
+      "path": "data/streaming.json",
+      "status": 200,
+      "equal": true,
+      "size": 119315
+    },
+    {
+      "path": "data/movies.json",
+      "status": 200,
+      "equal": true,
+      "size": 866681
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "equal": true,
+      "size": 127766
+    },
+    {
+      "path": "my-cinelva/index.html",
+      "status": 200,
+      "equal": true,
+      "size": 138049
+    },
+    {
+      "path": "js/cinelva-records-page.js",
+      "status": 200,
+      "equal": true,
+      "size": 122023
+    },
+    {
+      "path": "js/cinelva-movie-identity.js",
+      "status": 200,
+      "equal": true,
+      "size": 15895
+    },
+    {
+      "path": "rankings.html",
+      "status": 200,
+      "equal": true,
+      "size": 56519
+    },
+    {
+      "path": "revivals.html",
+      "status": 200,
+      "equal": true,
+      "size": 11839
+    },
+    {
+      "path": "data/source_registry.json",
+      "status": 200,
+      "equal": true,
+      "size": 8787
+    }
+  ],
   "remaining": [
-    "パンダのすごい世界: verified premiere, no matched approved TMDB artwork",
-    "Provider premiere collection is editorial partial coverage, not each provider's entire library"
+    "パンダのすごい世界 has no verified matching approved poster.",
+    "Streaming premiere coverage remains partial; exhaustive provider libraries not available from current approved dated feeds."
   ],
-  "identity_review_notes": [
-    "Festival titles matched using official director/cast identities.",
-    "Ben'Imana festival year 2026 preserved independently of TMDB future theatrical date 2027.",
-    "Gloria corrected from director name; Once Upon a Time in Gaza category corrected to Un Certain Regard Best Directing."
-  ],
-  "next_action": "Wait final CI, merge PR493, verify canonical publication.",
-  "sources": [
-    "https://www.wikidata.org/wiki/Wikidata:Licensing",
-    "https://www.festival-cannes.com/en/f/ben-imana/",
-    "https://www.festival-cannes.com/en/f/soudain/",
-    "https://www.festival-cannes.com/en/f/once-upon-a-time-in-gaza/",
-    "https://www.labiennale.org/en/history-venice-film-festival"
-  ]
+  "status": "production_verified",
+  "canonical_url": "https://cinelva.vercel.app",
+  "verified_at": "2026-10-25T01:05:44.681Z"
 }

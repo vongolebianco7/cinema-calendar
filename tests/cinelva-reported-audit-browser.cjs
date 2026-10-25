@@ -20,7 +20,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    const errors=[];let page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});
    // A new document must not inherit WebKit errors from intentionally canceled
    // background fetches in an outgoing document. Keep all current-page errors fatal.
-   const freshPage=async()=>{assert.deepEqual(errors,[]);page.removeAllListeners('pageerror');await page.close();page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});};
+   const freshPage=async()=>{assert.deepEqual(errors,[]);page.removeAllListeners('pageerror');await page.close();page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));};
    await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:'domcontentloaded'});
    await page.locator('.modeTab[data-mode="theatrical"]').click();await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).waitFor();
    assert.equal(await page.locator('.streamMovieTitle').filter({hasText:'用心棒'}).count(),1,'one poster per finite period in displayed month');
@@ -63,6 +63,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    for(const prefix of ['', 'cinelva/']){
     await freshPage();
     await page.goto(`http://127.0.0.1:${port}/${prefix}search.html?id=42`,{waitUntil:'domcontentloaded'});
+    assert.equal(await page.evaluate(()=>new Date().toISOString().slice(0,10)),'2026-10-24','context clock is retained by fresh documents');
     try{await page.getByRole('heading',{name:'視聴可能なサービス',exact:true}).waitFor();}catch(error){await page.screenshot({path:`artifacts/reported-audit/provider-failure-${prefix?'prefix':'root'}.png`});throw Error(JSON.stringify({errors,detail:await page.locator('#detail').innerText()})+' '+error.message);}
     assert.equal(await page.getByRole('heading',{name:'どの上映方式で見る？',exact:true}).count(),0,'old films do not show cinema formats');
     const panel=page.locator('.watchProviders');assert.match(await panel.innerText(),/見放題[\s\S]*レンタル[\s\S]*購入/);

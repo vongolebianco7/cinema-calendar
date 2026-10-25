@@ -21,7 +21,7 @@
   <div id="discountBenefits" class="discountBenefits"></div>
   <p id="discountStorage" class="discountMuted">選択内容はこの端末のブラウザーに保存します。カード番号や会員番号の入力は不要です。</p>
  </details>
- <p class="discountMuted">これから14日間の登録料金の最小額（円・税込）</p>
+ <p class="discountMuted">これから14日間の料金目安（円・税込）</p>
  <div id="discountCalendar" class="discountCalendar" aria-label="料金比較カレンダー"></div>
  <div id="discountSummary" class="discountStatus" role="status" aria-live="polite">料金情報を読み込んでいます…</div>
  <div id="discountResults" class="discountResults"></div>

@@ -125,7 +125,7 @@ test('Japanese aliases connect original-name records to sourced profile and full
   assert.match(detail.innerHTML, /<details class="director-biography"><summary>経歴を読む<\/summary>/);
   assert.match(detail.innerHTML, /原名：Example Director/);
   assert.match(detail.innerHTML, /原名からのカタカナ表記/);
-  assert.match(detail.innerHTML, /本数による切り捨てなし/);
+  assert.match(detail.innerHTML, /出典：TMDB/);
   assert.match(detail.innerHTML, /監督の出典情報/);
 });
 
@@ -167,7 +167,7 @@ test('missing director catalog never presents saved records as the filmography t
   assert.match(row.innerHTML, /<b>1<\/b>.*<b>—<\/b>/);
   assert.doesNotMatch(row.innerHTML, /<b>1<\/b><small>レビュー済み<\/small><\/span><span><b>1<\/b>/);
   row.listeners.click();
-  assert.match(detail.innerHTML, /総数未取得/);
+  assert.match(detail.innerHTML, /総数不明/);
   assert.doesNotMatch(detail.innerHTML, /director-progress-track|1 \/ 1本|収録作品 1本/);
 });
 

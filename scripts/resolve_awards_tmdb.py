@@ -6,6 +6,8 @@ import concurrent.futures
 import datetime
 import json
 import time
+import functools
+import sys
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -14,6 +16,31 @@ from enrich_award_catalog import normalized
 ROOT=Path(__file__).resolve().parents[1]
 API='https://backend-one-gray-94.vercel.app/api/movies'
 
+@functools.lru_cache(maxsize=2000)
+def details(mid):
+    with urllib.request.urlopen(API.replace('/movies','/movie-detail')+'?id='+str(mid),timeout=20) as response:
+        return json.load(response).get('movie',{})
+
+def primary_candidates(title, movies, fetch_detail=details):
+    """Verify original release dates; JP premieres can follow an award by years."""
+    wanted=normalized(title)
+    result=[]
+    seen=set()
+    for movie in movies:
+        mid=movie.get('tmdbId') or movie.get('id')
+        if not str(mid).isdigit() or str(mid) in seen:continue
+        if wanted not in {normalized(movie.get(k) or '') for k in ['title','original_title','originalTitle']}:continue
+        seen.add(str(mid))
+        try:
+            found=fetch_detail(int(mid))
+            if str(found.get('tmdbId') or found.get('id'))!=str(mid):continue
+            if found.get('release_date_source')!='tmdb_primary':continue
+            if wanted not in {normalized(found.get(k) or '') for k in ['title','original_title','originalTitle']}:continue
+            result.append(found)
+        except Exception:
+            continue
+    return result
+
 def search(title):
     url=API+'?'+urllib.parse.urlencode({'q':title,'limit':20})
     for attempt in range(2):
@@ -21,7 +48,9 @@ def search(title):
             request=urllib.request.Request(url,headers={'User-Agent':'CinelvaAwardIdentity/1.0'})
             with urllib.request.urlopen(request,timeout=20) as response:
                 data=json.load(response)
-            return title,data.get('movies',[])+data.get('external',[])
+            movies=data.get('movies',[])+data.get('external',[])
+            if '--primary' in sys.argv:movies=primary_candidates(title,movies)
+            return title,movies
         except Exception:
             if attempt==0:time.sleep(1)
     return title,[]
@@ -39,7 +68,7 @@ if __name__=='__main__':
     path=ROOT/'data/awards.json';data=json.loads(path.read_text()); rows=data['awards']
     titles=sorted({(r.get('film_title') or r['title']).split(' — ')[0] for r in rows if not r.get('tmdb_id')})
     results={}; catalog={str(m['id']):m for m in data.get('catalog',[])}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         for title,movies in pool.map(search,titles):
             results[title]=movies
             if len(results)%25==0:print(f'Searched {len(results)}/{len(titles)}',flush=True)

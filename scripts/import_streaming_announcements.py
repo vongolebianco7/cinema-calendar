@@ -17,6 +17,7 @@ current = read("streaming.json")
 intake = read("streaming_announcements.json")
 existing = {(m["service"], m["title"], m["date"]) for m in current["movies"]}
 pending = []
+identity_updates = 0
 for entry in intake.get("movies", []):
     title, service, date = (entry.get(k) for k in ("title", "service", "date"))
     url = entry.get("source_url", "")
@@ -34,8 +35,6 @@ for entry in intake.get("movies", []):
     if entry.get("verified") is not True:
         raise ValueError(f"Official release not reviewed: {title!r}")
     key = (service, title, date)
-    if key in existing:
-        continue
     movie = {
         "title": title, "date": date, "event": "streaming",
         "service": service, "score": 0, "votes": 0,
@@ -59,9 +58,16 @@ for entry in intake.get("movies", []):
         if parsed_title.scheme != "https" or not parsed_title.hostname:
             raise ValueError(f"An HTTPS title URL is required: {title!r}")
         movie["title_url"] = title_url
+    if key in existing:
+        previous=next(m for m in current['movies'] if (m['service'],m['title'],m['date'])==key)
+        for field in ['original_title','release_year','year','title_url']:
+            if movie.get(field) and previous.get(field)!=movie[field]:
+                previous[field]=movie[field]
+                identity_updates+=1
+        continue
     pending.append(movie)
     existing.add(key)
-if pending:
+if pending or identity_updates:
     current["movies"].extend(pending)
     current["movies"].sort(key=lambda m: (m["date"], m["service"], m["title"]))
     current["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()

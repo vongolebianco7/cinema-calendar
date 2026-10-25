@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "b20b9dbd5081fd11abce6f42db43a074a233d7bc",
-  "verified_at": "2026-10-24T20:40:05.000Z",
-  "note": "PR491 exact executable source: Autonomous40128581324, smoke40128581329, frontend40128581333, backend40128581359 all succeeded. Local full quality and22 focused regressions passed. Reported-issue Chromium/WebKit both themes/root-prefix logo/calendar dedupe/provider evidence/review alignment/IMAX and world-boxoffice checks succeeded. Source performance1057ms exceeded1000ms; unchanged-source bounded remeasurement in40128581320 remains pending; require final-head completeness and all required CI before merge. Existing scorecard legacy-gauge journey failures remain baseline, not cleared. Preserve original logo pixels, storage keys, origins and source limitations."
+  "head_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
+  "verified_at": "2026-10-25T00:39:58.398Z",
+  "note": "PR493 exact executable source passed all10 applicable workflows, including full both-engine frontend/reported-artwork/table/native-select checks and completeness. Full local quality and targeted identity/import/bookmark tests pass. This commit changes only receipt, reviewed generated snapshots and documentation. Award records674→705, IDs338→611, artwork338→611; streaming112→134, artwork133/134.94 award entries remain unresolved, Panda artwork unavailable; no complete streaming catalog claim. Require final CI and canonical verification; original logo/storage/origins unchanged."
 }

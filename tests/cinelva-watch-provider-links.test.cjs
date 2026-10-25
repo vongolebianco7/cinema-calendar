@@ -23,3 +23,5 @@ test('rejects injected or wrong-film source URLs and never invents availability'
 test('provider controls are used by both shared detail routes before long work information',()=>{
  for(const path of ['search.html','cinelva/search.html']){const s=fs.readFileSync(path,'utf8');assert.ok(s.includes("+watchProvidersHtml(m,av)+"),path);assert.ok(s.indexOf('+watchProvidersHtml(m,av)+')<s.indexOf('+screeningRecommendationV3Html(m)'),path);}
 });
+
+test('U-NEXT uses the official freeword search route',()=>{const out=render({id:42,title:'短い作品'},{flatrate:['U-NEXT']});assert.ok(out.includes('https://video.unext.jp/freeword?query='));});

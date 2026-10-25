@@ -12,3 +12,5 @@ Acceptance: matching Japanese availability only; safe escaped output/HTTPS URLs;
 - [ ] Renew source receipt only after exact-source CI. Merge after final CI and verify canonical files.
 
 Review focus: same-name films must keep ID, rental never labelled subscription, unknown providers must not point to another provider, injected title/URLs escaped, backend error must not invent access.
+
+User steering: hide cinema-format recommendations unless fresh Japanese now-playing data contains the exact film ID; stale/failed observations hide it. Sort weekly calendars by date, then provider on that date; mix regular/morning-ten/revival chronologically; each card uses its legend color. Add three chronology regressions and current/stale/unknown-ID gate regression, plus browser old/current visibility.

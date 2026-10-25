@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T01:59:01.604Z",
-  "status": "ci_passed",
+  "updated_at": "2026-10-25T02:38:00Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "b58489d6457f9dbc05eda659e88c7652d0a8a9ba",
-  "branch": "fix/prime-october-missing-films-20261025",
-  "head_sha": "6c0feac68b699e08f8d9584d2689087d81dd7de5",
-  "pull_request": 495,
+  "branch": "feat/movie-watch-provider-links-20261025",
+  "head_sha": "1814b5d9bb33a6c7b325373076101f4eb357ab64",
+  "pull_request": 496,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -841,7 +841,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Wait final-head CI for PR495, merge and verify both canonical deployments and data249/249 artwork. Exact executable source8a75fb6853f3fafc6ff9f2c8f390777a5b73921d all6 succeeded; receipt renewed. Source gaps remain10 FOD film identities and confirmed DMM TV/TELASA movie start dates. No exhaustive provider-library claim.",
+  "next_action": "PR495 receipt07e5cdbc final frontend pending (other6 passed). PR496 expanded: provider buttons including verified U-NEXT freeword; fresh exact-JP-ID now-playing gate hides historical cinema formats; calendar date-first/provider-within-day and legend-colored tags including regular/morning-ten/revival. New units red then green; full local quality rerun; source/final CI and canonical publication pending. Merge495 first; renew496 exact-source proof after all checks. FOD10, DMM/TELASA dates and global device/DB gates remain.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

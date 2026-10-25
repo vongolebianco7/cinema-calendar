@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8072bce22681f9c26b55bcc7628836bc7f531f0b",
-  "verified_at": "2026-10-25T18:02:16.559Z",
-  "note": "Integrated main source awaits exact PR501 CI. Existing head retained: guard must continue refusing integrated publication until new source verification and a receipt-only renewal. No product changes."
+  "head_sha": "cebf5f0785a97425a65437f159817a8b7114a907",
+  "verified_at": "2026-10-25T18:30:23.167Z",
+  "note": "PR501 integrated source all10 workflows succeeded. Required autonomous40220434154,smoke40220434115,frontend40220434117,backend40220434150 passed. Includes all PR499 search/provider features plus concurrent restored Best10/header source. Approved icon metadata and31-route audit coverage repaired, local full quality passed. No existing records or original logo colors changed. Final receipt-head CI and canonical publication verification required."
 }

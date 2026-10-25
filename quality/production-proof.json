@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
   "head_sha": "8072bce22681f9c26b55bcc7628836bc7f531f0b",
-  "verified_at": "2026-10-25T07:39:06.323Z",
-  "note": "PR499 exact source all9 workflows succeeded, including required autonomous40172691613,smoke40172691602,frontend40172691627,backend40172691636. Full local quality passed. Chromium/WebKit verify movie/director/cast autocomplete,touch/keyboard/IME,identity and delayed responses,profile fallback,three poster columns,shared review persistence and director identity,compact provider icon columns. All audit navigations isolated with one context clock; current page errors remain fatal. Independent review findings fixed RED to GREEN. Final receipt-head CI and canonical verification required."
+  "verified_at": "2026-10-25T18:02:16.559Z",
+  "note": "Integrated main source awaits exact PR501 CI. Existing head retained: guard must continue refusing integrated publication until new source verification and a receipt-only renewal. No product changes."
 }

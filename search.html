@@ -181,7 +181,7 @@ async function search(){
  history.replaceState(null,"","search.html?search="+encodeURIComponent(term));
  status.textContent="「"+term+"」を検索中…";grid.innerHTML="";
  let remote=[],local=[],errors=0;
- const paint=()=>{if(request!==searchRequest)return;
+ const paint=()=>{if(request!==searchRequest||globalThis.document?.body?.dataset.personSearch==='true')return;
  const seen=new Set();
  results=[...local,...remote].filter(m=>{
   const id=String(movieTmdbId(m)||m.id||''),year=movieReleaseYear(m);

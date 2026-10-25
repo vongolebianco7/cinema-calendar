@@ -36,17 +36,20 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.locator('.modeTab[data-mode="tv"]').click();await page.locator('.tvMovie>.cinelva-rating-controls').first().waitFor();
    const tvBoxes=await page.locator('.tvMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {bottom:r.bottom,height:r.height};}));assert.equal(tvBoxes.length,2);assert(Math.abs(tvBoxes[0].bottom-tvBoxes[1].bottom)<1,'TV reviews align despite unequal program text');assert.equal(tvBoxes[0].height,tvBoxes[1].height);
    for(const route of ['cinelva/index.html','cinelva/credits.html','discover.html','search.html','rankings.html','my-cinelva/index.html','credits.html','theaters.html']){
+    await freshPage();
     await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});
     const images=page.locator('.gBrand img,.brand img');await images.first().waitFor();
     const sources=await images.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')));assert(sources.every(x=>x.includes('cinelva_original_colors_transparent.png')),route+' uses unchanged supplied frame');
     assert.equal(await page.locator('script[src*="cinelva-logo-frame"]').count(),0,route+' never loads destructive canvas transform');
     if(route==='credits.html')assert.equal(await page.getByRole('link',{name:'映画コンシェルジュ',exact:true}).count(),0);
    }
+   await freshPage();
    await page.goto(`http://127.0.0.1:${port}/theaters.html?format=IMAX&prefecture=${encodeURIComponent('神奈川県')}`,{waitUntil:'domcontentloaded'});
    await page.locator('[data-format-filter="IMAX"]').click();await page.locator('#prefectureFilter').selectOption('神奈川県');await page.waitForFunction(()=>document.querySelector('#meta')?.textContent.includes('5件表示'));
    assert.match(await page.locator('#grid').innerText(),/横浜ブルク13/);assert.match(await page.locator('#grid').innerText(),/休止/);
    await context.route('**/data/awards.json*',r=>r.fulfill({json:{awards:[{organization:'アカデミー賞',category:'作品賞',year:1944,title:'カサブランカ',tmdb_id:289,release_year:1942,source:'https://www.oscars.org/oscars/ceremonies/1944'}],catalog:[{id:289,title:'カサブランカ',year:1942,poster:'https://image.tmdb.org/t/p/w342/verified.jpg'}]}}));
    await context.route('**/data/movies.json*',r=>r.fulfill({json:{movies:[{id:289,title:'カサブランカ',year:1942,poster:null}]}}));
+   await freshPage();
    await page.goto(`http://127.0.0.1:${port}/my-cinelva/`,{waitUntil:'domcontentloaded'});
    await page.locator('[data-tab="awards"]').click();
    await page.waitForFunction(()=>document.querySelector('#awardMatrix th'));

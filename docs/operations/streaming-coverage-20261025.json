@@ -1,10 +1,10 @@
 {
-  "status": "ci_passed",
-  "rows": 249,
-  "artwork_rows": 249,
+  "status": "in_progress",
+  "rows": 252,
+  "artwork_rows": 252,
   "prime_october_added": 87,
   "prime_october_rows": 103,
-  "fod_added": 26,
+  "fod_added": 29,
   "disney_added": 2,
   "panda_tmdb_id": 1644945,
   "fod_identity_pending": [
@@ -25,20 +25,8 @@
       "date": "2026-10-01"
     },
     {
-      "title": "君への挽歌",
-      "date": "2026-10-01"
-    },
-    {
       "title": "女",
       "date": "2026-10-01"
-    },
-    {
-      "title": "アウトロー・キラーズ 悪意の連鎖",
-      "date": "2026-10-02"
-    },
-    {
-      "title": "エターナル・ラストラブ あの世での魂活",
-      "date": "2026-10-02"
     },
     {
       "title": "きみがいるだけで",
@@ -49,7 +37,7 @@
       "date": "2026-10-03"
     }
   ],
-  "remaining": "10 FOD identity/artwork matches remain unavailable in approved catalog search and local director catalog. DMM TV/TELASA official dated film starts remain unconfirmed.",
+  "remaining": "7 FOD film identity/artwork matches and DMM TV/TELASA official dated movie starts remain unconfirmed. Whole provider libraries are not certified complete.",
   "identity_review": "Sappy confirmed2022/86min, director Ueda Shusei by TAMA festival primary source; secondary22min field rejected.",
   "source_sha": "8a75fb6853f3fafc6ff9f2c8f390777a5b73921d",
   "receipt_sha": "6c0feac68b699e08f8d9584d2689087d81dd7de5",
@@ -57,5 +45,30 @@
     "mobile_1000": 181.63,
     "desktop_1000": 216.15
   },
-  "next_action": "Wait final-head CI for PR495, merge and verify both canonical deployments and data249/249 artwork. Exact executable source8a75fb6853f3fafc6ff9f2c8f390777a5b73921d all6 succeeded; receipt renewed. Source gaps remain10 FOD film identities and confirmed DMM TV/TELASA movie start dates. No exhaustive provider-library claim."
+  "next_action": "Verify data-only followup CI, merge and confirm252/252 canonical artwork rows. Preserve source receipt dc7cc711; no executable changes.",
+  "new_identity_review": [
+    {
+      "id": 685916,
+      "title": "アウトロー・キラーズ 悪意の連鎖",
+      "evidence": [
+        "https://fod.fujitv.co.jp/title/91bj/",
+        "https://deskpopentertainment.com/ourfilms/the-killers-next-door/"
+      ]
+    },
+    {
+      "id": 534038,
+      "title": "エターナル・ラストラブ あの世での魂活",
+      "evidence": [
+        "https://www.videx.jp/detail/cinema/v_c_transworldassociates/ctwa1882_0001/index.htm",
+        "https://harrygreenberger.com/about/"
+      ]
+    },
+    {
+      "id": 956793,
+      "title": "君への挽歌",
+      "evidence": [
+        "https://jiggyfilms.co.jp/item/item-1521/"
+      ]
+    }
+  ]
 }

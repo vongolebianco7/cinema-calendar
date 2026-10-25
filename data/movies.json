@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T20:49:02.687048+00:00",
+  "generated_at": "2026-10-25T06:01:15.375722+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -32413,6 +32413,139 @@
       "artwork_type": "backdrop",
       "artwork_source": "TMDB movie-detail API: same-work backdrop used because poster is unavailable",
       "artwork_verified_at": "2026-10-23"
+    },
+    {
+      "id": 956793,
+      "tmdbId": 956793,
+      "original_title": "그대 어이가리",
+      "score": 7.5,
+      "votes": 2,
+      "poster": "https://image.tmdb.org/t/p/w500/lcjsQkNbGV7c9OC8OrQOm5CK9eh.jpg",
+      "runtime": 120,
+      "genres": [
+        "ドラマ"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "cast": [
+        "정아미",
+        "민경진",
+        "Sun Dong-hyuk",
+        "カン・インキ",
+        "안석현",
+        "권성현"
+      ],
+      "director_id": 1654633,
+      "tmdb": "https://www.themoviedb.org/movie/956793",
+      "title": "君への挽歌",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "FOD",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "overview": "",
+      "checked_at": "2026-10-25",
+      "director": "イ・チャンヨル",
+      "year": 2023,
+      "release_year": 2023,
+      "identity_verified_at": "2026-10-25",
+      "identity_source_urls": [
+        "https://jiggyfilms.co.jp/item/item-1521/"
+      ],
+      "runtime_source_url": "https://jiggyfilms.co.jp/item/item-1521/"
+    },
+    {
+      "id": 685916,
+      "tmdbId": 685916,
+      "original_title": "The Killers Next Door",
+      "score": 5.3,
+      "votes": 9,
+      "poster": "https://image.tmdb.org/t/p/w500/gr01vMO5kwccJmoTikZgq2k5JMW.jpg",
+      "runtime": 88,
+      "genres": [
+        "スリラー",
+        "犯罪"
+      ],
+      "countries": [],
+      "cast": [
+        "David Pridemore",
+        "Rosanna Jimenez",
+        "Michael A. LoCicero",
+        "Sean Carmichael",
+        "Richard Donelly",
+        "Scout Lyons",
+        "Ariana Ruckle",
+        "Rich Tretheway",
+        "James Malcolm"
+      ],
+      "director_id": 1138748,
+      "tmdb": "https://www.themoviedb.org/movie/685916",
+      "title": "アウトロー・キラーズ 悪意の連鎖",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "FOD",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "overview": "",
+      "checked_at": "2026-10-25",
+      "director": "マイケル・A・ロチセロ",
+      "year": 2023,
+      "release_year": 2023,
+      "identity_verified_at": "2026-10-25",
+      "identity_source_urls": [
+        "https://fod.fujitv.co.jp/title/91bj/",
+        "https://deskpopentertainment.com/ourfilms/the-killers-next-door/"
+      ]
+    },
+    {
+      "id": 534038,
+      "tmdbId": 534038,
+      "original_title": "Faraway Eyes",
+      "score": 4.8,
+      "votes": 39,
+      "poster": "https://image.tmdb.org/t/p/w500/rIyEZ1L2eR6337usDnzwpmOQyI3.jpg",
+      "runtime": 121,
+      "genres": [
+        "ファンタジー",
+        "コメディ",
+        "ロマンス"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "cast": [
+        "Andy Karl",
+        "クリスティーナ・リッチ",
+        "ノラ・アルネゼデール",
+        "マイケル・リスポリ",
+        "アレックス・ハート",
+        "Richard Topol",
+        "Ray Iannicelli",
+        "ジーニー・バーリン",
+        "Elissa Middleton",
+        "Florencia Lozano",
+        "Maya Deshmukh",
+        "Jonathan Huggins"
+      ],
+      "director_id": 2078864,
+      "tmdb": "https://www.themoviedb.org/movie/534038",
+      "title": "エターナル・ラストラブ あの世での魂活",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "FOD",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "overview": "",
+      "checked_at": "2026-10-25",
+      "director": "ハリー・グリーンバーガー",
+      "year": 2021,
+      "release_year": 2021,
+      "identity_verified_at": "2026-10-25",
+      "identity_source_urls": [
+        "https://www.videx.jp/detail/cinema/v_c_transworldassociates/ctwa1882_0001/index.htm",
+        "https://harrygreenberger.com/about/"
+      ]
     }
   ]
 }

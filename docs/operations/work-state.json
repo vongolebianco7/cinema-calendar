@@ -4,9 +4,9 @@
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b58489d6457f9dbc05eda659e88c7652d0a8a9ba",
+  "base_sha": "280c03eb0f90b5bccc3b94cca5c15a33bf389516",
   "branch": "feat/movie-watch-provider-links-20261025",
-  "head_sha": "1814b5d9bb33a6c7b325373076101f4eb357ab64",
+  "head_sha": "bbfd8d84563433c7bfe5b644894af9f826379995",
   "pull_request": 496,
   "work_items": [
     {
@@ -841,7 +841,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "PR495 receipt07e5cdbc final frontend pending (other6 passed). PR496 expanded: provider buttons including verified U-NEXT freeword; fresh exact-JP-ID now-playing gate hides historical cinema formats; calendar date-first/provider-within-day and legend-colored tags including regular/morning-ten/revival. New units red then green; full local quality rerun; source/final CI and canonical publication pending. Merge495 first; renew496 exact-source proof after all checks. FOD10, DMM/TELASA dates and global device/DB gates remain.",
+  "next_action": "PR495 merged280c03eb; both canonical deployments READY; streaming/movies/awards/MyCinelva files HTTP200 byte-identical. PR496 sourcebbfd8d84 all10 except frontend pass; frontend detected old prefix detail and missing prefix data-quality import. Replaced prefix index/search with root implementation plus base/noindex/relative metadata. Full localquality passed. Actual local Chromium reported audit passes both themes/root/prefix provider popup links, old/current format gate, chronology and exact legend colors; separate root/prefix current labels and expiry pass. Publish repaired source, wait exact-source CI, renew proof, final CI, merge, verify canonical. FOD10 and DMM/TELASA source gaps plus global DB/device/participants remain.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

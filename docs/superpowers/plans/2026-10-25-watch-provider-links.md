@@ -14,3 +14,5 @@ Acceptance: matching Japanese availability only; safe escaped output/HTTPS URLs;
 Review focus: same-name films must keep ID, rental never labelled subscription, unknown providers must not point to another provider, injected title/URLs escaped, backend error must not invent access.
 
 User steering: hide cinema-format recommendations unless fresh Japanese now-playing data contains the exact film ID; stale/failed observations hide it. Sort weekly calendars by date, then provider on that date; mix regular/morning-ten/revival chronologically; each card uses its legend color. Add three chronology regressions and current/stale/unknown-ID gate regression, plus browser old/current visibility.
+
+Validation finding: prefixed index/search had diverged from root; old detail lacked the canonical identity helper and failed on the new gating call. Synchronize complete root implementations while retaining prefix base/noindex and relative icon metadata. Actual Chromium provider popup, visibility, chronology, tag colors and existing calendar labels/expiry pass locally in both themes. No production browser writes.

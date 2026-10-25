@@ -42,3 +42,12 @@ test('failed snapshot fallback is evicted so a recovered live API can be retried
  let available=false;const {ctx}=discovery(async url=>url.includes('/api/people?')?{ok:available,json:async()=>({ids:[27205]})}:url.includes('directors-mobile.json')?{ok:false}:{ok:true,json:async()=>({movies:[{id:27205,title:'Inception'}]})});
  await ctx.load();assert.equal(ctx.items.length,0);available=true;await ctx.load();assert.deepEqual(Array.from(ctx.items,x=>x.title),['Inception']);
 });
+
+test('person profile includes full filtered director/acting credits and source identity',async()=>{
+ const calls=[];const get=route(async u=>{calls.push(new URL(u));return {ok:true,json:async()=>({id:7,name:'人物',birthday:'1970-01-01',place_of_birth:'日本',biography:'経歴',profile_path:'/face.jpg',movie_credits:{crew:[{id:42,title:'監督作品',job:'Director'},{id:42,title:'重複',job:'Director'},{id:43,title:'脚本のみ',job:'Writer'},{id:44,title:'成人作品',job:'Director',adult:true}],cast:[{id:45,title:'出演作品',character:'役'}]}})}});
+ const r=await get({url:'https://example.test/api/people?id=7&profile=1'});assert.equal(r.status,200);assert.equal(r.body.person.id,7);assert.equal(r.body.person.biography_ja,'経歴');assert.deepEqual(Array.from(r.body.credits.director,x=>x.id),[42]);assert.deepEqual(Array.from(r.body.credits.cast,x=>x.id),[45]);assert.equal(calls[0].searchParams.get('append_to_response'),'movie_credits');assert.equal(r.body.coverage.truncated,false);
+});
+test('person profile refuses wrong identities and missing credits instead of declaring empty filmography',async()=>{
+ for(const body of [{id:8,movie_credits:{crew:[],cast:[]}},{id:7}]){const get=route(async()=>({ok:true,json:async()=>body}));assert.equal((await get({url:'https://example.test/api/people?id=7&profile=1'})).status,502);}
+ const get=route(async()=>{throw Error('must not fetch')});assert.equal((await get({url:'https://example.test/api/people?id=oops&profile=1'})).status,400);
+});

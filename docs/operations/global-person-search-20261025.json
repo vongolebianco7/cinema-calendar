@@ -1,0 +1,16 @@
+{
+  "status": "in_progress",
+  "pull_request": 499,
+  "branch": "feat/compact-watch-services-20261025",
+  "parent_sha": "30c83539ffdf3e4b65851c8a1c9bc9f785826f9f",
+  "scope": [
+    "Compact 視聴可能なサービス icon links in subscription/rental/purchase columns",
+    "Shared header movie/director/cast autocomplete and tap/keyboard/Enter commit",
+    "Exact unique person name opens matching ID; ambiguous names show choices",
+    "Person profile, director/acting credits tabs,three poster columns and common review controls"
+  ],
+  "local_validation": "Full quality gate and17 focused unit/API tests pass; Chromium390px root/prefix/MyCinelva headers, tap/movie/Enter, exact person, stale responses, IME, ArrowUp, three columns, director metadata preservation and review save/reload; stalled movie shows people; stalled profile uses saved director fallback. Final source CI and final receipt CI pending.",
+  "review": "Independent reviewer findings fixed and reproduced red→green; no unresolved important findings.",
+  "prior_ci": "Compact-only source30c83539 all9 except frontend. Both engine new UI regressions passed. Existing full route WebKit agent redirect timed out; one unchanged-source bounded rerun started. This combined source supersedes it; publication remains guarded.",
+  "next_action": "Wait exact combined-source CI, renew receipt in proof-only commit, require final CI, merge499 and verify canonical frontend/backend."
+}

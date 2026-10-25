@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T02:38:00Z",
-  "status": "pr_created",
+  "updated_at": "2026-10-25T06:13:16.968181+00:00",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "280c03eb0f90b5bccc3b94cca5c15a33bf389516",
-  "branch": "feat/movie-watch-provider-links-20261025",
-  "head_sha": "bbfd8d84563433c7bfe5b644894af9f826379995",
-  "pull_request": 496,
+  "base_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
+  "branch": "data/fod-verified-identities-20261025",
+  "head_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
+  "pull_request": 497,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -830,10 +830,10 @@
   ],
   "deployment": {
     "status": "production_verified",
-    "frontend": "b877e60e READY dpl_Em48nfoBbFurqRjHZV9yrjggEBp6 at unchanged cinelva.vercel.app. Canonical JSON200/complete:true/100 unique JP titles; actual Chrome displays12/100, expands100, filters1 and opens matching detail. Existing origin preserved.",
-    "backend": "b877e60e READY dpl_HbKbqJoK7goG2tYVBezAbD38VgoZ at unchanged backend-one-gray-94.vercel.app. New list is independent of the database; no DB write/recovery performed in this increment.",
+    "frontend": "1792b8c8 READY dpl_CGiEFGCWuheNzTE2xScbMpZFdmTh at unchanged cinelva.vercel.app;8canonical files HTTP200 byte-identical,including2redirect aliases.",
+    "backend": "1792b8c8 READY dpl_Fjk2dW3d8nkzoqdEm3U7mYADkq5G at unchanged backend-one-gray-94.vercel.app. Real Interstellar availability200 and read-only detail buttons confirmed after one runtime-proxy timeout/native retry.",
     "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Actual guarded initial nationwide observationb877e60e:100 titles,2026-10-23T23:07:46.612102+00:00 (10/24 08:07JST), complete and canonical. Existing calendar1031-film baseline unchanged. Earlier deployment rate-limit evidence superseded by both READYb877e60e deployments.",
+    "latest_data": "Canonical streaming252/252 artwork and all3new FOD identities/dates verified. All249previous streaming and1176previous merged-calendar rows retained,3appended. Provider coverage remains partial.",
     "now_playing": "Production verified. Initial100/99 inconsistency refused safely; documented equivalent read-only diagnostic validated100 titles. Direct endpoint had become consistent in successful production run40037837837, so final provenance correctly remains direct /movie/now_playing. Raw-row/pagination checks retained; daily03:13JST refresh configured, stale>36hours hidden."
   },
   "blockers": [
@@ -841,7 +841,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "PR495 merged280c03eb; both canonical deployments READY; streaming/movies/awards/MyCinelva files HTTP200 byte-identical. PR496 sourcebbfd8d84 all10 except frontend pass; frontend detected old prefix detail and missing prefix data-quality import. Replaced prefix index/search with root implementation plus base/noindex/relative metadata. Full localquality passed. Actual local Chromium reported audit passes both themes/root/prefix provider popup links, old/current format gate, chronology and exact legend colors; separate root/prefix current labels and expiry pass. Publish repaired source, wait exact-source CI, renew proof, final CI, merge, verify canonical. FOD10 and DMM/TELASA source gaps plus global DB/device/participants remain.",
+  "next_action": "Reported provider links, historical/current screening visibility, chronological calendars and legend-color tags are production-verified in PR496. PR497 publishes3 more verified FOD films,252/252 artwork; all prior rows retained. Continue primary-source verification for remaining7 FOD identities and DMM TV/TELASA dated starts. Whole provider libraries remain partial. Global DB free quota,physical-device,independent-user and rights gates remain open; no paid bypass or invented data.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -852,11 +852,11 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 484,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/484",
-    "merge_sha": "3fae6b87f3ba181a3783d887779c14c9cccec801",
-    "source_sha": "45b2c01af7bb096be1abff763cf8e11c2998d8bf",
-    "receipt_sha": "ac222b69c37ce0f7e0acc6bdd283699b0831dc68"
+    "number": 497,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/497",
+    "merge_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
+    "source_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
+    "receipt_sha": "cc7e1af2490d592e53ca5d01ba7237466937b94a"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -1097,6 +1097,88 @@
         "name": "Validate frontend",
         "conclusion": "success"
       }
+    ]
+  },
+  "watch_provider_release": {
+    "status": "production_verified",
+    "ui_pr": 496,
+    "ui_source_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
+    "ui_receipt_sha": "cc7e1af2490d592e53ca5d01ba7237466937b94a",
+    "ui_merge_sha": "0b0808c1522f26535ee37ce66ab61db6a2dad619",
+    "data_pr": 497,
+    "data_merge_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
+    "frontend": "dpl_CGiEFGCWuheNzTE2xScbMpZFdmTh",
+    "backend": "dpl_Fjk2dW3d8nkzoqdEm3U7mYADkq5G",
+    "tests": "Exact UI source all10/final all11 workflows pass. Final completeness was3.5/4 at maxNav2023ms with all hard budgets passing; one unchanged-source bounded rerun passed4/4,maxNav231ms,1000-record interactions232/254ms. No budget changes. New provider5,chronology3,current-screening1 regressions red→green; full local shared gates pass. Actual Chromium/WebKit root/prefix/light/dark provider popups,44px controls,old/current format visibility,date/provider order,tag/legend colors,current labels/expiry and existing journeys pass. Representative CI screenshots reviewed. Data followup full localquality and all4 CI workflows pass.",
+    "canonical_ui_checks": [
+      {
+        "path": "index.html",
+        "status": 200,
+        "equal": true,
+        "bytes": 134848,
+        "redirected": false
+      },
+      {
+        "path": "search.html",
+        "status": 200,
+        "equal": true,
+        "bytes": 79846,
+        "redirected": false
+      },
+      {
+        "path": "js/cinelva-now-playing.js",
+        "status": 200,
+        "equal": true,
+        "bytes": 6192,
+        "redirected": false
+      },
+      {
+        "path": "my-cinelva/index.html",
+        "status": 200,
+        "equal": true,
+        "bytes": 140919,
+        "redirected": false
+      },
+      {
+        "path": "data/streaming.json",
+        "status": 200,
+        "equal": true,
+        "bytes": 219712,
+        "redirected": false
+      },
+      {
+        "path": "data/awards.json",
+        "status": 200,
+        "equal": true,
+        "bytes": 642701,
+        "redirected": false
+      },
+      {
+        "path": "cinelva/search.html",
+        "status": 200,
+        "equal": true,
+        "bytes": 79846,
+        "redirected": true
+      },
+      {
+        "path": "cinelva/index.html",
+        "status": 200,
+        "equal": true,
+        "bytes": 134848,
+        "redirected": true
+      }
+    ],
+    "canonical_browser": "Read-only Chromium390px through runtime proxy: initial detail timeout; native retry succeeded with real Interstellar subscription/rental/purchase providers and10 links,0 page errors/overflow. No real-device or production record writes claimed.",
+    "streaming_rows": 252,
+    "streaming_artwork_rows": 252,
+    "fod_added_total": 29,
+    "fod_identity_pending": 7,
+    "source_receipt": "dc7cc711 unchanged for generated-data followup",
+    "remaining": [
+      "7 FOD identities/artwork without verified matching approved catalog records",
+      "DMM TV/TELASA official dated movie starts unconfirmed",
+      "Provider libraries are not certified exhaustive",
+      "Existing global free DB quota/physical iPhone/independent participants/artwork-rights gates remain open"
     ]
   }
 }

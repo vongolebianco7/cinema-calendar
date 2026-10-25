@@ -1,0 +1,82 @@
+{
+  "status": "production_verified",
+  "ui_pr": 496,
+  "ui_source_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
+  "ui_receipt_sha": "cc7e1af2490d592e53ca5d01ba7237466937b94a",
+  "ui_merge_sha": "0b0808c1522f26535ee37ce66ab61db6a2dad619",
+  "data_pr": 497,
+  "data_merge_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
+  "frontend": "dpl_CGiEFGCWuheNzTE2xScbMpZFdmTh",
+  "backend": "dpl_Fjk2dW3d8nkzoqdEm3U7mYADkq5G",
+  "tests": "Exact UI source all10/final all11 workflows pass. Final completeness was3.5/4 at maxNav2023ms with all hard budgets passing; one unchanged-source bounded rerun passed4/4,maxNav231ms,1000-record interactions232/254ms. No budget changes. New provider5,chronology3,current-screening1 regressions red→green; full local shared gates pass. Actual Chromium/WebKit root/prefix/light/dark provider popups,44px controls,old/current format visibility,date/provider order,tag/legend colors,current labels/expiry and existing journeys pass. Representative CI screenshots reviewed. Data followup full localquality and all4 CI workflows pass.",
+  "canonical_ui_checks": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "equal": true,
+      "bytes": 134848,
+      "redirected": false
+    },
+    {
+      "path": "search.html",
+      "status": 200,
+      "equal": true,
+      "bytes": 79846,
+      "redirected": false
+    },
+    {
+      "path": "js/cinelva-now-playing.js",
+      "status": 200,
+      "equal": true,
+      "bytes": 6192,
+      "redirected": false
+    },
+    {
+      "path": "my-cinelva/index.html",
+      "status": 200,
+      "equal": true,
+      "bytes": 140919,
+      "redirected": false
+    },
+    {
+      "path": "data/streaming.json",
+      "status": 200,
+      "equal": true,
+      "bytes": 219712,
+      "redirected": false
+    },
+    {
+      "path": "data/awards.json",
+      "status": 200,
+      "equal": true,
+      "bytes": 642701,
+      "redirected": false
+    },
+    {
+      "path": "cinelva/search.html",
+      "status": 200,
+      "equal": true,
+      "bytes": 79846,
+      "redirected": true
+    },
+    {
+      "path": "cinelva/index.html",
+      "status": 200,
+      "equal": true,
+      "bytes": 134848,
+      "redirected": true
+    }
+  ],
+  "canonical_browser": "Read-only Chromium390px through runtime proxy: initial detail timeout; native retry succeeded with real Interstellar subscription/rental/purchase providers and10 links,0 page errors/overflow. No real-device or production record writes claimed.",
+  "streaming_rows": 252,
+  "streaming_artwork_rows": 252,
+  "fod_added_total": 29,
+  "fod_identity_pending": 7,
+  "source_receipt": "dc7cc711 unchanged for generated-data followup",
+  "remaining": [
+    "7 FOD identities/artwork without verified matching approved catalog records",
+    "DMM TV/TELASA official dated movie starts unconfirmed",
+    "Provider libraries are not certified exhaustive",
+    "Existing global free DB quota/physical iPhone/independent participants/artwork-rights gates remain open"
+  ]
+}

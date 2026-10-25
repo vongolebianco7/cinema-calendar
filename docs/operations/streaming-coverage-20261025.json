@@ -1,10 +1,10 @@
 {
   "status": "publication_pending",
-  "rows": 243,
-  "artwork_rows": 243,
+  "rows": 248,
+  "artwork_rows": 248,
   "prime_october_added": 87,
   "prime_october_rows": 103,
-  "fod_added": 20,
+  "fod_added": 25,
   "disney_added": 2,
   "panda_tmdb_id": 1644945,
   "fod_identity_pending": [
@@ -21,23 +21,7 @@
       "date": "2026-10-01"
     },
     {
-      "title": "ゲイラン",
-      "date": "2026-10-01"
-    },
-    {
-      "title": "シャドウズ",
-      "date": "2026-10-01"
-    },
-    {
-      "title": "ジョーズ 異次元の怪物",
-      "date": "2026-10-01"
-    },
-    {
       "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
-      "date": "2026-10-01"
-    },
-    {
-      "title": "リンウー 靈語 ─超常捜査─",
       "date": "2026-10-01"
     },
     {
@@ -67,17 +51,8 @@
     {
       "title": "I AM JAM ピザの惑星危機一髪！（活弁吹込版）",
       "date": "2026-10-03"
-    },
-    {
-      "title": "ゲッベルス ヒトラーをプロデュースした男",
-      "date": "2026-10-04"
     }
   ],
-  "sources": [
-    "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-    "https://news.fod.fujitv.co.jp/article/14842",
-    "https://www.universal-music.co.jp/katseye/news/2026-10-01/",
-    "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus"
-  ],
-  "remaining": "Resolve16 FOD titles before importing; investigate dated DMM TV/TELASA announcements. No entire-provider coverage certification."
+  "remaining": "11 FOD identities/artwork pending; DMM TV/TELASA movie start dates still require official confirmation. No entire-provider completeness claim.",
+  "rejected_identity": "Sappy1141409 returns86min vs reviewed22min work; rejected despite same title/year."
 }

@@ -41,12 +41,15 @@
       "name": "Wikidata",
       "mode": "approved",
       "purpose": [
-        "theater_master"
+        "theater_master",
+        "award_winners",
+        "movie_identity"
       ],
       "basis": "Wikidata structured data is released under CC0.",
       "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
       "requirements": [
-        "Retain source/provenance where practical"
+        "Retain source/provenance where practical",
+        "Award imports require explicit award-statement or ceremony dates; never infer award year from film release year."
       ]
     },
     {

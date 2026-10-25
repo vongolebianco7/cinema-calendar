@@ -258,7 +258,7 @@
       if (parent && !fallback) {
         fallback = document.createElement("span");
         fallback.dataset.posterFallback = "";
-        fallback.textContent = "ポスター未取得";
+        fallback.textContent = "画像なし";
         parent.append(fallback);
       }
       if (fallback){fallback.hidden = false;fallback.style.removeProperty('display');}

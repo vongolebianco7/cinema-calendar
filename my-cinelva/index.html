@@ -934,7 +934,7 @@ const sortKey='cinelva-watchlist-sort-v1';
 const toolbar=document.createElement('div');toolbar.className='toolbar';
 const label=document.createElement('label');label.textContent='並び替え';label.htmlFor='wantWatchSort';
 const select=document.createElement('select');select.id='wantWatchSort';select.setAttribute('aria-label','見たい映画の並び替え');
-for(const [value,text]of [['savedNew','追加：新しい順'],['savedOld','追加：古い順'],['title','作品名順'],['releaseNew','公開年：新しい順'],['releaseOld','公開年：古い順']]){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option)}
+for(const [value,text]of [['savedNew','保存した日：新しい順'],['savedOld','保存した日：古い順'],['title','作品名順'],['releaseNew','公開年：新しい順'],['releaseOld','公開年：古い順']]){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option)}
 try{select.value=sessionStorage.getItem(sortKey)||'savedNew'}catch{}
 if(!select.value)select.value='savedNew';
 toolbar.append(label,select);list.before(toolbar);
@@ -951,10 +951,10 @@ function render(){
   const tmdbId=Number(item.tmdbId??item.tmdb_id??item.id);
   const movie={...(identity?.resolve?.({tmdbId})||{}),...item,tmdbId};
   const source=raw=>{const v=String(raw||'');return /^https:\/\//i.test(v)?v:v.startsWith('/')?'https://image.tmdb.org/t/p/w342'+v:''};
-  const draw=raw=>{const url=source(raw);if(!url||!card.isConnected)return false;let img=poster.querySelector('img');if(!img){img=document.createElement('img');img.loading='lazy';img.alt='';poster.replaceChildren(img)}img.onerror=()=>{identity?.reportBroken?.(movie,img.src);img.remove();poster.textContent='ポスター確認中';identity?.fetchOne?.({...movie,poster:'',posterUrl:'',poster_path:'',poster_url:''}).then(found=>{if(!found?.poster||source(found.poster)===url||!draw(found.poster))poster.textContent='ポスター未取得'}).catch(()=>{poster.textContent='ポスター未取得'})};img.src=url;return true};
+  const draw=raw=>{const url=source(raw);if(!url||!card.isConnected)return false;let img=poster.querySelector('img');if(!img){img=document.createElement('img');img.loading='lazy';img.alt='';poster.replaceChildren(img)}img.onerror=()=>{identity?.reportBroken?.(movie,img.src);img.remove();poster.textContent='画像を読み込み中';identity?.fetchOne?.({...movie,poster:'',posterUrl:'',poster_path:'',poster_url:''}).then(found=>{if(!found?.poster||source(found.poster)===url||!draw(found.poster))poster.textContent='画像なし'}).catch(()=>{poster.textContent='画像なし'})};img.src=url;return true};
   const first=identity?.posterFor?.(movie)||movie.poster||movie.posterUrl||movie.poster_path||'';
-  if(!draw(first))poster.textContent='ポスター確認中';
-  identity?.fetchOne?.(movie).then(found=>{if(found?.poster)draw(found.poster);else if(!poster.querySelector('img'))poster.textContent='ポスター未取得'}).catch(()=>{if(!poster.querySelector('img'))poster.textContent='ポスター未取得'});
+  if(!draw(first))poster.textContent='画像を読み込み中';
+  identity?.fetchOne?.(movie).then(found=>{if(found?.poster)draw(found.poster);else if(!poster.querySelector('img'))poster.textContent='画像なし'}).catch(()=>{if(!poster.querySelector('img'))poster.textContent='画像なし'});
   const title=document.createElement('strong');title.textContent=item.title||'作品';link.append(poster,title);
   const review=document.createElement('div');review.className='want-watch-review';
   card.append(link,review);list.append(card);

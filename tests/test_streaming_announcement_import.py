@@ -24,3 +24,13 @@ class StreamingAnnouncementImportTests(unittest.TestCase):
    self.assertEqual(movie.get('title_url'),'https://www.netflix.com/jp/title/81757047')
    self.assertNotIn('id',movie)
    self.assertNotIn('tmdbId',movie)
+
+ def test_existing_premiere_receives_new_reviewed_identity_facts(self):
+  with tempfile.TemporaryDirectory() as directory:
+   root=Path(directory)/'data';root.mkdir()
+   row={'title':'アニマルズ','date':'2026-10-09','service':'Netflix','poster':None}
+   reviewed={**row,'original_title':'Animals','release_year':2026,'source_url':'https://about.netflix.com/ja/new-to-watch','verified':True,'content_type':'movie'}
+   for name,value in {'streaming_sources.json':{'services':[{'name':'Netflix'}]},'streaming.json':{'movies':[row]},'streaming_announcements.json':{'movies':[reviewed]}}.items():(root/name).write_text(json.dumps(value))
+   subprocess.run([sys.executable,str(SCRIPT)],cwd=directory,check=True,capture_output=True)
+   movies=json.loads((root/'streaming.json').read_text())['movies']
+   self.assertEqual(len(movies),1);self.assertEqual(movies[0].get('original_title'),'Animals');self.assertEqual(movies[0].get('release_year'),2026);self.assertEqual(movies[0]['date'],'2026-10-09');self.assertNotIn('id',movies[0])

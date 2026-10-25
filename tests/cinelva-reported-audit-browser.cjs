@@ -55,6 +55,20 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.locator('[data-tab="watchlist"]').click();
    assert.match((await page.locator('#wantWatchSort option').allTextContents()).join(' '),/保存した日/);
    assert.doesNotMatch(await page.locator('body').innerText(),/ソートキー|実装済み|作品ID未照合|照合保留/);
+   await context.route('**/api/movie-detail?*',r=>r.fulfill({headers:{'access-control-allow-origin':'*'},json:{movie:{id:42,tmdbId:42,title:'短い作品',event:'catalog',availability:{flatrate:['Netflix','Amazon Prime Video'],rent:['Amazon Video'],buy:['Apple TV Store'],source_url:'https://www.themoviedb.org/movie/42/watch?locale=JP'}}}}));
+   for(const prefix of ['', 'cinelva/']){
+    await page.goto(`http://127.0.0.1:${port}/${prefix}search.html?id=42`,{waitUntil:'domcontentloaded'});
+    await page.getByRole('heading',{name:'どこで観る？',exact:true}).waitFor();
+    const panel=page.locator('.watchProviders');assert.match(await panel.innerText(),/見放題[\s\S]*レンタル[\s\S]*購入/);
+    const netflix=panel.getByRole('link',{name:'Netflixで検索 ↗',exact:true});
+    assert.equal(new URL(await netflix.getAttribute('href')).searchParams.get('q'),'短い作品');
+    assert.equal(await netflix.evaluate(e=>e.getBoundingClientRect().height>=44),true);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    assert.equal(await panel.locator('.watchProviderLink').count(),4);
+    const popupPromise=page.waitForEvent('popup');await netflix.click();const popup=await popupPromise;await popup.waitForLoadState('domcontentloaded');assert.equal(new URL(popup.url()).hostname,'www.netflix.com');await popup.close();
+    await page.screenshot({path:`artifacts/reported-audit/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${prefix?'prefix':'root'}-providers.png`});
+    assert.deepEqual(errors,[]);
+   }
    await context.close();
   }
   console.log('Reported UI audit: supplied logos, period dedupe, quiet tabs, provider evidence, review alignment and Kanagawa IMAX passed in both themes');

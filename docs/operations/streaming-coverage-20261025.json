@@ -1,5 +1,5 @@
 {
-  "status": "in_progress",
+  "status": "production_verified",
   "rows": 252,
   "artwork_rows": 252,
   "prime_october_added": 87,
@@ -39,13 +39,13 @@
   ],
   "remaining": "7 FOD film identity/artwork matches and DMM TV/TELASA official dated movie starts remain unconfirmed. Whole provider libraries are not certified complete.",
   "identity_review": "Sappy confirmed2022/86min, director Ueda Shusei by TAMA festival primary source; secondary22min field rejected.",
-  "source_sha": "8a75fb6853f3fafc6ff9f2c8f390777a5b73921d",
-  "receipt_sha": "6c0feac68b699e08f8d9584d2689087d81dd7de5",
+  "source_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
+  "receipt_sha": "cc7e1af2490d592e53ca5d01ba7237466937b94a",
   "performance_ms": {
     "mobile_1000": 181.63,
     "desktop_1000": 216.15
   },
-  "next_action": "Verify data-only followup CI, merge and confirm252/252 canonical artwork rows. Preserve source receipt dc7cc711; no executable changes.",
+  "next_action": "Verified canonical252/252 artwork rows. Continue remaining7 FOD identities and primary dated DMM TV/TELASA movie starts; no whole-library completeness claim.",
   "new_identity_review": [
     {
       "id": 685916,
@@ -70,5 +70,6 @@
         "https://jiggyfilms.co.jp/item/item-1521/"
       ]
     }
-  ]
+  ],
+  "merge_sha": "1792b8c80dd534e8156853adc3383d906e42d883"
 }

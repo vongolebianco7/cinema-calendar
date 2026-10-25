@@ -1,17 +1,13 @@
 {
   "status": "publication_pending",
-  "rows": 248,
-  "artwork_rows": 248,
+  "rows": 249,
+  "artwork_rows": 249,
   "prime_october_added": 87,
   "prime_october_rows": 103,
-  "fod_added": 25,
+  "fod_added": 26,
   "disney_added": 2,
   "panda_tmdb_id": 1644945,
   "fod_identity_pending": [
-    {
-      "title": "Sappy",
-      "date": "2026-10-01"
-    },
     {
       "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
       "date": "2026-10-01"
@@ -53,6 +49,6 @@
       "date": "2026-10-03"
     }
   ],
-  "remaining": "11 FOD identities/artwork pending; DMM TV/TELASA movie start dates still require official confirmation. No entire-provider completeness claim.",
-  "rejected_identity": "Sappy1141409 returns86min vs reviewed22min work; rejected despite same title/year."
+  "remaining": "10 FOD identity/artwork matches remain unavailable in approved catalog search and local director catalog. DMM TV/TELASA official dated film starts remain unconfirmed.",
+  "identity_review": "Sappy confirmed2022/86min, director Ueda Shusei by TAMA festival primary source; secondary22min field rejected."
 }

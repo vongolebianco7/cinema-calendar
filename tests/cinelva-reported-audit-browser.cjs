@@ -53,7 +53,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.match(await awardImage.getAttribute('src'),/verified.jpg/,'empty calendar artwork never erases award catalog poster');
    await page.waitForFunction(()=>document.querySelector('#awardFilms .poster img')?.naturalWidth>0);
    await page.locator('[data-tab="watchlist"]').click();
-   assert.match(await page.locator('#wantWatchSort').innerText(),/保存した日/);
+   assert.match((await page.locator('#wantWatchSort option').allTextContents()).join(' '),/保存した日/);
    assert.doesNotMatch(await page.locator('body').innerText(),/ソートキー|実装済み|作品ID未照合|照合保留/);
    await context.close();
   }

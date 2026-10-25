@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
-  "verified_at": "2026-10-25T00:39:58.398Z",
-  "note": "PR493 exact executable source passed all10 applicable workflows, including full both-engine frontend/reported-artwork/table/native-select checks and completeness. Full local quality and targeted identity/import/bookmark tests pass. This commit changes only receipt, reviewed generated snapshots and documentation. Award records674→705, IDs338→611, artwork338→611; streaming112→134, artwork133/134.94 award entries remain unresolved, Panda artwork unavailable; no complete streaming catalog claim. Require final CI and canonical verification; original logo/storage/origins unchanged."
+  "head_sha": "8a75fb6853f3fafc6ff9f2c8f390777a5b73921d",
+  "verified_at": "2026-10-25T01:58:59.893Z",
+  "note": "PR495 exact executable source: all6 workflows succeeded, including Autonomous40151732365, smoke40151732370, frontend40151732356 (one bounded unchanged-source rerun after existing search bookmark assertion), backend40151732368, mobile and completeness. Data249/249 artwork; 115 reviewed premieres and Panda identity artwork. Original performance1126ms/repeat1003ms exceeded1000ms; offscreen layout repair now182/216ms for390/1280px1000-record interactions, all4 cases pass. Preserve all records, poster identities, storage keys, origins, logo pixels and timing budgets. Final-head CI and canonical verification still required."
 }

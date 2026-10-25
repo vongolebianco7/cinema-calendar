@@ -1,7 +1,19 @@
 {
-  "status": "in_progress",
-  "merged_pr": 499,
-  "integrated_main": "e850cdc2310faf94b1e47a1f74a84e9cf35cc1ed",
-  "reason": "Concurrent Best10/header commits changed executable main while PR499 exact-head tests ran. Guard correctly refused both production builds. Preserve all integrated source, obtain exact integrated PR CI, then proof-only receipt and final CI.",
-  "next_action": "Verify integrated source, renew production-proof.json, merge release PR and canonical verification."
+  "status": "production_deployed",
+  "feature_pr": 499,
+  "release_pr": 501,
+  "source_sha": "cebf5f0785a97425a65437f159817a8b7114a907",
+  "receipt_sha": "ff06ad1739d2e6cd029fa3af5f175e7249c4325c",
+  "merge_sha": "5e31f47e06baacf50b13717f0f5cb4cd9a3f43af",
+  "frontend": "dpl_5Bekty7Duue7U8snbH2GtsQj6y2j READY",
+  "backend": "dpl_HvzMJVvETT79vbeWLoYBX5eMAMCe READY",
+  "ci": "All integrated source and final-head workflows pass. Final frontend legacy agent redirect timeout passed one unchanged-source rerun. Full quality and31-route coverage preserved.",
+  "canonical": "Six canonical source files HTTP200 byte-identical to merge. Real API Nolan525 director19/cast33;Hanks31 cast188;Interstellar157336 provider logos8,subscription5,rental3,buy2.",
+  "browser": "Actual390px Chromium touch context: Nolan profile13 cached fallback,Hanks188 films,three columns,one common review control per film,dialogs open/close,provider icons10 with images loading. Read-only;no production record writes.",
+  "limitations": [
+    "Actual autocomplete candidate tap could not be verified through runtime proxy: backend fetches exceeded6s frontend timeout, while direct public API returns correct Nolan candidates. CI candidate tap passes Chromium/WebKit.",
+    "Existing movie-detail close button #close is covered by sticky header #gMenuBtn at390px; actual click failed. Needs followup fix and source proof.",
+    "No physical iPhone Safari test or whole-catalog completeness claim."
+  ],
+  "next_action": "Fix and test390px detail close/header overlap; determine whether autocomplete6s timeout also affects ordinary clients, then verify live candidate tap. Preserve all deployed requested features and Best10 source."
 }

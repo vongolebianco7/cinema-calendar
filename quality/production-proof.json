@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8072bce22681f9c26b55bcc7628836bc7f531f0b",
-  "verified_at": "2026-10-25T07:39:06.323Z",
-  "note": "PR499 exact source all9 workflows succeeded, including required autonomous40172691613,smoke40172691602,frontend40172691627,backend40172691636. Full local quality passed. Chromium/WebKit verify movie/director/cast autocomplete,touch/keyboard/IME,identity and delayed responses,profile fallback,three poster columns,shared review persistence and director identity,compact provider icon columns. All audit navigations isolated with one context clock; current page errors remain fatal. Independent review findings fixed RED to GREEN. Final receipt-head CI and canonical verification required."
+  "head_sha": "cebf5f0785a97425a65437f159817a8b7114a907",
+  "verified_at": "2026-10-25T18:30:23.167Z",
+  "note": "PR501 integrated source all10 workflows succeeded. Required autonomous40220434154,smoke40220434115,frontend40220434117,backend40220434150 passed. Includes all PR499 search/provider features plus concurrent restored Best10/header source. Approved icon metadata and31-route audit coverage repaired, local full quality passed. No existing records or original logo colors changed. Final receipt-head CI and canonical publication verification required."
 }

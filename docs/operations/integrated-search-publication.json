@@ -1,0 +1,7 @@
+{
+  "status": "in_progress",
+  "merged_pr": 499,
+  "integrated_main": "e850cdc2310faf94b1e47a1f74a84e9cf35cc1ed",
+  "reason": "Concurrent Best10/header commits changed executable main while PR499 exact-head tests ran. Guard correctly refused both production builds. Preserve all integrated source, obtain exact integrated PR CI, then proof-only receipt and final CI.",
+  "next_action": "Verify integrated source, renew production-proof.json, merge release PR and canonical verification."
+}

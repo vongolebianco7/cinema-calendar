@@ -23,7 +23,7 @@ async function freePort() {
   const root = path.resolve(__dirname, '..');
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'quality', 'route-manifest.json'), 'utf8'));
   const routes = manifest.routes.map(route => route.path).sort();
-  assert.equal(routes.length, 30, 'route audit covers all current non-Ocean HTML pages');
+  assert.equal(routes.length, 31, 'route audit covers all current non-Ocean HTML pages');
 
   const port = await freePort();
   const base = `http://127.0.0.1:${port}`;

@@ -802,6 +802,8 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
 /* Recorded films and calendar selections use one shared, aligned card geometry. */
 #recordsView #recordList,#summaryView #calendarFilms .record-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px 9px!important;align-items:stretch!important}
 #recordsView #recordList>.cinelva-unified-record-card,#summaryView #calendarFilms .cinelva-unified-record-card{display:flex!important;flex-direction:column!important;gap:5px!important;height:100%!important;min-width:0!important;overflow:visible!important;padding:0!important;margin:0!important}
+/* Keep every record searchable while deferring layout of offscreen cards. */
+#recordsView #recordList>.cinelva-unified-record-card:nth-child(n+31){content-visibility:auto;contain-intrinsic-size:auto 400px}
 #recordsView #recordList .cinelva-record-poster,#summaryView #calendarFilms .cinelva-record-poster{aspect-ratio:2/3!important;height:auto!important;width:100%!important;flex-shrink:0!important;overflow:hidden!important}
 #recordsView #recordList .cinelva-record-poster .poster,#summaryView #calendarFilms .cinelva-record-poster .poster{width:100%!important;height:100%!important;aspect-ratio:2/3!important;box-sizing:border-box!important}
 #recordsView #recordList .cinelva-record-title,#summaryView #calendarFilms .cinelva-record-title{font-size:12px!important;font-weight:650!important;line-height:1.35!important;min-height:2.7em!important;max-height:2.7em!important;margin:3px 0 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}

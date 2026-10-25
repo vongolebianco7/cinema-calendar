@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
-  "verified_at": "2026-10-25T00:39:58.398Z",
-  "note": "PR493 exact executable source passed all10 applicable workflows, including full both-engine frontend/reported-artwork/table/native-select checks and completeness. Full local quality and targeted identity/import/bookmark tests pass. This commit changes only receipt, reviewed generated snapshots and documentation. Award records674→705, IDs338→611, artwork338→611; streaming112→134, artwork133/134.94 award entries remain unresolved, Panda artwork unavailable; no complete streaming catalog claim. Require final CI and canonical verification; original logo/storage/origins unchanged."
+  "head_sha": "2e689d9e7119e4d5dac8135d46631828fd10325e",
+  "verified_at": "2026-10-25T02:29:49.630Z",
+  "note": "PR495 exact executable source2e689d9e: all7 PR workflows succeeded, including Autonomous40153143714, smoke40153143720, frontend40153143883, backend40153143754, mobile40153143751, completeness40153143760 and scorecard40153143687. Full local quality gate passed on this head. Chromium/WebKit 30 routes x4 viewports x2 themes each pass; shared review/bookmark storage and reported regressions pass. First30 record cards render eagerly; later cards defer offscreen layout. Streaming249/249 artwork; provider coverage remains partial. Receipt-only final-head CI and canonical production verification required."
 }

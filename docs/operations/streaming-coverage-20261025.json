@@ -1,15 +1,83 @@
 {
   "status": "publication_pending",
-  "base_sha": "b58489d6457f9dbc05eda659e88c7652d0a8a9ba",
-  "rows": 221,
-  "artwork_rows": 221,
-  "added": 87,
-  "source": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+  "rows": 243,
+  "artwork_rows": 243,
+  "prime_october_added": 87,
   "prime_october_rows": 103,
-  "scope": "Official October Prime Video individual film list; all103 films represented. This does not certify complete libraries or other providers.",
-  "panda": {
-    "tmdb_id": 1644945,
-    "identity_evidence": "Original title 熊猫奇遇記, director Liang Bibo, runtime85, Japanese premiere2026-02-06; distributor primary source https://www.albatros-film.com/archives/17209/"
-  },
-  "remaining": "Audit other provider dated film announcements; do not infer start dates from availability."
+  "fod_added": 20,
+  "disney_added": 2,
+  "panda_tmdb_id": 1644945,
+  "fod_identity_pending": [
+    {
+      "title": "Sappy",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "カウントダウン",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "ゲイラン",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "シャドウズ",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "ジョーズ 異次元の怪物",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "リンウー 靈語 ─超常捜査─",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "君の僕の詩",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "君への挽歌",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "女",
+      "date": "2026-10-01"
+    },
+    {
+      "title": "アウトロー・キラーズ 悪意の連鎖",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "エターナル・ラストラブ あの世での魂活",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "きみがいるだけで",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "I AM JAM ピザの惑星危機一髪！（活弁吹込版）",
+      "date": "2026-10-03"
+    },
+    {
+      "title": "ゲッベルス ヒトラーをプロデュースした男",
+      "date": "2026-10-04"
+    }
+  ],
+  "sources": [
+    "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+    "https://news.fod.fujitv.co.jp/article/14842",
+    "https://www.universal-music.co.jp/katseye/news/2026-10-01/",
+    "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus"
+  ],
+  "remaining": "Resolve16 FOD titles before importing; investigate dated DMM TV/TELASA announcements. No entire-provider coverage certification."
 }

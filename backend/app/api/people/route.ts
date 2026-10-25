@@ -15,5 +15,13 @@ export async function GET(req:Request){const limited=rateLimited(req,90);if(limi
   const u=new URL(B+`/person/${id}/movie_credits`);u.searchParams.set("language","ja-JP");const h=auth(u);if(!h)return json({error:"TMDB not configured"},{status:503});
   try{const r=await fetch(u,{headers:h,next:{revalidate:86400}});if(!r.ok)throw 0;const d=await r.json();const ids=[...new Set((d.crew||[]).filter((x:any)=>x.job==="Director").map((x:any)=>Number(x.id)).filter((x:number)=>Number.isInteger(x)&&x>0))];return json({ids})}catch{return json({error:"director credits unavailable"},{status:502})}
  }
- const q=params.get("q")?.trim()||"";if(q.length<2)return json({people:[]});const u=new URL(B+"/search/person");u.searchParams.set("query",q);u.searchParams.set("language","ja-JP");u.searchParams.set("include_adult","false");const h=auth(u);if(!h)return json({people:[]});try{const r=await fetch(u,{headers:h,next:{revalidate:3600}});if(!r.ok)throw 0;const d=await r.json();return json({people:(d.results||[]).slice(0,8).map((x:any)=>({id:x.id,name:x.name,department:x.known_for_department,profile_path:x.profile_path||null,known_for:(x.known_for||[]).map((m:any)=>m.title||m.name).filter(Boolean).slice(0,3)}))})}catch{return json({people:[]},{status:502})}}
+ const q=(params.get("q")||"").normalize("NFKC").trim().slice(0,100);if(q.length<2)return json({people:[]});
+ const normalize=(value:string)=>String(value||"").normalize("NFKC").toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,"");
+ const search=async(query:string)=>{const u=new URL(B+"/search/person");u.searchParams.set("query",query);u.searchParams.set("language","ja-JP");u.searchParams.set("include_adult","false");const h=auth(u);if(!h)return [];const r=await fetch(u,{headers:h,next:{revalidate:3600}});if(!r.ok)throw Error("person search unavailable");return (await r.json()).results||[];};
+ try{let rows=await search(q);const key=normalize(q);
+  // TMDB requires Japanese name separators. A bounded prefix lookup recovers
+  // omitted separators while full normalized-name matching excludes other people.
+  if(!rows.length&&key.length>2&&/^[ァ-ヶー]+$/.test(key)){rows=(await search(key.slice(0,2))).filter((x:any)=>normalize(x.name).includes(key)||normalize(x.original_name).includes(key));}
+  return json({people:rows.slice(0,8).map((x:any)=>({id:x.id,name:x.name,department:x.known_for_department,profile_path:x.profile_path||null,known_for:(x.known_for||[]).map((m:any)=>m.title||m.name).filter(Boolean).slice(0,3)}))});
+ }catch{return json({people:[]},{status:502})}}
 export async function OPTIONS(request:Request){return options(request)}

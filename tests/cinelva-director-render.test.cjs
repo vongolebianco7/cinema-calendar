@@ -24,6 +24,7 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
   }
   const elements = { directorTimeline: element(), directorWorks: element() };
   const context = {
+    CinelvaGlobalSearch:require('../js/cinelva-global-search.js'),
     state: { records, movies, directors: { one: { name, works, ...profile } } },
     recordMovies: () => records,
     enriched: movie => movie,

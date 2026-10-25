@@ -19,3 +19,16 @@ test('provider-safe image paths reject injected and external paths',()=>{
  assert.equal(model.imageUrl('/safe_file.jpg'),'https://image.tmdb.org/t/p/w185/safe_file.jpg');
  for(const p of ['https://evil.example/a.png','//evil.example/a.png','/a.svg','/a.jpg" onerror="x'])assert.equal(model.imageUrl(p),'');
 });
+test('director search shares ranking exclusions for shorts, anthologies and other jobs',()=>{
+ const rows=[{id:1,title:'Feature',job:'Director'},{id:2,title:'Short Films Collection',job:'Director'},{id:3,title:'Tiny',runtime:12,job:'Director'},{id:4,title:'出演',job:'Actor'},{id:5,title:'Episode',media_type:'episode',job:'Director'},{id:6,title:'Documentary',job:'Director',runtime:90}];
+ assert.deepEqual(model.creditFilms(rows,'director').map(x=>x.id),[6,1]);
+});
+test('person search treats punctuation and spacing as equivalent',()=>{
+ assert.equal(model.normalizeName('トムホランド'),model.normalizeName('トム・ホランド'));
+ assert.equal(model.normalizeName(' Ｔｏｍ Holland '),'tomholland');
+});
+test('suggestions choose safe person photos and movie posters',()=>{
+ assert.equal(model.candidateImage({kind:'person',profile_path:'/face.jpg'}),'https://image.tmdb.org/t/p/w185/face.jpg');
+ assert.equal(model.candidateImage({kind:'movie',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}),'https://image.tmdb.org/t/p/w185/poster.jpg');
+ assert.equal(model.candidateImage({kind:'movie',poster:'https://untrusted.test/a.jpg'}),'');
+});

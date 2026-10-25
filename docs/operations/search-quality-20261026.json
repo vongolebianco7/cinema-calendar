@@ -1,0 +1,26 @@
+{
+  "status": "in_progress",
+  "base_sha": "8b7697c7840e0737be6dbcf5db0ae06036d1b369",
+  "branch": "fix/search-quality-20261026",
+  "scope": [
+    "Shared exact director-credit ranking exclusions in person search",
+    "Progressive photo/poster suggestions and profile response reuse",
+    "Japanese punctuation-free people fallback with normalized name verification",
+    "Mobile movie-detail close control above sticky header"
+  ],
+  "verification": {
+    "focused_node": "48/48 passed",
+    "quality_gate": "passed;347 active node tests plus Python/route/data contracts",
+    "mobile_browser": "Chromium390px light/dark root,prefix,MyCinelva;independent movie/person stalls,photos,strict director exclusions,tab network reuse,common review save/reload,detail close and saved fallback passed",
+    "fallback_timing": "One10s timeout in full browser test; unchanged application rerun passed. Isolated actual6s abort→saved fallback also passed.",
+    "review": "Independent whole-change review: no critical/important findings.",
+    "live_prefix": "Existing production API トム returned actor1136406 as first result, confirming new bounded prefix recovery lookup covers reported actor. Full new endpoint requires deployment."
+  },
+  "netflix_scope": {
+    "streaming_rows": 5,
+    "october_2026_rows": 2,
+    "coverage": "Verified dated announcements only;not exhaustive Japan Netflix library",
+    "automatic_html_collection": "disabled by source registry"
+  },
+  "next_action": "Exact source CI,receipt-only CI,merge,canonical API/browser verification"
+}

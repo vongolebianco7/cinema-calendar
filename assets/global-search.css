@@ -3,3 +3,5 @@
 body[data-person-search="true"] .movieGridSort{display:none!important}
 
 body[data-person-search="true"] #grid,body[data-person-search="true"] #status{display:none!important}
+
+.cinelva-search-suggestions button{flex-direction:row;align-items:center;gap:10px}.cinelva-suggestion-image{width:34px;height:48px;object-fit:cover;flex:none;border-radius:4px;background:#8882}.cinelva-suggestion-placeholder{display:grid;place-items:center;font-size:10px}.cinelva-suggestion-text{display:flex;flex-direction:column;gap:3px;min-width:0;overflow-wrap:anywhere}

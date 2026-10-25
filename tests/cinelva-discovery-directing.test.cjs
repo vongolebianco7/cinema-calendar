@@ -51,3 +51,8 @@ test('person profile refuses wrong identities and missing credits instead of dec
  for(const body of [{id:8,movie_credits:{crew:[],cast:[]}},{id:7}]){const get=route(async()=>({ok:true,json:async()=>body}));assert.equal((await get({url:'https://example.test/api/people?id=7&profile=1'})).status,502);}
  const get=route(async()=>{throw Error('must not fetch')});assert.equal((await get({url:'https://example.test/api/people?id=oops&profile=1'})).status,400);
 });
+test('punctuation-free person search retries a short prefix and filters exact normalized names',async()=>{
+ const queries=[];const get=route(async u=>{const q=u.searchParams.get('query');queries.push(q);return {ok:true,json:async()=>({results:q==='トム'?[{id:1136406,name:'トム・ホランド',known_for_department:'Acting',profile_path:'/face.jpg'},{id:64796,name:'トム・ホランド',known_for_department:'Directing'},{id:500,name:'トム・クルーズ',known_for_department:'Acting'}]:[]})}});
+ const r=await get({url:'https://local/api/people?q='+encodeURIComponent('トムホランド')});
+ assert.deepEqual(Array.from(r.body.people,x=>x.id),[1136406,64796]);assert.equal(queries.length,2);
+});

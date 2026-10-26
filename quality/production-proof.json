@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5ce8a9a265d2ebc3bd93e821eb9f0e03a6f672d8",
-  "verified_at": "2026-10-26T14:29:33.851Z",
-  "note": "PR512 integrated exact source all9 CI passed: autonomous40337774596,smoke40337774683,frontend40337774636,backend40337774674. Includes protected TELASA intake14films, JP provider metadata choices, lazy startup and selection/focus preservation; preserves verified Best10 main77c5837c. Chromium/WebKit provider and existing journeys pass. Receipt-only update; final-head CI before merge. Exhaustive provider catalogs and upstream500page ceiling remain unresolved."
+  "head_sha": "539b544b3db7be8d9b1a628b8dea2e756533daf6",
+  "verified_at": "2026-10-26T15:01:49.023Z",
+  "note": "PR510 combined current main c7f7e245 provider catalogue,Best10,TELASA and nationwide savings. All exact-source workflows passed, including four required workflows.47 prefectural examples,14 profiles,30 methods;15 focused units and full local quality pass. Only documentation changed after proved source; this commit changes receipt only. Final CI and canonical verification required."
 }

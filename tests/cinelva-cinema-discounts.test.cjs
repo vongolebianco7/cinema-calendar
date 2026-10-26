@@ -70,3 +70,46 @@ test('every price retains reviewed primary provenance and bounded manual coverag
   for(const o of v.offers){assert.ok(Number.isInteger(o.price)&&o.price>0);assert.ok(o.condition);}
  }
 });
+
+test('national guide shows conditional methods without selected benefits',()=>{
+ const fixture={chains:[{id:'toho',name:'TOHO',offers:[{id:'coupon',price:1100,access:'member',verifiedAt:'2026-10-26',when:{kind:'weekday',days:[1,3]},feeText:'月額548円',steps:['クーポンを取得']},{id:'public',price:1400,access:'public',verifiedAt:'2026-10-26',when:{kind:'weekday',days:[3]}}]}]};
+ const r=D.guide(fixture,{date:'2026-10-26'},new Date('2026-10-26T01:00:00Z'))[0];
+ assert.equal(r.available[0].price,1100);assert.equal(r.publicBest,null);assert.equal(r.conditionalBest.price,1100);assert.equal(r.upcoming[0].nextDate,'2026-10-28');
+});
+test('national guide excludes named theaters and never uses stale or future reviews',()=>{
+ const fixture={chains:[{id:'smt',name:'MOVIX',offers:[{id:'a',price:1400,access:'member',verifiedAt:'2026-10-26',when:{kind:'always'},excludedTheaters:['東劇']},{id:'old',price:500,verifiedAt:'2026-01-01',when:{kind:'always'}},{id:'future',price:600,verifiedAt:'2026-10-27',when:{kind:'always'}}]}]};
+ const now=new Date('2026-10-26T01:00:00Z');
+ assert.equal(D.guide(fixture,{date:'2026-10-26',theater:'東劇'},now)[0].available.length,0);
+ assert.equal(D.guide(fixture,{date:'2026-10-26'},now)[0].available[0].price,1400);
+ assert.equal(D.guide(fixture,{date:'2026-12-26'},now)[0].available.length,0);
+ assert.deepEqual(D.guide(fixture,{date:'invalid'},now),[]);
+});
+test('national theater matching does not confuse AEON shops or premium109 with ordinary theaters',()=>{
+ assert.equal(D.chainForTheater('イオンシネマ北見'),'aeon');assert.equal(D.chainForTheater('イオンモール映画館'),'');
+ assert.equal(D.chainForTheater('109シネマズプレミアム新宿'),'109');assert.equal(D.chainForTheater('T・ジョイ出雲'),'tjoy');
+ assert.equal(D.chainForTheater('MOVIX日吉津'),'smt');assert.equal(D.chainForTheater('未知の映画館'),'');
+});
+test('national facts cover broad chains and retain actionable primary provenance and fees',()=>{
+ assert.equal(data.chains.length,14);
+ for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.equal(o.verifiedAt,'2026-10-26');}
+ const now=new Date('2026-10-26T01:00:00Z');
+ const r=D.guide(data,{date:'2026-12-01',chain:'tjoy'},now)[0];assert.equal(r.available.some(o=>o.id==='first'),false);assert.equal(r.publicBest.price,1000);
+ assert.equal(D.guide(data,{date:'2026-10-28',chain:'109',theater:'109シネマズプレミアム新宿'},now)[0].available.length,0);
+});
+test('every prefecture has a sourced example and a usable guide, including Miyazaki',()=>{
+ const prefs='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
+ assert.deepEqual(data.regions?.map(r=>r.prefecture).sort(),prefs.sort());
+ const now=new Date('2026-10-26T01:00:00Z');
+ for(const r of data.regions){assert.ok(r.sourceUrl.startsWith('https://'));assert.ok(r.theater);const rows=D.guide(data,{date:'2026-10-28',prefecture:r.prefecture},now);assert.equal(rows.length,1);assert.equal(rows[0].id,r.chain);assert.ok(rows[0].available.length>0);}
+ const m=D.guide(data,{date:'2026-10-28',prefecture:'宮崎県'},now)[0];assert.equal(m.publicBest.price,1300);
+ assert.deepEqual(D.guide(data,{date:'2026-10-28',prefecture:'架空県'},now),[]);
+});
+test('stale regional theater association cannot expose a fresh chain coupon',()=>{
+ const f=JSON.parse(JSON.stringify(data));f.regions.find(r=>r.prefecture==='沖縄県').verifiedAt='2026-01-01';
+ const r=D.guide(f,{date:'2026-10-28',prefecture:'沖縄県'},new Date('2026-10-26T01:00:00Z'))[0];assert.equal(r.available.length,0);assert.equal(r.upcoming.length,0);
+});
+test('upcoming price dates cannot outlive a regional association reviewed earlier than the offer',()=>{
+ const f=JSON.parse(JSON.stringify(data));f.regions.find(r=>r.prefecture==='東京都').verifiedAt='2026-10-01';
+ const r=D.guide(f,{date:'2026-11-29',prefecture:'東京都'},new Date('2026-10-26T01:00:00Z'))[0];
+ assert.ok(r.upcoming.every(o=>o.nextDate<='2026-11-30'));assert.ok(r.upcoming.some(o=>o.nextDate==='2026-11-30'));
+});

@@ -22,6 +22,7 @@
   if(offer.evening&&!options.evening)return false;
   const d=civil(date),day=d.getUTCDate(),month=d.getUTCMonth()+1,rule=offer.when||{};
   if(offer.from&&date<offer.from||offer.until&&date>offer.until)return false;
+  if((offer.excludedMonths||[]).includes(month))return false;
   switch(rule.kind){
    case 'always':return true;
    case 'weekday':return (rule.days||[]).includes(d.getUTCDay());
@@ -47,6 +48,37 @@
    return {date,price:rows.find(v=>v.best)?.best.price??null};
   });
  }
- const api={today,addDays,compare,calendar,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
+ const normalized=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[\s・･ー−–—-]/g,'');
+ function chainForTheater(name){
+  const n=normalized(name);
+  const patterns=[['central-miyazaki',/セントラルシネマ宮崎/],['toho',/tohoシネマズ/],['aeon',/イオンシネマ/],['109',/109シネマズ|ムビル/],['tjoy',/tジョイ|ティジョイ|tjoy/],['sunshine',/シネマサンシャイン/],['smt',/movix|新宿ピカデリ|丸の内ピカデリ|熊本ピカデリ|東劇|なんばパクスシネマ|大阪ステションシティシネマ/],['united',/ユナイテッドシネマ|シネプレックス|yebisugardencinema/],['corona',/コロナシネマ/],['forum',/^(フォラム|アトフォラム|ソラリス)/],['kino',/キノシネマ|kinocinema/],['cinemart',/シネマト新宿/],['os',/osシネマズ/],['ttcg',/テアトル新宿|ヒュマントラストシネマ|シネリブル/]];
+  return patterns.find(([,pattern])=>pattern.test(n))?.[0]||'';
+ }
+ function guide(data,options={},now=new Date()){
+  const date=options.date||'',current=today(now);
+  if(!civil(date)||!current||date<current)return [];
+  const region=options.prefecture?(Array.isArray(data?.regions)?data.regions:[]).find(r=>r?.prefecture===options.prefecture):null;
+  if(options.prefecture&&!region)return [];
+  const chain=region?.chain||options.chain||'',theater=normalized(region?.theater||options.theater);
+  return (Array.isArray(data?.chains)?data.chains:[]).filter(c=>c&&typeof c==='object'&&(!chain||c.id===chain)).map(c=>{
+   const available=[],upcoming=[];
+   for(const o of Array.isArray(c.offers)?c.offers:[]){
+    if(!o||typeof o!=='object'||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
+    if(theater&&(o.excludedTheaters||[]).some(name=>theater.includes(normalized(name))))continue;
+    for(let i=0;i<=REVIEW_DAYS;i++){
+     const nextDate=addDays(date,i);
+     if(!fresh(o,nextDate,now)||region&&!fresh(region,nextDate,now))break;
+     // Explain all methods; do not infer visitor membership or screening availability.
+     if(applies({...o,requires:[],evening:false},nextDate,{})){
+      const row={...o,nextDate};(i===0?available:upcoming).push(row);break;
+     }
+    }
+   }
+   const sort=(a,b)=>a.price-b.price||(a.maxPrice||a.price)-(b.maxPrice||b.price)||a.nextDate.localeCompare(b.nextDate);
+   available.sort(sort);upcoming.sort(sort);
+   return {...c,available,upcoming,publicBest:available.find(o=>o.access==='public')||null,conditionalBest:available.find(o=>o.access!=='public')||null};
+  });
+ }
+ const api={today,addDays,compare,calendar,guide,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

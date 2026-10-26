@@ -247,9 +247,9 @@
       "basis": "Manually reviewed numeric tariffs and original factual eligibility summaries with official source links; no automated acquisition, source images or copied editorial text. See docs/data/cinema-discounts.md.",
       "requirements": [
         "Manual review only; no cinema endpoint or HTML collection automation",
-        "Retain venue-specific official source, review date and limited adult2D coverage",
+        "Retain programme or venue primary source, actual review date, theater exclusions and limited adult2D coverage",
         "Suppress numerical comparisons after60 days or beyond next review horizon",
-        "Never infer showtime availability or stack discounts; identify existing paid benefits and excluded fees"
+        "Never infer visitor eligibility/showtime availability or stack discounts; show required steps, enrolment/recurring/card fees and initial-offer conditions"
       ]
     }
   ]

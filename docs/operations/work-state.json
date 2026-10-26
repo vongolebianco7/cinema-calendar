@@ -1389,5 +1389,87 @@
       "Dated feeds remain partial;DMM exact premiere dates and TELASAOctober first-half not confirmed"
     ],
     "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
+  },
+  "nationwide_cinema_savings": {
+    "status": "ci_passed",
+    "branch": "feat/nationwide-cinema-savings-20261026",
+    "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
+    "review_date": "2026-10-26",
+    "programmes": 14,
+    "methods": 30,
+    "scope": "Method-first savings without membership checkboxes:47 sourced prefectural theater examples,14 programme profiles,30 methods, fees/purchase steps, date/chain/prefecture links and independent review horizons. Non-exhaustive local coverage, ordinary adult2D only.",
+    "local_validation": "15/15 focused unit tests and full shared quality passed. Local Japanese-font Chromium root/prefix/light/dark320–1280px,fees,no checkboxes,prefecture/Miyazaki separation,date sharing,exclusions,retry/malformed/stale and delayed-engine national directory passed. Exact source all9 workflows passed including actual Chromium/WebKit journeys. Latest Best10/TELASA integration local full quality and15 units passed; exact combined source CI green. One unchanged agent redirect/theme WebKit timeout passed a bounded failed-job retry with no code/test weakening.",
+    "production": {
+      "state": "publication_pending",
+      "previous_quota_error": "api-deployments-free-per-day402 recorded2026-10-26T02:20:02Z; no payment/limit bypass",
+      "live_serving_deployment": "dpl_2X9LEryKoFdwEmxfABUGDG9WVasy",
+      "live_serving_sha": "85ea1e5df0b21dc5e10cd275a0d2ce1e52a70b75",
+      "live_success_created_at": "2026-10-26T08:01:49.280Z",
+      "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
+    },
+    "next_action": "Wait final receipt head CI, merge PR510 after rechecking main source, then verify actual canonical deployment/bytes/browser. Latest provider,Best10,TELASA changes preserved.",
+    "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
+    "prefectural_examples": 47,
+    "updated_at": "2026-10-26T15:01:46.913Z",
+    "pull_request": 510,
+    "source_sha": "539b544b3db7be8d9b1a628b8dea2e756533daf6",
+    "source_ci": [
+      {
+        "id": 40342952277,
+        "name": "CINELVA smoke tests",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952259,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952296,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952269,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952292,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952246,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342953121,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952316,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952332,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342937319,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342936975,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      }
+    ],
+    "integrated_main_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812"
   }
 }

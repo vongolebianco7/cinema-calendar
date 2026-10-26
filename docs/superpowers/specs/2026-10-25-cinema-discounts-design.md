@@ -1,0 +1,11 @@
+# Cinema discount comparison
+
+The user approved the free, non-scraping discount comparison described in this conversation. Implement it within the existing theater page, using its brand/navigation and adding a calendar entry link. Scope is six manually verified Yokohama/Kawasaki venues, ordinary adult 2D tickets, date, area and evening selection. Existing memberships/cards can be selected; costs of acquiring those benefits are not included in ticket prices and must be explicitly distinguished. No personal or payment data, paid services or new acquisition automation.
+
+Approaches: a standalone new route duplicates navigation; combining live showtimes with prices requires unavailable licensed data. Choose an independent comparison section in theaters.html with static sourced prices and deterministic local calculations, as approved. No claim that any film is playing or that prices are universally cheapest.
+
+Show a 14-day price calendar, chosen-date theater prices ordered by price, the actual discount conditions, alternatives, official price/schedule links and review dates. Apply one eligible tariff, never additive discounts. Unknown, future-dated or >60-day-old reviews hide numerical prices. Dates beyond the next review boundary also hide prices. Official prices may change earlier, and special screenings/formats/seats require official confirmation. Unsupported theaters/discounts remain outside coverage rather than inferred.
+
+Initial venues: TOHO Kawasaki and LaLaport Yokohama; 109 Kawasaki; Cinecitta; AEON Kohoku New Town and Minatomirai. Manually recorded factual tariffs and independently written conditions only. Data provenance and manual-only review belong in source_registry.json and a data maintenance document. Existing 109 automated-source prohibition remains unchanged.
+
+Acceptance: membership eligibility, simultaneous service days, December 1, February card-day rollover, midnight in JST, late-show selection, expiration/error states and mobile light/dark UI work without network calls to cinemas. Existing directory, records, logos and stored-data keys remain intact. Root and prefixed theater routes expose equivalent controls. Browser checks run in existing CI, and exact-source production proof is renewed before merge.

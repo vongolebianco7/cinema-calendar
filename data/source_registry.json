@@ -236,6 +236,21 @@
         "Describe TOHO-distributed subset; never imply complete nationwide annual ranking",
         "No automated crawling, paid service or copied report imagery"
       ]
+    },
+    {
+      "id": "manual_cinema_discount_facts",
+      "name": "映画館公式料金表の手動確認済み料金・割引条件",
+      "mode": "approved",
+      "purpose": [
+        "manual_cinema_discount_facts"
+      ],
+      "basis": "Manually reviewed numeric tariffs and original factual eligibility summaries with official source links; no automated acquisition, source images or copied editorial text. See docs/data/cinema-discounts.md.",
+      "requirements": [
+        "Manual review only; no cinema endpoint or HTML collection automation",
+        "Retain venue-specific official source, review date and limited adult2D coverage",
+        "Suppress numerical comparisons after60 days or beyond next review horizon",
+        "Never infer showtime availability or stack discounts; identify existing paid benefits and excluded fees"
+      ]
     }
   ]
 }

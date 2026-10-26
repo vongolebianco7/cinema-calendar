@@ -1,0 +1,37 @@
+#discounts{scroll-margin-top:76px;border-top:1px solid var(--line);padding:24px 0 30px;color:var(--text)}
+#discounts h2{font-size:22px;margin:0 0 8px}#discounts p{font-size:13px;line-height:1.7;margin:8px 0}
+#discounts .discountMuted{color:var(--muted)}
+#discounts .discountControls{display:grid;grid-template-columns:1fr 1fr 1.3fr;align-items:end;gap:12px;margin:18px 0}
+#discounts .discountField{display:grid;gap:6px;min-width:0;font-size:13px}
+#discounts input[type=date],#discounts select{display:block;width:100%;min-width:0;min-height:46px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:9px;font:inherit;font-size:16px;box-sizing:border-box}
+#discounts label.discountCheck{display:flex;align-items:center;gap:9px;min-height:46px;font-size:13px;cursor:pointer}
+#discounts input[type=checkbox]{width:20px;height:20px;flex:none;accent-color:var(--accent);margin:0}
+#discounts details{border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--panel);margin:12px 0}
+#discounts summary{min-height:46px;padding:12px 0;cursor:pointer;font-size:13px;font-weight:700}
+#discounts .discountBenefits{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;padding:4px 0 12px}
+#discounts .discountBenefits small{display:block;color:var(--muted);font-size:11px;line-height:1.5;font-weight:400}
+#discounts .discountCalendar{display:grid;grid-template-columns:repeat(7,minmax(44px,1fr));gap:6px;margin:16px 0;overflow-x:auto;padding:3px;scrollbar-width:thin}
+#discounts button{min-height:44px;min-width:44px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;cursor:pointer}
+#discounts .discountDay{padding:9px 2px;font-size:12px;line-height:1.5;min-width:0}
+#discounts .discountDay b{display:block;font-size:13px;white-space:nowrap}
+#discounts .discountDay[aria-pressed=true]{background:var(--text)!important;color:var(--bg)!important;border-color:var(--text)!important}
+#discounts .discountResults{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#discounts .discountCard{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px}
+#discounts .discountCard h3{font-size:16px;line-height:1.5;margin:0 0 4px;overflow-wrap:anywhere}
+#discounts .discountPrice{font-size:26px;font-weight:750;line-height:1.3;margin-top:12px}
+#discounts .discountPrice small{font-size:12px;font-weight:400}
+#discounts .discountOffer{font-weight:700}#discounts .discountCondition{font-size:12px;line-height:1.7;margin:6px 0}
+#discounts .discountLinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+#discounts .discountLinks a{display:flex;align-items:center;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+#discounts .discountAlternatives{font-size:12px;line-height:1.7;padding:0 10px}
+#discounts .discountAlternatives ul{padding-left:18px;margin:0 0 12px}
+#discounts .discountError{border-left:3px solid var(--accent);padding:8px 12px;line-height:1.7}
+#discounts :is(button,input,select,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#discounts .discountStatus{min-height:24px;font-size:13px;line-height:1.7;margin-bottom:12px}
+@media(max-width:600px){
+ #discounts .discountControls{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #discounts .discountControls>.discountCheck{grid-column:1/-1}
+ #discounts .discountResults,#discounts .discountBenefits{grid-template-columns:minmax(0,1fr)}
+ #discounts .discountDay{font-size:10px}#discounts .discountDay b{font-size:11px}
+ #discounts .discountCalendar{gap:4px}#discounts .discountCard{padding:14px}
+}

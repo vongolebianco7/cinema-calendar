@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1d754af3d179aaaf191eb4defb8f0fd1c60e0167",
-  "verified_at": "2026-10-26T08:53:31.258Z",
-  "note": "PR510 national method-first source1d754af3 all9 exact-head workflows succeeded. Required autonomous40293297707,smoke40293297766,frontend40293297786,backend40293298079 passed.47 sourced prefectural examples,14 programme profiles,30 methods;15 unit cases, actual Chromium/WebKit mobile/light/dark/root/prefix,fees,no checkboxes,regional exclusions,date refresh,retry and expired/malformed data passed. Independent review findings fixed. Final receipt-head CI and canonical publication required."
+  "head_sha": "30e2d37a20c065db6ed1891391cb5f00df77bf48",
+  "verified_at": "2026-10-26T08:43:09.851Z",
+  "note": "PR508 exact source all9 workflows passed including frontend40290066270 after WebKit internal-error retry, autonomous40290066272,smoke40290066325,backend40290066316. Remove hidden provider vote threshold and20-page truncation. Not exhaustive catalog certification. Receipt-only commit; require final CI before merge."
 }

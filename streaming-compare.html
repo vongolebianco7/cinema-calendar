@@ -45,7 +45,9 @@ dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);c
   </div>
   <p class="legend">※「確認中」は「非対応」を意味しません。各サービスの仕様は契約プランや利用地域で変わる場合があります。表は横にスクロールできます。</p>
   <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス・プラン同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
-    <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div><p class="calcResult" id="calcResult" aria-live="polite"></p><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
+    <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div>
+    <div class="controls"><label for="billingCycle" style="font-weight:700">比較する支払い方法</label><select class="chip" id="billingCycle" aria-label="支払い方法"><option value="monthly">月額プランで12か月利用</option><option value="best">年額プランがあれば年額を利用</option></select></div>
+    <p class="calcResult" id="calcResult" aria-live="polite"></p><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
     <p class="calcNote">※ 年額プランがあるDisney+は、月額プランの12か月分と年額一括払いで負担が異なります。年額プランは12,500円／16,700円です。</p>
   </section>
   <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
@@ -103,6 +105,15 @@ const verified={
   '月額料金（税込）':{value:'1,540円',note:'2026年2月からのWeb契約。アプリ内課金は1,650円',urls:['https://lemino.docomo.ne.jp/leminonews/articles/lemino-price-revision-news-release']},
   '無料体験':{value:'初回初月無料あり',note:'適用条件あり。App Store / Google Play等は対象外',urls:['https://lemino.docomo.ne.jp/leminonews/articles/what-is-lemino-premium']}
  },
+ 'Prime Video':{
+  '月額料金（税込）':{value:'600円（Prime会費）',note:'Amazonプライム会員特典にPrime Videoが含まれます。レンタル・追加チャンネルは別料金',urls:['https://www.cdn.amazon.co.jp/-/en/gp/subs/primeclub/signup/main.html']},
+  '年額料金（税込）':{value:'5,900円（Prime会費）',note:'月額換算約492円。別途レンタル・購入・チャンネル課金あり',urls:['https://www.cdn.amazon.co.jp/-/en/gp/subs/primeclub/signup/main.html']}
+ },
+ 'WOWOW':{
+  '月額料金（税込）':{value:'2,530円〜',note:'スタンダード2,530円。トリプル月額3,960円。契約形態やApp Store決済で異なる',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']},
+  '年額料金（税込）':{value:'トリプル43,560円',note:'トリプル年額のみ。WOWOWとの直接契約など利用条件に注意',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']},
+  '同時視聴可能台数':{value:'1台／3台',note:'スタンダード／トリプル。同時視聴数は契約形態・プランによる',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']}
+ },
  'Hulu':{
   '作成可能プロフィール数':{value:'最大6',note:'Hulu公式のサービス案内による',urls:['https://www.hulu.jp/about/']},
   'オフライン再生':{value:'対応',note:'事前にダウンロードした対応作品をオフラインで視聴可能',urls:['https://www.hulu.jp/about/']},
@@ -112,8 +123,8 @@ const verified={
   '同時視聴可能台数':{value:'最大4台',note:'同一作品は最大2台。レンタル・購入は対象外',urls:['https://help.hulu.jp/hc/ja/articles/360044166294-1%E3%81%A4%E3%81%AE%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E5%90%8C%E6%99%82%E8%A6%96%E8%81%B4%E5%8F%AF%E8%83%BD%E3%81%A7%E3%81%99%E3%81%8B']}
  }
 };
-const monthlyFees={'Netflix 広告つき':890,'Netflix スタンダード':1590,'Netflix プレミアム':2290,'U-NEXT':2189,'Hulu':1320,'Disney+ スタンダード':1250,'Disney+ プレミアム':1670,'Lemino プレミアム':1540};
-const yearlyFees={'Disney+ スタンダード':12500,'Disney+ プレミアム':16700};
+const monthlyFees={'Netflix 広告つき':890,'Netflix スタンダード':1590,'Netflix プレミアム':2290,'U-NEXT':2189,'Hulu':1320,'Disney+ スタンダード':1250,'Disney+ プレミアム':1670,'Lemino プレミアム':1540,'Prime Video（プライム会費）':600,'WOWOW スタンダード':2530,'WOWOW トリプル':3960};
+const yearlyFees={'Disney+ スタンダード':12500,'Disney+ プレミアム':16700,'Prime Video（プライム会費）':5900,'WOWOW トリプル':43560};
 const sections=[
   {name:'料金と契約',rows:['月額料金（税込）','年額料金（税込）','広告の有無','広告なしプラン','無料体験','解約・契約条件']},
   {name:'利用人数・端末',rows:['同時視聴可能台数','登録可能端末数','作成可能プロフィール数','家族共有','別居家族の利用条件','ダウンロード可能台数']},
@@ -150,14 +161,18 @@ function openSource(name,row,info){
  document.getElementById('sourceDialog').showModal();
 }
 function renderFees(){
- const from=document.getElementById('fromService'),to=document.getElementById('toService');
- Object.keys(monthlyFees).forEach((name,i)=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
+ const from=document.getElementById('fromService'),to=document.getElementById('toService'),cycle=document.getElementById('billingCycle');
+ Object.keys(monthlyFees).forEach(name=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
  to.selectedIndex=5;
+ const yen=n=>n.toLocaleString('ja-JP')+'円';
+ const annually=name=>cycle.value==='best'&&Object.prototype.hasOwnProperty.call(yearlyFees,name)?yearlyFees[name]:monthlyFees[name]*12;
  const update=()=>{
-  const before=monthlyFees[from.value],after=monthlyFees[to.value],delta=after-before;
-  document.getElementById('calcResult').textContent=delta===0?'料金差はありません（月額'+after.toLocaleString('ja-JP')+'円）':delta<0?'月額'+Math.abs(delta).toLocaleString('ja-JP')+'円安くなります（年間'+(Math.abs(delta)*12).toLocaleString('ja-JP')+'円相当）':'月額'+delta.toLocaleString('ja-JP')+'円高くなります（年間'+(delta*12).toLocaleString('ja-JP')+'円相当）';
+  const before=annually(from.value),after=annually(to.value),delta=after-before;
+  const status=delta===0?'年間支払額は同じです':delta<0?'年間'+yen(-delta)+'安くなります':'年間'+yen(delta)+'高くなります';
+  const contract=name=>cycle.value==='best'&&Object.prototype.hasOwnProperty.call(yearlyFees,name)?'年額一括':'月額払い×12';
+  document.getElementById('calcResult').textContent=status+'。 '+from.value+'：'+yen(before)+'（'+contract(from.value)+'） → '+to.value+'：'+yen(after)+'（'+contract(to.value)+'）';
  };
- from.addEventListener('change',update);to.addEventListener('change',update);update();
+ from.addEventListener('change',update);to.addEventListener('change',update);cycle.addEventListener('change',update);update();
 }
 draw();renderFees();
 document.getElementById('sourceClose').addEventListener('click',()=>document.getElementById('sourceDialog').close());

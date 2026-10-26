@@ -1,0 +1,42 @@
+{
+  "status": "blocked",
+  "updated_at": "2026-10-26T14:48:35.359466+00:00",
+  "implemented_scope": "production_verified",
+  "merge_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
+  "pull_request": 512,
+  "source_sha": "5ce8a9a265d2ebc3bd93e821eb9f0e03a6f672d8",
+  "receipt_sha": "3f9d268f69d5b1625242827a40f926ac56924763",
+  "source_ci": "All9 passed including frontend40337774636,quality40337774596,smoke40337774683,backend40337774674",
+  "final_ci": "All10 passed including frontend40340065032,quality40340065828,smoke40340064830,backend40340064426",
+  "deployments": {
+    "frontend": "dpl_VV1T6bmJRW9tEsUZem3DBgcxBFWz",
+    "backend": "dpl_8xSEFoN4aWp2cmGX9DPbwvDGqwej",
+    "state": "BothREADY atc7f7e245"
+  },
+  "live_evidence": {
+    "japan_provider_metadata_count": 70,
+    "cloud_browser_provider_checkbox_count": 70,
+    "cloud_browser_netflix_result_label": "5,240作品",
+    "cloud_browser_movie_cards": 20,
+    "telasa_films": 14,
+    "calendar_movies": 1197,
+    "streaming_movies": 270,
+    "production_record_writes": false,
+    "source_scope": "TMDB/JustWatch Japan movie provider metadata,not independently certified complete service catalogs",
+    "runtime_browser_limitation": "Scratch Chromium through runtime proxy timed out metadata into6-choice fallback;independent cloud browser loaded all70 and searchedNetflix successfully. No product bypass/mocks used in cloud verification."
+  },
+  "fixes": [
+    "Remove hidden100-vote provider threshold",
+    "Remove20-page UI truncation",
+    "Replace fixed6provider selector with all valid returnedJPproviders",
+    "Lazy metadata, safe labels,selection/focus preservation and fallback",
+    "Add14 officially dated TELASAfilms with posters to both feeds"
+  ],
+  "publication_recovery": "Manual streaming_announcements.json is protected source. Initial TELASA standalone merge was refused by guard;combined exact-source verification+receipt now published. No whitelist or guard bypass.",
+  "remaining": [
+    "No complete authoritative Japan service libraries obtained for zero-omission reconciliation",
+    "Upstream TMDB500-page query limit remains;use production-year filters for larger catalogs",
+    "Dated feeds remain partial;DMM exact premiere dates and TELASAOctober first-half not confirmed"
+  ],
+  "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
+}

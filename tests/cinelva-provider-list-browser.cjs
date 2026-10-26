@@ -32,7 +32,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    assert.equal(await page.locator('#providerChecks').evaluate(e=>e.scrollHeight>e.clientHeight),true);
    await context.route('**/api/watch-providers',r=>r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},json:{error:'unavailable'}}));
-   await page.reload({waitUntil:'domcontentloaded'});await page.getByText('サービス一覧を更新できませんでした。表示中のサービスは検索できます。',{exact:true}).waitFor();
+   await page.reload({waitUntil:'domcontentloaded'});await page.locator('#providerChecks').scrollIntoViewIfNeeded();await page.getByText('サービス一覧を更新できませんでした。表示中のサービスは検索できます。',{exact:true}).waitFor();
    assert.equal(await page.locator('#providerChecks input').count(),6);
    await page.locator('#providerChecks input[value="8"]').check();assert.equal(await page.evaluate(()=>build().get('provider')),'8');
    assert.deepEqual(errors,[]);await context.close();

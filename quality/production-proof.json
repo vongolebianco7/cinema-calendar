@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "30e2d37a20c065db6ed1891391cb5f00df77bf48",
-  "verified_at": "2026-10-26T08:43:09.851Z",
-  "note": "PR508 exact source all9 workflows passed including frontend40290066270 after WebKit internal-error retry, autonomous40290066272,smoke40290066325,backend40290066316. Remove hidden provider vote threshold and20-page truncation. Not exhaustive catalog certification. Receipt-only commit; require final CI before merge."
+  "head_sha": "0dfe8e4cf8f26b79a7d30ece768121b2b530bd72",
+  "verified_at": "2026-10-26T10:37:35.384Z",
+  "note": "PR513 CI verified source: required workflows Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build all completed successfully; mobile layout smoke and completeness scorecard succeeded. My Best 10 highest MY ratings selection requires confirmation before overwriting. All changes since PR head are release receipt only."
 }

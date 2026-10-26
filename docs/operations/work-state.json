@@ -1377,10 +1377,10 @@
       "live_success_created_at": "2026-10-26T08:01:49.280Z",
       "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
     },
-    "next_action": "Require final receipt-head CI; re-evaluate latest main source, merge PR510 within approved scope, make one automatic frontend release and verify canonical hashes/browser. Backend changes are outside this feature.",
+    "next_action": "Wait combined source CI with latest My Best10 and TELASA changes, renew receipt-only proof, require final CI, merge PR510 and verify canonical release.",
     "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-26T08:53:28.476Z",
+    "updated_at": "2026-10-26T14:16:51.141864+00:00",
     "pull_request": 510,
     "source_sha": "1d754af3d179aaaf191eb4defb8f0fd1c60e0167",
     "source_ci": [
@@ -1429,6 +1429,7 @@
         "name": "Validate frontend",
         "conclusion": "success"
       }
-    ]
+    ],
+    "integrated_main_sha": "77c5837c"
   }
 }

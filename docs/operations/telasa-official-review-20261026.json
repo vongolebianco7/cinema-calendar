@@ -3,7 +3,7 @@
   "source_url": "https://navi.telasa.jp/lineup/",
   "source_image": "https://navi.telasa.jp/lineup/img/list02.png",
   "scope": "Manually reviewed 2026 October15-31 official sheet;domestic7,foreign4,theatrical animation3. Not complete service library or first-half list.",
-  "year_evidence": "Official sheet carries October16 as Friday;page currentOctober secondhalf and observed2026-10-26.",
+  "year_evidence": "Official current page and list02.png both returned Last-Modified: Fri,16 Oct2026 06:32:26 GMT (checked2026-10-26). The companion list01.png names Aibou season25 episode1 onOctober21, independently dated2026-10-21 by TV Asahi. The image itself does not print a year or weekday.",
   "added": [
     {
       "id": 229113,
@@ -104,5 +104,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/g3HJOAjkAIoCcKRE3glxlWpHS2J.jpg"
     }
   ],
-  "excluded": "Episodic anime,drama,variety,live and music shows;銀魂ジャンプスペシャルアニメフェスタ2014 is a TV/special rather than a theatrical feature."
+  "excluded": "Episodic anime,drama,variety,live and music shows;銀魂ジャンプスペシャルアニメフェスタ2014 is a TV/special rather than a theatrical feature.",
+  "year_crosscheck_url": "https://www.tv-asahi.co.jp/aibou25/story/0001/"
 }
+

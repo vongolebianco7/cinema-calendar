@@ -5,6 +5,8 @@ const {validateSnapshot,matchBookmarkIds}=require('../js/streaming-availability.
 const NOW=Date.parse('2026-10-27T00:00:00Z');
 function snapshot(){
  return {schema_version:1,country:'JP',generated_at:'2026-10-26T23:00:00Z',
+  license:{provider:'fixture',agreement_reference:'fixture-contract',public_display_authorized:true},
+  coverage_audit:{auditor:'fixture',method:'full feed reconciliation',all_supported_services_verified:true},
   services:{Netflix:{coverage:'complete',entitlement:'subscription',
    source:{urls:['https://example.org/evidence']},
    movies:[{tmdb_id:101,title:'Film A',entitlement:'subscription'},
@@ -40,4 +42,11 @@ test('gain/loss differences are deduped and unavailable without complete evidenc
  assert.deepEqual(comparison.lost.map(x=>x.tmdb_id),[101]);
  assert.deepEqual(comparison.shared.map(x=>x.tmdb_id),[102]);
  assert.equal(require('../js/streaming-availability.js').compareBookmarkAvailability(a,{ok:false},[101]),null);
+});
+
+test('refuses complete-looking snapshots without public display rights and coverage audit',()=>{
+ const noLicense=snapshot();delete noLicense.license;
+ assert.equal(validateSnapshot(noLicense,'Netflix',NOW).reason,'unlicensed-feed');
+ const noAudit=snapshot();delete noAudit.coverage_audit;
+ assert.equal(validateSnapshot(noAudit,'Netflix',NOW).reason,'unaudited-coverage');
 });

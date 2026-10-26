@@ -1359,5 +1359,18 @@
     "retry_after_seconds": 86400,
     "provider_advised_retry_at_utc": "2026-10-27T02:20:02Z",
     "retry_note": "Provider-advised waiting period, not independently confirmed reset. No repeated deploy attempts, paid changes or quota evasion."
+  },
+  "nationwide_cinema_savings": {
+    "status": "in_progress",
+    "branch": "feat/nationwide-cinema-savings-20261026",
+    "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
+    "review_date": "2026-10-26",
+    "programmes": 13,
+    "methods": 26,
+    "scope": "Replace benefit checkboxes/six-venue UI with method-first national programme guide, steps/fees/exclusions and national directory links. No all-cinema or universal-minimum claim.",
+    "local_validation": "12/12 unit tests and full shared quality passed. Chromium root/prefix/light/dark320–1280px,no checkbox prerequisite,fees,date/chain deep links and refresh,excluded theaters,retry/stale/malformed and national directory link passed. Japanese-font screenshots inspected.",
+    "production": "Existing provider quota denial documented in search-release-quota-20261026.json; advised retry after2026-10-27T02:20:02Z. No deployment attempt or paid workaround.",
+    "next_action": "Run exact-source CI, renew proof in receipt-only commit, final CI and merge; preserve production quota blocker.",
+    "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green)."
   }
 }

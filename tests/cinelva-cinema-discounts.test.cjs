@@ -70,3 +70,29 @@ test('every price retains reviewed primary provenance and bounded manual coverag
   for(const o of v.offers){assert.ok(Number.isInteger(o.price)&&o.price>0);assert.ok(o.condition);}
  }
 });
+
+test('national guide shows conditional methods without selected benefits',()=>{
+ const fixture={chains:[{id:'toho',name:'TOHO',offers:[{id:'coupon',price:1100,access:'member',verifiedAt:'2026-10-26',when:{kind:'weekday',days:[1,3]},feeText:'月額548円',steps:['クーポンを取得']},{id:'public',price:1400,access:'public',verifiedAt:'2026-10-26',when:{kind:'weekday',days:[3]}}]}]};
+ const r=D.guide(fixture,{date:'2026-10-26'},new Date('2026-10-26T01:00:00Z'))[0];
+ assert.equal(r.available[0].price,1100);assert.equal(r.publicBest,null);assert.equal(r.conditionalBest.price,1100);assert.equal(r.upcoming[0].nextDate,'2026-10-28');
+});
+test('national guide excludes named theaters and never uses stale or future reviews',()=>{
+ const fixture={chains:[{id:'smt',name:'MOVIX',offers:[{id:'a',price:1400,access:'member',verifiedAt:'2026-10-26',when:{kind:'always'},excludedTheaters:['東劇']},{id:'old',price:500,verifiedAt:'2026-01-01',when:{kind:'always'}},{id:'future',price:600,verifiedAt:'2026-10-27',when:{kind:'always'}}]}]};
+ const now=new Date('2026-10-26T01:00:00Z');
+ assert.equal(D.guide(fixture,{date:'2026-10-26',theater:'東劇'},now)[0].available.length,0);
+ assert.equal(D.guide(fixture,{date:'2026-10-26'},now)[0].available[0].price,1400);
+ assert.equal(D.guide(fixture,{date:'2026-12-26'},now)[0].available.length,0);
+ assert.deepEqual(D.guide(fixture,{date:'invalid'},now),[]);
+});
+test('national theater matching does not confuse AEON shops or premium109 with ordinary theaters',()=>{
+ assert.equal(D.chainForTheater('イオンシネマ北見'),'aeon');assert.equal(D.chainForTheater('イオンモール映画館'),'');
+ assert.equal(D.chainForTheater('109シネマズプレミアム新宿'),'109');assert.equal(D.chainForTheater('T・ジョイ出雲'),'tjoy');
+ assert.equal(D.chainForTheater('MOVIX日吉津'),'smt');assert.equal(D.chainForTheater('未知の映画館'),'');
+});
+test('national facts cover broad chains and retain actionable primary provenance and fees',()=>{
+ assert.equal(data.chains.length,13);
+ for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.equal(o.verifiedAt,'2026-10-26');}
+ const now=new Date('2026-10-26T01:00:00Z');
+ const r=D.guide(data,{date:'2026-12-01',chain:'tjoy'},now)[0];assert.equal(r.available.some(o=>o.id==='first'),false);assert.equal(r.publicBest.price,1000);
+ assert.equal(D.guide(data,{date:'2026-10-28',chain:'109',theater:'109シネマズプレミアム新宿'},now)[0].available.length,0);
+});

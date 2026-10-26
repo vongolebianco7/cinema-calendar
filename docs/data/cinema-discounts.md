@@ -18,3 +18,23 @@ Sources:
 Do not imply complete local coverage, movie availability, remaining seats or a nationwide minimum. Senior/student, paired tickets, points, individual coupons, special events, premium formats and seats are outside the comparison. Evening selection is a tariff condition, not a known available screening. Actual applicability and latest price are confirmed on the theater's own checkout. A late-show selection must not imply an eligible film exists.
 
 The existing disabled109 automated source remains disabled. The new registry entry covers only this manual factual snapshot. Terms and permission for future automated showtimes remain a separate prerequisite.
+
+## Nationwide method-first guide (2026-10-26)
+
+The user rejected membership checkboxes and six local venues as the main experience. `chains` now contains13 nationally usable exhibitor/programme profiles and26 methods. The UI shows methods, fees, eligibility, steps, selected-date candidates and other eligible dates without visitor benefit preselection or preference storage. Registration-free and conditional ticket prices are separate. First-enrolment500-yen SMT tickets have their one-time, designated route, counter-only, expiry and548-yen automatic renewal conditions; they are never claimed as available to everyone. Programme sources do not establish a complete list of all discounts or all cinemas. All source summaries are factual and independently worded.
+
+Primary manual review2026-10-26:
+- https://www.tohotheater.jp/otoku/ (service days)
+- https://entm.auone.jp/toho/aumonday/lpc (TOHO Ponta)
+- https://www.saisoncard.co.jp/creditcard/benefits-service/saison-thursday/ (qualifying issuer/steps)
+- https://www.toho-one.com/about/ (annual500-yen standard plan)
+- https://help.fod.fujitv.co.jp/ (standard1320-yen plan, eligible course restrictions)
+- https://www.aeoncinema.com/service/service_day/ (1200-yen Monday/first,1400-yen night and5 Monday exclusions)
+- https://www.aeon.co.jp/card/lp/merit_aeoncinema/ (1100-yen designated cards, prior purchase and annual10 limit)
+- https://109cinemas.net/images/theater/20260528/20260528price_all.pdf (2026-06-26 tariffs; service day1300–1400 range, premiumShinjuku excluded)
+- https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default (service days, December distinction)
+- https://www.cinemasunshine.co.jp/news/27/ (Wednesday1400; primary search index confirmed text, client-rendered page)
+- https://entm.auone.jp/ (1400-yen national participating groups, exclusions, OS Wednesday1100)
+- https://entm.auone.jp/smt/everyday/lpc (SMT regular/first-enrolment terms, monthly548)
+
+No new automated acquisition permission. Existing disabled109 automation remains disabled. Historical6-venue `venues` facts and their original2026-10-25 review dates remain for backward-compatible pure-engine tests; they do not define the nationwide UI. Individual theater standard prices are not inferred from chain membership. National directory rows link to the relevant guide only for explicit brand matches; unrecognized cinemas retain existing official links. A selected named exclusion suppresses the related method. The directory snapshot itself is historical and does not certify current operation.

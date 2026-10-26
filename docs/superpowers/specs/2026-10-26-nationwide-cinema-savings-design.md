@@ -1,0 +1,11 @@
+# Nationwide cinema savings guide
+
+User correction: show how to obtain lower prices before asking for memberships; make the feature useful throughout Japan. Existing instructions authorize native execution without another approval loop.
+
+Replace the six-venue checkbox calculator with a nationwide chain guide. Show all reviewed methods by default: ticket price/range, applicable day/time, eligibility, extra membership/card fees, concrete purchase steps and primary links. Date and optional chain narrow the list; no membership checkbox or personal eligibility storage. Clearly distinguish registration-free methods from conditional ones; never assume the visitor qualifies. Include both methods applicable on the selected date and the next eligible date within60 days. Preserve60-day per-offer freshness; expired prices are hidden.
+
+Approaches considered: copying local tariffs nationwide would invent prices/exceptions; making users choose all benefits first repeats the rejected flow. Use reviewed national exhibitor/provider programmes with explicit exclusions and official theater links. National guide is independent of the incomplete historical location snapshot. Add guide links to matching national directory rows; a selected excluded theater suppresses its inapplicable offers. Other cinemas retain their directory and official links; do not claim every cinema or the universal minimum is covered.
+
+Initial national programmes: TOHO, AEON,109,T-Joy,cinema sunshine,SMT,United/Cineplex,theatres cinema group,corona,forum,kino cinema,cinemart Shinjuku and OS cinemas. Optional initial-enrolment offers only when primary conditions were reviewed; fees and renewal are prominent. Ordinary adult2D tickets only. No points/paired/student/senior calculations, movie availability, scraping, new paid infrastructure, affiliate links, logos or record changes.
+
+Implementation: append national chain facts to existing manual JSON, add pure guide functions to existing tariff module, replace scoped UI, scoped styles and browser assertions. Existing venue engine remains compatible. Main search/equipment behavior remains intact. Mobile320–1280px, root/prefix, light/dark, errors/retry/stale/malformed and exclusions require meaningful tests. Deployment is blocked while the provider's existing quota denial remains; do not retry publication before its advised wait.

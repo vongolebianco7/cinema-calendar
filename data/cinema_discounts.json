@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceId": "manual_cinema_discount_facts",
-  "coverage": "横浜・川崎の確認済み6館。一般大人1名・通常2D席の一部料金を比較。",
+  "coverage": "全国の13系列・映画館の一部割引方法。全映画館・全優待を網羅した最安比較ではありません。",
   "benefits": [
     {
       "id": "tohoOne",
@@ -872,5 +872,652 @@
         }
       ]
     }
-  ]
+  ],
+  "chains": [
+    {
+      "id": "toho",
+      "name": "TOHOシネマズ",
+      "theaterUrl": "https://www.tohotheater.jp/theater/find.html",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "Pontaパス マンデイ＆ウェンズデイ",
+          "price": 1100,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1,
+              3
+            ]
+          },
+          "access": "member",
+          "condition": "月・水曜日。Pontaパスの有効会員と同伴者1名。",
+          "steps": [
+            "Pontaパスの公式ページでクーポンを取得",
+            "WEB購入でコードを入力、または劇場でクーポンを使って購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/toho/aumonday/lpc",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "saison",
+          "label": "セゾンの木曜日",
+          "price": 1200,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              4
+            ]
+          },
+          "access": "card",
+          "condition": "木曜日。クレディセゾン発行の対象セゾン・UCカード会員。",
+          "steps": [
+            "セゾンPortal／UC Portalでクーポンを取得",
+            "WEBまたは劇場でクーポンを使って購入"
+          ],
+          "sourceUrl": "https://www.saisoncard.co.jp/creditcard/benefits-service/saison-thursday/",
+          "feeText": "未保有なら対象カードの申込み・審査が必要です。年会費はカードごとに異なります。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "toho-one",
+          "label": "TOHO-ONEメンバーデイ",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "access": "member",
+          "condition": "火曜日。有料対象プランの有効会員。",
+          "steps": [
+            "対象プランへ登録し、会員証を用意",
+            "購入時に会員証を認証して会員料金を選択"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/otoku/",
+          "feeText": "スタンダードプランは年会費500円。初年度に1回だけなら鑑賞券と合わせて1,800円。カード型プランは別条件。",
+          "verifiedAt": "2026-10-26",
+          "feeSourceUrl": "https://www.toho-one.com/about/"
+        },
+        {
+          "id": "fod",
+          "label": "FODフライデイ",
+          "price": 1200,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              5
+            ]
+          },
+          "access": "member",
+          "condition": "金曜日。FODプレミアムの対象コース等。ライトコースは対象外。",
+          "steps": [
+            "FODの対象コースからクーポンを取得",
+            "TOHOシネマズの購入画面または劇場で利用"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/otoku/",
+          "feeText": "スタンダードコースは月額1,320円。登録経路・既存契約で異なる場合があり、鑑賞券代とは別です。",
+          "verifiedAt": "2026-10-26",
+          "feeSourceUrl": "https://help.fod.fujitv.co.jp/"
+        },
+        {
+          "id": "wed",
+          "label": "TOHOウェンズデイ",
+          "price": 1400,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "毎週水曜日。会員登録不要。",
+          "steps": [
+            "水曜日の対象上映を選択",
+            "購入画面でTOHOウェンズデイ料金を選択"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/otoku/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1400,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "毎月1日。12月1日は映画の日料金。",
+          "steps": [
+            "毎月1日の対象上映を選択",
+            "購入画面でファーストデイ料金を選択"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/otoku/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "excludedMonths": [
+            12
+          ]
+        },
+        {
+          "id": "dec1",
+          "label": "映画の日",
+          "price": 1000,
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "access": "public",
+          "condition": "12月1日。対象上映に限ります。",
+          "steps": [
+            "12月1日の対象上映を選択",
+            "購入画面で映画の日料金を選択"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/otoku/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "aeon",
+      "name": "イオンシネマ／シアタス",
+      "theaterUrl": "https://www.aeoncinema.com/service/service_day/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "minions",
+          "label": "対象イオンカードで事前チケット購入",
+          "price": 1100,
+          "when": {
+            "kind": "always"
+          },
+          "access": "card",
+          "condition": "ミニオンズ対象カード／TGC CARD。券種ごと年10枚。イオンの商業施設にある他社映画館は対象外。",
+          "steps": [
+            "対象カードを登録したAEON Pay IDで公式ページへログイン",
+            "専用サイトで鑑賞チケットを事前購入",
+            "購入済みチケットでWEB・劇場から座席指定"
+          ],
+          "sourceUrl": "https://www.aeon.co.jp/card/lp/merit_aeoncinema/",
+          "feeText": "未保有なら対象カードの申込み・審査が必要です。年会費等は対象カードの公式条件を確認。窓口でカード提示だけでは1,100円になりません。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "monday",
+          "label": "ハッピーマンデー",
+          "price": 1200,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "月曜日。新潟西・常滑・大日・高松東・宇多津は実施なし。",
+          "steps": [
+            "対象館で月曜日の上映を選択",
+            "ハッピーマンデー料金で購入"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": [
+            "新潟西",
+            "常滑",
+            "大日",
+            "高松東",
+            "宇多津"
+          ]
+        },
+        {
+          "id": "first",
+          "label": "ハッピーファースト",
+          "price": 1200,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "毎月1日。対象上映に限ります。",
+          "steps": [
+            "毎月1日の対象上映を選択",
+            "ハッピーファースト料金で購入"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "night",
+          "label": "ハッピーナイト",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "毎日20時以降に開始する対象上映。",
+          "steps": [
+            "20時以降に開始する対象上映を探す",
+            "購入時にハッピーナイト料金を確認"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "109",
+      "name": "109シネマズ／ムービル",
+      "theaterUrl": "https://109cinemas.net/",
+      "note": "劇場により金額が異なります。プレミアム新宿は掲載サービスの対象外。個別の料金表を確認してください。",
+      "offers": [
+        {
+          "id": "wed",
+          "label": "109シネマズデイ",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "水曜日。木場・二子玉川・グランベリーパーク・川崎・湘南・ゆめが丘は非会員1,400円。ほかの対象館は1,300円。",
+          "steps": [
+            "公式の劇場料金表で対象館の価格を確認",
+            "水曜日の対象上映をサービスデイ料金で購入"
+          ],
+          "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "maxPrice": 1400,
+          "excludedTheaters": [
+            "プレミアム新宿"
+          ]
+        },
+        {
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1300,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "毎月1日。対象館の料金は1,300〜1,400円。プレミアム新宿は対象外。",
+          "steps": [
+            "劇場の公式料金表で料金・適用条件を確認",
+            "毎月1日の対象上映で利用"
+          ],
+          "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "maxPrice": 1400,
+          "excludedTheaters": [
+            "プレミアム新宿"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tjoy",
+      "name": "T・ジョイ",
+      "theaterUrl": "https://tjoy.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "wed",
+          "label": "水曜サービスデー",
+          "price": 1400,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "毎週水曜日。対象上映に限ります。",
+          "steps": [
+            "水曜日の対象上映を選択",
+            "購入時に水曜サービスデー料金を選択"
+          ],
+          "sourceUrl": "https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "first",
+          "label": "ファーストデー",
+          "price": 1400,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "12月を除く毎月1日。",
+          "steps": [
+            "対象日の上映を選択",
+            "ファーストデー料金で購入"
+          ],
+          "sourceUrl": "https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "excludedMonths": [
+            12
+          ]
+        },
+        {
+          "id": "dec1",
+          "label": "映画の日",
+          "price": 1000,
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "access": "public",
+          "condition": "12月1日。",
+          "steps": [
+            "12月1日の上映を選択",
+            "映画の日料金で購入"
+          ],
+          "sourceUrl": "https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "sunshine",
+      "name": "シネマサンシャイン",
+      "theaterUrl": "https://www.cinemasunshine.co.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "wed",
+          "label": "シネマサンシャインデイ",
+          "price": 1400,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "毎週水曜日。対象上映に限ります。",
+          "steps": [
+            "公式で劇場と水曜日の上映を選択",
+            "サービスデイ料金で購入"
+          ],
+          "sourceUrl": "https://www.cinemasunshine.co.jp/news/27/",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26"
+        }
+      ]
+    },
+    {
+      "id": "smt",
+      "name": "MOVIX／ピカデリー",
+      "theaterUrl": "https://entm.auone.jp/smt/everyday/lpc",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。対象外：東劇・大阪ステーションシティシネマ・なんばパークスシネマ。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/smt/everyday/lpc",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": [
+            "東劇",
+            "大阪ステーションシティシネマ",
+            "なんばパークスシネマ"
+          ]
+        },
+        {
+          "id": "ponta-first",
+          "label": "初回加入限定500円クーポン",
+          "price": 500,
+          "when": {
+            "kind": "always"
+          },
+          "access": "intro",
+          "condition": "指定の公式ページからPontaパスへ初めて加入する方のみ。1人1回、劇場窓口限定。加入月の翌月末上映分まで。",
+          "steps": [
+            "公式ページの対象劇場と初回加入条件を確認",
+            "そのページの指定リンクから初回加入しクーポンを取得",
+            "劇場窓口で対象上映のチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/smt/everyday/lpc",
+          "feeText": "初回30日間は無料。その後は月額548円で自動更新します。通常の会員クーポンとは別の初回限定特典です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": [
+            "東劇",
+            "大阪ステーションシティシネマ",
+            "なんばパークスシネマ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "united",
+      "name": "ローソン・ユナイテッドシネマ／シネプレックス",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。対象外：YEBISU GARDEN CINEMA・恵比寿ガーデンシネマ。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": [
+            "YEBISU GARDEN CINEMA",
+            "恵比寿ガーデンシネマ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ttcg",
+      "name": "テアトルシネマグループ",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": []
+        }
+      ]
+    },
+    {
+      "id": "corona",
+      "name": "コロナシネマワールド",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": []
+        }
+      ]
+    },
+    {
+      "id": "forum",
+      "name": "フォーラムシネマネットワーク",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": []
+        }
+      ]
+    },
+    {
+      "id": "kino",
+      "name": "キノシネマ",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": []
+        }
+      ]
+    },
+    {
+      "id": "cinemart",
+      "name": "シネマート新宿",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "シアター割",
+          "price": 1400,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "毎日。Pontaパスの有効会員。対象外の特別興行・席があります。",
+          "steps": [
+            "公式の映画特典ページで利用する劇場・系列を選択",
+            "Pontaパスにログインしてクーポンを取得",
+            "クーポン画面の案内に従ってチケットを購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26",
+          "excludedTheaters": []
+        }
+      ]
+    },
+    {
+      "id": "os",
+      "name": "OSシネマズ",
+      "theaterUrl": "https://entm.auone.jp/",
+      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "offers": [
+        {
+          "id": "ponta",
+          "label": "水曜日のシアター割",
+          "price": 1100,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "member",
+          "condition": "毎週水曜日。Pontaパスの有効会員。",
+          "steps": [
+            "公式ページでOSシネマズを選択",
+            "クーポンを取得して案内された方法で購入"
+          ],
+          "sourceUrl": "https://entm.auone.jp/",
+          "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
+          "verifiedAt": "2026-10-26"
+        }
+      ]
+    }
+  ],
+  "nationalGuideVersion": 1
 }

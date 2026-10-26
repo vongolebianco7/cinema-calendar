@@ -2,76 +2,91 @@
  'use strict';
  const host=document.getElementById('discounts'),D=globalThis.CinelvaCinemaDiscounts;
  if(!host||!D)return;
- const key='cinelva-cinema-discount-benefits-v1';
- const escaped=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const official=value=>{try{const u=new URL(value);return u.protocol==='https:'&&['www.tohotheater.jp','hlo.tohotheater.jp','109cinemas.net','cinecitta.co.jp','www.aeoncinema.com','theater.aeoncinema.com'].includes(u.hostname)?escaped(u.href):'';}catch(_){return '';}};
+ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const domains=['www.tohotheater.jp','www.toho-one.com','entm.auone.jp','www.saisoncard.co.jp','www.aeoncinema.com','www.aeon.co.jp','109cinemas.net','help.tjoy.jp','tjoy.jp','www.cinemasunshine.co.jp','help.fod.fujitv.co.jp'];
+ const official=value=>{try{const u=new URL(value);return u.protocol==='https:'&&domains.includes(u.hostname)&&!u.username&&!u.password?esc(u.href):'';}catch(_){return '';}};
  const money=value=>Number(value).toLocaleString('ja-JP')+'円';
+ const price=o=>o.maxPrice&&o.maxPrice!==o.price?money(o.price).replace('円','')+'〜'+money(o.maxPrice):money(o.price);
  const dayLabel=date=>{const d=new Date(date+'T00:00:00Z');return `${d.getUTCMonth()+1}/${d.getUTCDate()}（${'日月火水木金土'[d.getUTCDay()]}）`;};
- let data=null,saved=[];
- try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))saved=v.filter(x=>typeof x==='string');}catch(_){}
- host.innerHTML=`<h2>映画館で安く見る</h2>
- <p class="discountMuted">横浜・川崎の確認済み6館。一般大人1名・通常2D席の料金を、日付と使える割引で比較できます。</p>
+ const labels={public:'会員登録不要',member:'会員登録が必要',card:'対象カードが必要',intro:'初回加入限定'};
+ const params=new URLSearchParams(location.search);
+ let data=null,selectedTheater=params.get('discountTheater')||'';
+ const inferred=D.chainForTheater(selectedTheater);
+ let requestedChain=inferred||params.get('discountChain')||'';
+ if(!inferred)selectedTheater='';
+ host.innerHTML=`<h2>映画館で安く見る方法</h2>
+ <p class="discountMuted">全国の主要系列・映画館の割引を、金額・条件・購入手順で見比べられます。会員登録なしの割引と、会員・カード向けの優待をまとめました。</p>
  <div class="discountControls">
   <label class="discountField" for="discountDate">鑑賞日<input type="date" id="discountDate"></label>
-  <label class="discountField" for="discountArea">エリア<select id="discountArea"><option value="">横浜・川崎</option><option value="横浜">横浜</option><option value="川崎">川崎</option></select></label>
-  <label class="discountCheck"><input type="checkbox" id="discountEvening">20時以降の回の料金で比較</label>
+  <label class="discountField" for="discountChain">映画館・系列<select id="discountChain"><option value="">すべての掲載系列</option></select></label>
  </div>
- <details open><summary>利用中の会員サービス・対象カード</summary>
-  <p class="discountMuted">すでに条件を満たしているものだけ選択してください。料金は本人1名分です。入会費・年会費・月額料金は含みません。</p>
-  <div id="discountBenefits" class="discountBenefits"></div>
-  <p id="discountStorage" class="discountMuted">選択内容はこの端末のブラウザーに保存します。カード番号や会員番号の入力は不要です。</p>
- </details>
- <p class="discountMuted">これから14日間の料金目安（円・税込）</p>
- <div id="discountCalendar" class="discountCalendar" aria-label="料金比較カレンダー"></div>
- <div id="discountSummary" class="discountStatus" role="status" aria-live="polite">料金情報を読み込んでいます…</div>
+ <div id="discountTheater" class="discountMuted"></div>
+ <p class="discountMuted">一般大人1名・通常2Dの鑑賞券代（税込）です。会員・カードの料金や対象外の劇場を、各方法の中で確認してください。</p>
+ <div id="discountSummary" class="discountStatus" role="status" aria-live="polite">割引方法を読み込んでいます…</div>
  <div id="discountResults" class="discountResults"></div>
- <details><summary>比較対象と料金について</summary>
-  <p class="discountMuted">公式料金表を確認して掲載した一部の料金です。掲載館・割引を網羅しておらず、上映作品・空席・上映回の有無は確認していません。選んだ日に作品が上映されるかは、各館の公式スケジュールでご確認ください。</p>
-  <p class="discountMuted">IMAX・3D・4DX・LIVE ZOUNDなどの特殊上映、特別席、特別興行は追加料金や割引対象外となる場合があります。学生・シニア・ペア・朝の割引、ポイント・個別クーポン・前売券は比較対象外です。複数の割引を足し合わせず、選択条件に合う掲載料金を比較しています。</p>
-  <p class="discountMuted">料金は変更される場合があります。確認から60日を過ぎた情報や、その確認期限を超える日付の金額は表示しません。最新料金と適用条件は公式サイトでご確認ください。</p>
+ <p class="discountMuted">系列が分からない場合や、その他の映画館は、<a href="#directory">全国の映画館検索</a>から公式情報を確認できます。全映画館・全割引を網羅した比較ではありません。</p>
+ <details><summary>料金と掲載範囲について</summary>
+  <p class="discountMuted">掲載した割引の利用方法を紹介しています。利用資格・対象劇場・購入枠・特別興行によって適用されない場合があります。新規加入やカード発行には条件があり、当日すぐ使えるとは限りません。</p>
+  <p class="discountMuted">学生・シニア・ペア・ポイント・個別クーポン・前売券は比較対象外です。複数の割引は加算していません。全国共通の優待にも対象外の劇場があります。個別の通常料金・営業状況・上映作品・空席は、各館の公式情報で確認してください。</p>
+  <p class="discountMuted">確認から60日を過ぎた割引や、確認期限を超える鑑賞日の金額は表示しません。最新条件は必ず公式ページでご確認ください。</p>
  </details>`;
- const dateInput=host.querySelector('#discountDate'),areaInput=host.querySelector('#discountArea'),eveningInput=host.querySelector('#discountEvening'),results=host.querySelector('#discountResults'),summary=host.querySelector('#discountSummary'),calendar=host.querySelector('#discountCalendar'),benefits=host.querySelector('#discountBenefits');
- dateInput.value=D.today();dateInput.min=D.today();dateInput.max=D.addDays(D.today(),60);
- function options(){return {date:dateInput.value,area:areaInput.value,evening:eveningInput.checked,benefits:[...benefits.querySelectorAll('input:checked')].map(x=>x.dataset.discountBenefit)};}
+ const dateInput=host.querySelector('#discountDate'),chainInput=host.querySelector('#discountChain'),results=host.querySelector('#discountResults'),summary=host.querySelector('#discountSummary'),theaterBox=host.querySelector('#discountTheater');
+ const today=D.today();dateInput.min=today;dateInput.max=D.addDays(today,60);
+ const requestedDate=params.get('discountDate')||'';
+ dateInput.value=D.addDays(requestedDate,0)&&requestedDate>=today&&requestedDate<=dateInput.max?requestedDate:today;
+ function updateUrl(){
+  const p=new URLSearchParams(location.search);
+  if(dateInput.value)p.set('discountDate',dateInput.value);else p.delete('discountDate');
+  if(chainInput.value)p.set('discountChain',chainInput.value);else p.delete('discountChain');
+  if(selectedTheater)p.set('discountTheater',selectedTheater);else p.delete('discountTheater');
+  history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:'')+location.hash);
+ }
+ function way(o,upcoming){
+  const source=official(o.sourceUrl),feeSource=official(o.feeSourceUrl);
+  return `<section class="discountWay"><div class="discountWayHead"><h4>${esc(o.label)}</h4><span class="discountTag">${esc(labels[o.access]||'条件あり')}</span></div>
+   <div class="discountPrice" data-price="${o.price}">${price(o)} <small>鑑賞券／1名</small></div>
+   <p class="discountDateLabel">${upcoming?'次の対象日：':'選択日に利用できる候補：'}${dayLabel(o.nextDate)}</p>
+   <p>${esc(o.condition)}</p><p class="discountFee">${esc(o.feeText)}</p>
+   <ol class="discountSteps">${o.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>
+   <div class="discountLinks">${source?`<a href="${source}" target="_blank" rel="noopener noreferrer">公式で条件・購入手順を確認</a>`:''}${feeSource?`<a href="${feeSource}" target="_blank" rel="noopener noreferrer">会費の公式情報</a>`:''}</div>
+   <p class="discountMuted">条件確認日：${esc(o.verifiedAt)}</p></section>`;
+ }
  function render(){
   if(!data)return;
-  const opts=options(),rows=D.compare(data,opts);
-  calendar.innerHTML=D.calendar(data,{...opts,date:D.today()}).map(d=>`<button type="button" class="discountDay" data-discount-date="${d.date}" aria-label="${dayLabel(d.date)} ${d.price===null?'料金確認待ち':money(d.price)}" aria-pressed="${d.date===opts.date}"><span>${dayLabel(d.date).split('（')[0]}</span><span>${dayLabel(d.date).split('（')[1].replace('）','')}</span><b>${d.price===null?'未確認':String(d.price)}</b></button>`).join('');
-  const count=rows.filter(r=>r.best).length;
-  summary.textContent=rows.length?`${dayLabel(opts.date)} · ${rows.length}館を料金順に表示（${count}館の料金情報あり）。上映の有無は公式サイトでご確認ください。`:'今日以降の有効な日付を選択してください。';
-  results.innerHTML=rows.map(v=>{
-   const b=v.best,source=official(v.sourceUrl),schedule=official(v.scheduleUrl);
-   const rest=v.offers.slice(1).map(o=>`<li>${escaped(o.label)}：${money(o.price)}<br>${escaped(o.condition)}</li>`).join('');
-   return `<article class="discountCard" data-discount-venue="${escaped(v.id)}"><h3>${escaped(v.name)}</h3><div class="discountMuted">${escaped(v.place)}</div>
-    ${b?`<div class="discountPrice" data-price="${b.price}">${money(b.price)} <small>税込／1名</small></div><p class="discountOffer">${escaped(b.label)}</p><p class="discountCondition">${escaped(b.condition)}</p>`:'<p class="discountPrice"><small>料金の再確認待ち</small></p><p class="discountCondition">料金を確認できないため、金額は公式サイトでご確認ください。</p>'}
-    ${rest?`<details class="discountAlternatives"><summary>ほかの適用候補</summary><ul>${rest}</ul></details>`:''}
-    <p class="discountMuted discountCondition">料金確認日：${escaped(v.verifiedAt||'未確認')}</p>
-    <div class="discountLinks">${source?`<a href="${source}" target="_blank" rel="noopener noreferrer">公式料金・条件</a>`:''}${schedule?`<a href="${schedule}" target="_blank" rel="noopener noreferrer">公式上映スケジュール</a>`:''}</div></article>`;
+  const rows=D.guide(data,{date:dateInput.value,chain:chainInput.value,theater:selectedTheater});
+  const count=rows.reduce((n,c)=>n+c.available.length,0);
+  summary.textContent=rows.length?`${dayLabel(dateInput.value)} · ${rows.length}系列・映画館。選択日の割引候補は${count}件です。利用条件を確認してください。`:'今日以降の有効な鑑賞日を選択してください。';
+  theaterBox.innerHTML=selectedTheater?`確認する映画館：${esc(selectedTheater)} <button type="button" id="discountClearTheater">系列全体を見る</button>`:'';
+  results.innerHTML=rows.map(c=>{
+   const publicText=c.publicBest?price(c.publicBest):'対象の掲載割引なし';
+   const conditionalText=c.conditionalBest?price(c.conditionalBest):'対象の掲載割引なし';
+   const methods=c.available.map(o=>way(o,false)).join('');
+   const upcoming=c.upcoming.map(o=>way(o,true)).join('');
+   const nextPublic=c.upcoming.find(o=>o.access==='public');
+   const nextHint=nextPublic?`<p>日付を変えるなら <strong>${dayLabel(nextPublic.nextDate)} · ${price(nextPublic)}</strong><br>${esc(nextPublic.label)}（掲載した対象館・上映条件に限ります）</p>`:'';
+   const url=official(c.theaterUrl);
+   return `<article class="discountCard" data-discount-chain="${esc(c.id)}"><h3>${esc(c.name)}</h3><p class="discountMuted">${esc(c.note)}</p>
+    <div class="discountOverview"><p>登録不要の掲載料金 <strong>${publicText}</strong></p><p>会員・カード等の条件あり <strong>${conditionalText}</strong></p>${nextHint}</div>
+    ${methods||'<p class="discountCondition">この日の対象となる確認済み割引はありません。料金情報の再確認待ち、対象外の劇場の場合もあります。</p>'}
+    ${upcoming?`<details class="discountUpcoming"><summary>別の日に使える割引を見る（${c.upcoming.length}件）</summary>${upcoming}</details>`:''}
+    ${url?`<div class="discountLinks"><a href="${url}" target="_blank" rel="noopener noreferrer">対象劇場・公式料金を確認</a></div>`:''}</article>`;
   }).join('');
  }
- async function load(){
-  data=null;results.innerHTML='';calendar.innerHTML='';summary.textContent='料金情報を読み込んでいます…';
-  try{
-   const response=await fetch('data/cinema_discounts.json?v=20261025',{cache:'no-cache'});
-   if(!response.ok)throw Error('data unavailable');
-   const next=await response.json();
-   if(next.version!==1||!Array.isArray(next.venues)||!next.venues.length||!Array.isArray(next.benefits))throw Error('invalid data');
-   data=next;
-   benefits.innerHTML=data.benefits.map(b=>`<label class="discountCheck"><input type="checkbox" data-discount-benefit="${escaped(b.id)}" ${saved.includes(b.id)?'checked':''}><span>${escaped(b.label)}<small>${escaped(b.condition)}</small></span></label>`).join('');
-   render();
-  }catch(_){data=null;results.innerHTML='';calendar.innerHTML='';summary.innerHTML='<div class="discountError">料金情報を読み込めませんでした。<button type="button" id="discountRetry">再読み込み</button></div>';}
+ function valid(next){
+  return next?.version===1&&next.nationalGuideVersion===1&&Array.isArray(next.chains)&&next.chains.length&&next.chains.every(c=>c&&typeof c.id==='string'&&typeof c.name==='string'&&Array.isArray(c.offers)&&c.offers.every(o=>o&&Number.isInteger(o.price)&&o.price>0&&typeof o.label==='string'&&typeof o.condition==='string'&&typeof o.feeText==='string'&&Array.isArray(o.steps)&&o.steps.every(s=>typeof s==='string')&&(!o.excludedTheaters||Array.isArray(o.excludedTheaters))));
  }
- host.addEventListener('change',event=>{
-  if(event.target.matches('[data-discount-benefit]')){
-   saved=options().benefits;
-   try{localStorage.setItem(key,JSON.stringify(saved));}catch(_){host.querySelector('#discountStorage').textContent='このブラウザーでは選択内容を保存できません。このページでは選択した条件を利用できます。';}
-  }
-  render();
- });
- host.addEventListener('click',event=>{
-  const day=event.target.closest('[data-discount-date]');
-  if(day){dateInput.value=day.dataset.discountDate;render();}
-  if(event.target.closest('#discountRetry'))load();
- });
+ async function load(){
+  data=null;results.innerHTML='';summary.textContent='割引方法を読み込んでいます…';
+  try{
+   const r=await fetch('data/cinema_discounts.json?v=20261026',{cache:'no-cache'});if(!r.ok)throw Error('unavailable');
+   const next=await r.json();if(!valid(next))throw Error('invalid');data=next;
+   chainInput.innerHTML='<option value="">すべての掲載系列</option>'+data.chains.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
+   chainInput.value=data.chains.some(c=>c.id===requestedChain)?requestedChain:'';
+   render();
+  }catch(_){data=null;results.innerHTML='';summary.innerHTML='<div class="discountError">割引方法を読み込めませんでした。<button type="button" id="discountRetry">再読み込み</button></div>';}
+ }
+ dateInput.addEventListener('change',()=>{updateUrl();render();});
+ chainInput.addEventListener('change',()=>{requestedChain=chainInput.value;selectedTheater='';updateUrl();render();});
+ host.addEventListener('click',e=>{if(e.target.closest('#discountRetry'))load();if(e.target.closest('#discountClearTheater')){selectedTheater='';updateUrl();render();}});
  load();
 })();

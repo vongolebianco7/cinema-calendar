@@ -1,0 +1,18 @@
+{
+  "status": "ci_pending",
+  "source_sha": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
+  "feature_pr": 503,
+  "feature_merge": "101162ed7c9bdcd1d91c33701d05be85c53bd08f",
+  "old_calendar_rows": 1179,
+  "calendar_rows": 1183,
+  "netflix_rows": 9,
+  "october_netflix_rows": 5,
+  "added_ids": [
+    1752355,
+    1620080,
+    1756138,
+    1483525
+  ],
+  "validation": "Full shared quality gate and release schemas passed. All1179 prior calendar entries retained. Four official Netflix premiere rows projected from reviewed streaming snapshot to calendar/search/API snapshot.",
+  "next_action": "Data-only CI, merge, confirm production deployments and canonical Netflix9/calendar/search."
+}

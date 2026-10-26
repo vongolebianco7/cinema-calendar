@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T06:01:15.375722+00:00",
+  "generated_at": "2026-10-26T02:04:37.536188+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -21128,6 +21128,50 @@
       "checked_at": "2026-10-19T18:51:11.245620+00:00"
     },
     {
+      "id": 1752355,
+      "tmdbId": 1752355,
+      "original_title": "Schumacher ’94 – Die Geburt einer Legende",
+      "overview": "",
+      "score": 7.645,
+      "votes": 31,
+      "poster": "https://image.tmdb.org/t/p/w500/o09Z2TPQLkLg2zE6U9PUF17RmGf.jpg",
+      "runtime": 105,
+      "director": "Christin Freitag",
+      "director_id": 1467602,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "countries": [
+        "Germany"
+      ],
+      "cast": [
+        "ミハエル・シューマッハ",
+        "Corinna Schumacher",
+        "Flavio Briatore",
+        "Bernie Ecclestone",
+        "David Coulthard",
+        "Willi Weber",
+        "Kai Ebel",
+        "Heiko Waßer",
+        "Pat Symonds",
+        "Lennart Betzgen"
+      ],
+      "release_date": "2026-10-02",
+      "release_date_source": "tmdb_primary",
+      "title": "シューマッハ‘94 －伝説の幕開け－",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "Netflix",
+      "type": "見放題",
+      "year": 2026,
+      "release_year": 2026,
+      "source": "Netflix公式 日本向け新作情報（2026-10-26確認）",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "checked_at": "2026-10-26",
+      "identity_source": "https://www.themoviedb.org/movie/1752355",
+      "title_url": "https://www.netflix.com/jp/title/81916859"
+    },
+    {
       "id": 1666802,
       "title": "still dark",
       "original_title": "still dark",
@@ -21357,6 +21401,98 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-10-18T18:41:07.624083+00:00"
+    },
+    {
+      "id": 1756138,
+      "tmdbId": 1756138,
+      "original_title": "Who Is Martin Mull?",
+      "overview": "",
+      "score": 5.75,
+      "votes": 4,
+      "poster": "https://image.tmdb.org/t/p/w500/gQjXr8XxVpskubxVACnRLHx5xIS.jpg",
+      "runtime": 94,
+      "director": "Neil Berkeley",
+      "director_id": 938587,
+      "genres": [
+        "ドキュメンタリー",
+        "コメディ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "cast": [
+        "Martin Mull",
+        "Bob Saget",
+        "Fred Willard",
+        "スティーヴ・マーティン",
+        "トム・ウェイツ",
+        "David Alan Grier",
+        "アンドレア・サヴェージ",
+        "セス・マクファーレン",
+        "Ted Sarandos",
+        "パットン・オズワルト",
+        "Kerri Kenney",
+        "エリック・アイドル"
+      ],
+      "release_date": "2026-10-07",
+      "release_date_source": "tmdb_primary",
+      "title": "これぞマーティン・マル",
+      "date": "2026-10-07",
+      "event": "streaming",
+      "service": "Netflix",
+      "type": "見放題",
+      "year": 2026,
+      "release_year": 2026,
+      "source": "Netflix公式 日本向け新作情報（2026-10-26確認）",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "checked_at": "2026-10-26",
+      "identity_source": "https://www.themoviedb.org/movie/1756138",
+      "title_url": "https://www.netflix.com/jp/title/81922437"
+    },
+    {
+      "id": 1620080,
+      "tmdbId": 1620080,
+      "original_title": "Mniej obcy",
+      "overview": "",
+      "score": 8.8,
+      "votes": 4,
+      "poster": "https://image.tmdb.org/t/p/w500/5lxcAE2DLtK8bFfCXOV9TM13RDq.jpg",
+      "runtime": 120,
+      "director": "Kristoffer Rus",
+      "director_id": 2192333,
+      "genres": [
+        "ドラマ",
+        "音楽"
+      ],
+      "countries": [
+        "Poland"
+      ],
+      "cast": [
+        "Mikołaj Bukrewicz",
+        "Patryk Pietrzak",
+        "Hubert Miłkowski",
+        "Krzysztof Oleksyn",
+        "Mikołaj Matczak",
+        "Marcel Barra",
+        "Kinga Preis",
+        "Ireneusz Czop",
+        "Maciej Musiałowski",
+        "Mirosław Tomczuk"
+      ],
+      "release_date": "2026-09-21",
+      "release_date_source": "tmdb_primary",
+      "title": "レス・オブ・ア・ストレンジャー",
+      "date": "2026-10-07",
+      "event": "streaming",
+      "service": "Netflix",
+      "type": "見放題",
+      "year": 2026,
+      "release_year": 2026,
+      "source": "Netflix公式 日本向け新作情報（2026-10-26確認）",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "checked_at": "2026-10-26",
+      "identity_source": "https://www.themoviedb.org/movie/1620080",
+      "title_url": "https://www.netflix.com/jp/title/81744789"
     },
     {
       "id": 1248832,
@@ -23041,6 +23177,49 @@
       "runtime": 108,
       "genres": [],
       "checked_at": "2026-10-23T18:49:38.604313+00:00"
+    },
+    {
+      "id": 1483525,
+      "tmdbId": 1483525,
+      "original_title": "가능한 사랑",
+      "overview": "まったく異なる人生を歩む2 組の夫婦の交錯する日常を捉え、平穏に見えた日々に少しずつ亀裂が生まれていく様子を描き出す。",
+      "score": 7.9,
+      "votes": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
+      "runtime": 165,
+      "director": "イ・チャンドン",
+      "director_id": 96657,
+      "genres": [
+        "ドラマ"
+      ],
+      "countries": [
+        "South Korea",
+        "United States of America"
+      ],
+      "cast": [
+        "チョン・ドヨン",
+        "ソル・ギョング",
+        "チョ・インソン",
+        "チョ・ヨジョン",
+        "정섶",
+        "조유리",
+        "최민",
+        "전운종",
+        "강길우"
+      ],
+      "release_date": "2026-09-23",
+      "release_date_source": "tmdb_primary",
+      "title": "もしもの愛",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Netflix",
+      "type": "見放題",
+      "year": 2026,
+      "release_year": 2026,
+      "source": "Netflix公式 日本向け新作情報（2026-10-26確認）",
+      "source_url": "https://about.netflix.com/en/news/possible-love-official-trailer",
+      "checked_at": "2026-10-26",
+      "identity_source": "https://www.themoviedb.org/movie/1483525"
     },
     {
       "id": 1755423,

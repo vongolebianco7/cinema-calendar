@@ -13,8 +13,9 @@
  };
  const normalize=value=>String(value||'').normalize('NFKC').trim();
  const recordId=record=>id(record?.tmdbId??record?.tmdb_id);
- function awardMatches(validated,records,awards){
-  if(!validated?.ok||!Array.isArray(records)||!Array.isArray(awards))return null;
+ function awardMatches(validated,records,dataset){
+  if(!validated?.ok||!Array.isArray(records)||!dataset?.coverage_audit?.all_relevant_awards_verified||!Array.isArray(dataset.awards))return null;
+  const awards=dataset.awards;
   const watched=new Set(records.filter(r=>r&&r.watched!==false).map(recordId).filter(Boolean));
   if(!watched.size)return [];
   const organizations=new Map();
@@ -41,6 +42,7 @@
    counts.set(person,(counts.get(person)||0)+1);
   }
   const winner=[...counts].sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0];
+  if(winner && validated.movies.some(movie=>id(movie.director_id)===null))return null;
   if(!winner)return watched.length?null:[];
   return validated.movies.filter(movie=>id(movie.director_id)===winner[0]);
  }

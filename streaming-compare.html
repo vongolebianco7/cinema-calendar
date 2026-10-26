@@ -25,7 +25,7 @@ th:last-child,td:last-child{border-right:0}thead th{background:var(--soft);font-
 tr:last-child td{border-bottom:0}.section td{background:var(--soft)!important;font-size:12px;font-weight:800;text-align:left}.section td:first-child{position:static}.muted{color:var(--muted)}.status{font-size:12px;color:var(--muted)}
 .serviceLabel{display:block;font-size:14px}.official{display:inline-block;margin-top:4px;font-size:11px;color:var(--brand);text-decoration:underline;text-underline-offset:3px}
 .cellLink{background:none;color:var(--brand);border:0;text-decoration:underline;text-underline-offset:3px;min-height:36px;padding:4px;font-weight:700}.cellLink:disabled{color:var(--muted);text-decoration:none;cursor:default}
-.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
+.verified{border:0;background:none;color:var(--brand);padding:3px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;line-height:1.5}.verified small{display:block;font-weight:400;font-size:10px;color:var(--muted)}.calc{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:18px;margin-top:20px}.calcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calc select{max-width:100%;width:100%;min-height:42px;border:1px solid var(--line);color:var(--ink);background:var(--panel);border-radius:5px;padding:8px}.calc label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.calcResult{margin-top:14px;font-size:14px;font-weight:700}.calcNote{font-size:12px;color:var(--muted)}.sourceList{padding-left:18px;font-size:12px}.sourceList li{margin:8px 0}.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
 h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--line);background:var(--panel);border-radius:8px;margin-top:12px;padding:17px}
 dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
 .modalClose{float:right;border:1px solid var(--line);background:transparent;border-radius:5px;padding:4px 11px}
@@ -38,12 +38,15 @@ dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);c
   <div class="eyebrow">CINELVA / STREAMING SERVICES</div>
   <h1>映画サブスク比較</h1>
   <p class="sub">料金・広告・端末・家族利用・映画ラインナップを横並びで比較。個人向け分析にも対応予定です。</p>
-  <div class="notice" role="status"><strong>データの確認状況</strong><br>プラン価格・端末数などは公式情報の検証前のため「確認中」と表示します。現在の配信カレンダーは配信開始情報であり、見放題カタログ全件ではありません。ブックマーク該当本数は、網羅的な視聴可能データが揃うまで計算しません。</div>
+  <div class="notice" role="status"><strong>データの確認状況</strong><br>公式ヘルプで裏付けできた項目のみ表示し、未確認の仕様は「確認中」とします。現在の配信カレンダーは配信開始情報であり、見放題カタログ全件ではありません。ブックマーク該当本数は、網羅的な視聴可能データが揃うまで計算しません。</div>
   <div class="controls" id="filters" aria-label="比較カテゴリ"></div>
   <div class="tableWrap" role="region" aria-label="サブスクの比較表（横にスクロール可能）" tabindex="0">
     <table><thead id="tableHead"></thead><tbody id="comparisonRows"></tbody></table>
   </div>
   <p class="legend">※「確認中」は「非対応」を意味しません。各サービスの仕様は契約プランや利用地域で変わる場合があります。表は横にスクロールできます。</p>
+  <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
+    <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div><p class="calcResult" id="calcResult" aria-live="polite"></p><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
+  </section>
   <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
   <div class="details">
     <p><strong>見たい映画・好きな監督・映画賞</strong></p>
@@ -52,6 +55,7 @@ dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);c
   </div>
 </main>
 <dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p></dialog>
+<dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
 <script>
 (function(){
 'use strict';
@@ -65,6 +69,27 @@ const services=[
   {name:'Lemino',url:'https://lemino.docomo.ne.jp/'},
   {name:'WOWOW',url:'https://www.wowow.co.jp/'}
 ];
+// Official first-party Japanese help pages, reviewed on 2026-10-27.
+// Every displayed value has a specific source. Unknown values remain unfilled.
+const verified={
+ 'Netflix':{
+  '広告の有無':{value:'広告ありプランあり',note:'広告つきプランは作品制限あり',urls:['https://help.netflix.com/ja/node/126831']},
+  '作成可能プロフィール数':{value:'最大5',note:'プロフィール数は同時視聴台数とは別',urls:['https://help.netflix.com/ja/node/322532375336036']}
+ },
+ 'U-NEXT':{
+  '月額料金（税込）':{value:'2,189円',note:'Web申込の月額プラン。アプリ申込は異なる',urls:['https://help.unext.jp/guide/detail/types-of-service-plan']},
+  '同時視聴可能台数':{value:'最大4台',note:'4つの別アカウント利用時。同一作品などに制限あり',urls:['https://help.unext.jp/guide/detail/how-many-devices-can-be-play','https://help.unext.jp/guide/detail/play-at-the-same-time-in-multiple-accounts']},
+  '登録可能端末数':{value:'ログイン台数制限なし',note:'同一アカウントでの同時視聴は禁止',urls:['https://help.unext.jp/guide/detail/not-allowed-play-on-some-terminals-at-the-same-time-by-the-same-account']},
+  '作成可能プロフィール数':{value:'最大4アカウント',note:'メイン1＋サブ3',urls:['https://help.unext.jp/guide/detail/what-is-family-account']},
+  '家族共有':{value:'同居家族 最大4人',note:'サブアカウント3つを無料追加',urls:['https://help.unext.jp/guide/detail/what-is-family-account','https://help.unext.jp/guide/detail/u-next-cost-perf']},
+  '別居家族の利用条件':{value:'同居家族向け',note:'別居利用を許可しているという意味ではありません',urls:['https://help.unext.jp/guide/detail/u-next-cost-perf']}
+ },
+ 'Hulu':{
+  '月額料金（税込）':{value:'1,320円',note:'2026年10月1日改定。通常Web契約・毎月400ポイント付与。アプリ決済は異なる',urls:['https://help.hulu.jp/hc/ja/articles/59524415235865--%E9%87%8D%E8%A6%81%E3%81%AA%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B-Hulu-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%94%B9%E5%AE%9A%E3%81%AB%E4%BC%B4%E3%81%86%E6%9C%88%E9%A1%8D%E5%88%A9%E7%94%A8%E6%96%99%E9%87%91%E6%94%B9%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B']},
+  '同時視聴可能台数':{value:'最大4台',note:'同一作品は最大2台。レンタル・購入は対象外',urls:['https://help.hulu.jp/hc/ja/articles/360044166294-1%E3%81%A4%E3%81%AE%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E5%90%8C%E6%99%82%E8%A6%96%E8%81%B4%E5%8F%AF%E8%83%BD%E3%81%A7%E3%81%99%E3%81%8B']}
+ }
+};
+const monthlyFees={'U-NEXT':2189,'Hulu':1320};
 const sections=[
   {name:'料金と契約',rows:['月額料金（税込）','年額料金（税込）','広告の有無','広告なしプラン','無料体験','解約・契約条件']},
   {name:'利用人数・端末',rows:['同時視聴可能台数','登録可能端末数','作成可能プロフィール数','家族共有','別居家族の利用条件','ダウンロード可能台数']},
@@ -81,15 +106,37 @@ function draw(){
  services.forEach(service=>{const th=document.createElement('th');const name=cell('span',service.name,'serviceLabel');th.appendChild(name);const a=cell('a','公式サイト','official');a.href=service.url;a.target='_blank';a.rel='noopener noreferrer';th.appendChild(a);tr.appendChild(th)});head.appendChild(tr);
  sections.filter(s=>active==='すべて'||s.name===active).forEach(section=>{
   const banner=document.createElement('tr');banner.className='section';const item=cell('td',section.name);item.colSpan=services.length+1;banner.appendChild(item);body.appendChild(banner);
-  section.rows.forEach(row=>{const line=document.createElement('tr');line.appendChild(cell('td',row));services.forEach(()=>{
+  section.rows.forEach(row=>{const line=document.createElement('tr');line.appendChild(cell('td',row));services.forEach(service=>{
     const td=document.createElement('td');
     if(section.name==='あなたとの相性'||section.name==='映画ラインナップ'){const btn=cell('button','未集計','cellLink');btn.type='button';btn.addEventListener('click',()=>document.getElementById('dataDialog').showModal());td.appendChild(btn)}
-    else td.appendChild(cell('span','確認中','status'));
+    else {
+      const info=(verified[service.name]||{})[row];
+      if(info){const btn=cell('button',info.value,'verified');btn.type='button';btn.title=info.note;btn.setAttribute('aria-label',service.name+' '+row+' '+info.value+' の根拠を確認');btn.addEventListener('click',()=>openSource(service.name,row,info));td.appendChild(btn)}
+      else td.appendChild(cell('span','確認中','status'));
+    }
     line.appendChild(td);
   });body.appendChild(line)})
  })
 }
-draw();
+function openSource(name,row,info){
+ document.getElementById('sourceTitle').textContent=name+' / '+row;
+ document.getElementById('sourceDescription').textContent=info.value+'。'+info.note;
+ const links=document.getElementById('sourceLinks');links.replaceChildren();
+ info.urls.forEach((url,i)=>{const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='公式情報 '+(i+1);li.appendChild(a);links.appendChild(li)});
+ document.getElementById('sourceDialog').showModal();
+}
+function renderFees(){
+ const from=document.getElementById('fromService'),to=document.getElementById('toService');
+ Object.keys(monthlyFees).forEach((name,i)=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
+ to.selectedIndex=1;
+ const update=()=>{
+  const before=monthlyFees[from.value],after=monthlyFees[to.value],delta=after-before;
+  document.getElementById('calcResult').textContent=delta===0?'料金差はありません（月額'+after.toLocaleString('ja-JP')+'円）':delta<0?'月額'+Math.abs(delta).toLocaleString('ja-JP')+'円安くなります（年間'+(Math.abs(delta)*12).toLocaleString('ja-JP')+'円相当）':'月額'+delta.toLocaleString('ja-JP')+'円高くなります（年間'+(delta*12).toLocaleString('ja-JP')+'円相当）';
+ };
+ from.addEventListener('change',update);to.addEventListener('change',update);update();
+}
+draw();renderFees();
+document.getElementById('sourceClose').addEventListener('click',()=>document.getElementById('sourceDialog').close());
 const dialog=document.getElementById('dataDialog');document.getElementById('aboutData').addEventListener('click',()=>dialog.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dialog.close());
 })();
 </script>

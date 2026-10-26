@@ -1240,6 +1240,28 @@
           "sourceUrl": "https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default",
           "feeText": "追加の会費・カード申込みは不要です。",
           "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "kinezo",
+          "label": "KINEZO会員デー",
+          "price": 1500,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2,
+              4
+            ]
+          },
+          "access": "member",
+          "condition": "火・木曜日。KINEZO会員によるオンライン予約限定。劇場窓口での購入は対象外。",
+          "steps": [
+            "無料のKINEZO会員登録をしてログイン",
+            "火曜日または木曜日の対象上映をオンライン予約し、会員デー料金で購入"
+          ],
+          "sourceUrl": "https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default",
+          "feeText": "KINEZOの会員登録・年会費・更新費・手数料は無料です。オンライン予約が必要です。",
+          "verifiedAt": "2026-10-27",
+          "feeSourceUrl": "https://help.tjoy.jp/faq/show/24?category_id=9&site_domain=default"
         }
       ]
     },
@@ -1275,7 +1297,7 @@
       "id": "smt",
       "name": "MOVIX／ピカデリー",
       "theaterUrl": "https://entm.auone.jp/smt/everyday/lpc",
-      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "note": "MOVIX・ピカデリーの通常2D上映向けです。東劇・共同運営館は料金体系が異なるため、掲載サービスデーを適用していません。特別興行・特別席・特殊上映は対象外または追加料金です。",
       "offers": [
         {
           "id": "ponta",
@@ -1322,6 +1344,83 @@
             "大阪ステーションシティシネマ",
             "なんばパークスシネマ"
           ]
+        },
+        {
+          "id": "wed",
+          "label": "水曜サービスデー",
+          "price": 1400,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "毎週水曜日。会員登録不要。対象外：東劇・大阪ステーションシティシネマ・なんばパークスシネマ。",
+          "steps": [
+            "水曜日の通常2D上映を選択",
+            "公式の購入画面または劇場でサービスデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.smt-cinema.com/site/hiezu/service.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": [
+            "東劇",
+            "大阪ステーションシティシネマ",
+            "なんばパークスシネマ"
+          ]
+        },
+        {
+          "id": "first",
+          "label": "ファーストデー",
+          "price": 1400,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "12月を除く毎月1日。会員登録不要。",
+          "steps": [
+            "毎月1日の通常2D上映を選択",
+            "公式の購入画面または劇場でファーストデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.smt-cinema.com/site/hiezu/service.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedMonths": [
+            12
+          ],
+          "excludedTheaters": [
+            "東劇",
+            "大阪ステーションシティシネマ",
+            "なんばパークスシネマ"
+          ]
+        },
+        {
+          "id": "dec1",
+          "label": "映画の日",
+          "price": 1000,
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "access": "public",
+          "condition": "12月1日。会員登録不要。特別興行・特別席は対象外の場合があります。",
+          "steps": [
+            "12月1日の通常2D上映を選択",
+            "購入時に映画の日料金を確認"
+          ],
+          "sourceUrl": "https://www.smt-cinema.com/site/hiezu/service.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": [
+            "東劇",
+            "大阪ステーションシティシネマ",
+            "なんばパークスシネマ"
+          ]
         }
       ]
     },
@@ -1329,7 +1428,7 @@
       "id": "united",
       "name": "ローソン・ユナイテッドシネマ／シネプレックス",
       "theaterUrl": "https://entm.auone.jp/",
-      "note": "全国の対象劇場で利用できます。特別興行・特別席・特殊上映は対象外または追加料金です。",
+      "note": "曜日割引は劇場ごとに異なります。札幌・稲沢は木曜日、阿久比は火曜日、浦添は曜日割引なし。特別興行・特別席・特殊上映は対象外または追加料金です。",
       "offers": [
         {
           "id": "ponta",
@@ -1351,6 +1450,154 @@
           "excludedTheaters": [
             "YEBISU GARDEN CINEMA",
             "恵比寿ガーデンシネマ"
+          ]
+        },
+        {
+          "id": "wed",
+          "label": "水曜サービスデー",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "public",
+          "condition": "毎週水曜日。札幌・稲沢は木曜日、阿久比は火曜日の別サービス。浦添・YEBISU GARDEN CINEMAはこの方法の対象外。",
+          "steps": [
+            "水曜日の通常2D上映を選択",
+            "公式の購入画面または劇場でサービスデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/toyosu/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": [
+            "札幌",
+            "稲沢",
+            "阿久比",
+            "浦添",
+            "YEBISU GARDEN CINEMA",
+            "恵比寿ガーデンシネマ"
+          ]
+        },
+        {
+          "id": "first",
+          "label": "ファーストデー",
+          "price": 1300,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "public",
+          "condition": "12月を除く毎月1日。会員登録不要。 浦添・YEBISU GARDEN CINEMAはこの掲載方法の対象外。",
+          "steps": [
+            "毎月1日の通常2D上映を選択",
+            "公式の購入画面または劇場でファーストデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/toyosu/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedMonths": [
+            12
+          ],
+          "excludedTheaters": [
+            "浦添",
+            "YEBISU GARDEN CINEMA",
+            "恵比寿ガーデンシネマ"
+          ]
+        },
+        {
+          "id": "dec1",
+          "label": "映画の日",
+          "price": 1000,
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "access": "public",
+          "condition": "12月1日。会員登録不要。特別興行・特別席は対象外の場合があります。 浦添も対象。YEBISU GARDEN CINEMAはこの掲載方法の対象外。",
+          "steps": [
+            "12月1日の通常2D上映を選択",
+            "購入時に映画の日料金を確認"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/toyosu/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": [
+            "YEBISU GARDEN CINEMA",
+            "恵比寿ガーデンシネマ"
+          ]
+        },
+        {
+          "id": "sapporo-thu",
+          "label": "札幌の木曜サービスデー",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              4
+            ]
+          },
+          "access": "public",
+          "condition": "ユナイテッド・シネマ札幌のみ。毎週木曜日、会員登録不要。",
+          "steps": [
+            "ユナイテッド・シネマ札幌の対象曜日の通常2D上映を選択",
+            "公式の購入画面または劇場でサービスデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/sapporo/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "includedTheaters": [
+            "ユナイテッドシネマ札幌"
+          ]
+        },
+        {
+          "id": "inazawa-thu",
+          "label": "稲沢の木曜サービスデー",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              4
+            ]
+          },
+          "access": "public",
+          "condition": "ユナイテッド・シネマ稲沢のみ。毎週木曜日、会員登録不要。",
+          "steps": [
+            "ユナイテッド・シネマ稲沢の対象曜日の通常2D上映を選択",
+            "公式の購入画面または劇場でサービスデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/inazawa/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "includedTheaters": [
+            "ユナイテッドシネマ稲沢"
+          ]
+        },
+        {
+          "id": "agui-tue",
+          "label": "阿久比の火曜サービスデー",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "access": "public",
+          "condition": "ユナイテッド・シネマ阿久比のみ。毎週火曜日、会員登録不要。",
+          "steps": [
+            "ユナイテッド・シネマ阿久比の対象曜日の通常2D上映を選択",
+            "公式の購入画面または劇場でサービスデー料金を確認して購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/agui/price6.html",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-27",
+          "includedTheaters": [
+            "ユナイテッドシネマ阿久比"
           ]
         }
       ]

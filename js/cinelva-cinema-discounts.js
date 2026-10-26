@@ -65,6 +65,11 @@
    for(const o of Array.isArray(c.offers)?c.offers:[]){
     if(!o||typeof o!=='object'||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
     if(theater&&(o.excludedTheaters||[]).some(name=>theater.includes(normalized(name))))continue;
+    const included=o.includedTheaters;
+    if(included!==undefined){
+     if(!Array.isArray(included)||!included.length||included.some(name=>typeof name!=='string'||!name.trim()))continue;
+     if(theater&&!included.some(name=>theater.includes(normalized(name))))continue;
+    }
     for(let i=0;i<=REVIEW_DAYS;i++){
      const nextDate=addDays(date,i);
      if(!fresh(o,nextDate,now)||region&&!fresh(region,nextDate,now))break;

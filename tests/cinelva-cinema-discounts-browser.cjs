@@ -89,6 +89,27 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.equal(await directoryPage.locator('#discountResults .discountCard').count(),1);
   assert.match(await directoryPage.locator('#discountTheater').innerText(),/札幌/);
   await directoryContext.close();
+  for(const publicRoute of ['/theaters.html','/cinelva/theaters.html']){
+  const publicContext=await browser.newContext({viewport:{width:390,height:844},timezoneId:'Asia/Tokyo'});
+  await publicContext.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+  const publicPage=await publicContext.newPage();await publicPage.clock.install({time:new Date('2026-10-27T01:00:00Z')});
+  const visit=async(chain,theater,date)=>{await publicPage.goto(`http://127.0.0.1:${port}${publicRoute}?discountChain=${chain}&discountTheater=${encodeURIComponent(theater)}&discountDate=${date}#discounts`);await publicPage.locator('#discountResults .discountCard').first().waitFor();};
+  const headings=()=>publicPage.locator('#discountResults .discountCard > .discountWay h4').allTextContents();
+  await visit('united','ユナイテッド・シネマ豊洲','2026-10-28');assert.ok((await headings()).includes('水曜サービスデー'));
+  await visit('united','ローソン・ユナイテッドシネマ札幌','2026-10-28');assert.equal((await headings()).includes('水曜サービスデー'),false);
+  await publicPage.locator('#discountDate').fill('2026-10-29');assert.ok((await headings()).includes('札幌の木曜サービスデー'));assert.equal((await headings()).includes('稲沢の木曜サービスデー'),false);
+  await visit('united','ユナイテッド・シネマPARCO CITY浦添','2026-11-01');assert.equal((await headings()).includes('ファーストデー'),false);
+  await visit('smt','MOVIX日吉津','2026-10-28');assert.ok((await headings()).includes('水曜サービスデー'));
+  await visit('tjoy','','2026-10-27');assert.match(await publicPage.locator('#discountResults').innerText(),/KINEZO会員デー/);assert.match(await publicPage.locator('#discountResults').innerText(),/無料/);
+  assert.equal(await publicPage.locator('#discounts input[type=checkbox]').count(),0);await publicContext.close();
+  }
+  for(const included of ['札幌',null,[],[''],[null]]){
+   const invalidData=JSON.parse(fs.readFileSync('data/cinema_discounts.json','utf8'));invalidData.chains.find(c=>c.id==='united').offers[0].includedTheaters=included;
+   const invalidContext=await browser.newContext({viewport:{width:390,height:844}});
+   await invalidContext.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+   await invalidContext.route('**/data/cinema_discounts.json*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(invalidData)}));
+   const invalidPage=await invalidContext.newPage();await invalidPage.goto(`http://127.0.0.1:${port}/theaters.html#discounts`);await invalidPage.locator('#discountRetry').waitFor();assert.equal(await invalidPage.locator('#discountResults [data-price]').count(),0);await invalidContext.close();
+  }
   console.log('Cinema discount journeys: root/prefix, light/dark,320–1280px, national methods without checkboxes, fees, date/chain, exclusions, retry and stale prices passed');
  }finally{await browser?.close();server.kill('SIGTERM');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

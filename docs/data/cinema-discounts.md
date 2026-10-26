@@ -21,7 +21,7 @@ The existing disabled109 automated source remains disabled. The new registry ent
 
 ## Nationwide method-first guide (2026-10-26)
 
-The user rejected membership checkboxes and six local venues as the main experience. `chains` now contains14 nationally usable exhibitor/programme profiles and30 methods. The UI shows methods, fees, eligibility, steps, selected-date candidates and other eligible dates without visitor benefit preselection or preference storage. Registration-free and conditional ticket prices are separate. First-enrolment500-yen SMT tickets have their one-time, designated route, counter-only, expiry and548-yen automatic renewal conditions; they are never claimed as available to everyone. Programme sources do not establish a complete list of all discounts or all cinemas. All source summaries are factual and independently worded.
+The user rejected membership checkboxes and six local venues as the main experience. `chains` now contains14 nationally usable exhibitor/programme profiles and40 methods. The UI shows methods, fees, eligibility, steps, selected-date candidates and other eligible dates without visitor benefit preselection or preference storage. Registration-free and conditional ticket prices are separate. First-enrolment500-yen SMT tickets have their one-time, designated route, counter-only, expiry and548-yen automatic renewal conditions; they are never claimed as available to everyone. Programme sources do not establish a complete list of all discounts or all cinemas. All source summaries are factual and independently worded.
 
 Primary manual review2026-10-26:
 - https://www.tohotheater.jp/otoku/ (service days)
@@ -40,3 +40,20 @@ Primary manual review2026-10-26:
 No new automated acquisition permission. Existing disabled109 automation remains disabled. Historical6-venue `venues` facts and their original2026-10-25 review dates remain for backward-compatible pure-engine tests; they do not define the nationwide UI. Individual theater standard prices are not inferred from chain membership. National directory rows link to the relevant guide only for explicit brand matches; unrecognized cinemas retain existing official links. A selected named exclusion suppresses the related method. The directory snapshot itself is historical and does not certify current operation.
 
 47-prefecture navigation adds one manually reviewed theater example per prefecture, not exhaustive local coverage. TOHO and AEON official theater lists establish28/14 regional examples; Fukushima/Yamagata and remaining AEON areas use the current official list. The remaining five examples use direct official Korona Fukui, MOVIX Hiezu,Central Miyazaki,Cinema Sunshine Aira andUnited Urasoe pages. The mapping itself expires after60 days when used to select prices. Central Miyazaki has its own1300-yen Wednesday/first,1000-yen December1 and1500-yen late-show facts from https://www.mcc-9.jp/miyazaki/price/; it must not inherit AEON offers merely because it is inside an AEON mall. All47 examples have per-record primary source and actual review date in JSON. A user can leave the regional example and choose another national chain or the independent nationwide directory.
+
+## Public service-day expansion (2026-10-27)
+
+Added ten methods: MOVIX/Piccadilly Wednesday/first/December1; United Wednesday/first/December1 plus theater-specific Sapporo/Inazawa Thursday and Agui Tuesday; free KINEZO online member-day Tuesday/Thursday. Existing review dates are not refreshed. `includedTheaters` binds named local methods when a theater is selected, including upcoming dates; unfiltered chain guides show the named conditions.
+
+United Urasoe has neither Wednesday nor first-day tariff: suppress both; only its December1 public tariff is verified. Other Wednesday exclusions: Sapporo,Inazawa,Agui,YEBISU. YEBISU is conservatively outside these newly added tariff records until individually reviewed. SMT excludes Togeki and jointly operated Osaka/Namba cinemas from the new common tariffs. No production crawling or new acquisition permission.
+
+Primary sources reviewed2026-10-27:
+- https://www.smt-cinema.com/site/hiezu/service.html
+- https://www.smt-cinema.com/site/togeki/service.html
+- https://www.unitedcinemas.jp/toyosu/price6.html
+- https://www.unitedcinemas.jp/urasoe/price6.html
+- https://www.unitedcinemas.jp/sapporo/price6.html
+- https://www.unitedcinemas.jp/inazawa/price6.html
+- https://www.unitedcinemas.jp/agui/price6.html
+- https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default
+- https://help.tjoy.jp/faq/show/24?category_id=9&site_domain=default

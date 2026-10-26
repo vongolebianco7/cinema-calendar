@@ -78,7 +78,7 @@
   }).join('');
  }
  function valid(next){
-  return next?.version===1&&next.nationalGuideVersion===1&&Array.isArray(next.chains)&&next.chains.length&&Array.isArray(next.regions)&&next.regions.length===47&&next.regions.every(r=>r&&typeof r.prefecture==='string'&&typeof r.theater==='string'&&typeof r.sourceUrl==='string'&&next.chains.some(c=>c?.id===r.chain))&&next.chains.every(c=>c&&typeof c.id==='string'&&typeof c.name==='string'&&Array.isArray(c.offers)&&c.offers.every(o=>o&&Number.isInteger(o.price)&&o.price>0&&typeof o.label==='string'&&typeof o.condition==='string'&&typeof o.feeText==='string'&&Array.isArray(o.steps)&&o.steps.every(s=>typeof s==='string')&&(!o.excludedTheaters||Array.isArray(o.excludedTheaters))));
+  return next?.version===1&&next.nationalGuideVersion===1&&Array.isArray(next.chains)&&next.chains.length&&Array.isArray(next.regions)&&next.regions.length===47&&next.regions.every(r=>r&&typeof r.prefecture==='string'&&typeof r.theater==='string'&&typeof r.sourceUrl==='string'&&next.chains.some(c=>c?.id===r.chain))&&next.chains.every(c=>c&&typeof c.id==='string'&&typeof c.name==='string'&&Array.isArray(c.offers)&&c.offers.every(o=>o&&Number.isInteger(o.price)&&o.price>0&&typeof o.label==='string'&&typeof o.condition==='string'&&typeof o.feeText==='string'&&Array.isArray(o.steps)&&o.steps.every(s=>typeof s==='string')&&(o.excludedTheaters===undefined||Array.isArray(o.excludedTheaters)&&o.excludedTheaters.every(s=>typeof s==='string'&&s.trim()))&&(o.includedTheaters===undefined||Array.isArray(o.includedTheaters)&&o.includedTheaters.length>0&&o.includedTheaters.every(s=>typeof s==='string'&&s.trim()))));
  }
  async function load(){
   data=null;results.innerHTML='';summary.textContent='割引方法を読み込んでいます…';

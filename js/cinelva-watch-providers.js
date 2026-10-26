@@ -10,6 +10,11 @@
  }
  async function mount({container,api}){
   if(!container||!api)return;
+  // Service filters sit below the discovery shelves; do not compete with startup requests.
+  if(typeof IntersectionObserver!=='undefined')await new Promise(resolve=>{
+   const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();resolve();}},{rootMargin:'160px'});observer.observe(container);
+  });
+  if(!container.isConnected)return;
   const status=container.ownerDocument.createElement('p');status.className='status';status.setAttribute('role','status');
   status.textContent='配信サービスを読み込み中…';container.after(status);
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);

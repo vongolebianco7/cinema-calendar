@@ -8,6 +8,13 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await waitForLocalServer(port);
   const launch=process.env.CINELVA_CHROMIUM_EXECUTABLE?{executablePath:process.env.CINELVA_CHROMIUM_EXECUTABLE,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--no-zygote']}:{};
   browser=await require('playwright')[process.env.CINELVA_BROWSER||'chromium'].launch(launch);
+  const visibilityContext=await browser.newContext({viewport:{width:390,height:844}}),visibilityPage=await visibilityContext.newPage();
+  let metadataRequests=0;await visibilityContext.route('https://fixture.test/api/watch-providers',r=>{metadataRequests++;return r.fulfill({headers:{'access-control-allow-origin':'*'},json:{providers:[{provider_id:99,provider_name:'New service'}]}});});
+  await visibilityPage.setContent('<div style="height:2400px"></div><div id="providerChecks"><label><input type="checkbox" value="8">Netflix</label></div>');
+  await visibilityPage.addScriptTag({path:'js/cinelva-watch-providers.js'});
+  await visibilityPage.evaluate(()=>{CinelvaWatchProviders.mount({container:document.getElementById('providerChecks'),api:'https://fixture.test'});});
+  await visibilityPage.waitForTimeout(150);assert.equal(metadataRequests,0,'offscreen provider controls must not add startup network traffic');
+  await visibilityPage.locator('#providerChecks').scrollIntoViewIfNeeded();await visibilityPage.locator('#providerChecks input[value="99"]').waitFor();assert.equal(metadataRequests,1);await visibilityContext.close();
   for(const path of ['discover.html','cinelva/discover.html'])for(const theme of ['light','dark']){
    const context=await browser.newContext({viewport:{width:390,height:844}});await context.addInitScript(t=>localStorage.setItem('cinelva-theme-v1',t),theme);
    await context.route('https://**/*',r=>r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},json:{}}));

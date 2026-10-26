@@ -31,7 +31,7 @@ tr:last-child td{border-bottom:0}.section td{background:var(--soft)!important;fo
 .cellLink{background:none;color:var(--brand);border:0;text-decoration:underline;text-underline-offset:3px;min-height:36px;padding:4px;font-weight:700}.cellLink:disabled{color:var(--muted);text-decoration:none;cursor:default}
 .verified{border:0;background:none;color:var(--brand);padding:3px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;line-height:1.5}.verified small{display:block;font-weight:400;font-size:10px;color:var(--muted)}.calc{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:18px;margin-top:20px}.calcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calc select{max-width:100%;width:100%;min-height:42px;border:1px solid var(--line);color:var(--ink);background:var(--panel);border-radius:5px;padding:8px}.calc label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.calcResult{margin-top:14px;font-size:14px;font-weight:700}.calcNote{font-size:12px;color:var(--muted)}.sourceList{padding-left:18px;font-size:12px}.sourceList li{margin:8px 0}.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
 h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--line);background:var(--panel);border-radius:8px;margin-top:12px;padding:17px}
-.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
+.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}.deltaActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.deltaActions button{min-height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--brand);padding:7px 12px;font-weight:700}.deltaActions button:disabled{color:var(--muted);cursor:default}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
 .modalClose{float:right;border:1px solid var(--line);background:transparent;border-radius:5px;padding:4px 11px}
 @media(max-width:600px){main{padding:22px 12px 70px}th,td{padding:10px 8px;min-width:126px}th:first-child,td:first-child{width:142px;min-width:142px;font-size:12px}.top{padding:10px 12px}}
 </style>
@@ -51,7 +51,7 @@ h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--
   <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス・プラン同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
     <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div>
     <div class="controls"><label for="billingCycle" style="font-weight:700">比較する支払い方法</label><select class="chip" id="billingCycle" aria-label="支払い方法"><option value="monthly">月額プランで12か月利用</option><option value="best">年額プランがあれば年額を利用</option></select></div>
-    <p class="calcResult" id="calcResult" aria-live="polite"></p><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
+    <p class="calcResult" id="calcResult" aria-live="polite"></p><p id="movieDelta" class="calcNote" aria-live="polite">見たい映画の増減：未集計</p><div class="deltaActions" id="deltaActions" hidden></div><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
     <p class="calcNote">※ 年額プランがあるDisney+は、月額プランの12か月分と年額一括払いで負担が異なります。年額プランは12,500円／16,700円です。</p>
   </section>
   <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
@@ -174,7 +174,7 @@ async function loadAvailability(){
   const data=await response.json(),checker=window.CinelvaStreamingAvailability;
   if(!checker)return;
   services.forEach(service=>availability[service.name]=checker.validateSnapshot(data,service.name));
-  draw();
+  draw();document.getElementById('fromService').dispatchEvent(new Event('change'));
  }catch{/* Never convert missing or malformed evidence into zero counts. */}
 }
 const filters=document.getElementById('filters'),head=document.getElementById('tableHead'),body=document.getElementById('comparisonRows');
@@ -210,6 +210,30 @@ function openSource(name,row,info){
  info.urls.forEach((url,i)=>{const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='公式情報 '+(i+1);li.appendChild(a);links.appendChild(li)});
  document.getElementById('sourceDialog').showModal();
 }
+function serviceFromPlan(plan){
+ if(plan.startsWith('Netflix '))return 'Netflix';
+ if(plan.startsWith('Disney+ '))return 'Disney+';
+ if(plan.startsWith('Lemino '))return 'Lemino';
+ if(plan.startsWith('Prime Video'))return 'Prime Video';
+ if(plan.startsWith('WOWOW '))return 'WOWOW';
+ return plan;
+}
+function updateMovieDelta(previousPlan,nextPlan){
+ const deltaEl=document.getElementById('movieDelta'),actions=document.getElementById('deltaActions');actions.replaceChildren();actions.hidden=true;
+ const checker=window.CinelvaStreamingAvailability,bookmarks=bookmarkIds();
+ const previous=availability[serviceFromPlan(previousPlan)],next=availability[serviceFromPlan(nextPlan)];
+ const comparison=checker&&bookmarks?checker.compareBookmarkAvailability(previous,next,bookmarks):null;
+ if(!comparison){
+  deltaEl.textContent='見たい映画の増減：未集計（両サービスの見放題全件データが確認されていません）';
+  return;
+ }
+ deltaEl.textContent='見たい映画：'+comparison.before.length+'本 → '+comparison.after.length+'本。新たに観られる'+comparison.gained.length+'本／観られなくなる'+comparison.lost.length+'本';
+ actions.hidden=false;
+ [['新たに観られる映画',comparison.gained],['観られなくなる映画',comparison.lost],['乗り換え後の対象映画',comparison.after]].forEach(([label,movies])=>{
+  const btn=cell('button',label+' '+movies.length+'本');btn.type='button';
+  btn.addEventListener('click',()=>showMatches(label,movies));actions.appendChild(btn);
+ });
+}
 function renderFees(){
  const from=document.getElementById('fromService'),to=document.getElementById('toService'),cycle=document.getElementById('billingCycle');
  Object.keys(monthlyFees).forEach(name=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
@@ -221,12 +245,13 @@ function renderFees(){
   const status=delta===0?'年間支払額は同じです':delta<0?'年間'+yen(-delta)+'安くなります':'年間'+yen(delta)+'高くなります';
   const contract=name=>cycle.value==='best'&&Object.prototype.hasOwnProperty.call(yearlyFees,name)?'年額一括':'月額払い×12';
   document.getElementById('calcResult').textContent=status+'。 '+from.value+'：'+yen(before)+'（'+contract(from.value)+'） → '+to.value+'：'+yen(after)+'（'+contract(to.value)+'）';
+  updateMovieDelta(from.value,to.value);
  };
  from.addEventListener('change',update);to.addEventListener('change',update);cycle.addEventListener('change',update);update();
 }
 draw();renderFees();loadAvailability();
-window.addEventListener('storage',event=>{if(event.key===BOOKMARK_KEY)draw()});
-window.addEventListener('cinelva-bookmarks-updated',draw);
+window.addEventListener('storage',event=>{if(event.key===BOOKMARK_KEY){draw();document.getElementById('fromService').dispatchEvent(new Event('change'))}});
+window.addEventListener('cinelva-bookmarks-updated',()=>{draw();document.getElementById('fromService').dispatchEvent(new Event('change'))});
 document.getElementById('matchesClose').addEventListener('click',()=>document.getElementById('matchesDialog').close());
 document.getElementById('sourceClose').addEventListener('click',()=>document.getElementById('sourceDialog').close());
 const dialog=document.getElementById('dataDialog');document.getElementById('aboutData').addEventListener('click',()=>dialog.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dialog.close());

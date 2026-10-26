@@ -26,7 +26,7 @@
   const ranked=[...organizations].map(([name,films])=>({
    name,watched:[...films].filter(film=>watched.has(film)).length,films
   })).filter(x=>x.watched>0).sort((a,b)=>b.watched-a.watched||a.name.localeCompare(b.name,'ja'));
-  if(!ranked.length)return [];
+  if(!ranked.length)return null;
   const winner=ranked[0];
   return validated.movies.filter(movie=>winner.films.has(id(movie.tmdb_id)));
  }
@@ -41,7 +41,7 @@
    counts.set(person,(counts.get(person)||0)+1);
   }
   const winner=[...counts].sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0];
-  if(!winner)return [];
+  if(!winner)return watched.length?null:[];
   return validated.movies.filter(movie=>id(movie.director_id)===winner[0]);
  }
  return {awardMatches,directorMatches};

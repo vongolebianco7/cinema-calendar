@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "7fb47345a9ea38acfb2ccc79f924b0e9fe2be6e7",
-  "verified_at": "2026-10-25T21:53:30.000Z",
-  "note": "PR504 source head 7fb47345: required pull-request workflows (Autonomous quality gate, CINELVA smoke, Validate frontend, Reproducible backend build) all completed successfully; full mobile layout and completeness scorecard also succeeded. The executable source matches the PR head; My Best 10 return navigation, search fallback and safe templates included. Publication receipt updated after merging the verified changes; keep production validation enabled."
+  "head_sha": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
+  "verified_at": "2026-10-26T01:09:05.199Z",
+  "note": "PR503 exact integrated source all10 workflows succeeded, including Autonomous40251606222, smoke40251606429, frontend40251606248 and backend40251606206. Shared director ranking predicate plus110KB verified feature-ID index, punctuation-free person matching, progressive photo suggestions, profile reuse and mobile detail close verified. Chromium/WebKit new and existing journeys pass; source includes latest Best10 release invariants. This commit changes only the publication receipt; require final-head checks before merge."
 }

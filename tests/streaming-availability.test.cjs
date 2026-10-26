@@ -28,3 +28,16 @@ test('does not return misleading bookmark counts from invalid evidence',()=>{
  const bad=validateSnapshot({movies:[{tmdb_id:101}]},'Netflix',NOW);
  assert.equal(matchBookmarkIds(bad,[101]),null);
 });
+
+test('gain/loss differences are deduped and unavailable without complete evidence',()=>{
+ const first=snapshot();
+ const next=snapshot();next.services.Netflix.movies=[
+   {tmdb_id:102,title:'Film B',entitlement:'subscription'},
+   {tmdb_id:103,title:'Film C',entitlement:'subscription'}];
+ const a=validateSnapshot(first,'Netflix',NOW),b=validateSnapshot(next,'Netflix',NOW);
+ const comparison=require('../js/streaming-availability.js').compareBookmarkAvailability(a,b,[101,102,103,103]);
+ assert.deepEqual(comparison.gained.map(x=>x.tmdb_id),[103]);
+ assert.deepEqual(comparison.lost.map(x=>x.tmdb_id),[101]);
+ assert.deepEqual(comparison.shared.map(x=>x.tmdb_id),[102]);
+ assert.equal(require('../js/streaming-availability.js').compareBookmarkAvailability(a,{ok:false},[101]),null);
+});

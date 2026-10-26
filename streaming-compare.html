@@ -31,7 +31,7 @@ tr:last-child td{border-bottom:0}.section td{background:var(--soft)!important;fo
 .cellLink{background:none;color:var(--brand);border:0;text-decoration:underline;text-underline-offset:3px;min-height:36px;padding:4px;font-weight:700}.cellLink:disabled{color:var(--muted);text-decoration:none;cursor:default}
 .verified{border:0;background:none;color:var(--brand);padding:3px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;line-height:1.5}.verified small{display:block;font-weight:400;font-size:10px;color:var(--muted)}.calc{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:18px;margin-top:20px}.calcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calc select{max-width:100%;width:100%;min-height:42px;border:1px solid var(--line);color:var(--ink);background:var(--panel);border-radius:5px;padding:8px}.calc label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.calcResult{margin-top:14px;font-size:14px;font-weight:700}.calcNote{font-size:12px;color:var(--muted)}.sourceList{padding-left:18px;font-size:12px}.sourceList li{margin:8px 0}.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
 h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--line);background:var(--panel);border-radius:8px;margin-top:12px;padding:17px}
-dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
+.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
 .modalClose{float:right;border:1px solid var(--line);background:transparent;border-radius:5px;padding:4px 11px}
 @media(max-width:600px){main{padding:22px 12px 70px}th,td{padding:10px 8px;min-width:126px}th:first-child,td:first-child{width:142px;min-width:142px;font-size:12px}.top{padding:10px 12px}}
 </style>
@@ -61,8 +61,10 @@ dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);c
     <button class="chip" type="button" id="aboutData">なぜ本数が表示されないのか</button>
   </div>
 </main>
+<dialog id="matchesDialog" aria-labelledby="matchesTitle"><button class="modalClose" id="matchesClose" type="button" aria-label="閉じる">×</button><h2 id="matchesTitle">見たい映画</h2><p id="matchesSummary" class="matchNote"></p><div id="matchesList" class="matchGrid"></div></dialog>
 <dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p></dialog>
 <dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
+<script src="js/streaming-availability.js"></script>
 <script>
 (function(){
 'use strict';
@@ -136,6 +138,45 @@ const sections=[
   {name:'映画ラインナップ',rows:['見放題映画数','洋画・邦画・アニメ','独占配信映画','映画賞受賞作品数']},
   {name:'あなたとの相性',rows:['ブックマークした映画','好きな監督の映画','好きな映画賞の映画','未鑑賞の名作','サブスク乗り換え時の増減']}
 ];
+const availability={};
+const BOOKMARK_KEY='cinelva-want-to-watch-v1';
+function bookmarkIds(){
+ try{const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
+  if(!data||typeof data!=='object'||Array.isArray(data))return null;
+  return Object.entries(data).filter(([id,item])=>item&&typeof item==='object'&&String(item.id||id)===String(id)&&/^[1-9]\\d*$/.test(String(id))).map(([id])=>Number(id));
+ }catch{return null}
+}
+function confirmedMatches(service){
+ const validated=availability[service];
+ if(!validated||!validated.ok)return null;
+ const ids=bookmarkIds();if(!ids)return null;
+ return window.CinelvaStreamingAvailability.matchBookmarkIds(validated,ids);
+}
+function showMatches(service,matches){
+ document.getElementById('matchesTitle').textContent=service+'で観られる見たい映画';
+ document.getElementById('matchesSummary').textContent='検証済み見放題データとブックマークが一致した'+matches.length+'作品。作品の配信状況は変わる場合があります。';
+ const grid=document.getElementById('matchesList');grid.replaceChildren();
+ if(!matches.length){grid.appendChild(cell('p','現在該当する作品はありません。','matchNote'))}
+ matches.forEach(movie=>{
+  const card=document.createElement('article');card.className='matchMovie';
+  if(typeof movie.poster==='string'&&/^https:\/\/(?:image\\.tmdb\\.org)\//.test(movie.poster)){
+   const img=document.createElement('img');img.className='matchPoster';img.src=movie.poster;img.alt=movie.title+'のポスター';img.loading='lazy';img.referrerPolicy='no-referrer';card.appendChild(img);
+  }else{const fallback=cell('div','ポスター未取得','matchPoster matchFallback');card.appendChild(fallback)}
+  card.appendChild(cell('strong',movie.title));grid.appendChild(card);
+ });
+ document.getElementById('matchesDialog').showModal();
+}
+async function loadAvailability(){
+ // Only show matching counts after a fresh, complete, JP subscription-only snapshot passes validation.
+ try{
+  const response=await fetch('data/streaming-availability.json',{cache:'no-store'});
+  if(!response.ok)return;
+  const data=await response.json(),checker=window.CinelvaStreamingAvailability;
+  if(!checker)return;
+  services.forEach(service=>availability[service.name]=checker.validateSnapshot(data,service.name));
+  draw();
+ }catch{/* Never convert missing or malformed evidence into zero counts. */}
+}
 const filters=document.getElementById('filters'),head=document.getElementById('tableHead'),body=document.getElementById('comparisonRows');
 let active='すべて';const labels=['すべて',...sections.map(s=>s.name)];
 labels.forEach(label=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',String(label===active));b.addEventListener('click',()=>{active=label;document.querySelectorAll('#filters button').forEach(el=>el.setAttribute('aria-pressed',String(el.textContent===active)));draw()});filters.appendChild(b)});
@@ -147,7 +188,12 @@ function draw(){
   const banner=document.createElement('tr');banner.className='section';const item=cell('td',section.name);item.colSpan=services.length+1;banner.appendChild(item);body.appendChild(banner);
   section.rows.forEach(row=>{const line=document.createElement('tr');line.appendChild(cell('td',row));services.forEach(service=>{
     const td=document.createElement('td');
-    if(section.name==='あなたとの相性'||section.name==='映画ラインナップ'){const btn=cell('button','未集計','cellLink');btn.type='button';btn.addEventListener('click',()=>document.getElementById('dataDialog').showModal());td.appendChild(btn)}
+    if(section.name==='あなたとの相性'||section.name==='映画ラインナップ'){
+      const matches=row==='ブックマークした映画'?confirmedMatches(service.name):null;
+      const btn=cell('button',matches===null?'未集計':matches.length+'本','cellLink');btn.type='button';
+      btn.addEventListener('click',()=>matches===null?document.getElementById('dataDialog').showModal():showMatches(service.name,matches));
+      td.appendChild(btn);
+    }
     else {
       const info=(verified[service.name]||{})[row];
       if(info){const btn=cell('button',info.value,'verified');btn.type='button';btn.title=info.note;btn.setAttribute('aria-label',service.name+' '+row+' '+info.value+' の根拠を確認');btn.addEventListener('click',()=>openSource(service.name,row,info));td.appendChild(btn)}
@@ -178,7 +224,10 @@ function renderFees(){
  };
  from.addEventListener('change',update);to.addEventListener('change',update);cycle.addEventListener('change',update);update();
 }
-draw();renderFees();
+draw();renderFees();loadAvailability();
+window.addEventListener('storage',event=>{if(event.key===BOOKMARK_KEY)draw()});
+window.addEventListener('cinelva-bookmarks-updated',draw);
+document.getElementById('matchesClose').addEventListener('click',()=>document.getElementById('matchesDialog').close());
 document.getElementById('sourceClose').addEventListener('click',()=>document.getElementById('sourceDialog').close());
 const dialog=document.getElementById('dataDialog');document.getElementById('aboutData').addEventListener('click',()=>dialog.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dialog.close());
 })();

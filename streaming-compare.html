@@ -142,9 +142,19 @@ const sections=[
 const availability={};
 const BOOKMARK_KEY='cinelva-want-to-watch-v1';
 function bookmarkIds(){
- try{const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
+ try{
+  const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
   if(!data||typeof data!=='object'||Array.isArray(data))return null;
-  return Object.entries(data).filter(([id,item])=>item&&typeof item==='object'&&String(item.id||id)===String(id)&&/^[1-9]\\d*$/.test(String(id))).map(([id])=>Number(id));
+  const ids=new Set();
+  for(const [key,item] of Object.entries(data)){
+   if(!item||typeof item!=='object'||Array.isArray(item))continue;
+   // The local bookmark key is not necessarily a TMDB movie ID.
+   // Only match an explicit, verified TMDB identity to prevent false positives.
+   const raw=item.tmdbId??item.tmdb_id;
+   const value=Number(raw);
+   if(raw!=null && /^[1-9][0-9]*$/.test(String(raw)) && Number.isSafeInteger(value) && value>0)ids.add(value);
+  }
+  return [...ids];
  }catch{return null}
 }
 function confirmedMatches(service){
@@ -232,7 +242,7 @@ function updateMovieDelta(previousPlan,nextPlan){
  const previous=availability[serviceFromPlan(previousPlan)],next=availability[serviceFromPlan(nextPlan)];
  const comparison=checker&&bookmarks?checker.compareBookmarkAvailability(previous,next,bookmarks):null;
  if(!comparison){
-  deltaEl.textContent='見たい映画の増減：未集計（両サービスの見放題全件データが確認されていません）';
+  deltaEl.textContent='見たい映画の増減：未集計（配信データまたは作品IDの照合が未確認です）';
   return;
  }
  deltaEl.textContent='見たい映画：'+comparison.before.length+'本 → '+comparison.after.length+'本。新たに観られる'+comparison.gained.length+'本／観られなくなる'+comparison.lost.length+'本';

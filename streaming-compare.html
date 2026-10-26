@@ -31,7 +31,7 @@ tr:last-child td{border-bottom:0}.section td{background:var(--soft)!important;fo
 .cellLink{background:none;color:var(--brand);border:0;text-decoration:underline;text-underline-offset:3px;min-height:36px;padding:4px;font-weight:700}.cellLink:disabled{color:var(--muted);text-decoration:none;cursor:default}
 .verified{border:0;background:none;color:var(--brand);padding:3px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;line-height:1.5}.verified small{display:block;font-weight:400;font-size:10px;color:var(--muted)}.calc{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:18px;margin-top:20px}.calcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calc select{max-width:100%;width:100%;min-height:42px;border:1px solid var(--line);color:var(--ink);background:var(--panel);border-radius:5px;padding:8px}.calc label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.calcResult{margin-top:14px;font-size:14px;font-weight:700}.calcNote{font-size:12px;color:var(--muted)}.sourceList{padding-left:18px;font-size:12px}.sourceList li{margin:8px 0}.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
 h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--line);background:var(--panel);border-radius:8px;margin-top:12px;padding:17px}
-.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie a{display:block;text-decoration:none;color:inherit}.matchMovie a:focus-visible{outline:2px solid var(--gold)}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}.deltaActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.deltaActions button{min-height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--brand);padding:7px 12px;font-weight:700}.deltaActions button:disabled{color:var(--muted);cursor:default}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
+.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie a{display:block;text-decoration:none;color:inherit}.matchMovie a:focus-visible{outline:2px solid var(--gold)}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.matchReview{min-height:44px;display:flex;align-items:center;justify-content:center;margin-top:4px}.matchReview button{min-height:36px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}.deltaActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.deltaActions button{min-height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--brand);padding:7px 12px;font-weight:700}.deltaActions button:disabled{color:var(--muted);cursor:default}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
 .modalClose{float:right;border:1px solid var(--line);background:transparent;border-radius:5px;padding:4px 11px}
 @media(max-width:600px){main{padding:22px 12px 70px}th,td{padding:10px 8px;min-width:126px}th:first-child,td:first-child{width:142px;min-width:142px;font-size:12px}.top{padding:10px 12px}}
 </style>
@@ -66,6 +66,8 @@ h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--
 <dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
 <script src="js/streaming-availability.js"></script>
 <script src="js/cinelva-library-records.js"></script>
+<script src="js/cinelva-movie-identity.js"></script>
+<script src="js/cinelva-quick-rate.js"></script>
 <script src="js/streaming-bookmark-identity.js"></script>
 <script>
 (function(){
@@ -185,7 +187,13 @@ function showMatches(service,matches){
   link.appendChild(cell('strong',movie.title));card.appendChild(link);
   const record=scores.get(Number(movie.tmdb_id));
   const value=record&&Number.isFinite(Number(record.rating))&&Number(record.rating)>0?Number(record.rating).toFixed(1):'未鑑賞';
-  card.appendChild(cell('small','MY評価：'+value));grid.appendChild(card);
+  card.appendChild(cell('small','MY評価：'+value));
+  const slot=cell('div','','matchReview');card.appendChild(slot);grid.appendChild(card);
+  window.CinelvaQuickRate?.mountInline(slot,{
+   id:Number(movie.tmdb_id),tmdbId:Number(movie.tmdb_id),title:movie.title,
+   poster:typeof movie.poster==='string'?movie.poster:'',year:movie.year||'',
+   source:'tmdb',catalog:true
+  });
  });
  document.getElementById('matchesDialog').showModal();
 }

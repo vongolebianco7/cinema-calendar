@@ -276,8 +276,9 @@ function updateMovieDelta(previousPlan,nextPlan){
  const deltaEl=document.getElementById('movieDelta'),actions=document.getElementById('deltaActions');actions.replaceChildren();actions.hidden=true;
  // Netflix's ad-supported tier has a different movie entitlement.
  // A service-level snapshot cannot prove this plan's complete coverage.
- if(previousPlan==='Netflix 広告つき'||nextPlan==='Netflix 広告つき'){
-  deltaEl.textContent='見たい映画の増減：未集計（広告つきプランの作品制限を個別に確認する必要があります）';
+ const planSpecificCoverageNeeded=['Netflix 広告つき','WOWOW スタンダード','WOWOW トリプル'];
+ if(planSpecificCoverageNeeded.includes(previousPlan)||planSpecificCoverageNeeded.includes(nextPlan)){
+  deltaEl.textContent='見たい映画の増減：未集計（プラン固有の配信対象作品を確認する必要があります）';
   return;
  }
  const checker=window.CinelvaStreamingAvailability,bookmarks=bookmarkIds();

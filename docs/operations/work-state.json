@@ -1475,6 +1475,15 @@
     "final_head": "b48bc355ad04f0c48ae0b01ad7302a97ea3f1363",
     "receipt_head": "f31199d1b7ec00edfda21cdc4e168ea3d0ed4940",
     "merge_sha": "12a98875cfb83a1d9affc0ce6c7329eb66586021",
-    "final_ci": "Required4 workflows, mobile and all other final CI passed except backup40345528428: two attempts cancelled at15min while apt downloading browser prerequisites from Azure Ubuntu mirror; backup tests not reached. Same executable source539b544b backup passed. No code or assertion weakened; no repeated production attempts."
+    "final_ci": "Required4 workflows, mobile and all other final CI passed except backup40345528428: two attempts cancelled at15min while apt downloading browser prerequisites from Azure Ubuntu mirror; backup tests not reached. Same executable source539b544b backup passed. No code or assertion weakened; no repeated production attempts.",
+    "public_service_expansion": {
+      "status": "in_progress",
+      "updated_at": "2026-10-26T19:53:25.862829+00:00",
+      "branch": "feat/cinema-public-savings-20261027",
+      "base_sha": "4bb1143170c35604ad1203f3c377f89122eef616",
+      "scope": "10 added methods;40total. PublicSMT/United service days, namedUnited exceptions, freeKINEZO booking. Existing47examples and original review dates retained.",
+      "validation": "19units green;3 feature regressions and1 malformed restriction red-to-green. Full local quality passed. Focused independent review has no blockers after root/prefix new-date flow and fail-closed schema fixes. Actual browser CI pending.",
+      "next_action": "Resolve review findings, push source PR, require exact-source4/mobile checks, receipt-only proof and final CI; verify canonical publication."
+    }
   }
 }

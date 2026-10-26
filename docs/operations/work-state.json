@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T02:28:37.614800+00:00",
+  "updated_at": "2026-10-26T14:48:35.359466+00:00",
   "status": "blocked",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
-  "branch": "docs/search-release-quota-20261026",
-  "head_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
-  "pull_request": 499,
+  "base_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
+  "branch": "docs/provider-release-verified-20261026",
+  "head_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
+  "pull_request": 512,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -841,7 +841,7 @@
     "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
     "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
   ],
-  "next_action": "Source73efb734 focused browser regression suite passes both engines after full navigation isolation and late-response guard. Final user-facing wording polish pending exact-source/final proof CI. Renew proof after required source workflows, merge499 after final CI, verify canonical frontend/backend.",
+  "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1348,16 +1348,46 @@
     "final_head": "098d4b88b8e216f357e3fdde1c334c13a187b411",
     "resume_record": "docs/operations/search-release-quota-20261026.json"
   },
-  "publication_blocker": {
-    "attempted_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
-    "team_id": "team_dQvCdXuckHgqGgutn9yXfVTV",
-    "project_id": "prj_BPmpSaJmKfVDQpVWOFKaoXHS1eeD",
-    "target": "production",
-    "http_status": 402,
-    "code": "api-deployments-free-per-day",
-    "message": "Resource is limited - try again in24hours (more than100)",
-    "retry_after_seconds": 86400,
-    "provider_advised_retry_at_utc": "2026-10-27T02:20:02Z",
-    "retry_note": "Provider-advised waiting period, not independently confirmed reset. No repeated deploy attempts, paid changes or quota evasion."
+  "subscription_coverage": {
+    "status": "blocked",
+    "updated_at": "2026-10-26T14:48:35.359466+00:00",
+    "implemented_scope": "production_verified",
+    "merge_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
+    "pull_request": 512,
+    "source_sha": "5ce8a9a265d2ebc3bd93e821eb9f0e03a6f672d8",
+    "receipt_sha": "3f9d268f69d5b1625242827a40f926ac56924763",
+    "source_ci": "All9 passed including frontend40337774636,quality40337774596,smoke40337774683,backend40337774674",
+    "final_ci": "All10 passed including frontend40340065032,quality40340065828,smoke40340064830,backend40340064426",
+    "deployments": {
+      "frontend": "dpl_VV1T6bmJRW9tEsUZem3DBgcxBFWz",
+      "backend": "dpl_8xSEFoN4aWp2cmGX9DPbwvDGqwej",
+      "state": "BothREADY atc7f7e245"
+    },
+    "live_evidence": {
+      "japan_provider_metadata_count": 70,
+      "cloud_browser_provider_checkbox_count": 70,
+      "cloud_browser_netflix_result_label": "5,240作品",
+      "cloud_browser_movie_cards": 20,
+      "telasa_films": 14,
+      "calendar_movies": 1197,
+      "streaming_movies": 270,
+      "production_record_writes": false,
+      "source_scope": "TMDB/JustWatch Japan movie provider metadata,not independently certified complete service catalogs",
+      "runtime_browser_limitation": "Scratch Chromium through runtime proxy timed out metadata into6-choice fallback;independent cloud browser loaded all70 and searchedNetflix successfully. No product bypass/mocks used in cloud verification."
+    },
+    "fixes": [
+      "Remove hidden100-vote provider threshold",
+      "Remove20-page UI truncation",
+      "Replace fixed6provider selector with all valid returnedJPproviders",
+      "Lazy metadata, safe labels,selection/focus preservation and fallback",
+      "Add14 officially dated TELASAfilms with posters to both feeds"
+    ],
+    "publication_recovery": "Manual streaming_announcements.json is protected source. Initial TELASA standalone merge was refused by guard;combined exact-source verification+receipt now published. No whitelist or guard bypass.",
+    "remaining": [
+      "No complete authoritative Japan service libraries obtained for zero-omission reconciliation",
+      "Upstream TMDB500-page query limit remains;use production-year filters for larger catalogs",
+      "Dated feeds remain partial;DMM exact premiere dates and TELASAOctober first-half not confirmed"
+    ],
+    "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
   }
 }

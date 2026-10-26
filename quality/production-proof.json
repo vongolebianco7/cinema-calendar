@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0dfe8e4cf8f26b79a7d30ece768121b2b530bd72",
-  "verified_at": "2026-10-26T10:37:35.384Z",
-  "note": "PR513 CI verified source: required workflows Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build all completed successfully; mobile layout smoke and completeness scorecard succeeded. My Best 10 highest MY ratings selection requires confirmation before overwriting. All changes since PR head are release receipt only."
+  "head_sha": "5ce8a9a265d2ebc3bd93e821eb9f0e03a6f672d8",
+  "verified_at": "2026-10-26T14:29:33.851Z",
+  "note": "PR512 integrated exact source all9 CI passed: autonomous40337774596,smoke40337774683,frontend40337774636,backend40337774674. Includes protected TELASA intake14films, JP provider metadata choices, lazy startup and selection/focus preservation; preserves verified Best10 main77c5837c. Chromium/WebKit provider and existing journeys pass. Receipt-only update; final-head CI before merge. Exhaustive provider catalogs and upstream500page ceiling remain unresolved."
 }

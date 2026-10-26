@@ -30,8 +30,10 @@ Consumes guide(); date/chain controls, two clear price categories, applicable me
 - [x] Update meaningful browser journeys: root/prefix,light/dark,320/390/768/1280px,no selection prerequisite,fee visibility,date/chain/exclusion,retry and stale prices.
 - [x] Shared gate and independent focused review; fix findings.
 - [x] Exact-source CI and receipt-only proof preparation.
-- [ ] Final receipt-head CI, merge and one verified publication attempt after checking live availability; record any concrete publication blocker.
+- [x] Final required CI, merge and verified publication. Final backup-only environment installation timeout is recorded below.
 
 - Coverage completion:14 programmes/30 methods plus47 manually sourced prefectural examples; no all-cinema claim. Added region/chain/date deep-link tests, all47 Wednesday usable-guide assertions and stale-region association suppression.
 
 - Source1d754af3: all9 exact-head workflows pass, including frontend40293297786,autonomous40293297707,smoke40293297766,backend40293298079. Fifteen unit tests/local shared quality and Japanese-font screenshots pass. Live canonical READY85ea1e5 created08:01UTC after earlier02:20 quota error provides new availability evidence; do not treat old wait estimate as a current block. Final-head CI and publication verification remain required.
+
+- Published PR510 as12a98875: source539b544b all workflows green; proof-only f31199d1; final b48bc355 required4/mobile/feature browser checks pass. Backup final2attempts timed out during apt prerequisites; same-source backup green, no assertion weakened. Actual production guard+quality/build passed. Canonical deployment dpl_FV6HyYuqAdcq6RJBJPQYxperq5QN READY;8/8 actual static files HTTP200 byte-identical. Cloud browser14cards/0checkboxes/47prefectures+placeholder/fees+steps and Miyazaki noAEONcoupon verified.

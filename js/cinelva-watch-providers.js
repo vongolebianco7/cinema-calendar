@@ -24,6 +24,7 @@
    const data=await response.json(),providers=normalize(data.providers);
    if(!providers.length)throw Error('empty metadata');
    // Read selection after the request: choices made while loading must survive.
+   const active=container.ownerDocument.activeElement,focusedId=container.contains(active)&&active?.tagName==='INPUT'?active.value:null;
    const checked=new Map([...container.querySelectorAll('input:checked')].map(input=>[Number(input.value),input.closest('label')?.textContent.trim()||String(input.value)]));
    for(const [id,name] of checked)if(!providers.some(p=>p.id===id))providers.push({id,name});
    const fragment=container.ownerDocument.createDocumentFragment();
@@ -33,6 +34,7 @@
     const name=container.ownerDocument.createElement('span');name.textContent=provider.name;name.style.minWidth='0';name.style.overflowWrap='anywhere';label.append(input,name);fragment.append(label);
    }
    container.replaceChildren(fragment);container.style.maxHeight='192px';container.style.overflowY='auto';
+   if(focusedId!==null){const target=[...container.querySelectorAll('input')].find(input=>input.value===focusedId)||container.querySelector('input');target?.focus({preventScroll:true});}
    status.textContent='日本向けの配信情報に掲載されているサービスです。見放題の有無は作品ごとに異なります。';
   }catch{
    status.textContent='サービス一覧を更新できませんでした。表示中のサービスは検索できます。';

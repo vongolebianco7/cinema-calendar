@@ -26,6 +26,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.locator('#providerChecks input[value="8"]').check();release();
    await page.waitForFunction(()=>document.querySelectorAll('#providerChecks input').length===40);
    assert.equal(await page.locator('#providerChecks input[value="8"]').isChecked(),true);
+   assert.equal(await page.evaluate(()=>document.activeElement?.value),'8','metadata refresh must preserve keyboard focus');
    await page.locator('#providerChecks input[value="40"]').check();
    assert.deepEqual(await page.evaluate(()=>build().get('provider').split('|').map(Number).sort((a,b)=>a-b)),[8,40]);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);

@@ -60,3 +60,8 @@ Primary sources reviewed2026-10-27:
 
 ## Chain-wide navigation (2026-10-27)
 The guide no longer selects one sample cinema per prefecture. Chain records apply throughout their published programme scope; named theater exclusions/inclusions remain authoritative. Existing nationwide directory provides geographic search and links recognized theaters to their chain guide. Legacy regions remain for API compatibility only and are not a UI validation prerequisite. Neither the historical directory nor programme facts certify every operating cinema or every available discount.
+
+## Calendar and BenefitStation (2026-10-27)
+User requires calendar-first presentation and a tapped-day sorted table. Calendar uses reviewed guide() methods for each day, with separate public/conditional ticket minima. Fees, eligibility and purchase steps remain visible/expandable in the table. No assumed visitor eligibility or screening availability.
+
+Added public BenefitStation listed plans: TOHO menu10670209 TC1500yen(after payment12h delivery);AEON10670546 1300yen;United10670674 LUC1500yen. Membership/contract, target theater/plan, purchase quota, delivery and voucher expiry must be checked in the member plan before purchase. Public list is not a guarantee that every employer contract has the same offer. Benepo1point=1yen is a payment method, not an extra tariff reduction or free cinema ticket. Source https://life.bs.benefit-one.inc/menus?keyword=%E6%98%A0%E7%94%BB&type=1 and https://bs.benefit-one.inc/otherPage?other_id=goriyou_benepo (official indexed text manually reviewed; client-rendered body is not an automated data source). No account scraping, login collection, point-balance storage or automatic review-date refresh. Total43methods.

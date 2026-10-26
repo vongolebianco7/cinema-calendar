@@ -84,6 +84,15 @@
    return {...c,available,upcoming,publicBest:available.find(o=>o.access==='public')||null,conditionalBest:available.find(o=>o.access!=='public')||null};
   });
  }
- const api={today,addDays,compare,calendar,guide,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
+ function guideCalendar(data,options={},now=new Date()){
+  if(!civil(options.date)||options.date<today(now))return [];
+  return Array.from({length:14},(_,i)=>{
+   const date=addDays(options.date,i),rows=guide(data,{...options,date},now);
+   const prices=access=>rows.flatMap(c=>c.available.filter(o=>(o.access==='public')===access).map(o=>o.price));
+   const publicPrices=prices(true),conditionalPrices=prices(false);
+   return {date,publicPrice:publicPrices.length?Math.min(...publicPrices):null,conditionalPrice:conditionalPrices.length?Math.min(...conditionalPrices):null};
+  });
+ }
+ const api={today,addDays,compare,calendar,guide,guideCalendar,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

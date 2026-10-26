@@ -1024,6 +1024,26 @@
           "sourceUrl": "https://www.tohotheater.jp/otoku/",
           "feeText": "追加の会費・カード申込みは不要です。",
           "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "benefit",
+          "label": "ベネフィット・ステーション（ベネポ利用可）",
+          "price": 1500,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "勤務先などの契約による対象会員向け。公開プランの掲載価格で、所属団体・購入枠・対象劇場により異なる場合があります。入金後12時間で受取。鑑賞までにコード受取が必要です。 特別興行・特別席は対象外または追加料金。",
+          "steps": [
+            "会員サイトへログインし、メニュー番号10670209で対象プランと劇場・期限を確認",
+            "鑑賞券を購入。ベネポ利用可のプランでは保有ポイントを使用可能",
+            "受け取ったコードを映画館の公式購入画面などで使い、対象上映の座席を指定"
+          ],
+          "sourceUrl": "https://life.bs.benefit-one.inc/menus?keyword=%E6%98%A0%E7%94%BB&type=1",
+          "feeText": "福利厚生等の会員資格が必要です。会費・負担額は所属団体の契約によります。ベネポは1ポイント＝1円の支払い手段で、ポイント消費分を値引きや無料とは扱いません。",
+          "feeSourceUrl": "https://bs.benefit-one.inc/otherPage?other_id=goriyou_benepo",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": []
         }
       ]
     },
@@ -1114,6 +1134,26 @@
           "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
           "feeText": "追加の会費・カード申込みは不要です。",
           "verifiedAt": "2026-10-26"
+        },
+        {
+          "id": "benefit",
+          "label": "ベネフィット・ステーション（ベネポ利用可）",
+          "price": 1300,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "勤務先などの契約による対象会員向け。公開プランの掲載価格で、所属団体・購入枠・対象劇場により異なる場合があります。入金後にコードを受け取ってから座席指定します。 特別興行・特別席は対象外または追加料金。",
+          "steps": [
+            "会員サイトへログインし、メニュー番号10670546で対象プランと劇場・期限を確認",
+            "鑑賞券を購入。ベネポ利用可のプランでは保有ポイントを使用可能",
+            "受け取ったコードを映画館の公式購入画面などで使い、対象上映の座席を指定"
+          ],
+          "sourceUrl": "https://life.bs.benefit-one.inc/menus?keyword=%E6%98%A0%E7%94%BB&type=1",
+          "feeText": "福利厚生等の会員資格が必要です。会費・負担額は所属団体の契約によります。ベネポは1ポイント＝1円の支払い手段で、ポイント消費分を値引きや無料とは扱いません。",
+          "feeSourceUrl": "https://bs.benefit-one.inc/otherPage?other_id=goriyou_benepo",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": []
         }
       ]
     },
@@ -1598,6 +1638,29 @@
           "verifiedAt": "2026-10-27",
           "includedTheaters": [
             "ユナイテッドシネマ阿久比"
+          ]
+        },
+        {
+          "id": "benefit",
+          "label": "ベネフィット・ステーション（ベネポ利用可）",
+          "price": 1500,
+          "when": {
+            "kind": "always"
+          },
+          "access": "member",
+          "condition": "勤務先などの契約による対象会員向け。公開プランの掲載価格で、所属団体・購入枠・対象劇場により異なる場合があります。入金後にコードを受け取ってから座席指定します。 特別興行・特別席は対象外または追加料金。",
+          "steps": [
+            "会員サイトへログインし、メニュー番号10670674で対象プランと劇場・期限を確認",
+            "鑑賞券を購入。ベネポ利用可のプランでは保有ポイントを使用可能",
+            "受け取ったコードを映画館の公式購入画面などで使い、対象上映の座席を指定"
+          ],
+          "sourceUrl": "https://life.bs.benefit-one.inc/menus?keyword=%E6%98%A0%E7%94%BB&type=1",
+          "feeText": "福利厚生等の会員資格が必要です。会費・負担額は所属団体の契約によります。ベネポは1ポイント＝1円の支払い手段で、ポイント消費分を値引きや無料とは扱いません。",
+          "feeSourceUrl": "https://bs.benefit-one.inc/otherPage?other_id=goriyou_benepo",
+          "verifiedAt": "2026-10-27",
+          "excludedTheaters": [
+            "YEBISU GARDEN CINEMA",
+            "恵比寿ガーデンシネマ"
           ]
         }
       ]

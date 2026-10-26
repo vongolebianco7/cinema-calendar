@@ -7,7 +7,7 @@
 #discounts details{border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--panel);margin:12px 0}
 #discounts summary{min-height:46px;padding:12px 0;cursor:pointer;font-size:13px;font-weight:700}
 #discounts button{min-height:44px;min-width:44px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;cursor:pointer;padding:8px}
-#discounts .discountResults{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#discounts .discountResults{display:block;min-width:0}
 #discounts .discountCard{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px;align-self:start}
 #discounts .discountCard h3{font-size:18px;line-height:1.5;margin:0 0 4px;overflow-wrap:anywhere}
 #discounts .discountOverview{border-block:1px solid var(--line);padding:8px 0;margin:14px 0}
@@ -29,3 +29,19 @@
 #discounts :is(button,input,select,a,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 #discounts .discountStatus{min-height:24px;font-size:13px;line-height:1.7;margin-bottom:12px}
 @media(max-width:600px){#discounts .discountControls{grid-template-columns:minmax(0,1fr);gap:10px}#discounts .discountResults{grid-template-columns:minmax(0,1fr)}#discounts .discountCard{padding:14px}}
+
+#discounts .discountCalendarNav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0;font-size:12px;flex-wrap:wrap}
+#discounts .discountCalendar{display:grid;grid-template-columns:repeat(7,minmax(44px,1fr));gap:6px;overflow-x:auto;padding:3px;margin-bottom:18px}
+#discounts .discountDay{padding:8px 2px;min-height:120px;line-height:1.6}
+#discounts .discountDay span{display:block;font-size:11px}#discounts .discountDay small{display:block;font-size:10px;color:var(--muted)}#discounts .discountDay b{display:block;font-size:13px;white-space:nowrap}
+#discounts .discountDay[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:0;background:var(--bg)}
+#discounts button:disabled{opacity:.45;cursor:default}
+#discounts .discountTableScroll{overflow-x:auto;max-width:100%}
+#discounts .discountTable{width:100%;min-width:440px;border-collapse:collapse;table-layout:fixed;font-size:13px;text-align:left}
+#discounts .discountTable caption{font-size:17px;font-weight:700;text-align:left;padding:10px 0}
+#discounts .discountTable th,#discounts .discountTable td{vertical-align:top;border-bottom:1px solid var(--line);padding:12px 8px;overflow-wrap:anywhere}
+#discounts .discountTable th:first-child{width:30%}#discounts .discountTable th:nth-child(2){width:20%}
+#discounts .discountTable .discountPrice{font-size:17px;white-space:normal}#discounts .discountTable h4{min-width:0;font-size:13px}#discounts .discountTable small{display:block;font-weight:400;color:var(--muted)}#discounts .discountTable .discountTag{display:inline-block;margin-top:8px;font-weight:400}
+#discounts .discountTable details{margin:8px 0;padding:0 6px}#discounts .discountTable p{font-size:12px}
+
+@media(max-width:600px){#discounts .discountDay b{font-size:11px}#discounts .discountDay small{font-size:9px}}

@@ -57,15 +57,16 @@ h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--
   <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
   <div class="details">
     <p><strong>見たい映画・好きな監督・映画賞</strong></p>
-    <p class="sub">将来的には、各サービスの本数をタップすると、作品名・ポスター・MY評価付きの3列一覧が開きます。対象作品に見放題・レンタルを混在させないため、全件を照合できるまでは未集計として扱います。</p>
+    <p class="sub">検証済みの見放題作品データがあるサービスでは、該当本数をタップして作品名・ポスター・MY評価を確認できます。見放題・レンタルを混在させないため、データが未確認のサービスは未集計とします。</p>
     <button class="chip" type="button" id="aboutData">なぜ本数が表示されないのか</button>
   </div>
 </main>
 <dialog id="matchesDialog" aria-labelledby="matchesTitle"><button class="modalClose" id="matchesClose" type="button" aria-label="閉じる">×</button><h2 id="matchesTitle">見たい映画</h2><p id="matchesSummary" class="matchNote"></p><div id="matchesList" class="matchGrid"></div></dialog>
-<dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p></dialog>
+<dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。ブックマークに作品IDがない場合も、確認できるまで集計しません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p></dialog>
 <dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
 <script src="js/streaming-availability.js"></script>
 <script src="js/cinelva-library-records.js"></script>
+<script src="js/streaming-bookmark-identity.js"></script>
 <script>
 (function(){
 'use strict';
@@ -143,20 +144,9 @@ const availability={};
 const BOOKMARK_KEY='cinelva-want-to-watch-v1';
 function bookmarkIds(){
  try{
-  const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
-  if(!data||typeof data!=='object'||Array.isArray(data))return null;
-  const ids=new Set();let unresolved=0;
-  for(const [key,item] of Object.entries(data)){
-   if(!item||typeof item!=='object'||Array.isArray(item))continue;
-   // The local bookmark key is not necessarily a TMDB movie ID.
-   // Only match an explicit, verified TMDB identity to prevent false positives.
-   const raw=item.tmdbId??item.tmdb_id;
-   const value=Number(raw);
-   if(raw!=null && /^[1-9][0-9]*$/.test(String(raw)) && Number.isSafeInteger(value) && value>0)ids.add(value);
-   else unresolved++;
-  }
-  // A partial ID mapping must never masquerade as a complete bookmark match count.
-  return unresolved===0?[...ids]:null;
+  const raw=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
+  const records=window.CinelvaLibraryRecords?.all?.()||[];
+  return window.CinelvaStreamingBookmarks?.resolve(raw,records).ids??null;
  }catch{return null}
 }
 function confirmedMatches(service){

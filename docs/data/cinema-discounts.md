@@ -57,3 +57,6 @@ Primary sources reviewed2026-10-27:
 - https://www.unitedcinemas.jp/agui/price6.html
 - https://help.tjoy.jp/faq/show/126?category_id=16&site_domain=default
 - https://help.tjoy.jp/faq/show/24?category_id=9&site_domain=default
+
+## Chain-wide navigation (2026-10-27)
+The guide no longer selects one sample cinema per prefecture. Chain records apply throughout their published programme scope; named theater exclusions/inclusions remain authoritative. Existing nationwide directory provides geographic search and links recognized theaters to their chain guide. Legacy regions remain for API compatibility only and are not a UI validation prerequisite. Neither the historical directory nor programme facts certify every operating cinema or every available discount.

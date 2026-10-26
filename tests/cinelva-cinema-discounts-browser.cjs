@@ -16,8 +16,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    try{await page.locator('#discountResults .discountCard').first().waitFor({timeout:5000});}catch(e){console.error('discount load:',errors,await page.locator('#discounts').innerText());throw e;}
    assert.equal(await page.locator('#discounts input[type=checkbox]').count(),0,'methods must be visible without benefit checkboxes');
    assert.equal(await page.locator('#discountResults .discountCard').count(),14);
-   assert.equal(await page.locator('#discountPrefecture option').count(),48);
-   await page.locator('#discountPrefecture').selectOption('宮崎県');
+   assert.equal(await page.locator('#discountPrefecture').count(),0,'guide must not restrict a prefecture to one sample theater');
+   if(route==='/theaters.html')assert.equal(await page.locator('#prefectureFilter option').count(),48);
+   await page.goto(`http://127.0.0.1:${port}${route}?discountChain=central-miyazaki&discountTheater=${encodeURIComponent('セントラルシネマ宮崎')}#discounts`);await page.locator('#discountResults .discountCard').first().waitFor();
    await page.locator('#discountDate').fill('2026-10-28');
    assert.match(await page.locator('#discountResults').innerText(),/セントラルシネマ宮崎/);
    assert.match(await page.locator('#discountResults').innerText(),/1,300/);
@@ -110,6 +111,14 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await invalidContext.route('**/data/cinema_discounts.json*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(invalidData)}));
    const invalidPage=await invalidContext.newPage();await invalidPage.goto(`http://127.0.0.1:${port}/theaters.html#discounts`);await invalidPage.locator('#discountRetry').waitFor();assert.equal(await invalidPage.locator('#discountResults [data-price]').count(),0);await invalidContext.close();
   }
+  const chainContext=await browser.newContext({viewport:{width:390,height:844}});
+  await chainContext.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+  const chainData=JSON.parse(fs.readFileSync('data/cinema_discounts.json','utf8'));delete chainData.regions;
+  await chainContext.route('**/data/cinema_discounts.json*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(chainData)}));
+  const chainPage=await chainContext.newPage();await chainPage.clock.install({time:new Date('2026-10-27T01:00:00Z')});
+  await chainPage.goto(`http://127.0.0.1:${port}/theaters.html?discountPrefecture=${encodeURIComponent('鳥取県')}#discounts`);await chainPage.locator('#discountResults .discountCard').first().waitFor();
+  assert.equal(await chainPage.locator('#discountResults .discountCard').count(),14,'old regional sample URLs must not narrow the nationwide chain guide');
+  assert.equal(await chainPage.locator('#discountTheater').innerText(),'');await chainContext.close();
   console.log('Cinema discount journeys: root/prefix, light/dark,320–1280px, national methods without checkboxes, fees, date/chain, exclusions, retry and stale prices passed');
  }finally{await browser?.close();server.kill('SIGTERM');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

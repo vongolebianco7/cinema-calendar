@@ -1,0 +1,4 @@
+# Chain-wide savings
+User approved series-wide facts with theater exceptions, rejecting one-example-per-prefecture as nationwide coverage. Use existing40methods/14profiles; stop using47sample mappings to select prices in the UI. Existing nationwide directory already links recognized chain theaters to named guides, where exclusions/inclusions apply. Keep nationwide directory prefecture filter and official theater links. Preserve legacy pure API/regions for compatibility, but region data is no longer a UI prerequisite. No new catalog completeness claim, scraping, paid services, record/logo changes.
+
+Alternative: expanding manually repeated prefectural prices duplicates common facts and misses branches. Use common chain records+named exceptions; no new database or duplicated tariffs. Acceptance:14chain guide loads without regions; old region URL never auto-selects one example; specific Miyazaki and United exceptions still work; directory remains national.

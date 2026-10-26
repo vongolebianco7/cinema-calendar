@@ -1468,6 +1468,15 @@
       "source_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
       "final_head": "9a2f6d5aee333c5bf8643589f39d97afececc8ea",
       "merge_sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8"
+    },
+    "chain_wide_navigation": {
+      "status": "in_progress",
+      "updated_at": "2026-10-26T20:46:28.733092+00:00",
+      "branch": "feat/chain-wide-savings-20261027",
+      "base_sha": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
+      "scope": "Remove one-prefecture-one-theater guide selection. Existing40 common/exception methods cover chain programmes; national directory provides geography and named theater links. Legacy region data retained only for compatibility.",
+      "validation": "Full local shared quality passed; focused review no blockers. Browser missing-regions/old-region URL and existing named theater flows pending actualCI.",
+      "next_action": "Exact-source CI, receipt-only proof, final CI, merge and canonical verification."
     }
   }
 }

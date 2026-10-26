@@ -36,5 +36,17 @@
     const wanted = new Set(ids.map(Number).filter(id=>Number.isSafeInteger(id)&&id>0));
     return validated.movies.filter(movie=>wanted.has(Number(movie.tmdb_id)));
   }
-  return {serviceKeys,validateSnapshot,matchBookmarkIds};
+  function compareBookmarkAvailability(previous, next, ids) {
+    const before=matchBookmarkIds(previous,ids),after=matchBookmarkIds(next,ids);
+    if(before===null || after===null) return null;
+    const previousIds=new Set(before.map(movie=>Number(movie.tmdb_id)));
+    const nextIds=new Set(after.map(movie=>Number(movie.tmdb_id)));
+    return {
+      before,after,
+      gained:after.filter(movie=>!previousIds.has(Number(movie.tmdb_id))),
+      lost:before.filter(movie=>!nextIds.has(Number(movie.tmdb_id))),
+      shared:after.filter(movie=>previousIds.has(Number(movie.tmdb_id)))
+    };
+  }
+  return {serviceKeys,validateSnapshot,matchBookmarkIds,compareBookmarkAvailability};
 });

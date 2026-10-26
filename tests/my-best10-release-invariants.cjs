@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const html=fs.readFileSync('my-best10.html','utf8');
+const art=fs.readFileSync('js/my-cinemap-art.js','utf8');
+assert.match(html,/href="my-cinelva\/"[^>]*>← My Cinelvaに戻る<\/a>/);
+assert.match(html,/fetch\("data\/movies.json"/);
+assert.match(html,/api\/movies\?q=/);
+assert.match(html,/best10Normalize/);
+assert.equal((html.match(/data-theme="cinema-[1-5]"/g)||[]).length,0);
+for(const theme of ['minimal','noir','burgundy','bluegray'])assert.match(html,new RegExp('data-theme="'+theme+'"'));
+assert.doesNotMatch(art,/drawOriginalUploadedBackground/);
+console.log('My Best 10 release invariants passed');

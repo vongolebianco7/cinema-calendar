@@ -11,9 +11,9 @@ must('月額料金（税込）','広告の有無','同時視聴可能台数','�
  '家族共有','登録可能端末数','ブックマークした映画','好きな監督の映画',
  '好きな映画賞の映画','サブスク乗り換え時の増減','billingCycle','yearlyFees',
  'Disney+','Lemino','Prime Video','WOWOW','Apple TV','確認中','未集計');
-must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','cinelva-want-to-watch-v1',
+must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','streaming-personal-match.js','cinelva-want-to-watch-v1',
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
- 'compareBookmarkAvailability','deltaActions','updateMovieDelta',
+ 'compareBookmarkAvailability','deltaActions','updateMovieDelta','personalMatches(service.name,row)',
  'search.html?','new URLSearchParams({search:movie.title,id:String(movie.tmdb_id)})',
  'const scores=new Map()', 'CinelvaQuickRate?.mountInline', 'cinelva-quick-rate.js',
  "previousPlan==='Netflix 広告つき'||nextPlan==='Netflix 広告つき'");
@@ -30,7 +30,7 @@ const availability=JSON.parse(read('data/streaming-availability.json'));
 assert.equal(availability.country,'JP');
 assert.deepEqual(availability.services,{});
 assert.equal(availability.generated_at,null);
-for(const filename of ['js/streaming-availability.js','js/streaming-bookmark-identity.js']){
+for(const filename of ['js/streaming-availability.js','js/streaming-bookmark-identity.js','js/streaming-personal-match.js']){
  new vm.Script(read(filename),{filename});
 }
 console.log('streaming compare invariant checks passed');

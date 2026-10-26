@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8da67665159e7cb053216b1cc768897ffff36121",
-  "verified_at": "2026-10-26T14:32:59.061Z",
-  "note": "PR510 combined latest main Best10/TELASA with nationwide savings. Exact source required Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build and other workflows passed. 47 prefectural examples,14 profiles,30 methods;15 unit tests/full local quality. This commit changes only the receipt; final head CI and canonical verification required."
+  "head_sha": "5ce8a9a265d2ebc3bd93e821eb9f0e03a6f672d8",
+  "verified_at": "2026-10-26T14:29:33.851Z",
+  "note": "PR512 integrated exact source all9 CI passed: autonomous40337774596,smoke40337774683,frontend40337774636,backend40337774674. Includes protected TELASA intake14films, JP provider metadata choices, lazy startup and selection/focus preservation; preserves verified Best10 main77c5837c. Chromium/WebKit provider and existing journeys pass. Receipt-only update; final-head CI before merge. Exhaustive provider catalogs and upstream500page ceiling remain unresolved."
 }

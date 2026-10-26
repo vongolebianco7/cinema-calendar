@@ -14,6 +14,7 @@ on:
       - "tests/cinelva-library-records.test.cjs"
       - "tests/cinelva-theme.test.cjs"
       - "tests/cinelva-discovery-offer-order.test.cjs"
+      - "tests/cinelva-provider-list-browser.cjs"
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
       - "tests/cinelva-calendar-record-entry-browser.cjs"
@@ -254,6 +255,8 @@ jobs:
       - name: Verify reported calendar, brand, review, sort and theater issues
         run: |
           result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1

@@ -38,7 +38,7 @@ async function freePort(){const server=net.createServer();await new Promise(r=>s
   await page.locator('#matchesDialog[open]').waitFor();
   assert.match(await page.locator('#matchesTitle').innerText(),/Netflix/);
   assert.equal(await page.locator('#matchesList .matchMovie').count(),1);
-  assert.match(await page.locator('#matchesList a').first().getAttribute('href'),/search.html\\?search=Fixture\\+A&id=101/);
+  assert.match(await page.locator('#matchesList a').first().getAttribute('href'), /search[.]html[?]search=Fixture[+]A&id=101/);
   await page.locator('#matchesClose').click();
   await page.selectOption('#fromService','Netflix スタンダード');
   await page.selectOption('#toService','U-NEXT');

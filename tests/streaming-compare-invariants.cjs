@@ -7,7 +7,7 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'streaming-compare.html'
 const must = (...fragments) => fragments.forEach(t => assert.ok(html.includes(t), 'missing: ' + t));
 must('月額料金（税込）', '広告の有無', '同時視聴可能台数', '作成可能プロフィール数',
   '家族共有', '登録可能端末数', 'ブックマークした映画', '好きな監督の映画',
-  '好きな映画賞の映画', 'サブスク乗り換え時の増減');
+  '好きな映画賞の映画', 'サブスク乗り換え時の増減', 'billingCycle', 'yearlyFees', 'Disney+', 'Lemino', 'Prime Video', 'WOWOW');
 must("const verified={", "const monthlyFees={'Netflix 広告つき':890",
   "document.getElementById('sourceDialog').showModal()", '確認中', '未集計');
 assert.match(html, /現在の配信カレンダーは配信開始情報/);

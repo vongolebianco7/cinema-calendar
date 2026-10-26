@@ -151,7 +151,7 @@ const sections=[
   {name:'あなたとの相性',rows:['ブックマークした映画','好きな監督の映画','好きな映画賞の映画','未鑑賞の名作','サブスク乗り換え時の増減']}
 ];
 const availability={};
-let awardEntries=null;
+let awardDataset=null;
 const BOOKMARK_KEY='cinelva-want-to-watch-v1';
 function bookmarkIds(){
  try{
@@ -173,7 +173,7 @@ function personalMatches(service,row){
  try{records=window.CinelvaLibraryRecords?.all?.()}catch{return null}
  if(!Array.isArray(records))return null;
  if(row==='好きな監督の映画')return matcher.directorMatches(validated,records);
- if(row==='好きな映画賞の映画')return awardEntries===null?null:matcher.awardMatches(validated,records,awardEntries);
+ if(row==='好きな映画賞の映画')return awardDataset===null?null:matcher.awardMatches(validated,records,awardDataset);
  return null;
 }
 async function loadAwards(){
@@ -182,7 +182,7 @@ async function loadAwards(){
   if(!response.ok)return;
   const data=await response.json();
   if(!Array.isArray(data.awards))return;
-  awardEntries=data.awards;draw();
+  awardDataset=data;draw();
  }catch{/* Unknown award data must never be shown as zero matches. */}
 }
 function showMatches(service,matches){

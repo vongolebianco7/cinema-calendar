@@ -17,3 +17,8 @@ const script = html.match(/<script>\s*([\s\S]*?)<\/script>/);
 assert.ok(script, 'inline application script missing');
 new (require('node:vm').Script)(script[1], {filename:'streaming-compare.html'});
 console.log('streaming compare invariant checks passed');
+
+// Local bookmark keys can be internal Cinelva IDs, not TMDB IDs.
+// Prevent accidental cross-title matches when joining with availability snapshots.
+assert.match(html, /item\\.tmdbId\\?\\?item\\.tmdb_id/);
+assert.doesNotMatch(html, /\\.map\\(\\(\\[id\\]\\)\\)=>Number\\(id\\)\\)/);

@@ -1368,7 +1368,7 @@
     "programmes": 14,
     "methods": 30,
     "scope": "Method-first savings without membership checkboxes:47 sourced prefectural theater examples,14 programme profiles,30 methods, fees/purchase steps, date/chain/prefecture links and independent review horizons. Non-exhaustive local coverage, ordinary adult2D only.",
-    "local_validation": "15/15 focused unit tests and full shared quality passed. Local Japanese-font Chromium root/prefix/light/dark320–1280px,fees,no checkboxes,prefecture/Miyazaki separation,date sharing,exclusions,retry/malformed/stale and delayed-engine national directory passed. Exact source all9 workflows passed including actual Chromium/WebKit journeys.",
+    "local_validation": "15/15 focused unit tests and full shared quality passed. Local Japanese-font Chromium root/prefix/light/dark320–1280px,fees,no checkboxes,prefecture/Miyazaki separation,date sharing,exclusions,retry/malformed/stale and delayed-engine national directory passed. Exact source all9 workflows passed including actual Chromium/WebKit journeys. Latest Best10/TELASA integration local full quality and15 units passed; exact combined source CI green. One unchanged agent redirect/theme WebKit timeout passed a bounded failed-job retry with no code/test weakening.",
     "production": {
       "state": "publication_pending",
       "previous_quota_error": "api-deployments-free-per-day402 recorded2026-10-26T02:20:02Z; no payment/limit bypass",
@@ -1377,59 +1377,69 @@
       "live_success_created_at": "2026-10-26T08:01:49.280Z",
       "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
     },
-    "next_action": "Wait combined source CI with latest My Best10 and TELASA changes, renew receipt-only proof, require final CI, merge PR510 and verify canonical release.",
+    "next_action": "Require receipt-only final head CI, merge PR510 after checking live main, verify canonical deployment and bytes/browser.",
     "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-26T14:16:51.141864+00:00",
+    "updated_at": "2026-10-26T14:32:57.208Z",
     "pull_request": 510,
-    "source_sha": "1d754af3d179aaaf191eb4defb8f0fd1c60e0167",
+    "source_sha": "8da67665159e7cb053216b1cc768897ffff36121",
     "source_ci": [
       {
-        "id": 40293297766,
-        "name": "CINELVA smoke tests",
-        "conclusion": "success"
-      },
-      {
-        "id": 40293297688,
-        "name": "Check brand identity",
-        "conclusion": "success"
-      },
-      {
-        "id": 40293298079,
-        "name": "Reproducible backend build",
-        "conclusion": "success"
-      },
-      {
-        "id": 40293297836,
-        "name": "CINELVA mobile layout smoke test",
-        "conclusion": "success"
-      },
-      {
-        "id": 40293297979,
+        "id": 40338298288,
         "name": "CINELVA isolated Pages stage",
         "conclusion": "success"
       },
       {
-        "id": 40293297707,
-        "name": "Autonomous quality gate",
+        "id": 40338298207,
+        "name": "Check brand identity",
         "conclusion": "success"
       },
       {
-        "id": 40293297803,
-        "name": "CINELVA backup safety",
+        "id": 40338298242,
+        "name": "CINELVA smoke tests",
         "conclusion": "success"
       },
       {
-        "id": 40293297969,
+        "id": 40338298390,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338298227,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338298226,
         "name": "Cinemap completeness scorecard",
         "conclusion": "success"
       },
       {
-        "id": 40293297786,
+        "id": 40338298315,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338298201,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338298155,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338283975,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40338283752,
         "name": "Validate frontend",
         "conclusion": "success"
       }
     ],
-    "integrated_main_sha": "77c5837c"
+    "integrated_main_sha": "77c5837cda1d5fcf87fc2a2062647fa66b164715"
   }
 }

@@ -1377,69 +1377,69 @@
       "live_success_created_at": "2026-10-26T08:01:49.280Z",
       "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
     },
-    "next_action": "Require receipt-only final head CI, merge PR510 after checking live main, verify canonical deployment and bytes/browser.",
+    "next_action": "Wait final receipt head CI, merge PR510 after rechecking main source, then verify actual canonical deployment/bytes/browser. Latest provider,Best10,TELASA changes preserved.",
     "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-26T14:32:57.208Z",
+    "updated_at": "2026-10-26T15:01:46.913Z",
     "pull_request": 510,
-    "source_sha": "8da67665159e7cb053216b1cc768897ffff36121",
+    "source_sha": "539b544b3db7be8d9b1a628b8dea2e756533daf6",
     "source_ci": [
       {
-        "id": 40338298288,
-        "name": "CINELVA isolated Pages stage",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298207,
-        "name": "Check brand identity",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298242,
+        "id": 40342952277,
         "name": "CINELVA smoke tests",
         "conclusion": "success"
       },
       {
-        "id": 40338298390,
-        "name": "CINELVA mobile layout smoke test",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298227,
-        "name": "Reproducible backend build",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298226,
-        "name": "Cinemap completeness scorecard",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298315,
-        "name": "CINELVA backup safety",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298201,
-        "name": "Autonomous quality gate",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338298155,
-        "name": "Validate frontend",
-        "conclusion": "success"
-      },
-      {
-        "id": 40338283975,
+        "id": 40342952259,
         "name": "Check brand identity",
         "conclusion": "success"
       },
       {
-        "id": 40338283752,
+        "id": 40342952296,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952269,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952292,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952246,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342953121,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952316,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342952332,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342937319,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40342936975,
         "name": "Validate frontend",
         "conclusion": "success"
       }
     ],
-    "integrated_main_sha": "77c5837cda1d5fcf87fc2a2062647fa66b164715"
+    "integrated_main_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812"
   }
 }

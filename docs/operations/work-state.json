@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T14:48:35.359466+00:00",
+  "updated_at": "2026-10-26T21:07:10.317Z",
   "status": "blocked",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "branch": "docs/provider-release-verified-20261026",
-  "head_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "pull_request": 512,
+  "base_sha": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
+  "branch": "fix/fod-announced-film-omissions-20261027",
+  "head_sha": "985f17daf29b269ab9c3878f94f2898fa474d70c",
+  "pull_request": 517,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -1388,7 +1388,26 @@
       "Upstream TMDB500-page query limit remains;use production-year filters for larger catalogs",
       "Dated feeds remain partial;DMM exact premiere dates and TELASAOctober first-half not confirmed"
     ],
-    "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
+    "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live.",
+    "premiere_followup": {
+      "status": "pr_created",
+      "pull_request": 517,
+      "source_sha": "703226cc6ef4c61d44535ac659180ad0e0519fe5",
+      "receipt_sha": "985f17daf29b269ab9c3878f94f2898fa474d70c",
+      "integrated_main": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
+      "source_ci": "All10 passed including quality40398751385,smoke40398751391,frontend40398751449,backend40398751317",
+      "final_ci": "All11 workflow runs queued at last observation; no merge before final required CI",
+      "scope": "FOD7 and NetflixBlackShowman1 added; streaming278/calendar1205. Existing270/1197 rows and order preserved; root/prefix no-ID detail URL fixed.",
+      "validation": "Full local quality382Node/8focused pass, undefinedID2RED→4GREEN. Reviewer FODdates/preservation/collisions/linkfix checked. Netflixprimary agency explicitly10/12, identity1369010/2025/Tanaka,posterHEAD200.",
+      "publication": "Notpublished. Vercel api-deployments-free-per-day reported2026-10-26T20:47:24Z. Existing serving3f9711d4 retained; live270/1197 and no BlackShowmanNetflix. No manual retry/billing/origin changes.",
+      "remaining": [
+        "Final receipt CI and merge pending",
+        "Vercel publication quota",
+        "Seven FOD identities/posters unresolved",
+        "No authoritative complete service catalogs;500-page/partial dated-feed limits remain"
+      ],
+      "next_action": "Fetch current main, PR517 head/checks and deployments. Require successful final requiredCI985f17da; integrate newer executable main and renew proof if necessary. Merge only green. Publish verified source after quota permits, then verify actual278/1205,new no-ID title-search links and BlackShowman1369010. No zero-omission claim."
+    }
   },
   "nationwide_cinema_savings": {
     "status": "production_verified",

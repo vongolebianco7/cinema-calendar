@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-10-26T21:06:18.451238+00:00",
+  "status": "pr_created",
+  "pull_request": 517,
+  "source_sha": "703226cc6ef4c61d44535ac659180ad0e0519fe5",
+  "receipt_sha": "985f17daf29b269ab9c3878f94f2898fa474d70c",
+  "integrated_main": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
+  "source_ci": "All10 workflows passed; requiredquality40398751385,smoke40398751391,frontend40398751449,backend40398751317",
+  "local_validation": "Full shared quality382Node tests,8focused tests; no-ID links red-to-green. All prior270/1197 rows preserved.",
+  "scope": {
+    "added_fod_films": 7,
+    "added_netflix_films": 1,
+    "streaming_rows": 278,
+    "calendar_rows": 1205,
+    "netflix_total": 10,
+    "netflix_october": 6,
+    "fod_total": 36
+  },
+  "remaining": [
+    "FOD7identities/posters unresolved",
+    "No authoritative complete service catalogs to certify zero omissions",
+    "TMDB500-page limit and partial dated feeds"
+  ],
+  "publication": {
+    "status": "blocked",
+    "reason": "Vercel api-deployments-free-per-day preview error2026-10-26T20:47:24Z; no manual retry",
+    "serving_sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8",
+    "frontend": "dpl_3sY7uwYukHDBHfcWPSgKg8UidB8x",
+    "backend": "dpl_4sLKKnXaRg33tJvNXHXqHifGj4RW",
+    "live_streaming_rows": 270,
+    "live_calendar_rows": 1197,
+    "black_showman_netflix_live": false
+  },
+  "next_action": "Wait final receipt985f17da required CI, merge only green while preserving latestmain; publication after quota permits without paid plans or origin changes. Then verify live278/1205 and new detail links. Never claim zero omissions."
+}

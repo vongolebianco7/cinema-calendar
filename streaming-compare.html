@@ -65,6 +65,7 @@ h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--
 <dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p></dialog>
 <dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
 <script src="js/streaming-availability.js"></script>
+<script src="js/cinelva-library-records.js"></script>
 <script>
 (function(){
 'use strict';
@@ -162,7 +163,14 @@ function showMatches(service,matches){
   if(typeof movie.poster==='string'&&/^https:\/\/(?:image\\.tmdb\\.org)\//.test(movie.poster)){
    const img=document.createElement('img');img.className='matchPoster';img.src=movie.poster;img.alt=movie.title+'のポスター';img.loading='lazy';img.referrerPolicy='no-referrer';card.appendChild(img);
   }else{const fallback=cell('div','ポスター未取得','matchPoster matchFallback');card.appendChild(fallback)}
-  card.appendChild(cell('strong',movie.title));grid.appendChild(card);
+  card.appendChild(cell('strong',movie.title));
+  try{
+   const records=window.CinelvaLibraryRecords?.all?.();
+   const record=Array.isArray(records)?records.find(item=>Number(item.tmdbId??item.tmdb_id??item.id)===Number(movie.tmdb_id)):null;
+   const value=record&&Number.isFinite(Number(record.rating))&&Number(record.rating)>0?Number(record.rating).toFixed(1):'未鑑賞';
+   card.appendChild(cell('small','MY評価：'+value));
+  }catch{card.appendChild(cell('small','MY評価：未取得'))}
+  grid.appendChild(card);
  });
  document.getElementById('matchesDialog').showModal();
 }

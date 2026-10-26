@@ -32,7 +32,7 @@ Consumes: Task1 engine/data. Produces: accessible date/area/evening/benefit cont
 - [x] Add browser assertions for controls, persistence, no overflow, root/prefix/light/dark and failure/retry.
 - [x] Implement scoped section and calendar link; wire browser test into existing validation.
 - [x] Run node tests, browser Chromium/WebKit, shared quality; review diff and screenshots.
-- [ ] Open PR, wait exact-source CI, receipt-only commit, final-head CI, merge and verify publication if available.
+- [x] Open PR, wait exact-source CI, receipt-only commit, final-head CI, merge and verify publication if available.
 
 ## Execution ledger
 - Isolated fresh clone/feature branch; existing directory/schedule baseline 8/8 passed.
@@ -41,3 +41,5 @@ Consumes: Task1 engine/data. Produces: accessible date/area/evening/benefit cont
 - Task1 complete:8/8 unit tests green. February2028 fixture corrected:28th is independently a Monday tariff, not card day.
 - Task2 local complete: shared gate and Chromium journeys pass. Independent reviewer found no critical/important issues; all3 minor findings addressed with browser regressions for320px touch targets and malformed-data recovery.
 - Environment: fresh isolated checkout, original main kept on origin/main. Local Playwright browser package lacks binaries; provided /tmp/chromium successfully used through optional test-only executable override. WebKit runs in existing CI.
+
+- Release complete2026-10-26: PR500 source65289b32 all10 and receipt83fe11d2 all11 workflows passed; merged15e214bb. Canonical Vercel deployment dpl_EZ44hynZewki3fPdAAk5DwQ7podg READY. Nine canonical files HTTP200/byte-identical; live cloud Chromium shows six venue cards and current prices. CI Japanese WebKit light/Chromium dark screenshots visually inspected. Ordinary adult2D tariff comparison only; no physical-device or live-screening availability claim.

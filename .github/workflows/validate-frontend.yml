@@ -128,6 +128,8 @@ jobs:
           python scripts/check_release_data.py
           node --test tests/cinelva-insights.test.cjs tests/cinelva-library-records.test.cjs tests/cinelva-storage.test.cjs tests/cinelva-backup.test.cjs tests/cinelva-my-page-contract.test.cjs tests/cinelva-my-page-record-entry.test.cjs tests/cinelva-my-page-bookmark-list.test.cjs tests/cinelva-my-page-presentation.test.cjs tests/cinelva-quick-rate.test.cjs
           node --test tests/cinelva-route-manifest.test.cjs
+          node tests/streaming-compare-invariants.cjs
+          node --test tests/streaming-availability.test.cjs tests/streaming-bookmark-identity.test.cjs
       - name: Check My Cinelva PNG export
         run: python tests/test_my_cinemap_three_column_export.py
       - name: Generate the same offline director projection used by publication

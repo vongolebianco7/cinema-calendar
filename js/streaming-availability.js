@@ -16,6 +16,16 @@
     if (!snapshot.generated_at || !Number.isFinite(Date.parse(snapshot.generated_at))) return {ok:false,reason:'missing-update-time'};
     const stamp = Date.parse(snapshot.generated_at);
     if (stamp > now + 5*60*1000 || now - stamp > MAX_AGE_MS) return {ok:false,reason:'stale'};
+    // The browser must reject feeds without recorded usage rights and independent
+    // full-catalog verification, even if a caller bypassed the import command.
+    if (!snapshot.license || snapshot.license.public_display_authorized !== true ||
+        typeof snapshot.license.provider !== 'string' || !snapshot.license.provider.trim() ||
+        typeof snapshot.license.agreement_reference !== 'string' || !snapshot.license.agreement_reference.trim())
+      return {ok:false,reason:'unlicensed-feed'};
+    if (!snapshot.coverage_audit || snapshot.coverage_audit.all_supported_services_verified !== true ||
+        typeof snapshot.coverage_audit.auditor !== 'string' || !snapshot.coverage_audit.auditor.trim() ||
+        typeof snapshot.coverage_audit.method !== 'string' || !snapshot.coverage_audit.method.trim())
+      return {ok:false,reason:'unaudited-coverage'};
     const group = snapshot.services && snapshot.services[service];
     if (!group || group.coverage !== 'complete' || group.entitlement !== 'subscription') return {ok:false,reason:'unverified-coverage'};
     if (!group.source || !Array.isArray(group.source.urls) || !group.source.urls.length ||

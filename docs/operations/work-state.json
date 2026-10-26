@@ -1361,17 +1361,74 @@
     "retry_note": "Provider-advised waiting period, not independently confirmed reset. No repeated deploy attempts, paid changes or quota evasion."
   },
   "nationwide_cinema_savings": {
-    "status": "in_progress",
+    "status": "ci_passed",
     "branch": "feat/nationwide-cinema-savings-20261026",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
     "programmes": 14,
     "methods": 30,
-    "scope": "Replace benefit checkboxes/six-venue UI with method-first national programme guide, steps/fees/exclusions and national directory links. No all-cinema or universal-minimum claim.",
-    "local_validation": "15/15 unit tests and full shared quality verification; Chromium root/prefix/light/dark320–1280px,no checkbox prerequisite,fees,date/chain/prefecture,SMT exclusion,Central Miyazaki cannot inherit AEON discount,retry/stale/malformed and delayed-engine national directory link passed. Integration CI pending.",
-    "production": "Existing provider quota denial documented in search-release-quota-20261026.json; advised retry after2026-10-27T02:20:02Z. No deployment attempt or paid workaround.",
-    "next_action": "Run exact-source CI, renew proof in receipt-only commit, final CI and merge; preserve production quota blocker.",
+    "scope": "Method-first savings without membership checkboxes:47 sourced prefectural theater examples,14 programme profiles,30 methods, fees/purchase steps, date/chain/prefecture links and independent review horizons. Non-exhaustive local coverage, ordinary adult2D only.",
+    "local_validation": "15/15 focused unit tests and full shared quality passed. Local Japanese-font Chromium root/prefix/light/dark320–1280px,fees,no checkboxes,prefecture/Miyazaki separation,date sharing,exclusions,retry/malformed/stale and delayed-engine national directory passed. Exact source all9 workflows passed including actual Chromium/WebKit journeys.",
+    "production": {
+      "state": "publication_pending",
+      "previous_quota_error": "api-deployments-free-per-day402 recorded2026-10-26T02:20:02Z; no payment/limit bypass",
+      "live_serving_deployment": "dpl_2X9LEryKoFdwEmxfABUGDG9WVasy",
+      "live_serving_sha": "85ea1e5df0b21dc5e10cd275a0d2ce1e52a70b75",
+      "live_success_created_at": "2026-10-26T08:01:49.280Z",
+      "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
+    },
+    "next_action": "Require final receipt-head CI; re-evaluate latest main source, merge PR510 within approved scope, make one automatic frontend release and verify canonical hashes/browser. Backend changes are outside this feature.",
     "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
-    "prefectural_examples": 47
+    "prefectural_examples": 47,
+    "updated_at": "2026-10-26T08:53:28.476Z",
+    "pull_request": 510,
+    "source_sha": "1d754af3d179aaaf191eb4defb8f0fd1c60e0167",
+    "source_ci": [
+      {
+        "id": 40293297766,
+        "name": "CINELVA smoke tests",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297688,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293298079,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297836,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297979,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297707,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297803,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297969,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40293297786,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      }
+    ]
   }
 }

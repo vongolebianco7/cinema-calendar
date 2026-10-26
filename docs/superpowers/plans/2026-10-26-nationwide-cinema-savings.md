@@ -29,6 +29,9 @@ Consumes guide(); date/chain controls, two clear price categories, applicable me
 - [x] Replace rejected checkbox interface and connect national directory rows.
 - [x] Update meaningful browser journeys: root/prefix,light/dark,320/390/768/1280px,no selection prerequisite,fee visibility,date/chain/exclusion,retry and stale prices.
 - [x] Shared gate and independent focused review; fix findings.
-- [ ] Exact-source CI, receipt-only proof, final CI and merge. Verify deployment only after known provider quota wait; otherwise record concrete publication blocker.
+- [x] Exact-source CI and receipt-only proof preparation.
+- [ ] Final receipt-head CI, merge and one verified publication attempt after checking live availability; record any concrete publication blocker.
 
 - Coverage completion:14 programmes/30 methods plus47 manually sourced prefectural examples; no all-cinema claim. Added region/chain/date deep-link tests, all47 Wednesday usable-guide assertions and stale-region association suppression.
+
+- Source1d754af3: all9 exact-head workflows pass, including frontend40293297786,autonomous40293297707,smoke40293297766,backend40293298079. Fifteen unit tests/local shared quality and Japanese-font screenshots pass. Live canonical READY85ea1e5 created08:01UTC after earlier02:20 quota error provides new availability evidence; do not treat old wait estimate as a current block. Final-head CI and publication verification remain required.

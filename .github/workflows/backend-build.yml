@@ -9,6 +9,7 @@ on:
       - '!data/awards.json'
       - '!data/director_name_readings.json'
       - '!data/directors-mobile.json'
+      - '!data/director-feature-index.json'
       - '!data/directors.json'
       - '!data/events.json'
       - '!data/movies.json'

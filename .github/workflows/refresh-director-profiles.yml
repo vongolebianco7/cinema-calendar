@@ -57,7 +57,9 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/enrich_directors.py --limit 800 --discover-names --verify-person 190 --report-path "$RUNNER_TEMP/director-enrichment.json"
       - name: Build the mobile projection from the same refreshed source
-        run: python scripts/build_director_mobile.py
+        run: |
+          python scripts/build_director_mobile.py
+          node scripts/build-director-feature-index.cjs
       - name: Preserve completeness and missing-source report
         if: always()
         uses: actions/upload-artifact@v4
@@ -104,9 +106,10 @@ jobs:
           PY
             python scripts/enrich_directors.py --normalize-only
             python scripts/build_director_mobile.py
+            node scripts/build-director-feature-index.cjs
             python -m unittest tests.test_director_enrichment
             node scripts/verify-production-release.cjs --require
-            git add data/directors.json data/directors-mobile.json
+            git add data/directors.json data/directors-mobile.json data/director-feature-index.json
             if git diff --cached --quiet; then
               echo 'Director snapshot already up to date'
               exit 0

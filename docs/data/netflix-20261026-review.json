@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-26T01:32:15.299605+00:00",
+  "method": "Manual editorial comparison of official Japanese Netflix dates and official film pages; approved TMDB metadata confirms unique IDs and artwork. No automated HTML collection enabled.",
+  "added": [
+    {
+      "title": "シューマッハ‘94 －伝説の幕開け－",
+      "date": "2026-10-02",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "netflix_title_url": "https://www.netflix.com/jp/title/81916859",
+      "tmdb_id": 1752355,
+      "identity_source": "https://www.themoviedb.org/movie/1752355",
+      "runtime": 105,
+      "poster": "https://image.tmdb.org/t/p/w500/o09Z2TPQLkLg2zE6U9PUF17RmGf.jpg",
+      "classification": "Feature or documentary film verified on Netflix; series excluded"
+    },
+    {
+      "title": "レス・オブ・ア・ストレンジャー",
+      "date": "2026-10-07",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "netflix_title_url": "https://www.netflix.com/jp/title/81744789",
+      "tmdb_id": 1620080,
+      "identity_source": "https://www.themoviedb.org/movie/1620080",
+      "runtime": 120,
+      "poster": "https://image.tmdb.org/t/p/w500/5lxcAE2DLtK8bFfCXOV9TM13RDq.jpg",
+      "classification": "Feature or documentary film verified on Netflix; series excluded"
+    },
+    {
+      "title": "これぞマーティン・マル",
+      "date": "2026-10-07",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "netflix_title_url": "https://www.netflix.com/jp/title/81922437",
+      "tmdb_id": 1756138,
+      "identity_source": "https://www.themoviedb.org/movie/1756138",
+      "runtime": 94,
+      "poster": "https://image.tmdb.org/t/p/w500/gQjXr8XxVpskubxVACnRLHx5xIS.jpg",
+      "classification": "Feature or documentary film verified on Netflix; series excluded"
+    },
+    {
+      "title": "もしもの愛",
+      "date": "2026-11-06",
+      "source_url": "https://about.netflix.com/en/news/possible-love-official-trailer",
+      "netflix_title_url": null,
+      "tmdb_id": 1483525,
+      "identity_source": "https://www.themoviedb.org/movie/1483525",
+      "runtime": 165,
+      "poster": "https://image.tmdb.org/t/p/w500/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
+      "classification": "Feature or documentary film verified on Netflix; series excluded"
+    }
+  ],
+  "excluded_series": [
+    "#Love",
+    "クローズド・サークル",
+    "BELOW/ビロウ"
+  ],
+  "coverage": "Partial dated film-premiere feed, not an exhaustive Netflix library. US-only licensed lineups were not treated as Japan premiere dates.",
+  "netflix_rows": 9,
+  "netflix_october_rows": 5,
+  "poster_http": [
+    [
+      1752355,
+      200
+    ],
+    [
+      1620080,
+      200
+    ],
+    [
+      1756138,
+      200
+    ],
+    [
+      1483525,
+      200
+    ]
+  ]
+}

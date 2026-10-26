@@ -1332,5 +1332,15 @@
       "Coverage is intentionally six venues and selected ordinary-adult2D tariffs; student/senior/special-format tickets and actual screening availability remain outside this feature."
     ],
     "next_action": "Approved cinema discount comparison scope complete and production verified. Preserve free/manual provenance policy and maintain tariff freshness."
+  },
+  "search_quality_followup": {
+    "status": "in_progress",
+    "pull_request": 503,
+    "branch": "fix/search-quality-20261026",
+    "integrated_main": "50747ea369580613cc7ba5ffd032488eae79c8a0",
+    "prior_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
+    "prior_final": "a7130416794562287c22b8f3c653eb1d88d65221",
+    "evidence": "Both prior source/final all10 CI passed; subsequent cinema-discount main required integrated source. Full integrated local gate passes; Netflix4 added with official dates, exact TMDB identities and4HTTP200 posters.",
+    "next_action": "Update PR503 with a real merge commit including main15e parent; exact source CI, receipt-only final CI, merge and canonical search/calendar verification."
   }
 }

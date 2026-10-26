@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "65289b322aaf38318f88faedc67b6801d150783e",
-  "verified_at": "2026-10-26T01:10:39.668Z",
-  "note": "PR500 integrated with main e42a8e0: all10 exact-source pull-request workflows succeeded, including autonomous40251745090,smoke40251745091,frontend40251745087,backend40251745099. Cinema discount comparisons passed Chromium/WebKit, root/prefix, light/dark,320–1280px, eligibility, persistence, evening, retry and stale prices. Latest My Best10/search changes preserved. Final receipt-head CI and canonical publication verification required."
+  "head_sha": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
+  "verified_at": "2026-10-26T01:55:00.028Z",
+  "note": "PR503 integrated source all9 workflows succeeded. Required autonomous40255376551,smoke40255376582,frontend40255376606,backend40255376637 passed. Preserves verified cinema-discount and Best10 features; shared director feature-ID policy, progressive photo search, punctuation-free matching and mobile close pass Chromium/WebKit. Adds4 officially dated Netflix films with verified identities/artwork, preserves252 prior entries. Receipt-only update; require final-head CI and canonical verification."
 }

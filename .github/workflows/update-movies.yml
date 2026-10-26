@@ -37,6 +37,7 @@ jobs:
         run: |
           python scripts/enrich_directors.py --normalize-only
           python scripts/build_director_mobile.py
+          node scripts/build-director-feature-index.cjs
       - name: Classify confirmed revival screenings
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
@@ -112,15 +113,16 @@ jobs:
           # update_movies only discovers absent IDs; existing profiles belong to
           # the latest source, including any concurrent director refresh.
           cp data/directors.json "$RUNNER_TEMP/movie-directors.json"
-          git restore --staged --worktree data/directors.json data/directors-mobile.json
+          git restore --staged --worktree data/directors.json data/directors-mobile.json data/director-feature-index.json
           git add data/*.json data/rankings/*.json
           git diff --cached --quiet || git commit -m "Update movie data"
           git pull --rebase -X theirs origin main
           python scripts/enrich_directors.py --normalize-only --merge-additions "$RUNNER_TEMP/movie-directors.json"
           python scripts/build_director_mobile.py
+          node scripts/build-director-feature-index.cjs
           python scripts/quality_gate.py
           node scripts/verify-production-release.cjs --require
-          git add data/directors.json data/directors-mobile.json
+          git add data/directors.json data/directors-mobile.json data/director-feature-index.json
           git diff --cached --quiet || git commit -m "Preserve new movie directors in the latest mobile catalog"
           # A later concurrent push is rejected normally; never force-push data.
           git push origin main

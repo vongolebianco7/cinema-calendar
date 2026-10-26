@@ -828,38 +828,7 @@
     }
     return directorAliases.get(normalizeName(raw))||directorJapaneseNames.get(raw.toLowerCase())||raw;
   };
-  const isDirectorCredit = (work, directorName) => {
-    if (!work || typeof work !== 'object') return false;
-    const title=String(work.title||work.name||work.original_title||'').trim();
-    const original=String(work.original_title||'').trim();
-    const titleText=(title+' '+original).toLowerCase();
-    // These are standalone feature-film directorographies, not all person credits.
-    if (/cinema\s*16\b|short\s*films?|shorts?\s*collection|amazing\s*stories:\s*the\s*movie|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス/i.test(titleText)) return false;
-    const genres=[...(Array.isArray(work.genres)?work.genres:[]),...(Array.isArray(work.genre_names)?work.genre_names:[])].map(g=>typeof g==='string'?g:g?.name||'').join(' ').toLowerCase();
-    if (/\bshort\b|短編|短篇/.test(genres)) return false;
-    if ([work.is_short,work.isShort,work.short_film,work.shortFilm].some(x=>x===true)) return false;
-    const duration=Number(work.runtime??work.duration??work.length_minutes??work.runtime_minutes);
-    if (Number.isFinite(duration)&&duration>0&&duration<30) return false;
-    // A TMDB directing credit alone does not prove feature-film length:
-    // exclude runtime-unverified catalog credits until movie detail is fetched.
-    // Saved viewing records retain their existing handling.
-    // TMDB person movie credits do not contain runtime. Unknown runtime must not discard a verified directing credit.
-    const type=String(work.type||work.media_type||work.format||'').toLowerCase();
-    if (/\bshort\b|短編|短篇|\btv\b|\btv_series\b|\bepisode\b/.test(type)) return false;
-    if (work.cast===true||work.actor===true||work.self===true||work.is_director===false||work.isDirector===false) return false;
-    const role=String(work.job||work.role||work.credit_type||work.creditType||'').trim().toLowerCase();
-    if (role && !['director','監督'].includes(role)) return false;
-    const department=String(work.department||'').trim().toLowerCase();
-    if (department && !['directing','監督'].includes(department)) return false;
-    const named=String(work.director||work.director_name||work.directorName||'').trim();
-    // Use the same kana-equivalence rules as the director picker.
-    // Without this, sourced works can disappear for ヴ/ブ or イィ spellings.
-    const directorSpellingKey=value=>normalizeName(directorJapanese(value))
-      .replace(/ヴ/g,'ブ').replace(/ィ/g,'イ').replace(/ェ/g,'エ').replace(/ー/g,'');
-    if (named && directorSpellingKey(named)!==directorSpellingKey(directorName)) return false;
-    // Missing credits are not evidence of direction; require an explicit match.
-    return role==='director'||role==='監督'||work.is_director===true||work.isDirector===true||Boolean(named);
-  };
+  const isDirectorCredit = (work,directorName) => globalThis.CinelvaGlobalSearch.isDirectorCredit(work,directorName,directorJapanese);
   // Milestones use distinct watched feature films, not review edits or ratings.
   // A complete collection is only awarded when the full filmography is known.
   const directorMedalHistory=new Map();

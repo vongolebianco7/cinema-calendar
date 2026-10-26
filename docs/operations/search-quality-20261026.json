@@ -1,5 +1,5 @@
 {
-  "status": "in_progress",
+  "status": "blocked",
   "base_sha": "8b7697c7840e0737be6dbcf5db0ae06036d1b369",
   "branch": "fix/search-quality-20261026",
   "scope": [
@@ -26,9 +26,16 @@
     "added": 4,
     "review": "docs/data/netflix-20261026-review.json"
   },
-  "next_action": "Exact source CI,receipt-only CI,merge,canonical API/browser verification",
+  "next_action": "After advised quota wait, fetch live main/CI/receipt and current deployments. Preserve latest approved changes; deploy only verified current main once to existing frontend project and backend if needed, without payment/auth/security/origin changes. Stop on402. Verify canonical file hashes, dropdown photo/tap, Nolan13, actor42+,service3 columns and close,calendar Netflix9/October5. Do not make production review record writes.",
   "integrated_main": "15e214bbdd96248ffbbb487e2707164ec761debb",
   "prior_verified_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
   "prior_verified_final_head": "a7130416794562287c22b8f3c653eb1d88d65221",
-  "integration_reason": "Concurrent cinema discount feature changed executable main during final CI; preserve both features and obtain exact integrated verification."
+  "integration_reason": "Concurrent cinema discount feature changed executable main during final CI; preserve both features and obtain exact integrated verification.",
+  "feature_merge": "101162ed7c9bdcd1d91c33701d05be85c53bd08f",
+  "projection_pr": 506,
+  "projection_merge": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
+  "verified_source": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
+  "final_receipt_head": "098d4b88b8e216f357e3fdde1c334c13a187b411",
+  "blocker": "Vercel402 api-deployments-free-per-day. Frontend remains15e214bb; canonical new UI not published. Backend101162ed query normalization is live; unified Netflix9 calendar snapshot remains undeployed.",
+  "resume_record": "docs/operations/search-release-quota-20261026.json"
 }

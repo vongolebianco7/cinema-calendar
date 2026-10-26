@@ -1,5 +1,5 @@
 {
-  "status": "ci_pending",
+  "status": "blocked",
   "source_sha": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
   "feature_pr": 503,
   "feature_merge": "101162ed7c9bdcd1d91c33701d05be85c53bd08f",
@@ -14,5 +14,9 @@
     1483525
   ],
   "validation": "Full shared quality gate and release schemas passed. All1179 prior calendar entries retained. Four official Netflix premiere rows projected from reviewed streaming snapshot to calendar/search/API snapshot.",
-  "next_action": "Data-only CI, merge, confirm production deployments and canonical Netflix9/calendar/search."
+  "next_action": "Data-only CI, merge, confirm production deployments and canonical Netflix9/calendar/search.",
+  "merge_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
+  "ci": "All4 workflows passed",
+  "blocker": "Deployment free quota: source merged, current canonical calendar stillNetflix5/October2; target9/5 awaiting backend publication.",
+  "resume_record": "docs/operations/search-release-quota-20261026.json"
 }

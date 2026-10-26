@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T01:24:28.205Z",
-  "status": "pr_created",
+  "updated_at": "2026-10-26T02:28:37.614800+00:00",
+  "status": "blocked",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "9d4f486118a2ef7edc4269e4b0b10523e3e3e089",
-  "branch": "feat/compact-watch-services-20261025",
-  "head_sha": "73efb7342fc514d698f7aa6e27242fad176ec753",
+  "base_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
+  "branch": "docs/search-release-quota-20261026",
+  "head_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
   "pull_request": 499,
   "work_items": [
     {
@@ -1334,13 +1334,30 @@
     "next_action": "Approved cinema discount comparison scope complete and production verified. Preserve free/manual provenance policy and maintain tariff freshness."
   },
   "search_quality_followup": {
-    "status": "in_progress",
+    "status": "blocked",
     "pull_request": 503,
     "branch": "fix/search-quality-20261026",
     "integrated_main": "50747ea369580613cc7ba5ffd032488eae79c8a0",
     "prior_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
     "prior_final": "a7130416794562287c22b8f3c653eb1d88d65221",
     "evidence": "Both prior source/final all10 CI passed; subsequent cinema-discount main required integrated source. Full integrated local gate passes; Netflix4 added with official dates, exact TMDB identities and4HTTP200 posters.",
-    "next_action": "Update PR503 with a real merge commit including main15e parent; exact source CI, receipt-only final CI, merge and canonical search/calendar verification."
+    "next_action": "After advised quota wait, fetch live main/CI/receipt and current deployments. Preserve latest approved changes; deploy only verified current main once to existing frontend project and backend if needed, without payment/auth/security/origin changes. Stop on402. Verify canonical file hashes, dropdown photo/tap, Nolan13, actor42+,service3 columns and close,calendar Netflix9/October5. Do not make production review record writes.",
+    "feature_merge": "101162ed7c9bdcd1d91c33701d05be85c53bd08f",
+    "projection_merge": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
+    "verified_source": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
+    "final_head": "098d4b88b8e216f357e3fdde1c334c13a187b411",
+    "resume_record": "docs/operations/search-release-quota-20261026.json"
+  },
+  "publication_blocker": {
+    "attempted_sha": "496e44d159ba04f85cde44999f5bf4e1947fde1c",
+    "team_id": "team_dQvCdXuckHgqGgutn9yXfVTV",
+    "project_id": "prj_BPmpSaJmKfVDQpVWOFKaoXHS1eeD",
+    "target": "production",
+    "http_status": 402,
+    "code": "api-deployments-free-per-day",
+    "message": "Resource is limited - try again in24hours (more than100)",
+    "retry_after_seconds": 86400,
+    "provider_advised_retry_at_utc": "2026-10-27T02:20:02Z",
+    "retry_note": "Provider-advised waiting period, not independently confirmed reset. No repeated deploy attempts, paid changes or quota evasion."
   }
 }

@@ -311,7 +311,7 @@ function attachInlineScore(button,movie) {
   try{
    const data=getBookmarks(),key=String(id),marked=!!data[key];
    if(marked)delete data[key];
-   else data[key]={id:key,title:movie.title||movie.name||'作品',poster:root.CinelvaMovieIdentity?.posterFor(movie)||movie.poster||movie.posterUrl||movie.poster_path||'',year:movie.year||String(movie.release_date||'').slice(0,4),savedAt:new Date().toISOString()};
+   else data[key]={id:key,...(Number.isSafeInteger(Number(movie.tmdbId??movie.tmdb_id))&&Number(movie.tmdbId??movie.tmdb_id)>0?{tmdbId:Number(movie.tmdbId??movie.tmdb_id)}:{}),title:movie.title||movie.name||'作品',poster:root.CinelvaMovieIdentity?.posterFor(movie)||movie.poster||movie.posterUrl||movie.poster_path||'',year:movie.year||String(movie.release_date||'').slice(0,4),savedAt:new Date().toISOString()};
    localStorage.setItem(bookmarkKey,JSON.stringify(data));
    syncBookmark();
    showBookmarkToast(marked?'ブックマークを解除しました':'ブックマークしました');

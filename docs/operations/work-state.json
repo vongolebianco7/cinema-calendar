@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T01:35:14.285534+00:00",
+  "updated_at": "2026-10-26T01:24:28.205Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
@@ -1198,28 +1198,146 @@
     "next_action": "Wait exact combined-source CI, renew receipt in proof-only commit, require final CI, merge499 and verify canonical frontend/backend."
   },
   "cinema_discount_comparison": {
-    "status": "integration_validation_pending",
+    "status": "production_verified",
     "branch": "feat/cinema-discount-comparison-20261025",
-    "base_sha": "9d4f486",
+    "pull_request": 500,
+    "source_sha": "65289b322aaf38318f88faedc67b6801d150783e",
+    "receipt_sha": "83fe11d2ae6997c3562c952798bf171cade5b400",
+    "merge_sha": "15e214bbdd96248ffbbb487e2707164ec761debb",
     "venues": 6,
     "source_review_date": "2026-10-25",
-    "scope": "Ordinary adult2D, Yokohama/Kawasaki, dates/area/evening/existing benefits; manually reviewed static tariffs only. No showtime availability claimed.",
-    "tests": "New unit8/8 passed; full shared quality gate passed; local Chromium root/prefix light/dark320–1280px,44px calendar targets,eligibility,persistence,evening,retry,malformed data and expired prices passed. WebKit and exact-head GitHub CI pending.",
-    "review": "Independent focused review no critical/important findings. Minor neutral stale wording,320px targets and malformed-data retry corrected; relevant browser regressions red-to-green. Local Chromium lacks Japanese fonts; screenshot layout inspected but final Japanese visual evidence pending CI.",
-    "remaining": [
-      "Source-head required CI",
-      "Receipt-only production proof update",
-      "Final-head CI",
-      "Merge and canonical publication verification"
+    "scope": "Ordinary adult 2D tariffs for six Yokohama/Kawasaki venues, date/area/evening/existing benefits and next14 days. Manually reviewed primary official facts; no live movie/showtime/seat availability claimed.",
+    "tests": "Unit8/8 and full local shared quality passed. Exact integrated source all10 workflows and receipt head all11 workflows passed. Chromium and WebKit root/prefix, light/dark,320–1280px,44px calendar targets, eligibility, persistence, evening, retry, malformed and expired data passed. Independent review had no critical/important findings; three minors fixed with regressions. Japanese-font CI WebKit light and Chromium dark screenshots visually inspected.",
+    "source_ci": [
+      {
+        "id": 40251745091,
+        "name": "CINELVA smoke tests",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745104,
+        "name": "Full Python contract suite",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745078,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745145,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745099,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745083,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745090,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745089,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745181,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40251745087,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      }
     ],
-    "next_action": "Push feature branch; open PR and inspect all exact-head workflow results.",
-    "source_ci_note": "503c4f8:9/10 workflows green; discount browser journey passes both engines,480-route audit passes. Existing reported-audit WebKit test catches canceled fetches from previous pages during rapid navigation; one bounded rerun reproduced the race with different request URLs. Latest main542cbc1 merged before final verification. Caption clarified to料金目安; local shared gate and unit8/8 pass. No publication claim."
+    "final_ci": [
+      {
+        "id": 40252929777,
+        "name": "Scorecard contract",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929770,
+        "name": "CINELVA smoke tests",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929830,
+        "name": "Check brand identity",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929769,
+        "name": "Full Python contract suite",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929865,
+        "name": "Reproducible backend build",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929805,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929760,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929788,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929845,
+        "name": "Autonomous quality gate",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929827,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40252929916,
+        "name": "Validate frontend",
+        "conclusion": "success"
+      }
+    ],
+    "production": {
+      "deployment": "dpl_EZ44hynZewki3fPdAAk5DwQ7podg",
+      "state": "READY",
+      "sha": "15e214bbdd96248ffbbb487e2707164ec761debb",
+      "url": "https://cinelva.vercel.app/theaters.html#discounts",
+      "source_digest": "057877d33a201dc038640c98a1e6e819ca857a9aa629b8a7c012df440962b4ea",
+      "build": "Production proof all4 required workflows and shared quality gate passed. Merged tree is byte-identical to final verified tree.",
+      "canonical": "HTTP200 byte-identical index.html, theaters.html, assets/cinema-discounts.css, both new JS modules, data/cinema_discounts.json, data/source_registry.json, my-best10.html; prefixed theaters redirects to matching canonical page. Live cloud Chromium DOM shows six venue cards and six available tariffs on2026-10-26. Read-only verification; no production record writes or physical iPhone claim."
+    },
+    "remaining": [],
+    "maintenance": [
+      "Re-review official tariff facts manually before the60-day review horizon. Never renew verifiedAt without a source review.",
+      "Coverage is intentionally six venues and selected ordinary-adult2D tariffs; student/senior/special-format tickets and actual screening availability remain outside this feature."
+    ],
+    "next_action": "Approved cinema discount comparison scope complete and production verified. Preserve free/manual provenance policy and maintain tariff freshness."
   },
   "search_quality_followup": {
     "status": "in_progress",
     "pull_request": 503,
     "branch": "fix/search-quality-20261026",
-    "integrated_main": "15e214bbdd96248ffbbb487e2707164ec761debb",
+    "integrated_main": "50747ea369580613cc7ba5ffd032488eae79c8a0",
     "prior_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
     "prior_final": "a7130416794562287c22b8f3c653eb1d88d65221",
     "evidence": "Both prior source/final all10 CI passed; subsequent cinema-discount main required integrated source. Full integrated local gate passes; Netflix4 added with official dates, exact TMDB identities and4HTTP200 posters.",

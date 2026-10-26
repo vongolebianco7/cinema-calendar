@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "4e86fa1cbf1c86358748ef3e5b81810dd27df06f",
-  "verified_at": "2026-10-26T01:55:00.028Z",
-  "note": "PR503 integrated source all9 workflows succeeded. Required autonomous40255376551,smoke40255376582,frontend40255376606,backend40255376637 passed. Preserves verified cinema-discount and Best10 features; shared director feature-ID policy, progressive photo search, punctuation-free matching and mobile close pass Chromium/WebKit. Adds4 officially dated Netflix films with verified identities/artwork, preserves252 prior entries. Receipt-only update; require final-head CI and canonical verification."
+  "head_sha": "30e2d37a20c065db6ed1891391cb5f00df77bf48",
+  "verified_at": "2026-10-26T08:43:09.851Z",
+  "note": "PR508 exact source all9 workflows passed including frontend40290066270 after WebKit internal-error retry, autonomous40290066272,smoke40290066325,backend40290066316. Remove hidden provider vote threshold and20-page truncation. Not exhaustive catalog certification. Receipt-only commit; require final CI before merge."
 }

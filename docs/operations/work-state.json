@@ -1391,7 +1391,7 @@
     "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
   },
   "nationwide_cinema_savings": {
-    "status": "ci_passed",
+    "status": "production_verified",
     "branch": "feat/nationwide-cinema-savings-20261026",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
@@ -1400,17 +1400,18 @@
     "scope": "Method-first savings without membership checkboxes:47 sourced prefectural theater examples,14 programme profiles,30 methods, fees/purchase steps, date/chain/prefecture links and independent review horizons. Non-exhaustive local coverage, ordinary adult2D only.",
     "local_validation": "15/15 focused unit tests and full shared quality passed. Local Japanese-font Chromium root/prefix/light/dark320–1280px,fees,no checkboxes,prefecture/Miyazaki separation,date sharing,exclusions,retry/malformed/stale and delayed-engine national directory passed. Exact source all9 workflows passed including actual Chromium/WebKit journeys. Latest Best10/TELASA integration local full quality and15 units passed; exact combined source CI green. One unchanged agent redirect/theme WebKit timeout passed a bounded failed-job retry with no code/test weakening.",
     "production": {
-      "state": "publication_pending",
-      "previous_quota_error": "api-deployments-free-per-day402 recorded2026-10-26T02:20:02Z; no payment/limit bypass",
-      "live_serving_deployment": "dpl_2X9LEryKoFdwEmxfABUGDG9WVasy",
-      "live_serving_sha": "85ea1e5df0b21dc5e10cd275a0d2ce1e52a70b75",
-      "live_success_created_at": "2026-10-26T08:01:49.280Z",
-      "availability_note": "Live READY canonical deployment created after the earlier quota error supersedes the stale waiting assumption. One verified frontend publication attempt after final CI/main is appropriate; stop and record any new denial rather than repeating it."
+      "state": "production_verified",
+      "deployment": "dpl_FV6HyYuqAdcq6RJBJPQYxperq5QN",
+      "sha": "12a98875cfb83a1d9affc0ce6c7329eb66586021",
+      "url": "https://cinelva.vercel.app/theaters.html#discounts",
+      "canonical_bytes": "8/8 HTTP200 and byte-identical: index,theaters,discountCSS,both discountJS,discountJSON,source registry,MyBest10",
+      "cloud_browser": "14 profiles,0 discount checkboxes,48 prefecture options incl placeholder; fees,steps,next dates visible. Miyazaki filters to Central Cinema independently without AEON-only coupons. No production record writes.",
+      "build": "Actual production build passed guard and complete quality; digest609f110e8e8986ea1740354f4d016ef81285188d41190e882bb06db61d694220."
     },
-    "next_action": "Wait final receipt head CI, merge PR510 after rechecking main source, then verify actual canonical deployment/bytes/browser. Latest provider,Best10,TELASA changes preserved.",
+    "next_action": "Approved nationwide savings redesign published and verified. Maintain dated manual facts; coverage is47 prefectural examples/14 profiles/30 methods, not every cinema or discount. Separate backup CI infrastructure timeout remains; same executable source backup passed, no test weakened.",
     "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-26T15:01:46.913Z",
+    "updated_at": "2026-10-26T15:36:16.888260+00:00",
     "pull_request": 510,
     "source_sha": "539b544b3db7be8d9b1a628b8dea2e756533daf6",
     "source_ci": [
@@ -1470,6 +1471,10 @@
         "conclusion": "success"
       }
     ],
-    "integrated_main_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812"
+    "integrated_main_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
+    "final_head": "b48bc355ad04f0c48ae0b01ad7302a97ea3f1363",
+    "receipt_head": "f31199d1b7ec00edfda21cdc4e168ea3d0ed4940",
+    "merge_sha": "12a98875cfb83a1d9affc0ce6c7329eb66586021",
+    "final_ci": "Required4 workflows, mobile and all other final CI passed except backup40345528428: two attempts cancelled at15min while apt downloading browser prerequisites from Azure Ubuntu mirror; backup tests not reached. Same executable source539b544b backup passed. No code or assertion weakened; no repeated production attempts."
   }
 }

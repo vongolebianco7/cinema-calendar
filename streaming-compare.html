@@ -145,7 +145,7 @@ function bookmarkIds(){
  try{
   const data=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
   if(!data||typeof data!=='object'||Array.isArray(data))return null;
-  const ids=new Set();
+  const ids=new Set();let unresolved=0;
   for(const [key,item] of Object.entries(data)){
    if(!item||typeof item!=='object'||Array.isArray(item))continue;
    // The local bookmark key is not necessarily a TMDB movie ID.
@@ -153,8 +153,10 @@ function bookmarkIds(){
    const raw=item.tmdbId??item.tmdb_id;
    const value=Number(raw);
    if(raw!=null && /^[1-9][0-9]*$/.test(String(raw)) && Number.isSafeInteger(value) && value>0)ids.add(value);
+   else unresolved++;
   }
-  return [...ids];
+  // A partial ID mapping must never masquerade as a complete bookmark match count.
+  return unresolved===0?[...ids]:null;
  }catch{return null}
 }
 function confirmedMatches(service){

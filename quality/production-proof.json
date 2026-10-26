@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "7fb47345a9ea38acfb2ccc79f924b0e9fe2be6e7",
-  "verified_at": "2026-10-25T21:53:30.000Z",
-  "note": "PR504 source head 7fb47345: required pull-request workflows (Autonomous quality gate, CINELVA smoke, Validate frontend, Reproducible backend build) all completed successfully; full mobile layout and completeness scorecard also succeeded. The executable source matches the PR head; My Best 10 return navigation, search fallback and safe templates included. Publication receipt updated after merging the verified changes; keep production validation enabled."
+  "head_sha": "65289b322aaf38318f88faedc67b6801d150783e",
+  "verified_at": "2026-10-26T01:10:39.668Z",
+  "note": "PR500 integrated with main e42a8e0: all10 exact-source pull-request workflows succeeded, including autonomous40251745090,smoke40251745091,frontend40251745087,backend40251745099. Cinema discount comparisons passed Chromium/WebKit, root/prefix, light/dark,320–1280px, eligibility, persistence, evening, retry and stale prices. Latest My Best10/search changes preserved. Final receipt-head CI and canonical publication verification required."
 }

@@ -305,7 +305,7 @@ async function load(reset=true){
   const movies=(data.movies||[]).filter(movie=>!credits||credits.ids.has(String(movie.tmdbId||movie.tmdb_id||movie.id)));
   items=items.concat(movies.map(normalizeLocalMovie));render();renderPersonProfile();
   $("#status").textContent=credits?items.length.toLocaleString()+"作品（監督作品"+(credits.asOf?"・"+credits.asOf+"収録":"")+"）":(data.total_results||items.length).toLocaleString()+"作品";
-  $("#more").style.display=page<Math.min(totalPages,20)?"block":"none";
+  $("#more").style.display=page<Math.min(totalPages,500)?"block":"none";
  }catch(error){if(token!==discoveryLoadToken)return;$("#status").textContent="取得できませんでした";$("#grid").innerHTML='<div class="empty">作品データを取得できませんでした。</div>';$("#more").style.display="none"}
  finally{if(token===discoveryLoadToken){discoveryLoading=false;$("#more").disabled=false;}}
 }

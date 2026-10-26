@@ -25,11 +25,11 @@ if(require.main===module){
   try{
    const feed=JSON.parse(fs.readFileSync(path.resolve(file),'utf8'));
    const result=validateImport(feed);
-   if(!result.ok){console.error('Import blocked:\\n'+result.problems.join('\\n'));process.exitCode=1}
+   if(!result.ok){console.error('Import blocked:\n'+result.problems.join('\n'));process.exitCode=1}
    else if(write){
     const output=path.resolve(__dirname,'../data/streaming-availability.json');
     const {schema_version,country,generated_at,services}=feed;
-    fs.writeFileSync(output,JSON.stringify({schema_version,country,generated_at,services},null,2)+'\\n');
+    fs.writeFileSync(output,JSON.stringify({schema_version,country,generated_at,services},null,2)+'\n');
     console.log('Validated licensed JP catalog written to '+output);
    }else console.log('Feed validated; run with --write after verifying license and coverage audit.');
   }catch(error){console.error(error.message);process.exitCode=1}

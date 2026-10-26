@@ -1365,12 +1365,13 @@
     "branch": "feat/nationwide-cinema-savings-20261026",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
-    "programmes": 13,
-    "methods": 26,
+    "programmes": 14,
+    "methods": 30,
     "scope": "Replace benefit checkboxes/six-venue UI with method-first national programme guide, steps/fees/exclusions and national directory links. No all-cinema or universal-minimum claim.",
-    "local_validation": "12/12 unit tests and full shared quality passed. Chromium root/prefix/light/dark320–1280px,no checkbox prerequisite,fees,date/chain deep links and refresh,excluded theaters,retry/stale/malformed and national directory link passed. Japanese-font screenshots inspected.",
+    "local_validation": "15/15 unit tests and full shared quality verification; Chromium root/prefix/light/dark320–1280px,no checkbox prerequisite,fees,date/chain/prefecture,SMT exclusion,Central Miyazaki cannot inherit AEON discount,retry/stale/malformed and delayed-engine national directory link passed. Integration CI pending.",
     "production": "Existing provider quota denial documented in search-release-quota-20261026.json; advised retry after2026-10-27T02:20:02Z. No deployment attempt or paid workaround.",
     "next_action": "Run exact-source CI, renew proof in receipt-only commit, final CI and merge; preserve production quota blocker.",
-    "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green)."
+    "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
+    "prefectural_examples": 47
   }
 }

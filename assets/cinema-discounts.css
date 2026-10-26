@@ -1,7 +1,7 @@
 #discounts{scroll-margin-top:76px;border-top:1px solid var(--line);padding:24px 0 30px;color:var(--text)}
 #discounts h2{font-size:22px;margin:0 0 8px}#discounts p{font-size:13px;line-height:1.7;margin:8px 0}
 #discounts .discountMuted{color:var(--muted)}
-#discounts .discountControls{display:grid;grid-template-columns:1fr 2fr;align-items:end;gap:12px;margin:18px 0}
+#discounts .discountControls{display:grid;grid-template-columns:1fr 1.2fr 1.8fr;align-items:end;gap:12px;margin:18px 0}
 #discounts .discountField{display:grid;gap:6px;min-width:0;font-size:13px}
 #discounts input[type=date],#discounts select{display:block;width:100%;min-width:0;min-height:46px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:9px;font:inherit;font-size:16px;box-sizing:border-box}
 #discounts details{border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--panel);margin:12px 0}

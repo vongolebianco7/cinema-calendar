@@ -30,3 +30,5 @@ Consumes guide(); date/chain controls, two clear price categories, applicable me
 - [x] Update meaningful browser journeys: root/prefix,light/dark,320/390/768/1280px,no selection prerequisite,fee visibility,date/chain/exclusion,retry and stale prices.
 - [x] Shared gate and independent focused review; fix findings.
 - [ ] Exact-source CI, receipt-only proof, final CI and merge. Verify deployment only after known provider quota wait; otherwise record concrete publication blocker.
+
+- Coverage completion:14 programmes/30 methods plus47 manually sourced prefectural examples; no all-cinema claim. Added region/chain/date deep-link tests, all47 Wednesday usable-guide assertions and stale-region association suppression.

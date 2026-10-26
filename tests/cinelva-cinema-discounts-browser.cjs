@@ -15,7 +15,14 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.goto(`http://127.0.0.1:${port}${route}#discounts`);
    try{await page.locator('#discountResults .discountCard').first().waitFor({timeout:5000});}catch(e){console.error('discount load:',errors,await page.locator('#discounts').innerText());throw e;}
    assert.equal(await page.locator('#discounts input[type=checkbox]').count(),0,'methods must be visible without benefit checkboxes');
-   assert.equal(await page.locator('#discountResults .discountCard').count(),13);
+   assert.equal(await page.locator('#discountResults .discountCard').count(),14);
+   assert.equal(await page.locator('#discountPrefecture option').count(),48);
+   await page.locator('#discountPrefecture').selectOption('宮崎県');
+   await page.locator('#discountDate').fill('2026-10-28');
+   assert.match(await page.locator('#discountResults').innerText(),/セントラルシネマ宮崎/);
+   assert.match(await page.locator('#discountResults').innerText(),/1,300/);
+   assert.equal(await page.locator('#discountResults').getByText('対象イオンカードで事前チケット購入').count(),0);
+   if(route==='/theaters.html'&&theme==='light'){fs.mkdirSync('artifacts/cinema-discounts',{recursive:true});await page.locator('#discounts').screenshot({path:`artifacts/cinema-discounts/${process.env.CINELVA_BROWSER||'chromium'}-prefecture-example-light.png`});}
    await page.locator('#discountChain').selectOption('toho');
    await page.locator('#discountDate').fill('2026-10-26');
    assert.match(await page.locator('#discountResults').innerText(),/1,100/);

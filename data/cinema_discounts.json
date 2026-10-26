@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceId": "manual_cinema_discount_facts",
-  "coverage": "全国の13系列・映画館の一部割引方法。全映画館・全優待を網羅した最安比較ではありません。",
+  "coverage": "47都道府県の掲載劇場例と14系列・映画館の一部割引方法。全映画館・全優待を網羅した最安比較ではありません。",
   "benefits": [
     {
       "id": "tohoOne",
@@ -1517,7 +1517,425 @@
           "verifiedAt": "2026-10-26"
         }
       ]
+    },
+    {
+      "id": "central-miyazaki",
+      "name": "セントラルシネマ宮崎",
+      "theaterUrl": "https://www.mcc-9.jp/miyazaki/price/",
+      "note": "セントラルシネマ宮崎の料金です。イオンモール内の映画館ですが、イオンシネマ専用の優待チケットは対象外です。特殊上映・特別席は追加料金です。",
+      "offers": [
+        {
+          "access": "public",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+          "id": "wed",
+          "label": "セントラルウェンズデー",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "condition": "水曜日。セントラルシネマ宮崎の通常2D対象上映。",
+          "steps": [
+            "水曜日の対象上映を選択",
+            "サービスデー料金を選択して購入"
+          ]
+        },
+        {
+          "access": "public",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+          "id": "first",
+          "label": "ファーストデイ",
+          "price": 1300,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "condition": "毎月1日。12月1日は映画の日料金。",
+          "steps": [
+            "毎月1日の対象上映を選択",
+            "ファーストデイ料金で購入"
+          ],
+          "excludedMonths": [
+            12
+          ]
+        },
+        {
+          "access": "public",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+          "id": "dec1",
+          "label": "映画の日",
+          "price": 1000,
+          "when": {
+            "kind": "annual",
+            "month": 12,
+            "day": 1
+          },
+          "condition": "12月1日。対象上映に限ります。",
+          "steps": [
+            "12月1日の対象上映を選択",
+            "映画の日料金で購入"
+          ]
+        },
+        {
+          "access": "public",
+          "feeText": "追加の会費・カード申込みは不要です。",
+          "verifiedAt": "2026-10-26",
+          "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+          "id": "night",
+          "label": "レイトショー",
+          "price": 1500,
+          "when": {
+            "kind": "always"
+          },
+          "condition": "毎日20時以降に開始する対象上映。",
+          "steps": [
+            "20時以降に開始する通常2D上映を選択",
+            "レイトショー料金を確認して購入"
+          ]
+        }
+      ]
     }
   ],
-  "nationalGuideVersion": 1
+  "nationalGuideVersion": 1,
+  "regions": [
+    {
+      "prefecture": "北海道",
+      "chain": "toho",
+      "theater": "TOHOシネマズ すすきの",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "青森県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ おいらせ下田",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "岩手県",
+      "chain": "aeon",
+      "theater": "イオンシネマ江釣子",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "宮城県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 仙台",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "秋田県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 秋田",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "山形県",
+      "chain": "aeon",
+      "theater": "イオンシネマ三川",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "福島県",
+      "chain": "aeon",
+      "theater": "イオンシネマ福島",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "茨城県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ ひたちなか",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "栃木県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 宇都宮",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "群馬県",
+      "chain": "aeon",
+      "theater": "イオンシネマ高崎",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "埼玉県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ ららぽーと富士見",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "千葉県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ ららぽーと船橋",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "東京都",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 日比谷",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "神奈川県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 川崎",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "新潟県",
+      "chain": "aeon",
+      "theater": "イオンシネマ県央",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "富山県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ ファボーレ富山",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "石川県",
+      "chain": "aeon",
+      "theater": "イオンシネマ金沢",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "福井県",
+      "chain": "corona",
+      "theater": "福井コロナシネマワールド",
+      "sourceUrl": "https://cinema.korona.co.jp/theaters/fuk/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "山梨県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 甲府",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "長野県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 上田",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "岐阜県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 岐阜",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "静岡県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 浜松",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "愛知県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 名古屋栄",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "三重県",
+      "chain": "aeon",
+      "theater": "イオンシネマ桑名",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "滋賀県",
+      "chain": "aeon",
+      "theater": "イオンシネマ草津",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "京都府",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 二条",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "大阪府",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 梅田",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "兵庫県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 西宮OS",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "奈良県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 橿原",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "和歌山県",
+      "chain": "aeon",
+      "theater": "イオンシネマ和歌山",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "鳥取県",
+      "chain": "smt",
+      "theater": "MOVIX日吉津",
+      "sourceUrl": "https://www.smt-cinema.com/site/hiezu/access.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "島根県",
+      "chain": "aeon",
+      "theater": "イオンシネマ松江",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "岡山県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 岡南",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "広島県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 緑井",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "山口県",
+      "chain": "aeon",
+      "theater": "イオンシネマ防府",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "徳島県",
+      "chain": "aeon",
+      "theater": "イオンシネマ徳島",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "香川県",
+      "chain": "aeon",
+      "theater": "イオンシネマ綾川",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "愛媛県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 新居浜",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "高知県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 高知",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "福岡県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ ららぽーと福岡",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "佐賀県",
+      "chain": "aeon",
+      "theater": "イオンシネマ佐賀大和",
+      "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "長崎県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 長崎",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "熊本県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 熊本サクラマチ",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "大分県",
+      "chain": "toho",
+      "theater": "TOHOシネマズ 大分わさだ",
+      "sourceUrl": "https://www.tohotheater.jp/theater/find.html",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "宮崎県",
+      "chain": "central-miyazaki",
+      "theater": "セントラルシネマ宮崎",
+      "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "鹿児島県",
+      "chain": "sunshine",
+      "theater": "シネマサンシャイン姶良",
+      "sourceUrl": "https://www.cinemasunshine.co.jp/theater/aira/",
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "prefecture": "沖縄県",
+      "chain": "united",
+      "theater": "ローソン・ユナイテッドシネマ PARCO CITY 浦添",
+      "sourceUrl": "https://www.unitedcinemas.jp/urasoe/index.html",
+      "verifiedAt": "2026-10-26"
+    }
+  ]
 }

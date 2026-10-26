@@ -51,21 +51,23 @@
  const normalized=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[\s・･ー−–—-]/g,'');
  function chainForTheater(name){
   const n=normalized(name);
-  const patterns=[['toho',/tohoシネマズ/],['aeon',/イオンシネマ/],['109',/109シネマズ|ムビル/],['tjoy',/tジョイ|ティジョイ|tjoy/],['sunshine',/シネマサンシャイン/],['smt',/movix|新宿ピカデリ|丸の内ピカデリ|熊本ピカデリ|東劇|なんばパクスシネマ|大阪ステションシティシネマ/],['united',/ユナイテッドシネマ|シネプレックス|yebisugardencinema/],['corona',/コロナシネマ/],['forum',/^(フォラム|アトフォラム|ソラリス)/],['kino',/キノシネマ|kinocinema/],['cinemart',/シネマト新宿/],['os',/osシネマズ/],['ttcg',/テアトル新宿|ヒュマントラストシネマ|シネリブル/]];
+  const patterns=[['central-miyazaki',/セントラルシネマ宮崎/],['toho',/tohoシネマズ/],['aeon',/イオンシネマ/],['109',/109シネマズ|ムビル/],['tjoy',/tジョイ|ティジョイ|tjoy/],['sunshine',/シネマサンシャイン/],['smt',/movix|新宿ピカデリ|丸の内ピカデリ|熊本ピカデリ|東劇|なんばパクスシネマ|大阪ステションシティシネマ/],['united',/ユナイテッドシネマ|シネプレックス|yebisugardencinema/],['corona',/コロナシネマ/],['forum',/^(フォラム|アトフォラム|ソラリス)/],['kino',/キノシネマ|kinocinema/],['cinemart',/シネマト新宿/],['os',/osシネマズ/],['ttcg',/テアトル新宿|ヒュマントラストシネマ|シネリブル/]];
   return patterns.find(([,pattern])=>pattern.test(n))?.[0]||'';
  }
  function guide(data,options={},now=new Date()){
   const date=options.date||'',current=today(now);
   if(!civil(date)||!current||date<current)return [];
-  const chain=options.chain||'',theater=normalized(options.theater);
+  const region=options.prefecture?(Array.isArray(data?.regions)?data.regions:[]).find(r=>r?.prefecture===options.prefecture):null;
+  if(options.prefecture&&!region)return [];
+  const chain=region?.chain||options.chain||'',theater=normalized(region?.theater||options.theater);
   return (Array.isArray(data?.chains)?data.chains:[]).filter(c=>c&&typeof c==='object'&&(!chain||c.id===chain)).map(c=>{
    const available=[],upcoming=[];
    for(const o of Array.isArray(c.offers)?c.offers:[]){
-    if(!o||typeof o!=='object'||!fresh(o,date,now))continue;
+    if(!o||typeof o!=='object'||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
     if(theater&&(o.excludedTheaters||[]).some(name=>theater.includes(normalized(name))))continue;
     for(let i=0;i<=REVIEW_DAYS;i++){
      const nextDate=addDays(date,i);
-     if(!fresh(o,nextDate,now))break;
+     if(!fresh(o,nextDate,now)||region&&!fresh(region,nextDate,now))break;
      // Explain all methods; do not infer visitor membership or screening availability.
      if(applies({...o,requires:[],evening:false},nextDate,{})){
       const row={...o,nextDate};(i===0?available:upcoming).push(row);break;

@@ -44,7 +44,7 @@ dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);c
     <table><thead id="tableHead"></thead><tbody id="comparisonRows"></tbody></table>
   </div>
   <p class="legend">※「確認中」は「非対応」を意味しません。各サービスの仕様は契約プランや利用地域で変わる場合があります。表は横にスクロールできます。</p>
-  <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
+  <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス・プラン同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
     <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div><p class="calcResult" id="calcResult" aria-live="polite"></p><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
   </section>
   <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
@@ -73,6 +73,9 @@ const services=[
 // Every displayed value has a specific source. Unknown values remain unfilled.
 const verified={
  'Netflix':{
+  '月額料金（税込）':{value:'890円〜2,290円',note:'広告つきスタンダード890円／スタンダード1,590円／プレミアム2,290円。Netflix公式の日本向け料金表示',urls:['https://www.netflix.com/jp/']},
+  '最大画質・4K':{value:'プレミアム：4K＋HDR',note:'スタンダードと広告つきスタンダードは1080p',urls:['https://www.netflix.com/jp/']},
+  '広告なしプラン':{value:'スタンダード以上',note:'広告なしプランは月額1,590円／2,290円',urls:['https://www.netflix.com/jp/']},
   '広告の有無':{value:'広告ありプランあり',note:'広告つきプランは作品制限あり',urls:['https://help.netflix.com/ja/node/126831']},
   '作成可能プロフィール数':{value:'最大5',note:'プロフィール数は同時視聴台数とは別',urls:['https://help.netflix.com/ja/node/322532375336036']}
  },
@@ -85,11 +88,15 @@ const verified={
   '別居家族の利用条件':{value:'同居家族向け',note:'別居利用を許可しているという意味ではありません',urls:['https://help.unext.jp/guide/detail/u-next-cost-perf']}
  },
  'Hulu':{
+  '作成可能プロフィール数':{value:'最大6',note:'Hulu公式のサービス案内による',urls:['https://www.hulu.jp/about/']},
+  'オフライン再生':{value:'対応',note:'事前にダウンロードした対応作品をオフラインで視聴可能',urls:['https://www.hulu.jp/about/']},
+  '最大画質・4K':{value:'4K対応作品あり',note:'すべての作品が4Kではありません',urls:['https://www.hulu.jp/about/']},
+  '解約・契約条件':{value:'いつでも解約可',note:'公式案内では解約違約金なし',urls:['https://www.hulu.jp/about/']},
   '月額料金（税込）':{value:'1,320円',note:'2026年10月1日改定。通常Web契約・毎月400ポイント付与。アプリ決済は異なる',urls:['https://help.hulu.jp/hc/ja/articles/59524415235865--%E9%87%8D%E8%A6%81%E3%81%AA%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B-Hulu-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%94%B9%E5%AE%9A%E3%81%AB%E4%BC%B4%E3%81%86%E6%9C%88%E9%A1%8D%E5%88%A9%E7%94%A8%E6%96%99%E9%87%91%E6%94%B9%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B']},
   '同時視聴可能台数':{value:'最大4台',note:'同一作品は最大2台。レンタル・購入は対象外',urls:['https://help.hulu.jp/hc/ja/articles/360044166294-1%E3%81%A4%E3%81%AE%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E5%90%8C%E6%99%82%E8%A6%96%E8%81%B4%E5%8F%AF%E8%83%BD%E3%81%A7%E3%81%99%E3%81%8B']}
  }
 };
-const monthlyFees={'U-NEXT':2189,'Hulu':1320};
+const monthlyFees={'Netflix 広告つき':890,'Netflix スタンダード':1590,'Netflix プレミアム':2290,'U-NEXT':2189,'Hulu':1320};
 const sections=[
   {name:'料金と契約',rows:['月額料金（税込）','年額料金（税込）','広告の有無','広告なしプラン','無料体験','解約・契約条件']},
   {name:'利用人数・端末',rows:['同時視聴可能台数','登録可能端末数','作成可能プロフィール数','家族共有','別居家族の利用条件','ダウンロード可能台数']},
@@ -128,7 +135,7 @@ function openSource(name,row,info){
 function renderFees(){
  const from=document.getElementById('fromService'),to=document.getElementById('toService');
  Object.keys(monthlyFees).forEach((name,i)=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
- to.selectedIndex=1;
+ to.selectedIndex=4;
  const update=()=>{
   const before=monthlyFees[from.value],after=monthlyFees[to.value],delta=after-before;
   document.getElementById('calcResult').textContent=delta===0?'料金差はありません（月額'+after.toLocaleString('ja-JP')+'円）':delta<0?'月額'+Math.abs(delta).toLocaleString('ja-JP')+'円安くなります（年間'+(Math.abs(delta)*12).toLocaleString('ja-JP')+'円相当）':'月額'+delta.toLocaleString('ja-JP')+'円高くなります（年間'+(delta*12).toLocaleString('ja-JP')+'円相当）';

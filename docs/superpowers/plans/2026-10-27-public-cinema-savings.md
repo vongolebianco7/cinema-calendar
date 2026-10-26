@@ -24,5 +24,7 @@ Interface:guide(data,{date,chain,theater},now),optional offer.includedTheaters.
 Files:tests/cinelva-cinema-discounts-browser.cjs,docs/operations/work-state.json.
 - [x] Add real-date27 browser flow for ordinary/exception theaters and free booking.
 - [x] Full shared quality and focused review. Both minor review findings fixed; no blockers.
-- [ ] Exact-source CI, receipt-only proof and final required CI.
-- [ ] Merge, verified publication and durable checkpoint.
+- [x] Exact-source CI, receipt-only proof and final required CI.
+- [x] Merge and verified publication; release evidence saved in work-state checkpoint.
+
+Published PR518 as3f9711d4. Exact source69d30406 and receipt-only final9a2f6d5a all workflows green; actual Chromium/WebKit new flows passed. Production build guard+fullquality passed (digest0de71f98176ef25d85aa6a7f9a50269810a4ed2a14d84acf183574ff0645d8a8). Canonical deployment dpl_3sY7uwYukHDBHfcWPSgKg8UidB8x READY;8/8 actual files200 byte-identical. Live browser14cards/40methods/0checkboxes/48prefecture options,KINEZO free online steps,Agui named Tuesday and MOVIX publicWednesday1400 verified. Existing47examples retain original review dates. No all-cinema/all-discount claim or production record writes.

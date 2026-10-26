@@ -13,7 +13,9 @@ must('月額料金（税込）','広告の有無','同時視聴可能台数','�
  'Disney+','Lemino','Prime Video','WOWOW','確認中','未集計');
 must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','cinelva-want-to-watch-v1',
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
- 'compareBookmarkAvailability','deltaActions','updateMovieDelta');
+ 'compareBookmarkAvailability','deltaActions','updateMovieDelta',
+ 'search.html?','new URLSearchParams({search:movie.title,id:String(movie.tmdb_id)})',
+ 'const scores=new Map()');
 assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
 assert.match(html,/CinelvaStreamingBookmarks\?\.resolve\(raw,records\)/);
 assert.doesNotMatch(html,/\.map\(\(\[id\]\)=>Number\(id\)\)/);

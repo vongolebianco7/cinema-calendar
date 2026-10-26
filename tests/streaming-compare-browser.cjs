@@ -20,7 +20,9 @@ async function freePort(){const server=net.createServer();await new Promise(r=>s
    b:{id:'b',title:'Fixture B',year:2024,tmdbId:102}
   })));
   const group=movies=>({coverage:'complete',entitlement:'subscription',source:{urls:['https://example.org/fixture']},movies:movies.map(([id,title])=>({tmdb_id:id,title,entitlement:'subscription'}))});
-  const data={schema_version:1,country:'JP',generated_at:new Date().toISOString(),services:{
+  const data={schema_version:1,country:'JP',generated_at:new Date().toISOString(),
+   license:{provider:'fixture',agreement_reference:'fixture-contract',public_display_authorized:true},
+   coverage_audit:{auditor:'fixture',method:'full feed reconciliation',all_supported_services_verified:true},services:{
    Netflix:group([[101,'Fixture A']]),
    'U-NEXT':group([[102,'Fixture B']])
   }};

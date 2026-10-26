@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
-  "verified_at": "2026-10-26T01:09:05.199Z",
-  "note": "PR503 exact integrated source all10 workflows succeeded, including Autonomous40251606222, smoke40251606429, frontend40251606248 and backend40251606206. Shared director ranking predicate plus110KB verified feature-ID index, punctuation-free person matching, progressive photo suggestions, profile reuse and mobile detail close verified. Chromium/WebKit new and existing journeys pass; source includes latest Best10 release invariants. This commit changes only the publication receipt; require final-head checks before merge."
+  "head_sha": "65289b322aaf38318f88faedc67b6801d150783e",
+  "verified_at": "2026-10-26T01:10:39.668Z",
+  "note": "PR500 integrated with main e42a8e0: all10 exact-source pull-request workflows succeeded, including autonomous40251745090,smoke40251745091,frontend40251745087,backend40251745099. Cinema discount comparisons passed Chromium/WebKit, root/prefix, light/dark,320–1280px, eligibility, persistence, evening, retry and stale prices. Latest My Best10/search changes preserved. Final receipt-head CI and canonical publication verification required."
 }

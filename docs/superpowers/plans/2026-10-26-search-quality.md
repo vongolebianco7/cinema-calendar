@@ -29,3 +29,5 @@
 - [ ] Review complete diff; exact source CI, receipt-only CI, merge and verify canonical deployment.
 
 Actual-data finding: TMDB movie credits omit runtimes; pure predicate reuse alone retained Nolan shorts. Project verified ranking IDs to a110KB index, rebuild/stage with every director projection, and constrain complete director lists. This replaces loading4.9MB of biography/poster data for healthy profiles.
+
+Integration checkpoint: preserve main cinema discount feature15e214bb in a true merge parent. Official Netflix editorial review adds4 identified films with verified artwork, bringing dated Netflix coverage to9 rows (October5); remains partial and excludes series.

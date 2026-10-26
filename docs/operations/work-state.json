@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T07:24:54.363678+00:00",
+  "updated_at": "2026-10-26T01:35:14.285534+00:00",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
@@ -1196,5 +1196,33 @@
     "review": "Independent reviewer findings fixed and reproduced red→green; no unresolved important findings.",
     "prior_ci": "Combined source4e631291: all8 other workflows and full frontend validate480-page/record journeys passed. New global search passed Chromium+WebKit twice. Existing reported audit repeatedly counted WebKit outgoing-document fetch cancellation as current-page error. Provider route transitions now use fresh pages, retaining strict current-page error assertions. No product source changes in repair. Renew exact-source CI and receipt. Repair556e5070 passed both new search suites again, but repeated clock.install on a new WebKit about:blank failed because Playwright clock state is context-scoped. Keep its single original installation and assert frozen date after each fresh document navigation. Product source remains unchanged. Repairfbab8217 exposed the earlier brand-route loop still reusing a page, so all subsequent navigations now close the prior page after strict assertions and create a fresh page. Current-document errors stay fatal; a single context clock is asserted. Late movie response after exact person selection separately reproduced status overwrite; both detail routes now refuse movie repaint in person mode, and profile CSS hides the movie grid/status. Added delayed-movie browser regression, observed RED then GREEN. Full local quality and both focused Chromium browser suites pass. Source73efb734 reported UI/global search both Chromium and WebKit pass, including complete fresh-page isolation and late movie response regression. Final wording polish replaces developer-facing 人物API with plain 最新の人物情報 in cached-profile notice. No behavior changes.",
     "next_action": "Wait exact combined-source CI, renew receipt in proof-only commit, require final CI, merge499 and verify canonical frontend/backend."
+  },
+  "cinema_discount_comparison": {
+    "status": "integration_validation_pending",
+    "branch": "feat/cinema-discount-comparison-20261025",
+    "base_sha": "9d4f486",
+    "venues": 6,
+    "source_review_date": "2026-10-25",
+    "scope": "Ordinary adult2D, Yokohama/Kawasaki, dates/area/evening/existing benefits; manually reviewed static tariffs only. No showtime availability claimed.",
+    "tests": "New unit8/8 passed; full shared quality gate passed; local Chromium root/prefix light/dark320–1280px,44px calendar targets,eligibility,persistence,evening,retry,malformed data and expired prices passed. WebKit and exact-head GitHub CI pending.",
+    "review": "Independent focused review no critical/important findings. Minor neutral stale wording,320px targets and malformed-data retry corrected; relevant browser regressions red-to-green. Local Chromium lacks Japanese fonts; screenshot layout inspected but final Japanese visual evidence pending CI.",
+    "remaining": [
+      "Source-head required CI",
+      "Receipt-only production proof update",
+      "Final-head CI",
+      "Merge and canonical publication verification"
+    ],
+    "next_action": "Push feature branch; open PR and inspect all exact-head workflow results.",
+    "source_ci_note": "503c4f8:9/10 workflows green; discount browser journey passes both engines,480-route audit passes. Existing reported-audit WebKit test catches canceled fetches from previous pages during rapid navigation; one bounded rerun reproduced the race with different request URLs. Latest main542cbc1 merged before final verification. Caption clarified to料金目安; local shared gate and unit8/8 pass. No publication claim."
+  },
+  "search_quality_followup": {
+    "status": "in_progress",
+    "pull_request": 503,
+    "branch": "fix/search-quality-20261026",
+    "integrated_main": "15e214bbdd96248ffbbb487e2707164ec761debb",
+    "prior_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
+    "prior_final": "a7130416794562287c22b8f3c653eb1d88d65221",
+    "evidence": "Both prior source/final all10 CI passed; subsequent cinema-discount main required integrated source. Full integrated local gate passes; Netflix4 added with official dates, exact TMDB identities and4HTTP200 posters.",
+    "next_action": "Update PR503 with a real merge commit including main15e parent; exact source CI, receipt-only final CI, merge and canonical search/calendar verification."
   }
 }

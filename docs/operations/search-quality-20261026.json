@@ -15,13 +15,20 @@
     "fallback_timing": "One10s timeout in full browser test; unchanged application rerun passed. Isolated actual6s abort→saved fallback also passed.",
     "review": "Independent whole-change review: no critical/important findings.",
     "live_prefix": "Existing production API トム returned actor1136406 as first result, confirming new bounded prefix recovery lookup covers reported actor. Full new endpoint requires deployment.",
-    "director_data_parity": "Shared policy projects911 verified complete director lists to110598-byte index. Nolan observed13 feature IDs, excluding raw runtime-unknown shorts from19 API credits. Generated with every source projection."
+    "director_data_parity": "Shared policy projects911 verified complete director lists to110598-byte index. Nolan observed13 feature IDs, excluding raw runtime-unknown shorts from19 API credits. Generated with every source projection.",
+    "integrated_quality_gate": "Full shared gate passed after preserving discounts and adding4 verified Netflix films."
   },
   "netflix_scope": {
-    "streaming_rows": 5,
-    "october_2026_rows": 2,
+    "streaming_rows": 9,
+    "october_2026_rows": 5,
     "coverage": "Verified dated announcements only;not exhaustive Japan Netflix library",
-    "automatic_html_collection": "disabled by source registry"
+    "automatic_html_collection": "disabled by source registry",
+    "added": 4,
+    "review": "docs/data/netflix-20261026-review.json"
   },
-  "next_action": "Exact source CI,receipt-only CI,merge,canonical API/browser verification"
+  "next_action": "Exact source CI,receipt-only CI,merge,canonical API/browser verification",
+  "integrated_main": "15e214bbdd96248ffbbb487e2707164ec761debb",
+  "prior_verified_source": "5ce5a045b21ca9b5ee177ea9428027c30a2a87b0",
+  "prior_verified_final_head": "a7130416794562287c22b8f3c653eb1d88d65221",
+  "integration_reason": "Concurrent cinema discount feature changed executable main during final CI; preserve both features and obtain exact integrated verification."
 }

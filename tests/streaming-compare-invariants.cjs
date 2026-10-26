@@ -11,12 +11,11 @@ must('月額料金（税込）','広告の有無','同時視聴可能台数','�
  '家族共有','登録可能端末数','ブックマークした映画','好きな監督の映画',
  '好きな映画賞の映画','サブスク乗り換え時の増減','billingCycle','yearlyFees',
  'Disney+','Lemino','Prime Video','WOWOW','確認中','未集計');
-must('streaming-availability.js','streaming-availability.json','cinelva-want-to-watch-v1',
+must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','cinelva-want-to-watch-v1',
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
  'compareBookmarkAvailability','deltaActions','updateMovieDelta');
 assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-assert.match(html,/item\.tmdbId\?\?item\.tmdb_id/);
-assert.match(html,/unresolved===0\?\[\.\.\.ids\]:null/);
+assert.match(html,/CinelvaStreamingBookmarks\?\.resolve\(raw,records\)/);
 assert.doesNotMatch(html,/\.map\(\(\[id\]\)=>Number\(id\)\)/);
 assert.match(html,/現在の配信カレンダーは配信開始情報/);
 assert.match(html,/ライセンス状況・プラン・地域・更新日/);
@@ -28,6 +27,7 @@ const availability=JSON.parse(read('data/streaming-availability.json'));
 assert.equal(availability.country,'JP');
 assert.deepEqual(availability.services,{});
 assert.equal(availability.generated_at,null);
-const source=read('js/streaming-availability.js');
-new vm.Script(source,{filename:'streaming-availability.js'});
+for(const filename of ['js/streaming-availability.js','js/streaming-bookmark-identity.js']){
+ new vm.Script(read(filename),{filename});
+}
 console.log('streaming compare invariant checks passed');

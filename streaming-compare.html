@@ -151,7 +151,7 @@ const sections=[
   {name:'あなたとの相性',rows:['ブックマークした映画','好きな監督の映画','好きな映画賞の映画','未鑑賞の名作','サブスク乗り換え時の増減']}
 ];
 const availability={};
-let awardDataset=null;
+let awardDataset=null,awardsRequested=false;
 const BOOKMARK_KEY='cinelva-want-to-watch-v1';
 function bookmarkIds(){
  try{
@@ -177,6 +177,8 @@ function personalMatches(service,row){
  return null;
 }
 async function loadAwards(){
+ if(awardsRequested||!services.some(service=>availability[service.name]?.ok))return;
+ awardsRequested=true;
  try{
   const response=await fetch('data/awards.json');
   if(!response.ok)return;
@@ -226,12 +228,12 @@ async function loadAvailability(){
   const data=await response.json(),checker=window.CinelvaStreamingAvailability;
   if(!checker)return;
   services.forEach(service=>availability[service.name]=checker.validateSnapshot(data,service.name));
-  draw();document.getElementById('fromService').dispatchEvent(new Event('change'));
+  draw();if(active==='あなたとの相性')loadAwards();document.getElementById('fromService').dispatchEvent(new Event('change'));
  }catch{/* Never convert missing or malformed evidence into zero counts. */}
 }
 const filters=document.getElementById('filters'),head=document.getElementById('tableHead'),body=document.getElementById('comparisonRows');
 let active='すべて';const labels=['すべて',...sections.map(s=>s.name)];
-labels.forEach(label=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',String(label===active));b.addEventListener('click',()=>{active=label;document.querySelectorAll('#filters button').forEach(el=>el.setAttribute('aria-pressed',String(el.textContent===active)));draw()});filters.appendChild(b)});
+labels.forEach(label=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',String(label===active));b.addEventListener('click',()=>{active=label;document.querySelectorAll('#filters button').forEach(el=>el.setAttribute('aria-pressed',String(el.textContent===active)));draw();if(label==='あなたとの相性')loadAwards()});filters.appendChild(b)});
 function cell(tag,text,cls){const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=text;return e}
 function draw(){
  head.replaceChildren();body.replaceChildren();const tr=document.createElement('tr');tr.appendChild(cell('th','比較項目'));
@@ -307,7 +309,7 @@ function renderFees(){
  };
  from.addEventListener('change',update);to.addEventListener('change',update);cycle.addEventListener('change',update);update();
 }
-draw();renderFees();loadAvailability();loadAwards();
+draw();renderFees();loadAvailability();
 window.addEventListener('storage',event=>{if(event.key===BOOKMARK_KEY){draw();document.getElementById('fromService').dispatchEvent(new Event('change'))}});
 window.addEventListener('cinelva-bookmarks-updated',()=>{draw();document.getElementById('fromService').dispatchEvent(new Event('change'))});
 document.getElementById('matchesClose').addEventListener('click',()=>document.getElementById('matchesDialog').close());

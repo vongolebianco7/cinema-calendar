@@ -15,7 +15,8 @@ must('streaming-availability.js','streaming-availability.json','streaming-bookma
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
  'compareBookmarkAvailability','deltaActions','updateMovieDelta',
  'search.html?','new URLSearchParams({search:movie.title,id:String(movie.tmdb_id)})',
- 'const scores=new Map()', 'CinelvaQuickRate?.mountInline', 'cinelva-quick-rate.js');
+ 'const scores=new Map()', 'CinelvaQuickRate?.mountInline', 'cinelva-quick-rate.js',
+ "previousPlan==='Netflix 広告つき'||nextPlan==='Netflix 広告つき'");
 assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
 assert.match(html,/CinelvaStreamingBookmarks\?\.resolve\(raw,records\)/);
 assert.doesNotMatch(html,/\.map\(\(\[id\]\)=>Number\(id\)\)/);

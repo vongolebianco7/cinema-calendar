@@ -1,0 +1,46 @@
+{
+  "status": "in_progress",
+  "pull_request": 508,
+  "source_sha": "30e2d37a20c065db6ed1891391cb5f00df77bf48",
+  "verified_at": "2026-10-26T08:12:49.403021+00:00",
+  "confirmed_defects": [
+    "Implicit100-vote minimum on all provider queries",
+    "Frontend stopped after20pages despite available results"
+  ],
+  "local_validation": "Full shared quality gate passed;361Node tests;8focused tests;independent review no important issues",
+  "production_read_only_observation": {
+    "Netflix": [
+      2120,
+      5240
+    ],
+    "Prime Video": [
+      2867,
+      9465
+    ],
+    "Disney+": [
+      1168,
+      1898
+    ],
+    "U-NEXT": [
+      3954,
+      10072
+    ],
+    "Hulu": [
+      1887,
+      5800
+    ],
+    "Apple TV+": [
+      71,
+      119
+    ]
+  },
+  "observation_meaning": "[default filtered total, explicit votes=0 total] from existing live API; upstream reported results, not certified service-library counts",
+  "remaining": [
+    "Exact-source frontend CI then receipt-only proof and final CI before merge/deploy",
+    "Upstream500-page ceiling;U-NEXT query reports504 pages",
+    "Only6 providers selectable in current condition search",
+    "Premiere feed remains partial;DMM TV and TELASA0 dated records",
+    "No authoritative complete Japan service catalogs obtained;zero-omission requirement not satisfied"
+  ],
+  "next_action": "Wait PR508 exact-source frontend CI. Renew receipt only after all4required workflows success, finalCI,merge,publish. Continue provider coverage/source assessment without paid services or scraping."
+}

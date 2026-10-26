@@ -91,7 +91,7 @@ test('national theater matching does not confuse AEON shops or premium109 with o
 });
 test('national facts cover broad chains and retain actionable primary provenance and fees',()=>{
  assert.equal(data.chains.length,14);
- for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.equal(o.verifiedAt,'2026-10-26');}
+ for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.ok(['2026-10-26','2026-10-27'].includes(o.verifiedAt));}
  const now=new Date('2026-10-26T01:00:00Z');
  const r=D.guide(data,{date:'2026-12-01',chain:'tjoy'},now)[0];assert.equal(r.available.some(o=>o.id==='first'),false);assert.equal(r.publicBest.price,1000);
  assert.equal(D.guide(data,{date:'2026-10-28',chain:'109',theater:'109シネマズプレミアム新宿'},now)[0].available.length,0);
@@ -112,4 +112,42 @@ test('upcoming price dates cannot outlive a regional association reviewed earlie
  const f=JSON.parse(JSON.stringify(data));f.regions.find(r=>r.prefecture==='東京都').verifiedAt='2026-10-01';
  const r=D.guide(f,{date:'2026-11-29',prefecture:'東京都'},new Date('2026-10-26T01:00:00Z'))[0];
  assert.ok(r.upcoming.every(o=>o.nextDate<='2026-11-30'));assert.ok(r.upcoming.some(o=>o.nextDate==='2026-11-30'));
+});
+
+test('named-theater methods never leak to other cinemas, including future dates',()=>{
+ const f={chains:[{id:'united',offers:[{id:'local',price:1300,access:'public',verifiedAt:'2026-10-27',when:{kind:'weekday',days:[4]},includedTheaters:['ユナイテッドシネマ札幌']}]}]};
+ const now=new Date('2026-10-27T01:00:00Z');
+ assert.equal(D.guide(f,{date:'2026-10-29',chain:'united',theater:'ユナイテッド・シネマ豊洲'},now)[0].available.length,0);
+ assert.equal(D.guide(f,{date:'2026-10-28',chain:'united',theater:'ユナイテッド・シネマ豊洲'},now)[0].upcoming.length,0);
+ assert.equal(D.guide(f,{date:'2026-10-29',chain:'united',theater:'ローソン・ユナイテッドシネマ札幌'},now)[0].publicBest.price,1300);
+});
+test('public service days follow United theater exceptions and December pricing',()=>{
+ const now=new Date('2026-10-27T01:00:00Z');
+ const row=(theater,date)=>D.guide(data,{date,chain:'united',theater},now)[0];
+ assert.equal(row('ユナイテッド・シネマ豊洲','2026-10-28').publicBest?.price,1300);
+ for(const t of ['札幌','稲沢','阿久比','PARCO CITY 浦添'])assert.equal(row('ユナイテッド・シネマ'+t,'2026-10-28').publicBest,null,t+' has no Wednesday service day');
+ assert.equal(row('ユナイテッド・シネマ札幌','2026-10-29').publicBest?.price,1300);
+ assert.equal(row('ユナイテッド・シネマ稲沢','2026-10-29').publicBest?.price,1300);
+ assert.equal(row('ユナイテッド・シネマ阿久比','2026-10-27').publicBest?.price,1300);
+ assert.equal(row('ユナイテッド・シネマ豊洲','2026-11-01').publicBest?.price,1300);
+ assert.equal(row('ユナイテッド・シネマPARCO CITY浦添','2026-11-01').publicBest,null);
+ assert.equal(row('ユナイテッド・シネマPARCO CITY浦添','2026-12-01').publicBest?.price,1000);
+ assert.equal(row('ユナイテッド・シネマ豊洲','2026-12-01').available.some(o=>o.id==='first'),false);
+});
+test('MOVIX public tariffs and free KINEZO booking are actionable without paid membership',()=>{
+ const now=new Date('2026-10-27T01:00:00Z');
+ const smt=date=>D.guide(data,{date,chain:'smt',theater:'MOVIX日吉津'},now)[0];
+ assert.equal(smt('2026-10-28').publicBest?.price,1400);
+ assert.equal(smt('2026-11-01').publicBest?.price,1400);
+ assert.equal(smt('2026-12-01').publicBest?.price,1000);
+ assert.equal(D.guide(data,{date:'2026-10-28',chain:'smt',theater:'東劇'},now)[0].available.length,0);
+ const k=D.guide(data,{date:'2026-10-27',chain:'tjoy'},now)[0].conditionalBest;
+ assert.equal(k?.price,1500);assert.match(k.feeText,/無料/);assert.match(k.condition,/オンライン/);
+});
+test('malformed named-theater restrictions fail closed rather than broadening a local tariff',()=>{
+ for(const includedTheaters of ['札幌',null,[],[''],[null]]){
+  const f={chains:[{id:'united',offers:[{id:'local',price:1300,access:'public',verifiedAt:'2026-10-27',when:{kind:'always'},includedTheaters}]}]};
+  const r=D.guide(f,{date:'2026-10-28',theater:'ユナイテッド・シネマ豊洲'},new Date('2026-10-27T01:00:00Z'))[0];
+  assert.equal(r.available.length,0,JSON.stringify(includedTheaters));assert.equal(r.upcoming.length,0);
+ }
 });

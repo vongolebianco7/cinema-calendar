@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "539b544b3db7be8d9b1a628b8dea2e756533daf6",
-  "verified_at": "2026-10-26T15:01:49.023Z",
-  "note": "PR510 combined current main c7f7e245 provider catalogue,Best10,TELASA and nationwide savings. All exact-source workflows passed, including four required workflows.47 prefectural examples,14 profiles,30 methods;15 focused units and full local quality pass. Only documentation changed after proved source; this commit changes receipt only. Final CI and canonical verification required."
+  "head_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
+  "verified_at": "2026-10-26T20:11:33.826Z",
+  "note": "PR518: all exact-source workflows succeeded, including required Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build. 19focused units/full shared quality; Chromium+WebKit root/prefix public-day, named-theater exceptions and malformed restrictions passed.10added methods,40total; original47prefectural examples and review dates retained. Receipt-only commit; require final-head CI and canonical verification."
 }

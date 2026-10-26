@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0dfe8e4cf8f26b79a7d30ece768121b2b530bd72",
-  "verified_at": "2026-10-26T10:37:35.384Z",
-  "note": "PR513 CI verified source: required workflows Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build all completed successfully; mobile layout smoke and completeness scorecard succeeded. My Best 10 highest MY ratings selection requires confirmation before overwriting. All changes since PR head are release receipt only."
+  "head_sha": "8da67665159e7cb053216b1cc768897ffff36121",
+  "verified_at": "2026-10-26T14:32:59.061Z",
+  "note": "PR510 combined latest main Best10/TELASA with nationwide savings. Exact source required Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build and other workflows passed. 47 prefectural examples,14 profiles,30 methods;15 unit tests/full local quality. This commit changes only the receipt; final head CI and canonical verification required."
 }

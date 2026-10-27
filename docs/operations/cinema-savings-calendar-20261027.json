@@ -1,0 +1,177 @@
+{
+  "source": "775f216dffab09955838b9902bed7c95ee5e3470",
+  "final": "7d75b6d2b77b39436577e419e98969fd0de962a2",
+  "merge": "7fae48e445a5382d96cbfa90403164464b55e483",
+  "source_ci": [
+    {
+      "id": 40437425732,
+      "name": "Check brand identity",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425884,
+      "name": "Autonomous quality gate",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425756,
+      "name": "Cinemap completeness scorecard",
+      "conclusion": "failure"
+    },
+    {
+      "id": 40437425897,
+      "name": "CINELVA smoke tests",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425808,
+      "name": "Reproducible backend build",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425763,
+      "name": "CINELVA mobile layout smoke test",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425723,
+      "name": "CINELVA isolated Pages stage",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425799,
+      "name": "CINELVA backup safety",
+      "conclusion": "success"
+    },
+    {
+      "id": 40437425736,
+      "name": "Validate frontend",
+      "conclusion": "success"
+    }
+  ],
+  "final_ci": [
+    {
+      "id": 40438596684,
+      "name": "Validate frontend",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596695,
+      "name": "Check brand identity",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596589,
+      "name": "CINELVA smoke tests",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596567,
+      "name": "Scorecard contract",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596685,
+      "name": "CINELVA mobile layout smoke test",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596583,
+      "name": "Reproducible backend build",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596725,
+      "name": "CINELVA isolated Pages stage",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596776,
+      "name": "Cinemap completeness scorecard",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596601,
+      "name": "Autonomous quality gate",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 40438596682,
+      "name": "CINELVA backup safety",
+      "conclusion": "success",
+      "attempt": 2
+    }
+  ],
+  "deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
+  "source_digest": "ee8dfea48d5f99fdc6e099298b863da5fd24ab2587eb0f19d4050a61fd281e73",
+  "canonical": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "match": true,
+      "sha256": "0e4d44c270c83d01e132b6e2d260f93c0877274c8c298d69e6e35c8b0174e3b8"
+    },
+    {
+      "path": "theaters.html",
+      "status": 200,
+      "match": true,
+      "sha256": "195d70a7d8ee44a1042064a058eb366d0b0281ce15561884b06868ec144abcd7"
+    },
+    {
+      "path": "assets/cinema-discounts.css",
+      "status": 200,
+      "match": true,
+      "sha256": "bf07f75999d058d9c35bf9b647e76b3127e7df3cc1d9328c57f61b526e916048"
+    },
+    {
+      "path": "js/cinelva-cinema-discounts.js",
+      "status": 200,
+      "match": true,
+      "sha256": "63571781a9d5f8b32f3708425830c28e993f2ef5eda18e35481c18f669840692"
+    },
+    {
+      "path": "js/cinelva-cinema-discounts-ui.js",
+      "status": 200,
+      "match": true,
+      "sha256": "00253c7b7a618ba34ee786e18447670ac6ce73b8981ddd0d159c04edc461535b"
+    },
+    {
+      "path": "data/cinema_discounts.json",
+      "status": 200,
+      "match": true,
+      "sha256": "40663a191b31120d03c7d12001dd490d54b781419e6187926cb1a6e484ca910a"
+    },
+    {
+      "path": "data/source_registry.json",
+      "status": 200,
+      "match": true,
+      "sha256": "d06bc24d55cb1b8d4a046e468fd472a2a3016303f61bcc9ddd7e77aa5bdddb0e"
+    },
+    {
+      "path": "my-best10.html",
+      "status": 200,
+      "match": true,
+      "sha256": "26782636dbee8f69ef8dde358804c48e53f1f25fadee52840cc856ab9a8dcd23"
+    }
+  ],
+  "url": "https://cinelva.vercel.app/theaters.html#discounts",
+  "checked_at": "2026-10-27T02:52:17.809Z",
+  "status": "production_verified",
+  "pull_request": 520,
+  "methods": 43,
+  "profiles": 14,
+  "benefit_station_plans": 3,
+  "browser": "14calendar day buttons,10/28tap selected and caption updated,23rows sorted500→1500 including range1300–1400;3BenefitStation rows and fees/contract/1point=1yen caveats;0eligibility checkbox inputs,no page overflow,no Cinelva-origin console errors observed. Browser extension metadata errors excluded. Read-only;no production record writes or physical iPhone claim.",
+  "review": "Independent reviewer confirmed dropped chain notes/excluded theaters important finding fixed. Named theater navigation test now waits for URL and selected-theater rendering before table assertion;actual Chromium/WebKit pass. Source completeness saw a WebKit fixture timeout;same-source final completeness passed without threshold/source changes. Final backup attempt1 timed out downloading Ubuntu dependencies;single-job retry2 passed all comparisons.",
+  "remaining": [],
+  "maintenance": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility."
+}

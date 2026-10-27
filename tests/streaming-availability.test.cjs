@@ -55,3 +55,10 @@ test('rejects empty catalog even when metadata claims complete coverage',()=>{
  const empty=snapshot();empty.services.Netflix.movies=[];
  assert.equal(validateSnapshot(empty,'Netflix',NOW).reason,'empty-or-invalid-catalog');
 });
+
+test('rejects string and boolean movie identifiers instead of coercing them',()=>{
+ for(const id of ['101',true,1.5,0]){
+  const feed=snapshot();feed.services.Netflix.movies[0].tmdb_id=id;
+  assert.equal(validateSnapshot(feed,'Netflix',NOW).reason,'invalid-title-or-duplicate');
+ }
+});

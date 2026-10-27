@@ -76,7 +76,7 @@ Manually reviewed primary inventories on2026-10-27:
 - AEON: https://www.aeoncinema.com/theater/ (prefecture headings; service-day exclusions still resolved by named theater)
 - United: https://www.ent.lawson.co.jp/search_map/uc/ (exclude explicitly closed Tsukuba,Imabari,Kumamoto);STYLE-SMinatomirai publicWednesday/first1300 verified at https://www.unitedcinemas.jp/minatomirai/price6.html;premium seats excluded
 - SMT: https://www.smt-cinema.com/purchased/ (current23theater list; unavailable premium/partner tariffs are not inferred from an ownership relationship)
--109: https://109cinemas.net/ and the previously reviewed2026tariff PDF; woodenKiba,Futakotamagawa,Grandberry,Kawasaki,Shonan,Yumegaoka1400others1300;premiumShinjuku excluded
+-109: https://109cinemas.net/ and the previously reviewed2026tariff PDF; Kiba,Futakotamagawa,Grandberry,Kawasaki,Shonan,Yumegaoka1400others1300;premiumShinjuku excluded
 - Tjoy: https://www.tjoy.co.jp/theater (operated theaters incl jointoperation; exclude partner-operated Wakkanai,SapporoFrontier,OsakaStationCity,NambaPark until tariff applicability individually verified)
 - Sunshine: https://www.cinemasunshine.co.jp/areas/
 - Corona: https://cinema.korona.co.jp/areas/

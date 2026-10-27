@@ -1570,8 +1570,9 @@
       "branch": "feat/prefecture-chain-calendar-20261027",
       "base_sha": "e6788c6573410fe7e1f357725cdcbba5859e0877",
       "scope": "Choose prefecture, compare all local listed chains flat;calendar shows winning chain names and dates,daytap per-chain table;cinema names only applicability details.No one-time coupons/chain picker.42recurring methods,14profiles,159prefecture-chain groups,323named theaters,47prefectures.",
-      "validation": "24focused units pass after3 expected RED failures;full shared quality passes. Actual Chromium/WebKit browserCI and fresh whole-branch review pending. Original tariff review dates retained;new geography manually sourced.",
-      "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification."
+      "validation": "25focused units and full shared quality pass. Important punctuation-only normalized theater restrictions reproduced RED thenGREEN; coverage/UI/override validators fail closed. Dec1preview visibly hid third/fourth tied winners; all short names now displayed with browser regression. Independent fresh review has no other blockers;actual new browserCI pending.",
+      "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification.",
+      "review": "Whole-branch fresh review: one important malformed-normalization finding fixed with nineinput combinations; one tie-visibility minor elevated because series discovery is primary,actual preview RED and browser regression added. OS theater name corrected to current ミント神戸 from official indexed listing. No other blockers;no claim of exhaustive cinema inventory."
     }
   }
 }

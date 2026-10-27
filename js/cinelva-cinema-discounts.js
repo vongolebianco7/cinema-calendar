@@ -50,6 +50,7 @@
   });
  }
  const normalized=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[\s・･ー−–—-]/g,'');
+ const validNames=(a,nonempty=false)=>Array.isArray(a)&&(!nonempty||a.length>0)&&a.every(n=>typeof n==='string'&&normalized(n));
  function chainForTheater(name){
   const n=normalized(name);
   const patterns=[['central-miyazaki',/セントラルシネマ宮崎/],['toho',/tohoシネマズ/],['aeon',/イオンシネマ/],['109',/109シネマズ|ムビル/],['tjoy',/tジョイ|ティジョイ|tjoy/],['sunshine',/シネマサンシャイン/],['smt',/movix|新宿ピカデリ|丸の内ピカデリ|熊本ピカデリ|東劇|なんばパクスシネマ|大阪ステションシティシネマ/],['united',/ユナイテッドシネマ|シネプレックス|yebisugardencinema/],['corona',/コロナシネマ/],['forum',/^(フォラム|アトフォラム|ソラリス)/],['kino',/キノシネマ|kinocinema/],['cinemart',/シネマト新宿/],['os',/osシネマズ/],['ttcg',/テアトル新宿|ヒュマントラストシネマ|シネリブル/]];
@@ -65,6 +66,7 @@
    const available=[],upcoming=[];
    for(const o of Array.isArray(c.offers)?c.offers:[]){
     if(!o||typeof o!=='object'||o.access==='intro'||o.repeatability==='one-time'||o.oneTime===true||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
+    if(o.excludedTheaters!==undefined&&!validNames(o.excludedTheaters)||o.includedTheaters!==undefined&&!validNames(o.includedTheaters,true))continue;
     if(theater&&(o.excludedTheaters||[]).some(name=>theater.includes(normalized(name))))continue;
     const included=o.includedTheaters;
     if(included!==undefined){
@@ -99,12 +101,12 @@
   if(!civil(date)||date<today(now)||typeof options.prefecture!=='string'||!options.prefecture)return [];
   const groups=new Map();
   for(const r of Array.isArray(data?.regionalCoverage)?data.regionalCoverage:[]){
-   if(!r||r.prefecture!==options.prefecture||!fresh(r,date,now)||!Array.isArray(r.theaters)||!r.theaters.length||r.theaters.some(t=>typeof t!=='string'||!t.trim()))continue;
+   if(!r||r.prefecture!==options.prefecture||!fresh(r,date,now)||!validNames(r.theaters,true))continue;
    if(!groups.has(r.chain))groups.set(r.chain,new Set());
    r.theaters.forEach(t=>groups.get(r.chain).add(t));
   }
   const allowed=(o,t)=>{
-   for(const key of ['includedTheaters','excludedTheaters'])if(o[key]!==undefined&&(!Array.isArray(o[key])||o[key].some(n=>typeof n!=='string'||!n.trim())||key==='includedTheaters'&&!o[key].length))return false;
+   for(const key of ['includedTheaters','excludedTheaters'])if(o[key]!==undefined&&!validNames(o[key],key==='includedTheaters'))return false;
    const n=normalized(t);
    return !(o.excludedTheaters||[]).some(v=>n.includes(normalized(v)))&&(o.includedTheaters===undefined||o.includedTheaters.some(v=>n.includes(normalized(v))));
   };
@@ -118,7 +120,7 @@
     for(const t of theaters.filter(t=>allowed(o,t))){
      let amount=o.price,max=o.maxPrice;
      if(o.defaultTheaterPrice!==undefined||o.theaterPrices!==undefined){
-      if(!Number.isInteger(o.defaultTheaterPrice)||o.defaultTheaterPrice<=0||!Array.isArray(o.theaterPrices)||o.theaterPrices.some(r=>!r||!Number.isInteger(r.price)||r.price<=0||!Array.isArray(r.theaters)||!r.theaters.length||r.theaters.some(v=>typeof v!=='string'||!v.trim())))continue;
+      if(!Number.isInteger(o.defaultTheaterPrice)||o.defaultTheaterPrice<=0||!Array.isArray(o.theaterPrices)||o.theaterPrices.some(r=>!r||!Number.isInteger(r.price)||r.price<=0||!validNames(r.theaters,true)))continue;
       amount=o.theaterPrices.find(r=>r.theaters.some(v=>normalized(t).includes(normalized(v))))?.price??o.defaultTheaterPrice;max=undefined;
      }
      const key=amount+':'+(max||amount);

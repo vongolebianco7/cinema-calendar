@@ -190,3 +190,11 @@ test('reviewed regional inventory covers all prefectures and applies exact local
  const monday=D.regionalGuide(data,{date:'2026-11-02',prefecture:'香川県'},regionalNow).find(c=>c.id==='aeon').publicBest;assert.equal(monday.price,1200);assert.deepEqual(monday.applicableTheaters,['イオンシネマ 綾川']);
  for(const p of prefs)assert.ok(D.regionalGuide(data,{date:'2026-10-28',prefecture:p},regionalNow).length,p);
 });
+test('punctuation-only theater restrictions and overrides never broaden a regional price',()=>{
+ for(const value of ['-','・','ー'])for(const field of ['includedTheaters','excludedTheaters','override']){
+  const offer={id:'bad',price:1200,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'}};
+  if(field==='override'){offer.defaultTheaterPrice=1300;offer.theaterPrices=[{theaters:[value],price:500}];}else offer[field]=[value];
+  const d={chains:[{id:'a',name:'A',offers:[offer]}],regionalCoverage:[{prefecture:'東京都',chain:'a',theaters:['Tokyo'],verifiedAt:'2026-10-26'}]};
+  assert.equal(D.regionalGuide(d,{date:'2026-10-28',prefecture:'東京都'},regionalNow)[0].publicBest,null,field+':'+value);
+ }
+});

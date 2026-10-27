@@ -23,3 +23,7 @@ Neighboring prefectures cannot leak prices; local exclusions require eligible lo
 Ruling: registration-free and conditional prices remain separate; all applicable recurring methods appear in expandable detail without visitor eligibility selection. Named cinemas support exclusions, not the primary calendar result.
 
 Evidence:24focused units GREEN; original three new regressions RED (intro included;regionalGuide undefined). Full shared quality passed. Isolated worktree and native execution; final fresh review in progress. No threshold/workflow changes.
+
+Review: important punctuation-only names normalized to empty and could broaden restricted offers; reproduced RED with Tokyo fixture, fixed validation in pure engine/UI/override paths,25units GREEN.
+Ruling: reviewer graded hidden third/fourth tied winner names Minor, elevated to Important because series discovery is the user's primary goal. Reproduced Dec1preview missing visibleTOHO/United, display all short names and add browser regression. Cost: slightly taller calendar cells on tied days.
+Geography correction: current officialOSsite identifies OSシネマズミント神戸 (not former guessed 神戸三宮 label); manual record corrected, no tariff/date refresh.

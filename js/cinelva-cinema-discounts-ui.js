@@ -11,7 +11,7 @@
  const labels={public:'登録不要',member:'会員向け',card:'対象カードが必要'};
  const prefectures='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
  const shortNames={toho:'TOHO',aeon:'イオン',109:'109',tjoy:'T・ジョイ',sunshine:'サンシャイン',smt:'MOVIX等',united:'ユナイテッド',ttcg:'テアトル',corona:'コロナ',forum:'フォーラム',kino:'キノシネマ',cinemart:'シネマート',os:'OS','central-miyazaki':'セントラル'};
- const winnerText=chains=>chains.length?chains.slice(0,2).map(c=>shortNames[c.id]||c.name).join('・')+(chains.length>2?` ほか${chains.length-2}系列`:''):'—';
+ const winnerText=chains=>chains.length?chains.map(c=>shortNames[c.id]||c.name).join('・'):'—';
  const params=new URLSearchParams(location.search),named=params.get('discountTheater')||'';
  let data=null,requestedPrefecture=params.get('discountPrefecture')||params.get('prefecture')||'';
  host.innerHTML=`<h2>県内の安い系列・日付を探す</h2>
@@ -60,7 +60,7 @@
   host.querySelector('#discountCoverage').textContent=prefInput.value?`${prefInput.value}の掲載${rows.length}系列・${rows.reduce((n,c)=>n+c.theaters.length,0)}館の所在地と、確認済みの割引を比較しています。未掲載・料金未確認の系列や映画館もあります。日付をタップすると系列ごとの内訳を確認できます。`:'';
  }
  function valid(next){
-  const strings=a=>Array.isArray(a)&&a.every(s=>typeof s==='string'&&s.trim());
+  const strings=a=>Array.isArray(a)&&a.every(s=>typeof s==='string'&&s.normalize('NFKC').replace(/[\s・･ー−–—-]/g,''));
   return next?.version===1&&next.nationalGuideVersion===1&&next.regionalGuideVersion===1&&Array.isArray(next.chains)&&next.chains.length&&next.chains.every(c=>c&&typeof c.id==='string'&&typeof c.name==='string'&&Array.isArray(c.offers)&&c.offers.every(o=>o&&o.access!=='intro'&&o.repeatability==='recurring'&&Number.isInteger(o.price)&&o.price>0&&typeof o.label==='string'&&typeof o.condition==='string'&&typeof o.feeText==='string'&&strings(o.steps)&&(o.excludedTheaters===undefined||strings(o.excludedTheaters))&&(o.includedTheaters===undefined||strings(o.includedTheaters)&&o.includedTheaters.length)))&&Array.isArray(next.regionalCoverage)&&next.regionalCoverage.length&&next.regionalCoverage.every(r=>r&&prefectures.includes(r.prefecture)&&next.chains.some(c=>c.id===r.chain)&&strings(r.theaters)&&r.theaters.length&&typeof r.verifiedAt==='string'&&official(r.sourceUrl));
  }
  async function load(){

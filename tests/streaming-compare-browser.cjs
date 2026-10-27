@@ -31,6 +31,11 @@ async function freePort(){const server=net.createServer();await new Promise(r=>s
   const page=await context.newPage(),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await page.goto(base+'/streaming-compare.html',{waitUntil:'domcontentloaded'});
+  // Complete licensed fixtures show a catalog count; unverified providers stay unknown.
+  await page.getByRole('button',{name:'映画ラインナップ'}).click();
+  const catalogRow=page.locator('#comparisonRows tr').filter({has:page.locator('td:first-child',{hasText:'見放題映画数'})});
+  await catalogRow.locator('button').first().getByText('1本').waitFor();
+  assert.equal(await catalogRow.locator('button').nth(2).innerText(),'未集計');
   await page.getByRole('button',{name:'あなたとの相性'}).click();
   const row=page.locator('#comparisonRows tr').filter({has:page.locator('td:first-child', {hasText:'ブックマークした映画'})});
   await row.locator('button').first().getByText('1本').waitFor();

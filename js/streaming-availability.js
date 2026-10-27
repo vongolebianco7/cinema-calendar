@@ -30,7 +30,7 @@
     if (!group || group.coverage !== 'complete' || group.entitlement !== 'subscription') return {ok:false,reason:'unverified-coverage'};
     if (!group.source || !Array.isArray(group.source.urls) || !group.source.urls.length ||
         !group.source.urls.every(url=>typeof url==='string' && /^https:\/\//.test(url))) return {ok:false,reason:'missing-evidence'};
-    if (!Array.isArray(group.movies)) return {ok:false,reason:'invalid-movies'};
+    if (!Array.isArray(group.movies) || group.movies.length === 0) return {ok:false,reason:'empty-or-invalid-catalog'};
     const seen = new Set();
     for (const movie of group.movies) {
       const id = Number(movie && movie.tmdb_id);

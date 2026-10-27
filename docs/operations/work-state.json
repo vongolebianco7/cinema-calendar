@@ -1391,7 +1391,7 @@
     "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
   },
   "nationwide_cinema_savings": {
-    "status": "in_progress",
+    "status": "blocked",
     "branch": "feat/chain-wide-savings-20261027",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
@@ -1409,10 +1409,10 @@
       "cloud_browser": "14calendar day buttons,10/28tap selected and caption updated,23rows sorted500→1500 including range1300–1400;3BenefitStation rows and fees/contract/1point=1yen caveats;0eligibility checkbox inputs,no page overflow,no Cinelva-origin console errors observed. Browser extension metadata errors excluded. Read-only;no production record writes or physical iPhone claim.",
       "build": "Exact final and merged tree identical; actual production proof,complete shared quality and static build passed."
     },
-    "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification.",
+    "next_action": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts. Scheduled resume2026-10-28 13:55:55JST;not yet published.",
     "review": "Independent reviewer confirmed dropped chain notes/excluded theaters important finding fixed. Named theater navigation test now waits for URL and selected-theater rendering before table assertion;actual Chromium/WebKit pass. Source completeness saw a WebKit fixture timeout;same-source final completeness passed without threshold/source changes. Final backup attempt1 timed out downloading Ubuntu dependencies;single-job retry2 passed all comparisons.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-27T02:52:17.809Z",
+    "updated_at": "2026-10-27T04:47:24.238Z",
     "pull_request": 520,
     "source_sha": "775f216dffab09955838b9902bed7c95ee5e3470",
     "source_ci": [
@@ -1565,14 +1565,156 @@
       "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility."
     },
     "prefecture_chain_comparison": {
-      "status": "in_progress",
-      "updated_at": "2026-10-27T04:09:57.187447+00:00",
+      "status": "blocked",
+      "updated_at": "2026-10-27T04:47:24.238Z",
       "branch": "feat/prefecture-chain-calendar-20261027",
       "base_sha": "e6788c6573410fe7e1f357725cdcbba5859e0877",
-      "scope": "Choose prefecture, compare all local listed chains flat;calendar shows winning chain names and dates,daytap per-chain table;cinema names only applicability details.No one-time coupons/chain picker.42recurring methods,14profiles,159prefecture-chain groups,323named theaters,47prefectures.",
-      "validation": "25focused units and full shared quality pass. Important punctuation-only normalized theater restrictions reproduced RED thenGREEN; coverage/UI/override validators fail closed. Dec1preview visibly hid third/fourth tied winners; all short names now displayed with browser regression. Independent fresh review has no other blockers;actual new browserCI pending.",
-      "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification.",
-      "review": "Whole-branch fresh review: one important malformed-normalization finding fixed with nineinput combinations; one tie-visibility minor elevated because series discovery is primary,actual preview RED and browser regression added. OS theater name corrected to current ミント神戸 from official indexed listing. No other blockers;no claim of exhaustive cinema inventory."
+      "scope": "Prefecture-wide flat comparison of all local listed chains,calendar winning series names/all ties,daytap chain table;no chain picker or one-time coupons.42recurring methods/14profiles,47prefectures,159geographic groups/323named theaters;nonexhaustive cinemas and tariff coverage.",
+      "validation": "25focused units/fullsharedquality pass. ActualChromium/WebKit47prefectures/root/prefix/lightdark320–1280/date/horizon/localexclusions/109exactprices/Benepo/malformed/directory flows pass. Fresh review punctuation normalization and visibleallties fixed RED→GREEN. Actualproductionguard/fullquality/staticbuild passed. Final andmerged trees identical.",
+      "next_action": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts. Scheduled resume2026-10-28 13:55:55JST;not yet published.",
+      "review": "Whole-branch fresh review: one important malformed-normalization finding fixed with nineinput combinations; one tie-visibility minor elevated because series discovery is primary,actual preview RED and browser regression added. OS theater name corrected to current ミント神戸 from official indexed listing. No other blockers;no claim of exhaustive cinema inventory.",
+      "pull_request": 523,
+      "source_sha": "4027c030379e6d501ec8e295b8fc8161609fcfee",
+      "final_head": "68d9037ca7613ed24937102362cc7e38f18c2cae",
+      "merge_sha": "9b2bd36836a2b4b8deda84d98900dc2c5d347062",
+      "source_ci": [
+        {
+          "id": 40448636827,
+          "name": "Check brand identity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636787,
+          "name": "CINELVA smoke tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636859,
+          "name": "Reproducible backend build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636905,
+          "name": "CINELVA mobile layout smoke test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636842,
+          "name": "CINELVA isolated Pages stage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636932,
+          "name": "Cinemap completeness scorecard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636794,
+          "name": "Autonomous quality gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636829,
+          "name": "Validate frontend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40448636869,
+          "name": "CINELVA backup safety",
+          "status": "completed",
+          "conclusion": "cancelled"
+        }
+      ],
+      "final_ci": [
+        {
+          "id": 40450038986,
+          "name": "CINELVA smoke tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038988,
+          "name": "Check brand identity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038981,
+          "name": "Scorecard contract",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038960,
+          "name": "Reproducible backend build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450039109,
+          "name": "CINELVA mobile layout smoke test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038984,
+          "name": "CINELVA isolated Pages stage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038933,
+          "name": "Cinemap completeness scorecard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450038947,
+          "name": "CINELVA backup safety",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450039013,
+          "name": "Autonomous quality gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40450039004,
+          "name": "Validate frontend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": {
+        "observed_at": "2026-10-27T04:40:50Z",
+        "context": "Vercel – cinema-calendar",
+        "state": "failure",
+        "description": "Deployment rate limited — retry in 24 hours.",
+        "commit": "9b2bd36836a2b4b8deda84d98900dc2c5d347062",
+        "production_deployment_created": false
+      },
+      "production": {
+        "status": "blocked",
+        "last_ready_deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
+        "last_ready_sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+        "url": "https://cinelva.vercel.app/theaters.html#discounts",
+        "new_canonical_and_browser_verification": "not completed;do not claim published"
+      },
+      "resume": {
+        "scheduled_for": "2026-10-28T13:55:55+09:00",
+        "status": "existing one-time Cinelva production-release automation successfully updated;original MYTop10 scope retained",
+        "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
+      }
     }
   }
 }

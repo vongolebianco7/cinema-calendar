@@ -243,7 +243,10 @@ function draw(){
   section.rows.forEach(row=>{const line=document.createElement('tr');line.appendChild(cell('td',row));services.forEach(service=>{
     const td=document.createElement('td');
     if(section.name==='あなたとの相性'||section.name==='映画ラインナップ'){
-      const matches=row==='ブックマークした映画'?confirmedMatches(service.name):personalMatches(service.name,row);
+      const matches=row==='見放題映画数'
+       ? (availability[service.name]?.ok?availability[service.name].movies:null)
+       : row==='ブックマークした映画'?confirmedMatches(service.name)
+       : section.name==='あなたとの相性'?personalMatches(service.name,row):null;
       const btn=cell('button',matches===null?'未集計':matches.length+'本','cellLink');btn.type='button';
       btn.addEventListener('click',()=>matches===null?document.getElementById('dataDialog').showModal():showMatches(service.name+'の'+row,matches));
       td.appendChild(btn);

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
-  "verified_at": "2026-10-26T20:11:33.826Z",
-  "note": "PR518: all exact-source workflows succeeded, including required Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build. 19focused units/full shared quality; Chromium+WebKit root/prefix public-day, named-theater exceptions and malformed restrictions passed.10added methods,40total; original47prefectural examples and review dates retained. Receipt-only commit; require final-head CI and canonical verification."
+  "head_sha": "703226cc6ef4c61d44535ac659180ad0e0519fe5",
+  "verified_at": "2026-10-26T21:02:19.147Z",
+  "note": "PR517 combined main345ea51a with eight verified FOD/Netflix premieres and no-ID calendar detail fallback. All10 exact-source workflows succeeded including four required workflows. Full local quality382Node tests and8focused tests pass; Chromium/WebKit frontend passed. Existing270 streaming/1197 calendar rows preserved. FOD7 identities/posters remain unknown; no zero-omission certification. Receipt-only commit; final-head CI and publication verification required. Vercel daily quota currently blocks publication."
 }

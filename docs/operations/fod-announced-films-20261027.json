@@ -1,0 +1,55 @@
+{
+  "reviewed_at": "2026-10-27",
+  "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+  "scope": "Seven previously omitted films explicitly listed by FOD under dated movie headings. Dates transcribed manually; no scraping or inferred TMDB identity/artwork/monetization.",
+  "added": [
+    {
+      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
+      "date": "2026-10-01",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
+      "date": "2026-10-01",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "カウントダウン",
+      "date": "2026-10-01",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "君の僕の詩",
+      "date": "2026-10-01",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "女",
+      "date": "2026-10-01",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "きみがいるだけで",
+      "date": "2026-10-02",
+      "service": "FOD",
+      "type": "配信"
+    },
+    {
+      "title": "I AM JAM ピザの惑星危機一髪！（活弁吹込版）",
+      "date": "2026-10-03",
+      "service": "FOD",
+      "type": "配信"
+    }
+  ],
+  "validation": "All prior270 streaming and1197 calendar rows unchanged, including order; seven added to each; no fabricated IDs/year/posters. Existing importer accepts reviewed film announcements without catalog identities.",
+  "remaining": [
+    "Seven identities and posters remain unresolved; title-only calendar display uses existing placeholder and official source link.",
+    "No complete authoritative service catalog available; zero omissions not certified.",
+    "TMDB500-page limit and partial dated feeds remain."
+  ]
+}

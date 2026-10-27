@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "703226cc6ef4c61d44535ac659180ad0e0519fe5",
-  "verified_at": "2026-10-26T21:02:19.147Z",
-  "note": "PR517 combined main345ea51a with eight verified FOD/Netflix premieres and no-ID calendar detail fallback. All10 exact-source workflows succeeded including four required workflows. Full local quality382Node tests and8focused tests pass; Chromium/WebKit frontend passed. Existing270 streaming/1197 calendar rows preserved. FOD7 identities/posters remain unknown; no zero-omission certification. Receipt-only commit; final-head CI and publication verification required. Vercel daily quota currently blocks publication."
+  "head_sha": "775f216dffab09955838b9902bed7c95ee5e3470",
+  "verified_at": "2026-10-27T02:28:05.186Z",
+  "note": "PR520 integrated main42e4ce3a: exact four required PR workflows quality40437425884,smoke40437425897,frontend40437425736,backend40437425808 passed,as did mobile40437425763.20focused units/full local quality; calendar/day-tap comparison43methods/Benepo3plans and named exclusions verified in Chromium/WebKit. Completeness source run40437425756 saw a WebKit fixture-detail timeout and1point baseline regression;require final-head completeness and all CI before merge,plus canonical verification. Receipt-only commit."
 }

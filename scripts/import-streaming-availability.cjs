@@ -10,7 +10,7 @@ function validateImport(feed,now=Date.now()){
  if(!feed||feed.schema_version!==1||feed.country!=='JP')problems.push('expected schema_version=1, country=JP');
  if(!feed?.license?.provider||!feed?.license?.agreement_reference||feed?.license?.public_display_authorized!==true)
   problems.push('a verified rights agreement for public display is required');
- if(!feed?.coverage_audit?.auditor||!feed?.coverage_audit?.method||feed?.coverage_audit?.all_supported_services_verified)
+ if(!feed?.coverage_audit?.auditor||!feed?.coverage_audit?.method||feed?.coverage_audit?.all_supported_services_verified!==true)
   problems.push('independent full-catalog coverage audit is required');
  for(const service of serviceKeys){
   const result=validateSnapshot(feed,service,now);

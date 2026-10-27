@@ -151,7 +151,7 @@ html,body{overflow-x:hidden}
 @media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
 </style><link rel="stylesheet" href="assets/theme.css">
 <meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png?v=20261023-clean">
-<link rel="stylesheet" href="assets/cinema-discounts.css?v=20261027-calendar">
+<link rel="stylesheet" href="assets/cinema-discounts.css?v=20261027-prefecture">
 </head>
 <body>
 
@@ -206,7 +206,7 @@ html,body{overflow-x:hidden}
 
 <div class="note">上映時刻は映画館公式サイト由来の取得データを表示しています。上映内容は変更される場合があるため、鑑賞前に公式スケジュールを確認してください。<br><a href="cinelva/credits.html">Credits / Data Sources</a></div>
 </main>
-<script src="js/cinelva-cinema-discounts.js?v=20261027-calendar"></script>
+<script src="js/cinelva-cinema-discounts.js?v=20261027-prefecture"></script>
 <script>
 const $=s=>document.querySelector(s);
 let theaters=[],osmTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
@@ -360,7 +360,7 @@ boot();
    const source=rows.find(x=>x.source_url)?.source_url||'';
    const equipment=screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>';
    const savingsChain=globalThis.CinelvaCinemaDiscounts?.chainForTheater(t.name)||'';
-   const savingsLink=savingsChain?'<a href="theaters.html?discountChain='+encodeURIComponent(savingsChain)+'&amp;discountTheater='+encodeURIComponent(t.name)+'#discounts">安く見る方法</a>':'';
+   const savingsLink=savingsChain?'<a href="theaters.html?discountChain='+encodeURIComponent(savingsChain)+'&amp;discountPrefecture='+encodeURIComponent(t.prefecture||'')+'&amp;discountTheater='+encodeURIComponent(t.name)+'#discounts">安く見る方法</a>':'';
    const links=savingsLink+(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
@@ -404,5 +404,5 @@ boot();
 })();
 </script>
 
-<script src="js/cinelva-cinema-discounts-ui.js?v=20261027-calendar"></script>
+<script src="js/cinelva-cinema-discounts-ui.js?v=20261027-prefecture"></script>
 </body></html>

@@ -65,3 +65,26 @@ The guide no longer selects one sample cinema per prefecture. Chain records appl
 User requires calendar-first presentation and a tapped-day sorted table. Calendar uses reviewed guide() methods for each day, with separate public/conditional ticket minima. Fees, eligibility and purchase steps remain visible/expandable in the table. No assumed visitor eligibility or screening availability.
 
 Added public BenefitStation listed plans: TOHO menu10670209 TC1500yen(after payment12h delivery);AEON10670546 1300yen;United10670674 LUC1500yen. Membership/contract, target theater/plan, purchase quota, delivery and voucher expiry must be checked in the member plan before purchase. Public list is not a guarantee that every employer contract has the same offer. Benepo1point=1yen is a payment method, not an extra tariff reduction or free cinema ticket. Source https://life.bs.benefit-one.inc/menus?keyword=%E6%98%A0%E7%94%BB&type=1 and https://bs.benefit-one.inc/otherPage?other_id=goriyou_benepo (official indexed text manually reviewed; client-rendered body is not an automated data source). No account scraping, login collection, point-balance storage or automatic review-date refresh. Total43methods.
+
+## Current prefecture comparison / recurring-only policy (2026-10-27)
+This section supersedes the earlier sample-prefecture/chain-picker/intro-coupon UI descriptions. The user requires a prefecture-wide flat comparison with series names primary: all local listed chains are compared together, calendar cells identify cheapest chain names, and a date opens one table row per chain with expandable tariff conditions. There is no chain selector and no visitor eligibility checklist. First-enrolment/purchase and all other one-time acquisition offers are excluded from data and pure-engine minima. The500yen initial SMT coupon is removed, leaving42recurring methods in14profiles. Preserve original tariff verifiedAt values; the new geography review is independent.
+
+regionalCoverage contains159prefecture+chain groups/323named cinemas across all47prefectures. Names bind inclusions/exclusions and109theater-specific1300/1400prices before chain minima, instead of treating a sample cinema as the whole prefecture. Unknown/expired geography never generates a price. The UI prominently states that this is the listed chains/verified methods and not an exhaustive inventory of every operating cinema/discount. No inference from incomplete OSM/Wikidata prefecture fields. No production scraper, authenticated benefit access, account/point storage, paid source or new external runtime request.
+
+Manually reviewed primary inventories on2026-10-27:
+- TOHO: https://www.tohotheater.jp/theater/find.html (Kinshicho's exceptional10/31–11/2transition omitted from this comparison snapshot; other reviewed Tokyo theaters retained)
+- AEON: https://www.aeoncinema.com/theater/ (prefecture headings; service-day exclusions still resolved by named theater)
+- United: https://www.ent.lawson.co.jp/search_map/uc/ (exclude explicitly closed Tsukuba,Imabari,Kumamoto);STYLE-SMinatomirai publicWednesday/first1300 verified at https://www.unitedcinemas.jp/minatomirai/price6.html;premium seats excluded
+- SMT: https://www.smt-cinema.com/purchased/ (current23theater list; unavailable premium/partner tariffs are not inferred from an ownership relationship)
+-109: https://109cinemas.net/ and the previously reviewed2026tariff PDF; woodenKiba,Futakotamagawa,Grandberry,Kawasaki,Shonan,Yumegaoka1400others1300;premiumShinjuku excluded
+- Tjoy: https://www.tjoy.co.jp/theater (operated theaters incl jointoperation; exclude partner-operated Wakkanai,SapporoFrontier,OsakaStationCity,NambaPark until tariff applicability individually verified)
+- Sunshine: https://www.cinemasunshine.co.jp/areas/
+- Corona: https://cinema.korona.co.jp/areas/
+- Forum: https://www.forum-movie.net/theater-list (primary indexed listing and current individual official theater pages; body fetch was unavailable)
+- Kino: https://kinocinema.jp/lp/membership/ (current6theater footer only; this geography review does not certify older tariff blocks on that mixed-history page)
+- TTCG: https://www.ttcg.jp/theaters/
+- Cinemart: https://www.cinemart.co.jp/theater/shinjuku/access/
+- OS: https://www.oscinemas.net/ (client-rendered; geographic group limited to two named Kobe theaters)
+- CentralMiyazaki: https://www.mcc-9.jp/miyazaki/ (own tariffs, not AEON)
+
+Series-level minima may apply only to the named participating theaters shown in detail. A public price can require a particular start time. Conditional prices require membership/card/contract and exclude fees. Point use is payment, never a new tariff discount. Never describe this as the cheapest possible ticket for an individual or a known available screening.

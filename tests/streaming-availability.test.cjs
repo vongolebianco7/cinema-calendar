@@ -50,3 +50,8 @@ test('refuses complete-looking snapshots without public display rights and cover
  const noAudit=snapshot();delete noAudit.coverage_audit;
  assert.equal(validateSnapshot(noAudit,'Netflix',NOW).reason,'unaudited-coverage');
 });
+
+test('rejects empty catalog even when metadata claims complete coverage',()=>{
+ const empty=snapshot();empty.services.Netflix.movies=[];
+ assert.equal(validateSnapshot(empty,'Netflix',NOW).reason,'empty-or-invalid-catalog');
+});

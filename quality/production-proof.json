@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
-  "verified_at": "2026-10-26T20:11:33.826Z",
-  "note": "PR518: all exact-source workflows succeeded, including required Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build. 19focused units/full shared quality; Chromium+WebKit root/prefix public-day, named-theater exceptions and malformed restrictions passed.10added methods,40total; original47prefectural examples and review dates retained. Receipt-only commit; require final-head CI and canonical verification."
+  "head_sha": "f0fdf1984cf1e62e0c521d4e1a35416abdf75957",
+  "verified_at": "2026-10-27T02:15:11.515Z",
+  "note": "PR520: calendar-first14days with date-tap ascending comparison,43methods/14profiles and3BenefitStation plans; Benepo is payment,not extra discount.20focused units/full shared quality,independent review resolved exclusions,actualChromium/WebKit mobile/root/prefix passed. Exact four required PR workflows succeeded: quality40401570169,smoke40401570006,frontend40401570029,backend40401570151;mobile40401570017. Receipt-only commit;require final-head CI and canonical verification."
 }

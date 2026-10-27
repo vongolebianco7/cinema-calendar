@@ -14,6 +14,7 @@ must('月額料金（税込）','広告の有無','同時視聴可能台数','�
 must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','streaming-personal-match.js','cinelva-want-to-watch-v1',
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
  'compareBookmarkAvailability','deltaActions','updateMovieDelta','personalMatches(service.name,row)',
+ "row==='見放題映画数'",
  'search.html?','new URLSearchParams({search:movie.title,id:String(movie.tmdb_id)})',
  'const scores=new Map()', 'CinelvaQuickRate?.mountInline', 'cinelva-quick-rate.js',
  "planSpecificCoverageNeeded=['Netflix 広告つき','WOWOW スタンダード','WOWOW トリプル']");

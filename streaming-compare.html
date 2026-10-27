@@ -42,7 +42,7 @@ h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--
   <div class="eyebrow">映画配信サービス比較</div>
   <h1>映画サブスク比較</h1>
   <p class="sub">料金・広告・端末・家族利用・映画ラインナップを横並びで比較。個人向け分析にも対応予定です。</p>
-  <div class="notice" role="status"><strong>データの確認状況</strong><br>公式ヘルプで裏付けできた項目のみ表示し、未確認の仕様は「確認中」とします。現在の配信カレンダーは配信開始情報であり、見放題カタログ全件ではありません。ブックマーク該当本数は、網羅的な視聴可能データが揃うまで計算しません。</div>
+  <div class="notice" role="status"><strong>データの確認状況</strong><br>公式ヘルプで裏付けできた項目のみ表示し、未確認の仕様は「確認中」とします。現在の配信カレンダーは配信開始情報であり、見放題カタログ全件ではありません。ブックマーク該当本数は、網羅的な視聴可能データが揃うまで計算しません。<p id="availabilityStatus" aria-live="polite">見放題作品のデータを確認中です。</p></div>
   <div class="controls" id="filters" aria-label="比較カテゴリ"></div>
   <div class="tableWrap" role="region" aria-label="サブスクの比較表（横にスクロール可能）" tabindex="0">
     <table><thead id="tableHead"></thead><tbody id="comparisonRows"></tbody></table>
@@ -228,8 +228,13 @@ async function loadAvailability(){
   const data=await response.json(),checker=window.CinelvaStreamingAvailability;
   if(!checker)return;
   services.forEach(service=>availability[service.name]=checker.validateSnapshot(data,service.name));
+  const ready=services.filter(service=>availability[service.name]?.ok);
+  const label=document.getElementById('availabilityStatus');
+  if(ready.length===services.length)label.textContent='見放題作品データ：全8サービスの検証済みカタログを利用しています。';
+  else if(ready.length===0)label.textContent='見放題作品データ：全サービス未集計。利用許諾と網羅性を確認できる全件データがありません。';
+  else label.textContent='見放題作品データ：'+ready.map(item=>item.name).join('、')+'のみ検証済み。その他は未集計です。';
   draw();if(active==='あなたとの相性')loadAwards();document.getElementById('fromService').dispatchEvent(new Event('change'));
- }catch{/* Never convert missing or malformed evidence into zero counts. */}
+ }catch{document.getElementById('availabilityStatus').textContent='見放題作品データ：未取得。作品数は未集計です。'}
 }
 const filters=document.getElementById('filters'),head=document.getElementById('tableHead'),body=document.getElementById('comparisonRows');
 let active='すべて';const labels=['すべて',...sections.map(s=>s.name)];

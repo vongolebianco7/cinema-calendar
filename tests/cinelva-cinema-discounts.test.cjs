@@ -151,3 +151,11 @@ test('malformed named-theater restrictions fail closed rather than broadening a 
   assert.equal(r.available.length,0,JSON.stringify(includedTheaters));assert.equal(r.upcoming.length,0);
  }
 });
+test('method calendar separates public and conditional minima and retains named exceptions',()=>{
+ const now=new Date('2026-10-27T01:00:00Z');
+ const a=D.guideCalendar(data,{date:'2026-10-27',chain:'united',theater:'ユナイテッド・シネマ札幌'},now);
+ assert.equal(a.length,14);assert.equal(a[1].date,'2026-10-28');assert.equal(a[1].publicPrice,null);assert.equal(a[2].publicPrice,1300);
+ const b=D.guideCalendar(data,{date:'2026-10-28',chain:'smt',theater:'MOVIX日吉津'},now)[0];assert.equal(b.publicPrice,1400);assert.equal(b.conditionalPrice,500);
+ assert.deepEqual(D.guideCalendar(data,{date:'invalid'},now),[]);
+ assert.ok(D.guideCalendar(data,{date:'2027-01-01'},new Date('2027-01-01T01:00:00Z')).every(d=>d.publicPrice===null&&d.conditionalPrice===null));
+});

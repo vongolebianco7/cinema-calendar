@@ -1468,6 +1468,15 @@
       "source_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
       "final_head": "9a2f6d5aee333c5bf8643589f39d97afececc8ea",
       "merge_sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8"
+    },
+    "chain_wide_navigation": {
+      "status": "in_progress",
+      "updated_at": "2026-10-26T20:54:13.951128+00:00",
+      "branch": "feat/chain-wide-savings-20261027",
+      "base_sha": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
+      "scope": "Calendar-first14days; tap date for sorted comparison table. Public/conditional prices separate;fees/steps/exclusions visible. BenefitStation3plans with Benepo payment caveat.43methods/14profiles; no one-prefecture-one-example restriction.",
+      "validation": "20focused units/full shared quality pass. Calendar missing-function RED thenGREEN. Review exclusion-note blocker fixed, browser assertions added; reviewer confirms resolved. Actual new browserCI pending.",
+      "next_action": "Exact-source CI, receipt-only proof, final CI, merge and canonical verification."
     }
   }
 }

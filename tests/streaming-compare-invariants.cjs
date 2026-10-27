@@ -10,7 +10,8 @@ const must=(...parts)=>parts.forEach(part=>assert.ok(html.includes(part),'missin
 must('月額料金（税込）','広告の有無','同時視聴可能台数','作成可能プロフィール数',
  '家族共有','登録可能端末数','ブックマークした映画','好きな監督の映画',
  '好きな映画賞の映画','サブスク乗り換え時の増減','billingCycle','yearlyFees',
- 'Disney+','Lemino','Prime Video','WOWOW','Apple TV','確認中','未集計');
+ 'Disney+','Lemino','Prime Video','WOWOW','Apple TV','確認中','未集計',
+ 'availabilityStatus','全サービス未集計','その他は未集計です');
 must('streaming-availability.js','streaming-availability.json','streaming-bookmark-identity.js','streaming-personal-match.js','cinelva-want-to-watch-v1',
  'confirmedMatches(service.name)','matchesDialog','matchBookmarkIds(validated,ids)',
  'compareBookmarkAvailability','deltaActions','updateMovieDelta','personalMatches(service.name,row)',

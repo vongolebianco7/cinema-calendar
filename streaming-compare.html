@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>サブスク比較 | Cinelva</title>
+<meta name="description" content="映画配信サブスクの料金、広告、同時視聴、プロフィール、家族共有と、映画ラインナップを比較するためのカタログ。">
+<link rel="icon" href="assets/cinelva_original_colors_transparent.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0c0f">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png">
+<script src="js/theme.js?v=20261023-frame-2"></script>
+<link rel="stylesheet" href="assets/theme.css?v=20261023-dark-frame-1">
+<style>
+:root{--page:#f5f2ea;--panel:#fffdf8;--ink:#292821;--muted:#706d63;--line:#dcd6c9;--soft:#eae4d8;--brand:#762f3d;--gold:#b99c59}
+html[data-theme=dark]{--page:#171918;--panel:#212421;--ink:#f2eee4;--muted:#bab6aa;--line:#3c4039;--soft:#30352e;--brand:#e6a5ac;--gold:#d9bd7f}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
+a{color:inherit}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.top{background:var(--panel);border-bottom:1px solid var(--line);padding:12px max(18px,calc((100vw - 1120px)/2));display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px;font:25px Georgia,"Yu Mincho",serif;text-decoration:none}.brand img{width:32px;height:32px;object-fit:contain}
+main{max-width:1180px;margin:auto;padding:28px 18px 75px}.eyebrow{font-size:11px;color:var(--brand);letter-spacing:.12em;font-weight:750}
+h1{font:clamp(27px,5vw,39px)/1.3 Georgia,"Yu Mincho",serif;margin:5px 0 9px}p{margin:7px 0}.sub{color:var(--muted);font-size:13px}
+.notice{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--panel);margin:20px 0;color:var(--muted);font-size:12px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.chip{border:1px solid var(--line);background:var(--panel);padding:9px 13px;border-radius:5px;color:var(--ink);min-height:42px}.chip[aria-pressed=true]{border-color:var(--brand);color:var(--brand);font-weight:800}
+.tableWrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:var(--panel);overscroll-behavior-inline:contain}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:730px;text-align:center}th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:12px 10px;vertical-align:middle;min-width:148px}
+th:first-child,td:first-child{position:sticky;left:0;z-index:1;min-width:160px;width:190px;text-align:left;background:var(--panel);font-weight:700}
+th:last-child,td:last-child{border-right:0}thead th{background:var(--soft);font-size:14px}thead th:first-child{background:var(--soft);z-index:2}
+tr:last-child td{border-bottom:0}.section td{background:var(--soft)!important;font-size:12px;font-weight:800;text-align:left}.section td:first-child{position:static}.muted{color:var(--muted)}.status{font-size:12px;color:var(--muted)}
+.serviceLabel{display:block;font-size:14px}.official{display:inline-block;margin-top:4px;font-size:11px;color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+.cellLink{background:none;color:var(--brand);border:0;text-decoration:underline;text-underline-offset:3px;min-height:36px;padding:4px;font-weight:700}.cellLink:disabled{color:var(--muted);text-decoration:none;cursor:default}
+.verified{border:0;background:none;color:var(--brand);padding:3px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;line-height:1.5}.verified small{display:block;font-weight:400;font-size:10px;color:var(--muted)}.calc{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:18px;margin-top:20px}.calcGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calc select{max-width:100%;width:100%;min-height:42px;border:1px solid var(--line);color:var(--ink);background:var(--panel);border-radius:5px;padding:8px}.calc label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.calcResult{margin-top:14px;font-size:14px;font-weight:700}.calcNote{font-size:12px;color:var(--muted)}.sourceList{padding-left:18px;font-size:12px}.sourceList li{margin:8px 0}.legend{margin-top:16px;color:var(--muted);font-size:12px}.sectionHeader{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:32px}
+h2{font:24px Georgia,"Yu Mincho",serif;margin:0}.details{border:1px solid var(--line);background:var(--panel);border-radius:8px;margin-top:12px;padding:17px}
+.matchGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 9px;margin-top:16px}.matchMovie{min-width:0}.matchPoster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--soft);display:block}.matchFallback{display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);padding:8px;font-size:11px}.matchMovie a{display:block;text-decoration:none;color:inherit}.matchMovie a:focus-visible{outline:2px solid var(--gold)}.matchMovie strong{display:block;font-size:12px;line-height:1.4;margin-top:5px;overflow-wrap:anywhere}.matchMovie small{color:var(--muted);font-size:11px}.matchReview{min-height:44px;display:flex;align-items:center;justify-content:center;margin-top:4px}.matchReview button{min-height:36px}.evidenceStamp{font-size:11px;color:var(--muted)}.matchNote{font-size:12px;color:var(--muted)}.deltaActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.deltaActions button{min-height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--brand);padding:7px 12px;font-weight:700}.deltaActions button:disabled{color:var(--muted);cursor:default}dialog{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);width:min(520px,92vw);max-height:85dvh;padding:22px}dialog::backdrop{background:#0009}
+.modalClose{float:right;border:1px solid var(--line);background:transparent;border-radius:5px;padding:4px 11px}
+@media(max-width:600px){main{padding:22px 12px 70px}th,td{padding:10px 8px;min-width:126px}th:first-child,td:first-child{width:142px;min-width:142px;font-size:12px}.top{padding:10px 12px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="./"><img src="assets/cinelva_original_colors_transparent.png" alt="">Cinelva</a><a href="./">映画カレンダーへ戻る</a></header>
+<main>
+  <div class="eyebrow">映画配信サービス比較</div>
+  <h1>映画サブスク比較</h1>
+  <p class="sub">料金・広告・端末・家族利用・映画ラインナップを横並びで比較。個人向け分析にも対応予定です。</p>
+  <div class="notice" role="status"><strong>データの確認状況</strong><br>公式ヘルプで裏付けできた項目のみ表示し、未確認の仕様は「確認中」とします。現在の配信カレンダーは配信開始情報であり、見放題カタログ全件ではありません。ブックマーク該当本数は、網羅的な視聴可能データが揃うまで計算しません。<p id="availabilityStatus" aria-live="polite">見放題作品のデータを確認中です。</p></div>
+  <div class="controls" id="filters" aria-label="比較カテゴリ"></div>
+  <div class="tableWrap" role="region" aria-label="サブスクの比較表（横にスクロール可能）" tabindex="0">
+    <table><thead id="tableHead"></thead><tbody id="comparisonRows"></tbody></table>
+  </div>
+  <p class="legend">※「確認中」は「非対応」を意味しません。各サービスの仕様は契約プランや利用地域で変わる場合があります。表は横にスクロールできます。</p>
+  <section class="calc" aria-labelledby="calcTitle"><h2 id="calcTitle">乗り換え料金シミュレーター</h2><p class="sub">公式月額料金を確認できたサービス・プラン同士を比較します。見放題作品の増減は、網羅的なデータが揃うまで未集計です。</p>
+    <div class="calcGrid"><div><label for="fromService">現在のサービス</label><select id="fromService"></select></div><div><label for="toService">乗り換え先</label><select id="toService"></select></div></div>
+    <div class="controls"><label for="billingCycle" style="font-weight:700">比較する支払い方法</label><select class="chip" id="billingCycle" aria-label="支払い方法"><option value="monthly">月額プランで12か月利用</option><option value="best">年額プランがあれば年額を利用</option></select></div>
+    <p class="calcResult" id="calcResult" aria-live="polite"></p><p id="movieDelta" class="calcNote" aria-live="polite">見たい映画の増減：未集計</p><div class="deltaActions" id="deltaActions" hidden></div><p class="calcNote">Webからの通常契約料金を基準とし、バンドル・アプリ決済・キャンペーン・ポイント価値は含みません。</p>
+    <p class="calcNote">※ 年額プランがあるDisney+は、月額プランの12か月分と年額一括払いで負担が異なります。年額プランは12,500円／16,700円です。</p>
+  </section>
+  <div class="sectionHeader"><h2>映画好き向けの比較</h2></div>
+  <div class="details">
+    <p><strong>見たい映画・好きな監督・映画賞</strong></p>
+    <p class="sub">検証済みの見放題作品データがあるサービスでは、該当本数をタップして作品名・ポスター・MY評価を確認できます。見放題・レンタルを混在させないため、データが未確認のサービスは未集計とします。</p>
+    <button class="chip" type="button" id="aboutData">なぜ本数が表示されないのか</button>
+  </div>
+</main>
+<dialog id="matchesDialog" aria-labelledby="matchesTitle"><button class="modalClose" id="matchesClose" type="button" aria-label="閉じる">×</button><h2 id="matchesTitle">見たい映画</h2><p id="matchesSummary" class="matchNote"></p><div id="matchesList" class="matchGrid"></div></dialog>
+<dialog id="dataDialog" aria-labelledby="dialogTitle"><button type="button" class="modalClose" id="dialogClose" aria-label="閉じる">×</button><h2 id="dialogTitle">作品数の集計について</h2><p>現在の配信開始カレンダーのデータから、各配信サービスの見放題作品全件や配信終了作品を正確に判断することはできません。ブックマークに作品IDがない場合も、確認できるまで集計しません。</p><p>誤った数字を表示しないため、配信事業者ごとのライセンス状況・プラン・地域・更新日を確認できるデータソースが整うまで、個人別の該当本数と作品一覧は無効にしています。</p><p>無料で使えるTMDBの作品別配信情報は、8サービスの全作品を網羅していることの証明にはなりません。JustWatchの全件データ提供はパートナー契約が必要です。無許可のスクレイピングは行いません。</p><p class="sub">参考：<a href="https://developer.themoviedb.org/docs/faq" target="_blank" rel="noopener noreferrer">TMDBの利用条件</a> ／ <a href="https://apis.justwatch.com/docs/data_export/" target="_blank" rel="noopener noreferrer">JustWatchのデータ提供条件</a></p></dialog>
+<dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="modalClose" type="button" id="sourceClose" aria-label="閉じる">×</button><h2 id="sourceTitle">確認済みスペック</h2><p id="sourceDescription"></p><p class="sub">最終確認：2026年10月27日。料金・プランは変わることがあります。</p><ul class="sourceList" id="sourceLinks"></ul></dialog>
+<script src="js/streaming-availability.js"></script>
+<script src="js/cinelva-library-records.js"></script>
+<script src="js/cinelva-movie-identity.js"></script>
+<script src="js/cinelva-quick-rate.js"></script>
+<script src="js/streaming-bookmark-identity.js"></script>
+<script src="js/streaming-personal-match.js"></script>
+<script>
+(function(){
+'use strict';
+const services=[
+  {name:'Netflix',url:'https://www.netflix.com/jp/'},
+  {name:'U-NEXT',url:'https://video.unext.jp/'},
+  {name:'Prime Video',url:'https://www.amazon.co.jp/gp/video/storefront/'},
+  {name:'Disney+',url:'https://www.disneyplus.com/ja-jp'},
+  {name:'Hulu',url:'https://www.hulu.jp/'},
+  {name:'Apple TV',url:'https://tv.apple.com/jp'},
+  {name:'Lemino',url:'https://lemino.docomo.ne.jp/'},
+  {name:'WOWOW',url:'https://www.wowow.co.jp/'}
+];
+// Official first-party Japanese help pages, reviewed on 2026-10-27.
+// Every displayed value has a specific source. Unknown values remain unfilled.
+const verified={
+ 'Netflix':{
+  '月額料金（税込）':{value:'890円〜2,290円',note:'広告つきスタンダード890円／スタンダード1,590円／プレミアム2,290円。Netflix公式の日本向け料金表示',urls:['https://www.netflix.com/jp/']},
+  '最大画質・4K':{value:'プレミアム：4K＋HDR',note:'スタンダードと広告つきスタンダードは1080p',urls:['https://www.netflix.com/jp/']},
+  '広告なしプラン':{value:'スタンダード以上',note:'広告なしプランは月額1,590円／2,290円',urls:['https://www.netflix.com/jp/']},
+  '広告の有無':{value:'広告ありプランあり',note:'広告つきプランは作品制限あり',urls:['https://help.netflix.com/ja/node/126831']},
+  '作成可能プロフィール数':{value:'最大5',note:'プロフィール数は同時視聴台数とは別',urls:['https://help.netflix.com/ja/node/322532375336036']}
+ },
+ 'U-NEXT':{
+  '月額料金（税込）':{value:'2,189円',note:'Web申込の月額プラン。アプリ申込は異なる',urls:['https://help.unext.jp/guide/detail/types-of-service-plan']},
+  '同時視聴可能台数':{value:'最大4台',note:'4つの別アカウント利用時。同一作品などに制限あり',urls:['https://help.unext.jp/guide/detail/how-many-devices-can-be-play','https://help.unext.jp/guide/detail/play-at-the-same-time-in-multiple-accounts']},
+  '登録可能端末数':{value:'ログイン台数制限なし',note:'同一アカウントでの同時視聴は禁止',urls:['https://help.unext.jp/guide/detail/not-allowed-play-on-some-terminals-at-the-same-time-by-the-same-account']},
+  '作成可能プロフィール数':{value:'最大4アカウント',note:'メイン1＋サブ3',urls:['https://help.unext.jp/guide/detail/what-is-family-account']},
+  '家族共有':{value:'同居家族 最大4人',note:'サブアカウント3つを無料追加',urls:['https://help.unext.jp/guide/detail/what-is-family-account','https://help.unext.jp/guide/detail/u-next-cost-perf']},
+  '別居家族の利用条件':{value:'同居家族向け',note:'別居利用を許可しているという意味ではありません',urls:['https://help.unext.jp/guide/detail/u-next-cost-perf']}
+ },
+ 'Disney+':{
+  '月額料金（税込）':{value:'1,250円／1,670円',note:'スタンダード／プレミアム。Disney+公式Web契約',urls:['https://www.disneyplus.com/ja-jp/explore/how-to-join']},
+  '年額料金（税込）':{value:'12,500円／16,700円',note:'スタンダード／プレミアム。月払い12か月との比較で約2か月分割引',urls:['https://www.disneyplus.com/ja-jp/explore/how-to-join']},
+  '広告の有無':{value:'両プラン広告なし',note:'サービス内プロモーション等と広告の取り扱いは異なります',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  '同時視聴可能台数':{value:'2台／4台',note:'スタンダード／プレミアム',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  '最大画質・4K':{value:'Full HD／4K HDR',note:'スタンダード／プレミアム。対応デバイス・作品に限る',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  'サラウンド・Dolby Atmos':{value:'5.1／Dolby Atmos',note:'スタンダード／プレミアム。対応デバイス・作品に限る',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  'オフライン再生':{value:'両プラン対応',note:'ダウンロード可能作品と対応端末に限る',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  'ダウンロード可能台数':{value:'最大10台',note:'両プラン。対応作品・端末に限る',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']},
+  '別居家族の利用条件':{value:'追加メンバー制度あり',note:'追加メンバーは月額540円、対象条件あり',urls:['https://www.disneyplus.com/ja-jp/explore/what-is-disneyplus']}
+ },
+ 'Lemino':{
+  '月額料金（税込）':{value:'1,540円',note:'2026年2月からのWeb契約。アプリ内課金は1,650円',urls:['https://lemino.docomo.ne.jp/leminonews/articles/lemino-price-revision-news-release']},
+  '無料体験':{value:'初回初月無料あり',note:'適用条件あり。App Store / Google Play等は対象外',urls:['https://lemino.docomo.ne.jp/leminonews/articles/what-is-lemino-premium']}
+ },
+ 'Prime Video':{
+  '月額料金（税込）':{value:'600円（Prime会費）',note:'Amazonプライム会員特典にPrime Videoが含まれます。レンタル・追加チャンネルは別料金',urls:['https://www.cdn.amazon.co.jp/-/en/gp/subs/primeclub/signup/main.html']},
+  '年額料金（税込）':{value:'5,900円（Prime会費）',note:'月額換算約492円。別途レンタル・購入・チャンネル課金あり',urls:['https://www.cdn.amazon.co.jp/-/en/gp/subs/primeclub/signup/main.html']}
+ },
+ 'WOWOW':{
+  '月額料金（税込）':{value:'2,530円〜',note:'スタンダード2,530円。トリプル月額3,960円。契約形態やApp Store決済で異なる',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']},
+  '年額料金（税込）':{value:'トリプル43,560円',note:'トリプル年額のみ。WOWOWとの直接契約など利用条件に注意',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']},
+  '同時視聴可能台数':{value:'1台／3台',note:'スタンダード／トリプル。同時視聴数は契約形態・プランによる',urls:['https://support.wowow.co.jp/answer/64703ec2824840db044f89c3/']}
+ },
+ 'Apple TV':{
+  '月額料金（税込）':{value:'900円',note:'Apple公式の日本向けキャンペーン規約に記載された通常月額。Apple TVアプリのレンタル・購入作品は対象外',urls:['https://www.apple.com/jp/promo/pdf/JA_JP_ATV_Promo_TandCs.pdf']},
+  '同時視聴可能台数':{value:'最大6台',note:'大部分の作品で最大6台。作品や学生プラン等には例外あり',urls:['https://support.apple.com/ja-jp/118239']},
+  '家族共有':{value:'最大6人',note:'本人とファミリー共有の家族最大5人',urls:['https://support.apple.com/ja-jp/108107']},
+  'オフライン再生':{value:'対応',note:'iPhone、iPad、Mac、Windows PCなどでダウンロード可能。スマートテレビ等は非対応',urls:['https://support.apple.com/ja-jp/118239']},
+  '解約・契約条件':{value:'解約可能',note:'Apple公式の解約手順。決済経路により解約方法が異なる',urls:['https://support.apple.com/ja-jp/118398']}
+ },
+ 'Hulu':{
+  '作成可能プロフィール数':{value:'最大6',note:'Hulu公式のサービス案内による',urls:['https://www.hulu.jp/about/']},
+  'オフライン再生':{value:'対応',note:'事前にダウンロードした対応作品をオフラインで視聴可能',urls:['https://www.hulu.jp/about/']},
+  '最大画質・4K':{value:'4K対応作品あり',note:'すべての作品が4Kではありません',urls:['https://www.hulu.jp/about/']},
+  '解約・契約条件':{value:'いつでも解約可',note:'公式案内では解約違約金なし',urls:['https://www.hulu.jp/about/']},
+  '月額料金（税込）':{value:'1,320円',note:'2026年10月1日改定。通常Web契約・毎月400ポイント付与。アプリ決済は異なる',urls:['https://help.hulu.jp/hc/ja/articles/59524415235865--%E9%87%8D%E8%A6%81%E3%81%AA%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B-Hulu-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%94%B9%E5%AE%9A%E3%81%AB%E4%BC%B4%E3%81%86%E6%9C%88%E9%A1%8D%E5%88%A9%E7%94%A8%E6%96%99%E9%87%91%E6%94%B9%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B']},
+  '同時視聴可能台数':{value:'最大4台',note:'同一作品は最大2台。レンタル・購入は対象外',urls:['https://help.hulu.jp/hc/ja/articles/360044166294-1%E3%81%A4%E3%81%AE%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E5%90%8C%E6%99%82%E8%A6%96%E8%81%B4%E5%8F%AF%E8%83%BD%E3%81%A7%E3%81%99%E3%81%8B']}
+ }
+};
+const monthlyFees={'Netflix 広告つき':890,'Netflix スタンダード':1590,'Netflix プレミアム':2290,'U-NEXT':2189,'Hulu':1320,'Disney+ スタンダード':1250,'Disney+ プレミアム':1670,'Lemino プレミアム':1540,'Prime Video（プライム会費）':600,'WOWOW スタンダード':2530,'WOWOW トリプル':3960,'Apple TV':900};
+const yearlyFees={'Disney+ スタンダード':12500,'Disney+ プレミアム':16700,'Prime Video（プライム会費）':5900,'WOWOW トリプル':43560};
+const sections=[
+  {name:'料金と契約',rows:['月額料金（税込）','年額料金（税込）','広告の有無','広告なしプラン','無料体験','解約・契約条件']},
+  {name:'利用人数・端末',rows:['同時視聴可能台数','登録可能端末数','作成可能プロフィール数','家族共有','別居家族の利用条件','ダウンロード可能台数']},
+  {name:'映像と音声',rows:['最大画質・4K','HDR・Dolby Vision','サラウンド・Dolby Atmos','オフライン再生','対応デバイス']},
+  {name:'映画ラインナップ',rows:['見放題映画数','洋画・邦画・アニメ','独占配信映画','映画賞受賞作品数']},
+  {name:'あなたとの相性',rows:['ブックマークした映画','好きな監督の映画','好きな映画賞の映画','未鑑賞の名作','サブスク乗り換え時の増減']}
+];
+const availability={};
+let awardDataset=null,awardsRequested=false;
+const BOOKMARK_KEY='cinelva-want-to-watch-v1';
+function bookmarkIds(){
+ try{
+  const raw=JSON.parse(localStorage.getItem(BOOKMARK_KEY)||'{}');
+  const records=window.CinelvaLibraryRecords?.all?.()||[];
+  return window.CinelvaStreamingBookmarks?.resolve(raw,records).ids??null;
+ }catch{return null}
+}
+function confirmedMatches(service){
+ const validated=availability[service];
+ if(!validated||!validated.ok)return null;
+ const ids=bookmarkIds();if(!ids)return null;
+ return window.CinelvaStreamingAvailability.matchBookmarkIds(validated,ids);
+}
+function personalMatches(service,row){
+ const validated=availability[service],matcher=window.CinelvaStreamingPersonalMatch;
+ if(!validated?.ok||!matcher)return null;
+ let records;
+ try{records=window.CinelvaLibraryRecords?.all?.()}catch{return null}
+ if(!Array.isArray(records))return null;
+ if(row==='好きな監督の映画')return matcher.directorMatches(validated,records);
+ if(row==='好きな映画賞の映画')return awardDataset===null?null:matcher.awardMatches(validated,records,awardDataset);
+ return null;
+}
+async function loadAwards(){
+ if(awardsRequested||!services.some(service=>availability[service.name]?.ok))return;
+ awardsRequested=true;
+ try{
+  const response=await fetch('data/awards.json');
+  if(!response.ok)return;
+  const data=await response.json();
+  if(!Array.isArray(data.awards))return;
+  awardDataset=data;draw();
+ }catch{/* Unknown award data must never be shown as zero matches. */}
+}
+function showMatches(service,matches){
+ document.getElementById('matchesTitle').textContent=service;
+ document.getElementById('matchesSummary').textContent='検証済み見放題データとの照合結果：'+matches.length+'作品。配信状況は変わる場合があります。';
+ const grid=document.getElementById('matchesList');grid.replaceChildren();
+ if(!matches.length)grid.appendChild(cell('p','現在該当する作品はありません。','matchNote'));
+ let records=[];try{records=window.CinelvaLibraryRecords?.all?.()||[]}catch{}
+ const scores=new Map();
+ if(Array.isArray(records))for(const record of records){
+  const explicit=record?.tmdbId??record?.tmdb_id;
+  if(explicit!=null && /^[1-9][0-9]*$/.test(String(explicit)) && Number.isSafeInteger(Number(explicit)))
+   scores.set(Number(explicit),record);
+ }
+ matches.forEach(movie=>{
+  const card=document.createElement('article');card.className='matchMovie';
+  const link=document.createElement('a');
+  const params=new URLSearchParams({search:movie.title,id:String(movie.tmdb_id)});
+  link.href='search.html?'+params.toString();link.setAttribute('aria-label',movie.title+'の作品詳細');
+  if(typeof movie.poster==='string'&&/^https:\/\/(?:image\\.tmdb\\.org)\//.test(movie.poster)){
+   const img=document.createElement('img');img.className='matchPoster';img.src=movie.poster;img.alt=movie.title+'のポスター';img.loading='lazy';img.referrerPolicy='no-referrer';link.appendChild(img);
+  }else link.appendChild(cell('div','ポスター未取得','matchPoster matchFallback'));
+  link.appendChild(cell('strong',movie.title));card.appendChild(link);
+  const record=scores.get(Number(movie.tmdb_id));
+  const value=record&&Number.isFinite(Number(record.rating))&&Number(record.rating)>0?Number(record.rating).toFixed(1):'未鑑賞';
+  card.appendChild(cell('small','MY評価：'+value));
+  const slot=cell('div','','matchReview');card.appendChild(slot);grid.appendChild(card);
+  window.CinelvaQuickRate?.mountInline(slot,{
+   id:Number(movie.tmdb_id),tmdbId:Number(movie.tmdb_id),title:movie.title,
+   poster:typeof movie.poster==='string'?movie.poster:'',year:movie.year||'',
+   source:'tmdb',catalog:true
+  });
+ });
+ document.getElementById('matchesDialog').showModal();
+}
+async function loadAvailability(){
+ // Only show matching counts after a fresh, complete, JP subscription-only snapshot passes validation.
+ try{
+  const response=await fetch('data/streaming-availability.json',{cache:'no-store'});
+  if(!response.ok)return;
+  const data=await response.json(),checker=window.CinelvaStreamingAvailability;
+  if(!checker)return;
+  services.forEach(service=>availability[service.name]=checker.validateSnapshot(data,service.name));
+  const ready=services.filter(service=>availability[service.name]?.ok);
+  const label=document.getElementById('availabilityStatus');
+  if(ready.length===services.length)label.textContent='見放題作品データ：全8サービスの検証済みカタログを利用しています。';
+  else if(ready.length===0)label.textContent='見放題作品データ：全サービス未集計。利用許諾と網羅性を確認できる全件データがありません。';
+  else label.textContent='見放題作品データ：'+ready.map(item=>item.name).join('、')+'のみ検証済み。その他は未集計です。';
+  draw();if(active==='あなたとの相性')loadAwards();document.getElementById('fromService').dispatchEvent(new Event('change'));
+ }catch{document.getElementById('availabilityStatus').textContent='見放題作品データ：未取得。作品数は未集計です。'}
+}
+const filters=document.getElementById('filters'),head=document.getElementById('tableHead'),body=document.getElementById('comparisonRows');
+let active='すべて';const labels=['すべて',...sections.map(s=>s.name)];
+labels.forEach(label=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',String(label===active));b.addEventListener('click',()=>{active=label;document.querySelectorAll('#filters button').forEach(el=>el.setAttribute('aria-pressed',String(el.textContent===active)));draw();if(label==='あなたとの相性')loadAwards()});filters.appendChild(b)});
+function cell(tag,text,cls){const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=text;return e}
+function draw(){
+ head.replaceChildren();body.replaceChildren();const tr=document.createElement('tr');tr.appendChild(cell('th','比較項目'));
+ services.forEach(service=>{const th=document.createElement('th');const name=cell('span',service.name,'serviceLabel');th.appendChild(name);const a=cell('a','公式サイト','official');a.href=service.url;a.target='_blank';a.rel='noopener noreferrer';th.appendChild(a);tr.appendChild(th)});head.appendChild(tr);
+ sections.filter(s=>active==='すべて'||s.name===active).forEach(section=>{
+  const banner=document.createElement('tr');banner.className='section';const item=cell('td',section.name);item.colSpan=services.length+1;banner.appendChild(item);body.appendChild(banner);
+  section.rows.forEach(row=>{const line=document.createElement('tr');line.appendChild(cell('td',row));services.forEach(service=>{
+    const td=document.createElement('td');
+    if(section.name==='あなたとの相性'||section.name==='映画ラインナップ'){
+      const matches=row==='見放題映画数'
+       ? (availability[service.name]?.ok?availability[service.name].movies:null)
+       : row==='ブックマークした映画'?confirmedMatches(service.name)
+       : section.name==='あなたとの相性'?personalMatches(service.name,row):null;
+      const btn=cell('button',matches===null?'未集計':matches.length+'本','cellLink');btn.type='button';
+      btn.addEventListener('click',()=>matches===null?document.getElementById('dataDialog').showModal():showMatches(service.name+'の'+row,matches));
+      td.appendChild(btn);
+    }
+    else {
+      const info=(verified[service.name]||{})[row];
+      if(info){const btn=cell('button',info.value,'verified');btn.type='button';btn.title=info.note;btn.setAttribute('aria-label',service.name+' '+row+' '+info.value+' の根拠を確認');btn.addEventListener('click',()=>openSource(service.name,row,info));td.appendChild(btn)}
+      else td.appendChild(cell('span','確認中','status'));
+    }
+    line.appendChild(td);
+  });body.appendChild(line)})
+ })
+}
+function openSource(name,row,info){
+ document.getElementById('sourceTitle').textContent=name+' / '+row;
+ document.getElementById('sourceDescription').textContent=info.value+'。'+info.note;
+ const links=document.getElementById('sourceLinks');links.replaceChildren();
+ info.urls.forEach((url,i)=>{const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='公式情報 '+(i+1);li.appendChild(a);links.appendChild(li)});
+ document.getElementById('sourceDialog').showModal();
+}
+function serviceFromPlan(plan){
+ if(plan.startsWith('Netflix '))return 'Netflix';
+ if(plan.startsWith('Disney+ '))return 'Disney+';
+ if(plan.startsWith('Lemino '))return 'Lemino';
+ if(plan.startsWith('Prime Video'))return 'Prime Video';
+ if(plan.startsWith('WOWOW '))return 'WOWOW';
+ return plan;
+}
+function updateMovieDelta(previousPlan,nextPlan){
+ const deltaEl=document.getElementById('movieDelta'),actions=document.getElementById('deltaActions');actions.replaceChildren();actions.hidden=true;
+ // Netflix's ad-supported tier has a different movie entitlement.
+ // A service-level snapshot cannot prove this plan's complete coverage.
+ const planSpecificCoverageNeeded=['Netflix 広告つき','WOWOW スタンダード','WOWOW トリプル'];
+ if(planSpecificCoverageNeeded.includes(previousPlan)||planSpecificCoverageNeeded.includes(nextPlan)){
+  deltaEl.textContent='見たい映画の増減：未集計（プラン固有の配信対象作品を確認する必要があります）';
+  return;
+ }
+ const checker=window.CinelvaStreamingAvailability,bookmarks=bookmarkIds();
+ const previous=availability[serviceFromPlan(previousPlan)],next=availability[serviceFromPlan(nextPlan)];
+ const comparison=checker&&bookmarks?checker.compareBookmarkAvailability(previous,next,bookmarks):null;
+ if(!comparison){
+  deltaEl.textContent='見たい映画の増減：未集計（配信データまたは作品IDの照合が未確認です）';
+  return;
+ }
+ deltaEl.textContent='見たい映画：'+comparison.before.length+'本 → '+comparison.after.length+'本。新たに観られる'+comparison.gained.length+'本／観られなくなる'+comparison.lost.length+'本';
+ actions.hidden=false;
+ [['新たに観られる映画',comparison.gained],['観られなくなる映画',comparison.lost],['乗り換え後の対象映画',comparison.after]].forEach(([label,movies])=>{
+  const btn=cell('button',label+' '+movies.length+'本');btn.type='button';
+  btn.addEventListener('click',()=>showMatches(label,movies));actions.appendChild(btn);
+ });
+}
+function renderFees(){
+ const from=document.getElementById('fromService'),to=document.getElementById('toService'),cycle=document.getElementById('billingCycle');
+ Object.keys(monthlyFees).forEach(name=>{for(const select of [from,to]){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.appendChild(opt)}});
+ to.selectedIndex=5;
+ const yen=n=>n.toLocaleString('ja-JP')+'円';
+ const annually=name=>cycle.value==='best'&&Object.prototype.hasOwnProperty.call(yearlyFees,name)?yearlyFees[name]:monthlyFees[name]*12;
+ const update=()=>{
+  const before=annually(from.value),after=annually(to.value),delta=after-before;
+  const status=delta===0?'年間支払額は同じです':delta<0?'年間'+yen(-delta)+'安くなります':'年間'+yen(delta)+'高くなります';
+  const contract=name=>cycle.value==='best'&&Object.prototype.hasOwnProperty.call(yearlyFees,name)?'年額一括':'月額払い×12';
+  document.getElementById('calcResult').textContent=status+'。 '+from.value+'：'+yen(before)+'（'+contract(from.value)+'） → '+to.value+'：'+yen(after)+'（'+contract(to.value)+'）';
+  updateMovieDelta(from.value,to.value);
+ };
+ from.addEventListener('change',update);to.addEventListener('change',update);cycle.addEventListener('change',update);update();
+}
+draw();renderFees();loadAvailability();
+window.addEventListener('storage',event=>{if(event.key===BOOKMARK_KEY){draw();document.getElementById('fromService').dispatchEvent(new Event('change'))}});
+window.addEventListener('cinelva-bookmarks-updated',()=>{draw();document.getElementById('fromService').dispatchEvent(new Event('change'))});
+document.getElementById('matchesClose').addEventListener('click',()=>document.getElementById('matchesDialog').close());
+document.getElementById('sourceClose').addEventListener('click',()=>document.getElementById('sourceDialog').close());
+const dialog=document.getElementById('dataDialog');document.getElementById('aboutData').addEventListener('click',()=>dialog.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dialog.close());
+})();
+</script>
+</body></html>

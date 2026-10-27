@@ -373,6 +373,17 @@
       "source_refs": [
         "local-storage"
       ]
+    },
+    {
+      "path": "streaming-compare.html",
+      "surface": "public",
+      "purpose": "streaming plan comparison with evidence-backed pricing",
+      "data_owner": "first-party provider pricing and availability evidence",
+      "count_contract": "no catalog coverage or personalized counts without verified complete data",
+      "primary_cta": "compare verified subscription plan costs",
+      "source_refs": [
+        "official-provider-plan-pages"
+      ]
     }
   ]
 }

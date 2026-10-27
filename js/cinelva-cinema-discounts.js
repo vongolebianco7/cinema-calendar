@@ -16,6 +16,7 @@
   return !!(checked&&current&&selected&&checked<=current&&current.getTime()-checked.getTime()<=REVIEW_DAYS*DAY&&selected>=current&&selected.getTime()-checked.getTime()<=REVIEW_DAYS*DAY);
  }
  function applies(offer,date,options){
+  if(offer.access==='intro'||offer.repeatability==='one-time'||offer.oneTime===true)return false;
   if(!Number.isInteger(offer.price)||offer.price<=0)return false;
   const benefits=new Set(Array.isArray(options.benefits)?options.benefits:[]);
   if((offer.requires||[]).some(key=>!benefits.has(key)))return false;
@@ -49,6 +50,7 @@
   });
  }
  const normalized=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[\s・･ー−–—-]/g,'');
+ const validNames=(a,nonempty=false)=>Array.isArray(a)&&(!nonempty||a.length>0)&&a.every(n=>typeof n==='string'&&normalized(n));
  function chainForTheater(name){
   const n=normalized(name);
   const patterns=[['central-miyazaki',/セントラルシネマ宮崎/],['toho',/tohoシネマズ/],['aeon',/イオンシネマ/],['109',/109シネマズ|ムビル/],['tjoy',/tジョイ|ティジョイ|tjoy/],['sunshine',/シネマサンシャイン/],['smt',/movix|新宿ピカデリ|丸の内ピカデリ|熊本ピカデリ|東劇|なんばパクスシネマ|大阪ステションシティシネマ/],['united',/ユナイテッドシネマ|シネプレックス|yebisugardencinema/],['corona',/コロナシネマ/],['forum',/^(フォラム|アトフォラム|ソラリス)/],['kino',/キノシネマ|kinocinema/],['cinemart',/シネマト新宿/],['os',/osシネマズ/],['ttcg',/テアトル新宿|ヒュマントラストシネマ|シネリブル/]];
@@ -63,7 +65,8 @@
   return (Array.isArray(data?.chains)?data.chains:[]).filter(c=>c&&typeof c==='object'&&(!chain||c.id===chain)).map(c=>{
    const available=[],upcoming=[];
    for(const o of Array.isArray(c.offers)?c.offers:[]){
-    if(!o||typeof o!=='object'||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
+    if(!o||typeof o!=='object'||o.access==='intro'||o.repeatability==='one-time'||o.oneTime===true||!fresh(o,date,now)||region&&!fresh(region,date,now))continue;
+    if(o.excludedTheaters!==undefined&&!validNames(o.excludedTheaters)||o.includedTheaters!==undefined&&!validNames(o.includedTheaters,true))continue;
     if(theater&&(o.excludedTheaters||[]).some(name=>theater.includes(normalized(name))))continue;
     const included=o.includedTheaters;
     if(included!==undefined){
@@ -93,6 +96,53 @@
    return {date,publicPrice:publicPrices.length?Math.min(...publicPrices):null,conditionalPrice:conditionalPrices.length?Math.min(...conditionalPrices):null};
   });
  }
- const api={today,addDays,compare,calendar,guide,guideCalendar,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
+ function regionalGuide(data,options={},now=new Date()){
+  const date=options.date;
+  if(!civil(date)||date<today(now)||typeof options.prefecture!=='string'||!options.prefecture)return [];
+  const groups=new Map();
+  for(const r of Array.isArray(data?.regionalCoverage)?data.regionalCoverage:[]){
+   if(!r||r.prefecture!==options.prefecture||!fresh(r,date,now)||!validNames(r.theaters,true))continue;
+   if(!groups.has(r.chain))groups.set(r.chain,new Set());
+   r.theaters.forEach(t=>groups.get(r.chain).add(t));
+  }
+  const allowed=(o,t)=>{
+   for(const key of ['includedTheaters','excludedTheaters'])if(o[key]!==undefined&&!validNames(o[key],key==='includedTheaters'))return false;
+   const n=normalized(t);
+   return !(o.excludedTheaters||[]).some(v=>n.includes(normalized(v)))&&(o.includedTheaters===undefined||o.includedTheaters.some(v=>n.includes(normalized(v))));
+  };
+  const order=(a,b)=>a.price-b.price||(a.maxPrice||a.price)-(b.maxPrice||b.price)||String(a.id).localeCompare(String(b.id));
+  const rows=[];
+  for(const c of guide(data,{date},now)){
+   if(!groups.has(c.id))continue;
+   const theaters=[...groups.get(c.id)],offers=[];
+   for(const o of c.available){
+    const prices=new Map();
+    for(const t of theaters.filter(t=>allowed(o,t))){
+     let amount=o.price,max=o.maxPrice;
+     if(o.defaultTheaterPrice!==undefined||o.theaterPrices!==undefined){
+      if(!Number.isInteger(o.defaultTheaterPrice)||o.defaultTheaterPrice<=0||!Array.isArray(o.theaterPrices)||o.theaterPrices.some(r=>!r||!Number.isInteger(r.price)||r.price<=0||!validNames(r.theaters,true)))continue;
+      amount=o.theaterPrices.find(r=>r.theaters.some(v=>normalized(t).includes(normalized(v))))?.price??o.defaultTheaterPrice;max=undefined;
+     }
+     const key=amount+':'+(max||amount);
+     if(!prices.has(key))prices.set(key,{...o,price:amount,maxPrice:max,applicableTheaters:[]});
+     prices.get(key).applicableTheaters.push(t);
+    }
+    offers.push(...prices.values());
+   }
+   offers.sort(order);
+   rows.push({...c,theaters,available:offers,upcoming:[],publicBest:offers.find(o=>o.access==='public')||null,conditionalBest:offers.find(o=>o.access!=='public')||null,best:offers[0]||null});
+  }
+  return rows.sort((a,b)=>(a.best?.price??Infinity)-(b.best?.price??Infinity)||a.name.localeCompare(b.name,'ja'));
+ }
+ function regionalCalendar(data,options={},now=new Date()){
+  if(!civil(options.date)||options.date<today(now))return [];
+  return Array.from({length:14},(_,i)=>{
+   const date=addDays(options.date,i),rows=regionalGuide(data,{...options,date},now);
+   const winners=key=>{const eligible=rows.filter(c=>c[key]);if(!eligible.length)return {price:null,chains:[]};const price=Math.min(...eligible.map(c=>c[key].price));return {price,chains:eligible.filter(c=>c[key].price===price).map(c=>({id:c.id,name:c.name}))};};
+   const a=winners('publicBest'),b=winners('conditionalBest');
+   return {date,publicPrice:a.price,publicChains:a.chains,conditionalPrice:b.price,conditionalChains:b.chains};
+  });
+ }
+ const api={today,addDays,compare,calendar,guide,guideCalendar,regionalGuide,regionalCalendar,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

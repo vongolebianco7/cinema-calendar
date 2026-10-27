@@ -155,7 +155,46 @@ test('method calendar separates public and conditional minima and retains named 
  const now=new Date('2026-10-27T01:00:00Z');
  const a=D.guideCalendar(data,{date:'2026-10-27',chain:'united',theater:'ユナイテッド・シネマ札幌'},now);
  assert.equal(a.length,14);assert.equal(a[1].date,'2026-10-28');assert.equal(a[1].publicPrice,null);assert.equal(a[2].publicPrice,1300);
- const b=D.guideCalendar(data,{date:'2026-10-28',chain:'smt',theater:'MOVIX日吉津'},now)[0];assert.equal(b.publicPrice,1400);assert.equal(b.conditionalPrice,500);
+ const b=D.guideCalendar(data,{date:'2026-10-28',chain:'smt',theater:'MOVIX日吉津'},now)[0];assert.equal(b.publicPrice,1400);assert.equal(b.conditionalPrice,1400);
  assert.deepEqual(D.guideCalendar(data,{date:'invalid'},now),[]);
  assert.ok(D.guideCalendar(data,{date:'2027-01-01'},new Date('2027-01-01T01:00:00Z')).every(d=>d.publicPrice===null&&d.conditionalPrice===null));
+});
+
+const regionalNow=new Date('2026-10-27T01:00:00Z');
+test('one-time acquisition offers never enter guide or calendar minima',()=>{
+ const d={chains:[{id:'x',name:'X',offers:[{id:'intro',price:100,access:'intro',verifiedAt:'2026-10-26',when:{kind:'always'}},{id:'once',price:200,access:'member',repeatability:'one-time',verifiedAt:'2026-10-26',when:{kind:'always'}},{id:'recurring',price:1300,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'}}]}]};
+ assert.deepEqual(D.guide(d,{date:'2026-10-28'},regionalNow)[0].available.map(o=>o.id),['recurring']);
+ assert.equal(D.guideCalendar(d,{date:'2026-10-28'},regionalNow)[0].conditionalPrice,null);
+});
+test('prefecture comparison ranks multiple local chains and preserves cheapest ties without sample mapping',()=>{
+ const offer=(id,price)=>({id,price,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'}});
+ const d={chains:[{id:'a',name:'A',offers:[offer('a',1300)]},{id:'b',name:'B',offers:[offer('b',1200)]},{id:'c',name:'C',offers:[offer('c',1200)]},{id:'outside',name:'Outside',offers:[offer('o',100)]}],regions:[{prefecture:'神奈川県',chain:'a',theater:'A1',verifiedAt:'2026-10-26'}],regionalCoverage:[{prefecture:'神奈川県',chain:'a',theaters:['A1','A2'],verifiedAt:'2026-10-26'},{prefecture:'神奈川県',chain:'b',theaters:['B1'],verifiedAt:'2026-10-26'},{prefecture:'神奈川県',chain:'c',theaters:['C1'],verifiedAt:'2026-10-26'},{prefecture:'東京都',chain:'outside',theaters:['O1'],verifiedAt:'2026-10-26'}]};
+ const rows=D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow);assert.deepEqual(rows.map(c=>c.id),['b','c','a']);assert.equal(rows[2].theaters.length,2);
+ const cell=D.regionalCalendar(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0];assert.equal(cell.publicPrice,1200);assert.deepEqual(cell.publicChains.map(c=>c.id),['b','c']);
+ assert.deepEqual(D.regionalGuide(d,{date:'2026-10-28',prefecture:'存在しない県'},regionalNow),[]);
+ d.regionalCoverage[1].verifiedAt='2026-01-01';assert.equal(D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow).some(c=>c.id==='b'),false);
+});
+test('regional tariffs bind local inclusions and theater prices before choosing chain minimum',()=>{
+ const d={chains:[{id:'a',name:'A',offers:[{id:'regular',price:1300,maxPrice:1400,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'},excludedTheaters:['Premium'],theaterPrices:[{theaters:['Expensive'],price:1400}],defaultTheaterPrice:1300},{id:'local',price:500,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'},includedTheaters:['Elsewhere']}]}],regionalCoverage:[{prefecture:'神奈川県',chain:'a',theaters:['Expensive','Premium'],verifiedAt:'2026-10-26'}]};
+ const row=D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0];assert.equal(row.publicBest.price,1400);assert.deepEqual(row.publicBest.applicableTheaters,['Expensive']);
+ d.regionalCoverage[0].theaters.push('Regular');assert.equal(D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0].publicBest.price,1300);
+ d.regionalCoverage[0].theaters='Expensive';assert.deepEqual(D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow),[]);
+});
+test('reviewed regional inventory covers all prefectures and applies exact local conditions',()=>{
+ const groups=data.regionalCoverage,prefs=new Set(groups.map(r=>r.prefecture));assert.equal(prefs.size,47);assert.equal(new Set(groups.map(r=>r.chain)).size,14);assert.ok(groups.reduce((n,r)=>n+r.theaters.length,0)>300);
+ for(const r of groups){assert.match(r.sourceUrl,/^https:\/\//);assert.equal(r.verifiedAt,'2026-10-27');assert.ok(r.theaters.length);}
+ assert.ok(data.chains.every(c=>c.offers.every(o=>o.access!=='intro'&&o.repeatability==='recurring')));
+ const tokyo=D.regionalGuide(data,{date:'2026-10-28',prefecture:'東京都'},regionalNow);assert.equal(tokyo.find(c=>c.id==='109').publicBest.price,1400);
+ const kanagawa=D.regionalGuide(data,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow);assert.equal(kanagawa.length,8);assert.equal(kanagawa.find(c=>c.id==='109').publicBest.price,1300);
+ const okinawa=D.regionalGuide(data,{date:'2026-11-01',prefecture:'沖縄県'},regionalNow);assert.equal(okinawa.length,1);assert.equal(okinawa[0].publicBest,null);
+ const monday=D.regionalGuide(data,{date:'2026-11-02',prefecture:'香川県'},regionalNow).find(c=>c.id==='aeon').publicBest;assert.equal(monday.price,1200);assert.deepEqual(monday.applicableTheaters,['イオンシネマ 綾川']);
+ for(const p of prefs)assert.ok(D.regionalGuide(data,{date:'2026-10-28',prefecture:p},regionalNow).length,p);
+});
+test('punctuation-only theater restrictions and overrides never broaden a regional price',()=>{
+ for(const value of ['-','・','ー'])for(const field of ['includedTheaters','excludedTheaters','override']){
+  const offer={id:'bad',price:1200,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'}};
+  if(field==='override'){offer.defaultTheaterPrice=1300;offer.theaterPrices=[{theaters:[value],price:500}];}else offer[field]=[value];
+  const d={chains:[{id:'a',name:'A',offers:[offer]}],regionalCoverage:[{prefecture:'東京都',chain:'a',theaters:['Tokyo'],verifiedAt:'2026-10-26'}]};
+  assert.equal(D.regionalGuide(d,{date:'2026-10-28',prefecture:'東京都'},regionalNow)[0].publicBest,null,field+':'+value);
+ }
 });

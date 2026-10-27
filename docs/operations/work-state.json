@@ -1391,7 +1391,7 @@
     "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live."
   },
   "nationwide_cinema_savings": {
-    "status": "production_verified",
+    "status": "in_progress",
     "branch": "feat/chain-wide-savings-20261027",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
@@ -1409,7 +1409,7 @@
       "cloud_browser": "14calendar day buttons,10/28tap selected and caption updated,23rows sorted500→1500 including range1300–1400;3BenefitStation rows and fees/contract/1point=1yen caveats;0eligibility checkbox inputs,no page overflow,no Cinelva-origin console errors observed. Browser extension metadata errors excluded. Read-only;no production record writes or physical iPhone claim.",
       "build": "Exact final and merged tree identical; actual production proof,complete shared quality and static build passed."
     },
-    "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility.",
+    "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification.",
     "review": "Independent reviewer confirmed dropped chain notes/excluded theaters important finding fixed. Named theater navigation test now waits for URL and selected-theater rendering before table assertion;actual Chromium/WebKit pass. Source completeness saw a WebKit fixture timeout;same-source final completeness passed without threshold/source changes. Final backup attempt1 timed out downloading Ubuntu dependencies;single-job retry2 passed all comparisons.",
     "prefectural_examples": 47,
     "updated_at": "2026-10-27T02:52:17.809Z",
@@ -1563,6 +1563,16 @@
         "build": "Exact final and merged tree identical; actual production proof,complete shared quality and static build passed."
       },
       "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility."
+    },
+    "prefecture_chain_comparison": {
+      "status": "in_progress",
+      "updated_at": "2026-10-27T04:09:57.187447+00:00",
+      "branch": "feat/prefecture-chain-calendar-20261027",
+      "base_sha": "e6788c6573410fe7e1f357725cdcbba5859e0877",
+      "scope": "Choose prefecture, compare all local listed chains flat;calendar shows winning chain names and dates,daytap per-chain table;cinema names only applicability details.No one-time coupons/chain picker.42recurring methods,14profiles,159prefecture-chain groups,323named theaters,47prefectures.",
+      "validation": "25focused units and full shared quality pass. Important punctuation-only normalized theater restrictions reproduced RED thenGREEN; coverage/UI/override validators fail closed. Dec1preview visibly hid third/fourth tied winners; all short names now displayed with browser regression. Independent fresh review has no other blockers;actual new browserCI pending.",
+      "next_action": "Complete prefecture-wide chain calendar and recurring-only correction through exact-source/finalCI,publication and canonical verification.",
+      "review": "Whole-branch fresh review: one important malformed-normalization finding fixed with nineinput combinations; one tie-visibility minor elevated because series discovery is primary,actual preview RED and browser regression added. OS theater name corrected to current ミント神戸 from official indexed listing. No other blockers;no claim of exhaustive cinema inventory."
     }
   }
 }

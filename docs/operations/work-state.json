@@ -1392,70 +1392,142 @@
   },
   "nationwide_cinema_savings": {
     "status": "production_verified",
-    "branch": "feat/nationwide-cinema-savings-20261026",
+    "branch": "feat/chain-wide-savings-20261027",
     "base_sha": "1f5b3fae030d4eb67edac4633a3b9520200ffc7c",
     "review_date": "2026-10-26",
     "programmes": 14,
-    "methods": 30,
-    "scope": "Method-first savings without membership checkboxes:47 sourced prefectural theater examples,14 programme profiles,40 methods, fees/purchase steps, date/chain/prefecture links and independent review horizons. Non-exhaustive local coverage, ordinary adult2D only.",
-    "local_validation": "19focused units/full shared quality;4 expected regressions red-to-green; independent review no blockers. Source+final actual Chromium/WebKit root/prefix/mobile,local restrictions,December,freeKINEZO and malformed records passed. Existing320–1280 light/dark flows retained. Production guard/build and live canonical bytes/browser verified.",
+    "methods": 43,
+    "scope": "Calendar-first14days with date-tap ascending comparison. Nationwide chain rules and named local exceptions;43selected methods/14profiles,3BenefitStation plans. No prefectural sample restriction in guide; legacy47examples retained only for compatibility. Ordinary adult2D;not all theaters/discounts/screenings.",
+    "local_validation": "20focused units and full integrated shared quality pass. Actual Chromium/WebKit root/prefix light/dark320–1280 calendar/daytap/sort/horizon,fees/Benepo/exclusions,national-directory/delayed engine,malformed/retry/stale all passed. Independent review exclusions blocker resolved. Actual production guard/fullquality/staticbuild pass; canonical8/8 bytes and read-only cloud interaction verified.",
     "production": {
       "state": "production_verified",
-      "deployment": "dpl_3sY7uwYukHDBHfcWPSgKg8UidB8x",
-      "sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8",
+      "deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
+      "sha": "7fae48e445a5382d96cbfa90403164464b55e483",
       "url": "https://cinelva.vercel.app/theaters.html#discounts",
-      "canonical_bytes": "8/8 HTTP200 byte-identical: index,theaters,discountCSS,both discountJS,discountJSON,source registry,MyBest10",
-      "cloud_browser": "14cards,40methods,0checkboxes,48prefecture options including placeholder; KINEZO free booking fee/steps and Agui named Tuesday visible; selecting MOVIX Wednesday displays public1400 with paid/intro methods separately. No production record writes.",
-      "build": "Actual production guard,complete quality and static build passed; source digest0de71f98176ef25d85aa6a7f9a50269810a4ed2a14d84acf183574ff0645d8a8."
+      "source_digest": "ee8dfea48d5f99fdc6e099298b863da5fd24ab2587eb0f19d4050a61fd281e73",
+      "canonical_bytes": "8/8 HTTP200 byte-identical;prefix theaters redirects to matching canonical page",
+      "cloud_browser": "14calendar day buttons,10/28tap selected and caption updated,23rows sorted500→1500 including range1300–1400;3BenefitStation rows and fees/contract/1point=1yen caveats;0eligibility checkbox inputs,no page overflow,no Cinelva-origin console errors observed. Browser extension metadata errors excluded. Read-only;no production record writes or physical iPhone claim.",
+      "build": "Exact final and merged tree identical; actual production proof,complete shared quality and static build passed."
     },
-    "next_action": "Approved public-service expansion published and verified. Maintain dated manual facts and explicit local exceptions;47 regional examples/14profiles/40methods are not complete all-cinema or all-discount coverage.",
-    "review": "Independent review: no critical findings. One important script-order race fixed by loading the pure engine before directory bootstrap; delayed-engine/initially-filtered directory regression added. Minor selected-date sharing fixed with validated discountDate parameter and refresh regression (red to green). Incremental review found upcoming dates outliving an older region review; corrected inner-loop freshness boundary with a reproduced red-to-green regression.",
+    "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility.",
+    "review": "Independent reviewer confirmed dropped chain notes/excluded theaters important finding fixed. Named theater navigation test now waits for URL and selected-theater rendering before table assertion;actual Chromium/WebKit pass. Source completeness saw a WebKit fixture timeout;same-source final completeness passed without threshold/source changes. Final backup attempt1 timed out downloading Ubuntu dependencies;single-job retry2 passed all comparisons.",
     "prefectural_examples": 47,
-    "updated_at": "2026-10-26T20:29:53.780825+00:00",
-    "pull_request": 518,
-    "source_sha": "69d304066a6931e7461a217b31aac09c47b889b5",
+    "updated_at": "2026-10-27T02:52:17.809Z",
+    "pull_request": 520,
+    "source_sha": "775f216dffab09955838b9902bed7c95ee5e3470",
     "source_ci": [
       {
-        "id": 40391052949,
-        "name": "CINELVA mobile layout smoke test",
+        "id": 40437425732,
+        "name": "Check brand identity",
         "conclusion": "success"
       },
       {
-        "id": 40391052924,
+        "id": 40437425884,
         "name": "Autonomous quality gate",
         "conclusion": "success"
       },
       {
-        "id": 40391053474,
+        "id": 40437425756,
         "name": "Cinemap completeness scorecard",
-        "conclusion": "success"
+        "conclusion": "failure"
       },
       {
-        "id": 40391052803,
+        "id": 40437425897,
         "name": "CINELVA smoke tests",
         "conclusion": "success"
       },
       {
-        "id": 40391052880,
+        "id": 40437425808,
         "name": "Reproducible backend build",
         "conclusion": "success"
       },
       {
-        "id": 40391053001,
-        "name": "Validate frontend",
+        "id": 40437425763,
+        "name": "CINELVA mobile layout smoke test",
         "conclusion": "success"
       },
       {
-        "id": 40391047135,
+        "id": 40437425723,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success"
+      },
+      {
+        "id": 40437425799,
+        "name": "CINELVA backup safety",
+        "conclusion": "success"
+      },
+      {
+        "id": 40437425736,
         "name": "Validate frontend",
         "conclusion": "success"
       }
     ],
     "integrated_main_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-    "final_head": "9a2f6d5aee333c5bf8643589f39d97afececc8ea",
-    "receipt_head": "9a2f6d5aee333c5bf8643589f39d97afececc8ea",
-    "merge_sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8",
-    "final_ci": "Final9a2f6d5a all7 workflows succeeded, including required quality40393460240,smoke40393457736,frontend40393457739,backend40393457733 and mobile40393457827. Source69d30406 all workflows succeeded. No tests or publication guard weakened.",
+    "final_head": "7d75b6d2b77b39436577e419e98969fd0de962a2",
+    "receipt_head": "7d75b6d2b77b39436577e419e98969fd0de962a2",
+    "merge_sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+    "final_ci": [
+      {
+        "id": 40438596684,
+        "name": "Validate frontend",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596695,
+        "name": "Check brand identity",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596589,
+        "name": "CINELVA smoke tests",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596567,
+        "name": "Scorecard contract",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596685,
+        "name": "CINELVA mobile layout smoke test",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596583,
+        "name": "Reproducible backend build",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596725,
+        "name": "CINELVA isolated Pages stage",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596776,
+        "name": "Cinemap completeness scorecard",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596601,
+        "name": "Autonomous quality gate",
+        "conclusion": "success",
+        "attempt": 1
+      },
+      {
+        "id": 40438596682,
+        "name": "CINELVA backup safety",
+        "conclusion": "success",
+        "attempt": 2
+      }
+    ],
     "public_service_expansion": {
       "status": "production_verified",
       "updated_at": "2026-10-26T20:29:53.780825+00:00",
@@ -1470,13 +1542,27 @@
       "merge_sha": "3f9711d46784e7b6d8db21f3029c39f5273476d8"
     },
     "chain_wide_navigation": {
-      "status": "in_progress",
-      "updated_at": "2026-10-26T20:54:13.951128+00:00",
+      "status": "production_verified",
+      "updated_at": "2026-10-27T02:52:17.809Z",
       "branch": "feat/chain-wide-savings-20261027",
-      "base_sha": "345ea51a468f9f97cb550a504fe9a2aefe9cb7bd",
-      "scope": "Calendar-first14days; tap date for sorted comparison table. Public/conditional prices separate;fees/steps/exclusions visible. BenefitStation3plans with Benepo payment caveat.43methods/14profiles; no one-prefecture-one-example restriction.",
-      "validation": "20focused units/full shared quality pass. Calendar missing-function RED thenGREEN. Review exclusion-note blocker fixed, browser assertions added; reviewer confirms resolved. Actual new browserCI pending.",
-      "next_action": "Exact-source CI, receipt-only proof, final CI, merge and canonical verification."
+      "base_sha": "42e4ce3a155dc6d19d76d9418c684c6e0c9d4da5",
+      "pull_request": 520,
+      "source_sha": "775f216dffab09955838b9902bed7c95ee5e3470",
+      "final_head": "7d75b6d2b77b39436577e419e98969fd0de962a2",
+      "merge_sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+      "scope": "Calendar-first14days with date-tap ascending comparison. Nationwide chain rules and named local exceptions;43selected methods/14profiles,3BenefitStation plans. No prefectural sample restriction in guide; legacy47examples retained only for compatibility. Ordinary adult2D;not all theaters/discounts/screenings.",
+      "validation": "20focused units and full integrated shared quality pass. Actual Chromium/WebKit root/prefix light/dark320–1280 calendar/daytap/sort/horizon,fees/Benepo/exclusions,national-directory/delayed engine,malformed/retry/stale all passed. Independent review exclusions blocker resolved. Actual production guard/fullquality/staticbuild pass; canonical8/8 bytes and read-only cloud interaction verified.",
+      "production": {
+        "state": "production_verified",
+        "deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
+        "sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+        "url": "https://cinelva.vercel.app/theaters.html#discounts",
+        "source_digest": "ee8dfea48d5f99fdc6e099298b863da5fd24ab2587eb0f19d4050a61fd281e73",
+        "canonical_bytes": "8/8 HTTP200 byte-identical;prefix theaters redirects to matching canonical page",
+        "cloud_browser": "14calendar day buttons,10/28tap selected and caption updated,23rows sorted500→1500 including range1300–1400;3BenefitStation rows and fees/contract/1point=1yen caveats;0eligibility checkbox inputs,no page overflow,no Cinelva-origin console errors observed. Browser extension metadata errors excluded. Read-only;no production record writes or physical iPhone claim.",
+        "build": "Exact final and merged tree identical; actual production proof,complete shared quality and static build passed."
+      },
+      "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility."
     }
   }
 }

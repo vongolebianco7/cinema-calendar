@@ -1733,7 +1733,8 @@
       "12 security regression tests passed",
       "backend build and five snapshot APIs passed",
       "npm audit 0 vulnerabilities",
-      "history credential pattern scan 7629 blobs 0 findings"
+      "history credential pattern scan 7629 blobs 0 findings",
+      "2 director feature regression tests passed after live short-film contamination reproduced"
     ],
     "blockers": [
       "CI and exact-source proof pending",

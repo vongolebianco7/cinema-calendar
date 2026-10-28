@@ -78,3 +78,7 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - built backendの隔離テストを拡張し、15ルート×PUT/PATCH/DELETEの45操作が405となること、agent preflightと不正JSON400/過大本文413/型不正400、no-storeを確認。既存backend CIから継続実行する。
 - 独立レビュー再確認: ストリームの指摘2件は解消、12/12回帰成功、新たなimportant所見なし。全体監査の未了項目は依然残る。
 - 作業中mainのイベントfeed更新 `f6ab09985cfcfde199f42d7ca113650d091cc5f8` を保持する。
+
+### 本番実操作で見つかった監督作品欄の短編混入
+
+本番のインターステラー詳細で、Doodlebug、Quay、Cinema16短編集が監督作品欄に表示された。backendのmovie creditsはDirector役割だけを検証し上映時間を検証していなかったため、既存の長編インデックスが詳細画面に適用されていなかった。既存 `director-feature-index.json` の確認済みID、または40分以上の確認可能なruntimeだけを採用するよう修正。未確認の作品を長編と推測せず、`verified_feature_subset` として返す。2件のRED→GREEN回帰でNolan短編・短編集・重複・自作品・Producer混入、未登録監督の時間不明/短編を除外。未知の監督の時間未確認作品は表示されないという範囲制限がある。

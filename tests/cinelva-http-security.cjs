@@ -24,6 +24,10 @@ test('rate limit rejects excess calls with uncached retry guidance',()=>{
  assert.equal(denied.status,429);assert.equal(denied.headers.get('cache-control'),'no-store');
  assert.ok(Number(denied.headers.get('retry-after'))>0);
 });
+test('rate limiter refuses new buckets at capacity instead of growing unbounded',()=>{
+ for(let i=0;i<5100;i++)exportsObject.rateLimit(new Request('https://test.invalid/api/capacity',{headers:{'x-forwarded-for':String(i)}}));
+ assert.equal(exportsObject.rateLimit(new Request('https://test.invalid/api/new-capacity')).ok,false);
+});
 test('every database-backed endpoint applies a request limit before database work',()=>{
  for(const route of ['calendar','health','status','tv','releases','theater-directory']){
   const source=fs.readFileSync(`backend/app/api/${route}/route.ts`,'utf8');

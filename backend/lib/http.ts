@@ -63,6 +63,10 @@ export function rateLimit(request: Request, limit = 90, windowMs = 60_000) {
   const key = ip + ":" + new URL(request.url).pathname;
   const now = Date.now();
   const old = buckets.get(key);
+  if (!old && buckets.size >= 5000) {
+    for (const [k,v] of buckets) if (v.reset <= now) buckets.delete(k);
+    if (buckets.size >= 5000) return {ok:false, retryAfter:Math.ceil(windowMs/1000)};
+  }
   const b = !old || old.reset <= now ? { count: 0, reset: now + windowMs } : old;
   b.count += 1; buckets.set(key, b);
   if (buckets.size > 5000) for (const [k,v] of buckets) if (v.reset <= now) buckets.delete(k);

@@ -79,7 +79,7 @@
    const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('../assets/global-search.css',script).href;document.head.append(css);
    document.querySelectorAll('.gSearchForm').forEach((form,index)=>{
     const input=form.querySelector('.gSearch');if(!input)return;
-    input.placeholder='作品・監督・キャストを検索';input.setAttribute('aria-label','作品・監督・キャストを検索');input.autocomplete='off';input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','false');
+    input.placeholder='作品・監督・俳優';input.setAttribute('aria-label','作品・監督・キャストを検索');input.autocomplete='off';input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','false');
     const box=document.createElement('div');box.id='cinelvaSearchSuggestions'+index;box.className='cinelva-search-suggestions';box.hidden=true;box.setAttribute('role','listbox');box.setAttribute('aria-label','検索候補');document.body.append(box);input.setAttribute('aria-controls',box.id);
     let timer,controller,version=0,choices=[],active=-1,composing=false;
     const close=()=>{box.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');active=-1;};

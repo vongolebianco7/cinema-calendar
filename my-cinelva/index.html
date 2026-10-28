@@ -857,7 +857,18 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
  #summaryView #csTop .cs-top-review{position:relative;z-index:1}
 }
 </style>
-</head>
+<style id="cinelva-director-detail-dashboard-style">
+.director-profile-dashboard{margin:14px 0 18px;padding:14px;border:1px solid var(--line,#777);border-radius:12px;background:var(--panel,#181818);color:var(--text,#f5f5f5)}
+.director-profile-dashboard h4{font-size:16px;margin:0 0 12px;color:inherit}
+.director-profile-statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.director-profile-stat{padding:12px 10px;border:1px solid var(--line,#555);border-radius:9px;min-width:0}
+.director-profile-stat span{display:block;font-size:11px;opacity:.72}
+.director-profile-stat strong{display:block;font-size:19px;line-height:1.5;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;color:inherit}
+.director-profile-dashboard p{margin:12px 0 0;font-size:11px;line-height:1.6;opacity:.77}
+@media(max-width:600px){.director-profile-statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.director-profile-stat strong{font-size:17px}}
+html[data-theme="light"] .director-profile-dashboard{background:#fffefa;color:#242521;border-color:#d4d0c7}
+html[data-theme="light"] .director-profile-stat{border-color:#d4d0c7}
+</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>

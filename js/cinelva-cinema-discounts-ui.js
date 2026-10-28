@@ -94,6 +94,7 @@
  }
  dateInput.addEventListener('change',()=>{if(D.addDays(dateInput.value,0)&&dateInput.value>=today)calendarStart=dateInput.value>D.addDays(today,47)?D.addDays(today,47):dateInput.value;updateUrl();render();});
  prefInput.addEventListener('change',()=>{requestedPrefecture=prefInput.value;updateUrl();render();});
+ timeInput.addEventListener('change',()=>{updateUrl();render();});
  host.addEventListener('click',e=>{const detail=e.target.closest('[data-discount-chain]');if(detail){const c=activeRows.find(c=>c.id===detail.dataset.discountChain);if(c){returnFocus=detail;dialog.querySelector('#discountDetailTitle').textContent=c.name+' の割引・利用条件';dialogBody.innerHTML='<p class="discountMuted">'+esc(c.note)+'</p>'+(c.available.length?c.available.map(method).join(''):'<p>この日の確認済み割引はありません。公式情報をご確認ください。</p>')+'<p class="discountMuted">県内の掲載対象館：'+c.theaters.map(esc).join('・')+'</p>';dialog.showModal();}return;}const day=e.target.closest('[data-discount-date]');if(day){dateInput.value=day.dataset.discountDate;updateUrl();render();}if(e.target.closest('#discountPrev')||e.target.closest('#discountNext')){const shift=e.target.closest('#discountPrev')?-14:14;calendarStart=D.addDays(calendarStart,shift);if(calendarStart>D.addDays(today,47))calendarStart=D.addDays(today,47);if(calendarStart<today)calendarStart=today;dateInput.value=calendarStart;updateUrl();render();}if(e.target.closest('#discountRetry'))load();});
  load();
 })();

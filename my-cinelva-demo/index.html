@@ -1,38 +1,1008 @@
 <!doctype html>
-<html lang="ja" data-theme="dark">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><title>My Cinelva | DEMO</title>
-<link rel="icon" href="../assets/cinelva_original_colors_transparent.png">
-<style>
-:root{color-scheme:dark;--bg:#0a0a0a;--panel:#151515;--line:#303030;--ink:#f2f2f2;--muted:#aaa;--gold:#d9bd7f}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}header{position:sticky;top:0;z-index:3;background:#0a0a0aef;border-bottom:1px solid var(--line)}.nav{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:12px 16px}.logo{width:34px;height:34px;object-fit:contain}.brand{font:600 25px Georgia,serif;color:#f2dfbb}.demo{margin-left:auto;border:1px solid var(--gold);color:var(--gold);border-radius:6px;padding:4px 9px;font-size:11px;font-weight:700}.wrap{max-width:1100px;margin:auto;padding:25px 16px 80px}.eyebrow{color:var(--gold);letter-spacing:.15em;font-size:11px}.title{font:38px Georgia,serif;margin:4px 0 5px}.sub{color:var(--muted);margin:0 0 22px}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden}.stat{background:var(--panel);padding:20px 16px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat small{display:block;color:var(--muted)}.stat strong{font:38px Georgia,serif}.stat em{font-style:normal;color:var(--gold)}.section{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:20px;margin-top:20px}h2{font-size:20px;margin:0 0 15px;font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}.bars{display:flex;align-items:end;gap:7px;height:142px;border-bottom:1px solid #444;padding-top:10px}.bar{flex:1;min-width:0;background:#687681;border-radius:4px 4px 0 0;position:relative}.bar:last-child{background:var(--gold)}.bar span{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}.rows{display:grid;gap:13px}.r{display:grid;grid-template-columns:minmax(0,130px) 1fr 55px;gap:12px;align-items:center}.r .meter{height:9px;background:#292929;border-radius:10px;overflow:hidden}.r .fill{height:100%;background:var(--gold);border-radius:10px}.r b{text-align:right;font-variant-numeric:tabular-nums}.r span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.heat{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:4px;overflow:auto;padding:4px 0 8px}.day{width:12px;height:12px;border-radius:2px;background:#272727}.day.l1{background:#645338}.day.l2{background:#a5854b}.day.l3{background:#d9bd7f}.legend{font-size:11px;color:var(--muted);margin-top:9px}.rank{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid #303030;padding:11px 0}.rank:last-child{border:0}.rank .n{font:24px Georgia,serif;color:var(--gold)}.rank small{display:block;color:var(--muted)}.rank b{font-size:18px}.foot{margin-top:26px;color:var(--muted);font-size:12px}.foot a{color:var(--gold)}@media(max-width:650px){.title{font-size:30px}.stats{grid-template-columns:repeat(2,1fr)}.stat{padding:15px 12px}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.stat strong{font-size:30px}.split{grid-template-columns:1fr}.section{padding:15px}.r{grid-template-columns:minmax(0,100px) 1fr 48px}.brand{font-size:22px}}
-</style></head>
-<body><header><div class="nav"><img class="logo" src="../assets/cinelva_original_colors_transparent.png" alt="Cinelva 正式ロゴ"><span class="brand">Cinelva</span><span class="demo">DEMO / サンプルデータ</span></div></header>
-<main class="wrap"><div class="eyebrow">YOUR CINEMA LIFE</div><h1 class="title">My Cinelva</h1><p class="sub">あなたの映画人生を、ひと目で。 <strong style="color:var(--gold)">※以下は架空の鑑賞履歴です。</strong></p>
-<div class="stats"><div class="stat"><small>生涯鑑賞本数</small><strong id="total">—</strong><small>全期間</small></div><div class="stat"><small>2026年鑑賞本数</small><strong id="year">—</strong><small>今年の記録</small></div><div class="stat"><small>平均評価</small><strong id="avg">—</strong><small>5点満点</small></div><div class="stat"><small>4.0以上の作品</small><strong id="high">—</strong><small>お気に入りの映画</small></div></div>
-<div class="split"><section class="section"><h2>年間鑑賞本数</h2><div class="bars" id="bars"></div><p class="legend">2017〜2026年の推移（2026年は10月まで）</p></section><section class="section"><h2>ジャンル別の鑑賞傾向</h2><div class="rows" id="genres"></div></section></div>
-<section class="section"><h2>2026年 鑑賞カレンダー</h2><div class="heat" id="heat"></div><p class="legend">濃い色ほど、その日に鑑賞した作品が多いことを示します。</p></section>
-<div class="split"><section class="section"><h2>好きな監督ランキング</h2><div id="directors"></div></section><section class="section"><h2>制作国別の鑑賞傾向</h2><div class="rows" id="countries"></div></section></div>
-<p class="foot">このページは宣伝撮影専用の独立したデモです。実ユーザーの鑑賞履歴・ローカルストレージ・データベースは読み書きしません。集計値は再現可能な架空データに基づきます。<a href="../my-cinelva/">通常の My Cinelva へ</a></p></main>
-<script>
-"use strict";
-// Fixed seed, deterministic synthetic viewing records. No network/storage access.
-let seed=529;function rnd(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}
-const directors=["クリストファー・ノーラン","スティーヴン・スピルバーグ","黒澤 明","デヴィッド・フィンチャー","是枝 裕和","マーティン・スコセッシ","宮崎 駿","ウェス・アンダーソン","ポン・ジュノ","グレタ・ガーウィグ","その他の監督"];
-const genres=["ドラマ","サスペンス","SF","コメディ","アクション","アニメーション","その他"];
-const countries=["アメリカ","日本","イギリス","フランス","韓国","その他"];
-const years=[94,102,111,116,122,129,137,167,184,86]; // 2017–2026; total 1248
-const records=[];years.forEach((count,i)=>{const year=2017+i;for(let j=0;j<count;j++){const days=year===2026?304:365;const day=Math.floor(rnd()*days);const date=new Date(Date.UTC(year,0,1+day)).toISOString().slice(0,10);const director=directors[Math.floor(Math.pow(rnd(),1.65)*directors.length)];const genre=genres[Math.floor(Math.pow(rnd(),1.15)*genres.length)];const country=countries[Math.floor(Math.pow(rnd(),1.3)*countries.length)];const score=Math.round((2.4+rnd()*2.6)*10)/10;records.push({date,year,director,genre,country,score})}});
-const by=(key)=>{const m=new Map();for(const r of records)m.set(r[key],(m.get(r[key])||0)+1);return [...m].sort((a,b)=>b[1]-a[1])};
-document.querySelector("#total").textContent=records.length.toLocaleString("ja-JP");
-document.querySelector("#year").textContent=records.filter(r=>r.year===2026).length;
-document.querySelector("#avg").textContent=(records.reduce((s,r)=>s+r.score,0)/records.length).toFixed(1);
-document.querySelector("#high").textContent=records.filter(r=>r.score>=4).length;
-const barMax=Math.max(...years);document.querySelector("#bars").innerHTML=years.map((v,i)=>'<div class="bar" style="height:'+Math.round(v/barMax*100)+'%" title="'+(2017+i)+'年 '+v+'本"><span>'+String(2017+i).slice(2)+'</span></div>').join("");
-function renderRows(id,key){const data=by(key),max=data[0][1];document.querySelector(id).innerHTML=data.map(([label,count])=>'<div class="r"><span>'+label+'</span><div class="meter"><div class="fill" style="width:'+(count/max*100).toFixed(1)+'%"></div></div><b>'+count+'</b></div>').join("")}
-renderRows("#genres","genre");renderRows("#countries","country");
-const map=new Map();for(const r of records.filter(r=>r.year===2026))map.set(r.date,(map.get(r.date)||0)+1);
-const heat=document.querySelector("#heat");for(let i=0;i<308;i++){const date=new Date(Date.UTC(2026,0,1+i)).toISOString().slice(0,10);const n=map.get(date)||0;const el=document.createElement("span");el.className="day"+(n?" l"+Math.min(3,n):"");el.title=date+" · "+n+"本";heat.append(el)}
-const d=by("director").filter(x=>x[0]!=="その他の監督").slice(0,5);document.querySelector("#directors").innerHTML=d.map(([name,count],i)=>{const scores=records.filter(r=>r.director===name);const avg=scores.reduce((s,r)=>s+r.score,0)/scores.length;return '<div class="rank"><span class="n">'+(i+1)+'</span><div><strong>'+name+'</strong><small>鑑賞 '+count+'本</small></div><b>★ '+avg.toFixed(1)+'</b></div>'}).join("");
+<html lang="ja" data-theme="light">
+<head>\n<meta name="robots" content="noindex,nofollow">\n<script>
+/* Demo-only storage adapter. Real UI and real application scripts are unchanged. */
+(()=>{'use strict';
+const demoKey='cinelva-library-records-v2';
+let seed=529;const rnd=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+const films=[
+[27205,'インセプション',2010,'クリストファー・ノーラン','SF','アメリカ'],
+[155,'ダークナイト',2008,'クリストファー・ノーラン','アクション','アメリカ'],
+[157336,'インターステラー',2014,'クリストファー・ノーラン','SF','アメリカ'],
+[496243,'パラサイト 半地下の家族',2019,'ポン・ジュノ','ドラマ','韓国'],
+[680,'パルプ・フィクション',1994,'クエンティン・タランティーノ','ドラマ','アメリカ'],
+[13,'フォレスト・ガンプ／一期一会',1994,'ロバート・ゼメキス','ドラマ','アメリカ'],
+[238,'ゴッドファーザー',1972,'フランシス・フォード・コッポラ','ドラマ','アメリカ'],
+[424,'シンドラーのリスト',1993,'スティーヴン・スピルバーグ','ドラマ','アメリカ'],
+[278,'ショーシャンクの空に',1994,'フランク・ダラボン','ドラマ','アメリカ'],
+[129,'千と千尋の神隠し',2001,'宮崎 駿','アニメーション','日本'],
+[4935,'ハウルの動く城',2004,'宮崎 駿','アニメーション','日本'],
+[12477,'火垂るの墓',1988,'高畑 勲','アニメーション','日本'],
+[24428,'アベンジャーズ',2012,'ジョス・ウェドン','アクション','アメリカ'],
+[120,'ロード・オブ・ザ・リング',2001,'ピーター・ジャクソン','ファンタジー','ニュージーランド'],
+[603,'マトリックス',1999,'ラナ・ウォシャウスキー','SF','アメリカ'],
+[550,'ファイト・クラブ',1999,'デヴィッド・フィンチャー','ドラマ','アメリカ'],
+[807,'セブン',1995,'デヴィッド・フィンチャー','サスペンス','アメリカ'],
+[378064,'君の名は。',2016,'新海 誠','アニメーション','日本'],
+[19404,'ディルウェール・ドゥルハニヤー・レー・ジャーエンゲ',1995,'アディティヤ・チョープラー','ドラマ','インド'],
+[8587,'ライオン・キング',1994,'ロジャー・アラーズ','アニメーション','アメリカ']
+];
+// 20 genuine film identities only; no invented TMDB IDs. 20 records, not a fake 1,248-film library.
+const records={};films.forEach(([id,title,year,director,genre,country],i)=>{const watchedAt=new Date(Date.UTC(2026,0,1+Math.floor(rnd()*290))).toISOString().slice(0,10);records[id]={id:String(id),tmdbId:id,title,year,director,genres:[genre],countries:[country],rating:Math.round((3.2+rnd()*1.8)*10)/10,watchedAt,watched:true,poster:'',viewingMethod:i%3?'配信':'映画館'}});
+const memory=new Map([[demoKey,JSON.stringify(records)],['cinemap-viewing-records-v1','{}'],['cinelva-library-deleted-legacy-v1','[]'],['cinelva-want-to-watch-v1','{}']]);
+const adapter={getItem:k=>memory.has(k)?memory.get(k):null,setItem:(k,v)=>{memory.set(String(k),String(v))},removeItem:k=>memory.delete(k),clear:()=>memory.clear(),key:i=>[...memory.keys()][i]??null,get length(){return memory.size}};
+Object.defineProperty(window,'localStorage',{configurable:false,get:()=>adapter});
+Object.defineProperty(window,'sessionStorage',{configurable:false,get:()=>adapter});
+document.addEventListener('DOMContentLoaded',()=>{const mark=document.createElement('div');mark.textContent='DEMO / サンプルデータ — 実際の鑑賞履歴ではありません';mark.style.cssText='position:sticky;top:0;z-index:200;background:#4b3420;color:#fff;text-align:center;padding:7px 12px;font:600 12px system-ui';document.body.prepend(mark)});
+})();
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0c0f">
+  <title>My Cinelva DEMO — サンプルデータ</title>
+  <script src="../js/theme.js?v=20261023-frame-2"></script>
+  <link rel="stylesheet" href="../assets/theme.css?v=20261023-dark-frame-1">
+  <style>
+    :root{--page:#f5f2ea;--panel:#fffdf8;--ink:#292821;--muted:#706d63;--line:#dcd6c9;--soft:#eae4d8;--brand:#762f3d;--gold:#b99c59}
+    html[data-theme=dark]{--page:#171918;--panel:#212421;--ink:#f2eee4;--muted:#bab6aa;--line:#3c4039;--soft:#30352e;--brand:#e6a5ac;--gold:#d9bd7f}
+    [hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.top{background:var(--panel);border-bottom:1px solid var(--line);padding:12px max(18px,calc((100vw - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:inline-flex;align-items:center;gap:9px;font:26px Georgia,"Yu Mincho",serif;text-decoration:none;color:var(--ink)}.brand img{display:block;width:32px;height:32px;object-fit:contain}.top a:last-child{color:var(--brand)}main{max-width:1120px;margin:auto;padding:30px 22px 80px}.hero{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}.eyebrow{font-size:11px;color:var(--brand);letter-spacing:.18em;font-weight:750}.hero h1{font:36px/1.2 Georgia,"Yu Mincho",serif;margin:5px 0}.hero p,.hint{color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:end}.button{min-height:44px;padding:9px 14px;border:1px solid var(--line);border-radius:5px;background:var(--panel);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.primary{background:var(--brand);color:#fff;border-color:var(--brand)}.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--panel);border:1px solid var(--line);border-radius:6px;margin:20px 0}.stat{padding:14px 18px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat span{display:block;color:var(--muted);font-size:11px}.stat b{font:32px Georgia,serif;font-variant-numeric:tabular-nums}.tabs{display:flex;overflow:auto;gap:8px;border-bottom:1px solid var(--line);margin:24px 0 18px;scrollbar-width:thin}.tab{white-space:nowrap;min-height:46px;padding:8px 13px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted)}.tab[aria-selected=true]{color:var(--brand);border-color:var(--brand);font-weight:700}.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px;margin:12px 0}.panel h2{font:26px Georgia,"Yu Mincho",serif;margin:0 0 4px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 14px}.section-head h2{font:25px Georgia,"Yu Mincho",serif}.section-head p{color:var(--muted);font-size:12px}.record-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px 13px}.movie{min-width:0;text-align:left}.poster{position:relative;aspect-ratio:2/3;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}.poster img{width:100%;height:100%;object-fit:cover}.poster span{padding:8px;text-align:center;color:var(--muted);font:16px Georgia,serif}.movie strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;margin-top:7px}.movie small{display:block;color:var(--muted);font-size:11px}.movie .score{color:var(--muted);font-weight:750}.movie .score.high-rating{color:var(--gold)}.record-actions{display:flex;gap:4px;margin-top:5px}.record-actions button{border:1px solid var(--line);background:transparent;border-radius:3px;padding:4px 7px;font-size:11px}.empty{padding:48px 18px;text-align:center;border:1px dashed var(--line);background:var(--panel);color:var(--muted)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.toolbar input,.toolbar select,.field input,.field select,.field textarea{min-height:44px;max-width:100%;border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:8px 10px}.toolbar input{flex:1;min-width:180px}.canvasbox{border:1px solid var(--line);border-radius:6px;background:linear-gradient(145deg,#102735,#193b48 60%,#13232e);overflow:hidden;touch-action:none}.canvasbox canvas{display:block;width:100%;height:480px}.canvas-note{padding:10px 14px;color:#d6e1dd;font-size:12px}.legend{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip{font-size:11px;border:1px solid var(--line);border-radius:30px;padding:5px 9px;background:var(--panel)}.selected-film{min-height:70px}.selected-film .movie{max-width:160px}.genre-matrix,.award-matrix{overflow:auto;border:1px solid var(--line);background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:720px}th,td{border-bottom:1px solid var(--line);padding:7px;text-align:center}th{font-size:12px;color:var(--muted);position:sticky;top:0;background:var(--panel)}th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--panel);z-index:1}td button{min-width:42px;min-height:42px;border:1px solid transparent;border-radius:4px;background:var(--soft)}td button:hover{border-color:var(--brand)}.award-cell{font-variant-numeric:tabular-nums;font-weight:700}.heat-0{opacity:.5}.heat-1{background:#eee3ce}.heat-2{background:#d9bd7f}.heat-3{background:#a77d35;color:white}.heat-4{background:#673d27;color:white}.timeline{position:relative;overflow-x:auto;padding:24px 8px 28px;min-height:150px}.timeline:before{content:"";position:absolute;left:10px;right:10px;top:70px;height:2px;background:var(--line)}.timeline-row{position:relative;min-width:700px;height:95px}.timeline-node{position:absolute;top:32px;transform:translateX(-50%);min-width:36px;min-height:36px;border-radius:50%;border:2px solid var(--brand);background:var(--panel);color:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 15%,transparent);font-size:10px}.timeline-node.unwatched{opacity:.38;border-style:dashed;box-shadow:none}.timeline-node span{position:absolute;top:39px;left:50%;width:120px;transform:translateX(-50%);font-size:10px;color:var(--ink);white-space:normal}.timeline-year{position:absolute;top:78px;color:var(--muted);font-size:10px;transform:translateX(-50%)}dialog{width:min(560px,calc(100vw - 24px));max-height:92dvh;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);padding:0}dialog::backdrop{background:#13110fb0}.dialog-head,.dialog-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}.dialog-body{padding:18px 20px}.dialog-actions{border:0;border-top:1px solid var(--line);justify-content:end}.field{display:block;margin:14px 0}.field input,.field select{width:100%;margin-top:4px}.search-results{max-height:250px;overflow:auto}.search-result{width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:8px 0;border:0;border-bottom:1px solid var(--line);background:transparent}.search-result img{width:40px;height:60px;object-fit:cover;background:var(--soft)}.search-result small{display:block;color:var(--muted)}.rating{display:flex;align-items:center;gap:12px}.rating input{flex:1}.status{min-height:22px;color:var(--muted);font-size:12px}.footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.footer a{color:inherit}
+    @media(max-width:760px){main{padding:22px 14px 60px}.top{padding:10px 14px}.brand{font-size:23px}.hero{align-items:start;flex-direction:column}.hero h1{font-size:30px}.actions{justify-content:start}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.record-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 10px}.panel{padding:13px}.canvasbox canvas{height:360px}.tabs{margin-left:-4px;margin-right:-4px}.section-head{align-items:start;flex-direction:column}.toolbar input{min-width:100%}.award-matrix{margin-right:-13px}}
+    .heatgrid{display:grid;grid-template-rows:repeat(7,13px);grid-auto-flow:column;grid-auto-columns:13px;gap:3px;overflow:auto;padding:8px 2px}.heat-day{width:13px;height:13px;border-radius:2px;background:var(--soft)}.heat-day[data-level="1"]{background:#d9bd7f}.heat-day[data-level="2"]{background:#a77d35}.heat-day[data-level="3"]{background:#673d27}.heat-day.empty{opacity:.25}.timeline-node.awarded{border-color:var(--gold);box-shadow:0 0 0 5px color-mix(in srgb,var(--gold) 30%,transparent)}.timeline-node.high-rated{outline:2px solid var(--gold);outline-offset:3px}.breakdown{border:1px solid var(--line);padding:10px;flex:1;min-width:150px}.breakdown strong{display:block}.annual-count{display:flex;align-items:center;gap:9px;min-width:120px}.annual-bar{display:block;height:10px;min-width:2px;max-width:100%;border-radius:6px;background:var(--brand)}.annual-comparison table{min-width:0}.annual-comparison th,.annual-comparison td{text-align:left}.annual-comparison td:last-child{color:var(--muted);font-size:12px}
+   .cy-month.one-month{background:linear-gradient(140deg,#dcecf8,#c7dfef);color:#243d50}
+ .cy-month.light-month{background:linear-gradient(140deg,#a8cde7,#8fb9d9);color:#20384e}
+ .cy-month.mid-month{background:linear-gradient(140deg,#659bc4,#4784b2);color:#fff}
+ .cy-month.deep-month{background:linear-gradient(140deg,#285f91,#164873);color:#fff}
+#summaryView .cs-stack-legend button.cs-donut-legend-row{width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;min-height:30px!important;padding:3px 0!important;border-radius:3px}
+#summaryView .cs-stack-legend button.cs-donut-legend-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#summaryBreakdownFilms .record-grid{margin-top:14px}
+</style>
+<style id="shared-header">html[data-theme]{color-scheme:dark}body{--page:#0a0a0a;--panel:#111;--ink:#f2f2f2;--muted:#aaa;--line:#303030;--soft:#222;--brand:#e6a5ac;--gold:#d9bd7f;background:var(--page);color:var(--ink)}.gTop{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans",sans-serif}.gTop button,.gTop input{font:inherit}.gTop button{cursor:pointer}.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+.gLogo{display:block;height:31px;width:auto;max-width:170px;object-fit:contain}
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}.gLogo{height:27px;max-width:124px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+
+
+</style>
+<style id="cinelva-wordmark">
+.gBrand{gap:5px!important;line-height:1!important}
+.gBrandImage{width:33px!important;height:33px!important;object-fit:contain!important;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+@media(max-width:370px){.gBrandImage{width:29px!important;height:29px!important}.gBrandWord{font-size:18px}}
+</style>
+<link rel="icon" href="../assets/cinelva_original_colors_transparent.png?v=20261023-clean" type="image/png">
+<link rel="apple-touch-icon" href="../assets/cinelva_original_colors_transparent.png?v=20261023-clean">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png?v=20261023-clean">
+<style id="cinelva-mobile-utility-menu-fix">
+.recordUtilities{position:relative!important;max-width:100%!important}
+.recordUtilities[open] .utilityItems{position:absolute!important;top:calc(100% + 6px)!important;right:0!important;left:auto!important;transform:none!important;width:min(260px,calc(100vw - 32px))!important;min-width:0!important;max-width:calc(100vw - 32px)!important;box-sizing:border-box!important;z-index:150!important}
+.recordUtilities[open] .utilityItems>*{width:100%!important;box-sizing:border-box!important;min-width:0!important;text-align:left!important}
+@media(max-width:760px){.hero .actions{display:flex!important;justify-content:flex-end!important;max-width:100%!important}.recordUtilities[open] .utilityItems{right:0!important;left:auto!important}}
+</style><style id="my-cinelva-mobile-ux">.recordUtilities{position:relative;align-self:center}.recordUtilities summary{cursor:pointer;list-style:none;padding:10px 12px;color:var(--muted);font-size:12px;border:1px solid var(--line);border-radius:8px}.recordUtilities summary::-webkit-details-marker{display:none}.utilityItems{position:absolute;right:0;top:calc(100% + 6px);z-index:10;display:grid;gap:6px;min-width:220px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:0 10px 30px #0005}.utilityItems .button{width:100%;text-align:center}.sectionGuide{font-size:12px;color:var(--muted);margin:26px 0 0}.stats .stat{min-width:0}.stats .stat b{display:block;overflow-wrap:anywhere}.stats .stat small{display:block;font-size:10px;line-height:1.45;color:var(--muted);margin-top:5px}.tabs{scroll-snap-type:x proximity;scroll-padding-left:0;overscroll-behavior-x:contain}.tabs .tab{flex-shrink:0;white-space:nowrap;scroll-snap-align:start}@media(max-width:650px){.hero{gap:10px}.hero h1{font-size:28px}.hero p{line-height:1.5}.actions{width:100%;align-items:center;justify-content:space-between;gap:8px}.actions>.primary{flex:1;min-width:0}.recordUtilities{flex:0 0 auto}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:13px 12px}.stat b{font-size:27px}.stat:last-child{border-right:0}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.tabs{margin-top:10px;margin-left:0;margin-right:0}.tabs .tab{padding:12px 14px}.toolbar input{min-width:0;width:100%;flex-basis:100%}}</style><style id="cinelva-summary-style">
+.cinema-summary{margin:22px 0 26px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans",sans-serif;color:var(--ink)}
+.cs-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.cs-head h2{font-size:23px;font-weight:500;letter-spacing:.04em;margin:0}.cs-head select{width:auto;min-width:118px;padding:8px 28px 8px 12px;background:var(--panel);border:1px solid var(--line);border-radius:20px;font-size:13px}
+.cs-top{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.cs-number{font-size:clamp(30px,5vw,54px);font-weight:300;line-height:1.15;letter-spacing:-.045em;font-variant-numeric:tabular-nums}.cs-muted{font-size:12px;color:var(--muted)}.cs-milestones{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}.cs-prisms{display:flex;flex-wrap:wrap;gap:5px;max-width:310px}.cs-prism{width:29px;height:35px;flex:none}.cs-crowns{display:grid;grid-template-columns:repeat(5,18px);gap:4px}.cs-crown{width:18px;height:18px}.cs-year-bars{display:flex;align-items:end;gap:7px;overflow-x:auto;min-height:104px;padding:10px 0 0}.cs-year{min-width:34px;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:3px;font-size:10px;color:var(--muted)}.cs-year .bar{width:22px;min-height:2px;background:#677581;border-radius:2px 2px 0 0}.cs-year.active .bar{background:#d9bd7f}.cs-year.active{color:var(--gold)}.cs-section{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel)}.cs-section h3{font-size:16px;font-weight:500;margin:0 0 14px}.cs-posters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.cs-film{min-width:0}.cs-film img,.cs-film .cs-poster-empty{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;background:var(--soft)}.cs-film .cs-poster-empty{display:grid;place-items:center;color:var(--muted);font-size:11px}.cs-film-name{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cs-score{font-size:12px;color:var(--gold)}.cs-breakdowns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.cs-breakdowns .cs-section{margin-top:0}.cs-row{display:grid;grid-template-columns:minmax(75px,1fr) 2fr auto;gap:8px;align-items:center;margin:7px 0;font-size:12px}.cs-track{height:6px;background:var(--soft);border-radius:5px;overflow:hidden}.cs-track i{display:block;height:100%;border-radius:5px}.cs-strip{display:flex;height:9px;overflow:hidden;border-radius:5px;background:var(--soft);margin-bottom:12px}.cs-strip span{min-width:1px}.cs-decade{display:flex;align-items:end;gap:4px;min-height:95px;overflow-x:auto}.cs-decade-item{flex:1;min-width:32px;text-align:center;font-size:10px;color:var(--muted)}.cs-decade-item i{display:block;width:70%;margin:auto;background:#8994a1;border-radius:2px 2px 0 0}.cs-empty{color:var(--muted);font-size:13px}.cs-count{font-variant-numeric:tabular-nums}
+@media(max-width:650px){.cs-top{padding:13px;gap:12px}.cs-head h2{font-size:19px}.cs-prism{width:24px;height:29px}.cs-prisms{max-width:145px}.cs-crowns{grid-template-columns:repeat(5,14px);gap:3px}.cs-crown{width:14px;height:14px}.cs-posters{gap:5px}.cs-film-name{font-size:9px}.cs-score{font-size:10px}.cs-breakdowns{grid-template-columns:1fr}.cs-year{min-width:23px}.cs-year .bar{width:16px}.cs-muted{font-size:11px}}
+ .stats[hidden]{display:none!important}.cinema-summary{margin-top:18px}.cs-top{border-radius:8px}.cs-section{border-radius:8px}@media(max-width:650px){.cs-section{padding:12px}.cs-top{padding:12px}.cs-head{margin-bottom:12px}}
+
+/* My Cinelva summary — refined editorial layout */
+#summaryView{--cs-ink:#f2f2f2;--cs-gold:#d9bd7f;color:var(--cs-ink);max-width:1120px;margin:30px auto 54px}
+#summaryView .cs-head{margin-bottom:28px;align-items:baseline}
+#summaryView .cs-head h2{font-size:clamp(22px,3vw,30px);font-weight:400;letter-spacing:-.035em}
+#summaryView .cs-head select{background:#151515;color:#f2f2f2;border:1px solid #353535;border-radius:6px;padding:10px 30px 10px 13px}
+#summaryView .cs-top{background:transparent;border:0;border-radius:0;padding:0;gap:clamp(20px,5vw,64px);grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+#summaryView .cs-top>div{min-width:0;padding:24px 0 26px;border-top:1px solid #393632;border-bottom:1px solid #262626}
+#summaryView .cs-number{font-size:clamp(46px,7vw,84px);font-weight:300;line-height:1.18;letter-spacing:-.065em;margin:7px 0 10px}
+#summaryView .cs-muted{font-size:12px;letter-spacing:.075em;color:#a6a4a1}
+#summaryView .cs-milestones{min-height:74px;gap:16px;align-items:center}
+#summaryView .cs-prisms{gap:7px;max-width:none}
+#summaryView .cs-prism{width:36px;height:42px;filter:drop-shadow(0 3px 5px #91b6c52c)}
+#summaryView .cs-crowns{grid-template-columns:repeat(5,18px);gap:7px 8px}
+#summaryView .cs-crown{width:18px;height:18px}
+#summaryView .cs-year-bars{min-height:112px}
+#summaryView .cs-section{background:transparent;border:0;border-radius:0;padding:0;margin-top:34px}
+#summaryView .cs-section h3{font-size:14px;font-weight:500;letter-spacing:.045em;padding-bottom:12px;border-bottom:1px solid #303030;margin-bottom:17px}
+#summaryView .cs-posters{gap:clamp(8px,1.6vw,18px)}
+#summaryView .cs-film img,#summaryView .cs-poster-empty{border-radius:3px;display:block}
+#summaryView .cs-film-name{margin-top:8px;font-size:12px;line-height:1.5}
+#summaryView .cs-score{font-size:13px;margin-top:3px}
+#summaryView .cs-breakdowns{gap:6px 36px;margin-top:22px!important}
+#summaryView .cs-breakdowns .cs-section{margin-top:22px}
+#summaryView .cs-row{margin:11px 0;gap:10px}
+#summaryView .cs-track{height:5px;background:#252525}
+#summaryView .cs-strip{height:7px}
+@media(max-width:650px){
+#summaryView{margin:22px auto 40px}
+#summaryView .cs-head{margin-bottom:20px}
+#summaryView .cs-top{gap:14px}
+#summaryView .cs-top>div{padding:16px 0 20px}
+#summaryView .cs-number{font-size:clamp(35px,10vw,54px)}
+#summaryView .cs-milestones{gap:9px;min-height:65px;align-items:flex-start}
+#summaryView .cs-prisms{gap:4px}
+#summaryView .cs-prism{width:24px;height:30px}
+#summaryView .cs-crowns{grid-template-columns:repeat(5,12px);gap:4px}
+#summaryView .cs-crown{width:12px;height:12px}
+#summaryView .cs-posters{gap:6px}
+#summaryView .cs-film-name{font-size:10px;line-height:1.35}
+#summaryView .cs-score{font-size:11px}
+#summaryView .cs-section{margin-top:26px}
+#summaryView .cs-breakdowns{gap:0}
+}
+
+/* Viewing calendar: single authoritative layout (no legacy heatgrid rules). */
+#calendarView .panel{background:#111;color:#f2f2f2}
+#calendarView .panel h2,#calendarView .section-head h2{font-family:system-ui,-apple-system,"Hiragino Sans",sans-serif;font-size:20px;font-weight:500;color:#f2f2f2}
+#calendarView .cw-mode-label{display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa}
+#calendarView #calendarMode{background:#151515;color:#eee;border:1px solid #353535;border-radius:6px;padding:8px}
+#calendarView .cw-history{display:grid;gap:5px;max-height:640px;overflow-y:auto;overscroll-behavior:contain}
+#calendarView .cw-week{display:grid;grid-template-columns:60px repeat(7,minmax(0,1fr));gap:5px;align-items:stretch}
+#calendarView .cw-weekdays{position:sticky;top:0;z-index:2;background:#171717;text-align:center;color:#aaa;font-size:11px;padding:7px 0}
+#calendarView .cw-week-label{align-self:center;font-size:11px;color:#999}
+#calendarView .cw-day{min-width:0;min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#25292d;border:1px solid transparent;border-radius:5px;color:#ddd}
+#calendarView .cw-day.has-film{background:#314b60;border-color:#57728b}
+#calendarView .cw-day[data-level="2"]{background:#42637c}
+#calendarView .cw-day[data-level="3"],#calendarView .cw-day[data-level="4"]{background:#577b96}
+#calendarView .cw-date{font-size:9px;opacity:.7}
+#calendarView .cw-value{font-size:12px;font-weight:600;white-space:nowrap}
+#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;gap:24px 18px;padding:0;overflow:visible}
+#calendarView #yearHeatmap>.cy-month{min-width:0;max-width:100%;margin:0;padding:0}
+#calendarView .cy-month-head{width:100%;min-height:30px;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 0 6px;margin:0 0 10px;border:0;border-bottom:1px solid #383838;background:transparent;color:#f0efec;text-align:left;font-size:14px}
+#calendarView .cy-month-count{font-size:11px;color:#aaa;white-space:nowrap}
+#calendarView #yearHeatmap .cy-dots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,auto));grid-auto-flow:row;gap:3px;width:100%;overflow:hidden}
+#calendarView #yearHeatmap .cy-dots>.cy-day,#calendarView #yearHeatmap .cy-dots>.cy-empty{display:block;width:100%;min-width:0;max-width:100%;height:auto;aspect-ratio:1;border:0;border-radius:3px;margin:0;padding:0;box-shadow:none}
+#calendarView #yearHeatmap .cy-dots>.cy-empty{background:transparent}
+#calendarView #yearHeatmap .cy-dots>.cy-day{background:#303030}
+#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#a18a5b}
+#calendarView .cy-day:focus-visible,#calendarView .cy-month-head:focus-visible,#calendarView .cw-day:focus-visible{outline:2px solid #d9bd7f;outline-offset:2px}
+@media(max-width:650px){
+#calendarView .cw-week{grid-template-columns:35px repeat(7,minmax(0,1fr));gap:3px}
+#calendarView .cw-day{min-height:41px;gap:3px}
+#calendarView .cw-date{font-size:8px}
+#calendarView .cw-value,#calendarView .cw-week-label{font-size:9px}
+#calendarView #yearHeatmap.cinelva-annual-calendar{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 6px}
+#calendarView .cy-month-head{font-size:12px}
+#calendarView .cy-month-count{font-size:10px}
+}
+</style>
+<style id="my-cinelva-unified-design">
+body,button,input,select,textarea,summary,.cinema-summary,.gTop,#calendarView .panel h2,#calendarView .section-head h2{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif!important}
+.hero h1,.brand{font-family:inherit!important;font-weight:750!important;letter-spacing:-.03em}
+.director-bars{display:grid;gap:11px;padding:12px 0 18px}
+.director-bar-row{display:grid;grid-template-columns:minmax(85px,32%) minmax(0,1fr) 38px;align-items:center;gap:10px;width:100%;padding:7px 8px;border:1px solid transparent;border-radius:7px;background:transparent;text-align:left;color:var(--ink)}
+.director-bar-row:hover,.director-bar-row.active{background:var(--soft);border-color:var(--line)}
+.director-bar-name{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.director-bar-track{height:14px;border-radius:4px;background:var(--soft);overflow:hidden}
+.director-bar-fill{display:block;height:100%;border-radius:4px;background:var(--gold)}
+.director-bar-count{text-align:right;font-size:13px;font-variant-numeric:tabular-nums}
+#directorsView #directorWorks:not(:empty){margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+#directorsView #directorWorks[hidden], #directorsView #directorFilmography[hidden] { display:none !important; }
+</style><style id="my-cinelva-clarity-105">
+:root{--my-font:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
+body,body *:not(svg):not(path):not(.gBrandWord){font-family:var(--my-font)!important}
+.hero{margin-bottom:16px!important}
+.hero .eyebrow{font-size:10px!important;letter-spacing:.12em!important}
+.hero h1{font-size:clamp(27px,5vw,38px)!important;line-height:1.18!important;letter-spacing:-.035em!important}
+.hero p{font-size:13px!important;line-height:1.65!important}
+.tabs{gap:4px!important;overflow-x:auto!important;scrollbar-width:none!important;white-space:nowrap!important}
+.tabs::-webkit-scrollbar{display:none}
+.tabs .tab{flex:0 0 auto!important;font-size:12px!important;letter-spacing:0!important;padding:9px 11px!important}
+.view .section-head p,.view .hint{line-height:1.6!important}
+.cinema-summary .cs-head h2{font-size:19px!important;font-weight:700!important;letter-spacing:-.025em!important}
+.cinema-summary .cs-section h3{font-size:14px!important;font-weight:650!important}
+.want-watch-section{margin:8px 0 14px!important}
+@media(max-width:760px){.hero{gap:12px!important}.tabs{margin-bottom:14px!important}.cinema-summary{margin-top:8px!important}}
+</style><style id="cinelva-donut-layout">
+#summaryView .cs-breakdowns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px 14px!important}
+#summaryView .cs-breakdowns .cs-section{min-width:0!important;margin:0!important}
+.cs-donut-layout{display:flex;flex-direction:column;align-items:center;gap:12px}
+.cs-donut{width:min(100%,154px);aspect-ratio:1;border-radius:50%;position:relative;flex-shrink:0}
+.cs-donut:after{content:"";position:absolute;inset:27%;border-radius:50%;background:#111}
+.cs-donut-legend{width:100%;display:grid;gap:5px}
+.cs-donut-legend-row{display:flex;align-items:flex-start;gap:5px;font-size:11px;line-height:1.35}
+.cs-donut-dot{width:8px;height:8px;flex:0 0 8px;border-radius:2px;margin-top:3px}
+.cs-donut-label{flex:1;min-width:0;overflow-wrap:anywhere}
+.cs-donut-value{font-variant-numeric:tabular-nums;white-space:nowrap}
+.cs-donut-note{font-size:10px;color:#999;line-height:1.4}
+@media(max-width:400px){#summaryView .cs-breakdowns{gap:15px 9px!important}.cs-donut{width:min(100%,125px)}.cs-donut-legend-row{font-size:10px}}
+</style><style id="cinelva-refinements-107">
+.cinelva-year-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cinelva-year-controls{display:flex;align-items:center;gap:5px}
+.cinelva-year-controls button,.cinelva-year-controls select{min-height:34px;border:1px solid #4a5567;background:#1b2637;color:#eaf2ff;border-radius:7px;padding:4px 9px}
+#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#4989cf!important}
+#calendarView #yearHeatmap .cy-month.gold-month .cy-dots>.cy-day.watched{background:#d9b55d!important}
+#calendarView #yearHeatmap .cy-month.gold-month .cy-month-count{color:#e9c76f!important}
+#calendarView #yearHeatmap .cy-month-head{border-bottom-color:#344b68!important}
+#awardsView .award-matrix .heat-0{background:#1b2532!important;color:#8494a7!important;opacity:1!important}
+#awardsView .award-matrix .heat-1{background:#274c72!important;color:#eaf4ff!important}
+#awardsView .award-matrix .heat-2{background:#3479a8!important;color:#fff!important}
+#awardsView .award-matrix .heat-3{background:#407ea8!important;color:#fff!important}
+#awardsView .award-matrix .heat-4{background:#64a6d1!important;color:#0e2030!important}
+#awardsView .award-cell{font-size:13px!important;font-weight:700!important}
+#awardsView .award-cell:focus-visible{outline:2px solid white!important}
+.director-work-group{margin:10px 0 22px}
+.director-work-group h3{margin:0 0 10px;font-size:14px}
+.director-work-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px}
+.director-work{padding:10px;border:1px solid #344054;border-radius:8px;background:#19202b;color:#eee;text-align:left}
+.director-work.watched{border-color:#b69a57}
+.director-work small{display:block;margin-top:4px;color:#b2c0cf}
+</style><style id="cinelva-awards-108">
+#calendarView .cy-month.gold-month .cy-month-count{font-weight:800!important;color:#f0c75c!important}
+#calendarView .cy-month.gold-month .cy-month-head{border-bottom-color:#b8964c!important}
+#awardsView .award-detail-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:15px}
+#awardsView .award-detail-head{grid-column:1/-1;border-top:1px solid #3e4d60;padding-top:14px}
+#awardsView .award-detail-head h3{font-size:17px;margin:0}
+#awardsView .award-detail-head p{font-size:12px;color:#adb9c6;margin:2px 0}
+#awardsView .award-detail-list article.panel{margin:0;padding:12px}
+#awardsView .award-watch-state{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:700}
+#awardsView .award-watch-state.is-watched{background:#204f47;color:#a9e4cc}
+#awardsView .award-watch-state.is-unwatched{background:#51402a;color:#f5d49a}
+</style><style id="cinelva-medal-109">.cy-medal{display:inline-flex;vertical-align:middle;margin-right:3px;color:#e9be58}.cy-medal svg{width:17px;height:17px;display:block}.cy-month-count{display:inline-flex;align-items:center}</style><style>.gTop .gBrandWord,.gDrawer .gBrandWord{font-family:Georgia,"Times New Roman",serif!important;font-weight:600!important;letter-spacing:-.045em!important}</style><style id="cinelva-calendar-reference-115">
+#calendarView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-flow:row!important;gap:16px 12px!important}
+#calendarView #yearHeatmap>.cy-month{position:relative;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1.25;min-width:0;padding:14px 12px 16px!important;border-radius:14px;border:1px solid #aac7db;box-shadow:inset 0 1px 0 #ffffff30;background:linear-gradient(135deg,#6c91af,#a2c8e2);color:#14283b;overflow:hidden}
+#calendarView #yearHeatmap>.cy-month.light-month{background:linear-gradient(140deg,#7194af,#9fc6df)}
+#calendarView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,#84a9c6,#b2d4e9)}
+#calendarView #yearHeatmap>.cy-month.deep-month{background:linear-gradient(140deg,#486a87,#789db9);color:#f4f8ff}
+#calendarView #yearHeatmap>.cy-month.empty-month{background:linear-gradient(140deg,#303b49,#45576a);border-color:#71849a;color:#e0e7f1}
+#calendarView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(135deg,#8d6b37,#b28e4e);border-color:#e5bd69;color:#fff5dd}
+#calendarView #yearHeatmap .cy-month-head{display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:flex-start!important;gap:8px!important;position:relative;flex:1;min-height:0!important;width:100%;padding:0!important;margin:0!important;border:0!important;background:transparent!important;color:inherit!important;text-align:left}
+#calendarView #yearHeatmap .cy-month-name{font-size:14px;font-weight:600;line-height:1.1}
+#calendarView #yearHeatmap .cy-month-total{display:flex;align-items:baseline;gap:4px;font-size:12px;line-height:1}
+#calendarView #yearHeatmap .cy-month-total strong{font-size:34px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
+#calendarView #yearHeatmap .cy-month-total small{font-size:12px;font-weight:500}
+#calendarView #yearHeatmap .cy-medal{position:absolute;right:0;top:0;display:flex;flex-direction:column;align-items:center;gap:1px;color:#ffe8ae;font-size:9px;font-weight:800;letter-spacing:.09em}
+#calendarView #yearHeatmap .cy-medal svg{display:block;width:19px;height:19px}
+#calendarView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-template-rows:repeat(6,minmax(0,auto))!important;gap:3px!important;width:100%;margin-top:12px;flex-shrink:0}
+#calendarView #yearHeatmap .cy-dots>.cy-day,#calendarView #yearHeatmap .cy-dots>.cy-empty{width:100%;aspect-ratio:1.15;min-height:0;border-radius:3px}
+#calendarView #yearHeatmap .cy-dots>.cy-day{background:#243b50!important;opacity:.23}
+#calendarView #yearHeatmap .cy-dots>.cy-day.watched{background:#f4fbff!important;opacity:1;box-shadow:0 0 5px #f4fbff44}
+#calendarView #yearHeatmap>.gold-month .cy-dots>.cy-day{background:#49361e!important;opacity:.25}
+#calendarView #yearHeatmap>.gold-month .cy-dots>.cy-day.watched{background:#fff1c7!important;opacity:1}
+#calendarView #yearHeatmap>.empty-month .cy-dots>.cy-day{background:#172433!important;opacity:.45}
+@media(max-width:650px){#calendarView #yearHeatmap.cinelva-annual-calendar{gap:10px 7px!important}#calendarView #yearHeatmap>.cy-month{padding:9px 7px 10px!important;border-radius:10px;aspect-ratio:1/1.34}#calendarView #yearHeatmap .cy-month-name{font-size:12px}#calendarView #yearHeatmap .cy-month-total strong{font-size:26px}#calendarView #yearHeatmap .cy-month-total small{font-size:10px}#calendarView #yearHeatmap .cy-dots{gap:2px!important;margin-top:6px}#calendarView #yearHeatmap .cy-medal{font-size:7px}#calendarView #yearHeatmap .cy-medal svg{width:15px;height:15px}}
+</style><style id="cinelva-dashboard-calendar-117">
+#summaryView #yearHeatmap.cinelva-annual-calendar{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-flow:row!important;gap:16px 12px!important}
+#summaryView #yearHeatmap>.cy-month{position:relative;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1.25;min-width:0;padding:14px 12px 16px!important;border-radius:14px;border:1px solid #aac7db;box-shadow:inset 0 1px 0 #ffffff30;background:linear-gradient(135deg,#6c91af,#a2c8e2);color:#14283b;overflow:hidden}
+#summaryView #yearHeatmap>.cy-month.light-month{background:linear-gradient(140deg,#7194af,#9fc6df)}
+#summaryView #yearHeatmap>.cy-month.mid-month{background:linear-gradient(140deg,#84a9c6,#b2d4e9)}
+#summaryView #yearHeatmap>.cy-month.deep-month{background:linear-gradient(140deg,#486a87,#789db9);color:#f4f8ff}
+#summaryView #yearHeatmap>.cy-month.empty-month{background:linear-gradient(140deg,#303b49,#45576a);border-color:#71849a;color:#e0e7f1}
+#summaryView #yearHeatmap>.cy-month.gold-month{background:linear-gradient(135deg,#8d6b37,#b28e4e);border-color:#e5bd69;color:#fff5dd}
+#summaryView #yearHeatmap .cy-month-head{display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:flex-start!important;gap:8px!important;position:relative;flex:1;min-height:0!important;width:100%;padding:0!important;margin:0!important;border:0!important;background:transparent!important;color:inherit!important;text-align:left}
+#summaryView #yearHeatmap .cy-month-name{font-size:14px;font-weight:600;line-height:1.1}
+#summaryView #yearHeatmap .cy-month-total{display:flex;align-items:baseline;gap:4px;font-size:12px;line-height:1}
+#summaryView #yearHeatmap .cy-month-total strong{font-size:34px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
+#summaryView #yearHeatmap .cy-month-total small{font-size:12px;font-weight:500}
+#summaryView #yearHeatmap .cy-medal{position:absolute;right:0;top:0;display:flex;flex-direction:column;align-items:center;gap:1px;color:#ffe8ae;font-size:9px;font-weight:800;letter-spacing:.09em}
+#summaryView #yearHeatmap .cy-medal svg{display:block;width:19px;height:19px}
+#summaryView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-template-rows:repeat(6,minmax(0,auto))!important;gap:3px!important;width:100%;margin-top:12px;flex-shrink:0}
+#summaryView #yearHeatmap .cy-dots>.cy-day,#summaryView #yearHeatmap .cy-dots>.cy-empty{width:100%;aspect-ratio:1.15;min-height:0;border-radius:3px}
+#summaryView #yearHeatmap .cy-dots>.cy-day{background:#243b50!important;opacity:.23}
+#summaryView #yearHeatmap .cy-dots>.cy-day.watched{background:#f4fbff!important;opacity:1;box-shadow:0 0 5px #f4fbff44}
+#summaryView #yearHeatmap>.gold-month .cy-dots>.cy-day{background:#49361e!important;opacity:.25}
+#summaryView #yearHeatmap>.gold-month .cy-dots>.cy-day.watched{background:#fff1c7!important;opacity:1}
+#summaryView #yearHeatmap>.empty-month .cy-dots>.cy-day{background:#172433!important;opacity:.45}
+@media(max-width:650px){#summaryView #yearHeatmap.cinelva-annual-calendar{gap:10px 7px!important}#summaryView #yearHeatmap>.cy-month{padding:9px 7px 10px!important;border-radius:10px;aspect-ratio:1/1.34}#summaryView #yearHeatmap .cy-month-name{font-size:12px}#summaryView #yearHeatmap .cy-month-total strong{font-size:26px}#summaryView #yearHeatmap .cy-month-total small{font-size:10px}#summaryView #yearHeatmap .cy-dots{gap:2px!important;margin-top:6px}#summaryView #yearHeatmap .cy-medal{font-size:7px}#summaryView #yearHeatmap .cy-medal svg{width:15px;height:15px}}
+</style><style id="dashboard-calendar-117">#summaryView #yearHeatmap>.cy-month{aspect-ratio:1/1.32}#summaryView .cinelva-year-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}#summaryView .cinelva-year-controls{display:flex;gap:5px;align-items:center}#summaryView .cinelva-year-controls button,#summaryView .cinelva-year-controls select{min-height:32px;border:1px solid #4a5567;background:#1b2637;color:#eaf2ff;border-radius:7px;padding:4px 7px}@media(max-width:650px){#summaryView #yearHeatmap.cinelva-annual-calendar{gap:7px 5px!important}#summaryView #yearHeatmap>.cy-month{padding:7px 5px 8px!important;border-radius:8px;aspect-ratio:1/1.5}#summaryView #yearHeatmap .cy-month-name{font-size:11px}#summaryView #yearHeatmap .cy-month-total strong{font-size:23px}#summaryView #yearHeatmap .cy-month-total small{font-size:9px}#summaryView #yearHeatmap .cy-dots{gap:1px!important;margin-top:5px}#summaryView #yearHeatmap .cy-medal svg{width:12px;height:12px}#summaryView #yearHeatmap .cy-medal{font-size:6px}}</style><style id="calendar-grid-overlap-fix-118">
+#summaryView #yearHeatmap>.cy-month{height:auto!important;min-height:0!important}
+#summaryView #yearHeatmap .cy-dots{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-template-rows:repeat(6,minmax(0,1fr))!important;grid-auto-rows:minmax(0,1fr)!important;gap:2px!important;align-content:end!important;min-height:0!important;max-height:none!important;overflow:visible!important;flex-shrink:0!important}
+#summaryView #yearHeatmap .cy-dots>.cy-day,#summaryView #yearHeatmap .cy-dots>.cy-empty{display:block!important;box-sizing:border-box!important;width:100%!important;height:auto!important;min-width:0!important;min-height:0!important;max-width:100%!important;aspect-ratio:1!important;margin:0!important;padding:0!important;border:0!important;border-radius:2px!important;box-shadow:none!important;line-height:0!important;position:static!important;transform:none!important}
+#summaryView #yearHeatmap .cy-dots>.cy-empty{background:transparent!important}
+#summaryView #yearHeatmap .cy-dots>.cy-day.watched{box-shadow:inset 0 0 0 1px #ffffff66!important}
+#summaryView #yearHeatmap .cy-month-head{flex:1 1 auto!important;min-height:0!important}
+@media(max-width:650px){#summaryView #yearHeatmap .cy-dots{gap:1.5px!important}#summaryView #yearHeatmap>.cy-month{aspect-ratio:1/1.48!important;padding:7px 5px 8px!important}}
+</style>
+<style id="director-poster-grid-125">
+#directorsView .director-picker{display:flex;flex-direction:column;gap:6px}
+#directorsView .director-pick{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto 18px;align-items:center;gap:12px;padding:13px 14px;text-align:left;background:#171b23;color:#f1f1f1;border:1px solid #343944;border-radius:9px;font-size:15px;cursor:pointer}
+#directorsView .director-pick strong{color:#d7c28e;font-size:13px}
+#directorsView .director-pick.active{border-color:#d2b878;background:#25271f}
+#directorsView .director-filmography{min-width:0;margin:7px 0 13px;padding:12px;border:1px solid #51515a;border-radius:12px;background:#12151b}
+#directorsView .director-filmography[hidden]{display:none!important}
+#directorsView .director-filmography-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#directorsView .director-filmography-head h3{margin:0;font-size:17px}
+#directorsView .director-filmography-head p{margin:0;font-size:12px;color:#b7bdc6}
+#directorsView .director-poster-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 7px}
+#directorsView .director-film-tile{min-width:0}
+#directorsView .director-film-poster{display:block;width:100%;aspect-ratio:2/3;overflow:hidden;border-radius:5px;border:1px solid #424754;background:#222a36}
+#directorsView .director-film-poster .poster{width:100%!important;height:100%!important;aspect-ratio:2/3!important;margin:0!important;padding:0!important;border:0!important}
+#directorsView .director-film-poster .poster img{display:block;width:100%;height:100%;object-fit:cover}
+#directorsView .director-film-poster .poster span{font-size:11px;overflow-wrap:anywhere}
+#directorsView .director-film-meta{display:flex;flex-direction:column;gap:3px;padding-top:5px}
+#directorsView .director-film-year{font-size:10px;color:#a8b1c1}
+#directorsView .director-film-title{font-size:11px;line-height:1.35;font-weight:650;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#directorsView .director-film-rating{font-size:12px;color:#e9c77c;font-weight:800}
+#directorsView .director-film-pending{font-size:11px;color:#8993a3}
+#directorsView .director-film-tile.is-unwatched .director-film-poster{opacity:.67}
+#directorsView .director-coverage-note{font-size:11px;color:#9fa8b5;margin:13px 0 0}
+@media(min-width:700px){#directorsView .director-poster-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px 12px}}
+</style><style id="director-profile-126">
+#directorsView .director-profile{display:flex;align-items:flex-start;gap:13px;margin-bottom:14px;padding:4px 0 12px;border-bottom:1px solid #414753}
+#directorsView .director-profile-photo{width:80px;aspect-ratio:2/3;object-fit:cover;border-radius:8px;flex:none}
+#directorsView .director-profile-body{min-width:0;flex:1}
+#directorsView .director-profile h3{font-size:18px;margin:0 0 7px}
+#directorsView .director-profile p{font-size:12px;color:#aeb8c5;line-height:1.5;margin:7px 0 0;overflow-wrap:anywhere}
+#directorsView .director-progress{font-size:14px;color:#ebd29c}
+#directorsView .director-progress-track{height:5px;background:#343c48;border-radius:9px;overflow:hidden;margin:8px 0}
+#directorsView .director-progress-track span{display:block;height:100%;background:#d8ba77;border-radius:9px}
+#directorsView .director-film-tile.is-watched .director-film-poster{border:2px solid #e6c57d;box-shadow:0 0 0 1px #9a7a39}
+#directorsView .director-film-tile.is-unwatched .director-film-poster{border:1px solid #454a54}
+/* Legacy standalone score is redundant with the shared MY/TMDB rating block. */
+#directorsView .director-film-rating{display:none!important}
+</style><style id="cinelva-director-gallery-20261019">
+#directorsView .section-head{margin-bottom:22px}
+#directorsView .section-head h2{font-size:clamp(23px,4vw,34px);letter-spacing:-.04em}
+#directorsView .director-picker{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px!important;align-items:start}
+#directorsView .director-pick{display:grid!important;grid-template-columns:66px minmax(0,1fr) auto!important;grid-template-rows:auto auto;gap:8px 13px!important;min-height:112px;padding:15px!important;border:1px solid var(--line)!important;border-radius:18px!important;background:linear-gradient(135deg,var(--panel),var(--soft))!important;color:var(--ink)!important;box-shadow:0 6px 22px #00000012;transition:transform .2s,border-color .2s,box-shadow .2s}
+#directorsView .director-pick:hover{transform:translateY(-3px);box-shadow:0 12px 30px #00000020}
+#directorsView .director-pick.active{border:2px solid var(--gold)!important;box-shadow:0 0 0 3px #b99c5926}
+#directorsView .director-pick-photo,#directorsView .director-pick-monogram{width:66px;height:80px;object-fit:cover;object-position:center 20%;border-radius:11px;grid-row:1/3;background:#283444;display:flex;align-items:center;justify-content:center;font-size:29px}
+#directorsView .director-pick-main{min-width:0;display:flex;flex-direction:column;gap:5px;align-self:center}
+#directorsView .director-pick-name{font-size:16px;font-weight:800;line-height:1.3}
+#directorsView .director-pick-caption{font-size:12px;color:var(--muted)}
+#directorsView .director-pick-meter{height:6px;background:#8c92983b;border-radius:20px;overflow:hidden;display:block;margin-top:5px}
+#directorsView .director-pick-meter i{height:100%;display:block;border-radius:20px;background:linear-gradient(90deg,#bd9250,#f0cb7b)}
+#directorsView .director-pick-total{font-size:15px;font-weight:800;color:var(--gold);align-self:center}
+#directorsView .director-pick-chevron{grid-column:3;grid-row:2;text-align:right}
+#directorsView .director-filmography{grid-column:1/-1!important;margin:0 0 12px!important;padding:clamp(14px,3vw,26px)!important;background:var(--panel)!important;color:var(--ink)!important;border:1px solid var(--gold)!important;border-radius:20px!important;box-shadow:0 12px 32px #00000012}
+#directorsView .director-poster-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))!important;gap:18px 12px!important}
+#directorsView .director-film-tile.is-watched .director-film-poster{outline:2px solid var(--gold);outline-offset:2px}
+#directorsView .director-film-tile.is-unwatched{opacity:.72}
+@media(max-width:650px){#directorsView .director-picker{grid-template-columns:1fr!important}#directorsView .director-pick{min-height:104px}#directorsView .director-poster-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+</style>
+<style id="cinelva-director-mobile-fix-20261019">
+/* The original director-pick has a 3-column grid; override it without leaving a phantom fourth column. */
+#directorsView .director-picker{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))!important}
+#directorsView .director-pick{width:100%!important;min-width:0!important;grid-template-columns:60px minmax(0,1fr) 42px!important;grid-template-rows:1fr!important;align-items:center!important;gap:12px!important;min-height:96px!important;padding:12px!important;overflow:hidden}
+#directorsView .director-pick-photo,#directorsView .director-pick-monogram{grid-column:1!important;grid-row:1!important;width:60px;height:72px}
+#directorsView .director-pick-main{grid-column:2!important;grid-row:1!important;min-width:0!important;overflow:hidden;align-self:center}
+#directorsView .director-pick-name{display:block!important;overflow-wrap:normal!important;word-break:keep-all!important;line-break:strict!important;font-size:clamp(13px,3.6vw,16px)!important;line-height:1.4!important;letter-spacing:-.035em}
+#directorsView .director-pick-caption{font-size:11px!important;white-space:normal}
+#directorsView .director-pick-total{grid-column:3!important;grid-row:1!important;justify-self:end!important;white-space:nowrap!important;font-size:13px!important}
+#directorsView .director-pick-chevron{display:none!important}
+#directorsView .director-filmography{width:100%!important;min-width:0!important;overflow:hidden}
+@media(max-width:650px){#directorsView .director-picker{grid-template-columns:1fr!important;gap:9px!important}#directorsView .director-pick{min-height:90px!important;border-radius:13px!important}#directorsView .director-pick-photo,#directorsView .director-pick-monogram{height:66px;width:55px}#directorsView .director-pick{grid-template-columns:55px minmax(0,1fr) 38px!important}#directorsView .director-pick-total{font-size:12px!important}}
+</style>
+<style id="director-layout-hardening-20261019">
+#directorsView .director-picker{display:flex!important;flex-direction:column!important;gap:10px!important;width:100%!important}
+#directorsView .director-pick{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important;width:100%!important;min-height:86px!important;padding:11px 13px!important;text-align:left!important}
+#directorsView .director-pick-photo,#directorsView .director-pick-monogram{display:flex!important;flex:0 0 54px!important;width:54px!important;height:64px!important;object-fit:cover!important}
+#directorsView .director-pick-main{display:flex!important;flex:1 1 0!important;flex-direction:column!important;gap:4px!important;min-width:0!important;width:auto!important}
+#directorsView .director-pick-name{display:block!important;max-width:100%!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;line-break:strict!important;font-size:16px!important;font-weight:700!important;line-height:1.35!important}
+#directorsView .director-pick-caption{display:block!important;white-space:normal!important;font-size:12px!important;line-height:1.4!important}
+#directorsView .director-pick-meter{width:100%!important;max-width:240px!important}
+#directorsView .director-pick-total{display:block!important;flex:0 0 auto!important;min-width:36px!important;max-width:64px!important;text-align:right!important;white-space:nowrap!important;font-size:13px!important}
+#directorsView .director-pick-chevron{display:none!important}
+#directorsView .director-filmography{display:block!important;width:100%!important;margin:0 0 14px!important;box-sizing:border-box!important}
+@media(min-width:800px){#directorsView .director-picker{max-width:900px!important}#directorsView .director-pick{min-height:94px!important}#directorsView .director-pick-photo,#directorsView .director-pick-monogram{flex-basis:64px!important;width:64px!important;height:75px!important}}
+</style>
+<style id="director-two-column-cards-20261019">
+#directorsView .director-picker{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;width:100%!important;max-width:none!important;align-items:start!important}
+#directorsView .director-pick{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;min-width:0!important;min-height:0!important;height:100%!important;padding:12px!important;border-radius:16px!important;overflow:hidden!important;text-align:center!important}
+#directorsView .director-card-photo{display:flex;align-items:center;justify-content:center;width:100%;height:105px;overflow:hidden;border-radius:10px;background:#343943}
+#directorsView .director-card-photo .director-pick-photo{display:block!important;flex:none!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center 24%!important;border-radius:0!important}
+#directorsView .director-card-photo .director-pick-monogram{display:flex!important;flex:none!important;width:100%!important;height:100%!important;align-items:center;justify-content:center}
+#directorsView .director-pick-name{display:block!important;width:100%!important;min-height:2.7em!important;margin:0!important;color:var(--ink)!important;font-size:14px!important;font-weight:800!important;line-height:1.35!important;overflow-wrap:anywhere!important;word-break:normal!important;white-space:normal!important;text-align:center!important}
+#directorsView .director-card-stats{display:grid!important;grid-template-columns:1fr 1fr!important;gap:5px!important;width:100%!important;border-top:1px solid var(--line);padding-top:9px}
+#directorsView .director-card-stats>span{display:flex;flex-direction:column;align-items:center;min-width:0;gap:1px}
+#directorsView .director-card-stats b{font-size:21px;line-height:1.2;color:var(--gold)}
+#directorsView .director-card-stats small{font-size:10px;line-height:1.35;color:var(--muted);white-space:normal}
+#directorsView .director-filmography{grid-column:1/-1!important;width:100%!important;margin:0 0 12px!important}
+@media(min-width:700px){#directorsView .director-picker{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}#directorsView .director-card-photo{height:160px}#directorsView .director-pick-name{font-size:17px!important}}
+@media(min-width:1100px){#directorsView .director-picker{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:699px){#directorsView .director-picker{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#directorsView .director-pick{padding:9px!important}#directorsView .director-card-photo{height:96px}#directorsView .director-card-stats small{font-size:9px}}
+</style>
+<style id="director-three-column-mobile-20261019">
+@media(max-width:699px){
+#directorsView .director-picker{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+#directorsView .director-pick{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px!important;padding:7px!important;min-width:0!important;min-height:0!important;border-radius:12px!important;text-align:center!important}
+#directorsView .director-card-photo{height:78px!important;border-radius:7px!important}
+#directorsView .director-pick-name{font-size:11px!important;line-height:1.35!important;min-height:2.7em!important;overflow-wrap:anywhere!important}
+#directorsView .director-card-stats{gap:2px!important;padding-top:6px!important}
+#directorsView .director-card-stats b{font-size:16px!important}
+#directorsView .director-card-stats small{font-size:8px!important;line-height:1.25!important}
+#directorsView .director-filmography{grid-column:1/-1!important}
+}
+</style>
+<style id="director-portrait-no-crop-20261019">
+/* Show the entire portrait rather than cropping the lower half of the photo. */
+#directorsView .director-card-photo{height:110px!important;overflow:hidden!important;background:#232831!important}
+#directorsView .director-card-photo .director-pick-photo{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important}
+@media(max-width:699px){#directorsView .director-card-photo{height:94px!important}}
+</style>
+<style id="director-portrait-ratio-and-close-20261019">
+/* Director portraits should be portrait-oriented, not horizontal thumbnails. */
+#directorsView .director-card-photo{width:100%!important;height:auto!important;aspect-ratio:3/4!important;overflow:hidden!important;background:#232831!important}
+#directorsView .director-card-photo .director-pick-photo{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 20%!important}
+#directorsView .director-card-photo .director-pick-monogram{width:100%!important;height:100%!important}
+#directorsView .director-filmography-close{display:block;position:sticky;top:8px;z-index:5;margin:0 0 14px auto;padding:10px 16px;border:1px solid var(--gold);border-radius:999px;background:var(--panel);color:var(--ink);font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px #0003}
+#directorsView .director-filmography[hidden]{display:none!important}
+</style>
+<style id="director-empty-panel-hide-20261019">#directorsView #directorFilmography:empty,#directorsView #directorFilmography[hidden]{display:none!important}</style>
+<style id="record-actions-minimal-gauge-20261019">
+.record-actions.record-actions-compact{display:flex!important;flex-direction:row!important;align-items:center!important;gap:5px!important;margin-top:8px!important;min-width:0!important}
+.record-actions-compact button{min-width:0!important;min-height:34px!important;height:34px!important;margin:0!important;padding:5px!important;border-radius:8px!important;line-height:1!important;writing-mode:horizontal-tb!important;word-break:normal!important;white-space:nowrap!important}
+.record-actions-compact .record-score-gauge{display:flex!important;flex:1 1 auto!important;align-items:center!important;gap:4px!important;justify-content:center!important;color:var(--ink)!important}
+.record-actions-compact .record-gauge-track{display:block!important;flex:1 1 12px!important;min-width:9px!important;height:5px!important;background:#7f84904d!important;border-radius:5px!important;overflow:hidden!important}
+.record-actions-compact .record-gauge-fill{display:block!important;height:100%!important;background:var(--gold)!important;border-radius:5px!important}
+.record-actions-compact .record-gauge-value{font-size:11px!important;font-variant-numeric:tabular-nums!important;font-weight:800!important}
+.record-actions-compact .record-score-gauge svg{flex:0 0 13px!important;width:13px!important}
+.record-actions-compact .record-delete-icon{display:flex!important;flex:0 0 30px!important;align-items:center!important;justify-content:center!important;color:var(--muted)!important}
+@media(max-width:600px){.record-actions-compact .record-score-gauge svg{display:none!important}.record-actions-compact .record-delete-icon{flex-basis:26px!important}.record-actions-compact button{padding:3px!important}}
+</style>
+<style id="cinelva-record-list-three-cols-20261019">
+/* Reviewed movie lists use three readable columns on iPhone, never four. */
+@media(max-width:699px){
+#recordsView #recordList.record-grid,
+#worldView #worldList.record-grid,
+#genreView #genreFilms.record-grid,
+#directorsView #directorWorks.record-grid{
+display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 9px!important
+}
+#recordsView #recordList .movie{min-width:0!important}
+#recordsView #recordList .movie strong{overflow-wrap:anywhere!important;word-break:normal!important}
+}
+</style>
+<style id="record-icon-row-20261019">
+.record-actions.record-actions-compact{display:flex!important;align-items:center!important;gap:3px!important}
+.record-actions-compact .record-watched-icon{display:flex;flex:0 0 17px;align-items:center;justify-content:center;color:var(--gold)}
+.record-actions-compact .record-score-gauge{min-width:0!important;flex:1 1 0!important}
+.record-actions-compact .record-score-gauge .record-gauge-value{font-size:11px!important}
+.record-actions-compact .record-bookmark-icon,.record-actions-compact .record-delete-icon{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 24px!important;width:24px!important;padding:2px!important}
+.record-actions-compact .record-bookmark-icon.is-bookmarked{color:var(--gold)!important}
+.record-actions-compact .record-bookmark-icon.is-bookmarked svg{fill:currentColor}
+@media(max-width:699px){.record-actions-compact .record-watched-icon{flex-basis:15px}.record-actions-compact .record-bookmark-icon,.record-actions-compact .record-delete-icon{flex-basis:22px!important;width:22px!important}.record-actions-compact .record-score-gauge{padding:2px!important}}
+</style>
+<style id="director-fixed-bottom-close-20261019">
+#directorsView .director-filmography-close{position:fixed!important;top:auto!important;bottom:calc(90px + env(safe-area-inset-bottom,0px))!important;right:18px!important;left:auto!important;z-index:1000!important;display:flex!important;align-items:center!important;justify-content:center!important;width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;margin:0!important;padding:0!important;border-radius:50%!important;border:1px solid var(--gold)!important;background:#20232b!important;color:#f2e0b7!important;box-shadow:0 6px 22px #0009!important;cursor:pointer!important}
+#directorsView .director-filmography-close svg{display:block!important;flex:none!important}
+#directorsView .director-filmography[hidden] .director-filmography-close{display:none!important}
+</style>
+<style id="cinelva-ranking-floating-collapse-20261019">
+#csTop .cs-top-collapse{position:fixed!important;right:18px!important;bottom:calc(90px + env(safe-area-inset-bottom,0px))!important;z-index:999!important;display:flex!important;align-items:center!important;justify-content:center!important;width:50px!important;height:50px!important;border:1px solid #d9bc78!important;border-radius:50%!important;background:#20232b!important;color:#f2e0b7!important;font-size:28px!important;line-height:1!important;box-shadow:0 5px 20px #0009!important;cursor:pointer!important}
+#csTop .cs-top-collapse[hidden]{display:none!important}
+</style>
+<style id="record-gauge-separate-row-20261019">
+/* On three-column iPhone cards the score gauge gets its own full-width row. */
+@media(max-width:699px){
+.record-actions.record-actions-compact{display:grid!important;grid-template-columns:20px minmax(0,1fr) 25px 25px!important;grid-template-rows:34px 32px!important;column-gap:4px!important;row-gap:4px!important;align-items:center!important}
+.record-actions-compact .record-score-gauge{grid-column:1/-1!important;grid-row:1!important;display:flex!important;width:100%!important;max-width:none!important;justify-content:space-between!important;min-width:0!important;box-sizing:border-box!important;padding:5px 8px!important}
+.record-actions-compact .record-gauge-track{flex:1 1 auto!important;min-width:15px!important}
+.record-actions-compact .record-watched-icon{grid-column:1!important;grid-row:2!important;justify-self:center!important}
+.record-actions-compact .record-bookmark-icon{grid-column:3!important;grid-row:2!important;justify-self:center!important}
+.record-actions-compact .record-delete-icon{grid-column:4!important;grid-row:2!important;justify-self:center!important}
+}
+</style>
+<style id="cinelva-chart-calendar-contrast-20261019">
+/* Distinguish donut slices by number as well as hue. */
+#summaryView .cs-donut{position:relative!important}
+
+#summaryView .cs-donut-dot{display:inline-flex!important;align-items:center;justify-content:center;width:20px!important;height:20px!important;flex:0 0 20px!important;border-radius:5px!important;color:white!important;font-size:11px!important;font-weight:800!important;text-shadow:0 1px 2px #000a!important}
+/* One film and two films must be visually distinct, not two adjacent blues. */
+#yearHeatmap .cy-month.one-month{background:linear-gradient(145deg,#273f59,#345d78)!important;color:#fff!important;border:1px solid #678ea8!important}
+#yearHeatmap .cy-month.light-month{background:linear-gradient(145deg,#c0e8f2,#82c8db)!important;color:#112b3c!important;border:2px solid #d8f5ff!important}
+#yearHeatmap .cy-month.one-month .cy-month-total strong{color:#fff!important}
+#yearHeatmap .cy-month.light-month .cy-month-total strong{color:#112b3c!important}
+/* Monthly intensity is conveyed by background tone only; no decorative symbols. */
+</style>
+<style id="cinelva-calendar-monotonic-tone-20261019">
+/* Progressive blue intensity for 1–4 films, gold for 5+. */
+#yearHeatmap .cy-month.one-month{background:linear-gradient(145deg,#cfe5f4,#b8d8ec)!important;color:#20384e!important;border:1px solid #9ebfd5!important}
+#yearHeatmap .cy-month.light-month{background:linear-gradient(145deg,#9fc9e4,#7eb4d9)!important;color:#16384f!important;border:1px solid #6b9fc4!important}
+#yearHeatmap .cy-month.mid-month{background:linear-gradient(145deg,#5e9bc8,#367baa)!important;color:#fff!important;border:1px solid #467da6!important}
+#yearHeatmap .cy-month.deep-month{background:linear-gradient(145deg,#295c87,#173d66)!important;color:#fff!important;border:1px solid #315d84!important}
+#yearHeatmap .cy-month.one-month .cy-month-total strong,#yearHeatmap .cy-month.light-month .cy-month-total strong{color:#16384f!important}
+#yearHeatmap .cy-month.mid-month .cy-month-total strong,#yearHeatmap .cy-month.deep-month .cy-month-total strong{color:#fff!important}
+#yearHeatmap .cy-month .cy-month-name::after{content:none!important}
+</style>
+<style id="cinelva-donut-muted-typography-20261019">
+#summaryView .cs-donut-dot{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;font-size:10px!important;font-weight:600!important;text-shadow:0 1px 1px #0005!important}
+
+</style>
+<style id="cinelva-awards-collection-v2">
+#awardsView{--award-accent:#dbc291}
+#awardsView .award-eyebrow,#awardsView .award-detail-kicker{display:block;font-size:10px;letter-spacing:.19em;color:#b8a07a;font-weight:700;margin-bottom:6px}
+#awardsView .award-titlebar{margin-bottom:16px}
+#awardsView .award-titlebar h2{font-size:clamp(23px,3vw,31px);letter-spacing:-.035em}
+#awardsView .award-titlebar p{font-size:13px;color:#aeb9c5;line-height:1.6}
+#awardsView .award-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:16px 0 18px}
+#awardsView .award-stat{min-width:0;min-height:98px;padding:14px 12px;border:1px solid #343a43;background:linear-gradient(145deg,#22262d,#171b21);border-radius:12px;display:flex;flex-direction:column;justify-content:space-between}
+#awardsView .award-stat>span{font-size:11px;color:#aeb5bf;line-height:1.5}
+#awardsView .award-stat strong{font-variant-numeric:tabular-nums;font-size:30px;letter-spacing:-.04em;color:#ead3a5;line-height:1.15}
+#awardsView .award-stat strong small{font-size:12px;font-weight:500;margin-left:3px;color:#b5bdc6}
+#awardsView .award-stat .award-stat-name{font-size:14px;line-height:1.45;letter-spacing:0;overflow-wrap:anywhere}
+#awardsView .award-legend{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11px;color:#b9c0ca;margin:0 0 12px}
+#awardsView .award-legend-swatch{width:19px;height:13px;border-radius:3px;border:1px solid #49505a}
+#awardsView .award-legend-caption{margin-left:4px;color:#8e99a7}
+#awardsView .award-notation{margin-bottom:12px}
+#awardsView .award-matrix{border:1px solid #353b45;border-radius:12px;background:#171a20;overflow:auto;max-width:100%;scrollbar-width:thin}
+#awardsView .award-table{border-collapse:separate;border-spacing:5px;width:max-content;min-width:100%;padding:7px;font-variant-numeric:tabular-nums}
+#awardsView .award-table th,#awardsView .award-table td{border:0;padding:3px;text-align:center}
+#awardsView .award-table thead th{position:sticky;top:0;z-index:2;background:#171a20;white-space:nowrap;color:#b9c3ce;font-size:12px;font-weight:600;padding:10px 7px}
+#awardsView .award-table thead th small{display:block;font-size:10px;color:#83909d;font-weight:400}
+#awardsView .award-table thead th:first-child{left:0;z-index:4;min-width:128px;text-align:left}
+#awardsView .award-table tbody th{position:sticky;left:0;z-index:1;background:#171a20;min-width:128px;max-width:180px;text-align:left;font-size:12px;line-height:1.5;color:#e1e4e8;padding:10px 8px;white-space:normal}
+#awardsView .award-table .award-cell{min-width:49px;height:48px;min-height:48px;border:1px solid #3c4651;border-radius:8px;font-size:15px!important;font-weight:650!important;transition:border-color .15s,transform .15s;background-clip:padding-box}
+#awardsView .award-table .award-cell:active{transform:scale(.95)}
+#awardsView .award-table .award-cell.is-selected{outline:2px solid #e8d0a3;outline-offset:1px;box-shadow:0 0 0 4px #d7bc8d26}
+#awardsView .award-table .award-empty{font-size:13px;color:#545d66}
+#awardsView .award-table .award-row-total{font-weight:750;color:#e2cd9e;min-width:58px;font-size:16px}
+#awardsView .award-table .award-row-total small{display:block;font-size:10px;color:#a5aab2;font-weight:400}
+#awardsView .award-detail-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:11px;margin-top:15px}
+#awardsView .award-detail-head{grid-column:1/-1;display:flex;align-items:start;justify-content:space-between;gap:16px;border:0;padding:18px 0 5px}
+#awardsView .award-detail-head h3{font-size:19px;line-height:1.4;letter-spacing:-.02em;color:#f1e5d0}
+#awardsView .award-detail-close{border:1px solid #555d66;border-radius:50%;background:#242930;color:#e5e9ef;font-size:21px;width:34px;height:34px;flex-shrink:0}
+#awardsView .award-film-card{display:flex;flex-direction:column;gap:9px;border:1px solid #3b414b;border-radius:11px;padding:14px;background:#20242b}
+#awardsView .award-film-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#awardsView .award-film-year{color:#aeb5bd;font-size:11px}
+#awardsView .award-film-card strong{font-size:15px;line-height:1.45}
+#awardsView .award-film-card p{margin:0;font-size:11px}
+#awardsView .award-film-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:auto}
+#awardsView .award-film-actions a{font-size:11px;color:#b9cce0}
+
+
+#awardsView .award-ranking-link{display:inline-flex;margin-top:18px;align-items:center;gap:10px;color:#e3cda1;font-size:13px;text-decoration:none}
+@media(max-width:650px){#awardsView .award-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#awardsView .award-stat{min-height:88px;padding:12px}#awardsView .award-stat strong{font-size:27px}#awardsView .award-matrix{margin-right:0}#awardsView .award-table{padding:5px;border-spacing:3px}#awardsView .award-table tbody th,#awardsView .award-table thead th:first-child{min-width:106px;max-width:126px;font-size:11px}#awardsView .award-table .award-cell{min-width:45px;height:44px;min-height:44px}#awardsView .award-detail-list{grid-template-columns:1fr}}
+</style><style>
+#awardsView .award-filters{display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;margin:16px 0 14px}
+#awardsView .award-filters label{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+#awardsView .award-filters select{max-width:210px;padding:10px 28px 10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit}
+#awardsView .award-other-toggle{cursor:pointer}
+#awardsView .award-other-toggle input{accent-color:#b9a17b;width:16px;height:16px}
+@media(max-width:560px){#awardsView .award-filters{align-items:center}#awardsView .award-filters label{font-size:12px}}
+</style><style id="cinelva-review-detail-modal-20261019">
+.record-review-detail-trigger{appearance:none;border:0;background:none;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:8px}
+.record-review-detail-trigger:hover,.record-review-detail-trigger:focus-visible{color:var(--brand,#d9bd84);outline:1px solid currentColor}
+.review-detail-dialog{width:min(92vw,510px);max-width:510px;max-height:min(85dvh,760px);margin:auto;padding:0;color:var(--ink,#eee);background:var(--panel,#161718);border:1px solid var(--line,#343434);border-radius:18px;box-shadow:0 24px 90px #0009;overflow:auto}
+.review-detail-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(4px)}
+.review-detail-header,.review-detail-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 20px}
+.review-detail-header{border-bottom:1px solid var(--line,#343434)}
+.review-detail-footer{justify-content:flex-end;border-top:1px solid var(--line,#343434)}
+.review-detail-body{padding:20px}
+.review-detail-film{display:grid;grid-template-columns:100px minmax(0,1fr);gap:16px;align-items:start}
+.review-detail-film .poster{width:100px;min-height:145px}
+.review-detail-film h3{margin:0 0 18px;line-height:1.45;font-size:18px;overflow-wrap:anywhere}
+.review-detail-score{margin:0}.review-detail-score span{display:block;font-size:12px;color:var(--muted,#999)}
+.review-detail-score strong{font-size:38px;color:var(--brand,#d9bd84);font-variant-numeric:tabular-nums}
+.review-detail-score small{color:var(--muted,#999)}
+.review-detail-info{margin:22px 0;display:grid;gap:12px}
+.review-detail-info>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line,#343434);padding-bottom:10px}
+.review-detail-info dt{font-size:12px;color:var(--muted,#999)}
+.review-detail-info dd{margin:0;text-align:right;font-size:13px}
+.review-detail-comment{border-top:1px solid var(--line,#343434);padding-top:15px}
+.review-detail-comment h4{font-size:12px;letter-spacing:.04em;color:var(--muted,#999);margin:0 0 12px}
+.review-detail-comment p{margin:0;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+@media(max-width:440px){.review-detail-dialog{width:calc(100vw - 30px)}.review-detail-body{padding:17px}.review-detail-header,.review-detail-footer{padding:14px 17px}}
+</style>
+<style id="cinelva-own-rating-label">
+/* The score shown on every saved-record card is the viewer's personal rating, never TMDB's rating. */
+.record-grid .movie .record-own-rating-label{display:block;min-width:0;margin-top:auto;padding:5px 2px 2px;color:var(--muted,#aaa);font-size:10px;font-weight:600;line-height:1.2;letter-spacing:.01em;text-align:left}
+.record-grid .movie .record-own-rating-label span{font-size:9px;opacity:.7;font-weight:400}
+@media(max-width:699px){.record-grid .movie .record-own-rating-label{font-size:9px;white-space:nowrap}.record-grid .movie .record-own-rating-label span{font-size:8px}}
+</style>
+
+<style id="cinelva-award-movie-grid-20261019">
+/* Award details use the same compact film tiles as the viewing collection. */
+#awardsView #awardFilms.award-detail-list{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px 13px!important;align-items:start!important}
+#awardsView #awardFilms .award-detail-head,#awardsView #awardFilms .award-invite{grid-column:1/-1}
+#awardsView #awardFilms .award-film-unit{min-width:0;display:flex;flex-direction:column;gap:5px}
+#awardsView #awardFilms .award-film-unit .movie{min-width:0;display:flex;flex-direction:column;gap:5px}
+#awardsView #awardFilms .award-film-unit .poster{width:100%;aspect-ratio:2/3}
+#awardsView #awardFilms .award-film-unit strong{font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+#awardsView #awardFilms .award-film-top{display:flex;align-items:center;justify-content:space-between;gap:3px;min-height:23px}
+#awardsView #awardFilms .award-watch-state{font-size:10px;white-space:nowrap;padding:2px 5px}
+#awardsView #awardFilms .award-film-year{font-size:10px}
+#awardsView #awardFilms .award-card-category{color:var(--muted);font-size:10px;line-height:1.45}
+#awardsView #awardFilms .award-card-not-rated{font-size:12px;color:var(--muted)}
+#awardsView #awardFilms .award-film-actions{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+#awardsView #awardFilms .award-card-open{width:100%;text-align:center;font:inherit;font-size:11px;padding:7px 3px;line-height:1.3;border:1px solid var(--line);background:transparent;color:var(--gold);border-radius:5px;cursor:pointer}
+#awardsView #awardFilms .award-card-source{font-size:10px;color:var(--muted)}
+#awardsView #awardFilms .award-card-unmatched{font-size:10px;color:var(--muted)}
+@media(max-width:699px){
+ #awardsView #awardFilms.award-detail-list{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px 9px!important}
+ #awardsView #awardFilms .award-film-unit strong{font-size:12px!important}
+ #awardsView #awardFilms .award-film-unit .record-actions.record-actions-compact{gap:2px!important}
+ #awardsView #awardFilms .award-film-unit .record-actions button{min-width:0}
+}
+</style>
+
+
+
+<style id="cinelva-mobile-two-column-chart-repair-20261019">
+@media(max-width:700px){
+ #summaryView .cs-breakdowns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px 12px!important;margin-top:16px!important}
+ #summaryView .cs-breakdowns .cs-section{min-width:0!important;width:auto!important;margin:0!important;padding:0 0 12px!important;border-bottom:1px solid #303030}
+ #summaryView .cs-breakdowns .cs-section>h3{font-size:15px!important;line-height:1.4!important;margin:0 0 8px!important}
+ #summaryView .cs-donut-layout{width:100%!important;gap:7px!important;align-items:center!important;overflow:hidden!important}
+ #summaryView .cs-donut{width:min(100%,160px)!important;min-width:0!important;max-width:160px!important;margin:8px auto!important}
+ 
+ #summaryView .cs-donut-mode{width:100%!important;justify-content:center!important;gap:5px!important;margin:0 0 4px!important}
+ #summaryView .cs-donut-mode button{min-height:32px!important;min-width:45px!important;font-size:12px!important;padding:4px 7px!important}
+ #summaryView .cs-donut-legend{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:5px!important;width:100%!important}
+ #summaryView .cs-donut-legend-row{font-size:11px!important;line-height:1.4!important;gap:5px!important;min-width:0!important}
+ #summaryView .cs-donut-label{overflow-wrap:anywhere!important}
+ #summaryView .cs-donut-value{font-size:11px!important}
+ #summaryView .cs-donut-note{font-size:10px!important}
+}
+</style>
+
+<style id="cinelva-two-column-labels-visible-20261019">
+@media(max-width:700px){
+ #summaryView .cs-donut-layout{overflow:visible!important}
+ #summaryView .cs-donut{width:min(100%,160px)!important;overflow:visible!important;margin:8px auto 12px!important}
+ 
+ 
+ #summaryView .cs-breakdowns .cs-section{overflow:visible!important}
+}
+</style>
+
+<style id="cinelva-donut-legends-restored-20261019">
+
+#summaryView .cs-donut-layout{overflow:visible!important}
+#summaryView .cs-donut-legend{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important;width:100%!important;margin-top:6px!important}
+#summaryView .cs-donut-legend-row{display:flex!important;align-items:center!important;gap:6px!important;font-size:11px!important;line-height:1.35!important;min-width:0!important}
+#summaryView .cs-donut-dot{display:block!important;flex:0 0 10px!important;width:10px!important;height:10px!important;border-radius:3px!important;font-size:0!important;color:transparent!important}
+#summaryView .cs-donut-label{flex:1!important;min-width:0!important;overflow-wrap:anywhere!important}
+#summaryView .cs-donut-value{flex-shrink:0!important;font-size:11px!important;font-variant-numeric:tabular-nums!important}
+</style>
+<style id="cinelva-adaptive-chart-labels-20261019">
+
+
+#summaryView .cs-donut{overflow:hidden!important}
+#summaryView .cs-donut-legend{display:grid!important}
+</style><style id="cinelva-svg-label-size-hotfix-20261019">
+/* Restore SVG viewBox font sizing; CSS px sizes had overridden SVG user units. */
+
+
+#summaryView .cs-donut{overflow:hidden!important}
+</style><style id="cinelva-donut-safe-labels-20261019">
+#summaryView .cs-donut{position:relative!important;overflow:hidden!important}
+
+
+#summaryView .cs-donut-center{position:absolute;z-index:2;inset:29%;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;background:#111;color:#f4eee5;line-height:1.12;pointer-events:none}
+#summaryView .cs-donut-center span{font-size:clamp(8px,1.7vw,12px);color:#c7c3bc}
+#summaryView .cs-donut-center strong{font-size:clamp(17px,4vw,28px);font-weight:650;font-variant-numeric:tabular-nums}
+#summaryView .cs-donut-legend{display:grid!important}
+</style><style id="cinelva-unified-svg-donut-20261019">
+/* One SVG is the source of truth for both ring geometry and labels. */
+#summaryView .cs-donut::after{display:none!important;content:none!important}
+#summaryView .cs-donut{background:transparent!important}
+
+#summaryView .cs-donut-center{z-index:2!important;inset:29%!important;background:#111!important}
+</style><style id="cinelva-donut-single-source-20261019">
+#summaryView .cs-donut{position:relative!important;background:transparent!important;overflow:visible!important}
+#summaryView .cs-donut::after{display:none!important;content:none!important}
+#summaryView .cs-donut svg.cs-donut-numbers{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:visible!important;z-index:1!important}
+#summaryView .cs-donut svg.cs-donut-numbers text{display:block!important;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif!important;font-weight:600!important}
+#summaryView .cs-donut-center{z-index:2!important;inset:29%!important}
+</style><style id="cinelva-donut-type-20261019-9">
+#summaryView .cs-donut svg.cs-donut-numbers text{
+ font-family:-apple-system,"Helvetica Neue","Hiragino Sans","Noto Sans JP",sans-serif!important;
+ font-weight:500!important;stroke-width:.12!important;letter-spacing:0!important
+}
+</style><style id="cinelva-donut-callout-global-mode">
+#summaryView .cs-donut-global-mode{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:12px 0 16px;color:#c5c1b9;font-size:12px}
+#summaryView .cs-donut-global-mode button{border:1px solid #555;border-radius:8px;background:#242424;color:#eee;padding:7px 16px;font:500 13px -apple-system,"Hiragino Sans",sans-serif}
+#summaryView .cs-donut-global-mode button[aria-pressed="true"]{background:#b9a077;color:#111;border-color:#b9a077}
+#summaryView .cs-donut-layout{position:relative!important;overflow:visible!important}
+
+
+</style><style id="cinelva-donut-compact-legend-20261019-13">
+#summaryView .cs-donut-layout{gap:7px!important}
+#summaryView .cs-donut-legend{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:3px!important;margin-top:4px!important;width:100%!important}
+#summaryView .cs-donut-legend-row{display:grid!important;grid-template-columns:7px minmax(0,1fr) auto!important;align-items:center!important;gap:5px!important;min-height:17px!important;font:400 10px/1.3 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif!important}
+#summaryView .cs-donut-dot{width:7px!important;height:7px!important;min-width:7px!important;border-radius:2px!important}
+#summaryView .cs-donut-label{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;overflow-wrap:normal!important}
+#summaryView .cs-donut-value{font-size:10px!important;font-weight:600!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+#summaryView .cs-donut-note{font-size:9px!important;line-height:1.3!important}
+</style><style id="cinelva-stacked-bars-20261019-14">
+#summaryView .cs-stack-layout{display:flex;flex-direction:column;gap:10px;min-width:0;width:100%}
+#summaryView .cs-stack-bar{display:flex;width:100%;height:20px;min-height:20px;overflow:hidden;border-radius:5px;background:#353535;gap:0}
+#summaryView .cs-stack-segment{display:block;flex-basis:0;min-width:0;height:100%}
+#summaryView .cs-stack-legend{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:4px!important;margin:0!important;width:100%!important}
+#summaryView .cs-stack-legend .cs-donut-legend-row{display:grid!important;grid-template-columns:8px minmax(0,1fr) auto!important;align-items:center!important;gap:6px!important;min-height:18px!important;padding:0!important;font:400 11px/1.35 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif!important}
+#summaryView .cs-stack-legend .cs-donut-dot{width:8px!important;height:8px!important;min-width:8px!important;border-radius:2px!important}
+#summaryView .cs-stack-legend .cs-donut-label{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#summaryView .cs-stack-legend .cs-donut-value{font-size:11px!important;font-weight:600!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+</style><style id="cinelva-affinity-20261019-17">
+.cinelva-affinity{margin:18px 0;padding:16px;border:1px solid #383b42;border-radius:12px;background:#1b1e24;min-width:0}
+.cinelva-affinity h3{margin:0 0 5px;font-size:16px;font-weight:650;color:#f1eee8}
+.cinelva-affinity-note{font-size:11px;line-height:1.6;color:#a9abb0;margin:0 0 12px}
+.cinelva-affinity-list{display:grid;gap:0}
+.cinelva-affinity-row{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:9px;align-items:center;padding:10px 0;border-top:1px solid #333840;min-width:0}
+.cinelva-affinity-rank{font-size:11px;color:#b5a17d;font-variant-numeric:tabular-nums}
+.cinelva-affinity-row strong{font-size:12px;line-height:1.4;min-width:0;overflow-wrap:anywhere}
+.cinelva-affinity-meta{font-size:11px;color:#c3c1bc;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:480px){.cinelva-affinity-row{grid-template-columns:18px minmax(0,1fr)}.cinelva-affinity-meta{grid-column:2;white-space:normal}}
+</style><style id="cinelva-summary-affinity-20261019-18">#summaryView .cs-affinities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}#summaryView .cs-affinities .cinelva-affinity{margin:0;height:100%;box-sizing:border-box}@media(max-width:520px){#summaryView .cs-affinities{grid-template-columns:minmax(0,1fr);gap:12px}}</style><style id="cinelva-alltime-calendar-20261019-19">
+#summaryView .cinelva-alltime-years{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#summaryView .cy-year-card{appearance:none;text-align:left;display:grid;gap:12px;min-width:0;border:1px solid #3a414b;border-radius:11px;background:#20252d;color:#e6e9ec;padding:12px;cursor:pointer}
+#summaryView .cy-year-card.is-gold{border-color:#b49a5f;background:linear-gradient(145deg,#343023,#22252b)}
+#summaryView .cy-year-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#summaryView .cy-year-head>strong{font-size:16px;font-variant-numeric:tabular-nums}
+#summaryView .cy-year-count{margin-left:auto;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+#summaryView .cy-year-count small{font-size:10px;margin-left:2px;font-weight:400}
+#summaryView .cy-year-gold{font-size:9px;letter-spacing:.08em;color:#ebd28c;font-weight:750;width:100%}
+#summaryView .cy-year-months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+#summaryView .cy-year-month{display:grid;gap:5px;min-width:0;text-align:center}
+#summaryView .cy-year-month i{height:20px;border-radius:3px;background:rgba(123,173,190,var(--cy-year-level));border:1px solid rgba(147,183,196,.2)}
+#summaryView .cy-year-card.is-gold .cy-year-month i{background:rgba(213,178,101,var(--cy-year-level))}
+#summaryView .cy-year-month small{font-size:8px;color:#aeb7c2;font-variant-numeric:tabular-nums}
+@media(max-width:700px){#summaryView .cinelva-alltime-years{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:390px){#summaryView .cinelva-alltime-years{grid-template-columns:minmax(0,1fr)}}
+</style><style id="dashboard-extra-stats-20261019">#summaryView .cs-extra-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}#summaryView .cs-extra-stat{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);min-width:0}#summaryView .cs-extra-stat span{display:block;font-size:12px;color:var(--muted)}#summaryView .cs-extra-stat strong{display:block;font-size:23px;line-height:1.4;font-variant-numeric:tabular-nums}#summaryView .cs-affinities{display:grid;grid-template-columns:1fr;gap:14px}#summaryView .cinelva-affinity-row{min-width:0}@media(min-width:850px){#summaryView .cs-extra-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}</style><style id="cinelva-dashboard-unified-20261019">
+/* Dashboard-only design system. Leave navigation, logo and other pages untouched. */
+#summaryView{--dash-bg:var(--panel);--dash-line:var(--line);--dash-muted:var(--muted);--dash-ink:var(--ink);--dash-accent:var(--gold)}
+#summaryView .cs-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+#summaryView .cs-head h2{margin:0;font-size:clamp(19px,3vw,25px);font-weight:750;letter-spacing:-.025em}
+#summaryView .cs-head select{max-width:170px;min-height:38px;border-radius:9px}
+#summaryView .cs-top,#summaryView .cs-extra-stat,#summaryView>.panel,#summaryView .cs-section,#summaryView .cinelva-affinity{background:var(--dash-bg)!important;border:1px solid var(--dash-line)!important;border-radius:12px!important;box-shadow:none!important;color:var(--dash-ink)!important}
+#summaryView .cs-top{padding:18px!important;margin:0 0 12px!important}
+#summaryView .cs-extra-stats{margin:0 0 14px!important;gap:10px!important}
+#summaryView .cs-extra-stat{padding:13px!important}
+#summaryView .cs-extra-stat span{font-size:12px!important;color:var(--dash-muted)!important}
+#summaryView .cs-extra-stat strong{font-size:clamp(17px,2.5vw,23px)!important;color:var(--dash-ink)!important}
+#summaryView>.panel{padding:16px!important;margin:0 0 14px!important}
+#summaryView .cs-section{margin:0 0 14px!important;padding:16px!important;min-width:0!important}
+#summaryView .cs-section h3,#summaryView .cinelva-affinity h3{font-size:16px!important;line-height:1.4!important;font-weight:750!important;letter-spacing:0!important;color:var(--dash-ink)!important;border:0!important;padding:0!important;margin:0 0 12px!important}
+#summaryView .cs-affinities{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0 0 14px!important}
+#summaryView .cs-affinities>div{min-width:0!important}
+#summaryView .cinelva-affinity{padding:16px!important;margin:0!important;height:100%!important}
+#summaryView .cinelva-affinity-note{color:var(--dash-muted)!important;font-size:11px!important}
+#summaryView .cinelva-affinity-row{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;gap:2px 9px!important;align-items:center!important;padding:10px 0!important;border-top:1px solid var(--dash-line)!important}
+#summaryView .cinelva-affinity-rank{grid-column:1!important;grid-row:1/3!important;color:var(--dash-accent)!important}
+#summaryView .cinelva-affinity-row strong{grid-column:2!important;font-size:13px!important;color:var(--dash-ink)!important}
+#summaryView .cinelva-affinity-meta{grid-column:2!important;white-space:normal!important;font-size:11px!important;color:var(--dash-muted)!important}
+#summaryView .cs-breakdowns{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important}
+#summaryView .cs-breakdowns .cs-section{margin:0!important;padding:16px!important;border:1px solid var(--dash-line)!important;min-width:0!important}
+#summaryView .cs-donut-layout{min-width:0!important}
+@media(max-width:699px){#summaryView .cs-affinities{grid-template-columns:minmax(0,1fr)!important}#summaryView .cs-breakdowns{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#summaryView .cs-breakdowns .cs-section{padding:11px!important}#summaryView .cs-section{padding:13px!important}#summaryView .cs-top{padding:13px!important}#summaryView>.panel{padding:13px!important}#summaryView .cs-affinities{gap:9px!important}}
+@media(max-width:370px){#summaryView .cs-breakdowns{grid-template-columns:1fr!important}}
+#summaryView .cinelva-affinity-link{grid-column:2;display:block;width:100%;min-width:0;border:0;background:none;padding:0;color:var(--dash-ink);font:inherit;font-size:13px;font-weight:700;line-height:1.4;text-align:left;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;cursor:pointer;overflow-wrap:anywhere}#summaryView .cinelva-affinity-link:hover,#summaryView .cinelva-affinity-link:focus-visible{text-decoration-color:currentColor;color:var(--dash-accent)}#summaryView .cinelva-affinity-link:focus-visible{outline:2px solid var(--dash-accent);outline-offset:3px}</style><style id="cinelva-affinity-images-20261019">
+#summaryView .cinelva-affinity-row{grid-template-columns:18px 46px minmax(0,1fr)!important;gap:2px 10px!important;min-height:60px!important}
+#summaryView .cinelva-affinity-rank{grid-column:1!important;grid-row:1/3!important}
+#summaryView .cinelva-affinity-visual{grid-column:2!important;grid-row:1/3!important;display:flex;align-items:center;justify-content:center;width:44px;height:50px;border-radius:7px;overflow:hidden;background:var(--soft);border:1px solid var(--line);color:var(--ink)}
+#summaryView .cinelva-affinity-visual img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+#summaryView .cinelva-affinity-placeholder{font-size:10px;color:var(--muted)}
+#summaryView .cinelva-award-mark{font-size:8px;font-weight:800;letter-spacing:-.02em;overflow-wrap:anywhere;text-align:center;padding:3px;color:var(--gold)}
+#summaryView .cinelva-affinity-link,#summaryView .cinelva-affinity-meta{grid-column:3!important}
+</style><style id="cinelva-dashboard-collection-highlights">
+#summaryView .cs-collection-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 14px}
+#summaryView .cs-highlight{border:1px solid var(--line);border-radius:9px;padding:10px;min-width:0;background:var(--soft)}
+#summaryView .cs-highlight-label{display:block;font-size:11px;color:var(--muted);line-height:1.4}
+#summaryView .cs-highlight-value{display:block;font-size:16px;font-weight:800;line-height:1.4;margin-top:3px;overflow-wrap:anywhere}
+#summaryView .cs-highlight-detail{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+#summaryView .cs-highlight button{background:none;border:0;padding:0;color:inherit;text-align:left;text-decoration:underline;text-underline-offset:3px;font:inherit;cursor:pointer}
+@media(max-width:370px){#summaryView .cs-collection-highlights{grid-template-columns:1fr}}
+</style><style id="cinelva-director-top10-grid">
+/* Two compact columns within the director ranking, independently of award layout. */
+#summaryView #csDirectorAffinity .cinelva-affinity-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:12px!important;row-gap:0!important}
+#summaryView #csDirectorAffinity .cinelva-affinity-row{min-width:0!important}
+@media(max-width:430px){#summaryView #csDirectorAffinity .cinelva-affinity-list{column-gap:8px!important}#summaryView #csDirectorAffinity .cinelva-affinity-row{grid-template-columns:14px 34px minmax(0,1fr)!important;gap:2px 5px!important}#summaryView #csDirectorAffinity .cinelva-affinity-visual{width:32px!important;height:40px!important}#summaryView #csDirectorAffinity .cinelva-affinity-link{font-size:11px!important}#summaryView #csDirectorAffinity .cinelva-affinity-meta{font-size:10px!important}}
+</style><style id="cinelva-award-approved-png-sprite-20261019">
+/* Original approved flat artwork, shipped as a single PNG asset; no SVG reinterpretation. */
+#summaryView .cinelva-affinity-visual.cinelva-award-emblem{
+ display:block!important;flex:none!important;box-sizing:border-box!important;
+ width:32px!important;height:32px!important;min-width:32px!important;
+ padding:0!important;border:0!important;border-radius:0!important;
+ background-image:url('../assets/awards/cinelva-awards-sprite.png')!important;
+ background-repeat:no-repeat!important;background-size:224px 32px!important;
+ background-color:transparent!important;
+}
+#summaryView .cinelva-award-emblem--academy{background-position:0 0!important}
+#summaryView .cinelva-award-emblem--cannes{background-position:-32px 0!important}
+#summaryView .cinelva-award-emblem--venice{background-position:-64px 0!important}
+#summaryView .cinelva-award-emblem--berlin{background-position:-96px 0!important}
+#summaryView .cinelva-award-emblem--bafta{background-position:-128px 0!important}
+#summaryView .cinelva-award-emblem--japan-academy{background-position:-160px 0!important}
+#summaryView .cinelva-award-emblem--golden-globes{background-position:-192px 0!important}
+</style><style id="cinelva-movie-row-alignment">
+/* CINELVA shared movie-row alignment: equal columns, card heights and actions. */
+.presetShelfGrid,#grid.grid,#grid.rankGrid,.rankGrid,.awardGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;grid-auto-flow:row!important;gap:9px!important}
+.presetShelfGrid>.cinelva-discover-review-wrap,#grid>.cinelva-discover-review-wrap,#grid>.cinelva-rate-wrap,.rankGrid>.rankReviewWrap,.awardGrid>.awardCard{min-width:0!important;align-self:stretch!important;display:flex!important;flex-direction:column!important;height:100%!important}
+.cinelva-discover-review-wrap>.presetCard,.cinelva-discover-review-wrap>.card,.cinelva-rate-wrap>.card,.rankReviewWrap>.rankCard{flex:1 1 auto!important;width:100%!important;min-width:0!important;max-width:none!important}
+.presetShelfGrid .presetCardPoster,.cinelva-discover-review-wrap .poster,#grid .cinelva-rate-wrap .poster,.rankGrid .rankCard img,.awardGrid .awardPoster{width:100%!important;aspect-ratio:2/3!important;object-fit:cover!important;overflow:hidden!important}
+.presetShelfGrid img,.cinelva-discover-review-wrap .poster img,#grid .cinelva-rate-wrap .poster img{display:block;width:100%;height:100%;object-fit:cover}
+.cinelva-discover-review,.rankReviewWrap>[data-rank-review],.awardCard [data-rank-review]{margin-top:auto!important;width:100%!important;min-width:0!important;flex:0 0 auto!important}
+.cinelva-rating-controls.cinelva-rating-controls-no-gauge{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important}
+</style><style id="cinelva-award-collection-common-review-20261020">
+#awardsView #awardFilms.award-detail-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;gap:9px!important}
+#awardsView #awardFilms .award-film-unit{display:flex!important;flex-direction:column!important;min-width:0!important;height:100%!important;gap:5px!important;overflow:hidden!important}
+#awardsView #awardFilms .award-film-unit .poster{width:100%!important;aspect-ratio:2/3!important;flex:0 0 auto!important}
+#awardsView #awardFilms .award-film-unit>strong{font-size:12px!important;line-height:1.35!important;min-height:2.7em!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important}
+#awardsView #awardFilms .award-film-unit .award-card-category{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;min-height:2.8em!important}
+#awardsView #awardFilms .award-common-review{margin-top:auto!important;min-width:0!important;width:100%!important;min-height:48px!important}
+#awardsView #awardFilms .award-film-unit .award-card-source{font-size:10px!important}
+#awardsView #awardFilms .award-film-unit .award-film-top{min-height:23px!important}
+</style><script src="../js/cinelva-movie-identity.js?v=20261021-poster-placeholder-fix"></script>
+<style id="cinelva-method-breakdown-v1">#summaryView .cs-method-breakdown{margin:12px 0 16px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}#summaryView .cs-method-breakdown h3{font-size:14px;font-weight:650;margin:0 0 14px}#summaryView .cs-method-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}#summaryView .cs-method-item{min-width:0;display:flex;flex-direction:column;gap:5px}#summaryView .cs-method-name{font-size:11px;color:var(--muted);line-height:1.3;overflow-wrap:anywhere}#summaryView .cs-method-item strong{font-size:20px;line-height:1.2;font-variant-numeric:tabular-nums}#summaryView .cs-method-track{height:4px;border-radius:4px;background:var(--soft);overflow:hidden}#summaryView .cs-method-track span{display:block;height:100%;background:var(--brand);border-radius:4px}#summaryView .cs-method-item small{font-size:11px;color:var(--muted)}#summaryView .cs-method-item:nth-child(2) .cs-method-track span{background:#579ac9}#summaryView .cs-method-item:nth-child(3) .cs-method-track span{background:#9873c4}#summaryView .cs-method-item:nth-child(4) .cs-method-track span{background:#899398}@media(max-width:390px){#summaryView .cs-method-grid{gap:5px}#summaryView .cs-method-item strong{font-size:17px}#summaryView .cs-method-name{font-size:10px}}</style><style id="cinelva-director-dash-card-unified-20261021">#directorsView .director-collection-dashboard{border:1px solid var(--line);border-radius:13px;padding:13px;margin:0 0 14px;background:var(--panel)}#directorsView .director-collection-dashboard h3{font-size:14px;margin:0 0 10px}#directorsView .director-achievement-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}#directorsView .director-achievement{display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;min-width:0;padding:11px 2px}#directorsView .director-achievement strong{font-size:25px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}#directorsView .director-achievement span{font-size:11px;font-weight:600}#directorsView .director-achievement small{font-size:9px;color:var(--muted)}#directorsView .director-achievement[data-tier="4"] span{color:#76b6ed}#directorsView .director-achievement[data-tier="3"] span{color:#d8b76b}#directorsView .director-achievement[data-tier="2"] span{color:#a1aaba}#directorsView .director-achievement[data-tier="1"] span{color:#bd8762}#directorsView .director-nearly-complete{font-size:11px;margin:10px 0 0;color:var(--muted)}#calendarFilms .record-grid,#recordList{align-items:stretch}#calendarFilms .record-grid>.cinelva-unified-record-card,#recordList>.cinelva-unified-record-card{display:flex;flex-direction:column;min-width:0;height:100%;box-sizing:border-box;gap:5px;overflow:hidden}#calendarFilms .cinelva-unified-record-card .cinelva-record-poster,#recordList .cinelva-unified-record-card .cinelva-record-poster{width:100%;aspect-ratio:2/3;overflow:hidden;flex-shrink:0}#calendarFilms .cinelva-unified-record-card .cinelva-record-poster img,#recordList .cinelva-unified-record-card .cinelva-record-poster img{width:100%;height:100%;object-fit:cover}#calendarFilms .cinelva-unified-record-card .cinelva-record-title,#recordList .cinelva-unified-record-card .cinelva-record-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-clamp:2;overflow:hidden;line-height:1.35;height:2.7em;font-size:13px;overflow-wrap:anywhere}#calendarFilms .cinelva-unified-record-card .cinelva-record-meta,#recordList .cinelva-unified-record-card .cinelva-record-meta{display:flex;flex-direction:column;min-height:4.2em;gap:2px}#calendarFilms .cinelva-unified-record-card .cinelva-record-meta small,#recordList .cinelva-unified-record-card .cinelva-record-meta small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}#calendarFilms .cinelva-unified-record-card .cinelva-record-review,#recordList .cinelva-unified-record-card .cinelva-record-review{width:100%;min-width:0;margin-top:auto}#calendarFilms .cinelva-unified-record-card .cinelva-record-footer,#recordList .cinelva-unified-record-card .cinelva-record-footer{display:flex;justify-content:flex-end}#calendarFilms .cinelva-unified-record-card .record-delete-icon,#recordList .cinelva-unified-record-card .record-delete-icon{font-size:10px;padding:5px;border:1px solid var(--line);border-radius:6px}#calendarFilms .record-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}#calendarFilms .selected-film .movie{max-width:none}@media(min-width:800px){#calendarFilms .record-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}</style><style id="cinelva-record-list-unified-v2">
+/* Recorded films and calendar selections use one shared, aligned card geometry. */
+#recordsView #recordList,#summaryView #calendarFilms .record-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px 9px!important;align-items:stretch!important}
+#recordsView #recordList>.cinelva-unified-record-card,#summaryView #calendarFilms .cinelva-unified-record-card{display:flex!important;flex-direction:column!important;gap:5px!important;height:100%!important;min-width:0!important;overflow:visible!important;padding:0!important;margin:0!important}
+/* Keep every record searchable while deferring layout of offscreen cards. */
+#recordsView #recordList>.cinelva-unified-record-card:nth-child(n+31){content-visibility:auto;contain-intrinsic-size:auto 400px}
+#recordsView #recordList .cinelva-record-poster,#summaryView #calendarFilms .cinelva-record-poster{aspect-ratio:2/3!important;height:auto!important;width:100%!important;flex-shrink:0!important;overflow:hidden!important}
+#recordsView #recordList .cinelva-record-poster .poster,#summaryView #calendarFilms .cinelva-record-poster .poster{width:100%!important;height:100%!important;aspect-ratio:2/3!important;box-sizing:border-box!important}
+#recordsView #recordList .cinelva-record-title,#summaryView #calendarFilms .cinelva-record-title{font-size:12px!important;font-weight:650!important;line-height:1.35!important;min-height:2.7em!important;max-height:2.7em!important;margin:3px 0 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#recordsView #recordList .cinelva-record-meta,#summaryView #calendarFilms .cinelva-record-meta{display:flex!important;flex-direction:column!important;gap:1px!important;min-height:4.3em!important;margin:0!important}
+#recordsView #recordList .cinelva-record-meta small,#summaryView #calendarFilms .cinelva-record-meta small{font-size:10px!important;line-height:1.4!important;color:var(--muted)!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#recordsView #recordList .cinelva-record-review,#summaryView #calendarFilms .cinelva-record-review{margin-top:auto!important;min-width:0!important;width:100%!important;min-height:43px!important;display:block!important}
+#recordsView #recordList .cinelva-record-review .cinelva-rating-controls,#summaryView #calendarFilms .cinelva-record-review .cinelva-rating-controls{width:100%!important;max-width:100%!important;margin:0!important}
+#recordsView #recordList .cinelva-record-footer,#summaryView #calendarFilms .cinelva-record-footer{display:flex!important;align-items:center!important;justify-content:flex-end!important;margin:0!important;min-height:22px!important}
+#recordsView #recordList .record-own-rating-label,#summaryView #calendarFilms .record-own-rating-label{display:none!important}
+#recordsView #recordList .cinelva-record-review-fallback,#summaryView #calendarFilms .cinelva-record-review-fallback{display:grid;grid-template-columns:minmax(0,1fr) 20px;align-items:center;gap:3px;min-height:43px;padding:3px;box-sizing:border-box}
+#recordsView #recordList .cinelva-record-review-fallback .cinelva-rating-pair,#summaryView #calendarFilms .cinelva-record-review-fallback .cinelva-rating-pair{display:grid;gap:2px;min-width:0}
+#recordsView #recordList .cinelva-record-review-fallback .cinelva-rating-line,#summaryView #calendarFilms .cinelva-record-review-fallback .cinelva-rating-line{display:flex;justify-content:space-between;gap:2px;font-size:10px;white-space:nowrap}
+@media(min-width:850px){#recordsView #recordList,#summaryView #calendarFilms .record-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important}}
+</style><style id="cinelva-top10-shared-review-v1">#summaryView #csTop .cs-film{display:flex;flex-direction:column;min-width:0}#summaryView #csTop .cs-film-name{font-size:11px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}#summaryView #csTop .cs-top-review{margin-top:auto;width:100%;min-height:43px;min-width:0}#summaryView #csTop .cs-top-review .cinelva-rating-controls{width:100%!important;box-sizing:border-box}#summaryView #csTop .cs-score{display:none!important}</style><style id="cinelva-highest-picture-collection">#awardsView .award-collection-scope{font-size:12px;color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:6px 11px}#awardsView .award-filters{align-items:center}</style><style id="cinelva-award-scope-toggle-v1">#awardsView .award-scope-toggle{display:inline-flex;gap:3px;padding:3px;background:var(--soft);border:1px solid var(--line);border-radius:10px;max-width:100%}#awardsView .award-scope-toggle button{appearance:none;border:0;border-radius:7px;white-space:nowrap;cursor:pointer;background:transparent;color:var(--muted);font-size:12px;font-weight:600;line-height:1.2;padding:9px 13px;min-height:34px}#awardsView .award-scope-toggle button.active{background:var(--panel);color:var(--ink);box-shadow:0 1px 5px #0002}#awardsView .award-scope-toggle button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}</style><style id="cinelva-awards-collection-cleanup-20261021">
+/* One functional award-scope switch only: remove obsolete controls. */
+#awardsView .award-collection-scope,#awardsView .award-other-toggle,#awardsView #awardMode{display:none!important}
+#awardsView .award-scope-toggle{display:inline-flex!important}
+#awardsView .award-legend .award-legend-swatch.heat-0,#awardsView .award-matrix .heat-0{background:#1b2532!important;color:#8c9baa!important;opacity:1!important}
+#awardsView .award-legend .award-legend-swatch.heat-1,#awardsView .award-matrix .heat-1{background:#25435f!important;color:#e7f0fa!important}
+#awardsView .award-legend .award-legend-swatch.heat-2,#awardsView .award-matrix .heat-2{background:#34658a!important;color:#f2f8fc!important}
+#awardsView .award-legend .award-legend-swatch.heat-3,#awardsView .award-matrix .heat-3{background:#4686b4!important;color:#fff!important}
+#awardsView .award-legend .award-legend-swatch.heat-4,#awardsView .award-matrix .heat-4{background:#64a6d1!important;color:#0e2030!important}
+#awardsView #awardFilms .award-film-unit.is-watched{border:2px solid #d8ba7e!important;box-shadow:inset 0 0 0 1px #d8ba7e33!important;border-radius:9px!important}
+#awardsView #awardFilms .award-film-unit.is-unwatched{border:1px solid var(--line)!important;border-radius:9px!important}
+#awardsView #awardFilms .award-film-unit.is-watched .award-watch-state{background:#2d5746!important;color:#d1e9dc!important}
+#awardsView #awardFilms .award-film-unit{padding:5px!important;box-sizing:border-box!important}
+</style><style id="cinelva-award-prize-clarity-20261021">#awardsView .award-table .award-prize-subtitle{display:block;font-size:10px;font-weight:400;line-height:1.4;color:#a5b4c4;margin-top:3px;white-space:normal}#awardsView .award-legend{gap:7px 10px;align-items:center}#awardsView .award-legend-key{display:inline-flex;gap:4px;align-items:center;white-space:nowrap;font-size:11px}#awardsView .award-legend-key i{display:inline-block;flex:none}#awardsView .award-legend-caption{font-size:10px}#awardsView .award-matrix .heat-0,#awardsView .award-legend .heat-0{background:#1b2532!important;color:#8c9baa!important}#awardsView .award-matrix .heat-1,#awardsView .award-legend .heat-1{background:#25435f!important;color:#e7f0fa!important}#awardsView .award-matrix .heat-2,#awardsView .award-legend .heat-2{background:#315571!important;color:#f2f8fc!important}#awardsView .award-matrix .heat-3,#awardsView .award-legend .heat-3{background:#407ea8!important;color:#fff!important}#awardsView .award-matrix .heat-4,#awardsView .award-legend .heat-4{background:#64a6d1!important;color:#0e2030!important}</style><style id="cinelva-record-compact-list-20261021">
+#recordsView .record-compact-toolbar{display:grid!important;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,.66fr)!important;gap:7px!important;align-items:center!important;margin:10px 0 14px!important;width:100%!important}
+#recordsView .record-compact-toolbar>*{width:100%!important;min-width:0!important;max-width:none!important;height:39px!important;min-height:39px!important;padding:7px 9px!important;box-sizing:border-box!important;margin:0!important;font-size:13px!important;border-radius:8px!important}
+#recordsView .record-compact-toolbar input{min-width:0!important}
+#recordsView #recordList>.cinelva-unified-record-card{gap:4px!important;justify-content:flex-start!important;height:auto!important;min-height:0!important;align-self:stretch!important}
+#recordsView #recordList .cinelva-record-poster{margin:0!important;padding:0!important;aspect-ratio:2/3!important;overflow:hidden!important;flex:none!important}
+#recordsView #recordList .cinelva-record-poster .poster{margin:0!important;padding:0!important;aspect-ratio:2/3!important;height:100%!important}
+#recordsView #recordList .cinelva-record-title{margin:4px 0 0!important;min-height:2.7em!important;max-height:2.7em!important}
+#recordsView #recordList .cinelva-record-meta{margin:0!important;padding:0!important;min-height:0!important;height:auto!important;gap:0!important;display:block!important}
+#recordsView #recordList .cinelva-record-meta small{font-size:10px!important;line-height:1.35!important;min-height:0!important}
+#recordsView #recordList .cinelva-record-review{min-height:43px!important;margin-top:3px!important}
+#recordsView #recordList .cinelva-record-footer{display:none!important}
+@media(max-width:390px){#recordsView .record-compact-toolbar{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,.7fr)!important;gap:5px!important}#recordsView .record-compact-toolbar>*{font-size:12px!important;padding:6px!important}}
+</style><style id="cinelva-record-release-date-tight-v1">#recordsView #recordList>.cinelva-unified-record-card{gap:2px!important}#recordsView #recordList .cinelva-record-title{margin:2px 0 0!important;min-height:2.7em!important;max-height:2.7em!important;line-height:1.35!important}#recordsView #recordList .cinelva-record-meta{margin:-1px 0 0!important;line-height:1.3!important}#recordsView #recordList .cinelva-record-review{margin-top:2px!important}#recordsView #recordList .cinelva-record-poster{margin-bottom:0!important}</style><style id="cinelva-award-record-review-fallback-20261021">#awardsView #awardFilms .award-review-search{display:flex;justify-content:center;align-items:center;text-align:center;width:100%;min-height:38px;padding:5px;border:1px solid var(--line);border-radius:7px;font-size:11px;color:var(--muted);box-sizing:border-box;text-decoration:none}#awardsView #awardFilms .award-review-search:focus-visible{outline:2px solid var(--brand)}</style><style id="cinelva-top10-poster-fallback-20261021">#summaryView #csTop .cs-film-art{width:100%;aspect-ratio:2/3;position:relative;overflow:hidden;border-radius:6px;background:var(--panel)}#summaryView #csTop .cs-film-art>img{width:100%;height:100%;object-fit:cover;display:block}#summaryView #csTop .cs-film-art>.cs-poster-empty{display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;width:100%;height:100%;padding:5px;box-sizing:border-box}#summaryView #csTop .cs-film-art>.cs-poster-empty[hidden]{display:none!important}</style><style id="cinelva-awards-gold-20261021">#awardsView .award-table .award-cell.is-gold{background:linear-gradient(145deg,#f0d791,#b68835)!important;color:#34240d!important;border:1px solid #f6e3aa!important;box-shadow:inset 0 1px 1px #ffffff80,0 1px 7px #c9a44d45!important;display:flex!important;align-items:center;justify-content:center;flex-direction:column;gap:0}#awardsView .award-table .award-cell.is-gold>span{font-size:14px;line-height:1.15;font-weight:800}#awardsView .award-table .award-gold-tag{font-size:8px;line-height:1.2;font-weight:750;letter-spacing:.025em;color:#4e3613}#awardsView #awardCoverage{font-size:11px;line-height:1.4;margin:7px 0 2px}#awardsView #awardNotation{font-size:11px;line-height:1.4;margin:0 0 12px}#awardsView .award-summary .award-stat-name{font-size:13px;line-height:1.4}</style><style id="cinelva-gold-only-v2">#awardsView .award-matrix .award-cell.heat-3{background:#407ea8!important;color:#fff!important}#awardsView .award-matrix .award-cell.heat-4{background:#64a6d1!important;color:#10273b!important}#awardsView .award-matrix .award-cell.is-gold{background:linear-gradient(145deg,#f0d791,#b68835)!important;color:#34240d!important}</style><style id="cinelva-awards-verified-gold-v3">#awardsView .award-matrix .award-cell.heat-3,#awardsView .award-matrix .award-cell.heat-4{background:#29405a!important;color:#e7edf6!important}#awardsView .award-matrix .award-cell.is-gold{background:linear-gradient(145deg,#f1dca5,#b98b38)!important;color:#34240d!important}#awardsView .award-summary .award-stat-name{font-size:clamp(11px,2.9vw,15px)!important;line-height:1.45!important;overflow-wrap:anywhere!important}#awardsView #awardFilms:empty{display:none!important}</style></head>
+<body>
+  <header class="gTop"><div class="wrap gNav">
+ <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
+ <form class="gSearchForm" action="../search.html" method="get">
+  <input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+  <button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+ </form>
+ <button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+ <div class="gDrawerHead"><a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+ <a href="../index.html">カレンダー</a>
+ <a href="../discover.html">映画を探す</a>
+ <a href="../rankings.html">ランキング</a>
+ <a href="../theaters.html">映画館を探す</a>
+ <a href="../experience.html">上映方式</a>
+ <a href="./">My Cinelva</a>
+</aside>
+
+  <main>
+    <section class="hero"><div><div class="eyebrow">YOUR MOVIE HISTORY</div><h1>My Cinelva</h1><p>観た映画を記録して、年間の歩みや好きな作品を振り返る。</p></div><div class="actions"><details class="recordUtilities"><summary>その他の操作 <span aria-hidden="true">⌄</span></summary><div class="utilityItems"><button class="button" id="exportRecords">記録をバックアップ</button><button class="button" id="importRecords">バックアップを復元</button><a class="button" href="../my-cinemap.html">実績画像を作る</a></div></details><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    <p id="originNote" class="hint">記録はこのブラウザとドメインに保存されます。端末間で自動同期はされません。</p>
+    <section class="stats" aria-label="鑑賞実績" hidden><div class="stat"><span>鑑賞記録</span><b id="statTotal">0</b><small>本</small></div><div class="stat"><span>今年</span><b id="statYear">0</b><small>本</small></div><div class="stat"><span>生涯平均評価</span><b id="statAverage">—</b></div><div class="stat"><span>邦画／洋画</span><b id="statOrigin">0 / 0</b><small>邦画・洋画の内訳</small></div></section>
+    
+    <nav class="tabs" role="tablist" aria-label="鑑賞記録の表示"><button class="tab" role="tab" aria-selected="true" data-tab="summary">ダッシュボード</button><button class="tab" role="tab" aria-selected="false" data-tab="records">鑑賞した映画</button><button class="tab" role="tab" aria-selected="false" data-tab="watchlist">見たい映画</button><button class="tab" role="tab" aria-selected="false" data-tab="awards">映画賞</button><button class="tab" role="tab" aria-selected="false" data-tab="directors">監督別</button></nav>
+    <section id="summaryView" class="cinema-summary view" role="tabpanel" aria-label="鑑賞サマリー"><div class="cs-head"><h2>あなたの鑑賞実績</h2><select id="csPeriod" aria-label="集計期間"><option value="all">オールタイム</option></select></div><div class="cs-top"><div><div class="cs-muted">生涯鑑賞本数</div><div class="cs-number" id="csLifetime">0</div></div><div><div class="cs-muted" id="csPeriodLabel">今年の鑑賞本数</div><div class="cs-number" id="csCount">0</div><div id="csYears" class="cs-year-bars"></div></div></div><div id="csExtraStats" class="cs-extra-stats" aria-label="鑑賞傾向"></div><div class="panel"><div class="cinelva-year-heading"><h2 id="yearHeatmapTitle">年間鑑賞カレンダー</h2></div><div id="yearHeatmap" class="cinelva-annual-calendar" aria-label="年間鑑賞カレンダー"></div><div id="calendarFilms" class="selected-film" aria-live="polite"></div></div><div class="cs-section"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><h3>高評価の映画 TOP10</h3><a href="../my-best10.html" class="button" style="font-size:13px">My Best 10を作成・共有</a></div><div id="csTop" class="cs-posters"></div></div><div id="csAffinities" class="cs-affinities"><div id="csDirectorAffinity"><div id="csDirectorHighlights" class="cs-collection-highlights"></div></div><div id="csAwardAffinity"><div id="csAwardHighlights" class="cs-collection-highlights"></div></div></div><div class="cs-breakdowns" style="margin-top:14px"><div class="cs-section"><h3>ジャンルの内訳</h3><div id="csGenres"></div></div><div class="cs-section"><h3>製作国</h3><div id="csCountries"></div></div><div class="cs-section"><h3>公開年代</h3><div id="csDecades"></div></div><div class="cs-section"><h3>鑑賞方法</h3><div id="csMethods"></div></div></div></section><section id="watchlistView" class="view" role="tabpanel" aria-label="見たい映画" hidden><div class="panel"><h2>見たい映画</h2><p class="hint">ブックマークした映画をまとめて確認できます。</p><div id="wantWatchList" class="want-watch-list"></div></div></section><section id="recordsView" class="view" role="tabpanel" hidden><div class="toolbar record-compact-toolbar"><input id="recordSearch" type="search" placeholder="映画を検索" aria-label="鑑賞記録を検索"><select id="recordSort" aria-label="並び順"><option value="date">新しい順</option><option value="rating">MY評価順</option><option value="userRating">TMDB評価順</option><option value="releaseNew">公開年↓</option><option value="releaseOld">公開年↑</option><option value="title">作品名順</option></select><select id="recordYear" aria-label="鑑賞年"><option value="all">すべての年</option></select></div><div id="recordList" class="record-grid"></div></section>
+    <section id="calendarView" class="view" role="tabpanel" hidden><div hidden aria-hidden="true"><select id="calendarMode"><option value="count">本数</option><option value="date">日付</option><option value="rating">評価</option><option value="method">鑑賞方法</option></select><button id="monthPrev">‹</button><strong id="calendarMonth"></strong><button id="monthNext">›</button><div id="calendar"></div></div></section><section id="worldView" class="view" role="tabpanel" hidden><div class="section-head"><div><h2>映画の世界</h2><p>横軸は公開年、縦軸は製作国の概算緯度、奥行きはジャンルのカテゴリ順です。ジャンル間の距離は類似度を意味しません。情報不明の点は各軸の始点側に分けて表示します。</p></div></div><div class="toolbar"><label>公開年代<select id="worldYear"><option value="all">すべて</option></select></label><label>ジャンル<select id="worldGenre"><option value="all">すべて</option></select></label><label>製作国<select id="worldCountry"><option value="all">すべて</option></select></label></div><div class="toolbar"><button class="button" id="worldZoomIn" aria-label="マップを拡大">＋</button><button class="button" id="worldZoomOut" aria-label="マップを縮小">−</button><button class="button" id="worldReset">表示をリセット</button><button class="button" id="worldToggle" aria-pressed="false">2D一覧で見る</button></div><p class="hint" id="worldControlsHint">1本指で回転、2本指で移動・拡縮。キーボードは矢印で回転、＋／−で拡縮、Enterで作品を順に選択できます。</p><div class="canvasbox"><canvas id="worldCanvas" tabindex="0" aria-describedby="worldControlsHint" aria-label="公開年、製作国、ジャンルを軸にした鑑賞作品の3Dマップ"></canvas><div class="canvas-note" id="worldStatus">作品の点をドラッグで回転、スクロールで拡大できます。</div></div><div id="worldList" class="record-grid" hidden></div><div id="worldLegend" class="legend"></div><div id="worldFilm" class="panel selected-film" aria-live="polite">点を選ぶと作品情報が表示されます。</div></section>
+    <section id="genresView" class="view" role="tabpanel" hidden><div class="section-head"><div><h2>ジャンルの重なり</h2><p>複数ジャンルの記録を数え、よく一緒に観ている組み合わせを示します。未分類作品は推測で振り分けません。</p></div></div><div class="toolbar"><label>表現形式<select id="genreFormat"><option value="all">すべて</option><option>実写</option><option>アニメーション</option><option>ストップモーション</option><option value="unknown">不明</option></select></label><label>作品形式<select id="genreWorkForm"><option value="all">すべて</option><option>フィクション</option><option>ドキュメンタリー</option><option value="unknown">不明</option></select></label></div><div id="classificationSummary" class="legend"></div><div id="genreSummary" class="legend"></div><div id="genreMatrix" class="genre-matrix"></div><div id="genreFilms" class="record-grid"></div></section>
+    <section id="awardsView" class="view" role="tabpanel" hidden><div class="section-head award-titlebar"><div><span class="award-eyebrow">My Cinelva / Awards</span><h2>映画賞コレクション</h2><p>世界の映画賞を、受賞した作品の鑑賞記録からたどる。</p></div><select id="awardMode" hidden aria-label="表示形式"><option value="count">鑑賞本数</option><option value="rate" disabled>達成率</option></select></div><div class="award-filters" aria-label="映画賞の絞り込み"><input id="awardCategory" type="hidden" value="picture"><div class="award-scope-toggle" role="group" aria-label="受賞作品の集計範囲"><button type="button" data-award-scope="picture" aria-pressed="true" class="active">最高賞</button><button type="button" data-award-scope="all" aria-pressed="false">受賞作すべて</button></div></div><div id="awardSummary" class="award-summary" aria-label="映画賞コレクションの鑑賞サマリー"></div><p class="hint" id="awardCoverage"></p><p class="hint award-notation" id="awardNotation">0：未鑑賞 ／ —：受賞作未収録</p><div id="awardMatrix" class="award-matrix" tabindex="0" aria-label="映画賞と10年単位の鑑賞ヒートマップ。横にスクロールできます。"></div><div id="awardFilms" class="award-detail-list"></div><a class="award-ranking-link" href="../rankings.html">映画賞ランキングを見る <span aria-hidden="true">↗</span></a></section>
+    <section id="directorsView" class="view" role="tabpanel" hidden><div class="section-head"><div><h2>監督コレクション</h2><p>映画を観るほど広がる、監督たちの作品世界。気になる監督を選んで、観てきた作品とこれから出会う一本を探しましょう。</p></div></div><div id="directorTimeline"></div><div id="directorWorks" class="record-grid"></div></section>
+    
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <p class="footer">記録はこのブラウザの保存領域に保持されます。ブラウザの設定や保存データの削除により失われる場合があります。<a href="../data-backup.html">すべてのCinelvaデータをバックアップ</a> · <a href="../privacy.html">プライバシー</a></p>
+  </main>
+  <dialog id="reviewDetailDialog" class="review-detail-dialog" aria-label="レビュー詳細を見る">
+    <div class="review-detail-header"><strong>レビュー詳細を見る</strong><button type="button" class="button" id="reviewDetailClose" aria-label="閉じる">閉じる ×</button></div>
+    <div id="reviewDetailBody" class="review-detail-body"></div>
+    <div class="review-detail-footer"><button type="button" class="button primary" id="reviewDetailEdit">レビューを編集</button></div>
+  </dialog>
+  <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="DVD／ブルーレイ">DVD／ブルーレイ</option><option value="その他">その他</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
+  <script src="../js/cinelva-library-records.js?v=20261021-dvd-validation"></script><script src="../js/cinelva-insights.js?v=20261021-award-verified-496243"></script><script src="../js/cinelva-quick-rate.js?v=20261021-remove-tv-method"></script><script src="../js/cinelva-global-search.js?v=20261026-quality"></script><script src="../js/cinelva-records-page.js?v=20261021-award-prize-gold-v3"></script>
+<script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
+.want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.want-watch-section summary{cursor:pointer;font-weight:750}
+.want-watch-section summary span{float:right;color:var(--muted);font-size:13px;font-weight:500}
+.want-watch-list{display:grid;gap:7px;margin-top:12px}
+.want-watch-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.want-watch-item a{color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+.want-watch-item button{flex:none;padding:5px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel);font-size:12px}
+</style>
+<div id="cinelvaBuildVersion" aria-label="Cinelva バージョン" style="position:relative;display:block;width:max-content;margin:28px 12px 12px auto;background:rgba(28,31,37,.87);color:#fff;border-radius:8px;padding:5px 9px;font:11px/1.4 system-ui,sans-serif;pointer-events:none">Cinelva v2026.10.19.20</div><style id="cinelva-record-card-row-alignment-20261019">
+@media(max-width:699px){
+#recordsView #recordList.record-grid{align-items:stretch!important}
+#recordsView #recordList.record-grid>.movie{display:flex!important;flex-direction:column!important;min-width:0!important;height:100%!important}
+#recordsView #recordList.record-grid>.movie strong{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;line-clamp:3!important;overflow:hidden!important;min-height:4.5em!important;line-height:1.5!important}
+#recordsView #recordList.record-grid>.movie .record-actions{margin-top:auto!important}
+}
+</style>
+<style id="cinelva-watchlist-grid">
+#wantWatchList.want-watch-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;align-items:stretch!important}
+#wantWatchList .want-watch-item{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:initial!important;min-width:0!important;padding:0!important;border:1px solid var(--line)!important;border-radius:8px!important;overflow:hidden!important;gap:0!important}
+#wantWatchList .want-watch-film{display:flex;flex-direction:column;flex:1;min-width:0;color:var(--ink);text-decoration:none}
+#wantWatchList .want-watch-poster{width:100%;aspect-ratio:2/3;background:var(--soft);display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;color:var(--muted)}
+#wantWatchList .want-watch-poster img{display:block;width:100%;height:100%;object-fit:cover}
+#wantWatchList .want-watch-film strong{font-size:12px;line-height:1.4;padding:7px;overflow-wrap:anywhere}
+#wantWatchList .want-watch-review{margin-top:auto;min-width:0}
+#wantWatchList .want-watch-remove{align-self:stretch!important;margin:4px!important;font-size:10px!important;padding:6px 2px!important;white-space:normal!important}
+@media(max-width:600px){#watchlistView .panel{padding:10px!important}}
+</style><script id="cinelva-watchlist-tab">
+(()=>{'use strict';
+const key='cinelva-want-to-watch-v1',list=document.getElementById('wantWatchList');
+const read=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}};
+function sortedBookmarks(entries,order){
+ const title=(a,b)=>String(a.title||'').localeCompare(String(b.title||''),'ja')||Number(a.id)-Number(b.id);
+ const year=item=>Number(String(item.year||item.release_date||item.date||'').slice(0,4))||null;
+ return [...entries].sort((a,b)=>{
+  if(order==='title')return title(a,b);
+  if(order==='releaseNew'||order==='releaseOld'){
+   const left=year(a),right=year(b);
+   if(left===null&&right!==null)return 1;if(right===null&&left!==null)return -1;
+   return (order==='releaseNew'?right-left:left-right)||title(a,b);
+  }
+  const left=String(a.savedAt||''),right=String(b.savedAt||'');
+  if(!left&&right)return 1;if(!right&&left)return -1;
+  return (order==='savedOld'?left.localeCompare(right):right.localeCompare(left))||title(a,b);
+ });
+}
+const sortKey='cinelva-watchlist-sort-v1';
+const toolbar=document.createElement('div');toolbar.className='toolbar';
+const label=document.createElement('label');label.textContent='並び替え';label.htmlFor='wantWatchSort';
+const select=document.createElement('select');select.id='wantWatchSort';select.setAttribute('aria-label','見たい映画の並び替え');
+for(const [value,text]of [['savedNew','保存した日：新しい順'],['savedOld','保存した日：古い順'],['title','作品名順'],['releaseNew','公開年：新しい順'],['releaseOld','公開年：古い順']]){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option)}
+try{select.value=sessionStorage.getItem(sortKey)||'savedNew'}catch{}
+if(!select.value)select.value='savedNew';
+toolbar.append(label,select);list.before(toolbar);
+select.addEventListener('change',()=>{try{sessionStorage.setItem(sortKey,select.value)}catch{}render()});
+function render(){
+ const entries=sortedBookmarks(Object.values(read()).filter(x=>x&&Number(x.id)>0).map(item=>({...globalThis.CinelvaMovieIdentity?.resolve?.({tmdbId:Number(item.tmdbId??item.tmdb_id??item.id)}),...item})),select.value);
+ list.replaceChildren();
+ if(!entries.length){const p=document.createElement('p');p.className='hint';p.textContent='見たい映画はまだありません。映画一覧のブックマークから追加できます。';list.append(p);return}
+ for(const item of entries){
+  const card=document.createElement('article');card.className='want-watch-item';list.append(card);
+  const link=document.createElement('a');link.className='want-watch-film';link.href='../search.html?id='+encodeURIComponent(item.id)+'&search='+encodeURIComponent(item.title||'');
+  const poster=document.createElement('div');poster.className='want-watch-poster';
+  const identity=globalThis.CinelvaMovieIdentity;
+  const tmdbId=Number(item.tmdbId??item.tmdb_id??item.id);
+  const movie={...(identity?.resolve?.({tmdbId})||{}),...item,tmdbId};
+  const source=raw=>{const v=String(raw||'');return /^https:\/\//i.test(v)?v:v.startsWith('/')?'https://image.tmdb.org/t/p/w342'+v:''};
+  const draw=raw=>{const url=source(raw);if(!url||!card.isConnected)return false;let img=poster.querySelector('img');if(!img){img=document.createElement('img');img.loading='lazy';img.alt='';poster.replaceChildren(img)}img.onerror=()=>{identity?.reportBroken?.(movie,img.src);img.remove();poster.textContent='画像を読み込み中';identity?.fetchOne?.({...movie,poster:'',posterUrl:'',poster_path:'',poster_url:''}).then(found=>{if(!found?.poster||source(found.poster)===url||!draw(found.poster))poster.textContent='画像なし'}).catch(()=>{poster.textContent='画像なし'})};img.src=url;return true};
+  const first=identity?.posterFor?.(movie)||movie.poster||movie.posterUrl||movie.poster_path||'';
+  if(!draw(first))poster.textContent='画像を読み込み中';
+  identity?.fetchOne?.(movie).then(found=>{if(found?.poster)draw(found.poster);else if(!poster.querySelector('img'))poster.textContent='画像なし'}).catch(()=>{if(!poster.querySelector('img'))poster.textContent='画像なし'});
+  const title=document.createElement('strong');title.textContent=item.title||'作品';link.append(poster,title);
+  const review=document.createElement('div');review.className='want-watch-review';
+  card.append(link,review);list.append(card);
+  globalThis.CinelvaQuickRate?.mountInline?.(review,{...item,id:Number(item.id),tmdbId:Number(item.id),title:item.title||'作品'});
+  globalThis.CinelvaMovieIdentity?.hydrateCard(poster,{...item,tmdbId:Number(item.id)});
+
+ }
+}
+document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',render);
+window.addEventListener('storage',e=>{if(e.key===key)render()});
+window.addEventListener('cinelva-bookmarks-updated',render);
+render();
+})();
 </script></body></html>

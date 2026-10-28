@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T08:58:26.839823+00:00",
-  "status": "blocked",
+  "updated_at": "2026-10-28T21:11:04.361Z",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "branch": "docs/provider-release-verified-20261026",
-  "head_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "pull_request": 512,
+  "base_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
+  "branch": "fix/unify-festivals-events-navigation-20261029",
+  "head_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3",
+  "pull_request": 541,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -596,6 +596,14 @@
       "title": "Restore115 omitted official premieres and Panda artwork; large record-list responsiveness",
       "status": "ci_passed",
       "acceptance": "249/249 artwork, Prime October103 individual films, FOD26 and Disney2 added, non-streaming calendar unchanged, 1000-record interactions under1second. Final CI/publication pending;10 further FOD identities remain."
+    },
+    {
+      "id": "P0-541-UNIFIED-EVENTS",
+      "title": "Unify festival/events calendar and correct credits My Cinelva navigation",
+      "status": "ci_passed",
+      "acceptance": "One festival/events tab includes all event categories; saved events mode migrates; credits menu opens my-cinelva/; adjacent-month festival bars remain operable; production is verified.",
+      "pull_request": 541,
+      "source_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3"
     }
   ],
   "verification": [
@@ -826,22 +834,20 @@
     {
       "check": "Nationwide actual collection and canonical production acceptance",
       "result": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
+    },
+    {
+      "check": "PR541 exact source CI",
+      "result": "All9 pull-request workflows succeeded on 0eff8bf80a900927b19141f8dde57f6a9f108ff3, including all4 publication-required workflows. Shared local quality gate passed. Focused review P2 adjacent-month bar issue reproduced, fixed and re-reviewed. Chromium/WebKit navigation and unified-calendar checks passed."
     }
   ],
   "deployment": {
-    "status": "production_verified",
-    "frontend": "1792b8c8 READY dpl_CGiEFGCWuheNzTE2xScbMpZFdmTh at unchanged cinelva.vercel.app;8canonical files HTTP200 byte-identical,including2redirect aliases.",
-    "backend": "1792b8c8 READY dpl_Fjk2dW3d8nkzoqdEm3U7mYADkq5G at unchanged backend-one-gray-94.vercel.app. Real Interstellar availability200 and read-only detail buttons confirmed after one runtime-proxy timeout/native retry.",
-    "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Canonical streaming252/252 artwork and all3new FOD identities/dates verified. All249previous streaming and1176previous merged-calendar rows retained,3appended. Provider coverage remains partial.",
-    "now_playing": "Production verified. Initial100/99 inconsistency refused safely; documented equivalent read-only diagnostic validated100 titles. Direct endpoint had become consistent in successful production run40037837837, so final provenance correctly remains direct /movie/now_playing. Raw-row/pagination checks retained; daily03:13JST refresh configured, stale>36hours hidden."
+    "status": "deployment_pending",
+    "canonical_url": "https://cinelva.vercel.app",
+    "serving_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
+    "release_source_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3"
   },
-  "blockers": [
-    "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
-    "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
-    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
-  ],
-  "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live.",
+  "blockers": [],
+  "next_action": "Renew receipt for verified source 0eff8bf80a900927b19141f8dde57f6a9f108ff3; require final-head CI, merge PR541, verify Vercel production and both live journeys.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1725,10 +1731,10 @@
   "public_release_audit_20261028": {
     "status": "in_progress",
     "branch": "audit/public-release-20261028",
-    "base_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
+    "base_sha": "201b0295b96abf967e5b2e5c157eed86323d6413",
     "decision": "NO-GO",
     "report": "docs/operations/public-release-audit-20261028.md",
     "local_validation": "Current source-head exact checks passed on bc649df: four required workflows (Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build), plus backup, scorecards, Pages, mobile, brand and Full Python contract. Receipt-only commit 023afb4 references bc649df and changes quality/production-proof.json only. Latest main advanced to fa47e48; merge into PR branch had one conflict in quality/production-proof.json, resolved by preserving main proof pending final receipt refresh. Manual final-head AQG, frontend and smoke runs dispatched on 023afb4 and are in progress; backend workflow has no workflow_dispatch trigger. Source is being reconciled with latest main before accepting any final proof.",
-    "next_action": "Complete latest-main integration on audit branch; rerun local quality gate and all four required workflows on exact integrated source. Create a receipt-only proof commit for that source; dispatch final-head checks where supported and use exact source backend CI where source digest is unchanged. Verify PR mergeability and all required checks; keep NO-GO until physical iPhone, legal/material, private security intake and operations gates are cleared."
+    "next_action": "Validate integrated source after main #541; refresh receipt after four exact-source workflows, then final-head CI. Production remains NO-GO pending physical device and operations/legal evidence. Preview DATABASE_URL inheritance removed; existing previews require remediation."
   }
 }

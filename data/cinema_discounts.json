@@ -1291,7 +1291,31 @@
       "theaterUrl": "https://109cinemas.net/",
       "note": "劇場により金額が異なります。プレミアム新宿は掲載サービスの対象外。個別の料金表を確認してください。",
       "offers": [
-        {
+          {
+          "id": "109-member-tuesday",
+          "label": "シネマポイント会員 メンバーズデイ",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "access": "member",
+          "condition": "毎週火曜。対象の109シネマズ・ムービルでシネマポイント会員本人が対象。プレミアム新宿は対象外。",
+          "steps": [
+            "シネマポイント会員に登録",
+            "毎週火曜の対象上映で会員認証し、メンバーズデイ料金を選ぶ"
+          ],
+          "sourceUrl": "https://109cinemas.net/pointcard_prices.html",
+          "feeText": "入会金・年会費等の会員費用は別途必要。詳細は109シネマズ公式の最新会員条件を確認。",
+          "verifiedAt": "2026-10-29",
+          "excludedTheaters": [
+            "プレミアム新宿"
+          ],
+          "repeatability": "recurring"
+        },
+      {
           "id": "wed",
           "label": "109シネマズデイ",
           "price": 1300,

@@ -20,7 +20,7 @@
  <p class="discountMuted">県内の系列をまとめて比較し、どの系列で・いつ安く見られるかをカレンダーで確認できます。サービスデーと、繰り返し使える会員・カード・福利厚生優待を掲載しています。</p>
  <div class="discountControls">
   <div class="discountField"><span>都道府県（複数可）</span><button type="button" id="discountPrefOpen">都道府県を選択</button><span id="discountPrefSummary" class="discountMuted"></span><select id="discountPrefecture" hidden aria-hidden="true"><option value="">都道府県を選択</option>${prefectures.map(p=>`<option value="${p}">${p}</option>`).join('')}</select></div>
-  <label class="discountField" for="discountDate">鑑賞日<input type="date" id="discountDate"></label>
+  <input type="date" id="discountDate" hidden aria-hidden="true" tabindex="-1">
  </div>
  <label class="discountField discountTimeField" for="discountTime">上映時間帯<select id="discountTime"><option value="day">昼間（夜間限定割引を除外）</option><option value="evening">夜間（20時以降）</option></select></label><div id="discountTheater" class="discountMuted"></div>
  <p class="discountMuted">一般大人1名・通常2Dの鑑賞券代（税込）です。登録不要と会員・カード等の条件付き料金は別に表示します。会費・ポイント消費は含みません。初回加入・初回購入など一度限りの特典は比較対象外です。</p>

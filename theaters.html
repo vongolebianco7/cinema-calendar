@@ -135,6 +135,8 @@ html[data-theme="light"] .theaterTable .areaCell,html[data-theme="light"] .theat
 html[data-theme="light"] .theaterTable .unknownCell{color:#555a54!important}
 html[data-theme="light"] .theaterTable .verifiedCell{color:#79561e!important}
 html[data-theme="light"] .theaterTable .tableLinks a,html[data-theme="light"] .theaterTable .equipmentSource{color:#4e3a1b!important}
+.theaterTable .tableLinks .showtimeLink{cursor:pointer;min-height:40px;padding:7px 10px;border:1px solid #948061;border-radius:7px;background:#2d2418;color:#f8e7c2;font:700 12px system-ui}
+html[data-theme="light"] .theaterTable .tableLinks .showtimeLink{background:#f0e8d9!important;color:#382e1b!important;border-color:#998560!important}
 </style>
 <style id="cinelva-theater-light-contrast-late">
 html[data-theme="light"] .theaterTable{color:#242521!important}
@@ -249,7 +251,7 @@ function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filte
 function scheduleUrl(t){const schedule=(scheduleData.theaters||[]).find(x=>String(x.name||'').replace(/\s+/g,'')===String(t.name||'').replace(/\s+/g,''));if(schedule?.code)return 'https://cinema.109cinemas.net/cgi-bin/pc/site/det.cgi?tsc='+encodeURIComponent(schedule.code);if(t.scheduleUrl)return t.scheduleUrl;if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
 async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
 function param(name){return new URLSearchParams(location.search).get(name)||""}
-function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
+function updateUrl(){const p=new URLSearchParams(location.search);if(selectedTheater)p.set("theater",selectedTheater);else p.delete("theater");if(selectedDate)p.set("date",selectedDate);else p.delete("date");history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():"")+location.hash)}
 function renderTheaterChips(){
  const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
  if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
@@ -412,7 +414,8 @@ boot();
    const equipment=(screens.length?screens.map(esc).join(' / '):'<span class="unknownCell">未確認</span>')+(notes.length?'<br>'+notes.map(esc).join('<br>'):'');
    const savingsChain=globalThis.CinelvaCinemaDiscounts?.chainForTheater(t.name)||'';
    const savingsLink=savingsChain?'<a href="theaters.html?discountChain='+encodeURIComponent(savingsChain)+'&amp;discountPrefecture='+encodeURIComponent(t.prefecture||'')+'&amp;discountTheater='+encodeURIComponent(t.name)+'#discounts">安く見る方法</a>':'';
-   const links=savingsLink+(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
+   const showtimeButton='<button type="button" class="showtimeLink" data-showtime-theater="'+esc(t.name)+'">上映時間</button>';
+   const links=showtimeButton+savingsLink+(t.website?'<a target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映</a><a target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a>';
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
  function renderTheaterTable(){
@@ -450,7 +453,15 @@ boot();
    });
  }
  const input=$("#q"); if(input){const fresh=input.cloneNode(true);input.replaceWith(fresh);fresh.addEventListener('input',renderTheaterTable);}
- const timer=setInterval(()=>{if((theaters.length||osmTheaters.length)&&formatData&&Array.isArray(formatData.screens)){clearInterval(timer);renderTheaterTable();}},100);
+ document.getElementById('grid').addEventListener('click',event=>{
+   const button=event.target.closest('[data-showtime-theater]');if(!button)return;
+   const name=button.dataset.showtimeTheater;
+   const panel=document.querySelector('.schedulePanel');if(panel)panel.open=true;
+   const field=document.getElementById('scheduleQ');if(field)field.value=name;
+   selectedTheater=name;selectedDate='';renderTheaterChips();renderTheaterDetail();updateUrl();
+   panel?.scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ const timer=setInterval(()=>{if((theaters.length||osmTheaters.length||officialCinemaTheaters.length)&&formatData&&Array.isArray(formatData.screens)){clearInterval(timer);renderTheaterTable();}},100);
  setTimeout(()=>clearInterval(timer),8000);
 })();
 </script>

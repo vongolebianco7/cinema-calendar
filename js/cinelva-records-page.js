@@ -128,6 +128,31 @@
     if(state.year!==selectedYear)state.year=selectedYear;
     renderYearHeatmap();
     $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
+    // Agreed milestone design: one crown per 100 films within each 1000,
+    // and one faceted crystal per completed 1000 films.
+    let milestoneHost=document.getElementById('csLifetimeMilestones');
+    if(!milestoneHost){
+      milestoneHost=document.createElement('div');
+      milestoneHost.id='csLifetimeMilestones';
+      milestoneHost.className='cs-milestones';
+      $('csLifetime').insertAdjacentElement('afterend',milestoneHost);
+    }
+    const lifetime=all.length;
+    const crystals=Math.floor(lifetime/1000);
+    const crowns=Math.floor((lifetime%1000)/100);
+    const crownSVG='<svg class="cs-crown" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4 4.5-7 4.5 7L21 8l-2 11H5L3 8Z" fill="#b99449" stroke="#e3c47b" stroke-width="1.3"/><path d="M5 21h14" stroke="#e3c47b" stroke-width="1.6"/></svg>';
+    const crystalSVG='<svg class="cs-prism" viewBox="0 0 30 38" aria-hidden="true"><defs><linearGradient id="cinelvaCrystalGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e7e8ff"/><stop offset=".5" stop-color="#93b9e3"/><stop offset="1" stop-color="#a68fd2"/></linearGradient></defs><path d="M15 1 28 10 25 27 15 37 5 27 2 10Z" fill="url(#cinelvaCrystalGradient)" stroke="#c6c9ee" stroke-width=".8"/><path d="M2 10h26L15 37Z" fill="#9eaddf" opacity=".35"/><path d="M15 1v36M2 10l13-9 13 9M5 27l10 10 10-10" fill="none" stroke="#f3f0ff" stroke-opacity=".75" stroke-width=".8"/></svg>';
+    const crystalGroup=document.createElement('span');
+    crystalGroup.className='cs-prisms';
+    crystalGroup.setAttribute('aria-label',crystals+'個の1000本記念クリスタル');
+    crystalGroup.innerHTML=Array.from({length:crystals},()=>crystalSVG).join('');
+    const crownGroup=document.createElement('span');
+    crownGroup.className='cs-crowns';
+    crownGroup.setAttribute('aria-label',crowns+'個の100本記念王冠');
+    crownGroup.innerHTML=Array.from({length:crowns},()=>crownSVG).join('');
+    milestoneHost.replaceChildren(crystalGroup,crownGroup);
+    milestoneHost.hidden=crystals===0&&crowns===0;
+
     const statsHost=$('csExtraStats');
     if(statsHost){
       const scored=filtered.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>0);

@@ -20,8 +20,9 @@
 |---|---|---|
 |static responseにnosniff/frame/CSP等がない|クリックジャッキング等の防御不足。XSSの存在自体を証明したものではない|DENY、nosniff、referrer/permissions、CSPのbase/object/frame/form境界を追加|
 |agentがrequest.json()で全文を先に読み込む|message長チェック前の過大本文のメモリ消費|4KiBのストリーム読取上限、宣言長と実測byte双方の検証・キャンセル、string型検証|
-|agentの上流例外が未処理、timeoutなし|エラー時の安定性・情報漏えい余地|8秒timeout、汎用502、POST検証エラー含めno-store|
+|agentの上流例外が未処理、timeoutなし|エラー時の安定性・情報漏えい余地|8秒timeout、汎用502、POST検証エラー含めno-store、8秒本文期限、非同期キャンセル|
 |TMDB例外オブジェクトをconsole.warnへ渡す|例外がURL等を含む場合の秘密情報漏えい余地。漏えいの発生は未確認|固定メッセージのみ出力|
+|agentのpreflightがPOSTを許可しない|別originのJSON POSTがブラウザで拒否される|agent OPTIONSのみPOSTを許可し、読み取りAPIはGET/OPTIONSを維持|
 |Actionsが移動可能なmajor tag参照|供給網の再現性不足|公式の7種Actionの現在のcommit SHAに固定（checkout/setup-node/setup-python/upload/download/pages）|
 |privacy/termsの実通信・削除説明不足|検索語/API/画像通信、共用端末の扱いが不明|実構成に沿って通信、共用端末、削除・バックアップ、情報の範囲と権利を追記。法的承認は未了|
 
@@ -30,7 +31,7 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 ## 今回実行した検査
 
 - 基準mainおよび修正後 `python scripts/quality_gate.py`: **PASSED**。record/backup/storage、映画ID、映画賞、配信、割引、ブランド等の既存決定的回帰検査を含む。
-- `node --test tests/cinelva-release-security.test.cjs`: **9/9成功**。修正前6件失敗を確認後、宣言長/実byte/UTF-8/不正JSON/型/例外/正常結果/CORSを検証。実ユーザーデータ・外部TMDB通信なし。
+- `node --test tests/cinelva-release-security.test.cjs`: **12/12成功**。修正前6件失敗を確認後、宣言長/実byte/UTF-8/不正JSON/型/例外/正常結果/CORSを検証。実ユーザーデータ・外部TMDB通信なし。
 - `npm ci --ignore-scripts --no-audit --no-fund` と `npm audit --json`: **既知脆弱性0（124 dependencies）**。これは未公表の脆弱性がない証明ではない。
 - `npm run build`: **成功**（本番秘密情報なし）。`node tests/cinelva-backend-snapshot-smoke.cjs`: **成功**。DB接続不能の隔離fixtureでcalendar/tv/movies/theater-directory/releasesの5 APIがstatic snapshotを返し、healthが503を返すことを確認。
 - Git全履歴（local cloneのall refs）7,629 blobを高確度patternで検査: **0 findings**。GitHub token/AWS access key/private key/TMDB assignment等の限定検査。すべての種類の秘密情報や外部失効状態を網羅しない。値は報告・ログに出さない。ローテーションは未実施。
@@ -68,3 +69,5 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - ASVS: https://owasp.org/projects/asvs
 - 既存 `AGENTS.md`, `docs/operations/work-resume.md`, `quality/production-proof.json` を優先。`scripts/verify-production-release.cjs` を迂回しない。
 - 本番: https://cinelva.vercel.app 。現状の公開継続と「一般公開品質GO」の認定は別。未了項目が残る間は新たな一般公開GOを出さない。
+
+独立レビュー後、実ReadableStreamでキャンセルが停止/拒否するケースと本文停止を再現・修正。UTF-8一byte分割、期限408、超過413、POST preflightの回帰を追加。初回PR CI backend materialized-config検査は新headerテストがrootの実行時configを読んだため失敗し、既存の厳密source-configuration readerを利用するようテストを修正。guardの迂回なし。

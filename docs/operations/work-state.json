@@ -1730,7 +1730,7 @@
     "verdict": "NO-GO",
     "validation": [
       "shared quality gate passed",
-      "9 security regression tests passed",
+      "12 security regression tests passed",
       "backend build and five snapshot APIs passed",
       "npm audit 0 vulnerabilities",
       "history credential pattern scan 7629 blobs 0 findings"
@@ -1740,6 +1740,7 @@
       "local Playwright browser download fails",
       "private security contact and operational controls unverified"
     ],
-    "next_action": "Create PR; require exact-source and final-head CI; renew production receipt only after successful checks; no release bypass."
+    "next_action": "Require new exact-head CI after streamed-body review fixes and CORS preflight regression; renew receipt only after 4 required workflows pass. Preserve main event data update f6ab0998.",
+    "pull_request": 526
   }
 }

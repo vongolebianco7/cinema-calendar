@@ -42,6 +42,36 @@
  #discounts .discountDialogHead button,#discounts .discountDetailButton{cursor:pointer;border:1px solid #777;border-radius:8px;padding:9px 12px;background:#303030;color:#fff;font:inherit}
  #discounts .discountDetailButton{min-width:110px}
  #discounts .discountDetailDialog .discountWay{max-width:100%;min-width:0;overflow-wrap:anywhere}
+ #discounts .discountTable{width:100%;border-collapse:separate;border-spacing:0 8px;table-layout:fixed}
+ #discounts .discountTable caption{text-align:left;font-weight:700;padding:10px 4px}
+ #discounts .discountTable thead th{font-size:12px;letter-spacing:.02em;text-align:left;padding:10px 12px;white-space:normal}
+ #discounts .discountTable tbody tr{background:rgba(128,128,128,.075)}
+ #discounts .discountTable tbody th,#discounts .discountTable tbody td{vertical-align:middle;padding:14px 12px;border-top:1px solid rgba(128,128,128,.22);border-bottom:1px solid rgba(128,128,128,.22)}
+ #discounts .discountTable tbody th{border-left:1px solid rgba(128,128,128,.22);border-radius:12px 0 0 12px;text-align:left}
+ #discounts .discountTable tbody td:last-child{border-right:1px solid rgba(128,128,128,.22);border-radius:0 12px 12px 0}
+ #discounts .discountTable tbody th h3{font-size:15px;line-height:1.35;margin:0 0 6px}
+ #discounts .discountTable .discountPrice{font-weight:800;font-size:19px;line-height:1.3;font-variant-numeric:tabular-nums}
+ #discounts .discountTable .discountPrice small{display:block;font-size:11px;font-weight:500;line-height:1.45;margin-top:6px;overflow-wrap:anywhere}
+ #discounts .discountTheaterList{font-size:12px;font-weight:400}
+ #discounts .discountTable .discountDetailButton{width:100%;min-width:0;min-height:44px;font-size:13px}
+ @media(max-width:650px){
+  #discounts .discountTableScroll{overflow:visible}
+  #discounts .discountTable{display:block;border-spacing:0;table-layout:auto}
+  #discounts .discountTable caption{display:block;font-size:13px;padding:10px 0}
+  #discounts .discountTable thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  #discounts .discountTable tbody{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+  #discounts .discountTable tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden;border:1px solid rgba(128,128,128,.32);border-radius:14px;background:rgba(128,128,128,.07)}
+  #discounts .discountTable tbody th{grid-column:1/-1;border:0;border-bottom:1px solid rgba(128,128,128,.2);border-radius:0;padding:13px 14px}
+  #discounts .discountTable tbody td{display:block;min-width:0;border:0;border-radius:0;padding:12px 14px;overflow-wrap:anywhere}
+  #discounts .discountTable tbody td:nth-of-type(1){border-right:1px solid rgba(128,128,128,.18)}
+  #discounts .discountTable tbody td:nth-of-type(1)::before{content:'登録不要'}
+  #discounts .discountTable tbody td:nth-of-type(2)::before{content:'会員・カード等'}
+  #discounts .discountTable tbody td:nth-of-type(1)::before,#discounts .discountTable tbody td:nth-of-type(2)::before{display:block;font-size:11px;font-weight:600;opacity:.75;margin-bottom:6px}
+  #discounts .discountTable tbody td:last-child{grid-column:1/-1;border:0;border-top:1px solid rgba(128,128,128,.2);border-radius:0;padding:9px 12px}
+  #discounts .discountTable .discountDetailButton{width:100%;min-height:44px;font-size:13px}
+  #discounts .discountTable .discountPrice{font-size:20px}
+ }
+
  @media(max-width:600px){#discounts .discountDetailDialog{width:94vw;max-height:86dvh;padding:14px}#discounts .discountDialogHead{top:-14px}#discounts .discountDetailDialog p,#discounts .discountDetailDialog li{font-size:14px;line-height:1.65}}
  `;host.append(modalStyle);
  const dialog=host.querySelector('#discountDetailDialog'),dialogBody=host.querySelector('#discountDialogBody');

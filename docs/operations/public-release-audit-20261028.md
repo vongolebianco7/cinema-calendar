@@ -91,3 +91,9 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - 統合後ローカル: `python3 scripts/quality_gate.py` 成功（404 Node tests + Python/data/compliance/brand/work-state/dependency gates）。P0 security/API/records/directorに絞った38 testすべて成功。PR security browser suiteはローカルのPlaywright browser binary未導入で起動不可。WebKit/Chromium検証は修正後のGitHub Actions結果待ち。
 - 保存・バックアップ互換性の既存品質ゲートは成功。DB schema/localStorage key/バックアップ形式/ユーザーデータは変更していない。プロダクションDB/利用者記録の書込みはしていない。
 - 次: 統合ブランチをPR #528 source branchへpushし、4必須workflowとその他のrequired checksを正確なsource SHAで確認→必要ならreceipt-only commit→final-head CI→guardを維持して判断。実機iPhone、公開前法務・素材権、非公開security intake、運用/無料枠、Preview DB分離は未完了。公開判定はNO-GOのまま。
+
+### 2026-10-28 追加CI診断: built API smoke
+
+- exact head `e6cc8e7934dbba82781a530959a6c0b1ff2171b5` のFull Python contract 192件が成功。CSP/WebKit検査は別のValidate frontend workflowで継続中。
+- Reproducible backend buildはNext.js/TypeScript build、dependency audit、license inventory、secret-history scan、HTTP security testsまで成功。その後 `tests/cinelva-backend-snapshot-smoke.cjs` の実行で、同じスコープ内に `const preflight` が重複していてSyntaxErrorとなった。API handlerやPrisma build失敗ではない。
+- PR #526の追加preflight検査と#528の先行検査が二重に残っていたため、検査を1回に統合し、POST,OPTIONS/CORS/no-credentialsを同時に確認するよう修正。ローカル `node --check tests/cinelva-backend-snapshot-smoke.cjs` は成功。built backendでの再実行は修正headのActions待ち。

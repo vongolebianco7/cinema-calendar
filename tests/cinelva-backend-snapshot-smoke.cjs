@@ -24,7 +24,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   }
   const agentUrl=`http://127.0.0.1:${port}/api/agent`;
   const preflight=await fetch(agentUrl,{method:'OPTIONS',headers:{Origin:'https://cinelva.vercel.app','Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'content-type'}});
-  assert.equal(preflight.status,204);assert.match(preflight.headers.get('access-control-allow-methods'),/POST/);assert.equal(preflight.headers.get('access-control-allow-credentials'),null);
+  assert.equal(preflight.status,204);assert.equal(preflight.headers.get('access-control-allow-methods'),'POST,OPTIONS');assert.equal(preflight.headers.get('access-control-allow-credentials'),null);
   for(const [body,status] of [['{',400],[JSON.stringify({message:'a',extra:'x'.repeat(9000)}),413],[JSON.stringify({message:{a:1}}),400]]){
    const r=await fetch(agentUrl,{method:'POST',headers:{'Content-Type':'application/json'},body});assert.equal(r.status,status);assert.equal(r.headers.get('cache-control'),'no-store');
   }
@@ -36,7 +36,6 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   for (const [body,type,status] of [[' '.repeat(5000),'application/json',413],['{','application/json',400],['hello','text/plain',415],['{"message":{}}','application/json',400]]) {
    const response=await fetch(`http://127.0.0.1:${port}/api/agent`,{method:'POST',headers:{'Content-Type':type},body});assert.equal(response.status,status);assert.equal(response.headers.get('cache-control'),'no-store');
   }
-  const preflight=await fetch(`http://127.0.0.1:${port}/api/agent`,{method:'OPTIONS'});assert.equal(preflight.headers.get('access-control-allow-methods'),'POST,OPTIONS');
   const write=await fetch(`http://127.0.0.1:${port}/api/movies`,{method:'PUT',headers:{'Content-Type':'application/json'},body:'{}'});assert.equal(write.status,405);
   console.log('Built backend: five snapshot read APIs, malformed query/body boundaries, credential-free preflight and rejected catalog writes passed; health remains503.');
  }catch(error){console.error(output.slice(-3000));throw error;}finally{server.kill('SIGTERM');await new Promise(r=>server.once('exit',r));}

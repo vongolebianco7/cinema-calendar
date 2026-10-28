@@ -77,7 +77,7 @@
      const nextDate=addDays(date,i);
      if(!fresh(o,nextDate,now)||region&&!fresh(region,nextDate,now))break;
      // Explain all methods; do not infer visitor membership or screening availability.
-     if(applies({...o,requires:[],evening:false},nextDate,{})){
+     if(applies({...o,requires:[]},nextDate,{evening:!!options.evening})){
       const row={...o,nextDate};(i===0?available:upcoming).push(row);break;
      }
     }
@@ -112,7 +112,7 @@
   };
   const order=(a,b)=>a.price-b.price||(a.maxPrice||a.price)-(b.maxPrice||b.price)||String(a.id).localeCompare(String(b.id));
   const rows=[];
-  for(const c of guide(data,{date},now)){
+  for(const c of guide(data,{date,evening:!!options.evening},now)){
    if(!groups.has(c.id))continue;
    const theaters=[...groups.get(c.id)],offers=[];
    for(const o of c.available){

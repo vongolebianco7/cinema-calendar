@@ -1725,10 +1725,10 @@
   "public_release_audit_20261028": {
     "status": "in_progress",
     "branch": "audit/public-release-20261028",
-    "base_sha": "26429f4318856f685914c9d32bcfdd9e1c02563b",
+    "base_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
     "decision": "NO-GO",
     "report": "docs/operations/public-release-audit-20261028.md",
-    "local_validation": "Local python3 scripts/quality_gate.py PASS (404 Node tests plus Python/data/compliance/brand/state/dependency); focused security/API/data/director 38/38 PASS; secret scans zero. Exact head 9cc3bd0 validations found unsafe large movie ID reaching DB and WebKit isolated fixture CORS failure. Head fc7540e: backend build/API smoke passed after safe-integer validation; Python contract, smoke tests, scorecard, brand and mobile smoke passed; Validate frontend still failed because WebKit fixture requests (API preflight and local JSON) were not fully isolated. Latest fixture update returns OPTIONS 204 and fulfils same-origin JSON snapshots locally; revised exact-head CI pending.",
-    "next_action": "Publish completed WebKit fixture isolation update with exact tree verification; inspect the newest exact-head frontend/WebKit run and all other required checks. If green, follow receipt-only → final-head CI → guard. Keep release NO-GO until physical iPhone, legal/material, private security intake and operations gates reviewed."
+    "local_validation": "Current source-head exact checks passed on bc649df: four required workflows (Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build), plus backup, scorecards, Pages, mobile, brand and Full Python contract. Receipt-only commit 023afb4 references bc649df and changes quality/production-proof.json only. Latest main advanced to fa47e48; merge into PR branch had one conflict in quality/production-proof.json, resolved by preserving main proof pending final receipt refresh. Manual final-head AQG, frontend and smoke runs dispatched on 023afb4 and are in progress; backend workflow has no workflow_dispatch trigger. Source is being reconciled with latest main before accepting any final proof.",
+    "next_action": "Complete latest-main integration on audit branch; rerun local quality gate and all four required workflows on exact integrated source. Create a receipt-only proof commit for that source; dispatch final-head checks where supported and use exact source backend CI where source digest is unchanged. Verify PR mergeability and all required checks; keep NO-GO until physical iPhone, legal/material, private security intake and operations gates are cleared."
   }
 }

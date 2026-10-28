@@ -294,8 +294,10 @@ const { chromium, webkit } = require("playwright"),
         );
         throw e;
       });
-    assert.equal(await dp.locator('#csPrisms,#csCrowns,.cs-prism,.cs-crown').count(),0,
-      'retired lifetime reward decorations must stay removed at1000 records');
+    assert.equal(await dp.locator('#csLifetimeMilestones .cs-prism').count(),1,
+      '1000 records should display one crystal');
+    assert.equal(await dp.locator('#csLifetimeMilestones .cs-crown').count(),0,
+      '1000 records should reset the crown count');
     await dp.locator('[data-tab="records"]').click();
     assert.equal(
       await dp.locator("#recordList [data-record-card]").count(),

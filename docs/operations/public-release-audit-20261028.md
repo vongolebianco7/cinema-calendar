@@ -106,3 +106,10 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - 再開: 最新PR #528 headのValidate frontend、Reproducible backend build、他required checksを確認し、失敗時はjob logを読み、receipt-only/final-head CI/guard手順を維持する。
 
 - 追試 `fc7540e`: backend build/API smokeとFull Python contract、brand、mobile smokeは成功。Validate frontendはWebKitのCORSアクセス拒否が残った。fixtureのOPTIONS preflightを204で返し、same-origin JSON snapshotもfixtureで完結させる修正を追加。実際のCSPヘッダーは維持し、次headで再検査。
+
+
+## 2026-10-29 main同期
+
+- PR #528のsource checks完了後、mainが `fa47e48ac63c87fb8a35d72b60d4a48a137fec36` まで7 commit進んでいたため、latest mainを監査ブランチへ統合。production-proof.jsonのみ競合し、旧監査head由来の証明を保持せずmain側の既存receiptを保持して解消。統合headでの4必須workflow、source digest再計算、receipt refreshが必要。
+- receipt-only head `023afb4` の最終CIは、Autonomous quality gate / Validate frontend / CINELVA smoke testsをworkflow_dispatchで手動起動し、Reproducible backend buildはreceipt-only変更がソースに無いため、直前の完全source headの成功runを確認する方針。現在3 runは進行中。
+- 公開判定NO-GO。iPhone実機、素材権・法務、非公開security intake、Preview DB/運用/free quota未確認。

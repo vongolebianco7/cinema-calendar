@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "bc649df5d3c4f28b70a48f0f03b697ae8086718f",
-  "verified_at": "2026-10-28T19:51:59.890Z",
-  "note": "PR #528 exact-source CI succeeded: Autonomous quality gate 40707124924, CINELVA smoke tests 40707124839, Validate frontend 40707124850, Reproducible backend build 40707124872. Source digest binds the executable tree at the verified source head. Receipt-only; does not certify physical iPhone acceptance or clear the separate legal, rights, private security intake and operations release gates."
+  "head_sha": "94f3bb9f3b1cd6edcf21a8b9a6f540ae0bdde2af",
+  "verified_at": "2026-10-29T00:00:00.000Z",
+  "note": "PR #537: cinema discount modal and time-of-day filtering. All four required PR CI workflows succeeded on exact source head SHA; receipt-only change excluded from executable digest."
 }

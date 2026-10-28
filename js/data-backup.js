@@ -55,5 +55,48 @@
    throw Error(rollbackFailed?'復元に失敗しました。一部の追加データが残った可能性があります。バックアップを保持してください。':'復元できませんでした。今回追加したデータを取り消しました。既存データとバックアップは保持されています。');}
   return{written:written.length,skipped};
  }
- root.CinemapBackup={inspect,exportData,restore};
+
+ // Preview and merge ONLY the current My Cinelva record key. Never modify other backup keys.
+ const RECORD_KEY='cinelva-library-records-v2';
+ const LEGACY_KEY='cinemap-viewing-records-v1';
+ function recordMap(raw,label){
+  if(raw===null)return {};
+  let data;try{data=JSON.parse(raw)}catch{throw Error(label+'を読み取れません。既存データは変更していません。')}
+  if(!object(data)||!validPayload(RECORD_KEY,JSON.stringify(data)))throw Error(label+'の形式が不正です。既存データは変更していません。');
+  return data;
+ }
+ function mergePlan(storage,text){
+  if(!storage)throw Error('保存領域を利用できません。');
+  const data=inspect(text);
+  if(!Object.prototype.hasOwnProperty.call(data.entries,RECORD_KEY))throw Error('ファイルにMy Cinelvaの鑑賞記録がありません。');
+  const incoming=recordMap(data.entries[RECORD_KEY],'取り込み元の鑑賞記録');
+  const existing=recordMap(storage.getItem(RECORD_KEY),'現在の鑑賞記録');
+  const legacyRaw=storage.getItem(LEGACY_KEY);
+  let legacy={};if(legacyRaw!==null){try{legacy=JSON.parse(legacyRaw)}catch{throw Error('旧鑑賞記録を読み取れません。')};if(!object(legacy))throw Error('旧鑑賞記録の形式が不正です。')}
+  const deletedRaw=storage.getItem('cinelva-library-deleted-legacy-v1');
+  let deleted=[];if(deletedRaw!==null){try{deleted=JSON.parse(deletedRaw)}catch{throw Error('旧鑑賞記録の削除情報を読み取れません。')};if(!Array.isArray(deleted))throw Error('旧鑑賞記録の削除情報が不正です。')}
+  const hidden=new Set(deleted.map(String));
+  const existingIds=new Set([...Object.keys(existing),...Object.keys(legacy).filter(id=>!hidden.has(id))]);
+  const additions={};let skipped=0;
+  for(const [id,record] of Object.entries(incoming)){
+   if(existingIds.has(id)){skipped++;continue}
+   additions[id]=record;
+  }
+  return {existing,incoming,additions,added:Object.keys(additions).length,skipped,existingCount:existingIds.size,rawBefore:storage.getItem(RECORD_KEY)};
+ }
+ function previewRecordMerge(storage,text){
+  const p=mergePlan(storage,text);
+  return {existing:p.existingCount,incoming:Object.keys(p.incoming).length,added:p.added,skipped:p.skipped};
+ }
+ function mergeRecords(storage,text){
+  const p=mergePlan(storage,text);
+  if(!p.added)return {added:0,skipped:p.skipped};
+  // Re-read just before writing: reject concurrent modifications instead of overwriting them.
+  if(storage.getItem(RECORD_KEY)!==p.rawBefore)throw Error('鑑賞記録が変更されました。再度ファイルを選択してください。');
+  const combined={...p.existing,...p.additions};
+  try{storage.setItem(RECORD_KEY,JSON.stringify(combined))}
+  catch{throw Error('保存できませんでした。元の記録は保持されています。')}
+  return {added:p.added,skipped:p.skipped};
+ }
+ root.CinemapBackup={inspect,exportData,restore,previewRecordMerge,mergeRecords};
 })(typeof window==='undefined'?globalThis:window);

@@ -126,6 +126,16 @@ button.active *,.chip.active *,.dateBtn.active *,.modeTab.active *{color:#111!im
 </style>
 
 
+<style id="cinelva-theater-light-contrast-fix">
+html[data-theme="light"] .theaterTable{color:#242521!important}
+html[data-theme="light"] .theaterTable th{background:#e8e3d9!important;color:#31312e!important}
+html[data-theme="light"] .theaterTable td{background:#fffefa!important;color:#31312e!important}
+html[data-theme="light"] .theaterTable .theaterName{color:#22231f!important}
+html[data-theme="light"] .theaterTable .areaCell,html[data-theme="light"] .theaterTable .equipmentCell{color:#4a4c46!important}
+html[data-theme="light"] .theaterTable .unknownCell{color:#555a54!important}
+html[data-theme="light"] .theaterTable .verifiedCell{color:#79561e!important}
+html[data-theme="light"] .theaterTable .tableLinks a,html[data-theme="light"] .theaterTable .equipmentSource{color:#4e3a1b!important}
+</style>
 <style id="cinemap-theater-table-v1">
 html,body{overflow-x:hidden}
 .theaterTableWrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);scrollbar-width:thin}
@@ -220,10 +230,10 @@ html,body{overflow-x:hidden}
 <script src="js/cinelva-theater-schedule.js?v=20261017"></script>
 <script>
 const $=s=>document.querySelector(s);
-let theaters=[],osmTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
+let theaters=[],osmTheaters=[],officialCinemaTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
-function scheduleUrl(t){if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
+function scheduleUrl(t){const schedule=(scheduleData.theaters||[]).find(x=>String(x.name||'').replace(/\s+/g,'')===String(t.name||'').replace(/\s+/g,''));if(schedule?.code)return 'https://cinema.109cinemas.net/cgi-bin/pc/site/det.cgi?tsc='+encodeURIComponent(schedule.code);if(t.scheduleUrl)return t.scheduleUrl;if(t.website)return t.website;const q=[t.name,"上映スケジュール","公式"].filter(Boolean).join(" ");return "https://www.google.com/search?q="+encodeURIComponent(q)}
 async function backend(){try{const r=await fetch("data/backend.json?"+Date.now(),{cache:"no-store"});if(!r.ok)return null;const c=await r.json();return c&&c.enabled&&c.base_url?String(c.base_url).replace(/\/$/,""):null}catch(e){return null}}
 function param(name){return new URLSearchParams(location.search).get(name)||""}
 function updateUrl(){const p=new URLSearchParams();if(selectedTheater)p.set("theater",selectedTheater);if(selectedDate)p.set("date",selectedDate);history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""))}
@@ -231,14 +241,14 @@ function renderTheaterChips(){
  const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
  if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
  const available=CinelvaTheaterSchedule.snapshot(scheduleData).rows;
- const scheduleNames=new Set(available.map(x=>x.theater)),list=directoryCache.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(" ").toLowerCase().includes(q)).slice(0,30);
- $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(t.name===selectedTheater?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(t.name)?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
+ const scheduleNames=new Set(available.map(x=>normName(x.theater))),list=directoryCache.filter(t=>matchesTheaterSearch(t,q)).slice(0,30);
+ $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(normName(t.name)===normName(selectedTheater)?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(normName(t.name))?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
 }
 function renderTheaterDetail(){
- const snapshot=CinelvaTheaterSchedule.snapshot(scheduleData),defs=scheduleData.theaters||[],def=defs.find(t=>t.name===selectedTheater),rows=snapshot.rows.filter(x=>x.theater===selectedTheater).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+ const snapshot=CinelvaTheaterSchedule.snapshot(scheduleData),defs=scheduleData.theaters||[],def=defs.find(t=>normName(t.name)===normName(selectedTheater)),rows=snapshot.rows.filter(x=>normName(x.theater)===normName(selectedTheater)).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
  if(!snapshot.fresh||!rows.length){
-  const t=directoryCache.find(x=>x.name===selectedTheater)||def;
+  const t=directoryCache.find(x=>normName(x.name)===normName(selectedTheater))||def;
   const reason=!snapshot.fresh
    ? '上映時刻の更新が24時間以内に確認できないため、取得済み時刻は表示していません。'
    : '本日以降の取得済み上映時刻はありません。上映状況は公式スケジュールで確認してください。';
@@ -284,13 +294,15 @@ function renderDirectory(){
  $("#grid").innerHTML=list.length?list.map(t=>{const place=[t.prefecture,t.municipality,t.address].filter(Boolean).join(" ");return '<article class="card"><h3>'+esc(t.name||"名称未登録")+'</h3><div class="place">'+esc(place||"所在地未登録")+'</div><div class="btns">'+(t.website?'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+esc(t.website)+'">公式</a>':'')+'<a class="btn" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">上映スケジュール</a><a class="btn" target="_blank" rel="noopener noreferrer" href="'+mapsUrl(t)+'">地図</a></div></article>'}).join(""):'<div class="empty">該当する映画館がありません。</div>'
 }
 async function loadDirectory(base){
+ try{const r=await fetch('data/cinema_discounts.json',{cache:'no-store'});if(r.ok){const d=await r.json();const venues=d.venues||[];officialCinemaTheaters=(d.regionalCoverage||[]).flatMap(region=>(region.theaters||[]).map(name=>({name,prefecture:region.prefecture,municipality:'',address:'',source:'cinema-discounts-official',source_id:region.prefecture+'-'+name,website:'',scheduleUrl:venues.find(v=>String(v.name).replace(/\s+/g,'')===String(name).replace(/\s+/g,''))?.scheduleUrl||'',source_url:region.sourceUrl})));}}catch(_){}
+
  let loaded=[];
  if(base){try{const r=await fetch(base+"/api/theater-directory",{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||[]}}catch(_){}}
  if(!loaded.length){try{const r=await fetch("data/theaters_master.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();loaded=d.theaters||d||[]}}catch(_){}}
  theaters=Array.isArray(loaded)?loaded:[];
  try{const r=await fetch("data/theaters_osm.json?"+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();osmTheaters=d.theaters||[]}}catch(_){}
  renderDirectory();
- $("#scheduleMeta").textContent=CinelvaTheaterQuality.directory([...theaters,...osmTheaters]).length+"館収録"
+ $("#scheduleMeta").textContent=CinelvaTheaterQuality.directory([...officialCinemaTheaters,...theaters,...osmTheaters]).length+"館収録"
 }
 async function loadSchedules(){
  try{
@@ -315,11 +327,12 @@ boot();
 
 <script id="cinemap-theater-table-js-v1">
 (function(){
- const normName=s=>String(s||'').replace(/[\s　・･\.\-（）()]/g,'').toLowerCase();
+ const normName=s=>String(s||'').normalize('NFKC').replace(/[\s　・･\.\-（）()]/g,'').toLowerCase();
+ const matchesTheaterSearch=(t,q)=>{const n=normName(t.name),wanted=normName(q);return [n,n.replace(/シネマズ|シネマ/g,''),normName([t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(''))].some(x=>x.includes(wanted));};
  const genericNames=new Set(['tohoシネマ','tohoシネマズ','tジョイ','t・ジョイ','ティジョイ','イオンシネマ','movix','ユナイテッドシネマ','ユナイテッド・シネマ','109シネマズ']);
  window.isGenericChainOnly=function(t){
    const n=String(t&&t.name||'').trim().toLowerCase();
-   return genericNames.has(n) && !(t&&t.address) && !(t&&t.municipality);
+   return genericNames.has(n);
  };
  window.strictTheaterFormatRows=function(t){
    const tn=normName(t&&t.name);
@@ -389,12 +402,12 @@ boot();
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
  function renderTheaterTable(){
-   const candidates=CinelvaTheaterQuality.directory([...theaters,...osmTheaters]).filter(t=>!window.isGenericChainOnly(t));
+   const candidates=CinelvaTheaterQuality.directory([...officialCinemaTheaters,...theaters,...osmTheaters]).filter(t=>!window.isGenericChainOnly(t));
    let directory=equipmentFilter?window.equipmentTheaters(candidates,equipmentFilter):candidates;
    if(prefectureFilter)directory=directory.filter(t=>String(t.prefecture||'')===prefectureFilter);
    directoryCache=directory;
    const q=$("#q").value.trim().toLowerCase();
-   if(q)directory=directory.filter(t=>[t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(' ').toLowerCase().includes(q));
+   if(q)directory=directory.filter(t=>matchesTheaterSearch(t,q));
    if(!q&&!equipmentFilter&&!prefectureFilter){$("#meta").textContent=directory.length+'館収録 · 名前・地域、または上映方式で探せます';$("#grid").innerHTML='<div class="empty">映画館名・住所・地域を入力するか、上映方式を選んでください。</div>';return}
    $("#meta").textContent=directory.length+'件表示'+(equipmentFilter?' · '+equipmentFilter+'（設備登録・休止中を含む）':'')+(prefectureFilter?' · '+prefectureFilter:'');
    if(!directory.length){$("#grid").innerHTML='<div class="empty">条件に合う映画館がありません。</div>';return}

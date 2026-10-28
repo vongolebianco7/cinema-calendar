@@ -50,7 +50,7 @@
   const onSearchPage=/\/search\.html$/.test(location.pathname);
   const cache=new Map(),profiles=new Map();let localCatalog,localPeople,savedDirectors,featureIndex,sequence=0;
   const dataUrl=name=>new URL('../data/'+name,script).href;
-  const get=async(url,signal,timeout=15000)=>{const controller=new AbortController(),abort=()=>controller.abort();if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(abort,timeout);try{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error('search unavailable');return await r.json();}finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}};
+  const get=async(url,signal,timeout=6000)=>{const controller=new AbortController(),abort=()=>controller.abort();if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(abort,timeout);try{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error('search unavailable');return await r.json();}finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}};
   const catalog=()=>localCatalog||(localCatalog=get(dataUrl('movies.json')).then(d=>Array.isArray(d)?d:d.movies||[]).catch(()=>[]));
   const directors=()=>localPeople||(localPeople=get(dataUrl('director_name_readings.json')).then(d=>Object.entries(d.directors||{}).map(([id,p])=>({...p,id:Number(id),name:p.nameJa||p.original_name}))).catch(()=>[]));
   async function personMatches(term,signal,partial){
@@ -69,7 +69,7 @@
     return {movies,people,failed:!remote&&peopleFailed};};
    const emit=()=>{if(!signal?.aborted)partial?.({...result(),pending:true});};
    const updatePeople=d=>{people=d.people;peopleFailed=d.failed;emit();};
-   await Promise.allSettled([get(api+'/api/movies?q='+encodeURIComponent(term)+'&limit=100',signal).then(d=>{remote=d;emit();}),personMatches(term,signal,updatePeople).then(updatePeople),catalog().then(d=>{local=d;emit();})]);
+   await Promise.allSettled([get(api+'/api/movies?q='+encodeURIComponent(term)+'&limit=100',signal,15000).then(d=>{remote=d;emit();}),personMatches(term,signal,updatePeople).then(updatePeople),catalog().then(d=>{local=d;emit();})]);
    if(signal?.aborted)throw Error('cancelled');
    const d=result();if(remote&&!peopleFailed){if(cache.size>=32)cache.delete(cache.keys().next().value);cache.set(key,d);}return d;
   }

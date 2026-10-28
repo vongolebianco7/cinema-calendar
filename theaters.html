@@ -254,14 +254,15 @@ function renderTheaterChips(){
  const q=($("#scheduleQ")?.value||"").trim().toLowerCase();
  if(!q){$("#theaterChips").innerHTML='<span class="empty">映画館名や地域を入力すると候補が表示されます。</span>';return}
  const available=CinelvaTheaterSchedule.snapshot(scheduleData).rows;
- const scheduleNames=new Set(available.map(x=>normName(x.theater))),list=directoryCache.filter(t=>matchesTheaterSearch(t,q)).slice(0,30);
+ const all=CinelvaTheaterQuality.directory([...theaters,...osmTheaters]);
+ const scheduleNames=new Set(available.map(x=>normName(x.theater))),list=all.filter(t=>!window.isGenericChainOnly(t)&&matchesTheaterSearch(t,q)).slice(0,30);
  $("#theaterChips").innerHTML=list.length?list.map(t=>'<button class="chip '+(normName(t.name)===normName(selectedTheater)?'active':'')+'" data-theater="'+esc(t.name)+'">'+esc(t.name)+(scheduleNames.has(normName(t.name))?' <span style="opacity:.65">取得済み上映時間あり</span>':'')+'</button>').join(""):'<span class="empty">該当する映画館がありません。</span>';
  document.querySelectorAll("[data-theater]").forEach(b=>b.onclick=()=>{selectedTheater=b.dataset.theater;selectedDate="";renderTheaterChips();renderTheaterDetail();updateUrl()})
 }
 function renderTheaterDetail(){
  const snapshot=CinelvaTheaterSchedule.snapshot(scheduleData),defs=scheduleData.theaters||[],def=defs.find(t=>normName(t.name)===normName(selectedTheater)),rows=snapshot.rows.filter(x=>normName(x.theater)===normName(selectedTheater)).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
  if(!snapshot.fresh||!rows.length){
-  const t=directoryCache.find(x=>normName(x.name)===normName(selectedTheater))||def;
+  const t=CinelvaTheaterQuality.directory([...theaters,...osmTheaters]).find(x=>normName(x.name)===normName(selectedTheater))||def;
   const reason=!snapshot.fresh
    ? '上映時刻の更新が24時間以内に確認できないため、取得済み時刻は表示していません。'
    : '本日以降の取得済み上映時刻はありません。上映状況は公式スケジュールで確認してください。';
@@ -270,7 +271,7 @@ function renderTheaterDetail(){
    : '<div class="empty">映画館を選択してください。</div>';
   return;
  }
- if(!def){const t=directoryCache.find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinelva内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
+ if(!def){const t=CinelvaTheaterQuality.directory([...theaters,...osmTheaters]).find(x=>x.name===selectedTheater);$("#theaterDetail").innerHTML=t?'<div class="theaterHero"><h2>'+esc(t.name)+'</h2><div class="area">'+esc([t.prefecture,t.municipality,t.address].filter(Boolean).join(" "))+'</div></div><div class="verifiedNote">Cinelva内に取得済み上映時刻はありません。公式スケジュールで確認できます。</div><a class="official" target="_blank" rel="noopener noreferrer" href="'+scheduleUrl(t)+'">公式の上映スケジュールを確認</a>':'<div class="empty">映画館を選択してください。</div>';return}
  const dates=[...new Set(rows.map(x=>x.date))].sort(),today=snapshot.today;
  if(!selectedDate||!dates.includes(selectedDate)){
    const requested=param("date");

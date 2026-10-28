@@ -52,6 +52,7 @@ const { chromium } = require("playwright"),
     const films=Array.from({length:45},(_,i)=>({id:10000+i,tmdbId:10000+i,title:'スター・ウォーズ 検証映画'+(i+1),year:'2000',catalog:true}));
     await page.route("**/api/movies?*",r=>r.fulfill({json:{movies:[],external:films,external_search:{truncated:false,incomplete:false}},headers:{"access-control-allow-origin":"*"}}));
     await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:'domcontentloaded'});
+    await page.locator('.gSearch[role="combobox"]').waitFor();
     await page.locator('.gSearch').fill('スターウォーズ');
     await page.waitForFunction(()=>document.querySelectorAll('.cinelva-search-suggestions [role="option"]').length===45);
     assert.equal(await page.locator('.cinelva-search-suggestions [role="option"]').count(),45);

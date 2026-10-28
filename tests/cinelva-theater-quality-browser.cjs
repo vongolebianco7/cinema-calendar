@@ -13,7 +13,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/theaters.html?search=Cinema`);
   await page.locator('#grid .theaterTable').waitFor();
-  assert.equal(await page.locator('#grid .theaterName').count(),2);
+  assert.equal((await page.locator('#grid .theaterName').allTextContents()).filter(name=>name==='Cinema').length,2);
   assert.equal(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.some(s=>s.includes('closed'))),false);
   assert.match(await page.locator('#theaterOperationNote').innerText(),/営業状況は未確認/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);

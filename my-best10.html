@@ -136,6 +136,34 @@ async function best10Catalog(){
  if(!best10CatalogPromise)best10CatalogPromise=fetch("data/movies.json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("Local movie catalog HTTP "+r.status);return r.json()}).then(d=>Array.isArray(d)?d:Array.isArray(d.movies)?d.movies:[]).catch(e=>{best10CatalogPromise=null;throw e;});
  return best10CatalogPromise;
 }
+const best10PosterUrl=movie=>{const raw=String(movie?.poster||movie?.posterUrl||movie?.poster_path||'');if(/^\/[A-Za-z0-9_-]+\.(jpg|jpeg|png|webp)$/i.test(raw))return 'https://image.tmdb.org/t/p/w342'+raw;if(/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\//i.test(raw))return raw;return ''};
+async function hydrateBest10Posters(){
+ const missing=picks.filter(m=>!best10PosterUrl(m));if(!missing.length)return;
+ let updated=false;
+ try{
+  const movies=await best10Catalog();
+  for(const m of missing){
+   const id=String(m.tmdbId||m.tmdb_id||m.id||'');
+   const title=best10Normalize(m.title),year=String(m.year||'');
+   const found=movies.find(x=>id&&String(x.tmdbId||x.tmdb_id||x.id||'')===id)||movies.find(x=>year&&String(x.year||String(x.release_date||'').slice(0,4))===year&&best10Normalize(x.title)===title);
+   const url=found&&best10PosterUrl(found);
+   if(url){m.poster=url;updated=true;}
+  }
+ }catch(_){}
+ const still=picks.filter(m=>!best10PosterUrl(m)&&/^\d+$/.test(String(m.tmdbId||m.tmdb_id||m.id||''))).slice(0,10);
+ for(const movie of still){
+  try{
+   const id=String(movie.tmdbId||movie.tmdb_id||movie.id),res=await fetch(API+'/api/movie-detail?id='+encodeURIComponent(id),{cache:'force-cache'});
+   if(!res.ok)continue;
+   const data=await res.json(),found=data.movie||data;
+   if(String(found.tmdbId||found.tmdb_id||found.id)!==id)continue;
+   const url=best10PosterUrl(found);
+   if(url){movie.poster=url;updated=true;}
+  }catch(_){}
+ }
+ if(updated){try{localStorage.setItem('cinemap-my-list',JSON.stringify(picks))}catch(_){}render();}
+}
+window.hydrateBest10Posters=hydrateBest10Posters;
 async function search(){
  const term=q.value.trim(),box=document.getElementById("results"),seq=++best10SearchSeq;
  if(!term){box.textContent="作品名を入力してください。";return;}
@@ -149,7 +177,7 @@ async function search(){
  if(seq===best10SearchSeq&&!successes)box.textContent="検索サーバーに接続できませんでした。時間をおいて再検索してください。";
 }
 document.getElementById("go").onclick=search;q.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();search();}};["title","sub"].forEach(id=>document.getElementById(id).oninput=render);function syncThemeChoices(){const v=document.getElementById("theme").value;document.querySelectorAll("button[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===v))}
-document.querySelectorAll("button[data-theme]").forEach(b=>b.onclick=()=>{document.getElementById("theme").value=b.dataset.theme;syncThemeChoices();render()});document.getElementById("saveList").onclick=()=>{localStorage.setItem("cinemap-my-saved-list",JSON.stringify(snapshot()));document.getElementById("msg").textContent="現在のMy Cinelva Best 10を保存しました。"};document.getElementById("loadList").onclick=()=>{const s=JSON.parse(localStorage.getItem("cinemap-my-saved-list")||"null");if(!s){document.getElementById("msg").textContent="保存済みのリストはありません。";return}picks=Array.isArray(s.picks)?s.picks.slice(0,10):[];if(s.title!=null)document.getElementById("title").value=s.title;if(s.sub!=null)document.getElementById("sub").value=s.sub;if(s.theme!=null)document.getElementById("theme").value=/^(minimal|noir|burgundy|bluegray)$/.test(s.theme)?s.theme:"minimal";if(s.format)document.getElementById("format").value=s.format;if(s.cinemaBackground)document.getElementById("cinemaBackground").value=s.cinemaBackground;if(s.layout){document.getElementById("layout").value=["single","double"].includes(s.layout)?s.layout:"single"}syncThemeChoices();persist();document.getElementById("msg").textContent="保存済みのMy Cinelva Best 10を読み込みました。"};document.getElementById("clear").onclick=()=>{picks=[];persist()};document.getElementById("copy").onclick=async()=>{let t=document.getElementById("title").value+"\n\n"+picks.map((m,i)=>(i+1)+". "+m.title+(m.year?" ("+m.year+")":"")).join("\n")+"\n\n#Cinelva";await navigator.clipboard.writeText(t);document.getElementById("msg").textContent="リストをコピーしました。"};document.getElementById("save").onclick=saveArtwork;document.getElementById("saveToPhotos").onclick=openImageForSaving;document.getElementById("closeSaveImage").onclick=()=>document.getElementById("saveImageDialog").close();document.getElementById("share").onclick=shareArtwork;["format","layout","cinemaBackground"].forEach(id=>document.getElementById(id).onchange=render);syncThemeChoices();render();</script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const o=()=>{d.classList.add("show");m.classList.add("show")},c=()=>{d.classList.remove("show");m.classList.remove("show")};b.onclick=o;m.onclick=c;if(x)x.onclick=c})();</script><script src="js/cinelva-library-records.js?v=20261026-top-ratings"></script><script>
+document.querySelectorAll("button[data-theme]").forEach(b=>b.onclick=()=>{document.getElementById("theme").value=b.dataset.theme;syncThemeChoices();render()});document.getElementById("saveList").onclick=()=>{localStorage.setItem("cinemap-my-saved-list",JSON.stringify(snapshot()));document.getElementById("msg").textContent="現在のMy Cinelva Best 10を保存しました。"};document.getElementById("loadList").onclick=()=>{const s=JSON.parse(localStorage.getItem("cinemap-my-saved-list")||"null");if(!s){document.getElementById("msg").textContent="保存済みのリストはありません。";return}picks=Array.isArray(s.picks)?s.picks.slice(0,10):[];if(s.title!=null)document.getElementById("title").value=s.title;if(s.sub!=null)document.getElementById("sub").value=s.sub;if(s.theme!=null)document.getElementById("theme").value=/^(minimal|noir|burgundy|bluegray)$/.test(s.theme)?s.theme:"minimal";if(s.format)document.getElementById("format").value=s.format;if(s.cinemaBackground)document.getElementById("cinemaBackground").value=s.cinemaBackground;if(s.layout){document.getElementById("layout").value=["single","double"].includes(s.layout)?s.layout:"single"}syncThemeChoices();persist();hydrateBest10Posters();document.getElementById("msg").textContent="保存済みのMy Cinelva Best 10を読み込みました."};document.getElementById("clear").onclick=()=>{picks=[];persist()};document.getElementById("copy").onclick=async()=>{let t=document.getElementById("title").value+"\n\n"+picks.map((m,i)=>(i+1)+". "+m.title+(m.year?" ("+m.year+")":"")).join("\n")+"\n\n#Cinelva";await navigator.clipboard.writeText(t);document.getElementById("msg").textContent="リストをコピーしました。"};document.getElementById("save").onclick=saveArtwork;document.getElementById("saveToPhotos").onclick=openImageForSaving;document.getElementById("closeSaveImage").onclick=()=>document.getElementById("saveImageDialog").close();document.getElementById("share").onclick=shareArtwork;["format","layout","cinemaBackground"].forEach(id=>document.getElementById(id).onchange=render);syncThemeChoices();render();hydrateBest10Posters();</script><script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const o=()=>{d.classList.add("show");m.classList.add("show")},c=()=>{d.classList.remove("show");m.classList.remove("show")};b.onclick=o;m.onclick=c;if(x)x.onclick=c})();</script><script src="js/cinelva-library-records.js?v=20261026-top-ratings"></script><script>
 /* Ranking import is deliberately transactional: do not touch the current list until the user confirms. */
 (function(){
  const button=document.getElementById('applyTopRatings');
@@ -186,6 +214,7 @@ document.querySelectorAll("button[data-theme]").forEach(b=>b.onclick=()=>{docume
   pending=null;
   picks=selected;
   persist();
+  window.hydrateBest10Posters?.();
   dialog.close();
   document.getElementById('msg').textContent='MY評価上位'+selected.length+'作品を反映しました。';
  });

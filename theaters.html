@@ -416,7 +416,8 @@ boot();
    return '<tr><td><div class="theaterName">'+esc(t.name||'店舗未確認')+'</div></td><td class="areaCell">'+esc(place)+'</td><td>'+cellFormats(rows,'imax')+'</td><td>'+cellFormats(rows,'dolby')+'</td><td>'+cellFormats(rows,'motion')+'</td><td>'+cellFormats(rows,'screenx')+'</td><td class="equipmentCell">'+equipment+(source?'<br><a class="equipmentSource" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式設備情報</a>':'')+'</td><td><div class="tableLinks">'+links+'</div></td></tr>';
  }
  function renderTheaterTable(){
-   const candidates=CinelvaTheaterQuality.directory([...officialCinemaTheaters,...theaters,...osmTheaters]).filter(t=>!window.isGenericChainOnly(t));
+   const verifiedKeys=new Set(officialCinemaTheaters.map(t=>normName(t.name)+'|'+t.prefecture));
+   const candidates=CinelvaTheaterQuality.directory([...officialCinemaTheaters,...theaters,...osmTheaters]).filter(t=>!window.isGenericChainOnly(t)&&(t.source==='cinema-discounts-official'||!verifiedKeys.has(normName(t.name)+'|'+t.prefecture)));
    let directory=equipmentFilter?window.equipmentTheaters(candidates,equipmentFilter):candidates;
    if(prefectureFilter)directory=directory.filter(t=>String(t.prefecture||'')===prefectureFilter);
    directoryCache=directory;

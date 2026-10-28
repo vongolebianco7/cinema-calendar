@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "94f3bb9f3b1cd6edcf21a8b9a6f540ae0bdde2af",
-  "verified_at": "2026-10-29T00:00:00.000Z",
-  "note": "PR #537: cinema discount modal and time-of-day filtering. All four required PR CI workflows succeeded on exact source head SHA; receipt-only change excluded from executable digest."
+  "head_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3",
+  "verified_at": "2026-10-28T21:11:04.361Z",
+  "note": "PR #541: unified festival/event calendar and corrected credits My Cinelva navigation. All four required exact-source workflows succeeded; receipt-only commit excludes no executable changes."
 }

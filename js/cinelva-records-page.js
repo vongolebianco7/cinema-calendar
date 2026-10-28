@@ -1118,8 +1118,17 @@
         ['鑑賞率',ratio===null?'—':ratio+'%'],['MY平均評価',average===null?'—':average.toFixed(2)+' / 5.0'],
         ['MY評価済み',reviewed.length+'本'],['MY 4.0以上',high+'本']
       ].map(([name,value])=>'<div class="director-profile-stat"><span>'+escapeHTML(name)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div><p>MY平均は評価済み作品のみ。総数・鑑賞率は確認済み監督クレジットを基準にしています。</p></section>';
+      const scoredFilms=group.records.map(movie=>Number(movie.rating)).filter(value=>Number.isFinite(value)&&value>0);
+      const averageScore=scoredFilms.length?scoredFilms.reduce((sum,v)=>sum+v,0)/scoredFilms.length:null;
+      const strongScores=scoredFilms.filter(value=>value>=4).length;
+      const completion=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;
+      const directorStats='<section class="director-profile-dashboard" aria-label="'+escapeHTML(group.name)+'の鑑賞ダッシュボード"><h4>鑑賞ダッシュボード</h4><div class="director-profile-statgrid">'+[
+       ['鑑賞した作品',watchedCount+'本'],['監督作品の収録数',catalogAvailable?films.length+'本':'未確認'],
+       ['鑑賞率',completion===null?'—':completion+'%'],['MY平均評価',averageScore===null?'—':averageScore.toFixed(2)+' / 5.0'],
+       ['評価した作品',scoredFilms.length+'本'],['MY 4.0以上',strongScores+'本']
+      ].map(([label,value])=>'<div class="director-profile-stat"><span>'+escapeHTML(label)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div><p>MY平均評価は評価済み作品のみから計算。総作品数・鑑賞率は確認できた監督クレジットを基準としています。</p></section>';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+progress+'</strong>'+progressTrack+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+biography+'</div></div>'+
-        directorStats+'<div class="director-poster-grid">'+films.map((movie,index)=>filmTile(movie,watched.has(String(movie.id)),group.name,index)).join('')+'</div>'+
+        directorStats+directorStats+'<div class="director-poster-grid">'+films.map((movie,index)=>filmTile(movie,watched.has(String(movie.id)),group.name,index)).join('')+'</div>'+
         '<p class="director-coverage-note">'+coverageNote+(sourceUrl?' <a href="'+escapeHTML(sourceUrl)+'" target="_blank" rel="noopener noreferrer">監督の出典情報</a>':'')+'</p>';
       const close=document.createElement('button');
       close.type='button';

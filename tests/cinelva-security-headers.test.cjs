@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 test('canonical static pages prevent framing, MIME sniffing and unsafe base/form targets',()=>{
- const config=require('../vercel.json');
+ const config=require('../scripts/source-configuration.cjs').readSourceConfiguration('vercel.json');
  const rule=config.headers?.find(x=>x.source==='/(.*)');
  assert.ok(rule,'all static routes need security headers');
  const headers=Object.fromEntries(rule.headers.map(x=>[x.key.toLowerCase(),x.value]));

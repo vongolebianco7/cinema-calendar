@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png?v=20261023-clean">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0a0c0f">
-<script src="js/theme.js?v=20261023-frame-2"></script>
+<script src="js/cinelva-film-medium.js?v=20261029-films"></script><script src="js/theme.js?v=20261029-series-films"></script>
 <style>
 :root{--bg:#0a0a0a;--panel:#111;--panel2:#171717;--text:#f2f2f2;--muted:#888;--accent:#ef3f3f;--line:#262626}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px;letter-spacing:0}
@@ -349,7 +349,7 @@ async function fetchRemoteMovieResults(q){
  try{
   const cfg=await getBackendConfig();if(!cfg||!cfg.enabled||!cfg.base_url)return;
   const base=String(cfg.base_url).replace(/\/$/,"");
-  const r=await fetch(base+"/api/movies?q="+encodeURIComponent(q)+"&limit=16",{cache:"no-store"});
+  const r=await fetch(base+"/api/movies?q="+encodeURIComponent(q)+"&limit=100",{cache:"no-store"});
   if(!r.ok)return;const d=await r.json();if(seq!==remoteSearchSeq)return;
   remoteMovieResults=[...(d.movies||[]),...(d.external||[])].filter(x=>x&&x.title)
  }catch(e){console.warn("catalog search unavailable",e)}
@@ -365,7 +365,7 @@ function renderSearchResults(fromRemote=false){
  if(!q&&!hasRuntime){box.classList.remove("show");return}
  if(!fromRemote){clearTimeout(remoteSearchTimer);if(q.length>=2)remoteSearchTimer=setTimeout(()=>fetchRemoteMovieResults(q),280);else remoteMovieResults=[]}
  const keys=new Set(rows.map(m=>String(m.tmdbId||m.tmdb_id||m.id||normTitle(m.title))));
- const remote=remoteMovieResults.filter(m=>!keys.has(String(m.tmdbId||m.tmdb_id||m.id||normTitle(m.title)))).slice(0,12);
+ const remote=remoteMovieResults.filter(m=>!keys.has(String(m.tmdbId||m.tmdb_id||m.id||normTitle(m.title)))).slice(0,100);
  let movieHtml=rows.map(m=>'<div class="searchResult" data-mi="'+movies.indexOf(m)+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="searchThumb"></div>')+'<div><b>'+esc(m.title)+'</b><span>'+(m.director?"監督 "+esc(m.director)+" · ":"")+(m.event==="theatrical"?"劇場公開":m.event==="tv"?"TV":m.service||"配信")+(m.date?" · "+m.date:"")+'</span></div></div>').join("");
  let remoteHtml=remote.map((m,i)=>'<div class="searchResult" data-ri="'+i+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="searchThumb"></div>')+'<div><b>'+esc(m.title)+'</b><span>作品カタログ'+((m.year||m.date)?' · '+esc(m.year||String(m.date).slice(0,4)):'')+'</span></div></div>').join("");
  let theaterHtml=theaters.length?'<div class="searchEmpty" style="padding-bottom:5px;color:#bbb;font-weight:800">映画館</div>'+theaters.map(t=>'<a class="searchResult" href="theaters.html?search='+encodeURIComponent(t.name)+'" style="text-decoration:none;color:inherit"><div class="searchThumb" style="aspect-ratio:1;display:grid;place-items:center">▣</div><div><b>'+esc(t.name)+'</b><span>'+esc([t.prefecture,t.municipality].filter(Boolean).join(" "))+'</span></div></a>').join(""):"";
@@ -853,7 +853,7 @@ function openMovie(m){
  let todayIso=new Date().toLocaleDateString("sv-SE"),tvUpcoming=tvs.filter(x=>x.date>=todayIso),tvPast=tvs.filter(x=>x.date<todayIso);
  let av=(m.availability?{...m.availability}:null)||(m.catalog?null:((availabilitySnapshot.movies||{})[String(globalThis.CinelvaMovieIdentity?.id(m)||m.tmdbId||m.tmdb_id||m.id)]));
  const freshAvailability=av&&CinelvaDataQuality.availabilityIsFresh(av);let flat=freshAvailability?(av.flatrate||av.services||[]):[],rent=freshAvailability?(av.rent||[]):[],buy=freshAvailability?(av.buy||[]):[];
- let d=m.director_id&&directors[String(m.director_id)],works=d&&d.works?d.works:(m.director_works||[]);
+ let d=m.director_id&&directors[String(m.director_id)],works=(d&&d.works?d.works:(m.director_works||[])).filter(work=>globalThis.CinelvaFilmMedium?.isFilmMedium(work));
  let peopleIntro='<section class="detailSection info"><h3>監督・出演者</h3><div class="small" style="line-height:1.8">'+(m.director?'監督：'+m.director+'<br>':'')+(m.cast&&m.cast.length?'主な出演：'+cinelvaCastLinks(m.cast.slice(0,8)):'')+'</div></section>';
  let filmHtml=works.length?'<section class="detailSection info"><h3>'+(m.director||"監督")+'の作品を辿る</h3><div class="small" style="margin-bottom:10px">監督のフィルモグラフィー</div><div class="filmography">'+works.slice(0,14).map(w=>{let local=movies.findIndex(x=>String(x.id||"")===String(w.id||"")||normTitle(x.title)===normTitle(w.title));let body=(w.poster?'<img src="'+w.poster+'" loading="lazy">':'<div style="width:108px;aspect-ratio:2/3;background:#222;border-radius:8px"></div>')+'<b>'+w.title+'</b><span class="small">'+(w.year||"")+' · ★ '+Number(w.score||0).toFixed(1)+'</span>';return local>=0?'<button type="button" class="filmItem relatedMovie" data-related="'+local+'" style="border:0;background:transparent;color:inherit;text-align:left;padding:0;cursor:pointer">'+body+'</button>':'<div class="filmItem"><a target="_blank" rel="noopener noreferrer" href="'+w.tmdb+'" style="color:inherit;text-decoration:none">'+body+'</a></div>'}).join("")+'</div></section>':"";
  let trailer=m.trailer_url||('https://www.youtube.com/results?search_query='+encodeURIComponent(m.title+' 予告 公式'));

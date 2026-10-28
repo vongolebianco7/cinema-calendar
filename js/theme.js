@@ -3,7 +3,8 @@
   'use strict';
   const key = 'cinelva-theme-v1';
   const sourceHref = document.currentScript?.src ? new URL('../credits.html#data-status', document.currentScript.src).href : 'credits.html#data-status';
-  const globalSearchHref = document.currentScript?.src ? new URL('cinelva-global-search.js?v=20261026-quality', document.currentScript.src).href : '';
+  const globalSearchHref = document.currentScript?.src ? new URL('cinelva-global-search.js?v=20261029-series-films', document.currentScript.src).href : '';
+  const filmMediumHref = document.currentScript?.src ? new URL('cinelva-film-medium.js?v=20261029-films', document.currentScript.src).href : '';
   const root = document.documentElement;
   const media = window.matchMedia('(prefers-color-scheme: dark)');
   let preference = 'system';
@@ -27,6 +28,7 @@
   });
   function mount() {
     if (globalSearchHref && !window.CinelvaGlobalSearch && document.querySelector('.gSearchForm')) {
+      if (!window.CinelvaFilmMedium) { const mediumScript=document.createElement('script');mediumScript.src=filmMediumHref;mediumScript.async=false;document.head.appendChild(mediumScript); }
       const searchScript = document.createElement('script');searchScript.src = globalSearchHref;searchScript.async = false;document.head.appendChild(searchScript);
     }
     const host = document.querySelector('.gDrawer') || document.querySelector('main');

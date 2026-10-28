@@ -16,6 +16,14 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    console.log(url,200,d[key].length,'static_snapshot');
   }
   const health=await fetch(`http://127.0.0.1:${port}/api/health`,{signal:AbortSignal.timeout(10000)});assert.equal(health.status,503,'health must report database outage honestly');
-  console.log('Built backend serves all five read APIs with database unavailable; health remains503.');
+  for (const url of ['/api/movies?limit=NaN','/api/movies?limit=1.5','/api/movies?q='+'a'.repeat(301),'/api/discover?page=NaN','/api/discover?page=501','/api/movie-detail?id=9007199254740992']) {
+   const response=await fetch(`http://127.0.0.1:${port}${url}`);assert.equal(response.status,400,url);assert.equal(response.headers.get('cache-control'),'no-store');
+  }
+  for (const [body,type,status] of [[' '.repeat(5000),'application/json',413],['{','application/json',400],['hello','text/plain',415],['{"message":{}}','application/json',400]]) {
+   const response=await fetch(`http://127.0.0.1:${port}/api/agent`,{method:'POST',headers:{'Content-Type':type},body});assert.equal(response.status,status);assert.equal(response.headers.get('cache-control'),'no-store');
+  }
+  const preflight=await fetch(`http://127.0.0.1:${port}/api/agent`,{method:'OPTIONS'});assert.equal(preflight.headers.get('access-control-allow-methods'),'POST,OPTIONS');
+  const write=await fetch(`http://127.0.0.1:${port}/api/movies`,{method:'PUT',headers:{'Content-Type':'application/json'},body:'{}'});assert.equal(write.status,405);
+  console.log('Built backend: five snapshot read APIs, malformed query/body boundaries, credential-free preflight and rejected catalog writes passed; health remains503.');
  }catch(error){console.error(output.slice(-3000));throw error;}finally{server.kill('SIGTERM');await new Promise(r=>server.once('exit',r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

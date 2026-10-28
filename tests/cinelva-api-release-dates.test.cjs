@@ -5,7 +5,7 @@ function route(name,results,rows=[]){
  let code=require('node:module').stripTypeScriptTypes(fs.readFileSync(`backend/app/api/${name}/route.ts`,'utf8'),{mode:'transform'});
  code=code.replace(/^import .*?;\n/gm,'').replaceAll('export ','');
  const requested=[];
- const context={URL,process:{env:{TMDB_API_KEY:'fixture'}},console,
+ const context={URL,AbortSignal,process:{env:{TMDB_API_KEY:'fixture'}},console,
   fetch:async url=>{requested.push(String(url));return {ok:true,json:async()=>({results,page:1})}},
   json:body=>body,rateLimited:()=>null,options:()=>null,
   readWithSnapshot:read=>read(),movieSnapshot:()=>({movies:[]}),

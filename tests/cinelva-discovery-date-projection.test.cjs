@@ -14,7 +14,7 @@ test('detail, director works and related responses retain upstream full dates wi
  let code=require('node:module').stripTypeScriptTypes(fs.readFileSync('backend/app/api/movie-detail/route.ts','utf8'),{mode:'transform'});
  code=code.replace(/^import .*?;\n/gm,'').replaceAll('export ','');
  const requests=[];
- const context={URL,console,process:{env:{TMDB_API_KEY:'fixture'}},json:b=>b,rateLimited:()=>null,options:()=>null,
+ const context={URL,AbortSignal,console,process:{env:{TMDB_API_KEY:'fixture'}},json:b=>b,rateLimited:()=>null,options:()=>null,
  fetch:async url=>{const path=new URL(url).pathname;requests.push(path);const body=path.endsWith('/movie_credits')?{crew:[{id:2,title:'Director work',job:'Director',release_date:'2001-02-03'}]}:path.endsWith('/recommendations')?{results:[{id:3,title:'Related',release_date:'2004-05-06'},{id:4,title:'Unknown'}]}:{id:1,title:'Main',release_date:'2007-08-09',credits:{crew:[{id:9,name:'Director',job:'Director'}]}};return {ok:true,json:async()=>body};}};
  vm.runInNewContext(code+';globalThis.get=GET',context);
  const {movie}=await context.get({url:'https://local/api/movie-detail?id=1'});

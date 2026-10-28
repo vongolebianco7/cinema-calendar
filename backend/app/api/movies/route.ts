@@ -18,7 +18,10 @@ export async function GET(request: Request) {
   const limited=rateLimited(request,90);if(limited)return limited;
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q")?.trim();
-  const limit = Math.min(Math.max(Number(searchParams.get("limit") || 50), 1), 100);
+  const rawLimit = searchParams.get("limit");
+  if (q && q.length > 300) return json({ error: "Query too long" }, { status: 400 });
+  if (rawLimit !== null && !/^[1-9]\d{0,2}$/.test(rawLimit)) return json({ error: "Invalid limit" }, { status: 400 });
+  const limit = Math.min(Number(rawLimit || 50), 100);
 
   const catalog = await readWithSnapshot(async()=>{
   let rows = await prisma.movie.findMany({
@@ -94,7 +97,7 @@ export async function GET(request: Request) {
       url.searchParams.set("include_adult", "false");
       const headers = tmdbAuth(url);
       if (headers) {
-        const res = await fetch(url, { headers, next: { revalidate: 3600 } });
+        const res = await fetch(url, { headers, next: { revalidate: 3600 }, signal: AbortSignal.timeout(8000) });
         if (res.ok) {
           const body = await res.json();
           const localIds = new Set(movies.map((m:any)=>String(m.tmdbId||m.id||"")));
@@ -123,7 +126,7 @@ export async function GET(request: Request) {
             }));
         }
       }
-    } catch (e) { console.warn("TMDB search unavailable", e); }
+    } catch (e) { console.warn("TMDB search unavailable"); }
   }
 
   return json({ ...catalog, movies, external, count: movies.length + external.length });

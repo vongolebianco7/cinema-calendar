@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T14:48:35.359466+00:00",
+  "updated_at": "2026-10-28T08:58:26.839823+00:00",
   "status": "blocked",
   "issue": 239,
   "base_branch": "main",
@@ -1721,5 +1721,14 @@
         "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
       }
     }
+  },
+  "public_release_audit_20261028": {
+    "status": "in_progress",
+    "branch": "audit/public-release-20261028",
+    "base_sha": "8672ef287262dd921ec83f15dd54b184c6597daf",
+    "decision": "NO-GO",
+    "report": "docs/operations/public-release-audit-20261028.md",
+    "local_validation": "Shared quality gate, 27 focused tests, backend build/API boundaries and npm audit 0 vulnerabilities passed; reachable history 13033 objects no supported-pattern secrets. Local browser installation failed; CI browser pending.",
+    "next_action": "Publish scoped hardening PR, run exact source and final-head CI, renew receipt and normal deployment only after gates. Rights/private security intake/device/ops gates unresolved."
   }
 }

@@ -222,9 +222,9 @@ function drawArtwork(movies){
     }
     const offset=columns===2?194:214,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
-    const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
+    const nameSize=(columns===2?(shape==='portrait'?36:30):(shape==='portrait'?44:shape==='square'?38:32))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,movieWeight,1.10);
+    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?26:28)*fontScale,font.movie,movieWeight,1.10);
     const meta=String(m.year||'');
     if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });

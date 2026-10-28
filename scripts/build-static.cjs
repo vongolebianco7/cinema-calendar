@@ -22,7 +22,7 @@ for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
     fs.copyFileSync(path.join(root, entry.name), path.join(output, entry.name));
   }
 }
-for (const directory of ['assets', 'js', 'data', 'preview', 'my-cinelva']) {
+for (const directory of ['assets', 'js', 'data', 'preview', 'my-cinelva', 'my-cinelva-demo']) {
   fs.cpSync(path.join(root, directory), path.join(output, directory), {
     recursive: true,
     filter(source) {

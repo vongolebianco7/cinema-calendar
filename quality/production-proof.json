@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "94f3bb9f3b1cd6edcf21a8b9a6f540ae0bdde2af",
-  "verified_at": "2026-10-29T00:00:00.000Z",
-  "note": "PR #537: cinema discount modal and time-of-day filtering. All four required PR CI workflows succeeded on exact source head SHA; receipt-only change excluded from executable digest."
+  "head_sha": "9c0fb091f4aa70415c339da0ab160aae2d25459a",
+  "verified_at": "2026-10-28T20:15:38.936Z",
+  "note": "PR #528 integrated main fa47e48. Four required pull_request workflows succeeded: AQG 40759398802, smoke 40759398856, frontend 40759398898, backend 40759398995. Executable source digest 6a149c191d9b52f1a79f26c5678bdf62a730432e5f52085b9ec565dc95438c9c. Release remains NO-GO pending physical iPhone and operational/legal gates."
 }

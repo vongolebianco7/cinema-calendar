@@ -1315,6 +1315,19 @@ style.textContent+=`
 .cinelva-review-method select{width:100%;max-width:100%}
 .cinelva-review-method label[hidden]{display:none!important}
 `;
+style.textContent+=`
+/* Light-theme review dialog: readable neutral surfaces independent of dark theme. */
+html[data-theme="light"] .cinelva-rate-dialog{background:#fffefa!important;color:#242521!important;border:1px solid #d2cbc0!important;box-shadow:0 16px 46px #0004!important}
+html[data-theme="light"] .cinelva-rate-inner{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-inner label,html[data-theme="light"] .cinelva-review-header strong{color:#242521!important}
+html[data-theme="light"] .cinelva-review-header button{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-inner :is(input,textarea,select){background:#f5f2ec!important;color:#242521!important;border:1px solid #a9a397!important}
+html[data-theme="light"] .cinelva-rate-inner :is(input,textarea,select):focus-visible{outline:2px solid #8e7038!important;outline-offset:2px}
+html[data-theme="light"] .cinelva-review-score output{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-actions button{background:#292a27!important;color:#fffefa!important;border:1px solid #292a27!important}
+html[data-theme="light"] .cinelva-rate-actions button:first-child{background:#f2eee6!important;color:#242521!important;border:1px solid #bcb4a8!important}
+html[data-theme="light"] .cinelva-rate-dialog .cinelva-rate-inner .cinelva-review-method{background:transparent!important}
+`;
 root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie))||undefined,_localRecord:!(root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie)))});}}
 if(typeof MutationObserver!=='undefined'){const start=()=>{mountRecordReviews();new MutationObserver(rows=>{for(const row of rows)for(const node of row.addedNodes)if(node.nodeType===1)mountRecordReviews(node)}).observe(document.body,{childList:true,subtree:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}

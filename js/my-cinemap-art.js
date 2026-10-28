@@ -212,7 +212,7 @@ function drawArtwork(movies){
     const path=String(m.poster||m.posterUrl||m.poster_path||'');
     const posterUrl=path.startsWith('/')?'https://image.tmdb.org/t/p/w500'+path:path;
     const poster=safePosterImage(posterUrl);
-    const posterW=columns===2?100:94,posterH=Math.min(rowH-12,posterW*1.5);
+    const posterW=Math.min(columns===2?172:128,(rowH-10)/1.5),posterH=posterW*1.5;
     const posterX=x+(columns===2?80:104),posterY=y+(rowH-posterH)/2;
     if(poster?.status==='ready'&&poster.image){
       ctx.save();ctx.beginPath();ctx.rect(posterX,posterY,posterW,posterH);ctx.clip();
@@ -220,11 +220,11 @@ function drawArtwork(movies){
       ctx.drawImage(im,posterX+(posterW-im.naturalWidth*scale)/2,posterY+(posterH-im.naturalHeight*scale)/2,im.naturalWidth*scale,im.naturalHeight*scale);
       ctx.restore();
     }
-    const offset=columns===2?194:214,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
+    const offset=(columns===2?80:104)+posterW+20,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
-    const nameSize=(columns===2?(shape==='portrait'?36:30):(shape==='portrait'?44:shape==='square'?38:32))*fontScale;
+    const nameSize=(columns===2?(shape==='portrait'?52:43):(shape==='portrait'?55:shape==='square'?50:44))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?26:28)*fontScale,font.movie,movieWeight,1.10);
+    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?35:37)*fontScale,font.movie,movieWeight,1.10);
     const meta=String(m.year||'');
     if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });

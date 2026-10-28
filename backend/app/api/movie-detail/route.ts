@@ -4,7 +4,7 @@ export const dynamic="force-dynamic";
 const BASE="https://api.themoviedb.org/3";
 function auth(url:URL){const token=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,key=process.env.TMDB_API_KEY;const headers:Record<string,string>={accept:"application/json"};if(token)headers.Authorization=`Bearer ${token}`;else if(key)url.searchParams.set("api_key",key);return token||key?headers:null}
 export async function GET(request:Request){const limited=rateLimited(request,60);if(limited)return limited;
- const id=Number(new URL(request.url).searchParams.get("id"));if(!Number.isInteger(id)||id<1)return json({error:"invalid id"},{status:400});
+ const id=Number(new URL(request.url).searchParams.get("id"));if(!Number.isSafeInteger(id)||id<1)return json({error:"invalid id"},{status:400});
  try{
   const url=new URL(BASE+`/movie/${id}`);url.searchParams.set("language","ja-JP");url.searchParams.set("append_to_response","credits,videos,watch/providers,release_dates");
   const headers=auth(url);if(!headers)return json({error:"TMDB not configured"},{status:503});

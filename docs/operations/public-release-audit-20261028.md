@@ -97,3 +97,10 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - exact head `e6cc8e7934dbba82781a530959a6c0b1ff2171b5` のFull Python contract 192件が成功。CSP/WebKit検査は別のValidate frontend workflowで継続中。
 - Reproducible backend buildはNext.js/TypeScript build、dependency audit、license inventory、secret-history scan、HTTP security testsまで成功。その後 `tests/cinelva-backend-snapshot-smoke.cjs` の実行で、同じスコープ内に `const preflight` が重複していてSyntaxErrorとなった。API handlerやPrisma build失敗ではない。
 - PR #526の追加preflight検査と#528の先行検査が二重に残っていたため、検査を1回に統合し、POST,OPTIONS/CORS/no-credentialsを同時に確認するよう修正。ローカル `node --check tests/cinelva-backend-snapshot-smoke.cjs` は成功。built backendでの再実行は修正headのActions待ち。
+
+### 2026-10-28 追加CI診断: safe integer と fixture CORS
+
+- source head `9cc3bd0a251800674369b663c57afc47380e8bb8` でbackend build後の実API smokeが失敗。`/api/movie-detail?id=9007199254740992` が不正入力400でなく、隔離DBへの照会後503となった。ID検査を `Number.isSafeInteger` に変更し、精度を保証できないIDをDB/upstreamより前に400で拒否する。
+- 同じheadのValidate frontendではChromiumがCSP付き13画面を通過。WebKitでdiscover.htmlのpage errorsにオフラインAPI fixtureのCORS拒否が出た。オフライン応答に本番APIと同等の非credentialed CORS headersを付与し、ブラウザ側の実CSPを維持する。
+- `node --check tests/cinelva-security-headers-browser.cjs`、detail/security focused tests 14件、`git diff --check` は成功。改訂後のCIは未実行。実機iPhoneは引き続き未確認。判定NO-GO。
+- 再開: 最新PR #528 headのValidate frontend、Reproducible backend build、他required checksを確認し、失敗時はjob logを読み、receipt-only/final-head CI/guard手順を維持する。

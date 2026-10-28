@@ -17,7 +17,7 @@ const {spawn,spawnSync}=require('node:child_process'),{waitForLocalServer}=requi
   // HTTP on WebKit, so an HTTP-only fixture would test a broken transport.
   // Do not mock or weaken this policy when checking Safari/WebKit compatibility.
   // Avoid upstream dependency or quota use. Existing journeys exercise known catalog fixtures.
-  await context.route('https://backend-one-gray-94.vercel.app/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{"error":"isolated offline fixture"}'}));
+  await context.route('https://backend-one-gray-94.vercel.app/**',route=>route.fulfill({status:503,headers:{'access-control-allow-origin':'*','access-control-allow-methods':'GET,OPTIONS','access-control-allow-headers':'content-type'},contentType:'application/json',body:'{"error":"isolated offline fixture"}'}));
   const page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')console.log(name+' console '+m.text())});

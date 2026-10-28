@@ -1145,7 +1145,8 @@
           "sourceUrl": "https://www.aeoncinema.com/service/service_day/",
           "feeText": "追加の会費・カード申込みは不要です。",
           "verifiedAt": "2026-10-26",
-          "repeatability": "recurring"
+          "repeatability": "recurring",
+          "evening": true
         },
         {
           "id": "benefit",
@@ -1958,7 +1959,8 @@
             "20時以降に開始する通常2D上映を選択",
             "レイトショー料金を確認して購入"
           ],
-          "repeatability": "recurring"
+          "repeatability": "recurring",
+          "evening": true
         }
       ]
     }

@@ -116,6 +116,7 @@
    if(!groups.has(c.id))continue;
    const theaters=[...groups.get(c.id)],offers=[];
    for(const o of c.available){
+    if(o.evening&&!options.evening)continue;
     const prices=new Map();
     for(const t of theaters.filter(t=>allowed(o,t))){
      let amount=o.price,max=o.maxPrice;

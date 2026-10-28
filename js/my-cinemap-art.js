@@ -209,21 +209,23 @@ function drawArtwork(movies){
     const medalScale=theme==='minimal'?minimalMedalScale:1;
     if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
-    const poster=safePosterImage(m.poster);
-    const posterW=columns===2?64:74,posterH=Math.min(rowH-12,posterW*1.5);
-    const posterX=x+(columns===2?80:94),posterY=y+(rowH-posterH)/2;
+    const path=String(m.poster||m.posterUrl||m.poster_path||'');
+    const posterUrl=path.startsWith('/')?'https://image.tmdb.org/t/p/w500'+path:path;
+    const poster=safePosterImage(posterUrl);
+    const posterW=columns===2?100:94,posterH=Math.min(rowH-12,posterW*1.5);
+    const posterX=x+(columns===2?80:104),posterY=y+(rowH-posterH)/2;
     if(poster?.status==='ready'&&poster.image){
       ctx.save();ctx.beginPath();ctx.rect(posterX,posterY,posterW,posterH);ctx.clip();
       const im=poster.image,scale=Math.max(posterW/im.naturalWidth,posterH/im.naturalHeight);
       ctx.drawImage(im,posterX+(posterW-im.naturalWidth*scale)/2,posterY+(posterH-im.naturalHeight*scale)/2,im.naturalWidth*scale,im.naturalHeight*scale);
       ctx.restore();
     }
-    const offset=columns===2?154:182,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
+    const offset=columns===2?194:214,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
     const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,movieWeight,1.10);
-    const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
+    const meta=String(m.year||'');
     if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);

@@ -40,9 +40,9 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#grid .theaterTable').waitFor();
   assert.match(await page.locator('#grid .theaterTable').innerText(),/IMAXレーザー/);
   await page.locator('#q').fill('TOHO川崎');
-  await page.locator('.schedulePanel summary').click();
-  await page.locator('#scheduleQ').fill('TOHO川崎');
-  await page.locator('#theaterChips .chip').first().click();
+  await page.locator('#grid [data-showtime-theater]').first().click();
+  assert.equal(await page.locator('.schedulePanel').evaluate(el=>el.open),true);
+  assert.match(await page.locator('#scheduleQ').inputValue(),/TOHOシネマズ 川崎/);
   assert.match(await page.locator('#theaterDetail').innerText(),/TOHOシネマズ 川崎/);
   assert.ok(await page.locator('#theaterDetail a.official').count()>0);
   assert.deepEqual(errors,[]);

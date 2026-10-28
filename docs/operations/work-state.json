@@ -1565,13 +1565,13 @@
       "next_action": "Approved calendar/day-tap/Benepo/nationwide-chain scope is live and verified. Maintain dated manual source facts and theater exceptions; re-review before60day horizon. No claim of all cinemas/all discounts or individual eligibility."
     },
     "prefecture_chain_comparison": {
-      "status": "blocked",
-      "updated_at": "2026-10-27T04:47:24.238Z",
+      "status": "deployment_pending",
+      "updated_at": "2026-10-28T05:06:00Z",
       "branch": "feat/prefecture-chain-calendar-20261027",
       "base_sha": "e6788c6573410fe7e1f357725cdcbba5859e0877",
       "scope": "Prefecture-wide flat comparison of all local listed chains,calendar winning series names/all ties,daytap chain table;no chain picker or one-time coupons.42recurring methods/14profiles,47prefectures,159geographic groups/323named theaters;nonexhaustive cinemas and tariff coverage.",
       "validation": "25focused units/fullsharedquality pass. ActualChromium/WebKit47prefectures/root/prefix/lightdark320–1280/date/horizon/localexclusions/109exactprices/Benepo/malformed/directory flows pass. Fresh review punctuation normalization and visibleallties fixed RED→GREEN. Actualproductionguard/fullquality/staticbuild passed. Final andmerged trees identical.",
-      "next_action": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts. Scheduled resume2026-10-28 13:55:55JST;not yet published.",
+      "next_action": "Vercel already auto-published exact current main; no duplicate deploy. Complete remaining 6 canonical raw HTTP comparisons and actual read-only production day-button click, then update status to production_verified in docs-only PR. No paid service or bypass.",
       "review": "Whole-branch fresh review: one important malformed-normalization finding fixed with nineinput combinations; one tie-visibility minor elevated because series discovery is primary,actual preview RED and browser regression added. OS theater name corrected to current ミント神戸 from official indexed listing. No other blockers;no claim of exhaustive cinema inventory.",
       "pull_request": 523,
       "source_sha": "4027c030379e6d501ec8e295b8fc8161609fcfee",
@@ -1704,11 +1704,16 @@
         "production_deployment_created": false
       },
       "production": {
-        "status": "blocked",
-        "last_ready_deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
-        "last_ready_sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+        "status": "deployment_pending",
+        "deployment": "dpl_DjLz4Hqbnm8mJ6LbvPPCJ3CN5M2u",
+        "sha": "53674d4672c432f3a92acf2f88748cb62368d3cc",
         "url": "https://cinelva.vercel.app/theaters.html#discounts",
-        "new_canonical_and_browser_verification": "not completed;do not claim published"
+        "ready_at": "2026-10-28T07:09:21+09:00",
+        "source_digest": "54e934d4d18afd0a8c7c19d5a58b5dadf48a68b3022e18504d9ffcdbf011ad02",
+        "guard": "Vercel build log confirms exact PR523 source receipt and 4 required workflows; shared QUALITY GATE PASSED, static build READY; existing alias attached.",
+        "canonical_bytes": "2/8 directly verified over HTTP: discount engine and UI JS byte-identical to current main. Six files remain unverified by direct HTTP byte comparison.",
+        "live_read_only": "Canonical and prefixed theater URLs HTTP200; 神奈川県 10/29 and 11/04 selected by URL, 14-day chain calendar/all tie names, 8 sorted chain rows, recurring-only conditions/Benepo. My Best 10 live page HTTP200 with confirm/cancel controls. No records written.",
+        "limitations": "Live production click event not executed; date URL equivalent and PR523 Chromium/WebKit click tests passed. No physical iPhone claim. Do not mark production_verified until remaining direct checks."
       },
       "resume": {
         "scheduled_for": "2026-10-28T13:55:55+09:00",

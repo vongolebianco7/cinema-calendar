@@ -1,6 +1,6 @@
 {
-  "status": "blocked",
-  "updated_at": "2026-10-27T04:47:24.238Z",
+  "status": "deployment_pending",
+  "updated_at": "2026-10-28T05:06:00Z",
   "pull_request": 523,
   "branch": "feat/prefecture-chain-calendar-20261027",
   "source_sha": "4027c030379e6d501ec8e295b8fc8161609fcfee",
@@ -136,11 +136,18 @@
     "production_deployment_created": false
   },
   "production": {
-    "status": "blocked",
-    "last_ready_deployment": "dpl_CULY1GVMdhcJBGy2F3bHTC8MCGp3",
-    "last_ready_sha": "7fae48e445a5382d96cbfa90403164464b55e483",
+    "status": "deployment_pending",
+    "deployment": "dpl_DjLz4Hqbnm8mJ6LbvPPCJ3CN5M2u",
+    "ready_sha": "53674d4672c432f3a92acf2f88748cb62368d3cc",
+    "ready_at": "2026-10-28T07:09:21+09:00",
     "url": "https://cinelva.vercel.app/theaters.html#discounts",
-    "new_canonical_and_browser_verification": "not completed;do not claim published"
+    "alias_confirmed": true,
+    "production_guard": "Vercel build log: Production CI proof passed 4027c030379e6d501ec8e295b8fc8161609fcfee; source digest 54e934d4d18afd0a8c7c19d5a58b5dadf48a68b3022e18504d9ffcdbf011ad02; all four required workflows succeeded; QUALITY GATE PASSED; static build completed.",
+    "source_diff": "Current main is exactly deployment SHA; only generated data and docs differ from PR523 merged tree; executable source receipt unchanged.",
+    "read_only_live": "HTTP200 canonical theater page with 神奈川県 selected via query, 14-day chain-name calendar, ties 109・ユナイテッド and TOHO・イオン. Date query 2026-11-04 shows 8 chains sorted 1100,1100,1300,1300,1400,1400,1400,1400; one-time excluded, Benepo 1 point = 1 yen as payment, not a discount. Prefix /cinelva/theaters.html redirects to canonical and retains selection. HTTP200 MY Top10 page displays user-confirmation controls; no watched-record writes.",
+    "http_exact_source": "2/8 direct HTTP200 raw source exact comparisons: js/cinelva-cinema-discounts.js and js/cinelva-cinema-discounts-ui.js. Other six not byte-compared over HTTP; deterministic static copy and exact-source guard verified in build logs.",
+    "limitations": "Actual browser click interaction on live production not performed (selected dates via read-only URL query); full canonical 8/8 direct HTTP byte comparison incomplete. No physical iPhone Safari claim.",
+    "next_action": "Complete read-only live day-button click and remaining six direct canonical HTTP byte comparisons without paid services; only then mark production_verified."
   },
   "resume": {
     "scheduled_for": "2026-10-28T13:55:55+09:00",
@@ -148,10 +155,12 @@
     "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
   },
   "remaining": [
-    "Hosting rate limit must clear",
-    "Publish latest exact-source CI-verified main once",
-    "Verify canonical files,prefix andlive province/chain/day comparison/nointro/allties/Benepo",
-    "Record production_verified"
+    "Live read-only click from prefecture calendar day button (URL-param equivalent verified)",
+    "Complete six remaining canonical HTTP raw byte comparisons (2/8 exact directly verified)"
   ],
-  "source_backup_note": "4027backup job cancelled during browserdependency setup;requiredfour source workflows passed andall10 finalworkflows,includingbackup,passed."
+  "source_backup_note": "4027backup job cancelled during browserdependency setup;requiredfour source workflows passed andall10 finalworkflows,includingbackup,passed.",
+  "blocker_resolved": {
+    "observed_at": "2026-10-28T07:09:21+09:00",
+    "evidence": "Existing Vercel project automatically published exact current main after quota reset; no manual deployment or bypass used."
+  }
 }

@@ -225,7 +225,7 @@ function drawArtwork(movies){
     const nameSize=(columns===2?(shape==='portrait'?52:43):(shape==='portrait'?55:shape==='square'?50:44))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
     const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?35:37)*fontScale,font.movie,movieWeight,1.10);
-    const meta=String(m.year||'');
+    const meta='';
     if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
   });
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);

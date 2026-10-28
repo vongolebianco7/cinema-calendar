@@ -21,11 +21,10 @@ function month(count) {
   return months[0];
 }
 
-test('annual calendar keeps high-volume months in the deepest blue tone', () => {
+test('annual calendar marks months with five or more films as GOLD', () => {
   for (const count of [5, 6, 10]) {
     const html = month(count);
-    assert.match(html, /cy-month deep-month/);
-    assert.doesNotMatch(html, /gold-month|cy-medal|GOLD/);
+    assert.match(html, /cy-month gold-month/);
     assert.match(html, new RegExp('1月 ' + count + '本'));
   }
 });

@@ -128,6 +128,35 @@
     if(state.year!==selectedYear)state.year=selectedYear;
     renderYearHeatmap();
     $('csLifetime').textContent=String(all.length);$('csCount').textContent=String(filtered.length);
+    // Lifetime achievement markers must be derived from the complete record set,
+    // independent of the selected year. Re-render after imports and edits.
+    let achievements=document.getElementById('csLifetimeAchievements');
+    if(!achievements){
+      achievements=document.createElement('div');
+      achievements.id='csLifetimeAchievements';
+      achievements.className='cs-milestones';
+      achievements.setAttribute('aria-label','生涯鑑賞達成バッジ');
+      $('csLifetime').insertAdjacentElement('afterend',achievements);
+    }
+    const count=all.length;
+    const milestones=[
+      {count:100,label:'100本',icon:'◆'},
+      {count:300,label:'300本',icon:'◆'},
+      {count:500,label:'500本',icon:'💎'},
+      {count:1000,label:'1,000本',icon:'👑'},
+      {count:1500,label:'1,500本',icon:'👑'},
+      {count:2000,label:'2,000本',icon:'👑'}
+    ];
+    achievements.replaceChildren(...milestones.filter(m=>count>=m.count).map(m=>{
+      const badge=document.createElement('span');
+      badge.className='cs-achievement';
+      badge.setAttribute('role','img');
+      badge.setAttribute('aria-label',m.label+'鑑賞達成');
+      badge.style.cssText='display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border:1px solid #b99b59;border-radius:7px;color:#e3c67b;font-size:12px;white-space:nowrap';
+      badge.textContent=m.icon+' '+m.label;
+      return badge;
+    }));
+
     const statsHost=$('csExtraStats');
     if(statsHost){
       const scored=filtered.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>0);

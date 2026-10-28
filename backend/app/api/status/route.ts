@@ -1,9 +1,10 @@
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   try {
     const [
       movieCount,

@@ -1,8 +1,9 @@
-import { json } from "../../../lib/http";
+import { json, rateLimited } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   // Automatic schedule collection is intentionally disabled until the
   // collection policy is explicitly approved. Return a non-2xx response so
   // the static frontend can safely fall back to the last verified snapshot

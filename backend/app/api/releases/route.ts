@@ -1,6 +1,6 @@
 import { readWithSnapshot, releaseSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +11,7 @@ function startOfDay(value: string | null, fallback: Date) {
 }
 
 export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   const { searchParams } = new URL(request.url);
   const now = new Date();
   const from = startOfDay(searchParams.get("from"), new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)));

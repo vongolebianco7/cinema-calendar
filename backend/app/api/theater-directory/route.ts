@@ -1,10 +1,11 @@
 import { readWithSnapshot, theaterSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   const url = new URL(request.url);
   const q = (url.searchParams.get("q") || "").trim();
   const prefecture = (url.searchParams.get("prefecture") || "").trim();

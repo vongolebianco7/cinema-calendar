@@ -55,6 +55,8 @@ jobs:
         run: npm audit --audit-level=high
       - name: Verify installed configuration merge regression
         run: node tests/cinelva-backend-deepmerge-security.cjs
+      - name: Verify bounded HTTP input and private error caching
+        run: node --test tests/cinelva-http-security.cjs
       - name: Generate Prisma client and compile without production credentials
         working-directory: backend
         run: npm run build

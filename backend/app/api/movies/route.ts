@@ -123,7 +123,7 @@ export async function GET(request: Request) {
             }));
         }
       }
-    } catch (e) { console.warn("TMDB search unavailable", e); }
+    } catch (e) { console.warn("TMDB search unavailable"); }
   }
 
   return json({ ...catalog, movies, external, count: movies.length + external.length });

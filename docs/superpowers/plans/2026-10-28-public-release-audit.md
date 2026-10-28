@@ -1,53 +1,14 @@
-# Cinelva public release audit implementation plan
+# Public release audit implementation plan
 
-> **For agentic workers:** Use superpowers:executing-plans for implementation and one fresh branch review.
+Goal: establish evidence for the user's 2026-10-28 launch requirements and repair confirmed security weaknesses without changing storage keys or production data.
+Architecture: static frontend, public catalog-only Next.js/Prisma backend, device-local viewing records. There are no accounts or private server-side user resources. Public catalog CORS is intentionally credential-free.
+Scope: existing repository, projects, aliases and free services; no destructive DB operation, token rotation or production attack testing.
 
-**Goal:** Verify public-release readiness, repair reproducible security defects and retain an honest NO-GO until all release gates have evidence.
+1. Reconcile latest main, checkpoint, open PRs, Actions and both production sources.
+2. Reproduce missing frontend headers and oversized agent requests with deterministic tests. Repair only these confirmed boundaries and unsafe upstream error logging. Validate agent success, malformed/streaming bodies, UTF-8 byte limits and upstream outage without external calls.
+3. Inspect public endpoint inventory, local record/backup isolation, source registry, legal notices and dependency/secret/supply-chain controls. Record unknowns explicitly rather than treating a partial audit as clearance.
+4. Run full quality gate, isolated API build/tests and existing mobile Chromium/WebKit E2E. Add repeatable security checks to existing CI.
+5. PR, exact-head four required workflows, receipt-only commit and final-head CI, authorized merge, normal release and read-only production verification. Stop publication if any required evidence is missing.
+6. Update audit and checkpoint with exact evidence, known risks, physical iPhone/legal/operational gaps and GO/NO-GO.
 
-**Architecture:** Preserve static frontend, public catalog-only backend and browser-local records. No account system, DB migration, billing or origin change.
-
-**Tech Stack:** Static JS, Next.js, Prisma, Node/Python tests, Playwright, existing GitHub/Vercel projects.
-
-**Spec:** User request dated 2026-10-28; AGENTS.md; COMPLIANCE.md.
-
-## Global Constraints
-- Latest main baseline 8672ef287262dd921ec83f15dd54b184c6597daf; preserve other working copies.
-- No production attack/load tests or user record writes; no secrets in evidence.
-- Existing required workflows, exact-source receipt and production guard remain mandatory.
-- Free only. No retries around deployment limits. No backend deployment unless backend source changes.
-
-## Review Focus
-- Chunked or misleading content-length must not bypass actual body limit.
-- Full rate-limit map must not evict an existing offender into a fresh allowance.
-- Invalid pagination must be rejected before DB/TMDB work.
-- CSP must preserve existing inline handlers while disallowing framing, base changes, plugins and unapproved scripts/connections.
-- Browser-local records are shared by people using the same browser profile; never describe them as account-isolated.
-
-### Task 1: Baseline and security fixes
-**Files:** backend/lib/http.ts; backend/app/api/*/route.ts; vercel.json; tests/cinelva-public-security.test.cjs; tests/cinelva-backend-http-security.cjs.
-**Interfaces:** Existing HTTP JSON helpers; preserve successful API shapes and CORS credential-free behavior.
-- [ ] Add failing tests for bounded body, query/pagination validation, cache-safe failures, bounded limiter and static headers.
-- [ ] Run tests and retain RED evidence.
-- [ ] Implement minimal fixes; ensure agent POST preflight explicitly supports POST.
-- [ ] Run GREEN tests, backend compilation and shared quality gate.
-
-### Task 2: Supply chain, privacy and evidence
-**Files:** scripts/check_secrets.py; .github/workflows/backend-build.yml; privacy.html; docs/operations/public-release-audit-20261028.md; docs/operations/work-state.json.
-**Interfaces:** Secret scanner reports only counts and file/object identifiers, never matched values.
-- [ ] Scan reachable git history and current source, audit installed lock against current advisories; distinguish limited pattern scan from exhaustive secret clearance.
-- [ ] Pin changed workflow actions to their existing version commit SHA; add HTTP security tests and history scan to existing CI.
-- [ ] Align privacy text with external API requests, provider logs, browser-local deletion and shared-device limits. Do not invent a private contact or retention guarantee.
-- [ ] Run relevant isolated Chromium/WebKit core journeys and header-enforced smoke tests; read-only production smoke.
-- [ ] Record rights, private security intake, real device and operational unknowns as unresolved.
-
-### Task 3: Review, CI and release
-- [ ] Fresh branch review; fix material findings with RED/GREEN evidence.
-- [ ] Push branch and open PR; wait for four source workflows, renew receipt-only commit, then final-head CI.
-- [ ] Merge only on successful gates. Verify production guard, exact frontend/backend source and read-only canonical smoke after normal deployment.
-- [ ] If any external blocker remains, retain NO-GO and precise checkpoint; never bypass gate.
-
-## Execution ledger
-Baseline shared quality gate PASSED. Existing PR514 is draft blocked on licensed streaming catalog; do not merge. PR521 is an older docs checkpoint; no source overlap.
-Ruling: execute without plan approval pause because user explicitly requested continuous audit/fix/test/PR/release work.
-
-Execution update: scoped fixes, full quality390+6Node, Python192, backendbuild/API smoke, dependency and supported secret-pattern checks passed. Fresh reviewer found no Critical/Important. Minor same-context/deferred-interaction browser coverage remains documented. Materialized-config test failure was reproduced and fixed through existing source-configuration helper; full materialized quality GREEN. PR528 pending renewed source CI. Actual local guard refuses on public proof HTTP403; no bypass.
+Review focus: hostile request bodies without Content-Length; multibyte boundary; upstream exceptions containing credentials; CSP compatibility with existing inline scripts and same-origin aliases; local-only records on shared browsers. No claim of complete streaming coverage or physical iPhone verification.

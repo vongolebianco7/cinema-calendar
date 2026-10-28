@@ -1,85 +1,93 @@
-# Cinelva 一般公開前監査 — 2026-10-28
+# Cinelva 公開前監査（2026-10-28）
 
-判定: **NO-GO（一般公開の承認はしない）**。この記録は全ASVS項目への適合証明や第三者侵入テスト報告ではない。
+判定: **NO-GO（監査・修正中）**。この文書は全項目の合格証明ではない。修正PRのCI・本番反映が未了であり、重大・高リスクがゼロと断定できる網羅的証拠はまだない。
 
-## 対象・制約
+## 確認した構成と基準
 
-初回取得main/frontend production: `8672ef287262dd921ec83f15dd54b184c6597daf`。作業中にmainのイベント更新 `f6ab09985cfcfde199f42d7ca113650d091cc5f8` を確認。既存変更を保持して追随する。backend production: `9092bac0f8b78b88a9f5f83243095dffbc65333b`、READY。frontendとbackendが別コミットであることを隠さない。既存Vercel team/project/domainを維持する。
+- GitHub main: `8672ef287262dd921ec83f15dd54b184c6597daf`。古いcheckpointよりlive mainを優先。
+- frontend: 既存 `cinema-calendar` / `cinelva.vercel.app`、production `dpl_FtjYDBttgSGNj9BLHEemQmPzPtMR` READY、mainと同じSHA。
+- backend: 既存 `backend` / `backend-one-gray-94.vercel.app`、production `dpl_7kMaZAZZkioHGFohqPoEeasHSjvW` READY、`9092bac0f8b78b88a9f5f83243095dffbc65333b`。このSHAから基準mainまでbackendソースの差分なし。新しいbackend deploymentはCANCELEDであり、READYと混同しない。
+- frontend環境変数なし。backendはTMDB_API_KEYがproductionのみ、DATABASE_URLがproduction/previewに設定、双方sensitive。値の復号・出力はしていない。previewの実DBがproductionと分離されているかは値を取得せず確認できていない。
+- static HTML/JS + Next.js公開映画カタログAPI + Prisma/PostgreSQL。DB schemaにUser/Review等の個人データモデルなし。APIにユーザー記録の保存・更新・削除ルートなし。唯一のPOSTは映画検索コンシェルジュ。
+- 鑑賞記録、感想、評価、ブックマーク、ランキングは同一originのlocalStorage。アカウント、ログイン、セッションCookie、OAuthなし。従ってIDOR/BOLA、ログアウト失効、state/PKCEのアカウント用検査は現構成では非該当。将来認証を追加する際は再監査必須。同一ブラウザの共用者からの分離はない。
+- 公開映画カタログの `Access-Control-Allow-Origin: *` はcredential-free。認証情報を許可するCORSヘッダーなし。CORSを認可の代替とみなさない。
+- open PR: #514（別機能）、#521（古いcheckpoint）。自動mergeや古い状態の復元はしない。
+- main branch protection無効、repository rulesets空。production guardは存在するが、管理者による直接pushをGitHub側で阻止する設定ではない。
 
-本番では通常のページGETとデプロイ情報の読み取りのみ。攻撃・負荷試験、ユーザー記録の書込、DB同期、秘密情報の復号・ローテーションは実施していない。
+## 確認した問題と修正
 
-## 構成と認証・データ境界
-
-- 静的フロントエンドと公開映画カタログAPI。Prisma schemaに利用者・セッション・鑑賞記録のテーブルはない。鑑賞記録、評価、感想、ブックマークは既存localStorage形式を維持。
-- ログイン、OAuth、セッションCookie、アカウント単位のCRUD APIは現在存在しないため、ログイン/ログアウト、PKCE/state、他アカウントIDOR、トークン失効は**対象外**。認証テスト成功と読み替えない。
-- 同じブラウザプロファイルの利用者は記録を共有する。アカウントごとの分離は提供しない。別ブラウザcontextの分離検査と、同一利用者の永続化は異なるゲート。
-- サーバーAPIは公開カタログの読み取り。agent POSTは条件検索であり個人記録の保存ではない。CORS `*` はcredentialなしの公開データ用途。認証情報付与はない。PUTは隔離した実ビルドで405を確認。
-- 生のSQL文字列連結は使わずPrisma bindingを使用する検索を確認。TMDB upstreamは固定ホストのURLにパラメータを設定。利用者指定URLへの汎用proxyはない。全DOM sinkの形式的証明や全API変種の侵入検証は未実施。
-
-## 今回修正した確認可能な問題
-
-| 問題 | 対応・回帰検査 | 限界 |
+|問題|影響・限界|修正|
 |---|---|---|
-| agentが無制限にJSON bodyを読み取る | Content-Type/宣言長と実ストリーム4096byte上限、400/413/415。長さ詐称もテスト | 低速接続等はホスト側制御。分散DoS耐性の保証ではない |
-| レート制限mapが活動中の多数の識別子で増加 | 5000上限、期限切れ整理、新規識別子は満杯時拒否、既存カウンタ保持 | インスタンス内のbest effort。IPはVercelの転送ヘッダー境界を信頼。分散制限/課金抑止にはならない |
-| health/status/calendar/tv/releases/theater-directoryの制限漏れ | 共通request guard、4096文字URL制限、60/分 | 公開カタログ自体の収集は禁止できない |
-| NaN/小数等の検索limit/page、過長検索 | DB/TMDB前に400、既存正常レスポンス保持 | その他のフィルターの意味的組合せは既存検査の範囲 |
-| upstream待機・エラー漏洩/キャッシュ | 主要TMDB fetchに8秒timeout、エラー詳細をログに渡さず、4xx/5xxはno-store | DBライブラリ/ホスト側ログの保持設定は未確認 |
-| agent preflightがGETのみ | POST,OPTIONSを返す | credentialを許可しない |
-| 静的フロントエンドの保護ヘッダー欠落 | CSP、nosniff、DENY、Referrer/Permissions Policy。base/plugin/frame/form制限、script/connect先限定 | 既存inline script/handler互換のためunsafe-inlineが残る。XSSの完全対策とは呼ばない。https画像は許可 |
-| 通信/共有端末の説明不足 | privacyに検索語の送信、外部画像、ホストログ、共有端末と削除の説明を追加 | 実際の事業者ログ期間・削除対応と法的確認は運営者確認待ち |
+|static responseにnosniff/frame/CSP等がない|クリックジャッキング等の防御不足。XSSの存在自体を証明したものではない|DENY、nosniff、referrer/permissions、CSPのbase/object/frame/form境界を追加|
+|agentがrequest.json()で全文を先に読み込む|message長チェック前の過大本文のメモリ消費|4KiBのストリーム読取上限、宣言長と実測byte双方の検証・キャンセル、string型検証|
+|agentの上流例外が未処理、timeoutなし|エラー時の安定性・情報漏えい余地|8秒timeout、汎用502、POST検証エラー含めno-store、8秒本文期限、非同期キャンセル|
+|TMDB例外オブジェクトをconsole.warnへ渡す|例外がURL等を含む場合の秘密情報漏えい余地。漏えいの発生は未確認|固定メッセージのみ出力|
+|agentのpreflightがPOSTを許可しない|別originのJSON POSTがブラウザで拒否される|agent OPTIONSのみPOSTを許可し、読み取りAPIはGET/OPTIONSを維持|
+|Actionsが移動可能なmajor tag参照|供給網の再現性不足|公式の7種Actionの現在のcommit SHAに固定（checkout/setup-node/setup-python/upload/download/pages）|
+|privacy/termsの実通信・削除説明不足|検索語/API/画像通信、共用端末の扱いが不明|実構成に沿って通信、共用端末、削除・バックアップ、情報の範囲と権利を追記。法的承認は未了|
 
-OWASP Top 10/API Top 10/ASVSの認証・アクセス制御、入力/出力、データ保護、リソース消費、設定、依存関係、監視の観点で確認。全チェック項目の認証取得・網羅的合格ではない。
+CSPは既存inline scriptを壊さない限定ポリシーであり、script-srcを制限する厳格CSPではない。stored/DOM XSSの全sinkレビューを終えたという意味ではない。
 
-## 実行済み証拠
+## 今回実行した検査
 
-- 変更前・変更後とも `python scripts/quality_gate.py` 成功。変更後は途中のVM fixture不備とprefixページmetadataの差分を修正し、最終runで成功。既存ゲートのassertionは削除していない。
-- 新規HTTP/static security 7テスト成功。既存API日付/監督テストと合わせ27テスト成功。本文・cache・limiter・headersは修正前失敗を確認。
-- `NEXT_TELEMETRY_DISABLED=1 DATABASE_URL=<unused local fixture> npm run build` 成功。実DB・TMDB資格情報なし。
-- 実コンパイル済みbackendで5つのsnapshot GET、DB停止時health503、不正limit/page/ID、本文413/400/415、POST preflight、PUT405成功。実ユーザーデータは使わない。
-- `npm ci --ignore-scripts --no-audit --no-fund` と最新 `npm audit --json`: 124依存エントリ、既知脆弱性0（critical/high/moderate/low全0）。将来の安全を保証しない。
-- offline secret-pattern scan: 初回tracked 1769ファイル、到達可能history 13033オブジェクトに該当なし。3つの候補はenv.exampleの正確なUSER/PASSWORD/HOSTプレースホルダーで、固定例外により分類。GitHub形式、AWS access ID、秘密鍵、接続URLが対象。任意のAPIキー、未到達object、削除済みremote ref、全entropy検査は未確認。値は出力しない。
-- 変更した2ワークフローのcheckout/setup-node/upload-artifactを既存v4の取得済みSHAへ固定。contents:readを維持、checkout credentials不保持。backend workflowに全履歴scanとHTTP testsを追加。未変更ワークフローのタグ参照は別途残る。
-- fresh reviewer: 今回のpatchにCritical/Important指摘なし。minor: 同一context別タブの共有/再読込と、CSP下の成功API/deferred interactionは追加検証余地。独立reviewは一般公開承認ではない。
-- ローカルPlaywright browserのダウンロードは破損zipで失敗。ローカルChromium/WebKitや物理iPhoneを検証済みとしない。CSPを実際に付与する13ページmobile smokeと別context storage検査をCIへ追加したが、CI結果確定前はpending。
-- 必須source CI、receipt-only commit、final-head CI、production guard、新修正の本番反映は**未完了**。この版で成功を主張しない。
+- 基準mainおよび修正後 `python scripts/quality_gate.py`: **PASSED**。record/backup/storage、映画ID、映画賞、配信、割引、ブランド等の既存決定的回帰検査を含む。
+- `node --test tests/cinelva-release-security.test.cjs`: **12/12成功**。修正前6件失敗を確認後、宣言長/実byte/UTF-8/不正JSON/型/例外/正常結果/CORSを検証。実ユーザーデータ・外部TMDB通信なし。
+- `npm ci --ignore-scripts --no-audit --no-fund` と `npm audit --json`: **既知脆弱性0（124 dependencies）**。これは未公表の脆弱性がない証明ではない。
+- `npm run build`: **成功**（本番秘密情報なし）。`node tests/cinelva-backend-snapshot-smoke.cjs`: **成功**。DB接続不能の隔離fixtureでcalendar/tv/movies/theater-directory/releasesの5 APIがstatic snapshotを返し、healthが503を返すことを確認。
+- Git全履歴（local cloneのall refs）7,629 blobを高確度patternで検査: **0 findings**。GitHub token/AWS access key/private key/TMDB assignment等の限定検査。すべての種類の秘密情報や外部失効状態を網羅しない。値は報告・ログに出さない。ローテーションは未実施。
+- GitHub CIにtracked sourceのcredential pattern scanを追加。新security回帰は既存shared quality gateが自動検出する。
+- SQLはPrismaとparameterized tagged query。API上流hostは定数TMDB。今回調べたAPIに任意URL fetchやファイルpath入力はない。XSS/SSRF/CSRF/SQLi全攻撃の網羅的なペネトレーションテストは未了。
+- production homepage GET/HEAD **200**、HSTSあり、防御ヘッダーは修正前の状態。productionへ攻撃payload・負荷試験・記録書込を送っていない。
+- local Playwright browser配布ファイル取得失敗（壊れた/空ZIP）でChromium/WebKit E2E未実行。既存CIの実ブラウザ結果を必須とする。物理iPhone Safari **未確認**。
 
-## データ・UI・機能の監査範囲
+## データ品質の実測（2026-10-28 17:52 JST付近）
 
-共有ゲートは鑑賞記録CRUD/backup/storage/重複排除、映画ID/日付の投影、検索、監督、配信情報、ブランド、3列、テーマ、作品賞等の既存deterministic checksを含む。全主要journeyの今回のE2E成功とは異なる。実機iPhone、利用者テスト、全イベント/作品の事実照合は未実施。
+`python scripts/audit_data_freshness.py --output ...`:
 
-現snapshot: カレンダー1205イベント、配信カレンダー278行、availability1119作品、監督911件、屋外30件。イベント行数とユニーク作品数を混同しない。availabilityの観測は2026-10-24生成で作品別checked_atを使用。現行配信作品の完全カタログではない。Netflix等8対象の全作品母数と欠落率は不明で、0%/全網羅とは主張しない。PR514の許諾付き日本向け全件カタログは未確保でdraftを維持。
+- 配信availability: 1,119観測中、7日以内740（66.1%）、7日超379。48時間以内0。全サービスの全作品母集団が不明なため、網羅率や欠落率は算出不能。観測数を全作品数と呼ばない。
+- movies/postersのsnapshotは48.1時間経過し48時間鮮度gateを超過。今回生成日時を偽って更新していない。
+- 映画館上映時刻は許諾待ちで自動取得無効、snapshot古い。既存の期限切れ非表示ガードを維持。
+- テレビの完全番組表は取得不可、興収snapshotも古い。映画祭・野外上映等の公式feedは既存対象範囲のみ。
+- 賞・作品IDの既存整合性テストは成功したが、全ポスター/監督作品の実作品照合や8サービス全作品照合は未了。無料・公式データ以外の取得を追加していない。
 
-映画館の県/日付/同額最安/価格/ベネポは既存単体検査とCI browser journeyの対象。今回実機操作確認は未完了。ポスター・賞・監督の全事実正確性は既存スキーマ/ID checksを超えて保証しない。
+## 公開前の未解決事項
 
-## 公開前の未解決ゲート
+1. PR exact-headの4必須workflow、receipt-only commit、final-head CI、production guard、本番両ソース反映とread-only smokeが未了。
+2. 全主要画面E2E（検索/人物/候補/CRUD/0評価/感想・spoiler/bookmark/Top10確認/集計/戻る・タブ/保存失敗）とlight/dark/mobile表示は既存CIの今回結果を要確認。過去の成功だけで今回合格扱いにしない。
+3. 全DOM/HTML sinkとimport由来URLの悪用検査、全API入力・例外・response-size検証、全static解析は未完。P0重大・高リスクゼロをまだ証明できない。
+4. in-memory rate limiterはinstance毎で、distributedな無料枠保護を保証しない。health/status等のDB読み取りAPIに同等の制限がなく、unbounded DB読み取りもある。request IP信頼境界、ホスティング側無料の防御・利用量監視/停止設定、DB最大接続等を確認してから公開する。
+5. backend previewにproduction DATABASE_URLが流用されていないかを所有者が設定画面で確認する。値をチャットへ送らない。
+6. 非公開のsecurity連絡手段が未整備（公開Issuesのみ）。GitHub private vulnerability reporting等の実受付確認が必要。秘密情報をpublic Issueへ投稿しない。
+7. Vercel/DBのログ保持期間・閲覧権限、DB暗号化/backup/restore、alert配送先・復旧演習・無料枠の上限停止が未確認。ローカル記録はサーバーbackup対象外で、ユーザーのexportが復旧手段。
+8. TMDB/JustWatch等の帰属は既存creditsを維持。画像・poster・第三者データの全許諾、依存ライセンス15表現、サービス名商標・法務文書は法的確認未了。利用量/商用化が変わる際のHobby条件も要確認。
+9. 物理iPhoneでの操作・キーボード・アクセシビリティ、実データ量での性能、SNSの実OGP表示は未確認。
+10. GitHub必須checksをruleset/branch protectionで強制する設定が未了。権限変更は勝手に実施していない。
 
-1. **素材の利用権**: 最新の `asset-rights-inventory-20261023.json` は59素材のうち9件の生成元一致を確認し、50件の許諾は未確認（未使用の旧素材も含む）。今回の `public-release-assets-20261028.json` で現在60ファイルを再照合した。公開で使用される素材の権利と、15ライセンス式の確認が未解決。TMDB等の帰属表示は許諾証明の代わりにならない。所有者による取得元/使用範囲の確認、または確認可能な素材への置換が必要。
-2. **非公開のsecurity intake**: 現privacyの問い合わせは公開GitHub Issues。秘密を公開投稿しない注意あり。非公開脆弱性報告機能の有効化・受信担当・応答手順は未確認。未確認のメールアドレス/フォームを捏造しない。
-3. **実機・E2E・publication**: 最新patchの必須CI、CSP下の主要操作とproduction guard、main/production一致、読取専用smoke。物理iPhoneは運営者の実機確認が必要。
-4. **保存保護・復旧**: 個人記録の自動サーバーバックアップはない。利用者export/importが復旧手段。ホスト/DBの保存時暗号化、PITR、バックアップ保持期間、復旧訓練、アクセス権最小化は管理設定の実査が未完了。カタログschemaが個人記録を保持しないことと別問題。
-5. **監視/無料枠**: Hobby継続、使用量上限/通知、無料枠超過時対応、障害連絡先、ログPIIと保持期間の運営者確認。実際の契約/制限設定の証拠なしに「超過防止済み」としない。
-6. **残存XSSリスク**: localStorageは同一originのJSから読める。CSPのinline許可と多数の既存HTML render sinkが残るため、パッチ成功だけで重大脆弱性ゼロと断定しない。未許可の第三者script追加を避ける。
+## 参照・再開
 
-## 次の実行
+- OWASP API Security Top10: https://owasp.github.io/www-project-api-security/
+- ASVS: https://owasp.org/projects/asvs
+- 既存 `AGENTS.md`, `docs/operations/work-resume.md`, `quality/production-proof.json` を優先。`scripts/verify-production-release.cjs` を迂回しない。
+- 本番: https://cinelva.vercel.app 。現状の公開継続と「一般公開品質GO」の認定は別。未了項目が残る間は新たな一般公開GOを出さない。
 
-branch `audit/public-release-20261028` のPRで全source CIを確認→成功headのreceiptのみ更新→final-head CI→許可されたmerge→通常のVercel自動反映。API/git認証制約やCI失敗は具体的に記録し、回避しない。NO-GOは素材・窓口・運用・実機等のゲートが解消されるまで保持。
+独立レビュー後、実ReadableStreamでキャンセルが停止/拒否するケースと本文停止を再現・修正。UTF-8一byte分割、期限408、超過413、POST preflightの回帰を追加。初回PR CI backend materialized-config検査は新headerテストがrootの実行時configを読んだため失敗し、既存の厳密source-configuration readerを利用するようテストを修正。guardの迂回なし。
 
-本番: https://cinelva.vercel.app
-参考: https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html / https://vercel.com/docs/project-configuration/vercel-json
+### 追加検証
 
-## 追記: PR528 検証途中の観測
+- Cloud Chromeで本番トップ表示と映画館割引を読み取り専用で実操作。神奈川県選択、14日分カレンダー、11/4日付クリック、8系列の比較、最安同額の109/ユナイテッド・TOHO/イオン併記を確認。実機iPhoneや全県の検証ではない。記録は書き込んでいない。
+- built backendの隔離テストを拡張し、15ルート×PUT/PATCH/DELETEの45操作が405となること、agent preflightと不正JSON400/過大本文413/型不正400、no-storeを確認。既存backend CIから継続実行する。
+- 独立レビュー再確認: ストリームの指摘2件は解消、12/12回帰成功、新たなimportant所見なし。全体監査の未了項目は依然残る。
+- 作業中mainのイベントfeed更新 `f6ab09985cfcfde199f42d7ca113650d091cc5f8` を保持する。
 
-- PR: https://github.com/vongolebianco7/cinema-calendar/pull/528 。ソース更新ごとに必須CIを再実行。初回のscanner fixtureの正例/除外例の衝突を修正し、Python全192件成功。
-- backend materialized-config品質検査で新規static-headerテストがrootのbackend設定をfrontendと誤認した。既存 `readSourceConfiguration` に揃えて修正前失敗→修正後共有ゲート成功を確認。実際の保護ヘッダーのassertionを省略したわけではない。
-- 最終ローカル共有gateはNode390件と別group6件を含め成功、実backendビルド/API boundary smokeも成功。
-- 旧本番の13主要HTMLはHTTP200で最新mainの各ファイルとbyte一致。cloud browserで神奈川県選択→11/4ボタン `aria-pressed=true`、比較tableの日付更新と8系列の条件付き最安1100/1300/1400円順、同率系列名の表示を確認。データ書込なし。物理iPhoneではない。
-- Vercel metadata: frontend envは0件。backendはTMDB keyがproductionのみ、DATABASE_URLはproductionとpreviewに設定され、sensitive/secret・decrypted=falseを確認。値は取得・出力しない。previewのDB権限・本番DB共用の有無は不明で、運営者の確認項目。team member取得範囲ではconfirmed OWNER1名。billing/quota設定はconnector返却に含まれず未確認。
-- ローカルの実production guard実行は公開GitHub proof取得HTTP403で拒否された。成功としない。実際のVercel publicationでもguard成功が必須。connectorで証拠を読むことは、guardのネットワーク検証の代用・迂回にしない。
-- 残存P1: 非変更workflowのActionタグ参照、既存unsafe-inline、DOM sink全数検査/分散レート制限、監視と復旧設定。browser testの同一context別タブ/成功APIの遅延操作の検証はminor未対応として明示。
+### 本番実操作で見つかった監督作品欄の短編混入
 
-## WebKit CSP検査の切り分け
+本番のインターステラー詳細で、Doodlebug、Quay、Cinema16短編集が監督作品欄に表示された。backendのmovie creditsはDirector役割だけを検証し上映時間を検証していなかったため、既存の長編インデックスが詳細画面に適用されていなかった。既存 `director-feature-index.json` の確認済みID、または40分以上の確認可能なruntimeだけを採用するよう修正。未確認の作品を長編と推測せず、`verified_feature_subset` として返す。2件のRED→GREEN回帰でNolan短編・短編集・重複・自作品・Producer混入、未登録監督の時間不明/短編を除外。未知の監督の時間未確認作品は表示されないという範囲制限がある。
 
-source ddcb348cの新規CSP検査はChromiumで13routes成功、WebKitで4つの依存global未定義が発生。保護を緩めず、Playwrightで全レスポンスを差し替える方式から、同一ヘッダーを実HTTPで配信するlocal-only fixtureへ変更して切り分ける。ページごとのconsole/requestfailureとCSP header完全一致をassert。wire上のJS MIME=text/javascript・nosniff・CSP一致はローカルHTTPで確認。WebKit再検証前は修正済みとしない。
+## 2026-10-28 継続実行チェックポイント
 
-追加データ観測: calendar1205行中、ID/ポスター未確定7行（FOD告知、公開年も不明）を保持。同名・別版への推測紐付けはしない。IDあり1198行は1144作品で、複数イベントの行を作品重複と混同しない。availability1119観測のchecked_atは9/23〜10/24に分散し、生成日だけで新鮮と判断しない。既存7日freshness検査があるが、全作品の最新配信を保証しない。
+- `main` の最新base `26429f4318856f685914c9d32bcfdd9e1c02563b` (2026-10-28)。PR #528 の初回レビュー対象head `a7c5a6d1` は9/10 GitHub workflows success、`Validate frontend` failed。故障ジョブはCSP browser testのWebKitで、CSPがHTTP localhost assetsをHTTPSへ昇格した後、TLS非対応fixtureに接続してJSが読めず `CinemapCalendarContext` 未定義となった。Chromiumの同検査は13画面成功。これは製品側Safariの欠陥と確認されたものではない。
+- fixtureをHTTPから一時自己署名TLSに変更し、本番と同じCSPを弱めずWebKitが実際に受け取る設計に修正。証明書はテスト毎に生成し終了時に削除する。ブラウザを同一contextに分ける保存隔離テストは維持。
+- PR #526の追加差分（ストリーム本文の8秒deadline/byte上限、45禁止HTTP method検査、監督作品のverified feature filter、Action pins、既存CI/Privacy更新）を最新mainへ統合。#528の上限時rate limiter、長さ4096のURL拒否、厳格CSP、履歴scanは保持。agent JSON Content-Type 415、error no-storeを保持。
+- 統合後ローカル: `python3 scripts/quality_gate.py` 成功（404 Node tests + Python/data/compliance/brand/work-state/dependency gates）。P0 security/API/records/directorに絞った38 testすべて成功。PR security browser suiteはローカルのPlaywright browser binary未導入で起動不可。WebKit/Chromium検証は修正後のGitHub Actions結果待ち。
+- 保存・バックアップ互換性の既存品質ゲートは成功。DB schema/localStorage key/バックアップ形式/ユーザーデータは変更していない。プロダクションDB/利用者記録の書込みはしていない。
+- 次: 統合ブランチをPR #528 source branchへpushし、4必須workflowとその他のrequired checksを正確なsource SHAで確認→必要ならreceipt-only commit→final-head CI→guardを維持して判断。実機iPhone、公開前法務・素材権、非公開security intake、運用/無料枠、Preview DB分離は未完了。公開判定はNO-GOのまま。

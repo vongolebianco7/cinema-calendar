@@ -15,6 +15,20 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    if(key==='releases')assert.ok(d.count>=2);
    console.log(url,200,d[key].length,'static_snapshot');
   }
+  // Built handlers, isolated from production DB and TMDB credentials.
+  for(const route of ['agent','boxoffice-world','calendar','critic-videos','discover','health','movie-detail','movies','people','releases','status','theater-directory','theaters','tv','watch-providers']){
+   for(const method of ['PUT','PATCH','DELETE']){
+    const r=await fetch(`http://127.0.0.1:${port}/api/${route}`,{method,signal:AbortSignal.timeout(10000)});
+    assert.equal(r.status,405,`${method} ${route} must not expose a write handler`);
+   }
+  }
+  const agentUrl=`http://127.0.0.1:${port}/api/agent`;
+  const preflight=await fetch(agentUrl,{method:'OPTIONS',headers:{Origin:'https://cinelva.vercel.app','Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'content-type'}});
+  assert.equal(preflight.status,204);assert.match(preflight.headers.get('access-control-allow-methods'),/POST/);assert.equal(preflight.headers.get('access-control-allow-credentials'),null);
+  for(const [body,status] of [['{',400],[JSON.stringify({message:'a',extra:'x'.repeat(9000)}),413],[JSON.stringify({message:{a:1}}),400]]){
+   const r=await fetch(agentUrl,{method:'POST',headers:{'Content-Type':'application/json'},body});assert.equal(r.status,status);assert.equal(r.headers.get('cache-control'),'no-store');
+  }
+  console.log('45 prohibited write methods rejected; agent preflight and malformed/oversized/type validation passed.');
   const health=await fetch(`http://127.0.0.1:${port}/api/health`,{signal:AbortSignal.timeout(10000)});assert.equal(health.status,503,'health must report database outage honestly');
   for (const url of ['/api/movies?limit=NaN','/api/movies?limit=1.5','/api/movies?q='+'a'.repeat(301),'/api/discover?page=NaN','/api/discover?page=501','/api/movie-detail?id=9007199254740992']) {
    const response=await fetch(`http://127.0.0.1:${port}${url}`);assert.equal(response.status,400,url);assert.equal(response.headers.get('cache-control'),'no-store');

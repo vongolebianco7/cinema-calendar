@@ -24,9 +24,9 @@ test('limiter fails closed at capacity and preserves offender counters',()=>{
 });
 test('bounded JSON uses streamed bytes, not claimed length; rejects wrong types and invalid JSON',async()=>{
  const post=(body,headers={'content-type':'application/json'})=>new Request('https://example.test/api/agent',{method:'POST',body,headers});
- assert.deepEqual((await http.readJsonBody(post('{"message":"映画"}'))).data,{message:'映画'});
- assert.equal((await http.readJsonBody(post('x',{'content-type':'text/plain'}))).response.status,415);
- assert.equal((await http.readJsonBody(post('{'))).response.status,400);
- assert.equal((await http.readJsonBody(post(' '.repeat(5000),{'content-type':'application/json','content-length':'2'}))).response.status,413);
- assert.equal((await http.readJsonBody(post(' '.repeat(5000)))).response.status,413);
+ assert.deepEqual(await http.readJsonBody(post('{"message":"映画"}')),{message:'映画'});
+ await assert.rejects(()=>http.readJsonBody(post('x',{'content-type':'text/plain'})),e=>e.status===415);
+ await assert.rejects(()=>http.readJsonBody(post('{')),e=>e.status===400);
+ await assert.rejects(()=>http.readJsonBody(post(' '.repeat(5000),{'content-type':'application/json','content-length':'2'})),e=>e.status===413);
+ await assert.rejects(()=>http.readJsonBody(post(' '.repeat(5000))),e=>e.status===413);
 });

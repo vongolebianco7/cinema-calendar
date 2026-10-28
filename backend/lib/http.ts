@@ -50,29 +50,39 @@ export function rateLimited(request: Request, limit?: number) {
   return r.ok ? null : json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": String(r.retryAfter), "Cache-Control": "no-store" } }, request);
 }
 
-export function options(request: Request, methods = ["GET", "OPTIONS"]) {
-  return new Response(null, { status: 204, headers: { ...securityHeaders(request), "Access-Control-Allow-Methods": methods.join(",") } });
+export function options(request: Request, methods: string | string[] = "GET,OPTIONS") {
+  return new Response(null, { status: 204, headers: { ...securityHeaders(request), "Access-Control-Allow-Methods": Array.isArray(methods) ? methods.join(",") : methods } });
 }
 
-export async function readJsonBody(request: Request, maxBytes = 4096): Promise<{ data: unknown; response?: never } | { data?: never; response: Response }> {
-  const reject = (status: number, error: string) => ({ response: json({ error }, { status }, request) });
-  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || "")) return reject(415, "JSON content type required");
-  const declared = Number(request.headers.get("content-length"));
-  if (Number.isFinite(declared) && declared > maxBytes) return reject(413, "Request body too large");
-  const reader = request.body?.getReader();
-  if (!reader) return reject(400, "Invalid JSON");
-  const chunks: Uint8Array[] = []; let total = 0;
+// Read incrementally: Content-Length may be absent or dishonest. Count bytes,
+// cancel excess input, and never buffer an unbounded request before validation.
+export async function readJsonBody(request: Request, maxBytes = 4096, timeoutMs = 8000): Promise<unknown> {
+  const failure = (status: number) => Object.assign(new Error(status === 413 ? "request too large" : status === 415 ? "json content type required" : "invalid json"), { status });
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || "")) throw failure(415);
+  const declared = request.headers.get("content-length");
+  if (declared && (!/^\d+$/.test(declared) || Number(declared) > maxBytes)) throw failure(413);
+  if (!request.body) throw failure(400);
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder("utf-8", { fatal: true });
+  let size = 0, text = "";
+  let timer: ReturnType<typeof setTimeout>;
+  const deadline = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(failure(408)), timeoutMs);
+  });
+  const cancel = () => { void reader.cancel().catch(() => {}); };
   try {
     while (true) {
-      const { done, value } = await reader.read();
+      const { done, value } = await Promise.race([reader.read(), deadline]);
       if (done) break;
-      total += value.byteLength;
-      if (total > maxBytes) { await reader.cancel(); return reject(413, "Request body too large"); }
-      chunks.push(value);
+      size += value.byteLength;
+      if (size > maxBytes) { cancel(); throw failure(413); }
+      text += decoder.decode(value, { stream: true });
     }
-    const bytes = new Uint8Array(total); let offset = 0;
-    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-    return { data: JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)) };
-  } catch { return reject(400, "Invalid JSON"); }
-  finally { reader.releaseLock(); }
+    text += decoder.decode();
+    return JSON.parse(text);
+  } catch (error) {
+    cancel();
+    if ([413, 408, 415].includes((error as { status?: number }).status || 0)) throw error;
+    throw failure(400);
+  } finally { clearTimeout(timer!); reader.releaseLock(); }
 }

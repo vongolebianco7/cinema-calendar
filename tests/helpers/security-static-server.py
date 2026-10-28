@@ -1,5 +1,6 @@
 """Local-only browser fixture serving the actual static Vercel headers on the wire."""
 import json
+import ssl
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -12,4 +13,8 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header(header['key'], header['value'])
         super().end_headers()
 
-ThreadingHTTPServer(('127.0.0.1', int(sys.argv[1])), Handler).serve_forever()
+server = ThreadingHTTPServer(('127.0.0.1', int(sys.argv[1])), Handler)
+tls = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+tls.load_cert_chain(sys.argv[2], sys.argv[3])
+server.socket = tls.wrap_socket(server.socket, server_side=True)
+server.serve_forever()

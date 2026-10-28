@@ -1113,7 +1113,7 @@
       const average=reviewed.length?reviewed.reduce((sum,v)=>sum+v,0)/reviewed.length:null;
       const high=reviewed.filter(v=>v>=4).length;
       const ratio=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;
-      const directorStats='<section class="director-profile-dashboard" aria-label="'+escapeHTML(group.name)+'の鑑賞ダッシュボード"><h4>鑑賞ダッシュボード</h4><div class="director-profile-statgrid">'+[
+      const directorProfileStats='<section class="director-profile-dashboard" aria-label="'+escapeHTML(group.name)+'の鑑賞ダッシュボード"><h4>鑑賞ダッシュボード</h4><div class="director-profile-statgrid">'+[
         ['鑑賞本数',watchedCount+'本'],['監督作品総数',catalogAvailable?films.length+'本':'未確認'],
         ['鑑賞率',ratio===null?'—':ratio+'%'],['MY平均評価',average===null?'—':average.toFixed(2)+' / 5.0'],
         ['MY評価済み',reviewed.length+'本'],['MY 4.0以上',high+'本']

@@ -1,4 +1,15 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+for(const mode of ['tv','festival','events'])test('active '+mode+' calendar renders external values only as text and HTTPS links',()=>{
+ const html=fs.readFileSync('index.html','utf8'),payload='<svg onload=alert(1)>';
+ const extract=name=>{const start=html.indexOf('function '+name+'(');return html.slice(start,html.indexOf('\nfunction ',start+10));};
+ const elements=new Map();const element=()=>({innerHTML:'',textContent:'',classList:{add(){},remove(){}}});
+ const row={title:payload,name:payload,program:payload,time:payload,service:payload,date:'2026-10-28',event:'tv',source_url:'javascript:alert(1)',url:'javascript:alert(1)',place:payload,area:payload};
+ const ctx={Date,URL,encodeURIComponent,mode,active:'すべて',view:new Date(2026,9,15),movies:[row],festivalEvents:[row],outdoorEvents:[row],calendarPriorityBudget:0,filtered:()=>[row],missingPoster:()=>'',tvChannelColor:()=> '#000',sameDay:()=>false,currentWeekStart:()=>new Date(2026,9,26),dayColorClass:()=>'',mountCalendarOutdoorReviews(){},document:{querySelector:()=>element(),querySelectorAll:()=>[]},$:key=>{if(!elements.has(key))elements.set(key,element());return elements.get(key)}};
+ vm.createContext(ctx);vm.runInContext(['esc','safeCalendarUrl','monthPageStart','monthPageEnd','monthPageWeekCount','renderOutdoorCalendar','renderCal'].map(extract).join('\n'),ctx);
+ ctx.renderCal();const result=elements.get('#dates').innerHTML;
+ assert.ok(!result.includes('<svg onload'),mode+' text must not become markup');
+ assert.ok(!result.includes('href="javascript:'),mode+' source URL must not run script');
+});
 test('special screening detail treats movie text and source URL as untrusted data',()=>{
  const html=fs.readFileSync('index.html','utf8');
  const source=html.slice(html.indexOf('function esc(value)'),html.indexOf('function streamServiceColor'));

@@ -54,7 +54,7 @@ OWASP Top 10/API Top 10/ASVSの認証・アクセス制御、入力/出力、デ
 
 ## 公開前の未解決ゲート
 
-1. **素材の利用権**: `rights-review-20261021.md` の画像54件のファイル別許諾証跡と15ライセンス式の確認が未解決。TMDB等の帰属表示は許諾証明の代わりにならない。所有者による取得元/使用範囲の確認、または確認可能な素材への置換が必要。
+1. **素材の利用権**: 最新の `asset-rights-inventory-20261023.json` は59素材のうち9件の生成元一致を確認し、50件の許諾は未確認（未使用の旧素材も含む）。今回の `public-release-assets-20261028.json` で現在60ファイルを再照合した。公開で使用される素材の権利と、15ライセンス式の確認が未解決。TMDB等の帰属表示は許諾証明の代わりにならない。所有者による取得元/使用範囲の確認、または確認可能な素材への置換が必要。
 2. **非公開のsecurity intake**: 現privacyの問い合わせは公開GitHub Issues。秘密を公開投稿しない注意あり。非公開脆弱性報告機能の有効化・受信担当・応答手順は未確認。未確認のメールアドレス/フォームを捏造しない。
 3. **実機・E2E・publication**: 最新patchの必須CI、CSP下の主要操作とproduction guard、main/production一致、読取専用smoke。物理iPhoneは運営者の実機確認が必要。
 4. **保存保護・復旧**: 個人記録の自動サーバーバックアップはない。利用者export/importが復旧手段。ホスト/DBの保存時暗号化、PITR、バックアップ保持期間、復旧訓練、アクセス権最小化は管理設定の実査が未完了。カタログschemaが個人記録を保持しないことと別問題。
@@ -77,3 +77,9 @@ branch `audit/public-release-20261028` のPRで全source CIを確認→成功hea
 - Vercel metadata: frontend envは0件。backendはTMDB keyがproductionのみ、DATABASE_URLはproductionとpreviewに設定され、sensitive/secret・decrypted=falseを確認。値は取得・出力しない。previewのDB権限・本番DB共用の有無は不明で、運営者の確認項目。team member取得範囲ではconfirmed OWNER1名。billing/quota設定はconnector返却に含まれず未確認。
 - ローカルの実production guard実行は公開GitHub proof取得HTTP403で拒否された。成功としない。実際のVercel publicationでもguard成功が必須。connectorで証拠を読むことは、guardのネットワーク検証の代用・迂回にしない。
 - 残存P1: 非変更workflowのActionタグ参照、既存unsafe-inline、DOM sink全数検査/分散レート制限、監視と復旧設定。browser testの同一context別タブ/成功APIの遅延操作の検証はminor未対応として明示。
+
+## WebKit CSP検査の切り分け
+
+source ddcb348cの新規CSP検査はChromiumで13routes成功、WebKitで4つの依存global未定義が発生。保護を緩めず、Playwrightで全レスポンスを差し替える方式から、同一ヘッダーを実HTTPで配信するlocal-only fixtureへ変更して切り分ける。ページごとのconsole/requestfailureとCSP header完全一致をassert。wire上のJS MIME=text/javascript・nosniff・CSP一致はローカルHTTPで確認。WebKit再検証前は修正済みとしない。
+
+追加データ観測: calendar1205行中、ID/ポスター未確定7行（FOD告知、公開年も不明）を保持。同名・別版への推測紐付けはしない。IDあり1198行は1144作品で、複数イベントの行を作品重複と混同しない。availability1119観測のchecked_atは9/23〜10/24に分散し、生成日だけで新鮮と判断しない。既存7日freshness検査があるが、全作品の最新配信を保証しない。

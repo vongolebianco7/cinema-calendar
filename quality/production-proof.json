@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1717df6d2df47af10645cad3922664d2137301b4",
+  "head_sha": "913d9e3f5eec01ab42e11725010c03513fc2f33e",
   "verified_at": "2026-10-28T00:00:00.000Z",
-  "note": "PR #531: additive viewing-record import. Required CI workflows autonomous quality gate, smoke, frontend validation, backend build all completed successfully for exact PR head. Source tree remains unchanged except this receipt."
+  "note": "PR #535: GOLD calendar and mobile Top 10 legibility. Release only after all four required PR workflows succeed for exact head_sha; receipt-only change excluded from executable source digest."
 }

@@ -16,7 +16,7 @@ jobs:
   critic-render:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Check Critic Map render TDZ regression
         run: python scripts/check_critic_render_tdz.py
       - name: Check inline JavaScript syntax

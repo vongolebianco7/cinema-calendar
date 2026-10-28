@@ -1721,5 +1721,25 @@
         "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
       }
     }
+  },
+  "public_release_audit_20261028": {
+    "status": "in_progress",
+    "base_sha": "8672ef287262dd921ec83f15dd54b184c6597daf",
+    "branch": "security/public-release-audit-20261028",
+    "report": "docs/operations/public-release-audit-20261028.md",
+    "verdict": "NO-GO",
+    "validation": [
+      "shared quality gate passed",
+      "9 security regression tests passed",
+      "backend build and five snapshot APIs passed",
+      "npm audit 0 vulnerabilities",
+      "history credential pattern scan 7629 blobs 0 findings"
+    ],
+    "blockers": [
+      "CI and exact-source proof pending",
+      "local Playwright browser download fails",
+      "private security contact and operational controls unverified"
+    ],
+    "next_action": "Create PR; require exact-source and final-head CI; renew production receipt only after successful checks; no release bypass."
   }
 }

@@ -54,3 +54,29 @@ export function rateLimited(request: Request, limit?: number) {
 export function options(request: Request) {
   return new Response(null, { status: 204, headers: securityHeaders(request) });
 }
+
+// Read incrementally: Content-Length may be absent or dishonest. Count bytes,
+// cancel excess input, and never buffer an unbounded request before validation.
+export async function readJsonBody(request: Request, maxBytes = 4096): Promise<unknown> {
+  const failure = (status: number) => Object.assign(new Error(status === 413 ? "request too large" : "invalid json"), { status });
+  const declared = request.headers.get("content-length");
+  if (declared && (!/^\d+$/.test(declared) || Number(declared) > maxBytes)) throw failure(413);
+  if (!request.body) throw failure(400);
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder("utf-8", { fatal: true });
+  let size = 0, text = "";
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > maxBytes) { await reader.cancel(); throw failure(413); }
+      text += decoder.decode(value, { stream: true });
+    }
+    text += decoder.decode();
+    return JSON.parse(text);
+  } catch (error) {
+    if ((error as { status?: number }).status === 413) throw error;
+    throw failure(400);
+  } finally { reader.releaseLock(); }
+}

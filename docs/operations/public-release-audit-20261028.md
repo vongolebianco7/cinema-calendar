@@ -71,3 +71,10 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - 本番: https://cinelva.vercel.app 。現状の公開継続と「一般公開品質GO」の認定は別。未了項目が残る間は新たな一般公開GOを出さない。
 
 独立レビュー後、実ReadableStreamでキャンセルが停止/拒否するケースと本文停止を再現・修正。UTF-8一byte分割、期限408、超過413、POST preflightの回帰を追加。初回PR CI backend materialized-config検査は新headerテストがrootの実行時configを読んだため失敗し、既存の厳密source-configuration readerを利用するようテストを修正。guardの迂回なし。
+
+### 追加検証
+
+- Cloud Chromeで本番トップ表示と映画館割引を読み取り専用で実操作。神奈川県選択、14日分カレンダー、11/4日付クリック、8系列の比較、最安同額の109/ユナイテッド・TOHO/イオン併記を確認。実機iPhoneや全県の検証ではない。記録は書き込んでいない。
+- built backendの隔離テストを拡張し、15ルート×PUT/PATCH/DELETEの45操作が405となること、agent preflightと不正JSON400/過大本文413/型不正400、no-storeを確認。既存backend CIから継続実行する。
+- 独立レビュー再確認: ストリームの指摘2件は解消、12/12回帰成功、新たなimportant所見なし。全体監査の未了項目は依然残る。
+- 作業中mainのイベントfeed更新 `f6ab09985cfcfde199f42d7ca113650d091cc5f8` を保持する。

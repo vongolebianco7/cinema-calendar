@@ -104,3 +104,5 @@ CSPは既存inline scriptを壊さない限定ポリシーであり、script-src
 - 同じheadのValidate frontendではChromiumがCSP付き13画面を通過。WebKitでdiscover.htmlのpage errorsにオフラインAPI fixtureのCORS拒否が出た。オフライン応答に本番APIと同等の非credentialed CORS headersを付与し、ブラウザ側の実CSPを維持する。
 - `node --check tests/cinelva-security-headers-browser.cjs`、detail/security focused tests 14件、`git diff --check` は成功。改訂後のCIは未実行。実機iPhoneは引き続き未確認。判定NO-GO。
 - 再開: 最新PR #528 headのValidate frontend、Reproducible backend build、他required checksを確認し、失敗時はjob logを読み、receipt-only/final-head CI/guard手順を維持する。
+
+- 追試 `fc7540e`: backend build/API smokeとFull Python contract、brand、mobile smokeは成功。Validate frontendはWebKitのCORSアクセス拒否が残った。fixtureのOPTIONS preflightを204で返し、same-origin JSON snapshotもfixtureで完結させる修正を追加。実際のCSPヘッダーは維持し、次headで再検査。

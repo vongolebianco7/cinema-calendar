@@ -67,3 +67,13 @@ branch `audit/public-release-20261028` のPRで全source CIを確認→成功hea
 
 本番: https://cinelva.vercel.app
 参考: https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html / https://vercel.com/docs/project-configuration/vercel-json
+
+## 追記: PR528 検証途中の観測
+
+- PR: https://github.com/vongolebianco7/cinema-calendar/pull/528 。ソース更新ごとに必須CIを再実行。初回のscanner fixtureの正例/除外例の衝突を修正し、Python全192件成功。
+- backend materialized-config品質検査で新規static-headerテストがrootのbackend設定をfrontendと誤認した。既存 `readSourceConfiguration` に揃えて修正前失敗→修正後共有ゲート成功を確認。実際の保護ヘッダーのassertionを省略したわけではない。
+- 最終ローカル共有gateはNode390件と別group6件を含め成功、実backendビルド/API boundary smokeも成功。
+- 旧本番の13主要HTMLはHTTP200で最新mainの各ファイルとbyte一致。cloud browserで神奈川県選択→11/4ボタン `aria-pressed=true`、比較tableの日付更新と8系列の条件付き最安1100/1300/1400円順、同率系列名の表示を確認。データ書込なし。物理iPhoneではない。
+- Vercel metadata: frontend envは0件。backendはTMDB keyがproductionのみ、DATABASE_URLはproductionとpreviewに設定され、sensitive/secret・decrypted=falseを確認。値は取得・出力しない。previewのDB権限・本番DB共用の有無は不明で、運営者の確認項目。team member取得範囲ではconfirmed OWNER1名。billing/quota設定はconnector返却に含まれず未確認。
+- ローカルの実production guard実行は公開GitHub proof取得HTTP403で拒否された。成功としない。実際のVercel publicationでもguard成功が必須。connectorで証拠を読むことは、guardのネットワーク検証の代用・迂回にしない。
+- 残存P1: 非変更workflowのActionタグ参照、既存unsafe-inline、DOM sink全数検査/分散レート制限、監視と復旧設定。browser testの同一context別タブ/成功APIの遅延操作の検証はminor未対応として明示。

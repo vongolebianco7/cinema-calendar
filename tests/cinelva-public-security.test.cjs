@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 test('all static routes receive protective headers without disabling existing inline handlers',()=>{
- const config=JSON.parse(fs.readFileSync('vercel.json'));
+ const config=require('../scripts/source-configuration.cjs').readSourceConfiguration('vercel.json');
  const headers=Object.fromEntries((config.headers?.find(x=>x.source==='/(.*)')?.headers||[]).map(x=>[x.key.toLowerCase(),x.value]));
  assert.equal(headers['x-content-type-options'],'nosniff');
  assert.equal(headers['x-frame-options'],'DENY');

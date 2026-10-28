@@ -10,6 +10,15 @@ test('special screening detail treats movie text and source URL as untrusted dat
  assert.ok(!detail.innerHTML.includes('<img src=x'),'title must remain text');
  assert.ok(!detail.innerHTML.includes('href="javascript:'),'source must not execute script');
 });
+test('timeline escapes observed provider labels and validates source URLs',()=>{
+ const html=fs.readFileSync('index.html','utf8');
+ const extract=name=>{const start=html.indexOf('function '+name+'(');return html.slice(start,html.indexOf('\nfunction ',start+10));};
+ const ctx={URL,availabilitySnapshot:{movies:{'1':{checked_at:'2026-10-28',flatrate:['<img src=x onerror=alert(1)>'],source_url:'javascript:alert(1)'}}},CinelvaDataQuality:{availabilityIsFresh:()=>true},related:()=>[],normTitle:x=>String(x),releaseHistory:{records:[]}};
+ vm.createContext(ctx);vm.runInContext(extract('esc')+extract('safeCalendarUrl')+extract('movieTimelineHtml'),ctx);
+ const result=ctx.movieTimelineHtml({id:1,title:'Film'});
+ assert.ok(!result.includes('<img src=x'));
+ assert.ok(!result.includes('href="javascript:'));
+});
 test('ordinary movie trailers reject script schemes without changing record data',()=>{
  const html=fs.readFileSync('index.html','utf8'),detail={innerHTML:''};
  const source=html.slice(html.indexOf('function esc(value)'),html.indexOf('function streamServiceColor'));

@@ -230,6 +230,9 @@ html,body{overflow-x:hidden}
 <script src="js/cinelva-theater-schedule.js?v=20261017"></script>
 <script>
 const $=s=>document.querySelector(s);
+function normName(s){return String(s||'').normalize('NFKC').replace(/[\s　・･\.\-（）()]/g,'').toLowerCase()}
+function matchesTheaterSearch(t,q){const n=normName(t.name),v=normName(q);return [n,n.replace(/シネマズ|シネマ/g,''),normName([t.name,t.prefecture,t.municipality,t.address].filter(Boolean).join(''))].some(x=>x.includes(v))}
+
 let theaters=[],osmTheaters=[],officialCinemaTheaters=[],directoryCache=[],formatData={screens:[]},scheduleData={theaters:[],schedules:[]},selectedTheater="",selectedDate="",selectedFormat=param("format");
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 function mapsUrl(t){const q=[t.name,t.address,t.prefecture,t.municipality].filter(Boolean).join(" ");return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}

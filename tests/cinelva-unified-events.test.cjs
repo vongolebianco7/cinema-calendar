@@ -18,4 +18,10 @@ test('unified calendar preserves festivals, awards, domestic events and outdoor 
  for(const label of ['国内映画祭','海外映画祭','映画賞','国内イベント','屋外上映','上映作品'])assert.ok(nodes['#dates'].innerHTML.includes(label),label);
  ctx.active='海外映画祭';ctx.renderOutdoorCalendar();
  assert.ok(nodes['#dates'].innerHTML.includes('海外映画祭'));assert.ok(!nodes['#dates'].innerHTML.includes('屋外上映'));
+ ctx.active='すべて';ctx.festivalEvents=[{title:'翌月の映画祭',date:'2026-11-01',service:'国内映画祭'}];
+ const bar={dataset:{outdoor:encodeURIComponent('翌月の映画祭')}};
+ ctx.document.querySelectorAll=s=>s==='[data-outdoor]'?[bar]:[];
+ let opened;ctx.openMovie=movie=>opened=movie;
+ ctx.renderOutdoorCalendar();bar.onclick();
+ assert.equal(opened?.title,'翌月の映画祭','adjacent-month festival bar must open details even without a month detail card');
 });

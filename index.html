@@ -534,7 +534,7 @@ function renderOutdoorCalendar(){
  html+='</div>';
  $("#dates").innerHTML=html;
  mountCalendarOutdoorReviews();
- document.querySelectorAll("[data-outdoor]").forEach(el=>el.onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const target=[...document.querySelectorAll(".outdoorEventItem")].find(x=>x.querySelector("h3")?.textContent===all.find(g=>(g.event_id||g.name)===key)?.name);target?.scrollIntoView({behavior:"smooth",block:"center"})})
+ document.querySelectorAll("[data-outdoor]").forEach(el=>el.onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const group=all.find(g=>(g.event_id||g.name)===key);const target=[...document.querySelectorAll(".outdoorEventItem")].find(x=>x.querySelector("h3")?.textContent===group?.name);if(target)target.scrollIntoView({behavior:"smooth",block:"center"});else if(group?.service){const ev=festivalEvents.find(ev=>ev.title===group.name&&ev.date===group.first);if(ev)openMovie({...ev,start_date:ev.date,event:"festival"})}})
 }
 
 function renderCal(){if(mode==="festival"||mode==="events"){renderOutdoorCalendar();return;}

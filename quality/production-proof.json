@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3",
-  "verified_at": "2026-10-28T21:11:04.361Z",
-  "note": "PR #541: unified festival/event calendar and corrected credits My Cinelva navigation. All four required exact-source workflows succeeded; receipt-only commit excludes no executable changes."
+  "head_sha": "91205dfde3daa07e67237d077b19833f43b23cee",
+  "verified_at": "2026-10-28T21:59:20.005Z",
+  "note": "PR #528 integrated main #541. Required PR workflows all success: AQG 40774582073, smoke 40774582183, frontend 40774582090, backend 40774582214. Operational release gates remain unresolved."
 }

@@ -9,10 +9,13 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const wordmarkStyle=()=>[...document.querySelectorAll('.gBrand>span')].map(el=>{const s=getComputedStyle(el);return {color:s.color,backgroundImage:s.backgroundImage,textFill:s.webkitTextFillColor}});
   for(const theme of ['light','dark']){
-   await context.addInitScript(value=>localStorage.setItem('cinelva-theme-v1',value),theme);
    await page.goto(`http://127.0.0.1:${port}/index.html`);
+   await page.locator('#gMenuBtn').click();
+   await page.getByLabel('表示テーマ',{exact:true}).selectOption(theme);
+   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    const expected=await page.evaluate(wordmarkStyle);
    await page.goto(`http://127.0.0.1:${port}/credits.html`);
+   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    assert.deepEqual(await page.evaluate(wordmarkStyle),expected,`credits header and drawer wordmarks match calendar in ${theme}`);
   }
   await page.goto(`http://127.0.0.1:${port}/my-cinelva/`);

@@ -21,7 +21,7 @@ def findings(data):
             if kind == 'credential_url':
                 # Local test connections are intentionally non-secret fixtures.
                 host = match.group(2).split(b':')[0].lower()
-                if host in (b'localhost', b'127.0.0.1', b'example.invalid', b'example.test') or (host == b'host' and match.group(1) == b'PASSWORD'):
+                if host in (b'localhost', b'127.0.0.1', b'example.invalid', b'example.test') or (host == b'host' and match.group(1) == b'PASSWORD') or (host == b'remote.example' and match.group(1) == b'private'):
                     continue
             result.append(kind)
     return sorted(set(result))

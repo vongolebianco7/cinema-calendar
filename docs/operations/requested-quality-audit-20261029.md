@@ -1,6 +1,6 @@
 # 2026-10-29 requested 28-task audit
 
-Baseline: main `0e94795f6342d8dcb8b390fc51485a03a1958745`. Read AGENTS, work-resume, work-state, #239, current Issue search and 12 open PRs. This is a source/test audit, not fresh production or physical-iPhone acceptance. `要確認` explicitly includes implemented-but-not-fully-accepted behavior; do not rebuild it or call it complete.
+Historical baseline: main `0e94795f6342d8dcb8b390fc51485a03a1958745`. Follow-up implementation is now on main at `f998de7e8bee72a7603c51db9a92180a453bc690` via PRs #546–#548. The table below records the initial request audit; its `要確認`/`不具合あり` labels are not a fresh 28-item production acceptance. See the post-merge checkpoint below for completed work and the remaining gates.
 
 | # | Request | Classification | Evidence / remaining acceptance / owner |
 |---|---|---|---|
@@ -52,10 +52,24 @@ Diagnostic command: `node tests/cinelva-requested-performance-browser.cjs`; repe
 
 Local browser attempt failed before navigation: no installed Chromium executable. Browser download returned a truncated/non-ZIP payload; install was interrupted rather than endlessly retried. No timing values or speedup are claimed. Requested initial/tab/cache/review/search targets remain UNMEASURED. Record filtering is not global TMDB search; repeat-tab timing is not all cached screens. Empty-record review/scroll remain unmeasured. The diagnostic preserves old scoring and reports target failures separately; strict mode rejects every unmeasured/missed target.
 
+## Post-merge checkpoint — 2026-10-29
+
+PR #546 integrated the reviewed mobile fixes: visible-only review controls, reliable discovery return state, duplicate dashboard-render reduction, director insights, and removal of unlicensed event scraping/automation while preserving the manually curated snapshots. PR #547 added same-title film identity protection and skipped an inactive weekly-calendar renderer. PR #548 added opt-in, local release-date notices to My Cinelva.
+
+PR #548 is merged at `f998de7`; exact-source and final-head CI passed, Vercel production is READY on that SHA, and deployed watchlist/notice/quick-rate assets were checked. The notice feature checks only on page/watchlist open and only for the expected Japan date; it does not run in the background, request notification permission, or send user data. Schedule entries without an official HTTPS source link are deliberately skipped.
+
+## Remaining acceptance across the 28 requests
+
+- The P0 code fixes in #546/#547/#548 are not a blanket sign-off. Confirm poster fallbacks and TMDB-rating presentation across actual routes; check duplicate identities across catalog, rankings and awards; validate director counts, shorts and names against real input data; and finish card-height, detail-return, review, and calendar acceptance.
+- Existing awards, director collections, My Cinelva statistics, annual calendar, watchlist and discovery surfaces still need the acceptance cases in the original task table. The release notice was added to the watchlist; background/push notice delivery is not implemented.
+- The event and streaming datasets still need permitted official/API sources with suitable coverage and freshness. No scraping or unlicensed automatic refresh is permitted.
+- Hosted Chromium/WebKit CI and a 390px layout smoke are not physical iPhone Safari. Physical-device acceptance remains unverified.
+- Performance remains measured in synthetic hosted-browser contexts, not real iPhone hardware. The latest documented same-runner WebKit 1000-record diagnostic was initial 2519ms, tab 183ms, cache 114ms, review 269ms; tab/cache met requested thresholds, initial/review did not. Earlier same-runner baseline was 3457/701/530/765ms, respectively. These are samples and do not establish all performance targets. Scroll FPS and global TMDB search remain unmeasured.
+
 ## Next actions
 
-1. Read current PR539/543/544 diffs and latest checks, reconcile their dependencies; do not merge failing source. Investigate earliest deterministic failure, then frontend regression evidence, maximum three attempts per persistent blocker.
-2. Run new diagnostic in CI; inspect artifact and repair any harness failure before using it for baseline comparisons. Compare unchanged harness on before/after code for every optimization.
-3. Continue P0 with #542 detail return and light review evidence after reconciling PR539; preserve approved UI and data keys.
-4. Audit remaining source coverage via approved APIs/RSS only; record unsupported feeds explicitly.
-5. Actual iPhone and production acceptance remain separate. No approval is currently requested; destructive migration, authentication or major production change remains outside this patch.
+1. Re-audit all 28 rows against current main and current production after PR #548; keep implementation and acceptance status distinct.
+2. Continue P0 in order with route-level poster/rating, duplicate, director and card assertions; keep records, bookmarks and review data intact.
+3. Close P1 UI and calendar acceptance with hosted Chromium/WebKit and production read-only checks, then measure each requested performance target using the same committed harness and environment.
+4. Add automated event/streaming updates only when a free, permitted, authoritative API/RSS source provides the required freshness and attribution. Record unsupported coverage instead of fabricating it.
+5. Request a physical iPhone Safari regression pass for the remaining real-device gate. Do not describe synthetic viewport tests as iPhone hardware results.

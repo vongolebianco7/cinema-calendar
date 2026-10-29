@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "b8a85bfb83dde79e7d7b4549da27550cc9fc74c5",
-  "verified_at": "2026-10-29T12:04:46.519Z",
-  "note": "PR #548 exact executable source: Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build, mobile layout smoke and Cinemap completeness scorecard all passed on this source SHA. Receipt-only commit; final-head CI required before merge/publication."
+  "head_sha": "0c6eaa51eed9ae489f6c5eac7a9a902bc9d0277c",
+  "verified_at": "2026-10-29T12:49:00.000Z",
+  "note": "PR #550 exact executable source: Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build, mobile layout smoke and Cinemap completeness scorecard all passed on this source SHA. Receipt-only commit; final-head CI required before merge/publication."
 }

@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const source=fs.readFileSync('js/cinelva-quick-rate.js','utf8');
 function setup(existing=[]){
- const nodes=new Map(),writes=[];let allCalls=0;
+ const nodes=new Map(),writes=[];let allCalls=0,storageReads=0;
  const node=()=>({value:'',textContent:'',onclick:null,children:[],options:[],
   style:{setProperty(){}},attributes:{},setAttribute(k,v){this.attributes[k]=String(v)},getAttribute(k){return this.attributes[k]??null},replaceWith(){},addEventListener(){},
   append(child){this.children.push(child);this.options.push(child);},
@@ -23,8 +23,8 @@ function setup(existing=[]){
  };
  const Records={all:()=>{allCalls++;return existing},validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
  const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
- vm.runInNewContext(source,{window,document,location:{pathname:'/'},localStorage:{getItem(){return null}},CustomEvent:class{constructor(){}},MutationObserver:class{observe(){}}});
- return {api:window.CinelvaQuickRate,dialog,element,writes,allCalls:()=>allCalls};
+ vm.runInNewContext(source,{window,document,location:{pathname:'/'},localStorage:{getItem(){storageReads++;return null}},CustomEvent:class{constructor(){}},MutationObserver:class{observe(){}}});
+ return {api:window.CinelvaQuickRate,dialog,element,writes,allCalls:()=>allCalls,storageReads:()=>storageReads};
 }
 test('middle dot, spaces and Unicode punctuation do not prevent title matching',()=>{
  const {api}=setup();
@@ -63,17 +63,19 @@ test('invalid date does not persist and existing zero rating remains zero',()=>{
 });
 test('primed My Cinelva records open locally without reparsing storage and refresh on a new snapshot',()=>{
  const first=[{id:'22',title:'作品',rating:4.2,watchedAt:'2026-10-20'}];
- const {api,element,allCalls}=setup();
- const callsBeforeOpen=allCalls();
+ const {api,element,allCalls,storageReads}=setup();
  assert.equal(typeof api.primeRecords,'function');
  api.primeRecords(first);
+ const readsAfterPrime=storageReads(),callsAfterPrime=allCalls();
  assert.equal(api.open({id:22,title:'作品',_localRecord:true}),true);
  assert.equal(element('cinelvaRateScore').value,4.2);
- assert.equal(allCalls(),callsBeforeOpen,'the page-provided snapshot avoids a second full Records.all() read');
+ assert.equal(allCalls(),callsAfterPrime,'the page-provided snapshot avoids Records.all()');
+ assert.equal(storageReads(),readsAfterPrime,'a local snapshot lookup should not reread even large localStorage values');
  const next=[{...first[0],rating:3.7}];api.primeRecords(next);
+ const readsAfterRefresh=storageReads();
  assert.equal(api.open({id:22,title:'作品',_localRecord:true}),true);
  assert.equal(element('cinelvaRateScore').value,3.7,'a refreshed page snapshot must replace the old index');
- assert.equal(allCalls(),callsBeforeOpen);
+ assert.equal(storageReads(),readsAfterRefresh);
 });
 test('all three existing pages load the shared inline rating workflow',()=>{
  for(const name of ['index.html','rankings.html','search.html']){

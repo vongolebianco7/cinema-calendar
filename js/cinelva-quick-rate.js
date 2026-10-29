@@ -5,8 +5,8 @@ const Records=root.CinelvaLibraryRecords;
 if(!Records)return;
 let recordCache=null,lastRecordData=null,lastLegacyData=null,lastDeletedData=null;
 const allRecords=()=>{let data,legacy,deleted;try{data=localStorage.getItem(Records.KEY);legacy=localStorage.getItem(Records.LEGACY);deleted=localStorage.getItem(Records.DELETED)}catch{}if(!recordCache||data!==lastRecordData||legacy!==lastLegacyData||deleted!==lastDeletedData){recordCache=Records.all();lastRecordData=data;lastLegacyData=legacy;lastDeletedData=deleted}return recordCache};
-root.addEventListener('cinelva-record-updated',()=>{recordCache=null});
-root.addEventListener('storage',()=>{recordCache=null});
+root.addEventListener('cinelva-record-updated',()=>{recordCache=null;localRecordIndexSource=null;localRecordIndex=null});
+root.addEventListener('storage',()=>{recordCache=null;localRecordIndexSource=null;localRecordIndex=null});
 
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
@@ -160,6 +160,7 @@ function primeRecordSnapshot(records){
 }
 function viewingRecord(movie){
  const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
+ if(movie._localRecord&&localRecordIndexSource!==null)return localRecordIndex.get(String(movie.id));
  const records=allRecords();
  if(movie._localRecord){
   if(localRecordIndexSource!==records){

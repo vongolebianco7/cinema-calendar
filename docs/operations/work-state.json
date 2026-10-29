@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T21:11:04.361Z",
-  "status": "ci_passed",
+  "updated_at": "2026-10-29T12:25:49.181Z",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
-  "branch": "fix/unify-festivals-events-navigation-20261029",
-  "head_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3",
-  "pull_request": 541,
+  "base_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
+  "branch": "main",
+  "head_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
+  "pull_request": 548,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -604,6 +604,14 @@
       "acceptance": "One festival/events tab includes all event categories; saved events mode migrates; credits menu opens my-cinelva/; adjacent-month festival bars remain operable; production is verified.",
       "pull_request": 541,
       "source_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3"
+    },
+    {
+      "id": "P2-26-BOOKMARK-NOTICES",
+      "title": "Opt-in local bookmark release-date notices",
+      "status": "production_verified",
+      "issue": 239,
+      "pull_request": 548,
+      "acceptance": "On My Cinelva/watchlist open, opt-in date-based notices match explicit or unambiguous legacy TMDB identity, require official HTTPS source links, preserve records, persist dismissals and fit 390px Chromium/WebKit."
     }
   ],
   "verification": [
@@ -838,16 +846,20 @@
     {
       "check": "PR541 exact source CI",
       "result": "All9 pull-request workflows succeeded on 0eff8bf80a900927b19141f8dde57f6a9f108ff3, including all4 publication-required workflows. Shared local quality gate passed. Focused review P2 adjacent-month bar issue reproduced, fixed and re-reviewed. Chromium/WebKit navigation and unified-calendar checks passed."
+    },
+    {
+      "check": "PR548 bookmark release-date notice, final source and production",
+      "result": "PR548 executable source b8a85bfb83dde79e7d7b4549da27550cc9fc74c5; exact-source required workflows passed, receipt-only final head da4a4dcce2752cb900aa0c176992b31c3c89771d passed Validate frontend, Autonomous quality gate, CINELVA smoke, reproducible backend, mobile layout, completeness and scorecard contract. Squash-merged f998de7e8bee72a7603c51db9a92180a453bc690; Vercel production deployment dpl_D14bYw2AfW92uojDegj8jRoi85yr READY. Production watchlist HTML references new scripts; both new JS assets and quick-rate.js verified byte-for-byte. Seven focused unit tests and local 442-test shared quality gate passed. Physical iPhone acceptance remains separate."
     }
   ],
   "deployment": {
-    "status": "deployment_pending",
+    "status": "production_verified",
     "canonical_url": "https://cinelva.vercel.app",
-    "serving_sha": "fa47e48ac63c87fb8a35d72b60d4a48a137fec36",
-    "release_source_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3"
+    "serving_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
+    "deployment_id": "dpl_D14bYw2AfW92uojDegj8jRoi85yr"
   },
   "blockers": [],
-  "next_action": "Renew receipt for verified source 0eff8bf80a900927b19141f8dde57f6a9f108ff3; require final-head CI, merge PR541, verify Vercel production and both live journeys.",
+  "next_action": "Continue the 28 requested tasks from their current classifications. Prioritize remaining confirmed P0 acceptance and feasible non-destructive fixes; keep physical iPhone Safari, licensed external event/streaming sources, and unmet measured performance budgets explicitly open.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1729,14 +1741,15 @@
     }
   },
   "p0_release_review_20261029": {
-    "status": "in_progress",
-    "pull_request": 544,
+    "status": "production_verified",
+    "pull_request": 548,
     "source_before_review": "90701a9c896800c6e03cee4b72960726474b9966",
     "integrated_main": "0e94795f6342d8dcb8b390fc51485a03a1958745",
     "review": "Independent review found wrong Best10 poster persistence via localID/TMDB collision and loss of theater location/official links. Both fixed with observed RED-to-GREEN regressions. Main integrated with real ancestry, preserving PR541 and latest now-playing.",
     "tests": "13/13 focused (5 Best10 identity,8 theater quality); full shared quality PASS (399 primary Node,6 dedupe plus Python/contracts). Browser acceptance/source proof renewal/finalCI pending.",
-    "remaining": "Do not close542: exact discovery filter/list/scroll restoration, Nolan-only results, director dashboard totals and light-review contrast still require dedicated browser assertions. No production deploy or record migration.",
-    "next_action": "Run exact-head4 required workflows including mobile. Inspect browser failures. Renew production receipt only on successful source, then finalCI before merge. Preserve PR543 independent search/film-medium work."
+    "remaining": "Continue the remaining audit and live acceptance; existing unresolved categories remain in requested-quality-audit-20261029.md. Actual iPhone Safari and licensed data source gaps remain open.",
+    "next_action": "Run exact-head4 required workflows including mobile. Inspect browser failures. Renew production receipt only on successful source, then finalCI before merge. Preserve PR543 independent search/film-medium work.",
+    "latest_merge_sha": "f998de7e8bee72a7603c51db9a92180a453bc690"
   },
   "requested_quality_audit_20261029": {
     "status": "in_progress",
@@ -1762,5 +1775,16 @@
     "performance": "First integrated same-runner WebKit1000 before3457/701/530/765ms -> after2519/183/114/269ms (initial/tab/cache/review). Tab/cache meet targets, initial/review still miss. Single synthetic sample, not physical iPhone or all-target completion. New duplicate-summary-render reduction awaits CI comparison.",
     "next_action": "Run new integrated PR exact-source CI, inspect new browser assertions and before/after performance. Repair failures without weakening acceptance. Then renew source proof only after all4 required workflows pass, require finalheadCI, merge permitted scope and verify existing production deployment. Continue remaining28-task gates.",
     "compliance": "Inherited event refresh HTML JSON-LD/news-discovery scraping contradicted user prohibition. Removed acquisition code and both schedule triggers, local manual-only atomic merge preserves32/30 snapshot records, timestamps and omitted fields; no licensed automated event feed configured. No new source permission or cost."
+  },
+  "release_notices_20261029": {
+    "status": "production_verified",
+    "pull_request": 548,
+    "source_sha": "b8a85bfb83dde79e7d7b4549da27550cc9fc74c5",
+    "receipt_head_sha": "da4a4dcce2752cb900aa0c176992b31c3c89771d",
+    "merge_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
+    "deployment_id": "dpl_D14bYw2AfW92uojDegj8jRoi85yr",
+    "validation": "Source required workflows passed; final-head workflows passed. Local quality gate442 Node tests plus Python/contracts; seven focused notice tests; hosted Chromium/WebKit 390px. Production deployment READY and changed scripts byte-verified.",
+    "scope": "No background or push notifications; checks happen only on page/watchlist open and only for expected Japan date. Uses existing curated official HTTPS-linked rows; no new feed, scraping, API key, recurring job, or plan change.",
+    "remaining": "Official theatrical dataset rows without source_url are intentionally skipped; licensed source coverage and physical iPhone Safari remain pending."
   }
 }

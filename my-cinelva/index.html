@@ -947,7 +947,7 @@ html[data-theme="light"] .director-profile-stat{border-color:#d4d0c7}
 #wantWatchList .want-watch-review{margin-top:auto;min-width:0}
 #wantWatchList .want-watch-remove{align-self:stretch!important;margin:4px!important;font-size:10px!important;padding:6px 2px!important;white-space:normal!important}
 @media(max-width:600px){#watchlistView .panel{padding:10px!important}}
-</style><script id="cinelva-watchlist-tab">
+</style><script src="../js/cinelva-release-notices.js?v=20261029-release-notices"></script><script src="../js/cinelva-watch-notices.js?v=20261029-release-notices"></script><script id="cinelva-watchlist-tab">
 (()=>{'use strict';
 const key='cinelva-want-to-watch-v1',list=document.getElementById('wantWatchList');
 const read=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}};

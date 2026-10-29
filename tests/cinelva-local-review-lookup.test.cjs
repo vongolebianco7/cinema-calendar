@@ -5,7 +5,7 @@ function harness(initial){
  const start=source.indexOf('let localRecordIndexSource=')>=0?source.indexOf('let localRecordIndexSource='):source.indexOf('function viewingRecord(');
  const ctx={root:{},canonicalId:m=>m.tmdbId||m.id,allRecords:()=>records};vm.createContext(ctx);
  vm.runInContext(source.slice(start,source.indexOf('function open(movie,')),ctx);
- return {find:m=>ctx.viewingRecord(m),replace:next=>{records=next}};
+ return {find:m=>ctx.viewingRecord(m),replace:next=>{records=next;vm.runInContext('localRecordIndexSource=null;localRecordIndex=null',ctx)}};
 }
 test('large local review lists build identity index once instead of rescanning each card',()=>{
  let reads=0;const records=Array.from({length:1000},(_,i)=>({get id(){reads++;return String(i)},rating:4}));
@@ -13,7 +13,7 @@ test('large local review lists build identity index once instead of rescanning e
  for(let i=0;i<1000;i++)assert.equal(api.find({_localRecord:true,id:String(i)}),records[i]);
  assert.ok(reads<=3000,'1000 lookups should need linear identity reads; got '+reads);
 });
-test('local review index invalidates on new canonical records and keeps first duplicate semantics',()=>{
+test('local review index invalidates on update events and keeps first duplicate semantics',()=>{
  const first={id:'1',rating:3},second={id:'1',rating:4};const api=harness([first,second]);
  assert.equal(api.find({_localRecord:true,id:'1'}),first);
  const edited={id:'1',rating:5};api.replace([edited]);assert.equal(api.find({_localRecord:true,id:'1'}),edited);

@@ -570,7 +570,10 @@
       "collection_method": "manual_official_announcement"
     }
   ],
-  "discovery_count": 1,
+  "discovery_count": 0,
   "last_attempt_at": "2026-10-29",
-  "curated_count": 2
+  "curated_count": 2,
+  "collection_mode": "manual_only",
+  "automation_status": "disabled_pending_licensed_feed",
+  "verified_count": 0
 }

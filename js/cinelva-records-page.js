@@ -443,10 +443,11 @@
     const tabs = [...document.querySelectorAll('.tab[data-tab]')];
     if (tab === 'calendar') tab = 'summary';
     if (!tabs.some(button => button.dataset.tab === tab) || !$(tab + 'View')) return;
+    const summaryAlreadyVisible=tab==='summary'&&!$('summaryView').hidden;
     try { sessionStorage.setItem(TAB_STORAGE_KEY, tab); } catch (_) { /* Storage may be unavailable. */ }
     document.querySelectorAll('.tab').forEach(button => button.setAttribute('aria-selected', String(button.dataset.tab === tab)));
     document.querySelectorAll('.view').forEach(section => { section.hidden = section.id !== tab + 'View'; });
-    if (tab === 'summary') { renderCinemaSummary(); renderAwards(); }
+    if (tab === 'summary'&&!summaryAlreadyVisible) { renderCinemaSummary(); renderAwards(); }
     if (tab === 'world') drawWorld();
     if (tab === 'genres') renderGenres();
     if (tab === 'awards') renderAwards();

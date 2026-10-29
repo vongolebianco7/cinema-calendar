@@ -116,7 +116,7 @@ function syncDialogScore(){
  const score=Number($('cinelvaRateScore').value);
  $('cinelvaRateValue').textContent=score.toFixed(1);
  $('cinelvaRateScore').style.setProperty('--dialog-progress',(score/5*100)+'%');
- $('cinelvaRateValue').style.setProperty('color',score===0?'#fff':'#e4bd70','important');
+ $('cinelvaRateValue').style.setProperty('color',score===0?'var(--cinelva-dialog-unwatched, #fff)':'var(--cinelva-dialog-rated, #e4bd70)','important');
 }
 $('cinelvaRateSpoiler').onclick=()=>{const button=$('cinelvaRateSpoiler');button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));};
 $('cinelvaRateScore').oninput=syncDialogScore;
@@ -1325,7 +1325,7 @@ style.textContent+=`
 `;
 style.textContent+=`
 /* Light-theme review dialog: readable neutral surfaces independent of dark theme. */
-html[data-theme="light"] .cinelva-rate-dialog{background:#fffefa!important;color:#242521!important;border:1px solid #d2cbc0!important;box-shadow:0 16px 46px #0004!important}
+html[data-theme="light"] .cinelva-rate-dialog{--cinelva-dialog-unwatched:#242521;--cinelva-dialog-rated:#765413;background:#fffefa!important;color:#242521!important;border:1px solid #d2cbc0!important;box-shadow:0 16px 46px #0004!important}
 html[data-theme="light"] .cinelva-rate-inner{color:#242521!important}
 html[data-theme="light"] .cinelva-rate-inner label,html[data-theme="light"] .cinelva-review-header strong{color:#242521!important}
 html[data-theme="light"] .cinelva-review-header button{color:#242521!important}

@@ -6,13 +6,22 @@
   return Number.isFinite(checked)&&checked<=now+300000&&now-checked<=7*86400000;
  }
  function uniqueMovies(rows) {
-  const ids=new Set(),titles=new Set(),output=[];
-  for(const movie of rows||[]) {
-   const id=String(movie.tmdbId||movie.tmdb_id||movie.id||''),year=Number(movie.year);
-   const keys=year>0?[movie.title,movie.original_title,movie.originalTitle,...(movie.aliases||[])].filter(Boolean).map(title=>year+':'+normalize(title)):[];
-   const duplicate=(id&&ids.has(id))||keys.some(key=>titles.has(key));
-   if(id)ids.add(id);for(const key of keys)titles.add(key);
-   if(!duplicate)output.push(movie);
+  const movies=(Array.isArray(rows)?rows:[]).filter(movie=>movie&&typeof movie==='object');
+  const verified=movie=>{const raw=movie.tmdbId??movie.tmdb_id;return /^[1-9]\d*$/.test(String(raw))&&Number.isSafeInteger(Number(raw))?String(Number(raw)):'';};
+  const keysFor=movie=>Number(movie.year)>0?[movie.title,movie.original_title,movie.originalTitle,...(Array.isArray(movie.aliases)?movie.aliases:[])].filter(Boolean).map(title=>Number(movie.year)+':'+normalize(title)):[];
+  const verifiedTitles=new Map();
+  // Resolve ambiguity before considering legacy rows, independent of input order.
+  for(const movie of movies){const id=verified(movie);if(!id)continue;for(const key of keysFor(movie)){if(!verifiedTitles.has(key))verifiedTitles.set(key,new Set());verifiedTitles.get(key).add(id);}}
+  const ids=new Map(),titles=new Map(),output=[];
+  for(const movie of movies){
+   const canonical=verified(movie),local=String(movie.id||''),id=canonical?'tmdb:'+canonical:local&&local!=='0'?'local:'+local:'',keys=keysFor(movie);
+   let index=id?ids.get(id):undefined;
+   if(index===undefined){const key=keys.find(key=>titles.has(key)&&(verifiedTitles.get(key)?.size||0)<=1);if(key!==undefined)index=titles.get(key);}
+   if(index===undefined){index=output.length;output.push(movie);}
+   else if(canonical&&!verified(output[index])){
+    const old=output[index];output[index]={...old,...movie,tmdbId:Number(canonical),poster:movie.poster||old.poster};
+   }
+   if(id)ids.set(id,index);for(const key of keys)titles.set(key,index);
   }
   return output;
  }

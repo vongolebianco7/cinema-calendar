@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T12:25:49.181Z",
-  "status": "production_verified",
+  "updated_at": "2026-10-29T23:30:00Z",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
-  "branch": "main",
-  "head_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
-  "pull_request": 548,
+  "base_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+  "branch": "docs/workstate-cinema-554-20261030",
+  "head_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+  "pull_request": 554,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -850,16 +850,25 @@
     {
       "check": "PR548 bookmark release-date notice, final source and production",
       "result": "PR548 executable source b8a85bfb83dde79e7d7b4549da27550cc9fc74c5; exact-source required workflows passed, receipt-only final head da4a4dcce2752cb900aa0c176992b31c3c89771d passed Validate frontend, Autonomous quality gate, CINELVA smoke, reproducible backend, mobile layout, completeness and scorecard contract. Squash-merged f998de7e8bee72a7603c51db9a92180a453bc690; Vercel production deployment dpl_D14bYw2AfW92uojDegj8jRoi85yr READY. Production watchlist HTML references new scripts; both new JS assets and quick-rate.js verified byte-for-byte. Seven focused unit tests and local 442-test shared quality gate passed. Physical iPhone acceptance remains separate."
+    },
+    {
+      "check": "Cinema comparison #554 and post-merge data refresh 2026-10-30 JST",
+      "result": "PR #554 merged as 94e1410c719594e4837a7c30336dab01078a2534. Frontend and backend Vercel deployments are READY for this exact SHA. Update movie data run 40961767421 passed source/compliance/TMDB/dataset validation, refreshed 199/200 provider observations, then failed freshness audit at 755/1312 (57.5%) against 70%; database sync was skipped. No new data commit was found on GitHub; no data publication or DB sync is claimed."
+    },
+    {
+      "check": "Scheduled official data refresh #94 after PR #553 merge",
+      "result": "Run 40968095519 started from trigger SHA 16f2578, then commit step rebased onto current main and successfully published generated snapshots as c90db692c5c5c78d1a30fcd0619fc3a686eb17fd after PR #553 merge 887c07e. Changed only eight generated JSON snapshots (availability, awards, boxoffice, movies, extra rankings, release history, streaming, theatrical); no user ratings/bookmarks or DB schema. 199/200 availability observations refreshed; 755/1312 (57.5%) remained within 7 days vs the 70% warning threshold. Vercel frontend/backend deployments for c90db were READY; newer #554 commit 94e1410 is READY on both projects. PostgreSQL sync step failed before connection with Prisma P1001, so no DB writes were made. Do not retry until read-only DB availability diagnosis; data remains served from verified static snapshots."
     }
   ],
   "deployment": {
     "status": "production_verified",
     "canonical_url": "https://cinelva.vercel.app",
-    "serving_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
-    "deployment_id": "dpl_D14bYw2AfW92uojDegj8jRoi85yr"
+    "serving_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+    "frontend_deployment_id": "dpl_6MWy6xEwHVCndRtNynRBaGGtZ9fT",
+    "backend_deployment_id": "dpl_7tooKRDykW8Y9ypjqEGjeqbLdaRb"
   },
   "blockers": [],
-  "next_action": "Continue the 28 requested tasks from their current classifications. Prioritize remaining confirmed P0 acceptance and feasible non-destructive fixes; keep physical iPhone Safari, licensed external event/streaming sources, and unmet measured performance budgets explicitly open.",
+  "next_action": "Inspect Update movie data run #93 step 20 failure logs and reconcile the 70% freshness threshold with the bounded 200-title/day refresh; do not lower the threshold or retry until root cause is fixed. Then continue highest-priority open P0 items.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1786,5 +1795,41 @@
     "validation": "Source required workflows passed; final-head workflows passed. Local quality gate442 Node tests plus Python/contracts; seven focused notice tests; hosted Chromium/WebKit 390px. Production deployment READY and changed scripts byte-verified.",
     "scope": "No background or push notifications; checks happen only on page/watchlist open and only for expected Japan date. Uses existing curated official HTTPS-linked rows; no new feed, scraping, API key, recurring job, or plan change.",
     "remaining": "Official theatrical dataset rows without source_url are intentionally skipped; licensed source coverage and physical iPhone Safari remain pending."
+  },
+  "continued_work_20261030": {
+    "status": "in_progress",
+    "updated_at": "2026-10-29T23:25:00Z",
+    "main_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+    "cinema_comparison": {
+      "status": "production_verified",
+      "pull_request": 554,
+      "merge_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+      "frontend_deployment": "dpl_6MWy6xEwHVCndRtNynRBaGGtZ9fT",
+      "backend_deployment": "dpl_7tooKRDykW8Y9ypjqEGjeqbLdaRb",
+      "acceptance": "Compact controls, no duplicate visible selects/date, daily low-price badge, unlisted text, two prices beside series, and non-modal theater popover. Exact-head CI and local quality gate passed."
+    },
+    "data_refresh": {
+      "status": "in_progress",
+      "workflow_run": 40968095519,
+      "fresh_observations": "755/1312 (57.5%)",
+      "required_threshold": "70%",
+      "provider_updates": "199/200",
+      "database_sync": "failed_before_connection: Prisma P1001; no database write",
+      "publication": "generated snapshot commit and static production deployment verified; database sync not verified",
+      "next_action": "Inspect DB availability through read-only control-plane status if available; do not retry a data sync until the endpoint is reachable. Keep 70% freshness threshold; monitor next scheduled 199/200 daily refresh.",
+      "trigger_sha": "16f2578d2d77df4e0fa8bc306de8336141576646",
+      "data_commit": "c90db692c5c5c78d1a30fcd0619fc3a686eb17fd",
+      "pr553_merge": "887c07e620989607f681be4f006b68f605645d6a",
+      "static_deployments_ready": [
+        "dpl_37KgqnaXh7kdVrFFNhGhC59u8tet",
+        "dpl_8vGWRVxqwDjZzmUFtdRwK3Vk5Uvy"
+      ]
+    },
+    "open_counts": {
+      "issues": 6,
+      "pull_requests": 9,
+      "drafts": 2
+    },
+    "next_action": "Check read-only database availability after Prisma P1001 without running a query or changing schema; verify PR #555 checkpoint CI; continue remaining feasible P0 tasks."
   }
 }

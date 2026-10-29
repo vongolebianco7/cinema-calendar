@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0c6eaa51eed9ae489f6c5eac7a9a902bc9d0277c",
-  "verified_at": "2026-10-29T12:49:00.000Z",
-  "note": "PR #550 exact executable source: Validate frontend, Autonomous quality gate, CINELVA smoke tests, Reproducible backend build, mobile layout smoke and Cinemap completeness scorecard all passed on this source SHA. Receipt-only commit; final-head CI required before merge/publication."
+  "head_sha": "9d57f67ff0d0d9b7ffb7e82dd3083a9234fe33fb",
+  "verified_at": "2026-10-29T13:34:00.000Z",
+  "note": "PR #551 exact executable source: all six workflows passed on this source SHA (Validate frontend includes Chromium/WebKit My Cinelva journey and regression suite). Hosted synthetic 390x844, 0/1000 records performance artifact reports all Chromium budgets passing; WebKit initial 1908ms/tab 165ms/cache 113ms/search 52ms/review 256ms (review target 200ms remains unmet); physical iPhone/display FPS not measured. Receipt-only commit; final-head CI required before merge/publication."
 }

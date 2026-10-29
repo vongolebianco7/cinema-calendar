@@ -150,6 +150,14 @@ function syncViewingVenue(saved=''){
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
 let localRecordIndexSource=null,localRecordIndex=null;
+function primeRecordSnapshot(records){
+ if(!Array.isArray(records))return false;
+ recordCache=records;
+ try{lastRecordData=localStorage.getItem(Records.KEY);lastLegacyData=localStorage.getItem(Records.LEGACY);lastDeletedData=localStorage.getItem(Records.DELETED)}catch{lastRecordData=lastLegacyData=lastDeletedData=undefined}
+ localRecordIndexSource=records;localRecordIndex=new Map();
+ for(const record of records){const key=String(record.id);if(!localRecordIndex.has(key))localRecordIndex.set(key,record)}
+ return true;
+}
 function viewingRecord(movie){
  const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
  const records=allRecords();
@@ -1336,7 +1344,7 @@ html[data-theme="light"] .cinelva-rate-actions button{background:#292a27!importa
 html[data-theme="light"] .cinelva-rate-actions button:first-child{background:#f2eee6!important;color:#242521!important;border:1px solid #bcb4a8!important}
 html[data-theme="light"] .cinelva-rate-dialog .cinelva-rate-inner .cinelva-review-method{background:transparent!important}
 `;
-root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+root.CinelvaQuickRate={open,normalize,primeRecords:primeRecordSnapshot,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie))||undefined,_localRecord:!(root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie)))});}}
 if(typeof MutationObserver!=='undefined'){const start=()=>{mountRecordReviews();new MutationObserver(rows=>{for(const row of rows)for(const node of row.addedNodes)if(node.nodeType===1)mountRecordReviews(node)}).observe(document.body,{childList:true,subtree:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}
 

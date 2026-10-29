@@ -5,6 +5,7 @@
   const Insights = globalThis.CinelvaInsights;
   const currentYear = new Date().getFullYear();
   const state = { records: [], movies: [], awards: [], directors: {}, month: new Date().getMonth(), year: currentYear, selected: null, searchToken: 0, plotRotation: { x: -.32, y: -.58 }, plotZoom: 1, plotOffset: { x: 0, y: 0 }, plotPointers: new Map(), plotDrag: null, activeGenre: null, awardSelection: null, awardCoverage: {}, flatWorld: false, keyboardPoint: 0 };
+  const setRecords = records => { state.records=records;globalThis.CinelvaQuickRate?.primeRecords?.(records); };
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const byId = new Map();
   let posterCatalogCache = null;
@@ -1245,10 +1246,10 @@
   }
   function saveRecord() {
     if(!state.selected){notify('作品を検索して選んでください。');return;}
-    try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); state.records=Records.all(); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
+    try { state.selected.viewingMethod=$('viewingMethod').value;state.selected.comment=$('recordComment').value.trim(); const typedDate=$('watchedAt').value.trim(), date=typedDate||null; if(!Records.validDate(date))throw Error('鑑賞日は YYYY、YYYY-MM、YYYY-MM-DD の形式で入力してください。'); const value=Records.save(state.selected,Number($('rating').value),date); setRecords(Records.all()); $('recordDialog').close(); drawYearCalendar(); renderAwards(); notify(`「${value.title}」の鑑賞記録を保存しました。`); }
     catch(error){notify(`保存できませんでした：${error.message}`);}
   }
-  function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);state.records=Records.all();$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }
+  function deleteRecord(id) { const record=state.records.find(item=>String(item.id)===String(id)); if(!record)return; if(!globalThis.confirm(`「${record.title}」の鑑賞記録を削除しますか？`))return; try{Records.remove(id);setRecords(Records.all());$('recordDialog').close();drawYearCalendar();notify('鑑賞記録を削除しました。');}catch(error){notify(`削除できませんでした：${error.message}`);} }
   function exportRecords() { try { const payload={format:'cinelva-records-backup',version:2,exportedAt:new Date().toISOString(),records:Records.all()}; const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`cinelva-records-${new Date().toISOString().slice(0,10)}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),30000);notify('鑑賞記録のバックアップを作成しました。');}catch(error){notify(`バックアップできませんでした：${error.message}`);} }
   function readBackup(text) {
     const data=JSON.parse(text); if(data?.format==='cinelva-records-backup'&&(!Number.isInteger(data.version)||data.version<1||data.version>2))throw Error('このバックアップのバージョンには対応していません。'); let rows=[];
@@ -1259,7 +1260,7 @@
     if(rows.length>10000)throw Error('記録件数が上限を超えています。');
     return rows.map(row=>{const id=String(row?.id??row?.tmdbId??'');if(!/^[1-9]\d*$/.test(id)||typeof row.title!=='string'||!(row.rating==null||Records.validScore(row.rating))||!Records.validDate(row.watchedAt??null))throw Error('作品ID・評価・鑑賞日のデータを確認してください。');return {...row,id};});
   }
-  async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));state.records=Records.all();populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }
+  async function importRecords(file) { if(!file)return;try{if(file.size>10*1024*1024)throw Error('10 MiB以内のJSONを選択してください。');const rows=readBackup(await file.text());if(!rows.length)throw Error('復元できる鑑賞記録がありません。');if(!globalThis.confirm(`${rows.length}件を復元します。同じ作品IDの既存記録は更新されます。続けますか？`))return;Records.restore(rows.map(enriched));setRecords(Records.all());populateYears();drawYearCalendar();notify(`${rows.length}件の鑑賞記録を復元しました。`);}catch(error){notify(`復元できませんでした：${error.message}`);} }
   function bindEvents() {
     document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
     if($('addRecord')) $('addRecord').onclick=null; $('closeDialog').onclick=()=>$('recordDialog').close(); $('saveRecord').onclick=saveRecord;
@@ -1342,7 +1343,7 @@
     };
     window.addEventListener('cinelva-record-updated',()=>{
       directorMedalUpdatePending=true;
-      state.records=Records.all();
+      setRecords(Records.all());
       refreshAfterReview();
     });
     // Closing a parent overlay resumes the deferred refresh without closing it on save.
@@ -1356,11 +1357,11 @@
       if(pendingReviewRefresh)setTimeout(()=>refreshAfterReview(),0);
     },true);
     window.addEventListener('resize',()=>{if(!$('worldView').hidden)drawWorld();});
-    window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{state.records=Records.all();populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
+    window.addEventListener('storage',event=>{if(event.key===Records.KEY||event.key===null){try{setRecords(Records.all());populateYears();drawYearCalendar();}catch(error){notify(`他のタブの記録を読み込めません：${error.message}`);}}});
   }
   function openKnownMovie(id){const existing=Insights.directorViewingRecord(state.records,{id}),movie=byId.get(String(id)),title=movie?.title||existing?.title;if(!title){notify('この作品の情報が未収録です。作品検索から追加してください。');return;}location.href='../search.html?'+new URLSearchParams({search:title});}
   async function init() {
-    try { state.records=Records.all(); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
+    try { setRecords(Records.all()); } catch(error) { notify(`保存データを読み込めません：${error.message}`); return; }
     const load=async(url,fallback)=>{
       const essential=/\/data\/directors(?:-mobile)?\.json(?:[?#]|$)/.test(url);
       for(let attempt=0;attempt<(essential?3:1);attempt++){

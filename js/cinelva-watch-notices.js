@@ -8,7 +8,7 @@
   if(panel?.isConnected)return true;
   const style=document.createElement('style');style.textContent='.cinelva-release-notice{margin:12px 0 16px;padding:12px;border:1px solid var(--line,#444);border-radius:10px;background:var(--panel,#17191d);color:var(--ink,#eee);font-size:13px}.cinelva-release-notice label{display:flex;align-items:flex-start;gap:9px;line-height:1.55}.cinelva-release-notice input{width:20px;height:20px;flex:none;margin:0;accent-color:#d4a945}.cinelva-release-notice small{display:block;color:var(--muted,#aaa);margin:7px 0}.cinelva-release-notice-list{display:grid;gap:8px}.cinelva-release-notice-item{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:9px;border-radius:8px;background:var(--soft,#22252a)}.cinelva-release-notice-item a{color:inherit}.cinelva-release-notice-item button{flex:none;border:1px solid var(--line,#555);border-radius:7px;padding:5px 8px;background:transparent;color:inherit;font-size:12px}';
   panel=document.createElement('section');panel.className='cinelva-release-notice';panel.setAttribute('aria-label','公開・配信予定のお知らせ');
-  const label=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';toggle.id='cinelvaReleaseNoticeToggle';toggle.checked=localStorage.getItem(enabledKey)==='1';
+  const label=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';toggle.id='cinelvaReleaseNoticeToggle';try{toggle.checked=localStorage.getItem(enabledKey)==='1';}catch{toggle.checked=false;}
   const copy=document.createElement('span');copy.textContent='見たい映画の公開・配信予定を確認する（この端末のみ）';label.append(toggle,copy);
   const note=document.createElement('small');note.textContent='有効にすると、このページまたは「見たい映画」を開いたときに当日分を確認します。バックグラウンド通知は行いません。予定日当日の表示で、現在の公開・配信状況を保証するものではありません。';
   status=document.createElement('div');status.className='cinelva-release-notice-status';status.setAttribute('role','status');
@@ -18,7 +18,7 @@
   return true;
  }
  async function catalog(){
-  if(!loaded)loaded=Promise.all(['../data/movies.json','../data/streaming.json'].map(async path=>{const response=await fetch(path,{cache:'force-cache'});if(!response.ok)throw Error('予定データを取得できません');const data=await response.json();return Array.isArray(data.movies)?data.movies:[]})).then(groups=>groups.flat());
+  if(!loaded)loaded=Promise.all(['../data/movies.json','../data/streaming.json'].map(async path=>{const response=await fetch(path,{cache:'force-cache'});if(!response.ok)throw Error('予定データを取得できません');const data=await response.json();return Array.isArray(data.movies)?data.movies:[]})).then(groups=>groups.flat()).catch(error=>{loaded=null;throw error;});
   return loaded;
  }
  async function refresh(force=false){
@@ -44,6 +44,6 @@
  }
  document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',()=>refresh(true));
  window.addEventListener('cinelva-bookmarks-updated',()=>refresh(true));
- window.addEventListener('storage',event=>{if([bookmarkKey,enabledKey,dismissedKey].includes(event.key)){const toggle=$('cinelvaReleaseNoticeToggle');if(toggle&&event.key===enabledKey)toggle.checked=localStorage.getItem(enabledKey)==='1';refresh(true);}});
+ window.addEventListener('storage',event=>{if([bookmarkKey,enabledKey,dismissedKey].includes(event.key)){const toggle=$('cinelvaReleaseNoticeToggle');if(toggle&&event.key===enabledKey){try{toggle.checked=localStorage.getItem(enabledKey)==='1';}catch{toggle.checked=false;}}refresh(true);}});
  if(ensurePanel())status.textContent='「見たい映画」を開いたときに予定日を確認します。';
 })();

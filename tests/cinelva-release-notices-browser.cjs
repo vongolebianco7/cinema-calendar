@@ -15,7 +15,7 @@ const assert=require('node:assert/strict'),{chromium,webkit}=require('playwright
   assert.match(await page.locator('#cinelvaReleaseNoticeList').innerText(),/公開予定の映画/);assert.equal(await page.locator('#cinelvaReleaseNoticeList a').getAttribute('href'),'https://example.com/official');
   await page.locator('#cinelvaReleaseNoticeList button').click();assert.match(await page.locator('.cinelva-release-notice-status').innerText(),/お知らせはありません/);
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinelva-library-records-v2'))['999'].title),'保持する既存記録');
-  await page.reload();await page.locator('[data-tab="watchlist"]').click();assert.match(await page.locator('.cinelva-release-notice-status').innerText(),/お知らせはありません/);
+  await page.reload();await page.locator('[data-tab="watchlist"]').click();await page.getByText(/今日が公開・配信予定日のブックマークはありません/).waitFor();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'watchlist notification layout must fit iPhone width');assert.deepEqual(errors,[]);
   await context.close();
  }finally{await browser?.close();server.kill();}

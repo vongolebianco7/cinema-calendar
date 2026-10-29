@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T23:26:11.978Z",
+  "updated_at": "2026-10-29T23:30:29.431Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -25,9 +25,10 @@
     {
       "id": "P0-241",
       "title": "Keep validation running without Vercel deployment",
-      "status": "ci_passed",
+      "status": "production_verified",
       "issue": 241,
-      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
+      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step.",
+      "ci": "PR #555 exact head bd4009d8: Autonomous quality gate, CINELVA smoke tests, and mobile layout checks all passed; checkpoint merged as 5b2ed95. Main-only Pages publication gate and current Vercel production READY state verified."
     },
     {
       "id": "P0-AUDIT",
@@ -862,6 +863,10 @@
     {
       "check": "PR #555 merged and read-only Neon quota diagnosis",
       "result": "PR #555 merged as 5b2ed9516c621d2f7dcc6e4411457c3c6e99208b after Autonomous quality gate, CINELVA smoke tests, and mobile layout checks all passed. Neon organization reports Free plan; read-only project status reports 5,541,204,690 public-transfer bytes for a monthly period ending 2026-11-01 and the sole read/write endpoint idle/suspended since 2026-10-23. Neon documents 5 GB monthly public transfer for Free; the counter exceeds that allowance, likely explaining P1001/suspension (inference). No endpoint start, DB query/write, schema change, or sync retry."
+    },
+    {
+      "check": "Issue #241 closed after acceptance verification",
+      "result": "PR #555 exact-head Autonomous quality gate, smoke tests, and Chromium/WebKit mobile checks passed; publish-pages.yml deploys only on main after verified static build; checkpoint/resume docs are present; current Vercel production is READY. Issue #241 closed completed."
     }
   ],
   "deployment": {
@@ -1802,7 +1807,7 @@
   },
   "continued_work_20261030": {
     "status": "in_progress",
-    "updated_at": "2026-10-29T23:26:11.978Z",
+    "updated_at": "2026-10-29T23:30:29.431Z",
     "main_sha": "5b2ed9516c621d2f7dcc6e4411457c3c6e99208b",
     "cinema_comparison": {
       "status": "production_verified",
@@ -1830,11 +1835,11 @@
       ]
     },
     "open_counts": {
-      "issues": 6,
-      "pull_requests": 8,
+      "issues": 5,
+      "pull_requests": 9,
       "drafts": 2
     },
-    "next_action": "Continue safe, independent P0 work and exact-head review of open PRs. Recheck Neon Free-plan transfer quota after 2026-11-01 before any database sync.",
+    "next_action": "Continue safe independent P0 work and exact-head PR review. Recheck Neon Free-plan transfer quota after 2026-11-01; do not start DB compute or retry sync before Free quota is available.",
     "endpoint_diagnosis": {
       "status": "read_only_quota_blocker",
       "project": "cinema-days",

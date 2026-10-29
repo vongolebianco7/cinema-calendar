@@ -19,7 +19,7 @@ test('share image is generated only from existing viewing records', () => {
   assert.doesNotMatch(share, /自由に作品を追加|映画棚を作成|コレクション/);
 });
 
-test('a rerelease search keeps the original catalog year and refreshes authoritative details', async () => {
+test('My Cinelva shares its loaded records with the common review dialog on every refresh',()=>{\n  const source=fs.readFileSync('js/cinelva-records-page.js','utf8');\n  assert.match(source,/const setRecords = records => \\{ state\\.records=records;globalThis\\.CinelvaQuickRate\\?\\.primeRecords\\?\\.\\(records\\); \\}/);\n  assert.equal((source.match(/setRecords\\(Records\\.all\\(\\)\\)/g)||[]).length,6,'initial load, save, delete, import, review update and storage refresh keep the review snapshot current');\n});\n\ntest('a rerelease search keeps the original catalog year and refreshes authoritative details', async () => {
   const vm = require('node:vm');
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const choose = source.slice(source.indexOf('  async function chooseMovie('), source.indexOf('  function saveRecord()'));

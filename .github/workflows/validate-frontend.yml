@@ -279,6 +279,16 @@ jobs:
         if: always()
         run: |
           result=0
+          # Compare the same harness on the same runner against the pre-index source.
+          git fetch --no-tags --depth=1 origin d439417e806ba998f5c8800ed38bb6d1bda49f03
+          before_dir="$RUNNER_TEMP/cinelva-performance-before"
+          git worktree add --detach "$before_dir" FETCH_HEAD
+          for engine in chromium webkit; do
+            (cd "$before_dir" && CINELVA_BROWSER="$engine" NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node "$GITHUB_WORKSPACE/tests/cinelva-requested-performance-browser.cjs") || result=1
+            mkdir -p artifacts/requested-performance
+            cp "$before_dir/artifacts/requested-performance/$engine.json" "artifacts/requested-performance/before-$engine.json" || result=1
+          done
+          git worktree remove --force "$before_dir"
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
           exit "$result"

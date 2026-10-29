@@ -149,10 +149,18 @@ function syncViewingVenue(saved=''){
  select.value=saved||'';
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
+let localRecordIndexSource=null,localRecordIndex=null;
 function viewingRecord(movie){
  const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
- return allRecords().find(record=>{
-  if(movie._localRecord)return String(record.id)===String(movie.id);
+ const records=allRecords();
+ if(movie._localRecord){
+  if(localRecordIndexSource!==records){
+   localRecordIndexSource=records;localRecordIndex=new Map();
+   for(const record of records){const key=String(record.id);if(!localRecordIndex.has(key))localRecordIndex.set(key,record);}
+  }
+  return localRecordIndex.get(String(movie.id));
+ }
+ return records.find(record=>{
   const explicit=identity?.id(record)||record.tmdbId||record.tmdb_id;
   if(explicit)return String(explicit)===String(target);
   const resolved=identity?.id(identity?.resolve(record));

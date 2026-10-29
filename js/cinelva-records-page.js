@@ -473,6 +473,7 @@
     $('worldCountry').innerHTML = '<option value="all">すべて</option>' + countries.map(country => `<option>${escapeHTML(country)}</option>`).join('');
   }
   function renderCalendar() {
+    if($('calendarView')?.hidden===true){renderYearHeatmap();return;}
     const records=recordMovies().map(enriched), dates=new Map();
     for(const r of records){const date=dateOf(r);if(/^\d{4}-\d{2}-\d{2}$/.test(date))dates.set(date,[...(dates.get(date)||[]),r]);}
     const sorted=[...dates.keys()].sort();

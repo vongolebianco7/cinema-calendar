@@ -7,6 +7,17 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
   const context=await browser.newContext({viewport:{width:390,height:844}});await context.route('https://backend-one-gray-94.vercel.app/**',r=>r.abort());
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const wordmarkStyle=()=>[...document.querySelectorAll('.gBrand>span')].map(el=>{const s=getComputedStyle(el);return {color:s.color,backgroundImage:s.backgroundImage,textFill:s.webkitTextFillColor}});
+  for(const theme of ['light','dark']){
+   await page.goto(`http://127.0.0.1:${port}/index.html`);
+   await page.locator('#gMenuBtn').click();
+   await page.getByLabel('表示テーマ',{exact:true}).selectOption(theme);
+   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+   const expected=await page.evaluate(wordmarkStyle);
+   await page.goto(`http://127.0.0.1:${port}/credits.html`);
+   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+   assert.deepEqual(await page.evaluate(wordmarkStyle),expected,`credits header and drawer wordmarks match calendar in ${theme}`);
+  }
   await page.goto(`http://127.0.0.1:${port}/my-cinelva/`);
   await page.locator('#gMenuBtn').click();
   const link=page.getByRole('link',{name:'情報源と収録日時',exact:true});

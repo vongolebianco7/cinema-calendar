@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-function route(fetcher,configured=true){let code=require('node:module').stripTypeScriptTypes(fs.readFileSync('backend/app/api/people/route.ts','utf8'),{mode:'transform'});code=code.replace(/^import .*?;\n/m,'').replaceAll('export ','');const ctx={URL,process:{env:configured?{TMDB_API_KEY:'test-key'}:{}},fetch:fetcher,json:(body,options)=>({body,status:options?.status||200}),rateLimited:()=>null,options:()=>null};vm.runInNewContext(code+';globalThis.get=GET',ctx);return ctx.get;}
+function route(fetcher,configured=true){let code=require('node:module').stripTypeScriptTypes(fs.readFileSync('backend/app/api/people/route.ts','utf8'),{mode:'transform'});code=code.replace(/^import .*?;\n/gm,'').replaceAll('export ','');const ctx={...require('../js/cinelva-film-medium.js'),URL,process:{env:configured?{TMDB_API_KEY:'test-key'}:{}},fetch:fetcher,json:(body,options)=>({body,status:options?.status||200}),rateLimited:()=>null,options:()=>null};vm.runInNewContext(code+';globalThis.get=GET',ctx);return ctx.get;}
 test('director credits exclude producer/writer credits and deduplicate canonical films',async()=>{
  let requested='';const get=route(async url=>{requested=String(url);return {ok:true,json:async()=>({crew:[{id:27205,job:'Director'},{id:27205,job:'Director'},{id:141052,job:'Producer'},{id:57729,job:'Writer'}]})}});
  const r=await get({url:'https://local/api/people?role=director&id=525'});
@@ -10,7 +10,7 @@ test('invalid director ID and unavailable upstream fail explicitly',async()=>{
  assert.equal((await get({url:'https://local/api/people?role=director&id=525'})).status,502);
  assert.equal((await route(()=>{throw Error('should not fetch')},false)({url:'https://local/api/people?role=director&id=525'})).status,503);
 });
-function discovery(fetcher){const html=fs.readFileSync('discover.html','utf8');const start=html.includes('const directorCreditsCache=')?html.indexOf('const directorCreditsCache='):html.indexOf('async function load(reset=');const code=html.slice(start,html.indexOf('\nfunction render()',start));const nodes=new Map();const $=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'old results',textContent:'',style:{}});return nodes.get(id)};const ctx={API:'https://local',URLSearchParams,fetch:fetcher,$,page:1,items:[],directorId:'525',currentPersonKind:'director',currentPersonId:'525',build:()=>'?crew=525',normalizeLocalMovie:m=>({...m,normalized:true}),render(){},renderPersonProfile(){}};vm.runInNewContext(code+';globalThis.load=load',ctx);return {ctx,nodes,$};}
+function discovery(fetcher){const html=fs.readFileSync('discover.html','utf8');const start=html.includes('const directorCreditsCache=')?html.indexOf('const directorCreditsCache='):html.indexOf('async function load(reset=');const code=html.slice(start,html.indexOf('\nfunction render()',start));const nodes=new Map();const $=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'old results',textContent:'',style:{}});return nodes.get(id)};const ctx={CinelvaFilmMedium:require('../js/cinelva-film-medium.js'),API:'https://local',URLSearchParams,fetch:fetcher,$,page:1,items:[],directorId:'525',currentPersonKind:'director',currentPersonId:'525',build:()=>'?crew=525',normalizeLocalMovie:m=>({...m,normalized:true}),render(){},renderPersonProfile(){}};vm.runInNewContext(code+';globalThis.load=load',ctx);return {ctx,nodes,$};}
 test('director search shows only verified directing credits and normalizes retained cards',async()=>{
  const {ctx}=discovery(async url=>({ok:true,json:async()=>url.includes('/api/people?')?{ids:[27205]}:{movies:[{id:27205,title:'Inception'},{id:141052,title:'Justice League'},{id:57729,title:'The Cobol Job'}],total_results:3}}));await ctx.load();assert.deepEqual(Array.from(ctx.items,x=>x.title),['Inception']);assert.equal(ctx.items[0].normalized,true);
 });
@@ -55,4 +55,10 @@ test('punctuation-free person search retries a short prefix and filters exact no
  const queries=[];const get=route(async u=>{const q=u.searchParams.get('query');queries.push(q);return {ok:true,json:async()=>({results:q==='トム'?[{id:1136406,name:'トム・ホランド',known_for_department:'Acting',profile_path:'/face.jpg'},{id:64796,name:'トム・ホランド',known_for_department:'Directing'},{id:500,name:'トム・クルーズ',known_for_department:'Acting'}]:[]})}});
  const r=await get({url:'https://local/api/people?q='+encodeURIComponent('トムホランド')});
  assert.deepEqual(Array.from(r.body.people,x=>x.id),[1136406,64796]);assert.equal(queries.length,2);
+});
+
+test('offline sourced director credits exclude television specials but retain anime and drama films',async()=>{
+ const works=[{id:1,genre_ids:[10770]},{id:2,genre_ids:[16]},{id:3,genre_ids:[18]}].map(x=>({...x,job:'Director',director_id:525,source:'tmdb'}));
+ const {ctx}=discovery(async url=>url.includes('/api/people?')?{ok:false,status:503}:{ok:true,json:async()=>url.includes('directors-mobile')?{directors:{525:{id:525,source_url:'https://www.themoviedb.org/person/525',coverage:{source:'tmdb_director_movie_credits'},works}}}:{movies:works,total_results:3}});
+ await ctx.load();assert.deepEqual(Array.from(ctx.items,x=>x.id),[2,3]);
 });

@@ -857,7 +857,27 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
  #summaryView #csTop .cs-top-review{position:relative;z-index:1}
 }
 </style>
-</head>
+<style id="cinelva-director-detail-dashboard-style">
+.director-profile-dashboard{margin:14px 0 18px;padding:14px;border:1px solid var(--line,#777);border-radius:12px;background:var(--panel,#181818);color:var(--text,#f5f5f5)}
+.director-profile-dashboard h4{font-size:16px;margin:0 0 12px;color:inherit}
+.director-profile-statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.director-profile-stat{padding:12px 10px;border:1px solid var(--line,#555);border-radius:9px;min-width:0}
+.director-profile-stat span{display:block;font-size:11px;opacity:.72}
+.director-profile-stat strong{display:block;font-size:19px;line-height:1.5;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;color:inherit}
+.director-profile-dashboard p{margin:12px 0 0;font-size:11px;line-height:1.6;opacity:.77}
+@media(max-width:600px){.director-profile-statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.director-profile-stat strong{font-size:17px}}
+html[data-theme="light"] .director-profile-dashboard{background:#fffefa;color:#242521;border-color:#d4d0c7}
+html[data-theme="light"] .director-profile-stat{border-color:#d4d0c7}
+</style><style id="cinelva-director-dashboard-style">
+.director-profile-dashboard{margin:14px 0 18px;padding:16px;border:1px solid var(--line,#c9c2b7);border-radius:14px;background:var(--card,#232323);color:var(--text,#eee)}
+.director-profile-dashboard h4{margin:0 0 12px;font-size:1.05rem}
+.director-profile-statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.director-profile-stat{padding:10px 8px;border:1px solid currentColor;border-radius:9px;display:flex;flex-direction:column;gap:5px}
+.director-profile-stat span{font-size:.7rem;opacity:.8}
+.director-profile-stat strong{font-size:1.15rem}
+.director-profile-dashboard p{font-size:.72rem;line-height:1.5;opacity:.78}
+@media(max-width:600px){.director-profile-statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
 <body>
   <header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="../index.html" aria-label="Cinelva"><img class="gBrandImage" src="../assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
@@ -899,7 +919,7 @@ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;g
     <div class="review-detail-footer"><button type="button" class="button primary" id="reviewDetailEdit">レビューを編集</button></div>
   </dialog>
   <dialog id="recordDialog"><form method="dialog" id="recordForm"><div class="dialog-head"><strong id="dialogTitle">鑑賞を記録</strong><button type="button" class="button" id="closeDialog">閉じる</button></div><div class="dialog-body"><label class="field">作品を検索<input id="movieQuery" type="search" autocomplete="off" placeholder="作品名"><span class="hint">記録済み作品の編集時は検索を省略できます。</span></label><div id="movieResults" class="search-results"></div><div id="chosenMovie" class="hint"></div><label class="field">鑑賞日（任意）<input id="watchedAt" type="text" inputmode="numeric" autocomplete="off" placeholder="YYYY / YYYY-MM / YYYY-MM-DD" aria-describedby="dateHint"><span id="dateHint" class="hint">年のみ・年月のみでも保存できます。日付を削除する場合は空欄にしてください。</span></label><label class="field">鑑賞方法<select id="viewingMethod"><option value="">未指定</option><option value="映画館">映画館</option><option value="配信">配信</option><option value="DVD／ブルーレイ">DVD／ブルーレイ</option><option value="その他">その他</option></select></label><label class="field">コメント（任意）<textarea id="recordComment" maxlength="2000" placeholder="感想をひとこと"></textarea></label><label class="field">評価（0〜5点）<div class="rating"><input id="rating" type="range" min="0" max="5" step="0.5" value="0"><output id="ratingOut">0.0</output></div></label></div><div class="dialog-actions"><button type="button" class="button" id="deleteRecord" hidden>記録を削除</button><button type="button" class="button primary" id="saveRecord">保存</button></div></form></dialog>
-  <script src="../js/cinelva-library-records.js?v=20261021-dvd-validation"></script><script src="../js/cinelva-insights.js?v=20261021-award-verified-496243"></script><script src="../js/cinelva-quick-rate.js?v=20261021-remove-tv-method"></script><script src="../js/cinelva-global-search.js?v=20261026-quality"></script><script src="../js/cinelva-records-page.js?v=20261021-award-prize-gold-v3"></script>
+  <script src="../js/cinelva-library-records.js?v=20261021-dvd-validation"></script><script src="../js/cinelva-insights.js?v=20261021-award-verified-496243"></script><script src="../js/cinelva-quick-rate.js?v=20261021-remove-tv-method"></script><script src="../js/cinelva-film-medium.js?v=20261029-films"></script><script src="../js/cinelva-global-search.js?v=20261029-series-films"></script><script src="../js/cinelva-visible-reviews.js?v=20261029-visible"></script><script src="../js/cinelva-records-page.js?v=20261021-award-prize-gold-v3"></script>
 <script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close)})();</script><style>
 .want-watch-section{margin:12px 0 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .want-watch-section summary{cursor:pointer;font-weight:750}

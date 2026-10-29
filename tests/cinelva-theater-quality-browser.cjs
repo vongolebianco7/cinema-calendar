@@ -13,7 +13,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/theaters.html?search=Cinema`);
   await page.locator('#grid .theaterTable').waitFor();
-  assert.equal(await page.locator('#grid .theaterName').count(),2);
+  assert.equal((await page.locator('#grid .theaterName').allTextContents()).filter(name=>name==='Cinema').length,2);
   assert.equal(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.some(s=>s.includes('closed'))),false);
   assert.match(await page.locator('#theaterOperationNote').innerText(),/営業状況は未確認/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
@@ -29,6 +29,22 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
    if(layout.hintHeight)assert.ok(layout.hintWidth>=layout.grid-2,`table scroll hint must span full directory at${width}px`);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   }
+  // Source-verified cinema branches must be discoverable by common abbreviated names.
+  await page.goto(`http://127.0.0.1:${port}/theaters.html?prefecture=神奈川県&search=TOHO川崎`);
+  await page.locator('#grid .theaterTable').waitFor();
+  assert.match(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.join(' ')),/TOHOシネマズ 川崎/);
+  await page.evaluate(()=>document.documentElement.dataset.theme='light');
+  const color=await page.locator('#grid .theaterName').first().evaluate(el=>getComputedStyle(el).color);
+  assert.notEqual(color,'rgb(238, 238, 238)','light theater names must not be near-white');
+  await page.locator('#q').fill('109シネマズ川崎');
+  await page.locator('#grid .theaterTable').waitFor();
+  assert.match(await page.locator('#grid .theaterTable').innerText(),/IMAXレーザー/);
+  await page.locator('#q').fill('TOHO川崎');
+  await page.locator('#grid [data-showtime-theater]').first().click();
+  assert.equal(await page.locator('.schedulePanel').evaluate(el=>el.open),true);
+  assert.match(await page.locator('#scheduleQ').inputValue(),/TOHOシネマズ 川崎/);
+  assert.match(await page.locator('#theaterDetail').innerText(),/TOHOシネマズ 川崎/);
+  assert.ok(await page.locator('#theaterDetail a.official').count()>0);
   assert.deepEqual(errors,[]);
   console.log('Theater directory excludes known closure and duplicate source while retaining different same-name locations at390px');
  }finally{await browser?.close();server.kill('SIGTERM');}

@@ -30,10 +30,10 @@ const minimalMovieWeight=600;
 const minimalFooterGap=38;
 const minimalSingleMovieSize=42;
 const singleMovieSize=38;
-const doublePortraitMovieSize=32;
-const doubleCompactMovieSize=27;
-const singleMetaSize=21;
-const doubleMetaSize=20;
+const doublePortraitMovieSize=38;
+const doubleCompactMovieSize=32;
+const singleMetaSize=25;
+const doubleMetaSize=24;
 
 function rule(ctx,x,y,w,color,alpha=.5){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5);ctx.restore()}
 function fittedLines(ctx,text,maxWidth,maxLines,size,minSize,family,weight=400){
@@ -160,7 +160,10 @@ function layoutMetrics(shape,columns,theme){
 }
 const posterCache=new Map();
 function safePosterImage(url){
-  if(!url||typeof url!=='string'||!/^https:\/\//i.test(url))return null;
+  if(!url||typeof url!=='string')return null;
+  if(/^\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp)$/i.test(url))url='https://image.tmdb.org/t/p/w342'+url;
+  else if(/^\/t\/p\//.test(url))url='https://image.tmdb.org'+url;
+  if(!/^https:\/\//i.test(url))return null;
   if(posterCache.has(url))return posterCache.get(url);
   const item={status:'loading',image:null};posterCache.set(url,item);
   const image=new Image();image.crossOrigin='anonymous';image.referrerPolicy='no-referrer';
@@ -210,7 +213,7 @@ function drawArtwork(movies){
     if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
     const poster=safePosterImage(m.poster);
-    const posterW=columns===2?64:74,posterH=Math.min(rowH-12,posterW*1.5);
+    const posterW=columns===2?82:96,posterH=Math.min(rowH-12,posterW*1.5);
     const posterX=x+(columns===2?80:94),posterY=y+(rowH-posterH)/2;
     if(poster?.status==='ready'&&poster.image){
       ctx.save();ctx.beginPath();ctx.rect(posterX,posterY,posterW,posterH);ctx.clip();
@@ -218,7 +221,7 @@ function drawArtwork(movies){
       ctx.drawImage(im,posterX+(posterW-im.naturalWidth*scale)/2,posterY+(posterH-im.naturalHeight*scale)/2,im.naturalWidth*scale,im.naturalHeight*scale);
       ctx.restore();
     }
-    const offset=columns===2?154:182,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
+    const offset=columns===2?176:204,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
     ctx.fillStyle=p.fg;
     const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
     const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;

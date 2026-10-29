@@ -98,7 +98,27 @@
  }
  function regionalGuide(data,options={},now=new Date()){
   const date=options.date;
-  if(!civil(date)||date<today(now)||typeof options.prefecture!=='string'||!options.prefecture)return [];
+  if(!civil(date)||date<today(now))return [];
+  const selected=Array.isArray(options.prefectures)?[...new Set(options.prefectures.filter(p=>typeof p==='string'&&p))]:[];
+  if(selected.length){
+   const merged=new Map();
+   for(const pref of selected){
+    for(const c of regionalGuide(data,{...options,prefectures:undefined,prefecture:pref},now)){
+     if(!merged.has(c.id))merged.set(c.id,{...c,theaters:[],available:[]});
+     const row=merged.get(c.id);
+     row.theaters.push(...c.theaters.map(t=>pref+'：'+t));
+     row.available.push(...c.available.map(o=>({...o,applicableTheaters:o.applicableTheaters.map(t=>pref+'：'+t)})));
+    }
+   }
+   return [...merged.values()].map(c=>{
+    c.available.sort((a,b)=>a.price-b.price||(a.maxPrice||a.price)-(b.maxPrice||b.price));
+    c.publicBest=c.available.find(o=>o.access==='public')||null;
+    c.conditionalBest=c.available.find(o=>o.access!=='public')||null;
+    c.best=c.available[0]||null;
+    return c;
+   }).sort((a,b)=>(a.best?.price??Infinity)-(b.best?.price??Infinity)||a.name.localeCompare(b.name,'ja'));
+  }
+  if(typeof options.prefecture!=='string'||!options.prefecture)return [];
   const groups=new Map();
   for(const r of Array.isArray(data?.regionalCoverage)?data.regionalCoverage:[]){
    if(!r||r.prefecture!==options.prefecture||!fresh(r,date,now)||!validNames(r.theaters,true))continue;
@@ -136,9 +156,9 @@
   return rows.sort((a,b)=>(a.best?.price??Infinity)-(b.best?.price??Infinity)||a.name.localeCompare(b.name,'ja'));
  }
  function regionalCalendar(data,options={},now=new Date()){
-  if(!civil(options.date)||options.date<today(now))return [];
+  if(!civil(options.date))return [];
   return Array.from({length:14},(_,i)=>{
-   const date=addDays(options.date,i),rows=regionalGuide(data,{...options,date},now);
+   const date=addDays(options.date,i),rows=date<today(now)?[]:regionalGuide(data,{...options,date},now);
    const winners=key=>{const eligible=rows.filter(c=>c[key]);if(!eligible.length)return {price:null,chains:[]};const price=Math.min(...eligible.map(c=>c[key].price));return {price,chains:eligible.filter(c=>c[key].price===price).map(c=>({id:c.id,name:c.name}))};};
    const a=winners('publicBest'),b=winners('conditionalBest');
    return {date,publicPrice:a.price,publicChains:a.chains,conditionalPrice:b.price,conditionalChains:b.chains};

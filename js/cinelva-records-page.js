@@ -367,9 +367,15 @@
       '<div class="cinelva-record-meta"><small>'+escapeHTML(releaseDate)+'</small></div>'+
       '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
+  let visibleReviewQueue=null;
   function mountRecordReviewAreas(scope){
     if(!scope)return;
-    scope.querySelectorAll('[data-record-review-id]').forEach(node=>{
+    const nodes=scope.querySelectorAll('[data-record-review-id]');
+    if(!visibleReviewQueue&&globalThis.CinelvaVisibleReviews)visibleReviewQueue=globalThis.CinelvaVisibleReviews.create({mount:mountRecordReviewNode});
+    if(visibleReviewQueue)visibleReviewQueue.observe(nodes);
+    else nodes.forEach(mountRecordReviewNode);
+  }
+  function mountRecordReviewNode(node){
       if(node.dataset.gaugeMounted==='true')return;
       const id=node.dataset.recordReviewId;
       const record=state.records.find(item=>String(item.id)===id);
@@ -398,7 +404,6 @@
       const edit=document.createElement('button');edit.type='button';edit.className='cinelva-rate-button';edit.textContent='◉';edit.setAttribute('aria-label','レビューを編集');
       edit.addEventListener('click',()=>{const latest=state.records.find(item=>String(item.id)===id);if(latest)openDialog(latest);});
       box.append(ratings,edit);node.append(box);
-    });
   }
   function showReviewDetail(id) {
     const record=state.records.find(item=>String(item.id)===String(id));
@@ -438,10 +443,11 @@
     const tabs = [...document.querySelectorAll('.tab[data-tab]')];
     if (tab === 'calendar') tab = 'summary';
     if (!tabs.some(button => button.dataset.tab === tab) || !$(tab + 'View')) return;
+    const summaryAlreadyVisible=tab==='summary'&&!$('summaryView').hidden;
     try { sessionStorage.setItem(TAB_STORAGE_KEY, tab); } catch (_) { /* Storage may be unavailable. */ }
     document.querySelectorAll('.tab').forEach(button => button.setAttribute('aria-selected', String(button.dataset.tab === tab)));
     document.querySelectorAll('.view').forEach(section => { section.hidden = section.id !== tab + 'View'; });
-    if (tab === 'summary') { renderCinemaSummary(); renderAwards(); }
+    if (tab === 'summary'&&!summaryAlreadyVisible) { renderCinemaSummary(); renderAwards(); }
     if (tab === 'world') drawWorld();
     if (tab === 'genres') renderGenres();
     if (tab === 'awards') renderAwards();
@@ -981,7 +987,7 @@
       const director=resolveDirector(group.name,group.records);
       const sourcedName=director?.name||group.name;
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
-      const all=new Map();
+      const all=new Map(),catalogById=new Map((director?.works||[]).map(work=>[filmIdentity(work),work]));
       for(const work of director?.works||[]){
         // Sourced director credits are authoritative. General movie metadata may
         // have another lead director or missing runtime and must not veto them.
@@ -991,7 +997,7 @@
         if(!isDirectorCredit(combined,sourcedName))continue;
         all.set(id,combined);
       }
-      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
+      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie),combined={...globalThis.CinelvaGlobalSearch.filmMedium.mergeFilmMetadata(catalogById.get(id)||all.get(id)||{},movie),id};if(isDirectorCredit(combined,group.name))all.set(id,combined);}
       const films=[...all.values()];
       // Counts are derived from distinct, verified director credits, not arbitrary minimums per person.
       const sourcedCount=new Set((director?.works||[]).filter(work=>isDirectorCredit(work,sourcedName)).map(filmIdentity)).size;
@@ -1109,8 +1115,26 @@
       const progress=catalogAvailable?watchedCount+' / '+films.length+'本 採点済み':watchedCount+'本 鑑賞済み · 総数不明';
       const progressTrack=catalogAvailable?'<div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>':'';
       const coverageNote=catalogAvailable?'収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。'+(director?.coverage?.truncated===false?'出典：TMDB。':'収録範囲は情報元の掲載状況によって異なります。'):'監督作品の情報を確認できていません。鑑賞記録のある作品だけを表示しています。';
+      const reviewed=group.records.map(movie=>Number(movie.rating)).filter(v=>Number.isFinite(v)&&v>0);
+      const average=reviewed.length?reviewed.reduce((sum,v)=>sum+v,0)/reviewed.length:null;
+      const high=reviewed.filter(v=>v>=4).length;
+      const ratio=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;
+      const directorProfileStats='<section class="director-profile-dashboard" aria-label="'+escapeHTML(group.name)+'の鑑賞ダッシュボード"><h4>鑑賞ダッシュボード</h4><div class="director-profile-statgrid">'+[
+        ['鑑賞本数',watchedCount+'本'],['監督作品総数',catalogAvailable?films.length+'本':'未確認'],
+        ['鑑賞率',ratio===null?'—':ratio+'%'],['MY平均評価',average===null?'—':average.toFixed(2)+' / 5.0'],
+        ['MY評価済み',reviewed.length+'本'],['MY 4.0以上',high+'本']
+      ].map(([name,value])=>'<div class="director-profile-stat"><span>'+escapeHTML(name)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div><p>MY平均は評価済み作品のみ。総数・鑑賞率は確認済み監督クレジットを基準にしています。</p></section>';
+      const scoredFilms=group.records.map(movie=>Number(movie.rating)).filter(value=>Number.isFinite(value)&&value>0);
+      const averageScore=scoredFilms.length?scoredFilms.reduce((sum,v)=>sum+v,0)/scoredFilms.length:null;
+      const strongScores=scoredFilms.filter(value=>value>=4).length;
+      const completion=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;
+      const directorStats='<section class="director-profile-dashboard" aria-label="'+escapeHTML(group.name)+'の鑑賞ダッシュボード"><h4>鑑賞ダッシュボード</h4><div class="director-profile-statgrid">'+[
+       ['鑑賞した作品',watchedCount+'本'],['監督作品の収録数',catalogAvailable?films.length+'本':'未確認'],
+       ['鑑賞率',completion===null?'—':completion+'%'],['MY平均評価',averageScore===null?'—':averageScore.toFixed(2)+' / 5.0'],
+       ['評価した作品',scoredFilms.length+'本'],['MY 4.0以上',strongScores+'本']
+      ].map(([label,value])=>'<div class="director-profile-stat"><span>'+escapeHTML(label)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div><p>MY平均評価は評価済み作品のみから計算。総作品数・鑑賞率は確認できた監督クレジットを基準としています。</p></section>';
       detail.innerHTML='<div class="director-profile">'+(safePhoto?'<img class="director-profile-photo" src="'+escapeHTML(safePhoto)+'" alt="'+escapeHTML(group.name)+'の写真" loading="lazy">':'')+'<div class="director-profile-body"><h3>'+escapeHTML(group.name)+'</h3><strong class="director-progress">'+progress+'</strong>'+progressTrack+profileDetails.map(v=>'<p>'+escapeHTML(v)+'</p>').join('')+biography+'</div></div>'+
-        '<div class="director-poster-grid">'+films.map((movie,index)=>filmTile(movie,watched.has(String(movie.id)),group.name,index)).join('')+'</div>'+
+        directorStats+'<div class="director-poster-grid">'+films.map((movie,index)=>filmTile(movie,watched.has(String(movie.id)),group.name,index)).join('')+'</div>'+
         '<p class="director-coverage-note">'+coverageNote+(sourceUrl?' <a href="'+escapeHTML(sourceUrl)+'" target="_blank" rel="noopener noreferrer">監督の出典情報</a>':'')+'</p>';
       const close=document.createElement('button');
       close.type='button';
@@ -1199,10 +1223,10 @@
   async function searchMovies(query) {
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];
-    try { const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movies?q=${encodeURIComponent(query)}&limit=12`,{signal:AbortSignal.timeout(8000)}); if(response.ok){const data=await response.json();rows=[...(data.movies||[]),...(data.external||[])];} } catch (_) { /* Local catalog fallback follows. */ }
-    if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,12); }
+    try { const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movies?q=${encodeURIComponent(query)}&limit=100`,{signal:AbortSignal.timeout(15000)}); if(response.ok){const data=await response.json();rows=[...(data.movies||[]),...(data.external||[])];} } catch (_) { /* Local catalog fallback follows. */ }
+    if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,100); }
     if(token!==state.searchToken)return;
-    const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,12);
+    const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,100);
     box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
     box._movies=rows;
   }
@@ -1360,7 +1384,7 @@
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});
       Object.assign(directorData,original);
     }
-    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,poster:movie.poster||old.poster||'',year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
+    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...globalThis.CinelvaGlobalSearch.filmMedium.mergeFilmMetadata(old,movie),poster:movie.poster||old.poster||'',year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {

@@ -63,3 +63,13 @@ test('offline details retain the event date with its actual meaning', () => {
   assert.doesNotMatch(info,/<dt>公開日<\/dt><dd>2026-09-01/);
   assert.equal(event.date,'2026-09-01');
 });
+
+test('title search retains all resolved series films beyond the old thirty-card cap', async()=>{
+ const films=Array.from({length:45},(_,i)=>({id:10000+i,tmdbId:10000+i,title:'スター・ウォーズ '+i,year:'2000',catalog:true}));
+ const grid={innerHTML:'',querySelectorAll:()=>[]},status={};
+ const context={q:{value:'スターウォーズ'},API:'https://example.invalid',history:{replaceState(){}},status,grid,E:String,results:[],AbortSignal,window:{},fetch:async url=>({ok:true,json:async()=>url.includes('/api/')?{movies:[],external:films,external_search:{truncated:false,incomplete:false}}:{movies:[]}})};
+ vm.runInNewContext(helpers+section('async function search()', 'function syncTrailUrl('),context);
+ await context.search();
+ assert.equal((grid.innerHTML.match(/class="card"/g)||[]).length,45);
+ assert.match(status.textContent,/45件/);
+});

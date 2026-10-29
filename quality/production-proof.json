@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "96eb59defa9a9449ea69dcd414cdbe1fa83c3507",
-  "verified_at": "2026-10-28T22:30:00.000Z",
-  "note": "PR #543 source 96eb59de: exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build and additional workflows all succeeded. Receipt-only update; final-head CI and review still required before merge."
+  "head_sha": "9ebb1b80983dc26b9cd50a126335215e946b4d77",
+  "verified_at": "2026-10-29T08:26:35.117Z",
+  "note": "PR #546 integrated source: all four required exact-source workflows and additional mobile, backup, Python and completeness checks succeeded. Receipt-only commit; final-head CI required before merge/publication. Actual iPhone and unmet performance goals remain separate."
 }

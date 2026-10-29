@@ -1727,5 +1727,14 @@
         "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
       }
     }
+  },
+  "requested_quality_audit_20261029": {
+    "status": "in_progress",
+    "base_sha": "0e94795f6342d8dcb8b390fc51485a03a1958745",
+    "branch": "test/requested-performance-budgets-20261029",
+    "audit": "docs/operations/requested-quality-audit-20261029.md",
+    "validation": "Baseline full shared quality PASS; changed full shared quality PASS (393 primary Node tests,6 dedupe); focused performance5/5 RED-to-GREEN. New browser diagnostic blocked locally before navigation: no browser executable and invalid download archive. No performance measurements claimed.",
+    "next_action": "Inspect new PR CI requested-performance artifact; repair harness before baseline comparison. Reconcile PR544 (contains539, source CI successful but proof/final checks pending) and PR543 before duplicate P0 work. Preserve exact-source proof and final CI gates.",
+    "production": "Latest observed READY201b0295 PR541; no deploy from this branch. Physical iPhone acceptance pending."
   }
 }

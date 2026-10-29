@@ -275,3 +275,17 @@ jobs:
             artifacts/reported-audit/
             artifacts/global-search/
           if-no-files-found: warn
+      - name: Record requested operation performance separately from historical score
+        if: always()
+        run: |
+          result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
+          exit "$result"
+      - name: Preserve requested operation measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: requested-performance
+          path: artifacts/requested-performance/
+          if-no-files-found: warn

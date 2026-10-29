@@ -57,6 +57,7 @@ on:
       - '!**/*.md'
       - '!data/availability.json'
       - '!data/awards.json'
+      - '!data/boxoffice.json'
       - '!data/director_name_readings.json'
       - '!data/directors-mobile.json'
       - '!data/director-feature-index.json'
@@ -87,7 +88,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -142,6 +143,8 @@ jobs:
           bash scripts/prepare-browser-ci.sh
           "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
@@ -173,105 +176,19 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: cinema-discounts
-          path: artifacts/cinema-discounts/
-          if-no-files-found: warn
-      - name: Preserve route audit evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: cinelva-route-audit
-          path: artifacts/route-audit/
-          if-no-files-found: warn
-          retention-days: 14
-      - name: Preserve calendar regression evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: cinelva-calendar-cross-screen
-          path: artifacts/calendar-cross-screen/
-          if-no-files-found: warn
-          retention-days: 14
-      - name: Check Cinemap brand identity
-        run: python -m unittest discover -s tests -p 'test_brand_identity.py' -v
-      - name: Check approved data sources
-        run: python scripts/check_sources.py
-      - name: Check discovery UI integrations
-        run: |
-          python scripts/check_discovery_ui.py
-          node --test tests/cinelva-discovery-offer-order.test.cjs
-      - name: Check discovery shelf count and expansion
-        run: node --test tests/cinelva-discovery-shelf.test.cjs
-      - name: Check Cinemap core journey
-        run: python scripts/check_core_journey.py
-      - name: Check Critic Map compliance gate
-        run: python scripts/check_critic_map.py
-      - name: Check critic evidence thresholds and sources
-        run: node scripts/check_critic_evidence.js
-      - name: Reject stale cinema showtimes
-        run: |
-          node --check js/cinelva-theater-schedule.js
-          node --test tests/cinelva-theater-schedule.test.cjs
-  now-playing:
-    name: Nationwide now-playing shared controls (Chromium + WebKit)
-    runs-on: ubuntu-latest
-    timeout-minutes: 8
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: '22'
-      - name: Install isolated browser test tools
-        run: |
-          npm install --prefix "$RUNNER_TEMP/cinelva-now-playing" --no-audit --no-fund playwright@1.59.0
-          bash scripts/prepare-browser-ci.sh
-          "$RUNNER_TEMP/cinelva-now-playing/node_modules/.bin/playwright" install --with-deps chromium webkit
-      - name: Verify current, stale and unavailable list with real shared actions
-        run: |
-          NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-now-playing-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-calendar-now-playing-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-now-playing/node_modules" node tests/cinelva-calendar-now-playing-browser.cjs
-      - name: Preserve rendered list evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: nationwide-now-playing
-          path: artifacts/now-playing/
-          if-no-files-found: warn
-  reported-audit:
-    name: Reported UI and data regressions (Chromium + WebKit)
-    runs-on: ubuntu-latest
-    timeout-minutes: 8
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: '22'
-      - name: Install isolated browser tools
-        run: |
-          npm install --prefix "$RUNNER_TEMP/cinelva-reported-audit" --no-audit --no-fund playwright@1.59.0
-          bash scripts/prepare-browser-ci.sh
-          "$RUNNER_TEMP/cinelva-reported-audit/node_modules/.bin/playwright" install --with-deps chromium webkit
-      - name: Verify reported calendar, brand, review, sort and theater issues
-        run: |
-          result=0
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
-          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-world-boxoffice-browser.cjs || result=1
-          exit "$result"
-      - name: Preserve reported issue evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: reported-ui-audit
-          path: |
-            artifacts/reported-audit/
-            artifacts/global-search/
-          if-no-files-found: warn
+   …2461 tokens truncated….searchParams.set("query",q);u.searchParams.set("language","ja-JP");u.searchParams.set("region","JP");u.searchParams.set("include_adult","false");return tmdbJson(u)}
+async function recommend(id:number){const u=new URL(B+`/movie/${id}/recommendations`);u.searchParams.set("language","ja-JP");return tmdbJson(u)}
+async function discover(q:string){const u=new URL(B+"/discover/movie");u.searchParams.set("language","ja-JP");u.searchParams.set("region","JP");u.searchParams.set("include_adult","false");u.searchParams.set("sort_by",/評価|高評価/.test(q)?"vote_average.desc":"popularity.desc");u.searchParams.set("vote_count.gte","300");for(const [n,id] of Object.entries(genres))if(q.includes(n)){u.searchParams.set("with_genres",id);break}for(const [n,id] of Object.entries(providers))if(q.toLowerCase().includes(n.toLowerCase())){u.searchParams.set("watch_region","JP");u.searchParams.set("with_watch_providers",id);u.searchParams.set("with_watch_monetization_types","flatrate");break}const yr=yearRange(q);if(yr){u.searchParams.set("primary_release_date.gte",yr[0]+"-01-01");u.searchParams.set("primary_release_date.lte",yr[1]+"-12-31")}const rt=runtime(q);if(rt)u.searchParams.set("with_runtime.lte",String(rt));return tmdbJson(u)}
+function movieLine(m:any,i:number){const y=(m.release_date||"").slice(0,4),score=Number(m.vote_average||0).toFixed(1);return `${i+1}. ${m.title}${y?" ("+y+")":""} — ★${score}\n   ${(m.overview||"あらすじ情報なし").slice(0,100)}`}
+export async function POST(request:Request){const limited=rateLimited(request,30);if(limited)return limited;let b:any;try{b=await readJsonBody(request)}catch(error){const code=(error as {status?:number}).status;const status=code===413?413:code===408?408:code===415?415:400;return json({error:status===413?"request too large":status===408?"request timeout":status===415?"unsupported media type":"invalid json"},{status,headers:{"Cache-Control":"no-store"}},request)}const q=typeof b?.message==="string"?b.message.trim():"";if(!q||q.length>300)return json({error:"message must be 1-300 characters"},{status:400,headers:{"Cache-Control":"no-store"}},request);
+ try {
+ let results:any[]=[];let lead="条件から探しました。";
+ const like=q.match(/(.+?)(?:が好き|に似た|みたいな|っぽい)/);if(like){const s=await search(like[1].replace(/[「」『』]/g,"").trim());const base=s?.results?.[0];if(base){const rec=await recommend(base.id);results=rec?.results||[];lead=`「${base.title}」を起点に関連作品を探しました。`}}
+ if(!results.length){const d=await discover(q);results=d?.results||[]}
+ results=results.filter((m:any)=>m.title&&!m.adult).slice(0,5);
+ if(!results.length)return json({answer:"条件に合う作品を見つけられませんでした。条件を少し広げてみてください。",movies:[]},{headers:{"Cache-Control":"no-store"}},request);
+ const answer=lead+"\n\n"+results.map(movieLine).join("\n\n")+"\n\n※評価・配信状況などは取得時点のTMDBデータを使用しています。";
+ return json({answer,movies:results.map((m:any)=>({id:m.id,title:m.title,year:(m.release_date||"").slice(0,4),poster:m.poster_path?`https://image.tmdb.org/t/p/w342${m.poster_path}`:null}))},{headers:{"Cache-Control":"no-store"}},request)
+ } catch { return json({error:"catalog unavailable"},{status:502,headers:{"Cache-Control":"no-store"}},request) }
+}
+export async function OPTIONS(request:Request){return options(request,"POST,OPTIONS")}

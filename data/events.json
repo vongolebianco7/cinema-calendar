@@ -434,7 +434,9 @@
     }
   ],
   "discovery_count": 0,
-  "last_attempt_at": "2026-10-28",
+  "last_attempt_at": "2026-10-29",
   "verified_count": 0,
-  "curated_count": 13
+  "curated_count": 13,
+  "collection_mode": "manual_only",
+  "automation_status": "disabled_pending_licensed_feed"
 }

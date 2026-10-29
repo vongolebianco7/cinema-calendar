@@ -309,3 +309,10 @@ test('the real mobile projection keeps the original-name and unofficial-reading 
   assert.match(detail.innerHTML,/原名：Retained Source Name/);
   assert.match(detail.innerHTML,/日本語名は原名からのカタカナ表記です。/);
 });
+
+test('saved metadata cannot reintroduce a TV special excluded from the catalog',()=>{
+ const feature={id:1,title:'映画',director:'Steven Spielberg',job:'Director',runtime:100,genre_ids:[18]};
+ const tv={id:2,title:'TV special',director:'Steven Spielberg',job:'Director',runtime:100,genre_ids:[10770]};
+ const {row,detail}=render({records:[{...feature,rating:4},{...tv,genre_ids:[18],rating:5}],works:[feature,tv],profile:{coverage:{truncated:false}}});
+ assert.match(row.innerHTML,/<b>1<\/b>/);row.listeners.click();assert.doesNotMatch(detail.innerHTML,/TV special/);
+});

@@ -26,7 +26,11 @@ for key, director in source.get("directors", {}).items():
         slim["works"].append({k: work[k] for k in (
             "id", "title", "original_title", "year", "date", "runtime", "poster",
             "director", "director_id", "job", "is_director", "source",
-            "source_url", "genre_ids", "genres"
+            "source_url", "type", "media_type", "mediaType", "format", "work_type", "workType",
+            "genre_ids", "genres", "genre_names", "is_tv", "isTV", "is_episode", "isEpisode",
+            "is_series", "isSeries", "number_of_episodes", "number_of_seasons", "first_air_date",
+            "episode_number", "season_number", "release_dates",
+            "theatrical_release_verified", "theatrical_release_source"
         ) if k in work})
     result["directors"][key] = slim
 out = ROOT / "data/directors-mobile.json"

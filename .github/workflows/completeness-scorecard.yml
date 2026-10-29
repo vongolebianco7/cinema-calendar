@@ -217,4 +217,6 @@ jobs:
           retention-days: 14
       - name: Enforce Phase A comparison
         if: github.event_name == 'pull_request' && steps.phase_a.outcome == 'failure'
-        run: exit 1
+        run: |
+          cat artifacts/completeness/score.md
+          exit 1

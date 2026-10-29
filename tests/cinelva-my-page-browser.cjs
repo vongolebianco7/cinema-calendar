@@ -108,6 +108,19 @@ const { chromium, webkit } = require("playwright"),
       assert.ok(await page.locator('#summaryBreakdownFilms .cinelva-record-title').getAttribute('href'));
       await page.locator('#summaryBreakdownFilms .cinelva-rate-button').click();
       await page.locator('.cinelva-rate-dialog[open]').waitFor();
+      if(kind==='csGenres'){
+        const previousTheme=await page.evaluate(()=>document.documentElement.dataset.theme);
+        for(const theme of ['light','dark']){
+          await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+          const measured=await assertTextContrast(page,[
+            '.cinelva-rate-dialog #cinelvaRateTitle','.cinelva-rate-dialog label',
+            '.cinelva-rate-dialog textarea','.cinelva-rate-dialog select',
+            '.cinelva-rate-dialog .cinelva-review-score output','.cinelva-rate-actions button',
+          ],`shared review ${theme} 390px`);
+          assert.ok(measured.length>=5,'review contrast must sample actual visible controls');
+        }
+        await page.evaluate(value=>document.documentElement.dataset.theme=value,previousTheme);
+      }
       await page.locator('#cinelvaRateClose').first().click();
       await page.locator('#summaryBreakdownFilms').getByRole('button', {name: '一覧を閉じる'}).click();
       assert.equal(await legend.evaluate(el => document.activeElement === el), true);
@@ -132,6 +145,15 @@ const { chromium, webkit } = require("playwright"),
     await page.locator('[data-tab="directors"]').click();
     await page.locator(".director-pick").filter({hasText:director.name}).first().click();
     const profileText = await page.locator("#directorFilmography .director-profile").innerText();
+    assert.equal(await page.locator('#directorFilmography .director-profile-dashboard').count(),1,'one director dashboard only');
+    const directorStats=await page.locator('#directorFilmography .director-profile-stat').evaluateAll(nodes=>Object.fromEntries(nodes.map(node=>[node.querySelector('span').textContent,node.querySelector('strong').textContent])));
+    assert.equal(directorStats['鑑賞した作品'],'1本');
+    assert.equal(directorStats['評価した作品'],'1本');
+    assert.equal(directorStats['MY平均評価'],'4.50 / 5.0');
+    assert.equal(directorStats['MY 4.0以上'],'1本');
+    const filmCount=await page.locator('#directorFilmography .director-film-tile').count();
+    assert.equal(directorStats['監督作品の収録数'],filmCount+'本');
+    assert.equal(directorStats['鑑賞率'],Math.round(100/filmCount)+'%');
     assert.ok(profileText.includes("原名：" + director.original_name), "generated mobile data must retain the original name");
     assert.ok(profileText.includes("日本語名は原名からのカタカナ表記です。"), "editorial kana must remain explicitly labeled");
     fs.mkdirSync("artifacts/route-audit/director-provenance", {recursive:true});
@@ -141,6 +163,7 @@ const { chromium, webkit } = require("playwright"),
       await page.screenshot({path:`artifacts/route-audit/director-provenance/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-full-390.png`,fullPage:true});
       await assertTextContrast(page, [
         '.director-sort-bar label', '#directorCollectionSort', '.director-achievement span',
+        '#directorFilmography .director-profile-stat span','#directorFilmography .director-profile-stat strong',
         '#directorFilmography .poster span:not([hidden])',
         '#directorFilmography .rating-caption', '#directorFilmography .rating-value',
         '#directorFilmography .cinelva-rating-actions button',
@@ -294,8 +317,10 @@ const { chromium, webkit } = require("playwright"),
         );
         throw e;
       });
-    assert.equal(await dp.locator('#csPrisms,#csCrowns,.cs-prism,.cs-crown').count(),0,
-      'retired lifetime reward decorations must stay removed at1000 records');
+    assert.equal(await dp.locator('#csLifetimeMilestones .cs-prism').count(),1,
+      '1000 records should display one crystal');
+    assert.equal(await dp.locator('#csLifetimeMilestones .cs-crown').count(),0,
+      '1000 records should reset the crown count');
     await dp.locator('[data-tab="records"]').click();
     assert.equal(
       await dp.locator("#recordList [data-record-card]").count(),

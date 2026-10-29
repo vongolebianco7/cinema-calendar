@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),{stripTypeScriptTypes}=require('node:module');
 async function details(person,credits){
  const code=stripTypeScriptTypes(fs.readFileSync('backend/app/api/movie-detail/route.ts','utf8'),{mode:'transform'}).replace(/^import .*?;\n/gm,'').replaceAll('export ','');
- const ctx={URL,console,process:{env:{TMDB_API_KEY:'fixture'}},featureIndex:require('../data/director-feature-index.json'),rateLimited:()=>null,options:()=>null,json:x=>x,
+ const ctx={...require('../js/cinelva-film-medium.js'),URL,console,process:{env:{TMDB_API_KEY:'fixture'}},featureIndex:require('../data/director-feature-index.json'),rateLimited:()=>null,options:()=>null,json:x=>x,
  fetch:async url=>({ok:true,json:async()=>String(url).includes('movie_credits')?{crew:credits}:String(url).includes('recommendations')?{results:[]}:{id:157336,title:'Fixture',credits:{crew:[{id:person,name:'Director',job:'Director'}]}}})};
  vm.runInNewContext(code+';globalThis.get=GET',ctx);return (await ctx.get({url:'https://fixture/api/movie-detail?id=157336'})).movie;
 }

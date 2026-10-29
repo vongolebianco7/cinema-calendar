@@ -24,6 +24,26 @@
     }
     return output;
   }
-  const api={knownClosed,directory};root.CinelvaTheaterQuality=api;
+  function mergeOfficialDirectory(official,existing,now=Date.now()){
+    const key=row=>normalize(row?.name).replace(/[・･.\-（）()]/g,'')+'|'+normalize(row?.prefecture);
+    const prior=(existing||[]).filter(row=>row&&typeof row==='object');
+    const consumed=new Set(),output=[];
+    for(const row of official||[]){
+      if(!row||typeof row!=='object')continue;
+      const matches=normalize(row.prefecture)?prior.filter(item=>key(item)===key(row)):[];
+      matches.forEach(item=>consumed.add(item));
+      if(matches.length===1){
+        // A sparse official branch list enriches identity, never erases trusted
+        // location/links or revives a separately recorded closure.
+        const nonempty=Object.fromEntries(Object.entries(row).filter(([,value])=>value!==''&&value!==null&&value!==undefined));
+        if(!knownClosed(matches[0],now))output.push({...matches[0],...nonempty});
+      }else if(matches.length>1){
+        // Name+prefecture is insufficient to choose between distinct locations.
+        output.push(...matches);
+      }else output.push(row);
+    }
+    return directory([...output,...prior.filter(item=>!consumed.has(item))],now);
+  }
+  const api={knownClosed,directory,mergeOfficialDirectory};root.CinelvaTheaterQuality=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

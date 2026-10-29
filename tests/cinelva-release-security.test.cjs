@@ -20,6 +20,9 @@ test('agent rejects oversized declared body before reading it',async()=>{
 test('agent rejects oversized streamed body without a length header',async()=>{
  const r=await agent().POST(req(JSON.stringify({message:'a',extra:'x'.repeat(9000)})));assert.equal(r.status,413);
 });
+test('agent rejects non-JSON content types before interpreting the body',async()=>{
+ const r=await agent().POST(req('{"message":"SF"}',{'Content-Type':'text/plain'}));assert.equal(r.status,415);assert.equal(r.headers.get('cache-control'),'no-store');
+});
 test('agent requires a JSON string message and never reflects malformed input',async()=>{
  for(const body of ['{',JSON.stringify({message:{secret:'fixture'}}),JSON.stringify({message:['a']})]){const r=await agent().POST(req(body));assert.equal(r.status,400);assert.equal(r.headers.get('cache-control'),'no-store');}
 });
@@ -47,16 +50,16 @@ test('over-limit streams return 413 without waiting for cancellation',async()=>{
  const {readJsonBody}=load('backend/lib/http.ts');
  for(const cancel of [()=>new Promise(()=>{}),()=>Promise.reject(Error('cancel rejected'))]){
   const stream=new ReadableStream({start(c){c.enqueue(new Uint8Array(4097));},cancel});
-  const request=new Request('https://fixture/api/agent',{method:'POST',body:stream,duplex:'half'});
+  const request=new Request('https://fixture/api/agent',{method:'POST',headers:{'Content-Type':'application/json'},body:stream,duplex:'half'});
   const outcome=await Promise.race([readJsonBody(request).then(()=>0,e=>e.status),new Promise(r=>setTimeout(()=>r('hung'),100))]);assert.equal(outcome,413);
  }
 });
 test('stalled body has a bounded deadline and split UTF-8 is decoded correctly',async()=>{
  const {readJsonBody}=load('backend/lib/http.ts');
- const stalled=new Request('https://fixture/api/agent',{method:'POST',body:new ReadableStream({pull(){return new Promise(()=>{})}}),duplex:'half'});
+ const stalled=new Request('https://fixture/api/agent',{method:'POST',headers:{'Content-Type':'application/json'},body:new ReadableStream({pull(){return new Promise(()=>{})}}),duplex:'half'});
  const outcome=await Promise.race([readJsonBody(stalled,4096,10).then(()=>0,e=>e.status),new Promise(r=>setTimeout(()=>r('hung'),100))]);assert.equal(outcome,408);
  const bytes=new TextEncoder().encode('{"message":"映画"}');let i=0;const chunks=new ReadableStream({pull(c){if(i===bytes.length)c.close();else c.enqueue(bytes.slice(i,++i));}});
- assert.equal((await readJsonBody(new Request('https://fixture/api/agent',{method:'POST',body:chunks,duplex:'half'}))).message,'映画');
+ assert.equal((await readJsonBody(new Request('https://fixture/api/agent',{method:'POST',headers:{'Content-Type':'application/json'},body:chunks,duplex:'half'}))).message,'映画');
 });
 
 test('agent JSON POST preflight is allowed without enabling catalog writes',async()=>{

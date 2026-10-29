@@ -9,32 +9,26 @@ test('only recent successful observations can support current availability',()=>
  assert.equal(Q.availabilityIsFresh({checked_at:'2027-01-01'},now),false);
  assert.equal(Q.availabilityIsFresh({date:'2026-10-16'},now),false);
 });
-test('movie identity dedupes alias IDs only with a known shared release year',()=>{
+test('movie identity keeps distinct TMDB films with the same normalized title/year',()=>{
  assert.equal(typeof Q.uniqueMovies,'function');
- const movies=[{id:1,title:'Film: A',year:2000},{id:2,title:'Film A',year:2000},{id:1,title:'別題',year:2000},{id:3,title:'Film A',year:2020},{id:4,title:'Film A'}];
- assert.equal(Q.uniqueMovies(movies).length,3);
+ const movies=[{tmdbId:1,title:'Film: A',year:2000},{tmdbId:2,title:'Film A',year:2000},{tmdbId:1,title:'別題',year:2000},{tmdbId:3,title:'Film A',year:2020},{id:'local-4',title:'Film A'}];
+ assert.deepEqual(Q.uniqueMovies(movies),[movies[0],movies[1],movies[3],movies[4]]);
 });
-test('distinct verified movie IDs retain same-name same-year films',()=>{
- const rows=[{id:1,tmdbId:1,title:'同名作品',year:2026},{id:2,tmdbId:2,title:'同名作品',year:2026},{id:99,tmdbId:1,title:'別表記',year:2026}];
- assert.deepEqual(Q.uniqueMovies(rows).map(m=>m.tmdbId),[1,2]);
+test('an ID-less same-title row stays separate when multiple TMDB identities make it ambiguous',()=>{
+ const rows=[{tmdbId:11,title:'同題',year:2020},{title:'同題',year:2020},{tmdb_id:12,title:'同題',year:2020}];
+ assert.equal(Q.uniqueMovies(rows).length,3);
 });
-test('local and TMDB numeric ID namespaces cannot collapse unrelated films',()=>{
- const rows=[{id:550,title:'手動記録の作品',year:2026},{id:550,tmdbId:550,title:'別の作品',year:1999}];
+test('a legacy title/year row joins one unambiguous TMDB identity',()=>{
+ const rows=[{title:'映画A',year:2020},{tmdbId:88,title:'映画 A',year:2020}];
+ assert.deepEqual(Q.uniqueMovies(rows),[rows[1]]);
+});
+test('unverified local row IDs are not mistaken for TMDB IDs',()=>{
+ const rows=[{id:'local-1',title:'映画A',year:2020},{id:'local-2',title:'映画 A',year:2020}];
+ assert.equal(Q.uniqueMovies(rows).length,1);
+});
+test('raw TMDB-shaped rows use their numeric IDs and keep same-title remakes distinct',()=>{
+ const rows=[{id:91,title:'Same',release_date:'2020-01-01',poster_path:'/a.jpg',vote_average:7.1},{id:92,title:'Same',release_date:'2020-05-01',poster_path:'/b.jpg',vote_average:7.2}];
  assert.equal(Q.uniqueMovies(rows).length,2);
-});
-test('zero placeholder IDs do not hide unrelated unidentified releases',()=>{
- assert.equal(Q.uniqueMovies([{id:0,title:'作品A',year:2026},{id:0,title:'作品B',year:2026}]).length,2);
-});
-test('legacy and verified copies collapse in either order while retaining canonical identity',()=>{
- const legacy={id:'legacy',title:'Film A',year:2000,custom:'retained'},verified={tmdbId:1,title:'Film A',year:2000};
- for(const rows of [[legacy,verified],[verified,legacy]]){
-  const result=Q.uniqueMovies(rows);assert.equal(result.length,1);assert.equal(result[0].tmdbId,1);
- }
- assert.equal(legacy.tmdbId,undefined,'input records are never mutated');
-});
-test('ambiguous same-title legacy rows never pick between two verified film identities',()=>{
- const a={tmdbId:1,title:'Film A',year:2000},b={tmdbId:2,title:'Film A',year:2000},unknown={title:'Film A',year:2000};
- for(const rows of [[unknown,a,b],[a,unknown,b],[a,b,unknown]])assert.equal(Q.uniqueMovies(rows).length,3);
 });
 test('official on-demand listings expire and are never made into premieres',()=>{
  assert.equal(typeof Q.activeOfficialOffers,'function');

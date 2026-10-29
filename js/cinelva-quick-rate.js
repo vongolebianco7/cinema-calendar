@@ -160,6 +160,7 @@ function primeRecordSnapshot(records){
 }
 function viewingRecord(movie){
  const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
+ if(movie._localRecord&&localRecordIndexSource!==null)return localRecordIndex.get(String(movie.id));
  const records=allRecords();
  if(movie._localRecord){
   if(localRecordIndexSource!==records){

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T23:25:00Z",
+  "updated_at": "2026-10-29T23:30:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -854,6 +854,10 @@
     {
       "check": "Cinema comparison #554 and post-merge data refresh 2026-10-30 JST",
       "result": "PR #554 merged as 94e1410c719594e4837a7c30336dab01078a2534. Frontend and backend Vercel deployments are READY for this exact SHA. Update movie data run 40961767421 passed source/compliance/TMDB/dataset validation, refreshed 199/200 provider observations, then failed freshness audit at 755/1312 (57.5%) against 70%; database sync was skipped. No new data commit was found on GitHub; no data publication or DB sync is claimed."
+    },
+    {
+      "check": "Scheduled official data refresh #94 after PR #553 merge",
+      "result": "Run 40968095519 started from trigger SHA 16f2578, then commit step rebased onto current main and successfully published generated snapshots as c90db692c5c5c78d1a30fcd0619fc3a686eb17fd after PR #553 merge 887c07e. Changed only eight generated JSON snapshots (availability, awards, boxoffice, movies, extra rankings, release history, streaming, theatrical); no user ratings/bookmarks or DB schema. 199/200 availability observations refreshed; 755/1312 (57.5%) remained within 7 days vs the 70% warning threshold. Vercel frontend/backend deployments for c90db were READY; newer #554 commit 94e1410 is READY on both projects. PostgreSQL sync step failed before connection with Prisma P1001, so no DB writes were made. Do not retry until read-only DB availability diagnosis; data remains served from verified static snapshots."
     }
   ],
   "deployment": {
@@ -1806,19 +1810,26 @@
     },
     "data_refresh": {
       "status": "in_progress",
-      "workflow_run": 40961767421,
+      "workflow_run": 40968095519,
       "fresh_observations": "755/1312 (57.5%)",
       "required_threshold": "70%",
       "provider_updates": "199/200",
-      "database_sync": "skipped",
-      "publication": "not verified",
-      "next_action": "Inspect exact failure log for step 20 and resolve freshness warm-up/capacity diagnosis without lowering thresholds; then one bounded attempt."
+      "database_sync": "failed_before_connection: Prisma P1001; no database write",
+      "publication": "generated snapshot commit and static production deployment verified; database sync not verified",
+      "next_action": "Inspect DB availability through read-only control-plane status if available; do not retry a data sync until the endpoint is reachable. Keep 70% freshness threshold; monitor next scheduled 199/200 daily refresh.",
+      "trigger_sha": "16f2578d2d77df4e0fa8bc306de8336141576646",
+      "data_commit": "c90db692c5c5c78d1a30fcd0619fc3a686eb17fd",
+      "pr553_merge": "887c07e620989607f681be4f006b68f605645d6a",
+      "static_deployments_ready": [
+        "dpl_37KgqnaXh7kdVrFFNhGhC59u8tet",
+        "dpl_8vGWRVxqwDjZzmUFtdRwK3Vk5Uvy"
+      ]
     },
     "open_counts": {
       "issues": 6,
-      "pull_requests": 8,
+      "pull_requests": 9,
       "drafts": 2
     },
-    "next_action": "Inspect workflow step 20 failure, then resume highest-priority open P0 items. Do not blindly rerun data refresh."
+    "next_action": "Check read-only database availability after Prisma P1001 without running a query or changing schema; verify PR #555 checkpoint CI; continue remaining feasible P0 tasks."
   }
 }

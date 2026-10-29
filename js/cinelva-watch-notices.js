@@ -6,7 +6,7 @@
  function ensurePanel(){
   list=$('wantWatchList');if(!list)return false;
   if(panel?.isConnected)return true;
-  const style=document.createElement('style');style.textContent='.cinelva-release-notice{margin:12px 0 16px;padding:12px;border:1px solid var(--line,#444);border-radius:10px;background:var(--panel,#17191d);color:var(--ink,#eee);font-size:13px}.cinelva-release-notice label{display:flex;align-items:flex-start;gap:9px;line-height:1.55}.cinelva-release-notice input{width:20px;height:20px;flex:none;margin:0;accent-color:#d4a945}.cinelva-release-notice small{display:block;color:var(--muted,#aaa);margin:7px 0}.cinelva-release-notice-list{display:grid;gap:8px}.cinelva-release-notice-item{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:9px;border-radius:8px;background:var(--soft,#22252a)}.cinelva-release-notice-item a{color:inherit}.cinelva-release-notice-item button{flex:none;border:1px solid var(--line,#555);border-radius:7px;padding:5px 8px;background:transparent;color:inherit;font-size:12px}';
+  const style=document.createElement('style');style.textContent='.cinelva-release-notice{margin:12px 0 16px;padding:12px;border:1px solid var(--line,#444);border-radius:10px;background:var(--panel,#17191d);color:var(--ink,#eee);font-size:13px}.cinelva-release-notice label{display:flex;align-items:flex-start;gap:9px;line-height:1.55;min-height:44px}.cinelva-release-notice input{width:20px;height:20px;flex:none;margin:0;accent-color:#d4a945}.cinelva-release-notice small{display:block;color:var(--muted,#aaa);margin:7px 0}.cinelva-release-notice-list{display:grid;gap:8px}.cinelva-release-notice-item{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:9px;border-radius:8px;background:var(--soft,#22252a)}.cinelva-release-notice-item a{color:inherit}.cinelva-release-notice-item button{flex:none;min-width:44px;min-height:44px;border:1px solid var(--line,#555);border-radius:7px;padding:5px 8px;background:transparent;color:inherit;font-size:12px}';
   panel=document.createElement('section');panel.className='cinelva-release-notice';panel.setAttribute('aria-label','公開・配信予定のお知らせ');
   const label=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';toggle.id='cinelvaReleaseNoticeToggle';try{toggle.checked=localStorage.getItem(enabledKey)==='1';}catch{toggle.checked=false;}
   const copy=document.createElement('span');copy.textContent='見たい映画の公開・配信予定を確認する（この端末のみ）';label.append(toggle,copy);
@@ -43,7 +43,7 @@
   }catch{status.textContent='公開予定を読み込めませんでした。時間をおいてもう一度ご確認ください。';status.dataset.loaded='0';}
  }
  document.querySelector('[data-tab="watchlist"]')?.addEventListener('click',()=>refresh(true));
- window.addEventListener('cinelva-bookmarks-updated',()=>refresh(true));
- window.addEventListener('storage',event=>{if([bookmarkKey,enabledKey,dismissedKey].includes(event.key)){const toggle=$('cinelvaReleaseNoticeToggle');if(toggle&&event.key===enabledKey){try{toggle.checked=localStorage.getItem(enabledKey)==='1';}catch{toggle.checked=false;}}refresh(true);}});
+ window.addEventListener('cinelva-bookmarks-updated',()=>{if(!$('watchlistView')?.hidden)refresh(true);});
+ window.addEventListener('storage',event=>{if([bookmarkKey,enabledKey,dismissedKey].includes(event.key)){const toggle=$('cinelvaReleaseNoticeToggle');if(toggle&&event.key===enabledKey){try{toggle.checked=localStorage.getItem(enabledKey)==='1';}catch{toggle.checked=false;}}if(!$('watchlistView')?.hidden)refresh(true);}});
  if(ensurePanel())status.textContent='「見たい映画」を開いたときに予定日を確認します。';
 })();

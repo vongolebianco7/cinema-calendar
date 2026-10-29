@@ -137,26 +137,31 @@ async function best10Catalog(){
  return best10CatalogPromise;
 }
 const best10PosterUrl=movie=>{const raw=String(movie?.poster||movie?.posterUrl||movie?.poster_path||'');if(/^\/[A-Za-z0-9_-]+\.(jpg|jpeg|png|webp)$/i.test(raw))return 'https://image.tmdb.org/t/p/w342'+raw;if(/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\//i.test(raw))return raw;return ''};
+const best10ExplicitId=movie=>{const id=String(movie?.tmdbId||movie?.tmdb_id||'');return /^[1-9]\d*$/.test(id)?id:''};
+const best10PosterIdentityMatches=(movie,candidate)=>{
+ const title=best10Normalize(movie.title),year=String(movie.year||String(movie.release_date||'').slice(0,4));
+ return !!title&&/^\d{4}$/.test(year)&&title===best10Normalize(candidate.title)&&year===String(candidate.year||String(candidate.release_date||'').slice(0,4));
+};
 async function hydrateBest10Posters(){
  const missing=picks.filter(m=>!best10PosterUrl(m));if(!missing.length)return;
  let updated=false;
  try{
   const movies=await best10Catalog();
   for(const m of missing){
-   const id=String(m.tmdbId||m.tmdb_id||m.id||'');
-   const title=best10Normalize(m.title),year=String(m.year||'');
-   const found=movies.find(x=>id&&String(x.tmdbId||x.tmdb_id||x.id||'')===id)||movies.find(x=>year&&String(x.year||String(x.release_date||'').slice(0,4))===year&&best10Normalize(x.title)===title);
+   const id=best10ExplicitId(m);
+   const candidates=movies.filter(x=>best10PosterIdentityMatches(m,x)&&(!id||String(x.tmdbId||x.tmdb_id||x.id||'')===id));
+   const found=candidates.length===1?candidates[0]:null;
    const url=found&&best10PosterUrl(found);
    if(url){m.poster=url;updated=true;}
   }
  }catch(_){}
- const still=picks.filter(m=>!best10PosterUrl(m)&&/^\d+$/.test(String(m.tmdbId||m.tmdb_id||m.id||''))).slice(0,10);
+ const still=picks.filter(m=>!best10PosterUrl(m)&&best10ExplicitId(m)).slice(0,10);
  for(const movie of still){
   try{
-   const id=String(movie.tmdbId||movie.tmdb_id||movie.id),res=await fetch(API+'/api/movie-detail?id='+encodeURIComponent(id),{cache:'force-cache'});
+   const id=best10ExplicitId(movie),res=await fetch(API+'/api/movie-detail?id='+encodeURIComponent(id),{cache:'force-cache'});
    if(!res.ok)continue;
    const data=await res.json(),found=data.movie||data;
-   if(String(found.tmdbId||found.tmdb_id||found.id)!==id)continue;
+   if(String(found.tmdbId||found.tmdb_id||found.id)!==id||!best10PosterIdentityMatches(movie,found))continue;
    const url=best10PosterUrl(found);
    if(url){movie.poster=url;updated=true;}
   }catch(_){}
@@ -200,7 +205,7 @@ document.querySelectorAll("button[data-theme]").forEach(b=>b.onclick=()=>{docume
    });
   const rated=[...unique.values()].slice(0,10);
   if(!rated.length){document.getElementById('msg').textContent='MY評価を付けた鑑賞済み作品がありません。My Cinelvaで評価を記録してください。';return;}
-  pending=rated.map(r=>({id:r.id,tmdbId:r.tmdbId||r.tmdb_id||r.id,title:r.title,year:r.year||String(r.date||'').slice(0,4)||'',poster:r.poster||r.posterUrl||'',director:r.director||'',rating:r.rating}));
+  pending=rated.map(r=>({id:r.id,tmdbId:r.tmdbId||r.tmdb_id,title:r.title,year:r.year||String(r.date||'').slice(0,4)||'',poster:r.poster||r.posterUrl||'',director:r.director||'',rating:r.rating}));
   desc.textContent='現在のランキング'+picks.length+'作品を、MY評価の高い順'+pending.length+'作品で上書きします。元の順位は失われます。反映しますか？';
   list.replaceChildren();
   rated.forEach(r=>{const item=document.createElement('li'),label=document.createElement('span'),score=document.createElement('small');label.textContent=r.title;score.textContent='MY '+r.rating.toFixed(1)+' / 5.0';item.append(label,score);list.appendChild(item)});

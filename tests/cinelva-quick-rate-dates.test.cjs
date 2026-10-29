@@ -33,7 +33,10 @@ function editor(initialDate, existing = true, identity = {}) {
     CustomEvent: class {},
   });
   const source = fs.readFileSync('js/cinelva-quick-rate.js', 'utf8');
-  const actions = source.slice(source.indexOf('function viewingRecord(movie)'), source.indexOf("$('cinelvaRateSave').onclick=save;"));
+  // Evaluate the editor together with its real lookup-cache state.
+  const start = source.indexOf('let localRecordIndexSource=');
+  assert.ok(start >= 0);
+  const actions = source.slice(start, source.indexOf("$('cinelvaRateSave').onclick=save;"));
   vm.runInContext('let selected;\n' + actions + '\nglobalThis.actions={open,save};', context);
   context.actions.open({ id: 123, title: '日付精度テスト', ...(existing&&!identity.tmdbId&&!identity.tmdb_id?{_localRecord:true}:{}) });
   return { Records, element, actions: context.actions, dialog: context.dialog, context };

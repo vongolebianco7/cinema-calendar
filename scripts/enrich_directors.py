@@ -9,6 +9,7 @@ import datetime
 from functools import lru_cache
 import json
 import os
+import sys
 from pathlib import Path
 import re
 import threading
@@ -18,6 +19,19 @@ import urllib.request
 import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+
+
+def film_works(works):
+    from film_medium import film_works as apply_policy
+    return apply_policy(works)
+
+
+def detail_medium(detail):
+    from film_medium import detail_medium as project
+    return project(detail)
+
+
 JAPANESE = re.compile(r'[ぁ-ゖァ-ヺ\u3400-\u9fff]')
 KANA = re.compile(r'[ぁ-ゖァ-ヺ]')
 EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|amazing\s*stories:\s*the\s*movie|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
@@ -78,6 +92,7 @@ def enrich_director(old, profile, today, aliases=None):
             'director': name, 'director_id': profile['id'], 'job': 'Director', 'is_director': True,
             'poster': 'https://image.tmdb.org/t/p/w342' + poster_path if poster_path else work.get('poster'),
             'source': 'tmdb', 'source_url': f"https://www.themoviedb.org/movie/{credit['id']}"}
+    works = {str(work['id']): work for work in film_works(list(works.values()))}
     biography = profile.get('biography') or ''
     return {**old, 'id': profile['id'], 'name': name, 'nameJa': japanese,
         'original_name': profile.get('name') or old.get('name'),
@@ -124,13 +139,14 @@ def verify_director_runtimes(director, request):
             detail = request('/movie/' + str(int(work['id'])))
             if detail.get('id') != work['id']:
                 raise ValueError('Mismatched movie metadata')
-            work = {**work, 'runtime': detail.get('runtime')}
+            work = {**work, **detail_medium(detail), 'runtime': detail.get('runtime')}
         runtime = work.get('runtime')
         if isinstance(runtime, (int, float)) and 0 < runtime < 30:
             continue
         if EXCLUDED.search(str(work.get('title', '')) + ' ' + str(work.get('original_title', ''))):
             continue
         works.append(work)
+    works = film_works(works)
     return {**director, 'works': works, 'coverage': {**director.get('coverage', {}),
         'runtime_unverified': sum(not work.get('runtime') for work in works)}}
 
@@ -274,7 +290,7 @@ def main():
                         if detail.get('id') != work['id']:
                             raise ValueError('Mismatched movie metadata')
                         runtime = detail.get('runtime')
-                        work = {**work, 'runtime': runtime}
+                        work = {**work, **detail_medium(detail), 'runtime': runtime}
                         if isinstance(runtime, (int, float)) and runtime > 0:
                             runtime_verified += 1
                     except Exception as error:
@@ -282,6 +298,7 @@ def main():
                 if isinstance(runtime, (int, float)) and 0 < runtime < 30:
                     continue
                 retained.append(work)
+            retained = film_works(retained)
             director['works'] = retained
             director['coverage'] = {**director.get('coverage', {}),
                 'runtime_unverified': sum(not work.get('runtime') for work in retained)}

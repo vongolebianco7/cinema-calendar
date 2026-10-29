@@ -120,7 +120,7 @@ const best10Key=m=>String(m.tmdbId||m.tmdb_id||m.id||"")||best10Normalize(m.titl
 function best10RenderMatches(box,items){
  box.replaceChildren();
  if(!items.length){box.textContent="該当する映画が見つかりませんでした。別の表記でもお試しください。";return;}
- items.slice(0,30).forEach(movie=>{
+ items.slice(0,100).forEach(movie=>{
   const row=document.createElement("div");row.className="result";
   const poster=document.createElement("div");
   const url=String(movie.poster||movie.posterUrl||movie.poster_path||"");
@@ -177,7 +177,7 @@ async function search(){
  const unique=new Map();let successes=0;
  const collect=movies=>{if(seq!==best10SearchSeq)return;(movies||[]).forEach(m=>{if(!m||!m.title)return;const k=best10Key(m);if(!unique.has(k))unique.set(k,m);});best10RenderMatches(box,[...unique.values()]);};
  const localTask=best10Catalog().then(movies=>{successes++;collect(movies.filter(m=>[m.title,m.original_title,m.originalTitle,...(Array.isArray(m.aliases)?m.aliases:[])].some(v=>best10Normalize(v).includes(needle))).slice(0,30));}).catch(()=>{});
- const remoteTask=(async()=>{const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),6000);try{const response=await fetch(API+"/api/movies?q="+encodeURIComponent(term)+"&limit=30",{signal:ctrl.signal,cache:"no-store"});if(!response.ok)throw Error("Remote movie search HTTP "+response.status);const data=await response.json();successes++;collect([...(Array.isArray(data.movies)?data.movies:[]),...(Array.isArray(data.external)?data.external:[])]);}catch{}finally{clearTimeout(timer);}})();
+ const remoteTask=(async()=>{const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),15000);try{const response=await fetch(API+"/api/movies?q="+encodeURIComponent(term)+"&limit=100",{signal:ctrl.signal,cache:"no-store"});if(!response.ok)throw Error("Remote movie search HTTP "+response.status);const data=await response.json();successes++;collect([...(Array.isArray(data.movies)?data.movies:[]),...(Array.isArray(data.external)?data.external:[])]);}catch{}finally{clearTimeout(timer);}})();
  await Promise.all([localTask,remoteTask]);
  if(seq===best10SearchSeq&&!successes)box.textContent="検索サーバーに接続できませんでした。時間をおいて再検索してください。";
 }

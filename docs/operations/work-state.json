@@ -1737,5 +1737,29 @@
     "tests": "13/13 focused (5 Best10 identity,8 theater quality); full shared quality PASS (399 primary Node,6 dedupe plus Python/contracts). Browser acceptance/source proof renewal/finalCI pending.",
     "remaining": "Do not close542: exact discovery filter/list/scroll restoration, Nolan-only results, director dashboard totals and light-review contrast still require dedicated browser assertions. No production deploy or record migration.",
     "next_action": "Run exact-head4 required workflows including mobile. Inspect browser failures. Renew production receipt only on successful source, then finalCI before merge. Preserve PR543 independent search/film-medium work."
+  },
+  "requested_quality_audit_20261029": {
+    "status": "in_progress",
+    "base_sha": "0e94795f6342d8dcb8b390fc51485a03a1958745",
+    "branch": "test/requested-performance-budgets-20261029",
+    "audit": "docs/operations/requested-quality-audit-20261029.md",
+    "validation": "Baseline full shared quality PASS; changed full shared quality PASS (393 primary Node tests,6 dedupe); focused performance5/5 RED-to-GREEN. New browser diagnostic blocked locally before navigation: no browser executable and invalid download archive. No performance measurements claimed.",
+    "next_action": "Inspect new PR CI requested-performance artifact; repair harness before baseline comparison. Reconcile PR544 (contains539, source CI successful but proof/final checks pending) and PR543 before duplicate P0 work. Preserve exact-source proof and final CI gates.",
+    "production": "Latest observed READY201b0295 PR541; no deploy from this branch. Physical iPhone acceptance pending."
+  },
+  "integrated_mobile_release_20261029": {
+    "status": "in_progress",
+    "branch": "fix/mobile-release-acceptance-20261029",
+    "integrated": [
+      "2e282130fa092ace9a9b625c18ec1de5e3014e7e",
+      "2cb2b61a3239912f819f45f7b83a9bebfc402d12",
+      "ec484c69af36c72f6e2cd5ed1d83ffab0e2c32d2",
+      "61a34e1"
+    ],
+    "scope": "Existing reviewed PR543/544/545 plus visible-only shared review mounting and explicit discovery history restoration. All film cards and storage keys preserved.",
+    "validation": "Visible queue3 RED-to-GREEN; discovery restore5 GREEN including provider IDs, shelf navigation and delayed scroll. Full shared quality434/434 primary Node plus6 dedupe and Python/contracts PASS. New browser acceptance added for Nolan-only mixed upstream IDs, back+forced reload, provider/shelf selections, populated delayed shelves, modal contrast and director stats. Browser execution pending.",
+    "review": "Independent review found3 Important discovery restoration gaps; regression tests observed RED then GREEN; provider IDs now restore before metadata mount, popular shelf navigation captures state, scroll waits for both shelf fetch paths and user interaction cancels delayed jump.",
+    "performance": "Prior local-ID index had no demonstrated WebKit latency benefit. New visible-review construction hypothesis must be compared against same pre-index source on same CI runner. Physical iPhone, real scroll FPS and live TMDB search not proven.",
+    "next_action": "Run new integrated PR exact-source CI, inspect new browser assertions and before/after performance. Repair failures without weakening acceptance. Then renew source proof only after all4 required workflows pass, require finalheadCI, merge permitted scope and verify existing production deployment. Continue remaining28-task gates."
   }
 }

@@ -367,9 +367,15 @@
       '<div class="cinelva-record-meta"><small>'+escapeHTML(releaseDate)+'</small></div>'+
       '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
+  let visibleReviewQueue=null;
   function mountRecordReviewAreas(scope){
     if(!scope)return;
-    scope.querySelectorAll('[data-record-review-id]').forEach(node=>{
+    const nodes=scope.querySelectorAll('[data-record-review-id]');
+    if(!visibleReviewQueue&&globalThis.CinelvaVisibleReviews)visibleReviewQueue=globalThis.CinelvaVisibleReviews.create({mount:mountRecordReviewNode});
+    if(visibleReviewQueue)visibleReviewQueue.observe(nodes);
+    else nodes.forEach(mountRecordReviewNode);
+  }
+  function mountRecordReviewNode(node){
       if(node.dataset.gaugeMounted==='true')return;
       const id=node.dataset.recordReviewId;
       const record=state.records.find(item=>String(item.id)===id);
@@ -398,7 +404,6 @@
       const edit=document.createElement('button');edit.type='button';edit.className='cinelva-rate-button';edit.textContent='◉';edit.setAttribute('aria-label','レビューを編集');
       edit.addEventListener('click',()=>{const latest=state.records.find(item=>String(item.id)===id);if(latest)openDialog(latest);});
       box.append(ratings,edit);node.append(box);
-    });
   }
   function showReviewDetail(id) {
     const record=state.records.find(item=>String(item.id)===String(id));
@@ -981,7 +986,7 @@
       const director=resolveDirector(group.name,group.records);
       const sourcedName=director?.name||group.name;
       const watched=new Map(group.records.map(movie=>[filmIdentity(movie),movie]));
-      const all=new Map();
+      const all=new Map(),catalogById=new Map((director?.works||[]).map(work=>[filmIdentity(work),work]));
       for(const work of director?.works||[]){
         // Sourced director credits are authoritative. General movie metadata may
         // have another lead director or missing runtime and must not veto them.
@@ -991,7 +996,7 @@
         if(!isDirectorCredit(combined,sourcedName))continue;
         all.set(id,combined);
       }
-      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie);all.set(id,{...(all.get(id)||{}),...movie,id});}
+      for(const movie of group.records){if(!isDirectorCredit(movie,group.name))continue;const id=filmIdentity(movie),combined={...globalThis.CinelvaGlobalSearch.filmMedium.mergeFilmMetadata(catalogById.get(id)||all.get(id)||{},movie),id};if(isDirectorCredit(combined,group.name))all.set(id,combined);}
       const films=[...all.values()];
       // Counts are derived from distinct, verified director credits, not arbitrary minimums per person.
       const sourcedCount=new Set((director?.works||[]).filter(work=>isDirectorCredit(work,sourcedName)).map(filmIdentity)).size;
@@ -1217,10 +1222,10 @@
   async function searchMovies(query) {
     const token=++state.searchToken, box=$('movieResults'); if(!query.trim()){box.replaceChildren();return;} box.innerHTML='<p class="hint">検索中…</p>';
     let rows=[];
-    try { const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movies?q=${encodeURIComponent(query)}&limit=12`,{signal:AbortSignal.timeout(8000)}); if(response.ok){const data=await response.json();rows=[...(data.movies||[]),...(data.external||[])];} } catch (_) { /* Local catalog fallback follows. */ }
-    if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,12); }
+    try { const response=await fetch(`https://backend-one-gray-94.vercel.app/api/movies?q=${encodeURIComponent(query)}&limit=100`,{signal:AbortSignal.timeout(15000)}); if(response.ok){const data=await response.json();rows=[...(data.movies||[]),...(data.external||[])];} } catch (_) { /* Local catalog fallback follows. */ }
+    if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,100); }
     if(token!==state.searchToken)return;
-    const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,12);
+    const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,100);
     box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
     box._movies=rows;
   }
@@ -1378,7 +1383,7 @@
       const original=await load('../data/directors.json?v=20261019-full-catalog',{directors:{}});
       Object.assign(directorData,original);
     }
-    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...old,...movie,poster:movie.poster||old.poster||'',year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
+    state.movies=movieData.movies||[];state.awards=awardData.awards||[];state.awardCoverage=awardData.coverage||{};state.directors=directorData.directors||{};for(const director of Object.values(state.directors))for(const work of director.works||[]){if(!isDirectorCredit(work,director.name))continue;byId.set(String(work.id),{...work,director:work.director||director.name});}for(const movie of [...(awardData.catalog||[]),...state.movies]){const old=byId.get(String(movie.id))||{};byId.set(String(movie.id),{...globalThis.CinelvaGlobalSearch.filmMedium.mergeFilmMetadata(old,movie),poster:movie.poster||old.poster||'',year:movie.year||old.year||Number(String(movie.date||'').slice(0,4))||null});}state.movies=[...byId.values()];
     populateYears();bindEvents();drawYearCalendar();
     // Restore the selected tab after a refresh, without affecting record deep links.
     try {

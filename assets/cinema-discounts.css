@@ -119,7 +119,7 @@
 #discounts .discountConditional>small,#discounts .discountConditional>small.discountWinner{font-size:11px;line-height:1.4;min-height:0}
 #discounts .discountConditional>b{font-size:15px;white-space:nowrap}
 #discounts .discountDay .discountLowestBadge{top:6px;left:8px;right:auto;font-size:10px;transform:translateY(-50%)}
-#discounts .discountCalendarUnconfirmed{font-size:13px}
+#discounts .discountCalendarRanks>.discountCalendarUnconfirmed{display:block;grid-column:1/-1;font-size:13px;white-space:normal}
 #discounts .discountVisuallyHidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:650px){#discounts .discountCalendar{grid-template-columns:minmax(0,1fr)}#discounts .discountTable .discountDetailButton{min-height:44px;font-size:12px}}
 @media(max-width:360px){#discounts .discountDay{grid-template-columns:minmax(0,1fr)}#discounts .discountDay .discountDayDate{grid-column:1;grid-row:auto;display:flex;align-items:baseline;gap:6px}#discounts .discountDay .discountDayDate small{margin:0}#discounts .discountDay .discountPublicLabel,#discounts .discountDay .discountCalendarRanks,#discounts .discountDay .discountConditional{grid-column:1}}

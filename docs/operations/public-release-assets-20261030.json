@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-10-30",
-  "source_base": "108cc7c6f81a5f5196c65ca37946d761a4b66c5d",
-  "scope": "Tracked assets/ files at source_base. Literal references searched only in root HTML, js/ files, and web manifests by exact asset path or basename; this is not reachability proof. Unchanged classifications are carried only by exact path+SHA-256 match to the 2026-10-28 inventory. Generated origin and user approval are not legal permission.",
+  "audited_at": "2026-10-30T12:00:23.054Z",
+  "source_base": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
+  "scope": "All 62 tracked assets at source_base; limited literal references across 52 root HTML/js/manifest files, not reachability proof.",
   "legal_clearance": false,
   "counts": {
-    "authored_nonvisual_asset": 4,
     "exact_asset_permission_unverified": 47,
     "generated_origin_verified": 9,
-    "permission_unverified_changed_since_2026-10-28": 2
+    "permission_unverified_changed_since_2026-10-28": 2,
+    "authored_nonvisual_asset": 4
   },
   "asset_count": 62,
   "image_or_split_asset_count": 58,
@@ -19,7 +19,7 @@
       "bytes": 618601,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -28,7 +28,7 @@
       "bytes": 3324345,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/my-cinemap-art-direction.js",
         "js/my-cinemap-cinema-templates.js"
@@ -40,7 +40,7 @@
       "bytes": 2359028,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -51,7 +51,7 @@
       "bytes": 2580955,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/my-cinemap-art-direction.js",
         "js/my-cinemap-cinema-templates.js"
@@ -63,7 +63,7 @@
       "bytes": 753616,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/cinelva-icon-trim.js",
         "js/cinelva-logo-frame.js"
@@ -75,7 +75,7 @@
       "bytes": 3321454,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -84,7 +84,7 @@
       "bytes": 1138208,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -93,7 +93,7 @@
       "bytes": 1373759,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -104,7 +104,7 @@
       "bytes": 2480665,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -115,7 +115,7 @@
       "bytes": 3209537,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/my-cinemap-art-direction.js",
         "js/my-cinemap-cinema-templates.js"
@@ -127,7 +127,7 @@
       "bytes": 995022,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -136,7 +136,7 @@
       "bytes": 2404046,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -147,7 +147,7 @@
       "bytes": 2107189,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -156,7 +156,7 @@
       "bytes": 1917199,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -167,7 +167,7 @@
       "bytes": 3196611,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -176,7 +176,7 @@
       "bytes": 2568421,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -187,7 +187,7 @@
       "bytes": 3509366,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -196,7 +196,7 @@
       "bytes": 2029001,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/cinelva-records-page.js"
       ]
@@ -207,7 +207,7 @@
       "bytes": 3007191,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -218,7 +218,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -227,7 +227,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -236,7 +236,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -245,7 +245,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -254,7 +254,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -263,7 +263,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -272,7 +272,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -281,7 +281,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -290,7 +290,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -299,7 +299,7 @@
       "bytes": 60000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -308,7 +308,7 @@
       "bytes": 8968,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -317,7 +317,7 @@
       "bytes": 3278,
       "kind": "image_or_binary_split",
       "status": "permission_unverified_changed_since_2026-10-28",
-      "status_basis": "new or changed image/split bytes since prior inventory; exact-asset permission evidence not carried forward",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -326,7 +326,7 @@
       "bytes": 67282,
       "kind": "image_or_binary_split",
       "status": "permission_unverified_changed_since_2026-10-28",
-      "status_basis": "new or changed image/split bytes since prior inventory; exact-asset permission evidence not carried forward",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -335,7 +335,7 @@
       "bytes": 556,
       "kind": "authored_nonvisual",
       "status": "authored_nonvisual_asset",
-      "status_basis": "tracked stylesheet/source; artwork permission review not applicable",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "index.html",
         "js/cinelva-movie-identity.js"
@@ -347,7 +347,7 @@
       "bytes": 67282,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -356,7 +356,7 @@
       "bytes": 482,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -365,7 +365,7 @@
       "bytes": 499033,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "agent.html",
         "credits.html",
@@ -388,11 +388,11 @@
     },
     {
       "path": "assets/cinema-discounts.css",
-      "sha256": "b2496e2a8af8a5c3c2b8d881ab2b72ff403b38cf8e2c7c82314efcebab7b0b33",
-      "bytes": 10354,
+      "sha256": "3a42bf7fedabe629c52b61c2d53c662305dbd8e78c686a08f2d7ccb3c9db2283",
+      "bytes": 12070,
       "kind": "authored_nonvisual",
       "status": "authored_nonvisual_asset",
-      "status_basis": "tracked stylesheet/source; artwork permission review not applicable",
+      "status_basis": "Repository-authored stylesheet; not third-party image clearance.",
       "literal_source_references": [
         "theaters.html"
       ]
@@ -403,7 +403,7 @@
       "bytes": 2791263,
       "kind": "image_or_binary_split",
       "status": "generated_origin_verified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "experience.html"
       ]
@@ -414,7 +414,7 @@
       "bytes": 8695,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -423,7 +423,7 @@
       "bytes": 15007,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -432,7 +432,7 @@
       "bytes": 7514,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -441,7 +441,7 @@
       "bytes": 14947,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -450,7 +450,7 @@
       "bytes": 7293,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -459,7 +459,7 @@
       "bytes": 3780,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -468,7 +468,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -477,7 +477,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -486,7 +486,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -495,7 +495,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -504,7 +504,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -513,7 +513,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -522,7 +522,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -531,7 +531,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -540,7 +540,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -549,7 +549,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -558,7 +558,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -567,7 +567,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -576,7 +576,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -585,7 +585,7 @@
       "bytes": 8000,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -594,7 +594,7 @@
       "bytes": 4524,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -603,7 +603,7 @@
       "bytes": 7350,
       "kind": "image_or_binary_split",
       "status": "exact_asset_permission_unverified",
-      "status_basis": "same path and SHA-256 as 2026-10-28 inventory; prior classification retained, not legal clearance",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": []
     },
     {
@@ -612,7 +612,7 @@
       "bytes": 3945,
       "kind": "authored_nonvisual",
       "status": "authored_nonvisual_asset",
-      "status_basis": "tracked stylesheet/source; artwork permission review not applicable",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "js/cinelva-global-search.js"
       ]
@@ -623,7 +623,7 @@
       "bytes": 19805,
       "kind": "authored_nonvisual",
       "status": "authored_nonvisual_asset",
-      "status_basis": "tracked stylesheet/source; artwork permission review not applicable",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
       "literal_source_references": [
         "agent.html",
         "credits.html",

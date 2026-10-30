@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T11:52:15.541Z",
+  "updated_at": "2026-10-30T11:59:32.993Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
@@ -613,6 +613,22 @@
       "issue": 239,
       "pull_request": 548,
       "acceptance": "On My Cinelva/watchlist open, opt-in date-based notices match explicit or unambiguous legacy TMDB identity, require official HTTPS source links, preserve records, persist dismissals and fit 390px Chromium/WebKit."
+    },
+    {
+      "id": "CINEMA-CALENDAR-TOP3-20261030",
+      "title": "Show three researched public cinema prices per date",
+      "status": "ci_passed",
+      "issue": 239,
+      "pull_request": {
+        "number": 567,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/567",
+        "branch": "feat/calendar-top3-public-prices-20261030",
+        "head_sha": "b480b17a53734e90747622978d28453d01109bef"
+      },
+      "acceptance": "On mobile and desktop, the 14-day calendar shows up to three distinct, confirmed registration-free adult fares per day, keeps conditional minima separate, labels unconfirmed fares honestly, and links applicable venue tariffs.",
+      "ci": "Exact source head b480b17a: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit including cinema comparison), Reproducible backend build, mobile layout, backup safety, Cinemap completeness scorecard, and brand identity all passed. Earlier frontend run exposed exact theater-name mismatch in venue tariff sources; fixed by normalized matching. Browser assertion now distinguishes public top-three results from the separate conditional minimum.",
+      "local": "27/27 cinema discount unit tests; full shared quality gate 453 Node + 6 dedupe + Python/contracts passed. Local Playwright unavailable because Chromium is not installed; hosted browser CI supplied the browser evidence.",
+      "next_action": "Create a docs checkpoint commit, rerun exact-head CI, renew quality/production-proof.json in a receipt-only commit, rerun final-head CI, merge, then verify deployment SHA and canonical bytes."
     }
   ],
   "verification": [
@@ -871,17 +887,26 @@
     {
       "check": "Superseded premiere checkpoint PR #521 closed",
       "result": "PR #521 contained only a stale 2026-10-27 checkpoint. Its source feature is integrated on main as 42e4ce3; later snapshot/deployment and PR #548 release-notice verification supersede its publication-pending state. Closed unmerged; PR history retained."
+    },
+    {
+      "check": "PR #567 source acceptance",
+      "result": "Exact head b480b17a: all 8 source workflows passed (Autonomous quality, CINELVA smoke, Validate frontend, reproducible backend build, mobile layout, backup safety, Cinemap completeness, brand identity). The full mobile comparison assertions passed in hosted Chromium/WebKit. Local 27/27 focused tests and 453-test shared quality gate passed. PR #567 remains open pending checkpoint, receipt-only proof renewal and final-head CI."
     }
   ],
   "deployment": {
-    "status": "production_verified",
-    "canonical_url": "https://cinelva.vercel.app",
-    "serving_sha": "94e1410c719594e4837a7c30336dab01078a2534",
-    "frontend_deployment_id": "dpl_6MWy6xEwHVCndRtNynRBaGGtZ9fT",
-    "backend_deployment_id": "dpl_7tooKRDykW8Y9ypjqEGjeqbLdaRb"
+    "status": "deployment_pending",
+    "canonical_url": "https://cinelva.vercel.app/theaters.html#discounts",
+    "current_serving_sha": "80418f05e27cee2a755a39602b6a76a8bbb30645",
+    "current_frontend_deployment_id": "dpl_A6KbQF7KPdjxiYsAvgpqWbymeHzD",
+    "note": "Current main is READY in production; PR #567 is not merged or deployed.",
+    "user_approval_required": true
   },
-  "blockers": [],
-  "next_action": "Continue exact-head Actions on PRs #560, #561, #563, and #564; inspect failures and update issue #239. Do not merge or deploy before required review and release gates.",
+  "blockers": [
+    "Explicit user approval required before publication; main code merges can trigger production deployment.",
+    "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
+    "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
+  ],
+  "next_action": "Inspect exact PR571 source CI, fix browser failures, renew proof only after required workflows succeed. PR568 is final-CI-ready. Complete feedback reconciliation; retain human approval, physical iPhone, permissions and free quota gates.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1811,8 +1836,8 @@
   },
   "continued_work_20261030": {
     "status": "in_progress",
-    "updated_at": "2026-10-30T02:00:00Z",
-    "main_sha": "108cc7c6f81a5f5196c65ca37946d761a4b66c5d",
+    "updated_at": "2026-10-29T23:31:39.361Z",
+    "main_sha": "80418f05e27cee2a755a39602b6a76a8bbb30645",
     "cinema_comparison": {
       "status": "production_verified",
       "pull_request": 554,
@@ -1840,25 +1865,10 @@
     },
     "open_counts": {
       "issues": 5,
-      "pull_requests": 11,
+      "pull_requests": 8,
       "drafts": 2
     },
-    "next_action": "Poll exact-head CI for #560/#561/#563/#564, diagnose failures, then refresh #239. Follow source checks -> receipt-only -> final-head CI. Do not merge/deploy before human review and documented release gates.",
-    "pull_request_queue_20261030": {
-      "514": "blocked on a complete reuse-authorized streaming catalog; no scraping/paid fallback",
-      "526": "receipt head da8866eb5813b47ca57d74b21b8db0eccdc416cd; 11/11 Actions success; review pending",
-      "540": "head d4c3967f27da5c8b8fe7ee2f35c5534b5c6f07c3; 7/7 Actions success; review pending; Vercel free daily preview quota",
-      "557": "human review and physical iPhone Safari pending",
-      "558": "head 8bc22a21939ac2278db63d3f641a2b337e75fe74; 6/6 Actions success",
-      "559": "head 0acdebfe90cd13c1a504e94c3f51d4f21c017c7b; 6/6 Actions success; in-memory per-instance limiter",
-      "560": "head 7235603adf60d0c6810b19747f9781a5f3ffcdae; Validate frontend running",
-      "561": "head 98f4c485dba33535cf50e7df7545672677c5d198; Validate frontend running",
-      "562": "audit head a0a0f5966e91b4f261b939765048b9fa232c0e30; current-main audit and 62-file asset inventory; legal clearance false",
-      "563": "head 9049da232b593516293a8a02ffeb0125b35bdcb8; 1,803 tracked files and 9,226 reachable objects scanned with zero findings; CI running",
-      "564": "head ac23633d3b57f124526401c619f2217d451ae5cc; 452 Node tests passed locally; CI running"
-    },
-    "closed_superseded_prs_20261030": "#527 and #528 closed after residuals were assigned to #526 and #558-#564; chronology/data-quality coverage already exists on main.",
-    "release_gate_20261030": "NO-GO pending physical iPhone Safari, artwork/data rights and legal review, private security intake, preview DB separation, free-quota/operations evidence, and human review.",
+    "next_action": "Complete PR #567 checkpoint, exact-source proof receipt and final-head CI; then merge and verify normal production release. Continue other approved ready work and keep the Neon Free quota block unchanged.",
     "endpoint_diagnosis": {
       "status": "read_only_quota_blocker",
       "project": "cinema-days",
@@ -1869,6 +1879,12 @@
       "usage_period_end": "2026-11-01T00:00:00Z",
       "assessment": "The returned transfer counter exceeds the published Free allowance; this likely explains the suspended endpoint and P1001. This is an inference from read-only status, not a direct Neon suspension reason.",
       "action": "Do not start compute or retry DB sync before quota reset. Recheck plan usage and endpoint status after 2026-11-01; only attempt one bounded sync if the project remains Free and has available quota."
+    },
+    "calendar_top3": {
+      "status": "ci_passed",
+      "pull_request": 567,
+      "head_sha": "b480b17a53734e90747622978d28453d01109bef",
+      "next_action": "Create docs checkpoint on PR #567; renew exact-source proof in receipt-only commit after CI and require final-head checks before merge."
     }
   },
   "integrated_user_directive_20261030": {
@@ -1897,9 +1913,9 @@
     },
     "feedback_ledger": {
       "path": "docs/operations/user-feedback-ledger-20261030.json",
-      "registry_entries": 103,
+      "registry_entries": 125,
       "unique_feedback_total": null,
-      "note": "58 current P0 requirements plus 17/28 historical audit entries; duplicates not counted as independent complaints. Historical completion labels not automatically accepted. P1/all GitHub history reconciliation incomplete."
+      "note": "58 current P0 requirements plus historical17/28, calendar9, Issue54212, Eastwood1; duplicates not independent complaints. Closed-PR review history/P1 reconciliation incomplete."
     },
     "production": {
       "status": "deployment_pending",

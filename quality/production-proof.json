@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3fe7123f3740d99b277d52bb2364e0e63d25f392",
-  "verified_at": "2026-10-30T08:17:39Z",
-  "note": "PR #567 exact source head 3fe7123f3740d99b277d52bb2364e0e63d25f392 passed all 8 relevant pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit mobile cinema-comparison assertions), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, Cinemap completeness scorecard, and Check brand identity. The release adds dated official general-adult 2D tariff evidence for 13 offer rows across 12 chains; each calendar day ranks up to three distinct verified registration-free fares, keeps conditional offers separate, and labels unknown prices. Theater tariff links were corrected to match region-prefixed names and displayed even for one applicable theater. Receipt-only evidence for source 3fe7123; final-head CI is required before merge/publication. No user data, database schema, API, authentication, or billing changed."
+  "head_sha": "959bcfa130b234d12ea6b80c638798dfa03dd446",
+  "verified_at": "2026-10-30T12:50:52.240Z",
+  "note": "Exact source959bcfa passed all6 workflows, including required Autonomous41055515153, smoke41055515465, Validate frontend41055515009 and backend build41055514895; mobile41055515122 and completeness41055515234 also succeeded. Bounded discover pages, upstream people timeouts, safe profile/director IDs before upstream access. Focused21 runtime tests passed after reproducing unsafe director ID HTTP200. Current main was reconciled without replaying stale receipt. No fixture called real upstream/DB or used real credentials. Receipt-only preparation. Require final-head CI and combined release verification; explicit user approval required before main/production. Physical iPhone Safari and wider legal/source acceptance remain unverified."
 }

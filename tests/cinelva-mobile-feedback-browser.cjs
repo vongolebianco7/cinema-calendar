@@ -33,6 +33,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
      assert.doesNotMatch(await page.locator('#artCanvas').getAttribute('aria-label'),/Hidden Director|2013/);
     }
     if(route==='my-cinelva/'){
+     assert.equal(await page.locator('#csTop').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),width<=360?2:width<=600?3:5,'readable Top 10 columns');
      const cards=page.locator('#csTop .cinelva-rating-controls');await cards.first().waitFor();
      assert.equal(await cards.first().locator('.rating-caption').allTextContents().then(a=>a.join(',')),'MY,TMDB');
      await assertTextContrast(page,['#csTop .rating-caption','#csTop .rating-value'],`${theme} top10`);

@@ -18,7 +18,7 @@ test('static production branch omits the demo while preview output contains it',
   try{
     for(const [name,branch,expected] of [['main','main',false],['preview','feature/demo',true]]){
       const output=path.join(temp,name);
-      const result=spawnSync(process.execPath,['scripts/build-static.cjs'],{encoding:'utf8',env:{...process.env,CINELVA_STATIC_OUTPUT:output,CF_PAGES_BRANCH:branch,CF_PAGES_PRODUCTION_BRANCH:'main'}});
+      const result=spawnSync(process.execPath,['scripts/build-static.cjs'],{encoding:'utf8',env:{PATH:process.env.PATH,CINELVA_STATIC_OUTPUT:output,CF_PAGES_BRANCH:branch,CF_PAGES_PRODUCTION_BRANCH:'main',VERCEL_ENV:''}});
       assert.equal(result.status,0,result.stderr||result.stdout);
       assert.equal(fs.existsSync(path.join(output,'my-cinelva-demo','index.html')),expected,`${branch} output demo inclusion`);
     }

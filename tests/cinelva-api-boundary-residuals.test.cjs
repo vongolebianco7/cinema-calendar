@@ -69,3 +69,14 @@ test('people profile, director, and search requests use an eight-second upstream
   assert.equal(signals.length, 3);
   assert.ok(signals.every(signal => signal instanceof AbortSignal));
 });
+test('people profile and director reject unsafe IDs before upstream access', async () => {
+  let calls=0;
+  const api=loadRoute('backend/app/api/people/route.ts',async()=>{
+    calls++;return {ok:true,json:async()=>({crew:[]})};
+  });
+  for(const query of ['profile=1','role=director']){
+    const response=await api.GET(new Request(`https://cinelva.test/api/people?${query}&id=9007199254740992`));
+    assert.equal(response.status,400,query);
+  }
+  assert.equal(calls,0);
+});

@@ -12,9 +12,9 @@ export async function GET(req:Request){const limited=rateLimited(req,90);if(limi
   }catch{return json({error:"person unavailable"},{status:502})}
  }
  if(params.get("role")==="director"){
-  const id=Number(params.get("id"));if(!Number.isInteger(id)||id<1)return json({error:"invalid person id"},{status:400});
+  const id=Number(params.get("id"));if(!Number.isSafeInteger(id)||id<1)return json({error:"invalid person id"},{status:400});
   const u=new URL(B+`/person/${id}/movie_credits`);u.searchParams.set("language","ja-JP");const h=auth(u);if(!h)return json({error:"TMDB not configured"},{status:503});
-  try{const r=await fetch(u,{headers:h,next:{revalidate:86400},signal:AbortSignal.timeout(8000)});if(!r.ok)throw 0;const d=await r.json();const ids=[...new Set((d.crew||[]).filter((x:any)=>x.job==="Director"&&isFilmMedium(x)).map((x:any)=>Number(x.id)).filter((x:number)=>Number.isInteger(x)&&x>0))];return json({ids})}catch{return json({error:"director credits unavailable"},{status:502})}
+  try{const r=await fetch(u,{headers:h,next:{revalidate:86400},signal:AbortSignal.timeout(8000)});if(!r.ok)throw 0;const d=await r.json();const ids=[...new Set((d.crew||[]).filter((x:any)=>x.job==="Director"&&isFilmMedium(x)).map((x:any)=>Number(x.id)).filter((x:number)=>Number.isSafeInteger(x)&&x>0))];return json({ids})}catch{return json({error:"director credits unavailable"},{status:502})}
  }
  const q=(params.get("q")||"").normalize("NFKC").trim().slice(0,100);if(q.length<2)return json({people:[]});
  const normalize=(value:string)=>String(value||"").normalize("NFKC").toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,"");

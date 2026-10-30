@@ -30,6 +30,22 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
      await page.selectOption('#format','portrait');await page.selectOption('#layout','double');await page.evaluate(()=>drawArtwork(picks));
      await page.waitForFunction(()=>artworkReady());
      assert.ok(await page.locator('#artCanvas').evaluate(c=>c.toDataURL('image/png').startsWith('data:image/png')),'CORS-safe PNG');
+     // Inspect raster pixels as well as DOM text; a nonempty data URL alone can be blank.
+     const pixels=await page.locator('#artCanvas').evaluate(c=>{
+      const ctx=c.getContext('2d'),rows=[];
+      for(const x of [204,912])for(let row=0;row<5;row++){
+       const data=ctx.getImageData(x,Math.round(232+row*323.6+74),110,170).data;
+       let dark=0;for(let k=0;k<data.length;k+=4)if(data[k]+data[k+1]+data[k+2]<300)dark++;
+       rows.push(dark/(data.length/4));
+      }
+      return rows;
+     });
+     assert.ok(pixels.every(value=>value>.2),'every ranking row contains its poster in the actual PNG: '+JSON.stringify(pixels));
+     if(width===390){
+      const png=await page.locator('#artCanvas').evaluate(c=>c.toDataURL('image/png').split(',')[1]);
+      fs.writeFileSync(`artifacts/reported-audit/mobile-feedback/${engine}-${theme}-390-export.png`,Buffer.from(png,'base64'));
+     }
+     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
      assert.doesNotMatch(await page.locator('#artCanvas').getAttribute('aria-label'),/Hidden Director|2013/);
     }
     if(route==='my-cinelva/'){

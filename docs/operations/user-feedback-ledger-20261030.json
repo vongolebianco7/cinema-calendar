@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T20:53:32.380083+00:00",
+  "updated_at": "2026-10-30T21:35:49.086936+00:00",
   "scope": "現セッションP0具体項目、既存17/28項目監査、過去カレンダー9指摘、Issue542の具体指摘、Eastwood収録漏れを集約。P1全基準・全closed PRレビュー履歴の再照合は未完了。",
   "past_conversation_access": "このセッションで提示された内容とGitHub上の記録のみ。参照できない過去会話の指摘を対応済みにしない。",
   "unique_feedback_total": null,
@@ -2682,12 +2682,13 @@
       "pull_requests": [
         582
       ],
-      "implementation_status": "in_progress",
+      "implementation_status": "ci_passed",
       "fix": "日別/系列別カードはスマホ1列、日付と料金比較を分離、系列名14px/日別金額15px、系列別金額16px、金額単位の分断を防止。数値・条件・上位3系列は維持。",
-      "test_result": "現行production DOMで54対象、9px等の可読性違反を確認。ローカルquality_gate成功。Chromium/WebKitの新規名前/価格折返し・文字サイズ回帰はCI待ち。",
-      "production_status": "not_deployed",
-      "iphone_safari_status": "user_report_reproduced_from_screenshot; fixed_version_unverified",
-      "disposition": "open_pending_browser_and_user_acceptance"
+      "test_result": "Source935bc076 all6 workflows success; final receipt6e958a35 all7 success. Chromium248/WebKit248 route cells, cinema root/prefix/light/dark320–1280 passed. New predicate RED on1c1eebb then GREEN. WebKit390 images visually inspected. See cinema-readability-release-20261031.json.",
+      "production_status": "verified_http_and_desktop_ui",
+      "iphone_safari_status": "fixed_version_unverified_on_physical_device",
+      "disposition": "open_pending_physical_device_acceptance",
+      "production_merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74"
     }
   ],
   "github_inventory": {

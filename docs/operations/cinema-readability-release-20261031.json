@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-30T21:35:49.086936+00:00",
+  "scope": "Movie-price readability correction; not completion of every release requirement",
+  "pull_request": 582,
+  "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+  "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7",
+  "receipt_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
+  "source_digest": "45742013e9f9452f0ffbc68f9cc176f4e8cc3089a68868858964e0610cb1d366",
+  "source_ci": {
+    "run": 41127856189,
+    "applicable_workflows_passed": 6,
+    "chromium_cells": 248,
+    "webkit_cells": 248
+  },
+  "final_ci": {
+    "run": 41130172542,
+    "applicable_workflows_passed": 7
+  },
+  "cinema_images": {
+    "artifact": 13012647611,
+    "count": 8,
+    "zip_sha256": "f3ac7d5e517ef430b7466752ed2e18ad9043aaf5670ad206988e952a519ff4b5",
+    "visual_review": "WebKit390 root light/dark daily ranks and dark series-card crops inspected; physical device unverified"
+  },
+  "production": {
+    "frontend_deployment": "dpl_45Zzh4Z6n8v84yYNJwnc3v7JjyZM",
+    "backend_deployment": "dpl_2vhjbNsZtTZbNtZq9LSMATrTK6ms",
+    "state": "READY",
+    "alias_errors": null,
+    "canonical_url": "https://cinelva.vercel.app",
+    "http_and_api": {
+      "at": "2026-10-30T21:34:07.589614+00:00",
+      "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+      "checks": [
+        {
+          "path": "/",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "2154a9af99d959f382677a60007e2505e5097c3f1d724584c7efd5ad688ee881",
+          "csp_present": true
+        },
+        {
+          "path": "/theaters.html",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "782e05725a062e273e4c8f5532b19849227eec3da30c234d6b56aba3f5ad5d04",
+          "csp_present": true
+        },
+        {
+          "path": "/search.html",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "a11958891d45e9082dbff076a9b2987a028c3a474dc1150b69ee161de5711c1b",
+          "csp_present": true
+        },
+        {
+          "path": "/my-cinelva/",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "594b02603acf6205a9b63a1a1b8f23e468f2d6a557d155771f6e460209c795c8",
+          "csp_present": true
+        },
+        {
+          "path": "/data-backup.html",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "acb16a50c0d26b678dfe42e1681572bb0919b13ee0051a483fa2b76876363b7b",
+          "csp_present": true
+        },
+        {
+          "path": "/assets/cinema-discounts.css",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "78a7d67b409be8341fd3ab2ded96a6a7cb3997752d89a446130792cf9b32ae6f",
+          "csp_present": true
+        },
+        {
+          "path": "/js/cinelva-cinema-discounts-ui.js",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "bd487c128d122da9877479293369a8d63cac1518843d35e7c127ddb093976ca1",
+          "csp_present": true
+        },
+        {
+          "path": "/data/cinema_discounts.json",
+          "status": 200,
+          "candidate_match": true,
+          "sha256": "83c580ce48a71a4b1d974165cf1961c045d6a5c43277a11ffc0001d576bdd56c",
+          "csp_present": true
+        }
+      ],
+      "read_only_api": {
+        "status": 200,
+        "movie_id": 804,
+        "poster_present": true
+      }
+    },
+    "desktop_browser": {
+      "rank_text_elements": 54,
+      "readability_violations": 0,
+      "theater_buttons": 11,
+      "buttons_below_44px": 0,
+      "date_changed_to": "2026-11-01",
+      "aeon_public_price": 1200,
+      "aeon_conditional_price": 1100,
+      "popup_open_close_verified": true,
+      "console_note": "Cloud-browser diagnostics returned extension metadata transport errors. Do not claim zero production console errors from this observation."
+    },
+    "backend_error_fatal_log_groups_last_10m": 0,
+    "log_window_note": "Short post-release window, not a reliability guarantee"
+  },
+  "data_protection": "No watch records, ratings, bookmarks, backup schema/keys/origin or DB/billing changed",
+  "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
+}

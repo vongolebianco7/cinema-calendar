@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T20:53:32.382505+00:00",
+  "updated_at": "2026-10-30T21:35:49.086936+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "3fc4e34903a74a1108401ca01a15902b2f26f363",
-  "branch": "fix/cinema-mobile-readability-20261031",
-  "head_sha": "1c1eebb0d954fde6ba9ff2df128f4aad8c8c282c",
+  "base_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+  "branch": "docs/cinema-readability-checkpoint-20261031",
+  "head_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
   "pull_request": 582,
   "work_items": [
     {
@@ -629,6 +629,19 @@
       "ci": "Exact source head b480b17a: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit including cinema comparison), Reproducible backend build, mobile layout, backup safety, Cinemap completeness scorecard, and brand identity all passed. Earlier frontend run exposed exact theater-name mismatch in venue tariff sources; fixed by normalized matching. Browser assertion now distinguishes public top-three results from the separate conditional minimum.",
       "local": "27/27 cinema discount unit tests; full shared quality gate 453 Node + 6 dedupe + Python/contracts passed. Local Playwright unavailable because Chromium is not installed; hosted browser CI supplied the browser evidence.",
       "next_action": "Create a docs checkpoint commit, rerun exact-head CI, renew quality/production-proof.json in a receipt-only commit, rerun final-head CI, merge, then verify deployment SHA and canonical bytes."
+    },
+    {
+      "id": "P0-PRICE-READABILITY-20261031",
+      "title": "Repair real iPhone price-calendar readability report",
+      "status": "production_verified",
+      "issue": 242,
+      "pull_request": 582,
+      "acceptance": "Readable intact daily chain names/currency, one-column phone cards,14/15/16px type and44px theater controls. CI WebKit is separate from physical iPhone.",
+      "evidence": "docs/operations/cinema-readability-release-20261031.json",
+      "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7",
+      "receipt_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
+      "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+      "iphone_safari_status": "unverified_fixed_version"
     }
   ],
   "verification": [
@@ -891,22 +904,25 @@
     {
       "check": "PR #567 source acceptance",
       "result": "Exact head b480b17a: all 8 source workflows passed (Autonomous quality, CINELVA smoke, Validate frontend, reproducible backend build, mobile layout, backup safety, Cinemap completeness, brand identity). The full mobile comparison assertions passed in hosted Chromium/WebKit. Local 27/27 focused tests and 453-test shared quality gate passed. PR #567 remains open pending checkpoint, receipt-only proof renewal and final-head CI."
-    }
+    },
+    "Price readability582: source935bc076 all6 CI, receipt6e958a35 all7 CI; clean shared quality489+6/invoked Python; WebKit390 light/dark reviewed; formal URL8 files/API/browser scoped smoke passed. No production mobile/physical Safari claim."
   ],
   "deployment": {
-    "status": "deployment_pending",
-    "canonical_url": "https://cinelva.vercel.app/theaters.html#discounts",
-    "current_serving_sha": "80418f05e27cee2a755a39602b6a76a8bbb30645",
-    "current_frontend_deployment_id": "dpl_A6KbQF7KPdjxiYsAvgpqWbymeHzD",
-    "note": "Current main is READY in production; PR #567 is not merged or deployed.",
-    "user_approval_required": true
+    "status": "production_verified",
+    "canonical_url": "https://cinelva.vercel.app",
+    "current_serving_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+    "current_frontend_deployment_id": "dpl_45Zzh4Z6n8v84yYNJwnc3v7JjyZM",
+    "note": "User-authorized release573 and follow-up price correction582 deployed. Both aliases READY atd3cf7546;8 canonical files byte-match, read-only detail API200 and desktop price/date/popover checks passed. Physical iPhone and broad legal/data/free-quota gates remain unresolved.",
+    "user_approval_required": true,
+    "current_backend_deployment_id": "dpl_2vhjbNsZtTZbNtZq9LSMATrTK6ms",
+    "current_release_user_approved": true
   },
   "blockers": [
     "Explicit user approval required before publication; main code merges can trigger production deployment.",
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Finish #573 exact-head CI on the preparation candidate after documentation pointer/checkpoint merge. Source ba255d21/all9, receipt-final0a2e7670/all10 and independent code review passed; public guard passed. Explicit user approval remains required before main/production. Preserve open Issues and external/device/legal/free-quota gates.",
+  "next_action": "Read latest GitHub239/242 and this evidence first. Physical iPhone acceptance is still needed; do not close reported feedback based only on CI. Continue unresolved data freshness, asset/legal/private intake/free quota and residual526/514 without reintroducing old security policy. Keep Neon suspended until reset/available free capacity is verified. No unapproved paid, destructive or future production actions.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -917,11 +933,10 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 497,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/497",
-    "merge_sha": "1792b8c80dd534e8156853adc3383d906e42d883",
-    "source_sha": "dc7cc711c07337af9215fee780df9441a98a621c",
-    "receipt_sha": "cc7e1af2490d592e53ca5d01ba7237466937b94a"
+    "number": 582,
+    "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+    "head_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
+    "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -2012,5 +2027,120 @@
       "note": "Snapshot inventory through #579; later documentation PRs are separate. Not all complaints resolved, production verified or legal/device cleared."
     },
     "publication_action": "None; main remains19ebe13, production not changed."
+  },
+  "cinema_readability_release_20261031": {
+    "schema_version": 1,
+    "recorded_at": "2026-10-30T21:35:49.086936+00:00",
+    "scope": "Movie-price readability correction; not completion of every release requirement",
+    "pull_request": 582,
+    "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+    "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7",
+    "receipt_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
+    "source_digest": "45742013e9f9452f0ffbc68f9cc176f4e8cc3089a68868858964e0610cb1d366",
+    "source_ci": {
+      "run": 41127856189,
+      "applicable_workflows_passed": 6,
+      "chromium_cells": 248,
+      "webkit_cells": 248
+    },
+    "final_ci": {
+      "run": 41130172542,
+      "applicable_workflows_passed": 7
+    },
+    "cinema_images": {
+      "artifact": 13012647611,
+      "count": 8,
+      "zip_sha256": "f3ac7d5e517ef430b7466752ed2e18ad9043aaf5670ad206988e952a519ff4b5",
+      "visual_review": "WebKit390 root light/dark daily ranks and dark series-card crops inspected; physical device unverified"
+    },
+    "production": {
+      "frontend_deployment": "dpl_45Zzh4Z6n8v84yYNJwnc3v7JjyZM",
+      "backend_deployment": "dpl_2vhjbNsZtTZbNtZq9LSMATrTK6ms",
+      "state": "READY",
+      "alias_errors": null,
+      "canonical_url": "https://cinelva.vercel.app",
+      "http_and_api": {
+        "at": "2026-10-30T21:34:07.589614+00:00",
+        "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+        "checks": [
+          {
+            "path": "/",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "2154a9af99d959f382677a60007e2505e5097c3f1d724584c7efd5ad688ee881",
+            "csp_present": true
+          },
+          {
+            "path": "/theaters.html",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "782e05725a062e273e4c8f5532b19849227eec3da30c234d6b56aba3f5ad5d04",
+            "csp_present": true
+          },
+          {
+            "path": "/search.html",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "a11958891d45e9082dbff076a9b2987a028c3a474dc1150b69ee161de5711c1b",
+            "csp_present": true
+          },
+          {
+            "path": "/my-cinelva/",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "594b02603acf6205a9b63a1a1b8f23e468f2d6a557d155771f6e460209c795c8",
+            "csp_present": true
+          },
+          {
+            "path": "/data-backup.html",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "acb16a50c0d26b678dfe42e1681572bb0919b13ee0051a483fa2b76876363b7b",
+            "csp_present": true
+          },
+          {
+            "path": "/assets/cinema-discounts.css",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "78a7d67b409be8341fd3ab2ded96a6a7cb3997752d89a446130792cf9b32ae6f",
+            "csp_present": true
+          },
+          {
+            "path": "/js/cinelva-cinema-discounts-ui.js",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "bd487c128d122da9877479293369a8d63cac1518843d35e7c127ddb093976ca1",
+            "csp_present": true
+          },
+          {
+            "path": "/data/cinema_discounts.json",
+            "status": 200,
+            "candidate_match": true,
+            "sha256": "83c580ce48a71a4b1d974165cf1961c045d6a5c43277a11ffc0001d576bdd56c",
+            "csp_present": true
+          }
+        ],
+        "read_only_api": {
+          "status": 200,
+          "movie_id": 804,
+          "poster_present": true
+        }
+      },
+      "desktop_browser": {
+        "rank_text_elements": 54,
+        "readability_violations": 0,
+        "theater_buttons": 11,
+        "buttons_below_44px": 0,
+        "date_changed_to": "2026-11-01",
+        "aeon_public_price": 1200,
+        "aeon_conditional_price": 1100,
+        "popup_open_close_verified": true,
+        "console_note": "Cloud-browser diagnostics returned extension metadata transport errors. Do not claim zero production console errors from this observation."
+      },
+      "backend_error_fatal_log_groups_last_10m": 0,
+      "log_window_note": "Short post-release window, not a reliability guarantee"
+    },
+    "data_protection": "No watch records, ratings, bookmarks, backup schema/keys/origin or DB/billing changed",
+    "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
   }
 }

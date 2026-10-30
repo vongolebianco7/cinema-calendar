@@ -11,9 +11,7 @@ test('award navigation uses natural Japanese wording', () => {
   assert.doesNotMatch(html, /映画賞ランキングへ/);
 });
 
-test('zero means unwatched and the shared editor retains viewing method choices', () => {
-  assert.match(quickRate, /Number\(\$\('cinelvaRateScore'\)\.value\)===0/);
-  assert.match(quickRate, /Records\.remove\(selected\.id\)/);
+test('the shared editor retains viewing method choices and decimal rating steps', () => {
   assert.match(quickRate, /step="0\.1"/);
   for(const method of ['映画館','配信・サブスク','TV','DVD・Blu-ray','その他']) assert.ok(quickRate.includes('value="'+method+'"'));
 });

@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const source=fs.readFileSync('js/cinelva-quick-rate.js','utf8');
 function setup(existing=[]){
- const nodes=new Map(),writes=[];let allCalls=0,storageReads=0;
+ const nodes=new Map(),writes=[],removals=[];let allCalls=0,storageReads=0;
  const node=()=>({value:'',textContent:'',onclick:null,children:[],options:[],
   style:{setProperty(){}},attributes:{},setAttribute(k,v){this.attributes[k]=String(v)},getAttribute(k){return this.attributes[k]??null},replaceWith(){},addEventListener(){},
   append(child){this.children.push(child);this.options.push(child);},
@@ -21,10 +21,10 @@ function setup(existing=[]){
   querySelectorAll(){return []},
   createElement(tag){return tag==='dialog'?dialog:node()},
  };
- const Records={all:()=>{allCalls++;return existing},validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]}};
+ const Records={all:()=>{allCalls++;return existing},validDate:s=>s===null||/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s),save:(...args)=>{writes.push(args);return args[0]},remove:id=>removals.push(id)};
  const window={CinelvaLibraryRecords:Records,dispatchEvent(){},addEventListener(){}};
  vm.runInNewContext(source,{window,document,location:{pathname:'/'},localStorage:{getItem(){storageReads++;return null}},CustomEvent:class{constructor(){}},MutationObserver:class{observe(){}}});
- return {api:window.CinelvaQuickRate,dialog,element,writes,allCalls:()=>allCalls,storageReads:()=>storageReads};
+ return {api:window.CinelvaQuickRate,dialog,element,writes,removals,window,allCalls:()=>allCalls,storageReads:()=>storageReads};
 }
 test('middle dot, spaces and Unicode punctuation do not prevent title matching',()=>{
  const {api}=setup();
@@ -48,6 +48,29 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
  assert.equal(writes[0][1],4.5);
  assert.equal(writes[0][2],'2026-10');
  assert.equal(dialog.open,false);
+});
+test('saving zero persists a watched rating instead of deleting the record',()=>{
+ const {api,element,writes}=setup();
+ api.open({id:123,tmdbId:123,title:'Zero rating'});
+ element('cinelvaRateScore').value='0';
+ element('cinelvaRateSave').onclick();
+ assert.equal(writes.length,1);
+ assert.equal(writes[0][1],0);
+});
+test('explicit deletion requires an existing record and confirmation; cancel preserves the dialog',()=>{
+ const {api,dialog,element,removals,window}=setup([{id:'22',title:'Zero',rating:0,watched:true}]);
+ api.open({id:22,title:'Zero',_localRecord:true});
+ assert.equal(element('cinelvaRateDelete').hidden,false);
+ window.confirm=()=>false;
+ element('cinelvaRateDelete').onclick();
+ assert.deepEqual(removals,[]);assert.equal(dialog.open,true);
+ window.confirm=()=>true;
+ element('cinelvaRateDelete').onclick();
+ assert.deepEqual(removals,['22']);assert.equal(dialog.open,false);
+ api.open({id:123,tmdbId:123,title:'New'});
+ assert.equal(element('cinelvaRateDelete').hidden,true);
+ element('cinelvaRateDelete').onclick();
+ assert.deepEqual(removals,['22']);
 });
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};

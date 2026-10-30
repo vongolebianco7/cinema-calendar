@@ -17,6 +17,7 @@ on:
       - "tests/cinelva-provider-list-browser.cjs"
       - "tests/cinelva-my-page-*.cjs"
       - "tests/cinelva-quick-rate-browser.cjs"
+      - "tests/cinelva-search-rating-theme-browser.cjs"
       - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
       - "tests/cinelva-theater-quality-browser.cjs"
@@ -142,6 +143,8 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0
           bash scripts/prepare-browser-ci.sh
           "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
@@ -157,11 +160,13 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs

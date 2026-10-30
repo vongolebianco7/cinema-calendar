@@ -191,12 +191,22 @@ html[data-theme="dark"] #directorsView .cinelva-rating-actions { --cinelva-bookm
 #directorsView .cinelva-rating-actions button { -webkit-appearance:none;appearance:none; }
 
 /* Shared review rows must follow the theme on every movie list, not just directors. */
+/* Keep the standalone TMDB line only when shared review controls cannot mount. */
+#grid .cinelva-rate-wrap:has(> .cinelva-rating-controls) > .card[data-i] > .body > .score { display:none; }
+.cinelva-rate-dialog #cinelvaRateDelete {
+  justify-self:start;min-height:44px;padding:8px 10px;
+  background:transparent;color:inherit;border:1px solid currentColor;border-radius:8px;
+}
+.cinelva-rate-dialog #cinelvaRateDelete[hidden] { display:none!important; }
 html[data-theme="light"] .cinelva-rating-controls.cinelva-rating-controls-no-gauge {
   background:#eeeae2!important;color:#242521!important;
   --cinelva-bookmark-ink:#242521;--cinelva-bookmark-marked:#246996;
 }
 html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-actions .cinelva-rate-button {
   color:#242521!important;
+}
+html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-actions .cinelva-rate-button.is-watched {
+  color:#806027!important;
 }
 html[data-theme="light"] .cinelva-rating-controls .rating-caption,
 html[data-theme="light"] .cinelva-rating-controls .rating-label { color:#64645d!important; }

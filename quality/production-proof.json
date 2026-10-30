@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "959bcfa130b234d12ea6b80c638798dfa03dd446",
-  "verified_at": "2026-10-30T12:50:52.240Z",
-  "note": "Exact source959bcfa passed all6 workflows, including required Autonomous41055515153, smoke41055515465, Validate frontend41055515009 and backend build41055514895; mobile41055515122 and completeness41055515234 also succeeded. Bounded discover pages, upstream people timeouts, safe profile/director IDs before upstream access. Focused21 runtime tests passed after reproducing unsafe director ID HTTP200. Current main was reconciled without replaying stale receipt. No fixture called real upstream/DB or used real credentials. Receipt-only preparation. Require final-head CI and combined release verification; explicit user approval required before main/production. Physical iPhone Safari and wider legal/source acceptance remain unverified."
+  "head_sha": "dfd3c58e8c107d8ef5bbc6541e163f77e9a723ad",
+  "verified_at": "2026-10-30T11:38:59.852Z",
+  "note": "PR #568 exact source passed all 9 pull-request workflows and all 22 check runs, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit reported UI/data regressions and nationwide shared controls), Reproducible backend build, mobile layout, backup safety, brand, Python contracts and completeness. Calendar event labels are escaped and external URLs require credential-free HTTPS; the complete calendar page is preserved. Local quality gate passed 456 Node tests plus Python/contracts/compliance. Receipt-only preparation; final-head CI and explicit user approval are required before production release. Physical iPhone Safari remains unverified. No storage schema, existing records, API credentials or billing changes."
 }

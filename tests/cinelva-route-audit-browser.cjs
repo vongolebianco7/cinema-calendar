@@ -88,15 +88,15 @@ async function freePort() {
           // concierge destination rather than sampling the outgoing document.
           if (route === 'agent.html' || route === 'cinelva/agent.html') {
             const destination = route.startsWith('cinelva/') ? '/cinelva/discover.html' : '/discover.html';
-            await page.waitForURL(url =>
-              url.pathname === destination &&
-              url.searchParams.get('mode') === 'concierge',
-              { timeout: 15000, waitUntil: 'commit' }
+            // Observe the destination in the live document. WebKit's navigation
+            // event watcher can report an internal error for location.replace,
+            // even after the destination has committed. Keep the exact path and
+            // query assertion and the readiness checks below.
+            await page.waitForFunction(expected =>
+              location.pathname === expected &&
+              new URLSearchParams(location.search).get('mode') === 'concierge',
+              destination, { timeout: 15000 }
             );
-            // The correct redirect destination is asserted above. WebKit
-            // occasionally reports an internal error while waiting for a
-            // legacy page's load event after a location.replace navigation.
-            // The theme/main-content assertions below confirm readiness.
           }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
           await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);

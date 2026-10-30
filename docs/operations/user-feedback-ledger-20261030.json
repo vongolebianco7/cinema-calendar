@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T14:40:52.050990+00:00",
+  "updated_at": "2026-10-30T20:53:32.380083+00:00",
   "scope": "現セッションP0具体項目、既存17/28項目監査、過去カレンダー9指摘、Issue542の具体指摘、Eastwood収録漏れを集約。P1全基準・全closed PRレビュー履歴の再照合は未完了。",
   "past_conversation_access": "このセッションで提示された内容とGitHub上の記録のみ。参照できない過去会話の指摘を対応済みにしない。",
   "unique_feedback_total": null,
-  "registry_entries": 125,
+  "registry_entries": 126,
   "counts_are_unique_feedback": false,
   "count_note": "過去監査と現指示は重複を含む。登録行数を全指摘数・解決数とみなさない。",
   "release_decision": "NO_GO",
@@ -2666,6 +2666,28 @@
       "production_status": "unverified",
       "iphone_safari_status": "unverified",
       "disposition": "open"
+    },
+    {
+      "id": "USER-20261031-PRICE-READABILITY",
+      "source": "current-user-attachment IMG_3237.png / issue242 comment6533189285",
+      "request": "iPhone映画館料金の系列名・金額が細切れに改行され非常に見づらい",
+      "screen": "映画館料金比較の日別上位3候補・系列別料金",
+      "severity": "P0",
+      "cause": "日別3列に4項目/系列、系列別2列カードに3内部列を配置し8–11px指定。no-overflowのみで可読性を検出できなかった。",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [
+        582
+      ],
+      "implementation_status": "in_progress",
+      "fix": "日別/系列別カードはスマホ1列、日付と料金比較を分離、系列名14px/日別金額15px、系列別金額16px、金額単位の分断を防止。数値・条件・上位3系列は維持。",
+      "test_result": "現行production DOMで54対象、9px等の可読性違反を確認。ローカルquality_gate成功。Chromium/WebKitの新規名前/価格折返し・文字サイズ回帰はCI待ち。",
+      "production_status": "not_deployed",
+      "iphone_safari_status": "user_report_reproduced_from_screenshot; fixed_version_unverified",
+      "disposition": "open_pending_browser_and_user_acceptance"
     }
   ],
   "github_inventory": {

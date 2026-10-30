@@ -1,0 +1,2113 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-30T11:48:54.594483+00:00",
+  "scope": "現セッション統合指示のP0具体項目＋既存17項目・28項目監査を集約。P1全基準・全GitHub履歴の照合は未完了。",
+  "past_conversation_access": "このセッションで提示された内容とGitHub上の記録のみ。参照できない過去会話の指摘を対応済みにしない。",
+  "unique_feedback_total": null,
+  "registry_entries": 103,
+  "counts_are_unique_feedback": false,
+  "count_note": "過去監査と現指示は重複を含む。登録行数を全指摘数・解決数とみなさない。",
+  "release_decision": "NO_GO",
+  "items": [
+    {
+      "id": "P0-PRICE-UI-01",
+      "source": "current-integrated-directive",
+      "request": "都道府県と昼夜選択をコンパクト化",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-02",
+      "source": "current-integrated-directive",
+      "request": "都道府県ボタンをiPhoneで2〜3列にする",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-03",
+      "source": "current-integrated-directive",
+      "request": "不要な都道府県プルダウンを削除",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-04",
+      "source": "current-integrated-directive",
+      "request": "不要な日付選択を削除",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-05",
+      "source": "current-integrated-directive",
+      "request": "冗長な見出しと余白を削減",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-06",
+      "source": "current-integrated-directive",
+      "request": "系列名横に2種類の料金を並べる",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-07",
+      "source": "current-integrated-directive",
+      "request": "最安値のゴールド強調",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-08",
+      "source": "current-integrated-directive",
+      "request": "詳細を適切なポップアップにする",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-UI-09",
+      "source": "current-integrated-directive",
+      "request": "ライト・ダーク表示を確認",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-01",
+      "source": "current-integrated-directive",
+      "request": "登録不要の最安料金を明示",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-02",
+      "source": "current-integrated-directive",
+      "request": "会員・非会員料金を区別",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-03",
+      "source": "current-integrated-directive",
+      "request": "毎日料金と曜日・条件付き料金を区別",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-04",
+      "source": "current-integrated-directive",
+      "request": "根拠不明のハイフン・未確認価格を表示しない",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-05",
+      "source": "current-integrated-directive",
+      "request": "出典・適用条件・確認日を記録",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-06",
+      "source": "current-integrated-directive",
+      "request": "期間中上位3候補を正確に表示",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        567
+      ],
+      "implementation_status": "merged",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "deployment_pending",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-07",
+      "source": "current-integrated-directive",
+      "request": "同額・条件付き・特別上映の扱いを明示",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-PRICE-DATA-08",
+      "source": "current-integrated-directive",
+      "request": "以前の修正が本番に反映されなかった原因を確認",
+      "screen": "映画館料金比較",
+      "severity": "P0",
+      "cause": "mainの料金top3修正より古いSHA80418f0を本番が配信。今回のユーザー公開承認は未取得。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        567
+      ],
+      "implementation_status": "merged",
+      "test_result": "前チェックポイントで本番HTML/JS/dataを読み取り照合。",
+      "production_status": "deployment_pending",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-01",
+      "source": "current-integrated-directive",
+      "request": "目アイコン操作後の色と状態",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "pr_created",
+      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "production_status": "not_deployed",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-02",
+      "source": "current-integrated-directive",
+      "request": "ライトでレビュー領域が黒い",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-03",
+      "source": "current-integrated-directive",
+      "request": "暗い背景と暗い文字の組み合わせ",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-04",
+      "source": "current-integrated-directive",
+      "request": "ボタン・選択状態・アイコンの視認性",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-05",
+      "source": "current-integrated-directive",
+      "request": "両テーマで不整合な配色",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-06",
+      "source": "current-integrated-directive",
+      "request": "直接色指定を既存ブランド変数へ統一",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-07",
+      "source": "current-integrated-directive",
+      "request": "文字4.5:1・主要UI3:1のコントラスト",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-08",
+      "source": "current-integrated-directive",
+      "request": "目アイコン操作後の状態・保存・再表示を一致",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "pr_created",
+      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "production_status": "not_deployed",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-LIGHT-09",
+      "source": "current-integrated-directive",
+      "request": "390pxの修正前後画像とテーマ回帰テスト",
+      "screen": "全画面・共通レビュー",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-01",
+      "source": "current-integrated-directive",
+      "request": "共通レビューUIを全画面に適用",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-02",
+      "source": "current-integrated-directive",
+      "request": "MY評価0.0〜5.0を0.1刻みで保存",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "pr_created",
+      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "production_status": "not_deployed",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-03",
+      "source": "current-integrated-directive",
+      "request": "0.0点と未鑑賞を区別",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "pr_created",
+      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "production_status": "not_deployed",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-04",
+      "source": "current-integrated-directive",
+      "request": "TMDB評価を重複させない",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-05",
+      "source": "current-integrated-directive",
+      "request": "目アイコン・ブックマーク状態",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-06",
+      "source": "current-integrated-directive",
+      "request": "鑑賞日・方法・映画館方式・配信・ネタバレを統一",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-07",
+      "source": "current-integrated-directive",
+      "request": "保存後は対象ポップアップのみ閉じる",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-08",
+      "source": "current-integrated-directive",
+      "request": "保存を全画面へ反映",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-09",
+      "source": "current-integrated-directive",
+      "request": "編集・削除・再鑑賞・復元を検証",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-REVIEW-10",
+      "source": "current-integrated-directive",
+      "request": "保存形式と既存データ互換性",
+      "screen": "全画面・鑑賞記録",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-01",
+      "source": "current-integrated-directive",
+      "request": "ポスター欠落",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-02",
+      "source": "current-integrated-directive",
+      "request": "同名作品の誤統合・重複",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-03",
+      "source": "current-integrated-directive",
+      "request": "作品ID不一致",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-04",
+      "source": "current-integrated-directive",
+      "request": "TMDB評価重複",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-05",
+      "source": "current-integrated-directive",
+      "request": "映画史と史実の分類混同",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-06",
+      "source": "current-integrated-directive",
+      "request": "表示件数と実作品数の不一致",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-MOVIE-07",
+      "source": "current-integrated-directive",
+      "request": "横レールから全件への導線",
+      "screen": "映画一覧・作品詳細",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-01",
+      "source": "current-integrated-directive",
+      "request": "監督作品総数未取得",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-02",
+      "source": "current-integrated-directive",
+      "request": "短編の意図しない混入",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-03",
+      "source": "current-integrated-directive",
+      "request": "監督別鑑賞本数の不整合",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-04",
+      "source": "current-integrated-directive",
+      "request": "映画賞重複",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-05",
+      "source": "current-integrated-directive",
+      "request": "映画賞マトリクス集計不整合",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-COLLECTION-06",
+      "source": "current-integrated-directive",
+      "request": "鑑賞済み表示の誤り",
+      "screen": "監督・映画賞",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-01",
+      "source": "current-integrated-directive",
+      "request": "配信サービス別取得状況",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-02",
+      "source": "current-integrated-directive",
+      "request": "劇場上映情報の取得と鮮度",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-03",
+      "source": "current-integrated-directive",
+      "request": "テレビ放映予定の取得と鮮度",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-04",
+      "source": "current-integrated-directive",
+      "request": "興行収入ランキングの取得と鮮度",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-05",
+      "source": "current-integrated-directive",
+      "request": "映画祭・屋外上映イベントの取得と鮮度",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-06",
+      "source": "current-integrated-directive",
+      "request": "更新頻度と最終成功日時",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-07",
+      "source": "current-integrated-directive",
+      "request": "未取得・未確認・配信なしを区別",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-08",
+      "source": "current-integrated-directive",
+      "request": "古い情報を現在情報と断定しない",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "P0-FRESHNESS-09",
+      "source": "current-integrated-directive",
+      "request": "公式API・許可フィード等の無料合法ソースのみ",
+      "screen": "配信・上映・放映・イベント",
+      "severity": "P0",
+      "cause": "未調査または証跡未照合",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "unverified",
+      "test_result": "現在の受入条件に対する証跡未照合",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-logo",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "全画面のロゴと枠を原本どおりに統一",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-morning-duplicate",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "午前十時の同一上映期間を重複させず期間表示",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-calendar-tabs",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "赤い四角を廃止し下線のタブに統一",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-netflix-october",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "10月Netflix公式配信予定を収録",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-review-height",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "共通レビュー領域を同じ段の下端で揃える",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-provider-tags",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "空のTMDB観測でも公式の配信開始情報を空白にしない",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-festival-awards",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "アカデミー等の開催予定を追加",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-domestic-events",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "国内映画関連イベントの公式日程補充",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-release-day",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "取得済み公開日を日単位で表示",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-missing-posters",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "興収と映画賞の画像・作品ID整合修正",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-boxoffice-this-year",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "2026年途中の興収データ取得",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-boxoffice-world",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "日本市場の邦洋区分を明記し世界興収を検討",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-kanagawa-imax",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "神奈川IMAXの設備登録と休止状況を区別",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-watchlist-sort",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "見たい映画に並び替えを追加",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-award-collection",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "映画賞コレクションの作品メタデータ拡充",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-retired-concierge",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "情報源ページの廃止済み導線を削除",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261024-sort-labels",
+      "source": "docs/operations/user-audit-20261024.json",
+      "request": "ランキング順と元の表示順を削除",
+      "screen": "過去監査参照",
+      "severity": "P0",
+      "cause": "過去監査参照・現在の再確認未完了",
+      "issues": [
+        239,
+        242,
+        243
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "merged_and_publication_verified",
+      "test_result": "過去の完了ラベルを現在の受入完了へ自動継承しない",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-01",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "ポスター欠落",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "poster-index, poster-retry-browser, boxoffice-poster-browser exist; source quality gate passes. Run current live missing-image sample and confirm fallback. #242",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-02",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "レビューUI共通化",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "cinelva-quick-rate.js and shared card tests present; light review contrast reported in #542, overlaps PR539. Audit every entry.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-03",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "作品・ランキング・映画賞重複",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "movie-identity, calendar-dedupe, boxoffice-ties, award_identity tests pass locally; production catalog cross-screen audit outstanding. #242/#244",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-04",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "タブ切替の初期化",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "不具合あり",
+      "test_result": "#542 reports discovery detail close losing list/filters/scroll; My page separately has sessionStorage tab restoration. PR539 search.html changes overlap. Preserve both navigation contexts.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-05",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "監督数・短編・同名統合",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "不具合あり",
+      "test_result": "director enrichment/render tests exist; open PR543 movie-only filmographies and PR526 short-film work overlap. PR544 fixes duplicate declaration in PR539; reconcile before new patch.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-06",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "TMDB二重表示",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "quick-rate and shared card tests pass; full live per-route rating audit required. #242",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-07",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "カード高さ",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "390px layout/readiness contracts exist; screenshots on watchlist/awards and long titles still needed. #243",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-08",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "映画祭・イベント不足",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "PR541 merged; events.html and official feed refresh tests exist. Confirm licensed feed coverage, freshness and live combined navigation. #244",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-09",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "作品詳細ページ",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "search.html detail and calendar detail context/fallback implemented; independent URL and return-flow acceptance required. #542",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-10",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "レビュー仕様統一",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "不具合あり",
+      "test_result": "Shared modal implemented; #542 light-theme issue, PR539 includes modal changes. Verify today's date, venue, spoiler, save-only-current-modal and preserved records.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-11",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "映画カレンダー整備",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Chronology/API identity/import/month-week tests pass; TV/showtime source gaps remain. #244",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-12",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "映画賞マトリクス",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Existing My awards implementation and identity tests; check six awards, decades, film counts and watched outlines on current production. #239",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-13",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "監督コレクション・メダル",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Existing director rendering and insights; unresolved filmography work as #5, dashboard requests #542/PR539. Audit 3/5/10/Complete against feature-only IDs.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-14",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "My統計",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "cinelva-insights.js, shared record tests; PR539/544 dashboard changes pending. Verify numeric breakdown and drilldowns with imported IDs. #239",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-15",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "年間鑑賞カレンダー",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "annual-calendar tests pass; current accepted semantics/4x3 layout need live review. Historical acceptance docs contain superseded rules; do not restore them blindly.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-16",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "見たい映画",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "my-cinelva/watchlist.html and tab/shared bookmark tests exist; production three-column/height/unbookmark validation required.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-17",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "探す",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "不具合あり",
+      "test_result": "discover.html exists; #542 director constraint relevance and detail return defects; PR543 series-title searches. Reconcile existing changes.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-18",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "初期表示",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Old score permits 5000ms. Requested 2000ms not established; added separate diagnostic. #239 P1-08",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-19",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "タブ0.3秒",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Old score combines tab + typing into one metric. Separate tab measurement added. #239 P1-08",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-20",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "画像最適化",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Lazy loading/poster retry/index present; real network bytes, decode/priority/LCP and iPhone testing outstanding.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-21",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "スクロール60fps",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Added rAF cadence diagnostic on full 1000-record list; not actual GPU/display FPS. Browser binaries unavailable locally; physical device trace required.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-22",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "API・キャッシュ",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Existing API caching and release-date tests; request counts/hit ratios/rate limits under real search not measured in this run.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-23",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "My集計",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Insights tests and existing 0/1000-record score harness; operation-specific baseline pending.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-24",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "ランキング・監督・映画賞取得",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Static catalogs/feature index and deferred data exist; category-specific fetch/parse/cache timing still unmeasured.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-25",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "上映中",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "now_playing.json, API/tests and shared browser controls exist; current source snapshot and live freshness acceptance still required. #244",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-26",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "ブックマーク公開・配信通知",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "未実装",
+      "test_result": "No release/streaming notification pipeline found in backend/js; local status notify() is only a UI message. Design permission/opt-in and free delivery limits before implementing. #239",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-27",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "配信自動更新",
+      "screen": "過去28項目監査参照",
+      "severity": "P1",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Existing update tests, source registry and #244. PR514 explicitly blocks all-catalog claims without licensed source; no scraping or paid catalog workaround.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-20261029-28",
+      "source": "docs/operations/requested-quality-audit-20261029.md",
+      "request": "iPhone回帰",
+      "screen": "過去28項目監査参照",
+      "severity": "P0",
+      "cause": "現在の原因・変更の再照合未完了",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "implementation_status": "historical_report",
+      "historical_status": "要確認",
+      "test_result": "Mobile CI and browser suites exist; no attached physical iPhone. #542 is current actual-user regression input. CI WebKit must not be labeled device acceptance.",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    }
+  ]
+}

@@ -191,6 +191,8 @@ html[data-theme="dark"] #directorsView .cinelva-rating-actions { --cinelva-bookm
 #directorsView .cinelva-rating-actions button { -webkit-appearance:none;appearance:none; }
 
 /* Shared review rows must follow the theme on every movie list, not just directors. */
+/* Keep the standalone TMDB line only when shared review controls cannot mount. */
+#grid .cinelva-rate-wrap:has(> .cinelva-rating-controls) > .card[data-i] > .body > .score { display:none; }
 .cinelva-rate-dialog #cinelvaRateDelete {
   justify-self:start;min-height:44px;padding:8px 10px;
   background:transparent;color:inherit;border:1px solid currentColor;border-radius:8px;

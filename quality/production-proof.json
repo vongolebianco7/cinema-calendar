@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "68d2ecff8f38507c5f3dd3c8d73a471929c98195",
-  "verified_at": "2026-10-30T05:30:00Z",
-  "note": "PR #566 exact source head 68d2ecff8f38507c5f3dd3c8d73a471929c98195: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including My Cinelva mobile browser journey), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, brand identity, and Cinemap completeness all passed. Cloudflare Pages preview for the exact source head succeeded (8e512c94.cinema-calendar.pages.dev). Mobile cinema discount comparison now displays separate cards in two columns on phone widths and three columns on small-tablet widths while retaining three fare fields inside each card; HTML asset query keys were bumped to 20261030-chain-grid. Receipt-only evidence; final-head CI required before merge/publication. No user data, database schema, API, authentication or billing changed."
+  "head_sha": "3fe7123f3740d99b277d52bb2364e0e63d25f392",
+  "verified_at": "2026-10-30T08:17:39Z",
+  "note": "PR #567 exact source head 3fe7123f3740d99b277d52bb2364e0e63d25f392 passed all 8 relevant pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit mobile cinema-comparison assertions), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, Cinemap completeness scorecard, and Check brand identity. The release adds dated official general-adult 2D tariff evidence for 13 offer rows across 12 chains; each calendar day ranks up to three distinct verified registration-free fares, keeps conditional offers separate, and labels unknown prices. Theater tariff links were corrected to match region-prefixed names and displayed even for one applicable theater. Receipt-only evidence for source 3fe7123; final-head CI is required before merge/publication. No user data, database schema, API, authentication, or billing changed."
 }

@@ -140,12 +140,13 @@
     const prices=new Map();
     for(const t of theaters.filter(t=>allowed(o,t))){
      let amount=o.price,max=o.maxPrice;
-     if(o.defaultTheaterPrice!==undefined||o.theaterPrices!==undefined){
+      let sourceUrl=o.sourceUrl;
+      if(o.defaultTheaterPrice!==undefined||o.theaterPrices!==undefined){
       if(!Number.isInteger(o.defaultTheaterPrice)||o.defaultTheaterPrice<=0||!Array.isArray(o.theaterPrices)||o.theaterPrices.some(r=>!r||!Number.isInteger(r.price)||r.price<=0||!validNames(r.theaters,true)))continue;
-      amount=o.theaterPrices.find(r=>r.theaters.some(v=>normalized(t).includes(normalized(v))))?.price??o.defaultTheaterPrice;max=undefined;
+      const override=o.theaterPrices.find(r=>r.theaters.some(v=>normalized(t).includes(normalized(v))));amount=override?.price??o.defaultTheaterPrice;sourceUrl=override?.sourceUrl||sourceUrl;max=undefined;
      }
      const key=amount+':'+(max||amount);
-     if(!prices.has(key))prices.set(key,{...o,price:amount,maxPrice:max,applicableTheaters:[]});
+     if(!prices.has(key))prices.set(key,{...o,price:amount,maxPrice:max,sourceUrl,applicableTheaters:[]});
      prices.get(key).applicableTheaters.push(t);
     }
     offers.push(...prices.values());
@@ -161,7 +162,8 @@
    const date=addDays(options.date,i),rows=date<today(now)?[]:regionalGuide(data,{...options,date},now);
    const winners=key=>{const eligible=rows.filter(c=>c[key]);if(!eligible.length)return {price:null,chains:[]};const price=Math.min(...eligible.map(c=>c[key].price));return {price,chains:eligible.filter(c=>c[key].price===price).map(c=>({id:c.id,name:c.name}))};};
    const a=winners('publicBest'),b=winners('conditionalBest');
-   return {date,publicPrice:a.price,publicChains:a.chains,conditionalPrice:b.price,conditionalChains:b.chains};
+   const publicTop3=rows.filter(c=>c.publicBest).map(c=>({id:c.id,name:c.name,price:c.publicBest.price,theaterCount:c.publicBest.applicableTheaters?.length||0,regionalTheaterCount:c.theaters.length})).sort((x,y)=>x.price-y.price||x.name.localeCompare(y.name,'ja')||x.id.localeCompare(y.id)).slice(0,3);
+   return {date,publicPrice:a.price,publicChains:a.chains,publicTop3,conditionalPrice:b.price,conditionalChains:b.chains};
   });
  }
  const api={today,addDays,compare,calendar,guide,guideCalendar,regionalGuide,regionalCalendar,chainForTheater,REVIEW_DAYS};root.CinelvaCinemaDiscounts=api;

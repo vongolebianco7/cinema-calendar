@@ -32,7 +32,7 @@
 
 #discounts .discountCalendarNav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0;font-size:12px;flex-wrap:wrap}
 #discounts .discountCalendar{display:grid;grid-template-columns:repeat(7,minmax(44px,1fr));gap:6px;overflow-x:auto;padding:3px;margin-bottom:18px}
-#discounts .discountDay{padding:8px 2px;min-height:120px;line-height:1.6}
+#discounts .discountDay{display:grid;align-content:start;gap:2px;padding:8px 2px;min-height:120px;line-height:1.6}
 #discounts .discountDay span{display:block;font-size:11px}#discounts .discountDay small{display:block;font-size:10px;color:var(--muted)}#discounts .discountDay b{display:block;font-size:13px;white-space:nowrap}
 #discounts .discountDay[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:0;background:var(--bg)}
 #discounts button:disabled{opacity:.45;cursor:default}
@@ -92,3 +92,16 @@
 #discounts .discountDay .discountLowestBadge{position:absolute;top:3px;right:3px;margin:0;padding:1px 3px;border-radius:3px;background:#d7ad3e;color:#17130a;font-size:8px;font-style:normal;font-weight:900;line-height:1.3}
 #discounts .discountControls .discountField{position:relative}
 #discounts #discountPrefSummary{position:absolute;inset:auto auto auto 0;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#discounts .discountDay .discountCalendarRanks{display:grid;gap:2px;width:100%;}
+#discounts .discountCalendarRanks>span{display:grid;grid-template-columns:10px minmax(0,1fr) 24px auto;align-items:center;gap:2px;min-width:0;line-height:1.25}
+#discounts .discountCalendarRanks em{font-size:8px;font-style:normal;font-weight:700;color:var(--muted)}
+#discounts .discountCalendarRanks strong{min-width:0;font-size:9px;font-weight:600;overflow-wrap:anywhere}
+#discounts .discountCalendarRanks small{font-size:7px;line-height:1.1;white-space:nowrap;color:var(--muted)}
+#discounts .discountCalendarRanks b{font-size:9px;white-space:nowrap}
+#discounts .discountCalendarUnconfirmed{font-size:8px;color:var(--muted);white-space:normal}
+#discounts .discountTheaterSources{margin:6px 0;padding:0 8px;font-size:11px}
+#discounts .discountTheaterSources summary{min-height:32px;padding:6px 0;font-size:11px}
+#discounts .discountTheaterSources ul{margin:4px 0;padding-left:18px}
+#discounts .discountTheaterSources li{margin:4px 0;line-height:1.5}
+@media(max-width:650px){#discounts .discountCalendar{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;gap:6px}#discounts .discountDay{min-height:124px;padding:6px 5px;align-items:stretch}#discounts .discountCalendarRanks>span{grid-template-columns:12px minmax(0,1fr) 26px auto}#discounts .discountCalendarRanks em{font-size:9px}#discounts .discountCalendarRanks strong,#discounts .discountCalendarRanks b{font-size:10px}#discounts .discountCalendarRanks small{font-size:7px}#discounts .discountCalendarUnconfirmed{font-size:9px}}
+@media(max-width:360px){#discounts .discountCalendar{grid-template-columns:repeat(2,minmax(0,1fr))}}

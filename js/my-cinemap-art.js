@@ -142,16 +142,50 @@ function drawCinemaBackground(ctx,w,h,kind){
   ctx.fillStyle=dark?'rgba(0,0,0,.34)':'rgba(255,248,235,.24)';ctx.fillRect(0,0,w,h);ctx.restore();
 }
 
+// One asset and one row renderer are shared by every export template.
+const artworkImages=new Map();
+let artworkMovies=[];
+const officialEmblem='assets/cinelva_original_colors_transparent.png';
+function artworkImage(url){
+  if(!url)return null;
+  if(artworkImages.has(url))return artworkImages.get(url);
+  const image=new Image();image.crossOrigin='anonymous';
+  artworkImages.set(url,image);
+  let deadline;
+  const finish=()=>{if(image.artworkSettled)return;image.artworkSettled=true;clearTimeout(deadline);drawArtwork(artworkMovies)};
+  image.onload=finish;image.onerror=finish;
+  deadline=setTimeout(()=>{image.onerror=null;image.onload=null;image.src='';finish()},10000);
+  image.src=url;
+  return image;
+}
+function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
+function posterArtworkUrl(movie){
+  const raw=String(movie.poster||movie.posterUrl||movie.poster_path||'');
+  if(/^\/[A-Za-z0-9_-]+\.(?:jpg|jpeg|png|webp)$/i.test(raw))return 'https://image.tmdb.org/t/p/w342'+raw;
+  return /^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/[A-Za-z0-9_.-]+$/i.test(raw)?raw:'';
+}
+function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
+  const rankWidth=columns===2?76:94;
+  const posterHeight=Math.min(height-20,columns===2?176:132),posterWidth=posterHeight*2/3;
+  const posterX=x+rankWidth,posterY=y+(height-posterHeight)/2;
+  const image=artworkImage(posterArtworkUrl(m));
+  if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
+  const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
+  const size=(columns===2?(shape==='portrait'?52:shape==='square'?44:32):(shape==='portrait'?50:shape==='square'?38:28))*fontScale;
+  const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
+  const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
+  ctx.fillStyle=p.fg;
+  writeLines(ctx,m.title,tx,y+(height-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+}
 function drawBrand(ctx,w,h,theme,y=h-98){
-  const p=artPalettes[theme]||artPalettes.minimal,dark=!!p.dark,isMinimal=theme==='minimal';
-  const fg=dark?'#fbf6ed':p.fg,outline=dark?'rgba(239,230,216,.86)':p.border,tagline=dark?'#cbbca6':p.muted;
-  const tile=isMinimal?30:34,wordW=isMinimal?148:160,total=tile+12+wordW,x=(w-total)/2;
-  const lineY=y+(isMinimal?15:17),sideGap=42,lineW=Math.max(130,(w-total)/2-sideGap-78);
-  rule(ctx,78,lineY,lineW,p.line,isMinimal?.30:.42);rule(ctx,w-78-lineW,lineY,lineW,p.line,isMinimal?.30:.42);
-  ctx.save();ctx.strokeStyle=outline;ctx.globalAlpha=isMinimal?.76:1;ctx.lineWidth=isMinimal?1.15:1.35;ctx.strokeRect(x,y,tile,tile);
-  const beam=ctx.createLinearGradient(x+15,y,x+tile+8,y);beam.addColorStop(0,dark?'rgba(255,235,196,.68)':isMinimal?'rgba(154,143,124,.38)':'rgba(166,127,72,.52)');beam.addColorStop(1,'rgba(222,187,131,0)');ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(x+15,y+13);ctx.lineTo(x+tile+8,y+7);ctx.lineTo(x+tile+8,y+(isMinimal?25:28));ctx.lineTo(x+15,y+(isMinimal?20:21));ctx.closePath();ctx.fill();
-  ctx.globalAlpha=1;ctx.fillStyle=fg;ctx.textAlign='left';ctx.textBaseline='top';ctx.font=`500 ${isMinimal?23:26}px ${artDisplay}`;ctx.fillText('C',x+(isMinimal?5:6),y+1);ctx.font=`500 ${isMinimal?23:25}px ${artDisplay}`;ctx.fillText('Cinelva',x+tile+12,y-1);
-  ctx.fillStyle=tagline;ctx.globalAlpha=isMinimal?.82:1;ctx.font=`600 ${isMinimal?6:6.5}px ${artSans}`;ctx.fillText('EXPLORE CINEMA',x+tile+13,y+(isMinimal?25:27));ctx.restore();
+  const p=artPalettes[theme]||artPalettes.minimal;
+  const tile=50,gap=12,wordWidth=156,total=tile+gap+wordWidth,x=(w-total)/2;
+  const image=artworkImage(officialEmblem);
+  ctx.save();ctx.globalAlpha=1;ctx.shadowBlur=0;
+  if(image?.complete&&image.naturalWidth)ctx.drawImage(image,x,y,tile,tile);
+  ctx.fillStyle=p.dark?'#f2dfbb':'#b18e60';ctx.textAlign='left';ctx.textBaseline='middle';
+  ctx.font='600 42px Georgia,"Times New Roman",serif';ctx.fillText('Cinelva',x+tile+gap,y+tile/2-5);
+  ctx.font='600 9px '+artSans;ctx.fillText('EXPLORE CINEMA',x+tile+gap,y+tile-3);ctx.restore();
 }
 function layoutMetrics(shape,columns,theme){
   if(shape==='portrait')return {titleY:112,titleSize:theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize,listTop:theme==='minimal'?minimalPortraitListTop:portraitListTop,rowH:theme==='minimal'?minimalPortraitRowHeight:(columns===2?286:148),footerGap:theme==='minimal'?minimalFooterGap:portraitFooterGap,pad:128};
@@ -159,6 +193,7 @@ function layoutMetrics(shape,columns,theme){
   return {titleY:66,titleSize:46,listTop:182,rowH:columns===2?136:68,footerGap:30,pad:104};
 }
 function drawArtwork(movies){
+  artworkMovies=(movies||[]).slice(0,10);
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
@@ -198,31 +233,25 @@ function drawArtwork(movies){
     const medalScale=theme==='minimal'?minimalMedalScale:1;
     if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
-    const offset=columns===2?80:94,tx=x+offset,tw=cellW-offset-8,top=y+rowInset;
-    ctx.fillStyle=p.fg;
-    const nameSize=(columns===2?(shape==='portrait'?doublePortraitMovieSize:doubleCompactMovieSize):(shape==='portrait'?(theme==='minimal'?minimalSingleMovieSize:singleMovieSize):shape==='square'?34:28))*fontScale;
-    const movieWeight=fontKey==='modern'?(theme==='minimal'?minimalMovieWeight:font.movieWeight):font.movieWeight;
-    const nameHeight=writeLines(ctx,m.title,tx,top,tw,2,nameSize,(columns===2?21:24)*fontScale,font.movie,movieWeight,1.10);
-    const meta=[m.year,m.director].filter(Boolean).join('   ·   ');
-    if(meta){ctx.save();ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?minimalMetaAlpha:1;writeLines(ctx,meta,tx,top+nameHeight+9,tw,1,(columns===2?doubleMetaSize:singleMetaSize)*fontScale,16*fontScale,artSans,400);ctx.restore();ctx.fillStyle=p.fg}
+    drawRankingMovie(ctx,m,x,y,cellW,rowH,columns,shape,font,fontScale,p);
   });
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);
   drawBrand(ctx,w,h,theme,footerY);
-  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title+(m.director?' 監督 '+m.director:'')).join('、'));
+  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
   artworkFile=null;document.getElementById('share').disabled=true;
   const revision=++artworkRevision;
-  c.toBlob(blob=>{if(!blob||revision!==artworkRevision)return;artworkFile=new File([blob],'my-cinelva.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
+  c.toBlob(blob=>{if(!blob||revision!==artworkRevision||!artworkReady())return;artworkFile=new File([blob],'my-cinelva.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
 }
 function downloadArtwork(file){if(artworkURL)URL.revokeObjectURL(artworkURL);artworkURL=URL.createObjectURL(file);const a=document.createElement('a');a.href=artworkURL;a.download='my-cinelva.png';document.body.append(a);a.click();a.remove()}
-async function saveArtwork(){const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinelva.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGをダウンロードしました。iPhoneでは「写真に保存」から画像を長押ししてください。'}catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}}
-function openImageForSaving(){const dialog=document.getElementById('saveImageDialog'),image=document.getElementById('saveImagePreview');image.src=document.getElementById('artCanvas').toDataURL('image/png');if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','')}
+async function saveArtwork(){if(!artworkReady()){document.getElementById('msg').textContent='画像を準備中です。少し待ってからお試しください。';return}const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinelva.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGをダウンロードしました。iPhoneでは「写真に保存」から画像を長押ししてください。'}catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}}
+function openImageForSaving(){if(!artworkReady()){document.getElementById('msg').textContent='画像を準備中です。少し待ってからお試しください。';return}const dialog=document.getElementById('saveImageDialog'),image=document.getElementById('saveImagePreview');image.src=document.getElementById('artCanvas').toDataURL('image/png');if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','')}
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
 window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
-  s.src='js/my-cinemap-tools.js?v=20261016-cinelva-case';
+  s.src='js/my-cinemap-tools.js?v=20261031-mobile-feedback';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261016-cinelva-case';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261031-mobile-feedback';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

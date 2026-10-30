@@ -40,7 +40,8 @@ class RebrandReleaseTests(unittest.TestCase):
                 source = (ROOT / path).read_text()
                 urls = re.findall(r'''js/my-cinemap-(?:art|tools|art-direction|cinema-templates)\.js\?([^'"\s]+)''', source)
                 self.assertTrue(urls)
-                self.assertTrue(all(url == 'v=20261016-cinelva-case' for url in urls), urls)
+                expected = 'v=20261031-mobile-feedback' if path.startswith('js/') else 'v=20261016-cinelva-case'
+                self.assertTrue(all(url == expected for url in urls), urls)
 
     def test_legacy_namespaces_and_record_modules_are_preserved(self):
         contract = json.loads((ROOT / 'docs/rebranding/cinelva/storage-contract.json').read_text())

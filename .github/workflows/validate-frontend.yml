@@ -275,6 +275,8 @@ jobs:
       - name: Verify reported calendar, brand, review, sort and theater issues
         run: |
           result=0
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-mobile-feedback-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-mobile-feedback-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1

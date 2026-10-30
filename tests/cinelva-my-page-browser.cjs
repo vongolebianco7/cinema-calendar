@@ -255,7 +255,14 @@ const { chromium, webkit } = require("playwright"),
     await page.locator('#recordList [data-record-card="900003"] .cinelva-rate-button').click();
     await page.locator("#cinelvaRateScore").fill("0");
     await page.locator("#cinelvaRateSave").click();
-    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003")),false);
+    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003"&&r.rating===0&&r.watched)),true);
+    await page.locator('#recordList [data-record-card="900003"] .cinelva-rate-button').click();
+    page.once('dialog',d=>d.dismiss());
+    await page.locator('#cinelvaRateDelete').click();
+    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003")),true,'cancel preserves the zero-rated record');
+    page.once('dialog',d=>d.accept());
+    await page.locator('#cinelvaRateDelete').click();
+    assert.equal(await page.evaluate(()=>CinelvaLibraryRecords.all().some(r=>r.id==="900003")),false,'explicit delete removes the record');
     page.once("dialog", (d) => d.accept());
     await page
       .locator("#importFile")

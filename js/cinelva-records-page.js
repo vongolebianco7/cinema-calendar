@@ -57,8 +57,9 @@
     }
     return sourceFrom(posterCatalogCache.titles.get(JSON.stringify([title, year])));
   };
-  const recordMovies = () => state.records.filter(record => record.watched !== false && record.rating !== 0);
-  const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');
+  const recordMovies = () => state.records.filter(record => record.watched !== false);
+  const ratingValues = records => records.map(record=>record.rating).filter(value=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=5);
+  const ratedMovies = () => recordMovies().filter(record => ratingValues([record]).length>0);
   const metadataFor = id => byId.get(String(id)) || {};
   const countryAliases = {"united states":"アメリカ","united states of america":"アメリカ","usa":"アメリカ","us":"アメリカ","アメリカ合衆国":"アメリカ","united kingdom":"イギリス","uk":"イギリス","gb":"イギリス","great britain":"イギリス","英国":"イギリス","japan":"日本","jp":"日本","france":"フランス","germany":"ドイツ","italy":"イタリア","spain":"スペイン","canada":"カナダ","australia":"オーストラリア","south korea":"韓国","china":"中国","hong kong":"香港","taiwan":"台湾","india":"インド","brazil":"ブラジル","mexico":"メキシコ","russia":"ロシア","new zealand":"ニュージーランド","sweden":"スウェーデン","denmark":"デンマーク","norway":"ノルウェー","finland":"フィンランド","netherlands":"オランダ","switzerland":"スイス","austria":"オーストリア","ireland":"アイルランド","poland":"ポーランド","argentina":"アルゼンチン","thailand":"タイ","vietnam":"ベトナム","philippines":"フィリピン","indonesia":"インドネシア","turkey":"トルコ","iran":"イラン","israel":"イスラエル","portugal":"ポルトガル","greece":"ギリシャ","belgium":"ベルギー"};
   const countryJP = value => countryAliases[String(value||'').trim().toLowerCase()] || String(value||'').trim();
@@ -156,7 +157,7 @@
 
     const statsHost=$('csExtraStats');
     if(statsHost){
-      const scored=filtered.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>0);
+      const scored=ratingValues(filtered);
       const methodOf=r=>String(r.viewingMethod||r.viewing_method||r.method||'').trim();
       const totals={'映画館':0,'配信':0,'DVD／ブルーレイ':0,'その他':0,'未指定':0};
       for(const record of filtered){
@@ -194,7 +195,7 @@
     const max=Math.max(1,...counts.values());
     $('csYears').hidden=counts.size===0;
     $('csYears').innerHTML=[...counts.keys()].sort().map(y=>'<div class="cs-year '+(y===period?'active':'')+'"><span>'+counts.get(y)+'</span><i class="bar" style="height:'+Math.max(2,Math.round(counts.get(y)/max*65))+'px"></i><span>'+y+'</span></div>').join('');
-    const top=filtered.filter(r=>Number(r.rating)>0&&Number(r.rating)<=5).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
+    const top=filtered.filter(r=>ratingValues([r]).length>0).sort((a,b)=>Number(b.rating)-Number(a.rating)||dateOf(b).localeCompare(dateOf(a)));
     $('csTop').innerHTML=top.length?top.map((r,i)=>{
       const src=poster(r),id=escapeHTML(r.tmdbId??r.tmdb_id??r.id);
       const art='<div class="cs-film-art">'+(src?'<img src="'+escapeHTML(src)+'" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">':'')+'<span class="cs-poster-empty"'+(src?' hidden':'')+'>画像なし</span></div>';
@@ -663,7 +664,7 @@
     const ratingById=new Map();
     for(const record of recordMovies()){
       const movie=enriched(record),rating=Number(record.rating);
-      if(Number.isFinite(rating)&&rating>0){
+      if(typeof record.rating==='number'&&Number.isFinite(rating)&&rating>=0){
         for(const key of [movie.tmdbId,movie.tmdb_id,movie.id,movie.title].filter(Boolean))
           ratingById.set(String(key),rating);
       }
@@ -685,7 +686,7 @@
         const key=String(entry.id||entry.title);
         if(!unique.has(key))unique.set(key,entry);
       }
-      const scores=[...unique.values()].map(entry=>ratingById.get(String(entry.id||entry.title))).filter(v=>Number.isFinite(v)&&v>0);
+      const scores=[...unique.values()].map(entry=>ratingById.get(String(entry.id||entry.title))).filter(v=>Number.isFinite(v)&&v>=0);
       return {name,watched:unique.size,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
     }).filter(row=>row.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
     const allAwardGroups=organizations.map(name=>{
@@ -969,7 +970,7 @@
     const filmIdentity=movie=>String(movie.tmdbId??movie.tmdb_id??movie.id);
     const movieById=new Map(state.movies.map(movie=>[filmIdentity(movie),movie]));
     const directorKey=name=>directorIdentity(name);
-    for(const record of ratedMovies().filter(item=>Number(item.rating)>0)){
+    for(const record of ratedMovies()){
       const movie=enriched(record),name=String(movie.director||'').trim();
       if(!name)continue;
       const displayName=directorJapanese(name),key=directorKey(name);
@@ -1026,7 +1027,7 @@
     // Director affinity uses reviewed films only. Unrated watches never
     // contribute a zero to the mean, and a single review is not over-ranked.
     const affinity=sorted.map(group=>{
-      const scores=group.records.map(movie=>Number(movie.rating)).filter(v=>Number.isFinite(v)&&v>0);
+      const scores=ratingValues(group.records);
       return {...group,scored:scores.length,average:scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,high:scores.filter(v=>v>=4).length};
     }).filter(group=>group.scored>0).sort((a,b)=>(b.average*Math.min(b.scored,3)/3)-(a.average*Math.min(a.scored,3)/3)||b.scored-a.scored);
     const watchedDirectorGroups=new Map();
@@ -1117,7 +1118,7 @@
       const progress=catalogAvailable?watchedCount+' / '+films.length+'本 採点済み':watchedCount+'本 鑑賞済み · 総数不明';
       const progressTrack=catalogAvailable?'<div class="director-progress-track"><span style="width:'+Math.round(watchedCount/Math.max(1,films.length)*100)+'%"></span></div>':'';
       const coverageNote=catalogAvailable?'収録作品 '+films.length+'本のうち '+watchedCount+'本を鑑賞。公開年の古い順に表示。'+(director?.coverage?.truncated===false?'出典：TMDB。':'収録範囲は情報元の掲載状況によって異なります。'):'監督作品の情報を確認できていません。鑑賞記録のある作品だけを表示しています。';
-      const reviewed=group.records.map(movie=>Number(movie.rating)).filter(v=>Number.isFinite(v)&&v>0);
+      const reviewed=ratingValues(group.records);
       const average=reviewed.length?reviewed.reduce((sum,v)=>sum+v,0)/reviewed.length:null;
       const high=reviewed.filter(v=>v>=4).length;
       const ratio=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;
@@ -1126,7 +1127,7 @@
         ['鑑賞率',ratio===null?'—':ratio+'%'],['MY平均評価',average===null?'—':average.toFixed(2)+' / 5.0'],
         ['MY評価済み',reviewed.length+'本'],['MY 4.0以上',high+'本']
       ].map(([name,value])=>'<div class="director-profile-stat"><span>'+escapeHTML(name)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div><p>MY平均は評価済み作品のみ。総数・鑑賞率は確認済み監督クレジットを基準にしています。</p></section>';
-      const scoredFilms=group.records.map(movie=>Number(movie.rating)).filter(value=>Number.isFinite(value)&&value>0);
+      const scoredFilms=ratingValues(group.records);
       const averageScore=scoredFilms.length?scoredFilms.reduce((sum,v)=>sum+v,0)/scoredFilms.length:null;
       const strongScores=scoredFilms.filter(value=>value>=4).length;
       const completion=catalogAvailable?Math.round(watchedCount/Math.max(1,films.length)*100):null;

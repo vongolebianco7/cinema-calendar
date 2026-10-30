@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T14:07:53.864Z",
+  "updated_at": "2026-10-30T14:23:15.795156+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
-  "branch": "release/cinelva-ready-20261030",
-  "head_sha": "5981f2f02ec7ebc616936e5061bfdbf3010788b4",
-  "pull_request": 573,
+  "branch": "release/cinelva-candidate-20261031",
+  "head_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+  "pull_request": 578,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -906,7 +906,7 @@
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Freeze feature scope for 2026-10-31 launch. Observe #557/#558/#576/#577 receipt-final CI; integrate successful fixes into release/cinelva-ready-20261030 preserving all prior source, then require combined source CI, receipt-only proof and final CI. Resolve or disclose remaining release blockers; do not merge #573 to main or publish without explicit user approval.",
+  "next_action": "Observe remaining Validate frontend on combined sourceba255d21 and receipt-final checks #557/#558/#576/#577. When combined required4 succeeds, push prepared documentation followed by receipt-only proof; require final CI, then merge only to preparation. Explicit user approval remains required before #573/main/production.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1997,6 +1997,22 @@
       "Source freshness/free quota: existing Neon suspension remains; no quota bypass",
       "Asset and trademark rights review, private security intake and operations acceptance",
       "Unique feedback reconciliation remains incomplete; 125 registry rows are not unique complaints"
-    ]
+    ],
+    "integrated_candidate": {
+      "pull_request": 578,
+      "branch": "release/cinelva-candidate-20261031",
+      "source_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+      "status": "in_progress",
+      "local_quality": "489 primary Node+6dedupe+invoked Python/data/compliance/policy passed on fresh checkout",
+      "hosted_source": "8 of9 workflows passed; Validate frontend in progress",
+      "preview": "https://56f60388.cinema-calendar.pages.dev",
+      "preview_review_asset_sha256": "1539fb88fe5071f65e69cd355aec91b92a8a5edd7122ed907d323f0cfa4e62ff",
+      "preview_review_asset_bytes": 114044,
+      "preview_review_asset_matches_source": true,
+      "physical_iPhone": "unverified; user was asked to check the concrete preview",
+      "streaming_fresh_7d": "569/1312 (43.4%);743 stale at2026-10-30T14:15:41Z",
+      "performance": "Hosted WebKit1000-record review open245ms vs200ms target; other current applicable budgets pass; no physical device/FPS claim",
+      "local_environment": "Workspace restored by fresh Git checkout; local execution and full quality gate succeeded. Browser binaries remain absent."
+    }
   }
 }

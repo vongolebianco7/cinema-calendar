@@ -1052,6 +1052,69 @@
           "verifiedAt": "2026-10-27",
           "excludedTheaters": [],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-kanagawa-verified",
+          "label": "一般通常料金",
+          "price": 2100,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.tohotheater.jp/theater/010/price.html",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "TOHOシネマズ 川崎",
+            "TOHOシネマズ ららぽーと横浜",
+            "TOHOシネマズ 海老名",
+            "TOHOシネマズ 上大岡",
+            "TOHOシネマズ 小田原"
+          ],
+          "repeatability": "recurring",
+          "defaultTheaterPrice": 2100,
+          "theaterPrices": [
+            {
+              "theaters": [
+                "TOHOシネマズ 川崎"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.tohotheater.jp/theater/010/price.html"
+            },
+            {
+              "theaters": [
+                "TOHOシネマズ ららぽーと横浜"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.tohotheater.jp/theater/036/price.html"
+            },
+            {
+              "theaters": [
+                "TOHOシネマズ 海老名"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.tohotheater.jp/theater/007/price.html"
+            },
+            {
+              "theaters": [
+                "TOHOシネマズ 上大岡"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.tohotheater.jp/theater/066/price.html"
+            },
+            {
+              "theaters": [
+                "TOHOシネマズ 小田原"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.tohotheater.jp/theater/008/price.html"
+            }
+          ]
         }
       ]
     },
@@ -1148,7 +1211,7 @@
           "repeatability": "recurring",
           "evening": true
         },
-          {
+        {
           "id": "aeon-card-thanks",
           "label": "イオンカードお客さま感謝デー",
           "price": 1100,
@@ -1262,7 +1325,7 @@
           ],
           "repeatability": "recurring"
         },
-      {
+        {
           "id": "benefit",
           "label": "ベネフィット・ステーション（ベネポ利用可）",
           "price": 1300,
@@ -1282,6 +1345,125 @@
           "verifiedAt": "2026-10-27",
           "excludedTheaters": [],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.aeonentertainment.jp/assets/img/news/AE0416release.pdf",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "イオンシネマ 江別",
+            "イオンシネマ 小樽",
+            "イオンシネマ 北見",
+            "イオンシネマ 旭川駅前",
+            "イオンシネマ 釧路",
+            "イオンシネマ 弘前",
+            "イオンシネマ 新青森",
+            "イオンシネマ 大曲",
+            "イオンシネマ 江釣子",
+            "イオンシネマ 名取",
+            "イオンシネマ 新利府",
+            "イオンシネマ 石巻",
+            "イオンシネマ 天童",
+            "イオンシネマ 米沢",
+            "イオンシネマ 三川",
+            "イオンシネマ 福島",
+            "イオンシネマ 太田",
+            "イオンシネマ 高崎",
+            "イオンシネマ 下妻",
+            "イオンシネマ 守谷",
+            "イオンシネマ 大井",
+            "イオンシネマ 大宮",
+            "イオンシネマ 熊谷",
+            "イオンシネマ 浦和美園",
+            "イオンシネマ 羽生",
+            "イオンシネマ 越谷レイクタウン",
+            "イオンシネマ 春日部",
+            "イオンシネマ 川口",
+            "イオンシネマ 板橋",
+            "イオンシネマ シアタス調布",
+            "イオンシネマ 多摩センター",
+            "イオンシネマ 八王子滝山",
+            "イオンシネマ むさし村山",
+            "イオンシネマ 日の出",
+            "イオンシネマ 市川妙典",
+            "イオンシネマ 津田沼South",
+            "イオンシネマ 幕張新都心",
+            "イオンシネマ 千葉ニュータウン",
+            "イオンシネマ 銚子",
+            "イオンシネマ 茅ヶ崎",
+            "イオンシネマ 座間",
+            "イオンシネマ 新百合ヶ丘",
+            "イオンシネマ みなとみらい",
+            "イオンシネマ 港北ニュータウン",
+            "イオンシネマ 県央",
+            "イオンシネマ 新潟西",
+            "イオンシネマ 新潟亀田インター",
+            "イオンシネマ となみ",
+            "イオンシネマ 白山",
+            "イオンシネマ 金沢",
+            "イオンシネマ 金沢フォーラス",
+            "イオンシネマ 新小松",
+            "イオンシネマ 須坂",
+            "イオンシネマ 松本",
+            "イオンシネマ 各務原",
+            "イオンシネマ 土岐",
+            "イオンシネマ 富士宮",
+            "イオンシネマ 豊川",
+            "イオンシネマ 豊田KiTARA",
+            "イオンシネマ 大高",
+            "イオンシネマ 長久手",
+            "イオンシネマ 名古屋茶屋",
+            "イオンシネマ ワンダー",
+            "イオンシネマ 岡崎",
+            "イオンシネマ 常滑",
+            "イオンシネマ 桑名",
+            "イオンシネマ 東員",
+            "イオンシネマ 鈴鹿",
+            "イオンシネマ 津南",
+            "イオンシネマ 近江八幡",
+            "イオンシネマ 草津",
+            "イオンシネマ 高の原",
+            "イオンシネマ 久御山",
+            "イオンシネマ 京都桂川",
+            "イオンシネマ 茨木",
+            "イオンシネマ 四條畷",
+            "イオンシネマ シアタス心斎橋",
+            "イオンシネマ りんくう泉南",
+            "イオンシネマ 大日",
+            "イオンシネマ 明石",
+            "イオンシネマ 三田ウッディタウン",
+            "イオンシネマ 加古川",
+            "イオンシネマ 和歌山",
+            "イオンシネマ 岡山",
+            "イオンシネマ 広島",
+            "イオンシネマ 広島西風新都",
+            "イオンシネマ 松江",
+            "イオンシネマ 防府",
+            "イオンシネマ 宇多津",
+            "イオンシネマ 高松東",
+            "イオンシネマ 綾川",
+            "イオンシネマ 徳島",
+            "イオンシネマ 今治新都市",
+            "イオンシネマ 大野城",
+            "イオンシネマ 戸畑",
+            "イオンシネマ 福岡",
+            "イオンシネマ 筑紫野",
+            "イオンシネマ 佐賀大和",
+            "イオンシネマ 熊本"
+          ],
+          "repeatability": "recurring"
         }
       ]
     },
@@ -1291,7 +1473,7 @@
       "theaterUrl": "https://109cinemas.net/",
       "note": "劇場により金額が異なります。プレミアム新宿は掲載サービスの対象外。個別の料金表を確認してください。",
       "offers": [
-          {
+        {
           "id": "109-member-tuesday",
           "label": "シネマポイント会員 メンバーズデイ",
           "price": 1300,
@@ -1315,7 +1497,7 @@
           ],
           "repeatability": "recurring"
         },
-      {
+        {
           "id": "wed",
           "label": "109シネマズデイ",
           "price": 1300,
@@ -1343,15 +1525,37 @@
           "theaterPrices": [
             {
               "theaters": [
-                "木場",
-                "二子玉川",
-                "グランベリーパーク",
-                "川崎",
-                "湘南",
-                "ゆめが丘"
+                "109シネマズ 木場",
+                "109シネマズ 二子玉川",
+                "109シネマズ グランベリーパーク",
+                "109シネマズ 川崎",
+                "109シネマズ 湘南",
+                "109シネマズ ゆめが丘"
               ],
-              "price": 1400
+              "price": 1400,
+              "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf"
             }
+          ],
+          "includedTheaters": [
+            "109シネマズ 富谷",
+            "109シネマズ 佐野",
+            "109シネマズ 菖蒲",
+            "109シネマズ 港北",
+            "ムービル",
+            "109シネマズ 名古屋",
+            "109シネマズ 四日市",
+            "109シネマズ 明和",
+            "109シネマズ 大阪エキスポシティ",
+            "109シネマズ 箕面",
+            "109シネマズ HAT神戸",
+            "109シネマズ 広島",
+            "109シネマズ 佐賀",
+            "109シネマズ 木場",
+            "109シネマズ 二子玉川",
+            "109シネマズ グランベリーパーク",
+            "109シネマズ 川崎",
+            "109シネマズ 湘南",
+            "109シネマズ ゆめが丘"
           ]
         },
         {
@@ -1382,16 +1586,97 @@
           "theaterPrices": [
             {
               "theaters": [
-                "木場",
-                "二子玉川",
-                "グランベリーパーク",
-                "川崎",
-                "湘南",
-                "ゆめが丘"
+                "109シネマズ 木場",
+                "109シネマズ 二子玉川",
+                "109シネマズ グランベリーパーク",
+                "109シネマズ 川崎",
+                "109シネマズ 湘南",
+                "109シネマズ ゆめが丘"
               ],
-              "price": 1400
+              "price": 1400,
+              "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf"
             }
+          ],
+          "includedTheaters": [
+            "109シネマズ 富谷",
+            "109シネマズ 佐野",
+            "109シネマズ 菖蒲",
+            "109シネマズ 港北",
+            "ムービル",
+            "109シネマズ 名古屋",
+            "109シネマズ 四日市",
+            "109シネマズ 明和",
+            "109シネマズ 大阪エキスポシティ",
+            "109シネマズ 箕面",
+            "109シネマズ HAT神戸",
+            "109シネマズ 広島",
+            "109シネマズ 佐賀",
+            "109シネマズ 木場",
+            "109シネマズ 二子玉川",
+            "109シネマズ グランベリーパーク",
+            "109シネマズ 川崎",
+            "109シネマズ 湘南",
+            "109シネマズ ゆめが丘"
           ]
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "109シネマズ 富谷",
+            "109シネマズ 佐野",
+            "109シネマズ 菖蒲",
+            "109シネマズ 港北",
+            "ムービル",
+            "109シネマズ 名古屋",
+            "109シネマズ 四日市",
+            "109シネマズ 明和",
+            "109シネマズ 大阪エキスポシティ",
+            "109シネマズ 箕面",
+            "109シネマズ HAT神戸",
+            "109シネマズ 広島",
+            "109シネマズ 佐賀"
+          ],
+          "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general-high-rate",
+          "label": "一般通常料金（対象6館）",
+          "price": 2200,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://109cinemas.net/images/theater/20260528/20260528price_all.pdf",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "109シネマズ 木場",
+            "109シネマズ 二子玉川",
+            "109シネマズ グランベリーパーク",
+            "109シネマズ 川崎",
+            "109シネマズ 湘南",
+            "109シネマズ ゆめが丘"
+          ],
+          "repeatability": "recurring"
         }
       ]
     },
@@ -1487,6 +1772,46 @@
           "feeText": "KINEZOの会員登録・年会費・更新費・手数料は無料です。オンライン予約が必要です。",
           "verifiedAt": "2026-10-27",
           "feeSourceUrl": "https://help.tjoy.jp/faq/show/24?category_id=9&site_domain=default",
+          "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2200,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般（18〜64歳）。2025年9月1日改定後の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金改定告知で対象劇場を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.tjoy.co.jp/files/_up/corp_news/1753797372_%E9%91%91%E8%B3%9E%E6%96%99%E9%87%91%E6%94%B9%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "T・ジョイ新潟万代",
+            "T・ジョイ長岡",
+            "新宿バルト9",
+            "T・ジョイSEIBU大泉",
+            "T・ジョイPRINCE品川",
+            "横浜ブルク13",
+            "T・ジョイ横浜",
+            "T・ジョイ蘇我",
+            "こうのすシネマ",
+            "T・ジョイエミテラス所沢",
+            "T・ジョイ梅田",
+            "T・ジョイ京都",
+            "広島バルト11",
+            "T・ジョイ東広島",
+            "T・ジョイ出雲",
+            "T・ジョイ博多",
+            "T・ジョイ久留米",
+            "T・ジョイリバーウォーク北九州",
+            "T・ジョイパークプレイス大分",
+            "鹿児島ミッテ10"
+          ],
           "repeatability": "recurring"
         }
       ]
@@ -1629,6 +1954,205 @@
             "なんばパークスシネマ"
           ],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2100,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般の通常2D席料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "対象劇場の公式料金案内を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.smt-cinema.com/site/sendai/service.html",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "MOVIX仙台",
+            "丸の内ピカデリー",
+            "新宿ピカデリー",
+            "MOVIX亀有",
+            "MOVIX昭島",
+            "MOVIXつくば",
+            "MOVIX宇都宮",
+            "MOVIX伊勢崎",
+            "MOVIXさいたま",
+            "MOVIX川口",
+            "MOVIX柏の葉",
+            "MOVIX橋本",
+            "MOVIX清水",
+            "MOVIX三好",
+            "MOVIX京都",
+            "MOVIX八尾",
+            "MOVIXあまがさき",
+            "MOVIX倉敷",
+            "MOVIX日吉津",
+            "MOVIX広島駅",
+            "MOVIX周南",
+            "熊本ピカデリー"
+          ],
+          "repeatability": "recurring",
+          "defaultTheaterPrice": 2100,
+          "theaterPrices": [
+            {
+              "theaters": [
+                "MOVIX仙台"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/sendai/service.html"
+            },
+            {
+              "theaters": [
+                "丸の内ピカデリー"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/marunouchi/service.html"
+            },
+            {
+              "theaters": [
+                "新宿ピカデリー"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/shinjuku/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX亀有"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kameari/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX昭島"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/akishima/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIXつくば"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/tsukuba/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX宇都宮"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/utsunomiya/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX伊勢崎"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/isesaki/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIXさいたま"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/saitama/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX川口"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kawaguchi/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX柏の葉"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kashiwanoha/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX橋本"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/hashimoto/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX清水"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/shimizu/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX三好"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/miyoshi/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX京都"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kyoto/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX八尾"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/yao/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIXあまがさき"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/amagasaki/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX倉敷"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kurashiki/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX日吉津"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/hiezu/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX広島駅"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/hiroshima/service.html"
+            },
+            {
+              "theaters": [
+                "MOVIX周南"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/shunan/service.html"
+            },
+            {
+              "theaters": [
+                "熊本ピカデリー"
+              ],
+              "price": 2100,
+              "sourceUrl": "https://www.smt-cinema.com/site/kumamoto/service.html"
+            }
+          ]
         }
       ]
     },
@@ -1838,6 +2362,317 @@
             "恵比寿ガーデンシネマ"
           ],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general-verified",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般（大人）の通常2D席料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "対象劇場の公式料金ページを確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.unitedcinemas.jp/sapporo/price6.html",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "ローソン・ユナイテッドシネマ札幌",
+            "シネプレックス旭川",
+            "ユナイテッド・シネマフォルテ宮城大河原",
+            "ユナイテッド・シネマ水戸",
+            "ユナイテッド・シネマアシコタウンあしかが",
+            "ローソン・ユナイテッドシネマ前橋",
+            "ユナイテッド・シネマ浦和",
+            "ユナイテッド・シネマウニクス南古谷",
+            "ユナイテッド・シネマウニクス秩父",
+            "ユナイテッド・シネマ春日部",
+            "ローソン・ユナイテッドシネマ入間",
+            "ユナイテッド・シネマウニクス上里",
+            "ユナイテッド・シネマわかば",
+            "シネプレックス幸手",
+            "シネプレックス幕張",
+            "ユナイテッド・シネマテラスモール松戸",
+            "ユナイテッド・シネマ豊洲",
+            "ユナイテッド・シネマとしまえん",
+            "ユナイテッド・シネマアクアシティお台場",
+            "シネプレックス平塚",
+            "ローソン・ユナイテッドシネマSTYLE-Sみなとみらい",
+            "ユナイテッド・シネマ新潟",
+            "ユナイテッド・シネマ金沢",
+            "ユナイテッド・シネマ豊橋18",
+            "ユナイテッド・シネマ稲沢",
+            "ユナイテッド・シネマ阿久比",
+            "ローソン・ユナイテッドシネマ岡崎",
+            "ユナイテッド・シネマ大津",
+            "ユナイテッド・シネマ岸和田",
+            "ユナイテッド・シネマ橿原",
+            "ユナイテッド・シネマキャナルシティ13",
+            "ユナイテッド・シネマなかま16",
+            "ローソン・ユナイテッドシネマ小倉",
+            "ユナイテッド・シネマ福岡ももち",
+            "ローソン・ユナイテッドシネマ長崎",
+            "ローソン・ユナイテッドシネマPARCO CITY浦添"
+          ],
+          "repeatability": "recurring",
+          "defaultTheaterPrice": 2000,
+          "theaterPrices": [
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ札幌"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/sapporo/price6.html"
+            },
+            {
+              "theaters": [
+                "シネプレックス旭川"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/asahikawa/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマフォルテ宮城大河原"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/ogawara/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ水戸"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/mito/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマアシコタウンあしかが"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/ashikaga/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ前橋"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/maebashi/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ浦和"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/urawa/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマウニクス南古谷"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/minamifuruya/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマウニクス秩父"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/chichibu/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ春日部"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kasukabe/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ入間"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/iruma/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマウニクス上里"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kamisato/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマわかば"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/wakaba/price6.html"
+            },
+            {
+              "theaters": [
+                "シネプレックス幸手"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/satte/price6.html"
+            },
+            {
+              "theaters": [
+                "シネプレックス幕張"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/makuhari/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマテラスモール松戸"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/matsudo/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ豊洲"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/toyosu/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマとしまえん"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/toshimaen/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマアクアシティお台場"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/odaiba/price6.html"
+            },
+            {
+              "theaters": [
+                "シネプレックス平塚"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/hiratsuka/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマSTYLE-Sみなとみらい"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/minatomirai/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ新潟"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/niigata/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ金沢"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kanazawa/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ豊橋18"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/toyohashi/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ稲沢"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/inazawa/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ阿久比"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/agui/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ岡崎"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/okazaki/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ大津"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/otsu/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ岸和田"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kishiwada/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ橿原"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kashihara/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマキャナルシティ13"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/canalcity/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマなかま16"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/nakama/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ小倉"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/kokura/price6.html"
+            },
+            {
+              "theaters": [
+                "ユナイテッド・シネマ福岡ももち"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/fukuokamomochi/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマ長崎"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/nagasaki/price6.html"
+            },
+            {
+              "theaters": [
+                "ローソン・ユナイテッドシネマPARCO CITY浦添"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://www.unitedcinemas.jp/urasoe/price6.html"
+            }
+          ]
         }
       ]
     },
@@ -1865,6 +2700,32 @@
           "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
           "verifiedAt": "2026-10-26",
           "excludedTheaters": [],
+          "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://ttcg.jp/topics/2023/06161200_16971.html",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "ヒューマントラストシネマ有楽町",
+            "ヒューマントラストシネマ渋谷",
+            "テアトル新宿",
+            "キネカ大森",
+            "テアトル梅田",
+            "シネ・リーブル神戸"
+          ],
           "repeatability": "recurring"
         }
       ]
@@ -1922,6 +2783,79 @@
           "verifiedAt": "2026-10-26",
           "excludedTheaters": [],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general-verified",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般（大人）の通常2D席料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "対象劇場の公式料金ページを確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://forum-movie.net/higashine/price",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "フォーラム盛岡",
+            "フォーラム山形",
+            "ソラリス",
+            "フォーラム東根",
+            "フォーラム仙台",
+            "フォーラム福島",
+            "フォーラム那須塩原"
+          ],
+          "repeatability": "recurring",
+          "defaultTheaterPrice": 2000,
+          "theaterPrices": [
+            {
+              "theaters": [
+                "フォーラム盛岡"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/morioka/price"
+            },
+            {
+              "theaters": [
+                "フォーラム山形",
+                "ソラリス"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/yamagata/price"
+            },
+            {
+              "theaters": [
+                "フォーラム東根"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/higashine/price"
+            },
+            {
+              "theaters": [
+                "フォーラム仙台"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/sendai/price"
+            },
+            {
+              "theaters": [
+                "フォーラム福島"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/fukushima/price"
+            },
+            {
+              "theaters": [
+                "フォーラム那須塩原"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://forum-movie.net/nasushiobara/price"
+            }
+          ]
         }
       ]
     },
@@ -1950,6 +2884,77 @@
           "verifiedAt": "2026-10-26",
           "excludedTheaters": [],
           "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://kinocinema.jp/minatomirai/price/",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "kino cinéma新宿",
+            "kino cinéma立川髙島屋S.C.館",
+            "kino cinéma横浜みなとみらい",
+            "kino cinéma神戸国際",
+            "kino cinéma天神",
+            "kino cinéma心斎橋"
+          ],
+          "repeatability": "recurring",
+          "theaterPrices": [
+            {
+              "theaters": [
+                "kino cinéma新宿"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/shinjuku/price/"
+            },
+            {
+              "theaters": [
+                "kino cinéma立川髙島屋S.C.館"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/tachikawa/price/"
+            },
+            {
+              "theaters": [
+                "kino cinéma横浜みなとみらい"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/minatomirai/price/"
+            },
+            {
+              "theaters": [
+                "kino cinéma神戸国際"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/kobekokusai/price/"
+            },
+            {
+              "theaters": [
+                "kino cinéma天神"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/tenjin/price/"
+            },
+            {
+              "theaters": [
+                "kino cinéma心斎橋"
+              ],
+              "price": 2000,
+              "sourceUrl": "https://kinocinema.jp/shinsaibashi/price/"
+            }
+          ],
+          "defaultTheaterPrice": 2000
         }
       ]
     },
@@ -1977,6 +2982,27 @@
           "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
           "verifiedAt": "2026-10-26",
           "excludedTheaters": [],
+          "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.cinemart.co.jp/theater/shinjuku/price/",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "シネマート新宿"
+          ],
           "repeatability": "recurring"
         }
       ]
@@ -2006,6 +3032,28 @@
           "sourceUrl": "https://entm.auone.jp/",
           "feeText": "Pontaパスは月額548円。未加入なら入会が必要で、継続課金されます。鑑賞券とは別の費用です。",
           "verifiedAt": "2026-10-26",
+          "repeatability": "recurring"
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.oscinemas.net/cgi-bin/pc/showfile.cgi?tgttmp=guide/info_service_discount",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "OSシネマズ神戸ハーバーランド",
+            "OSシネマズミント神戸"
+          ],
           "repeatability": "recurring"
         }
       ]
@@ -2099,6 +3147,27 @@
           ],
           "repeatability": "recurring",
           "evening": true
+        },
+        {
+          "id": "ordinary-general",
+          "label": "一般通常料金",
+          "price": 2000,
+          "when": {
+            "kind": "always"
+          },
+          "access": "public",
+          "condition": "一般・通常2D席の料金。特別興行・特別席・特殊上映は追加料金または対象外の場合があります。",
+          "steps": [
+            "公式料金表で対象劇場・上映の条件を確認",
+            "対象上映を一般料金で購入"
+          ],
+          "sourceUrl": "https://www.mcc-9.jp/miyazaki/price/",
+          "feeText": "会員登録・カード申込み不要。",
+          "verifiedAt": "2026-10-30",
+          "includedTheaters": [
+            "セントラルシネマ宮崎"
+          ],
+          "repeatability": "recurring"
         }
       ]
     }

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-29T22:44:24.256028+00:00",
+  "generated_at": "2026-10-30T22:18:46.705276+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-29",
-      "2027-02-26"
+      "2026-09-30",
+      "2027-02-27"
     ],
     "background_slice": [
-      "2027-06-21",
-      "2027-08-19"
+      "2027-08-21",
+      "2027-10-19"
     ],
     "max_detail_requests": 40
   },
@@ -20493,7 +20493,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1786485,
@@ -20522,7 +20522,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1792352,
@@ -20547,7 +20547,7 @@
       ],
       "runtime": 100,
       "genres": [],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1799159,
@@ -20622,7 +20622,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "checked_at": "2026-10-30T22:18:46.705276+00:00",
       "revival": true,
       "original_jp_release_date": "2020-02-04",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -20771,7 +20771,7 @@
       ],
       "runtime": 23,
       "genres": [],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1792196,
@@ -20800,7 +20800,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1670114,
@@ -20867,8 +20867,8 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
-      "score": 8.089,
-      "votes": 4763,
+      "score": 8.1,
+      "votes": 4770,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/406",
       "director": "マチュー・カソヴィッツ",
@@ -20886,7 +20886,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "checked_at": "2026-10-30T22:18:46.705276+00:00",
       "revival": true,
       "original_jp_release_date": "1996-02-17",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21114,7 +21114,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1793888,
@@ -21148,13 +21148,13 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
       "score": 8.1,
-      "votes": 13,
+      "votes": 19,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1234139",
       "director": "நெல்சன் திலீப்குமார்",
       "director_id": 1378577,
       "cast": [
-        "ラジニカント",
+        "ラジニカーント",
         "S. J. Suryah",
         "Suraj Venjaramoodu",
         "Ramya Krishnan"
@@ -21165,9 +21165,10 @@
       "runtime": 163,
       "genres": [
         "アクション",
-        "コメディ"
+        "コメディ",
+        "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 59352,
@@ -21177,7 +21178,7 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/avcCRRIsQ1Toz0F18zvQ5zOg7QR.jpg",
-      "score": 7.372,
+      "score": 7.4,
       "votes": 43,
       "overview": "中学校の理科教師である城戸誠（沢田研二）は、茨城県東海村の原子力発電所から液体プルトニウムを強奪し、アパートの自室でハンドメイドの原爆を完成させた。そして、金属プルトニウムの欠片を仕込んだダミー原爆を国会議事堂に置き去り、日本政府を脅迫する。",
       "tmdb": "https://www.themoviedb.org/movie/59352",
@@ -21198,7 +21199,7 @@
         "スリラー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "checked_at": "2026-10-30T22:18:46.705276+00:00",
       "revival": true,
       "original_jp_release_date": "1979-10-06",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -21243,8 +21244,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vjTYUTgh9nO88i6HZ4YPRhiFL05.jpg",
-      "score": 6.795,
-      "votes": 44,
+      "score": 6.587,
+      "votes": 127,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1255833",
       "director": "ブライアン・ダッフィールド",
@@ -21260,11 +21261,9 @@
       ],
       "runtime": 106,
       "genres": [
-        "スリラー",
-        "アドベンチャー",
-        "ドラマ"
+        "スリラー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1153576,
@@ -21274,8 +21273,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/1JBlbyXionXPRaqW1UQw7eKkxNP.jpg",
-      "score": 6.333,
-      "votes": 72,
+      "score": 6.354,
+      "votes": 202,
       "overview": "舞台は1993年。かつて、共に天才格闘家として名を馳せ、兄弟のような存在であったリュウとケン。ある理由により疎遠になった二人のもとに、謎の女性格闘家・春麗が現れ、“ワールドウォリアー・トーナメント（世界格闘王決定戦）”の招待状が差し出される。世界最強の猛者たち“ストリートファイター”と戦うことになった二人は、その拳で運命を変えることができるのか？",
       "tmdb": "https://www.themoviedb.org/movie/1153576",
       "director": "キタオ・サクライ",
@@ -21283,7 +21282,7 @@
       "cast": [
         "アンドリュー・小路",
         "ノア・センティネオ",
-        "Callina Liang",
+        "カリーナ・リャン",
         "デヴィッド・ダストマルチャン"
       ],
       "countries": [
@@ -21295,7 +21294,7 @@
         "アクション",
         "ファンタジー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1692852,
@@ -21325,7 +21324,7 @@
         "ドラマ",
         "戦争"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1687667,
@@ -21354,7 +21353,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1614539,
@@ -21364,8 +21363,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/gP1Id1bMZug89wf4CwvXWt1ZLuf.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 9.0,
+      "votes": 2,
       "overview": "Ave Mujicaの再デビューから半年以上が過ぎ、季節は春。  バンドはさらに人気を博し、 メンバーそれぞれの活動も軌道に乗っていた。  次なる舞台として祥子が打ち出したのは、会員制のマスカレードであった。  神になると誓った彼女の思惑とは……",
       "tmdb": "https://www.themoviedb.org/movie/1614539",
       "director": "柿本広大",
@@ -21385,7 +21384,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1575872,
@@ -21395,8 +21394,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/eHKLUM2VhJWJeGLFdrTChC5Jmjg.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 8.333,
+      "votes": 3,
       "overview": "15年前の夏に起きたある火災事故から始まる。少年の無邪気な花火遊びがアパートを全焼させ、黒焦げの妻を抱えた男・埜本（のもと）が、燃えさかるアパートの一室から姿を現す。あまりにも強烈な記憶を前に、当事者であった少年たち——龍之介と拓海の時間は、あの日を境に止まってしまった。  やがて大人になった二人は、まったく異なる道を歩んでいる。龍之介（磯村勇斗）は罪に蓋をし、アーチェリーのオリンピック日本代表候補として前へ進もうとする。一方、拓海（末澤誠也）はいまだ罪の記憶から抜け出せず、陰鬱な日々に立ちすくんでいた。そんな二人の前に、あの火傷の男・埜本が再び現れる。しかし彼は恨みの言葉を口にすることなく、「君はもう、充分に償ったよ」と静かに語りかける。不気味なほどに優しいその姿は、やがて彼らにとっての “mentor／メンター”（助言者・導き手）となっていく——。",
       "tmdb": "https://www.themoviedb.org/movie/1575872",
       "director": "𠮷田恵輔",
@@ -21404,7 +21403,8 @@
       "cast": [
         "磯村勇斗",
         "末澤誠也",
-        "綾野剛"
+        "綾野剛",
+        "木南晴夏"
       ],
       "countries": [
         "Japan"
@@ -21413,7 +21413,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1553200,
@@ -21423,8 +21423,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/iSG98AUNeBEol9GhoPVdPMxjpYb.jpg",
-      "score": 10.0,
-      "votes": 1,
+      "score": 8.0,
+      "votes": 2,
       "overview": "「実は、私が霧島透子なんです」  謎に包まれた大人気ネットシンガーの正体は 国民的女優の桜島麻衣だった――と、沸き立つ観客たち。 その光景は梓川咲太がクリスマスイブに見た夢と同じ――。  4月1日、麻衣の衝撃の告白を皮切りにかつて皆が夢で見たあり得ない出来事が次々と起こり続ける。  見た夢が正夢になるSNSの書き込み「＃夢見る」の存在も消え、目の前の現実と自分の認識が食い違う咲太のもとに、もう一つの可能性の世界の咲太からメッセージが届く。  ――霧島透子を止めてくれ――現実が書き換えられる前に  書き換えられた世界を元に戻すため、咲太は霧島透子を探す。これは、思春期症候群を乗り越える物語――",
       "tmdb": "https://www.themoviedb.org/movie/1553200",
       "director": "増井壮一",
@@ -21438,14 +21438,14 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 118,
       "genres": [
         "アニメーション",
         "ドラマ",
         "謎",
         "ロマンス"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1799743,
@@ -21491,11 +21491,15 @@
       "tmdb": "https://www.themoviedb.org/movie/1805382",
       "director": null,
       "director_id": null,
-      "cast": [],
+      "cast": [
+        "椎名林檎"
+      ],
       "countries": [],
-      "runtime": 0,
-      "genres": [],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "runtime": 115,
+      "genres": [
+        "音楽"
+      ],
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1462841,
@@ -21550,7 +21554,7 @@
       "countries": [],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1693902,
@@ -21567,7 +21571,7 @@
       "director": "Gyanendra Bahadur Deuja",
       "director_id": 1469755,
       "cast": [
-        "Keki Adhikari",
+        "केकी अधिकारी",
         "Aanchal Sharma",
         "Mahesh Tripathi",
         "Kushal Bista"
@@ -21578,7 +21582,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1774055,
@@ -21606,7 +21610,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1803043,
@@ -21633,7 +21637,7 @@
         "履歴",
         "音楽"
       ],
-      "checked_at": "2026-10-23T12:21:11.921996+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1283320,
@@ -21643,8 +21647,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/zehE12ErqzG4Y9znKtYDAvBOvmZ.jpg",
-      "score": 6.8,
-      "votes": 66,
+      "score": 6.7,
+      "votes": 67,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1283320",
       "director": "ハリス・ディキンソン",
@@ -21663,7 +21667,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1053231,
@@ -21672,9 +21676,9 @@
       "date": "2026-10-23",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/tOMd1oZxW0FR0jATgSMavI4igcS.jpg",
-      "score": 6.0,
-      "votes": 11,
+      "poster": "https://image.tmdb.org/t/p/w500/fkKBSgw4yv1C7d3n2UP5UvGRS2q.jpg",
+      "score": 6.1,
+      "votes": 12,
       "overview": "あるギャング組織で、カリスマと呼ばれたボスが不慮の死を遂げる。長年ボスを支え、組織のために抗争を生き抜いてきた側近の三人が、そのまま後継者候補として名前を挙げられる。だが本命と目されるスンテにも、対抗馬のガンピョにも、跡目を継ぐ気はない。ただ一人その座を望むパノは、組織内の人望を得られずにいる。誰も引き受けたがらない次期ボスの座をめぐって押し付け合いが続くなか、組織に潜入したものの正体をほとんど隠せていない警官までが巻き込まれ、事態はいっそう収拾がつかなくなっていく。",
       "tmdb": "https://www.themoviedb.org/movie/1053231",
       "director": "라희찬",
@@ -21693,7 +21697,7 @@
         "コメディ",
         "アクション"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1184941,
@@ -21724,7 +21728,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1483525,
@@ -21734,8 +21738,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
-      "score": 8.0,
-      "votes": 4,
+      "score": 7.9,
+      "votes": 10,
       "overview": "まったく異なる人生を歩む2 組の夫婦の交錯する日常を捉え、平穏に見えた日々に少しずつ亀裂が生まれていく様子を描き出す。",
       "tmdb": "https://www.themoviedb.org/movie/1483525",
       "director": "イ・チャンドン",
@@ -21754,7 +21758,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1703008,
@@ -21771,14 +21775,18 @@
       "director": "末廣朋樹",
       "director_id": 6243060,
       "cast": [
-        "辻凪子"
+        "辻凪子",
+        "田村明石"
       ],
       "countries": [
         "Japan"
       ],
       "runtime": 91,
-      "genres": [],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "genres": [
+        "ドラマ",
+        "コメディ"
+      ],
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1689343,
@@ -21803,7 +21811,7 @@
       "countries": [],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1526917,
@@ -21828,19 +21836,19 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 71,
       "genres": [
         "アニメーション",
         "サイエンスフィクション",
         "ファンタジー",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1473439,
-      "title": "バッド・ルーテナント:トウキョウ",
-      "original_title": "バッド・ルーテナント:トウキョウ",
+      "title": "バッド・ルーテナント：トウキョウ",
+      "original_title": "バッド・ルーテナント：トウキョウ",
       "date": "2026-10-23",
       "event": "theatrical",
       "service": "劇場公開",
@@ -21868,7 +21876,7 @@
         "犯罪",
         "アクション"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1410955,
@@ -21898,7 +21906,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1801113,
@@ -21916,14 +21924,20 @@
       "director_id": 2032049,
       "cast": [
         "HOKUTO",
-        "鈴木愛理"
+        "鈴木愛理",
+        "工藤阿須加",
+        "王林"
       ],
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
-      "genres": [],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "runtime": 95,
+      "genres": [
+        "コメディ",
+        "ロマンス",
+        "スリラー"
+      ],
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1755291,
@@ -21933,8 +21947,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/12lO7y7j57j6mpQCUccOdEpSZzA.jpg",
-      "score": 8.12,
-      "votes": 108,
+      "score": 8.057,
+      "votes": 123,
       "overview": "夜のテルアビブ、とある建物の屋上でイスラエル人ジャーナリストのユヴァル・アブラハームとラヘル・ショールは、イスラエル軍の兵士と諜報員24名に極秘インタビューを行った。ガザでの民間人殺害について、どのような指令を受けたのか。何をしたのか。ある者はデジタル化された遠隔攻撃を「事務作業のようなものだ」と語り、ある者は「食糧配給所に人が集まったところを撃った」と証言する。ひとりひとりの言葉から浮かび上がるのは、イスラエル国家が組織的に作り上げた、人間を人間としてみなさない＜虐殺を可能にするシステム＞だった。",
       "tmdb": "https://www.themoviedb.org/movie/1755291",
       "director": "ユヴァル・アブラハム",
@@ -21952,7 +21966,7 @@
         "ドキュメンタリー",
         "戦争"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1797226,
@@ -22070,7 +22084,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1102390,
@@ -22080,8 +22094,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/yX4ZvG4ly26ePyfOkkx6dIHeVWN.jpg",
-      "score": 5.8,
-      "votes": 12,
+      "score": 5.731,
+      "votes": 13,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1102390",
       "director": "Ramon Zürcher",
@@ -22099,7 +22113,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1400940,
@@ -22109,8 +22123,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/6ttcIVdQbS6esi5wPEUuVKQN8SX.jpg",
-      "score": 7.586,
-      "votes": 93,
+      "score": 7.475,
+      "votes": 284,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1400940",
       "director": "ジェームズ・ワトキンス",
@@ -22130,7 +22144,7 @@
         "スリラー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1748514,
@@ -22747,7 +22761,7 @@
       "event": "theatrical",
       "service": "リバイバル上映",
       "poster": "https://image.tmdb.org/t/p/w500/99vPuzrGf8cDIvpaLaTdyj0s9tF.jpg",
-      "score": 7.083,
+      "score": 7.1,
       "votes": 54,
       "overview": "西村は南極の昭和基地からも遠く離れた陸の孤島、南極ドームふじ基地に料理人として派遣される。妻と娘を置いての単身赴任生活で、彼は8人の男性南極越冬隊員たちの胃袋を満たすという大役を任される。基地では雪氷学者をはじめ、雪氷サポート隊員らが彼の料理を心待ちにしており……。",
       "tmdb": "https://www.themoviedb.org/movie/106378",
@@ -22767,7 +22781,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00",
+      "checked_at": "2026-10-30T22:18:46.705276+00:00",
       "revival": true,
       "original_jp_release_date": "2009-08-08",
       "revival_evidence": "TMDB JP theatrical release history"
@@ -23183,6 +23197,30 @@
         "ドキュメンタリー"
       ],
       "checked_at": "2026-10-29T22:44:24.256028+00:00"
+    },
+    {
+      "id": 1807502,
+      "title": "巡る世界、巡る言葉",
+      "original_title": "巡る世界、巡る言葉",
+      "date": "2026-11-14",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/oPAnu2PEIesBTTuYJ0Ws61orzQ5.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "「見えるか保己一」で直木賞候補となった蝉谷めぐ実、エッセイ「夢みるかかとにご飯つぶ」の清繭子、「解答者は走ってください」で文藝賞優秀作を受賞した佐佐木陸、芥川賞候補作「たえまない光の足し算」の日比野コレコ、第一歌集「これからの友情」を発表した丸田洋渡、さらに角田光代、西加奈子、金原ひとみ、穂村弘ら、世代も作風もキャリアも異なる作家たちの姿と言葉を記録。作品を生み出す喜びをもつ一方で、評価されること、執筆で生計を立てること、作家として生き続けることへの葛藤など、それぞれの場所で言葉と向き合い、書くことを続ける彼らの日常を追い、文学の現在とその先を見つめる。",
+      "tmdb": "https://www.themoviedb.org/movie/1807502",
+      "director": "富樫渉",
+      "director_id": 2326326,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1159206,
@@ -25114,6 +25152,30 @@
       "genres": [
         "ドラマ"
       ]
+    },
+    {
+      "id": 1725084,
+      "title": "とびらをあけたら",
+      "original_title": "とびらをあけたら",
+      "date": "2027-01-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/9mQdXVXBgrqEXRyx5P7tl5niJHi.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1725084",
+      "director": "Eriko Katagiri",
+      "director_id": 4544883,
+      "cast": [
+        "モトーラ世理奈"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 86,
+      "genres": [],
+      "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
       "id": 1214931,

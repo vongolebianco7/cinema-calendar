@@ -44,7 +44,7 @@ test('production build omits retired Ocean payload while preserving legacy redir
   }
   fs.cpSync(path.join(root, 'scripts'), path.join(fixture, 'scripts'), { recursive: true });
   const config = readSourceConfiguration('vercel.json');
-  const result = spawnSync(config.buildCommand, { cwd: fixture, shell: true, encoding: 'utf8' });
+  const result = spawnSync(config.buildCommand, { cwd: fixture, shell: true, encoding: 'utf8', env: { PATH: process.env.PATH, GITHUB_EVENT_NAME: '', VERCEL_ENV: '', CF_PAGES_BRANCH: '' } });
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const output = path.join(fixture, config.outputDirectory);
   assert.equal(fs.existsSync(path.join(output, 'preview/ocean/assets/texture.png')), false, 'retired textures are not published');

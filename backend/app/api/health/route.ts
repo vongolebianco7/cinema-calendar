@@ -1,9 +1,10 @@
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited, options } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   try {
     await prisma.$queryRaw`SELECT 1`;
     return json({ ok: true, database: "up", timestamp: new Date().toISOString() });
@@ -15,6 +16,4 @@ export async function GET() {
   }
 }
 
-export async function OPTIONS() {
-  return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,OPTIONS" } });
-}
+export async function OPTIONS(request: Request) { return options(request); }

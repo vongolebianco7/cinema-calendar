@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3fe7123f3740d99b277d52bb2364e0e63d25f392",
-  "verified_at": "2026-10-30T08:17:39Z",
-  "note": "PR #567 exact source head 3fe7123f3740d99b277d52bb2364e0e63d25f392 passed all 8 relevant pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit mobile cinema-comparison assertions), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, Cinemap completeness scorecard, and Check brand identity. The release adds dated official general-adult 2D tariff evidence for 13 offer rows across 12 chains; each calendar day ranks up to three distinct verified registration-free fares, keeps conditional offers separate, and labels unknown prices. Theater tariff links were corrected to match region-prefixed names and displayed even for one applicable theater. Receipt-only evidence for source 3fe7123; final-head CI is required before merge/publication. No user data, database schema, API, authentication, or billing changed."
+  "head_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+  "verified_at": "2026-10-30T14:24:55.601Z",
+  "note": "Combined release candidate #578 exact source passed all9 pull-request workflows, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit, complete route/theme matrix and reported issues), Reproducible backend build, mobile layout, backup safety, full Python suite, brand and completeness. Fresh local quality gate passed489 primary Node+6dedupe plus invoked Python/data/compliance/policy. Receipt-only update after separate documentation commits, with executable source unchanged. Individual final checks and final combined-head CI remain required before preparation merge. No production approval, physical iPhone acceptance, legal clearance or complete data freshness is claimed. No production/DB/billing changes."
 }

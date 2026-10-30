@@ -137,7 +137,7 @@ export async function GET(request: Request) {
             catalog: true,
           }));
       } else externalSearch.incomplete = true;
-    } catch (e) { externalSearch.incomplete = true; console.warn("TMDB search unavailable", e); }
+    } catch (e) { externalSearch.incomplete = true; console.warn("TMDB search unavailable"); }
   }
 
   return json({ ...catalog, movies, external, external_search: externalSearch, count: movies.length + external.length });

@@ -51,6 +51,38 @@ export function rateLimited(request: Request, limit?: number) {
   return r.ok ? null : json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": String(r.retryAfter), "Cache-Control": "no-store" } }, request);
 }
 
-export function options(request: Request) {
-  return new Response(null, { status: 204, headers: securityHeaders(request) });
+export function options(request: Request, methods = "GET,OPTIONS") {
+  return new Response(null, { status: 204, headers: { ...securityHeaders(request), "Access-Control-Allow-Methods": methods } });
+}
+
+// Read incrementally: Content-Length may be absent or dishonest. Count bytes,
+// cancel excess input, and never buffer an unbounded request before validation.
+export async function readJsonBody(request: Request, maxBytes = 4096, timeoutMs = 8000): Promise<unknown> {
+  const failure = (status: number) => Object.assign(new Error(status === 413 ? "request too large" : "invalid json"), { status });
+  const declared = request.headers.get("content-length");
+  if (declared && (!/^\d+$/.test(declared) || Number(declared) > maxBytes)) throw failure(413);
+  if (!request.body) throw failure(400);
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder("utf-8", { fatal: true });
+  let size = 0, text = "";
+  let timer: ReturnType<typeof setTimeout>;
+  const deadline = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(failure(408)), timeoutMs);
+  });
+  const cancel = () => { void reader.cancel().catch(() => {}); };
+  try {
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), deadline]);
+      if (done) break;
+      size += value.byteLength;
+      if (size > maxBytes) { cancel(); throw failure(413); }
+      text += decoder.decode(value, { stream: true });
+    }
+    text += decoder.decode();
+    return JSON.parse(text);
+  } catch (error) {
+    cancel();
+    if ([413, 408].includes((error as { status?: number }).status || 0)) throw error;
+    throw failure(400);
+  } finally { clearTimeout(timer!); reader.releaseLock(); }
 }

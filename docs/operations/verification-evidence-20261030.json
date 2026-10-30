@@ -1,0 +1,68 @@
+{
+  "checked_at": "2026-10-30T11:58:36.761Z",
+  "main_sha": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
+  "release_decision": "NO_GO",
+  "production_read_only": {
+    "origin": "https://cinelva.vercel.app",
+    "datasets": [
+      {
+        "path": "data/tv.json",
+        "http": 200,
+        "byte_equal_to_main": true,
+        "bytes": 22976,
+        "sha256": "5f0611d14f5b37b182790548d27d90d11df76e819e495916b1aa40104e7744ce",
+        "rows": 16,
+        "generated_at": "2026-10-22",
+        "latest_schedule_date": "2026-11-13",
+        "november_rows": 2
+      },
+      {
+        "path": "data/events.json",
+        "http": 200,
+        "byte_equal_to_main": true,
+        "bytes": 18907,
+        "sha256": "cdd6de7fa1432028b10dd9c8a035d7e439d2d78d101c451e7b2e1bc68200085e",
+        "rows": 32,
+        "december_or_later_rows": 8
+      }
+    ],
+    "limits": "Dataset bytes verified only. Does not verify official-source correctness, current rights, full coverage, actual calendar rendering or physical iPhone Safari."
+  },
+  "repository_data_audit": {
+    "availability_total": 1312,
+    "fresh_7d": 755,
+    "stale_7d": 557,
+    "fresh_pct": 57.5,
+    "observations_with_providers_fresh_7d": 437,
+    "checked_within_48h": 199,
+    "theater_showtimes": "stale",
+    "theater_directory": "stale",
+    "box_office": "stale",
+    "note": "No external refresh or DB writes. No enforced failures is not blanket freshness acceptance. Several provider premiere lists lack upcoming entries."
+  },
+  "credential_pattern_scan": {
+    "source_pull_request": 563,
+    "reachable_history_objects": 13957,
+    "tracked_files": 1804,
+    "findings": 0,
+    "scope": "Existing high-confidence GitHub token/AWS access ID/private key/credential URL patterns; no credential values printed.",
+    "limitations": "Pattern scan only; no proof for arbitrary API keys, unreachable objects or deleted remote refs. Not a complete security audit."
+  },
+  "review_inventory": {
+    "all_issue_pr_entries": 571,
+    "issues": 14,
+    "open_issues": 5,
+    "closed_issues": 9,
+    "open_pull_requests": 14,
+    "open_pr_inline_review_threads": 0,
+    "master_comments_retrieved": 257,
+    "limitations": "Closed PR review history is not fully re-audited. No blanket complaint completion."
+  },
+  "pending": {
+    "zero_rating_pr": 571,
+    "source_sha": "b9e665b70630716b2fe8fa66c6da653032878011",
+    "browser_ci": "in_progress",
+    "physical_iphone_safari": "unverified",
+    "production_release": "requires explicit user approval"
+  }
+}

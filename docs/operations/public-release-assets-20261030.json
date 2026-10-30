@@ -1,0 +1,647 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-10-30T12:00:23.054Z",
+  "source_base": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
+  "scope": "All 62 tracked assets at source_base; limited literal references across 52 root HTML/js/manifest files, not reachability proof.",
+  "legal_clearance": false,
+  "counts": {
+    "exact_asset_permission_unverified": 47,
+    "generated_origin_verified": 9,
+    "permission_unverified_changed_since_2026-10-28": 2,
+    "authored_nonvisual_asset": 4
+  },
+  "asset_count": 62,
+  "image_or_split_asset_count": 58,
+  "assets": [
+    {
+      "path": "assets/08AF5B56-A987-4D6E-A04C-D20E40483567.png",
+      "sha256": "61aa67d1b65203d837a0c04bad271858d79620e94e5c3934fa47f5c8ec6a1046",
+      "bytes": 618601,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/105DE5C4-9F65-41AF-A72F-0731A88CA8E6.png",
+      "sha256": "e379350fac4ab5cb403d37fa6fb786f92211d6017f1f7f70e2f07b42dec05ef0",
+      "bytes": 3324345,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/my-cinemap-art-direction.js",
+        "js/my-cinemap-cinema-templates.js"
+      ]
+    },
+    {
+      "path": "assets/24B630B8-44B6-4B0B-854A-F8D8B246763F.png",
+      "sha256": "68b32dca00a5004e4fa9f84df4341c81814b81d1d7808c0ba619e85d0a4905f1",
+      "bytes": 2359028,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/309A0142-0B8A-4070-A341-63A2446D0CBE.png",
+      "sha256": "f57933698b742b9c6297eaa75a839be1b8470a6c2742ecdde17476ba5934280a",
+      "bytes": 2580955,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/my-cinemap-art-direction.js",
+        "js/my-cinemap-cinema-templates.js"
+      ]
+    },
+    {
+      "path": "assets/411DC24B-E557-4A36-95D2-5FA3550E7BD7.png",
+      "sha256": "8334a3233cfe807911b1b5e2bce622263c187c699cb5025313f7744736ce0030",
+      "bytes": 753616,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/cinelva-icon-trim.js",
+        "js/cinelva-logo-frame.js"
+      ]
+    },
+    {
+      "path": "assets/48E0565E-2BBD-45A0-B6C9-A3A554976D0D.png",
+      "sha256": "76fd229d823bed54d6103b2385851cb53caa1e7d8249acdce186ed4df4e99c41",
+      "bytes": 3321454,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/5AAEB2F3-B50B-49FC-9251-13FF1E773868.png",
+      "sha256": "45d04cd69e0592899fa5dad3aa343b6f50d132d5150a38289bf95737b13ae089",
+      "bytes": 1138208,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/887F3A99-0D56-4E3F-9754-859B5C27E764.png",
+      "sha256": "e6a1340b43d5a19b22504e1f965780e49a6692bc40c6fbee10dd1f60a13ac1f4",
+      "bytes": 1373759,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/8897F0A1-FC35-4609-A239-1C800BF9EAE9.png",
+      "sha256": "9d60ecfcf37c52d951d8573672cadf602f6a0d53aa0ff999fedfe2f9718f429b",
+      "bytes": 2480665,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/99AFA977-5A97-4544-A7AD-60E16A93F874.png",
+      "sha256": "7c28fdc08504767347330e25e74a1c2e35c691212a2e0963b1ee54ca5590d308",
+      "bytes": 3209537,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/my-cinemap-art-direction.js",
+        "js/my-cinemap-cinema-templates.js"
+      ]
+    },
+    {
+      "path": "assets/99F95993-3507-4C63-B108-53E99B791322.png",
+      "sha256": "4d9985774e248a1ad755f7fe6eb0446fd986f2a13ac19eefc9142b767c7ab865",
+      "bytes": 995022,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/A03A1082-4DE0-4BCF-9B5E-0985A16F41E2.png",
+      "sha256": "a23a319ba2ef2eab9bc7a85edcd293c53893b927138e2a21a4906c83fa1fae4c",
+      "bytes": 2404046,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/AB933939-93EB-43D6-814A-C60BE58B42F6.png",
+      "sha256": "e9485e341602526ddae17925176b2ba00f4f1b02d76ac676db70e5ebc99bdd53",
+      "bytes": 2107189,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/B3FA4217-3B0A-4F0A-8D84-6560C5E6F4B4.png",
+      "sha256": "6bd89495bcb53006b82d0ac51b93d89b45911ba6cd512e973406031c85327cc4",
+      "bytes": 1917199,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/C39E8377-836A-4605-85D2-585A3F65BEE8.png",
+      "sha256": "9cdde09dc9e056fe8d40b104552e5396b1a094b2bd96c6828a04ef8f5ff5da2d",
+      "bytes": 3196611,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/C5869218-9A57-4BC2-83AA-ABB00892A431.png",
+      "sha256": "8ba00cf8d13b5ca63f42df7a96c7c33dd7798bc3223e1ca8a43c39bc17c34797",
+      "bytes": 2568421,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/CAECC410-93BE-4136-9FA8-BFD3B7604FB7.png",
+      "sha256": "52fbe7cad24f43e5eb4c7792d813554f862e9d7909c2cbd04fd13e7046258e0b",
+      "bytes": 3509366,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/E2B78401-CCF3-46CB-B9AB-32CE69754AC0.png",
+      "sha256": "6df7fcc3678f2e52d670790fab1517967b1c1f1982c8b08d4f1e20f5e49c13ae",
+      "bytes": 2029001,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/cinelva-records-page.js"
+      ]
+    },
+    {
+      "path": "assets/F90C6A34-D4FF-4500-AD8D-310B8FF4D01C.png",
+      "sha256": "c5459e869a5438a8f94a333d56184c5a6fe83df1e29bd680f6fa5a8b876014fe",
+      "bytes": 3007191,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/aspect-base.part01",
+      "sha256": "b8c7cc7af0488e703c8ad23fdef14b80b19a71f8b993a3dc4cc0c2f21569124a",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part02",
+      "sha256": "a90b4461b5b871da8b490cf292c80cb0cac3745ff1d041392d4cba493f34ac55",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part03",
+      "sha256": "a79186718a9d5db9882b63b7b626bb092c3b7821dcad4b2231584d0128aea999",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part04",
+      "sha256": "ee6911aa58ff4a878a0d5502338e4b9c43878eef840da469dcf1c99ede9195df",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part05",
+      "sha256": "1568393cd68f1668626d6f5548d5d691de63a36cd22b354f0cb81eba5be74bbf",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part06",
+      "sha256": "0b32ecda1ce3912d6e8e9d6a7fe74731a65290299fd09068f59aa58b5409e484",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part07",
+      "sha256": "6868f6e9a9f5f103e84b70f0cbc01073b58bd7de33f0007f7af4f8cdbc3c12b1",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part08",
+      "sha256": "4fa9d574e5cd7a7001820e019312c170e45ec51e6ee2684abd447e93a665bff7",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part09",
+      "sha256": "7eb2b2178124231d5e914dbaa62f7d92fe99539523ff7ae1e81f55ad090572c1",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part10",
+      "sha256": "5c7a453eaa060b9f149611690e12eaa15b8d6ff13a6f4626f50846c189180496",
+      "bytes": 60000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/aspect-base.part11",
+      "sha256": "767b5142a77c8fd9c3a485b02fab8c609e9989508233f3496b6186adccd55045",
+      "bytes": 8968,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/awards/cinelva-awards-approved-sprite.png",
+      "sha256": "31d345b74caaddfc99ac01a830761f88feafbd637e4d6f953dca16116593c92b",
+      "bytes": 3278,
+      "kind": "image_or_binary_split",
+      "status": "permission_unverified_changed_since_2026-10-28",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/awards/cinelva-awards-sprite.png",
+      "sha256": "2a6c832beb792e8f03c530fab4cd8257fd228b1d1ec5bf413d78c2d8370ccac1",
+      "bytes": 67282,
+      "kind": "image_or_binary_split",
+      "status": "permission_unverified_changed_since_2026-10-28",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/calendar-now-playing.css",
+      "sha256": "8b10c2356440b515b53b936bf4b39b4b1cbe5338ab8e6b77d001952592c8b876",
+      "bytes": 556,
+      "kind": "authored_nonvisual",
+      "status": "authored_nonvisual_asset",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "index.html",
+        "js/cinelva-movie-identity.js"
+      ]
+    },
+    {
+      "path": "assets/cinelva-awards-sprite.png",
+      "sha256": "2a6c832beb792e8f03c530fab4cd8257fd228b1d1ec5bf413d78c2d8370ccac1",
+      "bytes": 67282,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/cinelva-logo-light-framed.svg",
+      "sha256": "af9f3020cf1ac53a4878daa004b63a370c8516b2d0a505c7f4d09c4daf841f89",
+      "bytes": 482,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/cinelva_original_colors_transparent.png",
+      "sha256": "b56654a77491d377a0238e47bd4ac4e988208af7ec487743f4ddacb2591ba4fc",
+      "bytes": 499033,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "agent.html",
+        "credits.html",
+        "critic.html",
+        "data-backup.html",
+        "discover.html",
+        "events.html",
+        "experience.html",
+        "index.html",
+        "manifest.webmanifest",
+        "my-best10.html",
+        "my-cinemap.html",
+        "privacy.html",
+        "rankings.html",
+        "revivals.html",
+        "search.html",
+        "terms.html",
+        "theaters.html"
+      ]
+    },
+    {
+      "path": "assets/cinema-discounts.css",
+      "sha256": "3a42bf7fedabe629c52b61c2d53c662305dbd8e78c686a08f2d7ccb3c9db2283",
+      "bytes": 12070,
+      "kind": "authored_nonvisual",
+      "status": "authored_nonvisual_asset",
+      "status_basis": "Repository-authored stylesheet; not third-party image clearance.",
+      "literal_source_references": [
+        "theaters.html"
+      ]
+    },
+    {
+      "path": "assets/cinemap-experience.png",
+      "sha256": "8b3e61a36d8496194537337df4e7d38a4b128fdb2cde823f22711278d32d2f4e",
+      "bytes": 2791263,
+      "kind": "image_or_binary_split",
+      "status": "generated_origin_verified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "experience.html"
+      ]
+    },
+    {
+      "path": "assets/cinemap-logo.png",
+      "sha256": "cd0c9b7d20a42656a6a5e588dc0845afb1b039ef64acae6339bf35b4740f509c",
+      "bytes": 8695,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/cinemap-logo.webp",
+      "sha256": "b42d4d10aa854f14e3f2262389f86b9cac1622fecca2f723dcceee8c034fd103",
+      "bytes": 15007,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/cinemap-underwater-comparison.jpg",
+      "sha256": "8a59de6643ebe7d716cf5bc6c46b64d17afb88aeab95646d8c42aa27651c9d7c",
+      "bytes": 7514,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-aspect.jpg",
+      "sha256": "55a66b0cebc714de3999cd15c7121b449a7b3c769dac523626e4c44366ef8cf8",
+      "bytes": 14947,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-audio.jpg",
+      "sha256": "2595494911fec97a5dc50fdee2d4f3901c1407f118f227cd05a69f09360f190c",
+      "bytes": 7293,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-special.jpg",
+      "sha256": "a9a74972dab0730a728e6be73493d4952aead273c394c3b57e31cb9adfdb34eb",
+      "bytes": 3780,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part01",
+      "sha256": "9c26ffd4a304e27335bd55df2b5a6e754dcb93d1fc23968d3a1b0b8cfd734262",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part02",
+      "sha256": "4cb79db3753bf8c023369da9e2ee3d49c98346db1a1e1c1b630ce00870a446d5",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part03",
+      "sha256": "d34accadbdc28f98627863950264572efd63cb66bff3ee6eb54b1fdf5f6ada70",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part04",
+      "sha256": "d95e44dad55b113c07b5f125516aac3b14932439e60bf1fc275c7acd2cda57ca",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part05",
+      "sha256": "113cbaac113e0993e4d927c8aee7236102970337da9d9986f0b9d4711f1abb6d",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part06",
+      "sha256": "9e124de7528f0d7ce6499332c1d47885f006c338c3dd4eeca2d282610b50fef7",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part07",
+      "sha256": "d4336f1d7aa880755db7cafd50791e55f06eebb157aa2e4452961a6a0ed78ed8",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part08",
+      "sha256": "3f42e0701f1d5b2117a9dd54761e024c07372cb58e0a2020fd49ad073e138e5f",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part09",
+      "sha256": "38890a238ae15ee2f1a54a22fe0698cfba5ddb384528cf89f64b4ec48c728d9f",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part10",
+      "sha256": "241a9f7e4e88b5f50474ac5228f83efe6ae197b44b7d8f0bd92473aa6609d64b",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part11",
+      "sha256": "ea99afb4351f3a05e5541cfc369275d3a0bf361883fdfc49af265eb98f10f966",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part12",
+      "sha256": "496dadb9793918355642d40b87f901143b675f27a34b3b3579c645fecb6d61ba",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part13",
+      "sha256": "2420b7c7ac635bde24bb369a7a7b8222b0764fd40c681db3f6ebe261add20a4d",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part14",
+      "sha256": "cdb25bd0fca559110089a97c151412f081ff8e92c7a41a8e3e13e20ee799fa45",
+      "bytes": 8000,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-sprite.part15",
+      "sha256": "19e16746626ae23b8b59812d8a2bfc5432bb4ff9bedf7f83ec4906b30fe87fc2",
+      "bytes": 4524,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/experience-visual.jpg",
+      "sha256": "845b5abe13397de78db039206812570fff900d5d2aaca55f3ebe94588b39c0a4",
+      "bytes": 7350,
+      "kind": "image_or_binary_split",
+      "status": "exact_asset_permission_unverified",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": []
+    },
+    {
+      "path": "assets/global-search.css",
+      "sha256": "1810f46334fd7951ad0e152df77c18443d1eaa66c7563fff2b271bd9badfa7a3",
+      "bytes": 3945,
+      "kind": "authored_nonvisual",
+      "status": "authored_nonvisual_asset",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "js/cinelva-global-search.js"
+      ]
+    },
+    {
+      "path": "assets/theme.css",
+      "sha256": "4a9384c3ddc1199a53bf825286f1c2d93bc7cf9034b56383f96233fedf8a66af",
+      "bytes": 19805,
+      "kind": "authored_nonvisual",
+      "status": "authored_nonvisual_asset",
+      "status_basis": "Exact path/hash match with prior audit; classification retained, not legal clearance.",
+      "literal_source_references": [
+        "agent.html",
+        "credits.html",
+        "critic.html",
+        "data-backup.html",
+        "discover.html",
+        "events.html",
+        "experience.html",
+        "index.html",
+        "my-best10.html",
+        "my-cinemap.html",
+        "privacy.html",
+        "rankings.html",
+        "revivals.html",
+        "search.html",
+        "terms.html",
+        "theaters.html"
+      ]
+    }
+  ]
+}

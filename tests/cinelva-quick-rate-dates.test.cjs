@@ -155,7 +155,7 @@ for(const legacy of [false,true])test(`unmapped ${legacy?'legacy':'current'} col
  assert.equal(Records.all()[0].title,'日付精度テスト');assert.equal(Records.all()[0].tmdbId,undefined);
 });
 
-test('a uniquely resolved imported record edits and clears its original storage key',()=>{
+test('a uniquely resolved imported record preserves its original storage key at zero',()=>{
  const {Records,element,actions,context}=editor('2024',true,{id:9001,year:2000});
  context.root.CinelvaMovieIdentity={id:m=>Number(m?.tmdbId||0),resolve:m=>m.title==='日付精度テスト'&&m.year===2000?{tmdbId:123}:null};
  actions.open({id:123,tmdbId:123,title:'日付精度テスト',year:2000});
@@ -166,5 +166,8 @@ test('a uniquely resolved imported record edits and clears its original storage 
  assert.equal(Records.all()[0].rating,4.6);
  actions.open({id:123,tmdbId:123,title:'日付精度テスト',year:2000});
  element('cinelvaRateScore').value='0';actions.save();
- assert.equal(Records.all().length,0,'zero clears the actual imported storage key');
+ assert.equal(Records.all().length,1,'zero remains a viewing record');
+ assert.equal(Records.all()[0].id,'9001');
+ assert.equal(Records.all()[0].rating,0);
+ assert.equal(Records.all()[0].watched,true);
 });

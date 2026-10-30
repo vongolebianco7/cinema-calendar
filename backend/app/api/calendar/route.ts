@@ -1,10 +1,11 @@
 import { readWithSnapshot, calendarSnapshot } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
-import { json } from "../../../lib/http";
+import { json, rateLimited, options } from "../../../lib/http";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = rateLimited(request, 60); if (limited) return limited;
   return json(await readWithSnapshot(async()=>{
   const rows = await prisma.release.findMany({
     include: { movie: true },
@@ -35,12 +36,4 @@ export async function GET() {
   }, calendarSnapshot));
 }
 
-export async function OPTIONS() {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,OPTIONS",
-    },
-  });
-}
+export async function OPTIONS(request: Request) { return options(request); }

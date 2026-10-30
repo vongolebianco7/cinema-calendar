@@ -88,3 +88,18 @@ Manually reviewed primary inventories on2026-10-27:
 - CentralMiyazaki: https://www.mcc-9.jp/miyazaki/ (own tariffs, not AEON)
 
 Series-level minima may apply only to the named participating theaters shown in detail. A public price can require a particular start time. Conditional prices require membership/card/contract and exclude fees. Point use is payment, never a new tariff discount. Never describe this as the cheapest possible ticket for an individual or a known available screening.
+
+## Calendar top-three public prices (2026-10-30)
+
+Each date shows up to three distinct chains, ranked by the lowest verified registration-free general-adult 2D ticket price among that chain's reviewed cinemas in the selected prefectures. Equal prices are ordered by chain name. Each line includes `applicable cinemas / listed cinemas`; a chain's minimum may apply to only part of its local inventory. The selected date's detail view lists each exact theater and tariff. Conditional membership/card prices remain a separate single minimum. `料金未確認` means the selected date and listed theater set have no currently verified tariff in the dataset; it does not mean free admission or screening availability. Standard tariffs may exclude premium seats, special screenings, and format surcharges.
+
+Manually reviewed official general-admission tariffs on 2026-10-30:
+- AEON Cinema: ¥2,000 for non-WATATHEATER+ general admission nationwide from 2026-06-19, applied to the 99 named theaters in the reviewed inventory: https://www.aeonentertainment.jp/assets/img/news/AE0416release.pdf
+- 109 Cinemas: ¥2,000 at 13 named theaters and ¥2,200 at six named theaters; Premium Shinjuku and unlisted theaters remain unpriced. The six higher-rate theaters are Kiba, Futakotamagawa, Grandberry Park, Kawasaki, Shonan, and Yumegaoka. The same notice sets public 109-day/first-day prices to ¥1,400 at those six, while the named standard-rate theaters remain ¥1,300: https://109cinemas.net/images/theater/20260528/20260528price_all.pdf
+- T・Joy: ¥2,200 at 20 named direct and partner-operated theaters from 2025-09-01: https://www.tjoy.co.jp/news/info/605
+- TOHO Cinemas: five individually sourced Kanagawa theaters: ¥2,100 at Kawasaki, LaLaport Yokohama, Ebina, and Kamiooka; ¥2,000 at Odawara. No national default: https://www.tohotheater.jp/theater/010/price.html, https://www.tohotheater.jp/theater/036/price.html, https://www.tohotheater.jp/theater/007/price.html, https://www.tohotheater.jp/theater/066/price.html, https://www.tohotheater.jp/theater/008/price.html
+- MOVIX/Piccadilly: ¥2,100 individually checked at 22 named theaters. Each theater's primary tariff URL is retained in its offer. 東劇 remains excluded because its program-specific prices vary.
+- United Cinemas: ¥2,000 individually checked at 36 named theaters. Each theater's primary tariff URL is retained in its offer. Niiza, Yebisu Garden Cinema, and Torius Hisayama remain unpriced.
+- Theater-specific ¥2,000 prices: six TCG theaters, Cinemart Shinjuku, two OS Cinemas Kobe theaters, six Kino Cinema theaters, Central Cinema Miyazaki, and seven Forum Cinema Network theaters. Theater-level official source URLs are retained per offer; other theaters in those chains are not inferred.
+
+109's June 2026 notice also changes its registration-free service-day/first-day fare at six named theaters to ¥1,400; the other 13 named standard-rate theaters remain ¥1,300. This per-theater exception is applied before computing calendar minima. No automated source was added. Manual tariffs expire under the existing 60-day review rule; sources that do not clearly establish a theater's price remain unlisted.

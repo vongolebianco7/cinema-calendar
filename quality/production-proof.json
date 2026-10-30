@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "4022b3089ff8eaeb948bae88f68638df0c1138fb",
-  "verified_at": "2026-10-30T13:00:01.639Z",
-  "note": "PR #574 exact source passed all six pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), Reproducible backend build, mobile layout and completeness. Local quality gate passed 480 primary Node plus 6 dedupe and Python/data/compliance/policy gates. Bounded JSON body and no-store generic errors preserve existing records and API ID checks. Receipt-only preparation; final-head CI and combined release proof remain required. No production publication or billing changes. Physical iPhone Safari remains unverified."
+  "head_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+  "verified_at": "2026-10-30T14:24:55.601Z",
+  "note": "Combined release candidate #578 exact source passed all9 pull-request workflows, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit, complete route/theme matrix and reported issues), Reproducible backend build, mobile layout, backup safety, full Python suite, brand and completeness. Fresh local quality gate passed489 primary Node+6dedupe plus invoked Python/data/compliance/policy. Receipt-only update after separate documentation commits, with executable source unchanged. Individual final checks and final combined-head CI remain required before preparation merge. No production approval, physical iPhone acceptance, legal clearance or complete data freshness is claimed. No production/DB/billing changes."
 }

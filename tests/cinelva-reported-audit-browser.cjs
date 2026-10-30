@@ -44,8 +44,19 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     if(route==='credits.html')assert.equal(await page.getByRole('link',{name:'映画コンシェルジュ',exact:true}).count(),0);
    }
    await freshPage();
+   // Hold schedules until the directory is usable: late boot completion must
+   // preserve both filters and the active comparison table, in either theme.
+   let releaseSchedules;
+   const schedulesReady=new Promise(resolve=>{releaseSchedules=resolve});
+   await context.route('**/data/theater_schedules.json*',async route=>{await schedulesReady;await route.fulfill({json:{__loadRace:true,theaters:[]}})});
    await page.goto(`http://127.0.0.1:${port}/theaters.html?format=IMAX&prefecture=${encodeURIComponent('神奈川県')}`,{waitUntil:'domcontentloaded'});
    await page.locator('[data-format-filter="IMAX"]').click();await page.locator('#prefectureFilter').selectOption('神奈川県');await page.waitForFunction(()=>document.querySelector('#meta')?.textContent.includes('5件表示'));
+   releaseSchedules();
+   await page.waitForFunction(()=>typeof scheduleData!=='undefined'&&scheduleData.__loadRace);
+   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+   assert.match(await page.locator('#meta').innerText(),/5件表示.*神奈川県/,'late schedules preserve prefecture and equipment filters');
+   assert.equal(await page.locator('#grid .theaterTable').count(),1,'late schedules preserve comparison table');
+   await context.unroute('**/data/theater_schedules.json*');
    assert.match(await page.locator('#grid').innerText(),/横浜ブルク13/);assert.match(await page.locator('#grid').innerText(),/休止/);
    await context.route('**/data/awards.json*',r=>r.fulfill({json:{awards:[{organization:'アカデミー賞',category:'作品賞',year:1944,title:'カサブランカ',tmdb_id:289,release_year:1942,source:'https://www.oscars.org/oscars/ceremonies/1944'}],catalog:[{id:289,title:'カサブランカ',year:1942,poster:'https://image.tmdb.org/t/p/w342/verified.jpg'}]}}));
    await context.route('**/data/movies.json*',r=>r.fulfill({json:{movies:[{id:289,title:'カサブランカ',year:1942,poster:null}]}}));

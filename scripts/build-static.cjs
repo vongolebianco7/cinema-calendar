@@ -1,9 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const cinelvaDemo = require('./cinelva-demo-build.cjs');
 if (process.env.VERCEL_ENV === 'production') require('./production-checks.cjs').checkProduction();
 
 const root = process.cwd();
-const output = path.join(root, 'public');
+const output = process.env.CINELVA_STATIC_OUTPUT
+  ? path.resolve(root, process.env.CINELVA_STATIC_OUTPUT)
+  : path.join(root, 'public');
 const retiredRoutes = [
   'preview/ocean/index.html',
   'preview/ocean/ocean-demo.html',
@@ -31,6 +34,10 @@ for (const directory of ['assets', 'js', 'data', 'preview', 'my-cinelva']) {
       return retiredRoutes.some(route => route === relative || route.startsWith(relative + '/'));
     },
   });
+}
+if (cinelvaDemo.shouldIncludeDemo(process.env)) {
+  const result = cinelvaDemo.buildDemoPageFromRoot(root, output);
+  console.log(`Built isolated My Cinelva demo with ${result.records} local sample records for this preview only.`);
 }
 fs.writeFileSync(path.join(output, 'data/source-status.json'), JSON.stringify(require('./source-status.cjs').fromRoot(root), null, 2) + '\n');
 console.log('Static site built; retired Ocean publishes only its eight legacy redirects.');

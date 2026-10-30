@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-30T14:18:53.111Z",
+  "candidate_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+  "local_quality": {
+    "status": "passed",
+    "primary_node": 489,
+    "dedupe_node": 6,
+    "additional": "Invoked Python/data/compliance/policy gates passed; no claim of physical iPhone acceptance.",
+    "browser": "Not run locally: Playwright browser binary absent.",
+    "diff_check": "One whitespace-only finding in existing tests/cinelva-demo-build.test.cjs:39 (blank line at EOF); retained to avoid source churn during final validation."
+  },
+  "freshness": {
+    "checked_at": "2026-10-30T14:15:41.557439+00:00",
+    "registry": "quality/external-data-registry.json",
+    "datasets": {
+      "streaming-availability": {
+        "category": "streaming",
+        "status": "automated",
+        "path": "data/availability.json",
+        "max_age_hours": 168,
+        "freshness_enforced": true,
+        "freshness": "partial",
+        "freshness_scope": "title_observations",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-10-29T22:45:50.953744+00:00",
+        "age_hours": 15.5,
+        "snapshot_freshness": "fresh",
+        "observations": {
+          "total": 1312,
+          "fresh_7d": 569,
+          "stale_7d": 743,
+          "missing_or_invalid_checked_at": 0,
+          "checked_within_48h": 199,
+          "observations_with_providers_fresh_7d": 333,
+          "snapshot_generated_at": "2026-10-29T22:45:50.953744+00:00",
+          "evaluated_at": "2026-10-30T14:15:41.557439+00:00",
+          "fresh_pct": 43.4
+        }
+      },
+      "streaming-premieres": {
+        "category": "streaming",
+        "status": "manual",
+        "path": "data/streaming.json",
+        "max_age_hours": 168,
+        "freshness_enforced": false,
+        "freshness": "fresh",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-10-29T22:44:19.849780+00:00",
+        "age_hours": 15.5
+      },
+      "theater-showtimes": {
+        "category": "theater-schedules",
+        "status": "disabled-pending-permission",
+        "path": "data/theater_schedules.json",
+        "max_age_hours": 24,
+        "freshness_enforced": false,
+        "freshness": "stale",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-09-24T12:10:06.014736+00:00",
+        "age_hours": 866.1
+      },
+      "theater-directory": {
+        "category": "theater-directory",
+        "status": "disabled-resource-scope",
+        "path": "data/theaters_osm.json",
+        "max_age_hours": 720,
+        "freshness_enforced": false,
+        "freshness": "stale",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-09-25T05:21:34.965693+00:00",
+        "age_hours": 848.9
+      },
+      "television-schedules": {
+        "category": "television",
+        "status": "unavailable",
+        "path": null,
+        "max_age_hours": null,
+        "freshness_enforced": false,
+        "freshness": "not_applicable",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp"
+      },
+      "box-office": {
+        "category": "box-office",
+        "status": "manual",
+        "path": "data/boxoffice.json",
+        "max_age_hours": 720,
+        "freshness_enforced": false,
+        "freshness": "stale",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-09-27",
+        "age_hours": 806.3
+      },
+      "movies-and-posters": {
+        "category": "movies-posters",
+        "status": "automated",
+        "path": "data/movies.json",
+        "max_age_hours": 48,
+        "freshness_enforced": true,
+        "freshness": "fresh",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-10-29T22:45:28.160933+00:00",
+        "age_hours": 15.5
+      },
+      "awards": {
+        "category": "awards",
+        "status": "manual",
+        "path": "data/awards.json",
+        "max_age_hours": 8760,
+        "freshness_enforced": false,
+        "freshness": "fresh",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp",
+        "generated_at": "2026-10-17",
+        "age_hours": 326.3
+      },
+      "editorial-features": {
+        "category": "features",
+        "status": "manual",
+        "path": null,
+        "max_age_hours": null,
+        "freshness_enforced": false,
+        "freshness": "not_applicable",
+        "freshness_scope": "snapshot_timestamp",
+        "enforcement_scope": "snapshot_timestamp"
+      }
+    },
+    "enforced_failures": []
+  },
+  "production_read_only": {
+    "url": "https://cinelva.vercel.app",
+    "frontend_deployment": "dpl_A6KbQF7KPdjxiYsAvgpqWbymeHzD",
+    "frontend_sha": "80418f05e27cee2a755a39602b6a76a8bbb30645",
+    "backend_latest_production_deployment": "dpl_7zSMYDDestctAjbQZBuFoUiFfoQ8",
+    "backend_latest_production_sha": "395f48b2a97f8b981cf03b562f3b3eb9f8efbf22",
+    "asset": "js/cinelva-cinema-discounts-ui.js",
+    "http_status": 200,
+    "bytes": 26311,
+    "sha256": "4059c16fdb6809b7b6408c6232f0fabcd5824095843283856c1edbb45a504adb",
+    "matches_frontend_source": true,
+    "publication_action": "None; no deploy/promote/rollback/DB/billing operations.",
+    "limit": "Deployment metadata and one exact asset; not a full production smoke or proof all aliases point to the latest backend deployment."
+  },
+  "preview": {
+    "url": "https://56f60388.cinema-calendar.pages.dev",
+    "sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
+    "evidence": "Cloudflare bot reported successful deployment for matching commit; human/physical-device acceptance pending."
+  },
+  "release_verdict": "NO-GO pending combined and constituent final CI/proof, physical iPhone, rights, freshness/free quota and operational acceptance; explicit production approval required."
+}

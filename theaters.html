@@ -329,7 +329,7 @@ async function loadSchedules(){
   $("#theaterChips").innerHTML="";$("#theaterDetail").innerHTML='<div class="empty">上映スケジュールを取得できませんでした。</div>'
  }
 }
-async function boot(){const base=await backend();try{const fr=await fetch("data/theater_formats.json?"+Date.now(),{cache:"no-store"});if(fr.ok)formatData=await fr.json()}catch(_){}await loadDirectory(base);await loadSchedules();if(selectedFormat)renderFormatDirectory()}
+async function boot(){const base=await backend();try{const fr=await fetch("data/theater_formats.json?"+Date.now(),{cache:"no-store"});if(fr.ok)formatData=await fr.json()}catch(_){}await loadDirectory(base);await loadSchedules();renderDirectory()}
 $("#q").addEventListener("input",()=>{selectedFormat="";renderDirectory()});$("#scheduleQ").addEventListener("input",()=>{selectedTheater="";selectedDate="";renderTheaterChips();$("#theaterDetail").innerHTML=""});
 const initialSearch=new URLSearchParams(location.search).get("search")||"";
 if(initialSearch){selectedFormat="";$("#q").value=initialSearch}

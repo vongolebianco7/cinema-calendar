@@ -12,12 +12,12 @@ test('every declared active route is published or redirects to its published can
   const fixture=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-published-routes-'));
   t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
   for(const directory of ['assets','js','data','preview','my-cinelva','scripts']) fs.mkdirSync(path.join(fixture,directory));
-  for(const name of ['build-static.cjs','source-status.cjs'])fs.copyFileSync('scripts/'+name,path.join(fixture,'scripts',name));
+  for(const name of ['build-static.cjs','cinelva-demo-build.cjs','cinelva-demo-fixture.cjs','source-status.cjs'])fs.copyFileSync('scripts/'+name,path.join(fixture,'scripts',name));
   for(const {path:route} of routes){
     const target=path.join(fixture,route);
     fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(route,target);
   }
-  const result=spawnSync(config.buildCommand,{cwd:fixture,shell:true,encoding:'utf8'});
+  const result=spawnSync(config.buildCommand,{cwd:fixture,shell:true,encoding:'utf8',env:{PATH:process.env.PATH,GITHUB_EVENT_NAME:'',VERCEL_ENV:'',CF_PAGES_BRANCH:''}});
   assert.equal(result.status,0,result.stderr);
   const output=path.join(fixture,config.outputDirectory);
   for(const {path:route} of routes){

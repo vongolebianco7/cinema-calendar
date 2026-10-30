@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "workflow_run": 41069325503,
+  "job": 124108956238,
+  "candidate_pr_head": "ba255d21d77eb51505be230c428be3e52f493bdd",
+  "observations": [
+    {
+      "sha": "d439417e806ba998f5c8800ed38bb6d1bda49f03",
+      "engine": "chromium",
+      "node": "v22.23.4",
+      "platform": "linux",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scope": "Local static server, synthetic local records, external requests blocked. Search means record filtering; cached means repeat tab. rAF cadence is not physical display/GPU FPS. No whole-service or physical iPhone claim.",
+      "cases": [
+        {
+          "count": 0,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 477.6000000000349,
+            "tab_ms": 31.29999999998836,
+            "cached_ms": 32.20000000001164,
+            "search_ms": 31.70000000001164
+          },
+          "errors": [],
+          "assessment": {
+            "initial_ms": {
+              "value": 477.6000000000349,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 31.29999999998836,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 32.20000000001164,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": null,
+              "target": 200,
+              "comparison": "<=",
+              "status": "unmeasured"
+            },
+            "search_ms": {
+              "value": 31.70000000001164,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        },
+        {
+          "count": 1000,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 1987.7000000000116,
+            "tab_ms": 44.90000000002328,
+            "cached_ms": 47.59999999997672,
+            "search_ms": 30.70000000001164,
+            "review_ms": 83.70000000001164
+          },
+          "errors": [],
+          "scroll_cadence_fps": 60.00393468424162,
+          "assessment": {
+            "initial_ms": {
+              "value": 1987.7000000000116,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 44.90000000002328,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 47.59999999997672,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": 83.70000000001164,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "search_ms": {
+              "value": 30.70000000001164,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        }
+      ],
+      "browser": "147.0.7727.15"
+    },
+    {
+      "sha": "d439417e806ba998f5c8800ed38bb6d1bda49f03",
+      "engine": "webkit",
+      "node": "v22.23.4",
+      "platform": "linux",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scope": "Local static server, synthetic local records, external requests blocked. Search means record filtering; cached means repeat tab. rAF cadence is not physical display/GPU FPS. No whole-service or physical iPhone claim.",
+      "cases": [
+        {
+          "count": 0,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 936,
+            "tab_ms": 86.99999999999989,
+            "cached_ms": 31,
+            "search_ms": 32
+          },
+          "errors": [],
+          "assessment": {
+            "initial_ms": {
+              "value": 936,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 86.99999999999989,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 31,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": null,
+              "target": 200,
+              "comparison": "<=",
+              "status": "unmeasured"
+            },
+            "search_ms": {
+              "value": 32,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        },
+        {
+          "count": 1000,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 2903,
+            "tab_ms": 480,
+            "cached_ms": 370,
+            "search_ms": 79,
+            "review_ms": 574
+          },
+          "errors": [],
+          "scroll_cadence_fps": 61.083743842364534,
+          "assessment": {
+            "initial_ms": {
+              "value": 2903,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "fail"
+            },
+            "tab_ms": {
+              "value": 480,
+              "target": 300,
+              "comparison": "<=",
+              "status": "fail"
+            },
+            "cached_ms": {
+              "value": 370,
+              "target": 200,
+              "comparison": "<=",
+              "status": "fail"
+            },
+            "review_ms": {
+              "value": 574,
+              "target": 200,
+              "comparison": "<=",
+              "status": "fail"
+            },
+            "search_ms": {
+              "value": 79,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        }
+      ],
+      "browser": "26.4"
+    },
+    {
+      "sha": "569d2f2d06fe91996eb0bcd120c7b7253134d61f",
+      "engine": "chromium",
+      "node": "v22.23.4",
+      "platform": "linux",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scope": "Local static server, synthetic local records, external requests blocked. Search means record filtering; cached means repeat tab. rAF cadence is not physical display/GPU FPS. No whole-service or physical iPhone claim.",
+      "cases": [
+        {
+          "count": 0,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 497.30000000004657,
+            "tab_ms": 31.70000000001164,
+            "cached_ms": 32.20000000001164,
+            "search_ms": 31.5
+          },
+          "errors": [],
+          "assessment": {
+            "initial_ms": {
+              "value": 497.30000000004657,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 31.70000000001164,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 32.20000000001164,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": null,
+              "target": 200,
+              "comparison": "<=",
+              "status": "unmeasured"
+            },
+            "search_ms": {
+              "value": 31.5,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        },
+        {
+          "count": 1000,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 950.4000000000233,
+            "tab_ms": 45.800000000046566,
+            "cached_ms": 30.099999999976717,
+            "search_ms": 30,
+            "review_ms": 62.59999999997672
+          },
+          "errors": [],
+          "scroll_cadence_fps": 59.999999999999986,
+          "assessment": {
+            "initial_ms": {
+              "value": 950.4000000000233,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 45.800000000046566,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 30.099999999976717,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": 62.59999999997672,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "search_ms": {
+              "value": 30,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        }
+      ],
+      "browser": "147.0.7727.15"
+    },
+    {
+      "sha": "569d2f2d06fe91996eb0bcd120c7b7253134d61f",
+      "engine": "webkit",
+      "node": "v22.23.4",
+      "platform": "linux",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scope": "Local static server, synthetic local records, external requests blocked. Search means record filtering; cached means repeat tab. rAF cadence is not physical display/GPU FPS. No whole-service or physical iPhone claim.",
+      "cases": [
+        {
+          "count": 0,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 956.0000000000001,
+            "tab_ms": 41.000000000000114,
+            "cached_ms": 31,
+            "search_ms": 30
+          },
+          "errors": [],
+          "assessment": {
+            "initial_ms": {
+              "value": 956.0000000000001,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 41.000000000000114,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 31,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": null,
+              "target": 200,
+              "comparison": "<=",
+              "status": "unmeasured"
+            },
+            "search_ms": {
+              "value": 30,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        },
+        {
+          "count": 1000,
+          "route": "/my-cinelva/",
+          "values": {
+            "initial_ms": 1739,
+            "tab_ms": 154.00000000000023,
+            "cached_ms": 90,
+            "search_ms": 51,
+            "review_ms": 245
+          },
+          "errors": [],
+          "scroll_cadence_fps": 55.6640625,
+          "assessment": {
+            "initial_ms": {
+              "value": 1739,
+              "target": 2000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "tab_ms": {
+              "value": 154.00000000000023,
+              "target": 300,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "cached_ms": {
+              "value": 90,
+              "target": 200,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "review_ms": {
+              "value": 245,
+              "target": 200,
+              "comparison": "<=",
+              "status": "fail"
+            },
+            "search_ms": {
+              "value": 51,
+              "target": 1000,
+              "comparison": "<=",
+              "status": "pass"
+            },
+            "scroll_fps": {
+              "value": null,
+              "target": 60,
+              "comparison": ">=",
+              "status": "unmeasured"
+            }
+          }
+        }
+      ],
+      "browser": "26.4"
+    }
+  ],
+  "assessment": "Current merge-tree Chromium budgets pass; WebKit1000-record review open245ms exceeds200ms target by45ms. Other current applicable budgets pass. These are hosted synthetic Linux timings, not physical iPhone or full-service API latency/FPS. Earlier baseline includes prior optimizations and runner variation; no causal attribution to this candidate's fixes. Performance target not relaxed.",
+  "checked_at": "2026-10-30T14:22:10.788Z"
+}

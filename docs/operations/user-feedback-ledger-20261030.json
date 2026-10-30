@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T11:55:34.653Z",
+  "updated_at": "2026-10-30T14:40:52.050990+00:00",
   "scope": "現セッションP0具体項目、既存17/28項目監査、過去カレンダー9指摘、Issue542の具体指摘、Eastwood収録漏れを集約。P1全基準・全closed PRレビュー履歴の再照合は未完了。",
   "past_conversation_access": "このセッションで提示された内容とGitHub上の記録のみ。参照できない過去会話の指摘を対応済みにしない。",
   "unique_feedback_total": null,
@@ -15,19 +15,24 @@
       "request": "都道府県と昼夜選択をコンパクト化",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-02",
@@ -35,19 +40,24 @@
       "request": "都道府県ボタンをiPhoneで2〜3列にする",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-03",
@@ -55,19 +65,24 @@
       "request": "不要な都道府県プルダウンを削除",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-04",
@@ -75,19 +90,24 @@
       "request": "不要な日付選択を削除",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-05",
@@ -95,19 +115,24 @@
       "request": "冗長な見出しと余白を削減",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-06",
@@ -115,19 +140,24 @@
       "request": "系列名横に2種類の料金を並べる",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-07",
@@ -135,19 +165,24 @@
       "request": "最安値のゴールド強調",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-08",
@@ -155,19 +190,24 @@
       "request": "詳細を適切なポップアップにする",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-UI-09",
@@ -175,19 +215,24 @@
       "request": "ライト・ダーク表示を確認",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        554,
+        565,
+        566,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-01",
@@ -195,19 +240,23 @@
       "request": "登録不要の最安料金を明示",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        538,
+        554,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-02",
@@ -215,19 +264,23 @@
       "request": "会員・非会員料金を区別",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        538,
+        554,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-03",
@@ -235,19 +288,23 @@
       "request": "毎日料金と曜日・条件付き料金を区別",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        538,
+        554,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-04",
@@ -255,19 +312,23 @@
       "request": "根拠不明のハイフン・未確認価格を表示しない",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        538,
+        554,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-05",
@@ -295,7 +356,7 @@
       "request": "期間中上位3候補を正確に表示",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
@@ -303,13 +364,15 @@
         244
       ],
       "pull_requests": [
+        538,
+        554,
         567
       ],
-      "implementation_status": "merged",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "deployment_pending",
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-07",
@@ -317,19 +380,23 @@
       "request": "同額・条件付き・特別上映の扱いを明示",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        538,
+        554,
+        567
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-PRICE-DATA-08",
@@ -337,7 +404,7 @@
       "request": "以前の修正が本番に反映されなかった原因を確認",
       "screen": "映画館料金比較",
       "severity": "P0",
-      "cause": "mainの料金top3修正より古いSHA80418f0を本番が配信。今回のユーザー公開承認は未取得。",
+      "cause": "本番frontend料金JSは80418f05とbyte一致、準備sourceと異なる。frontend/backendの配信commit相違を確認。ブラウザ個別cacheは未確認。",
       "issues": [
         239,
         242,
@@ -347,8 +414,8 @@
       "pull_requests": [
         567
       ],
-      "implementation_status": "merged",
-      "test_result": "前チェックポイントで本番HTML/JS/dataを読み取り照合。",
+      "implementation_status": "partially_verified",
+      "test_result": "正式URL料金JS HTTP200/26311bytes/hash一致。Service Worker登録はsource検索で見つからず。原因の全経路を確認済みとはしない。",
       "production_status": "deployment_pending",
       "iphone_safari_status": "unverified",
       "disposition": "open"
@@ -359,7 +426,7 @@
       "request": "目アイコン操作後の色と状態",
       "screen": "全画面・共通レビュー",
       "severity": "P0",
-      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
@@ -369,11 +436,11 @@
       "pull_requests": [
         571
       ],
-      "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
-      "production_status": "not_deployed",
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-LIGHT-02",
@@ -501,7 +568,7 @@
       "request": "目アイコン操作後の状態・保存・再表示を一致",
       "screen": "全画面・共通レビュー",
       "severity": "P0",
-      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
@@ -511,11 +578,11 @@
       "pull_requests": [
         571
       ],
-      "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
-      "production_status": "not_deployed",
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-LIGHT-09",
@@ -523,19 +590,22 @@
       "request": "390pxの修正前後画像とテーマ回帰テスト",
       "screen": "全画面・共通レビュー",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        571,
+        572
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-REVIEW-01",
@@ -563,7 +633,7 @@
       "request": "MY評価0.0〜5.0を0.1刻みで保存",
       "screen": "全画面・鑑賞記録",
       "severity": "P0",
-      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
@@ -573,11 +643,11 @@
       "pull_requests": [
         571
       ],
-      "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
-      "production_status": "not_deployed",
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-REVIEW-03",
@@ -585,7 +655,7 @@
       "request": "0.0点と未鑑賞を区別",
       "screen": "全画面・鑑賞記録",
       "severity": "P0",
-      "cause": "0点保存時に削除し、カード・集計が0点を未鑑賞として除外。ライトの目アイコンは状態によらず同色。",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
@@ -595,11 +665,11 @@
       "pull_requests": [
         571
       ],
-      "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
-      "production_status": "not_deployed",
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-REVIEW-04",
@@ -627,19 +697,21 @@
       "request": "目アイコン・ブックマーク状態",
       "screen": "全画面・鑑賞記録",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-REVIEW-06",
@@ -707,19 +779,21 @@
       "request": "編集・削除・再鑑賞・復元を検証",
       "screen": "全画面・鑑賞記録",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-REVIEW-10",
@@ -727,19 +801,21 @@
       "request": "保存形式と既存データ互換性",
       "screen": "全画面・鑑賞記録",
       "severity": "P0",
-      "cause": "未調査または証跡未照合",
+      "cause": "対象のコード・画面回帰で修正を確認。料金/記録/テーマの統合source ba255d21の全9CI成功。",
       "issues": [
         239,
         242,
         243,
         244
       ],
-      "pull_requests": [],
-      "implementation_status": "unverified",
-      "test_result": "現在の受入条件に対する証跡未照合",
-      "production_status": "unverified",
+      "pull_requests": [
+        571
+      ],
+      "implementation_status": "ci_passed",
+      "test_result": "統合source ba255d21: Validate frontend41069325503 Chromium/WebKit成功。390/1280等の全ルート・料金・記録テスト、ローカル489+6/Python等成功。個別要件の範囲に限る。",
+      "production_status": "pending_verification",
       "iphone_safari_status": "unverified",
-      "disposition": "open"
+      "disposition": "open_pending_production_and_device"
     },
     {
       "id": "P0-MOVIE-01",
@@ -2593,13 +2669,17 @@
     }
   ],
   "github_inventory": {
-    "all_issue_and_pr_entries": 571,
+    "all_issue_and_pr_entries": 579,
     "issues": 14,
     "open_issues": 5,
     "closed_issues": 9,
     "open_pull_requests": 14,
     "open_pr_inline_review_threads": 0,
     "master_issue_comments_retrieved": 257,
-    "scope": "全Issue/PR一覧6ページ取得、open PR14件の会話コメントとinline threadを確認。全closed PRの全レビュー履歴の再照合は未完了。master257コメントは取得済み、個別指摘抽出・重複照合を継続。"
-  }
+    "scope": "created-time境界検索で全565PR取得、全565のinline review threadsとconversation timelineを照合。transient532取得は再取得成功。全Issue14のopen5/closed9を再確認。別の指摘総数/完了数や未見会話の全照合完了とは扱わない。",
+    "all_pull_requests": 565,
+    "all_pr_inline_review_threads": 0,
+    "non_bot_pr_timeline_comments": 73
+  },
+  "review_history_evidence": "docs/operations/pr-review-history-audit-20261030.json"
 }

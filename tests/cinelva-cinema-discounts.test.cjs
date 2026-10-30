@@ -91,7 +91,7 @@ test('national theater matching does not confuse AEON shops or premium109 with o
 });
 test('national facts cover broad chains and retain actionable primary provenance and fees',()=>{
  assert.equal(data.chains.length,14);
- for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.match(o.verifiedAt,/^2026-10-(26|27|29)$/);}
+ for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.match(o.verifiedAt,/^2026-10-(26|27|29|30)$/);}
  const now=new Date('2026-10-26T01:00:00Z');
  const r=D.guide(data,{date:'2026-12-01',chain:'tjoy'},now)[0];assert.equal(r.available.some(o=>o.id==='first'),false);assert.equal(r.publicBest.price,1000);
  assert.equal(D.guide(data,{date:'2026-10-28',chain:'109',theater:'109シネマズプレミアム新宿'},now)[0].available.length,0);
@@ -173,6 +173,30 @@ test('prefecture comparison ranks multiple local chains and preserves cheapest t
  const cell=D.regionalCalendar(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0];assert.equal(cell.publicPrice,1200);assert.deepEqual(cell.publicChains.map(c=>c.id),['b','c']);
  assert.deepEqual(D.regionalGuide(d,{date:'2026-10-28',prefecture:'存在しない県'},regionalNow),[]);
  d.regionalCoverage[1].verifiedAt='2026-01-01';assert.equal(D.regionalGuide(d,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow).some(c=>c.id==='b'),false);
+});
+test('regional calendar ranks up to three distinct confirmed public chains per day',()=>{
+ const offer=(id,price)=>({id,price,access:'public',repeatability:'recurring',verifiedAt:'2026-10-27',when:{kind:'always'}});
+ const f={chains:[{id:'a',name:'Alpha',offers:[offer('a1',2000),offer('a2',1900)]},{id:'b',name:'Beta',offers:[offer('b1',1400)]},{id:'c',name:'Gamma',offers:[offer('c1',1400)]},{id:'d',name:'Delta',offers:[offer('d1',1800)]}],regionalCoverage:[{prefecture:'神奈川県',chain:'a',theaters:['A'],verifiedAt:'2026-10-27'},{prefecture:'神奈川県',chain:'b',theaters:['B'],verifiedAt:'2026-10-27'},{prefecture:'神奈川県',chain:'c',theaters:['C'],verifiedAt:'2026-10-27'},{prefecture:'神奈川県',chain:'d',theaters:['D'],verifiedAt:'2026-10-27'}]};
+ const cell=D.regionalCalendar(f,{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0];
+ assert.deepEqual(cell.publicTop3.map(x=>[x.id,x.name,x.price]),[['b','Beta',1400],['c','Gamma',1400],['d','Delta',1800]]);
+ assert.equal(cell.publicPrice,1400);assert.deepEqual(cell.publicChains.map(x=>x.id),['b','c']);
+ assert.deepEqual(D.regionalCalendar({chains:[],regionalCoverage:[]},{date:'2026-10-28',prefecture:'神奈川県'},regionalNow)[0].publicTop3,[]);
+});
+test('reviewed ordinary fares are theater-scoped and 109 service prices follow its 2026 revision',()=>{
+ const clock=new Date('2026-10-30T01:00:00Z');
+ const cell=D.regionalCalendar(data,{date:'2026-10-30',prefecture:'神奈川県'},clock)[0];
+ assert.equal(cell.publicTop3.length,3);assert.deepEqual(cell.publicTop3.map(x=>x.price),[2000,2000,2000]);
+ assert.ok(cell.publicTop3.every(x=>x.theaterCount>0&&x.theaterCount<=x.regionalTheaterCount));
+ const wed=D.regionalGuide(data,{date:'2026-11-04',prefecture:'神奈川県'},clock).find(c=>c.id==='109');
+ const byTheater=new Map(wed.available.filter(o=>o.id==='wed').flatMap(o=>o.applicableTheaters.map(t=>[t,o.price])));
+ assert.equal(byTheater.get('109シネマズ 港北'),1300);
+ for(const t of ['109シネマズ 川崎','109シネマズ 湘南','109シネマズ ゆめが丘'])assert.equal(byTheater.get(t),1400);
+ const ordinary=data.chains.flatMap(c=>c.offers.map(o=>({chain:c.id,offer:o}))).filter(x=>x.offer.id.startsWith('ordinary-'));
+ assert.equal(ordinary.length,13);
+ for(const {offer} of ordinary){assert.match(offer.sourceUrl,/^https:\/\//);assert.equal(offer.verifiedAt,'2026-10-30');assert.equal(offer.repeatability,'recurring');assert.ok(offer.includedTheaters?.length||offer.theaterPrices?.length);for(const row of offer.theaterPrices||[])assert.match(row.sourceUrl,/^https:\/\//);}
+ const kino=ordinary.find(x=>x.chain==='kino').offer;assert.equal(kino.theaterPrices.length,6);assert.ok(kino.theaterPrices.every(row=>row.price===2000));
+ const tachikawa=D.regionalGuide(data,{date:'2026-10-30',prefecture:'東京都'},clock).find(c=>c.id==='kino');assert.equal(tachikawa.publicBest.price,2000);
+ const toho=D.regionalGuide(data,{date:'2026-10-30',prefecture:'神奈川県'},clock).find(c=>c.id==='toho');assert.equal(toho.publicBest.price,2000);assert.match(toho.publicBest.sourceUrl,/theater\/008\/price\.html$/);assert.deepEqual(toho.publicBest.applicableTheaters,['TOHOシネマズ 小田原']);
 });
 test('regional tariffs bind local inclusions and theater prices before choosing chain minimum',()=>{
  const d={chains:[{id:'a',name:'A',offers:[{id:'regular',price:1300,maxPrice:1400,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'},excludedTheaters:['Premium'],theaterPrices:[{theaters:['Expensive'],price:1400}],defaultTheaterPrice:1300},{id:'local',price:500,access:'public',verifiedAt:'2026-10-26',when:{kind:'always'},includedTheaters:['Elsewhere']}]}],regionalCoverage:[{prefecture:'神奈川県',chain:'a',theaters:['Expensive','Premium'],verifiedAt:'2026-10-26'}]};

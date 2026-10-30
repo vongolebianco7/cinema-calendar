@@ -17,7 +17,7 @@ test('every declared active route is published or redirects to its published can
     const target=path.join(fixture,route);
     fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(route,target);
   }
-  const result=spawnSync(config.buildCommand,{cwd:fixture,shell:true,encoding:'utf8'});
+  const result=spawnSync(config.buildCommand,{cwd:fixture,shell:true,encoding:'utf8',env:{PATH:process.env.PATH,GITHUB_EVENT_NAME:'',VERCEL_ENV:'',CF_PAGES_BRANCH:''}});
   assert.equal(result.status,0,result.stderr);
   const output=path.join(fixture,config.outputDirectory);
   for(const {path:route} of routes){

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3fe7123f3740d99b277d52bb2364e0e63d25f392",
-  "verified_at": "2026-10-30T08:17:39Z",
-  "note": "PR #567 exact source head 3fe7123f3740d99b277d52bb2364e0e63d25f392 passed all 8 relevant pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit mobile cinema-comparison assertions), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, Cinemap completeness scorecard, and Check brand identity. The release adds dated official general-adult 2D tariff evidence for 13 offer rows across 12 chains; each calendar day ranks up to three distinct verified registration-free fares, keeps conditional offers separate, and labels unknown prices. Theater tariff links were corrected to match region-prefixed names and displayed even for one applicable theater. Receipt-only evidence for source 3fe7123; final-head CI is required before merge/publication. No user data, database schema, API, authentication, or billing changed."
+  "head_sha": "a21920f9eee0dcf11e91dec5037bcae61ea91f12",
+  "verified_at": "2026-10-30T12:06:51.436Z",
+  "note": "PR #570 exact source passed all six workflows: Autonomous quality 41050916655, smoke 41050916426, Validate frontend 41050916526 (including Chromium/WebKit legacy redirect destination polling and route matrix), Reproducible backend build 41050916902, mobile layout 41050916273 and completeness 41050916492. Reject unsafe integer movie IDs before upstream access. Browser harness preserves exact destination pathname/query and all readiness/contrast/layout assertions without WebKit navigation-event watcher. The earlier bookmark assertion passed on rerun; final source browser checks now green. Receipt-only preparation; final-head CI and explicit user approval required before production release. No database writes, storage format, credentials or billing changes; physical iPhone remains unverified."
 }

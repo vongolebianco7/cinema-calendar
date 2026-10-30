@@ -36,7 +36,8 @@ function render({ records, works, movies = works, name = 'Steven Spielberg', pro
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');
   const directorView = source.slice(source.indexOf('  const normalizeName ='), source.indexOf('  function drawWorld()'));
   const ratedMovies = source.match(/  const ratedMovies = [^\n]+/)[0];
-  vm.runInNewContext(ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
+  const ratingValues = source.match(/  const ratingValues = [^\n]+/)[0];
+  vm.runInNewContext(ratingValues + '\n' + ratedMovies + '\n' + directorView + '\nrenderDirectors();', context);
   const picker=elements.directorTimeline.children.find(x=>x.className==='director-picker'), detail=elements.directorTimeline.children.find(x=>x.className==='director-filmography');
   return { row: picker?.children[0], detail, host: elements.directorTimeline };
 }
@@ -97,11 +98,12 @@ test('filmography excludes missing and conflicting director credits', () => {
 });
 
 
-test('zero-score films do not expose a director under the current reviewed-only rule', () => {
-  const film = { id: 14, title: '採点なしの鑑賞作品', director: 'Other Director', year: 2020, runtime: 120, rating: 0 };
-  const { row, host } = render({ records: [film], works: [film], name: 'Other Director' });
-  assert.equal(row, undefined);
-  assert.match(host.innerHTML, /監督情報がある鑑賞記録はまだありません/);
+test('zero-rated watched films expose their director and retain a zero average', () => {
+  const film = { id: 14, title: '0点の鑑賞作品', director: 'Other Director', year: 2020, runtime: 120, rating: 0 };
+  const { row, detail } = render({ records: [film], works: [film], name: 'Other Director' });
+  assert.ok(row);
+  row.listeners.click();
+  assert.match(detail.innerHTML, /0\.00 \/ 5\.0/);
 });
 
 test('a reviewed director includes every watched feature in progress', () => {

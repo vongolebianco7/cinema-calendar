@@ -28,3 +28,19 @@ test('My Cinelva counts zero-rated and unrated watched records while excluding u
  const ids=vm.runInNewContext(line+';recordMovies().map(row=>row.id)',{state});
  assert.deepEqual(Array.from(ids),[1,2]);
 });
+test('award affinity averages retain zero ratings and exclude missing ratings',()=>{
+ const page=fs.readFileSync('js/cinelva-records-page.js','utf8');
+ const line=page.split('\n').find(line=>line.includes('const scores=[...unique.values()]'));
+ const unique=new Map([['1',{id:1}],['2',{id:2}],['3',{id:3}]]);
+ const ratingById=new Map([['1',0],['2',4]]);
+ const scores=vm.runInNewContext(line+';scores',{unique,ratingById});
+ assert.deepEqual(Array.from(scores),[0,4]);
+ assert.equal(scores.reduce((a,b)=>a+b,0)/scores.length,2);
+});
+test('dashboard and director averages include zero without coercing unrated values',()=>{
+ const page=fs.readFileSync('js/cinelva-records-page.js','utf8');
+ const line=page.split('\n').find(line=>line.includes('const ratingValues ='));
+ const records=[0,4,null,undefined,'',NaN,6,-1].map(rating=>({rating}));
+ const scores=vm.runInNewContext(line+';ratingValues(records)',{records});
+ assert.deepEqual(Array.from(scores),[0,4]);
+});

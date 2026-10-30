@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "3fe7123f3740d99b277d52bb2364e0e63d25f392",
-  "verified_at": "2026-10-30T08:17:39Z",
-  "note": "PR #567 exact source head 3fe7123f3740d99b277d52bb2364e0e63d25f392 passed all 8 relevant pull-request workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit mobile cinema-comparison assertions), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, Cinemap completeness scorecard, and Check brand identity. The release adds dated official general-adult 2D tariff evidence for 13 offer rows across 12 chains; each calendar day ranks up to three distinct verified registration-free fares, keeps conditional offers separate, and labels unknown prices. Theater tariff links were corrected to match region-prefixed names and displayed even for one applicable theater. Receipt-only evidence for source 3fe7123; final-head CI is required before merge/publication. No user data, database schema, API, authentication, or billing changed."
+  "head_sha": "dfd3c58e8c107d8ef5bbc6541e163f77e9a723ad",
+  "verified_at": "2026-10-30T11:38:59.852Z",
+  "note": "PR #568 exact source passed all 9 pull-request workflows and all 22 check runs, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit reported UI/data regressions and nationwide shared controls), Reproducible backend build, mobile layout, backup safety, brand, Python contracts and completeness. Calendar event labels are escaped and external URLs require credential-free HTTPS; the complete calendar page is preserved. Local quality gate passed 456 Node tests plus Python/contracts/compliance. Receipt-only preparation; final-head CI and explicit user approval are required before production release. Physical iPhone Safari remains unverified. No storage schema, existing records, API credentials or billing changes."
 }

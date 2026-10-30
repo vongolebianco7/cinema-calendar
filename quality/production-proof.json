@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ba255d21d77eb51505be230c428be3e52f493bdd",
-  "verified_at": "2026-10-30T14:24:55.601Z",
-  "note": "Combined release candidate #578 exact source passed all9 pull-request workflows, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit, complete route/theme matrix and reported issues), Reproducible backend build, mobile layout, backup safety, full Python suite, brand and completeness. Fresh local quality gate passed489 primary Node+6dedupe plus invoked Python/data/compliance/policy. Receipt-only update after separate documentation commits, with executable source unchanged. Individual final checks and final combined-head CI remain required before preparation merge. No production approval, physical iPhone acceptance, legal clearance or complete data freshness is claimed. No production/DB/billing changes."
+  "head_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7",
+  "verified_at": "2026-10-30T21:19:20.739Z",
+  "note": "PR582 exact-source iPhone cinema readability correction passed all6 applicable pull-request workflows, including the four required Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit cinema and full route/theme matrix) and Reproducible backend build. Local shared quality passed489 primary Node+6dedupe and invoked Python/data/compliance/policy. Regression is confirmed RED on1c1eebb at390px and GREEN on this source. Independent static review found no remaining findings after minor touch-target/test-floor fixes. Receipt-only update; no new executable/data/storage changes. Final-head CI remains required. Existing user authorization covers this release display correction; physical iPhone acceptance and broader legal/data/free-quota constraints remain unverified."
 }

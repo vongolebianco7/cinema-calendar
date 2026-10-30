@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T12:10:42.884Z",
+  "updated_at": "2026-10-30T14:07:53.864Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
   "branch": "release/cinelva-ready-20261030",
-  "head_sha": "681f22a583e9af8e6b0d10aaaa58965d6e04c8f5",
+  "head_sha": "5981f2f02ec7ebc616936e5061bfdbf3010788b4",
   "pull_request": 573,
   "work_items": [
     {
@@ -906,7 +906,7 @@
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Observe #571/#570 receipt final CI and #572 source/browser CI. Integrate successful fixes into release preparation, then verify combined source and renew receipt. Do not merge #573 to main or publish without explicit approval.",
+  "next_action": "Freeze feature scope for 2026-10-31 launch. Observe #557/#558/#576/#577 receipt-final CI; integrate successful fixes into release/cinelva-ready-20261030 preserving all prior source, then require combined source CI, receipt-only proof and final CI. Resolve or disclose remaining release blockers; do not merge #573 to main or publish without explicit user approval.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1944,5 +1944,59 @@
       "main_sha": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
       "publication": "No production deployment. Integrate only final-CI-successful fixes; combined proof/final CI and explicit approval required before main/publication."
     }
+  },
+  "release_deadline_20261031": {
+    "timezone": "Asia/Tokyo",
+    "planned_release_date": "2026-10-31",
+    "status": "in_progress",
+    "feature_scope": "Existing functionality only; prioritize P0 fixes, unified candidate validation, data preservation and release readiness.",
+    "preparation_head": "5981f2f02ec7ebc616936e5061bfdbf3010788b4",
+    "merged_into_preparation": [
+      {
+        "pr": 574,
+        "sha": "1da889458e3bb1222b43de9db77cc5c1cb2f3417"
+      },
+      {
+        "pr": 575,
+        "sha": "5981f2f02ec7ebc616936e5061bfdbf3010788b4"
+      }
+    ],
+    "pending_receipt_final_ci": [
+      {
+        "pr": 557,
+        "source_sha": "7e69aae474137aa3b0cbeb90773229663f77cd31",
+        "receipt_sha": "caf7ba5674279827bc7323e0da5c2403e07410c2",
+        "status": "in_progress"
+      },
+      {
+        "pr": 558,
+        "source_sha": "f7e45d6a31d5cfc647ac5735756558e37154de38",
+        "receipt_sha": "9e012e46279a6809f8254c151d763f43203afd83",
+        "status": "in_progress"
+      },
+      {
+        "pr": 576,
+        "source_sha": "f71d8b035e614e81ed5b298d1c3f03ba7c1880df",
+        "receipt_sha": "f97ef32171ee442e43c2f6b9de1f2b279b44883a",
+        "status": "in_progress"
+      },
+      {
+        "pr": 577,
+        "source_sha": "6e7c277bef6bdb3d669c2889c25b8d98309821ba",
+        "receipt_sha": "20d8b25eaa7a8139daf452a0ad8f598ec5efac0c",
+        "status": "in_progress"
+      }
+    ],
+    "main_unchanged": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
+    "production_action": "None. Explicit approval remains required.",
+    "personal_context": "Search returned Personal context is disabled; unseen conversations cannot be marked reconciled.",
+    "closed_pr_audit": "30 recent closed PR conversation timelines and inline thread lists checked; thread lists empty (one transient #530 query succeeded on retry). This is partial historical coverage, not all closed-PR history.",
+    "remaining_gates": [
+      "Combined source and final CI plus production proof",
+      "Physical iPhone Safari acceptance",
+      "Source freshness/free quota: existing Neon suspension remains; no quota bypass",
+      "Asset and trademark rights review, private security intake and operations acceptance",
+      "Unique feedback reconciliation remains incomplete; 125 registry rows are not unique complaints"
+    ]
   }
 }

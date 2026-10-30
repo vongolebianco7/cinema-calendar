@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T14:50:45.466454+00:00",
+  "updated_at": "2026-10-30T20:53:32.382505+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "19ebe13cb99142a718ea8737be56c1284c5ce7e0",
-  "branch": "release/cinelva-ready-20261030",
-  "head_sha": "41ec239ae8658bc71a777debe2ed0ac0e3eee1c3",
-  "pull_request": 573,
+  "base_sha": "3fc4e34903a74a1108401ca01a15902b2f26f363",
+  "branch": "fix/cinema-mobile-readability-20261031",
+  "head_sha": "1c1eebb0d954fde6ba9ff2df128f4aad8c8c282c",
+  "pull_request": 582,
   "work_items": [
     {
       "id": "P0-RESTART",

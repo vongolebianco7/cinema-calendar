@@ -48,3 +48,47 @@
 /* Prefecture calendar: chain names stay visible; named cinemas live in details. */
 .discountWinner{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.4;min-height:2.8em}.discountDay{justify-content:flex-start}.discountLowest{box-shadow:inset 0 -3px 0 var(--gold,#a98b52)}.discountTable th h3{font-size:13px;margin:0 0 6px}.discountPrice small{display:block;font-size:11px;font-weight:400;white-space:normal;margin-top:6px}.discountTable .discountWay{margin-top:14px;padding-top:10px;border-top:1px solid var(--line,#8884)}.discountTable .discountWay h4{font-size:13px}.discountTable td{vertical-align:top}.discountTable th{overflow-wrap:anywhere}
 #discounts .discountDay small.discountWinner{font-size:10px;line-height:1.45;min-height:2.9em}#discounts .discountTable .discountPrice small{display:block}
+
+/* iPhone-first compact controls and daily price comparison. */
+#discounts{padding:14px 0 20px}
+#discounts h2{font-size:18px;margin-bottom:5px}
+#discounts p{font-size:12px;line-height:1.55;margin:5px 0}
+#discounts .discountControls{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:10px 0}
+#discounts .discountField{gap:4px;font-size:11px}
+#discounts .discountControls button,#discounts .discountControls select{min-height:42px;padding:7px 9px;font-size:14px}
+#discounts .discountControls .discountMuted{font-size:10px;line-height:1.35;min-height:1.35em}
+#discounts .discountCalendarNav{margin:7px 0;font-size:11px}
+#discounts .discountCalendarNav button{min-height:38px;padding:6px 8px;font-size:11px}
+#discounts .discountCalendar{gap:4px;padding:2px;margin-bottom:10px;grid-template-columns:repeat(7,minmax(42px,1fr))}
+#discounts .discountDay{position:relative;gap:1px;padding:5px 2px;min-height:96px;border-radius:7px}
+#discounts .discountDay span{font-size:10px}
+#discounts .discountDay small,#discounts .discountDay small.discountWinner{font-size:8px;line-height:1.25;min-height:1.1em}
+#discounts .discountDay b{font-size:10px;line-height:1.25}
+#discounts .discountLowest{background:rgba(205,166,66,.18);box-shadow:inset 0 0 0 2px #d7ad3e,0 0 8px rgba(215,173,62,.3);color:var(--text)}
+#discounts .discountTable{border-spacing:0 4px}
+#discounts .discountTable caption{font-size:12px;padding:4px 0}
+#discounts .discountTable tbody tr{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr) minmax(0,.8fr);gap:0 4px;padding:7px;border-radius:9px}
+#discounts .discountTable tbody th{grid-column:1;grid-row:1;min-width:0;border:0;padding:3px 4px;align-self:center}
+#discounts .discountTable tbody th h3{font-size:12px;line-height:1.25;margin:0 0 3px}
+#discounts .discountTable .discountTheaterOpen{min-height:28px;min-width:36px;padding:2px 5px;font-size:10px}
+#discounts .discountTable tbody td{grid-row:1;align-self:center;padding:3px 4px;font-size:10px}
+#discounts .discountTable tbody td:nth-of-type(1){grid-column:2;border:0}
+#discounts .discountTable tbody td:nth-of-type(2){grid-column:3;border:0}
+#discounts .discountTable tbody td:nth-of-type(1)::before,#discounts .discountTable tbody td:nth-of-type(2)::before{font-size:9px;margin-bottom:2px}
+#discounts .discountTable .discountPrice{font-size:14px;line-height:1.2;white-space:nowrap}
+#discounts .discountTable .discountPrice small{font-size:8px;line-height:1.2;margin-top:2px}
+#discounts .discountTable tbody td:last-child{grid-column:1/-1;grid-row:2;border-top:1px solid rgba(128,128,128,.2);padding:4px 2px 0}
+#discounts .discountTable .discountDetailButton{min-height:32px;padding:4px 8px;font-size:11px}
+#discounts .discountTheaterPopup{box-sizing:border-box;position:fixed;inset:auto;margin:0;width:min(88vw,360px);max-height:min(60dvh,440px);overflow:auto;padding:10px 12px;border:1px solid #948061;border-radius:10px;background:#171717;color:#f6f3ed;box-shadow:0 8px 28px #0008;z-index:10000;font-size:12px}
+#discounts .discountTheaterPopup::backdrop{background:transparent}
+#discounts .discountTheaterPopup .discountDialogHead{top:-10px;padding:4px 0}
+#discounts .discountTheaterPopup .discountDialogHead h3{font-size:13px}
+#discounts .discountTheaterPopup .discountDialogHead button{min-height:34px;padding:4px 8px;font-size:11px}
+#discounts .discountTheaterPopup ul{list-style:none;margin:5px 0;padding:0}
+#discounts .discountTheaterPopup li{padding:6px 2px;border-bottom:1px solid #ffffff20}
+#discounts .discountTheaterPopup li:last-child{border:0}
+@media(max-width:600px){#discounts .discountControls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#discounts .discountCalendar{grid-template-columns:repeat(7,minmax(42px,1fr))}#discounts .discountCalendarNav{flex-wrap:nowrap}#discounts .discountCalendarNav button{white-space:nowrap}#discounts .discountTable{width:100%;min-width:0}#discounts .discountTable tbody tr{width:100%;box-sizing:border-box}#discounts .discountTable tbody th:first-child{width:auto}}
+#discounts [hidden]{display:none!important}
+#discounts .discountDay .discountLowestBadge{position:absolute;top:3px;right:3px;margin:0;padding:1px 3px;border-radius:3px;background:#d7ad3e;color:#17130a;font-size:8px;font-style:normal;font-weight:900;line-height:1.3}
+#discounts .discountControls .discountField{position:relative}
+#discounts #discountPrefSummary{position:absolute;inset:auto auto auto 0;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

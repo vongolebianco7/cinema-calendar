@@ -57,6 +57,7 @@ on:
       - '!**/*.md'
       - '!data/availability.json'
       - '!data/awards.json'
+      - '!data/boxoffice.json'
       - '!data/director_name_readings.json'
       - '!data/directors-mobile.json'
       - '!data/director-feature-index.json'
@@ -87,7 +88,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -142,6 +143,8 @@ jobs:
           bash scripts/prepare-browser-ci.sh
           "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
@@ -259,6 +262,8 @@ jobs:
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-provider-list-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-global-search-browser.cjs || result=1
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-discovery-return-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-discovery-return-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-reported-audit-browser.cjs || result=1
           NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-ranking-bookmark-browser.cjs || result=1
@@ -274,4 +279,29 @@ jobs:
           path: |
             artifacts/reported-audit/
             artifacts/global-search/
+            artifacts/discovery-return/
+          if-no-files-found: warn
+      - name: Record requested operation performance separately from historical score
+        if: always()
+        run: |
+          result=0
+          # Compare the same harness on the same runner against the pre-index source.
+          git fetch --no-tags --depth=1 origin d439417e806ba998f5c8800ed38bb6d1bda49f03
+          before_dir="$RUNNER_TEMP/cinelva-performance-before"
+          git worktree add --detach "$before_dir" FETCH_HEAD
+          for engine in chromium webkit; do
+            (cd "$before_dir" && CINELVA_BROWSER="$engine" NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node "$GITHUB_WORKSPACE/tests/cinelva-requested-performance-browser.cjs") || result=1
+            mkdir -p artifacts/requested-performance
+            cp "$before_dir/artifacts/requested-performance/$engine.json" "artifacts/requested-performance/before-$engine.json" || result=1
+          done
+          git worktree remove --force "$before_dir"
+          NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-reported-audit/node_modules" node tests/cinelva-requested-performance-browser.cjs || result=1
+          exit "$result"
+      - name: Preserve requested operation measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: requested-performance
+          path: artifacts/requested-performance/
           if-no-files-found: warn

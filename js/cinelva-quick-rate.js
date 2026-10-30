@@ -5,8 +5,8 @@ const Records=root.CinelvaLibraryRecords;
 if(!Records)return;
 let recordCache=null,lastRecordData=null,lastLegacyData=null,lastDeletedData=null;
 const allRecords=()=>{let data,legacy,deleted;try{data=localStorage.getItem(Records.KEY);legacy=localStorage.getItem(Records.LEGACY);deleted=localStorage.getItem(Records.DELETED)}catch{}if(!recordCache||data!==lastRecordData||legacy!==lastLegacyData||deleted!==lastDeletedData){recordCache=Records.all();lastRecordData=data;lastLegacyData=legacy;lastDeletedData=deleted}return recordCache};
-root.addEventListener('cinelva-record-updated',()=>{recordCache=null});
-root.addEventListener('storage',()=>{recordCache=null});
+root.addEventListener('cinelva-record-updated',()=>{recordCache=null;localRecordIndexSource=null;localRecordIndex=null});
+root.addEventListener('storage',()=>{recordCache=null;localRecordIndexSource=null;localRecordIndex=null});
 
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
@@ -116,7 +116,7 @@ function syncDialogScore(){
  const score=Number($('cinelvaRateScore').value);
  $('cinelvaRateValue').textContent=score.toFixed(1);
  $('cinelvaRateScore').style.setProperty('--dialog-progress',(score/5*100)+'%');
- $('cinelvaRateValue').style.setProperty('color',score===0?'#fff':'#e4bd70','important');
+ $('cinelvaRateValue').style.setProperty('color',score===0?'var(--cinelva-dialog-unwatched, #fff)':'var(--cinelva-dialog-rated, #e4bd70)','important');
 }
 $('cinelvaRateSpoiler').onclick=()=>{const button=$('cinelvaRateSpoiler');button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));};
 $('cinelvaRateScore').oninput=syncDialogScore;
@@ -149,10 +149,27 @@ function syncViewingVenue(saved=''){
  select.value=saved||'';
 }
 $('cinelvaRatePlace').addEventListener('change',()=>syncViewingVenue());
+let localRecordIndexSource=null,localRecordIndex=null;
+function primeRecordSnapshot(records){
+ if(!Array.isArray(records))return false;
+ recordCache=records;
+ try{lastRecordData=localStorage.getItem(Records.KEY);lastLegacyData=localStorage.getItem(Records.LEGACY);lastDeletedData=localStorage.getItem(Records.DELETED)}catch{lastRecordData=lastLegacyData=lastDeletedData=undefined}
+ localRecordIndexSource=records;localRecordIndex=new Map();
+ for(const record of records){const key=String(record.id);if(!localRecordIndex.has(key))localRecordIndex.set(key,record)}
+ return true;
+}
 function viewingRecord(movie){
  const target=canonicalId(movie),identity=root.CinelvaMovieIdentity;
- return allRecords().find(record=>{
-  if(movie._localRecord)return String(record.id)===String(movie.id);
+ if(movie._localRecord&&localRecordIndexSource!==null)return localRecordIndex.get(String(movie.id));
+ const records=allRecords();
+ if(movie._localRecord){
+  if(localRecordIndexSource!==records){
+   localRecordIndexSource=records;localRecordIndex=new Map();
+   for(const record of records){const key=String(record.id);if(!localRecordIndex.has(key))localRecordIndex.set(key,record);}
+  }
+  return localRecordIndex.get(String(movie.id));
+ }
+ return records.find(record=>{
   const explicit=identity?.id(record)||record.tmdbId||record.tmdb_id;
   if(explicit)return String(explicit)===String(target);
   const resolved=identity?.id(identity?.resolve(record));
@@ -311,7 +328,7 @@ function attachInlineScore(button,movie) {
   try{
    const data=getBookmarks(),key=String(id),marked=!!data[key];
    if(marked)delete data[key];
-   else data[key]={id:key,title:movie.title||movie.name||'作品',poster:root.CinelvaMovieIdentity?.posterFor(movie)||movie.poster||movie.posterUrl||movie.poster_path||'',year:movie.year||String(movie.release_date||'').slice(0,4),savedAt:new Date().toISOString()};
+   else data[key]={id:key,tmdbId:String(id),title:movie.title||movie.name||'作品',poster:root.CinelvaMovieIdentity?.posterFor(movie)||movie.poster||movie.posterUrl||movie.poster_path||'',year:movie.year||String(movie.release_date||'').slice(0,4),savedAt:new Date().toISOString()};
    localStorage.setItem(bookmarkKey,JSON.stringify(data));
    syncBookmark();
    showBookmarkToast(marked?'ブックマークを解除しました':'ブックマークしました');
@@ -1315,7 +1332,20 @@ style.textContent+=`
 .cinelva-review-method select{width:100%;max-width:100%}
 .cinelva-review-method label[hidden]{display:none!important}
 `;
-root.CinelvaQuickRate={open,normalize,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
+style.textContent+=`
+/* Light-theme review dialog: readable neutral surfaces independent of dark theme. */
+html[data-theme="light"] .cinelva-rate-dialog{--cinelva-dialog-unwatched:#242521;--cinelva-dialog-rated:#765413;background:#fffefa!important;color:#242521!important;border:1px solid #d2cbc0!important;box-shadow:0 16px 46px #0004!important}
+html[data-theme="light"] .cinelva-rate-inner{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-inner label,html[data-theme="light"] .cinelva-review-header strong{color:#242521!important}
+html[data-theme="light"] .cinelva-review-header button{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-inner :is(input,textarea,select){background:#f5f2ec!important;color:#242521!important;border:1px solid #a9a397!important}
+html[data-theme="light"] .cinelva-rate-inner :is(input,textarea,select):focus-visible{outline:2px solid #8e7038!important;outline-offset:2px}
+html[data-theme="light"] .cinelva-review-score output{color:#242521!important}
+html[data-theme="light"] .cinelva-rate-actions button{background:#292a27!important;color:#fffefa!important;border:1px solid #292a27!important}
+html[data-theme="light"] .cinelva-rate-actions button:first-child{background:#f2eee6!important;color:#242521!important;border:1px solid #bcb4a8!important}
+html[data-theme="light"] .cinelva-rate-dialog .cinelva-rate-inner .cinelva-review-method{background:transparent!important}
+`;
+root.CinelvaQuickRate={open,normalize,primeRecords:primeRecordSnapshot,mountInline(target,movie){if(!target||target.dataset.gaugeMounted||!validId(canonicalId(movie)))return false;target.dataset.gaugeMounted='true';target.textContent='';const button=document.createElement('button');button.type='button';button.className='cinelva-rate-button';button.innerHTML=reviewIcon;button.setAttribute('aria-label','レビューを編集');button.onclick=e=>{e.preventDefault();e.stopPropagation();open(movie);};target.append(button);attachInlineScore(button,movie);return true;}};
 function mountRecordReviews(scope=document){const nodes=[...(scope.matches?.('.record-common-review')?[scope]:[]),...(scope.querySelectorAll?.('.record-common-review')||[])];if(!nodes.length)return;const records=allRecords();for(const slot of nodes){if(slot.dataset.gaugeMounted)continue;const movie=records.find(r=>String(r.id)===slot.dataset.recordId);if(movie)root.CinelvaQuickRate.mountInline(slot,{...movie,tmdbId:root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie))||undefined,_localRecord:!(root.CinelvaMovieIdentity?.id(movie)||root.CinelvaMovieIdentity?.id(root.CinelvaMovieIdentity?.resolve(movie)))});}}
 if(typeof MutationObserver!=='undefined'){const start=()=>{mountRecordReviews();new MutationObserver(rows=>{for(const row of rows)for(const node of row.addedNodes)if(node.nodeType===1)mountRecordReviews(node)}).observe(document.body,{childList:true,subtree:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}
 

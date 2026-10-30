@@ -19,6 +19,12 @@ test('share image is generated only from existing viewing records', () => {
   assert.doesNotMatch(share, /自由に作品を追加|映画棚を作成|コレクション/);
 });
 
+test('My Cinelva shares its loaded records with the common review dialog on every refresh',()=>{
+  const source=fs.readFileSync('js/cinelva-records-page.js','utf8');
+  assert.match(source,/const setRecords = records => \{ state\.records=records;globalThis\.CinelvaQuickRate\?\.primeRecords\?\.\(records\); \}/);
+  assert.equal((source.match(/setRecords\(Records\.all\(\)\)/g)||[]).length,6,'initial load, save, delete, import, review update and storage refresh keep the review snapshot current');
+});
+
 test('a rerelease search keeps the original catalog year and refreshes authoritative details', async () => {
   const vm = require('node:vm');
   const source = fs.readFileSync('js/cinelva-records-page.js', 'utf8');

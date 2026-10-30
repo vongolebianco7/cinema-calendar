@@ -1148,7 +1148,121 @@
           "repeatability": "recurring",
           "evening": true
         },
+          {
+          "id": "aeon-card-thanks",
+          "label": "イオンカードお客さま感謝デー",
+          "price": 1100,
+          "when": {
+            "kind": "aeonThanks"
+          },
+          "access": "card",
+          "condition": "毎月20・30日（2月は末日）。対象イオンマークのクレジットカード会員本人。一般通常料金の購入でカード提示または対象カード決済が必要。",
+          "steps": [
+            "毎月20日・30日（2月は末日）の対象上映を選ぶ",
+            "対象カードを窓口で提示、またはオンライン・券売機で対象カード決済"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/aeoncard/",
+          "feeText": "対象カードの所有が必要。ほかの割引と併用不可。",
+          "verifiedAt": "2026-10-29",
+          "repeatability": "recurring"
+        },
         {
+          "id": "aeon-plus-monday",
+          "label": "ワタシアタープラス ハッピーマンデー",
+          "price": 1100,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              1
+            ]
+          },
+          "access": "member",
+          "condition": "月曜日。ワタシアタープラス本登録済み会員本人。新潟西・常滑・大日・高松東・宇多津は実施なし。",
+          "steps": [
+            "ワタシアタープラスへ登録・ログイン",
+            "対象館の月曜日の上映で会員価格を選ぶ"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/watatheatre/",
+          "feeText": "有料会員資格が必要。会費はチケット代に含まれない。",
+          "verifiedAt": "2026-10-29",
+          "excludedTheaters": [
+            "新潟西",
+            "常滑",
+            "大日",
+            "高松東",
+            "宇多津"
+          ],
+          "repeatability": "recurring"
+        },
+        {
+          "id": "aeon-plus-first",
+          "label": "ワタシアタープラス ハッピーファースト",
+          "price": 1100,
+          "when": {
+            "kind": "monthday",
+            "days": [
+              1
+            ]
+          },
+          "access": "member",
+          "condition": "毎月1日。ワタシアタープラス本登録済み会員本人。",
+          "steps": [
+            "ワタシアタープラスへ登録・ログイン",
+            "毎月1日の対象上映で会員価格を選ぶ"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/watatheatre/",
+          "feeText": "有料会員資格が必要。会費はチケット代に含まれない。",
+          "verifiedAt": "2026-10-29",
+          "repeatability": "recurring"
+        },
+        {
+          "id": "aeon-plus-night",
+          "label": "ワタシアタープラス ハッピーナイト",
+          "price": 1300,
+          "when": {
+            "kind": "always"
+          },
+          "evening": true,
+          "access": "member",
+          "condition": "毎日20時以降に開始する対象上映。ワタシアタープラス本登録済み会員本人。",
+          "steps": [
+            "ワタシアタープラスへ登録・ログイン",
+            "20時以降に開始する対象上映を選ぶ"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/watatheatre/",
+          "feeText": "有料会員資格が必要。会費はチケット代に含まれない。",
+          "verifiedAt": "2026-10-29",
+          "repeatability": "recurring"
+        },
+        {
+          "id": "aeon-plus-wednesday",
+          "label": "ワタシアタープラス サンクスデー",
+          "price": 1100,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              3
+            ]
+          },
+          "access": "member",
+          "condition": "毎週水曜、サンクスデー実施劇場に限る。新潟西・常滑・大日・高松東・宇多津。ワタシアタープラス本登録済み会員本人。",
+          "steps": [
+            "対象のサンクスデー実施劇場を確認",
+            "水曜日の上映でワタシアタープラス会員価格を選ぶ"
+          ],
+          "sourceUrl": "https://www.aeoncinema.com/service/watatheatre/",
+          "feeText": "有料会員資格が必要。会費はチケット代に含まれない。",
+          "verifiedAt": "2026-10-29",
+          "includedTheaters": [
+            "新潟西",
+            "常滑",
+            "大日",
+            "高松東",
+            "宇多津"
+          ],
+          "repeatability": "recurring"
+        },
+      {
           "id": "benefit",
           "label": "ベネフィット・ステーション（ベネポ利用可）",
           "price": 1300,
@@ -1177,7 +1291,31 @@
       "theaterUrl": "https://109cinemas.net/",
       "note": "劇場により金額が異なります。プレミアム新宿は掲載サービスの対象外。個別の料金表を確認してください。",
       "offers": [
-        {
+          {
+          "id": "109-member-tuesday",
+          "label": "シネマポイント会員 メンバーズデイ",
+          "price": 1300,
+          "when": {
+            "kind": "weekday",
+            "days": [
+              2
+            ]
+          },
+          "access": "member",
+          "condition": "毎週火曜。対象の109シネマズ・ムービルでシネマポイント会員本人が対象。プレミアム新宿は対象外。",
+          "steps": [
+            "シネマポイント会員に登録",
+            "毎週火曜の対象上映で会員認証し、メンバーズデイ料金を選ぶ"
+          ],
+          "sourceUrl": "https://109cinemas.net/pointcard_prices.html",
+          "feeText": "入会金・年会費等の会員費用は別途必要。詳細は109シネマズ公式の最新会員条件を確認。",
+          "verifiedAt": "2026-10-29",
+          "excludedTheaters": [
+            "プレミアム新宿"
+          ],
+          "repeatability": "recurring"
+        },
+      {
           "id": "wed",
           "label": "109シネマズデイ",
           "price": 1300,

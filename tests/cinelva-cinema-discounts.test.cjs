@@ -91,7 +91,7 @@ test('national theater matching does not confuse AEON shops or premium109 with o
 });
 test('national facts cover broad chains and retain actionable primary provenance and fees',()=>{
  assert.equal(data.chains.length,14);
- for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.ok(['2026-10-26','2026-10-27'].includes(o.verifiedAt));}
+ for(const c of data.chains)for(const o of c.offers){assert.ok(o.sourceUrl.startsWith('https://'));assert.ok(o.feeText);assert.ok(o.condition);assert.ok(o.steps.length>=2);assert.match(o.verifiedAt,/^2026-10-(26|27|29)$/);}
  const now=new Date('2026-10-26T01:00:00Z');
  const r=D.guide(data,{date:'2026-12-01',chain:'tjoy'},now)[0];assert.equal(r.available.some(o=>o.id==='first'),false);assert.equal(r.publicBest.price,1000);
  assert.equal(D.guide(data,{date:'2026-10-28',chain:'109',theater:'109シネマズプレミアム新宿'},now)[0].available.length,0);

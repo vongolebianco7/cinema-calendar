@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28",
+  "updated_at": "2026-10-29",
   "scope": [
     "東京",
     "神奈川"
@@ -570,7 +570,10 @@
       "collection_method": "manual_official_announcement"
     }
   ],
-  "discovery_count": 1,
-  "last_attempt_at": "2026-10-28",
-  "curated_count": 2
+  "discovery_count": 0,
+  "last_attempt_at": "2026-10-29",
+  "curated_count": 2,
+  "collection_mode": "manual_only",
+  "automation_status": "disabled_pending_licensed_feed",
+  "verified_count": 0
 }

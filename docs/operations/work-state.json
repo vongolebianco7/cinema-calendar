@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T14:48:35.359466+00:00",
-  "status": "blocked",
+  "updated_at": "2026-10-29T23:31:39.361Z",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "branch": "docs/provider-release-verified-20261026",
-  "head_sha": "c7f7e245da77f1ed90f7a37c83b114ec84973812",
-  "pull_request": 512,
+  "base_sha": "5b2ed9516c621d2f7dcc6e4411457c3c6e99208b",
+  "branch": "docs/checkpoint-neon-endpoint-status-20261030",
+  "head_sha": "5b2ed9516c621d2f7dcc6e4411457c3c6e99208b",
+  "pull_request": 555,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -25,9 +25,10 @@
     {
       "id": "P0-241",
       "title": "Keep validation running without Vercel deployment",
-      "status": "ci_passed",
+      "status": "production_verified",
       "issue": 241,
-      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step."
+      "acceptance": "Repeatable checks run on PRs and deployment remains a separate verified release step.",
+      "ci": "PR #555 exact head bd4009d8: Autonomous quality gate, CINELVA smoke tests, and mobile layout checks all passed; checkpoint merged as 5b2ed95. Main-only Pages publication gate and current Vercel production READY state verified."
     },
     {
       "id": "P0-AUDIT",
@@ -596,6 +597,22 @@
       "title": "Restore115 omitted official premieres and Panda artwork; large record-list responsiveness",
       "status": "ci_passed",
       "acceptance": "249/249 artwork, Prime October103 individual films, FOD26 and Disney2 added, non-streaming calendar unchanged, 1000-record interactions under1second. Final CI/publication pending;10 further FOD identities remain."
+    },
+    {
+      "id": "P0-541-UNIFIED-EVENTS",
+      "title": "Unify festival/events calendar and correct credits My Cinelva navigation",
+      "status": "ci_passed",
+      "acceptance": "One festival/events tab includes all event categories; saved events mode migrates; credits menu opens my-cinelva/; adjacent-month festival bars remain operable; production is verified.",
+      "pull_request": 541,
+      "source_sha": "0eff8bf80a900927b19141f8dde57f6a9f108ff3"
+    },
+    {
+      "id": "P2-26-BOOKMARK-NOTICES",
+      "title": "Opt-in local bookmark release-date notices",
+      "status": "production_verified",
+      "issue": 239,
+      "pull_request": 548,
+      "acceptance": "On My Cinelva/watchlist open, opt-in date-based notices match explicit or unambiguous legacy TMDB identity, require official HTTPS source links, preserve records, persist dismissals and fit 390px Chromium/WebKit."
     }
   ],
   "verification": [
@@ -826,22 +843,45 @@
     {
       "check": "Nationwide actual collection and canonical production acceptance",
       "result": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
+    },
+    {
+      "check": "PR541 exact source CI",
+      "result": "All9 pull-request workflows succeeded on 0eff8bf80a900927b19141f8dde57f6a9f108ff3, including all4 publication-required workflows. Shared local quality gate passed. Focused review P2 adjacent-month bar issue reproduced, fixed and re-reviewed. Chromium/WebKit navigation and unified-calendar checks passed."
+    },
+    {
+      "check": "PR548 bookmark release-date notice, final source and production",
+      "result": "PR548 executable source b8a85bfb83dde79e7d7b4549da27550cc9fc74c5; exact-source required workflows passed, receipt-only final head da4a4dcce2752cb900aa0c176992b31c3c89771d passed Validate frontend, Autonomous quality gate, CINELVA smoke, reproducible backend, mobile layout, completeness and scorecard contract. Squash-merged f998de7e8bee72a7603c51db9a92180a453bc690; Vercel production deployment dpl_D14bYw2AfW92uojDegj8jRoi85yr READY. Production watchlist HTML references new scripts; both new JS assets and quick-rate.js verified byte-for-byte. Seven focused unit tests and local 442-test shared quality gate passed. Physical iPhone acceptance remains separate."
+    },
+    {
+      "check": "Cinema comparison #554 and post-merge data refresh 2026-10-30 JST",
+      "result": "PR #554 merged as 94e1410c719594e4837a7c30336dab01078a2534. Frontend and backend Vercel deployments are READY for this exact SHA. Update movie data run 40961767421 passed source/compliance/TMDB/dataset validation, refreshed 199/200 provider observations, then failed freshness audit at 755/1312 (57.5%) against 70%; database sync was skipped. No new data commit was found on GitHub; no data publication or DB sync is claimed."
+    },
+    {
+      "check": "Scheduled official data refresh #94 after PR #553 merge",
+      "result": "Run 40968095519 started from trigger SHA 16f2578, then commit step rebased onto current main and successfully published generated snapshots as c90db692c5c5c78d1a30fcd0619fc3a686eb17fd after PR #553 merge 887c07e. Changed only eight generated JSON snapshots (availability, awards, boxoffice, movies, extra rankings, release history, streaming, theatrical); no user ratings/bookmarks or DB schema. 199/200 availability observations refreshed; 755/1312 (57.5%) remained within 7 days vs the 70% warning threshold. Vercel frontend/backend deployments for c90db were READY; newer #554 commit 94e1410 is READY on both projects. PostgreSQL sync step failed before connection with Prisma P1001, so no DB writes were made. Do not retry until read-only DB availability diagnosis; data remains served from verified static snapshots."
+    },
+    {
+      "check": "PR #555 merged and read-only Neon quota diagnosis",
+      "result": "PR #555 merged as 5b2ed9516c621d2f7dcc6e4411457c3c6e99208b after Autonomous quality gate, CINELVA smoke tests, and mobile layout checks all passed. Neon organization reports Free plan; read-only project status reports 5,541,204,690 public-transfer bytes for a monthly period ending 2026-11-01 and the sole read/write endpoint idle/suspended since 2026-10-23. Neon documents 5 GB monthly public transfer for Free; the counter exceeds that allowance, likely explaining P1001/suspension (inference). No endpoint start, DB query/write, schema change, or sync retry."
+    },
+    {
+      "check": "Issue #241 closed after acceptance verification",
+      "result": "PR #555 exact-head Autonomous quality gate, smoke tests, and Chromium/WebKit mobile checks passed; publish-pages.yml deploys only on main after verified static build; checkpoint/resume docs are present; current Vercel production is READY. Issue #241 closed completed."
+    },
+    {
+      "check": "Superseded premiere checkpoint PR #521 closed",
+      "result": "PR #521 contained only a stale 2026-10-27 checkpoint. Its source feature is integrated on main as 42e4ce3; later snapshot/deployment and PR #548 release-notice verification supersede its publication-pending state. Closed unmerged; PR history retained."
     }
   ],
   "deployment": {
     "status": "production_verified",
-    "frontend": "1792b8c8 READY dpl_CGiEFGCWuheNzTE2xScbMpZFdmTh at unchanged cinelva.vercel.app;8canonical files HTTP200 byte-identical,including2redirect aliases.",
-    "backend": "1792b8c8 READY dpl_Fjk2dW3d8nkzoqdEm3U7mYADkq5G at unchanged backend-one-gray-94.vercel.app. Real Interstellar availability200 and read-only detail buttons confirmed after one runtime-proxy timeout/native retry.",
-    "database": "Neon free egress exhausted; actual DB writes are not restored. Reset2026-11-01T00:00:00Z; no paid upgrade/quota evasion.",
-    "latest_data": "Canonical streaming252/252 artwork and all3new FOD identities/dates verified. All249previous streaming and1176previous merged-calendar rows retained,3appended. Provider coverage remains partial.",
-    "now_playing": "Production verified. Initial100/99 inconsistency refused safely; documented equivalent read-only diagnostic validated100 titles. Direct endpoint had become consistent in successful production run40037837837, so final provenance correctly remains direct /movie/now_playing. Raw-row/pagination checks retained; daily03:13JST refresh configured, stale>36hours hidden."
+    "canonical_url": "https://cinelva.vercel.app",
+    "serving_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+    "frontend_deployment_id": "dpl_6MWy6xEwHVCndRtNynRBaGGtZ9fT",
+    "backend_deployment_id": "dpl_7tooKRDykW8Y9ypjqEGjeqbLdaRb"
   },
-  "blockers": [
-    "Neon free egress exceeded: SQL HTTP402, reset 2026-11-01T00:00:00Z; no paid upgrade or quota evasion.",
-    "Physical iPhone Safari and 5–10 independent participants unavailable; test kit prepared, not executed.",
-    "Exact origins/permissions remain unverified for remaining artwork; nine exact generated origins now verified."
-  ],
-  "next_action": "Keep zero-omission goal blocked until primary complete catalog feeds and reconciliation evidence exist;do not invent starts from observation/article dates. Maintain approved free/manual sources. Current implemented fixes are live.",
+  "blockers": [],
+  "next_action": "Inspect Update movie data run #93 step 20 failure logs and reconcile the 70% freshness threshold with the bounded 200-title/day refresh; do not lower the threshold or retry until root cause is fixed. Then continue highest-priority open P0 items.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -1720,6 +1760,100 @@
         "status": "existing one-time Cinelva production-release automation successfully updated;original MYTop10 scope retained",
         "instructions": "Fetch latestmain/workstate/proof/CI and currentquota. One normal verifiedfrontend release toexistingprojectafterrestrictionclears;no guard/rate-limit bypass,newcost,alternatehostorbackenddeploy. Preserve otherchanges;verify exactREADYsha/canonicalbytes/prefix andactualprefecture/daytap UIread-only,thenrecordproduction_verified. Stop onnew402;no repeateddeployattempts."
       }
+    }
+  },
+  "p0_release_review_20261029": {
+    "status": "production_verified",
+    "pull_request": 548,
+    "source_before_review": "90701a9c896800c6e03cee4b72960726474b9966",
+    "integrated_main": "0e94795f6342d8dcb8b390fc51485a03a1958745",
+    "review": "Independent review found wrong Best10 poster persistence via localID/TMDB collision and loss of theater location/official links. Both fixed with observed RED-to-GREEN regressions. Main integrated with real ancestry, preserving PR541 and latest now-playing.",
+    "tests": "13/13 focused (5 Best10 identity,8 theater quality); full shared quality PASS (399 primary Node,6 dedupe plus Python/contracts). Browser acceptance/source proof renewal/finalCI pending.",
+    "remaining": "Continue the remaining audit and live acceptance; existing unresolved categories remain in requested-quality-audit-20261029.md. Actual iPhone Safari and licensed data source gaps remain open.",
+    "next_action": "Run exact-head4 required workflows including mobile. Inspect browser failures. Renew production receipt only on successful source, then finalCI before merge. Preserve PR543 independent search/film-medium work.",
+    "latest_merge_sha": "f998de7e8bee72a7603c51db9a92180a453bc690"
+  },
+  "requested_quality_audit_20261029": {
+    "status": "in_progress",
+    "base_sha": "0e94795f6342d8dcb8b390fc51485a03a1958745",
+    "branch": "test/requested-performance-budgets-20261029",
+    "audit": "docs/operations/requested-quality-audit-20261029.md",
+    "validation": "Baseline full shared quality PASS; changed full shared quality PASS (393 primary Node tests,6 dedupe); focused performance5/5 RED-to-GREEN. New browser diagnostic blocked locally before navigation: no browser executable and invalid download archive. No performance measurements claimed.",
+    "next_action": "Inspect new PR CI requested-performance artifact; repair harness before baseline comparison. Reconcile PR544 (contains539, source CI successful but proof/final checks pending) and PR543 before duplicate P0 work. Preserve exact-source proof and final CI gates.",
+    "production": "Latest observed READY201b0295 PR541; no deploy from this branch. Physical iPhone acceptance pending."
+  },
+  "integrated_mobile_release_20261029": {
+    "status": "in_progress",
+    "branch": "fix/mobile-release-acceptance-20261029",
+    "integrated": [
+      "2e282130fa092ace9a9b625c18ec1de5e3014e7e",
+      "2cb2b61a3239912f819f45f7b83a9bebfc402d12",
+      "ec484c69af36c72f6e2cd5ed1d83ffab0e2c32d2",
+      "61a34e1"
+    ],
+    "scope": "Existing reviewed PR543/544/545 plus visible-only shared review mounting and explicit discovery history restoration. All film cards and storage keys preserved.",
+    "validation": "New discovery/Nolan/provider/shelf return browser assertions passed both engines on fb5950af (reported job123327539890). Main frontend caught modal light score contrast1.76 because inline important color overrode theme CSS; repaired with inherited theme variables. New initial summary no-rebuild unit RED-to-GREEN. Current local full shared quality435/435 +6dedupe +Python/contracts PASS. Event manual-only12focused Python PASS, including0network and same-identity unknown field preservation.",
+    "review": "Independent review found3 Important discovery restoration gaps; regression tests observed RED then GREEN; provider IDs now restore before metadata mount, popular shelf navigation captures state, scroll waits for both shelf fetch paths and user interaction cancels delayed jump.",
+    "performance": "First integrated same-runner WebKit1000 before3457/701/530/765ms -> after2519/183/114/269ms (initial/tab/cache/review). Tab/cache meet targets, initial/review still miss. Single synthetic sample, not physical iPhone or all-target completion. New duplicate-summary-render reduction awaits CI comparison.",
+    "next_action": "Run new integrated PR exact-source CI, inspect new browser assertions and before/after performance. Repair failures without weakening acceptance. Then renew source proof only after all4 required workflows pass, require finalheadCI, merge permitted scope and verify existing production deployment. Continue remaining28-task gates.",
+    "compliance": "Inherited event refresh HTML JSON-LD/news-discovery scraping contradicted user prohibition. Removed acquisition code and both schedule triggers, local manual-only atomic merge preserves32/30 snapshot records, timestamps and omitted fields; no licensed automated event feed configured. No new source permission or cost."
+  },
+  "release_notices_20261029": {
+    "status": "production_verified",
+    "pull_request": 548,
+    "source_sha": "b8a85bfb83dde79e7d7b4549da27550cc9fc74c5",
+    "receipt_head_sha": "da4a4dcce2752cb900aa0c176992b31c3c89771d",
+    "merge_sha": "f998de7e8bee72a7603c51db9a92180a453bc690",
+    "deployment_id": "dpl_D14bYw2AfW92uojDegj8jRoi85yr",
+    "validation": "Source required workflows passed; final-head workflows passed. Local quality gate442 Node tests plus Python/contracts; seven focused notice tests; hosted Chromium/WebKit 390px. Production deployment READY and changed scripts byte-verified.",
+    "scope": "No background or push notifications; checks happen only on page/watchlist open and only for expected Japan date. Uses existing curated official HTTPS-linked rows; no new feed, scraping, API key, recurring job, or plan change.",
+    "remaining": "Official theatrical dataset rows without source_url are intentionally skipped; licensed source coverage and physical iPhone Safari remain pending."
+  },
+  "continued_work_20261030": {
+    "status": "in_progress",
+    "updated_at": "2026-10-29T23:31:39.361Z",
+    "main_sha": "5b2ed9516c621d2f7dcc6e4411457c3c6e99208b",
+    "cinema_comparison": {
+      "status": "production_verified",
+      "pull_request": 554,
+      "merge_sha": "94e1410c719594e4837a7c30336dab01078a2534",
+      "frontend_deployment": "dpl_6MWy6xEwHVCndRtNynRBaGGtZ9fT",
+      "backend_deployment": "dpl_7tooKRDykW8Y9ypjqEGjeqbLdaRb",
+      "acceptance": "Compact controls, no duplicate visible selects/date, daily low-price badge, unlisted text, two prices beside series, and non-modal theater popover. Exact-head CI and local quality gate passed."
+    },
+    "data_refresh": {
+      "status": "blocked",
+      "workflow_run": 40968095519,
+      "fresh_observations": "755/1312 (57.5%)",
+      "required_threshold": "70%",
+      "provider_updates": "199/200",
+      "database_sync": "blocked: endpoint suspended; Free-plan transfer counter exceeds published allowance; no DB writes",
+      "publication": "generated snapshot commit and static production deployment verified; database sync not verified",
+      "next_action": "No DB retry before the 2026-11-01 quota reset. After reset, check usage/endpoint read-only and make one bounded sync only if Free quota is available; otherwise continue with static snapshots and unrelated work.",
+      "trigger_sha": "16f2578d2d77df4e0fa8bc306de8336141576646",
+      "data_commit": "c90db692c5c5c78d1a30fcd0619fc3a686eb17fd",
+      "pr553_merge": "887c07e620989607f681be4f006b68f605645d6a",
+      "static_deployments_ready": [
+        "dpl_37KgqnaXh7kdVrFFNhGhC59u8tet",
+        "dpl_8vGWRVxqwDjZzmUFtdRwK3Vk5Uvy"
+      ]
+    },
+    "open_counts": {
+      "issues": 5,
+      "pull_requests": 8,
+      "drafts": 2
+    },
+    "next_action": "Continue safe independent P0 work and exact-head PR review. Recheck Neon Free-plan transfer quota after 2026-11-01; do not start DB compute or retry sync before Free quota is available.",
+    "endpoint_diagnosis": {
+      "status": "read_only_quota_blocker",
+      "project": "cinema-days",
+      "plan": "free",
+      "endpoint_state": "idle/suspended; suspended_at 2026-10-23",
+      "measured_public_transfer_bytes": 5541204690,
+      "free_monthly_transfer_allowance": "5 GB per project",
+      "usage_period_end": "2026-11-01T00:00:00Z",
+      "assessment": "The returned transfer counter exceeds the published Free allowance; this likely explains the suspended endpoint and P1001. This is an inference from read-only status, not a direct Neon suspension reason.",
+      "action": "Do not start compute or retry DB sync before quota reset. Recheck plan usage and endpoint status after 2026-11-01; only attempt one bounded sync if the project remains Free and has available quota."
     }
   }
 }

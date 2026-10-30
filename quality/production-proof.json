@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "dfd3c58e8c107d8ef5bbc6541e163f77e9a723ad",
-  "verified_at": "2026-10-30T11:38:59.852Z",
-  "note": "PR #568 exact source passed all 9 pull-request workflows and all 22 check runs, including Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit reported UI/data regressions and nationwide shared controls), Reproducible backend build, mobile layout, backup safety, brand, Python contracts and completeness. Calendar event labels are escaped and external URLs require credential-free HTTPS; the complete calendar page is preserved. Local quality gate passed 456 Node tests plus Python/contracts/compliance. Receipt-only preparation; final-head CI and explicit user approval are required before production release. Physical iPhone Safari remains unverified. No storage schema, existing records, API credentials or billing changes."
+  "head_sha": "7e69aae474137aa3b0cbeb90773229663f77cd31",
+  "verified_at": "2026-10-30T14:06:22.453Z",
+  "note": "PR #557 exact source passed all 6 pull-request workflows, including Autonomous quality gate, CINELVA smoke tests, Validate frontend Chromium/WebKit and Reproducible backend build. Receipt-only commit; final-head CI and combined release verification remain required. Preparation branch only; production publication requires explicit user approval. No physical iPhone Safari acceptance or blanket legal/data clearance is claimed."
 }

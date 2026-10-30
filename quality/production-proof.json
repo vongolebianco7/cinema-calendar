@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "c81ebf67fcd050c74be5f16e3d4316278e1e76e0",
-  "verified_at": "2026-10-30T04:51:19Z",
-  "note": "PR #565 exact source head c81ebf67fcd050c74be5f16e3d4316278e1e76e0: Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build, CINELVA mobile layout, backup safety, brand identity, and Cinemap completeness all passed; Vercel backend status success. Mobile comparison rows now use compact three-column layout and versioned CSS/UI assets to bypass browser cache. Receipt-only evidence; final-head CI required before merge/publication. No user data, database schema, API, authentication or billing changed."
+  "head_sha": "68d2ecff8f38507c5f3dd3c8d73a471929c98195",
+  "verified_at": "2026-10-30T05:30:00Z",
+  "note": "PR #566 exact source head 68d2ecff8f38507c5f3dd3c8d73a471929c98195: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including My Cinelva mobile browser journey), Reproducible backend build, CINELVA mobile layout smoke, CINELVA backup safety, brand identity, and Cinemap completeness all passed. Cloudflare Pages preview for the exact source head succeeded (8e512c94.cinema-calendar.pages.dev). Mobile cinema discount comparison now displays separate cards in two columns on phone widths and three columns on small-tablet widths while retaining three fare fields inside each card; HTML asset query keys were bumped to 20261030-chain-grid. Receipt-only evidence; final-head CI required before merge/publication. No user data, database schema, API, authentication or billing changed."
 }

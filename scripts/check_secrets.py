@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 
 PATTERNS = {
+    'tmdb_literal_key': re.compile(rb'''\b(?:TMDB_API_KEY|api_key)[\"']?\s*(?:=|:)\s*[\"']?[0-9a-f]{32}(?![0-9a-f])''', re.I),
     'github_token': re.compile(rb'\b(?:gh[pousr]_[A-Za-z0-9]{36,255}|github_pat_[A-Za-z0-9_]{60,255})\b'),
     'aws_access_id': re.compile(rb'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b'),
     'private_key': re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----'),

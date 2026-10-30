@@ -7,7 +7,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
  const engine=process.env.CINELVA_BROWSER||'chromium';
  const movies=Array.from({length:10},(_,i)=>({id:100+i,tmdbId:100+i,title:i?'映画 '+i:'ウルフ・オブ・ウォールストリート',year:2013,director:'Hidden Director',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg',score:8,votes:100,watched:true,rating:5,watchedAt:'2026-10-30'}));
  try{
-  await waitForLocalServer(port);browser=await require('playwright')[engine].launch();fs.mkdirSync('artifacts/mobile-feedback',{recursive:true});
+  await waitForLocalServer(port);browser=await require('playwright')[engine].launch();fs.mkdirSync('artifacts/reported-audit/mobile-feedback',{recursive:true});
   for(const width of [320,390,1280])for(const theme of ['light','dark']){
    const context=await browser.newContext({viewport:{width,height:844},colorScheme:theme});
    await context.addInitScript(({theme,movies})=>{localStorage.setItem('cinelva-theme-v1',theme);localStorage.setItem('cinemap-my-list',JSON.stringify(movies));localStorage.setItem('cinelva-library-records-v2',JSON.stringify(Object.fromEntries(movies.map(m=>[m.id,m]))));},{theme,movies});
@@ -27,7 +27,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
       await page.evaluate(({format,layout})=>{document.getElementById('format').value=format;document.getElementById('layout').value=layout;drawArtwork(picks);},{format,layout});
       assert.ok(await page.locator('#artCanvas').getAttribute('aria-label'));
      }
-     await page.selectOption('#format','portrait');await page.selectOption('#layout','double');
+     await page.selectOption('#format','portrait');await page.selectOption('#layout','double');await page.evaluate(()=>drawArtwork(picks));
      await page.waitForFunction(()=>artworkReady());
      assert.ok(await page.locator('#artCanvas').evaluate(c=>c.toDataURL('image/png').startsWith('data:image/png')),'CORS-safe PNG');
      assert.doesNotMatch(await page.locator('#artCanvas').getAttribute('aria-label'),/Hidden Director|2013/);
@@ -42,7 +42,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
      if(theme==='light')assert.equal(await cards.first().locator('.rating-caption').first().evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(245, 211, 108)');
     }
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),route+' no overflow');
-    await page.screenshot({path:`artifacts/mobile-feedback/${engine}-${theme}-${width}-${route.replace(/\W/g,'_')}.png`,fullPage:route==='my-best10.html'});
+    await page.screenshot({path:`artifacts/reported-audit/mobile-feedback/${engine}-${theme}-${width}-${route.replace(/\W/g,'_')}.png`,fullPage:route==='my-best10.html'});
    }
    assert.deepEqual(errors,[]);await context.close();
   }

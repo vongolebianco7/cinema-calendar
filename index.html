@@ -315,13 +315,15 @@ function streamingReleaseServices(){
  const extras=found.filter(s=>!STREAMING_SERVICES.includes(s)&&s!=="WOWOW").sort((a,b)=>a.localeCompare(b,"ja"));
  return [...STREAMING_SERVICES,...extras]
 }
+function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c]))}
+function safeCalendarUrl(value){try{const url=new URL(String(value));return url.protocol==="https:"&&!url.username&&!url.password?esc(url.href):""}catch{return ""}}
 function renderChips(){
  let tvPreferred=["日本テレビ","テレビ朝日","TBS","テレビ東京","フジテレビ","NHK総合"];
  let tvFound=[...new Set(movies.filter(m=>m.event==="tv"&&m.service).map(m=>m.service))];
  let tvExtras=tvFound.filter(x=>!tvPreferred.includes(x));
  let ss=mode==="events"?["すべて","東京","神奈川","千葉","その他"]:mode==="streaming"?["すべて",...streamingReleaseServices()]:mode==="theatrical"?["すべて","通常","リバイバル","午前十時"]:mode==="tv"?["すべて",...tvPreferred,...tvExtras]:mode==="festival"?["すべて","国内映画祭","海外映画祭","映画賞","国内イベント","屋外上映"]:["すべて"];
  if(!ss.includes(active))active="すべて";
- $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+s+'">'+s+'</button>').join("");
+ $("#chips").innerHTML=ss.map(s=>'<button class="chip '+(s===active?'active':'')+'" data-s="'+esc(s)+'">'+esc(s)+'</button>').join("");
  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{active=b.dataset.s;localStorage.setItem("cinemaNow.active",active);render()})
 }
 function cinelvaCastLinks(names){return (names||[]).filter(Boolean).map(person=>{const name=typeof person==='string'?person:String(person.name||'');const safe=name.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));return '<a href="https://www.themoviedb.org/search/person?query='+encodeURIComponent(name)+'" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="color:#cdbef5;text-decoration:underline">'+safe+'</a>';}).join('、')}
@@ -517,16 +519,17 @@ function renderOutdoorCalendar(){
   const spans=shown.map((g,lane)=>{
    const a=new Date(g.first+"T00:00:00"),z=new Date(g.last+"T00:00:00"),left=a>ws?a:ws,right=z<we?z:we;
    const from=((left.getDay()+6)%7)+1,to=((right.getDay()+6)%7)+2;
-   return '<div class="festivalSpan '+(g.kind==="映画賞"?"award":g.kind==="海外映画祭"?"overseas":g.kind==="国内映画祭"?"domestic":"event")+'" data-outdoor="'+encodeURIComponent(g.event_id||g.name)+'" style="grid-column:'+from+' / '+to+';grid-row:1;margin-top:'+(29+lane*32)+'px" title="'+g.name+'">'+(a<ws?'← ':'')+g.name+(z>we?' →':'')+'</div>'
+   return '<div class="festivalSpan '+(g.kind==="映画賞"?"award":g.kind==="海外映画祭"?"overseas":g.kind==="国内映画祭"?"domestic":"event")+'" data-outdoor="'+encodeURIComponent(g.event_id||g.name)+'" style="grid-column:'+from+' / '+to+';grid-row:1;margin-top:'+(29+lane*32)+'px" title="'+esc(g.name)+'">'+(a<ws?'← ':'')+esc(g.name)+(z>we?' →':'')+'</div>'
   }).join("");
   html+='<div class="festivalWeek '+(sameDay(ws,currentWeekStart())?'isCurrentWeek':'')+'">'+cells+spans+'</div>'
  }
  const y=view.getFullYear(),m=view.getMonth(),min=y+"-"+String(m+1).padStart(2,"0")+"-01",max=y+"-"+String(m+1).padStart(2,"0")+"-"+String(new Date(y,m+1,0).getDate()).padStart(2,"0");
  html+='<div class="outdoorEventList">';
  for(const g of all.filter(g=>g.first<=max&&g.last>=min)){
-  html+='<section class="outdoorEventItem"><div class="small">'+g.first+' 〜 '+g.last+' · '+g.kind+(g.area?' · '+g.area:'')+'</div><h3>'+g.name+'</h3><div class="small">'+g.place+'</div>'+(g.overview?'<p class="small">'+String(g.overview).replace(/</g,'&lt;')+'</p>':'')+(g.url?'<a href="'+g.url+'" target="_blank" rel="noopener noreferrer">公式情報 ↗</a>':'');
-  if(g.visual_url)html+='<img src="'+g.visual_url+'" alt="" loading="lazy" style="max-width:100%;max-height:180px;object-fit:contain">';
-  if(g.trailer_url)html+='<a href="'+g.trailer_url+'" target="_blank" rel="noopener noreferrer">予告編を見る ↗</a>';
+  const sourceUrl=safeCalendarUrl(g.url),visualUrl=safeCalendarUrl(g.visual_url),trailerUrl=safeCalendarUrl(g.trailer_url);
+  html+='<section class="outdoorEventItem"><div class="small">'+esc(g.first)+' 〜 '+esc(g.last)+' · '+esc(g.kind)+(g.area?' · '+esc(g.area):'')+'</div><h3>'+esc(g.name)+'</h3><div class="small">'+esc(g.place)+'</div>'+(g.overview?'<p class="small">'+esc(g.overview)+'</p>':'')+(sourceUrl?'<a href="'+sourceUrl+'" target="_blank" rel="noopener noreferrer">公式情報 ↗</a>':'');
+  if(visualUrl)html+='<img src="'+visualUrl+'" alt="" loading="lazy" style="max-width:100%;max-height:180px;object-fit:contain">';
+  if(trailerUrl)html+='<a href="'+trailerUrl+'" target="_blank" rel="noopener noreferrer">予告編を見る ↗</a>';
   const awardOrg=festivalAwardOrg(g.name);if(awardOrg)html+='<a href="rankings.html?axis=awards&year='+encodeURIComponent(g.first.slice(0,4))+'&award='+encodeURIComponent(awardOrg)+'">受賞作品を見る</a>';
   if(g.films.length){
    html+='<div class="outdoorFilmGrid">';

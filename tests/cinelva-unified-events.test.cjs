@@ -13,7 +13,12 @@ test('unified calendar preserves festivals, awards, domestic events and outdoor 
  const nodes={};const el=s=>nodes[s]||(nodes[s]={innerHTML:'',classList:{remove(){},add(){}}});
  const ctx={view:new Date(2026,9,1),active:'すべて',outdoorEvents:[{event_id:'out',name:'屋外上映',date:'2026-10-10',movie:'上映作品',area:'東京',place:'公園'}],festivalEvents:['国内映画祭','海外映画祭','映画賞','国内イベント'].map(service=>({title:service,date:'2026-10-10',service})),document:{querySelector:el,querySelectorAll:()=>[]},$:el,monthPageStart:()=>new Date(2026,8,28),monthPageWeekCount:()=>5,dayColorClass:()=>'',sameDay:()=>false,currentWeekStart:()=>new Date(),mountCalendarOutdoorReviews(){},festivalAwardOrg:()=>'',window:{}};
  vm.createContext(ctx);
- vm.runInContext(html.slice(html.indexOf('function renderOutdoorCalendar(){'),html.indexOf('\nfunction renderCal(){')),ctx);
+ const escStart=html.indexOf('function esc(');
+ const escEnd=html.indexOf('\nfunction safeCalendarUrl(',escStart);
+ const safeStart=escEnd+1;
+ const safeEnd=html.indexOf('\nfunction ',safeStart+1);
+ const helpers=html.slice(escStart,escEnd)+'\n'+html.slice(safeStart,safeEnd)+'\n';
+ vm.runInContext(helpers+html.slice(html.indexOf('function renderOutdoorCalendar(){'),html.indexOf('\nfunction renderCal(){')),ctx);
  ctx.renderOutdoorCalendar();
  for(const label of ['国内映画祭','海外映画祭','映画賞','国内イベント','屋外上映','上映作品'])assert.ok(nodes['#dates'].innerHTML.includes(label),label);
  ctx.active='海外映画祭';ctx.renderOutdoorCalendar();

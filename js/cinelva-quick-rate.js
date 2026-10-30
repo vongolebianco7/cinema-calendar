@@ -359,14 +359,15 @@ function attachInlineScore(button,movie) {
   const watched=Boolean(rec&&rec.watched!==false);
   const rated=watched&&rec.rating!==null&&rec.rating!==undefined&&rec.rating!==''&&Number.isFinite(Number(rec.rating));
   const score=!watched?'未鑑賞':rated?Number(rec.rating).toFixed(1):'未評価';
-  personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
+  personal.innerHTML='<span class="rating-caption">MY</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
   personal.classList.toggle('is-unwatched',!watched);
+  controls.classList.toggle('is-watched',watched);
   personal.style.setProperty('color',watched?'#e4bd70':'#aab0bb','important');
  };
  const tmdbScore=Number(movie?.vote_average??movie?.voteAverage??movie?.tmdbRating??movie?.score);
  const votes=movie?.vote_count??movie?.voteCount??movie?.votes;
  const validTmdb=Number.isFinite(tmdbScore)&&tmdbScore>0&&votes!==0;
- audience.innerHTML='<span class="rating-caption">TMDB評価</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'-';
+ audience.innerHTML='<span class="rating-caption">TMDB</span><span class="rating-value"></span>';audience.querySelector('.rating-value').textContent=validTmdb?(tmdbScore/2).toFixed(1):'-';
  audience.classList.toggle('is-unrated',!validTmdb);
  if(!validTmdb&&typeof IntersectionObserver!=='undefined'){
   const observer=new IntersectionObserver(entries=>{

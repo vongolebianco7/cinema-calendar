@@ -287,3 +287,32 @@ body .availabilityUnknown{color:var(--muted)}
 body .cinelva-rate-wrap,body .cinelva-discover-review-wrap{display:flex;flex-direction:column;min-width:0;height:100%;box-sizing:border-box}
 body .cinelva-rate-wrap>.cinelva-rating-controls,body .cinelva-discover-review-wrap>.cinelva-rating-controls{margin-top:auto!important;flex-shrink:0}
 .festivalSpan.award{background:#574029;border-color:#a7854c;color:#fff}
+
+/* Shared brand typography, independent of the current page. */
+body .gTop .gBrand .gBrandWord,body .gDrawerHead .gBrand .gBrandWord{
+ font:600 21px/1 Georgia,"Times New Roman",serif!important;letter-spacing:-.045em!important;white-space:nowrap
+}
+@media(max-width:370px){body .gTop .gBrand .gBrandWord,body .gDrawerHead .gBrand .gBrandWord{font-size:18px!important}}
+/* Highlight the complete personal-rating row, including its eye button. */
+html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-personal,
+html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-personal :is(.rating-caption,.rating-value),
+html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button{
+ color:#624600!important;background:#f5d36c!important;
+}
+html[data-theme="light"] .cinelva-rating-controls.is-watched{
+ background:linear-gradient(to bottom,#f5d36c 0 50%,#eeeae2 50% 100%)!important;
+}
+html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-personal,
+html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-personal :is(.rating-caption,.rating-value),
+html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button{color:#f3c84e!important}
+html body .cinelva-rating-controls-no-gauge .rating-caption{font-size:10px!important;letter-spacing:0!important;white-space:nowrap!important}
+html[data-theme="light"] #list .item{background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
+html[data-theme="light"] #list .item :is(b,a){color:var(--text)!important}
+html[data-theme="light"] #list .compactMovieMeta,html[data-theme="light"] #list .directorName{color:var(--muted)!important}
+html[data-theme="light"] :is(.candidateShelf,.designPicker,.movieEditPanel){background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
+html[data-theme="light"] :is(.candidateCard,.candidateShelf){background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
+html[data-theme="light"] :is(.candidateHead,.candidateCard b,.movieEditPanel label){color:var(--text)!important}
+html[data-theme="light"] :is(.templateHint,.completionHint){color:var(--muted)!important}
+/* Five phone columns cannot fit a label, score and action without crushing text. */
+@media(max-width:600px){#summaryView #csTop .cs-posters{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px 8px!important}}
+@media(max-width:360px){#summaryView #csTop .cs-posters{grid-template-columns:repeat(2,minmax(0,1fr))!important}}

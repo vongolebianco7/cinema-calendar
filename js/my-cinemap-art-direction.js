@@ -50,7 +50,7 @@
     #list .item:nth-child(-n+5){grid-column:1!important}#list .item:nth-child(n+6){grid-column:2!important}
     #list .item:nth-child(1),#list .item:nth-child(6){grid-row:1!important}#list .item:nth-child(2),#list .item:nth-child(7){grid-row:2!important}
     #list .item:nth-child(3),#list .item:nth-child(8){grid-row:3!important}#list .item:nth-child(4),#list .item:nth-child(9){grid-row:4!important}#list .item:nth-child(5),#list .item:nth-child(10){grid-row:5!important}
-    #list .item{display:grid!important;grid-template-columns:20px 38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;min-width:0!important;min-height:0!important;padding:7px 6px!important;border:1px solid #292929!important;border-radius:9px!important;background:#111!important;align-items:start!important;column-gap:6px!important;overflow:hidden!important}
+    #list .item{display:grid!important;grid-template-columns:20px 38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;min-width:0!important;min-height:0!important;padding:7px 6px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:var(--panel)!important;color:var(--text)!important;align-items:start!important;column-gap:6px!important;overflow:hidden!important}
     #list .item>:nth-child(1){grid-column:1!important;grid-row:1!important;align-self:start!important;font-size:11px!important;line-height:1.3!important}
     #list .item>:nth-child(2){display:block!important;grid-column:2!important;grid-row:1!important;width:38px!important;height:52px!important;object-fit:cover!important;border-radius:4px!important}
     #list .item>:nth-child(3){grid-column:3!important;grid-row:1!important;min-width:0!important;width:100%!important;max-width:100%!important;white-space:normal!important;word-break:keep-all!important;overflow-wrap:anywhere!important;writing-mode:horizontal-tb!important;line-height:1.3!important;font-size:11px!important}
@@ -133,7 +133,7 @@
       const text=node.textContent||'';
       if(!text.includes('ポスター')&&!text.includes('場面写真')&&!text.includes('再配布の許諾'))return;
       if(node.classList.contains('exportLegal')){node.remove();return}
-      node.textContent='画像は作品名・公開年・監督名・順位で作成します。';
+      node.textContent='画像はポスター・作品名・順位で作成します。';
     });
   }
 
@@ -211,7 +211,7 @@
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20261016-cinelva-case';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20261031-mobile-feedback';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,scheduleDirectorHydration,mountFontPicker,mountCinemaTemplates,removeDeprecatedTemplates,markEditorRanking,bindExportControlsToEnhancedRender,bindLightweightTextInputs,scheduleArtworkRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

@@ -198,6 +198,9 @@ html[data-theme="light"] .cinelva-rating-controls.cinelva-rating-controls-no-gau
 html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-actions .cinelva-rate-button {
   color:#242521!important;
 }
+html[data-theme="light"] .cinelva-rating-controls .cinelva-rating-actions .cinelva-rate-button.is-watched {
+  color:#806027!important;
+}
 html[data-theme="light"] .cinelva-rating-controls .rating-caption,
 html[data-theme="light"] .cinelva-rating-controls .rating-label { color:#64645d!important; }
 html[data-theme="light"] .cinelva-rating-controls .rating-value { color:#242521!important; }

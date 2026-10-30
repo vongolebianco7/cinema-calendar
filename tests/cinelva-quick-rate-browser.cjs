@@ -1,5 +1,6 @@
 const { waitForLocalServer } = require("./helpers/local-server.cjs");
 const fs = require('node:fs');
+const {assertTextContrast}=require('./helpers/text-contrast.cjs');
 const { chromium, webkit } = require("playwright"),
   { spawn } = require("child_process"),
   net = require("net"),
@@ -133,6 +134,21 @@ const { chromium, webkit } = require("playwright"),
     await eye.waitFor();
     assert.match(await page.locator('#grid .cinelva-rating-personal').first().innerText(),/0\.0/);
     assert.equal(await eye.evaluate(el=>el.classList.contains('is-watched')),true);
+    fs.mkdirSync('artifacts/route-audit/zero-rating',{recursive:true});
+    for(const theme of ['light','dark']){
+      await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+      await assertTextContrast(page,['#grid .cinelva-rating-personal .rating-value'],`zero rating ${theme}`);
+      const colors=await eye.evaluate(el=>{
+        el.style.transition='none';
+        const watched=getComputedStyle(el).color;
+        el.classList.remove('is-watched');
+        const unwatched=getComputedStyle(el).color;
+        el.classList.add('is-watched');
+        return {watched,unwatched};
+      });
+      assert.notEqual(colors.watched,colors.unwatched,`${theme} eye visibly distinguishes watched state`);
+      await page.screenshot({path:`artifacts/route-audit/zero-rating/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-390.png`});
+    }
     assert.equal(
       await bookmark.getAttribute("aria-pressed"),
       "true",

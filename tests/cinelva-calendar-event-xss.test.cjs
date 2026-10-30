@@ -4,12 +4,11 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 
 const html = fs.readFileSync('index.html', 'utf8');
-function functionSource(name, nextName) {
+function functionSource(name) {
   const start = html.indexOf(`function ${name}(`);
   assert.notEqual(start, -1, `${name} must be present`);
-  const end = html.indexOf(`\nfunction ${nextName}(`, start + 1);
-  assert.notEqual(end, -1, `${nextName} must follow ${name}`);
-  return html.slice(start, end);
+  const next = html.slice(start).search(/\n(?:async )?function [\w$]+\s*\(/);
+  return html.slice(start, next < 0 ? html.length : start + next);
 }
 
 test('calendar chip labels render external service names as text', () => {
@@ -23,7 +22,7 @@ test('calendar chip labels render external service names as text', () => {
     STREAMING_SERVICES: [], Set, $,
     document: { querySelectorAll: () => [] },
   };
-  vm.runInNewContext(functionSource('esc', 'safeCalendarUrl') + '\n' + functionSource('safeCalendarUrl', 'renderChips') + '\n' + functionSource('streamingReleaseServices', 'renderChips') + '\n' + functionSource('renderChips', 'cinelvaCastLinks') + '\n;renderChips();', context);
+  vm.runInNewContext(functionSource('esc') + '\n' + functionSource('safeCalendarUrl') + '\n' + functionSource('streamingReleaseServices') + '\n' + functionSource('renderChips') + '\n;renderChips();', context);
   const output = nodes.get('#chips').innerHTML;
   assert.ok(!output.includes('<img src=x onerror=alert(1)>'));
   assert.ok(output.includes('&lt;img src=x onerror=alert(1)&gt;'));
@@ -56,7 +55,7 @@ test('calendar event content is escaped and only HTTPS links become active', () 
     sameDay: () => false, currentWeekStart: () => new Date(2026, 8, 28), dayColorClass: () => '',
     festivalAwardOrg: () => null, mountCalendarOutdoorReviews() {}, openMovie() {},
   };
-  vm.runInNewContext(functionSource('esc', 'safeCalendarUrl') + '\n' + functionSource('safeCalendarUrl', 'renderChips') + '\n' + functionSource('renderOutdoorCalendar', 'renderCal') + '\n;renderOutdoorCalendar();', context);
+  vm.runInNewContext(functionSource('esc') + '\n' + functionSource('safeCalendarUrl') + '\n' + functionSource('renderOutdoorCalendar') + '\n;renderOutdoorCalendar();', context);
   const output = nodes.get('#dates').innerHTML;
   assert.ok(!output.includes(payload));
   assert.ok(!output.includes('<img src=x onerror=alert(2)>'));

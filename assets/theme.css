@@ -302,7 +302,7 @@ html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-acti
 html body .cinelva-rating-controls-no-gauge .rating-caption{font-size:10px!important;letter-spacing:0!important;white-space:nowrap!important}
 html[data-theme="light"] #list .item{background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
 html[data-theme="light"] #list .item :is(b,a){color:var(--text)!important}
-html[data-theme="light"] #list .compactMovieMeta,html[data-theme="light"] #list .directorName{color:var(--muted)!important}
+html[data-theme] #list .compactMovieMeta,html[data-theme] #list .directorName{color:var(--muted)!important}
 html[data-theme="light"] :is(.candidateShelf,.designPicker,.movieEditPanel){background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
 html[data-theme="light"] :is(.candidateCard,.candidateShelf){background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
 html[data-theme="light"] :is(.candidateHead,.candidateCard b,.movieEditPanel label){color:var(--text)!important}

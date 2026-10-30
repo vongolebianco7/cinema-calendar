@@ -12,7 +12,7 @@ function auth(url:URL){
  return token||key?headers:null;
 }
 export async function GET(request:Request){const limited=rateLimited(request,90);if(limited)return limited;
- const p=new URL(request.url).searchParams,page=Math.min(Math.max(Number(p.get("page")||1),1),500);
+ const p=new URL(request.url).searchParams,rawPage=p.get("page")||"1";if(!/^[1-9]\d{0,2}$/.test(rawPage)||Number(rawPage)>500)return json({movies:[],error:"Invalid page"},{status:400,headers:{"Cache-Control":"no-store"}});const page=Number(rawPage);
  const url=new URL(TMDB_BASE+"/discover/movie");
  url.searchParams.set("language","ja-JP");url.searchParams.set("region","JP");url.searchParams.set("include_adult","false");url.searchParams.set("include_video","false");url.searchParams.set("page",String(page));
  const sort=p.get("sort")||"popularity.desc";url.searchParams.set("sort_by",sort);

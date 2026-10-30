@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 31957)
-Total output lines: 1885
-
 {
   "schema_version": 1,
   "updated_at": "2026-10-30T07:57:12Z",
@@ -777,7 +774,63 @@ Total output lines: 1885
     },
     {
       "check": "Director data retained after UI integration",
-   …1957 tokens truncated…uota blockers. No unverified completion or user results invented."
+      "result": "GitHub compare fd8722e3...f4109367f6487a0f0cea1c0ea46ea9942a90177f includes onlyCSS/quick-rate/browser/proof/docs; neither director JSON changed. Published901 persons/11087 works retained."
+    },
+    {
+      "check": "Executor recovery and safe artifact fallback",
+      "result": "Local executor disconnected and returned environment_offline on three checks. No lost source: f11/176 source+receipt saved remotely. A bounded QA-only branch downloaded existing run39740981085 artifact12409767655 via GitHub actions/download-artifact, preserved exact8 source PNGs plus overview/footer comparisons, and made them readable through base64 GitHub file API. Run39748667542 success. Latest4profiles and both comparison sheets reviewed before merge. QA branch/workflow was not merged into production main."
+    },
+    {
+      "check": "Calendar incident source repair and independent screenshot review",
+      "result": "PR473 merged0f0250ff. Source ad574 all7 workflows passed. Finalafde required4/mobile/Python/contract passed after a package-mirror timeout rerun. Optional performance score failed1081/1064ms against1000ms; independent476source passed991/944ms with no threshold change. Actual light detail title1.003:1 reproduced and repaired; Chromium/WebKit rendered headings/dates/body/links/film text assertions passed. Local full Python161/161 passed."
+    },
+    {
+      "check": "Browser dependency timeout root cause and constrained CI repair",
+      "result": "Final476 Autonomous cancelled during Azure apt downloads; other7 workflows succeeded. Same installer preparation stalled in477. Mirror-only preparation added to existing five installer jobs in4 workflows; no assertions/timeouts removed. Shell syntax, YAML parse, signature/suite/protocol fixture and original-command equality checks pass. Shared quality gate passes; fresh CI must verify actual archive download and unchanged browser journeys."
+    },
+    {
+      "check": "Remaining release gates local evidence",
+      "result": "Backend build and five unavailable-DB read API smoke passed; health503 retained. Guard regressions22 pass including pipeline order; Python director suite19 pass. Seven generated artwork exact SHA matches. Source/final CI and production proof still pending."
+    },
+    {
+      "check": "PR479 exact-source CI",
+      "result": "Source06c157af7411f06daf583a3bd37fde8a8bf296ce all7 workflows successful: Autonomous39932810180, smoke39932810260, backend39932810345, frontend39932810192, Python39932810199, mobile39932810185, completeness39932810209. Built5-API unavailable-DB smoke passed; Python162/162. Source frontend includes both engines240 route loads each; receipt/final CI and production pending."
+    },
+    {
+      "check": "Final completeness failure diagnosis",
+      "result": "Receipt736ff47a mobile score leaked calendar/tv/theater-directory requests to real quota-suspended DB; WebKit CORS created DISC-02/CROSS-MOBILE regression. One unchanged-head mobile rerun reproduced. Existing helper mocked movies only. New red→green fixture regression covers all5 reviewed read snapshots with CORS and unknown API503; no assertions/thresholds weakened. Fresh source proof is required."
+    },
+    {
+      "check": "Vercel preview and source2 CI",
+      "result": "Source1eb1 scored completeness now passes after fixture correction. Vercel preview736ff47a actual calendar/tv/movies/theater-directory/releases all200 static_snapshot, DB unavailable, health503, source timestamp preserved; backdrop HEAD200 image/jpeg65569bytes. Source1eb frontend failed on WebKit first cell root agent.html/375/light waiting main text:0 page errors/local failures, blank artifact. Existing exact URL/mode wait applied to both root and prefixed legacy-agent redirects; assertions/timeouts unchanged, focused review no blockers."
+    },
+    {
+      "check": "Source45 exact CI and bounded performance remeasurement",
+      "result": "All8 source45a8762c workflows successful, including frontend39936962182 (both-engine route audit after root redirect wait), backend39936962240, Autonomous39936962269, smoke39936962204, Python39936962206, mobile39936962255, scorecard contract39936962260, completeness39936962301. First performance1000-record390px interaction1038ms exceeded unchanged1000ms budget; one unchanged-head mobile remeasurement passed741.86ms at390 and743.13ms at1280, ready1621.92/1654.81ms, CLS.04237/.01516, no errors. App/performance test source unchanged. Final CI and production still pending."
+    },
+    {
+      "check": "Actual backend materialized quality failure and fix",
+      "result": "DeploymentDfgo9h3 passed proof then failed12 source-config assertions. Same complete gate reproduced locally. Narrow reader validates exact committed config and uses frontend source only after verified backend marker; all assertions retained. Marker set after real proof, backend only; inherited frontend marker cleared. Normal and materialized full gates pass; focused review32/32 pass and no blockers. Materialized whole-gate smoke added backend CI; new helper watched by both projects."
+    },
+    {
+      "check": "PR480 production verified",
+      "result": "Source924e0763 all6/final52980b8e all7 CI; actual materialized production-checks public proof and full quality passed, source digest32e74873f80f81dbcfbd88579bfc3f71d6d9171bd787b6a7be9e5259a5dd29e6. Merged5cf977ac. Backend dpl_CbePaXkqu76aoowiGsU6dVVmrL6a and frontend dpl_CPEdZnJ1DFtwkgdu6wz2kPh8UQRD READY. Canonical calendar1027/TV16/search1/Tokyo14/Lemino2 all200/static_snapshot; original timestamps, health503. DB recovery remains blocked."
+    },
+    {
+      "check": "Main synthetic performance bounded remeasurement",
+      "result": "Main39952478680 mobile/performance first390px1000-record input1003.21ms exceeded unchanged1000ms by3.21ms; ready2211.44ms,CLS.04237,no errors. One unchanged-head remeasurement passed4/4:390px974.70ms/ready2112.34ms;1280px969.71ms/ready2134.61ms; CLS.04237/.01516,no errors. No app/performance/threshold changes; both observations preserved. Actual device gate remains open."
+    },
+    {
+      "check": "Guarded daily data publication and detected deployment boundaries",
+      "result": "39939689022 attempt2 successfully passed fullquality/sourceproof and pushed13a9e63e:1030 movies, generated_at2026-10-23T12:21:40.307684+00:00; MissingJapanese0/Failed0. Subsequent DBsyncP1001 retained. Actual frontend GitHub Vercel status says Deployment rate limited retry24h; backend IgnoredBuildStep canceled. Added realGit regression for3 actual JSON imports; red3→green17/17 after3 exact backend pathspec additions. Both working directories and last-successful-SHA across laterdocs covered. Data/availability and UI-only inputs still skip backend."
+    },
+    {
+      "check": "PR481 exact-source CI",
+      "result": "Sourced2e534a2 all6 workflows successful: backend39954029766, completeness39954029615, Autonomous39954029951, mobile39954029738, frontend39954029705, smoke39954029637. Compiled calendar1030 and all5 APIs200/static_snapshot, health503; full materialized quality passed. RealGit regression red3→green17/17, focused review no blockers. Receipt-only final CI required before merge; actual Vercel latest data publication remains limited."
+    },
+    {
+      "check": "PR481 final source acceptance and integration",
+      "result": "Source d2e534a2 all6/final1c31122f all7 successful workflows; realGit tests17/17 and focused review no blockers. Complete materialized production-checks passed public proof and fullquality, digest64289707b8e45ebf4896eb0ec6f99ea0fbb9d4f61c17cedd9e7a7d80e04d7b6d. Mergedd3452c12. Latest data deployment deferred; READY5cf977ac canonical API verification remains the actual serving evidence. Global28/32; remaining rights2/device/users plus operational deployment/DB quota blockers. No unverified completion or user results invented."
     },
     {
       "check": "Nationwide now-playing baseline and initial feature",

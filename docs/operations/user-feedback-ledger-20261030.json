@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T11:48:54.594483+00:00",
-  "scope": "現セッション統合指示のP0具体項目＋既存17項目・28項目監査を集約。P1全基準・全GitHub履歴の照合は未完了。",
+  "updated_at": "2026-10-30T11:55:34.653Z",
+  "scope": "現セッションP0具体項目、既存17/28項目監査、過去カレンダー9指摘、Issue542の具体指摘、Eastwood収録漏れを集約。P1全基準・全closed PRレビュー履歴の再照合は未完了。",
   "past_conversation_access": "このセッションで提示された内容とGitHub上の記録のみ。参照できない過去会話の指摘を対応済みにしない。",
   "unique_feedback_total": null,
-  "registry_entries": 103,
+  "registry_entries": 125,
   "counts_are_unique_feedback": false,
   "count_note": "過去監査と現指示は重複を含む。登録行数を全指摘数・解決数とみなさない。",
   "release_decision": "NO_GO",
@@ -370,7 +370,7 @@
         571
       ],
       "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
       "production_status": "not_deployed",
       "iphone_safari_status": "unverified",
       "disposition": "open"
@@ -512,7 +512,7 @@
         571
       ],
       "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
       "production_status": "not_deployed",
       "iphone_safari_status": "unverified",
       "disposition": "open"
@@ -574,7 +574,7 @@
         571
       ],
       "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
       "production_status": "not_deployed",
       "iphone_safari_status": "unverified",
       "disposition": "open"
@@ -596,7 +596,7 @@
         571
       ],
       "implementation_status": "pr_created",
-      "test_result": "ローカル全体品質459 primary Node＋6dedupe＋Python等成功。exact-head browser CI未完了。",
+      "test_result": "ローカル全体品質460 primary Node＋6dedupe＋Python等成功。専用削除・確認キャンセル保護も追加。exact-head browser CI中。",
       "production_status": "not_deployed",
       "iphone_safari_status": "unverified",
       "disposition": "open"
@@ -2108,6 +2108,498 @@
       "production_status": "unverified",
       "iphone_safari_status": "unverified",
       "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-1",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "目アイコンがライトで見えない",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-LIGHT-01"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-2",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "配信ポスター多数欠損",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-MOVIE-01"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-3",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "スオミが同一行に重複",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-MOVIE-02"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-4",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "U-NEXT/Disney+/ABEMA/Lemino/WOWOWが空",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-FRESHNESS-01"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-5",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "TV11月以降なし",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-FRESHNESS-03"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-6",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "映画祭バー文字不可視",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-LIGHT-03"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-7",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "映画祭12月以降なし",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-FRESHNESS-05"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-8",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "イベント掲載不足",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-FRESHNESS-05"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-CALENDAR9-9",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6338331336",
+      "request": "日比谷以外の上映作品情報不足",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-FRESHNESS-05"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-01",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Remove the redundant **鑑賞日** date picker from cinema discount comparison; keep calendar selection and Monday-first weeks, multi-prefecture filtering, venue-list modal.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-02",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Light mode tables have near-white text on white backgrounds; fix all relevant text/link color and contrast, including sticky name column and action links.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-03",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Theater names lack branch/location (multiple entries simply `イオンシネマ` or `109シネマズ`); show canonical venue identity and city, distinguish all branches; do not invent or duplicate.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-04",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Screening format/equipment nearly all `未確認`; verify source truth and improve coverage, starting with IMAX at 109シネマズ川崎; do not fabricate verified metadata.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-05",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Showtime finder is disconnected from cinema directory. Searching for `TOHO川崎` does not find the cinema; searching `109シネマズ` yields only a generic chain name and no showtimes. Reuse canonical theater IDs, theater names, official schedules and freshness gating. If source unavailable, show accurate last checked status and actionable official schedule.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-06",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "AI映画検索: `ノーラン映画` returns non-Nolan films. Implement deterministic entity/director constraints with provenance for director-specific requests, regression for `ノーラン`, and clear failure if result cannot satisfy constraints. Assess feasibility of reliable AI search before continuing promotional claims.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-07",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Director Collection should have a director dashboard (film counts, watched, average rating and detailed breakdown).",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-08",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "In 映画を探す, opening a movie detail and closing with X navigates to an empty generic `作品・監督・キャスト検索` page instead of preserving the original list, filters, scroll and route. Add navigation regression.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-09",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Header search placeholder truncates `作品・監督・キャストを...`; shorten it or adapt widths so iPhone shows useful complete text.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-10",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Light theme review modal has a dark background with illegible or harsh light controls; implement consistent legible light treatment, without changing dark.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-11",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Light theme movie-format comparison cards have black text on nearly-black cards; fix heading and secondary text contrast.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-ISSUE542-12",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/542",
+      "request": "Screenshots/user repro: 390px iPhone Safari light, dark. Include both /theaters.html and /cinelva/theaters.html where applicable. Verify real user-visible content and use official theater sources; no imaginary schedules/format details. Preserve user viewing records and release gate. Prioritize theater finder/contrast/showtime/AI relevance over feature expansions.",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
+    },
+    {
+      "id": "HIST-EASTWOOD-COUNT",
+      "source": "https://github.com/vongolebianco7/cinema-calendar/issues/239#issuecomment-6254166088",
+      "request": "Eastwoodが1本・1/1と表示され監督カタログの収録漏れを見落とした",
+      "screen": "過去ユーザー報告の対象画面",
+      "severity": "P0",
+      "cause": "当時の調査・修正証跡は参照先。現行本番での再照合未完了。",
+      "issues": [
+        239,
+        242,
+        243,
+        244
+      ],
+      "pull_requests": [],
+      "related_item_ids": [
+        "P0-COLLECTION-01"
+      ],
+      "implementation_status": "historical_report",
+      "test_result": "現在の受入条件で未照合。クローズや過去の修正記録だけで解決としない。",
+      "production_status": "unverified",
+      "iphone_safari_status": "unverified",
+      "disposition": "open"
     }
-  ]
+  ],
+  "github_inventory": {
+    "all_issue_and_pr_entries": 571,
+    "issues": 14,
+    "open_issues": 5,
+    "closed_issues": 9,
+    "open_pull_requests": 14,
+    "open_pr_inline_review_threads": 0,
+    "master_issue_comments_retrieved": 257,
+    "scope": "全Issue/PR一覧6ページ取得、open PR14件の会話コメントとinline threadを確認。全closed PRの全レビュー履歴の再照合は未完了。master257コメントは取得済み、個別指摘抽出・重複照合を継続。"
+  }
 }

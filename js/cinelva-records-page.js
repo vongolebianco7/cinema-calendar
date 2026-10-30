@@ -57,7 +57,7 @@
     }
     return sourceFrom(posterCatalogCache.titles.get(JSON.stringify([title, year])));
   };
-  const recordMovies = () => state.records.filter(record => record.watched !== false && record.rating !== 0);
+  const recordMovies = () => state.records.filter(record => record.watched !== false);
   const ratedMovies = () => recordMovies().filter(record => typeof record.rating === 'number');
   const metadataFor = id => byId.get(String(id)) || {};
   const countryAliases = {"united states":"アメリカ","united states of america":"アメリカ","usa":"アメリカ","us":"アメリカ","アメリカ合衆国":"アメリカ","united kingdom":"イギリス","uk":"イギリス","gb":"イギリス","great britain":"イギリス","英国":"イギリス","japan":"日本","jp":"日本","france":"フランス","germany":"ドイツ","italy":"イタリア","spain":"スペイン","canada":"カナダ","australia":"オーストラリア","south korea":"韓国","china":"中国","hong kong":"香港","taiwan":"台湾","india":"インド","brazil":"ブラジル","mexico":"メキシコ","russia":"ロシア","new zealand":"ニュージーランド","sweden":"スウェーデン","denmark":"デンマーク","norway":"ノルウェー","finland":"フィンランド","netherlands":"オランダ","switzerland":"スイス","austria":"オーストリア","ireland":"アイルランド","poland":"ポーランド","argentina":"アルゼンチン","thailand":"タイ","vietnam":"ベトナム","philippines":"フィリピン","indonesia":"インドネシア","turkey":"トルコ","iran":"イラン","israel":"イスラエル","portugal":"ポルトガル","greece":"ギリシャ","belgium":"ベルギー"};
@@ -663,7 +663,7 @@
     const ratingById=new Map();
     for(const record of recordMovies()){
       const movie=enriched(record),rating=Number(record.rating);
-      if(Number.isFinite(rating)&&rating>0){
+      if(typeof record.rating==='number'&&Number.isFinite(rating)&&rating>=0){
         for(const key of [movie.tmdbId,movie.tmdb_id,movie.id,movie.title].filter(Boolean))
           ratingById.set(String(key),rating);
       }

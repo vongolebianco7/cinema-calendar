@@ -49,6 +49,14 @@ test('quick rating opens existing film, defaults to zero and persists comment / 
  assert.equal(writes[0][2],'2026-10');
  assert.equal(dialog.open,false);
 });
+test('saving zero persists a watched rating instead of deleting the record',()=>{
+ const {api,element,writes}=setup();
+ api.open({id:123,tmdbId:123,title:'Zero rating'});
+ element('cinelvaRateScore').value='0';
+ element('cinelvaRateSave').onclick();
+ assert.equal(writes.length,1);
+ assert.equal(writes[0][1],0);
+});
 test('invalid date does not persist and existing zero rating remains zero',()=>{
  const old={id:'22',title:'作品',rating:0,viewingMethod:'配信',comment:'短評'};
  const {api,element,writes}=setup([old]);

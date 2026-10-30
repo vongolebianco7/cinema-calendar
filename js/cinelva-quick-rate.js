@@ -201,8 +201,7 @@ function save() {
  const date=$('cinelvaRateDate').value.trim()||(selected.watchedAt && !/^\d{4}-\d{2}-\d{2}$/.test(selected.watchedAt)?selected.watchedAt:null),comment=$('cinelvaRateComment').value.trim();
  if(!Records.validDate(date)){$('cinelvaRateMessage').textContent='カレンダーから鑑賞日を選択してください';return;}
  try{
-  if(Number($('cinelvaRateScore').value)===0){if(selected._editingExisting&&String(viewingRecord(selected)?.id)===String(selected.id))Records.remove(selected.id);}
-  else {const {_editingExisting,_localRecord,...movie}=selected;Records.save({...movie,comment,hasSpoilers:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',spoiler:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);}
+  const {_editingExisting,_localRecord,...movie}=selected;Records.save({...movie,comment,hasSpoilers:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',spoiler:$('cinelvaRateSpoiler').getAttribute('aria-pressed')==='true',viewingMethod:$('cinelvaRatePlace').value,viewingVenue:$('cinelvaRatePlace').value?$('cinelvaRateVenue').value:''},Number($('cinelvaRateScore').value),date);
   root.dispatchEvent(new CustomEvent('cinelva-record-updated',{detail:{id:selected.id}}));
   dialog.close();
  }catch(error){$('cinelvaRateMessage').textContent='保存できません：'+error.message;}
@@ -347,8 +346,9 @@ function attachInlineScore(button,movie) {
  audience.className='cinelva-rating-line cinelva-rating-audience';
  const updatePersonal=()=>{
   const rec=viewingRecord(movie);
-  const watched=Boolean(rec&&rec.rating!==0);
-  const score=watched&&Number.isFinite(Number(rec.rating))&&rec.rating!==null?Number(rec.rating).toFixed(1):watched?'0.0':'未鑑賞';
+  const watched=Boolean(rec&&rec.watched!==false);
+  const rated=watched&&rec.rating!==null&&rec.rating!==undefined&&rec.rating!==''&&Number.isFinite(Number(rec.rating));
+  const score=!watched?'未鑑賞':rated?Number(rec.rating).toFixed(1):'未評価';
   personal.innerHTML='<span class="rating-caption">MY評価</span><span class="rating-value"></span>';personal.querySelector('.rating-value').textContent=score;
   personal.classList.toggle('is-unwatched',!watched);
   personal.style.setProperty('color',watched?'#e4bd70':'#aab0bb','important');

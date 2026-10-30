@@ -121,16 +121,22 @@ const { chromium, webkit } = require("playwright"),
     await page.locator("#cinelvaRateSave").click();
     assert.equal(
       (await page.evaluate(() => CinelvaLibraryRecords.all())).length,
-      0,
+      1,
     );
     assert.match(
       await page.locator("#grid .cinelva-rating-personal").first().innerText(),
-      /未鑑賞/,
+      /0\.0/,
     );
+    assert.equal((await page.evaluate(() => CinelvaLibraryRecords.all()))[0].rating,0);
+    assert.equal(await eye.evaluate(el=>el.classList.contains('is-watched')),true);
+    await page.reload();
+    await eye.waitFor();
+    assert.match(await page.locator('#grid .cinelva-rating-personal').first().innerText(),/0\.0/);
+    assert.equal(await eye.evaluate(el=>el.classList.contains('is-watched')),true);
     assert.equal(
       await bookmark.getAttribute("aria-pressed"),
       "true",
-      "clearing rating preserves independent bookmark",
+      "saving zero rating preserves independent bookmark",
     );
     await bookmark.click();
     assert.equal(await bookmark.getAttribute("aria-pressed"), "false");

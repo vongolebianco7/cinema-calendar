@@ -290,7 +290,7 @@ body .gTop .gBrand .gBrandWord,body .gDrawerHead .gBrand .gBrandWord{
 /* Highlight the complete personal-rating row, including its eye button. */
 html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-personal,
 html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-personal :is(.rating-caption,.rating-value),
-html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button{
+html[data-theme="light"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button.is-watched{
  color:#624600!important;background:#f5d36c!important;
 }
 html[data-theme="light"] .cinelva-rating-controls.is-watched{
@@ -298,7 +298,7 @@ html[data-theme="light"] .cinelva-rating-controls.is-watched{
 }
 html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-personal,
 html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-personal :is(.rating-caption,.rating-value),
-html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button{color:#f3c84e!important}
+html[data-theme="dark"] .cinelva-rating-controls.is-watched .cinelva-rating-actions .cinelva-rate-button.is-watched{color:#f3c84e!important}
 html body .cinelva-rating-controls-no-gauge .rating-caption{font-size:10px!important;letter-spacing:0!important;white-space:nowrap!important}
 html[data-theme="light"] #list .item{background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important}
 html[data-theme="light"] #list .item :is(b,a){color:var(--text)!important}

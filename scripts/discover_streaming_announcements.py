@@ -7,6 +7,7 @@ import json
 import pathlib
 import re
 import urllib.request
+from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -20,8 +21,14 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
         url = feed["url"]
         if not url.startswith("https://") or not feed.get("service"):
             raise ValueError("Official feed must have HTTPS URL and service")
+        hostname = (urlparse(url).hostname or "").lower()
+        if not hostname or hostname in {"localhost", "127.0.0.1"} or hostname.endswith(".local"):
+            raise ValueError("Non-public feed hostname refused")
         request = urllib.request.Request(url, headers={"User-Agent": "Cinelva-feed-discovery/1.0"})
         with opener(request, timeout=12) as response:
+            final_url = response.geturl() if hasattr(response, "geturl") else url
+            if not final_url.startswith("https://") or (urlparse(final_url).hostname or "").lower() != hostname:
+                raise ValueError("Feed redirected outside the configured HTTPS hostname")
             raw = response.read(1_000_001)
         if len(raw) > 1_000_000:
             raise ValueError("Official feed exceeded size limit")
@@ -37,13 +44,17 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
                 link = atom.get("href", "") if atom is not None else ""
             if title and KEYWORDS.search(title) and link.startswith("https://"):
                 candidates.append({"service": feed["service"], "title": title, "source_url": link, "status": "needs_release_date_verification"})
-    unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())\n    if not feeds.get("feeds"):\n        print("No verified official RSS endpoints configured; discovery is inactive")
-    result = {"checked_at": dt.date.today().isoformat(), "candidates": unique}
+    unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())
+    if not feeds.get("feeds"):
+        print("No verified official RSS endpoints configured; discovery is inactive")
+    result = {"candidates": sorted(unique, key=lambda item: (item["service"], item["source_url"]))}
+    content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    if output.exists() and output.read_text(encoding="utf-8") == content:
+        return len(unique)
     import os
     import tempfile
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=output.parent, delete=False) as tmp:
-        json.dump(result, tmp, ensure_ascii=False, indent=2)
-        tmp.write("\n")
+        tmp.write(content)
         path = tmp.name
     os.replace(path, output)
     return len(unique)

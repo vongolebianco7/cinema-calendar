@@ -7,6 +7,7 @@ import json
 import pathlib
 import re
 import urllib.request
+from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -20,8 +21,14 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
         url = feed["url"]
         if not url.startswith("https://") or not feed.get("service"):
             raise ValueError("Official feed must have HTTPS URL and service")
+        hostname = (urlparse(url).hostname or "").lower()
+        if not hostname or hostname in {"localhost", "127.0.0.1"} or hostname.endswith(".local"):
+            raise ValueError("Non-public feed hostname refused")
         request = urllib.request.Request(url, headers={"User-Agent": "Cinelva-feed-discovery/1.0"})
         with opener(request, timeout=12) as response:
+            final_url = response.geturl() if hasattr(response, "geturl") else url
+            if not final_url.startswith("https://"):
+                raise ValueError("Feed redirected to an insecure URL")
             raw = response.read(1_000_001)
         if len(raw) > 1_000_000:
             raise ValueError("Official feed exceeded size limit")

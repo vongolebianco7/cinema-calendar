@@ -1,38 +1,17 @@
 {
-  "generated_at": "2026-10-30T22:18:46.705276+00:00",
+  "generated_at": "2026-10-31T21:32:34.720804+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-09-30",
-      "2027-02-27"
+      "2026-10-01",
+      "2027-02-28"
     ],
     "background_slice": [
-      "2027-08-21",
-      "2027-10-19"
+      "2027-10-21",
+      "2027-10-31"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1605420,
-      "title": "33-2",
-      "original_title": "33-2",
-      "date": "2025-10-30",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/kmeOwHI3lj0lP5jWtP9LAYrln96.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1605420",
-      "director": "Reiji Saito",
-      "director_id": 4447989,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 14,
-      "genres": []
-    },
     {
       "id": 9323,
       "title": "GHOST IN THE SHELL / 攻殻機動隊",
@@ -20266,8 +20245,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vDnJLpE2jhu8OVcwpWuYCMF5hRU.jpg",
-      "score": 7.436,
-      "votes": 3828,
+      "score": 7.429,
+      "votes": 3915,
       "overview": "気象キャスターのマーガレットとサイバーセキュリティのエキスパート、ダニエル。接点のないはずの二人が衝撃的な機密情報を知ることとなった。やがて、その秘密を明らかにする使命を負った彼らの前に謎の組織が立ちはだかる――。",
       "tmdb": "https://www.themoviedb.org/movie/1275779",
       "director": "スティーヴン・スピルバーグ",
@@ -20286,7 +20265,7 @@
         "サイエンスフィクション",
         "スリラー"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1333141,
@@ -21062,7 +21041,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 621689,
@@ -21475,7 +21454,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1805382,
@@ -21529,7 +21508,7 @@
         "ドラマ",
         "音楽"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1774868,
@@ -21969,35 +21948,6 @@
       "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
-      "id": 1797226,
-      "title": "하이브 치어링 파티",
-      "original_title": "하이브 치어링 파티",
-      "date": "2026-10-24",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1797226",
-      "director": "Park Sang-geun",
-      "director_id": 5361732,
-      "cast": [
-        "알엠",
-        "진",
-        "슈가",
-        "제이홉"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 60,
-      "genres": [
-        "音楽"
-      ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
-    },
-    {
       "id": 1797200,
       "title": "세븐틴 월드 투어 '뉴_'",
       "original_title": "세븐틴 월드 투어 '뉴_'",
@@ -22031,7 +21981,7 @@
       "id": 1688795,
       "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
       "original_title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
-      "date": "2026-10-24",
+      "date": "2026-10-30",
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/aRoPHxYzfQjCLxSp4H4sJANNmou.jpg",
@@ -22055,7 +22005,7 @@
         "音楽",
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 517815,
@@ -22170,8 +22120,10 @@
         "Japan"
       ],
       "runtime": 0,
-      "genres": [],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1646897,
@@ -22201,7 +22153,7 @@
         "犯罪",
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1555226,
@@ -22230,7 +22182,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 164328,
@@ -22261,7 +22213,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1575667,
@@ -22322,6 +22274,34 @@
         "ドラマ"
       ],
       "checked_at": "2026-10-29T22:44:24.256028+00:00"
+    },
+    {
+      "id": 1785779,
+      "title": "Super Lucky Girl",
+      "original_title": "Super Lucky Girl",
+      "date": "2026-10-30",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/x6riRzJI4bvOnpbCqsW9xd2O4tY.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1785779",
+      "director": "Yang Kaijing",
+      "director_id": 6517916,
+      "cast": [
+        "Yumi Narita",
+        "佐野弘樹",
+        "古賀 祐太"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 79,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1807421,
@@ -22432,18 +22412,47 @@
         "ホラー",
         "アクション"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+    },
+    {
+      "id": 1797226,
+      "title": "하이브 치어링 파티",
+      "original_title": "하이브 치어링 파티",
+      "date": "2026-11-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1797226",
+      "director": "Park Sang-geun",
+      "director_id": 5361732,
+      "cast": [
+        "알엠",
+        "진",
+        "슈가",
+        "제이홉"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 60,
+      "genres": [
+        "音楽"
+      ],
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1278101,
-      "title": "小さな私",
+      "title": "ちっぽけな僕の、おおきな世界",
       "original_title": "小小的我",
       "date": "2026-11-06",
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
-      "score": 8.791,
-      "votes": 153,
+      "score": 8.8,
+      "votes": 157,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "tmdb": "https://www.themoviedb.org/movie/1278101",
       "director": "Yang Lina",
@@ -22462,7 +22471,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1773014,
@@ -22491,7 +22500,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1707282,
@@ -22520,7 +22529,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1567149,
@@ -22551,7 +22560,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1527427,
@@ -22580,7 +22589,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1313587,
@@ -22612,7 +22621,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1283515,
@@ -22621,28 +22630,28 @@
       "date": "2026-11-06",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/zPHfsaiMZT1HNz1ZS55iyLKZkFG.jpg",
-      "score": 6.386,
-      "votes": 242,
+      "poster": "https://image.tmdb.org/t/p/w500/rmaNMA1seHqpjtnYKzyynFAr1g8.jpg",
+      "score": 6.657,
+      "votes": 411,
       "overview": "仕事にも人生にも行き詰まっている売れない作家ローウェン・アシュリー（ダコタ・ジョンソン）のもとへ、突然、驚くようなオファーが届く。それは交通事故で生死を彷徨う人気作家ヴェリティ・クロフォード（アン・ハサウェイ）のためのゴーストライター業だった。なぜ自分が選ばれたのか疑問を持ちながらも、またとないチャンスを引き受けるべく、ローウェンは人里離れたクロフォード家の邸宅へと移り住む。次第にヴェリティの夫ジェレミー（ジョシュ・ハートネット）と親密な関係になっていくローウェンだったが、ある日ヴェリティが書いたと思われる不気味な原稿を発見してしまう。そこには、夫との性愛や子供たちへの激しい感情、そして自らにまつわる衝撃の告白が記されていた── クロフォード家に一体何があったのか？ 善悪の境界線が揺らぐ中、やがてローウェンは闇深い真実に辿り着く…。",
       "tmdb": "https://www.themoviedb.org/movie/1283515",
       "director": "マイケル・ショウォーター",
       "director_id": 22215,
       "cast": [
-        "アン・ハサウェイ",
         "ダコタ・ジョンソン",
+        "アン・ハサウェイ",
         "ジョシュ・ハートネット",
         "Brady Wagner"
       ],
       "countries": [
         "United States of America"
       ],
-      "runtime": 114,
+      "runtime": 117,
       "genres": [
         "謎",
         "スリラー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1795736,
@@ -22664,7 +22673,7 @@
       "countries": [],
       "runtime": 108,
       "genres": [],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1807529,
@@ -22721,7 +22730,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1807445,
@@ -22794,8 +22803,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/aASLRiO8p9xLIvG9EHXSyZ71sPl.jpg",
-      "score": 7.4,
-      "votes": 53,
+      "score": 7.3,
+      "votes": 54,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1306816",
       "director": "필감성",
@@ -22814,7 +22823,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 338969,
@@ -22824,8 +22833,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cCWojb6N9UcTzNVtS4bOM3vQ30x.jpg",
-      "score": 5.952,
-      "votes": 460,
+      "score": 5.929,
+      "votes": 465,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/338969",
       "director": "メイコン・ブレア",
@@ -22845,7 +22854,7 @@
         "コメディ",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 467905,
@@ -22855,11 +22864,11 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/adIG9Tsf9FkUkJ1euYjtktSMOyT.jpg",
-      "score": 6.925,
-      "votes": 811,
-      "overview": "",
+      "score": 6.904,
+      "votes": 835,
+      "overview": "生まれながらに大富豪一族から追放され、貧しい生活を余儀なくされたベケット・レッドフェロー。280億ドルの遺産と「ふさわしい人生」を取り戻すため、相続に立ちはだかる親族たちを巧妙な「事故」に見せかけ抹殺していく。母親仕込みの知性を武器に暗躍するベケットだったが、ジュリアの登場で完璧な計画は狂い始め……。",
       "tmdb": "https://www.themoviedb.org/movie/467905",
-      "director": "John Patton Ford",
+      "director": "ジョン・パットン・フォード",
       "director_id": 1099792,
       "cast": [
         "グレン・パウエル",
@@ -22877,7 +22886,7 @@
         "スリラー",
         "犯罪"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1567605,
@@ -22903,12 +22912,12 @@
         "United States of America",
         "United Kingdom"
       ],
-      "runtime": 120,
+      "runtime": 115,
       "genres": [
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1759179,
@@ -22938,7 +22947,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1737072,
@@ -22998,7 +23007,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1236857,
@@ -23030,7 +23039,7 @@
         "アクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1707955,
@@ -23059,7 +23068,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1806317,
@@ -23083,7 +23092,7 @@
       "countries": [],
       "runtime": 38,
       "genres": [],
-      "checked_at": "2026-10-24T20:48:23.300025+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1147710,
@@ -23229,9 +23238,9 @@
       "date": "2026-11-20",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/96O3Ol3f2veMxAxYqsML8rOumB9.jpg",
-      "score": 6.382,
-      "votes": 353,
+      "poster": "https://image.tmdb.org/t/p/w500/ph4rTUcsXsGMcLIysFlYxWUdlYu.jpg",
+      "score": 6.37,
+      "votes": 361,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1159206",
       "director": "ジム・ジャームッシュ",
@@ -23252,10 +23261,9 @@
       ],
       "runtime": 111,
       "genres": [
-        "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1411577,
@@ -23285,7 +23293,7 @@
         "ファンタジー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1400837,
@@ -23295,8 +23303,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
-      "score": 6.0,
-      "votes": 132,
+      "score": 5.803,
+      "votes": 175,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1400837",
       "director": "ロブ・サヴェージ",
@@ -23314,7 +23322,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1767360,
@@ -23343,7 +23351,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1754757,
@@ -23372,7 +23380,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1746633,
@@ -23401,7 +23409,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1724371,
@@ -23429,7 +23437,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1694711,
@@ -23438,7 +23446,7 @@
       "date": "2026-11-20",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bLqeWTf9HGofglNZ6XENSsY1HbD.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/2EQ3JA0NT6bDg0xoZlYWGSBbzqO.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "アストラギウス銀河を二分するギルガメスとバララント。 この二つの勢力は、原因すら定かではない戦争を100年近く続けていた。  “百年戦争”末期――アスガルズ星系第二惑星ヴァルキュリアⅡの前線基地に、一人の女性士官マキ・シュタウフェンベルクが赴任する。 彼女は、寄せ集めの兵士で構成された懲罰部隊にあって、どんな過酷な作戦でもただ一人生還することから“魔女”と呼ばれる兵士、アッシュ・ヴァンプスを調査する任務を密かに受けていた。  戦場の真実は、戦場でしか知ることはできない。  アッシュの部隊に命じられた敵陣への強行降下作戦に、AT（アーマードトルーパー）のパイロットとしてマキは参加を決意する。  生還不可能にも見える作戦の中、戦況は刻一刻と絶望へ向かう。 戦火の中でアッシュを追うマキは、やがて彼女に秘められた真実へと近づいていく――。",
@@ -23461,7 +23469,7 @@
         "アクション",
         "戦争"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 920167,
@@ -23520,7 +23528,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-10-21T10:18:39.044766+00:00"
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1069537,
@@ -25176,6 +25184,38 @@
       "runtime": 86,
       "genres": [],
       "checked_at": "2026-10-30T22:18:46.705276+00:00"
+    },
+    {
+      "id": 1284465,
+      "title": "ロビン・フッドの死",
+      "original_title": "The Death of Robin Hood",
+      "date": "2027-01-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/13MmRwmG5NmaMfU8qNrtgGXisiD.jpg",
+      "score": 6.756,
+      "votes": 588,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1284465",
+      "director": "マイケル・サルノスキ",
+      "director_id": 2580328,
+      "cast": [
+        "ヒュー・ジャックマン",
+        "ジョディ・カマー",
+        "ビル・スカルスガルド",
+        "Murray Bartlett"
+      ],
+      "countries": [
+        "United States of America",
+        "United Kingdom"
+      ],
+      "runtime": 123,
+      "genres": [
+        "アドベンチャー",
+        "ドラマ",
+        "アクション"
+      ],
+      "checked_at": "2026-10-31T21:32:34.720804+00:00"
     },
     {
       "id": 1214931,

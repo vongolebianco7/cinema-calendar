@@ -14,6 +14,8 @@ ALLOWED_STATUS = {
 
 def validate(state):
     errors = []
+    if not isinstance(state, dict):
+        return ["work state must be a JSON object"]
     if state.get("schema_version") != 1:
         errors.append("schema_version must be 1")
     for key in ("updated_at", "base_branch", "base_sha", "work_items", "next_action", "deployment"):
@@ -27,6 +29,9 @@ def validate(state):
     else:
         seen = set()
         for index, item in enumerate(items):
+            if not isinstance(item, dict):
+                errors.append(f"work_items[{index}] must be an object")
+                continue
             for key in ("id", "title", "status", "acceptance"):
                 if not item.get(key):
                     errors.append(f"work_items[{index}].{key} is required")

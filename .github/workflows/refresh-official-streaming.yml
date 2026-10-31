@@ -19,7 +19,9 @@ jobs:
           python-version: '3.12'
       - name: Validate and refresh verified release subset
         run: python scripts/refresh_streaming_official.py
-      - name: Discover official announcement candidates\n        run: python scripts/discover_streaming_announcements.py\n      - name: Commit only verified generated data
+      - name: Discover official announcement candidates
+        run: python scripts/discover_streaming_announcements.py
+      - name: Commit only verified generated data
         run: |
           if git diff --quiet -- data/streaming-official-current.json data/streaming-announcement-candidates.json && test -f data/streaming-official-current.json; then exit 0; fi
           git config user.name "github-actions[bot]"

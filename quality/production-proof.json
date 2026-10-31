@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "41b98c1f8f8b44b7f397a07552c12550633011be",
-  "verified_at": "2026-10-31T10:30:00.000Z",
-  "note": "PR590 exact source passed all seven pull_request workflows including the four mandatory production checks. Receipt-only update after squash merge. Official RSS feed list remains empty; discovery not claimed operational."
+  "head_sha": "20d533594248e6a07735f1cc7e643331aae0739d",
+  "verified_at": "2026-10-31T11:30:00.000Z",
+  "note": "PR591 exact source passed all seven pull_request workflows including four required production checks. Receipt-only update after squash merge. RSS feeds remain unconfigured; no release discovery claim."
 }

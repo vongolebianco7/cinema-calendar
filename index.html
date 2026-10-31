@@ -996,6 +996,23 @@ async function fastInitialCalendarPaint(){
  }catch(e){console.warn("fast calendar paint unavailable",e)}
 }
 async function boot(){await fastInitialCalendarPaint();try{let [mr,tr,dr,fr,er,sr,hr,ar,lr,tdr,spr,rr]=await Promise.all([fetchBackendOrFallback("/api/calendar","data/movies.json"),fetchBackendOrFallback("/api/tv","data/tv.json").catch(()=>null),fetch("data/directors.json?"+Date.now()).catch(()=>null),fetch("data/rankings_extra.json?"+Date.now()).catch(()=>null),fetch("data/events.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theaters","data/theater_schedules.json").catch(()=>null),fetch("data/release_history.json?"+Date.now()).catch(()=>null),fetch("data/availability.json?"+Date.now()).catch(()=>null),fetch("data/locations.json?"+Date.now()).catch(()=>null),fetchBackendOrFallback("/api/theater-directory","data/theaters_master.json").catch(()=>null),fetch("data/special_screenings.json?"+Date.now()).catch(()=>null),fetch("data/revival_screenings.json?"+Date.now()).catch(()=>null)]);let md=await mr.json();if(!(md.movies||[]).length){let fallback=await fetch("data/movies.json?"+Date.now(),{cache:"no-store"});if(fallback.ok)md=await fallback.json()}movies=md.movies||[];
+// Load the independently validated daily streaming supplement; never replace existing catalog.
+try{
+ const dailyResponse=await fetch("data/streaming-official-current.json",{cache:"no-store"});
+ if(dailyResponse.ok){
+  const daily=await dailyResponse.json();
+  if(Array.isArray(daily.movies)){
+   const keyOf=m=>[m.date,m.service,String(m.title||"").normalize("NFKC").replace(/[\\s　・･:：\\/／\\-－—]/g,"").toLowerCase()].join("|");
+   const known=new Set(movies.filter(m=>m.event==="streaming").map(keyOf));
+   for(const m of daily.movies){
+    if(!m||m.event!=="streaming"||!/^20\\d{2}-\\d{2}-\\d{2}$/.test(m.date||"")||!m.service||!m.title||!/^https:\\/\\//.test(m.source_url||""))continue;
+    const key=keyOf(m);
+    if(!known.has(key)){movies.push(m);known.add(key)}
+   }
+  }
+ }
+}catch(error){console.warn("Daily official streaming supplement unavailable",error)}
+
 // Officially announced Japan streaming additions. Keep the catalog source intact and
 // avoid overwriting records with richer TMDB metadata from the API or static feed.
 try {

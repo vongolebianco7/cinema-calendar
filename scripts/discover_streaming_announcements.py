@@ -40,12 +40,14 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
     unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())
     if not feeds.get("feeds"):
         print("No verified official RSS endpoints configured; discovery is inactive")
-    result = {"checked_at": dt.date.today().isoformat(), "candidates": unique}
+    result = {"candidates": sorted(unique, key=lambda item: (item["service"], item["source_url"]))}
+    content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    if output.exists() and output.read_text(encoding="utf-8") == content:
+        return len(unique)
     import os
     import tempfile
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=output.parent, delete=False) as tmp:
-        json.dump(result, tmp, ensure_ascii=False, indent=2)
-        tmp.write("\n")
+        tmp.write(content)
         path = tmp.name
     os.replace(path, output)
     return len(unique)

@@ -37,7 +37,7 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
                 link = atom.get("href", "") if atom is not None else ""
             if title and KEYWORDS.search(title) and link.startswith("https://"):
                 candidates.append({"service": feed["service"], "title": title, "source_url": link, "status": "needs_release_date_verification"})
-    unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())
+    unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())\n    if not feeds.get("feeds"):\n        print("No verified official RSS endpoints configured; discovery is inactive")
     result = {"checked_at": dt.date.today().isoformat(), "candidates": unique}
     import os
     import tempfile

@@ -1013,25 +1013,6 @@ try{
  }
 }catch(error){console.warn("Daily official streaming supplement unavailable",error)}
 
-// Officially announced Japan streaming additions. Keep the catalog source intact and
-// avoid overwriting records with richer TMDB metadata from the API or static feed.
-try {
- const officialResponse=await fetch("data/streaming-2026-11-prime-official-staging.json",{cache:"no-store"});
- if(officialResponse.ok){
-  const official=await officialResponse.json();
-  if(Array.isArray(official.movies)){
-   const normalizeTitle=s=>String(s||"").normalize("NFKC").replace(/[\s　・･:：\/／\-－—]/g,"").toLowerCase();
-   const existing=new Set(movies.filter(m=>m.event==="streaming").map(m=>[m.date,m.service,normalizeTitle(m.title)].join("|")));
-   for(const item of official.movies){
-    if(!item||item.event!=="streaming"||item.service!=="Prime Video"||!/^2026-11-\d{2}$/.test(item.date)||!item.title)continue;
-    const key=[item.date,item.service,normalizeTitle(item.title)].join("|");
-    if(existing.has(key))continue;
-    movies.push({...item,source:item.source||"About Amazon Japan",source_url:item.source_url||official.source_url});
-    existing.add(key);
-   }
-  }
- }
-} catch(error){console.warn("Official November streaming supplement unavailable",error)}
 if(spr&&spr.ok){let sp=await spr.json();for(const x of(sp.screenings||[]))movies.push({...x,revival:false})}if(rr&&rr.ok){let rv=await rr.json();for(const x of(rv.screenings||[]))movies.push({...x,revival:true,service:"リバイバル上映"})}
 // Reset a stale streaming-service filter if it no longer exists in the loaded catalog.
 if(mode==="streaming"&&active!=="すべて"&&!movies.some(m=>m.event==="streaming"&&m.service===active)){active="すべて";localStorage.setItem("cinemaNow.active",active)}

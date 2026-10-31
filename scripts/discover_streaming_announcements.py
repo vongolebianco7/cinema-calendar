@@ -2,11 +2,12 @@
 """Discover possible streaming announcements from explicitly configured official RSS feeds.
 Candidates are never published as release dates without verification.
 """
-import datetime as dt
 import json
 import pathlib
 import re
 import urllib.request
+import ipaddress
+import socket
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
@@ -24,6 +25,10 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
         hostname = (urlparse(url).hostname or "").lower()
         if not hostname or hostname in {"localhost", "127.0.0.1"} or hostname.endswith(".local"):
             raise ValueError("Non-public feed hostname refused")
+        for address in socket.getaddrinfo(hostname, 443, type=socket.SOCK_STREAM):
+            ip = ipaddress.ip_address(address[4][0])
+            if not ip.is_global:
+                raise ValueError("Official feed resolved to a non-public address")
         request = urllib.request.Request(url, headers={"User-Agent": "Cinelva-feed-discovery/1.0"})
         with opener(request, timeout=12) as response:
             final_url = response.geturl() if hasattr(response, "geturl") else url

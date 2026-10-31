@@ -1,6 +1,6 @@
 {
   "period": "2026-11",
-  "scope": "Japan announced film streaming releases; not exhaustive",
+  "scope": "Japan announced movie streaming releases; not exhaustive; U-NEXT may include paid rentals",
   "status": "verified announced subset",
   "movies": [
     {
@@ -770,6 +770,62 @@
       "service": "Disney+",
       "source": "2026年11月配信予定",
       "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus"
+    },
+    {
+      "title": "入国審査",
+      "date": "2026-11-01",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "犯罪都市 NO WAY OUT",
+      "date": "2026-11-01",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "大統領のケーキ",
+      "date": "2026-11-10",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "ホテル・ルワンダ",
+      "date": "2026-11-15",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "バレリーナ：The World of John Wick",
+      "date": "2026-11-18",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "トレンケ・ラウケン Part1",
+      "date": "2026-11-25",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
+    },
+    {
+      "title": "トレンケ・ラウケン Part2",
+      "date": "2026-11-25",
+      "event": "streaming",
+      "service": "U-NEXT",
+      "source": "海外ドラマNAVI 2026年11月配信予定",
+      "source_url": "https://dramanavi.net/articles/341254"
     }
   ]
 }

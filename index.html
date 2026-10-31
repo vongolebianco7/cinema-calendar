@@ -1002,7 +1002,7 @@ try {
  const officialResponse=await fetch("data/streaming-2026-11-prime-official-staging.json",{cache:"no-store"});
  if(officialResponse.ok){
   const official=await officialResponse.json();
-  if(Array.isArray(official.movies)){
+  if(official.period==="2026-11"&&Array.isArray(official.movies)){
    const normalizeTitle=s=>String(s||"").normalize("NFKC").replace(/[\s　・･:：\/／\-－—]/g,"").toLowerCase();
    const existing=new Set(movies.filter(m=>m.event==="streaming").map(m=>[m.date,m.service,normalizeTitle(m.title)].join("|")));
    for(const item of official.movies){

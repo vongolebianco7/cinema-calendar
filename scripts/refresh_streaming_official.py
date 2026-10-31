@@ -34,7 +34,7 @@ def refresh(source=SOURCE, output=OUTPUT, today=None):
             seen.add(key)
     if not clean:
         raise ValueError("Empty update refused; existing output preserved")
-    result = {"generated_at": today.isoformat(), "period": data.get("period"), "movies": clean, "count": len(clean), "note": "Verified-source subset, not a complete subscription catalog"}
+    result = {"period": data.get("period"), "movies": clean, "count": len(clean), "note": "Verified-source subset, not a complete subscription catalog"}
     content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if output.exists() and output.read_text(encoding="utf-8") == content:
         return False

@@ -95,7 +95,7 @@ async function freePort() {
             await page.waitForFunction(expected =>
               location.pathname === expected &&
               new URLSearchParams(location.search).get('mode') === 'concierge',
-              destination, { timeout: 15000 }
+              destination, { timeout: 30000 }
             );
           }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);

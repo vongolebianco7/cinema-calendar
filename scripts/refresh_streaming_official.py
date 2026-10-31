@@ -38,7 +38,12 @@ def refresh(source=SOURCE, output=OUTPUT, today=None):
     content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if output.exists() and output.read_text(encoding="utf-8") == content:
         return False
-    import os\n    import tempfile\n    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=output.parent, delete=False) as tmp:\n        tmp.write(content)\n        temp_path = tmp.name\n    os.replace(temp_path, output)
+    import os
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=output.parent, delete=False) as tmp:
+        tmp.write(content)
+        temp_path = tmp.name
+    os.replace(temp_path, output)
     return True
 if __name__ == "__main__":
     try:

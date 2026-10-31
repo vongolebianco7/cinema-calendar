@@ -27,8 +27,8 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
         request = urllib.request.Request(url, headers={"User-Agent": "Cinelva-feed-discovery/1.0"})
         with opener(request, timeout=12) as response:
             final_url = response.geturl() if hasattr(response, "geturl") else url
-            if not final_url.startswith("https://"):
-                raise ValueError("Feed redirected to an insecure URL")
+            if not final_url.startswith("https://") or (urlparse(final_url).hostname or "").lower() != hostname:
+                raise ValueError("Feed redirected outside the configured HTTPS hostname")
             raw = response.read(1_000_001)
         if len(raw) > 1_000_000:
             raise ValueError("Official feed exceeded size limit")

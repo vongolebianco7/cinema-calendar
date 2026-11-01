@@ -9,7 +9,7 @@ const end=source.indexOf('\n const tmdbScore=',start);
 function render(record){
  const value={},states={};
  const personal={querySelector:()=>value,classList:{toggle:(key,state)=>states[key]=state},style:{setProperty(){}}};
- vm.runInNewContext(source.slice(start,end)+';updatePersonal();',{personal,movie:{id:42},viewingRecord:()=>record});
+ vm.runInNewContext(source.slice(start,end)+';updatePersonal();',{personal,controls:{classList:{toggle:(key,state)=>{assert.equal(key,'is-watched');assert.equal(state,Boolean(record&&record.watched!==false));}}},assert,movie:{id:42},viewingRecord:()=>record});
  return {text:value.textContent,unwatched:states['is-unwatched']};
 }
 test('zero rating remains a watched record, distinct from absent and explicitly unwatched records',()=>{

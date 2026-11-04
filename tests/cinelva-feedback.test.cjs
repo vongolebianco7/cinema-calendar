@@ -26,3 +26,4 @@ test('database errors fail closed and rate denial returns 429 without echoing co
  assert.equal((await f.createHandler(opts)(req('feedback','POST',{kind:'bug',body:'abc'}))).status,429);
  opts.store.submit=async()=>{throw new Error('private database details');};const r=await f.createHandler(opts)(req('feedback','POST',{kind:'bug',body:'abc'}));assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/private database/);
 });
+test('Unicode minimum length agrees with PostgreSQL character count',()=>{assert.throws(()=>f.validate({kind:'bug',body:'😀a'}));assert.equal(f.validate({kind:'bug',body:'😀ab'}).body,'😀ab');});

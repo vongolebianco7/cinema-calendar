@@ -2142,5 +2142,17 @@
     },
     "data_protection": "No watch records, ratings, bookmarks, backup schema/keys/origin or DB/billing changed",
     "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
+  },
+  "issue_585_20261104": {
+    "status": "pr_created",
+    "pull_request": 594,
+    "branch": "feat/585-private-feedback",
+    "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+    "initial_source_sha": "63cc1ab54777899c5a403760bff62f4f1f797614",
+    "implementation": "Anonymous private intake, additive SQL, atomic rate caps, bearer-authenticated admin status list, common menu, Hobby pageview instrumentation; existing local data preserved.",
+    "local_validation": "shared quality gate PASS; focused request/privacy tests PASS; PostgreSQL WASM concurrent caps and rollback PASS; initial Prisma/TypeScript/Next build PASS.",
+    "review": "Independent review: Referer query leak and early-search race fixed with regression tests; Unicode minimum aligned.",
+    "external": "Vercel Web Analytics enabled on Hobby, API 0PV/0visitors; real received data unverified. Admin/rate secrets not set; schema not applied; physical iPhone not tested.",
+    "next_action": "Push review fixes; require exact-source four workflows, production-proof receipt, final-head CI. Apply additive schema only after proof/free quota confirmation; guarded merge/release and production acceptance. Never close #585 while pending."
   }
 }

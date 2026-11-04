@@ -37,6 +37,14 @@ const {spawn,spawnSync}=require('node:child_process'),{waitForLocalServer}=requi
    assert.deepEqual(errors,[],file+' page errors');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth<=2),file+' overflow');
   }
+  await page.goto(`https://127.0.0.1:${port}/search.html?search=private-query`,{waitUntil:'domcontentloaded'});
+  const outgoing=page.waitForRequest(r=>r.url().includes('/js/cinelva-feedback.js?referrer-test'));
+  await page.evaluate(()=>fetch('/js/cinelva-feedback.js?referrer-test'));
+  assert.equal((await outgoing).headers().referer,`https://127.0.0.1:${port}/`,'same-origin requests suppress search query/path');
+  await page.evaluate(()=>{const a=document.createElement('a');a.id='referrer-check';a.href='privacy.html';a.textContent='Privacy';document.body.prepend(a);});
+  await page.locator('#referrer-check').click();
+  await page.waitForURL('**/privacy.html');
+  assert.equal(await page.evaluate(()=>document.referrer),`https://127.0.0.1:${port}/`,'same-site referrer excludes private query');
   await page.evaluate(()=>localStorage.setItem('cinemap-viewing-records-v1','{"1":{"watched":true,"rating":4}}'));
   const separate=await browser.newContext({ignoreHTTPSErrors:true});const other=await separate.newPage();await other.goto(`https://127.0.0.1:${port}/privacy.html`);
   assert.equal(await other.evaluate(()=>localStorage.getItem('cinemap-viewing-records-v1')),null,'separate browser profiles must not share records');

@@ -7,7 +7,7 @@ function validate(input){
  if(typeof input.website==='string'&&input.website)throw fail(400);
  if(!kinds.has(input.kind)||typeof input.body!=='string'||input.body.length>4000)throw fail(400);
  const body=input.body.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g,'').trim();
- if(body.length<3)throw fail(400);
+ if(Array.from(body).length<3)throw fail(400);
  if(input.email!==undefined&&typeof input.email!=='string')throw fail(400);
  const email=(input.email||'').trim();
  if(email&&(email.length>254||!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)))throw fail(400);

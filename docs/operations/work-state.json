@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-04T22:55:06Z",
+  "updated_at": "2026-11-05T00:00:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2144,10 +2144,10 @@
     "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
   },
   "latest_restart": {
-    "observed_at": "2026-11-05T01:02:22+09:00",
+    "observed_at": "2026-11-05T08:59:12+09:00",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
-      596,
+      597,
       526,
       514
     ],
@@ -2169,27 +2169,31 @@
       "Audit approved event/IMAX sources; do not re-enable scraping"
     ],
     "known_blockers": [
-      "main production-proof head_sha 20d5335 differs from main 60c4650",
-      "Director refresh fails feature-credit test (36 vs >=40)",
-      "Production poster recovery unverified",
-      "Vercel latest production readiness unverified"
+      "Production poster coverage across all routes and iPhone remains unmeasured",
+      "Scheduled director refresh and DB synchronization success not verified",
+      "Feedback anonymous submission, persistence, admin access control and analytics acceptance not verified",
+      "November provider coverage, event and IMAX automation freshness not verified",
+      "PR #597 checkpoint itself is stale and needs required CI review before merge"
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
-    "checked_at": "2026-11-04T22:55:06Z",
-    "main_sha": "2e35c4f9e5e39bae9db7c776d35b8477ad195ef1",
-    "production_frontend": "READY at main 2e35c4f9; functionality not yet accepted",
+    "checked_at": "2026-11-05T08:59:12+09:00",
+    "main_sha": "3413ddabb88d332a3cefc4e03657a1174179e9b4",
+    "production_frontend": "READY at 3413ddab (Vercel CPMAHJE2pRjNDUDPGZBCQEGT9cbJ); functionality unverified",
     "closed_pr_588": "closed; do not retry without new evidence",
     "pr_596": "mergeable=true; 3 CI success, 4 in progress at checkpoint; do not merge before all required checks and review",
     "poster_issue_593": "open; cross-route production image coverage unverified",
     "feedback_issue_585": "merged to main; end-to-end persistence/admin authorization and analytics unverified",
     "release_decision": "NO-GO",
     "next_steps": [
-      "Wait for PR #596 all required CI, review exact-title TMDB enrichment and data provenance; merge only if checks and review policy allow",
-      "Reproduce and measure poster failure on actual production routes and iPhone WebKit/Chromium",
-      "Inspect latest scheduled director refresh and DB synchronization logs; fix source-specific failures without loosening data integrity gates",
-      "Verify feedback anonymous submit -> durable storage -> admin access denied/allowed, and analytics without personal data",
-      "Audit November streaming, event and IMAX freshness, then update release evidence"
-    ]
+      "Review CI and mergeability for PR #597 after this checkpoint refresh; do not merge blindly",
+      "Measure actual production poster missing/error rates across calendar, search, ranking, directors, My Cinelva and streaming on Chromium/WebKit",
+      "Inspect latest director update and DB sync scheduled-run failures, compare Spielberg film IDs with saved artifacts before altering thresholds",
+      "Verify anonymous feedback submit -> persistence -> admin access control and aggregate analytics",
+      "Audit November streaming service-by-service and event/IMAX source licenses, schedules and freshness; preserve unknown as unknown"
+    ],
+    "closed_pr_596": "closed and merged to main (poster enrichment and official November supplement)",
+    "pr_598": "merged to main at 3413ddab; generated streaming discovery candidates excluded from executable-source proof",
+    "production_backend": "READY at 3413ddab (Vercel ASbMXXNYey9uuPpkKhAAzRHfyYzZ); functionality unverified"
   },
   "issue_585_20261104": {
     "status": "production_schema_applied_pending_final_ci",

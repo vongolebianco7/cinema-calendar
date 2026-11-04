@@ -5,7 +5,6 @@ The official source remains authoritative for date and service. This script
 adds artwork only when TMDB returns one distinct exact-title movie identity;
 ambiguous titles are left without a poster rather than guessed.
 """
-import datetime
 import json
 import os
 import pathlib
@@ -80,10 +79,6 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35):
 
     data["poster_enrichment"] = {
         "source": "TMDB Search API; unique exact-title matches only",
-        "checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        "enriched": enriched,
-        "ambiguous": ambiguous,
-        "unresolved": unresolved,
     }
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.read_text(encoding="utf-8") == content:

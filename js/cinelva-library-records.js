@@ -92,6 +92,7 @@
   function save(movie,rating,watchedAt) {
     const current=load(), value=recordValue({...movie,watched:true},rating,watchedAt,current,legacy());
     writeRecords({...current,[value.id]:value},deleted().filter(id=>id!==value.id));
+    try { root.CinelvaAnalytics?.count('record_saved'); } catch (_) { /* Metrics never affect persistence. */ }
     return value;
   }
   function saveUnrated(movie,watchedAt) { return save(movie,null,watchedAt); }

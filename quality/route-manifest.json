@@ -373,6 +373,28 @@
       "source_refs": [
         "local-storage"
       ]
+    },
+    {
+      "path": "feedback.html",
+      "surface": "public",
+      "purpose": "private anonymous feedback",
+      "data_owner": "private feedback API",
+      "count_contract": "no public feedback count",
+      "primary_cta": "submit feedback",
+      "source_refs": [
+        "operator-private-feedback"
+      ]
+    },
+    {
+      "path": "admin-feedback.html",
+      "surface": "admin-shell",
+      "purpose": "authenticated feedback triage",
+      "data_owner": "private feedback API",
+      "count_contract": "no public feedback count",
+      "primary_cta": "authenticate administrator",
+      "source_refs": [
+        "operator-private-feedback"
+      ]
     }
   ]
 }

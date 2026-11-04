@@ -16,6 +16,9 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
  await context.addInitScript(t=>localStorage.setItem('cinelva-theme-v1',t),theme);
  await context.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
  const page=await context.newPage();
+ // This visual regression intentionally exercises the curated October 2026 films.
+ // Pin its clock so a new month does not turn real review controls into empty lists.
+ await page.clock.install({time:new Date('2026-10-18T03:00:00Z')});
  for(const route of ['index.html','rankings.html','revivals.html','events.html']){
  await page.goto('http://127.0.0.1:8768/'+route,{waitUntil:'domcontentloaded'});
  await page.locator('.cinelva-rating-actions .cinelva-rate-button').first().waitFor();

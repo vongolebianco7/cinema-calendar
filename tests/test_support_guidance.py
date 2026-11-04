@@ -2,15 +2,16 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC_ISSUES = 'https://github.com/vongolebianco7/cinema-calendar/issues/new'
+PRIVATE_FEEDBACK = 'feedback.html'
 
 class SupportGuidanceTests(unittest.TestCase):
-    def test_public_support_warns_against_personal_data(self):
+    def test_private_support_warns_against_personal_data(self):
         for prefix in ('', 'cinelva/'):
             privacy = (ROOT / prefix / 'privacy.html').read_text(encoding='utf-8')
             credits = (ROOT / prefix / 'credits.html').read_text(encoding='utf-8')
             for content in (privacy, credits):
-                self.assertIn(PUBLIC_ISSUES, content)
+                self.assertIn(PRIVATE_FEEDBACK, content)
+                self.assertNotIn('https://github.com/vongolebianco7/cinema-calendar/issues/new', content)
                 self.assertIn('個人情報', content)
                 self.assertIn('rel="noopener noreferrer"', content)
             self.assertIn('別ドメインには自動同期されません', privacy)

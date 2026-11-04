@@ -10,6 +10,10 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 class RefreshTest(unittest.TestCase):
+    def test_uses_registered_services_without_rejecting_fod(self):
+        self.assertIn("FOD", module.ALLOWED)
+        self.assertIn("DMM TV", module.ALLOWED)
+
     def test_deduplicates_and_preserves_existing_on_bad_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)

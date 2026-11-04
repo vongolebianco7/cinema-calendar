@@ -8,7 +8,17 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "data/streaming-2026-11-official-supplement.json"
 OUTPUT = ROOT / "data/streaming-official-current.json"
-ALLOWED = {"Prime Video", "Netflix", "Disney+", "U-NEXT", "Apple TV+", "Hulu", "ABEMA", "Lemino", "WOWOWオンデマンド"}
+SERVICES = ROOT / "data/streaming_sources.json"
+def registered_services(path=SERVICES):
+    data = json.loads(path.read_text(encoding="utf-8"))
+    services = data.get("services") if isinstance(data, dict) else None
+    if not isinstance(services, list):
+        raise ValueError("Invalid streaming service registry")
+    names = {entry.get("name") for entry in services if isinstance(entry, dict) and isinstance(entry.get("name"), str) and entry["name"].strip()}
+    if not names:
+        raise ValueError("Streaming service registry is empty")
+    return names
+ALLOWED = registered_services()
 def refresh(source=SOURCE, output=OUTPUT, today=None):
     today = today or dt.date.today()
     if not source.exists():

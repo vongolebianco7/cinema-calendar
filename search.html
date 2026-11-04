@@ -176,6 +176,7 @@ function movieTmdbId(m){
 function movieDateLabel(m){return ({streaming:"配信開始",tv:"TV放映",theatrical:"劇場上映日"})[m.event]||"公開年月日";}
 let searchRequest=0;
 async function search(){
+try { if(window.CinelvaAnalytics)window.CinelvaAnalytics.count('search');else(window.CinelvaAnalyticsQueue=window.CinelvaAnalyticsQueue||[]).push('search'); } catch (_) {}
  const term=q.value.trim();if(!term)return;
  const request=++searchRequest;
  const normalize=globalThis.CinelvaQuickRate?.normalize||((value)=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'')),needle=normalize(term);

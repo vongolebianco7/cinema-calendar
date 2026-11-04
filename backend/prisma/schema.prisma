@@ -102,3 +102,33 @@ model Theater {
   @@index([municipality])
   @@index([name])
 }
+
+// Issue 585: isolated private intake. No relations to catalog/user records.
+model Feedback {
+  id        String   @id @default(cuid())
+  kind      String
+  body      String
+  email     String?
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt, id])
+  @@index([status, createdAt, id])
+}
+
+model FeedbackRateBucket {
+  key       String   @id
+  count     Int
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+// Anonymous, opt-in daily counts only. No visitor IDs or event payloads.
+model FeatureMetric {
+  day DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  event String
+  count Int
+  @@id([day, event])
+}

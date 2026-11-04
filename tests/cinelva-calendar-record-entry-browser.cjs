@@ -18,12 +18,13 @@ async function freePort() {
   const port = await freePort();
   const root = path.resolve(__dirname, '..');
   const catalog = JSON.parse(fs.readFileSync(path.join(root, 'data/movies.json'), 'utf8'));
-  const original = catalog.movies.find(row => row.id && row.title);
-  assert.ok(original, 'catalog fixture has a movie ID and title');
   const date = new Date();
-  date.setDate(date.getDate() + 1);
-  const iso = date.toISOString().slice(0, 10);
-  const movie = { ...original, date: iso, event: 'streaming', service: 'Netflix' };
+  date.setDate(date.getDate() + 2);
+  const iso = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+  const movie = {
+    id: 5850001, tmdbId: 5850001, title: 'Cinelva CI Calendar Film',
+    date: iso, event: 'streaming', service: 'Netflix', score: 7.5, votes: 100
+  };
   const server = spawn('python', ['-m', 'http.server', String(port), '--bind', '127.0.0.1'], { cwd: root, stdio: 'ignore' });
   let browser;
   try {
@@ -41,13 +42,21 @@ async function freePort() {
       contentType: 'application/json',
       body: JSON.stringify({ ...catalog, movies: [movie] })
     }));
-    await page.goto(`${base}/index.html`, { waitUntil: 'domcontentloaded' });
-    const event = page.locator('.streamMovie').first();
+    await page.goto(`${base}/index.html?date=${iso}&mode=streaming`, { waitUntil: 'domcontentloaded' });
+    const event = page.locator('.streamMovie[data-mi="0"]');
     await event.waitFor({ state: 'visible', timeout: 15000 });
+    assert.ok((await event.innerText()).includes(movie.title), 'calendar event is the deterministic CI fixture');
     await event.click();
     await page.locator('#modal.show').waitFor({ state: 'visible', timeout: 5000 });
     const detailLink = page.locator('#detail .links a[href*="search.html?id="]').first();
-    await detailLink.waitFor({ state: 'visible', timeout: 5000 });
+    await detailLink.waitFor({ state: 'visible', timeout: 5000 }).catch(async error => {
+      console.error('Calendar detail-link diagnostics:', JSON.stringify(await page.evaluate(() => ({
+        pageUrl: location.href,
+        modalText: document.querySelector('#detail')?.innerText?.slice(0, 1200),
+        links: [...document.querySelectorAll('#detail .links a')].map(a => a.getAttribute('href'))
+      }))));
+      throw error;
+    });
     const detailHref = await detailLink.getAttribute('href');
     assert.ok(detailHref.includes(encodeURIComponent(String(movie.id))));
     assert.ok(detailHref.includes('date='));

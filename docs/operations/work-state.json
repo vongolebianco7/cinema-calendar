@@ -2176,5 +2176,22 @@
       "Vercel latest production readiness unverified"
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data"
+  },
+  "issue_585_20261104": {
+    "status": "production_schema_applied_pending_final_ci",
+    "pull_request": 594,
+    "branch": "feat/585-private-feedback",
+    "base_sha": "22505395e81740748ab7f02176efb1b78ee30101",
+    "initial_source_sha": "63cc1ab54777899c5a403760bff62f4f1f797614",
+    "implementation": "Anonymous private intake, additive SQL, atomic rate caps, bearer-authenticated admin status list, common menu, Hobby pageview instrumentation; existing local data preserved.",
+    "local_validation": "shared quality gate PASS; feedback/metrics/analytics Node tests PASS; PGlite SQL intake limits/rollback and metric cap PASS; Next production compilation PASS; verified backend-materialized full gate PASS on2d22. CI/browser and production still pending on new source.",
+    "review": "Independent review: Referer query leak and early-search race fixed with regression tests; Unicode minimum aligned.",
+    "external": "FEEDBACK_RATE_SECRET configured sensitive production-only. Owner FEEDBACK_ADMIN_TOKEN not configured; authenticated admin acceptance cannot complete until owner sets it. Physical iPhone acceptance unavailable.",
+    "next_action": "Synchronize PR #594 with current main, require all four workflows on final PR head, merge, verify normal frontend/backend production deployments and canonical feedback/metrics APIs, verify Vercel pageview receipt, then keep Issue #585 open until owner admin token and physical iPhone gates are accepted.",
+    "continuation": "Added opt-in first-party daily aggregate feature counters (3 names, no identities/payloads), authenticated30-day summary, DB cap10000/event/day and20/page client cap; no paid Vercel custom events. Existing full tests preserved.",
+    "verified_source_sha": "95baea1a92680db09fd0d441e98be9483a4963ac",
+    "proof_receipt_commit": "81b1ac13de489c157a52fd0fcddddb749c384a07",
+    "ci": "All four required pull_request workflows passed on exact source 95baea1a92680db09fd0d441e98be9483a4963ac; full browser suite passed after route audit expectation corrected to 33 pages.",
+    "production": "Neon Free plan verified; additive Feedback, FeedbackRateBucket, FeatureMetric tables and indexes applied to production. Feature metrics server flag set production-only. Vercel Web Analytics enabled on Hobby; no real traffic yet after instrumentation because deploy pending."
   }
 }

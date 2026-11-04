@@ -339,6 +339,7 @@ function attachInlineScore(button,movie) {
    if(marked)delete data[key];
    else data[key]={id:key,tmdbId:String(id),title:movie.title||movie.name||'作品',poster:root.CinelvaMovieIdentity?.posterFor(movie)||movie.poster||movie.posterUrl||movie.poster_path||'',year:movie.year||String(movie.release_date||'').slice(0,4),savedAt:new Date().toISOString()};
    localStorage.setItem(bookmarkKey,JSON.stringify(data));
+   try { root.CinelvaAnalytics?.count('bookmark'); } catch (_) { /* Metrics never affect persistence. */ }
    syncBookmark();
    showBookmarkToast(marked?'ブックマークを解除しました':'ブックマークしました');
    root.dispatchEvent(new CustomEvent('cinelva-bookmarks-updated',{detail:{id:key,marked:!marked}}));

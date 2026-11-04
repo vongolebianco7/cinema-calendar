@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "20d533594248e6a07735f1cc7e643331aae0739d",
-  "verified_at": "2026-10-31T11:30:00.000Z",
-  "note": "PR591 exact source passed all seven pull_request workflows including four required production checks. Receipt-only update after squash merge. RSS feeds remain unconfigured; no release discovery claim."
+  "head_sha": "95baea1a92680db09fd0d441e98be9483a4963ac",
+  "verified_at": "2026-11-04T20:10:18.324Z",
+  "note": "PR #594 exact source passed all four required pull_request workflows; production proof receipt only. Apply additive issue #585 schema after Free quota verification. Admin token and physical iPhone acceptance remain external gates."
 }

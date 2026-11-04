@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-04T16:02:22Z",
+  "updated_at": "2026-11-04T22:55:06Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
-  "branch": "docs/restart-checkpoint-20261105",
-  "head_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "base_sha": "2e35c4f9e5e39bae9db7c776d35b8477ad195ef1",
+  "branch": "docs/restart-checkpoint-20261105-0755",
+  "head_sha": "2e35c4f9e5e39bae9db7c776d35b8477ad195ef1",
   "pull_request": null,
   "work_items": [
     {
@@ -922,7 +922,7 @@
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Read latest GitHub239/242 and this evidence first. Physical iPhone acceptance is still needed; do not close reported feedback based only on CI. Continue unresolved data freshness, asset/legal/private intake/free quota and residual526/514 without reintroducing old security policy. Keep Neon suspended until reset/available free capacity is verified. No unapproved paid, destructive or future production actions.",
+  "next_action": "Review PR #596 required CI and poster enrichment; measure production poster coverage; audit director refresh/DB sync. NO-GO until all production acceptance gates pass.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2147,8 +2147,7 @@
     "observed_at": "2026-11-05T01:02:22+09:00",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
-      594,
-      588,
+      596,
       526,
       514
     ],
@@ -2175,7 +2174,22 @@
       "Production poster recovery unverified",
       "Vercel latest production readiness unverified"
     ],
-    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data"
+    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
+    "checked_at": "2026-11-04T22:55:06Z",
+    "main_sha": "2e35c4f9e5e39bae9db7c776d35b8477ad195ef1",
+    "production_frontend": "READY at main 2e35c4f9; functionality not yet accepted",
+    "closed_pr_588": "closed; do not retry without new evidence",
+    "pr_596": "mergeable=true; 3 CI success, 4 in progress at checkpoint; do not merge before all required checks and review",
+    "poster_issue_593": "open; cross-route production image coverage unverified",
+    "feedback_issue_585": "merged to main; end-to-end persistence/admin authorization and analytics unverified",
+    "release_decision": "NO-GO",
+    "next_steps": [
+      "Wait for PR #596 all required CI, review exact-title TMDB enrichment and data provenance; merge only if checks and review policy allow",
+      "Reproduce and measure poster failure on actual production routes and iPhone WebKit/Chromium",
+      "Inspect latest scheduled director refresh and DB synchronization logs; fix source-specific failures without loosening data integrity gates",
+      "Verify feedback anonymous submit -> durable storage -> admin access denied/allowed, and analytics without personal data",
+      "Audit November streaming, event and IMAX freshness, then update release evidence"
+    ]
   },
   "issue_585_20261104": {
     "status": "production_schema_applied_pending_final_ci",

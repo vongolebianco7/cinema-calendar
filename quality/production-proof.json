@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "95baea1a92680db09fd0d441e98be9483a4963ac",
-  "verified_at": "2026-11-04T20:10:18.324Z",
-  "note": "PR #594 exact source passed all four required pull_request workflows; production proof receipt only. Apply additive issue #585 schema after Free quota verification. Admin token and physical iPhone acceptance remain external gates."
+  "head_sha": "d551493f0af5241d12162bd4e16710f9d6d00932",
+  "verified_at": "2026-11-04T20:49:11.028Z",
+  "note": "Issue #585 exact source passed all four required pull_request workflows; receipt-only update after latest-main synchronization. Production additive schema applied on Neon Free after quota check. Keep #585 open until owner admin key and physical iPhone acceptance."
 }

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T21:35:49.086936+00:00",
+  "updated_at": "2026-11-04T16:02:22Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-  "branch": "docs/cinema-readability-checkpoint-20261031",
-  "head_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-  "pull_request": 582,
+  "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "branch": "docs/restart-checkpoint-20261105",
+  "head_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -2143,17 +2143,55 @@
     "data_protection": "No watch records, ratings, bookmarks, backup schema/keys/origin or DB/billing changed",
     "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
   },
+  "latest_restart": {
+    "observed_at": "2026-11-05T01:02:22+09:00",
+    "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
+    "open_prs": [
+      594,
+      588,
+      526,
+      514
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      593,
+      529
+    ],
+    "priority": [
+      "Verify poster missing rate on production (#593)",
+      "Repair exact-source production proof and movie/DB sync without bypassing gate",
+      "Verify #594 feedback/admin/analytics end to end and safely merge",
+      "Validate #588 November streaming integration",
+      "Compare Spielberg IDs from director-enrichment artifact before changing 40-credit assertion",
+      "Audit approved event/IMAX sources; do not re-enable scraping"
+    ],
+    "known_blockers": [
+      "main production-proof head_sha 20d5335 differs from main 60c4650",
+      "Director refresh fails feature-credit test (36 vs >=40)",
+      "Production poster recovery unverified",
+      "Vercel latest production readiness unverified"
+    ],
+    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data"
+  },
   "issue_585_20261104": {
-    "status": "pr_created",
+    "status": "production_schema_applied_pending_final_ci",
     "pull_request": 594,
     "branch": "feat/585-private-feedback",
-    "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+    "base_sha": "22505395e81740748ab7f02176efb1b78ee30101",
     "initial_source_sha": "63cc1ab54777899c5a403760bff62f4f1f797614",
     "implementation": "Anonymous private intake, additive SQL, atomic rate caps, bearer-authenticated admin status list, common menu, Hobby pageview instrumentation; existing local data preserved.",
     "local_validation": "shared quality gate PASS; feedback/metrics/analytics Node tests PASS; PGlite SQL intake limits/rollback and metric cap PASS; Next production compilation PASS; verified backend-materialized full gate PASS on2d22. CI/browser and production still pending on new source.",
     "review": "Independent review: Referer query leak and early-search race fixed with regression tests; Unicode minimum aligned.",
-    "external": "Vercel Hobby Analytics enabled; API read0PV/0visitors. FEEDBACK_RATE_SECRET configured sensitive production-only. Owner FEEDBACK_ADMIN_TOKEN not configured. Production schema not applied; aggregate enable flag awaits proof/schema. Physical iPhone unavailable.",
-    "next_action": "Require exact-source four workflows and browser tests, then proof receipt and final-head CI; merge/release. Apply only additive585 SQL after proof/free quota check. Verify canonical served source/APIs and real Analytics data. Owner admin key is the remaining human authentication setup; keep585 open until all acceptance evidence exists.",
-    "continuation": "Added opt-in first-party daily aggregate feature counters (3 names, no identities/payloads), authenticated30-day summary, DB cap10000/event/day and20/page client cap; no paid Vercel custom events. Existing full tests preserved."
+    "external": "FEEDBACK_RATE_SECRET configured sensitive production-only. Owner FEEDBACK_ADMIN_TOKEN not configured; authenticated admin acceptance cannot complete until owner sets it. Physical iPhone acceptance unavailable.",
+    "next_action": "Synchronize PR #594 with current main, require all four workflows on final PR head, merge, verify normal frontend/backend production deployments and canonical feedback/metrics APIs, verify Vercel pageview receipt, then keep Issue #585 open until owner admin token and physical iPhone gates are accepted.",
+    "continuation": "Added opt-in first-party daily aggregate feature counters (3 names, no identities/payloads), authenticated30-day summary, DB cap10000/event/day and20/page client cap; no paid Vercel custom events. Existing full tests preserved.",
+    "verified_source_sha": "95baea1a92680db09fd0d441e98be9483a4963ac",
+    "proof_receipt_commit": "81b1ac13de489c157a52fd0fcddddb749c384a07",
+    "ci": "All four required pull_request workflows passed on exact source 95baea1a92680db09fd0d441e98be9483a4963ac; full browser suite passed after route audit expectation corrected to 33 pages.",
+    "production": "Neon Free plan verified; additive Feedback, FeedbackRateBucket, FeatureMetric tables and indexes applied to production. Feature metrics server flag set production-only. Vercel Web Analytics enabled on Hobby; no real traffic yet after instrumentation because deploy pending."
   }
 }

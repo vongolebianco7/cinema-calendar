@@ -2150,9 +2150,10 @@
     "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
     "initial_source_sha": "63cc1ab54777899c5a403760bff62f4f1f797614",
     "implementation": "Anonymous private intake, additive SQL, atomic rate caps, bearer-authenticated admin status list, common menu, Hobby pageview instrumentation; existing local data preserved.",
-    "local_validation": "shared quality gate PASS; focused request/privacy tests PASS; PostgreSQL WASM concurrent caps and rollback PASS; initial Prisma/TypeScript/Next build PASS.",
+    "local_validation": "shared quality gate PASS; feedback/metrics/analytics Node tests PASS; PGlite SQL intake limits/rollback and metric cap PASS; Next production compilation PASS; verified backend-materialized full gate PASS on2d22. CI/browser and production still pending on new source.",
     "review": "Independent review: Referer query leak and early-search race fixed with regression tests; Unicode minimum aligned.",
-    "external": "Vercel Web Analytics enabled on Hobby, API 0PV/0visitors; real received data unverified. Admin/rate secrets not set; schema not applied; physical iPhone not tested.",
-    "next_action": "Push review fixes; require exact-source four workflows, production-proof receipt, final-head CI. Apply additive schema only after proof/free quota confirmation; guarded merge/release and production acceptance. Never close #585 while pending."
+    "external": "Vercel Hobby Analytics enabled; API read0PV/0visitors. FEEDBACK_RATE_SECRET configured sensitive production-only. Owner FEEDBACK_ADMIN_TOKEN not configured. Production schema not applied; aggregate enable flag awaits proof/schema. Physical iPhone unavailable.",
+    "next_action": "Require exact-source four workflows and browser tests, then proof receipt and final-head CI; merge/release. Apply only additive585 SQL after proof/free quota check. Verify canonical served source/APIs and real Analytics data. Owner admin key is the remaining human authentication setup; keep585 open until all acceptance evidence exists.",
+    "continuation": "Added opt-in first-party daily aggregate feature counters (3 names, no identities/payloads), authenticated30-day summary, DB cap10000/event/day and20/page client cap; no paid Vercel custom events. Existing full tests preserved."
   }
 }

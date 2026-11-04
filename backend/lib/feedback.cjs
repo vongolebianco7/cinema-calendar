@@ -47,7 +47,7 @@ function createHandler({store,adminToken,rateSecret,origins=[]}){
     if(status&&!statuses.has(status))throw fail(400);
     const cursor=url.searchParams.get('cursor')||undefined;
     if(cursor&&!/^[a-zA-Z0-9-]{1,80}$/.test(cursor))throw fail(400);
-    return response({items:await store.list(status,cursor)});
+    return response({items:await store.list(status,cursor),metrics:store.metrics?await store.metrics():null});
    }
    if(admin&&request.method==='PATCH'){
     const input=await readBody(request);
@@ -65,4 +65,4 @@ function createHandler({store,adminToken,rateSecret,origins=[]}){
   }catch(e){const status=[400,408,413,415].includes(e.status)?e.status:503;return response({error:status===503?'現在受付できません。時間をおいて再度お試しください。':'入力内容を確認してください。'},status);}
  };
 }
-module.exports={validate,authorized,rateKey,createHandler};
+module.exports={validate,authorized,rateKey,createHandler,readBody};

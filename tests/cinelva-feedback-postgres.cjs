@@ -16,5 +16,11 @@ assert.equal((await db.query('SELECT count(*)::int AS n FROM "Feedback"')).rows[
 const more=await Promise.all(Array.from({length:120},(_,i)=>store.submit(data,'other-ip-'+i)));assert.equal(more.filter(Boolean).length,97);
 assert.equal((await db.query('SELECT count(*)::int AS n FROM "Feedback"')).rows[0].n,100);
 
+const {createMetricStore}=require('../backend/lib/metrics.cjs');
+const metricStore=createMetricStore({$executeRaw:async(parts,...values)=>db.query(sql(parts,values),values),$queryRaw:async(parts,...values)=>(await db.query(sql(parts,values),values)).rows});
+await metricStore.increment('search');assert.equal((await metricStore.summary())[0].count,1);
+await db.query('UPDATE "FeatureMetric" SET "count"=9999');
+await Promise.all(Array.from({length:8},()=>metricStore.increment('search')));assert.equal((await metricStore.summary())[0].count,10000,'daily metric counter saturates without overflow');
+await assert.rejects(()=>metricStore.increment('unknown'));
 console.log('PostgreSQL atomic concurrent IP/global caps, rollback and additive schema passed');
 }finally{await db.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

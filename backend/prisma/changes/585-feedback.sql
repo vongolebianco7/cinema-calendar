@@ -13,4 +13,10 @@ CREATE TABLE IF NOT EXISTS "FeedbackRateBucket" (
  "key" TEXT PRIMARY KEY, "count" INTEGER NOT NULL, "expiresAt" TIMESTAMP(3) NOT NULL
 );
 CREATE INDEX IF NOT EXISTS "FeedbackRateBucket_expiresAt_idx" ON "FeedbackRateBucket"("expiresAt");
+CREATE TABLE IF NOT EXISTS "FeatureMetric" (
+ "day" DATE NOT NULL DEFAULT CURRENT_DATE,
+ "event" TEXT NOT NULL CHECK ("event" IN ('search','record_saved','bookmark')),
+ "count" INTEGER NOT NULL CHECK ("count" BETWEEN 1 AND 10000),
+ PRIMARY KEY ("day","event")
+);
 COMMIT;

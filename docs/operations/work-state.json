@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T21:35:49.086936+00:00",
+  "updated_at": "2026-11-04T16:02:22Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-  "branch": "docs/cinema-readability-checkpoint-20261031",
-  "head_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-  "pull_request": 582,
+  "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "branch": "docs/restart-checkpoint-20261105",
+  "head_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -2142,5 +2142,39 @@
     },
     "data_protection": "No watch records, ratings, bookmarks, backup schema/keys/origin or DB/billing changed",
     "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
+  },
+  "latest_restart": {
+    "observed_at": "2026-11-05T01:02:22+09:00",
+    "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
+    "open_prs": [
+      594,
+      588,
+      526,
+      514
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      593,
+      529
+    ],
+    "priority": [
+      "Verify poster missing rate on production (#593)",
+      "Repair exact-source production proof and movie/DB sync without bypassing gate",
+      "Verify #594 feedback/admin/analytics end to end and safely merge",
+      "Validate #588 November streaming integration",
+      "Compare Spielberg IDs from director-enrichment artifact before changing 40-credit assertion",
+      "Audit approved event/IMAX sources; do not re-enable scraping"
+    ],
+    "known_blockers": [
+      "main production-proof head_sha 20d5335 differs from main 60c4650",
+      "Director refresh fails feature-credit test (36 vs >=40)",
+      "Production poster recovery unverified",
+      "Vercel latest production readiness unverified"
+    ],
+    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data"
   }
 }

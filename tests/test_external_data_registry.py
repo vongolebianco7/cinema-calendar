@@ -15,18 +15,25 @@ class ExternalDataRegistryTests(unittest.TestCase):
         payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
         rows = payload["categories"]
         categories = {row["category"] for row in rows}
-        self.assertTrue({"streaming", "theater-schedules", "theater-directory", "television", "box-office", "movies-posters", "awards", "features"} <= categories)
+        self.assertTrue({"streaming", "theater-schedules", "theater-directory", "television", "box-office", "movies-posters", "awards", "features", "劇場公開中作品", "映画祭・映画イベント", "屋外上映イベント", "特別上映", "リバイバル上映"} <= categories)
         self.assertEqual(len({row["id"] for row in rows}), len(rows))
         for row in rows:
             self.assertIn(row["status"], {"automated", "manual", "disabled-pending-permission", "disabled-resource-scope", "unavailable"})
             self.assertTrue(row["source"])
             self.assertTrue(row["acquisition"])
             self.assertTrue(row["coverage"])
+            if row["status"] == "automated":
+                self.assertTrue(row.get("workflow"), f"{row['id']} automated without a workflow")
+                self.assertTrue(row.get("trigger"), f"{row['id']} automated without a trigger")
             if row["status"].startswith("disabled-") or row["status"] == "unavailable":
                 self.assertFalse(row["freshness_enforced"], f"{row['id']} cannot refresh while disabled")
         television = next(row for row in rows if row["category"] == "television")
-        self.assertEqual(television["status"], "unavailable")
+        self.assertEqual(television["status"], "manual")
+        self.assertIn("TMDB公式API", television["acquisition"])
         self.assertFalse(television["freshness_enforced"])
+        showtimes = next(row for row in rows if row["id"] == "theater-showtimes")
+        self.assertEqual(showtimes["status"], "disabled-pending-permission")
+        self.assertEqual(showtimes["trigger"], "job disabled")
 
     def test_audit_reports_every_registry_entry_and_only_enforces_declared_datasets(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -93,7 +100,6 @@ class ExternalDataRegistryTests(unittest.TestCase):
                 self.assertEqual(row["snapshot_freshness"], "fresh")
                 self.assertEqual(row["observations"]["fresh_7d"], 0)
                 self.assertEqual(report["enforced_failures"], [])
-
 
 if __name__ == "__main__":
     unittest.main()

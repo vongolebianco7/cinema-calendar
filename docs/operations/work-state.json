@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T23:03:30Z",
+  "updated_at": "2026-11-05T23:04:20Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -938,9 +938,9 @@
     },
     {
       "item": "PR #647 proof/checkpoint follow-up",
-      "status": "in_progress",
+      "status": "superseded",
       "sha": "821c4de4218fcebaad13e9d5a12c468503f5deb2",
-      "note": "Exact-head CI rerunning."
+      "note": "This checkpoint-only commit was followed by later documentation corrections. At resume, read the live PR branch head and its checks; do not rely on this historical SHA as current."
     },
     {
       "item": "main Publish verified legacy Pages",
@@ -2821,9 +2821,9 @@
       },
       {
         "item": "PR #647 proof/checkpoint follow-up",
-        "status": "in_progress",
+        "status": "superseded",
         "sha": "821c4de4218fcebaad13e9d5a12c468503f5deb2",
-        "note": "Exact-head CI rerunning."
+        "note": "This checkpoint-only commit was followed by later documentation corrections. At resume, read the live PR branch head and its checks; do not rely on this historical SHA as current."
       },
       {
         "item": "main Publish verified legacy Pages",

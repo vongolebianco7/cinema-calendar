@@ -1,4 +1,5 @@
 import { readWithSnapshot, tvSnapshot, mergeTelevisionRows } from "../../../lib/catalog-snapshot.cjs";
+import { upcomingTelevisionRows } from "../../../lib/tv-broadcasts.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json, rateLimited, options } from "../../../lib/http";
 
@@ -11,8 +12,11 @@ export async function GET(request: Request) {
     orderBy: [{ date: "asc" }, { time: "asc" }, { service: "asc" }],
   });
   const snapshot = tvSnapshot();
-  return { ...snapshot, movies: mergeTelevisionRows(rows.map((row) => row.payload), snapshot.movies) };
-  }, tvSnapshot));
+  return { ...snapshot, movies: upcomingTelevisionRows(mergeTelevisionRows(rows.map((row) => row.payload), snapshot.movies)) };
+  },()=>{
+    const snapshot = tvSnapshot();
+    return { ...snapshot, movies: upcomingTelevisionRows(snapshot.movies) };
+  }));
 }
 
 export async function OPTIONS(request: Request) { return options(request); }

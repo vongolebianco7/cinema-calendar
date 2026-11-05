@@ -26,6 +26,11 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "non-object"):
             update_syoboi_tv_movies._as_programs(["not a program"])
 
+    def test_feed_uses_documented_unfiltered_category_schedule(self):
+        self.assertIn("filter=2", update_syoboi_tv_movies.SOURCE_URL)
+        self.assertIn("days=7", update_syoboi_tv_movies.SOURCE_URL)
+        self.assertIn("alt=json", update_syoboi_tv_movies.SOURCE_URL)
+
     def test_only_future_movie_category_broadcasts_are_imported_and_deduplicated(self):
         feed = [
             {"Cat": 8, "Title": "未来の映画", "TID": 1, "PID": 10, "ChName": "BS局", "StTimeU": epoch(NOW + dt.timedelta(days=1))},
@@ -50,7 +55,7 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
     def test_updates_auto_rows_and_preserves_curated_records_and_curated_timestamp(self):
         manual = {"title": "公式確認分", "date": "2026-11-05", "service": "地上波", "source_url": "https://broadcaster.example/"}
         old_auto = {"title": "古い自動行", "date": "2026-11-03", "service": "BS局", "source_id": "syoboi_calendar"}
-        incoming = {"title": "新しい自動行", "date": "2026-11-06", "service": "BS局", "source_id": "syoboi_calendar", "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json"}
+        incoming = {"title": "新しい自動行", "date": "2026-11-06", "service": "BS局", "source_id": "syoboi_calendar", "source_url": "https://cal.syoboi.jp/rss2.php?days=7&filter=2&alt=json"}
         original = {"generated_at": "2026-10-22", "movies": [manual, old_auto]}
         updated = merge_tv_snapshot(original, [incoming], generated_at="2026-11-05T00:00:00Z")
         self.assertEqual(updated["generated_at"], "2026-10-22")

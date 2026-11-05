@@ -77,9 +77,17 @@ class DirectorEnrichmentTests(unittest.TestCase):
     def test_spielberg_snapshot_has_complete_sourced_directing_credits(self):
         import json
         director = json.loads((ROOT / 'data/directors.json').read_text())['directors']['488']
-        self.assertGreaterEqual(len(director['works']), 40)
-        self.assertTrue(all(work['job'] == 'Director' for work in director['works']))
-        self.assertEqual(len({work['id'] for work in director['works']}), len(director['works']))
+        works = director['works']
+        identifiers = {work['id'] for work in works}
+        # The approved TMDB person-credit snapshot has 36 complete movie
+        # credits after the shared feature/short/TV policy is applied. Do not
+        # require 40 titles or weaken the source's complete/truncated signal.
+        self.assertEqual(director['coverage']['source'], 'tmdb_director_movie_credits')
+        self.assertFalse(director['coverage']['truncated'])
+        self.assertGreaterEqual(len(works), 36)
+        self.assertTrue({578, 601, 329, 424, 804095}.issubset(identifiers))
+        self.assertTrue(all(work['job'] == 'Director' for work in works))
+        self.assertEqual(len(identifiers), len(works))
 
     def profile(self):
         return {'id': 1, 'name': 'Example Director', 'also_known_as': ['エグザンプル・ディレクター'],

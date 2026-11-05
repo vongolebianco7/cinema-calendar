@@ -1,5 +1,6 @@
 import datetime as dt
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -25,6 +26,19 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(update_syoboi_tv_movies._as_programs({"items": {"item": [row]}}), [row])
         with self.assertRaisesRegex(ValueError, "non-object"):
             update_syoboi_tv_movies._as_programs(["not a program"])
+
+    def test_feed_refresh_precedes_same_day_tmdb_enrichment_job(self):
+        root = Path(__file__).resolve().parents[1]
+        feed = (root / ".github/workflows/update-tv-movie-broadcasts.yml").read_text(encoding="utf-8")
+        enrich = (root / ".github/workflows/update-movies.yml").read_text(encoding="utf-8")
+        feed_cron = re.search(r"cron:\s*'([0-9]+)\s+([0-9]+)\s+\*", feed)
+        enrich_cron = re.search(r'cron:\s*"([0-9]+)\s+([0-9]+)\s+\*', enrich)
+        self.assertIsNotNone(feed_cron)
+        self.assertIsNotNone(enrich_cron)
+        feed_minute = int(feed_cron.group(2)) * 60 + int(feed_cron.group(1))
+        enrich_minute = int(enrich_cron.group(2)) * 60 + int(enrich_cron.group(1))
+        self.assertLess(feed_minute, enrich_minute)
+        self.assertGreaterEqual(enrich_minute - feed_minute, 30)
 
     def test_feed_uses_documented_unfiltered_category_schedule(self):
         self.assertIn("filter=2", update_syoboi_tv_movies.SOURCE_URL)

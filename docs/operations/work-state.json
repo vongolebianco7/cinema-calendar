@@ -2565,5 +2565,42 @@
       "Refresh issue/PR/CI/main status and update this checkpoint before next interruption."
     ],
     "safety": "No user records, ratings, bookmarks, DB, credentials, paid plan or production deployment changed in this run."
+  },
+  "latest_tv_publish_race_recovery_20261105": {
+    "observed_at": "2026-11-05T19:15:49.055Z",
+    "main_sha": "2d79b0adb615a0a0b0e1df5fb6e131864534e013",
+    "merged": [
+      {
+        "pr": 633,
+        "sha": "569c7463b03a1ecbddd9328014117e5ba318c1ad",
+        "purpose": "Refresh exact-source proof and trigger the TV feed after receipt publication."
+      }
+    ],
+    "tv_first_attempt": {
+      "run_id": 42089461238,
+      "result": "13 upcoming Syoboi movie-category records fetched and validated; parser contract 10 tests and quality gate passed; final rebase failed only on concurrent data/source-status.json; no TV/source-status snapshot was pushed and no PostgreSQL was touched."
+    },
+    "active_pull_request": {
+      "number": 634,
+      "head": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
+      "title": "retry TV snapshot publication after source-status race",
+      "ci": "Autonomous quality, smoke, Validate frontend Chromium/WebKit, backend build, mobile, completeness all passed on this exact source head; refresh production proof to this SHA and merge only after proof validator succeeds."
+    },
+    "release_decision": "NO-GO",
+    "blockers": [
+      "PR #634 proof refresh/merge and rerun of TV feed still pending.",
+      "Vercel production aliases remain on older source (frontend 0c7b4f5; backend a1c93bc); verify current project deployments after merge without changing Hobby tier.",
+      "FEEDBACK_ADMIN_TOKEN is absent from frontend/backend project environments; owner must configure it for admin feedback acceptance.",
+      "Physical iPhone Safari acceptance is unavailable here; Chromium/WebKit tests are green.",
+      "Full nationwide TV, theatrical schedules, and film-event discovery remain unautomated pending authorized comprehensive sources; the Syoboi feed is anime-related movie-category only."
+    ],
+    "next_actions": [
+      "After proof renewal, run scripts/verify-production-release.cjs --require on the current PR branch and merge #634 against exact tested head.",
+      "Verify the new main push automatically launches Refresh anime-related movie TV broadcasts; confirm retry behavior, 13 candidates/matches/insertions and updated source-status; do not call zero or partial coverage complete.",
+      "Verify Publish verified legacy Pages and Vercel frontend/backend deployments on current main; if Vercel Git integration does not deploy, diagnose before creating any production deployment.",
+      "Fetch production /api/tv and confirm new data is visible, without submitting dummy feedback to production.",
+      "Continue Issue #585 and #239/#242/#243/#244 after external blockers and source authorization are resolved."
+    ],
+    "safety": "No user ratings, bookmarks, records, PostgreSQL, secrets, paid tier or production deployment changed by the failed TV run."
   }
 }

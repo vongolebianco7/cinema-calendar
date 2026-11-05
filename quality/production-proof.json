@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "a5aa00359fd5794e0ecb1a687c22e54c58bd5de3",
-  "verified_at": "2026-11-05T18:56:11.990Z",
-  "note": "PR #633 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), Reproducible backend build, mobile layout smoke, and completeness scorecard passed. The receipt is receipt-only: source files, data, database and user records are unchanged by this receipt."
+  "head_sha": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
+  "verified_at": "2026-11-05T19:15:59.176Z",
+  "note": "PR #634 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), Reproducible backend build, mobile layout smoke and completeness scorecard passed. Includes fail-closed recovery for the documented concurrent source-status snapshot race: restart from latest main, re-fetch/re-validate TV source, preserve other snapshots, retry up to three times. No PostgreSQL writes or user-record changes."
 }

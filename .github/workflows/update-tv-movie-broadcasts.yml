@@ -8,7 +8,6 @@ on:
       - data/source_registry.json
       - quality/production-proof.json
       - .github/workflows/update-tv-movie-broadcasts.yml
-      - quality/production-proof.json
   schedule:
     - cron: '37 18 * * *'
 permissions:
@@ -44,13 +43,43 @@ jobs:
           node scripts/verify-production-release.cjs --require
       - name: Publish source snapshot without touching PostgreSQL
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/tv.json data/source-status.json
           git diff --cached --quiet && exit 0
           git commit -m 'Refresh anime-related movie TV broadcasts'
-          git pull --rebase origin main
-          python scripts/check_sources.py
-          python scripts/quality_gate.py
-          node scripts/verify-production-release.cjs --require
-          git push origin main
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main; then
+              python scripts/check_sources.py
+              python scripts/quality_gate.py
+              node scripts/verify-production-release.cjs --require
+              if git push origin HEAD:main; then exit 0; fi
+              continue
+            fi
+            conflicts="$(git diff --name-only --diff-filter=U)"
+            git rebase --abort
+            if [[ "$conflicts" != "data/source-status.json" ]]; then
+              echo "Unexpected concurrent snapshot conflict: $conflicts" >&2
+              exit 1
+            fi
+            # Another approved updater changed source-status during this run.
+            # Restart from latest main and rebuild this feed instead of choosing
+            # either generated status file and losing the other source's data.
+            git reset --hard origin/main
+            python scripts/check_sources.py
+            node scripts/verify-production-release.cjs --require
+            python scripts/update_syoboi_tv_movies.py
+            python -m unittest tests.test_syoboi_tv_movies
+            if ! git diff --quiet -- data/tv.json; then
+              node scripts/source-status.cjs --output data/source-status.json
+            fi
+            python scripts/quality_gate.py
+            node scripts/verify-production-release.cjs --require
+            git add data/tv.json data/source-status.json
+            git diff --cached --quiet && exit 0
+            git commit -m 'Refresh anime-related movie TV broadcasts'
+          done
+          echo 'Unable to publish TV snapshot after three safe retries' >&2
+          exit 1

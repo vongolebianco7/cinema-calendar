@@ -35,11 +35,11 @@ test('invalid feed preserves the last-known-good file and valid feed replaces it
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'cinelva-streaming-import-'));
  const target=path.join(directory,'snapshot.json');
  try{
-  fs.writeFileSync(target,'last-known-good\\n');
+  fs.writeFileSync(target,'last-known-good\n');
   const invalid=feed();delete invalid.services.WOWOWオンデマンド;
   const rejected=writeValidatedImport(invalid,target,now);
   assert.equal(rejected.ok,false);
-  assert.equal(fs.readFileSync(target,'utf8'),'last-known-good\\n');
+  assert.equal(fs.readFileSync(target,'utf8'),'last-known-good\n');
   const accepted=writeValidatedImport(feed(),target,now);
   assert.equal(accepted.ok,true);
   const stored=JSON.parse(fs.readFileSync(target,'utf8'));

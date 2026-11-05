@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
-  "verified_at": "2026-11-05T22:58:59Z",
-  "note": "Executable source at exact PR #647 head 55849d0148391868ae63fd36cd76ce0c06dea281 passed all six exact-head GitHub Actions workflows before this receipt-only/checkpoint follow-up: Validate frontend (run 42124176106, Chromium/WebKit My Cinelva mobile browser journey), CINELVA smoke (42124175901), completeness scorecard (42124175997), Autonomous quality gate (42124176047), reproducible backend build (42124176037), and mobile layout smoke (42124176162). This receipt attests only to source CI. It does not claim a current Vercel/Pages production deployment or public acceptance."
+  "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
+  "verified_at": "2026-11-05T23:36:57.011Z",
+  "note": "PR #649 discovery fix executable source 27508f135fce7b3fd560415490efa896f2b2c78f is pending exact-head CI; this receipt records no production validation."
 }

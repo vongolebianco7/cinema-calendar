@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T23:04:20Z",
+  "updated_at": "2026-11-05T23:38:14.828Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
-  "branch": "fix/atomic-streaming-catalog-import-20261106",
-  "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
-  "pull_request": 647,
+  "base_sha": "22e5cdbe94ef466f00b42431ed76adca8ad569ba",
+  "branch": "fix/discovery-history-versus-true-story-main-20261106",
+  "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
+  "pull_request": 650,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -658,6 +658,14 @@
       "issue": 242,
       "pull_request": 649,
       "acceptance": "The discovery screen exposes separate labels and filters for historic classics and films with explicit true-story evidence; regression smoke verifies both."
+    },
+    {
+      "id": "P0-242-HISTORY-TRUE-STORY",
+      "title": "Separate film-history discovery from true-story discovery",
+      "status": "in_progress",
+      "issue": 242,
+      "pull_request": 650,
+      "acceptance": "Preserve the historical-classics preset, add a distinct explicit-evidence true-story preset, and keep the result sets separate. Exact-head CI pending."
     }
   ],
   "verification": [
@@ -959,6 +967,12 @@
       "item": "Public production/iPhone acceptance",
       "status": "blocked",
       "note": "Vercel Hobby quota and physical iPhone Safari verification remain unresolved."
+    },
+    {
+      "item": "PR #647 atomic streaming import and release checkpoint",
+      "status": "merged_ci_passed_production_ready",
+      "sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
+      "note": "All 14 GitHub Actions checks passed at exact PR head b247d1d. Merged as 7128a72. Production deployment dpl_CD4YcLVh3afb9z5PrWT2bYW3edE6 is READY for 7128a72; canonical cinelva.vercel.app alias returned HTTP 200. Main workflow run 42130066674 published verified legacy Pages successfully."
     }
   ],
   "deployment": {
@@ -2727,7 +2741,7 @@
   },
   "current_release_checkpoint": {
     "master_issue": 239,
-    "latest_main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+    "latest_main_sha": "22e5cdbe94ef466f00b42431ed76adca8ad569ba",
     "merged_pull_requests": [
       {
         "number": 642,
@@ -2743,6 +2757,11 @@
         "number": 644,
         "merge_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
         "result": "fail-closed 12-provider rights/coverage import gate; no feeds enabled"
+      },
+      {
+        "number": 647,
+        "merge_sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
+        "result": "All 14 exact-head GitHub Actions passed; merged. Main publication gate passed; Vercel production READY for merge SHA."
       }
     ],
     "closed_pull_requests": [
@@ -2753,20 +2772,18 @@
       {
         "number": 648,
         "result": "closed as duplicate after checkpoint was carried in PR #647"
+      },
+      {
+        "number": 649,
+        "result": "Superseded by rebased PR #650 after main advanced; same 3-file change preserved and retested against current main."
       }
     ],
     "open_pull_requests": [
       {
-        "number": 647,
-        "branch": "fix/atomic-streaming-catalog-import-20261106",
-        "head_sha": "2732f5a339b66c1760660f25b302f913b3e39a06",
-        "status": "source checks passed; exact-head follow-up checks are running"
-      },
-      {
-        "number": 649,
-        "branch": "fix/discovery-history-versus-true-story-20261105",
-        "head_sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
-        "status": "smoke/backend/mobile/backup/completeness/autonomous green; Validate frontend still running"
+        "number": 650,
+        "branch": "fix/discovery-history-versus-true-story-main-20261106",
+        "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
+        "status": "rebased on main; exact-head CI in progress"
       }
     ],
     "open_issues": [
@@ -2778,30 +2795,31 @@
       585
     ],
     "latest_main_actions": {
-      "commit_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
-      "smoke": "success",
-      "completeness": "success",
-      "pages_build": "success",
-      "publish_verified_legacy_pages": "Recent Vercel frontend/backend main deployments were rejected by the Hobby deployment quota; current public page is stale. The main GitHub Pages publication gate also failed on the stale CI receipt and will be retried only after the exact-source receipt is refreshed and checked.",
-      "next": "Poll the exact-head workflows on the latest PR #647 branch head. Repair any failures; when all required checks pass and the PR remains mergeable, merge it, then verify the post-merge legacy Pages publication and current production deployment. Continue PR #649's independent UI regression work while those checks run."
+      "commit_sha": "22e5cdbe94ef466f00b42431ed76adca8ad569ba",
+      "publish_verified_legacy_pages": "success for merge SHA 7128a72",
+      "current_main_checks": "actions for latest main/data snapshot 22e5cdbe must be confirmed",
+      "next": "Check current main checks and production deployment; complete exact-head CI on PR #650 and fix failures; merge only when green."
     },
     "production": {
       "url": "https://cinelva.vercel.app/",
       "http_status": 200,
-      "state": "serves stale build; current main is not production verified",
-      "vercel": "Hobby free-tier deployment cap blocked recent frontend/backend main builds; do not retry until quota window resets; preserve free tier"
+      "state": "READY deployment for merge SHA 7128a72; latest main has advanced to 22e5cdbe and must be verified",
+      "deployment_id": "dpl_CD4YcLVh3afb9z5PrWT2bYW3edE6",
+      "production_verified": false,
+      "vercel": "Free Hobby tier; no upgrade. Physical iPhone Safari acceptance remains unverified."
     },
     "blockers": [
-      "Vercel Hobby daily deployment cap blocked recent Vercel frontend/backend deployments; preserve free tier. Main Pages publication still needs to pass after the proof refresh.",
-      "No rights-verified official feeds for the 12 streaming services; no provider catalog is enabled, so exhaustive streaming coverage is unavailable.",
+      "Current main SHA advanced to 22e5cdbe after merge; verify its Vercel production deployment and source-bound proof.",
+      "PR #650 exact-head checks are running; repair failures and rerun before merge.",
+      "No rights-verified official feeds for all 12 streaming services; comprehensive premiere catalogs remain unavailable.",
       "Physical iPhone Safari acceptance remains outstanding.",
-      "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
-      "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
+      "Issue #585 needs owner-side FEEDBACK_ADMIN_TOKEN setup and admin acceptance; do not expose or invent secrets.",
+      "Issue #529 isolated My Cinelva demo acceptance remains unverified."
     ],
     "next_concrete_actions": [
-      "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it.",
-      "Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
-      "Continue #649's browser checks and then the remaining release issues; no release issue is complete from code/CI alone."
+      "Check exact-head CI for PR #650 after its checkpoint commit, resolve failures, and merge only when all required GitHub Actions pass and the PR is mergeable.",
+      "Confirm Vercel production READY for current main 22e5cdbe; verify canonical root and critical routes.",
+      "Continue #242 poster/record/mobile QA and #243/#244 data-quality work; retain explicit coverage limits."
     ],
     "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data.",
     "verification_summary": [

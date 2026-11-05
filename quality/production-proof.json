@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5e3efe44bad2fa2932344ab36917efa79a30cfef",
-  "verified_at": "2026-11-05T15:48:06.403Z",
-  "note": "PR #614 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build, mobile layout smoke, and completeness scorecard passed. The source synchronizes generated source-status counts with the nationwide now-playing snapshot. No database sync or paid deployment configuration is changed."
+  "head_sha": "6f36b3f11bc2952cda3db4ef19126386cadcf1eb",
+  "verified_at": "2026-11-05T16:45:24.244Z",
+  "note": "PR #618 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed on this head; mobile layout, Python contract suite, and completeness scorecard also passed. The change requires explicit automated/manual acquisition mode before a source can be marked fresh. Receipt-only commit."
 }

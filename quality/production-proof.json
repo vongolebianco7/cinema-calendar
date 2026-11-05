@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "fcf3b18a9e6414dbacc5e45a3dbc6de6595ddbd9",
-  "verified_at": "2026-11-05T22:08:03.909Z",
-  "note": "PR #642 executable source passed the Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), and Reproducible backend build on exact head fcf3b18a9e6414dbacc5e45a3dbc6de6595ddbd9. Both root and mirrored concierge redirects were opened in the successful Cloudflare Pages preview and reached the concierge discovery view. The Vercel Hobby daily deployment cap is currently blocking Vercel builds; this receipt records exact-head CI and preview evidence only and does not claim a production deployment."
+  "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
+  "verified_at": "2026-11-05T22:58:59Z",
+  "note": "Executable source at exact PR #647 head 55849d0148391868ae63fd36cd76ce0c06dea281 passed all six exact-head GitHub Actions workflows before this receipt-only/checkpoint follow-up: Validate frontend (run 42124176106, Chromium/WebKit My Cinelva mobile browser journey), CINELVA smoke (42124175901), completeness scorecard (42124175997), Autonomous quality gate (42124176047), reproducible backend build (42124176037), and mobile layout smoke (42124176162). This receipt attests only to source CI. It does not claim a current Vercel/Pages production deployment or public acceptance."
 }

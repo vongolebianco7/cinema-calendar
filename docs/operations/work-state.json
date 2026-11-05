@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:58:59Z",
+  "updated_at": "2026-11-05T23:00:48Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -642,297 +642,79 @@
       "receipt_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
       "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
       "iphone_safari_status": "unverified_fixed_version"
+    },
+    {
+      "id": "P0-244-ATOMIC-IMPORT-20261105",
+      "title": "Preserve the last-good streaming catalog on rejected imports",
+      "status": "in_progress",
+      "issue": 244,
+      "pull_request": 647,
+      "acceptance": "A malformed/incomplete rights or coverage feed cannot alter the published snapshot; valid fully verified imports replace it atomically. Exact source checks passed on 55849d0; final-head CI and post-merge publication still pending."
+    },
+    {
+      "id": "P0-242-HISTORY-TRUTH-20261105",
+      "title": "Separate film-history classics from true-story discovery",
+      "status": "pr_created",
+      "issue": 242,
+      "pull_request": 649,
+      "acceptance": "The discovery screen exposes separate labels and filters for historic classics and films with explicit true-story evidence; regression smoke verifies both."
     }
   ],
   "verification": [
     {
-      "command": "python scripts/quality_gate.py; node --test tests/cinelva-record-list-search.test.cjs tests/cinelva-director-render.test.cjs",
-      "result": "passed_locally",
-      "details": "116 active Node tests pass; all quality checks pass. Record-search regressions reproduced before fix. #384 introduced missing ratedMovies in isolated test harness; real production selector is now executed with rated fixtures. Local browser launch is blocked by missing Playwright executable; existing frontend CI covers Chromium/WebKit at 390px with added search assertions."
+      "item": "PR #647 executable importer source exact-head checks",
+      "status": "ci_passed",
+      "sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
+      "runs": [
+        42124176106,
+        42124175901,
+        42124175997,
+        42124176047,
+        42124176037,
+        42124176162
+      ],
+      "note": "All six passed; receipt now points to this executable tree. Proof/checkpoint-only follow-up requires its own final-head checks."
     },
     {
-      "check": "2026-10-18 cross-thread acceptance audit",
-      "result": "All32masterbullets catalogued in docs/operations/acceptance-audit-20261018.md;4verifiedlocally,24partial,4pending. This is evidence classification, not overall completion percentage. Staticbuild282localreferences0missing. Availability79/355fresh7days,276stale/unchecked."
+      "item": "PR #647 proof/checkpoint follow-up",
+      "status": "in_progress",
+      "sha": "821c4de4218fcebaad13e9d5a12c468503f5deb2",
+      "note": "Exact-head CI rerunning."
     },
     {
-      "check": "Mergedsourceacceptance21:12JST",
-      "result": "#387legacysafetyand#388freshnessscopeintegrated; stalePR#339/#368closedassupersededafteractualmaincodeinspection. Latestmain8b89f1bfrontendandbackendVercelstatusesbothbuild-rate-limit. No manualretry or productionverification."
+      "item": "main Publish verified legacy Pages",
+      "status": "blocked",
+      "sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+      "run": 42123516896,
+      "note": "Failed because the previous proof receipt source did not match main executable source."
     },
     {
-      "check": "PR390integration",
-      "result": "Mergedb2876171;head eadbf0a1 11/11check-runs successful. TCP listener/readiness-timeoutverified; actualHTTP/DOM/storageassertionsretained. No productionclaim."
+      "item": "PR #649 discovery UI regression",
+      "status": "in_progress",
+      "sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
+      "note": "Smoke test passed; remaining exact-head CI is running."
     },
     {
-      "check": "Canonical production source smoke",
-      "result": "Vercel READY production dadc773a79ad6175bb02c79d1f5e3c6a795fe978, alias cinelva.vercel.app confirmed. Six actual canonical URLs returned200 and exact main bytes: index, MyCinelva, search, quick-rate, library records, legacy redirect. This is HTTP/source evidence, not browser interaction or real-iPhone acceptance."
-    },
-    {
-      "check": "Canonical production browser smoke on dadc773",
-      "result": "Cloud Chrome actual MyCinelva empty state -> search Interstellar -> detail -> shared review dialog verified. Only close/save controls; no next action. Did not save test data. Discovered official streaming date2026-09-01 misrendered as film year and detail lookup skipped; source fix now under review. Extension-metadata errors observed are chrome-extension URLs, not app errors. Real iPhone remains unverified."
-    },
-    {
-      "check": "Follow-up deployment schema and canonical identity safety",
-      "result": "Long ignoreCommand reproduced provider256char validationfailure; new5th regression firstfails thenpasses with shortcommand. All9 focused real-Git/runtime tests pass; quality144Node/fullPython125pass. Focused review identified URL/offlinereview identitygap, nowcorrected and covered by actualfunctions."
-    },
-    {
-      "check": "Concurrent #391 integration",
-      "result": "Director profiles merged04d4b3f while#394CIpassed. Only checkpoint conflict; preserve director data/reading/credit behavior and auto-merged browser assertions. Re-run combined gate and CI before merge. Combined quality gate146Node/fullPython133pass; fresh CI required on merged tree."
-    },
-    {
-      "check": "Published route compatibility",
-      "result": "Actualreleaseddadc773:15canonicalrootpages200exactbytes,14nestedcinelvaHTML404. Providerdocsconfirm temporarywildcardredirectsyntax. Regressionusesactualbuildandactual29sourceHTML. Rootdestinationsexist; focusedreviewready afterfixturegapcorrected. No crossoriginorstoragekeychange."
-    },
-    {
-      "check": "Canonical release and retired queues",
-      "result": "bd6a1c99 READY/aliasconfirmed. ActualHTTP307preserves?id=157336&search=test; actualCloudChromelegacysearchpreservesid/search/#reviewanddetail2014. All8Oceanredirectsources200andbyteidenticald07; actualOceanroute landsMyCinelva. Issues111/113/143closednot_plannedasretired/superseded239, notimplementedOceanfeatures. No userdatawrites."
-    },
-    {
-      "check": "All29canonicalroutes",
-      "result": "29/29HTTP200 and exactreleasedHTML atbd6a1c99; durable docs/operations/canonical-http-audit-20261019.json. No whole-application completion claim."
-    },
-    {
-      "check": "Absent director source discovery",
-      "result": "Actions39158919785 succeeded:61additional directors,849total. Eastwood190 has44raw directing credits; runtime checks now required to remove short works and packaged AmazingStories compilation before final browser assertion.25names unresolved by unambiguous search; these remain honestly unknown rather than inferred."
-    },
-    {
-      "check": "Eastwood verified source snapshot and regression",
-      "result": "Actions39159216987 passed. Eastwood190 now41works,allruntime>=85minutes,no unknown runtimes. Excluded VanessaGarden1126932,BeguiledStoryteller524469 andAmazingStoriesMovieIV1309305.12Python/13directorUI/localqualitygatepass. FocusedreviewnoCritical/Important. Real390pxChromium/WebKitjourney seeds1EnglishEastwoodrecordandasserts1/41 plus41tiles/1watched; freshfinalCI required."
-    },
-    {
-      "check": "Final QA review and actual CDN sampling 2026-10-20",
-      "result": "173 active Node unit tests and shared quality gate pass; 138 Python tests passed. 30 routes x4 widths x2 themes audited. Actual CDN sample:60 page loads,242/242 image loads,0 failed/pending,0 overflow/page errors. Reviewer blockers fixed with current/legacy local-ID overwrite and zero-delete regressions;31 targeted tests pass. Search/critic hanging API and deterministic poster retry browser regressions pass. Final remote CI/merge/Pages still pending."
-    },
-    {
-      "check": "Final source and secondary-card audit",
-      "result": "Canonical metadata supplemented for33streaming rows,18outdoor rows,3revivals plus2fallback events.58already-enriched calendar rows copied back to matching streaming source records to preserve refresh data. APIsearch+canonicaldetails checked; wrong proposed ID1124 rejected because it was ThePrestige; correct11257 verified. Daily refresh now accepts explicit provenance or strict unique title+originalyear;6Python regressions pass.144fullPython tests,173Node tests,sharedqualitygate pass. Revival/selectedexperience browser regression passes6viewport/theme combinations.30-route Chromium audit240loads passes. Previous final WebKit audit exposed redirect readiness race; fixed by waiting for mounted themecontrols before unchanged assertions. RequiredfinalCI pending."
-    },
-    {
-      "check": "2026-10-21 integration of current main and PR437",
-      "result": "Local shared quality gate passes, including 175 Node tests; full Python suite 144/144; smoke209/209. Six merge conflicts resolved preserving latest medals, Gold/award names, release dates, spoiler button and comment visibility. Record poster/title detail links restored with canonical-ID regression (2 failing before fix, 2 passing after). Updated stale isolated DOM fixtures and exact-ID award fixtures without relaxing assertions. Chromium/WebKit download returned an invalid ZIP; browser checks must run in CI on this new head."
-    },
-    {
-      "check": "2026-10-21 reviewed integration follow-up",
-      "result": "Shared quality gate178 Node tests passes. Focused reviewer26 tests passes with no blockers. Resolved imports retain original key during edit/clear; Top10 uses verified identity. WebKit mobile CI failed specifically at screenshot32767px limit; dynamic body-height measurement and size-error-only viewport fallback added, failing-then-passing regression verified. Unrelated screenshot errors still fail."
-    },
-    {
-      "check": "PR437 exact-head final CI and integration",
-      "result": "All9 Actions succeeded at f189d5850924c78539aefca2046b18da5df3ba87; merged as f6b71c88b58d727b29bbff5da8287be1ca6cccab. Frontend https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956603 ; Autonomous https://github.com/vongolebianco7/cinema-calendar/actions/runs/39519956482 . Local179Node/144Python/209smoke and reviewer26 passed. Local checkpoint tree313c5416 exactly equals tested remote source tree."
-    },
-    {
-      "check": "Residual PR401 source reconciliation",
-      "result": "Confirmed two changes absent from main: actual Director-credit filtering on discovery and equal-gross competition ranks. Added backend/loader regressions8 and rendering rank regressions2, failed before and pass after. Shared quality gate189 tests passes; Python144. Browser regressions cover non-directing Justice League/Cobol exclusion, shared reviews and all100 ranks; fresh CI required."
-    },
-    {
-      "check": "PR448 final CI and split production release",
-      "result": "All8 Actions passed on7ef2817c; squash merged8ca54a7b. Frontend run39521938892 verified full30routes x4widths x2themes on Chromium and WebKit. OldPR399/400/401/402 closed as superseded. Frontend canonical alias now READY deploymentdpl_H1En35tTeA2k7EtgoNZkXbSsZThr at8ca54a7b; backend build-rate-limit leaves canonical backend0adf128e. Actual production awards confirmed BAFTA/film-prize names/Gold10 and noKinema. Actual Nolan discovery fails because old peopleAPI returns noids. Strict verified snapshot fallback is in progress."
-    },
-    {
-      "check": "Fixed acceptance count and provider refresh capacity",
-      "result": "User explicitly requests regular completed/remaining/fix/percent reports. Ledger32gates:16complete/16remaining/50.0%,additionalmergedfix1. #449 all7Actions passed28ceea15, mergedf50cf7ca and canonicalfrontendREADY. Actualbrowser Nolan13verifiedDirector works, snapshotdate2026-10-18, noJusticeLeague/Cobol. Latestconcurrentdata preserved; fullPython149 after5newcapacity/time-budget regressions. Openissues240/228closed with current-spec evidence. Capacityfix pendingCI; do not equate code fix with refreshed252staleobservations."
-    },
-    {
-      "check": "Provider capacity and deployment recovery integration",
-      "result": "#450 head665346a2 all6Actions succeeded, merged52da16ca. #451 head62fd4842 all4Actions succeeded, mergedf7d205b7. No manualdeploy. Progress16/32complete,16remaining,3mergedfixes,50.0%. Current perf-audit closes measurement gap; helper3cases and focusedreview pass, browserCIrequired. Five provider regressions and fullPython149pass; scheduling deadline is cooperative socket-timeout bound, actualthroughput/deferred still requires live observation."
-    },
-    {
-      "check": "Actual #451 canonical recovery smoke",
-      "result": "Both canonical aliasesREADY f7d205b7. ActualCloudBrowser Nolan13Directorworks now liveAPI(no snapshotdate). Sharedreview selectedcorrectOdyssey title, defaulttoday2026-10-21, 0.1slider0..5, fiveviewingmethods andcomment-header spoilerbutton. Closedwithoutsave. Previous frontendf50+backend0ad fallbackwasalreadyverified13works; safe rollbackpair retainsstoragekeys. Rollbacknotexecuted."
-    },
-    {
-      "name": "Current-spec retirement and discovery acceptance audit20261021",
-      "status": "passed",
-      "details": "Fullquality207Nodepass.8focused retirement/identity/build/route tests and4filterbehavior tests pass. PR453mergedf511101 after5greenActions. PR452exact-head1ba1d03pending; prior performanceall4casespassed, WebKitnavigationinternalerrorunderverification."
-    },
-    {
-      "check": "Reviewed source-status and dependency/performance/theater integration",
-      "result": "452/455/456 merged with all checks green; source457 localquality229/18focusedtests and independentreviewpassed;6of7Actions green, browserCIpending. Assets55inventoried with sha256, literalrefscope limitations and legal_clearance=false."
-    },
-    {
-      "check": "PR457 exact-headCI and actual canonical production smoke",
-      "result": "All7Actions passed inclfrontend39580306030/job119155982037. Bothengines390pxsource9categories/fetchfailure/no recordwrites and theaterclosed/dedupe fixturepassed. Merged768dda2b; actualmenu→9sourceUI verified. Progress27/32,5remaining,8mergedfixes,84.4%. See release-verification-20261021.md."
-    },
-    {
-      "check": "Explicitly authorized single Update movie data run74",
-      "result": "Run39583606695 succeeded, DB import ok1080movies/1113releases/12TV.184observations refreshed,2HTTPfailures.750observed/498fresh/252stale. Dataa4d5ee0canonicalfrontendREADY and actual9sourceUIcounts confirmed. No second run."
-    },
-    {
-      "check": "Production integration459/460",
-      "result": "460merged466f69a afterfinal7green. Firstscoreperformance1064.55ms failed1000ms once; unchangedsource finalscore4of4pass with1000records896/877ms. ActualguardedDBsync39591844636 succeeded1080movies/1113releases/12TV/1225theaters/322master; proofgatedPages39591844798 succeeded. Vercelbothrefuseddirtyvercel.json, so no fullpublicationclaim. Sourcebranchsettingnotchanged."
-    },
-    {
-      "check": "Final461 exact-head CI and real main publication evidence",
-      "result": "Source0dff69bc all7green; focusedreviewnoblockers. Finalreceipt6c31cbf all7latestgreen (reopenedonceafter3minzero-trigger; duplicateolderrunsnotconfusedwithlatest). Merged2c504e8. MainPages39595243091 build119205810035/deploy119205963089 succeeded: proof0dff source61eec13c28d252112b69155cd5d9726e7a8900ceac88a9bdacfd63576947e865 andsharedqualitypassed. Vercelcombinedstatuses explicitlyrate-limitedbothprojects, so semanticconfigintegrationinactualVercel remainsUNVERIFIED. EarlieractualDBsync39591844636 succeeded1080/1113/12/1225/322. Canonicalfronta4/backendcf remainREADY.27/32,5remaining,10mergedfixes,84.4%."
-    },
-    {
-      "check": "PR467 exact-source and receipt validation plus actual image review",
-      "status": "passed",
-      "details": "PR467 merged3a190245 after source583454bc all9/finalab43a380 all10 workflows passed. Both engines240 route cells each,0 page errors/local asset failures; explicit light body/opened-menu/label contrast>=4.5; review CRUD,zero/unrated/date/bookmark/import/reload/backup and0/1/1000 records passed. Latest16root-page edges perengine,changed source/event/summary sections,related cards and320px review forms visually checked, following earlier110 full-document segments. All18 specifically confirmed UI defects repaired. Physical iPhone Safari remains a distinct gate; no claim of all possible unknown bugs absent.",
-      "source_head": "583454bc1cab3ee6dbd6bb4ca13cc8be3bb8cc9f",
-      "final_head": "ab43a3809c2a4be884efbb085f4fad88ba06b8ed",
-      "source_frontend_run": 39729936196,
-      "final_frontend_run": 39730885345,
-      "source_artifact": 12405247420
-    },
-    {
-      "check": "Director projection/provenance offline regression",
-      "result": "Python18 and director Node27 passed; shared quality Node273 passed. Real Git fixture confirms normalization/builder introduce only allowed generated data. Focused review found protected-report and concurrent-director-overwrite paths; reports moved outside source and movie publisher merges absent IDs into latest source after rebasing other snapshots. New19 names use11 primary credits and8 explicitly editorial kana, without advancing source observation dates. No source/mobile publication yet."
-    },
-    {
-      "check": "PR469 source and generated-data integration",
-      "result": "source0a2be38d all7/finalf16499a7 all8 successful. Actual generated901-person catalog in both engines and240 route cells perengine,0 uncaught/local asset errors. Source backend npm audit transient endpoint failure diagnosed against identical previous lockfile, one failed-job retry succeeded. automatic publisherfd8722e3 verified901 IDs/original names/checked_at and11087 work IDs retained. Extra contrast defect470 independently reproduced ratio1.598 and is pending."
-    },
-    {
-      "check": "PR470 exact-source/final integration and latest actual visual inspection",
-      "result": "PR470 sourcef11a9301 all7/final176a6365 all7 successful, mergedf4109367f6487a0f0cea1c0ea46ea9942a90177f. Actual Chromium/WebKit light/dark active-director label/profile/select/placeholder/rating/action contrast>=4.5, selectappearance:none and text ancestoropacity1. Each engine240 route loads,0 uncaught/local asset errors. Latest artifact12409767655 visually reviewed via QA-only branch (4profiles and overview/footer comparisons); native WebKit dark surface and fallback/ratings/source text readable. No Vercel/physical-device/global bug-free claim."
-    },
-    {
-      "check": "Director data retained after UI integration",
-      "result": "GitHub compare fd8722e3...f4109367f6487a0f0cea1c0ea46ea9942a90177f includes onlyCSS/quick-rate/browser/proof/docs; neither director JSON changed. Published901 persons/11087 works retained."
-    },
-    {
-      "check": "Executor recovery and safe artifact fallback",
-      "result": "Local executor disconnected and returned environment_offline on three checks. No lost source: f11/176 source+receipt saved remotely. A bounded QA-only branch downloaded existing run39740981085 artifact12409767655 via GitHub actions/download-artifact, preserved exact8 source PNGs plus overview/footer comparisons, and made them readable through base64 GitHub file API. Run39748667542 success. Latest4profiles and both comparison sheets reviewed before merge. QA branch/workflow was not merged into production main."
-    },
-    {
-      "check": "Calendar incident source repair and independent screenshot review",
-      "result": "PR473 merged0f0250ff. Source ad574 all7 workflows passed. Finalafde required4/mobile/Python/contract passed after a package-mirror timeout rerun. Optional performance score failed1081/1064ms against1000ms; independent476source passed991/944ms with no threshold change. Actual light detail title1.003:1 reproduced and repaired; Chromium/WebKit rendered headings/dates/body/links/film text assertions passed. Local full Python161/161 passed."
-    },
-    {
-      "check": "Browser dependency timeout root cause and constrained CI repair",
-      "result": "Final476 Autonomous cancelled during Azure apt downloads; other7 workflows succeeded. Same installer preparation stalled in477. Mirror-only preparation added to existing five installer jobs in4 workflows; no assertions/timeouts removed. Shell syntax, YAML parse, signature/suite/protocol fixture and original-command equality checks pass. Shared quality gate passes; fresh CI must verify actual archive download and unchanged browser journeys."
-    },
-    {
-      "check": "Remaining release gates local evidence",
-      "result": "Backend build and five unavailable-DB read API smoke passed; health503 retained. Guard regressions22 pass including pipeline order; Python director suite19 pass. Seven generated artwork exact SHA matches. Source/final CI and production proof still pending."
-    },
-    {
-      "check": "PR479 exact-source CI",
-      "result": "Source06c157af7411f06daf583a3bd37fde8a8bf296ce all7 workflows successful: Autonomous39932810180, smoke39932810260, backend39932810345, frontend39932810192, Python39932810199, mobile39932810185, completeness39932810209. Built5-API unavailable-DB smoke passed; Python162/162. Source frontend includes both engines240 route loads each; receipt/final CI and production pending."
-    },
-    {
-      "check": "Final completeness failure diagnosis",
-      "result": "Receipt736ff47a mobile score leaked calendar/tv/theater-directory requests to real quota-suspended DB; WebKit CORS created DISC-02/CROSS-MOBILE regression. One unchanged-head mobile rerun reproduced. Existing helper mocked movies only. New red→green fixture regression covers all5 reviewed read snapshots with CORS and unknown API503; no assertions/thresholds weakened. Fresh source proof is required."
-    },
-    {
-      "check": "Vercel preview and source2 CI",
-      "result": "Source1eb1 scored completeness now passes after fixture correction. Vercel preview736ff47a actual calendar/tv/movies/theater-directory/releases all200 static_snapshot, DB unavailable, health503, source timestamp preserved; backdrop HEAD200 image/jpeg65569bytes. Source1eb frontend failed on WebKit first cell root agent.html/375/light waiting main text:0 page errors/local failures, blank artifact. Existing exact URL/mode wait applied to both root and prefixed legacy-agent redirects; assertions/timeouts unchanged, focused review no blockers."
-    },
-    {
-      "check": "Source45 exact CI and bounded performance remeasurement",
-      "result": "All8 source45a8762c workflows successful, including frontend39936962182 (both-engine route audit after root redirect wait), backend39936962240, Autonomous39936962269, smoke39936962204, Python39936962206, mobile39936962255, scorecard contract39936962260, completeness39936962301. First performance1000-record390px interaction1038ms exceeded unchanged1000ms budget; one unchanged-head mobile remeasurement passed741.86ms at390 and743.13ms at1280, ready1621.92/1654.81ms, CLS.04237/.01516, no errors. App/performance test source unchanged. Final CI and production still pending."
-    },
-    {
-      "check": "Actual backend materialized quality failure and fix",
-      "result": "DeploymentDfgo9h3 passed proof then failed12 source-config assertions. Same complete gate reproduced locally. Narrow reader validates exact committed config and uses frontend source only after verified backend marker; all assertions retained. Marker set after real proof, backend only; inherited frontend marker cleared. Normal and materialized full gates pass; focused review32/32 pass and no blockers. Materialized whole-gate smoke added backend CI; new helper watched by both projects."
-    },
-    {
-      "check": "PR480 production verified",
-      "result": "Source924e0763 all6/final52980b8e all7 CI; actual materialized production-checks public proof and full quality passed, source digest32e74873f80f81dbcfbd88579bfc3f71d6d9171bd787b6a7be9e5259a5dd29e6. Merged5cf977ac. Backend dpl_CbePaXkqu76aoowiGsU6dVVmrL6a and frontend dpl_CPEdZnJ1DFtwkgdu6wz2kPh8UQRD READY. Canonical calendar1027/TV16/search1/Tokyo14/Lemino2 all200/static_snapshot; original timestamps, health503. DB recovery remains blocked."
-    },
-    {
-      "check": "Main synthetic performance bounded remeasurement",
-      "result": "Main39952478680 mobile/performance first390px1000-record input1003.21ms exceeded unchanged1000ms by3.21ms; ready2211.44ms,CLS.04237,no errors. One unchanged-head remeasurement passed4/4:390px974.70ms/ready2112.34ms;1280px969.71ms/ready2134.61ms; CLS.04237/.01516,no errors. No app/performance/threshold changes; both observations preserved. Actual device gate remains open."
-    },
-    {
-      "check": "Guarded daily data publication and detected deployment boundaries",
-      "result": "39939689022 attempt2 successfully passed fullquality/sourceproof and pushed13a9e63e:1030 movies, generated_at2026-10-23T12:21:40.307684+00:00; MissingJapanese0/Failed0. Subsequent DBsyncP1001 retained. Actual frontend GitHub Vercel status says Deployment rate limited retry24h; backend IgnoredBuildStep canceled. Added realGit regression for3 actual JSON imports; red3→green17/17 after3 exact backend pathspec additions. Both working directories and last-successful-SHA across laterdocs covered. Data/availability and UI-only inputs still skip backend."
-    },
-    {
-      "check": "PR481 exact-source CI",
-      "result": "Sourced2e534a2 all6 workflows successful: backend39954029766, completeness39954029615, Autonomous39954029951, mobile39954029738, frontend39954029705, smoke39954029637. Compiled calendar1030 and all5 APIs200/static_snapshot, health503; full materialized quality passed. RealGit regression red3→green17/17, focused review no blockers. Receipt-only final CI required before merge; actual Vercel latest data publication remains limited."
-    },
-    {
-      "check": "PR481 final source acceptance and integration",
-      "result": "Source d2e534a2 all6/final1c31122f all7 successful workflows; realGit tests17/17 and focused review no blockers. Complete materialized production-checks passed public proof and fullquality, digest64289707b8e45ebf4896eb0ec6f99ea0fbb9d4f61c17cedd9e7a7d80e04d7b6d. Mergedd3452c12. Latest data deployment deferred; READY5cf977ac canonical API verification remains the actual serving evidence. Global28/32; remaining rights2/device/users plus operational deployment/DB quota blockers. No unverified completion or user results invented."
-    },
-    {
-      "check": "Nationwide now-playing baseline and initial feature",
-      "result": "Clean baseline fullquality passed atdb3460ca. Collector6 red missing→green; UI6 (including source-file/offline-detail checks) red missing→green; full shared gate passed. Partial API failures preserve previous file, sourceapproval/JP/pagination enforced,36h freshness/future5m checked. Local browser runtime lacked binary; runtime and pinned1.59 downloads both returned truncated0MB archives. No local browser pass claimed. Dedicated CI browser job added without extending existing15minute journey job. Full feature source/proof and actual API population still pending."
-    },
-    {
-      "check": "Nationwide list review and incomplete-response preservation",
-      "result": "Collector7 and UI6 units and full local quality passed. Focused review found one Important completeness bug; advertised raw totals now reconciled before filtering/dedup. Regression red2→green and prior bytes preserved. Real Chromium root/light shared actions, contrast and screenshot passed; prefix lazy posters require scrolling into view in test. Latest exact-source CI pending at c09f974f."
-    },
-    {
-      "check": "Nationwide final executable source browser and review evidence",
-      "result": "1415f995: collector7/UI7/full local shared quality passed; actual Chromium/WebKit nationwide root/prefix/light/dark cards, source states, search/expansion, review/bookmark persistence, exact-ID detail, contrast/overflow pass. Autonomous, mobile, smoke, reproducible backend, backup, completeness, Python, brand and isolated stage all succeeded; full frontend regression still running. Focused review Important raw-total finding fixed with preservation regression. No app logos, palette, origin or local records changed."
-    },
-    {
-      "check": "PR483 exact-source acceptance",
-      "result": "Exact source1415f995 all10 PR workflows succeeded, including full frontend and actual Chromium/WebKit nationwide root/prefix/light/dark geometry/actions/source states/contrast/overflow; collector7/UI7/full local quality pass.8 browser screenshots retained and representative routes visually checked. Focused review Important completeness repair verified red2→green; previous bytes preserved on truncated totals. Brand-source regression corrected for exact approved original sources and existing canvas framing, no logo changes."
-    },
-    {
-      "check": "Initial real now-playing observation and documented equivalent diagnosis",
-      "result": "PR483 source10/final11 workflows and materialized proof/fullquality passed; merged3d9d8208 and canonical UI READY. Initial actual refresh correctly refused API pages100/99 totals. Official equivalent read-only query using exact upstream dates returned consistent5×20/100 and passed unchanged collector. Equivalent fallback implementation12 tests pass after red6; fullquality/review/new proof and real publication pending. No actual populated canonical snapshot yet."
-    },
-    {
-      "check": "PR484 exact-source equivalent retrieval acceptance",
-      "result": "PR484 source45b2c01a all7 PR workflows passed, including full frontend, dedicated Chromium/WebKit nationwide controls, Autonomous, mobile, backend, smoke and Python/completeness. Collector12/fullquality passed; focused repair review no Critical/Important blockers. Documented upstream-window equivalent live diagnostic40034856714 observed100 complete titles; normal100/99 inconsistency remains. Temporary diagnostic workflow removed; no current-data snapshot publication claimed yet."
-    },
-    {
-      "check": "Nationwide actual collection and canonical production acceptance",
-      "result": "PR483 source1415f995 all10/final988a9e20 all11 passed; merged3d9d8208. PR484 source45b2c01a all7/finalac222b69 all8 passed, collector12/UI7/fullquality and materialized public proof passed (digest8056568b8ad81a97055a6a95817f4b5bc34a662d443c889d8a7325b05609f8a9), focused repair review no blockers; merged3fae6b87. Actual refresh40037837837 passed proof/fullquality and publishedb877e60e:100 unique JP titles, complete:true, generated_at2026-10-23T23:07:46.612102+00:00. Both production projects READYb877e60e. Canonical JSON200 and actual Chrome initial12/100, expand100, title query1 and matching detail ID1153576/title/record action verified. Review/bookmark persistence and offline detail passed both CI engines; no production review/bookmark actions performed."
-    },
-    {
-      "check": "PR541 exact source CI",
-      "result": "All9 pull-request workflows succeeded on 0eff8bf80a900927b19141f8dde57f6a9f108ff3, including all4 publication-required workflows. Shared local quality gate passed. Focused review P2 adjacent-month bar issue reproduced, fixed and re-reviewed. Chromium/WebKit navigation and unified-calendar checks passed."
-    },
-    {
-      "check": "PR548 bookmark release-date notice, final source and production",
-      "result": "PR548 executable source b8a85bfb83dde79e7d7b4549da27550cc9fc74c5; exact-source required workflows passed, receipt-only final head da4a4dcce2752cb900aa0c176992b31c3c89771d passed Validate frontend, Autonomous quality gate, CINELVA smoke, reproducible backend, mobile layout, completeness and scorecard contract. Squash-merged f998de7e8bee72a7603c51db9a92180a453bc690; Vercel production deployment dpl_D14bYw2AfW92uojDegj8jRoi85yr READY. Production watchlist HTML references new scripts; both new JS assets and quick-rate.js verified byte-for-byte. Seven focused unit tests and local 442-test shared quality gate passed. Physical iPhone acceptance remains separate."
-    },
-    {
-      "check": "Cinema comparison #554 and post-merge data refresh 2026-10-30 JST",
-      "result": "PR #554 merged as 94e1410c719594e4837a7c30336dab01078a2534. Frontend and backend Vercel deployments are READY for this exact SHA. Update movie data run 40961767421 passed source/compliance/TMDB/dataset validation, refreshed 199/200 provider observations, then failed freshness audit at 755/1312 (57.5%) against 70%; database sync was skipped. No new data commit was found on GitHub; no data publication or DB sync is claimed."
-    },
-    {
-      "check": "Scheduled official data refresh #94 after PR #553 merge",
-      "result": "Run 40968095519 started from trigger SHA 16f2578, then commit step rebased onto current main and successfully published generated snapshots as c90db692c5c5c78d1a30fcd0619fc3a686eb17fd after PR #553 merge 887c07e. Changed only eight generated JSON snapshots (availability, awards, boxoffice, movies, extra rankings, release history, streaming, theatrical); no user ratings/bookmarks or DB schema. 199/200 availability observations refreshed; 755/1312 (57.5%) remained within 7 days vs the 70% warning threshold. Vercel frontend/backend deployments for c90db were READY; newer #554 commit 94e1410 is READY on both projects. PostgreSQL sync step failed before connection with Prisma P1001, so no DB writes were made. Do not retry until read-only DB availability diagnosis; data remains served from verified static snapshots."
-    },
-    {
-      "check": "PR #555 merged and read-only Neon quota diagnosis",
-      "result": "PR #555 merged as 5b2ed9516c621d2f7dcc6e4411457c3c6e99208b after Autonomous quality gate, CINELVA smoke tests, and mobile layout checks all passed. Neon organization reports Free plan; read-only project status reports 5,541,204,690 public-transfer bytes for a monthly period ending 2026-11-01 and the sole read/write endpoint idle/suspended since 2026-10-23. Neon documents 5 GB monthly public transfer for Free; the counter exceeds that allowance, likely explaining P1001/suspension (inference). No endpoint start, DB query/write, schema change, or sync retry."
-    },
-    {
-      "check": "Issue #241 closed after acceptance verification",
-      "result": "PR #555 exact-head Autonomous quality gate, smoke tests, and Chromium/WebKit mobile checks passed; publish-pages.yml deploys only on main after verified static build; checkpoint/resume docs are present; current Vercel production is READY. Issue #241 closed completed."
-    },
-    {
-      "check": "Superseded premiere checkpoint PR #521 closed",
-      "result": "PR #521 contained only a stale 2026-10-27 checkpoint. Its source feature is integrated on main as 42e4ce3; later snapshot/deployment and PR #548 release-notice verification supersede its publication-pending state. Closed unmerged; PR history retained."
-    },
-    {
-      "check": "PR #567 source acceptance",
-      "result": "Exact head b480b17a: all 8 source workflows passed (Autonomous quality, CINELVA smoke, Validate frontend, reproducible backend build, mobile layout, backup safety, Cinemap completeness, brand identity). The full mobile comparison assertions passed in hosted Chromium/WebKit. Local 27/27 focused tests and 453-test shared quality gate passed. PR #567 remains open pending checkpoint, receipt-only proof renewal and final-head CI."
-    },
-    "Price readability582: source935bc076 all6 CI, receipt6e958a35 all7 CI; clean shared quality489+6/invoked Python; WebKit390 light/dark reviewed; formal URL8 files/API/browser scoped smoke passed. No production mobile/physical Safari claim."
+      "item": "Public production/iPhone acceptance",
+      "status": "blocked",
+      "note": "Vercel Hobby quota and physical iPhone Safari verification remain unresolved."
+    }
   ],
   "deployment": {
     "status": "blocked",
-    "canonical_url": "https://cinelva.vercel.app",
-    "main_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
-    "github_pages_url": "https://vongolebianco7.github.io/cinema-calendar/",
-    "github_pages_deployed": true,
-    "github_pages_run_id": 42099373598,
-    "vercel_frontend_latest_ready_sha": "0c7b4f55bab9f70e0fb7062a29b8dd99c64c07fd",
-    "vercel_backend_latest_ready_sha": "a1c93bc0149d38a410e5245f1ca745d620b59657",
-    "vercel_latest_failed_backend_sha": "e6c0a5e5fdf404c13f79176c0fe659b72a88aaf8",
-    "vercel_failure": "Main deploy blocked at verify-production-release until PR #636 updated proof; latest main proof gate now passed, but Vercel returned build-rate-limit on PR statuses and no deployment exists for main 1526d3e.",
-    "proof_head_sha": "34140cfd426fa469930d6451d79aed95b3951c08",
+    "url": "https://cinelva.vercel.app/",
+    "latest_main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
     "production_verified": false,
-    "user_approval_required": false,
-    "github_pages_latest_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
-    "note": "Pages deployment on current main b85a134 succeeded (run 42099373598). Vercel production still serves frontend 0c7b4f5 and backend a1c93bc; no Vercel deployment for current main due daily rate limit."
+    "reason": "Recent Vercel frontend/backend main deployments were rejected by the Hobby deployment quota; current public page is stale. The main GitHub Pages publication gate also failed on the stale CI receipt and will be retried only after the exact-source receipt is refreshed and checked."
   },
   "blockers": [
-    "Vercel production deploys are blocked by the account's daily deployment API limit (Vercel reported more than 100 deployments/day and 24h retry-after); keep Hobby/free settings and retry after reset. No Vercel production deployment for main 1526d3e is present.",
-    "FEEDBACK_ADMIN_TOKEN is absent from backend production env. Do not invent or expose a key; owner must configure it before admin list/status acceptance.",
-    "Production admin acceptance and a real anonymous submit-to-persist-to-admin verification remain incomplete. Do not write a production test feedback row without a way to remove it.",
-    "Physical iPhone Safari acceptance remains unverified; Chromium/WebKit CI passed.",
-    "Only anime-related movie broadcasts from Syoboi are automated (13 upcoming records). Nationwide terrestrial TV, theatrical showtimes, film events and special screenings remain partial/manual pending authorized comprehensive feeds; no scraping.",
-    "Vercel Web Analytics pageviews are queryable; Vercel custom-event querying returns Pro-only 402. First-party aggregate feature counters are implemented on the existing database but no events are yet recorded."
+    "Vercel Hobby daily deployment cap blocked recent Vercel frontend/backend deployments; preserve free tier. Main Pages publication still needs to pass after the proof refresh.",
+    "No rights-verified official feeds for the 12 streaming services; no provider catalog is enabled, so exhaustive streaming coverage is unavailable.",
+    "Physical iPhone Safari acceptance remains outstanding.",
+    "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
+    "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
   ],
-  "next_action": "After the Vercel daily deployment limit resets, verify a READY production frontend and backend for current main without changing plans/settings; check /api/tv includes the 13 automated records and verify feedback/admin endpoints without writing an orphaned production test row. Ask owner to set FEEDBACK_ADMIN_TOKEN; complete authorized admin and iPhone acceptance only after that. Keep Issue #585 open and do not claim nationwide TV/event/theatrical automation complete; continue approved-feed discovery without scraping.",
+  "next_action": "Poll the exact-head workflows on the latest PR #647 branch head. Repair any failures; when all required checks pass and the PR remains mergeable, merge it, then verify the post-merge legacy Pages publication and current production deployment. Continue PR #649's independent UI regression work while those checks run.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2740,8 +2522,8 @@
       "smoke": "success",
       "completeness": "success",
       "pages_build": "success",
-      "publish_verified_legacy_pages": "failure: stale CI receipt references fcf3b18a; #647 will update the receipt to the now-tested executable source; verify main publication after merge",
-      "next": "PR #647 source head 55849d0148391868ae63fd36cd76ce0c06dea281 has all exact-head CI green. Add proof and checkpoint only, rerun exact-final-head checks, merge safely, then verify main Pages publication and public production."
+      "publish_verified_legacy_pages": "Recent Vercel frontend/backend main deployments were rejected by the Hobby deployment quota; current public page is stale. The main GitHub Pages publication gate also failed on the stale CI receipt and will be retried only after the exact-source receipt is refreshed and checked.",
+      "next": "Poll the exact-head workflows on the latest PR #647 branch head. Repair any failures; when all required checks pass and the PR remains mergeable, merge it, then verify the post-merge legacy Pages publication and current production deployment. Continue PR #649's independent UI regression work while those checks run."
     },
     "production": {
       "url": "https://cinelva.vercel.app/",
@@ -2763,7 +2545,47 @@
       "Close stale checkpoint PR #648 as superseded after #647's checkpoint is merged; #646 has already been closed as stale. Do not close release issues yet.",
       "Continue PR #649 and all open release issues (#239/#242/#243/#244/#529/#585) until public acceptance is evidenced."
     ],
-    "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data."
+    "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data.",
+    "verification": [
+      {
+        "item": "PR #647 executable importer source exact-head checks",
+        "status": "ci_passed",
+        "sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
+        "runs": [
+          42124176106,
+          42124175901,
+          42124175997,
+          42124176047,
+          42124176037,
+          42124176162
+        ],
+        "note": "All six passed; receipt now points to this executable tree. Proof/checkpoint-only follow-up requires its own final-head checks."
+      },
+      {
+        "item": "PR #647 proof/checkpoint follow-up",
+        "status": "in_progress",
+        "sha": "821c4de4218fcebaad13e9d5a12c468503f5deb2",
+        "note": "Exact-head CI rerunning."
+      },
+      {
+        "item": "main Publish verified legacy Pages",
+        "status": "blocked",
+        "sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+        "run": 42123516896,
+        "note": "Failed because the previous proof receipt source did not match main executable source."
+      },
+      {
+        "item": "PR #649 discovery UI regression",
+        "status": "in_progress",
+        "sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
+        "note": "Smoke test passed; remaining exact-head CI is running."
+      },
+      {
+        "item": "Public production/iPhone acceptance",
+        "status": "blocked",
+        "note": "Vercel Hobby quota and physical iPhone Safari verification remain unresolved."
+      }
+    ]
   },
   "open_pull_requests": [
     {

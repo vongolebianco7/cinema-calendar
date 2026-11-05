@@ -17,7 +17,7 @@ def manifest_for(paths, root, source_sha, observed_at):
     entries = []
     root = root.resolve()
     for path in sorted(paths, key=lambda p: str(p)):
-        resolved = path.resolve()
+        resolved = (path if path.is_absolute() else root / path).resolve()
         if not resolved.is_relative_to(root) or not resolved.is_file():
             raise ValueError("snapshot missing or outside repository: " + str(path))
         raw = resolved.read_bytes()

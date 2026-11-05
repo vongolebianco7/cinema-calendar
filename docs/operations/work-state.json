@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 41544)
-Total output lines: 2491
-
 {
   "schema_version": 1,
   "updated_at": "2026-11-06T00:40:00Z",
@@ -941,7 +938,148 @@ Total output lines: 2491
   },
   "last_merged_pull_request": {
     "number": 582,
-    "merge_sha": "d3cf7546e7910ba…1544 tokens truncated…すごい世界 has no verified matching approved poster.",
+    "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
+    "head_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
+    "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7"
+  },
+  "ui_audit": {
+    "report": "docs/operations/ui-audit-20261022.json",
+    "confirmed_defects": 20,
+    "verified_and_merged_fixes": 20,
+    "remaining_confirmed_defects": 0,
+    "next_action": "All20 specifically confirmed defects integrated and verified. Reconcile latestmain against remaining acceptance gates; do not invent unknown-bug absence or physical/legal/user-study acceptance."
+  },
+  "current_runtime": {
+    "host_shell": "available",
+    "cloud_browser": "not used",
+    "github": "available",
+    "vercel_scope": "existing canonical release verification authorized by all remaining tasks request",
+    "note": "Neon connected and read-only diagnosis performed; no paid changes. Local compiled backend smoke passed5 APIs; Python162/162; focused review no blockers."
+  },
+  "calendar_regression_repair": {
+    "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
+    "total_tasks": 13,
+    "completed_tasks": 13,
+    "remaining_tasks": 0,
+    "confirmed_merged_fixes": 10,
+    "implemented_changes": 13,
+    "completion_percent": 100,
+    "ledger": "docs/operations/calendar-incident-progress-20261023.json",
+    "merged_prs": [
+      475,
+      473,
+      478,
+      479
+    ],
+    "pending_pr": null,
+    "pending_branch": "fix/lemino-dated-film-data-20261023",
+    "open": [],
+    "acceptance": "Only verified and merged corrections count complete. One newly identified detail-card defect raised the incident task count from12 to13. The prior32-gate progress_metrics object is a separate historical release ledger.",
+    "pending_branches": [],
+    "ci_environment_repair": "Azure Ubuntu package-mirror downloads repeatedly consumed the12-minute browser job budget before tests could run. Prefer Canonical archive in the same five installer jobs. Signed-By, suites, protocol, checks and timeouts unchanged.",
+    "poster_recheck": "Same-work backdrop published in frontend2493c6ed and image HEAD200. Actual TMDB poster remains unavailable; labelled fallback counts as artwork defect repair, not upstream poster availability."
+  },
+  "validation": [
+    {
+      "check": "PR478 exact source and approved-logo preservation",
+      "result": "77f27d01 all nine workflows successful. Local shared quality gate passed; Python161/161 passed. Independent code review found no blockers; all108 prior streaming entries retained plus two verified Lemino titles. Nine logo/header files byte-identical to main. Only outdated logo/cache-query assertions changed; ordinary UI contrast remains enforced. Final receipt-head CI pending.",
+      "source_sha": "77f27d014baecd52fc875201083f94fd4781a2c7"
+    },
+    {
+      "check": "Changing-catalog daily publication regression",
+      "result": "Daily run39939689022 failed a fixed-title test after a legitimate catalog refresh. Controlled fixtures now cover identity/order/dedup; runtime searches use an available snapshot title. Six unit tests, compiled5-API smoke, full normal and materialized quality gates passed, including a temporary refreshed-catalog removal reproduction. Fresh source/final CI pending."
+    },
+    {
+      "check": "PR480 latest exact-source CI",
+      "result": "Source924e0763 all6 workflows successful: smoke39949592719, frontend39949592723, backend39949592721, mobile39949592636, completeness39949592711, Autonomous39949592727. Normal/materialized whole gates and6 changing-catalog unit checks passed; focused review no blockers. Receipt-only final CI and full production simulation required before merge."
+    }
+  ],
+  "reported_ui_audit_release": {
+    "ledger": "docs/operations/user-audit-20261024.json",
+    "pr": 491,
+    "merge_sha": "e84c0e47098114315d5f7b682817401b4ab3d588",
+    "frontend": "dpl_JBg94Nuxr4TjhBfv32Ae8vxZ96wr READY",
+    "backend": "dpl_14BzDBBFAFqkjtij6fBY9tsVMccm READY",
+    "canonical_evidence": "16HTTP200 byte-identical files; calendar1033,OctoberNetflix2,world2026firstpage10 API200. No actual-device/browser production writes or DB recovery claimed."
+  },
+  "poster_coverage_release": {
+    "pr": 493,
+    "source_sha": "3c6050227558bb6b3509ae534acb9a009f14ba6a",
+    "final_head": "35da222f4039b429fb0a28e5e8ad00e5905d39e4",
+    "merge_sha": "2fc777a59ce153782e04bd4f3fbd06f460963785",
+    "award_entries": 705,
+    "unique_award_films": 549,
+    "award_artwork_entries": 705,
+    "streaming_entries": 134,
+    "streaming_artwork_entries": 133,
+    "streaming_complete": false,
+    "final_ci": "All11 workflows passed; reported browser regressions passed Chromium and WebKit.",
+    "frontend": "dpl_23eojEY8eq3hbui5msJfMMU7JcRE READY",
+    "backend": "dpl_EJ1pqGz314EiVrJEtjPTEEoqsJ4C READY",
+    "canonical_checks": [
+      {
+        "path": "data/awards.json",
+        "status": 200,
+        "equal": true,
+        "size": 601369
+      },
+      {
+        "path": "data/streaming.json",
+        "status": 200,
+        "equal": true,
+        "size": 119315
+      },
+      {
+        "path": "data/movies.json",
+        "status": 200,
+        "equal": true,
+        "size": 866681
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "equal": true,
+        "size": 127766
+      },
+      {
+        "path": "my-cinelva/index.html",
+        "status": 200,
+        "equal": true,
+        "size": 138049
+      },
+      {
+        "path": "js/cinelva-records-page.js",
+        "status": 200,
+        "equal": true,
+        "size": 122023
+      },
+      {
+        "path": "js/cinelva-movie-identity.js",
+        "status": 200,
+        "equal": true,
+        "size": 15895
+      },
+      {
+        "path": "rankings.html",
+        "status": 200,
+        "equal": true,
+        "size": 56519
+      },
+      {
+        "path": "revivals.html",
+        "status": 200,
+        "equal": true,
+        "size": 11839
+      },
+      {
+        "path": "data/source_registry.json",
+        "status": 200,
+        "equal": true,
+        "size": 8787
+      }
+    ],
+    "remaining": [
+      "パンダのすごい世界 has no verified matching approved poster.",
       "Streaming premiere coverage remains partial; exhaustive provider libraries not available from current approved dated feeds."
     ]
   },

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "6f36b3f11bc2952cda3db4ef19126386cadcf1eb",
-  "verified_at": "2026-11-05T16:45:24.244Z",
-  "note": "PR #618 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed on this head; mobile layout, Python contract suite, and completeness scorecard also passed. The change requires explicit automated/manual acquisition mode before a source can be marked fresh. Receipt-only commit."
+  "head_sha": "6fb9eab4e200b1920a1248ec17a59329e77297c0",
+  "verified_at": "2026-11-05T17:35:29Z",
+  "note": "CINELVA TV broadcast automation, latest main including PRs #618 and #619, and the WebKit theater fixture correction passed exact-source CI. Autonomous quality gate, CINELVA smoke tests, full Python contract suite, Validate frontend (Chromium and WebKit), reproducible backend build, mobile layout, backup safety, isolated Pages stage, completeness scorecard, and source status checks passed. Adds only the documented Syoboi Calendar anime-related film TV feed; preserves existing user records and curated broadcasts. No scraping, database writes, or paid services."
 }

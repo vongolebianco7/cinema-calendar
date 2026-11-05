@@ -8,8 +8,8 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const context=await browser.newContext({viewport:{width:390,height:844}});
   await context.route('https://backend-one-gray-94.vercel.app/**',r=>r.abort());
   const theaters=[{name:'Cinema',source:'Wikidata',source_id:'Q1',lat:35,lon:139},{name:'Cinema',source:'Wikidata',source_id:'Q2',lat:36,lon:140},{name:'Cinema closed',status:'closed',source:'Wikidata',source_id:'Q3'}];
-  await context.route('**/data/theaters_master.json?*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters})}));
-  await context.route('**/data/theaters_osm.json?*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters:[{name:'Cinema',lat:35,lon:139,source:'OpenStreetMap',osm_type:'node',osm_id:1}]})}));
+  await context.route(url=>new URL(url).pathname==='/data/theaters_master.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters})}));
+  await context.route(url=>new URL(url).pathname==='/data/theaters_osm.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters:[{name:'Cinema',lat:35,lon:139,source:'OpenStreetMap',osm_type:'node',osm_id:1}]})}));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/theaters.html?search=Cinema`);
   await page.locator('#grid .theaterTable').waitFor();

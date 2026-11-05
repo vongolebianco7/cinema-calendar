@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:19:00Z",
+  "updated_at": "2026-11-05T15:18:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2395,5 +2395,31 @@
       "Review PR #526 conflict and CI, do not merge without checks",
       "Complete feedback admin token and iPhone Safari acceptance with authorized owner"
     ]
+  },
+  "latest_automation_check_20261106_0018": {
+    "observed_at": "2026-11-05T15:18:00Z",
+    "release_decision": "NO-GO",
+    "pr_611": {
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/611",
+      "head": "fe7890681e994c7a1c60d04e6cd698d5bfe1b278",
+      "change": "Fail-closed production proof mismatch diagnostics; no bypass",
+      "ci": "Smoke succeeded; backend build, mobile layout, Validate frontend, autonomous quality and completeness still in_progress at last check; do not merge without complete required CI and review"
+    },
+    "data_source_audit": {
+      "streaming": "TMDB provider observations automated but not comprehensive catalogue; 1046 fresh and 548 stale of 1594 in source-status snapshot",
+      "tv": "Manual programme acquisition, metadata cross-reference only automated",
+      "film_events": "Manual official event input and manual workflow; no automatic external discovery",
+      "premium_formats": "Manual official theater/brand fact verification; no automatic external acquisition",
+      "theater_showtimes": "Disabled pending licensed access; stale data hidden",
+      "now_playing": "Source status snapshot marked stale as of 2026-11-05T13:37Z but later successful nationwide workflow observed; status snapshot needs reconciliation before user-facing freshness assertion"
+    },
+    "next_actions": [
+      "Wait for all PR #611 checks and review; only then consider merge and exact-head receipt update",
+      "Verify latest now-playing source-status reflects successful refresh rather than outdated snapshot",
+      "Check read-only live poster HTTP and actual Vercel production source",
+      "Check Update movie data and DB sync separately; Neon free quota before any DB mutation",
+      "Research licensed non-scraping event/IMAX/TV sources before enabling automated acquisition"
+    ],
+    "safety": "No user records, DB, secrets, deployments or production application source changed; only diagnostics PR and checkpoint."
   }
 }

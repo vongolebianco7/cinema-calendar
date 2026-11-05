@@ -78,6 +78,7 @@ on:
       - '!data/source-status.json'
       - '!data/special_screenings.json'
       - '!data/streaming.json'
+      - '!data/streaming-official-current.json'
       - '!data/streaming-announcement-candidates.json'
       - '!data/theater_schedules.json'
       - '!data/theaters_master.json'

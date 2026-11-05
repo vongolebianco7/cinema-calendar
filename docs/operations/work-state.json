@@ -1,16 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:40:00Z",
+  "updated_at": "2026-11-05T18:11:24.104Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "121ee41c4a101f005518312d0bdaec1d2b31e9fb",
-  "branch": "feat/syoboi-tv-broadcasts-20261106",
-  "head_sha": "d401ef306ff5c7e04b849eff5de0ff1492c249bf",
-  "pull_request": {
-    "number": 624,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/624"
-  },
+  "base_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+  "branch": "main",
+  "head_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -926,7 +923,7 @@
     "Neon Free transfer quota remains a blocker for another production movie/DB sync; do not retry or restart compute before quota reset/available allowance.",
     "Complete provider catalogue coverage is unavailable from approved dated official feeds; do not claim exhaustive streaming availability."
   ],
-  "next_action": "Refresh PR #624 source-head checks; fix any failure. While waiting, perform an independent read-only live production poster acceptance audit for #593/#242. After all required source-head checks pass, renew production proof in a receipt-only commit and verify final-head CI before merging.",
+  "next_action": "Refresh latest main, PR heads and exact-head checks. Resolve PR #629 receipt proof and PR #627 mirrored-route fix safely; continue independent unfinished P0 work during any CI wait. Then close superseded #622 if its only useful route fix is covered, run the approved TV workflow once publication proof is valid, and verify actual production deployment/data before claiming release.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2487,5 +2484,86 @@
       "次の中断前に最新main SHA、PR head/checks、作業内容、失敗、未完了項目、次の具体的操作を再記録する。"
     ],
     "safety": "本番DB、鑑賞記録、評価、ブックマーク、secret、課金プラン、デプロイは変更していない。"
+  },
+  "latest_automation_check_20261106_continued": {
+    "observed_at": "2026-11-05T18:11:24.104Z",
+    "main_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+    "merged": [
+      {
+        "pr": 624,
+        "sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+        "source_head": "d401ef306ff5c7e04b849eff5de0ff1492c249bf",
+        "ci": "All source checks passed, including exact-source Autonomous quality gate, smoke, frontend Chromium/WebKit, backend build, mobile, Python and scorecard. Branch merged before receipt follow-up, so #629 is restoring the receipt on main."
+      },
+      {
+        "pr": 626,
+        "sha": "0c7b4f55bab9f70e0fb7062a29b8dd99c64c07fd",
+        "ci": "Docs checkpoint merged after JSON parse and smoke/mobile/Autonomous quality checks passed."
+      }
+    ],
+    "active_prs": [
+      {
+        "pr": 629,
+        "head": "9680dfdc79f24b92f0162c0209a9e2aeba988257",
+        "title": "receipt-only proof for #624",
+        "ci": "Autonomous quality, Validate frontend, completeness in progress; smoke, scorecard contract, mobile and backend build passed."
+      },
+      {
+        "pr": 627,
+        "head": "2b20c4af8df01717b52ab74d831094a73eaa1587",
+        "title": "mirrored agent redirect fix",
+        "ci": "Autonomous quality, smoke, backend, mobile, isolated Pages and completeness passed; Validate frontend still running."
+      },
+      {
+        "pr": 625,
+        "head": "6430c3f9d505716fa2cd8bf22bc2a800512fc62f",
+        "title": "development stall watchdog",
+        "ci": "Validate frontend still running; other listed checks passed."
+      },
+      {
+        "pr": 622,
+        "head": "1ffa14c925a3bc99b580563fb92b3e93f9560c07",
+        "title": "stale TV validation retry",
+        "ci": "All listed checks passed; based on older main. PR #624 covers core TV acquisition; inspect unique theater test fixture before closing."
+      }
+    ],
+    "closed_prs": [
+      621
+    ],
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "http": "200",
+      "ready_sha": "86287ce04118c319a99ee891be8b66ea22d9f64b",
+      "main_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+      "result": "Production alias serves an older READY deployment; no latest-main acceptance. Vercel deployments list request timed out; get_deployment confirms alias SHA."
+    },
+    "live_ui_poster_audit": {
+      "calendar_visible": "11 images, 0 loaded-image failures",
+      "rankings_visible": "8 images, 0 loaded-image failures",
+      "discover_visible": "5 images, 0 loaded-image failures",
+      "theaters": "no poster catalog; 1135 total / 992 filtered directory entries displayed after load",
+      "scope": "Read-only browser audit; not full-page or real iPhone Safari acceptance."
+    },
+    "implemented_independent_task": {
+      "pr": 627,
+      "local_test": "node --test tests/cinelva-agent-redirect.test.cjs passed",
+      "quality_gate": "python scripts/quality_gate.py passed including the new test",
+      "fix": "Nested /cinelva/agent.html now resolves its own /cinelva/discover.html without duplicating the directory segment."
+    },
+    "blockers": [
+      "Production latest-main deployment/acceptance pending; free Hobby limit must be maintained.",
+      "FEEDBACK_ADMIN_TOKEN requires owner configuration; do not set/guess credentials.",
+      "Physical iPhone Safari acceptance not performed.",
+      "TV workflow has not yet run against merged main; no claim of actual new records."
+    ],
+    "next_actions": [
+      "Check PR #627 Validate frontend and PR #629 source-free proof CI; inspect failures and repair.",
+      "When PR #629 final checks are green, merge receipt-only proof and re-run verify-production-release on latest main.",
+      "After proof is valid, manually dispatch update-tv-movie-broadcasts if GitHub UI/API permits; verify candidate, match, insertion and display counts; no DB writes.",
+      "Close PR #622 only after confirming its remaining test-fixture change is unnecessary or safely transplanted; #621 is already superseded and closed.",
+      "Verify canonical Vercel deployment and live user flows; if deployment is blocked by free-tier limit, keep NO-GO and record the precise owner action required.",
+      "Refresh issue/PR/CI/main status and update this checkpoint before next interruption."
+    ],
+    "safety": "No user records, ratings, bookmarks, DB, credentials, paid plan or production deployment changed in this run."
   }
 }

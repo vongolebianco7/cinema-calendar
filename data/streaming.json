@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T00:22:46.778549+00:00",
+  "generated_at": "2026-11-05T01:26:18.740Z",
   "movies": [
     {
       "title": "Outcome",
@@ -390,39 +390,6 @@
       "tmdbId": 37799
     },
     {
-      "title": "ダンケルク",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.45,
-      "votes": 18111,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 374720,
-      "tmdb": "https://www.themoviedb.org/movie/374720",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 106,
-      "genres": [
-        "戦争",
-        "アクション",
-        "履歴"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "フィン・ホワイトヘッド",
-        "トム・ハーディ",
-        "マーク・ライランス",
-        "ケネス・ブラナー"
-      ],
-      "tmdbId": 374720
-    },
-    {
       "title": "ダークナイト",
       "date": "2026-09-01",
       "event": "streaming",
@@ -489,6 +456,39 @@
       "tmdbId": 49026
     },
     {
+      "title": "ダンケルク",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.45,
+      "votes": 18111,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 374720,
+      "tmdb": "https://www.themoviedb.org/movie/374720",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 106,
+      "genres": [
+        "戦争",
+        "アクション",
+        "履歴"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "フィン・ホワイトヘッド",
+        "トム・ハーディ",
+        "マーク・ライランス",
+        "ケネス・ブラナー"
+      ],
+      "tmdbId": 374720
+    },
+    {
       "title": "チャーリーとチョコレート工場",
       "date": "2026-09-01",
       "event": "streaming",
@@ -523,6 +523,34 @@
       "tmdbId": 118
     },
     {
+      "title": "デーヴァラ",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.814,
+      "votes": 229,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/fMvnCWdYpnHUwnMs6u3fKPBHDpP.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "tmdbId": 811941,
+      "tmdb": "https://www.themoviedb.org/movie/811941",
+      "release_year": 2024,
+      "year": 2024,
+      "original_title": "దేవర",
+      "director": "Koratala Siva",
+      "director_id": 1168111,
+      "runtime": 178,
+      "genres": [
+        "ドラマ",
+        "アクション"
+      ],
+      "countries": [
+        "India"
+      ],
+      "identity_verified_at": "2026-10-20"
+    },
+    {
       "title": "テネット",
       "date": "2026-09-01",
       "event": "streaming",
@@ -554,34 +582,6 @@
         "ケネス・ブラナー"
       ],
       "tmdbId": 577922
-    },
-    {
-      "title": "デーヴァラ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.814,
-      "votes": 229,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/fMvnCWdYpnHUwnMs6u3fKPBHDpP.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "tmdbId": 811941,
-      "tmdb": "https://www.themoviedb.org/movie/811941",
-      "release_year": 2024,
-      "year": 2024,
-      "original_title": "దేవర",
-      "director": "Koratala Siva",
-      "director_id": 1168111,
-      "runtime": 178,
-      "genres": [
-        "ドラマ",
-        "アクション"
-      ],
-      "countries": [
-        "India"
-      ],
-      "identity_verified_at": "2026-10-20"
     },
     {
       "title": "バイオハザード",
@@ -682,6 +682,143 @@
         "ロジャー・クレイグ・スミス"
       ],
       "tmdbId": 13648
+    },
+    {
+      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 5.948,
+      "votes": 2902,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 460458,
+      "tmdb": "https://www.themoviedb.org/movie/460458",
+      "director": "Johannes Roberts",
+      "director_id": 100734,
+      "runtime": 107,
+      "genres": [
+        "アクション",
+        "ホラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "Germany",
+        "United States of America",
+        "Canada"
+      ],
+      "cast": [
+        "カヤ・スコデラリオ",
+        "ハナ・ジョン＝カーメン",
+        "ロビー・アメル",
+        "Tom Hopper"
+      ],
+      "tmdbId": 460458
+    },
+    {
+      "title": "バイオハザード：ヴェンデッタ",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.9,
+      "votes": 1120,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/iXa4VPoT5G1tZG3L4QdOMIvJ9PF.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 400136,
+      "tmdb": "https://www.themoviedb.org/movie/400136",
+      "director": "辻本貴則",
+      "director_id": 133202,
+      "runtime": 97,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "アドベンチャー",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan",
+        "United States of America"
+      ],
+      "cast": [
+        "Kevin Dorman",
+        "マシュー・マーサー",
+        "Erin Cahill",
+        "John DeMita"
+      ],
+      "tmdbId": 400136
+    },
+    {
+      "title": "バイオハザード：ザ・ファイナル",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.106,
+      "votes": 3644,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/mvzMipirA7xEXoOJ3aSKfZIxj4G.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 173897,
+      "tmdb": "https://www.themoviedb.org/movie/173897",
+      "director": "ポール・W・S・アンダーソン",
+      "director_id": 4014,
+      "runtime": 107,
+      "genres": [
+        "アクション",
+        "ホラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "Canada",
+        "France",
+        "Germany",
+        "United States of America"
+      ],
+      "cast": [
+        "ミラ・ジョヴォヴィッチ",
+        "イアン・グレン",
+        "Ali Larter",
+        "ショーン・ロバーツ"
+      ],
+      "tmdbId": 173897
+    },
+    {
+      "title": "バイオハザード：デスアイランド",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.264,
+      "votes": 1156,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1083862,
+      "tmdb": "https://www.themoviedb.org/movie/1083862",
+      "director": "羽住英一郎",
+      "director_id": 589915,
+      "runtime": 91,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "マシュー・マーサー",
+        "Nicole Tompkins",
+        "Kevin Dorman",
+        "Stephanie Panisello"
+      ],
+      "tmdbId": 1083862
     },
     {
       "title": "バイオハザードII アポカリプス",
@@ -820,143 +957,6 @@
         "Aryana Engineer"
       ],
       "tmdbId": 71679
-    },
-    {
-      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 5.948,
-      "votes": 2902,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 460458,
-      "tmdb": "https://www.themoviedb.org/movie/460458",
-      "director": "Johannes Roberts",
-      "director_id": 100734,
-      "runtime": 107,
-      "genres": [
-        "アクション",
-        "ホラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "Germany",
-        "United States of America",
-        "Canada"
-      ],
-      "cast": [
-        "カヤ・スコデラリオ",
-        "ハナ・ジョン＝カーメン",
-        "ロビー・アメル",
-        "Tom Hopper"
-      ],
-      "tmdbId": 460458
-    },
-    {
-      "title": "バイオハザード：ザ・ファイナル",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.106,
-      "votes": 3644,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/mvzMipirA7xEXoOJ3aSKfZIxj4G.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 173897,
-      "tmdb": "https://www.themoviedb.org/movie/173897",
-      "director": "ポール・W・S・アンダーソン",
-      "director_id": 4014,
-      "runtime": 107,
-      "genres": [
-        "アクション",
-        "ホラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "Canada",
-        "France",
-        "Germany",
-        "United States of America"
-      ],
-      "cast": [
-        "ミラ・ジョヴォヴィッチ",
-        "イアン・グレン",
-        "Ali Larter",
-        "ショーン・ロバーツ"
-      ],
-      "tmdbId": 173897
-    },
-    {
-      "title": "バイオハザード：デスアイランド",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.264,
-      "votes": 1156,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 1083862,
-      "tmdb": "https://www.themoviedb.org/movie/1083862",
-      "director": "羽住英一郎",
-      "director_id": 589915,
-      "runtime": 91,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション",
-        "ホラー"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "マシュー・マーサー",
-        "Nicole Tompkins",
-        "Kevin Dorman",
-        "Stephanie Panisello"
-      ],
-      "tmdbId": 1083862
-    },
-    {
-      "title": "バイオハザード：ヴェンデッタ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.9,
-      "votes": 1120,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/iXa4VPoT5G1tZG3L4QdOMIvJ9PF.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 400136,
-      "tmdb": "https://www.themoviedb.org/movie/400136",
-      "director": "辻本貴則",
-      "director_id": 133202,
-      "runtime": 97,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "アドベンチャー",
-        "サイエンスフィクション",
-        "ホラー"
-      ],
-      "countries": [
-        "Japan",
-        "United States of America"
-      ],
-      "cast": [
-        "Kevin Dorman",
-        "マシュー・マーサー",
-        "Erin Cahill",
-        "John DeMita"
-      ],
-      "tmdbId": 400136
     },
     {
       "title": "バットマン ビギンズ",
@@ -2462,38 +2462,6 @@
       "identity_verified_at": "2026-10-25"
     },
     {
-      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": null,
-      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "type": "配信",
-      "checked_at": "2026-10-26"
-    },
-    {
-      "title": "めぐみへの誓い",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 7.3,
-      "votes": 3,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/9eRlNhVq2j0dizt4mTAG51de9xq.jpg",
-      "source": "FOD INFO公式配信一覧",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "checked_at": "2026-10-25",
-      "tmdbId": 798926,
-      "original_title": "めぐみへの誓い",
-      "year": 2021,
-      "release_year": 2021,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
       "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
       "date": "2026-10-01",
       "event": "streaming",
@@ -2633,6 +2601,20 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "type": "配信",
+      "checked_at": "2026-10-26"
+    },
+    {
       "title": "メガロポリス",
       "date": "2026-10-01",
       "event": "streaming",
@@ -2648,6 +2630,24 @@
       "original_title": "Megalopolis",
       "year": 2024,
       "release_year": 2024,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "めぐみへの誓い",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 7.3,
+      "votes": 3,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/9eRlNhVq2j0dizt4mTAG51de9xq.jpg",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "checked_at": "2026-10-25",
+      "tmdbId": 798926,
+      "original_title": "めぐみへの誓い",
+      "year": 2021,
+      "release_year": 2021,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -3078,25 +3078,6 @@
       "identity_verified_at": "2026-10-25"
     },
     {
-      "title": "007は二度死ぬ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.588,
-      "votes": 2600,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/jZNROWO3GN61GlPEs4KloT8CXz8.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 667,
-      "original_title": "You Only Live Twice",
-      "year": 1967,
-      "release_year": 1967,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
       "title": "007／オクトパシー",
       "date": "2026-10-01",
       "event": "streaming",
@@ -3211,25 +3192,6 @@
       "identity_verified_at": "2026-10-25"
     },
     {
-      "title": "007／ダイヤモンドは永遠に",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.396,
-      "votes": 2475,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/2QFyFsPq3GBnCjZ59qA8FoWhjIW.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 681,
-      "original_title": "Diamonds Are Forever",
-      "year": 1971,
-      "release_year": 1971,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
       "title": "007／ダイ・アナザー・デイ",
       "date": "2026-10-01",
       "event": "streaming",
@@ -3246,6 +3208,25 @@
       "original_title": "Die Another Day",
       "year": 2003,
       "release_year": 2003,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "007／ダイヤモンドは永遠に",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.396,
+      "votes": 2475,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/2QFyFsPq3GBnCjZ59qA8FoWhjIW.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 681,
+      "original_title": "Diamonds Are Forever",
+      "year": 1971,
+      "release_year": 1971,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -3515,6 +3496,25 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "007は二度死ぬ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.588,
+      "votes": 2600,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/jZNROWO3GN61GlPEs4KloT8CXz8.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 667,
+      "original_title": "You Only Live Twice",
+      "year": 1967,
+      "release_year": 1967,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
       "title": "48時間Part2/帰ってきたふたり",
       "date": "2026-10-01",
       "event": "streaming",
@@ -3550,44 +3550,6 @@
       "original_title": "마녀 2",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "ひとよ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.2,
-      "votes": 24,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/qCmC9JNQ5qDYnU4Z4fo6f2u8W9J.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 595112,
-      "original_title": "ひとよ",
-      "year": 2019,
-      "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "やがて海へと届く",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.9,
-      "votes": 24,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/6SlX5FeFarhW4GhqqmCvlRtbkbo.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 923837,
-      "original_title": "やがて海へと届く",
-      "year": 2022,
-      "release_year": 2022,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -3686,6 +3648,25 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "グッド・ウィル・ハンティング／旅立ち",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 8.2,
+      "votes": 14493,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/vZ2KGsE9kDSZSuBqooh5wBK7EAK.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 489,
+      "original_title": "Good Will Hunting",
+      "year": 2002,
+      "release_year": 2002,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
       "title": "クリード チャンプを継ぐ男",
       "date": "2026-10-01",
       "event": "streaming",
@@ -3740,25 +3721,6 @@
       "original_title": "Creed III",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "グッド・ウィル・ハンティング／旅立ち",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 8.2,
-      "votes": 14493,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/vZ2KGsE9kDSZSuBqooh5wBK7EAK.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 489,
-      "original_title": "Good Will Hunting",
-      "year": 2002,
-      "release_year": 2002,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -3838,6 +3800,25 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "スーパーエイト",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.782,
+      "votes": 7363,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/2NzRRE83B1kFLc1lgtTBS7pmL3B.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 37686,
+      "original_title": "Super 8",
+      "year": 2011,
+      "release_year": 2011,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
       "title": "スター・トレックVII　ジェネレーションズ",
       "date": "2026-10-01",
       "event": "streaming",
@@ -3873,25 +3854,6 @@
       "original_title": "スパイの妻",
       "year": 2020,
       "release_year": 2020,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "スーパーエイト",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.782,
-      "votes": 7363,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/2NzRRE83B1kFLc1lgtTBS7pmL3B.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 37686,
-      "original_title": "Super 8",
-      "year": 2011,
-      "release_year": 2011,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -3969,6 +3931,25 @@
       "original_title": "Beetlejuice",
       "year": 1988,
       "release_year": 1988,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "ひとよ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.2,
+      "votes": 24,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/qCmC9JNQ5qDYnU4Z4fo6f2u8W9J.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 595112,
+      "original_title": "ひとよ",
+      "year": 2019,
+      "release_year": 2019,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -4105,22 +4086,22 @@
       "identity_verified_at": "2026-10-25"
     },
     {
-      "title": "ラグラッツ　ムービー",
+      "title": "やがて海へと届く",
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.27,
-      "votes": 666,
+      "score": 6.9,
+      "votes": 24,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/aQQYMyTBnb1TNwHaRQywwu7MAqT.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/6SlX5FeFarhW4GhqqmCvlRtbkbo.jpg",
       "source": "Prime Video公式配信予定",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
       "type": "見放題",
       "checked_at": "2026-10-25",
-      "tmdbId": 14444,
-      "original_title": "The Rugrats Movie",
-      "year": 1999,
-      "release_year": 1999,
+      "tmdbId": 923837,
+      "original_title": "やがて海へと届く",
+      "year": 2022,
+      "release_year": 2022,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -4143,6 +4124,25 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "ラグラッツ　ムービー",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.27,
+      "votes": 666,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/aQQYMyTBnb1TNwHaRQywwu7MAqT.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 14444,
+      "original_title": "The Rugrats Movie",
+      "year": 1999,
+      "release_year": 1999,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
       "title": "レッド・オクトーバーを追え！",
       "date": "2026-10-01",
       "event": "streaming",
@@ -4159,6 +4159,25 @@
       "original_title": "The Hunt for Red October",
       "year": 1990,
       "release_year": 1990,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "ロード・オブ・ザ・リング/ローハンの戦い",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.501,
+      "votes": 973,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/hWIUksG3NcfckFmyiWm9yEpQDAR.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 839033,
+      "original_title": "The Lord of the Rings: The War of the Rohirrim",
+      "year": 2024,
+      "release_year": 2024,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -4197,6 +4216,25 @@
       "original_title": "Rocky",
       "year": 1976,
       "release_year": 1976,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "ロッキー・ザ・ファイナル",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.889,
+      "votes": 3969,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/smIG47LJZr9uBtdu6VeSOkzhCzc.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1246,
+      "original_title": "Rocky Balboa",
+      "year": 2007,
+      "release_year": 2007,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -4273,44 +4311,6 @@
       "original_title": "Rocky V",
       "year": 1990,
       "release_year": 1990,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "ロッキー・ザ・ファイナル",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.889,
-      "votes": 3969,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/smIG47LJZr9uBtdu6VeSOkzhCzc.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1246,
-      "original_title": "Rocky Balboa",
-      "year": 2007,
-      "release_year": 2007,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
-      "title": "ロード・オブ・ザ・リング/ローハンの戦い",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.501,
-      "votes": 973,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w342/hWIUksG3NcfckFmyiWm9yEpQDAR.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 839033,
-      "original_title": "The Lord of the Rings: The War of the Rohirrim",
-      "year": 2024,
-      "release_year": 2024,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -4843,20 +4843,6 @@
       "identity_verified_at": "2026-10-25"
     },
     {
-      "title": "きみがいるだけで",
-      "date": "2026-10-02",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": null,
-      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "type": "配信",
-      "checked_at": "2026-10-26"
-    },
-    {
       "id": 685916,
       "tmdbId": 685916,
       "original_title": "The Killers Next Door",
@@ -4947,6 +4933,20 @@
         "https://www.videx.jp/detail/cinema/v_c_transworldassociates/ctwa1882_0001/index.htm",
         "https://harrygreenberger.com/about/"
       ]
+    },
+    {
+      "title": "きみがいるだけで",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "type": "配信",
+      "checked_at": "2026-10-26"
     },
     {
       "title": "名探偵ミランダ 大富豪殺人の招待状",
@@ -5077,25 +5077,6 @@
       "identity_source": "https://www.themoviedb.org/movie/1458857"
     },
     {
-      "title": "マテリアリスト 結婚の条件",
-      "date": "2026-10-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.275,
-      "votes": 1441,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/phw7iwIeAuElwyyKrVXC55RXQQS.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1136867,
-      "original_title": "Materialists",
-      "year": null,
-      "release_year": null,
-      "identity_verified_at": "2026-10-25"
-    },
-    {
       "title": "８番出口",
       "date": "2026-10-02",
       "event": "streaming",
@@ -5115,6 +5096,25 @@
       "identity_verified_at": "2026-10-25"
     },
     {
+      "title": "マテリアリスト 結婚の条件",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.275,
+      "votes": 1441,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/phw7iwIeAuElwyyKrVXC55RXQQS.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1136867,
+      "original_title": "Materialists",
+      "year": null,
+      "release_year": null,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
       "title": "I AM JAM ピザの惑星危機一髪！（活弁吹込版）",
       "date": "2026-10-03",
       "event": "streaming",
@@ -5127,24 +5127,6 @@
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
       "checked_at": "2026-10-26"
-    },
-    {
-      "title": "ほなまた明日",
-      "date": "2026-10-03",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 6,
-      "votes": 1,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/czP3GUvJwAyAtSPWdLLdPFUfyCN.jpg",
-      "source": "FOD INFO公式配信一覧",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1263089,
-      "original_title": "ほなまた明日",
-      "year": 2024,
-      "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
     },
     {
       "title": "カーテンコールの灯",
@@ -5198,6 +5180,24 @@
       "original_title": "High Rollers",
       "year": 2025,
       "release_year": 2025,
+      "identity_verified_at": "2026-10-25"
+    },
+    {
+      "title": "ほなまた明日",
+      "date": "2026-10-03",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 6,
+      "votes": 1,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/czP3GUvJwAyAtSPWdLLdPFUfyCN.jpg",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1263089,
+      "original_title": "ほなまた明日",
+      "year": 2024,
+      "release_year": 2024,
       "identity_verified_at": "2026-10-25"
     },
     {
@@ -6234,32 +6234,6 @@
       "identity_source": "https://www.themoviedb.org/movie/1537620"
     },
     {
-      "title": "てんてん ずっと独身でいるつもり？",
-      "date": "2026-10-23",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/4FgmM1wuQxCLzVfPUJNmRyCBMtE.jpg",
-      "source": "Amazon Japan公式 2026年10月新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-11",
-      "tmdbId": 1768182,
-      "tmdb": "https://www.themoviedb.org/movie/1768182",
-      "release_year": 2026,
-      "year": 2026,
-      "original_title": "てんてん　ずっと独身でいるつもり？",
-      "director": "箱田優子",
-      "director_id": 2261683,
-      "genres": [],
-      "countries": [
-        "Japan"
-      ],
-      "identity_verified_at": "2026-10-20"
-    },
-    {
       "title": "ウォンカとチョコレート工場のはじまり",
       "date": "2026-10-23",
       "event": "streaming",
@@ -6288,6 +6262,32 @@
       "countries": [
         "United Kingdom",
         "United States of America"
+      ],
+      "identity_verified_at": "2026-10-20"
+    },
+    {
+      "title": "てんてん ずっと独身でいるつもり？",
+      "date": "2026-10-23",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/4FgmM1wuQxCLzVfPUJNmRyCBMtE.jpg",
+      "source": "Amazon Japan公式 2026年10月新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-11",
+      "tmdbId": 1768182,
+      "tmdb": "https://www.themoviedb.org/movie/1768182",
+      "release_year": 2026,
+      "year": 2026,
+      "original_title": "てんてん　ずっと独身でいるつもり？",
+      "director": "箱田優子",
+      "director_id": 2261683,
+      "genres": [],
+      "countries": [
+        "Japan"
       ],
       "identity_verified_at": "2026-10-20"
     },
@@ -7023,6 +7023,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "グーニーズ",
+      "date": "2026-11-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/cwVBY1pHjK2Q2lAWjmzvW337VtV.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "グレムリン",
       "date": "2026-11-01",
       "event": "streaming",
@@ -7043,19 +7056,6 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/dWQsE1XLd6qsmunlNEQneCY96Fu.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "グーニーズ",
-      "date": "2026-11-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/cwVBY1pHjK2Q2lAWjmzvW337VtV.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7282,6 +7282,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "おとななじみ",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "ABEMA",
+      "source": "ABEMA 2026年11月無料初配信",
+      "source_url": "https://prtimes.jp/main/html/rd/p/000004182.000064643.html",
+      "poster": "https://image.tmdb.org/t/p/w500/sUjXX4cDuuSFqrkMGc48tGvaah2.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "48時間",
       "date": "2026-11-02",
       "event": "streaming",
@@ -7333,19 +7346,6 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "インディ・ジョーンズ最後の聖戦",
-      "date": "2026-11-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/tpuICVAMw6oLuAxf9fR024feV9f.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
       "title": "イーグル・アイ",
       "date": "2026-11-02",
       "event": "streaming",
@@ -7353,6 +7353,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/vgZMfSTHLYTzIURja5bmoJuF81Y.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "インディ・ジョーンズ最後の聖戦",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/tpuICVAMw6oLuAxf9fR024feV9f.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7410,12 +7423,13 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "スター・トレックVIII　ファースト・コンタクト",
+      "title": "スター・トレックV　新たなる未知へ",
       "date": "2026-11-02",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/6bxXQc57HxA2ymJESbheb78EczO.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7435,13 +7449,12 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "スター・トレックV　新たなる未知へ",
+      "title": "スター・トレックVIII　ファースト・コンタクト",
       "date": "2026-11-02",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/6bxXQc57HxA2ymJESbheb78EczO.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7474,19 +7487,6 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "トゥルーマン・ショー",
-      "date": "2026-11-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/wDDMFUO91fTPig1F7Ht5gbcYBce.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
       "title": "トゥルー･グリット",
       "date": "2026-11-02",
       "event": "streaming",
@@ -7494,6 +7494,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/3ybjmknlrIckQmQB0qzhURz4Qab.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "トゥルーマン・ショー",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/wDDMFUO91fTPig1F7Ht5gbcYBce.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7694,6 +7707,58 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "ダーティ･マネー",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/2XkmblX1FB1v4Pb9GQlmhSe861e.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ディープ･ウォーター",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/f90xO280gGQArVP2GU4IshAClt.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "デビルズ･バス",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/pKXDD5LXPtWpXEBVTjWHi4x1eTQ.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ラスト･エージェント 最高機密プロトコル",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/cbKFcDZmHdjWoMNMQLMD9QBDJmg.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "余命一年、男をかう",
       "date": "2026-11-05",
       "event": "streaming",
@@ -7731,6 +7796,31 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/9zdqkbwVGrUl0biGCqCOgvbgaM5.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "アプレンティス：ドナルド･トランプの創り方",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/549Hdul2BgPnZMhqFxp6npp2opr.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "優しき罪人 (つみびと)",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7780,6 +7870,30 @@
       "identity_source": "https://www.themoviedb.org/movie/1483525"
     },
     {
+      "title": "マッド・マックス",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "マッド・マックス２",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "マッドマックス　怒りのデス・ロード",
       "date": "2026-11-06",
       "event": "streaming",
@@ -7787,19 +7901,6 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/auGxRPeTiC5p95sWktXJ4uIi6a4.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "マッドマックス／サンダードーム",
-      "date": "2026-11-06",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/exCsTKQROJyOeRAZntZPZaS9cjA.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7819,24 +7920,13 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "マッド・マックス",
+      "title": "マッドマックス／サンダードーム",
       "date": "2026-11-06",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "マッド・マックス２",
-      "date": "2026-11-06",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/exCsTKQROJyOeRAZntZPZaS9cjA.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -7944,6 +8034,82 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "アメリカン･アサシン",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/w6vjeHx3UEaBXIyc8VFqyZYKznD.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "アンジーのBARで逢いましょう",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/4EEqMMhKiEurKxWA4UPkJ3zs3Oy.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ヒットマン リサージェンス",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "大海原のソングライン",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "2025年7月5日午前4時18分",
+      "date": "2026-11-08",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/l3RQkjKmyXYygOhxGR53rlzQJyw.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "デュー あの時の君とボク",
+      "date": "2026-11-08",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/wA2H70y0G86wYm0HtE1TIkVGgU4.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "劇場版 ソードアート・オンライン -オーディナル・スケール-",
       "date": "2026-11-08",
       "event": "streaming",
@@ -7983,6 +8149,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "アンダードッグ／二人の男",
+      "date": "2026-11-09",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/zGNJvCq0q98tElqeJlaOFGy8RrR.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "ツイスターズ",
       "date": "2026-11-09",
       "event": "streaming",
@@ -7990,6 +8169,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/nfvTIg8Oa7iM7kXyKxJLh7Zgt5S.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "こんにちは、私のお母さん",
+      "date": "2026-11-10",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/1HLWXFfmCuWKJJXwF08k8tQrlzC.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -8080,6 +8272,92 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/d06Eb5ORa7zyygZYUL7zvZuveXU.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "search／#サーチ2",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/dHR3WAUmFJ2Ka2YBzn0nK5O2KME.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "search／サーチ",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/z9k4qQF3bDwnxEREcPkPdtYIhjy.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "スティール･レイン",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ファイト",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ブラック･ロータス 誓いの刻印",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ブレス",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "鬼哭 忌まわしき地",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
       "score": 0,
       "votes": 0,
       "overview": "",

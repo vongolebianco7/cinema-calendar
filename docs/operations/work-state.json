@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:12:00Z",
+  "updated_at": "2026-11-05T15:19:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2375,5 +2375,25 @@
       "Review November streaming and event/IMAX provenance, feedback admin token and security PR #526"
     ],
     "safety": "Checkpoint-only; no DB, secret, user record, deployment, or source-code mutation."
+  },
+  "latest_release_audit": {
+    "checked_main": "94a0a2c5837fea99ffc15d7fbbe8ea52288fbcc3",
+    "frontend_latest_ready_sha": "86287ce04118c319a99ee891be8b66ea22d9f64b",
+    "backend_latest_ready_sha": "86287ce04118c319a99ee891be8b66ea22d9f64b",
+    "latest_docs_only_deployments": "CANCELED for both projects (expected no new build; canonical alias not yet inspected)",
+    "github_actions": "main 08244e6b smoke/Pages succeeded; main 94a0a2c CI queued at inspection",
+    "issue_593": "closed; production poster HTTP and iPhone Safari not verified",
+    "open_prs": [
+      526,
+      514
+    ],
+    "release_decision": "NO-GO",
+    "next_actions": [
+      "Inspect canonical production aliases and verify poster HTTP across pages",
+      "Diagnose latest Update movie data backup/sync failure using exact job logs, preserve CI proof",
+      "Confirm Neon free transfer budget before any DB write",
+      "Review PR #526 conflict and CI, do not merge without checks",
+      "Complete feedback admin token and iPhone Safari acceptance with authorized owner"
+    ]
   }
 }

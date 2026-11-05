@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T12:57:00Z",
+  "updated_at": "2026-11-05T13:58:28Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2269,5 +2269,33 @@
     "ci_limit": "Commit PR-workflow endpoint empty; combined Vercel statuses success for both despite backend CANCELED. Need independent canonical alias and main workflow check.",
     "remaining": "Poster actual loads, movie data exact-source guard, Neon quota DB sync, streaming coverage, event/IMAX provenance, admin token, iPhone, security review.",
     "next": "Read-only investigate deployment mismatch and source guard, do not alter safety checks or production DB."
+  },
+  "latest_automation_check_20261105_2258": {
+    "observed_at": "2026-11-05T13:58:28Z",
+    "main_before_checkpoint": "5f7c2f2b036a313c3296769471f9b1277afc9a31",
+    "open_prs": [
+      526,
+      514
+    ],
+    "issue_states": {
+      "239": "open",
+      "242": "open",
+      "243": "open",
+      "244": "open",
+      "585": "open",
+      "593": "closed"
+    },
+    "vercel": "Exact-main frontend and backend production deployments CANCELED; deployment backend errorLink points to ignored-build-step documentation, but cause not established. 7a2e2bfb frontend READY/backend CANCELED; 3259dbb both READY. Verify canonical alias before release.",
+    "update_movie_data": "Run 41981020642 job 127090882358: step 20 Commit JSON backup snapshots FAILED; step 21 PostgreSQL sync SKIPPED; earlier snapshot/provenance validations PASSED. Inspect step-20 logs for exact cause; never bypass source guard.",
+    "actions_limit": "Commit-specific workflow lookup is PR-trigger-only; returned empty and cannot establish main CI health.",
+    "blockers": [
+      "Read-only identify ignored-build-step cancellation and canonical production alias",
+      "Inspect failed step 20 logs, repair exact-source guard with tests, then check Neon free quota before sync",
+      "Production poster real-image loads and iPhone Safari",
+      "FEEDBACK_ADMIN_TOKEN owner configuration and admin acceptance",
+      "November provider coverage and event/IMAX source audit",
+      "Security PR #526 review; PR #514 licensing"
+    ],
+    "safety": "No DB, secrets, user data, or deployments changed; documentation checkpoint only."
   }
 }

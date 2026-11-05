@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T16:15:28.196Z",
+  "generated_at": "2026-11-05T16:28:21.078Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -87,7 +87,7 @@
       "max_age_hours": 48,
       "freshness": "unknown",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
-      "trigger": "daily 18:37 UTC and manual; randomized 1–30 second delay before feed; sequential title lookups with at least one second between requests",
+      "trigger": "daily 17:30 UTC and manual; scheduled before the 18:17 UTC TMDB enrichment job; randomized 1–30 second delay before feed; sequential title lookups with at least one second between requests",
       "coverage": "しょぼいカレンダーが扱うアニメ・関連番組のうち映画カテゴリ。全国の全局・全映画放送の網羅ではありません。",
       "record_count": 0
     },

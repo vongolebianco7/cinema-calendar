@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T10:02:00Z",
+  "updated_at": "2026-11-05T12:04:26Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2220,15 +2220,15 @@
   },
   "release_gate": {
     "status": "NO-GO",
-    "verified_at": "2026-11-05T10:02:00Z",
-    "main_sha": "4b3481c9ede6f2736575e273b7c58c1c29df8d7d",
+    "verified_at": "2026-11-05T12:04:26Z",
+    "main_sha": "173e276e972621343a2d5accbb0dd9ffd73d9f4b",
     "open_prs": [
       526,
       514
     ],
     "poster_issue_593": "closed; production JSON poster data measured, but cross-route real image loads and physical iPhone Safari remain unverified",
-    "ci": "Exact main 4b3481c9: External data freshness audit, completeness scorecard, legacy Pages publish, smoke tests and Pages deployment succeeded. Prior Update movie data 41981020642 failed exact-source publishing proof; no verified successful follow-up in latest 35 runs.",
-    "vercel": "Exact-main 4b3481c9 production deployments for cinema-calendar and backend CANCELED; prior main 33c0a9ea production READY on both. Branch preview 2d19b60a backend READY does not prove production.",
+    "ci": "GitHub commit-workflow lookup for 173e276e returned zero PR-triggered runs (not proof main workflows failed or passed). Previous main Actions success remains historical.",
+    "vercel": "Latest observed exact-main 173e276e frontend/backend production deployments CANCELED; prior 33c0a9ea both READY. Do not claim current main production deployed.",
     "remaining": [
       "Production deployment of exact main and runbook proof",
       "Read-only cross-route poster image success plus physical iPhone Safari",
@@ -2238,11 +2238,24 @@
       "Event/IMAX provenance, freshness and automation"
     ],
     "next_actions": [
-      "Inspect failed Update movie data 41981020642 and fix source-proof mismatch without disabling safeguards; check Neon Free quota before any DB synchronization.",
-      "Verify poster images via actual production page and image requests across routes, then physical iPhone Safari.",
-      "Complete owner-managed FEEDBACK_ADMIN_TOKEN setup and authorized admin list/status acceptance.",
-      "Audit event/IMAX source provenance and official streaming provider coverage; preserve explicit partial-coverage labels.",
-      "Review security PR #526; keep catalogue PR #514 draft pending approved source; check production promotion of exact verified source."
+      "Investigate Update movie data exact-source proof mismatch and read-only Neon quota before sync.",
+      "Check why production builds for 173e276e were canceled; confirm deployed canonical aliases and exact source before promotion.",
+      "Sample actual poster image requests across routes and iPhone Safari.",
+      "Set FEEDBACK_ADMIN_TOKEN via owner; then authorized admin acceptance.",
+      "Audit events/IMAX official source freshness and per-provider November streaming gaps.",
+      "Security PR #526 requires review; PR #514 remains draft pending licensed data."
     ]
+  },
+  "latest_automation_check_20261105_2104": {
+    "observed_at": "2026-11-05T12:04:26Z",
+    "main_before_checkpoint": "173e276e972621343a2d5accbb0dd9ffd73d9f4b",
+    "open_prs": [
+      526,
+      514
+    ],
+    "production_latest": "Both projects CANCELED at 173e276e; last observed READY 33c0a9ea",
+    "actions_limit": "Commit lookup only returns pull_request runs; no main workflow conclusion established",
+    "no_mutation": "No production DB, secrets, user data, or deployment changes",
+    "next": "Resolve exact-source publication guard and Neon quota read-only before DB sync; check image loads, admin token, IMAX/event provenance."
   }
 }

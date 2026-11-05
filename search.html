@@ -165,6 +165,7 @@
  <a href="theaters.html">映画館を探す</a>
  <a href="experience.html">上映方式</a>
  <a href="my-cinelva/">My Cinelva</a> <a href="my-best10.html">My Best 10</a>
+ <a href="feedback.html">ご意見・ご要望</a>
 </aside><main class="wrap"><div class="hero"><h1>作品・監督・キャスト検索</h1><p>作品名・監督名・キャスト名から探せます。</p></div><div id="status" class="status"></div><div id="grid" class="grid"></div></main><div id="modal" class="modal"><div class="sheet"><button id="close" class="close">×</button><div id="detail"></div></div></div><script src="js/calendar-context.js"></script><script>const criticVideoCache=new Map(),API="https://backend-one-gray-94.vercel.app",E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),q=document.querySelector(".gSearch"),grid=document.getElementById("grid"),status=document.getElementById("status"),modal=document.getElementById("modal"),detail=document.getElementById("detail");let results=[];
 function movieReleaseYear(m){
  const date=m.release_date||(!m.event||m.event==="catalog"?m.date:"");

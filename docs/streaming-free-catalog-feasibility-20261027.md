@@ -42,3 +42,6 @@
 ## Reuse status
 
 This is an as-of 2026-10-27 research record, not a current license grant. Recheck the linked primary terms and permissions before importing or publishing any catalogue feed. The blank snapshot intentionally contains no provider availability claims.
+
+
+> Scope note (2026-11-06): this is a historical 8-service assessment, not a rights or coverage audit for the current 12-service scope (Netflix, Prime Video, Disney+, U-NEXT, Hulu, Apple TV+, Lemino, ABEMA, DMM TV, FOD, TELASA, WOWOWオンデマンド). The code gate requires separate rights and full-coverage evidence for all 12; no provider feed is enabled by this note.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T21:19:18.334Z",
+  "updated_at": "2026-11-06T06:00:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2681,5 +2681,71 @@
       "Complete physical iPhone Safari acceptance."
     ],
     "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, fold a production-proof receipt referencing the exact tested source into the route fix PR, require all checks on resulting head, merge atomically, close superseded #640, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
+  },
+  "latest_release_checkpoint_20261106": {
+    "observed_at": "2026-11-06T06:00:00Z",
+    "main_sha": "9ad0b5725f8886b8247f462bad96be54f2cecc4c",
+    "merged_prs": [
+      {
+        "number": 642,
+        "sha": "0dd74e931415b5f81493689a7710aac054990156",
+        "summary": "Fixed root/nested concierge redirects, added regression coverage, and refreshed exact-source production proof. Main GitHub Pages deployment succeeded."
+      }
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      529,
+      585
+    ],
+    "open_prs": [
+      {
+        "number": 644,
+        "head": "bcad0d8b74a40be7add739482fe6b236189b439a",
+        "summary": "Safe fail-closed rights and 12-provider coverage gate migrated from #514; catalog remains empty/unavailable; exact-head frontend and completeness checks pending, other checks green."
+      },
+      {
+        "number": 645,
+        "head": "e7c4e16c3a73b5134179ab117b78d6a64fc9c08d",
+        "summary": "Enables one isolated Vercel preview branch for #529. Exact-head Validate frontend rerun remains in progress. Vercel frontend preview blocked by Hobby api-deployments-free-per-day limit; backend preview READY. Cloudflare branch preview is reachable but does not contain DEMO mode, so it is not acceptance evidence."
+      },
+      {
+        "number": 514,
+        "summary": "Old draft/conflict remains unsafe to merge wholesale. Once #644 safely lands, close as superseded only with a clear explanation that catalog integration and UI remain incomplete."
+      }
+    ],
+    "ci": {
+      "PR #644": "Validate frontend 42121230137 in progress; Autonomous quality gate and smoke/mobile/backend green; completeness scorecard queued.",
+      "PR #645": "Validate frontend 42119779930 rerun in progress; other listed workflows green. Initial attempt reported a WebKit bookmark aria-pressed assertion; inspect final attempt and logs."
+    },
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "latest_main_deployment": "not verified for current main; public HTTP 200 serves clearly stale source referencing old theme/script versions.",
+      "free_tier": "Keep Hobby; Vercel bot reported api-deployments-free-per-day >100 and retry in 24 hours."
+    },
+    "acceptance": {
+      "cloudflare_branch_preview": "https://demo-cinelva-preview-2026110.cinema-calendar.pages.dev/",
+      "finding": "Rendered current calendar, but no DEMO/sample-data marker and it is not evidence for Vercel preview-only fixture mode.",
+      "poster_probe": "At viewport load, 23 image elements were loaded successfully, 0 completed failures; lazy/empty sources exist below or outside loaded viewport. This is partial, not full cross-screen poster acceptance."
+    },
+    "blockers": [
+      "Latest main needs READY Vercel frontend/backend production deployments after free quota reset; do not upgrade or retry repeatedly.",
+      "FEEDBACK_ADMIN_TOKEN is absent in backend production environment; owner must set it privately to complete protected admin end-to-end acceptance.",
+      "Physical iPhone Safari acceptance is still unavailable; CI WebKit is not a physical iPhone.",
+      "No verified public-display rights plus complete audited catalogue source exists for all 12 providers; do not enable/import feeds or claim completeness.",
+      "TV automation is only the partial Syoboi anime-related movie feed; broad TV, theater showtimes, events/festivals and special-format data remain partial/manual."
+    ],
+    "next_actions": [
+      "Poll exact-head PR #644 Validate frontend and completeness run; repair any failure and merge only if all checks pass and PR remains mergeable.",
+      "Poll exact-head PR #645 Validate frontend rerun; if it fails, inspect exact failing step/log and fix before merging.",
+      "After #644 merges, close #514 as superseded only if no unique safe code remains; retain #242/#244 open.",
+      "After Vercel free deployment quota resets, allow one current-main production build and verify both projects READY at latest SHA, then inspect live canonical pages and APIs.",
+      "Complete #242/#243 all-route data/visual QA, #585 admin/privacy analytics acceptance, and #529 true isolated Vercel demo URL plus 390px light/dark screenshots.",
+      "Keep all source coverage limitations explicit; do not close #239 until all release acceptance evidence exists."
+    ],
+    "release_decision": "NO-GO",
+    "safety": "No user records, ratings, bookmarks, database rows, secrets, paid plan, or production deployment settings were changed in this checkpoint."
   }
 }

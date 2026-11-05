@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "6bb443b7c0074622b246282ff7375de685956751",
-  "verified_at": "2026-11-05T14:33:06Z",
-  "note": "PR #609 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build succeeded. The source adds a main-branch trigger for the approved TMDB now-playing refresh when this receipt changes; no application data or user records are modified by this receipt."
+  "head_sha": "5e3efe44bad2fa2932344ab36917efa79a30cfef",
+  "verified_at": "2026-11-05T15:48:06.403Z",
+  "note": "PR #614 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build, mobile layout smoke, and completeness scorecard passed. The source synchronizes generated source-status counts with the nationwide now-playing snapshot. No database sync or paid deployment configuration is changed."
 }

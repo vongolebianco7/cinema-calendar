@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T14:57:16Z",
+  "updated_at": "2026-11-05T15:05:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2336,5 +2336,25 @@
       "Review security PR #526; retain draft #514 pending license"
     ],
     "safety": "No production DB, secrets, user data or deployment changes"
+  },
+  "latest_automation_check_20261106_0005": {
+    "observed_at": "2026-11-05T15:05:00Z",
+    "main_at_start": "d22ae3e923d899835b7bed73e178d2e5b2c79409",
+    "release_decision": "NO-GO",
+    "verified_findings": [
+      "quality/production-proof.json currently references PR #609 exact source 6bb443b7c0074622b246282ff7375de685956751",
+      "Commit b0527057 (#610) changes only the production proof receipt; receipt itself is intentionally excluded from executable source digest",
+      "scripts/verify-production-release.cjs rejects mismatched executable source and dirty executable files, and checks four exact-head PR workflows; safety gate must not be bypassed",
+      "The prior failed snapshot check alone does not prove current main is still mismatched; need compute tree digests and inspect job working tree before patching",
+      "No current workflow, Vercel production alias, PostgreSQL sync or poster live HTTP success independently established in this run"
+    ],
+    "next_actions": [
+      "Compare executable tree digest for current main versus receipt head and inspect dirtyPaths/build materialization for the failing workflow; add a targeted regression test only after reproducing the mismatch",
+      "Inspect actual Update movie data workflow and PostgreSQL sync run; check Neon free quota read-only before any DB mutation",
+      "Check canonical Vercel production alias and real poster HTTP/DOM loads across routes",
+      "Verify November provider coverage, event/IMAX licensed sources, feedback admin acceptance, physical iPhone Safari",
+      "Review PR #526 security; keep #514 draft without an approved catalogue source"
+    ],
+    "safety": "No source code, secrets, DB, deployment or user data changed; docs checkpoint only."
   }
 }

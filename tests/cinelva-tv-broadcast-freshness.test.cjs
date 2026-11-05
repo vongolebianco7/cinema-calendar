@@ -35,7 +35,7 @@ test('TV API filters both database and static fallback responses without changin
   const future = { title: 'future', date: '2026-11-06', time: '00:01' };
   const snapshot = { generated_at: '2026-11-06T01:00:00Z', movies: [expired, currentMinute, future] };
   const code = stripTypeScriptTypes(fs.readFileSync('backend/app/api/tv/route.ts', 'utf8'), { mode: 'transform' })
-    .replace(/^import .*?;\\n/gm, '').replaceAll('export ', '');
+    .replace(/^import .*?;/gm, '').replaceAll('export ', '');
   async function request(readWithSnapshot) {
     const context = {
       readWithSnapshot,

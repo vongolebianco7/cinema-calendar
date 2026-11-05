@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "tv.json"
-SOURCE_URL = "https://cal.syoboi.jp/rss2.php?days=7&alt=json"
+SOURCE_URL = "https://cal.syoboi.jp/rss2.php?days=7&filter=2&alt=json"
 USER_AGENT = "Cinelva/1.0 (+https://cinelva.vercel.app/feedback.html)"
 JST = ZoneInfo("Asia/Tokyo")
 

@@ -95,6 +95,8 @@ Production automation must consult `data/source_registry.json`.
 
 Automated workflows must pass `scripts/check_sources.py` before collecting production data. Changing a source from `disabled` or `link_only` to `approved` requires a fresh compliance review and documented legal/contractual basis.
 
+The Syoboi Calendar integration uses its documented RSS2/JSON feed, which the provider's help permits for automated copying. It imports only future rows marked with the provider's movie category (8), identifies the app, sends one request per daily run, caches normalized results and conditional-request validators, preserves the last good snapshot on errors, and explicitly disclaims all-channel coverage. It does not fetch HTML.
+
 
 ## Zero-cost / non-commercial release gate
 

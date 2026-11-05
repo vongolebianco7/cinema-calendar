@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5e3efe44bad2fa2932344ab36917efa79a30cfef",
-  "verified_at": "2026-11-05T15:48:06.403Z",
-  "note": "PR #614 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build, mobile layout smoke, and completeness scorecard passed. The source synchronizes generated source-status counts with the nationwide now-playing snapshot. No database sync or paid deployment configuration is changed."
+  "head_sha": "cc95d767d0aff369190afa8d1b6a8dc1bf73ec49",
+  "verified_at": "2026-11-05T16:40:14Z",
+  "note": "PR #621 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build all passed. Chromium/WebKit regression jobs, CINELVA mobile journey, mobile layout smoke, and completeness scorecard passed. Adds a daily documented Syoboi Calendar JSON feed limited to future anime-related movie-category TV broadcasts; preserves curated rows and existing user data; no database writes, paid services, or HTML scraping."
 }

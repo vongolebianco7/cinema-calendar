@@ -24,6 +24,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      # Fail before external API calls if a source change has not completed
+      # the exact-source CI receipt process. Keep the post-rebase gate below:
+      # concurrent main updates can still change executable source mid-run.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify approved source and exact-source CI before collection
+        run: |
+          python scripts/check_sources.py
+          node scripts/verify-production-release.cjs --require
       - name: Import source-reviewed official streaming premieres
         run: python scripts/import_streaming_announcements.py
       - name: Validate all streaming provider feeds and provenance

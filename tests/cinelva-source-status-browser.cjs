@@ -5,7 +5,10 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
  const server=spawn('python',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});let browser;
  try{
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
-  const context=await browser.newContext({viewport:{width:390,height:844}});await context.route('https://backend-one-gray-94.vercel.app/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({movies:[],external:[],results:[]})}));
+  const context=await browser.newContext({viewport:{width:390,height:844}});
+  const emptyMovies={movies:[],external:[],results:[]};
+  await context.route('**/api/movies**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
+  await context.route('https://backend-one-gray-94.vercel.app/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const wordmarkStyle=()=>[...document.querySelectorAll('.gBrand>span')].map(el=>{const s=getComputedStyle(el);return {color:s.color,backgroundImage:s.backgroundImage,textFill:s.webkitTextFillColor}});
   for(const theme of ['light','dark']){

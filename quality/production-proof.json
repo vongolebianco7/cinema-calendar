@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "e3a86e40e0a3b031b61048762f9def2a173251fe",
-  "verified_at": "2026-11-05T00:21:10.000Z",
-  "note": "Issue #599 exact source head passed Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build. Receipt-only refresh after exact-head verification; generated streaming snapshot is data."
+  "head_sha": "096eebcba0c7e988ba2f32ef72431b0ac1b3f46a",
+  "verified_at": "2026-11-05T01:07:46.000Z",
+  "note": "Issue #586 exact source head passed Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build. Receipt-only refresh after exact-head verification; generated official streaming snapshot remains data."
 }

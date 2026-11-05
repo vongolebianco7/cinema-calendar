@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "52f564ede7144b8e7371dc6a85d2b8de0880ee5e",
-  "verified_at": "2026-11-05T17:19:27.489Z",
-  "note": "PR #619 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed on this head; mobile layout and completeness scorecard also passed. The change filters unverified shorts from director feature works without changing user records, database, or source data. Receipt-only commit."
+  "head_sha": "d401ef306ff5c7e04b849eff5de0ff1492c249bf",
+  "verified_at": "2026-11-05T18:02:43.357Z",
+  "note": "PR #624 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed on this head; mobile layout, completeness scorecard, full Python contract suite and scorecard contract also passed. Adds permission-reviewed Syoboi RSS2/JSON acquisition for the anime-related movie category only, preserves curated/last-good TV data, and performs no DB or user-record writes. Receipt-only commit; source coverage remains partial and production acceptance is pending."
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T06:10:00Z",
+  "updated_at": "2026-11-06T06:20:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2683,8 +2683,8 @@
     "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, fold a production-proof receipt referencing the exact tested source into the route fix PR, require all checks on resulting head, merge atomically, close superseded #640, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
   },
   "latest_release_checkpoint_20261106": {
-    "observed_at": "2026-11-06T06:10:00Z",
-    "main_sha": "1051259997386a73ae387bac98998e6f823ad0c7",
+    "observed_at": "2026-11-06T06:20:00Z",
+    "main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
     "merged_prs": [
       {
         "number": 642,
@@ -2695,6 +2695,11 @@
         "number": 645,
         "sha": "1051259997386a73ae387bac98998e6f823ad0c7",
         "summary": "Dedicated demo preview branch enabled; exact-head GitHub Actions all green. Vercel frontend Preview blocked by free deployment cap, so #529 remains open."
+      },
+      {
+        "number": 644,
+        "sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+        "summary": "Added fail-closed streaming catalog rights/full-coverage gate for all 12 supported providers. Exact-head GitHub Actions all passed; no feed enabled."
       }
     ],
     "open_issues": [
@@ -2707,28 +2712,20 @@
     ],
     "open_prs": [
       {
-        "number": 644,
-        "head": "bcad0d8b74a40be7add739482fe6b236189b439a",
-        "summary": "Fail-closed rights/coverage gate for all 12 providers. Validate frontend run 42121230137 is in progress; completeness, autonomous, smoke, mobile, and backend checks succeeded."
-      },
-      {
         "number": 646,
-        "head": "work-state checkpoint update pending",
-        "summary": "Docs-only release checkpoint PR; initial GitHub checks success. Update will refresh current state."
-      },
-      {
-        "number": 514,
-        "summary": "Old draft/conflict unsafe to merge wholesale. Close as superseded after #644 integrates only if no unique safe changes remain; full catalog remains incomplete."
+        "head": "checkpoint update in progress",
+        "summary": "Docs-only durable release checkpoint; update PR to reflect #644 merge and close superseded #514."
       }
     ],
     "ci": {
-      "PR #644": "Validate frontend 42121230137 in progress at the My Cinelva mobile browser journey. Cinemap completeness 42121230568 and Autonomous quality 42121230297 succeeded; smoke/mobile/backend succeeded.",
+      "PR #644": "All exact-head GitHub Actions passed: Validate frontend, completeness scorecard, autonomous quality gate, smoke, mobile, reproducible backend build.",
       "PR #645": "Merged as 1051259997386a73ae387bac98998e6f823ad0c7 after exact-head GitHub Actions passed. Vercel Preview failed only because Hobby limit exceeded.",
-      "PR #646": "Initial smoke 42122126684, mobile 42122126695, and autonomous 42122126914 all succeeded; Vercel deployment blocked by daily free limit."
+      "PR #646": "Checkpoint branch checks running after the latest docs update; previous smoke/mobile succeeded, autonomous gate was still running.",
+      "main after PR #644": "Vercel frontend and backend status both failed due api-deployments-free-per-day cap; GitHub Pages production SHA 0dd74e remains successfully deployed (latest main assets after #644 not yet checked)."
     },
     "production": {
       "url": "https://cinelva.vercel.app/",
-      "latest_main_deployment": "not verified for current main; public HTTP 200 serves clearly stale source referencing old theme/script versions.",
+      "latest_main_deployment": "Vercel latest main deployment has not reached READY; main commit 8e6cfc69 has Vercel frontend/backend deployment status failures because the Hobby daily deployment cap is exceeded. Canonical URL still returns 200 with stale source.",
       "free_tier": "Keep Hobby; Vercel bot reported api-deployments-free-per-day >100 and retry in 24 hours."
     },
     "acceptance": {
@@ -2744,15 +2741,21 @@
       "TV automation is only the partial Syoboi anime-related movie feed; broad TV, theater showtimes, events/festivals and special-format data remain partial/manual."
     ],
     "next_actions": [
-      "Poll exact-head PR #644 Validate frontend run 42121230137; fix any failure and merge only after all checks succeed and mergeability is true.",
-      "Merge this docs checkpoint after its GitHub smoke/mobile/autonomous checks are green; Vercel failure is the known free-tier deployment cap, not a source build.",
-      "Poll exact-head PR #645 Validate frontend rerun; if it fails, inspect exact failing step/log and fix before merging.",
-      "After #644 merges, close #514 as superseded only if no unique safe code remains; retain #242/#244 open.",
-      "After Vercel free deployment quota resets, allow one current-main production build and verify both projects READY at latest SHA, then inspect live canonical pages and APIs.",
-      "Complete #242/#243 all-route data/visual QA, #585 admin/privacy analytics acceptance, and #529 true isolated Vercel demo URL plus 390px light/dark screenshots.",
-      "Keep all source coverage limitations explicit; do not close #239 until all release acceptance evidence exists."
+      "Poll PR #646 exact-head smoke/mobile/Autonomous checks; merge docs-only checkpoint once GitHub Actions pass and mergeable=true. Vercel deployment status is blocked by known quota, not code.",
+      "After the Vercel Hobby window resets (last failures from 2026-11-06, see GitHub commit statuses), allow one main deployment attempt and verify both frontend/backend READY at exact latest main SHA; do not upgrade or repeatedly retry.",
+      "Keep #242/#243/#244/#529/#585 open until full acceptance evidence; #514 is closed superseded.",
+      "Complete #242/#243 cross-route visual/data QA, #585 admin acceptance after the owner privately configures FEEDBACK_ADMIN_TOKEN, and #529 only after the actual isolated Vercel demo endpoint shows the fixture/DEMO banner.",
+      "Preserve source coverage limitations: 12-provider rights/catalog unavailable, TV feed partial, cinema showtimes/events/manual; no scraping or inferred availability.",
+      "Complete physical iPhone Safari review when the device is available; CI WebKit is not physical device acceptance."
     ],
     "release_decision": "NO-GO",
-    "safety": "No user records, ratings, bookmarks, database rows, secrets, paid plan, or production deployment settings were changed in this checkpoint."
+    "safety": "No user records, ratings, bookmarks, database rows, secrets, paid plan, or production deployment settings were changed in this checkpoint.",
+    "stale_or_blocked_prs": [
+      {
+        "number": 514,
+        "status": "closed_unmerged",
+        "summary": "Superseded; only safe import/rights gate was migrated in #644. Unlicensed catalog UI/workflow changes remain excluded. #242/#244 stay open."
+      }
+    ]
   }
 }

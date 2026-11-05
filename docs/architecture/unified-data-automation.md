@@ -102,6 +102,55 @@ Adapter modes:
 
 Definition of done: 7 consecutive scheduled runs without unreviewed failure; all approved adapters refresh within documented TTL; no duplicate keys; a forced API failure leaves last-known-good visible; a forced DB failure cannot alter user data and is retriable; exact-source proof and quality CI green; static/DB release versions reconcile; iPhone real-poster routes verified; no new paid service or prohibited collection.
 
+
+## Review resolution: exact publication and consistency contract
+
+### Cross-system consistency (GitHub Pages / PostgreSQL)
+
+GitHub static hosting and PostgreSQL have no distributed transaction. Therefore **never claim global atomicity**. Use immutable `dataset_version` identifiers, with one release manifest per domain, and independently recorded `static_version` and `db_version`. The release state machine is `candidate -> validated -> static_published -> db_synced -> verified`, with `partial` and `rejected` as explicit failure states. For domains used by both static and API readers, a version is advertised as `current_verified` only after both sides have been read back and their checksums/version IDs agree. Existing static readers that cannot pin versions must continue reading the prior compatible public snapshot until the new version is verified; a compatibility layer must be demonstrated before changing their pointers.
+
+An immutable candidate may be published to a versioned path without promoting the public pointer. The safe default order is: write immutable candidate, validate; stage DB changes in a transaction (only data-owned tables); validate DB staged rows; publish immutable static artifact; verify it is reachable; commit/promote the DB dataset version; then promote the public static pointer and verify both readers. A crash between DB promotion and static pointer promotion is a **partial** release, not success. Reconcile by completing the pointer promotion for the exact manifest or restoring the previous data-owned DB dataset version. Rollback must not mutate user-owned rows. This sequence is a migration target, not an assertion that the current DB supports staging or rollback; inventory schema, readers and migration reversibility first.
+
+Every public API response backed by the synchronized domain should expose `dataset_version` (header or JSON field) without breaking existing consumers. Clients receiving a newer static version and older API version should display the last compatible snapshot or an explicit stale indicator; never silently mix records from incompatible versions. A missing manifest or checksum mismatch is a release failure.
+
+### Exact-source proof across split jobs
+
+A run starts by resolving and recording `source_commit_sha`, `production_proof_head_sha`, `source_digest`, `dataset_version` and immutable candidate checksum. All downstream jobs consume these exact identifiers; no job recomputes from floating `main` after a rebase. If the source changed, require the four mandated CI workflows on the exact executable source and a receipt-only proof renewal before any publication/DB write. Each job checks out the pinned source, runs `check_sources.py`, the existing quality gate where appropriate, and `verify-production-release.cjs --require` before publication or DB sync. Do not bypass the gate when a receipt becomes stale.
+
+Concurrency is scoped to *writes*, with one serialized publication/DB promotion per domain and no forced push. If `main` moves while a candidate is being generated, reject/rebase the candidate through the **full** verification process; do not publish with mixed source hashes. No automatic proof-signing from untested source.
+
+### Resource budgets and domain thresholds (initial conservative defaults; tune from measured baselines)
+
+| Resource/domain | Initial guardrail | Failure behavior |
+| --- | --- | --- |
+| GitHub Actions | One scheduled full movie observation/day; one now-playing observation/day; cap each movie run at existing 25 min and now-playing at 8 min; no more than two automatic transient retries | Abort before exceeding run deadline; no overlapping writer |
+| TMDB | Keep existing per-run adaptive availability queue hard cap of 200 titles and six-minute observation deadline; preserve provider attribution | Defer remaining IDs to later runs, mark stale |
+| Neon Free | Preflight read-only capacity/connection/compute status and configured project free-plan limits before DB staging; no paid overage | Skip DB writes if safe capacity cannot be established; mark partial |
+| Vercel Hobby | Do not create preview/prod deployments for data-only or docs-only commits; deploy only approved application source changes | Stop at free-plan usage warning; no auto-upgrade |
+| Movie/poster data | Fail on a drop >20% from previous verified snapshot, unless an explicit reviewed removal manifest explains it; sample real poster URLs across routes | Quarantine candidate, preserve last good |
+| Streaming observations | 7-day per-title freshness target; warn when fresh share <90% and fail promotion when it drops >10 percentage points against previous verified release; report each provider separately | Retain last good, show stale markers; do not claim complete catalog |
+| Now-playing | 48-hour target; fail on unexpected >20% count drop or invalid JP territory | Retain previous verified |
+| TV schedules | 7-day source review freshness target; require at least one verified upcoming record to label coverage active | If missing, display incomplete/unavailable, not fresh |
+| Film festivals / events | 14-day source review freshness target; require cited date and venue for each event | Quarantine invalid records, show manual coverage status |
+| IMAX/premium format directory | 30-day manual source review target; no automatic showtime claims | Mark stale/unverified, do not fabricate schedules |
+
+These are **provisional engineering thresholds**, not measured coverage guarantees. P0 must capture at least 14 days of baseline counts, quotas and provider coverage before enforcing a new promotion failure threshold. A 7-run streak demonstrates operational reliability only; it cannot prove source completeness. Quota checks should use available provider metrics or safe local configured limits; if an authoritative live quota endpoint is unavailable, apply the conservative configured cap rather than guessing remaining usage.
+
+### Source permission vs adapter mode
+
+`data/source_registry.json` remains the sole source-permission gate with existing `approved`, `link_only`, `disabled` states. Adapter operational modes (`approved_api`, `approved_feed`, `manual_curated`, `disabled`) are **not** permission grants. An adapter can run automatically only if the corresponding source registry entry explicitly approves its precise acquisition, storage and publication purpose. `manual_curated` means manual discovery and review followed by automated downstream processing; it never authorizes automatic website retrieval.
+
+### Minimum acceptance tests before rollout
+
+1. Simulate API timeout and malformed response: candidate rejected, prior verified static/API records remain readable.
+2. Simulate DB sync failure after immutable static candidate upload: public pointer unchanged; previous DB dataset and all user-owned records unchanged; retry same pinned candidate idempotently.
+3. Simulate process crash between DB promotion and pointer promotion: release becomes `partial`, both version IDs visible, reconciliation restores verified parity.
+4. Simulate a source edit after CI receipt: publication and DB sync reject it before writes.
+5. Verify existing static JSON consumers and API clients handle version metadata without schema regression; verify real poster image responses on iPhone routes.
+6. Exercise free quota exhaustion: job exits without billable resource activation, without replacing good data.
+7. Confirm domain-specific freshness/coverage status distinguishes automated observation from manual intake and never implies full TV/event/IMAX discovery.
+
+
 ## Explicitly unresolved / requires owner decision
 
 - A genuinely comprehensive TV broadcast calendar, official streaming premieres, theater showtimes and event discovery require a permitted machine-readable source or written license. Architecture alone cannot authorize scraping or create source coverage.

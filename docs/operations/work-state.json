@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:40:00Z",
+  "updated_at": "2026-11-05T18:09:14.998Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "121ee41c4a101f005518312d0bdaec1d2b31e9fb",
-  "branch": "feat/syoboi-tv-broadcasts-20261106",
+  "base_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+  "branch": "ops/refresh-production-proof-tv-20261105",
   "head_sha": "d401ef306ff5c7e04b849eff5de0ff1492c249bf",
   "pull_request": {
-    "number": 624,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/624"
+    "number": 628,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/628"
   },
   "work_items": [
     {
@@ -926,7 +926,7 @@
     "Neon Free transfer quota remains a blocker for another production movie/DB sync; do not retry or restart compute before quota reset/available allowance.",
     "Complete provider catalogue coverage is unavailable from approved dated official feeds; do not claim exhaustive streaming availability."
   ],
-  "next_action": "Refresh PR #624 source-head checks; fix any failure. While waiting, perform an independent read-only live production poster acceptance audit for #593/#242. After all required source-head checks pass, renew production proof in a receipt-only commit and verify final-head CI before merging.",
+  "next_action": "Finish exact-head CI on PR #628. If green, merge the receipt-only proof, verify Publish verified legacy Pages, Sync backend database, and TV refresh pass, then confirm the Vercel production SHA and API data. Continue unresolved #585 admin-secret setup, poster gaps, and lawful TV/event/theater coverage.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2487,5 +2487,32 @@
       "次の中断前に最新main SHA、PR head/checks、作業内容、失敗、未完了項目、次の具体的操作を再記録する。"
     ],
     "safety": "本番DB、鑑賞記録、評価、ブックマーク、secret、課金プラン、デプロイは変更していない。"
+  },
+  "latest_automation_check_20261106_0307": {
+    "updated_at": "2026-11-05T18:09:14.998Z",
+    "merged": {
+      "pr": 624,
+      "sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+      "ci": "All eight exact-head PR workflows passed, including the required four, mobile layout, completeness scorecard, and Cloudflare preview."
+    },
+    "duplicates_closed": [
+      621,
+      622
+    ],
+    "deployment_gate": {
+      "status": "blocked_pending_receipt_pr",
+      "fix_pr": 628,
+      "evidence": "Main post-merge Pages publication, backend database sync, and TV refresh correctly refused publication because production-proof.json still referenced the prior executable source."
+    },
+    "data_coverage": {
+      "tv_automation": "Daily Syoboi Calendar machine-feed imports only future anime-related movies; this is partial coverage.",
+      "production_snapshot_observed": "Before the new workflow runs, /api/tv had 16 rows, 2 future and 14 past on 2026-11-05.",
+      "event_and_theater_automation": "Nationwide events, festivals, and theater showtimes remain incomplete; no scraping or paid integration."
+    },
+    "issue_585": {
+      "status": "admin acceptance blocked",
+      "blocker": "FEEDBACK_ADMIN_TOKEN was absent in the prior production environment names-only check; set it in Vercel without sharing its value."
+    },
+    "next_action": "Wait for exact-head CI on #628; merge only if green, then verify publication gates and current Vercel production SHA. Continue #585, poster coverage, and lawful TV/event/theater sources."
   }
 }

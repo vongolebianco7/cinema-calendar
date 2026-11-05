@@ -62,10 +62,20 @@ def verify_manifest(manifest, root):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
-    parser.add_argument("--source-sha", required=True)
+    parser.add_argument("--source-sha", help="Pinned full source SHA for candidate generation")
+    parser.add_argument("--verify", type=Path, help="Verify an existing candidate; do not write output")
     parser.add_argument("--output", type=Path, default=Path("artifacts/data-release-candidate.json"))
-    parser.add_argument("snapshots", nargs="+", type=Path)
+    parser.add_argument("snapshots", nargs="*", type=Path)
     args = parser.parse_args()
+    if args.verify:
+        if args.snapshots or args.source_sha:
+            parser.error("--verify cannot be combined with snapshots or --source-sha")
+        report = json.loads(args.verify.read_text(encoding="utf-8"))
+        verify_manifest(report, args.root)
+        print("Verified candidate dataset version:", report["dataset_version"])
+        return
+    if not args.source_sha or not args.snapshots:
+        parser.error("candidate generation requires --source-sha and at least one snapshot")
     report = manifest_for(args.snapshots, args.root, args.source_sha,
                           dt.datetime.now(dt.timezone.utc).isoformat())
     args.output.parent.mkdir(parents=True, exist_ok=True)

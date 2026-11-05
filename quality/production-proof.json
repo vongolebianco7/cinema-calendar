@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "f108e310394266d39c3987da67d771c269a4ee88",
-  "verified_at": "2026-11-05T06:31:23.000Z",
-  "note": "Issue #585 poster recovery and official November streaming coverage: exact source head passed Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build. Receipt-only refresh; official streaming dataset changes are generated data."
+  "head_sha": "0a471245819736f334dadb09bac1eb2e5000fbdd",
+  "verified_at": "2026-11-05T12:30:00Z",
+  "note": "PR #606 exact source: required Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build succeeded. The CI-verified source changes only the director-credit regression threshold to match the complete 36-title TMDB feature-credit snapshot; generated production data and runtime code are unchanged."
 }

@@ -37,6 +37,24 @@ class SourceHealthTests(unittest.TestCase):
             "source_observed_at": "2026-11-07T00:00:00Z", "max_age_hours": 48}]}, NOW)
         self.assertEqual(result["sources"][0]["health"], "unknown")
 
+    def test_recent_source_does_not_hide_stale_title_observations(self):
+        result = audit.build_report({"sources": [{
+            "id": "streaming", "status": "automated",
+            "source_observed_at": NOW.isoformat(), "max_age_hours": 168,
+            "observations": {"total": 100, "fresh": 35, "stale": 65}
+        }]}, NOW)
+        source = result["sources"][0]
+        self.assertEqual(source["health"], "fresh")
+        self.assertEqual(source["title_level_freshness"]["fresh_pct"], 35.0)
+
+    def test_invalid_observation_counts_do_not_claim_coverage(self):
+        result = audit.build_report({"sources": [{
+            "id": "streaming", "status": "automated",
+            "source_observed_at": NOW.isoformat(), "max_age_hours": 168,
+            "observations": {"total": 10, "fresh": 11, "stale": 0}
+        }]}, NOW)
+        self.assertIsNone(result["sources"][0]["title_level_freshness"])
+
     def test_reject_duplicate_ids(self):
         with self.assertRaises(ValueError):
             audit.build_report({"sources": [{"id": "a"}, {"id": "a"}]}, NOW)

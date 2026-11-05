@@ -62,5 +62,20 @@ try {
 for(const page of ['index.html','discover.html','search.html','rankings.html','my-cinelva/index.html','events.html','experience.html']){
  check(read(page).includes('cinelva-movie-identity.js'),'shared poster registry not loaded on '+page);
 }
+const discovery=read('discover.html');
+check(discovery.includes('data-p="classic">映画史をたどる'),'film-history discovery preset is visible');
+check(discovery.includes('data-p="history">史実をもとにした作品'),'true-story discovery preset is visible');
+check(discovery.includes('history:"史実をもとにした作品"'),'true-story shelf has its own display label');
+try {
+ const shelfContext=vm.createContext({});
+ new vm.Script(read('js/cinelva-discovery-shelves.js'),{filename:'js/cinelva-discovery-shelves.js'}).runInContext(shelfContext);
+ const start=discovery.indexOf('function hasAny('),end=discovery.indexOf('function recSort(');
+ const ctx=vm.createContext({CinelvaDiscoveryShelves:shelfContext.CinelvaDiscoveryShelves,Date});
+ new vm.Script(discovery.slice(start,end)+';this.recMatch=recMatch;').runInContext(ctx);
+ check(ctx.recMatch({title:'A film',overview:'Based on a true story',votes:100,score:7},'history'),'true-story preset accepts explicit story evidence');
+ const classic={title:'A classic film',overview:'A fictional adventure',year:1940,votes:1000,score:8};
+ check(!ctx.recMatch(classic,'history'),'true-story preset excludes unrelated historical classics');
+ check(ctx.recMatch(classic,'classic'),'film-history preset retains historical classics');
+} catch(error){check(false,'history/true-story discovery regression: '+error.message)}
 console.log(checks+' checks; '+failures+' failures');
 if(failures)process.exit(1);

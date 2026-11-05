@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T01:58:22Z",
+  "updated_at": "2026-11-05T05:55:27Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
-  "branch": "docs/release-checkpoint-20261105-1058",
-  "head_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
+  "base_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
+  "branch": "main",
+  "head_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
   "pull_request": null,
   "work_items": [
     {
@@ -2218,5 +2218,36 @@
     "proof_receipt_commit": "81b1ac13de489c157a52fd0fcddddb749c384a07",
     "ci": "All four required pull_request workflows passed on exact source 95baea1a92680db09fd0d441e98be9483a4963ac; full browser suite passed after route audit expectation corrected to 33 pages.",
     "production": "Neon Free plan verified; additive Feedback, FeedbackRateBucket, FeatureMetric tables and indexes applied to production. Feature metrics server flag set production-only. Vercel Web Analytics enabled on Hobby; no real traffic yet after instrumentation because deploy pending."
+  },
+  "release_gate": {
+    "status": "NO-GO",
+    "verified_at": "2026-11-05T05:55:27Z",
+    "main_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
+    "open_prs": [
+      603,
+      597,
+      526,
+      514
+    ],
+    "poster_issue_593": "closed; production cross-route image coverage and iPhone Safari not verified",
+    "ci": "PR #603 head ebc0dfdc: six checks success; Validate frontend in progress",
+    "vercel": "main 55079c1b frontend and backend production deployments CANCELED; prior 4e560246 production READY",
+    "remaining": [
+      "PR #603 Validate frontend completion and review",
+      "investigate production deployment cancellations and verify active aliases",
+      "director update and DB sync scheduled workflows",
+      "November streaming per-provider live coverage",
+      "events and IMAX automation provenance/freshness",
+      "feedback persistence/admin authorization and analytics acceptance",
+      "poster cross-route image success and iPhone WebKit",
+      "UI/security/data-preservation regression"
+    ],
+    "next_actions": [
+      "Wait for #603 Validate frontend, inspect failures before merge",
+      "Audit scheduled director and DB sync runs/logs without mutating production data",
+      "Check Vercel production aliases and cancellation reasons",
+      "Run read-only live smoke and acceptance tests",
+      "Only mark GO when production and all required acceptance gates have evidence"
+    ]
   }
 }

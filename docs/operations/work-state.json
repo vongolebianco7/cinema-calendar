@@ -2147,8 +2147,8 @@
     "observed_at": "2026-11-05T01:02:22+09:00",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
-      594,
-      588,
+      600,
+      597,
       526,
       514
     ],
@@ -2175,7 +2175,18 @@
       "Production poster recovery unverified",
       "Vercel latest production readiness unverified"
     ],
-    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data"
+    "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
+    "checked_at": "2026-11-05T10:02:14+09:00",
+    "main_sha": "f5aec23ad7f8e09260fb477b0544a1036d1cb3f8",
+    "release_decision": "NO-GO",
+    "new_progress": "PR #599 closed/merged since prior checkpoint; new PR #600 adds verified Hulu/ABEMA November premieres. Its six checks mostly pass, Validate frontend remains in progress. PR #597 is currently mergeable=false and must be rebased before merging; main state file remains stale.",
+    "next_steps": [
+      "Wait for PR #600 Validate frontend final status and review exact official-source evidence before merge",
+      "Rebase PR #597 onto current main and resolve checkpoint conflict without overwriting historical records",
+      "Reproduce and measure production poster failures across routes and iPhone WebKit",
+      "Inspect director-refresh and backend DB-sync failure logs; preserve Neon Free quota and existing user data",
+      "Complete production feedback authorization/persistence and analytics acceptance, event/IMAX source audit; release remains NO-GO"
+    ]
   },
   "issue_585_20261104": {
     "status": "production_schema_applied_pending_final_ci",

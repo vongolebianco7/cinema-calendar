@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T00:24:10.080143+00:00",
+  "generated_at": "2026-11-05T01:31:21.777976+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -18289,39 +18289,6 @@
       "tmdbId": 37799
     },
     {
-      "title": "ダンケルク",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.45,
-      "votes": 18111,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 374720,
-      "tmdb": "https://www.themoviedb.org/movie/374720",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 106,
-      "genres": [
-        "戦争",
-        "アクション",
-        "履歴"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "フィン・ホワイトヘッド",
-        "トム・ハーディ",
-        "マーク・ライランス",
-        "ケネス・ブラナー"
-      ],
-      "tmdbId": 374720
-    },
-    {
       "title": "ダークナイト",
       "date": "2026-09-01",
       "event": "streaming",
@@ -18388,6 +18355,39 @@
       "tmdbId": 49026
     },
     {
+      "title": "ダンケルク",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.45,
+      "votes": 18111,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/wMGrlJ8TGuB77jcLISUWiVlG1vY.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 374720,
+      "tmdb": "https://www.themoviedb.org/movie/374720",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 106,
+      "genres": [
+        "戦争",
+        "アクション",
+        "履歴"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "フィン・ホワイトヘッド",
+        "トム・ハーディ",
+        "マーク・ライランス",
+        "ケネス・ブラナー"
+      ],
+      "tmdbId": 374720
+    },
+    {
       "title": "チャーリーとチョコレート工場",
       "date": "2026-09-01",
       "event": "streaming",
@@ -18420,39 +18420,6 @@
         "ヘレナ・ボナム・カーター"
       ],
       "tmdbId": 118
-    },
-    {
-      "title": "テネット",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.172,
-      "votes": 11653,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/azzqSt3XPpRRIYyh0WT6rs2BCe7.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 577922,
-      "tmdb": "https://www.themoviedb.org/movie/577922",
-      "director": "クリストファー・ノーラン",
-      "director_id": 525,
-      "runtime": 150,
-      "genres": [
-        "アクション",
-        "スリラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "United Kingdom",
-        "United States of America"
-      ],
-      "cast": [
-        "ジョン・デヴィッド・ワシントン",
-        "ロバート・パティンソン",
-        "エリザベス・デビッキ",
-        "ケネス・ブラナー"
-      ],
-      "tmdbId": 577922
     },
     {
       "title": "デーヴァラ",
@@ -18488,6 +18455,39 @@
         "ప్రకాష్ రాజ్",
         "శ్రీకాంత్"
       ]
+    },
+    {
+      "title": "テネット",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.172,
+      "votes": 11653,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/azzqSt3XPpRRIYyh0WT6rs2BCe7.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 577922,
+      "tmdb": "https://www.themoviedb.org/movie/577922",
+      "director": "クリストファー・ノーラン",
+      "director_id": 525,
+      "runtime": 150,
+      "genres": [
+        "アクション",
+        "スリラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "United Kingdom",
+        "United States of America"
+      ],
+      "cast": [
+        "ジョン・デヴィッド・ワシントン",
+        "ロバート・パティンソン",
+        "エリザベス・デビッキ",
+        "ケネス・ブラナー"
+      ],
+      "tmdbId": 577922
     },
     {
       "title": "バイオハザード",
@@ -18588,6 +18588,143 @@
         "ロジャー・クレイグ・スミス"
       ],
       "tmdbId": 13648
+    },
+    {
+      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 5.948,
+      "votes": 2902,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 460458,
+      "tmdb": "https://www.themoviedb.org/movie/460458",
+      "director": "Johannes Roberts",
+      "director_id": 100734,
+      "runtime": 107,
+      "genres": [
+        "アクション",
+        "ホラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "Germany",
+        "United States of America",
+        "Canada"
+      ],
+      "cast": [
+        "カヤ・スコデラリオ",
+        "ハナ・ジョン＝カーメン",
+        "ロビー・アメル",
+        "Tom Hopper"
+      ],
+      "tmdbId": 460458
+    },
+    {
+      "title": "バイオハザード：ヴェンデッタ",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.9,
+      "votes": 1120,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/iXa4VPoT5G1tZG3L4QdOMIvJ9PF.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 400136,
+      "tmdb": "https://www.themoviedb.org/movie/400136",
+      "director": "辻本貴則",
+      "director_id": 133202,
+      "runtime": 97,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "アドベンチャー",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan",
+        "United States of America"
+      ],
+      "cast": [
+        "Kevin Dorman",
+        "マシュー・マーサー",
+        "Erin Cahill",
+        "John DeMita"
+      ],
+      "tmdbId": 400136
+    },
+    {
+      "title": "バイオハザード：ザ・ファイナル",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.106,
+      "votes": 3644,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/mvzMipirA7xEXoOJ3aSKfZIxj4G.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 173897,
+      "tmdb": "https://www.themoviedb.org/movie/173897",
+      "director": "ポール・W・S・アンダーソン",
+      "director_id": 4014,
+      "runtime": 107,
+      "genres": [
+        "アクション",
+        "ホラー",
+        "サイエンスフィクション"
+      ],
+      "countries": [
+        "Canada",
+        "France",
+        "Germany",
+        "United States of America"
+      ],
+      "cast": [
+        "ミラ・ジョヴォヴィッチ",
+        "イアン・グレン",
+        "Ali Larter",
+        "ショーン・ロバーツ"
+      ],
+      "tmdbId": 173897
+    },
+    {
+      "title": "バイオハザード：デスアイランド",
+      "date": "2026-09-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.264,
+      "votes": 1156,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
+      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
+      "id": 1083862,
+      "tmdb": "https://www.themoviedb.org/movie/1083862",
+      "director": "羽住英一郎",
+      "director_id": 589915,
+      "runtime": 91,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "サイエンスフィクション",
+        "ホラー"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "cast": [
+        "マシュー・マーサー",
+        "Nicole Tompkins",
+        "Kevin Dorman",
+        "Stephanie Panisello"
+      ],
+      "tmdbId": 1083862
     },
     {
       "title": "バイオハザードII アポカリプス",
@@ -18726,143 +18863,6 @@
         "Aryana Engineer"
       ],
       "tmdbId": 71679
-    },
-    {
-      "title": "バイオハザード：ウェルカム・トゥ・ラクーンシティ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 5.948,
-      "votes": 2902,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/oSSX3EZMRT1uS5z7IStyjbfBVfz.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 460458,
-      "tmdb": "https://www.themoviedb.org/movie/460458",
-      "director": "Johannes Roberts",
-      "director_id": 100734,
-      "runtime": 107,
-      "genres": [
-        "アクション",
-        "ホラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "Germany",
-        "United States of America",
-        "Canada"
-      ],
-      "cast": [
-        "カヤ・スコデラリオ",
-        "ハナ・ジョン＝カーメン",
-        "ロビー・アメル",
-        "Tom Hopper"
-      ],
-      "tmdbId": 460458
-    },
-    {
-      "title": "バイオハザード：ザ・ファイナル",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.106,
-      "votes": 3644,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/mvzMipirA7xEXoOJ3aSKfZIxj4G.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 173897,
-      "tmdb": "https://www.themoviedb.org/movie/173897",
-      "director": "ポール・W・S・アンダーソン",
-      "director_id": 4014,
-      "runtime": 107,
-      "genres": [
-        "アクション",
-        "ホラー",
-        "サイエンスフィクション"
-      ],
-      "countries": [
-        "Canada",
-        "France",
-        "Germany",
-        "United States of America"
-      ],
-      "cast": [
-        "ミラ・ジョヴォヴィッチ",
-        "イアン・グレン",
-        "Ali Larter",
-        "ショーン・ロバーツ"
-      ],
-      "tmdbId": 173897
-    },
-    {
-      "title": "バイオハザード：デスアイランド",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.264,
-      "votes": 1156,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/eWrw5wwfJllkapZw2tcVc36lZkb.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 1083862,
-      "tmdb": "https://www.themoviedb.org/movie/1083862",
-      "director": "羽住英一郎",
-      "director_id": 589915,
-      "runtime": 91,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション",
-        "ホラー"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "cast": [
-        "マシュー・マーサー",
-        "Nicole Tompkins",
-        "Kevin Dorman",
-        "Stephanie Panisello"
-      ],
-      "tmdbId": 1083862
-    },
-    {
-      "title": "バイオハザード：ヴェンデッタ",
-      "date": "2026-09-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.9,
-      "votes": 1120,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/iXa4VPoT5G1tZG3L4QdOMIvJ9PF.jpg",
-      "source": "About Amazon Japan 2026年9月Prime Video新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-september-2026",
-      "id": 400136,
-      "tmdb": "https://www.themoviedb.org/movie/400136",
-      "director": "辻本貴則",
-      "director_id": 133202,
-      "runtime": 97,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "アドベンチャー",
-        "サイエンスフィクション",
-        "ホラー"
-      ],
-      "countries": [
-        "Japan",
-        "United States of America"
-      ],
-      "cast": [
-        "Kevin Dorman",
-        "マシュー・マーサー",
-        "Erin Cahill",
-        "John DeMita"
-      ],
-      "tmdbId": 400136
     },
     {
       "title": "バットマン ビギンズ",
@@ -21115,8 +21115,8 @@
       "date": "2026-09-18",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.362,
-      "votes": 746,
+      "score": 6.363,
+      "votes": 747,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/3YCxCGaFXKcjpldfJY5BxGLJeqf.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -21151,8 +21151,8 @@
       "date": "2026-09-18",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.706,
-      "votes": 2104,
+      "score": 6.705,
+      "votes": 2105,
       "overview": "プロの殺人ハンターに追われながら30日間生き残らなければならないデスゲーム番組「ランニング・マン」。娘の治療費を稼ぐため、番組に参加することになったベン・リチャーズは予想外に人気者となり、システム全体にとって脅威の存在へと変貌していく。",
       "poster": "https://image.tmdb.org/t/p/w500/nABHEEaT2kweMDOZ0wNLWE0EbTe.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -22532,53 +22532,6 @@
       ]
     },
     {
-      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": null,
-      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "type": "配信",
-      "checked_at": "2026-10-26"
-    },
-    {
-      "title": "めぐみへの誓い",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 7.3,
-      "votes": 3,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/9eRlNhVq2j0dizt4mTAG51de9xq.jpg",
-      "source": "FOD INFO公式配信一覧",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "checked_at": "2026-10-25",
-      "tmdbId": 798926,
-      "original_title": "めぐみへの誓い",
-      "year": 2021,
-      "release_year": 2021,
-      "identity_verified_at": "2026-10-25",
-      "id": 798926,
-      "tmdb": "https://www.themoviedb.org/movie/798926",
-      "director": "Shô Nobushi",
-      "director_id": 1109298,
-      "cast": [
-        "原田大二郎",
-        "笠菜月",
-        "Riria Sakagami",
-        "石村知子"
-      ],
-      "countries": [],
-      "runtime": 102,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
       "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
       "date": "2026-10-01",
       "event": "streaming",
@@ -22826,12 +22779,26 @@
       ]
     },
     {
+      "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "type": "配信",
+      "checked_at": "2026-10-26"
+    },
+    {
       "title": "メガロポリス",
       "date": "2026-10-01",
       "event": "streaming",
       "service": "FOD",
-      "score": 5.139,
-      "votes": 1087,
+      "score": 5.136,
+      "votes": 1088,
       "overview": "未来のニューヨーク、\"新ローマ\"を舞台に、先見の明を持つ建築家シーザー・カティリナは、社会の常識を塗り替えるユートピア都市「メガロポリス」の建設を夢見ている。彼に立ちはだかるのは、権力と利権に執着する腐敗した市長フランクリン・キケロ。そして二人の間に立つのが、市長の娘ジュリア。シーザーへの愛が、彼女に忠誠心・野心・人類の未来の間での選択を迫る。",
       "poster": "https://image.tmdb.org/t/p/w500/doVWgLdNyK36nEyyZgVsEWFCO1e.jpg",
       "source": "FOD INFO公式配信一覧",
@@ -22860,6 +22827,39 @@
         "サイエンスフィクション",
         "ドラマ",
         "ファンタジー"
+      ]
+    },
+    {
+      "title": "めぐみへの誓い",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 7.3,
+      "votes": 3,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/9eRlNhVq2j0dizt4mTAG51de9xq.jpg",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "checked_at": "2026-10-25",
+      "tmdbId": 798926,
+      "original_title": "めぐみへの誓い",
+      "year": 2021,
+      "release_year": 2021,
+      "identity_verified_at": "2026-10-25",
+      "id": 798926,
+      "tmdb": "https://www.themoviedb.org/movie/798926",
+      "director": "Shô Nobushi",
+      "director_id": 1109298,
+      "cast": [
+        "原田大二郎",
+        "笠菜月",
+        "Riria Sakagami",
+        "石村知子"
+      ],
+      "countries": [],
+      "runtime": 102,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -22972,7 +22972,7 @@
       "event": "streaming",
       "service": "FOD",
       "score": 7.29,
-      "votes": 4057,
+      "votes": 4059,
       "overview": "チェーンソー片手に徘徊する、人間の皮をかぶった大男……汚れたエプロンには一体どれほどの人の血が染みついているのか。ウィスコンシンに実在した殺人鬼をモデルにした恐怖映画。\r テキサス州の片田舎。5人の若者が車で旅をしていた。途中、燃料が切れ、休憩を兼ねて立ち寄った農家で凄惨な“祭り”に巻き込まれていく。マスクを被った男“レザーフェイス”と、その怪しい一家――逃げ場のない絶望の中、恐怖の夜が幕を開ける。",
       "poster": "https://image.tmdb.org/t/p/w500/gcGxWfOGY3TTzL7TJfVWrnCBfFo.jpg",
       "source": "FOD INFO公式配信一覧",
@@ -23413,44 +23413,6 @@
       ]
     },
     {
-      "title": "007は二度死ぬ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.587,
-      "votes": 2610,
-      "overview": "米ソの宇宙ロケットが、次々と行方不明になるという事件が発生した。事件の背後にスペクターの影を見いだした英国情報部は、真相究明のため、ジェームズ・ボンドを日本に派遣する。日本の情報部局長、タナカの助けを得て、ボンドはスペクターの秘密基地に潜入するが……。ボンドの宿敵、ブロフェルドをD・プレザンスが演じたシリーズ第5作。",
-      "poster": "https://image.tmdb.org/t/p/w500/jZNROWO3GN61GlPEs4KloT8CXz8.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 667,
-      "original_title": "You Only Live Twice",
-      "year": 1967,
-      "release_year": 1967,
-      "identity_verified_at": "2026-10-25",
-      "id": 667,
-      "tmdb": "https://www.themoviedb.org/movie/667",
-      "director": "ルイス・ギルバート",
-      "director_id": 10076,
-      "cast": [
-        "ショーン・コネリー",
-        "若林映子",
-        "浜美枝",
-        "丹波哲郎"
-      ],
-      "countries": [
-        "United Kingdom"
-      ],
-      "runtime": 117,
-      "genres": [
-        "アクション",
-        "スリラー",
-        "アドベンチャー"
-      ]
-    },
-    {
       "title": "007／オクトパシー",
       "date": "2026-10-01",
       "event": "streaming",
@@ -23571,7 +23533,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 6.901,
-      "votes": 4550,
+      "votes": 4552,
       "overview": "ソ連崩壊前、ソ連の化学兵器工場に006ことアレックと共に侵入したボンドだったが、責任者のウルモフ大佐によりアレックが拘束されてしまう。ボンドはやむなく彼を見捨て秘密工場を爆破し、任務を達成した。  それから9年後。20世紀も終わりに近く、ソ連は既に崩壊していた。ボンドはモナコでロシアの犯罪組織「ヤヌス」のメンバーであるゼニアをマークしていたが、彼女と将軍になっていたウルモフは、対電磁波装甲を施したNATOの最新鋭戦闘ヘリコプター・タイガーを、デモンストレーションを行っていたフリゲート艦上から奪取・逃走する。  その後ゼニアとウルモフは、ロシアの秘密宇宙基地に現れ、ソ連時代の秘密兵器「ゴールデンアイ」を起動させ、兵士と職員を皆殺しにする。女性コンピューター技術士のナターリアは、奇跡的に生き残り脱出した。  ボンドは「ゴールデンアイ」とヤヌスの関係の手掛かりを求めてサンクトペテルブルクへ行き、そこで9年前殺されたはずのアレックと再会して、意外な真実を知る。",
       "poster": "https://image.tmdb.org/t/p/w500/qZEjh0xRw2bRqYLxMOPwLeIVViM.jpg",
       "source": "Prime Video公式配信予定",
@@ -23647,8 +23609,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.667,
-      "votes": 2764,
+      "score": 6.666,
+      "votes": 2765,
       "overview": "MOS型核弾頭2基を搭載したイギリス空軍機が、NATOの訓練飛行中に消息を絶ち、謎の組織スペクターが1億ポンド相当の金塊を要求してきた。イギリス秘密情報部員ジェームズ・ボンドは、上司Mが空軍機の消えた先と睨んだバハマに派遣される。そこでは、スペクターの幹部エミリオ・ラルゴが、宝探しのふりをして海底に沈めた空軍機から原爆を回収しようとしていた。ボンドはCIAやアメリカ海軍原子力潜水艦メンタ号の支援を受け、ラルゴに立ち向かう。",
       "poster": "https://image.tmdb.org/t/p/w500/66gvPug1fACRewpzWAnABXq5MDK.jpg",
       "source": "Prime Video公式配信予定",
@@ -23674,6 +23636,44 @@
         "United Kingdom"
       ],
       "runtime": 129,
+      "genres": [
+        "アドベンチャー",
+        "アクション",
+        "スリラー"
+      ]
+    },
+    {
+      "title": "007／ダイ・アナザー・デイ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.003,
+      "votes": 4054,
+      "overview": "ボンドは北朝鮮側の非武装地帯にある基地で、アフリカから不正輸出されたダイヤモンドと引き換えに武器の密輸を行なっていたムーン大佐抹殺の任務を遂行した直後、彼の父であるムーン将軍に捕らわれ、長きに渡る監禁・拷問を受ける。  14ヶ月後、中華人民共和国の諜報員3名を殺害したのち、逮捕されたムーン大佐の側近のザオとの捕虜交換が行われ、ようやくMのもとに戻れたボンドは思いがけない言葉を耳にする。それは00（ダブルオー）ナンバーの剥奪だった。1週間前に北朝鮮内部に潜り込んでいたアメリカの工作員が処刑され、ボンドが居た収容所から情報が発信された事から、北朝鮮での拷問でボンドが機密事項を洩らしたのが原因だと疑うアメリカはこれ以上の情報漏れを恐れザオとの交換でボンドを連れ戻したのだという。ボンドを疑うMは、ボンドの00ナンバー剥奪という決断に至ったのだ。  この結果に納得のいかないボンドは、自らのプライドと00ナンバーを取り戻すべく単身でMたちのもとから脱出。香港を拠点に活動する中国の諜報員ミスター・チャンの協力のもと、ザオがキューバに潜伏中との情報をつかみ、キューバに飛ぶ。そこでアメリカ国家安全保障局（NSA）の諜報員ジンクスと遭遇する。",
+      "poster": "https://image.tmdb.org/t/p/w500/t4iODyyV8q9AchQBkwkIU8RpsJ.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 36669,
+      "original_title": "Die Another Day",
+      "year": 2002,
+      "release_year": 2002,
+      "identity_verified_at": "2026-10-25",
+      "id": 36669,
+      "tmdb": "https://www.themoviedb.org/movie/36669",
+      "director": "リー・タマホリ",
+      "director_id": 7256,
+      "cast": [
+        "ピアース・ブロスナン",
+        "ハル・ベリー",
+        "トビー・スティーブンス",
+        "ロザムンド・パイク"
+      ],
+      "countries": [
+        "United Kingdom"
+      ],
+      "runtime": 133,
       "genres": [
         "アドベンチャー",
         "アクション",
@@ -23713,44 +23713,6 @@
       ],
       "runtime": 125,
       "genres": [
-        "アクション",
-        "スリラー"
-      ]
-    },
-    {
-      "title": "007／ダイ・アナザー・デイ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.003,
-      "votes": 4054,
-      "overview": "ボンドは北朝鮮側の非武装地帯にある基地で、アフリカから不正輸出されたダイヤモンドと引き換えに武器の密輸を行なっていたムーン大佐抹殺の任務を遂行した直後、彼の父であるムーン将軍に捕らわれ、長きに渡る監禁・拷問を受ける。  14ヶ月後、中華人民共和国の諜報員3名を殺害したのち、逮捕されたムーン大佐の側近のザオとの捕虜交換が行われ、ようやくMのもとに戻れたボンドは思いがけない言葉を耳にする。それは00（ダブルオー）ナンバーの剥奪だった。1週間前に北朝鮮内部に潜り込んでいたアメリカの工作員が処刑され、ボンドが居た収容所から情報が発信された事から、北朝鮮での拷問でボンドが機密事項を洩らしたのが原因だと疑うアメリカはこれ以上の情報漏れを恐れザオとの交換でボンドを連れ戻したのだという。ボンドを疑うMは、ボンドの00ナンバー剥奪という決断に至ったのだ。  この結果に納得のいかないボンドは、自らのプライドと00ナンバーを取り戻すべく単身でMたちのもとから脱出。香港を拠点に活動する中国の諜報員ミスター・チャンの協力のもと、ザオがキューバに潜伏中との情報をつかみ、キューバに飛ぶ。そこでアメリカ国家安全保障局（NSA）の諜報員ジンクスと遭遇する。",
-      "poster": "https://image.tmdb.org/t/p/w500/t4iODyyV8q9AchQBkwkIU8RpsJ.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 36669,
-      "original_title": "Die Another Day",
-      "year": 2002,
-      "release_year": 2002,
-      "identity_verified_at": "2026-10-25",
-      "id": 36669,
-      "tmdb": "https://www.themoviedb.org/movie/36669",
-      "director": "リー・タマホリ",
-      "director_id": 7256,
-      "cast": [
-        "ピアース・ブロスナン",
-        "ハル・ベリー",
-        "トビー・スティーブンス",
-        "ロザムンド・パイク"
-      ],
-      "countries": [
-        "United Kingdom"
-      ],
-      "runtime": 133,
-      "genres": [
-        "アドベンチャー",
         "アクション",
         "スリラー"
       ]
@@ -23798,8 +23760,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.986,
-      "votes": 4236,
+      "score": 6.985,
+      "votes": 4237,
       "overview": "映画史に刻まれるスパイ・アクション映画の金字塔、007シリーズの記念すべき第1作！宇宙ロケットを妨害する怪電波の調査に当たっていたイギリス諜報部員がジャマイカで殺された。早速現地に派遣されたのは、コードネーム＝007ことジェームズ・ボンド。そこで彼はドクター・ノオと名乗る中国人博士が所有する謎の島に秘密が隠されていることを知る......！",
       "poster": "https://image.tmdb.org/t/p/w500/eP16odPF2RAoohW0KVkla4KC7ms.jpg",
       "source": "Prime Video公式配信予定",
@@ -23993,8 +23955,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.058,
-      "votes": 3514,
+      "score": 7.057,
+      "votes": 3515,
       "overview": "ソビエト連邦情報機関の最高幹部会議は、西側の情報機関に打撃を与えるため、スメルシュの手によってイギリス秘密情報部の情報部員ジェームズ・ボンドをはずかしめて殺すことに決定した。チェスのモスクワ選手権タイトル保持者でスメルシュ企画課長のクロンスティーンが立てた計画に基づき、第2課長ローザ・クレッブ大佐は、タチアナ・ロマノーヴァ伍長を囮に仕立てた。  ボンドに夢中になったソ連職員タチアナが、暗号解読器「スペクター」を手土産に亡命を望んでいるという連絡が入り、ボンドはイスタンブルへ派遣された。首尾よくタチアナと解読器を確保したボンドは、夫婦を装いオリエント急行に乗り込んで国外脱出を図るが、そこにはスメルシュの放った刺客グラントが待っていた。",
       "poster": "https://image.tmdb.org/t/p/w500/6PZWGX98H7QEVPFRigsGchsEZXd.jpg",
       "source": "Prime Video公式配信予定",
@@ -24070,7 +24032,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 6.347,
-      "votes": 8877,
+      "votes": 8878,
       "overview": "相変わらず組織から理解されずにいたジェームズ・ボンドは、将来を誓い合いながらもヴェネツィアで死んだ英国金融活動部（FATF）のヴェスパーを操っていた男、「ミスター・ホワイト」を唯一の手掛かりとしてその背後にある組織を探っていた。  場所はイタリアの古都シエーナ。ボンドはアストンマーチン・DBSで謎の組織の構成員が操るアルファロメオ・159と激しいカーチェイスを繰り広げた末、何とか銃撃をかわしてミスター・ホワイトを「M」のもとに連行するも尋問中に仲間内で突然の裏切りが起こる。結局、ミスター・ホワイトは裏切り者の手引きにより逃走、ボンドは裏切り者を追跡の末、生け捕りにせず殺してしまう。",
       "poster": "https://image.tmdb.org/t/p/w500/fKAbN3LyiokDWZx4WPH25QTWrPT.jpg",
       "source": "Prime Video公式配信予定",
@@ -24300,6 +24262,44 @@
       ]
     },
     {
+      "title": "007は二度死ぬ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.587,
+      "votes": 2610,
+      "overview": "米ソの宇宙ロケットが、次々と行方不明になるという事件が発生した。事件の背後にスペクターの影を見いだした英国情報部は、真相究明のため、ジェームズ・ボンドを日本に派遣する。日本の情報部局長、タナカの助けを得て、ボンドはスペクターの秘密基地に潜入するが……。ボンドの宿敵、ブロフェルドをD・プレザンスが演じたシリーズ第5作。",
+      "poster": "https://image.tmdb.org/t/p/w500/jZNROWO3GN61GlPEs4KloT8CXz8.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 667,
+      "original_title": "You Only Live Twice",
+      "year": 1967,
+      "release_year": 1967,
+      "identity_verified_at": "2026-10-25",
+      "id": 667,
+      "tmdb": "https://www.themoviedb.org/movie/667",
+      "director": "ルイス・ギルバート",
+      "director_id": 10076,
+      "cast": [
+        "ショーン・コネリー",
+        "若林映子",
+        "浜美枝",
+        "丹波哲郎"
+      ],
+      "countries": [
+        "United Kingdom"
+      ],
+      "runtime": 117,
+      "genres": [
+        "アクション",
+        "スリラー",
+        "アドベンチャー"
+      ]
+    },
+    {
       "title": "48時間Part2/帰ってきたふたり",
       "date": "2026-10-01",
       "event": "streaming",
@@ -24374,78 +24374,6 @@
         "謎",
         "スリラー",
         "サイエンスフィクション"
-      ]
-    },
-    {
-      "title": "ひとよ",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 7.2,
-      "votes": 24,
-      "overview": "15年前、ある家族に起きた一夜の事件。それは、母とその子どもたち三兄妹の運命を大きく狂わせた。一家はあの晩の出来事に囚われたまま別々の人生を歩み、15年後に再会。葛藤と戸惑いの中で、一度崩壊した絆を取り戻そうともがき続ける。抗うことのできなかった家族の岐路と15年越しに向き合う一家が辿り着く先とは―。",
-      "poster": "https://image.tmdb.org/t/p/w500/qCmC9JNQ5qDYnU4Z4fo6f2u8W9J.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 595112,
-      "original_title": "ひとよ",
-      "year": 2019,
-      "release_year": 2019,
-      "identity_verified_at": "2026-10-25",
-      "id": 595112,
-      "tmdb": "https://www.themoviedb.org/movie/595112",
-      "director": "白石和彌",
-      "director_id": 1289548,
-      "cast": [
-        "佐藤健",
-        "鈴木亮平",
-        "松岡茉優",
-        "田中裕子"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 123,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "title": "やがて海へと届く",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.9,
-      "votes": 24,
-      "overview": "引っ込み思案の真奈と自由奔放なすみれは親友同士だったが、一人旅に出たすみれはそのまま行方知れずになる。親友がいなくなって5年が過ぎても真奈は彼女の不在を受け入れられずにいた。そんな折、真奈はすみれと以前付き合っていた遠野からすみれが大事にしていたビデオカメラを渡され、そこに残されていた彼女の秘密を知る。",
-      "poster": "https://image.tmdb.org/t/p/w500/6SlX5FeFarhW4GhqqmCvlRtbkbo.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 923837,
-      "original_title": "やがて海へと届く",
-      "year": 2022,
-      "release_year": 2022,
-      "identity_verified_at": "2026-10-25",
-      "id": 923837,
-      "tmdb": "https://www.themoviedb.org/movie/923837",
-      "director": "中川龍太郎",
-      "director_id": 1406394,
-      "cast": [
-        "岸井ゆきの",
-        "浜辺美波",
-        "杉野遥亮",
-        "中崎敏"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 126,
-      "genres": [
-        "ドラマ"
       ]
     },
     {
@@ -24633,6 +24561,42 @@
       ]
     },
     {
+      "title": "グッド・ウィル・ハンティング／旅立ち",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 8.168,
+      "votes": 14541,
+      "overview": "深い心の傷を負った天才青年と、同じく失意の中にいた精神分析医がお互いにあらたな旅立ちを自覚して成長してゆく姿を描く感動のヒューマン・ドラマ。ボストンに住む青年ウィルは、幼い頃から天才ゆえに周囲から孤立していた。だが、彼の才能に気付いた数学教授のランボーは、ウィルに精神分析医のショーンを紹介する。ウィルはショーンにしだいに心を開いてゆくが、彼の才能に気付いた政府機関や大企業が接近してくる。",
+      "poster": "https://image.tmdb.org/t/p/w500/vZ2KGsE9kDSZSuBqooh5wBK7EAK.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 489,
+      "original_title": "Good Will Hunting",
+      "year": 1997,
+      "release_year": 1997,
+      "identity_verified_at": "2026-10-25",
+      "id": 489,
+      "tmdb": "https://www.themoviedb.org/movie/489",
+      "director": "ガス・ヴァン・サント",
+      "director_id": 5216,
+      "cast": [
+        "マット・デイモン",
+        "ロビン・ウィリアムズ",
+        "ベン・アフレック",
+        "ステラン・スカルスガルド"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 127,
+      "genres": [
+        "ドラマ"
+      ]
+    },
+    {
       "title": "クリード チャンプを継ぐ男",
       "date": "2026-10-01",
       "event": "streaming",
@@ -24740,42 +24704,6 @@
       "genres": [
         "ドラマ",
         "アクション"
-      ]
-    },
-    {
-      "title": "グッド・ウィル・ハンティング／旅立ち",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 8.168,
-      "votes": 14541,
-      "overview": "深い心の傷を負った天才青年と、同じく失意の中にいた精神分析医がお互いにあらたな旅立ちを自覚して成長してゆく姿を描く感動のヒューマン・ドラマ。ボストンに住む青年ウィルは、幼い頃から天才ゆえに周囲から孤立していた。だが、彼の才能に気付いた数学教授のランボーは、ウィルに精神分析医のショーンを紹介する。ウィルはショーンにしだいに心を開いてゆくが、彼の才能に気付いた政府機関や大企業が接近してくる。",
-      "poster": "https://image.tmdb.org/t/p/w500/vZ2KGsE9kDSZSuBqooh5wBK7EAK.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 489,
-      "original_title": "Good Will Hunting",
-      "year": 1997,
-      "release_year": 1997,
-      "identity_verified_at": "2026-10-25",
-      "id": 489,
-      "tmdb": "https://www.themoviedb.org/movie/489",
-      "director": "ガス・ヴァン・サント",
-      "director_id": 5216,
-      "cast": [
-        "マット・デイモン",
-        "ロビン・ウィリアムズ",
-        "ベン・アフレック",
-        "ステラン・スカルスガルド"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 127,
-      "genres": [
-        "ドラマ"
       ]
     },
     {
@@ -24929,6 +24857,44 @@
       ]
     },
     {
+      "title": "スーパーエイト",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.782,
+      "votes": 7379,
+      "overview": "1979年にアメリカで実際に起こった事故を引き合いに、アメリカ政府がひた隠しにする秘密と、映画撮影に夢中になる少年たちが真実を暴く冒険と成長を描く。8ミリカメラで映画撮影をしていた6人の子どもたちのそばで、貨物列車の衝突事故が発生。貨物列車は空軍施設・エリア51からある場所へと研究素材を極秘に移送中だった。アメリカ政府が隠す秘密を目撃してしまった子どもたちのカメラには、事故の一部始終が記録されていた。",
+      "poster": "https://image.tmdb.org/t/p/w500/2NzRRE83B1kFLc1lgtTBS7pmL3B.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 37686,
+      "original_title": "Super 8",
+      "year": 2011,
+      "release_year": 2011,
+      "identity_verified_at": "2026-10-25",
+      "id": 37686,
+      "tmdb": "https://www.themoviedb.org/movie/37686",
+      "director": "Ｊ・Ｊ・エイブラムス",
+      "director_id": 15344,
+      "cast": [
+        "ジョエル・コートニー",
+        "エル・ファニング",
+        "Riley Griffiths",
+        "カイル・チャンドラー"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 111,
+      "genres": [
+        "スリラー",
+        "サイエンスフィクション",
+        "謎"
+      ]
+    },
+    {
       "title": "スター・トレックVII　ジェネレーションズ",
       "date": "2026-10-01",
       "event": "streaming",
@@ -25003,44 +24969,6 @@
         "ドラマ",
         "戦争",
         "スリラー"
-      ]
-    },
-    {
-      "title": "スーパーエイト",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.782,
-      "votes": 7379,
-      "overview": "1979年にアメリカで実際に起こった事故を引き合いに、アメリカ政府がひた隠しにする秘密と、映画撮影に夢中になる少年たちが真実を暴く冒険と成長を描く。8ミリカメラで映画撮影をしていた6人の子どもたちのそばで、貨物列車の衝突事故が発生。貨物列車は空軍施設・エリア51からある場所へと研究素材を極秘に移送中だった。アメリカ政府が隠す秘密を目撃してしまった子どもたちのカメラには、事故の一部始終が記録されていた。",
-      "poster": "https://image.tmdb.org/t/p/w500/2NzRRE83B1kFLc1lgtTBS7pmL3B.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 37686,
-      "original_title": "Super 8",
-      "year": 2011,
-      "release_year": 2011,
-      "identity_verified_at": "2026-10-25",
-      "id": 37686,
-      "tmdb": "https://www.themoviedb.org/movie/37686",
-      "director": "Ｊ・Ｊ・エイブラムス",
-      "director_id": 15344,
-      "cast": [
-        "ジョエル・コートニー",
-        "エル・ファニング",
-        "Riley Griffiths",
-        "カイル・チャンドラー"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 111,
-      "genres": [
-        "スリラー",
-        "サイエンスフィクション",
-        "謎"
       ]
     },
     {
@@ -25199,6 +25127,42 @@
       ]
     },
     {
+      "title": "ひとよ",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 7.2,
+      "votes": 24,
+      "overview": "15年前、ある家族に起きた一夜の事件。それは、母とその子どもたち三兄妹の運命を大きく狂わせた。一家はあの晩の出来事に囚われたまま別々の人生を歩み、15年後に再会。葛藤と戸惑いの中で、一度崩壊した絆を取り戻そうともがき続ける。抗うことのできなかった家族の岐路と15年越しに向き合う一家が辿り着く先とは―。",
+      "poster": "https://image.tmdb.org/t/p/w500/qCmC9JNQ5qDYnU4Z4fo6f2u8W9J.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 595112,
+      "original_title": "ひとよ",
+      "year": 2019,
+      "release_year": 2019,
+      "identity_verified_at": "2026-10-25",
+      "id": 595112,
+      "tmdb": "https://www.themoviedb.org/movie/595112",
+      "director": "白石和彌",
+      "director_id": 1289548,
+      "cast": [
+        "佐藤健",
+        "鈴木亮平",
+        "松岡茉優",
+        "田中裕子"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 123,
+      "genres": [
+        "ドラマ"
+      ]
+    },
+    {
       "title": "ファースト・ワイフ・クラブ",
       "date": "2026-10-01",
       "event": "streaming",
@@ -25276,7 +25240,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.388,
-      "votes": 20294,
+      "votes": 20298,
       "overview": "ホビット族のビルボ・バギンズは、魔法使いのガンダルフから思わぬ旅の誘いを受ける。それは、ドラゴンに乗っ取られたドワーフの王国を奪取するというものだった。ドワーフの戦士トーリンが率いる13人のドワーフたちと、最初の目的地“はなれ山”を目指してワーグ、オークといった怪物や魔術師がひしめく荒野を進んでいくビルボ。そんな中、ゴブリンが巣食うトンネルに入っていった彼は、そこでゴラムという醜悪な化け物と出会う。",
       "poster": "https://image.tmdb.org/t/p/w500/owRdGwcveYfvJUj9ogF2sh7H6AL.jpg",
       "source": "Prime Video公式配信予定",
@@ -25432,8 +25396,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 5.139,
-      "votes": 1087,
+      "score": 5.136,
+      "votes": 1088,
       "overview": "未来のニューヨーク、\"新ローマ\"を舞台に、先見の明を持つ建築家シーザー・カティリナは、社会の常識を塗り替えるユートピア都市「メガロポリス」の建設を夢見ている。彼に立ちはだかるのは、権力と利権に執着する腐敗した市長フランクリン・キケロ。そして二人の間に立つのが、市長の娘ジュリア。シーザーへの愛が、彼女に忠誠心・野心・人類の未来の間での選択を迫る。",
       "poster": "https://image.tmdb.org/t/p/w500/doVWgLdNyK36nEyyZgVsEWFCO1e.jpg",
       "source": "Prime Video公式配信予定",
@@ -25463,6 +25427,78 @@
         "サイエンスフィクション",
         "ドラマ",
         "ファンタジー"
+      ]
+    },
+    {
+      "title": "やがて海へと届く",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.9,
+      "votes": 24,
+      "overview": "引っ込み思案の真奈と自由奔放なすみれは親友同士だったが、一人旅に出たすみれはそのまま行方知れずになる。親友がいなくなって5年が過ぎても真奈は彼女の不在を受け入れられずにいた。そんな折、真奈はすみれと以前付き合っていた遠野からすみれが大事にしていたビデオカメラを渡され、そこに残されていた彼女の秘密を知る。",
+      "poster": "https://image.tmdb.org/t/p/w500/6SlX5FeFarhW4GhqqmCvlRtbkbo.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 923837,
+      "original_title": "やがて海へと届く",
+      "year": 2022,
+      "release_year": 2022,
+      "identity_verified_at": "2026-10-25",
+      "id": 923837,
+      "tmdb": "https://www.themoviedb.org/movie/923837",
+      "director": "中川龍太郎",
+      "director_id": 1406394,
+      "cast": [
+        "岸井ゆきの",
+        "浜辺美波",
+        "杉野遥亮",
+        "中崎敏"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 126,
+      "genres": [
+        "ドラマ"
+      ]
+    },
+    {
+      "title": "ラ・ヨローナ ～泣く女～",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 5.647,
+      "votes": 2766,
+      "overview": "1970年代のロサンゼルスで、ソーシャルワーカーのアンナ(リンダ・カーデリーニ)に、子供たちに危険が迫っているので助けてほしいとある女性が訴える。だがアンナは、その訴えに真剣に耳を貸さなかった。一人親のアンナには、エイプリル(マデリーン・マックグロウ)とクリス(ローマン・クリストウ)という二人の子供がいた。",
+      "poster": "https://image.tmdb.org/t/p/w500/2AuZ3T9uOxbTwmLDs0gfDqJ0kUm.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 480414,
+      "original_title": "The Curse of La Llorona",
+      "year": 2019,
+      "release_year": 2019,
+      "identity_verified_at": "2026-10-25",
+      "id": 480414,
+      "tmdb": "https://www.themoviedb.org/movie/480414",
+      "director": "マイケル・チャベス",
+      "director_id": 1607672,
+      "cast": [
+        "リンダ・カーデリーニ",
+        "レイモンド・クルス",
+        "Patricia Velásquez",
+        "Roman Christou"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 93,
+      "genres": [
+        "ホラー"
       ]
     },
     {
@@ -25505,42 +25541,6 @@
       ]
     },
     {
-      "title": "ラ・ヨローナ ～泣く女～",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 5.647,
-      "votes": 2766,
-      "overview": "1970年代のロサンゼルスで、ソーシャルワーカーのアンナ(リンダ・カーデリーニ)に、子供たちに危険が迫っているので助けてほしいとある女性が訴える。だがアンナは、その訴えに真剣に耳を貸さなかった。一人親のアンナには、エイプリル(マデリーン・マックグロウ)とクリス(ローマン・クリストウ)という二人の子供がいた。",
-      "poster": "https://image.tmdb.org/t/p/w500/2AuZ3T9uOxbTwmLDs0gfDqJ0kUm.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 480414,
-      "original_title": "The Curse of La Llorona",
-      "year": 2019,
-      "release_year": 2019,
-      "identity_verified_at": "2026-10-25",
-      "id": 480414,
-      "tmdb": "https://www.themoviedb.org/movie/480414",
-      "director": "マイケル・チャベス",
-      "director_id": 1607672,
-      "cast": [
-        "リンダ・カーデリーニ",
-        "レイモンド・クルス",
-        "Patricia Velásquez",
-        "Roman Christou"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 93,
-      "genres": [
-        "ホラー"
-      ]
-    },
-    {
       "title": "レッド・オクトーバーを追え！",
       "date": "2026-10-01",
       "event": "streaming",
@@ -25575,6 +25575,47 @@
       "genres": [
         "アクション",
         "スリラー"
+      ]
+    },
+    {
+      "title": "ロード・オブ・ザ・リング/ローハンの戦い",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.496,
+      "votes": 978,
+      "overview": "騎士の国ローハンは偉大なるヘルム王に護られていた。しかし突然の攻撃を受け、王国の平和が壊されていく。すべての運命は、一人の若き王女ヘラに託された！最大の敵はかつて共に育ったヘラの幼馴染ウルフ。果たしてヘラは、国の民の未来を救えるのか!? “あの指輪”をめぐる壮大な冒険へと繋がる、まだ誰も知らない伝説の戦いの幕が開ける！",
+      "poster": "https://image.tmdb.org/t/p/w500/hWIUksG3NcfckFmyiWm9yEpQDAR.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 839033,
+      "original_title": "The Lord of the Rings: The War of the Rohirrim",
+      "year": 2024,
+      "release_year": 2024,
+      "identity_verified_at": "2026-10-25",
+      "id": 839033,
+      "tmdb": "https://www.themoviedb.org/movie/839033",
+      "director": "神山健治",
+      "director_id": 16137,
+      "cast": [
+        "ブライアン・コックス",
+        "Gaia Wise",
+        "Luke Pasqualino",
+        "Laurence Ubong Williams"
+      ],
+      "countries": [
+        "Japan",
+        "New Zealand",
+        "United States of America"
+      ],
+      "runtime": 134,
+      "genres": [
+        "アニメーション",
+        "ファンタジー",
+        "アドベンチャー",
+        "アクション"
       ]
     },
     {
@@ -25649,6 +25690,43 @@
       "runtime": 119,
       "genres": [
         "ドラマ"
+      ]
+    },
+    {
+      "title": "ロッキー・ザ・ファイナル",
+      "date": "2026-10-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.888,
+      "votes": 3980,
+      "overview": "かつてのチャンピオン・ボクサー、ロッキー。今は引退し、地元フィラデルフィアでレストランを営む。妻エイドリアンは世を去り、息子のロバートは父に反発してビジネスマンの道に。満ち足りているがむなしい毎日の中、ロッキーは以前のようにリングに立ちたいと望みだす。同じころ、現役ヘビー級チャンピオンのディクソンは対戦相手に恵まれず、伝説的なロッキーとのエキシビションマッチを企画。ロッキーはこの挑戦を受けて立つ。",
+      "poster": "https://image.tmdb.org/t/p/w500/smIG47LJZr9uBtdu6VeSOkzhCzc.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1246,
+      "original_title": "Rocky Balboa",
+      "year": 2006,
+      "release_year": 2006,
+      "identity_verified_at": "2026-10-25",
+      "id": 1246,
+      "tmdb": "https://www.themoviedb.org/movie/1246",
+      "director": "シルヴェスター・スタローン",
+      "director_id": 16483,
+      "cast": [
+        "シルヴェスター・スタローン",
+        "バート・ヤング",
+        "Antonio Tarver",
+        "Geraldine Hughes"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 103,
+      "genres": [
+        "ドラマ",
+        "アクション"
       ]
     },
     {
@@ -25796,84 +25874,6 @@
       "runtime": 105,
       "genres": [
         "ドラマ",
-        "アクション"
-      ]
-    },
-    {
-      "title": "ロッキー・ザ・ファイナル",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.888,
-      "votes": 3980,
-      "overview": "かつてのチャンピオン・ボクサー、ロッキー。今は引退し、地元フィラデルフィアでレストランを営む。妻エイドリアンは世を去り、息子のロバートは父に反発してビジネスマンの道に。満ち足りているがむなしい毎日の中、ロッキーは以前のようにリングに立ちたいと望みだす。同じころ、現役ヘビー級チャンピオンのディクソンは対戦相手に恵まれず、伝説的なロッキーとのエキシビションマッチを企画。ロッキーはこの挑戦を受けて立つ。",
-      "poster": "https://image.tmdb.org/t/p/w500/smIG47LJZr9uBtdu6VeSOkzhCzc.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1246,
-      "original_title": "Rocky Balboa",
-      "year": 2006,
-      "release_year": 2006,
-      "identity_verified_at": "2026-10-25",
-      "id": 1246,
-      "tmdb": "https://www.themoviedb.org/movie/1246",
-      "director": "シルヴェスター・スタローン",
-      "director_id": 16483,
-      "cast": [
-        "シルヴェスター・スタローン",
-        "バート・ヤング",
-        "Antonio Tarver",
-        "Geraldine Hughes"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 103,
-      "genres": [
-        "ドラマ",
-        "アクション"
-      ]
-    },
-    {
-      "title": "ロード・オブ・ザ・リング/ローハンの戦い",
-      "date": "2026-10-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.496,
-      "votes": 978,
-      "overview": "騎士の国ローハンは偉大なるヘルム王に護られていた。しかし突然の攻撃を受け、王国の平和が壊されていく。すべての運命は、一人の若き王女ヘラに託された！最大の敵はかつて共に育ったヘラの幼馴染ウルフ。果たしてヘラは、国の民の未来を救えるのか!? “あの指輪”をめぐる壮大な冒険へと繋がる、まだ誰も知らない伝説の戦いの幕が開ける！",
-      "poster": "https://image.tmdb.org/t/p/w500/hWIUksG3NcfckFmyiWm9yEpQDAR.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 839033,
-      "original_title": "The Lord of the Rings: The War of the Rohirrim",
-      "year": 2024,
-      "release_year": 2024,
-      "identity_verified_at": "2026-10-25",
-      "id": 839033,
-      "tmdb": "https://www.themoviedb.org/movie/839033",
-      "director": "神山健治",
-      "director_id": 16137,
-      "cast": [
-        "ブライアン・コックス",
-        "Gaia Wise",
-        "Luke Pasqualino",
-        "Laurence Ubong Williams"
-      ],
-      "countries": [
-        "Japan",
-        "New Zealand",
-        "United States of America"
-      ],
-      "runtime": 134,
-      "genres": [
-        "アニメーション",
-        "ファンタジー",
-        "アドベンチャー",
         "アクション"
       ]
     },
@@ -26076,8 +26076,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.0,
-      "votes": 4725,
+      "score": 5.976,
+      "votes": 4726,
       "overview": "トム（チャーリー・シーン）の農場にミステリアス・サークルが出現。そのニュースを追うのはキャスターのシンディ（アンナ・ファリス）。彼女は友人の通夜で、1本のビデオを手にする。それは呪いのビデオだった。",
       "poster": "https://image.tmdb.org/t/p/w500/v4KR5XbPPxwRIPJDPzH4aMWs5zX.jpg",
       "source": "Prime Video公式配信予定",
@@ -26186,7 +26186,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.297,
-      "votes": 9534,
+      "votes": 9535,
       "overview": "1960年以降、アメリカを中心に数々の心霊事件を解決に導いてきた実在の心霊研究家ウォーレン夫妻。彼らが極秘にしてきた事件を描き、世界中に“真実の恐怖”を叩きつけた前作『死霊館』から3年。オリジナルキャスト＆スタッフが再び驚愕の実話恐怖事件を掘り起こす。その名は「エンフィールド事件」。“史上最長期間続いたポルターガイスト現象”として心霊史に残る悪名高き事件で、人々は“ポルターガイスト”という言葉と、その恐ろしさを知ることとなった。前作を遥かに凌ぐ“極限の恐怖”の舞台はロンドン北部エンフィールド。正体不明の音・不穏な囁き声・人体浮遊など数々の不可解現象に苦しむ人々を救うためウォーレン夫妻は再び恐怖の元凶と対峙することとなる。",
       "poster": "https://image.tmdb.org/t/p/w500/84FLZPgWeoo2nZGrtoNpLrGhOHT.jpg",
       "source": "Prime Video公式配信予定",
@@ -26482,7 +26482,7 @@
       "event": "streaming",
       "service": "U-NEXT",
       "score": 7.29,
-      "votes": 4057,
+      "votes": 4059,
       "overview": "チェーンソー片手に徘徊する、人間の皮をかぶった大男……汚れたエプロンには一体どれほどの人の血が染みついているのか。ウィスコンシンに実在した殺人鬼をモデルにした恐怖映画。\r テキサス州の片田舎。5人の若者が車で旅をしていた。途中、燃料が切れ、休憩を兼ねて立ち寄った農家で凄惨な“祭り”に巻き込まれていく。マスクを被った男“レザーフェイス”と、その怪しい一家――逃げ場のない絶望の中、恐怖の夜が幕を開ける。",
       "poster": "https://image.tmdb.org/t/p/w500/gcGxWfOGY3TTzL7TJfVWrnCBfFo.jpg",
       "source": "U-NEXT公式 2026年10月ラインナップ",
@@ -27007,20 +27007,6 @@
       ]
     },
     {
-      "title": "きみがいるだけで",
-      "date": "2026-10-02",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": null,
-      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "type": "配信",
-      "checked_at": "2026-10-26"
-    },
-    {
       "id": 685916,
       "tmdbId": 685916,
       "original_title": "The Killers Next Door",
@@ -27111,6 +27097,20 @@
         "https://www.videx.jp/detail/cinema/v_c_transworldassociates/ctwa1882_0001/index.htm",
         "https://harrygreenberger.com/about/"
       ]
+    },
+    {
+      "title": "きみがいるだけで",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "FOD INFO公式配信一覧（2026-10-27確認）",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "type": "配信",
+      "checked_at": "2026-10-26"
     },
     {
       "title": "名探偵ミランダ 大富豪殺人の招待状",
@@ -27279,44 +27279,6 @@
       "identity_source": "https://www.themoviedb.org/movie/1458857"
     },
     {
-      "title": "マテリアリスト 結婚の条件",
-      "date": "2026-10-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 6.264,
-      "votes": 1503,
-      "overview": "愛か条件か――“婚活のプロ”ルーシーの人生の選択とは？  婚活も日々進化を遂げるニューヨークでは、クライアントの理想や条件をマッチングさせ、ベストパートナーを見つけ出す結婚相談所が大流行。そんな現代の婚活市場を舞台に、凄腕のマッチメーカーが、結婚相手として最高なリッチで優しい恋人と、夢を追う売れない俳優の元カレとの間で揺れる姿を描く。監督・脚本は、『パスト ライブス／再会』（24）で世界中を魅了したセリーヌ・ソン。主人公のルーシーを演じるのは、『フィフティ・シェイズ・オブ・グレイ』でスターの座を獲得したダコタ・ジョンソン。ルーシーの元カレ・ジョンにクリス・エヴァンス、リッチで優しい恋人・ハリーにはペドロ・パスカルがそれぞれ扮し、プライスレスな三角関係が映し出される。現代的なテーマを兼ね備えた新たな傑作ラブストーリーがついに日本公開。",
-      "poster": "https://image.tmdb.org/t/p/w500/phw7iwIeAuElwyyKrVXC55RXQQS.jpg",
-      "source": "Prime Video公式配信予定",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1136867,
-      "original_title": "Materialists",
-      "year": 2025,
-      "release_year": 2025,
-      "identity_verified_at": "2026-10-25",
-      "id": 1136867,
-      "tmdb": "https://www.themoviedb.org/movie/1136867",
-      "director": "セリーヌ・ソン",
-      "director_id": 2518227,
-      "cast": [
-        "ダコタ・ジョンソン",
-        "クリス・エヴァンス",
-        "ペドロ・パスカル",
-        "Zoë Winters"
-      ],
-      "countries": [
-        "United States of America",
-        "Finland"
-      ],
-      "runtime": 116,
-      "genres": [
-        "ロマンス",
-        "ドラマ"
-      ]
-    },
-    {
       "title": "８番出口",
       "date": "2026-10-02",
       "event": "streaming",
@@ -27352,6 +27314,44 @@
         "謎",
         "スリラー",
         "ホラー"
+      ]
+    },
+    {
+      "title": "マテリアリスト 結婚の条件",
+      "date": "2026-10-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 6.264,
+      "votes": 1503,
+      "overview": "愛か条件か――“婚活のプロ”ルーシーの人生の選択とは？  婚活も日々進化を遂げるニューヨークでは、クライアントの理想や条件をマッチングさせ、ベストパートナーを見つけ出す結婚相談所が大流行。そんな現代の婚活市場を舞台に、凄腕のマッチメーカーが、結婚相手として最高なリッチで優しい恋人と、夢を追う売れない俳優の元カレとの間で揺れる姿を描く。監督・脚本は、『パスト ライブス／再会』（24）で世界中を魅了したセリーヌ・ソン。主人公のルーシーを演じるのは、『フィフティ・シェイズ・オブ・グレイ』でスターの座を獲得したダコタ・ジョンソン。ルーシーの元カレ・ジョンにクリス・エヴァンス、リッチで優しい恋人・ハリーにはペドロ・パスカルがそれぞれ扮し、プライスレスな三角関係が映し出される。現代的なテーマを兼ね備えた新たな傑作ラブストーリーがついに日本公開。",
+      "poster": "https://image.tmdb.org/t/p/w500/phw7iwIeAuElwyyKrVXC55RXQQS.jpg",
+      "source": "Prime Video公式配信予定",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1136867,
+      "original_title": "Materialists",
+      "year": 2025,
+      "release_year": 2025,
+      "identity_verified_at": "2026-10-25",
+      "id": 1136867,
+      "tmdb": "https://www.themoviedb.org/movie/1136867",
+      "director": "セリーヌ・ソン",
+      "director_id": 2518227,
+      "cast": [
+        "ダコタ・ジョンソン",
+        "クリス・エヴァンス",
+        "ペドロ・パスカル",
+        "Zoë Winters"
+      ],
+      "countries": [
+        "United States of America",
+        "Finland"
+      ],
+      "runtime": 116,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
       ]
     },
     {
@@ -27573,41 +27573,6 @@
       "checked_at": "2026-10-26"
     },
     {
-      "title": "ほなまた明日",
-      "date": "2026-10-03",
-      "event": "streaming",
-      "service": "FOD",
-      "score": 6.0,
-      "votes": 1,
-      "overview": "夏の大阪。写真家を目指している芸大生の草馬ナオは、卒業を控えるなか、写真中心の生活を過ごしていた。同じ写真学科の友人である小夜、山田、多田は写真優先のナオに振り回されながらも、彼女の才能を認め応援している。人生の選択を前に、時に傷つけ合い、時に励まし合う4人。ナオの写真にかける情熱は彼らにさまざまな選択を迫り、やがて卒業した4人はそれぞれの人生を歩み始める。4年後、久々に再会したナオと小夜、多田は、山田が失踪したことを知る。",
-      "poster": "https://image.tmdb.org/t/p/w500/czP3GUvJwAyAtSPWdLLdPFUfyCN.jpg",
-      "source": "FOD INFO公式配信一覧",
-      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
-      "checked_at": "2026-10-25",
-      "tmdbId": 1263089,
-      "original_title": "ほなまた明日",
-      "year": 2024,
-      "release_year": 2024,
-      "identity_verified_at": "2026-10-25",
-      "id": 1263089,
-      "tmdb": "https://www.themoviedb.org/movie/1263089",
-      "director": "道本咲希",
-      "director_id": 3112298,
-      "cast": [
-        "田中真琴",
-        "Ryota Matsuda",
-        "Risa Shigematsu",
-        "Takuro Akita"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 99,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
       "title": "カーテンコールの灯",
       "date": "2026-10-03",
       "event": "streaming",
@@ -27715,6 +27680,41 @@
         "アクション",
         "犯罪",
         "スリラー"
+      ]
+    },
+    {
+      "title": "ほなまた明日",
+      "date": "2026-10-03",
+      "event": "streaming",
+      "service": "FOD",
+      "score": 6.0,
+      "votes": 1,
+      "overview": "夏の大阪。写真家を目指している芸大生の草馬ナオは、卒業を控えるなか、写真中心の生活を過ごしていた。同じ写真学科の友人である小夜、山田、多田は写真優先のナオに振り回されながらも、彼女の才能を認め応援している。人生の選択を前に、時に傷つけ合い、時に励まし合う4人。ナオの写真にかける情熱は彼らにさまざまな選択を迫り、やがて卒業した4人はそれぞれの人生を歩み始める。4年後、久々に再会したナオと小夜、多田は、山田が失踪したことを知る。",
+      "poster": "https://image.tmdb.org/t/p/w500/czP3GUvJwAyAtSPWdLLdPFUfyCN.jpg",
+      "source": "FOD INFO公式配信一覧",
+      "source_url": "https://news.fod.fujitv.co.jp/article/14842",
+      "checked_at": "2026-10-25",
+      "tmdbId": 1263089,
+      "original_title": "ほなまた明日",
+      "year": 2024,
+      "release_year": 2024,
+      "identity_verified_at": "2026-10-25",
+      "id": 1263089,
+      "tmdb": "https://www.themoviedb.org/movie/1263089",
+      "director": "道本咲希",
+      "director_id": 3112298,
+      "cast": [
+        "田中真琴",
+        "Ryota Matsuda",
+        "Risa Shigematsu",
+        "Takuro Akita"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 99,
+      "genres": [
+        "ドラマ"
       ]
     },
     {
@@ -29050,9 +29050,9 @@
       "date": "2026-10-14",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.832,
-      "votes": 107,
-      "overview": "",
+      "score": 6.755,
+      "votes": 204,
+      "overview": "「内なる炎」のレイチェル・モリソン監督が贈る「生涯の愛」。マヤとチャーリーの偶然の出会いは世紀のロマンスへと発展し、マヤの想像を超えた未来が開けていく。だが、その未来は突然 閉ざされ、彼女は思いがけず新たな人生へと投げ出される。マヤは自分が何者で、何を望んでいるのかを見つめ直し、再び人を愛する道を模索する。",
       "poster": "https://image.tmdb.org/t/p/w500/hPGQkr1FqOLOEX5q77KXFa33JYq.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -29073,7 +29073,14 @@
       "countries": [
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 1381078,
+      "cast": [
+        "マーガレット・クアリー",
+        "ガブリエル・バッソ",
+        "アーロン・ピエール",
+        "パトリック・シュワルツェネッガー"
+      ]
     },
     {
       "id": 1234139,
@@ -29111,9 +29118,9 @@
       "date": "2026-10-15",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
+      "score": 7.324,
+      "votes": 5711,
+      "overview": "大手メディア「デイリー・プラネット」で平凡に働くクラーク・ケント、彼の本当の正体は人々を守るヒーロー「スーパーマン」。子どもも大人も、愛する地球で生きるすべての人を守り救うため、日々戦うスーパーマンは、誰からも愛される存在。そんな中、彼を地球の脅威とみなし暗躍する、最高の頭脳を持つ宿敵＝天才科学者して大富豪、レックス・ルーサーの世界を巻き込む綿密な計画が動き出すー",
       "poster": "https://image.tmdb.org/t/p/w500/eFnvujCLaUbhmrsRZzFy1bpdMko.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -29123,7 +29130,26 @@
       "tmdb": "https://www.themoviedb.org/movie/1061474",
       "release_year": 2025,
       "original_title": "Superman",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 1061474,
+      "year": 2025,
+      "director": "ジェームズ・ガン",
+      "director_id": 15218,
+      "cast": [
+        "デヴィッド・コレンスウェット",
+        "レイチェル・ブロズナハン",
+        "ニコラス・ホルト",
+        "エディ・ガテギ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 130,
+      "genres": [
+        "サイエンスフィクション",
+        "アドベンチャー",
+        "アクション"
+      ]
     },
     {
       "id": 59352,
@@ -29491,7 +29517,7 @@
       "date": "2026-10-16",
       "event": "streaming",
       "service": "Disney+",
-      "score": 7.125,
+      "score": 7.1,
       "votes": 4,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/2iMiErHxi3prW3J2ZjFiChfhptt.jpg",
@@ -29503,16 +29529,34 @@
       "original_title": "KATSEYE: Wild Hearts",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1728113,
+      "tmdb": "https://www.themoviedb.org/movie/1728113",
+      "director": "Nadia Hallgren",
+      "director_id": 1484586,
+      "cast": [
+        "Sophia Laforteza",
+        "Daniela Avanzini",
+        "Lara Raj",
+        "Megan Skiendiel"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 80,
+      "genres": [
+        "ドキュメンタリー",
+        "音楽"
+      ]
     },
     {
       "title": "マスタープラン",
       "date": "2026-10-16",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.14,
-      "votes": 107,
-      "overview": "",
+      "score": 6.857,
+      "votes": 228,
+      "overview": "ある伝説の泥棒が「モナ・リザ」を狙い、見知らぬ２人の若者を仲間に引き入れる。１人はイタリア人のサイバー犯罪のスペシャリスト、キアラ。もう１人はフランス人の爆発物のスペシャリスト、ジェイだ。そして自分が２人の父親であることを明かす。怒濤の展開で急に家族となった彼らが世紀の大強盗を成功させるには、協力し合い、互いに殺し合わないように努めなければならない。",
       "poster": "https://image.tmdb.org/t/p/w500/8EPrnSM1MjDd9NGuzXrcI5KlG9e.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -29534,7 +29578,14 @@
         "France",
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 1561726,
+      "cast": [
+        "スタンリー・トゥッチ",
+        "Simona Tabasco",
+        "Victor Belmondo",
+        "Eliott Margueron"
+      ]
     },
     {
       "original_title": "The Last Duel",
@@ -29653,7 +29704,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 6.7,
-      "votes": 101,
+      "votes": 103,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/sM1CDaFdb4WNjtxsbV1Rw78km0A.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -29678,7 +29729,14 @@
       "countries": [
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 1280282,
+      "cast": [
+        "Laila Lockhart Kraner",
+        "グロリア・エステファン",
+        "クリステン・ウィグ",
+        "Logan Bailey"
+      ]
     },
     {
       "id": 1693902,
@@ -29872,9 +29930,9 @@
     {
       "original_title": "The First Omen",
       "overview": "ローマのある教会で、新たな人生を歩み始めたアメリカ人女性、マーガレット。だが彼女は、悪の化身を生み出そうとする恐るべき陰謀を知ってしまう…。その謎へとつながる真の恐怖への幕が開く…",
-      "poster": "https://image.tmdb.org/t/p/w342/fZ5dtZilmxyEyx4usxW2wSj7S5W.jpg",
-      "score": 6.789,
-      "votes": 1431,
+      "poster": "https://image.tmdb.org/t/p/w500/fZ5dtZilmxyEyx4usxW2wSj7S5W.jpg",
+      "score": 6.791,
+      "votes": 1436,
       "title": "オーメン：ザ・ファースト",
       "release_year": 2024,
       "service": "TELASA",
@@ -29887,12 +29945,27 @@
       "year": 2024,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/437342",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "director": "アルカシャ・スティーブンソン",
+      "director_id": 1706480,
+      "cast": [
+        "ネル・タイガー・フリー",
+        "ラルフ・アイネソン",
+        "ソニア・ブラガ",
+        "Tawfeek Barhom"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 119,
+      "genres": [
+        "ホラー"
+      ]
     },
     {
       "original_title": "山田くんとLv999の恋をする",
       "overview": "彼氏に振られたばかりの大学生・茜（山下美月）がネトゲで出会ったのは、超塩対応の高校生プロゲーマー・山田（作間龍斗）。しかし、無愛想で冷たいやつだと思っていた山田は実は“最強ギャップ男子”だった!!いつもは超塩なのに、ふとしたときに垣間見える山田の無自覚な優しさに少しずつ惹かれていく茜・・・。だが、相手は”恋愛に興味ゼロ”なのに“とにかくモテまくる”難攻不落の強敵で・・・。第一印象最悪から始まった史上最高恋愛難易度の山田との恋は、はたして攻略できるのか！？",
-      "poster": "https://image.tmdb.org/t/p/w342/zu0O71LFTo8Qbicr6fvBRdt4joh.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/zu0O71LFTo8Qbicr6fvBRdt4joh.jpg",
       "score": 6.7,
       "votes": 3,
       "title": "山田くんとLv999の恋をする",
@@ -29907,14 +29980,30 @@
       "year": 2025,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/1420410",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "director": "安川有果",
+      "director_id": 2242054,
+      "cast": [
+        "作間龍斗",
+        "山下美月",
+        "NOA",
+        "月島琉衣"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 118,
+      "genres": [
+        "コメディ",
+        "ロマンス"
+      ]
     },
     {
       "title": "消滅世界",
       "date": "2026-10-22",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 0,
+      "score": 0.0,
       "votes": 0,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/vQmkn610Vj7iQOHeo6DrdPD0f4S.jpg",
@@ -29926,7 +30015,7 @@
       "tmdbId": 1537620,
       "original_title": "消滅世界",
       "runtime": 115,
-      "director": "",
+      "director": null,
       "genres": [
         "ドラマ"
       ],
@@ -29935,20 +30024,15 @@
         "蒔田彩珠",
         "栁俊太郎",
         "恒松祐里",
-        "結木滉星",
-        "富田健太郎",
-        "清水尚弥",
-        "霧島れいか",
-        "松浦りょう",
-        "山中崇",
-        "眞島秀和",
-        "岩田奏"
+        "結木滉星"
       ],
       "release_year": 2025,
       "year": 2025,
       "release_date": "2025-11-28",
       "release_date_source": "tmdb_primary",
-      "identity_source": "https://www.themoviedb.org/movie/1537620"
+      "identity_source": "https://www.themoviedb.org/movie/1537620",
+      "tmdb": "https://www.themoviedb.org/movie/1537620",
+      "director_id": null
     },
     {
       "id": 1283320,
@@ -30251,39 +30335,13 @@
       "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
-      "title": "てんてん ずっと独身でいるつもり？",
-      "date": "2026-10-23",
-      "event": "streaming",
-      "service": "Prime Video",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/4FgmM1wuQxCLzVfPUJNmRyCBMtE.jpg",
-      "source": "Amazon Japan公式 2026年10月新着配信",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
-      "type": "見放題",
-      "checked_at": "2026-10-11",
-      "tmdbId": 1768182,
-      "tmdb": "https://www.themoviedb.org/movie/1768182",
-      "release_year": 2026,
-      "year": 2026,
-      "original_title": "てんてん　ずっと独身でいるつもり？",
-      "director": "箱田優子",
-      "director_id": 2261683,
-      "genres": [],
-      "countries": [
-        "Japan"
-      ],
-      "identity_verified_at": "2026-10-20"
-    },
-    {
       "title": "ウォンカとチョコレート工場のはじまり",
       "date": "2026-10-23",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.033,
-      "votes": 4598,
-      "overview": "",
+      "score": 7.032,
+      "votes": 4623,
+      "overview": "世界中を虜にした名作『チャーリーとチョコレート工場』で有名な工場長ウィリー・ウォンカの若き日の物語。夢見ることを禁じられた町で、ウォンカは母と夢見た世界一のチョコレート工場をつくることができるのか―？「ハリー・ポッター」シリーズのプロデューサーが、次世代のジョニー・デップとの呼び声高いティモシー・シャラメ、名優ヒュー・グラントら超豪華キャストを迎えて贈る、歌と魔法と感動のファンタジー超大作！",
       "poster": "https://image.tmdb.org/t/p/w500/iKYFLQoYQRuogD2mh8QYZQXPnTT.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -30306,7 +30364,51 @@
         "United Kingdom",
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 787699,
+      "cast": [
+        "ティモシー・シャラメ",
+        "Calah Lane",
+        "キーガン＝マイケル・キー",
+        "ヒュー・グラント"
+      ]
+    },
+    {
+      "title": "てんてん ずっと独身でいるつもり？",
+      "date": "2026-10-23",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/4FgmM1wuQxCLzVfPUJNmRyCBMtE.jpg",
+      "source": "Amazon Japan公式 2026年10月新着配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
+      "type": "見放題",
+      "checked_at": "2026-10-11",
+      "tmdbId": 1768182,
+      "tmdb": "https://www.themoviedb.org/movie/1768182",
+      "release_year": 2026,
+      "year": 2026,
+      "original_title": "てんてん　ずっと独身でいるつもり？",
+      "director": "箱田優子",
+      "director_id": 2261683,
+      "genres": [
+        "ドラマ",
+        "ロマンス"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "identity_verified_at": "2026-10-20",
+      "id": 1768182,
+      "cast": [
+        "森香澄",
+        "若葉竜也",
+        "香椎由宇",
+        "芋生悠"
+      ],
+      "runtime": 114
     },
     {
       "original_title": "Dogman",
@@ -30518,19 +30620,38 @@
       "tmdbId": 1532481,
       "tmdb": "https://www.themoviedb.org/movie/1532481",
       "poster": "https://image.tmdb.org/t/p/w500/5GnO3HWgamhpX5BNrgE8RHFzqZn.jpg",
-      "score": 10,
+      "score": 10.0,
       "votes": 1,
       "checked_at": "2026-10-22",
-      "time": "20:00"
+      "time": "20:00",
+      "id": 1532481,
+      "overview": "",
+      "release_year": 2025,
+      "year": 2025,
+      "director": "阪本順治",
+      "director_id": 224663,
+      "cast": [
+        "吉永小百合",
+        "のん",
+        "若葉竜也",
+        "佐藤浩市"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 130,
+      "genres": [
+        "ドラマ"
+      ]
     },
     {
       "title": "ビューティフル・ジャーニー ふたりの時空旅行",
       "date": "2026-10-25",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.142,
-      "votes": 447,
-      "overview": "",
+      "score": 6.146,
+      "votes": 451,
+      "overview": "友人の結婚式で出会った男女がレンタカーのカーナビに導かれてたどり着いた、奇妙な“ドア”。通り抜けると＜人生で一番やり直したい日＞へとタイムスリップしていた…。【最悪な思い出】から【最高の愛】を見つけるための、ふたりの時空旅行がはじまる─。",
       "poster": "https://image.tmdb.org/t/p/w500/y0eo1A4EPKSg380hm4mYNQPuU3O.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -30553,16 +30674,23 @@
         "United States of America",
         "Ireland"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 1241921,
+      "cast": [
+        "コリン・ファレル",
+        "マーゴット・ロビー",
+        "ケヴィン・クライン",
+        "フィービー・ウォーラー＝ブリッジ"
+      ]
     },
     {
       "title": "脳内ニューヨーク",
       "date": "2026-10-25",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
+      "score": 7.513,
+      "votes": 1706,
+      "overview": "ケイデン・コタードはニューヨークに住む劇作家。平凡だった彼の日常は、ある日を境に変わっていく。 額を切って病院へ行けば、原因不明の病気と診断され、家族からは、自分が演出した自信満々の舞台をけなされる。 夫婦仲も上手くいかず、遂には愛する妻と娘に捨てられてしまう。新しい恋人を作ろうとするも、優柔不断で逃げられて…。 そんな失敗続きで、人生に嫌気がさしていた彼の元に、マッカーサー・フェロー賞(別名“天才賞”)を受賞した知らせが届く。 大金と名誉を手に入れた彼は、人生をやり直そうとそのすべてを注ぎ込んだ、一世一代のプロジェクトを実行する。 それは、自分の頭の中に思い描いた理想のニューヨークを本物のニューヨークの中にもう一つ作り、誰も見たことのない舞台を上演する事だった。",
       "poster": "https://image.tmdb.org/t/p/w500/jQQ6JIZ8cFb6rMsRpjcqggKEV49.jpg",
       "source": "公式配信発表（2026-10-22確認）",
       "source_url": "https://www.unext.co.jp/ja/press-room/2026-10-unext-lineup",
@@ -30572,16 +30700,33 @@
       "tmdb": "https://www.themoviedb.org/movie/4960",
       "release_year": 2008,
       "original_title": "Synecdoche, New York",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 4960,
+      "year": 2008,
+      "director": "チャーリー・カウフマン",
+      "director_id": 202,
+      "cast": [
+        "フィリップ・シーモア・ホフマン",
+        "サマンサ・モートン",
+        "ミシェル・ウィリアムズ",
+        "キャサリン・キーナー"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 124,
+      "genres": [
+        "ドラマ"
+      ]
     },
     {
       "title": "ロード・オブ・ザ・リング",
       "date": "2026-10-26",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 8.447,
-      "votes": 28622,
-      "overview": "",
+      "score": 8.45,
+      "votes": 28782,
+      "overview": "はるか昔。闇の冥王サウロンは世界を滅ぼす魔力を秘めたひとつの指輪を作り出した。指輪の力に支配された中つ国では一人の勇者がサウロンの指を切り落とし、国を悪から救った。それから数千年の時を経た中つ国第3世紀。ある時、指輪がホビット族の青年フロドの手に渡る。しかし、指輪を取り戻そうとするサウロンの部下が迫っていた。世界を守るためには指輪をオロドルイン山の火口、“滅びの亀裂”に投げ込み破壊するしか方法はない。そこでフロドを中心とする9人の仲間が結成され、彼らは“滅びの亀裂”目指し、遥かなる冒険の旅に出るのだった。",
       "poster": "https://image.tmdb.org/t/p/w500/9H6kyppkOJ1xkVN1s3LIFcPQKPO.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -30604,16 +30749,23 @@
         "New Zealand",
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 120,
+      "cast": [
+        "イライジャ・ウッド",
+        "イアン・マッケラン",
+        "ヴィゴ・モーテンセン",
+        "ショーン・アスティン"
+      ]
     },
     {
       "title": "ロード・オブ・ザ・リング／二つの塔",
       "date": "2026-10-26",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 8.431,
-      "votes": 24787,
-      "overview": "",
+      "score": 8.432,
+      "votes": 24910,
+      "overview": "オーク達の襲撃で離散してしまった「旅の仲間」達。フロドとサムは独力でモルドールの滅びの山への旅路を続けていた。荒涼とした景色が広がるをエミン・ムイル行くその2人の後を指輪の前の持ち主ゴラムが追跡していた。ゴラムを罠に掛けて捕らえた2人だが、すぐに殺そうと主張するサムに対し、フロドはエルフの綱につながれて苦しむゴラムを哀れに思い綱をほどく。フロドは情けをかけてゴラムを信じ、モルドールへの道案内を任せる事にする。",
       "poster": "https://image.tmdb.org/t/p/w500/3BEdEW1xzfXSohN9RSFxWe1inIW.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
@@ -30636,7 +30788,14 @@
         "New Zealand",
         "United States of America"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 121,
+      "cast": [
+        "イライジャ・ウッド",
+        "イアン・マッケラン",
+        "ヴィゴ・モーテンセン",
+        "ショーン・アスティン"
+      ]
     },
     {
       "title": "ロード・オブ・ザ・リング／王の帰還",
@@ -31509,6 +31668,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "グーニーズ",
+      "date": "2026-11-01",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/cwVBY1pHjK2Q2lAWjmzvW337VtV.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "グレムリン",
       "date": "2026-11-01",
       "event": "streaming",
@@ -31529,19 +31701,6 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/dWQsE1XLd6qsmunlNEQneCY96Fu.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "グーニーズ",
-      "date": "2026-11-01",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/cwVBY1pHjK2Q2lAWjmzvW337VtV.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -31768,6 +31927,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "おとななじみ",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "ABEMA",
+      "source": "ABEMA 2026年11月無料初配信",
+      "source_url": "https://prtimes.jp/main/html/rd/p/000004182.000064643.html",
+      "poster": "https://image.tmdb.org/t/p/w500/sUjXX4cDuuSFqrkMGc48tGvaah2.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "48時間",
       "date": "2026-11-02",
       "event": "streaming",
@@ -31819,19 +31991,6 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "インディ・ジョーンズ最後の聖戦",
-      "date": "2026-11-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/tpuICVAMw6oLuAxf9fR024feV9f.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
       "title": "イーグル・アイ",
       "date": "2026-11-02",
       "event": "streaming",
@@ -31839,6 +31998,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/vgZMfSTHLYTzIURja5bmoJuF81Y.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "インディ・ジョーンズ最後の聖戦",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/tpuICVAMw6oLuAxf9fR024feV9f.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -31896,12 +32068,13 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "スター・トレックVIII　ファースト・コンタクト",
+      "title": "スター・トレックV　新たなる未知へ",
       "date": "2026-11-02",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/6bxXQc57HxA2ymJESbheb78EczO.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -31921,13 +32094,12 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "スター・トレックV　新たなる未知へ",
+      "title": "スター・トレックVIII　ファースト・コンタクト",
       "date": "2026-11-02",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/6bxXQc57HxA2ymJESbheb78EczO.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -31960,19 +32132,6 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "トゥルーマン・ショー",
-      "date": "2026-11-02",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/wDDMFUO91fTPig1F7Ht5gbcYBce.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
       "title": "トゥルー･グリット",
       "date": "2026-11-02",
       "event": "streaming",
@@ -31980,6 +32139,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/3ybjmknlrIckQmQB0qzhURz4Qab.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "トゥルーマン・ショー",
+      "date": "2026-11-02",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/wDDMFUO91fTPig1F7Ht5gbcYBce.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -32234,6 +32406,58 @@
       "service": "FOD",
       "source": "FOD 11月上半期新規配信予定",
       "source_url": "https://help.fod.fujitv.co.jp/hc/ja/articles/11949370386585-11%E6%9C%88%E4%B8%8A%E5%8D%8A%E6%9C%9F%E6%96%B0%E8%A6%8F%E9%85%8D%E4%BF%A1%E4%BA%88%E5%AE%9A-FOD%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0-%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ダーティ･マネー",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/2XkmblX1FB1v4Pb9GQlmhSe861e.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ディープ･ウォーター",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/f90xO280gGQArVP2GU4IshAClt.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "デビルズ･バス",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/pKXDD5LXPtWpXEBVTjWHi4x1eTQ.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ラスト･エージェント 最高機密プロトコル",
+      "date": "2026-11-05",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/cbKFcDZmHdjWoMNMQLMD9QBDJmg.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -32544,6 +32768,31 @@
       "checked_at": "2026-10-29T22:44:24.256028+00:00"
     },
     {
+      "title": "アプレンティス：ドナルド･トランプの創り方",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/549Hdul2BgPnZMhqFxp6npp2opr.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "優しき罪人 (つみびと)",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "id": 1483525,
       "tmdbId": 1483525,
       "original_title": "가능한 사랑",
@@ -32587,6 +32836,30 @@
       "identity_source": "https://www.themoviedb.org/movie/1483525"
     },
     {
+      "title": "マッド・マックス",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "マッド・マックス２",
+      "date": "2026-11-06",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "About Amazon Japan 2026年11月",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "マッドマックス　怒りのデス・ロード",
       "date": "2026-11-06",
       "event": "streaming",
@@ -32594,19 +32867,6 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/auGxRPeTiC5p95sWktXJ4uIi6a4.jpg",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "マッドマックス／サンダードーム",
-      "date": "2026-11-06",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "poster": "https://image.tmdb.org/t/p/w500/exCsTKQROJyOeRAZntZPZaS9cjA.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -32626,24 +32886,13 @@
       "checked_at": "2026-11-05"
     },
     {
-      "title": "マッド・マックス",
+      "title": "マッドマックス／サンダードーム",
       "date": "2026-11-06",
       "event": "streaming",
       "service": "Prime Video",
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
-      "score": 0,
-      "votes": 0,
-      "overview": "",
-      "checked_at": "2026-11-05"
-    },
-    {
-      "title": "マッド・マックス２",
-      "date": "2026-11-06",
-      "event": "streaming",
-      "service": "Prime Video",
-      "source": "About Amazon Japan 2026年11月",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "poster": "https://image.tmdb.org/t/p/w500/exCsTKQROJyOeRAZntZPZaS9cjA.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -32809,6 +33058,82 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "アメリカン･アサシン",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/w6vjeHx3UEaBXIyc8VFqyZYKznD.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "アンジーのBARで逢いましょう",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/4EEqMMhKiEurKxWA4UPkJ3zs3Oy.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ヒットマン リサージェンス",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "大海原のソングライン",
+      "date": "2026-11-07",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "2025年7月5日午前4時18分",
+      "date": "2026-11-08",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/l3RQkjKmyXYygOhxGR53rlzQJyw.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "デュー あの時の君とボク",
+      "date": "2026-11-08",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/wA2H70y0G86wYm0HtE1TIkVGgU4.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "劇場版 ソードアート・オンライン -オーディナル・スケール-",
       "date": "2026-11-08",
       "event": "streaming",
@@ -32848,6 +33173,19 @@
       "checked_at": "2026-11-05"
     },
     {
+      "title": "アンダードッグ／二人の男",
+      "date": "2026-11-09",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/zGNJvCq0q98tElqeJlaOFGy8RrR.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
       "title": "ツイスターズ",
       "date": "2026-11-09",
       "event": "streaming",
@@ -32855,6 +33193,19 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/nfvTIg8Oa7iM7kXyKxJLh7Zgt5S.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "こんにちは、私のお母さん",
+      "date": "2026-11-10",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/1HLWXFfmCuWKJJXwF08k8tQrlzC.jpg",
       "score": 0,
       "votes": 0,
       "overview": "",
@@ -32945,6 +33296,92 @@
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
       "poster": "https://image.tmdb.org/t/p/w500/d06Eb5ORa7zyygZYUL7zvZuveXU.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "search／#サーチ2",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/dHR3WAUmFJ2Ka2YBzn0nK5O2KME.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "search／サーチ",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "poster": "https://image.tmdb.org/t/p/w500/z9k4qQF3bDwnxEREcPkPdtYIhjy.jpg",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "スティール･レイン",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ファイト",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ブラック･ロータス 誓いの刻印",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "ブレス",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "checked_at": "2026-11-05"
+    },
+    {
+      "title": "鬼哭 忌まわしき地",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Hulu",
+      "source": "Hulu まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
       "score": 0,
       "votes": 0,
       "overview": "",

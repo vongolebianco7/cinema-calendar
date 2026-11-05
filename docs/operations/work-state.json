@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T05:55:27Z",
+  "updated_at": "2026-11-05T06:55:25Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
+  "base_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
   "branch": "main",
-  "head_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
+  "head_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
   "pull_request": null,
   "work_items": [
     {
@@ -922,7 +922,7 @@
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Review current production poster evidence and scheduled DB/director runs, then verify feedback E2E; do not merge dirty PR #597 or bypass CI.",
+  "next_action": "Main and both Vercel production builds now READY at 33c0a9ea. Prioritize failed movie-data/DB sync logs, read-only poster/feedback acceptance and event/IMAX provenance; do not mistake READY for functional verification.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2175,16 +2175,16 @@
       "Vercel latest production readiness unverified"
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
-    "checked_at": "2026-11-05T10:02:14+09:00",
-    "main_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
-    "release_decision": "NO-GO pending poster production acceptance, DB sync/director schedule, feedback admin auth/E2E, source freshness, iPhone UI",
-    "new_progress": "PR #599 closed/merged since prior checkpoint; new PR #600 adds verified Hulu/ABEMA November premieres. Its six checks mostly pass, Validate frontend remains in progress. PR #597 is currently mergeable=false and must be rebased before merging; main state file remains stale.",
+    "checked_at": "2026-11-05T15:55:25+09:00",
+    "main_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
+    "release_decision": "NO-GO; Vercel exact-main frontend/backend READY, outstanding functional/data/security acceptance",
+    "new_progress": "PR #603 no longer open; latest main 33c0a9ea and Vercel production frontend/backend both READY. Main smoke/completeness/Pages publish passed. Earlier Update movie data run failed on 41400f48; must inspect subsequent runs and logs before claiming recovery.",
     "next_steps": [
-      "Wait for PR #600 Validate frontend final status and review exact official-source evidence before merge",
-      "Rebase PR #597 onto current main and resolve checkpoint conflict without overwriting historical records",
-      "Reproduce and measure production poster failures across routes and iPhone WebKit",
-      "Inspect director-refresh and backend DB-sync failure logs; preserve Neon Free quota and existing user data",
-      "Complete production feedback authorization/persistence and analytics acceptance, event/IMAX source audit; release remains NO-GO"
+      "Inspect failed Update movie data run for 41400f48 and latest director/DB-sync runs; do not trigger paid Neon transfer or write user data",
+      "Run read-only live poster and feedback/analytics acceptance against canonical production",
+      "Review approved event/IMAX sources and November per-provider coverage",
+      "Resolve stale #597; keep #526 pending security review and #514 draft",
+      "Do not mark GO until independent functional evidence is captured"
     ],
     "checkpoint_at": "2026-11-05T10:58:22+09:00",
     "completed_since_previous": [
@@ -2221,33 +2221,31 @@
   },
   "release_gate": {
     "status": "NO-GO",
-    "verified_at": "2026-11-05T05:55:27Z",
-    "main_sha": "55079c1bb220686296bd2638707f63caf139ba7c",
+    "verified_at": "2026-11-05T06:55:25Z",
+    "main_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
     "open_prs": [
-      603,
       597,
       526,
       514
     ],
     "poster_issue_593": "closed; production cross-route image coverage and iPhone Safari not verified",
-    "ci": "PR #603 head ebc0dfdc: six checks success; Validate frontend in progress",
-    "vercel": "main 55079c1b frontend and backend production deployments CANCELED; prior 4e560246 production READY",
+    "ci": "main 33c0a9ea: completeness, Pages publish, smoke and Pages deployment success. Earlier 41400f48 Update movie data failure; latest scheduled recovery not yet established.",
+    "vercel": "Vercel production frontend cinema-calendar and backend both READY for exact main 33c0a9ea (2026-11-05 15:55 JST check). This replaces prior canceled-deploy blocker; live functional acceptance remains outstanding.",
     "remaining": [
-      "PR #603 Validate frontend completion and review",
-      "investigate production deployment cancellations and verify active aliases",
-      "director update and DB sync scheduled workflows",
-      "November streaming per-provider live coverage",
-      "events and IMAX automation provenance/freshness",
-      "feedback persistence/admin authorization and analytics acceptance",
-      "poster cross-route image success and iPhone WebKit",
-      "UI/security/data-preservation regression"
+      "Read-only cross-route poster image success and iPhone Safari",
+      "Director refresh, movie-data scheduled failure and DB sync logs/quota",
+      "Per-provider November streaming and official source coverage",
+      "Event/IMAX provenance, freshness and automation",
+      "Anonymous feedback persistence, admin authorization, analytics",
+      "Security, user-data preservation and physical iPhone acceptance",
+      "Review #526 and supersede conflicting #597 without erasing history"
     ],
     "next_actions": [
-      "Wait for #603 Validate frontend, inspect failures before merge",
-      "Audit scheduled director and DB sync runs/logs without mutating production data",
-      "Check Vercel production aliases and cancellation reasons",
-      "Run read-only live smoke and acceptance tests",
-      "Only mark GO when production and all required acceptance gates have evidence"
+      "Inspect failed Update movie data run for 41400f48 and latest director/DB-sync runs; do not trigger paid Neon transfer or write user data",
+      "Run read-only live poster and feedback/analytics acceptance against canonical production",
+      "Review approved event/IMAX sources and November per-provider coverage",
+      "Resolve stale #597; keep #526 pending security review and #514 draft",
+      "Do not mark GO until independent functional evidence is captured"
     ]
   }
 }

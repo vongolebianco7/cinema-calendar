@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T18:11:24.104Z",
+  "updated_at": "2026-11-05T20:03:02.295Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+  "base_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
   "branch": "main",
-  "head_sha": "81f931f4790f6d1b4312030774b8b75bd4e17bdd",
+  "head_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
   "pull_request": null,
   "work_items": [
     {
@@ -908,22 +908,29 @@
     "Price readability582: source935bc076 all6 CI, receipt6e958a35 all7 CI; clean shared quality489+6/invoked Python; WebKit390 light/dark reviewed; formal URL8 files/API/browser scoped smoke passed. No production mobile/physical Safari claim."
   ],
   "deployment": {
-    "status": "production_verified",
+    "status": "NO-GO",
     "canonical_url": "https://cinelva.vercel.app",
-    "current_serving_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-    "current_frontend_deployment_id": "dpl_45Zzh4Z6n8v84yYNJwnc3v7JjyZM",
-    "note": "User-authorized release573 and follow-up price correction582 deployed. Both aliases READY atd3cf7546;8 canonical files byte-match, read-only detail API200 and desktop price/date/popover checks passed. Physical iPhone and broad legal/data/free-quota gates remain unresolved.",
-    "user_approval_required": true,
-    "current_backend_deployment_id": "dpl_2vhjbNsZtTZbNtZq9LSMATrTK6ms",
-    "current_release_user_approved": true
+    "main_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "github_pages_url": "https://vongolebianco7.github.io/cinema-calendar/",
+    "github_pages_deployed": true,
+    "github_pages_run_id": 42099191201,
+    "vercel_frontend_latest_ready_sha": "0c7b4f55bab9f70e0fb7062a29b8dd99c64c07fd",
+    "vercel_backend_latest_ready_sha": "a1c93bc0149d38a410e5245f1ca745d620b59657",
+    "vercel_latest_failed_backend_sha": "e6c0a5e5fdf404c13f79176c0fe659b72a88aaf8",
+    "vercel_failure": "Main deploy blocked at verify-production-release until PR #636 updated proof; latest main proof gate now passed, but Vercel returned build-rate-limit on PR statuses and no deployment exists for main 1526d3e.",
+    "proof_head_sha": "34140cfd426fa469930d6451d79aed95b3951c08",
+    "production_verified": false,
+    "user_approval_required": false
   },
   "blockers": [
-    "FEEDBACK_ADMIN_TOKEN is absent from Vercel production environment; owner must set it before authorized admin-list/status acceptance can be completed.",
-    "Physical iPhone Safari acceptance remains unverified.",
-    "Neon Free transfer quota remains a blocker for another production movie/DB sync; do not retry or restart compute before quota reset/available allowance.",
-    "Complete provider catalogue coverage is unavailable from approved dated official feeds; do not claim exhaustive streaming availability."
+    "Vercel production deploys are blocked by the account's daily deployment API limit (Vercel reported more than 100 deployments/day and 24h retry-after); keep Hobby/free settings and retry after reset. No Vercel production deployment for main 1526d3e is present.",
+    "FEEDBACK_ADMIN_TOKEN is absent from backend production env. Do not invent or expose a key; owner must configure it before admin list/status acceptance.",
+    "Production admin acceptance and a real anonymous submit-to-persist-to-admin verification remain incomplete. Do not write a production test feedback row without a way to remove it.",
+    "Physical iPhone Safari acceptance remains unverified; Chromium/WebKit CI passed.",
+    "Only anime-related movie broadcasts from Syoboi are automated (13 upcoming records). Nationwide terrestrial TV, theatrical showtimes, film events and special screenings remain partial/manual pending authorized comprehensive feeds; no scraping.",
+    "Vercel Web Analytics pageviews are queryable; Vercel custom-event querying returns Pro-only 402. First-party aggregate feature counters are implemented on the existing database but no events are yet recorded."
   ],
-  "next_action": "Refresh latest main, PR heads and exact-head checks. Resolve PR #629 receipt proof and PR #627 mirrored-route fix safely; continue independent unfinished P0 work during any CI wait. Then close superseded #622 if its only useful route fix is covered, run the approved TV workflow once publication proof is valid, and verify actual production deployment/data before claiming release.",
+  "next_action": "After the Vercel daily deployment limit resets, verify a READY production frontend and backend for current main without changing plans/settings; check /api/tv includes the 13 automated records and verify feedback/admin endpoints without writing an orphaned production test row. Ask owner to set FEEDBACK_ADMIN_TOKEN; complete authorized admin and iPhone acceptance only after that. Keep Issue #585 open and do not claim nationwide TV/event/theatrical automation complete; continue approved-feed discovery without scraping.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -934,10 +941,10 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 582,
-    "merge_sha": "d3cf7546e7910ba9c090f7ccfa7fe4e58657ed74",
-    "head_sha": "6e958a35ebecddd0a0fc42c07a172076b18a1410",
-    "source_sha": "935bc076ac5e44b352eb79e57007ac51d7283af7"
+    "number": 636,
+    "merge_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "head_sha": "ff33ddb14b8b306f62523f42f7edc33540be4b50",
+    "source_sha": "34140cfd426fa469930d6451d79aed95b3951c08"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -2567,40 +2574,55 @@
     "safety": "No user records, ratings, bookmarks, DB, credentials, paid plan or production deployment changed in this run."
   },
   "latest_tv_publish_race_recovery_20261105": {
-    "observed_at": "2026-11-05T19:15:49.055Z",
-    "main_sha": "2d79b0adb615a0a0b0e1df5fb6e131864534e013",
-    "merged": [
+    "observed_at": "2026-11-05T20:03:02.295Z",
+    "main_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "merged_prs": [
       {
-        "pr": 633,
+        "number": 633,
         "sha": "569c7463b03a1ecbddd9328014117e5ba318c1ad",
-        "purpose": "Refresh exact-source proof and trigger the TV feed after receipt publication."
+        "purpose": "Retain source-proof and trigger refresh after proof changes."
+      },
+      {
+        "number": 634,
+        "sha": "b5569a5be830087a3f4323d767c997aba0cb78ee",
+        "purpose": "Retry TV snapshot safely on source-status-only race."
       }
     ],
-    "tv_first_attempt": {
-      "run_id": 42089461238,
-      "result": "13 upcoming Syoboi movie-category records fetched and validated; parser contract 10 tests and quality gate passed; final rebase failed only on concurrent data/source-status.json; no TV/source-status snapshot was pushed and no PostgreSQL was touched."
+    "tv_run": {
+      "run_id": 42092495730,
+      "result": "Success: 13 upcoming anime-related movie broadcast records fetched and quality checks passed; automated snapshot committed as 3fa107b236e570f2ae80cd30f97ec9604752af5e. Production /api/tv still serves only 2 upcoming manually curated rows because Vercel backend is stale."
     },
-    "active_pull_request": {
-      "number": 634,
-      "head": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
-      "title": "retry TV snapshot publication after source-status race",
-      "ci": "Autonomous quality, smoke, Validate frontend Chromium/WebKit, backend build, mobile, completeness all passed on this exact source head; refresh production proof to this SHA and merge only after proof validator succeeds."
+    "source_proof": {
+      "head_sha": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
+      "note": "PR #635 changed executable HTML; PR #636 updated receipt to source SHA 34140cfd426fa469930d6451d79aed95b3951c08 after required workflows passed. Main source digest equality was verified across 1,337 executable entries. Publish verified legacy Pages run 42099191201 succeeded on 1526d3e."
     },
-    "release_decision": "NO-GO",
+    "release_decision": "NO-GO until Vercel production deployment and API verification; no paid plan change.",
     "blockers": [
-      "PR #634 proof refresh/merge and rerun of TV feed still pending.",
-      "Vercel production aliases remain on older source (frontend 0c7b4f5; backend a1c93bc); verify current project deployments after merge without changing Hobby tier.",
-      "FEEDBACK_ADMIN_TOKEN is absent from frontend/backend project environments; owner must configure it for admin feedback acceptance.",
-      "Physical iPhone Safari acceptance is unavailable here; Chromium/WebKit tests are green.",
-      "Full nationwide TV, theatrical schedules, and film-event discovery remain unautomated pending authorized comprehensive sources; the Syoboi feed is anime-related movie-category only."
+      "Vercel daily deployment API limit >100/day; latest backend production deployment failed on stale proof, and no deployment for proof-updated main exists yet.",
+      "FEEDBACK_ADMIN_TOKEN absent; issue #585 admin acceptance pending.",
+      "Broad all-channel TV, theatrical schedule, event and special screening feeds remain partial/manual; only Syoboi movie category is automated."
     ],
     "next_actions": [
-      "After proof renewal, run scripts/verify-production-release.cjs --require on the current PR branch and merge #634 against exact tested head.",
-      "Verify the new main push automatically launches Refresh anime-related movie TV broadcasts; confirm retry behavior, 13 candidates/matches/insertions and updated source-status; do not call zero or partial coverage complete.",
-      "Verify Publish verified legacy Pages and Vercel frontend/backend deployments on current main; if Vercel Git integration does not deploy, diagnose before creating any production deployment.",
-      "Fetch production /api/tv and confirm new data is visible, without submitting dummy feedback to production.",
-      "Continue Issue #585 and #239/#242/#243/#244 after external blockers and source authorization are resolved."
+      "Retry Git-connected Vercel production deployments after 24h rate-limit reset; never raise plan or billing.",
+      "Verify frontend feedback link and backend /api/tv against the newly READY aliases.",
+      "Keep #585 open until admin token and safe end-to-end acceptance are verified.",
+      "Continue feed-source research with official/API sources only, no scraping."
+    ]
+  },
+  "issue_585_20261105": {
+    "status": "open_acceptance_incomplete",
+    "implemented": "Anonymous feedback form, durable DB-backed intake, server-side bearer-token admin API/status handling, rate limits/honeypot/validation, privacy-safe pageviews and aggregate feature counters. Added feedback link to all 25 shared drawer menus in PR #635.",
+    "merged_prs": [
+      594,
+      635,
+      636
     ],
-    "safety": "No user ratings, bookmarks, records, PostgreSQL, secrets, paid tier or production deployment changed by the failed TV run."
+    "production": "/feedback.html is reachable on current Vercel frontend, but menu-link source and TV API data have not reached Vercel production. Analytics API returned page views and visitors; custom event API is Pro-only.",
+    "external_blockers": [
+      "FEEDBACK_ADMIN_TOKEN missing in backend production env",
+      "Vercel deployment daily API limit",
+      "iPhone Safari physical acceptance unavailable"
+    ],
+    "next_action": "Owner sets FEEDBACK_ADMIN_TOKEN; after Vercel free limit reset deploy current main, verify anonymous save and admin list/status with disposable controlled test data, non-admin rejection, analytics and real iPhone."
   }
 }

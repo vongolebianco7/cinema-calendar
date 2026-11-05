@@ -52,11 +52,22 @@ def build_report(snapshot, now):
             state = "fresh"
         if mode == "manual":
             result["summary"]["manual"] += 1
+        observations = source.get("observations")
+        coverage = None
+        if isinstance(observations, dict):
+            total = observations.get("total")
+            fresh = observations.get("fresh")
+            stale = observations.get("stale")
+            if all(isinstance(n, int) and not isinstance(n, bool) and n >= 0
+                   for n in (total, fresh, stale)) and fresh + stale <= total:
+                coverage = {"total": total, "fresh": fresh, "stale": stale,
+                            "fresh_pct": round(100 * fresh / total, 1) if total else 0.0}
         item = {"id": key, "acquisition_mode": mode, "health": state,
                 "observed_at": source.get("source_observed_at"),
                 "age_hours": age_hours, "max_age_hours": max_hours,
                 "record_count": source.get("record_count"),
                 "observations": source.get("observations"),
+                "title_level_freshness": coverage,
                 "workflow": source.get("workflow"),
                 "note": "Health reflects source observation age, not complete catalog coverage."}
         result["sources"].append(item)
@@ -83,11 +94,13 @@ def main():
     if summary_path:
         lines = ["## CINELVA source freshness", "",
                  "Source observation age only; **not** evidence of complete catalog coverage.", "",
-                 "| Source | Intake | Health | Observed at |",
-                 "| --- | --- | --- | --- |"]
+                 "| Source | Intake | Health | Observed at | Fresh records |",
+                 "| --- | --- | --- | --- | --- |"]
         for item in report["sources"]:
+            coverage = item["title_level_freshness"]
+            ratio = f"{coverage['fresh']}/{coverage['total']} ({coverage['fresh_pct']}%)" if coverage else "n/a"
             lines.append(f"| {item['id']} | {item['acquisition_mode']} | "
-                         f"{item['health']} | {item['observed_at'] or 'unknown'} |")
+                         f"{item['health']} | {item['observed_at'] or 'unknown'} | {ratio} |")
         with open(summary_path, "a", encoding="utf-8") as output:
             output.write("\n".join(lines) + "\n")
 

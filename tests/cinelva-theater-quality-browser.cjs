@@ -7,12 +7,15 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
   const context=await browser.newContext({viewport:{width:390,height:844}});
   await context.route('https://backend-one-gray-94.vercel.app/**',r=>r.abort());
+  let theaterFixtureHits=0,osmFixtureHits=0;
   const theaters=[{name:'Cinema',source:'Wikidata',source_id:'Q1',lat:35,lon:139},{name:'Cinema',source:'Wikidata',source_id:'Q2',lat:36,lon:140},{name:'Cinema closed',status:'closed',source:'Wikidata',source_id:'Q3'}];
-  await context.route('**/data/theaters_master.json?*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters})}));
-  await context.route('**/data/theaters_osm.json?*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters:[{name:'Cinema',lat:35,lon:139,source:'OpenStreetMap',osm_type:'node',osm_id:1}]})}));
+  await context.route(url=>new URL(url).pathname==='/data/theaters_master.json',async r=>{theaterFixtureHits++;await r.fulfill({contentType:'application/json',body:JSON.stringify({theaters})})});
+  await context.route(url=>new URL(url).pathname==='/data/theaters_osm.json',async r=>{osmFixtureHits++;await r.fulfill({contentType:'application/json',body:JSON.stringify({theaters:[{name:'Cinema',lat:35,lon:139,source:'OpenStreetMap',osm_type:'node',osm_id:1}]})})});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/theaters.html?search=Cinema`);
   await page.locator('#grid .theaterTable').waitFor();
+  await page.waitForFunction(()=>document.querySelectorAll('#grid .theaterName').length>=2);
+  assert.ok(theaterFixtureHits>0&&osmFixtureHits>0,'theater fixtures must be intercepted for the selected browser');
   assert.equal((await page.locator('#grid .theaterName').allTextContents()).filter(name=>name==='Cinema').length,2);
   assert.equal(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.some(s=>s.includes('closed'))),false);
   assert.match(await page.locator('#theaterOperationNote').innerText(),/営業状況は未確認/);

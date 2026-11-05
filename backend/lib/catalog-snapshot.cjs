@@ -6,7 +6,13 @@ const venues=require('../../data/theaters_master.json');
 const compact=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'');
 const bounded=value=>Number.isFinite(Number(value))?Math.min(100,Math.max(1,Math.floor(Number(value)))):50;
 function calendarSnapshot(){return {generated_at:films.generated_at,movies:films.movies};}
-function tvSnapshot(){return {generated_at:television.generated_at,movies:television.movies};}
+function tvSnapshot(){return {generated_at:television.automation_checked_at||television.generated_at,movies:television.movies};}
+function televisionKey(row){return [row?.title,row?.date,row?.service].map(value=>String(value||'').normalize('NFKC').trim().toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'')).join('|');}
+function mergeTelevisionRows(databaseRows,snapshotMovies=television.movies){
+ const rows=Array.isArray(databaseRows)?databaseRows.filter(row=>row&&typeof row==='object'):[],keys=new Set(rows.map(televisionKey));
+ for(const row of Array.isArray(snapshotMovies)?snapshotMovies:[]){if(!row||typeof row!=='object')continue;const key=televisionKey(row);if(!keys.has(key)){rows.push(row);keys.add(key);}}
+ return rows.sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.time||'').localeCompare(String(b.time||''))||String(a.service||'').localeCompare(String(b.service||'')));
+}
 function movieSnapshot(query='',limit=50){
  const term=compact(query),seen=new Set();
  const movies=films.movies.filter(m=>{
@@ -41,4 +47,4 @@ function createReadFallback({timeoutMs=1500,cooldownMs=60000,now=Date.now}={}){
  };
 }
 const readWithSnapshot=createReadFallback();
-module.exports={createReadFallback,readWithSnapshot,calendarSnapshot,movieSnapshot,tvSnapshot,theaterSnapshot,releaseSnapshot};
+module.exports={createReadFallback,readWithSnapshot,calendarSnapshot,movieSnapshot,tvSnapshot,mergeTelevisionRows,theaterSnapshot,releaseSnapshot};

@@ -78,6 +78,20 @@
       "record_count": 16
     },
     {
+      "id": "anime-film-tv-broadcasts",
+      "name": "アニメ関連映画のテレビ放映（公開API）",
+      "status": "automated",
+      "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
+      "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
+      "source_observed_at": null,
+      "max_age_hours": 48,
+      "freshness": "unknown",
+      "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
+      "trigger": "daily 17:30 UTC and manual; scheduled before the 18:17 UTC TMDB enrichment job; randomized 1–30 second delay before feed; sequential title lookups with at least one second between requests",
+      "coverage": "しょぼいカレンダーが扱うアニメ・関連番組のうち映画カテゴリ。全国の全局・全映画放送の網羅ではありません。",
+      "record_count": 0
+    },
+    {
       "id": "box-office",
       "name": "興行収入",
       "status": "manual",

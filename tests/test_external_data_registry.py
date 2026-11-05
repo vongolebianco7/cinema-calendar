@@ -15,7 +15,7 @@ class ExternalDataRegistryTests(unittest.TestCase):
         payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
         rows = payload["categories"]
         categories = {row["category"] for row in rows}
-        self.assertTrue({"streaming", "theater-schedules", "theater-directory", "television", "box-office", "movies-posters", "awards", "features", "劇場公開中作品", "映画祭・映画イベント", "屋外上映イベント", "特別上映", "リバイバル上映"} <= categories)
+        self.assertTrue({"streaming", "theater-schedules", "theater-directory", "television", "anime-film-tv-broadcasts", "box-office", "movies-posters", "awards", "features", "劇場公開中作品", "映画祭・映画イベント", "屋外上映イベント", "特別上映", "リバイバル上映"} <= categories)
         self.assertEqual(len({row["id"] for row in rows}), len(rows))
         for row in rows:
             self.assertIn(row["status"], {"automated", "manual", "disabled-pending-permission", "disabled-resource-scope", "unavailable"})

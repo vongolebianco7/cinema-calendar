@@ -298,6 +298,7 @@ for m in tv_data.get("movies",[]):
   tv_updated=True
  except Exception as e:print("TV metadata skipped",m.get("title"),e)
 if tv_updated:
+ tv_data["automated_movies"]=[m for m in tv_data.get("movies",[]) if m.get("source_id")=="syoboi_calendar"]
  with open("data/tv.json","w",encoding="utf-8") as fh:
   json.dump(tv_data,fh,ensure_ascii=False,indent=2)
 

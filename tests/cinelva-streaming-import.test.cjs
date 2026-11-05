@@ -16,7 +16,7 @@ function feed(){
   coverage_audit:{auditor:'fixture',method:'complete feed reconciliation',all_supported_services_verified:true},
   services};
 }
-test('accepts only a complete, audited, rights-cleared feed for all 8 services',()=>{
+test('accepts only a complete, audited, rights-cleared feed for all 12 services',()=>{
  assert.equal(validateImport(feed(),now).ok,true);
 });
 test('blocks missing licenses and missing coverage audit',()=>{
@@ -24,6 +24,6 @@ test('blocks missing licenses and missing coverage audit',()=>{
  const b=feed();delete b.coverage_audit;assert.equal(validateImport(b,now).ok,false);
 });
 test('blocks even one missing provider or partial provider catalog',()=>{
- const a=feed();delete a.services.WOWOW;assert.equal(validateImport(a,now).ok,false);
+ const a=feed();delete a.services.ABEMA;assert.equal(validateImport(a,now).ok,false);
  const b=feed();b.services.Netflix.coverage='partial';assert.equal(validateImport(b,now).ok,false);
 });

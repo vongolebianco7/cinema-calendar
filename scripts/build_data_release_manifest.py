@@ -34,6 +34,31 @@ def manifest_for(paths, root, source_sha, observed_at):
             "note": "Candidate only; no CI receipt, publication or DB parity proof."}
 
 
+
+def verify_manifest(manifest, root):
+    """Rehash files before downstream use; reject modified or missing candidates."""
+    if not isinstance(manifest, dict) or manifest.get("status") != "candidate":
+        raise ValueError("only candidate manifests can be verified")
+    source_sha = manifest.get("source_commit_sha")
+    if not isinstance(source_sha, str) or len(source_sha) != 40 or any(
+        c not in "0123456789abcdef" for c in source_sha.lower()
+    ):
+        raise ValueError("invalid pinned source SHA")
+    snapshots = manifest.get("snapshots")
+    if not isinstance(snapshots, list) or not snapshots:
+        raise ValueError("manifest snapshots must be nonempty")
+    root = root.resolve()
+    paths = []
+    for entry in snapshots:
+        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
+            raise ValueError("invalid snapshot entry")
+        paths.append(Path(entry["path"]))
+    actual = manifest_for(paths, root, source_sha, manifest.get("observed_at"))
+    if actual["snapshots"] != snapshots or actual["dataset_version"] != manifest.get("dataset_version"):
+        raise ValueError("candidate checksum or dataset version mismatch")
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))

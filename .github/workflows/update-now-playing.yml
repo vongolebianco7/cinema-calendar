@@ -6,6 +6,7 @@ on:
     paths:
       - scripts/update_now_playing.py
       - .github/workflows/update-now-playing.yml
+      - quality/production-proof.json
   schedule:
     - cron: '13 18 * * *'
 permissions:

@@ -1,4 +1,4 @@
-import { readWithSnapshot, tvSnapshot } from "../../../lib/catalog-snapshot.cjs";
+import { readWithSnapshot, tvSnapshot, mergeTelevisionRows } from "../../../lib/catalog-snapshot.cjs";
 import { prisma } from "../../../lib/prisma";
 import { json, rateLimited, options } from "../../../lib/http";
 
@@ -10,11 +10,8 @@ export async function GET(request: Request) {
   const rows = await prisma.tvBroadcast.findMany({
     orderBy: [{ date: "asc" }, { time: "asc" }, { service: "asc" }],
   });
-
-  return {
-    generated_at: new Date().toISOString(),
-    movies: rows.map((row) => row.payload),
-  };
+  const snapshot = tvSnapshot();
+  return { ...snapshot, generated_at: new Date().toISOString(), movies: mergeTelevisionRows(rows.map((row) => row.payload), snapshot.movies) };
   }, tvSnapshot));
 }
 

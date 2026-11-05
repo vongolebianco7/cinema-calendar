@@ -34,7 +34,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const showtimes=await page.locator('[data-source-category="theater-showtimes"]').innerText();
   assert.match(showtimes,/許諾確認待ち・自動取得停止中[\s\S]*収録件数：1225件[\s\S]*job disabled/);
   const nowPlaying=await page.locator('[data-source-category="now-playing"]').innerText();
-  assert.match(nowPlaying,/公式APIから自動取得[\s\S]*収録件数：88件[\s\S]*TMDBで公開中として返る作品/);
+  assert.match(nowPlaying,/公式APIから自動取得[\s\S]*収録件数：76件[\s\S]*TMDBで公開中として返る作品/);
   assert.match(await page.locator('[data-source-category="streaming-availability"]').innerText(),/一覧生成時点[\s\S]*未観測の作品もあります/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.equal(await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2')),null);

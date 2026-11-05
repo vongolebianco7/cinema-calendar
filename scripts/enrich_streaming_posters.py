@@ -16,27 +16,83 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 INPUT = ROOT / "data/streaming-official-current.json"
+CATALOG = ROOT / "data/movies.json"
 BASE = "https://api.themoviedb.org/3/search/movie"
+DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
+LOCAL_TITLE_ALIASES = {
+    # U-NEXT adds the descriptive "映画" prefix to its official title.
+    "映画 仮面ライダーゼッツ さよならのミッション": "仮面ライダーゼッツ さよならのミッション",
+}
 
 
 def normalize(value):
     return "".join(c for c in unicodedata.normalize("NFKC", str(value or "")).casefold() if c.isalnum())
 
 
-def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35):
+def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, catalog_path=CATALOG):
     api_key = api_key or os.environ.get("TMDB_API_KEY", "")
-    if not api_key:
-        raise ValueError("TMDB_API_KEY is required; existing generated data is preserved")
     data = json.loads(path.read_text(encoding="utf-8"))
     rows = data.get("movies") if isinstance(data, dict) else None
     if not isinstance(rows, list) or not rows:
         raise ValueError("Official streaming output is invalid; existing data is preserved")
 
+    # Reuse existing, locally reviewed TMDB identities where the announced
+    # title has exactly one normalized match in the canonical movie catalog.
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8")) if catalog_path.exists() else {}
+    by_title = {}
+    for item in catalog.get("movies", []) if isinstance(catalog, dict) else []:
+        if not isinstance(item, dict) or not item.get("id") or not item.get("poster"):
+            continue
+        for name in (item.get("title"), item.get("original_title")):
+            key = normalize(name)
+            if key:
+                by_title.setdefault(key, {})[str(item["id"])] = item
+
     last_request = 0.0
     enriched = ambiguous = unresolved = 0
     for movie in rows:
         if movie.get("poster"):
+            continue
+        reviewed_id = movie.get("tmdb_id")
+        if isinstance(reviewed_id, int) and reviewed_id > 0:
+            if not api_key:
+                unresolved += 1
+                continue
+            request = urllib.request.Request(
+                DETAILS.format(reviewed_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
+                headers={"Accept": "application/json"},
+            )
+            try:
+                with opener(request, timeout=15) as response:
+                    result = json.load(response)
+                if result.get("id") != reviewed_id or not result.get("poster_path"):
+                    unresolved += 1
+                    continue
+                movie["poster"] = IMAGE_BASE + result["poster_path"]
+                movie["id"] = reviewed_id
+                movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(reviewed_id)
+                enriched += 1
+            except Exception:
+                unresolved += 1
+            continue
+        exact = {}
+        for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
+            exact.update(by_title.get(normalize(name), {}))
+        if len(exact) == 1:
+            identity = next(iter(exact.values()))
+            movie["poster"] = identity["poster"]
+            movie["id"] = identity["id"]
+            movie["tmdb"] = identity.get("tmdb") or "https://www.themoviedb.org/movie/" + str(identity["id"])
+            if identity.get("release_year") or identity.get("year"):
+                movie["release_year"] = identity.get("release_year") or identity.get("year")
+            enriched += 1
+            continue
+        if len(exact) > 1:
+            ambiguous += 1
+            continue
+        if not api_key:
+            unresolved += 1
             continue
         title = movie.get("original_title") or movie.get("title")
         needle = normalize(title)
@@ -78,7 +134,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35):
             unresolved += 1
 
     data["poster_enrichment"] = {
-        "source": "TMDB Search API; unique exact-title matches only",
+        "source": "local catalog or TMDB Search API; unique exact-title matches only",
     }
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.read_text(encoding="utf-8") == content:

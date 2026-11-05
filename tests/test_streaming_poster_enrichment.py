@@ -22,18 +22,20 @@ class Response:
 
 
 class StreamingPosterEnrichmentTests(unittest.TestCase):
-    def run_fixture(self, movies, result):
+    def run_fixture(self, movies, result, catalog=None, api_key="fixture-secret"):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         path = Path(tmp.name) / "streaming.json"
         path.write_text(json.dumps({"movies": movies}), encoding="utf-8")
+        catalog_path = Path(tmp.name) / "catalog.json"
+        catalog_path.write_text(json.dumps(catalog or {"movies": []}), encoding="utf-8")
         requests = []
 
         def opener(request, timeout):
             requests.append((request, timeout))
             return Response(result)
 
-        counts = enrichment.enrich(path, api_key="fixture-secret", opener=opener, delay=0)
+        counts = enrichment.enrich(path, api_key=api_key, opener=opener, delay=0, catalog_path=catalog_path)
         return json.loads(path.read_text(encoding="utf-8")), requests, counts
 
     def test_unique_exact_title_adds_only_a_tmdb_poster_url(self):
@@ -65,15 +67,40 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(len(requests), 1)
         self.assertEqual(counts, (0, 1, 0))
 
-    def test_missing_api_key_preserves_existing_output(self):
+    def test_missing_api_key_leaves_unmatched_entries_without_posters(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "streaming.json"
             original = '{"movies":[{"title":"Keep"}]}\n'
             path.write_text(original, encoding="utf-8")
-            with patch.dict("os.environ", {"TMDB_API_KEY": ""}):
-                with self.assertRaisesRegex(ValueError, "TMDB_API_KEY"):
-                    enrichment.enrich(path, api_key="", delay=0)
-            self.assertEqual(path.read_text(encoding="utf-8"), original)
+            catalog = Path(tmp) / "catalog.json"
+            catalog.write_text('{"movies":[]}', encoding="utf-8")
+            self.assertEqual(enrichment.enrich(path, api_key="", delay=0, catalog_path=catalog), (0, 0, 1))
+            self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["movies"], [{"title": "Keep"}])
+
+    def test_unique_exact_local_catalog_identity_supplies_existing_poster_without_api(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "モアナと伝説の海", "date": "2026-11-18", "event": "streaming", "service": "Disney+"}],
+            {"results": []},
+            catalog={"movies": [{"id": 1108427, "title": "モアナと伝説の海", "poster": "https://image.tmdb.org/t/p/w500/moana.jpg"}]},
+            api_key="",
+        )
+        movie = data["movies"][0]
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/moana.jpg")
+        self.assertEqual(movie["id"], 1108427)
+        self.assertEqual(movie["tmdb"], "https://www.themoviedb.org/movie/1108427")
+        self.assertEqual(counts, (1, 0, 0))
+        self.assertEqual(requests, [])
+
+    def test_reviewed_tmdb_id_fetches_poster_from_its_movie_record(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "DUNE/デューン 砂の惑星PART2", "tmdb_id": 693134, "date": "2026-11-02", "event": "streaming", "service": "Prime Video"}],
+            {"id": 693134, "title": "Dune: Part Two", "poster_path": "/dune2.jpg"},
+        )
+        movie = data["movies"][0]
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/dune2.jpg")
+        self.assertEqual(movie["id"], 693134)
+        self.assertIn("/movie/693134?", requests[0][0].full_url)
+        self.assertEqual(counts, (1, 0, 0))
 
 
 if __name__ == "__main__":

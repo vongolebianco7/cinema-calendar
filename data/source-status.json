@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T17:35:19.704Z",
+  "generated_at": "2026-11-05T17:40:58.221Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -76,6 +76,20 @@
       "trigger": "日次18:17 UTC: TMDB作品情報の照合。番組表の新規取得・放送予定の自動更新はなし。",
       "coverage": "現行ファイル内の放送予定だけ。全国全局の網羅を保証しない。",
       "record_count": 16
+    },
+    {
+      "id": "anime-film-tv-broadcasts",
+      "name": "アニメ関連映画のテレビ放映（公開API）",
+      "status": "automated",
+      "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
+      "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
+      "source_observed_at": null,
+      "max_age_hours": 48,
+      "freshness": "unknown",
+      "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
+      "trigger": "毎日18:37 UTCと手動実行。フィード取得前にランダムな待ち時間を入れ、タイトル情報を順番に照合。",
+      "coverage": "しょぼいカレンダーが扱うアニメ・関連番組のうち映画カテゴリのみ。全国の全局・全映画放送の網羅ではありません。",
+      "record_count": 0
     },
     {
       "id": "box-office",

@@ -53,6 +53,24 @@
       ]
     },
     {
+      "id": "syoboi_calendar",
+      "name": "しょぼいカレンダー公開番組表",
+      "mode": "approved",
+      "purpose": [
+        "anime_related_movie_tv_broadcasts"
+      ],
+      "basis": "The provider help permits automated copying and documents RSS/API feeds; coverage is anime and anime-related programming, and only its explicit movie category is imported.",
+      "terms_url": "https://docs.cal.syoboi.jp/about/",
+      "requirements": [
+        "Use documented RSS/API feeds only; never scrape HTML",
+        "Set a product-specific User-Agent and link the documented feed",
+        "Cache responses, make sequential requests, and respect published rate limits",
+        "Match TMDB metadata only by exact title and original release year; unresolved records remain without a TMDB ID",
+        "Label coverage as anime-related movie broadcasts only, not nationwide all-channel coverage",
+        "Preserve the last good snapshot after empty or invalid responses"
+      ]
+    },
+    {
       "id": "filmarks",
       "name": "Filmarks",
       "mode": "link_only",

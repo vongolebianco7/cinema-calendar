@@ -7,6 +7,7 @@ APPROVED_AUTOMATED_SOURCES = {
     "tmdb",
     "justwatch_via_tmdb",
     "wikidata",
+    "syoboi_calendar",
 }
 
 with REGISTRY.open(encoding="utf-8") as f:

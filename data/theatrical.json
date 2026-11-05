@@ -1,491 +1,17 @@
 {
-  "generated_at": "2026-10-31T21:32:34.720804+00:00",
+  "generated_at": "2026-11-05T00:01:18.806656+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-01",
-      "2027-02-28"
+      "2026-10-06",
+      "2027-03-05"
     ],
     "background_slice": [
-      "2027-10-21",
-      "2027-10-31"
+      "2026-07-03",
+      "2026-08-31"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 9323,
-      "title": "GHOST IN THE SHELL / 攻殻機動隊",
-      "original_title": "GHOST IN THE SHELL / 攻殻機動隊",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/z9S9V4vtVJqyHxFfI8HFWCobdrH.jpg",
-      "score": 7.929,
-      "votes": 4056,
-      "overview": "2029年、二度の大戦を経て、電脳化・義体化技術の発展した世界。新たな可能性の一方で、ゴーストハックや犯罪の多様化といった問題にも悩まされていた。  そんな中、他人の電脳をハックし人形のように使う「人形使い」が入国し公安9課は調査に乗り出す。",
-      "tmdb": "https://www.themoviedb.org/movie/9323",
-      "director": "押井守",
-      "director_id": 12180,
-      "cast": [
-        "田中敦子",
-        "大塚明夫",
-        "家弓家正",
-        "山寺宏一"
-      ],
-      "countries": [
-        "Japan",
-        "United Kingdom"
-      ],
-      "runtime": 85,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション"
-      ]
-    },
-    {
-      "id": 1538058,
-      "title": "2021 방탄소년단 머스터 소우주 리마스터링",
-      "original_title": "2021 방탄소년단 머스터 소우주 리마스터링",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5iJa9vUI5rESXCuF3hpGkrflPaB.jpg",
-      "score": 5.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1538058",
-      "director": "Jo Hyeong-seok",
-      "director_id": 5649239,
-      "cast": [
-        "알엠",
-        "진",
-        "슈가",
-        "제이홉"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 94,
-      "genres": [
-        "音楽"
-      ]
-    },
-    {
-      "id": 1725531,
-      "title": "Don't Puke",
-      "original_title": "Don't Puke",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/2pL0Sz2xy72FsQHOVomCFrtcXlu.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1725531",
-      "director": "Daniel Chisholm",
-      "director_id": 3128647,
-      "cast": [
-        "Janka Horakova",
-        "Claire Uicker",
-        "Mitra Adib-Moghaddam",
-        "Özkan Tekin"
-      ],
-      "countries": [],
-      "runtime": 8,
-      "genres": []
-    },
-    {
-      "id": 1651617,
-      "title": "『あんさんぶるスターズ！THE STAGE』-Blessing Moment-",
-      "original_title": "『あんさんぶるスターズ！THE STAGE』-Blessing Moment-",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/9c00nejL2H5RfomTEUmFXAl015s.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1651617",
-      "director": "後藤健流",
-      "director_id": 5475395,
-      "cast": [
-        "山崎大輝",
-        "猪野広樹",
-        "大崎捺希",
-        "Nagato Okui"
-      ],
-      "countries": [],
-      "runtime": 160,
-      "genres": []
-    },
-    {
-      "id": 1556022,
-      "title": "INI THE MOVIE『I Need I』",
-      "original_title": "INI THE MOVIE『I Need I』",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/6bQALCckVp6Z78EHPAU0R9QFrRo.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "2021年、サバイバルオーディション番組「PRODUCE 101 JAPAN SEASON2」を通じて結成され、デビューした「INI」。同グループ初のドキュメンタリー映画となる本作では、華やかなステージでのパフォーマンスや夢をかなえた瞬間の涙、これまで言葉にしづらかった心の内を語る姿など、貴重なメンバーの素顔や葛藤が映し出されるほか、輝かしい栄光の裏にある努力や迷い、支え合いながら前を向く姿が紡がれ、「MINI」と呼ばれるファンたちとともに歩んできた日々や絆を描く。",
-      "tmdb": "https://www.themoviedb.org/movie/1556022",
-      "director": "榊原有佑",
-      "director_id": 2109785,
-      "cast": [
-        "池﨑理人",
-        "尾崎匠海",
-        "木村柾哉",
-        "後藤威尊"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 0,
-      "genres": [
-        "ドキュメンタリー",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1532481,
-      "title": "てっぺんの向こうにあなたがいる",
-      "original_title": "てっぺんの向こうにあなたがいる",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5GnO3HWgamhpX5BNrgE8RHFzqZn.jpg",
-      "score": 10.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1532481",
-      "director": "阪本順治",
-      "director_id": 224663,
-      "cast": [
-        "吉永小百合",
-        "のん",
-        "若葉竜也",
-        "佐藤浩市"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 130,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1531892,
-      "title": "白昼夢",
-      "original_title": "白昼夢",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uduJHIAi7mF4c2cjmnGuOENPr0n.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1531892",
-      "director": "Tatsuro Yamashiro",
-      "director_id": 3727667,
-      "cast": [
-        "見津賢",
-        "Yû Kamiwaki",
-        "宮田佳典",
-        "川瀬陽太"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 75,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1520936,
-      "title": "機動戦士ガンダム 鉄血のオルフェンズ ウルズハント -小さな挑戦者の軌跡-",
-      "original_title": "機動戦士ガンダム 鉄血のオルフェンズ ウルズハント -小さな挑戦者の軌跡-",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/ltP9L6UgEjsxWhHHpHfvGi7ofQ3.jpg",
-      "score": 5.75,
-      "votes": 4,
-      "overview": "ーーP.D.323 ギャラルホルンによるアーブラウ中央議会への政治介入事件は、モビルスーツを使った武力行使にまで発展。事件を終結に導いたのは、鉄華団と呼ばれる火星から来た少年たちだった。金星に浮かぶラドニッツァ・コロニーで生まれ育ったウィスタリオ・アファムの耳にも、鉄華団の活躍は届いていた。火星との開拓競争に敗北した金星は、四大経済圏も興味を示さない辺境惑星。住人はＩＤすら持たず、今は罪人の流刑地として使われるだけ。そんな生まれ故郷の現状を変えたいと願うウィスタリオの前に現れたのは、「ウルズハント」の水先案内人を名乗るひとりの少女だった。「おめでとうございます。あなたは『ウルズハント』の参加資格を得ました」少女との出会いにいざなわれ、ウィスタリオはコロニーすら易々と買うことのできる莫大な賞金を懸けたレース……「ウルズハント」の入口に立たされていた。",
-      "tmdb": "https://www.themoviedb.org/movie/1520936",
-      "director": "長井龍雪",
-      "director_id": 1243962,
-      "cast": [
-        "生駒里奈",
-        "堀内賢雄",
-        "上田麗奈",
-        "木内太郎"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 83,
-      "genres": [
-        "アクション",
-        "アニメーション",
-        "サイエンスフィクション"
-      ]
-    },
-    {
-      "id": 1504111,
-      "title": "映画 すみっコぐらし 空の王国とふたりのコ",
-      "original_title": "映画 すみっコぐらし 空の王国とふたりのコ",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/544dUXtySsbaLlZ53JXClq5skyo.jpg",
-      "score": 7.5,
-      "votes": 2,
-      "overview": "すみっコの町はここのところずっと雨ばかり。  雨のせいで、 あげものコンビ・とんかつとえびふらいのしっぽの体がじめじめに…。  そんなある日のこと、空からとつぜん何かが落ちてきた！  「だいじょうぶ？」すみっコたちがかけよると、そのコは空の王国からやってきた〈おうじ〉だった。  雲の上は今しんこくな水不足。王国のピンチを救うため、すみっコたちの空の冒険がはじまります！",
-      "tmdb": "https://www.themoviedb.org/movie/1504111",
-      "director": "イワタナオミ",
-      "director_id": 1255987,
-      "cast": [
-        "井ノ原快彦",
-        "本上まなみ"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 68,
-      "genres": [
-        "アニメーション",
-        "ファミリー",
-        "ファンタジー"
-      ]
-    },
-    {
-      "id": 1464533,
-      "title": "爆弾",
-      "original_title": "爆弾",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/b9FKunFkcYTVF9eEVS8muztAy9p.jpg",
-      "score": 7.5,
-      "votes": 35,
-      "overview": "物語の幕開けは、酔った勢いで自販機と店員に暴行を働き、警察に連行された一人の謎の中年男。彼は自らを「スズキタゴサク」と名乗り、霊感が働くと称して都内に仕掛けられた爆弾の存在を予告！秋葉原での爆破を皮切りに、この後一時間おきに３回爆発すると予知していく。そして、刑事たちの問いかけをのらりくらりとかわしつつ、次第に爆弾に関する謎めいた“クイズ”を出し始めるのだった・・・彼は、いったい何者なのか！？そして仕掛けられた“爆弾”の正体とは！？",
-      "tmdb": "https://www.themoviedb.org/movie/1464533",
-      "director": "永井聡",
-      "director_id": 1310363,
-      "cast": [
-        "山田裕貴",
-        "伊藤沙莉",
-        "染谷将太",
-        "渡部篤郎"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 136,
-      "genres": [
-        "スリラー",
-        "謎",
-        "犯罪"
-      ]
-    },
-    {
-      "id": 1418217,
-      "title": "盤上の向日葵",
-      "original_title": "盤上の向日葵",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/4tNBc0VX40IjoK7VHqSsFdupiQI.jpg",
-      "score": 7.714,
-      "votes": 7,
-      "overview": "山中で謎の白骨死体が発見される。事件解明の手掛かりは、遺体とともに発見されたこの世に7組しか現存しない希少な将棋駒。容疑をかけられたのは、突如将棋界に現れ、一躍時の人となっていた天才棋士〈上条桂介〉だった。さらに捜査の過程で、桂介の過去を知る重要人物として、賭け将棋で裏社会に生きた男〈東明重慶〉の存在が浮かび上がる。桂介と東明のあいだに何があったのか？謎に包まれた桂介の生い立ちが明らかになっていく。それは、想像を絶する過酷なものだった......",
-      "tmdb": "https://www.themoviedb.org/movie/1418217",
-      "director": "熊澤尚人",
-      "director_id": 133057,
-      "cast": [
-        "坂口健太郎",
-        "渡辺謙",
-        "佐々木蔵之介",
-        "土屋太鳳"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 123,
-      "genres": [
-        "ドラマ",
-        "謎"
-      ]
-    },
-    {
-      "id": 1406894,
-      "title": "（LOVE SONG）",
-      "original_title": "（LOVE SONG）",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/zKstxIlSSiSMCYBSahUZQxzCwA3.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1406894",
-      "director": "ウィーラチット・トーンジラー",
-      "director_id": 2770699,
-      "cast": [
-        "森崎ウィン",
-        "向井康二",
-        "แพรวา สุธรรมพงษ์",
-        "チャローンラット・ノープサムローン"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 118,
-      "genres": [
-        "ロマンス"
-      ]
-    },
-    {
-      "id": 1385004,
-      "title": "火の華",
-      "original_title": "火の華",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/eytr8VdiLEtnDiy7Sh3pDolNbyF.jpg",
-      "score": 8.0,
-      "votes": 2,
-      "overview": "2016年、PKO（国連平和維持活動）のため南スーダンに派遣された自衛官・島田東介は、現地傭兵との銃撃戦に巻き込まれる。同期で親友の古川裕司が凶弾に倒れ、島田はやむを得ず少年兵を射殺。さらに退却の混乱のなかで隊長の伊藤忠典が行方不明になるが、この前代未聞の「戦闘」は政府によって隠蔽されてしまう。2年後の新潟。悪夢に悩まされる島田は闇の武器ビジネスに加担しながら、花火工場で働き始める。親方の藤井与一や職人仲間たち、与一の娘・昭子に支えられ、心の傷を少しずつ癒していく島田だったが、そんな彼に過去の闇が迫り……。",
-      "tmdb": "https://www.themoviedb.org/movie/1385004",
-      "director": "小島央大",
-      "director_id": 2985196,
-      "cast": [
-        "山本一賢",
-        "柳ゆり菜",
-        "松角洋平",
-        "Ippei Tanaka"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 124,
-      "genres": [
-        "ドラマ",
-        "スリラー"
-      ]
-    },
-    {
-      "id": 1665783,
-      "title": "ガザからの声 Episode2「ミュージシャン・アハマドのメッセージ」",
-      "original_title": "ガザからの声 Episode2「ミュージシャン・アハマドのメッセージ」",
-      "date": "2025-10-31",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/9SMajYCBFehlNmVVIZ41jZicr53.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1665783",
-      "director": null,
-      "director_id": null,
-      "cast": [
-        "Muhammad Sawwaf"
-      ],
-      "countries": [],
-      "runtime": 64,
-      "genres": [
-        "ドキュメンタリー"
-      ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
-    },
-    {
-      "id": 1146410,
-      "title": "旅人の必需品",
-      "original_title": "여행자의 필요",
-      "date": "2025-11-01",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uxti9gIZPbLNvmBgqM3Wtqtjch6.jpg",
-      "score": 6.52,
-      "votes": 25,
-      "overview": "ソウルを訪れた謎めいたフランス人女性イリス。生活費のために風変わりなフランス語レッスンを行いながら、年下の恋人のもとへ帰る日々を送る。彼女がなぜここにいるのか、答えはなかなか見えてこない。イザベル・ユペール×ホン・サンス監督の3度目のタッグ作。第74回ベルリン国際映画祭審査員グランプリ受賞。",
-      "tmdb": "https://www.themoviedb.org/movie/1146410",
-      "director": "ホン・サンス",
-      "director_id": 150975,
-      "cast": [
-        "イザベル・ユペール",
-        "イ・ヘヨン",
-        "クォン・ヘヒョ",
-        "チョ・ユニ"
-      ],
-      "countries": [
-        "South Korea",
-        "France"
-      ],
-      "runtime": 90,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1624522,
-      "title": "ボー・ブランメル～美しすぎた男～ / Prayer～祈り～",
-      "original_title": "ボー・ブランメル～美しすぎた男～ / Prayer～祈り～",
-      "date": "2025-11-01",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/fQTQqawyt7V5W4T8spdP82aBnIC.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1624522",
-      "director": "生田大和",
-      "director_id": 3476659,
-      "cast": [
-        "朝美絢",
-        "夢白あや",
-        "瀬央ゆりあ",
-        "縣千"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 0,
-      "genres": [
-        "音楽"
-      ]
-    },
-    {
-      "id": 1555803,
-      "title": "佐藤忠男、映画の旅",
-      "original_title": "佐藤忠男、映画の旅",
-      "date": "2025-11-01",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/yUuo6WXM66CKaoaXcKq1f6BJOrD.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "独学で映画評論の道を開拓し、60年にわたる評論家人生で日本映画史を体系化した功績、そして後年にはライフワークとしてアジア映画を発掘し日本に先駆的に紹介した功績から、映画評論家として初めて文化功労者に選出されたことでも知られる佐藤忠男。庶民の目線から多岐に映画を論じ、アジアとの映画交流や後進の育成にも尽力したが、2022年3月に91歳で逝去した。",
-      "tmdb": "https://www.themoviedb.org/movie/1555803",
-      "director": "Terasaki Mizuho",
-      "director_id": 5724033,
-      "cast": [
-        "佐藤忠男",
-        "Sahoko Hata",
-        "Shaji N. Karun"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 98,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
     {
       "id": 1084736,
       "title": "モンテ・クリスト伯",
@@ -15216,6 +14742,31 @@
       "checked_at": "2026-09-27T18:28:52.872090+00:00"
     },
     {
+      "id": 1816903,
+      "title": "原因は自分にある。『ARENA TOUR 2026 仮ノ現』",
+      "original_title": "原因は自分にある。『ARENA TOUR 2026 仮ノ現』",
+      "date": "2026-07-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/sy0PSGUkom0zYJMefloWx40q47s.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1816903",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "杢代和人",
+        "小泉光咲",
+        "吉澤要人",
+        "大倉空人"
+      ],
+      "countries": [],
+      "runtime": 120,
+      "genres": [],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
+    },
+    {
       "id": 1749852,
       "title": "スーパーの裏でヤニ吸うふたり",
       "original_title": "スーパーの裏でヤニ吸うふたり",
@@ -15966,6 +15517,37 @@
         "ファンタジー"
       ],
       "checked_at": "2026-10-10T18:31:25.870357+00:00"
+    },
+    {
+      "id": 1290424,
+      "title": "新凱旋門物語",
+      "original_title": "L'Inconnu de la Grande Arche",
+      "date": "2026-07-17",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/vLgSZui7uXYc7r7utto6MZNQKTF.jpg",
+      "score": 6.932,
+      "votes": 133,
+      "overview": "1983年、パリ。ミッテラン大統領はフランス革命200周年を祝う新モニュメントの建設を構想していた。国際設計コンペで選ばれたのは、無名のデンマーク人建築家ヨハン・オットー・フォン・スプレッケルセン。イタリア・カッラーラ産の大理石によるキューブ状のアーチと、そのふもとに雲のような屋根が浮かぶ大胆なプランは、大統領の心を射止め、彼を一夜にして時の人にした。しかし、完璧を追い求める彼の前には、予算や政治的圧力、周囲の思惑が立ちはだかる。理想を貫くか、現実に折り合いをつけるか。巨大プロジェクトの渦中で、一人の建築家が下す“ある決断”とは――。",
+      "tmdb": "https://www.themoviedb.org/movie/1290424",
+      "director": "Stéphane Demoustier",
+      "director_id": 1186795,
+      "cast": [
+        "クレス・バング",
+        "グザヴィエ・ドラン",
+        "スワン・アルロー",
+        "Sidse Babett Knudsen"
+      ],
+      "countries": [
+        "France",
+        "Denmark"
+      ],
+      "runtime": 106,
+      "genres": [
+        "ドラマ",
+        "履歴"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1275095,
@@ -17301,6 +16883,35 @@
         "コメディ"
       ],
       "checked_at": "2026-09-28T18:31:59.587462+00:00"
+    },
+    {
+      "id": 1600745,
+      "title": "床一面こんな感じ",
+      "original_title": "床一面こんな感じ",
+      "date": "2026-08-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/vQusWmxZO2xfGK3U7B05x3QkzDQ.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "ことりとすずかは、お互いの怠惰な姿勢や干渉具合を原因にシェアハウス解消の危機を感じている。そんな中、近所のカフェの店主である栗田が家に遊びに来ることに。栗田に仄かな恋心を抱いている二人は浮き足立ち、汚い部屋を掃除しはじめる。",
+      "tmdb": "https://www.themoviedb.org/movie/1600745",
+      "director": "Satsuki Hamada",
+      "director_id": 4309521,
+      "cast": [
+        "瀬戸 璃子",
+        "工藤遥",
+        "Araho Yuki",
+        "Rin Sono"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 61,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 9539,
@@ -21948,36 +21559,6 @@
       "checked_at": "2026-10-30T22:18:46.705276+00:00"
     },
     {
-      "id": 1797200,
-      "title": "세븐틴 월드 투어 '뉴_'",
-      "original_title": "세븐틴 월드 투어 '뉴_'",
-      "date": "2026-10-24",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/p3SW5xiKdUJ0zIY3hMyyCQ6tcru.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1797200",
-      "director": "Taehwan Yum",
-      "director_id": 3432927,
-      "cast": [
-        "에스쿱스",
-        "정한",
-        "조슈아",
-        "文俊辉"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 103,
-      "genres": [
-        "音楽",
-        "ドキュメンタリー"
-      ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
-    },
-    {
       "id": 1688795,
       "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
       "original_title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
@@ -22302,6 +21883,40 @@
         "ドラマ"
       ],
       "checked_at": "2026-10-31T21:32:34.720804+00:00"
+    },
+    {
+      "id": 11299,
+      "title": "カウボーイビバップ 天国の扉",
+      "original_title": "カウボーイビバップ 天国の扉",
+      "date": "2026-10-30",
+      "event": "theatrical",
+      "service": "リバイバル上映",
+      "poster": "https://image.tmdb.org/t/p/w500/4iwcFGxdnsMWrvoqsgmU2TQfL6K.jpg",
+      "score": 7.712,
+      "votes": 1107,
+      "overview": "2071年、火星。高速道路でタンクローリーが爆発事故を起こし、タンクから漏れだした物質で500人以上が死傷する大惨事となる。正体不明のバイオ兵器を使用したテロの可能性があることから、火星政府は犯人に史上最高の懸賞金をかけると発表。貧困に喘ぐビバップ号クルーたちが眼の色を変えたのは当然だった……。",
+      "tmdb": "https://www.themoviedb.org/movie/11299",
+      "director": "渡辺信一郎",
+      "director_id": 56342,
+      "cast": [
+        "山寺宏一",
+        "石塚運昇",
+        "多田葵",
+        "小林愛"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 115,
+      "genres": [
+        "アクション",
+        "アニメーション",
+        "サイエンスフィクション"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00",
+      "revival": true,
+      "original_jp_release_date": "2001-09-01",
+      "revival_evidence": "TMDB JP theatrical release history"
     },
     {
       "id": 1807421,
@@ -23494,13 +23109,13 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 125,
       "genres": [
         "アニメーション",
         "ファンタジー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1802704,
@@ -23596,7 +23211,7 @@
       "date": "2026-11-25",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/wWJJMvBduAsH26MVkwsnssCh1WZ.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/5jiz8gmp2PtPsRxAR1Cm05UzqnL.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -23607,10 +23222,9 @@
         "ブラッド・ピット",
         "エリザベス・デビッキ",
         "スコット・カーン",
-        "カーラ・グギノ"
+        "ヤーヤ・アブドゥル＝マティーン2世"
       ],
       "countries": [
-        "United Kingdom",
         "United States of America"
       ],
       "runtime": 0,
@@ -23619,7 +23233,37 @@
         "コメディ",
         "スリラー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
+    },
+    {
+      "id": 1797200,
+      "title": "세븐틴 월드 투어 '뉴_'",
+      "original_title": "세븐틴 월드 투어 '뉴_'",
+      "date": "2026-11-27",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/p3SW5xiKdUJ0zIY3hMyyCQ6tcru.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1797200",
+      "director": "Taehwan Yum",
+      "director_id": 3432927,
+      "cast": [
+        "에스쿱스",
+        "조슈아",
+        "文俊辉",
+        "디에잇"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 103,
+      "genres": [
+        "音楽",
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1368166,
@@ -23629,8 +23273,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
-      "score": 7.252,
-      "votes": 3237,
+      "score": 7.25,
+      "votes": 3316,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1368166",
       "director": "ポール・フェイグ",
@@ -23638,7 +23282,7 @@
       "cast": [
         "シドニー・スウィーニー",
         "アマンダ・サイフリッド",
-        "Brandon Sklenar",
+        "ブランドン・スクレナー",
         "Michele Morrone"
       ],
       "countries": [
@@ -23649,7 +23293,7 @@
         "謎",
         "スリラー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1302904,
@@ -23659,8 +23303,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
-      "score": 6.977,
-      "votes": 244,
+      "score": 7.2,
+      "votes": 362,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1302904",
       "director": "スサンネ・ビア",
@@ -23680,7 +23324,7 @@
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1739765,
@@ -23708,7 +23352,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1718930,
@@ -23736,7 +23380,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1700953,
@@ -23745,7 +23389,7 @@
       "date": "2026-11-27",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/d8naDZPJ4NBlJW7SiiUrEAqDeSC.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/dM9eKAo5g5XiQcgEynX02WxTWr4.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "ハッピーを広めるため地球に降り立った ハッピー星人のタコピーは、 人間の女の子しずかと出会う。 ピンチを救ってもらったタコピーは、 しずかの笑顔を取り戻すため、 不思議な力を持つハッピー道具で奔走する。 しかし、しずかはおうちと学校で 何か事情を抱えているようで･･･。 これは、ぼくときみの 最高にハッピーな物語────",
@@ -23765,7 +23409,7 @@
         "サイエンスフィクション",
         "ファンタジー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1660754,
@@ -23795,7 +23439,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1807541,
@@ -23888,6 +23532,38 @@
       "checked_at": "2026-10-29T22:44:24.256028+00:00"
     },
     {
+      "id": 1381027,
+      "title": "HEEL／ヒール",
+      "original_title": "Good Boy",
+      "date": "2026-11-27",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/eWb841fMkSNly5gfL9J1N0xzVYI.jpg",
+      "score": 7.245,
+      "votes": 380,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1381027",
+      "director": "Jan Komasa",
+      "director_id": 566109,
+      "cast": [
+        "アンソン・ブーン",
+        "スティーヴン・グレアム",
+        "アンドレア・ライズボロー",
+        "Kit Rakusen"
+      ],
+      "countries": [
+        "United Kingdom",
+        "Poland"
+      ],
+      "runtime": 110,
+      "genres": [
+        "ドラマ",
+        "謎",
+        "ホラー"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
+    },
+    {
       "id": 1552998,
       "title": "インサイド・ガザ 封鎖の内側から",
       "original_title": "Inside Gaza",
@@ -23913,7 +23589,7 @@
         "戦争",
         "テレビ映画"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1774734,
@@ -23943,7 +23619,7 @@
         "犯罪",
         "ファンタジー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1790612,
@@ -23967,7 +23643,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1287141,
@@ -23977,8 +23653,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/7Pd6ChSQjSXy4snJiorSdzg2cG3.jpg",
-      "score": 6.489,
-      "votes": 349,
+      "score": 6.51,
+      "votes": 358,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1287141",
       "director": "Harry Lighton",
@@ -24000,7 +23676,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1168719,
@@ -24010,8 +23686,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/hHUN0a4sswgPTmM4TogFrl3OSgR.jpg",
-      "score": 7.2,
-      "votes": 58,
+      "score": 7.225,
+      "votes": 60,
       "overview": "舞台はドイツの学園都市にある植物園。一本のイチョウの木を軸に、1908年、1972年、2020年という三つの時代の人々の人生が交錯し、自然と人間のあいだに宿る神秘的なつながりを重厚かつ独創的な映像美で描き出す。",
       "tmdb": "https://www.themoviedb.org/movie/1168719",
       "director": "Enyedi Ildikó",
@@ -24033,7 +23709,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1743286,
@@ -24056,7 +23732,7 @@
       "countries": [],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1740230,
@@ -24084,7 +23760,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1538497,
@@ -24096,7 +23772,7 @@
       "poster": "https://image.tmdb.org/t/p/w500/7U3JJQngxQ0KUasG06g8UuqANZp.jpg",
       "score": 0.0,
       "votes": 0,
-      "overview": "",
+      "overview": "ディズニー長編アニメーション作品としては初となる、ディズニーヒロイン史上初の“現代の女子高校生”が主人公の＜ビリー＞による全く新しい魔法の物語。 型破りな性格で学校でも周囲になじめない高校生の少女・ビリーが魔法の力に目覚め、新たな世界での大冒険へと導かれていく―。",
       "tmdb": "https://www.themoviedb.org/movie/1538497",
       "director": "ジェイソン・ハンド",
       "director_id": 1461394,
@@ -24109,7 +23785,7 @@
       "countries": [
         "United States of America"
       ],
-      "runtime": 99,
+      "runtime": 103,
       "genres": [
         "アドベンチャー",
         "アニメーション",
@@ -24117,7 +23793,7 @@
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1720486,
@@ -24147,12 +23823,12 @@
         "ファミリー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1782930,
-      "title": "超塑性变形",
-      "original_title": "超塑性变形",
+      "title": "超塑性変形",
+      "original_title": "超塑性変形",
       "date": "2026-12-05",
       "event": "theatrical",
       "service": "劇場公開",
@@ -24178,7 +23854,7 @@
         "コメディ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-19T18:51:11.245620+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1794649,
@@ -24203,7 +23879,33 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
+    },
+    {
+      "id": 1816698,
+      "title": "THE COVER GIRL",
+      "original_title": "THE COVER GIRL",
+      "date": "2026-12-05",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/qP8e5aJAru5E14aC5Lbmm3muDD9.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "有名雑誌の表紙に抜擢された新人グラドル・麦ゆりな。その輝かしいチャンスの前に、数年前に絶縁した母・小川さゆりが突然現れる。母は勝手にマネージャーを名乗り、ゆりなの人生とキャリアに深く踏み込んでいく。やがて、人気グラドル・海つくしとの表紙を賭けた争奪戦が幕を開ける。  承認欲求、母子癒着、“成功”を求める社会の歪み。それぞれの欲望が交錯し、最新鋭の映像と演出が、物語を制御不能な領域へと導いていく。これは、表紙を巡る戦いであり、愛と支配の物語である。",
+      "tmdb": "https://www.themoviedb.org/movie/1816698",
+      "director": "小林勇貴",
+      "director_id": 1889615,
+      "cast": [
+        "林未珠",
+        "みひろ",
+        "原つむぎ"
+      ],
+      "countries": [],
+      "runtime": 28,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 478798,
@@ -24213,7 +23915,7 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/DGcFoTyyHNftOMufyLo5PoWnB4.jpg",
-      "score": 5.406,
+      "score": 5.4,
       "votes": 32,
       "overview": "銀世界の香港。突如として激しい銃撃戦が勃発、さらには爆破テロまで起こり街は混乱に包まれる。その犠牲者の中に、李珀山（レイ・パクサン）という男がいた。彼はさまざまな産業にまたがる帝国を築き上げてきた実業家だったが、実は彼こそが巨大麻薬組織を裏で支配する黒幕だったのだ。対立する勢力が覇権を争う中、李珀山の息子･李霧童（レイ・モウトン）は一族が受け継いできた犯罪の歴史に終止符を打つべく争いの渦中へと身を投じていくが、逃亡中の兄、亡き家長に忠誠を誓う側近たちなど大きな障壁が立ちはだかる。彼が後継者としての運命を背負い一族へ導くのは、希望か、それとも破滅か――。",
       "tmdb": "https://www.themoviedb.org/movie/478798",
@@ -24235,7 +23937,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1242332,
@@ -24244,9 +23946,9 @@
       "date": "2026-12-11",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/t13MdGCKRZvkmrFW2A7Vih3QjwD.jpg",
-      "score": 7.256,
-      "votes": 734,
+      "poster": "https://image.tmdb.org/t/p/w500/bIwQxcZl2CdyhVRNDtQl36YCZVr.jpg",
+      "score": 7.236,
+      "votes": 787,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1242332",
       "director": "Ben Wheatley",
@@ -24266,7 +23968,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1078446,
@@ -24294,9 +23996,10 @@
       "runtime": 110,
       "genres": [
         "アクション",
-        "コメディ"
+        "コメディ",
+        "ファンタジー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1759822,
@@ -24324,7 +24027,7 @@
         "スリラー",
         "謎"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1741752,
@@ -24355,7 +24058,7 @@
         "アドベンチャー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1620525,
@@ -24383,9 +24086,10 @@
       ],
       "runtime": 108,
       "genres": [
-        "ドラマ"
+        "ドラマ",
+        "コメディ"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1566920,
@@ -24394,7 +24098,7 @@
       "date": "2026-12-11",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/9mOEqhDD9jyuaD9ULfhWJXpiJW.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/jGj3GcsFCG9vCEQMk3K1NVz6bgX.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "水上都市に隠された秘宝を巡り、新たなミステリーの幕が上がる  帝から壬氏にとある命が下された。 それは、5年前に後宮で命を落とした妃の“故郷へ帰りたい”という最期の願いを叶えること。  彼女を家族の元へと返すため、遺体を確認すると、 まるで生きているかのように美しい姿のまま眠っていた。 遺体の謎を解き明かすため、猫猫は壬氏に連れられ、 未の一族が治める南の地・未南州へと旅に出る。  辿り着いたのは、活気あふれる水上都市。 見たことのない薬や植物に心躍らせる猫猫だったが、 その地では前頭領が隠した財宝を巡り水賊が暴れまわり、不穏な空気が漂っていた。  「何も起こらないといいが―」  壬氏の嫌な予感は的中し、妃の葬儀当日に起きた大事件をきっかけに、 想像を超える事態へと発展していくー",
@@ -24404,8 +24108,8 @@
       "cast": [
         "悠木碧",
         "大塚剛央",
-        "伊瀬茉莉也",
-        "飛田展男"
+        "小西克幸",
+        "伊瀬茉莉也"
       ],
       "countries": [
         "Japan"
@@ -24416,7 +24120,7 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1317512,
@@ -24426,8 +24130,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/A3yTrZi1hSGTYcAEqEPXd3FO2sG.jpg",
-      "score": 7.671,
-      "votes": 41,
+      "score": 7.616,
+      "votes": 43,
       "overview": "快活で物怖じしない17歳の女子高生ジュインが主人公。怒りと勢いに任せて口にした言葉がきっかけで校内に騒動を巻き起こし、匿名の手紙が届き始めたことから、彼女の平穏な日常が崩れていく。",
       "tmdb": "https://www.themoviedb.org/movie/1317512",
       "director": "윤가은",
@@ -24446,7 +24150,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1785714,
@@ -24475,7 +24179,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1785664,
@@ -24502,7 +24206,7 @@
       "genres": [
         "ロマンス"
       ],
-      "checked_at": "2026-10-23T18:49:38.604313+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1759805,
@@ -24532,7 +24236,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1800641,
@@ -24560,7 +24264,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1170608,
@@ -24631,9 +24335,9 @@
       "date": "2026-12-18",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/t1DQ4XXIqTm5LvUjz8jypN43JjZ.jpg",
-      "score": 7.2,
-      "votes": 920,
+      "poster": "https://image.tmdb.org/t/p/w500/j4uObYUBht95uiIxGy8VqVmHwet.jpg",
+      "score": 7.133,
+      "votes": 948,
       "overview": "1977 年、軍事政権下のブラジル。カーニバルの喧騒に紛れ、男は再び街へと舞い戻る。過去を消し身分を隠し、抑圧された僅かな自由にすがる人々と猜疑心渦巻くこの国で、「ある目的」を果たすために……。",
       "tmdb": "https://www.themoviedb.org/movie/1220564",
       "director": "クレベール・メンドンサ・フィリオ",
@@ -24657,7 +24361,7 @@
         "ドラマ",
         "犯罪"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1790602,
@@ -24891,6 +24595,37 @@
         "音楽",
         "履歴"
       ]
+    },
+    {
+      "id": 1260649,
+      "title": "ジュマンジ／オープンワールド",
+      "original_title": "Jumanji: Open World",
+      "date": "2026-12-25",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/ntjF2gemedf3ZcWzARGt6cuZlnJ.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1260649",
+      "director": "ジェイク・カスダン",
+      "director_id": 51851,
+      "cast": [
+        "ドウェイン・ジョンソン",
+        "ケヴィン・ハート",
+        "ジャック・ブラック",
+        "カレン・ギラン"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アドベンチャー",
+        "コメディ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
       "id": 1320392,

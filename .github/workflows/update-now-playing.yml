@@ -35,14 +35,41 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_now_playing.py
       - name: Publish validated snapshot without a database dependency
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           node scripts/source-status.cjs --output data/source-status.json
           git add data/now_playing.json data/source-status.json
           git diff --cached --quiet && exit 0
           git commit -m 'Refresh nationwide now-playing snapshot'
-          git pull --rebase origin main
-          python scripts/quality_gate.py
-          node scripts/verify-production-release.cjs --require
-          git push origin main
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main; then
+              python scripts/check_sources.py
+              python scripts/quality_gate.py
+              node scripts/verify-production-release.cjs --require
+              if git push origin HEAD:main; then exit 0; fi
+              continue
+            fi
+            conflicts="$(git diff --name-only --diff-filter=U)"
+            git rebase --abort
+            if [[ "$conflicts" != "data/source-status.json" ]]; then
+              echo "Unexpected concurrent snapshot conflict: $conflicts" >&2
+              exit 1
+            fi
+            git reset --hard origin/main
+            python scripts/check_sources.py
+            node scripts/verify-production-release.cjs --require
+            python scripts/update_now_playing.py
+            node scripts/source-status.cjs --output data/source-status.json
+            python scripts/quality_gate.py
+            node scripts/verify-production-release.cjs --require
+            git add data/now_playing.json data/source-status.json
+            git diff --cached --quiet && exit 0
+            git commit -m 'Refresh nationwide now-playing snapshot'
+          done
+          echo 'Unable to publish now-playing snapshot after three safe retries' >&2
+          exit 1

@@ -2637,7 +2637,7 @@
     "next_action": "Retry after approved data-source concurrency is serialized; preserve now-playing and TV statuses rather than selecting one generated status file."
   },
   "continuation_checkpoint_20261106": {
-    "recorded_at": "2026-11-05T21:20:55.140Z",
+    "recorded_at": "2026-11-05T21:22:30.355Z",
     "main_sha": "c075e500e95dd59762eae8daf757b1aebf8c3406",
     "merged_prs": [
       {
@@ -2677,8 +2677,8 @@
       "action": "Fold receipt refresh into the route fix release after exact-head checks; do not trigger repeated/manual deployments while Vercel Hobby quota is exhausted"
     },
     "outstanding_user_action": [
-      "Configure FEEDBACK_ADMIN_TOKEN for production admin access",
-      "Complete physical iPhone Safari acceptance"
+      "Set a production-only 32+ character FEEDBACK_ADMIN_TOKEN in Vercel project backend; do not send the value in chat. Metadata-only check confirms FEEDBACK_RATE_SECRET exists and FEEDBACK_ADMIN_TOKEN is absent.",
+      "Complete physical iPhone Safari acceptance."
     ],
     "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, fold a production-proof receipt referencing the exact tested source into the route fix PR, require all checks on resulting head, merge atomically, close superseded #640, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
   }

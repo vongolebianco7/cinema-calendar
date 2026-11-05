@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T20:03:02.295Z",
+  "updated_at": "2026-11-05T20:05:30.308Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+  "base_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
   "branch": "main",
-  "head_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+  "head_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
   "pull_request": null,
   "work_items": [
     {
@@ -910,17 +910,19 @@
   "deployment": {
     "status": "NO-GO",
     "canonical_url": "https://cinelva.vercel.app",
-    "main_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "main_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
     "github_pages_url": "https://vongolebianco7.github.io/cinema-calendar/",
     "github_pages_deployed": true,
-    "github_pages_run_id": 42099191201,
+    "github_pages_run_id": 42099373598,
     "vercel_frontend_latest_ready_sha": "0c7b4f55bab9f70e0fb7062a29b8dd99c64c07fd",
     "vercel_backend_latest_ready_sha": "a1c93bc0149d38a410e5245f1ca745d620b59657",
     "vercel_latest_failed_backend_sha": "e6c0a5e5fdf404c13f79176c0fe659b72a88aaf8",
     "vercel_failure": "Main deploy blocked at verify-production-release until PR #636 updated proof; latest main proof gate now passed, but Vercel returned build-rate-limit on PR statuses and no deployment exists for main 1526d3e.",
     "proof_head_sha": "34140cfd426fa469930d6451d79aed95b3951c08",
     "production_verified": false,
-    "user_approval_required": false
+    "user_approval_required": false,
+    "github_pages_latest_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
+    "note": "Pages deployment on current main b85a134 succeeded (run 42099373598). Vercel production still serves frontend 0c7b4f5 and backend a1c93bc; no Vercel deployment for current main due daily rate limit."
   },
   "blockers": [
     "Vercel production deploys are blocked by the account's daily deployment API limit (Vercel reported more than 100 deployments/day and 24h retry-after); keep Hobby/free settings and retry after reset. No Vercel production deployment for main 1526d3e is present.",
@@ -2575,7 +2577,7 @@
   },
   "latest_tv_publish_race_recovery_20261105": {
     "observed_at": "2026-11-05T20:03:02.295Z",
-    "main_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "main_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
     "merged_prs": [
       {
         "number": 633,
@@ -2589,8 +2591,8 @@
       }
     ],
     "tv_run": {
-      "run_id": 42092495730,
-      "result": "Success: 13 upcoming anime-related movie broadcast records fetched and quality checks passed; automated snapshot committed as 3fa107b236e570f2ae80cd30f97ec9604752af5e. Production /api/tv still serves only 2 upcoming manually curated rows because Vercel backend is stale."
+      "run_id": 42099191226,
+      "result": "Success: 13 upcoming anime-related movie broadcast records fetched and validated; snapshot commit b85a134ebb81b0804442cbda314177b43b483bcb now contains automation_checked_at 2026-11-05T20:00:44Z and 13 records. This remains a partial anime-movie category feed, not nationwide TV coverage."
     },
     "source_proof": {
       "head_sha": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
@@ -2624,5 +2626,14 @@
       "iPhone Safari physical acceptance unavailable"
     ],
     "next_action": "Owner sets FEEDBACK_ADMIN_TOKEN; after Vercel free limit reset deploy current main, verify anonymous save and admin list/status with disposable controlled test data, non-admin rejection, analytics and real iPhone."
+  },
+  "latest_now_playing_refresh": {
+    "run_id": 42099191674,
+    "head_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
+    "status": "failed_rebase_conflict",
+    "failed_path": "data/source-status.json",
+    "proof": "Production CI proof succeeded on 34140cfd; snapshot commit b7dc81c conflicted while TV update b85a134 had just updated source-status.",
+    "safety": "No data pushed; no database write occurred.",
+    "next_action": "Retry after approved data-source concurrency is serialized; preserve now-playing and TV statuses rather than selecting one generated status file."
   }
 }

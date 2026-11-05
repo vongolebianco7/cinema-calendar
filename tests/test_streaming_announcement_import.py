@@ -34,3 +34,27 @@ class StreamingAnnouncementImportTests(unittest.TestCase):
    subprocess.run([sys.executable,str(SCRIPT)],cwd=directory,check=True,capture_output=True)
    movies=json.loads((root/'streaming.json').read_text())['movies']
    self.assertEqual(len(movies),1);self.assertEqual(movies[0].get('original_title'),'Animals');self.assertEqual(movies[0].get('release_year'),2026);self.assertEqual(movies[0]['date'],'2026-10-09');self.assertNotIn('id',movies[0])
+
+ def test_generated_official_snapshot_is_imported_and_preserves_existing_poster(self):
+  with tempfile.TemporaryDirectory() as directory:
+   root=Path(directory)/'data';root.mkdir()
+   old={'title':'既存作品','date':'2026-11-01','service':'Prime Video','event':'streaming','poster':'https://image.tmdb.org/t/p/w500/old.jpg'}
+   snapshot={'period':'2026-11','movies':[
+    {'title':'既存作品','date':'2026-11-01','service':'Prime Video','event':'streaming','poster':None,'source':'Official November lineup','source_url':'https://www.aboutamazon.jp/november'},
+    {'title':'追加作品','date':'2026-11-02','service':'Prime Video','event':'streaming','poster':'https://image.tmdb.org/t/p/w500/new.jpg','source':'Official November lineup','source_url':'https://www.aboutamazon.jp/november'}
+   ]}
+   files={
+    'streaming_sources.json':{'services':[{'name':'Prime Video'}]},
+    'streaming.json':{'generated_at':'old','movies':[old]},
+    'streaming_announcements.json':{'movies':[]},
+    'streaming-official-current.json':snapshot
+   }
+   for name,value in files.items():(root/name).write_text(json.dumps(value))
+   subprocess.run([sys.executable,str(SCRIPT)],cwd=directory,check=True,capture_output=True)
+   result=json.loads((root/'streaming.json').read_text())['movies']
+   self.assertEqual(len(result),2)
+   existing=next(m for m in result if m['title']=='既存作品')
+   added=next(m for m in result if m['title']=='追加作品')
+   self.assertEqual(existing['poster'],old['poster'])
+   self.assertEqual(added['poster'],snapshot['movies'][1]['poster'])
+   self.assertEqual(added['source_url'],'https://www.aboutamazon.jp/november')

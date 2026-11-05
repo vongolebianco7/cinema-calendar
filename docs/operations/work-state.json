@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-04T16:02:22Z",
+  "updated_at": "2026-11-05T01:58:22Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
-  "branch": "docs/restart-checkpoint-20261105",
-  "head_sha": "60c46502bb8f2f22d1c096fb577f9a47888f5fc7",
+  "base_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
+  "branch": "docs/release-checkpoint-20261105-1058",
+  "head_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
   "pull_request": null,
   "work_items": [
     {
@@ -922,7 +922,7 @@
     "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
     "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
   ],
-  "next_action": "Read latest GitHub239/242 and this evidence first. Physical iPhone acceptance is still needed; do not close reported feedback based only on CI. Continue unresolved data freshness, asset/legal/private intake/free quota and residual526/514 without reintroducing old security policy. Keep Neon suspended until reset/available free capacity is verified. No unapproved paid, destructive or future production actions.",
+  "next_action": "Review current production poster evidence and scheduled DB/director runs, then verify feedback E2E; do not merge dirty PR #597 or bypass CI.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2147,7 +2147,6 @@
     "observed_at": "2026-11-05T01:02:22+09:00",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
-      600,
       597,
       526,
       514
@@ -2177,8 +2176,8 @@
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
     "checked_at": "2026-11-05T10:02:14+09:00",
-    "main_sha": "f5aec23ad7f8e09260fb477b0544a1036d1cb3f8",
-    "release_decision": "NO-GO",
+    "main_sha": "4e5602465d890fc904a45c00041c5ebb1c41ead4",
+    "release_decision": "NO-GO pending poster production acceptance, DB sync/director schedule, feedback admin auth/E2E, source freshness, iPhone UI",
     "new_progress": "PR #599 closed/merged since prior checkpoint; new PR #600 adds verified Hulu/ABEMA November premieres. Its six checks mostly pass, Validate frontend remains in progress. PR #597 is currently mergeable=false and must be rebased before merging; main state file remains stale.",
     "next_steps": [
       "Wait for PR #600 Validate frontend final status and review exact official-source evidence before merge",
@@ -2186,6 +2185,21 @@
       "Reproduce and measure production poster failures across routes and iPhone WebKit",
       "Inspect director-refresh and backend DB-sync failure logs; preserve Neon Free quota and existing user data",
       "Complete production feedback authorization/persistence and analytics acceptance, event/IMAX source audit; release remains NO-GO"
+    ],
+    "checkpoint_at": "2026-11-05T10:58:22+09:00",
+    "completed_since_previous": [
+      "PR #600 merged as d0143829",
+      "PR #601 official streaming refresh merged as 8078005f",
+      "Scheduled Update movie data successful at 2026-11-05T01:30Z",
+      "Issue #593 closed at 2026-11-05T01:42Z (production poster acceptance must be checked independently)"
+    ],
+    "ci_observed": "Update movie data and Refresh official streaming calendar success; theater showtimes skipped by policy. Other scheduled director/DB-sync status and browser production poster sampling not yet verified.",
+    "next_actions": [
+      "Verify #593 closure evidence and real production poster coverage before re-opening",
+      "Inspect director and backend DB-sync latest runs and logs, fix reproducible failures",
+      "Check November provider data coverage and approved-source event/IMAX limitations",
+      "Verify anonymous feedback persistence and admin authorization without exposing user data",
+      "Resolve stale dirty PR #597 without overwriting current main; close as superseded only after checkpoint PR merged"
     ]
   },
   "issue_585_20261104": {

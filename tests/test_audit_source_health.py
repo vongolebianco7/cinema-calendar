@@ -32,6 +32,15 @@ class SourceHealthTests(unittest.TestCase):
         result = audit.build_report(snapshot, NOW)
         self.assertEqual([s["health"] for s in result["sources"]], ["disabled", "unknown"])
 
+    def test_unknown_acquisition_mode_is_not_fresh(self):
+        snapshot = {"sources": [
+            {"id": "missing", "source_observed_at": NOW.isoformat(), "max_age_hours": 48},
+            {"id": "typo", "status": "auto", "source_observed_at": NOW.isoformat(), "max_age_hours": 48},
+            {"id": "valid", "status": "automated", "source_observed_at": NOW.isoformat(), "max_age_hours": 48},
+        ]}
+        result = audit.build_report(snapshot, NOW)
+        self.assertEqual([s["health"] for s in result["sources"]], ["unknown", "unknown", "fresh"])
+
     def test_future_timestamp_is_not_fresh(self):
         result = audit.build_report({"sources": [{"id": "a", "status": "automated",
             "source_observed_at": "2026-11-07T00:00:00Z", "max_age_hours": 48}]}, NOW)

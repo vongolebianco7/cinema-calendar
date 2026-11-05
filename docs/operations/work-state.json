@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T23:00:48Z",
+  "updated_at": "2026-11-05T23:01:45Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -714,7 +714,7 @@
     "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
     "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
   ],
-  "next_action": "Poll the exact-head workflows on the latest PR #647 branch head. Repair any failures; when all required checks pass and the PR remains mergeable, merge it, then verify the post-merge legacy Pages publication and current production deployment. Continue PR #649's independent UI regression work while those checks run.",
+  "next_action": "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it. Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2488,25 +2488,24 @@
       {
         "number": 514,
         "result": "closed unmerged; audited rights/coverage gate from its eligible work was superseded into #644"
+      },
+      {
+        "number": 648,
+        "result": "closed as duplicate after checkpoint was carried in PR #647"
       }
     ],
     "open_pull_requests": [
       {
         "number": 647,
         "branch": "fix/atomic-streaming-catalog-import-20261106",
-        "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
-        "status": "all six exact-head PR workflows passed; receipt and checkpoint follow-up is being added, then final-head CI must pass"
-      },
-      {
-        "number": 648,
-        "branch": "docs/current-release-checkpoint-20261105",
-        "status": "checkpoint superseded by this #647 checkpoint; close after #647 merges"
+        "head_sha": "2732f5a339b66c1760660f25b302f913b3e39a06",
+        "status": "source checks passed; exact-head follow-up checks are running"
       },
       {
         "number": 649,
         "branch": "fix/discovery-history-versus-true-story-20261105",
         "head_sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
-        "status": "history/true-story separation implementation; exact-head checks in progress"
+        "status": "smoke/backend/mobile/backup/completeness/autonomous green; Validate frontend still running"
       }
     ],
     "open_issues": [
@@ -2539,11 +2538,9 @@
       "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
     ],
     "next_concrete_actions": [
-      "All six exact-head #647 workflows passed on source head 55849d0148391868ae63fd36cd76ce0c06dea281: Validate frontend 42124176106, smoke 42124175901, completeness 42124175997, Autonomous 42124176047, backend build 42124176037, mobile 42124176162. Proof receipt may now reference this tested source tree.",
-      "Run exact-head PR checks again after the proof/checkpoint-only follow-up commit. Merge #647 only if all required final-head checks pass and mergeable is true.",
-      "After merge, inspect latest main Actions. Confirm Publish verified legacy Pages passes; then fetch production and verify exact deployed main, critical paths, poster states, and data freshness.",
-      "Close stale checkpoint PR #648 as superseded after #647's checkpoint is merged; #646 has already been closed as stale. Do not close release issues yet.",
-      "Continue PR #649 and all open release issues (#239/#242/#243/#244/#529/#585) until public acceptance is evidenced."
+      "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it.",
+      "Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
+      "Continue #649's browser checks and then the remaining release issues; no release issue is complete from code/CI alone."
     ],
     "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data.",
     "verification": [
@@ -2614,10 +2611,8 @@
     }
   ],
   "next_concrete_actions": [
-    "All six exact-head #647 workflows passed on source head 55849d0148391868ae63fd36cd76ce0c06dea281: Validate frontend 42124176106, smoke 42124175901, completeness 42124175997, Autonomous 42124176047, backend build 42124176037, mobile 42124176162. Proof receipt may now reference this tested source tree.",
-    "Run exact-head PR checks again after the proof/checkpoint-only follow-up commit. Merge #647 only if all required final-head checks pass and mergeable is true.",
-    "After merge, inspect latest main Actions. Confirm Publish verified legacy Pages passes; then fetch production and verify exact deployed main, critical paths, poster states, and data freshness.",
-    "Close stale checkpoint PR #648 as superseded after #647's checkpoint is merged; #646 has already been closed as stale. Do not close release issues yet.",
-    "Continue PR #649 and all open release issues (#239/#242/#243/#244/#529/#585) until public acceptance is evidenced."
+    "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it.",
+    "Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
+    "Continue #649's browser checks and then the remaining release issues; no release issue is complete from code/CI alone."
   ]
 }

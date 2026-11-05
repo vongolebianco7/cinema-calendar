@@ -26,6 +26,13 @@ class ManifestTests(unittest.TestCase):
             changed = module.manifest_for([data], root, SHA, "2026-11-07T00:00:00Z")
             self.assertNotEqual(first["dataset_version"], changed["dataset_version"])
 
+    def test_relative_path_uses_explicit_root(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "snapshot.json").write_text('{"ok":true}', encoding="utf-8")
+            result = module.manifest_for([Path("snapshot.json")], root, SHA, "now")
+            self.assertEqual(result["snapshots"][0]["path"], "snapshot.json")
+
     def test_rejects_invalid_json(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "bad.json"

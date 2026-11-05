@@ -1,6 +1,8 @@
 import datetime as dt
 import importlib.util
 import json
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -53,6 +55,27 @@ class ManifestTests(unittest.TestCase):
             manifest["dataset_version"] = "0" * 64
             with self.assertRaises(ValueError):
                 module.verify_manifest(manifest, root)
+
+    def test_cli_candidate_and_verify_end_to_end(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            data = root / "snapshot.json"
+            output = root / "candidate.json"
+            data.write_text('{"movies":[]}', encoding="utf-8")
+            generate = subprocess.run([sys.executable, str(MODULE),
+                "--root", str(root), "--source-sha", SHA,
+                "--output", str(output), "snapshot.json"],
+                capture_output=True, text=True)
+            self.assertEqual(generate.returncode, 0, generate.stderr)
+            verify = subprocess.run([sys.executable, str(MODULE),
+                "--root", str(root), "--verify", str(output)],
+                capture_output=True, text=True)
+            self.assertEqual(verify.returncode, 0, verify.stderr)
+            data.write_text('{"movies":[42]}', encoding="utf-8")
+            rejected = subprocess.run([sys.executable, str(MODULE),
+                "--root", str(root), "--verify", str(output)],
+                capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
 
     def test_rejects_invalid_json(self):
         with tempfile.TemporaryDirectory() as folder:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T13:58:28Z",
+  "updated_at": "2026-11-05T14:57:16Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2297,5 +2297,44 @@
       "Security PR #526 review; PR #514 licensing"
     ],
     "safety": "No DB, secrets, user data, or deployments changed; documentation checkpoint only."
+  },
+  "latest_automation_check_20261105_2357": {
+    "observed_at": "2026-11-05T14:57:16Z",
+    "main_before_checkpoint": "86287ce04118c319a99ee891be8b66ea22d9f64b",
+    "open_prs": [
+      526,
+      514
+    ],
+    "issue_states": {
+      "239": "open",
+      "242": "open",
+      "243": "open",
+      "244": "open",
+      "585": "open",
+      "593": "closed"
+    },
+    "actions": {
+      "latest_pages_run": 42048630024,
+      "latest_pages_conclusion": "success",
+      "nationwide_snapshot_run": 42048549034,
+      "nationwide_snapshot_conclusion": "success",
+      "smoke_run": 42048549038,
+      "smoke_conclusion": "success",
+      "completeness_run": 42048549068,
+      "completeness_conclusion": "success",
+      "failed_prior_snapshot_run": 42045875649,
+      "failed_job": 127308534169,
+      "failed_reason": "verify-production-release.cjs --require: Executable source does not match CI-verified source; check_sources.py passed"
+    },
+    "vercel": "Hobby team and linked frontend/backend projects discovered; open_deployments connector unavailable (tool not found). Exact production alias and SHA remain unverified.",
+    "release_decision": "NO-GO",
+    "next_actions": [
+      "Inspect current production proof generation and executable source hash; create tested fix without bypassing guard",
+      "Check actual current Update movie data workflow and PostgreSQL sync independently of nationwide snapshot",
+      "Verify Vercel canonical production aliases and poster loads",
+      "Audit November streaming, event/IMAX, feedback admin, analytics and iPhone acceptance",
+      "Review security PR #526; retain draft #514 pending license"
+    ],
+    "safety": "No production DB, secrets, user data or deployment changes"
   }
 }

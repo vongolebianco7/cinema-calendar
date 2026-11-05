@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "34140cfd426fa469930d6451d79aed95b3951c08",
-  "verified_at": "2026-11-05T19:50:51.952Z",
-  "note": "PR #635 exact executable source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), and Reproducible backend build all passed on this SHA. Includes the feedback navigation link in every shared drawer and a data-driven television source count assertion. The merged main source was verified identical to this CI-tested source; no user data or credentials changed."
+  "head_sha": "29879fa431e0fb7dfb6a5333a1330f3e9b04c306",
+  "verified_at": "2026-11-05T21:40:03.002Z",
+  "note": "Exact PR #639 executable source 29879fa431e0fb7dfb6a5333a1330f3e9b04c306 passed Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), and Reproducible backend build, as well as mobile layout, completeness, backup safety, brand, and isolated Pages checks. This receipt is in a follow-up receipt-only commit; its referenced source is unchanged and will be revalidated on the final PR head. Includes the root and mirrored concierge redirect fix."
 }

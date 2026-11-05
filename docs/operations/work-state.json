@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T09:15:00Z",
+  "updated_at": "2026-11-05T10:02:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
+  "base_sha": "4b3481c9ede6f2736575e273b7c58c1c29df8d7d",
   "branch": "main",
-  "head_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
+  "head_sha": "4b3481c9ede6f2736575e273b7c58c1c29df8d7d",
   "pull_request": null,
   "work_items": [
     {
@@ -2148,7 +2148,6 @@
     "observed_at": "2026-11-05T09:15:00Z",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
-      597,
       526,
       514
     ],
@@ -2176,9 +2175,9 @@
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
     "checked_at": "2026-11-05T15:55:25+09:00",
-    "main_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
+    "main_sha": "4b3481c9ede6f2736575e273b7c58c1c29df8d7d",
     "release_decision": "NO-GO; production main is CI-green but exact-main Vercel deployment and several functional/manual acceptance gates remain incomplete.",
-    "new_progress": "Read-only production checks: homepage, feedback page and menu present; Vercel Web Analytics received pageviews. Production streaming JSON generated 2026-11-05T06:32:44Z: 430 rows total, including Nov 155 across 9 services (135 posters, 20 identity-unverified placeholders) and Dec 1 row. Main b70dec6 checks passed. Issue #593/#586 closed. Feedback DB schema exists; production admin token is absent, so authorized admin acceptance is blocked.",
+    "new_progress": "PR #605 merged to main (4b3481c9). Latest five main workflows including External data freshness audit succeeded. Exact-main production deployments for frontend and backend are CANCELED; 33c0a9ea remains prior READY production. Issue #593 closed but live poster and iPhone acceptance incomplete. Issue #239/#242/#243/#244/#585 open.",
     "next_steps": [
       "Repair exact-source proof for failed Update movie data run 41981020642; quality gate passed but publication refused. DB-sync step was skipped. Do not retry production DB sync until Neon quota is safe.",
       "Resolve missing FEEDBACK_ADMIN_TOKEN through owner-managed secret setup; then verify admin list/status end-to-end without exposing feedback contents.",
@@ -2186,7 +2185,7 @@
       "Maintain official-feed coverage by provider and month; do not present partial dated announcements as exhaustive current catalogs.",
       "Review PR #526 with required security review, keep #514 draft until licensed whole-catalog source exists, and supersede stale #597 only after a current checkpoint passes CI."
     ],
-    "checkpoint_at": "2026-11-05T10:58:22+09:00",
+    "checkpoint_at": "2026-11-05T10:02:00Z",
     "completed_since_previous": [
       "PR #600 merged as d0143829",
       "PR #601 official streaming refresh merged as 8078005f",
@@ -2195,11 +2194,11 @@
     ],
     "ci_observed": "Update movie data and Refresh official streaming calendar success; theater showtimes skipped by policy. Other scheduled director/DB-sync status and browser production poster sampling not yet verified.",
     "next_actions": [
-      "Verify #593 closure evidence and real production poster coverage before re-opening",
-      "Inspect director and backend DB-sync latest runs and logs, fix reproducible failures",
-      "Check November provider data coverage and approved-source event/IMAX limitations",
-      "Verify anonymous feedback persistence and admin authorization without exposing user data",
-      "Resolve stale dirty PR #597 without overwriting current main; close as superseded only after checkpoint PR merged"
+      "Inspect failed Update movie data 41981020642 and fix source-proof mismatch without disabling safeguards; check Neon Free quota before any DB synchronization.",
+      "Verify poster images via actual production page and image requests across routes, then physical iPhone Safari.",
+      "Complete owner-managed FEEDBACK_ADMIN_TOKEN setup and authorized admin list/status acceptance.",
+      "Audit event/IMAX source provenance and official streaming provider coverage; preserve explicit partial-coverage labels.",
+      "Review security PR #526; keep catalogue PR #514 draft pending approved source; check production promotion of exact verified source."
     ]
   },
   "issue_585_20261104": {
@@ -2221,16 +2220,15 @@
   },
   "release_gate": {
     "status": "NO-GO",
-    "verified_at": "2026-11-05T09:15:00Z",
-    "main_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
+    "verified_at": "2026-11-05T10:02:00Z",
+    "main_sha": "4b3481c9ede6f2736575e273b7c58c1c29df8d7d",
     "open_prs": [
-      597,
       526,
       514
     ],
     "poster_issue_593": "closed; production JSON poster data measured, but cross-route real image loads and physical iPhone Safari remain unverified",
-    "ci": "Main b70dec6: Pages build, CINELVA smoke, Publish verified legacy Pages, and Completeness scorecard succeeded. Update movie data run 41981020642 on 41400f48: quality gate passed; publication refused because executable source did not match CI-verified source; direct PostgreSQL sync skipped.",
-    "vercel": "Current production remains READY at 33c0a9ea; exact-main b70dec6 production deployment not confirmed.",
+    "ci": "Exact main 4b3481c9: External data freshness audit, completeness scorecard, legacy Pages publish, smoke tests and Pages deployment succeeded. Prior Update movie data 41981020642 failed exact-source publishing proof; no verified successful follow-up in latest 35 runs.",
+    "vercel": "Exact-main 4b3481c9 production deployments for cinema-calendar and backend CANCELED; prior main 33c0a9ea production READY on both. Branch preview 2d19b60a backend READY does not prove production.",
     "remaining": [
       "Production deployment of exact main and runbook proof",
       "Read-only cross-route poster image success plus physical iPhone Safari",
@@ -2240,11 +2238,11 @@
       "Event/IMAX provenance, freshness and automation"
     ],
     "next_actions": [
-      "Correct exact-source proof mismatch without bypassing the publication gate.",
-      "Do not restart endpoint or retry production DB sync until Neon quota reset/available allowance.",
-      "Complete admin acceptance only after owner-managed FEEDBACK_ADMIN_TOKEN setup.",
-      "Validate production poster fallback and analytics through browser/read-only tools.",
-      "Keep NO-GO until release conditions are evidenced."
+      "Inspect failed Update movie data 41981020642 and fix source-proof mismatch without disabling safeguards; check Neon Free quota before any DB synchronization.",
+      "Verify poster images via actual production page and image requests across routes, then physical iPhone Safari.",
+      "Complete owner-managed FEEDBACK_ADMIN_TOKEN setup and authorized admin list/status acceptance.",
+      "Audit event/IMAX source provenance and official streaming provider coverage; preserve explicit partial-coverage labels.",
+      "Review security PR #526; keep catalogue PR #514 draft pending approved source; check production promotion of exact verified source."
     ]
   }
 }

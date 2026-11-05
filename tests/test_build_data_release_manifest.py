@@ -33,6 +33,27 @@ class ManifestTests(unittest.TestCase):
             result = module.manifest_for([Path("snapshot.json")], root, SHA, "now")
             self.assertEqual(result["snapshots"][0]["path"], "snapshot.json")
 
+    def test_verify_rejects_snapshot_changed_after_manifest(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            path = root / "snapshot.json"
+            path.write_text('{"count":1}', encoding="utf-8")
+            manifest = module.manifest_for([path], root, SHA, "now")
+            self.assertTrue(module.verify_manifest(manifest, root))
+            path.write_text('{"count":2}', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                module.verify_manifest(manifest, root)
+
+    def test_verify_rejects_modified_manifest_version(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            path = root / "snapshot.json"
+            path.write_text("{}", encoding="utf-8")
+            manifest = module.manifest_for([path], root, SHA, "now")
+            manifest["dataset_version"] = "0" * 64
+            with self.assertRaises(ValueError):
+                module.verify_manifest(manifest, root)
+
     def test_rejects_invalid_json(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "bad.json"

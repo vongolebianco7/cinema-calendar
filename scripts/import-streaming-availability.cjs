@@ -18,6 +18,21 @@ function validateImport(feed,now=Date.now()){
  }
  return {ok:problems.length===0,problems};
 }
+function writeValidatedImport(feed,outputPath,now=Date.now()){
+ const validation=validateImport(feed,now);
+ if(!validation.ok)return validation;
+ const target=path.resolve(outputPath);
+ const directory=path.dirname(target);
+ const temporary=path.join(directory,'.'+path.basename(target)+'.'+process.pid+'.'+require('node:crypto').randomUUID()+'.tmp');
+ try{
+  const {schema_version,country,generated_at,services,license,coverage_audit}=feed;
+  fs.writeFileSync(temporary,JSON.stringify({schema_version,country,generated_at,license,coverage_audit,services},null,2)+'\\n',{flag:'wx'});
+  fs.renameSync(temporary,target);
+  return {ok:true,problems:[]};
+ }finally{
+  try{fs.unlinkSync(temporary)}catch(error){if(error.code!=='ENOENT')throw error}
+ }
+}
 if(require.main===module){
  const file=process.argv[2],write=process.argv.includes('--write');
  if(!file){console.error('Usage: node scripts/import-streaming-availability.cjs <licensed-feed.json> [--write]');process.exitCode=2}
@@ -35,4 +50,4 @@ if(require.main===module){
   }catch(error){console.error(error.message);process.exitCode=1}
  }
 }
-module.exports={validateImport};
+module.exports={validateImport,writeValidatedImport};

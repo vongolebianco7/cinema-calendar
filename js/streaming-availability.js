@@ -9,7 +9,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
   const MAX_AGE_MS = 48 * 60 * 60 * 1000;
-  const serviceKeys = ['Netflix','U-NEXT','Prime Video','Disney+','Hulu','Apple TV','Lemino','WOWOW'];
+  const serviceKeys = ['Netflix','Prime Video','Disney+','U-NEXT','Hulu','Apple TV+','Lemino','ABEMA','DMM TV','FOD','TELASA','WOWOWオンデマンド'];
   function validateSnapshot(snapshot, service, now = Date.now()) {
     if (!serviceKeys.includes(service)) return {ok:false,reason:'unsupported-service'};
     if (!snapshot || snapshot.schema_version !== 1 || snapshot.country !== 'JP') return {ok:false,reason:'invalid-region-or-schema'};

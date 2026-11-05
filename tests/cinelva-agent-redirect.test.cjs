@@ -4,13 +4,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 test('legacy concierge redirects stay within their document roots despite base href', () => {
-  for (const [file, expected] of [
-    ['agent.html', '/discover.html?mode=concierge'],
-    ['cinelva/agent.html', '/cinelva/discover.html?mode=concierge']
-  ]) {
+  for (const file of ['agent.html', 'cinelva/agent.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    const match = html.match(/location\\.replace\\(new URL\\("([^"]+)",location\\.href\\)\\.href\\)/);
-    assert.ok(match, file + ' must resolve relative to the document URL');
-    assert.equal(new URL(match[1], 'https://cinelva.example/' + file).pathname + '?mode=concierge', expected);
+    const target = 'location.replace(new URL("./discover.html?mode=concierge",location.href).href)';
+    assert.ok(html.includes(target), file + ' must resolve relative to the document URL');
+    const expected = file.startsWith('cinelva/') ? '/cinelva/discover.html' : '/discover.html';
+    assert.equal(new URL('./discover.html?mode=concierge', 'https://cinelva.example/' + file).pathname, expected);
   }
 });

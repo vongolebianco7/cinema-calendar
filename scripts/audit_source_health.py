@@ -3,6 +3,7 @@
 import argparse
 import datetime as dt
 import json
+import os
 from pathlib import Path
 
 UTC = dt.timezone.utc
@@ -74,6 +75,22 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], sort_keys=True))
+    unhealthy = [item for item in report["sources"] if item["health"] in {"stale", "unknown"}]
+    for item in unhealthy:
+        print(f"::warning title=Stale or unverified source::{item['id']} is {item['health']}; "
+              f"last observation: {item['observed_at'] or 'missing'}")
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary_path:
+        lines = ["## CINELVA source freshness", "",
+                 "Source observation age only; **not** evidence of complete catalog coverage.", "",
+                 "| Source | Intake | Health | Observed at |",
+                 "| --- | --- | --- | --- |"]
+        for item in report["sources"]:
+            lines.append(f"| {item['id']} | {item['acquisition_mode']} | "
+                         f"{item['health']} | {item['observed_at'] or 'unknown'} |")
+        with open(summary_path, "a", encoding="utf-8") as output:
+            output.write("\n".join(lines) + "\n")
+
 
 
 if __name__ == "__main__":

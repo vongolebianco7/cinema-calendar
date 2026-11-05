@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d401ef306ff5c7e04b849eff5de0ff1492c249bf",
-  "verified_at": "2026-11-05T18:07:48.783Z",
-  "note": "PR #624 exact executable source d401ef306ff5c7e04b849eff5de0ff1492c249bf: Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build all passed; mobile layout and completeness scorecard also passed. The merged source tree matches that verified source digest. This receipt-only follow-up restores the guarded publication proof; TV source coverage remains partial and production acceptance is pending."
+  "head_sha": "a5aa00359fd5794e0ecb1a687c22e54c58bd5de3",
+  "verified_at": "2026-11-05T18:56:11.990Z",
+  "note": "PR #633 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), Reproducible backend build, mobile layout smoke, and completeness scorecard passed. The receipt is receipt-only: source files, data, database and user records are unchanged by this receipt."
 }

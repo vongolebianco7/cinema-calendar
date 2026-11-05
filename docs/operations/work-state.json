@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:54:37Z",
+  "updated_at": "2026-11-05T22:57:20Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2759,5 +2759,24 @@
       "Inspect main Actions publication and Vercel latest deployments; test the exact public URL and core route data after deployment; do not close release Issues before acceptance."
     ],
     "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data."
-  }
+  },
+  "open_pull_requests": [
+    {
+      "number": 647,
+      "branch": "fix/atomic-streaming-catalog-import-20261106",
+      "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
+      "status": "source fix complete; exact-head Validate frontend still in progress; other exact-head required workflows green"
+    },
+    {
+      "number": 648,
+      "branch": "docs/current-release-checkpoint-20261105",
+      "status": "current-main checkpoint; exact-head smoke passed; mobile and autonomous checks in progress"
+    }
+  ],
+  "closed_pull_requests": [
+    {
+      "number": 646,
+      "result": "closed as stale duplicate after checkpoint moved to #648"
+    }
+  ]
 }

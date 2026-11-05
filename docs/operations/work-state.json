@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T12:04:26Z",
+  "updated_at": "2026-11-05T12:57:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2220,15 +2220,15 @@
   },
   "release_gate": {
     "status": "NO-GO",
-    "verified_at": "2026-11-05T12:04:26Z",
-    "main_sha": "173e276e972621343a2d5accbb0dd9ffd73d9f4b",
+    "verified_at": "2026-11-05T12:57:00Z",
+    "main_sha": "7a2e2bfb07f056e88b83de32b762ab303a583d0d",
     "open_prs": [
       526,
       514
     ],
     "poster_issue_593": "closed; production JSON poster data measured, but cross-route real image loads and physical iPhone Safari remain unverified",
-    "ci": "GitHub commit-workflow lookup for 173e276e returned zero PR-triggered runs (not proof main workflows failed or passed). Previous main Actions success remains historical.",
-    "vercel": "Latest observed exact-main 173e276e frontend/backend production deployments CANCELED; prior 33c0a9ea both READY. Do not claim current main production deployed.",
+    "ci": "Latest main 7a2e2bfb PR-triggered workflow lookup empty (endpoint limitation). No current main Actions success claim.",
+    "vercel": "Latest main 7a2e2bfb frontend production READY, backend production CANCELED; previous 3259dbb both READY. Commit combined status reports success for both Vercel contexts but backend deployment record is CANCELED: verify canonical alias and do not equate check status with production readiness.",
     "remaining": [
       "Production deployment of exact main and runbook proof",
       "Read-only cross-route poster image success plus physical iPhone Safari",
@@ -2238,12 +2238,11 @@
       "Event/IMAX provenance, freshness and automation"
     ],
     "next_actions": [
-      "Investigate Update movie data exact-source proof mismatch and read-only Neon quota before sync.",
-      "Check why production builds for 173e276e were canceled; confirm deployed canonical aliases and exact source before promotion.",
-      "Sample actual poster image requests across routes and iPhone Safari.",
-      "Set FEEDBACK_ADMIN_TOKEN via owner; then authorized admin acceptance.",
-      "Audit events/IMAX official source freshness and per-provider November streaming gaps.",
-      "Security PR #526 requires review; PR #514 remains draft pending licensed data."
+      "Investigate latest backend CANCELED versus combined status success and canonical alias source.",
+      "Inspect movie update exact-source guard failure and Neon Free quota before DB sync.",
+      "Cross-route real poster HTTP/DOM and physical iPhone Safari acceptance.",
+      "Audit November streaming, event/IMAX provenance and freshness.",
+      "Owner must set FEEDBACK_ADMIN_TOKEN before admin acceptance; review security PR #526; keep #514 draft pending license."
     ]
   },
   "latest_automation_check_20261105_2104": {
@@ -2257,5 +2256,18 @@
     "actions_limit": "Commit lookup only returns pull_request runs; no main workflow conclusion established",
     "no_mutation": "No production DB, secrets, user data, or deployment changes",
     "next": "Resolve exact-source publication guard and Neon quota read-only before DB sync; check image loads, admin token, IMAX/event provenance."
+  },
+  "latest_automation_check_20261105_2157": {
+    "observed_at": "2026-11-05T12:57:00Z",
+    "main_before_checkpoint": "7a2e2bfb07f056e88b83de32b762ab303a583d0d",
+    "main_change": "Scheduled GitHub Actions bot updated director-feature-index.json, directors-mobile.json, directors.json at 12:53:38 UTC; no assumption of full director/DB sync recovery.",
+    "open_prs": [
+      526,
+      514
+    ],
+    "production": "Frontend latest 7a2e2bfb READY, backend latest 7a2e2bfb CANCELED; both 3259dbb READY.",
+    "ci_limit": "Commit PR-workflow endpoint empty; combined Vercel statuses success for both despite backend CANCELED. Need independent canonical alias and main workflow check.",
+    "remaining": "Poster actual loads, movie data exact-source guard, Neon quota DB sync, streaming coverage, event/IMAX provenance, admin token, iPhone, security review.",
+    "next": "Read-only investigate deployment mismatch and source guard, do not alter safety checks or production DB."
   }
 }

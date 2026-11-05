@@ -28,6 +28,7 @@ jobs:
             const {owner, repo} = context.repo;
             const now = Date.now();
             const ageMinutes = timestamp => Math.round((now - Date.parse(timestamp)) / 60000);
+            const checkpointUrl = `https://github.com/${owner}/${repo}/blob/main/docs/operations/work-state.json`;
             const prs = await github.paginate(github.rest.pulls.list, {owner, repo, state:'open', per_page:100});
             const warnings = [];
             const details = [];
@@ -67,7 +68,7 @@ jobs:
               '### Attention needed',
               ...warnings.map(s=>'- '+s),
               '',
-              'Next: check exact-head required CI, investigate failures, then resume the next safe task from [the checkpoint](../blob/main/docs/operations/work-state.json).',
+              `Next: check exact-head required CI, investigate failures, then resume the next safe task from [the checkpoint](${checkpointUrl}).`,
               'Do not bypass required checks, auto-merge, or modify production data.'
             ].join('\n');
             await core.summary.addHeading('CINELVA development watchdog').addRaw(body).write();

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T05:40:48.537264+00:00",
+  "generated_at": "2026-11-05T06:32:44.647147+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -7335,7 +7335,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "tmdb_id": 693134
+      "tmdb_id": 693134,
+      "poster": "https://image.tmdb.org/t/p/w500/uKaLrrf2pjunXroqHFO80Bzg8jx.jpg",
+      "id": 693134,
+      "tmdb": "https://www.themoviedb.org/movie/693134"
     },
     {
       "title": "G.I. ジョー 漆黒のスネークアイズ",
@@ -7413,7 +7416,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "tmdb_id": 13475
+      "tmdb_id": 13475,
+      "poster": "https://image.tmdb.org/t/p/w500/z6IinWYgAG6LJSHXwNFJ7Hnl0qH.jpg",
+      "id": 13475,
+      "tmdb": "https://www.themoviedb.org/movie/13475"
     },
     {
       "title": "スター・トレック イントゥ・ダークネス",
@@ -7465,7 +7471,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "tmdb_id": 199
+      "tmdb_id": 199,
+      "poster": "https://image.tmdb.org/t/p/w500/96x7OQAtGEF9EvZfSkcUrb22li0.jpg",
+      "id": 199,
+      "tmdb": "https://www.themoviedb.org/movie/199"
     },
     {
       "title": "スポンジ・ボブ / スクエアパンツ ザ・ムービー",
@@ -7891,7 +7900,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "tmdb_id": 9659
+      "tmdb_id": 9659,
+      "poster": "https://image.tmdb.org/t/p/w500/altY9ce7kPqZcc02xldlYceIkXm.jpg",
+      "id": 9659,
+      "tmdb": "https://www.themoviedb.org/movie/9659"
     },
     {
       "title": "マッド・マックス２",
@@ -7904,7 +7916,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "tmdb_id": 8810
+      "tmdb_id": 8810,
+      "poster": "https://image.tmdb.org/t/p/w500/wCNe2dJ9cCi8r3pktfxwRaMY4DA.jpg",
+      "id": 8810,
+      "tmdb": "https://www.themoviedb.org/movie/8810"
     },
     {
       "title": "マッドマックス　怒りのデス・ロード",
@@ -9063,7 +9078,7 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/d06Eb5ORa7zyygZYUL7zvZuveXU.jpg",
       "source": "Leminoポータル 2026年11月配信予定",
       "source_url": "https://lemino.docomo.ne.jp/ft/0000200/",
       "checked_at": "2026-11-05"

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T22:22:56.837Z",
+  "generated_at": "2026-11-05T23:32:31.110Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -16,8 +16,8 @@
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
         "total": 1594,
-        "fresh": 1046,
-        "stale": 548,
+        "fresh": 980,
+        "stale": 614,
         "unknown": 0
       }
     },
@@ -83,7 +83,7 @@
       "status": "automated",
       "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
       "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
-      "source_observed_at": "2026-11-05T22:22:56.648Z",
+      "source_observed_at": "2026-11-05T23:32:29.380Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",

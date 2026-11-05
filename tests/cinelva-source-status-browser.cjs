@@ -31,7 +31,9 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   assert.equal(await page.locator('.source-status-item').count(),expectedSourceCount);
   assert.match(await page.locator('[data-source-category="theater-directory"]').innerText(),/取得範囲を見直すまで自動更新停止中[\s\S]*営業状況は未確認/);
   const tvStatus=await page.locator('[data-source-category="television-schedules"]').innerText();
-  assert.match(tvStatus,/人が公式出典を確認して登録[\s\S]*収録件数：16件[\s\S]*TMDB作品情報の照合[\s\S]*全国全局の網羅を保証しない/);
+  const tvRecordCount=require('../data/source-status.json').sources.find(source=>source.id==='television-schedules').record_count;
+  assert.match(tvStatus,/人が公式出典を確認して登録[\s\S]*TMDB作品情報の照合[\s\S]*全国全局の網羅を保証しない/);
+  assert.ok(tvStatus.includes(`収録件数：${tvRecordCount}件`),'TV source status count matches its registry record');
   const showtimes=await page.locator('[data-source-category="theater-showtimes"]').innerText();
   assert.match(showtimes,/許諾確認待ち・自動取得停止中[\s\S]*収録件数：1225件[\s\S]*job disabled/);
   const nowPlaying=await page.locator('[data-source-category="now-playing"]').innerText();

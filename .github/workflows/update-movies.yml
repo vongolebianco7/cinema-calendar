@@ -6,6 +6,7 @@ on:
     paths:
       - data/streaming.json
       - data/streaming_announcements.json
+      - data/streaming-official-current.json
   schedule:
     - cron: "17 18 * * *"
 concurrency:

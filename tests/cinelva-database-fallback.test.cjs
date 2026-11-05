@@ -1,5 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const {createReadFallback,calendarSnapshot,movieSnapshot,tvSnapshot,mergeTelevisionRows,theaterSnapshot,releaseSnapshot}=require('../backend/lib/catalog-snapshot.cjs');
+const {upcomingTelevisionRows}=require('../backend/lib/tv-broadcasts.cjs');
 function snapshotFixture(movies){
  const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
  const context={module:{exports:{}},setTimeout,clearTimeout,require:name=>{
@@ -48,7 +49,7 @@ test('TV API keeps the feed observation timestamp instead of stamping old rows a
  const fs=require('node:fs'),vm=require('node:vm'),{stripTypeScriptTypes}=require('node:module');
  const code=stripTypeScriptTypes(fs.readFileSync('backend/app/api/tv/route.ts','utf8'),{mode:'transform'}).replace(/^import .*?;\n/gm,'').replaceAll('export ','');
  const source={generated_at:'2026-11-06T01:00:00Z',movies:[],automation_checked_at:'2026-11-06T01:00:00Z'};
- const context={readWithSnapshot:read=>read(),tvSnapshot:()=>source,mergeTelevisionRows:(database,snapshot)=>[...database,...snapshot],prisma:{tvBroadcast:{findMany:async()=>[]}},json:value=>value,rateLimited:()=>null,options:()=>null};
+ const context={readWithSnapshot:read=>read(),tvSnapshot:()=>source,mergeTelevisionRows:(database,snapshot)=>[...database,...snapshot],upcomingTelevisionRows,prisma:{tvBroadcast:{findMany:async()=>[]}},json:value=>value,rateLimited:()=>null,options:()=>null};
  vm.runInNewContext(code+';globalThis.get=GET',context);
  const result=await context.get({url:'https://fixture/api/tv'});
  assert.equal(result.generated_at,source.generated_at);

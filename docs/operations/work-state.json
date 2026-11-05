@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T22:57:20Z",
+  "updated_at": "2026-11-05T22:59:20Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2765,12 +2765,19 @@
       "number": 647,
       "branch": "fix/atomic-streaming-catalog-import-20261106",
       "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
-      "status": "source fix complete; exact-head Validate frontend still in progress; other exact-head required workflows green"
+      "status": "smoke, backend, mobile, completeness, autonomous green; Validate frontend still running its My Cinelva browser journey"
     },
     {
       "number": 648,
       "branch": "docs/current-release-checkpoint-20261105",
-      "status": "current-main checkpoint; exact-head smoke passed; mobile and autonomous checks in progress"
+      "head_sha": "d28109cb97162c78011a46e9ed26efca46af3b18",
+      "status": "current-main checkpoint; smoke green; mobile and autonomous CI in progress; will need a final update after #649 is included"
+    },
+    {
+      "number": 649,
+      "branch": "fix/discovery-history-versus-true-story-20261105",
+      "head_sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
+      "status": "separate visible true-story preset and smoke regression; exact-head CI in progress"
     }
   ],
   "closed_pull_requests": [
@@ -2778,5 +2785,8 @@
       "number": 646,
       "result": "closed as stale duplicate after checkpoint moved to #648"
     }
+  ],
+  "next_concrete_actions": [
+    "PR #649 implements the user-visible distinction between film-history classics and works explicitly based on true stories; verify its smoke regression and all exact-head CI before merging."
   ]
 }

@@ -28,7 +28,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.equal((await page.locator('#csLifetime').innerText()).replaceAll(',','').trim(),'1200','year filtering preserves lifetime count');
   await page.locator('#gMenuBtn').click();await page.locator('.cinelvaTheme select').selectOption('light');assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
   await page.locator('.cinelvaTheme select').selectOption('dark');assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
-  await page.locator('[aria-label="デモ表示"] button').click();assert.equal(await page.evaluate(()=>Object.keys(window.CinelvaDemo.records()).length),1200);
+  await Promise.all([page.waitForNavigation({waitUntil:'domcontentloaded'}),page.locator('[aria-label="デモ表示"] button').click()]);assert.equal(await page.evaluate(()=>Object.keys(window.CinelvaDemo.records()).length),1200);
   await page.setViewportSize({width:1280,height:900});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'1280px demo must not overflow horizontally');
   fs.mkdirSync('artifacts/cinelva-demo',{recursive:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:`artifacts/cinelva-demo/${process.env.CINELVA_BROWSER||'chromium'}-demo.png`,fullPage:true});
   assert.deepEqual(external,[],'demo data must be local and must not request external APIs');assert.deepEqual(errors,[]);

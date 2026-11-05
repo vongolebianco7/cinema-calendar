@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:18:00Z",
+  "updated_at": "2026-11-05T15:56:47Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2421,5 +2421,28 @@
       "Research licensed non-scraping event/IMAX/TV sources before enabling automated acquisition"
     ],
     "safety": "No user records, DB, secrets, deployments or production application source changed; only diagnostics PR and checkpoint."
+  },
+  "latest_automation_check_20261106_0056": {
+    "observed_at": "2026-11-05T15:56:47Z",
+    "release_decision": "NO-GO",
+    "merged_prior": [
+      615,
+      616,
+      617
+    ],
+    "pr_611": "Closed without merge; its diagnostics-only patch must not be assumed integrated",
+    "pr_612": "Open, mergeable=true at latest check; all six listed PR checks succeeded. Patch adds preflight check_sources.py and verify-production-release.cjs --require before TMDB API collection; requires verified production-proof receipt on changed executable source.",
+    "pr_614": "Open, mergeable=true at latest check; six checks succeeded, Validate frontend still in_progress. Patch regenerates data/source-status.json with now_playing.json; do not merge until browser check completes.",
+    "pr_526": "Open, mergeable=false, 11 listed checks passed on PR head; conflicts require review and resolution",
+    "pr_514": "Open, mergeable=false, nine listed checks passed on PR head; licensing and conflicts remain",
+    "source_guard": "Both #612 and #614 change workflows (executable source), so verify exact-source receipt renewal before deploying scheduled updates; do not bypass fail-closed guard.",
+    "next_actions": [
+      "Wait for #614 exact-head Validate frontend and review, then merge only if all required checks pass and source attestation can be renewed",
+      "Review #612 source attestation sequencing and coordinate verified receipt update; do not blindly merge changes that stop scheduled updates",
+      "Investigate #611 closure and whether equivalent diagnostics reached main",
+      "Resolve #526 security conflicts and #514 licensing before merging",
+      "Continue live production poster, DB sync, provider/event/IMAX, feedback admin and iPhone acceptance"
+    ],
+    "safety": "No DB, secret, production deployment, user record, or workflow guard modified; documentation-only checkpoint."
   }
 }

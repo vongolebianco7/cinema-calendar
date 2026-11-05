@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T21:19:18.334Z",
+  "updated_at": "2026-11-05T22:54:37Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c075e500e95dd59762eae8daf757b1aebf8c3406",
-  "branch": "main",
-  "head_sha": "c075e500e95dd59762eae8daf757b1aebf8c3406",
-  "pull_request": null,
+  "base_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+  "branch": "docs/current-release-checkpoint-20261105",
+  "head_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+  "pull_request": 648,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -2681,5 +2681,83 @@
       "Complete physical iPhone Safari acceptance."
     ],
     "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, fold a production-proof receipt referencing the exact tested source into the route fix PR, require all checks on resulting head, merge atomically, close superseded #640, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
+  },
+  "current_release_checkpoint": {
+    "master_issue": 239,
+    "latest_main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+    "merged_pull_requests": [
+      {
+        "number": 642,
+        "merge_sha": "0dd74e931415b5f81493689a7710aac054990156",
+        "result": "CI and concierge source checks passed; merged"
+      },
+      {
+        "number": 645,
+        "merge_sha": "1051259997386a73ae387bac98998e6f823ad0c7",
+        "result": "demo branch isolated from production; exact CI passed, Vercel Hobby quota prevented preview deployment; acceptance still failed"
+      },
+      {
+        "number": 644,
+        "merge_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+        "result": "fail-closed 12-provider rights/coverage import gate; no feeds enabled"
+      }
+    ],
+    "closed_pull_requests": [
+      {
+        "number": 514,
+        "result": "closed unmerged; audited rights/coverage gate from its eligible work was superseded into #644"
+      }
+    ],
+    "open_pull_requests": [
+      {
+        "number": 647,
+        "branch": "fix/atomic-streaming-catalog-import-20261106",
+        "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
+        "status": "source fix complete; exact-head Validate frontend still in progress; other exact-head required workflows green"
+      },
+      {
+        "number": 646,
+        "branch": "docs/cinelva-checkpoint-20261106",
+        "head_sha": "a4d6ec4fe014771df9b6883f0910ad8d3d291c25",
+        "status": "stale duplicate checkpoint; supersede after this checkpoint is merged"
+      }
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      529,
+      585
+    ],
+    "latest_main_actions": {
+      "commit_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+      "smoke": "success",
+      "completeness": "success",
+      "pages_build": "success",
+      "publish_verified_legacy_pages": "failure: stale CI receipt; receipt source fcf3b18a differs from current executable source",
+      "next": "after #647 source checks pass, refresh production-proof.json to exact tested source 55849d0148391868ae63fd36cd76ce0c06dea281, merge with all exact-head checks green, verify the main Pages publication workflow"
+    },
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "http_status": 200,
+      "state": "serves stale build; current main is not production verified",
+      "vercel": "Hobby free-tier deployment cap blocked recent frontend/backend main builds; do not retry until quota window resets; preserve free tier"
+    },
+    "blockers": [
+      "No verified rights-compliant official feeds for the 12 streaming providers; none are enabled, and exhaustive coverage must not be claimed.",
+      "Vercel Hobby deployment quota blocks current-main production rollout.",
+      "Physical iPhone Safari acceptance has not been performed.",
+      "Issue #585 administrator token/environment configuration requires owner-side private setup; do not expose any secret.",
+      "Issue #529 demo branch preview currently renders the regular calendar instead of the isolated My Cinelva demo; acceptance incomplete."
+    ],
+    "next_concrete_actions": [
+      "Inspect exact-head run 42124176106 (PR #647 Validate frontend). If it fails, fetch failed step logs, fix the cause on the PR branch, and rerun; if it succeeds, verify all required PR event workflows for the tested source head.",
+      "Once all required source checks pass, update quality/production-proof.json to reference the verified executable source head and retain explicit CI-only evidence; update this checkpoint with actual results.",
+      "Re-run PR checks for the final head; merge #647 only when exact-head checks are green and mergeable.",
+      "Close #646 as superseded only after the current checkpoint is merged.",
+      "Inspect main Actions publication and Vercel latest deployments; test the exact public URL and core route data after deployment; do not close release Issues before acceptance."
+    ],
+    "safety": "No scraping, paid tier, secret exposure, destructive schema change, or edits to user watch/rating/bookmark data."
   }
 }

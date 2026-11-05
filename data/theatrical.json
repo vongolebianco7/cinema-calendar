@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T00:01:18.806656+00:00",
+  "generated_at": "2026-11-05T00:22:55.075422+00:00",
   "refresh_policy": {
     "near_term": [
       "2026-10-06",
@@ -24273,7 +24273,7 @@
       "date": "2026-12-18",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/jEUAZKviKvotw1SzsVDH55CfVrj.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/1MQA1Wg2dK7KmvsM5UOXXdMqrDd.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -24295,7 +24295,7 @@
         "サイエンスフィクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1003596,
@@ -24326,7 +24326,7 @@
         "アクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1220564,
@@ -24391,7 +24391,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-10-20T18:48:23.011816+00:00"
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1094274,
@@ -24400,9 +24400,9 @@
       "date": "2026-12-25",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qndubIQalyxBJI5EBNZKGXEX74q.jpg",
-      "score": 5.15,
-      "votes": 309,
+      "poster": "https://image.tmdb.org/t/p/w500/vWigdAG9Q4xrlbcWcBOYkIJZ4sb.jpg",
+      "score": 5.134,
+      "votes": 331,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1094274",
       "director": "カイル・ムーニー",
@@ -24421,7 +24421,8 @@
         "サイエンスフィクション",
         "ホラー",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1397364,
@@ -24431,8 +24432,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/g8x2zmPvlmYobahJRb7enPDa1ZU.jpg",
-      "score": 7.3,
-      "votes": 444,
+      "score": 7.329,
+      "votes": 465,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1397364",
       "director": "パオロ・ソレンティーノ",
@@ -24449,7 +24450,8 @@
       "runtime": 133,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1284016,
@@ -24459,8 +24461,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/sGgX2K0SJqw90Ju8TONdhDVwlzT.jpg",
-      "score": 7.061,
-      "votes": 107,
+      "score": 7.128,
+      "votes": 137,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1284016",
       "director": "ジョン・カーニー",
@@ -24480,7 +24482,8 @@
         "コメディ",
         "音楽",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1117898,
@@ -24489,9 +24492,9 @@
       "date": "2026-12-25",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/mWN6knIVJ2o7eGwSm7mOgSCwNUc.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "poster": "https://image.tmdb.org/t/p/w500/ltbl17lqYWdbHfgfsm5BPujOS4f.jpg",
+      "score": 7.2,
+      "votes": 5,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1117898",
       "director": "Erica Rivinoja",
@@ -24506,19 +24509,20 @@
         "United Kingdom",
         "United States of America"
       ],
-      "runtime": 91,
+      "runtime": 108,
       "genres": [
+        "アドベンチャー",
         "アニメーション",
         "コメディ",
-        "アドベンチャー",
-        "ファンタジー",
-        "ファミリー"
-      ]
+        "ファミリー",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1757707,
-      "title": "巨頭オ",
-      "original_title": "巨頭オ",
+      "title": "巨頭ｵ",
+      "original_title": "巨頭ｵ",
       "date": "2026-12-25",
       "event": "theatrical",
       "service": "劇場公開",
@@ -24531,13 +24535,18 @@
       "director_id": 4351269,
       "cast": [
         "前田拳太郎",
-        "久保史緒里"
+        "久保史緒里",
+        "渡邉蒼",
+        "吉田悟郎"
       ],
-      "countries": [],
+      "countries": [
+        "Japan"
+      ],
       "runtime": 0,
       "genres": [
         "ホラー"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1657317,
@@ -24560,11 +24569,12 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 127,
       "genres": [
         "謎",
         "アクション"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1621673,
@@ -24594,7 +24604,8 @@
         "ドラマ",
         "音楽",
         "履歴"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1260649,
@@ -24636,7 +24647,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/7jv9DMLnYVCux6Q0FFWZCjdo5XF.jpg",
       "score": 7.1,
-      "votes": 19,
+      "votes": 21,
       "overview": "ジョン・レノンがビートルズ解散後に唯一行ったフルコンサート「One to One」を含む18ヶ月の日々を軸に、ジョンと妻オノ・ヨーコが駆け抜けた1970年代初頭のニューヨークを没入感たっぷりに描いたドキュメンタリー。  ザ・ビートルズ解散後の1971年、ジョン・レノンとヨーコ・オノはイギリスを離れ、ニューヨークの小さなアパートに移り住み新生活を始める。彼らがブラウン管越しに見つめていたのは、ベトナム戦争の狂騒やニクソン大統領の演説、そして華やかなテレビ番組やCMなど、混沌としたアメリカ社会そのものだった。平和を願うメッセージで熱狂的な称賛を浴びるジョンとヨーコだったが、既存の枠組みを揺るがす彼らの姿は、時にメディアや権力からの誹謗の標的となってしまう。そんな逆風の中でも、2人は信念を貫き「愛と平和」を歌い続ける。 グリニッチ・ビレッジの自由な空気の中で芸術家やミュージシャン、反戦・反体制活動家たちとの交流を深め、さまざまな活動を繰り広げていく。その一つが1972年8月30日にニューヨークのマディソン・スクエア・ガーデンで行われたチャリティー・コンサート「One to One」で、ジョンがザ・ビートルズ解散後に行なった唯一のフル・コンサートとしてよく知られている。新たに修復された同コンサートの鮮明な映像を中心に、2人が撮影したホームビデオ映像や肉声を記録した通話音声、当時のテレビ番組のアーカイブ映像などを織り交ぜ、ジョンとヨーコの親密な姿やビレッジの活気、反戦・反差別を訴えアクティブに活動した彼らのひたむきな姿を捉えながら、時代の空気を鮮烈に呼び起こす。",
       "tmdb": "https://www.themoviedb.org/movie/1320392",
       "director": "ケヴィン・マクドナルド",
@@ -24654,7 +24665,8 @@
       "genres": [
         "ドキュメンタリー",
         "音楽"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1167307,
@@ -24664,8 +24676,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/bESlrLOrsQ9gKzaGQGHXKOyIUtX.jpg",
-      "score": 8.1,
-      "votes": 196,
+      "score": 8.048,
+      "votes": 208,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1167307",
       "director": "Phil Cunningham",
@@ -24687,7 +24699,8 @@
         "ドラマ",
         "履歴",
         "アドベンチャー"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 840464,
@@ -24697,8 +24710,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/z2tqCJLsw6uEJ8nJV8BsQXGa3dr.jpg",
-      "score": 6.381,
-      "votes": 1557,
+      "score": 6.376,
+      "votes": 1646,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/840464",
       "director": "Ric Roman Waugh",
@@ -24706,7 +24719,7 @@
       "cast": [
         "ジェラルド・バトラー",
         "モリーナ・バッカリン",
-        "Roman Griffin Davis",
+        "ローマン・グリフィン・デイヴィス",
         "Tommie Earl Jenkins"
       ],
       "countries": [
@@ -24718,7 +24731,8 @@
         "アドベンチャー",
         "スリラー",
         "サイエンスフィクション"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1375646,
@@ -24728,8 +24742,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/zrYz4XEfT4Rx6Div0wPFfQwyFqK.jpg",
-      "score": 8.068,
-      "votes": 873,
+      "score": 8.213,
+      "votes": 1519,
       "overview": "ソウル都心の超高層ビル。突如発生した未知のバイオテロにより封鎖され逃げ場なきビルに残されたバイオテクノロジー教授であるクォン・セジョン（チョン・ジヒョン）らは、粘る糸を引きながら猛スピードで襲い来る“未知の感染者たち”が、集団知性を持ち、進化し続けることに気づく。生存者たちはヤツらから逃げ切り、超高層ビルから脱出することが出来るのかー──？",
       "tmdb": "https://www.themoviedb.org/movie/1375646",
       "director": "ヨン・サンホ",
@@ -24745,10 +24759,11 @@
       ],
       "runtime": 123,
       "genres": [
-        "アクション",
         "ホラー",
+        "アクション",
         "サイエンスフィクション"
-      ]
+      ],
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1481955,
@@ -24759,7 +24774,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ryCanTADyAo7bqRr1aca2ThuTeE.jpg",
       "score": 7.2,
-      "votes": 9,
+      "votes": 12,
       "overview": "光の届かない場所で生まれた歌声が、台湾全土をやさしく包み込んだ──。 女子刑務所で誕生した女児を大切に育てる母親と、辛い過去を抱えた4人の受刑者たち。 しかし、娘に“失明の危機”が迫り、「最後に最高の思い出を！」と合唱団を結成する。 反発を重ねながらも、歌を通して絆を深めていく姿は、世代を超えて人々の心を揺さぶり、",
       "tmdb": "https://www.themoviedb.org/movie/1481955",
       "director": "林孝謙",
@@ -24777,7 +24792,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-01T18:33:59.121809+00:00"
+      "checked_at": "2026-11-05T00:22:55.075422+00:00"
     },
     {
       "id": 1153714,

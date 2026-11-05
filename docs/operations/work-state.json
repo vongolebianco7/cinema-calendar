@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T07:58:00Z",
+  "updated_at": "2026-11-05T09:15:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
+  "base_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
   "branch": "main",
-  "head_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
+  "head_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
   "pull_request": null,
   "work_items": [
     {
@@ -918,11 +918,12 @@
     "current_release_user_approved": true
   },
   "blockers": [
-    "Explicit user approval required before publication; main code merges can trigger production deployment.",
-    "Physical iPhone Safari, material/source rights and external-data coverage remain unverified.",
-    "Neon Free transfer quota blocker; no compute restart/DB sync retry before reset and available free quota."
+    "FEEDBACK_ADMIN_TOKEN is absent from Vercel production environment; owner must set it before authorized admin-list/status acceptance can be completed.",
+    "Physical iPhone Safari acceptance remains unverified.",
+    "Neon Free transfer quota remains a blocker for another production movie/DB sync; do not retry or restart compute before quota reset/available allowance.",
+    "Complete provider catalogue coverage is unavailable from approved dated official feeds; do not claim exhaustive streaming availability."
   ],
-  "next_action": "Main and both Vercel production builds now READY at 33c0a9ea. Prioritize failed movie-data/DB sync logs, read-only poster/feedback acceptance and event/IMAX provenance; do not mistake READY for functional verification.",
+  "next_action": "Main b70dec6 is CI-green. Continue read-only validation and fix the Update movie data publication proof mismatch before any DB-sync retry; preserve Neon Free quota. Production data currently has 155 November streaming rows across 9 providers (20 missing posters intentionally unresolved) and one December row; do not describe this as exhaustive. Issue #593 and #586 are closed, while their acceptance evidence and ongoing coverage limits remain tracked.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2144,7 +2145,7 @@
     "remaining": "Physical iPhone acceptance and broader asset/legal/private-intake/data-freshness/free-quota gates remain unresolved; owner Issues stay open"
   },
   "latest_restart": {
-    "observed_at": "2026-11-05T01:02:22+09:00",
+    "observed_at": "2026-11-05T09:15:00Z",
     "source_of_truth": "GitHub main + open PRs + Issue #239; historical work_items below are retained as history",
     "open_prs": [
       597,
@@ -2157,7 +2158,6 @@
       243,
       244,
       585,
-      593,
       529
     ],
     "priority": [
@@ -2176,15 +2176,15 @@
     ],
     "safety": "No direct main writes, no unverified production publish, preserve user records and last-good data",
     "checked_at": "2026-11-05T15:55:25+09:00",
-    "main_sha": "33c0a9eaedb623262fbc385cfc3222824260f077",
-    "release_decision": "NO-GO; Vercel exact-main frontend/backend READY, outstanding functional/data/security acceptance",
-    "new_progress": "PR #603 no longer open; latest main 33c0a9ea and Vercel production frontend/backend both READY. Main smoke/completeness/Pages publish passed. Earlier Update movie data run failed on 41400f48; must inspect subsequent runs and logs before claiming recovery.",
+    "main_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
+    "release_decision": "NO-GO; production main is CI-green but exact-main Vercel deployment and several functional/manual acceptance gates remain incomplete.",
+    "new_progress": "Read-only production checks: homepage, feedback page and menu present; Vercel Web Analytics received pageviews. Production streaming JSON generated 2026-11-05T06:32:44Z: 430 rows total, including Nov 155 across 9 services (135 posters, 20 identity-unverified placeholders) and Dec 1 row. Main b70dec6 checks passed. Issue #593/#586 closed. Feedback DB schema exists; production admin token is absent, so authorized admin acceptance is blocked.",
     "next_steps": [
-      "Inspect failed Update movie data run for 41400f48 and latest director/DB-sync runs; do not trigger paid Neon transfer or write user data",
-      "Run read-only live poster and feedback/analytics acceptance against canonical production",
-      "Review approved event/IMAX sources and November per-provider coverage",
-      "Resolve stale #597; keep #526 pending security review and #514 draft",
-      "Do not mark GO until independent functional evidence is captured"
+      "Repair exact-source proof for failed Update movie data run 41981020642; quality gate passed but publication refused. DB-sync step was skipped. Do not retry production DB sync until Neon quota is safe.",
+      "Resolve missing FEEDBACK_ADMIN_TOKEN through owner-managed secret setup; then verify admin list/status end-to-end without exposing feedback contents.",
+      "Keep checking read-only poster fallbacks, deployed HTML/JS and Vercel Analytics; retain physical iPhone Safari as manual gate.",
+      "Maintain official-feed coverage by provider and month; do not present partial dated announcements as exhaustive current catalogs.",
+      "Review PR #526 with required security review, keep #514 draft until licensed whole-catalog source exists, and supersede stale #597 only after a current checkpoint passes CI."
     ],
     "checkpoint_at": "2026-11-05T10:58:22+09:00",
     "completed_since_previous": [
@@ -2203,7 +2203,7 @@
     ]
   },
   "issue_585_20261104": {
-    "status": "production_schema_applied_pending_final_ci",
+    "status": "production_deployed_acceptance_partial",
     "pull_request": 594,
     "branch": "feat/585-private-feedback",
     "base_sha": "22505395e81740748ab7f02176efb1b78ee30101",
@@ -2211,40 +2211,40 @@
     "implementation": "Anonymous private intake, additive SQL, atomic rate caps, bearer-authenticated admin status list, common menu, Hobby pageview instrumentation; existing local data preserved.",
     "local_validation": "shared quality gate PASS; feedback/metrics/analytics Node tests PASS; PGlite SQL intake limits/rollback and metric cap PASS; Next production compilation PASS; verified backend-materialized full gate PASS on2d22. CI/browser and production still pending on new source.",
     "review": "Independent review: Referer query leak and early-search race fixed with regression tests; Unicode minimum aligned.",
-    "external": "FEEDBACK_RATE_SECRET configured sensitive production-only. Owner FEEDBACK_ADMIN_TOKEN not configured; authenticated admin acceptance cannot complete until owner sets it. Physical iPhone acceptance unavailable.",
+    "external": "FEEDBACK_RATE_SECRET and DATABASE_URL configured; FEEDBACK_ADMIN_TOKEN absent in production. Anonymous feedback API/schema is deployed and one preexisting feedback row exists; do not read its content. Admin list/status acceptance is blocked until owner sets the token. Physical iPhone remains unverified.",
     "next_action": "Synchronize PR #594 with current main, require all four workflows on final PR head, merge, verify normal frontend/backend production deployments and canonical feedback/metrics APIs, verify Vercel pageview receipt, then keep Issue #585 open until owner admin token and physical iPhone gates are accepted.",
     "continuation": "Added opt-in first-party daily aggregate feature counters (3 names, no identities/payloads), authenticated30-day summary, DB cap10000/event/day and20/page client cap; no paid Vercel custom events. Existing full tests preserved.",
     "verified_source_sha": "95baea1a92680db09fd0d441e98be9483a4963ac",
     "proof_receipt_commit": "81b1ac13de489c157a52fd0fcddddb749c384a07",
     "ci": "All four required pull_request workflows passed on exact source 95baea1a92680db09fd0d441e98be9483a4963ac; full browser suite passed after route audit expectation corrected to 33 pages.",
-    "production": "Neon Free plan verified; additive Feedback, FeedbackRateBucket, FeatureMetric tables and indexes applied to production. Feature metrics server flag set production-only. Vercel Web Analytics enabled on Hobby; no real traffic yet after instrumentation because deploy pending."
+    "production": "Vercel Hobby Web Analytics is receiving pageviews (Nov 4–6 query: 6 visitors, 20 pageviews). Feature metrics remain opt-in and DB currently has 0 aggregate rows. Do not claim end-to-end feedback acceptance until admin token is configured and owner-authorized real submission is verified."
   },
   "release_gate": {
     "status": "NO-GO",
-    "verified_at": "2026-11-05T07:58:00Z",
-    "main_sha": "01bf9ccd2422ec7509da35995afad4f2e6579702",
+    "verified_at": "2026-11-05T09:15:00Z",
+    "main_sha": "b70dec6ae29e60604fa777554e3586b5b152cac8",
     "open_prs": [
       597,
       526,
       514
     ],
-    "poster_issue_593": "closed; production cross-route image coverage and iPhone Safari not verified",
-    "ci": "Main 01bf9ccd: smoke, completeness, Pages publish and deployment passed. Failed Update movie data run 41981020642 on 41400f48: quality gate passed, but production publication refused because executable source did not match CI-verified source.",
-    "vercel": "Latest main 01bf9ccd frontend/backend production deployments CANCELED; previous 33c0a9ea both READY. Exact-main production not verified.",
+    "poster_issue_593": "closed; production JSON poster data measured, but cross-route real image loads and physical iPhone Safari remain unverified",
+    "ci": "Main b70dec6: Pages build, CINELVA smoke, Publish verified legacy Pages, and Completeness scorecard succeeded. Update movie data run 41981020642 on 41400f48: quality gate passed; publication refused because executable source did not match CI-verified source; direct PostgreSQL sync skipped.",
+    "vercel": "Current production remains READY at 33c0a9ea; exact-main b70dec6 production deployment not confirmed.",
     "remaining": [
-      "Read-only cross-route poster image success and iPhone Safari",
-      "Director refresh, movie-data scheduled failure and DB sync logs/quota",
-      "Per-provider November streaming and official source coverage",
-      "Event/IMAX provenance, freshness and automation",
-      "Anonymous feedback persistence, admin authorization, analytics",
-      "Security, user-data preservation and physical iPhone acceptance",
-      "Review #526 and supersede conflicting #597 without erasing history"
+      "Production deployment of exact main and runbook proof",
+      "Read-only cross-route poster image success plus physical iPhone Safari",
+      "Update movie data source-proof mismatch; Neon Free quota before any DB sync",
+      "FEEDBACK_ADMIN_TOKEN and authorized admin list/status acceptance",
+      "Licensed comprehensive catalogue source; current approved announcement data is partial",
+      "Event/IMAX provenance, freshness and automation"
     ],
     "next_actions": [
-      "Fix exact-source CI proof mismatch without bypassing publication safety gate",
-      "Inspect latest director and DB-sync runs and free-plan limits",
-      "Read-only poster/feedback/analytics checks, iPhone Safari, provider/event/IMAX audit",
-      "Review #526; resolve stale #597; keep #514 draft; retain NO-GO"
+      "Correct exact-source proof mismatch without bypassing the publication gate.",
+      "Do not restart endpoint or retry production DB sync until Neon quota reset/available allowance.",
+      "Complete admin acceptance only after owner-managed FEEDBACK_ADMIN_TOKEN setup.",
+      "Validate production poster fallback and analytics through browser/read-only tools.",
+      "Keep NO-GO until release conditions are evidenced."
     ]
   }
 }

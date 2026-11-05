@@ -14,6 +14,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
    await context.route('https://**/*',route=>route.abort());
    await context.route('https://image.tmdb.org/**',route=>route.fulfill({path:'assets/cinelva_original_colors_transparent.png',headers:{'access-control-allow-origin':'*'}}));
    await context.route('**/data/movies.json*',route=>route.fulfill({json:{movies}}));
+   await context.route('**/api/movies**',route=>route.fulfill({json:{movies:[]}}));
    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    const base=`http://127.0.0.1:${port}/`;
    for(const route of ['index.html','search.html','rankings.html','my-cinelva/','my-best10.html']){

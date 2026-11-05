@@ -2637,7 +2637,7 @@
     "next_action": "Retry after approved data-source concurrency is serialized; preserve now-playing and TV statuses rather than selecting one generated status file."
   },
   "continuation_checkpoint_20261106": {
-    "recorded_at": "2026-11-05T21:19:18.334Z",
+    "recorded_at": "2026-11-05T21:20:55.140Z",
     "main_sha": "c075e500e95dd59762eae8daf757b1aebf8c3406",
     "merged_prs": [
       {
@@ -2661,7 +2661,7 @@
     "stale_or_blocked_prs": [
       {
         "number": 627,
-        "summary": "stale duplicate of #639, close after #639 merges"
+        "summary": "closed as superseded by PR #639 after recreating the redirect fix on current main"
       },
       {
         "number": 514,
@@ -2680,6 +2680,6 @@
       "Configure FEEDBACK_ADMIN_TOKEN for production admin access",
       "Complete physical iPhone Safari acceptance"
     ],
-    "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, update its branch to include a production-proof receipt referencing exact tested source 29879fa...; require all checks on resulting head, merge atomically, close superseded #640 and stale #627, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
+    "next_action": "Wait for PR #639's failed Validate frontend job rerun. Once green, fold a production-proof receipt referencing the exact tested source into the route fix PR, require all checks on resulting head, merge atomically, close superseded #640, then verify production after Hobby quota reset. Continue #242/#243/#244/#585/#529 and do not declare launch complete."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T15:05:00Z",
+  "updated_at": "2026-11-05T15:12:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -2356,5 +2356,24 @@
       "Review PR #526 security; keep #514 draft without an approved catalogue source"
     ],
     "safety": "No source code, secrets, DB, deployment or user data changed; docs checkpoint only."
+  },
+  "latest_automation_check_20261106_0012": {
+    "observed_at": "2026-11-05T15:12:00Z",
+    "main_at_start": "08244e6b347ed7fd4d1f4093fa18944887552b19",
+    "release_decision": "NO-GO",
+    "evidence": [
+      "GitHub Actions failed job 127308534169 checked out e6ce00fc6b6e13d7c50f38ac32ff91944f80ca23 at 2026-11-05T14:31:54Z",
+      "check_sources.py passed, then verify-production-release.cjs --require rejected executable source mismatch at 14:31:56Z",
+      "Older Update movie data job 127090882358 also contains the same production proof mismatch; DB sync was skipped after failure",
+      "These are historical failures, not evidence that the newest nationwide now-playing run is failing; later successful runs must be checked separately",
+      "Proof guard is functioning fail-closed; no bypass or blind retry authorized"
+    ],
+    "next_actions": [
+      "Compare e6ce00fc source tree with receipt head and inspect exact workflow edits to establish historical root cause; avoid modifying currently passing nationwide refresh",
+      "Check newest Update movie data and DB sync separately, read-only Neon quota first",
+      "Verify canonical production Vercel source and actual poster image loads",
+      "Review November streaming and event/IMAX provenance, feedback admin token and security PR #526"
+    ],
+    "safety": "Checkpoint-only; no DB, secret, user record, deployment, or source-code mutation."
   }
 }

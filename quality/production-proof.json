@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "a06858122e9e9ced45ebc8a7e4f25c1b3f34ca08",
-  "verified_at": "2026-11-05T19:15:59.176Z",
-  "note": "PR #634 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), Reproducible backend build, mobile layout smoke and completeness scorecard passed. Includes fail-closed recovery for the documented concurrent source-status snapshot race: restart from latest main, re-fetch/re-validate TV source, preserve other snapshots, retry up to three times. No PostgreSQL writes or user-record changes."
+  "head_sha": "34140cfd426fa469930d6451d79aed95b3951c08",
+  "verified_at": "2026-11-05T19:50:51.952Z",
+  "note": "PR #635 exact executable source: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium/WebKit), and Reproducible backend build all passed on this SHA. Includes the feedback navigation link in every shared drawer and a data-driven television source count assertion. The merged main source was verified identical to this CI-tested source; no user data or credentials changed."
 }

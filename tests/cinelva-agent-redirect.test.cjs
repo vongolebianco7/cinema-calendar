@@ -12,7 +12,7 @@ test('concierge legacy routes resolve to the matching discover page in both site
   ]){
     const html=fs.readFileSync(path.join(root,file),'utf8');
     const match=html.match(/location\.replace\("([^"]+)"\)/);
-    assert.ok(match,file+' must have a concierge redirect');
+    assert.ok(match,file+' must resolve the redirect against the current document URL');
     assert.equal(new URL(match[1],base).href,expected,file+' must resolve inside its current deployment root');
   }
 });

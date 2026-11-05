@@ -39,7 +39,7 @@ async function verifyProof({receipt,currentEntries,dirtyPaths=[],readJson}){
  const tree=await readJson(`/git/trees/${treeSha}?recursive=1`);
  if(tree?.sha!==treeSha||tree.truncated!==false||!Array.isArray(tree.tree))throw Error('CI proof tree is incomplete or unbound');
  const digest=sourceDigest(currentEntries);
- if(digest!==sourceDigest(tree.tree))throw Error('Executable source does not match CI-verified source');
+ if(digest!==sourceDigest(tree.tree))throw Error(`Executable source does not match CI-verified source (receipt head ${head}; current digest ${digest}; verified digest ${sourceDigest(tree.tree)}). Refresh the CI receipt only after all required checks pass for the changed executable source.`);
  const result=await readJson(`/actions/runs?head_sha=${head}&event=pull_request&per_page=100`);
  if(!Array.isArray(result?.workflow_runs))throw Error('CI workflows are unavailable');
  for(const workflow of REQUIRED_WORKFLOWS){

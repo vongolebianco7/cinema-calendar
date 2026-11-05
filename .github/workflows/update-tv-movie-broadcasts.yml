@@ -6,6 +6,7 @@ on:
     paths:
       - scripts/update_syoboi_tv_movies.py
       - data/source_registry.json
+      - quality/production-proof.json
       - .github/workflows/update-tv-movie-broadcasts.yml
       - quality/production-proof.json
   schedule:

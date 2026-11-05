@@ -118,7 +118,7 @@
       "acquisition": "毎日、文書化されたRSS2/JSONフィードを1回取得し、必要なタイトル情報を100件単位で順番に照合（各API呼び出し間は1秒以上空ける）。映画カテゴリだけを採用しTMDB公式APIで作品を照合。API失敗時は直近の成功データを保持。HTMLは取得しない。",
       "coverage": "しょぼいカレンダーが扱うアニメ・関連番組のうち映画カテゴリ。全国の全局・全映画放送の網羅ではありません。",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
-      "trigger": "daily 18:37 UTC and manual; randomized 1–30 second delay before feed; sequential title lookups with at least one second between requests",
+      "trigger": "daily 17:30 UTC and manual; scheduled before the 18:17 UTC TMDB enrichment job; randomized 1–30 second delay before feed; sequential title lookups with at least one second between requests",
       "ui_routes": [
         "index.html",
         "search.html"

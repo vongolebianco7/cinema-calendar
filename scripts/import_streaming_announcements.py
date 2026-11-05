@@ -100,7 +100,7 @@ if official_path.exists():
             "checked_at": movie.get("checked_at") or datetime.date.today().isoformat(),
         })
         if key in existing:
-            previous = next(m for m in current["movies"] if (m.get("service"), m.get("title"), m.get("date")) == key)
+            previous = next((m for m in current["movies"] if (m.get("service"), m.get("title"), m.get("date")) == key), None) or next((m for m in pending if (m.get("service"), m.get("title"), m.get("date")) == key), None)
             for field in ("poster", "source", "source_url", "original_title", "release_year", "year", "title_url", "tmdb", "id"):
                 value = movie.get(field)
                 if value and not previous.get(field):

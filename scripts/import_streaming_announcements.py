@@ -67,6 +67,49 @@ for entry in intake.get("movies", []):
         continue
     pending.append(movie)
     existing.add(key)
+
+# Import the generated snapshot of individually verified provider announcements.
+# This is a bounded, reviewed feed; this script does not fetch or scrape sources.
+official_path = ROOT / "streaming-official-current.json"
+if official_path.exists():
+    official = json.loads(official_path.read_text(encoding="utf-8"))
+    period = official.get("period")
+    for entry in official.get("movies", []):
+        title, service, date = (entry.get(k) for k in ("title", "service", "date"))
+        if service not in known or not isinstance(title, str) or not title.strip():
+            raise ValueError(f"Invalid official streaming entry: {service!r} {title!r}")
+        try:
+            datetime.date.fromisoformat(date)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid official streaming date: {date!r}") from exc
+        if period and date[:7] != period:
+            raise ValueError(f"Official streaming entry is outside {period}: {title!r} {date!r}")
+        source_url = entry.get("source_url", "")
+        parsed = urlparse(source_url)
+        if parsed.scheme != "https" or not parsed.hostname:
+            raise ValueError(f"An HTTPS source URL is required: {title!r}")
+        if entry.get("event", "streaming") != "streaming":
+            raise ValueError(f"Invalid official streaming event: {title!r}")
+        key = (service, title, date)
+        movie = dict(entry)
+        movie.update({
+            "event": "streaming",
+            "score": movie.get("score", 0),
+            "votes": movie.get("votes", 0),
+            "overview": movie.get("overview", ""),
+            "checked_at": movie.get("checked_at") or datetime.date.today().isoformat(),
+        })
+        if key in existing:
+            previous = next(m for m in current["movies"] if (m.get("service"), m.get("title"), m.get("date")) == key)
+            for field in ("poster", "source", "source_url", "original_title", "release_year", "year", "title_url", "tmdb", "id"):
+                value = movie.get(field)
+                if value and not previous.get(field):
+                    previous[field] = value
+                    identity_updates += 1
+            continue
+        pending.append(movie)
+        existing.add(key)
+
 if pending or identity_updates:
     current["movies"].extend(pending)
     current["movies"].sort(key=lambda m: (m["date"], m["service"], m["title"]))

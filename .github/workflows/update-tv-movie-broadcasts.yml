@@ -9,7 +9,7 @@ on:
       - .github/workflows/update-tv-movie-broadcasts.yml
       - quality/production-proof.json
   schedule:
-    - cron: '37 18 * * *'
+    - cron: '30 17 * * *'
 permissions:
   contents: write
 concurrency:

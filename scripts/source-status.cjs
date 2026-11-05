@@ -9,7 +9,9 @@ function buildStatus(registry,loadDataset,now=Date.now()){
  const sources=(registry.categories||[]).map(category=>{
   let data=null;try{if(category.dataset)data=loadDataset(category.dataset);}catch{/* Missing snapshots remain unknown. */}
   const date=observedAt(data?.[category.generated_at_field],now),age=date?(now-Date.parse(date))/3600000:null;
-  const row={id:category.id,status:category.status,source:category.source||'未確認',source_url:/^https:\/\//.test(category.source_url||'')?category.source_url:null,source_observed_at:date,max_age_hours:Number.isFinite(category.max_age_hours)?category.max_age_hours:null,freshness:date&&Number.isFinite(category.max_age_hours)?age>category.max_age_hours?'stale':'within_window':'unknown'};
+  const row={id:category.id,name:category.name||category.category||category.id,status:category.status,source:category.source||'未確認',source_url:/^https:\/\//.test(category.source_url||'')?category.source_url:null,source_observed_at:date,max_age_hours:Number.isFinite(category.max_age_hours)?category.max_age_hours:null,freshness:date&&Number.isFinite(category.max_age_hours)?age>category.max_age_hours?'stale':'within_window':'unknown',workflow:category.workflow||null,trigger:category.trigger||null,coverage:category.coverage||'対象範囲未確認'};
+  const countField=category.count_field;
+  if(countField&&Array.isArray(data?.[countField]))row.record_count=data[countField].length;
   if(category.id==='streaming-availability'&&data?.movies){
    const values=Object.values(data.movies),counts={total:values.length,fresh:0,stale:0,unknown:0};
    for(const value of values){const checked=observedAt(value?.checked_at,now);if(!checked)counts.unknown++;else if(now-Date.parse(checked)<=7*86400000)counts.fresh++;else counts.stale++;}

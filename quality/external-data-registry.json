@@ -18,7 +18,9 @@
       "ui_routes": [
         "discover.html",
         "search.html"
-      ]
+      ],
+      "name": "配信中作品の配信先確認",
+      "count_field": "movies"
     },
     {
       "id": "streaming-premieres",
@@ -33,11 +35,13 @@
       "acquisition": "curated official announcements imported by script",
       "coverage": "dated premieres with citations; not current availability",
       "workflow": ".github/workflows/update-movies.yml",
-      "trigger": "daily validation/import plus manual source updates",
+      "trigger": "日次の検証・取込と公式発表データ更新時。元発表の自動収集は認証済み公式フィードがないため手動。",
       "ui_routes": [
         "index.html",
         "discover.html"
-      ]
+      ],
+      "name": "配信開始予定の公式発表",
+      "count_field": "movies"
     },
     {
       "id": "theater-showtimes",
@@ -55,7 +59,9 @@
       "trigger": "job disabled",
       "ui_routes": [
         "theaters.html"
-      ]
+      ],
+      "name": "映画館の上映時刻",
+      "count_field": "schedules"
     },
     {
       "id": "theater-directory",
@@ -73,23 +79,30 @@
       "trigger": "job disabled",
       "ui_routes": [
         "theaters.html"
-      ]
+      ],
+      "name": "映画館の所在地",
+      "count_field": "theaters"
     },
     {
       "id": "television-schedules",
       "category": "television",
-      "status": "unavailable",
-      "dataset": null,
-      "generated_at_field": null,
-      "max_age_hours": null,
+      "status": "manual",
+      "dataset": "data/tv.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 168,
       "freshness_enforced": false,
-      "source": "none approved",
+      "source": "各放送局の公式番組案内（記録ごとに出典を保持）",
       "source_url": null,
-      "acquisition": "no free approved feed configured; no schedule is claimed",
-      "coverage": "unavailable",
-      "workflow": null,
-      "trigger": "none",
-      "ui_routes": []
+      "acquisition": "放送予定は出典を個別に確認して登録。放送局ページの自動収集は許諾確認待ちのため停止中。既存作品ID・ポスター等はTMDB公式APIで日次照合。",
+      "coverage": "現行ファイル内の放送予定だけ。全国全局の網羅を保証しない。",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "日次18:17 UTC: TMDB作品情報の照合。番組表の新規取得・放送予定の自動更新はなし。",
+      "ui_routes": [
+        "index.html",
+        "search.html"
+      ],
+      "name": "テレビ放送予定",
+      "count_field": "movies"
     },
     {
       "id": "box-office",
@@ -102,12 +115,14 @@
       "source": "official/industry source URLs embedded in dataset",
       "source_url": "data/boxoffice.json sources[].url",
       "acquisition": "curated source-backed snapshot; no unattended scraping",
-      "coverage": "Japan all-time and annual rows represented by the dataset",
+      "coverage": "公式/業界出典で確認した国内興収レコード。全期間ランキング全件を保証せず、対象範囲は記録内の説明に従う。",
       "workflow": ".github/workflows/check-boxoffice-minimum-per-year.yml",
       "trigger": "validation on dataset changes",
       "ui_routes": [
         "rankings.html"
-      ]
+      ],
+      "name": "興行収入",
+      "count_field": "all_time"
     },
     {
       "id": "movies-and-posters",
@@ -128,7 +143,9 @@
         "discover.html",
         "search.html",
         "rankings.html"
-      ]
+      ],
+      "name": "映画情報・ポスター",
+      "count_field": "movies"
     },
     {
       "id": "awards",
@@ -147,7 +164,9 @@
       "ui_routes": [
         "rankings.html",
         "my-cinelva/index.html"
-      ]
+      ],
+      "name": "映画賞",
+      "count_field": "awards"
     },
     {
       "id": "editorial-features",
@@ -167,7 +186,132 @@
         "discover.html",
         "experience.html",
         "revivals.html"
-      ]
+      ],
+      "name": "編集特集"
+    },
+    {
+      "id": "now-playing",
+      "category": "劇場公開中作品",
+      "name": "現在上映中の映画",
+      "status": "automated",
+      "dataset": "data/now_playing.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 48,
+      "freshness_enforced": true,
+      "source": "TMDB API",
+      "source_url": "https://developer.themoviedb.org/",
+      "acquisition": "TMDBの公式APIから日本地域の公開中作品を取得。画像・作品情報はTMDB attributionに従う。",
+      "coverage": "TMDBで公開中として返る作品。全劇場の上映時間や上映館別回数ではない。",
+      "workflow": ".github/workflows/update-now-playing.yml",
+      "trigger": "毎日18:13 UTCと手動実行。",
+      "ui_routes": [
+        "index.html"
+      ],
+      "count_field": "movies"
+    },
+    {
+      "id": "film-events",
+      "category": "映画祭・映画イベント",
+      "name": "映画祭・映画イベント",
+      "status": "manual",
+      "dataset": "data/events.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 336,
+      "freshness_enforced": false,
+      "source": "主催者の公式発表（各記録のsource_url）",
+      "source_url": null,
+      "acquisition": "主催者公式発表を人が確認した事実情報。自動HTML収集は行わず、日付・会場・出典を保持。",
+      "coverage": "登録済みイベントのみ。全国全イベントを網羅しない。",
+      "workflow": ".github/workflows/update-film-events.yml",
+      "trigger": "手動実行。既存の確認済み入力を統合するのみで、外部情報は取得しない。",
+      "ui_routes": [
+        "events.html",
+        "index.html"
+      ],
+      "count_field": "events"
+    },
+    {
+      "id": "outdoor-film-events",
+      "category": "屋外上映イベント",
+      "name": "屋外上映イベント",
+      "status": "manual",
+      "dataset": "data/outdoor-events.json",
+      "generated_at_field": "updated_at",
+      "max_age_hours": 336,
+      "freshness_enforced": false,
+      "source": "主催者の公式発表（各記録のsource_url）",
+      "source_url": null,
+      "acquisition": "公式発表を人が確認した事実情報。映画やポスターを推測せず、HTML収集もしない。",
+      "coverage": "登録済み屋外上映イベントのみ。全国全件を網羅しない。",
+      "workflow": ".github/workflows/update-outdoor-events.yml",
+      "trigger": "手動実行。既存の確認済み入力を統合するのみで、外部情報は取得しない。",
+      "ui_routes": [
+        "events.html",
+        "index.html"
+      ],
+      "count_field": "events"
+    },
+    {
+      "id": "special-screenings",
+      "category": "特別上映",
+      "name": "映画祭・特集上映",
+      "status": "manual",
+      "dataset": "data/special_screenings.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "source": "主催者・配給会社の公式発表（各記録のsource_url）",
+      "source_url": null,
+      "acquisition": "公式日程を人が確認して登録し、作品ID・ポスターをTMDB公式APIで日次補完。",
+      "coverage": "午前十時の映画祭など確認済み企画の一部。全特別上映は網羅しない。",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "日次18:17 UTCにTMDBの作品情報を照合。開催日程の新規発見は手動。",
+      "ui_routes": [
+        "index.html",
+        "revivals.html"
+      ],
+      "count_field": "screenings"
+    },
+    {
+      "id": "revival-screenings",
+      "category": "リバイバル上映",
+      "name": "リバイバル上映",
+      "status": "manual",
+      "dataset": "data/revival_screenings.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 336,
+      "freshness_enforced": false,
+      "source": "配給会社・劇場の公式発表（各記録のsource_url）",
+      "source_url": null,
+      "acquisition": "開催日・会場・作品IDを出典で確認して登録。TMDB作品情報の自動照合対象。",
+      "coverage": "記録済みの確認済みイベントのみ。全国全件を網羅しない。",
+      "workflow": ".github/workflows/update-movies.yml",
+      "trigger": "作品情報を日次照合。上映イベントの新規取得は手動。",
+      "ui_routes": [
+        "revivals.html",
+        "index.html"
+      ],
+      "count_field": "screenings"
+    },
+    {
+      "id": "theater-master",
+      "category": "映画館マスター",
+      "name": "映画館一覧",
+      "status": "disabled-resource-scope",
+      "dataset": "data/theaters_master.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 720,
+      "freshness_enforced": false,
+      "source": "Wikidata CC0",
+      "source_url": "https://www.wikidata.org/",
+      "acquisition": "Wikidata SPARQLの全国一括問い合わせは負荷範囲を再設計するまで停止。",
+      "coverage": "Wikidata登録分のみ。営業状況は未確認。",
+      "workflow": ".github/workflows/update-theater-master.yml",
+      "trigger": "ワークフローは停止中。",
+      "ui_routes": [
+        "theaters.html"
+      ],
+      "count_field": "theaters"
     }
   ]
 }

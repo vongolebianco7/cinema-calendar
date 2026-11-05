@@ -24,3 +24,35 @@ test('TV API filter leaves source rows and their historical database data untouc
   assert.deepEqual(upcomingTelevisionRows(source, new Date('2026-11-06T00:00:00Z')).map(row => row.id), ['future']);
   assert.deepEqual(source, original);
 });
+
+test('TV API filters both database and static fallback responses without changing storage inputs', async () => {
+  const fs = require('node:fs');
+  const vm = require('node:vm');
+  const { stripTypeScriptTypes } = require('node:module');
+  const now = new Date('2026-11-05T15:00:00.000Z');
+  const expired = { title: 'expired', date: '2026-11-05', time: '23:59' };
+  const currentMinute = { title: 'started', date: '2026-11-06', time: '00:00' };
+  const future = { title: 'future', date: '2026-11-06', time: '00:01' };
+  const snapshot = { generated_at: '2026-11-06T01:00:00Z', movies: [expired, currentMinute, future] };
+  const code = stripTypeScriptTypes(fs.readFileSync('backend/app/api/tv/route.ts', 'utf8'), { mode: 'transform' })
+    .replace(/^import .*?;\\n/gm, '').replaceAll('export ', '');
+  async function request(readWithSnapshot) {
+    const context = {
+      readWithSnapshot,
+      tvSnapshot: () => snapshot,
+      mergeTelevisionRows: (database, stored) => [...database, ...stored],
+      upcomingTelevisionRows: rows => upcomingTelevisionRows(rows, now),
+      prisma: { tvBroadcast: { findMany: async () => [{ payload: expired }] } },
+      json: value => value,
+      rateLimited: () => null,
+      options: () => null,
+    };
+    vm.runInNewContext(code + ';globalThis.get=GET', context);
+    return context.get({ url: 'https://fixture/api/tv' });
+  }
+  const live = await request(async read => read());
+  assert.deepEqual(live.movies.map(row => row.title), ['future']);
+  const fallback = await request(async (_read, getSnapshot) => getSnapshot());
+  assert.deepEqual(fallback.movies.map(row => row.title), ['future']);
+  assert.equal(expired.date, '2026-11-05', 'filtering must not mutate source rows');
+});

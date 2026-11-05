@@ -908,7 +908,7 @@
     "Price readability582: source935bc076 all6 CI, receipt6e958a35 all7 CI; clean shared quality489+6/invoked Python; WebKit390 light/dark reviewed; formal URL8 files/API/browser scoped smoke passed. No production mobile/physical Safari claim."
   ],
   "deployment": {
-    "status": "NO-GO",
+    "status": "blocked",
     "canonical_url": "https://cinelva.vercel.app",
     "main_sha": "b85a134ebb81b0804442cbda314177b43b483bcb",
     "github_pages_url": "https://vongolebianco7.github.io/cinema-calendar/",

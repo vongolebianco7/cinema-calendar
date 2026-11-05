@@ -27,14 +27,19 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   assert.match(await link.getAttribute('href'),/\/credits.html#data-status$/);
   await link.click();await page.waitForURL('**/credits.html#data-status');
   await page.locator('[data-source-category="editorial-features"]').waitFor();
-  assert.equal(await page.locator('.source-status-item').count(),15);
+  const expectedSourceCount=require('../quality/external-data-registry.json').categories.length;
+  assert.equal(await page.locator('.source-status-item').count(),expectedSourceCount);
   assert.match(await page.locator('[data-source-category="theater-directory"]').innerText(),/取得範囲を見直すまで自動更新停止中[\s\S]*営業状況は未確認/);
   const tvStatus=await page.locator('[data-source-category="television-schedules"]').innerText();
   assert.match(tvStatus,/人が公式出典を確認して登録[\s\S]*収録件数：16件[\s\S]*TMDB作品情報の照合[\s\S]*全国全局の網羅を保証しない/);
   const showtimes=await page.locator('[data-source-category="theater-showtimes"]').innerText();
   assert.match(showtimes,/許諾確認待ち・自動取得停止中[\s\S]*収録件数：1225件[\s\S]*job disabled/);
   const nowPlaying=await page.locator('[data-source-category="now-playing"]').innerText();
-  assert.match(nowPlaying,/公式APIから自動取得[\s\S]*収録件数：88件[\s\S]*TMDBで公開中として返る作品/);
+  const expectedNowPlayingCount=require('../data/now_playing.json').movies.length;
+  assert.ok(nowPlaying.includes(`収録件数：${expectedNowPlayingCount}件`),'source status count matches the collected TMDB snapshot');
+  assert.match(nowPlaying,/公式APIから自動取得[\s\S]*TMDBで公開中として返る作品/);
+  const animeFilmTv=await page.locator('[data-source-category="anime-film-tv-broadcasts"]').innerText();
+  assert.match(animeFilmTv,/しょぼいカレンダー公開番組表 API[\s\S]*アニメ・関連番組のうち映画カテゴリ[\s\S]*全国の全局・全映画放送の網羅ではありません/);
   assert.match(await page.locator('[data-source-category="streaming-availability"]').innerText(),/一覧生成時点[\s\S]*未観測の作品もあります/);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.equal(await page.evaluate(()=>localStorage.getItem('cinelva-library-records-v2')),null);
@@ -52,6 +57,6 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await context.route('**/data/source-status.json',r=>r.fulfill({status:503,body:'unavailable'}));
   await page.reload();await page.getByText('収録状態を取得できませんでした。以下の個別の出典をご確認ください。',{exact:true}).waitFor();
   assert.deepEqual(errors,[]);
-  console.log('Source provenance link,15-category coverage/update status,unknown/disabled/observation states and fetch failure pass at390px without record writes');
+  console.log('Source provenance link,category coverage/update status,unknown/disabled/observation states and fetch failure pass at390px without record writes');
  }finally{await browser?.close();server.kill('SIGTERM');}
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0a471245819736f334dadb09bac1eb2e5000fbdd",
-  "verified_at": "2026-11-05T12:30:00Z",
-  "note": "PR #606 exact source: required Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build succeeded. The CI-verified source changes only the director-credit regression threshold to match the complete 36-title TMDB feature-credit snapshot; generated production data and runtime code are unchanged."
+  "head_sha": "0faa79a07bf782477305beab894c0e9ab4b2d291",
+  "verified_at": "2026-11-05T13:57:48Z",
+  "note": "PR #608 exact source: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build succeeded on this source. The change updates external-data source status and its tests; it does not change user data, and it keeps unapproved TV/event/theater acquisition disabled."
 }

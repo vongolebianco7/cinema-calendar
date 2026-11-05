@@ -12,6 +12,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('https://image.tmdb.org/**',r=>r.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="200" height="300" fill="#555"/></svg>'}));
    await context.route('**/data/backend.json*',r=>r.fulfill({json:{enabled:false}}));
    await context.route('**/data/streaming.json*',r=>r.fulfill({json:{movies:[]}}));
+   await context.route('**/data/streaming-official-current.json*',r=>r.fulfill({json:{movies:[]}}));
    const film=(id,title)=>({id:'local-'+id,tmdbId:id,title,date:'2026-10-02',event:'streaming',service:'Prime Video',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg',source_url:'https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026'});
    const films=[film(42,'短い作品'),film(43,'とても長い作品名の映画で二行以上の高さになっていた作品')];
    await context.route('**/data/tv.json*',r=>r.fulfill({json:{movies:[{...film(44,'短い映画'),event:'tv',service:'テレビ東京',program:'短い番組',time:'13:40'},{...film(45,'長い映画名が続く二行の作品'),event:'tv',service:'テレビ東京',program:'とても長い番組名が何行も続いていても共通レビューの下端が揃う番組',time:'13:40'}]}}));

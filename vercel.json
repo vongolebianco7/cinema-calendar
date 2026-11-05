@@ -8,7 +8,8 @@
   "git": {
     "deploymentEnabled": {
       "**": false,
-      "main": true
+      "main": true,
+      "demo/cinelva-preview-20261106": true
     }
   },
   "redirects": [

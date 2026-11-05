@@ -44,7 +44,7 @@ def build_report(snapshot, now):
         age_hours = round((now - observed).total_seconds() / 3600, 2) if observed else None
         if isinstance(mode, str) and mode.startswith("disabled"):
             state = "disabled"
-        elif observed is None or not valid_window or age_hours < 0:
+        elif mode not in {"automated", "manual"} or observed is None or not valid_window or age_hours < 0:
             state = "unknown"
         elif age_hours > max_hours:
             state = "stale"
@@ -90,6 +90,12 @@ def main():
     for item in unhealthy:
         print(f"::warning title=Stale or unverified source::{item['id']} is {item['health']}; "
               f"last observation: {item['observed_at'] or 'missing'}")
+    for item in report["sources"]:
+        coverage = item["title_level_freshness"]
+        if coverage and coverage["stale"] > 0:
+            print(f"::warning title=Stale title observations::{item['id']} has "
+                  f"{coverage['stale']} stale of {coverage['total']} observations; "
+                  "a fresh source snapshot does not imply all titles are fresh")
     summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary_path:
         lines = ["## CINELVA source freshness", "",

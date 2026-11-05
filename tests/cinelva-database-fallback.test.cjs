@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const {createReadFallback,calendarSnapshot,movieSnapshot,tvSnapshot,theaterSnapshot,releaseSnapshot}=require('../backend/lib/catalog-snapshot.cjs');
+const {createReadFallback,calendarSnapshot,movieSnapshot,tvSnapshot,mergeTelevisionRows,theaterSnapshot,releaseSnapshot}=require('../backend/lib/catalog-snapshot.cjs');
 function snapshotFixture(movies){
  const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
  const context={module:{exports:{}},setTimeout,clearTimeout,require:name=>{
@@ -36,6 +36,13 @@ test('TV, theater filters and release interval retain established API response s
  const filtered=theaterSnapshot('','東京都');assert.ok(filtered.theaters.length);assert.ok(filtered.theaters.every(t=>t.prefecture==='東京都'));assert.equal(filtered.count,filtered.theaters.length);
  const rows=releaseSnapshot('2026-10-01','2026-11-01','Lemino');assert.ok(rows.count>=2);
  assert.ok(rows.releases.every(r=>r.movie&&r.service==='Lemino'&&r.date>='2026-10-01'&&r.date<'2026-11-01'));
+});
+test('healthy TV database reads retain database rows and add new static broadcast rows without a DB write',()=>{
+ const database=[{title:'既存番組',date:'2026-11-02',time:'20:00',service:'BS局',source:'database'}];
+ const snapshot=[{title:'既存番組',date:'2026-11-02',time:'20:00',service:'BS局',source:'static'}, {title:'新しい映画放映',date:'2026-11-03',time:'21:00',service:'別局',source_id:'syoboi_calendar'}];
+ const rows=mergeTelevisionRows(database,snapshot);
+ assert.equal(rows.length,2);assert.equal(rows[0].source,'database');assert.equal(rows[1].source_id,'syoboi_calendar');
+ assert.equal(mergeTelevisionRows([],snapshot).length,2);
 });
 test('release fallback normalizes movie identity and foreign keys and preserves date/service ordering',()=>{
  const fixture=snapshotFixture([

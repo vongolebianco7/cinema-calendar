@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
-  "verified_at": "2026-11-06T00:03:00Z",
-  "note": "PR #651 rebased onto main and adds shared ranking-card poster retry with browser regressions. This receipt points to executable-source commit 47e07098647c2c402f814dd33cc9d7e74629071e; exact-head GitHub Actions are pending. No production deployment or public acceptance is claimed."
+  "head_sha": "8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642",
+  "verified_at": "2026-11-06T02:55:00Z",
+  "note": "Exact-head PR #655 8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642 passed all six GitHub Actions including required autonomous quality gate, CINELVA smoke, Validate frontend and reproducible backend build. This receipt is a candidate for source-digest verification by scripts/verify-production-release.cjs on merged main after #655. No production publication or Vercel parity is claimed."
 }

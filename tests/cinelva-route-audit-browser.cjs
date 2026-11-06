@@ -183,10 +183,23 @@ async function freePort() {
             const destination = path.join(root, 'artifacts', 'route-audit', relative);
             fs.mkdirSync(path.dirname(destination), { recursive: true });
             await page.screenshot({ path: destination, fullPage: false, timeout: 5000 }).catch(() => {});
+            // Include the failing route and live browser state in CI logs. A bare
+            // waitForFunction timeout does not identify which of the 264 route
+            // loads failed, making WebKit regressions impossible to triage.
+            const browserState = await page.evaluate(() => ({
+              pathname: location.pathname,
+              theme: document.documentElement.dataset.theme || null,
+              colorScheme: document.documentElement.style.colorScheme || null,
+              mainTextLength: document.querySelector('main')?.textContent.trim().length || 0,
+              themeControlMounted: Boolean(document.querySelector('.cinelvaTheme select'))
+            })).catch(() => null);
             report.failure_context = {
               route, browser: browserName, viewport_width: width, theme,
+              resolved_url: page.url().replace(base, ''),
+              browser_state: browserState,
               screenshot: relative.split(path.sep).join('/')
             };
+            console.error('CINELVA route audit failure context:', JSON.stringify(report.failure_context));
             throw error;
           } finally {
             await page.close();

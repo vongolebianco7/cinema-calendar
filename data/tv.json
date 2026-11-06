@@ -2,26 +2,9 @@
   "generated_at": "2026-10-22",
   "note": "Partial television schedule coverage: curated records plus anime-related movie broadcasts from a public feed. This is not a nationwide all-channel listing; schedules may change and source links are retained per item.",
   "automation_source": "syoboi_calendar",
-  "automation_generated_at": "2026-11-06T03:57:34.437776Z",
-  "automation_checked_at": "2026-11-06T03:57:34.437786Z",
+  "automation_generated_at": "2026-11-06T20:59:21.277346Z",
+  "automation_checked_at": "2026-11-06T20:59:21.277359Z",
   "automated_movies": [
-    {
-      "title": "劇場版 ダンジョンに出会いを求めるのは間違っているだろうか -オリオンの矢-",
-      "date": "2026-11-06",
-      "time": "20:00",
-      "event": "tv",
-      "service": "ABEMA特設その他",
-      "program": "劇場版 ダンジョンに出会いを求めるのは間違っているだろうか -オリオンの矢-",
-      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
-      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
-      "source_id": "syoboi_calendar",
-      "collection_method": "automated_public_api",
-      "source_program_id": "724749",
-      "source_title_id": "5652",
-      "original_title": "Is It Wrong to Try to Pick Up Girls in a Dungeon?: Arrow of the Orion",
-      "release_year": 2019,
-      "year": 2019
-    },
     {
       "title": "楽園追放 -Expelled from Paradise-",
       "date": "2026-11-07",
@@ -613,23 +596,6 @@
       "score": 6.996,
       "votes": 3339,
       "overview": "モアナが壮大な冒険の末に故郷の島を救ってから3年。妹シメアが生まれて少し大人になったモアナは、愛する家族や島の仲間たちに囲まれながら、以前は禁じられていた海へと航海に繰り出す日々を送っていた。そんなある日、「かつて人々は海でつながっていたが、人間を憎む神によって引き裂かれてしまった。海の果てにある島にたどり着けば呪いが解け、世界は再びひとつになる」という伝説を知ったモアナは、人々の絆を取り戻すため立ちあがることを決意。風と海を司る半神半人のマウイや島の新たな仲間たちとともに、危険に満ちた冒険の旅に出る。"
-    },
-    {
-      "title": "劇場版 ダンジョンに出会いを求めるのは間違っているだろうか -オリオンの矢-",
-      "date": "2026-11-06",
-      "time": "20:00",
-      "event": "tv",
-      "service": "ABEMA特設その他",
-      "program": "劇場版 ダンジョンに出会いを求めるのは間違っているだろうか -オリオンの矢-",
-      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
-      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
-      "source_id": "syoboi_calendar",
-      "collection_method": "automated_public_api",
-      "source_program_id": "724749",
-      "source_title_id": "5652",
-      "original_title": "Is It Wrong to Try to Pick Up Girls in a Dungeon?: Arrow of the Orion",
-      "release_year": 2019,
-      "year": 2019
     },
     {
       "title": "楽園追放 -Expelled from Paradise-",

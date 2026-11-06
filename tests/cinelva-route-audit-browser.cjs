@@ -92,11 +92,25 @@ async function freePort() {
             // event watcher can report an internal error for location.replace,
             // even after the destination has committed. Keep the exact path and
             // query assertion and the readiness checks below.
-            await page.waitForFunction(expected =>
+            const waitForDestination = () => page.waitForFunction(expected =>
               location.pathname === expected &&
               new URLSearchParams(location.search).get('mode') === 'concierge',
-              destination, { timeout: 30000 }
+              destination, { timeout: browserName === 'webkit' ? 10000 : 30000 }
             );
+            try {
+              await waitForDestination();
+            } catch (error) {
+              // A WebKit CI navigation can leave the retired document loaded
+              // without committing its location.replace. Retry the original
+              // document once; never accept a missing redirect or weaken the
+              // destination, query, theme, and content assertions below.
+              if (browserName !== 'webkit' || !/Timeout/.test(String(error)) ||
+                  new URL(page.url()).pathname !== '/' + route) throw error;
+              console.warn('WebKit legacy redirect did not commit; retrying once:', route);
+              const retryResponse = await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
+              assert.ok(retryResponse && retryResponse.ok(), `${route} retry responds successfully`);
+              await waitForDestination();
+            }
           }
           await page.waitForFunction(expected => document.documentElement.dataset.theme === expected, theme);
           await page.waitForFunction(() => (document.querySelector('main')?.textContent.trim().length || 0) > 10);

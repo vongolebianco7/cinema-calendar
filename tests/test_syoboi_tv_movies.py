@@ -58,6 +58,36 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(updated["automated_movies"], [incoming])
         self.assertEqual(updated["automation_generated_at"], "2026-11-05T00:00:00Z")
 
+    def test_rescheduled_broadcast_retains_only_verified_artwork_for_the_same_film(self):
+        previous = {
+            "title": "作品", "source_id": "syoboi_calendar", "source_title_id": "12",
+            "source_program_id": "100", "release_year": 2020, "date": "2026-11-02",
+            "time": "18:00", "service": "BS局", "id": 123,
+            "tmdb": "https://www.themoviedb.org/movie/123",
+            "poster": "https://image.tmdb.org/t/p/w500/example.jpg",
+        }
+        moved = {
+            "title": "作品", "source_id": "syoboi_calendar", "source_title_id": "12",
+            "source_program_id": "101", "release_year": 2020, "date": "2026-11-03",
+            "time": "21:00", "service": "BS局",
+        }
+        remake = {**moved, "release_year": 2025, "time": "23:00"}
+        result = merge_tv_snapshot({"movies": [previous]}, [moved, remake])
+        self.assertEqual(result["automated_movies"], [
+            {**moved, "id": previous["id"], "tmdb": previous["tmdb"], "poster": previous["poster"]},
+            remake,
+        ])
+        self.assertNotIn("poster", moved)
+        conflicting = {**previous, "id": 456, "tmdb": "https://www.themoviedb.org/movie/456"}
+        ambiguous = merge_tv_snapshot({"movies": [previous, conflicting]}, [moved])
+        self.assertEqual(ambiguous["automated_movies"], [moved])
+
+    def test_normalization_preserves_same_channel_repeat_airings(self):
+        program = {"Cat": 8, "Title": "映画", "TID": 1, "PID": 10, "ChName": "BS局"}
+        first = {**program, "StTimeU": epoch(NOW + dt.timedelta(hours=1))}
+        repeat = {**program, "PID": 11, "StTimeU": epoch(NOW + dt.timedelta(hours=3))}
+        self.assertEqual([row["time"] for row in normalize_feed([first, repeat], now=NOW)], ["10:00", "12:00"])
+
     def test_empty_feed_refuses_to_erase_last_good_snapshot(self):
         with self.assertRaisesRegex(ValueError, "last good snapshot"):
             merge_tv_snapshot({"movies": [{"title": "saved"}]}, [])

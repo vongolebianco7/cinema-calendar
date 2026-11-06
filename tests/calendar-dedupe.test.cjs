@@ -35,3 +35,10 @@ test('an internal database ID without a TMDB ID does not protect a duplicate rel
  assert.equal(dedupe(rows).length,1);
  assert.equal(dedupe(rows)[0].tmdbId,1276849);
 });
+
+test('repeat TV airings on the same date and channel retain each start time', () => {
+  const first = { title: '映画', date: '2026-11-07', time: '18:00', event: 'tv', service: 'BS局' };
+  const repeat = { ...first, time: '21:00' };
+  const duplicate = { ...first, poster: 'film.jpg' };
+  assert.deepEqual(dedupe([first, repeat, duplicate]), [duplicate, repeat]);
+});

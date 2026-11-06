@@ -7,11 +7,26 @@ const compact=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().rep
 const bounded=value=>Number.isFinite(Number(value))?Math.min(100,Math.max(1,Math.floor(Number(value)))):50;
 function calendarSnapshot(){return {generated_at:films.generated_at,movies:films.movies};}
 function tvSnapshot(){return {generated_at:television.automation_checked_at||television.generated_at,movies:television.movies};}
-function televisionKey(row){return [row?.title,row?.date,row?.service].map(value=>String(value||'').normalize('NFKC').trim().toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,'')).join('|');}
+function televisionKey(row){
+ return [row.title,row.date,row.service,row.time].map(compact).join('|');
+}
 function mergeTelevisionRows(databaseRows,snapshotMovies=television.movies){
- const rows=Array.isArray(databaseRows)?databaseRows.filter(row=>row&&typeof row==='object'):[],keys=new Set(rows.map(televisionKey));
- for(const row of Array.isArray(snapshotMovies)?snapshotMovies:[]){if(!row||typeof row!=='object')continue;const key=televisionKey(row);if(!keys.has(key)){rows.push(row);keys.add(key);}}
- return rows.sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.time||'').localeCompare(String(b.time||''))||String(a.service||'').localeCompare(String(b.service||'')));
+ const rows=new Map();
+ // The versioned snapshot owns the automated feed. Old database copies may
+ // still contain broadcasts that the latest successful feed moved or removed.
+ for(const row of Array.isArray(databaseRows)?databaseRows:[]){
+  if(row&&typeof row==='object'&&row.source_id!=='syoboi_calendar'){
+   const key=televisionKey(row);
+   if(!rows.has(key))rows.set(key,row);
+  }
+ }
+ for(const row of Array.isArray(snapshotMovies)?snapshotMovies:[]){
+  if(row&&typeof row==='object'){
+   const key=televisionKey(row);
+   if(!rows.has(key))rows.set(key,row);
+  }
+ }
+ return [...rows.values()].sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.time||'').localeCompare(String(b.time||''))||String(a.service||'').localeCompare(String(b.service||'')));
 }
 function movieSnapshot(query='',limit=50){
  const term=compact(query),seen=new Set();

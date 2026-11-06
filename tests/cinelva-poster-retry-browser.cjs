@@ -28,7 +28,7 @@ const { chromium } = require("playwright"),
       });
     });
     await page.setContent(
-      '<style>img{display:block!important}.poster{width:100px;min-height:150px}.poster img{width:100%;height:100%}.rankPoster{width:100px;aspect-ratio:2/3;background:#222}.rankPoster img{width:100%;height:100%}[data-poster-fallback]{display:block}</style><div id="poster" class="poster">ポスター未取得</div><div class="rankCard" data-popular-id="550"><div class="rankPoster"><img src="https://image.tmdb.org/t/p/w500/bad.jpg"></div><b>Film</b></div>',
+      '<style>img{display:block!important}.poster{width:100px;min-height:150px}.poster img{width:100%;height:100%}.rankPoster{width:100px;aspect-ratio:2/3;background:#222}.rankPoster img{width:100%;height:100%}[data-poster-fallback]{display:block}</style><div id="poster" class="poster">ポスター未取得<img src="https://image.tmdb.org/t/p/w500/bad.jpg"></div><div class="rankCard" data-popular-id="550"><div class="rankPoster"><img src="https://image.tmdb.org/t/p/w500/bad.jpg"></div><b>Film</b></div>',
     );
     await page.addScriptTag({
       content: fs.readFileSync("js/cinelva-movie-identity.js", "utf8"),

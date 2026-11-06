@@ -2,7 +2,8 @@
 const {buildDemoRecords}=require('./cinelva-demo-fixture.cjs');
 
 function shouldIncludeDemo(env=process.env){
- if(env.VERCEL_ENV==='production')return false;
+ const approvedPagesDemo=env.CINELVA_PAGES_DEMO==='1'&&env.GITHUB_ACTIONS==='true'&&env.GITHUB_WORKFLOW==='Publish verified legacy Pages'&&env.GITHUB_REF==='refs/heads/main';
+ if(env.VERCEL_ENV==='production')return approvedPagesDemo;
  if(env.VERCEL_ENV==='preview')return true;
  if(env.CF_PAGES_BRANCH)return env.CF_PAGES_BRANCH!==(env.CF_PAGES_PRODUCTION_BRANCH||'main');
  return env.GITHUB_EVENT_NAME==='pull_request';

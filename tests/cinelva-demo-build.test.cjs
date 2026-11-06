@@ -8,9 +8,10 @@ const {shouldIncludeDemo,createDemoPage}=require('../scripts/cinelva-demo-build.
 
 test('demo output is included only in explicitly non-production previews',()=>{
   assert.equal(shouldIncludeDemo({VERCEL_ENV:'preview'}),true);
+  assert.equal(shouldIncludeDemo({VERCEL_ENV:'production',CINELVA_PAGES_DEMO:'1',GITHUB_ACTIONS:'true',GITHUB_WORKFLOW:'Publish verified legacy Pages',GITHUB_REF:'refs/heads/main'}),true,'only the Pages publication may include the isolated demo');
   assert.equal(shouldIncludeDemo({CF_PAGES_BRANCH:'feature/demo'}),true);
   assert.equal(shouldIncludeDemo({GITHUB_EVENT_NAME:'pull_request'}),true);
-  for(const env of [{VERCEL_ENV:'production',CF_PAGES_BRANCH:'main'},{VERCEL_ENV:'production',CF_PAGES_BRANCH:'preview',GITHUB_EVENT_NAME:'pull_request'},{CF_PAGES_BRANCH:'main'},{}, {VERCEL_ENV:'development'}]) assert.equal(shouldIncludeDemo(env),false);
+  for(const env of [{VERCEL_ENV:'production',CF_PAGES_BRANCH:'main'},{VERCEL_ENV:'production',CF_PAGES_BRANCH:'preview',GITHUB_EVENT_NAME:'pull_request'},{VERCEL_ENV:'production',CINELVA_PAGES_DEMO:'1',GITHUB_ACTIONS:'true',GITHUB_WORKFLOW:'Other workflow',GITHUB_REF:'refs/heads/main'},{VERCEL_ENV:'production',CINELVA_PAGES_DEMO:'1',GITHUB_ACTIONS:'true',GITHUB_WORKFLOW:'Publish verified legacy Pages',GITHUB_REF:'refs/heads/feature/demo'},{CF_PAGES_BRANCH:'main'},{}, {VERCEL_ENV:'development'}]) assert.equal(shouldIncludeDemo(env),false);
 });
 
 test('static production branch omits the demo while preview output contains it',()=>{

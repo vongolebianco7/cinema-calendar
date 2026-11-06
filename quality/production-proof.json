@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
-  "verified_at": "2026-11-05T23:36:57.011Z",
-  "note": "PR #649 discovery fix executable source 27508f135fce7b3fd560415490efa896f2b2c78f is pending exact-head CI; this receipt records no production validation."
+  "head_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
+  "verified_at": "2026-11-06T00:03:00Z",
+  "note": "PR #651 rebased onto main and adds shared ranking-card poster retry with browser regressions. This receipt points to executable-source commit 47e07098647c2c402f814dd33cc9d7e74629071e; exact-head GitHub Actions are pending. No production deployment or public acceptance is claimed."
 }

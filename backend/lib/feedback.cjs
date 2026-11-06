@@ -4,13 +4,13 @@ const kinds=new Set(['bug','idea','comment']),statuses=new Set(['new','in_progre
 const fail=status=>Object.assign(new Error('invalid request'),{status});
 function validate(input){
  if(!input||typeof input!=='object'||Array.isArray(input))throw fail(400);
- if(typeof input.website==='string'&&input.website)throw fail(400);
+ if(input.website!==undefined&&input.website!==null&&input.website!=='')throw fail(400);
  if(!kinds.has(input.kind)||typeof input.body!=='string'||input.body.length>4000)throw fail(400);
  const body=input.body.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g,'').trim();
  if(Array.from(body).length<3)throw fail(400);
  if(input.email!==undefined&&typeof input.email!=='string')throw fail(400);
  const email=(input.email||'').trim();
- if(email&&(email.length>254||!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)))throw fail(400);
+ if(email&&(email.length>254||/[\u0000-\u001f\u007f]/.test(email)||!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)))throw fail(400);
  return{kind:input.kind,body,email:email||null};
 }
 async function readBody(request){

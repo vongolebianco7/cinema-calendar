@@ -57,7 +57,7 @@ const { chromium } = require("playwright"),
     assert.equal(await page.locator("#poster img").isVisible(), true);
     assert.match(await page.locator("#poster img").getAttribute("src"), /good.png$/);
     assert.equal(
-      await page.locator("[data-poster-fallback]").isVisible(),
+      await page.locator("#poster [data-poster-fallback]").isVisible(),
       false,
     );
     assert.equal(await page.locator('#poster').innerText(),'','recovered artwork removes the stale fallback label');

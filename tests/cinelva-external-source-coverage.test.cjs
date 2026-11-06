@@ -21,7 +21,7 @@ test('streaming provider observations are not described as complete premiere cov
   assert.deepEqual(feeds.feeds, [], 'only confirmed official feed endpoints may be configured');
   assert.match(availability.coverage, /not a complete provider catalogue/i);
   assert.equal(premieres.status, 'manual', 'official premiere announcements remain manually reviewed');
-  assert.match(premieres.acquisition, /手動/);
+  assert.match(premieres.coverage, /not current availability/i);
 });
 
 test('unavailable theater schedules and nationwide television are not reported as automated', () => {

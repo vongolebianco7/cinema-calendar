@@ -24,6 +24,7 @@ jobs:
       - name: Verify source CI and quality before creating publication output
         env:
           VERCEL_ENV: production
+          CINELVA_PAGES_DEMO: '1'
         run: node scripts/build-static.cjs
       - name: Preserve isolated legacy stage routes on the same origin
         run: cp -R cinelva public/cinelva

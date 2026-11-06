@@ -5,12 +5,21 @@ export const dynamic="force-dynamic";
 const BASE="https://api.themoviedb.org/3";
 function auth(url:URL){const token=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,key=process.env.TMDB_API_KEY;const headers:Record<string,string>={accept:"application/json"};if(token)headers.Authorization=`Bearer ${token}`;else if(key)url.searchParams.set("api_key",key);return token||key?headers:null}
 export async function GET(request:Request){const limited=rateLimited(request,60);if(limited)return limited;
- const id=Number(new URL(request.url).searchParams.get("id"));if(!Number.isSafeInteger(id)||id<1)return json({error:"invalid id"},{status:400});
+ const params=new URL(request.url).searchParams;
+ const id=Number(params.get("id"));if(!Number.isSafeInteger(id)||id<1)return json({error:"invalid id"},{status:400});
  try{
-  const url=new URL(BASE+`/movie/${id}`);url.searchParams.set("language","ja-JP");url.searchParams.set("append_to_response","credits,videos,watch/providers,release_dates");
+  const url=new URL(BASE+`/movie/${id}`);url.searchParams.set("language","ja-JP");
+  const posterOnly=params.get("view")==="poster";
+  if(!posterOnly)url.searchParams.set("append_to_response","credits,videos,watch/providers,release_dates");
   const headers=auth(url);if(!headers)return json({error:"TMDB not configured"},{status:503});
   const r=await fetch(url,{headers,next:{revalidate:86400}});if(!r.ok)return json({error:"movie not found"},{status:r.status});
-  const m:any=await r.json(),jp=m["watch/providers"]?.results?.JP||{},crew=m.credits?.crew||[],cast=m.credits?.cast||[];
+  const m:any=await r.json();
+  if(posterOnly)return json({movie:{
+   id:m.id,tmdbId:m.id,title:m.title,original_title:m.original_title,
+   release_date:m.release_date,score:m.vote_average,votes:m.vote_count,
+   poster:m.poster_path?`https://image.tmdb.org/t/p/w500${m.poster_path}`:null,
+  }});
+  const jp=m["watch/providers"]?.results?.JP||{},crew=m.credits?.crew||[],cast=m.credits?.cast||[];
   const directorObj=crew.find((x:any)=>x.job==="Director"),director=directorObj?.name||"",directorOriginalName=directorObj?.original_name||director,directorIsJapanese=(m.production_countries||[]).some((c:any)=>c.iso_3166_1==="JP");
   const pick=(jobs:string[])=>crew.filter((x:any)=>jobs.includes(x.job)).slice(0,6).map((x:any)=>({id:x.id,name:x.name,job:x.job}));
   const dna={directors:pick(["Director"]),writers:pick(["Screenplay","Writer","Story"]),cinematography:pick(["Director of Photography","Cinematography"]),music:pick(["Original Music Composer","Music"]),editing:pick(["Editor"]),production:(m.production_companies||[]).slice(0,6).map((x:any)=>({id:x.id,name:x.name})),genres:(m.genres||[]).map((x:any)=>({id:x.id,name:x.name}))};

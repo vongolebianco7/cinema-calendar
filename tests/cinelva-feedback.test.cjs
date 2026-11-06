@@ -27,3 +27,9 @@ test('database errors fail closed and rate denial returns 429 without echoing co
  opts.store.submit=async()=>{throw new Error('private database details');};const r=await f.createHandler(opts)(req('feedback','POST',{kind:'bug',body:'abc'}));assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/private database/);
 });
 test('Unicode minimum length agrees with PostgreSQL character count',()=>{assert.throws(()=>f.validate({kind:'bug',body:'😀a'}));assert.equal(f.validate({kind:'bug',body:'😀ab'}).body,'😀ab');});
+
+test('reject non-string honeypot payloads and control characters in contact emails',()=>{
+ for(const website of [1,true,{},[],['spam']])assert.throws(()=>f.validate({kind:'bug',body:'valid report',website}));
+ for(const email of ['a\u0000b@example.com','a\u007fb@example.com'])assert.throws(()=>f.validate({kind:'bug',body:'valid report',email}));
+ assert.equal(f.validate({kind:'bug',body:'valid report',website:''}).body,'valid report');
+});

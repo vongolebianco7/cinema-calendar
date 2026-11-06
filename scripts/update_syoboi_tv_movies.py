@@ -9,6 +9,7 @@ from dataclasses import dataclass
 import json
 import os
 import random
+import re
 import sys
 import tempfile
 import time
@@ -88,7 +89,39 @@ def _category(program):
 
 def _key(item):
     normalized_title = " ".join(str(item.get("title", "")).split()).casefold()
-    return normalized_title, item.get("date"), " ".join(str(item.get("service", "")).split()).casefold()
+    return normalized_title, item.get("date"), " ".join(str(item.get("service", "")).split()).casefold(), item.get("time")
+
+
+def _film_key(row):
+    title_id = str(row.get("source_title_id") or "")
+    year = str(row.get("release_year") or row.get("year") or "")
+    if title_id.isdigit() and re.fullmatch(r"\d{4}", year) and row.get("title"):
+        return title_id, _key(row)[0], year
+    return None
+
+
+def _preserve_artwork(previous, upcoming):
+    verified = {}
+    for row in previous:
+        if row.get("source_id") != "syoboi_calendar":
+            continue
+        key = _film_key(row)
+        movie_id = str(row.get("id") or "")
+        link = f"https://www.themoviedb.org/movie/{movie_id}"
+        if not key or not movie_id.isdigit() or row.get("tmdb") != link:
+            continue
+        matches = verified.setdefault(key, {})
+        matches.setdefault(movie_id, None)
+        poster = str(row.get("poster") or "")
+        if re.fullmatch(r"https://image\.tmdb\.org/t/p/w\d+/[\w.-]+\.(?:jpg|jpeg|png|webp)", poster):
+            matches[movie_id] = row
+    for row in upcoming:
+        matches = verified.get(_film_key(row), {})
+        match = next(iter(matches.values())) if len(matches) == 1 else None
+        if match and not row.get("poster"):
+            yield {**row, "id": match["id"], "tmdb": match["tmdb"], "poster": match["poster"]}
+        else:
+            yield row
 
 
 def _write_snapshot(path, snapshot):
@@ -194,7 +227,7 @@ def merge_tv_snapshot(current, automated, *, generated_at=None, allow_empty=Fals
         raise ValueError("Existing television snapshot is malformed; refusing to replace it")
     manual = [row for row in current["movies"] if row.get("source_id") != "syoboi_calendar"]
     manual_keys = {_key(row) for row in manual if isinstance(row, dict)}
-    fresh = [row for row in automated if _key(row) not in manual_keys]
+    fresh = list(_preserve_artwork(current["movies"], (row for row in automated if _key(row) not in manual_keys)))
     result = dict(current)
     result["movies"] = manual + fresh
     result["automated_movies"] = fresh

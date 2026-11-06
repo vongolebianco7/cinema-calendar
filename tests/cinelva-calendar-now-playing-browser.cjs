@@ -51,6 +51,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    for(const id of [43,46,47])assert.equal(await page.locator(`#shared-label-proof [data-now-film-id="${id}"] > .cinelva-now-playing-label`).count(),0,route+' does not infer ended/start-only');
    assert.equal(await page.locator('#direct-hydrated-poster > .cinelva-now-playing-label').count(),1);
    await page.locator('#rank-failure-proof .cinelva-label-poster').waitFor();
+   await page.waitForFunction(()=>{const image=document.querySelector('#rank-failure-proof img');return image?.complete&&image.naturalWidth>0;});
    await page.locator('#rank-failure-proof img').dispatchEvent('error');
    assert.equal(await page.locator('#rank-failure-proof .rankPosterPlaceholder').isVisible(),true,'real rank-card failure fallback survives label wrapper');
    const sizes=await page.locator('#shared-label-proof .cinelva-now-playing-label').evaluateAll(nodes=>nodes.map(e=>{const a=e.getBoundingClientRect(),b=e.parentElement.getBoundingClientRect();return a.left>=b.left&&a.right<=b.right+1&&a.width>0;}));assert(sizes.every(Boolean),route+' badges fit posters');

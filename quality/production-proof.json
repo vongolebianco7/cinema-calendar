@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642",
-  "verified_at": "2026-11-06T02:55:00Z",
-  "note": "Exact-head PR #655 8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642 passed all six GitHub Actions including required autonomous quality gate, CINELVA smoke, Validate frontend and reproducible backend build. This receipt is a candidate for source-digest verification by scripts/verify-production-release.cjs on merged main after #655. No production publication or Vercel parity is claimed."
+  "head_sha": "17be0ddb7ecfc25aa0431dcb620c7557d17866ce",
+  "verified_at": "2026-11-06T14:57:00Z",
+  "note": "PR #663 exact-head 17be0ddb7ecfc25aa0431dcb620c7557d17866ce passed all six pull_request workflows, including autonomous quality, smoke, Validate frontend, and reproducible backend build. Compared all 1349 relevant executable blob paths, modes and SHAs with merged main bab9ea1d0a80621a6c997eef9a05bd1b2cf83df4; no executable differences. Receipt-only update; publication and Vercel parity remain subject to independent verification."
 }

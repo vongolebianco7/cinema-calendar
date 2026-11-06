@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642",
-  "verified_at": "2026-11-06T02:55:00Z",
-  "note": "Exact-head PR #655 8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642 passed all six GitHub Actions including required autonomous quality gate, CINELVA smoke, Validate frontend and reproducible backend build. This receipt is a candidate for source-digest verification by scripts/verify-production-release.cjs on merged main after #655. No production publication or Vercel parity is claimed."
+  "head_sha": "36381fd2e845428fabe93903d548d58f788b3b97",
+  "verified_at": "2026-11-06T19:00:06Z",
+  "note": "PR #665 exact-head 36381fd2e845428fabe93903d548d58f788b3b97: all six PR workflows passed, including autonomous quality, Validate frontend, smoke and reproducible backend build. Squash-merged main 378a0230fedd19a053a59bf114cad110a18fe2e4 has identical changed test-file blob bf8103fc51fefeee108b42d132a874939050b928; no other executable files changed from common parent bab9ea1d. Receipt-only update; production publication and backend database sync remain blocked pending independent strict gate and safety verification."
 }

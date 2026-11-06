@@ -4,7 +4,10 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   function key(row) {
     const title = String(row.title || '').normalize('NFKC').toLowerCase().replace(/[\p{P}\p{Z}\s]/gu, '');
-    return title && row.date ? [row.event || '', row.date, row.service || '', title].join('|') : null;
+    if (!title || !row.date) return null;
+    const parts = [row.event || '', row.date, row.service || '', title];
+    if (row.event === 'tv') parts.push(row.time || '');
+    return parts.join('|');
   }
   function movieId(row) {
     const value = row.tmdbId ?? row.tmdb_id ?? row.id;

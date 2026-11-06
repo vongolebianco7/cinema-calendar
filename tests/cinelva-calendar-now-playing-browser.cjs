@@ -43,7 +43,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.evaluate(()=>{
     const section=document.createElement('section');section.id='shared-label-proof';section.style='display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px';
     section.innerHTML=[42,43,44,45,46,47].map(id=>`<a href="search.html?id=${id}"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="display:block;width:100%;aspect-ratio:2/3"><span>作品${id}</span></a>`).join('');
-    section.insertAdjacentHTML('beforeend','<a class="rankCard" id="rank-failure-proof" href="search.html?id=43"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="width:100%" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="rankPosterPlaceholder" hidden>ポスター未取得</span></a>');
+    section.insertAdjacentHTML('beforeend','<a class="rankCard" id="rank-failure-proof" href="search.html?id=43"><img src="https://image.tmdb.org/t/p/w342/fixture.jpg" style="width:100%" onerror="this.hidden=true;this.closest(\'.rankCard\').querySelector(\'.rankPosterPlaceholder\').hidden=false"><span class="rankPosterPlaceholder" hidden>ポスター未取得</span></a>');
     document.body.prepend(section);
     const holder=document.createElement('div');holder.className='poster';holder.id='direct-hydrated-poster';section.append(holder);window.CinelvaMovieIdentity.hydrateCard(holder,{tmdbId:44,poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'});
    });

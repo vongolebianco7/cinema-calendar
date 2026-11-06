@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T23:38:14.828Z",
+  "updated_at": "2026-11-06T00:02:30Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "22e5cdbe94ef466f00b42431ed76adca8ad569ba",
-  "branch": "fix/discovery-history-versus-true-story-main-20261106",
-  "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
-  "pull_request": 650,
+  "base_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+  "branch": "fix/rank-card-poster-fallback-20261106",
+  "head_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
+  "pull_request": 651,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -989,7 +989,7 @@
     "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
     "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
   ],
-  "next_action": "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it. Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
+  "next_action": "Poll exact-head PR #651 workflows on c169c6be0f14ce522ea552c5931416dd5167fa98, repair failures, then merge only when all required Actions succeed. Continue #242/#243/#244/#585/#529 while checking current-main production parity without paid upgrades.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2893,5 +2893,65 @@
     "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it.",
     "Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
     "Continue #649's browser checks and then the remaining release issues; no release issue is complete from code/CI alone."
-  ]
+  ],
+  "continuation_checkpoint_20261106_0002": {
+    "recorded_at": "2026-11-06T00:02:30Z",
+    "latest_main_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+    "merged_pull_requests": [
+      {
+        "number": 650,
+        "merge_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+        "summary": "Separated historical classics from explicit true-story discovery; exact-head GitHub Actions passed. Production acceptance remains unverified."
+      }
+    ],
+    "active_pull_requests": [
+      {
+        "number": 651,
+        "branch": "fix/rank-card-poster-fallback-20261106",
+        "head_sha": "c169c6be0f14ce522ea552c5931416dd5167fa98",
+        "source_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
+        "summary": "Rebased ranking-card poster retry repair on current main; stabilized lazy-image fixture and now-playing failure simulation; exact-head Actions pending; GitHub mergeable."
+      }
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      529,
+      585
+    ],
+    "open_pull_requests": [
+      651
+    ],
+    "verified_ci": {
+      "pr650": {
+        "head_sha": "e7731a8d3af1a94f2fd628185e2c18af2a26f822",
+        "result": "all listed GitHub Actions succeeded; merged #650"
+      },
+      "pr651_previous_head": {
+        "head_sha": "9326e093b3be3ab4adce8a9d04fc9cb73cb41b46",
+        "result": "Validate frontend and nationwide controls failed; logs identified test race/lazy fixture; corrected and rebased"
+      }
+    },
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "last_ready_sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
+      "current_main_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+      "status": "stale; no current-main production deployment",
+      "blocker": "Vercel Hobby deployment rate limit; keep free tier and do not retry while platform rejects builds"
+    },
+    "external_blockers": [
+      "Physical iPhone Safari acceptance requires the owner’s device; Chromium/WebKit CI is not equivalent.",
+      "Issue #585 admin flow requires owner-only FEEDBACK_ADMIN_TOKEN setup; never place the secret in chat.",
+      "Full streaming/theater/TV/event coverage is unavailable without rights-approved sources; do not scrape or imply completeness.",
+      "Vercel Hobby deployment cap blocks production parity; no paid upgrade."
+    ],
+    "next_concrete_actions": [
+      "Check exact-head GitHub Actions for PR #651 (current head c169c6be0f14ce522ea552c5931416dd5167fa98); fix any failure and rerun. If all required Actions pass and PR remains mergeable, merge with expected head.",
+      "After merge, recheck current main Actions and Vercel/Pages deployments; verify current public routes, poster fallbacks, and data freshness. Do not report production success if only the stale 7128 deployment serves.",
+      "Continue release work in #242, #243, #244, #585, and #529; preserve review/watch/bookmark data, free tier, no scraping, and truthful partial coverage."
+    ],
+    "safety": "No user-record changes, destructive schema changes, secret exposure, paid plan change, or scraping."
+  }
 }

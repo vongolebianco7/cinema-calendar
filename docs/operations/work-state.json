@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05T23:38:14.828Z",
+  "updated_at": "2026-11-06T00:29:18.958Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "22e5cdbe94ef466f00b42431ed76adca8ad569ba",
-  "branch": "fix/discovery-history-versus-true-story-main-20261106",
-  "head_sha": "27508f135fce7b3fd560415490efa896f2b2c78f",
-  "pull_request": 650,
+  "base_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+  "branch": "test/guard-external-data-coverage-claims-20261106",
+  "head_sha": "164d9d79734163b27dfac230b292e9a94ba0946e",
+  "pull_request": 653,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -989,7 +989,7 @@
     "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
     "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
   ],
-  "next_action": "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it. Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
+  "next_action": "Recheck exact-head Actions for PR #651 (7100eed) and #653 (164d9d7). Fix any failure, then on #651 refresh the production-proof receipt to a CI-verified source head and run final exact-head checks before merging. After #651 lands, rebase #652 and #653 onto latest main, refresh the receipt for each final source head, pass all exact-head checks, then merge safely and verify the GitHub Pages and Vercel production states.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2893,5 +2893,86 @@
     "Check all exact-head workflows on the latest #647 head; repair any failure. If every required check is green and the PR is mergeable, merge it.",
     "Verify the main publication workflow after merge, then confirm a current production deployment, critical routes, posters, data freshness, and iPhone Safari acceptance.",
     "Continue #649's browser checks and then the remaining release issues; no release issue is complete from code/CI alone."
-  ]
+  ],
+  "continuation_checkpoint_20261106_0025": {
+    "recorded_at": "2026-11-06T00:29:18.958Z",
+    "latest_main_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+    "merged_pull_requests": [
+      {
+        "number": 650,
+        "merge_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+        "summary": "Historical classics separated from true-story discovery; exact-head Actions passed. Production remains stale."
+      }
+    ],
+    "active_pull_requests": [
+      {
+        "number": 651,
+        "branch": "fix/rank-card-poster-fallback-20261106",
+        "head_sha": "7100eed681c9b2c9c7cfff66a832556349e1d867",
+        "summary": "Ranking card included in shared poster fallback/retry; browser regressions pass. Exact Validate frontend is still running its Chromium/WebKit mobile journey; remaining checks succeeded."
+      },
+      {
+        "number": 652,
+        "branch": "feat/demo-github-pages-20261106",
+        "head_sha": "76a77c1319bee3a3f55928575b5e67d2a6c80bf9",
+        "summary": "Isolated My Cinelva demo is gated to the verified GitHub Pages workflow; all exact-head Actions pass, but branch needs rebase/proof refresh after #651 and actual Pages URL verification."
+      },
+      {
+        "number": 653,
+        "branch": "test/guard-external-data-coverage-claims-20261106",
+        "head_sha": "164d9d79734163b27dfac230b292e9a94ba0946e",
+        "summary": "Added source-coverage regression guards for streaming, theater, and TV claims. A prior-head assertion failed and was corrected; current-head backend build, smoke and mobile checks pass, remaining exact-head workflows are running."
+      }
+    ],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      529,
+      585
+    ],
+    "open_pull_requests": [
+      651,
+      652,
+      653
+    ],
+    "verified_ci": {
+      "pr651": {
+        "head_sha": "7100eed681c9b2c9c7cfff66a832556349e1d867",
+        "result": "CINELVA smoke, mobile, backend, scorecard, quality gate, and reported UI regression browser jobs succeeded; Validate frontend still in progress."
+      },
+      "pr652": {
+        "head_sha": "76a77c1319bee3a3f55928575b5e67d2a6c80bf9",
+        "result": "all exact-head GitHub Actions succeeded; not yet merged."
+      },
+      "pr653": {
+        "head_sha": "164d9d79734163b27dfac230b292e9a94ba0946e",
+        "result": "current exact-head smoke/mobile/backend passed; Validate, completeness, and quality gate in progress. Previous head failed due an incorrect test assertion; corrected on current head."
+      }
+    },
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "last_ready_sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
+      "current_main_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+      "status": "HTTP 200 but stale; deployment list still shows last READY at 7128. Latest Vercel production deploy attempts blocked by Hobby daily cap (100 deployments/day). Keep free plan.",
+      "pages_url": "https://vongolebianco7.github.io/cinema-calendar/",
+      "pages_last_published_sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
+      "status_note": "The GitHub Pages demo change is not live until PR #652 merges."
+    },
+    "external_blockers": [
+      "Physical iPhone Safari acceptance requires owner device; Chromium/WebKit CI does not replace this. Owner previously said Mac is inaccessible.",
+      "Issue #585 admin acceptance needs owner-only FEEDBACK_ADMIN_TOKEN configured privately; never disclose it in chat.",
+      "Vercel Hobby daily deployment limit currently prevents a fresh production deployment; do not upgrade or repeatedly retry.",
+      "Complete streaming/theater/TV/event catalogs need rights-cleared official sources; scraping remains prohibited."
+    ],
+    "next_concrete_actions": [
+      "Poll the latest exact-head CI on PR #651 (7100eed) and #653 (164d9d7); investigate and repair failures, keeping independent work moving.",
+      "Once #651 checks pass, update its proof receipt to the tested executable source SHA and checkpoint, rerun final exact-head checks, and merge using expected head.",
+      "After #651 merge, inspect main Actions/Pages; rebase #652 and #653 on latest main without overwriting current content, refresh each proof receipt for its final tested head, then merge only after all checks pass.",
+      "Verify current canonical production deployment and principal routes after the Vercel free-tier cooldown; verify Pages demo on its separate GitHub Pages origin. Keep #529 open until its live demo acceptance passes.",
+      "Continue #242/#243/#244/#585; verify user records and feedback admin only with authorized private setup, then complete owner iPhone acceptance."
+    ],
+    "safety": "No scraping, paid plan changes, secrets in chat, destructive schema changes, or user-record changes."
+  }
 }

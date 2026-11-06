@@ -69,3 +69,12 @@ test('release fallback normalizes movie identity and foreign keys and preserves 
  assert.equal(fixture.releaseSnapshot('2026-10-01','2026-10-07','B').count,0);
  assert.equal(fixture.releaseSnapshot('2026-10-07','2026-11-01','B').count,1);
 });
+
+test('the last good public TV feed replaces moved and withdrawn broadcasts in the database', () => {
+  const automated = { title: '映画', date: '2026-11-07', time: '18:00', service: 'BS局', source_id: 'syoboi_calendar', source_program_id: '100' };
+  const manual = { title: '別作品', date: '2026-11-07', time: '18:00', service: 'BS局' };
+  const moved = { ...automated, time: '19:00' };
+  const withdrawn = { ...automated, source_program_id: '101', time: '21:00' };
+  const repeat = { ...manual, time: '22:00' };
+  assert.deepEqual(mergeTelevisionRows([automated, withdrawn, manual], [moved, repeat]), [manual, moved, repeat]);
+});

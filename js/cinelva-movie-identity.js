@@ -173,15 +173,16 @@
     if (pending.has(key)) return pending.get(key);
     const task = (async () => {
       try {
-        if (wanted && !title) {
+        if (wanted) {
           const r = await fetch(
             "https://backend-one-gray-94.vercel.app/api/movie-detail?" +
-              new URLSearchParams({ id: String(wanted) }),
+              new URLSearchParams({ id: String(wanted), view: "poster" }),
           );
           if (!r.ok) return cached || null;
           const data = await r.json(),
             movie = fromApi(data.movie || {});
-          return id(movie) === wanted ? ingest(movie) : cached || null;
+          return id(movie) === wanted && (poster(movie) || !title)
+            ? ingest(movie) : cached || null;
         }
         const r = await fetch(
           "https://backend-one-gray-94.vercel.app/api/movies?" +
@@ -195,12 +196,10 @@
             ...(d.results || []),
           ].map(fromApi);
         const matches = rows.filter((m) =>
-          wanted
-            ? id(m) === wanted
-            : year(m) === y &&
-              [m.title, m.original_title, m.originalTitle].some(
-                (t) => norm(t) === norm(title),
-              ),
+          year(m) === y &&
+          [m.title, m.original_title, m.originalTitle].some(
+            (t) => norm(t) === norm(title),
+          ),
         );
         if (new Set(matches.map(id).filter(Boolean)).size !== 1)
           return cached || null;

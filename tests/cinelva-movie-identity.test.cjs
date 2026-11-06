@@ -17,9 +17,13 @@ function registry(rows = [], cache = {}, broken = []) {
       getItem: (k) => values.get(k) || null,
       setItem: (k, v) => values.set(k, v),
     },
-    fetch: async () => {
+    fetch: async (url) => {
       calls++;
-      return { ok: true, json: async () => ({ movies: rows }) };
+      const id = Number(new URL(url).searchParams.get("id"));
+      return {
+        ok: true,
+        json: async () => id ? { movie: rows.find((row) => row.id === id) } : { movies: rows },
+      };
     },
   });
   return { api: window.CinelvaMovieIdentity, values, calls: () => calls };
@@ -88,7 +92,7 @@ test("concurrent cards share lookup and ambiguous title-year results stay unreso
   assert.ok(r.every((x) => x === null));
   assert.equal(calls(), 1);
 });
-test("known TMDB identity can recover a poster without guessing a title", async () => {
+test("known TMDB identity recovers a poster even if the card title differs from TMDB", async () => {
   const window = {};
   let requested = "";
   vm.runInNewContext(fs.readFileSync("js/cinelva-movie-identity.js", "utf8"), {
@@ -112,10 +116,10 @@ test("known TMDB identity can recover a poster without guessing a title", async 
     },
   });
   assert.match(
-    (await window.CinelvaMovieIdentity.fetchOne({ tmdbId: 128 }))?.poster || "",
+    (await window.CinelvaMovieIdentity.fetchOne({ tmdbId: 128, title: "Princess Mononoke (restored screening)" }))?.poster || "",
     /mononoke.jpg$/,
   );
-  assert.match(requested, /movie-detail\?id=128/);
+  assert.match(requested, /movie-detail\?id=128&view=poster$/);
 });
 
 test("a transient failure in a previous document cannot permanently block healthy artwork", () => {

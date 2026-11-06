@@ -1,8 +1,9 @@
-const { chromium } = require("playwright"),
+const { chromium, webkit } = require("playwright"),
   fs = require("fs"),
   assert = require("assert/strict");
 (async () => {
-  const browser = await chromium.launch();
+  const engine = process.env.CINELVA_BROWSER === "webkit" ? webkit : chromium;
+  const browser = await engine.launch();
   try {
     const page = await browser.newPage();
     let release;
@@ -17,13 +18,11 @@ const { chromium } = require("playwright"),
         ),
       }),
     );
-    await page.route("**/api/movies?*", async (r) => {
+    await page.route("**/api/movie-detail?id=550&view=poster", async (r) => {
       await reply;
       await r.fulfill({
         json: {
-          movies: [
-            { tmdbId: 550, title: "Film", year: 2000, poster: "/good.png" },
-          ],
+          movie: { tmdbId: 550, title: "Film", year: 2000, poster: "/good.png" },
         },
       });
     });

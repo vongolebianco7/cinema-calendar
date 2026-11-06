@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T00:02:30Z",
+  "updated_at": "2026-11-06T05:55:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "52c0e66fe4c165d97b4d74473167f7a66db33335",
+  "base_sha": "2e0a022f973146735259092e9fa3ee1501de6cc1",
   "branch": "fix/rank-card-poster-fallback-20261106",
   "head_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
   "pull_request": 651,
@@ -989,7 +989,7 @@
     "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
     "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
   ],
-  "next_action": "Poll exact-head PR #651 workflows on c169c6be0f14ce522ea552c5931416dd5167fa98, repair failures, then merge only when all required Actions succeed. Continue #242/#243/#244/#585/#529 while checking current-main production parity without paid upgrades.",
+  "next_action": "Validate live Vercel/Pages public routes in browser, feedback #585 end-to-end with owner-provisioned private admin token, poster and iPhone Safari acceptance; do not close remaining P0 issues without evidence.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -2863,26 +2863,7 @@
       }
     ]
   },
-  "open_pull_requests": [
-    {
-      "number": 647,
-      "branch": "fix/atomic-streaming-catalog-import-20261106",
-      "head_sha": "55849d0148391868ae63fd36cd76ce0c06dea281",
-      "status": "smoke, backend, mobile, completeness, autonomous green; Validate frontend still running its My Cinelva browser journey"
-    },
-    {
-      "number": 648,
-      "branch": "docs/current-release-checkpoint-20261105",
-      "head_sha": "d28109cb97162c78011a46e9ed26efca46af3b18",
-      "status": "current-main checkpoint; smoke green; mobile and autonomous CI in progress; will need a final update after #649 is included"
-    },
-    {
-      "number": 649,
-      "branch": "fix/discovery-history-versus-true-story-20261105",
-      "head_sha": "51fc8116f0b8e978e4a69701bb677c32227a3152",
-      "status": "separate visible true-story preset and smoke regression; exact-head CI in progress"
-    }
-  ],
+  "open_pull_requests": [],
   "closed_pull_requests": [
     {
       "number": 646,
@@ -2953,5 +2934,47 @@
       "Continue release work in #242, #243, #244, #585, and #529; preserve review/watch/bookmark data, free tier, no scraping, and truthful partial coverage."
     ],
     "safety": "No user-record changes, destructive schema changes, secret exposure, paid plan change, or scraping."
+  },
+  "latest_automation_check_20261106_0555": {
+    "checked_at_utc": "2026-11-06T05:55:00Z",
+    "main_sha": "2e0a022f973146735259092e9fa3ee1501de6cc1",
+    "open_pull_requests": [],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585
+    ],
+    "closed_prior": [
+      529,
+      593,
+      618,
+      619
+    ],
+    "main_pages_workflow": {
+      "run_id": 42159647603,
+      "conclusion": "success"
+    },
+    "legacy_pages_workflow": {
+      "run_id": 42159481974,
+      "conclusion": "success",
+      "source_sha": "a6f651c73b9db75721292d9fe18314993edea6f3"
+    },
+    "vercel": {
+      "state": "READY",
+      "commit_sha": "2e0a022f973146735259092e9fa3ee1501de6cc1",
+      "canonical_alias": "cinelva.vercel.app",
+      "browser_acceptance": "not verified"
+    },
+    "production_proof_sha": "8f96a996b8e4e1e9825bb3ba7dd0cba32d67b642",
+    "unverified": [
+      "Live public routes and posters in real browser",
+      "iPhone Safari on owner device",
+      "Feedback submit-store-admin display and Analytics dashboard",
+      "External-data source completeness is partial and must not be overstated"
+    ],
+    "next_concrete_action": "Run browser acceptance against canonical Vercel URL and GitHub Pages demo; inspect failures and implement focused fix PR before closing any release issue.",
+    "safety": "No paid upgrade, scraping, secret exposure, destructive DB changes or user-record changes."
   }
 }

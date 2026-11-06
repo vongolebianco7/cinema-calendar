@@ -9,19 +9,30 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   const emptyMovies={movies:[],external:[],results:[]};
   await context.route('**/api/movies**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
   await context.route('https://backend-one-gray-94.vercel.app/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
-  const page=await context.newPage(),errors=[];page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/movies.*due to access control checks/.test(e.message))errors.push(e.message);});
+  const page=await context.newPage(),errors=[];
+  // WebKit occasionally fails its initial local navigation internally on CI.
+  // Retry only that engine-level error once; assertions and real page failures remain fatal.
+  async function navigate(url){
+   try{await page.goto(url);}
+   catch(error){
+    if(process.env.CINELVA_BROWSER!=='webkit'||!/WebKit encountered an internal error/.test(String(error)))throw error;
+    console.warn('WebKit internal navigation error; retrying once:',url);
+    await page.goto(url);
+   }
+  }
+  page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/movies.*due to access control checks/.test(e.message))errors.push(e.message);});
   const wordmarkStyle=()=>[...document.querySelectorAll('.gBrand>span')].map(el=>{const s=getComputedStyle(el);return {color:s.color,backgroundImage:s.backgroundImage,textFill:s.webkitTextFillColor}});
   for(const theme of ['light','dark']){
-   await page.goto(`http://127.0.0.1:${port}/index.html`);
+   await navigate(`http://127.0.0.1:${port}/index.html`);
    await page.locator('#gMenuBtn').click();
    await page.getByLabel('表示テーマ',{exact:true}).selectOption(theme);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    const expected=await page.evaluate(wordmarkStyle);
-   await page.goto(`http://127.0.0.1:${port}/credits.html`);
+   await navigate(`http://127.0.0.1:${port}/credits.html`);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    assert.deepEqual(await page.evaluate(wordmarkStyle),expected,`credits header and drawer wordmarks match calendar in ${theme}`);
   }
-  await page.goto(`http://127.0.0.1:${port}/my-cinelva/`);
+  await navigate(`http://127.0.0.1:${port}/my-cinelva/`);
   await page.locator('#gMenuBtn').click();
   const link=page.getByRole('link',{name:'情報源と収録日時',exact:true});
   assert.match(await link.getAttribute('href'),/\/credits.html#data-status$/);
@@ -48,13 +59,13 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#gMenuBtn').click();
   await page.locator('#gDrawer').getByRole('link',{name:'My Cinelva',exact:true}).click();
   await page.waitForURL('**/my-cinelva/');
-  await page.goto(`http://127.0.0.1:${port}/index.html`);
+  await navigate(`http://127.0.0.1:${port}/index.html`);
   await page.locator('[data-mode="festival"]').click();
   assert.equal(await page.locator('.modeTab').count(),4);
   assert.equal(await page.locator('[data-mode="events"]').count(),0);
   await page.getByRole('button',{name:'屋外上映',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  await page.goto(`http://127.0.0.1:${port}/credits.html#data-status`);
+  await navigate(`http://127.0.0.1:${port}/credits.html#data-status`);
   await page.waitForLoadState('networkidle');
   await context.route('**/data/source-status.json',r=>r.fulfill({status:503,body:'unavailable'}));
   await page.reload();await page.getByText('収録状態を取得できませんでした。以下の個別の出典をご確認ください。',{exact:true}).waitFor();

@@ -28,7 +28,7 @@ const { chromium } = require("playwright"),
       });
     });
     await page.setContent(
-      '<style>img{display:block!important}</style><div id="poster" class="poster">ポスター未取得</div>',
+      '<style>img{display:block!important}.poster{width:100px;min-height:150px}.poster img{width:100%;height:100%}.rankPoster{width:100px;aspect-ratio:2/3;background:#222}.rankPoster img{width:100%;height:100%}[data-poster-fallback]{display:block}</style><div id="poster" class="poster">ポスター未取得<img src="https://image.tmdb.org/t/p/w500/bad.jpg"></div><div class="rankCard" data-popular-id="550"><div class="rankPoster"><img src="https://image.tmdb.org/t/p/w500/bad.jpg"></div><b>Film</b></div>',
     );
     await page.addScriptTag({
       content: fs.readFileSync("js/cinelva-movie-identity.js", "utf8"),
@@ -40,21 +40,24 @@ const { chromium } = require("playwright"),
         poster: "/bad.jpg",
       }),
     );
-    await page.waitForFunction(() => document.querySelector("img")?.complete);
+    await page.waitForFunction(() => document.querySelector("#poster img")?.complete);
     assert.equal(
-      await page.locator("img").isVisible(),
+      await page.locator("#poster img").isVisible(),
       false,
       "the broken-image icon must disappear before a slow retry finishes",
     );
     assert.match(await page.locator("#poster").innerText(), /ポスター未取得/);
+    await page.waitForFunction(() => document.querySelector(".rankCard img")?.dataset.posterFailed === "1");
+    assert.equal(await page.locator(".rankCard img").isVisible(), false, "ranking cards hide failed images");
+    assert.equal(await page.locator(".rankCard [data-poster-fallback]").innerText(), "画像なし", "ranking cards expose a readable fallback");
     release();
     await page.waitForFunction(
-      () => document.querySelector("img")?.naturalWidth > 0,
+      () => document.querySelector("#poster img")?.naturalWidth > 0 && document.querySelector(".rankCard img")?.naturalWidth > 0,
     );
-    assert.equal(await page.locator("img").isVisible(), true);
-    assert.match(await page.locator("img").getAttribute("src"), /good.png$/);
+    assert.equal(await page.locator("#poster img").isVisible(), true);
+    assert.match(await page.locator("#poster img").getAttribute("src"), /good.png$/);
     assert.equal(
-      await page.locator("[data-poster-fallback]").isVisible(),
+      await page.locator("#poster [data-poster-fallback]").isVisible(),
       false,
     );
     assert.equal(await page.locator('#poster').innerText(),'','recovered artwork removes the stale fallback label');

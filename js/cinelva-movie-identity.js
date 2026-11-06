@@ -239,15 +239,14 @@
     if(image?.parentElement&&id(m))image.parentElement.dataset.nowFilmId=id(m);
     if (!image || !m || bound.has(image)) return;
     bound.add(image);
-    image.onerror = null;
     const parent = image.parentElement;
-    let fallback = parent?.querySelector("[data-poster-fallback]");
+    let fallback = parent?.querySelector("[data-poster-fallback],.rankPosterPlaceholder");
     const show = () => {
       image.hidden = false;
       image.style.removeProperty("display");
       parent?.classList.remove("posterMissing");
       if (fallback) fallback.hidden = true;
-      for(const placeholder of parent?.querySelectorAll('[data-poster-fallback],.calMissing,.filmPlaceholder,.theatricalPosterFallback,.selectedMoviePosterFallback,.filmCandidatePosterFallback')||[]){placeholder.hidden=true;placeholder.style.setProperty('display','none','important');}
+      for(const placeholder of parent?.querySelectorAll('[data-poster-fallback],.calMissing,.filmPlaceholder,.theatricalPosterFallback,.selectedMoviePosterFallback,.filmCandidatePosterFallback,.rankPosterPlaceholder')||[]){placeholder.hidden=true;placeholder.style.setProperty('display','none','important');}
       if(parent?.matches('.poster,.want-watch-poster,.streamMoviePoster,.tvMoviePoster,.presetCardPoster'))for(const node of [...parent.childNodes])if(node.nodeType===3)node.remove();
       image.dataset.posterFailed = "";
     };
@@ -341,7 +340,7 @@
   function bindPosters(scope = document) {
     let recordsById;
     const selector =
-      ".poster,.streamMoviePoster,.tvMoviePoster,.presetCardPoster,.want-watch-poster,.awardPoster,.outdoorFilmItem,.filmCard,.boxPoster";
+      ".poster,.streamMoviePoster,.tvMoviePoster,.presetCardPoster,.want-watch-poster,.awardPoster,.outdoorFilmItem,.filmCard,.rankCard,.boxPoster";
     const containers = [
       ...(scope.matches?.(selector) ? [scope] : []),
       ...(scope.querySelectorAll?.(selector) || []),

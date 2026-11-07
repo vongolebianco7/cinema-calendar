@@ -26,7 +26,8 @@ test('My Best 10 candidate cards fit a horizontal mobile scroller',()=>{
  assert.match(css,/#list\{[^}]*overflow-x:auto/);
  assert.match(css,/#list>\.item\{[^}]*flex:0 0/);
  assert.match(css,/#list>\.item \.move\{[^}]*display:flex/);
- assert.match(css,/@media\(max-width:600px\)/);\n assert.match(css,/\.results\{max-height:min\(62vh,560px\)\}/);
+ assert.match(css,/@media\(max-width:600px\)/);
+ assert.match(css,/\.results\{max-height:min\(62vh,560px\)\}/);
 });
 for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theater','cinema-archive'])test(`${theme}: posters and official emblem; no year/director, including saved records`,()=>{
  const r=renderer();r.elements.theme.value=theme;

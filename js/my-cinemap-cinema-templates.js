@@ -31,7 +31,7 @@
   }
 
   function brandFooterTop(shape,h,brandHeight=34){
-    const bottomGap=shape==='portrait'?26:shape==='square'?24:20;
+    const bottomGap=26;
     return h-bottomGap-brandHeight;
   }
 
@@ -49,7 +49,7 @@
 
   drawBrand=function(ctx,w,h,theme,y){
     const p=artPalettes[theme]||artPalettes.minimal;
-    const shape=artValue('format')||'portrait';
+    const shape='portrait';
     const brandHeight=50;
     const safeY=brandFooterTop(shape,h,brandHeight);
     drawBrandSafeZone(ctx,w,h,p,safeY,brandHeight);
@@ -99,10 +99,10 @@
 
   function renderCinemaTemplate(movies,theme){
     const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
-    const shape=artValue('format')||'portrait',layout=artValue('layout')||'single';
+    const shape='portrait',layout=artValue('layout')||'single';
     const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
     const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
-    c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
+    c.width=1600;c.height=2000;
     const w=c.width,h=c.height,columns=layout==='double'?2:1,metrics=layoutMetrics(shape,columns,'noir'),pad=metrics.pad,inner=w-2*pad;
     const img=getTemplateImage(theme);
     if(img.complete&&img.naturalWidth)drawImageCover(ctx,img,w,h);else{ctx.fillStyle='#111318';ctx.fillRect(0,0,w,h)}
@@ -129,12 +129,13 @@
     rule(ctx,pad,listBottom,inner,p.line,p.dark?.68:.54);
     const footerY=brandFooterTop(shape,h,36*brandScale);drawBrandSafeZone(ctx,w,h,p,footerY,36*brandScale);drawCinemaBrand(ctx,w,h,p,footerY);ctx.restore();
 
-    c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
+    c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+artworkMovieTitle(m)).join('、'));
     scheduleArtworkBlob(c);
   }
 
   drawArtwork=function(movies){
     artworkMovies=(movies||[]).slice(0,10);
+    artworkRatingLookup=buildArtworkRatingLookup(artworkMovies);
     const theme=artValue('theme')||'minimal';
     if(!theme.startsWith('cinema-'))return originalDrawArtwork(movies);
     renderCinemaTemplate(movies,theme);

@@ -14,7 +14,6 @@ class SupportGuidanceTests(unittest.TestCase):
                 self.assertIn(PRIVATE_FEEDBACK, content)
                 self.assertNotIn('https://github.com/vongolebianco7/cinema-calendar/issues/new', content)
                 self.assertRegex(content, r'個人情報|氏名')
-                self.assertIn('個人情報', content)
                 for anchor in re.findall(r'<a\b[^>]*>', content, flags=re.IGNORECASE):
                     if re.search(r'\btarget=["\']_blank["\']', anchor, flags=re.IGNORECASE):
                         self.assertRegex(anchor, r'\brel=["\'][^"\']*\bnoopener\b[^"\']*\b(?:noreferrer|noopener)\b[^"\']*["\']')

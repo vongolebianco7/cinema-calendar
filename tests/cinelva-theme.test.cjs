@@ -4,17 +4,18 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
 const root=path.join(__dirname,'..');
-function boot({saved=null,dark=false,denied=false}={}){
+function boot({saved=null,dark=false,denied=false,feedbackLink=null}={}){
  const listeners={},mediaListeners={},writes=[];
  const control={value:'',addEventListener:(type,fn)=>{listeners['control:'+type]=fn}};
  const label={className:'',innerHTML:'',querySelector:()=>control};
- const drawer={append:el=>{drawer.child=el}};
+ const appended=[];
+ const drawer={querySelectorAll:()=>feedbackLink?[{href:feedbackLink}]:[],append:el=>{appended.push({...el});drawer.child=el}};
  const doc={head:{appendChild:()=>{}},currentScript:{src:'https://example.test/js/theme.js'},documentElement:{dataset:{},style:{}},readyState:'loading',createElement:()=>label,querySelector:s=>s==='.gDrawer'?drawer:null,addEventListener:(type,fn)=>{listeners[type]=fn}};
  const media={matches:dark,addEventListener:(type,fn)=>{mediaListeners[type]=fn}};
  const storage={getItem:()=>{if(denied)throw Error('denied');return saved},setItem:(key,value)=>{if(denied)throw Error('denied');writes.push([key,value])},removeItem:key=>{if(denied)throw Error('denied');writes.push([key,null])}};
  const win={matchMedia:()=>media,addEventListener:(type,fn)=>{listeners['window:'+type]=fn}};
  vm.runInNewContext(fs.readFileSync(path.join(root,'js/theme.js'),'utf8'),{document:doc,window:win,localStorage:storage,URL});
- return {doc,media,mediaListeners,listeners,control,drawer,writes};
+ return {doc,media,mediaListeners,listeners,control,drawer,writes,appended};
 }
 test('first paint follows system unless an explicit valid preference exists',()=>{
  assert.equal(boot({dark:false}).doc.documentElement.dataset.theme,'light');
@@ -52,4 +53,13 @@ test('every public and isolated page loads the shared theme before rendering',()
   }
  }
  const css=fs.readFileSync(path.join(root,'assets/theme.css'),'utf8');assert.doesNotMatch(css,/filter\s*:\s*(?!none)[^;!}]+[;!}]/i);
+});
+
+test('theme adds a feedback link only when the host has no link to the feedback page',()=>{
+ const href='https://example.test/feedback.html';
+ for(const feedbackLink of [null,href]){
+  const app=boot({feedbackLink});
+  app.listeners.DOMContentLoaded();
+  assert.equal(app.appended.filter(link=>link.href===href).length,feedbackLink?0:1);
+ }
 });

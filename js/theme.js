@@ -36,8 +36,12 @@
     }
     const host = document.querySelector('.gDrawer') || document.querySelector('main');
     if (!host) return;
-    const feedbackLink = document.createElement('a');
-    feedbackLink.href = feedbackHref; feedbackLink.textContent = 'ご意見・ご要望'; host.append(feedbackLink);
+    if (![...host.querySelectorAll('a[href]')].some(link => link.href === feedbackHref)) {
+      const feedbackLink = document.createElement('a');
+      feedbackLink.href = feedbackHref;
+      feedbackLink.textContent = 'ご意見・ご要望';
+      host.append(feedbackLink);
+    }
     const sourceLink = document.createElement('a');
     sourceLink.className = 'cinelvaSourcesLink'; sourceLink.href = sourceHref; sourceLink.textContent = '情報源と収録日時';
     host.append(sourceLink);

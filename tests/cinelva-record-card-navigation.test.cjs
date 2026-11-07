@@ -4,7 +4,7 @@ function card(movie){const ctx={escapeHTML:x=>String(x??'').replaceAll('&','&amp
 test('watched poster and title open canonical independent detail and retain release date',()=>{
  const html=card({id:'900001',tmdbId:42,title:'Film',release_date:'2000-01-02'});
  assert.equal((html.match(/href="[^\"]*search.html\?id=42/g)||[]).length,2);
- assert.match(html,/2000\.01\.02/);
+ assert.match(html,/2000\/01\/02/);
  assert.doesNotMatch(html,/id=900001/);
 });
 test('unmapped imported record searches by title without using its storage ID as a film ID',()=>{

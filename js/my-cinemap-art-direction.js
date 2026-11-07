@@ -149,7 +149,7 @@
     if(!options)return;
     const label=document.createElement('label');
     label.className='fontStyleField';
-    label.innerHTML='フォント<select id="fontStyle"><option value="modern" selected>Modern Serif</option><option value="clean">Clean Sans</option><option value="classic">Cinema Classic</option></select>';
+    label.innerHTML='フォント<select id="fontStyle"><option value="modern" selected>Modern Serif</option><option value="clean">Clean Sans</option><option value="classic">Cinema Rounded</option></select>';
     options.appendChild(label);
     const fontStyle=label.querySelector('#fontStyle');
     const savedValue=localStorage.getItem(FONT_KEY);
@@ -211,7 +211,7 @@
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20261031-mobile-feedback';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20261107-rounded-font';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,scheduleDirectorHydration,mountFontPicker,mountCinemaTemplates,removeDeprecatedTemplates,markEditorRanking,bindExportControlsToEnhancedRender,bindLightweightTextInputs,scheduleArtworkRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

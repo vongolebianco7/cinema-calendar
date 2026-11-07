@@ -13,11 +13,11 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
  const r=renderer(),movie={title:'千と千尋の神隠し'};
  const fonts=new Map();
  for(const choice of ['modern','clean','classic']){r.elements.fontStyle.value=choice;r.calls.fonts=[];r.context.drawArtwork([movie]);assert.ok(r.calls.fonts.length>0,`${choice} font must render`);fonts.set(choice,r.calls.fonts.join('\n'))}
- assert.match(fonts.get('modern'),/Baskerville/);assert.match(fonts.get('clean'),/Avenir Next/);assert.match(fonts.get('classic'),/Hiragino Mincho ProN/);
+ assert.match(fonts.get('modern'),/Baskerville/);assert.match(fonts.get('clean'),/Avenir Next/);assert.match(fonts.get('classic'),/Hiragino Maru Gothic ProN/);assert.doesNotMatch(fonts.get('classic'),/Baskerville|Hiragino Mincho/);assert.notEqual(fonts.get('modern'),fonts.get('classic'),'the first and third font choices must differ');
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-japanese-fonts/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-rounded-font/);
 });
 for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theater','cinema-archive'])test(`${theme}: posters and official emblem; no year/director, including saved records`,()=>{
  const r=renderer();r.elements.theme.value=theme;

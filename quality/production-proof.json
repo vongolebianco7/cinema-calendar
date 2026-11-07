@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ccae26f8259b508ef6500c28dff543a7a85cf879",
-  "verified_at": "2026-11-07T00:59:19Z",
-  "note": "PR #669 mobile feedback admin layout and source-status fixture. Autonomous quality, smoke, Chromium/WebKit Validate frontend and reproducible backend build passed on this exact source. Receipt-only commit."
+  "head_sha": "279a84e3f41505921207aaefbda42fa7fbd0b169",
+  "verified_at": "2026-11-07T01:24:52Z",
+  "note": "PR #669 mobile feedback admin layout with narrowly scoped WebKit transient navigation retry in retirement browser test. Autonomous quality, smoke, Chromium/WebKit Validate frontend, and reproducible backend build passed on this exact source. Receipt-only commit."
 }

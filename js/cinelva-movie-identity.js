@@ -25,6 +25,13 @@
     Number(
       m?.release_year || m?.year || String(m?.release_date || "").slice(0, 4),
     ) || 0;
+  function movieMetadata(m) {
+    const runtime = Number(m?.runtime);
+    const rawDate = String(m?.release_date || m?.releaseDate || m?.date || "").slice(0, 10);
+    const yearOnly = String(m?.release_year || m?.year || rawDate.slice(0, 4)).trim();
+    const releaseDate = /^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate.replaceAll("-", "/") : /^\d{4}$/.test(yearOnly) ? `${yearOnly}年` : "";
+    return [Number.isFinite(runtime) && runtime > 0 ? `${runtime}分` : "", releaseDate].filter(Boolean).join(" · ");
+  }
   const positive = (v) =>
     Number.isSafeInteger(Number(v)) && Number(v) > 0 ? Number(v) : 0;
   function id(m) {
@@ -291,8 +298,28 @@
     else if (image.complete && image.getAttribute("src"))
       image.dispatchEvent(new Event("error"));
   }
+  function decorateMovieMetadata(card, m) {
+    const facts = movieMetadata(m);
+    if (!card || !facts) return;
+    const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
+    if (!title) return;
+    let metadata = card.querySelector(".cinelvaMovieMetadata");
+    if (!metadata) { metadata = document.createElement("small"); metadata.className = "cinelvaMovieMetadata"; metadata.style.cssText = "display:block;margin-top:3px;font-size:.78em;line-height:1.35;color:var(--muted,#737373);font-weight:400"; title.insertAdjacentElement("afterend", metadata); }
+    metadata.textContent = facts;
+  }
   function hydrateCard(container, m) {
     if (!container || !m) return;
+    const card = container.closest?.(".card,.filmCandidate,.presetCard,.rankCard,.streamMovie,.tvMovie,.want-watch-item,.filmCard") || container.parentElement;
+    decorateMovieMetadata(card, m);
+    const facts = movieMetadata(m);
+    if (card && facts) {
+      const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
+      if (title) {
+        let metadata = card.querySelector(":scope > .cinelvaMovieMetadata");
+        if (!metadata) { metadata = document.createElement("small"); metadata.className = "cinelvaMovieMetadata"; title.insertAdjacentElement("afterend", metadata); }
+        metadata.textContent = facts;
+      }
+    }
     if(id(m))container.dataset.nowFilmId=id(m);
     const apply = (url) => {
       if (!url || !container.isConnected) return;
@@ -394,6 +421,7 @@
           "",
         year: card.dataset.boxYear,
       };
+      decorateMovieMetadata(card, movie);
       const signature = [id(movie), movie.title, year(movie)].join("|");
       if (mounted.get(container) === signature) continue;
       mounted.set(container, signature);
@@ -433,6 +461,7 @@
   root.CinelvaMovieIdentity = {
     id,
     year,
+    movieMetadata,
     fromApi,
     normalizePoster,
     ingest,

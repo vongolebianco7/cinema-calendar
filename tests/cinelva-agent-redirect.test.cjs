@@ -8,6 +8,7 @@ test('legacy concierge redirects stay within their document roots despite base h
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     const target = 'location.replace(new URL("./discover.html?mode=concierge",location.href).href)';
     assert.ok(html.includes(target), file + ' must resolve relative to the document URL');
+    assert.doesNotMatch(html, /cinelva-movie-identity\.js/, file + ' redirects before optional movie identity code can start data requests');
     const expected = file.startsWith('cinelva/') ? '/cinelva/discover.html' : '/discover.html';
     assert.equal(new URL('./discover.html?mode=concierge', 'https://cinelva.example/' + file).pathname, expected);
   }

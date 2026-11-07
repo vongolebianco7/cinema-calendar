@@ -10,7 +10,7 @@ const end = html.indexOf('\n}', start) + 2;
 const overlapStart = html.indexOf('function theatricalMoviesOverlappingWeek(');
 assert.notEqual(overlapStart, -1, 'theater week overlap helper exists in production');
 const overlapEnd = html.indexOf('\n}', overlapStart) + 2;
-const context = vm.createContext({ Date, isoOf: (d) => [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-') });
+const context = vm.createContext({ Date });
 vm.runInContext(html.slice(start, end) + '\n' + html.slice(overlapStart, overlapEnd), context);
 
 test('theater month bounds exclude adjacent month dates', () => {

@@ -41,13 +41,21 @@ async function freePort() {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+    const navigate = async (url, options) => {
+      try {
+        await page.goto(url, options);
+      } catch (error) {
+        if (browserName !== 'webkit' || !/WebKit encountered an internal error/.test(error.message)) throw error;
+        await page.goto(url, options);
+      }
+    };
     for (const count of [0, 1, 1000]) {
       const records = Object.fromEntries(Array.from({ length: count }, (_, index) => [String(index + 900001), { id: String(index + 900001), title: `保存記録 ${index + 1}`, watched: true, rating: 4.2, watchedAt: '2026-01-02', custom: { preserve: true } }]));
       const serialized = JSON.stringify(records);
-      await page.goto(`${base}/my-cinemap.html`, { waitUntil: 'domcontentloaded' });
+      await navigate(`${base}/my-cinemap.html`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(([key, value]) => localStorage.setItem(key, value), [recordKey, serialized]);
       for (const route of routes) {
-        await page.goto(`${base}/${route}?retirement-test=${count}#records`, { waitUntil: 'domcontentloaded' });
+        await navigate(`${base}/${route}?retirement-test=${count}#records`, { waitUntil: 'domcontentloaded' });
         await page.waitForURL(url => url.pathname === '/my-cinelva/' && url.searchParams.get('retirement-test') === String(count) && url.hash === '#records');
         await page.waitForFunction(expected => document.getElementById('csLifetime')?.textContent === String(expected), count);
         assert.equal(await page.evaluate(() => CinelvaLibraryRecords.all().length), count);

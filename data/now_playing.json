@@ -5,11 +5,16 @@
   "source": {
     "id": "tmdb",
     "endpoint": "/movie/now_playing",
-    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list"
+    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list",
+    "retrieval_endpoint": "/discover/movie",
+    "upstream_window": {
+      "minimum": "2026-09-30",
+      "maximum": "2026-11-11"
+    }
   },
   "complete": true,
-  "generated_at": "2026-11-07T03:03:23.185131+00:00",
-  "upstream_total_results": 87,
+  "generated_at": "2026-11-07T07:40:15.118718+00:00",
+  "upstream_total_results": 88,
   "movies": [
     {
       "id": 1423191,
@@ -18,9 +23,9 @@
       "original_title": "Resident Evil",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/wHXSnGH3zQtvpxPwaBXMoS9o8Vl.jpg",
-      "score": 7.458,
-      "votes": 1638,
-      "popularity": 422.1049,
+      "score": 7.45,
+      "votes": 1658,
+      "popularity": 494.056,
       "overview": "ある医療品の配送を請け負った男を襲う、地獄の一夜。 男は、己の命運を懸けた壮絶なサバイバルを余儀なくされる…",
       "source_url": "https://www.themoviedb.org/movie/1423191"
     },
@@ -31,9 +36,9 @@
       "original_title": "Verity",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/rmaNMA1seHqpjtnYKzyynFAr1g8.jpg",
-      "score": 6.968,
-      "votes": 611,
-      "popularity": 192.4684,
+      "score": 6.962,
+      "votes": 613,
+      "popularity": 184.0988,
       "overview": "仕事にも人生にも行き詰まっている売れない作家ローウェン・アシュリー（ダコタ・ジョンソン）のもとへ、突然、驚くようなオファーが届く。それは交通事故で生死を彷徨う人気作家ヴェリティ・クロフォード（アン・ハサウェイ）のためのゴーストライター業だった。なぜ自分が選ばれたのか疑問を持ちながらも、またとないチャンスを引き受けるべく、ローウェンは人里離れたクロフォード家の邸宅へと移り住む。次第にヴェリティの夫ジェレミー（ジョシュ・ハートネット）と親密な関係になっていくローウェンだったが、ある日ヴェリティが書いたと思われる不気味な原稿を発見してしまう。そこには、夫との性愛や子供たちへの激しい感情、そして自らにまつわる衝撃の告白が記されていた── クロフォード家に一体何があったのか？ 善悪の境界線が揺らぐ中、やがてローウェンは闇深い真実に辿り着く…。",
       "source_url": "https://www.themoviedb.org/movie/1283515"
     },
@@ -44,9 +49,9 @@
       "original_title": "ゴジラ-0.0",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/zpcoFlZwyLnBt7bb5wmvGDCdg06.jpg",
-      "score": 8.083,
-      "votes": 48,
-      "popularity": 106.147,
+      "score": 8.132,
+      "votes": 57,
+      "popularity": 145.9052,
       "overview": "第96回アカデミー賞でアジア映画として初の視覚効果賞を受賞するなど、世界的に大きな話題を集めた「ゴジラ－1.0」の続編。山崎貴が引き続き監督・脚本・VFXを担い、前作から2年後の世界を舞台に、再び姿を現したゴジラとの新たな戦いを描き出す。  戦争によって「無（ゼロ）」となった日本を、ゴジラが「負（マイナス）」に叩き落としてから2年。もがき苦しみながらも復興を遂げ、ようやく取り戻したはずの日常に、再びゴジラが襲いかかる。人々はこの戦いを終わらせるべく、総力を結集して新たな作戦に乗り出す。  キャストは、前作でゴジラと壮絶な死闘を繰り広げた主人公・敷島浩一役の神木隆之介、ゴジラに襲われながらも奇跡的に一命をとりとめたヒロイン・敷島典子役の浜辺美波をはじめ、山田裕貴、佐々木蔵之介、安藤サクラ、吉岡秀隆ら前作の顔ぶれが再集結。さらに新たなメンバーとして、気象台から大型災害対策事務局に出向した天才気象予報官・青山真琴役で長澤まさみ、戦争で心に深い傷を負った生物学者・村上寛治役で田中泯、医師・緒方役で國村隼が出演。",
       "source_url": "https://www.themoviedb.org/movie/1381071"
     },
@@ -57,9 +62,9 @@
       "original_title": "Clayface",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/6ttcIVdQbS6esi5wPEUuVKQN8SX.jpg",
-      "score": 7.4,
-      "votes": 398,
-      "popularity": 105.4305,
+      "score": 7.431,
+      "votes": 400,
+      "popularity": 97.8805,
       "overview": "ゴッサムの路地裏で育った少年から、ハリウッドの主演俳優へ。瞬く間にスターの座へ駆け上がったマット・ヘイゲンだったが、地元の犯罪組織のボスによって顔を無残に損なわれ、その輝かしいキャリアは突然、悲劇的な終わりを迎える。周囲のスタッフにも見捨てられ、すべてを失ったマットは、最先端の治療に最後の望みを託す。奇跡的に元の姿を取り戻した彼だったが、その治療は思いもよらぬ形で彼の現実感覚を蝕んでいく。やがてマットは、すべてを呑み込むほどの復讐心に駆られ、破滅への道を転がり落ちていく——。",
       "source_url": "https://www.themoviedb.org/movie/1400940"
     },
@@ -70,9 +75,9 @@
       "original_title": "Street Fighter",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/1JBlbyXionXPRaqW1UQw7eKkxNP.jpg",
-      "score": 6.326,
-      "votes": 219,
-      "popularity": 65.6711,
+      "score": 6.33,
+      "votes": 220,
+      "popularity": 63.9123,
       "overview": "舞台は1993年。かつて、共に天才格闘家として名を馳せ、兄弟のような存在であったリュウとケン。ある理由により疎遠になった二人のもとに、謎の女性格闘家・春麗が現れ、“ワールドウォリアー・トーナメント（世界格闘王決定戦）”の招待状が差し出される。世界最強の猛者たち“ストリートファイター”と戦うことになった二人は、その拳で運命を変えることができるのか？",
       "source_url": "https://www.themoviedb.org/movie/1153576"
     },
@@ -85,7 +90,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/vDnJLpE2jhu8OVcwpWuYCMF5hRU.jpg",
       "score": 7.427,
       "votes": 3957,
-      "popularity": 61.2024,
+      "popularity": 58.6352,
       "overview": "気象キャスターのマーガレットとサイバーセキュリティのエキスパート、ダニエル。接点のないはずの二人が衝撃的な機密情報を知ることとなった。やがて、その秘密を明らかにする使命を負った彼らの前に謎の組織が立ちはだかる――。",
       "source_url": "https://www.themoviedb.org/movie/1275779"
     },
@@ -97,8 +102,8 @@
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/vi2HvWOBtR1pcr4vBoYe43ldkuu.jpg",
       "score": 7.5,
-      "votes": 499,
-      "popularity": 50.8776,
+      "votes": 501,
+      "popularity": 48.7506,
       "overview": "石油採掘会社のCEOとして君臨する傲慢な権力者、ディガー・ロックウェル。己の利益しか考えていない彼の欲深い行動のせいで、地球は滅亡の危機に陥ってしまう。大統領から事態の収拾を命じられたディガーは、世界を救うべくシャベルを片手に立ち上がるが……。",
       "source_url": "https://www.themoviedb.org/movie/1248832"
     },
@@ -109,11 +114,24 @@
       "original_title": "Whalefall",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/vjTYUTgh9nO88i6HZ4YPRhiFL05.jpg",
-      "score": 6.577,
-      "votes": 137,
-      "popularity": 46.7708,
+      "score": 6.6,
+      "votes": 139,
+      "popularity": 44.8806,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1255833"
+    },
+    {
+      "id": 1483525,
+      "tmdbId": 1483525,
+      "title": "もしもの愛",
+      "original_title": "가능한 사랑",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
+      "score": 7.389,
+      "votes": 18,
+      "popularity": 45.1143,
+      "overview": "まったく異なる人生を歩む2 組の夫婦の交錯する日常を捉え、平穏に見えた日々に少しずつ亀裂が生まれていく様子を描き出す。",
+      "source_url": "https://www.themoviedb.org/movie/1483525"
     },
     {
       "id": 1234139,
@@ -124,22 +142,9 @@
       "poster": "https://image.tmdb.org/t/p/w342/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
       "score": 8.2,
       "votes": 24,
-      "popularity": 20.8829,
+      "popularity": 19.1612,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1234139"
-    },
-    {
-      "id": 1483525,
-      "tmdbId": 1483525,
-      "title": "もしもの愛",
-      "original_title": "가능한 사랑",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
-      "score": 7.125,
-      "votes": 16,
-      "popularity": 10.4277,
-      "overview": "まったく異なる人生を歩む2 組の夫婦の交錯する日常を捉え、平穏に見えた日々に少しずつ亀裂が生まれていく様子を描き出す。",
-      "source_url": "https://www.themoviedb.org/movie/1483525"
     },
     {
       "id": 1755291,
@@ -148,9 +153,9 @@
       "original_title": "NAZA",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/12lO7y7j57j6mpQCUccOdEpSZzA.jpg",
-      "score": 8.1,
-      "votes": 130,
-      "popularity": 9.0972,
+      "score": 8.099,
+      "votes": 131,
+      "popularity": 7.731,
       "overview": "夜のテルアビブ、とある建物の屋上でイスラエル人ジャーナリストのユヴァル・アブラハームとラヘル・ショールは、イスラエル軍の兵士と諜報員24名に極秘インタビューを行った。ガザでの民間人殺害について、どのような指令を受けたのか。何をしたのか。ある者はデジタル化された遠隔攻撃を「事務作業のようなものだ」と語り、ある者は「食糧配給所に人が集まったところを撃った」と証言する。ひとりひとりの言葉から浮かび上がるのは、イスラエル国家が組織的に作り上げた、人間を人間としてみなさない＜虐殺を可能にするシステム＞だった。",
       "source_url": "https://www.themoviedb.org/movie/1755291"
     },
@@ -163,7 +168,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/gZITAx2f68kmwxk4ucKGL83RcoZ.jpg",
       "score": 8.088,
       "votes": 4788,
-      "popularity": 8.0397,
+      "popularity": 7.5607,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/406"
     },
@@ -176,7 +181,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
       "score": 8.8,
       "votes": 160,
-      "popularity": 7.2912,
+      "popularity": 7.8854,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "source_url": "https://www.themoviedb.org/movie/1278101"
     },
@@ -189,7 +194,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/nRoVOvMPOEM9GuHu5FKGigbXzVT.jpg",
       "score": 8.0,
       "votes": 1,
-      "popularity": 4.9062,
+      "popularity": 4.3823,
       "overview": "美しい海と空が広がる、瀬戸内のとある島。  島に転校してきた男子高校生・櫂（横浜流星）と、この島で育った暁海（広瀬すず）。  ともに家庭に恵まれずわだかまりを抱える2人は、互いに唯一の心の支えとなり、恋に落ちる。  夢を掴むために上京する櫂と、家族のために島で働く暁海。  そんな2人に、無情にも突き付けられるいくつもの“岐路”。15年の大恋愛の末に、2人のくだした決断とは。  「わたしは愛する人のために人生を誤りたい。」  2人の愛と選択を通して生きる意味を問う、  この秋、必涙の感動作がここに誕生する。",
       "source_url": "https://www.themoviedb.org/movie/1590933"
     },
@@ -202,7 +207,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/4iwcFGxdnsMWrvoqsgmU2TQfL6K.jpg",
       "score": 7.7,
       "votes": 1107,
-      "popularity": 4.8596,
+      "popularity": 4.3004,
       "overview": "2071年、火星。高速道路でタンクローリーが爆発事故を起こし、タンクから漏れだした物質で500人以上が死傷する大惨事となる。正体不明のバイオ兵器を使用したテロの可能性があることから、火星政府は犯人に史上最高の懸賞金をかけると発表。貧困に喘ぐビバップ号クルーたちが眼の色を変えたのは当然だった……。",
       "source_url": "https://www.themoviedb.org/movie/11299"
     },
@@ -215,7 +220,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/sTTmrV7Yy7Rf5jM9i2vXpbDSqs1.jpg",
       "score": 3.811,
       "votes": 246,
-      "popularity": 4.2533,
+      "popularity": 4.3592,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1333141"
     },
@@ -228,22 +233,9 @@
       "poster": "https://image.tmdb.org/t/p/w342/xpqa2ShXecFxMUGKv82Zx56ZoUD.jpg",
       "score": 7.1,
       "votes": 83,
-      "popularity": 3.3318,
+      "popularity": 3.4247,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/793058"
-    },
-    {
-      "id": 1393151,
-      "tmdbId": 1393151,
-      "title": "プーチンの愛国教室",
-      "original_title": "Mr. Nobody mod Putin",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/vxvYpq92BRYlsJmSroswNoiDbnR.jpg",
-      "score": 7.328,
-      "votes": 157,
-      "popularity": 3.0869,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1393151"
     },
     {
       "id": 1526917,
@@ -254,9 +246,22 @@
       "poster": "https://image.tmdb.org/t/p/w342/7HfBlYDlMVaHnvd7NEpZLd8r7FO.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 2.9419,
+      "popularity": 3.2226,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1526917"
+    },
+    {
+      "id": 1393151,
+      "tmdbId": 1393151,
+      "title": "プーチンの愛国教室",
+      "original_title": "Mr. Nobody mod Putin",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/vxvYpq92BRYlsJmSroswNoiDbnR.jpg",
+      "score": 7.328,
+      "votes": 157,
+      "popularity": 2.6736,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1393151"
     },
     {
       "id": 1553200,
@@ -267,9 +272,22 @@
       "poster": "https://image.tmdb.org/t/p/w342/iSG98AUNeBEol9GhoPVdPMxjpYb.jpg",
       "score": 8.0,
       "votes": 2,
-      "popularity": 2.8743,
+      "popularity": 2.8706,
       "overview": "「実は、私が霧島透子なんです」  謎に包まれた大人気ネットシンガーの正体は 国民的女優の桜島麻衣だった――と、沸き立つ観客たち。 その光景は梓川咲太がクリスマスイブに見た夢と同じ――。  4月1日、麻衣の衝撃の告白を皮切りにかつて皆が夢で見たあり得ない出来事が次々と起こり続ける。  見た夢が正夢になるSNSの書き込み「＃夢見る」の存在も消え、目の前の現実と自分の認識が食い違う咲太のもとに、もう一つの可能性の世界の咲太からメッセージが届く。  ――霧島透子を止めてくれ――現実が書き換えられる前に  書き換えられた世界を元に戻すため、咲太は霧島透子を探す。これは、思春期症候群を乗り越える物語――",
       "source_url": "https://www.themoviedb.org/movie/1553200"
+    },
+    {
+      "id": 1313587,
+      "tmdbId": 1313587,
+      "title": "GROTESQQQUE -グロテスク-",
+      "original_title": "GROTESQQQUE -グロテスク-",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 2.7778,
+      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
+      "source_url": "https://www.themoviedb.org/movie/1313587"
     },
     {
       "id": 1473439,
@@ -309,19 +327,6 @@
       "popularity": 2.0614,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1283320"
-    },
-    {
-      "id": 1313587,
-      "tmdbId": 1313587,
-      "title": "GROTESQQQUE -グロテスク-",
-      "original_title": "GROTESQQQUE -グロテスク-",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 2.7778,
-      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
-      "source_url": "https://www.themoviedb.org/movie/1313587"
     },
     {
       "id": 59352,
@@ -493,19 +498,6 @@
       "source_url": "https://www.themoviedb.org/movie/1410955"
     },
     {
-      "id": 1592548,
-      "tmdbId": 1592548,
-      "title": "ガールズ＆パンツァー 最終章 第5話",
-      "original_title": "ガールズ＆パンツァー 最終章 第5話",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/nq9vie4ppuFSKWaQmNkFgpfaER5.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.943,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1592548"
-    },
-    {
       "id": 1693902,
       "tmdbId": 1693902,
       "title": "झिंगेदाउ २",
@@ -540,7 +532,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/qjuzeBRrqHAyGJIJLyJBGuCy5oY.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 1.0875,
+      "popularity": 0.8883,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1748514"
     },
@@ -553,7 +545,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/eHKLUM2VhJWJeGLFdrTChC5Jmjg.jpg",
       "score": 8.333,
       "votes": 3,
-      "popularity": 1.0813,
+      "popularity": 1.3488,
       "overview": "15年前の夏に起きたある火災事故から始まる。少年の無邪気な花火遊びがアパートを全焼させ、黒焦げの妻を抱えた男・埜本（のもと）が、燃えさかるアパートの一室から姿を現す。あまりにも強烈な記憶を前に、当事者であった少年たち——龍之介と拓海の時間は、あの日を境に止まってしまった。  やがて大人になった二人は、まったく異なる道を歩んでいる。龍之介（磯村勇斗）は罪に蓋をし、アーチェリーのオリンピック日本代表候補として前へ進もうとする。一方、拓海（末澤誠也）はいまだ罪の記憶から抜け出せず、陰鬱な日々に立ちすくんでいた。そんな二人の前に、あの火傷の男・埜本が再び現れる。しかし彼は恨みの言葉を口にすることなく、「君はもう、充分に償ったよ」と静かに語りかける。不気味なほどに優しいその姿は、やがて彼らにとっての “mentor／メンター”（助言者・導き手）となっていく——。",
       "source_url": "https://www.themoviedb.org/movie/1575872"
     },
@@ -566,7 +558,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/bwfdiCXUzWbjD2TGxWOlt4rZq8C.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 1.0123,
+      "popularity": 0.692,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1689343"
     },
@@ -579,7 +571,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/57Cvx1ePJl4jJJ9CNVyRWSPtvfs.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.9665,
+      "popularity": 0.6682,
       "overview": "戦後の混乱期から昭和、平成、令和へと姿を変えながら、夢を追う者、夢にやぶれた者、それでも今を生きる者たちが夜ごと集まってきた新宿ゴールデン街。映画監督を目指して大阪から上京してきた青年・ギンジは、ゴールデン街の小さなスナック「スイカズラ」に迷い込み、マスターの青木や個性豊かな常連客たちと出会う。そこから始まる35年の物語は、ひとりの青年の成長のみならず、街に生きる人々の時間を記録していく。",
       "source_url": "https://www.themoviedb.org/movie/1807431"
     },
@@ -592,7 +584,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/tvtdgpfZJGVaC6cOE0pP0n1fxkH.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.96,
+      "popularity": 1.0008,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1807529"
     },
@@ -605,7 +597,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/tmJrPruWPchsLVeQHRPLJ8VENo.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.9579,
+      "popularity": 0.8155,
       "overview": "料理人を志す盲目の青年ユウキはとあるレストランのナポリタンに心を奪われる。見習いとして働き始めたユウキは先輩アルバイトのケンタや料理長と心を通わせながら夢と向き合う。",
       "source_url": "https://www.themoviedb.org/movie/1666802"
     },
@@ -618,7 +610,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/cH5dp1LCjG7Flmc9ueCr24H0CIU.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.9544,
+      "popularity": 0.8372,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1755423"
     },
@@ -631,9 +623,22 @@
       "poster": "https://image.tmdb.org/t/p/w342/lwRpfzxJCmXIPmnvGDUTuzKSYYd.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.9512,
+      "popularity": 0.8525,
       "overview": "1945年、終戦。音楽家の父のもとで育ち、ごく普通の暮らしを送っていた12歳の少女・茅野琴子は戦争によって家も家族も失い、焼け野原となった東京で、たったひとり生きることになる。  女性であることが生きる危険につながる現実を知った琴子は、少女という性を隠し、少年として生きることを決意する。 やがて将吉をはじめ、同じように家や家族を失った少年たちと出会い、「吉田茂男」と名乗って彼らと行動をともにする。闇市を束ねる菊沢組の親分・菊沢徹から仕事をもらい、ともに支え合う仲間との日々は、戦後ひとりぼっちだった琴子が初めて見つけた「居場所」となっていく。 一方、担任教師だった曽根文美子もまた、敗戦によるイデオロギーの転換と、婚約者を失った中で教師としての誇りも生きる意味も見失っていた。 しかし、父の友人から「琴子を探している」という知らせを受け、琴子を探す旅に出る。 曽根もまた、自らも失っていた人として生きる意味を少しずつ取り戻していく。 やがて子どもたちは東京湾上の孤島の隔離施設へ送られる。 そこでの過酷な環境の中で生かされている子どもたちの実態を知った新聞記者・諸積は、脱走すると決意する琴子たちを海苔漁師・山井甚平と妻・けいへ託す。 山井夫妻は、突然現れた子どもたちを煙たがりながらも生きる術を教えながら、その命を明日へとつないでいく。 これは、戦争によって人生を変えられながらも懸命に生きた子どもたちの 命の輝きと、その命を信じ、それぞれの選択で未来へつないだ人々の姿を描く物語。",
       "source_url": "https://www.themoviedb.org/movie/1692852"
+    },
+    {
+      "id": 1592548,
+      "tmdbId": 1592548,
+      "title": "ガールズ＆パンツァー 最終章 第5話",
+      "original_title": "ガールズ＆パンツァー 最終章 第5話",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/nq9vie4ppuFSKWaQmNkFgpfaER5.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.943,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1592548"
     },
     {
       "id": 1707282,
@@ -642,9 +647,9 @@
       "original_title": "男ともだち",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/im9W3Hw08NsHhOlF60FCX76Ln7u.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.9256,
+      "score": 8.0,
+      "votes": 1,
+      "popularity": 0.9092,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1707282"
     },
@@ -655,9 +660,9 @@
       "original_title": "3ミリの恋",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/cg0VwQsusxRMPNbyJUlUb1JBVH8.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.9249,
+      "score": 5.0,
+      "votes": 1,
+      "popularity": 1.1295,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1527427"
     },
@@ -670,7 +675,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/gqvNTLRwgQqp0FHQz5PvoyUbWmx.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.8932,
+      "popularity": 0.7387,
       "overview": "過去にトラウマを抱えた紬紀は、高校時代の陸上部メンバーたちとキャンプへ。 彼女達の間には高校時代の確執があり、険悪なムード。 このキャンプ場は数百年前に磔刑場だった呪われた土地で、当時全裸にされ処刑された村人が夜中に悪霊となり訪れた人間を襲う。 彼女たちは、脱衣すれば悪霊から見えなくことを発見する。",
       "source_url": "https://www.themoviedb.org/movie/1687667"
     },
@@ -683,7 +688,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.8658,
+      "popularity": 0.7014,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1797226"
     },
@@ -696,7 +701,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/1vrFlKqrQAsZqze5Z4pXMKkPVJB.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.8344,
+      "popularity": 0.6358,
       "overview": "人生に迷走している歴史教師・野田柚季は、車を運転中に隕石に直撃されそうになったところを、教え子の村木蒼によって救われる。柚季は廃校が決まった高校で、単位の足りない3年生2人の補習講義を担当しており、そのうちの1人が蒼だった。蒼は未来を予知できる超能力者で、彼の父親も時間を止める能力をもっている。教師の仕事にうんざりしていた柚季は、蒼の予知能力を使って人生を逆転させようと考える。一方、孤独を抱える蒼は、どこかズレているが真っ直ぐに自分と向き合ってくれる柚季に恋心を抱きはじめる。しかし柚季の未来には、ある重大な秘密が隠されていた。",
       "source_url": "https://www.themoviedb.org/movie/1807445"
     },
@@ -709,7 +714,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/2VEvO7Jw0CPCX3Jj1RZ2Ouvrl7V.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.7978,
+      "popularity": 0.5801,
       "overview": "母と娘、そして夫婦の愛と葛藤。喪失と再生を経て受け継がれる愛のかたちを描く、中川龍太郎監督三部作の最終章。",
       "source_url": "https://www.themoviedb.org/movie/1555226"
     },
@@ -720,9 +725,9 @@
       "original_title": "4アウト ─もう一度、プレイボール─",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/jc3MtWlLeuHQJwEYlvb5SVcVhCv.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.7896,
+      "score": 5.0,
+      "votes": 1,
+      "popularity": 0.7338,
       "overview": "子どもの頃から野球一筋だった矢上雄一は、結婚して父になってからも社会人野球に情熱を注いでいたが、年齢の壁には勝てず戦力外通告を受けてしまう。身体障害者スポーツセンターに再就職した彼は、聴覚障害を持つ泉邦衛から野球チームの監督を依頼され、戸惑いながらも引き受けることを決める。同僚の高橋明日香と共に選手集めに奔走し、やがてチームは全国大会に挑むことになるが、現実は厳しく初めての大舞台で惨敗してしまう。「勝ちたい」と言いながらも悔しそうな様子を見せない選手たちに失望した矢上は、監督を降りると宣言するが……。",
       "source_url": "https://www.themoviedb.org/movie/1773014"
     },
@@ -735,7 +740,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/lbrvikUasxWamMEofn1lJIswNgu.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.7602,
+      "popularity": 0.7076,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1555218"
     },
@@ -748,7 +753,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/dMshFLkfw8VUEbVkL6D025qImmb.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.7367,
+      "popularity": 0.5674,
       "overview": "青森で暮らす遠藤和（川口春奈）と将一(高杉真宙)。  時にぶつかりながらも「一分一秒、一緒にいたい」と願うほど、かけがえのない日々を過ごしていた。  しかし、和に突如つきつけられたのは  “ステージⅣの大腸がん”というあまりにも残酷な宣告。  残された日々は限られていた。  それでも将一は「一生大切にする」と和の手を固く握りしめた。二人の絆は、和の一つの願いへと繋がっていく。  それは「わたしたちの子供に会うこと」  ——だがその覚悟は、自身の命を繋ぐ抗がん剤治療を止めるという、あまりにも重い選択を伴った。",
       "source_url": "https://www.themoviedb.org/movie/1675182"
     },
@@ -761,7 +766,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/jJKS1IqSd7tPYCELThm3s4o4UrT.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.7129,
+      "popularity": 0.6002,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/621689"
     },
@@ -774,7 +779,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/s0BNmv4jtWp2XClygvzGqPQ0TQp.jpg",
       "score": 8.0,
       "votes": 2,
-      "popularity": 0.661,
+      "popularity": 0.4702,
       "overview": "――VS“常識”！《日本初》の「ハラスメント裁判」に挑んだ型破りな弁護士たちの【実話に着想を得た物語】痛快リーガールエンターテインメント！",
       "source_url": "https://www.themoviedb.org/movie/1706689"
     },
@@ -787,7 +792,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/8ottviBWvtnQYqLlQLbphVmxEYN.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.6565,
+      "popularity": 0.529,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1651260"
     },
@@ -800,7 +805,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/epYOHSeafQ1JurZjp69rXok0dTj.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.6482,
+      "popularity": 0.4736,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1688934"
     },
@@ -813,7 +818,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/fcew8q3dIjwkCsookwm34CcZfV2.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.6449,
+      "popularity": 0.4375,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1788171"
     },
@@ -826,7 +831,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/mntDfwy3aPhEMSyNFT92ILg4bOY.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.644,
+      "popularity": 0.5371,
       "overview": "世界のことが嫌いで\r 自分のことはもっと嫌いで",
       "source_url": "https://www.themoviedb.org/movie/1703008"
     },
@@ -839,7 +844,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/mhLlv62pOP44vLq6YsS31u9bU7t.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.6384,
+      "popularity": 0.6633,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1805382"
     },
@@ -852,7 +857,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/bpxQMv3xq2amSC2yjVq4XxAXYNw.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.6164,
+      "popularity": 0.5022,
       "overview": "プロボクサーとして最後の試合を迎えようとしている兄、ケンジ。定職に就かず気ままに生きている弟、ユウタ。二人は東京のはずれで一緒に暮らしている。平穏で変わらぬ日常が続いていくはずだったが。",
       "source_url": "https://www.themoviedb.org/movie/1600736"
     },
@@ -865,7 +870,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/zTrDAC1mXpVfwYPD0lBsfcIaQA7.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5957,
+      "popularity": 0.4738,
       "overview": "末期の乳がんを患い余命1年を宣告され、治療しないことを選択し故郷の瀬戸内海の島に戻ってきた音楽教師の踊場京香（広瀬アリス）。 祖母の営むカフェを手伝いながら、母校の合唱部の指導をすることになり、そこでいつも笑顔を絶やさない不思議な高校生・志津川沖晴と出会う。 ある時京香は彼が津波で家族を亡くしたことを知るが、笑いながらそのことを話す沖晴に京香はなぜ笑うのか聞くと、彼は津波に流されたときに喜び以外の感情「嫌悪・怒り・哀しみ・恐れ」を失い、何も感じないのだと答える。 ところが、ある事件をきっかけに失われた感情の1つがうっすらと顔を出し始め、余命わずかな京香と、感情を失った沖晴の、感情を取り戻す不思議な日常が始まる。",
       "source_url": "https://www.themoviedb.org/movie/1737455"
     },
@@ -878,7 +883,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/d6SMs485koXn7gGrCLSYuwMKQ5i.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5552,
+      "popularity": 0.4343,
       "overview": "愛と反骨を胸に日本の音楽シーンに変革をもたらした忌野清志郎の軌跡をたどり、その比類なき表現の真髄に迫ったドキュメンタリー。RCサクセションのメンバーとしてデビューし、圧倒的なライブパフォーマンスなどで人気を集めた彼の、膨大なアーカイブから厳選された映像を通して、唯一無二のパフォーマンスと“信念を貫く姿勢”を多面的に掘り下げていく。",
       "source_url": "https://www.themoviedb.org/movie/1799159"
     },
@@ -891,7 +896,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/suzbIuFNc3qFWMaHoD6Zvt8wCsn.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5399,
+      "popularity": 0.411,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1801113"
     },
@@ -904,7 +909,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/aiWQBdmDcZc0RjVCkie2LKPzMnu.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5088,
+      "popularity": 0.4826,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1462841"
     },
@@ -917,7 +922,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/cvOS0T7bals4dRLsYu15YOMmgsM.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5077,
+      "popularity": 0.369,
       "overview": "中学生の頃、いじめが原因で学校へ通えなくなり、義務教育を十分に受けられないまま大人になった潤間さやか  （桜田ひより）。学歴への引け目や生きづらさを抱えながらフリーターとして日々を過ごしていたある日、さまさまな事情から学ぶ機会を失った人たちのための\"夜間中学”があることを知る。  「もう一度やり直したいーー」勇気を振り絞って夜間中学の門を叩いたさやかは、中国残留孤児の蕗子（浅野温子）、ベトナム出身のスアン（ナターシャ）、料亭で修業に励む健児（小林虎之介）、韓国料理店を営む正子（中尾ミエ）、戦後の混乱の中で十分な教育を受けられなかった  遠見（山本學）ら、年齢も国籍も境遇も異なる仲間たちと出会う。生徒たちに寄り添う担任教師・江口（真木よう子） や夜間中学を取材する漫画家・用瀬（小泉孝太郎）  らの支えのもと、さやかの2度目の中学生活が始まる。  仲間たちとの出会いは、止まっていた彼女の人生を少しずつ動かしていくのだった。",
       "source_url": "https://www.themoviedb.org/movie/1795736"
     },
@@ -930,7 +935,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/kh0BWUAYl7vMOiZI8wpoq9Y6AyS.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4712,
+      "popularity": 0.3826,
       "overview": "灼熱の砂漠でキリンを狙うライオンの豪快な狩り、サバンナで群れで暮らす若いチーターの連携プレイ。\r マヌルネコはしっぽを使った＜にゃんともかわいい＞奇想天外の狩りを披露！\r 世界中のネコ科動物たちの驚きと発見いっぱいのネコ物語。",
       "source_url": "https://www.themoviedb.org/movie/1786485"
     },
@@ -943,7 +948,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/cTOis8vPhu1XZxJVgDMDrpZFXE3.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4709,
+      "popularity": 0.409,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/164328"
     },
@@ -956,7 +961,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/vu7x4MsUPM0eqY2c8BuHlydB1YJ.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4623,
+      "popularity": 0.3766,
       "overview": "一人目は「警告」、二人目は「試練」、そして三人目は……夢の記録、記憶の再生—“リープマインド“忘れられない感情が現実と交錯する。―過去は終わらない。人が見る夢をデジタル化し、再現する……夢のようなガジェット「リープマインド」。その宣伝契約を勝ち取るため、取締役会でのプレゼンテーションに臨むジョー（堺雅人）。　彼はリープマインドがもたらす新たな可能性に、ただならぬ情熱を抱いていた。 妻のハナ（倉科カナ）との生活も顧みず、他社との熾烈な競争に身を削る日々。ハナの姉・ミカ（伊勢佳世）に癒しを求めるが、二人の関係に取り返しのつかない亀裂が走る。ただならぬ様子のミカを心配したハナは、ジョーに疑問をぶつけるが、不安を解消するような返事は得られない……。事情を察したミカとハナの父・ケン（段田安則）は、ジョーからハナを引き離そうとする。一方、ジョーの母・マリ（高畑淳子）は、若くして自死した姉・ニコを助けられず自分を責め続けるジョーに、複雑な気持ちを拭い去れずにいた……。ミカが姿を消したあと、念願の案件を勝ち取ったジョーだが、成功は空虚なものだった。そして友人の眼科医・ユーゴ（迫田孝也）を訪ねたジョーに、思いがけない診断が下される。孤独の内にも新たな助手のサラ（sara）を迎え、仕事を続けるジョー。だが、サラはハナの教え子ダン（小日向星一）とともに、ある疑念を抱いてジョーに近づいたのだった――。",
       "source_url": "https://www.themoviedb.org/movie/1670114"
     },
@@ -969,7 +974,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/gwknZuWtEeY9Wz3kdZdhtJDTQfk.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4469,
+      "popularity": 0.2636,
       "overview": "閉館する映画館＜相鉄ムービル＞を舞台に存在しない記憶を巡るー短編映画『幻日』",
       "source_url": "https://www.themoviedb.org/movie/1788056"
     },
@@ -982,7 +987,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/upbw6TJwIDXabpV0aKmDmbRMPS.jpg",
       "score": 10.0,
       "votes": 1,
-      "popularity": 0.4379,
+      "popularity": 0.2488,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1803043"
     },
@@ -995,7 +1000,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/wTqjIC2Y8pWhkg50u5G0id0s9b6.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4327,
+      "popularity": 0.2535,
       "overview": "1999年。厳格な家庭に縛られてきた近田貴子は恋人との結婚を否定され、ある計画を企てる。その内容は、立派な経歴を持つ男性と結婚して殺害し、その人生を恋人に引き継がせ、夫婦として生きるというものだった。しかし貴子の歪んだ欲望はとどまることを知らず、殺人が繰り返されていく。貴子による「配偶者入れ替え連続殺人事件」から数十年が経った現在。事件を題材にした舞台劇が制作されることになり、夛田が主演の座を射止める。しかし夛田のもつ執着と執念は、相手役の米良や脚本家の垣内、演出家の加藤らを掌握し、すべてを破壊していく。",
       "source_url": "https://www.themoviedb.org/movie/1787681"
     },
@@ -1008,7 +1013,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/3X7WSROLYMdrV6DW8ZaudLFUBp2.jpg",
       "score": 8.0,
       "votes": 1,
-      "popularity": 0.4115,
+      "popularity": 0.318,
       "overview": "都会から離れた平穏な街に幼い息子と二人で暮らす小林典子は、社会から孤立している《ひきこもり》を支援する活動をしていた。繋がりを必要としている様々な葛藤を抱えた人々と一心に向き合う彼女の元には、他に行く宛の無い人や相談が集まってくる。ある時、いつものように依頼を受けた典子が任されたのは、長い間ひきこもったままの三浦雅彦という男だった。初めは一切の関係を拒んでいた雅彦も、典子の地道な働きかけにより徐々に周囲と言葉を交わし始める。このまま順調に外の世界へと繋げることができるはずだった。しかし、彼には決してひき出したくない過去があった...。",
       "source_url": "https://www.themoviedb.org/movie/1800610"
     },
@@ -1021,7 +1026,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/rLoYc3cPgoNPBZfBkvsEaVlHr7f.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4038,
+      "popularity": 0.2936,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1369767"
     },
@@ -1034,7 +1039,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/mL5APDoPtAnYDWICsQrAWNmXUKz.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.3653,
+      "popularity": 0.2698,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1799743"
     },
@@ -1047,7 +1052,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/5PgbuYJ7tcNRruQ5zymKZPS0SY7.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.2966,
+      "popularity": 0.1442,
       "overview": "喜乃（渡辺優美)は、母の葬儀に父・健一（竹中直人）が参列しなかったことを長年恨んでいた。\r 叔父の和也（甲本雅裕）から健一が末期がんであることを知らされた喜乃は、父と最期の対面を果たす。静まり返った体育館で、喜乃は秘めた想いを賭け、フリースロー3ラウンドの勝負に挑む。\r ボールが弧を描いて空を舞うにつれ、長年の沈黙と誤解が解きほぐされていく。",
       "source_url": "https://www.themoviedb.org/movie/1792196"
     },
@@ -1141,6 +1146,19 @@
       "popularity": 0.0907,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1793343"
+    },
+    {
+      "id": 1820214,
+      "tmdbId": 1820214,
+      "title": "妖怪VS仮面ライダーマイス",
+      "original_title": "妖怪VS仮面ライダーマイス",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/yh5e5UERGyO6MqdBxRRi4HlSqNy.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1820214"
     }
   ]
 }

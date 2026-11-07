@@ -120,13 +120,23 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             continue
         last_request = time.monotonic()
         matches = {}
+        expected_year = movie.get("release_year") or movie.get("year")
         for candidate in result.get("results", []):
             if not candidate.get("id") or not candidate.get("poster_path"):
                 continue
-            if needle in {normalize(candidate.get("title")), normalize(candidate.get("original_title"))}:
-                matches[int(candidate["id"])] = candidate
+            if needle not in {normalize(candidate.get("title")), normalize(candidate.get("original_title"))}:
+                continue
+            release_date = candidate.get("release_date") or ""
+            if expected_year and (not release_date.startswith(str(expected_year) + "-")):
+                continue
+            matches[int(candidate["id"])] = candidate
         if len(matches) == 1:
-            movie["poster"] = IMAGE_BASE + next(iter(matches.values()))["poster_path"]
+            identity = next(iter(matches.values()))
+            movie["poster"] = IMAGE_BASE + identity["poster_path"]
+            movie["id"] = int(identity["id"])
+            movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(identity["id"])
+            if identity.get("release_date", "").startswith("18") or identity.get("release_date", "").startswith("19") or identity.get("release_date", "").startswith("20"):
+                movie.setdefault("release_year", int(identity["release_date"][:4]))
             enriched += 1
         elif len(matches) > 1:
             ambiguous += 1
@@ -147,8 +157,12 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", default=str(INPUT), help="Streaming JSON snapshot to enrich")
+    args = parser.parse_args()
     try:
-        counts = enrich()
+        counts = enrich(pathlib.Path(args.input))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Streaming poster enrichment failed: {exc}", flush=True)
         raise SystemExit(1)

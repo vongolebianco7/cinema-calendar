@@ -1,6 +1,12 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');
 let f;try{f=require('../backend/lib/feedback.cjs');}catch{}
 test('feedback module provides private request handler',()=>assert.equal(typeof f?.createHandler,'function'));
+test('public support guidance points to private feedback form, not public GitHub issues',()=>{
+ const credits=require('node:fs').readFileSync(require('node:path').join(__dirname,'../credits.html'),'utf8');
+ assert.match(credits,/<b>Q\. 不具合や改善要望を伝えたい。<\/b>[\s\S]*?<a href="feedback\.html">ご意見・ご要望フォーム<\/a>/);
+ assert.match(credits,/投稿内容は非公開で管理者だけが閲覧します/);
+ assert.doesNotMatch(credits,/公開GitHub Issueを作成する/);
+});
 test('reject invalid types, long/blank body, malformed email and non-object input',()=>{
  assert.ok(f);for(const v of [null,[],{}, {kind:'other',body:'abc'}, {kind:'bug',body:'  '}, {kind:'bug',body:'a'.repeat(4001)}, {kind:'bug',body:'abc',email:'bad'}])assert.throws(()=>f.validate(v));
  assert.deepEqual(f.validate({kind:'bug',body:' <img src=x>\u0000 ',email:''}),{kind:'bug',body:'<img src=x>',email:null});

@@ -445,7 +445,8 @@ function monthVisibleBounds(d){
 }
 function theatricalMoviesOverlappingWeek(rows,weekStart,weekEnd,monthStart,monthEnd){
  const start=weekStart<monthStart?monthStart:weekStart,end=weekEnd>monthEnd?monthEnd:weekEnd;
- return rows.filter(m=>m.date&&m.date<=isoOf(end)&&(m.end_date||m.date)>=isoOf(start))
+ const toISO=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
+ return rows.filter(m=>m.date&&m.date<=toISO(end)&&(m.end_date||m.date)>=toISO(start))
 }
 function currentWeekStart(){
  const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d

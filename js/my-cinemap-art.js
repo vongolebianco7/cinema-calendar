@@ -17,7 +17,7 @@ const artFonts={
   clean:{title:artSans,movie:artSans,titleWeight:650,movieWeight:650},
   // Give the third option a rounded-gothic feel, clearly separate from both serif styles
   // and the clean geometric sans option.
-  classic:{title:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',movie:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',titleWeight:500,movieWeight:600}
+  classic:{title:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',movie:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',titleWeight:650,movieWeight:700}
 };
 const portraitTitleSize=54;
 const portraitListTop=244;

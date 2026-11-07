@@ -16,8 +16,9 @@ class StreamingDiscoveryComplianceTests(unittest.TestCase):
         sources = json.loads((DATA / "streaming_sources.json").read_text(encoding="utf-8"))
         feeds = json.loads((DATA / "streaming-official-feeds.json").read_text(encoding="utf-8"))
         registry = json.loads((DATA / "source_registry.json").read_text(encoding="utf-8"))
-        approved = {entry["id"] for entry in registry["sources"]
+        approved = {entry["id"]: entry for entry in registry["sources"]
                     if entry.get("mode") == "approved"}
+        premiere_purposes = {"release_announcements", "streaming_premiere_feed"}
         self.assertEqual(len(sources["services"]), 12)
         names = [service["name"] for service in sources["services"]]
         self.assertEqual(len(names), len(set(names)), "Duplicate streaming services")
@@ -25,6 +26,9 @@ class StreamingDiscoveryComplianceTests(unittest.TestCase):
         for feed in feeds["feeds"]:
             self.assertIn(feed["source_id"], approved,
                           "Automated feed is not in the approved source registry")
+            purposes = set(approved[feed["source_id"]].get("purpose", []))
+            self.assertTrue(purposes & premiere_purposes,
+                            "Availability-only/other-purpose approval cannot authorize premiere discovery")
             self.assertTrue(feed.get("url", "").startswith("https://"))
             self.assertTrue(feed.get("service"), "Feed must name its service")
             approved_feeds.setdefault(feed["service"], []).append(feed)
@@ -33,6 +37,13 @@ class StreamingDiscoveryComplianceTests(unittest.TestCase):
                 self.assertIn(service["name"], approved_feeds,
                               "Cannot claim automatic premiere discovery without an approved feed")
             self.assertTrue(service.get("official_url", "").startswith("https://"))
+
+    def test_availability_only_source_cannot_authorize_premieres(self):
+        registry = json.loads((DATA / "source_registry.json").read_text(encoding="utf-8"))
+        source = next(entry for entry in registry["sources"] if entry["id"] == "justwatch_via_tmdb")
+        self.assertEqual(source["mode"], "approved")
+        self.assertIn("streaming_availability", source.get("purpose", []))
+        self.assertFalse({"release_announcements", "streaming_premiere_feed"} & set(source.get("purpose", [])))
 
     def test_watch_provider_is_not_premiere_evidence(self):
         sources = json.loads((DATA / "streaming_sources.json").read_text(encoding="utf-8"))

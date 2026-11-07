@@ -27,6 +27,8 @@ test('MY Rating visibility toggle adds or removes each movie rating from the exp
  assert.ok(!r.calls.text.includes('MY評価 4.6'),'ratings are hidden by default');
  r.elements.showMyRating.checked=true;r.calls.text=[];r.context.drawArtwork([movie]);
  assert.ok(r.calls.text.includes('MY評価 4.6'),'the checked toggle adds the current personal rating');
+ r.context.CinelvaLibraryRecords={all:()=>[{id:'42',title:movie.title,rating:null,watched:true}]};r.calls.text=[];r.context.drawArtwork([{...movie,rating:4.8}]);
+ assert.ok(!r.calls.text.includes('MY評価 4.8'),'a cleared rating does not fall back to a stale imported score');
 });
 test('rating import filters release decades, keeps all-time mode, and removes duplicate works',()=>{
  const scope={window:{}};vm.runInNewContext(fs.readFileSync('js/my-best10-rating-import.js','utf8'),scope);

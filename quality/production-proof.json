@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "279a84e3f41505921207aaefbda42fa7fbd0b169",
-  "verified_at": "2026-11-07T02:30:00Z",
-  "note": "Staging receipt-only commit; after required source checks pass, a follow-up receipt commit will set head_sha to this commit."
+  "head_sha": "ed14425a2f1bbd9d84fbbf3f641cca1c2b361c0e",
+  "verified_at": "2026-11-07T02:44:46Z",
+  "note": "Receipt-only follow-up commit. The referenced staging commit passed the required exact-head PR workflows; source digest matches the final main executable tree."
 }

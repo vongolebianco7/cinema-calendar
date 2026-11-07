@@ -79,6 +79,14 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         exact = {}
         for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
             exact.update(by_title.get(normalize(name), {}))
+        expected_year = movie.get("release_year") or movie.get("year")
+        if expected_year:
+            expected_year = str(expected_year)
+            exact = {
+                movie_id: identity for movie_id, identity in exact.items()
+                if str(identity.get("release_year") or identity.get("year") or
+                       str(identity.get("release_date") or "")[:4]) == expected_year
+            }
         if len(exact) == 1:
             identity = next(iter(exact.values()))
             movie["poster"] = identity["poster"]
@@ -123,10 +131,20 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         for candidate in result.get("results", []):
             if not candidate.get("id") or not candidate.get("poster_path"):
                 continue
-            if needle in {normalize(candidate.get("title")), normalize(candidate.get("original_title"))}:
-                matches[int(candidate["id"])] = candidate
+            if needle not in {normalize(candidate.get("title")), normalize(candidate.get("original_title"))}:
+                continue
+            release_date = candidate.get("release_date") or ""
+            if expected_year and (not release_date.startswith(str(expected_year) + "-")):
+                continue
+            matches[int(candidate["id"])] = candidate
         if len(matches) == 1:
-            movie["poster"] = IMAGE_BASE + next(iter(matches.values()))["poster_path"]
+            identity = next(iter(matches.values()))
+            movie["poster"] = IMAGE_BASE + identity["poster_path"]
+            movie["id"] = int(identity["id"])
+            movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(identity["id"])
+            release_year = (identity.get("release_date") or "")[:4]
+            if release_year.isdigit() and 1888 <= int(release_year) <= 2100:
+                movie.setdefault("release_year", int(release_year))
             enriched += 1
         elif len(matches) > 1:
             ambiguous += 1
@@ -147,8 +165,12 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", default=str(INPUT), help="Streaming JSON snapshot to enrich")
+    args = parser.parse_args()
     try:
-        counts = enrich()
+        counts = enrich(pathlib.Path(args.input))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Streaming poster enrichment failed: {exc}", flush=True)
         raise SystemExit(1)

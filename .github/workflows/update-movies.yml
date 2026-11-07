@@ -44,6 +44,10 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_movies.py
+      - name: Resolve only unique reviewed streaming film identities with TMDB
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/enrich_streaming_posters.py --input data/streaming.json
       - name: Keep the director mobile projection synchronized
         run: |
           python scripts/enrich_directors.py --normalize-only

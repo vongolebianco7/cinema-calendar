@@ -38,18 +38,53 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         counts = enrichment.enrich(path, api_key=api_key, opener=opener, delay=0, catalog_path=catalog_path)
         return json.loads(path.read_text(encoding="utf-8")), requests, counts
 
-    def test_unique_exact_title_adds_only_a_tmdb_poster_url(self):
+    def test_unique_exact_title_adds_tmdb_poster_and_movie_identity(self):
         data, requests, counts = self.run_fixture(
             [{"title": "グーニーズ", "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
             {"results": [{"id": 9340, "title": "グーニーズ", "original_title": "The Goonies", "poster_path": "/goonies.jpg"}]},
         )
         movie = data["movies"][0]
         self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/goonies.jpg")
+        self.assertEqual(movie["id"], 9340)
+        self.assertEqual(movie["tmdb"], "https://www.themoviedb.org/movie/9340")
         self.assertNotIn("tmdbId", movie)
-        self.assertNotIn("id", movie)
         self.assertEqual(counts, (1, 0, 0))
         self.assertEqual(len(requests), 1)
         self.assertEqual(requests[0][0].full_url.split("?", 1)[0], enrichment.BASE)
+
+    def test_reviewed_release_year_blocks_wrong_same_title_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "The Example", "release_year": 2024, "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": [{"id": 111, "title": "The Example", "release_date": "1998-03-01",
+                          "poster_path": "/wrong.jpg"}]},
+        )
+        movie = data["movies"][0]
+        self.assertNotIn("id", movie)
+        self.assertNotIn("poster", movie)
+        self.assertEqual(counts, (0, 0, 1))
+        self.assertEqual(len(requests), 1)
+
+    def test_reviewed_release_year_also_blocks_wrong_local_catalog_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "The Example", "release_year": 2024, "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [{"id": 111, "title": "The Example", "year": 1998,
+                                  "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"}]},
+            api_key="",
+        )
+        movie = data["movies"][0]
+        self.assertNotIn("id", movie)
+        self.assertNotIn("poster", movie)
+        self.assertEqual(counts, (0, 0, 1))
+        self.assertEqual(requests, [])
+
+    def test_update_movies_workflow_enriches_streaming_snapshot_after_catalog_refresh(self):
+        workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/update-movies.yml").read_text()
+        self.assertIn("python scripts/enrich_streaming_posters.py --input data/streaming.json", workflow)
+        self.assertLess(workflow.index("python scripts/update_movies.py"),
+                        workflow.index("python scripts/enrich_streaming_posters.py --input data/streaming.json"))
 
     def test_ambiguous_exact_titles_and_existing_posters_are_not_replaced(self):
         data, requests, counts = self.run_fixture(

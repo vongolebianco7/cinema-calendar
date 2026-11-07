@@ -79,6 +79,14 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         exact = {}
         for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
             exact.update(by_title.get(normalize(name), {}))
+        expected_year = movie.get("release_year") or movie.get("year")
+        if expected_year:
+            expected_year = str(expected_year)
+            exact = {
+                movie_id: identity for movie_id, identity in exact.items()
+                if str(identity.get("release_year") or identity.get("year") or
+                       str(identity.get("release_date") or "")[:4]) == expected_year
+            }
         if len(exact) == 1:
             identity = next(iter(exact.values()))
             movie["poster"] = identity["poster"]
@@ -120,7 +128,6 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             continue
         last_request = time.monotonic()
         matches = {}
-        expected_year = movie.get("release_year") or movie.get("year")
         for candidate in result.get("results", []):
             if not candidate.get("id") or not candidate.get("poster_path"):
                 continue

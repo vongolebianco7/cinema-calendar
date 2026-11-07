@@ -65,6 +65,21 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(counts, (0, 0, 1))
         self.assertEqual(len(requests), 1)
 
+    def test_reviewed_release_year_also_blocks_wrong_local_catalog_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "The Example", "release_year": 2024, "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [{"id": 111, "title": "The Example", "year": 1998,
+                                  "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"}]},
+            api_key="",
+        )
+        movie = data["movies"][0]
+        self.assertNotIn("id", movie)
+        self.assertNotIn("poster", movie)
+        self.assertEqual(counts, (0, 0, 1))
+        self.assertEqual(requests, [])
+
     def test_update_movies_workflow_enriches_streaming_snapshot_after_catalog_refresh(self):
         workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/update-movies.yml").read_text()
         self.assertIn("python scripts/enrich_streaming_posters.py --input data/streaming.json", workflow)

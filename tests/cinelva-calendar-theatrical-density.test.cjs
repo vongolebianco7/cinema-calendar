@@ -51,6 +51,23 @@ test('calendar mode switching initializes the calendar before clearing the theat
   assert.ok(render.indexOf('let cal=document.querySelector(".calendar")') < render.indexOf('cal.classList.remove("theatricalWeekMode")'));
 });
 
+test('poster enrichment failure keeps the existing calendar snapshot available', async () => {
+  const fnStart = html.indexOf('async function hydrateMorningTenPosters(');
+  const fnEnd = html.indexOf('\n', fnStart);
+  const context = vm.createContext({
+    movies: [{ title: 'Fixture', special_screening: 'asa10', poster: '' }],
+    window: { CinelvaMovieIdentity: { fetchOne: async () => { throw new Error('offline'); } } },
+    morningTenQuery: (title) => title,
+    titleYearHint: () => '',
+    console: { warn() {} },
+  });
+  vm.runInContext(html.slice(fnStart, fnEnd), context);
+  await context.hydrateMorningTenPosters();
+  assert.equal(context.movies.length, 1);
+  assert.equal(context.movies[0].title, 'Fixture');
+  assert.match(html, /catch\(e\)\{console\.warn\("Calendar refresh failed; retaining last good movie snapshot",e\);if\(!movies\.length\)\$\("#dates"\)\.innerHTML/);
+});
+
 test('single-film weeks use a compact horizontal poster and details layout on mobile', () => {
   assert.match(html, /\.calendar\.theatricalWeekMode \.streamingWeekMovies \.streamMovie:only-child\{display:grid;grid-template-columns:76px minmax\(0,1fr\)/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*?\.calendar\.theatricalWeekMode \.streamingWeekFrame\{padding:6px\}/);

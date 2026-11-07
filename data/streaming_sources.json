@@ -7,84 +7,128 @@
       "official_url": "https://about.netflix.com/ja/newsroom",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "about.netflix.com",
+        "movies.shochiku.co.jp",
+        "t-tribe.co.jp"
+      ]
     },
     {
       "name": "Prime Video",
       "official_url": "https://www.aboutamazon.jp/news/entertainment",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "www.aboutamazon.jp"
+      ]
     },
     {
       "name": "Disney+",
       "official_url": "https://disneyplus.disney.co.jp/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "disneyplus.disney.co.jp",
+        "www.disneyplus.com"
+      ]
     },
     {
       "name": "U-NEXT",
       "official_url": "https://www.unext.co.jp/ja/press-room",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "www.unext.co.jp"
+      ]
     },
     {
       "name": "Hulu",
       "official_url": "https://news.hulu.jp/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "news.hulu.jp",
+        "movies.shochiku.co.jp"
+      ]
     },
     {
       "name": "Apple TV+",
       "official_url": "https://www.apple.com/tv-pr/news/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "www.apple.com"
+      ]
     },
     {
       "name": "Lemino",
       "official_url": "https://lemino.docomo.ne.jp/new-arrival/list",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "lemino.docomo.ne.jp",
+        "www.asmik-ace.co.jp"
+      ]
     },
     {
       "name": "ABEMA",
       "official_url": "https://abema.tv/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "abema.tv",
+        "abematv.co.jp"
+      ]
     },
     {
       "name": "DMM TV",
       "official_url": "https://tv.dmm.com/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "tv.dmm.com"
+      ]
     },
     {
       "name": "FOD",
       "official_url": "https://fod.fujitv.co.jp/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "news.fod.fujitv.co.jp"
+      ]
     },
     {
       "name": "TELASA",
       "official_url": "https://www.telasa.jp/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "www.telasa.jp",
+        "navi.telasa.jp"
+      ]
     },
     {
       "name": "WOWOWオンデマンド",
       "official_url": "https://wod.wowow.co.jp/",
       "announcement_collection": "editorial_verified_only",
       "availability_source": "TMDB_JP_if_returned",
-      "auto_premiere_discovery": false
+      "auto_premiere_discovery": false,
+      "reviewed_premiere_hosts": [
+        "wod.wowow.co.jp",
+        "note.wowow.co.jp"
+      ]
     }
   ]
 }

@@ -10,13 +10,24 @@ import os
 import tempfile
 from pathlib import Path
 from urllib.parse import urlparse
+from streaming_event_normalization import normalize_premieres
 
 ROOT = Path("data")
 read = lambda name: json.loads((ROOT / name).read_text(encoding="utf-8"))
 registry = read("streaming_sources.json")
 known = {entry["name"] for entry in registry["services"]}
+approved_hosts = {
+    entry["name"]: entry.get("reviewed_premiere_hosts") or
+                   ([urlparse(entry["official_url"]).hostname]
+                    if isinstance(entry.get("official_url"), str) and urlparse(entry["official_url"]).hostname
+                    else [])
+    for entry in registry["services"]
+}
 current = read("streaming.json")
 intake = read("streaming_announcements.json")
+# The reviewed-announcement path uses the same strict identity/date/source contract
+# as the tested normalizer; only source hosts recorded in streaming_sources.json are accepted.
+intake["movies"] = normalize_premieres(intake.get("movies", []), approved_hosts)
 existing = {(m["service"], m["title"], m["date"]) for m in current["movies"]}
 pending = []
 identity_updates = 0

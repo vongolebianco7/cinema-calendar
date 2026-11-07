@@ -8,6 +8,11 @@ import datetime
 import json
 from pathlib import Path
 
+try:
+    from .atomic_json import write_json_atomic
+except ImportError:  # Script execution from the scheduled workflow.
+    from atomic_json import write_json_atomic
+
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "data/streaming-official-current.json"
 CATALOG = ROOT / "data/streaming.json"
@@ -66,7 +71,7 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
         added += 1
     if added or updated:
         catalog["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_json_atomic(catalog_path, catalog)
     return added, updated
 
 

@@ -8,6 +8,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+from atomic_json import write_json_atomic
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts/import_streaming_announcements.py"
 
@@ -64,6 +68,33 @@ class AtomicStreamingPublishTests(unittest.TestCase):
             self.assertEqual(len(result["movies"]), 1)
             self.assertEqual(result["movies"][0]["title"], "Verified Example")
             self.assertEqual(list(root.glob(".streaming-*.tmp")), [])
+
+    def test_calendar_snapshots_replace_atomically_and_preserve_streaming_events(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "movies.json"
+            target.write_text('{"movies":[{"event":"streaming","title":"last good"}]}', encoding="utf-8")
+            previous = target.read_bytes()
+            snapshot = {
+                "generated_at": "2026-11-08T00:00:00Z",
+                "movies": [{"event": "streaming", "title": "Verified Example", "date": "2026-11-15"}],
+            }
+            with patch("os.replace", side_effect=OSError("simulated calendar publish failure")):
+                with self.assertRaisesRegex(OSError, "simulated calendar publish failure"):
+                    write_json_atomic(target, snapshot)
+            self.assertEqual(target.read_bytes(), previous)
+            self.assertEqual(list(Path(directory).glob(".movies.json-*.tmp")), [])
+
+            write_json_atomic(target, snapshot)
+            published = json.loads(target.read_text(encoding="utf-8"))
+            self.assertEqual(published["movies"][0]["event"], "streaming")
+            self.assertEqual(published["movies"][0]["title"], "Verified Example")
+            self.assertEqual(list(Path(directory).glob(".movies.json-*.tmp")), [])
+
+    def test_calendar_refresh_routes_both_streaming_and_display_snapshots_through_atomic_writer(self):
+        source = (SCRIPT.parent / "update_movies.py").read_text(encoding="utf-8")
+        self.assertIn('write_json_atomic("data/streaming.json"', source)
+        self.assertIn('write_json_atomic("data/movies.json"', source)
+        self.assertIn("events=theatrical+stream_movies", source)
 
 
 if __name__ == "__main__":

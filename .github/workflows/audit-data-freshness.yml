@@ -16,10 +16,15 @@ jobs:
           python-version: '3.12'
       - name: Audit published dataset timestamps
         run: python scripts/audit_data_freshness.py --output freshness-report.json
+      - name: Audit per-service streaming premiere coverage
+        if: always()
+        run: python scripts/audit_streaming_coverage.py --output streaming-coverage-report.json
       - name: Preserve report even on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: freshness-report
-          path: freshness-report.json
+          name: external-data-audit-reports
+          path: |
+            freshness-report.json
+            streaming-coverage-report.json
           if-no-files-found: warn

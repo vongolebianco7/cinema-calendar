@@ -28,6 +28,7 @@
  <div class="discountCalendarNav"><button type="button" id="discountPrev">前の2週間</button><span id="discountPeriod"></span><button type="button" id="discountNext">次の2週間</button></div>
  <div id="discountCalendar" class="discountCalendar" aria-label="県内の系列別・日別料金 上位3系列"></div>
  <div id="discountSummary" class="discountStatus" role="status" aria-live="polite">料金を読み込んでいます…</div>
+ <div id="discountSortControl" class="discountSortControl" hidden><label for="discountSort">系列の並び順<select id="discountSort"><option value="public">登録不要料金（通常）</option><option value="conditional">会員・カード等の料金</option></select></label></div>
  <div id="discountResults" class="discountResults"></div>
  <dialog id="discountPrefDialog" class="discountDetailDialog" aria-labelledby="discountPrefTitle"><div class="discountDialogHead"><h3 id="discountPrefTitle">都道府県を選択</h3><button type="button" id="discountPrefClose">完了 ×</button></div><div class="discountPrefGrid">${prefectures.map(p=>`<label><input type="checkbox" data-pref-check="${p}"> ${p}</label>`).join('')}</div></dialog>
  <div id="discountTheaterPopup" class="discountTheaterPopup" popover="auto" aria-labelledby="discountTheaterTitle"><div class="discountDialogHead"><h3 id="discountTheaterTitle">対象映画館</h3><button type="button" id="discountTheaterClose">閉じる ×</button></div><div id="discountTheaterBody"></div></div>
@@ -98,19 +99,21 @@
  host.querySelector('#discountTheaterClose').addEventListener('click',()=>theaterPopup.hidePopover());
  prefDialog.addEventListener('change',e=>{if(!e.target.matches('[data-pref-check]'))return;const p=e.target.dataset.prefCheck;selectedPrefs=e.target.checked?[...selectedPrefs,p]:selectedPrefs.filter(x=>x!==p);selectedPrefs=prefectures.filter(x=>selectedPrefs.includes(x));prefInput.value=selectedPrefs[0]||'';updateUrl();render();});
  function refreshPrefs(){host.querySelector('#discountPrefSummary').textContent=selectedPrefs.length?selectedPrefs.join('・'):'未選択';host.querySelector('#discountPrefOpen').textContent=selectedPrefs.length?selectedPrefs.slice(0,2).join('・')+(selectedPrefs.length>2?` 他${selectedPrefs.length-2}`:''):'都道府県を選択';host.querySelectorAll('[data-pref-check]').forEach(el=>{el.checked=selectedPrefs.includes(el.dataset.prefCheck);});}
- const timeInput=host.querySelector('#discountTime'),dateInput=host.querySelector('#discountDate'),prefInput=host.querySelector('#discountPrefecture'),results=host.querySelector('#discountResults'),summary=host.querySelector('#discountSummary');
+ const timeInput=host.querySelector('#discountTime'),sortInput=host.querySelector('#discountSort'),dateInput=host.querySelector('#discountDate'),prefInput=host.querySelector('#discountPrefecture'),results=host.querySelector('#discountResults'),summary=host.querySelector('#discountSummary');
  const today=D.today(),lastDate=D.addDays(today,60);
  const requestedDate=params.get('discountDate')||'';
  let selectedDate=D.addDays(requestedDate,0)&&requestedDate>=today&&requestedDate<=lastDate?requestedDate:today;
  dateInput.min=today;dateInput.max=lastDate;dateInput.value=selectedDate;
  let calendarStart=monday(selectedDate>D.addDays(today,47)?D.addDays(today,47):selectedDate);
  timeInput.value=params.get('discountTime')==='evening'?'evening':'day';
+ sortInput.value=params.get('discountSort')==='conditional'?'conditional':'public';
  function updateUrl(){
   const p=new URLSearchParams(location.search);p.delete('discountChain');
   if(selectedPrefs.length)p.set('discountPrefectures',selectedPrefs.join(','));else p.delete('discountPrefectures');
   if(selectedPrefs.length)p.set('discountPrefecture',selectedPrefs[0]);else p.delete('discountPrefecture');
   if(selectedDate)p.set('discountDate',selectedDate);else p.delete('discountDate');
   p.set('discountTime',timeInput.value);
+  if(sortInput.value==='conditional')p.set('discountSort','conditional');else p.delete('discountSort');
   history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:'')+location.hash);
  }
  const tablePrice=o=>o?`<span class="discountPriceValue">${money(o.price)}</span>${o.maxPrice&&o.maxPrice!==o.price?`<small>〜${money(o.maxPrice)}</small>`:''}`:'未掲載';
@@ -119,8 +122,9 @@
   if(!data)return;
   if(!D.addDays(selectedDate,0)||selectedDate<today||selectedDate>lastDate){summary.textContent='今日以降の有効な鑑賞日を選択してください。';results.innerHTML='';return;}
   refreshPrefs();
-  const options={date:selectedDate,prefectures:selectedPrefs,evening:timeInput.value==='evening'},rows=selectedPrefs.length?D.regionalGuide(data,options):[],days=selectedPrefs.length?D.regionalCalendar(data,{...options,date:calendarStart}):[];
+  const options={date:selectedDate,prefectures:selectedPrefs,evening:timeInput.value==='evening'},guideRows=selectedPrefs.length?D.regionalGuide(data,options):[],sortPrice=c=>(sortInput.value==='conditional'?c.conditionalBest:c.publicBest)?.price??Infinity,rows=guideRows.slice().sort((a,b)=>sortPrice(a)-sortPrice(b)||a.name.localeCompare(b.name,'ja')),days=selectedPrefs.length?D.regionalCalendar(data,{...options,date:calendarStart}):[];
   activeRows=rows;
+  host.querySelector('#discountSortControl').hidden=!selectedPrefs.length;
   host.querySelector('#discountTheater').textContent=named&&selectedPrefs.length?`選択元：${named}。選択した都道府県の掲載系列を比較しています。`:'';
   host.querySelector('#discountPeriod').textContent=days.length?`${dayLabel(days[0].date)}〜${dayLabel(days[days.length-1].date)}`:'';
   host.querySelector('#discountPrev').disabled=calendarStart<=monday(today);host.querySelector('#discountNext').disabled=calendarStart>=monday(D.addDays(today,47));
@@ -135,7 +139,7 @@
   host.querySelector('#discountCalendar').innerHTML=days.length?[days.slice(0,7),days.slice(7)].map(week=>
    `<section class="discountWeek"><h3>${weekLabel(week[0].date)}</h3>${week.map(renderDay).join('')}</section>`
   ).join(''):'';
-  const lowest=rows.find(c=>c.best)?.best.price;
+  const visiblePrices=rows.map(sortPrice).filter(Number.isFinite),lowest=visiblePrices.length?Math.min(...visiblePrices):undefined;
   summary.textContent=!selectedPrefs.length?'都道府県を選ぶと、選択地域の系列を横断して比較できます。':`${selectedPrefs.join('・')} · ${dayLabel(selectedDate)} · ${timeInput.value==='evening'?'夜間':'昼間'} · ${rows.length}系列`;
   results.innerHTML=!selectedPrefs.length?'':rows.length?`<div class="discountTableScroll"><table class="discountTable"><caption class="discountVisuallyHidden">${esc(selectedPrefs.join('・'))} · ${dayLabel(selectedDate)}</caption><thead><tr><th scope="col">系列</th><th scope="col">登録不要</th><th scope="col">会員・カード等</th><th scope="col">割引の内訳・条件</th></tr></thead><tbody>${rows.map(c=>`<tr data-chain="${esc(c.id)}"${c.best?.price===lowest&&lowest!==undefined?' class="discountLowestPrice"':''}${c.best?` data-price="${c.best.price}"`:''}><th scope="row"><h3>${esc(c.name)}</h3>${c.best?.price===lowest&&lowest!==undefined?'<small class="discountPriceBadge">最安</small>':''}<button type="button" class="discountTheaterOpen" data-theater-chain="${esc(c.id)}">${c.theaters.length}館</button></th><td class="discountPrice">${tablePrice(c.publicBest)}${c.publicBest?`<small>${esc(c.publicBest.label)}</small>`:''}</td><td class="discountPrice">${tablePrice(c.conditionalBest)}${c.conditionalBest?`<small>${esc(c.conditionalBest.label)}</small>`:''}</td><td><button type="button" class="discountDetailButton" data-discount-chain="${esc(c.id)}" aria-label="${esc(c.name)}の割引の内訳・条件を開く">内訳・条件（${c.available.length}件）</button></td></tr>`).join('')}</tbody></table></div>`:'<p class="discountError">この日の比較に使える所在地・割引情報は再確認待ちです。最新条件は公式情報をご確認ください。</p>';
   host.querySelector('#discountCoverage').textContent=selectedPrefs.length?`${selectedPrefs.join('・')}の掲載${rows.length}系列・${rows.reduce((n,c)=>n+c.theaters.length,0)}館の所在地と、確認済みの割引を比較しています。未掲載・料金未確認の系列や映画館もあります。日付をタップすると系列ごとの内訳を確認できます。`:'';
@@ -154,6 +158,7 @@
   }catch(_){data=null;results.innerHTML='';summary.innerHTML='<div class="discountError">料金を読み込めませんでした。<button type="button" id="discountRetry">再読み込み</button></div>';}
  }
  timeInput.addEventListener('change',()=>{updateUrl();render();});
+ sortInput.addEventListener('change',()=>{updateUrl();render();});
  dateInput.addEventListener('change',()=>{selectedDate=dateInput.value;if(D.addDays(selectedDate,0)&&selectedDate>=today)calendarStart=monday(selectedDate>D.addDays(today,47)?D.addDays(today,47):selectedDate);updateUrl();render();});
  prefInput.addEventListener('change',()=>{selectedPrefs=prefInput.value?[prefInput.value]:[];requestedPrefecture=prefInput.value;updateUrl();render();});
  host.addEventListener('click',e=>{const theater=e.target.closest('[data-theater-chain]');if(theater){const c=activeRows.find(c=>c.id===theater.dataset.theaterChain);if(c){host.querySelector('#discountTheaterTitle').textContent=c.name+' の対象映画館';host.querySelector('#discountTheaterBody').innerHTML='<table class="discountOfferFacts"><thead><tr><th scope="col">対象映画館</th></tr></thead><tbody>'+c.theaters.map(t=>'<tr><td><a href="theaters.html?search='+encodeURIComponent(t.replace(/^.*?：/,''))+'">'+esc(t)+'</a></td></tr>').join('')+'</tbody></table>';theaterPopup.showPopover();const r=theater.getBoundingClientRect(),p=theaterPopup.getBoundingClientRect();theaterPopup.style.left=Math.max(8,Math.min(innerWidth-p.width-8,r.left))+'px';theaterPopup.style.top=Math.max(8,Math.min(innerHeight-p.height-8,r.bottom+6))+'px';}return;}const detail=e.target.closest('[data-discount-chain]');if(detail){const c=activeRows.find(c=>c.id===detail.dataset.discountChain);if(c){returnFocus=detail;dialog.querySelector('#discountDetailTitle').textContent=c.name+' の割引・利用条件';dialogBody.innerHTML='<p class="discountMuted">'+esc(c.note)+'</p>'+(c.available.length?c.available.map(method).join(''):'<p>この日の確認済み割引はありません。公式情報をご確認ください。</p>')+'<p class="discountMuted">県内の掲載対象館：'+c.theaters.map(esc).join('・')+'</p>';dialog.showModal();}return;}const day=e.target.closest('[data-discount-date]');if(day){selectedDate=day.dataset.discountDate;dateInput.value=selectedDate;updateUrl();render();summary.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}if(e.target.closest('#discountPrev')||e.target.closest('#discountNext')){const shift=e.target.closest('#discountPrev')?-14:14;calendarStart=D.addDays(calendarStart,shift);if(calendarStart>monday(D.addDays(today,47)))calendarStart=monday(D.addDays(today,47));if(calendarStart<monday(today))calendarStart=monday(today);selectedDate=calendarStart<today?today:calendarStart;dateInput.value=selectedDate;updateUrl();render();}if(e.target.closest('#discountRetry'))load();});

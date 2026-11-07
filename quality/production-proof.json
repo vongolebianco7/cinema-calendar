@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8d568ad2bfaf67fa40854364f951a0949d40cc2d",
-  "verified_at": "2026-11-07T07:38:55Z",
-  "note": "Receipt-only release proof refresh. PR #685 exact-head required workflows passed; its executable source matches the current main source. No executable files changed after those checks."
+  "head_sha": "8a4b04836ac8ad4697201a022e8d49029b6c78ff",
+  "verified_at": "2026-11-07T08:18:48Z",
+  "note": "Receipt-only release proof refresh. PR #687 exact-head required workflows passed; the verified source includes the distinct Japanese font fallback for Cinema Classic and matches current main."
 }

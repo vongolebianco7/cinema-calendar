@@ -163,7 +163,7 @@ function artworkImage(url,movie=null){
 }
 function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
 function validMyRating(value){if(value===null||value===undefined||value==='')return null;const rating=Number(value);return Number.isFinite(rating)&&rating>=0&&rating<=5?rating:null}
-function artworkMovieId(movie){return String(movie?.tmdbId||movie?.tmdb_id||(movie?.source==='tmdb'?movie?.id:'')||'')}
+function artworkMovieId(movie){return String(movie?.tmdbId||movie?.tmdb_id||movie?.id||'')}
 function buildArtworkRatingLookup(movies){
   const lookup=new Map();
   (movies||[]).forEach(movie=>{const rating=validMyRating(movie?.myRating??movie?.rating),id=artworkMovieId(movie);if(id&&rating!==null)lookup.set(id,rating)});

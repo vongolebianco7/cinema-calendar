@@ -17,8 +17,8 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\\/my-cinemap-art\\.js\\?v=20261107-my-rating/);
- assert.match(html,/my-best10-rating-import\\.js\\?v=20261107-my-rating/);
+ assert.ok(html.includes("js/my-cinemap-art.js?v=20261107-my-rating"));
+ assert.ok(html.includes("my-best10-rating-import.js?v=20261107-my-rating"));
 });
 test('MY Rating visibility toggle adds or removes each movie rating from the export',()=>{
  const r=renderer(),movie={id:'42',title:'千と千尋の神隠し'};

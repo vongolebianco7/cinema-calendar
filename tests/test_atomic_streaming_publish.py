@@ -1,9 +1,12 @@
 """Issue #244: streaming importer must retain the last valid snapshot."""
 import json
+import os
+import runpy
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts/import_streaming_announcements.py"
@@ -34,6 +37,21 @@ class AtomicStreamingPublishTests(unittest.TestCase):
             result = subprocess.run([sys.executable, str(SCRIPT)],
                                     cwd=directory, capture_output=True)
             self.assertNotEqual(result.returncode, 0)
+            self.assertEqual((root / "streaming.json").read_bytes(), original)
+            self.assertEqual(list(root.glob(".streaming-*.tmp")), [])
+
+    def test_atomic_replace_failure_preserves_previous_snapshot_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.prepare(directory, True)
+            original = (root / "streaming.json").read_bytes()
+            previous = Path.cwd()
+            try:
+                os.chdir(directory)
+                with patch("os.replace", side_effect=OSError("simulated publish failure")):
+                    with self.assertRaisesRegex(OSError, "simulated publish failure"):
+                        runpy.run_path(str(SCRIPT), run_name="__main__")
+            finally:
+                os.chdir(previous)
             self.assertEqual((root / "streaming.json").read_bytes(), original)
             self.assertEqual(list(root.glob(".streaming-*.tmp")), [])
 

@@ -20,6 +20,9 @@
   function dedupe(rows) {
     const output = [], indices = new Map();
     for (const row of rows) {
+      // Schedule feeds include online channels alongside terrestrial, BS and CS stations.
+      const service = String(row.service || '').normalize('NFKC').trim();
+      if (row.event === 'tv' && /^(?:abema|youtube|ニコニコ|tver|アニメlive|wowowオンデマンド)/i.test(service)) continue;
       const identity = key(row);
       if (!identity || !indices.has(identity)) {
         if (identity) indices.set(identity, output.length);

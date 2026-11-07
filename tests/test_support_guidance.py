@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,8 +13,11 @@ class SupportGuidanceTests(unittest.TestCase):
             for content in (privacy, credits):
                 self.assertIn(PRIVATE_FEEDBACK, content)
                 self.assertNotIn('https://github.com/vongolebianco7/cinema-calendar/issues/new', content)
+                self.assertRegex(content, r'個人情報|氏名')
                 self.assertIn('個人情報', content)
-                self.assertIn('rel="noopener noreferrer"', content)
+                for anchor in re.findall(r'<a\b[^>]*>', content, flags=re.IGNORECASE):
+                    if re.search(r'\btarget=["\']_blank["\']', anchor, flags=re.IGNORECASE):
+                        self.assertRegex(anchor, r'\brel=["\'][^"\']*\bnoopener\b[^"\']*\b(?:noreferrer|noopener)\b[^"\']*["\']')
             self.assertIn('別ドメインには自動同期されません', privacy)
 
     def test_faq_discloses_freshness_and_local_backup(self):

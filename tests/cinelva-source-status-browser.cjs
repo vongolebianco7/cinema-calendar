@@ -15,6 +15,9 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
     json:pathname==='/api/movie-detail'?{movie:null}:emptyMovies,
    });
   });
+  // Artwork recovery has its own browser tests. Keep this provenance fixture
+  // independent of poster lookups that can outlive the calendar document.
+  await context.route('**/js/cinelva-movie-identity.js*',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   const page=await context.newPage(),errors=[];
   // WebKit occasionally fails its initial local navigation internally on CI.
   // Retry only that engine-level error once; assertions and real page failures remain fatal.
@@ -34,7 +37,6 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
    await page.getByLabel('表示テーマ',{exact:true}).selectOption(theme);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    const expected=await page.evaluate(wordmarkStyle);
-   await page.waitForLoadState('networkidle');
    await navigate(`http://127.0.0.1:${port}/credits.html`);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    assert.deepEqual(await page.evaluate(wordmarkStyle),expected,`credits header and drawer wordmarks match calendar in ${theme}`);
@@ -72,7 +74,6 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   assert.equal(await page.locator('[data-mode="events"]').count(),0);
   await page.getByRole('button',{name:'屋外上映',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  await page.waitForLoadState('networkidle');
   await navigate(`http://127.0.0.1:${port}/credits.html#data-status`);
   await page.waitForLoadState('networkidle');
   await context.route('**/data/source-status.json',r=>r.fulfill({status:503,body:'unavailable'}));

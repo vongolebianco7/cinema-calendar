@@ -55,3 +55,10 @@ test('all ten posters from supported TMDB URL variants are painted in the export
  r.calls.draws=[];r.context.drawArtwork(movies);
  for(let i=0;i<10;i++)assert.ok(r.calls.draws.some(url=>url.endsWith('/p'+i+'.jpg')),'poster '+i);
 });
+
+test('poster recovery never overwrites canonical viewing records in localStorage',()=>{
+ const source=fs.readFileSync(require('node:path').join(__dirname,'../js/my-cinemap-art.js'),'utf8');
+ const recovery=source.slice(source.indexOf('async function recoverPoster('),source.indexOf('function posterArtworkUrl('));
+ assert.ok(recovery.includes('movie.poster=poster'),'poster recovery must remain available');
+ assert.doesNotMatch(recovery,/localStorage\.(?:setItem|removeItem|clear)\s*\(/,'image recovery must not mutate saved viewing records');
+});

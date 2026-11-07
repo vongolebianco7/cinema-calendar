@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
   "head_sha": "81120b22fa4659c9f379b0287ae19e50efac2007",
-  "verified_at": "2026-11-07T14:14:00Z",
+  "verified_at": "2026-11-07T14:13:38Z",
   "note": "Receipt-only release proof refresh. PR #703 exact-head required workflows (Autonomous quality, smoke, frontend Chromium/WebKit, backend build) passed; executable source matches this checked PR source tree."
 }

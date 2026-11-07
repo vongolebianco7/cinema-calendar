@@ -87,6 +87,20 @@ def _category(program):
         return -1
 
 
+# Syoboi includes internet-only anime channels in its movie-category feed.
+# These are streaming schedules, not terrestrial/BS/CS television broadcasts.
+# Match only identified channel families; unknown channels remain visible until
+# independently classified, rather than silently discarding legitimate TV.
+STREAMING_CHANNEL_PREFIXES = (
+    "ABEMA", "アニメLIVE", "アニメ24", "アニメSPECIAL", "なつかしアニメ",
+)
+
+
+def _is_streaming_only_channel(name):
+    normalized = re.sub(r"[\s\u3000]+", "", str(name)).casefold()
+    return any(normalized.startswith(prefix.casefold()) for prefix in STREAMING_CHANNEL_PREFIXES)
+
+
 def _key(item):
     normalized_title = " ".join(str(item.get("title", "")).split()).casefold()
     return normalized_title, item.get("date"), " ".join(str(item.get("service", "")).split()).casefold(), item.get("time")
@@ -150,7 +164,7 @@ def normalize_feed(payload, *, now=None, title_metadata=None):
         title = str(program.get("Title") or program.get("title") or "").strip()
         when = _broadcast_datetime(program)
         service = str(program.get("ChName") or program.get("channel") or "").strip()
-        if not title or not when or when < now or not service:
+        if not title or not when or when < now or not service or _is_streaming_only_channel(service):
             continue
         row = {
             "title": title,

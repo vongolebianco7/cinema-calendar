@@ -6,6 +6,8 @@ This deliberately does not crawl or scrape third-party sites.
 """
 import datetime
 import json
+import os
+import tempfile
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -114,5 +116,20 @@ if pending or identity_updates:
     current["movies"].extend(pending)
     current["movies"].sort(key=lambda m: (m["date"], m["service"], m["title"]))
     current["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    (ROOT / "streaming.json").write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Atomic publish: a crash or disk-write error must not truncate the last good snapshot.
+    target = ROOT / "streaming.json"
+    staged = None
+    try:
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=ROOT,
+                                         prefix=".streaming-", suffix=".tmp",
+                                         delete=False) as handle:
+            staged = Path(handle.name)
+            json.dump(current, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(staged, target)
+    finally:
+        if staged is not None:
+            staged.unlink(missing_ok=True)
 print(f"Imported {len(pending)} verified film announcements")

@@ -19,6 +19,16 @@ test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
  assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-rounded-font/);
 });
+
+test('My Best 10 candidate cards fit a horizontal mobile scroller',()=>{
+ const html=fs.readFileSync('my-best10.html','utf8');
+ const css=html.match(/<style id="best10-horizontal-candidates">([\\s\\S]*?)<\\/style>/)?.[1]||'';
+ assert.match(css,/#list\\{[^}]*display:flex/);
+ assert.match(css,/#list\\{[^}]*overflow-x:auto/);
+ assert.match(css,/#list>\\.item\\{[^}]*flex:0 0/);
+ assert.match(css,/#list>\\.item \\.move\\{[^}]*display:flex/);
+ assert.match(css,/@media\\(max-width:600px\\)/);
+});
 for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theater','cinema-archive'])test(`${theme}: posters and official emblem; no year/director, including saved records`,()=>{
  const r=renderer();r.elements.theme.value=theme;
  const movies=[{title:'Film One',year:2024,director:'Director One',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}];r.context.picks=movies;

@@ -27,6 +27,12 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
  await page.screenshot({path:`artifacts/calendar-cross-screen/${engine}-${theme}-${route}.png`,fullPage:true});
  }
  await page.goto('http://127.0.0.1:8768/index.html',{waitUntil:'domcontentloaded'});
+ await page.waitForFunction(()=>festivalEvents.length>0&&movies.some(m=>m.event==='tv'));
+ await page.evaluate(()=>{view=new Date(2026,10,1);setMode('tv')});
+ const tvChannels=await page.locator('#chips .chip').allTextContents();
+ assert.ok(!tvChannels.some(c=>/youtube|abema|アニメlive|tver|ネット配信/i.test(c)),`online-only services entered TV filters: ${tvChannels.join(', ')}`);
+ const tvCalendar=await page.locator('#dates').innerText();
+ assert.ok(!/youtube|abema|アニメlive|tver|ネット配信/i.test(tvCalendar),'online-only entries entered TV broadcasts');
  await page.waitForFunction(()=>festivalEvents.length>0);
  await page.evaluate(()=>loadOutdoorEvents());
  await page.waitForFunction(()=>outdoorEvents.length>0);

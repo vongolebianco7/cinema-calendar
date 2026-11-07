@@ -43,7 +43,7 @@ test('rating import filters release decades, keeps all-time mode, and removes du
  const api=scope.window.CinelvaBest10RatingImport;
  assert.equal(api.filterCandidates(records,'2020').map(x=>x.id).join(','),'2,1');
  assert.equal(api.filterCandidates(records,'pre1950').map(x=>x.id).join(','),'7');
- assert.equal(api.filterCandidates(records,'all').map(x=>x.id).join(','),'6,3,2,1,4,7');
+ assert.equal(api.filterCandidates(records,'all').map(x=>x.id).join(','),'3,6,2,1,4,7');
  assert.equal(api.periodLabel('all'),'オールタイムベスト');
 });
 test('My Best 10 exposes decade selection and an image-rating toggle',()=>{

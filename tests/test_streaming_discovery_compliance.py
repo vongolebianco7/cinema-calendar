@@ -19,8 +19,10 @@ class StreamingDiscoveryComplianceTests(unittest.TestCase):
         approved = {entry["id"]: entry for entry in registry["sources"]
                     if entry.get("mode") == "approved"}
         premiere_purposes = {"release_announcements", "streaming_premiere_feed"}
-        self.assertEqual(len(sources["services"]), 12)
         names = [service["name"] for service in sources["services"]]
+        expected = ["Netflix", "Prime Video", "Disney+", "U-NEXT", "Hulu", "Apple TV+",
+                    "Lemino", "ABEMA", "DMM TV", "FOD", "TELASA", "WOWOWオンデマンド"]
+        self.assertEqual(names, expected, "Configured streaming services must remain explicit")
         self.assertEqual(len(names), len(set(names)), "Duplicate streaming services")
         approved_feeds = {}
         for feed in feeds["feeds"]:
@@ -30,7 +32,7 @@ class StreamingDiscoveryComplianceTests(unittest.TestCase):
             self.assertTrue(purposes & premiere_purposes,
                             "Availability-only/other-purpose approval cannot authorize premiere discovery")
             self.assertTrue(feed.get("url", "").startswith("https://"))
-            self.assertTrue(feed.get("service"), "Feed must name its service")
+            self.assertIn(feed.get("service"), names, "Feed service must be in the configured catalogue")
             approved_feeds.setdefault(feed["service"], []).append(feed)
         for service in sources["services"]:
             if service.get("auto_premiere_discovery"):

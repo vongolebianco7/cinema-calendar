@@ -48,12 +48,14 @@ for required in [
     'id="conditionResults"', '#grid .card',
     'id="theatricalPopularGrid"', 'id="catalogPopularGrid"',
     'data-availability="all"', 'data-availability="available"',
-    'data-availability="unknown"', 'currentCatalogList',
+    'currentCatalogList',
     'loadPopularShelves', 'loadPopularShelves',
     'data/theatrical.json', 'data/streaming.json'
 ]:
     if required not in discover:
         errors.append(f"Discover recommendation/search integration missing: {required}")
+if 'data-availability="unknown"' in discover:
+    errors.append("Discover must keep internal availability states out of public filters")
 if 'loadPreset();load(true);' in discover:
     errors.append("Discover must not auto-load recommendation results into condition search")
 if "repeat(3,minmax(0,1fr))" not in discover:

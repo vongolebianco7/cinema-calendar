@@ -176,6 +176,7 @@ function posterArtworkUrl(movie){
   }
   return '';
 }
+function artworkMovieTitle(movie){const original=String(movie?.original_title||movie?.originalTitle||movie?.original_name||'').trim();return artValue('artworkTitleMode')==='original'&&original?original:String(movie?.title||'')}
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
   const rankWidth=columns===2?98:94;
   const posterHeight=Math.min(height-16,columns===2?204:132),posterWidth=posterHeight*2/3;
@@ -185,9 +186,9 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
   const size=(columns===2?(shape==='portrait'?54:36):(shape==='portrait'?50:28))*fontScale;
   const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
-  const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
+  const fit=fittedLines(ctx,artworkMovieTitle(m),tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;
-  writeLines(ctx,m.title,tx,y+(height-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+  writeLines(ctx,artworkMovieTitle(m),tx,y+(height-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
 }
 function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal;
@@ -250,7 +251,7 @@ function drawArtwork(movies){
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);
   drawBrand(ctx,w,h,theme,footerY);
-  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
+  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+artworkMovieTitle(m)).join('、'));
   artworkFile=null;document.getElementById('share').disabled=true;
   const revision=++artworkRevision;
   c.toBlob(blob=>{if(!blob||revision!==artworkRevision||!artworkReady())return;artworkFile=new File([blob],'my-cinelva.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');

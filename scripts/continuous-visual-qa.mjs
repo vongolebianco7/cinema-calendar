@@ -23,6 +23,9 @@ try{
     const slug=route.replace(/[^a-z0-9]+/gi,'-');
     const id=slug+'-'+width+'-'+theme;
     const entry={route,width,theme,browser:browserName,issues:[]};
+    const runtimeErrors=[];
+    const onPageError=error=>runtimeErrors.push(String(error.message).slice(0,200));
+    page.on('pageerror',onPageError);
     try{
      const response=await page.goto(base+'/'+route,{waitUntil:'domcontentloaded',timeout:20000});
      if(!response||response.status()>=400)entry.issues.push('HTTP '+(response?.status()??'missing'));
@@ -38,6 +41,8 @@ try{
      if(audit.feedbackLinks>1)entry.issues.push('duplicate feedback navigation links: '+audit.feedbackLinks);
      await page.screenshot({path:output+'/'+id+'.png',fullPage:false,animations:'disabled',timeout:15000});
     }catch(error){entry.issues.push(String(error.message).slice(0,250))}
+    if(runtimeErrors.length)entry.issues.push('uncaught JavaScript errors: '+runtimeErrors.slice(0,5).join(' | '));
+    page.off('pageerror',onPageError);
     report.push(entry);
     if(entry.issues.length)failures.push(id+': '+entry.issues.join('; '));
    }

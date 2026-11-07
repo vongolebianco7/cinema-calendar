@@ -17,7 +17,7 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-rounded-font/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-my-rating/);
 });
 test('My Best 10 candidate cards fit a horizontal mobile scroller',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');

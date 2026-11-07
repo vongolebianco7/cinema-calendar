@@ -32,7 +32,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.locator('.streamMovieAvail').filter({hasText:'見放題 Prime Video'}).waitFor();
    assert.match(await page.locator('.streamMovie').filter({has:page.getByText('短い作品',{exact:true})}).locator('.streamMovieAvail').innerText(),/見放題 Prime Video/,'canonical TMDB ID finds observations despite local ID');
    const multiOffer=page.locator('.streamMovie').filter({has:page.getByText('短い作品',{exact:true})}).locator('.streamMovieAvail');
-   assert.match(await multiOffer.innerText(),/見放題 Prime Video[\\s\\S]*見放題 Hulu[\\s\\S]*見放題 U-NEXT/,'all three provider badges remain rendered');
+   const multiOfferText=await multiOffer.innerText();assert(multiOfferText.indexOf('見放題 Prime Video')<multiOfferText.indexOf('見放題 Hulu')&&multiOfferText.indexOf('見放題 Hulu')<multiOfferText.indexOf('見放題 U-NEXT'),'all three provider badges remain rendered in order');
    assert.equal(await multiOffer.evaluate(el=>{const box=el.getBoundingClientRect();return [...el.children].every(child=>{const r=child.getBoundingClientRect();return r.top>=box.top-1&&r.bottom<=box.bottom+1})}),true,'multiple provider badges are not clipped by the availability region');
    assert.match(await page.locator('.streamMovie').filter({has:page.getByText('とても長い作品名の映画で二行以上の高さになっていた作品',{exact:true})}).locator('.streamMovieAvail').innerText(),/Prime Video.*配信開始/,'official announcement remains visible without live providers');
    const boxes=await page.locator('.streamMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {y:r.y,height:r.height};}));assert.equal(boxes.length,2);assert(Math.abs(boxes[0].y-boxes[1].y)<1,'review baselines align');assert.equal(boxes[0].height,boxes[1].height);

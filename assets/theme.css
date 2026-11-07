@@ -274,7 +274,7 @@ body .modeTabs .modeTab:focus-visible{outline:2px solid #b18e60;outline-offset:2
 /* Equal grid-row card heights keep every shared review region on the baseline. */
 body .streamingWeekMovies>.streamMovie,body .tvWeekMovies>.tvMovie{display:flex!important;flex-direction:column;min-width:0;height:100%;box-sizing:border-box}
 body .streamMovieTitle{line-height:1.4;min-height:2.8em;max-height:2.8em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-body .streamMovieAvail{min-height:2.6em;max-height:2.6em;line-height:1.3;overflow:hidden}
+body .streamMovieAvail{min-height:2.6em;max-height:none;line-height:1.3;overflow:visible;flex:0 0 auto}
 body .streamingWeekMovies>.streamMovie>.cinelva-rating-controls,body .tvWeekMovies>.tvMovie>.cinelva-rating-controls{margin-top:auto!important;flex-shrink:0}
 body .streamMovieDate.isPeriod{top:auto;bottom:4px;max-width:calc(100% - 8px);white-space:normal;font-size:9px}
 body .availabilityUnknown{color:var(--muted)}

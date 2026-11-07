@@ -46,7 +46,7 @@ test('theater month header and week labels are clipped to the selected month', (
 
 test('calendar mode switching initializes the calendar before clearing the theater view class', () => {
   const renderStart = html.indexOf('function renderCal(');
-  const renderEnd = html.indexOf('\\n}', renderStart) + 2;
+  const renderEnd = html.indexOf('\n}', renderStart) + 2;
   const render = html.slice(renderStart, renderEnd);
   assert.ok(render.indexOf('let cal=document.querySelector(".calendar")') < render.indexOf('cal.classList.remove("theatricalWeekMode")'));
 });

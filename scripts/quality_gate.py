@@ -23,6 +23,7 @@ active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('
 commands.append(['python','-m','unittest','tests.test_streaming_poster_enrichment'])
 commands.append(['python','-m','unittest','tests.test_atomic_streaming_publish'])
 run(['node','--test',*active_node_tests])
+run(['python','-m','unittest','tests.test_streaming_discovery_compliance'])
 run(['python','-m','unittest','tests.test_external_data_registry','tests.test_film_event_refresh','tests.test_outdoor_event_refresh','tests.test_syoboi_tv_movies'])
 run(['node','--test','tests/calendar-dedupe.test.cjs'])
 run(['python','-m','unittest','tests.test_director_enrichment','tests.test_now_playing_update','tests.test_streaming_announcement_import','tests.test_theater_equipment_preservation'])

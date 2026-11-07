@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T05:55:00Z",
+  "updated_at": "2026-11-07T06:04:14Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "2e0a022f973146735259092e9fa3ee1501de6cc1",
-  "branch": "fix/rank-card-poster-fallback-20261106",
-  "head_sha": "47e07098647c2c402f814dd33cc9d7e74629071e",
-  "pull_request": 651,
+  "base_sha": "9a00ec0b2c9a6067d0012dff6df3764f7ba635b8",
+  "branch": "chore/refresh-work-checkpoint-20261107-0604",
+  "head_sha": null,
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -2976,5 +2976,48 @@
     ],
     "next_concrete_action": "Run browser acceptance against canonical Vercel URL and GitHub Pages demo; inspect failures and implement focused fix PR before closing any release issue.",
     "safety": "No paid upgrade, scraping, secret exposure, destructive DB changes or user-record changes."
+  },
+  "latest_automation_check_20261107_0604": {
+    "checked_at_utc": "2026-11-07T06:04:14Z",
+    "main_sha": "9a00ec0b2c9a6067d0012dff6df3764f7ba635b8",
+    "open_pull_requests": [],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585
+    ],
+    "closed_issues": [
+      593
+    ],
+    "merged_prior_pull_requests": [
+      618,
+      619
+    ],
+    "pages": {
+      "source_sha": "9a00ec0b2c9a6067d0012dff6df3764f7ba635b8",
+      "run_id": 42332221306,
+      "conclusion": "success"
+    },
+    "vercel": {
+      "production_state": "READY",
+      "source_sha": "7a9b4e96dece566f697a2e47a807203427a3f4bf",
+      "alias": "cinelva.vercel.app",
+      "deployment_id": "dpl_A4xpZ35KEVmRUZT2baBdnqP77dgU",
+      "latest_main_not_deployed": true
+    },
+    "publication_proof": {
+      "head_sha": "ed14425a2f1bbd9d84fbbf3f641cca1c2b361c0e",
+      "verified_at": "2026-11-07T02:44:46Z",
+      "not_exact_main": true
+    },
+    "blockers": [
+      "Vercel Hobby 24-hour deployment quota reported; reset not independently confirmed",
+      "Exact-main publication proof absent",
+      "Production browser acceptance and feedback/admin/analytics E2E unverified"
+    ],
+    "next_first_action": "Verify Vercel Hobby quota and exact-source proof for latest main, then execute one safe release; independently run production Chromium/WebKit smoke and feedback/admin/analytics checks.",
+    "safety": "No bypass of CI, paid upgrade, scraping, secrets, or destructive data migration."
   }
 }

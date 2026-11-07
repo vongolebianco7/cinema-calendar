@@ -17,7 +17,7 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-japanese-fonts/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-rounded-font/);
 });
 for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theater','cinema-archive'])test(`${theme}: posters and official emblem; no year/director, including saved records`,()=>{
  const r=renderer();r.elements.theme.value=theme;

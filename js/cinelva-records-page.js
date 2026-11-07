@@ -362,7 +362,7 @@
     const canonical=globalThis.CinelvaMovieIdentity?.id(movie);
     const detail=escapeHTML('../search.html?'+(canonical?'id='+encodeURIComponent(canonical)+'&':'')+'search='+encodeURIComponent(movie.title||''));
     const releaseCandidate=String(movie.release_date||movie.releaseDate||movie.releaseDateJP||movie.release_date_jp||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).release_date||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).releaseDate||'').trim();
-    const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','/'):(movie.year?String(movie.year):'');
+    const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','/'):(movie.year?String(movie.year)+'年':'');
     const movieFacts=[Number(movie.runtime)>0?Number(movie.runtime)+'分':'',releaseDate].filter(Boolean).join(' · ');
     return '<article class="movie cinelva-unified-record-card" data-record-card="'+id+'">'+
       '<a class="cinelva-record-poster" href="'+detail+'" aria-label="作品詳細：'+title+'">'+posterHTML(movie)+'</a>'+

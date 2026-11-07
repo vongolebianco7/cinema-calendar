@@ -7,8 +7,14 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
   const context=await browser.newContext({viewport:{width:390,height:844}});
   const emptyMovies={movies:[],external:[],results:[]};
-  await context.route('**/api/movies**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
-  await context.route('https://backend-one-gray-94.vercel.app/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
+  await context.route('https://backend-one-gray-94.vercel.app/api/**',route=>{
+   const pathname=new URL(route.request().url()).pathname;
+   return route.fulfill({
+    status:200,
+    headers:{'access-control-allow-origin':`http://127.0.0.1:${port}`},
+    json:pathname==='/api/movie-detail'?{movie:null}:emptyMovies,
+   });
+  });
   const page=await context.newPage(),errors=[];
   // WebKit occasionally fails its initial local navigation internally on CI.
   // Retry only that engine-level error once; assertions and real page failures remain fatal.
@@ -28,6 +34,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
    await page.getByLabel('表示テーマ',{exact:true}).selectOption(theme);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    const expected=await page.evaluate(wordmarkStyle);
+   await page.waitForLoadState('networkidle');
    await navigate(`http://127.0.0.1:${port}/credits.html`);
    assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
    assert.deepEqual(await page.evaluate(wordmarkStyle),expected,`credits header and drawer wordmarks match calendar in ${theme}`);
@@ -65,6 +72,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   assert.equal(await page.locator('[data-mode="events"]').count(),0);
   await page.getByRole('button',{name:'屋外上映',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await page.waitForLoadState('networkidle');
   await navigate(`http://127.0.0.1:${port}/credits.html#data-status`);
   await page.waitForLoadState('networkidle');
   await context.route('**/data/source-status.json',r=>r.fulfill({status:503,body:'unavailable'}));

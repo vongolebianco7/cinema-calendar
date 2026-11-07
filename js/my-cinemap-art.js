@@ -168,13 +168,15 @@ function posterArtworkUrl(movie){
   return '';
 }
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
-  const rankWidth=columns===2?76:94;
-  const posterHeight=Math.min(height-20,columns===2?176:132),posterWidth=posterHeight*2/3;
+  // Keep the medal fully within its own rank gutter, away from poster artwork.
+  const rankWidth=columns===2?96:110;
+  const posterHeight=Math.min(height-16,columns===2?(shape==='portrait'?214:176):132);
+  const posterWidth=posterHeight*2/3;
   const posterX=x+rankWidth,posterY=y+(height-posterHeight)/2;
   const image=artworkImage(posterArtworkUrl(m));
   if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
-  const size=(columns===2?(shape==='portrait'?52:shape==='square'?44:32):(shape==='portrait'?50:shape==='square'?38:28))*fontScale;
+  const size=(columns===2?(shape==='portrait'?56:shape==='square'?44:32):(shape==='portrait'?50:shape==='square'?38:28))*fontScale;
   const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
   const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;

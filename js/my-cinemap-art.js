@@ -166,7 +166,7 @@ async function recoverPoster(movie,failedUrl){
   const id=Number(movie.tmdbId||(movie.source==='tmdb'?movie.id:0));
   if(!Number.isInteger(id)||id<1||posterRecoveryRequests.has(id))return;
   posterRecoveryRequests.add(id);
-  try{const response=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?id='+id);if(!response.ok)return;const data=await response.json(),poster=data?.movie?.poster;if(!poster||poster===movie.poster)return;movie.poster=poster;try{localStorage.setItem('cinemap-my-list',JSON.stringify(artworkMovies))}catch{};artworkImages.delete(failedUrl);drawArtwork(artworkMovies)}catch{}finally{posterRecoveryRequests.delete(id)}
+  try{const response=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?id='+id);if(!response.ok)return;const data=await response.json(),poster=data?.movie?.poster;if(!poster||poster===movie.poster)return;movie.poster=poster;artworkImages.delete(failedUrl);drawArtwork(artworkMovies)}catch{}finally{posterRecoveryRequests.delete(id)}
 }
 function posterArtworkUrl(movie){
   for(const value of [movie.poster,movie.posterUrl,movie.poster_path]){

@@ -42,3 +42,11 @@ test('repeat TV airings on the same date and channel retain each start time', ()
   const duplicate = { ...first, poster: 'film.jpg' };
   assert.deepEqual(dedupe([first, repeat, duplicate]), [duplicate, repeat]);
 });
+
+test('online-only channel schedules never appear as TV airings', () => {
+  const entry = {title:'映画',date:'2026-11-07',time:'20:00',event:'tv'};
+  const tv = ['日本テレビ','TOKYO MX','BS日テレ','ディズニー・チャンネル','WOWOWシネマ'].map(service=>({...entry,service}));
+  const online = ['Abemaアニメ','ＡＢＥＭＡ特設その他','アニメLIVE','YouTube','WOWOWオンデマンド'].map(service=>({...entry,service}));
+  const release = {...entry,event:'streaming',service:'ABEMA'};
+  assert.deepEqual(dedupe([...tv,...online,release]),[...tv,release]);
+});

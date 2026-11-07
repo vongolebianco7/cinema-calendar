@@ -169,7 +169,7 @@ function buildArtworkRatingLookup(movies){
   (movies||[]).forEach(movie=>{const rating=validMyRating(movie?.myRating??movie?.rating),id=artworkMovieId(movie);if(id&&rating!==null)lookup.set(id,rating)});
   try{
     const records=window.CinelvaLibraryRecords?.all?.()||[];
-    records.forEach(record=>{const rating=validMyRating(record?.rating),id=String(record?.tmdbId||record?.tmdb_id||record?.id||'');if(id&&rating!==null)lookup.set(id,rating)});
+    records.forEach(record=>{const rating=validMyRating(record?.rating),id=String(record?.tmdbId||record?.tmdb_id||record?.id||'');if(id)lookup.set(id,rating)});
   }catch{}
   return lookup;
 }

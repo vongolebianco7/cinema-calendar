@@ -310,7 +310,7 @@ let modalScrollY=0;
 function showModal(){modalScrollY=window.scrollY||document.documentElement.scrollTop||0;document.body.style.top="-"+modalScrollY+"px";document.body.classList.add("modalOpen");$("#modal").classList.add("show")}
 function hideModal(){document.body.classList.remove("modalOpen");document.body.style.top="";$("#modal").classList.remove("show");window.scrollTo(0,modalScrollY)}
 function runtimeOk(m){if(!runtimeMin&&!runtimeMax)return true;let r=Number(m.runtime||0);if(!r)return false;return (!runtimeMin||r>=runtimeMin)&&(!runtimeMax||r<=runtimeMax)}
-function onlineOnlyTvChannel(value){const channel=String(value||"").replace(/\\s+/g,"").toLowerCase();return /youtube|abema|アニメlive|tver|ネット配信/.test(channel)}
+function onlineOnlyTvChannel(value){const channel=String(value||"").replace(/\s+/g,"").toLowerCase();return /youtube|abema|アニメlive|tver|ネット配信/.test(channel)}
 function theatricalCategory(m){return m.special_screening==="asa10"?"午前十時":m.service==="リバイバル上映"?"リバイバル":"通常"}
 function filtered(){return movies.filter(m=>{let ok=mode==="streaming"?m.event==="streaming":mode==="theatrical"?(m.event==="theatrical"||m.service==="劇場公開"):mode==="tv"?m.event==="tv":m.event==="festival";let serviceOk=mode==="theatrical"?(active==="すべて"||theatricalCategory(m)===active):(active==="すべて"||m.service===active||(active==="WOWOWオンデマンド"&&m.service==="WOWOW"));return ok&&serviceOk})}
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}

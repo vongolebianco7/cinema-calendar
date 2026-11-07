@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "54aaa77c6c547d218c655dba72cc13b08a9931ac",
-  "verified_at": "2026-11-07T21:41:15Z",
-  "note": "Receipt-only refresh for PR #712 after all four required exact-head workflows passed. Production executable source is unchanged from the tested source."
+  "head_sha": "03d2df4fbc5fca7f70e4491dc2bb98e955ddf7a1",
+  "verified_at": "2026-11-07T23:11:01.192Z",
+  "note": "Receipt-only refresh for PR #713 after all four required exact-source workflows passed; executable source is unchanged from the tested source head."
 }

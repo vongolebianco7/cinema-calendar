@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8a4b04836ac8ad4697201a022e8d49029b6c78ff",
-  "verified_at": "2026-11-07T08:18:48Z",
-  "note": "Receipt-only release proof refresh. PR #687 exact-head required workflows passed; the verified source includes the distinct Japanese font fallback for Cinema Classic and matches current main."
+  "head_sha": "32ae9a99a49d14273f2901ef76623a1ee14283bc",
+  "verified_at": "2026-11-07T09:03:49Z",
+  "note": "Receipt-only release proof refresh. PR #690 exact-head required workflows passed; its executable source including the cache-busted My Best 10 renderer URL is byte-identical to current main."
 }

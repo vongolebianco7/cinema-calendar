@@ -262,9 +262,9 @@ function openImageForSaving(){if(!artworkReady()){document.getElementById('msg')
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
 window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
-  s.src='js/my-cinemap-tools.js?v=20261107-rounded-font';
+  s.src='js/my-cinemap-tools.js?v=20261107-my-rating';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-rounded-font';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-my-rating';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

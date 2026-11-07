@@ -129,7 +129,7 @@
     rule(ctx,pad,listBottom,inner,p.line,p.dark?.68:.54);
     const footerY=brandFooterTop(shape,h,36*brandScale);drawBrandSafeZone(ctx,w,h,p,footerY,36*brandScale);drawCinemaBrand(ctx,w,h,p,footerY);ctx.restore();
 
-    c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
+    c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+artworkMovieTitle(m)).join('、'));
     scheduleArtworkBlob(c);
   }
 

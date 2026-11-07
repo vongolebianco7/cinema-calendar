@@ -9083,5 +9083,8 @@
       "source_url": "https://lemino.docomo.ne.jp/ft/0000200/",
       "checked_at": "2026-11-05"
     }
-  ]
+  ],
+  "poster_enrichment": {
+    "source": "local catalog or TMDB Search API; unique exact-title matches only"
+  }
 }

@@ -57,6 +57,8 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
      assert.doesNotMatch(await page.locator('#artCanvas').getAttribute('aria-label'),/Hidden Director|2013/);
     }
     if(route==='my-cinelva/'){
+     const facts=await page.evaluate(()=>{const card=document.createElement('article');card.className='want-watch-item';const poster=document.createElement('div');poster.className='want-watch-poster';const title=document.createElement('strong');title.textContent='Metadata fixture';card.append(poster,title);document.body.append(card);window.CinelvaMovieIdentity.hydrateCard(poster,{title:'Metadata fixture',runtime:121,release_date:'2013-10-10'});return card.querySelector('.cinelvaMovieMetadata')?.textContent;});
+     assert.equal(facts,'121分 · 2013/10/10','shared movie cards show runtime and full release date');
      assert.equal(await page.locator('#csTop').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),width<=360?2:width<=600?3:5,'readable Top 10 columns');
      const cards=page.locator('#csTop .cinelva-rating-controls');await cards.first().waitFor();
      assert.equal(await cards.first().locator('.rating-caption').allTextContents().then(a=>a.join(',')),'MY,TMDB');

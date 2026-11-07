@@ -37,16 +37,23 @@ async function freePort() {
     const base = `http://127.0.0.1:${port}`;
     await waitForLocalServer(port);
     browser = await engine.launch({ headless: true });
-    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const errors = [];
+    let page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
-    await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+    await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
     const navigate = async (url, options) => {
-      try {
-        await page.goto(url, options);
-      } catch (error) {
-        if (browserName !== 'webkit' || !/WebKit encountered an internal error/.test(error.message)) throw error;
-        await page.goto(url, options);
+      for (let attempt = 0; ; attempt += 1) {
+        try {
+          await page.goto(url, options);
+          return;
+        } catch (error) {
+          const transientWebKitFailure = browserName === 'webkit' && /WebKit encountered an internal error/.test(error.message);
+          if (!transientWebKitFailure || attempt >= 2) throw error;
+          await page.close().catch(() => {});
+          page = await context.newPage();
+          page.on('pageerror', error => errors.push(error.message));
+        }
       }
     };
     for (const count of [0, 1, 1000]) {

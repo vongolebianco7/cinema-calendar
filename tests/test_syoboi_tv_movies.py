@@ -41,6 +41,18 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(rows[0]["collection_method"], "automated_public_api")
         self.assertEqual((rows[0]["original_title"], rows[0]["release_year"]), ("Future Film", 2020))
 
+    def test_streaming_only_channels_are_not_mislabeled_as_tv_broadcasts(self):
+        channels = ["ABEMA特設その他", "ABEMA", "アニメLIVE2", "アニメ24", "アニメSPECIAL", "なつかしアニメ"]
+        channels += ["NHK総合", "BS11", "TOKYO MX", "AT-X"]
+        feed = [
+            {"Cat": 8, "Title": f"映画{i}", "TID": i + 1, "PID": i + 100,
+             "ChName": channel, "StTimeU": epoch(NOW + dt.timedelta(days=1))}
+            for i, channel in enumerate(channels)
+        ]
+        rows = normalize_feed(feed, now=NOW)
+        self.assertEqual([row["service"] for row in rows], channels[-4:])
+        self.assertTrue(all(row["event"] == "tv" for row in rows))
+
     def test_documented_title_lookup_metadata_is_parsed_without_inventing_years(self):
         xml = """<ResultSet><Result><Code>200</Code></Result><TitleLookup><Title><TID>42</TID><Title>作品</Title><TitleEN>Film</TitleEN><FirstYear>2021</FirstYear><Cat>8</Cat></Title></TitleLookup></ResultSet>"""
         self.assertEqual(parse_title_metadata(xml), {"42": {"TID": "42", "Title": "作品", "TitleEN": "Film", "FirstYear": "2021", "Cat": "8"}})

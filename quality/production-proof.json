@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "7e3161e1e083c3c368a8caae9f5f0ffb826b1846",
-  "verified_at": "2026-11-06T23:23:52Z",
-  "note": "PR #668 combined source with merged TV artwork fix #667. Autonomous quality, smoke, Validate frontend including Chromium/WebKit, and reproducible backend build passed on this exact source. Receipt-only commit."
+  "head_sha": "279a84e3f41505921207aaefbda42fa7fbd0b169",
+  "verified_at": "2026-11-07T01:24:52Z",
+  "note": "PR #669 mobile feedback admin layout with narrowly scoped WebKit transient navigation retry in retirement browser test. Autonomous quality, smoke, Chromium/WebKit Validate frontend, and reproducible backend build passed on this exact source. Receipt-only commit."
 }

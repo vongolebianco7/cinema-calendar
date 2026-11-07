@@ -7,8 +7,17 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
   const context=await browser.newContext({viewport:{width:390,height:844}});
   const emptyMovies={movies:[],external:[],results:[]};
-  await context.route('**/api/movies**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
-  await context.route('https://backend-one-gray-94.vercel.app/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(emptyMovies)}));
+  await context.route('https://backend-one-gray-94.vercel.app/api/**',route=>{
+   const pathname=new URL(route.request().url()).pathname;
+   return route.fulfill({
+    status:200,
+    headers:{'access-control-allow-origin':`http://127.0.0.1:${port}`},
+    json:pathname==='/api/movie-detail'?{movie:null}:emptyMovies,
+   });
+  });
+  // Artwork recovery has its own browser tests. Keep this provenance fixture
+  // independent of poster lookups that can outlive the calendar document.
+  await context.route('**/js/cinelva-movie-identity.js*',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   const page=await context.newPage(),errors=[];
   // WebKit occasionally fails its initial local navigation internally on CI.
   // Retry only that engine-level error once; assertions and real page failures remain fatal.

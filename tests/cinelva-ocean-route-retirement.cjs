@@ -37,17 +37,32 @@ async function freePort() {
     const base = `http://127.0.0.1:${port}`;
     await waitForLocalServer(port);
     browser = await engine.launch({ headless: true });
-    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const errors = [];
+    let page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
-    await page.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+    await context.route('https://backend-one-gray-94.vercel.app/**', route => route.abort());
+    const navigate = async (url, options) => {
+      for (let attempt = 0; ; attempt += 1) {
+        try {
+          await page.goto(url, options);
+          return;
+        } catch (error) {
+          const transientWebKitFailure = browserName === 'webkit' && /WebKit encountered an internal error/.test(error.message);
+          if (!transientWebKitFailure || attempt >= 2) throw error;
+          await page.close().catch(() => {});
+          page = await context.newPage();
+          page.on('pageerror', error => errors.push(error.message));
+        }
+      }
+    };
     for (const count of [0, 1, 1000]) {
       const records = Object.fromEntries(Array.from({ length: count }, (_, index) => [String(index + 900001), { id: String(index + 900001), title: `保存記録 ${index + 1}`, watched: true, rating: 4.2, watchedAt: '2026-01-02', custom: { preserve: true } }]));
       const serialized = JSON.stringify(records);
-      await page.goto(`${base}/my-cinemap.html`, { waitUntil: 'domcontentloaded' });
+      await navigate(`${base}/my-cinemap.html`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(([key, value]) => localStorage.setItem(key, value), [recordKey, serialized]);
       for (const route of routes) {
-        await page.goto(`${base}/${route}?retirement-test=${count}#records`, { waitUntil: 'domcontentloaded' });
+        await navigate(`${base}/${route}?retirement-test=${count}#records`, { waitUntil: 'domcontentloaded' });
         await page.waitForURL(url => url.pathname === '/my-cinelva/' && url.searchParams.get('retirement-test') === String(count) && url.hash === '#records');
         await page.waitForFunction(expected => document.getElementById('csLifetime')?.textContent === String(expected), count);
         assert.equal(await page.evaluate(() => CinelvaLibraryRecords.all().length), count);

@@ -2,8 +2,8 @@
   "generated_at": "2026-11-07",
   "note": "Partial television schedule coverage: curated records plus anime-related movie broadcasts from a public feed. This is not a nationwide all-channel listing; schedules may change and source links are retained per item.",
   "automation_source": "syoboi_calendar",
-  "automation_generated_at": "2026-11-07T03:02:41.782924Z",
-  "automation_checked_at": "2026-11-07T03:02:41.782938Z",
+  "automation_generated_at": "2026-11-07T07:41:54.022751Z",
+  "automation_checked_at": "2026-11-07T07:41:54.022763Z",
   "automated_movies": [
     {
       "title": "楽園追放 -Expelled from Paradise-",
@@ -155,6 +155,39 @@
       "year": 2017
     },
     {
+      "title": "劇場版 Fate/stay night[Heaven's Feel]",
+      "date": "2026-11-09",
+      "time": "20:00",
+      "event": "tv",
+      "service": "ABEMA特設その他",
+      "program": "劇場版 Fate/stay night[Heaven's Feel]",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724933",
+      "source_title_id": "4698",
+      "release_year": 2017,
+      "year": 2017
+    },
+    {
+      "title": "劇場版 魔法科高校の劣等生 星を呼ぶ少女",
+      "date": "2026-11-10",
+      "time": "16:20",
+      "event": "tv",
+      "service": "アニメLIVE2",
+      "program": "劇場版 魔法科高校の劣等生 星を呼ぶ少女",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724874",
+      "source_title_id": "5026",
+      "original_title": "The irregular at magic high school The Movie",
+      "release_year": 2017,
+      "year": 2017
+    },
+    {
       "title": "楽園追放 -Expelled from Paradise-",
       "date": "2026-11-11",
       "time": "19:00",
@@ -169,6 +202,22 @@
       "source_title_id": "4526",
       "release_year": 2014,
       "year": 2014
+    },
+    {
+      "title": "劇場版 空の境界",
+      "date": "2026-11-11",
+      "time": "20:00",
+      "event": "tv",
+      "service": "ABEMA特設その他",
+      "program": "劇場版 空の境界",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724935",
+      "source_title_id": "1536",
+      "release_year": 2007,
+      "year": 2007
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -783,6 +832,39 @@
       "year": 2017
     },
     {
+      "title": "劇場版 Fate/stay night[Heaven's Feel]",
+      "date": "2026-11-09",
+      "time": "20:00",
+      "event": "tv",
+      "service": "ABEMA特設その他",
+      "program": "劇場版 Fate/stay night[Heaven's Feel]",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724933",
+      "source_title_id": "4698",
+      "release_year": 2017,
+      "year": 2017
+    },
+    {
+      "title": "劇場版 魔法科高校の劣等生 星を呼ぶ少女",
+      "date": "2026-11-10",
+      "time": "16:20",
+      "event": "tv",
+      "service": "アニメLIVE2",
+      "program": "劇場版 魔法科高校の劣等生 星を呼ぶ少女",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724874",
+      "source_title_id": "5026",
+      "original_title": "The irregular at magic high school The Movie",
+      "release_year": 2017,
+      "year": 2017
+    },
+    {
       "title": "楽園追放 -Expelled from Paradise-",
       "date": "2026-11-11",
       "time": "19:00",
@@ -797,6 +879,22 @@
       "source_title_id": "4526",
       "release_year": 2014,
       "year": 2014
+    },
+    {
+      "title": "劇場版 空の境界",
+      "date": "2026-11-11",
+      "time": "20:00",
+      "event": "tv",
+      "service": "ABEMA特設その他",
+      "program": "劇場版 空の境界",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "source_id": "syoboi_calendar",
+      "collection_method": "automated_public_api",
+      "source_program_id": "724935",
+      "source_title_id": "1536",
+      "release_year": 2007,
+      "year": 2007
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",

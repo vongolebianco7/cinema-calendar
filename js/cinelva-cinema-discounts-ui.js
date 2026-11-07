@@ -152,6 +152,15 @@
    const scheduleEqualize=()=>window.requestAnimationFrame(()=>host._equalizeDiscountDays?.());
    window.addEventListener('resize',scheduleEqualize,{passive:true});
    window.addEventListener('orientationchange',scheduleEqualize,{passive:true});
+   const calendar=host.querySelector('#discountCalendar');
+   let lastCalendarWidth=calendar?.getBoundingClientRect().width||0;
+   if(calendar&&window.ResizeObserver){
+    host._discountResizeObserver=new ResizeObserver(entries=>{
+     const width=entries[0]?.contentRect?.width??calendar.getBoundingClientRect().width;
+     if(Math.abs(width-lastCalendarWidth)>0.5){lastCalendarWidth=width;scheduleEqualize();}
+    });
+    host._discountResizeObserver.observe(calendar);
+   }
    host._discountResizeBound=true;
   }
   equalizeDiscountDays();

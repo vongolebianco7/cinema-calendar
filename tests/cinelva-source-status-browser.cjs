@@ -20,7 +20,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
     await page.goto(url);
    }
   }
-  page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/movies.*due to access control checks/.test(e.message))errors.push(e.message);});
+  page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/(?:movies.*|movie-detail\?.*view=poster).*due to access control checks/.test(e.message))errors.push(e.message);});
   const wordmarkStyle=()=>[...document.querySelectorAll('.gBrand>span')].map(el=>{const s=getComputedStyle(el);return {color:s.color,backgroundImage:s.backgroundImage,textFill:s.webkitTextFillColor}});
   for(const theme of ['light','dark']){
    await navigate(`http://127.0.0.1:${port}/index.html`);

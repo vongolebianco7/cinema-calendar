@@ -203,15 +203,16 @@
   function decorateThemePreviews(){document.querySelectorAll('.templatePreview:not(.cinemaTemplatePreview)').forEach(preview=>{if(preview.querySelector('.previewDecor'))return;const decor=document.createElement('span');decor.className='previewDecor';decor.setAttribute('aria-hidden','true');preview.prepend(decor)})}
   function markEditorRanking(){document.getElementById('list')?.classList.add('editorRankingFixedTwoColumn')}
   function bindExportControlsToEnhancedRender(){['format','layout','fontSize'].forEach(id=>{const control=document.getElementById(id);if(control)control.onchange=()=>scheduleArtworkRender(0)})}
+  function bindMyRatingToggle(){const toggle=document.getElementById('showMyRating');if(toggle)toggle.addEventListener('change',()=>scheduleArtworkRender(0))}
   function bindLightweightTextInputs(){['title','sub'].forEach(id=>{const control=document.getElementById(id);if(control)control.oninput=()=>scheduleArtworkRender(90)})}
 
   function mount(){
-    strengthenArtworkTypography();removePosterExplanationCopy();removeDeprecatedTemplates();mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();bindLightweightTextInputs();
+    strengthenArtworkTypography();removePosterExplanationCopy();removeDeprecatedTemplates();mountFontPicker();mountCinemaTemplates();decorateThemePreviews();markEditorRanking();bindExportControlsToEnhancedRender();bindMyRatingToggle();bindLightweightTextInputs();
     scheduleArtworkRender(0);scheduleDirectorHydration();markEditorRanking();
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20261107-rounded-font';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20261107-my-rating';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,scheduleDirectorHydration,mountFontPicker,mountCinemaTemplates,removeDeprecatedTemplates,markEditorRanking,bindExportControlsToEnhancedRender,bindLightweightTextInputs,scheduleArtworkRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

@@ -5,7 +5,7 @@ const artPalettes = {
   burgundy: {bg:'#57252d', fg:'#f7eee4', muted:'#d4bdb2', line:'#87505a', accent:'#c89a68', border:'#a66f52', dark:true},
   bluegray: {bg:'#d9dfe3', fg:'#1d2730', muted:'#697681', line:'#aab4bb', accent:'#827665', border:'#8c9296', dark:false}
 };
-let artworkFile=null, artworkRevision=0, artworkURL=null;
+let artworkFile=null, artworkRevision=0, artworkURL=null, artworkRatingLookup=new Map();
 const artValue=id=>document.getElementById(id)?.value||'';
 const artDisplay='"Bodoni 72",Didot,"Hoefler Text","Times New Roman",serif';
 const artBodySerif='"Iowan Old Style",Palatino,"Palatino Linotype","Yu Mincho",serif';
@@ -149,8 +149,9 @@ const artworkImages=new Map();
 let artworkMovies=[];
 const officialEmblem='assets/cinelva_original_colors_transparent.png';
 const posterRecoveryRequests=new Set();
+const missingPosterRecoveryAttempts=new Set();
 function artworkImage(url,movie=null){
-  if(!url)return null;
+  if(!url){if(movie)recoverPoster(movie,'');return null;}
   if(artworkImages.has(url))return artworkImages.get(url);
   const image=new Image();image.crossOrigin='anonymous';
   artworkImages.set(url,image);
@@ -162,9 +163,26 @@ function artworkImage(url,movie=null){
   return image;
 }
 function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
+function validMyRating(value){if(value===null||value===undefined||value==='')return null;const rating=Number(value);return Number.isFinite(rating)&&rating>=0&&rating<=5?rating:null}
+function artworkMovieId(movie){return String(movie?.tmdbId||movie?.tmdb_id||movie?.id||'')}
+function buildArtworkRatingLookup(movies){
+  const lookup=new Map();
+  (movies||[]).forEach(movie=>{const rating=validMyRating(movie?.myRating??movie?.rating),id=artworkMovieId(movie);if(id&&rating!==null)lookup.set(id,rating)});
+  try{
+    const records=window.CinelvaLibraryRecords?.all?.()||[];
+    records.forEach(record=>{const rating=validMyRating(record?.rating),id=String(record?.tmdbId||record?.tmdb_id||record?.id||'');if(id)lookup.set(id,rating)});
+  }catch{}
+  return lookup;
+}
+function artworkRating(movie){
+  const id=artworkMovieId(movie),saved=id?artworkRatingLookup.get(id):undefined;
+  return saved!==undefined?saved:validMyRating(movie?.myRating??movie?.rating);
+}
+
 async function recoverPoster(movie,failedUrl){
   const id=Number(movie.tmdbId||(movie.source==='tmdb'?movie.id:0));
   if(!Number.isInteger(id)||id<1||posterRecoveryRequests.has(id))return;
+  if(!failedUrl){if(missingPosterRecoveryAttempts.has(id))return;missingPosterRecoveryAttempts.add(id)}
   posterRecoveryRequests.add(id);
   try{const response=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?id='+id);if(!response.ok)return;const data=await response.json(),poster=data?.movie?.poster;if(!poster||poster===movie.poster)return;movie.poster=poster;artworkImages.delete(failedUrl);drawArtwork(artworkMovies)}catch{}finally{posterRecoveryRequests.delete(id)}
 }
@@ -176,6 +194,7 @@ function posterArtworkUrl(movie){
   }
   return '';
 }
+function artworkMovieTitle(movie){const original=String(movie?.original_title||movie?.originalTitle||movie?.original_name||'').trim();return artValue('artworkTitleMode')==='original'&&original?original:String(movie?.title||'')}
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
   const rankWidth=columns===2?98:94;
   const posterHeight=Math.min(height-16,columns===2?204:132),posterWidth=posterHeight*2/3;
@@ -184,10 +203,17 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
   if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
   const size=(columns===2?(shape==='portrait'?54:36):(shape==='portrait'?50:28))*fontScale;
-  const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
-  const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
+  const rating=artworkRating(m),showRating=!!document.getElementById('showMyRating')?.checked&&rating!==null;
+  const ratingHeight=showRating?30:0,titleRegionHeight=height-12-ratingHeight;
+  const maxLines=Math.max(1,Math.min(4,Math.floor((titleRegionHeight-18)/(size*1.12))));
+  const title=artworkMovieTitle(m);
+  const fit=fittedLines(ctx,title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;
-  writeLines(ctx,m.title,tx,y+(height-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+  writeLines(ctx,title,tx,y+(titleRegionHeight-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+  if(showRating){
+    ctx.save();ctx.fillStyle=p.accent;ctx.font=`700 ${columns===2?17:19}px ${artSans}`;ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.fillText('MY評価 '+rating.toFixed(1),tx,y+height-ratingHeight/2);ctx.restore();
+  }
 }
 function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal;
@@ -200,17 +226,16 @@ function drawBrand(ctx,w,h,theme,y=h-98){
   ctx.font='600 9px '+artSans;ctx.fillText('EXPLORE CINEMA',x+tile+gap,y+tile-3);ctx.restore();
 }
 function layoutMetrics(shape,columns,theme){
-  if(shape==='portrait')return {titleY:112,titleSize:theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize,listTop:theme==='minimal'?minimalPortraitListTop:portraitListTop,rowH:theme==='minimal'?minimalPortraitRowHeight:(columns===2?286:148),footerGap:theme==='minimal'?minimalFooterGap:portraitFooterGap,pad:128};
-  if(shape==='square')return {titleY:96,titleSize:58,listTop:222,rowH:columns===2?220:110,footerGap:42,pad:118};
-  return {titleY:66,titleSize:46,listTop:182,rowH:columns===2?136:68,footerGap:30,pad:104};
+  return {titleY:112,titleSize:theme==='minimal'?minimalPortraitTitleSize:portraitTitleSize,listTop:theme==='minimal'?minimalPortraitListTop:portraitListTop,rowH:theme==='minimal'?minimalPortraitRowHeight:(columns===2?286:148),footerGap:theme==='minimal'?minimalFooterGap:portraitFooterGap,pad:128};
 }
 function drawArtwork(movies){
   artworkMovies=(movies||[]).slice(0,10);
+  artworkRatingLookup=buildArtworkRatingLookup(artworkMovies);
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
-  const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
+  const shape='portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
   const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
-  c.width=1600;c.height=shape==='landscape'?1000:2000;
+  c.width=1600;c.height=2000;
   const w=c.width,h=c.height;
   const columns=layout==='double'?2:1;
   const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
@@ -250,7 +275,7 @@ function drawArtwork(movies){
   rule(ctx,pad,listBottom,inner,p.line,theme==='minimal'?.22:.30);
   const footerY=Math.min(h-92,listBottom+metrics.footerGap);
   drawBrand(ctx,w,h,theme,footerY);
-  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+m.title).join('、'));
+  c.setAttribute('aria-label',title+'。'+items.map((m,i)=>(i+1)+'位 '+artworkMovieTitle(m)).join('、'));
   artworkFile=null;document.getElementById('share').disabled=true;
   const revision=++artworkRevision;
   c.toBlob(blob=>{if(!blob||revision!==artworkRevision||!artworkReady())return;artworkFile=new File([blob],'my-cinelva.png',{type:'image/png'});document.getElementById('share').disabled=false},'image/png');
@@ -261,9 +286,9 @@ function openImageForSaving(){if(!artworkReady()){document.getElementById('msg')
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
 window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
-  s.src='js/my-cinemap-tools.js?v=20261107-rounded-font';
+  s.src='js/my-cinemap-tools.js?v=20261107-my-rating';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-rounded-font';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-my-rating';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

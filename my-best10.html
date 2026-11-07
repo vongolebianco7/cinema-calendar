@@ -87,6 +87,13 @@ body .move button,body .remove{background:var(--line);color:var(--ink)}
 .best10ConfirmActions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .best10ConfirmActions button{min-height:44px;padding:10px 14px;border-radius:7px;cursor:pointer;font:600 13px system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
 @media(max-width:600px){.best10RankHeader{align-items:flex-start}.best10FillBtn{width:100%}.best10ConfirmActions button{flex:1}.results{max-height:42vh}.result{grid-template-columns:44px minmax(0,1fr)}.result img,.resultPosterPlaceholder{width:42px;height:62px}.result .assistRow{grid-column:2}.result button{flex:1}}
+</style><style id="best10-horizontal-candidates">
+#list{display:flex;flex-wrap:nowrap;gap:8px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:4px 1px 8px;overscroll-behavior-x:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+#list>.item{flex:0 0 min(78vw,280px);min-width:220px;max-width:280px;grid-template-columns:24px 38px minmax(0,1fr) auto;gap:6px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:9px;scroll-snap-align:start}
+#list>.item img{width:38px;max-height:57px;object-fit:cover}
+#list>.item .move{display:flex;flex-wrap:nowrap;gap:3px}
+#list>.item .move button,#list>.item .remove{width:32px;height:36px;min-height:36px;padding:0;display:grid;place-items:center}
+@media(max-width:600px){#list>.item{flex-basis:min(82vw,260px);min-width:210px}}
 </style></head><body><header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
  <form class="gSearchForm" action="search.html" method="get">

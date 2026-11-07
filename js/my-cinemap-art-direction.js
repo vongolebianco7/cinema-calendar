@@ -211,7 +211,7 @@
   }
 
   const renderer=document.createElement('script');
-  renderer.src='js/my-cinemap-cinema-templates.js?v=20261031-mobile-feedback';
+  renderer.src='js/my-cinemap-cinema-templates.js?v=20261107-rounded-font';
   renderer.defer=true;renderer.onload=mount;renderer.onerror=mount;document.body.appendChild(renderer);
   window.CinemapArtDirection={hydrateMissingDirectors,scheduleDirectorHydration,mountFontPicker,mountCinemaTemplates,removeDeprecatedTemplates,markEditorRanking,bindExportControlsToEnhancedRender,bindLightweightTextInputs,scheduleArtworkRender,strengthenArtworkTypography,removePosterExplanationCopy};
 })();

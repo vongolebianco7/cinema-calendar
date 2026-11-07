@@ -17,11 +17,13 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1});
   // Do not mutate the user's real local storage, reviews or bookmarks.
   for(const theme of ['light','dark']){
-   const page=await context.newPage();
-   // The init script runs before <html> exists. The application reads this
-   // preference during startup and applies its theme after document creation.
-   await page.addInitScript(t=>localStorage.setItem('cinelva-theme',t),theme);
    for(const route of routes){
+    // Give every route its own page so delayed work from a previous navigation
+    // cannot be reported as a runtime error on the next route.
+    const page=await context.newPage();
+    // The init script runs before <html> exists. The application reads this
+    // preference during startup and applies its theme after document creation.
+    await page.addInitScript(t=>localStorage.setItem('cinelva-theme',t),theme);
     const slug=route.replace(/[^a-z0-9]+/gi,'-');
     const id=slug+'-'+width+'-'+theme;
     const entry={route,width,theme,browser:browserName,issues:[]};
@@ -48,8 +50,8 @@ try{
     page.off('pageerror',onPageError);
     report.push(entry);
     if(entry.issues.length)failures.push(id+': '+entry.issues.join('; '));
+    await page.close();
    }
-   await page.close();
   }
   await context.close();
  }

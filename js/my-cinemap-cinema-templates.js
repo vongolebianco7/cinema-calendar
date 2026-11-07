@@ -135,6 +135,7 @@
 
   drawArtwork=function(movies){
     artworkMovies=(movies||[]).slice(0,10);
+    artworkRatingLookup=buildArtworkRatingLookup(artworkMovies);
     const theme=artValue('theme')||'minimal';
     if(!theme.startsWith('cinema-'))return originalDrawArtwork(movies);
     renderCinemaTemplate(movies,theme);

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1819d8a0adb790ed3cf199417193eedf45ffc5c1",
-  "verified_at": "2026-11-07T10:08:00Z",
-  "note": "Receipt-only release proof refresh. PR #693 exact-head required workflows passed; its executable source including the Japanese rounded-gothic My Best 10 font choice and cache-busted script references is byte-identical to current main."
+  "head_sha": "81120b22fa4659c9f379b0287ae19e50efac2007",
+  "verified_at": "2026-11-07T14:13:38Z",
+  "note": "Receipt-only release proof refresh. PR #703 exact-head required workflows (Autonomous quality, smoke, frontend Chromium/WebKit, backend build) passed; executable source matches this checked PR source tree."
 }

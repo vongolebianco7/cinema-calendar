@@ -17,13 +17,19 @@ test('Best10 rejects conflicting explicit TMDB identity metadata',async()=>{
 });
 test('Best10 resolves one exact catalog title/year without treating local ID as TMDB',async()=>{
  const result=await hydrate([{id:'local-1',title:fight.title,year:1999}],[fight],fight);
- assert.equal(result.picks[0].poster,'https://image.tmdb.org/t/p/w342/fight.jpg');assert.equal(result.calls.length,0);
+ assert.equal(result.picks[0].poster,'https://image.tmdb.org/t/p/w342/fight.jpg');assert.equal(result.calls.length,0);assert.deepEqual(result.saved,[]);
 });
 test('Best10 remote fallback requires explicit ID plus corroborating title/year',async()=>{
  const result=await hydrate([{id:'local',tmdbId:550,title:fight.title,year:1999}],[],fight);
- assert.equal(result.calls.length,1);assert.equal(result.picks[0].poster,'https://image.tmdb.org/t/p/w342/fight.jpg');
+ assert.equal(result.calls.length,1);assert.equal(result.picks[0].poster,'https://image.tmdb.org/t/p/w342/fight.jpg');assert.deepEqual(result.saved,[]);
 });
 test('Best10 ambiguous title/year catalog matches remain unresolved',async()=>{
  const result=await hydrate([{id:'local',title:fight.title,year:1999}],[fight,{...fight,id:551,tmdbId:551,poster:'/other.jpg'}],fight);
  assert.equal(result.picks[0].poster,undefined);assert.equal(result.saved.length,0);
+});
+
+test('poster fallback never writes a partial Best 10 selection over canonical viewing records',()=>{
+ const artwork=fs.readFileSync('js/my-cinemap-art.js','utf8');
+ assert.doesNotMatch(source,/localStorage\.setItem\(['"]cinemap-my-list/);
+ assert.doesNotMatch(artwork,/localStorage\.setItem\(['"]cinemap-my-list/);
 });

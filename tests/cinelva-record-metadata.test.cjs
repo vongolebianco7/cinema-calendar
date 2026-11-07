@@ -25,3 +25,10 @@ test('imported records use their explicit film identity for metadata and retain 
     assert.equal(JSON.stringify(record), before);
   }
 });
+
+const cardSource=source.slice(source.indexOf('  function card(movie)'),source.indexOf('  let visibleReviewQueue'));
+test('record cards and movie search candidates expose known runtime and full release date',()=>{
+ assert.match(cardSource,/movie\.runtime/);assert.match(cardSource,/movieFacts/);assert.match(cardSource,/releaseDate/);
+ assert.match(source,/Number\(movie\.runtime\|\|metadata\.runtime\)>0/);
+ assert.match(source,/date\.replaceAll\('-','\/'\)/);
+});

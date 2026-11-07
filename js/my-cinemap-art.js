@@ -5,7 +5,7 @@ const artPalettes = {
   burgundy: {bg:'#57252d', fg:'#f7eee4', muted:'#d4bdb2', line:'#87505a', accent:'#c89a68', border:'#a66f52', dark:true},
   bluegray: {bg:'#d9dfe3', fg:'#1d2730', muted:'#697681', line:'#aab4bb', accent:'#827665', border:'#8c9296', dark:false}
 };
-let artworkFile=null, artworkRevision=0, artworkURL=null;
+let artworkFile=null, artworkRevision=0, artworkURL=null, artworkRatingLookup=new Map();
 const artValue=id=>document.getElementById(id)?.value||'';
 const artDisplay='"Bodoni 72",Didot,"Hoefler Text","Times New Roman",serif';
 const artBodySerif='"Iowan Old Style",Palatino,"Palatino Linotype","Yu Mincho",serif';
@@ -162,6 +162,22 @@ function artworkImage(url,movie=null){
   return image;
 }
 function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
+function validMyRating(value){if(value===null||value===undefined||value==='')return null;const rating=Number(value);return Number.isFinite(rating)&&rating>=0&&rating<=5?rating:null}
+function artworkMovieId(movie){return String(movie?.tmdbId||movie?.tmdb_id||(movie?.source==='tmdb'?movie?.id:'')||'')}
+function buildArtworkRatingLookup(movies){
+  const lookup=new Map();
+  (movies||[]).forEach(movie=>{const rating=validMyRating(movie?.myRating??movie?.rating),id=artworkMovieId(movie);if(id&&rating!==null)lookup.set(id,rating)});
+  try{
+    const records=window.CinelvaLibraryRecords?.all?.()||[];
+    records.forEach(record=>{const rating=validMyRating(record?.rating),id=String(record?.tmdbId||record?.tmdb_id||record?.id||'');if(id&&rating!==null)lookup.set(id,rating)});
+  }catch{}
+  return lookup;
+}
+function artworkRating(movie){
+  const id=artworkMovieId(movie),saved=id?artworkRatingLookup.get(id):undefined;
+  return saved!==undefined?saved:validMyRating(movie?.myRating??movie?.rating);
+}
+
 async function recoverPoster(movie,failedUrl){
   const id=Number(movie.tmdbId||(movie.source==='tmdb'?movie.id:0));
   if(!Number.isInteger(id)||id<1||posterRecoveryRequests.has(id))return;
@@ -184,10 +200,16 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
   if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
   const size=(columns===2?(shape==='portrait'?54:36):(shape==='portrait'?50:28))*fontScale;
-  const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
+  const rating=artworkRating(m),showRating=!!document.getElementById('showMyRating')?.checked&&rating!==null;
+  const ratingHeight=showRating?30:0,titleRegionHeight=height-12-ratingHeight;
+  const maxLines=Math.max(1,Math.min(4,Math.floor((titleRegionHeight-18)/(size*1.12))));
   const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;
-  writeLines(ctx,m.title,tx,y+(height-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+  writeLines(ctx,m.title,tx,y+(titleRegionHeight-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
+  if(showRating){
+    ctx.save();ctx.fillStyle=p.accent;ctx.font=`700 ${columns===2?17:19}px ${artSans}`;ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.fillText('MY評価 '+rating.toFixed(1),tx,y+height-ratingHeight/2);ctx.restore();
+  }
 }
 function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal;
@@ -206,6 +228,7 @@ function layoutMetrics(shape,columns,theme){
 }
 function drawArtwork(movies){
   artworkMovies=(movies||[]).slice(0,10);
+  artworkRatingLookup=buildArtworkRatingLookup(artworkMovies);
   const c=document.getElementById('artCanvas'),ctx=c.getContext('2d');
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;

@@ -43,7 +43,8 @@
     }else{
       g.addColorStop(0,'rgba(249,244,234,0)');g.addColorStop(.32,'rgba(249,244,234,.78)');g.addColorStop(1,'rgba(249,244,234,.94)');
     }
-    ctx.save();ctx.fillStyle=g;ctx.fillRect(70,top,w-140,bottom-top);ctx.restore();
+    const width=242;
+    ctx.save();ctx.fillStyle=g;ctx.fillRect((w-width)/2,top,width,bottom-top);ctx.restore();
   }
 
   drawBrand=function(ctx,w,h,theme,y){

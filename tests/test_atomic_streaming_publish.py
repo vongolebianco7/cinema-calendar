@@ -17,7 +17,7 @@ class AtomicStreamingPublishTests(unittest.TestCase):
         root = Path(directory) / "data"
         root.mkdir()
         records = {
-            "streaming_sources.json": {"services": [{"name": "Netflix"}]},
+            "streaming_sources.json": {"services": [{"name": "Netflix", "official_url": "https://example.org/official"}]},
             "streaming.json": {"generated_at": "original", "movies": []},
             "streaming_announcements.json": {"movies": [{
                 "title": "Verified Example", "service": "Netflix",

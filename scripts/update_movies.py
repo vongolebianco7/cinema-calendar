@@ -1,4 +1,5 @@
 import os,json,urllib.request,urllib.parse,datetime,re,html,difflib,time
+from atomic_json import write_json_atomic
 KEY=os.environ["TMDB_API_KEY"]; BASE="https://api.themoviedb.org/3"
 MAX_TMDB_REQUESTS=180
 TMDB_REQUESTS=0
@@ -306,8 +307,7 @@ if tv_updated:
 # The editorial source's generated_at is preserved so stale official release dates
 # remain detectable even when the main movie snapshot is refreshed daily.
 if stream_movies != streaming.get("movies", []):
- with open("data/streaming.json", "w", encoding="utf-8") as fh:
-  json.dump({**streaming, "movies":stream_movies}, fh, ensure_ascii=False, indent=2)
+ write_json_atomic("data/streaming.json", {**streaming, "movies":stream_movies})
 
 # Emit honest freshness metadata for diagnostics. A refreshed TMDB availability
 # snapshot is NOT evidence that official streaming premieres have been updated.
@@ -358,5 +358,5 @@ try:
 except Exception:
  pass
 
-with open("data/movies.json","w",encoding="utf-8") as fh: json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events},fh,ensure_ascii=False,indent=2)
+write_json_atomic("data/movies.json", {"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"note":"Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.","movies":events})
 print("TMDB requests used:",TMDB_REQUESTS,"/",MAX_TMDB_REQUESTS)

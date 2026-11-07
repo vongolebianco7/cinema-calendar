@@ -19,6 +19,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});
    for(const mode of ['theatrical','streaming','tv']){
     await page.locator(`.modeTab[data-mode="${mode}"]`).click();await page.locator('.calendar [data-now-film-id="42"] > .cinelva-now-playing-label').first().waitFor();
+    if(mode==='streaming')assert.ok(await page.locator('.calendar .streamMovieTitle').filter({hasText:'上映中確認作品'}).count()>0,'a published streaming event reaches the user-facing calendar');
     assert.equal(await page.locator('[data-now-film-id="43"] > .cinelva-now-playing-label').count(),0);
     assert.equal(await page.locator('.cinelva-now-playing-label .cinelva-now-playing-label').count(),0);
     assert.equal(await page.locator('.calendar [data-now-film-id="42"] .cinelva-now-playing-label').first().innerText(),'上映中');

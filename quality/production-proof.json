@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "44864827114946237f68a6f334f61cdc7a6b1195",
-  "verified_at": "2026-11-07T21:09:05.131Z",
-  "note": "Receipt-only refresh for PR #703 after Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed on the exact source head. Executable source is unchanged."
+  "head_sha": "54aaa77c6c547d218c655dba72cc13b08a9931ac",
+  "verified_at": "2026-11-07T21:41:15Z",
+  "note": "Receipt-only refresh for PR #712 after all four required exact-head workflows passed. Production executable source is unchanged from the tested source."
 }

@@ -4,7 +4,11 @@ The ingestion tests were introduced in separate PRs; merging/rebasing must
 retain every check, even if the gate's command list is reorganized.
 """
 import ast
+import os
 from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import unittest
 
 GATE = Path(__file__).resolve().parents[1] / "scripts" / "quality_gate.py"
@@ -41,6 +45,19 @@ class StreamingQualityGateContract(unittest.TestCase):
             with self.subTest(module=module):
                 self.assertTrue((root / (module.replace(".", "/") + ".py")).is_file(),
                                 f"Missing contract module: {module}")
+
+    def test_streaming_poster_test_uses_file_discovery_when_an_external_tests_package_exists(self):
+        root = GATE.parent.parent
+        with tempfile.TemporaryDirectory() as directory:
+            external = Path(directory) / "tests"
+            external.mkdir()
+            (external / "__init__.py").write_text("# Simulate a preinstalled top-level tests package.\n", encoding="utf-8")
+            env = {**os.environ, "PYTHONPATH": directory}
+            command = [sys.executable, "-m", "unittest", "discover", "-s", "tests",
+                       "-p", "test_streaming_poster_enrichment.py", "-v"]
+            result = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("test_unique_exact_title_adds_tmdb_poster_and_movie_identity", result.stderr)
 
 
 if __name__ == "__main__":

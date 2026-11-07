@@ -123,3 +123,21 @@
 #discounts .discountVisuallyHidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:650px){#discounts .discountCalendar{grid-template-columns:minmax(0,1fr)}#discounts .discountTable .discountDetailButton{min-height:44px;font-size:12px}}
 @media(max-width:360px){#discounts .discountDay{grid-template-columns:minmax(0,1fr)}#discounts .discountDay .discountDayDate{grid-column:1;grid-row:auto;display:flex;align-items:baseline;gap:6px}#discounts .discountDay .discountDayDate small{margin:0}#discounts .discountDay .discountPublicLabel,#discounts .discountDay .discountCalendarRanks,#discounts .discountDay .discountConditional{grid-column:1}}
+
+#discounts .discountCalendar{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#discounts .discountWeek{display:grid;align-content:start;gap:6px;min-width:0}
+#discounts .discountWeek h3{margin:0 0 4px;font-size:14px}
+#discounts .discountDay{width:100%;grid-template-columns:minmax(0,1fr);padding:8px;min-height:44px}
+#discounts .discountDay :is(.discountDayDate,.discountPublicLabel,.discountCalendarRanks,.discountConditional){grid-column:1;grid-row:auto}
+#discounts .discountDay .discountDayDate{display:flex;align-items:baseline;gap:5px}
+#discounts .discountDay .discountLowestBadge{top:8px;left:auto;right:6px;transform:none}
+#discounts .discountCalendarRanks>span{grid-template-columns:12px minmax(0,1fr) auto}
+#discounts .discountCalendarRanks strong{white-space:normal;overflow-wrap:anywhere}
+#discounts .discountCalendarRanks small{grid-column:2;grid-row:2;text-align:left}
+#discounts .discountCalendarRanks b{grid-column:3;grid-row:1}
+#discounts #discountSummary{scroll-margin-top:72px}
+#discounts .discountPriceBadge{display:inline-block;color:var(--text,inherit);background:var(--bg);border:1px solid var(--accent);border-radius:4px;padding:1px 5px;margin:0 4px 5px 0}
+#discounts .discountTable tbody .discountLowestPrice{outline:2px solid var(--accent);outline-offset:-2px}
+#discounts .discountOfferFacts{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;font-size:13px}
+#discounts .discountOfferFacts th,#discounts .discountOfferFacts td{padding:7px 4px;border-bottom:1px solid var(--line);overflow-wrap:anywhere;vertical-align:top}
+#discounts .discountOfferFacts th[scope=row]{width:29%}

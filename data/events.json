@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24",
+  "generated_at": "2026-11-07",
   "note": "公式発表で日程を確認できた国内・海外の主要映画祭／映画関連イベント。日程は変更される場合があります。",
   "events": [
     {
@@ -331,9 +331,57 @@
       "service": "国内映画祭",
       "scope": "domestic",
       "venue": "福岡市美術館 ミュージアムホール",
-      "source": "主催・会場公式発表",
-      "source_url": "https://fcaf.jp/program/detail.php?id=1561",
-      "checked_at": "2026-10-22"
+      "source": "ふくおか県芸術文化祭 公式",
+      "source_url": "https://geibunsai-fukuoka.jp/events/detail/3b6c0dd3-55ed-450c-a5e5-bb8af182ea2d",
+      "checked_at": "2026-11-07",
+      "overview": "自主製作映画の上映、コンペティション、ゲストトーク。",
+      "timezone": "Asia/Tokyo",
+      "collection_method": "manual_official_announcement"
+    },
+    {
+      "title": "Tokyo Immersive Film Festival 2026",
+      "date": "2026-12-04",
+      "end_date": "2026-12-06",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "東京大学 生産技術研究所 S棟ホール・ギャラリー",
+      "source": "東京大学 生産技術研究所 公式",
+      "source_url": "https://www.iis.u-tokyo.ac.jp/ja/news/5177/",
+      "overview": "イマーシブ作品の上映・展示。無料・事前予約制。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-11-07",
+      "collection_method": "manual_official_announcement"
+    },
+    {
+      "title": "京都映画月間 2026",
+      "date": "2026-12-04",
+      "end_date": "2026-12-20",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "京都市内各会場",
+      "source": "京都市 公式",
+      "source_url": "https://www.city.kyoto.lg.jp/bunshi/page/0000359280.html",
+      "overview": "京都市・京都府等の映画関連催事を連携開催。詳細は各催事の公式案内を確認してください。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-11-07",
+      "collection_method": "manual_official_announcement"
+    },
+    {
+      "title": "カンヌ監督週間 in Tokio 2026",
+      "date": "2026-12-05",
+      "end_date": "2026-12-17",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "ヒューマントラストシネマ渋谷",
+      "source": "映像産業振興機構（VIPO）公式",
+      "source_url": "https://www.vipo.or.jp/news/69093/",
+      "overview": "13作品上映。12月8日に関連トークイベントも開催予定。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-11-07",
+      "collection_method": "manual_official_announcement"
     },
     {
       "title": "東京コミコン2026",
@@ -346,6 +394,21 @@
       "source": "東京コミコン 公式",
       "source_url": "https://tokyocomiccon.jp/topics",
       "overview": "映画・コミックなどの最新情報、展示、ステージを行うポップカルチャーイベント。"
+    },
+    {
+      "title": "第18回京都ヒストリカ国際映画祭",
+      "date": "2026-12-13",
+      "end_date": "2026-12-20",
+      "event": "festival",
+      "service": "国内映画祭",
+      "scope": "domestic",
+      "venue": "京都文化博物館",
+      "source": "京都ヒストリカ国際映画祭 公式",
+      "source_url": "https://historica-kyoto.com/",
+      "overview": "12月14日は休館。企画により料金が異なります。",
+      "timezone": "Asia/Tokyo",
+      "checked_at": "2026-11-07",
+      "collection_method": "manual_official_announcement"
     },
     {
       "title": "第84回ゴールデングローブ賞",
@@ -434,9 +497,9 @@
     }
   ],
   "discovery_count": 0,
-  "last_attempt_at": "2026-10-29",
+  "last_attempt_at": "2026-11-07",
   "verified_count": 0,
-  "curated_count": 13,
+  "curated_count": 18,
   "collection_mode": "manual_only",
   "automation_status": "disabled_pending_licensed_feed"
 }

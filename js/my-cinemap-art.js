@@ -15,7 +15,9 @@ const artSans='"Avenir Next","Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo
 const artFonts={
   modern:{title:'Baskerville,"Times New Roman","Yu Mincho",serif',movie:'Baskerville,"Times New Roman","Yu Mincho",serif',titleWeight:500,movieWeight:600},
   clean:{title:artSans,movie:artSans,titleWeight:650,movieWeight:650},
-  classic:{title:'Georgia,"Times New Roman","Yu Mincho",serif',movie:'Georgia,"Times New Roman","Yu Mincho",serif',titleWeight:500,movieWeight:600}
+  // Keep the Japanese glyph fallback distinct too. Georgia and Baskerville
+  // only cover Latin well, so sharing Yu Mincho made Japanese lists look alike.
+  classic:{title:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',movie:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',titleWeight:500,movieWeight:600}
 };
 const portraitTitleSize=54;
 const portraitListTop=244;

@@ -443,6 +443,10 @@ function monthPageWeekCount(d){
 function monthVisibleBounds(d){
  return {start:new Date(d.getFullYear(),d.getMonth(),1),end:new Date(d.getFullYear(),d.getMonth()+1,0)}
 }
+function theatricalMoviesOverlappingWeek(rows,weekStart,weekEnd,monthStart,monthEnd){
+ const start=weekStart<monthStart?monthStart:weekStart,end=weekEnd>monthEnd?monthEnd:weekEnd;
+ return rows.filter(m=>m.date&&m.date<=isoOf(end)&&(m.end_date||m.date)>=isoOf(start))
+}
 function currentWeekStart(){
  const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d
 }
@@ -664,12 +668,12 @@ function renderCal(){cal.classList.remove("theatricalWeekMode");if(mode==="festi
   for(let w=0;w<weekCount;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
    let we=new Date(ws);we.setDate(ws.getDate()+6);
-   let weekMovies=filtered().filter(m=>{
-    return CinemapCalendarDedupe.inFirstVisibleWeek(m,isoOf(ws),isoOf(we),isoOf(firstWeek))
+   const visibleStart=ws<monthBounds.start?monthBounds.start:ws,visibleEnd=we>monthBounds.end?monthBounds.end:we;
+   let weekMovies=theatricalMoviesOverlappingWeek(filtered(),ws,we,monthBounds.start,monthBounds.end).filter(m=>{
+    return CinemapCalendarDedupe.inFirstVisibleWeek(m,isoOf(ws),isoOf(we),isoOf(monthBounds.start))
    });
    weekMovies=dedupeMorningTenWeek(weekMovies).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
    let groups=groupedMovieCards(weekMovies,"theatrical"),isCurrent=sameDay(ws,currentWeekStart());
-   const visibleStart=ws<monthBounds.start?monthBounds.start:ws,visibleEnd=we>monthBounds.end?monthBounds.end:we;
    out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(visibleStart.getMonth()+1)+'/'+visibleStart.getDate()+' 〜 '+(visibleEnd.getMonth()+1)+'/'+visibleEnd.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
   }
   out+='</div>';

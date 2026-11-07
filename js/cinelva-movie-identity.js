@@ -28,7 +28,8 @@
   function movieMetadata(m) {
     const runtime = Number(m?.runtime);
     const rawDate = String(m?.release_date || m?.releaseDate || m?.date || "").slice(0, 10);
-    const releaseDate = /^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate.replaceAll("-", "/") : "";
+    const yearOnly = String(m?.release_year || m?.year || rawDate.slice(0, 4)).trim();
+    const releaseDate = /^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate.replaceAll("-", "/") : /^\d{4}$/.test(yearOnly) ? `${yearOnly}年` : "";
     return [Number.isFinite(runtime) && runtime > 0 ? `${runtime}分` : "", releaseDate].filter(Boolean).join(" · ");
   }
   const positive = (v) =>

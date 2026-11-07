@@ -1,0 +1,74 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+
+const html = fs.readFileSync('index.html', 'utf8');
+const start = html.indexOf('function monthVisibleBounds(');
+assert.notEqual(start, -1, 'month boundary helper exists in production');
+const end = html.indexOf('\n}', start) + 2;
+const overlapStart = html.indexOf('function theatricalMoviesOverlappingWeek(');
+assert.notEqual(overlapStart, -1, 'theater week overlap helper exists in production');
+const overlapEnd = html.indexOf('\n}', overlapStart) + 2;
+const context = vm.createContext({ Date });
+vm.runInContext(html.slice(start, end) + '\n' + html.slice(overlapStart, overlapEnd), context);
+
+test('theater month bounds exclude adjacent month dates', () => {
+  for (const [year, month, expectedStart, expectedEnd] of [
+    [2026, 10, '2026-11-01', '2026-11-30'],
+    [2027, 1, '2027-02-01', '2027-02-28'],
+  ]) {
+    const bounds = context.monthVisibleBounds(new Date(year, month, 12));
+    const localDate = (value) => [value.getFullYear(), String(value.getMonth() + 1).padStart(2, '0'), String(value.getDate()).padStart(2, '0')].join('-');
+    assert.equal(localDate(bounds.start), expectedStart);
+    assert.equal(localDate(bounds.end), expectedEnd);
+  }
+});
+
+test('theater week results exclude adjacent-month films but keep screenings crossing month start', () => {
+  const rows = [
+    { title: 'October only', date: '2026-10-16', end_date: '2026-10-29' },
+    { title: 'Crosses into November', date: '2026-10-31', end_date: '2026-11-02' },
+    { title: 'November only', date: '2026-11-20' },
+    { title: 'December only', date: '2026-12-04' },
+  ];
+  const firstWeek = context.theatricalMoviesOverlappingWeek(rows, new Date(2026, 9, 26), new Date(2026, 10, 1), new Date(2026, 10, 1), new Date(2026, 10, 30));
+  assert.deepEqual(firstWeek.map((row) => row.title), ['Crosses into November']);
+  const lastWeek = context.theatricalMoviesOverlappingWeek(rows, new Date(2026, 10, 30), new Date(2026, 11, 6), new Date(2026, 10, 1), new Date(2026, 10, 30));
+  assert.deepEqual(lastWeek.map((row) => row.title), []);
+});
+
+test('theater month header and week labels are clipped to the selected month', () => {
+  assert.match(html, /monthBounds\.start\.getMonth\(\).*monthBounds\.start\.getDate\(\)/);
+  assert.match(html, /const visibleStart=ws<monthBounds\.start\?monthBounds\.start:ws,visibleEnd=we>monthBounds\.end\?monthBounds\.end:we/);
+  assert.match(html, /visibleStart\.getMonth\(\).*visibleEnd\.getMonth\(\)/);
+});
+
+test('calendar mode switching initializes the calendar before clearing the theater view class', () => {
+  const renderStart = html.indexOf('function renderCal(');
+  const renderEnd = html.indexOf('\n}', renderStart) + 2;
+  const render = html.slice(renderStart, renderEnd);
+  assert.ok(render.indexOf('let cal=document.querySelector(".calendar")') < render.indexOf('cal.classList.remove("theatricalWeekMode")'));
+});
+
+test('poster enrichment failure keeps the existing calendar snapshot available', async () => {
+  const fnStart = html.indexOf('async function hydrateMorningTenPosters(');
+  const fnEnd = html.indexOf('\n', fnStart);
+  const context = vm.createContext({
+    movies: [{ title: 'Fixture', special_screening: 'asa10', poster: '' }],
+    window: { CinelvaMovieIdentity: { fetchOne: async () => { throw new Error('offline'); } } },
+    morningTenQuery: (title) => title,
+    titleYearHint: () => '',
+    console: { warn() {} },
+  });
+  vm.runInContext(html.slice(fnStart, fnEnd), context);
+  await context.hydrateMorningTenPosters();
+  assert.equal(context.movies.length, 1);
+  assert.equal(context.movies[0].title, 'Fixture');
+  assert.match(html, /catch\(e\)\{console\.warn\("Calendar refresh failed; retaining last good movie snapshot",e\);if\(!movies\.length\)\$\("#dates"\)\.innerHTML/);
+});
+
+test('single-film weeks use a compact horizontal poster and details layout on mobile', () => {
+  assert.match(html, /\.calendar\.theatricalWeekMode \.streamingWeekMovies \.streamMovie:only-child\{display:grid;grid-template-columns:76px minmax\(0,1fr\)/);
+  assert.match(html, /@media\(max-width:760px\)[\s\S]*?\.calendar\.theatricalWeekMode \.streamingWeekFrame\{padding:6px\}/);
+});

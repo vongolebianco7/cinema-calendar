@@ -135,8 +135,9 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             movie["poster"] = IMAGE_BASE + identity["poster_path"]
             movie["id"] = int(identity["id"])
             movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(identity["id"])
-            if identity.get("release_date", "").startswith("18") or identity.get("release_date", "").startswith("19") or identity.get("release_date", "").startswith("20"):
-                movie.setdefault("release_year", int(identity["release_date"][:4]))
+            release_year = (identity.get("release_date") or "")[:4]
+            if release_year.isdigit() and 1888 <= int(release_year) <= 2100:
+                movie.setdefault("release_year", int(release_year))
             enriched += 1
         elif len(matches) > 1:
             ambiguous += 1

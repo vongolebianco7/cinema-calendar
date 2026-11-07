@@ -60,6 +60,13 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await page.locator('#gDrawer').getByRole('link',{name:'My Cinelva',exact:true}).click();
   await page.waitForURL('**/my-cinelva/');
   await navigate(`http://127.0.0.1:${port}/index.html`);
+  await page.locator('[data-mode="tv"]').click();
+  assert.ok((await page.locator('#calendarCoverage').innerText()).includes('地上波・BS/CS・配信チャンネルを含み'));
+  assert.match(await page.locator('#calendarCoverage').innerText(),/全国の全局・全作品を網羅していません/);
+  await page.locator('[data-mode="festival"]').click();
+  assert.equal(await page.locator('#calendarCoverage').innerText(), '日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。');
+  await page.locator('[data-mode="theatrical"]').click();
+  assert.match(await page.locator('#calendarCoverage').innerText(),/国内の劇場公開情報/);
   await page.locator('[data-mode="festival"]').click();
   assert.equal(await page.locator('.modeTab').count(),4);
   assert.equal(await page.locator('[data-mode="events"]').count(),0);

@@ -2,8 +2,8 @@ const fs=require('node:fs'),vm=require('node:vm'),test=require('node:test'),asse
 function renderer(){
  const calls={images:[],draws:[],text:[],fonts:[]};
  const ctx=new Proxy({save(){},restore(){},createLinearGradient(){return {addColorStop(){}}},measureText(s){return {width:String(s).length*22}},fillText(s){calls.text.push(String(s))},drawImage(img){calls.draws.push(img.src)}},{get(o,k){return k in o?o[k]:(()=>{})},set(o,k,v){if(k==='font')calls.fonts.push(String(v));o[k]=v;return true}});
- const canvas={getContext:()=>ctx,setAttribute(){},toBlob(cb){cb({})}};
- const elements={artCanvas:canvas,share:{},save:{},saveToPhotos:{},format:{value:'portrait'},layout:{value:'double'},theme:{value:'minimal'},fontSize:{value:'medium'},fontStyle:{value:'modern'},title:{value:'My Best 10'},sub:{value:''},cinemaBackground:{value:'none'}};
+ const canvas={getContext:()=>ctx,setAttribute(name,value){if(name==='aria-label')this.ariaLabel=value},toBlob(cb){cb({})}};
+ const elements={artCanvas:canvas,share:{},save:{},saveToPhotos:{},format:{value:'portrait'},layout:{value:'double'},theme:{value:'minimal'},fontSize:{value:'medium'},fontStyle:{value:'modern'},title:{value:'My Best 10'},sub:{value:''},cinemaBackground:{value:'none'},artworkTitleMode:{value:'japanese'}};
  class Image{constructor(){this.complete=false;calls.images.push(this)}set src(v){this._src=v}get src(){return this._src}}
  const context={document:{getElementById:id=>elements[id]||null},window:{addEventListener(){}},Image,File:function(){},URL:{},setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){return 1},picks:[]};context.window=context;context.addEventListener=()=>{};
  vm.createContext(context);vm.runInContext(fs.readFileSync('js/my-cinemap-art.js','utf8'),context);vm.runInContext(fs.readFileSync('js/my-cinemap-cinema-templates.js','utf8'),context);
@@ -19,6 +19,16 @@ test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
  assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-my-rating/);
 });
+
+test('Japanese/original title mode is honored by standard and cinema export templates',()=>{
+ const r=renderer(),movie={title:'日本語タイトル',original_title:'Original Title'};
+ r.elements.artworkTitleMode.value='original';r.context.drawArtwork([movie]);
+ assert.match(r.elements.artCanvas.ariaLabel,/Original Title/);
+ r.elements.theme.value='cinema-theater';r.context.drawArtwork([movie]);
+ assert.match(r.elements.artCanvas.ariaLabel,/Original Title/);
+ assert.doesNotMatch(r.elements.artCanvas.ariaLabel,/日本語タイトル/);
+});
+
 test('My Best 10 candidate cards fit a horizontal mobile scroller',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
  const css=html.match(/<style id="best10-horizontal-candidates">([\s\S]*?)<\/style>/)?.[1]||'';

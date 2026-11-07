@@ -160,9 +160,12 @@ function artworkImage(url){
 }
 function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
 function posterArtworkUrl(movie){
-  const raw=String(movie.poster||movie.posterUrl||movie.poster_path||'');
-  if(/^\/[A-Za-z0-9_-]+\.(?:jpg|jpeg|png|webp)$/i.test(raw))return 'https://image.tmdb.org/t/p/w342'+raw;
-  return /^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/[A-Za-z0-9_.-]+$/i.test(raw)?raw:'';
+  for(const value of [movie.poster,movie.posterUrl,movie.poster_path]){
+    const raw=String(value||'').trim();
+    const match=raw.match(/^(?:(?:https:)?\/\/image\.tmdb\.org\/t\/p\/(?:w\d+|original)|(?:w\d+|original))?\/([\w.-]+\.(?:jpg|jpeg|png|webp))(?:\?[^#\s]*)?$/i);
+    if(match)return 'https://image.tmdb.org/t/p/w342/'+match[1];
+  }
+  return '';
 }
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
   const rankWidth=columns===2?76:94;

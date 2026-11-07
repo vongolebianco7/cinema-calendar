@@ -7,8 +7,10 @@ This deliberately does not crawl or scrape third-party sites.
 import datetime
 import json
 import os
+import sys
 import tempfile
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from urllib.parse import urlparse
 from streaming_event_normalization import normalize_premieres
 

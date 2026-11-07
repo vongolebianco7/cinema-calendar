@@ -440,6 +440,9 @@ function monthPageEnd(d){
 function monthPageWeekCount(d){
  const a=monthPageStart(d),z=monthPageEnd(d);return Math.floor((z-a)/86400000/7)+1
 }
+function monthVisibleBounds(d){
+ return {start:new Date(d.getFullYear(),d.getMonth(),1),end:new Date(d.getFullYear(),d.getMonth()+1,0)}
+}
 function currentWeekStart(){
  const d=new Date(),wd=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-wd);return d
 }
@@ -550,7 +553,7 @@ function renderOutdoorCalendar(){
  document.querySelectorAll("[data-outdoor]").forEach(el=>el.onclick=()=>{const key=decodeURIComponent(el.dataset.outdoor);const group=all.find(g=>(g.event_id||g.name)===key);const target=[...document.querySelectorAll(".outdoorEventItem")].find(x=>x.querySelector("h3")?.textContent===group?.name);if(target)target.scrollIntoView({behavior:"smooth",block:"center"});else if(group?.service){const ev=festivalEvents.find(ev=>ev.title===group.name&&ev.date===group.first);if(ev)openMovie({...ev,start_date:ev.date,event:"festival"})}})
 }
 
-function renderCal(){if(mode==="festival"||mode==="events"){renderOutdoorCalendar();return;}
+function renderCal(){cal.classList.remove("theatricalWeekMode");if(mode==="festival"||mode==="events"){renderOutdoorCalendar();return;}
  let calendarPriorityBudget=12;
  function calendarThumbUrl(url){return String(url||"").replace(/\/(?:original|w780|w500|w342)\//,"/w185/")}
  function calendarImg(url){let priority=calendarPriorityBudget>0;calendarPriorityBudget--;return '<img src="'+calendarThumbUrl(url)+'" alt="" loading="'+(priority?'eager':'lazy')+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>'}
@@ -652,11 +655,11 @@ function renderCal(){if(mode==="festival"||mode==="events"){renderOutdoorCalenda
   return;
  }
  if(mode==="theatrical"){
-  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.add("streamingWeekMode");
+  cal.classList.remove("theatricalCompact");cal.classList.remove("festivalMode");cal.classList.add("streamingWeekMode","theatricalWeekMode");
   $("#weekdays").innerHTML="";
   if(!theatricalRangeStart)theatricalRangeStart=monthPageStart(view)
-  let firstWeek=new Date(theatricalRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view);
-  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(firstWeek.getMonth()+1)+"/"+firstWeek.getDate()+" 〜 "+(lastDay.getMonth()+1)+"/"+lastDay.getDate();
+  let firstWeek=new Date(theatricalRangeStart),lastDay=monthPageEnd(view),weekCount=monthPageWeekCount(view),monthBounds=monthVisibleBounds(view);
+  $("#month").textContent=view.getFullYear()+"年 "+(view.getMonth()+1)+"月 · "+(monthBounds.start.getMonth()+1)+"/"+monthBounds.start.getDate()+" 〜 "+(monthBounds.end.getMonth()+1)+"/"+monthBounds.end.getDate();
   let out='<div class="streamingWeeks">';
   for(let w=0;w<weekCount;w++){
    let ws=new Date(firstWeek);ws.setDate(firstWeek.getDate()+w*7);
@@ -666,7 +669,8 @@ function renderCal(){if(mode==="festival"||mode==="events"){renderOutdoorCalenda
    });
    weekMovies=dedupeMorningTenWeek(weekMovies).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
    let groups=groupedMovieCards(weekMovies,"theatrical"),isCurrent=sameDay(ws,currentWeekStart());
-   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
+   const visibleStart=ws<monthBounds.start?monthBounds.start:ws,visibleEnd=we>monthBounds.end?monthBounds.end:we;
+   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(visibleStart.getMonth()+1)+'/'+visibleStart.getDate()+' 〜 '+(visibleEnd.getMonth()+1)+'/'+visibleEnd.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の劇場公開作品はありません</div>')+'</div></section>'
   }
   out+='</div>';
   $("#dates").innerHTML=out;
@@ -1058,6 +1062,17 @@ window.addEventListener("load",applyHeaderSearchParam);
  .cinelva-rating-controls,.cinelva-score-track{touch-action:none!important}
 }
 .cinelvaEventTab{text-decoration:none;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:760px){
+ .calendar.theatricalWeekMode .streamingWeeks{gap:8px}
+ .calendar.theatricalWeekMode .streamingWeekFrame{padding:6px}
+ .calendar.theatricalWeekMode .weekGroups{gap:6px}
+ .calendar.theatricalWeekMode .weekGroup{padding-top:6px}
+ .calendar.theatricalWeekMode .streamingWeekMovies{gap:5px}
+ .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child{display:grid;grid-template-columns:76px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:9px;align-items:start}
+ .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMoviePoster{grid-column:1;grid-row:1 / span 2;width:76px;aspect-ratio:2/3}
+ .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMovieService{grid-column:2;grid-row:1;justify-self:start;margin-top:0;white-space:normal}
+ .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMovieTitle{grid-column:2;grid-row:2;align-self:start;margin-top:5px;-webkit-line-clamp:3;font-size:12px}
+}
 </style>
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->
 <script src="js/movie-grid-sort.js?v=20261024-concrete-sort" defer></script><script src="js/cinelva-library-records.js?v=20261018-safe-film-edits"></script><script>window.CinelvaRatingResolve=(i)=>movies[Number(i)];</script><script src="js/cinelva-quick-rate.js?v=20261031-mobile-feedback"></script></body></html>

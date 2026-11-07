@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),test=require('node:test'),assert=require('node:assert/strict');
 function renderer(){
- const calls={images:[],draws:[],text:[]};
- const ctx=new Proxy({save(){},restore(){},createLinearGradient(){return {addColorStop(){}}},measureText(s){return {width:String(s).length*22}},fillText(s){calls.text.push(String(s))},drawImage(img){calls.draws.push(img.src)}},{get(o,k){return k in o?o[k]:(()=>{})}});
+ const calls={images:[],draws:[],text:[],fonts:[]};
+ const ctx=new Proxy({save(){},restore(){},createLinearGradient(){return {addColorStop(){}}},measureText(s){return {width:String(s).length*22}},fillText(s){calls.text.push(String(s))},drawImage(img){calls.draws.push(img.src)}},{get(o,k){return k in o?o[k]:(()=>{})},set(o,k,v){if(k==='font')calls.fonts.push(String(v));o[k]=v;return true}});
  const canvas={getContext:()=>ctx,setAttribute(){},toBlob(cb){cb({})}};
  const elements={artCanvas:canvas,share:{},save:{},saveToPhotos:{},format:{value:'portrait'},layout:{value:'double'},theme:{value:'minimal'},fontSize:{value:'medium'},fontStyle:{value:'modern'},title:{value:'My Best 10'},sub:{value:''},cinemaBackground:{value:'none'}};
  class Image{constructor(){this.complete=false;calls.images.push(this)}set src(v){this._src=v}get src(){return this._src}}
@@ -9,6 +9,12 @@ function renderer(){
  vm.createContext(context);vm.runInContext(fs.readFileSync('js/my-cinemap-art.js','utf8'),context);vm.runInContext(fs.readFileSync('js/my-cinemap-cinema-templates.js','utf8'),context);
  return {calls,elements,context,load(){for(const img of calls.images){img.complete=true;img.naturalWidth=600;img.naturalHeight=900;img.onload?.()}}};
 }
+test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
+ const r=renderer(),movie={title:'千と千尋の神隠し'};
+ const fonts=new Map();
+ for(const choice of ['modern','clean','classic']){r.elements.fontStyle.value=choice;r.calls.fonts=[];r.context.drawArtwork([movie]);assert.ok(r.calls.fonts.length>0,`${choice} font must render`);fonts.set(choice,r.calls.fonts.join('\n'))}
+ assert.match(fonts.get('modern'),/Baskerville/);assert.match(fonts.get('clean'),/Avenir Next/);assert.match(fonts.get('classic'),/Hiragino Mincho ProN/);
+});
 for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theater','cinema-archive'])test(`${theme}: posters and official emblem; no year/director, including saved records`,()=>{
  const r=renderer();r.elements.theme.value=theme;
  const movies=[{title:'Film One',year:2024,director:'Director One',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}];r.context.picks=movies;

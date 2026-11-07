@@ -24,3 +24,14 @@ test('missing or failed posters preserve titles and export; image loads use CORS
  for(const image of r.calls.images)image.onerror?.();
  r.context.drawArtwork([{title:'No Poster'}]);assert.ok(r.calls.text.includes('No Poster'));
 });
+test('all ten posters from supported TMDB URL variants are painted in the export',()=>{
+ const r=renderer();
+ const movies=Array.from({length:10},(_,i)=>({
+  title:'Film '+i,
+  poster:i%3===0?'//image.tmdb.org/t/p/original/p'+i+'.jpg':i%3===1?'w500/p'+i+'.jpg':'',
+  poster_path:'/p'+i+'.jpg'
+ }));
+ r.context.drawArtwork(movies);r.load();
+ r.calls.draws=[];r.context.drawArtwork(movies);
+ for(let i=0;i<10;i++)assert.ok(r.calls.draws.some(url=>url.endsWith('/p'+i+'.jpg')),'poster '+i);
+});

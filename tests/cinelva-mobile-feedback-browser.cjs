@@ -29,7 +29,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
      await page.waitForFunction(()=>document.querySelector('#artCanvas')?.getAttribute('aria-label')?.includes('ウルフ・オブ・ウォールストリート'));
      await page.locator('#saveList').click();
      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinemap-my-saved-list')).artworkTitleMode),'japanese','title mode persists with the existing Best 10 image settings');
-     await page.waitForFunction(()=>document.querySelector('#list .compactMovieItem'));
+     await page.waitForFunction(()=>document.querySelector('#list .item'));
      await assertTextContrast(page,['#list .item>b','#list .item a','#list .compactMovieMeta'],`${theme} best10`);
      for(const format of ['portrait','square','landscape'])for(const layout of ['single','double']){
       await page.evaluate(({format,layout})=>{document.getElementById('format').value=format;document.getElementById('layout').value=layout;drawArtwork(picks);},{format,layout});

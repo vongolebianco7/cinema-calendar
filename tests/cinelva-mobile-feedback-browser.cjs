@@ -5,7 +5,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
  const listener=net.createServer();await new Promise(r=>listener.listen(0,'127.0.0.1',r));const port=listener.address().port;await new Promise(r=>listener.close(r));
  const server=spawn('python',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});let browser;
  const engine=process.env.CINELVA_BROWSER||'chromium';
- const movies=Array.from({length:10},(_,i)=>({id:100+i,tmdbId:100+i,title:i?'映画 '+i:'ウルフ・オブ・ウォールストリート',year:2013,director:'Hidden Director',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg',score:8,votes:100,watched:true,rating:5,watchedAt:'2026-10-30'}));
+ const movies=Array.from({length:10},(_,i)=>({id:100+i,tmdbId:100+i,title:i?'映画 '+i:'ウルフ・オブ・ウォールストリート',original_title:i?'Original '+i:'The Wolf of Wall Street',release_date:'2013-10-10',runtime:121,year:2013,director:'Hidden Director',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg',score:8,votes:100,watched:true,rating:5,watchedAt:'2026-10-30'}));
  try{
   await waitForLocalServer(port);browser=await require('playwright')[engine].launch();fs.mkdirSync('artifacts/reported-audit/mobile-feedback',{recursive:true});
   for(const width of [320,390,1280])for(const theme of ['light','dark']){
@@ -22,6 +22,13 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
     assert.equal(await page.locator('#gDrawer a[href$="my-best10.html"]').count(),1,route+' common Best 10 entry');
     assert.equal(await page.locator('header .gBrandWord').evaluate(el=>getComputedStyle(el).fontWeight),'600');
     if(route==='my-best10.html'){
+     await page.selectOption('#artworkTitleMode','original');
+     await page.waitForFunction(()=>document.querySelector('#artCanvas')?.getAttribute('aria-label')?.includes('The Wolf of Wall Street'));
+     assert.match(await page.locator('#artCanvas').getAttribute('aria-label'),/The Wolf of Wall Street/,'original title is rendered in the shareable image');
+     await page.selectOption('#artworkTitleMode','japanese');
+     await page.waitForFunction(()=>document.querySelector('#artCanvas')?.getAttribute('aria-label')?.includes('ウルフ・オブ・ウォールストリート'));
+     await page.locator('#saveList').click();
+     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cinemap-my-saved-list')).artworkTitleMode),'japanese','title mode persists with the existing Best 10 image settings');
      await page.waitForFunction(()=>document.querySelector('#list .compactMovieItem'));
      await assertTextContrast(page,['#list .item>b','#list .item a','#list .compactMovieMeta'],`${theme} best10`);
      for(const format of ['portrait','square','landscape'])for(const layout of ['single','double']){

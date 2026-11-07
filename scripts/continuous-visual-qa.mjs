@@ -18,7 +18,9 @@ try{
   // Do not mutate the user's real local storage, reviews or bookmarks.
   for(const theme of ['light','dark']){
    const page=await context.newPage();
-   await page.addInitScript(t=>{localStorage.setItem('cinelva-theme',t);document.documentElement.dataset.theme=t},theme);
+   // The init script runs before <html> exists. The application reads this
+   // preference during startup and applies its theme after document creation.
+   await page.addInitScript(t=>localStorage.setItem('cinelva-theme',t),theme);
    for(const route of routes){
     const slug=route.replace(/[^a-z0-9]+/gi,'-');
     const id=slug+'-'+width+'-'+theme;

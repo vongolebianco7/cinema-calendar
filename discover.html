@@ -181,14 +181,14 @@ function popularCardHtml(m,kind){const id=m.tmdbId||m.id||"",title=m.title||"",y
 function hasFreshStreaming(m){const info=discoveryAvailability.movies?.[String(m.tmdbId||m.id)];return !!(CinelvaDataQuality.availabilityIsFresh(info)&&[...(info.flatrate||info.services||[]),...(info.rent||[]),...(info.buy||[])].length)}
 const discoverShelfExpanded={theatrical:false,catalog:false};
 function shelfVisibleMovies(key,movies){return discoverShelfExpanded[key]?movies:movies.slice(0,10)}
-function currentCatalogList(){return catalogPopular.filter(m=>availabilityFilter==="all"||(availabilityFilter==="available"?hasFreshStreaming(m):!hasFreshStreaming(m)))}
+function currentCatalogList(){return catalogPopular.filter(m=>availabilityFilter!=="available"||hasFreshStreaming(m))}
 function bindPopularClicks(){document.querySelectorAll("[data-popular-id]").forEach(b=>b.onclick=()=>{const list=b.dataset.popularKind==="theatrical"?theatricalPopular:currentCatalogList(),m=list.find(x=>String(x.tmdbId||x.id)===b.dataset.popularId);location.href="search.html?"+new URLSearchParams({id:b.dataset.popularId,search:m?.title||""}).toString()})}
 function renderPopularShelves(){
  const list=currentCatalogList();
  for(const [key,movies,kind,empty] of [["theatrical",theatricalPopular,"theatrical","公開時期の条件を満たす作品はありません。"],["catalog",list,"catalog","該当する作品がありません。"]]){
   const grid=$("#"+key+"PopularGrid");if(!grid)continue;
-  grid.innerHTML=shelfVisibleMovies(key,movies).map(m=>popularCardHtml(m,kind)).join("")||'<div class="empty">'+empty+'</div>';
   const button=document.getElementById(key+'ShelfMore');
+  grid.innerHTML=shelfVisibleMovies(key,movies).map(m=>popularCardHtml(m,kind)).join("")||'<div class="empty">'+empty+'</div>';
   const shown=shelfVisibleMovies(key,movies);
   grid.querySelectorAll(".presetCard[data-popular-id]").forEach(card=>{const movie=shown.find(m=>String(m.tmdbId||m.id)===card.dataset.popularId);window.CinelvaMovieIdentity?.hydrateCard(card.querySelector(".presetCardPoster"),movie)});
   if(button){
@@ -203,7 +203,7 @@ function renderPopularShelves(){
     if(opening){const next=document.getElementById(key+'PopularGrid');next?.querySelectorAll('.presetCard')[10]?.scrollIntoView({block:'nearest',inline:'start',behavior:'smooth'})}
     else grid.scrollTo({left:0,behavior:'smooth'});
    };
-   if(!button.hidden)grid.appendChild(button);
+   grid.appendChild(button);
   }
  }
  $("#catalogPopularStatus").textContent=list.length+"作品";
@@ -331,7 +331,7 @@ function restoreDiscoveryState(){
  if(!saved||saved.url!==location.href||!Array.isArray(saved.items))return false;
  items=saved.items;page=Number(saved.page)||1;totalPages=Number(saved.totalPages)||1;
  genre=String(saved.genre||'');preset=String(saved.preset||'rated');directorId=String(saved.directorId||'');castId=String(saved.castId||'');currentPersonId=String(saved.currentPersonId||'');currentPersonName=String(saved.currentPersonName||'');currentPersonKind=String(saved.currentPersonKind||'');personDecade=String(saved.personDecade||'');currentCrewRole=String(saved.currentCrewRole||'director');
- availabilityFilter=['all','available','unknown'].includes(saved.availabilityFilter)?saved.availabilityFilter:'all';
+ availabilityFilter=saved.availabilityFilter==='available'?'available':'all';
  if(saved.shelfExpanded&&typeof discoverShelfExpanded!=='undefined')Object.assign(discoverShelfExpanded,{catalog:Boolean(saved.shelfExpanded.catalog),theatrical:Boolean(saved.shelfExpanded.theatrical)});
  restoreDiscoveryProviders(saved.providers);
  for(const field of saved.controls||[]){const node=document.getElementById(field.id);if(node){node.value=field.value;if(node.type==='checkbox'||node.type==='radio')node.checked=Boolean(field.checked)}}

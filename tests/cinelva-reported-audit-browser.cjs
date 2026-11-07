@@ -17,7 +17,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    const films=[film(42,'短い作品'),film(43,'とても長い作品名の映画で二行以上の高さになっていた作品')];
    await context.route('**/data/tv.json*',r=>r.fulfill({json:{movies:[{...film(44,'短い映画'),event:'tv',service:'テレビ東京',program:'短い番組',time:'13:40'},{...film(45,'長い映画名が続く二行の作品'),event:'tv',service:'テレビ東京',program:'とても長い番組名が何行も続いていても共通レビューの下端が揃う番組',time:'13:40'}]}}));
    await context.route('**/data/movies.json*',r=>r.fulfill({json:{movies:films}}));
-   await context.route('**/data/availability.json*',r=>r.fulfill({json:{movies:{42:{checked_at:'2026-10-24T00:00:00Z',flatrate:['Prime Video']},43:{checked_at:'2026-10-24T00:00:00Z',flatrate:[]}}}}));
+   await context.route('**/data/availability.json*',r=>r.fulfill({json:{movies:{42:{checked_at:'2026-10-24T00:00:00Z',flatrate:['Prime Video','Hulu','U-NEXT']},43:{checked_at:'2026-10-24T00:00:00Z',flatrate:[]}}}}));
    await context.route('**/data/special_screenings.json*',r=>r.fulfill({json:{screenings:[{id:11878,tmdbId:11878,title:'用心棒',date:'2026-10-02',end_date:'2026-10-15',event:'theatrical',service:'午前十時の映画祭',special_screening:'asa10',poster:'https://image.tmdb.org/t/p/w342/fixture.jpg'}]}}));
    const errors=[];let page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date('2026-10-24T00:00:00Z')});
    // A new document must not inherit WebKit errors from intentionally canceled
@@ -31,6 +31,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await page.locator('.modeTab[data-mode="streaming"]').click();await page.locator('.streamMovie .cinelva-rating-controls').first().waitFor();
    await page.locator('.streamMovieAvail').filter({hasText:'見放題 Prime Video'}).waitFor();
    assert.match(await page.locator('.streamMovie').filter({has:page.getByText('短い作品',{exact:true})}).locator('.streamMovieAvail').innerText(),/見放題 Prime Video/,'canonical TMDB ID finds observations despite local ID');
+   const multiOffer=page.locator('.streamMovie').filter({has:page.getByText('短い作品',{exact:true})}).locator('.streamMovieAvail');
+   assert.match(await multiOffer.innerText(),/見放題 Prime Video[\\s\\S]*見放題 Hulu[\\s\\S]*見放題 U-NEXT/,'all three provider badges remain rendered');
+   assert.equal(await multiOffer.evaluate(el=>{const box=el.getBoundingClientRect();return [...el.children].every(child=>{const r=child.getBoundingClientRect();return r.top>=box.top-1&&r.bottom<=box.bottom+1})}),true,'multiple provider badges are not clipped by the availability region');
    assert.match(await page.locator('.streamMovie').filter({has:page.getByText('とても長い作品名の映画で二行以上の高さになっていた作品',{exact:true})}).locator('.streamMovieAvail').innerText(),/Prime Video.*配信開始/,'official announcement remains visible without live providers');
    const boxes=await page.locator('.streamMovie>.cinelva-rating-controls').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {y:r.y,height:r.height};}));assert.equal(boxes.length,2);assert(Math.abs(boxes[0].y-boxes[1].y)<1,'review baselines align');assert.equal(boxes[0].height,boxes[1].height);
    await page.screenshot({path:`artifacts/reported-audit/${process.env.CINELVA_BROWSER||'chromium'}-${theme}-calendar.png`});

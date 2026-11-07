@@ -131,10 +131,10 @@
 #discounts .discountDay :is(.discountDayDate,.discountPublicLabel,.discountCalendarRanks,.discountConditional){grid-column:1;grid-row:auto}
 #discounts .discountDay .discountDayDate{display:flex;align-items:baseline;gap:5px}
 #discounts .discountDay .discountLowestBadge{top:8px;left:auto;right:6px;transform:none}
-#discounts .discountCalendarRanks>span{grid-template-columns:12px minmax(0,1fr) auto}
+#discounts .discountCalendarRanks>span{grid-template-columns:12px minmax(0,1fr) auto auto}
 #discounts .discountCalendarRanks strong{white-space:normal;overflow-wrap:anywhere}
-#discounts .discountCalendarRanks small{grid-column:2;grid-row:2;text-align:left}
-#discounts .discountCalendarRanks b{grid-column:3;grid-row:1}
+#discounts .discountCalendarRanks small{grid-column:3;grid-row:1;text-align:right;font-size:7px;white-space:nowrap}
+#discounts .discountCalendarRanks b{grid-column:4;grid-row:1}
 #discounts #discountSummary{scroll-margin-top:72px}
 #discounts .discountPriceBadge{display:inline-block;color:var(--text,inherit);background:var(--bg);border:1px solid var(--accent);border-radius:4px;padding:1px 5px;margin:0 4px 5px 0}
 #discounts .discountTable tbody .discountLowestPrice{outline:2px solid var(--accent);outline-offset:-2px}

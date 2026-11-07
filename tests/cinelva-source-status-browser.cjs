@@ -18,6 +18,11 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   // Artwork recovery has its own browser tests. Keep this provenance fixture
   // independent of poster lookups that can outlive the calendar document.
   await context.route('**/js/cinelva-movie-identity.js*',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
+  // The record page only needs a non-empty catalog to initialize. Keep large
+  // published director snapshots out of this source-status smoke test so
+  // WebKit does not turn an unrelated local JSON transfer into a page error.
+  await context.route('**/data/directors-mobile.json*',route=>route.fulfill({json:{directors:{1:{id:1,name:'Fixture',works:[]}}}}));
+  await context.route('**/data/directors.json*',route=>route.fulfill({json:{directors:{1:{id:1,name:'Fixture',works:[]}}}}));
   const page=await context.newPage(),errors=[];
   // WebKit occasionally fails its initial local navigation internally on CI.
   // Retry only that engine-level error once; assertions and real page failures remain fatal.

@@ -13,7 +13,7 @@ fs.mkdirSync(output,{recursive:true});
 const failures=[],report=[];
 const browser=await type.launch();
 try{
- for(const width of [390,1280]){
+ for(const width of [320,390,1280]){
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1});
   // Do not mutate the user's real local storage, reviews or bookmarks.
   for(const theme of ['light','dark']){

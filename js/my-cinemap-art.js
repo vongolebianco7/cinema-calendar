@@ -15,9 +15,9 @@ const artSans='"Avenir Next","Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo
 const artFonts={
   modern:{title:'Baskerville,"Times New Roman","Yu Mincho",serif',movie:'Baskerville,"Times New Roman","Yu Mincho",serif',titleWeight:500,movieWeight:600},
   clean:{title:artSans,movie:artSans,titleWeight:650,movieWeight:650},
-  // Keep the Japanese glyph fallback distinct too. Georgia and Baskerville
-  // only cover Latin well, so sharing Yu Mincho made Japanese lists look alike.
-  classic:{title:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',movie:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',titleWeight:500,movieWeight:600}
+  // Give the third option a rounded-gothic feel, clearly separate from both serif styles
+  // and the clean geometric sans option.
+  classic:{title:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',movie:'Georgia,"Times New Roman","Hiragino Mincho ProN","HiraMinProN-W3",serif',titleWeight:500,movieWeight:600}
 };
 const portraitTitleSize=54;
 const portraitListTop=244;
@@ -263,7 +263,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20261031-mobile-feedback';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261031-mobile-feedback';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-rounded-font';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

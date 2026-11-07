@@ -362,11 +362,12 @@
     const canonical=globalThis.CinelvaMovieIdentity?.id(movie);
     const detail=escapeHTML('../search.html?'+(canonical?'id='+encodeURIComponent(canonical)+'&':'')+'search='+encodeURIComponent(movie.title||''));
     const releaseCandidate=String(movie.release_date||movie.releaseDate||movie.releaseDateJP||movie.release_date_jp||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).release_date||metadataFor(movie.tmdbId??movie.tmdb_id??movie.id).releaseDate||'').trim();
-    const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','.'):(movie.year?String(movie.year):'公開日不明');
+    const releaseDate=/^\d{4}-\d{2}-\d{2}$/.test(releaseCandidate)?releaseCandidate.replaceAll('-','/'):(movie.year?String(movie.year)+'年':'');
+    const movieFacts=[Number(movie.runtime)>0?Number(movie.runtime)+'分':'',releaseDate].filter(Boolean).join(' · ');
     return '<article class="movie cinelva-unified-record-card" data-record-card="'+id+'">'+
       '<a class="cinelva-record-poster" href="'+detail+'" aria-label="作品詳細：'+title+'">'+posterHTML(movie)+'</a>'+
       '<a class="cinelva-record-title" href="'+detail+'">'+title+'</a>'+
-      '<div class="cinelva-record-meta"><small>'+escapeHTML(releaseDate)+'</small></div>'+
+      '<div class="cinelva-record-meta"><small>'+escapeHTML(movieFacts)+'</small></div>'+
       '<div class="cinelva-record-review" data-record-review-id="'+id+'"></div></article>';
   }
   let visibleReviewQueue=null;
@@ -1230,7 +1231,7 @@
     if(!rows.length) { const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu,''); const needle=norm(query); rows=state.movies.filter(movie=>[movie.title,movie.original_title,...(movie.aliases||[])].some(value=>norm(value).includes(needle))).slice(0,100); }
     if(token!==state.searchToken)return;
     const seen=new Set(); rows=rows.filter(movie=>{const id=String(movie.id||movie.tmdbId||'');if(!id||seen.has(id))return false;seen.add(id);return true;}).slice(0,100);
-    box.innerHTML=rows.length?rows.map(movie=>`<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(metadataFor(movie.id||movie.tmdbId).year||movie.year||String(movie.date||'').slice(0,4))} · ${escapeHTML(movie.director||movie.directors?.[0]||'')}</small></span></button>`).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
+    box.innerHTML=rows.length?rows.map(movie=>{const metadata=metadataFor(movie.id||movie.tmdbId),date=String(movie.release_date||movie.releaseDate||movie.date||metadata.release_date||metadata.releaseDate||'').slice(0,10),release=/^\d{4}-\d{2}-\d{2}$/.test(date)?date.replaceAll('-','/'):String(metadata.year||movie.year||'');const facts=[Number(movie.runtime||metadata.runtime)>0?Number(movie.runtime||metadata.runtime)+'分':'',release,movie.director||movie.directors?.[0]||''].filter(Boolean).join(' · ');return `<button type="button" class="search-result" data-choose-movie="${escapeHTML(movie.id||movie.tmdbId)}"><img src="${escapeHTML(poster(movie))}" alt="" onerror="this.hidden=true"><span>${escapeHTML(movie.title||movie.name)}<small>${escapeHTML(facts)}</small></span></button>`}).join(''):'<p class="hint">作品が見つかりません。作品名を変えて検索してください。</p>';
     box._movies=rows;
   }
   async function chooseMovie(id) {

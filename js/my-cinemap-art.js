@@ -146,19 +146,26 @@ function drawCinemaBackground(ctx,w,h,kind){
 const artworkImages=new Map();
 let artworkMovies=[];
 const officialEmblem='assets/cinelva_original_colors_transparent.png';
-function artworkImage(url){
+const posterRecoveryRequests=new Set();
+function artworkImage(url,movie=null){
   if(!url)return null;
   if(artworkImages.has(url))return artworkImages.get(url);
   const image=new Image();image.crossOrigin='anonymous';
   artworkImages.set(url,image);
   let deadline;
   const finish=()=>{if(image.artworkSettled)return;image.artworkSettled=true;clearTimeout(deadline);drawArtwork(artworkMovies)};
-  image.onload=finish;image.onerror=finish;
+  image.onload=finish;image.onerror=()=>{finish();if(movie)recoverPoster(movie,url)};
   deadline=setTimeout(()=>{image.onerror=null;image.onload=null;image.src='';finish()},10000);
   image.src=url;
   return image;
 }
 function artworkReady(){return [...artworkImages.values()].every(image=>image.artworkSettled)}
+async function recoverPoster(movie,failedUrl){
+  const id=Number(movie.tmdbId||(movie.source==='tmdb'?movie.id:0));
+  if(!Number.isInteger(id)||id<1||posterRecoveryRequests.has(id))return;
+  posterRecoveryRequests.add(id);
+  try{const response=await fetch('https://backend-one-gray-94.vercel.app/api/movie-detail?id='+id);if(!response.ok)return;const data=await response.json(),poster=data?.movie?.poster;if(!poster||poster===movie.poster)return;movie.poster=poster;try{localStorage.setItem('cinemap-my-list',JSON.stringify(artworkMovies))}catch{};artworkImages.delete(failedUrl);drawArtwork(artworkMovies)}catch{}finally{posterRecoveryRequests.delete(id)}
+}
 function posterArtworkUrl(movie){
   for(const value of [movie.poster,movie.posterUrl,movie.poster_path]){
     const raw=String(value||'').trim();
@@ -168,13 +175,13 @@ function posterArtworkUrl(movie){
   return '';
 }
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
-  const rankWidth=columns===2?76:94;
-  const posterHeight=Math.min(height-20,columns===2?176:132),posterWidth=posterHeight*2/3;
+  const rankWidth=columns===2?98:94;
+  const posterHeight=Math.min(height-16,columns===2?204:132),posterWidth=posterHeight*2/3;
   const posterX=x+rankWidth,posterY=y+(height-posterHeight)/2;
-  const image=artworkImage(posterArtworkUrl(m));
+  const image=artworkImage(posterArtworkUrl(m),m);
   if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
-  const size=(columns===2?(shape==='portrait'?52:shape==='square'?44:32):(shape==='portrait'?50:shape==='square'?38:28))*fontScale;
+  const size=(columns===2?(shape==='portrait'?54:36):(shape==='portrait'?50:28))*fontScale;
   const maxLines=Math.max(1,Math.min(4,Math.floor((height-18)/(size*1.12))));
   const fit=fittedLines(ctx,m.title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;
@@ -201,7 +208,7 @@ function drawArtwork(movies){
   const shape=artValue('format')||'portrait',layout=artValue('layout')||'single',theme=artValue('theme')||'minimal',p=artPalettes[theme]||artPalettes.minimal;
   const fontScale={small:1,medium:1.18,large:1.36}[artValue('fontSize')]||1;
   const fontKey=artValue('fontStyle')||'modern',font=artFonts[fontKey]||artFonts.modern;
-  c.width=1600;c.height=shape==='landscape'?1000:shape==='square'?1600:2000;
+  c.width=1600;c.height=shape==='landscape'?1000:2000;
   const w=c.width,h=c.height;
   const columns=layout==='double'?2:1;
   const metrics=layoutMetrics(shape,columns,theme),pad=metrics.pad,inner=w-2*pad;
@@ -214,7 +221,7 @@ function drawArtwork(movies){
   ctx.textAlign='center';
   const titleHeight=writeLines(ctx,title,w/2,metrics.titleY,inner*.78,2,metrics.titleSize,40,font.title,font.titleWeight,1.04);
   const titleBottom=metrics.titleY+titleHeight;
-  const titleToListGap=shape==='portrait'?(theme==='minimal'?72:78):shape==='square'?68:70;
+  const titleToListGap=shape==='portrait'?(theme==='minimal'?72:78):70;
   const note=artValue('sub').trim();
   let listTop=Math.max(metrics.listTop,titleBottom+titleToListGap);
   if(note){
@@ -225,7 +232,7 @@ function drawArtwork(movies){
   ctx.textAlign='left';
   const items=(movies||[]).slice(0,10);
   const rows=columns===2?5:10;
-  const doubleListBottomTarget=h-(shape==='portrait'?150:shape==='square'?126:106);
+  const doubleListBottomTarget=h-(shape==='portrait'?150:106);
   const gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=columns===2?Math.max(96,(doubleListBottomTarget-listTop)/rows):metrics.rowH;
   const listBottom=listTop+rows*rowH;
   if(!items.length){ctx.fillStyle=p.muted;ctx.textAlign='center';ctx.font=`400 29px ${artSans}`;ctx.fillText('映画を追加すると、ここに表示されます',w/2,listTop+rowH*3.5);ctx.textAlign='left';ctx.fillStyle=p.fg}
@@ -234,7 +241,7 @@ function drawArtwork(movies){
     const x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
     rule(ctx,x,y,cellW,p.line,theme==='minimal'?.20:(p.dark?.27:.28));
     const medalScale=theme==='minimal'?minimalMedalScale:1;
-    if(i<3)drawMedal(ctx,numberX,y+rowH*.5,i+1,theme,medalScale);
+    if(i<3)drawMedal(ctx,numberX-6,y+rowH*.5,i+1,theme,medalScale);
     else{ctx.save();ctx.font=`400 ${columns===2?30:32}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=theme==='minimal'?.78:1;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
     drawRankingMovie(ctx,m,x,y,cellW,rowH,columns,shape,font,fontScale,p);
   });

@@ -44,6 +44,13 @@ test('theater month header and week labels are clipped to the selected month', (
   assert.match(html, /visibleStart\.getMonth\(\).*visibleEnd\.getMonth\(\)/);
 });
 
+test('calendar mode switching initializes the calendar before clearing the theater view class', () => {
+  const renderStart = html.indexOf('function renderCal(');
+  const renderEnd = html.indexOf('\\n}', renderStart) + 2;
+  const render = html.slice(renderStart, renderEnd);
+  assert.ok(render.indexOf('let cal=document.querySelector(".calendar")') < render.indexOf('cal.classList.remove("theatricalWeekMode")'));
+});
+
 test('single-film weeks use a compact horizontal poster and details layout on mobile', () => {
   assert.match(html, /\.calendar\.theatricalWeekMode \.streamingWeekMovies \.streamMovie:only-child\{display:grid;grid-template-columns:76px minmax\(0,1fr\)/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*?\.calendar\.theatricalWeekMode \.streamingWeekFrame\{padding:6px\}/);

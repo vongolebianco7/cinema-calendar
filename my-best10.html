@@ -176,7 +176,7 @@ async function hydrateBest10Posters(){
    if(url){movie.poster=url;updated=true;}
   }catch(_){}
  }
- if(updated){try{localStorage.setItem('cinemap-my-list',JSON.stringify(picks))}catch(_){}render();}
+ if(updated)render();
 }
 window.hydrateBest10Posters=hydrateBest10Posters;
 async function search(){

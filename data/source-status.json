@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-08T00:08:02.444Z",
+  "generated_at": "2026-11-08T02:28:40.267Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -27,7 +27,7 @@
       "status": "manual",
       "source": "source-reviewed official service announcements",
       "source_url": null,
-      "source_observed_at": "2026-11-07T22:36:01.442Z",
+      "source_observed_at": "2026-11-08T01:51:14.614Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
@@ -152,7 +152,7 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-08T00:07:12.028Z",
+      "source_observed_at": "2026-11-08T02:28:39.611Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",

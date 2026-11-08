@@ -150,6 +150,16 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(source["mode"], "approved")
         self.assertIn("HTML", " ".join(source["requirements"]))
 
+    def test_published_tv_snapshot_has_no_youtube_only_broadcasts(self):
+        root = Path(__file__).resolve().parents[1]
+        snapshot = json.loads((root / "data" / "tv.json").read_text(encoding="utf-8"))
+        rows = snapshot.get("movies", [])
+        self.assertFalse([
+            row for row in rows
+            if str(row.get("source_url", "")).startswith("https://cal.syoboi.jp/")
+            and str(row.get("service", "")).casefold().startswith("youtube")
+        ])
+
 
 if __name__ == "__main__":
     unittest.main()

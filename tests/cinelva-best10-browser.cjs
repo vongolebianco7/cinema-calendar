@@ -82,7 +82,7 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     const actionLabels = await rowButtons.allTextContents();
     assert.deepEqual(actionLabels.map((label) => label.trim()), ["ランキングに追加", "候補箱へ"]);
     const addButton = rowButtons.first();
-    assert.match(await addButton.getAttribute("aria-label"), /をランキングに追加$/, "ranking add has a descriptive accessible label");
+    assert.match(await addButton.getAttribute("aria-label"), /をランキングに追加$/, `ranking add has a descriptive accessible label; button=${await addButton.evaluate((button) => button.outerHTML)}; row=${await firstResult.evaluate((row) => row.outerHTML)}`);
     await addButton.click({ timeout: 5000 });
     await page.waitForFunction(() => document.querySelector("#count")?.textContent === "2/10");
     await page.locator("#layout").selectOption("double");

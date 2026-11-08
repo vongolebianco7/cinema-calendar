@@ -82,7 +82,7 @@ function filtered(){
  const q=clean($("query").value),service=$("service").value;
  return all.filter(row=>{
   const names=providerNames(row.entry),targets=names.map(findTarget).filter(Boolean);
-  return (!q||clean(row.entry.title||row.movie?.title).includes(q))&&(!service||targets.includes(service));
+  return names.length>0&&(!q||clean(row.entry.title||row.movie?.title).includes(q))&&(!service||targets.includes(service));
  }).sort((a,b)=>(Number(b.movie?.popularity||0)-Number(a.movie?.popularity||0))||(a.entry.title||"").localeCompare(b.entry.title||"","ja"));
 }
 function render(reset=true){

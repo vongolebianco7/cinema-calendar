@@ -72,7 +72,7 @@ class OfficialSnapshotImportTests(unittest.TestCase):
                 "title": "Unapproved source", "date": "2026-11-04", "event": "streaming",
                 "service": "Netflix", "source_url": "https://unknown.example/title",
             }]}), encoding="utf-8")
-            original = '{"movies": []}\\n'
+            original = json.dumps({"movies": []})
             catalog.write_text(original, encoding="utf-8")
             registry.write_text(json.dumps({"services": [
                 {"name": "Netflix", "reviewed_premiere_hosts": ["netflix.com"]},

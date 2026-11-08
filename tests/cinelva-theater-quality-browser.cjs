@@ -12,6 +12,7 @@ const {chromium,webkit}=require('playwright'),{spawn}=require('child_process'),n
   await context.route('**/data/theaters_osm.json?*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({theaters:[{name:'Cinema',lat:35,lon:139,source:'OpenStreetMap',osm_type:'node',osm_id:1}]})}));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/theaters.html?search=Cinema`);
+  await page.waitForFunction(() => [...document.querySelectorAll('#grid .theaterName')].filter(el => el.textContent.trim() === 'Cinema').length === 2, null, { timeout: 10000 });
   await page.locator('#grid .theaterTable').waitFor();
   assert.equal((await page.locator('#grid .theaterName').allTextContents()).filter(name=>name==='Cinema').length,2);
   assert.equal(await page.locator('#grid .theaterName').allTextContents().then(xs=>xs.some(s=>s.includes('closed'))),false);

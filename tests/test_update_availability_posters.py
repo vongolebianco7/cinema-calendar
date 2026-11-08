@@ -138,5 +138,32 @@ class AvailabilityPosterTests(unittest.TestCase):
         self.assertEqual(MODULE.poster_url("/movie.jpg"), "https://image.tmdb.org/t/p/w500/movie.jpg")
 
 
+    def test_recovered_streaming_posters_are_exact_id_tmdb_images(self):
+        data = json.loads((ROOT / "data" / "availability.json").read_text(encoding="utf-8"))
+        expected = {
+            "1406894": "zKstxIlSSiSMCYBSahUZQxzCwA3.jpg",
+            "530915": "51N8gNnW1DM1TDX6pzmDQ9RCMOa.jpg",
+            "85350": "yHDOG1XFO1EeXYsiuDqnxpTCJwR.jpg",
+            "1064213": "oPzW7Juxp2545owUEVC6ppRqQBj.jpg",
+            "9323": "z9S9V4vtVJqyHxFfI8HFWCobdrH.jpg",
+            "39210": "ty6UbMQrwpgmQ10fwojtcURl5bx.jpg",
+        }
+        titles = {
+            "1406894": "（LOVE SONG）",
+            "530915": "1917 命をかけた伝令",
+            "85350": "6才のボクが、大人になるまで。",
+            "1064213": "ANORA アノーラ",
+            "9323": "GHOST IN THE SHELL / 攻殻機動隊",
+            "39210": "SOMEWHERE",
+        }
+        for tmdb_id, filename in expected.items():
+            with self.subTest(tmdb_id=tmdb_id):
+                entry = data["movies"][tmdb_id]
+                self.assertIn(titles[tmdb_id], entry["title"])
+                self.assertEqual(
+                    entry["poster"],
+                    f"https://image.tmdb.org/t/p/w500/{filename}",
+                )
+
 if __name__ == "__main__":
     unittest.main()

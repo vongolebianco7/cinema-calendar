@@ -31,7 +31,9 @@ def normalize(value):
 
 
 def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, catalog_path=CATALOG):
-    api_key = api_key or os.environ.get("TMDB_API_KEY", "")
+    # An explicit empty key disables external requests, which keeps offline tests and
+    # deployments without credentials from silently inheriting a process secret.
+    api_key = os.environ.get("TMDB_API_KEY", "") if api_key is None else api_key
     data = json.loads(path.read_text(encoding="utf-8"))
     rows = data.get("movies") if isinstance(data, dict) else None
     if not isinstance(rows, list) or not rows:

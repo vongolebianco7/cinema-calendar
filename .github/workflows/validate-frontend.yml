@@ -148,7 +148,28 @@ jobs:
           python scripts/enrich_directors.py --normalize-only
           python scripts/build_director_mobile.py
           node scripts/build-director-feature-index.cjs
-      - name: Run My Cinelva mobile browser journey
+      - name: Classify changes for full frontend browser journey
+        id: browser_scope
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" != 'pull_request' ]; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch --no-tags origin "$BASE_SHA" --depth=1
+          git diff --name-only "$BASE_SHA" HEAD > /tmp/cinelva-frontend-changed
+          # Fail safe: audit unknown changes and empty diffs.
+          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev '^(docs/|tests/.*\\.py$|scripts/quality_gate\\.py$|scripts/score_quality\\.py$|quality/scorecard\\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run_browser=false' >> "$GITHUB_OUTPUT"
+            echo 'Skipping duplicate full browser journey for non-UI-only PR.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - if: steps.browser_scope.outputs.run_browser == 'true'
+        name: Run My Cinelva mobile browser journey
         timeout-minutes: 40
         run: |
           set -euxo pipefail

@@ -56,5 +56,35 @@ class StreamingMetadataPreservationTest(unittest.TestCase):
         self.assertEqual(movie["original_title"], "Heartland")
         self.assertIn("netflix.com/", movie["source_url"])
 
+    def test_ambiguous_titles_are_resolved_by_official_identity_sources(self):
+        catalog_path = pathlib.Path(__file__).resolve().parents[1] / "data" / "streaming.json"
+        data = json.loads(catalog_path.read_text(encoding="utf-8"))
+        expected = {
+            ("トラップ", "Prime Video", "2026-11-16"): {
+                "id": 1032823, "original_title": "Trap", "release_year": 2024,
+                "poster": "https://image.tmdb.org/t/p/w500/ynN2SyseYIwrcLfxYMfpva42oUU.jpg",
+                "identity_source_url": "https://www.primevideo.com/-/ja/detail/0I2TZOL3OM4GTUKUTFSHC02Z5S",
+            },
+            ("秒速5センチメートル", "Netflix", "2026-11-10"): {
+                "id": 1359916, "original_title": "秒速5センチメートル", "release_year": 2025,
+                "poster": "https://image.tmdb.org/t/p/w500/nhvPn4TsUQk5ZBk9T9RBW7v7z1J.jpg",
+                "identity_source_url": "https://www.netflix.com/jp/title/82758559",
+            },
+        }
+        for (title, service, date), identity in expected.items():
+            with self.subTest(title=title):
+                matches = [
+                    row for row in data["movies"]
+                    if row.get("title") == title
+                    and row.get("service") == service
+                    and row.get("date") == date
+                ]
+                self.assertEqual(len(matches), 1)
+                movie = matches[0]
+                for field, value in identity.items():
+                    self.assertEqual(movie[field], value)
+                self.assertEqual(movie["tmdb_id"], identity["id"])
+                self.assertEqual(movie["tmdb"], f"https://www.themoviedb.org/movie/{identity['id']}")
+
 if __name__ == "__main__":
     unittest.main()

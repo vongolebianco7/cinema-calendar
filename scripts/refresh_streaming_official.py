@@ -90,6 +90,33 @@ def refresh(source=None, output=OUTPUT, today=None):
                             existing[field] = movie[field]
     if not clean:
         raise ValueError("Empty update refused; existing output preserved")
+    # A curated announcement may omit previously verified artwork. Preserve
+    # enrichment from the last published snapshot only for an exact release
+    # key AND an explicitly matching TMDB identity; never guess by title.
+    if output.exists():
+        previous = json.loads(output.read_text(encoding="utf-8"))
+        if not isinstance(previous, dict) or not isinstance(previous.get("movies"), list):
+            raise ValueError("Invalid previous streaming snapshot; existing output preserved")
+        previous_by_key = {}
+        for old in previous["movies"]:
+            if not isinstance(old, dict):
+                raise ValueError("Invalid previous movie; existing output preserved")
+            old_key = (old.get("date"), old.get("service"), " ".join(str(old.get("title", "")).casefold().split()))
+            previous_by_key[old_key] = old
+        for movie in clean:
+            key = (movie["date"], movie["service"], " ".join(movie["title"].casefold().split()))
+            old = previous_by_key.get(key)
+            if old is None:
+                continue
+            current_id = movie.get("tmdb_id") or movie.get("tmdbId") or movie.get("id")
+            old_id = old.get("tmdb_id") or old.get("tmdbId") or old.get("id")
+            if current_id is None or old_id is None or str(current_id) != str(old_id):
+                continue
+            for field in ("poster", "poster_path", "image", "image_url", "release_year", "year"):
+                value = old.get(field)
+                if (field not in movie and value is not None
+                        and (not isinstance(value, str) or value.strip())):
+                    movie[field] = value
     ordered_periods = sorted(periods)
     result = {
         "period": ordered_periods[0] if len(ordered_periods) == 1 else None,

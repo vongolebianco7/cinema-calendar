@@ -60,10 +60,32 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
         normalized_entries.append(reviewed)
     entries = normalize_premieres(normalized_entries, approved_hosts)
 
-    def key(row):
+    def title_key(row):
         return (row.get("service"), " ".join(str(row.get("title", "")).casefold().split()), row.get("date"))
 
-    existing = {key(row): row for row in rows if isinstance(row, dict)}
+    def movie_identity(row):
+        tmdb_id = row.get("tmdb_id")
+        if type(tmdb_id) is int and tmdb_id > 0:
+            return tmdb_id
+        movie_id = row.get("id")
+        if (
+            type(movie_id) is int
+            and movie_id > 0
+            and row.get("tmdb") == "https://www.themoviedb.org/movie/" + str(movie_id)
+        ):
+            return movie_id
+        return None
+
+    existing_by_title = {}
+    existing_by_identity = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        existing_by_title.setdefault(title_key(row), row)
+        identity = movie_identity(row)
+        if identity:
+            existing_by_identity.setdefault((row.get("service"), row.get("date"), identity), row)
+
     added = updated = 0
     for source in entries:
         if not isinstance(source, dict) or source.get("event") != "streaming":
@@ -74,9 +96,18 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
         if service not in providers or not url.startswith("https://"):
             raise ValueError("Official entry has an unregistered provider or unsafe source URL")
         datetime.date.fromisoformat(date)
-        item_key = key(source)
-        if item_key in existing:
-            target = existing[item_key]
+        item_key = title_key(source)
+        identity = movie_identity(source)
+        identity_key = (service, date, identity) if identity else None
+        target = existing_by_identity.get(identity_key) if identity_key else None
+        title_target = existing_by_title.get(item_key)
+        if target is None and title_target is not None:
+            title_identity = movie_identity(title_target)
+            # A title match can fill missing metadata, but cannot merge two
+            # explicitly different TMDB works such as remakes with the same title.
+            if identity is None or title_identity is None or identity == title_identity:
+                target = title_target
+        if target is not None:
             for field in FILL_FIELDS:
                 if source.get(field) not in (None, "", 0) and target.get(field) in (None, "", 0):
                     target[field] = source[field]
@@ -97,7 +128,9 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
         if item.get("id") and not item.get("tmdb"):
             item["tmdb"] = "https://www.themoviedb.org/movie/" + str(item["id"])
         rows.append(item)
-        existing[item_key] = item
+        existing_by_title.setdefault(item_key, item)
+        if identity:
+            existing_by_identity.setdefault((service, date, identity), item)
         added += 1
     if added or updated:
         catalog["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()

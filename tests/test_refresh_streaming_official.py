@@ -22,8 +22,8 @@ class RefreshTest(unittest.TestCase):
                 "title": "Test", "date": "2026-11-10",
                 "event": "streaming", "service": "Netflix",
                 "source_url": "https://example.org/official",
-                "poster": "", "poster_path": None, "tmdb_id": "",
-                "release_year": None, "image_url": "",
+                "poster": "  \t ", "poster_path": None, "tmdb_id": "",
+                "release_year": None, "image_url": "\n  ",
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))

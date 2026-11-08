@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "fb4977c24cab5a75e1fcffb252a29284d98ecad5",
-  "verified_at": "2026-11-08T06:20:12Z",
-  "note": "Receipt-only refresh after exact-head GitHub Actions passed for PR #720 source fb4977c24cab5a75e1fcffb252a29284d98ecad5. The daily official streaming refresh now reruns strict poster enrichment on the complete merged snapshot; ambiguous identities remain unlinked. Production deployment and public URL acceptance remain pending."
+  "head_sha": "12e8c010796103332967f22bf19dba8112c3a01d",
+  "verified_at": "2026-11-08T21:20:32Z",
+  "note": "Required exact-head GitHub Actions passed for this source commit (Scorecard contract, CINELVA smoke tests, CINELVA mobile layout smoke test, Reproducible backend build, Cinemap completeness scorecard, Autonomous quality gate, Validate frontend, CINELVA continuous visual QA). This receipt-only commit binds the proof to that CI-verified executable tree; production publication remains gated on its own exact-head checks."
 }

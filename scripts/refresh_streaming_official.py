@@ -56,7 +56,7 @@ def refresh(source=None, output=OUTPUT, today=None):
                 movie = dict(movie)
                 for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "release_year", "year"):
                     value = movie.get(field)
-                    if value is None or value == "":
+                    if value is None or (isinstance(value, str) and not value.strip()):
                         movie.pop(field, None)
                 clean.append(movie)
                 seen.add(key)

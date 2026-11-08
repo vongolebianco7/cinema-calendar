@@ -102,7 +102,7 @@ async function load(){
   const [av,moviesJson]=await Promise.all([avRes.json(),movieRes.json()]);
   const movies=Array.isArray(moviesJson)?moviesJson:(moviesJson.movies||[]);
   const movieById=new Map(movies.map(m=>[String(m.tmdbId||m.tmdb_id||m.id||""),m]));
-  all=Object.entries(av.movies||{}).map(([id,entry])=>({id,entry,movie:movieById.get(id)||{id,title:entry.title}}))
+  all=Object.entries(av.movies||{}).map(([id,entry])=>({id,entry,movie:movieById.get(id)||{id:Number(id),tmdbId:Number(id),title:entry.title}}))
    .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");const age=Date.now()-checked;const providers=[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.free||[]),...(row.entry.ads||[]),...(row.entry.rent||[]),...(row.entry.buy||[])];return Number.isFinite(checked)&&age>=0&&age<=7*86400000&&providers.length>0;});
   const services=new Set(all.flatMap(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.free||[]),...(row.entry.ads||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].map(findTarget).filter(Boolean)));
   $("service").innerHTML='<option value="">すべてのサービス</option>'+TARGETS.map(s=>'<option value="'+s+'">'+s+(services.has(s)?"":"（直近データなし）")+'</option>').join("");

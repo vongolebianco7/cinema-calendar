@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - data/streaming-2026-11-official-supplement.json
+      - data/streaming-*-official-supplement.json
       - data/streaming_sources.json
       - scripts/refresh_streaming_official.py
       - scripts/enrich_streaming_posters.py

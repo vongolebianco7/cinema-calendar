@@ -6,7 +6,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "data/streaming-2026-11-official-supplement.json"
+SOURCE_GLOB = "streaming-*-official-supplement.json"
 OUTPUT = ROOT / "data/streaming-official-current.json"
 SERVICES = ROOT / "data/streaming_sources.json"
 def registered_services(path=SERVICES):
@@ -19,32 +19,49 @@ def registered_services(path=SERVICES):
         raise ValueError("Streaming service registry is empty")
     return names
 ALLOWED = registered_services()
-def refresh(source=SOURCE, output=OUTPUT, today=None):
-    today = today or dt.date.today()
-    if not source.exists():
-        raise ValueError("Official source missing; existing output preserved")
-    data = json.loads(source.read_text(encoding="utf-8"))
-    if not isinstance(data, dict) or not isinstance(data.get("movies"), list):
-        raise ValueError("Invalid official source; existing output preserved")
-    clean, seen = [], set()
-    for movie in data["movies"]:
-        if not isinstance(movie, dict):
-            raise ValueError("Invalid movie entry")
-        title, service, date, url = (movie.get(k) for k in ("title", "service", "date", "source_url"))
-        if not all(isinstance(x, str) and x.strip() for x in (title, service, date, url)):
-            raise ValueError("Missing title, service, date or provenance")
-        if service not in ALLOWED or not url.startswith("https://"):
-            raise ValueError("Unrecognized service or non-HTTPS provenance")
-        parsed = dt.date.fromisoformat(date)
-        if parsed.year < 2026 or movie.get("event") != "streaming":
-            raise ValueError("Invalid release date or event")
-        key = (date, service, " ".join(title.casefold().split()))
-        if key not in seen:
-            clean.append(movie)
-            seen.add(key)
+def refresh(source=None, output=OUTPUT, today=None):
+    # Default runs consume every reviewed month file so a new month needs only
+    # a verified data addition; the scheduled workflow itself remains stable.
+    sources = (
+        sorted((ROOT / "data").glob(SOURCE_GLOB))
+        if source is None
+        else list(source) if isinstance(source, (list, tuple)) else [source]
+    )
+    if not sources:
+        raise ValueError("No official supplement sources found; existing output preserved")
+    clean, seen, periods = [], set(), set()
+    for source_path in sources:
+        data = json.loads(source_path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or not isinstance(data.get("movies"), list):
+            raise ValueError(f"Invalid official source {source_path.name}; existing output preserved")
+        period = data.get("period")
+        if isinstance(period, str) and period.strip():
+            periods.add(period.strip())
+        for movie in data["movies"]:
+            if not isinstance(movie, dict):
+                raise ValueError("Invalid movie entry")
+            title, service, date, url = (movie.get(k) for k in ("title", "service", "date", "source_url"))
+            if not all(isinstance(x, str) and x.strip() for x in (title, service, date, url)):
+                raise ValueError("Missing title, service, date or provenance")
+            if service not in ALLOWED or not url.startswith("https://"):
+                raise ValueError("Unrecognized service or non-HTTPS provenance")
+            parsed = dt.date.fromisoformat(date)
+            if parsed.year < 2026 or movie.get("event") != "streaming":
+                raise ValueError("Invalid release date or event")
+            key = (date, service, " ".join(title.casefold().split()))
+            if key not in seen:
+                clean.append(movie)
+                seen.add(key)
     if not clean:
         raise ValueError("Empty update refused; existing output preserved")
-    result = {"period": data.get("period"), "movies": clean, "count": len(clean), "note": "Verified-source subset, not a complete subscription catalog"}
+    ordered_periods = sorted(periods)
+    result = {
+        "period": ordered_periods[0] if len(ordered_periods) == 1 else None,
+        "periods": ordered_periods,
+        "movies": clean,
+        "count": len(clean),
+        "note": "Verified-source subset, not a complete subscription catalog",
+    }
     content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if output.exists() and output.read_text(encoding="utf-8") == content:
         return False

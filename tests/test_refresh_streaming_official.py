@@ -27,5 +27,26 @@ class RefreshTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 module.refresh(source, output)
             self.assertEqual(output.read_bytes(), previous)
+
+    def test_default_refresh_combines_new_months_without_code_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source_dir = root / "data"
+            source_dir.mkdir()
+            output = root / "output.json"
+            entry = {"title": "Test", "date": "2026-11-10", "event": "streaming", "service": "Netflix", "source_url": "https://example.org/official"}
+            (source_dir / "streaming-2026-11-official-supplement.json").write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
+            november = (source_dir / "streaming-2026-11-official-supplement.json").read_text(encoding="utf-8")
+            (source_dir / "streaming-2026-12-official-supplement.json").write_text(json.dumps({"period": "2026-12", "movies": [{**entry, "date": "2026-12-01", "title": "Next month"}]}), encoding="utf-8")
+            original_root = module.ROOT
+            module.ROOT = root
+            try:
+                self.assertTrue(module.refresh(output=output))
+            finally:
+                module.ROOT = original_root
+            refreshed = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(refreshed["periods"], ["2026-11", "2026-12"])
+            self.assertIsNone(refreshed["period"])
+            self.assertEqual(refreshed["count"], 2)
 if __name__ == "__main__":
     unittest.main()

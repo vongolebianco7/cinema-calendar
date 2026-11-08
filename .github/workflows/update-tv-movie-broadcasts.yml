@@ -60,13 +60,22 @@ jobs:
             fi
             conflicts="$(git diff --name-only --diff-filter=U)"
             git rebase --abort
-            if [[ "$conflicts" != "data/source-status.json" ]]; then
-              echo "Unexpected concurrent snapshot conflict: $conflicts" >&2
+            if [[ -z "$conflicts" ]]; then
+              echo "Rebase failed without a reported conflict path" >&2
               exit 1
             fi
-            # Another approved updater changed source-status during this run.
+            while IFS= read -r conflict; do
+              case "$conflict" in
+                data/source-status.json|data/tv.json) ;;
+                *)
+                  echo "Unexpected concurrent snapshot conflict: $conflict" >&2
+                  exit 1
+                  ;;
+              esac
+            done <<< "$conflicts"
+            # Another approved updater changed one or both generated snapshots.
             # Restart from latest main and rebuild this feed instead of choosing
-            # either generated status file and losing the other source's data.
+            # either generated file and losing the other source's data.
             git reset --hard origin/main
             python scripts/check_sources.py
             node scripts/verify-production-release.cjs --require

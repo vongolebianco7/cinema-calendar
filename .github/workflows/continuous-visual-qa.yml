@@ -35,7 +35,7 @@ jobs:
             exit 0
           fi
           # Only skip for known non-UI-only changes. Unknown paths are audited.
-          if grep -Ev '^(docs/|tests/.*\.py$|scripts/quality_gate\.py$|scripts/score_quality\.py$|quality/scorecard\.json$)' /tmp/cinelva-changed-files >/dev/null; then
+          if grep -Ev '^(docs/|tests/.*\.py$|scripts/(enrich_streaming_posters|refresh_streaming_official|quality_gate)\.py$|scripts/score_quality\.py$|quality/scorecard\.json$)' /tmp/cinelva-changed-files >/dev/null; then
             echo 'run_visual=true' >> "$GITHUB_OUTPUT"
           else
             echo 'run_visual=false' >> "$GITHUB_OUTPUT"

@@ -10,6 +10,23 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 class RefreshTest(unittest.TestCase):
+    def test_invalid_provenance_url_preserves_last_good_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            entry = {
+                "title": "Test", "date": "2026-11-10", "event": "streaming",
+                "service": "Netflix", "source_url": "https://example.org/official",
+            }
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            previous = output.read_bytes()
+            for invalid_url in ("https://", "https:///missing-host", "http://example.org", "https://user:pass@example.org/private"):
+                source.write_text(json.dumps({"period": "2026-11", "movies": [{**entry, "source_url": invalid_url}]}), encoding="utf-8")
+                with self.subTest(url=invalid_url), self.assertRaises(ValueError):
+                    module.refresh(source, output)
+                self.assertEqual(output.read_bytes(), previous)
+
     def test_uses_registered_services_without_rejecting_fod(self):
         self.assertIn("FOD", module.ALLOWED)
         self.assertIn("DMM TV", module.ALLOWED)

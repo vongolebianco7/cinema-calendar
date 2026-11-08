@@ -43,7 +43,7 @@ def summarize(snapshot, now):
         result["fresh_7d"]+=1
         if age<=dt.timedelta(hours=48):
             result["checked_within_48h"]+=1
-        if any(item.get(k) for k in ("flatrate","rent","buy","services")):
+        if any(item.get(k) for k in ("flatrate","free","ads","rent","buy","services")):
             result["observations_with_providers_fresh_7d"]+=1
     result["stale_7d"]+=result["missing_or_invalid_checked_at"]
     result["fresh_pct"]=round(100*result["fresh_7d"]/result["total"],1) if result["total"] else 0

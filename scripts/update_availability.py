@@ -126,6 +126,114 @@ def provider_groups(region):
  """Keep subscription, free/ad-supported, rental, and purchase observations distinct."""
  return {kind:provider_names(region.get(kind)) for kind in ("flatrate","free","ads","rent","buy")}
 
+DISCOVERY_SERVICE_ORDER=("Netflix","Prime Video","U-NEXT","Disney+","ABEMA","WOWOWオンデマンド","Hulu","FOD","Apple TV+","Lemino","DMM TV","TELASA")
+MAX_DAILY_DISCOVERY_PAGES=12
+DISCOVERY_PAGE_SIZE=20
+
+def discovery_service(name):
+ name=ALIASES.get((name or "").strip(),(name or "").strip()).casefold()
+ if name.startswith("netflix"):return "Netflix"
+ if name in {"prime video","amazon prime video","amazon prime video with ads"}:return "Prime Video"
+ if name in {"u-next","u-next japan"}:return "U-NEXT"
+ if name in {"disney+","disney plus"}:return "Disney+"
+ if name=="abema":return "ABEMA"
+ if name in {"wowowオンデマンド","wowow on demand","wowow"}:return "WOWOWオンデマンド"
+ if name=="hulu":return "Hulu"
+ if name=="fod":return "FOD"
+ if name in {"apple tv+","apple tv plus"}:return "Apple TV+"
+ if name=="lemino":return "Lemino"
+ if name=="dmm tv":return "DMM TV"
+ if name=="telasa":return "TELASA"
+ return None
+
+def discover_provider_candidates(cache,state,api_key,opener=urllib.request.urlopen,now=None,max_pages=MAX_DAILY_DISCOVERY_PAGES,delay=0.25,deadline=None):
+ """Discover exact TMDB movie IDs by Japan provider, then verify each via watch/providers."""
+ now=now or datetime.datetime.now(datetime.timezone.utc)
+ checked_at=now.astimezone(datetime.timezone.utc).isoformat()
+ def get_json(url):
+  timeout=6
+  if deadline is not None:
+   remaining=deadline-time.monotonic()
+   if remaining<1:return None
+   timeout=min(timeout,remaining)
+  with opener(urllib.request.Request(url,headers={"Accept":"application/json","User-Agent":"CINELVA/1.0"}),timeout=timeout) as response:
+   return json.load(response)
+ provider_url="https://api.themoviedb.org/3/watch/providers/movie?"+urllib.parse.urlencode({"api_key":api_key,"watch_region":"JP","language":"ja-JP"})
+ try:
+  payload=get_json(provider_url)
+  if not isinstance(payload,dict) or not isinstance(payload.get("results"),list):
+   raise ValueError("invalid provider list response")
+ except Exception as exc:
+  print("availability provider discovery skipped:",type(exc).__name__)
+  return 0,0,[],False
+ provider_ids={}
+ for provider in payload["results"]:
+  if not isinstance(provider,dict):continue
+  provider_id=provider.get("provider_id")
+  if not isinstance(provider_id,int) or provider_id<=0:continue
+  target=discovery_service(provider.get("provider_name"))
+  if target:provider_ids.setdefault(target,[]).append(provider_id)
+ services=sorted(provider_ids,key=lambda name:(DISCOVERY_SERVICE_ORDER.index(name),name))
+ missing=[name for name in DISCOVERY_SERVICE_ORDER if name not in provider_ids]
+ state=state if isinstance(state,dict) else {}
+ state["provider_list_checked_at"]=checked_at
+ state["missing_services"]=missing
+ pages_state=state.setdefault("service_pages",{})
+ if not isinstance(pages_state,dict):
+  pages_state={};state["service_pages"]=pages_state
+ if not services:
+  state["next_service_index"]=0
+  return 0,0,missing,True
+ start=int(state.get("next_service_index",0) or 0)%len(services)
+ ordered=services[start:]+services[:start]
+ successes=added=attempted=0
+ for service in ordered[:max(0,min(MAX_DAILY_DISCOVERY_PAGES,int(max_pages)))]:
+  if deadline is not None and time.monotonic()>=deadline:break
+  ids=sorted(provider_ids[service])
+  provider_key="|".join(str(value) for value in ids)
+  progress=pages_state.get(service,{})
+  if not isinstance(progress,dict) or progress.get("provider_ids")!=provider_key:
+   page=1
+  else:
+   try:page=max(1,int(progress.get("next_page",1)))
+   except (TypeError,ValueError):page=1
+  params={"api_key":api_key,"language":"ja-JP","watch_region":"JP","with_watch_providers":provider_key,
+          "with_watch_monetization_types":"flatrate|free|ads|rent|buy","sort_by":"popularity.desc","include_adult":"false","page":str(page)}
+  url="https://api.themoviedb.org/3/discover/movie?"+urllib.parse.urlencode(params)
+  attempted+=1
+  try:
+   result=get_json(url)
+   if not isinstance(result,dict) or not isinstance(result.get("results"),list) or int(result.get("page") or 0)!=page:
+    raise ValueError("invalid discovery page response")
+   total_pages=max(1,int(result.get("total_pages") or 1))
+   for movie in result["results"]:
+    if not isinstance(movie,dict):continue
+    mid=movie.get("id");title=movie.get("title") or movie.get("original_title")
+    if not isinstance(mid,int) or mid<=0 or not isinstance(title,str) or not title.strip():continue
+    key=str(mid);item=cache.get(key)
+    if not isinstance(item,dict):
+     item={"title":title.strip(),"flatrate":[],"free":[],"ads":[],"rent":[],"buy":[],"services":[]}
+     cache[key]=item;added+=1
+    elif not item.get("title"):
+     item["title"]=title.strip()
+    if not item.get("poster"):
+     poster=poster_url(movie.get("poster_path"))
+     if poster:
+      item["poster"]=poster
+      item["poster_source"]="TMDB Japan provider discovery"
+    cache[key]=item
+   next_page=1 if page>=total_pages else page+1
+   pages_state[service]={"provider_ids":provider_key,"next_page":next_page,"total_pages":total_pages,"last_page_at":checked_at}
+   successes+=1
+  except Exception as exc:
+   print("availability provider page skipped:",service,type(exc).__name__)
+   break
+  if delay>0 and service!=ordered[-1]:
+   time.sleep(min(delay,max(0,(deadline-time.monotonic()) if deadline is not None else delay)))
+ state["next_service_index"]=(start+successes)%len(services)
+ state["services_seen"]=services
+ return successes,added,missing,True
+
 def finish_snapshot(old, cache, count, now):
  if not count:return old
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}

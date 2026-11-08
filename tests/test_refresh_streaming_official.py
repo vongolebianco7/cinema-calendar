@@ -107,6 +107,9 @@ class RefreshTest(unittest.TestCase):
             self.assertEqual(movies[0]["poster"], richer["poster"])
             self.assertEqual(movies[0]["release_year"], 2026)
 
+            # This case independently tests conflicting duplicate entries in a
+            # fresh build, not cross-refresh last-known-good enrichment.
+            output.unlink()
             conflicting = {**richer, "tmdb_id": 999, "poster": "https://example.org/wrong.jpg"}
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry, conflicting]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))

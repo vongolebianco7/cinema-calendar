@@ -90,7 +90,7 @@ function render(reset=true){
  const slice=list.slice(0,shown+PAGE);shown=slice.length;
  $("grid").innerHTML=slice.map(cardHtml).join("")||'<div class="empty">条件に合う作品はありません。サービスや検索語を変えてください。</div>';
  const coverage=TARGETS.map(target=>{const count=all.filter(row=>providerNames(row.entry).some(name=>findTarget(name)===target)).length;return count?target+" "+count:null;}).filter(Boolean).join("・");
- $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 7日以内のサービス別観測: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
+ $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 過去7日以内に"+({flatrate:"見放題",rent:"レンタル",buy:"購入"}[kind])+"を確認: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
  $("more").hidden=shown>=list.length;$("more").textContent="さらに表示 ("+shown.toLocaleString("ja-JP")+" / "+list.length.toLocaleString("ja-JP")+")";
 }
 async function load(){

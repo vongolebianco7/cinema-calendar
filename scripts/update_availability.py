@@ -230,7 +230,8 @@ def main():
  count=0
  failed=0
  batch_deadline=time.monotonic()+MAX_BATCH_SECONDS
- deadline=batch_deadline-60
+ poster_reserve=min(60,max(1,MAX_BATCH_SECONDS*0.15))
+ deadline=batch_deadline-poster_reserve
  for mid,(_,m) in selected:
   remaining=deadline-time.monotonic()
   if remaining<=0:

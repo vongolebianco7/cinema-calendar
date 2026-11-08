@@ -3,8 +3,11 @@ import datetime
 import importlib.util
 import io
 import json
+import os
+import tempfile
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -89,6 +92,61 @@ class AvailabilityDiscoveryTests(unittest.TestCase):
             {}, {}, "test-key", opener=opener, now=NOW, max_pages=3, delay=0)
         self.assertEqual((pages, checked), (3, True))
         self.assertEqual(requests.count("/3/discover/movie"), 3)
+
+    def test_main_discovers_verifies_and_atomically_publishes_a_title(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            snapshot = root / "availability.json"
+            (root / "movies.json").write_text('{"movies":[]}', encoding="utf-8")
+            (root / "awards.json").write_text('{"catalog":[]}', encoding="utf-8")
+            snapshot.write_text(json.dumps({
+                "generated_at": "2026-11-01T00:00:00Z",
+                "movies": {},
+            }), encoding="utf-8")
+            calls = []
+
+            def opener(request, timeout):
+                parsed = urlparse(request.full_url)
+                query = parse_qs(parsed.query)
+                calls.append(parsed.path)
+                if parsed.path == "/3/watch/providers/movie":
+                    return JsonResponse(json.dumps({"results": [
+                        {"provider_id": 8, "provider_name": "Netflix"},
+                    ]}).encode())
+                if parsed.path == "/3/discover/movie":
+                    self.assertEqual(query["watch_region"], ["JP"])
+                    return JsonResponse(json.dumps({
+                        "page": 1, "total_pages": 1, "results": [
+                            {"id": 12345, "title": "Verified Release",
+                             "poster_path": "/verified-release.jpg"},
+                        ],
+                    }).encode())
+                self.assertEqual(parsed.path, "/3/movie/12345/watch/providers")
+                return JsonResponse(json.dumps({"results": {"JP": {
+                    "flatrate": [{"provider_name": "Netflix"}],
+                    "free": [], "ads": [], "rent": [], "buy": [],
+                    "link": "https://www.themoviedb.org/movie/12345/watch?locale=JP",
+                }}}).encode())
+
+            with patch.object(MODULE, "ROOT", root), patch.object(MODULE, "PATH", snapshot), \
+                 patch.dict(os.environ, {"TMDB_API_KEY": "test-key"}), \
+                 patch.object(MODULE.urllib.request, "urlopen", side_effect=opener), \
+                 patch.object(MODULE.time, "sleep"):
+                MODULE.main()
+
+            result = json.loads(snapshot.read_text(encoding="utf-8"))
+            entry = result["movies"]["12345"]
+            self.assertEqual(entry["title"], "Verified Release")
+            self.assertEqual(entry["flatrate"], ["Netflix"])
+            self.assertEqual(entry["checked_at"], MODULE.NOW)
+            self.assertEqual(entry["poster"],
+                             "https://image.tmdb.org/t/p/w500/verified-release.jpg")
+            self.assertEqual(entry["poster_source"], "TMDB Japan provider discovery")
+            self.assertEqual(result["provider_discovery"]["services_seen"], ["Netflix"])
+            self.assertEqual(calls.count("/3/watch/providers/movie"), 1)
+            self.assertEqual(calls.count("/3/discover/movie"), 1)
+            self.assertEqual(calls.count("/3/movie/12345/watch/providers"), 1)
+            self.assertFalse(snapshot.with_suffix(".tmp").exists())
 
     def test_provider_list_failure_does_not_claim_discovery_or_mutate_cache(self):
         cache = {}

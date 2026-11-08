@@ -11,7 +11,8 @@
       "reviewed_premiere_hosts": [
         "about.netflix.com",
         "movies.shochiku.co.jp",
-        "t-tribe.co.jp"
+        "t-tribe.co.jp",
+        "www.netflix.com"
       ]
     },
     {
@@ -53,7 +54,8 @@
       "auto_premiere_discovery": false,
       "reviewed_premiere_hosts": [
         "news.hulu.jp",
-        "movies.shochiku.co.jp"
+        "movies.shochiku.co.jp",
+        "www.hulu.jp"
       ]
     },
     {
@@ -85,7 +87,8 @@
       "auto_premiere_discovery": false,
       "reviewed_premiere_hosts": [
         "abema.tv",
-        "abematv.co.jp"
+        "abematv.co.jp",
+        "times.abema.tv"
       ]
     },
     {
@@ -105,7 +108,8 @@
       "availability_source": "TMDB_JP_if_returned",
       "auto_premiere_discovery": false,
       "reviewed_premiere_hosts": [
-        "news.fod.fujitv.co.jp"
+        "news.fod.fujitv.co.jp",
+        "help.fod.fujitv.co.jp"
       ]
     },
     {

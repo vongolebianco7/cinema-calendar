@@ -37,7 +37,10 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    // scrolling; otherwise the reload can race the offscreen IntersectionObserver.
    await page.waitForFunction(()=>typeof window.CinelvaWatchProviders?.mount==='function');
    await page.locator('#providerChecks input[value="8"]').scrollIntoViewIfNeeded();
-   await page.getByText('サービス一覧を更新できませんでした。表示中のサービスは検索できます。',{exact:true}).waitFor({timeout:15000});
+   const failureStatus=page.locator('#providerChecks + .status');
+   await page.waitForFunction(()=>document.querySelector('#providerChecks + .status')?.textContent==='サービス一覧を更新できませんでした。表示中のサービスは検索できます。',null,{timeout:15000});
+   await failureStatus.scrollIntoViewIfNeeded();
+   assert.equal(await failureStatus.isVisible(),true,'offline provider status remains visible in the browser');
    assert.equal(await page.locator('#providerChecks input').count(),6);
    await page.locator('#providerChecks input[value="8"]').check();assert.equal(await page.evaluate(()=>build().get('provider')),'8');
    assert.deepEqual(errors,[]);await context.close();

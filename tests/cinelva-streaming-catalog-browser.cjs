@@ -42,6 +42,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await page.locator('#service').selectOption('Netflix');
   assert.equal(await page.locator('.card').count(),1,'service filter narrows the catalog');
   assert.match(await page.locator('.card').innerText(),/Netflixの映画/);
+  await page.locator('#service').selectOption('');
   await page.locator('[data-kind="rent"]').click();
   assert.equal(await page.locator('.card').count(),1,'only rows with rental observations remain in the separate rental view');
   assert.match(await page.locator('.card').innerText(),/レンタル映画/);

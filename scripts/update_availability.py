@@ -334,6 +334,18 @@ def main():
  movies=load(ROOT/"movies.json",{}).get("movies",[])+load(ROOT/"awards.json",{}).get("catalog",[])
  old=load(PATH,{"generated_at":None,"source":"TMDB watch/providers (JustWatch)","country":"JP","movies":{}})
  cache=old.get("movies",{})
+ batch_deadline=time.monotonic()+MAX_BATCH_SECONDS
+ poster_reserve=min(60,max(1,MAX_BATCH_SECONDS*0.15))
+ discovery_pages=discovery_added=0
+ discovery_missing=[]
+ discovery_list_checked=False
+ if MAX_BATCH_SECONDS>60:
+  discovery_state=old.get("provider_discovery",{})
+  discovery_deadline=batch_deadline-poster_reserve-min(120,MAX_BATCH_SECONDS*0.33)
+  discovery_pages,discovery_added,discovery_missing,discovery_list_checked=discover_provider_candidates(
+   cache,discovery_state,KEY,deadline=discovery_deadline)
+  if discovery_list_checked:old["provider_discovery"]=discovery_state
+  print(f"Availability catalog discovery: pages={discovery_pages}; new TMDB IDs={discovery_added}; services without provider IDs={','.join(discovery_missing)}")
  candidates=build_candidates(movies,cache,TODAY)
  catalog_poster_updates=attach_catalog_posters(cache,movies)
 
@@ -341,8 +353,6 @@ def main():
  selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=budget)
  count=0
  failed=0
- batch_deadline=time.monotonic()+MAX_BATCH_SECONDS
- poster_reserve=min(60,max(1,MAX_BATCH_SECONDS*0.15))
  deadline=batch_deadline-poster_reserve
  for mid,(_,m) in selected:
   remaining=deadline-time.monotonic()
@@ -381,7 +391,7 @@ def main():
  print(f"Daily provider observation budget: {budget} (hard cap {MAX_DAILY_OBSERVATIONS}); eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
  if len(candidates)>budget*REFRESH_AFTER_DAYS:
   print("::warning title=Provider refresh capacity::Catalogue exceeds the bounded six-day refresh capacity; some observations may expire. UI must retain unknown/stale handling.")
- if count or catalog_poster_updates or poster_updates or poster_attempted:
+ if count or catalog_poster_updates or poster_updates or poster_attempted or discovery_list_checked:
   result=finish_snapshot(old,cache,count,NOW) if count else {**old,"movies":cache}
   temporary=PATH.with_suffix('.tmp')
   temporary.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')

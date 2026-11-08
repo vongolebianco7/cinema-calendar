@@ -51,8 +51,8 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             root = Path(tmp)
             snapshot, catalog, registry = (root / name for name in ("official.json", "streaming.json", "registry.json"))
             snapshot.write_text(json.dumps({"movies": [
-                {"title": "Reviewed Film", "date": "2026-11-03", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "tmdb_id": 987},
-                {"title": "Reviewed Film Alternate Title", "date": "2026-11-03", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "tmdb_id": 987},
+                {"title": "Reviewed Film", "date": "2026-11-03", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "id": 987, "tmdb": "https://www.themoviedb.org/movie/987"},
+                {"title": "Reviewed Film Alternate Title", "date": "2026-11-03", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "id": 987, "tmdb": "https://www.themoviedb.org/movie/987"},
             ]}), encoding="utf-8")
             catalog.write_text(json.dumps({"movies": []}), encoding="utf-8")
             registry.write_text(json.dumps({"services": [
@@ -63,6 +63,7 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             rows = json.loads(catalog.read_text(encoding="utf-8"))["movies"]
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0]["title"], "Reviewed Film")
+            self.assertEqual(rows[0]["tmdb_id"], 987)
 
     def test_rejects_unreviewed_source_host_without_mutating_catalog(self):
         with tempfile.TemporaryDirectory() as tmp:

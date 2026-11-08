@@ -45,7 +45,19 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
     for source in entries:
         if not isinstance(source, dict) or source.get("event") != "streaming":
             raise ValueError("Invalid official movie entry")
-        normalized_entries.append({**source, "verified": True, "content_type": "movie"})
+        reviewed = {**source, "verified": True, "content_type": "movie"}
+        tmdb_id = reviewed.get("tmdb_id")
+        movie_id = reviewed.get("id")
+        tmdb_url = reviewed.get("tmdb")
+        if (
+            tmdb_id is None
+            and type(movie_id) is int
+            and movie_id > 0
+            and tmdb_url == "https://www.themoviedb.org/movie/" + str(movie_id)
+        ):
+            # Treat an ID as canonical only when the saved URL proves the same TMDB identity.
+            reviewed["tmdb_id"] = movie_id
+        normalized_entries.append(reviewed)
     entries = normalize_premieres(normalized_entries, approved_hosts)
 
     def key(row):

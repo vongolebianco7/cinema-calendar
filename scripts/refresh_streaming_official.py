@@ -4,6 +4,7 @@ import datetime as dt
 import json
 import pathlib
 import sys
+from urllib.parse import urlsplit
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE_GLOB = "streaming-*-official-supplement.json"
@@ -48,8 +49,12 @@ def refresh(source=None, output=OUTPUT, today=None):
             title, service, date, url = (movie.get(k) for k in ("title", "service", "date", "source_url"))
             if not all(isinstance(x, str) and x.strip() for x in (title, service, date, url)):
                 raise ValueError("Missing title, service, date or provenance")
-            if service not in ALLOWED or not url.startswith("https://"):
-                raise ValueError("Unrecognized service or non-HTTPS provenance")
+            # A bare https:// prefix is not sufficient evidence of a valid source.
+            parsed_source = urlsplit(url)
+            if (service not in ALLOWED or parsed_source.scheme != "https"
+                    or not parsed_source.hostname or parsed_source.username
+                    or parsed_source.password):
+                raise ValueError("Unrecognized service or invalid HTTPS provenance")
             parsed = dt.date.fromisoformat(date)
             if date[:7] != period:
                 raise ValueError("Streaming release date outside official supplement period")

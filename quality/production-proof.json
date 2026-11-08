@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "c20ff723aaaecfc188189ddda1bfa2fb0efeff9b",
-  "verified_at": "2026-11-08T02:10:08.892Z",
-  "note": "Receipt-only refresh for PR #717 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build passed. The source head adds deterministic negative fixtures for horizontal overflow, broken local images and duplicate feedback links, and routes production QA through the tested contract."
+  "head_sha": "5de0a3cd50b84473043c5e158b9ca36973aea44d",
+  "verified_at": "2026-11-08T03:18:02Z",
+  "note": "Receipt-only refresh for PR #718 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed. The source removes the verified duplicate theatrical entry and adds duplicate identity regression coverage. Production deployment and canonical URL acceptance remain pending the Vercel Hobby deployment limit."
 }

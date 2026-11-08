@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12",
-  "verified_at": "2026-11-08T22:15:11Z",
-  "note": "Exact-head GitHub Actions passed on source commit 8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12 (all eight required workflows, including Python contracts, Chromium/WebKit browser checks, visual QA, mobile smoke, backend build, and quality gate). Receipt-only update after streaming poster metadata recovery. Production publication remains pending Vercel Hobby daily deployment quota clearance."
+  "head_sha": "d4948186a84a781829225dc3f66bc335950d6386",
+  "verified_at": "2026-11-08T23:36:53Z",
+  "note": "Exact-head GitHub Actions passed on source commit d4948186a84a781829225dc3f66bc335950d6386: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build all succeeded. Refreshes the receipt for the source merged to main as d0c3c5b4a334fd7f80dd18d2c35107ca874ab049; production publication is permitted only while this executable source digest remains unchanged."
 }

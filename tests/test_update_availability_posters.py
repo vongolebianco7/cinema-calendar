@@ -2,8 +2,11 @@
 import datetime
 import importlib.util
 import io
+import json
+import os
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -63,6 +66,39 @@ class AvailabilityPosterTests(unittest.TestCase):
             cache, NOW + datetime.timedelta(days=29)), [])
         self.assertEqual(MODULE.select_missing_poster_ids(
             cache, NOW + datetime.timedelta(days=31)), [530915])
+
+    def test_main_persists_no_art_check_without_advancing_provider_freshness(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "availability.json"
+            previous = {
+                "generated_at": "2026-10-01T00:00:00Z",
+                "movies": {
+                    "530915": {
+                        "title": "1917",
+                        "services": ["U-NEXT"],
+                        "checked_at": "2026-10-01T00:00:00Z",
+                    }
+                },
+            }
+            path.write_text(json.dumps(previous), encoding="utf-8")
+            (root / "movies.json").write_text('{"movies":[]}', encoding="utf-8")
+            (root / "awards.json").write_text('{"catalog":[]}', encoding="utf-8")
+
+            def no_art_lookup(cache, *_args, **_kwargs):
+                cache["530915"]["poster_checked_at"] = NOW.isoformat()
+                return (0, 0, 1)
+
+            with patch.object(MODULE, "ROOT", root), patch.object(MODULE, "PATH", path), \
+                 patch.dict(os.environ, {"TMDB_API_KEY": "test-key"}), \
+                 patch.object(MODULE.urllib.request, "urlopen", side_effect=TimeoutError("offline")), \
+                 patch.object(MODULE, "enrich_missing_posters", side_effect=no_art_lookup):
+                with self.assertRaises(RuntimeError):
+                    MODULE.main()
+
+            result = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(result["generated_at"], previous["generated_at"])
+            self.assertEqual(result["movies"]["530915"]["poster_checked_at"], NOW.isoformat())
 
     def test_existing_poster_is_never_overwritten(self):
         existing = "https://image.tmdb.org/t/p/w500/approved.jpg"

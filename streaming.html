@@ -46,7 +46,7 @@ a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 16px}.top{position:
 const TARGETS=["Netflix","Prime Video","U-NEXT","Disney+","ABEMA","WOWOW","Hulu","FOD","Apple TV+","Lemino","DMM TV","TELASA"];
 const aliases={
  "Netflix":n=>/^Netflix/i.test(n),
- "Prime Video":n=>/(Prime Video|Amazon Video|Amazon Channel)/i.test(n),
+ "Prime Video":n=>/^(Prime Video|Amazon Prime Video with Ads|Amazon Video)$/i.test(n),
  "U-NEXT":n=>/U-Next/i.test(n),
  "Disney+":n=>/Disney\+/i.test(n),
  "ABEMA":n=>/^ABEMA$/i.test(n),

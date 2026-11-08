@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12",
-  "verified_at": "2026-11-08T22:15:11Z",
-  "note": "Exact-head GitHub Actions passed on source commit 8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12 (all eight required workflows, including Python contracts, Chromium/WebKit browser checks, visual QA, mobile smoke, backend build, and quality gate). Receipt-only update after streaming poster metadata recovery. Production publication remains pending Vercel Hobby daily deployment quota clearance."
+  "head_sha": "403aff27d74cd21a5bc7f3126eb87727e6eee131",
+  "verified_at": "2026-11-08T22:37:00Z",
+  "note": "Exact-head GitHub Actions passed on source commit 403aff27d74cd21a5bc7f3126eb87727e6eee131 (all 8 required workflows, including Python contracts, Chromium/WebKit browser checks, visual QA, mobile smoke, backend build, and quality gate). Receipt-only refresh after #748 snapshot-conflict recovery and blank camelCase TMDB ID regression fix. Production publication remains pending Vercel Hobby daily deployment quota clearance."
 }

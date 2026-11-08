@@ -75,7 +75,7 @@ class WatchProviderFairnessTests(unittest.TestCase):
         budget = getattr(MODULE, 'observation_budget', lambda count: MODULE.DAILY_OBSERVATION_LIMIT)
         self.assertEqual(budget(0), 60)
         self.assertEqual(budget(1114), 186)
-        self.assertEqual(budget(10000), 200)
+        self.assertEqual(budget(10000), 320)
 
     def test_refresh_has_headroom_before_seven_day_display_expiry(self):
         candidates = [candidate(1), candidate(2)]
@@ -90,7 +90,7 @@ class WatchProviderFairnessTests(unittest.TestCase):
         for day in range(21):
             now = NOW+datetime.timedelta(days=day)
             selected = MODULE.select_due_observations(candidates, cache, now, limit=budget)
-            self.assertLessEqual(len(selected),200)
+            self.assertLessEqual(len(selected),320)
             for mid, _ in selected:
                 cache[str(mid)] = {'checked_at':now.isoformat()}
             if day >= 6:

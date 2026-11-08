@@ -49,6 +49,24 @@ class RefreshTest(unittest.TestCase):
                 self.assertNotIn(field, saved)
             self.assertEqual(saved["title"], "Test")
 
+    def test_conflicting_tmdb_aliases_preserve_last_known_good(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            entry = {
+                "title": "Test", "date": "2026-11-10", "event": "streaming",
+                "service": "Netflix", "source_url": "https://example.org/official",
+                "tmdb_id": 123, "tmdbId": "123",
+            }
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            previous = output.read_bytes()
+            conflicting = {**entry, "tmdbId": "999", "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"}
+            source.write_text(json.dumps({"period": "2026-11", "movies": [conflicting]}), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Conflicting TMDB"):
+                module.refresh(source, output)
+            self.assertEqual(output.read_bytes(), previous)
+
     def test_duplicate_enrichment_requires_matching_movie_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)

@@ -19,7 +19,7 @@ class AvailabilityUpdateTest(unittest.TestCase):
             'flatrate':['Netflix'],
             'free':['ABEMA'],
             'ads':['Hulu'],
-            'rent':['Prime Video'],
+            'rent':['Amazon Video'],
             'buy':['Apple TV+'],
         })
 

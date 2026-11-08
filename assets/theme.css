@@ -312,3 +312,24 @@ html[data-theme="light"] :is(.templateHint,.completionHint){color:var(--muted)!i
 @media(max-width:360px){#summaryView #csTop.cs-posters{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 /* Keep the poster fallback label readable when an outdoor film has no artwork. */
 html[data-theme="dark"] .outdoorFilmPlaceholder{color:#aaa}
+
+/* Movie detail screening options: readable in light mode and clearly mark the top recommendation. */
+html[data-theme="light"] #detail .formatCompact,
+html[data-theme="light"] #detail .formatCompactBody {
+  background:var(--panel)!important;color:var(--text)!important;border-color:var(--line)!important;
+}
+html[data-theme="light"] #detail .formatCompact.recommended {
+  border:2px solid #8a6b21!important;box-shadow:0 0 0 2px #e9d9a8!important;
+}
+html[data-theme="light"] #detail .formatCompact :is(summary,.formatCompactName,.formatMetric b,.formatMetric span,.formatCompactVerdict) {
+  color:var(--text)!important;
+}
+html[data-theme="light"] #detail .formatCompact .formatSources a {color:#735516!important}
+html[data-theme="light"] #detail .formatCompactRecommended {
+  color:#3d321a!important;background:#f0e4be!important;border:1px solid #9b7930!important;
+}
+
+/* One explicit best-fit marker, including on cards below the four-star threshold. */
+.formatCompactRecommended{display:inline-flex;align-items:center;justify-content:center;margin:3px 0 0;padding:2px 6px;border:1px solid #9b7930;border-radius:999px;background:#f0e4be;color:#3d321a;font-size:9px;font-style:normal;font-weight:800;line-height:1.35}
+.formatCompact.recommended,.experienceFitCard.recommended{border:2px solid #d6ae56!important;box-shadow:0 0 0 2px #d6ae5633}
+html[data-theme="light"] .experienceFitCard.recommended{border:2px solid #8a6b21!important;box-shadow:0 0 0 2px #e9d9a8!important}

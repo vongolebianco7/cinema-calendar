@@ -19,7 +19,7 @@ test('original release dates use the requested full-date caption', () => {
 test('local official events resolve authoritative film details using their explicit TMDB identity', async () => {
   for (const film of [event, {...event,tmdb:undefined,tmdb_id:157336}, {...event,id:900001,tmdb:'https://www.themoviedb.org/movie/157336'}]) {
     const calls=[], rendered=[], urls=[];
-    const context={API:'https://example.invalid',URL,location:{href:'https://example.invalid/search.html'},history:{replaceState:(_a,_b,url)=>urls.push(String(url))},modal:{classList:{add(){}}},detail:{},
+    const context={API:'https://example.invalid',URL,location:{href:'https://example.invalid/search.html'},history:{replaceState:(_a,_b,url)=>urls.push(String(url))},modal:{classList:{add(){}}},detail:{},renderMovieRelated:()=>'',movieRuntimeLabel:m=>Number(m.runtime)>0?m.runtime+'分':'未確認',
       withTimeout:promise=>promise,loadScreeningEvidence:async()=>({}),renderDetail:m=>rendered.push(m),
       fetch:async url=>{calls.push(url);return {ok:true,json:async()=>url.includes('movie-detail')
         ?{movie:{id:157336,year:'2014',date:'2014-11-05',event:'catalog'}}:{guides:[]}};}};
@@ -34,7 +34,7 @@ test('local official events resolve authoritative film details using their expli
 
 test('offline review actions target the canonical film rather than a local event ID', () => {
   const detail={append(){},querySelectorAll:()=>[]};
-  const context={E:String,detail,URLSearchParams,location:{search:''},recordEntryUrl:String,
+  const context={E:String,detail,URLSearchParams,location:{search:''},recordEntryUrl:String,renderMovieRelated:()=>'',movieRuntimeLabel:m=>Number(m.runtime)>0?m.runtime+'分':'未確認',
     CinemapCalendarContext:{read:()=>null},screeningRecommendationV3Html:()=>'',renderMovieInformation:()=>'',viewingTimelineHtml:()=>'',
     document:{createElement:()=>({innerHTML:'',querySelector:()=>null}),getElementById:()=>null,querySelectorAll:()=>[]},showMovieAwardHistory(){},criticRegistry:()=>Promise.resolve({})};
   vm.runInNewContext(helpers+section('function watchProvidersHtml(', 'function viewingTimelineHtml(')+section('function mountDetailRelatedReviews(', 'function relatedHtml(')+section('function renderDetail(', 'document.getElementById("close").onclick='),context);
@@ -54,7 +54,7 @@ test('search cards do not use a streaming premiere as the original film year', a
 });
 
 test('offline details retain the event date with its actual meaning', () => {
-  const context={E:String};
+  const context={E:String,movieRuntimeLabel:m=>Number(m.runtime)>0?m.runtime+'分':'未確認'};
   vm.runInNewContext(helpers+section('function viewingTimelineHtml(', 'function screeningKnown(')
     +section('function renderMovieInformation(', "document.addEventListener('click',event=>"),context);
   const timeline=context.viewingTimelineHtml(event,{}), info=context.renderMovieInformation(event);

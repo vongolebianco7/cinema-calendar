@@ -95,7 +95,35 @@ permissions:
   contents: read
 
 jobs:
+  browser-scope:
+    runs-on: ubuntu-latest
+    outputs:
+      run_browser: ${{ steps.browser_scope.outputs.run_browser }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Classify changes for full frontend browser journey
+        id: browser_scope
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" != 'pull_request' ]; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch --no-tags origin "$BASE_SHA" --depth=1
+          git diff --name-only "$BASE_SHA" HEAD > /tmp/cinelva-frontend-changed
+          # Fail safe: audit unknown changes and empty diffs.
+          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev '^(docs/|tests/.*\.py$|scripts/quality_gate\.py$|scripts/score_quality\.py$|quality/scorecard\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run_browser=false' >> "$GITHUB_OUTPUT"
+            echo 'Skipping duplicate full browser journey for non-UI-only PR.' >> "$GITHUB_STEP_SUMMARY"
+          fi
   browser-journey:
+    needs: browser-scope
+    if: needs.browser-scope.outputs.run_browser == 'true'
     name: Frontend browser journey shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -180,7 +208,8 @@ jobs:
           path: artifacts/
           if-no-files-found: warn
   validate:
-    needs: browser-journey
+    needs: [browser-scope, browser-journey]
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -188,6 +217,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Enforce browser journey result
+        env:
+          BROWSER_SCOPE: ${{ needs.browser-scope.result }}
+          BROWSER_REQUIRED: ${{ needs.browser-scope.outputs.run_browser }}
+          BROWSER_RESULT: ${{ needs.browser-journey.result }}
+        run: |
+          test "$BROWSER_SCOPE" = success
+          if [ "$BROWSER_REQUIRED" = true ]; then
+            test "$BROWSER_RESULT" = success
+          else
+            test "$BROWSER_RESULT" = skipped
+          fi
       - name: Check inline JavaScript syntax
         run: |
           python - <<'PY'
@@ -233,26 +274,6 @@ jobs:
           python scripts/enrich_directors.py --normalize-only
           python scripts/build_director_mobile.py
           node scripts/build-director-feature-index.cjs
-      - name: Classify changes for full frontend browser journey
-        id: browser_scope
-        shell: bash
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: |
-          set -euo pipefail
-          if [ "${{ github.event_name }}" != 'pull_request' ]; then
-            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git fetch --no-tags origin "$BASE_SHA" --depth=1
-          git diff --name-only "$BASE_SHA" HEAD > /tmp/cinelva-frontend-changed
-          # Fail safe: audit unknown changes and empty diffs.
-          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev '^(docs/|tests/.*\.py$|scripts/quality_gate\.py$|scripts/score_quality\.py$|quality/scorecard\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
-            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'run_browser=false' >> "$GITHUB_OUTPUT"
-            echo 'Skipping duplicate full browser journey for non-UI-only PR.' >> "$GITHUB_STEP_SUMMARY"
-          fi
       - name: Preserve cinema discount evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

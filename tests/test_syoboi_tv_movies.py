@@ -94,6 +94,35 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         ambiguous = merge_tv_snapshot({"movies": [previous, conflicting]}, [moved])
         self.assertEqual(ambiguous["automated_movies"], [moved])
 
+    def test_missing_tv_artwork_uses_only_unique_same_title_and_year_catalog_match(self):
+        tv = [{"title": "GHOST IN THE SHELL 攻殻機動隊", "year": 1995, "service": "BS局"}]
+        catalog = [
+            {"id": 9323, "title": "GHOST IN THE SHELL / 攻殻機動隊", "date": "1995-11-18",
+             "poster": "https://image.tmdb.org/t/p/w500/ghost.jpg"},
+            {"id": 9323, "title": "GHOST IN THE SHELL / 攻殻機動隊", "date": "1995-11-18",
+             "poster": "https://image.tmdb.org/t/p/w342/ghost.jpg"},
+            {"id": 76, "title": "GHOST IN THE SHELL / 攻殻機動隊", "date": "2017-03-29",
+             "poster": "https://image.tmdb.org/t/p/w500/remake.jpg"},
+        ]
+        self.assertEqual(update_syoboi_tv_movies.enrich_catalog_posters(tv, catalog), [
+            {**tv[0], "id": 9323, "tmdb": "https://www.themoviedb.org/movie/9323",
+             "poster": "https://image.tmdb.org/t/p/w500/ghost.jpg"}
+        ])
+
+    def test_catalog_poster_match_refuses_ambiguous_ids_and_untrusted_urls(self):
+        tv = [{"title": "作品", "year": 2020}]
+        ambiguous = [
+            {"id": 1, "title": "作品", "date": "2020-01-01", "poster": "https://image.tmdb.org/t/p/w500/one.jpg"},
+            {"id": 2, "title": "作品", "date": "2020-01-01", "poster": "https://image.tmdb.org/t/p/w500/two.jpg"},
+        ]
+        untrusted = [{"id": 1, "title": "作品", "date": "2020-01-01", "poster": "https://example.com/poster.jpg"}]
+        self.assertEqual(update_syoboi_tv_movies.enrich_catalog_posters(tv, ambiguous), tv)
+        self.assertEqual(update_syoboi_tv_movies.enrich_catalog_posters(tv, untrusted), tv)
+        conflicting_id = [{**tv[0], "id": 99}]
+        self.assertEqual(update_syoboi_tv_movies.enrich_catalog_posters(conflicting_id, [
+            {"id": 1, "title": "作品", "date": "2020-01-01", "poster": "https://image.tmdb.org/t/p/w500/one.jpg"}
+        ]), conflicting_id)
+
     def test_normalization_preserves_same_channel_repeat_airings(self):
         program = {"Cat": 8, "Title": "映画", "TID": 1, "PID": 10, "ChName": "BS局"}
         first = {**program, "StTimeU": epoch(NOW + dt.timedelta(hours=1))}

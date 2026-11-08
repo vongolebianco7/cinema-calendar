@@ -13,6 +13,7 @@ import re
 import sys
 import tempfile
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -138,6 +139,96 @@ def _preserve_artwork(previous, upcoming):
             yield row
 
 
+def _catalog_identity(row):
+    movie_id = str(row.get("tmdb_id") or row.get("tmdbId") or row.get("id") or "")
+    poster = str(row.get("poster") or row.get("poster_url") or "")
+    if not movie_id.isdigit() or not re.fullmatch(
+            r"https://image\.tmdb\.org/t/p/w\d+/[\w.-]+\.(?:jpg|jpeg|png|webp)", poster):
+        return None
+    raw_year = row.get("release_year") or row.get("year") or row.get("release_date") or row.get("date") or ""
+    year_match = re.match(r"(\d{4})", str(raw_year))
+    if not year_match:
+        return None
+    year = year_match.group(1)
+    names = {row.get("title"), row.get("original_title"), row.get("name")}
+    identities = set()
+    for name in names:
+        normalized = unicodedata.normalize("NFKC", str(name or "")).casefold()
+        normalized = re.sub(r"[^\w]+", "", normalized)
+        if normalized:
+            identities.add((normalized, year))
+    return movie_id, poster, identities
+
+
+def enrich_catalog_posters(rows, catalog):
+    """Reuse artwork only for one exact normalized title/year/TMDB identity."""
+    candidates = {}
+    for item in catalog:
+        if not isinstance(item, dict):
+            continue
+        identity = _catalog_identity(item)
+        if not identity:
+            continue
+        movie_id, poster, keys = identity
+        for key in keys:
+            candidates.setdefault(key, {}).setdefault(movie_id, set()).add(poster)
+    enriched = []
+    for row in rows:
+        if row.get("poster"):
+            enriched.append(row)
+            continue
+        raw_year = row.get("release_year") or row.get("year") or row.get("date") or ""
+        year_match = re.match(r"(\d{4})", str(raw_year))
+        title = unicodedata.normalize("NFKC", str(row.get("title") or "")).casefold()
+        title = re.sub(r"[^\w]+", "", title)
+        matches = candidates.get((title, year_match.group(1)), {}) if title and year_match else {}
+        if len(matches) != 1:
+            enriched.append(row)
+            continue
+        movie_id, posters = next(iter(matches.items()))
+        existing_id = str(row.get("tmdb_id") or row.get("tmdbId") or row.get("id") or "")
+        existing_link = str(row.get("tmdb") or "")
+        if existing_id and existing_id != movie_id:
+            enriched.append(row)
+            continue
+        if existing_link and existing_link != f"https://www.themoviedb.org/movie/{movie_id}":
+            enriched.append(row)
+            continue
+        poster = max(posters, key=lambda value: int(re.search(r"/w(\d+)/", value).group(1)))
+        enriched.append({**row, "id": int(movie_id),
+                         "tmdb": f"https://www.themoviedb.org/movie/{movie_id}",
+                         "poster": poster})
+    return enriched
+
+
+def _poster_catalog(root=ROOT):
+    """Read only existing, reviewed local movie catalogs; never discover remotely."""
+    paths = ("movies.json", "theatrical.json", "now_playing.json", "directors.json",
+             "directors-mobile.json", "rankings.json", "awards.json", "boxoffice.json",
+             "special_screenings.json")
+    catalog = []
+
+    def collect(value):
+        if isinstance(value, dict):
+            if value.get("title") or value.get("original_title") or value.get("name"):
+                catalog.append(value)
+            for child in value.values():
+                collect(child)
+        elif isinstance(value, list):
+            for child in value:
+                collect(child)
+
+    for name in paths:
+        path = Path(root) / "data" / name
+        if not path.is_file():
+            continue
+        try:
+            collect(json.loads(path.read_text(encoding="utf-8")))
+        except (OSError, json.JSONDecodeError):
+            continue
+    return catalog
+
+
 def _write_snapshot(path, snapshot):
     encoded = json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -233,7 +324,7 @@ def fetch_title_metadata(programs):
     return metadata
 
 
-def merge_tv_snapshot(current, automated, *, generated_at=None, allow_empty=False):
+def merge_tv_snapshot(current, automated, *, generated_at=None, allow_empty=False, catalog=()):
     """Replace only this source's rows; preserve all manually curated TV records."""
     if not automated and not allow_empty:
         raise ValueError("No valid upcoming Syoboi movie broadcasts; keep the last good snapshot")
@@ -242,6 +333,7 @@ def merge_tv_snapshot(current, automated, *, generated_at=None, allow_empty=Fals
     manual = [row for row in current["movies"] if row.get("source_id") != "syoboi_calendar"]
     manual_keys = {_key(row) for row in manual if isinstance(row, dict)}
     fresh = list(_preserve_artwork(current["movies"], (row for row in automated if _key(row) not in manual_keys)))
+    fresh = enrich_catalog_posters(fresh, catalog)
     result = dict(current)
     result["movies"] = manual + fresh
     result["automated_movies"] = fresh
@@ -285,6 +377,14 @@ def run(path=DATA_PATH, *, fetcher=None, now=None):
         fetched = fetcher() if fetcher is not None else fetch_feed(current)
         if isinstance(fetched, FeedResponse):
             if fetched.payload is None:
+                refreshed = merge_tv_snapshot(
+                    current,
+                    current.get("automated_movies") or [row for row in current["movies"] if row.get("source_id") == "syoboi_calendar"],
+                    generated_at=current.get("automation_generated_at"),
+                    allow_empty=True,
+                    catalog=_poster_catalog(path.parent.parent),
+                )
+                current.update(refreshed)
                 current["automation_checked_at"] = dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
                 _write_snapshot(path, current)
                 print("Syoboi feed returned HTTP 304; cached snapshot remains current")
@@ -299,7 +399,7 @@ def run(path=DATA_PATH, *, fetcher=None, now=None):
             raise ValueError("Syoboi feed is unexpectedly empty; keep the last good snapshot")
         title_metadata = fetch_title_metadata(programs)
         automated = normalize_feed(programs, now=now, title_metadata=title_metadata)
-        updated = merge_tv_snapshot(current, automated, allow_empty=True)
+        updated = merge_tv_snapshot(current, automated, allow_empty=True, catalog=_poster_catalog(path.parent.parent))
         updated.update({key: value for key, value in metadata.items() if value})
         updated["automation_checked_at"] = dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
         _write_snapshot(path, updated)

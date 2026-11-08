@@ -48,7 +48,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.match(await page.locator('.card').innerText(),/レンタル映画/);
   await page.locator('#service').selectOption('Prime Video');
   assert.equal(await page.locator('.card').count(),1,'service filtering also works in the rental view');
-  assert.match(await page.locator('#dataNote').innerText(),/配信開始日を保証するものではありません/);
+  assert.match(await page.locator('.footer').innerText(),/配信開始日を保証するものではありません/);
   assert.deepEqual(errors,[]);
   await context.close();
   console.log('Current streaming catalog filters observed availability, excludes stale rows, renders known posters, and labels availability separately from premiere dates.');

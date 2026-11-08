@@ -122,6 +122,10 @@ def enrich_missing_posters(cache,api_key,opener=urllib.request.urlopen,now=None,
    print("poster detail lookup skipped:",mid,type(exc).__name__)
  return updated,failed,attempted
 
+def provider_groups(region):
+ """Keep subscription, free/ad-supported, rental, and purchase observations distinct."""
+ return {kind:provider_names(region.get(kind)) for kind in ("flatrate","free","ads","rent","buy")}
+
 def finish_snapshot(old, cache, count, now):
  if not count:return old
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}
@@ -241,16 +245,17 @@ def main():
   try:
    with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"CINEMA-NOW/1.0"}),timeout=min(25,remaining)) as r:
     jp=(json.load(r).get("results") or {}).get("JP") or {}
-   flatrate=provider_names(jp.get("flatrate"))
-   rent=provider_names(jp.get("rent"))
-   buy=provider_names(jp.get("buy"))
+   groups=provider_groups(jp)
+   flatrate,free,ads,rent,buy=(groups[kind] for kind in ("flatrate","free","ads","rent","buy"))
    item=cache.get(str(mid),{"title":m.get("title"),"changes":[]})
-   prev=(item.get("flatrate",item.get("services",[])),item.get("rent",[]),item.get("buy",[]))
-   current=(flatrate,rent,buy)
+   prev=(item.get("flatrate",item.get("services",[])),item.get("free",[]),item.get("ads",[]),item.get("rent",[]),item.get("buy",[]))
+   current=(flatrate,free,ads,rent,buy)
    if prev!=current:
-    item.setdefault("changes",[]).append({"observed_at":NOW,"flatrate":flatrate,"rent":rent,"buy":buy})
+    item.setdefault("changes",[]).append({"observed_at":NOW,"flatrate":flatrate,"free":free,"ads":ads,"rent":rent,"buy":buy})
    item["services"]=flatrate
    item["flatrate"]=flatrate
+   item["free"]=free
+   item["ads"]=ads
    item["rent"]=rent
    item["buy"]=buy
    item["checked_at"]=NOW

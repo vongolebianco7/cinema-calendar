@@ -25,6 +25,22 @@ class AvailabilityFreshnessAuditTests(unittest.TestCase):
         self.assertEqual(summary["fresh_pct"],25)
         self.assertEqual(summary["observations_with_providers_fresh_7d"],1)
 
+    def test_free_and_ad_supported_provider_observations_are_counted(self):
+        sample={"movies":{
+            "1":{"checked_at":"2026-10-16T11:00:00Z","free":["ABEMA"],"flatrate":[]},
+            "2":{"checked_at":"2026-10-16T11:00:00Z","ads":["Hulu"],"flatrate":[]},
+        }}
+        report=MODULE.summarize(sample,NOW)
+        self.assertEqual(report["fresh_7d"],2)
+        self.assertEqual(report["observations_with_providers_fresh_7d"],2)
+        self.assertEqual(report["fresh_by_provider_kind"],{
+            "flatrate":{},
+            "free":{"ABEMA":1},
+            "ads":{"Hulu":1},
+            "rent":{},
+            "buy":{},
+        })
+
     def test_unknown_and_future_checks_never_count_as_fresh(self):
         sample={"movies":{"1":{"checked_at":"2026-10-18T12:00:00Z"},
                           "2":{"checked_at":"not-a-timestamp"}}}

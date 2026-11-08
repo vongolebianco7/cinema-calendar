@@ -115,7 +115,7 @@ jobs:
           git fetch --no-tags origin "$BASE_SHA" --depth=1
           git diff --name-only "$BASE_SHA" HEAD > /tmp/cinelva-frontend-changed
           # Fail safe: audit unknown changes and empty diffs.
-          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev 'grep -Ev '^(docs/|tests/cinelva-mobile-feedback-browser\.cjs$|tests/.*\.py$|data/streaming(-official-current|-[0-9]{4}-[0-9]{2}-official-supplement)?\.json$|\.github/workflows/(validate-frontend|refresh-official-streaming)\.yml$|scripts/(refresh_streaming_official|quality_gate|score_quality)\.py$|quality/scorecard\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
+          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev '^(docs/|tests/cinelva-mobile-feedback-browser\.cjs$|tests/.*\.py$|data/streaming(-official-current|-[0-9]{4}-[0-9]{2}-official-supplement)?\.json$|\.github/workflows/(validate-frontend|refresh-official-streaming)\.yml$|scripts/(refresh_streaming_official|quality_gate|score_quality)\.py$|quality/scorecard\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
             echo 'run_browser=true' >> "$GITHUB_OUTPUT"
           else
             echo 'run_browser=false' >> "$GITHUB_OUTPUT"

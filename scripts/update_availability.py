@@ -12,6 +12,9 @@ ROOT=Path("data")
 TODAY=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date()
 NOW=datetime.datetime.now(datetime.timezone.utc).isoformat()
 PATH=ROOT/"availability.json"
+IMAGE_BASE="https://image.tmdb.org/t/p/w500"
+MAX_DAILY_POSTER_LOOKUPS=80
+POSTER_RECHECK_DAYS=30
 
 ALIASES={
  "Amazon Prime Video":"Prime Video",
@@ -33,6 +36,89 @@ def provider_names(rows):
   name=(p.get("provider_name") or "").strip()
   if name:names.add(ALIASES.get(name,name))
  return sorted(names)
+
+def poster_url(path):
+ if not isinstance(path,str) or not path.startswith("/") or path.startswith("//"):
+  return None
+ return IMAGE_BASE+path
+
+def attach_catalog_posters(cache,movies):
+ """Reuse only the same TMDB ID's canonical artwork; never title-match here."""
+ updated=0
+ for movie in movies:
+  mid=movie.get("id")
+  if not isinstance(mid,int) or mid<=0:
+   continue
+  item=cache.get(str(mid))
+  if not isinstance(item,dict) or item.get("poster"):
+   continue
+  poster=movie.get("poster")
+  if not isinstance(poster,str) or not poster.startswith("https://image.tmdb.org/t/p/"):
+   poster=poster_url(movie.get("poster_path"))
+  if poster:
+   item["poster"]=poster
+   item["poster_source"]="TMDB canonical movie catalog"
+   cache[str(mid)]=item
+   updated+=1
+ return updated
+
+def select_missing_poster_ids(cache,now,limit=MAX_DAILY_POSTER_LOOKUPS):
+ """Pick oldest unchecked missing-poster IDs for a bounded daily TMDB lookup."""
+ candidates=[]
+ for raw_id,item in cache.items():
+  if not isinstance(raw_id,str) or not raw_id.isdecimal() or raw_id.startswith("0") or not isinstance(item,dict) or item.get("poster"):
+   continue
+  checked=item.get("poster_checked_at")
+  checked_dt=None
+  if checked:
+   try:
+    checked_dt=datetime.datetime.fromisoformat(checked.replace("Z","+00:00"))
+    if checked_dt.tzinfo is None:
+     checked_dt=None
+    else:
+     checked_dt=checked_dt.astimezone(datetime.timezone.utc)
+   except (TypeError,ValueError,AttributeError):
+    checked_dt=None
+  if checked_dt and datetime.timedelta(0)<=now-checked_dt<datetime.timedelta(days=POSTER_RECHECK_DAYS):
+   continue
+  candidates.append((checked_dt.timestamp() if checked_dt else float("-inf"),int(raw_id)))
+ return [mid for _,mid in sorted(candidates)[:max(0,int(limit))]]
+
+def enrich_missing_posters(cache,api_key,opener=urllib.request.urlopen,now=None,limit=MAX_DAILY_POSTER_LOOKUPS,delay=0.25):
+ """Get official TMDB movie artwork for observed IDs, keeping existing values."""
+ now=now or datetime.datetime.now(datetime.timezone.utc)
+ checked_at=now.astimezone(datetime.timezone.utc).isoformat()
+ updated=failed=attempted=0
+ last_request=0.0
+ for mid in select_missing_poster_ids(cache,now,limit):
+  item=cache.get(str(mid))
+  if not isinstance(item,dict) or item.get("poster"):
+   continue
+  wait=delay-(time.monotonic()-last_request)
+  if wait>0:
+   time.sleep(wait)
+  url="https://api.themoviedb.org/3/movie/"+str(mid)+"?"+urllib.parse.urlencode({"api_key":api_key,"language":"ja-JP"})
+  try:
+   with opener(urllib.request.Request(url,headers={"Accept":"application/json"}),timeout=15) as response:
+    result=json.load(response)
+   attempted+=1
+   last_request=time.monotonic()
+   if result.get("id")!=mid:
+    failed+=1
+    continue
+   poster=poster_url(result.get("poster_path"))
+   item["poster_checked_at"]=checked_at
+   if poster and not item.get("poster"):
+    item["poster"]=poster
+    item["poster_source"]="TMDB movie details"
+    updated+=1
+   cache[str(mid)]=item
+  except Exception as exc:
+   attempted+=1
+   failed+=1
+   last_request=time.monotonic()
+   print("poster detail lookup skipped:",mid,type(exc).__name__)
+ return updated,failed,attempted
 
 def finish_snapshot(old, cache, count, now):
  if not count:return old
@@ -135,6 +221,7 @@ def main():
  old=load(PATH,{"generated_at":None,"source":"TMDB watch/providers (JustWatch)","country":"JP","movies":{}})
  cache=old.get("movies",{})
  candidates=build_candidates(movies,cache,TODAY)
+ catalog_poster_updates=attach_catalog_posters(cache,movies)
 
  budget=observation_budget(len(candidates))
  selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=budget)
@@ -172,16 +259,18 @@ def main():
    failed+=1
    print("provider check skipped:",mid,type(exc).__name__)
 
+ poster_updates,poster_failures,poster_attempted=enrich_missing_posters(cache,KEY,limit=MAX_DAILY_POSTER_LOOKUPS)
+ print(f"Availability poster catalog matches: {catalog_poster_updates}; TMDB detail lookups: {poster_attempted}; posters added: {poster_updates}; failures: {poster_failures}")
  print(f"Daily provider observation budget: {budget} (hard cap {MAX_DAILY_OBSERVATIONS}); eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
  if len(candidates)>budget*REFRESH_AFTER_DAYS:
   print("::warning title=Provider refresh capacity::Catalogue exceeds the bounded six-day refresh capacity; some observations may expire. UI must retain unknown/stale handling.")
- if count:
-  result=finish_snapshot(old,cache,count,NOW)
+ if count or catalog_poster_updates or poster_updates:
+  result=finish_snapshot(old,cache,count,NOW) if count else {**old,"movies":cache}
   temporary=PATH.with_suffix('.tmp')
   temporary.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
   temporary.replace(PATH)
  else:
-  print("No successful provider observations; preserving previous snapshot and update timestamp")
+  print("No successful provider observations or poster updates; preserving previous snapshot and update timestamp")
  print(f"Watch provider snapshots updated: {count}; failed: {failed}; attempted: {count+failed}; deferred: {len(selected)-count-failed}")
  if selected and count==0:
   raise RuntimeError("All TMDB provider observations failed; previous snapshot preserved")

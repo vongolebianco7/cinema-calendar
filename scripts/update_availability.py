@@ -84,13 +84,15 @@ def select_missing_poster_ids(cache,now,limit=MAX_DAILY_POSTER_LOOKUPS):
   candidates.append((checked_dt.timestamp() if checked_dt else float("-inf"),int(raw_id)))
  return [mid for _,mid in sorted(candidates)[:max(0,int(limit))]]
 
-def enrich_missing_posters(cache,api_key,opener=urllib.request.urlopen,now=None,limit=MAX_DAILY_POSTER_LOOKUPS,delay=0.25):
+def enrich_missing_posters(cache,api_key,opener=urllib.request.urlopen,now=None,limit=MAX_DAILY_POSTER_LOOKUPS,delay=0.25,deadline=None):
  """Get official TMDB movie artwork for observed IDs, keeping existing values."""
  now=now or datetime.datetime.now(datetime.timezone.utc)
  checked_at=now.astimezone(datetime.timezone.utc).isoformat()
  updated=failed=attempted=0
  last_request=0.0
  for mid in select_missing_poster_ids(cache,now,limit):
+  if deadline is not None and time.monotonic()>=deadline:
+   break
   item=cache.get(str(mid))
   if not isinstance(item,dict) or item.get("poster"):
    continue
@@ -227,7 +229,8 @@ def main():
  selected=select_due_observations(candidates,cache,datetime.datetime.now(datetime.timezone.utc),limit=budget)
  count=0
  failed=0
- deadline=time.monotonic()+MAX_BATCH_SECONDS
+ batch_deadline=time.monotonic()+MAX_BATCH_SECONDS
+ deadline=batch_deadline-60
  for mid,(_,m) in selected:
   remaining=deadline-time.monotonic()
   if remaining<=0:
@@ -259,7 +262,7 @@ def main():
    failed+=1
    print("provider check skipped:",mid,type(exc).__name__)
 
- poster_updates,poster_failures,poster_attempted=enrich_missing_posters(cache,KEY,limit=MAX_DAILY_POSTER_LOOKUPS)
+ poster_updates,poster_failures,poster_attempted=enrich_missing_posters(cache,KEY,limit=MAX_DAILY_POSTER_LOOKUPS,deadline=batch_deadline)
  print(f"Availability poster catalog matches: {catalog_poster_updates}; TMDB detail lookups: {poster_attempted}; posters added: {poster_updates}; failures: {poster_failures}")
  print(f"Daily provider observation budget: {budget} (hard cap {MAX_DAILY_OBSERVATIONS}); eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
  if len(candidates)>budget*REFRESH_AFTER_DAYS:

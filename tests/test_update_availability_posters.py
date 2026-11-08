@@ -50,6 +50,20 @@ class AvailabilityPosterTests(unittest.TestCase):
         self.assertEqual(cache["1406894"]["poster_source"], "TMDB movie details")
         self.assertEqual(cache["1406894"]["poster_checked_at"], NOW.isoformat())
 
+    def test_no_art_result_is_recorded_for_recheck_backoff(self):
+        cache = {"530915": {"title": "1917"}}
+        def opener(*_args, **_kwargs):
+            return JsonResponse(b'{"id":530915,"poster_path":null}')
+
+        updated, failed, attempted = MODULE.enrich_missing_posters(
+            cache, "test-key", opener=opener, now=NOW, limit=1, delay=0)
+        self.assertEqual((updated, failed, attempted), (0, 0, 1))
+        self.assertEqual(cache["530915"]["poster_checked_at"], NOW.isoformat())
+        self.assertEqual(MODULE.select_missing_poster_ids(
+            cache, NOW + datetime.timedelta(days=29)), [])
+        self.assertEqual(MODULE.select_missing_poster_ids(
+            cache, NOW + datetime.timedelta(days=31)), [530915])
+
     def test_existing_poster_is_never_overwritten(self):
         existing = "https://image.tmdb.org/t/p/w500/approved.jpg"
         cache = {"530915": {"poster": existing}}

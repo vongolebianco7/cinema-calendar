@@ -89,7 +89,8 @@ function render(reset=true){
  const list=filtered();if(reset)shown=0;
  const slice=list.slice(0,shown+PAGE);shown=slice.length;
  $("grid").innerHTML=slice.map(cardHtml).join("")||'<div class="empty">条件に合う作品はありません。サービスや検索語を変えてください。</div>';
- $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · "+TARGETS.filter(t=>!$("service").value||$("service").value===t).join("・")+" の確認済みスナップショット";
+ const coverage=TARGETS.map(target=>{const count=all.filter(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].some(name=>findTarget(name)===target)).length;return count?target+" "+count:null;}).filter(Boolean).join("・");
+ $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 7日以内のサービス別観測: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
  $("more").hidden=shown>=list.length;$("more").textContent="さらに表示 ("+shown.toLocaleString("ja-JP")+" / "+list.length.toLocaleString("ja-JP")+")";
 }
 async function load(){

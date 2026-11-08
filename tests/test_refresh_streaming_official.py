@@ -39,13 +39,13 @@ class RefreshTest(unittest.TestCase):
                 "title": "Test", "date": "2026-11-10",
                 "event": "streaming", "service": "Netflix",
                 "source_url": "https://example.org/official",
-                "poster": "  \t ", "poster_path": None, "tmdb_id": "",
+                "poster": "  \t ", "poster_path": None, "tmdb_id": "", "tmdbId": "  \t ",
                 "release_year": None, "image_url": "\n  ",
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))
             saved = json.loads(output.read_text(encoding="utf-8"))["movies"][0]
-            for field in ("poster", "poster_path", "tmdb_id", "release_year", "image_url"):
+            for field in ("poster", "poster_path", "tmdb_id", "tmdbId", "release_year", "image_url"):
                 self.assertNotIn(field, saved)
             self.assertEqual(saved["title"], "Test")
 

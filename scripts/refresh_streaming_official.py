@@ -65,7 +65,7 @@ def refresh(source=None, output=OUTPUT, today=None):
             # or artwork. Do not let blank optional fields erase canonical
             # metadata when downstream catalogs merge this record.
             movie = dict(movie)
-            for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "release_year", "year"):
+            for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "tmdbId", "release_year", "year"):
                 value = movie.get(field)
                 if value is None or (isinstance(value, str) and not value.strip()):
                     movie.pop(field, None)

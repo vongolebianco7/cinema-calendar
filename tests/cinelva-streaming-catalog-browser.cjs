@@ -56,6 +56,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await delayedImageRequest;
   await page.getByText('9作品で7日以内の配信状況を確認できました。',{exact:false}).waitFor();
   const recoveredCard=page.locator('.card').filter({hasText:'カタログ未収録の配信作品'});
+  await recoveredCard.scrollIntoViewIfNeeded();
   await recoveredCard.locator('img').waitFor({state:'attached'});
   assert.equal(await page.locator('.card').count(),6,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
   assert.equal(await page.locator('.card img').count(),4,'canonical and availability snapshot posters are rendered');

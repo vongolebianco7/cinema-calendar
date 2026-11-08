@@ -93,6 +93,7 @@ class AvailabilityPosterTests(unittest.TestCase):
             with patch.object(MODULE, "ROOT", root), patch.object(MODULE, "PATH", path), \
                  patch.dict(os.environ, {"TMDB_API_KEY": "test-key"}), \
                  patch.object(MODULE.urllib.request, "urlopen", side_effect=TimeoutError("offline")), \
+                 patch.object(MODULE, "discover_provider_candidates", return_value=(0, 0, [], False)), \
                  patch.object(MODULE, "enrich_missing_posters", side_effect=no_art_lookup):
                 with self.assertRaises(RuntimeError):
                     MODULE.main()

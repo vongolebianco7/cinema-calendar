@@ -395,6 +395,18 @@
       "source_refs": [
         "operator-private-feedback"
       ]
+    },
+    {
+      "path": "streaming.html",
+      "surface": "public",
+      "purpose": "current streaming catalog",
+      "data_owner": "TMDB JustWatch availability snapshot plus canonical movie catalog",
+      "count_contract": "filtered current-observation count with seven-day freshness",
+      "primary_cta": "filter and open a movie",
+      "source_refs": [
+        "tmdb-watch-providers",
+        "justwatch-via-tmdb"
+      ]
     }
   ]
 }

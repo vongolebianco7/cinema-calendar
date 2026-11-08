@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>配信中の映画 | Cinelva</title>
+<meta name="description" content="日本で現在配信先を確認できた映画を、動画配信サービス別に探せます。">
+<meta name="theme-color" content="#0a0c0f">\n<meta property="og:title" content="Cinelva｜現在配信先を確認できた映画">\n<meta property="og:description" content="日本で配信状況を確認できた映画をサービス別に探せます。">\n<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png?v=20261023-clean">\n<link rel="manifest" href="manifest.webmanifest">\n<link rel="stylesheet" href="assets/theme.css?v=20261029-series-films">
+<link rel="icon" href="assets/cinelva_original_colors_transparent.png?v=20261023-clean" type="image/png">
+<link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png?v=20261023-clean">
+<script src="js/theme.js?v=20261029-series-films"></script>
+<script src="js/cinelva-movie-identity.js?v=20261107-movie-metadata"></script>
+<style>
+:root{color-scheme:dark;--bg:#0a0c0f;--panel:#14171b;--panel2:#1c2025;--text:#f3f4f5;--muted:#a7adb4;--line:#30353b;--accent:#e55b4b}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f6f2;--panel:#fff;--panel2:#eeece6;--text:#202124;--muted:#62676e;--line:#dad8d0;--accent:#b63c34}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
+a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 16px}.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{height:58px;display:flex;align-items:center;gap:16px}.brand img{height:30px;width:auto;display:block}.nav a:not(.brand){text-decoration:none;color:var(--muted);font-weight:700}.nav a:not(.brand):hover{color:var(--text)}
+.hero{padding:26px 0 12px}.eyebrow{font-size:11px;color:var(--muted);letter-spacing:.1em;font-weight:750}.hero h1{font-size:clamp(25px,5vw,38px);line-height:1.15;margin:5px 0 8px}.hero p{color:var(--muted);max-width:780px;margin:0}.notice{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:12px;margin:12px 0 16px}.controls{display:grid;grid-template-columns:minmax(180px,1fr) auto auto;gap:8px;align-items:center}.search,.select{height:42px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);padding:0 12px;font:inherit;min-width:0}.tabs{display:flex;gap:6px}.tab,.more{border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);padding:10px 12px;font:inherit;font-weight:700;white-space:nowrap}.tab[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 -2px var(--accent)}.status{color:var(--muted);font-size:12px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:0 0 18px}.card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:11px;background:var(--panel);text-decoration:none}.poster{aspect-ratio:2/3;background:var(--panel2);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-weight:700;text-align:center;padding:10px}.poster img{width:100%;height:100%;object-fit:cover;display:block}.info{padding:9px}.title{font-size:12px;font-weight:750;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}.services{color:var(--muted);font-size:10px;line-height:1.35;margin-top:6px;min-height:2.7em}.checked{color:var(--muted);font-size:10px;margin-top:6px}.empty{grid-column:1/-1;background:var(--panel);padding:28px;text-align:center;border-radius:12px;color:var(--muted)}.footer{padding:18px 0 42px;color:var(--muted);font-size:11px}
+@media(max-width:760px){.wrap{padding:0 12px}.nav{gap:12px}.nav a:not(.brand){font-size:12px}.brand img{height:26px}.hero{padding-top:20px}.controls{grid-template-columns:1fr}.tabs{overflow-x:auto}.tab{flex:1}.select{width:100%}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.info{padding:7px}.title{font-size:11px}.notice{font-size:11px}}
+@media(max-width:360px){.grid{gap:7px}.services{font-size:9px}}
+</style>
+</head>
+<body>
+<header class="top"><nav class="nav wrap" aria-label="メインナビゲーション">
+<a class="brand" href="index.html" aria-label="Cinelva ホーム"><img src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt="Cinelva"></a>
+<a href="index.html">カレンダー</a><a href="discover.html">映画を探す</a><a href="streaming.html" aria-current="page">配信作品</a>
+</nav></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">STREAMING CATALOG</div><h1>現在配信先を確認できた映画</h1><p>配信開始予定の日付とは分けて、国内向けの配信状況を確認できた作品をサービス別に表示します。</p></section>
+<p class="notice" id="dataNote">配信状況を読み込み中です。</p>
+<section aria-label="配信作品の検索と絞り込み">
+<div class="controls">
+<input id="query" class="search" type="search" placeholder="作品名で検索" aria-label="作品名で検索">
+<select id="service" class="select" aria-label="配信サービス"><option value="">すべてのサービス</option></select>
+<div class="tabs" role="group" aria-label="配信方法"><button class="tab" data-kind="flatrate" aria-pressed="true">見放題</button><button class="tab" data-kind="rent" aria-pressed="false">レンタル</button><button class="tab" data-kind="buy" aria-pressed="false">購入</button></div>
+</div>
+<div id="status" class="status" role="status" aria-live="polite">読み込み中…</div>
+<div id="grid" class="grid" aria-label="配信作品"></div>
+<button id="more" class="more" type="button" hidden>さらに表示</button>
+</section>
+<footer class="footer">提供状況のデータ元はTMDB watch providers（JustWatch）です。これは確認時点の観測で、サービスの全作品一覧や配信開始日を保証するものではありません。各作品の確認日時と提供条件をご確認ください。<br><a href="credits.html#data-status">情報源とデータ更新状況</a></footer>
+</main>
+<script>
+(()=>{
+"use strict";
+const TARGETS=["Netflix","Prime Video","U-NEXT","Disney+","ABEMA","WOWOW","Hulu","FOD","Apple TV+","Lemino","DMM TV","TELASA"];
+const aliases={
+ "Netflix":n=>/^Netflix/i.test(n),
+ "Prime Video":n=>/^(Prime Video|Amazon Prime Video with Ads|Amazon Video)$/i.test(n),
+ "U-NEXT":n=>/U-Next/i.test(n),
+ "Disney+":n=>/Disney\+/i.test(n),
+ "ABEMA":n=>/^ABEMA$/i.test(n),
+ "WOWOW":n=>/WOWOW/i.test(n),
+ "Hulu":n=>/^Hulu$/i.test(n),
+ "FOD":n=>/^FOD$/i.test(n),
+ "Apple TV+":n=>/^Apple TV\+$/i.test(n),
+ "Lemino":n=>/^Lemino$/i.test(n),
+ "DMM TV":n=>/^DMM TV$/i.test(n),
+ "TELASA":n=>/^TELASA$/i.test(n)
+};
+const $=id=>document.getElementById(id);
+let all=[],kind="flatrate",shown=0;const PAGE=60;
+const clean=s=>String(s||"").normalize("NFKC").toLocaleLowerCase("ja").trim();
+const providerNames=m=>Array.isArray(m?.[kind])?m[kind]:kind==="flatrate"?(m?.services||[]):[];
+const matchesTarget=(name,target)=>aliases[target](name);
+const findTarget=name=>TARGETS.find(target=>matchesTarget(name,target));
+function posterFor(m){
+ const helper=window.CinelvaMovieIdentity;
+ let url=helper?.posterFor?.(m)||m.poster||m.poster_url||null;
+ if(!url&&m.poster_path)url="https://image.tmdb.org/t/p/w342"+m.poster_path;
+ return typeof url==="string"&&url.trim()?url:null;
+}
+function cardHtml(row){
+ const m=row.movie||{},title=row.entry.title||m.title||m.name||"タイトル未確認";
+ const id=row.id,providers=[...new Set(providerNames(row.entry).map(findTarget).filter(Boolean))];
+ const img=posterFor(m);
+ const meta=row.entry.checked_at?new Date(row.entry.checked_at).toLocaleDateString("ja-JP",{month:"numeric",day:"numeric"})+"確認":"確認日不明";
+ return '<a class="card" href="search.html?'+new URLSearchParams({id,search:title}).toString()+'" aria-label="'+escapeHtml(title)+'、配信先 '+escapeHtml(providers.join("、"))+'"><div class="poster">'+(img?'<img loading="lazy" decoding="async" src="'+img.replaceAll('"',"&quot;")+'" alt="'+escapeHtml(title)+'のポスター" onerror="this.remove();this.parentElement.textContent=\'ポスター未確認\'">':'ポスター未確認')+'</div><div class="info"><div class="title">'+escapeHtml(title)+'</div><div class="services">'+escapeHtml(providers.join("・")||providerNames(row.entry).join("・"))+'</div><div class="checked">'+meta+'</div></div></a>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function filtered(){
+ const q=clean($("query").value),service=$("service").value;
+ return all.filter(row=>{
+  const names=providerNames(row.entry),targets=names.map(findTarget).filter(Boolean);
+  return names.length>0&&(!q||clean(row.entry.title||row.movie?.title).includes(q))&&(!service||targets.includes(service));
+ }).sort((a,b)=>(Number(b.movie?.popularity||0)-Number(a.movie?.popularity||0))||(a.entry.title||"").localeCompare(b.entry.title||"","ja"));
+}
+function render(reset=true){
+ const list=filtered();if(reset)shown=0;
+ const slice=list.slice(0,shown+PAGE);shown=slice.length;
+ $("grid").innerHTML=slice.map(cardHtml).join("")||'<div class="empty">条件に合う作品はありません。サービスや検索語を変えてください。</div>';
+ const coverage=TARGETS.map(target=>{const count=all.filter(row=>providerNames(row.entry).some(name=>findTarget(name)===target)).length;return count?target+" "+count:null;}).filter(Boolean).join("・");
+ $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 過去7日以内に"+({flatrate:"見放題",rent:"レンタル",buy:"購入"}[kind])+"を確認: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
+ $("more").hidden=shown>=list.length;$("more").textContent="さらに表示 ("+shown.toLocaleString("ja-JP")+" / "+list.length.toLocaleString("ja-JP")+")";
+}
+async function load(){
+ const note=$("dataNote");
+ try{
+  const [avRes,movieRes]=await Promise.all([fetch("data/availability.json",{cache:"no-store"}),fetch("data/movies.json",{cache:"no-store"})]);
+  if(!avRes.ok||!movieRes.ok)throw Error("data");
+  const [av,moviesJson]=await Promise.all([avRes.json(),movieRes.json()]);
+  const movies=Array.isArray(moviesJson)?moviesJson:(moviesJson.movies||[]);
+  const movieById=new Map(movies.map(m=>[String(m.tmdbId||m.tmdb_id||m.id||""),m]));
+  all=Object.entries(av.movies||{}).map(([id,entry])=>({id,entry,movie:movieById.get(id)||{id,title:entry.title}}))
+   .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");const age=Date.now()-checked;const providers=[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])];return Number.isFinite(checked)&&age>=0&&age<=7*86400000&&providers.length>0;});
+  const services=new Set(all.flatMap(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].map(findTarget).filter(Boolean)));
+  $("service").innerHTML='<option value="">すべてのサービス</option>'+TARGETS.map(s=>'<option value="'+s+'">'+s+(services.has(s)?"":"（直近データなし）")+'</option>').join("");
+  note.textContent="観測更新 "+new Date(av.generated_at).toLocaleString("ja-JP")+"。"+all.length.toLocaleString("ja-JP")+"作品で7日以内の配信状況を確認できました。作品ごとの確認日は各カードに表示します。";
+  render();
+ }catch{
+  note.textContent="配信状況を読み込めませんでした。時間をおいて再度お試しください。";
+  $("status").textContent="データ取得に失敗しました。";$("grid").innerHTML="";
+ }
+}
+$("query").addEventListener("input",()=>render());
+$("service").addEventListener("change",()=>render());
+document.querySelectorAll("[data-kind]").forEach(button=>button.addEventListener("click",()=>{
+ kind=button.dataset.kind;document.querySelectorAll("[data-kind]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));render();
+}));
+$("more").addEventListener("click",()=>render(false));
+load();
+})();
+</script>
+</body>
+</html>

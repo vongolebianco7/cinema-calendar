@@ -343,7 +343,7 @@ def main():
   discovery_state=old.get("provider_discovery",{})
   discovery_deadline=batch_deadline-poster_reserve-min(120,MAX_BATCH_SECONDS*0.33)
   discovery_pages,discovery_added,discovery_missing,discovery_list_checked=discover_provider_candidates(
-   cache,discovery_state,KEY,deadline=discovery_deadline)
+   cache,discovery_state,KEY,opener=urllib.request.urlopen,deadline=discovery_deadline)
   if discovery_list_checked:old["provider_discovery"]=discovery_state
   print(f"Availability catalog discovery: pages={discovery_pages}; new TMDB IDs={discovery_added}; services without provider IDs={','.join(discovery_missing)}")
  candidates=build_candidates(movies,cache,TODAY)

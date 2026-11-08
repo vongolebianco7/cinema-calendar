@@ -268,7 +268,7 @@ def main():
  print(f"Daily provider observation budget: {budget} (hard cap {MAX_DAILY_OBSERVATIONS}); eligible titles: {len(candidates)}; scheduled checks: {len(selected)}")
  if len(candidates)>budget*REFRESH_AFTER_DAYS:
   print("::warning title=Provider refresh capacity::Catalogue exceeds the bounded six-day refresh capacity; some observations may expire. UI must retain unknown/stale handling.")
- if count or catalog_poster_updates or poster_updates:
+ if count or catalog_poster_updates or poster_updates or poster_attempted:
   result=finish_snapshot(old,cache,count,NOW) if count else {**old,"movies":cache}
   temporary=PATH.with_suffix('.tmp')
   temporary.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')

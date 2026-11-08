@@ -152,6 +152,11 @@ jobs:
         timeout-minutes: 40
         run: |
           set -euxo pipefail
+          # Bound each individual Node/browser test so one hung test cannot consume
+          # the entire 40-minute job budget without a useful failure signal.
+          node() {
+            timeout --signal=TERM --kill-after=10s 240s command node "$@"
+          }
           npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0 @electric-sql/pglite@0.3.15
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-postgres.cjs
           bash scripts/prepare-browser-ci.sh

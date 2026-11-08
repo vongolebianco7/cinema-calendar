@@ -39,7 +39,7 @@ def finish_snapshot(old, cache, count, now):
  return {**old,"generated_at":now,"source":"TMDB watch/providers (JustWatch)","country":"JP","note":"日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。","movies":cache}
 
 DAILY_OBSERVATION_LIMIT=60
-MAX_DAILY_OBSERVATIONS=200
+MAX_DAILY_OBSERVATIONS=320
 # Leave the rest of the25-minute job for other importers, checks and commit.
 MAX_BATCH_SECONDS=360
 REFRESH_AFTER_DAYS=6
@@ -167,7 +167,7 @@ def main():
    item["title"]=m.get("title") or item.get("title")
    cache[str(mid)]=item
    count+=1
-   time.sleep(min(1.5,max(0,deadline-time.monotonic())))
+   time.sleep(min(0.25,max(0,deadline-time.monotonic())))
   except Exception as exc:
    failed+=1
    print("provider check skipped:",mid,type(exc).__name__)

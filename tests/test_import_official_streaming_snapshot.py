@@ -102,7 +102,7 @@ class OfficialSnapshotImportTests(unittest.TestCase):
                 "name": "Netflix", "reviewed_premiere_hosts": ["netflix.com"],
             }]}), encoding="utf-8")
 
-            self.assertEqual(import_snapshot(snapshot, catalog, registry), (0, 1))
+            self.assertEqual(import_snapshot(snapshot, catalog, registry), (0, 2))
             rows = json.loads(catalog.read_text(encoding="utf-8"))["movies"]
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0]["title"], "Existing Japanese Title")

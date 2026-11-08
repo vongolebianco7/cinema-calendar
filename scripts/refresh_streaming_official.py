@@ -30,7 +30,7 @@ def refresh(source=None, output=OUTPUT, today=None):
     )
     if not sources:
         raise ValueError("No official supplement sources found; existing output preserved")
-    clean, seen, periods = [], set(), set()
+    clean, seen, periods = [], {}, set()
     for source_path in sources:
         data = json.loads(source_path.read_text(encoding="utf-8"))
         if not isinstance(data, dict) or not isinstance(data.get("movies"), list):
@@ -61,17 +61,28 @@ def refresh(source=None, output=OUTPUT, today=None):
             if parsed.year < 2026 or movie.get("event") != "streaming":
                 raise ValueError("Invalid release date or event")
             key = (date, service, " ".join(title.casefold().split()))
+            # A curated supplement is not authoritative for movie identity
+            # or artwork. Do not let blank optional fields erase canonical
+            # metadata when downstream catalogs merge this record.
+            movie = dict(movie)
+            for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "release_year", "year"):
+                value = movie.get(field)
+                if value is None or (isinstance(value, str) and not value.strip()):
+                    movie.pop(field, None)
             if key not in seen:
-                # A curated supplement is not authoritative for movie identity
-                # or artwork. Do not let blank optional fields erase canonical
-                # metadata when downstream catalogs merge this record.
-                movie = dict(movie)
-                for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "release_year", "year"):
-                    value = movie.get(field)
-                    if value is None or (isinstance(value, str) and not value.strip()):
-                        movie.pop(field, None)
+                seen[key] = len(clean)
                 clean.append(movie)
-                seen.add(key)
+            else:
+                existing = clean[seen[key]]
+                # A duplicate announcement may contain richer artwork. Only
+                # supplement identity fields when both records explicitly
+                # identify the same TMDB movie; never infer from title alone.
+                first_id = existing.get("tmdb_id") or existing.get("tmdbId")
+                second_id = movie.get("tmdb_id") or movie.get("tmdbId")
+                if first_id is not None and second_id is not None and str(first_id) == str(second_id):
+                    for field in ("poster", "poster_path", "image", "image_url", "release_year", "year"):
+                        if field not in existing and field in movie:
+                            existing[field] = movie[field]
     if not clean:
         raise ValueError("Empty update refused; existing output preserved")
     ordered_periods = sorted(periods)

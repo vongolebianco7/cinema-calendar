@@ -49,6 +49,32 @@ class RefreshTest(unittest.TestCase):
                 self.assertNotIn(field, saved)
             self.assertEqual(saved["title"], "Test")
 
+    def test_duplicate_enrichment_requires_matching_movie_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            entry = {
+                "title": "Test", "date": "2026-11-10", "event": "streaming",
+                "service": "Netflix", "source_url": "https://example.org/official",
+                "tmdb_id": 123, "poster": "",
+            }
+            richer = {**entry, "poster": "https://image.tmdb.org/t/p/w500/valid.jpg", "release_year": 2026}
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry, richer]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            movies = json.loads(output.read_text(encoding="utf-8"))["movies"]
+            self.assertEqual(len(movies), 1)
+            self.assertEqual(movies[0]["poster"], richer["poster"])
+            self.assertEqual(movies[0]["release_year"], 2026)
+
+            conflicting = {**richer, "tmdb_id": 999, "poster": "https://example.org/wrong.jpg"}
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry, conflicting]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            movies = json.loads(output.read_text(encoding="utf-8"))["movies"]
+            self.assertEqual(len(movies), 1)
+            self.assertNotIn("poster", movies[0])
+            self.assertNotIn("release_year", movies[0])
+            self.assertEqual(movies[0]["tmdb_id"], 123)
+
     def test_deduplicates_and_preserves_existing_on_bad_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)

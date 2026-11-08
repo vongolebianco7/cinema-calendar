@@ -33,6 +33,13 @@ class AvailabilityFreshnessAuditTests(unittest.TestCase):
         report=MODULE.summarize(sample,NOW)
         self.assertEqual(report["fresh_7d"],2)
         self.assertEqual(report["observations_with_providers_fresh_7d"],2)
+        self.assertEqual(report["fresh_by_provider_kind"],{
+            "flatrate":{},
+            "free":{"ABEMA":1},
+            "ads":{"Hulu":1},
+            "rent":{},
+            "buy":{},
+        })
 
     def test_unknown_and_future_checks_never_count_as_fresh(self):
         sample={"movies":{"1":{"checked_at":"2026-10-18T12:00:00Z"},

@@ -3,6 +3,26 @@ import unittest
 from pathlib import Path
 
 class AvailabilityUpdateTest(unittest.TestCase):
+    def test_provider_categories_keep_free_and_ads_separate(self):
+        spec=importlib.util.spec_from_file_location('availability_kinds',Path('scripts/update_availability.py'))
+        module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        region={
+            'flatrate':[{'provider_name':'Netflix'}],
+            'free':[{'provider_name':'ABEMA'}],
+            'ads':[{'provider_name':'Hulu'}],
+            'rent':[{'provider_name':'Amazon Video'}],
+            'buy':[{'provider_name':'Apple TV'}],
+        }
+        groups=module.provider_groups(region)
+        self.assertEqual(groups,{
+            'flatrate':['Netflix'],
+            'free':['ABEMA'],
+            'ads':['Hulu'],
+            'rent':['Amazon Video'],
+            'buy':['Apple TV+'],
+        })
+
     def test_failed_batch_does_not_advance_last_successful_update(self):
         spec=importlib.util.spec_from_file_location('availability_update',Path('scripts/update_availability.py'))
         module=importlib.util.module_from_spec(spec)

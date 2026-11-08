@@ -95,7 +95,121 @@ permissions:
   contents: read
 
 jobs:
+  browser-scope:
+    runs-on: ubuntu-latest
+    outputs:
+      run_browser: ${{ steps.browser_scope.outputs.run_browser }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Classify changes for full frontend browser journey
+        id: browser_scope
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" != 'pull_request' ]; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch --no-tags origin "$BASE_SHA" --depth=1
+          git diff --name-only "$BASE_SHA" HEAD > /tmp/cinelva-frontend-changed
+          # Fail safe: audit unknown changes and empty diffs.
+          if [ ! -s /tmp/cinelva-frontend-changed ] || grep -Ev '^(docs/|tests/.*\.py$|scripts/quality_gate\.py$|scripts/score_quality\.py$|quality/scorecard\.json$)' /tmp/cinelva-frontend-changed >/dev/null; then
+            echo 'run_browser=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run_browser=false' >> "$GITHUB_OUTPUT"
+            echo 'Skipping duplicate full browser journey for non-UI-only PR.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+  browser-journey:
+    needs: browser-scope
+    if: needs.browser-scope.outputs.run_browser == 'true'
+    name: Frontend browser journey shard ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare director projection
+        run: |
+          python scripts/enrich_directors.py --normalize-only
+          python scripts/build_director_mobile.py
+          node scripts/build-director-feature-index.cjs
+      - name: Run browser journey shard
+        timeout-minutes: 40
+        run: |
+          set -euxo pipefail
+          node() {
+            timeout --signal=TERM --kill-after=10s 240s node "$@"
+          }
+          npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0 @electric-sql/pglite@0.3.15
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-postgres.cjs
+          bash scripts/prepare-browser-ci.sh
+          "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then GITHUB_EVENT_NAME=pull_request node scripts/build-static.cjs; fi
+          if [ "${{ matrix.shard }}" = '1' ]; then
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-demo-browser.cjs; CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-demo-browser.cjs; fi
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-streaming-catalog-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-streaming-catalog-browser.cjs
+          fi
+          if [ "${{ matrix.shard }}" = '2' ]; then
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-best10-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-best10-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-fallback-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-secondary-cards-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-secondary-cards-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
+          node --test tests/cinelva-ocean-workflow-retirement.test.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
+          fi
+          if [ "${{ matrix.shard }}" = '3' ]; then
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-theater-quality-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-theater-quality-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
+          fi
+      - name: Preserve browser artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-browser-shard-${{ matrix.shard }}
+          path: artifacts/
+          if-no-files-found: warn
   validate:
+    needs: [browser-scope, browser-journey]
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -103,6 +217,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Enforce browser journey result
+        env:
+          BROWSER_SCOPE: ${{ needs.browser-scope.result }}
+          BROWSER_REQUIRED: ${{ needs.browser-scope.outputs.run_browser }}
+          BROWSER_RESULT: ${{ needs.browser-journey.result }}
+        run: |
+          test "$BROWSER_SCOPE" = success
+          if [ "$BROWSER_REQUIRED" = true ]; then
+            test "$BROWSER_RESULT" = success
+          else
+            test "$BROWSER_RESULT" = skipped
+          fi
       - name: Check inline JavaScript syntax
         run: |
           python - <<'PY'
@@ -148,56 +274,6 @@ jobs:
           python scripts/enrich_directors.py --normalize-only
           python scripts/build_director_mobile.py
           node scripts/build-director-feature-index.cjs
-      - name: Run My Cinelva mobile browser journey
-        timeout-minutes: 40
-        run: |
-          set -euxo pipefail
-          npm install --prefix "$RUNNER_TEMP/cinelva-e2e" --no-audit --no-fund playwright@1.59.0 @electric-sql/pglite@0.3.15
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-postgres.cjs
-          bash scripts/prepare-browser-ci.sh
-          "$RUNNER_TEMP/cinelva-e2e/node_modules/.bin/playwright" install --with-deps chromium webkit
-          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then GITHUB_EVENT_NAME=pull_request node scripts/build-static.cjs; fi
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-feedback-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-security-headers-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
-          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-demo-browser.cjs; CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-demo-browser.cjs; fi
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-release-notices-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-boxoffice-poster-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-poster-retry-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-streaming-catalog-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-streaming-catalog-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-best10-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-best10-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-fallback-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-secondary-cards-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-secondary-cards-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-ocean-route-retirement.cjs
-          node --test tests/cinelva-ocean-workflow-retirement.test.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-my-page-record-entry-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-search-rating-theme-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-record-entry-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-source-status-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-theater-quality-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-theater-quality-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
-          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
-          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
       - name: Preserve cinema discount evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

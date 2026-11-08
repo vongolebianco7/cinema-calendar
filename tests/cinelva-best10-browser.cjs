@@ -76,7 +76,12 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
       assert.equal(await page.locator("#results .result").count(), 3, "multiple candidates stay available");
       assert.equal(await page.locator("#results .result").nth(2).isVisible(), true, "the third candidate is visible and selectable");
     }
-    await page.locator('#results .result button[aria-label="テスト作品Aをランキングに追加"]').click();
+    const addButtons = page.locator("#results .result button");
+    assert.equal(await addButtons.count(), 3, "each visible candidate has an add action");
+    const labels = await addButtons.evaluateAll((buttons) => buttons.map((button) => button.getAttribute("aria-label")));
+    assert.ok(labels.every((label) => label && label.endsWith("をランキングに追加")), `candidate add actions expose full accessible labels: ${JSON.stringify(labels)}`);
+    assert.equal(await addButtons.first().innerText(), "追加");
+    await addButtons.first().click({ timeout: 5000 });
     await page.waitForFunction(() => document.querySelector("#count")?.textContent === "2/10");
     await page.locator("#layout").selectOption("double");
     assert.equal(await page.locator("#layout").inputValue(), "double");

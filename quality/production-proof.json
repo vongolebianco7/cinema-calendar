@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "dcba5bac176c2b969df547305e0030f53f6747e1",
-  "verified_at": "2026-11-09T06:30:00Z",
-  "note": "Receipt refresh preparation for the combined current main executable tree. This commit does not alter executable source; after required PR workflows pass, a receipt-only follow-up will bind the proof to this exact successful PR source commit."
+  "head_sha": "12e8c010796103332967f22bf19dba8112c3a01d",
+  "verified_at": "2026-11-08T21:20:32Z",
+  "note": "Required exact-head GitHub Actions passed for this source commit (Scorecard contract, CINELVA smoke tests, CINELVA mobile layout smoke test, Reproducible backend build, Cinemap completeness scorecard, Autonomous quality gate, Validate frontend, CINELVA continuous visual QA). This receipt-only commit binds the proof to that CI-verified executable tree; production publication remains gated on its own exact-head checks."
 }

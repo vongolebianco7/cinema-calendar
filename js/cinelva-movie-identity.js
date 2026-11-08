@@ -270,6 +270,11 @@
     };
     image.addEventListener("load", show);
     image.addEventListener("error", async () => {
+      // A delayed error from a replaced src must not hide artwork that already loaded.
+      if (image.complete && image.naturalWidth > 0) {
+        show();
+        return;
+      }
       fail();
       reportBroken(m, image.currentSrc || image.src);
       if (image.dataset.posterRetry === "1") {

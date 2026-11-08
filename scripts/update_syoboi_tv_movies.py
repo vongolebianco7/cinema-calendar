@@ -92,7 +92,7 @@ def _category(program):
 # Match only identified channel families; unknown channels remain visible until
 # independently classified, rather than silently discarding legitimate TV.
 STREAMING_CHANNEL_PREFIXES = (
-    "ABEMA", "アニメLIVE", "アニメ24", "アニメSPECIAL", "なつかしアニメ",
+    "ABEMA", "YouTube", "アニメLIVE", "アニメ24", "アニメSPECIAL", "なつかしアニメ",
 )
 
 

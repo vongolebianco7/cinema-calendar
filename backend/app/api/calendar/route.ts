@@ -8,7 +8,11 @@ export async function GET(request: Request) {
   // The checked-in snapshot is the reviewed source of truth used by the static
   // frontend. The database may lag scheduled catalog refreshes and contain
   // obsolete duplicate releases, so do not merge it into the public calendar.
-  return json(calendarSnapshot(), {}, request);
+  return json({
+    ...calendarSnapshot(),
+    data_source: "static_snapshot",
+    database_status: "not_used",
+  }, {}, request);
 }
 
 export async function OPTIONS(request: Request) { return options(request); }

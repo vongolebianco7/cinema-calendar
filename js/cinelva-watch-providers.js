@@ -19,7 +19,7 @@
   status.textContent='配信サービスを読み込み中…';container.after(status);
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);
   try{
-   const response=await fetch(api+'/api/watch-providers',{signal:controller.signal});
+   const response=await fetch(api+'/api/watch-providers',{signal:controller.signal,cache:'no-store'});
    if(!response.ok)throw Error('metadata unavailable');
    const data=await response.json(),providers=normalize(data.providers);
    if(!providers.length)throw Error('empty metadata');

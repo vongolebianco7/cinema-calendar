@@ -69,6 +69,11 @@ def refresh(source=None, output=OUTPUT, today=None):
                 value = movie.get(field)
                 if value is None or (isinstance(value, str) and not value.strip()):
                     movie.pop(field, None)
+            # Two aliases for the same TMDB identity must not disagree. A
+            # conflicting curated record cannot safely enrich any poster.
+            snake_id, camel_id = movie.get("tmdb_id"), movie.get("tmdbId")
+            if snake_id is not None and camel_id is not None and str(snake_id) != str(camel_id):
+                raise ValueError("Conflicting TMDB identity aliases; existing output preserved")
             if key not in seen:
                 seen[key] = len(clean)
                 clean.append(movie)

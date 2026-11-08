@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8777320216c6101aa8bb4d5b016a8a19b26c9fe5",
-  "verified_at": "2026-11-08T01:36:30.994Z",
-  "note": "Receipt-only refresh for PR #716 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build passed. The source head includes normalized official streaming imports, catalog TMDB identity deduplication, last-good atomic preservation, and Chromium/WebKit provider-list regression coverage."
+  "head_sha": "c20ff723aaaecfc188189ddda1bfa2fb0efeff9b",
+  "verified_at": "2026-11-08T02:10:08.892Z",
+  "note": "Receipt-only refresh for PR #717 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build passed. The source head adds deterministic negative fixtures for horizontal overflow, broken local images and duplicate feedback links, and routes production QA through the tested contract."
 }

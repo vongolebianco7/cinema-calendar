@@ -1,5 +1,7 @@
 import json
 import tempfile
+from contextlib import redirect_stdout
+from io import StringIO
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -99,6 +101,30 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         )
         self.assertNotIn("poster", data["movies"][0])
         self.assertEqual(data["movies"][1]["poster"], "https://image.tmdb.org/t/p/w500/kept.jpg")
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(counts, (0, 1, 0))
+
+    def test_ambiguous_api_candidates_are_reported_but_never_assigned(self):
+        output = StringIO()
+        with redirect_stdout(output):
+            data, requests, counts = self.run_fixture(
+                [{"title": "The Example", "date": "2026-11-01",
+                  "event": "streaming", "service": "Prime Video"}],
+                {"results": [
+                    {"id": 1, "title": "The Example", "original_title": "Example A",
+                     "release_date": "2001-01-01", "poster_path": "/one.jpg"},
+                    {"id": 2, "title": "The Example", "original_title": "Example B",
+                     "release_date": "2024-01-01", "poster_path": "/two.jpg"},
+                ]},
+            )
+        report = output.getvalue()
+        self.assertIn("Streaming poster candidate review", report)
+        self.assertIn('"id": 1', report)
+        self.assertIn('"id": 2', report)
+        self.assertIn("no identity assigned", report)
+        self.assertNotIn("fixture-secret", report)
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertNotIn("id", data["movies"][0])
         self.assertEqual(len(requests), 1)
         self.assertEqual(counts, (0, 1, 0))
 

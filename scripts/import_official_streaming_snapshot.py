@@ -12,6 +12,14 @@ try:
     from .atomic_json import write_json_atomic
 except ImportError:  # Script execution from the scheduled workflow.
     from atomic_json import write_json_atomic
+try:
+    from .streaming_event_normalization import normalize_premieres
+except ImportError:  # Script execution from the scheduled workflow.
+    from streaming_event_normalization import normalize_premieres
+try:
+    from .streaming_event_normalization import normalize_premieres
+except ImportError:  # Script execution from the scheduled workflow.
+    from streaming_event_normalization import normalize_premieres
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "data/streaming-official-current.json"
@@ -25,10 +33,24 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     providers = {x["name"] for x in registry.get("services", []) if isinstance(x, dict) and x.get("name")}
+    approved_hosts = {
+        x["name"]: x.get("reviewed_premiere_hosts", [])
+        for x in registry.get("services", [])
+        if isinstance(x, dict) and isinstance(x.get("name"), str) and x.get("name")
+    }
     entries = official.get("movies") if isinstance(official, dict) else None
     rows = catalog.get("movies") if isinstance(catalog, dict) else None
     if not providers or not isinstance(entries, list) or not entries or not isinstance(rows, list):
         raise ValueError("Official snapshot, provider registry, or streaming catalog is invalid")
+
+    # This input is a manually reviewed supplement. Reuse the strict provenance,
+    # date, identity and duplicate checks from the reviewed-announcement path.
+    normalized_entries = []
+    for source in entries:
+        if not isinstance(source, dict) or source.get("event") != "streaming":
+            raise ValueError("Invalid official movie entry")
+        normalized_entries.append({**source, "verified": True, "content_type": "movie"})
+    entries = normalize_premieres(normalized_entries, approved_hosts)
 
     def key(row):
         return (row.get("service"), " ".join(str(row.get("title", "")).casefold().split()), row.get("date"))

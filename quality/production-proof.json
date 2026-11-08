@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5de0a3cd50b84473043c5e158b9ca36973aea44d",
-  "verified_at": "2026-11-08T03:18:02Z",
-  "note": "Receipt-only refresh for PR #718 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build passed. The source removes the verified duplicate theatrical entry and adds duplicate identity regression coverage. Production deployment and canonical URL acceptance remain pending the Vercel Hobby deployment limit."
+  "head_sha": "72e0b15da933a293a71a0ece724baa93aa5e4dc2",
+  "verified_at": "2026-11-08T05:01:00Z",
+  "note": "Receipt-only refresh after exact-head GitHub Actions passed for PR #719 source 72e0b15da933a293a71a0ece724baa93aa5e4dc2. The calendar API now serves the reviewed static snapshot and cannot reintroduce the stale database duplicate for 呪いのスマホ. Production deployment and canonical URL acceptance remain pending the Vercel Hobby deployment limit."
 }

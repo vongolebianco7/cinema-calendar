@@ -33,6 +33,10 @@ jobs:
         run: python scripts/enrich_streaming_posters.py
       - name: Merge verified dated titles into the user-facing streaming catalog
         run: python scripts/import_official_streaming_snapshot.py
+      - name: Recheck existing streaming posters against the refreshed movie catalog
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/enrich_streaming_posters.py --input data/streaming.json
       - name: Discover official announcement candidates
         run: python scripts/discover_streaming_announcements.py
       - name: Commit only verified generated data

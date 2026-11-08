@@ -33,7 +33,8 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     '106':{title:'配信ポスター補完',poster:'https://image.tmdb.org/t/p/w500/verified.jpg',services:['Netflix'],flatrate:['Netflix'],free:[],ads:[],rent:[],buy:[],checked_at:now},
     '107':{title:'無料配信作品',services:[],flatrate:[],free:['ABEMA'],ads:[],rent:[],buy:[],checked_at:now},
     '108':{title:'広告つき配信作品',services:[],flatrate:[],free:[],ads:['Hulu'],rent:[],buy:[],checked_at:now},
-    '109':{title:'削除後に失敗するポスター',poster:'https://cinelva.test/delayed-fail.jpg',services:['Netflix'],flatrate:['Netflix'],free:[],ads:[],rent:[],buy:[],checked_at:now}
+    '109':{title:'削除後に失敗するポスター',poster:'https://cinelva.test/delayed-fail.jpg',services:['Netflix'],flatrate:['Netflix'],free:[],ads:[],rent:[],buy:[],checked_at:now},
+   '110':{title:'カタログ未収録の配信作品',services:['Netflix'],flatrate:['Netflix'],free:[],ads:[],rent:[],buy:[],checked_at:now,source_url:'https://www.themoviedb.org/movie/110/watch?locale=JP'}
    }
   }}));
   await context.route('**/data/movies.json',route=>route.fulfill({json:{movies:[
@@ -44,6 +45,8 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    {id:105,tmdbId:105,title:'FODチャンネル作品',poster:null,popularity:3},
    {id:106,tmdbId:106,title:'配信ポスター補完',poster:null,popularity:2}
   ]}}));
+  await context.route('**/api/movie-detail?id=110&view=poster',route=>route.fulfill({json:{movie:{id:110,tmdbId:110,title:'カタログ未収録の配信作品',release_date:'1994-01-01',poster:'https://image.tmdb.org/t/p/w500/api-fallback.jpg'}}}));
+  await context.route('https://image.tmdb.org/t/p/w500/api-fallback.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   await context.route('https://cinelva.test/fake.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   await context.route('https://image.tmdb.org/t/p/w500/verified.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   const page=await context.newPage(),errors=[];
@@ -51,17 +54,22 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   const delayedImageRequest=page.waitForRequest('**/delayed-fail.jpg');
   await page.goto(`http://127.0.0.1:${port}/streaming.html`);
   await delayedImageRequest;
-  await page.getByText('8作品で7日以内の配信状況を確認できました。',{exact:false}).waitFor();
-  assert.equal(await page.locator('.card').count(),5,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
-  assert.equal(await page.locator('.card img').count(),3,'canonical and availability snapshot posters are rendered');
+  await page.getByText('9作品で7日以内の配信状況を確認できました。',{exact:false}).waitFor();
+  const recoveredCard=page.locator('.card').filter({hasText:'カタログ未収録の配信作品'});
+  await recoveredCard.scrollIntoViewIfNeeded();
+  await recoveredCard.locator('img').waitFor({state:'attached'});
+  await page.waitForFunction(()=>[...document.querySelectorAll('.card img')].some(image=>image.getAttribute('src')==='https://image.tmdb.org/t/p/w500/api-fallback.jpg'));
+  assert.equal(await page.locator('.card').count(),6,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
+  assert.equal(await page.locator('.card img').count(),4,'canonical and availability snapshot posters are rendered');
   await page.locator('.card').filter({hasText:'削除後に失敗するポスター'}).evaluate(card=>card.remove());
   releaseDelayedImage();
   await page.waitForTimeout(100);
   assert.deepEqual(errors,[],'a late image error after its card is detached does not throw');
   const fallbackCard=page.locator('.card').filter({hasText:'配信ポスター補完'});
   assert.equal(await fallbackCard.locator('img').getAttribute('src'),'https://image.tmdb.org/t/p/w500/verified.jpg','availability poster is rendered even without a movie catalog row');
+  assert.equal(await recoveredCard.locator('img').getAttribute('src'),'https://image.tmdb.org/t/p/w500/api-fallback.jpg','TMDB ID from the availability snapshot recovers artwork when no movie catalog record exists');
   const coverage=await page.locator('#status').innerText();
-  assert.match(coverage,/Netflix 3.*Prime Video 1/,'subscription counts include only the selected access type');
+  assert.match(coverage,/Netflix 4.*Prime Video 1/,'subscription counts include only the selected access type');
   assert.doesNotMatch(coverage,/FOD/,'FOD Amazon Channels are not counted as the standalone FOD service');
   assert.doesNotMatch(coverage,/レンタル専用/);
   assert.doesNotMatch(coverage,/ABEMA/,'providers without fresh observations are not described as confirmed');
@@ -81,8 +89,8 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await page.locator('#service').selectOption('');
   await page.locator('[data-kind="flatrate"]').click();
   await page.locator('#service').selectOption('Netflix');
-  assert.equal(await page.locator('.card').count(),3,'service filter narrows the catalog to all three Netflix titles');
-  assert.match(await page.locator('#status').innerText(),/Netflix 3/,'filtered subscription count matches all three Netflix titles');
+  assert.equal(await page.locator('.card').count(),4,'service filter narrows the catalog to all four Netflix titles');
+  assert.match(await page.locator('#status').innerText(),/Netflix 4/,'filtered subscription count matches all four Netflix titles');
   assert.doesNotMatch(await page.locator('#status').innerText(),/Prime Video 1/,'other services do not appear in filtered coverage');
   await page.locator('#query').fill('配信ポスター補完');
   assert.equal(await page.locator('.card').count(),1,'text search narrows the visible catalog');
@@ -103,7 +111,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.match(await page.locator('.footer').innerText(),/配信開始日を保証するものではありません/);
   assert.deepEqual(errors,[]);
   await context.close();
-  console.log('Current streaming catalog filters observed availability, excludes stale rows, renders known posters, and labels availability separately from premiere dates.');
+  console.log('Current streaming catalog recovers posters by explicit TMDB ID when the movie catalog is missing a row, filters availability, and labels freshness.');
  }finally{
   if(browser)await browser.close();
   server.kill();

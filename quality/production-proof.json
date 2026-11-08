@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "fb4977c24cab5a75e1fcffb252a29284d98ecad5",
-  "verified_at": "2026-11-08T06:20:12Z",
-  "note": "Receipt-only refresh after exact-head GitHub Actions passed for PR #720 source fb4977c24cab5a75e1fcffb252a29284d98ecad5. The daily official streaming refresh now reruns strict poster enrichment on the complete merged snapshot; ambiguous identities remain unlinked. Production deployment and public URL acceptance remain pending."
+  "head_sha": "dcba5bac176c2b969df547305e0030f53f6747e1",
+  "verified_at": "2026-11-09T06:30:00Z",
+  "note": "Receipt refresh preparation for the combined current main executable tree. This commit does not alter executable source; after required PR workflows pass, a receipt-only follow-up will bind the proof to this exact successful PR source commit."
 }

@@ -36,6 +36,9 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     }, { recordsKey, records });
     await context.route("**/*", async (route) => {
       const url = new URL(route.request().url());
+      if (url.pathname === "/api/movies") {
+        return route.fulfill({ json: { movies: movies.slice(1) } });
+      }
       if (url.origin === origin && url.pathname === "/data/movies.json") {
         return route.fulfill({ json: { movies } });
       }
@@ -61,7 +64,9 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     assert.match(await page.locator("#list img").getAttribute("src"), /seven-fixture\.png$/, "the verified Seven poster is recovered from the local catalog");
     await page.locator("#q").fill("テスト作品");
     await page.locator("#go").click();
-    await page.waitForFunction(() => document.querySelectorAll("#results .result").length === 3);
+    await page.waitForFunction(() => document.querySelectorAll("#results .result").length === 3, null, { timeout: 5000 }).catch(() => {});
+    const candidateCount = await page.locator("#results .result").count();
+    assert.equal(candidateCount, 3, `expected 3 matching candidates for "${await page.locator("#q").inputValue()}"; got ${candidateCount}: ${await page.locator("#results").innerText()}`);
     for (const width of [320, 375, 390, 430]) {
       await page.setViewportSize({ width, height: 844 });
       assert.ok(

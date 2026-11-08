@@ -137,6 +137,13 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertIn("/movie/693134?", requests[0][0].full_url)
         self.assertEqual(counts, (1, 0, 0))
 
+    def test_daily_official_refresh_rechecks_existing_streaming_poster_gaps(self):
+        workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/refresh-official-streaming.yml").read_text()
+        importer = workflow.index("python scripts/import_official_streaming_snapshot.py")
+        enrichment = workflow.index("python scripts/enrich_streaming_posters.py --input data/streaming.json")
+        self.assertLess(importer, enrichment)
+        self.assertIn("TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -197,8 +197,15 @@ jobs:
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-theater-quality-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
+          # The same broad route/theme audit is already run by the parallel
+          # continuous-visual-qa workflow (Chromium + WebKit). Keep the extra
+          # four-viewport route audit on main pushes and scheduled full runs;
+          # running both in every PR duplicates hundreds of page loads and can
+          # hit the per-test 240-second limit on WebKit.
+          if [ "$GITHUB_EVENT_NAME" != 'pull_request' ]; then
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
+          fi
           fi
       - name: Preserve browser artifacts
         if: always()

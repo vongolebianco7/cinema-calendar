@@ -6,7 +6,8 @@ const { chromium, webkit } = require("playwright");
 const { waitForLocalServer } = require("./helpers/local-server.cjs");
 
 (async () => {
-  const engine = process.env.CINELVA_BROWSER === "webkit" ? webkit : chromium;
+  const engineName = process.env.CINELVA_BROWSER === "webkit" ? "webkit" : "chromium";
+  const engine = engineName === "webkit" ? webkit : chromium;
   const browser = await engine.launch();
   const listener = net.createServer();
   await new Promise((resolve) => listener.listen(0, "127.0.0.1", resolve));
@@ -96,8 +97,8 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     assert.equal(await page.evaluate((key) => localStorage.getItem(key), recordsKey), JSON.stringify(records), "poster hydration and export do not alter canonical viewing records");
     assert.deepEqual(pageErrors, []);
     fs.mkdirSync("artifacts/my-best10", { recursive: true });
-    await page.screenshot({ path: `artifacts/my-best10/${engine.name}-390.png`, fullPage: true });
-    console.log(`${engine.name}: Seven poster recovery, multi-result editing, 320/375/390/430px layout and image-save preview passed without changing viewing records`);
+    await page.screenshot({ path: `artifacts/my-best10/${engineName}-390.png`, fullPage: true });
+    console.log(`${engineName}: Seven poster recovery, multi-result editing, 320/375/390/430px layout and image-save preview passed without changing viewing records`);
   } finally {
     await context?.close();
     await browser.close();

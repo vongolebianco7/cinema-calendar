@@ -63,7 +63,29 @@ const { chromium, webkit } = require("playwright"),
       false,
     );
     assert.equal(await page.locator('#poster').innerText(),'','recovered artwork removes the stale fallback label');
-    console.log(
+    // A recycled card must display the new film's artwork, not keep its first identity.
+    await page.route("**/other.png", (r) =>
+      r.fulfill({
+        contentType: "image/png",
+        body: Buffer.from(
+          "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=",
+          "base64",
+        ),
+      }),
+    );
+    await page.locator(".rankCard img").evaluate((image) => {
+      CinelvaMovieIdentity.hydratePoster(image, {
+        tmdbId: 551,
+        title: "Second Film",
+        year: 2001,
+        poster: "/other.png",
+      });
+    });
+    await page.waitForFunction(() => document.querySelector(".rankCard img")?.naturalWidth > 0 &&
+      document.querySelector(".rankCard img")?.src.endsWith("/other.png"));
+    assert.equal(await page.locator(".rankCard img").isVisible(), true,
+      "reused image displays the second movie poster");
+        console.log(
       "Failed artwork immediately falls back under forced display CSS and recovers after one shared retry",
     );
   } finally {

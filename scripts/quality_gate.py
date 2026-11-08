@@ -29,7 +29,7 @@ run(['python','-m','unittest','tests.test_streaming_event_normalization'])
 run(['python','-m','unittest','tests.test_streaming_quality_gate_contract'])
 run(['python','-m','unittest','tests.test_external_data_registry','tests.test_film_event_refresh','tests.test_outdoor_event_refresh','tests.test_syoboi_tv_movies'])
 run(['node','--test','tests/calendar-dedupe.test.cjs'])
-run(['python','-m','unittest','tests.test_director_enrichment','tests.test_now_playing_update','tests.test_streaming_announcement_import','tests.test_theater_equipment_preservation'])
+run(['python','-m','unittest','tests.test_director_enrichment','tests.test_now_playing_update','tests.test_streaming_announcement_import','tests.test_theater_equipment_preservation','tests.test_theatrical_duplicate_identity'])
 for cmd in commands:
  if cmd[:2]==['node','--test'] and all(path in active_node_tests for path in cmd[2:]): continue
  if any('ocean-' in token or 'ocean_' in token or token.startswith('test_ocean') for token in cmd): continue

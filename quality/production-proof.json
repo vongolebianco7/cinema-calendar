@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "109b8332c4e33855a145b54f89f6f394d8f3cf36",
-  "verified_at": "2026-11-07T23:48:53.411Z",
-  "note": "Receipt-only refresh for PR #714 after all four required exact-source workflows passed; executable source is unchanged from the tested source head."
+  "head_sha": "8777320216c6101aa8bb4d5b016a8a19b26c9fe5",
+  "verified_at": "2026-11-08T01:36:30.994Z",
+  "note": "Receipt-only refresh for PR #716 after exact-source Autonomous quality gate, CINELVA smoke tests, Validate frontend and Reproducible backend build passed. The source head includes normalized official streaming imports, catalog TMDB identity deduplication, last-good atomic preservation, and Chromium/WebKit provider-list regression coverage."
 }

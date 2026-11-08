@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "72e0b15da933a293a71a0ece724baa93aa5e4dc2",
-  "verified_at": "2026-11-08T05:01:00Z",
-  "note": "Receipt-only refresh after exact-head GitHub Actions passed for PR #719 source 72e0b15da933a293a71a0ece724baa93aa5e4dc2. The calendar API now serves the reviewed static snapshot and cannot reintroduce the stale database duplicate for 呪いのスマホ. Production deployment and canonical URL acceptance remain pending the Vercel Hobby deployment limit."
+  "head_sha": "fb4977c24cab5a75e1fcffb252a29284d98ecad5",
+  "verified_at": "2026-11-08T06:20:12Z",
+  "note": "Receipt-only refresh after exact-head GitHub Actions passed for PR #720 source fb4977c24cab5a75e1fcffb252a29284d98ecad5. The daily official streaming refresh now reruns strict poster enrichment on the complete merged snapshot; ambiguous identities remain unlinked. Production deployment and public URL acceptance remain pending."
 }

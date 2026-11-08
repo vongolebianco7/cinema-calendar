@@ -44,9 +44,14 @@ test('calendar API serves the reviewed snapshot and excludes stale database dupl
   });
   vm.runInContext(source + '\nthis.handler = GET;', context);
 
-  const response = await context.handler(new Request('https://cinelva.test/api/calendar'));
-  assert.deepEqual(JSON.parse(JSON.stringify(response)), snapshot);
-  assert.equal(response.movies.length, 1);
-  assert.equal(response.movies[0].tmdbId, 1707955);
+  const result = await context.handler(new Request('https://cinelva.test/api/calendar'));
+  const response = {
+    ...snapshot,
+    data_source: 'static_snapshot',
+    database_status: 'not_used',
+  };
+  assert.deepEqual(JSON.parse(JSON.stringify(result)), response);
+  assert.equal(result.movies.length, 1);
+  assert.equal(result.movies[0].tmdbId, 1707955);
   assert.equal(databaseReads, 0, 'calendar must not mix stale database releases into the reviewed snapshot');
 });

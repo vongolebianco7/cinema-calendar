@@ -54,6 +54,7 @@ const { chromium, webkit } = require("playwright"),
       () => document.querySelector("#poster img")?.naturalWidth > 0 && document.querySelector(".rankCard img")?.naturalWidth > 0,
     );
     assert.equal(await page.locator("#poster img").isVisible(), true);
+    // Reproduce a delayed failure event from the replaced, broken src.
     await page.locator("#poster img").evaluate((image) => image.dispatchEvent(new Event("error")));
     assert.equal(await page.locator("#poster img").isVisible(), true, "a stale error cannot hide successfully loaded replacement art");
     assert.match(await page.locator("#poster img").getAttribute("src"), /good.png$/);

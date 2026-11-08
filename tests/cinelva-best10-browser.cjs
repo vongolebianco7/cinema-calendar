@@ -77,10 +77,12 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
       assert.equal(await page.locator("#results .result").nth(2).isVisible(), true, "the third candidate is visible and selectable");
     }
     const firstResult = page.locator("#results .result").first();
-    const addButton = firstResult.locator("button").last();
-    assert.ok(await addButton.count(), "a candidate row exposes an action");
-    assert.equal(await addButton.innerText(), "追加", "the action label remains fully readable");
-    assert.match(await addButton.getAttribute("aria-label"), /をランキングに追加$/, "the action has a descriptive accessible label");
+    const rowButtons = firstResult.locator("button");
+    assert.equal(await rowButtons.count(), 2, "the row keeps ranking and candidate-box actions");
+    const actionLabels = await rowButtons.allTextContents();
+    assert.deepEqual(actionLabels.map((label) => label.trim()), ["追加", "候補箱へ"]);
+    const addButton = rowButtons.first();
+    assert.match(await addButton.getAttribute("aria-label"), /をランキングに追加$/, "ranking add has a descriptive accessible label");
     await addButton.click({ timeout: 5000 });
     await page.waitForFunction(() => document.querySelector("#count")?.textContent === "2/10");
     await page.locator("#layout").selectOption("double");

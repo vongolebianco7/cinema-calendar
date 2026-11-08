@@ -26,6 +26,7 @@ def summarize(snapshot, now):
     result={"total":len(movies),"fresh_7d":0,"stale_7d":0,
             "missing_or_invalid_checked_at":0,"checked_within_48h":0,
             "observations_with_providers_fresh_7d":0,
+            "fresh_by_provider_kind":{kind:{} for kind in ("flatrate","free","ads","rent","buy")},
             "snapshot_generated_at":snapshot.get("generated_at"),
             "evaluated_at":now.isoformat()}
     for item in movies.values():
@@ -43,7 +44,19 @@ def summarize(snapshot, now):
         result["fresh_7d"]+=1
         if age<=dt.timedelta(hours=48):
             result["checked_within_48h"]+=1
-        if any(item.get(k) for k in ("flatrate","free","ads","rent","buy","services")):
+        has_provider=False
+        for kind in ("flatrate","free","ads","rent","buy"):
+            providers=item.get(kind)
+            if kind=="flatrate" and not providers:
+                providers=item.get("services")
+            if not isinstance(providers,list):
+                continue
+            for provider in set(value.strip() for value in providers
+                                if isinstance(value,str) and value.strip()):
+                counts=result["fresh_by_provider_kind"][kind]
+                counts[provider]=counts.get(provider,0)+1
+                has_provider=True
+        if has_provider:
             result["observations_with_providers_fresh_7d"]+=1
     result["stale_7d"]+=result["missing_or_invalid_checked_at"]
     result["fresh_pct"]=round(100*result["fresh_7d"]/result["total"],1) if result["total"] else 0
@@ -55,9 +68,11 @@ def main():
     result=summarize(snapshot,now)
     REPORT.parent.mkdir(parents=True,exist_ok=True)
     REPORT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    coverage=json.dumps(result["fresh_by_provider_kind"],ensure_ascii=False,sort_keys=True)
     line=(f"Provider observations: {result['fresh_7d']}/{result['total']} "
           f"fresh within 7 days ({result['fresh_pct']}%); "
           f"{result['stale_7d']} stale or unchecked. "
+          f"Fresh titles by access type/provider: {coverage}. "
           "Snapshot update timestamp alone is not proof of per-title freshness.")
     print(line)
     if os.environ.get("GITHUB_STEP_SUMMARY"):

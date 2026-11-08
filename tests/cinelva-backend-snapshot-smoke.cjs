@@ -10,7 +10,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await waitForLocalServer(port);
   const sample=require('../data/movies.json').movies.find(m=>m.title);assert.ok(sample);
   for(const [url,key] of [['/api/calendar','movies'],['/api/tv','movies'],['/api/movies?q='+encodeURIComponent(sample.title)+'&limit=3','movies'],['/api/theater-directory?prefecture=東京都','theaters'],['/api/releases?from=2026-10-01&to=2026-11-01&service=Lemino','releases']]){
-   const r=await fetch(`http://127.0.0.1:${port}${url}`,{signal:AbortSignal.timeout(10000)});assert.equal(r.status,200,url);const d=await r.json();assert.equal(d.data_source,'static_snapshot',url);assert.equal(d.database_status,'unavailable',url);assert.ok(d[key].length,url);assert.equal(r.headers.get('access-control-allow-origin'),'*');
+   const r=await fetch(`http://127.0.0.1:${port}${url}`,{signal:AbortSignal.timeout(10000)});assert.equal(r.status,200,url);const d=await r.json();assert.equal(d.data_source,'static_snapshot',url);assert.equal(d.database_status,url==='/api/calendar'?'not_used':'unavailable',url);assert.ok(d[key].length,url);assert.equal(r.headers.get('access-control-allow-origin'),'*');
    if(url.startsWith('/api/calendar'))assert.equal(d.generated_at,require('../data/movies.json').generated_at);
    if(key==='releases')assert.ok(d.count>=2);
    console.log(url,200,d[key].length,'static_snapshot');

@@ -1,6 +1,7 @@
 // Visual QA evidence: no external AI or paid service is required.
 // Run with: CINELVA_BASE_URL=http://127.0.0.1:8765 CINELVA_BROWSER=chromium node scripts/continuous-visual-qa.mjs
 import { chromium, webkit } from 'playwright';
+import { collectAuditIssues } from './visual-qa-contract.mjs';
 import fs from 'node:fs';
 const manifest=JSON.parse(fs.readFileSync('quality/route-manifest.json','utf8'));
 const browserName=process.env.CINELVA_BROWSER||'chromium';
@@ -41,9 +42,7 @@ try{
       const feedbackLinks=[...document.querySelectorAll('aside a, nav a, [role="navigation"] a')].filter(a=>/ご意見[・･]?ご要望/.test(a.textContent||'')).length;
       return {overflow,brokenLocalImages,feedbackLinks};
      });
-     if(audit.overflow>2)entry.issues.push('horizontal overflow '+audit.overflow+'px');
-     if(audit.brokenLocalImages.length)entry.issues.push('broken local images: '+audit.brokenLocalImages.join(', '));
-     if(audit.feedbackLinks>1)entry.issues.push('duplicate feedback navigation links: '+audit.feedbackLinks);
+     entry.issues.push(...collectAuditIssues(audit));
      await page.screenshot({path:output+'/'+id+'.png',fullPage:false,animations:'disabled',timeout:15000});
     }catch(error){entry.issues.push(String(error.message).slice(0,250))}
     if(runtimeErrors.length)entry.issues.push('uncaught JavaScript errors: '+runtimeErrors.slice(0,5).join(' | '));

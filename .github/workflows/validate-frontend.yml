@@ -10,6 +10,9 @@ on:
       - "js/cinelva-*.js"
       - "js/data-backup.js"
       - "my-cinelva/**"
+      - "scripts/continuous-visual-qa.mjs"
+      - "scripts/visual-qa-contract.mjs"
+      - "tests/continuous-visual-qa-contract.test.mjs"
       - "scripts/cinelva-demo-*.cjs"
       - "scripts/build-static.cjs"
       - "tests/cinelva-demo-*.cjs"
@@ -123,6 +126,8 @@ jobs:
               sys.exit(1)
           print("All inline JavaScript syntax checks passed.")
           PY
+      - name: Verify visual QA detects intentional regression fixtures
+        run: node --test tests/continuous-visual-qa-contract.test.mjs
       - name: Check My Cinelva record model and views
         run: |
           node --check js/cinelva-library-records.js

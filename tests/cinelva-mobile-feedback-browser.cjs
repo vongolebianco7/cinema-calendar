@@ -10,11 +10,10 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
   await waitForLocalServer(port);browser=await require('playwright')[engine].launch();fs.mkdirSync('artifacts/reported-audit/mobile-feedback',{recursive:true});
   for(const width of [320,390,1280])for(const theme of ['light','dark']){
    const context=await browser.newContext({viewport:{width,height:844},colorScheme:theme});
-   await context.addInitScript(({theme,movies})=>{localStorage.setItem('cinelva-theme-v1',theme);localStorage.setItem('cinemap-my-list',JSON.stringify(movies));localStorage.setItem('cinelva-library-records-v2',JSON.stringify(Object.fromEntries(movies.map(m=>[m.id,m]))));},{theme,movies});
+   await context.addInitScript(({theme,movies})=>{localStorage.setItem('cinelva-theme-v1',theme);localStorage.setItem('cinemap-my-list',JSON.stringify(movies));localStorage.setItem('cinelva-library-records-v2',JSON.stringify(Object.fromEntries(movies.map(m=>[m.id,m]))));const nativeFetch=window.fetch.bind(window);window.fetch=async(input,init)=>{const url=typeof input==='string'?input:(input&&input.url)||'';if(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//.test(url))return new Response('{"movie":null,"movies":[],"external":[],"results":[]}',{status:200,headers:{'content-type':'application/json'}});return nativeFetch(input,init)};},{theme,movies});
    await context.route('https://**/*',route=>route.abort());
    await context.route('https://image.tmdb.org/**',route=>route.fulfill({path:'assets/cinelva_original_colors_transparent.png',headers:{'access-control-allow-origin':'*'}}));
    await context.route('**/data/movies.json*',route=>route.fulfill({json:{movies}}));
-   await context.route(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//,route=>{const origin=route.request().headers().origin||'http://127.0.0.1';return route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':origin,'access-control-allow-credentials':'true','access-control-allow-methods':'GET, POST, OPTIONS','access-control-allow-headers':'content-type, authorization'},body:'{"movies":[],"external":[],"results":[]}'});});
    const page=await context.newPage(),errors=[];page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/movies.*due to access control checks/.test(e.message))errors.push(e.message);});
    const base=`http://127.0.0.1:${port}/`;
    for(const route of ['index.html','search.html','rankings.html','my-cinelva/','my-best10.html']){

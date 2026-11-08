@@ -67,6 +67,29 @@ class RefreshTest(unittest.TestCase):
                 module.refresh(source, output)
             self.assertEqual(output.read_bytes(), previous)
 
+    def test_refresh_preserves_verified_poster_only_for_matching_tmdb_id(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            entry = {
+                "title": "Test", "date": "2026-11-10", "event": "streaming",
+                "service": "Netflix", "source_url": "https://example.org/official",
+                "tmdb_id": 123,
+            }
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
+            old = {**entry, "poster": "https://image.tmdb.org/t/p/w500/verified.jpg", "release_year": 2020}
+            output.write_text(json.dumps({"movies": [old]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            saved = json.loads(output.read_text(encoding="utf-8"))["movies"][0]
+            self.assertEqual(saved["poster"], old["poster"])
+            self.assertEqual(saved["release_year"], 2020)
+
+            source.write_text(json.dumps({"period": "2026-11", "movies": [{**entry, "tmdb_id": 999}]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            saved = json.loads(output.read_text(encoding="utf-8"))["movies"][0]
+            self.assertNotIn("poster", saved)
+            self.assertNotIn("release_year", saved)
+
     def test_duplicate_enrichment_requires_matching_movie_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)
@@ -84,6 +107,9 @@ class RefreshTest(unittest.TestCase):
             self.assertEqual(movies[0]["poster"], richer["poster"])
             self.assertEqual(movies[0]["release_year"], 2026)
 
+            # This case independently tests conflicting duplicate entries in a
+            # fresh build, not cross-refresh last-known-good enrichment.
+            output.unlink()
             conflicting = {**richer, "tmdb_id": 999, "poster": "https://example.org/wrong.jpg"}
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry, conflicting]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))

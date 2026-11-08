@@ -50,6 +50,14 @@ def refresh(source=None, output=OUTPUT, today=None):
                 raise ValueError("Invalid release date or event")
             key = (date, service, " ".join(title.casefold().split()))
             if key not in seen:
+                # A curated supplement is not authoritative for movie identity
+                # or artwork. Do not let blank optional fields erase canonical
+                # metadata when downstream catalogs merge this record.
+                movie = dict(movie)
+                for field in ("poster", "poster_path", "image", "image_url", "tmdb_id", "release_year", "year"):
+                    value = movie.get(field)
+                    if value is None or value == "":
+                        movie.pop(field, None)
                 clean.append(movie)
                 seen.add(key)
     if not clean:

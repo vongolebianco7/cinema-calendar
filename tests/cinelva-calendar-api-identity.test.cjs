@@ -1,9 +1,57 @@
-const {test}=require('node:test');
-const assert=require('node:assert/strict');
-const vm=require('node:vm'),fs=require('node:fs');
-test('calendar API retains explicit TMDB identity separately from a local database ID',async()=>{
- const source=require('node:module').stripTypeScriptTypes(fs.readFileSync('backend/app/api/calendar/route.ts','utf8'),{mode:'transform'}).replace(/^import .*?;\s*$/gm,'').replaceAll('export ','');
- const context=vm.createContext({...require('../backend/lib/catalog-snapshot.cjs'),Request,Response,prisma:{release:{findMany:async()=>[{date:new Date('2026-10-13'),event:'streaming',service:'Prime Video',movie:{id:'local-db-id',tmdbId:1276849,title:'スオミの話をしよう'}}]}},json:value=>value,rateLimited:()=>null,options:()=>null});
- vm.runInContext(source+'\nthis.handler=GET;',context);
- const data=await context.handler();assert.equal(data.movies[0].tmdbId,1276849);assert.equal(data.movies[0].id,1276849);
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const vm = require('node:vm');
+const fs = require('node:fs');
+const { stripTypeScriptTypes } = require('node:module');
+
+test('calendar API serves the reviewed snapshot and excludes stale database duplicates', async () => {
+  const source = stripTypeScriptTypes(
+    fs.readFileSync('backend/app/api/calendar/route.ts', 'utf8'),
+    { mode: 'transform' },
+  ).replace(/^import .*?;\s*$/gm, '').replaceAll('export ', '');
+
+  const snapshot = {
+    generated_at: '2026-11-08T00:00:00Z',
+    movies: [{
+      id: 1707955,
+      tmdbId: 1707955,
+      title: '呪いのスマホ',
+      date: '2026-11-13',
+      event: 'theatrical',
+      service: '劇場公開',
+    }],
+  };
+  let databaseReads = 0;
+  const context = vm.createContext({
+    calendarSnapshot: () => snapshot,
+    Request,
+    json: value => value,
+    rateLimited: () => null,
+    options: () => null,
+    prisma: {
+      release: {
+        findMany: async () => {
+          databaseReads += 1;
+          return [{
+            date: new Date('2026-11-13'),
+            event: 'theatrical',
+            service: '劇場公開',
+            movie: { id: 'stale-db-id', tmdbId: 1737072, title: '呪いのスマホ' },
+          }];
+        },
+      },
+    },
+  });
+  vm.runInContext(source + '\nthis.handler = GET;', context);
+
+  const result = await context.handler(new Request('https://cinelva.test/api/calendar'));
+  const response = {
+    ...snapshot,
+    data_source: 'static_snapshot',
+    database_status: 'not_used',
+  };
+  assert.deepEqual(JSON.parse(JSON.stringify(result)), response);
+  assert.equal(result.movies.length, 1);
+  assert.equal(result.movies[0].tmdbId, 1707955);
+  assert.equal(databaseReads, 0, 'calendar must not mix stale database releases into the reviewed snapshot');
 });

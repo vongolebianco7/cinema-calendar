@@ -101,8 +101,8 @@ async function load(){
   const movies=Array.isArray(moviesJson)?moviesJson:(moviesJson.movies||[]);
   const movieById=new Map(movies.map(m=>[String(m.tmdbId||m.tmdb_id||m.id||""),m]));
   all=Object.entries(av.movies||{}).map(([id,entry])=>({id,entry,movie:movieById.get(id)||{id,title:entry.title}}))
-   .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");return Number.isFinite(checked)&&(Date.now()-checked)<=7*86400000&&providerNames({...row.entry,flatrate:row.entry.flatrate||row.entry.services}).length>0;});
-  const services=new Set(all.flatMap(row=>providerNames({...row.entry,flatrate:row.entry.flatrate||row.entry.services}).map(findTarget).filter(Boolean)));
+   .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");const providers=[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])];return Number.isFinite(checked)&&(Date.now()-checked)<=7*86400000&&providers.length>0;});
+  const services=new Set(all.flatMap(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].map(findTarget).filter(Boolean)));
   $("service").innerHTML='<option value="">すべてのサービス</option>'+TARGETS.filter(s=>services.has(s)).map(s=>'<option value="'+s+'">'+s+'</option>').join("");
   note.textContent="観測更新 "+new Date(av.generated_at).toLocaleString("ja-JP")+"。"+all.length.toLocaleString("ja-JP")+"作品で7日以内の配信状況を確認できました。作品ごとの確認日は各カードに表示します。";
   render();

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T06:53:20.993421+00:00",
+  "generated_at": "2026-11-08T09:28:27.143516+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -8113,7 +8113,9 @@
       "source": "Netflix公式 日本向け新作情報（2026-10-26確認）",
       "source_url": "https://about.netflix.com/en/news/possible-love-official-trailer",
       "checked_at": "2026-10-26",
-      "identity_source": "https://www.themoviedb.org/movie/1483525"
+      "identity_source": "https://www.themoviedb.org/movie/1483525",
+      "tmdb": "https://www.themoviedb.org/movie/1483525",
+      "tmdb_id": 1483525
     },
     {
       "title": "マッド・マックス",
@@ -9545,6 +9547,70 @@
       "tmdb": "https://www.themoviedb.org/movie/1570488",
       "tmdb_id": 1570488,
       "release_year": 2026
+    },
+    {
+      "title": "グッド・ロイヤー",
+      "date": "2026-11-09",
+      "event": "streaming",
+      "service": "Netflix",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "Netflix Tudum November 2026 schedule; Japan title page verified",
+      "source_url": "https://www.netflix.com/tudum/articles/new-on-netflix?inapp=true-65",
+      "checked_at": "2026-11-08",
+      "original_title": "The Good Lawyer"
+    },
+    {
+      "title": "クリスマス・スイッチ",
+      "date": "2026-11-12",
+      "event": "streaming",
+      "service": "Netflix",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/7ZkhHCvMoOw4wdW6nGQShCQH5yS.jpg",
+      "source": "About Netflix global release announcement; Japan title page verified",
+      "source_url": "https://about.netflix.com/en/news/netflix-unwraps-first-look-at-swedish-holiday-film-the-christmas-switch",
+      "checked_at": "2026-11-08",
+      "id": 313093,
+      "tmdb": "https://www.themoviedb.org/movie/313093",
+      "tmdb_id": 313093,
+      "release_year": 2014,
+      "original_title": "The Christmas Switch"
+    },
+    {
+      "title": "ハートランド",
+      "date": "2026-11-13",
+      "event": "streaming",
+      "service": "Netflix",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": null,
+      "source": "Netflix Tudum November 2026 schedule; Japan title page verified",
+      "source_url": "https://www.netflix.com/tudum/articles/new-on-netflix?inapp=true-65",
+      "checked_at": "2026-11-08",
+      "original_title": "Heartland"
+    },
+    {
+      "title": "モスキートボウル",
+      "date": "2026-11-25",
+      "event": "streaming",
+      "service": "Netflix",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/zbT4sxoCEeFWlQG4SC5X9Q8v6PC.jpg",
+      "source": "Netflix Tudum November 2026 schedule; Japan title page verified",
+      "source_url": "https://www.netflix.com/tudum/articles/new-on-netflix?inapp=true-65",
+      "checked_at": "2026-11-08",
+      "id": 1458300,
+      "tmdb": "https://www.themoviedb.org/movie/1458300",
+      "tmdb_id": 1458300,
+      "release_year": 2026,
+      "original_title": "The Mosquito Bowl"
     }
   ],
   "poster_enrichment": {

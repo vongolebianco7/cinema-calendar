@@ -16,10 +16,6 @@ try:
     from .streaming_event_normalization import normalize_premieres
 except ImportError:  # Script execution from the scheduled workflow.
     from streaming_event_normalization import normalize_premieres
-try:
-    from .streaming_event_normalization import normalize_premieres
-except ImportError:  # Script execution from the scheduled workflow.
-    from streaming_event_normalization import normalize_premieres
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "data/streaming-official-current.json"

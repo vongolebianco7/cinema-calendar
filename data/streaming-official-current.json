@@ -1748,9 +1748,21 @@
       "id": 1285372,
       "tmdb": "https://www.themoviedb.org/movie/1285372",
       "release_year": 2024
+    },
+    {
+      "title": "ゴス家のワン! ダフル・クリスマス",
+      "date": "2026-11-04",
+      "event": "streaming",
+      "service": "Netflix",
+      "source": "Netflix公式新作情報（2026-11-08確認）",
+      "source_url": "https://about.netflix.com/ja/new-to-watch",
+      "poster": "https://image.tmdb.org/t/p/w500/zvsNAohDHRWcGvbPSD7r3WojpKb.jpg",
+      "id": 1570488,
+      "tmdb": "https://www.themoviedb.org/movie/1570488",
+      "release_year": 2026
     }
   ],
-  "count": 154,
+  "count": 155,
   "note": "Verified-source subset, not a complete subscription catalog",
   "poster_enrichment": {
     "source": "local catalog or TMDB Search API; unique exact-title matches only"

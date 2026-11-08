@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "12e8c010796103332967f22bf19dba8112c3a01d",
-  "verified_at": "2026-11-08T21:20:32Z",
-  "note": "Required exact-head GitHub Actions passed for this source commit (Scorecard contract, CINELVA smoke tests, CINELVA mobile layout smoke test, Reproducible backend build, Cinemap completeness scorecard, Autonomous quality gate, Validate frontend, CINELVA continuous visual QA). This receipt-only commit binds the proof to that CI-verified executable tree; production publication remains gated on its own exact-head checks."
+  "head_sha": "8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12",
+  "verified_at": "2026-11-08T22:15:11Z",
+  "note": "Exact-head GitHub Actions passed on source commit 8fc4b98f7c75e3a36cd5f886ef7b0c8d7171bb12 (all eight required workflows, including Python contracts, Chromium/WebKit browser checks, visual QA, mobile smoke, backend build, and quality gate). Receipt-only update after streaming poster metadata recovery. Production publication remains pending Vercel Hobby daily deployment quota clearance."
 }

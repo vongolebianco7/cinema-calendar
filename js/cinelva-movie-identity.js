@@ -12,7 +12,8 @@
   const byId = new Map(),
     aliases = new Map(),
     pending = new Map(),
-    bound = new WeakSet();
+    bound = new WeakSet(),
+    imageContexts = new WeakMap();
   const CACHE_KEY = "cinelva-poster-registry-v1",
     BAD_KEY = "cinelva-broken-posters-v1",
     MAX_CACHE = 3000;
@@ -243,7 +244,21 @@
   }
   function hydratePoster(image, m) {
     if(image?.parentElement&&id(m))image.parentElement.dataset.nowFilmId=id(m);
-    if (!image || !m || bound.has(image)) return;
+    if (!image || !m) return;
+    const previous = imageContexts.get(image);
+    if (previous) {
+      const changed = id(previous.movie) !== id(m) ||
+        (!id(m) && (previous.movie.title !== m.title || year(previous.movie) !== year(m)));
+      previous.movie = m;
+      if (changed) {
+        delete image.dataset.posterRetry;
+        const url = posterFor(m);
+        if (url) image.src = url;
+      }
+      return;
+    }
+    const context = { movie: m };
+    imageContexts.set(image, context);
     bound.add(image);
     const parent = image.parentElement;
     let fallback = parent?.querySelector("[data-poster-fallback],.rankPosterPlaceholder");
@@ -276,14 +291,15 @@
         return;
       }
       fail();
-      reportBroken(m, image.currentSrc || image.src);
+      const failedMovie = context.movie;
+      reportBroken(failedMovie, image.currentSrc || image.src);
       if (image.dataset.posterRetry === "1") {
         fail();
         return;
       }
       image.dataset.posterRetry = "1";
       const next = await fetchOne({
-        ...m,
+        ...failedMovie,
         poster: "",
         poster_url: "",
         posterUrl: "",
@@ -292,7 +308,7 @@
         posterURL: "",
         images: null,
       });
-      if (next?.poster && image.isConnected) {
+      if (next?.poster && image.isConnected && context.movie === failedMovie) {
         image.src = next.poster;
       } else fail();
     });

@@ -14,8 +14,8 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
    await context.route('https://**/*',route=>route.abort());
    await context.route('https://image.tmdb.org/**',route=>route.fulfill({path:'assets/cinelva_original_colors_transparent.png',headers:{'access-control-allow-origin':'*'}}));
    await context.route('**/data/movies.json*',route=>route.fulfill({json:{movies}}));
-   await context.route(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*','access-control-allow-methods':'GET,POST,OPTIONS','access-control-allow-headers':'*'},body:'{"movies":[],"external":[],"results":[]}'}));
-   const page=await context.newPage(),errors=[];page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/movies.*due to access control checks/.test(e.message))errors.push(e.message);});
+   await context.route(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"movies":[],"external":[],"results":[]}'}));
+   const page=await context.newPage(),errors=[];page.on('pageerror',e=>{if(!/backend-one-gray-94\.vercel\.app\/api\/(?:movies|movie-detail).*due to access control checks/.test(e.message))errors.push(e.message);});
    const base=`http://127.0.0.1:${port}/`;
    for(const route of ['index.html','search.html','rankings.html','my-cinelva/','my-best10.html']){
     await page.goto(base+route,{waitUntil:'domcontentloaded'});

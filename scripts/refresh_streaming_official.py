@@ -35,8 +35,13 @@ def refresh(source=None, output=OUTPUT, today=None):
         if not isinstance(data, dict) or not isinstance(data.get("movies"), list):
             raise ValueError(f"Invalid official source {source_path.name}; existing output preserved")
         period = data.get("period")
-        if isinstance(period, str) and period.strip():
-            periods.add(period.strip())
+        if not isinstance(period, str) or len(period) != 7 or period[4] != "-":
+            raise ValueError(f"Invalid official period in {source_path.name}; existing output preserved")
+        try:
+            dt.date.fromisoformat(period + "-01")
+        except ValueError as exc:
+            raise ValueError(f"Invalid official period in {source_path.name}; existing output preserved") from exc
+        periods.add(period)
         for movie in data["movies"]:
             if not isinstance(movie, dict):
                 raise ValueError("Invalid movie entry")
@@ -46,6 +51,8 @@ def refresh(source=None, output=OUTPUT, today=None):
             if service not in ALLOWED or not url.startswith("https://"):
                 raise ValueError("Unrecognized service or non-HTTPS provenance")
             parsed = dt.date.fromisoformat(date)
+            if date[:7] != period:
+                raise ValueError("Streaming release date outside official supplement period")
             if parsed.year < 2026 or movie.get("event") != "streaming":
                 raise ValueError("Invalid release date or event")
             key = (date, service, " ".join(title.casefold().split()))

@@ -46,6 +46,24 @@ class RefreshTest(unittest.TestCase):
                 module.refresh(source, output)
             self.assertEqual(output.read_bytes(), previous)
 
+    def test_mismatched_period_rejected_without_overwriting_last_good(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            movie = {"title": "Test", "date": "2026-11-10", "event": "streaming",
+                     "service": "Netflix", "source_url": "https://example.org/official"}
+            source.write_text(json.dumps({"period": "2026-11", "movies": [movie]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            last_good = output.read_bytes()
+            source.write_text(json.dumps({"period": "2026-12", "movies": [movie]}), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "outside official supplement period"):
+                module.refresh(source, output)
+            self.assertEqual(output.read_bytes(), last_good)
+            source.write_text(json.dumps({"period": "2026-13", "movies": [movie]}), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Invalid official period"):
+                module.refresh(source, output)
+            self.assertEqual(output.read_bytes(), last_good)
+
     def test_default_refresh_combines_new_months_without_code_changes(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)

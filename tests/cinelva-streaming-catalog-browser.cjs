@@ -61,7 +61,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   const rentalCoverage=await page.locator('#status').innerText();
   assert.match(rentalCoverage,/Prime Video 2/,'rental counts are calculated for rental observations only');
   assert.doesNotMatch(rentalCoverage,/Netflix/);
-  assert.match(await page.locator('.card').innerText(),/レンタル映画/);
+  assert.equal(await page.locator('.card').filter({hasText:'レンタル映画'}).count(),1,'the mixed-access title remains in the rental results');
   await page.locator('#service').selectOption('Prime Video');
   assert.equal(await page.locator('.card').count(),2,'service filtering also works in the rental view');
   assert.match(await page.locator('.footer').innerText(),/配信開始日を保証するものではありません/);

@@ -32,7 +32,7 @@ a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 16px}.top{position:
 <div class="controls">
 <input id="query" class="search" type="search" placeholder="作品名で検索" aria-label="作品名で検索">
 <select id="service" class="select" aria-label="配信サービス"><option value="">すべてのサービス</option></select>
-<div class="tabs" role="group" aria-label="配信方法"><button class="tab" data-kind="flatrate" aria-pressed="true">見放題</button><button class="tab" data-kind="rent" aria-pressed="false">レンタル</button><button class="tab" data-kind="buy" aria-pressed="false">購入</button></div>
+<div class="tabs" role="group" aria-label="配信方法"><button class="tab" data-kind="flatrate" aria-pressed="true">見放題</button><button class="tab" data-kind="free_ads" aria-pressed="false">無料・広告つき</button><button class="tab" data-kind="rent" aria-pressed="false">レンタル</button><button class="tab" data-kind="buy" aria-pressed="false">購入</button></div>
 </div>
 <div id="status" class="status" role="status" aria-live="polite">読み込み中…</div>
 <div id="grid" class="grid" aria-label="配信作品"></div>
@@ -61,21 +61,22 @@ const aliases={
 const $=id=>document.getElementById(id);
 let all=[],kind="flatrate",shown=0;const PAGE=60;
 const clean=s=>String(s||"").normalize("NFKC").toLocaleLowerCase("ja").trim();
-const providerNames=m=>Array.isArray(m?.[kind])?m[kind]:kind==="flatrate"?(m?.services||[]):[];
+const providerNames=m=>kind==="free_ads"?[...(m?.free||[]),...(m?.ads||[])]:Array.isArray(m?.[kind])?m[kind]:kind==="flatrate"?(m?.services||[]):[];
 const matchesTarget=(name,target)=>aliases[target](name);
 const findTarget=name=>TARGETS.find(target=>matchesTarget(name,target));
-function posterFor(m){
+function posterFor(m,entry){
  const helper=window.CinelvaMovieIdentity;
- let url=helper?.posterFor?.(m)||m.poster||m.poster_url||null;
+ let url=helper?.posterFor?.(m)||m.poster||m.poster_url||entry?.poster||null;
  if(!url&&m.poster_path)url="https://image.tmdb.org/t/p/w342"+m.poster_path;
+ if(!url&&entry?.poster_path)url="https://image.tmdb.org/t/p/w342"+entry.poster_path;
  return typeof url==="string"&&url.trim()?url:null;
 }
 function cardHtml(row){
  const m=row.movie||{},title=row.entry.title||m.title||m.name||"タイトル未確認";
  const id=row.id,providers=[...new Set(providerNames(row.entry).map(findTarget).filter(Boolean))];
- const img=posterFor(m);
+ const img=posterFor(m,row.entry);
  const meta=row.entry.checked_at?new Date(row.entry.checked_at).toLocaleDateString("ja-JP",{month:"numeric",day:"numeric"})+"確認":"確認日不明";
- return '<a class="card" href="search.html?'+new URLSearchParams({id,search:title}).toString()+'" aria-label="'+escapeHtml(title)+'、配信先 '+escapeHtml(providers.join("、"))+'"><div class="poster">'+(img?'<img loading="lazy" decoding="async" src="'+img.replaceAll('"',"&quot;")+'" alt="'+escapeHtml(title)+'のポスター" onerror="this.remove();this.parentElement.textContent=\'ポスター未確認\'">':'ポスター未確認')+'</div><div class="info"><div class="title">'+escapeHtml(title)+'</div><div class="services">'+escapeHtml(providers.join("・")||providerNames(row.entry).join("・"))+'</div><div class="checked">'+meta+'</div></div></a>';
+ return '<a class="card" href="search.html?'+new URLSearchParams({id,search:title}).toString()+'" aria-label="'+escapeHtml(title)+'、配信先 '+escapeHtml(providers.join("、"))+'"><div class="poster">'+(img?'<img loading="lazy" decoding="async" src="'+img.replaceAll('"',"&quot;")+'" alt="'+escapeHtml(title)+'のポスター" onerror="const poster=this.closest(\'.poster\');this.remove();if(poster)poster.textContent=\'ポスター未確認\'">':'ポスター未確認')+'</div><div class="info"><div class="title">'+escapeHtml(title)+'</div><div class="services">'+escapeHtml(providers.join("・")||providerNames(row.entry).join("・"))+'</div><div class="checked">'+meta+'</div></div></a>';
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function filtered(){
@@ -89,8 +90,8 @@ function render(reset=true){
  const list=filtered();if(reset)shown=0;
  const slice=list.slice(0,shown+PAGE);shown=slice.length;
  $("grid").innerHTML=slice.map(cardHtml).join("")||'<div class="empty">条件に合う作品はありません。サービスや検索語を変えてください。</div>';
- const coverage=TARGETS.map(target=>{const count=all.filter(row=>providerNames(row.entry).some(name=>findTarget(name)===target)).length;return count?target+" "+count:null;}).filter(Boolean).join("・");
- $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 過去7日以内に"+({flatrate:"見放題",rent:"レンタル",buy:"購入"}[kind])+"を確認: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
+ const coverage=TARGETS.map(target=>{const count=list.filter(row=>providerNames(row.entry).some(name=>findTarget(name)===target)).length;return count?target+" "+count:null;}).filter(Boolean).join("・");
+ $("status").textContent=list.length.toLocaleString("ja-JP")+"作品 · 過去7日以内に"+({flatrate:"見放題",free_ads:"無料・広告つき",rent:"レンタル",buy:"購入"}[kind])+"を確認: "+(coverage||"なし")+"。直近7日以内に観測がないサービスは掲載していません。";
  $("more").hidden=shown>=list.length;$("more").textContent="さらに表示 ("+shown.toLocaleString("ja-JP")+" / "+list.length.toLocaleString("ja-JP")+")";
 }
 async function load(){
@@ -102,8 +103,8 @@ async function load(){
   const movies=Array.isArray(moviesJson)?moviesJson:(moviesJson.movies||[]);
   const movieById=new Map(movies.map(m=>[String(m.tmdbId||m.tmdb_id||m.id||""),m]));
   all=Object.entries(av.movies||{}).map(([id,entry])=>({id,entry,movie:movieById.get(id)||{id,title:entry.title}}))
-   .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");const age=Date.now()-checked;const providers=[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])];return Number.isFinite(checked)&&age>=0&&age<=7*86400000&&providers.length>0;});
-  const services=new Set(all.flatMap(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].map(findTarget).filter(Boolean)));
+   .filter(row=>{const checked=Date.parse(row.entry.checked_at||"");const age=Date.now()-checked;const providers=[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.free||[]),...(row.entry.ads||[]),...(row.entry.rent||[]),...(row.entry.buy||[])];return Number.isFinite(checked)&&age>=0&&age<=7*86400000&&providers.length>0;});
+  const services=new Set(all.flatMap(row=>[...(row.entry.flatrate||row.entry.services||[]),...(row.entry.free||[]),...(row.entry.ads||[]),...(row.entry.rent||[]),...(row.entry.buy||[])].map(findTarget).filter(Boolean)));
   $("service").innerHTML='<option value="">すべてのサービス</option>'+TARGETS.map(s=>'<option value="'+s+'">'+s+(services.has(s)?"":"（直近データなし）")+'</option>').join("");
   note.textContent="観測更新 "+new Date(av.generated_at).toLocaleString("ja-JP")+"。"+all.length.toLocaleString("ja-JP")+"作品で7日以内の配信状況を確認できました。作品ごとの確認日は各カードに表示します。";
   render();

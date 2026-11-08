@@ -53,6 +53,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
 
     last_request = 0.0
     enriched = ambiguous = unresolved = 0
+    candidate_review = []
     for movie in rows:
         if movie.get("poster"):
             continue
@@ -100,6 +101,21 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             continue
         if len(exact) > 1:
             ambiguous += 1
+            candidate_review.append({
+                "query": movie.get("title") or movie.get("original_title"),
+                "reason": "multiple exact identities in canonical movie catalog",
+                "candidates": [
+                    {
+                        "id": int(movie_id),
+                        "title": identity.get("title"),
+                        "original_title": identity.get("original_title"),
+                        "release_date": identity.get("release_date") or "",
+                        "source": "canonical movie catalog",
+                        "tmdb_url": identity.get("tmdb") or "https://www.themoviedb.org/movie/" + str(movie_id),
+                    }
+                    for movie_id, identity in sorted(exact.items())
+                ],
+            })
             continue
         if not api_key:
             unresolved += 1
@@ -130,6 +146,22 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             continue
         last_request = time.monotonic()
         matches = {}
+        search_candidates = []
+        for candidate in result.get("results", [])[:10]:
+            if not candidate.get("id"):
+                continue
+            search_candidates.append({
+                "id": int(candidate["id"]),
+                "title": candidate.get("title") or "",
+                "original_title": candidate.get("original_title") or "",
+                "release_date": candidate.get("release_date") or "",
+                "exact_title_match": needle in {
+                    normalize(candidate.get("title")),
+                    normalize(candidate.get("original_title")),
+                },
+                "has_poster": bool(candidate.get("poster_path")),
+                "tmdb_url": "https://www.themoviedb.org/movie/" + str(candidate["id"]),
+            })
         for candidate in result.get("results", []):
             if not candidate.get("id") or not candidate.get("poster_path"):
                 continue
@@ -150,8 +182,36 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             enriched += 1
         elif len(matches) > 1:
             ambiguous += 1
+            candidate_review.append({
+                "query": title,
+                "reason": "multiple exact-title candidates; no identity assigned",
+                "candidates": [
+                    {
+                        "id": int(candidate["id"]),
+                        "title": candidate.get("title") or "",
+                        "original_title": candidate.get("original_title") or "",
+                        "release_date": candidate.get("release_date") or "",
+                        "exact_title_match": True,
+                        "has_poster": bool(candidate.get("poster_path")),
+                        "tmdb_url": "https://www.themoviedb.org/movie/" + str(candidate["id"]),
+                    }
+                    for candidate in matches.values()
+                ],
+            })
         else:
             unresolved += 1
+            candidate_review.append({
+                "query": title,
+                "reason": "no unique exact-title candidate; no identity assigned",
+                "candidates": search_candidates,
+            })
+
+    if candidate_review:
+        print(
+            "Streaming poster candidate review (unapproved; no IDs or posters assigned): "
+            + json.dumps(candidate_review, ensure_ascii=False, sort_keys=True),
+            flush=True,
+        )
 
     data["poster_enrichment"] = {
         "source": "local catalog or TMDB Search API; unique exact-title matches only",

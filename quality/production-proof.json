@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d4948186a84a781829225dc3f66bc335950d6386",
-  "verified_at": "2026-11-08T23:36:53Z",
-  "note": "Exact-head GitHub Actions passed on source commit d4948186a84a781829225dc3f66bc335950d6386: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build all succeeded. Refreshes the receipt for the source merged to main as d0c3c5b4a334fd7f80dd18d2c35107ca874ab049; production publication is permitted only while this executable source digest remains unchanged."
+  "head_sha": "10c846494d5ad8255e74f204962af932f9d753f5",
+  "verified_at": "2026-11-08T23:50:00Z",
+  "note": "Exact-head GitHub Actions passed on source commit 10c846494d5ad8255e74f204962af932f9d753f5 (18 checks complete, zero failures, including Python contracts, Chromium/WebKit browser regression and visual checks, mobile smoke, backend build, and quality gate). Receipt refresh after verified poster enrichment preservation fix in PR #754. Production publication remains subject to the exact-source digest gate and Vercel Hobby quota."
 }

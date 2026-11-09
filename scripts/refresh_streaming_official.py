@@ -84,6 +84,8 @@ def refresh(source=None, output=OUTPUT, today=None):
                 # identify the same TMDB movie; never infer from title alone.
                 first_id = existing.get("tmdb_id") or existing.get("tmdbId")
                 second_id = movie.get("tmdb_id") or movie.get("tmdbId")
+                if first_id is not None and second_id is not None and str(first_id) != str(second_id):
+                    raise ValueError("Conflicting duplicate TMDB identities; existing output preserved")
                 if first_id is not None and second_id is not None and str(first_id) == str(second_id):
                     for field in ("poster", "poster_path", "image", "image_url", "release_year", "year"):
                         if field not in existing and field in movie:

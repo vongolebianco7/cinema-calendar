@@ -112,12 +112,9 @@ class RefreshTest(unittest.TestCase):
             output.unlink()
             conflicting = {**richer, "tmdb_id": 999, "poster": "https://example.org/wrong.jpg"}
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry, conflicting]}), encoding="utf-8")
-            self.assertTrue(module.refresh(source, output))
-            movies = json.loads(output.read_text(encoding="utf-8"))["movies"]
-            self.assertEqual(len(movies), 1)
-            self.assertNotIn("poster", movies[0])
-            self.assertNotIn("release_year", movies[0])
-            self.assertEqual(movies[0]["tmdb_id"], 123)
+            with self.assertRaisesRegex(ValueError, "Conflicting duplicate TMDB identities"):
+                module.refresh(source, output)
+            self.assertFalse(output.exists(), "Conflicting duplicate must not publish a snapshot")
 
     def test_deduplicates_and_preserves_existing_on_bad_source(self):
         with tempfile.TemporaryDirectory() as directory:

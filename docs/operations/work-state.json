@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:56:22Z",
+  "updated_at": "2026-11-09T03:04:40Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "9377890a5117cc81cfd6c0dfccd0a8b6fa1173d7",
   "branch": "docs/streaming-followup-checkpoint-20261109",
-  "head_sha": "pending-pr-head",
-  "pull_request": null,
+  "head_sha": "1681237443cdd262526fff5f7e1f1cdd847e5337",
+  "pull_request": 765,
   "work_items": [
     {
       "id": "P0-RESTART",

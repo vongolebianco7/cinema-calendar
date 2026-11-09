@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-09T15:27:00Z",
-  "status": "merged_source_pending_production",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
@@ -646,7 +646,7 @@
     {
       "id": "P0-244-ATOMIC-IMPORT-20261105",
       "title": "Preserve the last-good streaming catalog on rejected imports",
-      "status": "merged_source_pending_production",
+      "status": "merged",
       "issue": 244,
       "pull_request": {
         "number": 771,
@@ -674,7 +674,7 @@
     {
       "id": "P0-244-SIRAT",
       "title": "Publish verified Sirat Netflix premiere and audit November streaming coverage",
-      "status": "merged_source_pending_production",
+      "status": "merged",
       "issue": 244,
       "acceptance": "Sirat appears in the verified official subset and user-facing catalog with date, source, TMDB 1151272, poster, year, runtime and verification timestamps; previous enrichment remains intact; coverage limits are quantified.",
       "pull_request": {
@@ -693,7 +693,7 @@
     {
       "id": "P0-244-PUSH-RACE",
       "title": "Prevent daily streaming refresh push races",
-      "status": "merged_source_pending_production",
+      "status": "merged",
       "issue": 244,
       "pull_request": {
         "number": 761,
@@ -705,7 +705,7 @@
     {
       "id": "P0-593-DURABLE-POSTER-IDENTITIES-20261109",
       "title": "Persist verified streaming poster identities through scheduled regeneration",
-      "status": "merged_source_pending_production",
+      "status": "merged",
       "issue": 593,
       "pull_request": {
         "number": 779,
@@ -1069,20 +1069,22 @@
     }
   ],
   "deployment": {
-    "status": "blocked",
+    "status": "deployment_pending",
     "url": "https://cinelva.vercel.app/",
     "latest_main_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
     "alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
     "latest_deployment_sha": "d0c3c5b4a334fd7f80dd18d2c35107ca874ab049",
     "production_verified": false,
-    "reason": "Vercel returned HTTP 402 api-deployments-free-per-day (more than 100 deployments; retry-after 24 hours). Do not retry before 2026-11-10T01:37:22Z. Canonical alias was last observed serving old source f6cd6c6; production acceptance of merged Sirat catalog remains pending."
+    "reason": "Vercel returned HTTP 402 api-deployments-free-per-day (more than 100 deployments; retry-after 24 hours). Do not retry before 2026-11-10T01:37:22Z. Canonical alias was last observed serving old source f6cd6c6; production acceptance of merged Sirat catalog remains pending.",
+    "last_ready_sha": "391da7d6aec71ac97dd18235379c97f286fd4be8",
+    "blocker": "Vercel Hobby api-deployments-free-per-day quota; recheck live before a single free-tier deploy attempt."
   },
   "blockers": [
     "Vercel Hobby rejects deployments with api-deployments-free-per-day; production remains at SHA 391da7d6aec71ac97dd18235379c97f286fd4be8.",
     "No rights-reviewed free official premiere feeds are configured for any of the 12 providers; #244 automatic premiere discovery cannot be truthfully marked complete.",
     "Full screen-by-screen poster HTTP failure rates and public production acceptance are not yet measured."
   ],
-  "next_action": "Recheck live Vercel Hobby quota at/after 2026-11-10T01:37:22Z UTC and make one free-tier deployment attempt if available. Then measure public poster behavior on all requested screens and continue provider-by-provider official-feed rights audit; keep #244/#593 open until evidence passes.",
+  "next_action": "Recheck live Vercel Hobby quota after 2026-11-10T01:37:22Z UTC, then make one free-tier deployment attempt if allowed. Verify all target screens and keep #244/#593 open until production acceptance passes.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",

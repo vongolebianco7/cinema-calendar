@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T15:03:00Z",
+  "updated_at": "2026-11-09T15:07:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -693,6 +693,20 @@
         "head_sha": "949d554e5240900e3ad3abb5bf6f783d066376c4"
       },
       "acceptance": "Rebase generated data onto full-history latest main and retry safe fast-forward push at most three times; conflicts stop without overwriting data."
+    },
+    {
+      "id": "P0-244-593-DUPLICATE-LKG-20261109",
+      "title": "Reject ambiguous prior last-known-good streaming keys",
+      "status": "merged",
+      "issue": 244,
+      "pull_request": {
+        "number": 773,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/773",
+        "head_sha": "8ffe2b05571e628ab8563a43ef03aa96c100c52d",
+        "merge_sha": "a6c972c41d7ac3a6ddb4ff16c4a07197e0fa0e20"
+      },
+      "acceptance": "Duplicate prior release keys are rejected without altering existing last-known-good snapshot bytes.",
+      "ci": "Exact-head CI passed; merged to main before current main 8b6a7c2e."
     }
   ],
   "verification": [
@@ -1073,10 +1087,10 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 636,
-    "merge_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
-    "head_sha": "ff33ddb14b8b306f62523f42f7edc33540be4b50",
-    "source_sha": "34140cfd426fa469930d6451d79aed95b3951c08"
+    "number": 773,
+    "merge_sha": "a6c972c41d7ac3a6ddb4ff16c4a07197e0fa0e20",
+    "head_sha": "8ffe2b05571e628ab8563a43ef03aa96c100c52d",
+    "source_sha": "2ade5879619c161b30ab689c7b2454a51af09eae"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -2937,7 +2951,6 @@
     ]
   },
   "open_pull_requests": [
-    773,
     775,
     777
   ],
@@ -2945,6 +2958,10 @@
     {
       "number": 646,
       "result": "closed as stale duplicate after checkpoint moved to #648"
+    },
+    {
+      "number": 773,
+      "result": "merged as a6c972c41d7ac3a6ddb4ff16c4a07197e0fa0e20; added duplicate prior-LKG key rejection regression coverage"
     }
   ],
   "next_concrete_actions": [
@@ -3371,11 +3388,10 @@
     "user_data_safety": "PR #776 only adds TMDB identity/year/poster metadata and regression coverage; no viewing history, ratings, bookmarks, or backups are modified.",
     "checkpoint_commit": "1ac02c61a5a273830977583f4421648ec08ca1d0",
     "open_pull_requests": [
-      773,
       775,
       777
     ],
     "checkpoint_pr": 777,
-    "updated_at_utc": "2026-11-09T15:03:00Z"
+    "updated_at_utc": "2026-11-09T15:07:00Z"
   }
 }

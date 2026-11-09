@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "55ca84d2fb16cbcae0c951f1cbb556bd31c9a011",
-  "verified_at": "2026-11-09T22:59:02Z",
-  "note": "Receipt-only checkpoint for PR #782 exact source head 55ca84d2fb16cbcae0c951f1cbb556bd31c9a011; its tree SHA f785653be7f46f973ac8c1a7753c4b385a8f495f is identical to main squash merge d182c9d29a1318d2c07938cdf8f357681af92f5f. All four publication-proof workflows passed on the exact PR head: Validate frontend (Chromium/WebKit) run 42706996615, Autonomous quality gate 42706996992, CINELVA smoke tests 42706996968, and reproducible backend build 42706996844. Additional visual QA, completeness, and mobile layout checks also passed. This receipt confirms CI only; production deployment and all-screen public poster acceptance remain pending. No source files changed in this receipt-only commit."
+  "head_sha": "9f89001d4038e5c40c3b05a624860d7bdb8a8743",
+  "verified_at": "2026-11-09T23:47:22.850Z",
+  "note": "Receipt-only checkpoint for PR #784 exact executable source head 9f89001d4038e5c40c3b05a624860d7bdb8a8743; its tree SHA 7813cb04ecb3e0f894c0f993f7fa99bf9d59372b is identical to main squash merge f0979361f6ceca9b874e16c5bac78a5c9a85f222. All four publication-proof workflows passed on that exact PR head: Validate frontend (Chromium/WebKit) run 42722158148, Autonomous quality gate 42722158256, CINELVA smoke tests 42722158291, and reproducible backend build 42722157992. Additional visual QA, completeness, and mobile layout checks also passed. This receipt confirms CI only; production deployment and all-screen public poster acceptance remain pending. No executable source files changed in this receipt-only commit."
 }

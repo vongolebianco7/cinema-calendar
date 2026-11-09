@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T01:16:43Z",
+  "updated_at": "2026-11-09T02:04:52Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
-  "branch": "feat/sirat-streaming-coverage-20261109",
-  "head_sha": "142f42645446d003dae9c4caa2ed17f171859016",
-  "pull_request": 759,
+  "base_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
+  "branch": "fix/streaming-refresh-push-race-20261109",
+  "head_sha": "59af23bc9a3d78368ec3c7a2fb35d6b0ba008227",
+  "pull_request": 761,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -673,6 +673,26 @@
       "status": "in_progress",
       "issue": 244,
       "acceptance": "Sirat appears in the verified official subset and user-facing catalog with date, source, TMDB 1151272, poster, year, runtime and verification timestamps; previous enrichment remains intact; coverage limits are quantified."
+    },
+    {
+      "id": "P0-244-PREMIERE-DISCOVERY",
+      "title": "Discover streaming premiere dates from rights-approved official feeds",
+      "status": "blocked",
+      "issue": 244,
+      "acceptance": "Enable only terms-approved zero-cost official premiere feeds, validate candidates and publish with citations. Current availability observations remain separate."
+    },
+    {
+      "id": "P0-244-PUSH-RACE",
+      "title": "Prevent daily streaming refresh push races",
+      "status": "pr_created",
+      "issue": 244,
+      "pull_request": {
+        "number": 761,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/761",
+        "branch": "fix/streaming-refresh-push-race-20261109",
+        "head_sha": "949d554e5240900e3ad3abb5bf6f783d066376c4"
+      },
+      "acceptance": "Rebase generated data onto full-history latest main and retry safe fast-forward push at most three times; conflicts stop without overwriting data."
     }
   ],
   "verification": [
@@ -1019,18 +1039,24 @@
       },
       "local": "33 focused Python tests, production quality gate, release schema check, streaming coverage check, work-state schema and diff check passed. Standalone local browser was unavailable because the Playwright Chromium binary is not installed; CI browser checks passed.",
       "result": "Sirat row is mapped to TMDB 1151272, 2025, 115 minutes, canonical poster, 2026-11-05 date and Netflix title URL. Dedicated Chromium/WebKit calendar test checks the card date, poster, runtime and Netflix link. This is not yet production acceptance."
+    },
+    {
+      "check": "PR #761 exact-head source CI",
+      "result": "passed",
+      "details": "All 8 listed GitHub Actions succeeded on source 949d554e5240900e3ad3abb5bf6f783d066376c4; local focused streaming poster suite 17/17 passed; work-state and source registry remain compliance-gated."
     }
   ],
   "deployment": {
     "status": "blocked",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+    "latest_main_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
     "alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
     "latest_deployment_sha": "d0c3c5b4a334fd7f80dd18d2c35107ca874ab049",
     "production_verified": false,
-    "reason": "Vercel reports the Hobby daily deployment cap exceeded (>100 deployments; retry available after 24 hours). The canonical alias still serves the older f6cd6c6 source and live streaming.json lacks Sirat. Do not trigger redundant retries; after quota reset, verify the automatic production build against the renewed CI proof."
+    "reason": "Vercel returned HTTP 402 api-deployments-free-per-day (more than 100 deployments; retry-after 24 hours). Do not retry before 2026-11-10T01:37:22Z. Canonical alias was last observed serving old source f6cd6c6; production acceptance of merged Sirat catalog remains pending."
   },
   "blockers": [
+    "Streaming premiere discovery remains manual: no rights-reviewed official feed is enabled for any of 12 services; TMDB/JustWatch current-availability discovery does not provide premiere dates.",
     "No rights-reviewed official premiere API/feed is enabled for any of the 12 streaming services; all auto_premiere_discovery flags remain false. November records are a manual verified subset, not exhaustive.",
     "27 of 181 cited November announcement rows still lack a matched TMDB identity/poster; do not represent poster coverage as complete.",
     "Vercel Hobby daily build cap is exhausted (>100 deployments); canonical production is on an older build and production acceptance is pending quota reset.",
@@ -1038,7 +1064,7 @@
     "Issue #585 still requires owner-managed FEEDBACK_ADMIN_TOKEN setup; no secret is stored in the repository checkpoint.",
     "Issue #529 demo branch preview acceptance remains separate and incomplete."
   ],
-  "next_action": "Commit production proof and work-state/resume checkpoint referencing exact successful source 142f42645446d003dae9c4caa2ed17f171859016; verify final-head Actions, then merge PR #759 safely. Avoid Vercel retries while daily quota is exhausted; after reset, verify READY deployment and public streaming.json contains Sirat on 2026-11-05 with the Netflix link. Keep #244 and #593 open.",
+  "next_action": "The full work-state checkpoint has been restored after a transfer truncation at prior head 91e7dc3. Rerun all required checks on the current PR head; merge only after exact-head checks pass. After merge, verify the post-merge streaming refresh. Vercel remains blocked until after 2026-11-10T01:37:22Z.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -3070,9 +3096,9 @@
     "safety": "No bypass of CI, paid upgrade, scraping, secrets, or destructive data migration."
   },
   "latest_streaming_premiere_checkpoint_20261109": {
-    "recorded_at": "2026-11-09T01:16:43Z",
+    "recorded_at": "2026-11-09T02:04:52Z",
     "master_issue": 239,
-    "latest_main_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+    "latest_main_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
     "merged_prs": [
       {
         "number": 757,
@@ -3082,30 +3108,60 @@
       {
         "number": 756,
         "sha": "e8e292251c8b91c4722eaf5805685562653ba233",
-        "result": "TMDB alias identity-safe poster enrichment merged after all exact-head Actions passed"
+        "result": "TMDB identity-alias poster enrichment guard merged after exact-head CI"
+      },
+      {
+        "number": 759,
+        "sha": "af095dd87ddf28fa6b115032e6c0cd1c99126fc9",
+        "result": "Verified Sirat Netflix premiere, metadata preservation, report and Chromium/WebKit acceptance merged"
+      },
+      {
+        "number": 760,
+        "sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
+        "result": "Reject conflicting reviewed TMDB identities merged after exact-head CI"
       }
     ],
     "active_pr": {
-      "number": 759,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/759",
-      "branch": "feat/sirat-streaming-coverage-20261109",
-      "source_sha": "142f42645446d003dae9c4caa2ed17f171859016",
-      "exact_head_ci": "all 9 listed GitHub Actions succeeded on exact head; frontend failed shard alone was rerun and passed"
+      "number": 761,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/761",
+      "branch": "fix/streaming-refresh-push-race-20261109",
+      "source_sha": "949d554e5240900e3ad3abb5bf6f783d066376c4",
+      "exact_head_ci": "source 949d554 passed 8/8 Actions; prior documentation commit had an invalid truncated checkpoint; full valid state restored on top of 59af23bc9; final-head CI pending"
     },
     "coverage_report": "docs/operations/streaming-coverage-2026-11.json",
-    "coverage": {
-      "verified_cited_subset_rows": 181,
-      "exact_catalog_matches": 181,
+    "premiere_coverage": {
+      "verified_cited_official_subset_rows": 181,
+      "registered_exact_matches": 181,
       "catalog_november_rows": 182,
-      "tmdb_identity_and_poster_rows": 154,
-      "missing_poster_rows": 27,
-      "scope": "non-exhaustive manual verified subset"
+      "tmdb_identity_matches": 154,
+      "tmdb_match_rate": 0.8508,
+      "poster_missing_rows": 27,
+      "poster_missing_rate": 0.1492,
+      "scope": "non-exhaustive manually reviewed subset; no automated premiere retrieval success timestamp"
+    },
+    "current_availability": {
+      "source": "TMDB Watch Providers / JustWatch",
+      "snapshot": "data/availability.json",
+      "generated_at": "2026-11-07T21:51:37.504026+00:00",
+      "movies": 1602,
+      "fresh_observations": 971,
+      "stale_observations": 631,
+      "subscription_titles": {
+        "Netflix": 108,
+        "Prime Video": 301,
+        "U-NEXT": 279,
+        "Disney+": 45,
+        "Hulu": 164,
+        "FOD": 88,
+        "Apple TV+": 6
+      },
+      "note": "Current availability only, not premiere dates or a complete provider catalogue."
     },
     "automation": {
       "registered_services": 12,
       "enabled_official_premiere_feeds": 0,
       "auto_premiere_discovery_flags_true": 0,
-      "scheduled_job": "refresh-official-streaming daily refreshes curated official supplements; it does not discover new announcements"
+      "scheduled_job": "Daily refreshes reviewed supplements; no official premiere feed is configured. PR #761 fixes the concurrent publication race and triggers a verification refresh after merge."
     },
     "sirat": {
       "date": "2026-11-05",
@@ -3117,21 +3173,32 @@
       "netflix_title_url": "https://www.netflix.com/jp/title/82169786"
     },
     "production": {
-      "quota_status": "Vercel Hobby daily cap exceeded (>100 deployments); avoid retries until reset",
+      "quota_status": "HTTP 402 api-deployments-free-per-day (>100 deployments); retry after 2026-11-10T01:37:22Z",
       "canonical_alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
       "sirat_in_live_streaming_json": false,
-      "live_generated_at": "2026-11-08T12:10:28.725307+00:00"
+      "acceptance": "pending"
     },
     "remaining": [
-      "Commit proof/checkpoint referencing exact successful source and verify final-head Actions",
-      "Merge PR #759 after required exact-head checks pass",
-      "Wait for Vercel quota reset; verify production READY and live Sirat calendar/detail link without redundant deploy retries",
+      "Finish exact-head checks and merge #761",
+      "Verify its post-merge streaming refresh workflow",
+      "Update exact-source proof before one Vercel attempt after quota reset",
+      "Verify public Vercel calendar/catalog/detail",
       "Physical iPhone Safari acceptance",
-      "Official licensed feeds for streaming providers remain unavailable/unenabled"
+      "Enable no premiere feeds until terms permit automated collection and reuse"
     ],
     "do_not_close": [
       244,
       593
-    ]
+    ],
+    "coverage": {
+      "verified_cited_official_subset_rows": 181,
+      "registered_exact_matches": 181,
+      "catalog_november_rows": 182,
+      "tmdb_identity_matches": 154,
+      "tmdb_match_rate": 0.8508,
+      "poster_missing_rows": 27,
+      "poster_missing_rate": 0.1492,
+      "scope": "non-exhaustive manually reviewed subset; no automated premiere retrieval success timestamp"
+    }
   }
 }

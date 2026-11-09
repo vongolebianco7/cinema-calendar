@@ -3206,20 +3206,56 @@
       "generated_at": "2026-11-09T00:13:20.801231+00:00",
       "november_rows": 182,
       "by_service": {
-        "ABEMA": 1,
-        "Apple TV+": 1,
-        "Disney+": 5,
-        "FOD": 15,
-        "Hulu": 34,
-        "Lemino": 1,
-        "Netflix": 17,
-        "Prime Video": 90,
-        "U-NEXT": 18
+        "ABEMA": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Apple TV+": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Disney+": {
+          "rows": 5,
+          "tmdb_id": 5,
+          "poster": 5
+        },
+        "FOD": {
+          "rows": 15,
+          "tmdb_id": 9,
+          "poster": 9
+        },
+        "Hulu": {
+          "rows": 34,
+          "tmdb_id": 24,
+          "poster": 24
+        },
+        "Lemino": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Netflix": {
+          "rows": 17,
+          "tmdb_id": 14,
+          "poster": 14
+        },
+        "Prime Video": {
+          "rows": 90,
+          "tmdb_id": 87,
+          "poster": 87
+        },
+        "U-NEXT": {
+          "rows": 18,
+          "tmdb_id": 16,
+          "poster": 16
+        }
       },
       "rows_with_tmdb_id_and_poster": 158,
       "rows_missing_one_or_both": 24,
       "rate_with_id_and_poster": 0.8681,
-      "note": "Direct recount of current data/streaming.json. This differs from the manual-review coverage report (154/181 and 27 missing); reconcile report generation/scope before using a single rate."
+      "note": "Direct recount of current data/streaming.json, generated 2026-11-09T00:13:20.801231Z. This is the registered dataset count, not an exhaustive official count. Officially cited subset report has separate (and discrepant) TMDB/poster totals; reconcile source snapshot and scope before reporting definitive completeness."
     }
   }
 }

@@ -64,6 +64,20 @@ class DirectorEnrichmentTests(unittest.TestCase):
         self.assertEqual(result['works'][0]['runtime'], 100)
         self.assertEqual(result['coverage']['runtime_unverified'], 0)
 
+    def test_same_id_movie_detail_recovers_missing_director_poster_without_replacing_existing(self):
+        director = {'id': 190, 'works': [
+            {'id': 1, 'title': 'Artwork available', 'poster': None},
+            {'id': 2, 'title': 'Keep artwork',
+             'poster': 'https://image.tmdb.org/t/p/w342/existing.jpg'},
+        ]}
+        def request(endpoint, params=None):
+            identifier = int(endpoint.rsplit('/', 1)[1])
+            return {'id': identifier, 'runtime': 100, 'poster_path': f'/movie-{identifier}.jpg'}
+        result = self.module.verify_director_runtimes(director, request)
+        works = {work['id']: work for work in result['works']}
+        self.assertEqual(works[1]['poster'], 'https://image.tmdb.org/t/p/w342/movie-1.jpg')
+        self.assertEqual(works[2]['poster'], 'https://image.tmdb.org/t/p/w342/existing.jpg')
+
     def test_eastwood_snapshot_has_sourced_feature_credits_not_a_saved_record_total(self):
         import json
         director = json.loads((ROOT / 'data/directors.json').read_text())['directors']['190']

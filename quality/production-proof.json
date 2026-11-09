@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "fe07e2aaed2a62601e88428ec06cf8f82652412c",
-  "verified_at": "2026-11-09T13:11:00Z",
-  "note": "All 7 exact-head pull_request workflows passed on PR #771 head fe07e2aaed2a62601e88428ec06cf8f82652412c. Its Git tree 381df52cd94fbd2d830e14836de308f236d35a0d is identical to merged main a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a. Required workflows passed: Autonomous quality gate (2026-11-09T13:09:22Z), CINELVA smoke tests (13:05:23Z), Validate frontend (13:10:41Z), and Reproducible backend build (13:06:49Z). This receipt records CI verification only; Vercel production acceptance remains pending, and no quota-limited Vercel deployment is attempted."
+  "head_sha": "b31034b506df7ec9627b6f3540dff38c4a391621",
+  "verified_at": "2026-11-09T15:05:00Z",
+  "note": "Receipt-only checkpoint for PR #775 source head b31034b506df7ec9627b6f3540dff38c4a391621. Exact-head required pull_request workflows passed: Autonomous quality gate run 42640000705, CINELVA smoke tests 42640000758, Validate frontend run 42640000898 (including Chromium/WebKit reported-regression and shared-control jobs), Reproducible backend build run 42640000786. Visual QA run 42640000714 (Chromium + WebKit) and mobile layout smoke run 42640000833 also passed. This receipt does not claim production deployment or live public URL acceptance; Vercel Hobby api-deployments-free-per-day limit blocks deployment until retry-after 2026-11-10T01:37:22Z. Physical iPhone Safari remains unverified."
 }

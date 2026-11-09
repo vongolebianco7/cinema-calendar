@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "fe07e2aaed2a62601e88428ec06cf8f82652412c",
-  "verified_at": "2026-11-09T13:11:00Z",
-  "note": "All 7 exact-head pull_request workflows passed on PR #771 head fe07e2aaed2a62601e88428ec06cf8f82652412c. Its Git tree 381df52cd94fbd2d830e14836de308f236d35a0d is identical to merged main a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a. Required workflows passed: Autonomous quality gate (2026-11-09T13:09:22Z), CINELVA smoke tests (13:05:23Z), Validate frontend (13:10:41Z), and Reproducible backend build (13:06:49Z). This receipt records CI verification only; Vercel production acceptance remains pending, and no quota-limited Vercel deployment is attempted."
+  "head_sha": "e8f5f5ef0e09a0281531d1c7102e97ac9aa73f78",
+  "verified_at": "2026-11-09T14:30:13Z",
+  "note": "All 4 exact-head required pull_request workflows passed on PR #774 head e8f5f5ef0e09a0281531d1c7102e97ac9aa73f78: Autonomous quality gate (2026-11-09T14:27:25Z), CINELVA smoke tests (14:23:49Z), Validate frontend (14:30:13Z), and Reproducible backend build (14:24:44Z). This receipt records CI verification only; production and full #593/#244 acceptance remain pending."
 }

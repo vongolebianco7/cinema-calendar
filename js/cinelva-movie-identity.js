@@ -170,6 +170,23 @@
       tmdbId: id(m) || (typeof m?.id === "number" ? positive(m.id) : 0),
     };
   }
+  async function requestWithRateLimitRetry(url) {
+    let response = await fetch(url);
+    if (response.status !== 429) return response;
+    const retryAfter = response.headers?.get?.("Retry-After");
+    const seconds = retryAfter ? Number(retryAfter) : NaN;
+    const dateDelay = retryAfter && !Number.isFinite(seconds)
+      ? Date.parse(retryAfter) - Date.now()
+      : NaN;
+    const delay = Math.min(60_000, Math.max(0,
+      Number.isFinite(seconds) ? seconds * 1000
+        : Number.isFinite(dateDelay) ? dateDelay : 1_000,
+    ));
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    // A single bounded retry honors the API's published rate limit without
+    // creating an unbounded request loop when the service remains unavailable.
+    return fetch(url);
+  }
   async function fetchOne(q) {
     const cached = resolve(q);
     if (cached?.poster && !badPosters.has(cached.poster)) return cached;
@@ -182,7 +199,7 @@
     const task = (async () => {
       try {
         if (wanted) {
-          const r = await fetch(
+          const r = await requestWithRateLimitRetry(
             "https://backend-one-gray-94.vercel.app/api/movie-detail?" +
               new URLSearchParams({ id: String(wanted), view: "poster" }),
           );
@@ -192,7 +209,7 @@
           return id(movie) === wanted && (poster(movie) || !title)
             ? ingest(movie) : cached || null;
         }
-        const r = await fetch(
+        const r = await requestWithRateLimitRetry(
           "https://backend-one-gray-94.vercel.app/api/movies?" +
             new URLSearchParams({ q: title, limit: "30" }),
         );

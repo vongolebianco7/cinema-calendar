@@ -21,6 +21,7 @@ commands=[['node','--check','js/cinelva-records-page.js'],['node','--check','js/
 commands.append(['node','scripts/check_dependency_licenses.cjs'])
 active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('cinelva-*.test.cjs'))
 commands.append(['python','-m','unittest','discover','-s','tests','-p','test_streaming_poster_enrichment.py'])
+commands.append(['python','-m','unittest','tests.test_boxoffice_poster_backfill'])
 run(['node','--test',*active_node_tests])
 run(['python','-m','unittest','tests.test_streaming_discovery_compliance'])
 run(['python','-m','unittest','discover','-s','tests','-p','test_streaming_sirat_catalog_regression.py'])

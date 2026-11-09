@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T15:20:00Z",
+  "updated_at": "2026-11-09T15:27:00Z",
   "status": "merged_source_pending_production",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "1b218d006ceeb03a98768bfc35ebc988896d2e4a",
+  "base_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
   "branch": "main",
-  "head_sha": "1b218d006ceeb03a98768bfc35ebc988896d2e4a",
-  "pull_request": 778,
+  "head_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
+  "pull_request": 779,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -1056,15 +1056,11 @@
     "reason": "Vercel returned HTTP 402 api-deployments-free-per-day (more than 100 deployments; retry-after 24 hours). Do not retry before 2026-11-10T01:37:22Z. Canonical alias was last observed serving old source f6cd6c6; production acceptance of merged Sirat catalog remains pending."
   },
   "blockers": [
-    "Streaming premiere discovery remains manual: no rights-reviewed official feed is enabled for any of 12 services; TMDB/JustWatch current-availability discovery does not provide premiere dates.",
-    "No rights-reviewed official premiere API/feed is enabled for any of the 12 streaming services; all auto_premiere_discovery flags remain false. November records are a manual verified subset, not exhaustive.",
-    "27 of 181 cited November announcement rows still lack a matched TMDB identity/poster; do not represent poster coverage as complete.",
-    "Vercel Hobby daily build cap is exhausted (>100 deployments); canonical production is on an older build and production acceptance is pending quota reset.",
-    "Physical iPhone Safari acceptance has not been performed; CI WebKit/mobile viewport checks are not a physical-device check.",
-    "Issue #585 still requires owner-managed FEEDBACK_ADMIN_TOKEN setup; no secret is stored in the repository checkpoint.",
-    "Issue #529 demo branch preview acceptance remains separate and incomplete."
+    "Vercel Hobby rejects deployments with api-deployments-free-per-day; production remains at SHA 391da7d6aec71ac97dd18235379c97f286fd4be8.",
+    "No rights-reviewed free official premiere feeds are configured for any of the 12 providers; #244 automatic premiere discovery cannot be truthfully marked complete.",
+    "Full screen-by-screen poster HTTP failure rates and public production acceptance are not yet measured."
   ],
-  "next_action": "When the Vercel Hobby retry window passes (2026-11-10T01:37:22Z), verify current main/proof and quota once, deploy only if permitted, and verify Sirat on the canonical public URL. Meanwhile keep #244/#593 open: no licensed free official premiere feeds are enabled and the November report is a non-exhaustive reviewed subset.",
+  "next_action": "Recheck live Vercel Hobby quota at/after 2026-11-10T01:37:22Z UTC and make one free-tier deployment attempt if available. Then measure public poster behavior on all requested screens and continue provider-by-provider official-feed rights audit; keep #244/#593 open until evidence passes.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -3373,5 +3369,65 @@
     "safety": "Merged page/test code only. No #244/#593 data pipelines, saved records, storage keys, secrets, destructive migrations, scraping or paid plan changes.",
     "source_head_sha": "e17af7e6170fab090b42aeba240070b517179b96",
     "merged_sha": "1b218d006ceeb03a98768bfc35ebc988896d2e4a"
+  },
+  "latest_p0_244_593_checkpoint_20261109": {
+    "recorded_at": "2026-11-09T15:27:00Z",
+    "master_issue": 239,
+    "issues": {
+      "244": "open",
+      "593": "open"
+    },
+    "latest_main_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
+    "merged_pr": {
+      "number": 779,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/779",
+      "head_sha": "38952f07b0b6618304b7831b94a36f8f404c41bd",
+      "merge_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0"
+    },
+    "poster": {
+      "dataset": "data/streaming.json",
+      "rows": 457,
+      "poster_missing_before": 31,
+      "poster_missing_after": 28,
+      "missing_rate_before": "6.8%",
+      "missing_rate_after": "6.1%",
+      "interpretation": "Data-level streaming catalog measurement only; all-screen HTTP image success and public production acceptance remain pending."
+    },
+    "streaming": {
+      "registered_services": 12,
+      "approved_automatic_premiere_feeds": 0,
+      "automatic_premiere_discovery_enabled": 0,
+      "services_with_cited_curated_rows": 11,
+      "cited_curated_records": 457,
+      "uncovered_service": "DMM TV",
+      "limitation": "No rights-reviewed official free premiere feed is configured. Current availability observations do not establish premiere dates. Do not scrape or infer."
+    },
+    "sirat": {
+      "title": "シラート / Sirât",
+      "service": "Netflix",
+      "date": "2026-11-05",
+      "tmdb_id": 1151272,
+      "poster": "https://image.tmdb.org/t/p/w500/wcJ4lx6arqF3WsjUmXmeGR65wOB.jpg",
+      "source_url": "https://www.netflix.com/jp/title/82169786",
+      "official_announcement_url": "https://x.com/NetflixJP",
+      "status": "present in source supplement and catalog; production acceptance pending"
+    },
+    "validation": {
+      "local": "python scripts/quality_gate.py passed; focused official snapshot/import and refresh tests 18 passed; scripts/check_release_data.py passed; git diff --check passed.",
+      "exact_head_ci": "All 8 GitHub Actions workflows passed on PR #779 exact head 38952f07b0b6618304b7831b94a36f8f404c41bd, including Chromium + WebKit visual QA and browser regression shards.",
+      "vercel_status": "Vercel backend check failed because Hobby api-deployments-free-per-day limit; no paid plan or retry loop."
+    },
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "last_ready_sha": "391da7d6aec71ac97dd18235379c97f286fd4be8",
+      "status": "stale; new main not deployed; public acceptance pending",
+      "quota_reset_last_known": "2026-11-10T01:37:22Z (recheck live before one free-tier attempt)"
+    },
+    "remaining": [
+      "Measure poster failures and fallback behavior across all target screens and source datasets on current production/updated deployment; verify Chromium/WebKit and 390px public layout. Physical iPhone Safari remains separate.",
+      "Verify Vercel Hobby quota live before one free-tier deployment attempt; do not upgrade or retry before quota clears.",
+      "Continue official-feed rights audit for 12 providers. Configure only a free official feed with confirmed reuse permission; otherwise keep discovery marked unverified/manual and #244 open.",
+      "Recheck production Sirât row and all target screens after deployment; close #244/#593 only after their complete acceptance criteria pass."
+    ]
   }
 }

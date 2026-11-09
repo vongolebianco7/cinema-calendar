@@ -104,6 +104,8 @@ def refresh(source=None, output=OUTPUT, today=None):
             if not isinstance(old, dict):
                 raise ValueError("Invalid previous movie; existing output preserved")
             old_key = (old.get("date"), old.get("service"), " ".join(str(old.get("title", "")).casefold().split()))
+            if old_key in previous_by_key:
+                raise ValueError("Duplicate prior release key; existing output preserved")
             previous_by_key[old_key] = old
         for movie in clean:
             key = (movie["date"], movie["service"], " ".join(movie["title"].casefold().split()))

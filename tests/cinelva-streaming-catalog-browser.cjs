@@ -131,7 +131,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.equal(await page.locator('#streamingGrid .card').filter({hasText:'レンタル映画'}).count(),1,'the mixed-access title remains in the rental results');
   await page.locator('#service').selectOption('Prime Video');
   assert.equal(await page.locator('#streamingGrid .card').count(),2,'service filtering also works in the rental view');
-  assert.match(await page.locator('.footer').innerText(),/配信開始日を保証するものではありません/);
+  assert.match(await page.locator('.footer').innerText(),/配信開始日やサービスの全作品一覧を保証するものではありません/);
   assert.equal(await page.evaluate(()=>[localStorage.getItem('cinelva-library-records-v2'),localStorage.getItem('cinelva-want-to-watch-v1')].join('|')),[savedRecord,savedBookmarks].join('|'),'rendering the page does not rewrite existing viewing records or bookmarks');
   assert.deepEqual(errors,[]);
   await context.close();

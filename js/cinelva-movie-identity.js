@@ -174,7 +174,7 @@
     let response = await fetch(url);
     if (response.status !== 429) return response;
     const retryAfter = response.headers?.get?.("Retry-After");
-    const seconds = Number(retryAfter);
+    const seconds = retryAfter ? Number(retryAfter) : NaN;
     const dateDelay = retryAfter && !Number.isFinite(seconds)
       ? Date.parse(retryAfter) - Date.now()
       : NaN;

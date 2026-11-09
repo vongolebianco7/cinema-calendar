@@ -122,6 +122,40 @@ test("known TMDB identity recovers a poster even if the card title differs from 
   assert.match(requested, /movie-detail\?id=128&view=poster$/);
 });
 
+test("poster lookup honors Retry-After and retries one rate-limited request once", async () => {
+  const window = {};
+  let calls = 0;
+  vm.runInNewContext(fs.readFileSync("js/cinelva-movie-identity.js", "utf8"), {
+    window,
+    URL,
+    URLSearchParams,
+    setTimeout,
+    localStorage: { getItem: () => null, setItem() {} },
+    fetch: async () => {
+      calls++;
+      if (calls === 1)
+        return {
+          status: 429,
+          ok: false,
+          headers: { get: (name) => name === "Retry-After" ? "0" : null },
+        };
+      return {
+        status: 200,
+        ok: true,
+        json: async () => ({
+          movie: { id: 1725, title: "West Side Story", poster: "/west-side.jpg" },
+        }),
+      };
+    },
+  });
+  const movie = await window.CinelvaMovieIdentity.fetchOne({
+    tmdbId: 1725,
+    title: "ウエスト・サイド物語",
+  });
+  assert.match(movie?.poster || "", /west-side\.jpg$/);
+  assert.equal(calls, 2, "429 is retried once, with no unbounded loop");
+});
+
 test("a transient failure in a previous document cannot permanently block healthy artwork", () => {
   const url = "https://image.tmdb.org/t/p/w500/recovered.jpg";
   const { api } = registry([], { 99: url }, [url]);

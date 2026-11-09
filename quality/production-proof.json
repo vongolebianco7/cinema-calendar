@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d4948186a84a781829225dc3f66bc335950d6386",
-  "verified_at": "2026-11-08T23:36:53Z",
-  "note": "Exact-head GitHub Actions passed on source commit d4948186a84a781829225dc3f66bc335950d6386: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build all succeeded. Refreshes the receipt for the source merged to main as d0c3c5b4a334fd7f80dd18d2c35107ca874ab049; production publication is permitted only while this executable source digest remains unchanged."
+  "head_sha": "c94d26ed89f7c704afe78e27b8b8d921eda52ce1",
+  "verified_at": "2026-11-09T00:59:04Z",
+  "note": "Exact-head GitHub Actions passed for source c94d26ed89f7c704afe78e27b8b8d921eda52ce1: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build. This receipt records tested executable source only; public production deployment and acceptance are still pending."
 }

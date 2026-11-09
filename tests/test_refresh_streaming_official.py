@@ -86,7 +86,7 @@ class RefreshTest(unittest.TestCase):
 
             previous = output.read_bytes()
             source.write_text(json.dumps({"period": "2026-11", "movies": [{**entry, "tmdb_id": 999}]}), encoding="utf-8")
-            with self.assertRaisesRegex(ValueError, "Conflicting TMDB"):
+            with self.assertRaisesRegex(ValueError, "Conflicting prior TMDB identity"):
                 module.refresh(source, output)
             self.assertEqual(output.read_bytes(), previous,
                              "A conflicting identity must preserve last-known-good bytes")

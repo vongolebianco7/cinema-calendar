@@ -42,8 +42,8 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
 
     def test_unique_exact_title_adds_tmdb_poster_and_movie_identity(self):
         data, requests, counts = self.run_fixture(
-            [{"title": "グーニーズ", "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
-            {"results": [{"id": 9340, "title": "グーニーズ", "original_title": "The Goonies", "poster_path": "/goonies.jpg"}]},
+            [{"title": "グーニーズ", "release_year": 1985, "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
+            {"results": [{"id": 9340, "title": "グーニーズ", "original_title": "The Goonies", "release_date": "1985-06-07", "poster_path": "/goonies.jpg"}]},
         )
         movie = data["movies"][0]
         self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/goonies.jpg")
@@ -113,12 +113,12 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
     def test_ambiguous_exact_titles_and_existing_posters_are_not_replaced(self):
         data, requests, counts = self.run_fixture(
             [
-                {"title": "The Example", "date": "2026-11-01", "event": "streaming", "service": "Prime Video"},
+                {"title": "The Example", "release_year": 2024, "date": "2026-11-01", "event": "streaming", "service": "Prime Video"},
                 {"title": "Keep", "date": "2026-11-01", "event": "streaming", "service": "Prime Video", "poster": "https://image.tmdb.org/t/p/w500/kept.jpg"},
             ],
             {"results": [
-                {"id": 1, "title": "The Example", "poster_path": "/one.jpg"},
-                {"id": 2, "title": "The Example", "poster_path": "/two.jpg"},
+                {"id": 1, "title": "The Example", "release_date": "2024-01-01", "poster_path": "/one.jpg"},
+                {"id": 2, "title": "The Example", "release_date": "2024-02-01", "poster_path": "/two.jpg"},
             ]},
         )
         self.assertNotIn("poster", data["movies"][0])
@@ -130,11 +130,11 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         output = StringIO()
         with redirect_stdout(output):
             data, requests, counts = self.run_fixture(
-                [{"title": "The Example", "date": "2026-11-01",
+                [{"title": "The Example", "release_year": 2024, "date": "2026-11-01",
                   "event": "streaming", "service": "Prime Video"}],
                 {"results": [
                     {"id": 1, "title": "The Example", "original_title": "Example A",
-                     "release_date": "2001-01-01", "poster_path": "/one.jpg"},
+                     "release_date": "2024-01-01", "poster_path": "/one.jpg"},
                     {"id": 2, "title": "The Example", "original_title": "Example B",
                      "release_date": "2024-01-01", "poster_path": "/two.jpg"},
                 ]},
@@ -162,9 +162,9 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
 
     def test_unique_exact_local_catalog_identity_supplies_existing_poster_without_api(self):
         data, requests, counts = self.run_fixture(
-            [{"title": "モアナと伝説の海", "date": "2026-11-18", "event": "streaming", "service": "Disney+"}],
+            [{"title": "モアナと伝説の海", "release_year": 2026, "date": "2026-11-18", "event": "streaming", "service": "Disney+"}],
             {"results": []},
-            catalog={"movies": [{"id": 1108427, "title": "モアナと伝説の海", "poster": "https://image.tmdb.org/t/p/w500/moana.jpg"}]},
+            catalog={"movies": [{"id": 1108427, "title": "モアナと伝説の海", "release_year": 2026, "poster": "https://image.tmdb.org/t/p/w500/moana.jpg"}]},
             api_key="",
         )
         movie = data["movies"][0]
@@ -253,6 +253,20 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
                                   "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"}]},
             api_key="",
         )
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 0, 1))
+
+    def test_title_without_reviewed_release_year_never_assigns_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "The Example", "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": [{"id": 111, "title": "The Example",
+                          "release_date": "2024-01-01", "poster_path": "/candidate.jpg"}]},
+            catalog={"movies": [{"id": 111, "title": "The Example", "release_year": 2024,
+                                  "poster": "https://image.tmdb.org/t/p/w500/candidate.jpg"}]},
+        )
+        self.assertNotIn("id", data["movies"][0])
         self.assertNotIn("poster", data["movies"][0])
         self.assertEqual(requests, [])
         self.assertEqual(counts, (0, 0, 1))

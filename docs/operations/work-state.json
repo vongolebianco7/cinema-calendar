@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:04:52Z",
+  "updated_at": "2026-11-09T04:20:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
-  "branch": "fix/streaming-refresh-push-race-20261109",
-  "head_sha": "59af23bc9a3d78368ec3c7a2fb35d6b0ba008227",
-  "pull_request": 761,
+  "base_sha": "7be351c7b50e1ba57bdb764023bdedb694c09e7a",
+  "branch": "docs/streaming-followup-checkpoint-20261109",
+  "head_sha": "85c2ca694420da6e3b5cf9dd66ba1154f676c9d2",
+  "pull_request": 765,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -1064,7 +1064,7 @@
     "Issue #585 still requires owner-managed FEEDBACK_ADMIN_TOKEN setup; no secret is stored in the repository checkpoint.",
     "Issue #529 demo branch preview acceptance remains separate and incomplete."
   ],
-  "next_action": "The full work-state checkpoint has been restored after a transfer truncation at prior head 91e7dc3. Rerun all required checks on the current PR head; merge only after exact-head checks pass. After merge, verify the post-merge streaming refresh. Vercel remains blocked until after 2026-11-10T01:37:22Z.",
+  "next_action": "When the Vercel Hobby retry window passes (2026-11-10T01:37:22Z), verify current main/proof and quota once, deploy only if permitted, and verify Sirat on the canonical public URL. Meanwhile keep #244/#593 open: no licensed free official premiere feeds are enabled and the November report is a non-exhaustive reviewed subset.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -3096,109 +3096,184 @@
     "safety": "No bypass of CI, paid upgrade, scraping, secrets, or destructive data migration."
   },
   "latest_streaming_premiere_checkpoint_20261109": {
-    "recorded_at": "2026-11-09T02:04:52Z",
+    "recorded_at": "2026-11-09T02:52:17Z",
     "master_issue": 239,
-    "latest_main_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
+    "latest_main_sha": "9377890a5117cc81cfd6c0dfccd0a8b6fa1173d7",
     "merged_prs": [
-      {
-        "number": 757,
-        "sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
-        "result": "CI path optimization merged"
-      },
       {
         "number": 756,
         "sha": "e8e292251c8b91c4722eaf5805685562653ba233",
         "result": "TMDB identity-alias poster enrichment guard merged after exact-head CI"
       },
       {
+        "number": 757,
+        "sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+        "result": "CI path optimization merged"
+      },
+      {
         "number": 759,
         "sha": "af095dd87ddf28fa6b115032e6c0cd1c99126fc9",
-        "result": "Verified Sirat Netflix premiere, metadata preservation, report and Chromium/WebKit acceptance merged"
+        "result": "Sirat date/metadata, preservation, evidence report and Chromium/WebKit acceptance merged"
       },
       {
         "number": 760,
         "sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
         "result": "Reject conflicting reviewed TMDB identities merged after exact-head CI"
+      },
+      {
+        "number": 761,
+        "sha": "8f00f741dc86317ad46ad84b7b781742494b0372",
+        "result": "Race-safe official supplement refresh; post-merge refresh run 42549613739 succeeded but discovered 0 official feed candidates"
+      },
+      {
+        "number": 762,
+        "sha": "8b067dc08c6d5aa868d56e5870cbbac429bf3df6",
+        "result": "Restored 18 verified box-office poster/TMDB mappings; 22/22 exact-head checks passed; #593 remains open"
+      },
+      {
+        "number": 763,
+        "sha": "3c764a15141696b8d9b45074f5090d1d6dacb154",
+        "result": "Updated source-bound production proof receipt; verified Pages build/deploy and Cloudflare Pages succeeded"
       }
     ],
-    "active_pr": {
-      "number": 761,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/761",
-      "branch": "fix/streaming-refresh-push-race-20261109",
-      "source_sha": "949d554e5240900e3ad3abb5bf6f783d066376c4",
-      "exact_head_ci": "source 949d554 passed 8/8 Actions; prior documentation commit had an invalid truncated checkpoint; full valid state restored on top of 59af23bc9; final-head CI pending"
-    },
+    "open_pull_requests": [],
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683,
+      593
+    ],
     "coverage_report": "docs/operations/streaming-coverage-2026-11.json",
     "premiere_coverage": {
-      "verified_cited_official_subset_rows": 181,
+      "official_cited_subset": 181,
       "registered_exact_matches": 181,
       "catalog_november_rows": 182,
-      "tmdb_identity_matches": 154,
-      "tmdb_match_rate": 0.8508,
-      "poster_missing_rows": 27,
-      "poster_missing_rate": 0.1492,
-      "scope": "non-exhaustive manually reviewed subset; no automated premiere retrieval success timestamp"
+      "tmdb_identity_and_poster_matches": 154,
+      "unmatched_or_missing_poster": 27,
+      "match_rate": 0.8508,
+      "missing_rate": 0.1492,
+      "scope": "Non-exhaustive manually verified subset; no automated premiere retrieval success timestamp."
     },
     "current_availability": {
       "source": "TMDB Watch Providers / JustWatch",
       "snapshot": "data/availability.json",
       "generated_at": "2026-11-07T21:51:37.504026+00:00",
       "movies": 1602,
-      "fresh_observations": 971,
-      "stale_observations": 631,
-      "subscription_titles": {
-        "Netflix": 108,
-        "Prime Video": 301,
-        "U-NEXT": 279,
-        "Disney+": 45,
-        "Hulu": 164,
-        "FOD": 88,
-        "Apple TV+": 6
-      },
-      "note": "Current availability only, not premiere dates or a complete provider catalogue."
+      "fresh_observations_within_7_days": 971,
+      "stale": 631,
+      "note": "Current availability only; not premiere dates or a complete provider catalogue. Subsequent refresh timestamp not confirmed."
     },
     "automation": {
       "registered_services": 12,
-      "enabled_official_premiere_feeds": 0,
+      "official_premiere_feed_registry_entries": 0,
       "auto_premiere_discovery_flags_true": 0,
-      "scheduled_job": "Daily refreshes reviewed supplements; no official premiere feed is configured. PR #761 fixes the concurrent publication race and triggers a verification refresh after merge."
+      "latest_refresh_run": 42549613739,
+      "result": "Workflow succeeded. Logs: no verified official RSS endpoints configured; 0 official feed candidates. Only previously reviewed supplements are refreshed."
     },
     "sirat": {
       "date": "2026-11-05",
-      "service": "Netflix",
+      "service": "Netflix Japan",
       "tmdb_id": 1151272,
       "release_year": 2025,
       "runtime_minutes": 115,
       "poster": "https://image.tmdb.org/t/p/w500/wcJ4lx6arqF3WsjUmXmeGR65wOB.jpg",
-      "netflix_title_url": "https://www.netflix.com/jp/title/82169786"
+      "netflix_title_url": "https://www.netflix.com/jp/title/82169786",
+      "date_evidence": "Netflix Japan official announcement dated 2026-10-29; CI calendar acceptance passed in PR #759."
     },
     "production": {
-      "quota_status": "HTTP 402 api-deployments-free-per-day (>100 deployments); retry after 2026-11-10T01:37:22Z",
-      "canonical_alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
-      "sirat_in_live_streaming_json": false,
-      "acceptance": "pending"
+      "url": "https://cinelva.vercel.app/",
+      "latest_proof_checked_commit": "3c764a15141696b8d9b45074f5090d1d6dacb154",
+      "pages": "Publish verified legacy Pages build/deploy succeeded; Cloudflare Pages success",
+      "vercel": "Blocked by Hobby HTTP 402 api-deployments-free-per-day on commit 3c764a; retry-after 2026-11-10T01:37:22Z. No further attempt before reset.",
+      "acceptance": "Pending; live canonical Vercel data not verified, physical iPhone Safari not tested."
     },
     "remaining": [
-      "Finish exact-head checks and merge #761",
-      "Verify its post-merge streaming refresh workflow",
-      "Update exact-source proof before one Vercel attempt after quota reset",
-      "Verify public Vercel calendar/catalog/detail",
-      "Physical iPhone Safari acceptance",
-      "Enable no premiere feeds until terms permit automated collection and reuse"
+      "After 2026-11-10T01:37:22Z, verify quota reset and current-main proof/deployment readiness, then make one Vercel production attempt",
+      "Verify canonical Vercel calendar/catalog/detail and Sirat in deployed streaming data",
+      "No official premiere discovery source is enabled; continue source rights/terms audit without scraping",
+      "Continue remaining verified poster recovery; #593 stays open",
+      "Physical iPhone Safari acceptance"
     ],
     "do_not_close": [
       244,
       593
     ],
-    "coverage": {
-      "verified_cited_official_subset_rows": 181,
-      "registered_exact_matches": 181,
-      "catalog_november_rows": 182,
-      "tmdb_identity_matches": 154,
-      "tmdb_match_rate": 0.8508,
-      "poster_missing_rows": 27,
-      "poster_missing_rate": 0.1492,
-      "scope": "non-exhaustive manually reviewed subset; no automated premiere retrieval success timestamp"
+    "safety": "No scraping, paid tier, secrets, destructive data migration, or edits to viewing/rating/bookmark records.",
+    "live_streaming_snapshot": {
+      "generated_at": "2026-11-09T00:13:20.801231+00:00",
+      "november_rows": 182,
+      "by_service": {
+        "ABEMA": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Apple TV+": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Disney+": {
+          "rows": 5,
+          "tmdb_id": 5,
+          "poster": 5
+        },
+        "FOD": {
+          "rows": 15,
+          "tmdb_id": 9,
+          "poster": 9
+        },
+        "Hulu": {
+          "rows": 34,
+          "tmdb_id": 24,
+          "poster": 24
+        },
+        "Lemino": {
+          "rows": 1,
+          "tmdb_id": 1,
+          "poster": 1
+        },
+        "Netflix": {
+          "rows": 17,
+          "tmdb_id": 14,
+          "poster": 14
+        },
+        "Prime Video": {
+          "rows": 90,
+          "tmdb_id": 87,
+          "poster": 87
+        },
+        "U-NEXT": {
+          "rows": 18,
+          "tmdb_id": 16,
+          "poster": 16
+        }
+      },
+      "rows_with_tmdb_id_and_poster": 158,
+      "rows_missing_one_or_both": 24,
+      "rate_with_id_and_poster": 0.8681,
+      "note": "Direct recount of populated fields in current data/streaming.json, generated 2026-11-09T00:13:20.801231Z. 158 rows have ID+poster fields, but this does not validate their identity. The separate official-subset audit validated 154/181 identities and found 27 without verified ID/poster; different metric and scope, not a contradictory validated count. Hulu has 33 cited official rows vs 34 catalog rows."
     }
+  },
+  "latest_canonical_public_acceptance_20261109": {
+    "checked_at": "2026-11-09T04:00Z",
+    "canonical_url": "https://cinelva.vercel.app/",
+    "public_streaming_json": "https://cinelva.vercel.app/data/streaming.json",
+    "public_streaming_generated_at": "2026-11-08T12:10:28.725307+00:00",
+    "sirat_present_in_public_streaming_json": false,
+    "calendar_ui": "November 2026 Netflix day 2026-11-05 showed a different film, not Sirat",
+    "source_tree_sirat": {
+      "present": true,
+      "service": "Netflix",
+      "date": "2026-11-05",
+      "tmdb_id": 1151272,
+      "release_year": 2025,
+      "runtime_minutes": 115
+    },
+    "production": "stale Vercel deployment, blocked from updating by Hobby api-deployments-free-per-day HTTP 402; do not retry until quota reset",
+    "acceptance": "failed/pending production release; Chromium public page inspected; physical iPhone Safari not verified"
   }
 }

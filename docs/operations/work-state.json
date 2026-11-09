@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T04:20:00Z",
+  "updated_at": "2026-11-09T05:15:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "7be351c7b50e1ba57bdb764023bdedb694c09e7a",
-  "branch": "docs/streaming-followup-checkpoint-20261109",
-  "head_sha": "85c2ca694420da6e3b5cf9dd66ba1154f676c9d2",
-  "pull_request": 765,
+  "base_sha": "c24e982726dbc5a017c2d634428df2247b63366b",
+  "branch": "fix/refresh-production-proof-and-streaming-checkpoint-20261109",
+  "head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
+  "pull_request": 767,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -3270,10 +3270,43 @@
       "service": "Netflix",
       "date": "2026-11-05",
       "tmdb_id": 1151272,
+      "poster": "https://image.tmdb.org/t/p/w500/wcJ4lx6arqF3WsjUmXmeGR65wOB.jpg",
       "release_year": 2025,
       "runtime_minutes": 115
     },
-    "production": "stale Vercel deployment, blocked from updating by Hobby api-deployments-free-per-day HTTP 402; do not retry until quota reset",
-    "acceptance": "failed/pending production release; Chromium public page inspected; physical iPhone Safari not verified"
+    "production": "still stale; latest deploy attempt failed at Vercel Hobby quota",
+    "acceptance": "failed/pending production release; Chromium public page inspected; physical iPhone Safari not verified",
+    "source_main_sha": "c24e982726dbc5a017c2d634428df2247b63366b",
+    "source_streaming_generated_at": "2026-11-09T00:13:20.801231+00:00"
+  },
+  "latest_publication_proof_recovery_20261109": {
+    "main_sha": "c24e982726dbc5a017c2d634428df2247b63366b",
+    "sirat_catalog_regression_pr": {
+      "number": 766,
+      "head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
+      "merge_sha": "c24e982726dbc5a017c2d634428df2247b63366b",
+      "exact_head_ci": "All 7 PR checks passed; tree SHA equals current main tree."
+    },
+    "required_production_workflows": {
+      "exact_head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
+      "all_passed": true,
+      "workflow_updated_at_utc": {
+        "autonomous_quality_gate": "2026-11-09T05:02:42Z",
+        "smoke": "2026-11-09T04:59:31Z",
+        "validate_frontend": "2026-11-09T05:05:17Z",
+        "backend_build": "2026-11-09T05:00:38Z"
+      }
+    },
+    "prior_verified_pages_run": {
+      "id": 42567285133,
+      "result": "Refused stale proof: executable source digest differed from bd6ac8b869b738c62ac5c1ff08077a2d87458ca0."
+    },
+    "action": "Refresh production-proof.json to the exact CI-tested PR #766 head, whose Git tree exactly matches main; run publication only after PR checks and merge.",
+    "vercel": "Hobby daily limit HTTP 402; latest production deploy on c24e982 failed; do not retry before 2026-11-10T01:37:22Z.",
+    "blockers": [
+      "Issue #244: no rights-reviewed official premiere feeds; automated premiere discovery disabled.",
+      "Issue #593: verified poster gaps remain; production still stale.",
+      "Physical iPhone Safari not tested."
+    ]
   }
 }

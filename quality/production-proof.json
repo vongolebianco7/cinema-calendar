@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "bd6ac8b869b738c62ac5c1ff08077a2d87458ca0",
-  "verified_at": "2026-11-09T02:27:25Z",
-  "note": "All 22 exact-head checks passed on bd6ac8b869b738c62ac5c1ff08077a2d87458ca0, including all four required production workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium and WebKit), and Reproducible backend build. The current main source tree is identical to the verified head tree. This receipt records CI verification only; Vercel production acceptance remains pending because the Hobby daily deployment cap is exhausted."
+  "head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
+  "verified_at": "2026-11-09T05:10:00Z",
+  "note": "The current main tree is identical to exact PR head 9689929ec6cec9b4f379193efb1706d05a507ea4 (tree c61ef905b34a9e5d968dc4b49d8192e939ccc723). Its exact-head pull_request workflows passed, including all four required production workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium and WebKit), and Reproducible backend build. This receipt proves CI only; Vercel production acceptance remains pending because the Hobby daily deployment cap is exhausted."
 }

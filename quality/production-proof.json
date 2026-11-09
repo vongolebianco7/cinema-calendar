@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
-  "verified_at": "2026-11-09T05:10:00Z",
-  "note": "The current main tree is identical to exact PR head 9689929ec6cec9b4f379193efb1706d05a507ea4 (tree c61ef905b34a9e5d968dc4b49d8192e939ccc723). Its exact-head pull_request workflows passed, including all four required production workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium and WebKit), and Reproducible backend build. This receipt proves CI only; Vercel production acceptance remains pending because the Hobby daily deployment cap is exhausted."
+  "head_sha": "b6012d1634875403bf19722a7304866efd460a6e",
+  "verified_at": "2026-11-09T09:25:00Z",
+  "note": "PR #768 exact head b6012d1634875403bf19722a7304866efd460a6e has the identical Git tree 2bd8b06a6cc73ea7e25afc4a6174b2f19ec35ce7 as merged main 69cd38a3172f49f3f0ff26e766aaf1b5eeb4f94c. All four required pull_request workflows (Autonomous quality gate, CINELVA smoke tests, Validate frontend, Reproducible backend build) completed successfully on this exact head. This receipt only restores verified Pages publication eligibility; Vercel production acceptance and streaming completeness remain unverified."
 }

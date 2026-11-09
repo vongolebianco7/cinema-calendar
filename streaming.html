@@ -69,7 +69,7 @@ function posterFor(m,entry){
 function metaDate(movie, theatricalEntry){
  const raw=theatricalEntry?.date||movie.jp_release_date||"";
  if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){const d=new Date(raw+"T00:00:00Z");return "日本公開 "+d.getUTCFullYear()+"年"+(d.getUTCMonth()+1)+"月"+d.getUTCDate()+"日"}
- const year=String(movie.year||movie.release_year||"");return /^\d{4}$/.test(year)?"日本公開 "+year+"年":"日本公開日未確認";
+ return "日本公開日未確認";
 }
 function cardHtml(row,section){
  const m=row.movie||{},title=row.entry?.title||m.title||m.name||"タイトル未確認",id=row.id;

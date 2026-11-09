@@ -43,9 +43,11 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     # title has exactly one normalized match in the canonical movie catalog.
     catalog = json.loads(catalog_path.read_text(encoding="utf-8")) if catalog_path.exists() else {}
     by_title = {}
+    by_id = {}
     for item in catalog.get("movies", []) if isinstance(catalog, dict) else []:
         if not isinstance(item, dict) or not item.get("id") or not item.get("poster"):
             continue
+        by_id[str(item["id"])] = item
         for name in (item.get("title"), item.get("original_title")):
             key = normalize(name)
             if key:
@@ -57,8 +59,37 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     for movie in rows:
         if movie.get("poster"):
             continue
-        reviewed_id = movie.get("tmdb_id")
+        # Preserve existing canonical identities, regardless of alias.
+        # A title search must never override a reviewed movie ID.
+        identity_values = [movie.get(field) for field in ("tmdb_id", "tmdbId", "id")
+                           if movie.get(field) is not None]
+        identity_ids = {str(value) for value in identity_values}
+        if len(identity_ids) > 1:
+            ambiguous += 1
+            candidate_review.append({
+                "query": movie.get("title"),
+                "reason": "conflicting existing TMDB identity aliases; no poster assigned",
+                "candidates": [],
+            })
+            continue
+        reviewed_id = identity_values[0] if identity_values else None
+        if isinstance(reviewed_id, str) and reviewed_id.isdecimal():
+            reviewed_id = int(reviewed_id)
+        if reviewed_id is not None and (not isinstance(reviewed_id, int) or reviewed_id <= 0):
+            unresolved += 1
+            continue
         if isinstance(reviewed_id, int) and reviewed_id > 0:
+            # An exact reviewed ID in the local catalog is safe to reuse
+            # offline; never replace it with a same-title different movie.
+            reviewed_catalog = by_id.get(str(reviewed_id))
+            if reviewed_catalog is not None:
+                movie["poster"] = reviewed_catalog["poster"]
+                movie["id"] = reviewed_id
+                movie["tmdb"] = reviewed_catalog.get("tmdb") or (
+                    "https://www.themoviedb.org/movie/" + str(reviewed_id)
+                )
+                enriched += 1
+                continue
             if not api_key:
                 unresolved += 1
                 continue

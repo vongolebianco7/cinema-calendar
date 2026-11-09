@@ -163,6 +163,78 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertIn("/movie/693134?", requests[0][0].full_url)
         self.assertEqual(counts, (1, 0, 0))
 
+    def test_existing_canonical_id_uses_details_instead_of_title_search(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Remake", "id": 321, "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"id": 321, "poster_path": "/reviewed.jpg"},
+        )
+        self.assertEqual(data["movies"][0]["id"], 321)
+        self.assertTrue(data["movies"][0]["poster"].endswith("/reviewed.jpg"))
+        self.assertIn("/movie/321?", requests[0][0].full_url)
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_camelcase_tmdb_identity_uses_details(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Example", "tmdbId": 456, "date": "2026-11-01",
+              "event": "streaming", "service": "Prime Video"}],
+            {"id": 456, "poster_path": "/correct.jpg"},
+        )
+        self.assertEqual(data["movies"][0]["id"], 456)
+        self.assertIn("/movie/456?", requests[0][0].full_url)
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_conflicting_identity_aliases_never_request_or_assign_poster(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Example", "id": 111, "tmdbId": 222,
+              "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
+            {"id": 111, "poster_path": "/wrong.jpg"},
+        )
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 1, 0))
+
+    def test_invalid_existing_identity_does_not_fall_back_to_title(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Example", "id": "not-an-id",
+              "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
+            {"results": [{"id": 777, "title": "Example", "poster_path": "/wrong.jpg"}]},
+        )
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 0, 1))
+
+    def test_reviewed_id_recovers_local_poster_without_api_key(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "A Different Localized Title", "tmdbId": 321,
+              "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [
+                {"id": 321, "title": "Canonical Title",
+                 "poster": "https://image.tmdb.org/t/p/w500/correct.jpg"},
+                {"id": 999, "title": "A Different Localized Title",
+                 "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"},
+            ]},
+            api_key="",
+        )
+        self.assertEqual(data["movies"][0]["id"], 321)
+        self.assertTrue(data["movies"][0]["poster"].endswith("/correct.jpg"))
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_unknown_reviewed_id_never_uses_wrong_title_match(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Same Title", "id": 321,
+              "date": "2026-11-01", "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [{"id": 999, "title": "Same Title",
+                                  "poster": "https://image.tmdb.org/t/p/w500/wrong.jpg"}]},
+            api_key="",
+        )
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 0, 1))
+
     def test_daily_official_refresh_rechecks_existing_streaming_poster_gaps(self):
         workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/refresh-official-streaming.yml").read_text()
         importer = workflow.index("python scripts/import_official_streaming_snapshot.py")

@@ -78,6 +78,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await recoveredCard.scrollIntoViewIfNeeded();
   await recoveredCard.locator('img').waitFor({state:'attached'});
   await page.waitForFunction(()=>[...document.querySelectorAll('.card img')].some(image=>image.getAttribute('src')==='https://image.tmdb.org/t/p/w500/api-fallback.jpg'));
+  assert.match(await recoveredCard.innerText(),/日本公開日未確認/,'global release year is not mislabeled as a verified Japanese release date');
   assert.equal(await page.locator('#streamingGrid .card').count(),6,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
   assert.ok(await page.locator('#streamingGrid .card img').count()>=4,'canonical and availability snapshot posters are rendered; newly enriched rows may increase the count');
   await page.locator('#streamingGrid .card').filter({hasText:'削除後に失敗するポスター'}).evaluate(card=>card.remove());

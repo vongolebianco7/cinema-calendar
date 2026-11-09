@@ -21,7 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "data/streaming-official-current.json"
 CATALOG = ROOT / "data/streaming.json"
 REGISTRY = ROOT / "data/streaming_sources.json"
-FILL_FIELDS = ("poster", "id", "tmdb", "tmdb_id", "overview", "score", "votes", "release_year", "year")
+FILL_FIELDS = ("poster", "id", "tmdb", "tmdb_id", "overview", "score", "votes", "release_year", "year", "runtime")
+PROVENANCE_FIELDS = ("announcement_source_url", "source_published_at", "observed_at", "verified_at")
 
 
 def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=REGISTRY):
@@ -112,15 +113,19 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
                 if source.get(field) not in (None, "", 0) and target.get(field) in (None, "", 0):
                     target[field] = source[field]
                     updated += 1
+            for field in PROVENANCE_FIELDS:
+                if source.get(field) and not target.get(field):
+                    target[field] = source[field]
+                    updated += 1
             continue
         item = {
             "title": title, "date": date, "event": "streaming", "service": service,
             "score": source.get("score", 0), "votes": source.get("votes", 0),
             "overview": source.get("overview", ""), "poster": source.get("poster"),
             "source": source.get("source", "Official provider announcement"),
-            "source_url": url, "checked_at": datetime.date.today().isoformat(),
+            "source_url": url, "checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
-        for field in ("id", "tmdb", "tmdb_id", "release_year", "year", "original_title"):
+        for field in ("id", "tmdb", "tmdb_id", "release_year", "year", "original_title", "runtime", *PROVENANCE_FIELDS):
             if source.get(field) not in (None, ""):
                 item[field] = source[field]
         if item.get("tmdb_id") and not item.get("id"):

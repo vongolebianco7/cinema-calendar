@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T06:04:14Z",
+  "updated_at": "2026-11-09T01:16:43Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "9a00ec0b2c9a6067d0012dff6df3764f7ba635b8",
-  "branch": "chore/refresh-work-checkpoint-20261107-0604",
-  "head_sha": null,
-  "pull_request": null,
+  "base_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+  "branch": "feat/sirat-streaming-coverage-20261109",
+  "head_sha": "142f42645446d003dae9c4caa2ed17f171859016",
+  "pull_request": 759,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -666,6 +666,13 @@
       "issue": 242,
       "pull_request": 650,
       "acceptance": "Preserve the historical-classics preset, add a distinct explicit-evidence true-story preset, and keep the result sets separate. Exact-head CI pending."
+    },
+    {
+      "id": "P0-244-SIRAT",
+      "title": "Publish verified Sirat Netflix premiere and audit November streaming coverage",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Sirat appears in the verified official subset and user-facing catalog with date, source, TMDB 1151272, poster, year, runtime and verification timestamps; previous enrichment remains intact; coverage limits are quantified."
     }
   ],
   "verification": [
@@ -973,23 +980,65 @@
       "status": "merged_ci_passed_production_ready",
       "sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
       "note": "All 14 GitHub Actions checks passed at exact PR head b247d1d. Merged as 7128a72. Production deployment dpl_CD4YcLVh3afb9z5PrWT2bYW3edE6 is READY for 7128a72; canonical cinelva.vercel.app alias returned HTTP 200. Main workflow run 42130066674 published verified legacy Pages successfully."
+    },
+    {
+      "item": "Sirat streaming import",
+      "status": "passed_locally",
+      "base_sha": "b596002fcb68d8da281769a7a5532dfeebfdbf72",
+      "commands": [
+        "python -m unittest tests.test_import_official_streaming_snapshot tests.test_refresh_streaming_official",
+        "python scripts/quality_gate.py"
+      ],
+      "result": "17 focused Python tests passed; quality_gate.py pending final run after source-enrichment preservation change."
+    },
+    {
+      "item": "PR #757 CI optimization",
+      "status": "merged",
+      "sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+      "result": "Exact head e97cbc6; browser job rerun passed after a WebKit 503; merged with expected head."
+    },
+    {
+      "item": "PR #756 identity-safe poster enrichment",
+      "status": "in_progress",
+      "sha": "186f88476fb404b9cce44526a9d1467da497ead5",
+      "result": "Rebased onto main after #757; focused Python poster enrichment tests pass locally; exact-head Actions pending."
+    },
+    {
+      "item": "Sirat streaming data and calendar acceptance",
+      "status": "all_required_actions_passed_on_exact_source",
+      "source_sha": "c94d26ed89f7c704afe78e27b8b8d921eda52ce1",
+      "checks": {
+        "Full Python contract suite": "success",
+        "CINELVA smoke tests": "success",
+        "Validate frontend Chromium/WebKit": "success",
+        "Autonomous quality gate": "success",
+        "Reproducible backend build": "success",
+        "CINELVA mobile layout smoke": "success",
+        "CINELVA continuous visual QA": "success",
+        "Cinemap completeness scorecard": "success"
+      },
+      "local": "33 focused Python tests, production quality gate, release schema check, streaming coverage check, work-state schema and diff check passed. Standalone local browser was unavailable because the Playwright Chromium binary is not installed; CI browser checks passed.",
+      "result": "Sirat row is mapped to TMDB 1151272, 2025, 115 minutes, canonical poster, 2026-11-05 date and Netflix title URL. Dedicated Chromium/WebKit calendar test checks the card date, poster, runtime and Netflix link. This is not yet production acceptance."
     }
   ],
   "deployment": {
     "status": "blocked",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+    "latest_main_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+    "alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
+    "latest_deployment_sha": "d0c3c5b4a334fd7f80dd18d2c35107ca874ab049",
     "production_verified": false,
-    "reason": "Recent Vercel frontend/backend main deployments were rejected by the Hobby deployment quota; current public page is stale. The main GitHub Pages publication gate also failed on the stale CI receipt and will be retried only after the exact-source receipt is refreshed and checked."
+    "reason": "Vercel reports the Hobby daily deployment cap exceeded (>100 deployments; retry available after 24 hours). The canonical alias still serves the older f6cd6c6 source and live streaming.json lacks Sirat. Do not trigger redundant retries; after quota reset, verify the automatic production build against the renewed CI proof."
   },
   "blockers": [
-    "Vercel Hobby daily deployment cap blocked recent Vercel frontend/backend deployments; preserve free tier. Main Pages publication still needs to pass after the proof refresh.",
-    "No rights-verified official feeds for the 12 streaming services; no provider catalog is enabled, so exhaustive streaming coverage is unavailable.",
-    "Physical iPhone Safari acceptance remains outstanding.",
-    "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
-    "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
+    "No rights-reviewed official premiere API/feed is enabled for any of the 12 streaming services; all auto_premiere_discovery flags remain false. November records are a manual verified subset, not exhaustive.",
+    "27 of 181 cited November announcement rows still lack a matched TMDB identity/poster; do not represent poster coverage as complete.",
+    "Vercel Hobby daily build cap is exhausted (>100 deployments); canonical production is on an older build and production acceptance is pending quota reset.",
+    "Physical iPhone Safari acceptance has not been performed; CI WebKit/mobile viewport checks are not a physical-device check.",
+    "Issue #585 still requires owner-managed FEEDBACK_ADMIN_TOKEN setup; no secret is stored in the repository checkpoint.",
+    "Issue #529 demo branch preview acceptance remains separate and incomplete."
   ],
-  "next_action": "Validate live Vercel/Pages public routes in browser, feedback #585 end-to-end with owner-provisioned private admin token, poster and iPhone Safari acceptance; do not close remaining P0 issues without evidence.",
+  "next_action": "Commit production proof and work-state/resume checkpoint referencing exact successful source 142f42645446d003dae9c4caa2ed17f171859016; verify final-head Actions, then merge PR #759 safely. Avoid Vercel retries while daily quota is exhausted; after reset, verify READY deployment and public streaming.json contains Sirat on 2026-11-05 with the Netflix link. Keep #244 and #593 open.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {
@@ -3019,5 +3068,70 @@
     ],
     "next_first_action": "Verify Vercel Hobby quota and exact-source proof for latest main, then execute one safe release; independently run production Chromium/WebKit smoke and feedback/admin/analytics checks.",
     "safety": "No bypass of CI, paid upgrade, scraping, secrets, or destructive data migration."
+  },
+  "latest_streaming_premiere_checkpoint_20261109": {
+    "recorded_at": "2026-11-09T01:16:43Z",
+    "master_issue": 239,
+    "latest_main_sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+    "merged_prs": [
+      {
+        "number": 757,
+        "sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+        "result": "CI path optimization merged"
+      },
+      {
+        "number": 756,
+        "sha": "e8e292251c8b91c4722eaf5805685562653ba233",
+        "result": "TMDB alias identity-safe poster enrichment merged after all exact-head Actions passed"
+      }
+    ],
+    "active_pr": {
+      "number": 759,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/759",
+      "branch": "feat/sirat-streaming-coverage-20261109",
+      "source_sha": "142f42645446d003dae9c4caa2ed17f171859016",
+      "exact_head_ci": "all 9 listed GitHub Actions succeeded on exact head; frontend failed shard alone was rerun and passed"
+    },
+    "coverage_report": "docs/operations/streaming-coverage-2026-11.json",
+    "coverage": {
+      "verified_cited_subset_rows": 181,
+      "exact_catalog_matches": 181,
+      "catalog_november_rows": 182,
+      "tmdb_identity_and_poster_rows": 154,
+      "missing_poster_rows": 27,
+      "scope": "non-exhaustive manual verified subset"
+    },
+    "automation": {
+      "registered_services": 12,
+      "enabled_official_premiere_feeds": 0,
+      "auto_premiere_discovery_flags_true": 0,
+      "scheduled_job": "refresh-official-streaming daily refreshes curated official supplements; it does not discover new announcements"
+    },
+    "sirat": {
+      "date": "2026-11-05",
+      "service": "Netflix",
+      "tmdb_id": 1151272,
+      "release_year": 2025,
+      "runtime_minutes": 115,
+      "poster": "https://image.tmdb.org/t/p/w500/wcJ4lx6arqF3WsjUmXmeGR65wOB.jpg",
+      "netflix_title_url": "https://www.netflix.com/jp/title/82169786"
+    },
+    "production": {
+      "quota_status": "Vercel Hobby daily cap exceeded (>100 deployments); avoid retries until reset",
+      "canonical_alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
+      "sirat_in_live_streaming_json": false,
+      "live_generated_at": "2026-11-08T12:10:28.725307+00:00"
+    },
+    "remaining": [
+      "Commit proof/checkpoint referencing exact successful source and verify final-head Actions",
+      "Merge PR #759 after required exact-head checks pass",
+      "Wait for Vercel quota reset; verify production READY and live Sirat calendar/detail link without redundant deploy retries",
+      "Physical iPhone Safari acceptance",
+      "Official licensed feeds for streaming providers remain unavailable/unenabled"
+    ],
+    "do_not_close": [
+      244,
+      593
+    ]
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d4948186a84a781829225dc3f66bc335950d6386",
-  "verified_at": "2026-11-08T23:36:53Z",
-  "note": "Exact-head GitHub Actions passed on source commit d4948186a84a781829225dc3f66bc335950d6386: Autonomous quality gate, CINELVA smoke tests, Validate frontend, and Reproducible backend build all succeeded. Refreshes the receipt for the source merged to main as d0c3c5b4a334fd7f80dd18d2c35107ca874ab049; production publication is permitted only while this executable source digest remains unchanged."
+  "head_sha": "142f42645446d003dae9c4caa2ed17f171859016",
+  "verified_at": "2026-11-09T01:16:43Z",
+  "note": "All nine exact-head GitHub Actions passed for source 142f42645446d003dae9c4caa2ed17f171859016: Autonomous quality gate, CINELVA smoke tests, Validate frontend (including Chromium/WebKit journeys), Reproducible backend build, Full Python contract suite, Scorecard contract, CINELVA mobile layout smoke, visual QA, and completeness scorecard. The first frontend attempt hit an unrelated Ocean-route WebKit timeout; only failed jobs were rerun and passed. This receipt records tested executable source only; production acceptance remains pending because Vercel Hobby daily deployment quota is exhausted."
 }

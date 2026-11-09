@@ -24,6 +24,18 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     assert.equal(await page.locator('.cinelva-now-playing-label .cinelva-now-playing-label').count(),0);
     assert.equal(await page.locator('.calendar [data-now-film-id="42"] .cinelva-now-playing-label').first().innerText(),'上映中');
    }
+   if(route==='index.html'&&theme==='dark'){
+    await page.locator('.modeTab[data-mode="streaming"]').click();
+    const sirat=page.locator('.streamMovie').filter({hasText:'シラート'});
+    await sirat.waitFor();
+    assert.equal(await sirat.locator('.streamMovieDate').innerText(),'11/05','Sirāt appears on its verified November 5 streaming date');
+    assert.equal(await sirat.locator('img').getAttribute('src'),'https://image.tmdb.org/t/p/w500/wcJ4lx6arqF3WsjUmXmeGR65wOB.jpg','Sirāt uses the canonical TMDB poster');
+    await sirat.click();
+    const netflixLink=page.locator('#detail .links a[href="https://www.netflix.com/jp/title/82169786"]');
+    await netflixLink.waitFor();
+    assert.equal(await page.locator('#detail').innerText().then(text=>text.includes('115分')),true,'Sirāt runtime is shown in its movie detail');
+    await page.locator('#close').click();
+   }
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await page.locator('.calendar').screenshot({path:`artifacts/now-playing/calendar-label-${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${route.replace('/','-')}.png`});
    await page.clock.fastForward(37*3600000);assert.equal(await page.locator('.cinelva-now-playing-label').count(),0,'open pages expire current status');

@@ -38,77 +38,101 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    }
   }}));
   await context.route('**/data/movies.json',route=>route.fulfill({json:{movies:[
-   {id:101,tmdbId:101,title:'Netflixの映画',poster:'https://cinelva.test/fake.jpg',popularity:20},
-   {id:102,tmdbId:102,title:'レンタル映画',poster:null,popularity:10},
+   {id:101,tmdbId:101,title:'Netflixの映画',poster:'https://cinelva.test/fake.jpg',popularity:20,runtime:121,score:8.2},
+   {id:102,tmdbId:102,title:'レンタル映画',poster:null,popularity:10,runtime:99,score:7.2},
    {id:103,tmdbId:103,title:'古い観測',poster:null,popularity:5},
    {id:104,tmdbId:104,title:'レンタル専用',poster:null,popularity:4},
    {id:105,tmdbId:105,title:'FODチャンネル作品',poster:null,popularity:3},
    {id:106,tmdbId:106,title:'配信ポスター補完',poster:null,popularity:2}
+  ]}}));
+  await context.route('**/data/now_playing.json',route=>route.fulfill({json:{complete:true,region:'JP',generated_at:now,movies:[
+   {id:101,tmdbId:101,title:'Netflixの映画',poster:'https://cinelva.test/fake.jpg',score:8.2,votes:100}
+  ]}}));
+  await context.route('**/data/theatrical.json',route=>route.fulfill({json:{movies:[
+   {id:101,tmdbId:101,title:'Netflixの映画',event:'theatrical',date:'2026-11-09',runtime:121}
   ]}}));
   await context.route('**/api/movie-detail?id=110&view=poster',route=>route.fulfill({json:{movie:{id:110,tmdbId:110,title:'カタログ未収録の配信作品',release_date:'1994-01-01',poster:'https://image.tmdb.org/t/p/w500/api-fallback.jpg'}}}));
   await context.route('https://image.tmdb.org/t/p/w500/api-fallback.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   await context.route('https://cinelva.test/fake.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   await context.route('https://image.tmdb.org/t/p/w500/verified.jpg',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jp1sAAAAASUVORK5CYII=','base64')}));
   const page=await context.newPage(),errors=[];
+  const savedRecord='{"101":{"id":"101","tmdbId":"101","title":"Netflixの映画","watched":true,"rating":4.2,"date":"2025-02-03"}}';
+  const savedBookmarks='{"101":{"id":"101","tmdbId":"101","title":"Netflixの映画","savedAt":"2025-02-03T00:00:00.000Z"}}';
+  await page.addInitScript(({savedRecord,savedBookmarks})=>{localStorage.setItem('cinelva-library-records-v2',savedRecord);localStorage.setItem('cinelva-want-to-watch-v1',savedBookmarks);}, {savedRecord,savedBookmarks});
   page.on('pageerror',error=>errors.push(error.message));
   const delayedImageRequest=page.waitForRequest('**/delayed-fail.jpg');
   await page.goto(`http://127.0.0.1:${port}/streaming.html`);
   await delayedImageRequest;
-  await page.getByText('9作品で7日以内の配信状況を確認できました。',{exact:false}).waitFor();
-  const recoveredCard=page.locator('.card').filter({hasText:'カタログ未収録の配信作品'});
+  await page.locator('#streamingStatus').getByText('Netflix 4').waitFor();
+  assert.equal(await page.locator('#theatricalGrid .card').count(),1,'the Japan Now Playing snapshot populates the theatrical section');
+  const theaterCard=page.locator('#theatricalGrid .card').filter({hasText:'Netflixの映画'});
+  assert.match(await theaterCard.innerText(),/121分/,'runtime is shown on theatrical cards');
+  assert.match(await theaterCard.innerText(),/日本公開 2026年11月9日/,'verified Japanese theatrical release date is shown');
+  assert.equal(await theaterCard.locator('.cinelva-rating-controls').count(),1,'theatrical card uses the shared MY/TMDB/review/bookmark controls');
+  assert.equal(await theaterCard.locator('.cinelva-rating-pair').innerText().then(text=>text.includes('4.2')) ,true,'existing MY rating is read from the existing record key');
+  assert.equal(await theaterCard.locator('.cinelva-bookmark-button').getAttribute('aria-pressed'),'true','existing bookmark is read from the existing bookmark key');
+  assert.match(await page.locator('header.gTop').innerText(),/Cinelva/,'the canonical shared navigation header is present');
+  assert.equal(await page.locator('#streamingGrid').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3,'streaming cards use the shared three-column mobile grid');
+  assert.doesNotMatch(await page.locator('body').innerText(),/\\n/,'literal escaped newlines are not exposed in page content');
+  const recoveredCard=page.locator('#streamingGrid .card').filter({hasText:'カタログ未収録の配信作品'});
   await recoveredCard.scrollIntoViewIfNeeded();
   await recoveredCard.locator('img').waitFor({state:'attached'});
   await page.waitForFunction(()=>[...document.querySelectorAll('.card img')].some(image=>image.getAttribute('src')==='https://image.tmdb.org/t/p/w500/api-fallback.jpg'));
-  assert.equal(await page.locator('.card').count(),6,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
-  assert.ok(await page.locator('.card img').count()>=4,'canonical and availability snapshot posters are rendered; newly enriched rows may increase the count');
-  await page.locator('.card').filter({hasText:'削除後に失敗するポスター'}).evaluate(card=>card.remove());
+  assert.match(await recoveredCard.innerText(),/日本公開日未確認/,'global release year is not mislabeled as a verified Japanese release date');
+  assert.equal(await page.locator('#streamingGrid .card').count(),6,'fresh current availability is rendered; stale observations are excluded and rental-only rows stay out of subscription');
+  assert.ok(await page.locator('#streamingGrid .card img').count()>=4,'canonical and availability snapshot posters are rendered; newly enriched rows may increase the count');
+  const detachedCard=page.locator('#streamingGrid .card').filter({hasText:'削除後に失敗するポスター'});
+  const detachedCardHandle=await detachedCard.elementHandle();
+  await detachedCard.evaluate(card=>card.remove());
+  assert.equal(await detachedCardHandle.evaluate(card=>card.isConnected),false,'the delayed image error is released after its card is detached');
   releaseDelayedImage();
   await page.waitForTimeout(100);
   assert.deepEqual(errors,[],'a late image error after its card is detached does not throw');
-  const fallbackCard=page.locator('.card').filter({hasText:'配信ポスター補完'});
+  const fallbackCard=page.locator('#streamingGrid .card').filter({hasText:'配信ポスター補完'});
   assert.equal(await fallbackCard.locator('img').getAttribute('src'),'https://image.tmdb.org/t/p/w500/verified.jpg','availability poster is rendered even without a movie catalog row');
   assert.equal(await recoveredCard.locator('img').getAttribute('src'),'https://image.tmdb.org/t/p/w500/api-fallback.jpg','TMDB ID from the availability snapshot recovers artwork when no movie catalog record exists');
-  const coverage=await page.locator('#status').innerText();
+  const coverage=await page.locator('#streamingStatus').innerText();
   assert.match(coverage,/Netflix 4.*Prime Video 1/,'subscription counts include only the selected access type');
   assert.doesNotMatch(coverage,/FOD/,'FOD Amazon Channels are not counted as the standalone FOD service');
   assert.doesNotMatch(coverage,/レンタル専用/);
   assert.doesNotMatch(coverage,/ABEMA/,'providers without fresh observations are not described as confirmed');
   assert.doesNotMatch(await page.locator('#service option[value="ABEMA"]').innerText(),/直近データなし/,'fresh free availability is reflected in the provider selector');
   await page.locator('#service').selectOption('ABEMA');
-  assert.equal(await page.locator('.card').count(),0,'providers without recent rows do not receive stale titles');
+  assert.equal(await page.locator('#streamingGrid .card').count(),0,'providers without recent rows do not receive stale titles');
   await page.locator('#service').selectOption('');
   await page.locator('[data-kind="free_ads"]').click();
-  assert.equal(await page.locator('.card').count(),2,'free and ad-supported observations are shown in their own view');
-  const freeAdsCoverage=await page.locator('#status').innerText();
+  assert.equal(await page.locator('#streamingGrid .card').count(),2,'free and ad-supported observations are shown in their own view');
+  const freeAdsCoverage=await page.locator('#streamingStatus').innerText();
   assert.match(freeAdsCoverage,/無料・広告つき.*ABEMA 1.*Hulu 1/,'free and ad-supported provider coverage is reported separately');
   await page.locator('#service').selectOption('ABEMA');
-  assert.equal(await page.locator('.card').count(),1,'free providers filter correctly');
-  assert.match(await page.locator('#status').innerText(),/ABEMA 1/,'provider coverage follows the selected service');
-  assert.doesNotMatch(await page.locator('#status').innerText(),/Hulu 1/,'filtered coverage excludes other services');
-  assert.match(await page.locator('.card').innerText(),/無料配信作品/);
+  assert.equal(await page.locator('#streamingGrid .card').count(),1,'free providers filter correctly');
+  assert.match(await page.locator('#streamingStatus').innerText(),/ABEMA 1/,'provider coverage follows the selected service');
+  assert.doesNotMatch(await page.locator('#streamingStatus').innerText(),/Hulu 1/,'filtered coverage excludes other services');
+  assert.match(await page.locator('#streamingGrid .card').innerText(),/無料配信作品/);
   await page.locator('#service').selectOption('');
   await page.locator('[data-kind="flatrate"]').click();
   await page.locator('#service').selectOption('Netflix');
-  assert.equal(await page.locator('.card').count(),4,'service filter narrows the catalog to all four Netflix titles');
-  assert.match(await page.locator('#status').innerText(),/Netflix 4/,'filtered subscription count matches all four Netflix titles');
-  assert.doesNotMatch(await page.locator('#status').innerText(),/Prime Video 1/,'other services do not appear in filtered coverage');
+  assert.equal(await page.locator('#streamingGrid .card').count(),4,'service filter narrows the catalog to all four Netflix titles');
+  assert.match(await page.locator('#streamingStatus').innerText(),/Netflix 4/,'filtered subscription count matches all four Netflix titles');
+  assert.doesNotMatch(await page.locator('#streamingStatus').innerText(),/Prime Video 1/,'other services do not appear in filtered coverage');
   await page.locator('#query').fill('配信ポスター補完');
-  assert.equal(await page.locator('.card').count(),1,'text search narrows the visible catalog');
-  assert.match(await page.locator('#status').innerText(),/Netflix 1/,'provider coverage follows the text search');
+  assert.equal(await page.locator('#streamingGrid .card').count(),1,'text search narrows the visible catalog');
+  assert.match(await page.locator('#streamingStatus').innerText(),/Netflix 1/,'provider coverage follows the text search');
   await page.locator('#query').fill('');
-  const netflixCards=(await page.locator('.card').allTextContents()).join(' ');
+  const netflixCards=(await page.locator('#streamingGrid .card').allTextContents()).join(' ');
   assert.match(netflixCards,/Netflixの映画/);
   assert.match(netflixCards,/配信ポスター補完/);
   await page.locator('#service').selectOption('');
   await page.locator('[data-kind="rent"]').click();
-  assert.equal(await page.locator('.card').count(),2,'rental-only and mixed-access rows remain in the rental view');
-  const rentalCoverage=await page.locator('#status').innerText();
+  assert.equal(await page.locator('#streamingGrid .card').count(),2,'rental-only and mixed-access rows remain in the rental view');
+  const rentalCoverage=await page.locator('#streamingStatus').innerText();
   assert.match(rentalCoverage,/Prime Video 2/,'rental counts are calculated for rental observations only');
   assert.doesNotMatch(rentalCoverage,/Netflix/);
-  assert.equal(await page.locator('.card').filter({hasText:'レンタル映画'}).count(),1,'the mixed-access title remains in the rental results');
+  assert.equal(await page.locator('#streamingGrid .card').filter({hasText:'レンタル映画'}).count(),1,'the mixed-access title remains in the rental results');
   await page.locator('#service').selectOption('Prime Video');
-  assert.equal(await page.locator('.card').count(),2,'service filtering also works in the rental view');
-  assert.match(await page.locator('.footer').innerText(),/配信開始日を保証するものではありません/);
+  assert.equal(await page.locator('#streamingGrid .card').count(),2,'service filtering also works in the rental view');
+  assert.match(await page.locator('.footer').innerText(),/配信開始日やサービスの全作品一覧を保証するものではありません/);
+  assert.equal(await page.evaluate(()=>[localStorage.getItem('cinelva-library-records-v2'),localStorage.getItem('cinelva-want-to-watch-v1')].join('|')),[savedRecord,savedBookmarks].join('|'),'rendering the page does not rewrite existing viewing records or bookmarks');
   assert.deepEqual(errors,[]);
   await context.close();
   console.log('Current streaming catalog recovers posters by explicit TMDB ID when the movie catalog is missing a row, filters availability, and labels freshness.');

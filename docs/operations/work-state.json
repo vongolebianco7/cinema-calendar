@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T13:11:00Z",
+  "updated_at": "2026-11-09T15:58:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a",
-  "branch": "fix/refresh-proof-after-streaming-multisource-20261109",
-  "head_sha": "dc54cd571138e61d6c64fff5aea89396aad6786c",
-  "pull_request": 772,
+  "base_sha": "8b6a7c2ebc12cec48c07388c8ce06ae864b9f46e",
+  "branch": "fix/streaming-iphone-common-cards-latest-main-20261109",
+  "head_sha": "e17af7e6170fab090b42aeba240070b517179b96",
+  "pull_request": 778,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -3330,5 +3330,44 @@
       "#244 premiere discovery remains disabled for all 12 registered services.",
       "#593 poster gaps remain; canonical Vercel production is stale."
     ]
+  },
+  "latest_streaming_iphone_fix_20261109": {
+    "recorded_at": "2026-11-09T15:58:00Z",
+    "master_issue": 239,
+    "issue": 242,
+    "latest_main_sha": "8b6a7c2ebc12cec48c07388c8ce06ae864b9f46e",
+    "pull_request": {
+      "number": 778,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/778",
+      "branch": "fix/streaming-iphone-common-cards-latest-main-20261109",
+      "head_sha": "e17af7e6170fab090b42aeba240070b517179b96"
+    },
+    "scope": [
+      "Remove literal escaped newline text",
+      "Use shared CINELVA navigation header",
+      "Separate theatrical and streaming sections",
+      "Use three-column shared movie cards with MY/TMDB ratings, review and bookmark",
+      "Show runtime and verified Japanese release month"
+    ],
+    "preservation": "Shared local-first controls reuse existing record and bookmark keys; existing viewing records, ratings, reviews and bookmarks remain read-only until user action. No schema/storage migration.",
+    "conflict_check": "Recreated from latest main after concurrent #244/#593 updates; PR contains only streaming.html and two focused tests, no overlap with data pipeline changes.",
+    "exact_head_ci": {
+      "sha": "e17af7e6170fab090b42aeba240070b517179b96",
+      "result": "All 9 GitHub Actions workflows succeeded: Validate frontend (including issue regression checks, Chromium/WebKit shared controls and browser journeys), visual QA Chromium/WebKit, Autonomous quality gate, smoke, reproducible backend build, backup safety, mobile smoke, brand and completeness."
+    },
+    "review": "Self-review complete; no external reviews or inline review threads were present before merge.",
+    "production": {
+      "url": "https://cinelva.vercel.app/",
+      "status": "blocked",
+      "blocker": "Vercel Hobby HTTP 402 api-deployments-free-per-day; retry-after 2026-11-10T01:37:22Z. No retry before reset and no paid upgrade.",
+      "last_known_ready_sha": "391da7d6aec71ac97dd18235379c97f286fd4be8",
+      "acceptance": "Production deployment and 390px public URL acceptance pending."
+    },
+    "remaining": [
+      "Merge PR #778 after final main/mergeability check using exact head SHA.",
+      "After 2026-11-10T01:37:22Z, recheck Hobby quota, attempt one free-tier production deployment, then verify /streaming.html at 390px on public URL.",
+      "Physical iPhone Safari acceptance is still distinct from passing Chromium/WebKit CI."
+    ],
+    "safety": "No #244/#593 data pipeline edits, scraping, paid tier, secrets, destructive migrations, or changes to user records."
   }
 }

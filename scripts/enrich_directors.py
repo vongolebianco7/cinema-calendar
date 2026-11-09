@@ -35,6 +35,34 @@ def detail_medium(detail):
 JAPANESE = re.compile(r'[ぁ-ゖァ-ヺ\u3400-\u9fff]')
 KANA = re.compile(r'[ぁ-ゖァ-ヺ]')
 EXCLUDED = re.compile(r'cinema\s*16\b|short\s*films?|shorts?\s*collection|amazing\s*stories:\s*the\s*movie|anthology|compilation|behind.the.scenes|making.of|メイキング|短編|短篇|総集編|オムニバス', re.I)
+POSTER_BASE = 'https://image.tmdb.org/t/p/w342'
+
+
+def merge_movie_detail(work, detail, checked_at=None):
+    """Merge verified same-ID movie details and recover canonical artwork."""
+    if str(detail.get('id')) != str(work.get('id')):
+        raise ValueError('Mismatched TMDB movie metadata')
+    merged = {**work, **detail_medium(detail), 'runtime': detail.get('runtime') or work.get('runtime')}
+    path = detail.get('poster_path')
+    if not work.get('poster') and isinstance(path, str) and path.startswith('/') and not path.startswith('//'):
+        merged['poster'] = POSTER_BASE + path
+    if checked_at:
+        merged['poster_checked_at'] = checked_at
+    return merged
+
+
+def poster_check_recent(work, now):
+    checked = work.get('poster_checked_at')
+    if not checked:
+        return False
+    try:
+        timestamp = datetime.datetime.fromisoformat(str(checked).replace('Z', '+00:00'))
+        if timestamp.tzinfo is None:
+            return False
+        age = now - timestamp.astimezone(datetime.timezone.utc)
+        return datetime.timedelta(0) <= age < datetime.timedelta(days=30)
+    except (TypeError, ValueError):
+        return False
 
 
 @lru_cache(maxsize=1)
@@ -137,9 +165,7 @@ def verify_director_runtimes(director, request):
     for index, work in enumerate(director.get('works', [])):
         if index < 100 and not work.get('runtime'):
             detail = request('/movie/' + str(int(work['id'])))
-            if detail.get('id') != work['id']:
-                raise ValueError('Mismatched movie metadata')
-            work = {**work, **detail_medium(detail), 'runtime': detail.get('runtime')}
+            work = merge_movie_detail(work, detail)
         runtime = work.get('runtime')
         if isinstance(runtime, (int, float)) and 0 < runtime < 30:
             continue
@@ -276,21 +302,25 @@ def main():
             raise ValueError('Requested director is not in the sourced snapshot')
         verification_order = [identifier] + [item for item in verification_order if item != identifier]
     runtime_verified = 0
+    posters_recovered = 0
     runtime_failures = []
+    checked_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
     if not args.normalize_only:
         for identifier in verification_order:
             director = directors[identifier]
             retained = []
             for work in director.get('works', []):
                 runtime = work.get('runtime') or work.get('duration')
-                if not runtime and verification_budget:
+                needs_poster_check = not work.get('poster') and not poster_check_recent(work, datetime.datetime.now(datetime.timezone.utc))
+                if (not runtime or needs_poster_check) and verification_budget:
                     verification_budget -= 1
                     try:
                         detail = request('/movie/' + str(int(work['id'])))
-                        if detail.get('id') != work['id']:
-                            raise ValueError('Mismatched movie metadata')
+                        had_poster = bool(work.get('poster'))
                         runtime = detail.get('runtime')
-                        work = {**work, **detail_medium(detail), 'runtime': runtime}
+                        work = merge_movie_detail(work, detail, checked_at if needs_poster_check else None)
+                        if not had_poster and work.get('poster'):
+                            posters_recovered += 1
                         if isinstance(runtime, (int, float)) and runtime > 0:
                             runtime_verified += 1
                     except Exception as error:
@@ -328,7 +358,7 @@ def main():
     report = {'attempted': len(pending), 'refreshed': len(pending) - len(failures), 'failures': failures, 'discovery': discovery,
         'japanese_unavailable': [{'id': key, 'name': value.get('name')} for key, value in directors.items() if value.get('name_status') == 'japanese_unavailable'],
         'unrefreshed': [key for key, value in directors.items() if not value.get('checked_at')],
-        'runtime_verified': runtime_verified, 'runtime_failures': runtime_failures,
+        'runtime_verified': runtime_verified, 'runtime_failures': runtime_failures, 'posters_recovered': posters_recovered,
         'photos': sum(bool(value.get('profile_path')) for value in directors.values()),
         'transliterated_names': sum(value.get('name_status') == 'transliterated' for value in directors.values()),
         'japanese_biographies': sum(bool(value.get('biography_ja')) for value in directors.values())}

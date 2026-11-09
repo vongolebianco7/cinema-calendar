@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "949d554e5240900e3ad3abb5bf6f783d066376c4",
-  "verified_at": "2026-11-09T01:55:34Z",
-  "note": "All 8 exact-head GitHub Actions passed for source 949d554e5240900e3ad3abb5bf6f783d066376c4: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium and WebKit), Reproducible backend build, Full Python contract suite, mobile layout smoke, visual QA, and completeness scorecard. Local focused streaming poster suite: 17 passed. This receipt records the tested executable source; production acceptance remains pending due to Vercel Hobby deployment quota."
+  "head_sha": "bd6ac8b869b738c62ac5c1ff08077a2d87458ca0",
+  "verified_at": "2026-11-09T02:27:25Z",
+  "note": "All 22 exact-head checks passed on bd6ac8b869b738c62ac5c1ff08077a2d87458ca0, including all four required production workflows: Autonomous quality gate, CINELVA smoke tests, Validate frontend (Chromium and WebKit), and Reproducible backend build. The current main source tree is identical to the verified head tree. This receipt records CI verification only; Vercel production acceptance remains pending because the Hobby daily deployment cap is exhausted."
 }

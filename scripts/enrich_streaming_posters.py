@@ -8,6 +8,7 @@ ambiguous titles are left without a poster rather than guessed.
 import json
 import os
 import pathlib
+import re
 import tempfile
 import time
 import unicodedata
@@ -63,6 +64,13 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         # A title search must never override a reviewed movie ID.
         identity_values = [movie.get(field) for field in ("tmdb_id", "tmdbId", "id")
                            if movie.get(field) is not None]
+        # A canonical TMDB movie URL is also a reviewed identity. Never use a
+        # same-title search when the URL and numeric aliases disagree.
+        tmdb_url = movie.get("tmdb")
+        if isinstance(tmdb_url, str):
+            match = re.fullmatch(r"https://www\.themoviedb\.org/movie/([1-9][0-9]*)/?", tmdb_url)
+            if match:
+                identity_values.append(int(match.group(1)))
         identity_ids = {str(value) for value in identity_values}
         if len(identity_ids) > 1:
             ambiguous += 1

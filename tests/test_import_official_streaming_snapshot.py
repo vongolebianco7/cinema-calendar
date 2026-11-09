@@ -13,23 +13,53 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             root = Path(tmp)
             snapshot, catalog, registry = (root / name for name in ("official.json", "streaming.json", "registry.json"))
             snapshot.write_text(json.dumps({"movies": [
-                {"title": "Existing", "date": "2026-11-01", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "poster": "https://image.tmdb.org/t/p/w500/a.jpg", "id": 42},
+                {"title": "Existing", "date": "2026-11-01", "event": "streaming", "service": "Netflix", "source_url": "https://netflix.com/title", "poster": "https://image.tmdb.org/t/p/w500/a.jpg", "id": 42, "runtime": 101, "source_published_at": "2026-10-29", "observed_at": "2026-11-09T00:00:00+00:00", "verified_at": "2026-11-09T00:00:00+00:00"},
                 {"title": "New", "date": "2026-11-02", "event": "streaming", "service": "FOD", "source_url": "https://fod.fujitv.co.jp/news", "poster": "https://image.tmdb.org/t/p/w500/b.jpg", "id": 43},
             ]}), encoding="utf-8")
             catalog.write_text(json.dumps({"movies": [
-                {"title": "Existing", "date": "2026-11-01", "event": "streaming", "service": "Netflix", "poster": None, "score": 8},
+                {"title": "Existing", "date": "2026-11-01", "event": "streaming", "service": "Netflix", "poster": None, "score": 8, "runtime": 100},
             ]}), encoding="utf-8")
             registry.write_text(json.dumps({"services": [
                 {"name": "Netflix", "reviewed_premiere_hosts": ["netflix.com"]},
                 {"name": "FOD", "reviewed_premiere_hosts": ["fod.fujitv.co.jp"]},
             ]}), encoding="utf-8")
 
-            self.assertEqual(import_snapshot(snapshot, catalog, registry), (1, 2))
+            self.assertEqual(import_snapshot(snapshot, catalog, registry), (1, 5))
             rows = json.loads(catalog.read_text(encoding="utf-8"))["movies"]
             self.assertEqual(len(rows), 2)
             self.assertEqual(rows[0]["score"], 8)
             self.assertEqual(rows[0]["poster"], "https://image.tmdb.org/t/p/w500/a.jpg")
             self.assertEqual(rows[0]["id"], 42)
+            self.assertEqual(rows[0]["runtime"], 100)  # Never overwrite existing catalog metadata.
+            self.assertEqual(rows[0]["source_published_at"], "2026-10-29")
+            self.assertEqual(rows[0]["verified_at"], "2026-11-09T00:00:00+00:00")
+
+    def test_preserves_runtime_and_source_timestamps_for_new_records(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            snapshot, catalog, registry = (root / name for name in ("official.json", "streaming.json", "registry.json"))
+            snapshot.write_text(json.dumps({"movies": [{
+                "title": "Sirāt", "date": "2026-11-05", "event": "streaming",
+                "service": "Netflix", "source_url": "https://netflix.com/jp/title/82169786",
+                "announcement_source_url": "https://x.com/NetflixJP", "source_published_at": "2026-10-29",
+                "observed_at": "2026-11-09T00:00:00+00:00", "verified_at": "2026-11-09T00:00:00+00:00",
+                "poster": "https://image.tmdb.org/t/p/w500/verified.jpg", "id": 1151272,
+                "tmdb_id": 1151272, "tmdb": "https://www.themoviedb.org/movie/1151272",
+                "release_year": 2025, "runtime": 115,
+            }]}), encoding="utf-8")
+            catalog.write_text(json.dumps({"movies": []}), encoding="utf-8")
+            registry.write_text(json.dumps({"services": [
+                {"name": "Netflix", "reviewed_premiere_hosts": ["netflix.com"]},
+            ]}), encoding="utf-8")
+
+            self.assertEqual(import_snapshot(snapshot, catalog, registry), (1, 0))
+            row = json.loads(catalog.read_text(encoding="utf-8"))["movies"][0]
+            self.assertEqual(row["runtime"], 115)
+            self.assertEqual(row["id"], 1151272)
+            self.assertEqual(row["release_year"], 2025)
+            self.assertEqual(row["source_published_at"], "2026-10-29")
+            self.assertEqual(row["announcement_source_url"], "https://x.com/NetflixJP")
+            self.assertIn("+00:00", row["checked_at"])
 
     def test_rejects_unregistered_provider_without_mutating_catalog(self):
         with tempfile.TemporaryDirectory() as tmp:

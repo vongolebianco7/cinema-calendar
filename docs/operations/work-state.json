@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-07T06:04:14Z",
+  "updated_at": "2026-11-09T00:28:41+00:00",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "9a00ec0b2c9a6067d0012dff6df3764f7ba635b8",
-  "branch": "chore/refresh-work-checkpoint-20261107-0604",
+  "base_sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+  "branch": "feat/sirat-streaming-acceptance-20261109",
   "head_sha": null,
   "pull_request": null,
   "work_items": [
@@ -666,6 +666,13 @@
       "issue": 242,
       "pull_request": 650,
       "acceptance": "Preserve the historical-classics preset, add a distinct explicit-evidence true-story preset, and keep the result sets separate. Exact-head CI pending."
+    },
+    {
+      "id": "P0-244-SIRAT",
+      "title": "Publish verified Sirat Netflix premiere and audit November streaming coverage",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Sirat appears in the verified official subset and user-facing catalog with date, source, TMDB 1151272, poster, year, runtime and verification timestamps; previous enrichment remains intact; coverage limits are quantified."
     }
   ],
   "verification": [
@@ -973,23 +980,51 @@
       "status": "merged_ci_passed_production_ready",
       "sha": "7128a724e850b3e2dcf08aa2870afa5c2701c541",
       "note": "All 14 GitHub Actions checks passed at exact PR head b247d1d. Merged as 7128a72. Production deployment dpl_CD4YcLVh3afb9z5PrWT2bYW3edE6 is READY for 7128a72; canonical cinelva.vercel.app alias returned HTTP 200. Main workflow run 42130066674 published verified legacy Pages successfully."
+    },
+    {
+      "item": "Sirat streaming import",
+      "status": "passed_locally",
+      "base_sha": "b596002fcb68d8da281769a7a5532dfeebfdbf72",
+      "commands": [
+        "python -m unittest tests.test_import_official_streaming_snapshot tests.test_refresh_streaming_official",
+        "python scripts/quality_gate.py"
+      ],
+      "result": "17 focused Python tests passed; quality_gate.py pending final run after source-enrichment preservation change."
+    },
+    {
+      "item": "PR #757 CI optimization",
+      "status": "merged",
+      "sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+      "result": "Exact head e97cbc6; browser job rerun passed after a WebKit 503; merged with expected head."
+    },
+    {
+      "item": "PR #756 identity-safe poster enrichment",
+      "status": "in_progress",
+      "sha": "186f88476fb404b9cce44526a9d1467da497ead5",
+      "result": "Rebased onto main after #757; focused Python poster enrichment tests pass locally; exact-head Actions pending."
     }
   ],
   "deployment": {
     "status": "blocked",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "8e6cfc69fd0b5642bb8a669c50871808032be904",
+    "latest_main_sha": "5b894c873419ec2dacbd00a0bc91c343a4f51418",
+    "alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
+    "latest_deployment_sha": "d0c3c5b4a334fd7f80dd18d2c35107ca874ab049",
     "production_verified": false,
-    "reason": "Recent Vercel frontend/backend main deployments were rejected by the Hobby deployment quota; current public page is stale. The main GitHub Pages publication gate also failed on the stale CI receipt and will be retried only after the exact-source receipt is refreshed and checked."
+    "reason": "Alias remains on an older READY build; most recent production build reported ERROR. Diagnose source/build before any retry."
   },
   "blockers": [
     "Vercel Hobby daily deployment cap blocked recent Vercel frontend/backend deployments; preserve free tier. Main Pages publication still needs to pass after the proof refresh.",
     "No rights-verified official feeds for the 12 streaming services; no provider catalog is enabled, so exhaustive streaming coverage is unavailable.",
     "Physical iPhone Safari acceptance remains outstanding.",
     "Issue #585 administrator token/environment configuration requires owner-side private setup; no secret is stored or disclosed.",
-    "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance."
+    "Issue #529 demo branch preview has not met isolated My Cinelva fixture acceptance.",
+    "No rights-reviewed official premiere feeds for the 12 registered services; announcement discovery remains manual and non-exhaustive.",
+    "Latest Vercel API result reported production deployment ERROR for source d0c3c5b4, while GitHub main fetch returned b596002f; reconcile source SHA before production acceptance.",
+    "No rights-reviewed official premiere feeds for any of the 12 registered services; automatic premiere discovery remains unavailable and monthly records are non-exhaustive.",
+    "Vercel production alias still points to READY deployment for f6cd6c6; latest deployment reported ERROR for d0c3c5b4. GitHub main is 5b894c8; production is not current-main verified."
   ],
-  "next_action": "Validate live Vercel/Pages public routes in browser, feedback #585 end-to-end with owner-provisioned private admin token, poster and iPhone Safari acceptance; do not close remaining P0 issues without evidence.",
+  "next_action": "Recheck PR #756 exact-head checks at 186f884; repair/retry only diagnosed transient test failures. Create and validate the Sirat data/import PR. Confirm current Vercel source and build before any production attempt.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": "docs/operations/progress-ledger-20261021.json",
   "progress_metrics": {

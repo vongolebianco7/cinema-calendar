@@ -3008,7 +3008,16 @@
       }
     ]
   },
-  "open_pull_requests": [],
+  "open_pull_requests": [
+    {
+      "number": 780,
+      "title": "docs: checkpoint P0 after durable poster recovery",
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/780",
+      "branch": "docs/checkpoint-after-poster-persistence-20261109",
+      "head_sha": "3126f35878f82ef0a2e7dbf23314730370c8e81d",
+      "status": "open; exact-head CI pending"
+    }
+  ],
   "closed_pull_requests": [
     {
       "number": 646,
@@ -3512,6 +3521,12 @@
       "Verify Vercel Hobby quota live before one free-tier deployment attempt; do not upgrade or retry before quota clears.",
       "Continue official-feed rights audit for 12 providers. Configure only a free official feed with confirmed reuse permission; otherwise keep discovery marked unverified/manual and #244 open.",
       "Recheck production Sirât row and all target screens after deployment; close #244/#593 only after their complete acceptance criteria pass."
-    ]
+    ],
+    "checkpoint_pr": {
+      "number": 780,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/780",
+      "head_sha": "3126f35878f82ef0a2e7dbf23314730370c8e81d",
+      "status": "open"
+    }
   }
 }

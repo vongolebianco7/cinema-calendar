@@ -2245,5 +2245,8 @@
     }
   ],
   "count": 181,
-  "note": "Verified-source subset, not a complete subscription catalog"
+  "note": "Verified-source subset, not a complete subscription catalog",
+  "poster_enrichment": {
+    "source": "local catalog or TMDB Search API; unique exact-title matches only"
+  }
 }

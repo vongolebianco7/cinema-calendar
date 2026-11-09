@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T05:15:00Z",
+  "updated_at": "2026-11-09T13:11:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "c24e982726dbc5a017c2d634428df2247b63366b",
-  "branch": "fix/refresh-production-proof-and-streaming-checkpoint-20261109",
-  "head_sha": "9689929ec6cec9b4f379193efb1706d05a507ea4",
-  "pull_request": 767,
+  "base_sha": "a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a",
+  "branch": "fix/refresh-proof-after-streaming-multisource-20261109",
+  "head_sha": "dc54cd571138e61d6c64fff5aea89396aad6786c",
+  "pull_request": 772,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -3307,6 +3307,28 @@
       "Issue #244: no rights-reviewed official premiere feeds; automated premiere discovery disabled.",
       "Issue #593: verified poster gaps remain; production still stale.",
       "Physical iPhone Safari not tested."
+    ]
+  },
+  "latest_streaming_atomic_lkg_checkpoint_20261109": {
+    "main_sha": "a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a",
+    "test_pr": {
+      "number": 771,
+      "head_sha": "fe07e2aaed2a62601e88428ec06cf8f82652412c",
+      "merge_sha": "a0d7ac7e5a8677c89bf4819058b3e7b48af2e96a",
+      "tree_sha": "381df52cd94fbd2d830e14836de308f236d35a0d",
+      "all_seven_exact_head_checks_passed": true
+    },
+    "behavior": "An invalid later monthly source leaves the prior published snapshot byte-for-byte unchanged; corrected sources publish together.",
+    "prior_pages_publication_run": {
+      "id": 42612870101,
+      "result": "Failed closed because executable source digest changed after PR #768 proof; no publication artifact was deployed."
+    },
+    "proof_recovery_pr": 772,
+    "proof_recovery_head": "fe07e2aaed2a62601e88428ec06cf8f82652412c",
+    "vercel": "Hobby limit remains; no quota-limited deployment attempted.",
+    "blockers": [
+      "#244 premiere discovery remains disabled for all 12 registered services.",
+      "#593 poster gaps remain; canonical Vercel production is stale."
     ]
   }
 }

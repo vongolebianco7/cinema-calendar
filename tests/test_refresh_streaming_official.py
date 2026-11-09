@@ -84,11 +84,12 @@ class RefreshTest(unittest.TestCase):
             self.assertEqual(saved["poster"], old["poster"])
             self.assertEqual(saved["release_year"], 2020)
 
+            previous = output.read_bytes()
             source.write_text(json.dumps({"period": "2026-11", "movies": [{**entry, "tmdb_id": 999}]}), encoding="utf-8")
-            self.assertTrue(module.refresh(source, output))
-            saved = json.loads(output.read_text(encoding="utf-8"))["movies"][0]
-            self.assertNotIn("poster", saved)
-            self.assertNotIn("release_year", saved)
+            with self.assertRaisesRegex(ValueError, "Conflicting TMDB"):
+                module.refresh(source, output)
+            self.assertEqual(output.read_bytes(), previous,
+                             "A conflicting identity must preserve last-known-good bytes")
 
     def test_duplicate_enrichment_requires_matching_movie_identity(self):
         with tempfile.TemporaryDirectory() as directory:

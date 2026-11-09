@@ -23,6 +23,7 @@ active_node_tests=sorted(str(p.relative_to(ROOT)) for p in (ROOT/'tests').glob('
 commands.append(['python','-m','unittest','discover','-s','tests','-p','test_streaming_poster_enrichment.py'])
 run(['node','--test',*active_node_tests])
 run(['python','-m','unittest','tests.test_streaming_discovery_compliance'])
+run(['python','-m','unittest','discover','-s','tests','-p','test_streaming_sirat_catalog_regression.py'])
 run(['python','-m','unittest','tests.test_streaming_coverage_audit'])
 run(['python','-m','unittest','tests.test_atomic_streaming_publish'])
 run(['python','-m','unittest','tests.test_streaming_event_normalization'])

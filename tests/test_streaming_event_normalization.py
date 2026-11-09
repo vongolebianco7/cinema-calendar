@@ -47,6 +47,25 @@ class NormalizePremiereTests(unittest.TestCase):
                 [dict(BASE, source_url="https://sub.example.org/notice")],
                 APPROVED_HOSTS)
 
+    def test_rejects_non_object_entries_without_partial_import(self):
+        for invalid in (None, [], "Film", 42):
+            with self.subTest(entry=invalid), self.assertRaisesRegex(ValueError, "must be an object"):
+                normalize_premieres([dict(BASE), invalid], APPROVED_HOSTS)
+
+    def test_rejects_conflicting_reviewed_tmdb_identity_aliases(self):
+        for changes in (
+            {"tmdb_id": 123, "id": 456},
+            {"tmdb_id": 123, "id": "123"},
+            {"tmdb_id": 123, "tmdb": "https://www.themoviedb.org/movie/456"},
+            {"tmdb_id": 123, "tmdb": "https://www.themoviedb.org/tv/123"},
+        ):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, "Conflicting reviewed TMDB"):
+                normalize_premieres([dict(BASE, **changes)], APPROVED_HOSTS)
+
+    def test_accepts_consistent_reviewed_tmdb_identity_aliases(self):
+        row = dict(BASE, tmdb_id=123, id=123, tmdb="https://www.themoviedb.org/movie/123")
+        self.assertEqual(normalize_premieres([row], APPROVED_HOSTS)[0]["tmdb_id"], 123)
+
     def test_input_is_unchanged(self):
         item = dict(BASE)
         normalize_premieres([item], APPROVED_HOSTS)

@@ -16,6 +16,8 @@ def normalize_premieres(entries, approved_hosts_by_service):
     result = []
     seen = set()
     for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("Reviewed streaming entry must be an object")
         title = entry.get("title")
         service = entry.get("service")
         day = entry.get("date")
@@ -41,6 +43,15 @@ def normalize_premieres(entries, approved_hosts_by_service):
         tmdb_id = entry.get("tmdb_id")
         if tmdb_id is not None and (type(tmdb_id) is not int or tmdb_id <= 0):
             raise ValueError("TMDB movie ID must be a positive integer")
+        # Reject contradictory reviewed identity aliases before any catalog merge.
+        # An unreviewed standalone `id` is not promoted to a TMDB identity.
+        if tmdb_id is not None:
+            legacy_id = entry.get("id")
+            if legacy_id is not None and (type(legacy_id) is not int or legacy_id != tmdb_id):
+                raise ValueError("Conflicting reviewed TMDB movie IDs")
+            tmdb_url = entry.get("tmdb")
+            if tmdb_url is not None and tmdb_url != f"https://www.themoviedb.org/movie/{tmdb_id}":
+                raise ValueError("Conflicting reviewed TMDB movie URL")
         # An explicit ID is strong identity; without it use reviewed title and
         # release year so distinct remakes are not silently collapsed.
         year = entry.get("release_year")

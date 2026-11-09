@@ -114,7 +114,9 @@ def refresh(source=None, output=OUTPUT, today=None):
                 continue
             current_id = movie.get("tmdb_id") or movie.get("tmdbId") or movie.get("id")
             old_id = old.get("tmdb_id") or old.get("tmdbId") or old.get("id")
-            if current_id is None or old_id is None or str(current_id) != str(old_id):
+            if current_id is not None and old_id is not None and str(current_id) != str(old_id):
+                raise ValueError("Conflicting prior TMDB identity; existing output preserved")
+            if current_id is None or old_id is None:
                 continue
             for field in ("poster", "poster_path", "image", "image_url", "release_year", "year"):
                 value = old.get(field)

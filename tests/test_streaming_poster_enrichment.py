@@ -247,6 +247,7 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         start = workflow.index("- name: Commit only verified generated data")
         step = workflow[start:]
         self.assertIn("for attempt in 1 2 3", step)
+        self.assertIn("fetch-depth: 0", workflow)
         self.assertIn("git fetch origin main", step)
         self.assertIn("git rebase origin/main", step)
         self.assertIn("git push origin HEAD:main", step)

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T02:52:17Z",
+  "updated_at": "2026-11-09T02:56:22Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
@@ -3201,6 +3201,25 @@
       244,
       593
     ],
-    "safety": "No scraping, paid tier, secrets, destructive data migration, or edits to viewing/rating/bookmark records."
+    "safety": "No scraping, paid tier, secrets, destructive data migration, or edits to viewing/rating/bookmark records.",
+    "live_streaming_snapshot": {
+      "generated_at": "2026-11-09T00:13:20.801231+00:00",
+      "november_rows": 182,
+      "by_service": {
+        "ABEMA": 1,
+        "Apple TV+": 1,
+        "Disney+": 5,
+        "FOD": 15,
+        "Hulu": 34,
+        "Lemino": 1,
+        "Netflix": 17,
+        "Prime Video": 90,
+        "U-NEXT": 18
+      },
+      "rows_with_tmdb_id_and_poster": 158,
+      "rows_missing_one_or_both": 24,
+      "rate_with_id_and_poster": 0.8681,
+      "note": "Direct recount of current data/streaming.json. This differs from the manual-review coverage report (154/181 and 27 missing); reconcile report generation/scope before using a single rate."
+    }
   }
 }

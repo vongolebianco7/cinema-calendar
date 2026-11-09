@@ -5,31 +5,38 @@ from unittest.mock import patch
 from pathlib import Path
 
 from scripts.import_official_streaming_snapshot import import_snapshot
+from scripts import refresh_streaming_official
 
 
 class OfficialSnapshotImportTests(unittest.TestCase):
-    def test_curated_streaming_identity_repairs_use_unique_verified_local_tmdb_records(self):
-        snapshot = json.loads(Path("data/streaming-official-current.json").read_text(encoding="utf-8"))
+    def test_curated_streaming_identity_repairs_survive_official_refresh(self):
+        source_path = Path("data/streaming-2026-11-official-supplement.json")
+        source = json.loads(source_path.read_text(encoding="utf-8"))
         expected = {
             ("FOD", "愛人／ラ・マン"): (10995, 1992, "https://image.tmdb.org/t/p/w500/hi0NIBxA8ZBiVaUuwlVVMXxlGpA.jpg"),
             ("FOD", "糸"): (612511, 2020, "https://image.tmdb.org/t/p/w500/rMUDmntckRcONFQ26pq3knsj06v.jpg"),
             ("FOD", "オーバーフェンス"): (424995, 2016, "https://image.tmdb.org/t/p/w500/9xTncBPxGurkGg76spb42sWtGdK.jpg"),
         }
-        rows = {(row.get("service"), row.get("title")): row for row in snapshot["movies"]}
-        for key, (tmdb_id, release_year, poster) in expected.items():
-            with self.subTest(title=key[1]):
-                row = rows[key]
-                self.assertEqual(row["id"], tmdb_id)
-                self.assertEqual(row["tmdb_id"], tmdb_id)
-                self.assertEqual(row["release_year"], release_year)
-                self.assertEqual(row["tmdb"], f"https://www.themoviedb.org/movie/{tmdb_id}")
-                self.assertEqual(row["poster"], poster)
+        rows = {(row.get("service"), row.get("title")): row for row in source["movies"]}
+        with tempfile.TemporaryDirectory() as tmp:
+            generated = Path(tmp) / "streaming-official-current.json"
+            self.assertTrue(refresh_streaming_official.refresh(source=source_path, output=generated))
+            refreshed = json.loads(generated.read_text(encoding="utf-8"))
+            generated_rows = {(row.get("service"), row.get("title")): row for row in refreshed["movies"]}
+            for key, (tmdb_id, release_year, poster) in expected.items():
+                with self.subTest(title=key[1]):
+                    for row in (rows[key], generated_rows[key]):
+                        self.assertEqual(row["id"], tmdb_id)
+                        self.assertEqual(row["tmdb_id"], tmdb_id)
+                        self.assertEqual(row["release_year"], release_year)
+                        self.assertEqual(row["tmdb"], f"https://www.themoviedb.org/movie/{tmdb_id}")
+                        self.assertEqual(row["poster"], poster)
 
-        # Same-title remakes stay unresolved until the provider listing is disambiguated.
-        for title in ("カラーパープル", "ポルターガイスト"):
-            with self.subTest(title=title):
-                self.assertNotIn("id", rows[("Prime Video", title)])
-                self.assertIsNone(rows[("Prime Video", title)].get("poster"))
+            # Same-title remakes stay unresolved until the provider listing is disambiguated.
+            for title in ("カラーパープル", "ポルターガイスト"):
+                with self.subTest(title=title):
+                    self.assertNotIn("id", generated_rows[("Prime Video", title)])
+                    self.assertIsNone(generated_rows[("Prime Video", title)].get("poster"))
 
     def test_appends_and_only_fills_missing_fields_on_existing_entries(self):
         with tempfile.TemporaryDirectory() as tmp:

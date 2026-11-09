@@ -242,6 +242,18 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertLess(importer, enrichment)
         self.assertIn("TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}", workflow)
 
+    def test_daily_official_refresh_rebases_before_bounded_main_push_retry(self):
+        workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/refresh-official-streaming.yml").read_text()
+        start = workflow.index("- name: Commit only verified generated data")
+        step = workflow[start:]
+        self.assertIn("for attempt in 1 2 3", step)
+        self.assertIn("git fetch origin main", step)
+        self.assertIn("git rebase origin/main", step)
+        self.assertIn("git push origin HEAD:main", step)
+        self.assertIn("git rebase --abort", step)
+        self.assertIn("Unable to publish refreshed streaming data after three safe retries", step)
+        self.assertNotIn("git push --force", step)
+
 
 if __name__ == "__main__":
     unittest.main()

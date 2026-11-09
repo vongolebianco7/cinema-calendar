@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Attach TMDB poster URLs to official streaming announcements by exact title.
+"""Attach TMDB poster URLs to official streaming announcements by strict identity.
 
-The official source remains authoritative for date and service. This script
-adds artwork only when TMDB returns one distinct exact-title movie identity;
-ambiguous titles are left without a poster rather than guessed.
+The official source remains authoritative for date and service. Existing TMDB
+IDs are preferred. Without an ID, a title search is eligible only when the
+reviewed movie release year is also present and exactly matches one result.
+Ambiguous or yearless titles are left without a poster rather than guessed.
 """
 import json
 import os
@@ -118,17 +119,25 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             except Exception:
                 unresolved += 1
             continue
-        exact = {}
-        for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
-            exact.update(by_title.get(normalize(name), {}))
         expected_year = movie.get("release_year") or movie.get("year")
         if expected_year:
             expected_year = str(expected_year)
-            exact = {
-                movie_id: identity for movie_id, identity in exact.items()
-                if str(identity.get("release_year") or identity.get("year") or
-                       str(identity.get("release_date") or "")[:4]) == expected_year
-            }
+        else:
+            unresolved += 1
+            candidate_review.append({
+                "query": movie.get("title") or movie.get("original_title"),
+                "reason": "release year missing; strict title/year matching skipped",
+                "candidates": [],
+            })
+            continue
+        exact = {}
+        for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
+            exact.update(by_title.get(normalize(name), {}))
+        exact = {
+            movie_id: identity for movie_id, identity in exact.items()
+            if str(identity.get("release_year") or identity.get("year") or
+                   str(identity.get("release_date") or "")[:4]) == expected_year
+        }
         if len(exact) == 1:
             identity = next(iter(exact.values()))
             movie["poster"] = identity["poster"]

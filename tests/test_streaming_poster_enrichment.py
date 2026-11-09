@@ -54,6 +54,28 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(len(requests), 1)
         self.assertEqual(requests[0][0].full_url.split("?", 1)[0], enrichment.BASE)
 
+    def test_canonical_tmdb_url_without_id_uses_exact_details_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Ambiguous Remake", "tmdb": "https://www.themoviedb.org/movie/4321",
+              "date": "2026-11-01", "event": "streaming", "service": "Netflix"}],
+            {"id": 4321, "poster_path": "/reviewed.jpg"},
+        )
+        self.assertEqual(data["movies"][0]["id"], 4321)
+        self.assertEqual(data["movies"][0]["poster"], "https://image.tmdb.org/t/p/w500/reviewed.jpg")
+        self.assertEqual(requests[0][0].full_url.split("?", 1)[0], enrichment.DETAILS.format(4321))
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_conflicting_tmdb_url_and_id_fail_closed_without_request(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Ambiguous Remake", "id": 1234,
+              "tmdb": "https://www.themoviedb.org/movie/4321",
+              "date": "2026-11-01", "event": "streaming", "service": "Netflix"}],
+            {"id": 1234, "poster_path": "/wrong.jpg"},
+        )
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 1, 0))
+
     def test_reviewed_release_year_blocks_wrong_same_title_identity(self):
         data, requests, counts = self.run_fixture(
             [{"title": "The Example", "release_year": 2024, "date": "2026-11-01",

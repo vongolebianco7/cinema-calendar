@@ -137,7 +137,6 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 result = fetch_json(url, opener)
                 candidates = [movie for movie in result.get("results", [])
                               if normalize(title) in {normalize(movie.get("title")), normalize(movie.get("original_title"))}
-                              and valid_poster_path(movie.get("poster_path"))
                               and eligible_release_year(movie.get("release_date"), market_year)]
                 last_request = time.monotonic()
         except Exception as exc:

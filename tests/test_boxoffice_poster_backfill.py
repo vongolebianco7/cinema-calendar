@@ -68,6 +68,20 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
+    def test_posterless_same_title_candidate_still_makes_identity_ambiguous(self):
+        data, requests, result = self.run_rows(
+            [{"title": "同名作品", "gross": 10, "year": 1980}],
+            {"results": [
+                {"id": 1, "title": "同名作品", "release_date": "1979-01-01", "poster_path": "/one.jpg"},
+                {"id": 2, "title": "同名作品", "release_date": "1980-01-01", "poster_path": None},
+            ]},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertNotIn("poster", row)
+        self.assertNotIn("tmdbId", row)
+        self.assertEqual(result["ambiguous"], 1)
+        self.assertEqual(len(requests), 1)
+
     def test_compound_market_row_is_not_assigned_one_film_poster(self):
         data, requests, result = self.run_rows(
             [{"title": "映画A / 映画B", "gross": 15.5, "year": 1980}],

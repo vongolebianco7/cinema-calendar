@@ -94,4 +94,4 @@ Counts below are from the 182 current `data/streaming.json` rows for November. â
 | Lemino | 1 | 1 | 1 |
 | ABEMA | 1 | 1 | 1 |
 
-The coverage report's official-subset counts and direct current-data counts have different scope and do not reconcile (e.g., Hulu subset 33 vs 34 registered). Keep both explicitly labeled until its generator/source list is reconciled.
+The coverage report's official-subset counts and direct current-data field counts measure different things. Hulu has 33 cited official rows vs 34 catalog rows; retain this as one catalog row outside the cited subset, with source/date review still needed before treating it as verified.

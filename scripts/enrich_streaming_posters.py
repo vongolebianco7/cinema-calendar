@@ -19,17 +19,35 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 INPUT = ROOT / "data/streaming-official-current.json"
 CATALOG = ROOT / "data/movies.json"
+DIRECTOR_CATALOG = ROOT / "data/directors-mobile.json"
 BASE = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 LOCAL_TITLE_ALIASES = {
     # U-NEXT adds the descriptive "映画" prefix to its official title.
     "映画 仮面ライダーゼッツ さよならのミッション": "仮面ライダーゼッツ さよならのミッション",
+    # Amazon's official November 2026 announcement supplies the original
+    # title MADDEN. The reviewed local TMDB catalog stores that title in
+    # English, while the streaming row uses the Japanese transcription.
+    "マッデン": "Madden",
 }
 
 
 def normalize(value):
     return "".join(c for c in unicodedata.normalize("NFKC", str(value or "")).casefold() if c.isalnum())
+
+
+def _catalog_records(value):
+    """Yield poster-bearing TMDB movie records from supported catalog shapes."""
+    if isinstance(value, dict):
+        if (value.get("id") and value.get("poster") and
+                (value.get("title") or value.get("original_title"))):
+            yield value
+        for child in value.values():
+            yield from _catalog_records(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _catalog_records(child)
 
 
 def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, catalog_path=CATALOG):
@@ -43,17 +61,23 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
 
     # Reuse existing, locally reviewed TMDB identities where the announced
     # title has exactly one normalized match in the canonical movie catalog.
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8")) if catalog_path.exists() else {}
+    catalog_paths = [catalog_path]
+    if catalog_path.resolve() == CATALOG.resolve():
+        # Director credits are refreshed from TMDB movie-credit identities and
+        # contain reviewed IDs/posters absent from the compact movie catalog.
+        catalog_paths.append(DIRECTOR_CATALOG)
     by_title = {}
     by_id = {}
-    for item in catalog.get("movies", []) if isinstance(catalog, dict) else []:
-        if not isinstance(item, dict) or not item.get("id") or not item.get("poster"):
+    for current_path in catalog_paths:
+        if not current_path.exists():
             continue
-        by_id[str(item["id"])] = item
-        for name in (item.get("title"), item.get("original_title")):
-            key = normalize(name)
-            if key:
-                by_title.setdefault(key, {})[str(item["id"])] = item
+        catalog = json.loads(current_path.read_text(encoding="utf-8"))
+        for item in _catalog_records(catalog):
+            by_id[str(item["id"])] = item
+            for name in (item.get("title"), item.get("original_title")):
+                key = normalize(name)
+                if key:
+                    by_title.setdefault(key, {})[str(item["id"])] = item
 
     last_request = 0.0
     enriched = ambiguous = unresolved = 0
@@ -120,6 +144,44 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 unresolved += 1
             continue
         expected_year = movie.get("release_year") or movie.get("year")
+        reviewed_alias = LOCAL_TITLE_ALIASES.get(movie.get("title"))
+        if not expected_year and reviewed_alias:
+            # A source-reviewed alias may reuse a local identity without a
+            # release year only when the alias resolves to one TMDB ID across
+            # the entire canonical catalog. Generic same-title records keep
+            # requiring a reviewed year, so remakes cannot be guessed.
+            alias_matches = by_title.get(normalize(reviewed_alias), {})
+            if len(alias_matches) == 1:
+                identity = next(iter(alias_matches.values()))
+                movie["poster"] = identity["poster"]
+                movie["id"] = identity["id"]
+                movie["tmdb"] = identity.get("tmdb") or (
+                    "https://www.themoviedb.org/movie/" + str(identity["id"])
+                )
+                release_year = (identity.get("release_year") or identity.get("year") or
+                                str(identity.get("release_date") or "")[:4])
+                if str(release_year).isdigit() and 1888 <= int(release_year) <= 2100:
+                    movie["release_year"] = int(release_year)
+                enriched += 1
+                continue
+            if len(alias_matches) > 1:
+                ambiguous += 1
+                candidate_review.append({
+                    "query": reviewed_alias,
+                    "reason": "reviewed alias matched multiple local TMDB identities; no poster assigned",
+                    "candidates": [
+                        {
+                            "id": int(movie_id),
+                            "title": identity.get("title"),
+                            "original_title": identity.get("original_title"),
+                            "release_date": identity.get("release_date") or "",
+                            "tmdb_url": identity.get("tmdb") or
+                            "https://www.themoviedb.org/movie/" + str(movie_id),
+                        }
+                        for movie_id, identity in sorted(alias_matches.items())
+                    ],
+                })
+                continue
         if expected_year:
             expected_year = str(expected_year)
         else:

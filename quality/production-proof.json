@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "259ba18f3a67f2339f1386144045f2abf0387728",
-  "verified_at": "2026-11-10T15:28:26.417Z",
-  "note": "Exact-source CI receipt for PR #792. All four required PR workflows passed on source head 259ba18f3a67f2339f1386144045f2abf0387728: Autonomous quality gate run 42843450803, CINELVA smoke tests run 42843450748, Validate frontend run 42843450763, and Reproducible backend build run 42843450967. Six additional checks also passed: Check brand identity 42843450780, Full Python contract suite 42843450912, CINELVA mobile layout smoke test 42843450918, CINELVA backup safety 42843450592, Cinemap completeness scorecard 42843450916, and CINELVA continuous visual QA 42843450751. Grouped official Eiren rows remain explicit placeholders and never resolve to a misleading single-film poster. Production acceptance remains pending until the merged deployment is READY and the 1980 ranking is remeasured."
+  "head_sha": "384d94ded0181ab4efab7e90f170b28cadd8a3b2",
+  "verified_at": "2026-11-11T00:34:00.000Z",
+  "note": "Exact-source CI receipt for PR #792 source head 384d94ded0181ab4efab7e90f170b28cadd8a3b2. All four required PR workflows passed on this exact source head: Autonomous quality gate run 42845467168, CINELVA smoke tests run 42845466792, Validate frontend run 42845466795, and Reproducible backend build run 42845466993. Seven additional checks also passed on the same source head: CINELVA backup safety 42845467188, Cinemap completeness scorecard 42845466951, Scorecard contract 42845466732, CINELVA mobile layout smoke test 42845466902, Check brand identity 42845467015, Full Python contract suite 42845466789, and CINELVA continuous visual QA 42845466933. Source head includes the fail-closed handling for official grouped box-office rows; no single-film artwork is assigned to a grouped row. Production acceptance remains pending until the merged deployment is READY and the public 1980 ranking is remeasured."
 }

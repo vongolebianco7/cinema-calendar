@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BOXOFFICE = ROOT / "data/boxoffice.json"
 MOVIES = ROOT / "data/movies.json"
 DIRECTORS = ROOT / "data/directors-mobile.json"
+RANKINGS = ROOT / "data/rankings"
 SEARCH = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
@@ -108,12 +109,16 @@ def local_catalog_records(data, catalog_paths):
     for path in catalog_paths:
         if not path.exists():
             continue
-        catalog = json.loads(path.read_text(encoding="utf-8"))
-        if path.name == "directors-mobile.json":
-            for director in (catalog.get("directors") or {}).values():
-                yield from (director.get("works") or [])
-        else:
-            yield from (catalog.get("movies") or [])
+        files = sorted(path.glob("*.json")) if path.is_dir() else [path]
+        for catalog_path in files:
+            catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+            if catalog_path.name == "directors-mobile.json":
+                for director in (catalog.get("directors") or {}).values():
+                    yield from (director.get("works") or [])
+            elif isinstance(catalog.get("items"), list):
+                yield from catalog["items"]
+            else:
+                yield from (catalog.get("movies") or [])
 
 
 def reuse_verified_local_posters(data, now, catalog_paths):
@@ -160,7 +165,7 @@ def reuse_verified_local_posters(data, now, catalog_paths):
 
 
 def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=0.35,
-             now=None, limit=MAX_DAILY_LOOKUPS, catalog_paths=(MOVIES, DIRECTORS)):
+             now=None, limit=MAX_DAILY_LOOKUPS, catalog_paths=(MOVIES, DIRECTORS, RANKINGS)):
     api_key = os.environ.get("TMDB_API_KEY", "") if api_key is None else api_key
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict) or not isinstance(data.get("by_year"), dict):

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T01:28:35.197Z",
+  "generated_at": "2026-11-10T01:44:54.322Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-10T00:00:01.477Z",
+      "source_observed_at": "2026-11-10T01:32:17.544Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 1785,
-        "fresh": 1263,
-        "stale": 522,
+        "total": 1847,
+        "fresh": 1565,
+        "stale": 282,
         "unknown": 0
       }
     },
@@ -83,7 +83,7 @@
       "status": "automated",
       "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
       "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
-      "source_observed_at": "2026-11-10T01:27:26.974Z",
+      "source_observed_at": "2026-11-10T01:44:53.026Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
@@ -111,13 +111,13 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-09T23:58:39.625Z",
+      "source_observed_at": "2026-11-10T01:31:10.664Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "configured calendar/discovery catalogue; poster fallback remains explicit",
-      "record_count": 1380
+      "record_count": 1381
     },
     {
       "id": "awards",

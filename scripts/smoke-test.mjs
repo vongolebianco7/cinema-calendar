@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 const read=p=>fs.readFileSync(p,'utf8');
-const pages=['index.html','discover.html','rankings.html','search.html','experience.html','theaters.html','my-cinemap.html','my-cinelva/index.html'];
+const pages=['index.html','discover.html','rankings.html','search.html','experience.html','vivant-diagnosis.html','theaters.html','my-cinemap.html','my-cinelva/index.html'];
 let failures=0,checks=0;
 function check(ok,message){checks++;if(!ok){console.error('FAIL '+message);failures++;}}
 for(const page of pages){

@@ -26,6 +26,7 @@ on:
       - "tests/cinelva-search-rating-theme-browser.cjs"
       - "tests/cinelva-calendar-record-entry-browser.cjs"
       - "tests/cinelva-route-audit-browser.cjs"
+      - "tests/cinelva-vivant-diagnosis*"
       - "tests/cinelva-theater-quality-browser.cjs"
       - "tests/cinelva-now-playing-browser.cjs"
       - "tests/cinelva-source-status-browser.cjs"
@@ -185,6 +186,8 @@ jobs:
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-cross-screen-browser.cjs
           fi
           if [ "${{ matrix.shard }}" = '3' ]; then
+          NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-vivant-diagnosis-browser.cjs
+          CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-vivant-diagnosis-browser.cjs
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-calendar-ranking-rating-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-quick-rate-browser.cjs
@@ -198,10 +201,10 @@ jobs:
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
           # The same broad route/theme audit is already run by the parallel
           # continuous-visual-qa workflow (Chromium + WebKit). Keep the extra
-          # four-viewport route audit on main pushes and scheduled full runs;
+          # four-viewport route audit on main pushes;
           # running both in every PR duplicates hundreds of page loads and can
           # hit the per-test 240-second limit on WebKit.
-          if [ "$GITHUB_EVENT_NAME" != 'pull_request' ]; then
+          if [ "$GITHUB_REF" = 'refs/heads/main' ]; then
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
           fi

@@ -95,6 +95,17 @@
       ]
     },
     {
+      "path": "vivant-diagnosis.html",
+      "surface": "public",
+      "purpose": "unofficial VIVANT fan diagnosis and film recommendations",
+      "data_owner": "local curated quiz and movie catalog",
+      "count_contract": "8 questions, one result, three recommendations",
+      "primary_cta": "complete diagnosis",
+      "source_refs": [
+        "editorial"
+      ]
+    },
+    {
       "path": "revivals.html",
       "surface": "public",
       "purpose": "revival releases",

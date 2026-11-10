@@ -174,6 +174,23 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(counts, (1, 0, 0))
         self.assertEqual(requests, [])
 
+    def test_nested_director_catalog_shape_is_supported(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Example", "release_year": 2024, "date": "2026-11-18",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"directors": {"7": {"works": [
+                {"id": 4321, "title": "Example", "year": 2024,
+                 "poster": "https://image.tmdb.org/t/p/w342/example.jpg"}
+            ]}}},
+            api_key="",
+        )
+        self.assertEqual(data["movies"][0]["id"], 4321)
+        self.assertEqual(data["movies"][0]["poster"],
+                         "https://image.tmdb.org/t/p/w342/example.jpg")
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (1, 0, 0))
+
     def test_reviewed_tmdb_id_fetches_poster_from_its_movie_record(self):
         data, requests, counts = self.run_fixture(
             [{"title": "DUNE/デューン 砂の惑星PART2", "tmdb_id": 693134, "date": "2026-11-02", "event": "streaming", "service": "Prime Video"}],
@@ -270,6 +287,40 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertNotIn("poster", data["movies"][0])
         self.assertEqual(requests, [])
         self.assertEqual(counts, (0, 0, 1))
+
+    def test_reviewed_alias_reuses_one_unique_local_identity_without_year(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "マッデン", "date": "2026-11-18",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [{"id": 1131943, "title": "Madden", "year": 2026,
+                                  "poster": "https://image.tmdb.org/t/p/w342/madden.jpg"}]},
+            api_key="",
+        )
+        movie = data["movies"][0]
+        self.assertEqual(movie["id"], 1131943)
+        self.assertEqual(movie["release_year"], 2026)
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w342/madden.jpg")
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_reviewed_alias_with_multiple_local_ids_fails_closed(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "マッデン", "date": "2026-11-18",
+              "event": "streaming", "service": "Prime Video"}],
+            {"results": []},
+            catalog={"movies": [
+                {"id": 1, "title": "Madden", "year": 1999,
+                 "poster": "https://image.tmdb.org/t/p/w342/old.jpg"},
+                {"id": 2, "title": "Madden", "year": 2026,
+                 "poster": "https://image.tmdb.org/t/p/w342/new.jpg"},
+            ]},
+            api_key="",
+        )
+        self.assertNotIn("id", data["movies"][0])
+        self.assertNotIn("poster", data["movies"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(counts, (0, 1, 0))
 
     def test_daily_official_refresh_rechecks_existing_streaming_poster_gaps(self):
         workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/refresh-official-streaming.yml").read_text()

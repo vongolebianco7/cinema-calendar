@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BOXOFFICE = ROOT / "data/boxoffice.json"
 MOVIES = ROOT / "data/movies.json"
+DIRECTORS = ROOT / "data/directors-mobile.json"
 SEARCH = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
@@ -40,6 +41,10 @@ def grouped_title(title):
 
 def valid_poster_path(value):
     return isinstance(value, str) and value.startswith("/") and not value.startswith("//")
+
+
+def valid_tmdb_poster_url(value):
+    return isinstance(value, str) and value.startswith("https://image.tmdb.org/t/p/")
 
 
 def eligible_release_year(release_date, market_year):
@@ -97,20 +102,82 @@ def fetch_json(url, opener):
         return json.load(response)
 
 
+def local_catalog_records(data, catalog_paths):
+    """Yield already verified TMDB records without making another API request."""
+    yield from (data.get("all_time") or [])
+    for path in catalog_paths:
+        if not path.exists():
+            continue
+        catalog = json.loads(path.read_text(encoding="utf-8"))
+        if path.name == "directors-mobile.json":
+            for director in (catalog.get("directors") or {}).values():
+                yield from (director.get("works") or [])
+        else:
+            yield from (catalog.get("movies") or [])
+
+
+def reuse_verified_local_posters(data, now, catalog_paths):
+    """Reuse a unique exact-title, release-window TMDB identity from local data."""
+    indexed = {}
+    for movie in local_catalog_records(data, catalog_paths):
+        identifier = movie.get("tmdbId") or movie.get("tmdb_id") or movie.get("id")
+        poster = movie.get("poster")
+        if not identifier or not str(identifier).isdigit() or not valid_tmdb_poster_url(poster):
+            continue
+        for title in {movie.get("title"), movie.get("original_title")}:
+            key = normalize(title)
+            if key:
+                indexed.setdefault(key, {})[str(identifier)] = movie
+
+    checked_at = now.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+    enriched = 0
+    for market_year, rows in (data.get("by_year") or {}).items():
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if not isinstance(row, dict) or row.get("poster") or grouped_title(row.get("title")):
+                continue
+            candidates = {}
+            for identifier, movie in indexed.get(normalize(row.get("title")), {}).items():
+                release = movie.get("date") or movie.get("release_date") or movie.get("year")
+                if eligible_release_year(release, market_year):
+                    candidates[identifier] = movie
+            if len(candidates) != 1:
+                continue
+            identifier, movie = next(iter(candidates.items()))
+            row.update({
+                "tmdbId": int(identifier),
+                "original_title": movie.get("original_title") or movie.get("title"),
+                "tmdb_release_date": movie.get("date") or movie.get("release_date") or str(movie.get("year") or ""),
+                "poster": movie["poster"],
+                "identity_source": movie.get("identity_source") or movie.get("source_url") or f"https://www.themoviedb.org/movie/{identifier}",
+                "identity_checked_at": checked_at,
+                "identity_match": "verified_local_exact_title_and_release_year_window",
+                "poster_checked_at": checked_at,
+            })
+            enriched += 1
+    return enriched
+
+
 def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=0.35,
-             now=None, limit=MAX_DAILY_LOOKUPS):
+             now=None, limit=MAX_DAILY_LOOKUPS, catalog_paths=(MOVIES, DIRECTORS)):
     api_key = os.environ.get("TMDB_API_KEY", "") if api_key is None else api_key
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict) or not isinstance(data.get("by_year"), dict):
         raise ValueError("Invalid box-office dataset; refusing to modify it")
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    local_enriched = reuse_verified_local_posters(data, now, catalog_paths)
     if not api_key:
-        return {"enriched": 0, "ambiguous": 0, "unresolved": 0, "grouped": sum(
+        if local_enriched:
+            atomic_write(path, data)
+        return {"enriched": local_enriched, "local_enriched": local_enriched,
+                "ambiguous": 0, "unresolved": 0, "grouped": sum(
             grouped_title(row.get("title")) for rows in data["by_year"].values() if isinstance(rows, list)
             for row in rows if isinstance(row, dict) and not row.get("poster"))}
 
-    now = now or datetime.datetime.now(datetime.timezone.utc)
     checked_at = now.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
-    enriched = ambiguous = unresolved = 0
+    enriched = local_enriched
+    ambiguous = unresolved = 0
     last_request = 0.0
     for _, index, market_year, row in candidate_rows(data, now, limit):
         title = str(row.get("title") or "").strip()
@@ -176,7 +243,8 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
         atomic_write(path, data)
     grouped = sum(grouped_title(row.get("title")) for rows in data["by_year"].values()
                   if isinstance(rows, list) for row in rows if isinstance(row, dict) and not row.get("poster"))
-    return {"enriched": enriched, "ambiguous": ambiguous, "unresolved": unresolved, "grouped": grouped}
+    return {"enriched": enriched, "local_enriched": local_enriched,
+            "ambiguous": ambiguous, "unresolved": unresolved, "grouped": grouped}
 
 
 if __name__ == "__main__":

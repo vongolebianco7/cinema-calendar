@@ -9,3 +9,11 @@ test('calendar ingestion uses explicit TMDB identity even without the legacy id 
 test('explicit TMDB identity takes priority over an unrelated internal numeric ID',async()=>{
  const {run,calls}=importer();await run({id:12,tmdbId:1276849,title:'スオミの話をしよう'});assert.equal(calls[0].where.tmdbId,1276849);
 });
+test('movie sync preserves a stored poster when the incoming snapshot has none',async()=>{
+ const {run,calls}=importer();await run({tmdbId:1276849,title:'スオミの話をしよう',poster:null});
+ assert.equal(Object.hasOwn(calls[0].update,'posterUrl'),false);
+});
+test('movie sync still refreshes a stored poster when the source supplies a valid one',async()=>{
+ const {run,calls}=importer();await run({tmdbId:1276849,title:'スオミの話をしよう',poster:'refreshed.jpg'});
+ assert.equal(calls[0].update.posterUrl,'refreshed.jpg');
+});

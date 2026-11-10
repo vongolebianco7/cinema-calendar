@@ -85,7 +85,8 @@ async function upsertMovie(item: MovieJson) {
       update: {
         title: item.title,
         originalTitle: item.original_title || null,
-        posterUrl: item.poster || null,
+        // An incomplete source snapshot must not erase a previously verified poster.
+        ...(item.poster ? { posterUrl: item.poster } : {}),
         overview: item.overview || null,
         score: item.score ?? null,
         votes: item.votes ?? null,

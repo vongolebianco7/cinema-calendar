@@ -1,0 +1,54 @@
+name: Production poster acceptance
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/production-poster-acceptance.mjs
+      - tests/cinelva-production-poster-acceptance-contract.test.cjs
+      - .github/workflows/production-poster-acceptance.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-poster-acceptance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rendered-posters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: chromium
+            width: 1280
+          - browser: webkit
+            width: 390
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser tools
+        run: |
+          npm install --no-save --no-package-lock playwright@1.59.0
+          npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Check acceptance script syntax
+        run: |
+          node --check scripts/production-poster-acceptance.mjs
+          node --test tests/cinelva-production-poster-acceptance-contract.test.cjs
+      - name: Audit canonical production poster rendering
+        env:
+          CINELVA_BROWSER: ${{ matrix.browser }}
+          CINELVA_VIEWPORT_WIDTH: ${{ matrix.width }}
+          CINELVA_BASE_URL: https://cinelva.vercel.app
+        run: node scripts/production-poster-acceptance.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-poster-acceptance-${{ matrix.browser }}-${{ matrix.width }}
+          path: artifacts/production-poster-acceptance/
+          retention-days: 14

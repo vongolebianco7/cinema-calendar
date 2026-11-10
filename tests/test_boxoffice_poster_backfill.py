@@ -143,6 +143,73 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(requests, [])
         self.assertEqual(result["local_enriched"], 1)
 
+    def test_reuses_unique_verified_ranking_poster(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        ranking = Path(tmp.name) / "jp-action-1990.json"
+        path.write_text(json.dumps({"by_year": {"1990": [{"title": "ダイハード2"}]},
+                                    "all_time": []}), encoding="utf-8")
+        ranking.write_text(json.dumps({"items": [{
+            "id": 1573,
+            "title": "ダイ・ハード2",
+            "year": "1990",
+            "poster": "https://image.tmdb.org/t/p/w342/die-hard-2.jpg",
+            "tmdb": "https://www.themoviedb.org/movie/1573",
+        }]}), encoding="utf-8")
+
+        result = backfill.backfill(
+            path, api_key="", now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[ranking],
+        )
+
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1990"][0]
+        self.assertEqual(row["tmdbId"], 1573)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w342/die-hard-2.jpg")
+        self.assertEqual(row["identity_match"], "verified_local_exact_title_and_release_year_window")
+        self.assertEqual(result["local_enriched"], 1)
+
+    def test_reuses_verified_posters_from_ranking_directory(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        rankings = Path(tmp.name) / "rankings"
+        rankings.mkdir()
+        path.write_text(json.dumps({"by_year": {"2004": [{"title": "パッション"}]},
+                                    "all_time": []}), encoding="utf-8")
+        (rankings / "foreign-drama-2000.json").write_text(json.dumps({"items": [{
+            "id": 615,
+            "title": "パッション",
+            "year": "2004",
+            "poster": "https://image.tmdb.org/t/p/w342/passion.jpg",
+            "tmdb": "https://www.themoviedb.org/movie/615",
+        }]}), encoding="utf-8")
+
+        result = backfill.backfill(
+            path, api_key="", now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[rankings],
+        )
+
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2004"][0]
+        self.assertEqual(row["tmdbId"], 615)
+        self.assertEqual(result["local_enriched"], 1)
+
+    def test_default_catalogs_recover_existing_ranking_identity(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1990": [{"title": "ダイハード2"}]},
+                                    "all_time": []}), encoding="utf-8")
+
+        result = backfill.backfill(
+            path, api_key="", now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+        )
+
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1990"][0]
+        self.assertEqual(row["tmdbId"], 1573)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w342/8mICv4xxiIBwIOnzJrAkGnsDWUB.jpg")
+        self.assertEqual(result["local_enriched"], 1)
+
     def test_local_same_title_candidates_remain_unresolved(self):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)

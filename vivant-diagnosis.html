@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0c0f">
+  <title>VIVANT診断 | Cinelva</title>
+  <meta name="description" content="8つの質問からVIVANTの世界での所属と役割を診断。あなたに合う有名映画3本も紹介します。">
+  <meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png">
+  <link rel="icon" href="assets/cinelva_original_colors_transparent.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/theme.css">
+  <script src="js/theme.js?v=20261023-frame-2"></script>
+  <style>
+    :root{color-scheme:dark;--bg:#090909;--panel:#111;--panel2:#171717;--text:#f4f4f4;--muted:#999;--line:#292929;--blue:#38a9ff;--gold:#e5b64d;--green:#37d08b}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}.wrap{max-width:900px;margin:auto;padding:0 18px}
+    .gTop{position:sticky;top:0;z-index:20;background:rgba(9,9,9,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.gNav{height:62px;max-width:1180px;margin:auto;padding:0 18px;display:flex;align-items:center;gap:12px}.gBrand{display:flex;align-items:center;gap:7px;margin-right:auto;font-size:18px;font-weight:800}.gBrand img{height:31px;width:auto}.gNav form{display:flex;flex:0 1 min(360px,44vw);min-width:0;margin-left:auto}.gSearch{width:100%;min-width:0;height:36px;border:1px solid #333;border-radius:18px;background:#111;color:var(--text);padding:0 13px}.backLink{font-size:12px;color:#bbb;border:1px solid #333;border-radius:999px;padding:8px 12px}
+    main{padding-bottom:max(50px,env(safe-area-inset-bottom))}.hero{padding:38px 0 24px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--gold);font-weight:800}.hero h1{margin:10px 0;font-size:clamp(32px,8vw,52px);line-height:1.04;letter-spacing:-.04em}.hero p{max-width:650px;color:var(--muted);line-height:1.75;margin:0;font-size:14px}.fanNote{margin-top:15px;border-left:2px solid #555;padding:8px 12px;color:#888;font-size:11px;line-height:1.6}
+    .quiz{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#121416,#0d0d0d);padding:clamp(18px,5vw,32px);min-height:330px}.quizTop{display:flex;align-items:center;justify-content:space-between;gap:14px;color:#999;font-size:12px}.progress{height:3px;background:#282828;border-radius:99px;margin:13px 0 26px;overflow:hidden}.progress span{display:block;height:100%;background:var(--gold);transition:width .2s}.question{font-size:clamp(21px,5vw,29px);line-height:1.35;margin:0 0 20px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice{min-height:58px;text-align:left;border:1px solid #343434;border-radius:9px;background:#111;padding:13px 15px;font-size:14px;line-height:1.5;cursor:pointer;touch-action:manipulation}.choice:hover,.choice:focus-visible{border-color:#888;outline:2px solid #ffffff22;outline-offset:1px}.choice[aria-pressed="true"]{border-color:var(--gold);background:#211c10;color:#fff4d2}.quizActions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}.stepHint{font-size:11px;color:#777}.action{min-height:44px;border:1px solid #444;border-radius:7px;background:#171717;padding:10px 16px;font-weight:700;cursor:pointer}.action.primary{color:#101010;background:var(--gold);border-color:var(--gold)}.action:disabled{opacity:.4;cursor:not-allowed}.action:focus-visible{outline:3px solid #fff;outline-offset:2px}
+    .result{margin-top:24px}.resultHead{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:12px}.resultHead h2{margin:0;font-size:24px}.resultHead p{margin:0;color:#888;font-size:11px}.identity{border:1px solid #343434;border-radius:12px;padding:20px;background:radial-gradient(ellipse at top right,#282315 0,#121212 55%)}.identityGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.identityBlock span{display:block;color:#888;font-size:11px;margin-bottom:6px}.identityBlock strong{font-size:clamp(21px,5vw,30px);line-height:1.2}.identityReason{border-top:1px solid #343434;margin:18px 0 0;padding-top:14px;color:#ddd;font-size:14px;line-height:1.7}.identityReason b{display:block;color:#999;font-size:11px;font-weight:600;margin-bottom:5px}
+    .movieHead{margin:26px 0 12px}.movieHead h2{font-size:21px;margin:0}.movieHead p{font-size:12px;line-height:1.6;color:#888;margin:6px 0 0}.movies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.movie{border:1px solid #2d2d2d;border-radius:10px;padding:15px;background:#101010;min-height:150px;display:flex;flex-direction:column}.movieNum{font-size:10px;color:var(--gold);letter-spacing:.12em}.movie h3{font-size:17px;line-height:1.4;margin:12px 0 6px}.genre{color:#999;font-size:11px;margin-bottom:auto}.movie .replace{margin-top:18px;min-height:40px;border:1px solid #3b3b3b;background:#171717;border-radius:6px;font-size:11px;padding:8px;cursor:pointer}.movie .replace:hover{border-color:#888}.resultActions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}.resultActions small{color:#777;font-size:10px;line-height:1.5}.hidden{display:none!important}.siteFooter{margin-top:30px;padding:16px 0 35px;border-top:1px solid var(--line);font-size:10px;line-height:1.7;color:#777}
+    @media(max-width:620px){.gNav{height:56px;padding:0 12px;gap:8px}.gBrand img{height:27px}.gNav form{width:auto;flex:1}.gSearch{width:100%;min-width:0;height:34px;font-size:12px}.backLink{font-size:10px;padding:8px}.wrap{padding:0 14px}.hero{padding:26px 0 18px}.choices{grid-template-columns:1fr;gap:8px}.choice{min-height:54px}.quiz{min-height:360px;padding:18px}.quizActions{margin-top:19px}.identityGrid{gap:12px}.identity{padding:16px}.movies{grid-template-columns:1fr}.movie{min-height:0;display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start;padding:13px}.movieNum{grid-row:1 / span 2;padding-top:4px}.movie h3{margin:0;font-size:16px}.genre{grid-column:2;margin-top:4px}.movie .replace{grid-column:1 / -1;margin-top:12px}.resultHead{display:block}.resultHead p{margin-top:5px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<header class="gTop"><div class="gNav">
+  <a class="gBrand" href="index.html" aria-label="Cinelva カレンダーに戻る"><img src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span>Cinelva</span></a>
+  <form action="search.html" method="get"><input class="gSearch" type="search" name="search" placeholder="作品を検索" aria-label="作品を検索"></form>
+  <a class="backLink" href="index.html">カレンダー</a>
+</div></header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="pageTitle">
+    <span class="eyebrow">MOVIE DNA / SPECIAL</span>
+    <h1 id="pageTitle">VIVANT診断</h1>
+    <p>8つの選択から、VIVANTの世界でのあなたの所属と役割を診断します。最後に、回答の雰囲気から有名映画を3本選びます。</p>
+    <div class="fanNote">この診断はTBS日曜劇場『VIVANT』を題材にした非公式ファン企画です。TBSテレビおよび関係各社とは関係ありません。</div>
+  </section>
+  <section id="quiz" class="quiz" aria-label="VIVANT診断">
+    <div class="quizTop"><span id="questionCount">質問 1 / 8</span><span>回答はこの画面内だけで使います</span></div>
+    <div class="progress" role="progressbar" aria-label="診断の進み具合" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span id="progressBar"></span></div>
+    <div id="questionContent" aria-live="polite"></div>
+    <div class="quizActions"><button type="button" id="backButton" class="action" disabled>戻る</button><span class="stepHint" id="stepHint">選択肢をひとつ選んでください</span><button type="button" id="nextButton" class="action primary" disabled>次へ</button></div>
+  </section>
+  <section id="result" class="result hidden" aria-live="polite"></section>
+  <footer class="siteFooter">VIVANTはTBSテレビのテレビドラマ作品です。本企画はファンによる非公式の診断コンテンツで、権利者からの公認・協力を受けたものではありません。映画の推薦は診断結果に基づく独自の選定です。</footer>
+</main>
+<script src="js/vivant-diagnosis.js"></script>
+<script>
+(() => {
+  const data = window.VivantDiagnosis;
+  const answers = Array(data.QUESTIONS.length).fill(null);
+  const watched = new Set();
+  let index = 0;
+  const qContent = document.getElementById('questionContent');
+  const qCount = document.getElementById('questionCount');
+  const progress = document.querySelector('.progress');
+  const progressBar = document.getElementById('progressBar');
+  const next = document.getElementById('nextButton');
+  const back = document.getElementById('backButton');
+  const result = document.getElementById('result');
+  const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  function drawQuestion() {
+    const question = data.QUESTIONS[index];
+    qCount.textContent = `質問 ${index + 1} / ${data.QUESTIONS.length}`;
+    progress.setAttribute('aria-valuenow', String(index));
+    progressBar.style.width = `${(index / data.QUESTIONS.length) * 100}%`;
+    qContent.replaceChildren();
+    const title = document.createElement('h2');
+    title.className = 'question'; title.textContent = question.prompt;
+    qContent.append(title);
+    const choices = document.createElement('div'); choices.className = 'choices';
+    choices.setAttribute('role', 'group'); choices.setAttribute('aria-label', `質問 ${index + 1} の選択肢`);
+    question.choices.forEach(choice => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'choice';
+      button.textContent = choice.label; button.setAttribute('aria-pressed', String(answers[index] === choice.id));
+      button.addEventListener('click', () => { answers[index] = choice.id; drawQuestion(); });
+      choices.append(button);
+    });
+    qContent.append(choices);
+    back.disabled = index === 0;
+    next.disabled = !answers[index];
+    next.textContent = index === data.QUESTIONS.length - 1 ? '結果を見る' : '次へ';
+  }
+  function drawResult() {
+    const profile = data.getResult(answers);
+    const picks = data.recommendMovies(answers, [...watched]);
+    result.classList.remove('hidden');
+    result.replaceChildren();
+    const head = document.createElement('div'); head.className = 'resultHead';
+    head.innerHTML = '<h2>診断結果</h2><p>回答の傾向から選んだ結果です</p>'; result.append(head);
+    const identity = document.createElement('section'); identity.className = 'identity';
+    identity.innerHTML = `<div class="identityGrid"><div class="identityBlock"><span>所属組織</span><strong>${escapeHtml(profile.organization)}</strong></div><div class="identityBlock"><span>役割</span><strong>${escapeHtml(profile.role)}</strong></div></div><p class="identityReason"><b>この結果になった理由</b>${escapeHtml(profile.reason)}</p>`;
+    result.append(identity);
+    const movieHead = document.createElement('div'); movieHead.className = 'movieHead'; movieHead.innerHTML = '<h2>あなたにすすめる映画 3本</h2><p>ジャンルがかたよらないように選びました。鑑賞済みの作品は入れ替えられます。</p>'; result.append(movieHead);
+    const cards = document.createElement('div'); cards.className = 'movies'; cards.setAttribute('aria-label', 'おすすめ映画');
+    picks.forEach((movie, movieIndex) => {
+      const article = document.createElement('article'); article.className = 'movie';
+      article.innerHTML = `<span class="movieNum">PICK 0${movieIndex + 1}</span><h3>${escapeHtml(movie.title)}</h3><span class="genre">${escapeHtml(movie.genre)}</span>`;
+      const replace = document.createElement('button'); replace.type = 'button'; replace.className = 'replace'; replace.textContent = '鑑賞済みなので入れ替える';
+      replace.setAttribute('aria-label', `${movie.title}を鑑賞済みにして別の映画に入れ替える`);
+      replace.addEventListener('click', () => { watched.add(movie.id); drawResult(); });
+      article.append(replace); cards.append(article);
+    });
+    result.append(cards);
+    const actions = document.createElement('div'); actions.className = 'resultActions';
+    actions.innerHTML = '<small>回答と鑑賞済み指定は保存されず、このページを閉じると消去されます。</small>';
+    const restart = document.createElement('button'); restart.type = 'button'; restart.className = 'action'; restart.textContent = 'もう一度診断する';
+    restart.addEventListener('click', () => { answers.fill(null); watched.clear(); index = 0; result.classList.add('hidden'); drawQuestion(); document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'}); });
+    actions.append(restart); result.append(actions);
+    progress.setAttribute('aria-valuenow', String(data.QUESTIONS.length)); progressBar.style.width = '100%';
+    result.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  back.addEventListener('click', () => { if (index > 0) { index -= 1; drawQuestion(); } });
+  next.addEventListener('click', () => { if (!answers[index]) return; if (index === data.QUESTIONS.length - 1) drawResult(); else { index += 1; drawQuestion(); } });
+  drawQuestion();
+})();
+</script>
+</body>
+</html>

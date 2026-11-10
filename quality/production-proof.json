@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d5008cc31beecfff56aed74b383d7802310da6ba",
-  "verified_at": "2026-11-10T14:48:00.000Z",
-  "note": "Receipt checkpoint for PR #791 exact executable source head d5008cc31beecfff56aed74b383d7802310da6ba. All four publication-proof workflows passed on that exact head: Validate frontend run 42836805941, Autonomous quality gate 42836806067, CINELVA smoke tests 42836805978, and Reproducible backend build 42836806229. Additional continuous visual QA, completeness scorecard, full Python contract suite, and mobile layout checks also passed: 42836805974, 42836806097, 42836806092, and 42836807285. The source change reuses a yearless reviewed title alias only when it resolves to one unique poster-bearing local TMDB identity; multiple matches fail closed and generic yearless titles remain untouched. This receipt commit includes one generated streaming-poster restoration for Prime Video's Madden (TMDB 1131943); existing posters, viewing records, ratings, and bookmarks are unchanged. Production acceptance remains pending and Playwright WebKit is not physical iPhone Safari evidence."
+  "head_sha": "f9aba37d5cb2e43c2acc475a63364345849a4b49",
+  "verified_at": "2026-11-10T15:13:42.011Z",
+  "note": "Exact-source CI receipt for PR #790. All four required PR workflows passed on source head f9aba37d5cb2e43c2acc475a63364345849a4b49: Autonomous quality gate run 42840993836, CINELVA smoke tests run 42840994362, Validate frontend run 42840994133, and Reproducible backend build run 42840994084. The VIVANT fan diagnosis uses static local data and does not write existing viewing records, ratings, or bookmarks. Chromium and WebKit acceptance exercised 320px and 390px widths, all eight answers, three recommendations, replacement, and existing storage preservation. Production acceptance remains pending until the merged deployment is READY and the public URL is checked."
 }

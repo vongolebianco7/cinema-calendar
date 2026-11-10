@@ -201,10 +201,10 @@ jobs:
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-cinema-discounts-browser.cjs
           # The same broad route/theme audit is already run by the parallel
           # continuous-visual-qa workflow (Chromium + WebKit). Keep the extra
-          # four-viewport route audit on main pushes and scheduled full runs;
+          # four-viewport route audit on main pushes;
           # running both in every PR duplicates hundreds of page loads and can
           # hit the per-test 240-second limit on WebKit.
-          if [ "$GITHUB_EVENT_NAME" != 'pull_request' ]; then
+          if [ "$GITHUB_REF" = 'refs/heads/main' ]; then
           NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
           CINELVA_BROWSER=webkit NODE_PATH="$RUNNER_TEMP/cinelva-e2e/node_modules" node tests/cinelva-route-audit-browser.cjs
           fi

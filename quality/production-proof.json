@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "f9aba37d5cb2e43c2acc475a63364345849a4b49",
-  "verified_at": "2026-11-10T15:13:42.011Z",
-  "note": "Exact-source CI receipt for PR #790. All four required PR workflows passed on source head f9aba37d5cb2e43c2acc475a63364345849a4b49: Autonomous quality gate run 42840993836, CINELVA smoke tests run 42840994362, Validate frontend run 42840994133, and Reproducible backend build run 42840994084. The VIVANT fan diagnosis uses static local data and does not write existing viewing records, ratings, or bookmarks. Chromium and WebKit acceptance exercised 320px and 390px widths, all eight answers, three recommendations, replacement, and existing storage preservation. Production acceptance remains pending until the merged deployment is READY and the public URL is checked."
+  "head_sha": "384d94ded0181ab4efab7e90f170b28cadd8a3b2",
+  "verified_at": "2026-11-11T00:34:00.000Z",
+  "note": "Exact-source CI receipt for PR #792 source head 384d94ded0181ab4efab7e90f170b28cadd8a3b2. All four required PR workflows passed on this exact source head: Autonomous quality gate run 42845467168, CINELVA smoke tests run 42845466792, Validate frontend run 42845466795, and Reproducible backend build run 42845466993. Seven additional checks also passed on the same source head: CINELVA backup safety 42845467188, Cinemap completeness scorecard 42845466951, Scorecard contract 42845466732, CINELVA mobile layout smoke test 42845466902, Check brand identity 42845467015, Full Python contract suite 42845466789, and CINELVA continuous visual QA 42845466933. Source head includes the fail-closed handling for official grouped box-office rows; no single-film artwork is assigned to a grouped row. Production acceptance remains pending until the merged deployment is READY and the public 1980 ranking is remeasured."
 }

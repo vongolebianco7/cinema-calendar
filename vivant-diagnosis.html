@@ -41,7 +41,10 @@
     html[data-theme="light"] .movieHead p,html[data-theme="light"] .resultHead p{color:#565750}
     html[data-theme="light"] .replace{background:#f0ede6;color:#292a27;border-color:#c8c4bb}
     html[data-theme="light"] .siteFooter{color:#565750;border-color:#d5d1c8}
-    .movieHead{margin:26px 0 12px}.movieHead h2{font-size:21px;margin:0}.movieHead p{font-size:12px;line-height:1.6;color:#888;margin:6px 0 0}.movies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.movie{border:1px solid #2d2d2d;border-radius:10px;padding:15px;background:#101010;min-height:150px;display:flex;flex-direction:column}.movieNum{font-size:10px;color:var(--gold);letter-spacing:.12em}.movie h3{font-size:17px;line-height:1.4;margin:12px 0 6px}.genre{color:#999;font-size:11px;margin-bottom:auto}.movie .replace{margin-top:18px;min-height:40px;border:1px solid #3b3b3b;background:#171717;border-radius:6px;font-size:11px;padding:8px;cursor:pointer}.movie .replace:hover{border-color:#888}.resultActions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}.resultActions small{color:#777;font-size:10px;line-height:1.5}.hidden{display:none!important}.siteFooter{margin-top:30px;padding:16px 0 35px;border-top:1px solid var(--line);font-size:10px;line-height:1.7;color:#777}
+    html[data-theme="light"] .sharePrompt{background:linear-gradient(110deg,#f1e7d0,#fffefa);border-color:#b89a5b}
+    html[data-theme="light"] .sharePrompt span,html[data-theme="light"] .shareStatus{color:#565750}
+    html[data-theme="light"] .saveCardButton{background:#fffefa;color:#292a27;border-color:#aaa69d}
+    .movieHead{margin:26px 0 12px}.movieHead h2{font-size:21px;margin:0}.movieHead p{font-size:12px;line-height:1.6;color:#888;margin:6px 0 0}.movies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.movie{border:1px solid #2d2d2d;border-radius:10px;padding:15px;background:#101010;min-height:150px;display:flex;flex-direction:column}.movieNum{font-size:10px;color:var(--gold);letter-spacing:.12em}.movie h3{font-size:17px;line-height:1.4;margin:12px 0 6px}.genre{color:#999;font-size:11px;margin-bottom:auto}.movie .replace{margin-top:18px;min-height:40px;border:1px solid #3b3b3b;background:#171717;border-radius:6px;font-size:11px;padding:8px;cursor:pointer}.movie .replace:hover{border-color:#888}.sharePrompt{margin:24px 0 10px;padding:17px 18px;border-radius:10px;background:linear-gradient(110deg,#201b10,#151515);border:1px solid #5c4922;display:flex;justify-content:space-between;align-items:center;gap:12px}.sharePrompt strong{font-size:16px}.sharePrompt span{font-size:12px;color:#bbb}.shareActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.shareButton{min-height:48px;border:0;border-radius:8px;background:linear-gradient(110deg,#d6ad58,#f1d48e);color:#17130b;padding:12px 20px;font-weight:800;font-size:15px;cursor:pointer}.saveCardButton{min-height:44px;border:1px solid #555;border-radius:8px;background:#191919;color:#eee;padding:10px 14px;font-size:13px;cursor:pointer}.shareStatus{min-height:1.5em;color:#aaa;font-size:12px}.resultActions{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:14px}.resultActions small{margin-right:auto;color:#777;font-size:10px;line-height:1.5}.hidden{display:none!important}.siteFooter{margin-top:30px;padding:16px 0 35px;border-top:1px solid var(--line);font-size:10px;line-height:1.7;color:#777}
     @media(max-width:620px){.gNav{height:56px;padding:0 12px;gap:8px}.gBrand img{height:27px}.gNav form{width:auto;flex:1}.gSearch{width:100%;min-width:0;height:34px;font-size:12px}.backLink{font-size:10px;padding:8px}.wrap{padding:0 14px}.hero{padding:26px 0 18px}.choices{grid-template-columns:1fr;gap:8px}.choice{min-height:54px}.quiz{min-height:360px;padding:18px}.quizActions{margin-top:19px}.identityGrid{gap:12px}.identity{padding:16px}.movies{grid-template-columns:1fr}.movie{min-height:0;display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start;padding:13px}.movieNum{grid-row:1 / span 2;padding-top:4px}.movie h3{margin:0;font-size:16px}.genre{grid-column:2;margin-top:4px}.movie .replace{grid-column:1 / -1;margin-top:12px}.resultHead{display:block}.resultHead p{margin-top:5px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
@@ -126,8 +129,35 @@
       article.append(replace); cards.append(article);
     });
     result.append(cards);
+    const sharePrompt = document.createElement('div'); sharePrompt.className = 'sharePrompt';
+    sharePrompt.innerHTML = '<div><strong>あなたはどの組織？</strong><br><span>結果を送って、相手の所属も見てみよう。</span></div>';
+    result.append(sharePrompt);
     const actions = document.createElement('div'); actions.className = 'resultActions';
     actions.innerHTML = '<small>回答は保存されません。</small>';
+    const status = document.createElement('span'); status.className = 'shareStatus'; status.setAttribute('aria-live', 'polite');
+    const shareActions = document.createElement('div'); shareActions.className = 'shareActions';
+    const share = document.createElement('button'); share.type = 'button'; share.className = 'shareButton'; share.textContent = '結果をシェア';
+    share.addEventListener('click', async () => {
+      const text = `VIVANT診断の結果、私は「${profile.organization}／${profile.role}」でした。おすすめ映画は「${picks.map(movie => movie.title).join('」「')}」。あなたはどの組織？ #VIVANT診断 #Cinelva`;
+      try { if (navigator.share) await navigator.share({title:'VIVANT診断', text, url:location.href.split('#')[0]}); else { await navigator.clipboard.writeText(`${text} ${location.href.split('#')[0]}`); status.textContent='結果をコピーしました'; } }
+      catch (error) { if (error.name !== 'AbortError') status.textContent='共有できませんでした。'; }
+    });
+    const saveCard = document.createElement('button'); saveCard.type='button'; saveCard.className='saveCardButton'; saveCard.textContent='画像で保存';
+    saveCard.addEventListener('click', async () => {
+      const wrap = (value, size) => { const chars=Array.from(value); const lines=[]; while(chars.length) lines.push(chars.splice(0,size).join('')); return lines; };
+      const texts=[...wrap(profile.reason,22).slice(0,2),...picks.map((movie,i)=>`${i+1}. ${movie.title} · ${movie.genre}`)];
+      const escapeXml=value=>escapeHtml(value);
+      const body=texts.map((line,i)=>`<text x="88" y="${760+i*58}" fill="#f4f1e8" font-size="32">${escapeXml(line)}</text>`).join('');
+      const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350"><defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#201b10"/><stop offset="1" stop-color="#090a0c"/></linearGradient></defs><rect width="1080" height="1350" rx="40" fill="url(#b)"/><rect x="38" y="38" width="1004" height="1274" rx="28" fill="none" stroke="#b28b47" stroke-width="2"/><text x="88" y="128" fill="#dfbd70" font-size="34" letter-spacing="7">CINELVA / VIVANT</text><text x="88" y="240" fill="#f4f1e8" font-size="46">あなたの所属は</text><text x="88" y="360" fill="#f3ce77" font-size="78" font-weight="700">${escapeXml(profile.organization)}</text><text x="88" y="445" fill="#aaa69a" font-size="29">役割</text><text x="88" y="525" fill="#fff" font-size="54" font-weight="700">${escapeXml(profile.role)}</text><text x="88" y="665" fill="#dfbd70" font-size="28">この結果になった理由</text>${body}<text x="88" y="1190" fill="#dfbd70" font-size="38" font-weight="700">あなたはどの組織？</text><text x="88" y="1255" fill="#aaa69a" font-size="22">非公式ファン企画 · cinelva.vercel.app</text></svg>`;
+      try {
+        const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})); const img=new Image();
+        await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});
+        const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1350;canvas.getContext('2d').drawImage(img,0,0);URL.revokeObjectURL(url);
+        const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('png');
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vivant-diagnosis.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);status.textContent='シェア画像を保存しました';
+      } catch { status.textContent='画像を作成できませんでした。シェアボタンをお試しください。'; }
+    });
+    shareActions.append(share,saveCard); actions.append(status,shareActions);
     const restart = document.createElement('button'); restart.type = 'button'; restart.className = 'action'; restart.textContent = 'もう一度診断する';
     restart.addEventListener('click', () => { answers.fill(null); watched.clear(); index = 0; result.classList.add('hidden'); drawQuestion(); document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'}); });
     actions.append(restart); result.append(actions);

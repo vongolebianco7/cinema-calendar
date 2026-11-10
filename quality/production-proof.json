@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "53bb30a4b1eccb414f22713b3f57372ed2c4d5f1",
-  "verified_at": "2026-11-10T01:19:06.724Z",
-  "note": "Receipt-only checkpoint for PR #787 exact executable source head 53bb30a4b1eccb414f22713b3f57372ed2c4d5f1 (tree a4836d63522199d532ab7a89c91017ff138e1f96). All four publication-proof workflows passed on that exact PR head: Validate frontend run 42733047215 (transient Chromium provider-list wait timed out on attempt 1; required job rerun passed without source changes), Autonomous quality gate 42733046853, CINELVA smoke tests 42733046967, and Reproducible backend build 42733046836. Additional continuous visual QA, completeness scorecard, mobile layout, and full Python contract suite checks also passed: 42733047245, 42733046864, 42733047229, 42733046882. This receipt confirms CI only; production deployment and public poster acceptance remain pending. No executable source files changed by this receipt update."
+  "head_sha": "fca579cc2475e43fdb6c5f84040f213af4e5e13a",
+  "verified_at": "2026-11-10T03:33:00.000Z",
+  "note": "Receipt-only checkpoint for PR #788 exact executable source head fca579cc2475e43fdb6c5f84040f213af4e5e13a. All four publication-proof workflows passed on that exact PR head: Validate frontend run 42749592777, Autonomous quality gate 42749592745, CINELVA smoke tests 42749592773, and Reproducible backend build 42749592793. Additional continuous visual QA, completeness scorecard, mobile layout, and production poster acceptance checks also passed: 42749592705, 42749593147, 42749592760, and 42749592840. The production acceptance matrix observed canonical production in Chromium 1280px and Playwright WebKit 390px with zero broken or pending URL images, image HTTP errors, page errors, or page-level mobile overflow across the audited routes; restored Caligula artwork rendered in both engines. Playwright WebKit is not physical iPhone Safari evidence. This receipt changes no executable source file."
 }

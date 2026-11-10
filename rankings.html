@@ -202,6 +202,7 @@ async function renderAsiaRating(){
 }
 function renderRating(){if(regionActive==="アジア"){renderAsiaRating();return}const regions=baseRegions(),genres=allGenres(regions),genreOpts=["すべて",...genres];if(!genreOpts.includes(genreActive))genreActive="すべて";const useGenres=genreActive==="すべて"?genres:[genreActive];let eras=availableEras(regions,useGenres);const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));const eraOpts=["すべて","今年",...eras];if(!eraOpts.includes(eraActive))eraActive="すべて";$("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");$("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");$("#eraChips").innerHTML=eraOpts.map(x=>'<button class="chip '+(x===eraActive?'active':'')+'" data-era="'+x+'">'+x+'</button>').join("");document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="すべて";render()});document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="すべて";render()});document.querySelectorAll("[data-era]").forEach(b=>b.onclick=()=>{eraActive=b.dataset.era;render()});const list=ratingList(regions,genreActive,eraActive).slice(0,80);$("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map(ratingCard).join(""):'<div class="empty">該当作品がありません</div>';$("#sourceNote").textContent=(eraActive==="今年"?(yearValue||new Date().getFullYear())+"年公開作品 · ":"")+"TMDB評価順";mountRankingGauges()}
 const normalizeBoxTitle=t=>String(t||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+const isGroupedBoxTitle=title=>/\s\/\s/.test(String(title||''));
 let boxMovieIndexPromise=null;
 function collectPosterMovies(value,rows){if(Array.isArray(value)){for(const item of value){if(item&&typeof item==='object'&&item.poster&&(item.title||item.original_title))rows.push(item);else collectPosterMovies(item,rows)}return}if(value&&typeof value==='object')Object.values(value).forEach(item=>collectPosterMovies(item,rows))}
 async function localBoxMovies(){if(!boxMovieIndexPromise)boxMovieIndexPromise=Promise.allSettled([fetch('data/movies.json').then(r=>{if(!r.ok)throw Error('movies');return r.json()}),fetch('data/rankings.json').then(r=>{if(!r.ok)throw Error('rankings');return r.json()})]).then(parts=>{let rows=[];for(const p of parts){if(p.status!=='fulfilled')continue;const v=p.value;collectPosterMovies(Array.isArray(v)?v:(v.movies||[]),rows);collectPosterMovies(v.rankings||{},rows)}return rows});return boxMovieIndexPromise;}
@@ -247,6 +248,9 @@ async function resolveMovie(name,id,year){
 }
 async function hydrateOneBoxCard(card){
  const name=card.dataset.boxFilm;if(!name)return;
+ // Pre-2000 Eiren rows can represent two co-billed films in one official row.
+ // Resolving that combined label as one TMDB movie can attach the wrong artwork.
+ if(isGroupedBoxTitle(name))return;
  const id=card.dataset.boxId||null,year=card.dataset.boxYear||null;
  const current=card.querySelector('[data-box-poster]');if(current?.complete&&current.naturalWidth>0)return;
  const movie=await window.CinelvaMovieIdentity?.fetchOne({title:name,tmdbId:id,year})||await resolveMovie(name,id,year);if(!movie)return;

@@ -1,9 +1,18 @@
 'use strict';
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
 const { spawn } = require('node:child_process');
 const net = require('node:net');
 const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const { chromium, webkit } = require('playwright');
+
+const homeHtml = fs.readFileSync('index.html', 'utf8');
+const specialHtml = fs.readFileSync('specials.html', 'utf8');
+const diagnosisHtml = fs.readFileSync('vivant-diagnosis.html', 'utf8');
+assert.doesNotMatch(homeHtml, /href="vivant-diagnosis\.html" class="heroAction/);
+assert.match(homeHtml, /href="specials\.html">特集・診断<\/a>/);
+assert.match(specialHtml, /href="vivant-diagnosis\.html" class="specialAction"/);
+assert.match(diagnosisHtml, /href="specials\.html">特集<\/a>/);
 
 (async () => {
   const socket = net.createServer();
@@ -26,7 +35,9 @@ const { chromium, webkit } = require('playwright');
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto(`http://127.0.0.1:${port}/vivant-diagnosis.html`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`http://127.0.0.1:${port}/specials.html`, { waitUntil: 'domcontentloaded' });
+    await page.getByRole('heading', { name: '特集・診断' }).waitFor();
+    await page.getByRole('link', { name: '診断する' }).click();
     await page.getByRole('heading', { name: 'VIVANT診断' }).waitFor();
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     assert.match(await page.locator('.fanNote').innerText(), /非公式ファン企画/);

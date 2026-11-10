@@ -36,6 +36,17 @@
       ]
     },
     {
+      "path": "specials.html",
+      "surface": "public",
+      "purpose": "special content directory",
+      "data_owner": "static editorial entries",
+      "count_contract": "available special and diagnosis entries",
+      "primary_cta": "open a diagnosis",
+      "source_refs": [
+        "editorial"
+      ]
+    },
+    {
       "path": "discover.html",
       "surface": "public",
       "purpose": "discovery",

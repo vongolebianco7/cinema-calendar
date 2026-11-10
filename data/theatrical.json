@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-09T23:57:18.887336+00:00",
+  "generated_at": "2026-11-10T01:30:01.789566+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-10",
-      "2027-03-09"
+      "2026-10-11",
+      "2027-03-10"
     ],
     "background_slice": [
-      "2027-03-04",
-      "2027-05-02"
+      "2027-05-04",
+      "2027-07-02"
     ],
     "max_detail_requests": 40
   },
@@ -22789,7 +22789,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1746633,
@@ -22818,7 +22818,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1724371,
@@ -22846,7 +22846,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1694711,
@@ -22871,14 +22871,14 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 100,
       "genres": [
         "アニメーション",
         "サイエンスフィクション",
         "アクション",
         "戦争"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 920167,
@@ -24648,9 +24648,9 @@
       "date": "2027-01-08",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/xWlF2i51zUq7BUq4iJte1g9NyIM.jpg",
-      "score": 6.399,
-      "votes": 917,
+      "poster": "https://image.tmdb.org/t/p/w500/gXKK70iltV8zMUlAFeZMNCGAveZ.jpg",
+      "score": 6.4,
+      "votes": 978,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1153714",
       "director": "Alex Scharfman",
@@ -24669,7 +24669,8 @@
         "ホラー",
         "ファンタジー",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1740088,
@@ -24678,7 +24679,7 @@
       "date": "2027-01-08",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/viroAsjxCxGBC5SYnsBvmDAzgsb.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/8pnSSn2544SgEz4MECLXIy2Rhe0.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -24699,7 +24700,8 @@
         "スリラー",
         "犯罪",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1628271,
@@ -24708,7 +24710,7 @@
       "date": "2027-01-08",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/hlBOr3o0eu07VKXsxPMMKmXKbfy.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/jc5tri93P05ydZEF1PbuM7VVNBw.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "入学式当日の朝、高校生活に胸を膨らませていた家谷家の長男・光太郎は、父親の一郎から同じ高校に通うことを告げられる。さらには、母親の静香、妹で小学生の春香、 そしてペットのゴメスまで同じ高校に“同級生”として通うことを知らされる。光太郎の輝かしい高校生活は一体どうなってしまうのか。家谷家の面々に巻き込まれる形で、光太郎の波乱万丈な 高校生活が幕を開ける。一郎が青春を謳歌することで巻き起こる前代未聞の青春騒動の行方は？！",
@@ -24728,7 +24730,8 @@
       "genres": [
         "ドラマ",
         "コメディ"
-      ]
+      ],
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1520395,
@@ -24756,7 +24759,8 @@
       "runtime": 110,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1725084,
@@ -24780,7 +24784,7 @@
       ],
       "runtime": 86,
       "genres": [],
-      "checked_at": "2026-10-30T22:18:46.705276+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1284465,
@@ -24790,8 +24794,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/13MmRwmG5NmaMfU8qNrtgGXisiD.jpg",
-      "score": 6.756,
-      "votes": 588,
+      "score": 6.718,
+      "votes": 612,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1284465",
       "director": "マイケル・サルノスキ",
@@ -24812,7 +24816,7 @@
         "ドラマ",
         "アクション"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     },
     {
       "id": 1400336,
@@ -26040,6 +26044,37 @@
         "アドベンチャー",
         "ファンタジー"
       ]
+    },
+    {
+      "id": 1551110,
+      "title": "ガールズバンドクライ THE MOVIE",
+      "original_title": "ガールズバンドクライ THE MOVIE",
+      "date": "2027-05-21",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/xPwqUYCUvUj6cIhIxD3r5AmeB0q.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "それから2ヶ月、事務所を辞めた5人はそれぞれがバイト生活に戻り、バンド活動を続けていた。 ある日、事務所に籍を置いたまま個人的に仁菜達のライブのサポートをしていた三浦からライブツアーの連絡がくる。 5人が事務所を辞める前から予定が組まれていたようだ。 やる気がみなぎる仁菜は、どうせ遠くまで行くのならと次々とライブのブッキングを進める。 気が付けばその数は全国五十ヶ所にまで膨れ上がっていた…。 波乱万丈の全国ツアーが幕を開ける。",
+      "tmdb": "https://www.themoviedb.org/movie/1551110",
+      "director": "酒井和男",
+      "director_id": 1498114,
+      "cast": [
+        "理名",
+        "夕莉",
+        "美怜",
+        "凪都"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "ドラマ",
+        "音楽"
+      ],
+      "checked_at": "2026-11-10T01:30:01.789566+00:00"
     }
   ]
 }

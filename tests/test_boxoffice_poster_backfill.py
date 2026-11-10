@@ -35,7 +35,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
 
         now = datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc)
         result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
-                                   now=now, **kwargs)
+                                   now=now, catalog_paths=[], **kwargs)
         return json.loads(path.read_text(encoding="utf-8")), requests, result
 
     def test_unique_exact_title_in_adjacent_release_year_recovers_poster(self):
@@ -112,6 +112,56 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(data["by_year"]["1980"][0]["poster"], "https://image.tmdb.org/t/p/w500/existing.jpg")
         self.assertEqual(requests, [])
         self.assertEqual(result["enriched"], 0)
+
+    def test_reuses_unique_verified_local_poster_before_spending_api_lookup(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        catalog = Path(tmp.name) / "movies.json"
+        path.write_text(json.dumps({"by_year": {"1998": [{"title": "ディープ・インパクト"}]},
+                                    "all_time": []}), encoding="utf-8")
+        catalog.write_text(json.dumps({"movies": [{
+            "id": 8656, "title": "ディープ・インパクト", "date": "1998-05-08",
+            "poster": "https://image.tmdb.org/t/p/w342/verified.jpg",
+            "source_url": "https://www.themoviedb.org/movie/8656",
+        }]}), encoding="utf-8")
+        requests = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            return Response({"results": []})
+
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[catalog],
+        )
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1998"][0]
+        self.assertEqual(row["tmdbId"], 8656)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w342/verified.jpg")
+        self.assertEqual(row["identity_match"], "verified_local_exact_title_and_release_year_window")
+        self.assertEqual(requests, [])
+        self.assertEqual(result["local_enriched"], 1)
+
+    def test_local_same_title_candidates_remain_unresolved(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        catalog = Path(tmp.name) / "movies.json"
+        path.write_text(json.dumps({"by_year": {"2004": [{"title": "同名作品"}]},
+                                    "all_time": []}), encoding="utf-8")
+        catalog.write_text(json.dumps({"movies": [
+            {"id": 1, "title": "同名作品", "date": "2004-01-01", "poster": "https://image.tmdb.org/t/p/w342/one.jpg"},
+            {"id": 2, "title": "同名作品", "date": "2003-01-01", "poster": "https://image.tmdb.org/t/p/w342/two.jpg"},
+        ]}), encoding="utf-8")
+        result = backfill.backfill(
+            path, api_key="", now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[catalog],
+        )
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2004"][0]
+        self.assertNotIn("poster", row)
+        self.assertNotIn("tmdbId", row)
+        self.assertEqual(result["local_enriched"], 0)
 
 
 if __name__ == "__main__":

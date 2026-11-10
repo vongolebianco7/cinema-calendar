@@ -31,13 +31,14 @@ class BoxOffice1980BackfillTests(unittest.TestCase):
             "動乱": (392498, "動乱", "1980-01-15"),
             "青い珊瑚礁": (5689, "The Blue Lagoon", "1980-07-05"),
             "バトルクリーク・ブロー": (19267, "The Big Brawl", "1980-08-18"),
+            "カリギュラ": (9453, "Caligola", "1980-10-18"),
         }
         for title, (tmdb_id, original_title, release_date) in expected.items():
             row = rows[title]
             self.assertEqual(row.get("tmdbId"), tmdb_id)
             self.assertEqual(row.get("original_title"), original_title)
             self.assertEqual(row.get("tmdb_release_date"), release_date)
-            self.assertTrue(row.get("poster", "").startswith("https://image.tmdb.org/t/p/w500/"))
+            self.assertTrue(row.get("poster", "").startswith("https://image.tmdb.org/t/p/"))
             self.assertEqual(row.get("identity_source"), f"https://www.themoviedb.org/movie/{tmdb_id}")
             self.assertTrue(row.get("identity_checked_at"))
             self.assertTrue(row.get("identity_match"))
@@ -49,7 +50,6 @@ class BoxOffice1980BackfillTests(unittest.TestCase):
             "ドラえもん のび太の恐竜 / モスラ対ゴジラ",
             "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ",
             "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊",
-            "カリギュラ",
         ]
         for title in unresolved:
             self.assertFalse(rows[title].get("tmdbId"))

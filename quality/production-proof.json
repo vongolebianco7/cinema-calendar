@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "1fdffc346db0593f620edeb943e3d46a89ae4198",
-  "verified_at": "2026-11-10T00:30:48.907Z",
-  "note": "Receipt-only checkpoint for PR #786 exact executable source head 1fdffc346db0593f620edeb943e3d46a89ae4198 (tree 97c4e2000923fb7c6ecc402a87043b5e25dff50a). All four publication-proof workflows passed on that exact PR head: Validate frontend run 42728095505, Autonomous quality gate 42728095512, CINELVA smoke tests 42728095373, and reproducible backend build 42728095186. The additional visual QA, completeness scorecard, and mobile layout checks also passed: 42728095236, 42728095267, 42728095319. This receipt confirms CI only; production deployment and public poster acceptance remain pending. No executable source files changed by this receipt update."
+  "head_sha": "53bb30a4b1eccb414f22713b3f57372ed2c4d5f1",
+  "verified_at": "2026-11-10T01:19:06.724Z",
+  "note": "Receipt-only checkpoint for PR #787 exact executable source head 53bb30a4b1eccb414f22713b3f57372ed2c4d5f1 (tree a4836d63522199d532ab7a89c91017ff138e1f96). All four publication-proof workflows passed on that exact PR head: Validate frontend run 42733047215 (transient Chromium provider-list wait timed out on attempt 1; required job rerun passed without source changes), Autonomous quality gate 42733046853, CINELVA smoke tests 42733046967, and Reproducible backend build 42733046836. Additional continuous visual QA, completeness scorecard, mobile layout, and full Python contract suite checks also passed: 42733047245, 42733046864, 42733047229, 42733046882. This receipt confirms CI only; production deployment and public poster acceptance remain pending. No executable source files changed by this receipt update."
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T21:47:51.589Z",
+  "generated_at": "2026-11-10T23:15:12.637Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -152,7 +152,7 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-10T15:23:26.579Z",
+      "source_observed_at": "2026-11-10T23:15:12.429Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",

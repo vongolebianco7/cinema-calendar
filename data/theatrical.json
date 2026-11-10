@@ -1,307 +1,17 @@
 {
-  "generated_at": "2026-11-07T21:49:33.306340+00:00",
+  "generated_at": "2026-11-09T23:57:18.887336+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-08",
-      "2027-03-07"
+      "2026-10-10",
+      "2027-03-09"
     ],
     "background_slice": [
-      "2026-11-02",
-      "2026-12-31"
+      "2027-03-04",
+      "2027-05-02"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1084736,
-      "title": "モンテ・クリスト伯",
-      "original_title": "Le Comte de Monte-Cristo",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/g7kiprYdXxaYCZABWQwTWAgRYjl.jpg",
-      "score": 7.895,
-      "votes": 2138,
-      "overview": "19世紀フランスの文豪アレクサンドル・デュマによる傑作小説で、「巌窟王」の名でも知られる復讐劇の金字塔「モンテ・クリスト伯」をフランスで実写映画化。第50回セザール賞にて同年度最多の14部門にノミネートされ、美術賞と衣装デザイン賞を受賞した。  若き航海士エドモン・ダンテスは船長への昇進が決まり結婚も控えていたが、ある策略により無実の罪で投獄されてしまう。絶望のなかで生きる気力を失っていくダンテスだったが、脱獄を企てる老司祭との出会いにより希望を取り戻していく。司祭は彼に学問と教養を授け、さらにテンプル騎士団の隠し財宝の存在を打ち明ける。囚われの身となってから14年後、奇跡的に脱獄を果たしたダンテスは莫大な財宝を手に入れ、ついに復讐を果たすべく動き出す。謎に包まれた大富豪「モンテ・クリスト伯」としてパリ社交界に姿を現した彼は、自らの人生を奪った3人の男たちに巧妙に近づいていく。",
-      "tmdb": "https://www.themoviedb.org/movie/1084736",
-      "director": "アレクサンドル・ド・ラ・パトリエール",
-      "director_id": 58255,
-      "cast": [
-        "ピエール・ニネ",
-        "バスティアン・ブイヨン",
-        "アナイス・ドゥムースティエ",
-        "ローラン・ラフィット"
-      ],
-      "countries": [
-        "France",
-        "Belgium"
-      ],
-      "runtime": 178,
-      "genres": [
-        "アドベンチャー",
-        "アクション",
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1144107,
-      "title": "羅小黒戦記２ ぼくらが望む未来",
-      "original_title": "罗小黑战记 2",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/kM8HFn05FlFrlWw8cmoqrF4ZPVA.jpg",
-      "score": 8.958,
-      "votes": 144,
-      "overview": "中国の人気WEBアニメシリーズを原作に、黒猫の妖精シャオヘイの冒険を描くアクションファンタジーアニメ第2弾。ある襲撃事件により妖精の世界の平和が脅かされ、シャオヘイと師匠ムゲンの運命が大きく揺らいでいく。",
-      "tmdb": "https://www.themoviedb.org/movie/1144107",
-      "director": "顾杰",
-      "director_id": 2720951,
-      "cast": [
-        "王宥霁",
-        "劉朙月",
-        "朱婧",
-        "栾立胜"
-      ],
-      "countries": [
-        "China"
-      ],
-      "runtime": 119,
-      "genres": [
-        "アニメーション",
-        "ファンタジー",
-        "アクション",
-        "アドベンチャー"
-      ]
-    },
-    {
-      "id": 1560686,
-      "title": "超特急 The Movie RE:VE",
-      "original_title": "超特急 The Movie RE:VE",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/mlsICECGcNAzox247czK5fbPhQI.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "2011年に結成され、さまざまなジャンルの楽曲で魅せるフォーメーションダンスや、MCを交えたステージで人気を集めてきた超特急。22年には新メンバー4人が加入し、9人体制で新たなステージへと踏み出した。25年6月から8月にかけて実施したアリーナツアー「BULLET TRAIN ARENA TOUR 2025 EVE」では、東京・神戸・名古屋・埼玉の4都市で計8公演を行い、約10万人を動員した。 本作では同ツアーでの熱気あふれるステージパフォーマンスに加え、舞台裏にも密着。セットリストに込めた想いや、ステージ構成を入念につくりあげていく準備の様子なども余すところなくカメラに収め、会場の感動と興奮をスクリーンによみがえらせる。インタビューパートでは、各メンバーの努力と葛藤、グループに対する熱い思いや未来への展望などが明かされる。",
-      "tmdb": "https://www.themoviedb.org/movie/1560686",
-      "director": "임지수",
-      "director_id": 5488131,
-      "cast": [
-        "小笠原海",
-        "船津稜雅",
-        "草川拓弥",
-        "Yuki Murata"
-      ],
-      "countries": [
-        "Japan",
-        "South Korea"
-      ],
-      "runtime": 0,
-      "genres": [
-        "音楽",
-        "ドキュメンタリー"
-      ]
-    },
-    {
-      "id": 1539104,
-      "title": "劇場版 呪術廻戦「渋谷事変 特別編集版」×「死滅回游 先行上映」",
-      "original_title": "劇場版 呪術廻戦「渋谷事変 特別編集版」×「死滅回游 先行上映」",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qg4Qfsr0wWLTkRSIjI04NQzxB3w.jpg",
-      "score": 6.097,
-      "votes": 119,
-      "overview": "2018年10月31日。ハロウィンで賑わう渋谷駅周辺に突如“帳”が降ろされ大勢の一般人が閉じ込められる。そこに単独で乗り込む現代最強の呪術師・五条悟。だが、そこには五条の封印を目論む呪詛師・呪霊達が待ち構えていた。渋谷に集結する虎杖悠仁ら、数多くの呪術師たち。かつてない大規模な呪い合い「渋谷事変」が始まる―。そして戦いは、史上最悪の術師・加茂憲倫が仕組んだ殺し合い「死滅回游」へ。「渋谷事変」を経て、魔窟と化す全国10の結界コロニー。そんな大混乱の最中、虎杖の死刑執行役として特級術師・乙骨憂太が立ちはだかる。絶望の中で、なおも戦い続ける虎杖。無情にも、刃を向ける乙骨。加速していく呪いの混沌。同じ師を持つ虎杖と乙骨、二人の死闘が始まる——",
-      "tmdb": "https://www.themoviedb.org/movie/1539104",
-      "director": "御所園翔太",
-      "director_id": 2784807,
-      "cast": [
-        "榎木淳弥",
-        "緒方恵美",
-        "遊佐浩二",
-        "浪川大輔"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 88,
-      "genres": [
-        "アニメーション",
-        "アクション",
-        "ファンタジー"
-      ]
-    },
-    {
-      "id": 1488805,
-      "title": "彼女のくちづけ感染するリビドー",
-      "original_title": "彼女のくちづけ感染するリビドー",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/b2HKgNl7Zw6L67eat2DRJsaNHcy.jpg",
-      "score": 9.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1488805",
-      "director": "山岸謙太郎",
-      "director_id": 1479434,
-      "cast": [
-        "Yui Watanabe",
-        "鵜川もえか",
-        "Erika Harada",
-        "Yume Arakaki"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 65,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1484833,
-      "title": "トリツカレ男",
-      "original_title": "トリツカレ男",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/vzNDv1Ts7GzlFJ2pgcMYev3BDCG.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "ひとたび何かに夢中になると、ほかのことが目に入らなくなってしまうジュゼッペは、街のみんなから“トリツカレ男”と呼ばれている。  三段跳び、探偵、歌……ジュゼッペがとりつかれるものは誰も予想ができないものばかりだ。  行き場のないネズミのシエロに話しかけるうちにネズミ語をマスターしたジュゼッペ。  昆虫採集に夢中になっていると、公園で風船売りをしているペチカに一目惚れ。今度はペチカに夢中になった。  勇気を出してペチカに話しかけたジュゼッペだったが、ペチカの心には悲しみがあった。  大好きなペチカのため、相棒のシエロとともに、彼女が抱える心配事を、これまでとりつかれた数々の技を使ってこっそり解決していく。  ジュゼッペの夢中が、奇跡となってあなたに届くーー",
-      "tmdb": "https://www.themoviedb.org/movie/1484833",
-      "director": "高橋渉",
-      "director_id": 1937966,
-      "cast": [
-        "佐野晶哉",
-        "上白石萌歌",
-        "柿澤勇人",
-        "山本高広"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 98,
-      "genres": [
-        "アニメーション",
-        "コメディ",
-        "ロマンス",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1462735,
-      "title": "旅と日々",
-      "original_title": "旅と日々",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/d5kqa17dP6UqBBctkXJOsbhHjnm.jpg",
-      "score": 7.1,
-      "votes": 16,
-      "overview": "うだつの上がらない脚本家の李は、ひょんなことから訪れた雪荒ぶ旅先の山奥でおんぼろ宿に迷い込む。雪の重みで今にも落ちてしまいそうな屋根。“べん造\"と名乗る、やる気の感じられない宿主。暖房もない、まともな食事も出ない、布団も自分で敷く始末。しかし、べん造にはちょっとした秘密があるようだ。ある夜、べん造は李を夜の雪の原へと連れ出すのだった…。",
-      "tmdb": "https://www.themoviedb.org/movie/1462735",
-      "director": "三宅唱",
-      "director_id": 2223841,
-      "cast": [
-        "シム・ウンギョン",
-        "河合優実",
-        "髙田万作",
-        "柴田貴哉"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 89,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1154800,
-      "title": "ラブライブ！虹ヶ咲学園スクールアイドル同好会 完結編 第2章",
-      "original_title": "ラブライブ！虹ヶ咲学園スクールアイドル同好会 完結編 第2章",
-      "date": "2025-11-07",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bJa5yhBmzJTke6LCmfbwp26ydlZ.jpg",
-      "score": 8.0,
-      "votes": 2,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1154800",
-      "director": "河村智之",
-      "director_id": 1325036,
-      "cast": [
-        "矢野妃菜喜",
-        "大西亜玖璃",
-        "相良茉優",
-        "前田佳織里"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 75,
-      "genres": [
-        "音楽",
-        "アニメーション"
-      ]
-    },
-    {
-      "id": 27064,
-      "title": "Mishima: A Life in Four Chapters",
-      "original_title": "Mishima: A Life in Four Chapters",
-      "date": "2025-11-08",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/6P9jhxgdLGJMxlteZzuIcMQtM96.jpg",
-      "score": 7.813,
-      "votes": 371,
-      "overview": "物語は三島由紀夫最後の一日となる朝から始まり、『金閣寺』『鏡子の家』『奔馬』を劇中劇として見せながら三島の生涯を描いていく。\r どもりを持つ学生・溝口は金閣寺はその美しさに見苦しい自分の姿を責め悩み、放火をしてしまう『金閣寺』。容姿端麗で華奢な美青年・治が、最後はマゾヒスティックな狂愛に溺れていく『鏡子の家』。剣道に励む青年が同じ学生仲間とクーデターを決起する『奔馬』。そして、三島由紀夫の最期の瞬間に至る…。",
-      "tmdb": "https://www.themoviedb.org/movie/27064",
-      "director": "ポール・シュレイダー",
-      "director_id": 1035,
-      "cast": [
-        "緒形拳",
-        "沢田研二",
-        "十代目 坂東三津五郎",
-        "永島敏行"
-      ],
-      "countries": [
-        "Japan",
-        "United States of America"
-      ],
-      "runtime": 121,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1549706,
-      "title": "じぶん、まる！　いっぽのはなし",
-      "original_title": "じぶん、まる！　いっぽのはなし",
-      "date": "2025-11-08",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/1TiqTrNEwsAGMzDQws3hkA8WoVY.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1549706",
-      "director": "Toshiko Takashi",
-      "director_id": 1677003,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 60,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
     {
       "id": 81210,
       "title": "アニキ・ボボ",
@@ -21704,7 +21414,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1646897,
@@ -21724,17 +21434,17 @@
         "柳楽優弥",
         "川栄李奈",
         "萩原利久",
-        "三宅健"
+        "JUNON"
       ],
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 91,
       "genres": [
         "犯罪",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1555226,
@@ -21763,7 +21473,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 164328,
@@ -21794,7 +21504,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1575667,
@@ -21919,6 +21629,31 @@
       "revival_evidence": "TMDB JP theatrical release history"
     },
     {
+      "id": 1820858,
+      "title": "いつかの走馬灯で",
+      "original_title": "いつかの走馬灯で",
+      "date": "2026-10-30",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/kKtfP7PJAdghhRUXtthBG1rTK5D.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "3 つの異なる世界で、それぞれ別の人生を歩む女性「涼」\r 仕事の重圧、孤独な日常、守り続けたい小さな領域－\r 京都を舞台に繰り広げられる並行世界\r 並行世界として存在する彼女たちは、置かれた環境も抱える思いも異なりますが、日々の中でふと立ち止まり、自身の弱さや葛藤、そしてかすかな希望と向き合う瞬間を迎えます。それらが揺れ動く中で、各編は独立しながらも絡み合い、それぞれの「物語の出口」を探していきます。",
+      "tmdb": "https://www.themoviedb.org/movie/1820858",
+      "director": "堀陽子",
+      "director_id": 6609510,
+      "cast": [
+        "Alice Shimada",
+        "田村健太郎",
+        "酒井善史",
+        "Fuu Maeda"
+      ],
+      "countries": [],
+      "runtime": 114,
+      "genres": [],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
       "id": 1807421,
       "title": "私がまだ知らない沖縄",
       "original_title": "私がまだ知らない沖縄",
@@ -22032,9 +21767,9 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/zpcoFlZwyLnBt7bb5wmvGDCdg06.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
+      "score": 7.9,
+      "votes": 114,
+      "overview": "第96回アカデミー賞でアジア映画として初の視覚効果賞を受賞するなど、世界的に大きな話題を集めた「ゴジラ－1.0」の続編。山崎貴が引き続き監督・脚本・VFXを担い、前作から2年後の世界を舞台に、再び姿を現したゴジラとの新たな戦いを描き出す。  戦争によって「無（ゼロ）」となった日本を、ゴジラが「負（マイナス）」に叩き落としてから2年。もがき苦しみながらも復興を遂げ、ようやく取り戻したはずの日常に、再びゴジラが襲いかかる。人々はこの戦いを終わらせるべく、総力を結集して新たな作戦に乗り出す。  キャストは、前作でゴジラと壮絶な死闘を繰り広げた主人公・敷島浩一役の神木隆之介、ゴジラに襲われながらも奇跡的に一命をとりとめたヒロイン・敷島典子役の浜辺美波をはじめ、山田裕貴、佐々木蔵之介、安藤サクラ、吉岡秀隆ら前作の顔ぶれが再集結。さらに新たなメンバーとして、気象台から大型災害対策事務局に出向した天才気象予報官・青山真琴役で長澤まさみ、戦争で心に深い傷を負った生物学者・村上寛治役で田中泯、医師・緒方役で國村隼が出演。",
       "tmdb": "https://www.themoviedb.org/movie/1381071",
       "director": "山崎貴",
       "director_id": 43652,
@@ -22053,7 +21788,7 @@
         "ホラー",
         "アクション"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1797226,
@@ -22082,7 +21817,7 @@
       "genres": [
         "音楽"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1278101,
@@ -22093,7 +21828,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/5le1y4AKBSUJ5XTIG4ClGDL2rpC.jpg",
       "score": 8.8,
-      "votes": 157,
+      "votes": 161,
       "overview": "フィクションとドキュメンタリー双方で活躍するヤン・リーナーの監督作品。障がいを持ちながらも力強く生きる若者を、その母、祖母との関係のなかに描く。『少年の君』（19）でスターとなったイー・ヤンチェンシーが主演。",
       "tmdb": "https://www.themoviedb.org/movie/1278101",
       "director": "Yang Lina",
@@ -22112,7 +21847,7 @@
         "ドラマ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1773014,
@@ -22122,8 +21857,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/jc3MtWlLeuHQJwEYlvb5SVcVhCv.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 5.0,
+      "votes": 1,
       "overview": "子どもの頃から野球一筋だった矢上雄一は、結婚して父になってからも社会人野球に情熱を注いでいたが、年齢の壁には勝てず戦力外通告を受けてしまう。身体障害者スポーツセンターに再就職した彼は、聴覚障害を持つ泉邦衛から野球チームの監督を依頼され、戸惑いながらも引き受けることを決める。同僚の高橋明日香と共に選手集めに奔走し、やがてチームは全国大会に挑むことになるが、現実は厳しく初めての大舞台で惨敗してしまう。「勝ちたい」と言いながらも悔しそうな様子を見せない選手たちに失望した矢上は、監督を降りると宣言するが……。",
       "tmdb": "https://www.themoviedb.org/movie/1773014",
       "director": "Masahiro Inagaki",
@@ -22141,7 +21876,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1707282,
@@ -22151,8 +21886,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/im9W3Hw08NsHhOlF60FCX76Ln7u.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 8.0,
+      "votes": 1,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1707282",
       "director": "三島有紀子",
@@ -22170,7 +21905,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1567149,
@@ -22201,7 +21936,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1527427,
@@ -22211,8 +21946,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cg0VwQsusxRMPNbyJUlUb1JBVH8.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 5.0,
+      "votes": 1,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1527427",
       "director": "全辰隆",
@@ -22230,7 +21965,7 @@
         "ロマンス",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1313587,
@@ -22239,7 +21974,7 @@
       "date": "2026-11-06",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/4N7euiV0uozyZGFL59BL5FxNRyL.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/tLiCExCaevA5t2mXwsW6qUfimVE.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
@@ -22262,7 +21997,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1283515,
@@ -22272,8 +22007,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/rmaNMA1seHqpjtnYKzyynFAr1g8.jpg",
-      "score": 6.657,
-      "votes": 411,
+      "score": 7.008,
+      "votes": 653,
       "overview": "仕事にも人生にも行き詰まっている売れない作家ローウェン・アシュリー（ダコタ・ジョンソン）のもとへ、突然、驚くようなオファーが届く。それは交通事故で生死を彷徨う人気作家ヴェリティ・クロフォード（アン・ハサウェイ）のためのゴーストライター業だった。なぜ自分が選ばれたのか疑問を持ちながらも、またとないチャンスを引き受けるべく、ローウェンは人里離れたクロフォード家の邸宅へと移り住む。次第にヴェリティの夫ジェレミー（ジョシュ・ハートネット）と親密な関係になっていくローウェンだったが、ある日ヴェリティが書いたと思われる不気味な原稿を発見してしまう。そこには、夫との性愛や子供たちへの激しい感情、そして自らにまつわる衝撃の告白が記されていた── クロフォード家に一体何があったのか？ 善悪の境界線が揺らぐ中、やがてローウェンは闇深い真実に辿り着く…。",
       "tmdb": "https://www.themoviedb.org/movie/1283515",
       "director": "マイケル・ショウォーター",
@@ -22292,7 +22027,7 @@
         "謎",
         "スリラー"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1795736,
@@ -22314,7 +22049,7 @@
       "countries": [],
       "runtime": 108,
       "genres": [],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1807529,
@@ -22371,7 +22106,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1807445,
@@ -22444,8 +22179,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/aASLRiO8p9xLIvG9EHXSyZ71sPl.jpg",
-      "score": 7.3,
-      "votes": 54,
+      "score": 7.339,
+      "votes": 56,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1306816",
       "director": "필감성",
@@ -22464,7 +22199,7 @@
         "コメディ",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 338969,
@@ -22474,8 +22209,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/cCWojb6N9UcTzNVtS4bOM3vQ30x.jpg",
-      "score": 5.929,
-      "votes": 465,
+      "score": 5.932,
+      "votes": 467,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/338969",
       "director": "メイコン・ブレア",
@@ -22495,7 +22230,7 @@
         "コメディ",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 467905,
@@ -22505,8 +22240,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/adIG9Tsf9FkUkJ1euYjtktSMOyT.jpg",
-      "score": 6.904,
-      "votes": 835,
+      "score": 6.896,
+      "votes": 847,
       "overview": "生まれながらに大富豪一族から追放され、貧しい生活を余儀なくされたベケット・レッドフェロー。280億ドルの遺産と「ふさわしい人生」を取り戻すため、相続に立ちはだかる親族たちを巧妙な「事故」に見せかけ抹殺していく。母親仕込みの知性を武器に暗躍するベケットだったが、ジュリアの登場で完璧な計画は狂い始め……。",
       "tmdb": "https://www.themoviedb.org/movie/467905",
       "director": "ジョン・パットン・フォード",
@@ -22527,7 +22262,7 @@
         "スリラー",
         "犯罪"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1567605,
@@ -22537,8 +22272,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/6H2N59jJW1hZEzn2ZdrMvJw5vNI.jpg",
-      "score": 0.0,
-      "votes": 0,
+      "score": 8.25,
+      "votes": 4,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1567605",
       "director": "タイ・ウェスト",
@@ -22547,7 +22282,7 @@
         "ジョニー・デップ",
         "ルパート・グリント",
         "デイジー・リドリー",
-        "アンドレア・ライズボロー"
+        "サム・クラフリン"
       ],
       "countries": [
         "United States of America",
@@ -22558,7 +22293,7 @@
         "ファンタジー",
         "コメディ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1759179,
@@ -22588,7 +22323,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1560309,
@@ -22618,7 +22353,7 @@
         "ドラマ",
         "ロマンス"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1236857,
@@ -22650,7 +22385,7 @@
         "アクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1707955,
@@ -22703,7 +22438,7 @@
       "countries": [],
       "runtime": 38,
       "genres": [],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1147710,
@@ -22903,7 +22638,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-10-30T22:18:46.705276+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1159206,
@@ -22913,8 +22648,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ph4rTUcsXsGMcLIysFlYxWUdlYu.jpg",
-      "score": 6.37,
-      "votes": 361,
+      "score": 6.368,
+      "votes": 363,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1159206",
       "director": "ジム・ジャームッシュ",
@@ -22937,7 +22672,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1411577,
@@ -22956,7 +22691,7 @@
       "cast": [
         "チェ・ウシク",
         "チャン・ヘジン",
-        "공승연",
+        "コン・スンヨン",
         "권다함"
       ],
       "countries": [
@@ -22967,7 +22702,7 @@
         "ファンタジー",
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1400837,
@@ -22977,8 +22712,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg",
-      "score": 5.803,
-      "votes": 175,
+      "score": 5.8,
+      "votes": 201,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1400837",
       "director": "ロブ・サヴェージ",
@@ -22996,7 +22731,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1767360,
@@ -23025,7 +22760,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1754757,
@@ -23202,7 +22937,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-10-31T21:32:34.720804+00:00"
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1069537,
@@ -23705,6 +23440,28 @@
       "checked_at": "2026-11-05T00:01:18.806656+00:00"
     },
     {
+      "id": 1820865,
+      "title": "いかさま隆二と裏切り純子",
+      "original_title": "いかさま隆二と裏切り純子",
+      "date": "2026-11-28",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/kCHl4y1XA5po8QARhfmDjSz5HmV.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "借金取りに追われ、寂れた地方都市に逃げ込んできた元ヤクザの隆二。その町で閉店間際のスーパーに勤めながら、病弱な母と暮らす純子。世の中から取り残されたように生きる二人が出会い、やがて犯罪に手を染めていく。",
+      "tmdb": "https://www.themoviedb.org/movie/1820865",
+      "director": "マツヲトシヒコ",
+      "director_id": 6609547,
+      "cast": [
+        "中山雄斗"
+      ],
+      "countries": [],
+      "runtime": 75,
+      "genres": [],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
       "id": 1287141,
       "title": "ピリオン",
       "original_title": "Pillion",
@@ -23883,6 +23640,37 @@
         "サイエンスフィクション"
       ],
       "checked_at": "2026-11-05T00:01:18.806656+00:00"
+    },
+    {
+      "id": 1653140,
+      "title": "VIVANT",
+      "original_title": "VIVANT",
+      "date": "2026-12-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/3rTjnVouSX2SZP3CT59g9ojdiRO.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "完全新作映画『VIVANT』は2026年12月4日（金）より全国公開！IMAX同時公開も決定！ 本日11月8日(日)に第2シーズン最終話となる第24話が放送された『VIVANT』。最後の最後まで何が起こるか分からない予測不能な物語の行方を日本中が固唾をのんで見守る中、放送終了間際に、主演・堺雅人から映画化情報が発表され、2026年12月4日(金)より全国劇場公開されることが明かされました！ これまでにも数か月に及ぶ海外ロケや、総移動距離1000キロにも及ぶ大規模撮影を敢行するなど、テレビドラマの常識を覆す規格外のスケールで描かれてきた『VIVANT』。その舞台をついにスクリーンへと移し、『VIVANT』史上最大のスケールで繰り広げられる本作は、その壮大な世界観を余すことなく味わえるIMAXでの同時公開も決定！圧倒的な没入感、息をのむ映像美、全身を揺さぶる音響、そして一瞬たりとも目を離せない極限の緊張感を、IMAXでご体感ください。",
+      "tmdb": "https://www.themoviedb.org/movie/1653140",
+      "director": "福澤克雄",
+      "director_id": 1401527,
+      "cast": [
+        "堺雅人",
+        "阿部寛",
+        "二階堂ふみ"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 148,
+      "genres": [
+        "アクション",
+        "アドベンチャー",
+        "テレビ映画",
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1782930,
@@ -25057,6 +24845,54 @@
       "checked_at": "2026-11-07T21:49:33.306340+00:00"
     },
     {
+      "id": 1820676,
+      "title": "浜田省吾『ON THE ROAD 1988』",
+      "original_title": "浜田省吾『ON THE ROAD 1988』",
+      "date": "2027-01-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/acgVatOvx7oGoUrjdqNgokJpSA6.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "1988年から89年にかけて開催されたツアー「SHOGO HAMADA ON THE ROAD 1988 FATHER'S SON」。  ライブハウス、ホール、アリーナ、野外を駆け抜ける前代未聞のコンセプトのもと、昭和から平成へと切り替わる劇的な転換期に敢行された伝説のステージが、ついに映画館でよみがえる。  国立代々木競技場 第一体育館、MZA有明、名古屋レインボーホール――。各地のライブのオリジナルネガを4Kデジタルリマスター化し、5.1chサラウンドミックスの極上音響で再構築した。フィルムカメラが捉えた、自信とエネルギーに満ちた圧倒的な躍動感。大勢の観客を一つに束ねる凄まじい熱量。重厚なサウンド、うねる会場、そして静寂を切り裂く歌声――。  大きな反響を呼んだ前作『A PLACE IN THE SUN at 渚園 Summer of 1988』を経て、満を持して公開される決定版。あの夜の熱狂は、胸の中で今も激しく脈打っている。  2027年1月8日(金)より、39年の時を超え、浜田省吾のライブがスクリーンで復活する！",
+      "tmdb": "https://www.themoviedb.org/movie/1820676",
+      "director": "板屋宏幸",
+      "director_id": 1953328,
+      "cast": [
+        "浜田省吾"
+      ],
+      "countries": [],
+      "runtime": 114,
+      "genres": [
+        "音楽"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
+      "id": 1820368,
+      "title": "館長、最後の日",
+      "original_title": "館長、最後の日",
+      "date": "2027-01-09",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/bxOY9Ypo6jqIbfq03kSrXog5Tn6.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "50歳で脱サラし埼玉県深谷市に映画館「深谷シネマ」を創設した竹石研二。2024年、76歳になった彼は館の運営の若者への引き継ぎを決意する。資金難のなか、マイペースに奔走する愛すべき館長の日常。映画への熱い想いとユーモアあふれる引き継ぎ劇を、深谷市出身の映画監督・入江悠がカメラで追った。",
+      "tmdb": "https://www.themoviedb.org/movie/1820368",
+      "director": "入江悠",
+      "director_id": 1160535,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 108,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
       "id": 1214931,
       "title": "ニュルンベルグ裁判",
       "original_title": "Nuremberg",
@@ -25844,6 +25680,32 @@
       "checked_at": "2026-10-29T22:44:24.256028+00:00"
     },
     {
+      "id": 1820774,
+      "title": "LAST DANCE 最後の遊戯",
+      "original_title": "LAST DANCE 最後の遊戯",
+      "date": "2027-02-19",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/7Qxl9oKv3hO2o6L9H91vBhAE592.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1820774",
+      "director": "村川透",
+      "director_id": 129957,
+      "cast": [],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アクション",
+        "犯罪",
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
       "id": 1649075,
       "title": "映画 1リットルの涙",
       "original_title": "映画 1リットルの涙",
@@ -25978,6 +25840,96 @@
       "genres": []
     },
     {
+      "id": 1275096,
+      "title": "사랑의 하츄핑",
+      "original_title": "사랑의 하츄핑",
+      "date": "2027-03-19",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/vdUTq2BG2l8K1vSloVlAVXUtupQ.jpg",
+      "score": 7.4,
+      "votes": 6,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1275096",
+      "director": "김수훈",
+      "director_id": 1831715,
+      "cast": [
+        "이지현",
+        "조경이",
+        "최낙윤",
+        "여민정"
+      ],
+      "countries": [
+        "South Korea"
+      ],
+      "runtime": 86,
+      "genres": [
+        "アニメーション",
+        "ファミリー",
+        "アドベンチャー",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
+      "id": 1497464,
+      "title": "水の都のネロ",
+      "original_title": "Gatto",
+      "date": "2027-03-19",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/pni1OCwdGucWNmjyUpoXYKwoljA.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "美しい“水の都”に暮らす一匹の猫の物語。まったく新しいビジュアルで描く、感動のファンタジー・アドベンチャー。",
+      "tmdb": "https://www.themoviedb.org/movie/1497464",
+      "director": "Enrico Casarosa",
+      "director_id": 930567,
+      "cast": [
+        "マーク・ラファロ",
+        "ローレンス・フィッシュバーン",
+        "Enrico Casarosa"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 0,
+      "genres": [
+        "アニメーション",
+        "コメディ",
+        "犯罪",
+        "ファミリー"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
+      "id": 1817330,
+      "title": "マッシュル",
+      "original_title": "マッシュル",
+      "date": "2027-03-19",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/zvF6xYjM0bU8nTYANu9ulTuWY35.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1817330",
+      "director": "福田雄一",
+      "director_id": 133704,
+      "cast": [
+        "新田真剣佑"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "コメディ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
       "id": 1749570,
       "title": "ENJU エンジュ",
       "original_title": "ENJU エンジュ",
@@ -26001,6 +25953,62 @@
       "genres": [
         "アクション"
       ]
+    },
+    {
+      "id": 1817766,
+      "title": "まだ見ぬ君へ",
+      "original_title": "まだ見ぬ君へ",
+      "date": "2027-04-02",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/aNskHMRZoBtEHN9PfvQiEdLQtgA.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1817766",
+      "director": "山岸聖太",
+      "director_id": 1848458,
+      "cast": [
+        "松村北斗",
+        "堀田真由"
+      ],
+      "countries": [],
+      "runtime": 0,
+      "genres": [
+        "ロマンス"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
+    },
+    {
+      "id": 1820746,
+      "title": "沖縄コンフィデンシャル",
+      "original_title": "沖縄コンフィデンシャル",
+      "date": "2027-04-29",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/zqfGnUPU3D0pDIYM2JMPamIunzQ.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "太陽と海の楽園、沖縄。人で賑わうきらびやかな夜の新国際通りに、沖縄県警の破天荒で自由な無法者刑事・反町（赤楚衛二）と、東京から出向してきたクールな頭脳派シティボーイ刑事・赤堀（中川大志）が現れる。とある事件で内偵中の二人はバーの店内で突然暴れ出した外国人男性を取り押さえ、噂のあるものを押収。事件は解決したかに思われた。だがそれは、沖縄に隠された巨大な陰謀の始まりにすぎなかった――",
+      "tmdb": "https://www.themoviedb.org/movie/1820746",
+      "director": "橋本一",
+      "director_id": 1034272,
+      "cast": [
+        "赤楚衛二",
+        "中川大志",
+        "瀧内公美",
+        "茅島みずき"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ドラマ",
+        "謎",
+        "犯罪"
+      ],
+      "checked_at": "2026-11-09T23:57:18.887336+00:00"
     },
     {
       "id": 1177369,

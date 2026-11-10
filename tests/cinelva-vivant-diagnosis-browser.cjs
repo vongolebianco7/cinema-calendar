@@ -1,9 +1,18 @@
 'use strict';
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
 const { spawn } = require('node:child_process');
 const net = require('node:net');
 const { waitForLocalServer } = require('./helpers/local-server.cjs');
 const { chromium, webkit } = require('playwright');
+
+const homeHtml = fs.readFileSync('index.html', 'utf8');
+const specialHtml = fs.readFileSync('specials.html', 'utf8');
+const diagnosisHtml = fs.readFileSync('vivant-diagnosis.html', 'utf8');
+assert.doesNotMatch(homeHtml, /href="vivant-diagnosis\.html" class="heroAction/);
+assert.match(homeHtml, /href="specials\.html">特集・診断<\/a>/);
+assert.match(specialHtml, /href="vivant-diagnosis\.html" class="specialAction"/);
+assert.match(diagnosisHtml, /href="specials\.html">特集<\/a>/);
 
 (async () => {
   const socket = net.createServer();
@@ -26,8 +35,11 @@ const { chromium, webkit } = require('playwright');
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto(`http://127.0.0.1:${port}/vivant-diagnosis.html`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`http://127.0.0.1:${port}/specials.html`, { waitUntil: 'domcontentloaded' });
+    await page.getByRole('heading', { name: '特集・診断' }).waitFor();
+    await page.getByRole('link', { name: '診断する' }).click();
     await page.getByRole('heading', { name: 'VIVANT診断' }).waitFor();
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     assert.match(await page.locator('.fanNote').innerText(), /非公式ファン企画/);
     for (let question = 0; question < 8; question++) {
       assert.equal(await page.locator('.choice').count(), 4);
@@ -37,6 +49,17 @@ const { chromium, webkit } = require('playwright');
     await page.getByRole('heading', { name: '診断結果' }).waitFor();
     assert.equal(await page.locator('.movie').count(), 3);
     assert.equal(await page.locator('.identityBlock').count(), 2);
+    const contrast = await page.locator('.identityBlock strong').first().evaluate(el => ({ color: getComputedStyle(el).color, background: getComputedStyle(el.closest('.identity')).backgroundColor }));
+    assert.notEqual(contrast.color, contrast.background, 'result label must remain visible in light theme');
+    await page.evaluate(() => { Object.defineProperty(navigator, 'share', { configurable: true, value: async payload => { window.__sharedPayload = payload; } }); });
+    await page.locator('.shareButton').click();
+    await page.waitForFunction(() => Boolean(window.__sharedPayload));
+    const shared = await page.evaluate(() => window.__sharedPayload);
+    assert.match(shared.text, /VIVANT診断/);
+    assert.match(shared.text, /おすすめ映画/);
+    const imageDownload = page.waitForEvent('download');
+    await page.locator('.saveCardButton').click();
+    assert.equal((await imageDownload).suggestedFilename(), 'vivant-diagnosis.png');
     const firstTitle = await page.locator('.movie h3').first().innerText();
     await page.locator('.movie .replace').first().click();
     assert.equal(await page.locator('.movie').count(), 3);

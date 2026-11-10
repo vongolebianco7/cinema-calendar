@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0c0f">
+<title>特集・診断 | Cinelva</title>
+<meta name="description" content="Cinelvaの映画特集と診断。">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png?v=20261023-clean">
+<link rel="icon" href="assets/cinelva_original_colors_transparent.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="assets/theme.css">
+<script src="js/theme.js?v=20261023-frame-2"></script>
+<style>
+:root{color-scheme:dark;--bg:#090909;--text:#f4f4f4;--muted:#999;--line:#292929;--gold:#e5b64d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}a{color:inherit;text-decoration:none}
+.gTop{position:sticky;top:0;z-index:20;background:rgba(9,9,9,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.gNav{height:62px;max-width:1180px;margin:auto;padding:0 18px;display:flex;align-items:center;gap:12px}.gBrand{display:flex;align-items:center;gap:7px;margin-right:auto;font-size:18px;font-weight:800}.gBrand img{height:31px;width:auto}.gNav form{display:flex;flex:0 1 min(360px,44vw);min-width:0;margin-left:auto}.gSearch{width:100%;min-width:0;height:36px;border:1px solid #333;border-radius:18px;background:#111;color:var(--text);padding:0 13px}.backLink{font-size:12px;color:#bbb;border:1px solid #333;border-radius:999px;padding:8px 12px}
+main{max-width:900px;margin:auto;padding:30px 18px max(48px,env(safe-area-inset-bottom))}.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.15em}.hero{margin-bottom:24px}.hero h1{font-size:clamp(30px,7vw,44px);line-height:1.1;margin:9px 0 8px;letter-spacing:-.03em}.hero p{color:var(--muted);font-size:14px;margin:0}
+.specialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.specialCard{min-height:220px;border:1px solid #343434;border-radius:12px;padding:22px;background:linear-gradient(145deg,#171717,#101010);display:flex;flex-direction:column}.tag{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em}.specialCard h2{font-size:24px;line-height:1.2;margin:14px 0 8px}.specialCard p{color:#b6b6b6;font-size:14px;line-height:1.65;margin:0 0 18px}.specialAction{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:auto;padding:10px 16px;border:1px solid var(--gold);border-radius:7px;color:#17130b;background:var(--gold);font-weight:800}.note{color:#999;font-size:11px;margin-top:10px}.footer{border-top:1px solid var(--line);margin-top:26px;padding-top:16px;color:#888;font-size:11px}
+html[data-theme="light"]{color-scheme:light;--bg:#f6f4ef;--text:#242521;--muted:#5b5c57;--line:#d5d1c8;--gold:#9a7022}
+html[data-theme="light"] .gTop{background:rgba(246,244,239,.97)}html[data-theme="light"] .gSearch{background:#fffefa;color:#242521;border-color:#cbc6bb}html[data-theme="light"] .backLink{color:#343530;border-color:#aaa69d}
+html[data-theme="light"] .specialCard{background:#fffefa;color:#242521;border-color:#d2cec4}html[data-theme="light"] .specialCard p,html[data-theme="light"] .note,html[data-theme="light"] .footer{color:#565750}html[data-theme="light"] .specialAction{color:#fff;background:#89631c;border-color:#89631c}
+@media(max-width:620px){.gNav{height:56px;padding:0 12px;gap:8px}.gBrand img{height:27px}.gNav form{width:auto;flex:1}.gSearch{height:34px;font-size:12px}.backLink{font-size:10px;padding:8px}main{padding:24px 14px max(42px,env(safe-area-inset-bottom))}.specialGrid{grid-template-columns:1fr;gap:10px}.specialCard{min-height:190px;padding:18px}}
+</style>
+</head>
+<body>
+<header class="gTop"><div class="gNav">
+<a class="gBrand" href="index.html" aria-label="Cinelva カレンダーに戻る"><img src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span>Cinelva</span></a>
+<form action="search.html" method="get"><input class="gSearch" type="search" name="search" placeholder="作品を検索" aria-label="作品を検索"></form>
+<a class="backLink" href="index.html">カレンダー</a>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="pageTitle"><span class="eyebrow">Cinelva / SPECIAL</span><h1 id="pageTitle">特集・診断</h1><p>映画を、いつもと違う角度から。</p></section>
+<section class="specialGrid" aria-label="Cinelvaの特集と診断">
+<article class="specialCard"><span class="tag">診断</span><h2>VIVANT診断</h2><p>8問で所属と役割を診断。映画も3本おすすめ。</p><a href="vivant-diagnosis.html" class="specialAction">診断する</a><div class="note">非公式ファン企画です。TBSテレビとは関係ありません。</div></article>
+</section>
+<footer class="footer">Cinelva</footer>
+</main>
+</body>
+</html>

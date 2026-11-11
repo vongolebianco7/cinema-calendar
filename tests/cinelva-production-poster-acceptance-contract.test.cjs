@@ -10,6 +10,11 @@ test('production poster acceptance can use a system Chromium executable locally'
   assert.match(script, /executablePath/);
 });
 
+test('poster audit excludes intentional hidden placeholders and flags visible empty images', () => {
+  assert.match(script, /img\[data-box-poster\]:not\(\[hidden\]\)/);
+  assert.match(script, /image\.getAttribute\('src'\)\s*\|\|\s*''/);
+});
+
 test('artifact directory uses path.dirname for relative and absolute output paths', () => {
   assert.match(script, /import path from 'node:path'/);
   assert.match(script, /path\.dirname\(output\)/);

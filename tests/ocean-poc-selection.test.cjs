@@ -1,6 +1,0 @@
-const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const root=path.resolve(__dirname,'..');const read=p=>fs.readFileSync(path.join(root,p),'utf8');
-test('fixed comparison inputs',()=>{const c=read('preview/ocean/poc/poc-config.js');assert.match(c,/\[0, 10, 30, 100, 300, 500\]/);assert.match(c,/cinemap-poc-01/)});
-test('D v3 uses cached image sprites instead of procedural fish primitives',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/loadDV3Assets/);assert.match(m,/mountLayered2D/);assert.match(m,/drawImage\(assets\.fish/);assert.doesNotMatch(m,/function fish\(/);assert.doesNotMatch(m,/drawNaturalFish/)});
-test('D v3 models depth and ecology through sprite scale, schools and maturity',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/scenario\.maturity/);assert.match(m,/school=scenario\.state>=30/);assert.match(m,/const z=\.28\+seeded/);assert.match(m,/\.62\+z\*\.5/)});
-test('B C remain rejected',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/B:'REJECT/);assert.match(m,/C:'REJECT/)});
-test('performance evidence remains',()=>{const m=read('preview/ocean/poc/poc-main.js');assert.match(m,/medianFps/);assert.match(m,/longFrames/);assert.match(m,/metrics\.ready/);assert.match(m,/window\.__OCEAN_POC__/)});

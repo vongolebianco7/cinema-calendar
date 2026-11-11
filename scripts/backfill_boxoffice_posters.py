@@ -27,6 +27,7 @@ SEARCH = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 MAX_DAILY_LOOKUPS = 100
+MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 RECHECK_DAYS = 30
 
 
@@ -184,33 +185,64 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
     enriched = local_enriched
     ambiguous = unresolved = 0
     last_request = 0.0
+
+    def rate_limited_fetch(url):
+        nonlocal last_request
+        wait = delay - (time.monotonic() - last_request)
+        if wait > 0:
+            time.sleep(wait)
+        result = fetch_json(url, opener)
+        last_request = time.monotonic()
+        return result
+
     for _, index, market_year, row in candidate_rows(data, now, limit):
         title = str(row.get("title") or "").strip()
         if not title or not normalize(title):
             unresolved += 1
             continue
         existing_id = row.get("tmdbId") or row.get("tmdb_id")
+        match_type = "exact_title_and_release_year_window"
+        too_many_alias_candidates = False
         try:
             if existing_id:
                 if not str(existing_id).isdigit() or int(existing_id) <= 0:
                     unresolved += 1
                     continue
                 url = DETAILS.format(int(existing_id)) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"})
-                result = fetch_json(url, opener)
+                result = rate_limited_fetch(url)
                 candidates = [result] if result.get("id") == int(existing_id) else []
             else:
-                wait = delay - (time.monotonic() - last_request)
-                if wait > 0:
-                    time.sleep(wait)
                 url = SEARCH + "?" + urllib.parse.urlencode({
                     "api_key": api_key, "query": title, "language": "ja-JP", "region": "JP",
                     "include_adult": "false", "page": 1,
                 })
-                result = fetch_json(url, opener)
-                candidates = [movie for movie in result.get("results", [])
-                              if normalize(title) in {normalize(movie.get("title")), normalize(movie.get("original_title"))}
-                              and eligible_release_year(movie.get("release_date"), market_year)]
-                last_request = time.monotonic()
+                result = rate_limited_fetch(url)
+                search_results = result.get("results", [])
+                exact_candidates = [movie for movie in search_results
+                                    if normalize(title) in {normalize(movie.get("title")), normalize(movie.get("original_title"))}
+                                    and eligible_release_year(movie.get("release_date"), market_year)]
+                if exact_candidates:
+                    candidates = exact_candidates
+                else:
+                    # TMDB search also indexes alternative names. Verify those candidates
+                    # against TMDB's official Japan-scoped alternative-title endpoint
+                    # before assigning artwork; search ranking alone is never proof.
+                    year_candidates = [movie for movie in search_results
+                                       if movie.get("id") and eligible_release_year(movie.get("release_date"), market_year)]
+                    if len(year_candidates) > MAX_ALTERNATIVE_TITLE_CANDIDATES:
+                        candidates = []
+                        too_many_alias_candidates = True
+                    else:
+                        candidates = []
+                        for movie in year_candidates:
+                            alt_url = f"https://api.themoviedb.org/3/movie/{int(movie['id'])}/alternative_titles?" + urllib.parse.urlencode({
+                                "api_key": api_key, "country": "JP",
+                            })
+                            alternatives = rate_limited_fetch(alt_url).get("titles", [])
+                            if any(normalize(title) == normalize(item.get("title")) for item in alternatives):
+                                candidates.append(movie)
+                        if candidates:
+                            match_type = "exact_tmdb_alternative_title_and_release_year_window"
         except Exception as exc:
             print("TMDB box-office poster lookup skipped:", title, type(exc).__name__)
             # A transient API failure must remain retryable on the next run.
@@ -233,13 +265,13 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 "poster": IMAGE_BASE + path_value,
                 "identity_source": f"https://www.themoviedb.org/movie/{mid}",
                 "identity_checked_at": checked_at,
-                "identity_match": "exact_title_and_release_year_window",
+                "identity_match": match_type,
                 "poster_checked_at": checked_at,
             })
             enriched += 1
         else:
             row["poster_checked_at"] = checked_at
-            if len(unique) > 1:
+            if len(unique) > 1 or too_many_alias_candidates:
                 ambiguous += 1
             else:
                 unresolved += 1

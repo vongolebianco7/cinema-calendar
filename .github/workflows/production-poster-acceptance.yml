@@ -5,7 +5,9 @@ on:
   pull_request:
     paths:
       - scripts/production-poster-acceptance.mjs
+      - scripts/production-poster-acceptance-metrics.mjs
       - tests/cinelva-production-poster-acceptance-contract.test.cjs
+      - tests/cinelva-production-poster-acceptance-metrics.test.mjs
       - .github/workflows/production-poster-acceptance.yml
 
 permissions:
@@ -39,7 +41,7 @@ jobs:
       - name: Check acceptance script syntax
         run: |
           node --check scripts/production-poster-acceptance.mjs
-          node --test tests/cinelva-production-poster-acceptance-contract.test.cjs
+          node --test tests/cinelva-production-poster-acceptance-contract.test.cjs tests/cinelva-production-poster-acceptance-metrics.test.mjs
       - name: Audit canonical production poster rendering
         env:
           CINELVA_BROWSER: ${{ matrix.browser }}

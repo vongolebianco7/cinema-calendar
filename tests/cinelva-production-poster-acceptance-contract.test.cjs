@@ -17,6 +17,7 @@ test('artifact directory uses path.dirname for relative and absolute output path
 
 test('workflow installs Playwright where the ESM script can resolve it', () => {
   assert.match(workflow, /npm install --no-save --no-package-lock playwright@1\.59\.0/);
+  assert.match(workflow, /cinelva-production-poster-acceptance-metrics\.test\.mjs/);
   assert.doesNotMatch(workflow, /NODE_PATH:/);
   assert.doesNotMatch(workflow, /cd "\$RUNNER_TEMP\/cinelva-production-acceptance"/);
 });

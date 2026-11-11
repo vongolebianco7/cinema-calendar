@@ -55,9 +55,14 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run build
 
+      - name: Test direct database URL routing
+        if: steps.db.outputs.ready == 'true'
+        working-directory: backend
+        run: node --test scripts/db-sync-direct.test.mjs
+
       - name: Sync schema and import generated JSON
         if: steps.db.outputs.ready == 'true'
         working-directory: backend
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm run db:sync
+        run: node scripts/db-sync-direct.mjs

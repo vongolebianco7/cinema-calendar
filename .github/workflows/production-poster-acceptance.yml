@@ -5,7 +5,9 @@ on:
   pull_request:
     paths:
       - scripts/production-poster-acceptance.mjs
+      - scripts/production-poster-acceptance-metrics.mjs
       - tests/cinelva-production-poster-acceptance-contract.test.cjs
+      - tests/cinelva-production-poster-acceptance-metrics.test.mjs
       - .github/workflows/production-poster-acceptance.yml
 
 permissions:
@@ -16,7 +18,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check acceptance contracts
+        run: |
+          node --check scripts/production-poster-acceptance.mjs
+          node --test tests/cinelva-production-poster-acceptance-contract.test.cjs tests/cinelva-production-poster-acceptance-metrics.test.mjs
+
   rendered-posters:
+    if: github.event_name == 'workflow_dispatch'
+    needs: contract
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
@@ -36,10 +52,6 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.59.0
           npx playwright install --with-deps ${{ matrix.browser }}
-      - name: Check acceptance script syntax
-        run: |
-          node --check scripts/production-poster-acceptance.mjs
-          node --test tests/cinelva-production-poster-acceptance-contract.test.cjs
       - name: Audit canonical production poster rendering
         env:
           CINELVA_BROWSER: ${{ matrix.browser }}

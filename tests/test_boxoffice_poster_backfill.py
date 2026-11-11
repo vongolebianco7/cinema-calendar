@@ -65,6 +65,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", row)
         self.assertNotIn("tmdbId", row)
         self.assertTrue(row["poster_checked_at"])
+        self.assertEqual(row["poster_check_version"], 2)
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
@@ -101,7 +102,9 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", data["by_year"]["1980"][0])
         self.assertNotIn("tmdbId", data["by_year"]["1980"][0])
         self.assertEqual(result["unresolved"], 1)
-        self.assertEqual(len(requests), 1)
+        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 2)
+        self.assertEqual(len(requests), 2)
+        self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
         data, requests, result = self.run_rows(
@@ -142,6 +145,126 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "verified_local_exact_title_and_release_year_window")
         self.assertEqual(requests, [])
         self.assertEqual(result["local_enriched"], 1)
+
+
+
+    def test_recent_unresolved_row_from_old_matcher_is_rechecked_immediately(self):
+        recently_checked = {
+            "title": "旧照合方式の未解決作品",
+            "poster_checked_at": "2026-11-09T12:00:00Z",
+            "poster_check_version": 1,
+        }
+        data, requests, result = self.run_rows(
+            [recently_checked],
+            {"results": [{"id": 55, "title": "旧照合方式の未解決作品",
+                          "release_date": "1980-01-01", "poster_path": "/restored.jpg"}]},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertEqual(row["tmdbId"], 55)
+        self.assertEqual(row["poster_check_version"], 2)
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 1)
+
+    def test_recent_unresolved_row_in_current_matcher_backoff_is_skipped(self):
+        recently_checked = {
+            "title": "現方式で確認済みの作品",
+            "poster_checked_at": "2026-11-09T12:00:00Z",
+            "poster_check_version": 2,
+        }
+        data, requests, result = self.run_rows(
+            [recently_checked],
+            {"results": [{"id": 56, "title": "現方式で確認済みの作品",
+                          "release_date": "1980-01-01", "poster_path": "/ignored.jpg"}]},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertNotIn("poster", row)
+        self.assertEqual(requests, [])
+        self.assertEqual(result["enriched"], 0)
+
+    def test_unique_tmdb_japan_alternative_title_recovers_poster(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1981": [{"title": "レイダース 失われた聖櫃(アーク)"}]},
+                                    "all_time": []}), encoding="utf-8")
+        requests = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            if "/search/movie?" in request.full_url:
+                return Response({"results": [{
+                    "id": 85, "title": "インディ・ジョーンズ／レイダース 失われたアーク《聖櫃》",
+                    "original_title": "Raiders of the Lost Ark", "release_date": "1981-06-12",
+                    "poster_path": "/raiders.jpg",
+                }]})
+            return Response({"id": 85, "titles": [
+                {"iso_3166_1": "JP", "title": "レイダース 失われた聖櫃(アーク)", "type": "working"}
+            ]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                   now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                   catalog_paths=[])
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
+        self.assertEqual(row["tmdbId"], 85)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/raiders.jpg")
+        self.assertEqual(row["identity_match"],
+                         "exact_tmdb_alternative_title_and_release_year_window")
+        self.assertEqual(len(requests), 2)
+        self.assertIn("/movie/85/alternative_titles?", requests[1][0].full_url)
+        self.assertIn("country=JP", requests[1][0].full_url)
+        self.assertEqual(result["enriched"], 1)
+
+    def test_unverified_tmdb_search_result_stays_unresolved(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1981": [{"title": "レイダース 失われた聖櫃(アーク)"}]},
+                                    "all_time": []}), encoding="utf-8")
+        requests = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            if "/search/movie?" in request.full_url:
+                return Response({"results": [{
+                    "id": 86, "title": "似ているだけの作品", "original_title": "Other film",
+                    "release_date": "1981-06-12", "poster_path": "/wrong.jpg",
+                }]})
+            return Response({"id": 86, "titles": [
+                {"iso_3166_1": "JP", "title": "別の日本語題", "type": "working"}
+            ]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                   now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                   catalog_paths=[])
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
+        self.assertNotIn("tmdbId", row)
+        self.assertNotIn("poster", row)
+        self.assertEqual(len(requests), 2)
+        self.assertEqual(result["unresolved"], 1)
+
+    def test_alias_candidate_overflow_is_unresolved_without_guessing(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1981": [{"title": "同名別題"}]},
+                                    "all_time": []}), encoding="utf-8")
+        requests = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            return Response({"results": [
+                {"id": n, "title": f"候補{n}", "release_date": "1981-01-01",
+                 "poster_path": f"/{n}.jpg"} for n in range(1, 5)
+            ]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                   now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                   catalog_paths=[])
+        row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
+        self.assertNotIn("tmdbId", row)
+        self.assertNotIn("poster", row)
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(result["ambiguous"], 1)
 
     def test_reuses_unique_verified_ranking_poster(self):
         tmp = tempfile.TemporaryDirectory()

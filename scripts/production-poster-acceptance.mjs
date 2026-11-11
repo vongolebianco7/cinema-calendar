@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium, webkit } from 'playwright';
+import { posterFailures } from './production-poster-acceptance-metrics.mjs';
 
 const browserName = process.env.CINELVA_BROWSER || 'chromium';
 const browserType = { chromium, webkit }[browserName];
@@ -49,6 +50,10 @@ async function imageResult(page, name, imageResponses) {
       loaded: candidates.filter(image => image.complete && image.naturalWidth > 0).length,
       pending: candidates.filter(image => !image.complete).map(describe),
       broken: candidates.filter(image => image.complete && image.naturalWidth === 0).map(describe),
+      empty_source_images: [...document.querySelectorAll('img[data-box-poster]:not([src])')].map(image => ({
+        alt: image.alt || '',
+        card_title: image.closest('.rankCard')?.querySelector('.title')?.textContent?.trim() || '',
+      })),
       placeholders: document.querySelectorAll('.rankPosterPlaceholder:not([hidden]), .posterPlaceholder:not([hidden]), [data-poster-placeholder]:not([hidden])').length,
       horizontal_overflow: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth),
     };
@@ -129,13 +134,7 @@ try {
   await browser.close();
 }
 
-for (const result of results) {
-  if (result.broken.length) failures.push(`${result.name}: ${result.broken.length} broken rendered images`);
-  if (result.pending.length) failures.push(`${result.name}: ${result.pending.length} poster images never settled`);
-  if (result.image_http_errors.length) failures.push(`${result.name}: image HTTP errors: ${result.image_http_errors.join(', ')}`);
-  if (result.page_errors.length) failures.push(`${result.name}: page errors: ${result.page_errors.join(' | ')}`);
-  if (width <= 390 && result.horizontal_overflow > 1) failures.push(`${result.name}: ${result.horizontal_overflow}px page overflow at ${width}px`);
-}
+for (const result of results) failures.push(...posterFailures(result, width));
 const historical = results.find(result => result.name === 'box-office-1980');
 if (!historical?.caligula_loaded) failures.push('box-office-1980: restored Caligula poster did not render');
 

@@ -33,8 +33,8 @@ test('production poster audit covers My Cinelva data tabs with isolated syntheti
   for (const route of ['my-cinelva-records', 'my-cinelva-watchlist', 'my-cinelva-awards', 'my-cinelva-directors']) {
     assert.match(script, new RegExp(`name: '${route}'`));
   }
-  assert.match(script, /page\\.addInitScript/);
+  assert.ok(script.includes('page.addInitScript'));
   assert.match(script, /cinelva-library-records-v2/);
   assert.match(script, /cinelva-want-to-watch-v1/);
-  assert.match(script, /fixture_used: Boolean\\(route\\.fixture\\)/);
+  assert.ok(script.includes('fixture_used: Boolean(route.fixture)'));
 });

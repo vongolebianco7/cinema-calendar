@@ -50,10 +50,12 @@ async function imageResult(page, name, imageResponses) {
       loaded: candidates.filter(image => image.complete && image.naturalWidth > 0).length,
       pending: candidates.filter(image => !image.complete).map(describe),
       broken: candidates.filter(image => image.complete && image.naturalWidth === 0).map(describe),
-      empty_source_images: [...document.querySelectorAll('img[data-box-poster]:not([src])')].map(image => ({
-        alt: image.alt || '',
-        card_title: image.closest('.rankCard')?.querySelector('.title')?.textContent?.trim() || '',
-      })),
+      empty_source_images: [...document.querySelectorAll('img[data-box-poster]:not([hidden])')]
+        .filter(image => !/^https?:/.test(image.getAttribute('src') || ''))
+        .map(image => ({
+          alt: image.alt || '',
+          card_title: image.closest('.rankCard')?.querySelector('.title')?.textContent?.trim() || '',
+        })),
       placeholders: document.querySelectorAll('.rankPosterPlaceholder:not([hidden]), .posterPlaceholder:not([hidden]), [data-poster-placeholder]:not([hidden])').length,
       horizontal_overflow: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth),
     };

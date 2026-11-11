@@ -16,12 +16,28 @@ if (base.protocol !== 'https:' && base.hostname !== '127.0.0.1') {
 const width = Number(process.env.CINELVA_VIEWPORT_WIDTH || (browserName === 'webkit' ? 390 : 1280));
 const output = process.env.CINELVA_ACCEPTANCE_OUTPUT || `artifacts/production-poster-acceptance/${browserName}-${width}.json`;
 const executablePath = process.env.CINELVA_BROWSER_EXECUTABLE;
+const auditFixture = {
+  id: '597',
+  tmdbId: 597,
+  title: 'タイタニック',
+  year: 1997,
+  poster: 'https://image.tmdb.org/t/p/w342/ofhCnW6i7mQIiLSSucBHqZQ7XT7.jpg',
+  watched: true,
+  watchedAt: '2026-11-10',
+  rating: 4.5,
+  director: 'James Cameron',
+  genres: ['ドラマ'],
+};
 const routes = [
   { name: 'calendar', path: '/index.html' },
   { name: 'discover', path: '/discover.html' },
   { name: 'streaming', path: '/streaming.html' },
   { name: 'movie-detail', path: '/search.html?search=%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%B9%E3%83%86%E3%83%A9%E3%83%BC' },
   { name: 'director-collection', path: '/my-cinemap.html' },
+  { name: 'my-cinelva-records', path: '/my-cinelva/', tab: 'records', fixture: true },
+  { name: 'my-cinelva-watchlist', path: '/my-cinelva/?tab=watchlist', tab: 'watchlist', fixture: true },
+  { name: 'my-cinelva-awards', path: '/my-cinelva/', tab: 'awards', fixture: true },
+  { name: 'my-cinelva-directors', path: '/my-cinelva/', tab: 'directors', fixture: true },
 ];
 
 async function settleImages(page) {
@@ -65,6 +81,16 @@ async function imageResult(page, name, imageResponses) {
 
 async function auditRoute(context, route) {
   const page = await context.newPage();
+  if (route.fixture) {
+    await page.addInitScript(({ movie }) => {
+      localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
+        [movie.id]: { ...movie, id: String(movie.id), watched: true },
+      }));
+      localStorage.setItem('cinelva-want-to-watch-v1', JSON.stringify({
+        [movie.id]: { id: String(movie.id), tmdbId: movie.tmdbId, title: movie.title, year: movie.year, poster: movie.poster, savedAt: '2026-11-10T00:00:00.000Z' },
+      }));
+    }, { movie: auditFixture });
+  }
   const imageResponses = new Set();
   const pageErrors = [];
   page.on('response', response => {
@@ -77,8 +103,12 @@ async function auditRoute(context, route) {
     const response = await page.goto(new URL(route.path, base).href, { waitUntil: 'domcontentloaded', timeout: 30000 });
     if (!response || response.status() >= 400) throw new Error(`${route.name}: HTTP ${response?.status() ?? 'missing'}`);
     await page.waitForTimeout(2500);
+    if (route.tab) {
+      await page.locator(`[data-tab="${route.tab}"]`).click();
+      await page.waitForTimeout(500);
+    }
     await settleImages(page);
-    return { ...(await imageResult(page, route.name, imageResponses)), page_errors: pageErrors };
+    return { ...(await imageResult(page, route.name, imageResponses)), fixture_used: Boolean(route.fixture), page_errors: pageErrors };
   } finally {
     await page.close();
   }

@@ -28,3 +28,13 @@ test('workflow installs Playwright where the ESM script can resolve it', () => {
   assert.doesNotMatch(workflow, /NODE_PATH:/);
   assert.doesNotMatch(workflow, /cd "\$RUNNER_TEMP\/cinelva-production-acceptance"/);
 });
+
+test('production poster audit covers My Cinelva data tabs with isolated synthetic records', () => {
+  for (const route of ['my-cinelva-records', 'my-cinelva-watchlist', 'my-cinelva-awards', 'my-cinelva-directors']) {
+    assert.match(script, new RegExp(`name: '${route}'`));
+  }
+  assert.match(script, /page\\.addInitScript/);
+  assert.match(script, /cinelva-library-records-v2/);
+  assert.match(script, /cinelva-want-to-watch-v1/);
+  assert.match(script, /fixture_used: Boolean\\(route\\.fixture\\)/);
+});

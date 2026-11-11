@@ -103,7 +103,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("tmdbId", data["by_year"]["1980"][0])
         self.assertEqual(result["unresolved"], 1)
         self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 2)
-        self.assertEqual(len(requests), 1)
+        self.assertEqual(len(requests), 2)
+        self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
         data, requests, result = self.run_rows(

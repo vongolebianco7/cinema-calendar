@@ -28,6 +28,7 @@ DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 MAX_DAILY_LOOKUPS = 100
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
+POSTER_CHECK_VERSION = 2
 RECHECK_DAYS = 30
 
 
@@ -69,6 +70,8 @@ def atomic_write(path, data):
 
 
 def poster_checked_recently(row, now):
+    if row.get("poster_check_version") != POSTER_CHECK_VERSION:
+        return False
     checked = row.get("poster_checked_at")
     if not checked:
         return False
@@ -160,6 +163,7 @@ def reuse_verified_local_posters(data, now, catalog_paths):
                 "identity_checked_at": checked_at,
                 "identity_match": "verified_local_exact_title_and_release_year_window",
                 "poster_checked_at": checked_at,
+                "poster_check_version": POSTER_CHECK_VERSION,
             })
             enriched += 1
     return enriched
@@ -255,6 +259,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
             path_value = movie.get("poster_path")
             if not valid_poster_path(path_value):
                 row["poster_checked_at"] = checked_at
+                row["poster_check_version"] = POSTER_CHECK_VERSION
                 unresolved += 1
                 continue
             mid = int(movie["id"])
@@ -267,10 +272,12 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 "identity_checked_at": checked_at,
                 "identity_match": match_type,
                 "poster_checked_at": checked_at,
+                "poster_check_version": POSTER_CHECK_VERSION,
             })
             enriched += 1
         else:
             row["poster_checked_at"] = checked_at
+            row["poster_check_version"] = POSTER_CHECK_VERSION
             if len(unique) > 1 or too_many_alias_candidates:
                 ambiguous += 1
             else:

@@ -132,3 +132,13 @@ The coverage report's official-subset counts and direct current-data field count
 - #244 remains open: 12 registered providers, 0 approved premiere feeds/automated discovery; 11 services have cited curated records (457 rows), DMM TV has none. Sirât is in the durable source with Netflix 2026-11-05, TMDB 1151272, and poster; production acceptance is pending.
 - #593 remains open: all-screen image HTTP/error rates and public acceptance have not been measured. Continue full screen-by-screen validation after deployment; do not close issues early.
 - Next: verify quota, deploy once if allowed, then test production on desktop Chromium/WebKit and 390px layout; retain physical iPhone Safari as a separate acceptance item.
+
+
+## 2026-11-11 P0 resume checkpoint
+
+- Latest main: `f83530426aebd27baf27093b9964af28c29a04e3`. PR #796 was squash merged with empty-poster source handling, production acceptance for images without a src, strict official TMDB alternative-title matching, and the Neon direct-connection DB sync fix from #795. PR #795 was closed as included.
+- PR #796 head `94970b7b2fb0e6f84ff133e910922a75a6b2ea77` passed all four required workflows, the recorded additional checks, local focused tests 18/18, and the full quality gate (584 Node tests). Vercel preview was successful.
+- The merge-triggered Vercel production build `dpl_EzfkQh2yGCkpoqpfhuYencddbBqW` stopped at the source-bound publication gate. Current main executable digest is `02898cf0810a7ca7022fab1741256884f0f3e61632386d6bde12b7244b9469fe`; the receipt still references `c0151084f048c0ae7911bcf13a3156595dd712ba` and verifies a different digest. This is not a quota failure; do not weaken or bypass the gate.
+- Previous production counts, before #796 publication: boxoffice 1,383/1,647 (264 missing; +499 from 884 baseline), streaming 430/457 (27 missing), TV 20/23 (3 missing), movies 1,356/1,383 (27 missing), now-playing 88/89 (1 missing), theatrical 926/926, directors 9,980/10,673 (693 missing). Chromium showed zero HTTP failures for images that had URLs, but 3 ranking cards used empty image sources. These are not post-merge counts.
+- #593 and #244 remain open; #244 remains queued behind #593. No new production recovery is counted. Do not rerun official backfill/DB sync until the receipt is repaired and latest main/proof/quota are rechecked.
+- Next: verify the combined current-main source with required PR workflows, refresh `quality/production-proof.json` to a successful source SHA that matches the merged executable tree, merge after required checks pass, then verify the merge-triggered frontend/backend production deployments and public counts. Run post-deploy Chromium/WebKit poster acceptance once. Physical iPhone Safari remains a separate unverified acceptance item.

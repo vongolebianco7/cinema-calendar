@@ -65,6 +65,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", row)
         self.assertNotIn("tmdbId", row)
         self.assertTrue(row["poster_checked_at"])
+        self.assertEqual(row["poster_check_version"], 2)
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
@@ -101,6 +102,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", data["by_year"]["1980"][0])
         self.assertNotIn("tmdbId", data["by_year"]["1980"][0])
         self.assertEqual(result["unresolved"], 1)
+        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 2)
         self.assertEqual(len(requests), 1)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
@@ -143,6 +145,40 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(requests, [])
         self.assertEqual(result["local_enriched"], 1)
 
+
+
+    def test_recent_unresolved_row_from_old_matcher_is_rechecked_immediately(self):
+        recently_checked = {
+            "title": "旧照合方式の未解決作品",
+            "poster_checked_at": "2026-11-09T12:00:00Z",
+            "poster_check_version": 1,
+        }
+        data, requests, result = self.run_rows(
+            [recently_checked],
+            {"results": [{"id": 55, "title": "旧照合方式の未解決作品",
+                          "release_date": "1980-01-01", "poster_path": "/restored.jpg"}]},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertEqual(row["tmdbId"], 55)
+        self.assertEqual(row["poster_check_version"], 2)
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 1)
+
+    def test_recent_unresolved_row_in_current_matcher_backoff_is_skipped(self):
+        recently_checked = {
+            "title": "現方式で確認済みの作品",
+            "poster_checked_at": "2026-11-09T12:00:00Z",
+            "poster_check_version": 2,
+        }
+        data, requests, result = self.run_rows(
+            [recently_checked],
+            {"results": [{"id": 56, "title": "現方式で確認済みの作品",
+                          "release_date": "1980-01-01", "poster_path": "/ignored.jpg"}]},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertNotIn("poster", row)
+        self.assertEqual(requests, [])
+        self.assertEqual(result["enriched"], 0)
 
     def test_unique_tmdb_japan_alternative_title_recovers_poster(self):
         tmp = tempfile.TemporaryDirectory()

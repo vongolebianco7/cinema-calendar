@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "4b5b5830dcd53fbfd69a88edf124a6a299218e08",
-  "verified_at": "2026-11-11T03:18:28Z",
-  "note": "Exact-source CI receipt for PR #798 source head 4b5b5830dcd53fbfd69a88edf124a6a299218e08. All four required PR workflows passed on this exact source head: Autonomous quality gate run 42951133155, CINELVA smoke tests run 42951133171, Validate frontend run 42951133170, and Reproducible backend build run 42951133185. This receipt covers the source tree that adds visible-empty-poster acceptance and its contract tests. Production deployment and public rendered-image acceptance remain pending; no production improvement is claimed."
+  "head_sha": "1df8f98681655f21d5e3bc52382df381f4b6f7f5",
+  "verified_at": "2026-11-11T22:00:00+09:00",
+  "note": "Exact-source CI receipt for PR #798 source head 1df8f98681655f21d5e3bc52382df381f4b6f7f5. All four required pull-request workflows passed on this exact head: Autonomous quality gate run 43022691368; CINELVA smoke tests run 43022691336; Validate frontend run 43022691352; Reproducible backend build run 43022691420. Additional PR checks also passed. This receipt does not claim production deployment or public rendered-image acceptance; #593 remains open pending production recovery and browser acceptance."
 }

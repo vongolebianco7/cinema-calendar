@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "47d652bb28d5ef764c365d695ded62af58425949",
-  "verified_at": "2026-11-10T23:29:35.725Z",
-  "note": "Exact-source CI receipt for PR #795 source head 47d652bb28d5ef764c365d695ded62af58425949. All four required PR workflows passed on this exact source head: Autonomous quality gate run 42922849263, CINELVA smoke tests run 42922849254, Validate frontend run 42922849397, and Reproducible backend build run 42922849455. Three additional checks also passed on the same source head: CINELVA mobile layout smoke test 42922849375, Cinemap completeness scorecard 42922849303, and CINELVA continuous visual QA run 42922849359. Source includes direct Neon endpoint routing for the guarded DB sync workflow. This receipt attests CI only. Production acceptance of the latest now-playing deployment remains blocked by public GitHub CI proof HTTP403; the user-facing production alias remains on the previous READY deployment."
+  "head_sha": "c0151084f048c0ae7911bcf13a3156595dd712ba",
+  "verified_at": "2026-11-10T23:50:08.536Z",
+  "note": "Exact-source CI receipt for PR #794 source head c0151084f048c0ae7911bcf13a3156595dd712ba. All four required PR workflows passed on this exact source head: Autonomous quality gate run 42925697777, CINELVA smoke tests run 42925698413, Validate frontend run 42925697896, and Reproducible backend build run 42925697919. Additional checks passed on the same source head: CINELVA backup safety 42925698009, Cinemap completeness scorecard 42925698348, Scorecard contract 42925698782, CINELVA mobile layout smoke test 42925697773, Check brand identity 42925697949, Full Python contract suite 42925698784, and CINELVA continuous visual QA run 42925697787. Includes the VIVANT diagnosis special-content hub, share card and contrast fixes; its 320px/390px Chromium and WebKit journeys passed. Production acceptance remains pending until the merged deployment is READY and both public routes are verified."
 }

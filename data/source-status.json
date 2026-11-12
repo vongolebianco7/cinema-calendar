@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T03:21:19.644Z",
+  "generated_at": "2026-11-12T04:05:36.967Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-10T23:21:34.778Z",
+      "source_observed_at": "2026-11-12T03:28:21.923Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 2191,
-        "fresh": 1601,
-        "stale": 590,
+        "total": 2237,
+        "fresh": 1912,
+        "stale": 325,
         "unknown": 0
       }
     },
@@ -111,13 +111,13 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-10T23:20:58.902Z",
+      "source_observed_at": "2026-11-12T03:26:44.507Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "configured calendar/discovery catalogue; poster fallback remains explicit",
-      "record_count": 1383
+      "record_count": 1384
     },
     {
       "id": "awards",
@@ -152,7 +152,7 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-12T03:21:19.423Z",
+      "source_observed_at": "2026-11-12T04:05:36.249Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",

@@ -55,6 +55,17 @@ def grouped_title(title):
     parts = re.split(r"[/／]", value)
     if len(parts) == 2:
         left, right = parts
+        # These franchise pairs are separate market-ranking entries that were
+        # serialized without spaces around the separator in older source rows.
+        franchise_pairs = (
+            ("男はつらいよ", "釣りバカ日誌"),
+            ("ドラえもん", "チンプイ"),
+            ("リング", "らせん"),
+        )
+        if any((first in left and second in right) or (second in left and first in right)
+               for first, second in franchise_pairs):
+            return True
+
         if (("仮面ライダー" in left and "戦隊" in right)
                 or ("戦隊" in left and "仮面ライダー" in right)):
             return True

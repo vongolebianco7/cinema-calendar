@@ -117,7 +117,11 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
     def test_multiple_quoted_features_are_excluded_but_single_slash_titles_stay_eligible(self):
         self.assertTrue(backfill.grouped_title(
             "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼクロム」「ビクティニと白き英雄レシラム」"))
+        self.assertTrue(backfill.grouped_title("男はつらいよ 寅次郎サラダ記念日/釣りバカ日誌"))
+        self.assertTrue(backfill.grouped_title("ドラえもん のび太とアニマル惑星/チンプイ"))
+        self.assertTrue(backfill.grouped_title("リング/らせん"))
         self.assertFalse(backfill.grouped_title("007/ムーンレイカー"))
+        self.assertFalse(backfill.grouped_title("ケイゾク/映画"))
         self.assertFalse(backfill.grouped_title("仮面ライダー×仮面ライダーW&ディケイド"))
 
     def test_no_match_is_not_guessed_from_boxoffice_year(self):

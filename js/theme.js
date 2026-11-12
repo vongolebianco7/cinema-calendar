@@ -6,6 +6,7 @@
   const globalSearchHref = document.currentScript?.src ? new URL('cinelva-global-search.js?v=20261029-series-films', document.currentScript.src).href : '';
   const filmMediumHref = document.currentScript?.src ? new URL('cinelva-film-medium.js?v=20261029-films', document.currentScript.src).href : '';
   const feedbackHref = document.currentScript?.src ? new URL('../feedback.html', document.currentScript.src).href : 'feedback.html';
+  const specialsHref = document.currentScript?.src ? new URL('../specials.html', document.currentScript.src).href : 'specials.html';
   const analyticsHref = document.currentScript?.src ? new URL('cinelva-analytics.js', document.currentScript.src).href : '';
   const root = document.documentElement;
   const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -36,6 +37,14 @@
     }
     const host = document.querySelector('.gDrawer') || document.querySelector('main');
     if (!host) return;
+  if (host.matches('.gDrawer') && ![...host.querySelectorAll('a[href]')].some(link => link.href === specialsHref)) {
+    const specialsLink = document.createElement('a');
+    specialsLink.href = specialsHref;
+    specialsLink.textContent = '特集・診断';
+    const experienceLink = [...host.querySelectorAll('a[href]')].find(link => /experience\.html$/.test(new URL(link.href).pathname));
+    if (experienceLink) experienceLink.after(specialsLink);
+    else host.append(specialsLink);
+  }
     if (![...host.querySelectorAll('a[href]')].some(link => link.href === feedbackHref)) {
       const feedbackLink = document.createElement('a');
       feedbackLink.href = feedbackHref;

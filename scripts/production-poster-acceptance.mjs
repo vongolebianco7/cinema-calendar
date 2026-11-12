@@ -82,6 +82,12 @@ async function imageResult(page, name, imageResponses) {
 async function auditRoute(context, route) {
   const page = await context.newPage();
   if (route.fixture) {
+    // Keep synthetic My Cinelva records deterministic; real production routes still load TMDB images.
+    await page.route(auditFixture.poster, route => route.fulfill({
+      status: 200,
+      contentType: 'image/svg+xml',
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="342" height="513"><rect width="100%" height="100%" fill="#17212b"/><text x="171" y="256" text-anchor="middle" fill="#fff" font-size="18">CINELVA AUDIT FIXTURE</text></svg>',
+    }));
     await page.addInitScript(({ movie }) => {
       localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
         [movie.id]: { ...movie, id: String(movie.id), watched: true },

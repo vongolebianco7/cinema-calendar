@@ -29,8 +29,9 @@ test('workflow installs Playwright where the ESM script can resolve it', () => {
   assert.doesNotMatch(workflow, /cd "\$RUNNER_TEMP\/cinelva-production-acceptance"/);
 });
 
-test('synthetic My Cinelva poster fixture is fulfilled locally for deterministic browser checks', () => {
-  assert.ok(script.includes('page.route(auditFixture.poster'));
+test('synthetic My Cinelva poster fixture is fulfilled locally for deterministic browser checks at any TMDB image size', () => {
+  assert.ok(script.includes('fixturePosterFilename'));
+  assert.match(script, /url\.hostname === 'image\.tmdb\.org'.*url\.pathname\.endsWith/);
   assert.ok(script.includes('CINELVA AUDIT FIXTURE'));
 });
 

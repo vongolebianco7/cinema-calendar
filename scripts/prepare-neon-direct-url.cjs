@@ -27,4 +27,4 @@ if (databaseUrl.hostname.endsWith('.neon.tech')) {
   }
 }
 
-fs.appendFileSync(envFile, `DATABASE_URL=${databaseUrl.toString()}\n`, { mode: '0600' });
+fs.appendFileSync(envFile, `DATABASE_URL=${databaseUrl.toString()}\n`, { mode: 0o600 });

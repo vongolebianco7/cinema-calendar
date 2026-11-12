@@ -37,9 +37,50 @@ def normalize(value):
 
 
 def grouped_title(title):
-    # Historical association records combine separate films with spaced slashes.
-    # Do not assign one member's poster to a row representing several titles.
-    return bool(re.search(r"\s/\s", str(title or "")))
+    # Historical association records usually combine separate films with spaced
+    # slashes. Some source rows omit those spaces, so only treat an unspaced
+    # slash as a group when the two sides carry clear, distinct franchise/title
+    # markers. Ordinary single-film slash titles (007/ムーンレイカー,
+    # アベンジャーズ/エンドゲーム, etc.) must remain eligible.
+    value = str(title or "")
+    if re.search(r"\s/\s", value):
+        return True
+
+    # Two complete quoted subtitles in one market row are the Pokémon double
+    # feature records seen in the official historical rankings.
+    if re.search(r"「[^」]+」\s*「[^」]+」|『[^』]+』\s*『[^』]+』", value):
+        return True
+
+    # Explicitly separated Kamen Rider / Super Sentai theatrical double bills.
+    parts = re.split(r"[/／]", value)
+    if len(parts) == 2:
+        left, right = parts
+        # These franchise pairs are separate market-ranking entries that were
+        # serialized without spaces around the separator in older source rows.
+        franchise_pairs = (
+            ("男はつらいよ", "釣りバカ日誌"),
+            ("ドラえもん", "チンプイ"),
+            ("リング", "らせん"),
+        )
+        if any((first in left and second in right) or (second in left and first in right)
+               for first, second in franchise_pairs):
+            return True
+
+        if (("仮面ライダー" in left and "戦隊" in right)
+                or ("戦隊" in left and "仮面ライダー" in right)):
+            return True
+
+        # Pokémon feature plus its separately billed Pikachu short, marked by
+        # a closing Japanese quote immediately before the title separator.
+        if re.search(r"[」』]\s*$", left) and re.match(r"\s*ピカチュウ[、と]", right):
+            return True
+
+        # A pair of separately titled theatrical features both retain their
+        # source's explicit "劇場版" marker around the separator.
+        if "劇場版" in left and "劇場版" in right:
+            return True
+
+    return False
 
 
 def valid_poster_path(value):

@@ -94,9 +94,7 @@ async function auditRoute(context, route, browser, width) {
   let fixtureResponses = 0;
   if (route.fixture) {
     // Keep synthetic My Cinelva records deterministic; real production routes still load TMDB images.
-    const fixturePosterFilename = new URL(auditFixture.poster).pathname.split('/').pop();
-    await pageContext.route(url => url.hostname === 'image.tmdb.org'
-      && url.pathname.endsWith(`/${fixturePosterFilename}`), async imageRoute => {
+    await pageContext.route(url => url.hostname === 'image.tmdb.org', async imageRoute => {
       fixtureResponses += 1;
       await imageRoute.fulfill({
         status: 200,

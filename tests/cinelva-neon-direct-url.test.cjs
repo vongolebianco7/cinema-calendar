@@ -49,7 +49,7 @@ test('non-Neon Postgres URLs remain unchanged', () => {
   ].join('');
   const result = run(input);
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.content, `DATABASE_URL=${input}\\n`);
+  assert.equal(result.content, \`DATABASE_URL=\${input}\\n\`);
   assert.doesNotMatch(result.stdout + result.stderr, /secret/);
 });
 

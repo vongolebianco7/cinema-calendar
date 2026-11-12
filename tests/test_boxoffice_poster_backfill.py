@@ -122,6 +122,18 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(backfill.grouped_title("リング/らせん"))
         self.assertFalse(backfill.grouped_title("007/ムーンレイカー"))
         self.assertFalse(backfill.grouped_title("ケイゾク/映画"))
+        self.assertTrue(backfill.grouped_title(
+            "劇場版 仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル 海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船"))
+        self.assertTrue(backfill.grouped_title(
+            "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ! 特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ!"))
+        self.assertTrue(backfill.grouped_title(
+            "劇場版 仮面ライダージオウ Over Quartzer 騎士竜戦隊リュウソウジャー THE MOVIE タイムスリップ!恐竜パニック!!"))
+        self.assertTrue(backfill.grouped_title(
+            "ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ ピカチュウとポケモンおんがくたい"))
+        self.assertFalse(backfill.grouped_title("映画 仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル"))
+        self.assertFalse(backfill.grouped_title("海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船"))
+        self.assertFalse(backfill.grouped_title("劇場版 仮面ライダージオウ Over Quartzer"))
+        self.assertFalse(backfill.grouped_title("ピカチュウとポケモンおんがくたい"))
         self.assertFalse(backfill.grouped_title("仮面ライダー×仮面ライダーW&ディケイド"))
 
     def test_no_match_is_not_guessed_from_boxoffice_year(self):

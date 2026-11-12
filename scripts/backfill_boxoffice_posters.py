@@ -43,6 +43,19 @@ def grouped_title(title):
     # markers. Ordinary single-film slash titles (007/ムーンレイカー,
     # アベンジャーズ/エンドゲーム, etc.) must remain eligible.
     value = str(title or "")
+    # Some official historical market rows concatenate separately billed
+    # theatrical features with whitespace only. Exclude only these distinctive
+    # paired-title signatures; do not treat every Rider/Sentai crossover as a
+    # double feature.
+    unseparated_feature_pairs = (
+        ("仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル", "海賊戦隊ゴーカイジャー THE MOVIE"),
+        ("仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!", "特命戦隊ゴーバスターズ THE MOVIE"),
+        ("仮面ライダージオウ Over Quartzer", "騎士竜戦隊リュウソウジャー THE MOVIE"),
+        ("ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ", "ピカチュウとポケモンおんがくたい"),
+    )
+    if any(first in value and second in value for first, second in unseparated_feature_pairs):
+        return True
+
     if re.search(r"\s/\s", value):
         return True
 

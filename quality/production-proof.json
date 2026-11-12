@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "70729ce5da585389ba85a325fc3c1a50e1a17c4c",
-  "verified_at": "2026-11-12T14:57:15Z",
-  "note": "Exact-source CI receipt for PR #810 source head 70729ce5da585389ba85a325fc3c1a50e1a17c4c. Required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43241397306; CINELVA smoke tests run 43241397442; Validate frontend run 43241397785; Reproducible backend build run 43241397391. Additional exact-head checks succeeded: Full Python contract suite run 43241397406, mobile layout run 43241397155, continuous visual QA run 43241397262, and completeness scorecard run 43241397636. This receipt proves exact-source CI only; it does not claim verified poster data recovery, Neon synchronization, production deployment success, or physical iPhone Safari acceptance."
+  "head_sha": "24c9d48a80c736098a1e7f0648546ed071b00746",
+  "verified_at": "2026-11-12T19:29:39Z",
+  "note": "Exact-source CI receipt for PR #811 source head 24c9d48a80c736098a1e7f0648546ed071b00746. Required pull_request workflows succeeded on this exact head: Autonomous quality gate run 43289425664; CINELVA smoke tests run 43289425662; Validate frontend run 43289425716; Reproducible backend build run 43289425685. Additional exact-head checks succeeded: Production poster acceptance contract run 43289425622, mobile layout run 43289425765, continuous visual QA run 43289425691, and completeness scorecard run 43289425730. This receipt proves exact-source CI only; it does not claim Neon synchronization, restoration of all missing posters, production deployment success, or physical iPhone Safari acceptance."
 }

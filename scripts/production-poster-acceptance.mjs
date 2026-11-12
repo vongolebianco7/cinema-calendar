@@ -53,10 +53,15 @@ async function settleImages(page, { forceEager = false } = {}) {
       // Force only their isolated images to load; production routes retain lazy loading.
       if (eager && element.loading === 'lazy') element.loading = 'eager';
     }, forceEager);
-    // Wait for each image's own load/error state with a bounded timeout,
-    // then let the final DOM snapshot report any remaining stragglers.
-    await page.waitForFunction(element => element.complete, handle, { timeout: 2500 }).catch(() => {});
   }
+
+  // Scrolling each image triggers native lazy loading. Wait once for the whole
+  // page so slow WebKit/TMDB responses do not consume a separate timeout per
+  // image; anything still pending after this bounded window remains a failure
+  // in the final DOM snapshot.
+  await page.waitForFunction(() => [...document.images]
+    .filter(image => /^https?:/.test(image.getAttribute('src') || ''))
+    .every(image => image.complete), null, { timeout: 15000 }).catch(() => {});
   await page.waitForTimeout(100);
 }
 

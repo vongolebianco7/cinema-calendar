@@ -59,9 +59,11 @@ test('post-merge production audit runs only when acceptance files change on main
   ]) assert.ok(pushTrigger.includes(`      - ${path}`), `missing main push filter for ${path}`);
 });
 
-test('poster audit waits for each lazy image after scrolling it into view', () => {
-  assert.match(script, /waitForFunction\(element => element\.complete, handle, \{ timeout: 2500 \}\)/);
+test('poster audit triggers lazy images then waits once with a bounded page-wide window', () => {
   assert.match(script, /scrollIntoView\(\{ block: 'center' \}\)/);
+  assert.match(script, /await page\.waitForFunction\(\(\) => \[\.\.\.document\.images\]/);
+  assert.ok(script.includes('every(image => image.complete), null, { timeout: 15000 }'));
+  assert.doesNotMatch(script, /waitForFunction\(element => element\.complete, handle, \{ timeout: 2500 \}\)/);
   assert.doesNotMatch(script, /await page\.waitForTimeout\(1200\)/);
 });
 

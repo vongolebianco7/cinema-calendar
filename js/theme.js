@@ -37,7 +37,7 @@
     }
     const host = document.querySelector('.gDrawer') || document.querySelector('main');
     if (!host) return;
-  if (host.matches('.gDrawer') && ![...host.querySelectorAll('a[href]')].some(link => link.href === specialsHref)) {
+  if (host.matches?.('.gDrawer') && ![...host.querySelectorAll('a[href]')].some(link => link.href === specialsHref)) {
     const specialsLink = document.createElement('a');
     specialsLink.href = specialsHref;
     specialsLink.textContent = '特集・診断';

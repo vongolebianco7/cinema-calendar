@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "a4730946b07c2535f428185377e7cf4e56a3a7c3",
-  "verified_at": "2026-11-12T08:59:55Z",
-  "note": "Exact-source CI receipt for PR #808 source head a4730946b07c2535f428185377e7cf4e56a3a7c3. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43186684990; CINELVA smoke tests run 43186684975; Validate frontend run 43186684949; Reproducible backend build run 43186685102. Additional exact-head checks succeeded: Full Python contract suite run 43186685012, mobile layout run 43186685153, continuous visual QA run 43186684972, and completeness scorecard run 43186685029. The PR-event rendered-posters job was skipped by workflow design; main-push production browser acceptance remains separate. This receipt proves source CI only; it does not claim poster data recovery, Neon synchronization, or physical iPhone Safari acceptance."
+  "head_sha": "2740538c54b74b60c703900bde02cc807ebd6e16",
+  "verified_at": "2026-11-12T14:10:56Z",
+  "note": "Exact-source CI receipt for PR #809 source head 2740538c54b74b60c703900bde02cc807ebd6e16. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43233311669; CINELVA smoke tests run 43233311526; Validate frontend run 43233311489; Reproducible backend build run 43233312205. Additional exact-head checks succeeded: Full Python contract suite run 43233311291, mobile layout run 43233311321, continuous visual QA run 43233311455, completeness scorecard run 43233311403, backup safety run 43233311819, and brand identity run 43233311570. This receipt proves exact-source CI only; it does not claim verified poster data recovery, Neon synchronization, production deployment success, or physical iPhone Safari acceptance."
 }

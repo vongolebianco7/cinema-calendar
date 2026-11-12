@@ -28,5 +28,5 @@ test('every shared drawer links to the feedback page with a route-correct relati
   assert.equal(links[0][1],relative,path.relative(root,file)+' resolves feedback.html from its route');
   menuPages.push(file);
  }
- assert.equal(menuPages.length,26,'all main and mirrored shared drawers are checked');
+ assert.equal(menuPages.length,27,'all main and mirrored shared drawers, including VIVANT diagnosis, are checked');
 });

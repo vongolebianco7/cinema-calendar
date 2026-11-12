@@ -17,7 +17,7 @@ const artFonts={
   clean:{title:artSans,movie:artSans,titleWeight:650,movieWeight:650},
   // Give the third option a rounded-gothic feel, clearly separate from both serif styles
   // and the clean geometric sans option.
-  classic:{title:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',movie:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","Yu Gothic",Meiryo,sans-serif',titleWeight:650,movieWeight:700}
+  classic:{title:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic","Hiragino Sans",Meiryo,sans-serif',movie:'"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic","Hiragino Sans",Meiryo,sans-serif',titleWeight:600,movieWeight:650}
 };
 const portraitTitleSize=54;
 const portraitListTop=244;
@@ -204,15 +204,28 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
   const offset=rankWidth+posterWidth+18,tx=x+offset,tw=width-offset-8;
   const size=(columns===2?(shape==='portrait'?54:36):(shape==='portrait'?50:28))*fontScale;
   const rating=artworkRating(m),showRating=!!document.getElementById('showMyRating')?.checked&&rating!==null;
-  const ratingHeight=showRating?30:0,titleRegionHeight=height-12-ratingHeight;
+  const ratingHeight=showRating?48:0,titleRegionHeight=height-12-ratingHeight;
   const maxLines=Math.max(1,Math.min(4,Math.floor((titleRegionHeight-18)/(size*1.12))));
   const title=artworkMovieTitle(m);
   const fit=fittedLines(ctx,title,tw,maxLines,size,size*.82,font.movie,font.movieWeight);
   ctx.fillStyle=p.fg;
   writeLines(ctx,title,tx,y+(titleRegionHeight-fit.lines.length*fit.size*1.12)/2,tw,maxLines,size,size*.82,font.movie,font.movieWeight,1.12);
   if(showRating){
-    ctx.save();ctx.fillStyle=p.accent;ctx.font=`700 ${columns===2?17:19}px ${artSans}`;ctx.textAlign='left';ctx.textBaseline='middle';
-    ctx.fillText('MY評価 '+rating.toFixed(1),tx,y+height-ratingHeight/2);ctx.restore();
+    const starSize=columns===2?23:25,gap=5,starY=y+height-ratingHeight/2;
+    ctx.save();ctx.textAlign='left';ctx.textBaseline='middle';
+    for(let index=0;index<5;index++){
+      const fraction=Math.max(0,Math.min(1,rating-index)),cx=tx+starSize/2+index*(starSize+gap),cy=starY;
+      ctx.beginPath();
+      for(let point=0;point<10;point++){
+        const angle=-Math.PI/2+point*Math.PI/5,radius=point%2===0?starSize/2:starSize*.22,px=cx+Math.cos(angle)*radius,py=cy+Math.sin(angle)*radius;
+        if(point===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+      }
+      ctx.closePath();ctx.lineWidth=1.5;ctx.strokeStyle=p.accent;ctx.fillStyle=p.accent;ctx.globalAlpha=.35;ctx.stroke();
+      if(fraction>0){ctx.save();ctx.beginPath();ctx.rect(cx-starSize/2,cy-starSize/2,starSize*fraction,starSize);ctx.clip();ctx.globalAlpha=1;ctx.fill();ctx.restore();}
+      ctx.globalAlpha=1;
+    }
+    ctx.fillStyle=p.fg;ctx.font=`700 ${columns===2?25:27}px ${artSans}`;ctx.textAlign='left';ctx.fillText(rating.toFixed(1),tx+5*(starSize+gap)+8,starY);
+    ctx.restore();
   }
 }
 function drawBrand(ctx,w,h,theme,y=h-98){

@@ -19,15 +19,15 @@ test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
  assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-title-rating/);
 });
-test('MY Rating visibility toggle adds or removes each movie rating from the export',()=>{
+test('MY Rating visibility toggle shows a star row and score in the export',()=>{
  const r=renderer(),movie={id:'42',title:'千と千尋の神隠し'};
  r.context.CinelvaLibraryRecords={all:()=>[{id:'42',title:movie.title,rating:4.6,watched:true}]};
  r.context.drawArtwork([movie]);
- assert.ok(!r.calls.text.includes('MY評価 4.6'),'ratings are hidden by default');
+ assert.ok(!r.calls.text.includes('4.6'),'ratings are hidden by default');
  r.elements.showMyRating.checked=true;r.calls.text=[];r.context.drawArtwork([movie]);
- assert.ok(r.calls.text.includes('MY評価 4.6'),'the checked toggle adds the current personal rating');
+ assert.ok(r.calls.text.includes('4.6'),'the checked toggle adds the personal rating score beside the stars');
  r.context.CinelvaLibraryRecords={all:()=>[{id:'42',title:movie.title,rating:null,watched:true}]};r.calls.text=[];r.context.drawArtwork([{...movie,rating:4.8}]);
- assert.ok(!r.calls.text.includes('MY評価 4.8'),'a cleared rating does not fall back to a stale imported score');
+ assert.ok(!r.calls.text.includes('4.8'),'a cleared rating does not fall back to a stale imported score');
 });
 test('rating import filters release decades, keeps all-time mode, and removes duplicate works',()=>{
  const scope={window:{}};vm.runInNewContext(fs.readFileSync('js/my-best10-rating-import.js','utf8'),scope);

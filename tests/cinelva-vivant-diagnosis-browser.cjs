@@ -12,7 +12,7 @@ const diagnosisHtml = fs.readFileSync('vivant-diagnosis.html', 'utf8');
 assert.doesNotMatch(homeHtml, /href="vivant-diagnosis\.html" class="heroAction/);
 assert.match(homeHtml, /href="specials\.html">特集・診断<\/a>/);
 assert.match(specialHtml, /href="vivant-diagnosis\.html" class="specialAction"/);
-assert.match(diagnosisHtml, /href="specials\.html">特集<\/a>/);
+assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
 
 (async () => {
   const socket = net.createServer();

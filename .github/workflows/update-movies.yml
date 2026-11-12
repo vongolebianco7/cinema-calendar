@@ -146,12 +146,18 @@ jobs:
           # A later concurrent push is rejected normally; never force-push data.
           git push origin main
 
+      # Prisma schema sync is a one-off CLI connection. The Neon endpoint
+      # used by the database secret has pooler disabled, so resolve that URL
+      # to the matching direct host without logging or changing runtime secrets.
+      - name: Prepare direct Neon endpoint for one-off sync
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/prepare-neon-direct-url.cjs
+
       # Preserve validated snapshots even when the database is unavailable.
       # This step still fails the run if the real DB sync fails.
       - name: Sync fresh movie and TV data directly to PostgreSQL
         working-directory: backend
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npm ci --no-audit --no-fund
           npm run db:sync

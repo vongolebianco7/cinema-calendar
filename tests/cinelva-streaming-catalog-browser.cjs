@@ -62,6 +62,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   page.on('pageerror',error=>errors.push(error.message));
   const delayedImageRequest=page.waitForRequest('**/delayed-fail.jpg');
   await page.goto(`http://127.0.0.1:${port}/streaming.html`);
+  await page.locator('#streamingGrid .card').filter({hasText:'削除後に失敗するポスター'}).scrollIntoViewIfNeeded();
   await delayedImageRequest;
   await page.locator('#streamingStatus').getByText('Netflix 4').waitFor();
   assert.equal(await page.locator('#theatricalGrid .card').count(),1,'the Japan Now Playing snapshot populates the theatrical section');

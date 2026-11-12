@@ -64,3 +64,8 @@ test('poster audit waits for each lazy image after scrolling it into view', () =
   assert.match(script, /scrollIntoView\(\{ block: 'center' \}\)/);
   assert.doesNotMatch(script, /await page\.waitForTimeout\(1200\)/);
 });
+
+test('only isolated synthetic fixture routes force lazy images to eager loading', () => {
+  assert.match(script, /await settleImages\(page, \{ forceEager: Boolean\(route\.fixture\) \}\)/);
+  assert.match(script, /if \(eager && element\.loading === 'lazy'\) element\.loading = 'eager'/);
+});

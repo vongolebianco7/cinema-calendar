@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "800ff3f4cfc5f9228b39ab5d8cfff330ed1f3280",
-  "verified_at": "2026-11-12T04:40:24Z",
-  "note": "Exact-source CI receipt for PR #802 source head 800ff3f4cfc5f9228b39ab5d8cfff330ed1f3280. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43154614861; CINELVA smoke tests run 43154614780; Validate frontend run 43154614810 (failed shard 3 was re-run once and succeeded); Reproducible backend build run 43154614902. Additional exact-head scorecard, mobile layout, visual QA and production acceptance contract checks passed. The production acceptance workflow's rendered-posters job was skipped on the pull_request event; this receipt does not claim production browser acceptance or database synchronization."
+  "head_sha": "4f53178642181f8210d53a94c586b793f921ad9b",
+  "verified_at": "2026-11-12T04:53:50Z",
+  "note": "Exact-source CI receipt for PR #802 source head 4f53178642181f8210d53a94c586b793f921ad9b. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43157120443; CINELVA smoke tests run 43157120342; Validate frontend run 43157120499; Reproducible backend build run 43157120479. Additional exact-head checks succeeded: production acceptance contract run 43157120444, scorecard run 43157120404, mobile layout smoke run 43157120435 and continuous visual QA run 43157120398. The rendered-posters job was skipped for the pull_request event; this receipt does not claim production browser acceptance or database synchronization. The workflow now runs rendered production acceptance after relevant acceptance files are pushed to main."
 }

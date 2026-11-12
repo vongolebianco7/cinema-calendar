@@ -29,10 +29,10 @@ input,select{font-size:16px}.label{font-size:14px;color:#bdbdbd}.hero p{font-siz
 
 
 
-<style id="cinelva-best10-shared-header">.gTop .gBrand{display:inline-flex!important;align-items:center!important;gap:8px!important;min-width:0!important;text-decoration:none!important}.gTop .gBrandImage,.gDrawer .gBrandImage{display:block!important;width:32px!important;height:32px!important;object-fit:contain!important}.gTop .gBrandWord,.gDrawer .gBrandWord{display:inline!important;color:#f2dfbb!important;font:600 21px/1 Georgia,\"Times New Roman\",serif!important;letter-spacing:-.045em!important;white-space:nowrap!important}html[data-theme=\"light\"] .gTop .gBrandWord,html[data-theme=\"light\"] .gDrawer .gBrandWord{color:#a98752!important}.gTop .gNav{height:58px!important}.gTop .gSearchForm{margin-left:auto!important}@media(max-width:600px){.gTop .gNav{height:56px!important}.gTop .gBrandImage{width:29px!important;height:29px!important}}</style><meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png"><style id="cinelva-best10-consistency-v4">
+<style id="cinelva-best10-shared-header">.gTop .gBrand{display:inline-flex!important;align-items:center!important;gap:8px!important;min-width:0!important;text-decoration:none!important}.gTop .gBrandImage,.gDrawer .gBrandImage{display:block!important;width:32px!important;height:32px!important;object-fit:contain!important}.gTop .gBrandWord,.gDrawer .gBrandWord{display:inline!important;color:#f2f2f2!important;font:600 21px/1 Georgia,\"Times New Roman\",serif!important;letter-spacing:-.045em!important;white-space:nowrap!important}html[data-theme=\"light\"] .gTop .gBrandWord,html[data-theme=\"light\"] .gDrawer .gBrandWord{color:#292821!important}.gTop .gNav{height:58px!important}.gTop .gSearchForm{margin-left:auto!important}@media(max-width:600px){.gTop .gNav{height:56px!important}.gTop .gBrandImage{width:29px!important;height:29px!important}}</style><meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png"><style id="cinelva-best10-consistency-v4">
 /* Uses the same page font, palette and navigation metrics as My Cinelva. */
-:root{--bg:#f5f2ea;--panel:#fffdf8;--ink:#292821;--text:#292821;--muted:#706d63;--line:#dcd6c9;--brand:#762f3d}
-html[data-theme=dark]{--bg:#171918;--panel:#212421;--ink:#f2eee4;--text:#f2eee4;--muted:#bab6aa;--line:#3c4039;--brand:#e6a5ac}
+:root{--bg:#f8f6f1;--panel:#fff;--ink:#292821;--text:#292821;--muted:#706d63;--line:#dcd6c9;--brand:#762f3d}
+html[data-theme=dark]{--bg:#090909;--panel:#141414;--ink:#f4f4f4;--text:#f4f4f4;--muted:#999;--line:#292929;--brand:#e6a5ac}
 body{background:var(--bg)!important;color:var(--ink)!important;font:15px/1.6 system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif!important}
 body .hero h1{font:36px/1.2 Georgia,"Yu Mincho",serif!important;color:var(--ink)}
 body .hero p,body .legal,body .label{color:var(--muted)}
@@ -95,11 +95,6 @@ body .move button,body .remove{background:var(--line);color:var(--ink)}
 #list>.item .move button,#list>.item .remove{width:32px;height:36px;min-height:36px;padding:0;display:grid;place-items:center}
 .best10CandidateMetadata{display:block;margin-top:4px;color:var(--muted);font-size:.82em;font-weight:400}
 @media(max-width:600px){#list>.item{flex-basis:min(82vw,260px);min-width:210px}.results{max-height:min(62vh,560px)}}
-</style><style id="best10-black-theme-override">
-html[data-theme],html[data-theme] body{color-scheme:dark!important;--bg:#090909!important;--panel:#141414!important;--panel2:#141414!important;--ink:#f5f5f5!important;--text:#f5f5f5!important;--muted:#929292!important;--line:#2b2b2b!important;--brand:#e84a4a!important;background:#090909!important;color:#f5f5f5!important}
-html[data-theme] .gTop{background:#090909f5!important;border-color:#292929!important;backdrop-filter:blur(14px)!important}
-html[data-theme] .gTop .gBrandWord,html[data-theme] .gDrawer .gBrandWord{color:#f2f2f2!important}
-html[data-theme] .best10BackLink{color:#ddd!important;background:#141414!important;border-color:#2b2b2b!important}
 </style></head><body><header class="gTop"><div class="wrap gNav">
  <a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
  <form class="gSearchForm" action="search.html" method="get">
@@ -165,7 +160,7 @@ async function hydrateBest10Posters(){
   for(const m of missing){
    const id=best10ExplicitId(m);
    const candidates=movies.filter(x=>id?String(x.tmdbId||x.tmdb_id||x.id||'')===id:best10PosterIdentityMatches(m,x));
-   const found=candidates.length===1&&(id||best10PosterIdentityMatches(m,candidates[0]))?candidates[0]:null;
+   const found=candidates.length===1&&best10PosterIdentityMatches(m,candidates[0])?candidates[0]:null;
    const url=found&&best10PosterUrl(found);
    if(url&&!best10PosterUrl(m)){m.poster=url;updated=true;}
    const original=found&&(found.original_title||found.originalTitle||found.original_name);

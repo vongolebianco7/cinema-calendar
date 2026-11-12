@@ -33,6 +33,8 @@ test('synthetic My Cinelva poster fixture is fulfilled locally for deterministic
   assert.ok(script.includes('fixturePosterFilename'));
   assert.match(script, /url\.hostname === 'image\.tmdb\.org'.*url\.pathname\.endsWith/);
   assert.ok(script.includes('CINELVA AUDIT FIXTURE'));
+  assert.match(script, /serviceWorkers: 'block'/);
+  assert.match(script, /fixtureResponses === 0/);
 });
 
 test('production poster audit covers My Cinelva data tabs with isolated synthetic records', () => {

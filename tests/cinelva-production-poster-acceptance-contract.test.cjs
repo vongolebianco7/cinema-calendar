@@ -30,9 +30,8 @@ test('workflow installs Playwright where the ESM script can resolve it', () => {
 });
 
 test('synthetic My Cinelva poster fixture is fulfilled locally for deterministic browser checks at any TMDB image size', () => {
-  assert.ok(script.includes('fixturePosterFilename'));
-  assert.ok(script.includes("url.hostname === 'image.tmdb.org'"));
-  assert.ok(script.includes('url.pathname.endsWith'));
+  assert.match(script, /pageContext\.route\(url => url\.hostname === 'image\.tmdb\.org', async imageRoute =>/);
+  assert.match(script, /serviceWorkers: 'block'/);
   assert.ok(script.includes('CINELVA AUDIT FIXTURE'));
   assert.match(script, /serviceWorkers: 'block'/);
   assert.match(script, /fixtureResponses === 0/);

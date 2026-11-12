@@ -7,22 +7,22 @@
 
   const AXES = ['trust', 'nerve', 'empathy', 'curiosity', 'patience', 'mischief'];
   const questions = [
-    { prompt: '旅先で予定がひとつ空きました。', choices: [
-      ['a', '路地の小さな喫茶店に入る', { curiosity: 2, empathy: 1 }], ['b', '地図にない展望台を探す', { nerve: 2, curiosity: 1 }], ['c', '宿の人に町の話を聞く', { trust: 2, patience: 1 }], ['d', '近くの市場を一周する', { mischief: 1, empathy: 1, curiosity: 1 }]] },
-    { prompt: '待ち合わせに少し早く着いたときは？', choices: [
-      ['a', '周りの人の会話をぼんやり聞く', { curiosity: 1, patience: 2 }], ['b', '先に店へ入って席を選ぶ', { nerve: 1, trust: 1, patience: 1 }], ['c', '相手が来たら驚く仕掛けを考える', { mischief: 2, empathy: 1 }], ['d', '今日の段取りを頭の中で整える', { patience: 2, curiosity: 1 }]] },
-    { prompt: '食堂で最後のひと皿が残っています。', choices: [
-      ['a', 'みんなに声をかけて分ける', { empathy: 2, trust: 1 }], ['b', '店の人におすすめの食べ方を聞く', { trust: 1, curiosity: 2 }], ['c', '譲り合いの様子を見てから決める', { patience: 2, empathy: 1 }], ['d', '思い切って注文し、話の種にする', { nerve: 2, mischief: 1 }]] },
-    { prompt: '知らない街で急に雨が降ってきました。', choices: [
-      ['a', '近くの人に雨宿りの場所を尋ねる', { trust: 2, empathy: 1 }], ['b', '濡れてもよさそうな道を歩く', { nerve: 2, mischief: 1 }], ['c', '店先を眺めながら雨が弱まるのを待つ', { patience: 2, curiosity: 1 }], ['d', '傘を買って、ついでに寄り道する', { curiosity: 2, empathy: 1 }]] },
-    { prompt: '古い引き出しから見慣れない鍵が出てきました。', choices: [
-      ['a', '何の鍵か、持ち主に聞いてみる', { trust: 2, curiosity: 1 }], ['b', '形をよく見て、合いそうな場所を考える', { curiosity: 2, patience: 1 }], ['c', 'なくさないよう目立つ場所に置く', { patience: 2, empathy: 1 }], ['d', '宝箱の鍵ということにして楽しむ', { mischief: 2, curiosity: 1 }]] },
-    { prompt: '友人が「どちらでもいい」と言っています。', choices: [
-      ['a', '候補を二つに絞って聞き直す', { empathy: 2, patience: 1 }], ['b', '自分が行きたい方を提案する', { nerve: 2, trust: 1 }], ['c', '本人が気になっていたものを思い出す', { empathy: 1, curiosity: 2 }], ['d', 'くじ引きで決めてみる', { mischief: 2, patience: 1 }]] },
-    { prompt: '旅の荷物にひとつだけ足すなら？', choices: [
-      ['a', '使い慣れた小さなノート', { patience: 2, curiosity: 1 }], ['b', '誰かに渡せるお菓子', { empathy: 2, trust: 1 }], ['c', '行き先を決めないための余白', { nerve: 1, curiosity: 2 }], ['d', '話題になりそうな変な小物', { mischief: 2, empathy: 1 }]] },
-    { prompt: '帰り道、知らない子が道に迷っているようです。', choices: [
-      ['a', '目線を合わせて声をかける', { empathy: 2, trust: 1 }], ['b', '近くの大人や店の人にも協力を頼む', { trust: 2, patience: 1 }], ['c', '周囲を見て、案内できる場所を探す', { curiosity: 2, patience: 1 }], ['d', 'まず安心できるよう明るく話す', { mischief: 1, empathy: 2 }]] }
+    { prompt: '旅先で予定が空いたら、どう過ごしますか？', choices: [
+      ['a', '気になっていた喫茶店に入ってみる', { curiosity: 2, empathy: 1 }], ['b', '少し足を延ばして、景色のいい場所を探す', { nerve: 2, curiosity: 1 }], ['c', '宿の人に、この町のおすすめを聞く', { trust: 2, patience: 1 }], ['d', '近くを歩いて、面白そうな店をのぞく', { mischief: 1, empathy: 1, curiosity: 1 }]] },
+    { prompt: '待ち合わせより早く着いたら、どうしますか？', choices: [
+      ['a', '周りの様子を見ながら、のんびり待つ', { curiosity: 1, patience: 2 }], ['b', '先に店に入って、席を見ておく', { nerve: 1, trust: 1, patience: 1 }], ['c', '相手が来たときの話題を考える', { mischief: 2, empathy: 1 }], ['d', 'このあとの予定をもう一度確認する', { patience: 2, curiosity: 1 }]] },
+    { prompt: '食堂で最後の一皿が残っていたら？', choices: [
+      ['a', '一緒にいる人に、食べたいか聞く', { empathy: 2, trust: 1 }], ['b', '店の人に、どんな料理か尋ねる', { trust: 1, curiosity: 2 }], ['c', 'みんなの様子を見てから決める', { patience: 2, empathy: 1 }], ['d', '思い切って頼んでみる', { nerve: 2, mischief: 1 }]] },
+    { prompt: '知らない街を歩いていたら、急に雨が降ってきました。', choices: [
+      ['a', '近くの人に、雨宿りできる場所を聞く', { trust: 2, empathy: 1 }], ['b', '雨の中でも、そのまま歩いてみる', { nerve: 2, mischief: 1 }], ['c', '店先で雨が弱まるのを待つ', { patience: 2, curiosity: 1 }], ['d', '傘を買って、気になる店にも寄る', { curiosity: 2, empathy: 1 }]] },
+    { prompt: '引き出しの中から、見覚えのない鍵が出てきました。', choices: [
+      ['a', '誰の鍵か、家族や持ち主に聞く', { trust: 2, curiosity: 1 }], ['b', '形をよく見て、何に使う鍵か考える', { curiosity: 2, patience: 1 }], ['c', 'なくさないよう、決まった場所にしまう', { patience: 2, empathy: 1 }], ['d', '宝箱の鍵かもしれない、と想像してみる', { mischief: 2, curiosity: 1 }]] },
+    { prompt: '友人に「どこでもいいよ」と言われたら？', choices: [
+      ['a', '行き先の候補を二つ出して、選んでもらう', { empathy: 2, patience: 1 }], ['b', '自分が行きたい場所を提案する', { nerve: 2, trust: 1 }], ['c', '前に気に入っていた場所を思い出す', { empathy: 1, curiosity: 2 }], ['d', 'くじ引きで決めてみる', { mischief: 2, patience: 1 }]] },
+    { prompt: '旅行の荷物に、ひとつだけ足すなら？', choices: [
+      ['a', '旅先で気づいたことを書けるノート', { patience: 2, curiosity: 1 }], ['b', '一緒に行く人に渡すお菓子', { empathy: 2, trust: 1 }], ['c', '予定を決めずに動ける時間', { nerve: 1, curiosity: 2 }], ['d', '会話のきっかけになりそうな小物', { mischief: 2, empathy: 1 }]] },
+    { prompt: '帰り道、道に迷っている子どもを見かけたら？', choices: [
+      ['a', '目線を合わせて、困っていないか聞く', { empathy: 2, trust: 1 }], ['b', '近くの大人や店の人にも助けを求める', { trust: 2, patience: 1 }], ['c', '周りを見て、案内できる場所を探す', { curiosity: 2, patience: 1 }], ['d', 'まず安心してもらえるよう、明るく話しかける', { mischief: 1, empathy: 2 }]] }
   ].map(question => ({ prompt: question.prompt, choices: question.choices.map(([id, label, traits]) => ({ id, label, traits })) }));
 
   const resultRows = [

@@ -21,10 +21,10 @@ if (!['postgres:', 'postgresql:'].includes(databaseUrl.protocol)) {
 // Prisma schema synchronization is a one-off CLI operation. Use Neon’s direct
 // endpoint for it; serverless application connections keep their existing URL.
 if (databaseUrl.hostname.endsWith('.neon.tech')) {
-  databaseUrl.hostname = databaseUrl.hostname.replace(/-pooler(?=\\.c-)/, '');
+  databaseUrl.hostname = databaseUrl.hostname.replace(/-pooler(?=\.c-)/, '');
   if (databaseUrl.hostname.includes('-pooler.')) {
     throw new Error('Could not resolve the Neon pooler hostname to its direct endpoint');
   }
 }
 
-fs.appendFileSync(envFile, `DATABASE_URL=${databaseUrl.toString()}\\n`, { mode: 0o600 });
+fs.appendFileSync(envFile, `DATABASE_URL=${databaseUrl.toString()}\n`, { mode: '0600' });

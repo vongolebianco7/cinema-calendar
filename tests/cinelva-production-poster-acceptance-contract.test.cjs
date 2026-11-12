@@ -58,3 +58,9 @@ test('post-merge production audit runs only when acceptance files change on main
     '.github/workflows/production-poster-acceptance.yml'
   ]) assert.ok(pushTrigger.includes(`      - ${path}`), `missing main push filter for ${path}`);
 });
+
+test('poster audit waits for each lazy image after scrolling it into view', () => {
+  assert.match(script, /waitForFunction\(element => element\.complete, handle, \{ timeout: 2500 \}\)/);
+  assert.match(script, /scrollIntoView\(\{ block: 'center' \}\)/);
+  assert.doesNotMatch(script, /await page\.waitForTimeout\(1200\)/);
+});

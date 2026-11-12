@@ -44,10 +44,17 @@ async function settleImages(page) {
   const images = page.locator('img[src]');
   const count = await images.count();
   for (let index = 0; index < count; index += 1) {
-    await images.nth(index).evaluate(image => image.scrollIntoView({ block: 'center' }));
-    await page.waitForTimeout(35);
+    const image = images.nth(index);
+    const handle = await image.elementHandle();
+    if (!handle) continue;
+    await handle.evaluate(element => element.scrollIntoView({ block: 'center' }));
+    // Scroll-triggered loading is asynchronous: waiting a fixed 35 ms and
+    // then moving every other image can leave lazy images undispatched in
+    // WebKit/iOS-sized viewports. Wait for each image's own load/error state
+    // with a bounded timeout, then let the final DOM snapshot report stragglers.
+    await page.waitForFunction(element => element.complete, handle, { timeout: 2500 }).catch(() => {});
   }
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(100);
 }
 
 async function imageResult(page, name, imageResponses) {

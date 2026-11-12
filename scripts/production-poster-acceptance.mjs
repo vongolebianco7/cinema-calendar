@@ -40,18 +40,21 @@ const routes = [
   { name: 'my-cinelva-directors', path: '/my-cinelva/', tab: 'directors', fixture: true },
 ];
 
-async function settleImages(page) {
+async function settleImages(page, { forceEager = false } = {}) {
   const images = page.locator('img[src]');
   const count = await images.count();
   for (let index = 0; index < count; index += 1) {
     const image = images.nth(index);
     const handle = await image.elementHandle();
     if (!handle) continue;
-    await handle.evaluate(element => element.scrollIntoView({ block: 'center' }));
-    // Scroll-triggered loading is asynchronous: waiting a fixed 35 ms and
-    // then moving every other image can leave lazy images undispatched in
-    // WebKit/iOS-sized viewports. Wait for each image's own load/error state
-    // with a bounded timeout, then let the final DOM snapshot report stragglers.
+    await handle.evaluate((element, eager) => {
+      element.scrollIntoView({ block: 'center' });
+      // Synthetic localStorage fixtures lack real user scroll gestures.
+      // Force only their isolated images to load; production routes retain lazy loading.
+      if (eager && element.loading === 'lazy') element.loading = 'eager';
+    }, forceEager);
+    // Wait for each image's own load/error state with a bounded timeout,
+    // then let the final DOM snapshot report any remaining stragglers.
     await page.waitForFunction(element => element.complete, handle, { timeout: 2500 }).catch(() => {});
   }
   await page.waitForTimeout(100);
@@ -134,7 +137,7 @@ async function auditRoute(context, route, browser, width) {
       await page.locator(`[data-tab="${route.tab}"]`).click();
       await page.waitForTimeout(500);
     }
-    await settleImages(page);
+    await settleImages(page, { forceEager: Boolean(route.fixture) });
     if (route.fixture && fixtureResponses === 0) {
       throw new Error(`${route.name}: synthetic poster fixture was not fulfilled`);
     }

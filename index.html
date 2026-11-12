@@ -263,7 +263,7 @@ html[data-theme="light"] .experienceFitCard em{color:#665126!important;backgroun
 html[data-theme="light"] .experienceFitCard small{color:#53564f!important}
 html[data-theme="light"] .experienceFitCard i{color:#24628c!important}
 html[data-theme="light"] .experienceTheaterLink{background:#f0eae0!important;color:#2f302d!important;border:1px solid #d6cdbf!important}
-</style></head>
+</style><style id="calendar-movie-card-runtime-and-poster-fallback">.streamMovieRuntime{margin-top:3px;color:var(--muted);font-size:9px;line-height:1.35}.streamMoviePoster.posterMissing::after{content:"ポスター未確認";position:absolute;inset:0;display:grid;place-items:center;padding:8px;color:#a2a2a2;text-align:center;font-size:10px;line-height:1.4;background:#222}</style></head>
 <body>
 
 
@@ -482,14 +482,15 @@ function groupedMovieCards(weekMovies,modeName){
  return entries.map(([group,rows])=>{
   let cards=rows.slice().sort((a,b)=>(rank.get(service(a))??999)-(rank.get(service(b))??999)||service(a).localeCompare(service(b),"ja")||popularitySort(a,b)).map(m=>{
    let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/"),hasPeriod=m.end_date&&m.end_date!==m.date;
+   const runtimeValue=Number(m.runtime??m.runtime_minutes??m.duration),runtimeLabel=Number.isFinite(runtimeValue)&&runtimeValue>0?runtimeValue+'分':'上映時間未確認';
    if(hasPeriod)date+="〜"+m.end_date.slice(5).replace("-","/");
    if(modeName==="streaming"){
     let avId=globalThis.CinelvaMovieIdentity?.id(m)||m.tmdbId||m.tmdb_id||m.id,av=(availabilitySnapshot.movies||{})[String(avId)],flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
     if(!badges){const announced=globalThis.CinelvaOfficialOffers?.verifiedEvent(m);badges=announced?'<span title="公式発表による配信開始日">'+announced.service+' · 配信開始</span>':'<span class="availabilityUnknown">配信先未確認</span>';}
-    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':missingPoster())+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(m.service||'その他',streamServiceColor(m.service))+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div></article>'
+    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':missingPoster())+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(m.service||'その他',streamServiceColor(m.service))+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
    }
    let groupName=service(m),kind=groupName==="午前十時の映画祭"?"asa10":groupName==="リバイバル上映"?"revival":"theatrical";
-   return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="" loading="lazy">':'<div class="theatricalPosterFallback">'+m.title+'</div>')+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(groupName,kind==='asa10'?'#c69232':kind==='revival'?'#7d5aa8':'#6b3a3a')+'<div class="streamMovieTitle">'+m.title+'</div></article>'
+   return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':'<div class="theatricalPosterFallback">'+m.title+'</div>')+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(groupName,kind==='asa10'?'#c69232':kind==='revival'?'#7d5aa8':'#6b3a3a')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
   }).join("");
   return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group.slice(5).replace('-','/')+'</div><div class="weekGroupCount">'+rows.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
  }).join("")
@@ -936,7 +937,7 @@ function renderLegend(){if(mode==="festival"){$("#legend").innerHTML="国内映�
 }
 const coverageText={events:"東京・神奈川の屋外上映。日程・上映作品は主催者の公式サイトでご確認ください。",theatrical:"国内の劇場公開情報と、手動で確認した一部の再上映を掲載しています。全国の上映回を網羅するものではありません。",streaming:"公式情報で確認した一部の配信開始予定です。現在の配信先の観測日を、配信開始日として扱いません。",tv:"アニメ関連の映画番組表から確認できた予定を掲載しています。地上波・BS/CS・配信チャンネルを含み、全国の全局・全作品を網羅していません。放映・配信日時は各番組の公式案内でご確認ください。",festival:"日程を確認できた一部の映画祭・関連イベントです。すべての開催情報を網羅していません。"};function renderCoverage(){const el=document.getElementById("calendarCoverage");if(el)el.textContent=coverageText[mode]||""}
 function setMode(next){if(next==="events")next="festival";if(next==="festival"&&!outdoorEvents.length)loadOutdoorEvents();streamRangeStart=null;theatricalRangeStart=null;mode=next;active="すべて";localStorage.setItem("cinemaNow.mode",mode);localStorage.setItem("cinemaNow.active",active);render();renderCoverage()}
-function render(){globalThis.CinelvaOfficialOffers?.setFilter({mode,service:active});renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal()}
+function render(){globalThis.CinelvaOfficialOffers?.setFilter({mode,service:active});renderLegend();document.querySelectorAll(".modeTab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));renderChips();renderCal();document.querySelectorAll('.streamMovie[data-mi] .streamMoviePoster img').forEach(image=>{const movie=movies[Number(image.closest('.streamMovie')?.dataset.mi)];if(movie)globalThis.CinelvaMovieIdentity?.hydratePoster(image,movie)})}
 let backendConfigPromise=null;
 async function getBackendConfig(){
   if(!backendConfigPromise){

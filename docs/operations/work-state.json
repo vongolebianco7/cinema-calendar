@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T06:47:46Z",
+  "updated_at": "2026-11-12T07:08:06Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
   "branch": "docs/refresh-p593-production-proof-20261112",
-  "head_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
-  "pull_request": null,
+  "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5",
+  "pull_request": 807,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -721,7 +721,25 @@
       "title": "Resume the existing official poster backfill without duplicate dispatch",
       "status": "in_progress",
       "issue": 593,
-      "acceptance": "The next scheduled update reuses pending candidates through the existing official workflow, publishes only identity-verified unique films, preserves user records, and its JSON/Neon result is checked against production."
+      "acceptance": "The next scheduled update reuses pending candidates through the existing official workflow, publishes only identity-verified unique films, preserves user records, and its JSON/Neon result is checked against production.",
+      "pull_request": {
+        "number": 807,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/807",
+        "branch": "docs/refresh-p593-production-proof-20261112",
+        "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5"
+      },
+      "ci": "All four required exact-head workflows passed on source head a3b0ae15: Autonomous 43171876316, smoke 43171876253, frontend 43171876288, backend 43171876270. Additional scorecard, visual, mobile and poster acceptance contract passed.",
+      "latest_production_measurement": {
+        "rows": 1647,
+        "posters": 1405,
+        "missing": 242,
+        "missing_rate_percent": 14.69,
+        "grouped_excluded": 113,
+        "recently_checked_singles": 78,
+        "unqueried_candidates": 51,
+        "additional_production_recoveries_this_run": 0
+      },
+      "next_action": "Merge the verified proof-refresh PR after final-head CI succeeds, then validate the next scheduled updater and main-push production browser artifact."
     }
   ],
   "verification": [
@@ -1093,12 +1111,12 @@
     "blocker": "The connected Vercel project tools do not expose the Hobby usage meter. Do not manually deploy; recheck quota and deployments only for a source/data change that is approved to publish."
   },
   "blockers": [
-    "Production poster catalog still has 242/1,647 missing (14.69%); #593 remains open.",
-    "The current production-proof receipt points to bf669d27..., older than merged #804/#805/#806 source; refresh through exact-head pull-request CI before next scheduled update-movies run.",
-    "The previous Neon sync used a pooler hostname on an endpoint reporting pooler_enabled=false; PR #805 direct-host fix is merged but awaits the next scheduled sync to verify.",
-    "Vercel Hobby usage meter is not available through the connected tool; main-only test/harness deploys were canceled by Ignored Build Step."
+    "Production data still has 242/1,647 historical box-office rows without posters (14.69%); #593 remains open.",
+    "The current exact-source proof refresh is committed on PR #807; final-head required CI and merge are still required before the scheduled updater can pass production preflight.",
+    "PR #805 fixed the Neon pooler/direct-host mismatch; the next scheduled update must prove Neon sync succeeds.",
+    "Vercel Hobby usage meter is not available through the connected tools. Latest main-only deployments were canceled by Ignored Build Step; previous READY production remains."
   ],
-  "next_action": "Open and pass an exact-source proof-refresh PR on the current merged main, then let the scheduled 2026-11-13 03:17 JST update-movies run once. Verify main/public counts, enrichment identity log and Neon sync; run post-merge Chromium/WebKit 390px/1280px poster acceptance.",
+  "next_action": "Verify all exact-head checks on the updated PR #807 head, safely merge it, and let the existing 2026-11-12 18:17 UTC update-movies schedule run once. Compare the updated data snapshot and Neon result, then fetch public JSON and the main-push Chromium/WebKit acceptance artifact.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -3024,7 +3042,14 @@
       }
     ]
   },
-  "open_pull_requests": [],
+  "open_pull_requests": [
+    {
+      "number": 807,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/807",
+      "title": "test(p593): report source-level poster coverage",
+      "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5"
+    }
+  ],
   "closed_pull_requests": [
     {
       "number": 646,
@@ -3041,10 +3066,11 @@
     }
   ],
   "next_concrete_actions": [
-    "After the last-known Vercel Hobby cooldown, recheck quota live and make one free-tier deployment attempt if allowed.",
-    "On the deployed main build, measure image HTTP success/failure and fallback behavior on calendar, search, ranking, director collections, My Cinelva, MY TOP 10, streaming, and detail screens at desktop and 390px.",
-    "Continue official-feed rights review for all 12 streaming services; configure only explicitly permitted free official feeds. Keep #244 blocked where no source is available.",
-    "Verify the Sirât source row and full production acceptance; keep #244 and #593 open until every requested criterion passes."
+    "Confirm PR #807 final-head exact CI and mergeability, then merge only after all required checks are successful.",
+    "Do not dispatch update-movies manually; the next scheduled run is 2026-11-12 18:17 UTC / 2026-11-13 03:17 JST.",
+    "Read the scheduled run's backfill log: expected starting state is 51 unqueried single-title candidates, 78 recently checked singles (76 unresolved, 2 ambiguous), and 113 grouped titles excluded; compare new verified enrichments and Neon sync status.",
+    "After the main push, refetch production /data/boxoffice.json, count all year rows and missing posters, and inspect production Chromium 1280px/WebKit 390px image-coverage artifacts.",
+    "Keep #593 open and #244 untouched until user-visible data improvement and full production acceptance are proven."
   ],
   "continuation_checkpoint_20261106_0002": {
     "recorded_at": "2026-11-06T00:02:30Z",
@@ -3535,5 +3561,88 @@
       "head_sha": "3126f35878f82ef0a2e7dbf23314730370c8e81d",
       "status": "open"
     }
+  },
+  "latest_p0_593_checkpoint_20261112_0710": {
+    "recorded_at": "2026-11-12T07:08:06Z",
+    "master_issue": 239,
+    "latest_main_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+    "issues": {
+      "244": "open",
+      "593": "open"
+    },
+    "poster_data": {
+      "source": "production /data/boxoffice.json",
+      "rows": 1647,
+      "poster_rows": 1405,
+      "missing_rows": 242,
+      "missing_rate_percent": 14.69,
+      "restored_in_previous_official_run": 22,
+      "restored_in_current_run": 0,
+      "grouped_titles_excluded": 113,
+      "recent_checked_single_title_rows": 78,
+      "recent_checked_breakdown": {
+        "unresolved": 76,
+        "ambiguous": 2
+      },
+      "unqueried_single_title_candidates": 51
+    },
+    "acceptance": {
+      "production_run_id": 43170285626,
+      "production_main_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+      "chromium": {
+        "viewport": 1280,
+        "calendar": "65/65",
+        "discover": "28/28",
+        "streaming": "120/120",
+        "movie_detail": "25/25",
+        "image_http_errors": 0,
+        "page_errors": 0,
+        "unloaded_posters": 0
+      },
+      "webkit": {
+        "viewport": 390,
+        "calendar": "65/65",
+        "discover": "28/28",
+        "streaming": "120/120",
+        "movie_detail": "25/25",
+        "image_http_errors": 0,
+        "page_errors": 0,
+        "unloaded_posters": 0
+      },
+      "my_cinelva": "isolated synthetic fixture only; no real saved user data accessed",
+      "physical_iphone_safari": "not verified"
+    },
+    "proof_refresh": {
+      "pr": 807,
+      "verified_source_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5",
+      "verified_at": "2026-11-12T07:08:06Z",
+      "required_runs": {
+        "autonomous_quality_gate": 43171876316,
+        "smoke": 43171876253,
+        "frontend": 43171876288,
+        "backend": 43171876270
+      },
+      "extra_runs": {
+        "poster_acceptance_contract": 43171876244,
+        "mobile": 43171876285,
+        "continuous_visual": 43171876297,
+        "scorecard": 43171876282
+      },
+      "final_head_ci": "pending after receipt/work-state commit"
+    },
+    "neon": {
+      "previous_failure": "P1001 via pooler host while pooler_enabled=false",
+      "fix_pr": 805,
+      "fix_merge_sha": "fadac6e07030dcd0a01397f2ea1c92aa4ea21eae",
+      "next_check": "scheduled update-movies run"
+    },
+    "vercel": {
+      "latest_main_deployment_state": "CANCELED by Ignored Build Step",
+      "last_ready_sha": "38be06f55b62d9abb8b5435695f92fae474070e5",
+      "hobby_usage_meter": "not available through connected tools",
+      "manual_deploy_attempted": false
+    },
+    "next_schedule_utc": "2026-11-12T18:17:00Z",
+    "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "bf669d27d6ef74101b73f8ccb88ce5f7fc5e0f52",
-  "verified_at": "2026-11-12T05:16:00Z",
-  "note": "Exact-source CI receipt for PR #803 source head bf669d27d6ef74101b73f8ccb88ce5f7fc5e0f52. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43159311541; CINELVA smoke tests run 43159311528; Validate frontend run 43159311640; Reproducible backend build run 43159311500. Additional exact-head checks succeeded: Production poster acceptance contract run 43159311560, mobile layout smoke run 43159311511, completeness scorecard run 43159311623 and continuous visual QA run 43159311615. The rendered-posters job was skipped for the pull_request event. This receipt does not claim production browser acceptance or database synchronization. The full Chromium/WebKit production acceptance is scheduled on the relevant main push after merge."
+  "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5",
+  "verified_at": "2026-11-12T07:08:06Z",
+  "note": "Exact-source CI receipt for PR #807 source head a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43171876316; CINELVA smoke tests run 43171876253; Validate frontend run 43171876288; Reproducible backend build run 43171876270. Additional exact-head checks succeeded: production poster acceptance contract run 43171876244, mobile layout run 43171876285, continuous visual QA run 43171876297, and completeness scorecard run 43171876282. The PR-event rendered-posters job was skipped by workflow design; main-push production browser acceptance remains separate. This receipt proves source CI only; it does not claim poster data recovery, Neon synchronization, or physical iPhone Safari acceptance."
 }

@@ -69,3 +69,12 @@ test('only isolated synthetic fixture routes force lazy images to eager loading'
   assert.match(script, /await settleImages\(page, \{ forceEager: Boolean\(route\.fixture\) \}\)/);
   assert.match(script, /if \(eager && element\.loading === 'lazy'\) element\.loading = 'eager'/);
 });
+
+test('production poster acceptance reports source-level missing rows separately from rendered image failures', () => {
+  assert.match(script, /fetch\('\/data\/boxoffice\.json', \{ cache: 'no-store' \}\)/);
+  for (const field of ['total_rows', 'poster_rows', 'missing_poster_rows', 'missing_tmdb_id_rows', 'missing_by_year', 'missing_examples']) {
+    assert.match(script, new RegExp(field));
+  }
+  assert.match(script, /dataset_coverage: datasetCoverage/);
+  assert.match(script, /invalid row in/);
+});

@@ -170,6 +170,49 @@ async function auditHistoricalBoxOffice(context) {
     await page.getByRole('button', { name: '1980', exact: true }).click();
     await page.waitForFunction(() => document.querySelectorAll('.rankCard').length === 19, null, { timeout: 15000 });
     await settleImages(page);
+    const datasetCoverage = await page.evaluate(async () => {
+      const response = await fetch('/data/boxoffice.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`boxoffice.json: HTTP ${response.status}`);
+      const dataset = await response.json();
+      const byYear = dataset?.by_year;
+      if (!byYear || typeof byYear !== 'object' || Array.isArray(byYear)) {
+        throw new Error('boxoffice.json has no valid by_year object');
+      }
+
+      let totalRows = 0;
+      let posterRows = 0;
+      let missingTmdbIdRows = 0;
+      const missingByYear = {};
+      const missingExamples = [];
+      for (const [year, entries] of Object.entries(byYear)) {
+        if (!Array.isArray(entries)) throw new Error(`boxoffice.json has invalid year ${year}`);
+        for (const row of entries) {
+          if (!row || typeof row !== 'object' || Array.isArray(row)) {
+            throw new Error(`boxoffice.json has invalid row in ${year}`);
+          }
+          totalRows += 1;
+          if (typeof row.poster === 'string' && row.poster.trim()) {
+            posterRows += 1;
+            continue;
+          }
+          missingByYear[year] = (missingByYear[year] || 0) + 1;
+          if (!/^\d+$/.test(String(row.tmdbId ?? row.tmdb_id ?? ''))) missingTmdbIdRows += 1;
+          if (missingExamples.length < 10) {
+            missingExamples.push({ year, title: String(row.title || '') });
+          }
+        }
+      }
+      return {
+        source_url: new URL('/data/boxoffice.json', location.href).href,
+        generated_at: dataset.generated_at || null,
+        total_rows: totalRows,
+        poster_rows: posterRows,
+        missing_poster_rows: totalRows - posterRows,
+        missing_tmdb_id_rows: missingTmdbIdRows,
+        missing_by_year: missingByYear,
+        missing_examples: missingExamples,
+      };
+    });
     const historical = await page.evaluate(() => {
       const cards = [...document.querySelectorAll('.rankCard')];
       const title = card => card.querySelector('.title')?.textContent?.trim() || '';
@@ -184,7 +227,12 @@ async function auditHistoricalBoxOffice(context) {
         caligula_loaded: loadedTitles.includes('カリギュラ'),
       };
     });
-    return { ...(await imageResult(page, 'box-office-1980', imageResponses)), ...historical, page_errors: pageErrors };
+    return {
+      ...(await imageResult(page, 'box-office-1980', imageResponses)),
+      ...historical,
+      dataset_coverage: datasetCoverage,
+      page_errors: pageErrors,
+    };
   } finally {
     await page.close();
   }

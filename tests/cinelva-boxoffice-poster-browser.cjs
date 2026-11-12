@@ -53,6 +53,8 @@ async function freePort() {
         await card.scrollIntoViewIfNeeded();
         await card.locator('[data-box-placeholder]').waitFor({ state: 'visible' });
         assert.ok((await card.locator('.title').textContent()).trim(), 'every source row keeps its film title visible');
+        const visiblePostersWithoutSource = await card.locator('img[data-box-poster]:not([hidden])').evaluateAll(images => images.filter(image => !/^https?:/.test(image.getAttribute('src') || '')).length);
+        assert.equal(visiblePostersWithoutSource, 0, 'a missing poster keeps its placeholder visible instead of exposing an empty image');
         await page.waitForTimeout(10);
         assert.equal(await card.locator('img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');
       }

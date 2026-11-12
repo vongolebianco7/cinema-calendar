@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T19:38:48.444Z",
+  "generated_at": "2026-11-12T23:47:59.326Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-12T18:58:33.947Z",
+      "source_observed_at": "2026-11-12T23:40:21.022Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 2279,
-        "fresh": 2104,
-        "stale": 175,
+        "total": 2338,
+        "fresh": 2333,
+        "stale": 5,
         "unknown": 0
       }
     },
@@ -83,7 +83,7 @@
       "status": "automated",
       "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
       "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
-      "source_observed_at": "2026-11-12T19:37:53.709Z",
+      "source_observed_at": "2026-11-12T23:47:58.991Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
@@ -111,7 +111,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-12T18:57:32.229Z",
+      "source_observed_at": "2026-11-12T23:39:47.127Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",

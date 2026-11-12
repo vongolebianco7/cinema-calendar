@@ -196,7 +196,7 @@ async function auditHistoricalBoxOffice(context) {
             continue;
           }
           missingByYear[year] = (missingByYear[year] || 0) + 1;
-          if (!/^\\d+$/.test(String(row.tmdbId ?? row.tmdb_id ?? ''))) missingTmdbIdRows += 1;
+          if (!/^\d+$/.test(String(row.tmdbId ?? row.tmdb_id ?? ''))) missingTmdbIdRows += 1;
           if (missingExamples.length < 10) {
             missingExamples.push({ year, title: String(row.title || '') });
           }

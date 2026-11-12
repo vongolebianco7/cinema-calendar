@@ -22,11 +22,11 @@ class Response:
 
 
 class BoxofficePosterBackfillTests(unittest.TestCase):
-    def run_rows(self, rows, payload, **kwargs):
+    def run_rows(self, rows, payload, market_year="1980", **kwargs):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         path = Path(tmp.name) / "boxoffice.json"
-        path.write_text(json.dumps({"by_year": {"1980": rows}, "all_time": []}), encoding="utf-8")
+        path.write_text(json.dumps({"by_year": {market_year: rows}, "all_time": []}), encoding="utf-8")
         requests = []
 
         def opener(request, timeout):
@@ -92,6 +92,33 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", data["by_year"]["1980"][0])
         self.assertEqual(requests, [])
         self.assertEqual(result["grouped"], 1)
+
+    def test_unspaced_official_double_feature_separators_are_excluded(self):
+        titles = [
+            "仮面ライダーダブル/天装戦隊ゴセイジャー",
+            "劇場版 仮面ライダーウィザード イン マジックランド/劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック",
+            "劇場版ポケットモンスター ベストウィッシュ『神速のゲノセクト ミュウツー覚醒』/ピカチュウとイーブイ☆フレンズ",
+            "ポケモン・ザ・ムービーXY「破壊の繭とディアンシー」/ピカチュウ、これなんのカギ?",
+        ]
+        for title in titles:
+            with self.subTest(title=title):
+                self.assertTrue(backfill.grouped_title(title))
+
+        data, requests, result = self.run_rows(
+            [{"title": titles[0], "gross": 15.5, "year": 2010}],
+            {"results": [{"id": 10, "title": titles[0], "release_date": "2010-01-01",
+                          "poster_path": "/wrong.jpg"}]},
+            market_year="2010",
+        )
+        self.assertNotIn("poster", data["by_year"]["2010"][0])
+        self.assertEqual(requests, [])
+        self.assertEqual(result["grouped"], 1)
+
+    def test_multiple_quoted_features_are_excluded_but_single_slash_titles_stay_eligible(self):
+        self.assertTrue(backfill.grouped_title(
+            "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼクロム」「ビクティニと白き英雄レシラム」"))
+        self.assertFalse(backfill.grouped_title("007/ムーンレイカー"))
+        self.assertFalse(backfill.grouped_title("仮面ライダー×仮面ライダーW&ディケイド"))
 
     def test_no_match_is_not_guessed_from_boxoffice_year(self):
         data, requests, result = self.run_rows(

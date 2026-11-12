@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T15:27:00Z",
+  "updated_at": "2026-11-12T06:47:46Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
-  "branch": "main",
-  "head_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
-  "pull_request": 779,
+  "base_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+  "branch": "docs/refresh-p593-production-proof-20261112",
+  "head_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -715,6 +715,13 @@
       },
       "acceptance": "Corrected IDs/year/poster live in the durable monthly supplement and survive snapshot generation; all-screen/public image acceptance remains pending.",
       "ci": "All eight exact-head GitHub Actions passed; local quality gate, 18 focused tests, release-data check and diff check passed. Catalog posterless rows fell 31/457 (6.8%) to 28/457 (6.1%)."
+    },
+    {
+      "id": "P0-593-SCHEDULED-RECOVERY-20261112",
+      "title": "Resume the existing official poster backfill without duplicate dispatch",
+      "status": "in_progress",
+      "issue": 593,
+      "acceptance": "The next scheduled update reuses pending candidates through the existing official workflow, publishes only identity-verified unique films, preserves user records, and its JSON/Neon result is checked against production."
     }
   ],
   "verification": [
@@ -1066,25 +1073,32 @@
       "check": "PR #761 exact-head source CI",
       "result": "passed",
       "details": "All 8 listed GitHub Actions succeeded on source 949d554e5240900e3ad3abb5bf6f783d066376c4; local focused streaming poster suite 17/17 passed; work-state and source registry remain compliance-gated."
+    },
+    {
+      "check": "PR #805 Neon direct endpoint fix merged",
+      "result": "Exact-head a0ce32b11a3f1aa653c1960505af6ecb4e6eb90f required CI all passed: quality 43164225275, smoke 43164225242, frontend 43164225267, backend 43164225321; additional visual 43164225293, mobile 43164225333 and scorecard 43164225521 passed. Merged as fadac6e07030dcd0a01397f2ea1c92aa4ea21eae. Scheduled Neon sync not yet revalidated."
+    },
+    {
+      "check": "PR #806 deterministic isolated fixture acceptance merged",
+      "result": "Exact-head 2646cb2e3ed4c42bc9382f698744e747465f9e23: quality 43163691108, smoke 43163691158, frontend 43163691151, backend 43163691034 and additional checks passed; production render skipped for PR event as expected. Merged as 881d66e9b3de200654fc6b325e52d52a76ea971e; real Chromium/WebKit production rerun remains necessary."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "03a58494a5b9e60bf603e6599d1e4f49634f6f61",
-    "alias_source_sha": "f6cd6c6019417cb009d8d7abddc96dc2cbf7f626",
-    "latest_deployment_sha": "d0c3c5b4a334fd7f80dd18d2c35107ca874ab049",
+    "latest_main_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+    "latest_deployment_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
     "production_verified": false,
-    "reason": "Vercel returned HTTP 402 api-deployments-free-per-day (more than 100 deployments; retry-after 24 hours). Do not retry before 2026-11-10T01:37:22Z. Canonical alias was last observed serving old source f6cd6c6; production acceptance of merged Sirat catalog remains pending.",
-    "last_ready_sha": "391da7d6aec71ac97dd18235379c97f286fd4be8",
-    "blocker": "Vercel Hobby api-deployments-free-per-day quota; recheck live before a single free-tier deploy attempt."
+    "reason": "Vercel Ignored Build Step canceled the main deployments for test/workflow-only changes; previous READY main deployment 38be06f55b62d9abb8b5435695f92fae474070e remains. Public boxoffice JSON is HTTP 200 and matches main at 1,405/1,647 posters, 242 missing.",
+    "blocker": "The connected Vercel project tools do not expose the Hobby usage meter. Do not manually deploy; recheck quota and deployments only for a source/data change that is approved to publish."
   },
   "blockers": [
-    "Vercel Hobby rejects deployments with api-deployments-free-per-day; production remains at SHA 391da7d6aec71ac97dd18235379c97f286fd4be8.",
-    "No rights-reviewed free official premiere feeds are configured for any of the 12 providers; #244 automatic premiere discovery cannot be truthfully marked complete.",
-    "Full screen-by-screen poster HTTP failure rates and public production acceptance are not yet measured."
+    "Production poster catalog still has 242/1,647 missing (14.69%); #593 remains open.",
+    "The current production-proof receipt points to bf669d27..., older than merged #804/#805/#806 source; refresh through exact-head pull-request CI before next scheduled update-movies run.",
+    "The previous Neon sync used a pooler hostname on an endpoint reporting pooler_enabled=false; PR #805 direct-host fix is merged but awaits the next scheduled sync to verify.",
+    "Vercel Hobby usage meter is not available through the connected tool; main-only test/harness deploys were canceled by Ignored Build Step."
   ],
-  "next_action": "Recheck live Vercel Hobby quota after 2026-11-10T01:37:22Z UTC, then make one free-tier deployment attempt if allowed. Verify all target screens and keep #244/#593 open until production acceptance passes.",
+  "next_action": "Open and pass an exact-source proof-refresh PR on the current merged main, then let the scheduled 2026-11-13 03:17 JST update-movies run once. Verify main/public counts, enrichment identity log and Neon sync; run post-merge Chromium/WebKit 390px/1280px poster acceptance.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1147,10 +1161,10 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 636,
-    "merge_sha": "1526d3ebd623f817e276ba930909a8d4852571de",
-    "head_sha": "ff33ddb14b8b306f62523f42f7edc33540be4b50",
-    "source_sha": "34140cfd426fa469930d6451d79aed95b3951c08"
+    "number": 806,
+    "merge_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+    "head_sha": "2646cb2e3ed4c42bc9382f698744e747465f9e23",
+    "source_sha": "2646cb2e3ed4c42bc9382f698744e747465f9e23"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -3010,16 +3024,7 @@
       }
     ]
   },
-  "open_pull_requests": [
-    {
-      "number": 780,
-      "title": "docs: checkpoint P0 after durable poster recovery",
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/780",
-      "branch": "docs/checkpoint-after-poster-persistence-20261109",
-      "head_sha": "3126f35878f82ef0a2e7dbf23314730370c8e81d",
-      "status": "open; exact-head CI pending"
-    }
-  ],
+  "open_pull_requests": [],
   "closed_pull_requests": [
     {
       "number": 646,

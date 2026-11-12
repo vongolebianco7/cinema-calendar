@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5658cfe9cd982a8f9b939a21d1f6c4816858f3fd",
-  "verified_at": "2026-11-12T13:02:38+09:00",
-  "note": "Exact-source CI receipt for PR #799 source head 5658cfe9cd982a8f9b939a21d1f6c4816858f3fd. All four required pull-request workflows passed on this exact head: Autonomous quality gate run 43150226038; CINELVA smoke tests run 43150225951; Validate frontend run 43150225868; Reproducible backend build run 43150225953. PR #799 merged as 94b4081b461d8158b3fad4fc27c339742b7e869c. Production poster acceptance run 43152047171 is still running; this receipt does not claim production browser acceptance or database synchronization. The production UI data remains on main's JSON snapshots. Issue #593 remains open pending remaining poster recovery and complete Chromium/WebKit/iPhone-size production image acceptance."
+  "head_sha": "4f53178642181f8210d53a94c586b793f921ad9b",
+  "verified_at": "2026-11-12T04:53:50Z",
+  "note": "Exact-source CI receipt for PR #802 source head 4f53178642181f8210d53a94c586b793f921ad9b. All four required pull-request workflows succeeded on this exact head: Autonomous quality gate run 43157120443; CINELVA smoke tests run 43157120342; Validate frontend run 43157120499; Reproducible backend build run 43157120479. Additional exact-head checks succeeded: production acceptance contract run 43157120444, scorecard run 43157120404, mobile layout smoke run 43157120435 and continuous visual QA run 43157120398. The rendered-posters job was skipped for the pull_request event; this receipt does not claim production browser acceptance or database synchronization. The workflow now runs rendered production acceptance after relevant acceptance files are pushed to main."
 }

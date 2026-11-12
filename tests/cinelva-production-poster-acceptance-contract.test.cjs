@@ -24,15 +24,18 @@ test('workflow installs Playwright where the ESM script can resolve it', () => {
   assert.match(workflow, /npm install --no-save --no-package-lock playwright@1\.59\.0/);
   assert.match(workflow, /cinelva-production-poster-acceptance-metrics\.test\.mjs/);
   assert.match(workflow, /contract:\n\s+runs-on: ubuntu-latest/);
-  assert.match(workflow, /rendered-posters:\n\s+if: github\.event_name == 'workflow_dispatch'/);
+  assert.match(workflow, /rendered-posters:\n\s+if: github\.event_name == 'workflow_dispatch' \|\| github\.event_name == 'push'/);
   assert.doesNotMatch(workflow, /NODE_PATH:/);
   assert.doesNotMatch(workflow, /cd "\$RUNNER_TEMP\/cinelva-production-acceptance"/);
 });
 
 test('synthetic My Cinelva poster fixture is fulfilled locally for deterministic browser checks at any TMDB image size', () => {
   assert.ok(script.includes('fixturePosterFilename'));
-  assert.match(script, /url\.hostname === 'image\.tmdb\.org'.*url\.pathname\.endsWith/);
+  assert.ok(script.includes("url.hostname === 'image.tmdb.org'"));
+  assert.ok(script.includes('url.pathname.endsWith'));
   assert.ok(script.includes('CINELVA AUDIT FIXTURE'));
+  assert.match(script, /serviceWorkers: 'block'/);
+  assert.match(script, /fixtureResponses === 0/);
 });
 
 test('production poster audit covers My Cinelva data tabs with isolated synthetic records', () => {
@@ -43,4 +46,16 @@ test('production poster audit covers My Cinelva data tabs with isolated syntheti
   assert.match(script, /cinelva-library-records-v2/);
   assert.match(script, /cinelva-want-to-watch-v1/);
   assert.ok(script.includes('fixture_used: Boolean(route.fixture)'));
+});
+
+test('post-merge production audit runs only when acceptance files change on main', () => {
+  const pushTrigger = workflow.split('  pull_request:')[0];
+  assert.match(pushTrigger, /  push:\n    branches: \[main\]\n    paths:/);
+  for (const path of [
+    'scripts/production-poster-acceptance.mjs',
+    'scripts/production-poster-acceptance-metrics.mjs',
+    'tests/cinelva-production-poster-acceptance-contract.test.cjs',
+    'tests/cinelva-production-poster-acceptance-metrics.test.mjs',
+    '.github/workflows/production-poster-acceptance.yml'
+  ]) assert.ok(pushTrigger.includes(`      - ${path}`), `missing main push filter for ${path}`);
 });

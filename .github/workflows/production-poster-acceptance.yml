@@ -2,6 +2,14 @@ name: Production poster acceptance
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/production-poster-acceptance.mjs
+      - scripts/production-poster-acceptance-metrics.mjs
+      - tests/cinelva-production-poster-acceptance-contract.test.cjs
+      - tests/cinelva-production-poster-acceptance-metrics.test.mjs
+      - .github/workflows/production-poster-acceptance.yml
   pull_request:
     paths:
       - scripts/production-poster-acceptance.mjs
@@ -31,7 +39,7 @@ jobs:
           node --test tests/cinelva-production-poster-acceptance-contract.test.cjs tests/cinelva-production-poster-acceptance-metrics.test.mjs
 
   rendered-posters:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     needs: contract
     runs-on: ubuntu-latest
     timeout-minutes: 15

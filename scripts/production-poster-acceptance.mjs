@@ -79,16 +79,31 @@ async function imageResult(page, name, imageResponses) {
   return { name, ...result, image_http_errors: [...imageResponses] };
 }
 
-async function auditRoute(context, route) {
-  const page = await context.newPage();
+async function auditRoute(context, route, browser, width) {
+  // The fixture gets its own Service-Worker-free context. Playwright cannot
+  // route requests already intercepted by a Service Worker; real routes keep
+  // the normal production-like context and still exercise that behavior.
+  const pageContext = route.fixture
+    ? await browser.newContext({
+      viewport: { width, height: 844 },
+      deviceScaleFactor: 1,
+      serviceWorkers: 'block',
+    })
+    : context;
+  const page = await pageContext.newPage();
+  let fixtureResponses = 0;
   if (route.fixture) {
     // Keep synthetic My Cinelva records deterministic; real production routes still load TMDB images.
     const fixturePosterFilename = new URL(auditFixture.poster).pathname.split('/').pop();
-    await page.route(url => url.hostname === 'image.tmdb.org' && url.pathname.endsWith(`/${fixturePosterFilename}`), route => route.fulfill({
-      status: 200,
-      contentType: 'image/svg+xml',
-      body: '<svg xmlns="http://www.w3.org/2000/svg" width="342" height="513"><rect width="100%" height="100%" fill="#17212b"/><text x="171" y="256" text-anchor="middle" fill="#fff" font-size="18">CINELVA AUDIT FIXTURE</text></svg>',
-    }));
+    await pageContext.route(url => url.hostname === 'image.tmdb.org'
+      && url.pathname.endsWith(`/${fixturePosterFilename}`), async imageRoute => {
+      fixtureResponses += 1;
+      await imageRoute.fulfill({
+        status: 200,
+        contentType: 'image/svg+xml',
+        body: '<svg xmlns="http://www.w3.org/2000/svg" width="342" height="513"><rect width="100%" height="100%" fill="#17212b"/><text x="171" y="256" text-anchor="middle" fill="#fff" font-size="18">CINELVA AUDIT FIXTURE</text></svg>',
+      });
+    });
     await page.addInitScript(({ movie }) => {
       localStorage.setItem('cinelva-library-records-v2', JSON.stringify({
         [movie.id]: { ...movie, id: String(movie.id), watched: true },
@@ -115,9 +130,18 @@ async function auditRoute(context, route) {
       await page.waitForTimeout(500);
     }
     await settleImages(page);
-    return { ...(await imageResult(page, route.name, imageResponses)), fixture_used: Boolean(route.fixture), page_errors: pageErrors };
+    if (route.fixture && fixtureResponses === 0) {
+      throw new Error(`${route.name}: synthetic poster fixture was not fulfilled`);
+    }
+    return {
+      ...(await imageResult(page, route.name, imageResponses)),
+      fixture_used: Boolean(route.fixture),
+      fixture_response_count: route.fixture ? fixtureResponses : 0,
+      page_errors: pageErrors,
+    };
   } finally {
     await page.close();
+    if (route.fixture) await pageContext.close();
   }
 }
 
@@ -166,7 +190,7 @@ const browser = await browserType.launch(executablePath ? {
 } : {});
 try {
   const context = await browser.newContext({ viewport: { width, height: 844 }, deviceScaleFactor: 1 });
-  for (const route of routes) results.push(await auditRoute(context, route));
+  for (const route of routes) results.push(await auditRoute(context, route, browser, width));
   results.push(await auditHistoricalBoxOffice(context));
   await context.close();
 } finally {
